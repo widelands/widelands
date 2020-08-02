@@ -844,6 +844,22 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 			building_radius_infos.insert(description);
 		}
 	}
+
+	for (const auto& attribute_info : workerprogram->collected_attributes()) {
+		descr->add_collected_attribute(attribute_info);
+	}
+	for (const auto& attribute_info : workerprogram->created_attributes()) {
+		descr->add_created_attribute(attribute_info);
+	}
+	for (const std::string& resourcename : workerprogram->collected_resources()) {
+		descr->add_collected_resource(resourcename);
+	}
+	for (const std::string& resourcename : workerprogram->created_resources()) {
+		descr->add_created_resource(resourcename);
+	}
+	for (const std::string& bobname : workerprogram->created_bobs()) {
+		descr->add_created_bob(bobname);
+	}
 }
 
 void ProductionProgram::ActCallWorker::execute(Game& game, ProductionSite& ps) const {
@@ -1287,6 +1303,8 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	const std::string description = descr->name() + " " + production_program_name + " mine " +
 	                                world.get_resource(resource_)->name();
 	descr->workarea_info_[distance_].insert(description);
+
+	descr->add_collected_resource(arguments.front());
 }
 
 void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
@@ -1602,7 +1620,8 @@ an immovable.
 */
 ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& arguments,
                                               const std::string& production_program_name,
-                                              ProductionSiteDescr* descr) {
+                                              ProductionSiteDescr* descr,
+                                              const Tribes& tribes) {
 	if (arguments.size() != 3) {
 		throw GameDataError("Usage: construct=<object name> <worker program> <workarea radius>");
 	}
@@ -1613,6 +1632,14 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 	const std::string description =
 	   descr->name() + ' ' + production_program_name + " construct " + objectname;
 	descr->workarea_info_[radius].insert(description);
+
+	// Register created immovable with productionsite
+	const WorkerDescr& main_worker_descr =
+	   *tribes.get_worker_descr(descr->working_positions().front().first);
+	for (const auto& attribute_info :
+	     main_worker_descr.get_program(workerprogram)->created_attributes()) {
+		descr->add_created_attribute(attribute_info);
+	}
 }
 
 const ImmovableDescr&
@@ -1810,7 +1837,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActConstruct(parseinput.arguments, name(), building)));
+				   new ActConstruct(parseinput.arguments, name(), building, tribes)));
 			} else {
 				throw GameDataError(
 				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());

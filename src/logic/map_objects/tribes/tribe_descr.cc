@@ -38,9 +38,97 @@
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "scripting/lua_table.h"
+
+namespace {
+
+// Recursively get attributes for world immovable growth cycle
+void walk_world_immovables(
+   Widelands::DescriptionIndex index,
+   const Widelands::World& world,
+   std::set<Widelands::DescriptionIndex>* walked_immovables,
+   const std::set<Widelands::MapObjectDescr::AttributeIndex>& needed_attributes,
+   std::set<std::string>* deduced_immovables,
+   std::set<std::string>* deduced_bobs) {
+	// Protect against endless recursion
+	if (walked_immovables->count(index) == 1) {
+		return;
+	}
+	walked_immovables->insert(index);
+
+	// Insert this immovable's attributes
+	const Widelands::ImmovableDescr* immovable_descr = world.get_immovable_descr(index);
+	for (const Widelands::MapObjectDescr::AttributeIndex id : immovable_descr->attributes()) {
+		if (needed_attributes.count(id) == 1) {
+			deduced_immovables->insert(immovable_descr->name());
+		}
+	}
+
+	// Check immovables that this immovable can turn into
+	for (const auto& imm_becomes : immovable_descr->becomes()) {
+		switch (imm_becomes.first) {
+		case Widelands::MapObjectType::BOB:
+			deduced_bobs->insert(imm_becomes.second);
+			// Bobs don't transform further
+			return;
+		case Widelands::MapObjectType::IMMOVABLE: {
+			const Widelands::DescriptionIndex becomes_index =
+			   world.get_immovable_index(imm_becomes.second);
+			assert(becomes_index != Widelands::INVALID_INDEX);
+			walk_world_immovables(becomes_index, world, walked_immovables, needed_attributes,
+			                      deduced_immovables, deduced_bobs);
+		} break;
+		default:
+			NEVER_HERE();
+		}
+	}
+}
+
+// Recursively get attributes for tribe immovable growth cycle
+void walk_tribe_immovables(
+   Widelands::DescriptionIndex index,
+   const Widelands::TribeDescr& tribe,
+   std::set<Widelands::DescriptionIndex>* walked_immovables,
+   const std::set<Widelands::MapObjectDescr::AttributeIndex>& needed_attributes,
+   std::set<std::string>* deduced_immovables,
+   std::set<std::string>* deduced_bobs) {
+	// Protect against endless recursion
+	if (walked_immovables->count(index) == 1) {
+		return;
+	}
+	walked_immovables->insert(index);
+
+	// Insert this immovable's attributes
+	const Widelands::ImmovableDescr* immovable_descr = tribe.get_immovable_descr(index);
+	for (const Widelands::MapObjectDescr::AttributeIndex id : immovable_descr->attributes()) {
+		if (needed_attributes.count(id) == 1) {
+			deduced_immovables->insert(immovable_descr->name());
+		}
+	}
+
+	// Check immovables that this immovable can turn into
+	for (const auto& imm_becomes : immovable_descr->becomes()) {
+		switch (imm_becomes.first) {
+		case Widelands::MapObjectType::BOB:
+			deduced_bobs->insert(imm_becomes.second);
+			// Bobs don't transform further
+			return;
+		case Widelands::MapObjectType::IMMOVABLE: {
+			const Widelands::DescriptionIndex becomes_index =
+			   tribe.immovable_index(imm_becomes.second);
+			assert(becomes_index != Widelands::INVALID_INDEX);
+			walk_tribe_immovables(becomes_index, tribe, walked_immovables, needed_attributes,
+			                      deduced_immovables, deduced_bobs);
+		} break;
+		default:
+			NEVER_HERE();
+		}
+	}
+}
+}  // namespace
 
 namespace Widelands {
 
@@ -50,6 +138,7 @@ namespace Widelands {
  */
 TribeDescr::TribeDescr(const LuaTable& table,
                        const Widelands::TribeBasicInfo& info,
+                       const World& world,
                        const Tribes& init_tribes)
    : name_(table.get_string("name")),
      descname_(info.descname),
@@ -228,6 +317,8 @@ TribeDescr::TribeDescr(const LuaTable& table,
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
+
+	process_productionsites(world);
 }
 
 /**
@@ -544,6 +635,244 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename) {
 		return ware;
 	} catch (const WException& e) {
 		throw GameDataError("Failed adding special ware '%s': %s", warename.c_str(), e.what());
+	}
+}
+
+void TribeDescr::process_productionsites(const World& world) {
+	// Get a list of productionsites - we will need to iterate them more than once
+	// The temporary use of pointers here is fine, because it doesn't affect the game state.
+	std::set<ProductionSiteDescr*> productionsites;
+	for (const DescriptionIndex index : buildings()) {
+		BuildingDescr* building = tribes_.get_mutable_building_descr(index);
+		ProductionSiteDescr* productionsite = dynamic_cast<ProductionSiteDescr*>(building);
+		if (productionsite != nullptr) {
+			productionsites.insert(productionsite);
+		}
+	}
+
+	const DescriptionMaintainer<ImmovableDescr>& world_immovables = world.immovables();
+
+	// Find all attributes that we need to collect from map
+	std::set<MapObjectDescr::AttributeIndex> needed_attributes;
+	for (ProductionSiteDescr* prod : productionsites) {
+		for (const auto& attribinfo : prod->collected_attributes()) {
+			const MapObjectType mapobjecttype = attribinfo.first;
+			const MapObjectDescr::AttributeIndex attribute_id = attribinfo.second;
+			needed_attributes.insert(attribute_id);
+
+			// Add collected entities
+			switch (mapobjecttype) {
+			case MapObjectType::IMMOVABLE: {
+				for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
+					const ImmovableDescr& immovable_descr = world_immovables.get(i);
+					if (immovable_descr.has_attribute(attribute_id)) {
+						prod->add_collected_immovable(immovable_descr.name());
+					}
+				}
+				for (const DescriptionIndex i : immovables()) {
+					const ImmovableDescr& immovable_descr = *get_immovable_descr(i);
+					if (immovable_descr.has_attribute(attribute_id)) {
+						prod->add_collected_immovable(immovable_descr.name());
+					}
+				}
+			} break;
+			case MapObjectType::BOB: {
+				// We only support critters here, because no other bobs are collected so far
+				for (DescriptionIndex i = 0; i < world.get_nr_critters(); ++i) {
+					const CritterDescr* critter = world.get_critter_descr(i);
+					if (critter->has_attribute(attribute_id)) {
+						prod->add_collected_bob(critter->name());
+					}
+				}
+			} break;
+			default:
+				NEVER_HERE();
+			}
+		}
+	}
+
+	// Register who creates which entities
+	std::map<std::string, std::set<ProductionSiteDescr*>> creators;
+	auto add_creator = [&creators](const std::string& item, ProductionSiteDescr* productionsite) {
+		if (creators.count(item) != 1) {
+			creators[item] = {productionsite};
+		} else {
+			creators[item].insert(productionsite);
+		}
+	};
+
+	// Register who collects which entities
+	std::map<std::string, std::set<ProductionSiteDescr*>> collectors;
+	auto add_collector = [&collectors](
+	                        const std::string& item, ProductionSiteDescr* productionsite) {
+		if (collectors.count(item) != 1) {
+			collectors[item] = {productionsite};
+		} else {
+			collectors[item].insert(productionsite);
+		}
+	};
+
+	for (ProductionSiteDescr* prod : productionsites) {
+		// Add bobs that are created directly
+		for (const std::string& bobname : prod->created_bobs()) {
+			const CritterDescr* critter = world.get_critter_descr(bobname);
+			if (critter == nullptr) {
+				if (worker_index(bobname) == Widelands::INVALID_INDEX) {
+					throw GameDataError(
+					   "Productionsite '%s' has unknown bob '%s' in production or worker program",
+					   prod->name().c_str(), bobname.c_str());
+				}
+			}
+			add_creator(bobname, prod);
+		}
+
+		// Get attributes and bobs from transformations
+		std::set<std::string> deduced_bobs;
+		std::set<std::string> deduced_immovables;
+		// Remember where we walked in case of circular dependencies
+		std::set<DescriptionIndex> walked_world_immovables;
+		std::set<DescriptionIndex> walked_tribe_immovables;
+
+		for (const auto& attribinfo : prod->created_attributes()) {
+			const MapObjectType mapobjecttype = attribinfo.first;
+			const MapObjectDescr::AttributeIndex attribute_id = attribinfo.second;
+			if (mapobjecttype != MapObjectType::IMMOVABLE) {
+				continue;
+			}
+			for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
+				const ImmovableDescr& immovable_descr = world_immovables.get(i);
+				if (immovable_descr.has_attribute(attribute_id)) {
+					walk_world_immovables(i, world, &walked_world_immovables, needed_attributes,
+					                      &deduced_immovables, &deduced_bobs);
+					if (needed_attributes.count(attribute_id) == 1) {
+						prod->add_created_immovable(immovable_descr.name());
+						add_creator(immovable_descr.name(), prod);
+					}
+				}
+			}
+			for (const DescriptionIndex i : immovables()) {
+				const ImmovableDescr& immovable_descr = *get_immovable_descr(i);
+				if (immovable_descr.has_attribute(attribute_id)) {
+					walk_tribe_immovables(i, *this, &walked_tribe_immovables, needed_attributes,
+					                      &deduced_immovables, &deduced_bobs);
+					if (needed_attributes.count(attribute_id) == 1) {
+						prod->add_created_immovable(immovable_descr.name());
+						add_creator(immovable_descr.name(), prod);
+					}
+				}
+			}
+		}
+		// We're done with this site's attributes, let's get some memory back
+		prod->clear_attributes();
+
+		// Add deduced bobs & immovables
+		for (const std::string& bob_name : deduced_bobs) {
+			prod->add_created_bob(bob_name);
+			add_creator(bob_name, prod);
+		}
+		for (const std::string& immovable_name : deduced_immovables) {
+			prod->add_created_immovable(immovable_name);
+			add_creator(immovable_name, prod);
+		}
+
+		// Register remaining creators and collectors
+		for (const std::string& resource : prod->created_resources()) {
+			add_creator(resource, prod);
+		}
+		for (const std::string& resource : prod->collected_resources()) {
+			add_collector(resource, prod);
+		}
+		for (const std::string& bob : prod->collected_bobs()) {
+			add_collector(bob, prod);
+		}
+		for (const std::string& immovable : prod->collected_immovables()) {
+			add_collector(immovable, prod);
+		}
+	}
+
+	// Calculate workarea overlaps + AI info
+	for (ProductionSiteDescr* prod : productionsites) {
+		// Sites that create any immovables should not overlap each other
+		if (!prod->created_immovables().empty()) {
+			for (const ProductionSiteDescr* other_prod : productionsites) {
+				if (!other_prod->created_immovables().empty()) {
+					prod->add_competing_productionsite(other_prod->name());
+				}
+			}
+		}
+		// Sites that create any resources should not overlap each other
+		if (!prod->created_resources().empty()) {
+			for (const ProductionSiteDescr* other_prod : productionsites) {
+				if (!other_prod->created_resources().empty()) {
+					prod->add_competing_productionsite(other_prod->name());
+				}
+			}
+		}
+
+		// Sites that create a bob should not overlap sites that create the same bob
+		for (const std::string& item : prod->created_bobs()) {
+			if (creators.count(item)) {
+				for (ProductionSiteDescr* creator : creators.at(item)) {
+					prod->add_competing_productionsite(creator->name());
+					creator->add_competing_productionsite(prod->name());
+				}
+			}
+		}
+
+		for (const std::string& item : prod->collected_immovables()) {
+			// Sites that collect immovables and sites of other types that create immovables for them
+			// should overlap each other
+			if (creators.count(item)) {
+				for (ProductionSiteDescr* creator : creators.at(item)) {
+					if (creator != prod) {
+						prod->add_supported_by_productionsite(creator->name());
+						creator->add_supports_productionsite(prod->name());
+					}
+				}
+			}
+			// Sites that collect immovables should not overlap sites that collect the same immovable
+			if (collectors.count(item)) {
+				for (const ProductionSiteDescr* collector : collectors.at(item)) {
+					prod->add_competing_productionsite(collector->name());
+				}
+			}
+		}
+		for (const std::string& item : prod->collected_bobs()) {
+			// Sites that collect bobs and sites of other types that create bobs for them should
+			// overlap each other
+			if (creators.count(item)) {
+				for (ProductionSiteDescr* creator : creators.at(item)) {
+					if (creator != prod) {
+						prod->add_supported_by_productionsite(creator->name());
+						creator->add_supports_productionsite(prod->name());
+					}
+				}
+			}
+			// Sites that collect bobs should not overlap sites that collect the same bob
+			if (collectors.count(item)) {
+				for (const ProductionSiteDescr* collector : collectors.at(item)) {
+					prod->add_competing_productionsite(collector->name());
+				}
+			}
+		}
+		for (const std::string& item : prod->collected_resources()) {
+			// Sites that collect resources and sites of other types that create resources for them
+			// should overlap each other
+			if (creators.count(item)) {
+				for (ProductionSiteDescr* creator : creators.at(item)) {
+					if (creator != prod) {
+						prod->add_supported_by_productionsite(creator->name());
+						creator->add_supports_productionsite(prod->name());
+					}
+				}
+			}
+			// Sites that collect resources should not overlap sites that collect the same resource
+			if (collectors.count(item)) {
+				for (const ProductionSiteDescr* collector : collectors.at(item)) {
+					prod->add_competing_productionsite(collector->name());
+				}
+			}
+		}
 	}
 }
 }  // namespace Widelands
