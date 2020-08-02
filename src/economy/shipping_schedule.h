@@ -100,8 +100,6 @@ public:
 	void save(const EditorGameBase&, MapObjectSaver&, FileWrite&) const;
 	void load(FileRead&);
 	void load_pointers(MapObjectLoader&);
-	// TODO(Nordfriese): For b20 savegame compatibility ONLY
-	void load_finish(EditorGameBase&);
 
 private:
 	ShipFleet& fleet_;

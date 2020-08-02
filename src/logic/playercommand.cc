@@ -119,12 +119,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdSetWarePriority(des);
 	case QueueCommandTypes::kSetWareTargetQuantity:
 		return new CmdSetWareTargetQuantity(des);
-	case QueueCommandTypes::kResetWareTargetQuantity:
-		return new CmdResetWareTargetQuantity(des);
 	case QueueCommandTypes::kSetWorkerTargetQuantity:
 		return new CmdSetWorkerTargetQuantity(des);
-	case QueueCommandTypes::kResetWorkerTargetQuantity:
-		return new CmdResetWorkerTargetQuantity(des);
 
 	case QueueCommandTypes::kMessageSetStatusRead:
 		return new CmdMessageSetStatusRead(des);
@@ -520,12 +516,8 @@ constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 2;
 void CmdFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		// TODO(GunChleoc): Savegame compatibility, remove after Build 21
-		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdFlagAction) {
+		if (packet_version == kCurrentPacketVersionCmdFlagAction) {
 			PlayerCommand::read(fr, egbase, mol);
-			if (packet_version == 1) {
-				fr.unsigned_8();
-			}
 			serial = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
 		} else {
 			throw UnhandledVersionError(
@@ -783,12 +775,11 @@ constexpr uint16_t kCurrentPacketVersionCmdEnhanceBuilding = 2;
 void CmdEnhanceBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketVersionCmdEnhanceBuilding && packet_version >= 1) {
+		if (packet_version == kCurrentPacketVersionCmdEnhanceBuilding) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			bi_ = fr.unsigned_16();
-			// TODO(Nordfriese): Savegame compatibility
-			keep_wares_ = packet_version >= 2 && fr.unsigned_8();
+			keep_wares_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdEnhanceBuilding", packet_version, kCurrentPacketVersionCmdEnhanceBuilding);
@@ -828,11 +819,10 @@ constexpr uint16_t kCurrentPacketVersionDismantleBuilding = 2;
 void CmdDismantleBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketVersionDismantleBuilding && packet_version >= 1) {
+		if (packet_version == kCurrentPacketVersionDismantleBuilding) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			// TODO(Nordfriese): Savegame compatibility
-			keep_wares_ = packet_version >= 2 && fr.unsigned_8();
+			keep_wares_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdDismantleBuilding", packet_version, kCurrentPacketVersionDismantleBuilding);
@@ -1442,52 +1432,6 @@ void CmdSetWareTargetQuantity::serialize(StreamWrite& ser) {
 	ser.unsigned_32(permanent_);
 }
 
-CmdResetWareTargetQuantity::CmdResetWareTargetQuantity(const uint32_t init_duetime,
-                                                       const PlayerNumber init_sender,
-                                                       const uint32_t init_economy,
-                                                       const DescriptionIndex init_ware_type)
-   : CmdChangeTargetQuantity(init_duetime, init_sender, init_economy, init_ware_type) {
-}
-
-void CmdResetWareTargetQuantity::execute(Game& game) {
-	Player* player = game.get_player(sender());
-	const TribeDescr& tribe = player->tribe();
-	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
-		const int count = tribe.get_ware_descr(ware_type())->default_target_quantity(tribe.name());
-		player->get_economy(economy())->set_target_quantity(wwWARE, ware_type(), count, duetime());
-	}
-}
-
-constexpr uint16_t kCurrentPacketVersionResetWareTargetQuantity = 1;
-
-void CmdResetWareTargetQuantity::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
-	fw.unsigned_16(kCurrentPacketVersionResetWareTargetQuantity);
-	CmdChangeTargetQuantity::write(fw, egbase, mos);
-}
-
-void CmdResetWareTargetQuantity::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
-	try {
-		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionResetWareTargetQuantity) {
-			CmdChangeTargetQuantity::read(fr, egbase, mol);
-		} else {
-			throw UnhandledVersionError("CmdResetWareTargetQuantity", packet_version,
-			                            kCurrentPacketVersionResetWareTargetQuantity);
-		}
-	} catch (const WException& e) {
-		throw GameDataError("reset target quantity: %s", e.what());
-	}
-}
-
-CmdResetWareTargetQuantity::CmdResetWareTargetQuantity(StreamRead& des)
-   : CmdChangeTargetQuantity(des) {
-}
-
-void CmdResetWareTargetQuantity::serialize(StreamWrite& ser) {
-	write_id_and_sender(ser);
-	CmdChangeTargetQuantity::serialize(ser);
-}
-
 CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_duetime,
                                                        const PlayerNumber init_sender,
                                                        const uint32_t init_economy,
@@ -1539,56 +1483,6 @@ void CmdSetWorkerTargetQuantity::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 	ser.unsigned_32(permanent_);
-}
-
-CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity(const uint32_t init_duetime,
-                                                           const PlayerNumber init_sender,
-                                                           const uint32_t init_economy,
-                                                           const DescriptionIndex init_ware_type)
-   : CmdChangeTargetQuantity(init_duetime, init_sender, init_economy, init_ware_type) {
-}
-
-void CmdResetWorkerTargetQuantity::execute(Game& game) {
-	Player* player = game.get_player(sender());
-	const TribeDescr& tribe = player->tribe();
-	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
-		const int count = tribe.get_worker_descr(ware_type())->default_target_quantity();
-		player->get_economy(economy())->set_target_quantity(wwWORKER, ware_type(), count, duetime());
-	}
-}
-
-constexpr uint16_t kCurrentPacketVersionResetWorkerTargetQuantity = 1;
-
-void CmdResetWorkerTargetQuantity::write(FileWrite& fw,
-                                         EditorGameBase& egbase,
-                                         MapObjectSaver& mos) {
-	fw.unsigned_16(kCurrentPacketVersionResetWorkerTargetQuantity);
-	CmdChangeTargetQuantity::write(fw, egbase, mos);
-}
-
-void CmdResetWorkerTargetQuantity::read(FileRead& fr,
-                                        EditorGameBase& egbase,
-                                        MapObjectLoader& mol) {
-	try {
-		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionResetWorkerTargetQuantity) {
-			CmdChangeTargetQuantity::read(fr, egbase, mol);
-		} else {
-			throw UnhandledVersionError("CmdResetWorkerTargetQuantity", packet_version,
-			                            kCurrentPacketVersionResetWorkerTargetQuantity);
-		}
-	} catch (const WException& e) {
-		throw GameDataError("reset worker target quantity: %s", e.what());
-	}
-}
-
-CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity(StreamRead& des)
-   : CmdChangeTargetQuantity(des) {
-}
-
-void CmdResetWorkerTargetQuantity::serialize(StreamWrite& ser) {
-	write_id_and_sender(ser);
-	CmdChangeTargetQuantity::serialize(ser);
 }
 
 /*** class Cmd_ChangeTrainingOptions ***/

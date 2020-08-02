@@ -186,28 +186,27 @@ public:
 
 	/// Returns 'true' if an overlap highlighting relationship has been set. Whether an overlap is
 	/// wanted or not is written into 'positive'.
-	bool highlight_overlapping_workarea_for(const MapObjectDescr* productionsite,
-	                                        bool* positive) const;
+	bool highlight_overlapping_workarea_for(const std::string& productionsite, bool* positive) const;
 	/// Set that this production site competes with the given 'productionsite' for map resources.
-	void add_competing_productionsite(const MapObjectDescr* productionsite);
+	void add_competing_productionsite(const std::string& productionsite);
 	/// Set that this production site creates map resources or objects that the given
 	/// 'productionsite' needs.
-	void add_supports_productionsite(const MapObjectDescr* productionsite);
+	void add_supports_productionsite(const std::string& productionsite);
 	/// Set that the given 'productionsite' creates map resources or objects that this production
 	/// site needs.
-	void add_supported_by_productionsite(const MapObjectDescr* productionsite);
+	void add_supported_by_productionsite(const std::string& productionsite);
 	/// Returns whether this production site competes with the given 'productionsite' for map
 	/// resources.
-	bool competes_with_productionsite(const MapObjectDescr* productionsite) const;
+	bool competes_with_productionsite(const std::string& productionsite) const;
 	/// Returns whether this production site creates map resources or objects that the given
 	/// 'productionsite' needs.
-	bool supports_productionsite(const MapObjectDescr* productionsite) const;
+	bool supports_productionsite(const std::string& productionsite) const;
 	/// Returns whether the given 'productionsite' creates map resources or objects that this
 	/// production site needs.
-	bool is_supported_by_productionsite(const MapObjectDescr* productionsite) const;
+	bool is_supported_by_productionsite(const std::string& productionsite) const;
 	/// Returns the production sites that need a map resource or object that this production site
 	/// will place on the map.
-	std::set<const MapObjectDescr*> supported_productionsites() const {
+	std::set<std::string> supported_productionsites() const {
 		return supported_productionsites_;
 	}
 	/// Returns whether this production site needs map resources or objects that are created by a
@@ -266,9 +265,9 @@ private:
 	std::string out_of_resource_message_;
 	std::string resource_not_needed_message_;
 	int out_of_resource_productivity_threshold_;
-	std::set<const MapObjectDescr*> competing_productionsites_;
-	std::set<const MapObjectDescr*> supported_productionsites_;
-	std::set<const MapObjectDescr*> supported_by_productionsites_;
+	std::set<std::string> competing_productionsites_;
+	std::set<std::string> supported_productionsites_;
+	std::set<std::string> supported_by_productionsites_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
 };
@@ -367,7 +366,7 @@ public:
 	                   FailNotificationType type = FailNotificationType::kDefault);
 	void unnotify_player();
 
-	void set_default_anim(std::string);
+	void set_default_anim(const std::string&);
 
 	const BuildingSettings* create_building_settings() const override;
 

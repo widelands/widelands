@@ -406,7 +406,7 @@ struct BuildableField {
 	// and for rangers, fishbreeders:
 	std::vector<uint8_t> supporters_nearby;
 	// NOCOM supporters_nearby
-	std::map<const Widelands::MapObjectDescr*, uint8_t> supporters_nearby_new;
+	std::map<std::string, uint8_t> supporters_nearby_new;
 };
 
 struct MineableField {

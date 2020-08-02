@@ -246,12 +246,14 @@ end
 
 return {
    func = function(tribename, workername)
-      set_textdomain("tribes_encyclopedia")
+      push_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
       local worker_description = wl.Game():get_worker_description(workername)
-      return {
+      local r = {
          title = worker_description.descname,
          text = worker_help_string(tribe, worker_description)
       }
+      pop_textdomain()
+      return r
    end
 }

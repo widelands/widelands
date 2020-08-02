@@ -651,7 +651,7 @@ void DefaultAI::late_initialization() {
 		bo.max_preciousness = 0;
 		bo.max_needed_preciousness = 0;
 
-		for (auto ph : bh.supported_production()) {
+		for (auto& ph : bh.supported_production()) {
 			bo.production_hints.insert(tribe_->safe_ware_index(ph));
 		}
 		// I just presume cut wood is named "log" in the game
@@ -2710,10 +2710,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// Some productionsites strictly require supporting sites nearby
 				uint8_t count_supporters_nearby = 0;
 				if (bo.requires_supporters) {
-					if (bf->supporters_nearby_new.count(bo.desc) != 1) {
+					if (bf->supporters_nearby_new.count(bo.desc->name()) != 1) {
 						continue;
 					}
-					count_supporters_nearby = bf->supporters_nearby_new.at(bo.desc);
+					count_supporters_nearby = bf->supporters_nearby_new.at(bo.desc->name());
 				}
 
 				// this can be only a well (as by now)

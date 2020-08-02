@@ -476,7 +476,7 @@ constexpr uint8_t kCurrentPacketVersion = 6;
 PortDock::Loader::Loader() : warehouse_(0) {
 }
 
-void PortDock::Loader::load(FileRead& fr, uint8_t packet_version) {
+void PortDock::Loader::load(FileRead& fr, uint8_t /* packet_version */) {
 	PlayerImmovable::Loader::load(fr);
 
 	PortDock& pd = get<PortDock>();
@@ -488,16 +488,6 @@ void PortDock::Loader::load(FileRead& fr, uint8_t packet_version) {
 	for (uint16_t i = 0; i < nrdockpoints; ++i) {
 		pd.dockpoints_[i] = read_coords_32(&fr, egbase().map().extent());
 		pd.set_position(egbase(), pd.dockpoints_[i]);
-	}
-
-	// TODO(GunChleoc&Nordfriese): Savegame compatibility Build 20
-	// (remove when we break savegame compatibility)
-	if (packet_version == 5) {
-		for (uint32_t i = fr.unsigned_32(); i; --i) {
-			fr.unsigned_32();
-		}
-	} else if (packet_version < 5) {
-		fr.unsigned_8();
 	}
 
 	waiting_.resize(fr.unsigned_32());
@@ -550,9 +540,8 @@ MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, 
 	try {
 		// The header has been peeled away by the caller
 
-		// TODO(GunChleoc): Savegame compatibility Build 20
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr, packet_version);
 		} else {

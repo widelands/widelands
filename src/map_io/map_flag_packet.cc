@@ -50,7 +50,7 @@ void MapFlagPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 2) {
+		if (packet_version == kCurrentPacketVersion) {
 			const Map& map = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			Widelands::Extent const extent = map.extent();
@@ -60,9 +60,7 @@ void MapFlagPacket::read(FileSystem& fs,
 					throw GameDataError("Invalid player number: %i.", owner);
 				}
 				const Serial ware_economy_serial = fr.unsigned_32();
-				const Serial worker_economy_serial =
-				   packet_version >= 3 ? fr.unsigned_32() :
-				                         mol.get_economy_savegame_compatibility(ware_economy_serial);
+				const Serial worker_economy_serial = fr.unsigned_32();
 
 				Serial const serial = fr.unsigned_32();
 

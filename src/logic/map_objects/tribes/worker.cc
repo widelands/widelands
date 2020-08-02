@@ -60,6 +60,7 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
+#include "map_io/map_packet_versions.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 #include "sound/note_sound.h"
 
@@ -997,7 +998,7 @@ bool Worker::run_terraform(Game& game, State& state, const Action&) {
  * tribe uses and adds it to the appropriate fleet.
  *
  */
-// TODO(GunChleoc): Savegame compatibility, remove after Build 22.
+// TODO(GunChleoc): Savegame compatibility, remove after v1.0.
 bool Worker::run_buildferry(Game& game, State& state, const Action&) {
 	game.create_worker(get_position(), owner_->tribe().ferry(), owner_);
 	++state.ivar1;
@@ -3353,24 +3354,25 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
                                 FileRead& fr,
                                 const TribesLegacyLookupTable& lookup_table,
                                 uint8_t packet_version) {
-	try {
-		// header has already been read by caller
-		// Some maps contain worker info, so we need compatibility here.
-		if (packet_version == 1) {
-			fr.c_string();  // Consume tribe name
+	if (packet_version == kCurrentPacketVersionMapObject) {
+		try {
+			// header has already been read by caller
+			const std::string name = lookup_table.lookup_worker(fr.c_string());
+
+			const WorkerDescr* descr =
+			   egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));
+
+			Worker* worker = static_cast<Worker*>(&descr->create_object());
+			std::unique_ptr<Loader> loader(worker->create_loader());
+			loader->init(egbase, mol, *worker);
+			loader->load(fr);
+			return loader.release();
+		} catch (const std::exception& e) {
+			throw wexception("loading worker: %s", e.what());
 		}
-		const std::string name = lookup_table.lookup_worker(fr.c_string());
-
-		const WorkerDescr* descr =
-		   egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));
-
-		Worker* worker = static_cast<Worker*>(&descr->create_object());
-		std::unique_ptr<Loader> loader(worker->create_loader());
-		loader->init(egbase, mol, *worker);
-		loader->load(fr);
-		return loader.release();
-	} catch (const std::exception& e) {
-		throw wexception("loading worker: %s", e.what());
+	} else {
+		throw UnhandledVersionError(
+		   "MapObjectPacket::Worker", packet_version, kCurrentPacketVersionMapObject);
 	}
 }
 

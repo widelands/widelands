@@ -427,7 +427,7 @@ const std::string& MapObjectDescr::icon_filename() const {
  * Search for the attribute in the attribute list
  */
 bool MapObjectDescr::has_attribute(AttributeIndex attr) const {
-	for (const uint32_t& attrib : attributes_) {
+	for (const uint32_t& attrib : attribute_ids_) {
 		if (attrib == attr) {
 			return true;
 		}
@@ -440,19 +440,19 @@ bool MapObjectDescr::has_attribute(AttributeIndex attr) const {
  */
 void MapObjectDescr::add_attribute(AttributeIndex attr) {
 	if (!has_attribute(attr)) {
-		attributes_.push_back(attr);
+		attribute_ids_.push_back(attr);
 	}
 }
 
-void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes) {
-	for (const std::string& attribute : attributes) {
-		uint32_t const attrib = get_attribute_id(attribute, true);
-		add_attribute(attrib);
+void MapObjectDescr::add_attributes(const std::vector<std::string>& attribs) {
+	for (const std::string& attrib : attribs) {
+		uint32_t const attrib_id = get_attribute_id(attrib, true);
+		add_attribute(attrib_id);
 	}
 }
 
 const MapObjectDescr::Attributes& MapObjectDescr::attributes() const {
-	return attributes_;
+	return attribute_ids_;
 }
 
 /**

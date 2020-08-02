@@ -1591,7 +1591,7 @@ void Player::read_remaining_shipnames(FileRead& fr) {
  * \param fr source stream
  */
 void Player::read_statistics(FileRead& fr,
-                             const uint16_t packet_version,
+                             const uint16_t /* packet_version */,
                              const TribesLegacyLookupTable& lookup_table) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
@@ -1631,13 +1631,7 @@ void Player::read_statistics(FileRead& fr,
 		}
 
 		current_produced_statistics_[idx] = fr.unsigned_32();
-		if (packet_version < 22) {
-			for (uint32_t j = 0; j < nr_entries; ++j) {
-				ware_productions_[idx][j] = fr.unsigned_32();
-			}
-		} else {
-			parse_stats(&ware_productions_, idx, fr.c_string(), "produced");
-		}
+		parse_stats(&ware_productions_, idx, fr.c_string(), "produced");
 	}
 
 	// Read consumption statistics
@@ -1658,14 +1652,7 @@ void Player::read_statistics(FileRead& fr,
 		}
 
 		current_consumed_statistics_[idx] = fr.unsigned_32();
-		// TODO(GunChleoc): Get rid of this savegame compatibility code after build 21
-		if (packet_version < 22) {
-			for (uint32_t j = 0; j < nr_entries; ++j) {
-				ware_consumptions_[idx][j] = fr.unsigned_32();
-			}
-		} else {
-			parse_stats(&ware_consumptions_, idx, fr.c_string(), "consumed");
-		}
+		parse_stats(&ware_consumptions_, idx, fr.c_string(), "consumed");
 	}
 
 	// Read stock statistics
@@ -1684,13 +1671,7 @@ void Player::read_statistics(FileRead& fr,
 			continue;
 		}
 
-		if (packet_version < 22) {
-			for (uint32_t j = 0; j < nr_entries; ++j) {
-				ware_stocks_[idx][j] = fr.unsigned_32();
-			}
-		} else {
-			parse_stats(&ware_stocks_, idx, fr.c_string(), "stock");
-		}
+		parse_stats(&ware_stocks_, idx, fr.c_string(), "stock");
 	}
 
 	// All statistics should have the same size

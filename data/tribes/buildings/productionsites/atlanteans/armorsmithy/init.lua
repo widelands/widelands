@@ -53,7 +53,7 @@ dirname = path.dirname(__file__)
 --        *Mandatory*. The production site programs that define what preconditions
 --        a building needs to fulfil in order to produce its wares and how it's
 --        done, including any animations and sounds played.
---        See :doc:`productionsite_program`.
+--        See :ref:`productionsite_programs`.
 --
 --    **indicate_workarea_overlaps**
 --        *DEPRECATED*. The names of other productionsites whose workareas should be highlighted

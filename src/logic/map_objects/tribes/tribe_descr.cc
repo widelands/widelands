@@ -274,7 +274,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		}
 
 		items_table = table.get_table("resource_indicators");
-		for (std::string resource : items_table->keys<std::string>()) {
+		for (const std::string& resource : items_table->keys<std::string>()) {
 			ResourceIndicatorList resis;
 			std::unique_ptr<LuaTable> tbl = items_table->get_table(resource);
 			const std::set<int> keys = tbl->keys<int>();
@@ -640,6 +640,7 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename) {
 
 void TribeDescr::process_productionsites(const World& world) {
 	// Get a list of productionsites - we will need to iterate them more than once
+	// The temporary use of pointers here is fine, because it doesn't affect the game state.
 	std::set<ProductionSiteDescr*> productionsites;
 	for (const DescriptionIndex index : buildings()) {
 		BuildingDescr* building = tribes_.get_mutable_building_descr(index);
@@ -760,10 +761,9 @@ void TribeDescr::process_productionsites(const World& world) {
 					}
 				}
 			}
-
-			// We're done with this site's attributes, let's get some memory back
-			prod->clear_attributes();
 		}
+		// We're done with this site's attributes, let's get some memory back
+		prod->clear_attributes();
 
 		// Add deduced bobs & immovables
 		for (const std::string& bob_name : deduced_bobs) {
@@ -796,7 +796,7 @@ void TribeDescr::process_productionsites(const World& world) {
 		if (!prod->created_immovables().empty()) {
 			for (const ProductionSiteDescr* other_prod : productionsites) {
 				if (!other_prod->created_immovables().empty()) {
-					prod->add_competing_productionsite(other_prod);
+					prod->add_competing_productionsite(other_prod->name());
 				}
 			}
 		}
@@ -804,7 +804,7 @@ void TribeDescr::process_productionsites(const World& world) {
 		if (!prod->created_resources().empty()) {
 			for (const ProductionSiteDescr* other_prod : productionsites) {
 				if (!other_prod->created_resources().empty()) {
-					prod->add_competing_productionsite(other_prod);
+					prod->add_competing_productionsite(other_prod->name());
 				}
 			}
 		}
@@ -813,8 +813,8 @@ void TribeDescr::process_productionsites(const World& world) {
 		for (const std::string& item : prod->created_bobs()) {
 			if (creators.count(item)) {
 				for (ProductionSiteDescr* creator : creators.at(item)) {
-					prod->add_competing_productionsite(creator);
-					creator->add_competing_productionsite(prod);
+					prod->add_competing_productionsite(creator->name());
+					creator->add_competing_productionsite(prod->name());
 				}
 			}
 		}
@@ -825,15 +825,15 @@ void TribeDescr::process_productionsites(const World& world) {
 			if (creators.count(item)) {
 				for (ProductionSiteDescr* creator : creators.at(item)) {
 					if (creator != prod) {
-						prod->add_supported_by_productionsite(creator);
-						creator->add_supports_productionsite(prod);
+						prod->add_supported_by_productionsite(creator->name());
+						creator->add_supports_productionsite(prod->name());
 					}
 				}
 			}
 			// Sites that collect immovables should not overlap sites that collect the same immovable
 			if (collectors.count(item)) {
 				for (const ProductionSiteDescr* collector : collectors.at(item)) {
-					prod->add_competing_productionsite(collector);
+					prod->add_competing_productionsite(collector->name());
 				}
 			}
 		}
@@ -843,15 +843,15 @@ void TribeDescr::process_productionsites(const World& world) {
 			if (creators.count(item)) {
 				for (ProductionSiteDescr* creator : creators.at(item)) {
 					if (creator != prod) {
-						prod->add_supported_by_productionsite(creator);
-						creator->add_supports_productionsite(prod);
+						prod->add_supported_by_productionsite(creator->name());
+						creator->add_supports_productionsite(prod->name());
 					}
 				}
 			}
 			// Sites that collect bobs should not overlap sites that collect the same bob
 			if (collectors.count(item)) {
 				for (const ProductionSiteDescr* collector : collectors.at(item)) {
-					prod->add_competing_productionsite(collector);
+					prod->add_competing_productionsite(collector->name());
 				}
 			}
 		}
@@ -861,15 +861,15 @@ void TribeDescr::process_productionsites(const World& world) {
 			if (creators.count(item)) {
 				for (ProductionSiteDescr* creator : creators.at(item)) {
 					if (creator != prod) {
-						prod->add_supported_by_productionsite(creator);
-						creator->add_supports_productionsite(prod);
+						prod->add_supported_by_productionsite(creator->name());
+						creator->add_supports_productionsite(prod->name());
 					}
 				}
 			}
 			// Sites that collect resources should not overlap sites that collect the same resource
 			if (collectors.count(item)) {
 				for (const ProductionSiteDescr* collector : collectors.at(item)) {
-					prod->add_competing_productionsite(collector);
+					prod->add_competing_productionsite(collector->name());
 				}
 			}
 		}
