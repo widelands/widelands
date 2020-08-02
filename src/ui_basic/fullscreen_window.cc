@@ -37,7 +37,7 @@ namespace UI {
 
 FullscreenWindow::FullscreenWindow()
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
-     background_image_((boost::format("%s%s") % kTemplateDir % "fsmenu/background.png").str()) {
+     background_image_((boost::format("%1%fsmenu/background.png") % kTemplateDir).str()) {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.new_width, message.new_height);
