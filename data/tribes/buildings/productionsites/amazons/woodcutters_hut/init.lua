@@ -32,11 +32,6 @@ tribes:new_productionsite_type {
       amazons_woodcutter = 1
    },
 
-   indicate_workarea_overlaps = {
-      amazons_junglepreservers_hut = true,
-      amazons_woodcutters_hut = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...

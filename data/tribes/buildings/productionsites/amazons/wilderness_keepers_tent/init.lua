@@ -37,10 +37,6 @@ tribes:new_productionsite_type {
       amazons_wilderness_keeper = 1
    },
 
-   indicate_workarea_overlaps = {
-      amazons_hunter_gatherers_hut = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

@@ -36,10 +36,6 @@ tribes:new_productionsite_type {
       amazons_woodcutter_master = 1
    },
 
-   indicate_workarea_overlaps = {
-      amazons_rare_tree_plantation = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

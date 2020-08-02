@@ -33,9 +33,6 @@ tribes:new_productionsite_type {
       amazons_carrier = 1
    },
 
-   indicate_workarea_overlaps = {
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

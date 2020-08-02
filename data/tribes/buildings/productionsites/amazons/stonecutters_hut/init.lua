@@ -30,10 +30,6 @@ tribes:new_productionsite_type {
       amazons_stonecutter = 1
    },
 
-   indicate_workarea_overlaps = {
-      amazons_stonecutters_hut = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

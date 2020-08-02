@@ -48,11 +48,6 @@ tribes:new_productionsite_type {
       { name = "fish", amount = 3 },
    },
 
-   indicate_workarea_overlaps = {
-      amazons_rare_tree_plantation = true,
-      amazons_junglepreservers_hut = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of land because ...

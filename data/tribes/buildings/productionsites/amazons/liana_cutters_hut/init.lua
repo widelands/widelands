@@ -22,10 +22,6 @@ tribes:new_productionsite_type {
       unoccupied = {hotspot = {39, 45}}
    },
 
-   indicate_workarea_overlaps = {
-      amazons_junglepreservers_hut = true,
-   },
-
    aihints = {
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,

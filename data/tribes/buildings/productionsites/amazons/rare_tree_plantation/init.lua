@@ -42,14 +42,6 @@ tribes:new_productionsite_type {
       amazons_jungle_master = 1
    },
 
-   indicate_workarea_overlaps = {
-      amazons_rare_tree_plantation = false,
-      amazons_cocoa_farm = false,
-      amazons_cassava_root_plantation = false,
-      amazons_junglepreservers_hut = false,
-      amazons_rare_trees_woodcutters_hut = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

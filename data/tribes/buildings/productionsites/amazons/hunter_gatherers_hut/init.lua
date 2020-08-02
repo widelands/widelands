@@ -31,11 +31,6 @@ tribes:new_productionsite_type {
       --basic_amount = 1,
    },
 
-   indicate_workarea_overlaps = {
-      amazons_hunter_gatherers_hut = false,
-      amazons_wilderness_keepers_tent = true
-   },
-
    working_positions = {
       amazons_hunter_gatherer = 1
    },

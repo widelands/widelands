@@ -32,10 +32,6 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      amazons_stonemine = false,
-   },
-
    aihints = {
       mines = "stones",
       mines_percent = 100,

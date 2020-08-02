@@ -35,10 +35,6 @@ tribes:new_productionsite_type {
       prohibited_till = 1050
    },
 
-   indicate_workarea_overlaps = {
-      amazons_shipyard = false,
-   },
-
    working_positions = {
       amazons_shipwright = 1
    },

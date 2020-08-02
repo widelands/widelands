@@ -33,10 +33,6 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      amazons_gold_digger_dwelling = false,
-   },
-
    aihints = {
       mines = "gold",
       mines_percent = 100,
