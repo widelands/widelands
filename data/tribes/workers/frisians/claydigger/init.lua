@@ -18,7 +18,7 @@ tribes:new_worker_type {
       dig = {
          "findspace=size:any radius:4",
          "walk=coords",
-         "animate=dig 8000",
+         "animate=dig duration:8s",
          "plant=attrib:pond_dry",
          "return"
       }

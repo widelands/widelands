@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
             -- time total: 60
             "return=skipped unless economy needs smoked_meat",
             "consume=meat:2 log",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "sleep=30000",
             "produce=smoked_meat:2"
          }
@@ -78,7 +78,7 @@ tribes:new_productionsite_type {
             -- time total: 60
             "return=skipped unless economy needs smoked_fish",
             "consume=fish:2 log",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "sleep=30000",
             "produce=smoked_fish:2"
          }
@@ -90,7 +90,7 @@ tribes:new_productionsite_type {
             -- time total: 60
             "return=skipped unless economy needs smoked_fish",
             "consume=fish:2 log",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "sleep=30000",
             "produce=smoked_fish:2"
          }

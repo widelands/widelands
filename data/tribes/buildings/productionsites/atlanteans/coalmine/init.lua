@@ -43,10 +43,6 @@ tribes:new_productionsite_type {
       atlanteans_miner = 3
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_coalmine = false,
-   },
-
    inputs = {
       { name = "smoked_fish", amount = 10 },
       { name = "smoked_meat", amount = 6 },
@@ -80,7 +76,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining coal",
          actions = {
-            "animate=working 10000",
+            "animate=working duration:10s",
             "mine=coal 4 100 5 2",
             "produce=coal",
          }

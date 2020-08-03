@@ -45,11 +45,6 @@ tribes:new_productionsite_type {
       empire_miner = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_coalmine = false,
-      empire_coalmine_deep = false,
-   },
-
    inputs = {
       { name = "ration", amount = 6 },
       { name = "beer", amount = 6 }
@@ -71,7 +66,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining coal",
          actions = {
-            "animate=working 14000",
+            "animate=working duration:14s",
             "mine=coal 2 50 5 17",
             "produce=coal",
          }

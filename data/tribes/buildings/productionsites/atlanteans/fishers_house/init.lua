@@ -37,11 +37,6 @@ tribes:new_productionsite_type {
       atlanteans_fisher = 1
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_fishers_house = false,
-      atlanteans_fishbreeders_house = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
