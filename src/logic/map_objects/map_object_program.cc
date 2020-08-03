@@ -82,14 +82,10 @@ Duration MapObjectProgram::as_ms(Duration number, const std::string& unit) {
 	if (unit == "ms") {
 		return number;
 	}
-	if (unit.empty()) {
-		// TODO(GunChleoc): deprecate
-		return number;
-	}
 	throw GameDataError("has unknown unit '%s'", unit.c_str());
 }
 
-Duration MapObjectProgram::read_duration(const std::string& input) {
+Duration MapObjectProgram::read_duration(const std::string& input, const MapObjectDescr& descr) {
 	try {
 		boost::smatch match;
 		boost::regex one_unit("^(\\d+)(s|m|ms)$");
@@ -113,9 +109,10 @@ Duration MapObjectProgram::read_duration(const std::string& input) {
 			const Duration part3 = as_ms(read_positive(match[5], endless()), match[6]);
 			return part1 + part2 + part3;
 		}
-		// TODO(GunChleoc): Deprecate unitless
+		// TODO(GunChleoc): Compatibility, remove unitless option after v1.0
 		boost::regex without_unit("^(\\d+)$");
 		if (boost::regex_match(input, without_unit)) {
+			log("WARNING: Duration '%s' without unit in %s's program is deprecated\n", input.c_str(), descr.name().c_str());
 			return read_positive(input, endless());
 		}
 	} catch (const WException& e) {
@@ -176,10 +173,11 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 	if (arguments.size() == 2) {
 		const std::pair<std::string, std::string> item = read_key_value_pair(arguments.at(1), ':');
 		if (item.first == "duration") {
-			result.duration = read_duration(item.second);
+			result.duration = read_duration(item.second, descr);
 		} else if (item.second.empty()) {
-			// TODO(GunChleoc): Deprecate unitless
-			result.duration = read_duration(item.first);
+			// TODO(GunChleoc): Compatibility, remove this option after v1.0
+			result.duration = read_duration(item.first, descr);
+			log("WARNING: 'animate' program without parameter name is deprecated, please use 'animate=<animation_name> duration:<duration>' in %s\n", descr.name().c_str());
 		} else {
 			throw GameDataError("Unknown argument '%s'. Usage: <animation_name> [duration:<duration>]",
 			                    arguments.at(1).c_str());
