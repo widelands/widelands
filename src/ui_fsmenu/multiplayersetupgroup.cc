@@ -673,9 +673,9 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 
 	add(&clientbox);
 	add_space(8 * padding);
-	//	add_inf_space();
+	// add_inf_space();
 	add(&playerbox, Resizing::kFillSpace);
-	//	add_inf_space();
+	// add_inf_space();
 	playerbox.add(&players_, Resizing::kAlign, UI::Align::kCenter);
 	playerbox.add_space(padding);
 
@@ -733,7 +733,7 @@ void MultiPlayerSetupGroup::update() {
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 	const int32_t total_box_height = scrollable_playerbox.get_y() + scrollable_playerbox.get_h();
-	//	log("scrollable now: %d\n", scrollable_playerbox.get_w());
+	// log("scrollable now: %d\n", scrollable_playerbox.get_w());
 	for (MultiPlayerPlayerGroup* current_player : multi_player_player_groups) {
 		if (current_player->is_visible()) {
 			if (current_player->get_y() < 0 && current_player->get_y() > -current_player->get_h()) {
@@ -763,7 +763,7 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
 	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
 		multiPlayerClientGroup->force_new_dimensions(scale, standard_element_height);
 	}
-	//	playerbox.set_max_size(max_width - clientbox.get_w(), max_height);
+	// playerbox.set_max_size(max_width - clientbox.get_w(), max_height);
 
 	log("ind. contentbox - clientbox: %d\n", max_width - clientbox.get_w());
 	log("scrollable before: %d\n", scrollable_playerbox.get_w());

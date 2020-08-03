@@ -131,7 +131,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	ok_.set_enabled(settings_->can_launch());
 
 	individual_content_box.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
-	//	individual_content_box.add_inf_space();
+	// individual_content_box.add_inf_space();
 	individual_content_box.add_space(10 * padding_);
 	individual_content_box.add(&chat_, UI::Box::Resizing::kExpandBoth);
 	layout();
@@ -156,14 +156,14 @@ void FullscreenMenuLaunchMPG::layout() {
 	help_button_.set_pos(
 	   Vector2i(get_w() - 10 * padding_ - standard_element_height_, 10 * padding_));
 
-	//	mpsg_.set_max_size(0, get_h() / 2);
+	// mpsg_.set_max_size(0, get_h() / 2);
 	log("window width/2: %d\n", get_w() * 1 / 2);
 	log("individual box width: %d\n", individual_content_box.get_w());
 
 	mpsg_.force_new_dimensions(
 	   scale_factor(), get_w() * 1 / 2, get_h() / 2, standard_element_height_);
-	//	mpsg_.force_new_dimensions(
-	//	   scale_factor(), individual_content_box.get_w(), get_h() / 2, standard_element_height_);
+	// mpsg_.force_new_dimensions(
+	// scale_factor(), individual_content_box.get_w(), get_h() / 2, standard_element_height_);
 	chat_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, get_h() / 4);
 
 	FullscreenMenuLaunchGame::layout();
