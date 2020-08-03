@@ -73,7 +73,7 @@ tribes:new_productionsite_type {
             "callworker=dig",
             "consume=water",
             "sleep=22000",
-            "animate=working 17000",
+            "animate=working duration:17s",
             "sleep=1000",
             "produce=clay"
          },
