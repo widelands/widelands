@@ -116,8 +116,6 @@ protected:
 	                                                uint8_t default_priority);
 
 private:
-	static Widelands::Duration as_ms(Widelands::Duration number, const std::string& unit);
-
 	const std::string name_;
 };
 }  // namespace Widelands

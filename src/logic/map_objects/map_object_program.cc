@@ -72,20 +72,21 @@ unsigned int MapObjectProgram::read_positive(const std::string& input, int64_t m
 	return read_int(input, 1, max_value);
 }
 
-Duration MapObjectProgram::as_ms(Duration number, const std::string& unit) {
-	if (unit == "s") {
-		return number * 1000;
-	}
-	if (unit == "m") {
-		return number * 60000;
-	}
-	if (unit == "ms") {
-		return number;
-	}
-	throw GameDataError("has unknown unit '%s'", unit.c_str());
-}
-
 Duration MapObjectProgram::read_duration(const std::string& input, const MapObjectDescr& descr) {
+	// Convert unit part into milliseconds
+	auto as_ms = [](Duration number, const std::string& unit) {
+		if (unit == "s") {
+			return number * 1000;
+		}
+		if (unit == "m") {
+			return number * 60000;
+		}
+		if (unit == "ms") {
+			return number;
+		}
+		throw GameDataError("has unknown unit '%s'", unit.c_str());
+	};
+
 	try {
 		boost::smatch match;
 		boost::regex one_unit("^(\\d+)(s|m|ms)$");
