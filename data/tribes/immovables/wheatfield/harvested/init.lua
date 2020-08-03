@@ -9,7 +9,7 @@ tribes:new_immovable_type {
    icon = dirname .. "menu.png",
    programs = {
       program = {
-         "animate=idle 500000",
+         "animate=idle duration:8m20s",
          "remove=",
       }
    },

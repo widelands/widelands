@@ -74,7 +74,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs frisians_soldier",
             "consume=sword_short fur_garment frisians_carrier",
             "sleep=15000",
-            "animate=working 15000",
+            "animate=working duration:15s",
             "recruit=frisians_soldier"
          }
       },

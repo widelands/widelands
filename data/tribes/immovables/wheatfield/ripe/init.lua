@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    size = "small",
    programs = {
       program = {
-         "animate=idle 500000",
+         "animate=idle duration:8m20s",
          "remove=",
       },
       harvest = {
