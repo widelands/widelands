@@ -26,6 +26,23 @@
 #include "logic/map_objects/map_object.h"
 #include "sound/sound_handler.h"
 
+/* RST
+Programs
+========
+.. _map_object_programs:
+
+Some map object will have special programs that define their behavior.
+You can describe these programs in their ``init.lua`` files, in the ``programs``
+table. Map objects that can have programs are:
+
+.. toctree::
+   :maxdepth: 3
+
+   Production Sites <autogen_tribes_productionsite_programs>
+   Workers <autogen_tribes_worker_programs>
+   Immovables <immovable_program>
+*/
+
 namespace Widelands {
 
 MapObjectProgram::MapObjectProgram(const std::string& init_name) : name_(init_name) {
