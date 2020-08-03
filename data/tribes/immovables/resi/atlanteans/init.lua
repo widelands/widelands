@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -36,7 +36,7 @@ tribes:new_immovable_type {
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -62,7 +62,7 @@ tribes:new_immovable_type {
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -88,7 +88,7 @@ tribes:new_immovable_type {
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -114,7 +114,7 @@ tribes:new_immovable_type {
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -140,7 +140,7 @@ tribes:new_immovable_type {
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -166,7 +166,7 @@ tribes:new_immovable_type {
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -192,7 +192,7 @@ tribes:new_immovable_type {
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -218,7 +218,7 @@ tribes:new_immovable_type {
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -244,7 +244,7 @@ tribes:new_immovable_type {
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
