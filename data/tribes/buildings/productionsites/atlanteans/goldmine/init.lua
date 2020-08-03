@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs gold_ore",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=39000",
+            "sleep=duration:39s",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
