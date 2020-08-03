@@ -16,7 +16,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 55000",
+         "animate=idle duration:55s",
          "remove=success:42",
          "grow=palm_coconut_desert_pole",
       },
@@ -43,7 +43,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 55000",
+         "animate=idle duration:55s",
          "remove=success:33",
          "grow=palm_coconut_desert_mature",
       },
@@ -70,7 +70,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 60000",
+         "animate=idle duration:1m",
          "remove=success:23",
          "grow=palm_coconut_desert_old",
       },
@@ -99,7 +99,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 1550000",
+         "animate=idle duration:25m50s",
          "transform=deadtree6 success:36",
          "seed=palm_coconut_desert_sapling 100",
       },
