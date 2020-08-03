@@ -279,7 +279,7 @@ void Player::AiPersistentState::initialize() {
 	no_more_expeditions = false;
 	target_military_score = 100;
 	least_military_score = 0;
-	ai_productionsites_ratio = std::rand() % 5 + 7;
+	ai_productionsites_ratio = std::rand() % 5 + 7;  // NOLINT
 	ai_personality_mil_upper_limit = 100;
 
 	// all zeroes
@@ -1631,26 +1631,25 @@ void Player::read_statistics(FileRead& fr,
 	size_t nr_entries = fr.unsigned_16();
 
 	// Stats are saved as a single string to reduce number of hard disk write operations
-	const auto parse_stats = [nr_entries](std::vector<std::vector<uint32_t>>* stats,
-	                                      const DescriptionIndex ware_index,
-	                                      const std::string& stats_string,
-	                                      const std::string& description) {
-		if (!stats_string.empty()) {
-			std::vector<std::string> stats_vector;
-			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
-			if (stats_vector.size() != nr_entries) {
-				throw GameDataError("wrong number of %s statistics - expected %" PRIuS
-				                    " but got %" PRIuS,
-				                    description.c_str(), nr_entries, stats_vector.size());
-			}
-			for (size_t j = 0; j < nr_entries; ++j) {
-				stats->at(ware_index)[j] = static_cast<unsigned int>(atoi(stats_vector.at(j).c_str()));
-			}
-		} else if (nr_entries > 0) {
-			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",
-			                    description.c_str(), nr_entries);
-		}
-	};
+	const auto parse_stats =
+	   [nr_entries](std::vector<std::vector<uint32_t>>* stats, const DescriptionIndex ware_index,
+	                const std::string& stats_string, const std::string& description) {
+		   if (!stats_string.empty()) {
+			   std::vector<std::string> stats_vector;
+			   boost::split(stats_vector, stats_string, boost::is_any_of("|"));
+			   if (stats_vector.size() != nr_entries) {
+				   throw GameDataError("wrong number of %s statistics - expected %" PRIuS
+				                       " but got %" PRIuS,
+				                       description.c_str(), nr_entries, stats_vector.size());
+			   }
+			   for (size_t j = 0; j < nr_entries; ++j) {
+				   stats->at(ware_index)[j] = boost::lexical_cast<unsigned int>(stats_vector.at(j));
+			   }
+		   } else if (nr_entries > 0) {
+			   throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",
+			                       description.c_str(), nr_entries);
+		   }
+	   };
 
 	for (uint32_t i = 0; i < current_produced_statistics_.size(); ++i) {
 		ware_productions_[i].resize(nr_entries);
