@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
          descname = _"gathering meat",
          actions = {
             "callworker=hunt",
-            "sleep=30000",
+            "sleep=duration:30s",
          }
       },
       fish = {

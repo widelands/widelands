@@ -51,8 +51,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs charcoal",
             "consume=log:6",
-            "sleep=30000",
-            "animate=working 90000", -- Charcoal fires will burn for some days in real life
+            "sleep=duration:30s",
+            "animate=working duration:90s", -- Charcoal fires will burn for some days in real life
             "produce=charcoal"
          }
       },

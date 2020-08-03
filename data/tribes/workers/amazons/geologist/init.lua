@@ -19,9 +19,9 @@ tribes:new_worker_type {
          "repeatsearch=15 5 search"
       },
       search = {
-         "animate=hacking 4000",
-         "animate=idle 2000",
-         "animate=hacking 4000",
+         "animate=hacking duration:4s",
+         "animate=idle duration:2s",
+         "animate=hacking duration:4s",
          "findresources"
       }
    },

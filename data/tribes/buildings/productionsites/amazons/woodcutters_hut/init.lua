@@ -39,7 +39,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs log",
             "callworker=harvest",
-            "sleep=10000"
+            "sleep=duration:10s"
          }
       },
    },

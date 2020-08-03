@@ -95,7 +95,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has fish,meat",
             "return=failed unless site has chocolate",
             "return=failed unless site has spear_stone_tipped",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
             "consume=fish,meat chocolate spear_stone_tipped",
             "train=soldier attack 0 1"
@@ -110,7 +110,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has fish,meat",
             "return=failed unless site has chocolate",
             "return=failed unless site has spear_hardened",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "checksoldier=soldier attack 1", -- Because the soldier can be expulsed by the player
             "consume=amazons_bread fish,meat chocolate spear_hardened",
             "train=soldier attack 1 2"

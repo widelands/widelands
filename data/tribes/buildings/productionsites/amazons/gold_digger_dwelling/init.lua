@@ -55,8 +55,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs gold_dust",
             "consume=ration water:5",
-            "sleep=45000",
-            "animate=working 20000",
+            "sleep=duration:45s",
+            "animate=working duration:20s",
             "mine=gold 1 100 5 5", --name radius % chance_empty gain_exp_on_empty
             "produce=gold_dust"
          }

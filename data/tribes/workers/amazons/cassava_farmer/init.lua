@@ -18,17 +18,17 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:3 space",
          "walk=coords",
-         "animate=dig 6000",
+         "animate=dig duration:6s",
          "plant=attrib:seed_cassava",
-         "animate=planting_harvesting 6000",
+         "animate=planting_harvesting duration:6s",
          "return"
       },
       harvest = {
          "findobject=attrib:ripe_cassava radius:3",
          "walk=object",
-         "animate=planting_harvesting 8000",
+         "animate=planting_harvesting duration:8s",
          "callobject=harvest",
-         "animate=planting_harvesting 6000",
+         "animate=planting_harvesting duration:6s",
          "createware=cassavaroot",
          "return"
       }

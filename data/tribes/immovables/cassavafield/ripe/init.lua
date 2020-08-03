@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    attributes = { "ripe_cassava", "field" },
    programs = {
       program = {
-         "animate=idle 500000",
+         "animate=idle duration:8m20s",
          "remove=",
       },
       harvest = {

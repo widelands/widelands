@@ -63,8 +63,8 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ration",
             "consume=amazons_bread:2 fish,meat:2 charcoal",
             "sleep=5000",
-            "animate=working 18000",
-            "sleep=10000",
+            "animate=working duration:18s",
+            "sleep=duration:10s",
             "produce=ration:2"
          },
       },

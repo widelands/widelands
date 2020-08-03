@@ -53,7 +53,7 @@ tribes:new_productionsite_type {
          actions = {
             "consume=liana:2",
             "sleep=20000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=rope"
          },
       },

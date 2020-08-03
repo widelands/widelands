@@ -85,7 +85,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs shovel",
             "consume=ironwood",
             "sleep=32000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=shovel"
          },
       },
@@ -96,7 +96,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs felling_ax",
             "consume=log granite",
             "sleep=32000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=felling_ax"
          },
       },
@@ -107,7 +107,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs pick",
             "consume=log granite",
             "sleep=32000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=pick"
          },
       },
@@ -118,7 +118,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs machete",
             "consume=log granite",
             "sleep=32000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=machete"
          },
       },
@@ -129,7 +129,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs kitchen_tools",
             "consume=log granite",
             "sleep=32000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=kitchen_tools"
          },
       },
@@ -140,7 +140,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs hammer",
             "consume=log granite",
             "sleep=32000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=hammer"
          },
       },
@@ -151,7 +151,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs chisel",
             "consume=granite",
             "sleep=32000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=chisel"
          },
       },
@@ -162,7 +162,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs needles",
             "consume=granite",
             "sleep=32000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=needles"
          },
       },
@@ -173,7 +173,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs stonebowl",
             "consume=granite",
             "sleep=32000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=stonebowl"
          },
       },
@@ -184,7 +184,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs spear_wooden",
             "consume=ironwood",
             "sleep=32000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=spear_wooden"
          },
       },
@@ -195,7 +195,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs spear_stone_tipped",
             "consume=ironwood granite",
             "sleep=32000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=spear_stone_tipped"
          },
       },
@@ -206,7 +206,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs spear_hardened",
             "consume=ironwood log granite",
             "sleep=32000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=spear_hardened"
          },
       },

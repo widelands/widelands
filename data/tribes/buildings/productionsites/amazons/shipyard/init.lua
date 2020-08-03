@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
       ship_preparation = {
          descname = _"working",
          actions = {
-            "sleep=35000",
+            "sleep=duration:35s",
          }
       },
    },

@@ -15,7 +15,7 @@ tribes:new_carrier_type {
       fetch_water = {
          "findspace=size:swim radius:8",
          "walk=coords",
-         "animate=fetch_water 1000",
+         "animate=fetch_water duration:1s",
          "createware=water",
          "return"
       }

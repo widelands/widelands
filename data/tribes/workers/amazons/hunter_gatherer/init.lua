@@ -18,7 +18,7 @@ tribes:new_worker_type {
       hunt = {
          "findobject=type:bob radius:14 attrib:eatable",
          "walk=object",
-         "animate=idle 1000",
+         "animate=idle duration:1s",
          "callobject=remove",
          "createware=meat",
          "return"
@@ -28,7 +28,7 @@ tribes:new_worker_type {
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net 192",
          "mine=fish 1",
-         "animate=fishing 1000",
+         "animate=fishing duration:1s",
          "playsound=sound/fisher/fisher_pull_net 192",
          "createware=fish",
          "return"

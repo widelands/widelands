@@ -19,9 +19,9 @@ tribes:new_worker_type {
          "findobject=attrib:tree radius:6",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting 255",
-         "animate=work 4000",
+         "animate=work duration:4s",
          "playsound=sound/woodcutting/tree_falling 130",
-         "animate=work 1000",
+         "animate=work duration:1s",
          "createware=liana",
          "return"
       }
@@ -55,7 +55,7 @@ tribes:new_worker_type {
          rows = 5
       },
       work = {
-         hotspot = {19, 35},
+         hotspot = {19, duration:35s},
          fps = 15,
          frames = 15,
          columns = 5,

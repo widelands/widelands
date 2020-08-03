@@ -83,7 +83,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 55000",
+         "animate=idle duration:55s",
          "remove=35",
          "grow=ironwood_amazons_pole",
       },
@@ -104,7 +104,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 65000",
+         "animate=idle duration:1m05s",
          "remove=24",
          "grow=ironwood_amazons_mature",
       },
@@ -125,7 +125,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 72000",
+         "animate=idle duration:1m12s",
          "remove=19",
          "grow=ironwood_amazons_old",
       },
@@ -148,12 +148,12 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 1535000",
+         "animate=idle duration:25m35s",
          "transform=deadtree7 33",
          "seed=ironwood_amazons_sapling 50",
       },
       fall = {
-         "animate=fall 1000",
+         "animate=fall duration:1s",
          "remove=",
       },
    },
@@ -173,7 +173,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity_black,
    programs = {
       program = {
-         "animate=idle 55000",
+         "animate=idle duration:55s",
          "remove=35",
          "grow=ironwood_black_amazons_pole",
       },
@@ -194,7 +194,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity_black,
    programs = {
       program = {
-         "animate=idle 65000",
+         "animate=idle duration:1m05s",
          "remove=24",
          "grow=ironwood_black_amazons_mature",
       },
@@ -215,7 +215,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity_black,
    programs = {
       program = {
-         "animate=idle 72000",
+         "animate=idle duration:1m12s",
          "remove=19",
          "grow=ironwood_black_amazons_old",
       },
@@ -238,12 +238,12 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity_black,
    programs = {
       program = {
-         "animate=idle 1535000",
+         "animate=idle duration:25m35s",
          "transform=deadtree7 33",
          "seed=ironwood_black_amazons_sapling 50",
       },
       fall = {
-         "animate=fall 1000",
+         "animate=fall duration:1s",
          "remove=",
       },
    },
@@ -263,7 +263,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity_desert,
    programs = {
       program = {
-         "animate=idle 55000",
+         "animate=idle duration:55s",
          "remove=35",
          "grow=ironwood_desert_amazons_pole",
       },
@@ -284,7 +284,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity_desert,
    programs = {
       program = {
-         "animate=idle 65000",
+         "animate=idle duration:1m05s",
          "remove=24",
          "grow=ironwood_desert_amazons_mature",
       },
@@ -305,7 +305,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity_desert,
    programs = {
       program = {
-         "animate=idle 72000",
+         "animate=idle duration:1m12s",
          "remove=19",
          "grow=ironwood_desert_amazons_old",
       },
@@ -328,12 +328,12 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity_desert,
    programs = {
       program = {
-         "animate=idle 1535000",
+         "animate=idle duration:25m35s",
          "transform=deadtree7 33",
          "seed=ironwood_desert_amazons_sapling 50",
       },
       fall = {
-         "animate=fall 1000",
+         "animate=fall duration:1s",
          "remove=",
       },
    },
@@ -353,7 +353,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity_winter,
    programs = {
       program = {
-         "animate=idle 55000",
+         "animate=idle duration:55s",
          "remove=35",
          "grow=ironwood_winter_amazons_pole",
       },
@@ -374,7 +374,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity_winter,
    programs = {
       program = {
-         "animate=idle 65000",
+         "animate=idle duration:1m05s",
          "remove=24",
          "grow=ironwood_winter_amazons_mature",
       },
@@ -395,7 +395,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity_winter,
    programs = {
       program = {
-         "animate=idle 72000",
+         "animate=idle duration:1m12s",
          "remove=19",
          "grow=ironwood_winter_amazons_old",
       },
@@ -418,12 +418,12 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity_winter,
    programs = {
       program = {
-         "animate=idle 1535000",
+         "animate=idle duration:25m35s",
          "transform=deadtree7 33",
          "seed=ironwood_winter_amazons_sapling 50",
       },
       fall = {
-         "animate=fall 1000",
+         "animate=fall duration:1s",
          "remove=",
       },
    },

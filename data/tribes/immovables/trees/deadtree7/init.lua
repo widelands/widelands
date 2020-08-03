@@ -12,7 +12,7 @@ tribes:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 20000",
+         "animate=idle duration:20s",
          "remove=16",
       },
    },

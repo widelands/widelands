@@ -62,8 +62,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs amazons_tapir",
             "consume=cassavaroot water",
-            "sleep=15000",
-            "animate=working 15000",
+            "sleep=duration:15s",
+            "animate=working duration:15s",
             "recruit=amazons_tapir"
          }
       },

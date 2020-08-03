@@ -18,7 +18,7 @@ tribes:new_worker_type {
       cut_granite = {
          "findobject=attrib:rocks radius:6",
          "walk=object",
-         "animate=hacking 35000",
+         "animate=hacking duration:35s",
          "callobject=shrink",
          "createware=granite",
          "return"

@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    attributes = { "seed_cocoa" },
    programs = {
       program = {
-         "animate=idle 80000",
+         "animate=idle duration:80s",
          "remove=10",
          "transform=cocoa_tree_pole",
       },
@@ -36,7 +36,7 @@ tribes:new_immovable_type {
    attributes = {},
    programs = {
       program = {
-         "animate=idle 60000",
+         "animate=idle duration:60s",
          "remove=15",
          "transform=cocoa_tree_mature",
       },
@@ -62,7 +62,7 @@ tribes:new_immovable_type {
    attributes = { "flowering" },
    programs = {
       program = {
-         "animate=idle 60000",
+         "animate=idle duration:60s",
          "remove=20",
          "transform=cocoa_tree_old",
       },
@@ -88,7 +88,7 @@ tribes:new_immovable_type {
    attributes = { "ripe_cocoa", "field"},
    programs = {
       program = {
-         "animate=idle 500000",
+         "animate=idle duration:8m20s",
          "remove=",
       },
       harvest = {

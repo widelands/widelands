@@ -128,7 +128,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has boots_sturdy",
             "return=failed unless site has chocolate",
             "return=failed unless site has fish,meat",
-            "animate=working 22800",
+            "animate=working duration:22s800ms",
             "checksoldier=soldier evade 0", -- Because the soldier can be expelled by the player
             "consume=boots_sturdy chocolate fish,meat",
             "train=soldier evade 0 1"
@@ -142,7 +142,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has boots_swift",
             "return=failed unless site has chocolate",
             "return=failed unless site has amazons_bread",
-            "animate=working 15600",
+            "animate=working duration:15s600ms",
             "checksoldier=soldier evade 1", -- Because the soldier can be expelled by the player
             "consume=boots_swift amazons_bread chocolate",
             "train=soldier evade 1 2",
@@ -157,7 +157,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has chocolate:2",
             "return=failed unless site has amazons_bread:2",
             "return=failed unless site has fish,meat:2",
-            "animate=working 15600",
+            "animate=working duration:15s600ms",
             "checksoldier=soldier evade 2", -- Because the soldier can be expelled by the player
             "consume=boots_hero amazons_bread:2 chocolate:2 fish,meat:2",
             "train=soldier evade 2 3",
@@ -171,7 +171,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has armor_wooden",
             "return=failed unless site has chocolate",
             "return=failed unless site has fish,meat",
-            "animate=working 22800",
+            "animate=working duration:22s800ms",
             "checksoldier=soldier health 0", -- Because the soldier can be expelled by the player
             "consume=armor_wooden chocolate fish,meat",
             "train=soldier health 0 1"
@@ -185,7 +185,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has helmet_wooden",
             "return=failed unless site has chocolate",
             "return=failed unless site has amazons_bread",
-            "animate=working 15600",
+            "animate=working duration:15s600ms",
             "checksoldier=soldier health 1", -- Because the soldier can be expelled by the player
             "consume=helmet_wooden amazons_bread chocolate",
             "train=soldier health 1 2",
@@ -200,7 +200,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has chocolate",
             "return=failed unless site has amazons_bread",
             "return=failed unless site has fish,meat",
-            "animate=working 15600",
+            "animate=working duration:15s600ms",
             "checksoldier=soldier health 2", -- Because the soldier can be expelled by the player
             "consume=warriors_coat amazons_bread chocolate fish,meat",
             "train=soldier health 2 3",
@@ -214,7 +214,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has vest_padded",
             "return=failed unless site has chocolate",
             "return=failed unless site has amazons_bread",
-            "animate=working 22800",
+            "animate=working duration:22s800ms",
             "checksoldier=soldier defense 0", -- Because the soldier can be expelled by the player
             "consume=vest_padded amazons_bread chocolate",
             "train=soldier defense 0 1",
@@ -229,7 +229,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has chocolate",
             "return=failed unless site has amazons_bread",
             "return=failed unless site has fish,meat",
-            "animate=working 22800",
+            "animate=working duration:22s800ms",
             "checksoldier=soldier defense 1", -- Because the soldier can be expelled by the player
             "consume=protector_padded amazons_bread chocolate fish,meat",
             "train=soldier defense 1 2",

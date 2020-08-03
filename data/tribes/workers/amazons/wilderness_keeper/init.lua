@@ -17,14 +17,14 @@ tribes:new_worker_type {
       release_game = {
          "findobject=attrib:tree radius:10",
          "walk=object",
-         "animate=release 4181",
+         "animate=release duration:4s181ms",
          "createbob=bunny badger fox lynx marten wildboar",
          "return"
       },
       breed_fish = {
          "findspace=size:swim radius:7",
          "walk=coords",
-         "animate=release 12545",
+         "animate=release duration:12s545ms",
          "breed=fish 1",
          "return"
       }

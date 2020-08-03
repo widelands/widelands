@@ -42,7 +42,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs liana",
             "callworker=cut",
-            "sleep=30000",
+            "sleep=duration:30s",
          },
       },
    },
