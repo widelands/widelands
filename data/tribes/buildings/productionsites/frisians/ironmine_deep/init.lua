@@ -58,11 +58,6 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      frisians_ironmine = false,
-      frisians_ironmine_deep = false,
-   },
-
    aihints = {
       mines = "iron",
    },
@@ -74,9 +69,6 @@ tribes:new_productionsite_type {
 
    inputs = {
       { name = "meal", amount = 8 }
-   },
-   outputs = {
-      "iron_ore"
    },
 
    programs = {
@@ -99,7 +91,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining iron",
          actions = {
-            "animate=working 8700",
+            "animate=working duration:8s700ms",
             "mine=iron 3 100 10 5",
             "produce=iron_ore",
          }

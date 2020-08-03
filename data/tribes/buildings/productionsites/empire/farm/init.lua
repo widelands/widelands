@@ -29,12 +29,6 @@ tribes:new_productionsite_type {
       },
    },
 
-   indicate_workarea_overlaps = {
-      empire_farm = false,
-      empire_vineyard = false,
-      empire_foresters_house = false,
-   },
-
    aihints = {
       basic_amount = 1,
       space_consumer = true,
@@ -45,10 +39,6 @@ tribes:new_productionsite_type {
 
    working_positions = {
       empire_farmer = 1
-   },
-
-   outputs = {
-      "wheat"
    },
 
    programs = {

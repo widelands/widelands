@@ -170,8 +170,11 @@ void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std:
 		throw wexception("Usage: createware=<ware type>");
 	}
 
+	const DescriptionIndex ware_index = tribes_.safe_ware_index(cmd[0]);
+
 	act->function = &Worker::run_createware;
-	act->iparam1 = tribes_.safe_ware_index(cmd[0]);
+	act->iparam1 = ware_index;
+	produced_ware_types_.insert(ware_index);
 }
 
 /* RST
@@ -303,6 +306,12 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 		} else {
 			throw GameDataError("Unknown findobject predicate %s", argument.c_str());
 		}
+	}
+
+	if (act->iparam2 >= 0) {
+		collected_attributes_.insert(
+		   std::make_pair(act->sparam1 == "immovable" ? MapObjectType::IMMOVABLE : MapObjectType::BOB,
+		                  act->iparam2));
 	}
 
 	workarea_info_[act->iparam1].insert(" findobject");
@@ -446,6 +455,15 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 		throw GameDataError("findspace: must specify size");
 	}
 	workarea_info_[act->iparam1].insert(" findspace");
+
+	if (!act->sparam1.empty()) {
+		if (act->iparam4 == 1) {
+			// breeds
+			created_resources_.insert(act->sparam1);
+		} else {
+			collected_resources_.insert(act->sparam1);
+		}
+	}
 }
 
 /* RST
@@ -677,10 +695,10 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 		}
 
 		const std::string attrib_name = read_key_value_pair(cmd[i], ':', "", "attrib").second;
-
-		// This will throw a GameDataError if the attribute doesn't exist.
-		ImmovableDescr::get_attribute_id(attrib_name);
 		act->sparamv.push_back(attrib_name);
+		// get_attribute_id will throw a GameDataError if the attribute doesn't exist.
+		created_attributes_.insert(
+		   std::make_pair(MapObjectType::IMMOVABLE, ImmovableDescr::get_attribute_id(attrib_name)));
 	}
 }
 
@@ -692,8 +710,8 @@ createbob
    :arg string bob_name: The bob type to add to the selection. Specify as many bob
       types as you want.
 
-   Adds a bob (usually an animal) to the map at the worker's current location.
-   Randomly select from the list of ``bob_name``. Example::
+   Adds a bob (an animal or a worker, e.g. a deer or a ferry) to the map at the worker's current
+   location. Randomly select from the list of ``bob_name``. Examples::
 
       release = {
          "findspace=size:any radius:3",
@@ -701,6 +719,14 @@ createbob
          "animate=releasein 2000",
          "createbob=wildboar stag sheep", -- Release a wildboar, stag or sheep into the wild
          "animate=releaseout 2000",
+         "return"
+      },
+
+      buildferry = {
+         "findspace=size:swim radius:5",
+         "walk=coords",
+         "animate=work 10000",
+         "createbob=frisians_ferry",
          "return"
       }
 */
@@ -711,7 +737,12 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 	}
 
 	act->function = &Worker::run_createbob;
-	act->sparamv = std::move(cmd);
+	act->sparamv = cmd;
+
+	// Register created bobs
+	for (const std::string& bobname : act->sparamv) {
+		created_bobs_.insert(bobname);
+	}
 }
 
 /* RST
@@ -719,16 +750,7 @@ buildferry
 ^^^^^^^^^^
 .. function:: buildferry
 
-   Adds a new instance of this tribe's ferry to the map at the worker's current location. Example::
-
-      construct = {
-         "findspace=size:swim radius:4",
-         "walk=coords",
-         "animate=work 2000",
-         "buildferry",
-         "animate=work 2000",
-         "return"
-      }
+   **DEPRECATED** use ``createbob=TRIBENAME_ferry`` instead.
 */
 void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() > 1) {

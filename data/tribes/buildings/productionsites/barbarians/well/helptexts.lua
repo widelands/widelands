@@ -5,7 +5,7 @@ end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("barbarians_building", [[Song written by Sigurd the Bard when the first rain fell after the Great Drought in the 21st year of Chat’Karuth’s reign.]])
+   return pgettext("barbarians_building", [[Song written by Sigurd the Bard when the first rain fell after the Great Drought in the 21ˢᵗ year of Chat’Karuth’s reign.]])
 end
 
 function building_helptext_purpose()

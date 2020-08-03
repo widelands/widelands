@@ -580,7 +580,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// we dont want to send all of them so we limit the surplus value above attackgroup
 	const uint8_t attack_group = std::abs(management_data.get_military_number_at(6)) / 10;
 	if (attackers > attack_group) {
-		attackers = attack_group + std::rand() % (attackers - attack_group);
+		attackers = attack_group + std::rand() % (attackers - attack_group);  // NOLINT
 	}
 
 	assert(attackers < 500);
@@ -737,7 +737,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 
 		// now modifying max_fill of armors and weapons
-		for (std::string pattern : armors_and_weapons) {
+		for (const std::string& pattern : armors_and_weapons) {
 
 			if (tribe_->get_ware_descr(queue->get_index())->name().find(pattern) !=
 			    std::string::npos) {

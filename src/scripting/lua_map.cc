@@ -1427,7 +1427,7 @@ int LuaMap::find_ocean_fields(lua_State* L) {
 		bool success = false;
 		if (map[field].maxcaps() & Widelands::MOVECAPS_SWIM) {
 			for (Widelands::Coords port : map.get_port_spaces()) {
-				for (const Widelands::Coords& c : map.find_portdock(port)) {
+				for (const Widelands::Coords& c : map.find_portdock(port, false)) {
 					Widelands::Path p;
 					if (map.findpath(field, c, 0, p, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
 						success = true;
@@ -1604,7 +1604,7 @@ int LuaMap::sea_route_exists(lua_State* L) {
 	const Widelands::Map& map = get_egbase(L).map();
 	const Widelands::FCoords f_start = (*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L);
 	const Widelands::FCoords f_port = (*get_user_class<LuaMaps::LuaField>(L, 3))->fcoords(L);
-	for (const Widelands::Coords& c : map.find_portdock(f_port)) {
+	for (const Widelands::Coords& c : map.find_portdock(f_port, false)) {
 		Widelands::Path p;
 		if (map.findpath(f_start, c, 0, p, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
 			lua_pushboolean(L, true);
@@ -1763,8 +1763,7 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
 int LuaTribeDescription::get_resource_indicators(lua_State* L) {
 	const TribeDescr& tribe = *get();
 	lua_newtable(L);
-	const ResourceIndicatorSet resis = tribe.resource_indicators();
-	for (const auto& resilist : resis) {
+	for (const auto& resilist : tribe.resource_indicators()) {
 		lua_pushstring(L, resilist.first);
 		lua_newtable(L);
 		for (const auto& resi : resilist.second) {
@@ -3962,7 +3961,7 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 			if (quantity < 0) {
 				report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
 			}
-			get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+			get()->set_target_quantity(get()->type(), index, quantity, get_egbase(L).get_gametime());
 		} else {
 			report_error(L, "There is no ware '%s'.", wname.c_str());
 		}
@@ -3975,7 +3974,7 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 			if (quantity < 0) {
 				report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
 			}
-			get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+			get()->set_target_quantity(get()->type(), index, quantity, get_egbase(L).get_gametime());
 		} else {
 			report_error(L, "There is no worker '%s'.", wname.c_str());
 		}
@@ -4206,8 +4205,9 @@ int LuaMapObject::has_attribute(lua_State* L) {
  C METHODS
  ==========================================================
  */
-MapObject* LuaMapObject::get(lua_State* L, EditorGameBase& egbase, std::string name) {
-	MapObject* o = get_or_zero(egbase);
+Widelands::MapObject*
+LuaMapObject::get(lua_State* L, Widelands::EditorGameBase& egbase, const std::string& name) {
+	Widelands::MapObject* o = get_or_zero(egbase);
 	if (!o) {
 		report_error(L, "%s no longer exists!", name.c_str());
 	}

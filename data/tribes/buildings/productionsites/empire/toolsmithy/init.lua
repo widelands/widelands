@@ -43,20 +43,6 @@ tribes:new_productionsite_type {
       { name = "log", amount = 8 },
       { name = "iron", amount = 8 },
    },
-   outputs = {
-      "felling_ax",
-      "bread_paddle",
-      "fire_tongs",
-      "fishing_rod",
-      "hammer",
-      "kitchen_tools",
-      "pick",
-      "scythe",
-      "shovel",
-      "hunting_spear",
-      "basket",
-      "saw"
-   },
 
    programs = {
       work = {
@@ -85,7 +71,7 @@ tribes:new_productionsite_type {
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=felling_ax"
          }
       },
@@ -97,7 +83,7 @@ tribes:new_productionsite_type {
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=basket"
          }
       },
@@ -109,7 +95,7 @@ tribes:new_productionsite_type {
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=bread_paddle"
          }
       },
@@ -121,7 +107,7 @@ tribes:new_productionsite_type {
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=fire_tongs"
          }
       },
@@ -133,7 +119,7 @@ tribes:new_productionsite_type {
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=fishing_rod"
          }
       },
@@ -145,7 +131,7 @@ tribes:new_productionsite_type {
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=hammer"
          }
       },
@@ -157,7 +143,7 @@ tribes:new_productionsite_type {
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=hunting_spear"
          }
       },
@@ -169,7 +155,7 @@ tribes:new_productionsite_type {
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=kitchen_tools"
          }
       },
@@ -181,7 +167,7 @@ tribes:new_productionsite_type {
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=pick"
          }
       },
@@ -193,7 +179,7 @@ tribes:new_productionsite_type {
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=saw"
          }
       },
@@ -205,7 +191,7 @@ tribes:new_productionsite_type {
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=scythe"
          }
       },
@@ -217,7 +203,7 @@ tribes:new_productionsite_type {
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=shovel"
          }
       },

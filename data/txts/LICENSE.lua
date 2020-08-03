@@ -1,8 +1,8 @@
 include "scripting/richtext.lua"
 
-set_textdomain("texts")
+push_textdomain("texts")
 
-return {
+local r = {
    title = _"License",
    text = rt(
       p_font("align=center", "size=28 color=2F9131", _"Licensing information for Widelands") ..
@@ -28,3 +28,5 @@ return {
             a("widelands.org/wiki/TranslatingWidelands"))
    )
 }
+pop_textdomain()
+return r

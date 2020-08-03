@@ -34,16 +34,6 @@ tribes:new_productionsite_type {
       barbarians_gardener = 1
    },
 
-   outputs = {
-      "reed"
-   },
-
-   indicate_workarea_overlaps = {
-      barbarians_rangers_hut = false,
-      barbarians_reed_yard = false,
-      barbarians_farm = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

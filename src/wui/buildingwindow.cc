@@ -247,7 +247,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			const Widelands::DescriptionIndex& enhancement =
 			   cs ? cs->get_info().becomes->enhancement() : building->descr().enhancement();
 			const Widelands::TribeDescr& tribe = owner.tribe();
-			if (owner.is_building_type_allowed(enhancement)) {
+			if (owner.is_building_type_allowed(enhancement) &&
+			    owner.tribe().has_building(enhancement)) {
 				const Widelands::BuildingDescr& building_descr = *tribe.get_building_descr(enhancement);
 				std::string enhance_tooltip =
 				   (boost::format(_("Enhance to %s")) % building_descr.descname().c_str()).str() +
@@ -284,24 +285,20 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			if (building->descr().can_be_dismantled()) {
 				const Widelands::Buildcost wares =
 				   Widelands::DismantleSite::count_returned_wares(building);
-
-				const std::string dismantle_text =
-				   (wares.empty() ? _("Dismantle") :
-				                    std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") +
-				                       "</font><br>" + waremap_to_richtext(owner.tribe(), wares));
-
-				UI::Button* dismantlebtn =
-				   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				                  g_gr->images().get(pic_dismantle),
-				                  std::string(_("Dismantle")) + "<br>" +
-				                     g_gr->styles()
-				                        .ware_info_style(UI::WareInfoStyle::kNormal)
-				                        .header_font()
-				                        .as_font_tag(_("Returns:")) +
-				                     "<br>" + waremap_to_richtext(owner.tribe(), wares));
-				dismantlebtn->sigclicked.connect([this]() { act_dismantle(); });
-				capsbuttons->add(dismantlebtn);
-				requires_destruction_separator = true;
+				if (!wares.empty()) {
+					UI::Button* dismantlebtn =
+					   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+					                  g_gr->images().get(pic_dismantle),
+					                  std::string(_("Dismantle")) + "<br>" +
+					                     g_gr->styles()
+					                        .ware_info_style(UI::WareInfoStyle::kNormal)
+					                        .header_font()
+					                        .as_font_tag(_("Returns:")) +
+					                     "<br>" + waremap_to_richtext(owner.tribe(), wares));
+					dismantlebtn->sigclicked.connect([this]() { act_dismantle(); });
+					capsbuttons->add(dismantlebtn);
+					requires_destruction_separator = true;
+				}
 			}
 		}
 
@@ -387,8 +384,9 @@ void BuildingWindow::act_bulldoze() {
 	}
 
 	if (SDL_GetModState() & KMOD_CTRL) {
-		if (building->get_playercaps() & Widelands::Building::PCap_Bulldoze)
+		if (building->get_playercaps() & Widelands::Building::PCap_Bulldoze) {
 			igbase()->game().send_player_bulldoze(*building);
+		}
 	} else {
 		show_bulldoze_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
 	}
@@ -474,8 +472,9 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 	}
 
 	if (SDL_GetModState() & KMOD_CTRL) {
-		if (building->get_playercaps() & Widelands::Building::PCap_Enhancable)
+		if (building->get_playercaps() & Widelands::Building::PCap_Enhancable) {
 			igbase()->game().send_player_enhance_building(*building, id, false);
+		}
 	} else {
 		show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building, id);
 	}

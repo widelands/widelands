@@ -45,9 +45,6 @@ tribes:new_productionsite_type {
       { name = "cornmeal", amount = 4 },
       { name = "blackroot_flour", amount = 4 }
    },
-   outputs = {
-      "atlanteans_bread"
-   },
 
    programs = {
       work = {
@@ -56,7 +53,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs atlanteans_bread",
             "consume=water:2 blackroot_flour cornmeal",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "sleep=30000",
             "produce=atlanteans_bread:2"
          }

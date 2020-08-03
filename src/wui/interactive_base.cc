@@ -22,7 +22,7 @@
 #include <memory>
 
 #include <SDL_timer.h>
-#include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -177,9 +177,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      workareas_cache_(nullptr),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
-     display_flags_(dfDebug | kSoldierLevels),
+     display_flags_(dfDebug | dfShowSoldierLevels | dfShowBuildings),
 #else
-     display_flags_(kSoldierLevels),
+     display_flags_(dfShowSoldierLevels | dfShowBuildings),
 #endif
      lastframe_(SDL_GetTicks()),
      frametime_(0),
@@ -206,8 +206,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		for (;;) {  // The other buildhelp overlays.
 			++buildhelp_overlay;
 			++filename;
-			if (buildhelp_overlay == buildhelp_overlays_end)
+			if (buildhelp_overlay == buildhelp_overlays_end) {
 				break;
+			}
 			buildhelp_overlay->pic = g_gr->images().get(*filename);
 			buildhelp_overlay->hotspot =
 			   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
@@ -389,11 +390,17 @@ void InteractiveBase::set_sel_picture(const Image* image) {
 }
 
 InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
+	const auto display_flags = get_display_flags();
 	InfoToDraw info_to_draw = InfoToDraw::kNone;
+
+	if (display_flags & InteractiveBase::dfShowBuildings) {
+		info_to_draw = info_to_draw | InfoToDraw::kShowBuildings;
+	}
+
 	if (!show) {
 		return info_to_draw;
 	}
-	auto display_flags = get_display_flags();
+
 	if (display_flags & InteractiveBase::dfShowCensus) {
 		info_to_draw = info_to_draw | InfoToDraw::kCensus;
 	}
@@ -403,6 +410,7 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 	if (display_flags & InteractiveBase::dfShowSoldierLevels) {
 		info_to_draw = info_to_draw | InfoToDraw::kSoldierLevels;
 	}
+
 	return info_to_draw;
 }
 
@@ -902,8 +910,9 @@ bool InteractiveBase::get_display_flag(uint32_t const flag) {
 void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
 	display_flags_ &= ~flag;
 
-	if (on)
+	if (on) {
 		display_flags_ |= flag;
+	}
 }
 
 /*
@@ -975,8 +984,9 @@ void InteractiveBase::abort_build_road() {
 		hide_workarea(road_building_mode_->path.get_start(), true);
 	}
 #ifndef NDEBUG
-	else
+	else {
 		assert(!road_building_mode_->work_area);
+	}
 #endif
 
 	road_building_remove_overlay();
@@ -997,8 +1007,9 @@ void InteractiveBase::finish_build_road() {
 		hide_workarea(road_building_mode_->path.get_start(), true);
 	}
 #ifndef NDEBUG
-	else
+	else {
 		assert(!road_building_mode_->work_area);
+	}
 #endif
 
 	road_building_remove_overlay();
@@ -1375,7 +1386,7 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
 		return;
 	}
 
-	uint32_t serial = atoi(args[1].c_str());
+	uint32_t serial = boost::lexical_cast<uint32_t>(args[1]);
 	MapObject* obj = egbase().objects().get_object(serial);
 
 	if (!obj) {

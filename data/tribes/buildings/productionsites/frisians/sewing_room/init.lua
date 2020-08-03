@@ -60,9 +60,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "fur", amount = 8 },
    },
-   outputs = {
-      "fur_garment"
-   },
 
    programs = {
       work = {
@@ -73,7 +70,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs fur_garment or workers need experience",
             "consume=fur:2",
             "sleep=20000",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=fur_garment"
          },
       },

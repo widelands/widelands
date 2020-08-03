@@ -1,7 +1,7 @@
 -- =======================================================================
 --                         Empire Campaign Mission 3
 -- =======================================================================
-set_textdomain("scenario_emp03.wmf")
+push_textdomain("scenario_emp03.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/field_animations.lua"

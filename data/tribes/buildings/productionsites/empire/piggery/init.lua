@@ -44,9 +44,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 7 },
       { name = "wheat", amount = 7 }
    },
-   outputs = {
-      "meat"
-   },
 
    programs = {
       work = {
@@ -57,7 +54,7 @@ tribes:new_productionsite_type {
             "consume=water wheat",
             "sleep=10000",
             "playsound=sound/farm/farm_animal 180",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=meat"
          }
       },

@@ -1,5 +1,7 @@
 dirname = "tribes/buildings/productionsites/empire/brewery/"
 
+push_textdomain("scenario_emp04.wmf")
+
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_brewery1",
@@ -61,3 +63,4 @@ tribes:new_productionsite_type {
       },
    },
 }
+pop_textdomain()

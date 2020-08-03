@@ -49,9 +49,6 @@ tribes:new_productionsite_type {
       { name = "spear_wooden", amount = 8 },
       { name = "empire_recruit", amount = 8 }
    },
-   outputs = {
-      "empire_soldier",
-   },
 
    programs = {
       work = {
@@ -61,7 +58,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs empire_soldier",
             "consume=armor_helmet spear_wooden empire_recruit",
             "sleep=15000",
-            "animate=working 15000",
+            "animate=working duration:15s",
             "recruit=empire_soldier"
          }
       },

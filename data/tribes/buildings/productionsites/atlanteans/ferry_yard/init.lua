@@ -33,10 +33,6 @@ tribes:new_productionsite_type {
 
    aihints = {},
 
-   indicate_workarea_overlaps = {
-      atlanteans_ferry_yard = false,
-   },
-
    working_positions = {
       atlanteans_shipwright = 1
    },

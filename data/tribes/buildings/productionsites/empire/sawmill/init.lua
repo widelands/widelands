@@ -43,9 +43,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "log", amount = 8 }
    },
-   outputs = {
-      "planks"
-   },
 
    programs = {
       work = {
@@ -56,7 +53,7 @@ tribes:new_productionsite_type {
             "consume=log:2",
             "sleep=16500", -- Much faster than barbarians' wood hardener
             "playsound=sound/sawmill/sawmill 180",
-            "animate=working 20000", -- Much faster than barbarians' wood hardener
+            "animate=working duration:20s", -- Much faster than barbarians' wood hardener
             "produce=planks"
          }
       },

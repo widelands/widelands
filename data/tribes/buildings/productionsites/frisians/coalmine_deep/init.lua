@@ -67,16 +67,8 @@ tribes:new_productionsite_type {
       frisians_miner_master = 1,
    },
 
-   indicate_workarea_overlaps = {
-      frisians_coalmine = false,
-      frisians_coalmine_deep = false,
-   },
-
    inputs = {
       { name = "meal", amount = 8 }
-   },
-   outputs = {
-      "coal"
    },
 
    programs = {
@@ -99,7 +91,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining coal",
          actions = {
-            "animate=working 8700",
+            "animate=working duration:8s700ms",
             "mine=coal 3 100 10 5",
             "produce=coal",
          }

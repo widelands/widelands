@@ -46,9 +46,6 @@ tribes:new_productionsite_type {
       { name = "meat", amount = 5 },
       { name = "empire_bread", amount = 5 }
    },
-   outputs = {
-      "ration"
-   },
 
    programs = {
       work = {
@@ -60,7 +57,7 @@ tribes:new_productionsite_type {
             "consume=empire_bread,fish,meat",
             "sleep=5000",
             "playsound=sound/empire/taverns/ration 100",
-            "animate=working 18000",
+            "animate=working duration:18s",
             "sleep=10000",
             "produce=ration"
          }

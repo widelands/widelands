@@ -48,9 +48,6 @@ tribes:new_productionsite_type {
       { name = "trident_light", amount = 8 },
       { name = "atlanteans_recruit", amount = 8 }
    },
-   outputs = {
-      "atlanteans_soldier",
-   },
 
    programs = {
       work = {
@@ -60,7 +57,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs atlanteans_soldier",
             "consume=tabard trident_light atlanteans_recruit",
             "sleep=15000",
-            "animate=working 15000",
+            "animate=working duration:15s",
             "recruit=atlanteans_soldier"
          }
       },

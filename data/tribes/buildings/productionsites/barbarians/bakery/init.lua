@@ -48,9 +48,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 6 },
       { name = "wheat", amount = 6 }
    },
-   outputs = {
-      "barbarians_bread"
-   },
 
    programs = {
       work = {
@@ -60,9 +57,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs barbarians_bread",
             "consume=water:3 wheat:3",
             "sleep=20000",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=barbarians_bread",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=barbarians_bread"
          }
       },

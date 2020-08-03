@@ -29,7 +29,7 @@ class LuaTable;
 
 namespace Widelands {
 
-struct CritterDescr;
+class CritterDescr;
 class EditorCategory;
 class ImmovableDescr;
 class ResourceDescription;

@@ -60,10 +60,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 8 },
       { name = "honey", amount = 6 },
    },
-   outputs = {
-      "mead",
-      "beer"
-   },
 
    programs = {
       work = {
@@ -83,7 +79,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs mead or workers need experience",
             "consume=barley water honey",
             "sleep=30000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=mead"
          }
       },
@@ -94,7 +90,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs mead or workers need experience",
             "consume=barley water honey",
             "sleep=30000",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=mead"
          }
       },
@@ -105,7 +101,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs beer",
             "consume=barley water",
             "sleep=30000",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "produce=beer"
          }
       },

@@ -65,10 +65,6 @@ tribes:new_productionsite_type {
       { name = "fish", amount = 6 },
       { name = "log", amount = 6 },
    },
-   outputs = {
-      "smoked_meat",
-      "smoked_fish",
-   },
 
    programs = {
       work = {
@@ -86,7 +82,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs smoked_fish",
             "consume=fish:2 log",
             "sleep=16000",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "produce=smoked_fish:2"
          },
       },
@@ -98,7 +94,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs smoked_meat",
             "consume=meat:2 log",
             "sleep=16000",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "produce=smoked_meat:2"
          },
       },

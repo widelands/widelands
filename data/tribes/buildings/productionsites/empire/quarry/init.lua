@@ -32,15 +32,6 @@ tribes:new_productionsite_type {
       empire_stonemason = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_quarry = false,
-   },
-
-   outputs = {
-      "granite",
-      "marble"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

@@ -48,15 +48,6 @@ tribes:new_productionsite_type {
       { name = "smoked_meat", amount = 6 },
       { name = "atlanteans_bread", amount = 10 }
    },
-   outputs = {
-      "diamond",
-      "quartz",
-      "granite"
-   },
-
-   indicate_workarea_overlaps = {
-      atlanteans_crystalmine = false,
-   },
 
    programs = {
       work = {
@@ -113,7 +104,7 @@ tribes:new_productionsite_type {
       a_mine_produce_granite = {
          descname = _"mining granite",
          actions = {
-            "animate=working 15000",
+            "animate=working duration:15s",
             "mine=stones 4 100 5 2",
             "produce=granite",
          }
@@ -121,7 +112,7 @@ tribes:new_productionsite_type {
       a_mine_produce_quartz = {
          descname = _"mining quartz",
          actions = {
-            "animate=working 10000",
+            "animate=working duration:10s",
             "mine=stones 4 100 5 2",
             "produce=quartz",
          }
@@ -129,7 +120,7 @@ tribes:new_productionsite_type {
       a_mine_produce_diamond = {
          descname = _"mining diamonds",
          actions = {
-            "animate=working 25000",
+            "animate=working duration:25s",
             "mine=stones 4 100 5 2",
             "produce=diamond",
          }

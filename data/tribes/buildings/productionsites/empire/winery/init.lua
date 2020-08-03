@@ -46,9 +46,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "grape", amount = 8 }
    },
-   outputs = {
-      "wine"
-   },
 
    programs = {
       work = {
@@ -59,7 +56,7 @@ tribes:new_productionsite_type {
             "consume=grape:2",
             "sleep=30000",
             "playsound=sound/empire/winebubble 180",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "produce=wine"
          }
       },

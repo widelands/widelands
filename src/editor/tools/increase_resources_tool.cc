@@ -43,8 +43,9 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndT
 		      0;
 
 		amount += args->change_by;
-		if (amount > max_amount)
+		if (amount > max_amount) {
 			amount = max_amount;
+		}
 
 		if ((mr.location().field->get_resources() == args->current_resource ||
 		     !mr.location().field->get_resources_amount()) &&

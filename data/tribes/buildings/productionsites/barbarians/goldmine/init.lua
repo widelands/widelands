@@ -48,17 +48,8 @@ tribes:new_productionsite_type {
       barbarians_miner = 1
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_goldmine = false,
-      barbarians_goldmine_deep = false,
-      barbarians_goldmine_deeper = false,
-   },
-
    inputs = {
       { name = "ration", amount = 6 }
-   },
-   outputs = {
-      "gold_ore"
    },
 
    programs = {
@@ -69,7 +60,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs gold_ore",
             "consume=ration",
             "sleep=45000",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "mine=gold 2 33 5 17",
             "produce=gold_ore"
          }

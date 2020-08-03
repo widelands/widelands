@@ -1,4 +1,4 @@
-set_textdomain("texts")
+push_textdomain("texts")
 tips = {
    {
       text = _"Keep an eye on your fishers. After fish resources are exhausted in their work area, they will stop fishing.",
@@ -13,4 +13,5 @@ tips = {
       seconds = 7
    },
 }
+pop_textdomain()
 return tips

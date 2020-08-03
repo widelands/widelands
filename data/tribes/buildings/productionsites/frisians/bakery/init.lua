@@ -63,9 +63,6 @@ tribes:new_productionsite_type {
       { name = "barley", amount = 7 },
       { name = "water", amount = 7 },
    },
-   outputs = {
-      "bread_frisians"
-   },
 
    programs = {
       work = {
@@ -75,7 +72,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs bread_frisians or workers need experience",
             "consume=water barley",
             "sleep=20000",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=bread_frisians"
          },
       },

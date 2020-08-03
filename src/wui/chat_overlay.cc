@@ -106,8 +106,9 @@ void ChatOverlay::set_chat_provider(ChatProvider& chat) {
  */
 void ChatOverlay::think() {
 	if (m->havemessages_) {
-		if (time(nullptr) - m->oldest_ > CHAT_DISPLAY_TIME)
+		if (time(nullptr) - m->oldest_ > CHAT_DISPLAY_TIME) {
 			m->recompute();
+		}
 	}
 }
 
@@ -147,7 +148,7 @@ void ChatOverlay::Impl::recompute() {
 			// Chat message is more recent
 			oldest_ = chat_->get_messages()[chat_idx].time;
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = format_as_richtext(chat_->get_messages()[chat_idx]) + richtext;
+				richtext = format_as_richtext(chat_->get_messages()[chat_idx]).append(richtext);
 			}
 			if (!chat_->sound_off() && sound_played_ < oldest_) {
 				g_sh->play_fx(SoundType::kChat, new_message_);
@@ -175,8 +176,9 @@ void ChatOverlay::Impl::recompute() {
 }
 
 void ChatOverlay::draw(RenderTarget& dst) {
-	if (!m->havemessages_)
+	if (!m->havemessages_) {
 		return;
+	}
 
 	std::shared_ptr<const UI::RenderedText> im(nullptr);
 	try {

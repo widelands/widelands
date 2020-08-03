@@ -343,7 +343,7 @@ struct HostChatProvider : public ChatProvider {
 			// Acknowledge kick
 			else if (cmd == "ack_kick") {
 				if (arg1.empty()) {
-					c.msg = _("kick acknowledgement cancelled: No name given!");
+					c.msg = _("Kick acknowledgement cancelled: No name given!");
 				} else if (arg2.size()) {
 					c.msg = _("Wrong use, should be: /ack_kick <name>");
 				} else {
@@ -351,7 +351,7 @@ struct HostChatProvider : public ChatProvider {
 						h->kick_user(kickClient, kickReason);
 						return;
 					} else {
-						c.msg = _("kick acknowledgement cancelled: Wrong name given!");
+						c.msg = _("Kick acknowledgement cancelled: Wrong name given!");
 					}
 				}
 				kickUser = "";
@@ -1248,7 +1248,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 
 	if (random_tribe) {
 		uint8_t num_tribes = d->settings.tribes.size();
-		uint8_t random = (std::rand() % num_tribes);
+		uint8_t random = (std::rand() % num_tribes);  // NOLINT
 		actual_tribe = d->settings.tribes.at(random).name;
 	}
 
@@ -1574,7 +1574,7 @@ void GameHost::write_setting_all_users(SendPacket& packet) {
  *
  * \returns true if the data was written, else false
  */
-bool GameHost::write_map_transfer_info(SendPacket& packet, std::string mapfilename) {
+bool GameHost::write_map_transfer_info(SendPacket& packet, const std::string& mapfilename) {
 	// TODO(unknown): not yet able to handle directory type maps / savegames
 	if (g_fs->is_directory(mapfilename)) {
 		log("Map/Save is a directory! No way for making it available a.t.m.!\n");

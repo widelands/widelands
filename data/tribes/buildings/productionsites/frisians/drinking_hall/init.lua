@@ -64,10 +64,6 @@ tribes:new_productionsite_type {
       { name = "smoked_fish", amount = 4 },
       { name = "smoked_meat", amount = 4 },
    },
-   outputs = {
-      "ration",
-      "meal"
-   },
 
    programs = {
       work = {
@@ -86,7 +82,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ration",
             "consume=fruit,smoked_fish,smoked_meat",
             "sleep=5000",
-            "animate=working 18000",
+            "animate=working duration:18s",
             "sleep=10000",
             "produce=ration"
          }
@@ -98,7 +94,7 @@ tribes:new_productionsite_type {
             --time total: 40
             "return=skipped unless economy needs meal",
             "consume=beer honey_bread smoked_fish,smoked_meat",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "sleep=10000",
             "produce=meal"
          }

@@ -42,9 +42,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 8 },
       { name = "wheat", amount = 8 }
    },
-   outputs = {
-      "empire_donkey"
-   },
 
    programs = {
       work = {
@@ -55,7 +52,7 @@ tribes:new_productionsite_type {
             "consume=wheat water",
             "sleep=15000",
             "playsound=sound/farm/donkey 192",
-            "animate=working 15000", -- Feeding cute little baby donkeys ;)
+            "animate=working duration:15s", -- Feeding cute little baby donkeys ;)
             "recruit=empire_donkey"
          }
       },

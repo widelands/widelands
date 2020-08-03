@@ -19,6 +19,8 @@
 
 #include "wui/interactive_player.h"
 
+#include <boost/algorithm/string.hpp>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/flag.h"
@@ -114,6 +116,7 @@ void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
 }
 
 void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
+                                               const InfoToDraw info_to_draw,
                                                const Widelands::Player::Field& player_field,
                                                const float scale,
                                                RenderTarget* dst) {
@@ -123,14 +126,22 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 
 	if (player_field.constructionsite.becomes) {
 		assert(field.owner != nullptr);
-		player_field.constructionsite.draw(
-		   field.rendertarget_pixel, field.fcoords, scale, field.owner->get_playercolor(), dst);
+		player_field.constructionsite.draw(field.rendertarget_pixel, field.fcoords, scale,
+		                                   (info_to_draw & InfoToDraw::kShowBuildings),
+		                                   field.owner->get_playercolor(), dst);
 
 	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
-		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-		                    building->get_unoccupied_animation(), 0, &field.owner->get_playercolor());
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+			                    building->get_unoccupied_animation(), 0,
+			                    &field.owner->get_playercolor());
+		} else {
+			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+			                    building->get_unoccupied_animation(), 0, nullptr,
+			                    Widelands::kBuildingSilhouetteOpacity);
+		}
 	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
 		assert(field.owner != nullptr);
 		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
@@ -317,7 +328,7 @@ void InteractivePlayer::think() {
 	if (flag_to_connect_) {
 		Widelands::Field& field = egbase().map()[flag_to_connect_];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
-			if (!flag->has_road() && !in_road_building_mode())
+			if (!flag->has_road() && !in_road_building_mode()) {
 				if (auto_roadbuild_mode_) {
 					//  There might be a fieldaction window open, showing a button
 					//  for roadbuilding. If that dialog remains open so that the
@@ -332,6 +343,7 @@ void InteractivePlayer::think() {
 					   Widelands::TCoords<>(flag_to_connect_, Widelands::TriangleIndex::D)});
 					start_build_road(flag_to_connect_, field.get_owned_by(), RoadBuildingType::kRoad);
 				}
+			}
 			flag_to_connect_ = Widelands::Coords::null();
 		}
 	}
@@ -354,8 +366,9 @@ void InteractivePlayer::think() {
 void InteractivePlayer::draw(RenderTarget& dst) {
 	// Bail out if the game isn't actually loaded.
 	// This fixes a crash with displaying an error dialog during loading.
-	if (!game().is_loaded())
+	if (!game().is_loaded()) {
 		return;
+	}
 
 	draw_map_view(map_view(), &dst);
 }
@@ -403,13 +416,13 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 
 			// Render stuff that belongs to the node.
+			const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 			if (f->vision > 1) {
-				const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 				draw_immovables_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
 				draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
 			} else if (f->vision == 1) {
 				// We never show census or statistics for objects in the fog.
-				draw_immovable_for_formerly_visible_field(*f, player_field, scale, dst);
+				draw_immovable_for_formerly_visible_field(*f, info_to_draw, player_field, scale, dst);
 			}
 		}
 
@@ -549,8 +562,9 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_KP_5:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
+			}
 			FALLS_THROUGH;
 		case SDLK_HOME:
 			map_view()->scroll_to_field(
@@ -606,7 +620,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 		return;
 	}
 
-	int const n = atoi(args[1].c_str());
+	int const n = boost::lexical_cast<int>(args[1]);
 	if (n < 1 || n > kMaxPlayers || !game().get_player(n)) {
 		DebugConsole::write(str(boost::format("Player #%1% does not exist.") % n));
 		return;

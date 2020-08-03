@@ -38,11 +38,6 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      frisians_berry_farm = true,
-      frisians_collectors_house = false,
-   },
-
    aihints = {
       collects_ware_from_map = "fruit",
       prohibited_till = 470,
@@ -51,10 +46,6 @@ tribes:new_productionsite_type {
 
    working_positions = {
       frisians_fruit_collector = 1
-   },
-
-   outputs = {
-      "fruit"
    },
 
    programs = {

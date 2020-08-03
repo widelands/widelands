@@ -59,11 +59,6 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      frisians_ironmine = false,
-      frisians_ironmine_deep = false,
-   },
-
    aihints = {
       mines = "iron",
       mines_percent = 50,
@@ -77,9 +72,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "ration", amount = 8 }
    },
-   outputs = {
-      "iron_ore"
-   },
 
    programs = {
       work = {
@@ -89,7 +81,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs iron_ore",
             "consume=ration",
             "sleep=45000",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "mine=iron 3 50 5 20",
             "produce=iron_ore"
          }

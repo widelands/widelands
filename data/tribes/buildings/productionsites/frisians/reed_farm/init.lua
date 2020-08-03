@@ -50,19 +50,6 @@ tribes:new_productionsite_type {
       frisians_reed_farmer = 1
    },
 
-   outputs = {
-      "reed"
-   },
-
-   indicate_workarea_overlaps = {
-      frisians_clay_pit = false,
-      frisians_berry_farm = false,
-      frisians_reed_farm = false,
-      frisians_farm = false,
-      frisians_foresters_house = false,
-      frisians_beekeepers_house = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

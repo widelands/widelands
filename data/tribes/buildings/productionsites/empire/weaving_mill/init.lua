@@ -50,9 +50,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "wool", amount = 6 }
    },
-   outputs = {
-      "cloth"
-   },
 
    programs = {
       work = {
@@ -63,7 +60,7 @@ tribes:new_productionsite_type {
             "consume=wool",
             "sleep=20000",
             "playsound=sound/mill/weaving 120",
-            "animate=working 15000", -- Unsure of balancing CW
+            "animate=working duration:15s", -- Unsure of balancing CW
             "sleep=5000",
             "produce=cloth"
          }

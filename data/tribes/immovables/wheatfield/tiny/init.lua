@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    attributes = { "field", "seed_wheat" },
    programs = {
       program = {
-         "animate=idle 30000",
+         "animate=idle duration:30s",
          "transform=wheatfield_small",
       }
    },

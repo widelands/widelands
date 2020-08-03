@@ -52,13 +52,6 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
    },
-   outputs = {
-      "spear_wooden",
-      "spear",
-      "spear_advanced",
-      "spear_heavy",
-      "spear_war"
-   },
 
    programs = {
       work = {
@@ -81,7 +74,7 @@ tribes:new_productionsite_type {
             "consume=planks",
             "sleep=20000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 21000",
+            "animate=working duration:21s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear_wooden"
@@ -96,7 +89,7 @@ tribes:new_productionsite_type {
             "consume=coal iron planks",
             "sleep=32000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
+            "animate=working duration:36s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear"
@@ -111,7 +104,7 @@ tribes:new_productionsite_type {
             "consume=coal iron:2 planks",
             "sleep=32000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
+            "animate=working duration:36s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear_advanced"
@@ -126,7 +119,7 @@ tribes:new_productionsite_type {
             "consume=coal:2 gold iron planks",
             "sleep=32000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
+            "animate=working duration:36s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear_heavy"
@@ -141,7 +134,7 @@ tribes:new_productionsite_type {
             "consume=coal:2 gold iron:2 planks",
             "sleep=32000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
+            "animate=working duration:36s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear_war"

@@ -43,17 +43,8 @@ tribes:new_productionsite_type {
       prohibited_till = 480
    },
 
-   indicate_workarea_overlaps = {
-      frisians_hunters_house = false,
-   },
-
    working_positions = {
       frisians_hunter = 1
-   },
-
-   outputs = {
-      "meat",
-      "fur"
    },
 
    programs = {

@@ -47,9 +47,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "reed", amount = 8 }
    },
-   outputs = {
-      "cloth"
-   },
 
    programs = {
       work = {
@@ -60,7 +57,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs cloth",
             "consume=reed",
             "playsound=sound/barbarians/weaver 120",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=cloth"
          }
       },

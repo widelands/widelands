@@ -30,7 +30,7 @@
 #include "scripting/lua_interface.h"
 
 namespace {
-const std::string kCampVisFileLegacy = "save/campvis";
+constexpr const char* const kCampVisFileLegacy = "save/campvis";
 }
 
 Campaigns::Campaigns() {
@@ -123,11 +123,10 @@ Campaigns::Campaigns() {
 			scenario_data->is_tutorial = false;
 			scenario_data->playable = scenario_data->path != "dummy.wmf";
 			scenario_data->visible = false;
-			campaign_data->scenarios.push_back(
-			   std::unique_ptr<ScenarioData>(std::move(scenario_data)));
+			campaign_data->scenarios.push_back(std::unique_ptr<ScenarioData>(scenario_data));
 		}
 
-		campaigns_.push_back(std::unique_ptr<CampaignData>(std::move(campaign_data)));
+		campaigns_.push_back(std::unique_ptr<CampaignData>(campaign_data));
 	}
 
 	// Finally, calculate the visibility
@@ -182,9 +181,9 @@ void Campaigns::update_visibility_info() {
 /**
  * Handle legacy campvis file
  */
-// TODO(GunChleoc): Remove after Build 22
+// TODO(GunChleoc): Savegame compatibility, remove after v1.0
 void Campaigns::update_legacy_campvis() {
-	Profile legacy_campvis(kCampVisFileLegacy.c_str());
+	Profile legacy_campvis(kCampVisFileLegacy);
 	if (legacy_campvis.get_section("campmaps") == nullptr) {
 		return;
 	}

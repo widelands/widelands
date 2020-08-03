@@ -34,7 +34,7 @@
 #include "graphic/styles/ware_info_style.h"
 #include "scripting/lua_table.h"
 
-static const std::string kTemplateDir = "templates/default/";
+constexpr const char* const kTemplateDir = "templates/default/";
 
 class StyleManager {
 public:
