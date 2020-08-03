@@ -314,7 +314,8 @@ struct ProductionProgram : public MapObjectProgram {
 	///
 	/// Blocks the execution of the program for the specified duration.
 	struct ActSleep : public Action {
-		explicit ActSleep(const std::vector<std::string>& arguments, const ProductionSiteDescr& psite);
+		explicit ActSleep(const std::vector<std::string>& arguments,
+		                  const ProductionSiteDescr& psite);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:

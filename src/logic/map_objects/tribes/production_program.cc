@@ -904,7 +904,8 @@ Parameter semantics:
 
 Blocks the execution of the program for the specified duration.
 */
-ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments, const ProductionSiteDescr& psite) {
+ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
+                                      const ProductionSiteDescr& psite) {
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: sleep=duration:<duration>");
 	}
@@ -914,10 +915,12 @@ ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
 	} else if (item.second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove after v1.0
 		duration_ = read_duration(item.first);
-		log("WARNING: 'sleep' program without parameter name is deprecated, please use 'sleep=duration:<duration>' in %s\n", psite.name().c_str());
+		log("WARNING: 'sleep' program without parameter name is deprecated, please use "
+		    "'sleep=duration:<duration>' in %s\n",
+		    psite.name().c_str());
 	} else {
-		throw GameDataError("Unknown argument '%s'. Usage: duration:<duration>",
-							arguments.front().c_str());
+		throw GameDataError(
+		   "Unknown argument '%s'. Usage: duration:<duration>", arguments.front().c_str());
 	}
 }
 
@@ -1816,8 +1819,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActCall(parseinput.arguments, *building)));
 			} else if (parseinput.name == "sleep") {
-				actions_.push_back(
-				   std::unique_ptr<ProductionProgram::Action>(new ActSleep(parseinput.arguments, *building)));
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActSleep(parseinput.arguments, *building)));
 			} else if (parseinput.name == "animate") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActAnimate(parseinput.arguments, building)));
