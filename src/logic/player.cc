@@ -1394,8 +1394,12 @@ void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
 	case SeeUnseeNode::kReveal:
 		revealed_fields_.insert(index);
 		break;
-	case SeeUnseeNode::kUnsee:
 	case SeeUnseeNode::kUnexplore:
+		if (fields_) {
+			fields_[index].seeing = SeeUnseeNode::kUnexplore;
+		}
+		FALLS_THROUGH;
+	case SeeUnseeNode::kUnsee:
 		auto it = revealed_fields_.find(index);
 		if (it != revealed_fields_.end()) {
 			revealed_fields_.erase(it);
