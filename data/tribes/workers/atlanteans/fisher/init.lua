@@ -35,7 +35,7 @@ tribes:new_worker_type {
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net 192",
          "mine=fish 1",
-         "animate=fishing 9500",
+         "animate=fishing duration:9s500ms",
          "playsound=sound/fisher/fisher_pull_net 192",
          "createware=fish",
          "return"

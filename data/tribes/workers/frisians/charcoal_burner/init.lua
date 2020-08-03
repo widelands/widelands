@@ -17,7 +17,7 @@ tribes:new_worker_type {
       collect_coal = {
          "findobject=attrib:pond_coal radius:8",
          "walk=object",
-         "animate=collecting 8000",
+         "animate=collecting duration:8s",
          "callobject=fall_dry",
          "createware=coal",
          "return"
@@ -25,9 +25,9 @@ tribes:new_worker_type {
       make_stack = {
          "findobject=attrib:pond_dry radius:8",
          "walk=object",
-         "animate=stacking_1 14000",
+         "animate=stacking_1 duration:14s",
          "callobject=with_stack",
-         "animate=stacking_2 1000",
+         "animate=stacking_2 duration:1s",
          "return"
       },
       find_pond = {
