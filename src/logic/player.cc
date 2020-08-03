@@ -1631,7 +1631,8 @@ void Player::read_statistics(FileRead& fr,
 				                    description.c_str(), nr_entries, stats_vector.size());
 			}
 			for (size_t j = 0; j < nr_entries; ++j) {
-				stats->at(ware_index)[j] = boost::lexical_cast<unsigned int>(stats_vector.at(j).c_str());
+				stats->at(ware_index)[j] =
+				   boost::lexical_cast<unsigned int>(stats_vector.at(j).c_str());
 			}
 		} else if (nr_entries > 0) {
 			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",

@@ -56,7 +56,9 @@ Tribes::Tribes(LuaInterface* lua)
 	for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
 		description_manager_->register_description(tribeinfo.name, tribeinfo.script, attributes);
 		if (!attributes.empty()) {
-			throw GameDataError("Tribes can't have attributes - please remove all attributes in 'register.lua' for tribe '%s'.", tribeinfo.name.c_str());
+			throw GameDataError("Tribes can't have attributes - please remove all attributes in "
+			                    "'register.lua' for tribe '%s'.",
+			                    tribeinfo.name.c_str());
 		}
 	}
 
