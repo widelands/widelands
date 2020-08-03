@@ -213,8 +213,7 @@ void FullscreenMenuInternetLobby::clicked_ok() {
 
 /// connects Widelands with the metaserver
 void FullscreenMenuInternetLobby::connect_to_metaserver() {
-	const std::string& metaserver =
-	   get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	const std::string& metaserver = get_config_string("metaserver", INTERNET_GAMING_METASERVER);
 	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
 	std::string auth = is_registered_ ? password_ : get_config_string("uuid", "");
 	assert(!auth.empty());

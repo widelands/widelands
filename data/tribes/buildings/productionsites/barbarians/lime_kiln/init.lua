@@ -55,7 +55,7 @@ tribes:new_productionsite_type {
             "consume=coal granite:2 water:2",
             "sleep=50000",
             "playsound=sound/barbarians/stonegrind 100",
-            "animate=working 29000",
+            "animate=working duration:29s",
             "playsound=sound/barbarians/mortar 80",
             "sleep=3000",
             "produce=grout:2"

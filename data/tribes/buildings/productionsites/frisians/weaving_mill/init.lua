@@ -72,7 +72,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs cloth",
             "consume=fur reed",
             "sleep=25000",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=cloth"
          },
       },

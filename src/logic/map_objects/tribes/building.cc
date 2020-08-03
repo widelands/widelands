@@ -328,7 +328,8 @@ Building::Building(const BuildingDescr& building_descr)
      seeing_(false),
      was_immovable_(nullptr),
      attack_target_(nullptr),
-     soldier_control_(nullptr) {
+     soldier_control_(nullptr),
+     is_destruction_blocked_(false) {
 }
 
 void Building::load_finish(EditorGameBase& egbase) {
@@ -387,7 +388,7 @@ Flag& Building::base_flag() {
 uint32_t Building::get_playercaps() const {
 	uint32_t caps = 0;
 	const BuildingDescr& tmp_descr = descr();
-	if (tmp_descr.is_destructible()) {
+	if (tmp_descr.is_destructible() && !is_destruction_blocked()) {
 		caps |= PCap_Bulldoze;
 		if (tmp_descr.can_be_dismantled()) {
 			caps |= PCap_Dismantle;

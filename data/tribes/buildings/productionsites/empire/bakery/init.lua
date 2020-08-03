@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs empire_bread",
             "consume=flour water",
             "sleep=15000",
-            "animate=working 15000",
+            "animate=working duration:15s",
             "produce=empire_bread"
          }
       },

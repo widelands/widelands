@@ -19,10 +19,6 @@ tribes:new_productionsite_type {
       planks = 2
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_ironmine = false,
-   },
-
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
@@ -72,7 +68,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining iron",
          actions = {
-            "animate=working 14000",
+            "animate=working duration:14s",
             "mine=iron 4 100 5 2",
             "produce=iron_ore",
          }

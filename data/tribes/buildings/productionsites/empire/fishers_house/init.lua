@@ -35,10 +35,6 @@ tribes:new_productionsite_type {
       empire_fisher = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_fishers_house = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...

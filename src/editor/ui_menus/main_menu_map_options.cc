@@ -250,10 +250,10 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	// We need less space for the hint and the description, but it should at least have 1 line
 	// height.
-	hint_ = new UI::MultilineEditbox(
-	   &main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3), UI::PanelStyle::kWui);
+	const int16_t hinth = std::max(labelh_, remaining_space / 3);
 	descr_ = new UI::MultilineEditbox(
-	   &main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(), UI::PanelStyle::kWui);
+	   &main_box_, 0, 0, max_w_, remaining_space - hinth, UI::PanelStyle::kWui);
+	hint_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, hinth, UI::PanelStyle::kWui);
 
 	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map name:")));
 	main_box_.add(&name_);
