@@ -334,6 +334,7 @@ tribes:new_tribe {
    },
 
    ship_names = {
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Abaco"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Agate"),
@@ -343,18 +344,25 @@ tribes:new_tribe {
       pgettext("shipname", "Amber"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Amethyst"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Anguilla"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Antigua"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Aquamarine"),
       pgettext("shipname", "Atlantean’s Stronghold"),
       pgettext("shipname", "Atlantis"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Bahama"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Barbados"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Barbuda"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Beryl"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Blanquilla"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Caicos"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Cassiterite"),
@@ -364,12 +372,17 @@ tribes:new_tribe {
       pgettext("shipname", "Citrine"),
       -- TRANSLATORS: This Atlantean ship is named after an in-game character
       pgettext("shipname", "Colionder"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Dominica"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Eleuthera"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Emerald"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Grenada"),
-      pgettext("shipname", "Guadelope"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Guadeloupe"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Inagua"),
       -- TRANSLATORS: This Atlantean ship is named after an in-game character
       pgettext("shipname", "Jundlina"),
@@ -378,18 +391,23 @@ tribes:new_tribe {
       pgettext("shipname", "King Ajanthul"),
       -- TRANSLATORS: This Atlantean ship is named after an in-game character
       pgettext("shipname", "King Askandor"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Kitts"),
       -- TRANSLATORS: This Atlantean ship is named after an in-game character
       pgettext("shipname", "Loftomor"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Malachite"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Martinique"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Montserrat"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Moonstone"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Mystic Quartz"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Nassau"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Nevis"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Obsidian"),
@@ -397,6 +415,7 @@ tribes:new_tribe {
       pgettext("shipname", "Onyx"),
       -- TRANSLATORS: This Atlantean ship is named after an in-game character
       pgettext("shipname", "Opol"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Orchila"),
       -- TRANSLATORS: This Atlantean ship is named after an in-game character
       pgettext("shipname", "Ostur"),
@@ -417,12 +436,15 @@ tribes:new_tribe {
       pgettext("shipname", "Sunstone"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Tiger Eye"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Tobago"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Topaz"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Tortuga"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Tourmaline"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
       pgettext("shipname", "Trinidad"),
    },
 
