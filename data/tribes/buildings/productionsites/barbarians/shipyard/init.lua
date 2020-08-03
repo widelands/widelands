@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
       ship_preparation = {
          descname = _"working",
          actions = {
-            "animate=working 35000",
+            "animate=working duration:35s",
          }
       },
    },

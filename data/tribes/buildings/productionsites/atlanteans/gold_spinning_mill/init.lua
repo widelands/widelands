@@ -51,7 +51,7 @@ tribes:new_productionsite_type {
             "consume=gold",
             "sleep=15000",
             "playsound=sound/atlanteans/goldspin 192",
-            "animate=working 25000",
+            "animate=working duration:25s",
             "produce=gold_thread"
          }
       },

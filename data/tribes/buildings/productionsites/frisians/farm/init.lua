@@ -90,7 +90,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting barley",
          actions = {
             "callworker=harvest",
-            "animate=working 40000",
+            "animate=working duration:40s",
             "sleep=4000",
             "produce=barley" --produces 2 barley per field
          }

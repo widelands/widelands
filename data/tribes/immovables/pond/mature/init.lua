@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    attributes = { "pond_mature" },
    programs = {
       program = {
-         "animate=idle 400000",
+         "animate=idle duration:6m40s",
          "transform=pond_dry",
       },
       fall_dry = {

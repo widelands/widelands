@@ -64,7 +64,7 @@ tribes:new_productionsite_type {
          descname = _"planting wheat",
          actions = {
             "callworker=plant",
-            "animate=working 7000",
+            "animate=working duration:7s",
             "sleep=3000"
          }
       },
@@ -73,7 +73,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting wheat",
          actions = {
             "callworker=harvest",
-            "animate=working 3000",
+            "animate=working duration:3s",
             "sleep=1000"
          }
       },
