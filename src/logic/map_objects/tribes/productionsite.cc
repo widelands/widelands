@@ -588,9 +588,9 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
 /**
  * Create a new worker inside of us out of thin air
  *
- * returns 0 on success -1 if there is no room for this worker
+ * returns true on success and false if there is no room for this worker
  */
-int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes) {
+bool ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes) {
 	bool assigned = false;
 	WorkingPosition* current = working_positions_;
 	for (WorkingPosition* const end = current + descr().nr_working_positions(); current < end;
@@ -617,13 +617,13 @@ int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes)
 		break;
 	}
 	if (!assigned) {
-		return -1;
+		return false;
 	}
 
 	if (upcast(Game, game, &egbase)) {
 		try_start_working(*game);
 	}
-	return 0;
+	return true;
 }
 
 /**

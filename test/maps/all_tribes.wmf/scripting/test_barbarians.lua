@@ -81,12 +81,12 @@ local function init_shipconstruction(player, sf, total_previous_buildings)
    -- Waterway
    connected_road("normal", player, building.flag, "bl,bl")
 
+   -- NOCOM we're getting a weird mix of road textures here
    local flag = get_safe_field(player, sf, 17, 2).immovable
    assert_not_nil(flag)
    connected_road("waterway", player, flag, "bl,br,br,br,br,br,br,br")
    flag = get_safe_field(player, sf, 20, 10).immovable
    assert_not_nil(flag)
-   -- NOCOM busy road: No space left for worker 'barbarians_ox' at 'road'
    connected_road("busy", player, flag, "bl,bl,bl,bl")
 
    return count_buildings(player, total_previous_buildings, 4)

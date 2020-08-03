@@ -454,7 +454,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 			}
 		} else if (d > 0) {
 			for (; d; --d) {
-				if (T::create_new_worker(*pi, egbase, wdes)) {
+				if (!T::create_new_worker(*pi, egbase, wdes)) {
 					report_error(L, "No space left for worker '%s' at '%s'", wdes->name().c_str(),
 					             pi->descr().name().c_str());
 				}
@@ -4715,33 +4715,41 @@ int LuaRoad::set_workers(lua_State* L) {
  ==========================================================
  */
 
-int LuaRoad::create_new_worker(PlayerImmovable& pi,
+bool LuaRoad::create_new_worker(PlayerImmovable& pi,
                                EditorGameBase& egbase,
                                const WorkerDescr* wdes) {
-	RoadBase& r = static_cast<RoadBase&>(pi);
+	RoadBase& rb = dynamic_cast<RoadBase&>(pi);
 
-	if (r.get_workers().size()) {
-		return -1;  // No space
+	Road* r = dynamic_cast<Road*>(&rb);
+	const bool is_busy = r && r->is_busy();
+	if (is_busy) {
+		// Busy roads have space for 2 carriers
+		if (rb.get_workers().size() == 2) {
+			return false;  // No space
+		}
+	} else if (!rb.get_workers().empty()) {
+		// Normal roads and waterways have space for 1 carrier
+		return false;  // No space
 	}
 
 	// Determine Idle position.
-	Flag& start = r.get_flag(RoadBase::FlagStart);
+	Flag& start = rb.get_flag(RoadBase::FlagStart);
 	Coords idle_position = start.get_position();
-	const Path& path = r.get_path();
-	Path::StepVector::size_type idle_index = r.get_idle_index();
+	const Path& path = rb.get_path();
+	Path::StepVector::size_type idle_index = rb.get_idle_index();
 	for (Path::StepVector::size_type i = 0; i < idle_index; ++i) {
 		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
 	}
 
 	Carrier& carrier =
-	   dynamic_cast<Carrier&>(wdes->create(egbase, r.get_owner(), &r, idle_position));
+	   dynamic_cast<Carrier&>(wdes->create(egbase, rb.get_owner(), &rb, idle_position));
 
 	if (upcast(Game, game, &egbase)) {
 		carrier.start_task_road(*game);
 	}
 
-	r.assign_carrier(carrier, 0);
-	return 0;
+	rb.assign_carrier(carrier, 0);
+	return true;
 }
 
 /* RST
@@ -5543,7 +5551,7 @@ int LuaProductionSite::toggle_start_stop(lua_State* L) {
  ==========================================================
  */
 
-int LuaProductionSite::create_new_worker(PlayerImmovable& pi,
+bool LuaProductionSite::create_new_worker(PlayerImmovable& pi,
                                          EditorGameBase& egbase,
                                          const WorkerDescr* wdes) {
 	ProductionSite& ps = static_cast<ProductionSite&>(pi);
