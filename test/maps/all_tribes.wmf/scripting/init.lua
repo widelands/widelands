@@ -7,8 +7,6 @@
 -- Don't forget to define the tribe in player_names.
 -- Make sure that the building sizes are the same or smaller, and that ports go on port spaces etc.
 
--- TODO(GunChleoc): Place waterways when we have the Lua interface for them
-
 include "scripting/coroutine.lua"
 include "scripting/lunit.lua"
 include "scripting/infrastructure.lua"
