@@ -32,7 +32,6 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      collects_ware_from_map = "custom_ware",
       basic_amount = 1,
    },
 
@@ -42,11 +41,6 @@ tribes:new_productionsite_type {
 
    outputs = {
       "custom_ware"
-   },
-
-   indicate_workarea_overlaps = {
-      barbarians_rangers_hut = true,
-      barbarians_lumberjacks_hut = false,
    },
 
    programs = {
