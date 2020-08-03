@@ -81,7 +81,6 @@ local function init_shipconstruction(player, sf, total_previous_buildings)
    -- Waterway
    connected_road("normal", player, building.flag, "bl,bl")
 
-   -- NOCOM we're getting a weird mix of road textures here
    local flag = get_safe_field(player, sf, 17, 2).immovable
    assert_not_nil(flag)
    connected_road("waterway", player, flag, "bl,br,br,br,br,br,br,br")
@@ -417,8 +416,6 @@ run(function()
    print("Placing buildings for Player 1")
    init_barbarians(game.players[playernumber])
 
-   --[[ NOCOM
-
    -- Verify that nothing went wrong with placing the buildings,
    -- and that a building of each type has been placed.
    verify_buildings(playernumber, expected_number_of_buildings)
@@ -434,5 +431,4 @@ run(function()
 
    print("# All Tests passed.")
    mapview:close()
-   ]]
 end)

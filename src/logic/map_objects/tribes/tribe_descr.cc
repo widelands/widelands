@@ -222,6 +222,7 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("roads");
 	const auto load_roads = [&items_table](
 	                           const std::string& road_type, std::vector<std::string>* images) {
+		images->clear();
 		std::vector<std::string> roads =
 		   items_table->get_table(road_type)->array_entries<std::string>();
 		for (const std::string& filename : roads) {
