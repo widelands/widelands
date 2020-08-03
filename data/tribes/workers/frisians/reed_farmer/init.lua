@@ -26,9 +26,9 @@ tribes:new_worker_type {
       harvestreed = {
          "findobject=attrib:ripe_reed radius:1",
          "walk=object",
-         "animate=harvesting duration:12s",
+         "animate=harvesting duration:6s",
          "callobject=harvest",
-         "animate=harvesting duration:1ms",
+         "animate=harvesting duration:6s",
          "createware=reed",
          "return"
       },
