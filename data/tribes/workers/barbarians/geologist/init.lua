@@ -24,10 +24,10 @@ tribes:new_worker_type {
       },
       -- Search program, executed when we have found a place to hack on
       search = {
-         "animate=hack 5000",
-         "animate=idle 2000",
+         "animate=hack duration:5s",
+         "animate=idle duration:2s",
          "playsound=sound/hammering/geologist_hammer 192",
-         "animate=hack 3000",
+         "animate=hack duration:3s",
          "findresources"
       }
    },

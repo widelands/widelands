@@ -38,9 +38,9 @@ tribes:new_worker_type {
          "walk=object-or-coords",
          "plant=attrib:shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
-         "animate=work 500",
+         "animate=work duration:500ms",
          "construct",
-         "animate=work 5000",
+         "animate=work duration:5s",
          "return"
       },
       buildferry_1 = {
@@ -49,7 +49,7 @@ tribes:new_worker_type {
       buildferry_2 = {
          "findspace=size:swim radius:5",
          "walk=coords",
-         "animate=work 10000",
+         "animate=work duration:10s",
          "createbob=empire_ferry",
          "return"
       },
