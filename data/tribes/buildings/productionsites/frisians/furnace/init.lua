@@ -94,7 +94,7 @@ tribes:new_productionsite_type {
             "consume=coal iron_ore",
             "sleep=25000",
             "playsound=sound/metal/furnace 192",
-            "animate=working_iron 35000",
+            "animate=working_iron duration:35s",
             "playsound=sound/metal/ironping 80",
             "produce=iron"
          },
@@ -107,7 +107,7 @@ tribes:new_productionsite_type {
             "consume=coal iron_ore",
             "sleep=25000",
             "playsound=sound/metal/furnace 192",
-            "animate=working_iron 35000",
+            "animate=working_iron duration:35s",
             "playsound=sound/metal/ironping 80",
             "produce=iron"
          },
@@ -120,7 +120,7 @@ tribes:new_productionsite_type {
             "consume=coal gold_ore",
             "sleep=27000",
             "playsound=sound/metal/furnace 192",
-            "animate=working_gold 35000",
+            "animate=working_gold duration:35s",
             "playsound=sound/metal/goldping 80",
             "produce=gold"
          },

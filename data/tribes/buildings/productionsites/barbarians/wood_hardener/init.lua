@@ -75,7 +75,7 @@ tribes:new_productionsite_type {
             "consume=log:2",
             "sleep=43000",
             "playsound=sound/barbarians/blackwood 80",
-            "animate=working 24000",
+            "animate=working duration:24s",
             "produce=blackwood"
          }
       },
