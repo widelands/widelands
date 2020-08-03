@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    attributes = { "field" },
    programs = {
       program = {
-         "animate=idle duration:500s",
+         "animate=idle duration:8m20s",
          "remove=",
       }
    },
