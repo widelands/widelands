@@ -78,6 +78,18 @@ local function init_shipconstruction(player, sf, total_previous_buildings)
    building = place_safe_building(player, "barbarians_ferry_yard", sf, 18, -1)
    connected_road("normal", player, building.flag, "tr,r|tr,r")
 
+   -- Waterway
+   connected_road("normal", player, building.flag, "bl,bl")
+
+   local flag = get_safe_field(player, sf, 17, 2).immovable
+   assert_not_nil(flag)
+   -- NOCOM bug in connected_road: [string "scripting/infrastructure.lua"]:58: bad argument #1 to 'set_workers' (string expected, got nil)
+   connected_road("waterway", player, flag, "bl,br,br,br,br,br,br,br")
+   flag = get_safe_field(player, sf, 20, 10).immovable
+   assert_not_nil(flag)
+   -- NOCOM busy road: No space left for worker 'barbarians_ox' at 'road'
+   connected_road("normal", player, flag, "bl,bl,bl,bl")
+
    return count_buildings(player, total_previous_buildings, 4)
 end
 
@@ -406,6 +418,8 @@ run(function()
    print("Placing buildings for Player 1")
    init_barbarians(game.players[playernumber])
 
+   --[[ NOCOM
+
    -- Verify that nothing went wrong with placing the buildings,
    -- and that a building of each type has been placed.
    verify_buildings(playernumber, expected_number_of_buildings)
@@ -421,4 +435,5 @@ run(function()
 
    print("# All Tests passed.")
    mapview:close()
+   ]]
 end)

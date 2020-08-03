@@ -75,6 +75,11 @@ end
 
 -- Placement functions
 
+-- Get a field with the coordinates shifted for the player
+function get_safe_field(player, starting_field, x, y)
+   return map:get_field((starting_field.x + x) % 512, (starting_field.y + y) % 512)
+end
+
 -- Add a building with coordinates not going out of range.
 -- Note that this has only been tested with starting_field.y == 1
 function place_safe_building(player, buildingname, starting_field, x, y)
