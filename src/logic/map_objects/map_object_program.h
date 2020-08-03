@@ -51,10 +51,10 @@ protected:
 	/// exceeded
 	static unsigned int read_int(const std::string& input,
 	                             int min_value,
-	                             int max_value = std::numeric_limits<int32_t>::max());
+	                             int64_t max_value = std::numeric_limits<int32_t>::max());
 	/// Same as 'read_int', with 'min_value' == 1
 	static unsigned int read_positive(const std::string& input,
-	                                  int max_value = std::numeric_limits<int32_t>::max());
+	                                  int64_t max_value = std::numeric_limits<int32_t>::max());
 
 	/**
 	 * @brief Reads a key-value pair from a string using the given separator, e.g. "attrib:tree",
@@ -70,6 +70,14 @@ protected:
 	                    const char separator,
 	                    const std::string& default_value = "",
 	                    const std::string& expected_key = "");
+
+	/**
+	 * @brief Reads time duration with a unit from a string
+	 * @param A positive integer, optionally followed by 'ms' (milliseconds), 's' (seconds) or 'm'
+	 * (minutes). This can be repeated to form units like '1m20s500ms'.
+	 * @return The duration in SDL ticks (milliseconds)
+	 */
+	static Duration read_duration(const std::string& input);
 
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"
@@ -107,6 +115,8 @@ protected:
 	                                                uint8_t default_priority);
 
 private:
+	static Widelands::Duration as_ms(Widelands::Duration number, const std::string& unit);
+
 	const std::string name_;
 };
 }  // namespace Widelands

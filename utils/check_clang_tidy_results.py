@@ -7,15 +7,13 @@ regressed."""
 import re
 import sys
 
+# Checks list: https://clang.llvm.org/extra/clang-tidy/checks/list.html
 SUPPRESSED_CHECKS = {
     '[android-cloexec-fopen]',
     '[boost-use-to-string]',
     '[bugprone-integer-division]',
-    '[cert-dcl50-cpp]',
-    '[cert-err34-c]',
+    '[cert-dcl50-cpp]',  # We need this for our logger
     '[cert-err58-cpp]',
-    '[cert-msc30-c]',
-    '[cert-msc50-cpp]',
     '[clang-analyzer-core.CallAndMessage]',
     '[clang-analyzer-core.DivideZero]',
     '[clang-analyzer-core.NonNullParamChecker]',
