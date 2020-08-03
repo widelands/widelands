@@ -1042,8 +1042,8 @@ public:
 	 */
 	CASTED_GET(RoadBase)
 	static bool create_new_worker(Widelands::PlayerImmovable&,
-	                             Widelands::EditorGameBase&,
-	                             const Widelands::WorkerDescr*);
+	                              Widelands::EditorGameBase&,
+	                              const Widelands::WorkerDescr*);
 };
 
 class LuaConstructionSite : public LuaBuilding {
@@ -1175,8 +1175,8 @@ public:
 	 */
 	CASTED_GET(ProductionSite)
 	static bool create_new_worker(Widelands::PlayerImmovable&,
-	                             Widelands::EditorGameBase&,
-	                             const Widelands::WorkerDescr*);
+	                              Widelands::EditorGameBase&,
+	                              const Widelands::WorkerDescr*);
 };
 
 class LuaMilitarySite : public LuaBuilding {

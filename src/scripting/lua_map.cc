@@ -4716,8 +4716,8 @@ int LuaRoad::set_workers(lua_State* L) {
  */
 
 bool LuaRoad::create_new_worker(PlayerImmovable& pi,
-                               EditorGameBase& egbase,
-                               const WorkerDescr* wdes) {
+                                EditorGameBase& egbase,
+                                const WorkerDescr* wdes) {
 	RoadBase& rb = dynamic_cast<RoadBase&>(pi);
 
 	Road* r = dynamic_cast<Road*>(&rb);
@@ -5552,8 +5552,8 @@ int LuaProductionSite::toggle_start_stop(lua_State* L) {
  */
 
 bool LuaProductionSite::create_new_worker(PlayerImmovable& pi,
-                                         EditorGameBase& egbase,
-                                         const WorkerDescr* wdes) {
+                                          EditorGameBase& egbase,
+                                          const WorkerDescr* wdes) {
 	ProductionSite& ps = static_cast<ProductionSite&>(pi);
 	return ps.warp_worker(egbase, *wdes);
 }
