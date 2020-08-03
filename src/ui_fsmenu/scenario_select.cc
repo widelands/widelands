@@ -154,7 +154,9 @@ void FullscreenMenuScenarioSelect::layout() {
 	header_box_.set_size(get_w(), tabley_);
 	table_.set_size(tablew_, tableh_);
 	table_.set_pos(Vector2i(tablex_, tabley_));
-	scenario_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
+	scenario_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 6 * padding_ - scenario_difficulty_.get_h() - scenario_difficulty_header_.get_h());
+	scenario_details_.set_desired_size(
+	   get_right_column_w(right_column_x_), tableh_ - buth_ - 6 * padding_ - scenario_difficulty_.get_h() - scenario_difficulty_header_.get_h());
 	scenario_details_.set_pos(Vector2i(right_column_x_, tabley_));
 	scenario_difficulty_.set_size(get_right_column_w(right_column_x_), scenario_difficulty_.get_h());
 	scenario_difficulty_.set_pos(
