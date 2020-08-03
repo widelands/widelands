@@ -1676,7 +1676,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	const Map& map = game.map();
 	std::vector<ImmovableFound> immovables;
 	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
-	Area<FCoords> area(map.get_fcoords(psite.base_flag().get_position()), radius);
+	Area<FCoords> area(map.get_fcoords(psite.get_position()), radius);
 	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr))) {
 		state.objvar = immovables[0].object;
 
