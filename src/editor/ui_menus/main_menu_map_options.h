@@ -56,9 +56,10 @@ private:
 
 	const unsigned int padding_, indent_, labelh_, checkbox_space_, butw_, max_w_;
 
+	UI::Box tab_box_, buttons_box_;
+
 	UI::Button ok_, cancel_;
 
-	UI::Box tab_box_;
 	UI::TabPanel tabs_;
 	UI::Box main_box_;
 	UI::Box tags_box_;
@@ -93,8 +94,6 @@ struct SuggestedTeamsEntry : public UI::Panel {
 	}
 
 	void layout() override;
-	void draw(RenderTarget&) override;
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 
 	const Widelands::SuggestedTeamLineup& team() const {
 		return team_;
@@ -108,8 +107,10 @@ private:
 	Widelands::SuggestedTeamLineup team_;
 	UI::Button delete_;
 	std::vector<UI::Dropdown<Widelands::PlayerNumber>*> dropdowns_;
+	std::vector<std::vector<UI::Button*>> buttons_;
 
 	UI::Dropdown<Widelands::PlayerNumber>* create_dropdown(size_t);
+	UI::Button* create_button(Widelands::PlayerNumber);
 
 	void update();
 };
