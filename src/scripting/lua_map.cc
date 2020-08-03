@@ -1648,6 +1648,7 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, buildings),
    PROP_RO(LuaTribeDescription, carrier),
    PROP_RO(LuaTribeDescription, carrier2),
+   PROP_RO(LuaTribeDescription, ferry),
    PROP_RO(LuaTribeDescription, descname),
    PROP_RO(LuaTribeDescription, geologist),
    PROP_RO(LuaTribeDescription, immovables),
@@ -1719,6 +1720,18 @@ int LuaTribeDescription::get_carrier(lua_State* L) {
 
 int LuaTribeDescription::get_carrier2(lua_State* L) {
 	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->carrier2())->name());
+	return 1;
+}
+
+/* RST
+   .. attribute:: ferry
+
+         (RO) the :class:`string` internal name of the ferry type that this tribe uses.
+              e.g. 'atlanteans_ferry'
+*/
+
+int LuaTribeDescription::get_ferry(lua_State* L) {
+	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->ferry())->name());
 	return 1;
 }
 
