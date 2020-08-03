@@ -305,8 +305,10 @@ tribes:new_tribe {
       pgettext("shipname", "Mani"),
       pgettext("shipname", "Odin"),
       pgettext("shipname", "Red Fox"),
+      -- TRANSLATORS: This Barbarian ship is mentioned in some lore texts
       pgettext("shipname", "Saxnot"),
       pgettext("shipname", "Sigmund"),
+      -- TRANSLATORS: This Barbarian ship is named after a barbarian bard
       pgettext("shipname", "Sigurd"),
       pgettext("shipname", "Snotra"),
       pgettext("shipname", "Thor"),

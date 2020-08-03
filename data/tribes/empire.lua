@@ -285,6 +285,7 @@ tribes:new_tribe {
       -- TRANSLATORS: This Empire ship is named after an in-game character
       pgettext("shipname", "Amalea"),
       pgettext("shipname", "Amolius"),
+      -- TRANSLATORS: This Empire ship is named after a Roman god
       pgettext("shipname", "Apollo"),
       pgettext("shipname", "Augustus"),
       pgettext("shipname", "Azurea Sea"),
@@ -307,7 +308,9 @@ tribes:new_tribe {
       pgettext("shipname", "Gallus"),
       pgettext("shipname", "Ianus"),
       pgettext("shipname", "Iulius Caesar"),
+      -- TRANSLATORS: This Empire ship is named after a Roman goddess
       pgettext("shipname", "Iuno"),
+      -- TRANSLATORS: This Empire ship is named after a Roman god
       pgettext("shipname", "Iupiter"),
       pgettext("shipname", "Latium"),
       pgettext("shipname", "Latonia"),
@@ -316,13 +319,17 @@ tribes:new_tribe {
       -- TRANSLATORS: This Empire ship is named after an in-game character
       pgettext("shipname", "Lutius"),
       pgettext("shipname", "Marble"),
+      -- TRANSLATORS: This Empire ship is named after a Roman god
       pgettext("shipname", "Mars"),
+      -- TRANSLATORS: This Empire ship is named after a Roman goddess
       pgettext("shipname", "Minerva"),
+      -- TRANSLATORS: This Empire ship is named after a Roman god
       pgettext("shipname", "Neptune"),
       pgettext("shipname", "Nero"),
       pgettext("shipname", "Nerva"),
       pgettext("shipname", "Octavianus"),
       pgettext("shipname", "Otho"),
+      -- TRANSLATORS: This Empire ship is named after a Roman god
       pgettext("shipname", "Pluto"),
       pgettext("shipname", "Portus Bellus"),
       pgettext("shipname", "Quirinus"),
@@ -330,6 +337,7 @@ tribes:new_tribe {
       pgettext("shipname", "Romulus"),
       -- TRANSLATORS: This Empire ship is named after an in-game character
       pgettext("shipname", "Saledus"),
+      -- TRANSLATORS: This Empire ship is named after a Roman deity
       pgettext("shipname", "Saturn"),
       pgettext("shipname", "Siena"),
       pgettext("shipname", "Sparta"),
@@ -339,6 +347,7 @@ tribes:new_tribe {
       pgettext("shipname", "Traianus"),
       pgettext("shipname", "Venus"),
       pgettext("shipname", "Vespasianus"),
+      -- TRANSLATORS: This Empire ship is named after a Roman goddess
       pgettext("shipname", "Vesta"),
       pgettext("shipname", "Vinea"),
       pgettext("shipname", "Vitellius"),

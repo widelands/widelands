@@ -362,7 +362,8 @@ tribes:new_tribe {
       pgettext("shipname", "Cat’s Eye"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
       pgettext("shipname", "Citrine"),
-      pgettext("shipname", "Coliondor"),
+      -- TRANSLATORS: This Atlantean ship is named after an in-game character
+      pgettext("shipname", "Colionder"),
       pgettext("shipname", "Dominica"),
       pgettext("shipname", "Eleuthera"),
       -- TRANSLATORS: This Atlantean ship is named after a mineral
