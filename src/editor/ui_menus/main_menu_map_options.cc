@@ -72,10 +72,11 @@ SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo,
 }
 
 UI::Button* SuggestedTeamsEntry::create_button(Widelands::PlayerNumber p) {
-	UI::Button* b = new UI::Button(this, std::to_string(static_cast<unsigned>(p)), 0, 0, kSuggestedTeamsUnitSize, kSuggestedTeamsUnitSize,
-	    UI::ButtonStyle::kWuiSecondary,
-	    playercolor_image(p, "images/players/player_position_menu.png"),
-	    map_.get_scenario_player_name(p + 1), UI::Button::VisualState::kFlat);
+	UI::Button* b =
+	   new UI::Button(this, std::to_string(static_cast<unsigned>(p)), 0, 0, kSuggestedTeamsUnitSize,
+	                  kSuggestedTeamsUnitSize, UI::ButtonStyle::kWuiSecondary,
+	                  playercolor_image(p, "images/players/player_position_menu.png"),
+	                  map_.get_scenario_player_name(p + 1), UI::Button::VisualState::kFlat);
 	b->sigclicked.connect([this, b, p]() {
 		for (std::vector<UI::Button*>& vector : buttons_) {
 			for (auto it = vector.begin(); it != vector.end(); ++it) {
@@ -155,7 +156,8 @@ void SuggestedTeamsEntry::layout() {
 	for (auto& bb : buttons_) {
 		size_t index2 = 0;
 		for (auto& b : bb) {
-			b->set_pos(Vector2i(kSuggestedTeamsUnitSize * (++index2), kSuggestedTeamsUnitSize * index));
+			b->set_pos(
+			   Vector2i(kSuggestedTeamsUnitSize * (++index2), kSuggestedTeamsUnitSize * index));
 		}
 		++index;
 	}
@@ -340,8 +342,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	}
 
 	const unsigned nr_players = eia().egbase().map().get_nrplayers();
-	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_,
-			(boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str()));
+	teams_box_.add(new UI::Textarea(
+	   &teams_box_, 0, 0, max_w_, labelh_,
+	   (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str()));
 	teams_box_.add_space(4);
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")));
 	teams_box_.add(&inner_teams_box_, UI::Box::Resizing::kFullSize);
