@@ -40,9 +40,9 @@ enum class MapObjectType : uint8_t {
 	CRITTER,   // Bob -- Critter
 	SHIP,      // Bob -- Ship
 	WORKER,    // Bob -- Worker
-	CARRIER,   // Bob -- Worker -- Carrier
 	SOLDIER,   // Bob -- Worker -- Soldier
-	FERRY,     // Bob -- Worker -- Ferry
+	CARRIER,   // Bob -- Worker -- Carrier
+	FERRY,     // Bob -- Worker -- Carrier -- Ferry
 
 	// everything below is at least a BaseImmovable
 	IMMOVABLE = 30,
@@ -56,12 +56,12 @@ enum class MapObjectType : uint8_t {
 
 	// everything below is at least a Building
 	BUILDING = 100,    // Building
-	CONSTRUCTIONSITE,  // Building -- Constructionsite
-	DISMANTLESITE,     // Building -- Dismantlesite
+	CONSTRUCTIONSITE,  // Building -- PartiallyFinishedBuilding -- Constructionsite
+	DISMANTLESITE,     // Building -- PartiallyFinishedBuilding -- Dismantlesite
 	WAREHOUSE,         // Building -- Warehouse
 	MARKET,            // Building -- Market
+	MILITARYSITE,      // Building -- Militarysite
 	PRODUCTIONSITE,    // Building -- Productionsite
-	MILITARYSITE,      // Building -- Productionsite -- Militarysite
 	TRAININGSITE       // Building -- Productionsite -- Trainingsite
 };
 
