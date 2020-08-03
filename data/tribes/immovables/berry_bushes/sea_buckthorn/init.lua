@@ -18,7 +18,7 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 14000",
+         "animate=idle duration:14s",
          "grow=berry_bush_sea_buckthorn_small",
       },
    },
@@ -45,7 +45,7 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 18000",
+         "animate=idle duration:18s",
          "grow=berry_bush_sea_buckthorn_medium",
       },
    },
@@ -72,7 +72,7 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 26000",
+         "animate=idle duration:26s",
          "grow=berry_bush_sea_buckthorn_ripe",
       },
    },
@@ -99,7 +99,7 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 300000",
+         "animate=idle duration:5m",
          "remove=",
       },
       harvest = {

@@ -185,7 +185,7 @@ void LoginBox::verify_input() {
 /// Check password against metaserver
 bool LoginBox::check_password() {
 	// Try to connect to the metaserver
-	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER);
 	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
 	std::string password = crypto::sha1(eb_password->text());
 

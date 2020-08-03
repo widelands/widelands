@@ -76,7 +76,7 @@ tribes:new_productionsite_type {
             "consume=coal iron",
             "sleep=32000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=helmet"
          }
       },
@@ -89,7 +89,7 @@ tribes:new_productionsite_type {
             "consume=coal iron:2",
             "sleep=32000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 45000",
+            "animate=working duration:45s",
             "produce=helmet_mask"
          }
       },
@@ -102,7 +102,7 @@ tribes:new_productionsite_type {
             "consume=coal gold iron:2",
             "sleep=32000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 55000",
+            "animate=working duration:55s",
             "produce=helmet_warhelm"
          }
       },

@@ -52,7 +52,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs spider_silk",
             "consume=corn water",
             "sleep=25000",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "produce=spider_silk"
          }
       },

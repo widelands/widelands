@@ -68,15 +68,6 @@ tribes:new_productionsite_type {
       frisians_farmer = 1
    },
 
-   indicate_workarea_overlaps = {
-      frisians_clay_pit = false,
-      frisians_berry_farm = false,
-      frisians_reed_farm = false,
-      frisians_farm = false,
-      frisians_foresters_house = false,
-      frisians_beekeepers_house = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -99,7 +90,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting barley",
          actions = {
             "callworker=harvest",
-            "animate=working 40000",
+            "animate=working duration:40s",
             "sleep=4000",
             "produce=barley" --produces 2 barley per field
          }

@@ -70,7 +70,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs coal",
             "consume=log:3 clay",
             "sleep=30000",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "produce=coal"
          },
       },

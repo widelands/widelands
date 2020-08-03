@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
             "consume=water wheat",
             "sleep=25000",
             "playsound=sound/farm/sheep 192",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "produce=wool"
          }
       },

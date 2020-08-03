@@ -949,7 +949,7 @@ int LuaTribes::new_tribe(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_tribe(table);
+		get_egbase(L).mutable_tribes()->add_tribe(table, get_egbase(L).world());
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
