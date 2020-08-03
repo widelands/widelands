@@ -261,6 +261,13 @@ public:
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
 
+	bool is_destruction_blocked() const {
+		return is_destruction_blocked_;
+	}
+	void set_destruction_blocked(bool b) {
+		is_destruction_blocked_ = b;
+	}
+
 	virtual bool fetch_from_flag(Game&);
 	virtual bool get_building_work(Game&, Worker&, bool success);
 
@@ -394,6 +401,7 @@ private:
 	SoldierControl* soldier_control_;  // owned by the base classes, set by 'set_soldier_control'.
 
 	bool mute_messages_;
+	bool is_destruction_blocked_;
 };
 }  // namespace Widelands
 
