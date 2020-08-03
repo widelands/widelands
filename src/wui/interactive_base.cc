@@ -22,7 +22,7 @@
 #include <memory>
 
 #include <SDL_timer.h>
-#include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -1386,7 +1386,7 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
 		return;
 	}
 
-	uint32_t serial = atoi(args[1].c_str());
+	uint32_t serial = boost::lexical_cast<uint32_t>(args[1]);
 	MapObject* obj = egbase().objects().get_object(serial);
 
 	if (!obj) {

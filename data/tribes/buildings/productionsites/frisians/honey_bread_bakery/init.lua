@@ -81,7 +81,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs honey_bread or workers need experience",
             "consume=barley water honey",
             "sleep=20000",
-            "animate=working 25000",
+            "animate=working duration:25s",
             "produce=honey_bread"
          }
       },
@@ -92,7 +92,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs honey_bread or workers need experience",
             "consume=barley water honey",
             "sleep=20000",
-            "animate=working 25000",
+            "animate=working duration:25s",
             "produce=honey_bread"
          }
       },
@@ -103,7 +103,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs bread_frisians",
             "consume=barley water",
             "sleep=20000",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=bread_frisians"
          }
       },

@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    attributes = { "field", "flowering" },
    programs = {
       program = {
-         "animate=idle 40000",
+         "animate=idle duration:40s",
          "transform=grapevine_ripe",
       }
    },

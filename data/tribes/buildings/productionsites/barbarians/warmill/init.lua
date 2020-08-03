@@ -79,7 +79,7 @@ tribes:new_productionsite_type {
             "consume=coal iron",
             "sleep=26000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 22000",
+            "animate=working duration:22s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax"
@@ -94,7 +94,7 @@ tribes:new_productionsite_type {
             "consume=coal iron:2",
             "sleep=26000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 22000",
+            "animate=working duration:22s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_sharp"
@@ -109,7 +109,7 @@ tribes:new_productionsite_type {
             "consume=coal:2 iron:2",
             "sleep=26000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 22000",
+            "animate=working duration:22s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_broad"
@@ -124,7 +124,7 @@ tribes:new_productionsite_type {
             "consume=coal:2 iron:2",
             "sleep=26000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 22000",
+            "animate=working duration:22s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_bronze"
@@ -139,7 +139,7 @@ tribes:new_productionsite_type {
             "consume=coal gold iron:2",
             "sleep=26000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 22000",
+            "animate=working duration:22s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_battle"
@@ -154,7 +154,7 @@ tribes:new_productionsite_type {
             "consume=coal:2 gold:2 iron:2",
             "sleep=26000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 22000",
+            "animate=working duration:22s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_warriors"

@@ -80,7 +80,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs fur_garment_studded",
             "consume=fur_garment iron",
             "sleep=25000",
-            "animate=working 25000",
+            "animate=working duration:25s",
             "produce=fur_garment_studded"
          },
       },
@@ -92,7 +92,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs fur_garment_golden",
             "consume=fur_garment iron gold",
             "sleep=25000",
-            "animate=working 25000",
+            "animate=working duration:25s",
             "produce=fur_garment_golden"
          },
       },

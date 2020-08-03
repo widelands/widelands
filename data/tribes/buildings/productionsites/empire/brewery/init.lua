@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
             "consume=water wheat",
             "sleep=30000",
             "playsound=sound/empire/beerbubble 180",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "produce=beer"
          }
       },
