@@ -37,11 +37,11 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
 void FullscreenMenuLoadMapOrGame::layout() {
 	// UI coordinates and spacers
 	tablex_ = get_w() * 47 / 2500;
-	tabley_ = get_h() * 17 / 50;
+	tabley_ = get_h() * 14 / 50;
 	tablew_ = get_w() * 711 / 1250;
 	tableh_ = get_h() * 6083 / 10000;
 	right_column_x_ = tablex_ + tablew_ + right_column_margin_;
-	buty_ = get_h() * 9 / 10;
+	buty_ = get_h() * 84 / 100;
 	butw_ = (get_w() - right_column_x_ - right_column_margin_) / 2 - padding_;
 	buth_ = get_h() * 9 / 200;
 	right_column_tab_ = get_w() - right_column_margin_ - butw_;
