@@ -579,7 +579,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// we dont want to send all of them so we limit the surplus value above attackgroup
 	const uint8_t attack_group = std::abs(management_data.get_military_number_at(6)) / 10;
 	if (attackers > attack_group) {
-		attackers = attack_group + std::rand() % (attackers - attack_group);
+		attackers = attack_group + std::rand() % (attackers - attack_group);  // NOLINT
 	}
 
 	assert(attackers < 500);

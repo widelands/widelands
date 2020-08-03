@@ -265,7 +265,7 @@ void Player::AiPersistentState::initialize() {
 	no_more_expeditions = false;
 	target_military_score = 100;
 	least_military_score = 0;
-	ai_productionsites_ratio = std::rand() % 5 + 7;
+	ai_productionsites_ratio = std::rand() % 5 + 7;  // NOLINT
 	ai_personality_mil_upper_limit = 100;
 
 	// all zeroes
@@ -1631,7 +1631,7 @@ void Player::read_statistics(FileRead& fr,
 				                    description.c_str(), nr_entries, stats_vector.size());
 			}
 			for (size_t j = 0; j < nr_entries; ++j) {
-				stats->at(ware_index)[j] = static_cast<unsigned int>(atoi(stats_vector.at(j).c_str()));
+				stats->at(ware_index)[j] = boost::lexical_cast<unsigned int>(stats_vector.at(j).c_str());
 			}
 		} else if (nr_entries > 0) {
 			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",

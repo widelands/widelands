@@ -39,7 +39,8 @@ void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id,
 		ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
 		if (impls.size() > 1) {
 			do {
-				size_t random = (std::rand() % impls.size());  // Choose a random AI
+				// Choose a random AI
+				const size_t random = (std::rand() % impls.size());  // NOLINT
 				it = impls.begin() + random;
 			} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
 		}
