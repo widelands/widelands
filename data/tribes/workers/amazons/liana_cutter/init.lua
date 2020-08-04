@@ -55,7 +55,7 @@ tribes:new_worker_type {
          rows = 5
       },
       work = {
-         hotspot = {19, duration:35s},
+         hotspot = {19, 35},
          fps = 15,
          frames = 15,
          columns = 5,
