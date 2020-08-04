@@ -17,8 +17,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 72500",
-         "remove=80",
+         "animate=idle duration:1m12s500ms",
+         "remove=success:80",
          "grow=mushroom_dark_wasteland_pole",
       },
    },
@@ -45,8 +45,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 72500",
-         "remove=70",
+         "animate=idle duration:1m12s500ms",
+         "remove=success:70",
          "grow=mushroom_dark_wasteland_mature",
       },
    },
@@ -73,8 +73,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 75000",
-         "remove=40",
+         "animate=idle duration:1m15s",
+         "remove=success:40",
          "grow=mushroom_dark_wasteland_old",
       },
    },
@@ -104,8 +104,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 1050000",
-         "transform=deadtree2 25",
+         "animate=idle duration:17m30s",
+         "transform=deadtree2 success:25",
          "seed=mushroom_dark_wasteland_sapling 200",
       },
       fall = {

@@ -62,11 +62,6 @@ tribes:new_productionsite_type {
       mines = "gold",
    },
 
-   indicate_workarea_overlaps = {
-      frisians_goldmine = false,
-      frisians_goldmine_deep = false,
-   },
-
    working_positions = {
       frisians_miner = 1,
       frisians_miner_master = 1,
@@ -94,7 +89,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining gold",
          actions = {
-            "animate=working 12200",
+            "animate=working duration:12s200ms",
             "mine=gold 3 100 10 5",
             "produce=gold_ore",
          }

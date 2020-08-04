@@ -226,10 +226,10 @@ static const char* const pic_tab_buildhouse[] = {"images/wui/fieldaction/menu_ta
                                                  "images/wui/fieldaction/menu_tab_buildmedium.png",
                                                  "images/wui/fieldaction/menu_tab_buildbig.png",
                                                  "images/wui/fieldaction/menu_tab_buildport.png"};
-static const std::string tooltip_tab_build[] = {_("Build small building"),
+static const char* const tooltip_tab_build[] = {_("Build small building"),
                                                 _("Build medium building"), _("Build big building"),
                                                 _("Build port building")};
-static const std::string name_tab_build[] = {"small", "medium", "big", "port"};
+static const char* const name_tab_build[] = {"small", "medium", "big", "port"};
 
 static const char* const pic_tab_buildmine = "images/wui/fieldaction/menu_tab_buildmine.png";
 

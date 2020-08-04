@@ -16,8 +16,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 38000",
-         "remove=50",
+         "animate=idle duration:38s",
+         "remove=success:50",
          "grow=aspen_summer_pole",
       },
    },
@@ -43,8 +43,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 38000",
-         "remove=47",
+         "animate=idle duration:38s",
+         "remove=success:47",
          "grow=aspen_summer_mature",
       },
    },
@@ -70,11 +70,11 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 20000",
-         "remove=30",
+         "animate=idle duration:20s",
+         "remove=success:30",
          "seed=aspen_summer_sapling 60",
-         "animate=idle 20000",
-         "remove=20",
+         "animate=idle duration:20s",
+         "remove=success:20",
          "grow=aspen_summer_old",
       },
    },
@@ -102,12 +102,12 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 1050000",
-         "transform=deadtree2 15",
+         "animate=idle duration:17m30s",
+         "transform=deadtree2 success:15",
          "seed=aspen_summer_sapling 100",
       },
       fall = {
-         "animate=falling 1400",
+         "animate=falling duration:1s400ms",
          "transform=fallentree",
       },
    },

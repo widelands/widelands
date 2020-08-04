@@ -52,12 +52,6 @@ tribes:new_productionsite_type {
       { name = "snack", amount = 6 }
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_ironmine = false,
-      barbarians_ironmine_deep = false,
-      barbarians_ironmine_deeper = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
@@ -75,7 +69,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining iron",
          actions = {
-            "animate=working 9500",
+            "animate=working duration:9s500ms",
             "mine=iron 2 66 5 17",
             "produce=iron_ore",
          }
