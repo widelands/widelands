@@ -177,13 +177,25 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			if (program_descname == program_descname_unlocalized) {
 				program_descname = pgettext_expr(msgctxt_char, program_descname_unlocalized.c_str());
 			}
-			programs_[program_name] = std::unique_ptr<ProductionProgram>(
-			   new ProductionProgram(program_name, program_descname,
-			                         program_table->get_table("actions"), tribes, world, this));
+			if (program_name == "work") {
+				log("WARNING: The main program for the building %s should be renamed from 'work' to 'main'\n", name().c_str());
+				programs_["main"] = std::unique_ptr<ProductionProgram>(
+											  new ProductionProgram("main", program_descname,
+																	program_table->get_table("actions"), tribes, world, this));
+			} else {
+				programs_[program_name] = std::unique_ptr<ProductionProgram>(
+				   new ProductionProgram(program_name, program_descname,
+										 program_table->get_table("actions"), tribes, world, this));
+			}
 		} catch (const std::exception& e) {
 			throw GameDataError("%s: Error in productionsite program %s: %s", name().c_str(),
 			                    program_name.c_str(), e.what());
 		}
+	}
+
+	// Check ActCall
+	for (const auto& caller : programs_) {
+		caller.second->validate_calls(*this);
 	}
 
 	if (table.has_key("indicate_workarea_overlaps")) {
@@ -782,7 +794,7 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 }
 
 void ProductionSite::find_and_start_next_program(Game& game) {
-	program_start(game, "work");
+	program_start(game, "main");
 }
 
 /**

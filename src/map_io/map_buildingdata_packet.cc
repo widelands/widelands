@@ -726,9 +726,9 @@ void MapBuildingdataPacket::read_productionsite(
 				std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 				if (!pr_descr.programs().count(program_name)) {
 					log(
-					   "WARNING: productionsite has unknown program \"%s\",replacing it with \"work\"\n",
+					   "WARNING: productionsite has unknown program \"%s\",replacing it with \"main\"\n",
 					   program_name.c_str());
-					program_name = "work";
+					program_name = "main";
 				}
 
 				productionsite.stack_[i].program = productionsite.descr().get_program(program_name);

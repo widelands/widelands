@@ -696,8 +696,7 @@ executing ``return=failed``).
 ``failure_handling_directive``
     If omitted, the value ``Skip`` is used for ``failure_handling_method``.
 */
-ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments,
-                                    const ProductionSiteDescr& descr) {
+ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments) {
 	if (arguments.size() < 1 || arguments.size() > 4) {
 		throw GameDataError(
 		   "Usage: call=<program name> [on failure|completion|skip fail|complete|skip|repeat]");
@@ -712,15 +711,7 @@ ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments,
 	   ProgramResultHandlingMethod::kContinue;
 
 	// Fetch program to call
-	const std::string& program_name = arguments.front();
-	const ProductionSiteDescr::Programs& programs = descr.programs();
-	ProductionSiteDescr::Programs::const_iterator const it = programs.find(program_name);
-	if (it == programs.end()) {
-		throw GameDataError("The program '%s' has not (yet) been declared in %s "
-		                    "(wrong declaration order?)",
-		                    program_name.c_str(), descr.name().c_str());
-	}
-	program_ = it->second.get();
+	program_name_ = arguments.front();
 
 	//  Override with specified handling methods.
 	if (arguments.size() > 1) {
@@ -767,13 +758,15 @@ ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments,
 		}
 		handling_methods_[program_result_index(result_to_set_method_for)] = handling_method;
 	}
+
+	assert(!program_name_.empty());
 }
 
 void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 	ProgramResult const program_result = ps.top_state().phase;
 
 	if (program_result == ProgramResult::kNone) {  //  The program has not yet been called.
-		return ps.program_start(game, program_->name());
+		return ps.program_start(game, program_name_);
 	}
 
 	switch (handling_methods_[program_result_index(program_result)]) {
@@ -1800,7 +1793,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   new ActReturn(parseinput.arguments, *building, tribes)));
 			} else if (parseinput.name == "call") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActCall(parseinput.arguments, *building)));
+				   new ActCall(parseinput.arguments)));
 			} else if (parseinput.name == "sleep") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActSleep(parseinput.arguments, *building)));
@@ -1890,5 +1883,24 @@ const Buildcost& ProductionProgram::produced_wares() const {
 }
 const Buildcost& ProductionProgram::recruited_workers() const {
 	return recruited_workers_;
+}
+
+void ProductionProgram::validate_calls(const ProductionSiteDescr& descr) const {
+	for (const auto& action: actions_) {
+		const ActCall* act_call = dynamic_cast<const ActCall*>(action.get());
+		if (act_call != nullptr) {
+			const std::string& program_name = act_call->program_name();
+			if (name() == program_name) {
+				throw GameDataError("Production program '%s' in %s is calling itself",
+									program_name.c_str(), descr.name().c_str());
+			}
+			const ProductionSiteDescr::Programs& programs = descr.programs();
+			ProductionSiteDescr::Programs::const_iterator const it = programs.find(program_name);
+			if (it == programs.end()) {
+				throw GameDataError("Trying to call unknown program '%s' in %s",
+									program_name.c_str(), descr.name().c_str());
+			}
+		}
+	}
 }
 }  // namespace Widelands
