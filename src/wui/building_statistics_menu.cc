@@ -19,6 +19,8 @@
 
 #include "wui/building_statistics_menu.h"
 
+#include <boost/algorithm/string.hpp>
+
 #include "base/i18n.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -788,7 +790,7 @@ void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 
 void BuildingStatisticsMenu::low_production_changed() {
 	const std::string cutoff = unproductive_percent_.text();
-	int number = std::atoi(cutoff.c_str());
+	int number = boost::lexical_cast<int>(cutoff.c_str());
 
 	// Make sure that the user specified a correct number
 	if (std::to_string(number) == cutoff && 0 <= number && number <= 100) {

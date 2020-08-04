@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
             "consume=marble:2",
             "sleep=50000",
             "playsound=sound/stonecutting/stonemason 192",
-            "animate=working 32000",
+            "animate=working duration:32s",
             "produce=marble_column"
          }
       },

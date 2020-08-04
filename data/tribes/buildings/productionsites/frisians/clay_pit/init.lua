@@ -46,16 +46,6 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      frisians_aqua_farm = true,
-      frisians_charcoal_burners_house = true,
-      frisians_clay_pit = false,
-      frisians_berry_farm = false,
-      frisians_reed_farm = false,
-      frisians_farm = false,
-      frisians_foresters_house = false,
-   },
-
    aihints = {
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
@@ -83,7 +73,7 @@ tribes:new_productionsite_type {
             "callworker=dig",
             "consume=water",
             "sleep=22000",
-            "animate=working 17000",
+            "animate=working duration:17s",
             "sleep=1000",
             "produce=clay"
          },

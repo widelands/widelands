@@ -308,6 +308,12 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 		}
 	}
 
+	if (act->iparam2 >= 0) {
+		collected_attributes_.insert(
+		   std::make_pair(act->sparam1 == "immovable" ? MapObjectType::IMMOVABLE : MapObjectType::BOB,
+		                  act->iparam2));
+	}
+
 	workarea_info_[act->iparam1].insert(" findobject");
 }
 
@@ -449,6 +455,15 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 		throw GameDataError("findspace: must specify size");
 	}
 	workarea_info_[act->iparam1].insert(" findspace");
+
+	if (!act->sparam1.empty()) {
+		if (act->iparam4 == 1) {
+			// breeds
+			created_resources_.insert(act->sparam1);
+		} else {
+			collected_resources_.insert(act->sparam1);
+		}
+	}
 }
 
 /* RST
@@ -594,7 +609,7 @@ callobject
          "return"
       }
 
-   See also :doc:`immovable_program`.
+   See also :ref:`immovable_programs`.
 */
 /**
  * sparam1 = callobject command name
@@ -680,10 +695,10 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 		}
 
 		const std::string attrib_name = read_key_value_pair(cmd[i], ':', "", "attrib").second;
-
-		// This will throw a GameDataError if the attribute doesn't exist.
-		ImmovableDescr::get_attribute_id(attrib_name);
 		act->sparamv.push_back(attrib_name);
+		// get_attribute_id will throw a GameDataError if the attribute doesn't exist.
+		created_attributes_.insert(
+		   std::make_pair(MapObjectType::IMMOVABLE, ImmovableDescr::get_attribute_id(attrib_name)));
 	}
 }
 
@@ -723,6 +738,11 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 
 	act->function = &Worker::run_createbob;
 	act->sparamv = cmd;
+
+	// Register created bobs
+	for (const std::string& bobname : act->sparamv) {
+		created_bobs_.insert(bobname);
+	}
 }
 
 /* RST

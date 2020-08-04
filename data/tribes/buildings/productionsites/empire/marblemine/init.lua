@@ -42,11 +42,6 @@ tribes:new_productionsite_type {
       basic_amount = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_marblemine = false,
-      empire_marblemine_deep = false,
-   },
-
    working_positions = {
       empire_miner = 1
    },
@@ -94,7 +89,7 @@ tribes:new_productionsite_type {
       a_mine_produce_granite = {
          descname = _"mining granite",
          actions = {
-            "animate=working 10500",
+            "animate=working duration:10s500ms",
             "mine=stones 2 50 5 17",
             "produce=granite",
          }
@@ -102,7 +97,7 @@ tribes:new_productionsite_type {
       a_mine_produce_marble = {
          descname = _"mining marble",
          actions = {
-            "animate=working 10500",
+            "animate=working duration:10s500ms",
             "mine=stones 2 50 5 17",
             "produce=marble",
          }

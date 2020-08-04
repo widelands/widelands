@@ -33,11 +33,6 @@ tribes:new_productionsite_type {
       empire_lumberjack = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_lumberjacks_house = false,
-      empire_foresters_house = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...

@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    attributes = { "field" },
    programs = {
       program = {
-         "animate=idle 45000",
+         "animate=idle duration:45s",
          "transform=blackrootfield_medium",
       }
    },

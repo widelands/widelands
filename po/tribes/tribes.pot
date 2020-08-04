@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-23 07:46+0000\n"
+"POT-Creation-Date: 2020-08-01 01:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -3846,67 +3846,67 @@ msgctxt "immovable"
 msgid "Wheat Field (tiny)"
 msgstr ""
 
-#: ../../data/tribes/init.lua:19
+#: ../../data/tribes/init.lua:21
 msgid "Loading tribes: %1$s (%2$d/%3$d)"
 msgstr ""
 
-#: ../../data/tribes/init.lua:33
+#: ../../data/tribes/init.lua:35
 msgid "Ships"
 msgstr ""
 
-#: ../../data/tribes/init.lua:45 ../../data/tribes/scripting/help/init.lua:85
+#: ../../data/tribes/init.lua:47 ../../data/tribes/scripting/help/init.lua:85
 msgid "Wares"
 msgstr ""
 
-#: ../../data/tribes/init.lua:161 ../../data/tribes/scripting/help/init.lua:106
+#: ../../data/tribes/init.lua:163 ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
 msgstr ""
 
-#: ../../data/tribes/init.lua:221
+#: ../../data/tribes/init.lua:223
 msgid "Atlantean workers"
 msgstr ""
 
-#: ../../data/tribes/init.lua:254
+#: ../../data/tribes/init.lua:256
 msgid "Barbarian workers"
 msgstr ""
 
-#: ../../data/tribes/init.lua:289
+#: ../../data/tribes/init.lua:291
 msgid "Empire workers"
 msgstr ""
 
-#: ../../data/tribes/init.lua:325
+#: ../../data/tribes/init.lua:327
 msgid "Frisian workers"
 msgstr ""
 
-#: ../../data/tribes/init.lua:369
+#: ../../data/tribes/init.lua:371
 msgid "Warehouses"
 msgstr ""
 
-#: ../../data/tribes/init.lua:391
+#: ../../data/tribes/init.lua:393
 msgid "Atlantean productionsites"
 msgstr ""
 
-#: ../../data/tribes/init.lua:429
+#: ../../data/tribes/init.lua:431
 msgid "Barbarian productionsites"
 msgstr ""
 
-#: ../../data/tribes/init.lua:474
+#: ../../data/tribes/init.lua:476
 msgid "Empire productionsites"
 msgstr ""
 
-#: ../../data/tribes/init.lua:518
+#: ../../data/tribes/init.lua:520
 msgid "Frisian productionsites"
 msgstr ""
 
-#: ../../data/tribes/init.lua:573
+#: ../../data/tribes/init.lua:575
 msgid "Trainingsites"
 msgstr ""
 
-#: ../../data/tribes/init.lua:590
+#: ../../data/tribes/init.lua:592
 msgid "Militarysites"
 msgstr ""
 
-#: ../../data/tribes/init.lua:624
+#: ../../data/tribes/init.lua:626
 msgid "Finishing"
 msgstr ""
 

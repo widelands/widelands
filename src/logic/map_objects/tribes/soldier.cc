@@ -101,7 +101,6 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),
      evade_(table.get_table("evade")) {
-	add_attribute(MapObject::Attribute::SOLDIER);
 
 	// Battle animations
 	// attack_success_*-> soldier is attacking and hit his opponent
@@ -1649,7 +1648,9 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 				multiplesoldiers = true;
 			}
 
-			if (soldier->get_battle()) {
+			if (soldier->get_battle() &&
+			    game.map().calc_distance(soldier->get_battle()->first()->get_position(),
+			                             soldier->get_battle()->second()->get_position()) < 2) {
 				foundbattle = true;
 
 				if (battle_ && battle_->opponent(*this) == soldier) {

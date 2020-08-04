@@ -18,7 +18,7 @@ tribes:new_worker_type {
       hunt = {
          "findobject=type:bob radius:14 attrib:eatable",
          "walk=object",
-         "animate=idle 1000",
+         "animate=idle duration:1s",
          "callobject=remove",
          "createware=meat",
          "return"

@@ -64,7 +64,7 @@ tribes:new_productionsite_type {
             "sleep=3500",
             "consume=corn",
             "playsound=sound/mill/mill_turning 240",
-            "animate=working 15000",
+            "animate=working duration:15s",
             "produce=cornmeal"
          }
       },
@@ -77,7 +77,7 @@ tribes:new_productionsite_type {
             "consume=blackroot",
             "sleep=3500",
             "playsound=sound/mill/mill_turning 240",
-            "animate=working 15000",
+            "animate=working duration:15s",
             "produce=blackroot_flour"
          }
       },
