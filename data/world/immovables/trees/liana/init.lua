@@ -76,7 +76,7 @@ world:new_immovable_type{
          "animate=idle duration:55s",
          "remove=success:10",
          "seed=liana_wasteland_sapling 30",
-         "animate=idle 30000",
+         "animate=idle duration:30s",
          "remove=success:10",
          "grow=liana_wasteland_old",
       },
