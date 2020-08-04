@@ -1541,48 +1541,57 @@ bool Player::is_attack_forbidden(PlayerNumber who) const {
 }
 
 void Player::add_soldier(unsigned h, unsigned a, unsigned d, unsigned e) {
-	++soldier_stats_[std::make_tuple(h, a, d, e)];
+	SoldierStatistics ss(h, a, d, e);
+	auto it = std::find(soldier_stats_.begin(), soldier_stats_.end(), ss);
+	if (it == soldier_stats_.end()) {
+		++ss.total;
+		soldier_stats_.push_back(ss);
+	} else {
+		++it->total;
+	}
 }
 void Player::remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e) {
-	assert(count_soldiers(h, a, d, e));
-	--soldier_stats_[std::make_tuple(h, a, d, e)];
+	auto it = std::find(soldier_stats_.begin(), soldier_stats_.end(), SoldierStatistics(h, a, d, e));
+	assert(it != soldier_stats_.end());
+	assert(it->total > 0);
+	--it->total;
 }
 uint32_t Player::count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const {
-	const auto it = soldier_stats_.find(std::make_tuple(h, a, d, e));
-	return it == soldier_stats_.end() ? 0 : it->second;
+	const auto it = std::find(soldier_stats_.begin(), soldier_stats_.end(), SoldierStatistics(h, a, d, e));
+	return it == soldier_stats_.end() ? 0 : it->total;
 }
 uint32_t Player::count_soldiers_h(unsigned value) const {
 	uint32_t s = 0;
-	for (const auto& pair : soldier_stats_) {
-		if (std::get<0>(pair.first) == value) {
-			s += pair.second;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		if (ss.h == value) {
+			s += ss.total;
 		}
 	}
 	return s;
 }
 uint32_t Player::count_soldiers_a(unsigned value) const {
 	uint32_t s = 0;
-	for (const auto& pair : soldier_stats_) {
-		if (std::get<1>(pair.first) == value) {
-			s += pair.second;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		if (ss.a == value) {
+			s += ss.total;
 		}
 	}
 	return s;
 }
 uint32_t Player::count_soldiers_d(unsigned value) const {
 	uint32_t s = 0;
-	for (const auto& pair : soldier_stats_) {
-		if (std::get<2>(pair.first) == value) {
-			s += pair.second;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		if (ss.d == value) {
+			s += ss.total;
 		}
 	}
 	return s;
 }
 uint32_t Player::count_soldiers_e(unsigned value) const {
 	uint32_t s = 0;
-	for (const auto& pair : soldier_stats_) {
-		if (std::get<3>(pair.first) == value) {
-			s += pair.second;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		if (ss.e == value) {
+			s += ss.total;
 		}
 	}
 	return s;

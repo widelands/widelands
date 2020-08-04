@@ -37,7 +37,7 @@ private:
 
 	const Widelands::Player& player_;
 
-	unsigned ma_, md_, mh_, me_;
+	unsigned max_attack_, max_defense_, max_health_, max_evade_;
 
 	std::vector<UI::Icon*> icons_all_;
 	std::vector<UI::Textarea*> labels_all_;

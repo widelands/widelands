@@ -36,18 +36,18 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 	// and Health and Defense level gradients vertically
 	const Widelands::SoldierDescr& soldier = dynamic_cast<const Widelands::SoldierDescr&>(
 	   *player_.tribe().get_worker_descr(player_.tribe().soldier()));
-	ma_ = soldier.get_max_attack_level();
-	md_ = soldier.get_max_defense_level();
-	mh_ = soldier.get_max_health_level();
-	me_ = soldier.get_max_evade_level();
+	max_attack_ = soldier.get_max_attack_level();
+	max_defense_ = soldier.get_max_defense_level();
+	max_health_ = soldier.get_max_health_level();
+	max_evade_ = soldier.get_max_evade_level();
 
-	for (unsigned health = 0; health <= mh_; ++health) {
-		for (unsigned defense = 0; defense <= md_; ++defense) {
+	for (unsigned health = 0; health <= max_health_; ++health) {
+		for (unsigned defense = 0; defense <= max_defense_; ++defense) {
 			UI::Box* hbox1 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
 			UI::Box* hbox2 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
 			UI::Box* hbox3 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-			for (unsigned attack = 0; attack <= ma_; ++attack) {
-				for (unsigned evade = 0; evade <= me_; ++evade) {
+			for (unsigned attack = 0; attack <= max_attack_; ++attack) {
+				for (unsigned evade = 0; evade <= max_evade_; ++evade) {
 					if (attack || evade) {
 						hbox1->add_space(8);
 						hbox2->add_space(8);
@@ -104,7 +104,7 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 	UI::Box* hbox3 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
 	UI::Box* hbox4 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
 
-	for (unsigned h = 0; h <= mh_; ++h) {
+	for (unsigned h = 0; h <= max_health_; ++h) {
 		UI::Icon* i = new UI::Icon(hbox1, soldier.get_health_level_pic(h));
 		UI::Textarea* txt = new UI::Textarea(hbox1, "", UI::Align::kLeft);
 		txt->set_fixed_width(8 * i->get_w());
@@ -118,7 +118,7 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		i->set_tooltip(tt);
 		txt->set_tooltip(tt);
 	}
-	for (unsigned a = 0; a <= ma_; ++a) {
+	for (unsigned a = 0; a <= max_attack_; ++a) {
 		UI::Icon* i = new UI::Icon(hbox2, soldier.get_attack_level_pic(a));
 		UI::Textarea* txt = new UI::Textarea(hbox2, "", UI::Align::kLeft);
 		txt->set_fixed_width(8 * i->get_w());
@@ -132,7 +132,7 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		i->set_tooltip(tt);
 		txt->set_tooltip(tt);
 	}
-	for (unsigned d = 0; d <= md_; ++d) {
+	for (unsigned d = 0; d <= max_defense_; ++d) {
 		UI::Icon* i = new UI::Icon(hbox3, soldier.get_defense_level_pic(d));
 		UI::Textarea* txt = new UI::Textarea(hbox3, "", UI::Align::kLeft);
 		txt->set_fixed_width(8 * i->get_w());
@@ -146,7 +146,7 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		i->set_tooltip(tt);
 		txt->set_tooltip(tt);
 	}
-	for (unsigned e = 0; e <= me_; ++e) {
+	for (unsigned e = 0; e <= max_evade_; ++e) {
 		UI::Icon* i = new UI::Icon(hbox4, soldier.get_evade_level_pic(e));
 		UI::Textarea* txt = new UI::Textarea(hbox4, "", UI::Align::kLeft);
 		txt->set_fixed_width(8 * i->get_w());
@@ -178,10 +178,10 @@ void SoldierStatisticsMenu::think() {
 
 void SoldierStatisticsMenu::update() {
 	unsigned index = 0;
-	for (unsigned h = 0; h <= mh_; ++h) {
-		for (unsigned d = 0; d <= md_; ++d) {
-			for (unsigned a = 0; a <= ma_; ++a) {
-				for (unsigned e = 0; e <= me_; ++e) {
+	for (unsigned h = 0; h <= max_health_; ++h) {
+		for (unsigned d = 0; d <= max_defense_; ++d) {
+			for (unsigned a = 0; a <= max_attack_; ++a) {
+				for (unsigned e = 0; e <= max_evade_; ++e) {
 					const uint32_t nr = player_.count_soldiers(h, a, d, e);
 					labels_all_[index]->set_text(nr ? get_amount_string(nr, true) : "");
 					labels_all_[index]->set_tooltip(std::to_string(nr));
@@ -195,25 +195,25 @@ void SoldierStatisticsMenu::update() {
 	}
 
 	index = 0;
-	for (unsigned h = 0; h <= mh_; ++h) {
+	for (unsigned h = 0; h <= max_health_; ++h) {
 		const uint32_t nr = player_.count_soldiers_h(h);
 		icons_detail_[index]->set_grey_out(nr == 0);
 		labels_detail_[index]->set_text((boost::format(_("×%u")) % nr).str());
 		++index;
 	}
-	for (unsigned a = 0; a <= ma_; ++a) {
+	for (unsigned a = 0; a <= max_attack_; ++a) {
 		const uint32_t nr = player_.count_soldiers_a(a);
 		icons_detail_[index]->set_grey_out(nr == 0);
 		labels_detail_[index]->set_text((boost::format(_("×%u")) % nr).str());
 		++index;
 	}
-	for (unsigned d = 0; d <= md_; ++d) {
+	for (unsigned d = 0; d <= max_defense_; ++d) {
 		const uint32_t nr = player_.count_soldiers_d(d);
 		icons_detail_[index]->set_grey_out(nr == 0);
 		labels_detail_[index]->set_text((boost::format(_("×%u")) % nr).str());
 		++index;
 	}
-	for (unsigned e = 0; e <= me_; ++e) {
+	for (unsigned e = 0; e <= max_evade_; ++e) {
 		const uint32_t nr = player_.count_soldiers_e(e);
 		icons_detail_[index]->set_grey_out(nr == 0);
 		labels_detail_[index]->set_text((boost::format(_("×%u")) % nr).str());

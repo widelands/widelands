@@ -700,7 +700,22 @@ private:
 
 	PlayerBuildingStats building_stats_;
 
-	std::map<std::tuple<unsigned, unsigned, unsigned, unsigned>, uint32_t> soldier_stats_;
+	struct SoldierStatistics {
+		const unsigned h, a, d, e;
+		Quantity total;
+		SoldierStatistics(unsigned _h, unsigned _a, unsigned _d, unsigned _e) : h(_h), a(_a), d(_d), e(_e), total(0) {
+		}
+		bool operator==(const SoldierStatistics& s) const {
+			return s.h == h && s.a == a && s.d == d && s.e == e;
+		}
+		bool operator<(const SoldierStatistics& s) const {
+			return h != s.h ? h < s.h :
+				a != s.a ? a < s.a :
+					d != s.d ? d < s.d :
+						e != s.e ? e < s.e : false;
+		}
+	};
+	std::vector<SoldierStatistics> soldier_stats_;
 
 	FxId message_fx_;
 	FxId attack_fx_;
