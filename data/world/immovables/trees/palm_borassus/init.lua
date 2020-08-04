@@ -17,7 +17,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m10s",
-         "remove=80",
+         "remove=success:80",
          "grow=palm_borassus_desert_pole",
       },
    },
@@ -44,7 +44,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m10s",
-         "remove=70",
+         "remove=success:70",
          "grow=palm_borassus_desert_mature",
       },
    },
@@ -71,7 +71,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m5s",
-         "remove=40",
+         "remove=success:40",
          "grow=palm_borassus_desert_old",
       },
    },
@@ -100,7 +100,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:33m20s",
-         "transform=deadtree5 25",
+         "transform=deadtree5 success:25",
          "seed=palm_borassus_desert_sapling 160",
       },
       fall = {

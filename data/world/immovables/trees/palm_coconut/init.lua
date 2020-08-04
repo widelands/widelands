@@ -17,7 +17,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:55s",
-         "remove=42",
+         "remove=success:42",
          "grow=palm_coconut_desert_pole",
       },
    },
@@ -44,7 +44,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:55s",
-         "remove=33",
+         "remove=success:33",
          "grow=palm_coconut_desert_mature",
       },
    },
@@ -71,7 +71,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m",
-         "remove=23",
+         "remove=success:23",
          "grow=palm_coconut_desert_old",
       },
    },
@@ -100,7 +100,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:25m50s",
-         "transform=deadtree6 36",
+         "transform=deadtree6 success:36",
          "seed=palm_coconut_desert_sapling 100",
       },
       fall = {

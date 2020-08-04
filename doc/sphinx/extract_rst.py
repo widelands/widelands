@@ -24,6 +24,7 @@ cpp_pairs = (
     ('src/scripting/lua_globals.cc', 'autogen_globals.rst'),
     ('src/scripting/lua_path.cc', 'autogen_path.rst'),
     ('src/logic/map_objects/tribes/worker_program.cc', 'autogen_tribes_worker_programs.rst'),
+    ('src/logic/map_objects/immovable_program.cc', 'autogen_immovable_programs.rst'),
     ('src/logic/map_objects/tribes/production_program.cc', 'autogen_tribes_productionsite_programs.rst'),
 )
 
