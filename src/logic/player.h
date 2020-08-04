@@ -560,6 +560,11 @@ public:
 	void add_seer(const MapObject&);
 	void remove_seer(const MapObject&, const Area<FCoords>&);
 
+  bool is_muted(DescriptionIndex di) const {
+		return muted_building_types_.count(di);
+	}
+	void set_muted(DescriptionIndex, bool mute);
+
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
@@ -639,6 +644,8 @@ private:
 	 * ware_stocks_[ware_id][time_index]
 	 */
 	std::vector<std::vector<uint32_t>> ware_stocks_;
+
+	std::set<DescriptionIndex> muted_building_types_;
 
 	std::set<PlayerNumber> forbid_attack_;
 

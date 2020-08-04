@@ -84,7 +84,7 @@ tribes:new_productionsite_type {
             "consume=coal iron:2 gold",
             "sleep=24000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 24000",
+            "animate=working duration:24s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=sword_broad"
@@ -99,7 +99,7 @@ tribes:new_productionsite_type {
             "consume=coal:2 iron:2 gold",
             "sleep=24000",
             "playsound=sound/smiths/smith 192",
-            "animate=working 24000",
+            "animate=working duration:24s",
             "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=sword_double"
@@ -113,7 +113,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs helmet_golden",
             "consume=coal:2 iron:2 gold",
             "sleep=30000",
-            "animate=working 37000",
+            "animate=working duration:37s",
             "produce=helmet_golden"
          },
       },

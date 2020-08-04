@@ -880,6 +880,11 @@ void Game::send_player_set_stock_policy(Building& imm,
 	   get_gametime(), imm.get_owner()->player_number(), imm, ww == wwWORKER, di, sp));
 }
 
+void Game::send_player_toggle_mute(const Building& b, bool all) {
+	send_player_command(
+	   new CmdToggleMuteMessages(get_gametime(), b.owner().player_number(), b, all));
+}
+
 int Game::propose_trade(const Trade& trade) {
 	// TODO(sirver,trading): Check if a trade is possible (i.e. if there is a
 	// path between the two markets);

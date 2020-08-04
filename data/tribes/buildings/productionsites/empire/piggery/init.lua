@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
             "consume=water wheat",
             "sleep=10000",
             "playsound=sound/farm/farm_animal 180",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=meat"
          }
       },

@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
       mine_produce_granite = {
          descname = _"mining marble",
          actions = {
-            "animate=working 7800",
+            "animate=working duration:7s800ms",
             "mine=stones 2 100 5 2",
             "produce=granite",
          }
@@ -74,7 +74,7 @@ tribes:new_productionsite_type {
       mine_produce_marble = {
          descname = _"mining marble",
          actions = {
-            "animate=working 7800",
+            "animate=working duration:7s800ms",
             "mine=stones 2 100 5 2",
             "produce=marble",
          }
