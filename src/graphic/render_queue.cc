@@ -251,8 +251,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 		case Program::kTerrainDither: {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			dither_program_->draw(item.terrain_arguments.gametime, *item.terrain_arguments.terrains,
-			                      *item.terrain_arguments.fields_to_draw,
-			                      item.z_value + kOpenGlZDelta);
+			                      *item.terrain_arguments.fields_to_draw, item.z_value);
 			++i;
 		} break;
 
@@ -276,10 +275,9 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 
 		case Program::kTerrainRoad: {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
-			road_program_->draw(item.terrain_arguments.renderbuffer_width,
-			                    item.terrain_arguments.renderbuffer_height,
-			                    *item.terrain_arguments.fields_to_draw, item.terrain_arguments.scale,
-			                    item.z_value + 2 * kOpenGlZDelta);
+			road_program_->draw(
+			   item.terrain_arguments.renderbuffer_width, item.terrain_arguments.renderbuffer_height,
+			   *item.terrain_arguments.fields_to_draw, item.terrain_arguments.scale, item.z_value);
 			++i;
 		} break;
 
