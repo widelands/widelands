@@ -17,7 +17,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 55s",
-         "remove=42",
+         "remove=success:42",
          "grow=spruce_summer_pole",
       },
    },
@@ -44,7 +44,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:55s",
-         "remove=33",
+         "remove=success:33",
          "grow=spruce_summer_mature",
       },
    },
@@ -71,7 +71,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m",
-         "remove=23",
+         "remove=success:23",
          "grow=spruce_summer_old",
       },
    },
@@ -100,7 +100,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:25m50s",
-         "transform=deadtree3 24",
+         "transform=deadtree3 success:24",
          "seed=spruce_summer_sapling 200",
       },
       fall = {
