@@ -75,11 +75,14 @@ Map object programs are put in a Lua table, like this::
       }
    },
 
-* Named parameters of the form ``parameter:value`` can be given in any order, but we recommend using the order from the documentation for consistency. It will make your code easier to read.
+* Named parameters of the form ``parameter:value`` can be given in any order, but we recommend using
+the order from the documentation for consistency. It will make your code easier to read.
 * Values without parameter name need to be given in the correct order.
 * Some actions combine both named and unnamed values, see ``action5`` in our example.
 
-The first program is the default program that calls all the other programs. For productionsites, this is ``"work"`` and for immovables, this is ``"program"``. Workers have no defaut program, because their individual programs are called from their production site.
+The first program is the default program that calls all the other programs. For productionsites,
+this is ``"work"`` and for immovables, this is ``"program"``. Workers have no defaut program,
+because their individual programs are called from their production site.
 
 
 .. _map_object_programs_datatypes:
@@ -202,7 +205,8 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 		// TODO(GunChleoc): Compatibility, remove unitless option after v1.0
 		boost::regex without_unit("^(\\d+)$");
 		if (boost::regex_match(input, without_unit)) {
-			log("WARNING: Duration '%s' without unit in %s's program is deprecated\n", input.c_str(), descr.name().c_str());
+			log("WARNING: Duration '%s' without unit in %s's program is deprecated\n", input.c_str(),
+			    descr.name().c_str());
 			return read_positive(input, endless());
 		}
 	} catch (const WException& e) {
@@ -261,7 +265,9 @@ animate
    Switch to new animation and pause program execution for the given duration.
 
    :arg string name: The name of the animation to be played.
-   :arg duration duration: The time :ref:`map_object_programs_datatypes_duration` for which the program will wait before continuing on to the next action. If omitted, the program will continue to the next step immediately.
+   :arg duration duration: The time :ref:`map_object_programs_datatypes_duration` for which the
+program will wait before continuing on to the next action. If omitted, the program will continue to
+the next step immediately.
 
    Example for a worker::
 
@@ -274,9 +280,14 @@ animate
          "return"
       },
 
-The animate action will trigger a new animation, then wait for the specified duration before moving on to the next action in the program. The animation will continue playing and loop around until the program ends or another ``animate=`` action is called. The given duration does not have to equal the length of the animation.
+The animate action will trigger a new animation, then wait for the specified duration before moving
+on to the next action in the program. The animation will continue playing and loop around until the
+program ends or another ``animate=`` action is called. The given duration does not have to equal the
+length of the animation.
 
-When the program ends, the map object will switch back to the default ``idle`` animation. Some actions also have an animation associated with them that will be played instead, e.g. ``"walk=coords"`` will play the walking animation for the direction the worker is walking in.
+When the program ends, the map object will switch back to the default ``idle`` animation. Some
+actions also have an animation associated with them that will be played instead, e.g.
+``"walk=coords"`` will play the walking animation for the direction the worker is walking in.
 */
 MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
    const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
@@ -302,7 +313,9 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 		} else if (item.second.empty()) {
 			// TODO(GunChleoc): Compatibility, remove this option after v1.0
 			result.duration = read_duration(item.first, descr);
-			log("WARNING: 'animate' program without parameter name is deprecated, please use 'animate=<animation_name> duration:<duration>' in %s\n", descr.name().c_str());
+			log("WARNING: 'animate' program without parameter name is deprecated, please use "
+			    "'animate=<animation_name> duration:<duration>' in %s\n",
+			    descr.name().c_str());
 		} else {
 			throw GameDataError("Unknown argument '%s'. Usage: <animation_name> [duration:<duration>]",
 			                    arguments.at(1).c_str());
