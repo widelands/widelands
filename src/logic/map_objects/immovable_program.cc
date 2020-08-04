@@ -46,8 +46,8 @@ allow workers to interact with an immovable (e.g. a tree will need a "fall" prog
 woodcutters to remove the tree).
 
 It is not mandatory for immovables to define programs. If the immovable defines a program named
-``program``, this program will be started as the main program on creation. Immovables without such a
-program will simply display their main animation indefinitely.
+``main``, this program will be started as the main program on creation. Immovables without such a
+program will simply display their 'idle' animation indefinitely.
 
 Programs are defined as Lua tables. Each program must be declared as a subtable in the immovable's
 Lua table called ``programs`` and have a unique table key. The entries in a program's subtable are
@@ -56,7 +56,7 @@ the ``actions`` to execute, like this:
 .. code-block:: lua
 
    programs = {
-      program = {
+      main = {
          "animate=idle 1550000",
          "transform=deadtree4 chance:5.13%",
          "seed=alder_summer_sapling 180",

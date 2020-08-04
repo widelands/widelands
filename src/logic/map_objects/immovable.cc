@@ -193,8 +193,15 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 			                    program_name.c_str(), name().c_str());
 		}
 		try {
-			programs_[program_name] = new ImmovableProgram(
-			   program_name, programs->get_table(program_name)->array_entries<std::string>(), *this);
+			// TODO(GunChleoc): Compatibility, remove after v1.0
+			if (program_name == "program") {
+				log("WARNING: The main program for the immovable %s should be renamed from 'program' to 'main'\n", name().c_str());
+				programs_["main"] = new ImmovableProgram(
+				   "main", programs->get_table(program_name)->array_entries<std::string>(), *this);
+			} else {
+				programs_[program_name] = new ImmovableProgram(
+				   program_name, programs->get_table(program_name)->array_entries<std::string>(), *this);
+			}
 		} catch (const std::exception& e) {
 			throw GameDataError("%s: Error in immovable program %s: %s", name().c_str(),
 			                    program_name.c_str(), e.what());
@@ -249,11 +256,11 @@ const TerrainAffinity& ImmovableDescr::terrain_affinity() const {
 }
 
 void ImmovableDescr::make_sure_default_program_is_there() {
-	if (!programs_.count("program")) {  //  default program
+	if (!programs_.count("main")) {  //  default program
 		assert(is_animation_known("idle"));
 		std::vector<std::string> arguments{"idle"};
-		programs_["program"] =
-		   new ImmovableProgram("program", std::unique_ptr<ImmovableProgram::Action>(
+		programs_["main"] =
+		   new ImmovableProgram("main", std::unique_ptr<ImmovableProgram::Action>(
 		                                      new ImmovableProgram::ActAnimate(arguments, *this)));
 	}
 }
@@ -272,14 +279,21 @@ ImmovableDescr::~ImmovableDescr() {
  * Find the program of the given name.
  */
 ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_name) const {
-	Programs::const_iterator const it = programs_.find(program_name);
-
-	if (it == programs_.end()) {
-		throw GameDataError(
-		   "immovable %s has no program \"%s\"", name().c_str(), program_name.c_str());
+	{
+		Programs::const_iterator const it = programs_.find(program_name);
+		if (it != programs_.end()) {
+			return it->second;
+		}
 	}
 
-	return it->second;
+	// Program not found - fall back to "main" for permanent map compatibility
+	Programs::const_iterator const it = programs_.find("main");
+	if (it != programs_.end()) {
+		return it->second;
+	}
+
+	throw GameDataError(
+	   "immovable %s has no program \"%s\"", name().c_str(), program_name.c_str());
 }
 
 /**
@@ -363,7 +377,7 @@ bool Immovable::init(EditorGameBase& egbase) {
 	//  Set animation data according to current program state.
 	ImmovableProgram const* prog = program_;
 	if (!prog) {
-		prog = descr().get_program("program");
+		prog = descr().get_program("main");
 	}
 	assert(prog != nullptr);
 
@@ -372,7 +386,7 @@ bool Immovable::init(EditorGameBase& egbase) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		switch_program(*game, "program");
+		switch_program(*game, "main");
 	}
 	return true;
 }
@@ -559,14 +573,15 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	{  //  program
 		std::string program_name;
 		if (1 == packet_version) {
-			program_name = fr.unsigned_8() ? fr.c_string() : "program";
+			program_name = fr.unsigned_8() ? fr.c_string() : "main";
 			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 		} else {
 			program_name = fr.c_string();
 			if (program_name.empty()) {
-				program_name = "program";
+				program_name = "main";
 			}
 		}
+
 		imm.program_ = imm.descr().get_program(program_name);
 	}
 	imm.program_ptr_ = fr.unsigned_32();
