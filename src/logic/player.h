@@ -560,7 +560,7 @@ public:
 	void add_seer(const MapObject&);
 	void remove_seer(const MapObject&, const Area<FCoords>&);
 
-  bool is_muted(DescriptionIndex di) const {
+	bool is_muted(DescriptionIndex di) const {
 		return muted_building_types_.count(di);
 	}
 	void set_muted(DescriptionIndex, bool mute);
