@@ -76,7 +76,7 @@ Map object programs are put in a Lua table, like this::
    },
 
 * Named parameters of the form ``parameter:value`` can be given in any order, but we recommend using
-the order from the documentation for consistency. It will make your code easier to read.
+  the order from the documentation for consistency. It will make your code easier to read.
 * Values without parameter name need to be given in the correct order.
 * Some actions combine both named and unnamed values, see ``action5`` in our example.
 
@@ -266,8 +266,8 @@ animate
 
    :arg string name: The name of the animation to be played.
    :arg duration duration: The time :ref:`map_object_programs_datatypes_duration` for which the
-program will wait before continuing on to the next action. If omitted, the program will continue to
-the next step immediately.
+      program will wait before continuing on to the next action. If omitted, the program will
+      continue to the next step immediately.
 
    Example for a worker::
 
