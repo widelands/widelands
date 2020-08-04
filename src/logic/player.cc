@@ -1568,7 +1568,8 @@ void Player::remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e) {
 	--it->total;
 }
 uint32_t Player::count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const {
-	const auto it = std::find(soldier_stats_.begin(), soldier_stats_.end(), SoldierStatistics(h, a, d, e));
+	const auto it =
+	   std::find(soldier_stats_.begin(), soldier_stats_.end(), SoldierStatistics(h, a, d, e));
 	return it == soldier_stats_.end() ? 0 : it->total;
 }
 uint32_t Player::count_soldiers_h(unsigned value) const {
