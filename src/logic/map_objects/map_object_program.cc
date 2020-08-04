@@ -33,14 +33,59 @@ Programs
 
 Some map object will have special programs that define their behavior.
 You can describe these programs in their ``init.lua`` files, in the ``programs``
-table. Map objects that can have programs are:
+table.
+
+* :ref:`map_object_programs_syntax`
+* :ref:`map_object_programs_datatypes`
+* :ref:`map_object_programs_actions`
+
+Map objects that can have programs are:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
 
+   Immovables <autogen_immovable_programs>
    Production Sites <autogen_tribes_productionsite_programs>
    Workers <autogen_tribes_worker_programs>
-   Immovables <immovable_program>
+
+.. _map_object_programs_syntax:
+
+Syntax
+------
+
+Map object programs are put in a Lua table, like this::
+
+   programs = {
+      default_program = {
+         "program_name2",
+         "program_name3",
+      }
+      program_name2 = {
+         "action1=parameter1:value1 parameter2:value2",
+         "action2=value1",
+      },
+      program_name3 = {
+         "action3",
+         "action4=value1 value2 value3",
+      },
+	  program_name4 = {
+         "action5=value1 value2 parameter:value3",
+      }
+   },
+
+* Named parameters of the form ``parameter:value`` can be given in any order, but we recommend using the order from the documentation for consistency. It will make your code easier to read.
+* Values without parameter name need to be given in the correct order.
+* Some actions combine both named and unnamed parameters, see ``action5`` in our example.
+
+The first program is the default program that calls all the other programs. For productionsites, this is ``"work"`` and for immovables, this is ``"program"``. Workers have no defaut program, because their individual programs are called from their production site.
+
+
+.. _map_object_programs_datatypes:
+
+Data Types
+----------
+
+Some numerical action parameters use units of measure to clarify their meaning.
 */
 
 namespace Widelands {
@@ -89,6 +134,31 @@ unsigned int MapObjectProgram::read_positive(const std::string& input, int64_t m
 	return read_int(input, 1, max_value);
 }
 
+/* RST
+
+.. _map_object_programs_datatypes_duration:
+
+Duration
+^^^^^^^^
+
+Temporal duration is specified with an accompanying unit. Valid units are:
+
+* ``m`` (minutes)
+* ``s`` (seconds)
+* ``ms`` (milliseconds)
+
+You can combine them in descending order as you please. Examples:
+
+* ``4m``
+* ``12s``
+* ``500ms``
+* ``4m12s``
+* ``12s500ms``
+* ``4m500ms``
+* ``4m12s500ms``
+* ``1m500s100000ms`` will work too, but is not recommended (unreadable)
+
+*/
 Duration MapObjectProgram::read_duration(const std::string& input, const MapObjectDescr& descr) {
 	// Convert unit part into milliseconds
 	auto as_ms = [](Duration number, const std::string& unit) {
@@ -171,6 +241,40 @@ MapObjectProgram::read_key_value_pair(const std::string& input,
 	return std::make_pair(key, idx == input.npos ? default_value : input.substr(idx + 1));
 }
 
+/* RST
+
+.. _map_object_programs_actions:
+
+Actions
+-------
+
+The actions documented in this section are available to all map object types.
+
+.. _map_object_programs_animate:
+
+animate
+^^^^^^^
+.. function:: animate=\<name\> [duration:\<duration\>]
+
+   Switch to new animation and pause program execution for the given duration.
+
+   :arg string name: The name of the animation to be played.
+   :arg duration duration: The time :ref:`map_object_programs_datatypes_duration` for which the program will wait before continuing on to the next action. If omitted, the program will continue to the next step immediately.
+
+   Example for a worker::
+
+      plantvine = {
+         "findspace=size:any radius:1",
+         "walk=coords",
+         "animate=dig duration:2s500ms", -- Play a digging animation for 2.5 seconds.
+         "plant=attrib:seed_grapes",
+         "animate=planting duration:3s", -- Play a planting animation for 3 seconds.
+         "return"
+      },
+
+The animate action will trigger a new animation, then wait for the specified duration before moving on to the next action in the program. The animation will continue playing and loop around until another ``animate=`` action is called. The given duration does not have to equal the length of the animation.
+
+*/
 MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
    const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
 	if (arguments.size() < 1 || arguments.size() > 2) {

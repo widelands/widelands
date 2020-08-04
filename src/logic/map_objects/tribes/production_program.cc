@@ -129,7 +129,7 @@ A program can call another program, for example::
       },
    },
 
-A program's actions consist of a sequence of commands. A command is written as
+A program consists of a sequence of actions. An action is written as
 ``<type>=<parameters>``::
 
 
@@ -141,19 +141,19 @@ A program's actions consist of a sequence of commands. A command is written as
          "sleep=5000",
          "consume=barbarians_bread fish,meat beer",
          "playsound=sound/barbarians/taverns/inn 100",
-         "animate=working 22000",
+         "animate=working duration:22s",
          "sleep=10000",
          "produce=snack"
       }
    },
 
 
-The different command types and the parameters that they take are explained below.
-
 .. highlight:: default
 
-Command Types
-^^^^^^^^^^^^^
+For general information about the format, see :ref:`map_object_programs_syntax`.
+
+Available actions are:
+
 - `animate`_
 - `call`_
 - `callworker`_
@@ -918,24 +918,7 @@ void ProductionProgram::ActSleep::execute(Game& game, ProductionSite& ps) const 
 /* RST
 animate
 -------
-Runs an animation.
-
-Parameter syntax::
-
-  parameters ::= animation duration
-
-Parameter semantics:
-
-``animation``
-    The name of an animation (defined in the productionsite).
-``duration``
-    A natural integer. If 0, the result from the most recent command that
-    returned a value is used.
-
-Starts the specified animation for the productionsite. Blocks the execution of the program for the
-specified duration. (The duration does not have to equal the length of the animation. It will loop
-around. The animation will not be stopped by this command. It will run until another animation is
-started.)
+Runs an animation. See :ref:`map_object_programs_animate`.
 */
 ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr* descr) {

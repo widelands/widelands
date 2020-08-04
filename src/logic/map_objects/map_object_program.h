@@ -95,7 +95,7 @@ protected:
 	struct AnimationParameters {
 		/// Animation ID
 		uint32_t animation = 0;
-		/// Animation duration. 0 will play the animation forever.
+		/// Animation duration before the next action will be called by the program.
 		Duration duration = 0;
 	};
 	/// Parses the arguments for an animation action, e.g. { "working", "24000" }. If
