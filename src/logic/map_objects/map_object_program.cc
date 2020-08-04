@@ -31,13 +31,13 @@ Programs
 ========
 .. _map_object_programs:
 
-Some map object will have special programs that define their behavior.
+Many map objects have special programs that define their behavior.
 You can describe these programs in their ``init.lua`` files, in the ``programs``
 table.
 
 * :ref:`map_object_programs_syntax`
 * :ref:`map_object_programs_datatypes`
-* :ref:`map_object_programs_actions`
+* :ref:`map_object_programs_actions`.
 
 Map objects that can have programs are:
 
@@ -47,6 +47,8 @@ Map objects that can have programs are:
    Immovables <autogen_immovable_programs>
    Production Sites <autogen_tribes_productionsite_programs>
    Workers <autogen_tribes_worker_programs>
+
+Critters all run the same built-in program, so you don't need to define any programs for them.
 
 .. _map_object_programs_syntax:
 
@@ -68,14 +70,14 @@ Map object programs are put in a Lua table, like this::
          "action3",
          "action4=value1 value2 value3",
       },
-	  program_name4 = {
+      program_name4 = {
          "action5=value1 value2 parameter:value3",
       }
    },
 
 * Named parameters of the form ``parameter:value`` can be given in any order, but we recommend using the order from the documentation for consistency. It will make your code easier to read.
 * Values without parameter name need to be given in the correct order.
-* Some actions combine both named and unnamed parameters, see ``action5`` in our example.
+* Some actions combine both named and unnamed values, see ``action5`` in our example.
 
 The first program is the default program that calls all the other programs. For productionsites, this is ``"work"`` and for immovables, this is ``"program"``. Workers have no defaut program, because their individual programs are called from their production site.
 
@@ -147,7 +149,7 @@ Temporal duration is specified with an accompanying unit. Valid units are:
 * ``s`` (seconds)
 * ``ms`` (milliseconds)
 
-You can combine them in descending order as you please. Examples:
+You can combine these units in descending order as you please. Examples:
 
 * ``4m``
 * ``12s``
@@ -272,8 +274,9 @@ animate
          "return"
       },
 
-The animate action will trigger a new animation, then wait for the specified duration before moving on to the next action in the program. The animation will continue playing and loop around until another ``animate=`` action is called. The given duration does not have to equal the length of the animation.
+The animate action will trigger a new animation, then wait for the specified duration before moving on to the next action in the program. The animation will continue playing and loop around until the program ends or another ``animate=`` action is called. The given duration does not have to equal the length of the animation.
 
+When the program ends, the map object will switch back to the default ``idle`` animation. Some actions also have an animation associated with them that will be played instead, e.g. ``"walk=coords"`` will play the walking animation for the direction the worker is walking in.
 */
 MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
    const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
