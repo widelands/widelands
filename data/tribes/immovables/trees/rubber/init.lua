@@ -84,7 +84,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:55s",
-         "remove=35",
+         "remove=success:35",
          "grow=rubber_amazons_pole",
       },
    },
@@ -105,7 +105,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m05s",
-         "remove=24",
+         "remove=success:24",
          "grow=rubber_amazons_mature",
       },
    },
@@ -126,7 +126,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m12s",
-         "remove=19",
+         "remove=success:19",
          "grow=rubber_amazons_old",
       },
    },
@@ -149,7 +149,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:25m35s",
-         "transform=deadtree7 33",
+         "transform=deadtree7 success:33",
          "seed=rubber_amazons_sapling 50",
       },
       fall = {
@@ -174,7 +174,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:55s",
-         "remove=35",
+         "remove=success:35",
          "grow=rubber_black_amazons_pole",
       },
    },
@@ -195,7 +195,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m05s",
-         "remove=24",
+         "remove=success:24",
          "grow=rubber_black_amazons_mature",
       },
    },
@@ -216,7 +216,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m12s",
-         "remove=19",
+         "remove=success:19",
          "grow=rubber_black_amazons_old",
       },
    },
@@ -239,7 +239,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:25m35s",
-         "transform=deadtree7 33",
+         "transform=deadtree7 success:33",
          "seed=rubber_black_amazons_sapling 50",
       },
       fall = {
@@ -264,7 +264,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:55s",
-         "remove=35",
+         "remove=success:35",
          "grow=rubber_desert_amazons_pole",
       },
    },
@@ -285,7 +285,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m05s",
-         "remove=24",
+         "remove=success:24",
          "grow=rubber_desert_amazons_mature",
       },
    },
@@ -306,7 +306,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m12s",
-         "remove=19",
+         "remove=success:19",
          "grow=rubber_desert_amazons_old",
       },
    },
@@ -329,7 +329,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:25m35s",
-         "transform=deadtree7 33",
+         "transform=deadtree7 success:33",
          "seed=rubber_desert_amazons_sapling 50",
       },
       fall = {
@@ -354,7 +354,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:55s",
-         "remove=35",
+         "remove=success:35",
          "grow=rubber_winter_amazons_pole",
       },
    },
@@ -375,7 +375,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m05s",
-         "remove=24",
+         "remove=success:24",
          "grow=rubber_winter_amazons_mature",
       },
    },
@@ -396,7 +396,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m12s",
-         "remove=19",
+         "remove=success:19",
          "grow=rubber_winter_amazons_old",
       },
    },
@@ -419,7 +419,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:25m35s",
-         "transform=deadtree7 33",
+         "transform=deadtree7 success:33",
          "seed=rubber_winter_amazons_sapling 50",
       },
       fall = {

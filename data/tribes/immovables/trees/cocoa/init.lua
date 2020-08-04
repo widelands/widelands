@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle duration:80s",
-         "remove=10",
+         "remove=success:10",
          "transform=cocoa_tree_pole",
       },
    },
@@ -37,7 +37,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle duration:60s",
-         "remove=15",
+         "remove=success:15",
          "transform=cocoa_tree_mature",
       },
    },
@@ -63,7 +63,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle duration:60s",
-         "remove=20",
+         "remove=success:20",
          "transform=cocoa_tree_old",
       },
    },
