@@ -17,7 +17,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:57s500ms",
-         "remove=21",
+         "remove=success:21",
          "grow=maple_winter_pole",
       },
    },
@@ -44,7 +44,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:52s500ms",
-         "remove=19",
+         "remove=success:19",
          "grow=maple_winter_mature",
       },
    },
@@ -71,7 +71,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:50s",
-         "remove=18",
+         "remove=success:18",
          "grow=maple_winter_old",
       },
    },
@@ -100,7 +100,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:25m50s",
-         "transform=deadtree4 39",
+         "transform=deadtree4 success:39",
          "seed=maple_winter_sapling 240",
       },
       fall = {
