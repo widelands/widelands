@@ -81,7 +81,7 @@ Map object programs are put in a Lua table, like this::
 * Some actions combine both named and unnamed values, see ``action5`` in our example.
 
 The first program is the default program that calls all the other programs. For productionsites,
-this is ``"work"`` and for immovables, this is ``"program"``. Workers have no defaut program,
+this is ``"work"``, and for immovables, this is ``"program"``. Workers have no default program,
 because their individual programs are called from their production site.
 
 
