@@ -74,7 +74,6 @@ function food_thread()
       "empire_tavern",
       "empire_inn",
       "empire_fishers_house",
-      "empire_stonemasons_house",
    }
    local o = add_campaign_objective(obj_build_food_infrastructure)
 
@@ -103,11 +102,10 @@ function food_thread()
    set_objective_done(o)
 end
 
-local obj_build_marble_mine = false
-local obj_expand_south_done = false
+local build_marble_mine_done = false
 function mining_infrastructure()
-   -- Wait for marble mine and explored area in south
-   while not (obj_expand_south_done and obj_build_marble_mine) do sleep(3459) end
+   -- Wait for marble mine
+   while not (build_marble_mine_done) do sleep(3459) end
 
    -- Reveal the other mountains
    local coal_mountain = wl.Game().map:get_field(49,22)
@@ -191,15 +189,9 @@ function expand_and_build_marblemine()
 
    campaign_message_box(saledus_2)
    p1:allow_buildings{"empire_marblemine", "empire_marblemine_deep"}
-   o1 = add_campaign_objective(obj_build_marblemine)
+   o = add_campaign_objective(obj_build_marblemine)
    run(function() while not check_for_buildings(p1, {empire_marblemine = 1})
-      do sleep(2133) end set_objective_done(o1, 0); obj_build_marble_mine = true end)
-
-   o2 = add_campaign_objective(obj_expand_south)
-   -- Wait till we see the mountains
-   local mountains = wl.Game().map:get_field(38,33)
-   run(function() while not p1:seen_field(mountains)
-      do sleep(3458) end set_objective_done(o2, 0); obj_expand_south_done = true end)
+      do sleep(2133) end set_objective_done(o, 0); build_marble_mine_done = true end)
 
    -- Go back to where we were
    scroll_to_map_pixel(prior_center)
