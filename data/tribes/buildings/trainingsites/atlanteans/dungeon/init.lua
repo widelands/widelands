@@ -152,7 +152,7 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped",
          }
       },
@@ -164,7 +164,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has trident_long",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 0",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_long",
             "train=soldier attack 0 1"
@@ -178,7 +178,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has trident_steel",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 1",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_steel",
             "train=soldier attack 1 2"
@@ -192,7 +192,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has trident_double",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 2",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_double",
             "train=soldier attack 2 3"
@@ -206,7 +206,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has trident_heavy_double",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 3",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_heavy_double",
             "train=soldier attack 3 4"

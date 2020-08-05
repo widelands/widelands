@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs barbarians_bread",
             "consume=water:3 wheat:3",
-            "sleep=20000",
+            "sleep=duration:20s",
             "animate=working duration:20s",
             "produce=barbarians_bread",
             "animate=working duration:20s",
