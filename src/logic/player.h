@@ -715,7 +715,8 @@ private:
 		   : health(h), attack(a), defense(d), evade(e), total(0) {
 		}
 		bool operator==(const SoldierStatistics& s) const {
-			return s.health == health && s.attack == attack && s.defense == defense && s.evade == evade;
+			return s.health == health && s.attack == attack && s.defense == defense &&
+			       s.evade == evade;
 		}
 	};
 	std::vector<SoldierStatistics> soldier_stats_;
