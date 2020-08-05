@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=ration wine",
-            "sleep=18000",
+            "sleep=duration:18s",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_marble",
@@ -79,7 +79,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=wine ration",
-            "sleep=18000",
+            "sleep=duration:18s",
             "call=a_mine_produce_marble",
             "call=a_mine_produce_marble",
             "call=a_mine_produce_granite",

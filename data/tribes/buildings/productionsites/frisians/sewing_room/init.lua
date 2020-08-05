@@ -69,7 +69,7 @@ tribes:new_productionsite_type {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs fur_garment or workers need experience",
             "consume=fur:2",
-            "sleep=20000",
+            "sleep=duration:20s",
             "animate=working duration:20s",
             "produce=fur_garment"
          },
