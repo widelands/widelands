@@ -1,0 +1,26 @@
+name: MS-Windows Compilation Test
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, edited, synchronize]
+jobs:
+  compile:
+    name: Compile a ${{ matrix.config }} build
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        config:
+          - Release
+          - Debug
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: Compiler
+      run: |
+        mkdir build
+        cd build
+        IF "${{ matrix.config }}" == "Debug" (export USE_ASAN=ON) ELSE (export USE_ASAN=OFF)
+        cmake -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=OFF -DUSE_FLTO_IF_AVAILABLE=OFF
+        cmake --build .
