@@ -329,6 +329,7 @@ Building::Building(const BuildingDescr& building_descr)
      was_immovable_(nullptr),
      attack_target_(nullptr),
      soldier_control_(nullptr),
+     mute_messages_(false),
      is_destruction_blocked_(false) {
 }
 
@@ -886,6 +887,10 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
+	if (mute_messages() || owner().is_muted(game.tribes().safe_building_index(descr().name()))) {
+		return;
+	}
+
 	const std::string rt_description =
 	   as_mapobject_message(descr().name(), descr().representative_image()->width(), description,
 	                        &owner().get_playercolor());

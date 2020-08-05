@@ -17,7 +17,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:38s",
-         "remove=50",
+         "remove=success:50",
          "grow=aspen_summer_pole",
       },
    },
@@ -44,7 +44,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:38s",
-         "remove=47",
+         "remove=success:47",
          "grow=aspen_summer_mature",
       },
    },
@@ -71,10 +71,10 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:20s",
-         "remove=30",
+         "remove=success:30",
          "seed=aspen_summer_sapling 60",
          "animate=idle duration:20s",
-         "remove=20",
+         "remove=success:20",
          "grow=aspen_summer_old",
       },
    },
@@ -103,7 +103,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:17m30s",
-         "transform=deadtree2 15",
+         "transform=deadtree2 success:15",
          "seed=aspen_summer_sapling 100",
       },
       fall = {

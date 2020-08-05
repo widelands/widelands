@@ -78,7 +78,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs coal",
             "consume=meal",
-            "sleep=39900",
+            "sleep=duration:39s900ms",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

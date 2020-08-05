@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs smoked_meat",
             "consume=meat:2 log",
             "animate=working duration:30s",
-            "sleep=30000",
+            "sleep=duration:30s",
             "produce=smoked_meat:2"
          }
       },
@@ -79,7 +79,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs smoked_fish",
             "consume=fish:2 log",
             "animate=working duration:30s",
-            "sleep=30000",
+            "sleep=duration:30s",
             "produce=smoked_fish:2"
          }
       },
@@ -91,7 +91,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs smoked_fish",
             "consume=fish:2 log",
             "animate=working duration:30s",
-            "sleep=30000",
+            "sleep=duration:30s",
             "produce=smoked_fish:2"
          }
       },

@@ -57,7 +57,7 @@ tribes:new_productionsite_type {
             -- time total: 105 + 5 x 3.6
             "return=skipped unless economy needs iron_ore",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=35000",
+            "sleep=duration:35s",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

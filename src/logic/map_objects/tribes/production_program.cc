@@ -138,11 +138,11 @@ A program's actions consist of a sequence of commands. A command is written as
       descname = _"preparing a snack",
       actions = {
          "return=skipped unless economy needs snack",
-         "sleep=5000",
+         "sleep=duration:2s500ms",
          "consume=barbarians_bread fish,meat beer",
          "playsound=sound/barbarians/taverns/inn 100",
-         "animate=working 22000",
-         "sleep=10000",
+         "animate=working duration:22s",
+         "sleep=duration:10s",
          "produce=snack"
       }
    },
@@ -896,7 +896,7 @@ Does nothing.
 
 Parameter syntax::
 
-  parameters ::= duration
+  parameters ::= duration:<duration>
 
 Parameter semantics:
 
@@ -906,11 +906,24 @@ Parameter semantics:
 
 Blocks the execution of the program for the specified duration.
 */
-ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments) {
+ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
+                                      const ProductionSiteDescr& psite) {
 	if (arguments.size() != 1) {
-		throw GameDataError("Usage: sleep=<duration>");
+		throw GameDataError("Usage: sleep=duration:<duration>");
 	}
-	duration_ = read_positive(arguments.front());
+	const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
+	if (item.first == "duration") {
+		duration_ = read_duration(item.second);
+	} else if (item.second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove after v1.0
+		duration_ = read_duration(item.first);
+		log("WARNING: 'sleep' program without parameter name is deprecated, please use "
+		    "'sleep=duration:<duration>' in %s\n",
+		    psite.name().c_str());
+	} else {
+		throw GameDataError(
+		   "Unknown argument '%s'. Usage: duration:<duration>", arguments.front().c_str());
+	}
 }
 
 void ProductionProgram::ActSleep::execute(Game& game, ProductionSite& ps) const {
@@ -1678,7 +1691,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	const Map& map = game.map();
 	std::vector<ImmovableFound> immovables;
 	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
-	Area<FCoords> area(map.get_fcoords(psite.base_flag().get_position()), radius);
+	Area<FCoords> area(map.get_fcoords(psite.get_position()), radius);
 	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr))) {
 		state.objvar = immovables[0].object;
 
@@ -1808,8 +1821,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActCall(parseinput.arguments, *building)));
 			} else if (parseinput.name == "sleep") {
-				actions_.push_back(
-				   std::unique_ptr<ProductionProgram::Action>(new ActSleep(parseinput.arguments)));
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActSleep(parseinput.arguments, *building)));
 			} else if (parseinput.name == "animate") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActAnimate(parseinput.arguments, building)));
