@@ -130,12 +130,12 @@ public:
 	/// World immovable
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
-	               const std::vector<std::string>& attributes,
+	               const std::vector<std::string>& attribs,
 	               const World& world);
 	/// Tribes immovable
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
-	               const std::vector<std::string>& attributes,
+	               const std::vector<std::string>& attribs,
 	               Tribes& tribes);
 	~ImmovableDescr() override;
 
@@ -197,7 +197,7 @@ private:
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
 	               MapObjectDescr::OwnerType type,
-	               const std::vector<std::string>& attributes);
+	               const std::vector<std::string>& attribs);
 
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
