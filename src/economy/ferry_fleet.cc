@@ -357,7 +357,7 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 		Waterway& ww = *pending_ferry_requests_.begin()->second;
 
 		Ferry* ferry = idle_ferries.front();
-		int32_t shortest_distance = 0;
+		int32_t shortest_distance = std::numeric_limits<int32_t>::max();
 		for (Ferry* temp_ferry : idle_ferries) {
 			// Decide how far this ferry is from the waterway
 			Path path;
@@ -373,7 +373,7 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 				continue;
 			}
 
-			if (!ferry || f_distance < shortest_distance) {
+			if (f_distance < shortest_distance) {
 				ferry = temp_ferry;
 				shortest_distance = f_distance;
 			}
