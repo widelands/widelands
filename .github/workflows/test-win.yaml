@@ -19,10 +19,9 @@ jobs:
         fetch-depth: 1
     - name: Compiler
       run: |
-        $env:Path += ";C:\msys64"
-        dir C:\msys64 -recurse  # NOCOM
-        mingw64.exe -c "pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding"
+        C:\msys64\usr\bin\pacman.exe --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding
+        dir C:\msys64 *ninja* -recurse
         mkdir build
         cd build
-        cmake -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DUSE_FLTO_IF_AVAILABLE=OFF
-        cmake --build .
+        C:\msys64\mingw64\bin\cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DUSE_FLTO_IF_AVAILABLE=OFF
+        C:\msys64\mingw64\bin\cmake.exe --build .
