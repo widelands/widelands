@@ -57,7 +57,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs granite",
             "consume=ration",
-            "sleep=20000",
+            "sleep=duration:20s",
             "call=mine_produce",
             "call=mine_produce",
          }

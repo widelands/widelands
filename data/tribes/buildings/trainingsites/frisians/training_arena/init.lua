@@ -117,7 +117,7 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped",
          }
       },
@@ -129,7 +129,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has sword_long",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=10800",
+            "sleep=duration:10s800ms",
             "animate=working duration:12s",
             "checksoldier=soldier attack 3", -- Because the soldier can be expelled by the player
             "consume=sword_long honey_bread,mead smoked_fish,smoked_meat",
@@ -144,7 +144,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has sword_broad",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat:2",
-            "sleep=5600",
+            "sleep=duration:5s600ms",
             "animate=working duration:10s",
             "checksoldier=soldier attack 4", -- Because the soldier can be expelled by the player
             "consume=sword_broad honey_bread,mead smoked_fish,smoked_meat:2",
@@ -161,7 +161,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has honey_bread",
             "return=failed unless site has mead",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=5600",
+            "sleep=duration:5s600ms",
             "animate=working duration:10s",
             "checksoldier=soldier attack 5", -- Because the soldier can be expelled by the player
             "consume=sword_double honey_bread mead smoked_fish,smoked_meat",
@@ -177,7 +177,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has fur_garment_golden",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=10800",
+            "sleep=duration:10s800ms",
             "animate=working duration:12s",
             "checksoldier=soldier defense 1", -- Because the soldier can be expelled by the player
             "consume=fur_garment_golden honey_bread,mead smoked_fish,smoked_meat",
@@ -193,7 +193,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has helmet_golden",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=10800",
+            "sleep=duration:10s800ms",
             "animate=working duration:12s",
             "checksoldier=soldier health 1", -- Because the soldier can be expelled by the player
             "consume=helmet_golden honey_bread,mead smoked_fish,smoked_meat",

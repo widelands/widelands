@@ -55,6 +55,7 @@ void draw_terrain(uint32_t gametime,
                   const float scale,
                   const Workareas& workarea,
                   bool grid,
+                  const Widelands::Player* player,
                   RenderTarget* dst) {
 	const Recti& bounding_rect = dst->get_rect();
 	const Surface& surface = dst->get_surface();
@@ -74,6 +75,7 @@ void draw_terrain(uint32_t gametime,
 	i.terrain_arguments.terrains = &world.terrains();
 	i.terrain_arguments.fields_to_draw = &fields_to_draw;
 	i.terrain_arguments.scale = scale;
+	i.terrain_arguments.player = player;
 	RenderQueue::instance().enqueue(i);
 
 	// Enqueue the drawing of the dither layer.

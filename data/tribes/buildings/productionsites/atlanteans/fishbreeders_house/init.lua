@@ -42,7 +42,7 @@ tribes:new_productionsite_type {
          descname = _"breeding fish",
          actions = {
             "callworker=breed",
-            "sleep=13500"
+            "sleep=duration:13s500ms"
          }
       },
    },
