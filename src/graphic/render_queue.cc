@@ -244,14 +244,16 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 		case Program::kTerrainBase: {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			terrain_program_->draw(item.terrain_arguments.gametime, *item.terrain_arguments.terrains,
-			                       *item.terrain_arguments.fields_to_draw, item.z_value);
+			                       *item.terrain_arguments.fields_to_draw, item.z_value,
+			                       item.terrain_arguments.player);
 			++i;
 		} break;
 
 		case Program::kTerrainDither: {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			dither_program_->draw(item.terrain_arguments.gametime, *item.terrain_arguments.terrains,
-			                      *item.terrain_arguments.fields_to_draw, item.z_value);
+			                      *item.terrain_arguments.fields_to_draw, item.z_value,
+			                      item.terrain_arguments.player);
 			++i;
 		} break;
 

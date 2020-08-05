@@ -649,7 +649,8 @@ private:
 	uint32_t casualties_, kills_;
 	uint32_t msites_lost_, msites_defeated_;
 	uint32_t civil_blds_lost_, civil_blds_defeated_;
-	std::unordered_set<std::string> remaining_shipnames_;
+
+	std::list<std::string> remaining_shipnames_;
 	// If we run out of ship names, we'll want to continue with unique numbers
 	uint32_t ship_name_counter_;
 

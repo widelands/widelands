@@ -72,7 +72,7 @@ tribes:new_productionsite_type {
          descname = _"constructing a ship",
          actions = {
             "construct=atlanteans_shipconstruction buildship 6",
-            "sleep=20000",
+            "sleep=duration:20s",
          }
       },
       ship_preparation = {

@@ -187,6 +187,7 @@ public:
 	// be used to override contents of 'fields_to_draw' for player knowledge and
 	// visibility, and to correctly draw map objects, overlays and text.
 	FieldsToDraw* draw_terrain(const Widelands::EditorGameBase& egbase,
+	                           const Widelands::Player*,
 	                           const Workareas& workarea,
 	                           bool grid,
 	                           RenderTarget* dst);
