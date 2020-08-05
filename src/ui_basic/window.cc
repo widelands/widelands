@@ -31,6 +31,12 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 
+namespace {
+std::string window_image_path(const std::string& image) {
+	return kTemplateDir + image;
+}
+}  // namespace
+
 namespace UI {
 
 /// Width the horizontal border graphics must have.
@@ -64,11 +70,18 @@ constexpr int16_t kVerticalBorderThingyHeight = 20;
 constexpr int16_t kVerticalBorderMiddleLength =
    (kVerticalBorderTotalLength - 2 * kVerticalBorderThingyHeight);
 
-static const std::string kWindowImageClose = kTemplateDir + "wui/window_close.png";
-static const std::string kWindowImagePinned = kTemplateDir + "wui/window_unpin.png";
-static const std::string kWindowImageUnpinned = kTemplateDir + "wui/window_pin.png";
-static const std::string kWindowImageMinimize = kTemplateDir + "wui/window_minimize.png";
-static const std::string kWindowImageMaximize = kTemplateDir + "wui/window_maximize.png";
+// Decorations
+constexpr const char* const kWindowImageLeft = "wui/left.png";
+constexpr const char* const kWindowImageRight = "wui/right.png";
+constexpr const char* const kWindowImageTop = "wui/top.png";
+constexpr const char* const kWindowImageBottom = "wui/bottom.png";
+constexpr const char* const kWindowImageBackground = "wui/background.png";
+// Buttons
+constexpr const char* const kWindowImageClose = "wui/window_close.png";
+constexpr const char* const kWindowImagePinned = "wui/window_unpin.png";
+constexpr const char* const kWindowImageUnpinned = "wui/window_pin.png";
+constexpr const char* const kWindowImageMinimize = "wui/window_minimize.png";
+constexpr const char* const kWindowImageMaximize = "wui/window_maximize.png";
 
 /**
  * Initialize a framed window.
@@ -106,11 +119,11 @@ Window::Window(Panel* const parent,
      drag_start_mouse_x_(0),
      drag_start_mouse_y_(0),
      pinned_(false),
-     pic_lborder_(g_gr->images().get(kTemplateDir + "wui/left.png")),
-     pic_rborder_(g_gr->images().get(kTemplateDir + "wui/right.png")),
-     pic_top_(g_gr->images().get(kTemplateDir + "wui/top.png")),
-     pic_bottom_(g_gr->images().get(kTemplateDir + "wui/bottom.png")),
-     pic_background_(g_gr->images().get(kTemplateDir + "wui/background.png")),
+     pic_lborder_(g_gr->images().get(window_image_path(kWindowImageLeft))),
+     pic_rborder_(g_gr->images().get(window_image_path(kWindowImageRight))),
+     pic_top_(g_gr->images().get(window_image_path(kWindowImageTop))),
+     pic_bottom_(g_gr->images().get(window_image_path(kWindowImageBottom))),
+     pic_background_(g_gr->images().get(window_image_path(kWindowImageBackground))),
      center_panel_(nullptr),
      fastclick_panel_(nullptr),
      button_close_(new Button(this,
@@ -121,7 +134,7 @@ Window::Window(Panel* const parent,
                               kWindowTitlebarButtonsSize,
                               kWindowTitlebarButtonsSize,
                               ButtonStyle::kWuiSecondary,
-                              g_gr->images().get(kWindowImageClose),
+                              g_gr->images().get(window_image_path(kWindowImageClose)),
                               _("Close"))),
      button_pin_(new Button(this,
                             "b_pin",
@@ -130,7 +143,7 @@ Window::Window(Panel* const parent,
                             kWindowTitlebarButtonsSize,
                             kWindowTitlebarButtonsSize,
                             ButtonStyle::kWuiSecondary,
-                            g_gr->images().get(kWindowImageUnpinned),
+                            g_gr->images().get(window_image_path(kWindowImageUnpinned)),
                             "")),
      button_minimize_(new Button(this,
                                  "b_minimize",
@@ -139,7 +152,7 @@ Window::Window(Panel* const parent,
                                  kWindowTitlebarButtonsSize,
                                  kWindowTitlebarButtonsSize,
                                  ButtonStyle::kWuiSecondary,
-                                 g_gr->images().get(kWindowImageMinimize),
+                                 g_gr->images().get(window_image_path(kWindowImageMinimize)),
                                  "")) {
 	set_title(title);
 
@@ -173,12 +186,14 @@ Window::Window(Panel* const parent,
 }
 
 void Window::update_toolbar_buttons() {
-	button_minimize_->set_pic(
-	   g_gr->images().get(is_minimal_ ? kWindowImageMaximize : kWindowImageMinimize));
+	button_minimize_->set_pic(g_gr->images().get(is_minimal_ ?
+	                                                window_image_path(kWindowImageMaximize) :
+	                                                window_image_path(kWindowImageMinimize)));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
 	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed :
 	                                                 Button::VisualState::kRaised);
-	button_pin_->set_pic(g_gr->images().get(pinned_ ? kWindowImagePinned : kWindowImageUnpinned));
+	button_pin_->set_pic(g_gr->images().get(pinned_ ? window_image_path(kWindowImagePinned) :
+	                                                  window_image_path(kWindowImageUnpinned)));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
 	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed :
 	                                        Button::VisualState::kRaised);

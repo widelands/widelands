@@ -37,20 +37,13 @@ tribes:new_productionsite_type {
       atlanteans_forester = 1
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_blackroot_farm = false,
-      atlanteans_farm = false,
-      atlanteans_foresters_house = false,
-      atlanteans_woodcutters_house = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
          descname = _"planting trees",
          actions = {
             "callworker=plant",
-            "sleep=8000"
+            "sleep=duration:8s"
          }
       },
    },

@@ -93,7 +93,8 @@ void StyleManager::init() {
 	scrollbarstyles_.clear();
 
 	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script(kTemplateDir + "init.lua"));
+	std::unique_ptr<LuaTable> table(
+	   lua.run_script((boost::format("%1%init.lua") % kTemplateDir).str()));
 
 	// Buttons
 	std::unique_ptr<LuaTable> element_table = table->get_table("buttons");

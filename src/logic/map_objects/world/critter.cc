@@ -105,8 +105,7 @@ CritterDescr::CritterDescr(const std::string& init_descname,
      reproduction_rate_(table.get_int("reproduction_rate")) {
 	assign_directional_animation(&walk_anims_, "walk");
 
-	add_attributes(
-	   table.get_table("attributes")->array_entries<std::string>(), std::set<uint32_t>());
+	add_attributes(table.get_table("attributes")->array_entries<std::string>());
 
 	if (size_ < 1 || size_ > 10) {
 		throw GameDataError(
@@ -282,6 +281,7 @@ void Critter::roam_update(Game& game, State& state) {
 	// alternately move and idle
 	Time idle_time_min = 1000;
 	Time idle_time_rnd = kCritterMaxIdleTime;
+
 	if (state.ivar1) {
 		state.ivar1 = 0;
 		// lots of magic numbers for reasonable weighting of various nearby animals
@@ -317,6 +317,12 @@ void Critter::roam_update(Game& game, State& state) {
 	const uint32_t reproduction_rate = descr().get_reproduction_rate();
 
 	{  // chance to die
+		const uint32_t nearby_critters1 =
+		   game.map().find_bobs(game, Area<FCoords>(get_position(), 2), nullptr, FindCritter());
+		const uint32_t nearby_critters2 = game.map().find_bobs(
+		   game, Area<FCoords>(get_position(), 7), nullptr, FindBobByName(descr().name()));
+		assert(nearby_critters1);  // at least we are here
+		assert(nearby_critters2);
 		const double r = reproduction_rate * reproduction_rate / 10000000.0;
 		const double i1 = r / kMinCritterLifetime;
 		const double i2 = (1 - r) / (kMaxCritterLifetime - kMinCritterLifetime);
@@ -326,7 +332,8 @@ void Critter::roam_update(Game& game, State& state) {
 		                                             (kMaxCritterLifetime - kMinCritterLifetime));
 		assert(d >= 0.0);
 		assert(d <= 1.0);
-		if (game.logic_rand() % kMinCritterLifetime < d * kMinCritterLifetime) {
+		if (game.logic_rand() % kMinCritterLifetime <
+		    d * kMinCritterLifetime * nearby_critters1 * nearby_critters1 * nearby_critters2) {
 			// :(
 			molog("Goodbye world :(\n");
 			return schedule_destroy(game);

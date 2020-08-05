@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    attributes = { "field", "seed_barley" },
    programs = {
       program = {
-         "animate=idle 150000",
+         "animate=idle duration:2m30s",
          "transform=barleyfield_small",
       }
    },

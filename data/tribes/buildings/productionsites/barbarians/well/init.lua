@@ -40,17 +40,13 @@ tribes:new_productionsite_type {
       barbarians_carrier = 1
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_well = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "sleep=20000",
-            "animate=working 20000",
+            "sleep=duration:20s",
+            "animate=working duration:20s",
             "mine=water 1 100 65 2",
             "produce=water",
          }

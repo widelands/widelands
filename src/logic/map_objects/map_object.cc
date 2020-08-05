@@ -299,8 +299,7 @@ MapObjectDescr::~MapObjectDescr() {
 	anims_.clear();
 }
 
-uint32_t MapObjectDescr::dyn_attribhigh_ = MapObject::HIGHEST_FIXED_ATTRIBUTE;
-MapObjectDescr::AttribMap MapObjectDescr::dyn_attribs_;
+std::map<std::string, MapObjectDescr::AttributeIndex> MapObjectDescr::attribute_names_;
 
 bool MapObjectDescr::is_animation_known(const std::string& animname) const {
 	return (anims_.count(animname) == 1);
@@ -321,18 +320,33 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 			const bool is_directional =
 			   anim->has_key<std::string>("directional") ? anim->get_bool("directional") : false;
 			if (is_directional) {
-				for (int dir = 1; dir <= 6; ++dir) {
-					const std::string directional_animname =
-					   animname + animation_direction_names[dir - 1];
+				std::set<float> available_scales;
+				for (int dir = 0; dir < 6; ++dir) {
+					const std::string directional_animname = animname + animation_direction_names[dir];
 					if (is_animation_known(directional_animname)) {
 						throw GameDataError("Tried to add already existing directional animation '%s\'",
 						                    directional_animname.c_str());
 					}
-					const std::string directional_basename =
-					   basename + animation_direction_names[dir - 1];
-					anims_.insert(std::pair<std::string, uint32_t>(
-					   directional_animname, g_gr->animations().load(*anim, directional_basename,
-					                                                 animation_directory, anim_type)));
+					const std::string directional_basename = basename + animation_direction_names[dir];
+					uint32_t anim_id = 0;
+					try {
+						anim_id = g_gr->animations().load(
+						   *anim, directional_basename, animation_directory, anim_type);
+						anims_.insert(std::make_pair(directional_animname, anim_id));
+					} catch (const std::exception& e) {
+						throw GameDataError(
+						   "Direction '%s': %s", animation_direction_names[dir], e.what());
+					}
+					// Validate directions' scales
+					if (dir == 0) {
+						available_scales = g_gr->animations().get_animation(anim_id).available_scales();
+					}
+					if (available_scales.size() !=
+					    g_gr->animations().get_animation(anim_id).available_scales().size()) {
+						throw GameDataError("Direction '%s': number of available scales does not match "
+						                    "with direction '%s'",
+						                    animation_direction_names[dir], animation_direction_names[0]);
+					}
 				}
 			} else {
 				if (is_animation_known(animname)) {
@@ -340,11 +354,11 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 					   "Tried to add already existing animation '%s'", animname.c_str());
 				}
 				if (animname == "idle") {
-					anims_.insert(std::pair<std::string, uint32_t>(
+					anims_.insert(std::make_pair(
 					   animname,
 					   g_gr->animations().load(name_, *anim, basename, animation_directory, anim_type)));
 				} else {
-					anims_.insert(std::pair<std::string, uint32_t>(
+					anims_.insert(std::make_pair(
 					   animname,
 					   g_gr->animations().load(*anim, basename, animation_directory, anim_type)));
 				}
@@ -427,8 +441,8 @@ const std::string& MapObjectDescr::icon_filename() const {
 /**
  * Search for the attribute in the attribute list
  */
-bool MapObjectDescr::has_attribute(uint32_t const attr) const {
-	for (const uint32_t& attrib : attributes_) {
+bool MapObjectDescr::has_attribute(AttributeIndex attr) const {
+	for (const uint32_t& attrib : attribute_ids_) {
 		if (attrib == attr) {
 			return true;
 		}
@@ -439,51 +453,42 @@ bool MapObjectDescr::has_attribute(uint32_t const attr) const {
 /**
  * Add an attribute to the attribute list if it's not already there
  */
-void MapObjectDescr::add_attribute(uint32_t const attr) {
+void MapObjectDescr::add_attribute(AttributeIndex attr) {
 	if (!has_attribute(attr)) {
-		attributes_.push_back(attr);
+		attribute_ids_.push_back(attr);
 	}
 }
 
-void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
-                                    const std::set<uint32_t>& allowed_special) {
-	for (const std::string& attribute : attributes) {
-		uint32_t const attrib = get_attribute_id(attribute, true);
-		if (attrib < MapObject::HIGHEST_FIXED_ATTRIBUTE) {
-			if (!allowed_special.count(attrib)) {
-				throw GameDataError("bad attribute \"%s\"", attribute.c_str());
-			}
-		}
-		add_attribute(attrib);
+void MapObjectDescr::add_attributes(const std::vector<std::string>& attribs) {
+	for (const std::string& attrib : attribs) {
+		uint32_t const attrib_id = get_attribute_id(attrib, true);
+		add_attribute(attrib_id);
 	}
+}
+
+const MapObjectDescr::Attributes& MapObjectDescr::attributes() const {
+	return attribute_ids_;
 }
 
 /**
  * Lookup an attribute by name. If the attribute name hasn't been encountered
  * before and add_if_not_exists = true, we add it to the map. Else, throws exception.
  */
-uint32_t MapObjectDescr::get_attribute_id(const std::string& name, bool add_if_not_exists) {
-	AttribMap::iterator it = dyn_attribs_.find(name);
+MapObjectDescr::AttributeIndex MapObjectDescr::get_attribute_id(const std::string& name,
+                                                                bool add_if_not_exists) {
+	auto it = attribute_names_.find(name);
 
-	if (it != dyn_attribs_.end()) {
+	if (it != attribute_names_.end()) {
 		return it->second;
-	}
-
-	if (name == "worker") {
-		return MapObject::WORKER;
-	} else if (name == "resi") {
-		return MapObject::RESI;
 	}
 
 	if (!add_if_not_exists) {
 		throw GameDataError("get_attribute_id: attribute '%s' not found!\n", name.c_str());
 	} else {
-		++dyn_attribhigh_;
-		dyn_attribs_[name] = dyn_attribhigh_;
+		AttributeIndex attribute_id = attribute_names_.size();
+		attribute_names_[name] = attribute_id;
+		return attribute_id;
 	}
-	assert(dyn_attribhigh_ != 0);  // wrap around seems *highly* unlikely ;)
-
-	return dyn_attribhigh_;
 }
 
 /*

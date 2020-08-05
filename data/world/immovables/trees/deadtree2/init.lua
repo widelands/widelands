@@ -8,8 +8,8 @@ world:new_immovable_type{
    attributes = {},
    programs = {
       program = {
-        "animate=idle 20000",
-       "remove=12"
+         "animate=idle duration:20s",
+         "remove=success:12"
       }
    },
    animations = {

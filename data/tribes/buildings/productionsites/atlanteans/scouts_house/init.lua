@@ -45,10 +45,10 @@ tribes:new_productionsite_type {
          descname = _"scouting",
          actions = {
             "consume=smoked_fish",
-            "sleep=30000",
+            "sleep=duration:30s",
             "callworker=scout",
             "consume=atlanteans_bread",
-            "sleep=30000",
+            "sleep=duration:30s",
             "callworker=scout"
          }
       },

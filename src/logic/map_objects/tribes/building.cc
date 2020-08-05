@@ -328,7 +328,9 @@ Building::Building(const BuildingDescr& building_descr)
      seeing_(false),
      was_immovable_(nullptr),
      attack_target_(nullptr),
-     soldier_control_(nullptr) {
+     soldier_control_(nullptr),
+     mute_messages_(false),
+     is_destruction_blocked_(false) {
 }
 
 void Building::load_finish(EditorGameBase& egbase) {
@@ -387,7 +389,7 @@ Flag& Building::base_flag() {
 uint32_t Building::get_playercaps() const {
 	uint32_t caps = 0;
 	const BuildingDescr& tmp_descr = descr();
-	if (tmp_descr.is_destructible()) {
+	if (tmp_descr.is_destructible() && !is_destruction_blocked()) {
 		caps |= PCap_Bulldoze;
 		if (tmp_descr.can_be_dismantled()) {
 			caps |= PCap_Dismantle;
@@ -885,6 +887,10 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
+	if (mute_messages() || owner().is_muted(game.tribes().safe_building_index(descr().name()))) {
+		return;
+	}
+
 	const std::string rt_description =
 	   as_mapobject_message(descr().name(), descr().representative_image()->width(), description,
 	                        &owner().get_playercolor());

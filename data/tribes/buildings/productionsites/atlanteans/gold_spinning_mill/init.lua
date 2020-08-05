@@ -49,9 +49,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs gold_thread",
             "consume=gold",
-            "sleep=15000",
+            "sleep=duration:15s",
             "playsound=sound/atlanteans/goldspin 192",
-            "animate=working 25000",
+            "animate=working duration:25s",
             "produce=gold_thread"
          }
       },

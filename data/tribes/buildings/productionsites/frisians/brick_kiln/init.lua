@@ -72,8 +72,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs brick",
             "consume=granite clay:3 coal",
-            "sleep=30000",
-            "animate=working 50000",
+            "sleep=duration:30s",
+            "animate=working duration:50s",
             "produce=brick:3"
          },
       },

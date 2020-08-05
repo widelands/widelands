@@ -187,7 +187,7 @@ Player::Player(EditorGameBase& the_egbase,
 
 	// Populating remaining_shipnames vector
 	for (const auto& shipname : tribe_descr.get_ship_names()) {
-		remaining_shipnames_.insert(shipname);
+		remaining_shipnames_.push_back(shipname);
 	}
 }
 
@@ -277,7 +277,7 @@ void Player::AiPersistentState::initialize() {
 	no_more_expeditions = false;
 	target_military_score = 100;
 	least_military_score = 0;
-	ai_productionsites_ratio = std::rand() % 5 + 7;
+	ai_productionsites_ratio = std::rand() % 5 + 7;  // NOLINT
 	ai_personality_mil_upper_limit = 100;
 
 	// all zeroes
@@ -1536,6 +1536,17 @@ const std::string& Player::get_ai() const {
 	return ai_;
 }
 
+void Player::set_muted(DescriptionIndex di, bool mute) {
+	if (mute) {
+		muted_building_types_.insert(di);
+	} else {
+		auto it = muted_building_types_.find(di);
+		if (it != muted_building_types_.end()) {
+			muted_building_types_.erase(it);
+		}
+	}
+}
+
 bool Player::is_attack_forbidden(PlayerNumber who) const {
 	return forbid_attack_.find(who) != forbid_attack_.end();
 }
@@ -1557,17 +1568,17 @@ void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
 const std::string Player::pick_shipname() {
 	++ship_name_counter_;
 
-	if (!remaining_shipnames_.empty()) {
-		Game& game = dynamic_cast<Game&>(egbase());
-		assert(is_a(Game, &egbase()));
-		const uint32_t index = game.logic_rand() % remaining_shipnames_.size();
-		std::unordered_set<std::string>::iterator it = remaining_shipnames_.begin();
-		std::advance(it, index);
-		std::string new_name = *it;
-		remaining_shipnames_.erase(it);
-		return new_name;
+	if (remaining_shipnames_.empty()) {
+		return (boost::format(pgettext("shipname", "Ship %d")) % ship_name_counter_).str();
 	}
-	return (boost::format(pgettext("shipname", "Ship %d")) % ship_name_counter_).str();
+
+	Game& game = dynamic_cast<Game&>(egbase());
+	const size_t index = game.logic_rand() % remaining_shipnames_.size();
+	auto it = remaining_shipnames_.begin();
+	std::advance(it, index);
+	std::string new_name = *it;
+	remaining_shipnames_.erase(it);
+	return new_name;
 }
 
 /**
@@ -1580,7 +1591,7 @@ void Player::read_remaining_shipnames(FileRead& fr) {
 	remaining_shipnames_.clear();
 	const uint16_t count = fr.unsigned_16();
 	for (uint16_t i = 0; i < count; ++i) {
-		remaining_shipnames_.insert(fr.string());
+		remaining_shipnames_.push_back(fr.string());
 	}
 	ship_name_counter_ = fr.unsigned_32();
 }
@@ -1597,26 +1608,25 @@ void Player::read_statistics(FileRead& fr,
 	size_t nr_entries = fr.unsigned_16();
 
 	// Stats are saved as a single string to reduce number of hard disk write operations
-	const auto parse_stats = [nr_entries](std::vector<std::vector<uint32_t>>* stats,
-	                                      const DescriptionIndex ware_index,
-	                                      const std::string& stats_string,
-	                                      const std::string& description) {
-		if (!stats_string.empty()) {
-			std::vector<std::string> stats_vector;
-			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
-			if (stats_vector.size() != nr_entries) {
-				throw GameDataError("wrong number of %s statistics - expected %" PRIuS
-				                    " but got %" PRIuS,
-				                    description.c_str(), nr_entries, stats_vector.size());
-			}
-			for (size_t j = 0; j < nr_entries; ++j) {
-				stats->at(ware_index)[j] = static_cast<unsigned int>(atoi(stats_vector.at(j).c_str()));
-			}
-		} else if (nr_entries > 0) {
-			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",
-			                    description.c_str(), nr_entries);
-		}
-	};
+	const auto parse_stats =
+	   [nr_entries](std::vector<std::vector<uint32_t>>* stats, const DescriptionIndex ware_index,
+	                const std::string& stats_string, const std::string& description) {
+		   if (!stats_string.empty()) {
+			   std::vector<std::string> stats_vector;
+			   boost::split(stats_vector, stats_string, boost::is_any_of("|"));
+			   if (stats_vector.size() != nr_entries) {
+				   throw GameDataError("wrong number of %s statistics - expected %" PRIuS
+				                       " but got %" PRIuS,
+				                       description.c_str(), nr_entries, stats_vector.size());
+			   }
+			   for (size_t j = 0; j < nr_entries; ++j) {
+				   stats->at(ware_index)[j] = boost::lexical_cast<unsigned int>(stats_vector.at(j));
+			   }
+		   } else if (nr_entries > 0) {
+			   throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",
+			                       description.c_str(), nr_entries);
+		   }
+	   };
 
 	for (uint32_t i = 0; i < current_produced_statistics_.size(); ++i) {
 		ware_productions_[i].resize(nr_entries);

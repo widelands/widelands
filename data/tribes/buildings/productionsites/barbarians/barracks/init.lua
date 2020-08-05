@@ -58,8 +58,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs barbarians_soldier",
             "consume=ax barbarians_recruit",
-            "sleep=15000",
-            "animate=working 15000",
+            "sleep=duration:15s",
+            "animate=working duration:15s",
             "recruit=barbarians_soldier"
          }
       },

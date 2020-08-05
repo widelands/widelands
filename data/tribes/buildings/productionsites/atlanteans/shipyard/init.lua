@@ -58,10 +58,6 @@ tribes:new_productionsite_type {
       { name = "spidercloth", amount = 4 }
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_shipyard = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -76,13 +72,13 @@ tribes:new_productionsite_type {
          descname = _"constructing a ship",
          actions = {
             "construct=atlanteans_shipconstruction buildship 6",
-            "sleep=20000",
+            "sleep=duration:20s",
          }
       },
       ship_preparation = {
          descname = _"working",
          actions = {
-            "animate=working 35000",
+            "animate=working duration:35s",
          }
       },
    },

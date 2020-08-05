@@ -237,7 +237,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 		std::string tribe = map().get_scenario_player_tribe(p);
 		if (tribe.empty()) {
 			log("Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
-			const DescriptionIndex random = std::rand() % tribes().nrtribes();
+			const DescriptionIndex random = std::rand() % tribes().nrtribes();  // NOLINT
 			tribe = tribes().get_tribe_descr(random)->name();
 		}
 		add_player(p, 0, tribe, map().get_scenario_player_name(p));
@@ -878,6 +878,11 @@ void Game::send_player_set_stock_policy(Building& imm,
                                         StockPolicy sp) {
 	send_player_command(new CmdSetStockPolicy(
 	   get_gametime(), imm.get_owner()->player_number(), imm, ww == wwWORKER, di, sp));
+}
+
+void Game::send_player_toggle_mute(const Building& b, bool all) {
+	send_player_command(
+	   new CmdToggleMuteMessages(get_gametime(), b.owner().player_number(), b, all));
 }
 
 int Game::propose_trade(const Trade& trade) {

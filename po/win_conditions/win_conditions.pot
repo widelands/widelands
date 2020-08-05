@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-23 07:46+0000\n"
+"POT-Creation-Date: 2020-08-01 01:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -120,12 +120,12 @@ msgid_plural "Total: %i points"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../data/scripting/win_conditions/collectors.lua:169
+#: ../../data/scripting/win_conditions/collectors.lua:170
 #, lua-format
 msgid "Status for Team %d"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/collectors.lua:171
+#: ../../data/scripting/win_conditions/collectors.lua:172
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -185,12 +185,12 @@ msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:238
+#: ../../data/scripting/win_conditions/territorial_functions.lua:239
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:239
+#: ../../data/scripting/win_conditions/territorial_functions.lua:240
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."

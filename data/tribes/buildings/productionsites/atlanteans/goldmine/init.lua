@@ -49,10 +49,6 @@ tribes:new_productionsite_type {
       { name = "atlanteans_bread", amount = 10 }
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_goldmine = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
@@ -60,7 +56,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs gold_ore",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=39000",
+            "sleep=duration:39s",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
@@ -69,7 +65,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining gold",
          actions = {
-            "animate=working 22000",
+            "animate=working duration:22s",
             "mine=gold 4 100 5 2",
             "produce=gold_ore",
          }
