@@ -1,8 +1,8 @@
 name: MS-Windows Compilation Test
 on:
   pull_request:
-    branches: [main]
-    types: [opened, edited, synchronize]
+    branches: [ master ]
+    types: [ opened, edited, synchronize ]
 jobs:
   compile:
     name: Compile a ${{ matrix.config }} build
