@@ -267,7 +267,8 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		   NoteMapObjectDescription(type_name_, NoteMapObjectDescription::LoadType::kObject));
 
 		// Register target at ImmovableDescr
-		descr.becomes_.insert(std::make_pair(bob_ ? MapObjectType::BOB : MapObjectType::IMMOVABLE, type_name_));
+		descr.becomes_.insert(
+		   std::make_pair(bob_ ? MapObjectType::BOB : MapObjectType::IMMOVABLE, type_name_));
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
 	}

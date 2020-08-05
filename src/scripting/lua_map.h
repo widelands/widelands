@@ -1041,7 +1041,8 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(RoadBase)
-	static bool create_new_worker(lua_State* L, Widelands::PlayerImmovable&,
+	static bool create_new_worker(lua_State* L,
+	                              Widelands::PlayerImmovable&,
 	                              Widelands::EditorGameBase&,
 	                              const Widelands::WorkerDescr*);
 };
@@ -1174,7 +1175,8 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(ProductionSite)
-	static bool create_new_worker(lua_State* L, Widelands::PlayerImmovable&,
+	static bool create_new_worker(lua_State* L,
+	                              Widelands::PlayerImmovable&,
 	                              Widelands::EditorGameBase&,
 	                              const Widelands::WorkerDescr*);
 };
