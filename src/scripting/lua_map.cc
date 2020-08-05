@@ -4715,7 +4715,8 @@ int LuaRoad::set_workers(lua_State* L) {
  ==========================================================
  */
 
-bool LuaRoad::create_new_worker(lua_State* L, PlayerImmovable& pi,
+bool LuaRoad::create_new_worker(lua_State* L,
+                                PlayerImmovable& pi,
                                 EditorGameBase& egbase,
                                 const WorkerDescr* wdes) {
 	RoadBase& rb = dynamic_cast<RoadBase&>(pi);
@@ -4744,8 +4745,8 @@ bool LuaRoad::create_new_worker(lua_State* L, PlayerImmovable& pi,
 	// Ensure the position is free - e.g. we want carrier + carrier2 for busy road, not 2x carrier!
 	for (Worker* existing : rb.get_workers()) {
 		if (existing->descr().name() == wdes->name()) {
-			report_error(
-			   L, "Road already has worker <%s> assigned at (%d, %d)", wdes->name().c_str(), idle_position.x, idle_position.y);
+			report_error(L, "Road already has worker <%s> assigned at (%d, %d)", wdes->name().c_str(),
+			             idle_position.x, idle_position.y);
 		}
 	}
 
@@ -5559,7 +5560,8 @@ int LuaProductionSite::toggle_start_stop(lua_State* L) {
  ==========================================================
  */
 
-bool LuaProductionSite::create_new_worker(lua_State* /* L */, PlayerImmovable& pi,
+bool LuaProductionSite::create_new_worker(lua_State* /* L */,
+                                          PlayerImmovable& pi,
                                           EditorGameBase& egbase,
                                           const WorkerDescr* wdes) {
 	ProductionSite& ps = static_cast<ProductionSite&>(pi);
