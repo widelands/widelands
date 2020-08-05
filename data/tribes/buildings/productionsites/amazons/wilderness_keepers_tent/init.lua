@@ -51,7 +51,7 @@ tribes:new_productionsite_type {
          descname = _"breeding fish",
          actions = {
             "callworker=breed_fish",
-            "sleep=52500",
+            "sleep=duration:52s500ms",
          },
       },
       release = {
@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
          descname = _"releasing game",
          actions = {
             "callworker=release_game",
-            "sleep=52500",
+            "sleep=duration:52s500ms",
          },
       },
    },

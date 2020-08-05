@@ -52,7 +52,7 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: xx
             "callworker=harvest_balsa",
-            "sleep=12000"
+            "sleep=duration:12s"
          },
       },
       harvest_rubber = {
@@ -61,7 +61,7 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: xx
             "callworker=harvest_rubber",
-            "sleep=12000"
+            "sleep=duration:12s"
          },
       },
       harvest_ironwood = {
@@ -70,7 +70,7 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: xx
             "callworker=harvest_ironwood",
-            "sleep=12000"
+            "sleep=duration:12s"
          },
       },
    },

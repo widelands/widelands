@@ -72,7 +72,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting cassava root",
          actions = {
             "callworker=harvest",
-            "sleep=4000",
+            "sleep=duration:4s",
          }
       },
    },

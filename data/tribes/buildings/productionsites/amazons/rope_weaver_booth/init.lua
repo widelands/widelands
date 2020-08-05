@@ -52,7 +52,7 @@ tribes:new_productionsite_type {
          descname = _"making a rope",
          actions = {
             "consume=liana:2",
-            "sleep=20000",
+            "sleep=duration:20s",
             "animate=working duration:35s",
             "produce=rope"
          },

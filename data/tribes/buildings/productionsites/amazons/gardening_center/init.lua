@@ -68,7 +68,7 @@ tribes:new_productionsite_type {
          descname = _"enhancing the fertility of land",
          actions = {
             "callworker=terraform",
-            "sleep=8000"
+            "sleep=duration:8s"
          }
       },
    },

@@ -64,7 +64,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting cocoa",
          actions = {
             "callworker=harvest",
-            "sleep=4000"
+            "sleep=duration:4s"
          }
       },
    },

@@ -63,7 +63,7 @@ tribes:new_productionsite_type {
             -- time total: 33
             "return=skipped unless economy needs amazons_bread",
             "consume=cassavaroot water:2",
-            "sleep=5000",
+            "sleep=duration:5s",
             "animate=working duration:18s",
             "sleep=duration:10s",
             "produce=amazons_bread"

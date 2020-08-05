@@ -74,7 +74,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs tunic",
             "consume=rubber rope",
-            "sleep=32000",
+            "sleep=duration:32s",
             "animate=working duration:35s",
             "produce=tunic"
          },
@@ -85,7 +85,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs armor_wooden",
             "consume=balsa:2 rope",
-            "sleep=32000",
+            "sleep=duration:32s",
             "animate=working duration:35s",
             "produce=armor_wooden"
          },
@@ -96,7 +96,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs helmet_wooden",
             "consume=ironwood rubber",
-            "sleep=32000",
+            "sleep=duration:32s",
             "animate=working duration:35s",
             "produce=helmet_wooden"
          },
@@ -107,7 +107,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs warriors_coat",
             "consume=ironwood balsa:2 rubber gold",
-            "sleep=32000",
+            "sleep=duration:32s",
             "animate=working duration:35s",
             "produce=warriors_coat"
          },
@@ -118,7 +118,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs boots_sturdy",
             "consume=rubber balsa",
-            "sleep=32000",
+            "sleep=duration:32s",
             "animate=working duration:35s",
             "produce=boots_sturdy"
          },
@@ -129,7 +129,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs boots_swift",
             "consume=rubber:3",
-            "sleep=32000",
+            "sleep=duration:32s",
             "animate=working duration:35s",
             "produce=boots_swift"
          },
@@ -140,7 +140,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs boots_hero",
             "consume=rubber:3 gold",
-            "sleep=32000",
+            "sleep=duration:32s",
             "animate=working duration:35s",
             "produce=boots_hero"
          },
@@ -151,7 +151,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs vest_padded",
             "consume=rubber:2 rope:2",
-            "sleep=32000",
+            "sleep=duration:32s",
             "animate=working duration:35s",
             "produce=vest_padded"
          },
@@ -162,7 +162,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs protector_padded",
             "consume=rubber:2 rope:2 balsa gold",
-            "sleep=32000",
+            "sleep=duration:32s",
             "animate=working duration:35s",
             "produce=protector_padded"
          },

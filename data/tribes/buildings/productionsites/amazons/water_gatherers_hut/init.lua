@@ -38,7 +38,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "sleep=20000",
+            "sleep=duration:20s",
             "callworker=fetch_water",
             -- he carries 2 buckets so we need to create one now
             "produce=water",
