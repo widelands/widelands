@@ -224,6 +224,7 @@ unsigned MapObjectProgram::read_probability(const std::string& input) {
 	boost::smatch match;
 	boost::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
 	if (boost::regex_search(input, match, re)) {
+		// NOCOM Bug! Check for string length of second parameter.
 		const int result = 100 * std::stoi(match[1]) + (match[3].str().empty() ? 0 : std::stoi(match[3]));
 		if (result > kMaxProbability) {
 			throw GameDataError("Chance '%s' greater than 100%% given", input.c_str());
