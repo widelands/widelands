@@ -13,16 +13,16 @@ jobs:
     steps:
     - name: Installing dependencies
       run: |
-        $env:Path += ";C:\msys64\mingw64\bin"
-        pacman.exe --noconfirm -Syyuu
-        pacman.exe --noconfirm -Syyuu
-        pacman.exe --noconfirm -S mingw-w64-x86_64-ninja mingw-w64-x86_64-boost mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glbinding
+        C:\msys64\usr\bin\pacman.exe --noconfirm -Syyuu
+        C:\msys64\usr\bin\pacman.exe --noconfirm -Syyuu
+        C:\msys64\usr\bin\pacman.exe --noconfirm -S mingw-w64-x86_64-ninja mingw-w64-x86_64-boost mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glbinding
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
     - name: Compiler
       run: |
+        $env:Path += ";C:\msys64\mingw64\bin"
         mkdir build
         cd build
         cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DOPTION_USE_GLBINDING=ON -DCMAKE_C_COMPILER=C:\msys64\mingw64\bin\clang.exe -DCMAKE_CXX_COMPILER=C:\msys64\mingw64\bin\clang++.exe
