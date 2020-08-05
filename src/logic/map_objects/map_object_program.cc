@@ -219,8 +219,8 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 	   input.c_str());
 }
 
-// NOCOM document
-unsigned MapObjectProgram::read_chance(const std::string& input) {
+// NOCOM RST documentation
+unsigned MapObjectProgram::read_probability(const std::string& input) {
 	boost::smatch match;
 	boost::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
 	if (boost::regex_search(input, match, re)) {

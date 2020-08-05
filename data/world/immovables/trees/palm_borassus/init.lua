@@ -44,7 +44,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m10s",
-         "remove=chance:2.73%0",
+         "remove=chance:27.34%",
          "grow=palm_borassus_desert_mature",
       },
    },

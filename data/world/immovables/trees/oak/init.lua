@@ -44,7 +44,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m12s500ms",
-         "remove=chance:2.73%0",
+         "remove=chance:27.34%",
          "grow=oak_summer_mature",
       },
    },

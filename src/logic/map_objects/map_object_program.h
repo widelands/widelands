@@ -82,7 +82,12 @@ protected:
 	 */
 	static Duration read_duration(const std::string& input, const MapObjectDescr& descr);
 
-	static unsigned read_chance(const std::string& input);
+	/**
+	 * @brief Reads a percentage
+	 * @param input A percentage in the format 12%, 12.5% or 12.53%.
+	 * @return Scaled precentage as integer, where 100% corresponds to kMaxProbability.
+	 * */
+	static unsigned read_probability(const std::string& input);
 
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"
