@@ -300,6 +300,8 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 		if (item.first == "radius") {
 			act->iparam1 = read_positive(item.second);
 		} else if (item.first == "attrib") {
+			Notifications::publish(
+			   NoteMapObjectDescription(item.second, NoteMapObjectDescription::LoadType::kAttribute));
 			act->iparam2 = MapObjectDescr::get_attribute_id(item.second);
 		} else if (item.first == "type") {
 			act->sparam1 = item.second;
@@ -695,6 +697,8 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 		}
 
 		const std::string attrib_name = read_key_value_pair(cmd[i], ':', "", "attrib").second;
+		Notifications::publish(
+		   NoteMapObjectDescription(attrib_name, NoteMapObjectDescription::LoadType::kAttribute));
 		act->sparamv.push_back(attrib_name);
 		// get_attribute_id will throw a GameDataError if the attribute doesn't exist.
 		created_attributes_.insert(

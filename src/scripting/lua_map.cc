@@ -454,7 +454,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 			}
 		} else if (d > 0) {
 			for (; d; --d) {
-				if (!T::create_new_worker(*pi, egbase, wdes)) {
+				if (!T::create_new_worker(L, *pi, egbase, wdes)) {
 					report_error(L, "No space left for worker '%s' at '%s'", wdes->name().c_str(),
 					             pi->descr().name().c_str());
 				}
@@ -4715,7 +4715,7 @@ int LuaRoad::set_workers(lua_State* L) {
  ==========================================================
  */
 
-bool LuaRoad::create_new_worker(PlayerImmovable& pi,
+bool LuaRoad::create_new_worker(lua_State* L, PlayerImmovable& pi,
                                 EditorGameBase& egbase,
                                 const WorkerDescr* wdes) {
 	RoadBase& rb = dynamic_cast<RoadBase&>(pi);
@@ -4739,6 +4739,14 @@ bool LuaRoad::create_new_worker(PlayerImmovable& pi,
 	Path::StepVector::size_type idle_index = rb.get_idle_index();
 	for (Path::StepVector::size_type i = 0; i < idle_index; ++i) {
 		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
+	}
+
+	// Ensure the position is free - e.g. we want carrier + carrier2 for busy road, not 2x carrier!
+	for (Worker* existing : rb.get_workers()) {
+		if (existing->descr().name() == wdes->name()) {
+			report_error(
+			   L, "Road already has worker <%s> assigned at (%d, %d)", wdes->name().c_str(), idle_position.x, idle_position.y);
+		}
 	}
 
 	Carrier& carrier =
@@ -5551,7 +5559,7 @@ int LuaProductionSite::toggle_start_stop(lua_State* L) {
  ==========================================================
  */
 
-bool LuaProductionSite::create_new_worker(PlayerImmovable& pi,
+bool LuaProductionSite::create_new_worker(lua_State* /* L */, PlayerImmovable& pi,
                                           EditorGameBase& egbase,
                                           const WorkerDescr* wdes) {
 	ProductionSite& ps = static_cast<ProductionSite&>(pi);

@@ -100,9 +100,16 @@ function road_tests:test_carrier_creation_illegal_name()
    end)
 end
 function road_tests:test_carrier_no_space()
-   self.r:set_workers{barbarians_carrier=1}
-   assert_error("No space!", function ()
+   -- Our default road is busy
+   assert_error("2 identical carriers!", function ()
       self.r:set_workers{barbarians_carrier=2}
+   end)
+   self.r:set_workers{barbarians_carrier=1, barbarians_ox=1}
+
+   -- Now test normal road
+   local normal_road = player1:place_road("normal", self.end_flag, "r", "r")
+   assert_error("No space!", function ()
+      normal_road:set_workers{barbarians_carrier=1, barbarians_ox=1}
    end)
 end
 function road_tests:test_valid_workers()
