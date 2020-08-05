@@ -97,7 +97,7 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped",
          }
       },
@@ -109,7 +109,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has ax_sharp",
             "return=failed unless site has fish,meat",
             "return=failed unless site has barbarians_bread",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
             "consume=ax_sharp fish,meat barbarians_bread",
             "train=soldier attack 0 1"
@@ -123,7 +123,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has ax_broad",
             "return=failed unless site has fish,meat",
             "return=failed unless site has barbarians_bread",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 1",
             "consume=ax_broad fish,meat barbarians_bread",
             "train=soldier attack 1 2"
@@ -137,7 +137,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has ax_bronze",
             "return=failed unless site has fish,meat",
             "return=failed unless site has barbarians_bread",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 2",
             "consume=ax_bronze fish,meat barbarians_bread",
             "train=soldier attack 2 3"
@@ -151,7 +151,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has ax_battle",
             "return=failed unless site has fish,meat:2",
             "return=failed unless site has barbarians_bread",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 3",
             "consume=ax_battle fish,meat:2 barbarians_bread",
             "train=soldier attack 3 4"
@@ -165,7 +165,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has ax_warriors",
             "return=failed unless site has fish,meat",
             "return=failed unless site has barbarians_bread:2",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 4",
             "consume=ax_warriors fish,meat barbarians_bread:2",
             "train=soldier attack 4 5"
@@ -178,7 +178,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier health 0",
             "return=failed unless site has helmet",
             "return=failed unless site has barbarians_bread,fish,meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier health 0",
             "consume=helmet barbarians_bread,fish,meat",
             "train=soldier health 0 1"
@@ -192,7 +192,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has helmet_mask",
             "return=failed unless site has fish,meat",
             "return=failed unless site has barbarians_bread",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier health 1",
             "consume=helmet_mask fish,meat barbarians_bread",
             "train=soldier health 1 2"
@@ -206,7 +206,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has helmet_warhelm",
             "return=failed unless site has fish,meat:2",
             "return=failed unless site has barbarians_bread",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier health 2",
             "consume=helmet_warhelm fish,meat:2 barbarians_bread",
             "train=soldier health 2 3"

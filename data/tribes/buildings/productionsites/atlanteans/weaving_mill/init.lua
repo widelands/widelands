@@ -64,7 +64,7 @@ tribes:new_productionsite_type {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs spidercloth",
             "consume=spider_silk",
-            "sleep=20000",
+            "sleep=duration:20s",
             "playsound=sound/mill/weaving 120",
             "animate=working duration:20s",
             "produce=spidercloth"
@@ -77,7 +77,7 @@ tribes:new_productionsite_type {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs tabard",
             "consume=spider_silk",
-            "sleep=20000",
+            "sleep=duration:20s",
             "playsound=sound/mill/weaving 120",
             "animate=working duration:20s",
             "produce=tabard"
@@ -90,7 +90,7 @@ tribes:new_productionsite_type {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs tabard_golden",
             "consume=spider_silk gold_thread",
-            "sleep=20000",
+            "sleep=duration:20s",
             "playsound=sound/mill/weaving 120",
             "animate=working duration:20s",
             "produce=tabard_golden"
