@@ -395,7 +395,7 @@ protected:
 	                  const float scale,
 	                  RenderTarget* dst) const;
 
-	void molog(char const* fmt, ...) PRINTF_FORMAT(2, 3);
+	void molog(char const* fmt, ...) const PRINTF_FORMAT(2, 3);
 
 	const MapObjectDescr* descr_;
 	Serial serial_;
