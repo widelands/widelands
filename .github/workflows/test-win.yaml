@@ -25,7 +25,7 @@ jobs:
         $env:Path += ";C:\msys64\mingw64\bin"
         mkdir build
         cd build
-        cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DOPTION_USE_GLBINDING=ON -DCMAKE_C_COMPILER=C:\\msys64\\mingw64\\bin\\clang.exe -DCMAKE_CXX_COMPILER=C:\\msys64\\mingw64\\bin\\clang++.exe
+        cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DOPTION_USE_GLBINDING=ON -DCMAKE_C_COMPILER=C:/msys64/mingw64/bin/clang.exe -DCMAKE_CXX_COMPILER=C:/msys64/mingw64/bin/clang++.exe
         cmake.exe --build .
     - name: Test suite
       run: |
