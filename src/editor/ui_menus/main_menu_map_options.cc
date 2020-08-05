@@ -242,7 +242,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
      main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     inner_teams_box_(&teams_box_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h() / 2),
+     inner_teams_box_(
+        &teams_box_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h() / 2),
 
      name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
