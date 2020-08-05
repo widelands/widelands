@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
             "consume=empire_bread,fish,meat",
             "playsound=sound/empire/taverns/ration 100",
             "animate=working duration:23s",
-            "sleep=10000",
+            "sleep=duration:10s",
             "produce=ration"
          }
       },
@@ -75,7 +75,7 @@ tribes:new_productionsite_type {
             "consume=empire_bread fish,meat",
             "playsound=sound/empire/taverns/meal 100",
             "animate=working duration:30s",
-            "sleep=10000",
+            "sleep=duration:10s",
             "produce=meal"
          }
       },

@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs atlanteans_bread",
             "consume=water:2 blackroot_flour cornmeal",
             "animate=working duration:35s",
-            "sleep=30000",
+            "sleep=duration:30s",
             "produce=atlanteans_bread:2"
          }
       },

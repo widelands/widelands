@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs atlanteans_soldier",
             "consume=tabard trident_light atlanteans_recruit",
-            "sleep=15000",
+            "sleep=duration:15s",
             "animate=working duration:15s",
             "recruit=atlanteans_soldier"
          }

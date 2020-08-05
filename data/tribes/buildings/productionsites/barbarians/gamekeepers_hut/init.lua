@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "callworker=release",
-            "sleep=52500"
+            "sleep=duration:52s500ms"
          }
       },
    },

@@ -31,7 +31,7 @@ dirname = path.dirname(__file__)
 --    **helptext_script**:  The full path to the ``helptexts.lua`` script for this immovable.
 --
 --    **programs**: A table with the programs that this immovable will perform,
---    e.g. ``{ "animate=idle duration:2m30s500ms",  "remove=" }`` (see :doc:`immovable_program`)
+--    e.g. ``{ "animate=idle duration:2m30s500ms",  "remove=" }`` (see :ref:`immovable_programs`)
 --
 --    **animations**: A table containing all animations for this immovable.
 --

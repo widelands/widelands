@@ -17,7 +17,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:55s",
-         "remove=35",
+         "remove=success:35",
          "grow=beech_summer_pole",
       },
    },
@@ -44,7 +44,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m5s",
-         "remove=24",
+         "remove=success:24",
          "grow=beech_summer_mature",
       },
    },
@@ -71,7 +71,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m12s",
-         "remove=19",
+         "remove=success:19",
          "grow=beech_summer_old",
       },
    },
@@ -100,7 +100,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:25m25s",
-         "transform=deadtree2 20",
+         "transform=deadtree2 success:20",
          "seed=beech_summer_sapling 250",
       },
       fall = {

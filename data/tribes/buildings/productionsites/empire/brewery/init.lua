@@ -52,7 +52,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs beer",
             "consume=water wheat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "playsound=sound/empire/beerbubble 180",
             "animate=working duration:30s",
             "produce=beer"
