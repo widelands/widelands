@@ -41,6 +41,8 @@ struct MapObjectProgram {
 	virtual ~MapObjectProgram() = default;
 
 protected:
+	static constexpr int kMaxProbability = 10000;
+
 	/// Splits a string by separators.
 	/// \note This ignores empty elements, so do not use this for example to split
 	/// a string with newline characters into lines, because it would ignore empty
@@ -79,6 +81,8 @@ protected:
 	 * @return The duration in SDL ticks (milliseconds)
 	 */
 	static Duration read_duration(const std::string& input, const MapObjectDescr& descr);
+
+	static unsigned read_chance(const std::string& input);
 
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"

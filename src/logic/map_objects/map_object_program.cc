@@ -219,6 +219,20 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 	   input.c_str());
 }
 
+// NOCOM document
+unsigned MapObjectProgram::read_chance(const std::string& input) {
+	boost::smatch match;
+	boost::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
+	if (boost::regex_search(input, match, re)) {
+		const int result = 100 * std::stoi(match[1]) + (match[3].str().empty() ? 0 : std::stoi(match[3]));
+		if (result > kMaxProbability) {
+			throw GameDataError("Chance '%s' greater than 100%% given", input.c_str());
+		}
+		return result;
+	}
+	throw GameDataError("Wrong format for chance '%s'. Must look like '25%%', '25.4%%' or '25.26%%'.", input.c_str());
+}
+
 MapObjectProgram::ProgramParseInput
 MapObjectProgram::parse_program_string(const std::string& line) {
 	const std::pair<std::string, std::string> key_values =

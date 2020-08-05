@@ -205,6 +205,7 @@ Deletes this immovable and instantly replaces it with a different immovable or a
 parameters are given, the immovable is removed and no other transformation will take place. If
 ``success`` is specified, there's a probability that the transformation will be skipped.
 */
+// NOCOM document
 ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments,
                                              ImmovableDescr& descr) {
 	if (arguments.empty() || arguments.size() > 2) {
@@ -223,7 +224,10 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 					// guarantee the load order. Maybe in postload() one day.
 					type_name_ = item.second;
 				} else if (item.first == "success") {
-					probability_ = read_positive(item.second, 254);
+					// NOCOM remove
+					probability_ = (read_positive(item.second, 254) * kMaxProbability) / 256;
+				} else if (item.first == "chance") {
+					read_chance(item.second);
 				} else {
 					throw GameDataError(
 					   "Unknown argument '%s'. Usage: [bob:]name [success:chance]", argument.c_str());
@@ -238,7 +242,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 				log("WARNING: %s: Deprecated chance in 'transform' program, use 'success:<number>' "
 				    "instead.\n",
 				    descr.name().c_str());
-				probability_ = read_positive(item.first, 254);
+				probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
 			} else {
 				// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee
 				// the load order. Maybe in postload() one day.
@@ -263,7 +267,7 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 	if (immovable.apply_growth_delay(game)) {
 		return;
 	}
-	if (probability_ == 0 || game.logic_rand() % 256 < probability_) {
+	if (probability_ == 0 || game.logic_rand() % kMaxProbability < probability_) {
 		Player* player = immovable.get_owner();
 		Coords const c = immovable.get_position();
 		MapObjectDescr::OwnerType owner_type = immovable.descr().owner_type();
@@ -359,6 +363,7 @@ Parameter semantics:
     if this number is less than ``chance``. Otherwise, the next program step is triggered. If
     ``success:<chance>`` is omitted, the immovable will always be removed.
 */
+// NOCOM document
 ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
                                        const ImmovableDescr& descr) {
 	if (arguments.size() > 1) {
@@ -369,13 +374,16 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
 	} else {
 		const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
 		if (item.first == "success") {
-			probability_ = read_positive(item.second, 254);
+			// NOCOM remove
+			probability_ = (read_positive(item.second, 254) * kMaxProbability) / 256;
+		} else if (item.first == "chance") {
+			read_chance(item.second);
 		} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 			// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
 			log(
 			   "WARNING: %s: Deprecated chance in 'remove' program, use 'success:<number>' instead.\n",
 			   descr.name().c_str());
-			probability_ = read_positive(item.first, 254);
+			probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
 		} else {
 			throw GameDataError(
 			   "Unknown argument '%s'. Usage: [success:chance]", arguments.front().c_str());
@@ -384,7 +392,7 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
 }
 
 void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) const {
-	if (probability_ == 0 || game.logic_rand() % 256 < probability_) {
+	if (probability_ == 0 || game.logic_rand() % kMaxProbability < probability_) {
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 	} else {
 		immovable.program_step(game);
