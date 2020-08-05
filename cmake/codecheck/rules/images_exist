@@ -78,4 +78,7 @@ forbidden = [
 allowed = [
     # Loading image file that exists
     'g_gr->images().get("images/logos/wl-ico-128.png")',
+    'g_gr->images().get(kConstexpr)',
+    'g_gr->images().get("images/" + "foo/nonexistent.png")',
+    'g_gr->images().get((boost::format("images/%s") % "foo/nonexistent.png").str())',
 ]
