@@ -82,5 +82,13 @@ tribes:new_productionsite_type {
             "sleep=duration:13s"
          },
       },
+      dummy = {
+         -- dirty hack to make the relation to cutter inverse due to the cutter being an upgraded building
+         -- TODO(hessenfarmer): make this dissapear in building help
+         descname = "dummy",
+         actions = {
+            "produce=ironwood",
+         },
+      },
    }
 }
