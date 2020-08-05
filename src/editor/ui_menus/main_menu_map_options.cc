@@ -78,15 +78,19 @@ UI::Button* SuggestedTeamsEntry::create_button(Widelands::PlayerNumber p) {
 	                  playercolor_image(p, "images/players/player_position_menu.png"),
 	                  map_.get_scenario_player_name(p + 1), UI::Button::VisualState::kFlat);
 	b->sigclicked.connect([this, b, p]() {
+		auto teams_it = team_.begin();
 		for (std::vector<UI::Button*>& vector : buttons_) {
-			for (auto it = vector.begin(); it != vector.end(); ++it) {
+			auto t = teams_it->begin();
+			for (auto it = vector.begin(); it != vector.end(); ++it, ++t) {
 				if (*it == b) {
 					vector.erase(it);
+					teams_it->erase(t);
 					b->die();
 					update();
 					return;
 				}
 			}
+			++teams_it;
 		}
 		NEVER_HERE();
 	});
@@ -238,7 +242,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
      main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     inner_teams_box_(&teams_box_, padding_, padding_, UI::Box::Vertical, max_w_),
+     inner_teams_box_(&teams_box_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h() / 2),
 
      name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
@@ -359,6 +363,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	});
 
 	buttons_box_.add(&ok_, UI::Box::Resizing::kFullSize);
+	buttons_box_.add_space(4);
 	buttons_box_.add(&cancel_, UI::Box::Resizing::kFullSize);
 	tab_box_.add(&tabs_, UI::Box::Resizing::kFullSize);
 	tab_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
@@ -447,7 +452,9 @@ void MainMenuMapOptions::clicked_ok() {
 
 	map.get_suggested_teams().clear();
 	for (SuggestedTeamsEntry* ste : suggested_teams_entries_) {
-		map.get_suggested_teams().push_back(ste->team());
+		if (!ste->team().empty()) {
+			map.get_suggested_teams().push_back(ste->team());
+		}
 	}
 
 	map.clear_tags();
