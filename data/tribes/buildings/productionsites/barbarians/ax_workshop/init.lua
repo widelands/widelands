@@ -73,11 +73,11 @@ tribes:new_productionsite_type {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs ax",
             "consume=coal iron",
-            "sleep=26000",
+            "sleep=duration:26s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 22000",
+            "animate=working duration:22s",
             "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:9s",
             "produce=ax"
          }
       },
@@ -88,11 +88,11 @@ tribes:new_productionsite_type {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_sharp",
             "consume=coal iron:2",
-            "sleep=26000",
+            "sleep=duration:26s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 22000",
+            "animate=working duration:22s",
             "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:9s",
             "produce=ax_sharp"
          }
       },
@@ -103,11 +103,11 @@ tribes:new_productionsite_type {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_broad",
             "consume=coal:2 iron:2",
-            "sleep=26000",
+            "sleep=duration:26s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 22000",
+            "animate=working duration:22s",
             "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:9s",
             "produce=ax_broad"
          }
       },

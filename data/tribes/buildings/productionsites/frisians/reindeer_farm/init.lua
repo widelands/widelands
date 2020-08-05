@@ -82,8 +82,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs frisians_reindeer",
             "consume=barley water",
-            "sleep=15000",
-            "animate=working 15000",
+            "sleep=duration:15s",
+            "animate=working duration:15s",
             "recruit=frisians_reindeer"
          }
       },
@@ -93,8 +93,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fur",
             "consume=barley water",
-            "sleep=15000",
-            "animate=working 20000",
+            "sleep=duration:15s",
+            "animate=working duration:20s",
             "produce=fur"
          }
       },
@@ -104,8 +104,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fur",
             "consume=barley water",
-            "sleep=15000",
-            "animate=working 20000",
+            "sleep=duration:15s",
+            "animate=working duration:20s",
             "produce=fur meat"
          }
       },

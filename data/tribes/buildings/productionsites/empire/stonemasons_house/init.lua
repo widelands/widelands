@@ -52,9 +52,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs marble_column",
             "consume=marble:2",
-            "sleep=50000",
+            "sleep=duration:50s",
             "playsound=sound/stonecutting/stonemason 192",
-            "animate=working 32000",
+            "animate=working duration:32s",
             "produce=marble_column"
          }
       },

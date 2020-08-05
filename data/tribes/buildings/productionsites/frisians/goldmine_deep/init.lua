@@ -78,7 +78,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs gold_ore",
             "consume=meal",
-            "sleep=39800",
+            "sleep=duration:39s800ms",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
@@ -89,7 +89,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining gold",
          actions = {
-            "animate=working 12200",
+            "animate=working duration:12s200ms",
             "mine=gold 3 100 10 5",
             "produce=gold_ore",
          }

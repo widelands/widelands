@@ -896,7 +896,7 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 		   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
 		return;
 	}
-	get_owner()->force_csite(c, get_owner()->tribe().port());
+	get_owner()->force_csite(c, get_owner()->tribe().port()).set_destruction_blocked(true);
 
 	// Make sure that we have space to squeeze in a lumberjack
 	std::vector<ImmovableFound> trees_rocks;
@@ -1019,14 +1019,13 @@ void Ship::draw(const EditorGameBase& egbase,
 	if (info_to_draw & InfoToDraw::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
-			if (destination_) {
-				/** TRANSLATORS: This is a ship state. The ship is currently transporting wares. */
-				statistics_string = pgettext("ship_state", "Shipping");
-			} else {
-				/** TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
-				 * nothing to do. */
-				statistics_string = pgettext("ship_state", "Idle");
-			}
+			statistics_string =
+			   destination_ && fleet_->get_schedule().is_busy(*this) ?
+			      /** TRANSLATORS: This is a ship state. The ship is currently transporting wares. */
+			      pgettext("ship_state", "Shipping") :
+			      /** TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
+			       * nothing to do. */
+			      pgettext("ship_state", "Empty");
 			break;
 		case (ShipStates::kExpeditionWaiting):
 			/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */

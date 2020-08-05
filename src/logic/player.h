@@ -613,6 +613,11 @@ public:
 
 	const std::string pick_shipname();
 
+	bool is_muted(DescriptionIndex di) const {
+		return muted_building_types_.count(di);
+	}
+	void set_muted(DescriptionIndex, bool mute);
+
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
@@ -644,7 +649,8 @@ private:
 	uint32_t casualties_, kills_;
 	uint32_t msites_lost_, msites_defeated_;
 	uint32_t civil_blds_lost_, civil_blds_defeated_;
-	std::unordered_set<std::string> remaining_shipnames_;
+
+	std::list<std::string> remaining_shipnames_;
 	// If we run out of ship names, we'll want to continue with unique numbers
 	uint32_t ship_name_counter_;
 
@@ -687,6 +693,8 @@ private:
 	 * ware_stocks_[ware_id][time_index]
 	 */
 	std::vector<std::vector<uint32_t>> ware_stocks_;
+
+	std::set<DescriptionIndex> muted_building_types_;
 
 	std::set<PlayerNumber> forbid_attack_;
 

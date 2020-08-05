@@ -55,7 +55,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs coal",
             "consume=beer meal",
-            "sleep=38000",
+            "sleep=duration:38s",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining coal",
          actions = {
-            "animate=working 8000",
+            "animate=working duration:8s",
             "mine=coal 2 100 5 2",
             "produce=coal",
          }

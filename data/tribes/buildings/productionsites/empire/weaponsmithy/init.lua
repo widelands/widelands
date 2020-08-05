@@ -72,11 +72,11 @@ tribes:new_productionsite_type {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs spear_wooden",
             "consume=planks",
-            "sleep=20000",
+            "sleep=duration:20s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 21000",
+            "animate=working duration:21s",
             "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:9s",
             "produce=spear_wooden"
          }
       },
@@ -87,11 +87,11 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear",
             "consume=coal iron planks",
-            "sleep=32000",
+            "sleep=duration:32s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
+            "animate=working duration:36s",
             "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:9s",
             "produce=spear"
          }
       },
@@ -102,11 +102,11 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_advanced",
             "consume=coal iron:2 planks",
-            "sleep=32000",
+            "sleep=duration:32s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
+            "animate=working duration:36s",
             "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:9s",
             "produce=spear_advanced"
          }
       },
@@ -117,11 +117,11 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_heavy",
             "consume=coal:2 gold iron planks",
-            "sleep=32000",
+            "sleep=duration:32s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
+            "animate=working duration:36s",
             "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:9s",
             "produce=spear_heavy"
          }
       },
@@ -132,11 +132,11 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_war",
             "consume=coal:2 gold iron:2 planks",
-            "sleep=32000",
+            "sleep=duration:32s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
+            "animate=working duration:36s",
             "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:9s",
             "produce=spear_war"
          }
       },

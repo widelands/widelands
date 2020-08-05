@@ -57,7 +57,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs granite",
             "consume=ration",
-            "sleep=20000",
+            "sleep=duration:20s",
             "call=mine_produce",
             "call=mine_produce",
          }
@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining granite",
          actions = {
-            "animate=working 10000",
+            "animate=working duration:10s",
             "mine=stones 2 100 5 2",
             "produce=granite",
          }

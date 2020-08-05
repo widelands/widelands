@@ -16,8 +16,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 42000",
-         "remove=32",
+         "animate=idle duration:42s",
+         "remove=success:32",
          "grow=palm_oil_desert_pole",
       },
    },
@@ -43,8 +43,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 40000",
-         "remove=25",
+         "animate=idle duration:40s",
+         "remove=success:25",
          "grow=palm_oil_desert_mature",
       },
    },
@@ -70,11 +70,11 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 25000",
-         "remove=10",
+         "animate=idle duration:25s",
+         "remove=success:10",
          "seed=palm_oil_desert_sapling 80",
-         "animate=idle 30000",
-         "remove=10",
+         "animate=idle duration:30s",
+         "remove=success:10",
          "grow=palm_oil_desert_old",
 
       },
@@ -103,8 +103,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 800000",
-         "transform=deadtree5 50",
+         "animate=idle duration:13m20s",
+         "transform=deadtree5 success:50",
          "seed=palm_oil_desert_sapling 80",
       },
       fall = {
