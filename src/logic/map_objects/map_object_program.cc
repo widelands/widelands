@@ -227,11 +227,11 @@ unsigned MapObjectProgram::read_probability(const std::string& input) {
 		// NOCOM Bug! Check for string length of second parameter.
 		const int result = 100 * std::stoi(match[1]) + (match[3].str().empty() ? 0 : std::stoi(match[3]));
 		if (result > kMaxProbability) {
-			throw GameDataError("Chance '%s' greater than 100%% given", input.c_str());
+			throw GameDataError("Percentage '%s' greater than 100%% given", input.c_str());
 		}
 		return result;
 	}
-	throw GameDataError("Wrong format for chance '%s'. Must look like '25%%', '25.4%%' or '25.26%%'.", input.c_str());
+	throw GameDataError("Wrong format for percentage '%s'. Must look like '25%%', '25.4%%' or '25.26%%'.", input.c_str());
 }
 
 MapObjectProgram::ProgramParseInput
