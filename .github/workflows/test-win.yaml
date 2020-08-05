@@ -16,7 +16,7 @@ jobs:
     - name: Installing dependencies
       run: |
         C:\msys64\usr\bin\pacman.exe --noconfirm -S mingw-w64-x86_64-ninja mingw-w64-x86_64-boost mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glbinding
-        dir C:\msys64 *clang* -recurse  # NOCOM
+        # dir C:\msys64 *clang* -recurse  # NOCOM
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -25,5 +25,5 @@ jobs:
       run: |
         mkdir build
         cd build
-        C:\msys64\mingw64\bin\cmake.exe -G C:\msys64\mingw64\bin\ninja.exe .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DUSE_FLTO_IF_AVAILABLE=OFF
+        C:\msys64\mingw64\bin\cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DUSE_FLTO_IF_AVAILABLE=OFF
         C:\msys64\mingw64\bin\cmake.exe --build .
