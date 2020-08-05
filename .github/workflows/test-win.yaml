@@ -2,7 +2,7 @@ name: MS-Windows Compilation Test
 on:
   pull_request:
     branches: [ master ]
-    types: [ opened, edited, synchronize ]
+    types: [ opened, synchronize ]
 jobs:
   compile:
     strategy:
