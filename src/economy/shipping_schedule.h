@@ -95,6 +95,8 @@ public:
 	 */
 	bool empty() const;
 
+	bool is_busy(const Ship&) const;
+
 	void log_general_info(const EditorGameBase&) const;
 
 	void save(const EditorGameBase&, MapObjectSaver&, FileWrite&) const;

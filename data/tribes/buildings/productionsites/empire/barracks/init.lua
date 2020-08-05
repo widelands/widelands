@@ -57,7 +57,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs empire_soldier",
             "consume=armor_helmet spear_wooden empire_recruit",
-            "sleep=15000",
+            "sleep=duration:15s",
             "animate=working duration:15s",
             "recruit=empire_soldier"
          }
