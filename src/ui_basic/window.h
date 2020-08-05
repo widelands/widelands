@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,11 @@
 #ifndef WL_UI_BASIC_WINDOW_H
 #define WL_UI_BASIC_WINDOW_H
 
-#include "ui_basic/panel.h"
+#include "ui_basic/button.h"
+
+#include <memory>
+
+#include "graphic/graphic.h"
 
 namespace UI {
 /**
@@ -86,6 +90,14 @@ public:
 		return true;
 	}
 
+	bool is_pinned() const {
+		return pinned_;
+	}
+	void set_pinned(bool p) {
+		pinned_ = p;
+		update_toolbar_buttons();
+	}
+
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 	void draw_border(RenderTarget&) override;
@@ -98,18 +110,24 @@ public:
 	handle_mousemove(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_tooltip() override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
 	void die() override;
 	void layout() override;
 	void update_desired_size() override;
 
+	virtual void clicked_button_close();
+
 private:
+	void on_resolution_changed_note(const GraphicResolutionChanged& note);
+
 	bool is_minimal_;
 	uint32_t oldh_;  // if it is minimized, this is the old height
 	bool dragging_, docked_left_, docked_right_, docked_bottom_;
 	int32_t drag_start_win_x_, drag_start_win_y_;
 	int32_t drag_start_mouse_x_, drag_start_mouse_y_;
+	bool pinned_;
 
 	std::string title_;
 
@@ -121,6 +139,14 @@ private:
 
 	Panel* center_panel_;
 	Panel* fastclick_panel_;
+
+	Button* button_close_;
+	Button* button_pin_;
+	Button* button_minimize_;
+	void update_toolbar_buttons();
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 }  // namespace UI
 

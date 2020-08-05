@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -132,14 +132,14 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	if (can_act_) {
 		UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 		UI::Button* b;
-		add(buttons);
+		add(buttons, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		add_space(15);
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                             \
 	b = new UI::Button(                                                                             \
 	   buttons, #policy, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,                                   \
 	   g_gr->images().get("images/wui/buildings/stock_policy_button_" #policy ".png"), tooltip),    \
-	b->sigclicked.connect(                                                                          \
-	   boost::bind(&WarehouseWaresPanel::set_policy, this, Widelands::StockPolicy::k##policyname)), \
+	b->sigclicked.connect([this]() { set_policy(Widelands::StockPolicy::k##policyname); }),         \
 	buttons->add(b);
 
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
@@ -155,7 +155,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 void WarehouseWaresPanel::set_policy(Widelands::StockPolicy newpolicy) {
 	if (gb_.can_act(wh_.owner().player_number())) {
 		bool is_workers = type_ == Widelands::wwWORKER;
-		const std::set<Widelands::DescriptionIndex> indices =
+		const std::set<Widelands::DescriptionIndex>& indices =
 		   is_workers ? wh_.owner().tribe().workers() : wh_.owner().tribe().wares();
 
 		for (const Widelands::DescriptionIndex& index : indices) {

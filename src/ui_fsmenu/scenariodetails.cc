@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,9 +18,8 @@
 
 #include "ui_fsmenu/scenariodetails.h"
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/scrollbar.h"
 
 ScenarioDetails::ScenarioDetails(Panel* parent)

@@ -19,16 +19,23 @@ tribes:new_productionsite_type {
       log = 1,
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 91},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {40, 73},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 69},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {40, 56}
+      }
    },
 
    aihints = {
@@ -40,22 +47,13 @@ tribes:new_productionsite_type {
       frisians_forester = 1
    },
 
-   indicate_workarea_overlaps = {
-      frisians_clay_pit = false,
-      frisians_berry_farm = false,
-      frisians_reed_farm = false,
-      frisians_farm = false,
-      frisians_foresters_house = false,
-      frisians_woodcutters_house = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
          descname = _"planting trees",
          actions = {
             "callworker=plant",
-            "sleep=12000"
+            "sleep=duration:12s"
          }
       },
    },

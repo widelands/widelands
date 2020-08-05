@@ -11,18 +11,18 @@ tribes:new_immovable_type {
    attributes = { "ripe_barley", "field" },
    programs = {
       program = {
-         "animate=idle 2500000",
+         "animate=idle duration:41m40s",
          "remove=",
       },
       harvest = {
          "transform=barleyfield_harvested"
       }
    },
-
    animations = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = { 21, 34 },
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {21, 34}
+      }
    }
 }

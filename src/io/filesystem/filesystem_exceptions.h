@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 #define WL_IO_FILESYSTEM_FILESYSTEM_EXCEPTIONS_H
 
 #include <stdexcept>
-#include <string>
 
 /**
  * Generic problem when dealing with a file or directory

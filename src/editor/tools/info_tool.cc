@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,15 +19,11 @@
 
 #include "editor/tools/info_tool.h"
 
-#include <cstdio>
-#include <vector>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/world/editor_category.h"
+#include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/multilinetextarea.h"
@@ -210,7 +206,8 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 	// *** Map info
 	buf += as_heading(_("Map"), UI::PanelStyle::kWui);
 	buf += as_listitem(
-	   (boost::format(pgettext("map_name", "Name: %s")) % map->get_name()).str(), font_style);
+	   (boost::format(pgettext("map_name", "Name: %s")) % richtext_escape(map->get_name())).str(),
+	   font_style);
 	buf += as_listitem(
 	   (boost::format(_("Size: %1% x %2%")) % map->get_width() % map->get_height()).str(),
 	   font_style);
@@ -223,9 +220,11 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 		buf += as_listitem(_("Players: –"), font_style);
 	}
 
-	buf += as_listitem((boost::format(_("Author: %s")) % map->get_author()).str(), font_style);
-	buf +=
-	   as_listitem((boost::format(_("Description: %s")) % map->get_description()).str(), font_style);
+	buf += as_listitem(
+	   (boost::format(_("Author: %s")) % richtext_escape(map->get_author())).str(), font_style);
+	buf += as_listitem(
+	   (boost::format(_("Description: %s")) % richtext_escape(map->get_description())).str(),
+	   font_style);
 
 	multiline_textarea->set_text(as_richtext(buf));
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,15 +19,9 @@
 
 #include "logic/map_objects/tribes/dismantlesite.h"
 
-#include <cstdio>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
-#include "graphic/animation.h"
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -49,7 +43,6 @@ DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
    : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, tribes),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
-	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE);  // Yep, this is correct.
 }
 
 Building& DismantleSiteDescr::create_object() const {
@@ -76,8 +69,9 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
                              const Coords& c,
                              Player* plr,
                              bool loading,
-                             FormerBuildings& former_buildings)
-   : PartiallyFinishedBuilding(gdescr) {
+                             FormerBuildings& former_buildings,
+                             const std::map<DescriptionIndex, Quantity>& preserved_wares)
+   : PartiallyFinishedBuilding(gdescr), preserved_wares_(preserved_wares), next_dropout_index_(0) {
 	position_ = c;
 	set_owner(plr);
 
@@ -134,10 +128,15 @@ bool DismantleSite::init(EditorGameBase& egbase) {
 
 	PartiallyFinishedBuilding::init(egbase);
 
+	for (const auto& pair : preserved_wares_) {
+		WaresQueue* q = new WaresQueue(*this, pair.first, pair.second);
+		q->set_filled(pair.second);
+		dropout_wares_.push_back(q);
+	}
 	for (const auto& ware : count_returned_wares(this)) {
 		WaresQueue* wq = new WaresQueue(*this, ware.first, ware.second);
 		wq->set_filled(ware.second);
-		wares_.push_back(wq);
+		consume_wares_.push_back(wq);
 		work_steps_ += ware.second;
 	}
 	return true;
@@ -180,9 +179,9 @@ Construction sites only burn if some of the work has been completed.
 ===============
 */
 bool DismantleSite::burn_on_destroy() {
-	if (work_completed_ >= work_steps_)
+	if (work_completed_ >= work_steps_) {
 		return false;  // completed, so don't burn
-
+	}
 	return true;
 }
 
@@ -200,18 +199,39 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		return true;
 	}
 
-	if (!work_steps_)           //  Happens for building without buildcost.
-		schedule_destroy(game);  //  Complete the building immediately.
+	// Drop out preserved wares round-robin
+	if (const size_t nr_dropout_queues = dropout_wares_.size()) {
+		bool first_round = true;
+		for (size_t i = next_dropout_index_; i != next_dropout_index_ || first_round;
+		     i = (i + 1) % nr_dropout_queues, first_round = false) {
+			WaresQueue& q = *dropout_wares_[i];
+			if (q.get_filled()) {
+				q.set_filled(q.get_filled() - 1);
+				q.set_max_size(q.get_max_size() - 1);
+				const WareDescr& wd = *owner().tribe().get_ware_descr(q.get_index());
+				WareInstance& ware = *new WareInstance(q.get_index(), &wd);
+				ware.init(game);
+				worker.start_task_dropoff(game, ware);
+				next_dropout_index_ = (i + 1) % nr_dropout_queues;
+				return true;
+			}
+		}
+	}
+
+	if (!work_steps_) {
+		// Happens for building without buildcost. Complete the building immediately.
+		schedule_destroy(game);
+	}
 
 	// Check if one step has completed
 	if (static_cast<int32_t>(game.get_gametime() - work_steptime_) >= 0 && working_) {
 		++work_completed_;
 
-		for (uint32_t i = 0; i < wares_.size(); ++i) {
-			WaresQueue& wq = *wares_[i];
-
-			if (!wq.get_filled())
+		for (uint32_t i = 0; i < consume_wares_.size(); ++i) {
+			WaresQueue& wq = *consume_wares_[i];
+			if (!wq.get_filled()) {
 				continue;
+			}
 
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);
@@ -253,7 +273,7 @@ Draw it.
 ===============
 */
 void DismantleSite::draw(uint32_t gametime,
-                         const TextToDraw draw_text,
+                         const InfoToDraw info_to_draw,
                          const Vector2f& point_on_dst,
                          const Widelands::Coords& coords,
                          float scale,
@@ -262,19 +282,35 @@ void DismantleSite::draw(uint32_t gametime,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	if (was_immovable_) {
-		dst->blit_animation(
-		   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(
+			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
+		} else {
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), tanim,
+			                    nullptr, kBuildingSilhouetteOpacity);
+		}
 	} else {
 		// Draw the construction site marker
-		dst->blit_animation(
-		   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(
+			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
+		} else {
+			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr,
+			                    kBuildingSilhouetteOpacity);
+		}
 	}
 
 	// Blit bottom part of the animation according to dismantle progress
-	dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
-	                    &player_color, 100 - ((get_built_per64k() * 100) >> 16));
+	if (info_to_draw & InfoToDraw::kShowBuildings) {
+		dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
+		                    &player_color, 1.f, 100 - ((get_built_per64k() * 100) >> 16));
+	} else {
+		dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
+		                    nullptr, kBuildingSilhouetteOpacity,
+		                    100 - ((get_built_per64k() * 100) >> 16));
+	}
 
 	// Draw help strings
-	draw_info(draw_text, point_on_dst, scale, dst);
+	draw_info(info_to_draw, point_on_dst, scale, dst);
 }
 }  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,12 +21,13 @@
 
 #include <memory>
 
+#include <SDL_timer.h>
+
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
-#include "io/fileread.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
@@ -43,8 +44,9 @@ GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::st
 	// Loading the "texts" locale for translating the tips
 	i18n::Textdomain textdomain("texts");
 
-	for (uint8_t i = 0; i < names.size(); ++i)
+	for (uint8_t i = 0; i < names.size(); ++i) {
 		load_tips(names[i]);
+	}
 
 	if (!tips_.empty()) {
 		// add visualization only if any tips are loaded
@@ -78,13 +80,14 @@ void GameTips::load_tips(const std::string& name) {
 }
 
 void GameTips::update(bool repaint) {
-	uint8_t ticks = SDL_GetTicks();
+	uint32_t ticks = SDL_GetTicks();
 	if (ticks >= (lastUpdated_ + updateAfter_)) {
-		const uint32_t next = rand() % tips_.size();
-		if (next == lastTip_)
+		const uint32_t next = std::rand() % tips_.size();  // NOLINT
+		if (next == lastTip_) {
 			lastTip_ = (next + 1) % tips_.size();
-		else
+		} else {
 			lastTip_ = next;
+		}
 		show_tip(next);
 		lastUpdated_ = SDL_GetTicks();
 		updateAfter_ = tips_[next].interval * 1000;

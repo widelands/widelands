@@ -7,9 +7,6 @@ terrain_affinity = {
    pickiness = 50,
 }
 
-animations = {}
-add_animation(animations, "idle", dirname .. "tiny", "idle", { 4, 10 })
-
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_currant_black_tiny",
@@ -21,16 +18,21 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 20000",
-         "remove=10",
+         "animate=idle duration:20s",
          "grow=berry_bush_currant_black_small",
       },
    },
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname .. "tiny",
+         basename = "idle",
+         hotspot = {4, 10},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "small", "idle", { 8, 20 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -43,16 +45,21 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 24000",
-         "remove=30",
+         "animate=idle duration:24s",
          "grow=berry_bush_currant_black_medium",
       },
    },
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname .. "small",
+         basename = "idle",
+         hotspot = {8, 20},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "medium", "idle", { 13, 33 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -65,16 +72,21 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 22000",
-         "remove=70",
+         "animate=idle duration:22s",
          "grow=berry_bush_currant_black_ripe",
       },
    },
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname .. "medium",
+         basename = "idle",
+         hotspot = {13, 33},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "ripe", "idle", { 13, 33 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -87,12 +99,21 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 200000",
+         "animate=idle duration:3m20s",
          "remove=",
       },
       harvest = {
          "remove=",
       }
    },
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname .. "ripe",
+         basename = "idle",
+         hotspot = {13, 33},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
+   }
 }

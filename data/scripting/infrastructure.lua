@@ -6,22 +6,24 @@
 -- for maps. This includes placing buildings and roads.
 
 -- RST
--- .. function:: connected_road(plr, sflag, descr[, create_carriers = true])
+-- .. function:: connected_road(roadtype, plr, sflag, descr[, create_carriers = true])
 --
---    This is a convenience function to create roads. It is basically a frontend
+--    This is a convenience function to create roads and waterways. It is basically a frontend
 --    to :meth:`wl.game.Player.place_road`. The road is forced, that is other
 --    stuff in the way is removed. A sample usage:
 --
 --    .. code-block:: lua
 --
 --       local game = wl.Game()
---       connected_road(game.players[1], game.map:get_field(20,20).immovable, "r,r|br,r|r,r")
+--       connected_road("normal", game.players[1], game.map:get_field(20,20).immovable, "r,r|br,r|r,r")
 --
 --    This would create a road starting from the Flag standing at field(20,20)
 --    which must exist and goes from there 2 steps right (east), places a new
 --    flag. Then it goes one step bottom-right and one step right, places the
 --    next flag and then goes two steps right again and places the last flag.
 --
+--    :arg roadtype: 'normal', 'busy', or 'waterway'
+--    :type roadtype: :class:`string`
 --    :arg plr: The player for which the road is created
 --    :type plr: :class:`wl.game.Player`
 --    :arg sflag: The starting flag for this road.
@@ -33,7 +35,7 @@
 --       the roads. Otherwise no carriers will be created.
 --    :type create_carriers: :class:`boolean`
 
-function connected_road(p, start, cmd, g_create_carriers)
+function connected_road(roadtype, p, start, cmd, g_create_carriers)
    create_carriers = true
    if g_create_carriers ~= nil then
       create_carriers = g_create_carriers
@@ -48,10 +50,12 @@ function connected_road(p, start, cmd, g_create_carriers)
       moves[#moves+1] = m:sub(1,-2)
       if(m:sub(-1) == '|') then
          moves[#moves+1] = true -- Force the road
-         r = p:place_road(start, table.unpack(moves))
+         r = p:place_road(roadtype, start, table.unpack(moves))
          start = r.end_flag
          if create_carriers then
-            r:set_workers(p.tribe.carrier, 1)
+            if roadtype == "normal" then r:set_workers(p.tribe.carrier, 1)
+            elseif roadtype == "busy" then r:set_workers({[p.tribe.carrier] = 1, [p.tribe.carrier2] = 1})
+            else r:set_workers(p.tribe.ferry, 1) end
          end
          moves = {}
       end
@@ -73,7 +77,7 @@ end
 --          {"well", 52, 30}, -- a well with workers
 --       )
 --
---    :arg plr: The player for which the road is created
+--    :arg plr: The player for which the building is created
 --    :type plr: :class:`wl.game.Player`
 --    :arg b1_descr: An array of tables. Each table must contain at
 --       least the name of the building, and the x and y positions of the field
@@ -147,7 +151,7 @@ end
 --    :returns: The building created
 
 function place_building_in_region(plr, building, fields, gargs)
-   set_textdomain("widelands")
+   push_textdomain("widelands")
    local idx
    local f
    local args = gargs or {}
@@ -170,6 +174,7 @@ function place_building_in_region(plr, building, fields, gargs)
       p(_([[Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition.]])),
       {popup=true, heading=_"Not enough space"}
    )
+   pop_textdomain()
 end
 
 
@@ -188,4 +193,62 @@ function is_building(immovable)
       immovable.descr.type_name == "warehouse" or
       immovable.descr.type_name == "militarysite" or
       immovable.descr.type_name == "trainingsite"
+end
+
+-- RST
+-- .. function:: add_wares_to_warehouse(player, warehouse, waretable)
+--
+--    Adds(subtracts) wares to the first warehouse of specified type
+--
+--    :arg player: the player to add wares to
+--    :arg warehouse: The type of warehouse (string) to add wares to
+--    :arg waretable: a table of pairs {ware = value}
+
+function add_wares_to_warehouse(player, warehouse, waretable)
+   local hq = player:get_buildings(warehouse)[1]
+   for ware,warecount in pairs(waretable) do
+      local oldwarecount = hq:get_wares(ware) or 0
+      if warecount < 0 and -warecount > oldwarecount then
+         warecount = -oldwarecount
+      end
+      hq:set_wares(ware, oldwarecount+warecount)
+   end
+end
+
+-- RST
+-- .. function:: check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, waretable_trees)
+--
+--    Checks for rocks or trees in the region of the player starting field and adds wares if no immovables found
+--
+--    :arg player: the player to check
+--    :arg sf: starting field of the player
+--    :arg warehouse: The type of warehouse (string) to add wares to
+--    :arg waretable_rocks: a table of pairs {ware = value} to add if no rocks
+--    :arg waretable_trees: a table of pairs {ware = value} to add if no trees
+
+function check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, waretable_trees)
+   -- NOTE: pessimistically, this could be a single rock and a single tree
+   local has_rocks = false
+   local has_trees = false
+   for k,f in pairs(sf:region(10)) do
+      if f.immovable then
+         if not has_rocks and f.immovable:has_attribute('rocks') then
+            has_rocks = true
+         elseif not has_trees and f.immovable:has_attribute('tree') then
+            has_trees = true
+         end
+         if has_trees and has_rocks then
+            break
+         end
+      end
+   end
+   if not has_rocks then
+      add_wares_to_warehouse(player, warehouse, waretable_rocks)
+      player:send_message(_"No rocks nearby", _"There are no rocks near to your starting position. Therefore, you receive extra resources for bootstrapping your economy.")
+   end
+   -- adding exactly one forester
+   if not has_trees then
+      add_wares_to_warehouse(player, warehouse, waretable_trees)
+      player:send_message(_"No trees nearby", _"There are no trees near to your starting position. Therefore, you receive extra resources for bootstrapping your economy.")
+   end
 end

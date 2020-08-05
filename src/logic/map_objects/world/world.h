@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,12 +25,11 @@
 #include "base/macros.h"
 #include "logic/map_objects/description_maintainer.h"
 
-class LuaInterface;
 class LuaTable;
 
 namespace Widelands {
 
-struct CritterDescr;
+class CritterDescr;
 class EditorCategory;
 class ImmovableDescr;
 class ResourceDescription;
@@ -55,13 +54,14 @@ public:
 	DescriptionIndex get_critter(char const* const l) const;
 	CritterDescr const* get_critter_descr(DescriptionIndex index) const;
 	CritterDescr const* get_critter_descr(const std::string& name) const;
+	DescriptionIndex get_nr_critters() const;
 
 	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
 	DescriptionIndex get_immovable_index(const std::string& name) const;
 	DescriptionIndex get_nr_immovables() const;
 	ImmovableDescr const* get_immovable_descr(DescriptionIndex index) const;
 
-	DescriptionIndex get_resource(const char* const name) const;
+	DescriptionIndex resource_index(const char* const name) const;
 	ResourceDescription const* get_resource(DescriptionIndex res) const;
 	DescriptionIndex get_nr_resources() const;
 	DescriptionIndex safe_resource_index(const char* const warename) const;

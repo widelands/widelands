@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 
 #include "economy/request.h"
 #include "economy/wares_queue.h"
+#include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/building.h"
 
 namespace Widelands {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,6 @@
 #ifndef WL_MAP_IO_S2MAP_H
 #define WL_MAP_IO_S2MAP_H
 
-#include <string>
-
-#include "base/macros.h"
 #include "map_io/map_loader.h"
 
 class FileRead;

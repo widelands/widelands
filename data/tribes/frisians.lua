@@ -1,14 +1,30 @@
 image_dirname = path.dirname(__file__) .. "images/frisians/"
 
-animations = {}
-add_animation(animations, "frontier", image_dirname, "frontier", {9, 26})
-add_animation(animations, "flag", image_dirname, "flag", {10, 39}, 10)
-
 tribes:new_tribe {
    name = "frisians",
-   animations = animations,
+   animation_directory = image_dirname,
+   animations = {
+      frontier = { hotspot = {8, 26} },
+      bridge_normal_e = { hotspot = {-2, 12} },
+      bridge_busy_e = { hotspot = {-2, 12} },
+      bridge_normal_se = { hotspot = {5, 2} },
+      bridge_busy_se = { hotspot = {5, 2} },
+      bridge_normal_sw = { hotspot = {36, 3} },
+      bridge_busy_sw = { hotspot = {36, 3} }
+   },
+   spritesheets = {
+      flag = {
+         hotspot = {11, 41},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
 
-   -- Image file paths for this tribe's road textures
+   bridge_height = 8,
+
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          image_dirname .. "roadt_busy.png",
@@ -16,6 +32,9 @@ tribes:new_tribe {
       normal = {
          image_dirname .. "roadt_normal_00.png",
          image_dirname .. "roadt_normal_01.png",
+      },
+      waterway = {
+         "tribes/images/frisians/waterway_0.png",
       },
    },
 
@@ -122,6 +141,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "frisians_carrier",
+         "frisians_ferry",
          "frisians_reindeer",
          "frisians_reindeer_breeder"
       },
@@ -198,6 +218,10 @@ tribes:new_tribe {
       "berry_bush_strawberry_small",
       "berry_bush_strawberry_medium",
       "berry_bush_strawberry_ripe",
+      "berry_bush_stink_tree_tiny",
+      "berry_bush_stink_tree_small",
+      "berry_bush_stink_tree_medium",
+      "berry_bush_stink_tree_ripe",
       "berry_bush_desert_hackberry_tiny",
       "berry_bush_desert_hackberry_small",
       "berry_bush_desert_hackberry_medium",
@@ -214,6 +238,8 @@ tribes:new_tribe {
       "pond_dry",
       "pond_growing",
       "pond_mature",
+      "pond_burning",
+      "pond_coal",
       "reedfield_tiny",
       "reedfield_small",
       "reedfield_medium",
@@ -254,6 +280,7 @@ tribes:new_tribe {
       "frisians_reed_farm",
       "frisians_well",
       "frisians_clay_pit",
+      "frisians_charcoal_burners_house",
       "frisians_berry_farm",
       "frisians_collectors_house",
       "frisians_beekeepers_house",
@@ -278,8 +305,6 @@ tribes:new_tribe {
       "frisians_tavern",
       "frisians_drinking_hall",
       "frisians_barracks",
-      "frisians_weaving_mill",
-      "frisians_shipyard",
 
       -- Big
       "frisians_reindeer_farm",
@@ -307,31 +332,71 @@ tribes:new_tribe {
       "frisians_tower",
       "frisians_fortress",
 
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "frisians_ferry_yard",
+      "frisians_shipyard",
+      "frisians_weaving_mill",
+
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
    },
 
    ship_names = {
-      "Amrum",
-      "Föhr",
-      "Gröde",
-      "Habel",
-      "Hamburger Hallig",
-      "Hooge",
-      "Japsand",
-      "Kormoransand",
-      "Langeneß",
-      "Norderoog",
-      "Norderoogsand",
-      "Nordstrand",
-      "Nordstrandischmoor",
-      "Oland",
-      "Pellworm",
-      "Süderoog",
-      "Süderoogsand",
-      "Südfall",
-      "Sylt",
+      -- TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+      pgettext("shipname", "Amrum"),
+      -- TRANSLATORS: This frisian ship is named after a no longer existing island in Northern Frisia
+      pgettext("shipname", "Alt-Nordstrand"),
+      -- TRANSLATORS: This frisian ship is named after a peninsula in Northern Frisia
+      pgettext("shipname", "Eiderstedt"),
+      -- TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+      pgettext("shipname", "Föhr"),
+      -- TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+      pgettext("shipname", "Gröde"),
+      -- TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+      pgettext("shipname", "Habel"),
+      -- TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+      pgettext("shipname", "Hamburger Hallig"),
+      -- TRANSLATORS: This frisian ship is named after an island in the North Sea
+      pgettext("shipname", "Helgoland"),
+      -- TRANSLATORS: This frisian ship is named after a region in Northern Frisia
+      pgettext("shipname", "Hever"),
+      -- TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+      pgettext("shipname", "Hooge"),
+      -- TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+      pgettext("shipname", "Japsand"),
+      -- TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+      pgettext("shipname", "Kormoransand"),
+      -- TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+      pgettext("shipname", "Langeneß"),
+      -- TRANSLATORS: This frisian ship is named after a water body in Northern Frisia
+      pgettext("shipname", "Norderaue"),
+      -- TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+      pgettext("shipname", "Norderoog"),
+      -- TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+      pgettext("shipname", "Norderoogsand"),
+      -- TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+      pgettext("shipname", "Nordstrand"),
+      -- TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+      pgettext("shipname", "Nordstrandischmoor"),
+      -- TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+      pgettext("shipname", "Oland"),
+      -- TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+      pgettext("shipname", "Pellworm"),
+      -- TRANSLATORS: This frisian ship is named after a no longer existing island in Northern Frisia
+      pgettext("shipname", "Strand"),
+      -- TRANSLATORS: This frisian ship is named after a water body in Northern Frisia
+      pgettext("shipname", "Süderaue"),
+      -- TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+      pgettext("shipname", "Süderoog"),
+      -- TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+      pgettext("shipname", "Süderoogsand"),
+      -- TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+      pgettext("shipname", "Südfall"),
+      -- TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+      pgettext("shipname", "Sylt"),
+      -- TRANSLATORS: This frisian ship is named after a region in Northern Frisia
+      pgettext("shipname", "Uthlande"),
    },
 
    -- Special types
@@ -341,9 +406,6 @@ tribes:new_tribe {
    geologist = "frisians_geologist",
    soldier = "frisians_soldier",
    ship = "frisians_ship",
+   ferry = "frisians_ferry",
    port = "frisians_port",
-   ironore = "iron_ore",
-   rawlog = "log",
-   refinedlog = "brick",
-   granite = "granite",
 }

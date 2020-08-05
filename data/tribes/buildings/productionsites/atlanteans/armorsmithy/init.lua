@@ -45,7 +45,7 @@ dirname = path.dirname(__file__)
 --            },
 --
 --    **outputs**
---        *Optional*. The wares/workers produced by this building, e.g.::
+--        *DEPRECATED*. The wares/workers produced by this building, e.g.::
 --
 --            outputs = { "shield_advanced", "shield_steel" },
 --
@@ -53,10 +53,10 @@ dirname = path.dirname(__file__)
 --        *Mandatory*. The production site programs that define what preconditions
 --        a building needs to fulfil in order to produce its wares and how it's
 --        done, including any animations and sounds played.
---        See :doc:`productionsite_program`.
+--        See :ref:`productionsite_programs`.
 --
 --    **indicate_workarea_overlaps**
---        *Optional*. The names of other productionsites whose workareas should be highlighted
+--        *DEPRECATED*. The names of other productionsites whose workareas should be highlighted
 --        if theirs overlap with this building’s workarea while the player is placing a
 --        building of this type. The overlaps can be shown either as desired (`true`), if the
 --        proximity of these buildings is favourable, or as negative (`false`), if they influence
@@ -144,10 +144,6 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
    },
-   outputs = {
-      "shield_advanced",
-      "shield_steel"
-   },
 
    programs = {
       work = {
@@ -156,7 +152,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=produce_shield_steel",
             "call=produce_shield_advanced",
-            "return=no_stats"
          }
       },
       produce_shield_steel = {
@@ -166,8 +161,8 @@ tribes:new_productionsite_type {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs shield_steel",
             "consume=iron:2 coal:2",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=shield_steel"
          }
       },
@@ -178,8 +173,8 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs shield_advanced",
             "consume=iron:2 coal:2 gold",
-            "sleep=32000",
-            "animate=working 45000",
+            "sleep=duration:32s",
+            "animate=working duration:45s",
             "produce=shield_advanced"
          }
       },

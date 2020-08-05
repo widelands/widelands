@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,9 +18,6 @@
  */
 
 #include "wui/game_client_disconnected.h"
-
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
 
 #include "ai/computer_player.h"
 #include "ai/defaultai.h"
@@ -106,10 +103,8 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 	box_.set_size(width, text_.get_h() + vgap + box_h_.get_h() + exit_game_.get_h() + 3 * vspacing);
 	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 
-	continue_.sigclicked.connect(
-	   boost::bind(&GameClientDisconnected::clicked_continue, boost::ref(*this)));
-	exit_game_.sigclicked.connect(
-	   boost::bind(&GameClientDisconnected::clicked_exit_game, boost::ref(*this)));
+	continue_.sigclicked.connect([this]() { clicked_continue(); });
+	exit_game_.sigclicked.connect([this]() { clicked_exit_game(); });
 
 	// Add all AI types
 	for (const auto* impl : ComputerPlayer::get_implementations()) {
@@ -157,8 +152,7 @@ void GameClientDisconnected::clicked_exit_game() {
 		igb_->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
 		GameExitConfirmBox* gecb = new GameExitConfirmBox(*get_parent(), *igb_);
-		gecb->cancel.connect(
-		   boost::bind(&GameClientDisconnected::exit_game_aborted, boost::ref(*this), gecb));
+		gecb->cancel.connect([this, gecb]() { exit_game_aborted(gecb); });
 
 		set_visible(false);
 	}

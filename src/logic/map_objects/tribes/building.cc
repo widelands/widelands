@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,13 +19,9 @@
 
 #include "logic/map_objects/tribes/building.h"
 
-#include <cstdio>
-#include <cstring>
 #include <memory>
-#include <sstream>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -131,8 +127,9 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			const BuildingDescr* tmp_enhancement = tribes_.get_building_descr(en_i);
 			for (auto area : tmp_enhancement->workarea_info_) {
 				std::set<std::string>& strs = workarea_info_[area.first];
-				for (std::string str : area.second)
+				for (const std::string& str : area.second) {
 					strs.insert(str);
+				}
 			}
 		} else {
 			throw wexception(
@@ -167,7 +164,21 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes_);
 	}
 
-	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
+	needs_seafaring_ = false;
+	needs_waterways_ = false;
+	if (table.has_key("map_check")) {
+		for (const std::string& map_check :
+		     table.get_table("map_check")->array_entries<std::string>()) {
+			if (map_check == "seafaring") {
+				needs_seafaring_ = true;
+			} else if (map_check == "waterways") {
+				needs_waterways_ = true;
+			} else {
+				throw GameDataError(
+				   "Unexpected map_check item '%s' in building description", map_check.c_str());
+			}
+		}
+	}
 
 	if (table.has_key("vision_range")) {
 		vision_range_ = table.get_int("vision_range");
@@ -256,6 +267,18 @@ uint32_t BuildingDescr::get_unoccupied_animation() const {
 	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle", nullptr);
 }
 
+bool BuildingDescr::is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const {
+	if (needs_seafaring_ && needs_waterways_) {
+		return seafaring_allowed || waterways_allowed;
+	} else if (needs_seafaring_) {
+		return seafaring_allowed;
+	} else if (needs_waterways_) {
+		return waterways_allowed;
+	} else {
+		return true;
+	}
+}
+
 /**
  * Normal buildings don't conquer anything, so this returns 0 by default.
  *
@@ -305,7 +328,9 @@ Building::Building(const BuildingDescr& building_descr)
      seeing_(false),
      was_immovable_(nullptr),
      attack_target_(nullptr),
-     soldier_control_(nullptr) {
+     soldier_control_(nullptr),
+     mute_messages_(false),
+     is_destruction_blocked_(false) {
 }
 
 void Building::load_finish(EditorGameBase& egbase) {
@@ -364,7 +389,7 @@ Flag& Building::base_flag() {
 uint32_t Building::get_playercaps() const {
 	uint32_t caps = 0;
 	const BuildingDescr& tmp_descr = descr();
-	if (tmp_descr.is_destructible()) {
+	if (tmp_descr.is_destructible() && !is_destruction_blocked()) {
 		caps |= PCap_Bulldoze;
 		if (tmp_descr.can_be_dismantled()) {
 			caps |= PCap_Dismantle;
@@ -412,8 +437,9 @@ bool Building::init(EditorGameBase& egbase) {
 	map.get_brn(position_, &neighb);
 	{
 		Flag* flag = dynamic_cast<Flag*>(map.get_immovable(neighb));
-		if (!flag)
+		if (!flag) {
 			flag = new Flag(egbase, get_owner(), neighb);
+		}
 		flag_ = flag;
 		flag->attach_building(egbase, *this);
 	}
@@ -614,8 +640,9 @@ bool Building::leave_check_and_wait(Game& game, Worker& w) {
 void Building::leave_skip(Game&, Worker& w) {
 	LeaveQueue::iterator const it = std::find(leave_queue_.begin(), leave_queue_.end(), &w);
 
-	if (it != leave_queue_.end())
+	if (it != leave_queue_.end()) {
 		leave_queue_.erase(it);
+	}
 }
 
 /*
@@ -646,11 +673,12 @@ void Building::act(Game& game, uint32_t const data) {
 			}
 		}
 
-		if (!leave_queue_.empty())
+		if (!leave_queue_.empty()) {
 			schedule_act(game, leave_time_ - time);
-
-		if (!wakeup)
+		}
+		if (!wakeup) {
 			leave_time_ = time;  // make sure leave_time doesn't get too far behind
+		}
 	}
 
 	PlayerImmovable::act(game, data);
@@ -673,23 +701,33 @@ bool Building::fetch_from_flag(Game&) {
 }
 
 void Building::draw(uint32_t gametime,
-                    const TextToDraw draw_text,
+                    const InfoToDraw info_to_draw,
                     const Vector2f& point_on_dst,
                     const Widelands::Coords& coords,
                     const float scale,
                     RenderTarget* dst) {
 	if (was_immovable_) {
-		dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
-		                    gametime - animstart_, &get_owner()->get_playercolor());
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
+			                    gametime - animstart_, &get_owner()->get_playercolor());
+		} else {
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
+			                    gametime - animstart_, nullptr, kBuildingSilhouetteOpacity);
+		}
 	}
 
-	dst->blit_animation(
-	   point_on_dst, coords, scale, anim_, gametime - animstart_, &get_owner()->get_playercolor());
+	if (info_to_draw & InfoToDraw::kShowBuildings) {
+		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_,
+		                    &get_owner()->get_playercolor());
+	} else {
+		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_, nullptr,
+		                    kBuildingSilhouetteOpacity);
+	}
 
 	//  door animation?
 
 	//  overlay strings (draw when enabled)
-	draw_info(draw_text, point_on_dst, scale, dst);
+	draw_info(info_to_draw, point_on_dst, scale, dst);
 }
 
 /*
@@ -697,16 +735,14 @@ void Building::draw(uint32_t gametime,
 Draw overlay help strings when enabled.
 ===============
 */
-void Building::draw_info(const TextToDraw draw_text,
+void Building::draw_info(const InfoToDraw info_to_draw,
                          const Vector2f& point_on_dst,
                          const float scale,
                          RenderTarget* dst) {
 	const std::string statistics_string =
-	   ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone) ?
-	      info_string(InfoStringFormat::kStatistics) :
-	      "";
-	do_draw_info(draw_text, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
-	             scale, dst);
+	   (info_to_draw & InfoToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
+	do_draw_info(info_to_draw, info_string(InfoStringFormat::kCensus), statistics_string,
+	             point_on_dst, scale, dst);
 }
 
 int32_t
@@ -716,8 +752,9 @@ Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool 
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
 		std::map<DescriptionIndex, int32_t>::const_iterator it = ware_priorities_.find(ware_index);
-		if (it != ware_priorities_.end())
+		if (it != ware_priorities_.end()) {
 			priority = adjust ? (priority * it->second / kPriorityNormal) : it->second;
+		}
 	}
 
 	return priority;
@@ -728,13 +765,15 @@ Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool 
  * priorities are identified by ware type and index
  */
 void Building::collect_priorities(std::map<int32_t, std::map<DescriptionIndex, int32_t>>& p) const {
-	if (ware_priorities_.empty())
+	if (ware_priorities_.empty()) {
 		return;
+	}
 	std::map<DescriptionIndex, int32_t>& ware_priorities = p[wwWARE];
 	std::map<DescriptionIndex, int32_t>::const_iterator it;
 	for (it = ware_priorities_.begin(); it != ware_priorities_.end(); ++it) {
-		if (it->second == kPriorityNormal)
+		if (it->second == kPriorityNormal) {
 			continue;
+		}
 		ware_priorities[it->first] = it->second;
 	}
 }
@@ -782,8 +821,9 @@ void Building::add_worker(Worker& worker) {
 
 void Building::remove_worker(Worker& worker) {
 	PlayerImmovable::remove_worker(worker);
-	if (!get_workers().size())
+	if (!get_workers().size()) {
 		set_seeing(false);
+	}
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
@@ -804,8 +844,9 @@ void Building::set_soldier_control(SoldierControl* new_soldier_control) {
  * \note Warehouses always see their surroundings; this is handled separately.
  */
 void Building::set_seeing(bool see) {
-	if (see == seeing_)
+	if (see == seeing_) {
 		return;
+	}
 
 	Player* player = get_owner();
 	const Map& map = player->egbase().map();
@@ -846,6 +887,10 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
+	if (mute_messages() || owner().is_muted(game.tribes().safe_building_index(descr().name()))) {
+		return;
+	}
+
 	const std::string rt_description =
 	   as_mapobject_message(descr().name(), descr().representative_image()->width(), description,
 	                        &owner().get_playercolor());

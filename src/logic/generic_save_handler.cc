@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #include "logic/generic_save_handler.h"
 
 #include <memory>
-#include <string>
 
 #include <boost/format.hpp>
 
@@ -64,8 +63,9 @@ void GenericSaveHandler::make_backup() {
 	if (g_fs->file_exists(backup_filename_)) {
 		int suffix;
 		for (suffix = 0; suffix <= 9; suffix++) {
-			backup_filename_ =
-			   backup_filename_base + "-" + std::to_string(suffix) + kTempBackupExtension;
+			backup_filename_ = backup_filename_base.append("-")
+			                      .append(std::to_string(suffix))
+			                      .append(kTempBackupExtension);
 			if (!g_fs->file_exists(backup_filename_)) {
 				break;
 			}

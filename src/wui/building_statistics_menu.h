@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,6 @@
 
 #ifndef WL_WUI_BUILDING_STATISTICS_MENU_H
 #define WL_WUI_BUILDING_STATISTICS_MENU_H
-
-#include <vector>
 
 #include "graphic/color.h"
 #include "logic/map_objects/tribes/building.h"
@@ -73,7 +71,8 @@ private:
 	/// Whether a building that is used by the player's tribe should be added
 	bool own_building_is_valid(const Widelands::Player& player,
 	                           Widelands::DescriptionIndex index,
-	                           bool map_allows_seafaring) const;
+	                           bool map_allows_seafaring,
+	                           bool map_allows_waterways) const;
 	/// Whether a building that isn't used by the player's tribe should be added
 	bool foreign_tribe_building_is_valid(const Widelands::Player& player,
 	                                     Widelands::DescriptionIndex index) const;

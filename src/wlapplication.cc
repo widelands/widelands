@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,23 +19,15 @@
 
 #include "wlapplication.h"
 
-#include <cerrno>
+#include <cassert>
 #ifndef _WIN32
 #include <csignal>
 #endif
-#include <cstdlib>
-#include <cstring>
-#include <ctime>
-#include <fstream>
 #include <iostream>
 #include <memory>
-#include <stdexcept>
-#include <string>
 
-#include <SDL_image.h>
+#include <SDL.h>
 #include <SDL_ttf.h>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/format.hpp>
 #include <boost/regex.hpp>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
@@ -46,6 +38,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/random.h"
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "base/wexception.h"
@@ -54,11 +47,12 @@
 #include "editor/editorinteractive.h"
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
+#include "graphic/mouse_cursor.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/ai_dna_handler.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -73,7 +67,6 @@
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
-#include "random/random.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
@@ -91,9 +84,7 @@
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/scenario_select.h"
 #include "ui_fsmenu/singleplayer.h"
-#include "wlapplication_messages.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
@@ -156,7 +147,7 @@ bool is_absolute_path(const std::string& path) {
 std::string absolute_path_if_not_windows(const std::string& path) {
 #ifndef _WIN32
 	char buffer[PATH_MAX];
-	// http://pubs.opengroup.org/onlinepubs/009695399/functions/realpath.html
+	// https://pubs.opengroup.org/onlinepubs/009695399/functions/realpath.html
 	char* rp = realpath(path.c_str(), buffer);
 	log("Realpath: %s\n", rp);
 	if (!rp) {
@@ -303,13 +294,16 @@ WLApplication* WLApplication::the_singleton = nullptr;
  */
 // TODO(unknown): Return a reference - the return value is always valid anyway
 WLApplication* WLApplication::get(int const argc, char const** argv) {
-	if (the_singleton == nullptr)
+	if (the_singleton == nullptr) {
 		the_singleton = new WLApplication(argc, argv);
+	}
 	return the_singleton;
 }
 
 /**
  * Initialize an instance of WLApplication.
+ *
+ * Exits with code 2 if the SDL/TTF system is not available.
  *
  * This constructor is protected \e on \e purpose !
  * Use WLApplication::get() instead and look at the class description.
@@ -366,15 +360,26 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_temp_files();
 	cleanup_temp_backups();
 
-	// Start the SDL core
-	if (SDL_Init(SDL_INIT_VIDEO) == -1)
-		throw wexception("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+	log("Byte order: little-endian\n");
+#else
+	log("Byte order: big-endian\n");
+#endif
 
-	SDL_ShowCursor(SDL_DISABLE);
+	// Start the SDL core
+	if (SDL_Init(SDL_INIT_VIDEO) == -1) {
+		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
+		// too frequent failures
+		log("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
+		exit(2);
+	}
+
 	g_gr = new Graphic();
 
-	if (TTF_Init() == -1)
-		throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
+	if (TTF_Init() == -1) {
+		log("True Type library did not initialize: %s\n", TTF_GetError());
+		exit(2);
+	}
 
 	UI::g_fh = UI::create_fonthandler(
 	   &g_gr->images(), i18n::get_locale());  // This will create the fontset, so loading it first.
@@ -383,6 +388,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
 	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H),
 	   get_config_bool("fullscreen", false));
+
+	g_mouse_cursor = new MouseCursor();
+	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
 
 	g_sh = new SoundHandler();
 
@@ -421,8 +429,9 @@ WLApplication::~WLApplication() {
 
 	TTF_Quit();  // TODO(unknown): not here
 
-	assert(g_fs);
-	delete g_fs;
+	if (g_fs) {
+		delete g_fs;
+	}
 	g_fs = nullptr;
 
 	if (redirected_stdio_) {
@@ -551,13 +560,6 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 	if (down) {
 		const bool ctrl = (modifiers & KMOD_LCTRL) || (modifiers & KMOD_RCTRL);
 		switch (keycode) {
-		case SDLK_F10:
-			// exits the game.
-			if (ctrl) {
-				should_die_ = true;
-			}
-			return true;
-
 		case SDLK_F11:
 			// Takes a screenshot.
 			if (ctrl) {
@@ -582,7 +584,7 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 		case SDLK_f: {
 			// Toggle fullscreen
 			const uint32_t time = SDL_GetTicks();
-			if (time - last_resolution_change_ > 250) {
+			if ((time - last_resolution_change_ > 250) && (ctrl)) {
 				last_resolution_change_ = time;
 				bool value = !g_gr->fullscreen();
 				g_gr->set_fullscreen(value);
@@ -643,9 +645,10 @@ void WLApplication::handle_input(InputCallback const* cb) {
 		case SDL_MOUSEMOTION:
 			mouse_position_ = Vector2i(ev.motion.x, ev.motion.y);
 
-			if ((ev.motion.xrel || ev.motion.yrel) && cb && cb->mouse_move)
+			if ((ev.motion.xrel || ev.motion.yrel) && cb && cb->mouse_move) {
 				cb->mouse_move(
 				   ev.motion.state, ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
+			}
 			break;
 		case SDL_QUIT:
 			should_die_ = true;
@@ -699,9 +702,9 @@ void WLApplication::handle_mousebutton(SDL_Event& ev, InputCallback const* cb) {
 	}
 #endif
 
-	if (ev.type == SDL_MOUSEBUTTONDOWN && cb && cb->mouse_press)
+	if (ev.type == SDL_MOUSEBUTTONDOWN && cb && cb->mouse_press) {
 		cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
-	else if (ev.type == SDL_MOUSEBUTTONUP) {
+	} else if (ev.type == SDL_MOUSEBUTTONUP) {
 		if (cb && cb->mouse_release) {
 			if (ev.button.button == SDL_BUTTON_MIDDLE && faking_middle_mouse_button_) {
 				cb->mouse_release(SDL_BUTTON_LEFT, ev.button.x, ev.button.y);
@@ -759,6 +762,16 @@ void WLApplication::set_input_grab(bool grab) {
 	}
 }
 
+void WLApplication::set_mouse_lock(const bool locked) {
+	mouse_locked_ = locked;
+
+	// If we use the SDL cursor then it needs to be hidden when locked
+	// otherwise it'll jerk around which looks ugly
+	if (g_mouse_cursor->is_using_sdl()) {
+		g_mouse_cursor->set_visible(!mouse_locked_);
+	}
+}
+
 void WLApplication::refresh_graphics() {
 	g_gr->change_resolution(
 	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H));
@@ -789,9 +802,15 @@ bool WLApplication::init_settings() {
 
 	// Some of the options listed here are documented in wlapplication_messages.cc
 	get_config_bool("ai_training", false);
+	get_config_bool("auto_roadbuild_mode", false);
 	get_config_bool("auto_speed", false);
+	get_config_bool("dock_windows_to_edges", false);
 	get_config_bool("fullscreen", false);
+	get_config_bool("sdl_cursor", true);
+	get_config_bool("snap_windows_only_when_overlapping", false);
 	get_config_bool("animate_map_panning", false);
+	get_config_bool("write_syncstreams", false);
+	get_config_bool("nozip", false);
 	get_config_int("xres", 0);
 	get_config_int("yres", 0);
 	get_config_int("border_snap_distance", 0);
@@ -799,15 +818,15 @@ bool WLApplication::init_settings() {
 	get_config_int("panel_snap_distance", 0);
 	get_config_int("autosave", 0);
 	get_config_int("rolling_autosave", 0);
+	get_config_string("language", "");
+	get_config_string("metaserver", "");
+	get_config_natural("metaserverport", 0);
 	// Undocumented on command line, appears in game options
 	get_config_bool("single_watchwin", false);
-	get_config_bool("auto_roadbuild_mode", false);
-	// Undocumented on command line, appears in game options
-	get_config_bool("nozip", false);
-	get_config_bool("snap_windows_only_when_overlapping", false);
-	get_config_bool("dock_windows_to_edges", false);
-	get_config_bool("write_syncstreams", false);
-	// Undocumented on command line, appears in game options
+	get_config_bool("ctrl_zoom", false);
+	get_config_bool("game_clock", true);
+	get_config_bool("numpad_diagonalscrolling", false);
+	get_config_bool("inputgrab", false);
 	get_config_bool("transparent_chat", false);
 	// Undocumented. Unique ID used to allow the metaserver to recognize players
 	get_config_string("uuid", "");
@@ -817,10 +836,6 @@ bool WLApplication::init_settings() {
 	// Undocumented, appears in online login box and LAN lobby
 	// The nickname used for LAN and online games
 	get_config_string("nickname", "");
-	// Undocumented. The plaintext password for online logins
-	// TODO(Notabilis): Remove next line after build 20.
-	// Currently left in to avoid removing stored passwords for users of both build 19 and trunk
-	get_config_string("password", "");
 	// Undocumented, appears in online login box. The hashed password for online logins
 	get_config_string("password_sha1", "");
 	// Undocumented, appears in online login box. Whether to automatically use the stored login
@@ -831,11 +846,20 @@ bool WLApplication::init_settings() {
 	get_config_string("servername", "");
 	// Undocumented, appears in editor. Name of map author
 	get_config_string("realname", "");
-	get_config_string("metaserver", "");
-	get_config_natural("metaserverport", 0);
 	// Undocumented, checkbox appears on "Watch Replay" screen
 	get_config_bool("display_replay_filenames", false);
 	get_config_bool("editor_player_menu_warn_too_many_players", false);
+	// Undocumented, on command line, appears in game options
+	get_config_bool("sound", "enable_ambient", true);
+	get_config_bool("sound", "enable_chat", true);
+	get_config_bool("sound", "enable_message", true);
+	get_config_bool("sound", "enable_music", true);
+	get_config_bool("sound", "enable_ui", true);
+	get_config_int("sound", "volume_ambient", 128);
+	get_config_int("sound", "volume_chat", 128);
+	get_config_int("sound", "volume_message", 128);
+	get_config_int("sound", "volume_music", 64);
+	get_config_int("sound", "volume_ui", 128);
 	// KLUDGE!
 
 	long int last_start = get_config_int("last_start", 0);
@@ -845,13 +869,6 @@ bool WLApplication::init_settings() {
 		get_config_string("uuid", generate_random_uuid().c_str());
 	}
 	get_config_int("last_start", time(nullptr));
-
-	// Replace the stored plaintext password with its SHA-1 hashed version
-	// Used to upgrade the stored password when upgrading widelands
-	if (get_config_string("password", "").length() > 0 &&
-	    get_config_string("password_sha1", "").length() == 0) {
-		get_config_string("password_sha1", crypto::sha1(get_config_string("password", "")).c_str());
-	}
 
 	// Save configuration now. Otherwise, the UUID is not saved
 	// when the game crashes, losing part of its advantage
@@ -864,10 +881,26 @@ bool WLApplication::init_settings() {
  * Initialize language settings
  */
 void WLApplication::init_language() {
+	// Set the locale dir
+	i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
+
+	// If locale dir is not a directory, barf. We can handle it not being there tough.
+	if (g_fs->file_exists(i18n::get_localedir()) && !g_fs->is_directory(i18n::get_localedir())) {
+		SDL_ShowSimpleMessageBox(
+		   SDL_MESSAGEBOX_ERROR, "'locale' directory not valid",
+		   std::string(i18n::get_localedir() + "\nis not a directory. Please fix this.").c_str(),
+		   NULL);
+		log("ERROR: %s is not a directory. Please fix this.\n", i18n::get_localedir().c_str());
+		exit(1);
+	}
+
+	if (!g_fs->is_directory(i18n::get_localedir()) ||
+	    g_fs->list_directory(i18n::get_localedir()).empty()) {
+		log("WARNING: No locale translations found in %s\n", i18n::get_localedir().c_str());
+	}
+
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
-
-	i18n::set_localedir(datadir_ + "/locale");
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
@@ -885,6 +918,9 @@ void WLApplication::shutdown_settings() {
 }
 
 void WLApplication::shutdown_hardware() {
+	delete g_mouse_cursor;
+	g_mouse_cursor = nullptr;
+
 	delete g_gr;
 	g_gr = nullptr;
 
@@ -926,10 +962,11 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 		}
 
 		// Are we looking at an option at all?
-		if (opt.compare(0, 2, "--"))
+		if (opt.compare(0, 2, "--")) {
 			throw ParameterError();
-		else
+		} else {
 			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
+		}
 
 		// Look if this option has a value
 		std::string::size_type const pos = opt.find('=');
@@ -1005,51 +1042,62 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("editor")) {
 		filename_ = commandline_["editor"];
-		if (filename_.size() && *filename_.rbegin() == '/')
+		if (filename_.size() && *filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
+		}
 		game_type_ = EDITOR;
 		commandline_.erase("editor");
 	}
 
 	if (commandline_.count("replay")) {
-		if (game_type_ != NONE)
+		if (game_type_ != NONE) {
 			throw wexception("replay can not be combined with other actions");
+		}
 		filename_ = commandline_["replay"];
-		if (filename_.size() && *filename_.rbegin() == '/')
+		if (filename_.size() && *filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
+		}
 		game_type_ = REPLAY;
 		commandline_.erase("replay");
 	}
 
 	if (commandline_.count("loadgame")) {
-		if (game_type_ != NONE)
+		if (game_type_ != NONE) {
 			throw wexception("loadgame can not be combined with other actions");
+		}
 		filename_ = commandline_["loadgame"];
-		if (filename_.empty())
+		if (filename_.empty()) {
 			throw wexception("empty value of command line parameter --loadgame");
-		if (*filename_.rbegin() == '/')
+		}
+		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
+		}
 		game_type_ = LOADGAME;
 		commandline_.erase("loadgame");
 	}
 
 	if (commandline_.count("scenario")) {
-		if (game_type_ != NONE)
+		if (game_type_ != NONE) {
 			throw wexception("scenario can not be combined with other actions");
+		}
 		filename_ = commandline_["scenario"];
-		if (filename_.empty())
+		if (filename_.empty()) {
 			throw wexception("empty value of command line parameter --scenario");
-		if (*filename_.rbegin() == '/')
+		}
+		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
+		}
 		game_type_ = SCENARIO;
 		commandline_.erase("scenario");
 	}
 	if (commandline_.count("script")) {
 		script_to_run_ = commandline_["script"];
-		if (script_to_run_.empty())
+		if (script_to_run_.empty()) {
 			throw wexception("empty value of command line parameter --script");
-		if (*script_to_run_.rbegin() == '/')
+		}
+		if (*script_to_run_.rbegin() == '/') {
 			script_to_run_.erase(script_to_run_.size() - 1);
+		}
 		commandline_.erase("script");
 	}
 
@@ -1136,6 +1184,10 @@ void WLApplication::mainmenu() {
 				ff.run<FullscreenMenuBase::MenuTarget>();
 				break;
 			}
+			case FullscreenMenuBase::MenuTarget::kContinueLastsave: {
+				load_game(mm.get_filename_for_continue());
+				break;
+			}
 			case FullscreenMenuBase::MenuTarget::kEditor:
 				EditorInteractive::run_editor(filename_, script_to_run_);
 				break;
@@ -1187,8 +1239,9 @@ void WLApplication::mainmenu_tutorial() {
 	}
 	try {
 		// Load selected tutorial-map-file
-		if (filename.size())
+		if (filename.size()) {
 			game.run_splayer_scenario_direct(filename.c_str(), "");
+		}
 	} catch (const std::exception& e) {
 		log("Fatal exception: %s\n", e.what());
 		emergency_save(game);
@@ -1212,16 +1265,19 @@ void WLApplication::mainmenu_singleplayer() {
 		case FullscreenMenuBase::MenuTarget::kBack:
 			return;
 		case FullscreenMenuBase::MenuTarget::kNewGame:
-			if (new_game())
+			if (new_game()) {
 				return;
+			}
 			break;
 		case FullscreenMenuBase::MenuTarget::kLoadGame:
-			if (load_game())
+			if (load_game()) {
 				return;
+			}
 			break;
 		case FullscreenMenuBase::MenuTarget::kCampaign:
-			if (campaign_game())
+			if (campaign_game()) {
 				return;
+			}
 			break;
 		default:
 			NEVER_HERE();
@@ -1267,12 +1323,13 @@ void WLApplication::mainmenu_multiplayer() {
 			FullscreenMenuInternetLobby ns(playername.c_str(), password.c_str(), registered);
 			ns.run<FullscreenMenuBase::MenuTarget>();
 
-			if (InternetGaming::ref().logged_in())
+			if (InternetGaming::ref().logged_in()) {
 				// logout of the metaserver
 				InternetGaming::ref().logout();
-			else
+			} else {
 				// Reset InternetGaming for clean login
 				InternetGaming::ref().reset();
+			}
 		} else {
 			// reinitalise in every run, else graphics look strange
 			FullscreenMenuNetSetupLAN ns;
@@ -1343,22 +1400,22 @@ bool WLApplication::new_game() {
 			// the chat
 			game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
 			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
-			UI::ProgressWindow loader_ui;
-			std::vector<std::string> tipstext;
-			tipstext.push_back("general_game");
-			tipstext.push_back("singleplayer");
-			if (sp.has_players_tribe()) {
-				tipstext.push_back(sp.get_players_tribe());
-			}
-			GameTips tips(loader_ui, tipstext);
 
-			loader_ui.step(_("Preparing game"));
+			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
+			if (sp.has_players_tribe()) {
+				tipstexts.push_back(sp.get_players_tribe());
+			}
+			game.create_loader_ui(tipstexts, false);
+
+			game.step_loader_ui(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.init_newgame(&loader_ui, sp.settings());
-			game.run(&loader_ui, Widelands::Game::NewNonScenario, "", false, "single_player");
+			game.init_newgame(sp.settings());
+			game.run(Widelands::Game::NewNonScenario, "", false, "single_player");
 		} catch (const std::exception& e) {
 			log("Fatal exception: %s\n", e.what());
+			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
+			game.set_game_controller(ctrl.get());
 			emergency_save(game);
 			throw;
 		}
@@ -1373,22 +1430,25 @@ bool WLApplication::new_game() {
  * \return @c true if a game was loaded, @c false if the player pressed Back
  * or aborted the game setup via some other means.
  */
-bool WLApplication::load_game() {
+bool WLApplication::load_game(std::string filename) {
 	Widelands::Game game;
-	std::string filename;
 
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
 	SinglePlayerGameSettingsProvider sp;
 	FullscreenMenuLoadGame ssg(game, &sp);
 
-	if (ssg.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk)
-		filename = ssg.filename();
-	else
-		return false;
+	if (filename.empty()) {
+		if (ssg.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
+			filename = ssg.filename();
+		} else {
+			return false;
+		}
+	}
 
 	try {
-		if (game.run_load_game(filename, ""))
+		if (game.run_load_game(filename, "")) {
 			return true;
+		}
 	} catch (const std::exception& e) {
 		log("Fatal exception: %s\n", e.what());
 		emergency_save(game);
@@ -1427,13 +1487,15 @@ bool WLApplication::campaign_game() {
 		if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() ==
 		    FullscreenMenuBase::MenuTarget::kOk) {
 			filename = select_campaignmap.get_map();
+			game.set_scenario_difficulty(select_campaignmap.get_difficulty());
 			break;
 		}
 	}
 	try {
 		// Load selected campaign-map-file
-		if (filename.size())
+		if (filename.size()) {
 			return game.run_splayer_scenario_direct(filename.c_str(), "");
+		}
 	} catch (const std::exception& e) {
 		log("Fatal exception: %s\n", e.what());
 		emergency_save(game);
@@ -1450,19 +1512,16 @@ void WLApplication::replay() {
 	if (filename_.empty()) {
 		SinglePlayerGameSettingsProvider sp;
 		FullscreenMenuLoadGame rm(game, &sp, true);
-		if (rm.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kBack)
+		if (rm.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kBack) {
 			return;
+		}
 
 		filename_ = rm.filename();
 	}
 
 	try {
-		UI::ProgressWindow loader_ui;
-		std::vector<std::string> tipstext;
-		tipstext.push_back("general_game");
-		GameTips tips(loader_ui, tipstext);
-
-		loader_ui.step(_("Loading…"));
+		game.create_loader_ui({"general_game"}, true);
+		game.step_loader_ui(_("Loading…"));
 
 		game.set_ibase(new InteractiveSpectator(game, get_config_section()));
 		game.set_write_replay(false);
@@ -1470,7 +1529,7 @@ void WLApplication::replay() {
 
 		game.save_handler().set_allow_saving(false);
 
-		game.run(&loader_ui, Widelands::Game::Loaded, "", true, "replay");
+		game.run(Widelands::Game::Loaded, "", true, "replay");
 	} catch (const std::exception& e) {
 		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);
@@ -1562,7 +1621,7 @@ void WLApplication::cleanup_temp_files() {
 /**
  * Recursively delete temporary backup files in a given directory
  */
-void WLApplication::cleanup_temp_backups(std::string dir) {
+void WLApplication::cleanup_temp_backups(const std::string& dir) {
 	for (const std::string& filename : g_fs->filter_directory(
 	        dir, [](const std::string& fn) { return boost::ends_with(fn, kTempBackupExtension); })) {
 		if (is_autogenerated_and_expired(filename, kTempBackupsKeepAroundTime)) {
@@ -1603,8 +1662,9 @@ bool WLApplication::redirect_output(std::string path) {
 		GetModuleFileName(nullptr, module_name, MAX_PATH);
 		path = module_name;
 		size_t pos = path.find_last_of("/\\");
-		if (pos == std::string::npos)
+		if (pos == std::string::npos) {
 			return false;
+		}
 		path.resize(pos);
 #else
 		path = ".";
@@ -1613,13 +1673,15 @@ bool WLApplication::redirect_output(std::string path) {
 	std::string stdoutfile = path + "/stdout.txt";
 	/* Redirect standard output */
 	FILE* newfp = freopen(stdoutfile.c_str(), "w", stdout);
-	if (!newfp)
+	if (!newfp) {
 		return false;
+	}
 	/* Redirect standard error */
 	std::string stderrfile = path + "/stderr.txt";
 	newfp = freopen(stderrfile.c_str(), "w", stderr);
-	if (!newfp)
+	if (!newfp) {
 		return false;
+	}
 
 	/* Line buffered */
 	setvbuf(stdout, nullptr, _IOLBF, BUFSIZ);

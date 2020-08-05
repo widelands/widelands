@@ -6,9 +6,9 @@
 -- needed before a game is loaded or the editor has been started.
 
 dirname = path.dirname(__file__)
-set_textdomain("tribes")
+push_textdomain("tribes")
 
-return {
+local r = {
    -- Basic information for the Barbarian tribe
    {
       name = "barbarians",
@@ -23,6 +23,10 @@ return {
          dirname .. "scripting/starting_conditions/barbarians/fortified_village.lua";
          dirname .. "scripting/starting_conditions/barbarians/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/barbarians/village.lua";
+         dirname .. "scripting/starting_conditions/barbarians/poor_hamlet.lua";
+         dirname .. "scripting/starting_conditions/barbarians/struggling_outpost.lua";
+         dirname .. "scripting/starting_conditions/barbarians/discovery.lua";
+         dirname .. "scripting/starting_conditions/barbarians/new_world.lua";
       }
    },
 
@@ -40,6 +44,10 @@ return {
          dirname .. "scripting/starting_conditions/empire/fortified_village.lua";
          dirname .. "scripting/starting_conditions/empire/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/empire/village.lua";
+         dirname .. "scripting/starting_conditions/empire/poor_hamlet.lua";
+         dirname .. "scripting/starting_conditions/empire/struggling_outpost.lua";
+         dirname .. "scripting/starting_conditions/empire/discovery.lua";
+         dirname .. "scripting/starting_conditions/empire/new_world.lua";
       }
    },
 
@@ -57,6 +65,10 @@ return {
          dirname .. "scripting/starting_conditions/atlanteans/fortified_village.lua";
          dirname .. "scripting/starting_conditions/atlanteans/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/atlanteans/village.lua";
+         dirname .. "scripting/starting_conditions/atlanteans/poor_hamlet.lua";
+         dirname .. "scripting/starting_conditions/atlanteans/struggling_outpost.lua";
+         dirname .. "scripting/starting_conditions/atlanteans/discovery.lua";
+         dirname .. "scripting/starting_conditions/atlanteans/new_world.lua";
       }
    },
 
@@ -65,8 +77,8 @@ return {
       name = "frisians",
       author = _"The Widelands Development Team",
       -- TRANSLATORS: This is a tribe name
-      descname = _"Frisians (experimental)",
-      tooltip = _("The inhabitants of the rough North Sea shore. This tribe is still under development."),
+      descname = _"Frisians",
+      tooltip = _("The inhabitants of the rough North Sea shore."),
       icon = dirname .. "images/frisians/icon.png",
 
       starting_conditions = {
@@ -74,6 +86,12 @@ return {
          dirname .. "scripting/starting_conditions/frisians/fortified_village.lua";
          dirname .. "scripting/starting_conditions/frisians/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/frisians/village.lua";
+         dirname .. "scripting/starting_conditions/frisians/poor_hamlet.lua";
+         dirname .. "scripting/starting_conditions/frisians/struggling_outpost.lua";
+         dirname .. "scripting/starting_conditions/frisians/discovery.lua";
+         dirname .. "scripting/starting_conditions/frisians/new_world.lua";
       }
    }
 }
+pop_textdomain()
+return r

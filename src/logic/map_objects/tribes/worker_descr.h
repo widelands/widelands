@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,18 +24,15 @@
 
 #include "ai/ai_hints.h"
 #include "base/macros.h"
-#include "graphic/diranimations.h"
+#include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/immovable.h"
 #include "scripting/lua_table.h"
-
-class Image;
 
 namespace Widelands {
 
 // TODO(Antonio Trueba#1#): Get rid of forward class declaration
 // (chicked-and-egg problem)
-class Worker;
 struct WorkerProgram;
 
 class WorkerDescr : public BobDescr {

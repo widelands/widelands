@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,7 @@
 
 #include "logic/map_objects/tribes/militarysite.h"
 
-#include <clocale>
-#include <cstdio>
 #include <memory>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -159,13 +155,15 @@ void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) 
 	const Map& map = game.map();
 	if (enemy.get_owner() == owner || enemy.get_battle() ||
 	    military_site_->descr().get_conquers() <=
-	       map.calc_distance(enemy.get_position(), military_site_->get_position()))
+	       map.calc_distance(enemy.get_position(), military_site_->get_position())) {
 		return;
+	}
 
 	if (map.find_bobs(game,
 	                  Area<FCoords>(map.get_fcoords(military_site_->base_flag().get_position()), 2),
-	                  nullptr, FindBobEnemySoldier(owner)))
+	                  nullptr, FindBobEnemySoldier(owner))) {
 		return;
+	}
 
 	// We're dealing with a soldier that we might want to keep busy
 	// Now would be the time to implement some player-definable
@@ -307,8 +305,9 @@ MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
 	num_soldiers_ = table.get_int("max_soldiers");
 	heal_per_second_ = table.get_int("heal_per_second");
 
-	if (conquer_radius_ > 0)
+	if (conquer_radius_ > 0) {
 		workarea_info_[conquer_radius_].insert(name() + " conquer");
+	}
 	prefers_heroes_at_start_ = table.get_bool("prefer_heroes");
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("messages");
@@ -410,16 +409,18 @@ bool MilitarySite::init(EditorGameBase& egbase) {
 		if (upcast(Soldier, soldier, worker)) {
 			soldier->set_location_initially(*this);
 			assert(!soldier->get_state());  //  Should be newly created.
-			if (game)
+			if (game) {
 				soldier->start_task_buildingwork(*game);
+			}
 		}
 	}
 	update_soldier_request();
 
 	//  schedule the first healing
 	nexthealtime_ = egbase.get_gametime() + 1000;
-	if (game)
+	if (game) {
 		schedule_act(*game, 1000);
+	}
 	return true;
 }
 
@@ -429,13 +430,15 @@ Change the economy for the wares queues.
 Note that the workers are dealt with in the PlayerImmovable code.
 ===============
 */
-void MilitarySite::set_economy(Economy* const e) {
-	Building::set_economy(e);
+void MilitarySite::set_economy(Economy* const e, WareWorker type) {
+	Building::set_economy(e, type);
 
-	if (normal_soldier_request_ && e)
+	if (normal_soldier_request_ && e && type == normal_soldier_request_->get_type()) {
 		normal_soldier_request_->set_economy(e);
-	if (upgrade_soldier_request_ && e)
+	}
+	if (upgrade_soldier_request_ && e && type == upgrade_soldier_request_->get_type()) {
 		upgrade_soldier_request_->set_economy(e);
+	}
 }
 
 /**
@@ -445,12 +448,13 @@ Cleanup after a military site is removed
 */
 void MilitarySite::cleanup(EditorGameBase& egbase) {
 	// unconquer land
-	if (didconquer_)
+	if (didconquer_) {
 		egbase.unconquer_area(
 		   PlayerArea<Area<FCoords>>(
 		      owner().player_number(),
 		      Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().get_conquers())),
 		   defeating_player_);
+	}
 
 	Building::cleanup(egbase);
 
@@ -607,19 +611,23 @@ void MilitarySite::update_normal_soldier_request() {
  */
 void MilitarySite::update_upgrade_soldier_request() {
 	bool reqch = update_upgrade_requirements();
-	if (!soldier_upgrade_try_)
+	if (!soldier_upgrade_try_) {
 		return;
+	}
 
 	bool do_rebuild_request = reqch;
 
 	if (upgrade_soldier_request_) {
-		if (!upgrade_soldier_request_->is_open())
+		if (!upgrade_soldier_request_->is_open()) {
 			// If a replacement is already walking this way, let's not change our minds.
 			do_rebuild_request = false;
-		if (0 == upgrade_soldier_request_->get_count())
+		}
+		if (0 == upgrade_soldier_request_->get_count()) {
 			do_rebuild_request = true;
-	} else
+		}
+	} else {
 		do_rebuild_request = true;
+	}
 
 	if (do_rebuild_request) {
 		upgrade_soldier_request_.reset(new Request(
@@ -684,8 +692,9 @@ void MilitarySite::update_soldier_request(bool incd) {
 		}
 	} else  // not doing upgrade request
 	{
-		if ((capacity != stationed) || (normal_soldier_request_))
+		if ((capacity != stationed) || (normal_soldier_request_)) {
 			update_normal_soldier_request();
+		}
 
 		if ((capacity == stationed) && (!normal_soldier_request_)) {
 			if (soldier_control_.present_soldiers().size() == capacity) {
@@ -729,31 +738,44 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 		update_soldier_request();
 	}
 
+	// Heal soldiers
 	if (nexthealtime_ <= timeofgame) {
-		uint32_t total_heal = descr().get_heal_per_second();
-		std::vector<Soldier*> soldiers = soldier_control_.present_soldiers();
+		const uint32_t total_heal = descr().get_heal_per_second();
 		uint32_t max_total_level = 0;
 		float max_health = 0;
-		Soldier* soldier_to_heal = 0;
+		Soldier* soldier_to_heal = nullptr;
 
-		for (uint32_t i = 0; i < soldiers.size(); ++i) {
-			Soldier* s = soldiers[i];
-
-			// The healing algorithm is:
-			// * heal soldier with highest total level
-			// * heal healthiest if multiple of same total level exist
-			if (s->get_current_health() < s->get_max_health()) {
-				if (0 == soldier_to_heal || s->get_total_level() > max_total_level ||
-				    (s->get_total_level() == max_total_level &&
-				     s->get_current_health() / s->get_max_health() > max_health)) {
-					max_total_level = s->get_total_level();
-					max_health = s->get_current_health() / s->get_max_health();
-					soldier_to_heal = s;
+		for (Soldier* soldier : soldier_control_.stationed_soldiers()) {
+			if (soldier->get_current_health() < soldier->get_max_health()) {
+				if (is_present(*soldier)) {
+					// The healing algorithm for present soldiers is:
+					// * heal soldier with highest total level
+					// * heal healthiest if multiple of same total level exist
+					if (soldier_to_heal == nullptr || soldier->get_total_level() > max_total_level ||
+					    (soldier->get_total_level() == max_total_level &&
+					     soldier->get_current_health() / soldier->get_max_health() > max_health)) {
+						max_total_level = soldier->get_total_level();
+						max_health = soldier->get_current_health() / soldier->get_max_health();
+						soldier_to_heal = soldier;
+					}
+				} else if ((soldier->get_battle() == nullptr ||
+				            soldier->get_battle()->opponent(*soldier) == nullptr) &&
+				           !get_economy(WareWorker::wwWORKER)->warehouses().empty()) {
+					// Somewhat heal soldiers in the field that are not currently engaged in fighting an
+					// opponent, but only if there is a warehouse connected.
+					const PlayerNumber field_owner = soldier->get_position().field->get_owned_by();
+					if (owner().player_number() == field_owner) {
+						const unsigned int air_distance =
+						   game.map().calc_distance(get_position(), soldier->get_position());
+						const unsigned int heal_with_factor =
+						   total_heal * descr().get_conquers() / std::max(air_distance * 4U, 1U);
+						soldier->heal(std::min(total_heal, heal_with_factor));
+					}
 				}
 			}
 		}
 
-		if (0 != soldier_to_heal) {
+		if (soldier_to_heal != nullptr) {
 			soldier_to_heal->heal(total_heal);
 		}
 
@@ -771,8 +793,9 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 void MilitarySite::remove_worker(Worker& w) {
 	Building::remove_worker(w);
 
-	if (upcast(Soldier, soldier, &w))
+	if (upcast(Soldier, soldier, &w)) {
 		pop_soldier_job(soldier, nullptr);
+	}
 
 	update_soldier_request();
 }
@@ -797,12 +820,14 @@ bool MilitarySite::get_building_work(Game& game, Worker& worker, bool) {
 			} else if (upcast(Soldier, opponent, enemy)) {
 				if (!opponent->get_battle()) {
 					soldier->start_task_defense(game, stayhome);
-					if (stayhome)
+					if (stayhome) {
 						opponent->send_signal(game, "sleep");
+					}
 					return true;
 				}
-			} else
+			} else {
 				throw wexception("MilitarySite::get_building_work: bad SoldierJob");
+			}
 		}
 	}
 
@@ -847,11 +872,14 @@ bool MilitarySite::military_presence_kept(Game& game) {
 	FCoords const fc = game.map().get_fcoords(get_position());
 	game.map().find_immovables(game, Area<FCoords>(fc, 3), &immovables);
 
-	for (uint32_t i = 0; i < immovables.size(); ++i)
-		if (upcast(MilitarySite const, militarysite, immovables[i].object))
+	for (uint32_t i = 0; i < immovables.size(); ++i) {
+		if (upcast(MilitarySite const, militarysite, immovables[i].object)) {
 			if (this != militarysite && &owner() == &militarysite->owner() &&
-			    get_size() <= militarysite->get_size() && militarysite->didconquer_)
+			    get_size() <= militarysite->get_size() && militarysite->didconquer_) {
 				return true;
+			}
+		}
+	}
 	return false;
 }
 
@@ -925,8 +953,9 @@ MapObject* MilitarySite::pop_soldier_job(Soldier* const soldier, bool* const sta
 	     job_iter != soldierjobs_.end(); ++job_iter) {
 		if (job_iter->soldier == soldier) {
 			MapObject* const enemy = job_iter->enemy.get(owner().egbase());
-			if (stayhome)
+			if (stayhome) {
 				*stayhome = job_iter->stayhome;
+			}
 			soldierjobs_.erase(job_iter);
 			return enemy;
 		}
@@ -984,7 +1013,7 @@ bool MilitarySite::update_upgrade_requirements() {
 }
 
 const BuildingSettings* MilitarySite::create_building_settings() const {
-	MilitarysiteSettings* settings = new MilitarysiteSettings(descr());
+	MilitarysiteSettings* settings = new MilitarysiteSettings(descr(), owner().tribe());
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
 	settings->prefer_heroes = soldier_preference_ == SoldierPreference::kHeroes;

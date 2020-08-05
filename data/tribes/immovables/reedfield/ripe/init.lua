@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    attributes = { "ripe_reed", "field" },
    programs = {
       program = {
-         "animate=idle 500000",
+         "animate=idle duration:8m20s",
          "remove=",
       },
       harvest = {
@@ -22,7 +22,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 13, 18 },
+         hotspot = { 22, 27 },
       },
    }
 }

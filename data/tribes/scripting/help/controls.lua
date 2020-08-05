@@ -1,4 +1,4 @@
-set_textdomain("tribes_encyclopedia")
+push_textdomain("tribes_encyclopedia")
 
 include "scripting/richtext.lua"
 include "txts/help/common_helptexts.lua"
@@ -7,9 +7,7 @@ local toggle_minimap_hotkey = help_toggle_minimap_hotkey()
 local toggle_building_spaces_hotkey = help_toggle_building_spaces_hotkey()
 local toggle_fullscreen_hotkey = help_toggle_fullscreen_hotkey()
 
-set_textdomain("tribes_encyclopedia")
-
-return {
+local r = {
    title = _"Controls",
    text =
          h2(_"Window Control") ..
@@ -45,11 +43,25 @@ return {
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Page Down")), _"Decrease game speed") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Page Up")), _"Increase game speed by 10x") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Page Down")), _"Decrease game speed by 10x") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Shift + Page Up")), _"Increase game speed by 0.25x") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Shift + Page Down")), _"Decrease game speed by 0.25x") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Pause")), _"Pause the game") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'c'
                dl(help_format_hotkey("C"), _"Toggle census") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 's'
                dl(help_format_hotkey("S"), _"Toggle statistics") ..
+               -- TRANSLATORS: This is an access key combination. The hotkey is 'l'
+               dl(help_format_hotkey("L"), _"Toggle soldier health bars and level icons") ..
+               -- TRANSLATORS: This is an access key combination. The hotkey is 'u'
+               dl(help_format_hotkey("U"), _"Toggle building visibility") ..
+               -- TRANSLATORS: This is an access key combination. The hotkey is 'w'
+               dl(help_format_hotkey("W"), _"Toggle workarea overlap indicators") ..
                toggle_minimap_hotkey ..
                toggle_building_spaces_hotkey ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'o'
@@ -65,10 +77,20 @@ return {
                -- TRANSLATORS: This is an access key combination. The hotkey is 'e'
                dl(help_format_hotkey("E"), _"Toggle seafaring statistics") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Arrow keys")), _"Move the map") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Arrow keys")), _"Move the map fast") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Shift + Arrow keys")), _"Move the map slowly") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Home")), _"Center main mapview on starting location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Ctrl + 1-9")), _"Remember current location") ..
                dl(help_format_hotkey(pgettext("hotkey", "1-9")), _"Go to previously remembered location") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", ", (comma)")), _"Go to previous location") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", ". (period)")), _"Go to next location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Ctrl + +")), _"Increase zoom") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
@@ -78,8 +100,6 @@ return {
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Ctrl + F11")), _"Take a screenshot") ..
                toggle_fullscreen_hotkey ..
-               -- TRANSLATORS: This is an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + F10")), _"Quit the game immediately") ..
                -- TRANSLATORS: This is an access key combination.
                dl(help_format_hotkey(pgettext("hotkey", "F6")), _"Show the debug console (only in debug-builds)")
          ) ..
@@ -130,3 +150,5 @@ return {
                dl(help_format_hotkey("W"), _"Watch the selected ship")
          )
 }
+pop_textdomain()
+return r

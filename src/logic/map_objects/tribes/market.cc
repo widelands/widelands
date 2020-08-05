@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "base/i18n.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribes.h"
+#include "logic/player.h"
 
 namespace Widelands {
 
@@ -245,7 +246,7 @@ void Market::traded_ware_arrived(const int trade_id,
 	   *game->tribes().get_worker_descr(game->tribes().worker_index("barbarians_carrier"));
 	auto& worker = w_desc.create(*game, get_owner(), this, position_);
 	worker.start_task_dropoff(*game, *ware);
-	trade_order.received_traded_wares_in_this_batch += 1;
+	++trade_order.received_traded_wares_in_this_batch;
 	get_owner()->ware_produced(ware_index);
 
 	auto* other_market = dynamic_cast<Market*>(game->objects().get_object(trade_order.other_side));

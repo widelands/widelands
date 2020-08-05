@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2019 by the Widelands Development Team
+ * Copyright (C) 2005-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_WORKAREA_INFO_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WORKAREA_INFO_H
 
-#include <cstring>
 #include <map>
-#include <set>
 #include <string>
 
 /** The WorkareaInfo stores radii and for each radius a set of strings.

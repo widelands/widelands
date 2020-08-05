@@ -1,6 +1,3 @@
-include "scripting/messages.lua"
-include "scripting/field_animations.lua"
-
 show_warning_early_attack = true
 show_warning_reed = true
 show_warning_clay = true
@@ -124,6 +121,12 @@ function count(ware)
       in_warehouses = in_warehouses + wh:get_wares(ware)
    end
    return in_warehouses
+end
+
+function backup_autosave()
+   while backup_mark.owner ~= p1 do sleep(4273) end
+   -- TRANSLATORS: Name of a backup autosave
+   wl.Game():save(_"The Great Stormflood (Backup Autosave)")
 end
 
 function stormflood()
@@ -323,6 +326,7 @@ function mission_thread()
       while expansion_mark.owner == nil do sleep(4273) end
       set_objective_done(o)
    end
+   run(backup_autosave)
 
    -- A friendly chat between neighbours
    p1:reveal_fields(map.player_slots[2].starting_field:region(6))
@@ -455,7 +459,7 @@ function mission_thread()
    -- 2 soldiers with health-1/attack-2/defense-0.
    wl.Game():save_campaign_data("frisians", "fri01", persist)
    campaign_message_box(victory_1)
-   p1:reveal_scenario("frisians01")
+   p1:mark_scenario_as_solved("fri01.wmf")
    -- END OF MISSION 1
 end
 

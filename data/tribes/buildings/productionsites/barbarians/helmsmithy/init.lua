@@ -56,11 +56,6 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
    },
-   outputs = {
-      "helmet",
-      "helmet_mask",
-      "helmet_warhelm"
-   },
 
    programs = {
       work = {
@@ -70,7 +65,6 @@ tribes:new_productionsite_type {
             "call=produce_helmet",
             "call=produce_helmet_mask",
             "call=produce_helmet_warhelm",
-            "return=no_stats"
          }
       },
       produce_helmet = {
@@ -80,9 +74,9 @@ tribes:new_productionsite_type {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs helmet",
             "consume=coal iron",
-            "sleep=32000",
+            "sleep=duration:32s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "produce=helmet"
          }
       },
@@ -93,9 +87,9 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs helmet_mask",
             "consume=coal iron:2",
-            "sleep=32000",
+            "sleep=duration:32s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 45000",
+            "animate=working duration:45s",
             "produce=helmet_mask"
          }
       },
@@ -106,9 +100,9 @@ tribes:new_productionsite_type {
             -- time total: 87 + 3.6
             "return=skipped unless economy needs helmet_warhelm",
             "consume=coal gold iron:2",
-            "sleep=32000",
+            "sleep=duration:32s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 55000",
+            "animate=working duration:55s",
             "produce=helmet_warhelm"
          }
       },

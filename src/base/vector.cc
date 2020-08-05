@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,6 @@
  */
 
 #include "base/vector.h"
-
-#include <cmath>
 
 Vector2f middle(const Vector2f& a, const Vector2f& b) {
 	return Vector2f((a.x + b.x) / 2.f, (a.y + b.y) / 2.f);

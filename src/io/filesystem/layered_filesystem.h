@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ public:
 
 	bool is_writable() const override;
 	bool file_exists(const std::string& path) const override;
-	bool is_directory(const std::string& path) override;
+	bool is_directory(const std::string& path) const override;
 	void ensure_directory_exists(const std::string& fs_dirname) override;
 	void make_directory(const std::string& fs_dirname) override;
 

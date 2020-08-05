@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,6 @@
 
 #include "editor/ui_menus/main_menu_load_map.h"
 
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -33,14 +30,14 @@
  * Create all the buttons etc...
  */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
-   : MainMenuLoadOrSaveMap(parent, registry, 2, "load_map_menu", _("Load Map")) {
+   : MainMenuLoadOrSaveMap(parent, registry, "load_map_menu", _("Load Map")) {
 	set_current_directory(curdir_);
 
-	table_.selected.connect(boost::bind(&MainMenuLoadMap::entry_selected, this));
-	table_.double_clicked.connect(boost::bind(&MainMenuLoadMap::clicked_ok, boost::ref(*this)));
+	table_.selected.connect([this](unsigned) { entry_selected(); });
+	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
 
-	ok_.sigclicked.connect(boost::bind(&MainMenuLoadMap::clicked_ok, this));
-	cancel_.sigclicked.connect(boost::bind(&MainMenuLoadMap::die, this));
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	cancel_.sigclicked.connect([this]() { die(); });
 }
 
 void MainMenuLoadMap::clicked_ok() {
@@ -53,8 +50,10 @@ void MainMenuLoadMap::clicked_ok() {
 		fill_table();
 	} else {
 		EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
+		eia.egbase().create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 		eia.load(mapdata.filename);
 		// load() will delete us.
+		eia.egbase().remove_loader_ui();
 	}
 }
 

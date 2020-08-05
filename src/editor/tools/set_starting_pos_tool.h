@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,7 @@
 #ifndef WL_EDITOR_TOOLS_SET_STARTING_POS_TOOL_H
 #define WL_EDITOR_TOOLS_SET_STARTING_POS_TOOL_H
 
-#include <vector>
-
 #include "editor/tools/tool.h"
-#include "graphic/playercolor.h"
 
 // How much place should be left around a player position
 // where no other player can start

@@ -29,7 +29,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
-      basic_amount = 1,
+      basic_amount = 2,
       prohibited_till = 490,
       very_weak_ai_limit = 1,
       weak_ai_limit = 3
@@ -40,16 +40,6 @@ tribes:new_productionsite_type {
       empire_vinefarmer = 1
    },
 
-   outputs = {
-      "grape"
-   },
-
-   indicate_workarea_overlaps = {
-      empire_vineyard = false,
-      empire_farm = false,
-      empire_foresters_house = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -57,7 +47,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant",
             "call=harvest",
-            "return=no_stats"
          }
       },
       plant = {
@@ -65,7 +54,7 @@ tribes:new_productionsite_type {
          descname = _"planting grapevines",
          actions = {
             "callworker=plant",
-            "sleep=13000"
+            "sleep=duration:5s"
          }
       },
       harvest = {
@@ -73,7 +62,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting grapes",
          actions = {
             "callworker=harvest",
-            "sleep=5000"
+            "sleep=duration:5s"
          }
       },
    },

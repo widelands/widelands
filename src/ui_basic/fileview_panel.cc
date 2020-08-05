@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,6 @@
 #include "ui_basic/fileview_panel.h"
 
 #include <memory>
-
-#include <boost/format.hpp>
 
 #include "base/macros.h"
 #include "scripting/lua_interface.h"
@@ -58,7 +56,7 @@ void FileViewPanel::add_tab(const std::string& lua_script) {
 	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
 	   boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, panel_style_, content);
 
-	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(std::move(textarea)));
+	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(textarea));
 	add((boost::format("about_%" PRIuS) % index).str(), title, boxes_.at(index).get(), "");
 
 	assert(boxes_.size() == textviews_.size());

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,6 @@
 
 #include "wui/buildingwindow.h"
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
@@ -31,7 +29,6 @@
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
-#include "logic/maphollowregion.h"
 #include "logic/player.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/actionconfirm.h"
@@ -40,10 +37,15 @@
 #include "wui/inputqueuedisplay.h"
 #include "wui/interactive_player.h"
 #include "wui/unique_window_handler.h"
+#include "wui/waresdisplay.h"
 
 static const char* pic_bulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
 static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png";
 static const char* pic_debug = "images/wui/fieldaction/menu_debug.png";
+static const char* pic_mute_this = "images/wui/buildings/menu_mute_this.png";
+static const char* pic_unmute_this = "images/wui/buildings/menu_unmute_this.png";
+static const char* pic_mute_all = "images/wui/buildings/menu_mute_all.png";
+static const char* pic_unmute_all = "images/wui/buildings/menu_unmute_all.png";
 
 BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
                                UI::UniqueWindow::Registry& reg,
@@ -58,7 +60,9 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      building_position_(b.get_position()),
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
-     expeditionbtn_(nullptr) {
+     expeditionbtn_(nullptr),
+     mute_this_(nullptr),
+     mute_all_(nullptr) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) { on_building_note(note); });
 }
@@ -86,7 +90,8 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 			break;
 		// The building is no more. Next think() will call die().
 		case Widelands::NoteBuilding::Action::kStartWarp:
-			igbase()->add_wanted_building_window(building_position_, get_pos(), is_minimal());
+			igbase()->add_wanted_building_window(
+			   building_position_, get_pos(), is_minimal(), is_pinned());
 			break;
 		default:
 			break;
@@ -176,7 +181,35 @@ void BuildingWindow::think() {
 		caps_setup_ = true;
 	}
 
+	if (mute_this_ || mute_all_) {
+		assert(mute_this_ && mute_all_);
+		mute_this_->set_pic(
+		   g_gr->images().get(building->mute_messages() ? pic_unmute_this : pic_mute_this));
+		mute_this_->set_tooltip(building->mute_messages() ? _("Muted – click to unmute") :
+		                                                    _("Mute this building’s messages"));
+		if (building->owner().is_muted(
+		       building->owner().tribe().safe_building_index(building->descr().name()))) {
+			mute_this_->set_enabled(false);
+			mute_all_->set_pic(g_gr->images().get(pic_unmute_all));
+			mute_all_->set_tooltip(_("All buildings of this type are muted – click to unmute"));
+		} else {
+			mute_this_->set_enabled(true);
+			mute_all_->set_pic(g_gr->images().get(pic_mute_all));
+			mute_all_->set_tooltip(_("Mute all buildings of this type"));
+		}
+	}
+
 	UI::Window::think();
+}
+
+static bool allow_muting(const Widelands::BuildingDescr& d) {
+	if (d.type() == Widelands::MapObjectType::MILITARYSITE ||
+	    d.type() == Widelands::MapObjectType::WAREHOUSE) {
+		return true;
+	} else if (upcast(const Widelands::ProductionSiteDescr, p, &d)) {
+		return !p->out_of_resource_message().empty() || !p->resource_not_needed_message().empty();
+	}
+	return false;
 }
 
 /**
@@ -205,8 +238,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				   capsbuttons, "start_or_cancel_expedition", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 				   g_gr->images().get("images/wui/buildings/start_expedition.png"));
 				update_expedition_button(!pd->expedition_started());
-				expeditionbtn_->sigclicked.connect(
-				   boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
+				expeditionbtn_->sigclicked.connect([this]() { act_start_or_cancel_expedition(); });
 				capsbuttons->add(expeditionbtn_);
 
 				expedition_canceled_subscriber_ =
@@ -231,8 +263,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				      _("Continue") :
 				      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
 				      _("Stop"));
-				stopbtn->sigclicked.connect(
-				   boost::bind(&BuildingWindow::act_start_stop, boost::ref(*this)));
+				stopbtn->sigclicked.connect([this]() { act_start_stop(); });
 				capsbuttons->add(stopbtn);
 
 				// Add a fixed width separator rather than infinite space so the
@@ -244,10 +275,14 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			}
 		}  // upcast to productionsite
 
-		if (capscache_ & Widelands::Building::PCap_Enhancable) {
-			const Widelands::DescriptionIndex& enhancement = building->descr().enhancement();
+		upcast(Widelands::ConstructionSite, cs, building);
+		if ((capscache_ & Widelands::Building::PCap_Enhancable) ||
+		    (cs && cs->get_info().becomes->enhancement() != Widelands::INVALID_INDEX)) {
+			const Widelands::DescriptionIndex& enhancement =
+			   cs ? cs->get_info().becomes->enhancement() : building->descr().enhancement();
 			const Widelands::TribeDescr& tribe = owner.tribe();
-			if (owner.is_building_type_allowed(enhancement)) {
+			if (owner.is_building_type_allowed(enhancement) &&
+			    owner.tribe().has_building(enhancement)) {
 				const Widelands::BuildingDescr& building_descr = *tribe.get_building_descr(enhancement);
 				std::string enhance_tooltip =
 				   (boost::format(_("Enhance to %s")) % building_descr.descname().c_str()).str() +
@@ -263,7 +298,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				                  building_descr.icon(), enhance_tooltip);
 
 				//  button id = building id
-				enhancebtn->sigclicked.connect([this, enhancement] { act_enhance(enhancement); });
+				enhancebtn->sigclicked.connect(
+				   [this, enhancement, cs] { act_enhance(enhancement, cs); });
 				capsbuttons->add(enhancebtn);
 				requires_destruction_separator = true;
 			}
@@ -273,8 +309,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			UI::Button* destroybtn =
 			   new UI::Button(capsbuttons, "destroy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  g_gr->images().get(pic_bulldoze), _("Destroy"));
-			destroybtn->sigclicked.connect(
-			   boost::bind(&BuildingWindow::act_bulldoze, boost::ref(*this)));
+			destroybtn->sigclicked.connect([this]() { act_bulldoze(); });
 			capsbuttons->add(destroybtn);
 
 			requires_destruction_separator = true;
@@ -284,25 +319,20 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			if (building->descr().can_be_dismantled()) {
 				const Widelands::Buildcost wares =
 				   Widelands::DismantleSite::count_returned_wares(building);
-
-				const std::string dismantle_text =
-				   (wares.empty() ? _("Dismantle") :
-				                    std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") +
-				                       "</font><br>" + waremap_to_richtext(owner.tribe(), wares));
-
-				UI::Button* dismantlebtn =
-				   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				                  g_gr->images().get(pic_dismantle),
-				                  std::string(_("Dismantle")) + "<br>" +
-				                     g_gr->styles()
-				                        .ware_info_style(UI::WareInfoStyle::kNormal)
-				                        .header_font()
-				                        .as_font_tag(_("Returns:")) +
-				                     "<br>" + waremap_to_richtext(owner.tribe(), wares));
-				dismantlebtn->sigclicked.connect(
-				   boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
-				capsbuttons->add(dismantlebtn);
-				requires_destruction_separator = true;
+				if (!wares.empty()) {
+					UI::Button* dismantlebtn =
+					   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+					                  g_gr->images().get(pic_dismantle),
+					                  std::string(_("Dismantle")) + "<br>" +
+					                     g_gr->styles()
+					                        .ware_info_style(UI::WareInfoStyle::kNormal)
+					                        .header_font()
+					                        .as_font_tag(_("Returns:")) +
+					                     "<br>" + waremap_to_richtext(owner.tribe(), wares));
+					dismantlebtn->sigclicked.connect([this]() { act_dismantle(); });
+					capsbuttons->add(dismantlebtn);
+					requires_destruction_separator = true;
+				}
 			}
 		}
 
@@ -312,6 +342,19 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			UI::Panel* spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
 			capsbuttons->add(spacer);
 			capsbuttons->add_inf_space();
+		}
+
+		if (allow_muting(building->descr())) {
+			mute_this_ =
+			   new UI::Button(capsbuttons, "mute_this", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			                  g_gr->images().get(pic_mute_this), "" /* set by next think() */);
+			mute_all_ =
+			   new UI::Button(capsbuttons, "mute_all", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			                  g_gr->images().get(pic_mute_all), "" /* set by next think() */);
+			mute_all_->sigclicked.connect([this]() { act_mute(true); });
+			mute_this_->sigclicked.connect([this]() { act_mute(false); });
+			capsbuttons->add(mute_this_);
+			capsbuttons->add(mute_all_);
 		}
 	}
 
@@ -326,8 +369,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			toggle_workarea_ =
 			   new UI::Button(capsbuttons, "workarea", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  g_gr->images().get("images/wui/buildings/toggle_workarea.png"));
-			toggle_workarea_->sigclicked.connect(
-			   boost::bind(&BuildingWindow::toggle_workarea, boost::ref(*this)));
+			toggle_workarea_->sigclicked.connect([this]() { toggle_workarea(); });
 
 			capsbuttons->add(toggle_workarea_);
 			configure_workarea_button();
@@ -338,14 +380,14 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			UI::Button* debugbtn =
 			   new UI::Button(capsbuttons, "debug", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  g_gr->images().get(pic_debug), _("Show Debug Window"));
-			debugbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_debug, boost::ref(*this)));
+			debugbtn->sigclicked.connect([this]() { act_debug(); });
 			capsbuttons->add(debugbtn);
 		}
 
 		UI::Button* gotobtn =
 		   new UI::Button(capsbuttons, "goto", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 		                  g_gr->images().get("images/wui/menus/goto.png"), _("Center view on this"));
-		gotobtn->sigclicked.connect(boost::bind(&BuildingWindow::clicked_goto, boost::ref(*this)));
+		gotobtn->sigclicked.connect([this]() { clicked_goto(); });
 		capsbuttons->add(gotobtn);
 
 		if (!requires_destruction_separator) {
@@ -372,8 +414,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			}
 		};
 
-		helpbtn->sigclicked.connect(
-		   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));
+		helpbtn->sigclicked.connect([&registry]() { registry.toggle(); });
 		capsbuttons->add(helpbtn);
 	}
 }
@@ -390,8 +431,9 @@ void BuildingWindow::act_bulldoze() {
 	}
 
 	if (SDL_GetModState() & KMOD_CTRL) {
-		if (building->get_playercaps() & Widelands::Building::PCap_Bulldoze)
+		if (building->get_playercaps() & Widelands::Building::PCap_Bulldoze) {
 			igbase()->game().send_player_bulldoze(*building);
+		}
 	} else {
 		show_bulldoze_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
 	}
@@ -406,7 +448,7 @@ void BuildingWindow::act_dismantle() {
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-			igbase()->game().send_player_dismantle(*building);
+			igbase()->game().send_player_dismantle(*building, false);
 			hide_workarea(true);
 		}
 	} else {
@@ -458,17 +500,36 @@ void BuildingWindow::act_start_or_cancel_expedition() {
 Callback for enhancement request
 ===============
 */
-void BuildingWindow::act_enhance(Widelands::DescriptionIndex id) {
+void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (building == nullptr) {
 		return;
 	}
+	if (csite) {
+		upcast(Widelands::ConstructionSite, construction_site, building);
+		assert(construction_site);
+		if (SDL_GetModState() & KMOD_CTRL) {
+			igbase()->game().send_player_enhance_building(
+			   *construction_site, construction_site->building().enhancement(), false);
+		} else {
+			show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *construction_site,
+			                     construction_site->get_info().becomes->enhancement(), true);
+		}
+		return;
+	}
 
 	if (SDL_GetModState() & KMOD_CTRL) {
-		if (building->get_playercaps() & Widelands::Building::PCap_Enhancable)
-			igbase()->game().send_player_enhance_building(*building, id);
+		if (building->get_playercaps() & Widelands::Building::PCap_Enhancable) {
+			igbase()->game().send_player_enhance_building(*building, id, false);
+		}
 	} else {
 		show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building, id);
+	}
+}
+
+void BuildingWindow::act_mute(bool all) {
+	if (Widelands::Building* building = building_.get(parent_->egbase())) {
+		igbase()->game().send_player_toggle_mute(*building, all);
 	}
 }
 

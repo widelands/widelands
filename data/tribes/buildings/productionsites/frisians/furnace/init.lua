@@ -10,37 +10,52 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      brick = 4,
+      brick = 3,
       granite = 2,
       log = 1,
       reed = 2
    },
    return_on_dismantle = {
       brick = 2,
-      log = 1,
+      granite = 1,
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 69},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working_iron = {
-         pictures = path.list_files (dirname .. "working_iron_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
+         directory = dirname,
+         basename = "working_iron",
+         hotspot = {50, 69},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working_gold = {
-         pictures = path.list_files (dirname .. "working_gold_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working_gold",
+         hotspot = {50, 69},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
+      unoccupied = {
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 58}
+      }
    },
 
    aihints = {
@@ -59,10 +74,6 @@ tribes:new_productionsite_type {
       { name = "iron_ore", amount = 8 },
       { name = "gold_ore", amount = 8 },
    },
-   outputs = {
-      "iron",
-      "gold"
-   },
 
    programs = {
       work = {
@@ -71,18 +82,33 @@ tribes:new_productionsite_type {
          actions = {
             "call=smelt_iron",
             "call=smelt_gold",
-            "call=smelt_iron",
-            "return=no_stats",
+            "call=smelt_iron_2",
          },
       },
+      -- 2 identical programs for iron to prevent unnecessary skipping penalty
       smelt_iron = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",
          actions = {
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
-            "sleep=27000",
-            "animate=working_iron 35000",
+            "sleep=duration:25s",
+            "playsound=sound/metal/furnace 192",
+            "animate=working_iron duration:35s",
+            "playsound=sound/metal/ironping 80",
+            "produce=iron"
+         },
+      },
+      smelt_iron_2 = {
+         -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
+         descname = _"smelting iron",
+         actions = {
+            "return=skipped unless economy needs iron",
+            "consume=coal iron_ore",
+            "sleep=duration:25s",
+            "playsound=sound/metal/furnace 192",
+            "animate=working_iron duration:35s",
+            "playsound=sound/metal/ironping 80",
             "produce=iron"
          },
       },
@@ -92,8 +118,10 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs gold",
             "consume=coal gold_ore",
-            "sleep=27000",
-            "animate=working_gold 35000",
+            "sleep=duration:27s",
+            "playsound=sound/metal/furnace 192",
+            "animate=working_gold duration:35s",
+            "playsound=sound/metal/goldping 80",
             "produce=gold"
          },
       },

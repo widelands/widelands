@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,9 +76,11 @@ Radiogroup::Radiogroup() {
 Radiogroup::~Radiogroup() {
 	// Scan-build claims this results in double free.
 	// This is a false positive.
-	// See https://bugs.launchpad.net/widelands/+bug/1198928
-	while (buttons_)
+	// The reason is that the variable will be reassigned in the destructor of the deleted child.
+	// This is very uncommon behavior and bad style, but will be non trivial to fix.
+	while (buttons_) {
 		delete buttons_;
+	}
 }
 
 /**
@@ -93,8 +95,9 @@ int32_t Radiogroup::add_button(Panel* const parent,
 	++highestid_;
 	Radiobutton* btn = new Radiobutton(parent, p, pic, *this, highestid_);
 	btn->set_tooltip(tooltip);
-	if (ret_btn)
+	if (ret_btn) {
 		(*ret_btn) = btn;
+	}
 	return highestid_;
 }
 
@@ -109,8 +112,9 @@ void Radiogroup::set_state(int32_t const state) {
 		return;
 	}
 
-	for (Radiobutton* btn = buttons_; btn; btn = btn->nextbtn_)
+	for (Radiobutton* btn = buttons_; btn; btn = btn->nextbtn_) {
 		btn->set_state(btn->id_ == state);
+	}
 	state_ = state;
 	changed();
 	changedto(state);
@@ -120,7 +124,8 @@ void Radiogroup::set_state(int32_t const state) {
  * Disable this radiogroup
  */
 void Radiogroup::set_enabled(bool st) {
-	for (Radiobutton* btn = buttons_; btn; btn = btn->nextbtn_)
+	for (Radiobutton* btn = buttons_; btn; btn = btn->nextbtn_) {
 		btn->set_enabled(st);
+	}
 }
 }  // namespace UI

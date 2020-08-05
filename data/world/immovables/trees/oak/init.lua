@@ -16,17 +16,21 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 72500",
-         "remove=80",
+         "animate=idle duration:1m12s500ms",
+         "remove=success:80",
          "grow=oak_summer_pole",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
-         hotspot = { 5, 12 },
+         directory = dirname,
+         basename = "sapling",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 6, 13 }
+      }
    },
 }
 
@@ -39,17 +43,21 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 72500",
-         "remove=70",
+         "animate=idle duration:1m12s500ms",
+         "remove=success:70",
          "grow=oak_summer_mature",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pole/idle_?.png"),
-         hotspot = { 12, 28 },
+         directory = dirname,
+         basename = "pole",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 13, 29 }
+      }
    },
 }
 
@@ -62,17 +70,21 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 75000",
-         "remove=40",
+         "animate=idle duration:1m15s",
+         "remove=success:40",
          "grow=oak_summer_old",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "mature/idle_?.png"),
-         hotspot = { 18, 48 },
+         directory = dirname,
+         basename = "mature",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 19, 49 }
+      }
    },
 }
 
@@ -80,36 +92,44 @@ world:new_immovable_type{
    name = "oak_summer_old",
    descname = _ "Oak (Old)",
    species = _ "Oak",
-   icon = dirname .. "old/idle_0.png",
+   icon = dirname .. "menu.png",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 2250000",
-         "transform=deadtree2 12",
-         "seed=oak_summer_sapling",
+         "animate=idle duration:37m30s",
+         "transform=deadtree2 success:12",
+         "seed=oak_summer_sapling 100",
       },
       fall = {
-         "animate=falling 1400",
+         "animate=falling 1s400ms",
          "transform=fallentree",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "old/idle_?.png"),
-         hotspot = { 24, 60 },
+         directory = dirname,
+         basename = "old",
          fps = 10,
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 25, 61 },
          sound_effect = {
             path = "sound/animals/bird2",
          },
       },
       falling = {
-         pictures = path.list_files(dirname .. "old/f_tree_??.png"),
-         hotspot = { 10, 60 },
+         directory = dirname,
+         basename = "falling",
          fps = 10,
+         frames = 7,
+         rows = 4,
+         columns = 2,
+         hotspot = { 11, 61 },
          play_once = true
-      },
+      }
    },
 }

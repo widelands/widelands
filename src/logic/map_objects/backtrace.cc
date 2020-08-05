@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 
 #ifndef _WIN32
 #ifndef __APPLE__
-#include <cstdlib>
 
 #include <execinfo.h>
 #endif

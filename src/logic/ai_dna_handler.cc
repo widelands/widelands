@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,6 @@
  */
 
 #include "logic/ai_dna_handler.h"
-
-#include <cstring>
 
 #include "base/time_string.h"
 #include "base/wexception.h"
@@ -121,7 +119,7 @@ void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t
 		fn.set_natural(std::to_string(static_cast<int64_t>(i)).c_str(), pd->f_neurons.at(i));
 	}
 
-	std::string comment = "See wiki for more info: https://wl.widelands.org/wiki/Ai%20Training/";
+	std::string comment = "See wiki for more info: https://www.widelands.org/wiki/Ai%20Training/";
 
 	prof.write(full_filename.c_str(), false, *g_fs, comment.c_str());
 }

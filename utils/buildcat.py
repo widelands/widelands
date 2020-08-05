@@ -32,7 +32,7 @@ MAINPOTS = [
     ('maps/maps', [
         '../../data/maps/*/elemental',
         '../../data/maps/*/*/elemental',
-        '../../data/campaigns/*.conf',
+        '../../data/campaigns/*.lua',
         '../../data/campaigns/*/elemental'
     ]),
     ('texts/texts', ['../../data/txts/*.lua',
@@ -71,6 +71,7 @@ MAINPOTS = [
     ('tribes/tribes', [
         '../../data/tribes/scripting/starting_conditions/*/*.lua',
         '../../data/tribes/*.lua',
+        '../../data/tribes/economy_profiles/*',
         '../../data/tribes/*/init.lua',
         '../../data/tribes/*/*/init.lua',
         '../../data/tribes/*/*/*/init.lua',
@@ -110,7 +111,7 @@ ITERATIVEPOTS = [
      ['../../data/campaigns/%(name)s/extra_data',
       '../../data/campaigns/%(name)s/objective',
       '../../data/campaigns/%(name)s/scripting/*.lua',
-      '../../data/scripting/richtext_scenarios.lua'
+      '../../data/campaigns/%(name)s/scripting/*/*.lua',
       ]
      ),
     ('map_%(name)s/map_%(name)s', 'data/maps/',
@@ -127,7 +128,7 @@ XGETTEXTOPTS = '-k_ --from-code=UTF-8'
 XGETTEXTOPTS += " -F -c\"* TRANSLATORS\""
 # escaped double quotes are necessary for windows, as it ignores single quotes
 XGETTEXTOPTS += " --copyright-holder=\"Widelands Development Team\""
-XGETTEXTOPTS += " --msgid-bugs-address=\"https://wl.widelands.org/wiki/ReportingBugs/\""
+XGETTEXTOPTS += " --msgid-bugs-address=\"https://www.widelands.org/wiki/ReportingBugs/\""
 
 # Options for xgettext when parsing Lua scripts
 # Official Lua backend of xgettext does not support pgettext and npgettext right
@@ -151,7 +152,7 @@ HEAD += '#\n'
 HEAD += "msgid \"\"\n"
 HEAD += "msgstr \"\"\n"
 HEAD += "\"Project-Id-Version: Widelands svnVERSION\\n\"\n"
-HEAD += "\"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\\n\"\n"
+HEAD += "\"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\\n\"\n"
 HEAD += "\"POT-Creation-Date: " + \
     strftime('%Y-%m-%d %H:%M+0000', time_now) + "\\n\"\n"
 HEAD += "\"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n\"\n"

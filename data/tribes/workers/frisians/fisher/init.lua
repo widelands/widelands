@@ -1,24 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {8, 25},
-   },
-   fishing = {
-      pictures = path.list_files (dirname .. "fishing_??.png"),
-      hotspot = { 9, 23 },
-      fps = 10
-   },
-   release = {
-      pictures = path.list_files (dirname .. "release_??.png"),
-      hotspot = { 15, 20 },
-      fps = 10
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {13, 25}, 15)
-add_directional_animation(animations, "walkload", dirname, "walkload", {13, 26}, 15)
-
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
    name = "frisians_fisher",
@@ -38,14 +19,14 @@ tribes:new_worker_type {
          "findspace=size:any radius:8 resource:fish",
          "walk=coords",
          "mine=fish 1",
-         "animate=fishing 3000",
+         "animate=fishing duration:3s",
          "createware=fish",
          "return"
       },
       fish_in_pond = {
          "findobject=attrib:pond_mature radius:8",
          "walk=object",
-         "animate=fishing 3000",
+         "animate=fishing duration:3s",
          "callobject=fall_dry",
          "createware=fish",
          "return"
@@ -53,12 +34,59 @@ tribes:new_worker_type {
       breed_in_pond = {
          "findobject=attrib:pond_dry radius:8",
          "walk=object",
-         "animate=release 2000",
+         "animate=release duration:2s",
          "callobject=with_fish",
          "return"
       }
    },
 
    ware_hotspot = {0, 20},
-   animations = animations,
+
+   spritesheets = {
+      walk = {
+         directory = dirname,
+         basename = "walk",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {13, 25}
+      },
+      walkload = {
+         directory = dirname,
+         basename = "walkload",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {13, 26}
+      },
+      fishing = {
+         directory = dirname,
+         basename = "fishing",
+         fps = 10,
+         frames = 30,
+         columns = 5,
+         rows = 6,
+         hotspot = {9, 23}
+      },
+      release = {
+         directory = dirname,
+         basename = "release",
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         hotspot = {15, 20}
+      },
+   },
+   animations = {
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         hotspot = {8, 25}
+      },
+   },
 }

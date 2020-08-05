@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,6 +70,7 @@ public:
 	int get_terrain_description(lua_State* L);
 	int save_campaign_data(lua_State* L);
 	int read_campaign_data(lua_State* L);
+	int set_loading_message(lua_State*);
 
 	/*
 	 * C methods

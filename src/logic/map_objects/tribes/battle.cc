@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "base/log.h"
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -117,17 +116,20 @@ void Battle::cancel(Game& game, Soldier& soldier) {
 	} else if (&soldier == second_) {
 		second_ = nullptr;
 		soldier.set_battle(game, nullptr);
-	} else
+	} else {
 		return;
+	}
 
 	schedule_destroy(game);
 }
 
 bool Battle::locked(Game& game) {
-	if (!first_ || !second_)
+	if (!first_ || !second_) {
 		return false;
-	if (game.get_gametime() - creationtime_ < 1000)
+	}
+	if (game.get_gametime() - creationtime_ < 1000) {
 		return true;  // don't change battles around willy-nilly
+	}
 	return first_->get_position() == second_->get_position();
 }
 
@@ -314,7 +316,7 @@ void Battle::calculate_round(Game& game) {
 	first_strikes_ = !first_strikes_;
 
 	uint32_t const hit = game.logic_rand() % 100;
-	if (hit > defender->get_evade()) {
+	if (hit >= defender->get_evade()) {
 		// Attacker hits!
 		last_attack_hits_ = true;
 
@@ -356,18 +358,20 @@ void Battle::Loader::load_pointers() {
 	Battle& battle = get<Battle>();
 	try {
 		MapObject::Loader::load_pointers();
-		if (first_)
+		if (first_) {
 			try {
 				battle.first_ = &mol().get<Soldier>(first_);
 			} catch (const WException& e) {
 				throw wexception("soldier 1 (%u): %s", first_, e.what());
 			}
-		if (second_)
+		}
+		if (second_) {
 			try {
 				battle.second_ = &mol().get<Soldier>(second_);
 			} catch (const WException& e) {
 				throw wexception("soldier 2 (%u): %s", second_, e.what());
 			}
+		}
 	} catch (const WException& e) {
 		throw wexception("battle: %s", e.what());
 	}

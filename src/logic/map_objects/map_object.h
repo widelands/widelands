@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,38 +20,26 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 #define WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 
-#include <cstring>
-#include <map>
-#include <set>
-#include <string>
-#include <vector>
-
-#include <boost/function.hpp>
-#include <boost/signals2.hpp>
-#include <boost/unordered_map.hpp>
+#include <boost/signals2/signal.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/animation/animation.h"
+#include "graphic/animation/diranimations.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/draw_text.h"
+#include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
-#include "ui_basic/tabpanel.h"
 
-class FileRead;
 class RenderTarget;
-struct DirAnimations;
 
 namespace Widelands {
 
-class EditorCategory;
 class MapObject;
-class MapObjectLoader;
 class Player;
-struct Path;
 
 // This enum lists the available classes of Map Objects.
 enum class MapObjectType : uint8_t {
@@ -59,7 +47,8 @@ enum class MapObjectType : uint8_t {
 
 	WARE,  //  class WareInstance
 	BATTLE,
-	FLEET,
+	SHIP_FLEET,
+	FERRY_FLEET,
 
 	BOB = 10,  // Bob
 	CRITTER,   // Bob -- Critter
@@ -67,14 +56,17 @@ enum class MapObjectType : uint8_t {
 	WORKER,    // Bob -- Worker
 	CARRIER,   // Bob -- Worker -- Carrier
 	SOLDIER,   // Bob -- Worker -- Soldier
+	FERRY,     // Bob -- Worker -- Ferry
 
 	// everything below is at least a BaseImmovable
 	IMMOVABLE = 30,
 
 	// everything below is at least a PlayerImmovable
-	FLAG = 40,
-	ROAD,
-	PORTDOCK,
+	FLAG = 40,  // Flag
+	PORTDOCK,   // Portdock
+	ROADBASE,   // Roadbase
+	ROAD,       // Roadbase -- Road
+	WATERWAY,   // Roadbase -- Waterway
 
 	// everything below is at least a Building
 	BUILDING = 100,    // Building
@@ -94,7 +86,10 @@ std::string to_string(MapObjectType type);
  * Base class for descriptions of worker, files and so on. This must just
  * link them together
  */
-struct MapObjectDescr {
+class MapObjectDescr {
+public:
+	using AttributeIndex = uint32_t;
+	using Attributes = std::vector<AttributeIndex>;
 
 	enum class OwnerType { kWorld, kTribe };
 
@@ -125,6 +120,7 @@ struct MapObjectDescr {
 	}
 
 	virtual uint32_t get_animation(const std::string& animname, const MapObject* mo) const;
+
 	uint32_t main_animation() const;
 	std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
 
@@ -142,29 +138,31 @@ struct MapObjectDescr {
 	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
 	const std::string& icon_filename() const;
 
-	bool has_attribute(uint32_t) const;
-	static uint32_t get_attribute_id(const std::string& name, bool add_if_not_exists = false);
+	bool has_attribute(AttributeIndex) const;
+	const MapObjectDescr::Attributes& attributes() const;
+	static AttributeIndex get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 protected:
-	// Add all the special attributes to the attribute list. Only the 'allowed_special'
-	// attributes are allowed to appear - i.e. resi are fine for immovables.
-	void add_attributes(const std::vector<std::string>& attributes,
-	                    const std::set<uint32_t>& allowed_special);
-	void add_attribute(uint32_t attr);
+	// Add attributes to the attribute list
+	void add_attributes(const std::vector<std::string>& attribs);
+	void add_attribute(AttributeIndex attr);
 
 	/// Sets the directional animations in 'anims' with the animations
 	/// '&lt;basename&gt;_(ne|e|se|sw|w|nw)'.
 	void assign_directional_animation(DirAnimations* anims, const std::string& basename);
 
 private:
-	void add_animations(const LuaTable& table);
+	void add_animations(const LuaTable& table,
+	                    const std::string& animation_directory,
+	                    Animation::Type anim_type);
 
 	/// Throws an exception if the MapObjectDescr has no representative image
 	void check_representative_image();
 
 	using Anims = std::map<std::string, uint32_t>;
-	using AttribMap = std::map<std::string, uint32_t>;
-	using Attributes = std::vector<uint32_t>;
+
+	static std::map<std::string, AttributeIndex> attribute_names_;
+	Attributes attribute_ids_;
 
 	const MapObjectType type_;    /// Subclasses pick from the enum above
 	std::string const name_;      /// The name for internal reference
@@ -172,10 +170,7 @@ private:
 	/// The path and filename to the helptext script. Can be empty, but some subtypes like buildings,
 	/// wares and workers require it.
 	const std::string helptext_script_;
-	Attributes attributes_;
 	Anims anims_;
-	static uint32_t dyn_attribhigh_;  ///< highest attribute ID used
-	static AttribMap dyn_attribs_;
 	std::string icon_filename_;  // Filename for the menu icon
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
@@ -226,18 +221,6 @@ class MapObject {
 	MO_DESCR(MapObjectDescr)
 
 public:
-	/// Some default, globally valid, attributes.
-	/// Other attributes (such as "harvestable corn") could be
-	/// allocated dynamically (?)
-	enum Attribute {
-		CONSTRUCTIONSITE = 1,  ///< assume BUILDING
-		WORKER,                ///< assume BOB
-		SOLDIER,               ///<  assume WORKER
-		RESI,                  ///<  resource indicator, assume IMMOVABLE
-
-		HIGHEST_FIXED_ATTRIBUTE
-	};
-
 	struct LogSink {
 		virtual void log(const std::string& str) = 0;
 		virtual ~LogSink() {
@@ -293,9 +276,6 @@ public:
 	uint32_t schedule_act(Game&, uint32_t tdelta, uint32_t data = 0);
 	virtual void act(Game&, uint32_t data);
 
-	// implementation is in game_debug_ui.cc
-	virtual void create_debug_panels(const EditorGameBase& egbase, UI::TabPanel& tabs);
-
 	LogSink* get_logsink() {
 		return logsink_;
 	}
@@ -327,7 +307,8 @@ public:
 		HeaderWareInstance = 8,
 		HeaderShip = 9,
 		HeaderPortDock = 10,
-		HeaderFleet = 11,
+		HeaderShipFleet = 11,
+		HeaderFerryFleet = 12,
 	};
 
 	/**
@@ -407,7 +388,7 @@ protected:
 	virtual void cleanup(EditorGameBase&);
 
 	/// Draws census and statistics on screen
-	void do_draw_info(const TextToDraw& draw_text,
+	void do_draw_info(const InfoToDraw& info_to_draw,
 	                  const std::string& census,
 	                  const std::string& statictics,
 	                  const Vector2f& field_on_dst,
@@ -446,7 +427,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
  * Keeps the list of all objects currently in the game.
  */
 struct ObjectManager {
-	using MapObjectMap = boost::unordered_map<Serial, MapObject*>;
+	using MapObjectMap = std::unordered_map<Serial, MapObject*>;
 
 	ObjectManager() {
 		lastserial_ = 0;

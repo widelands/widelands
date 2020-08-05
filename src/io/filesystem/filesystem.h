@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,16 +20,9 @@
 #ifndef WL_IO_FILESYSTEM_FILESYSTEM_H
 #define WL_IO_FILESYSTEM_FILESYSTEM_H
 
-#include <cstring>
-#include <memory>
 #include <set>
-#include <stdexcept>
 #include <string>
 #include <vector>
-
-#include <stdint.h>
-
-#include "io/filesystem/filesystem_exceptions.h"
 
 using FilenameSet = std::set<std::string>;
 
@@ -53,7 +46,7 @@ public:
 	virtual FilenameSet list_directory(const std::string& directory) const = 0;
 
 	virtual bool is_writable() const = 0;
-	virtual bool is_directory(const std::string& path) = 0;
+	virtual bool is_directory(const std::string& path) const = 0;
 	virtual bool file_exists(const std::string& path) const = 0;
 
 	virtual void* load(const std::string& fname, size_t& length) = 0;
@@ -105,7 +98,7 @@ public:
 
 	// basic path/filename manipulation
 	std::string fix_cross_file(const std::string&) const;
-	std::string canonicalize_name(std::string path) const;
+	std::string canonicalize_name(const std::string& path) const;
 	bool is_path_absolute(const std::string& path) const;
 
 	/// Returns true if the filename is legal in all operating systems

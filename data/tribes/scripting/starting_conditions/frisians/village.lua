@@ -4,9 +4,9 @@
 
 include "scripting/infrastructure.lua"
 
-set_textdomain("tribes")
+push_textdomain("tribes")
 
-return {
+local r = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Village",
    -- TRANSLATORS: This is the tooltip for the "Village" starting condition
@@ -50,7 +50,7 @@ return {
          fur = 10,
          fur_garment = 5,
          sword_short = 5,
-         hammer = 5,
+         hammer = 10,
          fire_tongs = 2,
          bread_paddle = 2,
          kitchen_tools = 2,
@@ -92,7 +92,7 @@ return {
          inputs = {
             iron = 7,
             log = 7,
-            reed = 7
+            reed = 4
          },
       })
 
@@ -113,3 +113,5 @@ return {
 
 end
 }
+pop_textdomain()
+return r

@@ -92,8 +92,13 @@ function burn_tavern_down()
    o = campaign_message_with_objective(inventory2, obj_switch_stock_tab)
    wait_for_window_and_tab_or_complain(
       "stock_menu",
-      "wares_in_warehouses",
+      "total_wares",
       reopen_stock_menu, obj_reopen_stock_menu
+   )
+   wait_for_window_and_tab_or_complain(
+      "stock_menu",
+      "wares_in_warehouses",
+      reopen_stock_menu2, obj_reopen_stock_menu2
    )
    set_objective_done(o, 0)
    campaign_message_box(inventory3)
@@ -143,7 +148,7 @@ function plan_the_future()
    campaign_message_box(economy_settings2)
    o = campaign_message_with_objective(economy_settings3, obj_produce_marble_columns)
 
-   while sf.brn.immovable.economy:ware_target_quantity("marble_column") ~= 20 do
+   while sf.brn.immovable.ware_economy:target_quantity("marble_column") ~= 20 do
       sleep(200)
    end
    -- wait that the player has really changed the target quantity

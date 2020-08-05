@@ -34,21 +34,13 @@ tribes:new_productionsite_type {
       empire_hunter = 1
    },
 
-   outputs = {
-      "meat"
-   },
-
-   indicate_workarea_overlaps = {
-      empire_hunters_house = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _"hunting",
          actions = {
             "callworker=hunt",
-            "sleep=35000"
+            "sleep=duration:35s"
          }
       },
    },

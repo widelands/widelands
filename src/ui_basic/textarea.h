@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,11 @@
 #ifndef WL_UI_BASIC_TEXTAREA_H
 #define WL_UI_BASIC_TEXTAREA_H
 
+#include <memory>
+
 #include "graphic/align.h"
 #include "graphic/graphic.h"
+#include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 
 namespace UI {

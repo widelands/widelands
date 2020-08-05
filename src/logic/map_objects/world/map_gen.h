@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,16 +21,11 @@
 #define WL_LOGIC_MAP_OBJECTS_WORLD_MAP_GEN_H
 
 #include <map>
-#include <string>
-#include <vector>
 
 #include "logic/map_objects/world/terrain_description.h"
 
-class LuaTable;
-
 namespace Widelands {
 
-class World;
 struct MapGenInfo;
 
 /// Holds world and area specific information for the map generator.

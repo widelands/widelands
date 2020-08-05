@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,16 +20,13 @@
 #ifndef WL_NETWORK_GAMECLIENT_H
 #define WL_NETWORK_GAMECLIENT_H
 
-#include <memory>
-
 #include "chat/chat.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/player_end_result.h"
-#include "network/netclient_interface.h"
+#include "network/network.h"
 
 struct GameClientImpl;
-class InteractiveGameBase;
 
 /**
  * GameClient manages the lifetime of a network game in which this computer

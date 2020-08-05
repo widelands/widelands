@@ -41,9 +41,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 8 },
       { name = "wheat", amount = 8 }
    },
-   outputs = {
-      "beer_strong"
-   },
 
    programs = {
       work = {
@@ -52,8 +49,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs beer_strong",
             "consume=water wheat",
-            "sleep=30000",
-            "animate=working 30000",
+            "sleep=duration:30s",
+            "animate=working duration:30s",
             "produce=beer_strong"
          }
       },

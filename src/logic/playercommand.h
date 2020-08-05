@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
@@ -170,10 +169,35 @@ struct CmdBuildRoad : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Path* path;
+	std::unique_ptr<Path> path;
 	Coords start;
 	Path::StepVector::size_type nsteps;
-	char* steps;
+	std::unique_ptr<uint8_t[]> steps;
+};
+
+struct CmdBuildWaterway : public PlayerCommand {
+	CmdBuildWaterway() : PlayerCommand(), path(nullptr), start(), nsteps(0), steps(nullptr) {
+	}  // For savegame loading
+	CmdBuildWaterway(uint32_t, int32_t, Path&);
+	explicit CmdBuildWaterway(StreamRead&);
+
+	~CmdBuildWaterway() override;
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kBuildWaterway;
+	}
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	std::unique_ptr<Path> path;
+	Coords start;
+	Path::StepVector::size_type nsteps;
+	std::unique_ptr<uint8_t[]> steps;
 };
 
 struct CmdFlagAction : public PlayerCommand {
@@ -272,14 +296,43 @@ private:
 	Serial serial;
 };
 
-struct CmdEnhanceBuilding : public PlayerCommand {
-	CmdEnhanceBuilding() : PlayerCommand(), serial(0) {
+struct CmdExpeditionConfig : public PlayerCommand {
+	CmdExpeditionConfig() : PlayerCommand() {
 	}  // For savegame loading
-	CmdEnhanceBuilding(const uint32_t init_duetime,
-	                   const int32_t p,
-	                   Building& b,
-	                   const DescriptionIndex i)
-	   : PlayerCommand(init_duetime, p), serial(b.serial()), bi(i) {
+	CmdExpeditionConfig(uint32_t const t,
+	                    PlayerNumber const p,
+	                    PortDock& pd,
+	                    WareWorker ww,
+	                    DescriptionIndex di,
+	                    bool a)
+	   : PlayerCommand(t, p), serial(pd.serial()), type(ww), index(di), add(a) {
+	}
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kExpeditionConfig;
+	}
+
+	explicit CmdExpeditionConfig(StreamRead&);
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	Serial serial;
+	WareWorker type;
+	DescriptionIndex index;
+	bool add;
+};
+
+struct CmdEnhanceBuilding : public PlayerCommand {
+	CmdEnhanceBuilding() : PlayerCommand(), serial_(0), keep_wares_(false) {
+	}  // For savegame loading
+	CmdEnhanceBuilding(
+	   const uint32_t init_duetime, const int32_t p, Building& b, const DescriptionIndex i, bool kw)
+	   : PlayerCommand(init_duetime, p), serial_(b.serial()), bi_(i), keep_wares_(kw) {
 	}
 
 	// Write these commands to a file (for savegames)
@@ -296,15 +349,16 @@ struct CmdEnhanceBuilding : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Serial serial;
-	DescriptionIndex bi;
+	Serial serial_;
+	DescriptionIndex bi_;
+	bool keep_wares_;
 };
 
 struct CmdDismantleBuilding : public PlayerCommand {
-	CmdDismantleBuilding() : PlayerCommand(), serial(0) {
+	CmdDismantleBuilding() : PlayerCommand(), serial_(0), keep_wares_(false) {
 	}  // For savegame loading
-	CmdDismantleBuilding(const uint32_t t, const int32_t p, PlayerImmovable& pi)
-	   : PlayerCommand(t, p), serial(pi.serial()) {
+	CmdDismantleBuilding(const uint32_t t, const int32_t p, PlayerImmovable& pi, bool kw)
+	   : PlayerCommand(t, p), serial_(pi.serial()), keep_wares_(kw) {
 	}
 
 	// Write these commands to a file (for savegames)
@@ -321,7 +375,8 @@ struct CmdDismantleBuilding : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Serial serial;
+	Serial serial_;
+	bool keep_wares_;
 };
 
 struct CmdEvictWorker : public PlayerCommand {
@@ -589,30 +644,6 @@ private:
 	uint32_t permanent_;
 };
 
-// TODO(Nordfriese): CmdResetWareTargetQuantity can be removed when we next break savegame
-// compatibility
-struct CmdResetWareTargetQuantity : public CmdChangeTargetQuantity {
-	CmdResetWareTargetQuantity() : CmdChangeTargetQuantity() {
-	}
-	CmdResetWareTargetQuantity(uint32_t duetime,
-	                           PlayerNumber sender,
-	                           uint32_t economy,
-	                           DescriptionIndex index);
-
-	//  Write/Read these commands to/from a file (for savegames).
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kResetWareTargetQuantity;
-	}
-
-	explicit CmdResetWareTargetQuantity(StreamRead&);
-
-	void execute(Game&) override;
-	void serialize(StreamWrite&) override;
-};
-
 struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 	CmdSetWorkerTargetQuantity() : CmdChangeTargetQuantity(), permanent_(0) {
 	}
@@ -637,30 +668,6 @@ struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 
 private:
 	uint32_t permanent_;
-};
-
-// TODO(Nordfriese): CmdResetWorkerTargetQuantity can be removed when we next break savegame
-// compatibility
-struct CmdResetWorkerTargetQuantity : public CmdChangeTargetQuantity {
-	CmdResetWorkerTargetQuantity() : CmdChangeTargetQuantity() {
-	}
-	CmdResetWorkerTargetQuantity(uint32_t duetime,
-	                             PlayerNumber sender,
-	                             uint32_t economy,
-	                             DescriptionIndex index);
-
-	//  Write/Read these commands to/from a file (for savegames).
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kResetWorkerTargetQuantity;
-	}
-
-	explicit CmdResetWorkerTargetQuantity(StreamRead&);
-
-	void execute(Game&) override;
-	void serialize(StreamWrite&) override;
 };
 
 struct CmdChangeTrainingOptions : public PlayerCommand {
@@ -879,6 +886,30 @@ struct CmdProposeTrade : PlayerCommand {
 
 private:
 	Trade trade_;
+};
+
+struct CmdToggleMuteMessages : PlayerCommand {
+	CmdToggleMuteMessages(uint32_t t, PlayerNumber p, const Building& b, bool a)
+	   : PlayerCommand(t, p), building_(b.serial()), all_(a) {
+	}
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kToggleMuteMessages;
+	}
+
+	void execute(Game& game) override;
+
+	explicit CmdToggleMuteMessages(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	CmdToggleMuteMessages() : PlayerCommand() {
+	}
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial building_;
+	bool all_;
 };
 
 }  // namespace Widelands

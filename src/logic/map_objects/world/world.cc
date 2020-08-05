@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +67,7 @@ void World::load_graphics() {
 }
 
 void World::postload() {
-	const size_t nr_t = get_nr_terrains();
+	const DescriptionIndex nr_t = get_nr_terrains();
 	for (size_t i = 0; i < nr_t; ++i) {
 		const TerrainDescription& t = terrain_descr(i);
 		if (!t.enhancement().empty()) {
@@ -130,10 +130,11 @@ const DescriptionMaintainer<EditorCategory>& World::editor_immovable_categories(
 }
 
 DescriptionIndex World::safe_resource_index(const char* const resourcename) const {
-	int32_t const result = get_resource(resourcename);
+	DescriptionIndex const result = resource_index(resourcename);
 
-	if (result == INVALID_INDEX)
+	if (result == INVALID_INDEX) {
 		throw GameDataError("world does not define resource type \"%s\"", resourcename);
+	}
 	return result;
 }
 
@@ -142,7 +143,7 @@ TerrainDescription& World::terrain_descr(DescriptionIndex const i) const {
 }
 
 const TerrainDescription* World::terrain_descr(const std::string& name) const {
-	int32_t const i = terrains_->get_index(name);
+	DescriptionIndex const i = terrains_->get_index(name);
 	return i != INVALID_INDEX ? terrains_->get_mutable(i) : nullptr;
 }
 
@@ -152,6 +153,10 @@ DescriptionIndex World::get_terrain_index(const std::string& name) const {
 
 DescriptionIndex World::get_nr_terrains() const {
 	return terrains_->size();
+}
+
+DescriptionIndex World::get_nr_critters() const {
+	return critters_->size();
 }
 
 DescriptionIndex World::get_critter(char const* const l) const {
@@ -182,7 +187,7 @@ ImmovableDescr const* World::get_immovable_descr(DescriptionIndex const index) c
 	return immovables_->get_mutable(index);
 }
 
-DescriptionIndex World::get_resource(const char* const name) const {
+DescriptionIndex World::resource_index(const char* const name) const {
 	return strcmp(name, "none") ? resources_->get_index(name) : Widelands::kNoResource;
 }
 

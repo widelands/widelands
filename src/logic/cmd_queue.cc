@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "io/machdep.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
@@ -105,8 +104,9 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 
 		while (!current_cmds.empty()) {
 			Command& c = *current_cmds.top().cmd;
-			if (game_time_var < c.duetime())
+			if (game_time_var < c.duetime()) {
 				break;
+			}
 
 			current_cmds.pop();
 			--ncmds_;
@@ -165,8 +165,9 @@ void GameLogicCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoade
 		if (packet_version == kCurrentPacketVersion) {
 			set_duetime(fr.unsigned_32());
 			uint32_t const gametime = egbase.get_gametime();
-			if (duetime() < gametime)
+			if (duetime() < gametime) {
 				throw GameDataError("duetime (%i) < gametime (%i)", duetime(), gametime);
+			}
 		} else {
 			throw UnhandledVersionError("GameLogicCommand", packet_version, kCurrentPacketVersion);
 		}

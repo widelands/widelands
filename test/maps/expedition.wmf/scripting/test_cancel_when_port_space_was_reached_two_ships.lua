@@ -1,7 +1,6 @@
 run(function()
    create_two_ships()
 
-
    sleep(100)
    game.desired_speed = 10 * 1000
 
@@ -10,7 +9,6 @@ run(function()
    wait_for_message("Expedition")
    assert_equal(1, p1:get_workers("barbarians_builder"))
    sleep(500)
-
 
    if first_ship.state=="exp_waiting" then
       expedition_ship=first_ship
@@ -27,7 +25,7 @@ run(function()
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
-   stable_save(game, "reached_port_space")
+   stable_save(game, "reached_port_space", 10 * 1000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
    cancel_expedition_in_shipwindow(expedition_ship)

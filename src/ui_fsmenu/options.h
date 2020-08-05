@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,7 @@
 #ifndef WL_UI_FSMENU_OPTIONS_H
 #define WL_UI_FSMENU_OPTIONS_H
 
-#include <cstring>
 #include <memory>
-#include <string>
-#include <vector>
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -49,6 +46,7 @@ public:
 		bool fullscreen;
 		bool inputgrab;
 		uint32_t maxfps;
+		bool sdl_cursor;
 
 		// Windows options
 		bool snap_win_overlap_only;
@@ -67,6 +65,9 @@ public:
 		bool auto_roadbuild_mode;
 		bool transparent_chat;
 		bool single_watchwin;
+		bool ctrl_zoom;
+		bool game_clock;
+		bool numpad_diagonalscrolling;
 
 		// Language options
 		std::string language;
@@ -130,6 +131,7 @@ private:
 	UI::Dropdown<uintptr_t> resolution_dropdown_;
 	UI::Checkbox fullscreen_;
 	UI::Checkbox inputgrab_;
+	UI::Checkbox sdl_cursor_;
 	UI::SpinBox sb_maxfps_;
 	UI::MultilineTextarea translation_info_;
 
@@ -153,6 +155,9 @@ private:
 	UI::Checkbox auto_roadbuild_mode_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
+	UI::Checkbox ctrl_zoom_;
+	UI::Checkbox game_clock_;
+	UI::Checkbox numpad_diagonalscrolling_;
 
 	OptionsCtrl::OptionsStruct os_;
 

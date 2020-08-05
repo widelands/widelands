@@ -43,18 +43,9 @@ tribes:new_productionsite_type {
       empire_miner_master = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_marblemine = false,
-      empire_marblemine_deep = false,
-   },
-
    inputs = {
       { name = "meal", amount = 6 },
       { name = "wine", amount = 6 }
-   },
-   outputs = {
-      "marble",
-      "granite"
    },
 
    programs = {
@@ -64,19 +55,18 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=meal wine",
-            "sleep=40000",
+            "sleep=duration:40s",
             "call=mine_produce_marble",
             "call=mine_produce_granite",
             "call=mine_produce_marble",
             "call=mine_produce_granite",
             "call=mine_produce_marble",
-            "return=no_stats"
          }
       },
       mine_produce_granite = {
          descname = _"mining marble",
          actions = {
-            "animate=working 7800",
+            "animate=working duration:7s800ms",
             "mine=stones 2 100 5 2",
             "produce=granite",
          }
@@ -84,7 +74,7 @@ tribes:new_productionsite_type {
       mine_produce_marble = {
          descname = _"mining marble",
          actions = {
-            "animate=working 7800",
+            "animate=working duration:7s800ms",
             "mine=stones 2 100 5 2",
             "produce=marble",
          }

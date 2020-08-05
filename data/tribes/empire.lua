@@ -1,14 +1,22 @@
 image_dirname = path.dirname(__file__) .. "images/empire/"
 
-animations = {}
-add_animation(animations, "frontier", image_dirname, "frontier", {1, 19})
-add_animation(animations, "flag", image_dirname, "flag", {14, 38}, 10)
-
 tribes:new_tribe {
    name = "empire",
-   animations = animations,
+   animation_directory = image_dirname,
+   animations = {
+      frontier = { hotspot = {1, 19} },
+      flag = { hotspot = {14, 38}, fps = 10 },
+      bridge_normal_e = { hotspot = {-2, 12} },
+      bridge_busy_e = { hotspot = {-2, 12} },
+      bridge_normal_se = { hotspot = {5, 2} },
+      bridge_busy_se = { hotspot = {5, 2} },
+      bridge_normal_sw = { hotspot = {36, 3} },
+      bridge_busy_sw = { hotspot = {36, 3} }
+   },
 
-   -- Image file paths for this tribe's road textures
+   bridge_height = 8,
+
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          image_dirname .. "roadt_busy.png",
@@ -17,6 +25,9 @@ tribes:new_tribe {
          image_dirname .. "roadt_normal_00.png",
          image_dirname .. "roadt_normal_01.png",
          image_dirname .. "roadt_normal_02.png",
+      },
+      waterway = {
+         "tribes/images/empire/waterway_0.png",
       },
    },
 
@@ -116,6 +127,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "empire_carrier",
+         "empire_ferry",
          "empire_donkey",
          "empire_donkeybreeder"
       },
@@ -223,7 +235,6 @@ tribes:new_tribe {
       "empire_smelting_works",
       "empire_toolsmithy",
       "empire_armorsmithy",
-      "empire_shipyard",
       "empire_barracks",
 
       -- Big
@@ -259,78 +270,87 @@ tribes:new_tribe {
       "empire_fortress",
       "empire_castle",
 
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "empire_ferry_yard",
+      "empire_shipyard",
+
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
    },
 
    ship_names = {
-      "Adriaitic Sea",
-      "Alexandria",
-      "Amalea",
-      "Amolius",
-      "Apollo",
-      "Augustus",
-      "Azurea Sea",
-      "Baltic Sea",
-      "Bellona",
-      "Ben Hur",
-      "Bounty",
-      "Brutus",
-      "Caligula",
-      "Camilla",
-      "Carrara",
-      "Ceasar",
-      "Cicero",
-      "Claudius",
-      "Diana",
-      "Domitianus",
-      "Empire Glory",
-      "Faustulus",
-      "Galba",
-      "Gallus",
-      "Janus",
-      "Julius Caesar",
-      "Juno",
-      "Juno",
-      "Jupiter",
-      "Jupiter",
-      "Latium",
-      "Latonia",
-      "Leonardo",
-      "Liguria",
-      "Lutius",
-      "Marble",
-      "Mars",
-      "Mars",
-      "Minerva",
-      "Neptune",
-      "Neptune",
-      "Neptune",
-      "Nero",
-      "Nerva",
-      "Octavianus",
-      "Otho",
-      "Pluto",
-      "Porto Bello",
-      "Quirinus",
-      "Remus",
-      "Romulus",
-      "Saledus",
-      "Saturn",
-      "Siena",
-      "Sparta",
-      "Thyrrenia",
-      "Tiberius",
-      "Titus",
-      "Trajan",
-      "Venus",
-      "Venus",
-      "Vespasianus",
-      "Vesta",
-      "Vesta",
-      "Vine",
-      "Vitellius",
+      pgettext("shipname", "Adriatic Sea"),
+      pgettext("shipname", "Alexandria"),
+      -- TRANSLATORS: This Empire ship is named after an in-game character
+      pgettext("shipname", "Amalea"),
+      pgettext("shipname", "Amolius"),
+      -- TRANSLATORS: This Empire ship is named after a Roman god
+      pgettext("shipname", "Apollo"),
+      pgettext("shipname", "Augustus"),
+      pgettext("shipname", "Azurea Sea"),
+      pgettext("shipname", "Baltic Sea"),
+      pgettext("shipname", "Bellona"),
+      pgettext("shipname", "Ben Hur"),
+      pgettext("shipname", "Bounty"),
+      pgettext("shipname", "Brutus"),
+      pgettext("shipname", "Caligula"),
+      pgettext("shipname", "Camilla"),
+      pgettext("shipname", "Carrara"),
+      pgettext("shipname", "Caesar"),
+      pgettext("shipname", "Cicero"),
+      pgettext("shipname", "Claudius"),
+      pgettext("shipname", "Diana"),
+      pgettext("shipname", "Domitianus"),
+      pgettext("shipname", "Empire Glory"),
+      pgettext("shipname", "Faustulus"),
+      pgettext("shipname", "Galba"),
+      pgettext("shipname", "Gallus"),
+      pgettext("shipname", "Ianus"),
+      pgettext("shipname", "Iulius Caesar"),
+      -- TRANSLATORS: This Empire ship is named after a Roman goddess
+      pgettext("shipname", "Iuno"),
+      -- TRANSLATORS: This Empire ship is named after a Roman god
+      pgettext("shipname", "Iupiter"),
+      pgettext("shipname", "Latium"),
+      pgettext("shipname", "Latonia"),
+      pgettext("shipname", "Leonardo"),
+      pgettext("shipname", "Liguria"),
+      -- TRANSLATORS: This Empire ship is named after an in-game character
+      pgettext("shipname", "Lutius"),
+      pgettext("shipname", "Marble"),
+      -- TRANSLATORS: This Empire ship is named after a Roman god
+      pgettext("shipname", "Mars"),
+      -- TRANSLATORS: This Empire ship is named after a Roman goddess
+      pgettext("shipname", "Minerva"),
+      -- TRANSLATORS: This Empire ship is named after a Roman god
+      pgettext("shipname", "Neptune"),
+      pgettext("shipname", "Nero"),
+      pgettext("shipname", "Nerva"),
+      pgettext("shipname", "Octavianus"),
+      pgettext("shipname", "Otho"),
+      -- TRANSLATORS: This Empire ship is named after a Roman god
+      pgettext("shipname", "Pluto"),
+      pgettext("shipname", "Portus Bellus"),
+      pgettext("shipname", "Quirinus"),
+      pgettext("shipname", "Remus"),
+      pgettext("shipname", "Romulus"),
+      -- TRANSLATORS: This Empire ship is named after an in-game character
+      pgettext("shipname", "Saledus"),
+      -- TRANSLATORS: This Empire ship is named after a Roman deity
+      pgettext("shipname", "Saturn"),
+      pgettext("shipname", "Siena"),
+      pgettext("shipname", "Sparta"),
+      pgettext("shipname", "Thyrrenia"),
+      pgettext("shipname", "Tiberius"),
+      pgettext("shipname", "Titus"),
+      pgettext("shipname", "Traianus"),
+      pgettext("shipname", "Venus"),
+      pgettext("shipname", "Vespasianus"),
+      -- TRANSLATORS: This Empire ship is named after a Roman goddess
+      pgettext("shipname", "Vesta"),
+      pgettext("shipname", "Vinea"),
+      pgettext("shipname", "Vitellius"),
    },
 
    -- Special types
@@ -340,9 +360,6 @@ tribes:new_tribe {
    geologist = "empire_geologist",
    soldier = "empire_soldier",
    ship = "empire_ship",
+   ferry = "empire_ferry",
    port = "empire_port",
-   ironore = "iron_ore",
-   rawlog = "log",
-   refinedlog = "planks",
-   granite = "granite",
 }

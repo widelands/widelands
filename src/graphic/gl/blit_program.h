@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,6 @@
 
 #ifndef WL_GRAPHIC_GL_BLIT_PROGRAM_H
 #define WL_GRAPHIC_GL_BLIT_PROGRAM_H
-
-#include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "base/rect.h"

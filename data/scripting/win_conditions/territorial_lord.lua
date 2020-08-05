@@ -8,7 +8,7 @@ include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
 include "scripting/win_conditions/territorial_functions.lua"
 
-set_textdomain("win_conditions")
+push_textdomain("win_conditions")
 
 include "scripting/win_conditions/win_condition_texts.lua"
 
@@ -20,13 +20,15 @@ local wc_version = 2
 local wc_desc = _ (
    "Each player or team tries to obtain more than half of the map’s " ..
    "area. The winner will be the player or the team that is able to keep " ..
-   "that area for at least 20 minutes."
+   "that area for at least 20 minutes. " ..
+   "If the peaceful mode is selected, the game ends if one player has more " ..
+   "land than any other player could gain."
 )
 
-return {
+local r = {
    name = wc_name,
    description = wc_desc,
-   peaceful_mode_allowed = false,
+   peaceful_mode_allowed = true,
    init = function()
       fields = wl.Game().map:count_conquerable_fields()
    end,
@@ -42,7 +44,7 @@ return {
       territory_points.remaining_time = time_to_keep_territory
 
       local function _send_state(show_popup)
-         set_textdomain("win_conditions")
+         push_textdomain("win_conditions")
 
          for idx, player in ipairs(plrs) do
             local msg = ""
@@ -58,6 +60,7 @@ return {
             msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
             send_message(player, game_status.title, msg, {popup = show_popup})
          end
+         pop_textdomain()
       end
 
       -- Install statistics hook
@@ -86,3 +89,5 @@ return {
       territory_game_over(fields, wl.Game().players, wc_descname, wc_version)
    end
 }
+pop_textdomain()
+return r

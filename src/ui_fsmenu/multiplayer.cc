@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,10 @@
 #include "ui_fsmenu/multiplayer.h"
 
 #include "base/i18n.h"
+#include "base/random.h"
 #include "graphic/graphic.h"
 #include "network/internet_gaming.h"
-#include "random/random.h"
+#include "network/internet_gaming_protocol.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
 #include "wui/login_box.h"
@@ -47,19 +48,17 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
      showloginbox(
         &vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Online Game Settings")),
      back(&vbox_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Back")) {
-	metaserver.sigclicked.connect(
-	   boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));
+	metaserver.sigclicked.connect([this]() { internet_login(); });
 
-	lan.sigclicked.connect(
-	   boost::bind(&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>,
-	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kLan));
+	lan.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kLan);
+	});
 
-	showloginbox.sigclicked.connect(
-	   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
+	showloginbox.sigclicked.connect([this]() { show_internet_login(); });
 
-	back.sigclicked.connect(
-	   boost::bind(&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>,
-	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kBack));
+	back.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	});
 
 	title.set_font_scale(scale_factor());
 
@@ -109,16 +108,16 @@ void FullscreenMenuMultiPlayer::internet_login() {
 	}
 
 	// Try to connect to the metaserver
-	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER);
 	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
-	std::string auth = register_ ? password_ : get_config_string("uuid", nullptr);
-	assert(!auth.empty());
+	const std::string& auth = register_ ? password_ : get_config_string("uuid", "");
+	assert(!auth.empty() || !register_);
 	InternetGaming::ref().login(nickname_, auth, register_, meta, port);
 
 	// Check whether metaserver send some data
-	if (InternetGaming::ref().logged_in())
+	if (InternetGaming::ref().logged_in()) {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMetaserver);
-	else {
+	} else {
 		// something went wrong -> show the error message
 		ChatMessage msg = InternetGaming::ref().get_messages().back();
 		UI::WLMessageBox wmb(this, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);

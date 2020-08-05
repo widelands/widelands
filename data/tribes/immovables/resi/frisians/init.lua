@@ -6,20 +6,23 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "No Resources"),
    helptext_script = dirname .. "../helptexts/none.lua",
-   icon = dirname .. "pics/none_0.png",
+   icon = dirname .. "pics/none.png",
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/none_?.png"),
-         hotspot = {0, 46},
-      },
+         directory = dirname .. "pics",
+         basename = "none",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -29,21 +32,23 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Water"),
    helptext_script = dirname .. "../helptexts/water.lua",
-   icon = dirname .. "pics/water_0.png",
+   icon = dirname .. "pics/water.png",
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/water_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "water",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -53,21 +58,23 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Some Coal"),
    helptext_script = dirname .. "../helptexts/coal_1.lua",
-   icon = dirname .. "pics/coal_1_0.png",
+   icon = dirname .. "pics/coal_few.png",
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/coal_1_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "coal_few",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -77,21 +84,23 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Some Gold"),
    helptext_script = dirname .. "../helptexts/gold_1.lua",
-   icon = dirname .. "pics/gold_1_0.png",
+   icon = dirname .. "pics/gold_few.png",
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/gold_1_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "gold_few",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -101,21 +110,23 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Some Iron"),
    helptext_script = dirname .. "../helptexts/iron_1.lua",
-   icon = dirname .. "pics/iron_1_0.png",
+   icon = dirname .. "pics/iron_few.png",
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/iron_1_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "iron_few",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -125,21 +136,23 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Some Granite"),
    helptext_script = dirname .. "../helptexts/stones_1.lua",
-   icon = dirname .. "pics/stones_1_0.png",
+   icon = dirname .. "pics/stone_few.png",
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/stones_1_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "stone_few",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -149,21 +162,23 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "A Lot of Coal"),
    helptext_script = dirname .. "../helptexts/coal_2.lua",
-   icon = dirname .. "pics/coal_2_0.png",
+   icon = dirname .. "pics/coal_much.png",
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/coal_2_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "coal_much",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -173,21 +188,23 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "A Lot of Gold"),
    helptext_script = dirname .. "../helptexts/gold_2.lua",
-   icon = dirname .. "pics/gold_2_0.png",
+   icon = dirname .. "pics/gold_much.png",
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/gold_2_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "gold_much",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -197,21 +214,23 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "A Lot of Iron"),
    helptext_script = dirname .. "../helptexts/iron_2.lua",
-   icon = dirname .. "pics/iron_2_0.png",
+   icon = dirname .. "pics/iron_much.png",
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/iron_2_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "iron_much",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -221,20 +240,22 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "A Lot of Granite"),
    helptext_script = dirname .. "../helptexts/stones_2.lua",
-   icon = dirname .. "pics/stones_2_0.png",
+   icon = dirname .. "pics/stone_much.png",
    attributes = { "resi" },
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/stones_2_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "stone_much",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }

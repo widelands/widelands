@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,10 @@
 #ifndef WL_NETWORK_NETCLIENTPROXY_H
 #define WL_NETWORK_NETCLIENTPROXY_H
 
-#include <map>
 #include <memory>
 
+#include "network/bufferedconnection.h"
 #include "network/netclient_interface.h"
-#include "network/netrelayconnection.h"
 
 /**
  * Represents a client in-game, but talks through the 'wlnr' relay binary.
@@ -49,7 +48,7 @@ public:
 	bool is_connected() const override;
 	void close() override;
 	std::unique_ptr<RecvPacket> try_receive() override;
-	void send(const SendPacket& packet) override;
+	void send(const SendPacket& packet, NetPriority priority = NetPriority::kNormal) override;
 
 private:
 	/**
@@ -62,7 +61,7 @@ private:
 
 	void receive_commands();
 
-	std::unique_ptr<NetRelayConnection> conn_;
+	std::unique_ptr<BufferedConnection> conn_;
 
 	/// For each connected client, the packages that have been received from him.
 	std::queue<std::unique_ptr<RecvPacket>> received_;

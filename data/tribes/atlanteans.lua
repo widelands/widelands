@@ -17,7 +17,13 @@
 --
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``. Each animation needs the parameters ``pictures`` (table of filenames) and ``hotspot`` (2 integer coordinates), and may also define ``fps`` (integer frames per second).
 --
---    **roads**: The file paths for the tribes' road textures in 2 subtables ``busy`` and ``normal``
+--    **animation_directory**: The location of the animation png files.
+--
+--    **bridges**: Contains animations for ``normal_e``, ``normal_se``, ``normal_sw``, ``busy_e``, ``busy_se`` and ``busy_sw``.
+--
+--    **bridge_height**: The height in pixels of each bridge at it's summit at 1x scale.
+--
+--    **roads**: The file paths for the tribe's road textures in 3 subtables ``busy``, ``normal`` and ``waterway``.
 --
 --    **resource_indicators**: The names for the resource indicators. This table contains a subtable for each resource name plus a subtable named "" for no resources. Each subtable is an array, in which the index of each entry is the highest amount of resources the indicator may indicate.
 --
@@ -43,6 +49,8 @@
 --
 --    **ship**: The internal name of the tribe's ship.
 --
+--    **ferry**: The internal name of the tribe's ferry.
+--
 --    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
 --
 --    **toolbar**: *Optional*. Replace the default toolbar images with these custom images. Example:
@@ -60,15 +68,23 @@
 
 image_dirname = path.dirname(__file__) .. "images/atlanteans/"
 
-animations = {}
-add_animation(animations, "frontier", image_dirname, "frontier", {3, 12})
-add_animation(animations, "flag", image_dirname, "flag", {15, 35}, 10)
-
 tribes:new_tribe {
    name = "atlanteans",
-   animations = animations,
+   animation_directory = image_dirname,
+   animations = {
+      frontier = { hotspot = {3, 12} },
+      flag = { hotspot = {15, 35}, fps = 10 },
+      bridge_normal_e = { hotspot = {-2, 11} },
+      bridge_busy_e = { hotspot = {-2, 11} },
+      bridge_normal_se = { hotspot = {5, 2} },
+      bridge_busy_se = { hotspot = {5, 2} },
+      bridge_normal_sw = { hotspot = {36, 6} },
+      bridge_busy_sw = { hotspot = {36, 6} }
+   },
 
-   -- Image file paths for this tribe's road textures
+   bridge_height = 8,
+
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          image_dirname .. "roadt_busy.png",
@@ -76,6 +92,9 @@ tribes:new_tribe {
       normal = {
          image_dirname .. "roadt_normal_00.png",
          image_dirname .. "roadt_normal_01.png",
+      },
+      waterway = {
+         "tribes/images/atlanteans/waterway_0.png",
       },
    },
 
@@ -176,6 +195,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "atlanteans_carrier",
+         "atlanteans_ferry",
          "atlanteans_horse",
          "atlanteans_horsebreeder"
       },
@@ -277,7 +297,6 @@ tribes:new_tribe {
       "atlanteans_toolsmithy",
       "atlanteans_weaponsmithy",
       "atlanteans_armorsmithy",
-      "atlanteans_shipyard",
       "atlanteans_barracks",
 
       -- Big
@@ -305,70 +324,128 @@ tribes:new_tribe {
       "atlanteans_tower_high",
       "atlanteans_castle",
 
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "atlanteans_ferry_yard",
+      "atlanteans_shipyard",
+
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
    },
 
    ship_names = {
-      "Abaco",
-      "Agate",
-      "Alexandrite",
-      "Amber",
-      "Amethyst",
-      "Anguilla",
-      "Antigua",
-      "Aquamarine",
-      "Atlantean's Stronghold",
-      "Atlantis",
-      "Bahama",
-      "Barbados",
-      "Barbuda",
-      "Beryl",
-      "Blanquilla",
-      "Caicos",
-      "Cassiterite",
-      "Cat's Eye",
-      "Citrine",
-      "Coliondor",
-      "Dominica",
-      "Eleuthera",
-      "Emerald",
-      "Grenada",
-      "Guadelope",
-      "Inagua",
-      "Jundlina",
-      "Juventud",
-      "King Ajanthul",
-      "King Askandor",
-      "Kitts",
-      "Loftomor",
-      "Malachite",
-      "Martinique",
-      "Montserrat",
-      "Moonstone",
-      "Mystic Quartz",
-      "Nassau",
-      "Nevis",
-      "Obsidian",
-      "Onyx",
-      "Opol",
-      "Orchila",
-      "Ostur",
-      "Pearl",
-      "Sapphire",
-      "Satul",
-      "Sidolus",
-      "Sphalerite",
-      "Spider",
-      "Spinel",
-      "Sunstone",
-      "Tiger Eye",
-      "Tobago",
-      "Topaz",
-      "Tortuga",
-      "Tourmaline",
-      "Trinidad",
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Abaco"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Agate"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Alexandrite"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Amber"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Amethyst"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Anguilla"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Antigua"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Aquamarine"),
+      pgettext("shipname", "Atlantean’s Stronghold"),
+      pgettext("shipname", "Atlantis"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Bahama"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Barbados"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Barbuda"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Beryl"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Blanquilla"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Caicos"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Cassiterite"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Cat’s Eye"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Citrine"),
+      -- TRANSLATORS: This Atlantean ship is named after an in-game character
+      pgettext("shipname", "Colionder"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Dominica"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Eleuthera"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Emerald"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Grenada"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Guadeloupe"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Inagua"),
+      -- TRANSLATORS: This Atlantean ship is named after an in-game character
+      pgettext("shipname", "Jundlina"),
+      pgettext("shipname", "Juventud"),
+      -- TRANSLATORS: This Atlantean ship is named after an in-game character
+      pgettext("shipname", "King Ajanthul"),
+      -- TRANSLATORS: This Atlantean ship is named after an in-game character
+      pgettext("shipname", "King Askandor"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Kitts"),
+      -- TRANSLATORS: This Atlantean ship is named after an in-game character
+      pgettext("shipname", "Loftomor"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Malachite"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Martinique"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Montserrat"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Moonstone"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Mystic Quartz"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Nassau"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Nevis"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Obsidian"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Onyx"),
+      -- TRANSLATORS: This Atlantean ship is named after an in-game character
+      pgettext("shipname", "Opol"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Orchila"),
+      -- TRANSLATORS: This Atlantean ship is named after an in-game character
+      pgettext("shipname", "Ostur"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Pearl"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Sapphire"),
+      -- TRANSLATORS: This Atlantean ship is named after an in-game character
+      pgettext("shipname", "Satul"),
+      -- TRANSLATORS: This Atlantean ship is named after an in-game character
+      pgettext("shipname", "Sidolus"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Sphalerite"),
+      pgettext("shipname", "Spider"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Spinel"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Sunstone"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Tiger Eye"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Tobago"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Topaz"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Tortuga"),
+      -- TRANSLATORS: This Atlantean ship is named after a mineral
+      pgettext("shipname", "Tourmaline"),
+      -- TRANSLATORS: This Atlantean ship is named after an island
+      pgettext("shipname", "Trinidad"),
    },
 
    -- Special types
@@ -378,11 +455,8 @@ tribes:new_tribe {
    geologist = "atlanteans_geologist",
    soldier = "atlanteans_soldier",
    ship = "atlanteans_ship",
+   ferry = "atlanteans_ferry",
    port = "atlanteans_port",
-   ironore = "iron_ore",
-   rawlog = "log",
-   refinedlog = "planks",
-   granite = "granite",
 
    toolbar = {
       left_corner = image_dirname .. "toolbar_left_corner.png",

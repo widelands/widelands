@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,6 @@
 
 #ifndef WL_LOGIC_SAVE_HANDLER_H
 #define WL_LOGIC_SAVE_HANDLER_H
-
-#include <cstring>
-#include <string>
-
-#include <stdint.h>
 
 #include "io/filesystem/filesystem.h"
 
@@ -69,8 +64,13 @@ public:
 		save_filename_ = filename;
 	}
 
+	uint32_t last_save_time() const {
+		return last_save_realtime_;
+	}
+
 private:
 	uint32_t next_save_realtime_;
+	uint32_t last_save_realtime_;
 	bool initialized_;
 	bool allow_saving_;
 	bool save_requested_;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@
 
 #include "ui_fsmenu/campaigns.h"
 
-#include <map>
 #include <memory>
 
 #include "base/log.h"
@@ -31,7 +30,7 @@
 #include "scripting/lua_interface.h"
 
 namespace {
-const std::string kCampVisFileLegacy = "save/campvis";
+constexpr const char* const kCampVisFileLegacy = "save/campvis";
 }
 
 Campaigns::Campaigns() {
@@ -50,6 +49,10 @@ Campaigns::Campaigns() {
 	campvis.reset(new Profile(kCampVisFile.c_str()));
 	Section& campvis_scenarios = campvis->get_safe_section("scenarios");
 
+	/** TRANSLATORS: A campaign difficulty */
+	const std::string default_difficulty_name = _("Default");
+	i18n::Textdomain td("maps");
+
 	// Now load the campaign info
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
@@ -66,7 +69,6 @@ Campaigns::Campaigns() {
 
 	// Read the campaigns themselves
 	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
-	i18n::Textdomain td("maps");
 
 	for (const auto& campaign_table : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
 		CampaignData* campaign_data = new CampaignData();
@@ -79,6 +81,19 @@ Campaigns::Campaigns() {
 			     campaign_table->get_table("prerequisites")->array_entries<std::string>()) {
 				campaign_data->prerequisites.insert(prerequisite);
 			}
+		}
+		if (campaign_table->has_key("difficulties")) {
+			for (const std::string& d :
+			     campaign_table->get_table("difficulties")->array_entries<std::string>()) {
+				campaign_data->difficulties.push_back(d);
+			}
+			assert(campaign_table->has_key("default_difficulty"));
+			campaign_data->default_difficulty =
+			   get_positive_int(*campaign_table, "default_difficulty");
+		} else {
+			assert(!campaign_table->has_key("default_difficulty"));
+			campaign_data->difficulties.push_back(default_difficulty_name);
+			campaign_data->default_difficulty = 1;
 		}
 
 		campaign_data->visible = false;
@@ -108,11 +123,10 @@ Campaigns::Campaigns() {
 			scenario_data->is_tutorial = false;
 			scenario_data->playable = scenario_data->path != "dummy.wmf";
 			scenario_data->visible = false;
-			campaign_data->scenarios.push_back(
-			   std::unique_ptr<ScenarioData>(std::move(scenario_data)));
+			campaign_data->scenarios.push_back(std::unique_ptr<ScenarioData>(scenario_data));
 		}
 
-		campaigns_.push_back(std::unique_ptr<CampaignData>(std::move(campaign_data)));
+		campaigns_.push_back(std::unique_ptr<CampaignData>(campaign_data));
 	}
 
 	// Finally, calculate the visibility
@@ -167,9 +181,9 @@ void Campaigns::update_visibility_info() {
 /**
  * Handle legacy campvis file
  */
-// TODO(GunChleoc): Remove after Build 22
+// TODO(GunChleoc): Savegame compatibility, remove after v1.0
 void Campaigns::update_legacy_campvis() {
-	Profile legacy_campvis(kCampVisFileLegacy.c_str());
+	Profile legacy_campvis(kCampVisFileLegacy);
 	if (legacy_campvis.get_section("campmaps") == nullptr) {
 		return;
 	}

@@ -21,30 +21,41 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {39, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {28, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {39, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "working",
+         hotspot = {28, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       empty = {
-         pictures = path.list_files (dirname .. "empty_??.png"),
-         hotspot = {39, 94},
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {39, 72},
-      },
+         directory = dirname,
+         basename = "empty",
+         hotspot = {28, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
    },
-
-   indicate_workarea_overlaps = {
-      frisians_ironmine = false,
-      frisians_ironmine_deep = false,
+   animations = {
+      unoccupied = {
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {28, 57},
+      }
    },
 
    aihints = {
@@ -59,9 +70,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "meal", amount = 8 }
    },
-   outputs = {
-      "iron_ore"
-   },
 
    programs = {
       work = {
@@ -70,7 +78,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs iron_ore",
             "consume=meal",
-            "sleep=62100",
+            "sleep=duration:62s100ms",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
@@ -78,13 +86,12 @@ tribes:new_productionsite_type {
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
-            "return=no_stats"
          }
       },
       mine_produce = {
          descname = _"mining iron",
          actions = {
-            "animate=working 8700",
+            "animate=working duration:8s700ms",
             "mine=iron 3 100 10 5",
             "produce=iron_ore",
          }

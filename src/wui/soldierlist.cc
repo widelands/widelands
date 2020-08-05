@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,10 @@
 
 #include "wui/soldierlist.h"
 
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
+#include <functional>
+
+#include <SDL_mouse.h>
+#include <SDL_timer.h>
 
 #include "base/macros.h"
 #include "graphic/font_handler.h"
@@ -34,6 +36,7 @@
 #include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/textarea.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/soldiercapacitycontrol.h"
 
@@ -44,7 +47,7 @@ namespace {
 
 constexpr uint32_t kMaxColumns = 6;
 constexpr uint32_t kAnimateSpeed = 300;  ///< in pixels per second
-constexpr uint32_t kIconBorder = 2;
+constexpr int kIconBorder = 2;
 
 }  // namespace
 
@@ -52,7 +55,7 @@ constexpr uint32_t kIconBorder = 2;
  * Iconic representation of soldiers, including their levels and current health.
  */
 struct SoldierPanel : UI::Panel {
-	using SoldierFn = boost::function<void(const Soldier*)>;
+	using SoldierFn = std::function<void(const Soldier*)>;
 
 	SoldierPanel(UI::Panel& parent,
 	             Widelands::EditorGameBase& egbase,
@@ -105,8 +108,8 @@ private:
 	uint32_t rows_;
 	uint32_t cols_;
 
-	uint32_t icon_width_;
-	uint32_t icon_height_;
+	int icon_width_;
+	int icon_height_;
 
 	int32_t last_animate_time_;
 };
@@ -186,10 +189,11 @@ void SoldierPanel::think() {
 		if (soldier) {
 			std::vector<Soldier*>::iterator it =
 			   std::find(soldierlist.begin(), soldierlist.end(), soldier);
-			if (it != soldierlist.end())
+			if (it != soldierlist.end()) {
 				soldierlist.erase(it);
-			else
+			} else {
 				soldier = nullptr;
+			}
 		}
 
 		if (!soldier) {
@@ -200,8 +204,9 @@ void SoldierPanel::think() {
 		}
 
 		while (icon.row && (row_occupancy[icon.row] >= kMaxColumns ||
-		                    icon.row * kMaxColumns + row_occupancy[icon.row] >= capacity))
+		                    icon.row * kMaxColumns + row_occupancy[icon.row] >= capacity)) {
 			icon.row--;
+		}
 
 		icon.col = row_occupancy[icon.row]++;
 	}
@@ -212,8 +217,9 @@ void SoldierPanel::think() {
 		icon.soldier = soldierlist.back();
 		soldierlist.pop_back();
 		icon.row = 0;
-		while (row_occupancy[icon.row] >= kMaxColumns)
+		while (row_occupancy[icon.row] >= kMaxColumns) {
 			icon.row++;
+		}
 		icon.col = row_occupancy[icon.row]++;
 		icon.pos = calc_pos(icon.row, icon.col);
 
@@ -225,8 +231,9 @@ void SoldierPanel::think() {
 		for (std::vector<Icon>::iterator icon_iter = icons_.begin(); icon_iter != icons_.end();
 		     ++icon_iter) {
 
-			if (icon_iter->row <= icon.row)
+			if (icon_iter->row <= icon.row) {
 				insertpos = icon_iter + 1;
+			}
 
 			icon.pos.x = std::max<int32_t>(icon.pos.x, icon_iter->pos.x + icon_width_);
 		}
@@ -248,8 +255,9 @@ void SoldierPanel::think() {
 		dp.x = std::min(std::max(dp.x, -maxdist), maxdist);
 		dp.y = std::min(std::max(dp.y, -maxdist), maxdist);
 
-		if (dp.x != 0 || dp.y != 0)
+		if (dp.x != 0 || dp.y != 0) {
 			changes = true;
+		}
 
 		icon.pos += dp;
 
@@ -292,11 +300,13 @@ void SoldierPanel::draw(RenderTarget& dst) {
 	// Draw icons
 	for (const Icon& icon : icons_) {
 		const Soldier* soldier = icon.soldier.get(egbase());
-		if (!soldier)
+		if (!soldier) {
 			continue;
+		}
 
 		constexpr float kNoZoom = 1.f;
-		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom, false, &dst);
+		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom,
+		                        Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
 	}
 }
 
@@ -319,22 +329,25 @@ const Soldier* SoldierPanel::find_soldier(int32_t x, int32_t y) const {
 }
 
 void SoldierPanel::handle_mousein(bool inside) {
-	if (!inside && mouseover_fn_)
+	if (!inside && mouseover_fn_) {
 		mouseover_fn_(nullptr);
+	}
 }
 
 bool SoldierPanel::handle_mousemove(
    uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
-	if (mouseover_fn_)
+	if (mouseover_fn_) {
 		mouseover_fn_(find_soldier(x, y));
+	}
 	return true;
 }
 
 bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		if (click_fn_) {
-			if (const Soldier* soldier = find_soldier(x, y))
+			if (const Soldier* soldier = find_soldier(x, y)) {
 				click_fn_(soldier);
+			}
 		}
 		return true;
 	}
@@ -378,8 +391,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 
 	add(&infotext_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	soldierpanel_.set_mouseover(boost::bind(&SoldierList::mouseover, this, _1));
-	soldierpanel_.set_click(boost::bind(&SoldierList::eject, this, _1));
+	soldierpanel_.set_mouseover([this](const Soldier* s) { mouseover(s); });
+	soldierpanel_.set_click([this](const Soldier* s) { eject(s); });
 
 	// We don't want translators to translate this twice, so it's a bit involved.
 	int w = UI::g_fh
@@ -418,8 +431,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 			soldier_preference_.set_state(1);
 		}
 		if (can_act) {
-			soldier_preference_.changedto.connect(
-			   boost::bind(&SoldierList::set_soldier_preference, this, _1));
+			soldier_preference_.changedto.connect([this](int32_t a) { set_soldier_preference(a); });
 		} else {
 			soldier_preference_.set_enabled(false);
 		}
@@ -470,8 +482,9 @@ void SoldierList::eject(const Soldier* soldier) {
 	bool can_act = igbase_.can_act(building_.owner().player_number());
 	bool over_min = capacity_min < soldiers()->present_soldiers().size();
 
-	if (can_act && over_min)
+	if (can_act && over_min) {
 		igbase_.game().send_player_drop_soldier(building_, soldier->serial());
+	}
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {

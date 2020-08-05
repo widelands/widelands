@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,6 @@
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
-#include <boost/signals2.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -33,8 +30,10 @@
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
+#include "economy/expedition_bootstrap.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "economy/waterway.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_delete_message.h"
@@ -67,23 +66,24 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 	Widelands::FCoords c[4];  //  Big buildings occupy 4 locations.
 	c[0] = map.get_fcoords(location);
 	map.get_brn(c[0], &c[1]);
-	if (Widelands::BaseImmovable* const immovable = c[0].field->get_immovable())
+	if (Widelands::BaseImmovable* const immovable = c[0].field->get_immovable()) {
 		immovable->remove(egbase);
-	{
-		size_t nr_locations = 1;
-		if ((descr->get_size() & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
-			nr_locations = 4;
-			map.get_trn(c[0], &c[1]);
-			map.get_tln(c[0], &c[2]);
-			map.get_ln(c[0], &c[3]);
-		}
-		for (size_t i = 0; i < nr_locations; ++i) {
-			//  Make sure that the player owns the area around.
-			egbase.conquer_area_no_building(Widelands::PlayerArea<Widelands::Area<Widelands::FCoords>>(
-			   player_number, Widelands::Area<Widelands::FCoords>(c[i], 1)));
+	}
 
-			if (Widelands::BaseImmovable* const immovable = c[i].field->get_immovable())
-				immovable->remove(egbase);
+	size_t nr_locations = 1;
+	if ((descr->get_size() & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
+		nr_locations = 4;
+		map.get_trn(c[0], &c[1]);
+		map.get_tln(c[0], &c[2]);
+		map.get_ln(c[0], &c[3]);
+	}
+	for (size_t i = 0; i < nr_locations; ++i) {
+		//  Make sure that the player owns the area around.
+		egbase.conquer_area_no_building(Widelands::PlayerArea<Widelands::Area<Widelands::FCoords>>(
+		   player_number, Widelands::Area<Widelands::FCoords>(c[i], 1)));
+
+		if (Widelands::BaseImmovable* const immovable = c[i].field->get_immovable()) {
+			immovable->remove(egbase);
 		}
 	}
 }
@@ -171,8 +171,9 @@ Player::Player(EditorGameBase& the_egbase,
 	immovable_subscriber_ =
 	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
 		   if (note.pi->owner().player_number() == player_number()) {
-			   if (upcast(Building, building, note.pi))
+			   if (upcast(Building, building, note.pi)) {
 				   update_building_statistics(*building, note.ownership);
+			   }
 		   }
 	   });
 
@@ -186,12 +187,11 @@ Player::Player(EditorGameBase& the_egbase,
 
 	// Populating remaining_shipnames vector
 	for (const auto& shipname : tribe_descr.get_ship_names()) {
-		remaining_shipnames_.insert(shipname);
+		remaining_shipnames_.push_back(shipname);
 	}
 }
 
 Player::~Player() {
-	delete[] fields_;
 }
 
 void Player::create_default_infrastructure() {
@@ -222,13 +222,14 @@ void Player::create_default_infrastructure() {
 			ncr->push_arg(further_pos);
 			game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), std::move(ncr)));
 		}
-	} else
+	} else {
 		throw WLWarning(_("Missing starting position"),
 		                _("Widelands could not start the game, because player %u has "
 		                  "no starting position.\n"
 		                  "You can manually add a starting position with the Widelands "
 		                  "Editor to fix this problem."),
 		                static_cast<unsigned int>(player_number_));
+	}
 }
 
 /**
@@ -238,7 +239,7 @@ void Player::allocate_map() {
 	const Map& map = egbase().map();
 	assert(map.get_width());
 	assert(map.get_height());
-	fields_ = new Field[map.max_index()];
+	fields_.reset(new Field[map.max_index()]);
 }
 
 /**
@@ -276,7 +277,7 @@ void Player::AiPersistentState::initialize() {
 	no_more_expeditions = false;
 	target_military_score = 100;
 	least_military_score = 0;
-	ai_productionsites_ratio = std::rand() % 5 + 7;
+	ai_productionsites_ratio = std::rand() % 5 + 7;  // NOLINT
 	ai_personality_mil_upper_limit = 100;
 
 	// all zeroes
@@ -308,17 +309,21 @@ void Player::update_team_players() {
 	team_player_.clear();
 	team_player_uptodate_ = true;
 
-	if (!team_number_)
+	if (!team_number_) {
 		return;
+	}
 
 	for (PlayerNumber i = 1; i <= kMaxPlayers; ++i) {
 		Player* other = egbase().get_player(i);
-		if (!other)
+		if (!other) {
 			continue;
-		if (other == this)
+		}
+		if (other == this) {
 			continue;
-		if (team_number_ == other->team_number_)
+		}
+		if (team_number_ == other->team_number_) {
 			team_player_.push_back(other);
+		}
 	}
 }
 
@@ -351,15 +356,16 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 	// MapObject connection
 	if (message->serial() > 0) {
 		MapObject* mo = egbase().objects().get_object(message->serial());
-		mo->removed.connect(boost::bind(&Player::message_object_removed, this, id));
+		mo->removed.connect([this, id](unsigned) { message_object_removed(id); });
 	}
 
 	// Sound & popup
 	if (InteractivePlayer* const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
 			play_message_sound(message);
-			if (popup)
+			if (popup) {
 				iplayer->popup_message(id, *message);
+			}
 		}
 	}
 
@@ -416,22 +422,23 @@ NodeCaps Player::get_buildcaps(const FCoords& fc) const {
 	const Map& map = egbase().map();
 	uint8_t buildcaps = fc.field->nodecaps();
 
-	if (!fc.field->is_interior(player_number_))
+	if (!fc.field->is_interior(player_number_)) {
 		buildcaps = 0;
-
-	// Check if a building's flag can't be build due to ownership
-	else if (buildcaps & BUILDCAPS_BUILDINGMASK) {
+	} else if (buildcaps & BUILDCAPS_BUILDINGMASK) {  // Check if a building's flag can't be build
+		                                               // due to ownership
 		FCoords flagcoords;
 		map.get_brn(fc, &flagcoords);
-		if (!flagcoords.field->is_interior(player_number_))
+		if (!flagcoords.field->is_interior(player_number_)) {
 			buildcaps &= ~BUILDCAPS_BUILDINGMASK;
+		}
 
 		//  Prevent big buildings that would swell over borders.
 		if ((buildcaps & BUILDCAPS_BIG) == BUILDCAPS_BIG &&
 		    (!map.tr_n(fc).field->is_interior(player_number_) ||
 		     !map.tl_n(fc).field->is_interior(player_number_) ||
-		     !map.l_n(fc).field->is_interior(player_number_)))
+		     !map.l_n(fc).field->is_interior(player_number_))) {
 			buildcaps &= ~BUILDCAPS_SMALL;
+		}
 	}
 
 	return static_cast<NodeCaps>(buildcaps);
@@ -444,8 +451,9 @@ NodeCaps Player::get_buildcaps(const FCoords& fc) const {
 Flag* Player::build_flag(const Coords& c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
-	if (buildcaps & BUILDCAPS_FLAG)
+	if (buildcaps & BUILDCAPS_FLAG) {
 		return new Flag(egbase(), this, c);
+	}
 	return nullptr;
 }
 
@@ -454,16 +462,19 @@ Flag& Player::force_flag(const FCoords& c) {
 	const Map& map = egbase().map();
 	if (BaseImmovable* const immovable = c.field->get_immovable()) {
 		if (upcast(Flag, existing_flag, immovable)) {
-			if (existing_flag->get_owner() == this)
+			if (existing_flag->get_owner() == this) {
 				return *existing_flag;
-		} else if (!dynamic_cast<Road const*>(immovable))  //  A road is OK.
-			immovable->remove(egbase());                    //  Make room for the flag.
+			}
+		} else if (!dynamic_cast<RoadBase const*>(immovable)) {  //  A road or waterway is OK
+			immovable->remove(egbase());                          //  Make room for the flag.
+		}
 	}
 	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(c, 1));
-	do
-		if (upcast(Flag, flag, mr.location().field->get_immovable()))
+	do {
+		if (upcast(Flag, flag, mr.location().field->get_immovable())) {
 			flag->remove(egbase());  //  Remove all flags that are too close.
-	while (mr.advance(map));
+		}
+	} while (mr.advance(map));
 
 	//  Make sure that the player owns the area around.
 	egbase().conquer_area_no_building(
@@ -491,20 +502,23 @@ Road* Player::build_road(const Path& path) {
 			for (int32_t i = 0; i < laststep; ++i) {
 				fc = map.get_neighbour(fc, path[i]);
 
-				if (BaseImmovable* const imm = fc.field->get_immovable())
+				if (BaseImmovable* const imm = fc.field->get_immovable()) {
 					if (imm->get_size() >= BaseImmovable::SMALL) {
 						return nullptr;
 					}
+				}
 				if (!(get_buildcaps(fc) & MOVECAPS_WALK)) {
 					log("%i: building road, unwalkable\n", player_number());
 					return nullptr;
 				}
 			}
 			return &Road::create(egbase(), *start, *end, path);
-		} else
+		} else {
 			log("%i: building road, missed end flag\n", player_number());
-	} else
+		}
+	} else {
 		log("%i: building road, missed start flag\n", player_number());
+	}
 
 	return nullptr;
 }
@@ -531,6 +545,72 @@ Road& Player::force_road(const Path& path) {
 		}
 	}
 	return Road::create(egbase(), start, end, path);
+}
+
+Waterway* Player::build_waterway(const Path& path) {
+	const Map& map = egbase().map();
+
+	if (path.get_nsteps() > map.get_waterway_max_length()) {
+		log("%d: Refused to build a waterway because it is too long. Permitted length %d, actual "
+		    "length %" PRIuS ".",
+		    static_cast<unsigned int>(player_number()), map.get_waterway_max_length(),
+		    path.get_nsteps());
+		return nullptr;
+	}
+
+	FCoords fc = map.get_fcoords(path.get_start());
+	if (upcast(Flag, start, fc.field->get_immovable())) {
+		if (upcast(Flag, end, map.get_immovable(path.get_end()))) {
+			//  Verify ownership of the path.
+			const int32_t laststep = path.get_nsteps() - 1;
+			for (int32_t i = 0; i < laststep; ++i) {
+				fc = map.get_neighbour(fc, path[i]);
+
+				if (BaseImmovable* const imm = fc.field->get_immovable()) {
+					if (imm->get_size() >= BaseImmovable::SMALL) {
+						return nullptr;
+					}
+				}
+				if (!CheckStepFerry(egbase()).reachable_dest(map, fc)) {
+					log("%i: building waterway aborted, unreachable for ferries\n",
+					    static_cast<unsigned int>(player_number()));
+					return nullptr;
+				}
+			}
+			return &Waterway::create(egbase(), *start, *end, path);
+		} else {
+			log("%i: building waterway aborted, missing end flag\n",
+			    static_cast<unsigned int>(player_number()));
+		}
+	} else {
+		log("%i: building waterway aborted, missing start flag\n",
+		    static_cast<unsigned int>(player_number()));
+	}
+	return nullptr;
+}
+
+Waterway& Player::force_waterway(const Path& path) {
+	const Map& map = egbase().map();
+	FCoords c = map.get_fcoords(path.get_start());
+	Flag& start = force_flag(c);
+	Flag& end = force_flag(map.get_fcoords(path.get_end()));
+
+	Path::StepVector::size_type const laststep = path.get_nsteps() - 1;
+	for (Path::StepVector::size_type i = 0; i < laststep; ++i) {
+		c = map.get_neighbour(c, path[i]);
+		log("Clearing for waterway at (%i, %i)\n", c.x, c.y);
+
+		//  Make sure that the player owns the area around.
+		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
+		   PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
+
+		if (BaseImmovable* const immovable = c.field->get_immovable()) {
+			assert(immovable != &start);
+			assert(immovable != &end);
+			immovable->remove(egbase());
+		}
+	}
+	return Waterway::create(egbase(), start, end, path);
 }
 
 Building& Player::force_building(Coords const location, const FormerBuildings& former_buildings) {
@@ -639,7 +719,7 @@ Building* Player::build(Coords c,
 
 /*
 ===============
-Bulldoze the given road, flag or building.
+Bulldoze the given road, waterway, flag or building.
 ===============
 */
 void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
@@ -649,141 +729,208 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 	while (!bulldozelist.empty()) {
 		PlayerImmovable* immovable = bulldozelist.back().get(egbase());
 		bulldozelist.pop_back();
-		if (!immovable)
+		if (!immovable) {
 			continue;
+		}
 
 		// General security check
-		if (immovable->get_owner() != this)
+		if (immovable->get_owner() != this) {
 			return;
+		}
 
 		// Destroy, after extended security check
 		if (upcast(Building, building, immovable)) {
-			if (!(building->get_playercaps() & Building::PCap_Bulldoze))
+			if (!(building->get_playercaps() & Building::PCap_Bulldoze)) {
 				return;
+			}
 
 			Flag& flag = building->base_flag();
 			building->destroy(egbase());
 			//  Now imm and building are dangling reference/pointer! Do not use!
 
-			if (recurse && flag.is_dead_end())
+			if (recurse && flag.is_dead_end()) {
 				bulldozelist.push_back(&flag);
+			}
 		} else if (upcast(Flag, flag, immovable)) {
-			if (Building* const flagbuilding = flag->get_building())
+			if (Building* const flagbuilding = flag->get_building()) {
 				if (!(flagbuilding->get_playercaps() & Building::PCap_Bulldoze)) {
 					log("Player trying to rip flag (%u) with undestroyable "
 					    "building (%u)\n",
 					    flag->serial(), flagbuilding->serial());
 					return;
 				}
+			}
 
 			OPtr<Flag> flagcopy = flag;
 			if (recurse) {
 				for (uint8_t primary_road_id = 6; primary_road_id; --primary_road_id) {
 					// Recursive bulldoze calls may cause flag to disappear
-					if (!flagcopy.get(egbase()))
+					if (!flagcopy.get(egbase())) {
 						return;
+					}
 
-					if (Road* const primary_road = flag->get_road(primary_road_id)) {
-						Flag& primary_start = primary_road->get_flag(Road::FlagStart);
-						Flag& primary_other =
-						   flag == &primary_start ? primary_road->get_flag(Road::FlagEnd) : primary_start;
+					if (RoadBase* const primary_road = flag->get_roadbase(primary_road_id)) {
+						Flag& primary_start = primary_road->get_flag(RoadBase::FlagStart);
+						Flag& primary_other = flag == &primary_start ?
+						                         primary_road->get_flag(RoadBase::FlagEnd) :
+						                         primary_start;
 						primary_road->destroy(egbase());
-						log("destroying road from (%i, %i) going in dir %u\n", flag->get_position().x,
-						    flag->get_position().y, primary_road_id);
+						log("destroying road/waterway from (%i, %i) going in dir %u\n",
+						    flag->get_position().x, flag->get_position().y, primary_road_id);
 						//  The primary road is gone. Now see if the flag at the other
 						//  end of it is a dead-end.
-						if (primary_other.is_dead_end())
+						if (primary_other.is_dead_end()) {
 							bulldozelist.push_back(&primary_other);
+						}
 					}
 				}
 			}
 
 			// Recursive bulldoze calls may cause flag to disappear
-			if (flagcopy.get(egbase()))
+			if (flagcopy.get(egbase())) {
 				flag->destroy(egbase());
-		} else if (upcast(Road, road, immovable)) {
-			Flag& start = road->get_flag(Road::FlagStart);
-			Flag& end = road->get_flag(Road::FlagEnd);
+			}
+		} else if (upcast(RoadBase, road, immovable)) {
+			Flag& start = road->get_flag(RoadBase::FlagStart);
+			Flag& end = road->get_flag(RoadBase::FlagEnd);
 
 			road->destroy(egbase());
 			//  Now imm and road are dangling reference/pointer! Do not use!
 
 			if (recurse) {
-				// Destroy all roads between the flags, not just selected
-				while (Road* const r = start.get_road(end))
+				// Destroy all roads and waterways between the flags, not just selected
+				while (RoadBase* const r = start.get_roadbase(end)) {
 					r->destroy(egbase());
+				}
 
 				OPtr<Flag> endcopy = &end;
-				if (start.is_dead_end())
+				if (start.is_dead_end()) {
 					bulldozelist.push_back(&start);
+				}
 				// At this point, end may have become dangling
 				if (Flag* pend = endcopy.get(egbase())) {
-					if (pend->is_dead_end())
+					if (pend->is_dead_end()) {
 						bulldozelist.push_back(&end);
+					}
 				}
 			}
-		} else
+		} else {
 			throw wexception("Player::bulldoze(%u): bad immovable type", immovable->serial());
+		}
 	}
 }
 
 void Player::start_stop_building(PlayerImmovable& imm) {
-	if (imm.get_owner() == this)
-		if (upcast(ProductionSite, productionsite, &imm))
+	if (imm.get_owner() == this) {
+		if (upcast(ProductionSite, productionsite, &imm)) {
 			productionsite->set_stopped(!productionsite->is_stopped());
+		}
+	}
 }
 
 void Player::start_or_cancel_expedition(Warehouse& wh) {
-	if (wh.get_owner() == this)
+	if (wh.get_owner() == this) {
 		if (PortDock* pd = wh.get_portdock()) {
 			if (pd->expedition_started()) {
 				upcast(Game, game, &egbase());
 				pd->cancel_expedition(*game);
-			} else
+			} else {
 				pd->start_expedition();
+			}
 		}
+	}
 }
 
 void Player::military_site_set_soldier_preference(PlayerImmovable& imm,
                                                   SoldierPreference soldier_preference) {
-	if (imm.get_owner() == this)
-		if (upcast(MilitarySite, milsite, &imm))
+	if (imm.get_owner() == this) {
+		if (upcast(MilitarySite, milsite, &imm)) {
 			milsite->set_soldier_preference(soldier_preference);
+		}
+	}
 }
 
 /*
  * enhance this building, remove it, but give the constructionsite
  * an idea of enhancing
  */
-void Player::enhance_building(Building* building, DescriptionIndex const index_of_new_building) {
-	enhance_or_dismantle(building, index_of_new_building);
+void Player::enhance_building(Building* building,
+                              DescriptionIndex const index_of_new_building,
+                              bool keep_wares) {
+	enhance_or_dismantle(building, index_of_new_building, keep_wares);
 }
 
 /*
  * rip this building down, but slowly: a builder will take it gradually
  * apart.
  */
-void Player::dismantle_building(Building* building) {
-	enhance_or_dismantle(building, INVALID_INDEX);
+void Player::dismantle_building(Building* building, bool keep_wares) {
+	enhance_or_dismantle(building, INVALID_INDEX, keep_wares);
 }
 void Player::enhance_or_dismantle(Building* building,
-                                  DescriptionIndex const index_of_new_building) {
+                                  DescriptionIndex const index_of_new_building,
+                                  bool keep_wares) {
 	if (building->get_owner() == this &&
 	    (index_of_new_building == INVALID_INDEX ||
 	     building->descr().enhancement() == index_of_new_building)) {
 		FormerBuildings former_buildings = building->get_former_buildings();
 		const Coords position = building->get_position();
 
-		//  Get workers and soldiers
+		//  Get wares, workers, and soldiers
 		//  Make copies of the vectors, because the originals are destroyed with
 		//  the building.
 		std::vector<Worker*> workers;
-		upcast(Warehouse, wh, building);
-		if (wh) {
+		std::map<DescriptionIndex, Quantity> wares;
+		auto add_to_wares = [&wares](DescriptionIndex di, Quantity add) {
+			if (add == 0) {
+				return;
+			}
+			auto it = wares.find(di);
+			if (it == wares.end()) {
+				wares[di] = add;
+			} else {
+				it->second += add;
+			}
+		};
+
+		if (upcast(Warehouse, wh, building)) {
 			workers = wh->get_incorporated_workers();
+			if (keep_wares) {
+				for (DescriptionIndex di = wh->get_wares().get_nrwareids(); di; --di) {
+					wares[di - 1] = wh->get_wares().stock(di - 1);
+				}
+				if (PortDock* pd = wh->get_portdock()) {
+					for (DescriptionIndex di : tribe().wares()) {
+						add_to_wares(di, pd->count_waiting(wwWARE, di));
+					}
+					if (ExpeditionBootstrap* x = pd->expedition_bootstrap()) {
+						for (const InputQueue* q : x->queues(true)) {
+							if (q->get_type() == wwWARE) {
+								add_to_wares(q->get_index(), q->get_filled());
+							}
+						}
+					}
+				}
+			}
 		} else {
 			workers = building->get_workers();
+			if (keep_wares) {
+				// TODO(Nordfriese): Add support for markets?
+				if (upcast(ProductionSite, ps, building)) {
+					for (const InputQueue* q : ps->inputqueues()) {
+						if (q->get_type() == wwWARE) {
+							auto it = wares.find(q->get_index());
+							if (it == wares.end()) {
+								wares[q->get_index()] = q->get_filled();
+							} else {
+								it->second += q->get_filled();
+							}
+						}
+					}
+				}
+			}
 		}
+		assert(keep_wares || wares.empty());
 
 		const BuildingSettings* settings = nullptr;
 		if (index_of_new_building != INVALID_INDEX) {
@@ -797,10 +944,11 @@ void Player::enhance_or_dismantle(Building* building,
 		//  pointer.
 
 		if (index_of_new_building != INVALID_INDEX) {
-			building = &egbase().warp_constructionsite(
-			   position, player_number_, index_of_new_building, false, former_buildings, settings);
+			building = &egbase().warp_constructionsite(position, player_number_, index_of_new_building,
+			                                           false, former_buildings, settings, wares);
 		} else {
-			building = &egbase().warp_dismantlesite(position, player_number_, false, former_buildings);
+			building =
+			   &egbase().warp_dismantlesite(position, player_number_, false, former_buildings, wares);
 		}
 
 		// Open the new building window if needed
@@ -849,8 +997,8 @@ void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
 /*
  * Economy stuff below
  */
-Economy* Player::create_economy() {
-	std::unique_ptr<Economy> eco(new Economy(*this));
+Economy* Player::create_economy(WareWorker type) {
+	std::unique_ptr<Economy> eco(new Economy(*this, type));
 	const Serial serial = eco->serial();
 
 	assert(economies_.count(serial) == 0);
@@ -861,8 +1009,8 @@ Economy* Player::create_economy() {
 	return get_economy(serial);
 }
 
-Economy* Player::create_economy(Serial serial) {
-	std::unique_ptr<Economy> eco(new Economy(*this, serial));
+Economy* Player::create_economy(Serial serial, WareWorker type) {
+	std::unique_ptr<Economy> eco(new Economy(*this, serial, type));
 
 	assert(economies_.count(serial) == 0);
 	economies_.emplace(std::make_pair(serial, std::move(eco)));
@@ -914,10 +1062,12 @@ Forces the drop of given soldier at given house
 ===========
 */
 void Player::drop_soldier(PlayerImmovable& imm, Soldier& soldier) {
-	if (imm.get_owner() != this)
+	if (imm.get_owner() != this) {
 		return;
-	if (soldier.descr().type() != MapObjectType::SOLDIER)
+	}
+	if (soldier.descr().type() != MapObjectType::SOLDIER) {
 		return;
+	}
 	if (upcast(Building, building, &imm)) {
 		SoldierControl* soldier_control = building->mutable_soldier_control();
 		if (soldier_control != nullptr) {
@@ -943,8 +1093,9 @@ uint32_t
 Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32_t nr_wanted) {
 	uint32_t count = 0;
 
-	if (soldiers)
+	if (soldiers) {
 		soldiers->clear();
+	}
 
 	const Map& map = egbase().map();
 	std::vector<BaseImmovable*> flags;
@@ -953,8 +1104,9 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 	   egbase(), Area<FCoords>(map.get_fcoords(flag.get_position()), 25), flags,
 	   CheckStepDefault(MOVECAPS_WALK), FindFlagOf(FindImmovablePlayerMilitarySite(*this)));
 
-	if (flags.empty())
+	if (flags.empty()) {
 		return 0;
+	}
 
 	for (BaseImmovable* temp_flag : flags) {
 		upcast(Flag, attackerflag, temp_flag);
@@ -965,12 +1117,14 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 		uint32_t const nr_present = present.size();
 		if (nr_staying < nr_present) {
 			uint32_t const nr_taken = std::min(nr_wanted, nr_present - nr_staying);
-			if (soldiers)
+			if (soldiers) {
 				soldiers->insert(soldiers->end(), present.begin(), present.begin() + nr_taken);
+			}
 			count += nr_taken;
 			nr_wanted -= nr_taken;
-			if (!nr_wanted)
+			if (!nr_wanted) {
 				break;
+			}
 		}
 	}
 
@@ -1022,12 +1176,14 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 
 	Field& field = fields_[f.field - &first_map_field];
 
-	assert(fields_ <= &field);
-	assert(&field < fields_ + map.max_index());
+	assert(fields_.get() <= &field);
+	assert(&field < fields_.get() + map.max_index());
 
 	{  // discover everything (above the ground) in this field
 		field.terrains = f.field->get_terrains();
-		field.roads = f.field->get_roads();
+		field.r_e = f.field->get_road(WALK_E);
+		field.r_se = f.field->get_road(WALK_SE);
+		field.r_sw = f.field->get_road(WALK_SW);
 		field.owner = f.field->get_owned_by();
 
 		// Check if this node is part of a border
@@ -1068,20 +1224,22 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 			if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
 
-				if (Road::is_road_descr(map_object_descr))
+				if (Road::is_road_descr(map_object_descr) ||
+				    Waterway::is_waterway_descr(map_object_descr)) {
 					map_object_descr = nullptr;
-				else if (upcast(Building const, building, base_immovable)) {
-					if (building->get_position() != f)
+				} else if (upcast(Building const, building, base_immovable)) {
+					if (building->get_position() != f) {
 						// This is not the building's main position so we can not see it.
 						map_object_descr = nullptr;
-					else {
+					} else {
 						if (upcast(ConstructionSite const, cs, building)) {
 							field.constructionsite = const_cast<ConstructionSite*>(cs)->get_info();
 						}
 					}
 				}
-			} else
+			} else {
 				map_object_descr = nullptr;
+			}
 			field.map_object_descr = map_object_descr;
 		}
 	}
@@ -1090,8 +1248,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		Field& tr_field = fields_[tr.field - &first_map_field];
 		if (tr_field.vision <= 1) {
 			tr_field.terrains.d = tr.field->terrain_d();
-			tr_field.roads &= ~(RoadType::kMask << RoadType::kSouthWest);
-			tr_field.roads |= RoadType::kMask << RoadType::kSouthWest & tr.field->get_roads();
+			tr_field.r_sw = tr.field->get_road(WALK_SW);
 			tr_field.owner = tr.field->get_owned_by();
 		}
 	}
@@ -1100,8 +1257,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		Field& tl_field = fields_[tl.field - &first_map_field];
 		if (tl_field.vision <= 1) {
 			tl_field.terrains = tl.field->get_terrains();
-			tl_field.roads &= ~(RoadType::kMask << RoadType::kSouthEast);
-			tl_field.roads |= RoadType::kMask << RoadType::kSouthEast & tl.field->get_roads();
+			tl_field.r_se = tl.field->get_road(WALK_SE);
 			tl_field.owner = tl.field->get_owned_by();
 		}
 	}
@@ -1110,8 +1266,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		Field& l_field = fields_[l.field - &first_map_field];
 		if (l_field.vision <= 1) {
 			l_field.terrains.r = l.field->terrain_r();
-			l_field.roads &= ~(RoadType::kMask << RoadType::kEast);
-			l_field.roads |= RoadType::kMask << RoadType::kEast & l.field->get_roads();
+			l_field.r_e = l.field->get_road(WALK_E);
 			l_field.owner = l.field->get_owned_by();
 		}
 	}
@@ -1129,16 +1284,18 @@ Vision Player::see_node(const Map& map, const FCoords& f, Time const gametime, b
 
 	//  If this is not already a forwarded call, we should inform allied players
 	//  as well of this change.
-	if (!team_player_uptodate_)
+	if (!team_player_uptodate_) {
 		update_team_players();
+	}
 	if (!forward && !team_player_.empty()) {
-		for (uint8_t j = 0; j < team_player_.size(); ++j)
+		for (uint8_t j = 0; j < team_player_.size(); ++j) {
 			team_player_[j]->see_node(map, f, gametime, true);
+		}
 	}
 
 	Field& field = fields_[f.field - &first_map_field];
-	assert(fields_ <= &field);
-	assert(&field < fields_ + map.max_index());
+	assert(fields_.get() <= &field);
+	assert(&field < fields_.get() + map.max_index());
 
 	if (field.vision == 0) {
 		field.vision = 1;
@@ -1157,18 +1314,21 @@ Vision Player::unsee_node(MapIndex const i,
                           bool const forward) {
 	Field& field = fields_[i];
 	if ((mode == SeeUnseeNode::kUnsee && field.vision <= 1) ||
-	    field.vision < 1)  //  Already does not see this
+	    field.vision < 1) {  //  Already does not see this
 		return field.vision;
+	}
 
 	const Vision original_vision = field.vision;
 
 	//  If this is not already a forwarded call, we should inform allied players
 	//  as well of this change.
-	if (!team_player_uptodate_)
+	if (!team_player_uptodate_) {
 		update_team_players();
+	}
 	if (!forward && !team_player_.empty()) {
-		for (uint8_t j = 0; j < team_player_.size(); ++j)
+		for (uint8_t j = 0; j < team_player_.size(); ++j) {
 			team_player_[j]->unsee_node(i, gametime, mode, true);
+		}
 	}
 
 	if (mode == SeeUnseeNode::kUnexplore) {
@@ -1228,10 +1388,12 @@ void Player::sample_statistics() {
 	std::vector<uint32_t> stocks(egbase().tribes().nrwares());
 
 	for (const auto& economy : economies()) {
-		for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
-			const Widelands::WareList& wares = warehouse->get_wares();
-			for (size_t id = 0; id < stocks.size(); ++id) {
-				stocks[id] += wares.stock(DescriptionIndex(id));
+		if (economy.second->type() == wwWARE) {
+			for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
+				const Widelands::WareList& wares = warehouse->get_wares();
+				for (size_t id = 0; id < stocks.size(); ++id) {
+					stocks[id] += wares.stock(DescriptionIndex(id));
+				}
 			}
 		}
 	}
@@ -1318,8 +1480,9 @@ Player::get_building_statistics(const DescriptionIndex& i) const {
 
 Player::BuildingStatsVector* Player::get_mutable_building_statistics(const DescriptionIndex& i) {
 	DescriptionIndex const nr_buildings = egbase().tribes().nrbuildings();
-	if (building_stats_.size() < nr_buildings)
+	if (building_stats_.size() < nr_buildings) {
 		building_stats_.resize(nr_buildings);
+	}
 	return &building_stats_[i];
 }
 
@@ -1335,8 +1498,9 @@ void Player::update_building_statistics(Building& building, NoteImmovable::Owner
 	const size_t nr_buildings = egbase().tribes().nrbuildings();
 
 	// Get the valid vector for this
-	if (building_stats_.size() < nr_buildings)
+	if (building_stats_.size() < nr_buildings) {
 		building_stats_.resize(nr_buildings);
+	}
 
 	std::vector<BuildingStats>& stat =
 	   *get_mutable_building_statistics(egbase().tribes().building_index(building_name.c_str()));
@@ -1372,6 +1536,17 @@ const std::string& Player::get_ai() const {
 	return ai_;
 }
 
+void Player::set_muted(DescriptionIndex di, bool mute) {
+	if (mute) {
+		muted_building_types_.insert(di);
+	} else {
+		auto it = muted_building_types_.find(di);
+		if (it != muted_building_types_.end()) {
+			muted_building_types_.erase(it);
+		}
+	}
+}
+
 bool Player::is_attack_forbidden(PlayerNumber who) const {
 	return forbid_attack_.find(who) != forbid_attack_.end();
 }
@@ -1393,17 +1568,17 @@ void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
 const std::string Player::pick_shipname() {
 	++ship_name_counter_;
 
-	if (!remaining_shipnames_.empty()) {
-		Game& game = dynamic_cast<Game&>(egbase());
-		assert(is_a(Game, &egbase()));
-		const uint32_t index = game.logic_rand() % remaining_shipnames_.size();
-		std::unordered_set<std::string>::iterator it = remaining_shipnames_.begin();
-		std::advance(it, index);
-		std::string new_name = *it;
-		remaining_shipnames_.erase(it);
-		return new_name;
+	if (remaining_shipnames_.empty()) {
+		return (boost::format(pgettext("shipname", "Ship %d")) % ship_name_counter_).str();
 	}
-	return (boost::format(pgettext("shipname", "Ship %d")) % ship_name_counter_).str();
+
+	Game& game = dynamic_cast<Game&>(egbase());
+	const size_t index = game.logic_rand() % remaining_shipnames_.size();
+	auto it = remaining_shipnames_.begin();
+	std::advance(it, index);
+	std::string new_name = *it;
+	remaining_shipnames_.erase(it);
+	return new_name;
 }
 
 /**
@@ -1416,7 +1591,7 @@ void Player::read_remaining_shipnames(FileRead& fr) {
 	remaining_shipnames_.clear();
 	const uint16_t count = fr.unsigned_16();
 	for (uint16_t i = 0; i < count; ++i) {
-		remaining_shipnames_.insert(fr.string());
+		remaining_shipnames_.push_back(fr.string());
 	}
 	ship_name_counter_ = fr.unsigned_32();
 }
@@ -1427,35 +1602,35 @@ void Player::read_remaining_shipnames(FileRead& fr) {
  * \param fr source stream
  */
 void Player::read_statistics(FileRead& fr,
-                             const uint16_t packet_version,
+                             const uint16_t /* packet_version */,
                              const TribesLegacyLookupTable& lookup_table) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
 
 	// Stats are saved as a single string to reduce number of hard disk write operations
-	const auto parse_stats = [nr_entries](std::vector<std::vector<uint32_t>>* stats,
-	                                      const DescriptionIndex ware_index,
-	                                      const std::string& stats_string,
-	                                      const std::string& description) {
-		if (!stats_string.empty()) {
-			std::vector<std::string> stats_vector;
-			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
-			if (stats_vector.size() != nr_entries) {
-				throw GameDataError("wrong number of %s statistics - expected %" PRIuS
-				                    " but got %" PRIuS,
-				                    description.c_str(), nr_entries, stats_vector.size());
-			}
-			for (size_t j = 0; j < nr_entries; ++j) {
-				stats->at(ware_index)[j] = static_cast<unsigned int>(atoi(stats_vector.at(j).c_str()));
-			}
-		} else if (nr_entries > 0) {
-			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",
-			                    description.c_str(), nr_entries);
-		}
-	};
+	const auto parse_stats =
+	   [nr_entries](std::vector<std::vector<uint32_t>>* stats, const DescriptionIndex ware_index,
+	                const std::string& stats_string, const std::string& description) {
+		   if (!stats_string.empty()) {
+			   std::vector<std::string> stats_vector;
+			   boost::split(stats_vector, stats_string, boost::is_any_of("|"));
+			   if (stats_vector.size() != nr_entries) {
+				   throw GameDataError("wrong number of %s statistics - expected %" PRIuS
+				                       " but got %" PRIuS,
+				                       description.c_str(), nr_entries, stats_vector.size());
+			   }
+			   for (size_t j = 0; j < nr_entries; ++j) {
+				   stats->at(ware_index)[j] = boost::lexical_cast<unsigned int>(stats_vector.at(j));
+			   }
+		   } else if (nr_entries > 0) {
+			   throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",
+			                       description.c_str(), nr_entries);
+		   }
+	   };
 
-	for (uint32_t i = 0; i < current_produced_statistics_.size(); ++i)
+	for (uint32_t i = 0; i < current_produced_statistics_.size(); ++i) {
 		ware_productions_[i].resize(nr_entries);
+	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
@@ -1466,21 +1641,16 @@ void Player::read_statistics(FileRead& fr,
 		}
 
 		current_produced_statistics_[idx] = fr.unsigned_32();
-		if (packet_version < 22) {
-			for (uint32_t j = 0; j < nr_entries; ++j) {
-				ware_productions_[idx][j] = fr.unsigned_32();
-			}
-		} else {
-			parse_stats(&ware_productions_, idx, fr.c_string(), "produced");
-		}
+		parse_stats(&ware_productions_, idx, fr.c_string(), "produced");
 	}
 
 	// Read consumption statistics
 	nr_wares = fr.unsigned_16();
 	nr_entries = fr.unsigned_16();
 
-	for (uint32_t i = 0; i < current_consumed_statistics_.size(); ++i)
+	for (uint32_t i = 0; i < current_consumed_statistics_.size(); ++i) {
 		ware_consumptions_[i].resize(nr_entries);
+	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
@@ -1492,22 +1662,16 @@ void Player::read_statistics(FileRead& fr,
 		}
 
 		current_consumed_statistics_[idx] = fr.unsigned_32();
-		// TODO(GunChleoc): Get rid of this savegame compatibility code after build 21
-		if (packet_version < 22) {
-			for (uint32_t j = 0; j < nr_entries; ++j) {
-				ware_consumptions_[idx][j] = fr.unsigned_32();
-			}
-		} else {
-			parse_stats(&ware_consumptions_, idx, fr.c_string(), "consumed");
-		}
+		parse_stats(&ware_consumptions_, idx, fr.c_string(), "consumed");
 	}
 
 	// Read stock statistics
 	nr_wares = fr.unsigned_16();
 	nr_entries = fr.unsigned_16();
 
-	for (uint32_t i = 0; i < ware_stocks_.size(); ++i)
+	for (uint32_t i = 0; i < ware_stocks_.size(); ++i) {
 		ware_stocks_[i].resize(nr_entries);
+	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
@@ -1517,13 +1681,7 @@ void Player::read_statistics(FileRead& fr,
 			continue;
 		}
 
-		if (packet_version < 22) {
-			for (uint32_t j = 0; j < nr_entries; ++j) {
-				ware_stocks_[idx][j] = fr.unsigned_32();
-			}
-		} else {
-			parse_stats(&ware_stocks_, idx, fr.c_string(), "stock");
-		}
+		parse_stats(&ware_stocks_, idx, fr.c_string(), "stock");
 	}
 
 	// All statistics should have the same size

@@ -1,9 +1,9 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: widelands
-Source: http://www.widelands.org/
+Source: https://www.widelands.org/
 
 Files: *
-Copyright: 2002-2019 by the Widelands Development Team
+Copyright: 2002-2020 by the Widelands Development Team
 License: GPL-2+
 
 Files: src/third_party/eris/*
@@ -61,27 +61,6 @@ License: GPL-2+
 Files: data/i18n/fonts/Nakula/*
 Copyright: Nakula Devanagari font © 2006 University of Cambridge. Designed and developed by  IMRC, India. Latin and Cyrillic glyphs from the font Nimbus Roman No9 L Regular, © 1999 (URW)++ Design & Development; Cyrillic glyphs by Valek Filippov © 2001-2002.
 License: GPL-2+
-
-Files: data/i18n/fonts/Sinhala/*
-Copyright: 2004,2008 Anuradha Ratnaweera and Harshani Devadithya, 2006 Harshula Jayasuriya, 1994, The Wellcome Trust, London
-License:
-  LKLUG font is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License, version 2, as
-  published by the Free Software Foundation.
-
-  This program is distributed in the hope that it will be useful, but
-  WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  General Public License, version 2, for more details.
-
-  The Debian packaging is (C) 2004,2008, Anuradha Ratnaweera, and is
-  licensed under the GNU General Public License, version 2.
-
-  You should have received a copy of the GNU General Public License,
-  version 2, in the file `COPYING', or on Debian based systems in the
-  file `/usr/share/common-licenses/GPL-2'; if not, write to the Free
-  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-  MA 02110-1301 USA.
 
 Files: data/i18n/fonts/MicroHei/*
 Copyright WenQuanYi Board of Trustees 2008-2009
@@ -209,10 +188,6 @@ License: Apache 2.0
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing
   permissions and limitations under the License.
 
-Files: data/i18n/fonts/*mmrCensus*
-Copyright: SIG, http://www.myanmarlanguage.org/site-info/SIG-Myanmar-Language
-License: SIL-Open-Font-License
-
 Files: data/i18n/fonts/DejaVu/*
 Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is a trademark of Bitstream, Inc.
 License: Vera Fonts License, BSD like
@@ -229,17 +204,17 @@ Copyright: 2006-2010, Peter Schwanemann (Peter (AT) drehatlas (DOT) de)
 License: SIL-Open-Font-License
 
 Files: data/tribes/*/*.png
-Copyright: 2002-2019 by the Widelands Development Team
+Copyright: 2002-2020 by the Widelands Development Team
 License: GPL-2+
  The media files of Widelands are distributed under the same license
  than the game itself. The blender source files are not included in the same
  source tree because of their size but can be retrieved online from
- https://bugs.launchpad.net/widelands-media/
+ https://launchpad.net/widelands-media/
  Some of these models were lost by the widelands authors, and currently
- reimplemented (see https://bugs.launchpad.net/widelands-media/+bug/677337).
+ reimplemented (see https://github.com/widelands/widelands/issues/1256).
 
 Files: debian/*
-Copyright: 2004-2019 Martin Quinson <mquinson@debian.org>
+Copyright: 2004-2020 Martin Quinson <mquinson@debian.org>
 License: GPL-2+
 
 License: GPL-2+

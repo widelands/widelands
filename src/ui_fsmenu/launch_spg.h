@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,20 +21,14 @@
 #define WL_UI_FSMENU_LAUNCH_SPG_H
 
 #include <memory>
-#include <string>
 
 #include "graphic/playercolor.h"
 #include "logic/game_settings.h"
-#include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/launch_game.h"
 
-struct ChatProvider;
-class GameController;
-struct GameSettingsProvider;
 struct PlayerDescriptionGroup;
-class LuaInterface;
 
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player

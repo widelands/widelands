@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,8 @@
 #ifndef WL_WUI_ATTACK_BOX_H
 #define WL_WUI_ATTACK_BOX_H
 
-#include <list>
 #include <memory>
-#include <set>
-#include <vector>
 
-#include "graphic/font_handler.h"
-#include "graphic/text/font_set.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
@@ -68,8 +63,10 @@ private:
 	                                                 uint32_t max,
 	                                                 uint32_t initial,
 	                                                 char const* hint);
-	UI::Textarea&
-	add_text(UI::Box& parent, std::string str, UI::Align alignment, const UI::FontStyle style);
+	UI::Textarea& add_text(UI::Box& parent,
+	                       const std::string& str,
+	                       UI::Align alignment,
+	                       const UI::FontStyle style);
 	std::unique_ptr<UI::Button> add_button(UI::Box& parent,
 	                                       const std::string& text,
 	                                       void (AttackBox::*fn)(),

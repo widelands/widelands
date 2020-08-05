@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_resources_tool.h"
 #include "logic/field.h"
-#include "logic/map_objects/world/resource_description.h"
 #include "logic/mapregion.h"
 #include "logic/widelands_geometry.h"
 

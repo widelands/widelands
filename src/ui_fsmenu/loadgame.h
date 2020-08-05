@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,9 @@
 #ifndef WL_UI_FSMENU_LOADGAME_H
 #define WL_UI_FSMENU_LOADGAME_H
 
-#include "ui_fsmenu/base.h"
-
 #include "logic/game.h"
 #include "logic/game_settings.h"
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"

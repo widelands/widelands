@@ -2,9 +2,6 @@
 --                              Mission Threads
 -- =======================================================================
 
-include "scripting/messages.lua"
-include "scripting/field_animations.lua"
-
 function building_materials()
    reveal_concentric(p1, wl.Game().map.player_slots[1].starting_field, 13)
    sleep(1000)

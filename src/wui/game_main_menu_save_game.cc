@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "game_io/game_loader.h"
@@ -100,17 +99,17 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 	ok_.set_enabled(false);
 
-	filename_editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
-	filename_editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
-	filename_editbox_.cancel.connect(boost::bind(&GameMainMenuSaveGame::reset_editbox_or_die, this,
-	                                             parent.game().save_handler().get_cur_filename()));
+	filename_editbox_.changed.connect([this]() { edit_box_changed(); });
+	filename_editbox_.ok.connect([this]() { ok(); });
+	filename_editbox_.cancel.connect(
+	   [this, &parent]() { reset_editbox_or_die(parent.game().save_handler().get_cur_filename()); });
 
-	ok_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
-	cancel_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
+	ok_.sigclicked.connect([this]() { ok(); });
+	cancel_.sigclicked.connect([this]() { die(); });
 
-	load_or_save_.table().selected.connect(boost::bind(&GameMainMenuSaveGame::entry_selected, this));
-	load_or_save_.table().double_clicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
-	load_or_save_.table().cancel.connect(boost::bind(&GameMainMenuSaveGame::die, this));
+	load_or_save_.table().selected.connect([this](unsigned) { entry_selected(); });
+	load_or_save_.table().double_clicked.connect([this](unsigned) { ok(); });
+	load_or_save_.table().cancel.connect([this]() { die(); });
 
 	load_or_save_.fill_table();
 	load_or_save_.select_by_name(parent.game().save_handler().get_cur_filename());
@@ -135,7 +134,9 @@ void GameMainMenuSaveGame::entry_selected() {
 	load_or_save_.delete_button()->set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
 		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
-		filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata->filename.c_str()));
+		if (!gamedata->is_directory()) {
+			filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata->filename.c_str()));
+		}
 	}
 }
 
@@ -161,12 +162,18 @@ void GameMainMenuSaveGame::ok() {
 	if (!ok_.enabled()) {
 		return;
 	}
-
-	std::string filename = filename_editbox_.text();
-	if (save_game(filename, !get_config_bool("nozip", false))) {
-		die();
+	if (load_or_save_.has_selection() && load_or_save_.entry_selected()->is_directory()) {
+		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
+		load_or_save_.change_directory_to(gamedata->filename);
+		curdir_ = gamedata->filename;
+		filename_editbox_.focus();
 	} else {
-		load_or_save_.table_.focus();
+		std::string filename = filename_editbox_.text();
+		if (save_game(filename, !get_config_bool("nozip", false))) {
+			die();
+		} else {
+			load_or_save_.table().focus();
+		}
 	}
 }
 
@@ -236,6 +243,9 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 
 	// Try saving the game.
 	Widelands::Game& game = igbase().game();
+
+	game.create_loader_ui({"general_game"}, true);
+
 	GenericSaveHandler gsh(
 	   [&game](FileSystem& fs) {
 		   Widelands::GameSaver gs(fs, game);
@@ -243,6 +253,8 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	   },
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error = gsh.save();
+
+	game.remove_loader_ui();
 
 	// If only the temporary backup couldn't be deleted, we still treat it as
 	// success. Automatic cleanup will deal with later. No need to bother the

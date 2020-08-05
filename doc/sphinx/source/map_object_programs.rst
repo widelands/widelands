@@ -8,7 +8,6 @@ table. Map objects that can have programs are:
 .. toctree::
    :maxdepth: 3
 
-   Production Sites <productionsite_program>
+   Production Sites <autogen_tribes_productionsite_programs>
    Workers <autogen_tribes_worker_programs>
-
-The programs for Immovables haven't been documented yet.
+   Immovables <autogen_immovable_programs>

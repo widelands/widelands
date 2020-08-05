@@ -19,16 +19,23 @@ tribes:new_productionsite_type {
       log = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 88},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {40, 71},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 66},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {40, 53}
+      }
    },
 
    aihints = {
@@ -42,16 +49,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "fruit", amount = 8 },
-      { name = "water", amount = 8 },
-   },
-   outputs = {
-      "fish"
-   },
-
-   indicate_workarea_overlaps = {
-      frisians_aqua_farm = false,
-      frisians_clay_pit = true,
+      { name = "water", amount = 5 },
+      { name = "fruit", amount = 2 },
    },
 
    programs = {
@@ -61,7 +60,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=breed_fish",
             "call=fish_pond",
-            "return=no_stats",
          },
       },
       breed_fish = {
@@ -73,7 +71,7 @@ tribes:new_productionsite_type {
             "return=failed unless site has fruit",
             "callworker=breed_in_pond",
             "consume=fruit water:2",
-            "sleep=23000",
+            "sleep=duration:23s",
          },
       },
       fish_pond = {
@@ -81,7 +79,7 @@ tribes:new_productionsite_type {
          descname = _"fishing",
          actions = {
             "return=skipped unless economy needs fish",
-            "sleep=9000",
+            "sleep=duration:9s",
             "callworker=fish_in_pond",
          },
       },

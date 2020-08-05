@@ -38,16 +38,6 @@ tribes:new_productionsite_type {
       atlanteans_blackroot_farmer = 1
    },
 
-   outputs = {
-      "blackroot"
-   },
-
-   indicate_workarea_overlaps = {
-      atlanteans_blackroot_farm = false,
-      atlanteans_farm = false,
-      atlanteans_foresters_house = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -55,7 +45,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant",
             "call=harvest",
-            "return=no_stats"
          }
       },
       plant = {
@@ -63,7 +52,7 @@ tribes:new_productionsite_type {
          descname = _"planting blackroot",
          actions = {
             "callworker=plant",
-            "sleep=10000"
+            "sleep=duration:10s"
          }
       },
       harvest = {
@@ -71,7 +60,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting blackroot",
          actions = {
             "callworker=harvest",
-            "sleep=3000"
+            "sleep=duration:3s"
          }
       },
    },

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,10 +21,7 @@
 
 #include <memory>
 
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
-
-#include "economy/fleet.h"
+#include "economy/ship_fleet.h"
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "logic/game.h"
@@ -44,7 +41,7 @@ constexpr int kButtonSize = 34;
 
 SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                                                  UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&plr, "seafaring_statistics", &registry, 355, 375, _("Seafaring Statistics")),
+   : UI::UniqueWindow(&plr, "seafaring_statistics", &registry, 375, 375, _("Seafaring Statistics")),
      main_box_(this, kPadding, kPadding, UI::Box::Vertical, get_inner_w(), get_inner_h(), kPadding),
      filter_box_(
         &main_box_, 0, 0, UI::Box::Horizontal, get_inner_w() - 2 * kPadding, kButtonSize, kPadding),
@@ -137,7 +134,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	colony_icon_ = tribe.get_worker_descr(tribe.builder())->icon();
 
 	// Buttons for ship states
-	main_box_.add(&filter_box_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&filter_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	filter_box_.add(&idle_btn_);
 	filter_box_.add(&shipping_btn_);
 	filter_box_.add(&waiting_btn_);
@@ -155,29 +152,27 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	main_box_.set_size(get_inner_w() - 2 * kPadding, get_inner_h() - 2 * kPadding);
 
 	// Configure actions
-	idle_btn_.sigclicked.connect(
-	   boost::bind(&SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kIdle));
-	shipping_btn_.sigclicked.connect(
-	   boost::bind(&SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kShipping));
-	waiting_btn_.sigclicked.connect(boost::bind(
-	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionWaiting));
-	scouting_btn_.sigclicked.connect(boost::bind(
-	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionScouting));
-	portspace_btn_.sigclicked.connect(boost::bind(
-	   &SeafaringStatisticsMenu::filter_ships, this, ShipFilterStatus::kExpeditionPortspaceFound));
+	idle_btn_.sigclicked.connect([this]() { filter_ships(ShipFilterStatus::kIdle); });
+	shipping_btn_.sigclicked.connect([this]() { filter_ships(ShipFilterStatus::kShipping); });
+	waiting_btn_.sigclicked.connect(
+	   [this]() { filter_ships(ShipFilterStatus::kExpeditionWaiting); });
+	scouting_btn_.sigclicked.connect(
+	   [this]() { filter_ships(ShipFilterStatus::kExpeditionScouting); });
+	portspace_btn_.sigclicked.connect(
+	   [this]() { filter_ships(ShipFilterStatus::kExpeditionPortspaceFound); });
 	ship_filter_ = ShipFilterStatus::kAll;
 	set_filter_ships_tooltips();
 
-	watchbtn_.sigclicked.connect(boost::bind(&SeafaringStatisticsMenu::watch_ship, this));
-	openwindowbtn_.sigclicked.connect(boost::bind(&SeafaringStatisticsMenu::open_ship_window, this));
-	centerviewbtn_.sigclicked.connect(boost::bind(&SeafaringStatisticsMenu::center_view, this));
+	watchbtn_.sigclicked.connect([this]() { watch_ship(); });
+	openwindowbtn_.sigclicked.connect([this]() { open_ship_window(); });
+	centerviewbtn_.sigclicked.connect([this]() { center_view(); });
 
 	// Configure table
-	table_.selected.connect(boost::bind(&SeafaringStatisticsMenu::selected, this));
-	table_.double_clicked.connect(boost::bind(&SeafaringStatisticsMenu::double_clicked, this));
+	table_.selected.connect([this](unsigned) { selected(); });
+	table_.double_clicked.connect([this](unsigned) { double_clicked(); });
 	table_.add_column(
 	   0, pgettext("ship", "Name"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
-	table_.add_column(200, pgettext("ship", "Status"));
+	table_.add_column(230, pgettext("ship", "Status"));
 	table_.set_sort_column(ColName);
 	fill_table();
 
@@ -209,7 +204,7 @@ const std::string
 SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterStatus status) const {
 	switch (status) {
 	case SeafaringStatisticsMenu::ShipFilterStatus::kIdle:
-		return pgettext("ship_state", "Idle");
+		return pgettext("ship_state", "Empty");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kShipping:
 		return pgettext("ship_state", "Shipping");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionWaiting:
@@ -260,7 +255,7 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	ShipFilterStatus status = ShipFilterStatus::kAll;
 	switch (state) {
 	case Widelands::Ship::ShipStates::kTransport:
-		if (ship.get_destination(iplayer().game()) != nullptr) {
+		if (ship.get_destination() && ship.get_fleet()->get_schedule().is_busy(ship)) {
 			status = ShipFilterStatus::kShipping;
 		} else {
 			status = ShipFilterStatus::kIdle;
@@ -372,46 +367,84 @@ bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_w:
 			watch_ship();
 			return true;
+
+		case SDLK_KP_0:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_0:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kAll);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_1:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_1:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kIdle);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_2:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_2:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kShipping);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_3:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_3:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kExpeditionWaiting);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_4:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_4:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kExpeditionScouting);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_5:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_5:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kExpeditionPortspaceFound);
 				return true;
 			}
 			return false;
+
 		case SDL_SCANCODE_KP_PERIOD:
 		case SDLK_KP_PERIOD:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
+			}
 			FALLS_THROUGH;
 		default:
 			break;  // not handled
@@ -504,7 +537,7 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 
 	idle_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
-	   _("Show idle ships"), pgettext("hotkey", "Alt+1")));
+	   _("Show empty ships"), pgettext("hotkey", "Alt+1")));
 	shipping_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
 	   _("Show ships shipping wares and workers"), pgettext("hotkey", "Alt+2")));

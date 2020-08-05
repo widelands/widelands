@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,6 @@
 
 #include "wui/watchwindow.h"
 
-#include <string>
-#include <vector>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/rect.h"
@@ -33,7 +30,6 @@
 #include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
-#include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 
 #define REFRESH_TIME 5000
@@ -60,24 +56,24 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	UI::Button* followbtn =
 	   new UI::Button(this, "follow", 0, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
 	                  g_gr->images().get("images/wui/menus/watch_follow.png"), _("Follow"));
-	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
+	followbtn->sigclicked.connect([this]() { do_follow(); });
 
 	UI::Button* gotobtn = new UI::Button(
 	   this, "center_mainview_here", 34, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
 	   g_gr->images().get("images/wui/menus/goto.png"), _("Center the main view on this"));
-	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
+	gotobtn->sigclicked.connect([this]() { do_goto(); });
 
 	if (init_single_window) {
 		for (uint8_t i = 0; i < kViews; ++i) {
 			view_btns_[i] = new UI::Button(
 			   this, "view", 74 + (17 * i), 200 - 34, 17, 34, UI::ButtonStyle::kWuiSecondary, "-");
-			view_btns_[i]->sigclicked.connect(boost::bind(&WatchWindow::view_button_clicked, this, i));
+			view_btns_[i]->sigclicked.connect([this, i]() { view_button_clicked(i); });
 		}
 
 		UI::Button* closebtn =
 		   new UI::Button(this, "close", w - 34, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
 		                  g_gr->images().get("images/wui/menu_abort.png"), _("Close"));
-		closebtn->sigclicked.connect(boost::bind(&WatchWindow::close_cur_view, this));
+		closebtn->sigclicked.connect([this]() { close_cur_view(); });
 	}
 
 	map_view_.field_clicked.connect(
@@ -107,8 +103,9 @@ void WatchWindow::draw(RenderTarget& dst) {
  * This also resets the view cycling timer.
  */
 void WatchWindow::add_view(Widelands::Coords const coords) {
-	if (views_.size() >= kViews)
+	if (views_.size() >= kViews) {
 		return;
+	}
 	WatchWindow::View view;
 
 	map_view_.scroll_to_field(coords, MapView::Transition::Jump);
@@ -119,8 +116,9 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 
 	views_.push_back(view);
 	set_current_view(views_.size() - 1, views_.size() > 1);
-	if (single_window_)
+	if (single_window_) {
 		toggle_buttons();
+	}
 }
 
 // Switch to next view
@@ -150,8 +148,9 @@ void WatchWindow::toggle_buttons() {
 void WatchWindow::set_current_view(uint8_t idx, bool save_previous) {
 	assert(idx < views_.size());
 
-	if (save_previous)
+	if (save_previous) {
 		save_coords();
+	}
 
 	if (single_window_) {
 		view_btns_[cur_index_]->set_perm_pressed(false);
@@ -239,9 +238,11 @@ void WatchWindow::do_follow() {
 		                           map, center_map_pixel.x, center_map_pixel.y)
 		                           .node),
 		        2);
-		     area.radius <= 32; area.radius *= 2)
-			if (map.find_bobs(g, area, &bobs))
+		     area.radius <= 32; area.radius *= 2) {
+			if (map.find_bobs(g, area, &bobs)) {
 				break;
+			}
+		}
 		//  Find the bob closest to us
 		float closest_dist = 0;
 		Widelands::Bob* closest = nullptr;

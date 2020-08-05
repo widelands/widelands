@@ -21,34 +21,45 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {39, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {28, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {39, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "working",
+         hotspot = {28, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       empty = {
-         pictures = path.list_files (dirname .. "empty_??.png"),
-         hotspot = {39, 94},
-      },
+         directory = dirname,
+         basename = "empty",
+         hotspot = {28, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {39, 72},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {28, 57}
+      }
    },
 
    aihints = {
       mines = "gold",
-   },
-
-   indicate_workarea_overlaps = {
-      frisians_goldmine = false,
-      frisians_goldmine_deep = false,
    },
 
    working_positions = {
@@ -59,9 +70,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "meal", amount = 8 }
    },
-   outputs = {
-      "gold_ore"
-   },
 
    programs = {
       work = {
@@ -70,19 +78,18 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs gold_ore",
             "consume=meal",
-            "sleep=39800",
+            "sleep=duration:39s800ms",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
-            "return=no_stats"
          }
       },
       mine_produce = {
          descname = _"mining gold",
          actions = {
-            "animate=working 12200",
+            "animate=working duration:12s200ms",
             "mine=gold 3 100 10 5",
             "produce=gold_ore",
          }

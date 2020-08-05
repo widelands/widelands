@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #include "graphic/render_queue.h"
 
 #include <algorithm>
-#include <limits>
 
 #include "base/rect.h"
 #include "base/wexception.h"
@@ -92,7 +91,7 @@ inline void from_item(const RenderQueue::Item& item, BlitProgram::Arguments* arg
 }
 
 inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {
-	args->vertices = std::move(item.line_arguments.vertices);
+	args->vertices = item.line_arguments.vertices;
 }
 
 // Batches up as many items from 'items' that have the same 'program_id'.
@@ -252,8 +251,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 		case Program::kTerrainDither: {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			dither_program_->draw(item.terrain_arguments.gametime, *item.terrain_arguments.terrains,
-			                      *item.terrain_arguments.fields_to_draw,
-			                      item.z_value + kOpenGlZDelta);
+			                      *item.terrain_arguments.fields_to_draw, item.z_value);
 			++i;
 		} break;
 
@@ -277,10 +275,9 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 
 		case Program::kTerrainRoad: {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
-			road_program_->draw(item.terrain_arguments.renderbuffer_width,
-			                    item.terrain_arguments.renderbuffer_height,
-			                    *item.terrain_arguments.fields_to_draw, item.terrain_arguments.scale,
-			                    item.z_value + 2 * kOpenGlZDelta);
+			road_program_->draw(
+			   item.terrain_arguments.renderbuffer_width, item.terrain_arguments.renderbuffer_height,
+			   *item.terrain_arguments.fields_to_draw, item.terrain_arguments.scale, item.z_value);
 			++i;
 		} break;
 

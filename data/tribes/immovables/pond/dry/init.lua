@@ -11,18 +11,21 @@ tribes:new_immovable_type {
    attributes = { "pond_dry" },
    programs = {
       program = {
-         "animate=idle 400000",
+         "animate=idle duration:6m40s",
          "remove=",
       },
       with_fish = {
          "transform=pond_growing",
+      },
+      with_stack = {
+         "transform=pond_burning",
       }
    },
-
    animations = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = { 8, 5 },
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {8, 5}
+      }
    }
 }

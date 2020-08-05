@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,17 +21,14 @@
 #define WL_UI_FSMENU_LAUNCH_GAME_H
 
 #include <memory>
-#include <string>
 
-#include "graphic/playercolor.h"
-#include "logic/map.h"
+#include "logic/widelands.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
 
-struct ChatProvider;
 class GameController;
 struct GameSettingsProvider;
 class LuaInterface;
@@ -73,7 +70,7 @@ protected:
 	/// parses the win condition and returns it as a std::unique_ptr<LuaTable>.
 	/// If this win condition can't be played with the map tags, returns a unique_ptr to nullptr.
 	std::unique_ptr<LuaTable> win_condition_if_valid(const std::string& win_condition_script,
-	                                                 std::set<std::string> tags) const;
+	                                                 const std::set<std::string>& tags) const;
 
 	void toggle_peaceful();
 

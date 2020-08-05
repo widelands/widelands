@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Tries to find out the repository revision of the current working directory
-# using bzr or debian/changelog
+# using WL_RELEASE, git, bzr, or debian/changelog
 
 import os
 import sys
@@ -22,6 +22,18 @@ except ImportError:
 
 base_path = p.abspath(p.join(p.dirname(__file__), p.pardir))
 
+next_stable_version = open(
+    p.join(base_path, 'NEXT_STABLE_VERSION')).read().strip()
+
+
+def _communicate_utf8(cmd, **kwargs):
+    """Runs the 'cmd' with 'kwargs' and returns its output which is assumed to
+    be utf-8."""
+    if sys.version_info >= (3, 0):
+        output = subprocess.check_output(cmd, **kwargs)
+        return output.decode('utf-8')
+    return subprocess.check_output(cmd, **kwargs)
+
 
 def detect_debian_version():
     """Parse bzr revision and branch information from debian/changelog."""
@@ -37,21 +49,24 @@ def detect_debian_version():
     m = pattern.search(version)
     if m == None:
         return None
-    version = version[m.start():m.end()]
+    version = '%s~%s' % (next_stable_version, version[m.start():m.end()])
     return version
 
 
 def detect_git_revision():
     try:
-        cmd = subprocess.Popen(
-            ['git', 'rev-parse', '--short', 'HEAD'],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE, cwd=base_path
-        )
-        stdout, stderr = cmd.communicate()
+        stdout = _communicate_utf8(
+            ['git', 'rev-list', '--count', 'HEAD'], cwd=base_path)
+        git_count = stdout.rstrip()
+        stdout = _communicate_utf8(
+            ['git', 'rev-parse', '--short=7', 'HEAD'], cwd=base_path)
         git_revnum = stdout.rstrip()
-        if git_revnum:
-            return 'unofficial-git-%s' % git_revnum
+        stdout = _communicate_utf8(
+            ['git', 'rev-parse', '--abbrev-ref', 'HEAD'], cwd=base_path)
+        git_abbrev = stdout.rstrip()
+        if git_count and git_revnum and git_abbrev:
+            # 1.0~git34567[abc0123@master]
+            return '%s~git%s[%s@%s]' % (next_stable_version, git_count, git_revnum, git_abbrev)
     except Exception as e:
         pass
     return None
@@ -69,24 +84,42 @@ def check_for_explicit_version():
 
 
 def detect_bzr_revision():
+    def extract_git_hash(commit_message):
+        # Get the last string in the commit message
+        git_hash = commit_message.split()[-1]
+        # Does it look like a git hash?
+        if re.search(r'^[0-9A-Fa-f]{40}$', git_hash) is not None:
+            # It does; shorten it
+            return git_hash[:7]
+        else:
+            return 'NO_HASH'
+
     if __has_bzrlib:
         try:
             b = BzrDir.open(base_path).open_branch()
             revno, nick = b.revno(), b.nick
-            return 'bzr%s[%s]' % (revno, nick)
+            commit_message = b.repository.get_revision(
+                b.last_revision()).message
+            git_hash = extract_git_hash(commit_message)
+            # 1.0~bzr9876[abc0123@trunk]
+            return '{nsv}~bzr{revno}[{git_hash}@{nick}]'.format(
+                nsv=next_stable_version, revno=revno, git_hash=git_hash, nick=nick)
         except:
             return None
     else:
         # Windows stand alone installer do not come with bzrlib. We try to
         # parse the output of bzr then directly
         try:
-            def run_bzr(subcmd): return subprocess.Popen(
-                ['bzr', subcmd], stdout=subprocess.PIPE, cwd=base_path
-            ).stdout.read().strip().decode('utf-8')
-            revno = run_bzr('revno')
-            nick = run_bzr('nick')
-            return 'bzr%s[%s]' % (revno, nick)
-        except OSError:
+            def run_bzr(args):
+                return _communicate_utf8(['bzr'] + args, cwd=base_path).strip()
+            revno = run_bzr(['revno'])
+            nick = run_bzr(['nick'])
+            commit_message = run_bzr(['log', '--limit=1', '--short'])
+            git_hash = extract_git_hash(commit_message)
+            # 1.0~bzr9876[abc0123@trunk]
+            return '{nsv}~bzr{revno}[{git_hash}@{nick}]'.format(
+                nsv=next_stable_version, revno=revno, git_hash=git_hash, nick=nick)
+        except (OSError, subprocess.CalledProcessError):
             return None
     return None
 
@@ -101,7 +134,7 @@ def detect_revision():
         if rv:
             return rv
 
-    return 'REVDETECT-BROKEN-PLEASE-REPORT-THIS'
+    return '%s~error-REVDETECT-BROKEN-PLEASE-REPORT-THIS' % next_stable_version
 
 
 if __name__ == '__main__':

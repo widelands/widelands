@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,10 @@
 #ifndef WL_UI_FSMENU_MAPSELECT_H
 #define WL_UI_FSMENU_MAPSELECT_H
 
-#include <string>
-#include <vector>
-
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
 #include "ui_fsmenu/load_map_or_game.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
@@ -60,8 +57,10 @@ private:
 
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
-	UI::Checkbox* add_tag_checkbox(UI::Box*, std::string, std::string);
+	UI::Checkbox* add_tag_checkbox(UI::Box* box, const std::string& tag, const std::string&);
 	void tagbox_changed(int32_t, bool);
+	void clear_filter();
+	void rebuild_balancing_dropdown();
 
 	int32_t const checkbox_space_;
 	const int checkbox_padding_;
@@ -84,8 +83,15 @@ private:
 	UI::Checkbox* cb_dont_localize_mapnames_;
 	bool has_translated_mapname_;
 
-	UI::Checkbox* cb_show_all_maps_;
+	UI::Button* show_all_maps_;
 	std::vector<UI::Checkbox*> tags_checkboxes_;
+
+	UI::Dropdown<std::string>* official_tags_dropdown_;
+
+	UI::Dropdown<std::string>* balancing_tags_dropdown_;
+	bool unspecified_balancing_found_;  // Backwards compatibility
+
+	UI::Dropdown<std::string>* team_tags_dropdown_;
 
 	std::vector<std::string> tags_ordered_;
 	std::set<uint32_t> req_tags_;

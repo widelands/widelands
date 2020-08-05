@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2019 by the Widelands Development Team
+ * Copyright (C) 2005-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,9 @@
 
 #include "sound/sound_handler.h"
 
-#include <cerrno>
 #include <memory>
 
 #include <SDL.h>
-#include <SDL_mixer.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif

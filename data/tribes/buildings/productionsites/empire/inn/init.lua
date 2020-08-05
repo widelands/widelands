@@ -43,10 +43,6 @@ tribes:new_productionsite_type {
       { name = "meat", amount = 6 },
       { name = "empire_bread", amount = 6 }
    },
-   outputs = {
-      "ration",
-      "meal"
-   },
 
    programs = {
       work = {
@@ -55,7 +51,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=produce_ration",
             "call=produce_meal",
-            "return=no_stats"
          }
       },
       produce_ration = {
@@ -66,8 +61,8 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ration",
             "consume=empire_bread,fish,meat",
             "playsound=sound/empire/taverns/ration 100",
-            "animate=working 23000",
-            "sleep=10000",
+            "animate=working duration:23s",
+            "sleep=duration:10s",
             "produce=ration"
          }
       },
@@ -79,8 +74,8 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs meal",
             "consume=empire_bread fish,meat",
             "playsound=sound/empire/taverns/meal 100",
-            "animate=working 30000",
-            "sleep=10000",
+            "animate=working duration:30s",
+            "sleep=duration:10s",
             "produce=meal"
          }
       },

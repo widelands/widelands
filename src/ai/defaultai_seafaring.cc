@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2019 by the Widelands Development Team
+ * Copyright (C) 2009-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,8 @@
 
 #include "ai/defaultai.h"
 
-#include "economy/fleet.h"
+#include "economy/ship_fleet.h"
+#include "economy/wares_queue.h"
 
 using namespace Widelands;
 
@@ -66,7 +67,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	// if we are here we put score
 	score = 1;
 	if (mineable_fields_count > 0) {
-		score += 1;
+		++score;
 	}
 
 	// here we check for surface rocks + trees
@@ -90,10 +91,10 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 		}
 	}
 	if (rocks > 1) {
-		score += 1;
+		++score;
 	}
 	if (trees > 1) {
-		score += 1;
+		++score;
 	}
 
 	return score;
@@ -125,10 +126,10 @@ bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
 	// goes over all warehouses (these includes ports)
 	for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 		if (wh_obs.bo->is(BuildingAttribute::kPort)) {
-			ports_count += 1;
+			++ports_count;
 			if (const Widelands::PortDock* pd = wh_obs.site->get_portdock()) {
 				if (pd->expedition_started()) {
-					expeditions_in_prep += 1;
+					++expeditions_in_prep;
 				}
 			}
 		}
@@ -137,7 +138,7 @@ bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
 	// goes over productionsites and gets status of shipyards
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
 		if (ps_obs.bo->is(BuildingAttribute::kShipyard)) {
-			shipyards_count += 1;
+			++shipyards_count;
 
 			// In very rare situation, we might have non-seafaring map but the shipyard is working
 			if (!map_allows_seafaring_ && !ps_obs.site->is_stopped()) {
@@ -170,7 +171,7 @@ bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
 	for (std::deque<ShipObserver>::iterator sp_iter = allships.begin(); sp_iter != allships.end();
 	     ++sp_iter) {
 		if (sp_iter->ship->state_is_expedition()) {
-			expeditions_in_progress += 1;
+			++expeditions_in_progress;
 		}
 	}
 
@@ -455,8 +456,8 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 }
 
 Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
-	return std::rand() % 20 < 10 ? Widelands::IslandExploreDirection::kClockwise :
-	                               Widelands::IslandExploreDirection::kCounterClockwise;
+	return std::rand() % 20 < 10 ? Widelands::IslandExploreDirection::kClockwise :  // NOLINT
+	          Widelands::IslandExploreDirection::kCounterClockwise;
 }
 
 // this is called whenever ship received a notification that requires
@@ -486,7 +487,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		    spot_score);
 
 		// we make a decision based on the score value and random
-		if (std::rand() % 8 < spot_score) {
+		if (std::rand() % 8 < spot_score) {  // NOLINT
 			// we build a port here
 			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().front());
 			so.last_command_time = gametime;
@@ -579,15 +580,15 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	assert(possible_directions.size() >= new_teritory_directions.size());
 
 	// If only open sea (no unexplored sea) is found, we don't always divert the ship
-	if (new_teritory_directions.empty() && std::rand() % 100 < 80) {
+	if (new_teritory_directions.empty() && std::rand() % 100 < 80) {  // NOLINT
 		return false;
 	}
 
 	if (!possible_directions.empty() || !new_teritory_directions.empty()) {
 		const Direction direction =
 		   !new_teritory_directions.empty() ?
-		      new_teritory_directions.at(std::rand() % new_teritory_directions.size()) :
-		      possible_directions.at(std::rand() % possible_directions.size());
+		      new_teritory_directions.at(std::rand() % new_teritory_directions.size()) :  // NOLINT
+		      possible_directions.at(std::rand() % possible_directions.size());           // NOLINT
 		game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(direction));
 
 		log("%d: %s: exploration - breaking for %s sea, dir=%u\n", pn,

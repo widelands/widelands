@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,10 @@ class FullscreenMenuMain : public FullscreenMenuMainMenu {
 public:
 	FullscreenMenuMain();
 
+	const std::string& get_filename_for_continue() const {
+		return filename_for_continue_;
+	}
+
 protected:
 	void clicked_ok() override;
 
@@ -42,6 +46,7 @@ private:
 	UI::Icon logo_icon_;
 	UI::Button playtutorial;
 	UI::Button singleplayer;
+	UI::Button continue_lastsave;
 	UI::Button multiplayer;
 	UI::Button replay;
 	UI::Button editor;
@@ -51,6 +56,8 @@ private:
 	UI::Textarea version;
 	UI::Textarea copyright;
 	UI::Textarea gpl;
+
+	std::string filename_for_continue_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H

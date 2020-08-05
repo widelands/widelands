@@ -42,9 +42,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 8 },
       { name = "wheat", amount = 8 }
    },
-   outputs = {
-      "barbarians_ox"
-   },
 
    programs = {
       work = {
@@ -53,9 +50,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs barbarians_ox",
             "consume=wheat water",
-            "sleep=15000",
+            "sleep=duration:15s",
             "playsound=sound/farm/ox 192",
-            "animate=working 15000", -- Animation of feeding the cattle
+            "animate=working duration:15s", -- Animation of feeding the cattle
             "recruit=barbarians_ox"
          }
       },

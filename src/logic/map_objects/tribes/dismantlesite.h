@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,6 @@
 #include "scripting/lua_table.h"
 
 namespace Widelands {
-
-class Building;
 
 /*
 DismantleSite
@@ -73,7 +71,8 @@ public:
 	                       const Coords&,
 	                       Player*,
 	                       bool,
-	                       FormerBuildings& former_buildings);
+	                       FormerBuildings& former_buildings,
+	                       const std::map<DescriptionIndex, Quantity>& preserved_wares);
 
 	bool burn_on_destroy() override;
 	bool init(EditorGameBase&) override;
@@ -92,11 +91,15 @@ protected:
 	}
 
 	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
+	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
+
+private:
+	std::map<DescriptionIndex, Quantity> preserved_wares_;
+	size_t next_dropout_index_;
 };
 }  // namespace Widelands
 

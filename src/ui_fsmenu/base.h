@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,6 @@
 
 #ifndef WL_UI_FSMENU_BASE_H
 #define WL_UI_FSMENU_BASE_H
-
-#include <string>
 
 #include "ui_basic/fullscreen_window.h"
 #include "ui_basic/panel.h"
@@ -42,6 +40,7 @@ public:
 		// Main menu
 		kTutorial,
 		kSinglePlayer,
+		kContinueLastsave,
 		kMultiplayer,
 		kReplay,
 		kEditor,

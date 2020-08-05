@@ -64,7 +64,7 @@ def _format_msgid(tag, string, output):
     # msg_ids. I decided not to fix it, since that wuold change a ton
     # of pot files and maybe msg_ids.
     # if not string.count('\n'): <== this was s.count
-        # s += 'msgid "%s"\n' % string
+    # s += 'msgid "%s"\n' % string
     # else:
     string = _escape_pot_string(string)
     output.append('%s ""' % tag)

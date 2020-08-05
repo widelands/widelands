@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    attributes = { "field" },
    programs = {
       program = {
-         "animate=idle 28000",
+         "animate=idle duration:28s",
          "transform=reedfield_medium",
       }
    },
@@ -19,7 +19,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 13, 12 },
+         hotspot = { 23, 20 },
       },
    }
 }

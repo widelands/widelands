@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,7 +59,10 @@ public:
 	int set_desired_speed(lua_State*);
 	int get_allow_saving(lua_State*);
 	int set_allow_saving(lua_State*);
+	int get_last_save_time(lua_State* L);
 	int get_type(lua_State*);
+	int get_scenario_difficulty(lua_State*);
+	int get_interactive_player(lua_State*);
 
 	/*
 	 * Lua methods
@@ -159,6 +162,7 @@ public:
 	 * Lua methods
 	 */
 	int new_carrier_type(lua_State* L);
+	int new_ferry_type(lua_State* L);
 	int new_constructionsite_type(lua_State* L);
 	int new_dismantlesite_type(lua_State* L);
 	int new_immovable_type(lua_State* L);
@@ -173,6 +177,7 @@ public:
 	int new_warehouse_type(lua_State* L);
 	int new_worker_type(lua_State* L);
 	int add_custom_building(lua_State* L);
+	int add_custom_worker(lua_State* L);
 
 	/*
 	 * C methods

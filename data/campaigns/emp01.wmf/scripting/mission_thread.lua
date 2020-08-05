@@ -1,7 +1,3 @@
-include "scripting/messages.lua"
-include "map:scripting/helper_functions.lua"
-include "scripting/field_animations.lua"
-
 function mission_thread()
    sleep(1000)
 

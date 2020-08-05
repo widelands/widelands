@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include "base/log.h"
 #include "base/md5.h"
+#include "base/random.h"
 #include "base/wexception.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
@@ -33,7 +34,6 @@
 #include "logic/game_data_error.h"
 #include "logic/playercommand.h"
 #include "logic/save_handler.h"
-#include "random/random.h"
 
 namespace Widelands {
 
@@ -130,11 +130,13 @@ ReplayReader::~ReplayReader() {
  * or 0 if there are no remaining commands before the given time.
  */
 Command* ReplayReader::get_next_command(const uint32_t time) {
-	if (!cmdlog_)
+	if (!cmdlog_) {
 		return nullptr;
+	}
 
-	if (static_cast<int32_t>(replaytime_ - time) > 0)
+	if (static_cast<int32_t>(replaytime_ - time) > 0) {
 		return nullptr;
+	}
 
 	try {
 		uint8_t pkt = cmdlog_->unsigned_8();
@@ -223,8 +225,9 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 	SaveHandler& save_handler = game_.save_handler();
 
 	std::string error;
-	if (!save_handler.save_game(game_, filename_ + kSavegameExtension, &error))
+	if (!save_handler.save_game(game_, filename_ + kSavegameExtension, &error)) {
 		throw wexception("Failed to save game for replay: %s", error.c_str());
+	}
 
 	log("Reloading the game from replay\n");
 	game.cleanup_for_load();

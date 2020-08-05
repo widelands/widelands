@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,24 +21,15 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WAREHOUSE_H
 
 #include "base/macros.h"
-#include "base/wexception.h"
 #include "economy/request.h"
-#include "economy/wares_queue.h"
+#include "economy/ware_instance.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
 
-class InteractivePlayer;
-
 namespace Widelands {
 
-class EditorGameBase;
 class PortDock;
-class Request;
-struct Requirements;
-class Soldier;
-class TribeDescr;
-class WareInstance;
 struct WareList;
 
 /*
@@ -154,7 +145,7 @@ public:
 
 	void act(Game& game, uint32_t data) override;
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	const WareList& get_wares() const;
 	const WareList& get_workers() const;
@@ -208,6 +199,9 @@ public:
 		return portdock_;
 	}
 
+	// Returns the first matching not completely filled waresqueue of the expedition if this is a
+	// port.
+	// Will throw an exception otherwise or if all queues of this type are full.
 	const BuildingSettings* create_building_settings() const override;
 
 	// Returns the waresqueue of the expedition if this is a port.

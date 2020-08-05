@@ -8,5 +8,5 @@ nr_players="4"
 name=_"Crossing the Horizon"
 author="Kristin – edited by 3plus4i"
 descr=_"Man your ship and sail to the horizon."
-hint=
-tags="2teams,artifacts,ffa,official,seafaring"
+hint=_"This map is not winnable with the ‘Autocrat’ win condition."
+tags="2teams,artifacts,balanced,ffa,official,seafaring"

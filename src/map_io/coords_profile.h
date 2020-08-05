@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,9 @@
 #ifndef WL_MAP_IO_COORDS_PROFILE_H
 #define WL_MAP_IO_COORDS_PROFILE_H
 
-#include <string>
-
 #include "logic/widelands_geometry.h"
+
+#include <string>
 
 class Section;
 

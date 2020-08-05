@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,6 @@
 
 #ifndef WL_UI_BASIC_SLIDER_H
 #define WL_UI_BASIC_SLIDER_H
-
-#include <boost/signals2.hpp>
 
 #include "graphic/styles/text_panel_style.h"
 #include "ui_basic/panel.h"
@@ -227,7 +225,7 @@ struct DiscreteSlider : public Panel {
 	               const uint32_t cursor_size = 20,
 	               const bool enabled = true);
 
-	void set_labels(std::vector<std::string>);
+	void set_labels(const std::vector<std::string>&);
 
 	boost::signals2::signal<void()> changed;
 	boost::signals2::signal<void(int32_t)> changedto;

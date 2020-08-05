@@ -16,17 +16,21 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 57500",
-         "remove=21",
+         "animate=idle duration:57s500ms",
+         "remove=success:21",
          "grow=maple_winter_pole",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
-         hotspot = { 5, 12 },
+         directory = dirname,
+         basename = "sapling",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 6, 13 }
+      }
    },
 }
 
@@ -39,17 +43,21 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 52500",
-         "remove=19",
+         "animate=idle duration:52s500ms",
+         "remove=success:19",
          "grow=maple_winter_mature",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pole/idle_?.png"),
-         hotspot = { 12, 28 },
+         directory = dirname,
+         basename = "pole",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 13, 29 }
+      }
    },
 }
 
@@ -62,17 +70,21 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 50000",
-         "remove=18",
+         "animate=idle duration:50s",
+         "remove=success:18",
          "grow=maple_winter_old",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "mature/idle_?.png"),
-         hotspot = { 18, 48 },
+         directory = dirname,
+         basename = "mature",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 19, 49 }
+      }
    },
 }
 
@@ -80,26 +92,30 @@ world:new_immovable_type{
    name = "maple_winter_old",
    descname = _ "Maple (Old)",
    species = _ "Maple",
-   icon = dirname .. "old/idle_0.png",
+   icon = dirname .. "menu.png",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 1550000",
-         "transform=deadtree4 39",
-         "seed=maple_winter_sapling",
+         "animate=idle duration:25m50s",
+         "transform=deadtree4 success:39",
+         "seed=maple_winter_sapling 240",
       },
       fall = {
          "remove=",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "old/idle_?.png"),
-         hotspot = { 23, 59 },
+         directory = dirname,
+         basename = "old",
          fps = 10,
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 24, 60 },
          sound_effect = {
             path = "sound/animals/bird4",
          },

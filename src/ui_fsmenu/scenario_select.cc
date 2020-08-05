@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,6 @@
 #include "ui_fsmenu/scenario_select.h"
 
 #include <memory>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/wexception.h"
@@ -65,6 +63,25 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
                UI::Align::kCenter,
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
      scenario_details_(this),
+     scenario_difficulty_header_(this,
+                                 0,
+                                 0,
+                                 0,
+                                 0,
+                                 is_tutorial_ ? "" : _("Difficulty"),
+                                 UI::Align::kLeft,
+                                 g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
+     scenario_difficulty_(this,
+                          "scenario_difficulty",
+                          0,
+                          0,
+                          200,
+                          8,
+                          24,
+                          "",
+                          UI::DropdownType::kTextual,
+                          UI::PanelStyle::kFsMenu,
+                          UI::ButtonStyle::kFsMenuSecondary),
      campaign_(camp) {
 
 	// Set subtitle of the page
@@ -92,13 +109,23 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
 	                                 _("Return to campaign selection"));
 	ok_.set_tooltip(is_tutorial_ ? _("Play this tutorial") : _("Play this scenario"));
 
-	ok_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuScenarioSelect::clicked_ok, boost::ref(*this)));
-	back_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuScenarioSelect::clicked_back, boost::ref(*this)));
-	table_.selected.connect(boost::bind(&FullscreenMenuScenarioSelect::entry_selected, this));
-	table_.double_clicked.connect(
-	   boost::bind(&FullscreenMenuScenarioSelect::clicked_ok, boost::ref(*this)));
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	table_.selected.connect([this](unsigned) { entry_selected(); });
+	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
+
+	if (is_tutorial_) {
+		scenario_difficulty_.set_visible(false);
+	} else {
+		uint32_t val = 0;
+		assert(campaign_);
+		assert(!campaign_->difficulties.empty());
+		for (const std::string& d : campaign_->difficulties) {
+			++val;  // We use values from 1 up because that's how Lua indexes arrays
+			scenario_difficulty_.add(d, val, nullptr, val == campaign_->default_difficulty);
+		}
+		scenario_difficulty_.set_enabled(val > 1);
+	}
 
 	std::string number_tooltip;
 	std::string name_tooltip;
@@ -118,6 +145,8 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
 	table_.focus();
 	fill_table();
 	layout();
+
+	table_.cancel.connect([this]() { clicked_back(); });
 }
 
 void FullscreenMenuScenarioSelect::layout() {
@@ -127,6 +156,14 @@ void FullscreenMenuScenarioSelect::layout() {
 	table_.set_pos(Vector2i(tablex_, tabley_));
 	scenario_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
 	scenario_details_.set_pos(Vector2i(right_column_x_, tabley_));
+	scenario_difficulty_.set_size(get_right_column_w(right_column_x_), scenario_difficulty_.get_h());
+	scenario_difficulty_.set_pos(
+	   Vector2i(right_column_x_, ok_.get_y() - padding_ - scenario_difficulty_.get_h()));
+	scenario_difficulty_header_.set_size(
+	   get_right_column_w(right_column_x_), scenario_difficulty_.get_h());
+	scenario_difficulty_header_.set_pos(Vector2i(
+	   right_column_x_,
+	   ok_.get_y() - padding_ - scenario_difficulty_.get_h() - scenario_difficulty_header_.get_h()));
 }
 
 std::string FullscreenMenuScenarioSelect::get_map() {
@@ -135,6 +172,10 @@ std::string FullscreenMenuScenarioSelect::get_map() {
 		                                        scenarios_data_.at(table_.get_selected()).path);
 	}
 	return "";
+}
+
+uint32_t FullscreenMenuScenarioSelect::get_difficulty() const {
+	return scenario_difficulty_.get_selected();
 }
 
 bool FullscreenMenuScenarioSelect::set_has_selection() {

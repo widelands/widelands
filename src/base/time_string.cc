@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,9 +21,6 @@
 
 #include <cassert>
 #include <ctime>
-#include <string>
-
-#include <stdint.h>
 
 #include "base/i18n.h"
 
@@ -92,67 +89,67 @@ std::string localize_month(int8_t month) {
 		/** TRANSLATORS: January. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Jan");
 	case 1:
 		/** TRANSLATORS: February. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Feb");
 	case 2:
 		/** TRANSLATORS: March. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Mar");
 	case 3:
 		/** TRANSLATORS: April. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Apr");
 	case 4:
 		/** TRANSLATORS: May. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("May");
 	case 5:
 		/** TRANSLATORS: June. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Jun");
 	case 6:
 		/** TRANSLATORS: July. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Jul");
 	case 7:
 		/** TRANSLATORS: August. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Aug");
 	case 8:
 		/** TRANSLATORS: September. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Sep");
 	case 9:
 		/** TRANSLATORS: October. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Oct");
 	case 10:
 		/** TRANSLATORS: November. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Nov");
 	case 11:
 		/** TRANSLATORS: December. Keep this to 4 letters maximum. */
@@ -185,8 +182,9 @@ std::string gametimestring(uint32_t gametime, bool show_seconds) {
 
 	// remove leading 0s
 	int i = 0;
-	while (result.at(i) == '0')
+	while (result.at(i) == '0') {
 		++i;
+	}
 	if (result.at(i) == ':') {
 		if (show_seconds) {
 			++i;

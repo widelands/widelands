@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,12 +21,9 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/graphic.h"
-#include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -37,7 +34,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/slider.h"
-#include "ui_basic/textarea.h"
 #include "wui/interactive_player.h"
 
 using namespace Widelands;
@@ -75,8 +71,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	std::unique_ptr<LuaTable> hook = game.lua().get_hook("custom_statistic");
 	std::string cs_name, cs_pic;
 	if (hook) {
+		i18n::Textdomain td("win_conditions");
 		hook->do_not_warn_about_unaccessed_keys();
-		cs_name = hook->get_string("name");
+		cs_name = _(hook->get_string("name"));
 		cs_pic = hook->get_string("pic");
 		ndatasets_++;
 	}
@@ -97,8 +94,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		if (hook) {
 			plot_.register_plot_data(i * ndatasets_ + 11, &genstats[i].custom_statistic, color);
 		}
-		if (game.get_player(i + 1))  // Show area plot
+		if (game.get_player(i + 1)) {  // Show area plot
 			plot_.show_plot(i * ndatasets_ + selected_information_, my_registry_->selected_players[i]);
+		}
 	}
 
 	plot_.set_time(my_registry_->time);
@@ -118,7 +116,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		UI::Button& cb =
 		   *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25, UI::ButtonStyle::kWuiMenu,
 		                   player_image, player->get_name().c_str());
-		cb.sigclicked.connect(boost::bind(&GeneralStatisticsMenu::cb_changed_to, this, p));
+		cb.sigclicked.connect([this, p]() { cb_changed_to(p); });
 		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
 
 		cbs_[p - 1] = &cb;
@@ -194,12 +192,12 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	}
 
 	radiogroup_.set_state(selected_information_);
-	radiogroup_.changedto.connect(boost::bind(&GeneralStatisticsMenu::radiogroup_changed, this, _1));
+	radiogroup_.changedto.connect([this](int32_t i) { radiogroup_changed(i); });
 
 	box_.add(hbox2, UI::Box::Resizing::kFullSize);
 
 	WuiPlotAreaSlider* slider = new WuiPlotAreaSlider(&box_, plot_, 0, 0, 100, 45);
-	slider->changedto.connect(boost::bind(&WuiPlotArea::set_time_id, &plot_, _1));
+	slider->changedto.connect([this](int32_t i) { plot_.set_time_id(i); });
 	box_.add(slider, UI::Box::Resizing::kFullSize);
 }
 
@@ -233,11 +231,12 @@ void GeneralStatisticsMenu::cb_changed_to(int32_t const id) {
 void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
 	size_t const statistics_size =
 	   dynamic_cast<InteractiveGameBase&>(*get_parent()).game().get_general_statistics().size();
-	for (uint32_t i = 0; i < statistics_size; ++i)
+	for (uint32_t i = 0; i < statistics_size; ++i) {
 		if (cbs_[i]) {
 			plot_.show_plot(
 			   i * ndatasets_ + id, cbs_[i]->style() == UI::Button::VisualState::kPermpressed);
 			plot_.show_plot(i * ndatasets_ + selected_information_, false);
 		}
+	}
 	selected_information_ = id;
 }

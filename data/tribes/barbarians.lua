@@ -1,14 +1,30 @@
 image_dirname = path.dirname(__file__) .. "images/barbarians/"
 
-animations = {}
-add_animation(animations, "frontier", image_dirname, "frontier", {1, 19})
-add_animation(animations, "flag", image_dirname, "flag", {10, 38}, 5)
-
 tribes:new_tribe {
    name = "barbarians",
-   animations = animations,
+   animation_directory = image_dirname,
+   animations = {
+      frontier = { hotspot = {1, 19} },
+      bridge_normal_e = { hotspot = {-1, 13} },
+      bridge_busy_e = { hotspot = {-1, 13} },
+      bridge_normal_se = { hotspot = {8, 3} },
+      bridge_busy_se = { hotspot = {8, 3} },
+      bridge_normal_sw = { hotspot = {41, 3} },
+      bridge_busy_sw = { hotspot = {41, 3} }
+   },
+   spritesheets = {
+      flag = {
+         fps = 5,
+         frames = 16,
+         columns = 4,
+         rows = 4,
+         hotspot = { 11, 39 }
+      }
+   },
 
-   -- Image file paths for this tribe's road textures
+   bridge_height = 8,
+
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          image_dirname .. "roadt_busy.png",
@@ -16,6 +32,9 @@ tribes:new_tribe {
       normal = {
          image_dirname .. "roadt_normal_00.png",
          image_dirname .. "roadt_normal_01.png",
+      },
+      waterway = {
+         "tribes/images/barbarians/waterway_0.png",
       },
    },
 
@@ -112,6 +131,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "barbarians_carrier",
+         "barbarians_ferry",
          "barbarians_ox",
          "barbarians_cattlebreeder"
       },
@@ -219,13 +239,11 @@ tribes:new_tribe {
       "barbarians_metal_workshop",
       "barbarians_warmill",
       "barbarians_ax_workshop",
-      "barbarians_shipyard",
       "barbarians_barracks",
 
       -- Big
       "barbarians_cattlefarm",
       "barbarians_farm",
-      "barbarians_weaving_mill",
       "barbarians_helmsmithy",
 
       -- Mines
@@ -251,46 +269,58 @@ tribes:new_tribe {
       "barbarians_fortress",
       "barbarians_citadel",
 
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "barbarians_ferry_yard",
+      "barbarians_shipyard",
+      "barbarians_weaving_mill",
+
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
    },
 
    ship_names = {
-      "Agilaz",
-      "Aslaug",
-      "Baldr",
-      "Bear",
-      "Beowulf",
-      "Boldreth",
-      "Dellingr",
-      "Fulla",
-      "Gersemi",
-      "Hagbard",
-      "Heidrek",
-      "Heimdallr",
-      "Hnoss",
-      "Hrothgar",
-      "Ingeld",
-      "Karl Hundason",
-      "Khantrukh",
-      "Lynx",
-      "Mani",
-      "Odin",
-      "Red Fox",
-      "Saxnot",
-      "Sigmund",
-      "Sigurd",
-      "Snotra",
-      "Thor",
-      "Thron",
-      "Ullr",
-      "Valdar",
-      "Vili",
-      "Volf",
-      "Wild Boar",
-      "Wolverine",
-      "Yrsa",
+      pgettext("shipname", "Agilaz"),
+      pgettext("shipname", "Aslaug"),
+      pgettext("shipname", "Baldr"),
+      pgettext("shipname", "Bear"),
+      pgettext("shipname", "Beowulf"),
+      -- TRANSLATORS: This Barbarian ship is named after an in-game character
+      pgettext("shipname", "Boldreth"),
+      -- TRANSLATORS: This Barbarian ship is named after an in-game character
+      pgettext("shipname", "Chat’Karuth"),
+      pgettext("shipname", "Dellingr"),
+      pgettext("shipname", "Fulla"),
+      pgettext("shipname", "Gersemi"),
+      pgettext("shipname", "Hagbard"),
+      pgettext("shipname", "Heidrek"),
+      pgettext("shipname", "Heimdallr"),
+      pgettext("shipname", "Hnoss"),
+      pgettext("shipname", "Hrothgar"),
+      pgettext("shipname", "Ingeld"),
+      pgettext("shipname", "Karl Hundason"),
+      -- TRANSLATORS: This Barbarian ship is named after an in-game character
+      pgettext("shipname", "Khantrukh"),
+      pgettext("shipname", "Lynx"),
+      pgettext("shipname", "Mani"),
+      pgettext("shipname", "Odin"),
+      pgettext("shipname", "Red Fox"),
+      -- TRANSLATORS: This Barbarian ship is mentioned in some lore texts
+      pgettext("shipname", "Saxnot"),
+      pgettext("shipname", "Sigmund"),
+      -- TRANSLATORS: This Barbarian ship is named after a barbarian bard
+      pgettext("shipname", "Sigurd"),
+      pgettext("shipname", "Snotra"),
+      pgettext("shipname", "Thor"),
+      -- TRANSLATORS: This Barbarian ship is named after an in-game character
+      pgettext("shipname", "Thron"),
+      pgettext("shipname", "Ullr"),
+      pgettext("shipname", "Valdar"),
+      pgettext("shipname", "Vili"),
+      pgettext("shipname", "Volf"),
+      pgettext("shipname", "Wild Boar"),
+      pgettext("shipname", "Wolverine"),
+      pgettext("shipname", "Yrsa"),
    },
 
    -- Special types
@@ -300,9 +330,6 @@ tribes:new_tribe {
    geologist = "barbarians_geologist",
    soldier = "barbarians_soldier",
    ship = "barbarians_ship",
+   ferry = "barbarians_ferry",
    port = "barbarians_port",
-   ironore = "iron_ore",
-   rawlog = "log",
-   refinedlog = "blackwood",
-   granite = "granite",
 }

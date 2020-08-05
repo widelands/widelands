@@ -91,9 +91,10 @@ wl_library(editor
     base_i18n
     base_log
     base_macros
-    base_scoped_timer
+    base_random
     graphic
     graphic_fonthandler
+    graphic_mouse_cursor
     graphic_playercolor
     graphic_surface
     graphic_text_layout
@@ -109,14 +110,12 @@ wl_library(editor
     logic_widelands_geometry
     map_io
     map_io_map_loader
-    notifications
-    random
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
+    sound
     ui_basic
     widelands_options
     wui
     wui_common_mapdetails
-    wui_mapview_pixelfunctions
 )

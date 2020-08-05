@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,15 +21,10 @@
 #define WL_NETWORK_INTERNET_GAMING_H
 
 #include <memory>
-#include <string>
-#include <vector>
 
-#include "build_info.h"
 #include "chat/chat.h"
-#include "network/internet_gaming_protocol.h"
 #include "network/netclient.h"
 #include "network/network.h"
-#include "network/network_lan_promotion.h"
 
 /// A simple network client struct
 struct InternetClient {
@@ -200,7 +195,7 @@ struct InternetGaming : public ChatProvider {
 	                         bool system,
 	                         const std::string& msg);
 
-	bool valid_username(std::string);
+	bool valid_username(const std::string&);
 
 private:
 	InternetGaming();
@@ -223,7 +218,7 @@ private:
 	void handle_failed_read();
 
 	// conversion functions
-	bool str2bool(std::string);
+	bool str2bool(const std::string&);
 	std::string bool2str(bool);
 
 	/**

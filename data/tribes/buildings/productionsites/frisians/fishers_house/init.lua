@@ -19,16 +19,23 @@ tribes:new_productionsite_type {
       log = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 87},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {40, 70},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 64},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {40, 52}
+      }
    },
 
    aihints = {
@@ -37,16 +44,8 @@ tribes:new_productionsite_type {
       prohibited_till = 490
    },
 
-   indicate_workarea_overlaps = {
-      frisians_fishers_house = false,
-   },
-
    working_positions = {
       frisians_fisher = 1
-   },
-
-   outputs = {
-      "fish"
    },
 
    programs = {
@@ -55,7 +54,7 @@ tribes:new_productionsite_type {
          descname = _"fishing",
          actions = {
             "callworker=fish",
-            "sleep=16000" -- TODO(stonerl): reduce to 3000 and move 13000 to the worker
+            "sleep=duration:16s" -- TODO(stonerl): reduce to 3s and move 13s to the worker
          }
       },
    },

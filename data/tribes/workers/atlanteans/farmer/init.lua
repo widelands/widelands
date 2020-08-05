@@ -41,20 +41,20 @@ tribes:new_worker_type {
 
    programs = {
       plant = {
-         "findspace=size:any radius:2",
+         "findspace=size:any radius:2 space",
          "walk=coords",
-         "animate=planting 6000",
+         "animate=planting duration:6s",
          "plant=attrib:seed_corn",
-         "animate=planting 6000",
+         "animate=planting duration:6s",
          "return"
       },
       harvest = {
          "findobject=attrib:ripe_corn radius:2",
          "walk=object",
          "playsound=sound/farm/scythe 220",
-         "animate=harvesting 10000",
+         "animate=harvesting duration:10s",
          "callobject=harvest",
-         "animate=gathering 4000",
+         "animate=gathering duration:4s",
          "createware=corn",
          "return"
       }
