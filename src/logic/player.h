@@ -709,17 +709,13 @@ private:
 	PlayerBuildingStats building_stats_;
 
 	struct SoldierStatistics {
-		const unsigned h, a, d, e;
+		const unsigned health, attack, defense, evade;
 		Quantity total;
-		SoldierStatistics(unsigned _h, unsigned _a, unsigned _d, unsigned _e)
-		   : h(_h), a(_a), d(_d), e(_e), total(0) {
+		SoldierStatistics(unsigned h, unsigned a, unsigned d, unsigned e)
+		   : health(h), attack(a), defense(d), evade(e), total(0) {
 		}
 		bool operator==(const SoldierStatistics& s) const {
-			return s.h == h && s.a == a && s.d == d && s.e == e;
-		}
-		bool operator<(const SoldierStatistics& s) const {
-			return h != s.h ? h < s.h :
-			                  a != s.a ? a < s.a : d != s.d ? d < s.d : e != s.e ? e < s.e : false;
+			return s.health == health && s.attack == attack && s.defense == defense && s.evade == evade;
 		}
 	};
 	std::vector<SoldierStatistics> soldier_stats_;

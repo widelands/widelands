@@ -1575,7 +1575,7 @@ uint32_t Player::count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) 
 uint32_t Player::count_soldiers_h(unsigned value) const {
 	uint32_t s = 0;
 	for (const SoldierStatistics& ss : soldier_stats_) {
-		if (ss.h == value) {
+		if (ss.health == value) {
 			s += ss.total;
 		}
 	}
@@ -1584,7 +1584,7 @@ uint32_t Player::count_soldiers_h(unsigned value) const {
 uint32_t Player::count_soldiers_a(unsigned value) const {
 	uint32_t s = 0;
 	for (const SoldierStatistics& ss : soldier_stats_) {
-		if (ss.a == value) {
+		if (ss.attack == value) {
 			s += ss.total;
 		}
 	}
@@ -1593,7 +1593,7 @@ uint32_t Player::count_soldiers_a(unsigned value) const {
 uint32_t Player::count_soldiers_d(unsigned value) const {
 	uint32_t s = 0;
 	for (const SoldierStatistics& ss : soldier_stats_) {
-		if (ss.d == value) {
+		if (ss.defense == value) {
 			s += ss.total;
 		}
 	}
@@ -1602,7 +1602,7 @@ uint32_t Player::count_soldiers_d(unsigned value) const {
 uint32_t Player::count_soldiers_e(unsigned value) const {
 	uint32_t s = 0;
 	for (const SoldierStatistics& ss : soldier_stats_) {
-		if (ss.e == value) {
+		if (ss.evade == value) {
 			s += ss.total;
 		}
 	}
