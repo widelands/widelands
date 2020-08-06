@@ -613,6 +613,14 @@ public:
 
 	const std::string pick_shipname();
 
+	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
+	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
+	uint32_t count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const;
+	uint32_t count_soldiers_h(unsigned) const;
+	uint32_t count_soldiers_a(unsigned) const;
+	uint32_t count_soldiers_d(unsigned) const;
+	uint32_t count_soldiers_e(unsigned) const;
+
 	bool is_muted(DescriptionIndex di) const {
 		return muted_building_types_.count(di);
 	}
@@ -699,6 +707,19 @@ private:
 	std::set<PlayerNumber> forbid_attack_;
 
 	PlayerBuildingStats building_stats_;
+
+	struct SoldierStatistics {
+		const unsigned health, attack, defense, evade;
+		Quantity total;
+		SoldierStatistics(unsigned h, unsigned a, unsigned d, unsigned e)
+		   : health(h), attack(a), defense(d), evade(e), total(0) {
+		}
+		bool operator==(const SoldierStatistics& s) const {
+			return s.health == health && s.attack == attack && s.defense == defense &&
+			       s.evade == evade;
+		}
+	};
+	std::vector<SoldierStatistics> soldier_stats_;
 
 	FxId message_fx_;
 	FxId attack_fx_;

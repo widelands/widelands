@@ -503,9 +503,9 @@ static const char* unit_suffixes[] = {
    /** TRANSLATORS: This is a large number with a suffix (e.g. 5G = 5,000,000,000). */
    /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
    _("%1%G")};
-static std::string get_amount_string(uint32_t amount) {
+std::string get_amount_string(uint32_t amount, bool cutoff1k) {
 	uint8_t size = 0;
-	while (amount >= (size ? 1000 : 10000)) {
+	while (amount >= (size || cutoff1k ? 1000 : 10000)) {
 		amount /= 1000;
 		size++;
 	}
