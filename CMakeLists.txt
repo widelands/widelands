@@ -103,7 +103,6 @@ find_package(Boost 1.48
   REQUIRED
     system)
 
-find_package (Cygwin REQUIRED)  # NOCOM
 find_package (PythonInterp REQUIRED)
 
 find_package(Gettext REQUIRED)
