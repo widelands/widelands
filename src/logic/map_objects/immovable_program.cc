@@ -193,19 +193,19 @@ transform
       If the ``bob:<name>`` flag is given, the transformation target is a bob;
       otherwise it is an immovable. Currently, only ships are supported as bobs.
 
-   :arg percent chance: The :ref:`map_object_programs_datatypes_percent` chance that the transformation will be performed.
-      The game will generate a random number and the transformation will be performed if and only
-      if this number is less than ``chance``.
-      If ``chance:<percent>`` is omitted, the transformation will always be performed.
+   :arg percent chance: The :ref:`map_object_programs_datatypes_percent` chance that the
+transformation will be performed. The game will generate a random number and the transformation will
+be performed if and only if this number is less than ``chance``. If ``chance:<percent>`` is omitted,
+the transformation will always be performed.
 
    Deletes this immovable and instantly replaces it with a different immovable or a bob. If
    ``chance`` is specified, there's a probability that the transformation will be skipped.
-   When the transformation succeeds, no further program steps will be executed, because this object will be gone.
-   Example:
+   When the transformation succeeds, no further program steps will be executed, because this object
+will be gone. Example:
 
 .. code-block:: lua
 
-	  program = {
+     program = {
          "animate=idle duration:25m50s",
          "transform=deadtree3 chance:9.37%",
          "seed=spruce_summer_sapling 200", -- This line will be skipped if the removal succeeds
@@ -354,14 +354,14 @@ remove
 
 .. function:: remove=[chance:\<percent\>]
 
-   :arg percent chance: The :ref:`map_object_programs_datatypes_percent` chance that the immovable will be removed. The
-      game will generate a random number and the immovable will be removed if and only
-      if this number is less than ``chance``.
-      If ``chance:<percent>`` is omitted, the immovable will always be removed.
+   :arg percent chance: The :ref:`map_object_programs_datatypes_percent` chance that the immovable
+will be removed. The game will generate a random number and the immovable will be removed if and
+only if this number is less than ``chance``. If ``chance:<percent>`` is omitted, the immovable will
+always be removed.
 
-   Remove this immovable. If ``chance`` is specified, there's a probability that the removal will be skipped.
-   When the removal succeeds, no further program steps will be executed, because this object will be gone.
-   Examples:
+   Remove this immovable. If ``chance`` is specified, there's a probability that the removal will be
+skipped. When the removal succeeds, no further program steps will be executed, because this object
+will be gone. Examples:
 
 .. code-block:: lua
 
@@ -370,7 +370,7 @@ remove
          "remove=chance:16.41%",
          "grow=spruce_summer_pole", -- This line will be skipped if the removal succeeds
       },
-	  fall = {
+     fall = {
          "remove=", -- This object will always be removed when 'fall' is called
       },
 */

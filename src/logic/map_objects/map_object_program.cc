@@ -245,19 +245,19 @@ unsigned MapObjectProgram::read_percent_to_int(const std::string& input) {
 	if (boost::regex_search(input, match, re)) {
 		// Convert to range
 		unsigned long result =
-				100U * std::stoul(match[1]) +
-				(match[3].str().empty() ?
-					0U :
-					match[3].str().size() == 1 ?
-					10U * std::stoul(match[3]) :
-			std::stoul(match[3]));
+		   100U * std::stoul(match[1]) +
+		   (match[3].str().empty() ?
+		       0U :
+		       match[3].str().size() == 1 ? 10U * std::stoul(match[3]) : std::stoul(match[3]));
 
 		if (result > kMaxProbability) {
 			throw GameDataError("Percentage '%s' greater than 100%% given", input.c_str());
 		}
 		return result;
 	}
-	throw GameDataError("Wrong format for percentage '%s'. Must look like '25%%', '25.4%%' or '25.26%%'.", input.c_str());
+	throw GameDataError(
+	   "Wrong format for percentage '%s'. Must look like '25%%', '25.4%%' or '25.26%%'.",
+	   input.c_str());
 }
 
 MapObjectProgram::ProgramParseInput
