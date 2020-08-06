@@ -116,23 +116,23 @@ def main():
             'Usage: check_clang_tidy_results.py <log_file>')
         return 1
 
-    log_file = sys.argv[1]
+    log_file=sys.argv[1]
 
-    errors = 0
+    errors=0
 
     with open(log_file) as checkme:
-        contents = checkme.readlines()
+        contents=checkme.readlines()
         for line in contents:
             if 'third_party' in line:
                 continue
-            check_suppressed = False
+            check_suppressed=False
             for check in SUPPRESSED_CHECKS:
                 if check in line:
-                    check_suppressed = True
+                    check_suppressed=True
                     break
             if not check_suppressed and CHECK_REGEX.match(line):
                 print(line.strip())
-                errors = errors + 1
+                errors=errors + 1
 
     if errors > 0:
         print('########################################################')
