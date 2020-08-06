@@ -303,7 +303,6 @@ void EditorGameBase::postload() {
 	step_loader_ui(_("Postloading world and tribes…"));
 
 	assert(tribes_);
-	world_->postload();
 	tribes_->postload();
 	assert(world_);
 	world_->postload();

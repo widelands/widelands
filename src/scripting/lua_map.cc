@@ -2141,7 +2141,6 @@ int LuaImmovableDescription::get_buildcost(lua_State* L) {
          ``{"atlanteans_ship"}`` or ``{"deadtree2", "fallentree"}``.
 */
 int LuaImmovableDescription::get_becomes(lua_State* L) {
-	// NOCOM
 	lua_newtable(L);
 	int counter = 0;
 	for (const auto& target : get()->becomes()) {
