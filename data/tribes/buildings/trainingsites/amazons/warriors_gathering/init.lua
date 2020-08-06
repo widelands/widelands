@@ -27,21 +27,19 @@ tribes:new_trainingsite_type {
       rope = 1,
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 91},
-         fps = 10,
-      },
+      idle = {hotspot = {43, 54}},
+      unoccupied = {hotspot = {43, 54}},
+   },
+   spritesheets = {
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 91},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 69},
-      },
+         hotspot = {43, 54},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      }
    },
 
    aihints = {
