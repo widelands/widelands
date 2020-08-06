@@ -16,7 +16,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 55s",
+         "animate=idle duration:55s",
          "remove=success:42",
          "grow=spruce_summer_pole",
       },
