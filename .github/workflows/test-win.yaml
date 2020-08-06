@@ -13,11 +13,11 @@ jobs:
     steps:
     - name: Installing dependencies
       run: |
-        $env:Path += ";C:/msys64/usr/bin"
+        $env:Path += ";C:/msys64/usr/bin;C:/msys64/mingw64/bin;C:/msys64/mingw64/lib;C:/msys64/mingw64/include"
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -S mingw-w64-x86_64-ninja mingw-w64-x86_64-boost mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glbinding
-        dir C:/msys64 *.lib -recurse  # NOCOM
+        dir C:/msys64 *dll* -recurse  # NOCOM
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -26,7 +26,6 @@ jobs:
       run: |
         mkdir build
         cd build
-        $env:Path += ";C:/msys64/mingw64/bin;C:/msys64/mingw64/lib;C:/msys64/mingw64/include"
         $env:CC = "C:/msys64/mingw64/bin/clang.exe"
         $env:CXX = "C:/msys64/mingw64/bin/clang++.exe"
         cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DOPTION_USE_GLBINDING=ON -DPNG_LIBRARY_RELEASE=C:/msys64/mingw64/lib/libpng.dll.a -DZLIB_LIBRARY_RELEASE=C:/msys64/mingw64/lib/libz.dll.a -DBoost_NO_BOOST_CMAKE=ON
