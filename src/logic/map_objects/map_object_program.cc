@@ -243,8 +243,15 @@ unsigned MapObjectProgram::read_percent_to_range(const std::string& input, unsig
 	boost::smatch match;
 	boost::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
 	if (boost::regex_search(input, match, re)) {
-		// NOCOM Bug! Check for string length of second parameter.
-		unsigned long result = 100 * std::stoul(match[1]) + (match[3].str().empty() ? 0U : std::stoul(match[3]));
+		// Convert to range
+		unsigned long result =
+				100U * std::stoul(match[1]) +
+				(match[3].str().empty() ?
+					0U :
+					match[3].str().size() == 1 ?
+					10U * std::stoul(match[3]) :
+			std::stoul(match[3]));
+
 		if (result > range) {
 			throw GameDataError("Percentage '%s' greater than 100%% given", input.c_str());
 		}
