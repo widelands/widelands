@@ -17,7 +17,6 @@
  *
  */
 
-#define SDL_MAIN_HANDLED 1
 #define BOOST_TEST_MODULE Notifications
 #include <boost/test/unit_test.hpp>
 
