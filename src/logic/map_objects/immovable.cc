@@ -134,7 +134,7 @@ ImmovableDescr IMPLEMENTATION
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
                                MapObjectDescr::OwnerType input_type,
-                               const std::vector<std::string>& attributes)
+                               const std::vector<std::string>& attribs)
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
      size_(BaseImmovable::NONE),
      owner_type_(input_type),
@@ -157,10 +157,10 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	if (table.has_key("attributes") && input_type == Widelands::MapObjectDescr::OwnerType::kTribe) {
 		throw GameDataError("Tribe attributes need to be defined in 'register.lua' now");
 	}
-	if (!attributes.empty()) {
-		add_attributes(attributes);
+	if (!attribs.empty()) {
+		add_attributes(attribs);
 
-		for (const std::string& attribute : attributes) {
+		for (const std::string& attribute : attribs) {
 			if (attribute == "resi") {
 				// All resource indicators must have a menu icon
 				if (icon_filename().empty()) {
@@ -172,7 +172,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 
 		// Old trees get an extra species name so we can use it in help lists.
 		bool is_tree = false;
-		for (const std::string& attribute : attributes) {
+		for (const std::string& attribute : attribs) {
 			if (attribute == "tree") {
 				is_tree = true;
 				break;
@@ -211,9 +211,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               const std::vector<std::string>& attributes,
+                               const std::vector<std::string>& attribs,
                                const World& world)
-   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld, attributes) {
+   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld, attribs) {
 
 	const DescriptionIndex editor_category_index =
 	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
