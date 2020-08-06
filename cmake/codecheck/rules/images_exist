@@ -33,10 +33,14 @@ def evaluate_matches(lines, fn):
                     # Let's not deal with assembled filenames like
                     # "images/wui/editor/editor_menu_tool_" pic ".png" or
                     # "images/" + image_basename + ".png" for now
+                    print("\nSkip: " + image_file)
                     continue
 
                 if (not (os.path.exists(image_file) and os.path.isfile(image_file))):
                     errors.append([fn, lineno, 'Image file does not exist: %s' % os.path.join("data", match)])
+                    print("\nError: " + image_file)
+                else:
+                    print("\nOK: " + image_file)
 
         else:
             # Collect image variable names
