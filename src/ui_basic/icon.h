@@ -45,10 +45,15 @@ struct Icon : public Panel {
 
 	void draw(RenderTarget&) override;
 
+	void set_grey_out(bool g) {
+		grey_out_ = g;
+	}
+
 private:
 	const Image* pic_;
 	bool draw_frame_;
 	RGBColor framecolor_;
+	bool grey_out_;
 };
 }  // namespace UI
 
