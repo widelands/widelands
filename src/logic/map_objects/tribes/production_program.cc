@@ -911,10 +911,10 @@ ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
 	}
 	const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
 	if (item.first == "duration") {
-		duration_ = read_duration(item.second);
+		duration_ = read_duration(item.second, psite);
 	} else if (item.second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove after v1.0
-		duration_ = read_duration(item.first);
+		duration_ = read_duration(item.first, psite);
 		log("WARNING: 'sleep' program without parameter name is deprecated, please use "
 		    "'sleep=duration:<duration>' in %s\n",
 		    psite.name().c_str());
