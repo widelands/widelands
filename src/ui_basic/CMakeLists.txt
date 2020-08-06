@@ -51,7 +51,6 @@ wl_library(ui_basic
     unique_window.h
     window.cc
     window.h
-  USES_BOOST_REGEX
   USES_SDL2
   DEPENDS
     base_exceptions
@@ -64,6 +63,7 @@ wl_library(ui_basic
     graphic_align
     graphic_color
     graphic_fonthandler
+    graphic_mouse_cursor
     graphic_styles
     graphic_surface
     graphic_text

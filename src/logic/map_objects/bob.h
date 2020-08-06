@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,21 +23,17 @@
 #include "base/macros.h"
 #include "base/vector.h"
 #include "economy/route.h"
-#include "graphic/animation.h"
-#include "graphic/diranimations.h"
-#include "logic/map_objects/draw_text.h"
+#include "graphic/animation/diranimations.h"
+#include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/map_object_program.h"
 #include "logic/map_objects/walkingdir.h"
+#include "logic/path.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
 class Bob;
-class Map;
-struct Route;
-struct Transfer;
-class TribeDescr;
 
 /**
  * Implement MapObjectDescr for the following \ref Bob class.
@@ -254,7 +250,7 @@ public:
 	// starting field) in pixel space of 'dst' (including scale). The 'scale' is
 	// required to draw the bob in the right size.
 	virtual void draw(const EditorGameBase&,
-	                  const TextToDraw& draw_text,
+	                  const InfoToDraw& info_to_draw,
 	                  const Vector2f& field_on_dst,
 	                  const Coords& coords,
 	                  float scale,
@@ -268,7 +264,7 @@ public:
 
 	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game&, char const*);
-	void start_task_idle(Game&, uint32_t anim, int32_t timeout);
+	void start_task_idle(Game&, uint32_t anim, int32_t timeout, Vector2i offset = Vector2i::zero());
 	bool is_idle();
 
 	/// This can fail (and return false). Therefore the caller must check the

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,10 +19,7 @@
 
 #include <memory>
 
-#include <SDL.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -32,6 +29,8 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/world.h"
@@ -102,10 +101,15 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 				}
 			}
 			// Produces workers
-			if (productionsite->output_worker_types().size() > 0) {
+			if (productionsite->output_worker_types().size() > 0 ||
+			    productionsite->type() == Widelands::MapObjectType::TRAININGSITE) {
 				JSON::Array* json_workers_array = json_building->add_array("produced_workers");
 				for (DescriptionIndex worker_index : productionsite->output_worker_types()) {
 					json_workers_array->add_empty(tribe.get_worker_descr(worker_index)->name());
+				}
+				// Trainingsites
+				if (productionsite->type() == Widelands::MapObjectType::TRAININGSITE) {
+					json_workers_array->add_empty(tribe.get_worker_descr(tribe.soldier())->name());
 				}
 			}
 

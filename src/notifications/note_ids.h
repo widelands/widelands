@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #ifndef WL_NOTIFICATIONS_NOTE_IDS_H
 #define WL_NOTIFICATIONS_NOTE_IDS_H
 
-#include <stdint.h>
+#include <cstdint>
 
 // List all note ids here. They must be unique in the running
 // system, this is easier to guarantee when they are all listed in

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ Request::Request(PlayerImmovable& init_target,
      target_productionsite_(dynamic_cast<ProductionSite*>(&init_target)),
      target_warehouse_(dynamic_cast<Warehouse*>(&init_target)),
      target_constructionsite_(dynamic_cast<ConstructionSite*>(&init_target)),
-     economy_(init_target.get_economy()),
+     economy_(init_target.get_economy(w)),
      index_(index),
      count_(1),
      exact_match_(false),
@@ -66,25 +66,30 @@ Request::Request(PlayerImmovable& init_target,
      required_interval_(0),
      last_request_time_(required_time_) {
 	assert(type_ == wwWARE || type_ == wwWORKER);
-	if (w == wwWARE && !init_target.owner().egbase().tribes().ware_exists(index))
+	if (w == wwWARE && !init_target.owner().egbase().tribes().ware_exists(index)) {
 		throw wexception(
 		   "creating ware request with index %u, but the ware for this index doesn't exist", index);
-	if (w == wwWORKER && !init_target.owner().egbase().tribes().worker_exists(index))
+	}
+	if (w == wwWORKER && !init_target.owner().egbase().tribes().worker_exists(index)) {
 		throw wexception(
 		   "creating worker request with index %u, but the worker for this index doesn't exist",
 		   index);
-	if (economy_)
+	}
+	if (economy_) {
 		economy_->add_request(*this);
+	}
 }
 
 Request::~Request() {
 	// Remove from the economy
-	if (is_open() && economy_)
+	if (is_open() && economy_) {
 		economy_->remove_request(*this);
+	}
 
 	// Cancel all ongoing transfers
-	while (transfers_.size())
+	while (transfers_.size()) {
 		cancel_transfer(0);
+	}
 }
 
 // Modified to allow Requirements and SoldierRequests
@@ -121,6 +126,14 @@ void Request::read(FileRead& fr,
 					throw wexception("Request::read: unknown type '%s'.\n", type_name);
 				}
 			}
+
+			// Overwrite initial economy because our WareWorker type may have changed
+			if (economy_) {
+				economy_->remove_request(*this);
+			}
+			economy_ = target_.get_economy(type_);
+			assert(economy_);
+
 			count_ = fr.unsigned_32();
 			required_time_ = fr.unsigned_32();
 			required_interval_ = fr.unsigned_32();
@@ -130,7 +143,7 @@ void Request::read(FileRead& fr,
 			assert(transfers_.empty());
 
 			uint16_t const nr_transfers = fr.unsigned_16();
-			for (uint16_t i = 0; i < nr_transfers; ++i)
+			for (uint16_t i = 0; i < nr_transfers; ++i) {
 				try {
 					MapObject* obj = &mol.get<MapObject>(fr.unsigned_32());
 					Transfer* transfer;
@@ -159,9 +172,11 @@ void Request::read(FileRead& fr,
 				} catch (const WException& e) {
 					throw wexception("transfer %u: %s", i, e.what());
 				}
+			}
 			requirements_.read(fr, game, mol);
-			if (!is_open() && economy_)
-				economy_->remove_request(*this);
+			if (is_open()) {
+				economy_->add_request(*this);
+			}
 		} else {
 			throw UnhandledVersionError("Request", packet_version, kCurrentPacketVersion);
 		}
@@ -179,12 +194,15 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 	//  Target and economy should be set. Same is true for callback stuff.
 
 	assert(type_ == wwWARE || type_ == wwWORKER);
-	if (type_ == wwWARE) {
+	switch (type_) {
+	case wwWARE:
 		assert(game.tribes().ware_exists(index_));
 		fw.c_string(game.tribes().get_ware_descr(index_)->name());
-	} else if (type_ == wwWORKER) {
+		break;
+	case wwWORKER:
 		assert(game.tribes().worker_exists(index_));
 		fw.c_string(game.tribes().get_worker_descr(index_)->name());
+		break;
 	}
 
 	fw.unsigned_32(count_);
@@ -229,12 +247,14 @@ int32_t Request::get_base_required_time(EditorGameBase& egbase, uint32_t const n
 	}
 	int32_t const curtime = egbase.get_gametime();
 
-	if (!nr || !required_interval_)
+	if (!nr || !required_interval_) {
 		return required_time_;
+	}
 
 	if ((curtime - required_time_) > (required_interval_ * 2)) {
-		if (nr == 1)
+		if (nr == 1) {
 			return required_time_ + (curtime - required_time_) / 2;
+		}
 
 		assert(2 <= nr);
 		return curtime + (nr - 2) * required_interval_;
@@ -270,9 +290,9 @@ int32_t Request::get_priority(int32_t cost) const {
 
 	if (target_building_) {
 		modifier = target_building_->get_priority(get_type(), get_index());
-		if (target_constructionsite_)
+		if (target_constructionsite_) {
 			is_construction_site = true;
-		else if (target_warehouse_) {
+		} else if (target_warehouse_) {
 			// If there is no expedition at this warehouse, use the default
 			// warehouse calculation. Otherwise we use the default priority for
 			// the ware.
@@ -284,8 +304,9 @@ int32_t Request::get_priority(int32_t cost) const {
 		}
 	}
 
-	if (cost > PRIORITY_MAX_COST)
+	if (cost > PRIORITY_MAX_COST) {
 		cost = PRIORITY_MAX_COST;
+	}
 
 	// priority is higher if building waits for ware a long time
 	// additional factor - cost to deliver, so nearer building
@@ -309,10 +330,11 @@ uint32_t Request::get_transfer_priority() const {
 
 	if (target_building_) {
 		pri = target_building_->get_priority(get_type(), get_index());
-		if (target_constructionsite_)
+		if (target_constructionsite_) {
 			return pri + 3;
-		else if (target_warehouse_)
+		} else if (target_warehouse_) {
 			return pri - 2;
+		}
 	}
 	return pri;
 }
@@ -322,11 +344,13 @@ uint32_t Request::get_transfer_priority() const {
  */
 void Request::set_economy(Economy* const e) {
 	if (economy_ != e) {
-		if (economy_ && is_open())
+		if (economy_ && is_open()) {
 			economy_->remove_request(*this);
+		}
 		economy_ = e;
-		if (economy_ && is_open())
+		if (economy_ && is_open()) {
 			economy_->add_request(*this);
+		}
 	}
 }
 
@@ -341,15 +365,17 @@ void Request::set_count(uint32_t const count) {
 	// Cancel unneeded transfers. This should be more clever about which
 	// transfers to cancel. Then again, this loop shouldn't execute during
 	// normal play anyway
-	while (count_ < transfers_.size())
+	while (count_ < transfers_.size()) {
 		cancel_transfer(transfers_.size() - 1);
+	}
 
 	// Update the economy
 	if (economy_) {
-		if (wasopen && !is_open())
+		if (wasopen && !is_open()) {
 			economy_->remove_request(*this);
-		else if (!wasopen && is_open())
+		} else if (!wasopen && is_open()) {
 			economy_->add_request(*this);
+		}
 	}
 }
 
@@ -389,25 +415,31 @@ void Request::start_transfer(Game& game, Supply& supp) {
 	ss.unsigned_32(supp.get_position(game)->serial());
 
 	Transfer* t;
-	if (get_type() == wwWORKER) {
+	switch (get_type()) {
+	case wwWORKER: {
 		//  Begin the transfer of a soldier or worker.
 		//  launch_worker() creates or starts the worker
 		Worker& s = supp.launch_worker(game, *this);
 		ss.unsigned_32(s.serial());
 		t = new Transfer(game, *this, s);
-	} else {
-		//  Begin the transfer of an ware. The ware itself is passive.
+		break;
+	}
+	case wwWARE: {
+		//  Begin the transfer of n ware. The ware itself is passive.
 		//  launch_ware() ensures the WareInstance is transported out of the
 		//  warehouse. Once it's on the flag, the flag code will decide what to
 		//  do with it.
 		WareInstance& ware = supp.launch_ware(game, *this);
 		ss.unsigned_32(ware.serial());
 		t = new Transfer(game, *this, ware);
+		break;
+	}
 	}
 
 	transfers_.push_back(t);
-	if (!is_open())
+	if (!is_open()) {
 		economy_->remove_request(*this);
+	}
 }
 
 /**
@@ -418,8 +450,9 @@ void Request::start_transfer(Game& game, Supply& supp) {
 void Request::transfer_finish(Game& game, Transfer& t) {
 	Worker* const w = t.worker_;
 
-	if (t.ware_)
+	if (t.ware_) {
 		t.ware_->destroy(game);
+	}
 
 	t.worker_ = nullptr;
 	t.ware_ = nullptr;
@@ -449,8 +482,9 @@ void Request::transfer_fail(Game&, Transfer& t) {
 
 	remove_transfer(find_transfer(t));
 
-	if (!wasopen)
+	if (!wasopen) {
 		economy_->add_request(*this);
+	}
 }
 
 /// Cancel the transfer with the given index.
@@ -481,8 +515,9 @@ void Request::remove_transfer(uint32_t const idx) {
 uint32_t Request::find_transfer(Transfer& t) {
 	TransferList::const_iterator const it = std::find(transfers_.begin(), transfers_.end(), &t);
 
-	if (it == transfers_.end())
+	if (it == transfers_.end()) {
 		throw wexception("Request::find_transfer(): not found");
+	}
 
 	return it - transfers_.begin();
 }

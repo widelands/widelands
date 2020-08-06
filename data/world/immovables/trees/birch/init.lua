@@ -16,17 +16,21 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 42000",
-         "remove=32",
+         "animate=idle duration:42s",
+         "remove=success:32",
          "grow=birch_summer_pole",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
-         hotspot = { 5, 12 },
+         directory = dirname,
+         basename = "sapling",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 6, 13 }
+      }
    },
 }
 
@@ -39,17 +43,21 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 40000",
-         "remove=25",
+         "animate=idle duration:40s",
+         "remove=success:25",
          "grow=birch_summer_mature",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pole/idle_?.png"),
-         hotspot = { 12, 28 },
+         directory = dirname,
+         basename = "pole",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 13, 29 }
+      }
    },
 }
 
@@ -62,20 +70,24 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 25000",
-         "remove=10",
-         "seed=birch_summer_sapling",
-         "animate=idle 30000",
-         "remove=10",
+         "animate=idle duration:25s",
+         "remove=success:10",
+         "seed=birch_summer_sapling 200",
+         "animate=idle duration:30s",
+         "remove=success:10",
          "grow=birch_summer_old",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "mature/idle_?.png"),
-         hotspot = { 18, 47 },
+         directory = dirname,
+         basename = "mature",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 19, 48 }
+      }
    },
 }
 
@@ -83,29 +95,33 @@ world:new_immovable_type{
    name = "birch_summer_old",
    descname = _ "Birch (Old)",
    species = _ "Birch",
-   icon = dirname .. "old/idle_0.png",
+   icon = dirname .. "menu.png",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 800000",
-         "transform=deadtree2 27",
-         "seed=birch_summer_sapling",
+         "animate=idle duration:13m20s",
+         "transform=deadtree2 success:27",
+         "seed=birch_summer_sapling 60",
       },
       fall = {
          "remove=",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "old/idle_?.png"),
-         hotspot = { 23, 58 },
+         directory = path.dirname(__file__),
+         basename = "old",
          fps = 10,
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 24, 59 },
          sound_effect = {
             path = "sound/animals/bird5",
          },
-      },
+      }
    },
 }

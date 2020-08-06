@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2019 by the Widelands Development Team
+ * Copyright (C) 2003-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,22 +20,13 @@
 #ifndef WL_WUI_WARESDISPLAY_H
 #define WL_WUI_WARESDISPLAY_H
 
+#include <functional>
 #include <memory>
-#include <vector>
 
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "ui_basic/textarea.h"
-
-namespace UI {
-struct Textarea;
-}
-
-namespace Widelands {
-class TribeDescr;
-struct WareList;
-}  // namespace Widelands
 
 using WaresOrderCoords = std::map<Widelands::DescriptionIndex, Widelands::Coords>;
 
@@ -55,7 +46,7 @@ public:
 	   Widelands::WareWorker type,
 	   bool selectable,
 	   CLANG_DIAG_OFF("-Wunknown-pragmas") CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
-	      boost::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
+	      std::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
 	   CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 	      CLANG_DIAG_ON("-Wunknown-pragmas") bool horizontal = false,
 	   int32_t hgap = 3,
@@ -154,7 +145,7 @@ private:
 	 * It is not selected directly, but will be on mouse release.
 	 */
 	Widelands::DescriptionIndex selection_anchor_;
-	boost::function<void(Widelands::DescriptionIndex, bool)> callback_function_;
+	std::function<void(Widelands::DescriptionIndex, bool)> callback_function_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
@@ -191,5 +182,6 @@ private:
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
                                 const std::map<Widelands::DescriptionIndex, uint8_t>& map);
+std::string get_amount_string(uint32_t, bool cutoff1k = false);
 
 #endif  // end of include guard: WL_WUI_WARESDISPLAY_H

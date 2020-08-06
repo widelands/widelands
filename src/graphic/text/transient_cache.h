@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,10 +24,8 @@
 #include <list>
 #include <map>
 #include <memory>
-#include <string>
 
-#include <SDL.h>
-#include <boost/utility.hpp>
+#include <SDL_timer.h>
 
 #include "base/macros.h"
 

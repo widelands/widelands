@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_PROGRAM_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_PROGRAM_H
 
-#include <memory>
-
 #include "base/macros.h"
-#include "logic/map_objects/bob.h"
 #include "logic/map_objects/map_object_program.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/workarea_info.h"
@@ -32,16 +29,15 @@
 
 namespace Widelands {
 
-// TODO(Antonio Trueba#1#): Get rid of forward class
-// declaration (Chicken-and-egg problem)
-class WorkerDescr;
-
 struct WorkerProgram : public MapObjectProgram {
 
 	using ParseWorkerProgramFn = void (WorkerProgram::*)(Worker::Action*,
 	                                                     const std::vector<std::string>&);
 
-	WorkerProgram(const std::string& init_name, const LuaTable& actions_table, const WorkerDescr& worker, const Tribes& tribes);
+	WorkerProgram(const std::string& init_name,
+	              const LuaTable& actions_table,
+	              const WorkerDescr& worker,
+	              const Tribes& tribes);
 
 	using Actions = std::vector<Worker::Action>;
 	Actions::size_type get_size() const {
@@ -59,9 +55,37 @@ struct WorkerProgram : public MapObjectProgram {
 	const WorkareaInfo& get_workarea_info() const {
 		return workarea_info_;
 	}
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	collected_attributes() const {
+		return collected_attributes_;
+	}
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	created_attributes() const {
+		return created_attributes_;
+	}
+	const std::set<std::string>& collected_resources() const {
+		return collected_resources_;
+	}
+	const std::set<std::string>& created_resources() const {
+		return created_resources_;
+	}
+	const std::set<std::string>& created_bobs() const {
+		return created_bobs_;
+	}
+
+	/// Set of ware types produced by this program
+	const std::set<DescriptionIndex>& produced_ware_types() const {
+		return produced_ware_types_;
+	}
 
 private:
 	WorkareaInfo workarea_info_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
+	std::set<std::string> collected_resources_;
+	std::set<std::string> created_resources_;
+	std::set<std::string> created_bobs_;
+
 	struct ParseMap {
 		const char* name;
 		ParseWorkerProgramFn function;
@@ -78,6 +102,7 @@ private:
 	void parse_callobject(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_plant(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_createbob(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_buildferry(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_removeobject(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_repeatsearch(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_findresources(Worker::Action* act, const std::vector<std::string>& cmd);
@@ -90,6 +115,7 @@ private:
 	const Tribes& tribes_;
 	Actions actions_;
 	static ParseMap const parsemap_[];
+	std::set<DescriptionIndex> produced_ware_types_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerProgram);
 };
 }  // namespace Widelands

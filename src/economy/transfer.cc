@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
-#include "economy/road.h"
+#include "economy/roadbase.h"
 #include "economy/ware_instance.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -87,10 +87,11 @@ void Transfer::set_request(Request* req) {
 	assert(req);
 
 	if (&req->target() != destination_.get(game_)) {
-		if (destination_.is_set())
+		if (destination_.is_set()) {
 			log("WARNING: Transfer::set_request req->target (%u) "
 			    "vs. destination (%u) mismatch\n",
 			    req->target().serial(), destination_.serial());
+		}
 		destination_ = &req->target();
 	}
 	request_ = req;
@@ -116,14 +117,16 @@ PlayerImmovable* Transfer::get_destination(Game& g) {
  * Determine where we should be going from our current location.
  */
 PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& success) {
-	if (!location || !location->get_economy()) {
+	assert((worker_ == nullptr) ^ (ware_ == nullptr));
+	const WareWorker type = worker_ ? wwWORKER : wwWARE;
+	if (!location || !location->get_economy(type)) {
 		tlog("no location or economy -> fail\n");
 		success = false;
 		return nullptr;
 	}
 
-	PlayerImmovable* destination = destination_.get(location->get_economy()->owner().egbase());
-	if (!destination || destination->get_economy() != location->get_economy()) {
+	PlayerImmovable* destination = destination_.get(location->get_economy(type)->owner().egbase());
+	if (!destination || destination->get_economy(type) != location->get_economy(type)) {
 		tlog("destination disappeared or economy mismatch -> fail\n");
 		success = false;
 		return nullptr;
@@ -131,60 +134,71 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 
 	success = true;
 
-	if (location == destination)
+	if (location == destination) {
 		return nullptr;
+	}
 
 	Flag& locflag = location->base_flag();
 	Flag& destflag = destination->base_flag();
 
-	if (&locflag == &destflag)
+	if (&locflag == &destflag) {
 		return &locflag == location ? destination : &locflag;
+	}
 
 	// Brute force: recalculate the best route every time
-	if (!locflag.get_economy()->find_route(locflag, destflag, &route_, ware_ ? wwWARE : wwWORKER)) {
+	if (!locflag.get_economy(type)->find_route(locflag, destflag, &route_)) {
 		tlog("destination appears to have become split from current location -> fail\n");
-		Economy::check_split(locflag, destflag);
+		Economy::check_split(locflag, destflag, type);
 		success = false;
 		return nullptr;
 	}
 
-	if (route_.get_nrsteps() >= 1)
-		if (upcast(Road const, road, location))
-			if (&road->get_flag(Road::FlagEnd) == &route_.get_flag(game_, 1))
+	if (route_.get_nrsteps() >= 1) {
+		if (upcast(RoadBase const, road, location)) {
+			if (&road->get_flag(RoadBase::FlagEnd) == &route_.get_flag(game_, 1)) {
 				route_.trim_start(1);
+			}
+		}
+	}
 
-	if (route_.get_nrsteps() >= 1)
-		if (upcast(Road const, road, destination))
-			if (&road->get_flag(Road::FlagEnd) == &route_.get_flag(game_, route_.get_nrsteps() - 1))
+	if (route_.get_nrsteps() >= 1) {
+		if (upcast(RoadBase const, road, destination)) {
+			if (&road->get_flag(RoadBase::FlagEnd) ==
+			    &route_.get_flag(game_, route_.get_nrsteps() - 1)) {
 				route_.truncate(route_.get_nrsteps() - 1);
+			}
+		}
+	}
 
 	// Reroute into PortDocks or the associated warehouse when appropriate
 	if (route_.get_nrsteps() >= 1) {
 		Flag& curflag(route_.get_flag(game_, 0));
 		Flag& nextflag(route_.get_flag(game_, 1));
-		if (!curflag.get_road(nextflag)) {
+		if (type == wwWORKER ? curflag.get_road(nextflag) == nullptr :
+		                       curflag.get_roadbase(nextflag) == nullptr) {
 			upcast(Warehouse, wh, curflag.get_building());
 			assert(wh);
 
 			PortDock* pd = wh->get_portdock();
 			assert(pd);
 
-			if (location == pd)
+			if (location == pd) {
 				return pd->get_dock(nextflag);
-			if (location == wh)
+			}
+			if (location == wh) {
 				return pd;
-			if (location == &curflag || ware_)
+			}
+			if (location == &curflag || ware_) {
 				return wh;
+			}
 			return &curflag;
 		}
 
 		if (ware_ && location == &curflag && route_.get_nrsteps() >= 2) {
 			Flag& nextnextflag(route_.get_flag(game_, 2));
-			if (!nextflag.get_road(nextnextflag)) {
-				upcast(Warehouse, wh, nextflag.get_building());
-				assert(wh);
-
-				return wh;
+			if (nextflag.get_roadbase(nextnextflag) == nullptr) {
+				assert(is_a(Warehouse, nextflag.get_building()));
+				return nextflag.get_building();
 			}
 		}
 	}
@@ -194,12 +208,13 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 		assert(&route_.get_flag(game_, 0) == location);
 
 		// special rule to get wares into buildings
-		if (ware_ && route_.get_nrsteps() == 1)
+		if (ware_ && route_.get_nrsteps() == 1) {
 			if (dynamic_cast<Building const*>(destination)) {
 				assert(&route_.get_flag(game_, 1) == &destflag);
 
 				return destination;
 			}
+		}
 
 		if (route_.get_nrsteps() >= 1) {
 			return &route_.get_flag(game_, 1);
@@ -295,8 +310,9 @@ void Transfer::read(FileRead& fr, Transfer::ReadData& rd) {
 }
 
 void Transfer::read_pointers(MapObjectLoader& mol, const Widelands::Transfer::ReadData& rd) {
-	if (rd.destination)
+	if (rd.destination) {
 		destination_ = &mol.get<PlayerImmovable>(rd.destination);
+	}
 }
 
 void Transfer::write(MapObjectSaver& mos, FileWrite& fw) {

@@ -1,3 +1,4 @@
+add_subdirectory(animation)
 add_subdirectory(styles)
 add_subdirectory(text)
 
@@ -63,7 +64,6 @@ wl_library(graphic_image_io
     image_io.h
     image_io.cc
   USES_PNG
-  USES_SDL2
   USES_SDL2_IMAGE
   DEPENDS
     base_exceptions
@@ -78,12 +78,10 @@ wl_library(graphic_image_cache
   SRCS
     image_cache.cc
     image_cache.h
-  USES_SDL2
   DEPENDS
     base_macros
     graphic_image_io
     graphic_surface
-    graphic_texture_atlas
 )
 
 wl_library(graphic_sdl_utils
@@ -102,6 +100,7 @@ wl_library(graphic_gl_utils
     gl/system_headers.h
     gl/utils.cc
     gl/utils.h
+  USES_BOOST_REGEX
   USES_SDL2
   USES_OPENGL
   DEPENDS
@@ -190,17 +189,12 @@ wl_library(graphic_game_renderer
     game_renderer.cc
     game_renderer.h
   DEPENDS
-    base_geometry
-    base_macros
     graphic
     graphic_fields_to_draw
-    graphic_gl_utils
     graphic_render_queue
     graphic_surface
     logic
     logic_map_objects
-    wui
-    wui_mapview_pixelfunctions
 )
 
 wl_library(graphic_minimap_renderer
@@ -249,16 +243,16 @@ wl_library(graphic_terrain_programs
     base_geometry
     base_log
     base_macros
+    graphic
     graphic_fields_to_draw
     graphic_gl_utils
     graphic_image_io
     graphic_surface
     io_filesystem
     logic
-    logic_constants
     logic_map_objects
     logic_map_objects_description_maintainer
-    wui_mapview_pixelfunctions
+    wui_mapview_pixelconstants
 )
 
 
@@ -293,7 +287,6 @@ wl_library(graphic_wordwrap
     wordwrap.cc
     wordwrap.h
   USES_ICU
-  USES_SDL2_TTF
   DEPENDS
     base_geometry
     base_log
@@ -306,49 +299,58 @@ wl_library(graphic_wordwrap
 )
 
 
+# Mouse cursor
+
+wl_library(graphic_mouse_cursor
+  SRCS
+    mouse_cursor.cc
+    mouse_cursor.h
+  USES_SDL2
+  DEPENDS
+    base_geometry
+    graphic
+    graphic_image_io
+    io_filesystem
+)
+
+
 # Base library
 
 wl_library(graphic
   SRCS
-    animation.cc
-    animation.h
     default_resolution.h
-    diranimations.h
     graphic.cc
     graphic.h
     style_manager.cc
     style_manager.h
     rendertarget.cc
     rendertarget.h
+    road_segments.cc
+    road_segments.h
   USES_SDL2
   DEPENDS
     base_exceptions
     base_geometry
     base_i18n
     base_log
-    base_macros
     base_scoped_timer
     build_info
     graphic_align
+    graphic_animation
     graphic_build_texture_atlas
     graphic_color
     graphic_draw_programs
     graphic_gl_utils
     graphic_image_cache
     graphic_image_io
-    graphic_playercolor
     graphic_render_queue
     graphic_styles
     graphic_surface
     io_filesystem
     io_stream
-    logic_constants
-    logic_exceptions
     logic_widelands_geometry
-    note_sound
     notifications
     scripting_lua_interface
     scripting_lua_table
-    sound
 )
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,16 +91,13 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 		ok_.set_tooltip(_("Load this game"));
 	}
 
-	back_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
-	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
-	load_or_save_.table().selected.connect(
-	   boost::bind(&FullscreenMenuLoadGame::entry_selected, this));
-	load_or_save_.table().double_clicked.connect(
-	   boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	load_or_save_.table().selected.connect([this](unsigned) { entry_selected(); });
+	load_or_save_.table().double_clicked.connect([this](unsigned) { clicked_ok(); });
 
 	if (is_replay_) {
-		show_filenames_->changed.connect(
-		   boost::bind(&FullscreenMenuLoadGame::toggle_filenames, boost::ref(*this)));
+		show_filenames_->changed.connect([this]() { toggle_filenames(); });
 		show_filenames_->set_state(get_config_bool("display_replay_filenames", true));
 	}
 
@@ -108,6 +105,8 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	if (!load_or_save_.table().empty()) {
 		load_or_save_.table().select(0);
 	}
+
+	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
 }
 
 void FullscreenMenuLoadGame::layout() {
@@ -145,9 +144,13 @@ void FullscreenMenuLoadGame::clicked_ok() {
 	}
 
 	std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
-	if (gamedata && gamedata->errormessage.empty()) {
-		filename_ = gamedata->filename;
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+	if (gamedata->is_directory()) {
+		load_or_save_.change_directory_to(gamedata->filename);
+	} else {
+		if (gamedata && gamedata->errormessage.empty()) {
+			filename_ = gamedata->filename;
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+		}
 	}
 }
 
@@ -169,8 +172,9 @@ const std::string& FullscreenMenuLoadGame::filename() const {
 }
 
 bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
-	if (!down)
+	if (!down) {
 		return false;
+	}
 
 	switch (code.sym) {
 	case SDLK_KP_PERIOD:

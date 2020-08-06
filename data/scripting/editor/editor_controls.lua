@@ -5,9 +5,9 @@ local toggle_minimap_hotkey = help_toggle_minimap_hotkey()
 local toggle_building_spaces_hotkey = help_toggle_building_spaces_hotkey()
 local toggle_fullscreen_hotkey = help_toggle_fullscreen_hotkey()
 
-set_textdomain("widelands_editor")
+push_textdomain("widelands_editor")
 
-return {
+local r = {
    title = _"Controls",
    text =
       h2(_"Keyboard Shortcuts") ..
@@ -15,7 +15,7 @@ return {
          -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
          dl(help_format_hotkey("F1"), _"Help") ..
          -- TRANSLATORS: This is an access key combination.
-         dl(help_format_hotkey("H"), _"Toggle main menu") ..
+         dl(help_format_hotkey(pgettext("hotkey", "Esc")), _"Toggle main menu") ..
          -- TRANSLATORS: This is an access key combination. The hotkey is 't'
          dl(help_format_hotkey("T"), _"Toggle tools menu") ..
          toggle_minimap_hotkey ..
@@ -47,3 +47,5 @@ return {
          dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Click")), _"Set map elements to the value selected by ‘Set Value’")
       )
 }
+pop_textdomain()
+return r

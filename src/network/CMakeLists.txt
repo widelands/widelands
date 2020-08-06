@@ -1,5 +1,7 @@
 wl_library(network
   SRCS
+    bufferedconnection.cc
+    bufferedconnection.h
     constants.h
     crypto.h
     crypto.cc
@@ -22,8 +24,6 @@ wl_library(network
     nethost.h
     nethostproxy.cc
     nethostproxy.h
-    netrelayconnection.cc
-    netrelayconnection.h
     network.cc
     network.h
     network_gaming_messages.cc
@@ -34,13 +34,14 @@ wl_library(network
     network_player_settings_backend.h
     network_protocol.h
     relay_protocol.h
+  USES_SDL2
   DEPENDS
     ai
     base_exceptions
     base_i18n
     base_log
-    base_macros
     base_md5
+    base_random
     build_info
     chat
     game_io
@@ -54,7 +55,6 @@ wl_library(network
     logic_game_settings
     logic_tribe_basic_info
     map_io_map_loader
-    random
     scripting_lua_interface
     scripting_lua_table
     ui_basic

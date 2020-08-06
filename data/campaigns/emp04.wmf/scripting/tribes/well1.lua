@@ -1,5 +1,7 @@
 dirname = "tribes/buildings/productionsites/empire/well/"
 
+push_textdomain("scenario_emp04.wmf")
+
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_well1",
@@ -37,16 +39,12 @@ tribes:new_productionsite_type {
       empire_carrier = 1
    },
 
-   outputs = {
-      "water"
-   },
-
    programs = {
       work = {
          descname = "working",
          actions = {
             "sleep=30000",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "mine=water 5 100 5 2",
             "produce=water"
          }
@@ -59,3 +57,4 @@ tribes:new_productionsite_type {
       productivity_threshold = 15
    },
 }
+pop_textdomain()

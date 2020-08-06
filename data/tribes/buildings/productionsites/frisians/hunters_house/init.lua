@@ -19,16 +19,23 @@ tribes:new_productionsite_type {
       log = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 86},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {40, 69},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 64},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {40, 52}
+      }
    },
 
    aihints = {
@@ -36,17 +43,8 @@ tribes:new_productionsite_type {
       prohibited_till = 480
    },
 
-   indicate_workarea_overlaps = {
-      frisians_hunters_house = false,
-   },
-
    working_positions = {
       frisians_hunter = 1
-   },
-
-   outputs = {
-      "meat",
-      "fur"
    },
 
    programs = {
@@ -55,15 +53,15 @@ tribes:new_productionsite_type {
          descname = _"hunting",
          actions = {
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "produce=fur"
          }
       },

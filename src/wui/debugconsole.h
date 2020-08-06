@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,9 @@
 #ifndef WL_WUI_DEBUGCONSOLE_H
 #define WL_WUI_DEBUGCONSOLE_H
 
+#include <functional>
 #include <string>
 #include <vector>
-
-#include <boost/function.hpp>
 
 struct ChatProvider;
 
@@ -50,7 +49,7 @@ struct Handler {
 	 * The passed array contains a list of all (space-separated) components
 	 * of the command, including the command name itself.
 	 */
-	using HandlerFn = boost::function<void(const std::vector<std::string>&)>;
+	using HandlerFn = std::function<void(const std::vector<std::string>&)>;
 
 	Handler();
 	virtual ~Handler();

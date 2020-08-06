@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,9 +21,6 @@
 #define WL_WUI_INTERACTIVE_PLAYER_H
 
 #include <memory>
-#include <vector>
-
-#include <SDL_keyboard.h>
 
 #include "io/profile.h"
 #include "logic/message_id.h"
@@ -42,7 +39,8 @@ public:
 	InteractivePlayer(Widelands::Game&,
 	                  Section& global_s,
 	                  Widelands::PlayerNumber,
-	                  bool multiplayer);
+	                  bool multiplayer,
+	                  ChatProvider* chat_provider = nullptr);
 
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
@@ -78,7 +76,7 @@ public:
 
 private:
 	// For referencing the items in statisticsmenu_
-	enum class StatisticsMenuEntry { kGeneral, kWare, kBuildings, kStock, kSeafaring };
+	enum class StatisticsMenuEntry { kGeneral, kWare, kBuildings, kStock, kSoldiers, kSeafaring };
 
 	// Adds the statisticsmenu_ to the toolbar
 	void add_statistics_menu();
@@ -96,12 +94,10 @@ private:
 	bool auto_roadbuild_mode_;
 	Widelands::Coords flag_to_connect_;
 
-	UI::Button* toggle_chat_;
 	UI::Button* toggle_message_menu_;
 
 	// Statistics menu on the toolbar
 	UI::Dropdown<StatisticsMenuEntry> statisticsmenu_;
-	UI::UniqueWindow::Registry chat_;
 	UI::UniqueWindow::Registry objectives_;
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;

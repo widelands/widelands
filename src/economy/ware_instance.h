@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,11 +30,7 @@ namespace Widelands {
 class Building;
 class Economy;
 class EditorGameBase;
-class Game;
 struct IdleWareSupply;
-class MapObject;
-struct PlayerImmovable;
-struct Transfer;
 
 /**
  * WareInstance represents one item while it is being carried around.

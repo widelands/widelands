@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,11 @@
 #include "map_io/map_player_names_and_tribes_packet.h"
 
 #include <boost/algorithm/string/trim.hpp>
-#include <boost/format.hpp>
 
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/map_objects/world/world.h"
 
 namespace Widelands {
 
@@ -48,8 +46,9 @@ void MapPlayerNamesAndTribesPacket::read(FileSystem& fs,
 }
 
 void MapPlayerNamesAndTribesPacket::pre_read(FileSystem& fs, Map* const map, bool const skip) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	Profile prof;
 	prof.read("player_names", nullptr, fs);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,11 +23,10 @@
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "graphic/texture.h"
+#include "logic/player.h"
 
-// QuickRef:
-// http://www.cs.unh.edu/~cs770/docs/glsl-1.20-quickref.pdf
 // Full specification:
-// http://www.opengl.org/registry/doc/GLSLangSpec.Full.1.20.8.pdf
+// https://www.khronos.org/registry/OpenGL/specs/gl/GLSLangSpec.1.20.pdf
 // We target OpenGL 2.1 for the desktop here.
 TerrainProgram::TerrainProgram() {
 	gl_program_.build("terrain");
@@ -87,7 +86,8 @@ void TerrainProgram::draw(
    uint32_t gametime,
    const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
    const FieldsToDraw& fields_to_draw,
-   float z_value) {
+   float z_value,
+   const Widelands::Player* player) {
 	// This method expects that all terrains have the same dimensions and that
 	// all are packed into the same texture atlas, i.e. all are in the same GL
 	// texture. It does not check for this invariance for speeds sake.
@@ -107,10 +107,11 @@ void TerrainProgram::draw(
 
 		// Down triangle.
 		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
+			const Widelands::DescriptionIndex terrain =
+			   player ? player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.d :
+			            field.fcoords.field->terrain_d();
 			const Vector2f texture_offset =
-			   to_gl_texture(
-			      terrains.get(field.fcoords.field->terrain_d()).get_texture(gametime).blit_data())
-			      .origin();
+			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
 			add_vertex(fields_to_draw.at(field.bln_index), texture_offset);
 			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
@@ -118,10 +119,11 @@ void TerrainProgram::draw(
 
 		// Right triangle.
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
+			const Widelands::DescriptionIndex terrain =
+			   player ? player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.r :
+			            field.fcoords.field->terrain_r();
 			const Vector2f texture_offset =
-			   to_gl_texture(
-			      terrains.get(field.fcoords.field->terrain_r()).get_texture(gametime).blit_data())
-			      .origin();
+			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
 			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
 			add_vertex(fields_to_draw.at(field.rn_index), texture_offset);

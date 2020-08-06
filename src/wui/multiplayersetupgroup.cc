@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,8 @@
 #include "wui/multiplayersetupgroup.h"
 
 #include <memory>
-#include <string>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"
@@ -36,6 +33,7 @@
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
+#include "map_io/map_loader.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/mouse_constants.h"
@@ -76,8 +74,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		add(&name, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		slot_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
-		slot_dropdown_.selected.connect(
-		   boost::bind(&MultiPlayerClientGroup::set_slot, boost::ref(*this)));
+		slot_dropdown_.selected.connect([this]() { set_slot(); });
 
 		update();
 		layout();
@@ -254,14 +251,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		init_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		team_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 
-		type_dropdown_.selected.connect(
-		   boost::bind(&MultiPlayerPlayerGroup::set_type, boost::ref(*this)));
-		tribes_dropdown_.selected.connect(
-		   boost::bind(&MultiPlayerPlayerGroup::set_tribe_or_shared_in, boost::ref(*this)));
-		init_dropdown_.selected.connect(
-		   boost::bind(&MultiPlayerPlayerGroup::set_init, boost::ref(*this)));
-		team_dropdown_.selected.connect(
-		   boost::bind(&MultiPlayerPlayerGroup::set_team, boost::ref(*this)));
+		type_dropdown_.selected.connect([this]() { set_type(); });
+		tribes_dropdown_.selected.connect([this]() { set_tribe_or_shared_in(); });
+		init_dropdown_.selected.connect([this]() { set_init(); });
+		team_dropdown_.selected.connect([this]() { set_team(); });
 
 		add_space(0);
 		add(&player);
@@ -532,10 +525,28 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init_dropdown_.set_label("");
 			i18n::Textdomain td("tribes");  // for translated initialisation
 			const Widelands::TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
+			std::set<std::string> tags;
+			if (!settings.mapfilename.empty()) {
+				Widelands::Map map;
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(settings.mapfilename);
+				if (ml) {
+					ml->preload_map(true);
+					tags = map.get_tags();
+				}
+			}
 			for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
 				const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
-				init_dropdown_.add(_(addme.descname), i, nullptr,
-				                   i == player_setting.initialization_index, _(addme.tooltip));
+				bool matches_tags = true;
+				for (const std::string& tag : addme.required_map_tags) {
+					if (!tags.count(tag)) {
+						matches_tags = false;
+						break;
+					}
+				}
+				if (matches_tags) {
+					init_dropdown_.add(_(addme.descname), i, nullptr,
+					                   i == player_setting.initialization_index, _(addme.tooltip));
+				}
 			}
 		}
 
@@ -600,7 +611,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribes_dropdown_.set_enabled(false);
 			init_dropdown_.set_visible(false);
 			init_dropdown_.set_enabled(false);
-		} else {
+		} else {  // kHuman, kShared, kComputer
 			rebuild_tribes_dropdown(settings);
 			rebuild_init_dropdown(settings);
 			rebuild_team_dropdown(settings);

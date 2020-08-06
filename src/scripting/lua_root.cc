@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "logic/cmd_luacoroutine.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -34,10 +32,10 @@
 #include "logic/map_objects/world/world.h"
 #include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
-#include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"
 #include "scripting/lua_table.h"
+#include "wui/interactive_player.h"
 
 using namespace Widelands;
 
@@ -86,8 +84,11 @@ const MethodType<LuaGame> LuaGame::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
-   PROP_RO(LuaGame, real_speed),   PROP_RO(LuaGame, time), PROP_RW(LuaGame, desired_speed),
-   PROP_RW(LuaGame, allow_saving), PROP_RO(LuaGame, type), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaGame, real_speed),         PROP_RO(LuaGame, time),
+   PROP_RW(LuaGame, desired_speed),      PROP_RW(LuaGame, allow_saving),
+   PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
+   PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -164,6 +165,27 @@ int LuaGame::get_allow_saving(lua_State* L) {
 }
 
 /* RST
+   .. attribute:: interactive_player
+
+      (RO) The player number of the interactive player, or 0 for spectator
+*/
+int LuaGame::get_interactive_player(lua_State* L) {
+	upcast(const InteractivePlayer, p, get_game(L).get_ibase());
+	lua_pushuint32(L, p ? p->player_number() : 0);
+	return 1;
+}
+
+/* RST
+   .. attribute:: last_save_time
+
+      (RO) The gametime at which the game was last saved.
+*/
+int LuaGame::get_last_save_time(lua_State* L) {
+	lua_pushuint32(L, get_game(L).save_handler().last_save_time());
+	return 1;
+}
+
+/* RST
    .. attribute:: type
 
       (RO) One string out of 'undefined', 'singleplayer', 'netclient', 'nethost', 'replay',
@@ -192,6 +214,22 @@ int LuaGame::get_type(lua_State* L) {
 	return 1;
 }
 
+/* RST
+   .. attribute:: scenario_difficulty
+
+      (RO) The difficulty level of the current scenario. Values range from 1 to the number
+      of levels specified in the campaign's configuration in campaigns.lua. By convention
+      higher values mean more difficult. Throws an error if used outside of a scenario.
+*/
+int LuaGame::get_scenario_difficulty(lua_State* L) {
+	const uint32_t d = get_game(L).get_scenario_difficulty();
+	if (d == kScenarioDifficultyNotSet) {
+		report_error(L, "Scenario difficulty not set");
+	}
+	lua_pushuint32(L, d);
+	return 1;
+}
+
 /*
  ==========================================================
  LUA METHODS
@@ -216,8 +254,9 @@ int LuaGame::get_type(lua_State* L) {
 int LuaGame::launch_coroutine(lua_State* L) {
 	int nargs = lua_gettop(L);
 	uint32_t runtime = get_game(L).get_gametime();
-	if (nargs < 2)
+	if (nargs < 2) {
 		report_error(L, "Too few arguments!");
+	}
 	if (nargs == 3) {
 		runtime = luaL_checkuint32(L, 3);
 		lua_pop(L, 1);
@@ -526,6 +565,7 @@ Tribes
 const char LuaTribes::className[] = "Tribes";
 const MethodType<LuaTribes> LuaTribes::Methods[] = {
    METHOD(LuaTribes, new_carrier_type),
+   METHOD(LuaTribes, new_ferry_type),
    METHOD(LuaTribes, new_constructionsite_type),
    METHOD(LuaTribes, new_dismantlesite_type),
    METHOD(LuaTribes, new_immovable_type),
@@ -540,6 +580,7 @@ const MethodType<LuaTribes> LuaTribes::Methods[] = {
    METHOD(LuaTribes, new_warehouse_type),
    METHOD(LuaTribes, new_worker_type),
    METHOD(LuaTribes, add_custom_building),
+   METHOD(LuaTribes, add_custom_worker),
    {0, 0},
 };
 const PropertyType<LuaTribes> LuaTribes::Properties[] = {
@@ -826,6 +867,29 @@ int LuaTribes::new_carrier_type(lua_State* L) {
 }
 
 /* RST
+   .. method:: new_ferry_type{table}
+
+      Adds a new ferry worker type. Takes a single argument, a table with
+      the descriptions. See the files in tribes/ for usage examples.
+
+      :returns: :const:`nil`
+*/
+int LuaTribes::new_ferry_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_ferry_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
    .. method:: new_soldier_type{table}
 
       Adds a new soldier worker type. Takes a single argument, a table with
@@ -885,7 +949,7 @@ int LuaTribes::new_tribe(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_tribe(table);
+		get_egbase(L).mutable_tribes()->add_tribe(table, get_egbase(L).world());
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -920,6 +984,40 @@ int LuaTribes::add_custom_building(lua_State* L) {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
 		egbase.mutable_tribes()->add_custom_building(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+   .. method:: add_custom_worker{table}
+
+      Adds a worker building to a tribe, e.g. for use in a scenario.
+      The worker must already be known to the tribes and should be defined in
+      the ``map:scripting/tribes/`` directory.
+
+      **Note:** This function *has* to be called from ``map:scripting/tribes/init.lua``.
+
+      The table has the following entries:
+
+      **tribename**
+         *Mandatory*. The name of the tribe that this worker will be added to.
+
+      **workername**
+         *Mandatory*. The name of the worker to be added to the tribe.
+
+      :returns: :const:`0`
+*/
+int LuaTribes::add_custom_worker(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_custom_worker(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

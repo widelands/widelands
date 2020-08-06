@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# ks k, 2020
 # TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-07-21 03:02+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,141 +18,141 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:18
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:20
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:22
 msgid "Build up a basic economy"
 msgstr "기본적인 경제를 만드십시오"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 msgid "Start collecting basic building materials, and fortify the camp."
 msgstr "기본적인 건축 자재를 수집하고 진영 주변의 경계를 강화하십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:22
 msgid "Build a lumberjack’s hut"
-msgstr "나무꾼의 오두막을 지으십시오."
+msgstr "나무꾼의 오두막을 지으십시오"
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
+msgid "Build a ranger’s hut"
+msgstr "숲 지킴이의 오두막을 지으십시오"
+
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
+msgid "Build a quarry"
+msgstr "채석장을 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:25
-msgid "Build a ranger’s hut"
-msgstr "숲 지킴이의 오두막을 지으십시오."
+msgid "Build a wood hardener"
+msgstr "목재 경화소를 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
-msgid "Build a quarry"
-msgstr "채석장을 지으십시오."
+msgid "Build a sentry on the eastern border"
+msgstr "동쪽 끝 경계에 초소를 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
-msgid "Build a wood hardener"
-msgstr "목재 경화소를 지으십시오."
-
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
-msgid "Build a sentry on the eastern border"
-msgstr "동쪽 끝 경계에 초소를 지으십시오."
-
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "You should eventually also build a reed yard and a lime kiln."
 msgstr "결국엔 갈대밭과 석회 가마를 지어야합니다."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:32
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:34
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 msgid "Build up a small food economy"
 msgstr "최소한의 식량 공급 체제를 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:37
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build up a basic food economy to provide your people with food."
 msgstr "동료들에게 식량을 제공할 기본적인 식량 공급 체제를 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 msgid "Build a fisher’s hut"
 msgstr "낚시꾼의 오두막을 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:37
 msgid "Build a hunter’s hut"
 msgstr "사냥꾼의 오두막을 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:40
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
 msgid "Build a well"
 msgstr "우물을 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:41
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build a farm"
 msgstr "농장을 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:42
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Build a bakery"
 msgstr "제과점을 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:47
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a cattle farm"
 msgstr "소 목장을 지으십시오."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:49
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:51
 msgid "Remember to build a cattle farm"
 msgstr "소 목장 짓는것을 잊지 마십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:50
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:48
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
 msgstr "길이 더 길어지고 공급 체제가 더 커짐에 따라 물건들을 더 빨리 운반하기위해 황소를 잘 이용해야 합니다."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:55
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:57
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:59
 msgid "Build a tower"
 msgstr "탑을 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:60
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:58
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
 msgstr "북동쪽 경계에 탑을 건설하여 더 넓은 시야를 확보하고 적들의 기습으로부터 동료들을 보호하십시오."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:65
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:67
 msgid "Explore further"
 msgstr "주위를 더 멀리 탐색하십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:68
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:66
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr "본부의 주위에 군사계의 건물을 더 올리는 사람들의 안전을 확보합시다."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:73
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:75
 msgid "Build a mining infrastructure"
 msgstr "광산 채굴 기반시설을 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:76
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:74
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
 msgstr "산으로 영토를 넓히고 지질학자를 보내어 광석과 석탄을 찾으십시오. 그리고 각종광산, 술집, 제련소, 금속 작업장을 건설하여 기본적인 채굴 공급 체제를 지으십시오."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:79
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:81
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:83
 msgid "Build a fortress"
 msgstr "요새를 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:84
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:82
 msgid "Build a fortress to the east of the mountains."
 msgstr "산의 동쪽에 요새를 지으십시오."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:87
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:89
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a training infrastructure"
 msgstr "군사 훈련 기반시설을 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:92
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:90
 msgid "Build a barracks to train some basic soldiers."
 msgstr "신병을 훈련시킬 병영을 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a battle arena and a training camp to the west of the mountains."
 msgstr "전투 경기장과 훈련소를 산의 서쪽에 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:94
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:124
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:92
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:122
 msgid ""
 "Enhance your metal workshop to an ax workshop in order to produce weapons, "
 "and build up a second metal workshop to ensure the production of tools. When"
@@ -160,23 +161,23 @@ msgid ""
 "weapons."
 msgstr "무기를 생산하기 위해서 금속 제작소를 도끼 제작소로 향상 시키십시오. 그리고 두번째 금속제작소를 건설하여 도구의 제작도 끊어지지 않도록 합니다. 대장장이의 경험치가 다음 수준에 도달 할 정도면(숙련된 대장장이), 도끼 제작소를 추가 무기를 생산할수있는 전쟁 공장으로 향상 시킬수도 있습니다. "
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:95
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:132
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:130
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr "병사들에게 좋은 장비를 제공하기위해 투구 제작소를 산의 서쪽에 지으십시오."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:101
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:103
 msgid "Build a warehouse"
 msgstr "창고를 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:104
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:102
 msgid "Build a warehouse to the west of the mountains."
 msgstr "산의 서쪽에 창고를 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:105
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:103
 msgid ""
 "Warehouses are similar to your headquarters, with the only difference that "
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
@@ -184,18 +185,18 @@ msgid ""
 " longer."
 msgstr "창고는 본부와 비슷합니다. 딱 하나의 차이점은 창고는 군인들이 방어하지 않습니다. 영토가 넓어지고 본부로 가는 거리가 점점 멀어지는곳에는 창고를 짓는 것이 똑똑한 방법일것입니다."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:110
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:112
 msgid "Build training sites"
 msgstr "훈련 시설을 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:113
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:111
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
 msgstr "병영, 전투 경기장, 훈련소를 산의 서쪽에 지으십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:114
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""
 "Barracks train basic soldiers while training sites like a training camp or a"
 " battle arena are used for training soldiers in their different attributes. "
@@ -203,30 +204,30 @@ msgid ""
 "higher is the chance to win a fight."
 msgstr "병영은 신병을 훈련시킵니다. 그러나 훈련소나 전투 경기장같은 훈련시설은 군인을 각각 다른 속성으로 훈련시킵니다. 이러한 속성들은 전투에 있어서 매우 중요하고, 더 많은 훈련을 받은 군인일수록 싸움에서 이길 확률이 높아집니다."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:116
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid "The attributes are: health, attack, defense and evade."
 msgstr "그 속성은 체력, 공격력, 방어력, 회피력입니다."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:121
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:123
 msgid "Build weapons production"
 msgstr "무기 생산 체제를 지으십시오."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:129
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:131
 msgid "Build a helm smithy"
 msgstr "투구 제작소를 지으십시오."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:137
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:139
 msgid "Destroy Kalitath’s army"
 msgstr "카리타쓰의 군대 괴멸시키십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:140
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:138
 msgid "Destroy Kalitath’s army and expand your territory to the east."
 msgstr "카리타쓰의 군대 괴멸시키고 영토를 동쪽으로 확장하십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:141
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:139
 msgid ""
 "To attack an enemy, you must click on the door of an adversary’s military "
 "building. A menu will pop up allowing you to select the number of soldiers "
@@ -234,28 +235,28 @@ msgid ""
 " cross (‘Start Attack’)."
 msgstr "적을 공격하려면 적의 군사 건물 문을 클릭해야 합니다. 공격 대상 군인의 수를 선택할 수 있는 메뉴가 나타납니다. 숫자를 설정할 준비가 되었으면 십자 기호를 클릭합니다 (‘공격 시작’)."
 
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:146
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:148
 msgid "Military assault on Al’thunran"
 msgstr "일'쑨란으로 군사작전"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:149
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:147
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
 msgstr "쓰론의 두 형제들의 모든 군대를 전멸시키고 왕위를 해방시키시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:157
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:155
 msgid "Close to Home"
 msgstr "고향에 가까워지고있음."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:158
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:170
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Thron looks worried…"
 msgstr "쓰론은 걱정하는듯 했다…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:160
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:158
 msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
@@ -263,20 +264,20 @@ msgid ""
 msgstr "지난 며칠동안, 우리는 수도 인근까지 진군했다. 많은 사람들이 우리의 행군에 가세하여 나에게 희망을 주었다. 그러나, 나는 형제들과 싸울만큼 충분히 강하지 않았다는것이 두려울뿐이다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:163
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:161
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
 msgstr "현재 우리는 오래된 숲의 가장자리에서 휴식을 취하고, 다가올 날을 위한 대비를 하고 있다."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:169
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:193
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
 msgid "Another Cold Day"
 msgstr "어느 또다른 추운 날"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:172
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:170
 msgid ""
 "The news that a patrol brought is not good to hear. Our spies tell us that "
 "the war tribes still rage in battle, but some of the elder soldiers and "
@@ -286,16 +287,16 @@ msgid ""
 "around the capital, securing the outer fortification rings."
 msgstr "순찰대가 가져온 정보는 듣기 좋은소식은 아니었다. 우리의 정보요원들이 가져온 정보에 따르면, 전쟁 부족은 여전히 전투에서 격분하고 있으나 일부 원로 군인들과 부족의 지도자들은 이 무의미한 전쟁에 염증을 느끼고 있는것같다고 했다. 쿵의 아들인 카리타쓰 장군은 제일 먼저 알'쑨란을 떠났다. 따라서 그가 떠난 자리는 약하고 취약하다. 척후병의 보고에 따르면 그는 수도 주변의 저지대에 자리를 잡고 외부 방어시설 라인 강화하고있는것 같았다."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:177
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:175
 msgid "Doubts"
 msgstr "의심"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:178
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:176
 msgid "Boldreth is shaking his head…"
 msgstr "볼드레쓰는 고개를 저었다…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:180
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:178
 msgid ""
 "Thron seeks to believe that Kalitath is tired of fighting and would be "
 "willing to join us once we march to re-establish law and order in "
@@ -305,33 +306,33 @@ msgid ""
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
 msgstr "쓰론은 카리타쓰가 전투에 지쳐있고 알'쑨란의 법과 질서를 다시 세우기위해 진군할때 흔쾌히 우리의 손을 잡을것이라고 믿으려고 하오. 그렇지만 나는 그렇게 생각하지 않소. 카리타쓰는 가장 강력한 군대를 가진 장군들중 한명의 아들인데, 그의 일족이 찻'카루스의 깃발아래 고개를 숙이는것이 어려운 일이 될것이오. 어째서 카리타쓰가 찻'카루쓰의 아들의 유산과 왕좌를 되찾기위해 쓰론과 함께 진군해야하는 것이오?"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:185
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:201
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:183
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:199
 msgid "The Story Continues"
 msgstr "이야기는 계속되었다."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:186
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:234
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:260
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:269
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:315
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:184
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:232
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:258
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:267
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:313
 msgid "Boldreth says:"
 msgstr "볼드레쓰가 말했다:"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:188
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:186
 msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
 msgstr "그러나 쓰론은 나의 의심을 듣고 싶어하지 않소. 그는 카리타쓰의 영토까지 확장하고 그의 군대와 다시 합치려 하고있소. 나는 여기에서 일어난 모든일을 주시할수밖에 없소."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:194
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:192
 msgid "Thron is speaking confidently."
 msgstr "쓰론은 자신있게 말했다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:196
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:194
 msgid ""
 "The frontier line of my forces has expanded to the edge of the forests. We "
 "have a long and cold winter and so many miles behind us. The fortification "
@@ -341,18 +342,18 @@ msgid ""
 " this mission, I hope Kalitath son of Kun will follow my call."
 msgstr "우리 군대는 숲의 가장자리까지 확장하여 전선을 구축했다. 우리는 길고 추운 겨울과 긴여정을 보냈다. 옹둔 주변에 세운 우리 방어시설은 물자와 인원의 신속한 공급을 보장한다. 그리고 내가 알'쑨란을 손에 넣으면 두 도시는 물자와 방어가능한 기반시설로 연결될것이다. 그래도 이 임무를 우리만이 수행하지 않기를 바란다. 나는 쿵의 아들 카리타쓰가 우리의 요청에 응하길 바란다."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:202
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:220
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:251
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:290
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:298
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:307
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:200
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:218
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:249
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:288
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:305
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Thron says:"
 msgstr "쓰론이 말했다:"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:204
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:202
 msgid ""
 "I have sent men to meet with Kalitath in his fortress. He has barricaded the"
 " former main entrance to the capital and is trying to set up a siege ring "
@@ -362,16 +363,16 @@ msgid ""
 "prepare for battle."
 msgstr "나는 카리타쓰의 성에 사신을 보냈다. 그는 수도의 예전 입구를 봉쇄하고 알'쑨란 주변의 포위망을 세우려 하고있었다. 그는 개미새끼 한마리도 도시에서 들여보내거나 나가지못하게 할것이다. 포위망이 온전하게 버티는한. 지금까지는 내 메시지에 대한 답변은 전혀 없었다. 그러나 여기서 쓸데없는 시간낭비를 할수 없었다. 나는 군인들을 더 훈련시키고 전투 준비를 할것이다. "
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:208
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Your Loyal Companion"
 msgstr "충성스러운 동료"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:209
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:207
 msgid "Boldreth shouts out!"
 msgstr "볼드레쓰가 외쳤다!"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:211
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:209
 msgid ""
 "The BASTARD! Only one man of our frontier patrol came back alive. He carried"
 " a message from Kalitath, telling us that he will punish every move of our "
@@ -379,12 +380,12 @@ msgid ""
 "there is war between Kalitath and us!"
 msgstr "카리타쓰, 이런 후레자식놈! 사신으로 갔던 우리 국경 수비대를 모두 죽이고 단 한명만 살려보내놨소. 그는 카리타쓰의 답변을 받았는데 우리 군의 모든 움직임들을 그들 자신의 피로서 처벌할것이라고 전했었소.이런 무례한 행동을 용서할수 없소. 이제는 카리타쓰와 우리 사이에 전쟁뿐이오!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:217
 msgid "Renegade Fortification"
 msgstr "배신자의 방어 시설"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:222
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:220
 msgid ""
 "The traitor left his armies dying where they lay when he saw that he would "
 "not keep my forces back. Kalitath disappeared in the confusion of the war, "
@@ -394,7 +395,7 @@ msgid ""
 msgstr "카리타쓰, 그 반역자는 그는 내 군대를 막지못하자 그의 죽어가는 군대를 남겨두고 떠나버렸다. 그는 전쟁의 혼란속에서 사라졌다. 하지만 지금은 상관없다. 그는 도망갔고 ,숲의 옥좌앞에 복종하지 않는 부족의 우두머리로 영원히 잊혀졌다. 그 숲의 옥좌는 바로 지금 내가 가야 할 것이다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:225
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:223
 msgid ""
 "Furthermore, his flight brought us a great benefit: all year, Kalitath was "
 "so busy fighting that he did not even care to store enough food for all his "
@@ -404,7 +405,7 @@ msgid ""
 msgstr "뿐만아니라, 그의 도망은 우리에게 큰 이익을 가져다 주었다. 일년내내, 카리타쓰는 전쟁에만 집착한 나머지 식량 조차 충분히 신경쓰지 않았었다. 이젠 그가 도망친후, 한동안 굶주림에 허덕이다 일부 젊은 추종자들이 탈영병이 되버렸다. 결국 그들은 일부의 강력한 방어 시설까지 점령해버렸다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:228
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:226
 msgid ""
 "But there is more news: My scouts have reported that the two raging tribes "
 "of my brothers are in chaos and have barely noticed the new danger that is "
@@ -412,12 +413,12 @@ msgid ""
 "blinded by rage and hate, there is no sense left in them at all I believe."
 msgstr "[번역확인할것] 하지만 더 많은 소식이 있었다. 우리의 정찰대에 따르면 내 형제들의 분노한 두 부족은 혼란에 빠졌고, 그들을 공격하려는 새로운 위협에 공격받을 가능성을 전혀 예상하지 못하고 있었다고 보고했다. 그렇지만 그들은 분노와 증오에 눈이멀어, 내가 짐작하는것을 눈치채더라도 신경 쓰지 않을것이다. 나는 그들에게 아무런 의미가 없다고 생각한다."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:233
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:231
 msgid "Winter Ahead"
 msgstr "겨울을 앞두고"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:236
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:234
 msgid ""
 "This morning, I found Thron’s mind troubled. He returned from his patrol "
 "late last night and sat back against a tree, watching over the encampment. "
@@ -426,16 +427,16 @@ msgid ""
 "cold winter!"
 msgstr "오늘 아침, 쓰론의 마음에 문제가 있음을 발견했소.그는 어제밤 순찰에서 돌아와 나무에 기대어 앉아 야영지 너머를 지켜보았었소. 싸움과 분쟁의 횟수는 계속해서 늘어나고, 겨울은 우리를 단단히 붙잡을것이오. 우리는 길고 추운 겨울을 극복하기 위해 창고에 식량을 모아두어야 하오!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:241
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:239
 msgid "The Advisor"
 msgstr "조언자"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:240
 msgid "Khantrukh nods."
 msgstr "칸투르크는 고개를 끄덕였다."
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:244
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:242
 msgid ""
 "Boldreth is right! We don’t have enough food to survive a long, cold winter."
 " We should start building a well, a fisher’s and a hunter’s hut. And if we "
@@ -444,23 +445,23 @@ msgid ""
 "this cold soil."
 msgstr "볼드레쓰의 말이 옳소! 우리는 길고 추운 겨울을 보낼 음식이 충분하지 못하오. 우리는 우물, 어부, 사냥꾼의 오두막을 지어야 하오. 그리고 충분한 공간이 있다면 농장과 제과점도 짓는다면 더욱 좋아질것이오! 우리의 농부들중에 한명은 매우 영리한것같소. 그는 이미 이런 추운 곳의 흙에서 잘 자랄수있는 식물을 가지고 있소."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:250
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:248
 msgid "Food Economy Completed"
 msgstr "식량 생산 공급 체제가 완성되었습니다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:253
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:251
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
 msgstr "칸트루크는 이제막 우리의 기본 식량 공급 체제가 성공적으로 구축되었다고 나에게 알려주었다. 이젠 더 이상 굶주림을 두려워하지 않아도 될 것이다."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:259
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:257
 msgid "Tracks"
 msgstr "발자국(추적)"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:260
 msgid ""
 "Thron told me that he discovered tracks in the snow to the northeast of our "
 "settlement. He has instructed us to build a tower, to have a greater visual "
@@ -468,12 +469,12 @@ msgid ""
 "attacks."
 msgstr "쓰론은 우리 영지의 북동쪽에 있는 눈속에서 흔적을 발견했다고 말해줬소. 그는 우리에게 탑을 세우라고 지시했소. 우리의 동료들을 공습으로부터 지키기위한 본부의 주변의 범위를 넘어서 넓은 감시범위를 확보하기위해서요."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:268
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:266
 msgid "Further Exploration"
 msgstr "[번역확인] 추가 탐사"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:271
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:269
 msgid ""
 "The first fortification Thron ordered has just been completed. At the "
 "moment, he seeks to bring trust and belief to those who live inside the "
@@ -485,7 +486,7 @@ msgid ""
 msgstr "쓰론이 명령한 첫번째 방어시설이 막 완성되었소. 바로 지금도, 그는 새로운 거주지의 벽 내부에 살고있는 그들에게 신뢰와 확신을 가져다주도록 하도록 애를 쓰고있소. 새로운 거주지는 ‘온둔’이라는 이름을 가졌고, 이 이름은 오래된 혀에서 ‘기다리는 사람들’이라는 뜻이오. 그러나 쓰론은 아직도 만족하지 못하고있소. 그리고 나는 그가 무엇을 두려워하는지 알고있소. 그것은 숲은 깊고 알'쑨란의 국경과 가깝기 때문이오. 나는 미지의 흔적보다 훨씬 더 큰 수많은 위험이 있다고 확신하오."
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:274
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:272
 msgid ""
 "To overlook more of the area around our hall, we should explore further and "
 "set up more guards and scouts to observe the frontier and keep an eye on the"
@@ -493,12 +494,12 @@ msgid ""
 " capture our woods."
 msgstr "우리 본부 주변의 더 많은 지역을 바라 볼수있도록 우리는 더 멀리 탐사를 해야하고 국경을 감시하기위해 더 많은 경비대와 정찰대를 운영하고 국경밖의 격렬한 전쟁을 계속 지켜보아야 하오. 그런다음 언젠가 한번의 소요사태로 우리의 숲을 탈환하기위해 우리는 준비되어질것이오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:280
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:278
 msgid "Mountains Found"
 msgstr "산을 발견했다."
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:283
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:281
 msgid ""
 "I have just spoken to the leader of our patrol. He told me that they found "
 "some mountains to the north-east and east of our territory. With a bit of "
@@ -507,24 +508,24 @@ msgid ""
 "metal ores."
 msgstr "방금 순찰대장과 이야기를 했소그는 우리 영토의 북동쪽과 동쪽에 산을 발견했다고 나에게 말했소. 운이 좋으면 이것은 우리 병력을 재무장하기위한 새로운 기회가 열릴것이오. 알'툰란의 서쪽 산 대부분은 석탄과 여러 금속광물을 보유하고 있을거란거를 기억하오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:287
 msgid "Mining Economy Completed"
 msgstr "광산 공급체제 완성되었습니다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:292
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:290
 msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
 msgstr "방금 채굴 공급 체제가 갖춰지고 그일을 시작했다는 소식을 들었소. 이 소식이 나를 기쁘게 했소. 가장 어려운 부분은 여전히 마무리 되지않아지만, 이제 우리 대장장이들은 우리의 삶을 더 편하게 해줄것이오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:297
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:295
 msgid "Fortress Needed"
 msgstr "요새가 필요합니다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:300
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:298
 msgid ""
 "Boldreth and I just explored the area around the three mountains. One major "
 "strategic problem of that area seems to be that there are two bigger "
@@ -534,12 +535,12 @@ msgid ""
 " the east of the mountains!"
 msgstr "나는 볼드레쓰와 3개의 산 주변지역을 탐험했다. 중요 전략적 문제중 하나는 2곳의 큰 통로가 존재하는것이다. 산을 중심으로 북쪽 통로와 남쪽 통로이다. 이 통로들은 방어하기 어려울것이다. 그리고  적들의 손에서 산을 보호하기위해서는 우리에겐 오직 한번의 기회가 있는것처럼 보인다. 우리는 산의 동쪽에 요새를 지어야만 한다."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:306
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:304
 msgid "Fortress Completed"
 msgstr "요새가 완성되었습니다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:309
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:307
 msgid ""
 "Finally! The fortress has just been completed, so the entrance to our "
 "settlement should be safe for now. For the future, we might think on "
@@ -547,12 +548,12 @@ msgid ""
 "but for now we can take a deep breath."
 msgstr "드디어, 요새가 완공되었다. 이젠 우리의 거주지 입구는 안전해 질것이다. 앞으로는, 장벽이나 감시탑을 같은 방어시설을 더 지어야 할지도 모른다. 그러나 당분간은 겨우 한숨정도는 쉴수있게 된것같다."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:314
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:312
 msgid "Enhanced Economy and Training"
 msgstr "공급체제의 향상과 훈련"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:317
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:315
 msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
@@ -560,7 +561,7 @@ msgid ""
 msgstr "우리 채굴 공급 체제가 잘 작동하는것 같소. 좋은 소식이오. 어쨌거나 아직도 우리 본부는 일을 기다리고 있는 사람들이 많이 있소. 그러므로 다가올 전쟁을 준비하기위해 그들이 우리 군인들을 도울수 있을것이오."
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:320
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:318
 msgid ""
 "Our geologists found a lot more deposits of iron ore, coal and even gold. We"
 " should enhance our current mines as soon as our miners are more "
@@ -572,7 +573,7 @@ msgid ""
 msgstr "지질학자들이 대량으로 매장되어있는 철광석, 석탄, 금광석을 발견했소. 광부들의 숙련도가 더 좋아지면 광산을 향상시켜야 하오.더많은 광산, 우리는 사람들에게 항상 충분한 식량을 공급하는 더 큰 식량공급 기반시설, 한층 더 많은 가공 공급 체제를 건설해야하오. 그러나 그것들은 여전히 아무것도 없소. 대부분의 군인들은 매우 어리고 좋은 무기도 없거나 훈련을 잘받지도 못했소. 그러나 아직도 여전히 우리 군인 대부분이 경험이 없는 신병들이고, 좋은 무기도없고, 잘 훈련 된 것도 아니오. 앞으로 다가올 사태를 준비하기위해 훈련소를 지어야 하오."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:329
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -581,7 +582,7 @@ msgid ""
 msgstr "내 형제들과 군사들은 죽고 불과 파괴를 남겼다. 어떠한 폐허에서도 평범한 사람들은 찾을수도 없었다. 나는 다만 그들이 이 잔학한 전장에서 달아나 다른곳에서 더 나은 삶을 시작하길 바랄뿐이다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -591,22 +592,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "내가 기억속 아름다움은 그 아름다움은 남아있지 않았다. 단지 오래된 수도는 폐허로만 남아있었다. 나는 슬펐지만 한편으로는 안심이 되었다. 나는 알'쑨란의 오래된 아름다움을 다시 볼수있을거라고 생각하지 않았다. 몇달전까지만해도 내가 이곳에 다시 올수있을지 의문이었다. 이제 오래된 마을은 내손으로 들어왔고 내 동료들이 가질수있는 모든 힘으로 재건하는데 망설이지 않을것이다. 나는 그것의 오래된 아름다움을 다시 보고싶어 견딜수 없다."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid "Victory"
 msgstr "승리"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:334
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr "야만인 자습서 캠페인의 마지막 임무를 완료했습니다.원한다면 계속해서 플레이 할 수 있으며, 그렇지 않으면 다음 캠페인으로 넘어갈 수 있습니다."
+msgstr "야만인 자습서 캠페인의 마지막 임무를 완수했습니다. 원한다면 계속 할 수 있고, 그렇지 않으면 다음 캠페인으로 이동하십시오."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
 msgid "Military Assault"
 msgstr "군사 공격"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:342
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -614,7 +615,7 @@ msgid ""
 msgstr "그렇다면, 장군들은 군사를 준비 하고 있다. 그리고 볼드레쓰 자신은 첫 공습을 주도할것이다. 나도 그와 함께 나올것이다. 이 전쟁으로부터 알'쑨란을 해방시키고 우리의 수도에 평화를 돌려주기위해다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:345
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -623,20 +624,20 @@ msgid ""
 msgstr "[번역확인]내일 아침, 나무들위로 젊은 태양이 뜰때, 나는 공격 명령을 내릴것이다. 해질녁, 나는 장군들의 목조회관에서 승리를 축하할것이고, 오늘 눈이 나를 공격하는 내아버지의 영광속에 갓 태어난 양을 제물로 바칠것이다."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:348
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
 msgid "So be it!"
 msgstr "그렇다면 좋습니다!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
 msgid "Faster Transportation"
 msgstr "더 효율적인 교통"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Khantrukh says:"
 msgstr "칸투르크의 말:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:356
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
@@ -646,12 +647,4 @@ msgstr "족장, 불쌍한 운송일꾼들을 기억하시오. 우리의 길이 �
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:91
-msgid "New Objective"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:93
-msgid "New Objectives"
-msgstr ""
+msgstr "“%s”"

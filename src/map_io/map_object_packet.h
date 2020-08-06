@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,6 @@
 
 #ifndef WL_MAP_IO_MAP_OBJECT_PACKET_H
 #define WL_MAP_IO_MAP_OBJECT_PACKET_H
-
-#include <set>
 
 #include "logic/map_objects/map_object.h"
 

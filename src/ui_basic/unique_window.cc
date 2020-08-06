@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,6 @@
  */
 
 #include "ui_basic/unique_window.h"
-
-#include <boost/bind.hpp>
 
 namespace UI {
 /*
@@ -63,7 +61,8 @@ void UniqueWindow::Registry::toggle() {
 			window->restore();
 			opened();
 		} else {
-			window->die();
+			// Delete rather than die() to make dropdown lists behave
+			delete window;
 		}
 	} else {
 		open_window();

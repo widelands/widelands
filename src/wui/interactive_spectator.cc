@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,12 +22,13 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "chat/chat.h"
+#include "graphic/game_renderer.h"
+#include "graphic/mouse_cursor.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/fieldaction.h"
-#include "wui/game_chat_menu.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/general_statistics_menu.h"
 
@@ -36,8 +37,9 @@
  */
 InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            Section& global_s,
-                                           bool const multiplayer)
-   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer) {
+                                           bool const multiplayer,
+                                           ChatProvider* chat_provider)
+   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer, chat_provider) {
 	add_main_menu();
 
 	add_toolbar_button("wui/menus/statistics_general", "general_stats", _("Statistics"),
@@ -55,12 +57,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	toolbar()->add_space(15);
 
 	if (is_multiplayer()) {
-		add_toolbar_button("wui/menus/chat", "chat", _("Chat"), &chat_, true);
-		chat_.open_window = [this] {
-			if (chat_provider_) {
-				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
-			}
-		};
+		add_chat_ui();
 	}
 
 	finalize_toolbar();
@@ -73,17 +70,14 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 
 void InteractiveSpectator::draw(RenderTarget& dst) {
 	// This fixes a crash with displaying an error dialog during loading.
-	if (!game().is_loaded())
+	if (!game().is_loaded()) {
 		return;
+	}
 
 	draw_map_view(map_view(), &dst);
 }
 
 void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
-	// A spectator cannot build roads.
-	assert(road_building_overlays().steepness_indicators.empty());
-	assert(road_building_overlays().road_previews.empty());
-
 	// In-game, selection can never be on triangles or have a radius.
 	assert(get_sel_radius() == 0);
 	assert(!get_sel_triangles());
@@ -91,24 +85,25 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	const Widelands::Game& the_game = game();
 	const Widelands::Map& map = the_game.map();
 	auto* fields_to_draw =
-	   given_map_view->draw_terrain(the_game, get_workarea_overlays(map), false, dst);
+	   given_map_view->draw_terrain(the_game, nullptr, get_workarea_overlays(map), false, dst);
 	const float scale = 1.f / given_map_view->view().zoom;
 	const uint32_t gametime = the_game.get_gametime();
 
-	const auto text_to_draw = get_text_to_draw();
+	const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 
+		draw_bridges(dst, &field, gametime, scale);
 		draw_border_markers(field, scale, *fields_to_draw, dst);
 
 		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 		if (imm != nullptr && imm->get_positions(the_game).front() == field.fcoords) {
-			imm->draw(gametime, text_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
+			imm->draw(gametime, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
 		}
 
 		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 		     bob = bob->get_next_bob()) {
-			bob->draw(the_game, text_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
+			bob->draw(the_game, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
 		}
 
 		// Draw build help.
@@ -129,7 +124,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 		}
 
 		// Blit the selection marker.
-		if (field.fcoords == get_sel_pos().node) {
+		if (g_mouse_cursor->is_visible() && field.fcoords == get_sel_pos().node) {
 			const Image* pic = get_sel_picture();
 			blit_field_overlay(dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}
@@ -190,35 +185,5 @@ void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_
  * Global in-game keypresses:
  */
 bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
-	if (down)
-		switch (code.sym) {
-		case SDLK_SPACE:
-			toggle_buildhelp();
-			return true;
-
-		case SDLK_c:
-			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
-			return true;
-
-		case SDLK_s:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				new GameMainMenuSaveGame(*this, menu_windows_.savegame);
-			} else
-				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
-			return true;
-
-		case SDLK_RETURN:
-		case SDLK_KP_ENTER:
-			if (chat_provider_) {
-				if (!chat_.window) {
-					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
-				}
-				return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
-			}
-			break;
-		default:
-			break;
-		}
-
 	return InteractiveGameBase::handle_key(down, code);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,6 @@
 
 #ifndef WL_LOGIC_MAP_OBJECTS_TERRAIN_AFFINITY_H
 #define WL_LOGIC_MAP_OBJECTS_TERRAIN_AFFINITY_H
-
-#include <string>
 
 #include "base/macros.h"
 #include "logic/map_objects/description_maintainer.h"

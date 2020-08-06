@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,16 +20,13 @@
 #include "graphic/gl/road_program.h"
 
 #include <cassert>
-#include <cmath>
 
 #include "base/log.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
-#include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "logic/player.h"
-#include "logic/roadtype.h"
 
 // We target OpenGL 2.1 for the desktop here.
 RoadProgram::RoadProgram() {
@@ -51,7 +48,7 @@ void RoadProgram::add_road(const int renderbuffer_width,
                            const FieldsToDraw::Field& start,
                            const FieldsToDraw::Field& end,
                            const float scale,
-                           const Widelands::RoadType road_type,
+                           const Widelands::RoadSegment road_type,
                            const Direction direction,
                            uint32_t* gl_texture) {
 	// The thickness of the road in pixels on screen.
@@ -79,11 +76,15 @@ void RoadProgram::add_road(const int renderbuffer_width,
 		visible_owner = end.owner;
 	}
 
+	assert(road_type == Widelands::RoadSegment::kNormal ||
+	       road_type == Widelands::RoadSegment::kBusy ||
+	       road_type == Widelands::RoadSegment::kWaterway);
 	const Image& texture =
-	   road_type == Widelands::RoadType::kNormal ?
-	      visible_owner->tribe().road_textures().get_normal_texture(
-	         start.geometric_coords, direction) :
-	      visible_owner->tribe().road_textures().get_busy_texture(start.geometric_coords, direction);
+	   road_type == Widelands::RoadSegment::kNormal ?
+	      visible_owner->tribe().road_textures().get_normal_texture(start.fcoords, direction) :
+	      road_type == Widelands::RoadSegment::kWaterway ?
+	      visible_owner->tribe().road_textures().get_waterway_texture(start.fcoords, direction) :
+	      visible_owner->tribe().road_textures().get_busy_texture(start.fcoords, direction);
 	if (*gl_texture == 0) {
 		*gl_texture = texture.blit_data().texture_id;
 	}
@@ -154,31 +155,33 @@ void RoadProgram::draw(const int renderbuffer_width,
 
 		// Road to right neighbor.
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
-			const Widelands::RoadType road =
-			   static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
-			if (road != Widelands::RoadType::kNone) {
+			if (field.road_e != Widelands::RoadSegment::kNone &&
+			    field.road_e != Widelands::RoadSegment::kBridgeNormal &&
+			    field.road_e != Widelands::RoadSegment::kBridgeBusy) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
-				         fields_to_draw.at(field.rn_index), scale, road, kEast, &gl_texture);
+				         fields_to_draw.at(field.rn_index), scale, field.road_e, kEast, &gl_texture);
 			}
 		}
 
 		// Road to bottom right neighbor.
 		if (field.brn_index != FieldsToDraw::kInvalidIndex) {
-			const Widelands::RoadType road =
-			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
-			if (road != Widelands::RoadType::kNone) {
+			if (field.road_se != Widelands::RoadSegment::kNone &&
+			    field.road_se != Widelands::RoadSegment::kBridgeNormal &&
+			    field.road_se != Widelands::RoadSegment::kBridgeBusy) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
-				         fields_to_draw.at(field.brn_index), scale, road, kSouthEast, &gl_texture);
+				         fields_to_draw.at(field.brn_index), scale, field.road_se, kSouthEast,
+				         &gl_texture);
 			}
 		}
 
-		// Road to bottom right neighbor.
+		// Road to bottom left neighbor.
 		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
-			const Widelands::RoadType road =
-			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::RoadType::kMask);
-			if (road != Widelands::RoadType::kNone) {
+			if (field.road_sw != Widelands::RoadSegment::kNone &&
+			    field.road_sw != Widelands::RoadSegment::kBridgeNormal &&
+			    field.road_sw != Widelands::RoadSegment::kBridgeBusy) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
-				         fields_to_draw.at(field.bln_index), scale, road, kSouthWest, &gl_texture);
+				         fields_to_draw.at(field.bln_index), scale, field.road_sw, kSouthWest,
+				         &gl_texture);
 			}
 		}
 	}

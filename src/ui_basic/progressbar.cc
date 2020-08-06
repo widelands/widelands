@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,7 @@
 
 #include "ui_basic/progressbar.h"
 
-#include <cstdio>
-
-#include <boost/format.hpp>
+#include <memory>
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"

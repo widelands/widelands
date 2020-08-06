@@ -1,8 +1,3 @@
-include "scripting/messages.lua"
-include "map:scripting/helper_functions.lua"
-include "scripting/field_animations.lua"
-
-
 -- Some objectives need to be waited for in separate threads
 local obj_build_port_and_shipyard_done = false
 local obj_find_artifacts_done = false
@@ -97,7 +92,7 @@ function stonemason_and_marble_columns()
    local objective = add_campaign_objective(obj_lower_marble_column_demand)
 
    --- Check the headquarters' flag's economy
-   while sf.brn.immovable.economy:ware_target_quantity("marble_column") ~= 4 do
+   while sf.brn.immovable.ware_economy:target_quantity("marble_column") ~= 4 do
       sleep(2434)
    end
    sleep(4000)

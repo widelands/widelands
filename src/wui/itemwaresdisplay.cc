@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -125,8 +125,9 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 			                   &player().get_playercolor());
 		} else {
 			y += IWD_WareBaseLine;
-			if (tribe.get_ware_descr(it.index)->icon())
+			if (tribe.get_ware_descr(it.index)->icon()) {
 				dst.blit(Vector2i(x, y), tribe.get_ware_descr(it.index)->icon());
+			}
 		}
 	}
 }

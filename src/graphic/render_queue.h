@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,9 +21,6 @@
 #define WL_GRAPHIC_RENDER_QUEUE_H
 
 #include <memory>
-#include <vector>
-
-#include <stdint.h>
 
 #include "base/macros.h"
 #include "base/rect.h"
@@ -126,6 +123,7 @@ public:
 		Workareas workareas;
 		float scale = 1.f;
 		Rectf destination_rect = Rectf(0.f, 0.f, 0.f, 0.f);
+		const Widelands::Player* player = nullptr;
 	};
 
 	// The union of all possible program arguments represents an Item that is

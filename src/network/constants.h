@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #ifndef WL_NETWORK_CONSTANTS_H
 #define WL_NETWORK_CONSTANTS_H
 
-#include <stdint.h>
+#include <cstdint>
 
 constexpr uint16_t kWidelandsLanDiscoveryPort = 7394;
 constexpr uint16_t kWidelandsLanPromotionPort = 7395;

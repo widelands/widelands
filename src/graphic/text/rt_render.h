@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,12 +21,7 @@
 #define WL_GRAPHIC_TEXT_RT_RENDER_H
 
 #include <memory>
-#include <set>
-#include <string>
 
-#include <stdint.h>
-
-#include "graphic/color.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "graphic/text/font_set.h"

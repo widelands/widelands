@@ -11,15 +11,15 @@ tribes:new_immovable_type {
    attributes = { "field", "seed_barley" },
    programs = {
       program = {
-         "animate=idle 150000",
+         "animate=idle duration:2m30s",
          "transform=barleyfield_small",
       }
    },
-
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 21, 13 },
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {21, 13}
+      }
    }
 }

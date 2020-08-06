@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,8 +84,9 @@ EditorSetTerrainTool::handle_undo_impl(const Widelands::NodeAndTriangle<Wideland
 			++i;
 		} while (mr.advance(*map));
 		return radius + max;
-	} else
+	} else {
 		return radius;
+	}
 }
 
 EditorActionArgs EditorSetTerrainTool::format_args_impl(EditorInteractive& parent) {

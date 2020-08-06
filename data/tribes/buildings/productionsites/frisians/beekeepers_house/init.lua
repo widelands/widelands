@@ -19,23 +19,23 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 92},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 69},
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {40, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
    },
-
-   indicate_workarea_overlaps = {
-      frisians_berry_farm = true,
-      frisians_reed_farm = true,
-      frisians_farm = true,
-      frisians_beekeepers_house = false,
+   animations = {
+      unoccupied = {
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {40, 56}
+      }
    },
 
    aihints = {
@@ -48,17 +48,13 @@ tribes:new_productionsite_type {
       frisians_beekeeper = 1
    },
 
-   outputs = {
-      "honey"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "callworker=bees",
-            "sleep=45000"
+            "sleep=duration:45s"
          }
       },
    },

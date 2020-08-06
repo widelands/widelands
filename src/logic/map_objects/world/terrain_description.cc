@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,12 +19,8 @@
 
 #include "logic/map_objects/world/terrain_description.h"
 
-#include <memory>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
-#include "graphic/animation.h"
+#include "graphic/animation/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
 #include "logic/game_data_error.h"
@@ -102,7 +98,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      is_(terrain_type_from_string(table.get_string("is"))),
-     default_resource_index_(world.get_resource(table.get_string("default_resource").c_str())),
+     default_resource_index_(world.resource_index(table.get_string("default_resource").c_str())),
      default_resource_amount_(table.get_int("default_resource_amount")),
      dither_layer_(table.get_int("dither_layer")),
      temperature_(table.get_int("temperature")),
@@ -134,7 +130,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 	}
 
 	texture_paths_ = table.get_table("textures")->array_entries<std::string>();
-	frame_length_ = FRAME_LENGTH;
+	frame_length_ = kFrameLength;
 	if (texture_paths_.empty()) {
 		throw GameDataError("Terrain %s has no images.", name_.c_str());
 	} else if (texture_paths_.size() == 1) {
@@ -154,7 +150,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 		throw GameDataError("Default resource is not in valid resources.\n");
 	}
 
-	int editor_category_index =
+	const DescriptionIndex editor_category_index =
 	   world.editor_terrain_categories().get_index(table.get_string("editor_category"));
 	if (editor_category_index == Widelands::INVALID_INDEX) {
 		throw GameDataError(

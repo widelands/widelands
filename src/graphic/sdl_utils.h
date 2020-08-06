@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #ifndef WL_GRAPHIC_SDL_UTILS_H
 #define WL_GRAPHIC_SDL_UTILS_H
 
-#include <stdint.h>
+#include <cstdint>
 
 struct SDL_Surface;
 

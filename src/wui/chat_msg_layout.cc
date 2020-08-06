@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #include "wui/chat_msg_layout.h"
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "graphic/color.h"
 #include "graphic/playercolor.h"

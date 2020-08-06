@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,8 +28,6 @@
 #include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/world/terrain_description.h"
 
-class Texture;
-
 class DitherProgram {
 public:
 	DitherProgram();
@@ -39,7 +37,8 @@ public:
 	void draw(uint32_t gametime,
 	          const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	          const FieldsToDraw& fields_to_draw,
-	          float z_value);
+	          float z_value,
+	          const Widelands::Player*);
 
 private:
 	enum class TrianglePoint {

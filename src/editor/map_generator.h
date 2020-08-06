@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,10 +22,9 @@
 
 #include <memory>
 
+#include "base/random.h"
 #include "logic/map_objects/world/map_gen.h"
 #include "logic/widelands_geometry.h"
-
-struct RNG;
 
 namespace Widelands {
 

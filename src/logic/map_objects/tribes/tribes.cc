@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,16 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/ferry.h"
 #include "logic/map_objects/tribes/market.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 
 namespace Widelands {
@@ -35,6 +44,7 @@ Tribes::Tribes()
      wares_(new DescriptionMaintainer<WareDescr>()),
      workers_(new DescriptionMaintainer<WorkerDescr>()),
      tribes_(new DescriptionMaintainer<TribeDescr>()),
+     legacy_lookup_table_(new TribesLegacyLookupTable()),
      largest_workarea_(0) {
 }
 
@@ -115,6 +125,13 @@ void Tribes::add_carrier_type(const LuaTable& table) {
 	   table, *this));
 }
 
+void Tribes::add_ferry_type(const LuaTable& table) {
+	i18n::Textdomain td("tribes");
+	workers_->add(new FerryDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, *this));
+}
+
 void Tribes::add_soldier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new SoldierDescr(
@@ -129,10 +146,10 @@ void Tribes::add_worker_type(const LuaTable& table) {
 	   table, *this));
 }
 
-void Tribes::add_tribe(const LuaTable& table) {
+void Tribes::add_tribe(const LuaTable& table, const World& world) {
 	const std::string name = table.get_string("name");
 	if (Widelands::tribe_exists(name)) {
-		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), *this));
+		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), world, *this));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
 	}
@@ -144,6 +161,16 @@ void Tribes::add_custom_building(const LuaTable& table) {
 		TribeDescr* descr = tribes_->get_mutable(tribe_index(tribename));
 		const std::string buildingname = table.get_string("buildingname");
 		descr->add_building(buildingname);
+	} else {
+		throw GameDataError("The tribe '%s'' has no preload file.", tribename.c_str());
+	}
+}
+
+void Tribes::add_custom_worker(const LuaTable& table) {
+	const std::string tribename = table.get_string("tribename");
+	if (Widelands::tribe_exists(tribename)) {
+		TribeDescr* descr = tribes_->get_mutable(tribe_index(tribename));
+		descr->add_worker(table.get_string("workername"));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", tribename.c_str());
 	}
@@ -194,7 +221,8 @@ bool Tribes::tribe_exists(DescriptionIndex index) const {
 }
 
 DescriptionIndex Tribes::safe_building_index(const std::string& buildingname) const {
-	const DescriptionIndex result = building_index(buildingname);
+	const DescriptionIndex result =
+	   building_index(legacy_lookup_table_.get()->lookup_building(buildingname));
 	if (!building_exists(result)) {
 		throw GameDataError("Unknown building type \"%s\"", buildingname.c_str());
 	}
@@ -202,7 +230,8 @@ DescriptionIndex Tribes::safe_building_index(const std::string& buildingname) co
 }
 
 DescriptionIndex Tribes::safe_immovable_index(const std::string& immovablename) const {
-	const DescriptionIndex result = immovable_index(immovablename);
+	const DescriptionIndex result =
+	   immovable_index(legacy_lookup_table_.get()->lookup_immovable(immovablename));
 	if (!immovable_exists(result)) {
 		throw GameDataError("Unknown immovable type \"%s\"", immovablename.c_str());
 	}
@@ -210,7 +239,7 @@ DescriptionIndex Tribes::safe_immovable_index(const std::string& immovablename) 
 }
 
 DescriptionIndex Tribes::safe_ship_index(const std::string& shipname) const {
-	const DescriptionIndex result = ship_index(shipname);
+	const DescriptionIndex result = ship_index(legacy_lookup_table_.get()->lookup_ship(shipname));
 	if (!ship_exists(result)) {
 		throw GameDataError("Unknown ship type \"%s\"", shipname.c_str());
 	}
@@ -226,7 +255,7 @@ DescriptionIndex Tribes::safe_tribe_index(const std::string& tribename) const {
 }
 
 DescriptionIndex Tribes::safe_ware_index(const std::string& warename) const {
-	const DescriptionIndex result = ware_index(warename);
+	const DescriptionIndex result = ware_index(legacy_lookup_table_.get()->lookup_ware(warename));
 	if (!ware_exists(result)) {
 		throw GameDataError("Unknown ware type \"%s\"", warename.c_str());
 	}
@@ -234,7 +263,8 @@ DescriptionIndex Tribes::safe_ware_index(const std::string& warename) const {
 }
 
 DescriptionIndex Tribes::safe_worker_index(const std::string& workername) const {
-	const DescriptionIndex result = worker_index(workername);
+	const DescriptionIndex result =
+	   worker_index(legacy_lookup_table_.get()->lookup_worker(workername));
 	if (!worker_exists(result)) {
 		throw GameDataError("Unknown worker type \"%s\"", workername.c_str());
 	}
@@ -302,6 +332,9 @@ void Tribes::load_graphics() {
 		for (const std::string& texture_path : tribe->busy_road_paths()) {
 			tribe->add_busy_road_texture(g_gr->images().get(texture_path));
 		}
+		for (const std::string& texture_path : tribe->waterway_paths()) {
+			tribe->add_waterway_texture(g_gr->images().get(texture_path));
+		}
 	}
 }
 
@@ -326,22 +359,6 @@ void Tribes::postload() {
 			for (const auto& job : de->working_positions()) {
 				workers_->get_mutable(job.first)->add_employer(i);
 			}
-
-			// Check that all workarea overlap hints are valid
-			for (const auto& pair : de->get_highlight_overlapping_workarea_for()) {
-				const DescriptionIndex di = safe_building_index(pair.first);
-				if (upcast(const ProductionSiteDescr, p, get_building_descr(di))) {
-					if (!p->workarea_info().empty()) {
-						continue;
-					}
-					throw GameDataError("Productionsite %s will inform about conflicting building %s "
-					                    "which doesn’t have a workarea",
-					                    de->name().c_str(), pair.first.c_str());
-				}
-				throw GameDataError("Productionsite %s will inform about conflicting building %s which "
-				                    "is not a productionsite",
-				                    de->name().c_str(), pair.first.c_str());
-			}
 		}
 
 		// Register which buildings buildings can have been enhanced from
@@ -357,13 +374,13 @@ void Tribes::postload() {
 	// Validate immovable grows/transforms data
 	for (DescriptionIndex i = 0; i < immovables_->size(); ++i) {
 		const ImmovableDescr& imm = immovables_->get(i);
-		for (const std::string& target : imm.becomes()) {
-			bool target_exists = immovable_index(target) != INVALID_INDEX;
+		for (const auto& target : imm.becomes()) {
+			bool target_exists = immovable_index(target.second) != INVALID_INDEX;
 			if (!target_exists) {
-				target_exists = ship_index(target) != INVALID_INDEX;
+				target_exists = ship_index(target.second) != INVALID_INDEX;
 			}
 			if (!target_exists) {
-				throw GameDataError("Unknown grow/transform target '%s' for tribe immovable '%s'", target.c_str(), imm.name().c_str());
+				throw GameDataError("Unknown grow/transform target '%s' for tribe immovable '%s'", target.second.c_str(), imm.name().c_str());
 			}
 		}
 
@@ -374,8 +391,8 @@ void Tribes::postload() {
 		TribeDescr* tribe_descr = tribes_->get_mutable(i);
 
 		// Register which wares and workers have economy demand checks for each tribe
-		for (const DescriptionIndex building_index : tribe_descr->buildings()) {
-			postload_register_economy_demand_checks(*buildings_->get_mutable(building_index), *tribe_descr);
+		for (const DescriptionIndex bi : tribe_descr->buildings()) {
+			postload_register_economy_demand_checks(*buildings_->get_mutable(bi), *tribe_descr);
 		}
 		// Verify that the preciousness has been set for all of the tribe's wares
 		for (const DescriptionIndex wi : tribe_descr->wares()) {
@@ -390,29 +407,29 @@ void Tribes::postload() {
 }
 
 /// Register wares and workers that have economy demand checks for a building
-void Tribes::postload_register_economy_demand_checks(BuildingDescr& building_descr, const TribeDescr& tribe_descr)
-{
+void Tribes::postload_register_economy_demand_checks(BuildingDescr& building_descr,
+                                                     const TribeDescr& tribe_descr) {
 	if (upcast(ProductionSiteDescr, prodsite, &building_descr)) {
 		// This function can be called only once per loading of tribes
 		assert(prodsite->ware_demand_checks() != nullptr);
 
-		for (const DescriptionIndex ware_index : *prodsite->ware_demand_checks()) {
-			if (!tribe_descr.has_ware(ware_index)) {
-				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check for ware '%s', but the tribe does not use this ware",
-									prodsite->name().c_str(),
-									tribe_descr.name().c_str(),
-									get_ware_descr(ware_index)->name().c_str());
+		for (const DescriptionIndex wi : *prodsite->ware_demand_checks()) {
+			if (!tribe_descr.has_ware(wi)) {
+				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check "
+				                    "for ware '%s', but the tribe does not use this ware",
+				                    prodsite->name().c_str(), tribe_descr.name().c_str(),
+				                    get_ware_descr(wi)->name().c_str());
 			}
-			wares_->get_mutable(ware_index)->set_has_demand_check(tribe_descr.name());
+			wares_->get_mutable(wi)->set_has_demand_check(tribe_descr.name());
 		}
-		for (const DescriptionIndex worker_index : *prodsite->worker_demand_checks()) {
-			if (!tribe_descr.has_worker(worker_index)) {
-				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check for worker '%s', but the tribe does not use this worker",
-									prodsite->name().c_str(),
-									tribe_descr.name().c_str(),
-									get_worker_descr(worker_index)->name().c_str());
+		for (const DescriptionIndex wi : *prodsite->worker_demand_checks()) {
+			if (!tribe_descr.has_worker(wi)) {
+				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check "
+				                    "for worker '%s', but the tribe does not use this worker",
+				                    prodsite->name().c_str(), tribe_descr.name().c_str(),
+				                    get_worker_descr(wi)->name().c_str());
 			}
-			workers_->get_mutable(worker_index)->set_has_demand_check();
+			workers_->get_mutable(wi)->set_has_demand_check();
 		}
 		prodsite->clear_demand_checks();
 	}

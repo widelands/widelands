@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,9 @@
 #ifndef WL_LOGIC_CMD_DELETE_MESSAGE_H
 #define WL_LOGIC_CMD_DELETE_MESSAGE_H
 
-#include <memory>
-
 #include "logic/cmd_queue.h"
-#include "logic/message_queue.h"
+#include "logic/message_id.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 

@@ -1,9 +1,20 @@
+add_subdirectory(test)
+
+wl_library(ai_hints
+  SRCS
+    ai_hints.cc
+    ai_hints.h
+  DEPENDS
+    base_log
+    base_macros
+    logic_constants
+    scripting_lua_table
+)
+
 wl_library(ai
   SRCS
     ai_help_structs.cc
     ai_help_structs.h
-    ai_hints.cc
-    ai_hints.h
     computer_player.cc
     computer_player.h
     defaultai_seafaring.cc
@@ -11,6 +22,7 @@ wl_library(ai
     defaultai.cc
     defaultai.h
   DEPENDS
+    ai_hints
     base_exceptions
     base_i18n
     base_log
@@ -22,6 +34,4 @@ wl_library(ai
     logic_commands
     logic_map
     logic_map_objects
-    scripting_lua_table
 )
-add_subdirectory(test)

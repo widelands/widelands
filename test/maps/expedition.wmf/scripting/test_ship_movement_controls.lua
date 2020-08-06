@@ -24,8 +24,8 @@ run(function()
    --ship has no wares on it
    assert_equal(0,ships[1]:get_wares())
 
-   --no destination is set
-   assert(not ships[1].destination)
+   --heading to the port
+   assert(ships[1].destination)
    --ships in transport state
    assert_equal("transport", ships[1].state)
 
@@ -105,7 +105,7 @@ run(function()
    sleep(500)
    assert_equal("exp_colonizing", ships[1].state)
    sleep(15000)
-   stable_save(game, "port_in_constr")
+   stable_save(game, "port_in_constr", 30 * 1000)
 
    -- while unfinished yet, removing it
    new_port=map:get_field(16,2).immovable

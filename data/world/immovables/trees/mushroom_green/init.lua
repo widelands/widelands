@@ -17,17 +17,21 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 55000",
-         "remove=35",
+         "animate=idle duration:55s",
+         "remove=success:35",
          "grow=mushroom_green_wasteland_pole",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
-         hotspot = { 5, 12 },
+         directory = dirname,
+         basename = "sapling",
          fps = 8,
-      },
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 6, 13 }
+      }
    },
 }
 
@@ -41,17 +45,21 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 65000",
-         "remove=24",
+         "animate=idle duration:1m5s",
+         "remove=success:24",
          "grow=mushroom_green_wasteland_mature",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pole/idle_?.png"),
-         hotspot = { 12, 28 },
+         directory = dirname,
+         basename = "pole",
          fps = 8,
-      },
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 13, 29 }
+      }
    },
 }
 
@@ -65,17 +73,21 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 72000",
-         "remove=19",
+         "animate=idle duration:1m12s",
+         "remove=success:19",
          "grow=mushroom_green_wasteland_old",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "mature/idle_?.png"),
-         hotspot = { 18, 48 },
+         directory = dirname,
+         basename = "mature",
          fps = 8,
-      },
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 19, 49 }
+      }
    },
 }
 
@@ -85,26 +97,30 @@ world:new_immovable_type{
    descname = _ "Green Mushroom Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Green Mushroom Tree",
-   icon = dirname .. "old/idle_0.png",
+   icon = dirname .. "menu.png",
    editor_category = "trees_wasteland",
    size = "small",
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 1535000",
-         "transform=deadtree2 33",
-         "seed=mushroom_green_wasteland_sapling",
+         "animate=idle duration:25m35s",
+         "transform=deadtree2 success:33",
+         "seed=mushroom_green_wasteland_sapling 220",
       },
       fall = {
          "remove=",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "old/idle_?.png"),
-         hotspot = { 24, 60 },
+         directory = dirname,
+         basename = "old",
          fps = 10,
-      },
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 25, 61 }
+      }
    },
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,8 +40,9 @@ WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
                            DescriptionIndex const init_ware,
                            uint8_t const init_max_size)
    : InputQueue(init_owner, init_ware, init_max_size, wwWORKER), workers_() {
-	if (index_ != INVALID_INDEX)
+	if (index_ != INVALID_INDEX) {
 		update();
+	}
 }
 
 /**
@@ -102,9 +103,12 @@ void WorkersQueue::remove_from_economy(Economy&) {
 	}
 }
 
-void WorkersQueue::add_to_economy(Economy&) {
+void WorkersQueue::add_to_economy(Economy& e) {
 	if (index_ != INVALID_INDEX) {
 		update();
+		if (request_) {
+			request_->set_economy(&e);
+		}
 	}
 }
 
@@ -115,8 +119,9 @@ void WorkersQueue::set_filled(Quantity filled) {
 	if (filled > max_size_) {
 		filled = max_size_;
 	}
-	if (filled == get_filled())
+	if (filled == get_filled()) {
 		return;
+	}
 
 	// Now adjust them
 	const TribeDescr& tribe = owner().tribe();

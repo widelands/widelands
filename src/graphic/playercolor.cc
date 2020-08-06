@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ const Image* playercolor_image(const RGBColor& clr, const std::string& image_fil
 	Texture* pc_image = new Texture(w, h);
 	pc_image->fill_rect(Rectf(0.f, 0.f, w, h), RGBAColor(0, 0, 0, 0));
 	pc_image->blit_blended(Rectf(0.f, 0.f, w, h), *image, *color_mask, Rectf(0.f, 0.f, w, h), clr);
-	g_gr->images().insert(hash, std::unique_ptr<const Texture>(std::move(pc_image)));
+	g_gr->images().insert(hash, std::unique_ptr<const Texture>(pc_image));
 	assert(g_gr->images().has(hash));
 	return g_gr->images().get(hash);
 }

@@ -1,5 +1,7 @@
 dirname = "tribes/buildings/productionsites/empire/farm/"
 
+push_textdomain("scenario_emp04.wmf")
+
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_farm1",
@@ -23,17 +25,12 @@ tribes:new_productionsite_type {
       empire_farmer = 1
    },
 
-   outputs = {
-      "wheat"
-   },
-
    programs = {
       work = {
          descname = "working",
          actions = {
             "call=plant",
             "call=harvest",
-            "return=no_stats"
          }
       },
       plant = {
@@ -58,3 +55,4 @@ tribes:new_productionsite_type {
       productivity_threshold = 30
    },
 }
+pop_textdomain()

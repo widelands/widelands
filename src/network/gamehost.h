@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,6 @@
 #include "logic/player_end_result.h"
 #include "network/nethost_interface.h"
 #include "network/network.h"
-#include "ui_basic/unique_window.h"
 
 struct ChatMessage;
 struct GameHostImpl;
@@ -41,6 +40,9 @@ struct Client;
  * launch, as well as dealing with the actual network protocol.
  */
 struct GameHost : public GameController {
+	/** playernumber 0 identifies the spectators */
+	static constexpr uint8_t kSpectatorPlayerNum = 0;
+
 	GameHost(const std::string& playername, bool internet = false);
 	~GameHost() override;
 
@@ -62,7 +64,8 @@ struct GameHost : public GameController {
 	// End GameController interface
 
 	// Pregame-related stuff
-	const GameSettings& settings();
+	const GameSettings& settings() const;
+	/** return true in case all conditions for the game start are met */
 	bool can_launch();
 	void set_scenario(bool);
 	void set_map(const std::string& mapname,
@@ -129,6 +132,22 @@ private:
 	void init_computer_player(Widelands::PlayerNumber p);
 	void init_computer_players();
 
+	void handle_disconnect(uint32_t client_num, RecvPacket& r);
+	void handle_ping(Client& client);
+	void handle_hello(uint32_t client_num, uint8_t cmd, Client& client, RecvPacket& r);
+	void handle_changetribe(Client& client, RecvPacket& r);
+	void handle_changeshared(Client& client, RecvPacket& r);
+	void handle_changeteam(Client& client, RecvPacket& r);
+	void handle_changeinit(Client& client, RecvPacket& r);
+	void handle_changeposition(Client& client, RecvPacket& r);
+	void handle_nettime(uint32_t client_num, RecvPacket& r);
+	void handle_playercommmand(uint32_t client_num, Client& client, RecvPacket& r);
+	void handle_syncreport(uint32_t client_num, Client& client, RecvPacket& r);
+	void handle_chat(Client& client, RecvPacket& r);
+	void handle_speed(Client& client, RecvPacket& r);
+	void handle_new_file(Client& client);
+	void handle_file_part(Client& client, RecvPacket& r);
+
 	void handle_packet(uint32_t i, RecvPacket&);
 	void handle_network();
 	void send_file_part(NetHostInterface::ConnectionId client_sock_id, uint32_t part);
@@ -146,10 +165,12 @@ private:
 	void broadcast(SendPacket&);
 	void write_setting_map(SendPacket&);
 	void write_setting_player(SendPacket&, uint8_t number);
+	void broadcast_setting_player(uint8_t number);
 	void write_setting_all_players(SendPacket&);
-	void write_setting_user(SendPacket&, uint32_t number);
+	void write_setting_user(SendPacket& packet, uint32_t number);
+	void broadcast_setting_user(uint32_t number);
 	void write_setting_all_users(SendPacket&);
-	bool write_map_transfer_info(SendPacket&, std::string);
+	bool write_map_transfer_info(SendPacket&, const std::string&);
 
 	void disconnect_player_controller(uint8_t number, const std::string& name);
 	void disconnect_client(uint32_t number,
@@ -161,7 +182,8 @@ private:
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;
-	bool forced_pause_;
+	bool forced_pause_;  // triggered by the forcePause host chat command, see HostChatProvider in
+	                     // gamehost.cc
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMEHOST_H

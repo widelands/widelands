@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,9 @@
 
 #include "graphic/text_layout.h"
 
+#include <memory>
+
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -61,7 +62,7 @@ std::string as_richtext_paragraph(const std::string& text, UI::Align align) {
 int text_width(const std::string& text, const UI::FontStyleInfo& style, float scale) {
 	UI::FontStyleInfo info(style);
 	info.set_size(info.size() * scale - UI::g_fh->fontset()->size_offset());
-	return UI::g_fh->render(as_editor_richtext_paragraph(text, info))->width();
+	return UI::g_fh->render(as_editor_richtext_paragraph(richtext_escape(text), info))->width();
 }
 
 int text_height(const UI::FontStyleInfo& style, float scale) {

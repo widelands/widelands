@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,14 +36,14 @@ int32_t EditorDeleteCritterTool::handle_click_impl(
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
 
-	do
+	do {
 		if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
 			args->old_bob_type.push_back(&bob->descr());
 			bob->remove(eia.egbase());
 		} else {
 			args->old_bob_type.push_back(nullptr);
 		}
-	while (mr.advance(*map));
+	} while (mr.advance(*map));
 	return radius + 2;
 }
 

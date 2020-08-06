@@ -49,10 +49,6 @@ tribes:new_productionsite_type {
       { name = "iron_ore", amount = 8 },
       { name = "gold_ore", amount = 8 }
    },
-   outputs = {
-      "iron",
-      "gold"
-   },
 
    programs = {
       work = {
@@ -61,19 +57,32 @@ tribes:new_productionsite_type {
          actions = {
             "call=smelt_iron",
             "call=smelt_gold",
-            "call=smelt_iron",
-            "return=no_stats"
+            "call=smelt_iron_2",
          }
       },
+      -- 2 identical programs for iron to prevent unnecessary skipping penalty
       smelt_iron = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",
          actions = {
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
-            "sleep=32000",
+            "sleep=duration:29s",
             "playsound=sound/metal/furnace 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
+            "playsound=sound/metal/ironping 80",
+            "produce=iron"
+         }
+      },
+      smelt_iron_2 = {
+         -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
+         descname = _"smelting iron",
+         actions = {
+            "return=skipped unless economy needs iron",
+            "consume=coal iron_ore",
+            "sleep=duration:29s",
+            "playsound=sound/metal/furnace 192",
+            "animate=working duration:35s",
             "playsound=sound/metal/ironping 80",
             "produce=iron"
          }
@@ -84,9 +93,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs gold",
             "consume=coal gold_ore",
-            "sleep=32000",
+            "sleep=duration:29s",
             "playsound=sound/metal/furnace 192",
-            "animate=working 35000",
+            "animate=working duration:35s",
             "playsound=sound/metal/goldping 80",
             "produce=gold"
          }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,6 @@
  */
 
 #include "map_io/map_player_position_packet.h"
-
-#include <boost/format.hpp>
 
 #include "io/profile.h"
 #include "logic/editor_game_base.h"

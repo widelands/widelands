@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,53 +24,10 @@
 
 #include "graphic/image.h"
 #include "logic/game_controller.h"
-#include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
-
-/**
- * Data about a savegame/replay that we're interested in.
- */
-struct SavegameData {
-	/// The filename of the currenty selected file
-	std::string filename;
-	/// List of filenames when multiple files have been selected
-	std::string filename_list;
-	/// The name of the map that the game is based on
-	std::string mapname;
-	/// The win condition that was played
-	std::string wincondition;
-	/// Filename of the minimap or empty if none available
-	std::string minimap_path;
-	/// "saved on ..."
-	std::string savedatestring;
-	/// Verbose date and time
-	std::string savedonstring;
-	/// An error message or empty if no error occurred
-	std::string errormessage;
-
-	/// Compact gametime information
-	std::string gametime;
-	/// Number of players on the map
-	std::string nrplayers;
-	/// The version of Widelands that the game was played with
-	std::string version;
-	/// Gametime as time stamp. For games, it's the time the game ended. For replays, it's the time
-	/// the game started.
-	time_t savetimestamp;
-	/// Single payer, nethost, netclient or replay
-	GameController::GameType gametype;
-
-	SavegameData();
-
-	/// Converts timestamp to UI string and assigns it to gametime
-	void set_gametime(uint32_t input_gametime);
-	/// Sets the number of players on the map as a string
-	void set_nrplayers(Widelands::PlayerNumber input_nrplayers);
-	/// Sets the mapname as a localized string
-	void set_mapname(const std::string& input_mapname);
-};
+#include "wui/savegamedata.h"
 
 /**
  * Show a Panel with information about a savegame/replay file
@@ -84,8 +41,8 @@ public:
 	/// Reset the data
 	void clear();
 
-	/// Update the display from the 'gamedata'
-	void update(const SavegameData& gamedata);
+	/// show details of savegames including minimap
+	void display(const std::vector<SavegameData>& gamedata);
 
 	/// Box on the bottom where extra buttons can be placed from the outside, e.g. a delete button.
 	UI::Box* button_box() {
@@ -95,6 +52,11 @@ public:
 private:
 	/// Layout the information on screen
 	void layout() override;
+	/// Update the display from the 'gamedata'
+	void show(const SavegameData& gamedata);
+	void show(const std::vector<SavegameData>& gamedata);
+	void show_game_description(const SavegameData& gamedata);
+	void show_minimap(const SavegameData& gamedata);
 
 	const UI::PanelStyle style_;
 	const Mode mode_;

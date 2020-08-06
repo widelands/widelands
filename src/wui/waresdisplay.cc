@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2019 by the Widelands Development Team
+ * Copyright (C) 2003-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,10 +19,9 @@
 
 #include "wui/waresdisplay.h"
 
-#include <cstdio>
-#include <utility>
+#include <memory>
 
-#include <boost/format.hpp>
+#include <SDL_mouse.h>
 
 #include "base/i18n.h"
 #include "base/wexception.h"
@@ -46,7 +45,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
    const Widelands::TribeDescr& tribe,
    Widelands::WareWorker type,
    bool selectable,
-   boost::function<void(Widelands::DescriptionIndex, bool)> callback_function,
+   std::function<void(Widelands::DescriptionIndex, bool)> callback_function,
    bool horizontal,
    int32_t hgap,
    int32_t vgap)
@@ -63,7 +62,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
      hgap_(hgap),
      vgap_(vgap),
      selection_anchor_(Widelands::INVALID_INDEX),
-     callback_function_(callback_function),
+     callback_function_(std::move(callback_function)),
      min_free_vertical_space_(290) {
 	for (const Widelands::DescriptionIndex& index : indices_) {
 		selected_.insert(std::make_pair(index, false));
@@ -121,6 +120,8 @@ void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
 	if (relayout) {
 		// Since we are usually stacked deep within other panels, we need to tell our highest parent
 		// window to relayout
+		// TODO(GunChleoc): Window::on_resolution_changed_note can't shift these properly due to the
+		// changing dimensions.
 		UI::Panel* p = this;
 		while (p->get_parent()) {
 			p = p->get_parent();
@@ -321,7 +322,7 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y) {
 }
 
 void AbstractWaresDisplay::layout() {
-	curware_.set_pos(Vector2i(0, get_inner_h() - 25));
+	curware_.set_pos(Vector2i(0, get_inner_h() - 22));
 	curware_.set_size(get_inner_w(), 20);
 }
 
@@ -437,21 +438,25 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 
 // Wares highlighting/selecting
 void AbstractWaresDisplay::select_ware(Widelands::DescriptionIndex ware) {
-	if (selected_[ware])
+	if (selected_[ware]) {
 		return;
+	}
 
 	selected_[ware] = true;
-	if (callback_function_)
+	if (callback_function_) {
 		callback_function_(ware, true);
+	}
 }
 
 void AbstractWaresDisplay::unselect_ware(Widelands::DescriptionIndex ware) {
-	if (!selected_[ware])
+	if (!selected_[ware]) {
 		return;
+	}
 
 	selected_[ware] = false;
-	if (callback_function_)
+	if (callback_function_) {
 		callback_function_(ware, false);
+	}
 }
 
 bool AbstractWaresDisplay::ware_selected(Widelands::DescriptionIndex ware) {
@@ -460,8 +465,9 @@ bool AbstractWaresDisplay::ware_selected(Widelands::DescriptionIndex ware) {
 
 // Wares hiding
 void AbstractWaresDisplay::hide_ware(Widelands::DescriptionIndex ware) {
-	if (hidden_[ware])
+	if (hidden_[ware]) {
 		return;
+	}
 	hidden_[ware] = true;
 }
 
@@ -497,9 +503,9 @@ static const char* unit_suffixes[] = {
    /** TRANSLATORS: This is a large number with a suffix (e.g. 5G = 5,000,000,000). */
    /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
    _("%1%G")};
-static std::string get_amount_string(uint32_t amount) {
+std::string get_amount_string(uint32_t amount, bool cutoff1k) {
 	uint8_t size = 0;
-	while (amount >= (size ? 1000 : 10000)) {
+	while (amount >= (size || cutoff1k ? 1000 : 10000)) {
 		amount /= 1000;
 		size++;
 	}
@@ -536,8 +542,8 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 
 	const UI::WareInfoStyleInfo& style = g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal);
 
-	for (i = order.begin(); i != order.end(); ++i)
-		for (j = i->begin(); j != i->end(); ++j)
+	for (i = order.begin(); i != order.end(); ++i) {
+		for (j = i->begin(); j != i->end(); ++j) {
 			if ((c = map.find(*j)) != map.end()) {
 				ret += "<div width=30 padding=2><p align=center>"
 				       "<div width=26 background=" +
@@ -547,5 +553,7 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 				       "><p>" + style.info_font().as_font_tag(get_amount_string(c->second)) +
 				       "</p></div></p></div>";
 			}
+		}
+	}
 	return ret;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
@@ -34,6 +32,7 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "network/gamehost.h"
+#include "wlapplication_options.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
 #include "wui/game_chat_menu.h"
@@ -59,14 +58,18 @@ std::string speed_string(int const speed) {
 	return _("PAUSE");
 }
 
+constexpr uint8_t kSpeedSlow = 250;
+constexpr uint16_t kSpeedDefault = 1000;
+constexpr uint16_t kSpeedFast = 10000;
 }  // namespace
 
 InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                                          Section& global_s,
                                          PlayerType pt,
-                                         bool const multiplayer)
+                                         bool const multiplayer,
+                                         ChatProvider* chat_provider)
    : InteractiveBase(g, global_s),
-     chat_provider_(nullptr),
+     chat_provider_(chat_provider),
      multiplayer_(multiplayer),
      playertype_(pt),
      showhidemenu_(toolbar(),
@@ -90,7 +93,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                10,
                34U,
                /** TRANSLATORS: Title for the main menu button in the game */
-               _("Main Menu"),
+               as_tooltip_text_with_hotkey(_("Main Menu"), pgettext("hotkey", "Esc")),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -124,6 +127,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 					   if (wanted_building_window.minimize) {
 						   building_window->minimize();
 					   }
+					   building_window->set_pinned(wanted_building_window.pin);
 					   wanted_building_windows_.erase(coords.hash());
 				   }
 			   }
@@ -132,6 +136,10 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 			   break;
 		   }
 	   });
+
+	if (chat_provider_ != nullptr) {
+		chat_overlay()->set_chat_provider(*chat_provider_);
+	}
 }
 
 void InteractiveGameBase::add_main_menu() {
@@ -214,15 +222,33 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	 */
 	showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
 	                  ShowHideEntry::kCensus,
-	                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "c");
+	                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "C");
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-	                      * building staristics are shown */
+	                      * building statistics are shown */
 	                     _("Hide Statistics") :
 	                     _("Show Statistics"),
 	                  ShowHideEntry::kStatistics,
-	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "s");
+	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "S");
+
+	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * level information is shown above soldiers' heads */
+	                     _("Hide Soldier Levels") :
+	                     _("Show Soldier Levels"),
+	                  ShowHideEntry::kSoldierLevels,
+	                  g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
+	                  "L");
+
+	showhidemenu_.add(get_display_flag(dfShowBuildings) ?
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * buildings are greyed out */
+	                     _("Hide Buildings") :
+	                     _("Show Buildings"),
+	                  ShowHideEntry::kBuildings,
+	                  g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"), false, "",
+	                  "U");
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
@@ -235,6 +261,12 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 	} break;
 	case ShowHideEntry::kStatistics: {
 		set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+	} break;
+	case ShowHideEntry::kSoldierLevels: {
+		set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
+	} break;
+	case ShowHideEntry::kBuildings: {
+		set_display_flag(dfShowBuildings, !get_display_flag(dfShowBuildings));
 	} break;
 	case ShowHideEntry::kWorkareaOverlap: {
 		set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
@@ -282,12 +314,16 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	switch (entry) {
 	case GameSpeedEntry::kIncrease: {
-		increase_gamespeed();
+		increase_gamespeed(SDL_GetModState() & KMOD_SHIFT ?
+		                      kSpeedSlow :
+		                      SDL_GetModState() & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
 	case GameSpeedEntry::kDecrease: {
-		decrease_gamespeed();
+		decrease_gamespeed(SDL_GetModState() & KMOD_SHIFT ?
+		                      kSpeedSlow :
+		                      SDL_GetModState() & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
@@ -299,16 +335,32 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	}
 }
 
-void InteractiveGameBase::increase_gamespeed() {
+void InteractiveGameBase::add_chat_ui() {
+	add_toolbar_button("wui/menus/chat", "chat", _("Chat"), &chat_, true);
+	chat_.open_window = [this] {
+		if (chat_provider_) {
+			GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+		}
+	};
+}
+
+void InteractiveGameBase::increase_gamespeed(uint16_t speed) {
 	if (GameController* const ctrl = get_game()->game_controller()) {
-		ctrl->set_desired_speed(ctrl->desired_speed() + 1000);
+		uint32_t const current_speed = ctrl->desired_speed();
+		ctrl->set_desired_speed(current_speed + speed);
 	}
 }
 
-void InteractiveGameBase::decrease_gamespeed() {
+void InteractiveGameBase::decrease_gamespeed(uint16_t speed) {
 	if (GameController* const ctrl = get_game()->game_controller()) {
-		uint32_t const speed = ctrl->desired_speed();
-		ctrl->set_desired_speed(1000 < speed ? speed - 1000 : 0);
+		uint32_t const current_speed = ctrl->desired_speed();
+		ctrl->set_desired_speed(current_speed > speed ? current_speed - speed : 0);
+	}
+}
+
+void InteractiveGameBase::reset_gamespeed() {
+	if (GameController* const ctrl = get_game()->game_controller()) {
+		ctrl->set_desired_speed(kSpeedDefault);
 	}
 }
 
@@ -324,30 +376,73 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	if (InteractiveBase::handle_key(down, code)) {
 		return true;
 	}
+	const bool numpad_diagonalscrolling = get_config_bool("numpad_diagonalscrolling", false);
 
 	if (down) {
 		switch (code.sym) {
 		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_PAGEUP:
-			increase_gamespeed();
-			return true;
-
-		case SDLK_PAUSE:
-			toggle_game_paused();
-			return true;
-
-		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM) {
+			if (code.sym == SDLK_KP_9 && ((code.mod & KMOD_NUM) || numpad_diagonalscrolling)) {
 				break;
 			}
-			FALLS_THROUGH;
-		case SDLK_PAGEDOWN:
-			decrease_gamespeed();
+			increase_gamespeed(
+			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 			return true;
+		case SDLK_PAUSE:
+			if (code.mod & KMOD_SHIFT) {
+				reset_gamespeed();
+			} else {
+				toggle_game_paused();
+			}
+			return true;
+		case SDLK_KP_3:
+		case SDLK_PAGEDOWN:
+			if (code.sym == SDLK_KP_3 && ((code.mod & KMOD_NUM) || numpad_diagonalscrolling)) {
+				break;
+			}
+			decrease_gamespeed(
+			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
+			return true;
+
+		case SDLK_c:
+			set_display_flag(
+			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
+			return true;
+
+		case SDLK_g:
+			menu_windows_.stats_general.toggle();
+			return true;
+
+		case SDLK_l:
+			set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
+			return true;
+
+		case SDLK_u:
+			set_display_flag(dfShowBuildings, !get_display_flag(dfShowBuildings));
+			return true;
+
+		case SDLK_s:
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				new GameMainMenuSaveGame(*this, menu_windows_.savegame);
+			} else {
+				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+			}
+			return true;
+
+		case SDLK_ESCAPE:
+			InteractiveGameBase::toggle_mainmenu();
+			return true;
+
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			if (chat_provider_) {
+				if (!chat_.window) {
+					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+				}
+				return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
+			}
+			break;
+
 		default:
 			break;
 		}
@@ -362,15 +457,6 @@ Widelands::Game* InteractiveGameBase::get_game() const {
 
 Widelands::Game& InteractiveGameBase::game() const {
 	return dynamic_cast<Widelands::Game&>(egbase());
-}
-
-void InteractiveGameBase::set_chat_provider(ChatProvider& chat) {
-	chat_provider_ = &chat;
-	chat_overlay()->set_chat_provider(chat);
-}
-
-ChatProvider* InteractiveGameBase::get_chat_provider() {
-	return chat_provider_;
 }
 
 void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
@@ -471,12 +557,17 @@ void InteractiveGameBase::start() {
 	}
 }
 
+void InteractiveGameBase::toggle_mainmenu() {
+	mainmenu_.toggle();
+}
+
 void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
                                                      const Vector2i point,
-                                                     bool was_minimal) {
+                                                     bool was_minimal,
+                                                     bool was_pinned) {
 	wanted_building_windows_.insert(std::make_pair(
 	   coords.hash(), std::unique_ptr<const WantedBuildingWindow>(new WantedBuildingWindow(
-	                     point, was_minimal, has_workarea_preview(coords)))));
+	                     point, was_minimal, was_pinned, has_workarea_preview(coords)))));
 }
 
 UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord,

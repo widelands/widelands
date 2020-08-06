@@ -21,21 +21,32 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 84},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 73},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 83},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 72}, -- one pixel higher
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
+      unoccupied = {
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 58}
+      }
    },
 
    aihints = {
@@ -52,21 +63,7 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "iron", amount = 7 },
       { name = "log", amount = 7 },
-      { name = "reed", amount = 7 }
-   },
-   outputs = {
-      "felling_ax",
-      "pick",
-      "scythe",
-      "shovel",
-      "basket",
-      "hunting_spear",
-      "fishing_net",
-      "bread_paddle",
-      "kitchen_tools",
-      "hammer",
-      "fire_tongs",
-      "needles",
+      { name = "reed", amount = 4 }
    },
 
    programs = {
@@ -86,7 +83,6 @@ tribes:new_productionsite_type {
             "call=produce_8",
             "call=produce_7",
             "call=produce_6",
-            "return=no_stats",
          },
       },
       produce_1 = {
@@ -95,8 +91,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs felling_ax",
             "consume=log iron",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=felling_ax"
          },
       },
@@ -106,8 +102,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs pick",
             "consume=log iron",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=pick"
          },
       },
@@ -117,8 +113,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs scythe",
             "consume=log iron",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=scythe"
          },
       },
@@ -128,8 +124,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs shovel",
             "consume=log iron",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=shovel"
          },
       },
@@ -139,8 +135,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs basket",
             "consume=reed log",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=basket"
          },
       },
@@ -150,8 +146,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs hunting_spear",
             "consume=log iron",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=hunting_spear"
          },
       },
@@ -161,8 +157,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fishing_net",
             "consume=reed:2",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=fishing_net"
          },
       },
@@ -172,8 +168,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs bread_paddle",
             "consume=log iron",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=bread_paddle"
          },
       },
@@ -183,8 +179,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs kitchen_tools",
             "consume=log iron",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=kitchen_tools"
          },
       },
@@ -194,8 +190,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs hammer",
             "consume=log iron",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=hammer"
          },
       },
@@ -205,8 +201,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fire_tongs",
             "consume=iron",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=fire_tongs"
          },
       },
@@ -216,8 +212,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs needles",
             "consume=iron",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=needles:2"
          },
       },

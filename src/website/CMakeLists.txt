@@ -1,15 +1,33 @@
+add_subdirectory(lua)
 add_subdirectory(json)
 
 wl_library(website_common
   SRCS
     website_common.cc
     website_common.h
-  USES_SDL2
   DEPENDS
     base_exceptions
     base_i18n
     graphic
     io_filesystem
+)
+
+wl_binary(wl_create_spritesheet
+  SRCS
+    create_spritesheet.cc
+  DEPENDS
+    base_log
+    base_macros
+    graphic
+    graphic_animation
+    graphic_image_io
+    graphic_surface
+    io_filesystem
+    logic
+    logic_constants
+    logic_map_objects
+    lua_tree
+    website_common
 )
 
 
@@ -34,7 +52,6 @@ wl_binary(wl_map_info
 wl_binary(wl_map_object_info
   SRCS
     map_object_info.cc
-  USES_SDL2
   DEPENDS
     base_log
     base_macros

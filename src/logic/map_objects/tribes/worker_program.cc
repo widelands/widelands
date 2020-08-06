@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,9 +18,6 @@
  */
 
 #include "logic/map_objects/tribes/worker_program.h"
-
-#include <memory>
-#include <string>
 
 #include "base/log.h"
 #include "logic/game_data_error.h"
@@ -46,16 +43,19 @@ a colon (:). Finally, programs can call other programs. The table looks like thi
          "program_name3",
       }
       program_name2 = {
-         "command1=parameter1:value1 parameter2:value2",
-         "command2=parameter1",
+         "action1=parameter1:value1 parameter2:value2",
+         "action2=parameter1",
       },
       program_name3 = {
-         "command3",
-         "command4=parameter1 parameter2 parameter3",
+         "action3",
+         "action4=parameter1 parameter2 parameter3",
       }
    },
 
-The available commands are:
+
+For general information about the format, see :ref:`map_object_programs_syntax`.
+
+Available actions are:
 
 - `createware`_
 - `mine`_
@@ -68,6 +68,7 @@ The available commands are:
 - `callobject`_
 - `plant`_
 - `createbob`_
+- `buildferry`_
 - `removeobject`_
 - `repeatsearch`_
 - `findresources`_
@@ -89,6 +90,7 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
    {"callobject", &WorkerProgram::parse_callobject},
    {"plant", &WorkerProgram::parse_plant},
    {"createbob", &WorkerProgram::parse_createbob},
+   {"buildferry", &WorkerProgram::parse_buildferry},
    {"removeobject", &WorkerProgram::parse_removeobject},
    {"repeatsearch", &WorkerProgram::parse_repeatsearch},
    {"findresources", &WorkerProgram::parse_findresources},
@@ -99,11 +101,13 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 
    {nullptr, nullptr}};
 
-
 /**
  * Parse a program
  */
-WorkerProgram::WorkerProgram(const std::string& init_name, const LuaTable& actions_table, const WorkerDescr& worker, const Tribes& tribes)
+WorkerProgram::WorkerProgram(const std::string& init_name,
+                             const LuaTable& actions_table,
+                             const WorkerDescr& worker,
+                             const Tribes& tribes)
    : MapObjectProgram(init_name), worker_(worker), tribes_(tribes) {
 
 	for (const std::string& line : actions_table.array_entries<std::string>()) {
@@ -125,7 +129,8 @@ WorkerProgram::WorkerProgram(const std::string& init_name, const LuaTable& actio
 			}
 
 			if (!parsemap_[mapidx].name) {
-				throw GameDataError("Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
+				throw GameDataError(
+				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
 
 			(this->*parsemap_[mapidx].function)(&act, parseinput.arguments);
@@ -153,9 +158,9 @@ createware
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
          "playsound=sound/farm/scythe 220",
-         "animate=harvesting 10000",
+         "animate=harvesting duration:10s",
          "callobject=harvest",
-         "animate=gathering 4000",
+         "animate=gathering duration:4s",
          "createware=wheat", -- Create 1 wheat and start carrying it
          "return"
       },
@@ -168,8 +173,11 @@ void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std:
 		throw wexception("Usage: createware=<ware type>");
 	}
 
+	const DescriptionIndex ware_index = tribes_.safe_ware_index(cmd[0]);
+
 	act->function = &Worker::run_createware;
-	act->iparam1 = tribes_.safe_ware_index(cmd[0]);
+	act->iparam1 = ware_index;
+	produced_ware_types_.insert(ware_index);
 }
 
 /* RST
@@ -189,7 +197,7 @@ mine
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net 192",
          "mine=fish 1", -- Remove a fish in an area of 1
-         "animate=fishing 3000",
+         "animate=fishing duration:3s",
          "playsound=sound/fisher/fisher_pull_net 192",
          "createware=fish",
          "return"
@@ -224,7 +232,7 @@ breed
       breed = {
          "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
-         "animate=freeing 3000",
+         "animate=freeing duration:3s",
          "breed=fish 1", -- Add a fish in an area of 1
          "return"
       },
@@ -261,7 +269,7 @@ findobject
          building
          "walk=object", -- Now walk to those rocks
          "playsound=sound/atlanteans/cutting/stonecutter 192",
-         "animate=hacking 12000",
+         "animate=hacking duration:12s",
          "callobject=shrink",
          "createware=granite",
          "return"
@@ -271,7 +279,7 @@ findobject
          "findobject=type:bob radius:13 attrib:eatable", -- Find an eatable bob (animal) within a
          radius of 13 from your building
          "walk=object", -- Walk to where the animal is
-         "animate=idle 1500",
+         "animate=idle duration:1s500ms",
          "removeobject",
          "createware=meat",
          "return"
@@ -301,6 +309,12 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 		} else {
 			throw GameDataError("Unknown findobject predicate %s", argument.c_str());
 		}
+	}
+
+	if (act->iparam2 >= 0) {
+		collected_attributes_.insert(
+		   std::make_pair(act->sparam1 == "immovable" ? MapObjectType::IMMOVABLE : MapObjectType::BOB,
+		                  act->iparam2));
 	}
 
 	workarea_info_[act->iparam1].insert(" findobject");
@@ -352,7 +366,7 @@ findspace
          -- Find any field that can have fish in it for adding a fish to it below
          "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
-         "animate=freeing 3000",
+         "animate=freeing duration:3s",
          "breed=fish 1",
          "return"
       },
@@ -361,10 +375,10 @@ findspace
          -- Don't get in the way of the farmer's crops when planting trees. Retry 8 times.
          "findspace=size:any radius:5 avoid:field saplingsearches:8",
          "walk=coords",
-         "animate=dig 2000",
-         "animate=planting 1000",
+         "animate=dig duration:2s",
+         "animate=planting duration:1s",
          "plant=attrib:tree_sapling",
-         "animate=water 2000",
+         "animate=water duration:2s",
          "return"
       },
 
@@ -372,9 +386,9 @@ findspace
          -- The farmer will want to walk to this field again later for harvesting his crop
          "findspace=size:any radius:2 space",
          "walk=coords",
-         "animate=planting 4000",
+         "animate=planting duration:4s",
          "plant=attrib:seed_wheat",
-         "animate=planting 4000",
+         "animate=planting duration:4s",
          "return",
       },
 */
@@ -407,28 +421,16 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			if (item.first == "radius") {
 				act->iparam1 = read_positive(item.second);
 			} else if (item.first == "size") {
-				static const struct {
-					char const* name;
-					int32_t val;
-				} sizenames[] = {{"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
-								 {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
-								 {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
-								 {"port", FindNodeSize::sizePort},   {"swim", FindNodeSize::sizeSwim},
-								 {nullptr, 0}};
+				static const std::map<std::string, FindNodeSize::Size> sizenames{
+				   {"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
+				   {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
+				   {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
+				   {"port", FindNodeSize::sizePort},   {"swim", FindNodeSize::sizeSwim}};
 
-				int32_t index;
-
-				for (index = 0; sizenames[index].name; ++index) {
-					if (item.second == sizenames[index].name) {
-						break;
-					}
-				}
-
-				if (!sizenames[index].name) {
+				if (sizenames.count(item.second) != 1) {
 					throw GameDataError("Bad findspace size '%s'", item.second.c_str());
 				}
-
-				act->iparam2 = sizenames[index].val;
+				act->iparam2 = sizenames.at(item.second);
 			} else if (item.first == "breed") {
 				act->iparam4 = 1;
 			} else if (item.first == "terraform") {
@@ -440,7 +442,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			} else if (item.first == "avoid") {
 				act->iparam5 = MapObjectDescr::get_attribute_id(item.second);
 			} else if (item.first == "saplingsearches") {
-				act->iparam6 = read_positive(item.second);
+				act->iparam6 = read_int(item.second, 2);
 			} else {
 				throw GameDataError("Unknown findspace predicate %s", item.first.c_str());
 			}
@@ -456,6 +458,15 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 		throw GameDataError("findspace: must specify size");
 	}
 	workarea_info_[act->iparam1].insert(" findspace");
+
+	if (!act->sparam1.empty()) {
+		if (act->iparam4 == 1) {
+			// breeds
+			created_resources_.insert(act->sparam1);
+		} else {
+			collected_resources_.insert(act->sparam1);
+		}
+	}
 }
 
 /* RST
@@ -475,18 +486,18 @@ walk
       plant = {
          "findspace=size:any radius:2",
          "walk=coords", -- Walk to the space found by the command above
-         "animate=planting 4000",
+         "animate=planting duration:4s",
          "plant=attrib:seed_blackroot",
-         "animate=planting 4000",
+         "animate=planting duration:4s",
          "return"
       },
 
       harvest = {
          "findobject=attrib:ripe_blackroot radius:2",
          "walk object", -- Walk to the blackroot field found by the command above
-         "animate=harvesting 10000",
+         "animate=harvesting duration:10s",
          "callobject=harvest",
-         "animate=gathering 2000",
+         "animate=gathering duration:2s",
          "createware=blackroot",
          "return"
       },
@@ -496,9 +507,9 @@ walk
          -- 2. This will create an object for us if we don't have one yet
          "plant=attrib:shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
-         "animate=work 500",
+         "animate=work duration:500ms",
          "construct", -- 1. This will find a space for us if no object has been planted yet
-         "animate=work 5000",
+         "animate=work duration:5s",
          "return"
       },
 */
@@ -526,21 +537,7 @@ void WorkerProgram::parse_walk(Worker::Action* act, const std::vector<std::strin
 /* RST
 animate
 ^^^^^^^
-.. function:: animate=\<name\> \<duration\>
-
-   :arg string name: The name of the animation.
-   :arg int duration: The time in milliseconds for which the animation will be played.
-
-   Play the given animation for the given duration. Example::
-
-      plantvine = {
-         "findspace=size:any radius:1",
-         "walk=coords",
-         "animate=dig 2000", -- Play a digging animation for 2 seconds.
-         "plant=attrib:seed_grapes",
-         "animate=planting 3000", -- Play a planting animation for 3 seconds.
-         "return"
-      },
+Runs an animation. See :ref:`map_object_programs_animate`.
 */
 /**
  * iparam1 = anim id
@@ -593,13 +590,15 @@ callobject
          "findobject=attrib:tree radius:10",
          "walk=object",
          "playsound=sound/woodcutting/fast_woodcutting 250",
-         "animate=hacking 10000",
+         "animate=hacking duration:10s",
          "playsound=sound/woodcutting/tree-falling 130",
          "callobject=fall", -- Cause the tree to fall
-         "animate=idle 2000",
+         "animate=idle duration:2s",
          "createware=log",
          "return"
       }
+
+   See also :ref:`immovable_programs`.
 */
 /**
  * sparam1 = callobject command name
@@ -630,20 +629,20 @@ plant
       plant = {
          "findspace=size:any radius:5 avoid:field",
          "walk=coords",
-         "animate=dig 2000",
-         "animate=planting 1000",
+         "animate=dig duration:2s",
+         "animate=planting duration:1s",
          "plant=attrib:tree_sapling", -- Plant any random sapling tree
-         "animate=water 2000",
+         "animate=water duration:2s",
          "return"
       },
 
       plant = {
          "findspace=size:any radius:2 space",
          "walk=coords",
-         "animate=planting 4000",
+         "animate=planting duration:4s",
          -- Plant the tiny field immovable that the worker's tribe knows about
          "plant=attrib:seed_wheat",
-         "animate=planting 4000",
+         "animate=planting duration:4s",
          "return",
       },
 
@@ -652,9 +651,9 @@ plant
          -- Only create a shipconstruction if we don't already have one
          "plant=attrib:shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
-         "animate=work 500",
+         "animate=work duration:500ms",
          "construct",
-         "animate=work 5000",
+         "animate=work duration:5s",
          "return"
       }
 */
@@ -685,10 +684,10 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 		}
 
 		const std::string attrib_name = read_key_value_pair(cmd[i], ':', "", "attrib").second;
-
-		// This will throw a GameDataError if the attribute doesn't exist.
-		ImmovableDescr::get_attribute_id(attrib_name);
 		act->sparamv.push_back(attrib_name);
+		// get_attribute_id will throw a GameDataError if the attribute doesn't exist.
+		created_attributes_.insert(
+		   std::make_pair(MapObjectType::IMMOVABLE, ImmovableDescr::get_attribute_id(attrib_name)));
 	}
 }
 
@@ -700,15 +699,23 @@ createbob
    :arg string bob_name: The bob type to add to the selection. Specify as many bob
       types as you want.
 
-   Adds a bob (usually an animal) to the map at the worker's current location.
-   Randomly select from the list of ``bob_name``. Example::
+   Adds a bob (an animal or a worker, e.g. a deer or a ferry) to the map at the worker's current
+   location. Randomly select from the list of ``bob_name``. Examples::
 
       release = {
          "findspace=size:any radius:3",
          "walk=coords",
-         "animate=releasein 2000",
+         "animate=releasein duration:2s",
          "createbob=wildboar stag sheep", -- Release a wildboar, stag or sheep into the wild
-         "animate=releaseout 2000",
+         "animate=releaseout duration:2s",
+         "return"
+      },
+
+      buildferry = {
+         "findspace=size:swim radius:5",
+         "walk=coords",
+         "animate=work duration:10s",
+         "createbob=frisians_ferry",
          "return"
       }
 */
@@ -719,7 +726,26 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 	}
 
 	act->function = &Worker::run_createbob;
-	act->sparamv = std::move(cmd);
+	act->sparamv = cmd;
+
+	// Register created bobs
+	for (const std::string& bobname : act->sparamv) {
+		created_bobs_.insert(bobname);
+	}
+}
+
+/* RST
+buildferry
+^^^^^^^^^^
+.. function:: buildferry
+
+   **DEPRECATED** use ``createbob=TRIBENAME_ferry`` instead.
+*/
+void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std::string>& cmd) {
+	if (cmd.size() > 1) {
+		throw wexception("buildferry takes no arguments");
+	}
+	act->function = &Worker::run_buildferry;
 }
 
 /* RST
@@ -733,7 +759,7 @@ terraform
       terraform = {
          "findspace=size:terraform radius:6",
          "walk=coords",
-         "animate=dig 2000",
+         "animate=dig duration:2s",
          "terraform",
          "return"
       }
@@ -755,7 +781,7 @@ removeobject
       hunt = {
          "findobject=type:bob radius:13 attrib:eatable", -- Select an object to remove
          "walk=object",
-         "animate=idle 1000",
+         "animate=idle duration:1s",
          -- The selected eatable map object has been hunted, so remove it from the map
          "removeobject",
          "createware=meat",
@@ -808,10 +834,10 @@ findresources
    a marker object when possible. Example::
 
       search = {
-         "animate=hacking 5000",
-         "animate=idle 2000",
+         "animate=hacking duration:5s",
+         "animate=idle duration:2s",
          "playsound=sound/hammering/geologist_hammer 192",
-         "animate=hacking 3000",
+         "animate=hacking duration:3s",
          -- Plant a resource marker at the current location, according to what has been found.
          "findresources"
       }
@@ -873,9 +899,9 @@ playsound
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
          "playsound=sound/farm/scythe 220", -- Almost certainly play a swishy harvesting sound
-         "animate=harvesting 10000",
+         "animate=harvesting duration:10s",
          "callobject=harvest",
-         "animate=gathering 4000",
+         "animate=gathering duration:4s",
          "createware=wheat",
          "return"
       }
@@ -902,11 +928,11 @@ construct
          -- 2. This will create an object for us if we don't have one yet
          "plant=attrib:shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
-         "animate=work 500",
+         "animate=work duration:5s",
          -- 1. Add the current ware to the shipconstruction. This will find a space for us if no
          -- shipconstruction object has been planted yet
          "construct",
-         "animate=work 5000",
+         "animate=work duration:5s",
          "return"
       },
 */

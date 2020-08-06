@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,18 +19,10 @@
 
 #include "graphic/game_renderer.h"
 
-#include <memory>
-
-#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
-#include "logic/editor_game_base.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "wui/interactive_base.h"
-#include "wui/mapviewpixelconstants.h"
-#include "wui/mapviewpixelfunctions.h"
 
 void draw_border_markers(const FieldsToDraw::Field& field,
                          const float scale,
@@ -57,11 +49,13 @@ void draw_border_markers(const FieldsToDraw::Field& field,
 	}
 }
 
-void draw_terrain(const Widelands::EditorGameBase& egbase,
+void draw_terrain(uint32_t gametime,
+                  const Widelands::World& world,
                   const FieldsToDraw& fields_to_draw,
                   const float scale,
-                  Workareas workarea,
+                  const Workareas& workarea,
                   bool grid,
+                  const Widelands::Player* player,
                   RenderTarget* dst) {
 	const Recti& bounding_rect = dst->get_rect();
 	const Surface& surface = dst->get_surface();
@@ -75,12 +69,13 @@ void draw_terrain(const Widelands::EditorGameBase& egbase,
 	i.terrain_arguments.destination_rect =
 	   Rectf(bounding_rect.x, surface_height - bounding_rect.y - bounding_rect.h, bounding_rect.w,
 	         bounding_rect.h);
-	i.terrain_arguments.gametime = egbase.get_gametime();
+	i.terrain_arguments.gametime = gametime;
 	i.terrain_arguments.renderbuffer_width = surface_width;
 	i.terrain_arguments.renderbuffer_height = surface_height;
-	i.terrain_arguments.terrains = &egbase.world().terrains();
+	i.terrain_arguments.terrains = &world.terrains();
 	i.terrain_arguments.fields_to_draw = &fields_to_draw;
 	i.terrain_arguments.scale = scale;
+	i.terrain_arguments.player = player;
 	RenderQueue::instance().enqueue(i);
 
 	// Enqueue the drawing of the dither layer.

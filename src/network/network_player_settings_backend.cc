@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,8 @@ void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id,
 		ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
 		if (impls.size() > 1) {
 			do {
-				size_t random = (std::rand() % impls.size());  // Choose a random AI
+				// Choose a random AI
+				const size_t random = (std::rand() % impls.size());  // NOLINT
 				it = impls.begin() + random;
 			} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
 		}
@@ -63,8 +64,9 @@ void NetworkPlayerSettingsBackend::set_player_tribe(PlayerSlot id, const std::st
 void NetworkPlayerSettingsBackend::set_player_shared(PlayerSlot id,
                                                      Widelands::PlayerNumber shared) {
 	const GameSettings& settings = s->settings();
-	if (id >= settings.players.size() || shared > settings.players.size())
+	if (id >= settings.players.size() || shared > settings.players.size()) {
 		return;
+	}
 	if (settings.players.at(id).state == PlayerSettings::State::kShared) {
 		s->set_player_shared(id, shared);
 	}

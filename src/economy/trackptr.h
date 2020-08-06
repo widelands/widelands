@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,7 @@
 #define WL_ECONOMY_TRACKPTR_H
 
 #include <cassert>
-
-#include <stdint.h>
+#include <cstdint>
 
 class BaseTrackPtr;
 

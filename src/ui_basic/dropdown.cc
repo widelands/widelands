@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,17 +19,10 @@
 
 #include "ui_basic/dropdown.h"
 
-#include <algorithm>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
-#include "base/macros.h"
-#include "graphic/align.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
-#include "ui_basic/mouse_constants.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
 
@@ -44,6 +37,17 @@ int base_height(int button_dimension, UI::PanelStyle style) {
 namespace UI {
 
 int BaseDropdown::next_id_ = 0;
+
+// Dropdowns hook into parent elements to be notified of layouting changes. We need to keep track of
+// whether a dropdown actually still exists when notified to avoid heap-use-after-free's.
+static std::map<int, BaseDropdown*> living_dropdowns_;
+// static
+void BaseDropdown::layout_if_alive(int id) {
+	auto it = living_dropdowns_.find(id);
+	if (it != living_dropdowns_.end()) {
+		it->second->layout();
+	}
+}
 
 BaseDropdown::BaseDropdown(UI::Panel* parent,
                            const std::string& name,
@@ -98,7 +102,9 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      label),
      label_(label),
      type_(type),
-     is_enabled_(true) {
+     is_enabled_(true),
+     button_style_(button_style),
+     autoexpand_display_button_(false) {
 	if (label.empty()) {
 		set_tooltip(pgettext("dropdown", "Select Item"));
 	} else {
@@ -122,34 +128,44 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	}
 	list_ =
 	   new UI::Listselect<uintptr_t>(list_parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
+	list_->set_notify_on_delete(this);
 
 	list_->set_visible(false);
 	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
-	display_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
+	display_button_.sigclicked.connect([this]() { toggle_list(); });
 	if (push_button_ != nullptr) {
 		display_button_.set_perm_pressed(true);
 		button_box_.add(push_button_, UI::Box::Resizing::kFullSize);
-		push_button_->sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
+		push_button_->sigclicked.connect([this]() { toggle_list(); });
 	}
 	button_box_.set_size(w, get_h());
-	list_->clicked.connect(boost::bind(&BaseDropdown::set_value, this));
-	list_->clicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
+	list_->clicked.connect([this]() { set_value(); });
+	list_->clicked.connect([this]() { toggle_list(); });
 	set_can_focus(true);
 	set_value();
 
+	const int serial = id_;  // Not a member variable, because when the lambda below is triggered we
+	                         // might no longer exist
+	living_dropdowns_.insert(std::make_pair(serial, this));
 	// Find parent windows, boxes etc. so that we can move the list along with them
 	UI::Panel* ancestor = this;
 	while ((ancestor = ancestor->get_parent()) != nullptr) {
-		ancestor->position_changed.connect([this] { layout(); });
+		ancestor->position_changed.connect([serial] { layout_if_alive(serial); });
 	}
 	layout();
 }
 
 BaseDropdown::~BaseDropdown() {
 	// The list needs to be able to drop outside of windows, so it won't close with the window.
-	// Deleting here leads to a conflict as to who gets to delete it, so we just leave it.
-	// It will be hidden as soon as the mouse moves away anyway.
-	// TODO(GunChleoc): Investigate whether we can find a better solution for this
+	// So, we tell it to die.
+	if (list_) {
+		list_->set_notify_on_delete(nullptr);
+		list_->die();
+	}
+
+	// Unsubscribe from layouting hooks
+	assert(living_dropdowns_.find(id_) != living_dropdowns_.end());
+	living_dropdowns_.erase(living_dropdowns_.find(id_));
 }
 
 void BaseDropdown::set_height(int height) {
@@ -213,16 +229,32 @@ void BaseDropdown::set_desired_size(int nw, int nh) {
 	layout();
 }
 
+void BaseDropdown::set_autoexpand_display_button() {
+	autoexpand_display_button_ = true;
+}
+
 void BaseDropdown::add(const std::string& name,
                        const uint32_t value,
                        const Image* pic,
                        const bool select_this,
                        const std::string& tooltip_text,
-                       const std::string& hotkey = std::string()) {
+                       const std::string& hotkey) {
 	assert(pic != nullptr || type_ != DropdownType::kPictorial);
 	list_->add(name, value, pic, select_this, tooltip_text, hotkey);
 	if (select_this) {
 		set_value();
+	}
+
+	if (autoexpand_display_button_) {
+		/// Fit width of display button to make enough room for the entry's text
+		const std::string fitme =
+		   label_.empty() ? name : (boost::format(_("%1%: %2%")) % label_ % name).str();
+		const int new_width =
+		   text_width(fitme, g_gr->styles().button_style(button_style_).enabled().font()) + 8;
+		if (new_width > display_button_.get_w()) {
+			set_desired_size(get_w() + new_width - display_button_.get_w(), get_h());
+			set_size(get_w() + new_width - display_button_.get_w(), get_h());
+		}
 	}
 	layout();
 }

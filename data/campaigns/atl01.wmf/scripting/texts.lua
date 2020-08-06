@@ -2,8 +2,6 @@
 --                 Texts for the Atlantean tutorial mission
 -- =======================================================================
 
-include "scripting/richtext_scenarios.lua"
-
 function jundlina(title, text)
    return speech("map:princess.png", "2F9131", title, text)
 end
@@ -481,10 +479,12 @@ scenario_won = {
 }
 
 function building_lost(buildingname)
-   set_textdomain("scenario_atl01.wmf")
-   return {
+   push_textdomain("scenario_atl01.wmf")
+   local r = {
       -- TRANSLATORS: Short message title. Translate as "Lost!" if you don't have enough space.
       title = pgettext("message_short_title", "Building lost!"),
       text = li_object(buildingname, _"We lost a building to the ocean!")
    }
+   pop_textdomain()
+   return r
 end

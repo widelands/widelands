@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,12 +19,8 @@
 #ifndef WL_GRAPHIC_GL_DRAW_LINE_PROGRAM_H
 #define WL_GRAPHIC_GL_DRAW_LINE_PROGRAM_H
 
-#include <vector>
-
 #include "base/rect.h"
-#include "base/vector.h"
 #include "graphic/blend_mode.h"
-#include "graphic/color.h"
 #include "graphic/gl/utils.h"
 
 // This program actually only draws Triangles, which are tesselations of the

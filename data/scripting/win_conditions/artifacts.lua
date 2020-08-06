@@ -5,7 +5,7 @@
 include "scripting/coroutine.lua" -- for sleep
 include "scripting/win_conditions/win_condition_functions.lua"
 
-set_textdomain("win_conditions")
+push_textdomain("win_conditions")
 
 include "scripting/win_conditions/win_condition_texts.lua"
 
@@ -20,7 +20,7 @@ local wc_artifacts = _"Artifacts owned"
 -- Table of all artifacts to conquer
 local artifact_fields = {}
 
-return {
+local r = {
    name = wc_name,
    description = wc_desc,
    peaceful_mode_allowed = true,
@@ -39,7 +39,7 @@ return {
       end
    end,
    func = function()
-      set_textdomain("win_conditions")
+      push_textdomain("win_conditions")
       -- set the objective with the game type for all players
       broadcast_objective("win_condition", wc_descname, wc_desc)
 
@@ -70,7 +70,7 @@ return {
 
       if #artifact_fields == 0 then
          for idx, plr in ipairs(plrs) do
-            send_message(plr, _"No Artifacts", p(_"There are no artifacts on this map. This should not happen. Please file a bug report on %s and specify your Widelands version and the map you tried to load."):bformat("https://wl.widelands.org/wiki/ReportingBugs/"), {popup = true})
+            send_message(plr, _"No Artifacts", p(_"There are no artifacts on this map. This should not happen. Please file a bug report on %s and specify your Widelands version and the map you tried to load."):bformat("https://www.widelands.org/wiki/ReportingBugs/"), {popup = true})
          end
          return
       end
@@ -167,7 +167,7 @@ return {
          for idx, plr in ipairs(t) do
             table.insert(membernames, plr.name)
          end
-         return localize_list(membernames, ",", "win_conditions")
+         return localize_list(membernames, ",")
       end
 
       local teams = {}
@@ -203,6 +203,9 @@ return {
             wl.game.report_result(plr, 0, make_extra_data(plr, wc_descname, wc_version, {score=artifacts_per_team[key]}))
          end
       end
-   end,
 
+   pop_textdomain()
+   end,
 }
+pop_textdomain()
+return r

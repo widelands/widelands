@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,14 +34,14 @@ int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::NodeAndTri
                                                      Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
-	do
+	do {
 		if (upcast(Widelands::Immovable, immovable, mr.location().field->get_immovable())) {
 			args->old_immovable_types.push_back(immovable->descr().name());
 			immovable->remove(eia.egbase());  //  Delete no buildings or stuff.
 		} else {
 			args->old_immovable_types.push_back("");
 		}
-	while (mr.advance(*map));
+	} while (mr.advance(*map));
 	return mr.radius() + 2;
 }
 

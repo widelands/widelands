@@ -22,21 +22,32 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 70},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 70},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 58}
+      }
    },
 
    aihints = {
@@ -52,9 +63,6 @@ tribes:new_productionsite_type {
       { name = "barley", amount = 7 },
       { name = "water", amount = 7 },
    },
-   outputs = {
-      "bread_frisians"
-   },
 
    programs = {
       work = {
@@ -63,8 +71,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs bread_frisians or workers need experience",
             "consume=water barley",
-            "sleep=20000",
-            "animate=working 20000",
+            "sleep=duration:20s",
+            "animate=working duration:20s",
             "produce=bread_frisians"
          },
       },

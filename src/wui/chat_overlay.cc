@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,9 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "chat/chat.h"
 #include "graphic/font_handler.h"
@@ -31,6 +28,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/rt_errors.h"
+#include "sound/sound_handler.h"
 #include "wlapplication_options.h"
 #include "wui/chat_msg_layout.h"
 #include "wui/logmessage.h"
@@ -48,6 +46,7 @@ struct ChatOverlay::Impl {
 
 	/// Reception time of oldest message
 	time_t oldest_;
+	time_t sound_played_;
 
 	/// Layouted message list
 	std::string all_text_;
@@ -58,18 +57,22 @@ struct ChatOverlay::Impl {
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<LogMessage>> log_message_subscriber_;
 
+	FxId new_message_;
+
 	Impl()
 	   : transparent_(false),
 	     chat_(nullptr),
 	     havemessages_(false),
 	     oldest_(0),
+	     sound_played_(time(nullptr)),
 	     chat_message_subscriber_(
 	        Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recompute(); })),
 	     log_message_subscriber_(
 	        Notifications::subscribe<LogMessage>([this](const LogMessage& note) {
 		        log_messages_.push_back(note);
 		        recompute();
-	        })) {
+	        })),
+	     new_message_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 	}
 
 	void recompute();
@@ -103,8 +106,9 @@ void ChatOverlay::set_chat_provider(ChatProvider& chat) {
  */
 void ChatOverlay::think() {
 	if (m->havemessages_) {
-		if (time(nullptr) - m->oldest_ > CHAT_DISPLAY_TIME)
+		if (time(nullptr) - m->oldest_ > CHAT_DISPLAY_TIME) {
 			m->recompute();
+		}
 	}
 }
 
@@ -144,7 +148,11 @@ void ChatOverlay::Impl::recompute() {
 			// Chat message is more recent
 			oldest_ = chat_->get_messages()[chat_idx].time;
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = format_as_richtext(chat_->get_messages()[chat_idx]) + richtext;
+				richtext = format_as_richtext(chat_->get_messages()[chat_idx]).append(richtext);
+			}
+			if (!chat_->sound_off() && sound_played_ < oldest_) {
+				g_sh->play_fx(SoundType::kChat, new_message_);
+				sound_played_ = oldest_;
 			}
 			chat_idx--;
 		} else {
@@ -168,8 +176,9 @@ void ChatOverlay::Impl::recompute() {
 }
 
 void ChatOverlay::draw(RenderTarget& dst) {
-	if (!m->havemessages_)
+	if (!m->havemessages_) {
 		return;
+	}
 
 	std::shared_ptr<const UI::RenderedText> im(nullptr);
 	try {

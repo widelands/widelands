@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #ifndef WL_LOGIC_PATH_H
 #define WL_LOGIC_PATH_H
 
-#include <vector>
+#include <cassert>
 
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"

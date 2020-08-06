@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
+#include "economy/expedition_bootstrap.h"
 #include "economy/input_queue.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -48,8 +49,9 @@ namespace {
 // so the commands will never do anything when executed.
 template <typename T>
 Serial get_object_serial_or_zero(uint32_t object_index, MapObjectLoader& mol) {
-	if (!object_index)
+	if (!object_index) {
 		return 0;
+	}
 	return mol.get<T>(object_index).serial();
 }
 
@@ -95,6 +97,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdBuildFlag(des);
 	case QueueCommandTypes::kBuildRoad:
 		return new CmdBuildRoad(des);
+	case QueueCommandTypes::kBuildWaterway:
+		return new CmdBuildWaterway(des);
 	case QueueCommandTypes::kFlagAction:
 		return new CmdFlagAction(des);
 	case QueueCommandTypes::kStartStopBuilding:
@@ -115,12 +119,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdSetWarePriority(des);
 	case QueueCommandTypes::kSetWareTargetQuantity:
 		return new CmdSetWareTargetQuantity(des);
-	case QueueCommandTypes::kResetWareTargetQuantity:
-		return new CmdResetWareTargetQuantity(des);
 	case QueueCommandTypes::kSetWorkerTargetQuantity:
 		return new CmdSetWorkerTargetQuantity(des);
-	case QueueCommandTypes::kResetWorkerTargetQuantity:
-		return new CmdResetWorkerTargetQuantity(des);
 
 	case QueueCommandTypes::kMessageSetStatusRead:
 		return new CmdMessageSetStatusRead(des);
@@ -150,6 +150,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdShipSink(des);
 	case QueueCommandTypes::kShipCancelExpedition:
 		return new CmdShipCancelExpedition(des);
+	case QueueCommandTypes::kExpeditionConfig:
+		return new CmdExpeditionConfig(des);
 
 	default:
 		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
@@ -177,8 +179,9 @@ void PlayerCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& 
 		if (packet_version == kCurrentPacketVersionPlayerCommand) {
 			GameLogicCommand::read(fr, egbase, mol);
 			sender_ = fr.unsigned_8();
-			if (!egbase.get_player(sender_))
+			if (!egbase.get_player(sender_)) {
 				throw GameDataError("player %u does not exist", sender_);
+			}
 			cmdserial_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError(
@@ -196,8 +199,9 @@ CmdBulldoze::CmdBulldoze(StreamRead& des)
 }
 
 void CmdBulldoze::execute(Game& game) {
-	if (upcast(PlayerImmovable, pimm, game.objects().get_object(serial)))
+	if (upcast(PlayerImmovable, pimm, game.objects().get_object(serial))) {
 		game.get_player(sender())->bulldoze(*pimm, recurse);
+	}
 }
 
 void CmdBulldoze::serialize(StreamWrite& ser) {
@@ -334,25 +338,23 @@ CmdBuildRoad::CmdBuildRoad(StreamRead& des)
      path(nullptr),
      start(read_coords_32(&des)),
      nsteps(des.unsigned_16()),
-     steps(new char[nsteps]) {
+     steps(new uint8_t[nsteps]) {
 	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		steps[i] = des.unsigned_8();
 	}
 }
 
 CmdBuildRoad::~CmdBuildRoad() {
-	delete path;
-
-	delete[] steps;
 }
 
 void CmdBuildRoad::execute(Game& game) {
 	if (path == nullptr) {
 		assert(steps);
 
-		path = new Path(start);
-		for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+		path.reset(new Path(start));
+		for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 			path->append(game.map(), steps[i]);
+		}
 	}
 
 	game.get_player(sender())->build_road(*path);
@@ -365,8 +367,9 @@ void CmdBuildRoad::serialize(StreamWrite& ser) {
 
 	assert(path || steps);
 
-	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		ser.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersionCmdBuildRoad = 1;
@@ -378,10 +381,11 @@ void CmdBuildRoad::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& m
 			PlayerCommand::read(fr, egbase, mol);
 			start = read_coords_32(&fr, egbase.map().extent());
 			nsteps = fr.unsigned_16();
-			path = nullptr;
-			steps = new char[nsteps];
-			for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+			path.reset(nullptr);
+			steps.reset(new uint8_t[nsteps]);
+			for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 				steps[i] = fr.unsigned_8();
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "CmdBuildRoad", packet_version, kCurrentPacketVersionCmdBuildRoad);
@@ -397,8 +401,93 @@ void CmdBuildRoad::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 	PlayerCommand::write(fw, egbase, mos);
 	write_coords_32(&fw, start);
 	fw.unsigned_16(nsteps);
-	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		fw.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
+}
+
+/*** class Cmd_BuildWaterway ***/
+
+CmdBuildWaterway::CmdBuildWaterway(uint32_t t, int32_t p, Path& pa)
+   : PlayerCommand(t, p),
+     path(&pa),
+     start(pa.get_start()),
+     nsteps(pa.get_nsteps()),
+     steps(nullptr) {
+}
+
+CmdBuildWaterway::CmdBuildWaterway(StreamRead& des)
+   : PlayerCommand(0, des.unsigned_8()),
+     // We cannot completely deserialize the path here because we don't have a Map
+     path(nullptr),
+     start(read_coords_32(&des)),
+     nsteps(des.unsigned_16()),
+     steps(new uint8_t[nsteps]) {
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
+		steps[i] = des.unsigned_8();
+	}
+}
+
+CmdBuildWaterway::~CmdBuildWaterway() {
+}
+
+void CmdBuildWaterway::execute(Game& game) {
+	if (path == nullptr) {
+		assert(steps);
+
+		path.reset(new Path(start));
+		for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
+			path->append(game.map(), steps[i]);
+		}
+	}
+
+	game.get_player(sender())->build_waterway(*path);
+}
+
+void CmdBuildWaterway::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	write_coords_32(&ser, start);
+	ser.unsigned_16(nsteps);
+
+	assert(path || steps);
+
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
+		ser.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
+}
+
+constexpr uint16_t kCurrentPacketVersionCmdBuildWaterway = 1;
+
+void CmdBuildWaterway::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionCmdBuildWaterway) {
+			PlayerCommand::read(fr, egbase, mol);
+			start = read_coords_32(&fr, egbase.map().extent());
+			nsteps = fr.unsigned_16();
+			path.reset(nullptr);
+			steps.reset(new uint8_t[nsteps]);
+			for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
+				steps[i] = fr.unsigned_8();
+			}
+		} else {
+			throw UnhandledVersionError(
+			   "CmdBuildWaterway", packet_version, kCurrentPacketVersionCmdBuildWaterway);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("build waterway: %s", e.what());
+	}
+}
+void CmdBuildWaterway::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	// First, write version
+	fw.unsigned_16(kCurrentPacketVersionCmdBuildWaterway);
+	// Write base classes
+	PlayerCommand::write(fw, egbase, mos);
+	write_coords_32(&fw, start);
+	fw.unsigned_16(nsteps);
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
+		fw.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
 }
 
 /*** Cmd_FlagAction ***/
@@ -409,9 +498,11 @@ CmdFlagAction::CmdFlagAction(StreamRead& des) : PlayerCommand(0, des.unsigned_8(
 
 void CmdFlagAction::execute(Game& game) {
 	Player* player = game.get_player(sender());
-	if (upcast(Flag, flag, game.objects().get_object(serial)))
-		if (flag->get_owner() == player)
+	if (upcast(Flag, flag, game.objects().get_object(serial))) {
+		if (flag->get_owner() == player) {
 			player->flagaction(*flag);
+		}
+	}
 }
 
 void CmdFlagAction::serialize(StreamWrite& ser) {
@@ -425,12 +516,8 @@ constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 2;
 void CmdFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		// TODO(GunChleoc): Savegame compatibility, remove after Build 21
-		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdFlagAction) {
+		if (packet_version == kCurrentPacketVersionCmdFlagAction) {
 			PlayerCommand::read(fr, egbase, mol);
-			if (packet_version == 1) {
-				fr.unsigned_8();
-			}
 			serial = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
 		} else {
 			throw UnhandledVersionError(
@@ -603,37 +690,96 @@ void CmdStartOrCancelExpedition::write(FileWrite& fw, EditorGameBase& egbase, Ma
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 }
 
+/*** Cmd_ExpeditionConfig ***/
+
+CmdExpeditionConfig::CmdExpeditionConfig(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+	serial = des.unsigned_32();
+	type = des.unsigned_8() == 0 ? wwWARE : wwWORKER;
+	index = des.unsigned_32();
+	add = des.unsigned_8();
+}
+
+void CmdExpeditionConfig::execute(Game& game) {
+	if (upcast(PortDock, pd, game.objects().get_object(serial))) {
+		if (ExpeditionBootstrap* x = pd->expedition_bootstrap()) {
+			x->demand_additional_item(game, type, index, add);
+		}
+	}
+}
+
+void CmdExpeditionConfig::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(serial);
+	ser.unsigned_8(type == wwWARE ? 0 : 1);
+	ser.unsigned_32(index);
+	ser.unsigned_8(add ? 1 : 0);
+}
+
+constexpr uint16_t kCurrentPacketVersionCmdExpeditionConfig = 1;
+
+void CmdExpeditionConfig::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionCmdExpeditionConfig) {
+			PlayerCommand::read(fr, egbase, mol);
+			serial = get_object_serial_or_zero<PortDock>(fr.unsigned_32(), mol);
+			type = fr.unsigned_8() == 0 ? wwWARE : wwWORKER;
+			index = fr.unsigned_32();
+			add = fr.unsigned_8();
+		} else {
+			throw UnhandledVersionError(
+			   "CmdExpeditionConfig", packet_version, kCurrentPacketVersionCmdExpeditionConfig);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("enhance building: %s", e.what());
+	}
+}
+void CmdExpeditionConfig::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionCmdExpeditionConfig);
+	PlayerCommand::write(fw, egbase, mos);
+
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
+	fw.unsigned_8(type == wwWARE ? 0 : 1);
+	fw.unsigned_32(index);
+	fw.unsigned_8(add ? 1 : 0);
+}
+
 /*** Cmd_EnhanceBuilding ***/
 
 CmdEnhanceBuilding::CmdEnhanceBuilding(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
-	serial = des.unsigned_32();
-	bi = des.unsigned_16();
+	serial_ = des.unsigned_32();
+	bi_ = des.unsigned_16();
+	keep_wares_ = des.unsigned_8();
 }
 
 void CmdEnhanceBuilding::execute(Game& game) {
-	MapObject* mo = game.objects().get_object(serial);
+	MapObject* mo = game.objects().get_object(serial_);
 	if (upcast(ConstructionSite, cs, mo)) {
-		cs->enhance(game);
+		if (bi_ == cs->building().enhancement()) {
+			cs->enhance(game);
+		}
 	} else if (upcast(Building, building, mo)) {
-		game.get_player(sender())->enhance_building(building, bi);
+		game.get_player(sender())->enhance_building(building, bi_, keep_wares_);
 	}
 }
 
 void CmdEnhanceBuilding::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
-	ser.unsigned_32(serial);
-	ser.unsigned_16(bi);
+	ser.unsigned_32(serial_);
+	ser.unsigned_16(bi_);
+	ser.unsigned_8(keep_wares_ ? 1 : 0);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdEnhanceBuilding = 1;
+constexpr uint16_t kCurrentPacketVersionCmdEnhanceBuilding = 2;
 
 void CmdEnhanceBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionCmdEnhanceBuilding) {
 			PlayerCommand::read(fr, egbase, mol);
-			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			bi = fr.unsigned_16();
+			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
+			bi_ = fr.unsigned_16();
+			keep_wares_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdEnhanceBuilding", packet_version, kCurrentPacketVersionCmdEnhanceBuilding);
@@ -643,41 +789,40 @@ void CmdEnhanceBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 	}
 }
 void CmdEnhanceBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
-	// First, write version
 	fw.unsigned_16(kCurrentPacketVersionCmdEnhanceBuilding);
-	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
-
-	// Now serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
-
-	// Now id
-	fw.unsigned_16(bi);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_16(bi_);
+	fw.unsigned_8(keep_wares_ ? 1 : 0);
 }
 
 /*** Cmd_DismantleBuilding ***/
 CmdDismantleBuilding::CmdDismantleBuilding(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
-	serial = des.unsigned_32();
+	serial_ = des.unsigned_32();
+	keep_wares_ = des.unsigned_8();
 }
 
 void CmdDismantleBuilding::execute(Game& game) {
-	if (upcast(Building, building, game.objects().get_object(serial)))
-		game.get_player(sender())->dismantle_building(building);
+	if (upcast(Building, building, game.objects().get_object(serial_))) {
+		game.get_player(sender())->dismantle_building(building, keep_wares_);
+	}
 }
 
 void CmdDismantleBuilding::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
-	ser.unsigned_32(serial);
+	ser.unsigned_32(serial_);
+	ser.unsigned_8(keep_wares_ ? 1 : 0);
 }
 
-constexpr uint16_t kCurrentPacketVersionDismantleBuilding = 1;
+constexpr uint16_t kCurrentPacketVersionDismantleBuilding = 2;
 
 void CmdDismantleBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionDismantleBuilding) {
 			PlayerCommand::read(fr, egbase, mol);
-			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
+			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
+			keep_wares_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdDismantleBuilding", packet_version, kCurrentPacketVersionDismantleBuilding);
@@ -693,7 +838,8 @@ void CmdDismantleBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjec
 	PlayerCommand::write(fw, egbase, mos);
 
 	// Now serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_8(keep_wares_ ? 1 : 0);
 }
 
 /*** Cmd_EvictWorker ***/
@@ -1151,11 +1297,7 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.signed_32(index_);
-	if (type_ == wwWARE) {
-		fw.unsigned_8(0);
-	} else {
-		fw.unsigned_8(1);
-	}
+	fw.unsigned_8(type_ == wwWARE ? 0 : 1);
 	fw.unsigned_32(max_fill_);
 	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
@@ -1199,11 +1341,7 @@ void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(serial_);
 	ser.signed_32(index_);
-	if (type_ == wwWARE) {
-		ser.unsigned_8(0);
-	} else {
-		ser.unsigned_8(1);
-	}
+	ser.unsigned_8(type_ == wwWARE ? 0 : 1);
 	ser.unsigned_32(max_fill_);
 	ser.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
@@ -1253,7 +1391,8 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const uint32_t init_duetime,
 void CmdSetWareTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
 	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
-		player->get_economy(economy())->set_ware_target_quantity(ware_type(), permanent_, duetime());
+		player->get_economy(economy())->set_target_quantity(
+		   wwWARE, ware_type(), permanent_, duetime());
 	}
 }
 
@@ -1282,60 +1421,15 @@ void CmdSetWareTargetQuantity::read(FileRead& fr, EditorGameBase& egbase, MapObj
 
 CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(StreamRead& des)
    : CmdChangeTargetQuantity(des), permanent_(des.unsigned_32()) {
-	if (cmdserial() == 1)
+	if (cmdserial() == 1) {
 		des.unsigned_32();
+	}
 }
 
 void CmdSetWareTargetQuantity::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 	ser.unsigned_32(permanent_);
-}
-
-CmdResetWareTargetQuantity::CmdResetWareTargetQuantity(const uint32_t init_duetime,
-                                                       const PlayerNumber init_sender,
-                                                       const uint32_t init_economy,
-                                                       const DescriptionIndex init_ware_type)
-   : CmdChangeTargetQuantity(init_duetime, init_sender, init_economy, init_ware_type) {
-}
-
-void CmdResetWareTargetQuantity::execute(Game& game) {
-	Player* player = game.get_player(sender());
-	const TribeDescr& tribe = player->tribe();
-	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
-		const int count = tribe.get_ware_descr(ware_type())->default_target_quantity(tribe.name());
-		player->get_economy(economy())->set_ware_target_quantity(ware_type(), count, duetime());
-	}
-}
-
-constexpr uint16_t kCurrentPacketVersionResetWareTargetQuantity = 1;
-
-void CmdResetWareTargetQuantity::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
-	fw.unsigned_16(kCurrentPacketVersionResetWareTargetQuantity);
-	CmdChangeTargetQuantity::write(fw, egbase, mos);
-}
-
-void CmdResetWareTargetQuantity::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
-	try {
-		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionResetWareTargetQuantity) {
-			CmdChangeTargetQuantity::read(fr, egbase, mol);
-		} else {
-			throw UnhandledVersionError("CmdResetWareTargetQuantity", packet_version,
-			                            kCurrentPacketVersionResetWareTargetQuantity);
-		}
-	} catch (const WException& e) {
-		throw GameDataError("reset target quantity: %s", e.what());
-	}
-}
-
-CmdResetWareTargetQuantity::CmdResetWareTargetQuantity(StreamRead& des)
-   : CmdChangeTargetQuantity(des) {
-}
-
-void CmdResetWareTargetQuantity::serialize(StreamWrite& ser) {
-	write_id_and_sender(ser);
-	CmdChangeTargetQuantity::serialize(ser);
 }
 
 CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_duetime,
@@ -1350,8 +1444,8 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_dueti
 void CmdSetWorkerTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
 	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
-		player->get_economy(economy())->set_worker_target_quantity(
-		   ware_type(), permanent_, duetime());
+		player->get_economy(economy())->set_target_quantity(
+		   wwWORKER, ware_type(), permanent_, duetime());
 	}
 }
 
@@ -1380,64 +1474,15 @@ void CmdSetWorkerTargetQuantity::read(FileRead& fr, EditorGameBase& egbase, MapO
 
 CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(StreamRead& des)
    : CmdChangeTargetQuantity(des), permanent_(des.unsigned_32()) {
-	if (cmdserial() == 1)
+	if (cmdserial() == 1) {
 		des.unsigned_32();
+	}
 }
 
 void CmdSetWorkerTargetQuantity::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 	ser.unsigned_32(permanent_);
-}
-
-CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity(const uint32_t init_duetime,
-                                                           const PlayerNumber init_sender,
-                                                           const uint32_t init_economy,
-                                                           const DescriptionIndex init_ware_type)
-   : CmdChangeTargetQuantity(init_duetime, init_sender, init_economy, init_ware_type) {
-}
-
-void CmdResetWorkerTargetQuantity::execute(Game& game) {
-	Player* player = game.get_player(sender());
-	const TribeDescr& tribe = player->tribe();
-	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
-		const int count = tribe.get_worker_descr(ware_type())->default_target_quantity();
-		player->get_economy(economy())->set_worker_target_quantity(ware_type(), count, duetime());
-	}
-}
-
-constexpr uint16_t kCurrentPacketVersionResetWorkerTargetQuantity = 1;
-
-void CmdResetWorkerTargetQuantity::write(FileWrite& fw,
-                                         EditorGameBase& egbase,
-                                         MapObjectSaver& mos) {
-	fw.unsigned_16(kCurrentPacketVersionResetWorkerTargetQuantity);
-	CmdChangeTargetQuantity::write(fw, egbase, mos);
-}
-
-void CmdResetWorkerTargetQuantity::read(FileRead& fr,
-                                        EditorGameBase& egbase,
-                                        MapObjectLoader& mol) {
-	try {
-		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionResetWorkerTargetQuantity) {
-			CmdChangeTargetQuantity::read(fr, egbase, mol);
-		} else {
-			throw UnhandledVersionError("CmdResetWorkerTargetQuantity", packet_version,
-			                            kCurrentPacketVersionResetWorkerTargetQuantity);
-		}
-	} catch (const WException& e) {
-		throw GameDataError("reset worker target quantity: %s", e.what());
-	}
-}
-
-CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity(StreamRead& des)
-   : CmdChangeTargetQuantity(des) {
-}
-
-void CmdResetWorkerTargetQuantity::serialize(StreamWrite& ser) {
-	write_id_and_sender(ser);
-	CmdChangeTargetQuantity::serialize(ser);
 }
 
 /*** class Cmd_ChangeTrainingOptions ***/
@@ -1449,8 +1494,9 @@ CmdChangeTrainingOptions::CmdChangeTrainingOptions(StreamRead& des)
 }
 
 void CmdChangeTrainingOptions::execute(Game& game) {
-	if (upcast(TrainingSite, trainingsite, game.objects().get_object(serial)))
+	if (upcast(TrainingSite, trainingsite, game.objects().get_object(serial))) {
 		game.get_player(sender())->change_training_options(*trainingsite, attribute, value);
+	}
 }
 
 void CmdChangeTrainingOptions::serialize(StreamWrite& ser) {
@@ -1500,9 +1546,11 @@ CmdDropSoldier::CmdDropSoldier(StreamRead& des) : PlayerCommand(0, des.unsigned_
 }
 
 void CmdDropSoldier::execute(Game& game) {
-	if (upcast(PlayerImmovable, player_imm, game.objects().get_object(serial)))
-		if (upcast(Soldier, s, game.objects().get_object(soldier)))
+	if (upcast(PlayerImmovable, player_imm, game.objects().get_object(serial))) {
+		if (upcast(Soldier, s, game.objects().get_object(soldier))) {
 			game.get_player(sender())->drop_soldier(*player_imm, *s);
+		}
+	}
 }
 
 void CmdDropSoldier::serialize(StreamWrite& ser) {
@@ -1736,8 +1784,9 @@ void PlayerMessageCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectL
 		if (packet_version == kCurrentPacketVersionPlayerMessageCommand) {
 			PlayerCommand::read(fr, egbase, mol);
 			message_id_ = MessageId(fr.unsigned_32());
-			if (!message_id_)
+			if (!message_id_) {
 				throw GameDataError("(player %u): message id is null", sender());
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "PlayerMessageCommand", packet_version, kCurrentPacketVersionPlayerMessageCommand);
@@ -1942,6 +1991,54 @@ void CmdProposeTrade::write(FileWrite& /* fw */,
                             MapObjectSaver& /* mos */) {
 	// TODO(sirver,trading): Implement this.
 	NEVER_HERE();
+}
+
+// CmdToggleMuteMessages
+void CmdToggleMuteMessages::execute(Game& game) {
+	if (upcast(Building, b, game.objects().get_object(building_))) {
+		if (all_) {
+			const DescriptionIndex di = game.tribes().safe_building_index(b->descr().name());
+			b->get_owner()->set_muted(di, !b->owner().is_muted(di));
+		} else {
+			b->set_mute_messages(!b->mute_messages());
+		}
+	}
+}
+
+CmdToggleMuteMessages::CmdToggleMuteMessages(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+	building_ = des.unsigned_32();
+	all_ = des.unsigned_8();
+}
+
+void CmdToggleMuteMessages::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(building_);
+	ser.unsigned_8(all_ ? 1 : 0);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdToggleMuteMessages = 1;
+
+void CmdToggleMuteMessages::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdToggleMuteMessages) {
+			PlayerCommand::read(fr, egbase, mol);
+			building_ = fr.unsigned_32();
+			all_ = fr.unsigned_8() ? 1 : 0;
+		} else {
+			throw UnhandledVersionError(
+			   "CmdToggleMuteMessages", packet_version, kCurrentPacketVersionCmdToggleMuteMessages);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("Cmd_ToggleMuteMessages: %s", e.what());
+	}
+}
+
+void CmdToggleMuteMessages::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdToggleMuteMessages);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(building_)));
+	fw.unsigned_8(all_);
 }
 
 }  // namespace Widelands

@@ -22,25 +22,41 @@ tribes:new_productionsite_type {
       log = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {38, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {27, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {38, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "working",
+         hotspot = {27, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       empty = {
-         pictures = path.list_files (dirname .. "empty_??.png"),
-         hotspot = {38, 94},
-      },
+         directory = dirname,
+         basename = "empty",
+         hotspot = {27, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {38, 72},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {27, 56}
+      }
    },
 
    aihints = {
@@ -52,16 +68,8 @@ tribes:new_productionsite_type {
       frisians_miner = 1
    },
 
-   indicate_workarea_overlaps = {
-      frisians_coalmine = false,
-      frisians_coalmine_deep = false,
-   },
-
    inputs = {
       { name = "ration", amount = 8 }
-   },
-   outputs = {
-      "coal"
    },
 
    programs = {
@@ -71,16 +79,15 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs coal",
             "consume=ration",
-            "sleep=45000",
+            "sleep=duration:45s",
             "call=mine_produce",
             "call=mine_produce",
-            "return=no_stats"
          }
       },
       mine_produce = {
          descname = _"mining coal",
          actions = {
-            "animate=working 15000",
+            "animate=working duration:15s",
             "mine=coal 3 50 5 20",
             "produce=coal",
          }

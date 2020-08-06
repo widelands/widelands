@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    attributes = { "field", "seed_reed" },
    programs = {
       program = {
-         "animate=idle 22000",
+         "animate=idle duration:22s",
          "transform=reedfield_small",
       }
    },
@@ -19,7 +19,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 12, 8 },
+         hotspot = { 24, 20 },
       },
    }
 }

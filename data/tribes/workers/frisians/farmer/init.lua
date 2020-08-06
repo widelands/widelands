@@ -1,29 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {8, 23},
-   },
-   planting = {
-      pictures = path.list_files (dirname .. "plant_??.png"),
-      hotspot = { 13, 25 },
-      fps = 20
-   },
-   harvesting = {
-      pictures = path.list_files (dirname .. "harvest_??.png"),
-      hotspot = { 12, 25 },
-      fps = 10
-   },
-   gathering = {
-      pictures = path.list_files (dirname .. "gather_??.png"),
-      hotspot = { 12, 18 },
-      fps = 10
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {11, 24}, 15)
-add_directional_animation(animations, "walkload", dirname, "walkload", {16, 26}, 15)
-
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
    name = "frisians_farmer",
@@ -42,22 +18,78 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:3 space",
          "walk=coords",
-         "animate=planting 8000",
+         "animate=planting duration:6s",
          "plant=attrib:seed_barley",
-         "animate=planting 8000",
+         "animate=planting duration:6s",
          "return"
       },
       harvest = {
          "findobject=attrib:ripe_barley radius:3",
          "walk=object",
-         "animate=harvesting 10000",
+         "animate=harvesting duration:10s",
          "callobject=harvest",
-         "animate=gathering 8000",
+         "animate=gathering duration:4s",
          "createware=barley",
          "return"
       }
    },
 
    ware_hotspot = {0, 20},
-   animations = animations,
+
+   spritesheets = {
+      walk = {
+         directory = dirname,
+         basename = "walk",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {11, 24}
+      },
+      walkload = {
+         directory = dirname,
+         basename = "walkload",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {16, 26}
+      },
+      planting = {
+         directory = dirname,
+         basename = "plant",
+         fps = 20,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         hotspot = {13, 25}
+      },
+      harvesting = {
+         directory = dirname,
+         basename = "harvest",
+         fps = 10,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         hotspot = {12, 25}
+      },
+      gathering = {
+         directory = dirname,
+         basename = "gather",
+         fps = 10,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         hotspot = {12, 18}
+      },
+   },
+   animations = {
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         hotspot = {8, 23}
+      },
+   },
 }

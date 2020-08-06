@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,14 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTION_PROGRAM_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTION_PROGRAM_H
 
-#include <cassert>
-#include <cstring>
 #include <memory>
-#include <set>
-#include <string>
-#include <vector>
-
-#include <stdint.h>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -38,7 +31,6 @@
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "scripting/lua_table.h"
-#include "sound/constants.h"
 
 namespace Widelands {
 
@@ -46,8 +38,6 @@ class Game;
 class ImmovableDescr;
 class ProductionSiteDescr;
 class ProductionSite;
-class TribeDescr;
-class Tribes;
 class Worker;
 class World;
 
@@ -98,21 +88,27 @@ struct ProductionProgram : public MapObjectProgram {
 		DISALLOW_COPY_AND_ASSIGN(Action);
 	};
 
-	/// Parse a group of ware types followed by an optional count within a vector range. Example: "fish,meat:2".
-	static Groups parse_ware_type_groups(std::vector<std::string>::const_iterator begin, std::vector<std::string>::const_iterator end, const ProductionSiteDescr& descr, const Tribes& tribes);
+	/// Parse a group of ware types followed by an optional count within a vector range. Example:
+	/// "fish,meat:2".
+	static Groups parse_ware_type_groups(std::vector<std::string>::const_iterator begin,
+	                                     std::vector<std::string>::const_iterator end,
+	                                     const ProductionSiteDescr& descr,
+	                                     const Tribes& tribes);
 
-	/// Parse a ware or worker list with optional amounts and ensure that the building's outputs match. Example: "fish:2".
-	static BillOfMaterials parse_bill_of_materials(const std::vector<std::string>& arguments, WareWorker ww, const ProductionSiteDescr& descr, const Tribes& tribes);
+	/// Parse a ware or worker list with optional amounts and ensure that the building's outputs
+	/// match. Example: "fish:2".
+	static BillOfMaterials parse_bill_of_materials(const std::vector<std::string>& arguments,
+	                                               WareWorker ww,
+	                                               const Tribes& tribes);
 
 	/// Returns from the program.
 	///
 	/// Parameter syntax:
 	///    parameters         ::= return_value [condition_part]
-	///    return_value       ::= Failed | Completed | Skipped | None
+	///    return_value       ::= Failed | Completed | Skipped
 	///    Failed             ::= "failed"
 	///    Completed          ::= "completed"
 	///    Skipped            ::= "skipped"
-	///    None               ::= "no_stats"
 	///    condition_part     ::= when_condition | unless_conition
 	///    when_condition     ::= "when" condition {"and" condition}
 	///    unless_condition   ::= "unless" condition {"or" condition}
@@ -127,10 +123,9 @@ struct ProductionProgram : public MapObjectProgram {
 	///    workers_need_experience ::= "need experience"
 	/// Parameter semantics:
 	///    return_value:
-	///       If return_value is Failed or Completed, the productionsite's
-	///       statistics is updated accordingly. If return_value is Skipped or
-	///       None, the statistics are not affected. But Skipped adds a 10s delay
-	///       before the program is executed again.
+	///       If return_value is Failed, Skipped or Completed, the productionsite's
+	///       statistics is updated accordingly. Failed and Skipped add a 10s delay
+	///       from the time of failure before the same program is attempted again.
 	///    condition:
 	///       A boolean condition that can be evaluated to true or false.
 	///    condition_part:
@@ -155,7 +150,9 @@ struct ProductionProgram : public MapObjectProgram {
 	/// Note: If the execution reaches the end of the program. the return value
 	/// is implicitly set to Completed.
 	struct ActReturn : public Action {
-		ActReturn(const std::vector<std::string>& arguments, const ProductionSiteDescr&, const Tribes& tribes);
+		ActReturn(const std::vector<std::string>& arguments,
+		          const ProductionSiteDescr&,
+		          const Tribes& tribes);
 		~ActReturn() override;
 		void execute(Game&, ProductionSite&) const override;
 
@@ -165,11 +162,18 @@ struct ProductionProgram : public MapObjectProgram {
 			virtual std::string description(const Tribes&) const = 0;
 			virtual std::string description_negation(const Tribes&) const = 0;
 		};
-		static Condition*
-		create_condition(std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr&, const Tribes& tribes);
+		static Condition* create_condition(const std::vector<std::string>& arguments,
+		                                   std::vector<std::string>::const_iterator& begin,
+		                                   std::vector<std::string>::const_iterator& end,
+		                                   const ProductionSiteDescr&,
+		                                   const Tribes& tribes);
 
 		struct Negation : public Condition {
-			Negation(std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr& descr, const Tribes& tribes);
+			Negation(const std::vector<std::string>& arguments,
+			         std::vector<std::string>::const_iterator& begin,
+			         std::vector<std::string>::const_iterator& end,
+			         const ProductionSiteDescr& descr,
+			         const Tribes& tribes);
 			~Negation() override;
 			bool evaluate(const ProductionSite&) const override;
 			// Just a dummy to satisfy the superclass interface. Do not use.
@@ -209,7 +213,10 @@ struct ProductionProgram : public MapObjectProgram {
 		/// wares, combining from any of the types specified, in its input
 		/// queues.
 		struct SiteHas : public Condition {
-			SiteHas(std::vector<std::string>::const_iterator begin, std::vector<std::string>::const_iterator end, const ProductionSiteDescr& descr, const Tribes& tribes);
+			SiteHas(std::vector<std::string>::const_iterator begin,
+			        std::vector<std::string>::const_iterator end,
+			        const ProductionSiteDescr& descr,
+			        const Tribes& tribes);
 			bool evaluate(const ProductionSite&) const override;
 			std::string description(const Tribes& tribes) const override;
 			std::string description_negation(const Tribes& tribes) const override;
@@ -237,12 +244,11 @@ struct ProductionProgram : public MapObjectProgram {
 	/// Parameter syntax:
 	///    parameters         ::= program {handling_directive}
 	///    handling_directive ::= "on" Result handling_method
-	///    Result             ::= "failure" | "completion" | "skip" | "no_stats"
+	///    Result             ::= "failure" | "completion" | "skip"
 	///    handling_method    ::= Fail | Complete | Skip | Repeat
 	///    Fail               ::= "fail"
 	///    Ignore             ::= "ignore"
 	///    Repeat             ::= "repeat"
-	///    None               ::= "no_stats"
 	/// Parameter semantics:
 	///    program:
 	///       The name of a program defined in the productionsite.
@@ -264,8 +270,7 @@ struct ProductionProgram : public MapObjectProgram {
 	///         program (with the same effect as executing "return=skipped").
 	///       * If handling_method is "repeat", the command is repeated.
 	///       * If handling_method is None the called program continues normal,
-	///         but no statistics are calculated (with the same effect as
-	///         executing "return=no_stats")
+	///         but no statistics are calculated
 	struct ActCall : public Action {
 		ActCall(const std::vector<std::string>& arguments, const ProductionSiteDescr&);
 		void execute(Game&, ProductionSite&) const override;
@@ -309,30 +314,12 @@ struct ProductionProgram : public MapObjectProgram {
 	///
 	/// Blocks the execution of the program for the specified duration.
 	struct ActSleep : public Action {
-		explicit ActSleep(const std::vector<std::string>& arguments);
+		explicit ActSleep(const std::vector<std::string>& arguments,
+		                  const ProductionSiteDescr& psite);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
 		Duration duration_;
-	};
-
-	/// Checks whether the map has a certain feature enabled.
-	///
-	/// Parameter syntax:
-	///    parameters ::= feature
-	/// Parameter semantics:
-	///    feature:
-	///       The name of the feature that should be checked. Possible values are:
-	///       * Seafaring : to check whether the map has at least two port build spaces
-	///
-	/// Ends the program if the feature is not enabled.
-	struct ActCheckMap : public Action {
-		explicit ActCheckMap(const std::vector<std::string>& arguments);
-		void execute(Game&, ProductionSite&) const override;
-
-	private:
-		enum class Feature { kSeafaring = 1 };
-		Feature feature_;
 	};
 
 	/// Runs an animation.
@@ -403,7 +390,9 @@ struct ProductionProgram : public MapObjectProgram {
 	/// types of a group are sorted.
 	// TODO(unknown): change this!
 	struct ActConsume : public Action {
-		ActConsume(const std::vector<std::string>& arguments, const ProductionSiteDescr& descr, const Tribes& tribes);
+		ActConsume(const std::vector<std::string>& arguments,
+		           const ProductionSiteDescr& descr,
+		           const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 	};
 
@@ -423,7 +412,9 @@ struct ProductionProgram : public MapObjectProgram {
 	/// produced wares are of the type specified in the group. How the produced
 	/// wares are handled is defined by the productionsite.
 	struct ActProduce : public Action {
-		ActProduce(const std::vector<std::string>& arguments, const ProductionSiteDescr&, const Tribes& tribes);
+		ActProduce(const std::vector<std::string>& arguments,
+		           ProductionSiteDescr&,
+		           const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
@@ -444,7 +435,9 @@ struct ProductionProgram : public MapObjectProgram {
 	/// The recruited workers are of the type specified in the group. How the
 	/// recruited workers are handled is defined by the productionsite.
 	struct ActRecruit : public Action {
-		ActRecruit(const std::vector<std::string>& arguments, const ProductionSiteDescr&, const Tribes& tribes);
+		ActRecruit(const std::vector<std::string>& arguments,
+		           ProductionSiteDescr&,
+		           const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
@@ -520,7 +513,8 @@ struct ProductionProgram : public MapObjectProgram {
 	struct ActConstruct : public Action {
 		ActConstruct(const std::vector<std::string>& arguments,
 		             const std::string& production_program_name,
-		             ProductionSiteDescr*);
+		             ProductionSiteDescr*,
+		             const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;

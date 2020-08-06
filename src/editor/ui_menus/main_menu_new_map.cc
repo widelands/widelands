@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,12 +19,6 @@
 
 #include "editor/ui_menus/main_menu_new_map.h"
 
-#include <memory>
-#include <string>
-#include <vector>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "editor/editorinteractive.h"
@@ -36,6 +30,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/progresswindow.h"
+#include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 
 inline EditorInteractive& MainMenuNewMap::eia() {
@@ -80,8 +75,8 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
 	box_.add(&list_);
 	box_.add_space(2 * margin_);
 
-	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_cancel, this));
-	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
+	cancel_button_.sigclicked.connect([this]() { clicked_cancel(); });
+	ok_button_.sigclicked.connect([this]() { clicked_create_map(); });
 	if (UI::g_fh->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_);
 		button_box_.add(&cancel_button_);
@@ -100,9 +95,8 @@ void MainMenuNewMap::clicked_create_map() {
 	EditorInteractive& parent = eia();
 	Widelands::EditorGameBase& egbase = parent.egbase();
 	Widelands::Map* map = egbase.mutable_map();
-	UI::ProgressWindow loader_ui;
-
-	loader_ui.step(_("Creating empty map…"));
+	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
+	egbase.step_loader_ui(_("Creating empty map…"));
 
 	parent.cleanup_for_load();
 
@@ -111,9 +105,11 @@ void MainMenuNewMap::clicked_create_map() {
 	                      get_config_string("realname", pgettext("author_name", "Unknown")));
 
 	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
+	egbase.load_graphics();
 
 	map->recalc_whole_map(egbase);
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);
+	egbase.remove_loader_ui();
 	die();
 }
 

@@ -8,7 +8,7 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   needs_seafaring = true,
+   map_check = {"seafaring"},
 
    buildcost = {
       log = 3,
@@ -58,10 +58,6 @@ tribes:new_productionsite_type {
       { name = "spidercloth", amount = 4 }
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_shipyard = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -69,22 +65,20 @@ tribes:new_productionsite_type {
          actions = {
             "call=ship on failure fail",
             "call=ship_preparation",
-            "return=no_stats"
          }
       },
       ship = {
          -- TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
          descname = _"constructing a ship",
          actions = {
-            "checkmap=seafaring",
             "construct=atlanteans_shipconstruction buildship 6",
-            "sleep=20000",
+            "sleep=duration:20s",
          }
       },
       ship_preparation = {
          descname = _"working",
          actions = {
-            "animate=working 35000",
+            "animate=working duration:35s",
          }
       },
    },

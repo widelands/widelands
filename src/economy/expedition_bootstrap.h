@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,19 +21,14 @@
 #define WL_ECONOMY_EXPEDITION_BOOTSTRAP_H
 
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "economy/input_queue.h"
 
 namespace Widelands {
 
-class Economy;
 class EditorGameBase;
-class Game;
-class MapObjectLoader;
 class PortDock;
-class Request;
 class WareInstance;
 class Warehouse;
 class Worker;
@@ -71,13 +66,18 @@ public:
 	                                   std::vector<WareInstance*>* return_wares);
 
 	// Changes the economy for the wares that are already in store.
-	void set_economy(Economy* economy);
+	void set_economy(Economy* economy, WareWorker);
 
 	// Returns the wares and workers currently waiting for the expedition.
-	std::vector<InputQueue*> queues() const;
+	std::vector<InputQueue*> queues(bool all) const;
 
 	// Returns the matching input queue for the given index and type.
-	InputQueue& inputqueue(DescriptionIndex index, WareWorker type) const;
+	InputQueue& inputqueue(DescriptionIndex index, WareWorker type, bool) const;
+	InputQueue* inputqueue(size_t additional_index) const;
+	InputQueue& first_empty_inputqueue(DescriptionIndex index, WareWorker type) const;
+
+	void demand_additional_item(Game&, WareWorker, DescriptionIndex, bool);
+	size_t count_additional_queues() const;
 
 	// Delete all wares we currently handle.
 	void cleanup(EditorGameBase& egbase);
@@ -110,9 +110,11 @@ private:
 
 	/** The Expedition is bootstapped here. */
 	PortDock* const portdock_;  // not owned
-	Economy* economy_;
+	Economy* ware_economy_;
+	Economy* worker_economy_;
 
-	std::vector<std::unique_ptr<InputQueue>> queues_;
+	std::vector<std::pair<std::unique_ptr<InputQueue>, bool>>
+	   queues_;  // The bool indicates whether this queue can be removed
 
 	DISALLOW_COPY_AND_ASSIGN(ExpeditionBootstrap);
 };

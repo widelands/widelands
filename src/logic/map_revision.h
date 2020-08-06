@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 by the Widelands Development Team
+ * Copyright (C) 2013-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,7 @@
 #ifndef WL_LOGIC_MAP_REVISION_H
 #define WL_LOGIC_MAP_REVISION_H
 
-#include <cstring>
-#include <ctime>
-#include <memory>
-#include <set>
 #include <string>
-#include <vector>
 
 namespace Widelands {
 

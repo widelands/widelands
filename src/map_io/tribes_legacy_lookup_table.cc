@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,20 +25,16 @@ TribesLegacyLookupTable::TribesLegacyLookupTable()
      workers_{},
      // Wares
      wares_{
-        {"thatch_reed", "reed"},
+        // {"old_name", "new_name"},
      },
      // Immovables
-     immovables_{
-        {"field_medium", "wheatfield_medium"},
-        {"field_small", "wheatfield_small"},
-        {"field_tiny", "wheatfield_tiny"},
-        {"field_ripe", "wheatfield_ripe"},
-        {"field_harvested", "wheatfield_harvested"},
-        {"reed_medium", "reedfield_medium"},
-        {"reed_small", "reedfield_small"},
-        {"reed_tiny", "reedfield_tiny"},
-        {"reed_ripe", "reedfield_ripe"},
-     } {
+     immovables_{},
+     // Buildings
+     buildings_{},
+     // Ships
+     ships_{},
+     // Working Programs
+     programs_{} {
 }
 
 const std::string& TribesLegacyLookupTable::lookup_worker(const std::string& worker) const {
@@ -51,6 +47,18 @@ const std::string& TribesLegacyLookupTable::lookup_ware(const std::string& ware)
 
 const std::string& TribesLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
 	return lookup_entry(immovable, immovables_);
+}
+
+const std::string& TribesLegacyLookupTable::lookup_building(const std::string& building) const {
+	return lookup_entry(building, buildings_);
+}
+
+const std::string& TribesLegacyLookupTable::lookup_ship(const std::string& ship) const {
+	return lookup_entry(ship, ships_);
+}
+
+const std::string& TribesLegacyLookupTable::lookup_program(const std::string& program) const {
+	return lookup_entry(program, programs_);
 }
 
 const std::string&

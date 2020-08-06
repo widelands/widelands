@@ -9,7 +9,7 @@ name=_"Last Survivors"
 author="fk"
 descr=_"Four tribes fighting for dominance in a stark area. Resources are scattered all over the map."
 hint=
-tags="2teams,ffa,official"
+tags="2teams,balanced,ffa,official"
 
 [teams00]
 team1="0,2"

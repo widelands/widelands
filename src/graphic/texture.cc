@@ -20,13 +20,12 @@
 
 #include <cassert>
 
-#include <SDL.h>
+#include <SDL_surface.h>
 
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
-#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/draw_line_program.h"
 #include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/utils.h"
@@ -43,8 +42,9 @@ namespace {
 const SDL_PixelFormat& rgba_format() {
 	static SDL_PixelFormat format;
 	static bool init = false;
-	if (init)
+	if (init) {
 		return format;
+	}
 
 	init = true;
 	memset(&format, 0, sizeof(format));

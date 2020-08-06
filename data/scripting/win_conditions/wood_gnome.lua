@@ -6,7 +6,7 @@ include "scripting/coroutine.lua" -- for sleep
 include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
 
-set_textdomain("win_conditions")
+push_textdomain("win_conditions")
 
 include "scripting/win_conditions/win_condition_texts.lua"
 
@@ -21,7 +21,7 @@ local wc_desc = _(
 [[playing. The one with the most trees at that point will win the game.]])
 local wc_trees_owned = _"Trees owned"
 
-return {
+local r = {
    name = wc_name,
    description = wc_desc,
    peaceful_mode_allowed = true,
@@ -131,3 +131,5 @@ return {
 
 end
 }
+pop_textdomain()
+return r

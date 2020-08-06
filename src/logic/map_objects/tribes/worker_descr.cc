@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/tribes/worker_program.h"
-#include "logic/nodecaps.h"
 
 namespace Widelands {
 
@@ -52,7 +51,9 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
      becomes_(table.has_key("experience") ? tribes.safe_worker_index(table.get_string("becomes")) :
                                             INVALID_INDEX),
      needed_experience_(table.has_key("becomes") ? table.get_int("experience") : INVALID_INDEX),
-     ai_hints_(table.has_key("aihints") ? new WorkerHints(*table.get_table("aihints")) : nullptr),
+     ai_hints_(table.has_key("aihints") ?
+                  new WorkerHints(table.get_string("name"), *table.get_table("aihints")) :
+                  nullptr),
      tribes_(tribes) {
 	if (helptext_script().empty()) {
 		throw GameDataError("Worker %s has no helptext script", name().c_str());
@@ -94,11 +95,12 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	// Read the walking animations
 	assign_directional_animation(&walk_anims_, "walk");
 
-	// Many workers don't carry wares, so they have no walkload animation.
-	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
-	anims->do_not_warn_about_unaccessed_keys();
+	// Not all workers need a special walkload animation - for some the walk animation looks good
+	// enough.
 	if (is_animation_known("walkload_e")) {
 		assign_directional_animation(&walkload_anims_, "walkload");
+	} else {
+		assign_directional_animation(&walkload_anims_, "walk");
 	}
 
 	// Read programs
@@ -107,13 +109,15 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		for (std::string program_name : programs_table->keys<std::string>()) {
 			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 			if (programs_.count(program_name)) {
-				throw GameDataError("Program '%s' has already been declared for worker '%s'", program_name.c_str(), name().c_str());
+				throw GameDataError("Program '%s' has already been declared for worker '%s'",
+				                    program_name.c_str(), name().c_str());
 			}
 			try {
-				programs_[program_name] = std::unique_ptr<WorkerProgram>(
-				   new WorkerProgram(program_name, *programs_table->get_table(program_name), *this, tribes_));
+				programs_[program_name] = std::unique_ptr<WorkerProgram>(new WorkerProgram(
+				   program_name, *programs_table->get_table(program_name), *this, tribes_));
 			} catch (const std::exception& e) {
-				throw GameDataError("%s: Error in worker program %s: %s", name().c_str(), program_name.c_str(), e.what());
+				throw GameDataError("%s: Error in worker program %s: %s", name().c_str(),
+				                    program_name.c_str(), e.what());
 			}
 		}
 	}

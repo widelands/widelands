@@ -22,21 +22,32 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 84},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 73},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 84},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 73},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
+      unoccupied = {
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 58}
+      }
    },
 
    aihints = {
@@ -51,11 +62,6 @@ tribes:new_productionsite_type {
       { name = "coal", amount = 8 },
       { name = "iron", amount = 8 },
    },
-   outputs = {
-      "sword_short",
-      "sword_long",
-      "helmet",
-   },
 
    programs = {
       work = {
@@ -66,7 +72,6 @@ tribes:new_productionsite_type {
             "call=produce_s2",
             "call=produce_h",
             "call=produce_s2",
-            "return=no_stats",
          },
       },
       produce_s1 = {
@@ -76,11 +81,11 @@ tribes:new_productionsite_type {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs sword_short",
             "consume=coal iron",
-            "sleep=24000",
+            "sleep=duration:24s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 24000",
+            "animate=working duration:24s",
             "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:9s",
             "produce=sword_short"
          },
       },
@@ -91,11 +96,11 @@ tribes:new_productionsite_type {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs sword_long",
             "consume=coal iron:2",
-            "sleep=24000",
+            "sleep=duration:24s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 24000",
+            "animate=working duration:24s",
             "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:9s",
             "produce=sword_long"
          },
       },
@@ -106,9 +111,9 @@ tribes:new_productionsite_type {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs helmet",
             "consume=coal iron",
-            "sleep=30000",
+            "sleep=duration:30s",
             "playsound=sound/smiths/smith 192",
-            "animate=working 37000",
+            "animate=working duration:37s",
             "produce=helmet"
          },
       },

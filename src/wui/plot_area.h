@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,9 +21,6 @@
 #define WL_WUI_PLOT_AREA_H
 
 #include <memory>
-#include <vector>
-
-#include <boost/bind.hpp>
 
 #include "graphic/color.h"
 #include "ui_basic/panel.h"

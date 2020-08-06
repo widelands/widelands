@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 by the Widelands Development Team
+ * Copyright (C) 2019-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ MapSizeBox::MapSizeBox(
 	add(&height_, UI::Box::Resizing::kFillSpace);
 }
 
-void MapSizeBox::set_selection_function(const std::function<void()> func) {
+void MapSizeBox::set_selection_function(const std::function<void()>& func) {
 	width_.selected.connect(func);
 	height_.selected.connect(func);
 }

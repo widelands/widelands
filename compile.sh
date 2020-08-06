@@ -8,15 +8,15 @@ echo "  Because of the many different systems Widelands"
 echo "  might be compiled on, we unfortunally can not"
 echo "  provide a simple way to prepare your system for"
 echo "  compilation. To ensure your system is ready, best"
-echo "  check http://wl.widelands.org/wiki/BuildingWidelands"
+echo "  check https://www.widelands.org/wiki/BuildingWidelands"
 echo " "
 echo "  You will often find helpful hands at our"
-echo "  * IRC Chat: http://wl.widelands.org/webchat/"
-echo "  * Forums: http://wl.widelands.org/forum/"
-echo "  * Mailinglist: http://wl.widelands.org/wiki/MailLists/"
+echo "  * IRC Chat: https://www.widelands.org/webchat/"
+echo "  * Forums: https://www.widelands.org/forum/"
+echo "  * Mailinglist: https://www.widelands.org/wiki/MailLists/"
 echo " "
 echo "  Please post your bug reports and feature requests at:"
-echo "  https://bugs.launchpad.net/widelands"
+echo "  https://github.com/widelands/widelands/issues"
 echo " "
 echo "###########################################################"
 echo " "
@@ -57,6 +57,11 @@ print_help () {
     echo "-r or --release       Create a release build. If this is not set,"
     echo "                      a debug build will be created."
     echo " "
+    if which g++ >/dev/null; then # gcc specific
+    echo "-c or --no-cross-opt  Do not use cross compile unit optimization,"
+    echo "                      even if available."
+    echo " "
+    fi
     echo "--gcc                 Try to build with GCC rather than the system default."
     echo "                      If you built with Clang before, you will have to clean"
     echo "                      your build directory before switching compilers."
@@ -74,7 +79,7 @@ print_help () {
     echo " "
     echo "More info about AddressSanitizer at:"
     echo " "
-    echo "    http://clang.llvm.org/docs/AddressSanitizer.html"
+    echo "    https://clang.llvm.org/docs/AddressSanitizer.html"
     echo " "
     return
   }
@@ -88,6 +93,7 @@ BUILD_WEBSITE="ON"
 BUILD_TRANSLATIONS="ON"
 BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
+USE_FLTO="yes"
 USE_ASAN="ON"
 COMPILER="default"
 USE_XDG="ON"
@@ -133,6 +139,10 @@ do
     ;;
     -t|--no-translations)
       BUILD_TRANSLATIONS="OFF"
+    shift
+    ;;
+    -c|--no-cross-opt)
+      USE_FLTO="no"
     shift
     ;;
     -s|--skip-tests)
@@ -204,7 +214,7 @@ fi
 echo " "
 if [ $USE_ASAN = "ON" ]; then
   echo "Will build with AddressSanitizer."
-  echo "http://clang.llvm.org/docs/AddressSanitizer.html"
+  echo "https://clang.llvm.org/docs/AddressSanitizer.html"
   echo "You can use -a or --no-asan to switch it off."
 else
   echo "Will build without AddressSanitizer."
@@ -228,7 +238,7 @@ echo "Call 'compile.sh -h' or 'compile.sh --help' for help."
 echo ""
 echo "For instructions on how to adjust options and build with"
 echo "CMake, please take a look at"
-echo "https://wl.widelands.org/wiki/BuildingWidelands/."
+echo "https://www.widelands.org/wiki/BuildingWidelands/."
 echo " "
 echo "###########################################################"
 echo " "
@@ -279,9 +289,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   # Compile Widelands
   compile_widelands () {
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG
+      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
     else
-      cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG
+      cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
     fi
 
     $buildtool -j $CORES
@@ -301,6 +311,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     mv src/widelands ../widelands
 
     if [ $BUILD_WEBSITE = "ON" ]; then
+        mv ../build/src/website/wl_create_spritesheet ../wl_create_spritesheet
         mv ../build/src/website/wl_map_object_info ../wl_map_object_info
         mv ../build/src/website/wl_map_info ../wl_map_info
     fi
@@ -308,10 +319,11 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   }
 
   create_update_script () {
-    # First check if this is an bzr checkout at all - only in that case,
+    # First check if this is an git checkout at all - only in that case,
     # creation of a script makes any sense.
-    if ! [ -f .bzr/branch-format ] ; then
-      echo "You don't appear to be using Bazaar. An update script will not be created"
+    if [ -n "$(git status -s)" ]; then
+      echo "You don't appear to be using Git, or your working tree is not clean. An update script will not be created"
+      git status
       return 0
     fi
       rm -f update.sh || true
@@ -329,7 +341,10 @@ if ! [ -f src/wlapplication.cc ] ; then
   exit 1
 fi
 
-bzr pull
+# Checkout current branch and pull latest master
+git checkout
+git pull https://github.com/widelands/widelands.git master
+
 $COMMANDLINE
 
 echo " "
@@ -352,6 +367,12 @@ set -e
 basic_check
 set_buildtool
 prepare_directories_and_links
+
+# Dependency check doesn't work with ninja, so we do it manually here
+if [ $BUILD_TYPE = "Debug" -a \( $buildtool = "ninja" -o $buildtool = "ninja-build" \) ]; then
+  utils/build_deps.py
+fi
+
 mkdir -p build
 cd build
 compile_widelands

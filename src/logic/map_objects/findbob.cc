@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,11 +30,12 @@ bool FindBobAttribute::accept(Bob* const bob) const {
 }
 
 bool FindBobEnemySoldier::accept(Bob* const imm) const {
-	if (upcast(Soldier, soldier, imm))
+	if (upcast(Soldier, soldier, imm)) {
 		if (soldier->is_on_battlefield() && (!player || soldier->owner().is_hostile(*player)) &&
-		    soldier->get_current_health())
+		    soldier->get_current_health()) {
 			return true;
-
+		}
+	}
 	return false;
 }
 

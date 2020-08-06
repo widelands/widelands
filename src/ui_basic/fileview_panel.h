@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,6 @@
 #define WL_UI_BASIC_FILEVIEW_PANEL_H
 
 #include <memory>
-#include <string>
-#include <vector>
 
 #include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"

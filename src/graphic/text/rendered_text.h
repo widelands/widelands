@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 #define WL_GRAPHIC_TEXT_RENDERED_TEXT_H
 
 #include <memory>
-#include <vector>
 
 #include "base/rect.h"
 #include "base/vector.h"
@@ -65,7 +64,7 @@ public:
 
 	/// RenderedRect will contain a normal image that is managed by a transient cache.
 	/// Use this if the image is managed by an instance of TextureCache.
-	explicit RenderedRect(std::shared_ptr<const Image> init_image);
+	explicit RenderedRect(const std::shared_ptr<const Image>& init_image);
 
 	/// RenderedRect will contain a normal image that is managed by a permanent cache.
 	/// Use this if the image is managed by g_gr->images().

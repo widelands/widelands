@@ -42,9 +42,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "log", amount = 8 }
    },
-   outputs = {
-      "coal"
-   },
 
    programs = {
       work = {
@@ -53,8 +50,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs coal",
             "consume=log:6",
-            "sleep=30000",
-            "animate=working 90000", -- Charcoal fires will burn for some days in real life
+            "sleep=duration:30s",
+            "animate=working duration:1m30s", -- Charcoal fires will burn for some days in real life
             "produce=coal"
          }
       },

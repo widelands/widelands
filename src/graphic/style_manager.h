@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@
 #include "graphic/styles/ware_info_style.h"
 #include "scripting/lua_table.h"
 
-static const std::string kTemplateDir = "templates/default/";
+constexpr const char* const kTemplateDir = "templates/default/";
 
 class StyleManager {
 public:

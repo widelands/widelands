@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
 # Jacob Rasmussen <jacobvrasmussen@gmail.com>, 2018
-# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019-2020
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-22 05:17+0000\n"
-"PO-Revision-Date: 2019-04-25 12:53+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-05-04 13:14+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -411,7 +411,12 @@ msgstr "Mellemrum"
 msgid "Toggle building spaces"
 msgstr "Vis/skjul byggepladser"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
+msgstr "Ctrl + F"
+
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Skift fuldskærm (hvis understøttet af styresystemet)"
@@ -529,7 +534,7 @@ msgstr "Atlantere har brug for silketøj til mange bygninger. Byg den nødvendig
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr "Hold øje med dine fiskere. Hvis fiskeressourserne i deres arbejdsområde udtømmes, så holder de op med at fiske."
+msgstr "Hold øje med dine fiskere. Hvis fiskeressourcerne i deres arbejdsområde udtømmes, så holder de op med at fiske."
 
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
@@ -751,6 +756,53 @@ msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr "Zoom ind/ud med musehjulet eller %1%. Tryk %2% for at nulstille zoom."
 
 #: ../../data/txts/tips/general_game.lua:75
+msgid ""
+"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
+"visited locations."
+msgstr "Brug tasterne »,« (komma) og ».« (punktum) til at gå frem og tilbage mellem de seneste besøgte steder."
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Ctrl+(Page Up/Page Down)"
+msgstr "Ctrl+(Side op/Side ned)"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Page Up/Page Down"
+msgstr "Side op/Side ned"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Shift+(Page Up/Page Down)"
+msgstr "Skift+(Side op/Side ned)"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgid ""
+"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
+"adjust speed smoothly."
+msgstr "Øg eller sænk hastigheden på spillet med %1%. Brug %2% for hurtig ændring, %3% vil justere hastigheden mere blødt."
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Arrow keys"
+msgstr "Piletaster"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Ctrl+Arrow keys"
+msgstr "Ctrl+Piletaster"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr "Flyt kortvisning via %1%. %2% vil flytte visningen hurtigere, %3% flytter langsomt."
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Shift+Arrow keys"
+msgstr "Skift+piletasterne"
+
+#: ../../data/txts/tips/general_game.lua:87
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,6 @@
 #include "logic/map_objects/world/map_gen.h"
 
 #include <memory>
-#include <string>
-#include <vector>
 
 #include "base/wexception.h"
 #include "logic/game_data_error.h"
@@ -184,12 +182,14 @@ DescriptionIndex MapGenAreaInfo::get_terrain(MapGenTerrainType const terrain_typ
 }
 
 uint32_t MapGenInfo::get_sum_land_weight() const {
-	if (land_weight_valid_)
+	if (land_weight_valid_) {
 		return land_weight_;
+	}
 
 	uint32_t sum = 0;
-	for (uint32_t ix = 0; ix < get_num_areas(MapGenAreaInfo::atLand); ++ix)
+	for (uint32_t ix = 0; ix < get_num_areas(MapGenAreaInfo::atLand); ++ix) {
 		sum += get_area(MapGenAreaInfo::atLand, ix).get_weight();
+	}
 	land_weight_ = sum;
 	land_weight_valid_ = true;
 
@@ -205,12 +205,14 @@ size_t MapGenInfo::get_num_land_resources() const {
 }
 
 uint32_t MapGenInfo::get_sum_land_resource_weight() const {
-	if (sum_bob_area_weights_valid_)
+	if (sum_bob_area_weights_valid_) {
 		return sum_bob_area_weights_;
+	}
 
 	uint32_t sum = 0;
-	for (uint32_t ix = 0; ix < land_resources_.size(); ++ix)
+	for (uint32_t ix = 0; ix < land_resources_.size(); ++ix) {
 		sum += land_resources_[ix].get_weight();
+	}
 	sum_bob_area_weights_ = sum;
 	sum_bob_area_weights_valid_ = true;
 
@@ -247,8 +249,9 @@ const MapGenAreaInfo& MapGenInfo::get_area(MapGenAreaInfo::MapGenAreaType const 
 }
 
 const MapGenBobCategory* MapGenInfo::get_bob_category(const std::string& bob_category) const {
-	if (bob_categories_.find(bob_category) == bob_categories_.end())
+	if (bob_categories_.find(bob_category) == bob_categories_.end()) {
 		throw wexception("invalid MapGenBobCategory %s", bob_category.c_str());
+	}
 	// Ugly workaround because at is not defined for some systems
 	// and operator[] does not fare well with constants
 	return &bob_categories_.find(bob_category)->second;
@@ -303,14 +306,18 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 			   std::make_pair(entry->get_string("name"), MapGenBobCategory(*entry)));
 			MapGenBobCategory& category = bob_categories_.at(entry->get_string("name"));
 
-			for (size_t jx = 0; jx < category.num_immovables(); jx++)
+			for (size_t jx = 0; jx < category.num_immovables(); jx++) {
 				if (world.get_immovable_index(category.get_immovable(jx).c_str()) ==
-				    Widelands::INVALID_INDEX)
+				    Widelands::INVALID_INDEX) {
 					throw wexception("unknown immovable %s", category.get_immovable(jx).c_str());
+				}
+			}
 
-			for (size_t jx = 0; jx < category.num_critters(); jx++)
-				if (world.get_critter(category.get_critter(jx).c_str()) == Widelands::INVALID_INDEX)
+			for (size_t jx = 0; jx < category.num_critters(); jx++) {
+				if (world.get_critter(category.get_critter(jx).c_str()) == Widelands::INVALID_INDEX) {
 					throw wexception("unknown critter %s", category.get_critter(jx).c_str());
+				}
+			}
 		}
 	}
 
@@ -326,64 +333,65 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 		}
 	}
 
-	if (get_num_areas(MapGenAreaInfo::atWater) < 1)
+	if (get_num_areas(MapGenAreaInfo::atWater) < 1) {
 		throw GameDataError("missing a water area");
-
-	if (get_num_areas(MapGenAreaInfo::atWater) > 3)
+	}
+	if (get_num_areas(MapGenAreaInfo::atWater) > 3) {
 		throw GameDataError("too many water areas (>3)");
-
-	if (get_num_areas(MapGenAreaInfo::atLand) < 1)
+	}
+	if (get_num_areas(MapGenAreaInfo::atLand) < 1) {
 		throw GameDataError("missing a land area");
-
-	if (get_num_areas(MapGenAreaInfo::atLand) > 3)
+	}
+	if (get_num_areas(MapGenAreaInfo::atLand) > 3) {
 		throw GameDataError("too many land areas (>3)");
-
-	if (get_num_areas(MapGenAreaInfo::atWasteland) < 1)
+	}
+	if (get_num_areas(MapGenAreaInfo::atWasteland) < 1) {
 		throw GameDataError("missing a wasteland area");
-
-	if (get_num_areas(MapGenAreaInfo::atWasteland) > 2)
+	}
+	if (get_num_areas(MapGenAreaInfo::atWasteland) > 2) {
 		throw GameDataError("too many wasteland areas (>2)");
-
-	if (get_num_areas(MapGenAreaInfo::atMountains) < 1)
+	}
+	if (get_num_areas(MapGenAreaInfo::atMountains) < 1) {
 		throw GameDataError("missing a mountain area");
-
-	if (get_num_areas(MapGenAreaInfo::atMountains) > 1)
+	}
+	if (get_num_areas(MapGenAreaInfo::atMountains) > 1) {
 		throw GameDataError("too many mountain areas (>1)");
-
-	if (get_area(MapGenAreaInfo::atWater, 0).get_num_terrains(MapGenAreaInfo::ttWaterOcean) < 1)
+	}
+	if (get_area(MapGenAreaInfo::atWater, 0).get_num_terrains(MapGenAreaInfo::ttWaterOcean) < 1) {
 		throw GameDataError("missing a water/ocean terrain type");
-
-	if (get_area(MapGenAreaInfo::atWater, 0).get_num_terrains(MapGenAreaInfo::ttWaterShelf) < 1)
+	}
+	if (get_area(MapGenAreaInfo::atWater, 0).get_num_terrains(MapGenAreaInfo::ttWaterShelf) < 1) {
 		throw GameDataError("missing a water/shelf terrain type");
-
-	if (get_area(MapGenAreaInfo::atWater, 0).get_num_terrains(MapGenAreaInfo::ttWaterShallow) < 1)
+	}
+	if (get_area(MapGenAreaInfo::atWater, 0).get_num_terrains(MapGenAreaInfo::ttWaterShallow) < 1) {
 		throw GameDataError("is missing a water/shallow terrain type");
-
-	if (get_area(MapGenAreaInfo::atLand, 0).get_num_terrains(MapGenAreaInfo::ttLandCoast) < 1)
+	}
+	if (get_area(MapGenAreaInfo::atLand, 0).get_num_terrains(MapGenAreaInfo::ttLandCoast) < 1) {
 		throw GameDataError("missing a land/coast terrain type");
-
-	if (get_area(MapGenAreaInfo::atLand, 0).get_num_terrains(MapGenAreaInfo::ttLandLand) < 1)
+	}
+	if (get_area(MapGenAreaInfo::atLand, 0).get_num_terrains(MapGenAreaInfo::ttLandLand) < 1) {
 		throw GameDataError("missing a land/land terrain type");
-
+	}
 	if (get_area(MapGenAreaInfo::atMountains, 0).get_num_terrains(MapGenAreaInfo::ttMountainsFoot) <
-	    1)
+	    1) {
 		throw GameDataError("missing a mountain/foot terrain type");
-
+	}
 	if (get_area(MapGenAreaInfo::atMountains, 0)
-	       .get_num_terrains(MapGenAreaInfo::ttMountainsMountain) < 1)
+	       .get_num_terrains(MapGenAreaInfo::ttMountainsMountain) < 1) {
 		throw GameDataError("missing a monutain/mountain terrain type");
-
+	}
 	if (get_area(MapGenAreaInfo::atMountains, 0).get_num_terrains(MapGenAreaInfo::ttMountainsSnow) <
-	    1)
+	    1) {
 		throw GameDataError("missing a mountain/snow terrain type");
-
+	}
 	if (get_area(MapGenAreaInfo::atWasteland, 0).get_num_terrains(MapGenAreaInfo::ttWastelandInner) <
-	    1)
+	    1) {
 		throw GameDataError("missing a land/coast terrain type");
-
+	}
 	if (get_area(MapGenAreaInfo::atWasteland, 0).get_num_terrains(MapGenAreaInfo::ttWastelandOuter) <
-	    1)
+	    1) {
 		throw GameDataError("missing a land/land terrain type");
+	}
 }
 
 }  // namespace Widelands

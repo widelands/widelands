@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,13 +41,16 @@ Coords::operator bool() const {
 
 void Coords::reorigin(Coords new_origin, const Extent& extent) {
 	if (*this) {
-		if (y < new_origin.y)
+		if (y < new_origin.y) {
 			y += extent.h;
+		}
 		y -= new_origin.y;
-		if ((y & 1) && (new_origin.y & 1) && ++new_origin.x == extent.w)
+		if ((y & 1) && (new_origin.y & 1) && ++new_origin.x == extent.w) {
 			new_origin.x = 0;
-		if (x < new_origin.x)
+		}
+		if (x < new_origin.x) {
 			x += extent.w;
+		}
 		x -= new_origin.x;
 	}
 }

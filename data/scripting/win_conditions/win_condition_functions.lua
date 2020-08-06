@@ -39,6 +39,9 @@ function make_extra_data(plr, name, version, extra)
    return table.concat(rv, ";")
 end
 
+-- don't declare players defeated instantly with Discovery starting condition
+win_conditions__initially_without_warehouse = {}
+
 -- =======================================================================
 --                             PUBLIC FUNCTIONS
 -- =======================================================================
@@ -59,7 +62,9 @@ end
 --    :returns: :const:`nil`
 function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
    for idx,p in ipairs(plrs) do
-      if p.defeated then
+      if win_conditions__initially_without_warehouse[idx] == nil then
+         win_conditions__initially_without_warehouse[idx] = p.defeated
+      elseif p.defeated and not win_conditions__initially_without_warehouse[idx] then
          p:send_message(heading, msg)
          p.see_all = 1
          if (wc_name and wc_ver) then
@@ -67,6 +72,8 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
          end
          table.remove(plrs, idx)
          break
+      elseif not p.defeated then
+         win_conditions__initially_without_warehouse[idx] = false
       end
    end
 end
@@ -167,7 +174,7 @@ function count_owned_valuable_fields_for_all_players(players, attribute)
 
    -- Insert points for all players who are still in the game, and 0 points for defeated players.
    for idx,plr in ipairs(players) do
-      if (plr.defeated) then
+      if (plr.defeated) or (all_plrpoints[plr.number] == nil) then
          owned_fields[plr.number] = 0
       else
          owned_fields[plr.number] = all_plrpoints[plr.number]
@@ -281,7 +288,7 @@ function format_remaining_time(remaining_time)
    local h = 0
    local m = 60
    local time = ""
-   set_textdomain("win_conditions")
+   push_textdomain("win_conditions")
 
    if (remaining_time ~= 60) then
       h = math.floor(remaining_time / 60)
@@ -301,7 +308,9 @@ function format_remaining_time(remaining_time)
       time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
    end
    -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-   return p(_"The game will end in %s."):bformat(time)
+   local result = p(_"The game will end in %s."):bformat(time)
+   pop_textdomain()
+   return result
 end
 
 -- RST

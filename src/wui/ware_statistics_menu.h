@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,17 +20,13 @@
 #ifndef WL_WUI_WARE_STATISTICS_MENU_H
 #define WL_WUI_WARE_STATISTICS_MENU_H
 
-#include <vector>
-
 #include "logic/widelands.h"
 #include "ui_basic/unique_window.h"
 #include "wui/plot_area.h"
 
-struct DifferentialPlotArea;
 class InteractivePlayer;
-struct WuiPlotArea;
 struct StatisticWaresDisplay;
-struct WuiPlotAreaSlider;
+
 namespace UI {
 struct Box;
 struct TabPanel;

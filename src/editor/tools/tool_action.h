@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2019 by the Widelands Development Team
+ * Copyright (C) 2012-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,10 +24,6 @@
 #include "logic/widelands_geometry.h"
 
 class EditorTool;
-namespace Widelands {
-class map;
-}
-class EditorInteractive;
 
 /// Class to save an action done by an editor tool
 // implementations in editor_history.cc

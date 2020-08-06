@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,7 @@
 #ifndef WL_WUI_INTERACTIVE_SPECTATOR_H
 #define WL_WUI_INTERACTIVE_SPECTATOR_H
 
-#include <SDL_keyboard.h>
-
 #include "io/profile.h"
-#include "ui_basic/button.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
@@ -38,7 +35,10 @@ class Game;
  * This class provides the UI, runs the game logic, etc.
  */
 struct InteractiveSpectator : public InteractiveGameBase {
-	InteractiveSpectator(Widelands::Game&, Section& global_s, bool multiplayer = false);
+	InteractiveSpectator(Widelands::Game&,
+	                     Section& global_s,
+	                     bool multiplayer = false,
+	                     ChatProvider* chat_provider = nullptr);
 
 	Widelands::Player* get_player() const override;
 
@@ -54,8 +54,6 @@ private:
 	bool can_act(Widelands::PlayerNumber) const override;
 	Widelands::PlayerNumber player_number() const override;
 	void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) override;
-
-	UI::UniqueWindow::Registry chat_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_SPECTATOR_H

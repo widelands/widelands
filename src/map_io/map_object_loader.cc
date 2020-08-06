@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,8 +28,8 @@ namespace Widelands {
 /*
  * Returns true if this object has already been inserted
  */
-bool MapObjectLoader::is_object_known(Serial const n) {
-	return objects_.find(n) != objects_.end();
+bool MapObjectLoader::is_object_known(Serial const n) const {
+	return objects_.count(n) == 1;
 }
 
 /*
@@ -46,9 +46,11 @@ int32_t MapObjectLoader::get_nr_unloaded_objects() {
 	int32_t result = 0;
 	std::map<MapObject*, bool>::const_iterator const loaded_obj_end = loaded_objects_.end();
 	for (std::map<MapObject*, bool>::const_iterator it = loaded_objects_.begin();
-	     it != loaded_obj_end; ++it)
-		if (!it->second)
+	     it != loaded_obj_end; ++it) {
+		if (!it->second) {
 			++result;
+		}
+	}
 	return result;
 }
 
@@ -87,4 +89,5 @@ void MapObjectLoader::load_finish_game(Game& g) {
 		schedule_act_.pop_back();
 	}
 }
+
 }  // namespace Widelands

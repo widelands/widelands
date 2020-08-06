@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #ifndef WL_UI_BASIC_PROGRESSBAR_H
 #define WL_UI_BASIC_PROGRESSBAR_H
 
-#include "graphic/style_manager.h"
+#include "graphic/styles/progress_bar_style.h"
 #include "ui_basic/panel.h"
 
 namespace UI {

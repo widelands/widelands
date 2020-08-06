@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,26 +21,16 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H
 
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "logic/map_objects/tribes/building_settings.h"
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "scripting/lua_table.h"
 
-class FileRead;
-class FileWrite;
-
 namespace Widelands {
 
 class Building;
-class MilitarySiteDescr;
-class ProductionSiteDescr;
-class Request;
 enum class StockPolicy;
-class TrainingSiteDescr;
-class WarehouseDescr;
-class WaresQueue;
 
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {
@@ -51,6 +41,7 @@ struct ConstructionsiteInformation {
 	void draw(const Vector2f& point_on_dst,
 	          const Coords& coords,
 	          float scale,
+	          bool visible,
 	          const RGBColor& player_color,
 	          RenderTarget* dst) const;
 
@@ -126,12 +117,23 @@ public:
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
 
+	void add_additional_ware(DescriptionIndex);
+	void add_additional_worker(Game&, Worker&);
+	const std::map<DescriptionIndex, uint8_t>& get_additional_wares() const {
+		return additional_wares_;
+	}
+	const std::vector<Worker*>& get_additional_workers() const {
+		return additional_workers_;
+	}
+
 	BuildingSettings* get_settings() const {
 		return settings_.get();
 	}
 	void apply_settings(const BuildingSettings&);
 
 	void enhance(Game&);
+
+	void add_dropout_wares(const std::map<DescriptionIndex, Quantity>&);
 
 protected:
 	void update_statistics_string(std::string* statistics_string) override;
@@ -143,7 +145,7 @@ protected:
 	static void wares_queue_callback(Game&, InputQueue*, DescriptionIndex, Worker*, void* data);
 
 	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
+	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Coords& coords,
 	          float scale,
@@ -154,6 +156,9 @@ private:
 
 	bool builder_idle_;                 // used to determine whether the builder is idle
 	ConstructionsiteInformation info_;  // asked for by player point of view for the gameview
+
+	std::map<DescriptionIndex, uint8_t> additional_wares_;
+	std::vector<Worker*> additional_workers_;
 
 	std::unique_ptr<BuildingSettings> settings_;
 	void init_settings();

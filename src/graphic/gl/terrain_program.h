@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,6 @@
 #ifndef WL_GRAPHIC_GL_TERRAIN_PROGRAM_H
 #define WL_GRAPHIC_GL_TERRAIN_PROGRAM_H
 
-#include <vector>
-
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
@@ -37,7 +35,8 @@ public:
 	void draw(uint32_t gametime,
 	          const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	          const FieldsToDraw& fields_to_draw,
-	          float z_value);
+	          float z_value,
+	          const Widelands::Player*);
 
 private:
 	struct PerVertexData {

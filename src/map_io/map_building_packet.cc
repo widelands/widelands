@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,6 @@
  */
 
 #include "map_io/map_building_packet.h"
-
-#include <map>
 
 #include "base/macros.h"
 #include "economy/request.h"
@@ -46,8 +44,9 @@ void MapBuildingPacket::read(FileSystem& fs,
                              EditorGameBase& egbase,
                              bool const skip,
                              MapObjectLoader& mol) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 	FileRead fr;
 	try {
 		fr.open(fs, "binary/building");
@@ -98,8 +97,9 @@ void MapBuildingPacket::read(FileSystem& fs,
 
 							mol.register_object<Building>(serial, *building);
 							read_priorities(*building, fr);
-						} else
+						} else {
 							throw GameDataError("player %u does not exist", p);
+						}
 					}
 				}
 			}
@@ -151,8 +151,9 @@ void MapBuildingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 			}
 
 			write_priorities(*building, fw);
-		} else
+		} else {
 			fw.unsigned_8(0);
+		}
 	}
 
 	fw.write(fs, "binary/building");
@@ -169,8 +170,9 @@ void MapBuildingPacket::write_priorities(const Building& building, FileWrite& fw
 	const TribeDescr& tribe = building.owner().tribe();
 	building.collect_priorities(type_to_priorities);
 	for (it = type_to_priorities.begin(); it != type_to_priorities.end(); ++it) {
-		if (it->second.empty())
+		if (it->second.empty()) {
 			continue;
+		}
 
 		// write ware type and priority count
 		const int32_t ware_type = it->first;
@@ -181,12 +183,13 @@ void MapBuildingPacket::write_priorities(const Building& building, FileWrite& fw
 		for (it2 = it->second.begin(); it2 != it->second.end(); ++it2) {
 			std::string name;
 			DescriptionIndex const ware_index = it2->first;
-			if (wwWARE == ware_type)
+			if (wwWARE == ware_type) {
 				name = tribe.get_ware_descr(ware_index)->name();
-			else if (wwWORKER == ware_type)
+			} else if (wwWORKER == ware_type) {
 				name = tribe.get_worker_descr(ware_index)->name();
-			else
+			} else {
 				throw GameDataError("unrecognized ware type %d while writing priorities", ware_type);
+			}
 
 			fw.c_string(name.c_str());
 			fw.unsigned_32(it2->second);
@@ -208,12 +211,13 @@ void MapBuildingPacket::read_priorities(Building& building, FileRead& fr) {
 		const uint8_t count = fr.unsigned_8();
 		for (uint8_t i = 0; i < count; ++i) {
 			DescriptionIndex idx;
-			if (wwWARE == ware_type)
+			if (wwWARE == ware_type) {
 				idx = tribe.safe_ware_index(fr.c_string());
-			else if (wwWORKER == ware_type)
+			} else if (wwWORKER == ware_type) {
 				idx = tribe.safe_worker_index(fr.c_string());
-			else
+			} else {
 				throw GameDataError("unrecognized ware type %d while reading priorities", ware_type);
+			}
 
 			building.set_priority(ware_type, idx, fr.unsigned_32());
 		}

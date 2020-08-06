@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,9 @@ Widelands::Game& get_game(lua_State* const L) {
 	Widelands::Game* g = static_cast<Widelands::Game*>(lua_touserdata(L, -1));
 	lua_pop(L, 1);  // pop this userdata
 
-	if (!g)
+	if (!g) {
 		throw LuaError("\"game\" field was nil. get_game was not called in a game.");
+	}
 
 	return *g;
 }
@@ -35,8 +36,9 @@ Widelands::EditorGameBase& get_egbase(lua_State* const L) {
 	Widelands::EditorGameBase* g = static_cast<Widelands::EditorGameBase*>(lua_touserdata(L, -1));
 	lua_pop(L, 1);  // pop this userdata
 
-	if (!g)
+	if (!g) {
 		throw LuaError("\"egbase\" field was nil. This should be impossible.");
+	}
 
 	return *g;
 }
@@ -50,8 +52,9 @@ Widelands::MapObjectLoader* get_mol(lua_State* const L) {
 
 	lua_pop(L, 1);  // pop this userdata
 
-	if (!mol)
+	if (!mol) {
 		throw LuaError("\"mol\" field was nil. This should be impossible.");
+	}
 
 	return mol;
 }
@@ -64,8 +67,9 @@ Widelands::MapObjectSaver* get_mos(lua_State* const L) {
 
 	lua_pop(L, 1);  // pop this userdata
 
-	if (!mos)
+	if (!mos) {
 		throw LuaError("\"mos\" field was nil. This should be impossible.");
+	}
 
 	return mos;
 }

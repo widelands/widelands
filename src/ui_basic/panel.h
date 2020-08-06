@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,6 @@
 #ifndef WL_UI_BASIC_PANEL_H
 #define WL_UI_BASIC_PANEL_H
 
-#include <cassert>
-#include <cstring>
-#include <string>
-
 #include <SDL_keyboard.h>
 #include <boost/signals2/signal.hpp>
 #include <boost/signals2/trackable.hpp>
@@ -31,13 +27,10 @@
 #include "base/macros.h"
 #include "base/rect.h"
 #include "base/vector.h"
-#include "graphic/align.h"
-#include "graphic/font_handler.h"
 #include "graphic/styles/panel_styles.h"
 #include "sound/constants.h"
 
 class RenderTarget;
-class Image;
 
 namespace UI {
 
@@ -330,9 +323,6 @@ protected:
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
-	static const Image* default_cursor_;
-	static const Image* default_cursor_click_;
-
 private:
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;
@@ -354,6 +344,7 @@ private:
 
 	void check_child_death();
 
+	friend class Window;
 	void do_draw(RenderTarget&);
 	void do_draw_inner(RenderTarget&);
 	void do_think();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,12 @@
 
 #include "wui/story_message_box.h"
 
+#include <SDL_mouse.h>
+
 #include "logic/game_controller.h"
 #include "logic/save_handler.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
-#include "ui_basic/textarea.h"
 #include "wui/interactive_player.h"
 
 namespace {
@@ -64,7 +65,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	button_box_.add(&ok_);
 	button_box_.add_inf_space();
 
-	ok_.sigclicked.connect(boost::bind(&StoryMessageBox::clicked_ok, boost::ref(*this)));
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
 	if (x == -1 && y == -1) {
 		center_to_parent();
@@ -84,8 +85,9 @@ void StoryMessageBox::clicked_ok() {
 }
 
 bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
-	if (btn == SDL_BUTTON_RIGHT)
+	if (btn == SDL_BUTTON_RIGHT) {
 		return true;
+	}
 
 	return UI::Window::handle_mousepress(btn, mx, my);
 }
@@ -97,6 +99,9 @@ bool StoryMessageBox::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_RETURN:
 			clicked_ok();
 			return true;
+		case SDLK_ESCAPE:
+			clicked_ok();
+			return UI::Window::handle_key(down, code);
 		default:
 			break;  // not handled
 		}

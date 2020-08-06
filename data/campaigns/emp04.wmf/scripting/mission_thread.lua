@@ -1,7 +1,3 @@
-include "scripting/messages.lua"
-include "map:scripting/helper_functions.lua"
-include "scripting/field_animations.lua"
-
 -- Some objectives need to be waited for in separate threads
 local obj_find_monastery_done = false
 local julia_conquered = false
@@ -37,7 +33,7 @@ function farm_plans()
    local count = 0
    local o1 = add_campaign_objective(obj_click_farmbuilding)
    o1.done = true
-   while not (farmclick or p1.defeated) do
+   while not (farmclick or p1.defeated or (f.owner == p1)) do
       if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares and mv.windows.building_window.tabs.workers then
          farmclick = true
       end
@@ -481,10 +477,10 @@ function wheat_chain()
       place_building_in_region(p1, "empire_brewery", {field_brewery})
       place_building_in_region(p1, "empire_mill", {field_mill})
       place_building_in_region(p1, "empire_temple_of_vesta", {field_warehouse}, {wares = {water = 30, flour = 30, beer = 40,}})
-      connected_road(p1, field_warehouse.immovable.flag, "l, tl", true)
-      connected_road(p1, field_mill.immovable.flag, "tr, r", true)
-      connected_road(p1, field_mill.immovable.flag, "l, tl, tr", true)
-      connected_road(p1, field_mill.immovable.flag, "br, r", true)
+      connected_road("normal", p1, field_warehouse.immovable.flag, "l, tl", true)
+      connected_road("normal", p1, field_mill.immovable.flag, "tr, r", true)
+      connected_road("normal", p1, field_mill.immovable.flag, "l, tl, tr", true)
+      connected_road("normal", p1, field_mill.immovable.flag, "br, r", true)
 
       campaign_message_box(amalea_12)
       campaign_message_box(saledus_3)
@@ -540,7 +536,7 @@ function karma()
       for count = 0, 10 do
          sleep(1500000)
          local hq = p1:get_buildings("empire_temple_of_vesta")
-         if hq then
+         if hq and hq[1] then
             local beer = hq[1]:get_wares("beer") + 20
             local wine = hq[1]:get_wares("wine") + 10
             hq[1]:set_wares("beer", beer)

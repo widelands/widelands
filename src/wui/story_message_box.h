@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,6 @@
 
 #ifndef WL_WUI_STORY_MESSAGE_BOX_H
 #define WL_WUI_STORY_MESSAGE_BOX_H
-
-#include <vector>
 
 #include "logic/game.h"
 #include "ui_basic/box.h"
@@ -51,6 +49,10 @@ protected:
 
 	/// Handle keypresses for the OK button.
 	bool handle_key(bool down, SDL_Keysym code) override;
+
+	void clicked_button_close() override {
+		clicked_ok();
+	}
 
 private:
 	/// Get the game running again and close the window.

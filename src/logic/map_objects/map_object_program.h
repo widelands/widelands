@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,9 +29,11 @@
 
 namespace Widelands {
 
-struct MapObjectDescr;
+class MapObjectDescr;
 
-/// Superclass for Worker, Immovable and Productionsite programs. Includes a program name and diverse parsing convenience functions. The creation and execution of program actions is left to the sub-classes.
+/// Superclass for Worker, Immovable and Productionsite programs. Includes a program name and
+/// diverse parsing convenience functions. The creation and execution of program actions is left to
+/// the sub-classes.
 struct MapObjectProgram {
 	const std::string& name() const;
 
@@ -45,22 +47,41 @@ protected:
 	/// lines.
 	static std::vector<std::string> split_string(const std::string&, char const* separators);
 
-	/// Reads an int value from a string. Throws a GameDataError if 'min_value' or 'max_value' are exceeded
-	static unsigned int read_int(const std::string& input, int min_value, int max_value = std::numeric_limits<int32_t>::max());
+	/// Reads an int value from a string. Throws a GameDataError if 'min_value' or 'max_value' are
+	/// exceeded
+	static unsigned int read_int(const std::string& input,
+	                             int min_value,
+	                             int64_t max_value = std::numeric_limits<int32_t>::max());
 	/// Same as 'read_int', with 'min_value' == 1
-	static unsigned int read_positive(const std::string& input, int max_value = std::numeric_limits<int32_t>::max());
+	static unsigned int read_positive(const std::string& input,
+	                                  int64_t max_value = std::numeric_limits<int32_t>::max());
 
 	/**
-	 * @brief Reads a key-value pair from a string using the given separator, e.g. "attrib:tree", "meat:2", "return=skipped unless economy needs meal"
+	 * @brief Reads a key-value pair from a string using the given separator, e.g. "attrib:tree",
+	 * "meat:2", "return=skipped unless economy needs meal"
 	 * @param input The string to parse
 	 * @param separator The separator for splitting the string, e.g. ':' or '='
 	 * @param default_value A default to assign to the right-hand value if the separator is not found
 	 * @param expected_key If this is not empty, the left-hand key must match this string
 	 * @return A key, value pair
 	 */
-	static const std::pair<std::string, std::string> read_key_value_pair(const std::string& input, const char separator, const std::string& default_value = "", const std::string& expected_key = "");
+	static const std::pair<std::string, std::string>
+	read_key_value_pair(const std::string& input,
+	                    const char separator,
+	                    const std::string& default_value = "",
+	                    const std::string& expected_key = "");
 
-	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped unless economy needs meal"
+	/**
+	 * @brief Reads time duration with units from a string
+	 * @param input: A positive integer, followed by 'ms' (milliseconds), 's' (seconds) or 'm'
+	 * (minutes). This can be repeated to form units like '1m20s500ms'.
+	 * @param descr: For error messages
+	 * @return The duration in SDL ticks (milliseconds)
+	 */
+	static Duration read_duration(const std::string& input, const MapObjectDescr& descr);
+
+	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
+	/// unless economy needs meal"
 	struct ProgramParseInput {
 		/// Program name, e.g. "return"
 		std::string name;
@@ -74,11 +95,14 @@ protected:
 	struct AnimationParameters {
 		/// Animation ID
 		uint32_t animation = 0;
-		/// Animation duration. 0 will play the animation forever.
+		/// Animation duration before the next action will be called by the program.
 		Duration duration = 0;
 	};
-	/// Parses the arguments for an animation action, e.g. { "working", "24000" }. If 'is_idle_allowed' == false, throws a GameDataError if the animation is called "idle".
-	static AnimationParameters parse_act_animate(const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed);
+	/// Parses the arguments for an animation action, e.g. { "working", "24000" }. If
+	/// 'is_idle_allowed' == false, throws a GameDataError if the animation is called "idle".
+	static AnimationParameters parse_act_animate(const std::vector<std::string>& arguments,
+	                                             const MapObjectDescr& descr,
+	                                             bool is_idle_allowed);
 
 	/// Sound effect information
 	struct PlaySoundParameters {
@@ -88,7 +112,8 @@ protected:
 		uint8_t priority = 0;
 	};
 	/// Parses the arguments for a play_sound action, e.g. { "sound/smiths/sharpening", "120" }
-	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments, uint8_t default_priority);
+	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments,
+	                                                uint8_t default_priority);
 
 private:
 	const std::string name_;

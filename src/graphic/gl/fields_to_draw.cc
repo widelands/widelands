@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 
 #include "graphic/gl/coordinate_conversion.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 
 /*
@@ -162,7 +161,9 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 			f.owner = owned_by != 0 ? egbase.get_player(owned_by) : nullptr;
 			f.is_border = f.fcoords.field->is_border();
 			f.vision = 2;
-			f.roads = f.fcoords.field->get_roads();
+			f.road_e = f.fcoords.field->get_road(Widelands::WALK_E);
+			f.road_se = f.fcoords.field->get_road(Widelands::WALK_SE);
+			f.road_sw = f.fcoords.field->get_road(Widelands::WALK_SW);
 		}
 	}
 }

@@ -51,9 +51,6 @@ tribes:new_trainingsite_type {
       { name = "shield_steel", amount = 4 },
       { name = "shield_advanced", amount = 4 },
    },
-   outputs = {
-      "atlanteans_soldier",
-   },
 
    ["soldier defense"] = {
       min_level = 0,
@@ -91,8 +88,8 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
-            "return=no_stats",
+            "sleep=duration:5s",
+            "return=skipped",
          }
       },
       upgrade_soldier_defense_0 = {
@@ -103,7 +100,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has shield_steel",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier defense 0", -- Because the soldier can be expulsed by the player
             "consume=atlanteans_bread smoked_fish,smoked_meat shield_steel",
             "train=soldier defense 0 1"
@@ -117,7 +114,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has shield_advanced",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier defense 1", -- Because the soldier can be expelled by the player
             "consume=atlanteans_bread smoked_fish,smoked_meat shield_advanced",
             "train=soldier defense 1 2"
@@ -130,7 +127,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier health 0", -- Fails when aren't any soldier of level 0 health
             "return=failed unless site has tabard_golden",
             "return=failed unless site has smoked_fish,smoked_meat:2",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier health 0", -- Because the soldier can be expelled by the player
             "consume=smoked_fish,smoked_meat:2 tabard_golden",
             "train=soldier health 0 1"
@@ -143,7 +140,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat:2",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier evade 0", -- Because the soldier can be expelled by the player
             "consume=atlanteans_bread smoked_fish,smoked_meat:2",
             "train=soldier evade 0 1"
@@ -156,7 +153,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
             "return=failed unless site has atlanteans_bread:2",
             "return=failed unless site has smoked_fish,smoked_meat:2",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier evade 1", -- Because the soldier can be expelled by the player
             "consume=atlanteans_bread:2 smoked_fish,smoked_meat:2",
             "train=soldier evade 1 2"

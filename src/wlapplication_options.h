@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2019 by the Widelands Development Team
+ * Copyright (C) 2012-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
  * Further explanations for all functions and its return values
  * can be found in io/profile.cc
  */
-class Section;
 
 /*
  * Check if all options has been read.

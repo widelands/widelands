@@ -1,4 +1,4 @@
-set_textdomain("tribes")
+push_textdomain("tribes")
 
 dirname = path.dirname (__file__)
 
@@ -8,9 +8,6 @@ terrain_affinity = {
    preferred_fertility = 400,  -- Values between 0 and 1000 (1000 being very fertile).
    pickiness = 15,             -- Lower means it is less picky, i.e. it can deal better.
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "tiny", "idle", { 6, 7 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -23,16 +20,21 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 18000",
-         "remove=50",
+         "animate=idle duration:18s",
          "grow=berry_bush_blueberry_small",
       },
    },
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname .. "tiny",
+         basename = "idle",
+         hotspot = {6, 7},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "small", "idle", { 12, 13 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -45,16 +47,21 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 36000",
-         "remove=50",
+         "animate=idle duration:36s",
          "grow=berry_bush_blueberry_medium",
       },
    },
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname .. "small",
+         basename = "idle",
+         hotspot = {12, 13},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "medium", "idle", { 15, 16 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -67,16 +74,21 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 24000",
-         "remove=50",
+         "animate=idle duration:24s",
          "grow=berry_bush_blueberry_ripe",
       },
    },
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname .. "medium",
+         basename = "idle",
+         hotspot = {15, 16},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "ripe", "idle", { 15, 16 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -89,12 +101,22 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove=",
       },
       harvest = {
          "remove=",
       }
    },
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname .. "ripe",
+         basename = "idle",
+         hotspot = {15, 16},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
+   }
 }
+pop_textdomain()

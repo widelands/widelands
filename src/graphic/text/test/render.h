@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,11 +21,8 @@
 #define WL_GRAPHIC_TEXT_TEST_RENDER_H
 
 #include <memory>
-#include <string>
 
 #include "graphic/text/rt_render.h"
-
-class SDLSurface;
 
 // A stand alone richtext renderer for tests and binaries.
 class StandaloneRenderer {

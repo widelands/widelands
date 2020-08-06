@@ -46,6 +46,7 @@ end
 --    :type heading: :class:`string`
 --
 function send_to_all(text, heading)
+   push_textdomain("widelands")
    for idx,plr in ipairs(game.players) do
       if (heading ~= nil and heading ~= "") then
          send_message(plr, _"Status", text, {popup=true, heading=heading})
@@ -53,6 +54,7 @@ function send_to_all(text, heading)
          send_message(plr, _"Status", text, {popup=true})
       end
    end
+   pop_textdomain()
 end
 
 
@@ -162,7 +164,46 @@ end
 
 
 -- RST
--- .. function:: campaign_message_box(message, objective [,sleeptime])
+-- .. function:: new_objectives(...)
+--
+--    Append an objective text with a header to a dialog box in a nice fashion.
+--    For displaying objectives with an extra title when an advisor is talking
+--
+--    Provides nice formatting for objective texts.
+--    The following arguments will be parsed:
+--
+--       - number: the number of objectives described in the body
+--       - body: the objective text, e.g. created with function objective_text(heading, body)
+--
+--    :returns: a rich text object that contains the formatted
+--       objective text & title.
+function new_objectives(...)
+   local sum = 0
+   local text = ""
+   for idx,obj in ipairs{...} do
+      text = text .. obj.body
+      sum = sum + obj.number
+   end
+
+   push_textdomain("widelands")
+   local objectives_header = _"New Objective"
+   if (sum > 1) then
+      objectives_header = _"New Objectives"
+   end
+   pop_textdomain()
+
+   return
+      div("width=100%",
+         vspace(18) ..
+         div("float=left padding_r=6", p(img("images/wui/menus/objectives.png"))) ..
+         p_font("", "size=18 bold=1 color=D1D1D1",  vspace(6) .. objectives_header) ..
+         vspace(1) .. text
+      )
+end
+
+
+-- RST
+-- .. function:: campaign_message_with_objective(message, objective [,sleeptime])
 --
 --    Sets message.h and message.w if not set and calls
 --    message_box(player, title, body, parameters) for player 1.
@@ -176,10 +217,7 @@ end
 --
 --    :returns: The new objective.
 --
--- TODO(wl-zocker): This function should be used by all tutorials, campaigns and scenario maps
 function campaign_message_with_objective(message, objective, sleeptime)
-   -- TODO(GunChleoc): Once everybody is using this function, move new_objectives over from
-   -- richtext_scenarios and add this file to utils/buildcat.py
    message.body = message.body .. new_objectives(objective)
    campaign_message_box(message, sleeptime)
    return add_campaign_objective(objective)
@@ -201,74 +239,4 @@ function set_objective_done(objective, sleeptime)
       sleep(sleeptime)
    end
    objective.done = true
-end
-
-
--- RST
--- .. function:: message_box_objective(player, message)
---
---    DEPRECATED, use campaign_message_with_objective instead.
---    Calls message_box(player, message.title, message.body, message). Also adds an objective defined in obj_name, obj_title and obj_body.
---    This method should gather all options that are used often to avoid reimplementation in every single scenario script.
---
---    :arg player: the recipient of the message
---    :arg message: a table that contains all information
---
---    Besides the normal message arguments (see wl.Game.Player:message_box) the following ones can be used:
---
---    :arg position: A string that indicates at which border of the screen the message box shall appear. Can be "top", "bottom", "right", "left" or a combination (e.g. "topright"). Overrides posx and posy. Default: Center. If only one direction is indicated, the other one stays central.
---    :arg scroll_back: If true, the view scrolls/jumps back to where it came from. If false, the new location stays on the screen when the message box is closed. Default: False.
---    :arg show_instantly: If true, the message box is shown immediately. If false, this function calls message_box(), which waits until the player leaves the roadbuilding mode. Use this with care because it can be very interruptive. Default: false.
---
---    :returns: the objective if defined, nil otherwise
-function message_box_objective(player, message)
-   message.show_instantly = message.show_instantly or false
-   message.scroll_back = message.scroll_back or false
-   message.append_objective = message.append_objective or false
-   message.h = message.h or 400
-   message.w = message.w or 450
-
-   local center_pixel
-
-   if message.field then
-      -- This is necessary. Otherwise, we would scroll and then wait until the road is finished.
-      -- In this time, could user can scroll elsewhere, giving weird results.
-      if not message.show_instantly then
-         wait_for_roadbuilding()
-      end
-      center_pixel = scroll_to_field(message.field);
-   end
-
-   if message.position then
-      if string.find(message.position,"top") then
-         message.posy = 0
-      elseif string.find(message.position,"bottom") then
-         message.posy = 10000
-      end
-      if string.find(message.position,"left") then
-         message.posx = 0
-      elseif string.find(message.position,"right") then
-         message.posx = 10000
-      end
-   end
-
-   if message.show_instantly then
-      -- message_box takes care of this, but player:message_box does not
-      local user_input = wl.ui.get_user_input_allowed()
-      wl.ui.set_user_input_allowed(true)
-      player:message_box(message.title, rt(message.body), message)
-      wl.ui.set_user_input_allowed(user_input)
-   else
-      message_box(plr, message.title, message.body, message)
-   end
-
-   if (message.field and message.scroll_back) then
-      scroll_to_map_pixel(center_pixel);
-   end
-
-   if message.obj_name then
-      return add_campaign_objective(message)
-   else
-      return nil
-   end
 end

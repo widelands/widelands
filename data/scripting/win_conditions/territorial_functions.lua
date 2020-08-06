@@ -4,7 +4,7 @@
 --
 -- This file contains common code for the "Territorial Lord" and "Territorial Time" win conditions.
 
-set_textdomain("win_conditions")
+push_textdomain("win_conditions")
 
 include "scripting/richtext.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
@@ -86,7 +86,18 @@ function calculate_territory_points(fields, players)
 
    -- Check if we have a winner. The table was sorted, so we can simply grab the first entry.
    local winning_points = -1
-   if ranked_players[1].points > ( fields / 2 ) then
+   -- Peaceful mode needs more land than any other can gain (lead points > remaining fields)
+   local plrs = wl.Game().players
+   if plrs[1]:is_attack_forbidden(plrs[2].number) then
+      local remaining_points = fields
+      for tidx, teaminfo in ipairs(ranked_players) do
+         remaining_points = remaining_points - teaminfo.points
+      end
+      if (ranked_players[1].points - ranked_players[2].points) > remaining_points then
+         winning_points = ranked_players[1].points
+      end
+   -- Without peaceful mode we need half the useful fields to win
+   elseif ranked_players[1].points > ( fields / 2 ) then
       winning_points = ranked_players[1].points
    end
 
@@ -138,6 +149,11 @@ function calculate_territory_points(fields, players)
       -- Winner changed
       territory_points.remaining_time = 20 * 60 -- 20 minutes
    end
+   -- we are in peaceful mode and a player can't be stopped anymore
+   if plrs[1]:is_attack_forbidden(plrs[2].number) and winning_points > 0 then
+      territory_points.remaining_time = 0
+   end
+
    territory_points.points = points
 end
 
@@ -189,7 +205,7 @@ end
 --    :returns: a richtext-formatted string with header information for a winning player
 --
 function winning_status_header()
-   set_textdomain("win_conditions")
+   push_textdomain("win_conditions")
    local remaining_minutes = math.max(0, math.floor(territory_points.remaining_time / 60))
 
    local message = p(_"You own more than half of the map’s area.")
@@ -197,6 +213,7 @@ function winning_status_header()
              "Keep it for %i more minutes to win the game.",
              remaining_minutes))
          :format(remaining_minutes)
+   pop_textdomain()
    return message
 end
 
@@ -210,7 +227,7 @@ end
 --    :returns: a richtext-formatted string with header information for a losing player
 --
 function losing_status_header(players)
-   set_textdomain("win_conditions")
+   push_textdomain("win_conditions")
    local winner_name = "Error"
    if territory_points.last_winning_team >= 0 then
       winner_name = team_str:format(territory_points.last_winning_team)
@@ -224,6 +241,7 @@ function losing_status_header(players)
              "You’ve still got %i minutes to prevent a victory.",
              remaining_minutes))
          :format(remaining_minutes)
+   pop_textdomain()
    return message
 end
 
@@ -254,3 +272,5 @@ function territory_game_over(fields, players, wc_descname, wc_version)
       end
    end
 end
+
+pop_textdomain()

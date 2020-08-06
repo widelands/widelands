@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,9 @@
 #include "graphic/gl/initialize.h"
 
 #include <csignal>
-#include <cstdlib>
 
-#include <SDL.h>
+#include <SDL_messagebox.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 #include <boost/regex.hpp>
 
 #include "base/i18n.h"
@@ -207,16 +205,39 @@ SDL_GLContext initialize(
 		exit(1);
 	};
 
+	// Exit because we couldn't detect the shading language version, so there must be a problem
+	// communicating with the graphics adapter.
+	auto handle_unreadable_opengl_shading_language = [show_opengl_error_and_exit]() {
+		show_opengl_error_and_exit(
+		   "Widelands won't work because we were unable to detect the shading language version.\n"
+		   "There is an unknown problem with reading the information from the graphics driver.",
+		   (boost::format("%s\n%s") %
+		    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
+		       support is limited here, so do not use advanced typography **/
+		    _("Widelands won't work because we were unable to detect the shading language "
+		      "version.") %
+		    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
+		       support is limited here, so do not use advanced typography **/
+		    _("There is an unknown problem with reading the information from the graphics "
+		      "driver."))
+		      .str());
+	};
+
+	// glGetString returned an error for the shading language
+	if (glGetString(GL_SHADING_LANGUAGE_VERSION) == 0) {
+		handle_unreadable_opengl_shading_language();
+	}
+
 	std::vector<std::string> shading_language_version_vector;
 	boost::split(
-	   shading_language_version_vector, shading_language_version_string, boost::is_any_of("."));
+	   shading_language_version_vector, shading_language_version_string, boost::is_any_of(". "));
 	if (shading_language_version_vector.size() >= 2) {
 		// The shading language version has been detected properly. Exit if the shading language
 		// version is too old.
 		const int major_shading_language_version =
-		   atoi(shading_language_version_vector.front().c_str());
+		   boost::lexical_cast<int>(shading_language_version_vector.front());
 		const int minor_shading_language_version =
-		   atoi(shading_language_version_vector.at(1).c_str());
+		   boost::lexical_cast<int>(shading_language_version_vector.at(1));
 		if (major_shading_language_version < 1 ||
 		    (major_shading_language_version == 1 && minor_shading_language_version < 20)) {
 			show_opengl_error_and_exit(
@@ -236,7 +257,8 @@ SDL_GLContext initialize(
 		// conversion
 		boost::regex re("\\d+");
 		if (boost::regex_match(shading_language_version_string, re)) {
-			const int major_shading_language_version = atoi(shading_language_version_string);
+			const int major_shading_language_version =
+			   boost::lexical_cast<int>(shading_language_version_string);
 			if (major_shading_language_version < 2) {
 				show_opengl_error_and_exit(
 				   "Widelands won’t work because your graphics driver is too old.\n"
@@ -251,21 +273,8 @@ SDL_GLContext initialize(
 				      .str());
 			}
 		} else {
-			// Exit because we couldn't detect the shading language version, so there must be a problem
-			// communicating with the graphics adapter.
-			show_opengl_error_and_exit(
-			   "Widelands won't work because we were unable to detect the shading language version.\n"
-			   "There is an unknown problem with reading the information from the graphics driver.",
-			   (boost::format("%s\n%s") %
-			    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-			       support is limited here, so do not use advanced typography **/
-			    _("Widelands won't work because we were unable to detect the shading language "
-			      "version.") %
-			    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-			       support is limited here, so do not use advanced typography **/
-			    _("There is an unknown problem with reading the information from the graphics "
-			      "driver."))
-			      .str());
+			// We don't know how to interpret the shading language info
+			handle_unreadable_opengl_shading_language();
 		}
 	}
 

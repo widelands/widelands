@@ -8,7 +8,7 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-   needs_seafaring = true,
+   map_check = {"seafaring", "waterways"},
 
    buildcost = {
       log = 5,
@@ -36,7 +36,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 990
+      prohibited_till = 990,
+      supports_seafaring = true
    },
 
    working_positions = {
@@ -46,21 +47,17 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "reed", amount = 8 }
    },
-   outputs = {
-      "cloth"
-   },
 
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
          descname = _"weaving",
          actions = {
-            "sleep=25000",
-            "checkmap=seafaring",
+            "sleep=duration:25s",
             "return=skipped unless economy needs cloth",
             "consume=reed",
             "playsound=sound/barbarians/weaver 120",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=cloth"
          }
       },

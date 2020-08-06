@@ -44,8 +44,8 @@ function get_trees()
 end
 
 -- Main function
-set_textdomain("widelands_editor")
-return {
+push_textdomain("widelands_editor")
+local r = {
    title = _"Editor Help",
    tabs = {
       {
@@ -86,8 +86,10 @@ return {
          name = "trees",
          -- TRANSLATORS Tab title: tree help
          title = _"Trees",
-         icon = "world/immovables/trees/alder/old/idle_0.png",
+         icon = "world/immovables/trees/alder/menu.png",
          entries = get_trees()
       }
    }
 }
+pop_textdomain()
+return r

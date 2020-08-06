@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,7 @@
 #ifndef WL_LOGIC_PLAYERSMANAGER_H
 #define WL_LOGIC_PLAYERSMANAGER_H
 
-#include <string>
-#include <vector>
+#include <cassert>
 
 #include "graphic/playercolor.h"
 #include "logic/player_end_result.h"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,20 +46,22 @@ void MapResourcesPacket::read(FileSystem& fs,
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			int32_t const nr_res = fr.unsigned_16();
-			if (world.get_nr_resources() < nr_res)
+			if (world.get_nr_resources() < nr_res) {
 				log("WARNING: Number of resources in map (%i) is bigger than in world "
 				    "(%i)",
 				    nr_res, world.get_nr_resources());
+			}
 
 			// construct ids and map
 			std::map<uint8_t, uint8_t> smap;
 			for (uint8_t i = 0; i < nr_res; ++i) {
 				uint8_t const id = fr.unsigned_16();
 				const std::string resource_name = lookup_table.lookup_resource(fr.c_string());
-				int32_t const res = world.get_resource(resource_name.c_str());
-				if (res == Widelands::INVALID_INDEX)
+				DescriptionIndex const res = world.resource_index(resource_name.c_str());
+				if (res == Widelands::INVALID_INDEX) {
 					throw GameDataError(
 					   "resource '%s' exists in map but not in world", resource_name.c_str());
+				}
 				smap[id] = res;
 			}
 

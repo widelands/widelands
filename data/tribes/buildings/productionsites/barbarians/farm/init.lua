@@ -50,16 +50,6 @@ tribes:new_productionsite_type {
       barbarians_farmer = 1
    },
 
-   outputs = {
-      "wheat"
-   },
-
-   indicate_workarea_overlaps = {
-      barbarians_rangers_hut = false,
-      barbarians_farm = false,
-      barbarians_reed_yard = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -67,7 +57,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant",
             "call=harvest",
-            "return=no_stats"
          }
       },
       plant = {
@@ -75,8 +64,8 @@ tribes:new_productionsite_type {
          descname = _"planting wheat",
          actions = {
             "callworker=plant",
-            "animate=working 7000",
-            "sleep=3000"
+            "animate=working duration:7s",
+            "sleep=duration:3s"
          }
       },
       harvest = {
@@ -84,8 +73,8 @@ tribes:new_productionsite_type {
          descname = _"harvesting wheat",
          actions = {
             "callworker=harvest",
-            "animate=working 17000",
-            "sleep=3000"
+            "animate=working duration:3s",
+            "sleep=duration:1s"
          }
       },
    },

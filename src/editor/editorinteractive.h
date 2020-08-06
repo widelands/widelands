@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,6 @@
 #include "editor/tools/set_starting_pos_tool.h"
 #include "editor/tools/set_terrain_tool.h"
 #include "logic/map.h"
-#include "notifications/notifications.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/unique_window.h"

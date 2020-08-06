@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,7 @@
 #ifndef WL_IO_PROFILE_H
 #define WL_IO_PROFILE_H
 
-#include <cstring>
 #include <memory>
-#include <string>
-#include <vector>
 
 #include "base/macros.h"
 #include "base/vector.h"
@@ -59,12 +56,12 @@ public:
 	struct Value {
 		Value(const std::string& name, const char* const value);
 		Value(const Value&);
-		Value(Value&& other);
+		Value(Value&& other) noexcept;
 
 		// destructor would be empty
 
-		Value& operator=(Value);
-		Value& operator=(Value&& other);
+		Value& operator=(Value) noexcept;
+		Value& operator=(Value&& other) noexcept;
 
 		char const* get_name() const {
 			return name_.c_str();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,19 +20,17 @@
 #ifndef WL_MAP_IO_WIDELANDS_MAP_LOADER_H
 #define WL_MAP_IO_WIDELANDS_MAP_LOADER_H
 
-#include <boost/algorithm/string.hpp>
 #include <memory>
-#include <string>
+
+#include <boost/algorithm/string.hpp>
 
 #include "logic/filesystem_constants.h"
 #include "map_io/map_loader.h"
 
 class FileSystem;
-class LuaInterface;
 
 namespace Widelands {
 
-class EditorGameBase;
 class MapObjectLoader;
 
 /// Takes ownership of the filesystem that is passed to it.
