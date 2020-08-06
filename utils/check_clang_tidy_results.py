@@ -14,7 +14,6 @@ SUPPRESSED_CHECKS = {
     '[bugprone-integer-division]',
     '[cert-dcl50-cpp]',  # We need this for our logger
     '[cert-err58-cpp]',
-    '[clang-analyzer-alpha.cplusplus.VirtualCall'],
     '[clang-analyzer-core.CallAndMessage]',
     '[clang-analyzer-core.DivideZero]',
     '[clang-analyzer-core.NonNullParamChecker]',
@@ -124,6 +123,9 @@ def main():
         contents = checkme.readlines()
         for line in contents:
             if 'third_party' in line:
+                continue
+            # We're not piloting alpha-level checks
+            if 'clang-analyzer-alpha' in line:
                 continue
             check_suppressed = False
             for check in SUPPRESSED_CHECKS:
