@@ -182,5 +182,6 @@ private:
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
                                 const std::map<Widelands::DescriptionIndex, uint8_t>& map);
+std::string get_amount_string(uint32_t, bool cutoff1k = false);
 
 #endif  // end of include guard: WL_WUI_WARESDISPLAY_H
