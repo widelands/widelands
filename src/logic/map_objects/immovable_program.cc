@@ -51,7 +51,9 @@ program will simply display their main animation indefinitely.
 
 Programs are defined as Lua tables. Each program must be declared as a subtable in the immovable's
 Lua table called ``programs`` and have a unique table key. The entries in a program's subtable are
-the ``actions`` to execute, like this::
+the ``actions`` to execute, like this:
+
+.. code-block:: lua
 
    programs = {
       program = {
@@ -184,26 +186,30 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 
 transform
 ---------
-Replace this immovable with something else or remove it.
 
-Parameter syntax::
+.. function:: transform=[bob:]\<name\> [chance:\<percent\>]
 
-  parameters ::= [bob:]<name> [chance:<percent>]
+   :arg string \<name\>: The name of the map object to turn into.
+      If the ``bob:<name>`` flag is given, the transformation target is a bob;
+      otherwise it is an immovable. Currently, only ships are supported as bobs.
 
-Parameter semantics:
+   :arg percent chance: The :ref:`map_object_programs_datatypes_percent` chance that the transformation will be performed.
+      The game will generate a random number and the transformation will be performed if and only
+      if this number is less than ``chance``.
+      If ``chance:<percent>`` is omitted, the transformation will always be performed.
 
-``[bob:]<name>``
-    The name of the immovable to turn into. If the ``bob`` flag is given, the transformation target
-    is a bob; otherwise it is an immovable. Currently, only ships are supported as bobs.
-``success:<chance>``
-    A percentage defining the chance that the transformation will be performed. The
-    game will generate a random number and the program step succeeds if and only
-    if this number is less than ``chance``. Otherwise, the next program step is triggered. If
-    ``chance:<percent>`` is omitted, the transformation will always succeed.
+   Deletes this immovable and instantly replaces it with a different immovable or a bob. If
+   ``chance`` is specified, there's a probability that the transformation will be skipped.
+   When the transformation succeeds, no further program steps will be executed, because this object will be gone.
+   Example:
 
-Deletes this immovable and instantly replaces it with a different immovable or a bob. If no
-parameters are given, the immovable is removed and no other transformation will take place. If
-``success`` is specified, there's a probability that the transformation will be skipped.
+.. code-block:: lua
+
+	  program = {
+         "animate=idle duration:25m50s",
+         "transform=deadtree3 chance:9.37%",
+         "seed=spruce_summer_sapling 200", -- This line will be skipped if the removal succeeds
+      },
 */
 ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments,
                                              ImmovableDescr& descr) {
@@ -223,7 +229,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 					// guarantee the load order. Maybe in postload() one day.
 					type_name_ = item.second;
 				} else if (item.first == "chance") {
-					probability_ = read_probability(item.second);
+					probability_ = read_percent_to_range(item.second, kMaxProbability);
 				} else {
 					throw GameDataError(
 					   "Unknown argument '%s'. Usage: [bob:]name [chance:<percent>]", argument.c_str());
@@ -345,19 +351,28 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 
 remove
 ------
-Remove this immovable.
 
-Parameter syntax::
+.. function:: remove=[chance:\<percent\>]
 
-  parameters ::= [chance:<percent>]
+   :arg percent chance: The :ref:`map_object_programs_datatypes_percent` chance that the immovable will be removed. The
+      game will generate a random number and the immovable will be removed if and only
+      if this number is less than ``chance``.
+      If ``chance:<percent>`` is omitted, the immovable will always be removed.
 
-Parameter semantics:
+   Remove this immovable. If ``chance`` is specified, there's a probability that the removal will be skipped.
+   When the removal succeeds, no further program steps will be executed, because this object will be gone.
+   Examples:
 
-``chance:<percent>``
-    A percentage defining the chance that the immovable will removed. The
-    game will generate a random number and the program step succeeds if and only
-    if this number is less than ``chance``. Otherwise, the next program step is triggered. If
-    ``chance:<percent>`` is omitted, the immovable will always be removed.
+.. code-block:: lua
+
+      program = {
+         "animate=idle duration:55s",
+         "remove=chance:16.41%",
+         "grow=spruce_summer_pole", -- This line will be skipped if the removal succeeds
+      },
+	  fall = {
+         "remove=", -- This object will always be removed when 'fall' is called
+      },
 */
 ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
                                        const ImmovableDescr& descr) {
@@ -369,7 +384,7 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
 	} else {
 		const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
 		if (item.first == "chance") {
-			probability_ = read_probability(item.second);
+			probability_ = read_percent_to_range(item.second, kMaxProbability);
 		} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 			// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
 			log(

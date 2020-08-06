@@ -41,7 +41,7 @@ struct MapObjectProgram {
 	virtual ~MapObjectProgram() = default;
 
 protected:
-	static constexpr int kMaxProbability = 10000;
+	static constexpr unsigned kMaxProbability = 10000U;
 
 	/// Splits a string by separators.
 	/// \note This ignores empty elements, so do not use this for example to split
@@ -85,9 +85,10 @@ protected:
 	/**
 	 * @brief Reads a percentage
 	 * @param input A percentage in the format 12%, 12.5% or 12.53%.
+	 * @param range The expected maximum value
 	 * @return Scaled precentage as integer, where 100% corresponds to kMaxProbability.
 	 * */
-	static unsigned read_probability(const std::string& input);
+	static unsigned read_percent_to_range(const std::string& input, unsigned range);
 
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"
