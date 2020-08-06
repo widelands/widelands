@@ -72,7 +72,8 @@ void World::postload() {
 		const ImmovableDescr& imm = immovables_->get(i);
 		for (const auto& target : imm.becomes()) {
 			if (get_immovable_index(target.second) == INVALID_INDEX) {
-				throw GameDataError("Unknown grow/transform target '%s' for world immovable '%s'", target.second.c_str(), imm.name().c_str());
+				throw GameDataError("Unknown grow/transform target '%s' for world immovable '%s'",
+				                    target.second.c_str(), imm.name().c_str());
 			}
 		}
 	}

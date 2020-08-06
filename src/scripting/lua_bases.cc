@@ -192,7 +192,6 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 	return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
 }
 
-
 /* RST
    .. function:: tribe_immovable_exists(immovable_name)
 

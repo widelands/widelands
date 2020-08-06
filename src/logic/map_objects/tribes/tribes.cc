@@ -380,10 +380,10 @@ void Tribes::postload() {
 				target_exists = ship_index(target.second) != INVALID_INDEX;
 			}
 			if (!target_exists) {
-				throw GameDataError("Unknown grow/transform target '%s' for tribe immovable '%s'", target.second.c_str(), imm.name().c_str());
+				throw GameDataError("Unknown grow/transform target '%s' for tribe immovable '%s'",
+				                    target.second.c_str(), imm.name().c_str());
 			}
 		}
-
 	}
 
 	// Some final checks on the gamedata

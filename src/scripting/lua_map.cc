@@ -2133,7 +2133,6 @@ int LuaImmovableDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), MapObjectType::WARE);
 }
 
-
 /* RST
    .. attribute:: becomes
 
@@ -3172,7 +3171,6 @@ const PropertyType<LuaMarketDescription> LuaMarketDescription::Properties[] = {
  PROPERTIES
  ==========================================================
  */
-
 
 /* RST
 ShipDescription
