@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Installing dependencies
       run: |
-        dir C:\ recurse *cygwin*  # NOCOM
+        dir C:\ *cygwin* -recurse  # NOCOM
         $env:Path += ";C:\msys64\usr\bin"
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -Syyuu
