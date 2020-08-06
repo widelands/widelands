@@ -544,7 +544,7 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
-	auto* fields_to_draw = map_view()->draw_terrain(ebase, Workareas(), draw_grid_, &dst);
+	auto* fields_to_draw = map_view()->draw_terrain(ebase, nullptr, Workareas(), draw_grid_, &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const uint32_t gametime = ebase.get_gametime();
