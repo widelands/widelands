@@ -371,8 +371,7 @@ if (OPTION_BUILD_TESTS)
   # not rebuild tests:
   # https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
   add_custom_target(_run_all_tests ALL
-    COMMAND dumpbin /headers "./src/notifications/test/notifications_test.exe"  # NOCOM
-    COMMAND ${CMAKE_CTEST_COMMAND} -VV  # --output-on-failure
+    COMMAND ${CMAKE_CTEST_COMMAND} -VV  # --output-on-failure # NOCOM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     DEPENDS wl_tests
   )
