@@ -122,6 +122,9 @@ def main():
         for line in contents:
             if 'third_party' in line:
                 continue
+            # We're not piloting alpha-level checks
+            if 'clang-analyzer-alpha' in line:
+                continue
             check_suppressed = False
             for check in SUPPRESSED_CHECKS:
                 if check in line:

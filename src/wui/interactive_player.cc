@@ -384,7 +384,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const uint32_t gametime = gbase.get_gametime();
 
 	Workareas workareas = get_workarea_overlays(map);
-	auto* fields_to_draw = given_map_view->draw_terrain(gbase, workareas, false, dst);
+	auto* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
 	const auto& road_building_s = road_building_steepness_overlays();
 
 	const float scale = 1.f / given_map_view->view().zoom;
