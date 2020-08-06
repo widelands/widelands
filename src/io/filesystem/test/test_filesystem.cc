@@ -20,6 +20,7 @@
 #ifdef _WIN32
 #include <sstream>
 #endif
+#include <iostream>
 
 #include <boost/test/unit_test.hpp>
 
@@ -28,6 +29,9 @@
 
 #ifdef _WIN32
 static std::string Win32Path(std::string s) {
+
+	std::cout << "NOCOM: Win32Path(" << s.c_str() << ") returns ***";
+
 	for (size_t i = 0; i < s.size(); i++)
 		if (s[i] == '/')
 			s[i] = '\\';
@@ -36,6 +40,9 @@ static std::string Win32Path(std::string s) {
 		std::string cwd = FileSystem::get_working_directory();
 		s.insert(0, cwd.substr(0, 2));
 	}
+
+	std::cout << s.c_str() << "*** (NOCOM)" << std::endl;
+
 	return s;
 }
 static int setenv(const char* envname, const char* envval, int /* overwrite */) {
@@ -60,18 +67,26 @@ BOOST_AUTO_TEST_SUITE(FileSystemTests)
 #endif
 
 BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
+	std::cout << "NOCOM BOOST_AUTO_TEST_CASE(test_canonicalize_name) begins" << std::endl;
+
 	setenv("HOME", "/home/test", 1);
 	std::string cwd = RealFSImpl("").get_working_directory();
+
+	std::cout << "NOCOM test_canonicalize_name AAA" << std::endl;
 
 	// RealFSImpl is constructed with a root directory...
 
 	TEST_CANONICALIZE_NAME("", "path", cwd + "/path")
 	TEST_CANONICALIZE_NAME(".", "path", cwd + "/path")
 
+	std::cout << "NOCOM test_canonicalize_name BBB" << std::endl;
+
 	TEST_CANONICALIZE_NAME("/home", "path", "/home/path")
 	TEST_CANONICALIZE_NAME("/opt", "path", "/opt/path")
 	TEST_CANONICALIZE_NAME("/opt/test", "path", "/opt/test/path")
 	TEST_CANONICALIZE_NAME("/opt", "some/path", "/opt/some/path")
+
+	std::cout << "NOCOM test_canonicalize_name CCC" << std::endl;
 
 	// single dot is removed (root path)...
 
@@ -79,11 +94,15 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 	TEST_CANONICALIZE_NAME("/home/./you", "path", "/home/you/path")
 	TEST_CANONICALIZE_NAME("/home/us/.", "path", "/home/us/path")
 
+	std::cout << "NOCOM test_canonicalize_name DDD" << std::endl;
+
 	// single dot is removed (file path)...
 
 	TEST_CANONICALIZE_NAME("/opt", "./no/where", "/opt/no/where")
 	TEST_CANONICALIZE_NAME("/opt", "some/./where", "/opt/some/where")
 	TEST_CANONICALIZE_NAME("/opt", "any/where/.", "/opt/any/where")
+
+	std::cout << "NOCOM test_canonicalize_name EEE" << std::endl;
 
 	// empty path nodes are removed (root path)...
 
@@ -91,6 +110,8 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 	TEST_CANONICALIZE_NAME("/usr//empty", "path", "/usr/empty/path")
 	TEST_CANONICALIZE_NAME("/usr/empty/", "path", "/usr/empty/path")
 	TEST_CANONICALIZE_NAME("/usr/empty//", "path", "/usr/empty/path")
+
+	std::cout << "NOCOM test_canonicalize_name FFF" << std::endl;
 
 	// empty path nodes are removed (file path)...
 
@@ -102,6 +123,8 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 
 	// '..' moves up a directory in the path (root path)...
 
+	std::cout << "NOCOM test_canonicalize_name GGG" << std::endl;
+
 	TEST_CANONICALIZE_NAME("/usr/../home", "path", "/home/path")
 	TEST_CANONICALIZE_NAME("/usr/../../home", "path", "/home/path")
 	TEST_CANONICALIZE_NAME("/usr/test/..", "path", "/usr/path")
@@ -109,6 +132,8 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 	TEST_CANONICALIZE_NAME("/usr/one/../a/b/..", "path", "/usr/a/path")
 
 	// '..' moves up a directory in the path (file path)...
+
+	std::cout << "NOCOM test_canonicalize_name HHH" << std::endl;
 
 	TEST_CANONICALIZE_NAME("/home/test", "../path", "/home/path")
 	TEST_CANONICALIZE_NAME("/home/test", "../../path", "/path")
@@ -122,15 +147,21 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 	TEST_CANONICALIZE_NAME("/home/test", "path/../../../one", "/one")
 	TEST_CANONICALIZE_NAME("/home/test", "path/../../../../one", "/one")
 
+	std::cout << "NOCOM test_canonicalize_name III" << std::endl;
+
 	// ...but not a '..' coming from two different strings...
 
 	TEST_CANONICALIZE_NAME("/home/test/.", "./path", "/home/test/path")
+
+	std::cout << "NOCOM test_canonicalize_name JJJ" << std::endl;
 
 #ifdef _WIN32
 	// Check drive letter handling.
 	BOOST_CHECK_EQUAL(RealFSImpl("C:\\").canonicalize_name("C:\\"), "C:");
 	BOOST_CHECK_EQUAL(RealFSImpl("C:\\").canonicalize_name("D:\\"), "C:\\D:");
 #endif
+
+	std::cout << "NOCOM test_canonicalize_name SUCCESS!!" << std::endl;
 }
 
 // Skip testing tilde expansion on windows.

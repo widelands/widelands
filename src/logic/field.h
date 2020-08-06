@@ -81,8 +81,8 @@ struct Field {
 	struct Resources {
 		DescriptionIndex d : 4, r : 4;
 	};
-	static_assert(sizeof(Resources) == sizeof(DescriptionIndex) / 2,
-	              "assert(sizeof(Resources) == sizeof(DescriptionIndex) / 2) failed.");
+	static_assert(sizeof(Resources) <= sizeof(DescriptionIndex),
+	              "assert(sizeof(Resources) <= sizeof(DescriptionIndex)) failed.");
 	struct ResourceAmounts {
 		ResourceAmount d : 4, r : 4;
 	};
