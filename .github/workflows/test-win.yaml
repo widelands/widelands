@@ -9,13 +9,12 @@ jobs:
       matrix:
         config:
           - Release
-          # - Debug
+          - Debug
     name: ${{ matrix.config }} Build
     runs-on: windows-latest
     steps:
     - name: Installing dependencies
       run: |
-        dir "C:\Program Files\Git" *cyg* -recurse  # NOCOM
         $env:Path += ";C:\msys64\usr\bin"
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -Syyuu
