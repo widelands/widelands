@@ -7,17 +7,23 @@ jobs:
   compile:
     strategy:
       matrix:
-        config: [ Release, Debug ]
+        config:
+          - Release
+          # - Debug
     name: ${{ matrix.config }} Build
     runs-on: windows-latest
     steps:
     - name: Installing dependencies
       run: |
+        echo "***********************************************************"
+        echo $env:Path
+        echo $env:BOOST_ROOT_1_72_0
+        echo "***********************************************************"
         $env:Path += ";C:/msys64/usr/bin"
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -Syyuu
-        pacman.exe --noconfirm -S mingw-w64-x86_64-ninja mingw-w64-x86_64-boost mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glbinding
-        dir C:/msys64 *cyg* -recurse  # NOCOM
+        pacman.exe --noconfirm -S mingw-w64-x86_64-ninja mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glbinding
+        $env:BOOST_ROOT = $env:BOOST_ROOT_1_72_0
     - name: Checkout
       uses: actions/checkout@v2
       with:
