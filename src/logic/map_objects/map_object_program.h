@@ -85,10 +85,9 @@ protected:
 	/**
 	 * @brief Reads a percentage
 	 * @param input A percentage in the format 12%, 12.5% or 12.53%.
-	 * @param range The expected maximum value
 	 * @return Scaled precentage as integer, where 100% corresponds to kMaxProbability.
 	 * */
-	static unsigned read_percent_to_range(const std::string& input, unsigned range);
+	static unsigned read_percent_to_int(const std::string& input);
 
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"

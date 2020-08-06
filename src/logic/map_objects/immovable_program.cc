@@ -229,7 +229,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 					// guarantee the load order. Maybe in postload() one day.
 					type_name_ = item.second;
 				} else if (item.first == "chance") {
-					probability_ = read_percent_to_range(item.second, kMaxProbability);
+					probability_ = read_percent_to_int(item.second);
 				} else {
 					throw GameDataError(
 					   "Unknown argument '%s'. Usage: [bob:]name [chance:<percent>]", argument.c_str());
@@ -384,7 +384,7 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
 	} else {
 		const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
 		if (item.first == "chance") {
-			probability_ = read_percent_to_range(item.second, kMaxProbability);
+			probability_ = read_percent_to_int(item.second);
 		} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 			// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
 			log(

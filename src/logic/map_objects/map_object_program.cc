@@ -236,10 +236,10 @@ Maximum value is ``100%``. Examples:
 
 * ``25%``
 * ``25.1%``
-* ``25.23%``
+* ``25.13%``
 
 */
-unsigned MapObjectProgram::read_percent_to_range(const std::string& input, unsigned range) {
+unsigned MapObjectProgram::read_percent_to_int(const std::string& input) {
 	boost::smatch match;
 	boost::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
 	if (boost::regex_search(input, match, re)) {
@@ -252,7 +252,7 @@ unsigned MapObjectProgram::read_percent_to_range(const std::string& input, unsig
 					10U * std::stoul(match[3]) :
 			std::stoul(match[3]));
 
-		if (result > range) {
+		if (result > kMaxProbability) {
 			throw GameDataError("Percentage '%s' greater than 100%% given", input.c_str());
 		}
 		return result;
