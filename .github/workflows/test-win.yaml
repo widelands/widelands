@@ -15,23 +15,21 @@ jobs:
     steps:
     - name: Installing dependencies
       run: |
-        $env:Path += ";C:/msys64/usr/bin"
-        echo "***********************************************************"
-        echo $env:Path
-        echo $env:BOOST_ROOT_1_72_0
-        dir C:\hostedtoolcache\windows\Boost\1.72.0\x86_64 b*.hpp -recurse
-        echo "***********************************************************"
+        dir C:\cygwin  # NOCOM
+        dir D:\cygwin  # NOCOM
+        $env:Path += ";C:\msys64\usr\bin"
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -S mingw-w64-x86_64-ninja mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glbinding
-        $env:BOOST_ROOT = $env:BOOST_ROOT_1_72_0
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
     - name: Compiler
       run: |
-        $env:Path += ";C:/msys64/usr/bin;C:/msys64/mingw64/bin;C:/msys64/mingw64/lib;C:/msys64/mingw64/include"
+        $env:BOOST_ROOT = $env:BOOST_ROOT_1_72_0
+        $env:BOOST_INCLUDE_DIR = $env:BOOST_ROOT
+        $env:Path = "$env:BOOST_ROOT;C:/msys64/usr/bin;C:/msys64/mingw64/bin;C:/msys64/mingw64/lib;C:/msys64/mingw64/include;$env:Path"
         mkdir build
         cd build
         $env:CC = "C:/msys64/mingw64/bin/clang.exe"
