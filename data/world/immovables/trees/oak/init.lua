@@ -104,7 +104,7 @@ world:new_immovable_type{
          "seed=oak_summer_sapling 100",
       },
       fall = {
-         "animate=falling 1s400ms",
+         "animate=falling duration:1s400ms",
          "transform=fallentree",
       },
    },
