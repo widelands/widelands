@@ -560,6 +560,14 @@ public:
 	void add_seer(const MapObject&);
 	void remove_seer(const MapObject&, const Area<FCoords>&);
 
+	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
+	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
+	uint32_t count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const;
+	uint32_t count_soldiers_h(unsigned) const;
+	uint32_t count_soldiers_a(unsigned) const;
+	uint32_t count_soldiers_d(unsigned) const;
+	uint32_t count_soldiers_e(unsigned) const;
+
 	bool is_muted(DescriptionIndex di) const {
 		return muted_building_types_.count(di);
 	}
@@ -595,7 +603,8 @@ private:
 	uint32_t casualties_, kills_;
 	uint32_t msites_lost_, msites_defeated_;
 	uint32_t civil_blds_lost_, civil_blds_defeated_;
-	std::unordered_set<std::string> remaining_shipnames_;
+
+	std::list<std::string> remaining_shipnames_;
 	// If we run out of ship names, we'll want to continue with unique numbers
 	uint32_t ship_name_counter_;
 
@@ -650,6 +659,19 @@ private:
 	std::set<PlayerNumber> forbid_attack_;
 
 	PlayerBuildingStats building_stats_;
+
+	struct SoldierStatistics {
+		const unsigned health, attack, defense, evade;
+		Quantity total;
+		SoldierStatistics(unsigned h, unsigned a, unsigned d, unsigned e)
+		   : health(h), attack(a), defense(d), evade(e), total(0) {
+		}
+		bool operator==(const SoldierStatistics& s) const {
+			return s.health == health && s.attack == attack && s.defense == defense &&
+			       s.evade == evade;
+		}
+	};
+	std::vector<SoldierStatistics> soldier_stats_;
 
 	FxId message_fx_;
 	FxId attack_fx_;

@@ -71,14 +71,14 @@ tribes:new_productionsite_type {
             "callworker=find_pond",
             "consume=log:3",
             "callworker=make_stack",
-            "sleep=15000",
+            "sleep=duration:15s",
          },
       },
       collect_coal = {
          -- TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
          descname = _"collecting coal",
          actions = {
-            "sleep=15000",
+            "sleep=duration:15s",
             "callworker=collect_coal",
          },
       },
