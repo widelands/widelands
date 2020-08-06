@@ -229,7 +229,7 @@ void draw_diagram(uint32_t time_ms,
 	how_many_ticks = std::min(how_many_ticks, calc_plot_x_max_ticks(inner_w));
 
 	// Make sure how_many_ticks is a divisor of max_x
-	while (max_x % how_many_ticks != 0) {
+	while (how_many_ticks > 0 && max_x % how_many_ticks != 0) {
 		how_many_ticks--;
 	}
 
