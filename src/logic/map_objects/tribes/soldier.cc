@@ -349,10 +349,13 @@ bool Soldier::init(EditorGameBase& egbase) {
 	combat_walkstart_ = 0;
 	combat_walkend_ = 0;
 
+	get_owner()->add_soldier(health_level_, attack_level_, defense_level_, evade_level_);
+
 	return Worker::init(egbase);
 }
 
 void Soldier::cleanup(EditorGameBase& egbase) {
+	get_owner()->remove_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 	Worker::cleanup(egbase);
 }
 
@@ -378,7 +381,9 @@ void Soldier::set_health_level(const uint32_t health) {
 
 	uint32_t oldmax = get_max_health();
 
+	get_owner()->remove_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 	health_level_ = health;
+	get_owner()->add_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 
 	uint32_t newmax = get_max_health();
 	current_health_ = current_health_ * newmax / oldmax;
@@ -387,19 +392,25 @@ void Soldier::set_attack_level(const uint32_t attack) {
 	assert(attack_level_ <= attack);
 	assert(attack <= descr().get_max_attack_level());
 
+	get_owner()->remove_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 	attack_level_ = attack;
+	get_owner()->add_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 }
 void Soldier::set_defense_level(const uint32_t defense) {
 	assert(defense_level_ <= defense);
 	assert(defense <= descr().get_max_defense_level());
 
+	get_owner()->remove_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 	defense_level_ = defense;
+	get_owner()->add_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 }
 void Soldier::set_evade_level(const uint32_t evade) {
 	assert(evade_level_ <= evade);
 	assert(evade <= descr().get_max_evade_level());
 
+	get_owner()->remove_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 	evade_level_ = evade;
+	get_owner()->add_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 }
 void Soldier::set_retreat_health(const uint32_t retreat) {
 	assert(retreat <= get_max_health());
@@ -1758,6 +1769,10 @@ void Soldier::Loader::load(FileRead& fr) {
 			soldier.defense_level_ =
 			   std::min(fr.unsigned_32(), soldier.descr().get_max_defense_level());
 			soldier.evade_level_ = std::min(fr.unsigned_32(), soldier.descr().get_max_evade_level());
+
+			// During saveloading init() is not called so we were not registered in the statistics yet
+			soldier.get_owner()->add_soldier(soldier.health_level_, soldier.attack_level_,
+			                                 soldier.defense_level_, soldier.evade_level_);
 
 			if (soldier.current_health_ > soldier.get_max_health()) {
 				soldier.current_health_ = soldier.get_max_health();

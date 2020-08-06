@@ -64,12 +64,12 @@ the ``actions`` to execute, like this::
       },
    },
 
-The different command types and the parameters that they take are explained below.
-
 .. highlight:: default
 
-Command Types
-^^^^^^^^^^^^^
+For general information about the format, see :ref:`map_object_programs_syntax`.
+
+Available actions are:
+
 - `animate`_
 - `transform`_
 - `grow`_
@@ -130,23 +130,7 @@ ImmovableProgram::Action::~Action() {
 
 animate
 -------
-Runs an animation.
-
-Parameter syntax::
-
-  parameters ::= animation duration
-
-Parameter semantics:
-
-``animation``
-    The name of an animation (defined in the immovable).
-``duration``
-    A natural integer specifying the duration in milliseconds.
-
-Starts the specified animation for the immovable. Blocks the execution of the program for the
-specified duration. (The duration does not have to equal the length of the animation. It will loop
-around. The animation will not be stopped by this command. It will run until another animation is
-started.)
+Runs an animation. See :ref:`map_object_programs_animate`.
 */
 ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments,
                                          const ImmovableDescr& descr) {

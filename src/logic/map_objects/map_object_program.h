@@ -72,12 +72,13 @@ protected:
 	                    const std::string& expected_key = "");
 
 	/**
-	 * @brief Reads time duration with a unit from a string
-	 * @param A positive integer, optionally followed by 'ms' (milliseconds), 's' (seconds) or 'm'
+	 * @brief Reads time duration with units from a string
+	 * @param input: A positive integer, followed by 'ms' (milliseconds), 's' (seconds) or 'm'
 	 * (minutes). This can be repeated to form units like '1m20s500ms'.
+	 * @param descr: For error messages
 	 * @return The duration in SDL ticks (milliseconds)
 	 */
-	static Duration read_duration(const std::string& input);
+	static Duration read_duration(const std::string& input, const MapObjectDescr& descr);
 
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"
@@ -94,7 +95,7 @@ protected:
 	struct AnimationParameters {
 		/// Animation ID
 		uint32_t animation = 0;
-		/// Animation duration. 0 will play the animation forever.
+		/// Animation duration before the next action will be called by the program.
 		Duration duration = 0;
 	};
 	/// Parses the arguments for an animation action, e.g. { "working", "24000" }. If
@@ -115,8 +116,6 @@ protected:
 	                                                uint8_t default_priority);
 
 private:
-	static Widelands::Duration as_ms(Widelands::Duration number, const std::string& unit);
-
 	const std::string name_;
 };
 }  // namespace Widelands

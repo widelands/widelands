@@ -43,9 +43,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 7 },
       { name = "wheat", amount = 7 }
    },
-   outputs = {
-      "beer"
-   },
 
    programs = {
       work = {
@@ -56,7 +53,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs beer",
             "consume=water wheat",
             "playsound=sound/empire/beerbubble 180",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "produce=beer"
          }
       },

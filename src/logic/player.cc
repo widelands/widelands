@@ -1556,6 +1556,64 @@ bool Player::is_attack_forbidden(PlayerNumber who) const {
 	return forbid_attack_.find(who) != forbid_attack_.end();
 }
 
+void Player::add_soldier(unsigned h, unsigned a, unsigned d, unsigned e) {
+	SoldierStatistics ss(h, a, d, e);
+	auto it = std::find(soldier_stats_.begin(), soldier_stats_.end(), ss);
+	if (it == soldier_stats_.end()) {
+		++ss.total;
+		soldier_stats_.push_back(ss);
+	} else {
+		++it->total;
+	}
+}
+void Player::remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e) {
+	auto it = std::find(soldier_stats_.begin(), soldier_stats_.end(), SoldierStatistics(h, a, d, e));
+	assert(it != soldier_stats_.end());
+	assert(it->total > 0);
+	--it->total;
+}
+uint32_t Player::count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const {
+	const auto it =
+	   std::find(soldier_stats_.begin(), soldier_stats_.end(), SoldierStatistics(h, a, d, e));
+	return it == soldier_stats_.end() ? 0 : it->total;
+}
+uint32_t Player::count_soldiers_h(unsigned value) const {
+	uint32_t s = 0;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		if (ss.health == value) {
+			s += ss.total;
+		}
+	}
+	return s;
+}
+uint32_t Player::count_soldiers_a(unsigned value) const {
+	uint32_t s = 0;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		if (ss.attack == value) {
+			s += ss.total;
+		}
+	}
+	return s;
+}
+uint32_t Player::count_soldiers_d(unsigned value) const {
+	uint32_t s = 0;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		if (ss.defense == value) {
+			s += ss.total;
+		}
+	}
+	return s;
+}
+uint32_t Player::count_soldiers_e(unsigned value) const {
+	uint32_t s = 0;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		if (ss.evade == value) {
+			s += ss.total;
+		}
+	}
+	return s;
+}
+
 void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
 	const auto it = forbid_attack_.find(who);
 	if (forbid ^ (it == forbid_attack_.end())) {
