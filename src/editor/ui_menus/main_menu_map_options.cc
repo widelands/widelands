@@ -367,6 +367,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	buttons_box_.add_space(4);
 	buttons_box_.add(&cancel_, UI::Box::Resizing::kFullSize);
 	tab_box_.add(&tabs_, UI::Box::Resizing::kFullSize);
+	tab_box_.add_space(4);
 	tab_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/toggle_minimap.png"),
 	          &main_box_, _("Main Options"));
