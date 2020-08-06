@@ -15,12 +15,12 @@ jobs:
     steps:
     - name: Installing dependencies
       run: |
+        $env:Path += ";C:/msys64/usr/bin"
         echo "***********************************************************"
         echo $env:Path
         echo $env:BOOST_ROOT_1_72_0
-        dir C:\hostedtoolcache\windows\Boost\1.72.0\x86_64 -recurse
+        dir C:\hostedtoolcache\windows\Boost\1.72.0\x86_64 b*.hpp -recurse
         echo "***********************************************************"
-        $env:Path += ";C:/msys64/usr/bin"
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -S mingw-w64-x86_64-ninja mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glbinding
