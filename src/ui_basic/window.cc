@@ -357,9 +357,6 @@ void Window::draw(RenderTarget& dst) {
 	}
 }
 
-static const RGBAColor kColorFocused(200, 200, 255, 40);
-static const RGBAColor kColorUnfocused(50, 0, 0, 40);
-
 /**
  * Redraw the window frame
  */
@@ -372,7 +369,8 @@ void Window::draw_border(RenderTarget& dst) {
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - kHorizontalBorderMiddleLength;
 
 	const RGBAColor& focus_color =
-	   get_parent() && get_parent()->focused_child() == this ? kColorFocused : kColorUnfocused;
+	   get_parent() && get_parent()->focused_child() == this ?
+	   g_gr->styles().window_border_focused() : g_gr->styles().window_border_unfocused();
 
 	{  //  Top border.
 		int32_t pos = kCornerWidth;
