@@ -360,8 +360,8 @@ remove
       immovable will always be removed.
 
    Remove this immovable. If ``chance`` is specified, there's a probability that the removal will be
-   skipped. When the removal succeeds, no further program steps will be executed, because this object
-   will be gone. Examples:
+   skipped. When the removal succeeds, no further program steps will be executed, because this
+object will be gone. Examples:
 
 .. code-block:: lua
 
