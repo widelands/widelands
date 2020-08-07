@@ -19,7 +19,6 @@ jobs:
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -S mingw-w64-x86_64-ninja mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glbinding mingw-w64-x86_64-boost
-        dir C:\msys64 *symbolizer* -recurse  # NOCOM
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -29,6 +28,7 @@ jobs:
         $env:Path = "C:/msys64/usr/bin;C:/msys64/mingw64/bin;C:/msys64/mingw64/lib;C:/msys64/mingw64/include;$env:Path"
         $env:CC = "C:/msys64/mingw64/bin/clang.exe"
         $env:CXX = "C:/msys64/mingw64/bin/clang++.exe"
+        $env:ASAN_SYMBOLIZER_PATH = "C:/msys64/mingw64/bin/llvm-symbolizer.exe"
         mkdir build
         cd build
         cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=ON -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DOPTION_USE_GLBINDING=ON -DPNG_LIBRARY_RELEASE=C:/msys64/mingw64/lib/libpng.dll.a -DZLIB_LIBRARY_RELEASE=C:/msys64/mingw64/lib/libz.dll.a
