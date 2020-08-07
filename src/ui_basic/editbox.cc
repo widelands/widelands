@@ -214,21 +214,6 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_PAGEDOWN:
-			if (((SDL_GetModState() & KMOD_SHIFT)) && m_->caret_selection_end > 0) {
-				m_->caret_selection_end--;
-				log("caret selection end at %d, caret: %d\n", m_->caret_selection_end, m_->caret);
-				return true;
-			}
-			return false;
-		case SDLK_PAGEUP:
-			log("%d, %d\n", m_->caret_selection_end, m_->text.length());
-			if (((SDL_GetModState() & KMOD_SHIFT)) && m_->caret_selection_end < m_->text.length()) {
-				m_->caret_selection_end++;
-				log("caret selection end at %d, caret: %d\n", m_->caret_selection_end, m_->caret);
-				return true;
-			}
-			return false;
 		case SDLK_v:
 			if ((SDL_GetModState() & KMOD_CTRL) && SDL_HasClipboardText()) {
 				handle_textinput(SDL_GetClipboardText());
@@ -240,15 +225,12 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				std::string clipboardtext;
 				if (m_->selection_start <= m_->caret) {
 					size_t nr_characters = m_->caret - m_->selection_start;
-					log("start: %d, #char: %d\n", m_->selection_start, nr_characters);
 					clipboardtext = m_->text.substr(m_->selection_start, nr_characters);
 				} else {
 					size_t nr_characters = m_->selection_start - m_->caret;
-					log("caret: %d, #char: %d\n", m_->caret, nr_characters);
 					clipboardtext = m_->text.substr(m_->caret, nr_characters);
 				}
 				SDL_SetClipboardText(clipboardtext.c_str());
-				log("%s\n", clipboardtext.c_str());
 				m_->mode = EditBoxImpl::Mode::kNormal;
 				return true;
 			}
@@ -303,9 +285,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
-
 				if (SDL_GetModState() & KMOD_SHIFT) {
-					log("left+shift\n");
 					if (m_->mode == EditBoxImpl::Mode::kNormal) {
 						m_->selection_start = m_->caret;
 						m_->mode = EditBoxImpl::Mode::kSelection;
@@ -328,10 +308,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
-				log("caret: %d\n", m_->caret);
-
 				if (SDL_GetModState() & KMOD_SHIFT) {
-					log("right+shift\n");
 					if (m_->mode == EditBoxImpl::Mode::kNormal) {
 						m_->selection_start = m_->caret;
 						m_->mode = EditBoxImpl::Mode::kSelection;
