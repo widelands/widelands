@@ -317,7 +317,7 @@ WLApplication* WLApplication::get(int const argc, char const** argv) {
  */
 WLApplication::WLApplication(int const argc, char const* const* const argv)
    : commandline_(std::map<std::string, std::string>()),
-     game_type_(NONE),
+     game_type_(GameType::kNone),
      mouse_swapped_(false),
      faking_middle_mouse_button_(false),
      mouse_position_(Vector2i::zero()),
@@ -454,12 +454,12 @@ void WLApplication::run() {
 	// This also grabs the mouse cursor if so desired.
 	refresh_graphics();
 
-	if (game_type_ == EDITOR) {
+	if (game_type_ == GameType::kEditor) {
 		g_sh->change_music("ingame");
 		EditorInteractive::run_editor(filename_, script_to_run_);
-	} else if (game_type_ == REPLAY) {
+	} else if (game_type_ == GameType::kReplay) {
 		replay();
-	} else if (game_type_ == LOADGAME) {
+	} else if (game_type_ == GameType::kLoadGame) {
 		Widelands::Game game;
 		game.set_ai_training_mode(get_config_bool("ai_training", false));
 		try {
@@ -471,7 +471,7 @@ void WLApplication::run() {
 			emergency_save(game);
 			throw;
 		}
-	} else if (game_type_ == SCENARIO) {
+	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct(filename_.c_str(), script_to_run_);
@@ -1045,24 +1045,24 @@ void WLApplication::handle_commandline_parameters() {
 		if (filename_.size() && *filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
 		}
-		game_type_ = EDITOR;
+		game_type_ = GameType::kEditor;
 		commandline_.erase("editor");
 	}
 
 	if (commandline_.count("replay")) {
-		if (game_type_ != NONE) {
+		if (game_type_ != GameType::kNone) {
 			throw wexception("replay can not be combined with other actions");
 		}
 		filename_ = commandline_["replay"];
 		if (filename_.size() && *filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
 		}
-		game_type_ = REPLAY;
+		game_type_ = GameType::kReplay;
 		commandline_.erase("replay");
 	}
 
 	if (commandline_.count("loadgame")) {
-		if (game_type_ != NONE) {
+		if (game_type_ != GameType::kNone) {
 			throw wexception("loadgame can not be combined with other actions");
 		}
 		filename_ = commandline_["loadgame"];
@@ -1072,12 +1072,12 @@ void WLApplication::handle_commandline_parameters() {
 		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
 		}
-		game_type_ = LOADGAME;
+		game_type_ = GameType::kLoadGame;
 		commandline_.erase("loadgame");
 	}
 
 	if (commandline_.count("scenario")) {
-		if (game_type_ != NONE) {
+		if (game_type_ != GameType::kNone) {
 			throw wexception("scenario can not be combined with other actions");
 		}
 		filename_ = commandline_["scenario"];
@@ -1087,7 +1087,7 @@ void WLApplication::handle_commandline_parameters() {
 		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
 		}
-		game_type_ = SCENARIO;
+		game_type_ = GameType::kScenario;
 		commandline_.erase("scenario");
 	}
 	if (commandline_.count("script")) {
