@@ -500,8 +500,8 @@ void Window::draw_border(RenderTarget& dst) {
 		              focus_color, BlendMode::Default);
 		// Right
 		dst.fill_rect(
-		   Recti(get_w() - kVerticalBorderThickness, kTopBorderThickness,
-		         kVerticalBorderThickness, get_h() - kTopBorderThickness - kBottomBorderThickness),
+		   Recti(get_w() - kVerticalBorderThickness, kTopBorderThickness, kVerticalBorderThickness,
+		         get_h() - kTopBorderThickness - kBottomBorderThickness),
 		   focus_color, BlendMode::Default);
 	}
 
