@@ -1214,11 +1214,11 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 
 		field.border = f.field->is_border();
 		// draw a border if both nodes are borders belonging to the same player for all we know
-		field.border_r = field.border && r_vision != SeeUnseeNode::kUnexplore &&
+		field.border_r = field.border && r_vision != SeeUnseeNode::kUnexplored &&
 		                 fields_[r_index].border && fields_[r_index].owner == field.owner;
-		field.border_br = field.border && br_vision != SeeUnseeNode::kUnexplore &&
+		field.border_br = field.border && br_vision != SeeUnseeNode::kUnexplored &&
 		                  fields_[br_index].border && fields_[br_index].owner == field.owner;
-		field.border_bl = field.border && bl_vision != SeeUnseeNode::kUnexplore &&
+		field.border_bl = field.border && bl_vision != SeeUnseeNode::kUnexplored &&
 		                  fields_[bl_index].border && fields_[bl_index].owner == field.owner;
 		{
 			const MapObjectDescr* map_object_descr;
@@ -1248,7 +1248,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	{  //  discover the D triangle and the SW edge of the top right neighbour
 		FCoords tr = map.tr_n(f);
 		Field& tr_field = fields_[tr.field - &first_map_field];
-		if (tr_field.seeing != SeeUnseeNode::kReveal) {
+		if (tr_field.seeing != SeeUnseeNode::kVisible) {
 			tr_field.terrains.d = tr.field->terrain_d();
 			tr_field.r_sw = tr.field->get_road(WALK_SW);
 			tr_field.owner = tr.field->get_owned_by();
@@ -1257,7 +1257,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	{  //  discover both triangles and the SE edge of the top left  neighbour
 		FCoords tl = map.tl_n(f);
 		Field& tl_field = fields_[tl.field - &first_map_field];
-		if (tl_field.seeing != SeeUnseeNode::kReveal) {
+		if (tl_field.seeing != SeeUnseeNode::kVisible) {
 			tl_field.terrains = tl.field->get_terrains();
 			tl_field.r_se = tl.field->get_road(WALK_SE);
 			tl_field.owner = tl.field->get_owned_by();
@@ -1266,7 +1266,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	{  //  discover the R triangle and the  E edge of the     left  neighbour
 		FCoords l = map.l_n(f);
 		Field& l_field = fields_[l.field - &first_map_field];
-		if (l_field.seeing != SeeUnseeNode::kReveal) {
+		if (l_field.seeing != SeeUnseeNode::kVisible) {
 			l_field.terrains.r = l.field->terrain_r();
 			l_field.r_e = l.field->get_road(WALK_E);
 			l_field.owner = l.field->get_owned_by();
@@ -1275,7 +1275,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 }
 
 SeeUnseeNode Player::get_vision(MapIndex const i) const {
-	return see_all_ ? SeeUnseeNode::kReveal : fields_[i].seeing;
+	return see_all_ ? SeeUnseeNode::kVisible : fields_[i].seeing;
 }
 
 void Player::add_seer(const MapObject& m, const Area<FCoords>& a) {
@@ -1345,16 +1345,16 @@ void Player::update_vision(const FCoords& f, bool force_visible) {
 	}
 	Player::Field& field = fields_[egbase().map().get_index(f)];
 	if (force_visible || should_see(f)) {
-		if (field.seeing != SeeUnseeNode::kReveal) {
-			field.seeing = SeeUnseeNode::kReveal;
+		if (field.seeing != SeeUnseeNode::kVisible) {
+			field.seeing = SeeUnseeNode::kVisible;
 			rediscover_node(egbase().map(), f);
 		}
-	} else if (field.seeing != SeeUnseeNode::kUnexplore) {
-		if (field.seeing == SeeUnseeNode::kReveal) {
+	} else if (field.seeing != SeeUnseeNode::kUnexplored) {
+		if (field.seeing == SeeUnseeNode::kVisible) {
 			rediscover_node(egbase().map(), f);  // make sure all info is up to date
 			field.time_node_last_unseen = egbase().get_gametime();
 		}
-		field.seeing = SeeUnseeNode::kUnsee;
+		field.seeing = SeeUnseeNode::kPreviouslySeen;
 	}
 }
 
@@ -1391,15 +1391,15 @@ void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
 	const Widelands::MapIndex index = fcoords.field - &map[0];
 
 	switch (mode) {
-	case SeeUnseeNode::kReveal:
+	case SeeUnseeNode::kVisible:
 		revealed_fields_.insert(index);
 		break;
-	case SeeUnseeNode::kUnexplore:
+	case SeeUnseeNode::kUnexplored:
 		if (fields_) {
-			fields_[index].seeing = SeeUnseeNode::kUnexplore;
+			fields_[index].seeing = SeeUnseeNode::kUnexplored;
 		}
 		FALLS_THROUGH;
-	case SeeUnseeNode::kUnsee:
+	case SeeUnseeNode::kPreviouslySeen:
 		auto it = revealed_fields_.find(index);
 		if (it != revealed_fields_.end()) {
 			revealed_fields_.erase(it);
@@ -1407,7 +1407,7 @@ void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
 		break;
 	}
 
-	update_vision(fcoords, mode == SeeUnseeNode::kReveal);
+	update_vision(fcoords, mode == SeeUnseeNode::kVisible);
 }
 
 /**

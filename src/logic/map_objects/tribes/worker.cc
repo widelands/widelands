@@ -364,7 +364,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 					} else {
 						Coords const coord = imm->get_position();
 						MapIndex mapidx = map.get_index(coord, map.get_width());
-						if (owner().get_vision(mapidx) == SeeUnseeNode::kUnexplore) {
+						if (owner().get_vision(mapidx) == SeeUnseeNode::kUnexplored) {
 							list.erase(list.begin() + idx);
 						}
 					}
@@ -3046,7 +3046,7 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 			const SeeUnseeNode visible = owner().get_vision(idx);
 
 			// If the field is not yet discovered, go there
-			if (visible == SeeUnseeNode::kUnexplore) {
+			if (visible == SeeUnseeNode::kUnexplored) {
 				molog("[scout]: Go to interesting field (%i, %i)\n", coord.x, coord.y);
 				if (!start_task_movepath(
 				       game, coord, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
@@ -3061,7 +3061,7 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 			int dist = map.calc_distance(coord, get_position());
 			Time time = owner().fields()[idx].time_node_last_unseen;
 			// time is only valid if visible is 1
-			if (visible != SeeUnseeNode::kUnsee) {
+			if (visible != SeeUnseeNode::kPreviouslySeen) {
 				time = oldest_time;
 			}
 

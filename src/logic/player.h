@@ -215,7 +215,7 @@ public:
 	struct Field {
 		Field()
 		   : military_influence(0),
-		     seeing(SeeUnseeNode::kUnexplore),
+		     seeing(SeeUnseeNode::kUnexplored),
 		     r_e(RoadSegment::kNone),
 		     r_se(RoadSegment::kNone),
 		     r_sw(RoadSegment::kNone),
@@ -253,10 +253,10 @@ public:
 		/// has ever seen it.
 		///
 		/// The value is
-		///  `kUnexplore` if the player has never seen the node
-		///  `kUnsee`     if the player does not currently see
+		///  `kUnexplored` if the player has never seen the node
+		///  `kPreviouslySeen`     if the player does not currently see
 		///               the node, but has seen it previously
-		///  `kReveal`    if the player currently sees the node
+		///  `kVisible`    if the player currently sees the node
 		///
 		/// Note a fundamental difference between seeing a node, and having
 		/// knownledge about resources. A node is considered continuously seen by
@@ -363,7 +363,7 @@ public:
 
 		/**
 		 * The last time when this player saw this node.
-		 * Only valid when \ref seeing is kUnsee, i.e. the player has previously seen
+		 * Only valid when \ref seeing is kPreviouslySeen, i.e. the player has previously seen
 		 * this node but can't see it right now.
 		 *
 		 * This value is only for the node.
@@ -374,9 +374,9 @@ public:
 		 *      time_node_last_unseen for B,
 		 *      time_node_last_unseen for C)
 		 * and is only valid if all of {A, B, C} are currently not seen
-		 * (i.e. \ref seeing != kReveal)
+		 * (i.e. \ref seeing != kVisible)
 		 * and at least one of them has been seen at least once
-		 * (i.e. \ref seeing == kUnsee).
+		 * (i.e. \ref seeing == kPreviouslySeen).
 		 *
 		 * The corresponding value for an edge between the nodes A and B is
 		 *   max(time_node_last_unseen for A, time_node_last_unseen for B)
@@ -413,7 +413,7 @@ public:
 
 	SeeUnseeNode get_vision(MapIndex) const;
 	bool is_seeing(MapIndex i) const {
-		return get_vision(i) == SeeUnseeNode::kReveal;
+		return get_vision(i) == SeeUnseeNode::kVisible;
 	}
 
 	// Cause this player and all his team mates to recalculate the visibility
@@ -422,9 +422,9 @@ public:
 	void update_vision(const Area<FCoords>&, bool force_visible);
 
 	/// Explicitly hide or reveal the field at 'c'. The modes are as follows:
-	/// - kUnsee:     Decrement the field's vision
-	/// - kUnexplore: Set the field's vision to 0
-	/// - kReveal:    If the field was hidden previously, restore the vision to the value it had
+	/// - kPreviouslySeen:     Decrement the field's vision
+	/// - kUnexplored: Set the field's vision to 0
+	/// - kVisible:    If the field was hidden previously, restore the vision to the value it had
 	///               at the time of hiding. Otherwise, increment the vision.
 	void hide_or_reveal_field(const Coords&, SeeUnseeNode);
 

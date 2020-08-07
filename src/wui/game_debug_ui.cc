@@ -268,9 +268,9 @@ void FieldDebugWindow::think() {
 
 		const Widelands::SeeUnseeNode vision = player_field.seeing;
 		str += (boost::format("  vision: %s\n") %
-		        (vision == Widelands::SeeUnseeNode::kReveal ?
+		        (vision == Widelands::SeeUnseeNode::kVisible ?
 		            "revealed" :
-		            vision == Widelands::SeeUnseeNode::kUnsee ? "unseen" : "unexplored"))
+		            vision == Widelands::SeeUnseeNode::kPreviouslySeen ? "unseen" : "unexplored"))
 		          .str();
 		{
 			Widelands::Time const time_last_surveyed =
@@ -299,10 +299,10 @@ void FieldDebugWindow::think() {
 			}
 		}
 		switch (vision) {
-		case Widelands::SeeUnseeNode::kUnexplore:
+		case Widelands::SeeUnseeNode::kUnexplored:
 			str += "  never seen\n";
 			break;
-		case Widelands::SeeUnseeNode::kUnsee: {
+		case Widelands::SeeUnseeNode::kPreviouslySeen: {
 			std::string animation_name = "(no animation)";
 			if (player_field.map_object_descr) {
 				animation_name = "(seen an animation)";

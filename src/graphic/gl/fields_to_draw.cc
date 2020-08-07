@@ -160,7 +160,7 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 			const Widelands::PlayerNumber owned_by = f.fcoords.field->get_owned_by();
 			f.owner = owned_by != 0 ? egbase.get_player(owned_by) : nullptr;
 			f.is_border = f.fcoords.field->is_border();
-			f.seeing = Widelands::SeeUnseeNode::kReveal;
+			f.seeing = Widelands::SeeUnseeNode::kVisible;
 			f.road_e = f.fcoords.field->get_road(Widelands::WALK_E);
 			f.road_se = f.fcoords.field->get_road(Widelands::WALK_SE);
 			f.road_sw = f.fcoords.field->get_road(Widelands::WALK_SW);
