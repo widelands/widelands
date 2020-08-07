@@ -614,10 +614,10 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			// Workaround for duplicate triggering of the Alt key in Ubuntu:
 			// Don't accept the same key twice, so we use a map to squash them and handle them later.
 			if (ev.key.keysym.mod & KMOD_ALT) {
-				alt_events.insert(std::make_pair<std::pair<int32_t, uint16_t>, uint32_t>(
-				   std::make_pair<int32_t, uint16_t>(static_cast<int32_t>(ev.key.keysym.sym),
-				                                     static_cast<uint16_t>(ev.key.keysym.mod)),
-				   static_cast<uint32_t>(ev.type)));
+				alt_events.insert(
+				   std::make_pair(std::make_pair(static_cast<int32_t>(ev.key.keysym.sym),
+				                                 static_cast<uint16_t>(ev.key.keysym.mod)),
+				                  static_cast<uint32_t>(ev.type)));
 				handled = true;
 			}
 			if (!handled && cb && cb->key) {
