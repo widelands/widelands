@@ -194,14 +194,14 @@ transform
       otherwise it is an immovable. Currently, only ships are supported as bobs.
 
    :arg percent chance: The :ref:`map_object_programs_datatypes_percent` chance that the
-transformation will be performed. The game will generate a random number and the transformation will
-be performed if and only if this number is less than ``chance``. If ``chance:<percent>`` is omitted,
-the transformation will always be performed.
+      transformation will be performed. The game will generate a random number and the
+      transformation will be performed if and only if this number is less than ``chance``.
+      If ``chance:<percent>`` is omitted, the transformation will always be performed.
 
    Deletes this immovable and instantly replaces it with a different immovable or a bob. If
    ``chance`` is specified, there's a probability that the transformation will be skipped.
    When the transformation succeeds, no further program steps will be executed, because this object
-will be gone. Example:
+   will be gone. Example:
 
 .. code-block:: lua
 
@@ -355,13 +355,13 @@ remove
 .. function:: remove=[chance:\<percent\>]
 
    :arg percent chance: The :ref:`map_object_programs_datatypes_percent` chance that the immovable
-will be removed. The game will generate a random number and the immovable will be removed if and
-only if this number is less than ``chance``. If ``chance:<percent>`` is omitted, the immovable will
-always be removed.
+      will be removed. The game will generate a random number and the immovable will be removed if
+      and only if this number is less than ``chance``. If ``chance:<percent>`` is omitted, the
+      immovable will always be removed.
 
    Remove this immovable. If ``chance`` is specified, there's a probability that the removal will be
-skipped. When the removal succeeds, no further program steps will be executed, because this object
-will be gone. Examples:
+   skipped. When the removal succeeds, no further program steps will be executed, because this object
+   will be gone. Examples:
 
 .. code-block:: lua
 
