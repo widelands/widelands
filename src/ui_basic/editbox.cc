@@ -80,7 +80,9 @@ struct EditBoxImpl {
 	/// Initial position of text when selection was started
 	uint32_t selection_start;
 
-	bool selection_mode;
+	enum class Mode { kNormal, kSelection };
+
+	Mode mode;
 
 	/// Current scrolling offset to the text anchor position, in pixels
 	int32_t scrolloffset;
@@ -106,7 +108,7 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
 	// Set alignment to the UI language's principal writing direction
 	m_->align = UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
 	m_->caret = 0;
-	m_->selection_mode = false;
+	m_->mode = EditBoxImpl::Mode::kNormal;
 	m_->caret_selection_end = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -234,7 +236,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return false;
 		case SDLK_c:
-			if ((SDL_GetModState() & KMOD_CTRL) && m_->selection_mode) {
+			if ((SDL_GetModState() & KMOD_CTRL) && m_->mode == EditBoxImpl::Mode::kSelection) {
 				std::string clipboardtext;
 				if (m_->selection_start <= m_->caret) {
 					size_t nr_characters = m_->caret - m_->selection_start;
@@ -247,7 +249,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				}
 				SDL_SetClipboardText(clipboardtext.c_str());
 				log("%s\n", clipboardtext.c_str());
-				m_->selection_mode = false;
+				m_->mode = EditBoxImpl::Mode::kNormal;
 				return true;
 			}
 			return false;
@@ -304,11 +306,9 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 				if (SDL_GetModState() & KMOD_SHIFT) {
 					log("left+shift\n");
-					if (!m_->selection_mode) {
+					if (m_->mode == EditBoxImpl::Mode::kNormal) {
 						m_->selection_start = m_->caret;
-						m_->selection_mode = true;
-						log("mode: %d, selection_start:%d, caret: %d\n", m_->selection_mode,
-						    m_->selection_start, m_->caret);
+						m_->mode = EditBoxImpl::Mode::kSelection;
 					}
 				}
 
@@ -332,11 +332,9 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 				if (SDL_GetModState() & KMOD_SHIFT) {
 					log("right+shift\n");
-					if (!m_->selection_mode) {
+					if (m_->mode == EditBoxImpl::Mode::kNormal) {
 						m_->selection_start = m_->caret;
-						m_->selection_mode = true;
-						log("mode: %d, selection_start:%d, caret: %d\n", m_->selection_mode,
-						    m_->selection_start, m_->caret);
+						m_->mode = EditBoxImpl::Mode::kSelection;
 					}
 				}
 
@@ -409,6 +407,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 bool EditBox::handle_textinput(const std::string& input_text) {
 	if ((m_->text.size() + input_text.length()) < m_->maxLength) {
+		m_->mode = EditBoxImpl::Mode::kNormal;
 		m_->text.insert(m_->caret, input_text);
 		m_->caret += input_text.length();
 		check_caret();
