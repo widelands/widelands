@@ -19,6 +19,7 @@ jobs:
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -S mingw-w64-x86_64-ninja mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glbinding mingw-w64-x86_64-boost
+        dir C:\msys64 *symbolizer* -recurse  # NOCOM
     - name: Checkout
       uses: actions/checkout@v2
       with:
