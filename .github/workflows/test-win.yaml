@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         config:
-          # - Release
+          - Release
           - Debug
     name: ${{ matrix.config }} Build
     runs-on: windows-latest
@@ -30,10 +30,10 @@ jobs:
         $env:CXX = "C:/msys64/mingw64/bin/g++.exe"
         mkdir build
         cd build
-        cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DOPTION_USE_GLBINDING=ON -DPNG_LIBRARY_RELEASE=C:/msys64/mingw64/lib/libpng.dll.a -DZLIB_LIBRARY_RELEASE=C:/msys64/mingw64/lib/libz.dll.a
+        cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DOPTION_USE_GLBINDING=ON -DPNG_LIBRARY_RELEASE=C:/msys64/mingw64/lib/libpng.dll.a -DZLIB_LIBRARY_RELEASE=C:/msys64/mingw64/lib/libz.dll.a -DBoost_NO_BOOST_CMAKE=ON
         cmake.exe --build .
     - name: Test suite
       timeout-minutes: 20
       run: |
-        cd ..
-        ./regression_test.py -b build/src/widelands.exe
+        cd $env:GITHUB_WORKSPACE
+        .\regression_test.py -b build/src/widelands.exe
