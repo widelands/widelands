@@ -371,7 +371,8 @@ void Window::draw_border(RenderTarget& dst) {
 	const int32_t hz_bar_end = get_w() - kCornerWidth;
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - kHorizontalBorderMiddleLength;
 
-	const RGBAColor& focus_color = get_parent() && get_parent()->focused_child() == this ? kColorFocused : kColorUnfocused;
+	const RGBAColor& focus_color =
+	   get_parent() && get_parent()->focused_child() == this ? kColorFocused : kColorUnfocused;
 
 	{  //  Top border.
 		int32_t pos = kCornerWidth;
@@ -489,11 +490,17 @@ void Window::draw_border(RenderTarget& dst) {
 		}
 
 		// Bottom
-		dst.fill_rect(Recti(0, get_h() - kBottomBorderThickness, get_w(), kBottomBorderThickness), focus_color, BlendMode::Default);
+		dst.fill_rect(Recti(0, get_h() - kBottomBorderThickness, get_w(), kBottomBorderThickness),
+		              focus_color, BlendMode::Default);
 		// Left
-		dst.fill_rect(Recti(0, kTopBorderThickness, kVerticalBorderThickness, get_h() - kTopBorderThickness - kBottomBorderThickness), focus_color, BlendMode::Default);
+		dst.fill_rect(Recti(0, kTopBorderThickness, kVerticalBorderThickness,
+		                    get_h() - kTopBorderThickness - kBottomBorderThickness),
+		              focus_color, BlendMode::Default);
 		// Right
-		dst.fill_rect(Recti(get_w() - 2 * kVerticalBorderThickness, kTopBorderThickness, kVerticalBorderThickness, get_h() - kTopBorderThickness - kBottomBorderThickness), focus_color, BlendMode::Default);
+		dst.fill_rect(
+		   Recti(get_w() - 2 * kVerticalBorderThickness, kTopBorderThickness,
+		         kVerticalBorderThickness, get_h() - kTopBorderThickness - kBottomBorderThickness),
+		   focus_color, BlendMode::Default);
 	}
 
 	// draw them again so they aren't hidden by the border
