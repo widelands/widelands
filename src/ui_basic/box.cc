@@ -40,7 +40,9 @@ Box::Box(Panel* const parent,
      max_y_(max_y ? max_y : g_gr->get_yres()),
 
      scrolling_(false),
+     force_scrolling_(false),
      scrollbar_(nullptr),
+     scrollbar_style_(UI::PanelStyle::kFsMenu),
      orientation_(orientation),
      mindesiredbreadth_(0),
      inner_spacing_(inner_spacing) {
@@ -60,6 +62,23 @@ void Box::set_scrolling(bool scroll) {
 	}
 
 	scrolling_ = scroll;
+	update_desired_size();
+}
+
+/**
+ * If set to `true`, a scrollbar will always be used regardless of
+ * whether `scrolling_` is true and whether a scrollbar is needed.
+ */
+void Box::set_force_scrolling(bool f) {
+	if (force_scrolling_ == f) {
+		return;
+	}
+	force_scrolling_ = f;
+	update_desired_size();
+}
+
+void Box::set_scrollbar_style(UI::PanelStyle s) {
+	scrollbar_style_ = s;
 	update_desired_size();
 }
 
@@ -116,13 +135,13 @@ void Box::update_desired_size() {
 	}
 
 	if (orientation_ == Horizontal) {
-		if (totaldepth > max_x_ && scrolling_) {
+		if ((totaldepth > max_x_ && scrolling_) || force_scrolling_) {
 			maxbreadth += Scrollbar::kSize;
 		}
 		set_desired_size(std::min(totaldepth, max_x_),   // + get_lborder() + get_rborder(),
 		                 std::min(maxbreadth, max_y_));  // + get_tborder() + get_bborder());
 	} else {
-		if (totaldepth > max_y_ && scrolling_) {
+		if ((totaldepth > max_y_ && scrolling_) || force_scrolling_) {
 			maxbreadth += Scrollbar::kSize;
 		}
 		set_desired_size(std::min(maxbreadth, max_x_) + get_lborder() + get_rborder(),
@@ -137,14 +156,14 @@ void Box::update_desired_size() {
 
 bool Box::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	if (scrollbar_) {
-		assert(scrolling_);
+		assert(scrolling_ || force_scrolling_);
 		return scrollbar_->handle_mousewheel(which, x, y);
 	}
 	return Panel::handle_mousewheel(which, x, y);
 }
 bool Box::handle_key(bool down, SDL_Keysym code) {
 	if (scrollbar_) {
-		assert(scrolling_);
+		assert(scrolling_ || force_scrolling_);
 		return scrollbar_->handle_key(down, code);
 	}
 	return Panel::handle_key(down, code);
@@ -167,13 +186,13 @@ void Box::layout() {
 		totaldepth += (items_.size() - 1) * inner_spacing_;
 	}
 
-	bool needscrollbar = false;
-	if (orientation_ == Horizontal) {
-		if (totaldepth > max_x_ && scrolling_) {
-			needscrollbar = true;
-		}
-	} else {
-		if (totaldepth > max_y_ && scrolling_) {
+	bool needscrollbar = force_scrolling_;
+	if (!force_scrolling_ && scrolling_) {
+		if (orientation_ == Horizontal) {
+			if (totaldepth > max_x_) {
+				needscrollbar = true;
+			}
+		} else if (totaldepth > max_y_) {
 			needscrollbar = true;
 		}
 	}
@@ -195,9 +214,8 @@ void Box::layout() {
 			pagesize = get_inner_h() - Scrollbar::kSize;
 		}
 		if (scrollbar_ == nullptr) {
-			// TODO(GunChleoc): Implement styling if we ever use the scrollbar function.
 			scrollbar_.reset(new Scrollbar(
-			   this, sb_x, sb_y, sb_w, sb_h, UI::PanelStyle::kFsMenu, orientation_ == Horizontal));
+			   this, sb_x, sb_y, sb_w, sb_h, scrollbar_style_, orientation_ == Horizontal));
 			scrollbar_->moved.connect([this](int32_t a) { scrollbar_moved(a); });
 		} else {
 			scrollbar_->set_pos(Vector2i(sb_x, sb_y));
