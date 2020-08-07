@@ -19,6 +19,17 @@ jobs:
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -S mingw-w64-x86_64-ninja mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glbinding mingw-w64-x86_64-boost
+        # Need to copy a bunch of DLLs to get the tests working
+        mkdir $env:GITHUB_WORKSPACE\build
+        mkdir $env:GITHUB_WORKSPACE\build\src\ai\test
+        mkdir $env:GITHUB_WORKSPACE\build\src\economy\test
+        mkdir $env:GITHUB_WORKSPACE\build\src\io\filesystem\test
+        $DLLsToCopy = "libopusfile-0.dll", "libopus-0.dll", "libtermcap-0.dll", "libgmodule-2.0-0.dll", "libreadline8.dll", "libicuuc67.dll", "libbz2-1.dll", "libfreetype-6.dll", "libgcc_s_seh-1.dll", "libglbinding.dll", "libglib-2.0-0.dll", "libharfbuzz-0.dll", "libicudt67.dll", "libjpeg-8.dll", "liblzma-5.dll", "libogg-0.dll", "libpng16-16.dll", "libstdc++-6.dll", "libtiff-5.dll", "libvorbis-0.dll", "libvorbisfile-3.dll", "libwebp-7.dll", "libwinpthread-1.dll", "SDL2.dll", "SDL2_image.dll", "SDL2_mixer.dll", "SDL2_ttf.dll", "zlib1.dll", "libFLAC-8.dll", "libfluidsynth-2.dll", "libportaudio-2.dll", "libsndfile-1.dll", "libspeex-1.dll", "libvorbisenc-2.dll", "libmodplug-1.dll", "libmpg123-0.dll", "libintl-8.dll", "libiconv-2.dll", "libgraphite2.dll", "libpcre-1.dll", "libzstd.dll", "libbrotlicommon.dll", "libbrotlidec.dll", "libbrotlienc.dll"
+        foreach ($dll in $DLLsToCopy) {
+          Copy-Item C:\msys64\mingw64\bin\$dll -Destination $env:GITHUB_WORKSPACE\build\src\ai\test
+          Copy-Item C:\msys64\mingw64\bin\$dll -Destination $env:GITHUB_WORKSPACE\build\src\economy\test
+          Copy-Item C:\msys64\mingw64\bin\$dll -Destination $env:GITHUB_WORKSPACE\build\src\io\filesystem\test
+        }
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -28,7 +39,6 @@ jobs:
         $env:Path = "C:/msys64/mingw64/include;C:/msys64/mingw64/lib;C:/msys64/usr/bin;C:/msys64/mingw64/bin;$env:Path"
         $env:CC = "C:/msys64/mingw64/bin/gcc.exe"
         $env:CXX = "C:/msys64/mingw64/bin/g++.exe"
-        mkdir build
         cd build
         cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DOPTION_USE_GLBINDING=ON -DPNG_LIBRARY_RELEASE=C:/msys64/mingw64/lib/libpng.dll.a -DZLIB_LIBRARY_RELEASE=C:/msys64/mingw64/lib/libz.dll.a
         cmake.exe --build .
