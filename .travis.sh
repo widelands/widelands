@@ -30,8 +30,8 @@ build)
 codecheck)
    cmake .. -DCMAKE_BUILD_TYPE:STRING="Debug"
    # Run the codecheck test suite.
-   pushd ..
-   cmake/codecheck/run_tests.py
+   pushd ../cmake/codecheck
+   ./run_tests.py
    popd
 
    # Any codecheck warning is an error. Keep the codebase clean!!
