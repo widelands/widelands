@@ -9,12 +9,13 @@ jobs:
       matrix:
         config:
           - Release
-          - Debug
+          # - Debug
     name: ${{ matrix.config }} Build
     runs-on: windows-latest
     steps:
     - name: Installing dependencies
       run: |
+        dir "c:\program files (x86)\inno setup 6" -recurse
         $env:Path += ";C:\msys64\usr\bin"
         pacman.exe --noconfirm -Syyuu
         pacman.exe --noconfirm -Syyuu
