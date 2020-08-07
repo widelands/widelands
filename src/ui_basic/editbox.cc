@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include <SDL_clipboard.h>
 #include <SDL_mouse.h>
 
 #include "graphic/color.h"
@@ -73,6 +74,14 @@ struct EditBoxImpl {
 	/// Position of the caret.
 	uint32_t caret;
 
+	/// Position of the caret at text selection end.
+	uint32_t caret_selection_end;
+
+	/// Initial position of text when selection was started
+	uint32_t selection_start;
+
+	bool selection_mode;
+
 	/// Current scrolling offset to the text anchor position, in pixels
 	int32_t scrolloffset;
 
@@ -97,6 +106,8 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
 	// Set alignment to the UI language's principal writing direction
 	m_->align = UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
 	m_->caret = 0;
+	m_->selection_mode = false;
+	m_->caret_selection_end = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
 	set_max_length(std::numeric_limits<int32_t>::max());
@@ -201,6 +212,45 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
+		case SDLK_PAGEDOWN:
+			if (((SDL_GetModState() & KMOD_SHIFT)) && m_->caret_selection_end > 0) {
+				m_->caret_selection_end--;
+				log("caret selection end at %d, caret: %d\n", m_->caret_selection_end, m_->caret);
+				return true;
+			}
+			return false;
+		case SDLK_PAGEUP:
+			log("%d, %d\n", m_->caret_selection_end, m_->text.length());
+			if (((SDL_GetModState() & KMOD_SHIFT)) && m_->caret_selection_end < m_->text.length()) {
+				m_->caret_selection_end++;
+				log("caret selection end at %d, caret: %d\n", m_->caret_selection_end, m_->caret);
+				return true;
+			}
+			return false;
+		case SDLK_v:
+			if ((SDL_GetModState() & KMOD_CTRL) && SDL_HasClipboardText()) {
+				handle_textinput(SDL_GetClipboardText());
+				return true;
+			}
+			return false;
+		case SDLK_c:
+			if ((SDL_GetModState() & KMOD_CTRL) && m_->selection_mode) {
+				std::string clipboardtext;
+				if (m_->selection_start <= m_->caret) {
+					size_t nr_characters = m_->caret - m_->selection_start;
+					log("start: %d, #char: %d\n", m_->selection_start, nr_characters);
+					clipboardtext = m_->text.substr(m_->selection_start, nr_characters);
+				} else {
+					size_t nr_characters = m_->selection_start - m_->caret;
+					log("caret: %d, #char: %d\n", m_->caret, nr_characters);
+					clipboardtext = m_->text.substr(m_->caret, nr_characters);
+				}
+				SDL_SetClipboardText(clipboardtext.c_str());
+				log("%s\n", clipboardtext.c_str());
+				m_->selection_mode = false;
+				return true;
+			}
+			return false;
 		case SDLK_ESCAPE:
 			cancel();
 			return true;
@@ -251,8 +301,20 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
+
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					log("left+shift\n");
+					if (!m_->selection_mode) {
+						m_->selection_start = m_->caret;
+						m_->selection_mode = true;
+						log("mode: %d, selection_start:%d, caret: %d\n", m_->selection_mode,
+						    m_->selection_start, m_->caret);
+					}
+				}
+
 				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
 				}
+
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 					for (uint32_t new_caret = m_->caret;; m_->caret = new_caret) {
 						if (0 == new_caret || isspace(m_->text[--new_caret])) {
@@ -266,9 +328,22 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
+				log("caret: %d\n", m_->caret);
+
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					log("right+shift\n");
+					if (!m_->selection_mode) {
+						m_->selection_start = m_->caret;
+						m_->selection_mode = true;
+						log("mode: %d, selection_start:%d, caret: %d\n", m_->selection_mode,
+						    m_->selection_start, m_->caret);
+					}
+				}
+
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
 					// We're just advancing the caret
 				}
+
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 					for (uint32_t new_caret = m_->caret;; ++new_caret) {
 						if (new_caret == m_->text.size() || isspace(m_->text[new_caret - 1])) {
@@ -337,6 +412,7 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 		m_->text.insert(m_->caret, input_text);
 		m_->caret += input_text.length();
 		check_caret();
+		m_->caret_selection_end = m_->caret;
 		changed();
 	}
 	return true;
