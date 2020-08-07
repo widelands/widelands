@@ -19,15 +19,15 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:1",
          "walk=coords",
-         "animate=plant 6500",
+         "animate=plant duration:6s500ms",
          "plant=attrib:seed_reed",
-         "animate=plant 6500",
+         "animate=plant duration:6s500ms",
          "return"
       },
       harvest = {
          "findobject=attrib:ripe_reed radius:1",
          "walk=object",
-         "animate=harvest 14000",
+         "animate=harvest duration:14s",
          "callobject=harvest",
          "createware=reed",
          "return"

@@ -18,7 +18,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:55s",
-         "remove=42",
+         "remove=success:42",
          "grow=twine_wasteland_pole",
       },
    },
@@ -46,7 +46,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:55s",
-         "remove=33",
+         "remove=success:33",
          "grow=twine_wasteland_mature",
       },
    },
@@ -74,7 +74,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m",
-         "remove=23",
+         "remove=success:23",
          "grow=twine_wasteland_old",
       },
    },
@@ -105,7 +105,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:25m50s",
-         "transform=deadtree3 36",
+         "transform=deadtree3 success:36",
          "seed=twine_wasteland_sapling 20",
       },
       fall = {

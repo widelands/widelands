@@ -58,10 +58,10 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs cloth",
             "consume=wool",
-            "sleep=20000",
+            "sleep=duration:20s",
             "playsound=sound/mill/weaving 120",
             "animate=working duration:15s", -- Unsure of balancing CW
-            "sleep=5000",
+            "sleep=duration:5s",
             "produce=cloth"
          }
       },

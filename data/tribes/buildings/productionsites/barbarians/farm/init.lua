@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
          actions = {
             "callworker=plant",
             "animate=working duration:7s",
-            "sleep=3000"
+            "sleep=duration:3s"
          }
       },
       harvest = {
@@ -74,7 +74,7 @@ tribes:new_productionsite_type {
          actions = {
             "callworker=harvest",
             "animate=working duration:3s",
-            "sleep=1000"
+            "sleep=duration:1s"
          }
       },
    },

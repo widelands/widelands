@@ -58,7 +58,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs empire_bread",
             "consume=flour water",
-            "sleep=15000",
+            "sleep=duration:15s",
             "animate=working duration:15s",
             "produce=empire_bread"
          }

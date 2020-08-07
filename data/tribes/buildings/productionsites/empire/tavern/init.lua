@@ -55,10 +55,10 @@ tribes:new_productionsite_type {
             -- time total: 33
             "return=skipped unless economy needs ration",
             "consume=empire_bread,fish,meat",
-            "sleep=5000",
+            "sleep=duration:5s",
             "playsound=sound/empire/taverns/ration 100",
             "animate=working duration:18s",
-            "sleep=10000",
+            "sleep=duration:10s",
             "produce=ration"
          }
       },

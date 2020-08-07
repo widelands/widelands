@@ -43,16 +43,19 @@ a colon (:). Finally, programs can call other programs. The table looks like thi
          "program_name3",
       }
       program_name2 = {
-         "command1=parameter1:value1 parameter2:value2",
-         "command2=parameter1",
+         "action1=parameter1:value1 parameter2:value2",
+         "action2=parameter1",
       },
       program_name3 = {
-         "command3",
-         "command4=parameter1 parameter2 parameter3",
+         "action3",
+         "action4=parameter1 parameter2 parameter3",
       }
    },
 
-The available commands are:
+
+For general information about the format, see :ref:`map_object_programs_syntax`.
+
+Available actions are:
 
 - `createware`_
 - `mine`_
@@ -155,9 +158,9 @@ createware
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
          "playsound=sound/farm/scythe 220",
-         "animate=harvesting 10000",
+         "animate=harvesting duration:10s",
          "callobject=harvest",
-         "animate=gathering 4000",
+         "animate=gathering duration:4s",
          "createware=wheat", -- Create 1 wheat and start carrying it
          "return"
       },
@@ -194,7 +197,7 @@ mine
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net 192",
          "mine=fish 1", -- Remove a fish in an area of 1
-         "animate=fishing 3000",
+         "animate=fishing duration:3s",
          "playsound=sound/fisher/fisher_pull_net 192",
          "createware=fish",
          "return"
@@ -229,7 +232,7 @@ breed
       breed = {
          "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
-         "animate=freeing 3000",
+         "animate=freeing duration:3s",
          "breed=fish 1", -- Add a fish in an area of 1
          "return"
       },
@@ -266,7 +269,7 @@ findobject
          building
          "walk=object", -- Now walk to those rocks
          "playsound=sound/atlanteans/cutting/stonecutter 192",
-         "animate=hacking 12000",
+         "animate=hacking duration:12s",
          "callobject=shrink",
          "createware=granite",
          "return"
@@ -276,7 +279,7 @@ findobject
          "findobject=type:bob radius:13 attrib:eatable", -- Find an eatable bob (animal) within a
          radius of 13 from your building
          "walk=object", -- Walk to where the animal is
-         "animate=idle 1500",
+         "animate=idle duration:1s500ms",
          "removeobject",
          "createware=meat",
          "return"
@@ -363,7 +366,7 @@ findspace
          -- Find any field that can have fish in it for adding a fish to it below
          "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
-         "animate=freeing 3000",
+         "animate=freeing duration:3s",
          "breed=fish 1",
          "return"
       },
@@ -372,10 +375,10 @@ findspace
          -- Don't get in the way of the farmer's crops when planting trees. Retry 8 times.
          "findspace=size:any radius:5 avoid:field saplingsearches:8",
          "walk=coords",
-         "animate=dig 2000",
-         "animate=planting 1000",
+         "animate=dig duration:2s",
+         "animate=planting duration:1s",
          "plant=attrib:tree_sapling",
-         "animate=water 2000",
+         "animate=water duration:2s",
          "return"
       },
 
@@ -383,9 +386,9 @@ findspace
          -- The farmer will want to walk to this field again later for harvesting his crop
          "findspace=size:any radius:2 space",
          "walk=coords",
-         "animate=planting 4000",
+         "animate=planting duration:4s",
          "plant=attrib:seed_wheat",
-         "animate=planting 4000",
+         "animate=planting duration:4s",
          "return",
       },
 */
@@ -483,18 +486,18 @@ walk
       plant = {
          "findspace=size:any radius:2",
          "walk=coords", -- Walk to the space found by the command above
-         "animate=planting 4000",
+         "animate=planting duration:4s",
          "plant=attrib:seed_blackroot",
-         "animate=planting 4000",
+         "animate=planting duration:4s",
          "return"
       },
 
       harvest = {
          "findobject=attrib:ripe_blackroot radius:2",
          "walk object", -- Walk to the blackroot field found by the command above
-         "animate=harvesting 10000",
+         "animate=harvesting duration:10s",
          "callobject=harvest",
-         "animate=gathering 2000",
+         "animate=gathering duration:2s",
          "createware=blackroot",
          "return"
       },
@@ -504,9 +507,9 @@ walk
          -- 2. This will create an object for us if we don't have one yet
          "plant=attrib:shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
-         "animate=work 500",
+         "animate=work duration:500ms",
          "construct", -- 1. This will find a space for us if no object has been planted yet
-         "animate=work 5000",
+         "animate=work duration:5s",
          "return"
       },
 */
@@ -534,21 +537,7 @@ void WorkerProgram::parse_walk(Worker::Action* act, const std::vector<std::strin
 /* RST
 animate
 ^^^^^^^
-.. function:: animate=\<name\> \<duration\>
-
-   :arg string name: The name of the animation.
-   :arg int duration: The time in milliseconds for which the animation will be played.
-
-   Play the given animation for the given duration. Example::
-
-      plantvine = {
-         "findspace=size:any radius:1",
-         "walk=coords",
-         "animate=dig 2000", -- Play a digging animation for 2 seconds.
-         "plant=attrib:seed_grapes",
-         "animate=planting 3000", -- Play a planting animation for 3 seconds.
-         "return"
-      },
+Runs an animation. See :ref:`map_object_programs_animate`.
 */
 /**
  * iparam1 = anim id
@@ -601,15 +590,15 @@ callobject
          "findobject=attrib:tree radius:10",
          "walk=object",
          "playsound=sound/woodcutting/fast_woodcutting 250",
-         "animate=hacking 10000",
+         "animate=hacking duration:10s",
          "playsound=sound/woodcutting/tree-falling 130",
          "callobject=fall", -- Cause the tree to fall
-         "animate=idle 2000",
+         "animate=idle duration:2s",
          "createware=log",
          "return"
       }
 
-   See also :doc:`immovable_program`.
+   See also :ref:`immovable_programs`.
 */
 /**
  * sparam1 = callobject command name
@@ -640,20 +629,20 @@ plant
       plant = {
          "findspace=size:any radius:5 avoid:field",
          "walk=coords",
-         "animate=dig 2000",
-         "animate=planting 1000",
+         "animate=dig duration:2s",
+         "animate=planting duration:1s",
          "plant=attrib:tree_sapling", -- Plant any random sapling tree
-         "animate=water 2000",
+         "animate=water duration:2s",
          "return"
       },
 
       plant = {
          "findspace=size:any radius:2 space",
          "walk=coords",
-         "animate=planting 4000",
+         "animate=planting duration:4s",
          -- Plant the tiny field immovable that the worker's tribe knows about
          "plant=attrib:seed_wheat",
-         "animate=planting 4000",
+         "animate=planting duration:4s",
          "return",
       },
 
@@ -662,9 +651,9 @@ plant
          -- Only create a shipconstruction if we don't already have one
          "plant=attrib:shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
-         "animate=work 500",
+         "animate=work duration:500ms",
          "construct",
-         "animate=work 5000",
+         "animate=work duration:5s",
          "return"
       }
 */
@@ -716,16 +705,16 @@ createbob
       release = {
          "findspace=size:any radius:3",
          "walk=coords",
-         "animate=releasein 2000",
+         "animate=releasein duration:2s",
          "createbob=wildboar stag sheep", -- Release a wildboar, stag or sheep into the wild
-         "animate=releaseout 2000",
+         "animate=releaseout duration:2s",
          "return"
       },
 
       buildferry = {
          "findspace=size:swim radius:5",
          "walk=coords",
-         "animate=work 10000",
+         "animate=work duration:10s",
          "createbob=frisians_ferry",
          "return"
       }
@@ -770,7 +759,7 @@ terraform
       terraform = {
          "findspace=size:terraform radius:6",
          "walk=coords",
-         "animate=dig 2000",
+         "animate=dig duration:2s",
          "terraform",
          "return"
       }
@@ -792,7 +781,7 @@ removeobject
       hunt = {
          "findobject=type:bob radius:13 attrib:eatable", -- Select an object to remove
          "walk=object",
-         "animate=idle 1000",
+         "animate=idle duration:1s",
          -- The selected eatable map object has been hunted, so remove it from the map
          "removeobject",
          "createware=meat",
@@ -845,10 +834,10 @@ findresources
    a marker object when possible. Example::
 
       search = {
-         "animate=hacking 5000",
-         "animate=idle 2000",
+         "animate=hacking duration:5s",
+         "animate=idle duration:2s",
          "playsound=sound/hammering/geologist_hammer 192",
-         "animate=hacking 3000",
+         "animate=hacking duration:3s",
          -- Plant a resource marker at the current location, according to what has been found.
          "findresources"
       }
@@ -910,9 +899,9 @@ playsound
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
          "playsound=sound/farm/scythe 220", -- Almost certainly play a swishy harvesting sound
-         "animate=harvesting 10000",
+         "animate=harvesting duration:10s",
          "callobject=harvest",
-         "animate=gathering 4000",
+         "animate=gathering duration:4s",
          "createware=wheat",
          "return"
       }
@@ -939,11 +928,11 @@ construct
          -- 2. This will create an object for us if we don't have one yet
          "plant=attrib:shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
-         "animate=work 500",
+         "animate=work duration:5s",
          -- 1. Add the current ware to the shipconstruction. This will find a space for us if no
          -- shipconstruction object has been planted yet
          "construct",
-         "animate=work 5000",
+         "animate=work duration:5s",
          "return"
       },
 */

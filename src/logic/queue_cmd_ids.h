@@ -101,7 +101,8 @@ enum class QueueCommandTypes : uint8_t {
 	kExpeditionConfig,  // 134
 	kCallEconomyBalance = 200,
 
-	kDeleteMessage,  // 201
+	kDeleteMessage,
+	kToggleMuteMessages,  // 202
 
 	kNetCheckSync = 250,
 	kReplaySyncWrite,

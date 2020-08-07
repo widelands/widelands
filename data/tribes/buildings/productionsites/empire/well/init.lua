@@ -43,7 +43,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "sleep=20000",
+            "sleep=duration:20s",
             "animate=working duration:20s",
             "mine=water 1 100 65 2",
             "produce=water"

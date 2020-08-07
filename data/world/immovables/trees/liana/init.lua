@@ -18,7 +18,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:1m",
-         "remove=40",
+         "remove=success:40",
          "grow=liana_wasteland_pole",
       },
    },
@@ -46,7 +46,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:55s",
-         "remove=30",
+         "remove=success:30",
          "grow=liana_wasteland_mature",
       },
    },
@@ -74,10 +74,10 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:55s",
-         "remove=10",
+         "remove=success:10",
          "seed=liana_wasteland_sapling 30",
-         "animate=idle 30000",
-         "remove=10",
+         "animate=idle duration:30s",
+         "remove=success:10",
          "grow=liana_wasteland_old",
       },
    },
@@ -108,7 +108,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:24m15s",
-         "transform=deadtree4 48",
+         "transform=deadtree4 success:48",
          "seed=liana_wasteland_sapling 100",
       },
       fall = {
