@@ -56,7 +56,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   "",
                   UI::Align::kLeft,
                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
-     mode(Inbox) {
+     mode(Mode::Inbox) {
 
 	list = new UI::Table<uintptr_t>(this, kPadding, kButtonSize + 2 * kPadding,
 	                                kWindowWidth - 2 * kPadding, kTableHeight, UI::PanelStyle::kWui,
@@ -224,7 +224,7 @@ bool GameMessageMenu::compare_time_sent(uint32_t a, uint32_t b) {
 
 bool GameMessageMenu::should_be_hidden(const Widelands::Message& message) {
 	// Wrong box
-	return ((mode == Archive) != (message.status() == Message::Status::kArchived)) ||
+	return ((mode == Mode::Archive) != (message.status() == Message::Status::kArchived)) ||
 	       // Filtered out
 	       (message_filter_ != Message::Type::kAllMessages &&
 	        message.message_type_category() != message_filter_);
@@ -243,7 +243,7 @@ void GameMessageMenu::show_new_message(MessageId const id, const Widelands::Mess
 	assert(iplayer().player().messages()[id] == &message);
 	assert(!list->find(id.value()));
 	Message::Status const status = message.status();
-	if ((mode == Archive) != (status == Message::Status::kArchived)) {
+	if ((mode == Mode::Archive) != (status == Message::Status::kArchived)) {
 		toggle_mode();
 	}
 	UI::Table<uintptr_t>::EntryRecord& te = list->add(id.value());
@@ -481,12 +481,12 @@ void GameMessageMenu::archive_or_restore() {
 	for (const uint32_t index : selections) {
 		const uintptr_t selected_record = list->get(list->get_record(index));
 		switch (mode) {
-		case Inbox:
+		case Mode::Inbox:
 			// Archive highlighted message
 			game.send_player_command(new Widelands::CmdMessageSetStatusArchived(
 			   game.get_gametime(), plnum, MessageId(selected_record)));
 			break;
-		case Archive:
+		case Mode::Archive:
 			// Restore highlighted message
 			game.send_player_command(new Widelands::CmdMessageSetStatusRead(
 			   game.get_gametime(), plnum, MessageId(selected_record)));
@@ -626,15 +626,15 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 void GameMessageMenu::toggle_mode() {
 	list->clear();
 	switch (mode) {
-	case Inbox:
-		mode = Archive;
+	case Mode::Inbox:
+		mode = Mode::Archive;
 		set_title(_("Messages: Archive"));
 		archivebtn_->set_pic(g_gr->images().get("images/wui/messages/message_restore.png"));
 		togglemodebtn_->set_pic(g_gr->images().get("images/wui/messages/message_new.png"));
 		togglemodebtn_->set_tooltip(_("Show Inbox"));
 		break;
-	case Archive:
-		mode = Inbox;
+	case Mode::Archive:
+		mode = Mode::Inbox;
 		set_title(_("Messages: Inbox"));
 		archivebtn_->set_pic(g_gr->images().get("images/wui/messages/message_archive.png"));
 		togglemodebtn_->set_pic(g_gr->images().get("images/wui/messages/message_archived.png"));
@@ -654,7 +654,7 @@ void GameMessageMenu::update_archive_button_tooltip() {
 	std::string button_tooltip;
 	size_t no_selections = list->selections().size();
 	switch (mode) {
-	case Archive:
+	case Mode::Archive:
 		if (no_selections > 1) {
 			button_tooltip =
 			   /** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1
@@ -670,7 +670,7 @@ void GameMessageMenu::update_archive_button_tooltip() {
 			button_tooltip = _("Restore selected message");
 		}
 		break;
-	case Inbox:
+	case Mode::Inbox:
 		if (no_selections > 1) {
 			button_tooltip =
 			   /** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1
