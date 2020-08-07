@@ -2901,7 +2901,7 @@ void Worker::add_sites(Game& game,
 			const Coords buildingpos = a_building->get_positions(game)[0];
 			// Check the visibility: only invisible ones interest the scout.
 			MapIndex mx = map.get_index(buildingpos, map.get_width());
-			if (player.is_seeing(mx)) {
+			if (!player.is_seeing(mx)) {
 				// The find_reachable_immovable sometimes returns multiple instances.
 				// TODO(kxq): Is that okay? This could be a performance issue elsewhere.
 				// Let's not add duplicates to my work list.
