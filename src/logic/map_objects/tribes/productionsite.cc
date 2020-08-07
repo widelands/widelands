@@ -66,7 +66,7 @@ void parse_working_positions(Tribes& tribes,
 			if (!tribes.worker_exists(woi)) {
 				throw GameDataError("not a worker");
 			}
-			working_positions->push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
+			working_positions->push_back(std::make_pair(woi, amount));
 		} catch (const WException& e) {
 			throw GameDataError("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 		}
