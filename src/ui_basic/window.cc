@@ -395,6 +395,7 @@ void Window::draw_border(RenderTarget& dst) {
 		   Vector2i(pos, 0), pic_top_,
 		   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kTopBorderThickness));
 
+		// Focus overlay
 		dst.fill_rect(Recti(0, 0, get_w(), kTopBorderThickness), focus_color, BlendMode::Default);
 	}
 
@@ -489,6 +490,7 @@ void Window::draw_border(RenderTarget& dst) {
 			   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kBottomBorderThickness));
 		}
 
+		// Focus overlays
 		// Bottom
 		dst.fill_rect(Recti(0, get_h() - kBottomBorderThickness, get_w(), kBottomBorderThickness),
 		              focus_color, BlendMode::Default);
@@ -498,7 +500,7 @@ void Window::draw_border(RenderTarget& dst) {
 		              focus_color, BlendMode::Default);
 		// Right
 		dst.fill_rect(
-		   Recti(get_w() - 2 * kVerticalBorderThickness, kTopBorderThickness,
+		   Recti(get_w() - kVerticalBorderThickness, kTopBorderThickness,
 		         kVerticalBorderThickness, get_h() - kTopBorderThickness - kBottomBorderThickness),
 		   focus_color, BlendMode::Default);
 	}
