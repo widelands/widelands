@@ -1411,7 +1411,7 @@ bool WLApplication::new_game() {
 
 			game.set_game_controller(ctrl.get());
 			game.init_newgame(sp.settings());
-			game.run(Widelands::Game::NewNonScenario, "", false, "single_player");
+			game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
 		} catch (const std::exception& e) {
 			log("Fatal exception: %s\n", e.what());
 			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
@@ -1529,7 +1529,7 @@ void WLApplication::replay() {
 
 		game.save_handler().set_allow_saving(false);
 
-		game.run(Widelands::Game::Loaded, "", true, "replay");
+		game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
 	} catch (const std::exception& e) {
 		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);

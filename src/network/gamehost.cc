@@ -705,9 +705,9 @@ void GameHost::run() {
 		// wait mode when there are no clients
 		check_hung_clients();
 		init_computer_players();
-		game.run(d->settings.savegame ? Widelands::Game::Loaded :
-		                                d->settings.scenario ? Widelands::Game::NewMPScenario :
-		                                                       Widelands::Game::NewNonScenario,
+		game.run(d->settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
+		                                d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
+		                                                       Widelands::Game::StartGameType::kMap,
 		         "", false, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
