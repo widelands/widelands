@@ -6,6 +6,7 @@ tribes:new_productionsite_type {
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Spritesheet Animation"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -20,7 +21,6 @@ tribes:new_productionsite_type {
 
    animations = {
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 52, 64 },
       }
    },
@@ -31,24 +31,18 @@ tribes:new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          frames = 20,
          columns = 4,
          rows = 5,
          hotspot = { 52, 64 }
       },
       build = {
-         directory = dirname,
-         basename = "build",
          frames = 4,
          columns = 2,
          rows = 2,
          hotspot = { 52, 64 }
       },
       working = {
-         directory = dirname,
-         basename = "working",
          frames = 20,
          columns = 4,
          rows = 5,
