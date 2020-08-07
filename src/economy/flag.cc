@@ -101,7 +101,7 @@ void Flag::load_finish(EditorGameBase& egbase) {
 			log("WARNING: worker %u is in the capacity wait queue of flag %u but "
 			    "its waitforcapacity task is for map object %u! Removing from "
 			    "queue.\n",
-			    worker.serial(), serial(), state->objvar1.serial()); // NOLINT
+			    worker.serial(), serial(), state->objvar1.serial());  // NOLINT
 			return true;
 		}
 		return false;
