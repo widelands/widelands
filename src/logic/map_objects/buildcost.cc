@@ -51,7 +51,7 @@ Buildcost::Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes)
 		}
 
 		// Add
-		insert(std::pair<DescriptionIndex, uint8_t>(tribes.safe_ware_index(warename), value));
+		insert(std::make_pair(tribes.safe_ware_index(warename), value));
 	}
 }
 

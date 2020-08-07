@@ -55,9 +55,6 @@ tribes:new_trainingsite_type {
       { name = "armor_chain", amount = 1 },
       { name = "armor_gilded", amount = 1 },
    },
-   outputs = {
-      "empire_soldier",
-   },
 
    ["soldier attack"] = {
       min_level = 0,

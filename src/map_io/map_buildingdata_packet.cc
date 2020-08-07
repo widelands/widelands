@@ -1116,7 +1116,7 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 		for (Worker* temp_worker : cwt.second) {
 			const Worker& w = *temp_worker;
 			assert(mos.is_object_known(w));
-			workermap.insert(std::pair<uint32_t, const Worker*>(mos.get_object_file_index(w), &w));
+			workermap.insert(std::make_pair(mos.get_object_file_index(w), &w));
 		}
 	}
 
