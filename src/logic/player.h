@@ -253,10 +253,10 @@ public:
 		/// has ever seen it.
 		///
 		/// The value is
-		///  `kUnexplored` if the player has never seen the node
-		///  `kPreviouslySeen`     if the player does not currently see
-		///               the node, but has seen it previously
-		///  `kVisible`    if the player currently sees the node
+		///  `kUnexplored`      if the player has never seen the node
+		///  `kPreviouslySeen`  if the player does not currently see
+		///                     the node, but has seen it previously
+		///  `kVisible`         if the player currently sees the node
 		///
 		/// Note a fundamental difference between seeing a node, and having
 		/// knownledge about resources. A node is considered continuously seen by
@@ -421,11 +421,13 @@ public:
 	// will assume without checking that we can see all fields of this area.
 	void update_vision(const Area<FCoords>&, bool force_visible);
 
-	/// Explicitly hide or reveal the field at 'c'. The modes are as follows:
-	/// - kPreviouslySeen:     Decrement the field's vision
-	/// - kUnexplored: Set the field's vision to 0
-	/// - kVisible:    If the field was hidden previously, restore the vision to the value it had
-	///               at the time of hiding. Otherwise, increment the vision.
+	/// Explicitly hide or reveal the given field. The modes are as follows:
+	/// - kPreviouslySeen: Decrement the field's vision
+	/// - kUnexplored:     Make the field completely black
+	/// - kVisible:        Give the player full vision of this field.
+	// Note that kPreviouslySeen and kVisible will work as expected only when
+	// no building or worker is seeing the field. But they will always undo
+	// the effects of revealing the field with kVisible.
 	void hide_or_reveal_field(const Coords&, SeeUnseeNode);
 
 	MilitaryInfluence military_influence(MapIndex const i) const {
@@ -622,7 +624,6 @@ private:
 
 	void update_vision(const FCoords&, bool force_visible);
 	void update_vision_whole_map();
-	// Fields that were explicitly revealed, with their vision at the time of revealing
 	std::set<MapIndex> revealed_fields_;
 
 	/**
