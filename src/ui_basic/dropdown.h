@@ -45,7 +45,7 @@ struct NoteDropdown {
 
 /// The narrow textual dropdown omits the extra push button.
 /// Use kPictorialMenu if you want to trigger an action without changing the menu button.
-enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu };
+enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu, kTextualMenu };
 
 /// Implementation for a dropdown menu that lets the user select a value.
 class BaseDropdown : public NamedPanel {

@@ -19,52 +19,69 @@
 
 #include "ui_fsmenu/main.h"
 
+#include <SDL_timer.h>
+
 #include "base/i18n.h"
+#include "base/random.h"
 #include "build_info.h"
+#include "graphic/graphic.h"
+#include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
+#include "network/internet_gaming.h"
+#include "network/internet_gaming_protocol.h"
+#include "ui_basic/messagebox.h"
+#include "wlapplication_options.h"
+#include "wui/login_box.h"
 #include "wui/savegameloader.h"
 
-FullscreenMenuMain::FullscreenMenuMain()
-   : FullscreenMenuMainMenu(),
+constexpr uint32_t kInitialFadeoutDelay = 2000;
+constexpr uint32_t kInitialFadeoutDuration = 6000;
+constexpr uint32_t kImageExchangeInterval = 5000;
+constexpr uint32_t kImageExchangeDuration = 1000;
 
-     logo_icon_(this, g_gr->images().get("images/ui_fsmenu/main_title.png")),
+constexpr uint32_t kNoSplash = std::numeric_limits<uint32_t>::max();
+
+FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
+   : FullscreenMenuBase(),
+     box_x_(get_w() * 13 / 40),
+     box_y_(get_h() * 6 / 25),
+     butw_(get_w() * 7 / 20),
+     buth_(get_h() * 9 / 200),
+     padding_(buth_ / 3),
+     vbox_(this, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 
      // Buttons
-     playtutorial(&vbox_,
-                  "play_tutorial",
-                  0,
-                  0,
-                  butw_,
-                  buth_,
-                  UI::ButtonStyle::kFsMenuMenu,
-                  _("Play Tutorial")),
-     singleplayer(&vbox_,
-                  "single_player",
-                  0,
-                  0,
-                  butw_,
-                  buth_,
-                  UI::ButtonStyle::kFsMenuMenu,
-                  _("Single Player")),
-     continue_lastsave(&vbox_,
-                       "continue_lastsave",
-                       0,
-                       0,
-                       butw_,
-                       buth_,
-                       UI::ButtonStyle::kFsMenuMenu,
-                       _("Continue Playing")),
-     multiplayer(
-        &vbox_, "multi_player", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Multiplayer")),
-     replay(&vbox_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Watch Replay")),
-     editor(&vbox_, "editor", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Editor")),
-     options(&vbox_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Options")),
-     about(&vbox_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("About Widelands")),
-     exit(&vbox_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Exit Widelands")),
+     playtutorial_(&vbox_,
+                   "play_tutorial",
+                   0,
+                   0,
+                   butw_,
+                   buth_,
+                   UI::ButtonStyle::kFsMenuMenu,
+                   _("Play Tutorial"), as_tooltip_text_with_hotkey(_("Play one of our beginners’ tutorials"), "T")),
+     singleplayer_(&vbox_, "singleplayer", 0, 0, butw_, 4,
+	               buth_, _("Single Player…"), UI::DropdownType::kTextualMenu,
+	               UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu),
+     multiplayer_(&vbox_, "multiplayer", 0, 0, butw_, 4,
+	              buth_, _("Multiplayer…"), UI::DropdownType::kTextualMenu,
+	              UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu),
+     continue_lastsave_(&vbox_,
+                        "continue_lastsave",
+                        0,
+                        0,
+                        butw_,
+                        buth_,
+                        UI::ButtonStyle::kFsMenuMenu,
+                        _("Continue Playing")),
+     replay_(&vbox_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Watch Replay"), as_tooltip_text_with_hotkey(_("Watch the replay of an old game"), "R")),
+     editor_(&vbox_, "editor", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Editor"), as_tooltip_text_with_hotkey(_("Launch the map editor"), "E")),
+     options_(&vbox_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Options"), as_tooltip_text_with_hotkey(_("Technical and game-related settings"), "O")),
+     about_(&vbox_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("About Widelands"), as_tooltip_text_with_hotkey(_("Readme and Credits"), pgettext("hotkey", "F1"))),
+     exit_(&vbox_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Exit Widelands"), as_tooltip_text_with_hotkey(_("You do not want to press this button"), pgettext("hotkey", "Esc"))),
 
      // Textlabels
-     version(
+     version_(
         this,
         0,
         0,
@@ -72,59 +89,79 @@ FullscreenMenuMain::FullscreenMenuMain()
         0,
         /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
         (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str(),
-        UI::Align::kRight),
-     copyright(this,
+        UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuIntro)),
+     copyright_(this,
                0,
                0,
                0,
                0,
                /** TRANSLATORS: Placeholders are the copyright years */
-               (boost::format(_("(C) %1%-%2% by the Widelands Development Team")) %
+               (boost::format(_("(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU General Public License V2.0")) %
                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
-                  .str()),
-     gpl(this, 0, 0, 0, 0, _("Licensed under the GNU General Public License V2.0")) {
-	playtutorial.sigclicked.connect([this]() {
+                  .str(), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
+     main_image_(*g_gr->images().get("images/loadscreens/splash.jpg")),
+     title_image_(*g_gr->images().get("images/ui_fsmenu/main_title.png")),
+     init_time_(kNoSplash),
+     last_image_exchange_time_(0),
+     image_width_(0),
+     image_height_(0),
+     image_spacing_(0),
+     image_offset_(0),
+     visible_(true),
+     auto_log_(false) {
+	playtutorial_.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kTutorial);
 	});
-	singleplayer.sigclicked.connect([this]() {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kSinglePlayer);
+	singleplayer_.selected.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(singleplayer_.get_selected());
 	});
-	continue_lastsave.sigclicked.connect([this]() {
+	multiplayer_.selected.connect([this]() {
+		internet_login();
+		end_modal<FullscreenMenuBase::MenuTarget>(multiplayer_.get_selected());
+	});
+	continue_lastsave_.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kContinueLastsave);
 	});
-	multiplayer.sigclicked.connect([this]() {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMultiplayer);
-	});
-	replay.sigclicked.connect([this]() {
+	replay_.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kReplay);
 	});
-	editor.sigclicked.connect([this]() {
+	editor_.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditor);
 	});
-	options.sigclicked.connect([this]() {
+	options_.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOptions);
 	});
-	about.sigclicked.connect([this]() {
+	about_.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAbout);
 	});
-	exit.sigclicked.connect([this]() {
+	exit_.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kExit);
 	});
 
-	vbox_.add(&playtutorial, UI::Box::Resizing::kFullSize);
-	vbox_.add(&singleplayer, UI::Box::Resizing::kFullSize);
-	vbox_.add(&multiplayer, UI::Box::Resizing::kFullSize);
-	vbox_.add(&continue_lastsave, UI::Box::Resizing::kFullSize);
+	singleplayer_.add(_("New Game"), FullscreenMenuBase::MenuTarget::kNewGame, nullptr, false, _("Begin a new game"));
+	singleplayer_.add(_("Campaigns"), FullscreenMenuBase::MenuTarget::kCampaign, nullptr, false, _("Play a campaign"));
+	singleplayer_.add(_("Load Game"), FullscreenMenuBase::MenuTarget::kLoadGame, nullptr, false, _("Continue a saved game"));
+	multiplayer_.add(_("Online Game"), FullscreenMenuBase::MenuTarget::kMetaserver, nullptr, false, _("Join the Widelands lobby"));
+	multiplayer_.add(_("Online Game Settings"), FullscreenMenuBase::MenuTarget::kOnlineGameSettings, nullptr, false, _("Log in as a registered user"));
+	multiplayer_.add(_("LAN / Direct IP"), FullscreenMenuBase::MenuTarget::kLan, nullptr, false, _("Play a private online game"));
+
+	singleplayer_.set_tooltip(as_tooltip_text_with_hotkey(_("Begin or load a single-player campaign or free game"), "S"));
+	multiplayer_.set_tooltip(as_tooltip_text_with_hotkey(_("Play with your friends over the internet"), "M"));
+
+	vbox_.add(&playtutorial_, UI::Box::Resizing::kFullSize);
+	vbox_.add(&singleplayer_, UI::Box::Resizing::kFullSize);
+	vbox_.add(&multiplayer_, UI::Box::Resizing::kFullSize);
+	vbox_.add(&continue_lastsave_, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&replay, UI::Box::Resizing::kFullSize);
+	vbox_.add(&replay_, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&editor, UI::Box::Resizing::kFullSize);
+	vbox_.add(&editor_, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&options, UI::Box::Resizing::kFullSize);
+	vbox_.add(&options_, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&about, UI::Box::Resizing::kFullSize);
+	vbox_.add(&about_, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
-	vbox_.add(&exit, UI::Box::Resizing::kFullSize);
+	vbox_.add(&exit_, UI::Box::Resizing::kFullSize);
 
 	Widelands::Game game;
 	SinglePlayerLoader loader(game);
@@ -138,8 +175,8 @@ FullscreenMenuMain::FullscreenMenuMain()
 	}
 	if (newest_singleplayer) {
 		filename_for_continue_ = newest_singleplayer->filename;
-		continue_lastsave.set_tooltip(
-		   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
+		continue_lastsave_.set_tooltip(as_tooltip_text_with_hotkey(
+		   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>") %
 		    g_gr->styles()
 		       .font_style(UI::FontStyle::kTooltipHeader)
 		       .as_font_tag(
@@ -169,40 +206,271 @@ FullscreenMenuMain::FullscreenMenuMain()
 		                                        .font_style(UI::FontStyle::kTooltip)
 		                                        .as_font_tag(newest_singleplayer->savedatestring))
 		       .str())
-		      .str());
+		      .str(), "C"));
 	} else {
-		continue_lastsave.set_enabled(false);
+		continue_lastsave_.set_enabled(false);
 	}
 
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged&) {
+	      layout();
+	      // recalculate image positions on next frame
+	      last_image_exchange_time_ = 0;
+	   });
+
+	for (const std::string& img : g_fs->list_directory("images/loadscreens/worlds")) {
+		images_[0].push_back(g_gr->images().get(img));
+	}
+	for (const std::string& img : g_fs->list_directory("images/loadscreens/scenes")) {
+		images_[1].push_back(g_gr->images().get(img));
+	}
+	exchange_images();
+
+	if (first_ever_init) {
+		init_time_ = SDL_GetTicks();
+		set_button_visibility(false);
+	}
 	layout();
 }
 
-void FullscreenMenuMain::clicked_ok() {
-	// do nothing
+void FullscreenMenuMain::set_button_visibility(const bool v) {
+	if (visible_ == v) {
+		return;
+	}
+	visible_ = v;
+	vbox_.set_visible(v);
+	copyright_.set_visible(v);
+	version_.set_visible(v);
+}
+
+bool FullscreenMenuMain::handle_mousepress(uint8_t, int32_t, int32_t) {
+	if (!visible_) {
+		init_time_ = kNoSplash;
+		return true;
+	}
+	return false;
+}
+
+bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
+	if (down) {
+		bool fell_through = false;
+		if (!visible_) {
+			init_time_ = kNoSplash;
+			fell_through = true;
+		}
+		switch (code.sym) {
+		case SDLK_ESCAPE:
+			if (!fell_through) {
+				end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+				return true;
+			}
+			return false;
+		case SDLK_t:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kTutorial);
+			return true;
+		case SDLK_c:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kContinueLastsave);
+			return true;
+		case SDLK_e:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditor);
+			return true;
+		case SDLK_o:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOptions);
+			return true;
+		case SDLK_r:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kReplay);
+			return true;
+		case SDLK_F1:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAbout);
+			return true;
+		case SDLK_s:
+			singleplayer_.toggle();
+			return true;
+		case SDLK_m:
+			multiplayer_.toggle();
+			return true;
+		default:
+			return false;
+		}
+	}
+	return false;
+}
+
+void FullscreenMenuMain::exchange_images() {
+	last_image_exchange_time_ = SDL_GetTicks();
+
+	last_draw_images_[0] = draw_images_[0];
+	last_draw_images_[1] = draw_images_[1];
+
+	if (images_[0].empty() || images_[1].empty()) {
+		// No beautiful images available :(
+		draw_images_[0].clear();
+		draw_images_[1].clear();
+		return;
+	}
+
+	// Decide how many images we can draw
+	image_width_ = box_x_ * 3 / 5;
+	image_height_ = image_width_ * 9 / 16;  // assuming 16:9 images
+	image_spacing_ = image_height_ * 2 / 3;
+	const size_t nr_images = get_h() / (image_height_ + image_spacing_);
+	image_offset_ = (get_h() - image_height_ * nr_images - image_spacing_ * (nr_images - 1)) / 2;
+
+	for (uint8_t i = 0; i < 2; ++i) {
+		draw_images_[i].resize(nr_images);
+		// This is for the case that we can draw more images than we have
+		size_t multiplier = nr_images / images_[i].size();
+		if (multiplier * images_[i].size() < nr_images) {
+			++multiplier;
+		}
+		std::multiset<size_t> serials;
+		for (; multiplier; --multiplier) {
+			for (size_t j = images_[i].size(); j; --j) {
+				serials.insert(j - 1);
+			}
+		}
+		assert(serials.size() >= nr_images);
+
+		// Now decide which ones to draw
+		for (size_t j = 0; j < nr_images; ++j) {
+			const size_t index = std::rand() % serials.size();  // NOLINT
+			auto it = serials.begin();
+			std::advance(it, index);
+			draw_images_[i][j] = *it;
+			serials.erase(it);
+		}
+
+		size_t last = last_draw_images_[i].size();
+		last_draw_images_[i].resize(nr_images);
+		for (; last < nr_images; ++last) {
+			last_draw_images_[i][last] = std::rand() % images_[i].size();  // NOLINT
+		}
+	}
+}
+
+static inline void do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float opacity) {
+	r.blitrect_scale(dest, &img, Recti(0, 0, img.width(), img.height()), opacity, BlendMode::UseAlpha);
+}
+
+void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
+	const uint32_t time = SDL_GetTicks();
+	if (init_time_ == kNoSplash || time > init_time_ + kInitialFadeoutDelay) {
+		set_button_visibility(true);
+	}
+	if (init_time_ != kNoSplash && time < init_time_ + kInitialFadeoutDelay + kInitialFadeoutDuration) {
+		do_draw_image(r, Rectf((get_w() - main_image_.width()) / 2.f, (get_h() - main_image_.height()) / 2.f,
+			main_image_.width(), main_image_.height()), main_image_,
+			time < init_time_ + kInitialFadeoutDelay ? 1.f :
+		    1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) / kInitialFadeoutDuration);
+	}
+}
+
+void FullscreenMenuMain::draw(RenderTarget& r) {
+	FullscreenMenuBase::draw(r);
+
+	if (visible_) {
+		do_draw_image(r, Rectf((get_w() - title_image_.width()) / 2.f, get_h() * 7 / 80,
+				title_image_.width(), title_image_.height()), title_image_, 1.f);
+	}
+
+	const uint32_t time = SDL_GetTicks();
+	if (time - last_image_exchange_time_ > kImageExchangeInterval) {
+		exchange_images();
+	}
+
+	float x = (box_x_ - image_width_) / 2.f;
+	for (uint8_t j = 0; j < 2; ++j) {
+		const size_t nr = draw_images_[j].size();
+		for (size_t i = 0; i < nr; ++i) {
+			float opacity = 1.f;
+			Rectf rect(x, image_offset_ + i * (image_height_ + image_spacing_), image_width_, image_height_);
+			if (time - last_image_exchange_time_ < kImageExchangeDuration) {
+				opacity = std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) / kImageExchangeDuration));
+				do_draw_image(r, rect, *images_[j][last_draw_images_[j][i]], 1.f - opacity);
+			}
+			do_draw_image(r, rect, *images_[j][draw_images_[j][i]], opacity);
+		}
+		x = get_w() - x - image_width_;
+	}
 }
 
 void FullscreenMenuMain::layout() {
-	FullscreenMenuMainMenu::layout();
+	box_x_ = get_w() * 13 / 40;
+	box_y_ = get_h() * 6 / 25;
+	butw_ = get_w() * 7 / 20;
+	buth_ = get_h() * 9 / 200;
+	padding_ = buth_ / 3;
 
-	logo_icon_.set_pos(
-	   Vector2i((get_w() - logo_icon_.get_w()) / 2, title_y_ + logo_icon_.get_h() / 4));
+	version_.set_pos(Vector2i((get_w() - version_.get_w()) / 2, padding_ / 2));
+	copyright_.set_pos(Vector2i((get_w() - copyright_.get_w()) / 2, get_h() - copyright_.get_h() - padding_ / 2));
 
-	const int text_height = 0.5 * version.get_h() + padding_;
-	version.set_pos(Vector2i(get_w() - version.get_w(), get_h() - text_height));
-	copyright.set_pos(Vector2i(0, get_h() - 2 * text_height));
-	gpl.set_pos(Vector2i(0, get_h() - text_height));
-
-	playtutorial.set_desired_size(butw_, buth_);
-	singleplayer.set_desired_size(butw_, buth_);
-	continue_lastsave.set_desired_size(butw_, buth_);
-	multiplayer.set_desired_size(butw_, buth_);
-	replay.set_desired_size(butw_, buth_);
-	editor.set_desired_size(butw_, buth_);
-	options.set_desired_size(butw_, buth_);
-	about.set_desired_size(butw_, buth_);
-	exit.set_desired_size(butw_, buth_);
+	playtutorial_.set_desired_size(butw_, buth_);
+	singleplayer_.set_desired_size(butw_, buth_);
+	continue_lastsave_.set_desired_size(butw_, buth_);
+	multiplayer_.set_desired_size(butw_, buth_);
+	replay_.set_desired_size(butw_, buth_);
+	editor_.set_desired_size(butw_, buth_);
+	options_.set_desired_size(butw_, buth_);
+	about_.set_desired_size(butw_, buth_);
+	exit_.set_desired_size(butw_, buth_);
 
 	vbox_.set_pos(Vector2i(box_x_, box_y_));
 	vbox_.set_inner_spacing(padding_);
 	vbox_.set_size(butw_, get_h() - vbox_.get_y() - 5 * padding_);
+}
+
+/// called if the user is not registered
+void FullscreenMenuMain::show_internet_login() {
+	LoginBox lb(*this);
+	if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk && auto_log_) {
+		auto_log_ = false;
+		internet_login();
+	}
+}
+
+/**
+ * Called if "Online Game" button was pressed.
+ *
+ * IF no nickname or a nickname with invalid characters is set, the Online Game Settings
+ * are opened.
+ *
+ * IF at least a name is set, all data is read from the config file
+ *
+ * This fullscreen menu ends it's modality.
+ */
+void FullscreenMenuMain::internet_login() {
+	nickname_ = get_config_string("nickname", "");
+	password_ = get_config_string("password_sha1", "no_password_set");
+	register_ = get_config_bool("registered", false);
+
+	// Checks can be done directly in editbox' by using valid_username().
+	// This is just to be on the safe side, in case the user changed the password in the config file.
+	if (!InternetGaming::ref().valid_username(nickname_)) {
+		auto_log_ = true;
+		show_internet_login();
+		return;
+	}
+
+	// Try to connect to the metaserver
+	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER);
+	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
+	const std::string& auth = register_ ? password_ : get_config_string("uuid", "");
+	assert(!auth.empty() || !register_);
+	InternetGaming::ref().login(nickname_, auth, register_, meta, port);
+
+	// Check whether metaserver send some data
+	if (InternetGaming::ref().logged_in()) {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMetaserver);
+	} else {
+		// something went wrong -> show the error message
+		ChatMessage msg = InternetGaming::ref().get_messages().back();
+		UI::WLMessageBox wmb(this, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
+		wmb.run<UI::Panel::Returncodes>();
+
+		// Reset InternetGaming and passwort and show internet login again
+		InternetGaming::ref().reset();
+		set_config_string("password_sha1", "no_password_set");
+		auto_log_ = true;
+		show_internet_login();
+	}
 }

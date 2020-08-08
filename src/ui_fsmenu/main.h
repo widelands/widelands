@@ -20,44 +20,93 @@
 #ifndef WL_UI_FSMENU_MAIN_H
 #define WL_UI_FSMENU_MAIN_H
 
+#include <memory>
+
 #include "ui_basic/button.h"
-#include "ui_basic/icon.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/main_menu.h"
+#include "ui_fsmenu/base.h"
 
 /**
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
  */
-class FullscreenMenuMain : public FullscreenMenuMainMenu {
+class FullscreenMenuMain : public FullscreenMenuBase {
 public:
-	FullscreenMenuMain();
+	explicit FullscreenMenuMain(bool first_ever_init);
 
 	const std::string& get_filename_for_continue() const {
 		return filename_for_continue_;
 	}
 
+	// Internet login stuff
+	void show_internet_login();
+	void internet_login();
+	std::string get_nickname() const {
+		return nickname_;
+	}
+	std::string get_password() const {
+		return password_;
+	}
+	bool registered() const {
+		return register_;
+	}
+
+	void draw(RenderTarget&) override;
+	void draw_overlay(RenderTarget&) override;
+	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
+	bool handle_key(bool, SDL_Keysym) override;
+
 protected:
-	void clicked_ok() override;
+	void clicked_ok() override {
+	}
 
 private:
 	void layout() override;
 
-	UI::Icon logo_icon_;
-	UI::Button playtutorial;
-	UI::Button singleplayer;
-	UI::Button continue_lastsave;
-	UI::Button multiplayer;
-	UI::Button replay;
-	UI::Button editor;
-	UI::Button options;
-	UI::Button about;
-	UI::Button exit;
-	UI::Textarea version;
-	UI::Textarea copyright;
-	UI::Textarea gpl;
+	uint32_t box_x_, box_y_;
+	uint32_t butw_, buth_;
+	uint32_t padding_;
+
+	UI::Box vbox_;
+
+	UI::Button playtutorial_;
+	UI::Dropdown<FullscreenMenuBase::MenuTarget> singleplayer_;
+	UI::Dropdown<FullscreenMenuBase::MenuTarget> multiplayer_;
+	UI::Button continue_lastsave_;
+	UI::Button replay_;
+	UI::Button editor_;
+	UI::Button options_;
+	UI::Button about_;
+	UI::Button exit_;
+	UI::Textarea version_;
+	UI::Textarea copyright_;
 
 	std::string filename_for_continue_;
+
+	const Image& main_image_;
+	const Image& title_image_;
+
+	uint32_t init_time_;
+
+	std::vector<const Image*> images_[2];
+	std::vector<size_t /* image index */> draw_images_[2];
+	std::vector<size_t /* image index */> last_draw_images_[2];
+	uint32_t last_image_exchange_time_;
+	void exchange_images();
+	float image_width_, image_height_, image_spacing_, image_offset_;
+
+	bool visible_;
+	void set_button_visibility(bool);
+
+	// Values from internet login window
+	std::string nickname_;
+	std::string password_;
+	bool auto_log_;
+	bool register_;
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H
