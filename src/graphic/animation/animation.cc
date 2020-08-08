@@ -53,6 +53,7 @@ Animation::Animation(const LuaTable& table)
 			if (sound_effects->has_key<std::string>("priority")) {
 				sound_priority_ = sound_effects->get_int("priority");
 			}
+
 			if (sound_priority_ < kFxPriorityLowest) {
 				throw Widelands::GameDataError(
 				   "Minmum priority for sounds is %d, but only %d was specified for %s",
