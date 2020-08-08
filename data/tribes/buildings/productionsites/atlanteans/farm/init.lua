@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
          descname = _"planting corn",
          actions = {
             "callworker=plant",
-            "sleep=10000"
+            "sleep=duration:10s"
          }
       },
       harvest = {
@@ -64,7 +64,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting corn",
          actions = {
             "callworker=harvest",
-            "sleep=4000"
+            "sleep=duration:4s"
          }
       },
    },

@@ -30,6 +30,7 @@ void draw_terrain(uint32_t gametime,
                   const float scale,
                   const Workareas& workarea,
                   bool grid,
+                  const Widelands::Player*,
                   RenderTarget* dst);
 
 // Draw the border stones for 'field' if it is a border and 'visibility' is

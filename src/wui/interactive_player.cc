@@ -45,6 +45,7 @@
 #include "wui/game_objectives_menu.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/seafaring_statistics_menu.h"
+#include "wui/soldier_statistics_menu.h"
 #include "wui/stock_menu.h"
 #include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
@@ -240,6 +241,10 @@ void InteractivePlayer::add_statistics_menu() {
 		new BuildingStatisticsMenu(*this, menu_windows_.stats_buildings);
 	};
 
+	menu_windows_.stats_soldiers.open_window = [this] {
+		new SoldierStatisticsMenu(*this, menu_windows_.stats_soldiers);
+	};
+
 	menu_windows_.stats_wares.open_window = [this] {
 		new WareStatisticsMenu(*this, menu_windows_.stats_wares);
 	};
@@ -263,6 +268,11 @@ void InteractivePlayer::rebuild_statistics_menu() {
 		                    g_gr->images().get("images/wui/menus/statistics_seafaring.png"), false,
 		                    "", "E");
 	}
+
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("Soldiers"), StatisticsMenuEntry::kSoldiers,
+	                    g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
+	                    "X");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
@@ -293,6 +303,9 @@ void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 	} break;
 	case StatisticsMenuEntry::kBuildings: {
 		menu_windows_.stats_buildings.toggle();
+	} break;
+	case StatisticsMenuEntry::kSoldiers: {
+		menu_windows_.stats_soldiers.toggle();
 	} break;
 	case StatisticsMenuEntry::kStock: {
 		menu_windows_.stats_stock.toggle();
@@ -384,7 +397,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const uint32_t gametime = gbase.get_gametime();
 
 	Workareas workareas = get_workarea_overlays(map);
-	auto* fields_to_draw = given_map_view->draw_terrain(gbase, workareas, false, dst);
+	auto* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
 	const auto& road_building_s = road_building_steepness_overlays();
 
 	const float scale = 1.f / given_map_view->view().zoom;
@@ -547,6 +560,14 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return true;
 
+		case SDLK_x:
+			if (menu_windows_.stats_soldiers.window == nullptr) {
+				new SoldierStatisticsMenu(*this, menu_windows_.stats_soldiers);
+			} else {
+				menu_windows_.stats_soldiers.toggle();
+			}
+			return true;
+
 		case SDLK_e:
 			if (game().map().allows_seafaring()) {
 				if (menu_windows_.stats_seafaring.window == nullptr) {
@@ -633,4 +654,5 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 	if (UI::UniqueWindow* const building_statistics_window = menu_windows_.stats_buildings.window) {
 		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();
 	}
+	menu_windows_.stats_soldiers.destroy();
 }

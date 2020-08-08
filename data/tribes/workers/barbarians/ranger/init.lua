@@ -19,10 +19,10 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:5 avoid:field saplingsearches:5",
          "walk=coords",
-         "animate=dig 3500",
-         "animate=plant 2500",
+         "animate=dig duration:3s500ms",
+         "animate=plant duration:2s500ms",
          "plant=attrib:tree_sapling",
-         "animate=water 3500",
+         "animate=water duration:3s500ms",
          "return"
       }
    },

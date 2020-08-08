@@ -17,7 +17,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:42s",
-         "remove=32",
+         "remove=chance:12.5%",
          "grow=palm_oil_desert_pole",
       },
    },
@@ -44,7 +44,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:40s",
-         "remove=25",
+         "remove=chance:9.76%",
          "grow=palm_oil_desert_mature",
       },
    },
@@ -71,10 +71,10 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:25s",
-         "remove=10",
+         "remove=chance:3.91%",
          "seed=palm_oil_desert_sapling 80",
          "animate=idle duration:30s",
-         "remove=10",
+         "remove=chance:3.91%",
          "grow=palm_oil_desert_old",
 
       },
@@ -104,7 +104,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:13m20s",
-         "transform=deadtree5 50",
+         "transform=deadtree5 chance:19.53%",
          "seed=palm_oil_desert_sapling 80",
       },
       fall = {

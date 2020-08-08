@@ -18,7 +18,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:42s",
-         "remove=32",
+         "remove=chance:12.5%",
          "grow=mushroom_red_wasteland_pole",
       },
    },
@@ -46,7 +46,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:40s",
-         "remove=25",
+         "remove=chance:9.76%",
          "grow=mushroom_red_wasteland_mature",
       },
    },
@@ -74,10 +74,10 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:27s",
-         "remove=10",
+         "remove=chance:3.91%",
          "seed=mushroom_red_wasteland_sapling 100",
          "animate=idle duration:29s",
-         "remove=10",
+         "remove=chance:3.91%",
          "grow=mushroom_red_wasteland_old",
       },
    },
@@ -108,7 +108,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:13m20s",
-         "transform=deadtree2 50",
+         "transform=deadtree2 chance:19.53%",
          "seed=mushroom_red_wasteland_sapling 40",
       },
       fall = {

@@ -187,7 +187,7 @@ Player::Player(EditorGameBase& the_egbase,
 
 	// Populating remaining_shipnames vector
 	for (const auto& shipname : tribe_descr.get_ship_names()) {
-		remaining_shipnames_.insert(shipname);
+		remaining_shipnames_.push_back(shipname);
 	}
 }
 
@@ -1536,8 +1536,77 @@ const std::string& Player::get_ai() const {
 	return ai_;
 }
 
+void Player::set_muted(DescriptionIndex di, bool mute) {
+	if (mute) {
+		muted_building_types_.insert(di);
+	} else {
+		auto it = muted_building_types_.find(di);
+		if (it != muted_building_types_.end()) {
+			muted_building_types_.erase(it);
+		}
+	}
+}
+
 bool Player::is_attack_forbidden(PlayerNumber who) const {
 	return forbid_attack_.find(who) != forbid_attack_.end();
+}
+
+void Player::add_soldier(unsigned h, unsigned a, unsigned d, unsigned e) {
+	SoldierStatistics ss(h, a, d, e);
+	auto it = std::find(soldier_stats_.begin(), soldier_stats_.end(), ss);
+	if (it == soldier_stats_.end()) {
+		++ss.total;
+		soldier_stats_.push_back(ss);
+	} else {
+		++it->total;
+	}
+}
+void Player::remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e) {
+	auto it = std::find(soldier_stats_.begin(), soldier_stats_.end(), SoldierStatistics(h, a, d, e));
+	assert(it != soldier_stats_.end());
+	assert(it->total > 0);
+	--it->total;
+}
+uint32_t Player::count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const {
+	const auto it =
+	   std::find(soldier_stats_.begin(), soldier_stats_.end(), SoldierStatistics(h, a, d, e));
+	return it == soldier_stats_.end() ? 0 : it->total;
+}
+uint32_t Player::count_soldiers_h(unsigned value) const {
+	uint32_t s = 0;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		if (ss.health == value) {
+			s += ss.total;
+		}
+	}
+	return s;
+}
+uint32_t Player::count_soldiers_a(unsigned value) const {
+	uint32_t s = 0;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		if (ss.attack == value) {
+			s += ss.total;
+		}
+	}
+	return s;
+}
+uint32_t Player::count_soldiers_d(unsigned value) const {
+	uint32_t s = 0;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		if (ss.defense == value) {
+			s += ss.total;
+		}
+	}
+	return s;
+}
+uint32_t Player::count_soldiers_e(unsigned value) const {
+	uint32_t s = 0;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		if (ss.evade == value) {
+			s += ss.total;
+		}
+	}
+	return s;
 }
 
 void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
@@ -1557,17 +1626,17 @@ void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
 const std::string Player::pick_shipname() {
 	++ship_name_counter_;
 
-	if (!remaining_shipnames_.empty()) {
-		Game& game = dynamic_cast<Game&>(egbase());
-		assert(is_a(Game, &egbase()));
-		const uint32_t index = game.logic_rand() % remaining_shipnames_.size();
-		std::unordered_set<std::string>::iterator it = remaining_shipnames_.begin();
-		std::advance(it, index);
-		std::string new_name = *it;
-		remaining_shipnames_.erase(it);
-		return new_name;
+	if (remaining_shipnames_.empty()) {
+		return (boost::format(pgettext("shipname", "Ship %d")) % ship_name_counter_).str();
 	}
-	return (boost::format(pgettext("shipname", "Ship %d")) % ship_name_counter_).str();
+
+	Game& game = dynamic_cast<Game&>(egbase());
+	const size_t index = game.logic_rand() % remaining_shipnames_.size();
+	auto it = remaining_shipnames_.begin();
+	std::advance(it, index);
+	std::string new_name = *it;
+	remaining_shipnames_.erase(it);
+	return new_name;
 }
 
 /**
@@ -1580,7 +1649,7 @@ void Player::read_remaining_shipnames(FileRead& fr) {
 	remaining_shipnames_.clear();
 	const uint16_t count = fr.unsigned_16();
 	for (uint16_t i = 0; i < count; ++i) {
-		remaining_shipnames_.insert(fr.string());
+		remaining_shipnames_.push_back(fr.string());
 	}
 	ship_name_counter_ = fr.unsigned_32();
 }

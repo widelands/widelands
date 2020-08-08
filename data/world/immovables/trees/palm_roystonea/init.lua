@@ -17,7 +17,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:57s500ms",
-         "remove=21",
+         "remove=chance:8.20%",
          "grow=palm_roystonea_desert_pole",
       },
    },
@@ -44,7 +44,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:52s500ms",
-         "remove=19",
+         "remove=chance:7.42%",
          "grow=palm_roystonea_desert_mature",
       },
    },
@@ -71,7 +71,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:50s",
-         "remove=18",
+         "remove=chance:7.03%",
          "grow=palm_roystonea_desert_old",
       },
    },
@@ -100,7 +100,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:25m50s",
-         "transform=deadtree4 39",
+         "transform=deadtree4 chance:15.23%",
          "seed=palm_roystonea_desert_sapling 30",
       },
       fall = {

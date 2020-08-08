@@ -36,6 +36,51 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name, std::unique_ptr
 	actions_.push_back(std::move(action));
 }
 
+/* RST
+.. _immovable_programs:
+
+Immovable Programs
+==================
+Immovables can have programs that will be executed by the game engine. Programs are required to
+allow workers to interact with an immovable (e.g. a tree will need a "fall" program to allow
+woodcutters to remove the tree).
+
+It is not mandatory for immovables to define programs. If the immovable defines a program named
+``program``, this program will be started as the main program on creation. Immovables without such a
+program will simply display their main animation indefinitely.
+
+Programs are defined as Lua tables. Each program must be declared as a subtable in the immovable's
+Lua table called ``programs`` and have a unique table key. The entries in a program's subtable are
+the ``actions`` to execute, like this:
+
+.. code-block:: lua
+
+   programs = {
+      program = {
+         "animate=idle 1550000",
+         "transform=deadtree4 chance:5.13%",
+         "seed=alder_summer_sapling 180",
+      },
+      fall = {
+         "transform=",
+      },
+   },
+
+.. highlight:: default
+
+For general information about the format, see :ref:`map_object_programs_syntax`.
+
+Available actions are:
+
+- `animate`_
+- `transform`_
+- `grow`_
+- `remove`_
+- `seed`_
+- `construct`_
+- `playsound`_
+*/
+
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
                                    const std::vector<std::string>& lines,
                                    ImmovableDescr& immovable)
@@ -57,7 +102,8 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActGrow(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "remove") {
-				actions_.push_back(std::unique_ptr<Action>(new ActRemove(parseinput.arguments)));
+				actions_.push_back(
+				   std::unique_ptr<Action>(new ActRemove(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "seed") {
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
@@ -82,6 +128,12 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 ImmovableProgram::Action::~Action() {
 }
 
+/* RST
+
+animate
+-------
+Runs an animation. See :ref:`map_object_programs_animate`.
+*/
 ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments,
                                          const ImmovableDescr& descr) {
 	parameters = MapObjectProgram::parse_act_animate(arguments, descr, true);
@@ -96,6 +148,26 @@ void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) con
 	                                                   0);
 }
 
+/* RST
+
+playsound
+---------
+Plays a sound effect.
+
+Parameter syntax::
+
+  parameters ::= soundFX [priority]
+
+Parameter semantics:
+
+``filepath``
+    The path/base_filename of a soundFX (relative to the data directory).
+``priority``
+    An integer. If omitted, 127 is used.
+
+Plays the specified soundFX with the specified priority. Whether the soundFX is actually played is
+determined by the sound handler.
+*/
 ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
 	parameters = MapObjectProgram::parse_act_play_sound(arguments, kFxPriorityAllowMultiple - 1);
 }
@@ -110,34 +182,83 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 	immovable.program_step(game);
 }
 
+/* RST
+
+transform
+---------
+
+.. function:: transform=[bob:]\<name\> [chance:\<percent\>]
+
+   :arg string \<name\>: The name of the map object to turn into.
+      If the ``bob:<name>`` flag is given, the transformation target is a bob;
+      otherwise it is an immovable. Currently, only ships are supported as bobs.
+
+   :arg percent chance: The :ref:`map_object_programs_datatypes_percent` chance that the
+      transformation will be performed. The game will generate a random number and the
+      transformation will be performed if and only if this number is less than ``chance``.
+      If ``chance:<percent>`` is omitted, the transformation will always be performed.
+
+   Deletes this immovable and instantly replaces it with a different immovable or a bob. If
+   ``chance`` is specified, there's a probability that the transformation will be skipped.
+   When the transformation succeeds, no further program steps will be executed, because this object
+   will be gone. Example:
+
+.. code-block:: lua
+
+     program = {
+         "animate=idle duration:25m50s",
+         "transform=deadtree3 chance:9.37%",
+         "seed=spruce_summer_sapling 200", -- This line will be skipped if the removal succeeds
+      },
+*/
 ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments,
                                              ImmovableDescr& descr) {
-	if (arguments.empty()) {
-		throw GameDataError("Usage: transform=[bob] <name> [<probability>]");
+	if (arguments.empty() || arguments.size() > 2) {
+		throw GameDataError("Usage: [bob:]name [chance:<percent>]");
 	}
 	try {
-		bob = false;
-		probability = 0;
+		bob_ = false;
+		probability_ = 0;
 
 		for (const std::string& argument : arguments) {
-			if (argument == "bob") {
-				bob = true;
-			} else if (argument[0] >= '0' && argument[0] <= '9') {
-				probability = read_positive(argument, 254);
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (!item.second.empty()) {
+				if (item.first == "bob") {
+					bob_ = true;
+					// TODO(GunChleoc): If would be nice to check if target exists, but we can't
+					// guarantee the load order. Maybe in postload() one day.
+					type_name_ = item.second;
+				} else if (item.first == "chance") {
+					probability_ = read_percent_to_int(item.second);
+				} else {
+					throw GameDataError(
+					   "Unknown argument '%s'. Usage: [bob:]name [chance:<percent>]", argument.c_str());
+				}
+			} else if (item.first == "bob") {
+				// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
+				bob_ = true;
+				log("WARNING: %s: Deprecated 'bob' in 'transform' program, use 'bob:<name>' instead.\n",
+				    descr.name().c_str());
+			} else if (item.first[0] >= '0' && item.first[0] <= '9') {
+				// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
+				log("WARNING: %s: Deprecated chance in 'transform' program, use 'chance:<percent>' "
+				    "instead.\n",
+				    descr.name().c_str());
+				probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
 			} else {
 				// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee
 				// the load order. Maybe in postload() one day.
-				type_name = argument;
+				type_name_ = item.first;
 			}
 		}
-		if (type_name == descr.name()) {
+		if (type_name_ == descr.name()) {
 			throw GameDataError("illegal transformation to the same type");
 		}
 		// Register target at ImmovableDescr
-		if (bob) {
-			descr.becomes_.insert(std::make_pair(MapObjectType::BOB, type_name));
+		if (bob_) {
+			descr.becomes_.insert(std::make_pair(MapObjectType::BOB, type_name_));
 		} else {
-			descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name));
+			descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name_));
 		}
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
@@ -148,23 +269,44 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 	if (immovable.apply_growth_delay(game)) {
 		return;
 	}
-	if (probability == 0 || game.logic_rand() % 256 < probability) {
+	if (probability_ == 0 || game.logic_rand() % kMaxProbability < probability_) {
 		Player* player = immovable.get_owner();
 		Coords const c = immovable.get_position();
 		MapObjectDescr::OwnerType owner_type = immovable.descr().owner_type();
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 
-		if (bob) {
-			game.create_ship(c, type_name, player);
+		if (bob_) {
+			game.create_ship(c, type_name_, player);
 		} else {
 			game.create_immovable_with_name(
-			   c, type_name, owner_type, player, nullptr /* former_building_descr */);
+			   c, type_name_, owner_type, player, nullptr /* former_building_descr */);
 		}
 	} else {
 		immovable.program_step(game);
 	}
 }
 
+/* RST
+
+grow
+----
+Delete this immovable and instantly replace it with a different immovable with a chance depending on
+terrain affinity.
+
+Parameter syntax::
+
+  parameters ::= name
+
+Parameter semantics:
+
+``name``
+    The name of the immovable to turn into.
+
+Deletes the immovable (preventing subsequent program steps from being called) and replaces it with
+an immovable of the given name. The chance that this program step succeeds depends on how well this
+immovable's terrain affinity matches the terrains it grows on. If the growth fails, the next program
+step is triggered. This command may be used only for immovables with a terrain affinity.
+*/
 ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, ImmovableDescr& descr) {
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: grow=<immovable name>");
@@ -173,12 +315,15 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, Immovabl
 		throw GameDataError(
 		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
 	}
+	if (type_name_ == descr.name()) {
+		throw GameDataError("illegal growth to the same type");
+	}
 
 	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load
 	// order. Maybe in postload() one day.
-	type_name = arguments.front();
+	type_name_ = arguments.front();
 	// Register target at ImmovableDescr
-	descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name));
+	descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name_));
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
@@ -196,30 +341,96 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 		Player* owner = immovable.get_owner();
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 		game.create_immovable_with_name(
-		   f, type_name, owner_type, owner, nullptr /* former_building_descr */);
+		   f, type_name_, owner_type, owner, nullptr /* former_building_descr */);
 	} else {
 		immovable.program_step(game);
 	}
 }
 
-/**
- * remove
- */
-ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments) {
+/* RST
+
+remove
+------
+
+.. function:: remove=[chance:\<percent\>]
+
+   :arg percent chance: The :ref:`map_object_programs_datatypes_percent` chance that the immovable
+      will be removed. The game will generate a random number and the immovable will be removed if
+      and only if this number is less than ``chance``. If ``chance:<percent>`` is omitted, the
+      immovable will always be removed.
+
+   Remove this immovable. If ``chance`` is specified, there's a probability that the removal will be
+   skipped. When the removal succeeds, no further program steps will be executed, because this
+   object will be gone. Examples:
+
+.. code-block:: lua
+
+      program = {
+         "animate=idle duration:55s",
+         "remove=chance:16.41%",
+         "grow=spruce_summer_pole", -- This line will be skipped if the removal succeeds
+      },
+     fall = {
+         "remove=", -- This object will always be removed when 'fall' is called
+      },
+*/
+ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
+                                       const ImmovableDescr& descr) {
 	if (arguments.size() > 1) {
-		throw GameDataError("Usage: remove=[<probability>]");
+		throw GameDataError("Usage: remove=[chance:<percent>]");
 	}
-	probability = arguments.empty() ? 0 : read_positive(arguments.front(), 254);
+	if (arguments.empty()) {
+		probability_ = 0;
+	} else {
+		const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
+		if (item.first == "chance") {
+			probability_ = read_percent_to_int(item.second);
+		} else if (item.first[0] >= '0' && item.first[0] <= '9') {
+			// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
+			log(
+			   "WARNING: %s: Deprecated chance in 'remove' program, use 'chance:<percent>' instead.\n",
+			   descr.name().c_str());
+			probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
+		} else {
+			throw GameDataError(
+			   "Unknown argument '%s'. Usage: [chance:<percent>]", arguments.front().c_str());
+		}
+	}
 }
 
 void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) const {
-	if (probability == 0 || game.logic_rand() % 256 < probability) {
+	if (probability_ == 0 || game.logic_rand() % kMaxProbability < probability_) {
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 	} else {
 		immovable.program_step(game);
 	}
 }
 
+/* RST
+
+seed
+----
+Create a new immovable nearby with a chance depending on terrain affinity.
+
+Parameter syntax::
+
+  parameters ::= name factor
+
+Parameter semantics:
+
+``name``
+    The name of the immovable to create.
+``factor``
+    A natural integer in [1,254]. The radius within which the immovable will seed is not limited and
+    is determined by repeatedly generating a random number between 0 and 255 and comparing it with
+    ``factor`` until the comparison fails.
+
+Finds a random location nearby and creates a new immovable with the given name there with a chance
+depending on *this* immovable's terrain affinity. The chance that such a location will be searched
+for in a higher radius can be influenced. Note that this program step will consider only *one*
+random location, and it will only seed there if the terrain is well suited. This command may be used
+only for immovables with a terrain affinity.
+*/
 ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
                                    const ImmovableDescr& descr) {
 	if (arguments.size() != 2) {
@@ -274,6 +485,33 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 	immovable.program_step(game);
 }
 
+/* RST
+
+construct
+---------
+Blocks execution until enough wares have been delivered to this immovable by a worker.
+
+Parameter syntax::
+
+  parameters ::= animation build decay
+
+Parameter semantics:
+
+``animation``
+    The animation to display while the immovable is being constructed.
+``build``
+    The duration of each construction step in milliseconds for visualising the construction
+    progress. Used only in drawing code.
+``decay``
+    When no construction material has been delivered for this many milliseconds, the construction
+    progress starts to gradually reverse.
+
+Blocks execution of subsequent programs until enough wares have been delivered to this immovable by
+a worker. The wares to deliver are specified in the immovable's ``buildcost`` table which is
+mandatory for immovables using the ``construct`` command. If no wares are being delivered for a
+while, the progress gradually starts to reverse, increasing the number of wares left to deliver. If
+the immovable keeps decaying, it will eventually be removed.
+*/
 ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments,
                                              const ImmovableDescr& descr) {
 	if (arguments.size() != 3) {

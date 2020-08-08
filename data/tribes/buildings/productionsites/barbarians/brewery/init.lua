@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs beer_strong",
             "consume=water wheat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "animate=working duration:30s",
             "produce=beer_strong"
          }
