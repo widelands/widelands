@@ -50,9 +50,9 @@ jobs:
         $env:CONFIGURATION = "${{ matrix.config }}"
         $env:APPVEYOR_BUILD_FOLDER = $env:GITHUB_WORKSPACE
         $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-x64"
-        ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ matrix.config }}-x64 $env:GITHUB_WORKSPACE\utils\win32\innosetup\Widelands.iss
+        ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-${{ matrix.config }}-x64 $env:GITHUB_WORKSPACE\utils\win32\innosetup\Widelands.iss
     - name: Uploading installer
       uses: actions/upload-artifact@v2
       with:
         name: Widelands 64-bit ${{ matrix.config }} Installer
-        path: $env:GITHUB_WORKSPACE\Widelands-${{ matrix.config }}-x64.exe
+        path: ${{ github.workspace }}\Widelands-${{ github.sha }}-${{ matrix.config }}-x64.exe
