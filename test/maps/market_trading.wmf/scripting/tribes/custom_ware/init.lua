@@ -6,6 +6,7 @@ tribes:new_ware_type {
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Custom Ware"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    default_target_quantity = {},
    preciousness = {
@@ -17,7 +18,6 @@ tribes:new_ware_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 6, 7 },
       },
    }
