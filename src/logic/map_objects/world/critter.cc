@@ -438,7 +438,7 @@ void Critter::roam_update(Game& game, State& state) {
 				      defender_strength, weighted_success_chance);
 				assert(weighted_success_chance >= 0.0);
 				assert(weighted_success_chance <= 1.0);
-				if (game.logic_rand() % N < weighted_success_chance * N) {
+				if (game.logic_rand() % (N != 0 ? N : 1) < weighted_success_chance * N) {
 					molog("    SUCCESS :)\n");
 					food->remove(game);
 				} else {
