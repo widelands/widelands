@@ -81,8 +81,8 @@ Let's have a detailed look at the ``idle`` animation:
 **sound_effect**
    *Optional*. Our example will look for the sound files ``bar_00.ogg`` through ``bar_99.ogg`` in the directory ``data/sound/foo`` and play them in sequence. The priority is optional with the default being ``1``, and its range is:
 
-   * **1-100:** Probability between ``1%`` and ``100%``, only one instance can be playing at any time
-   * **101-199:** Probability between ``1%`` and ``100%``, many instances can be playing at any time
+   * **0.1 to 100:** Probability between ``0.1%`` and ``100%``, only one instance can be playing at any time
+   * **>100 to 199:** Probability between ``1.1%`` and ``100%``, many instances can be playing at any time
    * **200:** Always play
 
 
