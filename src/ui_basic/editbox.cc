@@ -285,6 +285,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			FALLS_THROUGH;
 		case SDLK_BACKSPACE:
+			log("start: %d, end: %d, caret: %d\n", m_->selection_start, m_->selection_end, m_->caret);
 			if (m_->mode == EditBoxImpl::Mode::kSelection) {
 				if (m_->selection_start <= m_->selection_end) {
 					size_t nr_characters = m_->selection_end - m_->selection_start;
@@ -293,8 +294,10 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 					size_t nr_characters = m_->selection_start - m_->selection_end;
 					m_->text.erase(m_->selection_end, nr_characters);
 				}
+				if (m_->text.empty()) {
+					m_->caret = 0;
+				}
 				check_caret();
-				reset_selection();
 				changed();
 				return true;
 			}
