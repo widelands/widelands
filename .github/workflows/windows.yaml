@@ -1,5 +1,7 @@
 name: Deployment for MS-Windows
 on:
+  push:
+    branches: [ master ]
   pull_request:
     branches: [ master ]
     types: [ opened, synchronize ]
