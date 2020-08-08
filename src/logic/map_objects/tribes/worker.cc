@@ -885,7 +885,8 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		total_weight += weight;
 	}
 
-	int choice = game.logic_rand() % total_weight;
+	// Avoid division by 0
+	int choice = game.logic_rand() % std::max(1, total_weight);
 	for (const auto& bsii : best_suited_immovables_index) {
 		const int weight = std::get<0>(bsii);
 		state.ivar2 = std::get<1>(bsii);
@@ -1495,7 +1496,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 
 	// We expect to always have a location at this point,
 	// but this assumption may fail when loading a corrupted savegame.
-	if (!location) {
+	if (location == nullptr) {
 		send_signal(game, "location");
 		return pop_task(game);
 	}
@@ -1651,10 +1652,9 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 			   "MO(%u): [transfer]: from road to bad nextstep %u", serial(), nextstep->serial());
 		}
 	} else {
-		// Scan-build reports Called C++ object pointer is null here.
-		// This is a false positive.
-		// See https://bugs.launchpad.net/widelands/+bug/1198918
-		throw wexception("MO(%u): location %u has bad type", serial(), location->serial());
+		// Check location to make clang-tidy happy
+		throw wexception(
+		   "MO(%u): location %u has bad type", serial(), location ? location->serial() : 0);
 	}
 }
 
