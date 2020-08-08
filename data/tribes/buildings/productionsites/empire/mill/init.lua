@@ -52,7 +52,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs flour",
             "consume=wheat",
             "sleep=duration:5s",
-            "playsound=sound/mill/mill_turning 240",
+            "playsound=sound/mill/mill_turning priority:190%",
             "animate=working duration:10s",
             "produce=flour"
          }

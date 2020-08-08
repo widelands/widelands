@@ -85,9 +85,10 @@ protected:
 	/**
 	 * @brief Reads a percentage
 	 * @param input A percentage in the format 12%, 12.5% or 12.53%.
+	 * @param factor Can be used to scale the range, e.g. to allow 200%.
 	 * @return Scaled precentage as integer, where 100% corresponds to kMaxProbability.
 	 * */
-	static unsigned read_percent_to_int(const std::string& input);
+	static unsigned read_percent_to_int(const std::string& input, uint8_t factor = 1U);
 
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"
@@ -118,11 +119,10 @@ protected:
 		/// Sound effect ID
 		FxId fx;
 		/// Sound effect priority
-		uint8_t priority = 0;
+		uint16_t priority = 0;
 	};
 	/// Parses the arguments for a play_sound action, e.g. { "sound/smiths/sharpening", "120" }
-	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments,
-	                                                uint8_t default_priority);
+	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments, const MapObjectDescr& descr);
 
 private:
 	const std::string name_;

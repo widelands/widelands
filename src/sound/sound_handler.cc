@@ -285,7 +285,7 @@ FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
  * (to avoid "sonic overload"). Based on priority and on when it was last played.
  * System sounds and sounds with priority "kFxPriorityAlwaysPlay" always return 'true'.
  */
-bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const priority) {
+bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint16_t const priority) {
 	assert(!SoundHandler::is_backend_disabled() && is_sound_enabled(type));
 	assert(priority >= kFxPriorityLowest);
 
@@ -362,7 +362,7 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const p
  */
 void SoundHandler::play_fx(SoundType type,
                            const FxId fx_id,
-                           uint8_t const priority,
+                           uint16_t const priority,
                            int32_t const stereo_pos,
                            int distance) {
 	if (SoundHandler::is_backend_disabled() || !is_sound_enabled(type)) {

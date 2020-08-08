@@ -126,6 +126,7 @@ world:new_immovable_type{
          hotspot = { 24, 60 },
          sound_effect = {
             path = "sound/animals/bird4",
+            priority = 10
          }
       }
    },

@@ -108,7 +108,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "playsound") {
-				actions_.push_back(std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments)));
+				actions_.push_back(std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, immovable)));
@@ -152,24 +152,10 @@ void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) con
 
 playsound
 ---------
-Plays a sound effect.
-
-Parameter syntax::
-
-  parameters ::= soundFX [priority]
-
-Parameter semantics:
-
-``filepath``
-    The path/base_filename of a soundFX (relative to the data directory).
-``priority``
-    An integer. If omitted, 127 is used.
-
-Plays the specified soundFX with the specified priority. Whether the soundFX is actually played is
-determined by the sound handler.
+Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
-ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
-	parameters = MapObjectProgram::parse_act_play_sound(arguments, kFxPriorityAllowMultiple - 1);
+ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments, const ImmovableDescr& descr) {
+	parameters = MapObjectProgram::parse_act_play_sound(arguments, descr);
 }
 
 /**

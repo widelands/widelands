@@ -33,7 +33,7 @@ tribes:new_worker_type {
       cut_granite = {
          "findobject=attrib:rocks radius:6",
          "walk=object",
-         "playsound=sound/atlanteans/cutting/stonecutter 192",
+         "playsound=sound/atlanteans/cutting/stonecutter priority:150%",
          "animate=hacking duration:18s500ms",
          "callobject=shrink",
          "createware=granite",

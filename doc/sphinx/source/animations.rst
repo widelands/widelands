@@ -33,7 +33,7 @@ are available, and what your image files need to look like:
          fps = 4,
          sound_effect = {
             path = "sound/foo/bar",
-            priority = 128
+            priority = 50
          },
          representative_frame = 3,
       },
@@ -81,9 +81,9 @@ Let's have a detailed look at the ``idle`` animation:
 **sound_effect**
    *Optional*. Our example will look for the sound files ``bar_00.ogg`` through ``bar_99.ogg`` in the directory ``data/sound/foo`` and play them in sequence. The priority is optional with the default being ``1``, and its range is:
 
-   * **0-127:** Probability between ``0.0`` and ``1.0``, only one instance can be playing at any time
-   * **128-254:** Probability between ``0.0`` and ``1.0``, many instances can be playing at any time
-   * **255:** Always play
+   * **1-100:** Probability between ``1%`` and ``100%``, only one instance can be playing at any time
+   * **101-199:** Probability between ``1%`` and ``100%``, many instances can be playing at any time
+   * **200:** Always play
 
 
 .. _animations_directional:
