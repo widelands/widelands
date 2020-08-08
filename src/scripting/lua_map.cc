@@ -4154,14 +4154,14 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case MapObjectType::FERRY:
 	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
+	case MapObjectType::SHIP:
+		return CAST_TO_LUA(ShipDescr, LuaShipDescription);
 	case MapObjectType::MAPOBJECT:
 	case MapObjectType::BATTLE:
 	case MapObjectType::BOB:
 	case MapObjectType::CRITTER:
 	case MapObjectType::FERRY_FLEET:
 	case MapObjectType::SHIP_FLEET:
-	case MapObjectType::SHIP:
-		return CAST_TO_LUA(ShipDescr, LuaShipDescription);
 	case MapObjectType::FLAG:
 	case MapObjectType::ROAD:
 	case MapObjectType::WATERWAY:
