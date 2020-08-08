@@ -32,12 +32,17 @@ class FullscreenMenuIntro : public FullscreenMenuBase {
 public:
 	FullscreenMenuIntro();
 
+	void think() override;
+	void draw(RenderTarget&) override;
+
 protected:
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 
 private:
 	UI::Textarea message_;
+
+	uint32_t init_time_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_INTRO_H

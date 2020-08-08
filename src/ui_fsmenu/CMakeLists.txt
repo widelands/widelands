@@ -197,4 +197,5 @@ wl_library(ui_fsmenu_misc
     base_i18n
     ui_basic
     ui_fsmenu_base
+  USES_SDL2
 )

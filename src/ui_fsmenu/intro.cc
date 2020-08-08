@@ -19,7 +19,12 @@
 
 #include "ui_fsmenu/intro.h"
 
+#include <SDL_timer.h>
+
 #include "base/i18n.h"
+
+constexpr uint32_t kAnimStart = 3000;
+constexpr uint32_t kAnimLength = 5000;
 
 FullscreenMenuIntro::FullscreenMenuIntro()
    : FullscreenMenuBase(),
@@ -32,7 +37,8 @@ FullscreenMenuIntro::FullscreenMenuIntro()
               0,
               _("Press any key or click to continue…"),
               UI::Align::kCenter,
-              g_gr->styles().font_style(UI::FontStyle::kFsMenuIntro)) {
+              g_gr->styles().font_style(UI::FontStyle::kFsMenuIntro)),
+     init_time_(SDL_GetTicks()) {
 	message_.set_font_scale(scale_factor());
 	add_overlay_image("images/loadscreens/splash.jpg",
 	                  FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
@@ -49,4 +55,27 @@ bool FullscreenMenuIntro::handle_key(const bool down, const SDL_Keysym) {
 	}
 
 	return false;
+}
+
+void FullscreenMenuIntro::think() {
+	if (SDL_GetTicks() - init_time_ > kAnimStart + kAnimLength) {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+	}
+	FullscreenMenuBase::think();
+}
+
+void FullscreenMenuIntro::draw(RenderTarget& r) {
+	FullscreenMenuBase::draw(r);
+
+	const uint32_t time = SDL_GetTicks();
+	const float opacity = time - init_time_ < kAnimStart ? 0.f :
+	   std::max(0.f, std::min(1.f, static_cast<float>(time - init_time_ - kAnimStart) / kAnimLength));
+
+	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, opacity * 255), BlendMode::Default);
+
+	const Image* img = g_gr->images().get("images/ui_fsmenu/main_title.png");
+	const int w = img->width();
+	const int h = img->height();
+	r.blitrect_scale(Rectf((get_w() - w) / 2.f, get_h() * 3.f / 40.f + h / 4.f, w, h),
+	                 img, Recti(0, 0, w, h), opacity, BlendMode::UseAlpha);
 }
