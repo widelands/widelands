@@ -381,11 +381,16 @@ playsound
       for `sound/farm/scythe`, we can have `sound/farm/scythe_00.ogg`, `sound/farm/scythe_01.ogg`
       ...
 
-   :arg percent priority: The priority to give this sound, in :ref:`map_object_programs_datatypes_percent`. Maximum priority is ``200%``.
+   :arg percent priority: The priority to give this sound,
+      in :ref:`map_object_programs_datatypes_percent`. Maximum priority is ``200%``.
 
-   Trigger a sound effect. Whether the sound effect is actually played is determined by the sound handler.
-   For priorities ``<= 100%``, this is the direct chance to be played, but only if this sound effect is not already playing.
-   For priorities ``> 100%``, ``100`` is subtracted from the chance (so that ``101%-200%`` given corresponds to an actual chance of ``1%-100%``), and the same sound effect can be played at the same time for multiple map objects.
+   Trigger a sound effect. Whether the sound effect is actually played is determined by the
+   sound handler.
+   For priorities ``<= 100%``, this is the direct chance to be played, but only if this sound
+   effect is not already playing.
+   For priorities ``> 100%``, ``100`` is subtracted from the chance (so that ``101%-200%`` given
+   corresponds to an actual chance of ``1%-100%``), and the same sound effect can be played at the
+   same time for multiple map objects.
 
    Example for a worker:
 
