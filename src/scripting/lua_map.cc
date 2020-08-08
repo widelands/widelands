@@ -4680,9 +4680,7 @@ int LuaRoad::set_workers(lua_State* L) {
  ==========================================================
  */
 
-int LuaRoad::create_new_worker(RoadBase& r,
-                               EditorGameBase& egbase,
-                               const WorkerDescr* wdes) {
+int LuaRoad::create_new_worker(RoadBase& r, EditorGameBase& egbase, const WorkerDescr* wdes) {
 	if (r.get_workers().size()) {
 		return -1;  // No space
 	}
