@@ -281,7 +281,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_game_.add(&numpad_diagonalscrolling_);
 
 	// Bind actions
-	language_dropdown_.selected.connect([this]() { update_language_stats(false); });
+	language_dropdown_.selected.connect([this]() { update_language_stats(); });
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
@@ -349,7 +349,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Language options
 	add_languages_to_list(opt.language);
-	update_language_stats(true);
+	update_language_stats();
 	layout();
 }
 
@@ -495,13 +495,13 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
  * @param include_system_lang We only want to include the system lang if it matches the Widelands
  * locale.
  */
-void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
+void FullscreenMenuOptions::update_language_stats() {
 	int percent = 100;
 	std::string message = "";
 	if (language_dropdown_.has_selection()) {
 		std::string locale = language_dropdown_.get_selected();
 		// Empty locale means try system locale
-		if (locale.empty() && include_system_lang) {
+		if (locale.empty()) {
 			std::vector<std::string> parts;
 			boost::split(parts, i18n::get_locale(), boost::is_any_of("."));
 			if (language_entries_.count(parts[0]) == 1) {
