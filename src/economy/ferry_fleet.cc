@@ -354,26 +354,26 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 	}
 	while (!pending_ferry_requests_.empty() && !idle_ferries.empty()) {
 		// The map is sorted by ascending gametime
-		Waterway* ww = pending_ferry_requests_.begin()->second;
+		Waterway& ww = *pending_ferry_requests_.begin()->second;
 
-		Ferry* ferry = nullptr;
-		int32_t shortest_distance = 0;
+		Ferry* ferry = idle_ferries.front();
+		int32_t shortest_distance = std::numeric_limits<int32_t>::max();
 		for (Ferry* temp_ferry : idle_ferries) {
 			// Decide how far this ferry is from the waterway
 			Path path;
 			int32_t f_distance =
-			   game.map().findpath(temp_ferry->get_position(), ww->base_flag().get_position(), 0, path,
+			   game.map().findpath(temp_ferry->get_position(), ww.base_flag().get_position(), 0, path,
 			                       CheckStepFerry(game));
 			if (f_distance < 0) {
 				log("FerryFleet(%u)::act: We have a ferry (%u at %dx%d) "
 				    "that can't reach one of our waterways (%u at %dx%d)!\n",
 				    serial_, temp_ferry->serial(), temp_ferry->get_position().x,
-				    temp_ferry->get_position().y, ww->serial(), ww->base_flag().get_position().x,
-				    ww->base_flag().get_position().y);
+				    temp_ferry->get_position().y, ww.serial(), ww.base_flag().get_position().x,
+				    ww.base_flag().get_position().y);
 				continue;
 			}
 
-			if (!ferry || f_distance < shortest_distance) {
+			if (f_distance < shortest_distance) {
 				ferry = temp_ferry;
 				shortest_distance = f_distance;
 			}
