@@ -545,6 +545,23 @@ void EditBox::draw(RenderTarget& dst) {
 		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 		dst.blit(caretpt, caret_image);
+
+		if (m_->mode == EditBoxImpl::Mode::kSelection) {
+			std::string selected_text;
+			if (m_->selection_start <= m_->selection_end) {
+				size_t nr_characters = m_->selection_end - m_->selection_start;
+				selected_text = m_->text.substr(m_->selection_start, nr_characters);
+			} else {
+				size_t nr_characters = m_->selection_start - m_->selection_end;
+				selected_text = m_->text.substr(m_->selection_end, nr_characters);
+			}
+			std::string text_before_selection = m_->text.substr(0, m_->text.find(selected_text));
+
+			int x_selection_end = text_width(selected_text, *m_->font_style, m_->font_scale);
+			int x_selection_start = text_width(text_before_selection, *m_->font_style, m_->font_scale);
+			dst.brighten_rect(Recti(x_selection_start, point.y, x_selection_end, fontheight),
+			                  BUTTON_EDGE_BRIGHT_FACTOR);
+		}
 	}
 }
 
