@@ -85,6 +85,7 @@ private:
 	std::unique_ptr<EditBoxImpl> m_;
 
 	void check_caret();
+	void reset_selection();
 	std::string text_to_asterisk();
 
 	bool history_active_;

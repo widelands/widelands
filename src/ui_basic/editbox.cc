@@ -75,7 +75,7 @@ struct EditBoxImpl {
 	uint32_t caret;
 
 	/// Position of the caret at text selection end.
-	uint32_t caret_selection_end;
+	uint32_t selection_end;
 
 	/// Initial position of text when selection was started
 	uint32_t selection_start;
@@ -109,7 +109,8 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
 	m_->align = UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
 	m_->caret = 0;
 	m_->mode = EditBoxImpl::Mode::kNormal;
-	m_->caret_selection_end = 0;
+	m_->selection_end = 0;
+	m_->selection_start = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
 	set_max_length(std::numeric_limits<int32_t>::max());
@@ -221,17 +222,28 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return false;
 		case SDLK_c:
+			log("start: %d, end: %d, caret: %d\n", m_->selection_start, m_->selection_end, m_->caret);
 			if ((SDL_GetModState() & KMOD_CTRL) && m_->mode == EditBoxImpl::Mode::kSelection) {
 				std::string clipboardtext;
-				if (m_->selection_start <= m_->caret) {
-					size_t nr_characters = m_->caret - m_->selection_start;
+				if (m_->selection_start <= m_->selection_end) {
+					size_t nr_characters = m_->selection_end - m_->selection_start;
 					clipboardtext = m_->text.substr(m_->selection_start, nr_characters);
 				} else {
-					size_t nr_characters = m_->selection_start - m_->caret;
-					clipboardtext = m_->text.substr(m_->caret, nr_characters);
+					size_t nr_characters = m_->selection_start - m_->selection_end;
+					clipboardtext = m_->text.substr(m_->selection_end, nr_characters);
 				}
 				SDL_SetClipboardText(clipboardtext.c_str());
-				m_->mode = EditBoxImpl::Mode::kNormal;
+				//				m_->mode = EditBoxImpl::Mode::kNormal;
+				log("%s\n", clipboardtext.c_str());
+				return true;
+			}
+			return false;
+
+		case SDLK_a:
+			if ((SDL_GetModState() & KMOD_CTRL)) {
+				m_->selection_start = 0;
+				m_->selection_end = m_->text.size();
+				m_->mode = EditBoxImpl::Mode::kSelection;
 				return true;
 			}
 			return false;
@@ -279,6 +291,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				}
 				m_->text.erase(m_->text.begin() + m_->caret);
 				check_caret();
+				reset_selection();
 				changed();
 			}
 			return true;
@@ -290,6 +303,9 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 						m_->selection_start = m_->caret;
 						m_->mode = EditBoxImpl::Mode::kSelection;
 					}
+					m_->selection_end = m_->caret - 1;
+				} else {
+					reset_selection();
 				}
 
 				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
@@ -313,6 +329,9 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 						m_->selection_start = m_->caret;
 						m_->mode = EditBoxImpl::Mode::kSelection;
 					}
+					m_->selection_end = m_->caret + 1;
+				} else {
+					reset_selection();
 				}
 
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
@@ -333,14 +352,31 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_HOME:
 			if (m_->caret != 0) {
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					if (m_->mode == EditBoxImpl::Mode::kNormal) {
+						m_->mode = EditBoxImpl::Mode::kSelection;
+						m_->selection_start = m_->caret;
+						m_->selection_end = 0;
+					} else {
+						m_->selection_end = 0;
+					}
+				}
 				m_->caret = 0;
-
 				check_caret();
 			}
 			return true;
 
 		case SDLK_END:
 			if (m_->caret != m_->text.size()) {
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					if (m_->mode == EditBoxImpl::Mode::kNormal) {
+						m_->mode = EditBoxImpl::Mode::kSelection;
+						m_->selection_start = m_->caret;
+						m_->selection_end = m_->text.size();
+					} else {
+						m_->selection_end = m_->text.size();
+					}
+				}
 				m_->caret = m_->text.size();
 				check_caret();
 			}
@@ -356,6 +392,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 					m_->text = history_[history_position_];
 					m_->caret = m_->text.size();
 					check_caret();
+					reset_selection();
 				}
 			}
 			return true;
@@ -370,6 +407,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 					m_->text = history_[history_position_];
 					m_->caret = m_->text.size();
 					check_caret();
+					reset_selection();
 				}
 			}
 			return true;
@@ -384,11 +422,10 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 bool EditBox::handle_textinput(const std::string& input_text) {
 	if ((m_->text.size() + input_text.length()) < m_->maxLength) {
-		m_->mode = EditBoxImpl::Mode::kNormal;
 		m_->text.insert(m_->caret, input_text);
 		m_->caret += input_text.length();
 		check_caret();
-		m_->caret_selection_end = m_->caret;
+		reset_selection();
 		changed();
 	}
 	return true;
@@ -496,6 +533,12 @@ void EditBox::draw(RenderTarget& dst) {
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 		dst.blit(caretpt, caret_image);
 	}
+}
+
+void EditBox::reset_selection() {
+	m_->mode = EditBoxImpl::Mode::kNormal;
+	m_->selection_start = m_->caret;
+	m_->selection_end = m_->caret;
 }
 
 /**
