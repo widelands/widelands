@@ -86,7 +86,7 @@ private:
 
 	void check_caret();
 	void reset_selection();
-	void highlight_selection(RenderTarget& dst, const Vector2i& point, const uint16_t fontheight);
+	void highlight_selection(RenderTarget& dst, const Vector2i& point, uint16_t fontheight);
 	std::string text_to_asterisk();
 
 	bool history_active_;

@@ -233,8 +233,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 					clipboardtext = m_->text.substr(m_->selection_end, nr_characters);
 				}
 				SDL_SetClipboardText(clipboardtext.c_str());
-				//				m_->mode = EditBoxImpl::Mode::kNormal;
-				log("%s\n", clipboardtext.c_str());
 				return true;
 			}
 			return false;
