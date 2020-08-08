@@ -132,7 +132,7 @@ void GameSummaryScreen::fill_data() {
 	   game_.player_manager()->get_players_end_status();
 	bool local_in_game = false;
 	bool local_won = false;
-	Widelands::Player* single_won = nullptr;
+	std::string won_name;
 	Widelands::TeamNumber team_won = 0;
 	InteractivePlayer* ipl = game_.get_ipl();
 	// This defines a row to be selected, current player,
@@ -169,8 +169,8 @@ void GameSummaryScreen::fill_data() {
 		case Widelands::PlayerEndResult::kWon:
 			/** TRANSLATORS: This is shown in the game summary for the players who have won. */
 			stat_str = _("Won");
-			if (!single_won) {
-				single_won = p;
+			if (won_name.empty()) {
+				won_name = p->get_name();
 			} else {
 				team_won = p->team_number();
 			}
@@ -198,8 +198,7 @@ void GameSummaryScreen::fill_data() {
 		}
 	} else {
 		if (team_won == 0) {
-			assert(single_won);
-			title_area_->set_text((boost::format(_("%s won!")) % single_won->get_name()).str());
+			title_area_->set_text((boost::format(_("%s won!")) % won_name).str());
 		} else {
 			title_area_->set_text(
 			   (boost::format(_("Team %|1$u| won!")) % static_cast<unsigned int>(team_won)).str());
