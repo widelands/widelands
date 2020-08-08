@@ -68,14 +68,18 @@ void FullscreenMenuIntro::draw(RenderTarget& r) {
 	FullscreenMenuBase::draw(r);
 
 	const uint32_t time = SDL_GetTicks();
-	const float opacity = time - init_time_ < kAnimStart ? 0.f :
-	   std::max(0.f, std::min(1.f, static_cast<float>(time - init_time_ - kAnimStart) / kAnimLength));
+	const float opacity =
+	   time - init_time_ < kAnimStart ?
+	      0.f :
+	      std::max(
+	         0.f, std::min(1.f, static_cast<float>(time - init_time_ - kAnimStart) / kAnimLength));
 
-	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, opacity * 255), BlendMode::Default);
+	r.fill_rect(
+	   Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, opacity * 255), BlendMode::Default);
 
 	const Image* img = g_gr->images().get("images/ui_fsmenu/main_title.png");
 	const int w = img->width();
 	const int h = img->height();
-	r.blitrect_scale(Rectf((get_w() - w) / 2.f, get_h() * 3.f / 40.f + h / 4.f, w, h),
-	                 img, Recti(0, 0, w, h), opacity, BlendMode::UseAlpha);
+	r.blitrect_scale(Rectf((get_w() - w) / 2.f, get_h() * 3.f / 40.f + h / 4.f, w, h), img,
+	                 Recti(0, 0, w, h), opacity, BlendMode::UseAlpha);
 }
