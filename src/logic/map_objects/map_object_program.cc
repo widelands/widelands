@@ -251,7 +251,7 @@ unsigned MapObjectProgram::read_percent_to_int(const std::string& input, uint8_t
 		       match[3].str().size() == 1 ? 10U * std::stoul(match[3]) : std::stoul(match[3]));
 
 		if (result > kMaxProbability * factor) {
-			throw GameDataError("Percentage '%s' greater than %d00%% given", input.c_str(), factor);
+			throw GameDataError("Given percentage of '%s' is greater than the %d00%% allowed", input.c_str(), factor);
 		}
 		return result;
 	}
