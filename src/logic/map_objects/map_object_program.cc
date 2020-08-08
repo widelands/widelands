@@ -251,7 +251,8 @@ unsigned MapObjectProgram::read_percent_to_int(const std::string& input, uint8_t
 		       match[3].str().size() == 1 ? 10U * std::stoul(match[3]) : std::stoul(match[3]));
 
 		if (result > kMaxProbability * factor) {
-			throw GameDataError("Given percentage of '%s' is greater than the %d00%% allowed", input.c_str(), factor);
+			throw GameDataError(
+			   "Given percentage of '%s' is greater than the %d00%% allowed", input.c_str(), factor);
 		}
 		return result;
 	}
@@ -399,17 +400,15 @@ playsound
       harvest = {
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
-         "playsound=sound/farm/scythe priority:95%", -- Almost certainly play a swishy harvesting sound
-         "animate=harvesting duration:10s",
-         "callobject=harvest",
-         "animate=gathering duration:4s",
+         "playsound=sound/farm/scythe priority:95%", -- Almost certainly play a swishy harvesting
+sound "animate=harvesting duration:10s", "callobject=harvest", "animate=gathering duration:4s",
          "createware=wheat",
          "return"
       }
 */
 MapObjectProgram::PlaySoundParameters
 MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments,
-									   const MapObjectDescr& descr) {
+                                       const MapObjectDescr& descr) {
 	if (arguments.size() != 2) {
 		throw GameDataError("Usage: playsound=<sound_dir/sound_name> priority:<percent>");
 	}
@@ -422,12 +421,14 @@ MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments
 	} else if (item.second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this option after v1.0
 		result.priority = (read_positive(arguments.at(1)) * kMaxProbability * 2U) / 256;
-		log("WARNING: Deprecated usage in %s. Please convert playsound's 'priority' option to percentage, like this: "
-			"playsound=<sound_dir/sound_name> priority:<percent>\n",
-			descr.name().c_str());
+		log("WARNING: Deprecated usage in %s. Please convert playsound's 'priority' option to "
+		    "percentage, like this: "
+		    "playsound=<sound_dir/sound_name> priority:<percent>\n",
+		    descr.name().c_str());
 	} else {
-		throw GameDataError("Unknown argument '%s'. Usage: playsound=<sound_dir/sound_name> priority:<percent>",
-							arguments.at(1).c_str());
+		throw GameDataError(
+		   "Unknown argument '%s'. Usage: playsound=<sound_dir/sound_name> priority:<percent>",
+		   arguments.at(1).c_str());
 	}
 
 	if (result.priority < kFxPriorityLowest) {
