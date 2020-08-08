@@ -1135,7 +1135,7 @@ void WLApplication::mainmenu() {
 	std::string messagetitle;
 	std::string message;
 
-	for (bool first_round = true; ; first_round = false) {
+	for (bool first_round = true;; first_round = false) {
 		// Refresh graphics system in case we just changed resolution.
 		refresh_graphics();
 

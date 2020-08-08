@@ -398,7 +398,8 @@ void BaseDropdown::set_list_visibility(bool open) {
 		focus();
 		set_mouse_pos(Vector2i(display_button_.get_x() + (display_button_.get_w() * 3 / 5),
 		                       display_button_.get_y() + (display_button_.get_h() * 2 / 5)));
-		if ((type_ == DropdownType::kPictorialMenu || type_ == DropdownType::kTextualMenu) && !has_selection() && !list_->empty()) {
+		if ((type_ == DropdownType::kPictorialMenu || type_ == DropdownType::kTextualMenu) &&
+		    !has_selection() && !list_->empty()) {
 			select(0);
 		}
 	}
