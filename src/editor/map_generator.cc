@@ -441,7 +441,8 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
                                                   RNG& rng,
                                                   MapGenAreaInfo::Terrain& terrType) {
 	uint32_t numLandAreas = map_gen_info_->get_num_areas(MapGenAreaInfo::Area::kLand);
-	uint32_t const numWasteLandAreas = map_gen_info_->get_num_areas(MapGenAreaInfo::Area::kWasteland);
+	uint32_t const numWasteLandAreas =
+	   map_gen_info_->get_num_areas(MapGenAreaInfo::Area::kWasteland);
 
 	bool isDesert = false;
 	bool isDesertOuter = false;
@@ -486,8 +487,10 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
 		if (numLandAreas == 1) {
 			landAreaIndex = 0;
 		} else if (numLandAreas == 2) {
-			uint32_t const weight1 = map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 0).get_weight();
-			uint32_t const weight2 = map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 1).get_weight();
+			uint32_t const weight1 =
+			   map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 0).get_weight();
+			uint32_t const weight2 =
+			   map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 1).get_weight();
 			uint32_t const sum = map_gen_info_->get_sum_land_weight();
 			if (weight1 * (random2[c0.x + map_info_.w * c0.y] / sum) >=
 			    weight2 * (kAverageElevation / sum)) {
@@ -496,9 +499,12 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
 				landAreaIndex = 1;
 			}
 		} else {
-			uint32_t const weight1 = map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 0).get_weight();
-			uint32_t const weight2 = map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 1).get_weight();
-			uint32_t const weight3 = map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 2).get_weight();
+			uint32_t const weight1 =
+			   map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 0).get_weight();
+			uint32_t const weight2 =
+			   map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 1).get_weight();
+			uint32_t const weight3 =
+			   map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 2).get_weight();
 			uint32_t const sum = map_gen_info_->get_sum_land_weight();
 			uint32_t const randomX = (rand2 + rand3) / 2;
 			if (weight1 * (rand2 / sum) > weight2 * (rand3 / sum) &&
@@ -570,8 +576,9 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
 		usedLandIndex = 0;
 	} else if (isDesert) {
 		atp = MapGenAreaInfo::Area::kWasteland;
-		ttp = ttp == MapGenAreaInfo::Terrain::kLandCoast || isDesertOuter ? MapGenAreaInfo::Terrain::kWastelandOuter :
-		                                                            MapGenAreaInfo::Terrain::kWastelandInner;
+		ttp = ttp == MapGenAreaInfo::Terrain::kLandCoast || isDesertOuter ?
+		         MapGenAreaInfo::Terrain::kWastelandOuter :
+		         MapGenAreaInfo::Terrain::kWastelandInner;
 	}
 
 	// Return terrain type

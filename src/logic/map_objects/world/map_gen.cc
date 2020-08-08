@@ -80,9 +80,7 @@ MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& map_ge
 	do_assign("wasteland_outer_bobs", &wasteland_outer_bob_category_);
 }
 
-MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
-                               const World& world,
-                               Area const area_type) {
+MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table, const World& world, Area const area_type) {
 	weight_ = get_positive_int(table, "weight");
 
 	const auto read_terrains = [&table, &world](
@@ -357,39 +355,44 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 	if (get_num_areas(MapGenAreaInfo::Area::kMountains) > 1) {
 		throw GameDataError("too many mountain areas (>1)");
 	}
-	if (get_area(MapGenAreaInfo::Area::kWater, 0).get_num_terrains(MapGenAreaInfo::Terrain::kWaterOcean) < 1) {
+	if (get_area(MapGenAreaInfo::Area::kWater, 0)
+	       .get_num_terrains(MapGenAreaInfo::Terrain::kWaterOcean) < 1) {
 		throw GameDataError("missing a water/ocean terrain type");
 	}
-	if (get_area(MapGenAreaInfo::Area::kWater, 0).get_num_terrains(MapGenAreaInfo::Terrain::kWaterShelf) < 1) {
+	if (get_area(MapGenAreaInfo::Area::kWater, 0)
+	       .get_num_terrains(MapGenAreaInfo::Terrain::kWaterShelf) < 1) {
 		throw GameDataError("missing a water/shelf terrain type");
 	}
-	if (get_area(MapGenAreaInfo::Area::kWater, 0).get_num_terrains(MapGenAreaInfo::Terrain::kWaterShallow) < 1) {
+	if (get_area(MapGenAreaInfo::Area::kWater, 0)
+	       .get_num_terrains(MapGenAreaInfo::Terrain::kWaterShallow) < 1) {
 		throw GameDataError("is missing a water/shallow terrain type");
 	}
-	if (get_area(MapGenAreaInfo::Area::kLand, 0).get_num_terrains(MapGenAreaInfo::Terrain::kLandCoast) < 1) {
+	if (get_area(MapGenAreaInfo::Area::kLand, 0)
+	       .get_num_terrains(MapGenAreaInfo::Terrain::kLandCoast) < 1) {
 		throw GameDataError("missing a land/coast terrain type");
 	}
-	if (get_area(MapGenAreaInfo::Area::kLand, 0).get_num_terrains(MapGenAreaInfo::Terrain::kLandLand) < 1) {
+	if (get_area(MapGenAreaInfo::Area::kLand, 0)
+	       .get_num_terrains(MapGenAreaInfo::Terrain::kLandLand) < 1) {
 		throw GameDataError("missing a land/land terrain type");
 	}
-	if (get_area(MapGenAreaInfo::Area::kMountains, 0).get_num_terrains(MapGenAreaInfo::Terrain::kMountainsFoot) <
-	    1) {
+	if (get_area(MapGenAreaInfo::Area::kMountains, 0)
+	       .get_num_terrains(MapGenAreaInfo::Terrain::kMountainsFoot) < 1) {
 		throw GameDataError("missing a mountain/foot terrain type");
 	}
 	if (get_area(MapGenAreaInfo::Area::kMountains, 0)
 	       .get_num_terrains(MapGenAreaInfo::Terrain::kMountainsMountain) < 1) {
 		throw GameDataError("missing a monutain/mountain terrain type");
 	}
-	if (get_area(MapGenAreaInfo::Area::kMountains, 0).get_num_terrains(MapGenAreaInfo::Terrain::kMountainsSnow) <
-	    1) {
+	if (get_area(MapGenAreaInfo::Area::kMountains, 0)
+	       .get_num_terrains(MapGenAreaInfo::Terrain::kMountainsSnow) < 1) {
 		throw GameDataError("missing a mountain/snow terrain type");
 	}
-	if (get_area(MapGenAreaInfo::Area::kWasteland, 0).get_num_terrains(MapGenAreaInfo::Terrain::kWastelandInner) <
-	    1) {
+	if (get_area(MapGenAreaInfo::Area::kWasteland, 0)
+	       .get_num_terrains(MapGenAreaInfo::Terrain::kWastelandInner) < 1) {
 		throw GameDataError("missing a land/coast terrain type");
 	}
-	if (get_area(MapGenAreaInfo::Area::kWasteland, 0).get_num_terrains(MapGenAreaInfo::Terrain::kWastelandOuter) <
-	    1) {
+	if (get_area(MapGenAreaInfo::Area::kWasteland, 0)
+	       .get_num_terrains(MapGenAreaInfo::Terrain::kWastelandOuter) < 1) {
 		throw GameDataError("missing a land/land terrain type");
 	}
 }

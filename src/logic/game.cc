@@ -253,7 +253,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
-		bool const result = run(StartGameType::kSinglePlayerScenario, script_to_run, false, "single_player");
+		bool const result =
+		   run(StartGameType::kSinglePlayerScenario, script_to_run, false, "single_player");
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
@@ -523,7 +524,8 @@ bool Game::run(StartGameType const start_game_type,
 		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
 	}
 
-	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario || start_game_type == StartGameType::kSaveGame)) {
+	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
+	                               start_game_type == StartGameType::kSaveGame)) {
 		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
 	}
 
