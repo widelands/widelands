@@ -356,16 +356,6 @@ bool InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coord
 void InteractivePlayer::think() {
 	InteractiveBase::think();
 
-	// Cleanup found port spaces if the ship sailed on or was destroyed
-	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
-		if (!egbase().objects().object_still_available(it->first) ||
-		    it->first->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			expedition_port_spaces_.erase(it);
-			// If another port space also needs removing, we'll take care of it in the next frame
-			return;
-		}
-	}
-
 	if (flag_to_connect_) {
 		Widelands::Field& field = egbase().map()[flag_to_connect_];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
@@ -401,6 +391,16 @@ void InteractivePlayer::think() {
 		}
 		toggle_message_menu_->set_pic(g_gr->images().get(msg_icon));
 		toggle_message_menu_->set_tooltip(msg_tooltip);
+	}
+
+	// Cleanup found port spaces if the ship sailed on or was destroyed
+	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
+		if (!egbase().objects().object_still_available(it->first) ||
+		    it->first->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+			expedition_port_spaces_.erase(it);
+			// If another port space also needs removing, we'll take care of it in the next frame
+			return;
+		}
 	}
 }
 
