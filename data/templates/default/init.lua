@@ -66,7 +66,7 @@ return {
    minimum_font_size = 10,
    minimap_icon_frame = fs_font_color,
 
-   -- These need a fourth color argument for the alpha
+   -- red, green, blue, alpha
    window_border_focused = {220, 220, 250, 40},
    window_border_unfocused = {50, 0, 0, 40},
 
