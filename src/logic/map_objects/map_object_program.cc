@@ -55,7 +55,9 @@ Critters all run the same built-in program, so you don't need to define any prog
 Syntax
 ------
 
-Map object programs are put in a Lua table, like this::
+Map object programs are put in a Lua table, like this:
+
+.. code-block:: lua
 
    programs = {
       default_program = {
@@ -219,6 +221,45 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 	   input.c_str());
 }
 
+/* RST
+
+.. _map_object_programs_datatypes_percent:
+
+Percent
+^^^^^^^
+
+A percent value. Valid unit is:
+
+* ``%`` (percent)
+
+Maximum value is ``100%``. Examples:
+
+* ``25%``
+* ``25.1%``
+* ``25.13%``
+
+*/
+unsigned MapObjectProgram::read_percent_to_int(const std::string& input) {
+	boost::smatch match;
+	boost::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
+	if (boost::regex_search(input, match, re)) {
+		// Convert to range
+		unsigned long result =
+		   100U * std::stoul(match[1]) +
+		   (match[3].str().empty() ?
+		       0U :
+		       match[3].str().size() == 1 ? 10U * std::stoul(match[3]) : std::stoul(match[3]));
+
+		if (result > kMaxProbability) {
+			throw GameDataError("Percentage '%s' greater than 100%% given", input.c_str());
+		}
+		return result;
+	}
+	throw GameDataError(
+	   "Wrong format for percentage '%s'. Must look like '25%%', '25.4%%' or '25.26%%'.",
+	   input.c_str());
+}
+
 MapObjectProgram::ProgramParseInput
 MapObjectProgram::parse_program_string(const std::string& line) {
 	const std::pair<std::string, std::string> key_values =
@@ -269,7 +310,9 @@ animate
       program will wait before continuing on to the next action. If omitted, the program will
       continue to the next step immediately.
 
-   Example for a worker::
+   Example for a worker:
+
+.. code-block:: lua
 
       plantvine = {
          "findspace=size:any radius:1",
