@@ -647,6 +647,13 @@ void MapObject::set_logsink(LogSink* const sink) {
 void MapObject::log_general_info(const EditorGameBase&) const {
 }
 
+const Player& MapObject::owner() const {
+	if (owner_ == nullptr) {
+		throw wexception("Attempted to get null owner reference for player");
+	}
+	return *owner_;
+}
+
 /**
  * Prints a log message prepended by the object's serial number.
  */

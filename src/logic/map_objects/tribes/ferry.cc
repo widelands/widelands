@@ -169,10 +169,10 @@ bool Ferry::unemployed() {
 const Bob::Task Ferry::taskRow = {
    "row", static_cast<Bob::Ptr>(&Ferry::row_update), nullptr, nullptr, true};
 
-void Ferry::start_task_row(Game& game, Waterway* ww) {
+void Ferry::start_task_row(Game& game, const Waterway& ww) {
 	// Our new destination is the middle of the waterway
 	destination_.reset(
-	   new Coords(CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()]));
+	   new Coords(CoordPath(game.map(), ww.get_path()).get_coords()[ww.get_idle_index()]));
 	send_signal(game, "row");
 }
 
@@ -270,7 +270,7 @@ void Ferry::set_destination(Game& game, Waterway* ww) {
 	destination_.reset(nullptr);
 	set_location(nullptr);
 	if (ww) {
-		start_task_row(game, ww);
+		start_task_row(game, *ww);
 	} else {
 		send_signal(game, "cancel");
 	}

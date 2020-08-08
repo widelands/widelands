@@ -51,12 +51,14 @@ program will simply display their main animation indefinitely.
 
 Programs are defined as Lua tables. Each program must be declared as a subtable in the immovable's
 Lua table called ``programs`` and have a unique table key. The entries in a program's subtable are
-the ``actions`` to execute, like this::
+the ``actions`` to execute, like this:
+
+.. code-block:: lua
 
    programs = {
       program = {
          "animate=idle 1550000",
-         "transform=deadtree4 success:5",
+         "transform=deadtree4 chance:5.13%",
          "seed=alder_summer_sapling 180",
       },
       fall = {
@@ -184,31 +186,35 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 
 transform
 ---------
-Replace this immovable with something else or remove it.
 
-Parameter syntax::
+.. function:: transform=[bob:]\<name\> [chance:\<percent\>]
 
-  parameters ::= [bob:]<name> [success:<chance>]
+   :arg string \<name\>: The name of the map object to turn into.
+      If the ``bob:<name>`` flag is given, the transformation target is a bob;
+      otherwise it is an immovable. Currently, only ships are supported as bobs.
 
-Parameter semantics:
+   :arg percent chance: The :ref:`map_object_programs_datatypes_percent` chance that the
+      transformation will be performed. The game will generate a random number and the
+      transformation will be performed if and only if this number is less than ``chance``.
+      If ``chance:<percent>`` is omitted, the transformation will always be performed.
 
-``[bob:]<name>``
-    The name of the immovable to turn into. If the ``bob`` flag is given, the transformation target
-    is a bob; otherwise it is an immovable. Currently, only ships are supported as bobs.
-``success:<chance>``
-    A natural integer in [1,254] defining the chance that the transformation will be performed. The
-    game will generate a random number between 0 and 255 and the program step succeeds if and only
-    if this number is less than ``chance``. Otherwise, the next program step is triggered. If
-    ``success:<chance>`` is omitted, the transformation will always succeed.
+   Deletes this immovable and instantly replaces it with a different immovable or a bob. If
+   ``chance`` is specified, there's a probability that the transformation will be skipped.
+   When the transformation succeeds, no further program steps will be executed, because this object
+   will be gone. Example:
 
-Deletes this immovable and instantly replaces it with a different immovable or a bob. If no
-parameters are given, the immovable is removed and no other transformation will take place. If
-``success`` is specified, there's a probability that the transformation will be skipped.
+.. code-block:: lua
+
+     program = {
+         "animate=idle duration:25m50s",
+         "transform=deadtree3 chance:9.37%",
+         "seed=spruce_summer_sapling 200", -- This line will be skipped if the removal succeeds
+      },
 */
 ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments,
                                              ImmovableDescr& descr) {
 	if (arguments.empty() || arguments.size() > 2) {
-		throw GameDataError("Usage: [bob:]name [success:chance]");
+		throw GameDataError("Usage: [bob:]name [chance:<percent>]");
 	}
 	try {
 		bob_ = false;
@@ -220,11 +226,11 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 				if (item.first == "bob") {
 					bob_ = true;
 					type_name_ = item.second;
-				} else if (item.first == "success") {
-					probability_ = read_positive(item.second, 254);
+				} else if (item.first == "chance") {
+					probability_ = read_percent_to_int(item.second);
 				} else {
 					throw GameDataError(
-					   "Unknown argument '%s'. Usage: [bob:]name [success:chance]", argument.c_str());
+					   "Unknown argument '%s'. Usage: [bob:]name [chance:<percent>]", argument.c_str());
 				}
 			} else if (item.first == "bob") {
 				// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
@@ -233,10 +239,10 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 				    descr.name().c_str());
 			} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 				// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
-				log("WARNING: %s: Deprecated chance in 'transform' program, use 'success:<number>' "
+				log("WARNING: %s: Deprecated chance in 'transform' program, use 'chance:<percent>' "
 				    "instead.\n",
 				    descr.name().c_str());
-				probability_ = read_positive(item.first, 254);
+				probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
 			} else {
 				type_name_ = argument;
 			}
@@ -262,7 +268,7 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 	if (immovable.apply_growth_delay(game)) {
 		return;
 	}
-	if (probability_ == 0 || game.logic_rand() % 256 < probability_) {
+	if (probability_ == 0 || game.logic_rand() % kMaxProbability < probability_) {
 		Player* player = immovable.get_owner();
 		Coords const c = immovable.get_position();
 		MapObjectDescr::OwnerType owner_type = immovable.descr().owner_type();
@@ -347,46 +353,55 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 
 remove
 ------
-Remove this immovable.
 
-Parameter syntax::
+.. function:: remove=[chance:\<percent\>]
 
-  parameters ::= [success:<chance>]
+   :arg percent chance: The :ref:`map_object_programs_datatypes_percent` chance that the immovable
+      will be removed. The game will generate a random number and the immovable will be removed if
+      and only if this number is less than ``chance``. If ``chance:<percent>`` is omitted, the
+      immovable will always be removed.
 
-Parameter semantics:
+   Remove this immovable. If ``chance`` is specified, there's a probability that the removal will be
+   skipped. When the removal succeeds, no further program steps will be executed, because this
+   object will be gone. Examples:
 
-``success:<chance>``
-    A natural integer in [1,254] defining the chance that the immovable will removed. The
-    game will generate a random number between 0 and 255 and the program step succeeds if and only
-    if this number is less than ``chance``. Otherwise, the next program step is triggered. If
-    ``success:<chance>`` is omitted, the immovable will always be removed.
+.. code-block:: lua
+
+      program = {
+         "animate=idle duration:55s",
+         "remove=chance:16.41%",
+         "grow=spruce_summer_pole", -- This line will be skipped if the removal succeeds
+      },
+     fall = {
+         "remove=", -- This object will always be removed when 'fall' is called
+      },
 */
 ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
                                        const ImmovableDescr& descr) {
 	if (arguments.size() > 1) {
-		throw GameDataError("Usage: remove=[success:<chance>]");
+		throw GameDataError("Usage: remove=[chance:<percent>]");
 	}
 	if (arguments.empty()) {
 		probability_ = 0;
 	} else {
 		const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
-		if (item.first == "success") {
-			probability_ = read_positive(item.second, 254);
+		if (item.first == "chance") {
+			probability_ = read_percent_to_int(item.second);
 		} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 			// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
 			log(
-			   "WARNING: %s: Deprecated chance in 'remove' program, use 'success:<number>' instead.\n",
+			   "WARNING: %s: Deprecated chance in 'remove' program, use 'chance:<percent>' instead.\n",
 			   descr.name().c_str());
-			probability_ = read_positive(item.first, 254);
+			probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
 		} else {
 			throw GameDataError(
-			   "Unknown argument '%s'. Usage: [success:chance]", arguments.front().c_str());
+			   "Unknown argument '%s'. Usage: [chance:<percent>]", arguments.front().c_str());
 		}
 	}
 }
 
 void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) const {
-	if (probability_ == 0 || game.logic_rand() % 256 < probability_) {
+	if (probability_ == 0 || game.logic_rand() % kMaxProbability < probability_) {
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 	} else {
 		immovable.program_step(game);
