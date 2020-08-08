@@ -285,6 +285,19 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			FALLS_THROUGH;
 		case SDLK_BACKSPACE:
+			if (m_->mode == EditBoxImpl::Mode::kSelection) {
+				if (m_->selection_start <= m_->selection_end) {
+					size_t nr_characters = m_->selection_end - m_->selection_start;
+					m_->text.erase(m_->selection_start, nr_characters);
+				} else {
+					size_t nr_characters = m_->selection_start - m_->selection_end;
+					m_->text.erase(m_->selection_end, nr_characters);
+				}
+				check_caret();
+				reset_selection();
+				changed();
+				return true;
+			}
 			if (m_->caret > 0) {
 				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
 					m_->text.erase(m_->text.begin() + m_->caret);
