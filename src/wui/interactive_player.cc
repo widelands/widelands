@@ -478,8 +478,10 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			// Draw build help.
 			bool show_port_space = has_expedition_port_space(f->fcoords);
 			if (show_port_space || buildhelp()) {
-				if (const auto* overlay = get_buildhelp_overlay(show_port_space ? f->fcoords.field->maxcaps() : plr.get_buildcaps(f->fcoords))) {
-					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale, f->seeing == Widelands::SeeUnseeNode::kVisible ? 1.f : 0.4f);
+				if (const auto* overlay = get_buildhelp_overlay(
+				       show_port_space ? f->fcoords.field->maxcaps() : plr.get_buildcaps(f->fcoords))) {
+					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale,
+					                   f->seeing == Widelands::SeeUnseeNode::kVisible ? 1.f : 0.4f);
 				}
 			}
 
