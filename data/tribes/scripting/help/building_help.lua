@@ -176,8 +176,30 @@ function building_help_general_string(tribe, building_description)
    local representative_resource = nil
    if (building_description.type_name == "productionsite") then
       representative_resource = building_description.output_ware_types[1]
-      if(not representative_resource) then
+      if not representative_resource then
          representative_resource = building_description.output_worker_types[1]
+      end
+      if not representative_resource then
+          for i, bob in ipairs(building_description.created_bobs) do
+            representative_resource = bob
+            break
+         end
+      end
+      if not representative_resource then
+          for i, immovable in ipairs(building_description.created_immovables) do
+            representative_resource = immovable
+            break
+         end
+      end
+      if not representative_resource then
+          for i, resource in ipairs(building_description.created_resources) do
+            representative_resource = find_resource_indicator(tribe, resource)
+            if representative_resource.max_amount ~= nil then
+               -- We have e.g. an undetectable resource and thus without any resource indicator to show
+               representative_resource = representative_resource:editor_image(1)
+            end
+            break
+         end
       end
    elseif (building_description.type_name == "militarysite" or
        building_description.type_name == "trainingsite") then
@@ -191,7 +213,13 @@ function building_help_general_string(tribe, building_description)
    end
 
    if(representative_resource) then
-      result = result .. li_image(representative_resource.icon_name, building_helptext_purpose())
+      if representative_resource.icon_name ~= nil then
+         result = result .. li_image(representative_resource.icon_name, building_helptext_purpose())
+      elseif representative_resource.name ~= nil then
+         result = result .. li_object(representative_resource.name, building_helptext_purpose())
+      else
+         result = result .. li_image(representative_resource, building_helptext_purpose())
+      end
    else
       result = result .. p(building_helptext_purpose())
    end
@@ -391,7 +419,6 @@ function building_help_dependencies_production(tribe, building_description)
       result =  h3(_"Incoming:") .. result
    end
 
-   -- NOCOM add created icon to purpose text
    -- Collected items
    if #building_description.collected_immovables > 0 or
       #building_description.collected_resources > 0 or
@@ -406,7 +433,6 @@ function building_help_dependencies_production(tribe, building_description)
    end
 
    -- Created items
-
    if #building_description.created_immovables > 0 or
       #building_description.created_resources > 0 or
       #building_description.created_bobs > 0 then
