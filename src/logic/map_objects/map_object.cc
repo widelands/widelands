@@ -162,6 +162,8 @@ ObjectManager::~ObjectManager() {
  * Clear all objects
  */
 void ObjectManager::cleanup(EditorGameBase& egbase) {
+	is_cleaning_up_ = true;
+
 	// If all wares (read: flags) of an economy are gone, but some workers remain,
 	// the economy is destroyed before workers detach. This can cause segfault.
 	// Destruction happens in correct order after this dirty quickie.
@@ -189,6 +191,7 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 	}
 
 	lastserial_ = 0;
+	is_cleaning_up_ = false;
 }
 
 /**

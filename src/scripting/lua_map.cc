@@ -2084,6 +2084,7 @@ const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
 const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[] = {
    PROP_RO(LuaImmovableDescription, species),
    PROP_RO(LuaImmovableDescription, buildcost),
+   PROP_RO(LuaImmovableDescription, becomes),
    PROP_RO(LuaImmovableDescription, editor_category),
    PROP_RO(LuaImmovableDescription, terrain_affinity),
    PROP_RO(LuaImmovableDescription, owner_type),
@@ -2130,6 +2131,23 @@ int LuaImmovableDescription::get_species(lua_State* L) {
 */
 int LuaImmovableDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), MapObjectType::WARE);
+}
+
+/* RST
+   .. attribute:: becomes
+
+         (RO) a table of map object names that this immovable can turn into, e.g.
+         ``{"atlanteans_ship"}`` or ``{"deadtree2", "fallentree"}``.
+*/
+int LuaImmovableDescription::get_becomes(lua_State* L) {
+	lua_newtable(L);
+	int counter = 0;
+	for (const auto& target : get()->becomes()) {
+		lua_pushuint32(L, ++counter);
+		lua_pushstring(L, target.second);
+		lua_settable(L, -3);
+	}
+	return 1;
 }
 
 /* RST
@@ -3155,6 +3173,45 @@ const PropertyType<LuaMarketDescription> LuaMarketDescription::Properties[] = {
  */
 
 /* RST
+ShipDescription
+-----------------
+
+.. class:: ShipDescription
+
+   Child of: :class:`MapObjectDescription`
+
+   A static description of a tribe's ship, so it can be used in help files
+   without having to access an actual instance of the ship on the map.
+   See also :class:`MapObjectDescription` for more properties.
+*/
+const char LuaShipDescription::className[] = "ShipDescription";
+const MethodType<LuaShipDescription> LuaShipDescription::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaShipDescription> LuaShipDescription::Properties[] = {
+   {nullptr, nullptr, nullptr},
+};
+
+void LuaShipDescription::__persist(lua_State* L) {
+	const ShipDescr* descr = get();
+	PERS_STRING("name", descr->name());
+}
+
+void LuaShipDescription::__unpersist(lua_State* L) {
+	std::string name;
+	UNPERS_STRING("name", name)
+	const Tribes& tribes = get_egbase(L).tribes();
+	DescriptionIndex idx = tribes.safe_ship_index(name.c_str());
+	set_description_pointer(tribes.get_ship_descr(idx));
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/* RST
 WareDescription
 ---------------
 
@@ -4097,13 +4154,14 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case MapObjectType::FERRY:
 	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
+	case MapObjectType::SHIP:
+		return CAST_TO_LUA(ShipDescr, LuaShipDescription);
 	case MapObjectType::MAPOBJECT:
 	case MapObjectType::BATTLE:
 	case MapObjectType::BOB:
 	case MapObjectType::CRITTER:
 	case MapObjectType::FERRY_FLEET:
 	case MapObjectType::SHIP_FLEET:
-	case MapObjectType::SHIP:
 	case MapObjectType::FLAG:
 	case MapObjectType::ROAD:
 	case MapObjectType::WATERWAY:
@@ -7084,6 +7142,10 @@ void luaopen_wlmap(lua_State* L) {
 	register_class<LuaMarketDescription>(L, "map", true);
 	add_parent<LuaMarketDescription, LuaBuildingDescription>(L);
 	add_parent<LuaMarketDescription, LuaMapObjectDescription>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaShipDescription>(L, "map", true);
+	add_parent<LuaShipDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaWareDescription>(L, "map", true);
