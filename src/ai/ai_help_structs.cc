@@ -972,7 +972,7 @@ bool SchedulerTask::operator<(const SchedulerTask& other) const {
 void BlockedFields::add(Widelands::Coords coords, uint32_t till) {
 	const uint32_t hash = coords.hash();
 	if (blocked_fields_.count(hash) == 0) {
-		blocked_fields_.insert(std::pair<uint32_t, uint32_t>(hash, till));
+		blocked_fields_.insert(std::make_pair(hash, till));
 	} else if (blocked_fields_[hash] < till) {
 		blocked_fields_[hash] = till;
 	}

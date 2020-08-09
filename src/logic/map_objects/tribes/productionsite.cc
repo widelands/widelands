@@ -61,7 +61,7 @@ void parse_working_positions(const Tribes& tribes,
 			if (!tribes.worker_exists(woi)) {
 				throw wexception("invalid");
 			}
-			working_positions->push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
+			working_positions->push_back(std::make_pair(woi, amount));
 		} catch (const WException& e) {
 			throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 		}

@@ -25,7 +25,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:57s500ms",
-         "remove=success:21",
+         "remove=chance:8.2%",
          "grow=alder_summer_pole",
       },
    },
@@ -52,7 +52,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:52s500ms",
-         "remove=success:19",
+         "remove=chance:7.42%",
          "grow=alder_summer_mature",
       },
    },
@@ -79,7 +79,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:50s",
-         "remove=success:18",
+         "remove=chance:7%",
          "grow=alder_summer_old",
       },
    },
@@ -108,7 +108,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:25m50s",
-         "transform=deadtree4 success:5",
+         "transform=deadtree4 chance:1.95%",
          "seed=alder_summer_sapling 180",
       },
       fall = {

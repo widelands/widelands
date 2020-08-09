@@ -172,7 +172,7 @@ public:
 	void init_newgame(const GameSettings&);
 	void init_savegame(const GameSettings&);
 
-	enum StartGameType { NewSPScenario, NewNonScenario, Loaded, NewMPScenario };
+	enum class StartGameType { kMap, kSinglePlayerScenario, kMultiPlayerScenario, kSaveGame };
 
 	bool run(StartGameType,
 	         const std::string& script_to_run,

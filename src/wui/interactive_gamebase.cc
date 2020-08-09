@@ -65,13 +65,11 @@ constexpr uint16_t kSpeedFast = 10000;
 
 InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                                          Section& global_s,
-                                         PlayerType pt,
                                          bool const multiplayer,
                                          ChatProvider* chat_provider)
    : InteractiveBase(g, global_s),
      chat_provider_(chat_provider),
      multiplayer_(multiplayer),
-     playertype_(pt),
      showhidemenu_(toolbar(),
                    "dropdown_menu_showhide",
                    0,
@@ -504,7 +502,7 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 	if (upcast(InteractivePlayer, iplayer, this)) {
 		player = iplayer->get_player();
 		if (player != nullptr && !player->see_all() &&
-		    (1 >= player->vision(Widelands::Map::get_index(center.node, map.get_width())))) {
+		    (!player->is_seeing(Widelands::Map::get_index(center.node, map.get_width())))) {
 			return set_tooltip("");
 		}
 	}
