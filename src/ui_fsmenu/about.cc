@@ -21,38 +21,49 @@
 
 #include "base/i18n.h"
 
-FullscreenMenuAbout::FullscreenMenuAbout()
-   : FullscreenMenuBase(),
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("About Widelands"),
-            UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
+   : UI::Window(&fsmm, "about", fsmm.get_w() / 4, fsmm.get_h() / 4, fsmm.get_w() / 2, fsmm.get_h() / 2, _("About Widelands")),
+     parent_(fsmm),
      close_(this, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
      tabs_(this, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
 	tabs_.add_tab("txts/README.lua");
 	tabs_.add_tab("txts/LICENSE.lua");
 	tabs_.add_tab("txts/AUTHORS.lua");
 	tabs_.add_tab("txts/TRANSLATORS.lua");
-	close_.sigclicked.connect([this]() { clicked_back(); });
+
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged&) { layout(); });
+
+	close_.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack); });
+
 	layout();
 }
 
-void FullscreenMenuAbout::layout() {
-	// Values for alignment and size
-	butw_ = get_w() / 5;
-	buth_ = get_h() * 9 / 200;
-	hmargin_ = get_w() * 19 / 200;
-	tab_panel_width_ = get_inner_w() - 2 * hmargin_;
-	tab_panel_y_ = get_h() * 14 / 100;
+bool FullscreenMenuAbout::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+		case SDLK_ESCAPE:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+			return true;
+		default:
+			break;
+		}
+	}
+	return UI::Window::handle_key(down, code);
+}
 
-	title_.set_size(get_w(), title_.get_h());
-	title_.set_pos(Vector2i(0, buth_));
-	close_.set_size(butw_, buth_);
-	close_.set_pos(Vector2i(get_w() * 2 / 4 - butw_ / 2, get_inner_h() - hmargin_));
-	tabs_.set_pos(Vector2i(hmargin_, tab_panel_y_));
-	tabs_.set_size(tab_panel_width_, get_inner_h() - tab_panel_y_ - buth_ - hmargin_);
+constexpr int16_t kPadding = 4;
+void FullscreenMenuAbout::layout() {
+	if (!is_minimal()) {
+		set_size(parent_.get_w() / 2, parent_.get_h() / 2);
+
+		close_.set_size(get_inner_w() / 2, get_h() / 20);
+		close_.set_pos(Vector2i(get_inner_w() / 4, get_inner_h() - kPadding - close_.get_h()));
+
+		tabs_.set_size(get_inner_w(), get_inner_h() - close_.get_h() - 2 * kPadding);
+	}
+
+	UI::Window::layout();
 }

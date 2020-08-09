@@ -84,7 +84,7 @@ private:
 
 	std::string filename_for_continue_;
 
-	const Image& main_image_;
+	const Image& splashscreen_;
 	const Image& title_image_;
 
 	uint32_t init_time_;
@@ -93,6 +93,7 @@ private:
 	uint32_t last_image_exchange_time_;
 	size_t draw_image_, last_image_;
 	Rectf image_pos(const Image&);
+	void draw_title(RenderTarget&, float);
 
 	bool visible_;
 	void set_button_visibility(bool);

@@ -16,7 +16,7 @@ wl_library(ui_fsmenu_options
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    ui_fsmenu_base
+    ui_fsmenu_main
     sound
     widelands_ball_of_mud
     widelands_options
@@ -182,5 +182,5 @@ wl_library(ui_fsmenu_misc
   DEPENDS
     base_i18n
     ui_basic
-    ui_fsmenu_base
+    ui_fsmenu_main
 )

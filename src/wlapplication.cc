@@ -1135,16 +1135,16 @@ void WLApplication::mainmenu() {
 	std::string messagetitle;
 	std::string message;
 
-	for (bool first_round = true;; first_round = false) {
+	std::unique_ptr<FullscreenMenuMain> mm(new FullscreenMenuMain(true));
+
+	for (;;) {
 		// Refresh graphics system in case we just changed resolution.
 		refresh_graphics();
-
-		FullscreenMenuMain mm(first_round);
 
 		if (message.size()) {
 			log("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
 
-			UI::WLMessageBox mmb(&mm, messagetitle, richtext_escape(message),
+			UI::WLMessageBox mmb(mm.get(), messagetitle, richtext_escape(message),
 			                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
 
@@ -1152,53 +1152,63 @@ void WLApplication::mainmenu() {
 			messagetitle.clear();
 		}
 
+		bool need_to_reset = false;
+
 		try {
-			switch (mm.run<FullscreenMenuBase::MenuTarget>()) {
+			switch (mm->run<FullscreenMenuBase::MenuTarget>()) {
 			case FullscreenMenuBase::MenuTarget::kTutorial:
+				need_to_reset = true;
 				mainmenu_tutorial();
 				break;
 			case FullscreenMenuBase::MenuTarget::kNewGame:
+				need_to_reset = true;
 				if (new_game()) {
 					return;
 				}
 				break;
 			case FullscreenMenuBase::MenuTarget::kLoadGame:
+				need_to_reset = true;
 				if (load_game()) {
 					return;
 				}
 				break;
 			case FullscreenMenuBase::MenuTarget::kCampaign:
+				need_to_reset = true;
 				if (campaign_game()) {
 					return;
 				}
 				break;
 			case FullscreenMenuBase::MenuTarget::kMetaserver:
-				mainmenu_multiplayer(mm, true);
+				need_to_reset = true;
+				mainmenu_multiplayer(*mm, true);
 				break;
 			case FullscreenMenuBase::MenuTarget::kLan:
-				mainmenu_multiplayer(mm, false);
+				need_to_reset = true;
+				mainmenu_multiplayer(*mm, false);
 				break;
 			case FullscreenMenuBase::MenuTarget::kOnlineGameSettings:
-				mm.show_internet_login();
+				mm->show_internet_login();
 				break;
 			case FullscreenMenuBase::MenuTarget::kReplay:
+				need_to_reset = true;
 				replay();
 				break;
 			case FullscreenMenuBase::MenuTarget::kOptions: {
-				Section& s = get_config_section();
-				OptionsCtrl om(s);
+				OptionsCtrl om(*mm, get_config_section());
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kAbout: {
-				FullscreenMenuAbout ff;
+				FullscreenMenuAbout ff(*mm);
 				ff.run<FullscreenMenuBase::MenuTarget>();
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kContinueLastsave: {
-				load_game(mm.get_filename_for_continue());
+				need_to_reset = true;
+				load_game(mm->get_filename_for_continue());
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kEditor:
+				need_to_reset = true;
 				EditorInteractive::run_editor(filename_, script_to_run_);
 				break;
 			case FullscreenMenuBase::MenuTarget::kExit:
@@ -1231,6 +1241,9 @@ void WLApplication::mainmenu() {
 			             .str();
 		}
 #endif
+		if (need_to_reset) {
+			mm.reset(new FullscreenMenuMain(false));
+		}
 	}
 }
 

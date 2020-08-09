@@ -160,7 +160,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                    .str(),
                 UI::Align::kCenter,
                 g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
-     main_image_(*g_gr->images().get("images/loadscreens/splash.jpg")),
+     splashscreen_(*g_gr->images().get("images/loadscreens/splash.jpg")),
      title_image_(*g_gr->images().get("images/ui_fsmenu/main_title.png")),
      init_time_(kNoSplash),
      last_image_exchange_time_(0),
@@ -418,14 +418,15 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 
 	if (init_time_ == kNoSplash ||
 	    time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		const RGBAColor bg(
-		   0, 0, 0,
-		   150 * (init_time_ == kNoSplash ||
+		const float factor = (init_time_ == kNoSplash ||
 		                time - init_time_ > kInitialFadeoutDelay + 2 * kInitialFadeoutDuration ?
 		             1 :
 		             static_cast<float>(time - init_time_ - kInitialFadeoutDelay -
 		                                kInitialFadeoutDuration) /
-		                kInitialFadeoutDuration));
+		                kInitialFadeoutDuration);
+		const RGBAColor bg(
+		   0, 0, 0,
+		   150 * factor);
 		r.fill_rect(Recti(box_rect_.x - padding_, box_rect_.y - padding_, box_rect_.w + 2 * padding_,
 		                  box_rect_.h + 2 * padding_),
 		            bg, BlendMode::Default);
@@ -435,14 +436,15 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 		r.fill_rect(Recti(version_.get_x() - padding_ / 2, version_.get_y() - padding_ / 2,
 		                  version_.get_w() + padding_, version_.get_h() + padding_),
 		            bg, BlendMode::Default);
+		draw_title(r, factor);
 	}
 
 	if (initial_fadeout_state < 1.f) {
 		do_draw_image(
 		   r,
-		   Rectf((get_w() - main_image_.width()) / 2.f, (get_h() - main_image_.height()) / 2.f,
-		         main_image_.width(), main_image_.height()),
-		   main_image_, 1.f - initial_fadeout_state);
+		   Rectf((get_w() - splashscreen_.width()) / 2.f, (get_h() - splashscreen_.height()) / 2.f,
+		         splashscreen_.width(), splashscreen_.height()),
+		   splashscreen_, 1.f - initial_fadeout_state);
 	}
 }
 
@@ -454,10 +456,9 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 		return;
 	}
 
-	float factor = 0.f;
 	if (init_time_ != kNoSplash &&
 	    time - init_time_ < kInitialFadeoutDelay + 2 * kInitialFadeoutDuration) {
-		factor = 1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay -
+		const float factor = 1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay -
 		                                  kInitialFadeoutDuration) /
 		                  kInitialFadeoutDuration;
 		float opacity = 1.f;
@@ -468,14 +469,17 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 		}
 		const Image& img = *g_gr->images().get(images_[draw_image_]);
 		do_draw_image(r, image_pos(img), img, opacity * factor);
+		draw_title(r, 1.f - factor);
 	}
+}
 
+void FullscreenMenuMain::draw_title(RenderTarget& r, const float opacity) {
 	const float imgh = 1.5f * box_rect_.w * title_image_.height() / title_image_.width();
 	do_draw_image(
 	   r,
 	   Rectf(box_rect_.x + box_rect_.w + (get_w() - box_rect_.x - 2.5f * box_rect_.w) / 2.f,
 	         box_rect_.y - imgh / 3.f, 1.5f * box_rect_.w, imgh),
-	   title_image_, 1.f - factor);
+	   title_image_, opacity);
 }
 
 void FullscreenMenuMain::layout() {
