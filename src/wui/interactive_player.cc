@@ -161,7 +161,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                                      Widelands::PlayerNumber const plyn,
                                      bool const multiplayer,
                                      ChatProvider* chat_provider)
-   : InteractiveGameBase(g, global_s, NONE, multiplayer, chat_provider),
+   : InteractiveGameBase(g, global_s, multiplayer, chat_provider),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()),
      statisticsmenu_(toolbar(),
