@@ -266,7 +266,7 @@ function find_created_collected_matches(creator, collector)
 end
 
 -- NOCOM document + shift up
-function dependencies_collects(tribe, building_description, items)
+function dependencies_collects(tribe, building_description)
    local supported = building_description.supported_by_productionsites
    if #supported > 0 then
       local result = ""
@@ -282,12 +282,22 @@ function dependencies_collects(tribe, building_description, items)
    end
    -- No other productionsites supported
    local result = ""
-   for k,mapobject in ipairs(items) do
-      result = result .. item_image(mapobject)
+   local collected_items = {}
+   for i, bob in ipairs(building_description.collected_bobs) do
+      table.insert(collected_items, bob)
+      result = result .. item_image(bob)
+   end
+   for i, immovable in ipairs(building_description.collected_immovables) do
+      table.insert(collected_items, immovable)
+      result = result .. item_image(immovable)
+   end
+   for i, resource in ipairs(building_description.collected_resources) do
+      table.insert(collected_items, resource)
+      result = result .. item_image(find_resource_indicator(tribe, resource))
    end
    result = result .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
-   result = result .. " " .. items[1].descname
-   for k,mapobject in ipairs({table.unpack(items,2)}) do
+   result = result .. " " .. collected_items[1].descname
+   for k,mapobject in ipairs({table.unpack(collected_items,2)}) do
       --- NOCOM i18n for the ,
       result = result .. ", " .. mapobject.descname
    end
@@ -312,11 +322,21 @@ function dependencies_creates(tribe, building_description, items)
    end
    -- No other productionsites supported
    local result = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
-   for k,mapobject in ipairs(items) do
-      result = result .. item_image(mapobject)
+   local created_items = {}
+   for i, bob in ipairs(building_description.created_bobs) do
+      table.insert(created_items, bob)
+      result = result .. item_image(bob)
    end
-   result = result .. " " .. items[1].descname
-   for k,result in ipairs({table.unpack(items,2)}) do
+   for i, immovable in ipairs(building_description.created_immovables) do
+      table.insert(created_items, immovable)
+      result = result .. item_image(immovable)
+   end
+   for i, resource in ipairs(building_description.created_resources) do
+      table.insert(created_items, resource)
+      result = result .. item_image(find_resource_indicator(tribe, resource))
+   end
+   result = result .. " " .. created_items[1].descname
+   for k,mapobject in ipairs({table.unpack(created_items,2)}) do
       --- NOCOM i18n for the ,
       result = result .. ", " .. mapobject.descname
    end
@@ -324,27 +344,22 @@ function dependencies_creates(tribe, building_description, items)
 end
 
 -- NOCOM document + shift up
-function find_resource_indicators(tribe, collected_resources)
-   local result = {}
-   for i, resource in ipairs(collected_resources) do
-      local resi = nil
-      local am = 0
-      local resource_indicators = tribe.resource_indicators[resource.name]
-      if resource_indicators ~= nil then
-         for amount, name in pairs(tribe.resource_indicators[resource.name]) do
-            if amount > am then
-               resi = name
-               am = amount
-            end
+function find_resource_indicator(tribe, resource)
+   local resi = nil
+   local am = 0
+   local resource_indicators = tribe.resource_indicators[resource.name]
+   if resource_indicators ~= nil then
+      for amount, name in pairs(tribe.resource_indicators[resource.name]) do
+         if amount > am then
+            resi = name
+            am = amount
          end
       end
-      if resi ~= nil then
-         table.insert(result, wl.Game():get_immovable_description(resi))
-      else
-         table.insert(result, resource)
-      end
    end
-   return result
+   if resi ~= nil then
+      return wl.Game():get_immovable_description(resi)
+   end
+   return resource
 end
 
 -- RST
@@ -377,45 +392,25 @@ function building_help_dependencies_production(tribe, building_description)
    end
 
    -- NOCOM add created icon to purpose text
-   -- NOCOM streamline this code
    -- Collected items
-   local collected_items = {}
-   for i, bob in ipairs(building_description.collected_bobs) do
-      table.insert(collected_items, bob)
-   end
-   for i, immovable in ipairs(building_description.collected_immovables) do
-      table.insert(collected_items, immovable)
-   end
-
-   for i, resource in ipairs(find_resource_indicators(tribe, building_description.collected_resources)) do
-      table.insert(collected_items, resource)
-   end
-   if collected_items[1] then
+   if #building_description.collected_immovables > 0 or
+      #building_description.collected_resources > 0 or
+      #building_description.collected_bobs > 0 then
       if (building_description.is_mine) then
          -- TRANSLATORS: This is a verb (The miner mines)
          result = result .. h3(_"Mines:")
       else
-         result = result .. h3(_"Collects from:")
+         result = result .. h3(_"Collects:")
       end
-      result = result ..
-         dependencies_collects(tribe, building_description, collected_items)
+      result = result .. dependencies_collects(tribe, building_description)
    end
 
    -- Created items
-   local created_items = {}
-   for i, bob in ipairs(building_description.created_bobs) do
-         table.insert(created_items, bob)
-   end
-   for i, immovable in ipairs(building_description.created_immovables) do
-      table.insert(created_items, immovable)
-   end
 
-   for i, resource in ipairs(find_resource_indicators(tribe, building_description.created_resources)) do
-      table.insert(created_items, resource)
-   end
-   if created_items[1] then
-      result = result .. h3(_"Creates:")
-      result = result .. dependencies_creates(tribe, building_description, created_items)
+   if #building_description.created_immovables > 0 or
+      #building_description.created_resources > 0 or
+      #building_description.created_bobs > 0 then
+      result = result .. h3(_"Creates:") .. dependencies_creates(tribe, building_description)
    end
 
    -- Produced items
