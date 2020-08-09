@@ -472,12 +472,11 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 	}
 }
 
-void FullscreenMenuMain::draw_title(RenderTarget& r, const float opacity) {
-	const float imgh = 1.5f * box_rect_.w * title_image_.height() / title_image_.width();
+inline void FullscreenMenuMain::draw_title(RenderTarget& r, const float opacity) {
 	do_draw_image(
 	   r,
 	   Rectf(box_rect_.x + box_rect_.w + (get_w() - box_rect_.x - 2.5f * box_rect_.w) / 2.f,
-	         box_rect_.y - imgh / 3.f, 1.5f * box_rect_.w, imgh),
+	         box_rect_.y, 1.5f * box_rect_.w, 1.5f * box_rect_.w * title_image_.height() / title_image_.width()),
 	   title_image_, opacity);
 }
 
