@@ -34,9 +34,188 @@ function dependencies_basic(images, text)
    return p(imgstring .. text)
 end
 
+
+-- RST
+-- .. function:: item_image(mapobject)
+--
+--    Creates Richtext image code for the given map object.
+--
+--    :arg mapobject: the mapobject to represent
+--    :returns: richtext code for displaying the mapobject as an image, preferable using its menu icon
+--
+function item_image(mapobject)
+   local icon = mapobject.icon_name
+   if icon ~= nil and icon ~= "" then
+      return img(icon)
+   end
+   if mapobject.max_amount ~= nil then
+      -- We have e.g. an undetectable resource and are thus without any resource indicator to show
+      return img(mapobject:editor_image(1))
+   end
+   print("WARNING: help item without icon_name: " .. mapobject.name)
+   return img_object(mapobject.name, "width=10")
+end
+
+
+-- RST
+-- .. function:: find_resource_indicator(tribe, resource)
+--
+--    Returns the biggest resource indicator available.
+--
+--    :arg tribe: the tribe to use for getting a tribe-specific indicator
+--    :arg resource: a map resource description
+--    :returns: a resource indicator immovable description
+--
+function find_resource_indicator(tribe, resource)
+   local resi = nil
+   local am = 0
+   local resource_indicators = tribe.resource_indicators[resource.name]
+   if resource_indicators ~= nil then
+      for amount, name in pairs(tribe.resource_indicators[resource.name]) do
+         if amount > am then
+            resi = name
+            am = amount
+         end
+      end
+   end
+   if resi ~= nil then
+      return wl.Game():get_immovable_description(resi)
+   end
+   return resource
+end
+
+
+-- RST
+-- .. function:: find_created_collected_matches(creator, collector)
+--
+--    Returns a table of map objects that link the two given production sites
+--
+--    :arg creator: a productionsite description that creates bobs, immovables and/or resources
+--    :arg collector: a productionsite description that collects bobs, immovables and/or resources
+--    :returns: a list of all bob, immovable and resource descriptions that matches both
+--
+function find_created_collected_matches(creator, collector)
+   local matching_items = {}
+   for i, bob1 in ipairs(collector.collected_bobs) do
+      for j, bob2 in ipairs(creator.created_bobs) do
+         if bob1.name == bob2.name then
+            table.insert(matching_items, bob1)
+         end
+      end
+   end
+   for i, immovable1 in ipairs(collector.collected_immovables) do
+      for i, immovable2 in ipairs(creator.created_immovables) do
+         if immovable1.name == immovable2.name then
+            table.insert(matching_items, immovable1)
+         end
+      end
+   end
+   for i, resource1 in ipairs(collector.collected_resources) do
+      for i, resource2 in ipairs(creator.created_resources) do
+         if resource1.name == resource2.name then
+            table.insert(matching_items, resource1)
+         end
+      end
+   end
+   return matching_items
+end
+
 --  =======================================================
 --  *************** Dependencies functions ****************
 --  =======================================================
+
+-- RST
+-- .. function:: dependencies_collects(tribe, building_description)
+--
+--    Assemble dependency help for a building that collects bobs, immovables and/or resources
+--
+--    :arg tribe: the tribe for which to display this help
+--    :arg building_description: a production site that collects bobs, immovables and/or resources from the map
+--    :returns: a richtext-formatted p()
+--
+function dependencies_collects(tribe, building_description)
+   local supported = building_description.supported_by_productionsites
+   if #supported > 0 then
+      local result = ""
+      for i,productionsite in ipairs(supported) do
+         local row = item_image(productionsite) .. img("images/richtext/arrow-right.png")
+         for k,mapobject in ipairs(find_created_collected_matches(productionsite, building_description)) do
+            row = row .. item_image(mapobject)
+         end
+         row = row .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name) .. " " .. productionsite.descname
+         result = result .. p(row)
+      end
+      return result
+   end
+   -- Not supported by other productionsites
+   local result = ""
+   local collected_items = {}
+   for i, bob in ipairs(building_description.collected_bobs) do
+      table.insert(collected_items, bob)
+      result = result .. item_image(bob)
+   end
+   for i, immovable in ipairs(building_description.collected_immovables) do
+      table.insert(collected_items, immovable)
+      result = result .. item_image(immovable)
+   end
+   for i, resource in ipairs(building_description.collected_resources) do
+      table.insert(collected_items, resource)
+      result = result .. item_image(find_resource_indicator(tribe, resource))
+   end
+   result = result .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
+   result = result .. " " .. collected_items[1].descname
+   for k,mapobject in ipairs({table.unpack(collected_items,2)}) do
+      result = result .. " • " .. mapobject.descname
+   end
+   return p(result)
+end
+
+
+-- RST
+-- .. function:: dependencies_creates(tribe, building_description)
+--
+--    Assemble dependency help for a building that places bobs, immovables and/or resources on the map
+--
+--    :arg tribe: the tribe for which to display this help
+--    :arg building_description: a production site that creates bobs, immovables and/or resources
+--    :returns: a richtext-formatted p()
+--
+function dependencies_creates(tribe, building_description)
+   local supported = building_description.supported_productionsites
+   if #supported > 0 then
+      local result = ""
+      for i,productionsite in ipairs(supported) do
+         local row = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
+         for k,mapobject in ipairs(find_created_collected_matches(building_description, productionsite)) do
+            row = row .. item_image(mapobject)
+         end
+         row = row .. img("images/richtext/arrow-right.png") .. item_image(productionsite) .. " " .. productionsite.descname
+         result = result .. p(row)
+      end
+      return result
+   end
+   -- No other productionsites supported
+   local result = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
+   local created_items = {}
+   for i, bob in ipairs(building_description.created_bobs) do
+      table.insert(created_items, bob)
+      result = result .. item_image(bob)
+   end
+   for i, immovable in ipairs(building_description.created_immovables) do
+      table.insert(created_items, immovable)
+      result = result .. item_image(immovable)
+   end
+   for i, resource in ipairs(building_description.created_resources) do
+      table.insert(created_items, resource)
+      result = result .. item_image(find_resource_indicator(tribe, resource))
+   end
+   result = result .. " " .. created_items[1].descname
+   for k,mapobject in ipairs({table.unpack(created_items,2)}) do
+      result = result .. " • " .. mapobject.descname
+   end
+   return p(result)
+end
+
 
 -- RST
 -- .. function:: dependencies_training_food
@@ -171,8 +350,7 @@ function building_help_general_string(tribe, building_description)
    result = result .. h2(_"General")
    result = result .. h3(_"Purpose:")
 
--- TODO(GunChleoc) "carrier" for headquarters, "ship" for ports, "scout" for scouts_hut, "shipwright" for shipyard?
--- TODO(GunChleoc) use aihints for gamekeeper, forester?
+-- TODO(GunChleoc) "carrier" for headquarters, "ship" for ports, "scout" for scouts_hut,
    local representative_resource = nil
    if (building_description.type_name == "productionsite") then
       representative_resource = building_description.output_ware_types[1]
@@ -202,17 +380,15 @@ function building_help_general_string(tribe, building_description)
          end
       end
    elseif (building_description.type_name == "militarysite" or
-       building_description.type_name == "trainingsite") then
+           building_description.type_name == "trainingsite") then
       representative_resource = wl.Game():get_worker_description(tribe.soldier)
--- TODO(GunChleoc) need a bob_descr for the ship -> port and shipyard
--- TODO(GunChleoc) create descr objects for flag, portdock, ...
    elseif (building_description.is_port or building_description.name == "shipyard") then
       representative_resource = nil
    elseif (building_description.type_name == "warehouse") then
       representative_resource = wl.Game():get_ware_description("log")
    end
 
-   if(representative_resource) then
+   if representative_resource then
       if representative_resource.icon_name ~= nil then
          result = result .. li_image(representative_resource.icon_name, building_helptext_purpose())
       elseif representative_resource.name ~= nil then
@@ -251,143 +427,6 @@ function building_help_general_string(tribe, building_description)
    return result
 end
 
--- NOCOM document + shift up
-function item_image(mapobject)
-   local icon = mapobject.icon_name
-   if icon ~= nil and icon ~= "" then
-      return img(icon)
-   end
-   if mapobject.max_amount ~= nil then
-      -- We have e.g. an undetectable resource and thus without any resource indicator to show
-      return img(mapobject:editor_image(1))
-   end
-   print("WARNING: help item without icon_name: " .. mapobject.name)
-   return img_object(mapobject.name, "width=10")
-end
-
-
--- NOCOM document
-function find_created_collected_matches(creator, collector)
-   local matching_items = {}
-   for i, bob1 in ipairs(collector.collected_bobs) do
-      for j, bob2 in ipairs(creator.created_bobs) do
-         if bob1.name == bob2.name then
-            table.insert(matching_items, bob1)
-         end
-      end
-   end
-   for i, immovable1 in ipairs(collector.collected_immovables) do
-      for i, immovable2 in ipairs(creator.created_immovables) do
-         if immovable1.name == immovable2.name then
-            table.insert(matching_items, immovable1)
-         end
-      end
-   end
-   for i, resource1 in ipairs(collector.collected_resources) do
-      for i, resource2 in ipairs(creator.created_resources) do
-         if resource1.name == resource2.name then
-            table.insert(matching_items, resource1)
-         end
-      end
-   end
-   return matching_items
-end
-
--- NOCOM document + shift up
-function dependencies_collects(tribe, building_description)
-   local supported = building_description.supported_by_productionsites
-   if #supported > 0 then
-      local result = ""
-      for i,productionsite in ipairs(supported) do
-         local row = item_image(productionsite) .. img("images/richtext/arrow-right.png")
-         for k,mapobject in ipairs(find_created_collected_matches(productionsite, building_description)) do
-            row = row .. item_image(mapobject)
-         end
-         row = row .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name) .. " " .. productionsite.descname
-         result = result .. p(row)
-      end
-      return result
-   end
-   -- No other productionsites supported
-   local result = ""
-   local collected_items = {}
-   for i, bob in ipairs(building_description.collected_bobs) do
-      table.insert(collected_items, bob)
-      result = result .. item_image(bob)
-   end
-   for i, immovable in ipairs(building_description.collected_immovables) do
-      table.insert(collected_items, immovable)
-      result = result .. item_image(immovable)
-   end
-   for i, resource in ipairs(building_description.collected_resources) do
-      table.insert(collected_items, resource)
-      result = result .. item_image(find_resource_indicator(tribe, resource))
-   end
-   result = result .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
-   result = result .. " " .. collected_items[1].descname
-   for k,mapobject in ipairs({table.unpack(collected_items,2)}) do
-      result = result .. " • " .. mapobject.descname
-   end
-   return p(result)
-end
-
-
--- NOCOM document + shift up
-function dependencies_creates(tribe, building_description, items)
-   local supported = building_description.supported_productionsites
-   if #supported > 0 then
-      local result = ""
-      for i,productionsite in ipairs(supported) do
-         local row = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
-         for k,mapobject in ipairs(find_created_collected_matches(building_description, productionsite)) do
-            row = row .. item_image(mapobject)
-         end
-         row = row .. img("images/richtext/arrow-right.png") .. item_image(productionsite) .. " " .. productionsite.descname
-         result = result .. p(row)
-      end
-      return result
-   end
-   -- No other productionsites supported
-   local result = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
-   local created_items = {}
-   for i, bob in ipairs(building_description.created_bobs) do
-      table.insert(created_items, bob)
-      result = result .. item_image(bob)
-   end
-   for i, immovable in ipairs(building_description.created_immovables) do
-      table.insert(created_items, immovable)
-      result = result .. item_image(immovable)
-   end
-   for i, resource in ipairs(building_description.created_resources) do
-      table.insert(created_items, resource)
-      result = result .. item_image(find_resource_indicator(tribe, resource))
-   end
-   result = result .. " " .. created_items[1].descname
-   for k,mapobject in ipairs({table.unpack(created_items,2)}) do
-      --- NOCOM i18n for the ,
-      result = result .. " • " .. mapobject.descname
-   end
-   return p(result)
-end
-
--- NOCOM document + shift up
-function find_resource_indicator(tribe, resource)
-   local resi = nil
-   local am = 0
-   local resource_indicators = tribe.resource_indicators[resource.name]
-   if resource_indicators ~= nil then
-      for amount, name in pairs(tribe.resource_indicators[resource.name]) do
-         if amount > am then
-            resi = name
-            am = amount
-         end
-      end
-   end
-   if resi ~= nil then
-      return wl.Game():get_immovable_description(resi)
-   end
-   return resource
-end
 
 -- RST
 -- .. function:: building_help_dependencies_production(tribe, building_description)
