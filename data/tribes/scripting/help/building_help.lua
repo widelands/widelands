@@ -326,8 +326,7 @@ function dependencies_collects(tribe, building_description)
    result = result .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
    result = result .. " " .. collected_items[1].descname
    for k,mapobject in ipairs({table.unpack(collected_items,2)}) do
-      --- NOCOM i18n for the ,
-      result = result .. ", " .. mapobject.descname
+      result = result .. " • " .. mapobject.descname
    end
    return p(result)
 end
@@ -366,7 +365,7 @@ function dependencies_creates(tribe, building_description, items)
    result = result .. " " .. created_items[1].descname
    for k,mapobject in ipairs({table.unpack(created_items,2)}) do
       --- NOCOM i18n for the ,
-      result = result .. ", " .. mapobject.descname
+      result = result .. " • " .. mapobject.descname
    end
    return p(result)
 end
