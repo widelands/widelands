@@ -25,18 +25,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
-    - name: Preparing DLLs
-      run: |
-        # Some tests need a bunch of DLLs to run correctly
-        $Dests = "src\ai\test", "src\economy\test", "src\io\filesystem\test"
-        # Keep this synchronized with the list of DLLs in utils/win32/innosetup/Widelands.iss!
-        $DLLsToCopy = "libopusfile-0.dll", "libopus-0.dll", "libtermcap-0.dll", "libgmodule-2.0-0.dll", "libreadline8.dll", "libicuuc67.dll", "libbz2-1.dll", "libfreetype-6.dll", "libgcc_s_seh-1.dll", "libglbinding.dll", "libglib-2.0-0.dll", "libharfbuzz-0.dll", "libicudt67.dll", "libjpeg-8.dll", "liblzma-5.dll", "libogg-0.dll", "libpng16-16.dll", "libstdc++-6.dll", "libtiff-5.dll", "libvorbis-0.dll", "libvorbisfile-3.dll", "libwebp-7.dll", "libwinpthread-1.dll", "SDL2.dll", "SDL2_image.dll", "SDL2_mixer.dll", "SDL2_ttf.dll", "zlib1.dll", "libFLAC-8.dll", "libfluidsynth-2.dll", "libportaudio-2.dll", "libsndfile-1.dll", "libspeex-1.dll", "libvorbisenc-2.dll", "libmodplug-1.dll", "libmpg123-0.dll", "libintl-8.dll", "libiconv-2.dll", "libgraphite2.dll", "libpcre-1.dll", "libzstd.dll", "libbrotlicommon.dll", "libbrotlidec.dll", "libbrotlienc.dll"
-        foreach ($dest in $Dests) {
-          mkdir $env:GITHUB_WORKSPACE\build\$dest
-          foreach ($dll in $DLLsToCopy) {
-            Copy-Item C:\msys64\mingw64\bin\$dll -Destination $env:GITHUB_WORKSPACE\build\$dest
-          }
-        }
     - name: Compiler
       run: |
         $env:Path = "C:/msys64/mingw64/include;C:/msys64/mingw64/lib;C:/msys64/usr/bin;C:/msys64/mingw64/bin;$env:Path"
