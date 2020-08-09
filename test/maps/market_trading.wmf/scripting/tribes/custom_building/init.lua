@@ -37,17 +37,13 @@ tribes:new_productionsite_type {
       barbarians_custom_worker = 1
    },
 
-   outputs = {
-      "custom_ware"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
          descname = _"felling trees",
          actions = {
             "callworker=harvest",
-            "sleep=20000"
+            "sleep=duration:20s"
          }
       },
    },

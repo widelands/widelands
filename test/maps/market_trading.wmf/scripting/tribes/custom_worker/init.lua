@@ -37,10 +37,10 @@ tribes:new_worker_type {
          "findobject=attrib:tree radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting 255",
-         "animate=hacking 15000",
+         "animate=hacking duration:15s",
          "playsound=sound/woodcutting/tree_falling 130",
          "callobject=fall",
-         "animate=idle 2000",
+         "animate=idle duration:2s",
          "createware=custom_ware",
          "return"
       }
