@@ -106,9 +106,6 @@ private:
 	std::string password_;
 	bool auto_log_;
 	bool register_;
-
-	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
-	   graphic_resolution_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H

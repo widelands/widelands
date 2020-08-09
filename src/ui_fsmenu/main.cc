@@ -279,12 +279,6 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 		continue_lastsave_.set_enabled(false);
 	}
 
-	graphic_resolution_changed_subscriber_ =
-	   Notifications::subscribe<GraphicResolutionChanged>([this](const GraphicResolutionChanged&) {
-		   layout();
-		   last_image_exchange_time_ = 0;
-	   });
-
 	for (const std::string& img : g_fs->list_directory("images/ui_fsmenu/backgrounds")) {
 		images_.push_back(img);
 	}
