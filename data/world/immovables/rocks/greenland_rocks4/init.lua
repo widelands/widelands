@@ -10,6 +10,7 @@ animations = {
 world:new_immovable_type{
    name = "greenland_rocks4",
    descname = _ "Rocks 4",
+   icon = dirname .. "menu.png",
    editor_category = "rocks",
    size = "big",
    attributes = { "rocks" },

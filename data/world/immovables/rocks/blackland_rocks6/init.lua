@@ -10,6 +10,7 @@ animations = {
 world:new_immovable_type{
    name = "blackland_rocks6",
    descname = _ "Rocks 6",
+   icon = dirname .. "menu.png",
    editor_category = "rocks",
    size = "big",
    attributes = { "rocks" },
