@@ -416,15 +416,25 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 		do_draw_image(r, image_pos(img), img, opacity * initial_fadeout_state);
 	}
 
-	if (init_time_ == kNoSplash || time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		const RGBAColor bg(0, 0, 0, 150 * (init_time_ == kNoSplash || time - init_time_ > kInitialFadeoutDelay + 2 * kInitialFadeoutDuration ? 1 :
-				static_cast<float>(time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) / kInitialFadeoutDuration));
-		r.fill_rect(Recti(box_rect_.x - padding_, box_rect_.y - padding_, box_rect_.w + 2 * padding_, box_rect_.h + 2 * padding_),
-			bg, BlendMode::Default);
+	if (init_time_ == kNoSplash ||
+	    time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) {
+		const RGBAColor bg(
+		   0, 0, 0,
+		   150 * (init_time_ == kNoSplash ||
+		                time - init_time_ > kInitialFadeoutDelay + 2 * kInitialFadeoutDuration ?
+		             1 :
+		             static_cast<float>(time - init_time_ - kInitialFadeoutDelay -
+		                                kInitialFadeoutDuration) /
+		                kInitialFadeoutDuration));
+		r.fill_rect(Recti(box_rect_.x - padding_, box_rect_.y - padding_, box_rect_.w + 2 * padding_,
+		                  box_rect_.h + 2 * padding_),
+		            bg, BlendMode::Default);
 		r.fill_rect(Recti(copyright_.get_x() - padding_ / 2, copyright_.get_y() - padding_ / 2,
-				copyright_.get_w() + padding_, copyright_.get_h() + padding_), bg, BlendMode::Default);
+		                  copyright_.get_w() + padding_, copyright_.get_h() + padding_),
+		            bg, BlendMode::Default);
 		r.fill_rect(Recti(version_.get_x() - padding_ / 2, version_.get_y() - padding_ / 2,
-				version_.get_w() + padding_, version_.get_h() + padding_), bg, BlendMode::Default);
+		                  version_.get_w() + padding_, version_.get_h() + padding_),
+		            bg, BlendMode::Default);
 	}
 
 	if (initial_fadeout_state < 1.f) {
@@ -461,8 +471,11 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 	}
 
 	const float imgh = 1.5f * box_rect_.w * title_image_.height() / title_image_.width();
-	do_draw_image(r, Rectf(box_rect_.x + box_rect_.w + (get_w() - box_rect_.x - 2.5f * box_rect_.w) / 2.f,
-			box_rect_.y - imgh / 3.f, 1.5f * box_rect_.w, imgh), title_image_, 1.f - factor);
+	do_draw_image(
+	   r,
+	   Rectf(box_rect_.x + box_rect_.w + (get_w() - box_rect_.x - 2.5f * box_rect_.w) / 2.f,
+	         box_rect_.y - imgh / 3.f, 1.5f * box_rect_.w, imgh),
+	   title_image_, 1.f - factor);
 }
 
 void FullscreenMenuMain::layout() {
