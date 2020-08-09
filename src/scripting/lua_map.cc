@@ -2598,6 +2598,8 @@ const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::P
    PROP_RO(LuaProductionSiteDescription, output_ware_types),
    PROP_RO(LuaProductionSiteDescription, output_worker_types),
    PROP_RO(LuaProductionSiteDescription, production_programs),
+   PROP_RO(LuaProductionSiteDescription, supported_productionsites),
+   PROP_RO(LuaProductionSiteDescription, supported_by_productionsites),
    PROP_RO(LuaProductionSiteDescription, working_positions),
    {nullptr, nullptr, nullptr},
 };
@@ -2784,6 +2786,33 @@ int LuaProductionSiteDescription::get_production_programs(lua_State* L) {
 	for (const auto& program : get()->programs()) {
 		lua_pushint32(L, index++);
 		lua_pushstring(L, program.first);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+// NOCOM document
+int LuaProductionSiteDescription::get_supported_productionsites(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	const Tribes& tribes = get_egbase(L).tribes();
+	for (const auto& site : get()->supported_productionsites()) {
+		lua_pushint32(L, index++);
+		const ProductionSiteDescr* descr = dynamic_cast<const ProductionSiteDescr*>(tribes.get_building_descr(tribes.safe_building_index(site)));
+		to_lua<LuaProductionSiteDescription>(L, new LuaProductionSiteDescription(descr));
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+// NOCOM document
+int LuaProductionSiteDescription::get_supported_by_productionsites(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	const Tribes& tribes = get_egbase(L).tribes();
+	for (const auto& site : get()->supported_by_productionsites()) {
+		lua_pushint32(L, index++);
+		const ProductionSiteDescr* descr = dynamic_cast<const ProductionSiteDescr*>(tribes.get_building_descr(tribes.safe_building_index(site)));
+		to_lua<LuaProductionSiteDescription>(L, new LuaProductionSiteDescription(descr));
 		lua_settable(L, -3);
 	}
 	return 1;

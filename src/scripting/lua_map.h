@@ -387,6 +387,8 @@ public:
 	int get_output_ware_types(lua_State*);
 	int get_output_worker_types(lua_State*);
 	int get_production_programs(lua_State*);
+	int get_supported_productionsites(lua_State*);
+	int get_supported_by_productionsites(lua_State*);
 	int get_working_positions(lua_State*);
 
 	/*

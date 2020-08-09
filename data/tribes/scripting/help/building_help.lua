@@ -237,105 +237,90 @@ function item_image(mapobject)
    return img_object(mapobject.name, "width=10")
 end
 
--- NOCOM document + shift up
--- NOCOM Beekeeper's House needs more accurate design. Maybe Clay Pit too.
-function dependencies_collects(tribe, building_description, items)
-   local has_producers = false
-   local producing_buildings = {}
-   local text = ""
-   local images = ""
-   for k,mapobject in ipairs(items) do
-      images = images .. item_image(mapobject)
-      for i, candidate in ipairs(tribe.buildings) do
-         if producing_buildings[candidate.name] == nil and building_description.name ~= candidate.name then
-            local produced_items = nil
-            if mapobject.type_name == "immovable" then
-               produced_items = candidate.created_immovables
-            elseif mapobject.type_name == "critter" then
-               produced_items = candidate.created_bobs
-            elseif mapobject.type_name ~= "ferry" and mapobject.type_name ~= "ship" then
-               -- Assuming resource type, which does not have a type_name
-               -- TODO(GunChleoc): This does not work if we have resource indicators,
-               -- but we don't have this usecase yet.
-               produced_items = candidate.created_resources
-            end
-            if produced_items ~= nil then
-               for j, produced_item in ipairs(produced_items) do
-                  if produced_item.name == mapobject.name then
-                     producing_buildings[candidate.name] = candidate
-                     has_producers = true
-                     break
-                  end
-               end
-            end
+
+-- NOCOM document
+function find_created_collected_matches(creator, collector)
+   local matching_items = {}
+   for i, bob1 in ipairs(collector.collected_bobs) do
+      for j, bob2 in ipairs(creator.created_bobs) do
+         if bob1.name == bob2.name then
+            table.insert(matching_items, bob1)
          end
       end
    end
-   images = images .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
-   -- Now create a separate row for each producing building
-   local result = ""
-   if has_producers then
-      for name,mapobject in pairs(producing_buildings) do
-         result = result .. p(item_image(mapobject)  .. img("images/richtext/arrow-right.png") .. images .. " " .. mapobject.descname)
+   for i, immovable1 in ipairs(collector.collected_immovables) do
+      for i, immovable2 in ipairs(creator.created_immovables) do
+         if immovable1.name == immovable2.name then
+            table.insert(matching_items, immovable1)
+         end
       end
-   else
-      result = images .. " " .. items[1].descname
-      for k,mapobject in ipairs({table.unpack(items,2)}) do
-         --- NOCOM i18n for the ,
-         result = result .. ", " .. mapobject.descname
-      end
-      result = p(result)
    end
-   return result
+   for i, resource1 in ipairs(collector.collected_resources) do
+      for i, resource2 in ipairs(creator.created_resources) do
+         if resource1.name == resource2.name then
+            table.insert(matching_items, resource1)
+         end
+      end
+   end
+   return matching_items
 end
 
 -- NOCOM document + shift up
-function dependencies_creates(tribe, building_description, items)
-   local has_consumers = false
-   local consuming_buildings = {}
-   local text = ""
-   local images = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
-   for k,mapobject in ipairs(items) do
-      images = images .. item_image(mapobject)
-      for i, candidate in ipairs(tribe.buildings) do
-         if consuming_buildings[candidate.name] == nil and building_description.name ~= candidate.name then
-            local consumed_items = nil
-            if mapobject.type_name == "immovable" then
-               consumed_items = candidate.collected_immovables
-            elseif mapobject.type_name == "critter" then
-               consumed_items = candidate.collected_bobs
-            elseif mapobject.type_name ~= "ferry" and mapobject.type_name ~= "ship" then
-               -- Assuming resource type, which does not have a type_name
-               -- TODO(GunChleoc): This does not work if we have resource indicators,
-               -- but we don't have this usecase yet.
-               consumed_items = candidate.collected_resources
-            end
-            if consumed_items ~= nil then
-               for j, consumed_item in ipairs(consumed_items) do
-                  if consumed_item.name == mapobject.name then
-                     consuming_buildings[candidate.name] = candidate
-                     has_consumers = true
-                     break
-                  end
-               end
-            end
+function dependencies_collects(tribe, building_description, items)
+   local supported = building_description.supported_by_productionsites
+   if #supported > 0 then
+      local result = ""
+      for i,productionsite in ipairs(supported) do
+         local row = item_image(productionsite) .. img("images/richtext/arrow-right.png")
+         for k,mapobject in ipairs(find_created_collected_matches(productionsite, building_description)) do
+            row = row .. item_image(mapobject)
          end
+         row = row .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name) .. " " .. productionsite.descname
+         result = result .. p(row)
       end
+      return result
    end
-   -- Now create a separate row for each consuming building
+   -- No other productionsites supported
    local result = ""
-   if has_consumers then
-      for name,mapobject in pairs(consuming_buildings) do
-         result = result .. p(images .. img("images/richtext/arrow-right.png") .. item_image(mapobject) .. " " .. mapobject.descname)
-      end
-   else
-      result = images
-      for k,mapobject in ipairs(items) do
-         result = result .. " " .. mapobject.descname
-      end
-      result = p(result)
+   for k,mapobject in ipairs(items) do
+      result = result .. item_image(mapobject)
    end
-   return result
+   result = result .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
+   result = result .. " " .. items[1].descname
+   for k,mapobject in ipairs({table.unpack(items,2)}) do
+      --- NOCOM i18n for the ,
+      result = result .. ", " .. mapobject.descname
+   end
+   return p(result)
+end
+
+
+-- NOCOM document + shift up
+function dependencies_creates(tribe, building_description, items)
+   local supported = building_description.supported_productionsites
+   if #supported > 0 then
+      local result = ""
+      for i,productionsite in ipairs(supported) do
+         local row = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
+         for k,mapobject in ipairs(find_created_collected_matches(building_description, productionsite)) do
+            row = row .. item_image(mapobject)
+         end
+         row = row .. img("images/richtext/arrow-right.png") .. item_image(productionsite) .. " " .. productionsite.descname
+         result = result .. p(row)
+      end
+      return result
+   end
+   -- No other productionsites supported
+   local result = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
+   for k,mapobject in ipairs(items) do
+      result = result .. item_image(mapobject)
+   end
+   result = result .. " " .. items[1].descname
+   for k,result in ipairs({table.unpack(items,2)}) do
+      --- NOCOM i18n for the ,
+      result = result .. ", " .. mapobject.descname
+   end
+   return p(result)
 end
 
 -- NOCOM document + shift up
@@ -391,8 +376,8 @@ function building_help_dependencies_production(tribe, building_description)
       result =  h3(_"Incoming:") .. result
    end
 
-   -- NOCOM add building chain for collect/create
    -- NOCOM add created icon to purpose text
+   -- NOCOM streamline this code
    -- Collected items
    local collected_items = {}
    for i, bob in ipairs(building_description.collected_bobs) do
@@ -410,7 +395,7 @@ function building_help_dependencies_production(tribe, building_description)
          -- TRANSLATORS: This is a verb (The miner mines)
          result = result .. h3(_"Mines:")
       else
-         result = result .. h3(_"Collects:")
+         result = result .. h3(_"Collects from:")
       end
       result = result ..
          dependencies_collects(tribe, building_description, collected_items)
