@@ -17,10 +17,10 @@ FIND_VARIABLE_NAMES = re.compile(r"""g_gr->images\(\)\.get\(([0-9a-zA-Z_-]*?)\)"
 base_path = os.getcwd()
 while len(base_path) > 0 and ("build" in base_path or "cmake" in base_path):
     base_path = os.path.dirname(base_path)
-data_path = os.path.join(base_path, "data")
 # Dirty hack to get this working on Travis
-if data_path == '/home/travis/data':
-    data_path = '~/build/widelands/widelands/'
+if data_path == '/home/travis':
+    data_path = '~/build/widelands/widelands'
+data_path = os.path.join(base_path, "data")
 print('Data path:', data_path)
 
 def evaluate_matches(lines, fn):
