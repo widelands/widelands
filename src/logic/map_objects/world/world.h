@@ -91,6 +91,8 @@ public:
 	// Load the graphics for the world. Animations are loaded on
 	// demand.
 	void load_graphics();
+
+	// Validate the world objects
 	void postload();
 
 private:
