@@ -371,6 +371,21 @@ void Tribes::postload() {
 	// Calculate the trainingsites proportions.
 	postload_calculate_trainingsites_proportions();
 
+	// Validate immovable grows/transforms data
+	for (DescriptionIndex i = 0; i < immovables_->size(); ++i) {
+		const ImmovableDescr& imm = immovables_->get(i);
+		for (const auto& target : imm.becomes()) {
+			bool target_exists = immovable_index(target.second) != INVALID_INDEX;
+			if (!target_exists) {
+				target_exists = ship_index(target.second) != INVALID_INDEX;
+			}
+			if (!target_exists) {
+				throw GameDataError("Unknown grow/transform target '%s' for tribe immovable '%s'",
+				                    target.second.c_str(), imm.name().c_str());
+			}
+		}
+	}
+
 	// Some final checks on the gamedata
 	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {
 		TribeDescr* tribe_descr = tribes_->get_mutable(i);
