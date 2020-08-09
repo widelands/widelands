@@ -377,14 +377,15 @@ do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float 
 
 static inline float calc_opacity(const uint32_t time, const uint32_t last_image_exchange_time) {
 	return std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time) /
-				                              kImageExchangeDuration));
+	                                      kImageExchangeDuration));
 }
 
 void FullscreenMenuMain::draw(RenderTarget& r) {
 	FullscreenMenuBase::draw(r);
 	const uint32_t time = SDL_GetTicks();
 
-	if (init_time_ == kNoSplash || time > init_time_ + kInitialFadeoutDelay + kInitialFadeoutDuration) {
+	if (init_time_ == kNoSplash ||
+	    time > init_time_ + kInitialFadeoutDelay + kInitialFadeoutDuration) {
 		set_button_visibility(true);
 	}
 
@@ -398,9 +399,13 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 
 	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 
-	const float initial_fadeout_state = (init_time_ == kNoSplash || time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) ? 1.f :
-				time - init_time_ < kInitialFadeoutDelay ? 0.f :
-				static_cast<float>(time - init_time_ - kInitialFadeoutDelay) / kInitialFadeoutDuration;
+	const float initial_fadeout_state =
+	   (init_time_ == kNoSplash ||
+	    time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) ?
+	      1.f :
+	      time - init_time_ < kInitialFadeoutDelay ?
+	      0.f :
+	      static_cast<float>(time - init_time_ - kInitialFadeoutDelay) / kInitialFadeoutDuration;
 	if (initial_fadeout_state > 0) {
 		float opacity = 1.f;
 		if (time - last_image_exchange_time_ < kImageExchangeDuration) {
@@ -412,22 +417,28 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 		do_draw_image(r, image_pos(img), img, opacity * initial_fadeout_state);
 	}
 	if (initial_fadeout_state < 1) {
-		do_draw_image(r,
+		do_draw_image(
+		   r,
 		   Rectf((get_w() - main_image_.width()) / 2.f, (get_h() - main_image_.height()) / 2.f,
-		         main_image_.width(), main_image_.height()), main_image_, 1.f - initial_fadeout_state);
+		         main_image_.width(), main_image_.height()),
+		   main_image_, 1.f - initial_fadeout_state);
 	}
 }
 
 void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 	const uint32_t time = SDL_GetTicks();
 
-	if (init_time_ != kNoSplash && time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
+	if (init_time_ != kNoSplash &&
+	    time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
 		return;
 	}
 
 	float factor = 0.f;
-	if (init_time_ != kNoSplash && time - init_time_ < kInitialFadeoutDelay + 2 * kInitialFadeoutDuration) {
-		factor = 1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) / kInitialFadeoutDuration;
+	if (init_time_ != kNoSplash &&
+	    time - init_time_ < kInitialFadeoutDelay + 2 * kInitialFadeoutDuration) {
+		factor = 1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay -
+		                                  kInitialFadeoutDuration) /
+		                  kInitialFadeoutDuration;
 		float opacity = 1.f;
 		if (time - last_image_exchange_time_ < kImageExchangeDuration) {
 			const Image& img = *g_gr->images().get(images_[last_image_]);
@@ -438,8 +449,10 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 		do_draw_image(r, image_pos(img), img, opacity * factor);
 	}
 
-	do_draw_image(r, Rectf((get_w() - title_image_.width()) / 2.f, get_h() * 7 / 80,
-		                title_image_.width(), title_image_.height()), title_image_, 1.f - factor);
+	do_draw_image(r,
+	              Rectf((get_w() - title_image_.width()) / 2.f, get_h() * 7 / 80,
+	                    title_image_.width(), title_image_.height()),
+	              title_image_, 1.f - factor);
 }
 
 void FullscreenMenuMain::layout() {

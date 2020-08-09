@@ -89,7 +89,7 @@ private:
 
 	uint32_t init_time_;
 
-	std::vector<std::string> images_/*[2]*/;
+	std::vector<std::string> images_ /*[2]*/;
 	// std::vector<size_t /* image index */> draw_images_[2];
 	// std::vector<size_t /* image index */> last_draw_images_[2];
 	uint32_t last_image_exchange_time_;
