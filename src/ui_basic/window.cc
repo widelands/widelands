@@ -368,6 +368,10 @@ void Window::draw_border(RenderTarget& dst) {
 	const int32_t hz_bar_end = get_w() - kCornerWidth;
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - kHorizontalBorderMiddleLength;
 
+	const RGBAColor& focus_color = get_parent() && get_parent()->focused_child() == this ?
+	                                  g_gr->styles().window_border_focused() :
+	                                  g_gr->styles().window_border_unfocused();
+
 	{  //  Top border.
 		int32_t pos = kCornerWidth;
 
@@ -388,6 +392,9 @@ void Window::draw_border(RenderTarget& dst) {
 		dst.blitrect(
 		   Vector2i(pos, 0), pic_top_,
 		   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kTopBorderThickness));
+
+		// Focus overlay
+		dst.fill_rect(Recti(0, 0, get_w(), kTopBorderThickness), focus_color, BlendMode::Default);
 	}
 
 	// draw the title if we have one
@@ -480,6 +487,20 @@ void Window::draw_border(RenderTarget& dst) {
 			   Vector2i(pos, get_h() - kBottomBorderThickness), pic_bottom_,
 			   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kBottomBorderThickness));
 		}
+
+		// Focus overlays
+		// Bottom
+		dst.fill_rect(Recti(0, get_h() - kBottomBorderThickness, get_w(), kBottomBorderThickness),
+		              focus_color, BlendMode::Default);
+		// Left
+		dst.fill_rect(Recti(0, kTopBorderThickness, kVerticalBorderThickness,
+		                    get_h() - kTopBorderThickness - kBottomBorderThickness),
+		              focus_color, BlendMode::Default);
+		// Right
+		dst.fill_rect(
+		   Recti(get_w() - kVerticalBorderThickness, kTopBorderThickness, kVerticalBorderThickness,
+		         get_h() - kTopBorderThickness - kBottomBorderThickness),
+		   focus_color, BlendMode::Default);
 	}
 
 	// draw them again so they aren't hidden by the border

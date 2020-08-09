@@ -504,7 +504,7 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 	if (upcast(InteractivePlayer, iplayer, this)) {
 		player = iplayer->get_player();
 		if (player != nullptr && !player->see_all() &&
-		    (1 >= player->vision(Widelands::Map::get_index(center.node, map.get_width())))) {
+		    (!player->is_seeing(Widelands::Map::get_index(center.node, map.get_width())))) {
 			return set_tooltip("");
 		}
 	}
