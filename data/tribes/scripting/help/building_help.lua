@@ -249,13 +249,47 @@ function dependencies_collects(items, building_description)
 end
 
 -- NOCOM document + shift up
-function dependencies_creates(items, building_description)
+function dependencies_creates(tribe, building_description, items)
+   local has_consumers = false
+   local consuming_buildings = {}
    local text = ""
    local images = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
-   for k,item in ipairs(items) do
-      images = images .. item_image(item)
+   for k,mapobject in ipairs(items) do
+      images = images .. item_image(mapobject)
+      for i, candidate in ipairs(tribe.buildings) do
+         if consuming_buildings[candidate.name] == nil then
+            local consumed_items = nil
+            if mapobject.type_name == "immovable" then
+               consumed_items = candidate.collected_immovables
+            elseif mapobject.type_name == "critter" then
+               consumed_items = candidate.collected_bobs
+            elseif mapobject.type_name ~= "ferry" and mapobject.type_name ~= "ship" then
+               -- Assuming resource type, which does not have a type_name
+               -- TODO(GunChleoc): This does not work if we have resource indicators,
+               -- but we don't have this usecase yet.
+               consumed_items = candidate.collected_resources
+            end
+            if consumed_items ~= nil then
+               for j, consumed_item in ipairs(consumed_items) do
+                  if consumed_item.name == mapobject.name then
+                     consuming_buildings[candidate.name] = candidate
+                     has_consumers = true
+                     break
+                  end
+               end
+            end
+         end
+      end
    end
-   return p(images)
+   local result = ""
+   if has_consumers then
+      for name,mapobject in pairs(consuming_buildings) do
+         result = result .. p(images .. img("images/richtext/arrow-right.png") .. item_image(mapobject) .. mapobject.descname)
+      end
+   else
+      result = p(images)
+   end
+   return result
 end
 
 -- NOCOM document + shift up
@@ -350,7 +384,7 @@ function building_help_dependencies_production(tribe, building_description)
    end
    if created_items[1] then
       result = result .. h3(_"Creates:")
-      result = result .. dependencies_creates(created_items, building_description)
+      result = result .. dependencies_creates(tribe, building_description, created_items)
    end
 
    -- Produced items
