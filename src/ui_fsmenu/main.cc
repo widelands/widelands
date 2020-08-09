@@ -476,7 +476,8 @@ inline void FullscreenMenuMain::draw_title(RenderTarget& r, const float opacity)
 	do_draw_image(
 	   r,
 	   Rectf(box_rect_.x + box_rect_.w + (get_w() - box_rect_.x - 2.5f * box_rect_.w) / 2.f,
-	         box_rect_.y, 1.5f * box_rect_.w, 1.5f * box_rect_.w * title_image_.height() / title_image_.width()),
+	         box_rect_.y, 1.5f * box_rect_.w,
+	         1.5f * box_rect_.w * title_image_.height() / title_image_.width()),
 	   title_image_, opacity);
 }
 
