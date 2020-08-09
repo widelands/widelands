@@ -224,20 +224,27 @@ function building_help_general_string(tribe, building_description)
 end
 
 -- NOCOM document + shift up
+function item_image(mapobject)
+   local icon = mapobject.icon_name
+   if icon ~= nil and icon ~= "" then
+      return img(icon)
+   end
+   if mapobject.max_amount ~= nil then
+      -- We have e.g. an undetectable resource and thus without any resource indicator to show
+      return img(mapobject:editor_image(1))
+   end
+   print("WARNING: help item without icon_name: " .. mapobject.name)
+   return img_object(mapobject.name, "width=10")
+end
+
+-- NOCOM document + shift up
 function dependencies_collects(items, building_description)
    local text = ""
    local images = ""
    for k,item in ipairs(items) do
-      local icon = item.icon_name
-      if icon ~= nil and icon ~= "" then
-         images = images .. img(icon)
-      else
-         print("WARNING: help item without icon_name: " .. item.name)
-         images = images .. img_object(item.name, "width=10")
-      end
+      images = images .. item_image(item)
    end
    images = images .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
-
    return p(images)
 end
 
@@ -246,13 +253,7 @@ function dependencies_creates(items, building_description)
    local text = ""
    local images = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
    for k,item in ipairs(items) do
-      local icon = item.icon_name
-      if icon ~= nil and icon ~= "" then
-         images = images .. img(icon)
-      else
-         print("WARNING: help item without icon_name: " .. item.name)
-         images = images .. img_object(item.name, "width=10")
-      end
+      images = images .. item_image(item)
    end
    return p(images)
 end
@@ -310,7 +311,6 @@ function building_help_dependencies_production(tribe, building_description)
       result =  h3(_"Incoming:") .. result
    end
 
-   -- NOCOM Decide how to handle lots of trees etc.
    -- NOCOM add building chain for collect/create
    -- NOCOM add created icon to purpose text
    -- Collected items
