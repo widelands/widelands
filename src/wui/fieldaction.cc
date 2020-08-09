@@ -33,6 +33,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/maphollowregion.h"
+#include "logic/mapregion.h"
 #include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -294,7 +295,7 @@ void FieldActionWindow::think() {
 			}
 		}
 	}
-	if (player_ && player_->vision(node_.field - &ibase().egbase().map()[0]) <= 1 &&
+	if (player_ && !player_->is_seeing(node_.field - &ibase().egbase().map()[0]) &&
 	    !player_->see_all()) {
 		die();
 	}
@@ -401,8 +402,8 @@ void FieldActionWindow::add_buttons_auto() {
 		}
 	} else if (player_) {
 		if (upcast(Building, building, map_.get_immovable(node_))) {
-			if (1 < player_->vision(Widelands::Map::get_index(
-			           building->get_position(), ibase().egbase().map().get_width()))) {
+			if (player_->is_seeing(Widelands::Map::get_index(
+			       building->get_position(), ibase().egbase().map().get_width()))) {
 				add_buttons_attack();
 			}
 		}
@@ -895,7 +896,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 		   map, Widelands::Area<Widelands::FCoords>(
 		           node_, workarea_radius + ibase().egbase().tribes().get_largest_workarea()));
 		do {
-			if (player_->vision(map.get_index(mr.location())) > 1) {
+			if (player_->is_seeing(map.get_index(mr.location()))) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {
 					const Widelands::MapObjectType imm_type = imm->descr().type();
 					if (imm_type < Widelands::MapObjectType::BUILDING) {
