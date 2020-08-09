@@ -64,7 +64,7 @@ protected:
 private:
 	void layout() override;
 
-	uint32_t box_x_, box_y_;
+	Recti box_rect_;
 	uint32_t butw_, buth_;
 	uint32_t padding_;
 

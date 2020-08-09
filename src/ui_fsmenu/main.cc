@@ -44,8 +44,7 @@ constexpr uint32_t kNoSplash = std::numeric_limits<uint32_t>::max();
 
 FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
    : FullscreenMenuBase(),
-     box_x_(get_w() * 13 / 40),
-     box_y_(get_h() * 6 / 25),
+     box_rect_(0, 0, 0, 0),
      butw_(get_w() * 7 / 20),
      buth_(get_h() * 9 / 200),
      padding_(buth_ / 3),
@@ -406,7 +405,7 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 	      time - init_time_ < kInitialFadeoutDelay ?
 	      0.f :
 	      static_cast<float>(time - init_time_ - kInitialFadeoutDelay) / kInitialFadeoutDuration;
-	if (initial_fadeout_state > 0) {
+	if (initial_fadeout_state > 0.f) {
 		float opacity = 1.f;
 		if (time - last_image_exchange_time_ < kImageExchangeDuration) {
 			const Image& img = *g_gr->images().get(images_[last_image_]);
@@ -416,7 +415,19 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 		const Image& img = *g_gr->images().get(images_[draw_image_]);
 		do_draw_image(r, image_pos(img), img, opacity * initial_fadeout_state);
 	}
-	if (initial_fadeout_state < 1) {
+
+	if (init_time_ == kNoSplash || time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) {
+		const RGBAColor bg(0, 0, 0, 150 * (init_time_ == kNoSplash || time - init_time_ > kInitialFadeoutDelay + 2 * kInitialFadeoutDuration ? 1 :
+				static_cast<float>(time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) / kInitialFadeoutDuration));
+		r.fill_rect(Recti(box_rect_.x - padding_, box_rect_.y - padding_, box_rect_.w + 2 * padding_, box_rect_.h + 2 * padding_),
+			bg, BlendMode::Default);
+		r.fill_rect(Recti(copyright_.get_x() - padding_ / 2, copyright_.get_y() - padding_ / 2,
+				copyright_.get_w() + padding_, copyright_.get_h() + padding_), bg, BlendMode::Default);
+		r.fill_rect(Recti(version_.get_x() - padding_ / 2, version_.get_y() - padding_ / 2,
+				version_.get_w() + padding_, version_.get_h() + padding_), bg, BlendMode::Default);
+	}
+
+	if (initial_fadeout_state < 1.f) {
 		do_draw_image(
 		   r,
 		   Rectf((get_w() - main_image_.width()) / 2.f, (get_h() - main_image_.height()) / 2.f,
@@ -449,18 +460,16 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 		do_draw_image(r, image_pos(img), img, opacity * factor);
 	}
 
-	do_draw_image(r,
-	              Rectf((get_w() - title_image_.width()) / 2.f, get_h() * 7 / 80,
-	                    title_image_.width(), title_image_.height()),
-	              title_image_, 1.f - factor);
+	const float imgh = 1.5f * box_rect_.w * title_image_.height() / title_image_.width();
+	do_draw_image(r, Rectf(box_rect_.x + box_rect_.w + (get_w() - box_rect_.x - 2.5f * box_rect_.w) / 2.f,
+			box_rect_.y - imgh / 3.f, 1.5f * box_rect_.w, imgh), title_image_, 1.f - factor);
 }
 
 void FullscreenMenuMain::layout() {
-	box_x_ = get_w() * 13 / 40;
-	box_y_ = get_h() * 6 / 25;
-	butw_ = get_w() * 7 / 20;
-	buth_ = get_h() * 9 / 200;
+	butw_ = get_w() / 5;
+	buth_ = get_h() / 25;
 	padding_ = buth_ / 3;
+	box_rect_ = Recti(get_w() / 9, get_h() / 7, butw_, get_h() * 5 / 7);
 
 	version_.set_pos(Vector2i((get_w() - version_.get_w()) / 2, padding_ / 2));
 	copyright_.set_pos(
@@ -476,9 +485,9 @@ void FullscreenMenuMain::layout() {
 	about_.set_desired_size(butw_, buth_);
 	exit_.set_desired_size(butw_, buth_);
 
-	vbox_.set_pos(Vector2i(box_x_, box_y_));
+	vbox_.set_pos(Vector2i(box_rect_.x, box_rect_.y));
 	vbox_.set_inner_spacing(padding_);
-	vbox_.set_size(butw_, get_h() - vbox_.get_y() - 5 * padding_);
+	vbox_.set_size(box_rect_.w, box_rect_.h);
 }
 
 /// called if the user is not registered
