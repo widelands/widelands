@@ -41,6 +41,7 @@
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/maphollowregion.h"
+#include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry.h"

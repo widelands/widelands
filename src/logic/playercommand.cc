@@ -1687,7 +1687,7 @@ void CmdEnemyFlagAction::execute(Game& game) {
 
 		if (const Building* const building = flag->get_building()) {
 			if (player->is_hostile(flag->owner()) &&
-			    1 < player->vision(Map::get_index(building->get_position(), game.map().get_width()))) {
+			    player->is_seeing(Map::get_index(building->get_position(), game.map().get_width()))) {
 				std::vector<Soldier*> result;
 				for (Serial s : soldiers) {
 					if (Soldier* soldier = dynamic_cast<Soldier*>(game.objects().get_object(s))) {
