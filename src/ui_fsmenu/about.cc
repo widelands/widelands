@@ -22,7 +22,13 @@
 #include "base/i18n.h"
 
 FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
-   : UI::Window(&fsmm, "about", fsmm.get_w() / 4, fsmm.get_h() / 4, fsmm.get_w() / 2, fsmm.get_h() / 2, _("About Widelands")),
+   : UI::Window(&fsmm,
+                "about",
+                fsmm.get_w() / 4,
+                fsmm.get_h() / 4,
+                fsmm.get_w() / 2,
+                fsmm.get_h() / 2,
+                _("About Widelands")),
      parent_(fsmm),
      close_(this, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
      tabs_(this, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
@@ -34,7 +40,9 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged&) { layout(); });
 
-	close_.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack); });
+	close_.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	});
 
 	layout();
 }

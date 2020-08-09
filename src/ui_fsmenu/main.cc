@@ -418,15 +418,14 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 
 	if (init_time_ == kNoSplash ||
 	    time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		const float factor = (init_time_ == kNoSplash ||
-		                time - init_time_ > kInitialFadeoutDelay + 2 * kInitialFadeoutDuration ?
-		             1 :
-		             static_cast<float>(time - init_time_ - kInitialFadeoutDelay -
-		                                kInitialFadeoutDuration) /
-		                kInitialFadeoutDuration);
-		const RGBAColor bg(
-		   0, 0, 0,
-		   150 * factor);
+		const float factor =
+		   (init_time_ == kNoSplash ||
+		          time - init_time_ > kInitialFadeoutDelay + 2 * kInitialFadeoutDuration ?
+		       1 :
+		       static_cast<float>(time - init_time_ - kInitialFadeoutDelay -
+		                          kInitialFadeoutDuration) /
+		          kInitialFadeoutDuration);
+		const RGBAColor bg(0, 0, 0, 150 * factor);
 		r.fill_rect(Recti(box_rect_.x - padding_, box_rect_.y - padding_, box_rect_.w + 2 * padding_,
 		                  box_rect_.h + 2 * padding_),
 		            bg, BlendMode::Default);
@@ -459,8 +458,8 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 	if (init_time_ != kNoSplash &&
 	    time - init_time_ < kInitialFadeoutDelay + 2 * kInitialFadeoutDuration) {
 		const float factor = 1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay -
-		                                  kInitialFadeoutDuration) /
-		                  kInitialFadeoutDuration;
+		                                              kInitialFadeoutDuration) /
+		                              kInitialFadeoutDuration;
 		float opacity = 1.f;
 		if (time - last_image_exchange_time_ < kImageExchangeDuration) {
 			const Image& img = *g_gr->images().get(images_[last_image_]);

@@ -69,8 +69,15 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 }  // namespace
 
 constexpr int16_t kPadding = 4;
-FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm, OptionsCtrl::OptionsStruct opt)
-   : UI::Window(&fsmm, "options", fsmm.get_w() / 4, fsmm.get_h() / 4, fsmm.get_w() / 2, fsmm.get_h() / 2, _("Options")),
+FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
+                                             OptionsCtrl::OptionsStruct opt)
+   : UI::Window(&fsmm,
+                "options",
+                fsmm.get_w() / 4,
+                fsmm.get_h() / 4,
+                fsmm.get_w() / 2,
+                fsmm.get_h() / 2,
+                _("Options")),
      parent_(fsmm),
 
      // Buttons
@@ -278,7 +285,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm, OptionsCt
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
-	ok_.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk); });
+	ok_.sigclicked.connect(
+	   [this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk); });
 
 	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));
@@ -371,10 +379,11 @@ void FullscreenMenuOptions::layout() {
 		box_interface_left_.set_desired_size(column_width + kPadding, tabs_.get_inner_h());
 		box_interface_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 		language_dropdown_.set_desired_size(column_width, language_dropdown_.get_h());
-		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth - 3 * kPadding);
+		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
+		                              3 * kPadding);
 		resolution_dropdown_.set_desired_size(column_width, resolution_dropdown_.get_h());
 		resolution_dropdown_.set_height(tabs_.get_h() - resolution_dropdown_.get_y() - buth -
-			                            3 * kPadding);
+		                                3 * kPadding);
 
 		fullscreen_.set_desired_size(column_width, fullscreen_.get_h());
 		inputgrab_.set_desired_size(column_width, inputgrab_.get_h());
@@ -408,7 +417,8 @@ void FullscreenMenuOptions::layout() {
 		single_watchwin_.set_desired_size(tab_panel_width, single_watchwin_.get_h());
 		ctrl_zoom_.set_desired_size(tab_panel_width, ctrl_zoom_.get_h());
 		game_clock_.set_desired_size(tab_panel_width, game_clock_.get_h());
-		numpad_diagonalscrolling_.set_desired_size(tab_panel_width, numpad_diagonalscrolling_.get_h());
+		numpad_diagonalscrolling_.set_desired_size(
+		   tab_panel_width, numpad_diagonalscrolling_.get_h());
 	}
 	UI::Window::layout();
 }
