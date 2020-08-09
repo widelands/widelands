@@ -40,7 +40,7 @@ run(function()
       sleep(100)
    end
    assert_equal(1, ship:get_workers())
-   -- the worker will have dropped the log so it is also shiping now
+   -- the worker will have dropped the log so it is also shipping now
    assert_equal(1, ship:get_wares())
 
    -- start to build a lumberjack on the second port while the required log is still in transit
