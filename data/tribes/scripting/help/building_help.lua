@@ -388,10 +388,10 @@ function building_help_general_string(tribe, building_description)
       representative_resource = wl.Game():get_ware_description("log")
    end
 
-   if representative_resource then
-      if representative_resource.icon_name ~= nil then
+   if representative_resource ~= nil and representative_resource ~= "" then
+      if representative_resource.icon_name ~= nil and representative_resource.icon_name ~= "" then
          result = result .. li_image(representative_resource.icon_name, building_helptext_purpose())
-      elseif representative_resource.name ~= nil then
+      elseif representative_resource.name ~= nil and representative_resource.name ~= ""  then
          result = result .. li_object(representative_resource.name, building_helptext_purpose())
       else
          result = result .. li_image(representative_resource, building_helptext_purpose())
