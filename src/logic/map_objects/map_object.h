@@ -288,10 +288,7 @@ public:
 		return owner_;
 	}
 
-	const Player& owner() const {
-		assert(get_owner());
-		return *owner_;
-	}
+	const Player& owner() const;
 
 	// Header bytes to distinguish between data packages for the different
 	// MapObject classes. Be careful in changing those, since they are written
@@ -429,8 +426,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
 struct ObjectManager {
 	using MapObjectMap = std::unordered_map<Serial, MapObject*>;
 
-	ObjectManager() {
-		lastserial_ = 0;
+	ObjectManager() : lastserial_(0), is_cleaning_up_(false) {
 	}
 	~ObjectManager();
 
@@ -462,9 +458,15 @@ struct ObjectManager {
 	 */
 	std::vector<Serial> all_object_serials_ordered() const;
 
+	bool is_cleaning_up() const {
+		return is_cleaning_up_;
+	}
+
 private:
 	Serial lastserial_;
 	MapObjectMap objects_;
+
+	bool is_cleaning_up_;
 
 	DISALLOW_COPY_AND_ASSIGN(ObjectManager);
 };

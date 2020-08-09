@@ -309,6 +309,9 @@ public:
 	const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {
 		return suggested_teams_;
 	}
+	std::vector<SuggestedTeamLineup>& get_suggested_teams() {
+		return suggested_teams_;
+	}
 
 	PlayerNumber get_nrplayers() const {
 		return nrplayers_;
