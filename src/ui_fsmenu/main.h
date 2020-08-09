@@ -89,12 +89,14 @@ private:
 
 	uint32_t init_time_;
 
-	std::vector<const Image*> images_[2];
-	std::vector<size_t /* image index */> draw_images_[2];
-	std::vector<size_t /* image index */> last_draw_images_[2];
+	std::vector<std::string> images_/*[2]*/;
+	// std::vector<size_t /* image index */> draw_images_[2];
+	// std::vector<size_t /* image index */> last_draw_images_[2];
 	uint32_t last_image_exchange_time_;
-	void exchange_images();
-	float image_width_, image_height_, image_spacing_, image_offset_;
+	// void exchange_images();
+	// float image_width_, image_height_, image_spacing_, image_offset_;
+	size_t draw_image_, last_image_;
+	Rectf image_pos(const Image&);
 
 	bool visible_;
 	void set_button_visibility(bool);

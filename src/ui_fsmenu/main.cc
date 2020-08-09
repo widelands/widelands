@@ -37,8 +37,8 @@
 
 constexpr uint32_t kInitialFadeoutDelay = 2000;
 constexpr uint32_t kInitialFadeoutDuration = 6000;
-constexpr uint32_t kImageExchangeInterval = 5000;
-constexpr uint32_t kImageExchangeDuration = 1000;
+constexpr uint32_t kImageExchangeInterval = 7500;
+constexpr uint32_t kImageExchangeDuration = 2500;
 
 constexpr uint32_t kNoSplash = std::numeric_limits<uint32_t>::max();
 
@@ -165,10 +165,8 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
      title_image_(*g_gr->images().get("images/ui_fsmenu/main_title.png")),
      init_time_(kNoSplash),
      last_image_exchange_time_(0),
-     image_width_(0),
-     image_height_(0),
-     image_spacing_(0),
-     image_offset_(0),
+     draw_image_(0),
+     last_image_(0),
      visible_(true),
      auto_log_(false) {
 	playtutorial_.sigclicked.connect([this]() {
@@ -284,17 +282,12 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	graphic_resolution_changed_subscriber_ =
 	   Notifications::subscribe<GraphicResolutionChanged>([this](const GraphicResolutionChanged&) {
 		   layout();
-		   // recalculate image positions on next frame
 		   last_image_exchange_time_ = 0;
 	   });
 
-	for (const std::string& img : g_fs->list_directory("images/loadscreens/worlds")) {
-		images_[0].push_back(g_gr->images().get(img));
+	for (const std::string& img : g_fs->list_directory("images/ui_fsmenu/backgrounds")) {
+		images_.push_back(img);
 	}
-	for (const std::string& img : g_fs->list_directory("images/loadscreens/scenes")) {
-		images_[1].push_back(g_gr->images().get(img));
-	}
-	exchange_images();
 
 	if (first_ever_init) {
 		init_time_ = SDL_GetTicks();
@@ -367,56 +360,19 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 	return false;
 }
 
-void FullscreenMenuMain::exchange_images() {
-	last_image_exchange_time_ = SDL_GetTicks();
-
-	last_draw_images_[0] = draw_images_[0];
-	last_draw_images_[1] = draw_images_[1];
-
-	if (images_[0].empty() || images_[1].empty()) {
-		// No beautiful images available :(
-		draw_images_[0].clear();
-		draw_images_[1].clear();
-		return;
+// Position the image at the screen center, as large as possible without upscaling
+Rectf FullscreenMenuMain::image_pos(const Image& i) {
+	const float w = i.width();
+	const float h = i.height();
+	if (w < get_w() || h < get_h()) {
+		return Rectf((get_w() - w) / 2.f, (get_h() - h) / 2.f, w, h);
 	}
-
-	// Decide how many images we can draw
-	image_width_ = box_x_ * 3 / 5;
-	image_height_ = image_width_ * 9 / 16;  // assuming 16:9 images
-	image_spacing_ = image_height_ * 2 / 3;
-	const size_t nr_images = get_h() / (image_height_ + image_spacing_);
-	image_offset_ = (get_h() - image_height_ * nr_images - image_spacing_ * (nr_images - 1)) / 2;
-
-	for (uint8_t i = 0; i < 2; ++i) {
-		draw_images_[i].resize(nr_images);
-		// This is for the case that we can draw more images than we have
-		size_t multiplier = nr_images / images_[i].size();
-		if (multiplier * images_[i].size() < nr_images) {
-			++multiplier;
-		}
-		std::multiset<size_t> serials;
-		for (; multiplier; --multiplier) {
-			for (size_t j = images_[i].size(); j; --j) {
-				serials.insert(j - 1);
-			}
-		}
-		assert(serials.size() >= nr_images);
-
-		// Now decide which ones to draw
-		for (size_t j = 0; j < nr_images; ++j) {
-			const size_t index = std::rand() % serials.size();  // NOLINT
-			auto it = serials.begin();
-			std::advance(it, index);
-			draw_images_[i][j] = *it;
-			serials.erase(it);
-		}
-
-		size_t last = last_draw_images_[i].size();
-		last_draw_images_[i].resize(nr_images);
-		for (; last < nr_images; ++last) {
-			last_draw_images_[i][last] = std::rand() % images_[i].size();  // NOLINT
-		}
+	const float new_h = h * get_w() / w;
+	if (new_h < get_h()) {
+		const float new_w = w * get_h() / h;
+		return Rectf((get_w() - new_w) / 2.f, 0, new_w, get_h());
 	}
+	return Rectf(0, (get_h() - new_h) / 2.f, get_w(), new_h);
 }
 
 static inline void
@@ -425,57 +381,71 @@ do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float 
 	   dest, &img, Recti(0, 0, img.width(), img.height()), opacity, BlendMode::UseAlpha);
 }
 
-void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
-	const uint32_t time = SDL_GetTicks();
-	if (init_time_ == kNoSplash || time > init_time_ + kInitialFadeoutDelay) {
-		set_button_visibility(true);
-	}
-	if (init_time_ != kNoSplash &&
-	    time < init_time_ + kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		do_draw_image(
-		   r,
-		   Rectf((get_w() - main_image_.width()) / 2.f, (get_h() - main_image_.height()) / 2.f,
-		         main_image_.width(), main_image_.height()),
-		   main_image_,
-		   time < init_time_ + kInitialFadeoutDelay ?
-		      1.f :
-		      1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
-		               kInitialFadeoutDuration);
-	}
+static inline float calc_opacity(const uint32_t time, const uint32_t last_image_exchange_time) {
+	return std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time) /
+				                              kImageExchangeDuration));
 }
 
 void FullscreenMenuMain::draw(RenderTarget& r) {
 	FullscreenMenuBase::draw(r);
-
-	if (visible_) {
-		do_draw_image(r,
-		              Rectf((get_w() - title_image_.width()) / 2.f, get_h() * 7 / 80,
-		                    title_image_.width(), title_image_.height()),
-		              title_image_, 1.f);
-	}
-
 	const uint32_t time = SDL_GetTicks();
-	if (time - last_image_exchange_time_ > kImageExchangeInterval) {
-		exchange_images();
+
+	if (init_time_ == kNoSplash || time > init_time_ + kInitialFadeoutDelay + kInitialFadeoutDuration) {
+		set_button_visibility(true);
 	}
 
-	float x = (box_x_ - image_width_) / 2.f;
-	for (uint8_t j = 0; j < 2; ++j) {
-		const size_t nr = draw_images_[j].size();
-		for (size_t i = 0; i < nr; ++i) {
-			float opacity = 1.f;
-			Rectf rect(
-			   x, image_offset_ + i * (image_height_ + image_spacing_), image_width_, image_height_);
-			if (time - last_image_exchange_time_ < kImageExchangeDuration) {
-				opacity =
-				   std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
-				                                  kImageExchangeDuration));
-				do_draw_image(r, rect, *images_[j][last_draw_images_[j][i]], 1.f - opacity);
-			}
-			do_draw_image(r, rect, *images_[j][draw_images_[j][i]], opacity);
-		}
-		x = get_w() - x - image_width_;
+	if (time - last_image_exchange_time_ > kImageExchangeInterval) {
+		last_image_ = draw_image_;
+		do {
+			draw_image_ = std::rand() % images_.size();
+		} while (draw_image_ == last_image_);
+		last_image_exchange_time_ = time;
 	}
+
+	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
+
+	const float initial_fadeout_state = (init_time_ == kNoSplash || time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) ? 1.f :
+				time - init_time_ < kInitialFadeoutDelay ? 0.f :
+				static_cast<float>(time - init_time_ - kInitialFadeoutDelay) / kInitialFadeoutDuration;
+	if (initial_fadeout_state > 0) {
+		float opacity = 1.f;
+		if (time - last_image_exchange_time_ < kImageExchangeDuration) {
+			const Image& img = *g_gr->images().get(images_[last_image_]);
+			opacity = calc_opacity(time, last_image_exchange_time_);
+			do_draw_image(r, image_pos(img), img, (1.f - opacity) * initial_fadeout_state);
+		}
+		const Image& img = *g_gr->images().get(images_[draw_image_]);
+		do_draw_image(r, image_pos(img), img, opacity * initial_fadeout_state);
+	}
+	if (initial_fadeout_state < 1) {
+		do_draw_image(r,
+		   Rectf((get_w() - main_image_.width()) / 2.f, (get_h() - main_image_.height()) / 2.f,
+		         main_image_.width(), main_image_.height()), main_image_, 1.f - initial_fadeout_state);
+	}
+}
+
+void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
+	const uint32_t time = SDL_GetTicks();
+
+	if (init_time_ != kNoSplash && time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
+		return;
+	}
+
+	float factor = 0.f;
+	if (init_time_ != kNoSplash && time - init_time_ < kInitialFadeoutDelay + 2 * kInitialFadeoutDuration) {
+		factor = 1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) / kInitialFadeoutDuration;
+		float opacity = 1.f;
+		if (time - last_image_exchange_time_ < kImageExchangeDuration) {
+			const Image& img = *g_gr->images().get(images_[last_image_]);
+			opacity = calc_opacity(time, last_image_exchange_time_);
+			do_draw_image(r, image_pos(img), img, (1.f - opacity) * factor);
+		}
+		const Image& img = *g_gr->images().get(images_[draw_image_]);
+		do_draw_image(r, image_pos(img), img, opacity * factor);
+	}
+
+	do_draw_image(r, Rectf((get_w() - title_image_.width()) / 2.f, get_h() * 7 / 80,
+		                title_image_.width(), title_image_.height()), title_image_, 1.f - factor);
 }
 
 void FullscreenMenuMain::layout() {
