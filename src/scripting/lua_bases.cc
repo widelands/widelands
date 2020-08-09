@@ -83,7 +83,9 @@ EditorGameBase
 const char LuaEditorGameBase::className[] = "EditorGameBase";
 const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
    METHOD(LuaEditorGameBase, get_immovable_description),
+   METHOD(LuaEditorGameBase, tribe_immovable_exists),
    METHOD(LuaEditorGameBase, get_building_description),
+   METHOD(LuaEditorGameBase, get_ship_description),
    METHOD(LuaEditorGameBase, get_tribe_description),
    METHOD(LuaEditorGameBase, get_ware_description),
    METHOD(LuaEditorGameBase, get_worker_description),
@@ -191,6 +193,24 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 }
 
 /* RST
+   .. function:: tribe_immovable_exists(immovable_name)
+
+      :arg immovable_name: the name of the tribe immovable
+
+      Returns whether the tribes know about an ImmovableDescription for the named object.
+
+      (RO) ``true`` if the named tribe immovable exists, ``false`` otherwise.
+*/
+int LuaEditorGameBase::tribe_immovable_exists(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string immovable_name = luaL_checkstring(L, 2);
+	lua_pushboolean(L, get_egbase(L).tribes().immovable_index(immovable_name) != INVALID_INDEX);
+	return 1;
+}
+
+/* RST
    .. function:: get_building_description(building_description.name)
 
       :arg building_name: the name of the building
@@ -214,6 +234,29 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, building_description);
 }
 
+/* RST
+   .. function:: get_ship_description(ship_description.name)
+
+      :arg ship_name: the name of the ship
+
+      Returns the description for the given ship.
+
+      (RO) The :class:`~wl.Game.Ship_description`.
+*/
+int LuaEditorGameBase::get_ship_description(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const Tribes& tribes = get_egbase(L).tribes();
+	const std::string ship_name = luaL_checkstring(L, 2);
+	const DescriptionIndex ship_index = tribes.ship_index(ship_name);
+	if (!tribes.ship_exists(ship_index)) {
+		report_error(L, "Ship %s does not exist", ship_name.c_str());
+	}
+	const ShipDescr* ship_description = tribes.get_ship_descr(ship_index);
+
+	return LuaMaps::upcasted_map_object_descr_to_lua(L, ship_description);
+}
 /* RST
    .. function:: get_tribe_description(tribe_name)
 

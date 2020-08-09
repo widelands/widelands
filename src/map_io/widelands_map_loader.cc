@@ -34,7 +34,6 @@
 #include "map_io/map_building_packet.h"
 #include "map_io/map_buildingdata_packet.h"
 #include "map_io/map_elemental_packet.h"
-#include "map_io/map_exploration_packet.h"
 #include "map_io/map_flag_packet.h"
 #include "map_io/map_flagdata_packet.h"
 #include "map_io/map_heights_packet.h"
@@ -130,7 +129,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	// PRELOAD DATA BEGIN
 	auto set_progress_message = [is_editor](std::string text, unsigned step) {
 		Notifications::publish(UI::NoteLoadingMessage(
-		   (boost::format(_("Loading map: %1$s (%2$u/%3$d)")) % text % step % (is_editor ? 9 : 24))
+		   (boost::format(_("Loading map: %1$s (%2$u/%3$d)")) % text % step % (is_editor ? 9 : 23))
 		      .str()));
 	};
 
@@ -248,20 +247,12 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
-		set_progress_message(_("Exploration"), 10);
-		log("Reading Exploration Data ... ");
-		{
-			MapExplorationPacket p;
-			p.read(*fs_, egbase, is_game, *mol_);
-		}
-		log("took %ums\n ", timer.ms_since_last_query());
-
 		//  !!!!!!!!!! NOTE
 		//  This packet must be before any building or road packet. So do not change
 		//  this order without knowing what you do
 		//  EXISTENT PACKETS
 		log("Reading Flag Data ... ");
-		set_progress_message(_("Flags"), 11);
+		set_progress_message(_("Flags"), 10);
 		{
 			MapFlagPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
@@ -269,7 +260,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Road Data ... ");
-		set_progress_message(_("Roads and waterways"), 12);
+		set_progress_message(_("Roads and waterways"), 11);
 		{
 			MapRoadPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
@@ -284,7 +275,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Building Data ... ");
-		set_progress_message(_("Buildings"), 13);
+		set_progress_message(_("Buildings"), 12);
 		{
 			MapBuildingPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
@@ -293,7 +284,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 		//  DATA PACKETS
 		log("Reading Flagdata Data ... ");
-		set_progress_message(_("Initializing flags"), 14);
+		set_progress_message(_("Initializing flags"), 13);
 		{
 			MapFlagdataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
@@ -301,7 +292,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Roaddata Data ... ");
-		set_progress_message(_("Initializing roads and waterways"), 15);
+		set_progress_message(_("Initializing roads and waterways"), 14);
 		{
 			MapRoaddataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
@@ -316,7 +307,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Buildingdata Data ... ");
-		set_progress_message(_("Initializing buildings"), 16);
+		set_progress_message(_("Initializing buildings"), 15);
 		{
 			MapBuildingdataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
@@ -324,7 +315,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Second and third phase loading Map Objects ... ");
-		set_progress_message(_("Initializing map objects"), 17);
+		set_progress_message(_("Initializing map objects"), 16);
 		mapobjects.load_finish();
 		{
 			const Field& fields_end = map()[map().max_index()];
@@ -345,10 +336,10 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		//  NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
 		//  Must be loaded after every kind of object that can see.
 		log("Reading Players View Data ... ");
-		set_progress_message(_("Vision"), 18);
+		set_progress_message(_("Vision"), 17);
 		{
 			MapPlayersViewPacket p;
-			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table, *world_lookup_table);
+			p.read(*fs_, egbase);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
@@ -356,7 +347,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		//    * command queue (PlayerMessageCommand, inherited by
 		//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
 		log("Reading Player Message Data ... ");
-		set_progress_message(_("Messages"), 19);
+		set_progress_message(_("Messages"), 18);
 		{
 			MapPlayersMessagesPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
@@ -365,7 +356,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 		// Map data used by win conditions.
 		log("Reading Wincondition Data ... ");
-		set_progress_message(_("Win condition"), 20);
+		set_progress_message(_("Win condition"), 19);
 		{
 			MapWinconditionPacket p;
 			p.read(*fs_, *egbase.mutable_map());
@@ -376,7 +367,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		// defined through Lua scripting. They are also not required for a game,
 		// since they will be only be set after it has started.
 		log("Reading Objective Data ... ");
-		set_progress_message(_("Objectives"), 21);
+		set_progress_message(_("Objectives"), 20);
 		if (!is_game) {
 			read_objective_data(*fs_, egbase);
 		}
@@ -384,7 +375,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	}
 
 	log("Reading Scripting Data ... ");
-	set_progress_message(_("Scripting"), is_editor ? 7 : 22);
+	set_progress_message(_("Scripting"), is_editor ? 7 : 21);
 	{
 		MapScriptingPacket p;
 		p.read(*fs_, egbase, is_game, *mol_);
@@ -392,11 +383,11 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading map images ... ");
-	set_progress_message(_("Images"), is_editor ? 8 : 23);
+	set_progress_message(_("Images"), is_editor ? 8 : 22);
 	load_map_images(*fs_);
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	set_progress_message(_("Checking map"), is_editor ? 9 : 24);
+	set_progress_message(_("Checking map"), is_editor ? 9 : 23);
 	if (!is_editor) {
 		if (mol_->get_nr_unloaded_objects()) {
 			log("WARNING: There are %i unloaded objects. This is a bug, please "

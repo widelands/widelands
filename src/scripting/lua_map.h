@@ -248,6 +248,7 @@ public:
 	 */
 	int get_species(lua_State*);
 	int get_buildcost(lua_State*);
+	int get_becomes(lua_State*);
 	int get_editor_category(lua_State*);
 	int get_terrain_affinity(lua_State*);
 	int get_owner_type(lua_State*);
@@ -660,6 +661,40 @@ public:
 
 private:
 	CASTED_GET_DESCRIPTION(SoldierDescr)
+};
+
+class LuaShipDescription : public LuaMapObjectDescription {
+public:
+	LUNA_CLASS_HEAD(LuaShipDescription);
+
+	~LuaShipDescription() override {
+	}
+
+	LuaShipDescription() {
+	}
+	explicit LuaShipDescription(const Widelands::ShipDescr* const shipdescr)
+	   : LuaMapObjectDescription(shipdescr) {
+	}
+	explicit LuaShipDescription(lua_State* L) : LuaMapObjectDescription(L) {
+	}
+
+	void __persist(lua_State* L) override;
+	void __unpersist(lua_State* L) override;
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(ShipDescr)
 };
 
 #undef CASTED_GET_DESCRIPTION

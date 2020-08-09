@@ -538,12 +538,12 @@ bool Warehouse::init(EditorGameBase& egbase) {
 
 	init_containers(*player);
 
+	set_seeing(true);
+
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's
 	// almost always going to be a carrier inside, that shouldn't hurt).
 	if (upcast(Game, game, &egbase)) {
-		player->see_area(
-		   Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().vision_range()));
 
 		{
 			uint32_t const act_time = schedule_act(*game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
@@ -753,9 +753,6 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 		                             Area<FCoords>(map.get_fcoords(get_position()), conquer_radius)),
 		   defeating_player_);
 	}
-
-	// Unsee the area that we started seeing in init()
-	get_owner()->unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 
 	Building::cleanup(egbase);
 }
@@ -1138,7 +1135,6 @@ bool Warehouse::can_create_worker(Game&, DescriptionIndex const worker) const {
 	}
 
 	const WorkerDescr& w_desc = *owner().tribe().get_worker_descr(worker);
-	assert(&w_desc);
 	if (!w_desc.is_buildable()) {
 		return false;
 	}

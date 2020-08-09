@@ -53,6 +53,7 @@
 #include "logic/map.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
