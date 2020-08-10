@@ -504,7 +504,7 @@ void EditBox::draw(RenderTarget& dst) {
 	UI::center_vertically(lineheight, &point);
 
 	// Crop to max_width while blitting
-	if (max_width < linewidth) {
+	if (max_width < linewidth || m_->scrolloffset != 0) {
 		// Fix positioning for BiDi languages.
 		if (UI::g_fh->fontset()->is_rtl()) {
 			point.x = 0.f;
@@ -601,7 +601,6 @@ void EditBox::check_caret() {
 	case UI::Align::kLeft:
 		caretpos = kMarginX + m_->scrolloffset + leftw;
 	}
-
 	if (caretpos < kMarginX) {
 		m_->scrolloffset += kMarginX - caretpos + get_w() / 5;
 	} else if (caretpos > get_w() - kMarginX) {
