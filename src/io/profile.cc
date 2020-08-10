@@ -147,10 +147,12 @@ Vector2i Section::Value::get_point() const {
 		throw wexception("%s: '%s' is not a Vector2i", get_name(), get_string());
 	}
 	if (x > std::numeric_limits<int32_t>::max()) {
-		throw wexception("%s: '%s' x coordinate too large (> %d)", get_name(), get_string(), std::numeric_limits<int32_t>::max());
+		throw wexception("%s: '%s' x coordinate too large (> %d)", get_name(), get_string(),
+		                 std::numeric_limits<int32_t>::max());
 	}
 	if (y > std::numeric_limits<int32_t>::max()) {
-		throw wexception("%s: '%s' y coordinate too large (> %d)", get_name(), get_string(), std::numeric_limits<int32_t>::max());
+		throw wexception("%s: '%s' y coordinate too large (> %d)", get_name(), get_string(),
+		                 std::numeric_limits<int32_t>::max());
 	}
 	return Vector2i(x, y);
 }

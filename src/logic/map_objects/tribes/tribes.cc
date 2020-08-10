@@ -263,8 +263,7 @@ DescriptionIndex Tribes::safe_ware_index(const std::string& warename) const {
 }
 
 DescriptionIndex Tribes::safe_worker_index(const std::string& workername) const {
-	const DescriptionIndex result =
-	   worker_index(legacy_lookup_table_->lookup_worker(workername));
+	const DescriptionIndex result = worker_index(legacy_lookup_table_->lookup_worker(workername));
 	if (!worker_exists(result)) {
 		throw GameDataError("Unknown worker type \"%s\"", workername.c_str());
 	}
