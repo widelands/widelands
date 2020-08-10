@@ -174,7 +174,7 @@ void changedir_on_mac() {
 
 // Extracts a long from 'text' into 'val' returning true if all of the string
 // was valid. If not, the content of 'val' is undefined.
-int64_t to_long(const std::string& text, long* val) {
+bool to_long(const std::string& text, int64_t* val) {
 	const char* start = text.c_str();
 	char* end;
 	*val = strtol(start, &end, 10);

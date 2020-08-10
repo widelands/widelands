@@ -244,7 +244,7 @@ unsigned MapObjectProgram::read_percent_to_int(const std::string& input) {
 	boost::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
 	if (boost::regex_search(input, match, re)) {
 		// Convert to range
-		unsigned long result =
+		uint64_t result =
 		   100U * std::stoul(match[1]) +
 		   (match[3].str().empty() ?
 		       0U :
