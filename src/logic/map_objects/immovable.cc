@@ -202,7 +202,8 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 					log("         This also clashes with an already existing 'main' program\n");
 				}
 				programs_[MapObjectProgram::kMainProgram] = new ImmovableProgram(
-				   MapObjectProgram::kMainProgram, programs->get_table(program_name)->array_entries<std::string>(), *this);
+				   MapObjectProgram::kMainProgram,
+				   programs->get_table(program_name)->array_entries<std::string>(), *this);
 			} else {
 				programs_[program_name] = new ImmovableProgram(
 				   program_name, programs->get_table(program_name)->array_entries<std::string>(),
@@ -292,7 +293,8 @@ ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_n
 		}
 	}
 
-	// Program not found - fall back to MapObjectProgram::kMainProgram for permanent map compatibility
+	// Program not found - fall back to MapObjectProgram::kMainProgram for permanent map
+	// compatibility
 	Programs::const_iterator const it = programs_.find(MapObjectProgram::kMainProgram);
 	if (it != programs_.end()) {
 		return it->second;
