@@ -437,14 +437,23 @@ function test_descr:test_immovable_support()
 
    -- Sites with multiple dependencies
    site = egbase:get_building_description("frisians_clay_pit")
-   assert_equal(2, #site.supported_productionsites)
+   site_support = site.supported_productionsites
+   assert_equal(2, #site_support)
+   assert_equal("frisians_aqua_farm", site_support[1].name)
+   assert_equal("frisians_charcoal_burners_house", site_support[2].name)
    assert_equal(0, #site.supported_by_productionsites)
+
    site = egbase:get_building_description("frisians_aqua_farm")
    assert_equal(0, #site.supported_productionsites)
-   assert_equal(1, #site.supported_by_productionsites)
+   site_support = site.supported_by_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("frisians_clay_pit", site_support[1].name)
+
    site = egbase:get_building_description("frisians_charcoal_burners_house")
    assert_equal(0, #site.supported_productionsites)
-   assert_equal(1, #site.supported_by_productionsites)
+   site_support = site.supported_by_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("frisians_clay_pit", site_support[1].name)
 end
 
 
