@@ -603,7 +603,7 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 void WLApplication::handle_input(InputCallback const* cb) {
 	// Container for keyboard events using the Alt key.
 	// <sym, mod>, type.
-	std::map<std::pair<SDL_Keycode, Uint16>, Uint32> alt_events;
+	std::map<std::pair<SDL_Keycode, uint16_t>, unsigned> alt_events;
 
 	SDL_Event ev;
 	while (poll_event(ev)) {
