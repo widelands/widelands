@@ -222,17 +222,16 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return false;
 		case SDLK_c:
-			log("start: %d, end: %d, caret: %d\n", m_->selection_start, m_->selection_end, m_->caret);
 			if ((SDL_GetModState() & KMOD_CTRL) && m_->mode == EditBoxImpl::Mode::kSelection) {
-				std::string clipboardtext;
+				std::string selected_text;
 				if (m_->selection_start <= m_->selection_end) {
 					size_t nr_characters = m_->selection_end - m_->selection_start;
-					clipboardtext = m_->text.substr(m_->selection_start, nr_characters);
+					selected_text = m_->text.substr(m_->selection_start, nr_characters);
 				} else {
 					size_t nr_characters = m_->selection_start - m_->selection_end;
-					clipboardtext = m_->text.substr(m_->selection_end, nr_characters);
+					selected_text = m_->text.substr(m_->selection_end, nr_characters);
 				}
-				SDL_SetClipboardText(clipboardtext.c_str());
+				SDL_SetClipboardText(selected_text.c_str());
 				return true;
 			}
 			return false;

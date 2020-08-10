@@ -52,6 +52,14 @@ struct MultilineEditbox::Data {
 	/// Maximum length of the text string, in bytes
 	const uint32_t maxbytes;
 
+	enum class Mode { kNormal, kSelection };
+
+	Mode mode;
+
+	uint32_t selection_start;
+
+	uint32_t selection_end;
+
 	/// Cached wrapping info; see @ref refresh_ww and @ref update
 	/*@{*/
 	bool ww_valid;
@@ -72,6 +80,7 @@ struct MultilineEditbox::Data {
 
 	void erase_bytes(uint32_t start, uint32_t end);
 	void insert(uint32_t where, const std::string& s);
+	void reset_selection();
 
 private:
 	MultilineEditbox& owner;
@@ -99,6 +108,9 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& 
                           g_gr->max_texture_size_for_font_rendering() /
                           (text_height(style.font()) * text_height(style.font())),
                        std::numeric_limits<int32_t>::max())),
+     mode(Mode::kNormal),
+     selection_start(0),
+     selection_end(0),
      ww_valid(false),
      ww(style.font().size(), style.font().color(), o.get_w()),
      owner(o) {
@@ -114,6 +126,12 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& 
  */
 void MultilineEditbox::Data::update() {
 	ww_valid = false;
+}
+
+void MultilineEditbox::Data::reset_selection() {
+	mode = Mode::kNormal;
+	selection_start = cursor_pos;
+	selection_end = cursor_pos;
 }
 
 /**
@@ -223,6 +241,38 @@ bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
+		case SDLK_v:
+			if ((SDL_GetModState() & KMOD_CTRL) && SDL_HasClipboardText()) {
+				handle_textinput(SDL_GetClipboardText());
+				return true;
+			}
+			return false;
+		case SDLK_c:
+			log("start: %d, end: %d, caret: %d\n", d_->selection_start, d_->selection_end,
+			    d_->cursor_pos);
+			if ((SDL_GetModState() & KMOD_CTRL) && d_->mode == Data::Mode::kSelection) {
+				std::string selected_text;
+				if (d_->selection_start <= d_->selection_end) {
+					size_t nr_characters = d_->selection_end - d_->selection_start;
+					selected_text = d_->text.substr(d_->selection_start, nr_characters);
+				} else {
+					size_t nr_characters = d_->selection_start - d_->selection_end;
+					selected_text = d_->text.substr(d_->selection_end, nr_characters);
+				}
+				log("%s\n", selected_text.c_str());
+				SDL_SetClipboardText(selected_text.c_str());
+				return true;
+			}
+			return false;
+
+		case SDLK_a:
+			if ((SDL_GetModState() & KMOD_CTRL)) {
+				d_->selection_start = 0;
+				d_->selection_end = d_->text.size();
+				d_->mode = Data::Mode::kSelection;
+				return true;
+			}
+			return false;
 		case SDLK_TAB:
 			// Let the panel handle the tab key
 			return get_parent()->handle_key(true, code);
@@ -246,37 +296,59 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_LEFT: {
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				uint32_t newpos = d_->prev_char(d_->cursor_pos);
-				while (newpos > 0 && isspace(d_->text[newpos])) {
-					newpos = d_->prev_char(newpos);
-				}
-				while (newpos > 0) {
-					uint32_t prev = d_->prev_char(newpos);
-					if (isspace(d_->text[prev])) {
-						break;
+			if (d_->cursor_pos > 0) {
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					if (d_->mode == Data::Mode::kNormal) {
+						d_->selection_start = d_->cursor_pos;
+						d_->mode = Data::Mode::kSelection;
 					}
-					newpos = prev;
+					d_->selection_end = d_->cursor_pos - 1;
+				} else {
+					d_->reset_selection();
 				}
-				d_->set_cursor_pos(newpos);
-			} else {
-				d_->set_cursor_pos(d_->prev_char(d_->cursor_pos));
+				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+					uint32_t newpos = d_->prev_char(d_->cursor_pos);
+					while (newpos > 0 && isspace(d_->text[newpos])) {
+						newpos = d_->prev_char(newpos);
+					}
+					while (newpos > 0) {
+						uint32_t prev = d_->prev_char(newpos);
+						if (isspace(d_->text[prev])) {
+							break;
+						}
+						newpos = prev;
+					}
+					d_->set_cursor_pos(newpos);
+				} else {
+					d_->set_cursor_pos(d_->prev_char(d_->cursor_pos));
+				}
 			}
 			break;
 		}
 
 		case SDLK_RIGHT:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				uint32_t newpos = d_->next_char(d_->cursor_pos);
-				while (newpos < d_->text.size() && isspace(d_->text[newpos])) {
-					newpos = d_->next_char(newpos);
+			if (d_->cursor_pos < d_->text.size()) {
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					if (d_->mode == Data::Mode::kNormal) {
+						d_->selection_start = d_->cursor_pos;
+						d_->mode = Data::Mode::kSelection;
+					}
+					d_->selection_end = d_->cursor_pos + 1;
+				} else {
+					d_->reset_selection();
 				}
-				while (newpos < d_->text.size() && !isspace(d_->text[newpos])) {
-					newpos = d_->next_char(newpos);
+				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+					uint32_t newpos = d_->next_char(d_->cursor_pos);
+					while (newpos < d_->text.size() && isspace(d_->text[newpos])) {
+						newpos = d_->next_char(newpos);
+					}
+					while (newpos < d_->text.size() && !isspace(d_->text[newpos])) {
+						newpos = d_->next_char(newpos);
+					}
+					d_->set_cursor_pos(newpos);
+				} else {
+					d_->set_cursor_pos(d_->next_char(d_->cursor_pos));
 				}
-				d_->set_cursor_pos(newpos);
-			} else {
-				d_->set_cursor_pos(d_->next_char(d_->cursor_pos));
 			}
 			break;
 
@@ -420,8 +492,16 @@ void MultilineEditbox::draw(RenderTarget& dst) {
 	d_->refresh_ww();
 
 	d_->ww.set_draw_caret(has_focus());
+	//	if (d_->selection_start > d_->selection_end) {
+	//		auto tmp = d_->selection_start;
+	//		d_->selection_start = d_->selection_end;
+	//		d_->selection_end = tmp;
+	//	}
+	auto start = std::min(d_->selection_start, d_->selection_end);
+	auto end = std::max(d_->selection_start, d_->selection_end);
 	d_->ww.draw(dst, Vector2i(0, -int32_t(d_->scrollbar.get_scrollpos())), UI::Align::kLeft,
-	            has_focus() ? d_->cursor_pos : std::numeric_limits<uint32_t>::max());
+	            has_focus() ? d_->cursor_pos : std::numeric_limits<uint32_t>::max(),
+	            d_->mode == Data::Mode::kSelection, start, end);
 }
 
 /**
