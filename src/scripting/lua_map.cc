@@ -2613,7 +2613,7 @@ const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::P
 /* RST
    .. attribute:: inputs
 
-      (RO) An array with :class:`LuaWareDescription` containing the wares that
+      (RO) An array with :class:`WareDescription` containing the wares that
       the productionsite needs for its production.
 */
 int LuaProductionSiteDescription::get_inputs(lua_State* L) {
@@ -2628,7 +2628,16 @@ int LuaProductionSiteDescription::get_inputs(lua_State* L) {
 	return 1;
 }
 
-// NOCOM document that we only support critters here for efficiency reasons
+/* RST
+   .. attribute:: collected_bobs
+
+      (RO) An array with :class:`MapObjectDescription` containing the bobs that
+      this building will collect from the map.
+      For example, a Hunters's Hut will hunt some critters for meat.
+
+      **Note:** At the moment, only critters are supported here, because we don't
+      have any other use case.
+*/
 int LuaProductionSiteDescription::get_collected_bobs(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
@@ -2642,6 +2651,15 @@ int LuaProductionSiteDescription::get_collected_bobs(lua_State* L) {
 	}
 	return 1;
 }
+
+/* RST
+   .. attribute:: collected_immovables
+
+      (RO) An array with :class:`ImmovableDescription` containing the immovables that
+      this building will collect from the map.
+      For example, a Woodcutters's House will cut down trees to obtain logs, and the
+      Fruit Collector's House will harvest fruit from berry bushes.
+*/
 int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
@@ -2660,6 +2678,14 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
 	}
 	return 1;
 }
+
+/* RST
+   .. attribute:: collected_resources
+
+      (RO) An array with :class:`ResourceDescription` containing the resources that
+      this building will collect from the map.
+      For example, a Fishers's House will collect the "fish" resource.
+*/
 int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
@@ -2674,6 +2700,14 @@ int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	}
 	return 1;
 }
+
+/* RST
+   .. attribute:: created_immovables
+
+      (RO) An array with :class:`ImmovableDescription` containing the immovables that
+      this building will place on the map.
+      For example, a Foresters's House will create trees, and the Berry Farm some berry bushes.
+*/
 int LuaProductionSiteDescription::get_created_immovables(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
@@ -2692,6 +2726,14 @@ int LuaProductionSiteDescription::get_created_immovables(lua_State* L) {
 	}
 	return 1;
 }
+
+/* RST
+   .. attribute:: created_bobs
+
+      (RO) An array with :class:`MapObjectDescription` containing the bobs that
+      this building will place on the map.
+      For example, a Gamekeepers's Hut will create some critters, and the Shipyard a Ship.
+*/
 int LuaProductionSiteDescription::get_created_bobs(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
@@ -2722,6 +2764,14 @@ int LuaProductionSiteDescription::get_created_bobs(lua_State* L) {
 	}
 	return 1;
 }
+
+/* RST
+   .. attribute:: created_resources
+
+      (RO) An array with :class:`ResourceDescription` containing the resources that
+      this building will place on the map.
+      For example, a Fishbreeder's House will create the "fish" resource.
+*/
 int LuaProductionSiteDescription::get_created_resources(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
@@ -2791,7 +2841,13 @@ int LuaProductionSiteDescription::get_production_programs(lua_State* L) {
 	return 1;
 }
 
-// NOCOM document
+/* RST
+   .. attribute:: supported_productionsites
+
+      (RO) An array with :class:`ProductionSiteDescription` containing the buildings that
+      will collect the bobs, immovables or resources from the map that this building will place on it.
+      For example, a Forester's House will support a Woodcutter's House, because it places trees on the map.
+*/
 int LuaProductionSiteDescription::get_supported_productionsites(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
@@ -2804,7 +2860,14 @@ int LuaProductionSiteDescription::get_supported_productionsites(lua_State* L) {
 	}
 	return 1;
 }
-// NOCOM document
+
+/* RST
+   .. attribute:: supported_by_productionsites
+
+      (RO) An array with :class:`ProductionSiteDescription` containing the buildings that
+      place bobs, immovables or resources on the map that this building will collect.
+      For example, a Woodcutter's House is supported by a Forester's House, because it needs trees to fell.
+*/
 int LuaProductionSiteDescription::get_supported_by_productionsites(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
