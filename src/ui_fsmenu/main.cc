@@ -162,6 +162,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                 g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
      splashscreen_(*g_gr->images().get("images/loadscreens/splash.jpg")),
      title_image_(*g_gr->images().get("images/ui_fsmenu/main_title.png")),
+     title_image_background_(*g_gr->images().get("images/loadscreens/tips_bg.png")),
      init_time_(kNoSplash),
      last_image_exchange_time_(0),
      draw_image_(0),
@@ -435,6 +436,10 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 		r.fill_rect(Recti(version_.get_x() - padding_ / 2, version_.get_y() - padding_ / 2,
 		                  version_.get_w() + padding_, version_.get_h() + padding_),
 		            bg, BlendMode::Default);
+
+		const Rectf rect = title_pos();
+		do_draw_image(r, Rectf(rect.x - rect.w / 4.f, rect.y - rect.h / 2.f, rect.w * 1.5f, rect.h * 2.f), title_image_background_, factor * 0.7f);
+
 		draw_title(r, factor);
 	}
 
@@ -472,13 +477,14 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 	}
 }
 
+inline Rectf FullscreenMenuMain::title_pos() {
+	const float imgh = 1.5f * box_rect_.w * title_image_.height() / title_image_.width();
+	return Rectf(box_rect_.x + box_rect_.w + (get_w() - box_rect_.x - 2.5f * box_rect_.w) / 2.f,
+	         box_rect_.y - padding_ + imgh / 2.f, 1.5f * box_rect_.w, imgh);
+}
+
 inline void FullscreenMenuMain::draw_title(RenderTarget& r, const float opacity) {
-	do_draw_image(
-	   r,
-	   Rectf(box_rect_.x + box_rect_.w + (get_w() - box_rect_.x - 2.5f * box_rect_.w) / 2.f,
-	         box_rect_.y, 1.5f * box_rect_.w,
-	         1.5f * box_rect_.w * title_image_.height() / title_image_.width()),
-	   title_image_, opacity);
+	do_draw_image(r, title_pos(), title_image_, opacity);
 }
 
 void FullscreenMenuMain::layout() {

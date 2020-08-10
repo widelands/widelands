@@ -86,6 +86,7 @@ private:
 
 	const Image& splashscreen_;
 	const Image& title_image_;
+	const Image& title_image_background_;
 
 	uint32_t init_time_;
 
@@ -93,6 +94,7 @@ private:
 	uint32_t last_image_exchange_time_;
 	size_t draw_image_, last_image_;
 	Rectf image_pos(const Image&);
+	Rectf title_pos();
 	void draw_title(RenderTarget&, float);
 
 	bool visible_;
