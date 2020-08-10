@@ -960,7 +960,7 @@ void Game::cancel_trade(int trade_id) {
 }
 
 LuaGameInterface& Game::lua() {
-	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
+	return dynamic_cast<LuaGameInterface&>(EditorGameBase::lua());
 }
 
 const std::string& Game::get_win_condition_displayname() const {
