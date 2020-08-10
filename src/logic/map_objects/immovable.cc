@@ -196,11 +196,11 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 			// TODO(GunChleoc): Compatibility, remove after v1.0
 			if (program_name == "program") {
 				log("WARNING: The main program for the immovable %s should be renamed from 'program' to 'main'\n", name().c_str());
-				if (programs_.count("main")) {
+				if (programs->keys<std::string>().count(MapObjectProgram::kMainProgram)) {
 					log("         This also clashes with an already existing 'main' program\n");
 				}
-				programs_["main"] = new ImmovableProgram(
-				   "main", programs->get_table(program_name)->array_entries<std::string>(), *this);
+				programs_[MapObjectProgram::kMainProgram] = new ImmovableProgram(
+				   MapObjectProgram::kMainProgram, programs->get_table(program_name)->array_entries<std::string>(), *this);
 			} else {
 				programs_[program_name] = new ImmovableProgram(
 				   program_name, programs->get_table(program_name)->array_entries<std::string>(), *this);
@@ -259,11 +259,11 @@ const TerrainAffinity& ImmovableDescr::terrain_affinity() const {
 }
 
 void ImmovableDescr::make_sure_default_program_is_there() {
-	if (!programs_.count("main")) {  //  default program
+	if (!programs_.count(MapObjectProgram::kMainProgram)) {  //  default program
 		assert(is_animation_known("idle"));
 		std::vector<std::string> arguments{"idle"};
-		programs_["main"] =
-		   new ImmovableProgram("main", std::unique_ptr<ImmovableProgram::Action>(
+		programs_[MapObjectProgram::kMainProgram] =
+		   new ImmovableProgram(MapObjectProgram::kMainProgram, std::unique_ptr<ImmovableProgram::Action>(
 		                                      new ImmovableProgram::ActAnimate(arguments, *this)));
 	}
 }
@@ -289,8 +289,8 @@ ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_n
 		}
 	}
 
-	// Program not found - fall back to "main" for permanent map compatibility
-	Programs::const_iterator const it = programs_.find("main");
+	// Program not found - fall back to MapObjectProgram::kMainProgram for permanent map compatibility
+	Programs::const_iterator const it = programs_.find(MapObjectProgram::kMainProgram);
 	if (it != programs_.end()) {
 		return it->second;
 	}
@@ -380,7 +380,7 @@ bool Immovable::init(EditorGameBase& egbase) {
 	//  Set animation data according to current program state.
 	ImmovableProgram const* prog = program_;
 	if (!prog) {
-		prog = descr().get_program("main");
+		prog = descr().get_program(MapObjectProgram::kMainProgram);
 	}
 	assert(prog != nullptr);
 
@@ -389,7 +389,7 @@ bool Immovable::init(EditorGameBase& egbase) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		switch_program(*game, "main");
+		switch_program(*game, MapObjectProgram::kMainProgram);
 	}
 	return true;
 }
@@ -576,12 +576,12 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	{  //  program
 		std::string program_name;
 		if (1 == packet_version) {
-			program_name = fr.unsigned_8() ? fr.c_string() : "main";
+			program_name = fr.unsigned_8() ? fr.c_string() : MapObjectProgram::kMainProgram;
 			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 		} else {
 			program_name = fr.c_string();
 			if (program_name.empty()) {
-				program_name = "main";
+				program_name = MapObjectProgram::kMainProgram;
 			}
 		}
 
