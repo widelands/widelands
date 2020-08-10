@@ -60,7 +60,6 @@ artifacts:
     name: Widelands Setup
 
 platform:
-  - x64
   - x86
 
 configuration:

@@ -89,11 +89,10 @@ endif()
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
+set (Boost_USE_STATIC_LIBS  OFF)
 if (WIN32)
   set (Boost_USE_STATIC_LIBS  ON)
   link_libraries(wsock32 ws2_32 bcrypt)
-else()
-  set (Boost_USE_STATIC_LIBS  OFF)
 endif()
 if (OPTION_BUILD_WINSTATIC)
   add_definitions(-DGLBINDING_STATIC_DEFINE)

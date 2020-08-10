@@ -75,11 +75,8 @@ Name: french;    MessagesFile: compiler:Languages\French.isl
 Name: german;    MessagesFile: compiler:Languages\German.isl
 Name: polish;    MessagesFile: compiler:Languages\Polish.isl
 Name: russian;   MessagesFile: compiler:Languages\Russian.isl
-Name: hungarian; MessagesFile: compiler:Languages\Hungarian.isl
 Name: dutch;     MessagesFile: compiler:Languages\Dutch.isl
-Name: gaelic;    MessagesFile: compiler:Languages\ScottishGaelic.isl
 Name: hebrew;    MessagesFile: compiler:Languages\Hebrew.isl
-Name: russian;   MessagesFile: compiler:Languages\Russian.isl
 Name: spanish;   MessagesFile: compiler:Languages\Spanish.isl
 
 [Tasks]
