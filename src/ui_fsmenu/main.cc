@@ -438,7 +438,9 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 		            bg, BlendMode::Default);
 
 		const Rectf rect = title_pos();
-		do_draw_image(r, Rectf(rect.x - rect.w / 4.f, rect.y - rect.h / 2.f, rect.w * 1.5f, rect.h * 2.f), title_image_background_, factor * 0.7f);
+		do_draw_image(
+		   r, Rectf(rect.x - rect.w / 4.f, rect.y - rect.h / 2.f, rect.w * 1.5f, rect.h * 2.f),
+		   title_image_background_, factor * 0.7f);
 
 		draw_title(r, factor);
 	}
@@ -480,7 +482,7 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 inline Rectf FullscreenMenuMain::title_pos() {
 	const float imgh = 1.5f * box_rect_.w * title_image_.height() / title_image_.width();
 	return Rectf(box_rect_.x + box_rect_.w + (get_w() - box_rect_.x - 2.5f * box_rect_.w) / 2.f,
-	         box_rect_.y - padding_ + imgh / 2.f, 1.5f * box_rect_.w, imgh);
+	             box_rect_.y - padding_ + imgh / 2.f, 1.5f * box_rect_.w, imgh);
 }
 
 inline void FullscreenMenuMain::draw_title(RenderTarget& r, const float opacity) {
