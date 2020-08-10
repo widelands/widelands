@@ -27,7 +27,6 @@ SUPPRESSED_CHECKS = {
     '[cppcoreguidelines-pro-type-const-cast]',
     '[cppcoreguidelines-pro-type-member-init]',
     '[cppcoreguidelines-pro-type-reinterpret-cast]',
-    '[cppcoreguidelines-pro-type-static-cast-downcast]',
     '[cppcoreguidelines-pro-type-union-access]',
     '[cppcoreguidelines-pro-type-vararg]',  # We need this for our logger
     '[cppcoreguidelines-slicing]',
