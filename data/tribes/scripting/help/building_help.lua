@@ -131,7 +131,7 @@ end
 --
 --    :arg tribe: the tribe for which to display this help
 --    :arg building_description: a production site that collects bobs, immovables and/or resources from the map
---    :returns: a richtext-formatted p()
+--    :returns: a richtext-formatted ``p()``
 --
 function dependencies_collects(tribe, building_description)
    local supported = building_description.supported_by_productionsites
@@ -178,7 +178,7 @@ end
 --
 --    :arg tribe: the tribe for which to display this help
 --    :arg building_description: a production site that creates bobs, immovables and/or resources
---    :returns: a richtext-formatted p()
+--    :returns: a richtext-formatted ``p()``
 --
 function dependencies_creates(tribe, building_description)
    local supported = building_description.supported_productionsites
@@ -218,7 +218,7 @@ end
 
 
 -- RST
--- .. function:: dependencies_training_food
+-- .. function:: dependencies_training_food(foods)
 --
 --    Creates dependencies lines for food in training sites.
 --
