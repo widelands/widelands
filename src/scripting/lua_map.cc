@@ -2845,8 +2845,9 @@ int LuaProductionSiteDescription::get_production_programs(lua_State* L) {
    .. attribute:: supported_productionsites
 
       (RO) An array with :class:`ProductionSiteDescription` containing the buildings that
-      will collect the bobs, immovables or resources from the map that this building will place on it.
-      For example, a Forester's House will support a Woodcutter's House, because it places trees on the map.
+      will collect the bobs, immovables or resources from the map that this building will place on
+      it. For example, a Forester's House will support a Woodcutter's House, because it places trees
+      on the map.
 */
 int LuaProductionSiteDescription::get_supported_productionsites(lua_State* L) {
 	lua_newtable(L);
@@ -2854,7 +2855,8 @@ int LuaProductionSiteDescription::get_supported_productionsites(lua_State* L) {
 	const Tribes& tribes = get_egbase(L).tribes();
 	for (const auto& site : get()->supported_productionsites()) {
 		lua_pushint32(L, index++);
-		const ProductionSiteDescr* descr = dynamic_cast<const ProductionSiteDescr*>(tribes.get_building_descr(tribes.safe_building_index(site)));
+		const ProductionSiteDescr* descr = dynamic_cast<const ProductionSiteDescr*>(
+		   tribes.get_building_descr(tribes.safe_building_index(site)));
 		to_lua<LuaProductionSiteDescription>(L, new LuaProductionSiteDescription(descr));
 		lua_settable(L, -3);
 	}
@@ -2866,7 +2868,8 @@ int LuaProductionSiteDescription::get_supported_productionsites(lua_State* L) {
 
       (RO) An array with :class:`ProductionSiteDescription` containing the buildings that
       place bobs, immovables or resources on the map that this building will collect.
-      For example, a Woodcutter's House is supported by a Forester's House, because it needs trees to fell.
+      For example, a Woodcutter's House is supported by a Forester's House, because it needs trees
+      to fell.
 */
 int LuaProductionSiteDescription::get_supported_by_productionsites(lua_State* L) {
 	lua_newtable(L);
@@ -2874,7 +2877,8 @@ int LuaProductionSiteDescription::get_supported_by_productionsites(lua_State* L)
 	const Tribes& tribes = get_egbase(L).tribes();
 	for (const auto& site : get()->supported_by_productionsites()) {
 		lua_pushint32(L, index++);
-		const ProductionSiteDescr* descr = dynamic_cast<const ProductionSiteDescr*>(tribes.get_building_descr(tribes.safe_building_index(site)));
+		const ProductionSiteDescr* descr = dynamic_cast<const ProductionSiteDescr*>(
+		   tribes.get_building_descr(tribes.safe_building_index(site)));
 		to_lua<LuaProductionSiteDescription>(L, new LuaProductionSiteDescription(descr));
 		lua_settable(L, -3);
 	}
