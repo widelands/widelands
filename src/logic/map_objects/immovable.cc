@@ -195,7 +195,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		try {
 			// TODO(GunChleoc): Compatibility, remove after v1.0
 			if (program_name == "program") {
-				log("WARNING: The main program for the immovable %s should be renamed from 'program' to 'main'\n", name().c_str());
+				log("WARNING: The main program for the immovable %s should be renamed from 'program' "
+				    "to 'main'\n",
+				    name().c_str());
 				if (programs->keys<std::string>().count(MapObjectProgram::kMainProgram)) {
 					log("         This also clashes with an already existing 'main' program\n");
 				}
@@ -203,7 +205,8 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 				   MapObjectProgram::kMainProgram, programs->get_table(program_name)->array_entries<std::string>(), *this);
 			} else {
 				programs_[program_name] = new ImmovableProgram(
-				   program_name, programs->get_table(program_name)->array_entries<std::string>(), *this);
+				   program_name, programs->get_table(program_name)->array_entries<std::string>(),
+				   *this);
 			}
 		} catch (const std::exception& e) {
 			throw GameDataError("%s: Error in immovable program %s: %s", name().c_str(),
@@ -263,8 +266,8 @@ void ImmovableDescr::make_sure_default_program_is_there() {
 		assert(is_animation_known("idle"));
 		std::vector<std::string> arguments{"idle"};
 		programs_[MapObjectProgram::kMainProgram] =
-		   new ImmovableProgram(MapObjectProgram::kMainProgram, std::unique_ptr<ImmovableProgram::Action>(
-		                                      new ImmovableProgram::ActAnimate(arguments, *this)));
+		   new ImmovableProgram("main", std::unique_ptr<ImmovableProgram::Action>(
+		                                   new ImmovableProgram::ActAnimate(arguments, *this)));
 	}
 }
 
@@ -295,8 +298,7 @@ ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_n
 		return it->second;
 	}
 
-	throw GameDataError(
-	   "immovable %s has no program \"%s\"", name().c_str(), program_name.c_str());
+	throw GameDataError("immovable %s has no program \"%s\"", name().c_str(), program_name.c_str());
 }
 
 /**
