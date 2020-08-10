@@ -196,6 +196,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 			// TODO(GunChleoc): Compatibility, remove after v1.0
 			if (program_name == "program") {
 				log("WARNING: The main program for the immovable %s should be renamed from 'program' to 'main'\n", name().c_str());
+				if (programs_.count("main")) {
+					log("         This also clashes with an already existing 'main' program\n");
+				}
 				programs_["main"] = new ImmovableProgram(
 				   "main", programs->get_table(program_name)->array_entries<std::string>(), *this);
 			} else {
