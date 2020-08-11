@@ -328,7 +328,8 @@ void WordWrap::draw(RenderTarget& dst,
                     uint32_t caret,
                     bool with_selection,
                     uint32_t selection_start,
-                    uint32_t selection_end) {
+                    uint32_t selection_end,
+                    uint32_t scrollbar_position) {
 	if (lines_.empty()) {
 		return;
 	}
@@ -371,7 +372,8 @@ void WordWrap::draw(RenderTarget& dst,
 			if (line == selection_start_line) {
 				std::string text_before_selection = lines_[line].text.substr(0, selection_start_x);
 				Vector2i selection_start_p =
-				   Vector2i(text_width(text_before_selection, fontsize_) + point.x, line * fontheight);
+				   Vector2i(text_width(text_before_selection, fontsize_) + point.x,
+				            (line * fontheight) - scrollbar_position);
 
 				Vector2i selection_end_p = Vector2i::zero();
 				if (line == selection_end_line) {
@@ -383,8 +385,6 @@ void WordWrap::draw(RenderTarget& dst,
 
 				} else {
 					std::string selected_text = lines_[line].text.substr(selection_start_x);
-					log("special: %s (%d) w: %d\n", selected_text.c_str(), selected_text.size(),
-					    text_width(selected_text, fontsize_));
 					selection_end_p = Vector2i(text_width(selected_text, fontsize_), fontheight);
 				}
 				dst.brighten_rect(Recti(selection_start_p, selection_end_p.x, selection_end_p.y),
@@ -392,7 +392,8 @@ void WordWrap::draw(RenderTarget& dst,
 				log("start line (%d). start: (%d,%d), w: %d, h: %d\n", line, selection_start_p.x,
 				    selection_start_p.y, selection_end_p.x, selection_end_p.y);
 			} else if (line > selection_start_line && line < selection_end_line) {
-				Vector2i selection_start_p = Vector2i(point.x, line * fontheight);
+				Vector2i selection_start_p =
+				   Vector2i(point.x, (line * fontheight) - scrollbar_position);
 				Vector2i selection_end_p =
 				   Vector2i(text_width(lines_[line].text, fontsize_), fontheight);
 				dst.brighten_rect(Recti(selection_start_p, selection_end_p.x, selection_end_p.y),
@@ -400,7 +401,8 @@ void WordWrap::draw(RenderTarget& dst,
 				log("middle line (%d). start: (%d,%d), w: %d, h: %d\n", line, selection_start_p.x,
 				    selection_start_p.y, selection_end_p.x, selection_end_p.y);
 			} else if (line == selection_end_line) {
-				Vector2i selection_start_p = Vector2i(point.x, line * fontheight);
+				Vector2i selection_start_p =
+				   Vector2i(point.x, (line * fontheight) - scrollbar_position);
 				Vector2i selection_end_p = Vector2i(
 				   text_width(lines_[line].text.substr(0, selection_end_x), fontsize_), fontheight);
 				dst.brighten_rect(Recti(selection_start_p, selection_end_p.x, selection_end_p.y),

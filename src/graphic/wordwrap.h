@@ -58,7 +58,8 @@ struct WordWrap {
 	          uint32_t caret = std::numeric_limits<uint32_t>::max(),
 	          bool with_selection = false,
 	          uint32_t selection_start = 0,
-	          uint32_t selection_end = 0);
+	          uint32_t selection_end = 0,
+	          uint32_t scrollbar_position = 0);
 
 	void calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) const;
 	uint32_t nrlines() const {
