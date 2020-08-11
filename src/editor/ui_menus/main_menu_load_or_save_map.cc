@@ -48,12 +48,18 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      map_details_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui),
 
-     display_mode_(&table_box_, "display_mode", 0, 0, 100, 4, 24,
-     		/** TRANSLATORS: "Display: Original/Localized map/file names" */
-     		_("Display"),
-	               UI::DropdownType::kTextual,
-	               UI::PanelStyle::kWui,
-	               UI::ButtonStyle::kWuiSecondary),
+     display_mode_(&table_box_,
+                   "display_mode",
+                   0,
+                   0,
+                   100,
+                   4,
+                   24,
+                   /** TRANSLATORS: "Display: Original/Localized map/file names" */
+                   _("Display"),
+                   UI::DropdownType::kTextual,
+                   UI::PanelStyle::kWui,
+                   UI::ButtonStyle::kWuiSecondary),
 
      table_footer_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
 
@@ -90,7 +96,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
 	display_mode_.add(_("File names"), MapData::DisplayType::kFilenames);
 	display_mode_.add(_("Original map names"), MapData::DisplayType::kMapnames);
-	display_mode_.add(_("Localized map names"), MapData::DisplayType::kMapnamesLocalized, nullptr, true);
+	display_mode_.add(
+	   _("Localized map names"), MapData::DisplayType::kMapnamesLocalized, nullptr, true);
 
 	table_.focus();
 
