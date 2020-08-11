@@ -123,18 +123,15 @@ macro(_common_compile_tasks)
   endif()
 
   if(ARG_USES_SDL2_MIXER)
-    wl_include_system_directories(${NAME} ${SDL2_MIXER_INCLUDE_DIRS})
-    target_link_libraries(${NAME} ${SDL2_MIXER_LIBRARIES})
+    target_link_libraries(${NAME} SDL2::Mixer)
   endif()
 
   if(ARG_USES_SDL2_IMAGE)
-    wl_include_system_directories(${NAME} ${SDL2_IMAGE_INCLUDE_DIRS})
-    target_link_libraries(${NAME} ${SDL2_IMAGE_LIBRARIES})
+    target_link_libraries(${NAME} SDL2::Image)
   endif()
 
   if(ARG_USES_SDL2_TTF)
-    wl_include_system_directories(${NAME} ${SDL2_TTF_INCLUDE_DIRS})
-    target_link_libraries(${NAME} ${SDL2_TTF_LIBRARIES})
+    target_link_libraries(${NAME} SDL2::TTF)
   endif()
 
   if (ARG_USES_INTL)
