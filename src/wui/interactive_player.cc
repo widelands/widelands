@@ -19,6 +19,8 @@
 
 #include "wui/interactive_player.h"
 
+#include <boost/algorithm/string.hpp>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/flag.h"
@@ -43,6 +45,7 @@
 #include "wui/game_objectives_menu.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/seafaring_statistics_menu.h"
+#include "wui/soldier_statistics_menu.h"
 #include "wui/stock_menu.h"
 #include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
@@ -57,14 +60,14 @@ namespace {
 float adjusted_field_brightness(const Widelands::FCoords& fcoords,
                                 const uint32_t gametime,
                                 const Widelands::Player::Field& pf) {
-	if (pf.vision == 0) {
+	if (pf.seeing == Widelands::SeeUnseeNode::kUnexplored) {
 		return 0.;
 	}
 
 	uint32_t brightness = 144 + fcoords.field->get_brightness();
 	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
 
-	if (pf.vision == 1) {
+	if (pf.seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
 		static const uint32_t kDecayTimeInMs = 20000;
 		const Widelands::Duration time_ago = gametime - pf.time_node_last_unseen;
 		if (time_ago < kDecayTimeInMs) {
@@ -158,7 +161,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                                      Widelands::PlayerNumber const plyn,
                                      bool const multiplayer,
                                      ChatProvider* chat_provider)
-   : InteractiveGameBase(g, global_s, NONE, multiplayer, chat_provider),
+   : InteractiveGameBase(g, global_s, multiplayer, chat_provider),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()),
      statisticsmenu_(toolbar(),
@@ -220,6 +223,15 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions&) { rebuild_statistics_menu(); });
+	shipnotes_subscriber_ =
+	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
+		   if (note.ship->owner().player_number() == player_number() &&
+		       note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
+		       note.ship->get_ship_state() ==
+		          Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
+		   }
+	   });
 }
 
 void InteractivePlayer::add_statistics_menu() {
@@ -236,6 +248,10 @@ void InteractivePlayer::add_statistics_menu() {
 
 	menu_windows_.stats_buildings.open_window = [this] {
 		new BuildingStatisticsMenu(*this, menu_windows_.stats_buildings);
+	};
+
+	menu_windows_.stats_soldiers.open_window = [this] {
+		new SoldierStatisticsMenu(*this, menu_windows_.stats_soldiers);
 	};
 
 	menu_windows_.stats_wares.open_window = [this] {
@@ -261,6 +277,11 @@ void InteractivePlayer::rebuild_statistics_menu() {
 		                    g_gr->images().get("images/wui/menus/statistics_seafaring.png"), false,
 		                    "", "E");
 	}
+
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("Soldiers"), StatisticsMenuEntry::kSoldiers,
+	                    g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
+	                    "X");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
@@ -292,6 +313,9 @@ void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 	case StatisticsMenuEntry::kBuildings: {
 		menu_windows_.stats_buildings.toggle();
 	} break;
+	case StatisticsMenuEntry::kSoldiers: {
+		menu_windows_.stats_soldiers.toggle();
+	} break;
 	case StatisticsMenuEntry::kStock: {
 		menu_windows_.stats_stock.toggle();
 	} break;
@@ -318,6 +342,15 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	   ShowHideEntry::kWorkareaOverlap,
 	   g_gr->images().get("images/wui/menus/show_workarea_overlap.png"), false,
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), "W");
+}
+
+bool InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) const {
+	for (const auto& pair : expedition_port_spaces_) {
+		if (pair.second == coords) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void InteractivePlayer::think() {
@@ -359,6 +392,16 @@ void InteractivePlayer::think() {
 		toggle_message_menu_->set_pic(g_gr->images().get(msg_icon));
 		toggle_message_menu_->set_tooltip(msg_tooltip);
 	}
+
+	// Cleanup found port spaces if the ship sailed on or was destroyed
+	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
+		if (!egbase().objects().object_still_available(it->first) ||
+		    it->first->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+			expedition_port_spaces_.erase(it);
+			// If another port space also needs removing, we'll take care of it in the next frame
+			return;
+		}
+	}
 }
 
 void InteractivePlayer::draw(RenderTarget& dst) {
@@ -382,7 +425,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const uint32_t gametime = gbase.get_gametime();
 
 	Workareas workareas = get_workarea_overlays(map);
-	auto* fields_to_draw = given_map_view->draw_terrain(gbase, workareas, false, dst);
+	auto* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
 	const auto& road_building_s = road_building_steepness_overlays();
 
 	const float scale = 1.f / given_map_view->view().zoom;
@@ -399,26 +442,26 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			f->road_e = player_field.r_e;
 			f->road_se = player_field.r_se;
 			f->road_sw = player_field.r_sw;
-			f->vision = player_field.vision;
-			if (player_field.vision == 1) {
+			f->seeing = player_field.seeing;
+			if (player_field.seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
 				f->owner = player_field.owner != 0 ? gbase.get_player(player_field.owner) : nullptr;
 				f->is_border = player_field.border;
 			}
 		}
 
 		// Add road building overlays if applicable.
-		if (f->vision > 0) {
+		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			draw_road_building(*f);
 
-			draw_bridges(dst, f, f->vision > 1 ? gametime : 0, scale);
+			draw_bridges(dst, f, f->seeing == Widelands::SeeUnseeNode::kVisible ? gametime : 0, scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 
 			// Render stuff that belongs to the node.
 			const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
-			if (f->vision > 1) {
+			if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
 				draw_immovables_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
 				draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
-			} else if (f->vision == 1) {
+			} else if (f->seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
 				// We never show census or statistics for objects in the fog.
 				draw_immovable_for_formerly_visible_field(*f, info_to_draw, player_field, scale, dst);
 			}
@@ -431,14 +474,14 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			                   scale);
 		}
 
-		if (f->vision > 0) {
+		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			// Draw build help.
 			bool show_port_space = has_expedition_port_space(f->fcoords);
 			if (show_port_space || buildhelp()) {
-				const auto* overlay = get_buildhelp_overlay(
-				   show_port_space ? f->fcoords.field->maxcaps() : plr.get_buildcaps(f->fcoords));
-				if (overlay != nullptr) {
-					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale);
+				if (const auto* overlay = get_buildhelp_overlay(
+				       show_port_space ? f->fcoords.field->maxcaps() : plr.get_buildcaps(f->fcoords))) {
+					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale,
+					                   f->seeing == Widelands::SeeUnseeNode::kVisible ? 1.f : 0.3f);
 				}
 			}
 
@@ -480,7 +523,7 @@ Widelands::PlayerNumber InteractivePlayer::player_number() const {
 /// Player has clicked on the given node; bring up the context menu.
 void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	const Map& map = egbase().map();
-	if (1 < player().vision(Map::get_index(node_and_triangle.node, map.get_width()))) {
+	if (player().is_seeing(Map::get_index(node_and_triangle.node, map.get_width()))) {
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(node_and_triangle.node))) {
 			if (can_see(building->owner().player_number())) {
@@ -542,6 +585,14 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				new BuildingStatisticsMenu(*this, menu_windows_.stats_buildings);
 			} else {
 				menu_windows_.stats_buildings.toggle();
+			}
+			return true;
+
+		case SDLK_x:
+			if (menu_windows_.stats_soldiers.window == nullptr) {
+				new SoldierStatisticsMenu(*this, menu_windows_.stats_soldiers);
+			} else {
+				menu_windows_.stats_soldiers.toggle();
 			}
 			return true;
 
@@ -609,7 +660,7 @@ bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) cons
 	const Widelands::Map& map = egbase().map();
 	const Widelands::Player::Field& player_field =
 	   plr.fields()[map.get_index(coords, map.get_width())];
-	return (player_field.vision > 1);
+	return player_field.seeing == Widelands::SeeUnseeNode::kVisible;
 }
 
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
@@ -618,7 +669,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 		return;
 	}
 
-	int const n = atoi(args[1].c_str());
+	int const n = boost::lexical_cast<int>(args[1]);
 	if (n < 1 || n > kMaxPlayers || !game().get_player(n)) {
 		DebugConsole::write(str(boost::format("Player #%1% does not exist.") % n));
 		return;
@@ -631,4 +682,5 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 	if (UI::UniqueWindow* const building_statistics_window = menu_windows_.stats_buildings.window) {
 		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();
 	}
+	menu_windows_.stats_soldiers.destroy();
 }

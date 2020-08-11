@@ -32,10 +32,6 @@ tribes:new_productionsite_type {
       empire_stonemason = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_quarry = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -55,7 +51,7 @@ tribes:new_productionsite_type {
          descname = _"quarrying granite",
          actions = {
             "callworker=cut_granite",
-            "sleep=17500"
+            "sleep=duration:17s500ms"
          }
       },
       mine_marble = {
@@ -63,7 +59,7 @@ tribes:new_productionsite_type {
          descname = _"quarrying marble",
          actions = {
             "callworker=cut_marble",
-            "sleep=17500"
+            "sleep=duration:17s500ms"
          }
       },
    },

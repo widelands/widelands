@@ -52,12 +52,6 @@ tribes:new_productionsite_type {
       { name = "ration", amount = 6 }
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_ironmine = false,
-      barbarians_ironmine_deep = false,
-      barbarians_ironmine_deeper = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
@@ -65,8 +59,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs iron_ore",
             "consume=ration",
-            "sleep=45000",
-            "animate=working 20000",
+            "sleep=duration:45s",
+            "animate=working duration:20s",
             "mine=iron 2 33 5 17",
             "produce=iron_ore"
          }

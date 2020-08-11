@@ -101,7 +101,6 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),
      evade_(table.get_table("evade")) {
-	add_attribute(MapObject::Attribute::SOLDIER);
 
 	// Battle animations
 	// attack_success_*-> soldier is attacking and hit his opponent
@@ -132,12 +131,12 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 			std::unique_ptr<LuaTable> range_table = walk_table->get_table(entry);
 			// I would prefer to use the SoldierLevelRange as key in the table,
 			// but LuaTable can handle only string keys :(
-			SoldierLevelRange* range = nullptr;
+			std::unique_ptr<SoldierLevelRange> range(nullptr);
 			std::map<uint8_t, std::string> map;
 			for (const std::string& dir_name : range_table->keys<std::string>()) {
 				uint8_t dir;
 				if (dir_name == "range") {
-					range = new SoldierLevelRange(*range_table->get_table(dir_name));
+					range.reset(new SoldierLevelRange(*range_table->get_table(dir_name)));
 					continue;
 				} else if (dir_name == "sw") {
 					dir = WALK_SW;
@@ -161,7 +160,7 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 				}
 				map.emplace(dir, anim_name);
 			}
-			walk_name_.emplace(std::make_pair(std::unique_ptr<SoldierLevelRange>(range), map));
+			walk_name_.emplace(std::make_pair(std::move(range), map));
 		}
 	}
 }
@@ -352,10 +351,13 @@ bool Soldier::init(EditorGameBase& egbase) {
 	combat_walkstart_ = 0;
 	combat_walkend_ = 0;
 
+	get_owner()->add_soldier(health_level_, attack_level_, defense_level_, evade_level_);
+
 	return Worker::init(egbase);
 }
 
 void Soldier::cleanup(EditorGameBase& egbase) {
+	get_owner()->remove_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 	Worker::cleanup(egbase);
 }
 
@@ -381,7 +383,9 @@ void Soldier::set_health_level(const uint32_t health) {
 
 	uint32_t oldmax = get_max_health();
 
+	get_owner()->remove_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 	health_level_ = health;
+	get_owner()->add_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 
 	uint32_t newmax = get_max_health();
 	current_health_ = current_health_ * newmax / oldmax;
@@ -390,19 +394,25 @@ void Soldier::set_attack_level(const uint32_t attack) {
 	assert(attack_level_ <= attack);
 	assert(attack <= descr().get_max_attack_level());
 
+	get_owner()->remove_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 	attack_level_ = attack;
+	get_owner()->add_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 }
 void Soldier::set_defense_level(const uint32_t defense) {
 	assert(defense_level_ <= defense);
 	assert(defense <= descr().get_max_defense_level());
 
+	get_owner()->remove_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 	defense_level_ = defense;
+	get_owner()->add_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 }
 void Soldier::set_evade_level(const uint32_t evade) {
 	assert(evade_level_ <= evade);
 	assert(evade <= descr().get_max_evade_level());
 
+	get_owner()->remove_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 	evade_level_ = evade;
+	get_owner()->add_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 }
 void Soldier::set_retreat_health(const uint32_t retreat) {
 	assert(retreat <= get_max_health());
@@ -690,7 +700,7 @@ void Soldier::draw_info_icon(Vector2i draw_position,
  */
 void Soldier::calc_info_icon_size(const TribeDescr& tribe, int& w, int& h) {
 	const SoldierDescr* soldierdesc =
-	   static_cast<const SoldierDescr*>(tribe.get_worker_descr(tribe.soldier()));
+	   dynamic_cast<const SoldierDescr*>(tribe.get_worker_descr(tribe.soldier()));
 	// The function draw_info_icon() already assumes that all icons have the same dimensions,
 	// so we can make the same assumption here too.
 	const int dimension = soldierdesc->get_health_level_pic(0)->height();
@@ -1638,7 +1648,9 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 				multiplesoldiers = true;
 			}
 
-			if (soldier->get_battle()) {
+			if (soldier->get_battle() &&
+			    game.map().calc_distance(soldier->get_battle()->first()->get_position(),
+			                             soldier->get_battle()->second()->get_position()) < 2) {
 				foundbattle = true;
 
 				if (battle_ && battle_->opponent(*this) == soldier) {
@@ -1759,6 +1771,10 @@ void Soldier::Loader::load(FileRead& fr) {
 			soldier.defense_level_ =
 			   std::min(fr.unsigned_32(), soldier.descr().get_max_defense_level());
 			soldier.evade_level_ = std::min(fr.unsigned_32(), soldier.descr().get_max_evade_level());
+
+			// During saveloading init() is not called so we were not registered in the statistics yet
+			soldier.get_owner()->add_soldier(soldier.health_level_, soldier.attack_level_,
+			                                 soldier.defense_level_, soldier.evade_level_);
 
 			if (soldier.current_health_ > soldier.get_max_health()) {
 				soldier.current_health_ = soldier.get_max_health();

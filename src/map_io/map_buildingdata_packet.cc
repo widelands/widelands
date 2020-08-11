@@ -45,6 +45,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
@@ -54,7 +55,7 @@
 namespace Widelands {
 
 // Overall package version
-constexpr uint16_t kCurrentPacketVersion = 5;
+constexpr uint16_t kCurrentPacketVersion = 6;
 
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
@@ -133,6 +134,8 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 
 					building.leave_time_ = fr.unsigned_32();
 
+					building.mute_messages_ = packet_version >= 6 && fr.unsigned_8();
+
 					if (uint32_t const leaver_serial = fr.unsigned_32()) {
 						try {
 							building.leave_allow_ = &mol.get<MapObject>(leaver_serial);
@@ -143,7 +146,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 						building.leave_allow_ = nullptr;
 					}
 
-					if (packet_version >= kCurrentPacketVersion) {
+					if (packet_version >= 5) {
 						while (fr.unsigned_8()) {
 							DescriptionIndex oldidx =
 							   building.owner().tribe().safe_building_index(fr.c_string());
@@ -496,8 +499,6 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 					   map.calc_influence(mr.location(), Area<>(a, a.radius));
 				} while (mr.advance(map));
 			}
-			player->see_area(Area<FCoords>(
-			   map.get_fcoords(warehouse.get_position()), warehouse.descr().vision_range()));
 			warehouse.next_military_act_ = game.get_gametime();
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse", packet_version,
@@ -951,6 +952,7 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 				}
 			}
 			fw.unsigned_32(building->leave_time_);
+			fw.unsigned_8(building->mute_messages_ ? 1 : 0);
 			if (MapObject const* const o = building->leave_allow_.get(egbase)) {
 				assert(mos.is_object_known(*o));
 				fw.unsigned_32(mos.get_object_file_index(*o));
@@ -1114,7 +1116,7 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 		for (Worker* temp_worker : cwt.second) {
 			const Worker& w = *temp_worker;
 			assert(mos.is_object_known(w));
-			workermap.insert(std::pair<uint32_t, const Worker*>(mos.get_object_file_index(w), &w));
+			workermap.insert(std::make_pair(mos.get_object_file_index(w), &w));
 		}
 	}
 

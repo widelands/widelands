@@ -50,9 +50,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs empire_donkey",
             "consume=wheat water",
-            "sleep=15000",
+            "sleep=duration:15s",
             "playsound=sound/farm/donkey 192",
-            "animate=working 15000", -- Feeding cute little baby donkeys ;)
+            "animate=working duration:15s", -- Feeding cute little baby donkeys ;)
             "recruit=empire_donkey"
          }
       },

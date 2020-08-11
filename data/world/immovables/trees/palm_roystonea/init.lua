@@ -16,8 +16,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 57500",
-         "remove=21",
+         "animate=idle duration:57s500ms",
+         "remove=chance:8.20%",
          "grow=palm_roystonea_desert_pole",
       },
    },
@@ -43,8 +43,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 52500",
-         "remove=19",
+         "animate=idle duration:52s500ms",
+         "remove=chance:7.42%",
          "grow=palm_roystonea_desert_mature",
       },
    },
@@ -70,8 +70,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 50000",
-         "remove=18",
+         "animate=idle duration:50s",
+         "remove=chance:7.03%",
          "grow=palm_roystonea_desert_old",
       },
    },
@@ -99,8 +99,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 1550000",
-         "transform=deadtree4 39",
+         "animate=idle duration:25m50s",
+         "transform=deadtree4 chance:15.23%",
          "seed=palm_roystonea_desert_sapling 30",
       },
       fall = {

@@ -71,8 +71,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs cloth",
             "consume=fur reed",
-            "sleep=25000",
-            "animate=working 20000",
+            "sleep=duration:25s",
+            "animate=working duration:20s",
             "produce=cloth"
          },
       },

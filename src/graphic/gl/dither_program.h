@@ -37,7 +37,8 @@ public:
 	void draw(uint32_t gametime,
 	          const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	          const FieldsToDraw& fields_to_draw,
-	          float z_value);
+	          float z_value,
+	          const Widelands::Player*);
 
 private:
 	enum class TrianglePoint {

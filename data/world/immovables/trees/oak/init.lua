@@ -16,8 +16,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 72500",
-         "remove=80",
+         "animate=idle duration:1m12s500ms",
+         "remove=chance:31.25%",
          "grow=oak_summer_pole",
       },
    },
@@ -43,8 +43,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 72500",
-         "remove=70",
+         "animate=idle duration:1m12s500ms",
+         "remove=chance:27.34%",
          "grow=oak_summer_mature",
       },
    },
@@ -70,8 +70,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 75000",
-         "remove=40",
+         "animate=idle duration:1m15s",
+         "remove=chance:15.62%",
          "grow=oak_summer_old",
       },
    },
@@ -99,12 +99,12 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 2250000",
-         "transform=deadtree2 12",
+         "animate=idle duration:37m30s",
+         "transform=deadtree2 chance:4.69%",
          "seed=oak_summer_sapling 100",
       },
       fall = {
-         "animate=falling 1400",
+         "animate=falling duration:1s400ms",
          "transform=fallentree",
       },
    },

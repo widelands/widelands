@@ -49,10 +49,6 @@ tribes:new_productionsite_type {
       { name = "atlanteans_bread", amount = 10 }
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_crystalmine = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -69,7 +65,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs granite",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=40000",
+            "sleep=duration:40s",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
@@ -84,7 +80,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs quartz",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=30000",
+            "sleep=duration:30s",
             "call=a_mine_produce_quartz",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
@@ -99,7 +95,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs diamond",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=40000",
+            "sleep=duration:40s",
             "call=a_mine_produce_diamond",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_diamond",
@@ -108,7 +104,7 @@ tribes:new_productionsite_type {
       a_mine_produce_granite = {
          descname = _"mining granite",
          actions = {
-            "animate=working 15000",
+            "animate=working duration:15s",
             "mine=stones 4 100 5 2",
             "produce=granite",
          }
@@ -116,7 +112,7 @@ tribes:new_productionsite_type {
       a_mine_produce_quartz = {
          descname = _"mining quartz",
          actions = {
-            "animate=working 10000",
+            "animate=working duration:10s",
             "mine=stones 4 100 5 2",
             "produce=quartz",
          }
@@ -124,7 +120,7 @@ tribes:new_productionsite_type {
       a_mine_produce_diamond = {
          descname = _"mining diamonds",
          actions = {
-            "animate=working 25000",
+            "animate=working duration:25s",
             "mine=stones 4 100 5 2",
             "produce=diamond",
          }

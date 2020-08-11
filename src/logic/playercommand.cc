@@ -1687,7 +1687,7 @@ void CmdEnemyFlagAction::execute(Game& game) {
 
 		if (const Building* const building = flag->get_building()) {
 			if (player->is_hostile(flag->owner()) &&
-			    1 < player->vision(Map::get_index(building->get_position(), game.map().get_width()))) {
+			    player->is_seeing(Map::get_index(building->get_position(), game.map().get_width()))) {
 				std::vector<Soldier*> result;
 				for (Serial s : soldiers) {
 					if (Soldier* soldier = dynamic_cast<Soldier*>(game.objects().get_object(s))) {
@@ -1991,6 +1991,54 @@ void CmdProposeTrade::write(FileWrite& /* fw */,
                             MapObjectSaver& /* mos */) {
 	// TODO(sirver,trading): Implement this.
 	NEVER_HERE();
+}
+
+// CmdToggleMuteMessages
+void CmdToggleMuteMessages::execute(Game& game) {
+	if (upcast(Building, b, game.objects().get_object(building_))) {
+		if (all_) {
+			const DescriptionIndex di = game.tribes().safe_building_index(b->descr().name());
+			b->get_owner()->set_muted(di, !b->owner().is_muted(di));
+		} else {
+			b->set_mute_messages(!b->mute_messages());
+		}
+	}
+}
+
+CmdToggleMuteMessages::CmdToggleMuteMessages(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+	building_ = des.unsigned_32();
+	all_ = des.unsigned_8();
+}
+
+void CmdToggleMuteMessages::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(building_);
+	ser.unsigned_8(all_ ? 1 : 0);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdToggleMuteMessages = 1;
+
+void CmdToggleMuteMessages::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdToggleMuteMessages) {
+			PlayerCommand::read(fr, egbase, mol);
+			building_ = fr.unsigned_32();
+			all_ = fr.unsigned_8() ? 1 : 0;
+		} else {
+			throw UnhandledVersionError(
+			   "CmdToggleMuteMessages", packet_version, kCurrentPacketVersionCmdToggleMuteMessages);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("Cmd_ToggleMuteMessages: %s", e.what());
+	}
+}
+
+void CmdToggleMuteMessages::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdToggleMuteMessages);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(building_)));
+	fw.unsigned_8(all_);
 }
 
 }  // namespace Widelands

@@ -81,9 +81,9 @@ tribes:new_productionsite_type {
             -- time total: 33
             "return=skipped unless economy needs ration",
             "consume=fruit,smoked_fish,smoked_meat",
-            "sleep=5000",
-            "animate=working 18000",
-            "sleep=10000",
+            "sleep=duration:5s",
+            "animate=working duration:18s",
+            "sleep=duration:10s",
             "produce=ration"
          }
       },
@@ -94,8 +94,8 @@ tribes:new_productionsite_type {
             --time total: 40
             "return=skipped unless economy needs meal",
             "consume=beer honey_bread smoked_fish,smoked_meat",
-            "animate=working 30000",
-            "sleep=10000",
+            "animate=working duration:30s",
+            "sleep=duration:10s",
             "produce=meal"
          }
       },

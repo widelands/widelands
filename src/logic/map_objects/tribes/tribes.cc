@@ -146,10 +146,10 @@ void Tribes::add_worker_type(const LuaTable& table) {
 	   table, *this));
 }
 
-void Tribes::add_tribe(const LuaTable& table) {
+void Tribes::add_tribe(const LuaTable& table, const World& world) {
 	const std::string name = table.get_string("name");
 	if (Widelands::tribe_exists(name)) {
-		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), *this));
+		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), world, *this));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
 	}
@@ -359,22 +359,6 @@ void Tribes::postload() {
 			for (const auto& job : de->working_positions()) {
 				workers_->get_mutable(job.first)->add_employer(i);
 			}
-
-			// Check that all workarea overlap hints are valid
-			for (const auto& pair : de->get_highlight_overlapping_workarea_for()) {
-				const DescriptionIndex di = safe_building_index(pair.first);
-				if (upcast(const ProductionSiteDescr, p, get_building_descr(di))) {
-					if (!p->workarea_info().empty()) {
-						continue;
-					}
-					throw GameDataError("Productionsite %s will inform about conflicting building %s "
-					                    "which doesn’t have a workarea",
-					                    de->name().c_str(), pair.first.c_str());
-				}
-				throw GameDataError("Productionsite %s will inform about conflicting building %s which "
-				                    "is not a productionsite",
-				                    de->name().c_str(), pair.first.c_str());
-			}
 		}
 
 		// Register which buildings buildings can have been enhanced from
@@ -386,6 +370,21 @@ void Tribes::postload() {
 
 	// Calculate the trainingsites proportions.
 	postload_calculate_trainingsites_proportions();
+
+	// Validate immovable grows/transforms data
+	for (DescriptionIndex i = 0; i < immovables_->size(); ++i) {
+		const ImmovableDescr& imm = immovables_->get(i);
+		for (const auto& target : imm.becomes()) {
+			bool target_exists = immovable_index(target.second) != INVALID_INDEX;
+			if (!target_exists) {
+				target_exists = ship_index(target.second) != INVALID_INDEX;
+			}
+			if (!target_exists) {
+				throw GameDataError("Unknown grow/transform target '%s' for tribe immovable '%s'",
+				                    target.second.c_str(), imm.name().c_str());
+			}
+		}
+	}
 
 	// Some final checks on the gamedata
 	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {

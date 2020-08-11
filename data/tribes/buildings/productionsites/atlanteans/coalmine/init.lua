@@ -43,10 +43,6 @@ tribes:new_productionsite_type {
       atlanteans_miner = 3
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_coalmine = false,
-   },
-
    inputs = {
       { name = "smoked_fish", amount = 10 },
       { name = "smoked_meat", amount = 6 },
@@ -61,7 +57,7 @@ tribes:new_productionsite_type {
             -- time total: 105 + 7 x 3.6
             "return=skipped unless economy needs coal",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=35000",
+            "sleep=duration:35s",
             -- after having the food the miners are working 7 times
             -- each cycle lasts 10 seconds for mining and producing coal
             -- and 3.6 seconds to deliver the coal to the flag
@@ -80,7 +76,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining coal",
          actions = {
-            "animate=working 10000",
+            "animate=working duration:10s",
             "mine=coal 4 100 5 2",
             "produce=coal",
          }
