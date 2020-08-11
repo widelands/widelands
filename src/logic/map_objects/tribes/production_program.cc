@@ -1285,19 +1285,22 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     const World& world,
                                     const std::string& production_program_name,
                                     ProductionSiteDescr* descr) {
-	if (arguments.size() != 5) {
+	if (arguments.size() != 5 && arguments.size() != 4) {
 		throw GameDataError(
-		   "Usage: mine=<resource name> workarea:<radius> resources:<percent> depleted:<percent> experience:<percent>");
+		   "Usage: mine=<resource name> workarea:<radius> resources:<percent> depleted:<percent> [experience:<percent>]");
 	}
+	experience_chance_ = 0U;
 
 	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
 		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log("WARNING: Using old syntax in %s. Please use 'mine=<resource name> workarea:<radius> resources:<percent> depleted:<percent> experience:<percent>'\n", descr->name().c_str());
+		log("WARNING: Using old syntax in %s. Please use 'mine=<resource name> workarea:<radius> resources:<percent> depleted:<percent> [experience:<percent>]'\n", descr->name().c_str());
 		resource_ = world.safe_resource_index(arguments.front().c_str());
 		workarea_ = read_positive(arguments.at(1));
 		max_resources_ = read_positive(arguments.at(2)) * 100U;
 		depleted_chance_ = read_positive(arguments.at(3)) * 100U;
-		experience_chance_ = read_positive(arguments.at(4)) * 100U;
+		if (arguments.size() == 5) {
+			experience_chance_ = read_positive(arguments.at(4)) * 100U;
+		}
 	} else {
 		for (const std::string& argument : arguments) {
 			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
@@ -1313,7 +1316,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 				experience_chance_ = read_percent_to_int(item.second);
 			} else {
 				throw GameDataError(
-				   "Unknown argument '%s'. Usage: mine=<resource name> workarea:<radius> resources:<percent> depleted:<percent> experience:<percent>", item.first.c_str());
+				   "Unknown argument '%s'. Usage: mine=<resource name> workarea:<radius> resources:<percent> depleted:<percent> [experience:<percent>]", item.first.c_str());
 			}
 		}
 	}
@@ -1427,7 +1430,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		if (depleted_chance_ <= game.logic_rand() % MapObjectProgram::kMaxProbability) {
 
 			// Gain experience
-			if (experience_chance_ >= game.logic_rand() % MapObjectProgram::kMaxProbability) {
+			if (experience_chance_ > 0 && experience_chance_ >= game.logic_rand() % MapObjectProgram::kMaxProbability) {
 				ps.train_workers(game);
 			}
 			return ps.program_end(game, ProgramResult::kFailed);
