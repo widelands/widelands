@@ -6,13 +6,13 @@ on:
   pull_request:
     branches: [ master ]
 
+strategy:
+  matrix:
+    compiler: [clang]
+
 jobs:
   check:
     runs-on: ubuntu-latest
-    env:
-    - COMPILER: clang
-    - LINKER: clang
-
     steps:
     - uses: actions/checkout@v2
     - name: clang-tidy
