@@ -38,6 +38,9 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Re
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	cancel_.sigclicked.connect([this]() { die(); });
+
+	fill_table();
+	layout();
 }
 
 void MainMenuLoadMap::clicked_ok() {
@@ -83,6 +86,6 @@ void MainMenuLoadMap::entry_selected() {
 		map_details_.clear();
 	} else {
 		map_details_.update(
-		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
+		   maps_data_[table_.get_selected()], display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized);
 	}
 }
