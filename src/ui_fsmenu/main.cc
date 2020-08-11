@@ -299,7 +299,7 @@ void FullscreenMenuMain::set_button_visibility(const bool v) {
 }
 
 bool FullscreenMenuMain::handle_mousepress(uint8_t, int32_t, int32_t) {
-	if (!visible_) {
+	if (init_time_ != kNoSplash) {
 		init_time_ = kNoSplash;
 		return true;
 	}
@@ -309,7 +309,7 @@ bool FullscreenMenuMain::handle_mousepress(uint8_t, int32_t, int32_t) {
 bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 	if (down) {
 		bool fell_through = false;
-		if (!visible_) {
+		if (init_time_ != kNoSplash) {
 			init_time_ = kNoSplash;
 			fell_through = true;
 		}
@@ -403,6 +403,10 @@ static inline float calc_opacity(const uint32_t time, const uint32_t last_image_
 void FullscreenMenuMain::draw(RenderTarget& r) {
 	FullscreenMenuBase::draw(r);
 	const uint32_t time = SDL_GetTicks();
+	if (init_time_ != kNoSplash &&
+	    time > init_time_ + kInitialFadeoutDelay + 2 * kInitialFadeoutDuration) {
+		init_time_ = kNoSplash;
+	}
 
 	if (init_time_ == kNoSplash ||
 	    time > init_time_ + kInitialFadeoutDelay + kInitialFadeoutDuration) {
