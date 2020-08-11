@@ -51,6 +51,7 @@ jobs:
         apt:
           packages:
             - python-pip
+            - libicu-dev
       install: pip install sphinx
       script: ./.travis.sh documentation
     - name: "Includes"
