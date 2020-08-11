@@ -25,6 +25,7 @@
 
 #include <memory>
 
+#include <ui_basic/mouse_constants.h>
 #include <unicode/unistr.h>
 
 #include "base/log.h"
@@ -321,14 +322,29 @@ uint32_t WordWrap::line_offset(uint32_t line) const {
  *
  * \note This also draws the caret, if any.
  */
-void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t caret) {
+void WordWrap::draw(RenderTarget& dst,
+                    Vector2i where,
+                    Align align,
+                    uint32_t caret,
+                    bool with_selection,
+                    uint32_t selection_start,
+                    uint32_t selection_end) {
 	if (lines_.empty()) {
 		return;
 	}
 
 	uint32_t caretline, caretpos;
+	uint32_t selection_start_line, selection_start_x;
+	uint32_t selection_end_line, selection_end_x;
 
 	calc_wrapped_pos(caret, caretline, caretpos);
+	calc_wrapped_pos(selection_start, selection_start_line, selection_start_x);
+	calc_wrapped_pos(selection_end, selection_end_line, selection_end_x);
+
+	//	log("selection start %d: line: %d, x: %d\n", selection_start, selection_start_line,
+	//	    selection_start_x);
+	//	log("selection end %d: line: %d, x: %d\n\n", selection_end, selection_end_line,
+	// selection_end_x);
 
 	++where.y;
 
@@ -350,6 +366,45 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 		   as_editorfont(lines_[line].text, fontsize_ - UI::g_fh->fontset()->size_offset(), color_));
 		UI::correct_for_align(alignment, rendered_text->width(), &point);
 		rendered_text->draw(dst, point);
+
+		if (with_selection) {
+			if (line == selection_start_line) {
+				std::string text_before_selection = lines_[line].text.substr(0, selection_start_x);
+				Vector2i selection_start_p =
+				   Vector2i(text_width(text_before_selection, fontsize_) + point.x, line * point.y);
+
+				Vector2i selection_end_p = Vector2i::zero();
+				if (line == selection_end_line) {
+					size_t nr_characters = selection_end_x - selection_start_x;
+					std::string selected_text =
+					   lines_[line].text.substr(selection_start_x, nr_characters);
+
+					selection_end_p = Vector2i(text_width(selected_text, fontsize_), fontheight);
+
+				} else {
+					selection_end_p = Vector2i(text_width(lines_[line].text, fontsize_), fontheight);
+				}
+				dst.brighten_rect(Recti(selection_start_p, selection_end_p.x, selection_end_p.y),
+				                  BUTTON_EDGE_BRIGHT_FACTOR);
+				log("start line (%d). start: (%d,%d), w: %d, h: %d\n", line, selection_start_p.x,
+				    selection_start_p.y, selection_end_p.x, selection_end_p.y);
+			}
+			//			else if (line > selection_start_line && line < selection_end_line) {
+			//				Vector2i selection_start_p = Vector2i(point.x, line * point.y);
+			//				Vector2i selection_end_p =
+			//				   Vector2i(text_width(lines_[line].text, fontsize_), line * fontheight);
+			//				dst.brighten_rect(Recti(selection_start_p, selection_end_p.x,
+			// selection_end_p.y), 				                  BUTTON_EDGE_BRIGHT_FACTOR); 			}
+			else if (line == selection_end_line) {
+				Vector2i selection_start_p = Vector2i(point.x, (line)*fontheight);
+				Vector2i selection_end_p = Vector2i(
+				   text_width(lines_[line].text.substr(0, selection_end_x), fontsize_), fontheight);
+				dst.brighten_rect(Recti(selection_start_p, selection_end_p.x, selection_end_p.y),
+				                  BUTTON_EDGE_BRIGHT_FACTOR);
+				log("end line (%d). start: (%d,%d), w: %d, h: %d\n\n", line, selection_start_p.x,
+				    selection_start_p.y, selection_end_p.x, selection_end_p.y);
+			}
+		}
 
 		if (draw_caret_ && line == caretline) {
 			std::string line_to_caret = lines_[line].text.substr(0, caretpos);
