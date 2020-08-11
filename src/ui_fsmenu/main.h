@@ -68,14 +68,13 @@ private:
 	uint32_t butw_, buth_;
 	uint32_t padding_;
 
-	UI::Box vbox_;
+	UI::Box vbox1_, vbox2_;
 
-	UI::Button playtutorial_;
 	UI::Dropdown<FullscreenMenuBase::MenuTarget> singleplayer_;
 	UI::Dropdown<FullscreenMenuBase::MenuTarget> multiplayer_;
-	UI::Button continue_lastsave_;
 	UI::Button replay_;
 	UI::Button editor_;
+	UI::Button addons_;
 	UI::Button options_;
 	UI::Button about_;
 	UI::Button exit_;

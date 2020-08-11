@@ -72,6 +72,7 @@ public:
 
 protected:
 	void draw(RenderTarget&) override;
+	void draw_edge_decoration(RenderTarget&);
 
 	/// Sets the image for the given frame position.
 	void set_frame_image(FullscreenWindow::Frames id, const std::string& filename);
