@@ -2,7 +2,7 @@ name: Clang-Tidy
 
 on:
   push:
-    branches: [ clang-tidy-action ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -26,8 +26,3 @@ jobs:
         python ../utils/run-clang-tidy.py -checks=-*,*braces*,cert*,clang-analyzer*,cppcoreguidelines-pro-type-static-cast-downcast,google-readability-casting,performance* > ../clang-tidy.log
         popd
         utils/check_clang_tidy_results.py clang-tidy.log
-    - name: Uploading log file
-      uses: actions/upload-artifact@v2
-      with:
-        name: Clang-Tidy Debug Log
-        path: ${{ github.workspace }}/clang-tidy.log
