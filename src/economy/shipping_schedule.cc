@@ -88,6 +88,18 @@ bool ShippingSchedule::empty() const {
 	return true;
 }
 
+bool ShippingSchedule::is_busy(const Ship& ship) const {
+	if (ship.get_nritems()) {
+		return true;
+	}
+	for (const SchedulingState& ss : plans_.at(const_cast<Ship*>(&ship))) {
+		if (ss.expedition || !ss.load_there.empty()) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void ShippingSchedule::start_expedition(Game& game, Ship& ship, PortDock& port) {
 	sslog("Loading expedition\n\n");
 	assert(port.expedition_ready_);
@@ -346,7 +358,8 @@ void ShippingSchedule::ship_added(Game& game, Ship& s) {
 	}
 	plans_[&s].push_back(SchedulingState(closest, false, dist));
 	s.set_destination(game, closest);
-	sslog("Sent to %u\n\n", closest->serial());
+	// Check for closest to make clang-tidy happy
+	sslog("Sent to %u\n\n", closest ? closest->serial() : 0);
 }
 
 void ShippingSchedule::port_added(Game& game, PortDock& dock) {
@@ -1558,7 +1571,9 @@ Duration ShippingSchedule::update(Game& game) {
 		}
 		assert(closest);
 		if (dist < kNearbyDockMaxDistanceFactor) {
-			sslog("%s is already near %u\n", ship->get_shipname().c_str(), closest->serial());
+			// Check for closest to make clang-tidy happy
+			sslog("%s is already near %u\n", ship->get_shipname().c_str(),
+			      closest ? closest->serial() : 0);
 		} else {
 			plans_[ship].push_back(SchedulingState(closest, false, dist));
 			ship->set_destination(game, closest);

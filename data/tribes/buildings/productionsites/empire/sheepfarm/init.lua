@@ -52,9 +52,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs wool",
             "consume=water wheat",
-            "sleep=25000",
+            "sleep=duration:25s",
             "playsound=sound/farm/sheep 192",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "produce=wool"
          }
       },

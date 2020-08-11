@@ -39,17 +39,13 @@ tribes:new_productionsite_type {
       barbarians_stonemason = 1
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_quarry = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
          descname = _"quarrying granite",
          actions = {
             "callworker=cut_granite",
-            "sleep=17500"
+            "sleep=duration:17s500ms"
          }
       },
    },

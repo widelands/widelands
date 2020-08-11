@@ -75,8 +75,8 @@ tribes:new_productionsite_type {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs armor_helmet",
             "consume=iron coal",
-            "sleep=47000",
-            "animate=working 20000",
+            "sleep=duration:47s",
+            "animate=working duration:20s",
             "produce=armor_helmet"
          }
       },
@@ -87,8 +87,8 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs armor",
             "consume=iron coal cloth",
-            "sleep=32000",
-            "animate=working 45000",
+            "sleep=duration:32s",
+            "animate=working duration:45s",
             "produce=armor"
          }
       },
@@ -99,8 +99,8 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs armor_chain",
             "consume=iron:2 coal cloth",
-            "sleep=32000",
-            "animate=working 45000",
+            "sleep=duration:32s",
+            "animate=working duration:45s",
             "produce=armor_chain"
          }
       },
@@ -111,8 +111,8 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs armor_gilded",
             "consume=iron:2 coal:2 cloth gold",
-            "sleep=32000",
-            "animate=working 45000",
+            "sleep=duration:32s",
+            "animate=working duration:45s",
             "produce=armor_gilded"
          }
       },

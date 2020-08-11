@@ -17,8 +17,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 61000",
-         "remove=44",
+         "animate=idle duration:1m1s",
+         "remove=chance:17.19%",
          "grow=cirrus_wasteland_pole",
       },
    },
@@ -45,8 +45,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 59000",
-         "remove=34",
+         "animate=idle duration:59s",
+         "remove=chance:13.28%",
          "grow=cirrus_wasteland_mature",
       },
    },
@@ -73,8 +73,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 55000",
-         "remove=24",
+         "animate=idle duration:55s",
+         "remove=chance:9.37%",
          "grow=cirrus_wasteland_old",
       },
    },
@@ -104,8 +104,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 1455000",
-         "transform=deadtree3 34",
+         "animate=idle duration:24m15s",
+         "transform=deadtree3 chance:13.28%",
          "seed=cirrus_wasteland_sapling 100",
       },
       fall = {

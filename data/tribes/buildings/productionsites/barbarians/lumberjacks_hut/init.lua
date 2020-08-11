@@ -40,18 +40,13 @@ tribes:new_productionsite_type {
       barbarians_lumberjack = 1
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_rangers_hut = true,
-      barbarians_lumberjacks_hut = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
          descname = _"felling trees",
          actions = {
             "callworker=harvest",
-            "sleep=20000"
+            "sleep=duration:20s"
          }
       },
    },

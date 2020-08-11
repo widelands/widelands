@@ -131,7 +131,8 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 		if (g_fs->file_exists(complete_filename)) {
 			int suffix;
 			for (suffix = 0; suffix <= 9; suffix++) {
-				complete_filename = filename + "-" + std::to_string(suffix) + kTempFileExtension;
+				complete_filename =
+				   filename.append("-").append(std::to_string(suffix)).append(kTempFileExtension);
 				if (!g_fs->file_exists(complete_filename)) {
 					break;
 				}
@@ -267,7 +268,7 @@ void EditorGameBase::inform_players_about_ownership(MapIndex const i,
                                                     PlayerNumber const new_owner) {
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& player_field = p->fields_[i];
-		if (1 < player_field.vision) {
+		if (SeeUnseeNode::kVisible == player_field.seeing) {
 			player_field.owner = new_owner;
 		}
 	}
@@ -277,7 +278,7 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 	if (!Road::is_road_descr(descr) && !Waterway::is_waterway_descr(descr)) {
 		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
-			if (1 < player_field.vision) {
+			if (SeeUnseeNode::kVisible == player_field.seeing) {
 				player_field.map_object_descr = descr;
 			}
 		}
@@ -384,7 +385,8 @@ Building& EditorGameBase::warp_building(const Coords& c,
                                         FormerBuildings former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	return tribe.get_building_descr(idx)->create(*this, plr, c, false, true, former_buildings);
+	return tribe.get_building_descr(idx)->create(
+	   *this, plr, c, false, true, std::move(former_buildings));
 }
 
 /**
@@ -401,11 +403,11 @@ EditorGameBase::warp_constructionsite(const Coords& c,
                                       bool loading,
                                       FormerBuildings former_buildings,
                                       const BuildingSettings* settings,
-                                      std::map<DescriptionIndex, Quantity> preserved_wares) {
+                                      const std::map<DescriptionIndex, Quantity>& preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	ConstructionSite& b = dynamic_cast<ConstructionSite&>(
-	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings));
+	ConstructionSite& b = dynamic_cast<ConstructionSite&>(tribe.get_building_descr(idx)->create(
+	   *this, plr, c, true, loading, std::move(former_buildings)));
 	if (settings) {
 		b.apply_settings(*settings);
 	}
@@ -418,11 +420,12 @@ EditorGameBase::warp_constructionsite(const Coords& c,
  * \li former_buildings : the former buildings list. This should not be empty,
  * except during loading.
  */
-Building& EditorGameBase::warp_dismantlesite(const Coords& c,
-                                             PlayerNumber const owner,
-                                             bool loading,
-                                             FormerBuildings former_buildings,
-                                             std::map<DescriptionIndex, Quantity> preserved_wares) {
+Building&
+EditorGameBase::warp_dismantlesite(const Coords& c,
+                                   PlayerNumber const owner,
+                                   bool loading,
+                                   FormerBuildings former_buildings,
+                                   const std::map<DescriptionIndex, Quantity>& preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 
@@ -511,7 +514,6 @@ Immovable& EditorGameBase::do_create_immovable(const Coords& c,
 	const ImmovableDescr& descr =
 	   *(type == MapObjectDescr::OwnerType::kTribe ? tribes().get_immovable_descr(idx) :
 	                                                 world().get_immovable_descr(idx));
-	assert(&descr);
 	inform_players_about_immovable(Map::get_index(c, map().get_width()), &descr);
 	Immovable& immovable = descr.create(*this, c, former_building_descr);
 	if (owner != nullptr) {
@@ -619,7 +621,8 @@ void EditorGameBase::set_road(const FCoords& f,
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& first_player_field = *p->fields_.get();
 		Player::Field& player_field = (&first_player_field)[i];
-		if (1 < player_field.vision || 1 < (&first_player_field)[neighbour_i].vision) {
+		if (SeeUnseeNode::kVisible == player_field.seeing ||
+		    SeeUnseeNode::kVisible == (&first_player_field)[neighbour_i].seeing) {
 			switch (direction) {
 			case WALK_SE:
 				player_field.r_se = roadtype;

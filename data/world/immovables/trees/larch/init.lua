@@ -16,8 +16,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 60000",
-         "remove=44",
+         "animate=idle duration:1m",
+         "remove=chance:17.19%",
          "grow=larch_summer_pole",
       },
    },
@@ -43,8 +43,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 60000",
-         "remove=34",
+         "animate=idle duration:1m",
+         "remove=chance:13.28%",
          "grow=larch_summer_mature",
       },
    },
@@ -70,8 +70,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 55000",
-         "remove=24",
+         "animate=idle duration:55s",
+         "remove=chance:9.37%",
          "grow=larch_summer_old",
       },
    },
@@ -99,8 +99,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 1455000",
-         "transform=deadtree3 23",
+         "animate=idle duration:24m15s",
+         "transform=deadtree3 chance:8.98%",
          "seed=larch_summer_sapling 30",
       },
       fall = {

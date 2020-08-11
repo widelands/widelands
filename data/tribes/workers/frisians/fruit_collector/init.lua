@@ -18,9 +18,9 @@ tribes:new_worker_type {
       harvest = {
          "findobject=attrib:ripe_bush radius:6",
          "walk=object",
-         "animate=gather 8000",
+         "animate=gather duration:8s",
          "callobject=harvest",
-         "animate=idle 1000",
+         "animate=idle duration:1s",
          "createware=fruit",
          "return"
       }

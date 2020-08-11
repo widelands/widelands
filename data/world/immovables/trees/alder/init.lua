@@ -24,8 +24,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 57500",
-         "remove=21",
+         "animate=idle duration:57s500ms",
+         "remove=chance:8.2%",
          "grow=alder_summer_pole",
       },
    },
@@ -51,8 +51,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 52500",
-         "remove=19",
+         "animate=idle duration:52s500ms",
+         "remove=chance:7.42%",
          "grow=alder_summer_mature",
       },
    },
@@ -78,8 +78,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 50000",
-         "remove=18",
+         "animate=idle duration:50s",
+         "remove=chance:7%",
          "grow=alder_summer_old",
       },
    },
@@ -107,8 +107,8 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 1550000",
-         "transform=deadtree4 5",
+         "animate=idle duration:25m50s",
+         "transform=deadtree4 chance:1.95%",
          "seed=alder_summer_sapling 180",
       },
       fall = {

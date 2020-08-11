@@ -81,6 +81,9 @@ bool FindCarnivores::accept(Bob* b) const {
 	}
 	return false;
 }
+bool FindCritter::accept(Bob* b) const {
+	return is_a(Critter, b);
+}
 bool FindBobByName::accept(Bob* b) const {
 	assert(b);
 	return b->descr().name() == name_;
@@ -2541,7 +2544,7 @@ void Map::recalculate_allows_seafaring() {
 		FCoords fc = get_fcoords(c);
 
 		// Get portdock slots for this port
-		for (const Coords& portdock : find_portdock(fc, false)) {
+		for (const Coords& portdock : find_portdock(fc, true)) {
 			reachable_from_current_port.insert(portdock);
 			positions_to_check.push(portdock);
 		}

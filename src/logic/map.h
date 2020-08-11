@@ -106,6 +106,11 @@ struct FindBobByName : public FindBob {
 private:
 	std::string name_;
 };
+struct FindCritter : public FindBob {
+	bool accept(Bob* b) const override;
+	~FindCritter() override {
+	}
+};
 struct FindCarnivores : public FindBob {
 	bool accept(Bob* b) const override;
 	explicit FindCarnivores() {
@@ -302,6 +307,9 @@ public:
 	}
 
 	const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {
+		return suggested_teams_;
+	}
+	std::vector<SuggestedTeamLineup>& get_suggested_teams() {
 		return suggested_teams_;
 	}
 

@@ -47,10 +47,6 @@ tribes:new_productionsite_type {
       prohibited_till = 1050
    },
 
-   indicate_workarea_overlaps = {
-      empire_shipyard = false,
-   },
-
    working_positions = {
       empire_shipwright = 1
    },
@@ -75,13 +71,13 @@ tribes:new_productionsite_type {
          descname = _"constructing a ship",
          actions = {
             "construct=empire_shipconstruction buildship 6",
-            "sleep=20000",
+            "sleep=duration:20s",
          }
       },
       ship_preparation = {
          descname = _"working",
          actions = {
-            "animate=working 35000",
+            "animate=working duration:35s",
          }
       },
    },

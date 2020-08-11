@@ -82,7 +82,7 @@ public:
 	void add_worker_type(const LuaTable& table);
 
 	/// Adds a specific tribe's configuration.
-	void add_tribe(const LuaTable& table);
+	void add_tribe(const LuaTable& table, const World& world);
 
 	/// Registers a custom scenario building with the tribes
 	void add_custom_building(const LuaTable& table);

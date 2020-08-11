@@ -170,7 +170,7 @@ private:
 	void write_setting_user(SendPacket& packet, uint32_t number);
 	void broadcast_setting_user(uint32_t number);
 	void write_setting_all_users(SendPacket&);
-	bool write_map_transfer_info(SendPacket&, std::string);
+	bool write_map_transfer_info(SendPacket&, const std::string&);
 
 	void disconnect_player_controller(uint8_t number, const std::string& name);
 	void disconnect_client(uint32_t number,

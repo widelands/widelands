@@ -63,6 +63,112 @@ bool match_and_skip(const std::vector<std::string>& args,
 	return result;
 }
 
+/* RST
+.. _productionsite_programs:
+
+Productionsite Programs
+=======================
+Productionsites can have programs that will be executed by the game engine. Each productionsite must
+have a program named ``work``, which will be started automatically when the productionsite is
+created in the game, and then repeated until the productionsite is destroyed.
+
+Programs are defined as Lua tables. Each program must be declared as a subtable in the
+productionsite's Lua table called ``programs`` and have a unique table key. The entries in a
+program's subtable are the translatable ``descname`` and the table of ``actions`` to execute, like
+this::
+
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            <list of actions>
+         }
+      },
+   },
+
+The translations for ``descname`` can also be fetched by ``pgettext`` to disambiguate. We recommend
+that you do this whenever workers are referenced, or if your tribes have multiple wares with the
+same name::
+
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+         descname = pgettext("atlanteans_building", "recruiting soldier"),
+         actions = {
+            <list of actions>
+         }
+      },
+   },
+
+A program can call another program, for example::
+
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=produce_ration",
+            "call=produce_snack",
+            "return=skipped"
+         }
+      },
+      produce_ration = {
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         descname = _"preparing a ration",
+         actions = {
+            <list of actions>
+         }
+      },
+      produce_snack = {
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
+         descname = _"preparing a snack",
+         actions = {
+            <list of actions>
+         }
+      },
+   },
+
+A program consists of a sequence of actions. An action is written as
+``<type>=<parameters>``::
+
+
+   produce_snack = {
+      -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
+      descname = _"preparing a snack",
+      actions = {
+         "return=skipped unless economy needs snack",
+         "sleep=duration:2s500ms",
+         "consume=barbarians_bread fish,meat beer",
+         "playsound=sound/barbarians/taverns/inn 100",
+         "animate=working duration:22s",
+         "sleep=duration:10s",
+         "produce=snack"
+      }
+   },
+
+
+.. highlight:: default
+
+For general information about the format, see :ref:`map_object_programs_syntax`.
+
+Available actions are:
+
+- `animate`_
+- `call`_
+- `callworker`_
+- `checksoldier`_
+- `construct`_
+- `consume`_
+- `mine`_
+- `playsound`_
+- `recruit`_
+- `produce`_
+- `return`_
+- `sleep`_
+- `train`_
+*/
+
 ProductionProgram::ActReturn::Condition* create_economy_condition(const std::string& item,
                                                                   const ProductionSiteDescr& descr,
                                                                   const Tribes& tribes) {
@@ -183,6 +289,56 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(
 	return result;
 }
 
+/* RST
+return
+------
+Returns from the program.
+
+Parameter syntax::
+
+    parameters        ::= return_value [condition_part]
+    return_value      ::= Failed | Completed | Skipped
+    Failed            ::= failed
+    Completed         ::= completed
+    Skipped           ::= skipped
+    condition_part    ::= when_condition | unless_condition
+    when_condition    ::= when condition {and condition}
+    unless_condition  ::= unless condition {or condition}
+    condition         ::= negation | economy_condition | workers_condition
+    negation          ::= not condition
+    economy_condition ::= economy economy_needs
+    workers_condition ::= workers need_experience
+    economy_needs     ::= needs ware_type
+    need_experience   ::= need experience
+
+Parameter semantics:
+
+``return_value``
+    If return_value is Failed or Completed, the productionsite's
+    statistics is updated accordingly. If return_value is Skipped, the
+    statistics are not affected.
+``condition``
+    A boolean condition that can be evaluated to true or false.
+``condition_part``
+    If omitted, the return is unconditional.
+``when_condition``
+    This will cause the program to return when all conditions are true.
+``unless_condition``
+    This will cause the program to return unless some condition is true.
+``ware_type``
+    The name of a ware type (defined in the tribe). A ware type may only
+    appear once in the command.
+``economy_needs``
+    The result of this condition depends on whether the economy that this
+    productionsite belongs to needs a ware of the specified type. How
+    this is determined is defined by the economy.
+
+Aborts the execution of the program and sets a return value. Updates the productionsite's statistics
+depending on the return value.
+
+.. note:: If the execution reaches the end of the program, the return value is implicitly set to
+    Completed.
+*/
 ProductionProgram::ActReturn::Condition::~Condition() {
 }
 
@@ -511,6 +667,35 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 	return ps.program_end(game, result_);
 }
 
+/* RST
+call
+----
+Calls a program of the productionsite.
+
+Parameter syntax::
+
+  parameters                 ::= program [failure_handling_directive]
+  failure_handling_directive ::= on failure failure_handling_method
+  failure_handling_method    ::= Fail | Repeat | Skip
+  Fail                       ::= fail
+  Repeat                     ::= repeat
+  Skip                       ::= skip
+
+Parameter semantics:
+
+``program``
+    The name of a program defined in the productionsite.
+``failure_handling_method``
+    Specifies how to handle a failure of the called program.
+
+    - If ``failure_handling_method`` is ``fail``, the command fails (with the same effect as
+executing ``return=failed``).
+    - If ``failure_handling_method`` is ``repeat``, the command is repeated.
+    - If ``failure_handling_method`` is ``skip``, the failure is ignored (the program is continued).
+
+``failure_handling_directive``
+    If omitted, the value ``Skip`` is used for ``failure_handling_method``.
+*/
 ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments,
                                     const ProductionSiteDescr& descr) {
 	if (arguments.size() < 1 || arguments.size() > 4) {
@@ -606,6 +791,20 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 	}
 }
 
+/* RST
+callworker
+----------
+Calls a program of the productionsite's main worker.
+
+Parameter syntax::
+
+    parameters ::= program
+
+Parameter semantics:
+
+``program``
+    The name of a program defined in the productionsite's main worker.
+*/
 ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& arguments,
                                                 const std::string& production_program_name,
                                                 ProductionSiteDescr* descr,
@@ -645,6 +844,22 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 			building_radius_infos.insert(description);
 		}
 	}
+
+	for (const auto& attribute_info : workerprogram->collected_attributes()) {
+		descr->add_collected_attribute(attribute_info);
+	}
+	for (const auto& attribute_info : workerprogram->created_attributes()) {
+		descr->add_created_attribute(attribute_info);
+	}
+	for (const std::string& resourcename : workerprogram->collected_resources()) {
+		descr->add_collected_resource(resourcename);
+	}
+	for (const std::string& resourcename : workerprogram->created_resources()) {
+		descr->add_created_resource(resourcename);
+	}
+	for (const std::string& bobname : workerprogram->created_bobs()) {
+		descr->add_created_bob(bobname);
+	}
 }
 
 void ProductionProgram::ActCallWorker::execute(Game& game, ProductionSite& ps) const {
@@ -672,17 +887,52 @@ void ProductionProgram::ActCallWorker::building_work_failed(Game& game,
 	psite.program_end(game, ProgramResult::kFailed);
 }
 
-ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments) {
+/* RST
+sleep
+-----
+Does nothing.
+
+Parameter syntax::
+
+  parameters ::= duration:<duration>
+
+Parameter semantics:
+
+``duration``
+    A natural integer. If 0, the result from the most recent command that
+    returned a value is used.
+
+Blocks the execution of the program for the specified duration.
+*/
+ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
+                                      const ProductionSiteDescr& psite) {
 	if (arguments.size() != 1) {
-		throw GameDataError("Usage: sleep=<duration>");
+		throw GameDataError("Usage: sleep=duration:<duration>");
 	}
-	duration_ = read_positive(arguments.front());
+	const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
+	if (item.first == "duration") {
+		duration_ = read_duration(item.second, psite);
+	} else if (item.second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove after v1.0
+		duration_ = read_duration(item.first, psite);
+		log("WARNING: 'sleep' program without parameter name is deprecated, please use "
+		    "'sleep=duration:<duration>' in %s\n",
+		    psite.name().c_str());
+	} else {
+		throw GameDataError(
+		   "Unknown argument '%s'. Usage: duration:<duration>", arguments.front().c_str());
+	}
 }
 
 void ProductionProgram::ActSleep::execute(Game& game, ProductionSite& ps) const {
 	return ps.program_step(game, duration_ ? duration_ : 0, ps.top_state().phase);
 }
 
+/* RST
+animate
+-------
+Runs an animation. See :ref:`map_object_programs_animate`.
+*/
 ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr* descr) {
 	parameters = MapObjectProgram::parse_act_animate(arguments, *descr, false);
@@ -694,6 +944,48 @@ void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) cons
 	   game, parameters.duration ? parameters.duration : 0, ps.top_state().phase);
 }
 
+/* RST
+consume
+-------
+Consumes wares from the input storages.
+
+Parameter syntax::
+
+  parameters ::= group {group}
+  group      ::= ware_type{,ware_type}[:count]
+
+Parameter semantics:
+
+``ware_type``
+    The name of a ware type (defined in the tribe).
+``count``
+    A positive integer. If omitted, the value 1 is used.
+
+For each group, the number of wares specified in count is consumed. The consumed wares may be of any
+type in the group.
+
+If there are not enough wares in the input storages, the command fails (with the same effect as
+executing ``return=failed``). Then no wares will be consumed.
+
+Selecting which ware types to consume for a group so that the whole command succeeds is a constraint
+satisfaction problem. The implementation does not implement an exhaustive search for a solution to
+it. It is just a greedy algorithm which gives up instead of backtracking. Therefore the command may
+fail even if there is a solution.
+
+However it may be possible to help the algorithm by ordering the groups carefully. Suppose that the
+input storage has the wares ``a:1, b:1`` and a consume command has the parameters ``a,b:1 a:1``. The
+algorithm tries to consume its input wares in order. It starts with the first group and consumes 1
+ware of type ``a`` (the group becomes satisfied). Then it proceeds with the second group, but there
+are no wares of type ``a`` left to consume. Since there is no other ware type that can satisfy the
+group, the command will fail. If the groups are reordered so that the parameters become ``a:1
+a,b:1``, it will work. The algorithm will consume 1 ware of type ``a`` for the first group. When it
+proceeds with the second group, it will not have any wares of type ``a`` left. Then it will go on
+and consume 1 ware of type ``b`` for the second group (which becomes satisfied) and the command
+succeeds.
+
+.. note:: It is not possible to reorder ware types within a group. ``a,b`` is equivalent to ``b,a``
+    because in the internal representation the ware types of a group are sorted.
+*/
 ProductionProgram::ActConsume::ActConsume(const std::vector<std::string>& arguments,
                                           const ProductionSiteDescr& descr,
                                           const Tribes& tribes) {
@@ -824,6 +1116,27 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 	}
 }
 
+/* RST
+produce
+-------
+Produces wares.
+
+Parameter syntax::
+
+  parameters ::= group {group}
+  group      ::= ware_type[:count]
+
+Parameter semantics:
+
+``ware_type``
+    The name of a ware type (defined in the tribe). A ware type may only
+    appear once in the command.
+``count``
+    A positive integer. If omitted, the value 1 is used.
+
+For each group, the number of wares specified in count is produced. The produced wares are of the
+type specified in the group. How the produced wares are handled is defined by the productionsite.
+*/
 ProductionProgram::ActProduce::ActProduce(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
                                           const Tribes& tribes) {
@@ -881,6 +1194,28 @@ bool ProductionProgram::ActProduce::get_building_work(Game& game,
 	return false;
 }
 
+/* RST
+recruit
+-------
+Recruits workers.
+
+Parameter syntax::
+
+  parameters ::= group {group}
+  group      ::= worker_type[:count]
+
+Parameter semantics:
+
+``worker_type``
+    The name of a worker type (defined in the tribe). A worker type may only
+    appear once in the command.
+``count``
+    A positive integer. If omitted, the value 1 is used.
+
+For each group, the number of workers specified in count is produced. The produced workers are of
+the type specified in the group. How the produced workers are handled is defined by the
+productionsite.
+*/
 ProductionProgram::ActRecruit::ActRecruit(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
                                           const Tribes& tribes) {
@@ -934,6 +1269,18 @@ bool ProductionProgram::ActRecruit::get_building_work(Game& game,
 	return false;
 }
 
+/* RST
+mine
+----
+Takes resources from the ground. It takes as arguments first the resource
+name, after this the radius for searching for the resource around the building
+field. The next values is the percentage of starting resources that can be dug
+out before this mine is exhausted. The next value is the percentage that this
+building still produces something even if it is exhausted. And the last value
+is the percentage chance that a worker is gaining experience on failure - this
+is to guarantee that you can eventually extend a mine, even though it was
+exhausted for a while already.
+*/
 ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     const World& world,
                                     const std::string& production_program_name,
@@ -952,6 +1299,8 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	const std::string description = descr->name() + " " + production_program_name + " mine " +
 	                                world.get_resource(resource_)->name();
 	descr->workarea_info_[distance_].insert(description);
+
+	descr->add_collected_resource(arguments.front());
 }
 
 void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
@@ -1070,6 +1419,12 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 	return ps.program_step(game);
 }
 
+/* RST
+checksoldier
+------------
+Returns failure unless there are a specified amount of soldiers with specified level of specified
+properties. This command type is subject to change.
+*/
 ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::string>& arguments) {
 	if (arguments.size() != 3) {
 		throw GameDataError("Usage: checksoldier=soldier <training attribute> <level>");
@@ -1128,6 +1483,11 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 	return ps.program_step(game);
 }
 
+/* RST
+train
+-----
+Increases the level of a specified property of a soldier. No further documentation available.
+*/
 ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments) {
 	if (arguments.size() != 4) {
 		throw GameDataError(
@@ -1204,6 +1564,25 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	return ps.program_step(game);
 }
 
+/* RST
+playsound
+---------
+Plays a sound effect.
+
+Parameter syntax::
+
+  parameters ::= soundFX [priority]
+
+Parameter semantics:
+
+``filepath``
+    The path/base_filename of a soundFX (relative to the data directory).
+``priority``
+    An integer. If omitted, 127 is used.
+
+Plays the specified soundFX with the specified priority. Whether the soundFX is actually played is
+determined by the sound handler.
+*/
 ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
 	parameters = MapObjectProgram::parse_act_play_sound(arguments, kFxPriorityAllowMultiple - 1);
 }
@@ -1214,9 +1593,31 @@ void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) co
 	return ps.program_step(game);
 }
 
+/* RST
+construct
+---------
+Construct an immovable on the seashore.
+
+Parameter syntax::
+
+  parameters ::= <object_name> <worker_program> <workarea_radius>
+
+Parameter semantics:
+
+``object_name``
+    The name of the immovable to be constructed, e.g. ``barbarians_shipconstruction``.
+``worker_program``
+    The worker's program that makes him walk to the immovable's location and do some work.
+``workarea_radius``
+    The radius used by the worker to find a suitable construction spot on the map.
+
+Sends the main worker to look for a suitable spot on the shore and to perform construction work on
+an immovable.
+*/
 ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& arguments,
                                               const std::string& production_program_name,
-                                              ProductionSiteDescr* descr) {
+                                              ProductionSiteDescr* descr,
+                                              const Tribes& tribes) {
 	if (arguments.size() != 3) {
 		throw GameDataError("Usage: construct=<object name> <worker program> <workarea radius>");
 	}
@@ -1227,6 +1628,14 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 	const std::string description =
 	   descr->name() + ' ' + production_program_name + " construct " + objectname;
 	descr->workarea_info_[radius].insert(description);
+
+	// Register created immovable with productionsite
+	const WorkerDescr& main_worker_descr =
+	   *tribes.get_worker_descr(descr->working_positions().front().first);
+	for (const auto& attribute_info :
+	     main_worker_descr.get_program(workerprogram)->created_attributes()) {
+		descr->add_created_attribute(attribute_info);
+	}
 }
 
 const ImmovableDescr&
@@ -1263,7 +1672,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	const Map& map = game.map();
 	std::vector<ImmovableFound> immovables;
 	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
-	Area<FCoords> area(map.get_fcoords(psite.base_flag().get_position()), radius);
+	Area<FCoords> area(map.get_fcoords(psite.get_position()), radius);
 	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr))) {
 		state.objvar = immovables[0].object;
 
@@ -1393,8 +1802,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActCall(parseinput.arguments, *building)));
 			} else if (parseinput.name == "sleep") {
-				actions_.push_back(
-				   std::unique_ptr<ProductionProgram::Action>(new ActSleep(parseinput.arguments)));
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActSleep(parseinput.arguments, *building)));
 			} else if (parseinput.name == "animate") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActAnimate(parseinput.arguments, building)));
@@ -1424,7 +1833,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActConstruct(parseinput.arguments, name(), building)));
+				   new ActConstruct(parseinput.arguments, name(), building, tribes)));
 			} else {
 				throw GameDataError(
 				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());

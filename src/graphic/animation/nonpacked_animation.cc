@@ -28,7 +28,6 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/playercolor.h"
-#include "graphic/texture.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
@@ -43,7 +42,7 @@ NonPackedAnimation::MipMapEntry IMPLEMENTATION
 */
 
 NonPackedAnimation::NonPackedMipMapEntry::NonPackedMipMapEntry(std::vector<std::string> files)
-   : Animation::MipMapEntry(), image_files(files) {
+   : Animation::MipMapEntry(), image_files(std::move(files)) {
 	if (image_files.empty()) {
 		throw Widelands::GameDataError(
 		   "Animation without image files. For a scale of 1.0, the template should look similar to "
@@ -114,17 +113,34 @@ void NonPackedAnimation::NonPackedMipMapEntry::blit(uint32_t idx,
                                                     const Rectf& source_rect,
                                                     const Rectf& destination_rect,
                                                     const RGBColor* clr,
-                                                    Surface* target) const {
+                                                    Surface* target,
+                                                    float opacity) const {
 	assert(!frames.empty());
 	assert(target);
 	assert(idx < frames.size());
 
 	if (!has_playercolor_masks || clr == nullptr) {
-		target->blit(destination_rect, *frames.at(idx), source_rect, 1., BlendMode::UseAlpha);
+		target->blit(destination_rect, *frames.at(idx), source_rect, opacity, BlendMode::UseAlpha);
 	} else {
 		target->blit_blended(
 		   destination_rect, *frames.at(idx), *playercolor_mask_frames.at(idx), source_rect, *clr);
 	}
+}
+
+std::vector<std::unique_ptr<const Texture>>
+NonPackedAnimation::NonPackedMipMapEntry::frame_textures(bool return_playercolor_masks) const {
+	ensure_graphics_are_loaded();
+
+	std::vector<std::unique_ptr<const Texture>> result;
+	const Rectf rect(Vector2f::zero(), width(), height());
+	for (const std::string& filename :
+	     return_playercolor_masks ? playercolor_mask_image_files : image_files) {
+		std::unique_ptr<Texture> texture(new Texture(width(), height()));
+		texture->fill_rect(rect, RGBAColor(0, 0, 0, 0));
+		texture->blit(rect, *g_gr->images().get(filename), rect, 1., BlendMode::Copy);
+		result.push_back(std::move(texture));
+	}
+	return result;
 }
 
 int NonPackedAnimation::NonPackedMipMapEntry::width() const {
@@ -205,18 +221,6 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
 	} catch (const LuaError& e) {
 		throw Widelands::GameDataError("Error in animation table: %s.", e.what());
 	}
-}
-
-std::vector<const Image*> NonPackedAnimation::images(float scale) const {
-	const NonPackedMipMapEntry& mipmap =
-	   dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(scale));
-	return mipmap.frames;
-}
-
-std::vector<const Image*> NonPackedAnimation::pc_masks(float scale) const {
-	const NonPackedMipMapEntry& mipmap =
-	   dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(scale));
-	return mipmap.playercolor_mask_frames;
 }
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {

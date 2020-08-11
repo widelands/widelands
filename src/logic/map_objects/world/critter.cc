@@ -105,8 +105,7 @@ CritterDescr::CritterDescr(const std::string& init_descname,
      reproduction_rate_(table.get_int("reproduction_rate")) {
 	assign_directional_animation(&walk_anims_, "walk");
 
-	add_attributes(
-	   table.get_table("attributes")->array_entries<std::string>(), std::set<uint32_t>());
+	add_attributes(table.get_table("attributes")->array_entries<std::string>());
 
 	if (size_ < 1 || size_ > 10) {
 		throw GameDataError(
@@ -265,6 +264,8 @@ Simply roam the map
 ==============================
 */
 
+constexpr double kPi = 3.1415926535897932384626433832795029;
+
 Bob::Task const Critter::taskRoam = {
    "roam", static_cast<Bob::Ptr>(&Critter::roam_update), nullptr, nullptr, true};
 
@@ -282,6 +283,7 @@ void Critter::roam_update(Game& game, State& state) {
 	// alternately move and idle
 	Time idle_time_min = 1000;
 	Time idle_time_rnd = kCritterMaxIdleTime;
+
 	if (state.ivar1) {
 		state.ivar1 = 0;
 		// lots of magic numbers for reasonable weighting of various nearby animals
@@ -317,6 +319,12 @@ void Critter::roam_update(Game& game, State& state) {
 	const uint32_t reproduction_rate = descr().get_reproduction_rate();
 
 	{  // chance to die
+		const uint32_t nearby_critters1 =
+		   game.map().find_bobs(game, Area<FCoords>(get_position(), 2), nullptr, FindCritter());
+		const uint32_t nearby_critters2 = game.map().find_bobs(
+		   game, Area<FCoords>(get_position(), 7), nullptr, FindBobByName(descr().name()));
+		assert(nearby_critters1);  // at least we are here
+		assert(nearby_critters2);
 		const double r = reproduction_rate * reproduction_rate / 10000000.0;
 		const double i1 = r / kMinCritterLifetime;
 		const double i2 = (1 - r) / (kMaxCritterLifetime - kMinCritterLifetime);
@@ -326,7 +334,8 @@ void Critter::roam_update(Game& game, State& state) {
 		                                             (kMaxCritterLifetime - kMinCritterLifetime));
 		assert(d >= 0.0);
 		assert(d <= 1.0);
-		if (game.logic_rand() % kMinCritterLifetime < d * kMinCritterLifetime) {
+		if (game.logic_rand() % kMinCritterLifetime <
+		    d * kMinCritterLifetime * nearby_critters1 * nearby_critters1 * nearby_critters2) {
 			// :(
 			molog("Goodbye world :(\n");
 			return schedule_destroy(game);
@@ -422,14 +431,14 @@ void Critter::roam_update(Game& game, State& state) {
 				const double weighted_success_chance =
 				   S <= -N ? 0.0 :
 				             S >= N ? 1.0 :
-				                      -(std::log(S * S + 1) - 2 * S * std::atan(S) - M_PI * S -
-				                        std::log(N * N + 1) + N * (2 * std::atan(N) - M_PI)) /
-				                         (2 * N * M_PI);
+				                      -(std::log(S * S + 1) - 2 * S * std::atan(S) - kPi * S -
+				                        std::log(N * N + 1) + N * (2 * std::atan(N) - kPi)) /
+				                         (2 * N * kPi);
 				molog("    *** [total strength %d] vs [prey %d] *** success chance %lf\n", S,
 				      defender_strength, weighted_success_chance);
 				assert(weighted_success_chance >= 0.0);
 				assert(weighted_success_chance <= 1.0);
-				if (game.logic_rand() % N < weighted_success_chance * N) {
+				if (game.logic_rand() % (N != 0 ? N : 1) < weighted_success_chance * N) {
 					molog("    SUCCESS :)\n");
 					food->remove(game);
 				} else {

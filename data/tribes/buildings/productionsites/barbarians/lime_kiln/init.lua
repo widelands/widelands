@@ -53,11 +53,11 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs grout",
             "consume=coal granite:2 water:2",
-            "sleep=50000",
+            "sleep=duration:50s",
             "playsound=sound/barbarians/stonegrind 100",
-            "animate=working 29000",
+            "animate=working duration:29s",
             "playsound=sound/barbarians/mortar 80",
-            "sleep=3000",
+            "sleep=duration:3s",
             "produce=grout:2"
          }
       },

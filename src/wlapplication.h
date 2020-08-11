@@ -131,8 +131,6 @@ struct WLApplication {
 	static WLApplication* get(int const argc = 0, char const** argv = nullptr);
 	~WLApplication();
 
-	enum GameType { NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK };
-
 	void run();
 
 	/// \warning true if an external entity wants us to quit
@@ -206,7 +204,7 @@ private:
 	void cleanup_replays();
 	void cleanup_ai_files();
 	void cleanup_temp_files();
-	void cleanup_temp_backups(std::string dir);
+	void cleanup_temp_backups(const std::string& dir);
 	void cleanup_temp_backups();
 
 	bool redirect_output(std::string path = "");
@@ -226,6 +224,7 @@ private:
 	/// --scenario or --loadgame.
 	std::string script_to_run_;
 
+	enum class GameType { kNone, kEditor, kReplay, kScenario, kLoadGame };
 	GameType game_type_;
 
 	/// True if left and right mouse button should be swapped

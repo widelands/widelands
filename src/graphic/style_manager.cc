@@ -27,13 +27,20 @@
 #include "scripting/lua_interface.h"
 
 namespace {
-// Read RGB color from LuaTable
+// Read RGB(A) color from LuaTable
 RGBColor read_rgb_color(const LuaTable& table) {
 	std::vector<int> rgbcolor = table.array_entries<int>();
 	if (rgbcolor.size() != 3) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
 	}
 	return RGBColor(rgbcolor[0], rgbcolor[1], rgbcolor[2]);
+}
+RGBAColor read_rgba_color(const LuaTable& table) {
+	std::vector<int> rgbacolor = table.array_entries<int>();
+	if (rgbacolor.size() != 4) {
+		throw wexception("Expected 4 entries for RGBA color, but got %" PRIuS ".", rgbacolor.size());
+	}
+	return RGBAColor(rgbacolor[0], rgbacolor[1], rgbacolor[2], rgbacolor[3]);
 }
 
 // Read font style from LuaTable
@@ -93,7 +100,8 @@ void StyleManager::init() {
 	scrollbarstyles_.clear();
 
 	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script(kTemplateDir + "init.lua"));
+	std::unique_ptr<LuaTable> table(
+	   lua.run_script((boost::format("%1%init.lua") % kTemplateDir).str()));
 
 	// Buttons
 	std::unique_ptr<LuaTable> element_table = table->get_table("buttons");
@@ -186,6 +194,8 @@ void StyleManager::init() {
 		throw wexception("Font size too small for minimum_font_size, must be at least 1!");
 	}
 	minimap_icon_frame_ = read_rgb_color(*table->get_table("minimap_icon_frame"));
+	window_border_focused_ = read_rgba_color(*table->get_table("window_border_focused"));
+	window_border_unfocused_ = read_rgba_color(*table->get_table("window_border_unfocused"));
 
 	// Fonts
 	element_table = table->get_table("fonts");

@@ -47,22 +47,13 @@ tribes:new_productionsite_type {
       frisians_forester = 1
    },
 
-   indicate_workarea_overlaps = {
-      frisians_clay_pit = false,
-      frisians_berry_farm = false,
-      frisians_reed_farm = false,
-      frisians_farm = false,
-      frisians_foresters_house = false,
-      frisians_woodcutters_house = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
          descname = _"planting trees",
          actions = {
             "callworker=plant",
-            "sleep=12000"
+            "sleep=duration:12s"
          }
       },
    },

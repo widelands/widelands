@@ -45,7 +45,7 @@ AttackBox::AttackBox(UI::Panel* parent,
 std::vector<Widelands::Soldier*> AttackBox::get_max_attackers() {
 	assert(player_);
 	if (upcast(Building, building, map_.get_immovable(*node_coordinates_))) {
-		if (player_->vision(map_.get_index(building->get_position(), map_.get_width())) > 1) {
+		if (player_->is_seeing(map_.get_index(building->get_position(), map_.get_width()))) {
 			std::vector<Widelands::Soldier*> v;
 			// TODO(Nordfriese): This method decides by itself which soldier remains in the building.
 			// This soldier will not show up in the result vector. Perhaps we should show all
@@ -75,7 +75,7 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
 }
 
 UI::Textarea& AttackBox::add_text(UI::Box& parent,
-                                  std::string str,
+                                  const std::string& str,
                                   UI::Align alignment,
                                   const UI::FontStyle style) {
 	UI::Textarea& result =

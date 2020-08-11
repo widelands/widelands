@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    attributes = {},
    programs = {
       program = {
-         "animate=idle 140000",
+         "animate=idle duration:2m20s",
          "transform=pond_mature",
       },
    },

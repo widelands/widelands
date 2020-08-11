@@ -1,20 +1,19 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+"""Checks whether clang-tidy warnings that were previously cleaned have
+regressed."""
+
 import re
 import sys
 
+# Checks list: https://clang.llvm.org/extra/clang-tidy/checks/list.html
 SUPPRESSED_CHECKS = {
     '[android-cloexec-fopen]',
     '[boost-use-to-string]',
     '[bugprone-integer-division]',
-    '[cert-dcl50-cpp]',
-    '[cert-err34-c]',
+    '[cert-dcl50-cpp]',  # We need this for our logger
     '[cert-err58-cpp]',
-    '[cert-msc30-c]',
-    '[cert-msc50-cpp]',
-    '[clang-analyzer-core.CallAndMessage]',
-    '[clang-analyzer-core.DivideZero]',
     '[clang-analyzer-core.NonNullParamChecker]',
     '[clang-analyzer-core.UndefinedBinaryOperatorResult]',
     '[clang-analyzer-cplusplus.NewDelete]',
@@ -28,7 +27,6 @@ SUPPRESSED_CHECKS = {
     '[cppcoreguidelines-pro-type-const-cast]',
     '[cppcoreguidelines-pro-type-member-init]',
     '[cppcoreguidelines-pro-type-reinterpret-cast]',
-    '[cppcoreguidelines-pro-type-static-cast-downcast]',
     '[cppcoreguidelines-pro-type-union-access]',
     '[cppcoreguidelines-pro-type-vararg]',  # We need this for our logger
     '[cppcoreguidelines-slicing]',
@@ -78,11 +76,6 @@ SUPPRESSED_CHECKS = {
     '[modernize-use-equals-default]',
     '[modernize-use-nullptr]',
     '[modernize-use-override]',
-    '[performance-for-range-copy]',
-    '[performance-inefficient-string-concatenation]',
-    '[performance-inefficient-vector-operation]',
-    '[performance-unnecessary-copy-initialization]',
-    '[performance-unnecessary-value-param]',
     '[readability-container-size-empty]',
     '[readability-delete-null-pointer]',
     '[readability-else-after-return]',
@@ -100,20 +93,20 @@ SUPPRESSED_CHECKS = {
     '[readability-static-definition-in-anonymous-namespace]'
 }
 
-CHECK_REGEX = re.compile('.*\[([A-Za-z0-9.-]+)\]$')
+CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')
 
 
 def main():
     """Checks whether clang-tidy warnings that were previously cleaned have
     regressed."""
     if len(sys.argv) == 2:
-        print('#######################################')
-        print('#######################################')
-        print('###                                 ###')
-        print('###   Checking clang-tidy results   ###')
-        print('###                                 ###')
-        print('#######################################')
-        print('#######################################')
+        print('########################################################')
+        print('########################################################')
+        print('###                                                  ###')
+        print('###   Checking clang-tidy results                    ###')
+        print('###                                                  ###')
+        print('########################################################')
+        print('########################################################')
     else:
         print(
             'Usage: check_clang_tidy_results.py <log_file>')
@@ -128,6 +121,9 @@ def main():
         for line in contents:
             if 'third_party' in line:
                 continue
+            # We're not piloting alpha-level checks
+            if 'clang-analyzer-alpha' in line:
+                continue
             check_suppressed = False
             for check in SUPPRESSED_CHECKS:
                 if check in line:
@@ -138,23 +134,24 @@ def main():
                 errors = errors + 1
 
     if errors > 0:
-        print('#######################################')
-        print('#######################################')
-        print('###                                 ###')
-        print('###   Found %s error(s)              ###' % errors)
-        print('###                                 ###')
-        print('#######################################')
-        print('#######################################')
+        print('########################################################')
+        print('########################################################')
+        print('###                                                  ###')
+        print('###   Found %s error(s)                               ###'
+              % errors)
+        print('###                                                  ###')
+        print('########################################################')
+        print('########################################################')
+        print('Information about the checks can be found on:')
+        print('https://clang.llvm.org/extra/clang-tidy/checks/list.html')
         return 1
-    else:
-        print('#######################################')
-        print('#######################################')
-        print('###                                 ###')
-        print('###   Check has passed              ###')
-        print('###                                 ###')
-        print('#######################################')
-        print('#######################################')
-        return 0
+
+    print('###                                                  ###')
+    print('###   Check has passed                               ###')
+    print('###                                                  ###')
+    print('########################################################')
+    print('########################################################')
+    return 0
 
 
 if __name__ == '__main__':

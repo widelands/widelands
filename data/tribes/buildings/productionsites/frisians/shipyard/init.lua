@@ -48,10 +48,6 @@ tribes:new_productionsite_type {
       prohibited_till = 1050
    },
 
-   indicate_workarea_overlaps = {
-      frisians_shipyard = false,
-   },
-
    working_positions = {
       frisians_shipwright = 1
    },
@@ -76,13 +72,13 @@ tribes:new_productionsite_type {
          descname = _"constructing a ship",
          actions = {
             "construct=frisians_shipconstruction buildship 6",
-            "sleep=20000",
+            "sleep=duration:20s",
          }
       },
       ship_preparation = {
          descname = _"working",
          actions = {
-            "sleep=35000",
+            "sleep=duration:35s",
             -- no working animation yet
          }
       },

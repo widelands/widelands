@@ -54,6 +54,7 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
@@ -544,7 +545,7 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
-	auto* fields_to_draw = map_view()->draw_terrain(ebase, Workareas(), draw_grid_, &dst);
+	auto* fields_to_draw = map_view()->draw_terrain(ebase, nullptr, Workareas(), draw_grid_, &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const uint32_t gametime = ebase.get_gametime();
@@ -652,7 +653,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					                         3);
 					const Image* pic = get_sel_picture();
 					blit_overlay(
-					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
 				}
 				if (selected_triangles.count(
 				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D))) {
@@ -664,7 +665,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					                         3);
 					const Image* pic = get_sel_picture();
 					blit_overlay(
-					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
 				}
 			}
 		}

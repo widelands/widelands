@@ -43,7 +43,7 @@ struct GameMessageMenu : public UI::UniqueWindow {
 	/// is currently multiselecting messages.
 	void show_new_message(Widelands::MessageId, const Widelands::Message&);
 
-	enum Mode { Inbox, Archive };
+	enum class Mode { kInbox, kArchive };
 	void think() override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 
