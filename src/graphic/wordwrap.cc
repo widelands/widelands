@@ -342,11 +342,6 @@ void WordWrap::draw(RenderTarget& dst,
 	calc_wrapped_pos(selection_start, selection_start_line, selection_start_x);
 	calc_wrapped_pos(selection_end, selection_end_line, selection_end_x);
 
-	//	log("selection start %d: line: %d, x: %d\n", selection_start, selection_start_line,
-	//	    selection_start_x);
-	//	log("selection end %d: line: %d, x: %d\n\n", selection_end, selection_end_line,
-	// selection_end_x);
-
 	++where.y;
 
 	Align alignment = mirror_alignment(align, g_fh->fontset()->is_rtl());
