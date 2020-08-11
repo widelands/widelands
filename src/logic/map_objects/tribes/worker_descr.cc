@@ -52,7 +52,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
                                             INVALID_INDEX),
      needed_experience_(table.has_key("becomes") ? table.get_int("experience") : INVALID_INDEX),
      ai_hints_(table.has_key("aihints") ?
-                  new WorkerHints(table.get_string("name"), *table.get_table("aihints")) :
+                  new AI::WorkerHints(table.get_string("name"), *table.get_table("aihints")) :
                   nullptr),
      tribes_(tribes) {
 	if (helptext_script().empty()) {

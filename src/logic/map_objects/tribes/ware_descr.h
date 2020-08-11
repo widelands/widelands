@@ -43,7 +43,7 @@ public:
 	}
 
 	/// AI hints for this ware type
-	const WareHints& ai_hints() const {
+	const AI::WareHints& ai_hints() const {
 		return *ai_hints_;
 	}
 
@@ -75,7 +75,7 @@ private:
 	std::unordered_map<std::string, int> default_target_quantities_;
 
 	// Hints for the AI
-	std::unique_ptr<WareHints> ai_hints_;
+	std::unique_ptr<AI::WareHints> ai_hints_;
 
 	std::set<DescriptionIndex> consumers_;  // Buildings that consume this ware
 	std::set<DescriptionIndex> producers_;  // Buildings that produce this ware
