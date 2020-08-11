@@ -108,8 +108,6 @@ find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(PNG REQUIRED)
 
-find_package(Threads REQUIRED)
-
 find_package(SDL2 REQUIRED)
 
 find_package(SDL2_image REQUIRED)
