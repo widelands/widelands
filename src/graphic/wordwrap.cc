@@ -382,7 +382,10 @@ void WordWrap::draw(RenderTarget& dst,
 					selection_end_p = Vector2i(text_width(selected_text, fontsize_), fontheight);
 
 				} else {
-					selection_end_p = Vector2i(text_width(lines_[line].text, fontsize_), fontheight);
+					std::string selected_text = lines_[line].text.substr(selection_start_x);
+					log("special: %s (%d) w: %d\n", selected_text.c_str(), selected_text.size(),
+					    text_width(selected_text, fontsize_));
+					selection_end_p = Vector2i(text_width(selected_text, fontsize_), fontheight);
 				}
 				dst.brighten_rect(Recti(selection_start_p, selection_end_p.x, selection_end_p.y),
 				                  BUTTON_EDGE_BRIGHT_FACTOR);
