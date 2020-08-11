@@ -38,8 +38,6 @@
 #include "scripting/lua_map.h"
 #include "ui_basic/progresswindow.h"
 
-using namespace Widelands;
-
 namespace LuaBases {
 
 /* RST
@@ -137,13 +135,13 @@ int LuaEditorGameBase::get_map(lua_State* L) {
       The editor always creates all players that are defined by the map.
 */
 int LuaEditorGameBase::get_players(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
 
 	lua_newtable(L);
 
 	uint32_t idx = 1;
-	for (PlayerNumber i = 1; i <= kMaxPlayers; i++) {
-		Player* rv = egbase.get_player(i);
+	for (Widelands::PlayerNumber i = 1; i <= kMaxPlayers; i++) {
+		Widelands::Player* rv = egbase.get_player(i);
 		if (!rv) {
 			continue;
 		}
@@ -175,20 +173,20 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string immovable_name = luaL_checkstring(L, 2);
-	EditorGameBase& egbase = get_egbase(L);
-	const World& world = egbase.world();
-	DescriptionIndex idx = world.get_immovable_index(immovable_name);
-	if (idx != INVALID_INDEX) {
-		const ImmovableDescr* descr = world.get_immovable_descr(idx);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	const Widelands::World& world = egbase.world();
+	Widelands::DescriptionIndex idx = world.get_immovable_index(immovable_name);
+	if (idx != Widelands::INVALID_INDEX) {
+		const Widelands::ImmovableDescr* descr = world.get_immovable_descr(idx);
 		return to_lua<LuaMaps::LuaImmovableDescription>(
 		   L, new LuaMaps::LuaImmovableDescription(descr));
 	}
-	const Tribes& tribes = egbase.tribes();
+	const Widelands::Tribes& tribes = egbase.tribes();
 	idx = tribes.immovable_index(immovable_name);
 	if (!tribes.immovable_exists(idx)) {
 		report_error(L, "Immovable %s does not exist", immovable_name.c_str());
 	}
-	const ImmovableDescr* descr = tribes.get_immovable_descr(idx);
+	const Widelands::ImmovableDescr* descr = tribes.get_immovable_descr(idx);
 	return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
 }
 
@@ -206,7 +204,7 @@ int LuaEditorGameBase::tribe_immovable_exists(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string immovable_name = luaL_checkstring(L, 2);
-	lua_pushboolean(L, get_egbase(L).tribes().immovable_index(immovable_name) != INVALID_INDEX);
+	lua_pushboolean(L, get_egbase(L).tribes().immovable_index(immovable_name) != Widelands::INVALID_INDEX);
 	return 1;
 }
 
@@ -223,13 +221,13 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Widelands::Tribes& tribes = get_egbase(L).tribes();
 	const std::string building_name = luaL_checkstring(L, 2);
-	const DescriptionIndex building_index = tribes.building_index(building_name);
+	const Widelands::DescriptionIndex building_index = tribes.building_index(building_name);
 	if (!tribes.building_exists(building_index)) {
 		report_error(L, "Building %s does not exist", building_name.c_str());
 	}
-	const BuildingDescr* building_description = tribes.get_building_descr(building_index);
+	const Widelands::BuildingDescr* building_description = tribes.get_building_descr(building_index);
 
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, building_description);
 }
@@ -247,13 +245,13 @@ int LuaEditorGameBase::get_ship_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Widelands::Tribes& tribes = get_egbase(L).tribes();
 	const std::string ship_name = luaL_checkstring(L, 2);
-	const DescriptionIndex ship_index = tribes.ship_index(ship_name);
+	const Widelands::DescriptionIndex ship_index = tribes.ship_index(ship_name);
 	if (!tribes.ship_exists(ship_index)) {
 		report_error(L, "Ship %s does not exist", ship_name.c_str());
 	}
-	const ShipDescr* ship_description = tribes.get_ship_descr(ship_index);
+	const Widelands::ShipDescr* ship_description = tribes.get_ship_descr(ship_index);
 
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, ship_description);
 }
@@ -270,12 +268,12 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	EditorGameBase& egbase = get_egbase(L);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
 	const std::string tribe_name = luaL_checkstring(L, 2);
 	if (!Widelands::tribe_exists(tribe_name)) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	const TribeDescr* descr =
+	const Widelands::TribeDescr* descr =
 	   egbase.tribes().get_tribe_descr(egbase.tribes().tribe_index(tribe_name));
 	return to_lua<LuaMaps::LuaTribeDescription>(L, new LuaMaps::LuaTribeDescription(descr));
 }
@@ -293,13 +291,13 @@ int LuaEditorGameBase::get_ware_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Widelands::Tribes& tribes = get_egbase(L).tribes();
 	const std::string ware_name = luaL_checkstring(L, 2);
-	DescriptionIndex ware_index = tribes.ware_index(ware_name);
+	Widelands::DescriptionIndex ware_index = tribes.ware_index(ware_name);
 	if (!tribes.ware_exists(ware_index)) {
 		report_error(L, "Ware %s does not exist", ware_name.c_str());
 	}
-	const WareDescr* ware_description = tribes.get_ware_descr(ware_index);
+	const Widelands::WareDescr* ware_description = tribes.get_ware_descr(ware_index);
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, ware_description);
 }
 
@@ -316,13 +314,13 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Widelands::Tribes& tribes = get_egbase(L).tribes();
 	const std::string worker_name = luaL_checkstring(L, 2);
-	const DescriptionIndex worker_index = tribes.worker_index(worker_name);
+	const Widelands::DescriptionIndex worker_index = tribes.worker_index(worker_name);
 	if (!tribes.worker_exists(worker_index)) {
 		report_error(L, "Worker %s does not exist", worker_name.c_str());
 	}
-	const WorkerDescr* worker_description = tribes.get_worker_descr(worker_index);
+	const Widelands::WorkerDescr* worker_description = tribes.get_worker_descr(worker_index);
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, worker_description);
 }
 
@@ -340,14 +338,14 @@ int LuaEditorGameBase::get_resource_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string resource_name = luaL_checkstring(L, 2);
-	const World& world = get_egbase(L).world();
-	const DescriptionIndex idx = world.resource_index(resource_name.c_str());
+	const Widelands::World& world = get_egbase(L).world();
+	const Widelands::DescriptionIndex idx = world.resource_index(resource_name.c_str());
 
-	if (idx == INVALID_INDEX) {
+	if (idx == Widelands::INVALID_INDEX) {
 		report_error(L, "Resource %s does not exist", resource_name.c_str());
 	}
 
-	const ResourceDescription* descr = world.get_resource(idx);
+	const Widelands::ResourceDescription* descr = world.get_resource(idx);
 	return to_lua<LuaMaps::LuaResourceDescription>(L, new LuaMaps::LuaResourceDescription(descr));
 }
 
@@ -365,7 +363,7 @@ int LuaEditorGameBase::get_terrain_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string terrain_name = luaL_checkstring(L, 2);
-	const TerrainDescription* descr = get_egbase(L).world().terrain_descr(terrain_name);
+	const Widelands::TerrainDescription* descr = get_egbase(L).world().terrain_descr(terrain_name);
 	if (!descr) {
 		report_error(L, "Terrain %s does not exist", terrain_name.c_str());
 	}
@@ -666,9 +664,9 @@ int LuaPlayerBase::get_tribe_name(lua_State* L) {
  ==========================================================
  */
 int LuaPlayerBase::__eq(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	const Player& me = get(L, egbase);
-	const Player& you = (*get_base_user_class<LuaPlayerBase>(L, 2))->get(L, egbase);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	const Widelands::Player& me = get(L, egbase);
+	const Widelands::Player& you = (*get_base_user_class<LuaPlayerBase>(L, 2))->get(L, egbase);
 
 	lua_pushboolean(L, (me.player_number() == you.player_number()));
 	return 1;
@@ -709,7 +707,7 @@ int LuaPlayerBase::place_flag(lua_State* L) {
 		force = luaL_checkboolean(L, 3);
 	}
 
-	Flag* f;
+	Widelands::Flag* f;
 	if (!force) {
 		f = get(L, get_egbase(L)).build_flag(c->fcoords(L));
 		if (!f) {
@@ -743,13 +741,13 @@ int LuaPlayerBase::place_flag(lua_State* L) {
       :returns: the road created
 */
 int LuaPlayerBase::place_road(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	const Map& map = egbase.map();
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	const Widelands::Map& map = egbase.map();
 
 	const std::string roadtype = luaL_checkstring(L, 2);
-	Flag* starting_flag = (*get_user_class<LuaMaps::LuaFlag>(L, 3))->get(L, egbase);
-	Coords current = starting_flag->get_position();
-	Path path(current);
+	Widelands::Flag* starting_flag = (*get_user_class<LuaMaps::LuaFlag>(L, 3))->get(L, egbase);
+	Widelands::Coords current = starting_flag->get_position();
+	Widelands::Path path(current);
 
 	bool force_road = false;
 	if (lua_isboolean(L, -1)) {
@@ -758,7 +756,7 @@ int LuaPlayerBase::place_road(lua_State* L) {
 	}
 
 	// Construct the path
-	CheckStepLimited cstep;
+	Widelands::CheckStepLimited cstep;
 	for (int32_t i = 4; i <= lua_gettop(L); i++) {
 		std::string d = luaL_checkstring(L, i);
 
@@ -788,18 +786,18 @@ int LuaPlayerBase::place_road(lua_State* L) {
 	}
 
 	// Make sure that the road cannot cross itself
-	Path optimal_path;
-	map.findpath(path.get_start(), path.get_end(), 0, optimal_path, cstep, Map::fpBidiCost);
+	Widelands::Path optimal_path;
+	map.findpath(path.get_start(), path.get_end(), 0, optimal_path, cstep, Widelands::Map::fpBidiCost);
 	if (optimal_path.get_nsteps() != path.get_nsteps()) {
 		report_error(L, "Cannot build a road that crosses itself!");
 	}
 
-	RoadBase* r = nullptr;
+	Widelands::RoadBase* r = nullptr;
 	if (force_road) {
 		if (roadtype == "waterway") {
 			r = &get(L, egbase).force_waterway(path);
 		} else {
-			Road& road = get(L, egbase).force_road(path);
+			Widelands::Road& road = get(L, egbase).force_road(path);
 			if (roadtype == "busy") {
 				road.set_busy(egbase, true);
 			} else if (roadtype != "normal") {
@@ -810,8 +808,8 @@ int LuaPlayerBase::place_road(lua_State* L) {
 			r = &road;
 		}
 	} else {
-		BaseImmovable* bi = map.get_immovable(current);
-		if (!bi || bi->descr().type() != MapObjectType::FLAG) {
+		Widelands::BaseImmovable* bi = map.get_immovable(current);
+		if (!bi || bi->descr().type() != Widelands::MapObjectType::FLAG) {
 			if (!get(L, egbase).build_flag(current)) {
 				report_error(L, "Could not place end flag!");
 			}
@@ -823,7 +821,7 @@ int LuaPlayerBase::place_road(lua_State* L) {
 		if (roadtype == "waterway") {
 			r = get(L, egbase).build_waterway(path);
 		} else {
-			Road* road = get(L, egbase).build_road(path);
+			Widelands::Road* road = get(L, egbase).build_road(path);
 			if (roadtype == "busy") {
 				if (road) {
 					road->set_busy(egbase, true);
@@ -874,21 +872,21 @@ int LuaPlayerBase::place_building(lua_State* L) {
 		force = luaL_checkboolean(L, 5);
 	}
 
-	EditorGameBase& egbase = get_egbase(L);
-	const Tribes& tribes = egbase.tribes();
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	const Widelands::Tribes& tribes = egbase.tribes();
 
 	if (!tribes.building_exists(name)) {
 		report_error(L, "Unknown Building: '%s'", name.c_str());
 	}
-	DescriptionIndex building_index = tribes.building_index(name);
+	Widelands::DescriptionIndex building_index = tribes.building_index(name);
 
-	FormerBuildings former_buildings;
+	Widelands::FormerBuildings former_buildings;
 	find_former_buildings(tribes, building_index, &former_buildings);
 	if (constructionsite) {
 		former_buildings.pop_back();
 	}
 
-	Building* b = nullptr;
+	Widelands::Building* b = nullptr;
 	if (force) {
 		if (constructionsite) {
 			b = &get(L, egbase).force_csite(c->coords(), building_index, former_buildings);
@@ -921,11 +919,11 @@ int LuaPlayerBase::place_building(lua_State* L) {
 int LuaPlayerBase::place_ship(lua_State* L) {
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 2);
 
-	EditorGameBase& egbase = get_egbase(L);
-	Player& player = get(L, egbase);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Player& player = get(L, egbase);
 
-	const ShipDescr* descr = egbase.tribes().get_ship_descr(player.tribe().ship());
-	Bob& ship = egbase.create_ship(c->coords(), descr->name(), &player);
+	const Widelands::ShipDescr* descr = egbase.tribes().get_ship_descr(player.tribe().ship());
+	Widelands::Bob& ship = egbase.create_ship(c->coords(), descr->name(), &player);
 
 	LuaMaps::upcasted_map_object_to_lua(L, &ship);
 
@@ -952,9 +950,9 @@ int LuaPlayerBase::conquer(lua_State* L) {
 		radius = luaL_checkuint32(L, 3);
 	}
 
-	get_egbase(L).conquer_area_no_building(PlayerArea<Area<FCoords>>(
+	get_egbase(L).conquer_area_no_building(Widelands::PlayerArea<Widelands::Area<Widelands::FCoords>>(
 	   player_number_,
-	   Area<FCoords>((*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L), radius)));
+	   Widelands::Area<Widelands::FCoords>((*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L), radius)));
 	return 0;
 }
 
@@ -970,10 +968,10 @@ int LuaPlayerBase::conquer(lua_State* L) {
 */
 // UNTESTED
 int LuaPlayerBase::get_workers(lua_State* L) {
-	Player& player = get(L, get_egbase(L));
+	Widelands::Player& player = get(L, get_egbase(L));
 	const std::string workername = luaL_checkstring(L, -1);
 
-	const DescriptionIndex worker = player.tribe().worker_index(workername);
+	const Widelands::DescriptionIndex worker = player.tribe().worker_index(workername);
 
 	uint32_t nworkers = 0;
 	for (const auto& economy : player.economies()) {
@@ -997,11 +995,11 @@ int LuaPlayerBase::get_workers(lua_State* L) {
 */
 // UNTESTED
 int LuaPlayerBase::get_wares(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	Player& player = get(L, egbase);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Player& player = get(L, egbase);
 	const std::string warename = luaL_checkstring(L, -1);
 
-	const DescriptionIndex ware = egbase.tribes().ware_index(warename);
+	const Widelands::DescriptionIndex ware = egbase.tribes().ware_index(warename);
 
 	uint32_t nwares = 0;
 	for (const auto& economy : player.economies()) {
@@ -1018,11 +1016,11 @@ int LuaPlayerBase::get_wares(lua_State* L) {
  C METHODS
  ==========================================================
  */
-Player& LuaPlayerBase::get(lua_State* L, Widelands::EditorGameBase& egbase) {
+Widelands::Player& LuaPlayerBase::get(lua_State* L, Widelands::EditorGameBase& egbase) {
 	if (player_number_ > kMaxPlayers) {
 		report_error(L, "Illegal player number %i", player_number_);
 	}
-	Player* rv = egbase.get_player(player_number_);
+	Widelands::Player* rv = egbase.get_player(player_number_);
 	if (!rv) {
 		report_error(L, "Player with the number %i does not exist", player_number_);
 	}
