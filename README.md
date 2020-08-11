@@ -163,7 +163,8 @@ For helping with issue management, see https://www.widelands.org/wiki/TriagingBu
 | utils | Diverse utilities: Building translations, code formatting, packaging Mac & Windows, ... |
 
 
-## Obtaining Travis and AppVeyor builds
+## Obtaining Travis and MS-Windows builds
 
-Travis and AppVeyor builds are triggered for all pull requests and for new pushes to the `master` branch. If you want to get a build without making a pull request, temporarily add the name of your branch to the `branches` section in `.travis.yml`/`appveyor.yml`. This will not work if the branch is in a fork though.
+Travis builds are triggered for all pull requests and for new pushes to the `master` branch. If you want to get a build without making a pull request, temporarily add the name of your branch to the `branches` section in `.travis.yml`. This will not work if the branch is in a fork though.
 
+All pushes to master will be built on AppVeyor. Pull request branches are deployed for MS-Windows using a GitHub action. To obtain MS-Windows builds if you do not wish to open a pull request, temporarily add the name of your branch to the `branches` section in `appveyor.yml`. This also does not work for branches in forks.
