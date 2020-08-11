@@ -171,7 +171,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditor);
 	});
 	/* addons_.sigclicked.connect([this]() {  // Not yet implemented
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAddOns);
+	   end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAddOns);
 	}); */
 	options_.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOptions);
@@ -257,8 +257,8 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	singleplayer_.add(_("Load Game"), FullscreenMenuBase::MenuTarget::kLoadGame, nullptr, false,
 	                  _("Continue a saved game"), "G");
 	if (!filename_for_continue_.empty()) {
-		singleplayer_.add(_("Continue Playing"), FullscreenMenuBase::MenuTarget::kContinueLastsave, nullptr, false,
-			              continue_tooltip, "C");
+		singleplayer_.add(_("Continue Playing"), FullscreenMenuBase::MenuTarget::kContinueLastsave,
+		                  nullptr, false, continue_tooltip, "C");
 	}
 	multiplayer_.add(_("Online Game"), FullscreenMenuBase::MenuTarget::kMetaserver, nullptr, false,
 	                 _("Join the Widelands lobby"), "J");
@@ -340,7 +340,8 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMetaserver);
 			return true;
 		case SDLK_u:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOnlineGameSettings);
+			end_modal<FullscreenMenuBase::MenuTarget>(
+			   FullscreenMenuBase::MenuTarget::kOnlineGameSettings);
 			return true;
 		case SDLK_p:
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kLan);
@@ -496,7 +497,8 @@ inline Rectf FullscreenMenuMain::title_pos() {
 
 inline void FullscreenMenuMain::draw_title(RenderTarget& rt, const float opacity) {
 	const Rectf r = title_pos();
-	do_draw_image(rt, Rectf(r.x + r.w * 0.2f, r.y + r.h * 0.2f, r.w * 0.6f, r.h * 0.6f), title_image_, opacity);
+	do_draw_image(
+	   rt, Rectf(r.x + r.w * 0.2f, r.y + r.h * 0.2f, r.w * 0.6f, r.h * 0.6f), title_image_, opacity);
 }
 
 void FullscreenMenuMain::layout() {
@@ -506,9 +508,12 @@ void FullscreenMenuMain::layout() {
 
 	copyright_.set_pos(
 	   Vector2i((get_w() - copyright_.get_w()) / 2, get_h() - copyright_.get_h() - padding_ / 2));
-	version_.set_pos(Vector2i((get_w() - version_.get_w()) / 2, copyright_.get_y() - version_.get_h() - padding_ / 2));
+	version_.set_pos(Vector2i(
+	   (get_w() - version_.get_w()) / 2, copyright_.get_y() - version_.get_h() - padding_ / 2));
 
-	box_rect_ = Recti((get_w() - padding_) / 2 - butw_, version_.get_y() - padding_ * 5 / 2 - get_h() / 4, 2 * butw_ + padding_, get_h() / 4);
+	box_rect_ =
+	   Recti((get_w() - padding_) / 2 - butw_, version_.get_y() - padding_ * 5 / 2 - get_h() / 4,
+	         2 * butw_ + padding_, get_h() / 4);
 
 	singleplayer_.set_desired_size(butw_, buth_);
 	multiplayer_.set_desired_size(butw_, buth_);
