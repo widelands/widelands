@@ -98,6 +98,15 @@ private:
 	std::unique_ptr<RT::IFont> font_;
 
 	std::vector<LineData> lines_;
+	void highlight_selection(RenderTarget& dst,
+	                         uint32_t scrollbar_position,
+	                         uint32_t selection_start_line,
+	                         uint32_t selection_start_x,
+	                         uint32_t selection_end_line,
+	                         uint32_t selection_end_x,
+	                         const int fontheight,
+	                         uint32_t line,
+	                         const Vector2i& point) const;
 };
 
 }  // namespace UI
