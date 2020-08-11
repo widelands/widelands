@@ -253,7 +253,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
-		bool const result = run(NewSPScenario, script_to_run, false, "single_player");
+		bool const result =
+		   run(StartGameType::kSinglePlayerScenario, script_to_run, false, "single_player");
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
@@ -415,7 +416,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
-		bool const result = run(Loaded, script_to_run, false, "single_player");
+		bool const result = run(StartGameType::kSaveGame, script_to_run, false, "single_player");
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
@@ -464,9 +465,9 @@ bool Game::run(StartGameType const start_game_type,
 	replay_ = replay;
 	postload();
 
-	if (start_game_type != Loaded) {
+	if (start_game_type != StartGameType::kSaveGame) {
 		PlayerNumber const nr_players = map().get_nrplayers();
-		if (start_game_type == NewNonScenario) {
+		if (start_game_type == StartGameType::kMap) {
 			step_loader_ui(_("Creating player infrastructure…"));
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
@@ -513,9 +514,9 @@ bool Game::run(StartGameType const start_game_type,
 		}
 
 		// Run the init script, if the map provides one.
-		if (start_game_type == NewSPScenario) {
+		if (start_game_type == StartGameType::kSinglePlayerScenario) {
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/init.lua"));
-		} else if (start_game_type == NewMPScenario) {
+		} else if (start_game_type == StartGameType::kMultiPlayerScenario) {
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
 		}
 
@@ -523,7 +524,8 @@ bool Game::run(StartGameType const start_game_type,
 		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
 	}
 
-	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
+	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
+	                               start_game_type == StartGameType::kSaveGame)) {
 		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
 	}
 
@@ -958,7 +960,7 @@ void Game::cancel_trade(int trade_id) {
 }
 
 LuaGameInterface& Game::lua() {
-	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
+	return dynamic_cast<LuaGameInterface&>(EditorGameBase::lua());
 }
 
 const std::string& Game::get_win_condition_displayname() const {

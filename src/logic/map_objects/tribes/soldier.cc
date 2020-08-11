@@ -700,7 +700,7 @@ void Soldier::draw_info_icon(Vector2i draw_position,
  */
 void Soldier::calc_info_icon_size(const TribeDescr& tribe, int& w, int& h) {
 	const SoldierDescr* soldierdesc =
-	   static_cast<const SoldierDescr*>(tribe.get_worker_descr(tribe.soldier()));
+	   dynamic_cast<const SoldierDescr*>(tribe.get_worker_descr(tribe.soldier()));
 	// The function draw_info_icon() already assumes that all icons have the same dimensions,
 	// so we can make the same assumption here too.
 	const int dimension = soldierdesc->get_health_level_pic(0)->height();

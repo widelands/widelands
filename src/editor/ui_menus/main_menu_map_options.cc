@@ -45,7 +45,7 @@ SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo,
                                          Widelands::SuggestedTeamLineup t)
    : UI::Panel(parent, 0, 0, w, kSuggestedTeamsUnitSize, _("Click player to remove")),
      map_(map),
-     team_(t),
+     team_(std::move(t)),
      delete_(this,
              "delete",
              0,
