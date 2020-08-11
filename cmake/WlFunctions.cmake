@@ -110,7 +110,7 @@ macro(_common_compile_tasks)
   endif()
 
   if(ARG_USES_SDL2)
-    target_link_libraries(${NAME} SDL2::SDL2)
+    target_link_libraries(${NAME} SDL2::Main)
   endif()
 
   if(ARG_USES_SDL2_MIXER)
@@ -184,13 +184,7 @@ function(wl_test NAME)
   target_link_libraries(${NAME} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
   # Tests need to link with SDL2 library without main.
-  set(SDL2_LIBRARIES_TEMP ${SDL2_LIBRARIES})
-  if (SDL2MAIN_LIBRARY)
-    list(REMOVE_ITEM SDL2_LIBRARIES_TEMP ${SDL2MAIN_LIBRARY})
-  else()
-    list(REMOVE_ITEM SDL2_LIBRARIES_TEMP -lSDL2main)
-  endif()
-  target_link_libraries(${NAME} ${SDL2_LIBRARIES_TEMP})
+  target_link_libraries(${NAME} SDL2::Core)
 
   _common_compile_tasks()
 
