@@ -13,7 +13,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:20s",
-         "remove=success:16",
+         "remove=chance:6.25%",
       },
    },
    icon = dirname .. "menu.png",
