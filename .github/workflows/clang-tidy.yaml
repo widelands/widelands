@@ -2,7 +2,7 @@ name: Clang-Tidy
 
 on:
   push:
-    branches: [ clang-tidy-action ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: clang-tidy
       run: |
-        pushd build
+        mkdir build && pushd build
         cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
         python ../utils/run-clang-tidy.py -checks=-*,*braces*,cert*,clang-analyzer*,cppcoreguidelines-pro-type-static-cast-downcast,google-readability-casting,performance* > ../clang-tidy.log
         pushd ..
