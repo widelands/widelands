@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
          descname = _"mining iron",
          actions = {
             "animate=working duration:10s",
-            "mine=iron 2 100 5 2",
+            "mine=iron workarea:2 resources:100% depleted:5% experience:2%",
             "produce=iron_ore",
          }
       },

@@ -1287,18 +1287,40 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     ProductionSiteDescr* descr) {
 	if (arguments.size() != 5) {
 		throw GameDataError(
-		   "Usage: mine=resource <workarea radius> <max> <chance> <worker experience gained>");
+		   "Usage: mine=<resource name> workarea:<radius> resources:<percent> depleted:<percent> experience:<percent>");
 	}
 
-	resource_ = world.safe_resource_index(arguments.front().c_str());
-	distance_ = read_positive(arguments.at(1));
-	max_ = read_positive(arguments.at(2));
-	chance_ = read_positive(arguments.at(3));
-	training_ = read_positive(arguments.at(4));
+	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
+		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
+		log("WARNING: Using old syntax in %s. Please use 'mine=<resource name> workarea:<radius> resources:<percent> depleted:<percent> experience:<percent>'\n", descr->name().c_str());
+		resource_ = world.safe_resource_index(arguments.front().c_str());
+		workarea_ = read_positive(arguments.at(1));
+		max_resources_ = read_positive(arguments.at(2)) * 100U;
+		depleted_chance_ = read_positive(arguments.at(3)) * 100U;
+		experience_chance_ = read_positive(arguments.at(4)) * 100U;
+	} else {
+		for (const std::string& argument : arguments) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.second.empty()) {
+				resource_ = world.safe_resource_index(item.first.c_str());
+			} else if (item.first == "workarea") {
+				workarea_ = read_positive(item.second);
+			} else if (item.first == "resources") {
+				max_resources_ = read_percent_to_int(item.second);
+			} else if (item.first == "depleted") {
+				depleted_chance_ = read_percent_to_int(item.second);
+			} else if (item.first == "experience") {
+				experience_chance_ = read_percent_to_int(item.second);
+			} else {
+				throw GameDataError(
+				   "Unknown argument '%s'. Usage: mine=<resource name> workarea:<radius> resources:<percent> depleted:<percent> experience:<percent>", item.first.c_str());
+			}
+		}
+	}
 
 	const std::string description = descr->name() + " " + production_program_name + " mine " +
 	                                world.get_resource(resource_)->name();
-	descr->workarea_info_[distance_].insert(description);
+	descr->workarea_info_[workarea_].insert(description);
 
 	descr->add_collected_resource(arguments.front());
 }
@@ -1313,7 +1335,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 	{
 		MapRegion<Area<FCoords>> mr(
-		   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), distance_));
+		   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), workarea_));
 		do {
 			DescriptionIndex fres = mr.location().field->get_resources();
 			ResourceAmount amount = mr.location().field->get_resources_amount();
@@ -1343,16 +1365,16 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		} while (mr.advance(*map));
 	}
 
-	//  how much is digged
-	int32_t digged_percentage = 100;
+	//  how much is dug
+	unsigned dug_percentage = MapObjectProgram::kMaxProbability;
 	if (totalstart) {
-		digged_percentage = (totalstart - totalres) * 100 / totalstart;
+		dug_percentage = (totalstart - totalres) * MapObjectProgram::kMaxProbability / totalstart;
 	}
 	if (!totalres) {
-		digged_percentage = 100;
+		dug_percentage = MapObjectProgram::kMaxProbability;
 	}
 
-	if (digged_percentage < max_) {
+	if (dug_percentage < max_resources_) {
 		//  mine can produce normally
 		if (totalres == 0) {
 			return ps.program_end(game, ProgramResult::kFailed);
@@ -1364,7 +1386,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 		{
 			MapRegion<Area<FCoords>> mr(
-			   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), distance_));
+			   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), workarea_));
 			do {
 				DescriptionIndex fres = mr.location().field->get_resources();
 				ResourceAmount amount = mr.location().field->get_resources_amount();
@@ -1393,7 +1415,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  there is a sufficiently high chance, that the mine
 		//  will still produce enough.
 		//  e.g. mines have chance=5, wells have 65
-		if (chance_ <= 20) {
+		if (depleted_chance_ <= game.world().get_resource(resource_)->max_amount() * MapObjectProgram::kMaxProbability / 100U) {
 			ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
@@ -1402,10 +1424,10 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
-		if (chance_ <= game.logic_rand() % 100) {
+		if (depleted_chance_ <= game.logic_rand() % MapObjectProgram::kMaxProbability) {
 
 			// Gain experience
-			if (training_ >= game.logic_rand() % 100) {
+			if (experience_chance_ >= game.logic_rand() % MapObjectProgram::kMaxProbability) {
 				ps.train_workers(game);
 			}
 			return ps.program_end(game, ProgramResult::kFailed);

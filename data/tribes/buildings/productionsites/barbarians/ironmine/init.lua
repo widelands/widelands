@@ -61,7 +61,7 @@ tribes:new_productionsite_type {
             "consume=ration",
             "sleep=duration:45s",
             "animate=working duration:20s",
-            "mine=iron 2 33 5 17",
+            "mine=iron workarea:2 resources:33.33% depleted:5% experience:17%",
             "produce=iron_ore"
          }
       },

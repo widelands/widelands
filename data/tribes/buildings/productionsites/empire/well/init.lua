@@ -45,7 +45,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=duration:20s",
             "animate=working duration:20s",
-            "mine=water 1 100 65 2",
+            "mine=water workarea:1 resources:100% depleted:65% experience:2%",
             "produce=water"
          }
       },
