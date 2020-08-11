@@ -1272,28 +1272,62 @@ bool ProductionProgram::ActRecruit::get_building_work(Game& game,
 /* RST
 mine
 ----
-Takes resources from the ground. It takes as arguments first the resource
-name, after this the radius for searching for the resource around the building
-field. The next values is the percentage of starting resources that can be dug
-out before this mine is exhausted. The next value is the percentage that this
-building still produces something even if it is exhausted. And the last value
-is the percentage chance that a worker is gaining experience on failure - this
-is to guarantee that you can eventually extend a mine, even though it was
-exhausted for a while already.
+
+.. function:: mine=\<resource_name\> workarea:\<radius\> resources:\<percent\> depleted:\<percent\>
+     \[experience:\<percent\>\]
+
+   :arg string resource_name: The name of the resource to mine, e.g. 'coal' or 'water'.
+   :arg int workarea: The workarea radius that is searched for resources.
+   :arg percent resources: The :ref:`map_object_programs_datatypes_percent` of resources that the
+      mine can dig up before its resource is depleted.
+   :arg percent depleted: The :ref:`map_object_programs_datatypes_percent` chance that the mine will
+      still find some resources after it has been depleted.
+   :arg percent experience: The :ref:`map_object_programs_datatypes_percent` chance that the mine's
+      workers will still gain some experience when mining fails after its resources have been
+      depleted.
+
+   Takes resources from the ground. A building that mines will deplete when the percentage of
+   resources given in ``resources`` has been dug up, leaving a chance of ``depleted`` that it
+   will still find some resources anyway. Examples:
+
+.. code-block:: lua
+
+     actions = {
+         "return=skipped unless economy needs iron_ore",
+         "consume=ration",
+         "sleep=duration:45s",
+         "animate=working duration:20s",
+          -- Search radius of 2 for iron. Will always find iron until 33.33% of it has been dug up.
+          -- After that, there's still a chance of 5% for finding iron.
+          -- If this fails, the workers still have a chance of 17% of gaining experience.
+         "mine=iron workarea:2 resources:33.33% depleted:5% experience:17%",
+         "produce=iron_ore"
+     }
+
+     actions = {
+         "sleep=duration:20s",
+         "animate=working duration:20s",
+          -- Search radius of 1 for water. Will always find water until 100% of it has been drawn.
+          -- After that, there's still a chance of 65% for finding water.
+         "mine=water workarea:1 resources:100% depleted:65%",
+         "produce=water"
+     }
 */
 ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     const World& world,
                                     const std::string& production_program_name,
                                     ProductionSiteDescr* descr) {
 	if (arguments.size() != 5 && arguments.size() != 4) {
-		throw GameDataError(
-		   "Usage: mine=<resource name> workarea:<radius> resources:<percent> depleted:<percent> [experience:<percent>]");
+		throw GameDataError("Usage: mine=<resource name> workarea:<radius> resources:<percent> "
+		                    "depleted:<percent> [experience:<percent>]");
 	}
 	experience_chance_ = 0U;
 
 	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
 		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log("WARNING: Using old syntax in %s. Please use 'mine=<resource name> workarea:<radius> resources:<percent> depleted:<percent> [experience:<percent>]'\n", descr->name().c_str());
+		log("WARNING: Using old syntax in %s. Please use 'mine=<resource name> workarea:<radius> "
+		    "resources:<percent> depleted:<percent> [experience:<percent>]'\n",
+		    descr->name().c_str());
 		resource_ = world.safe_resource_index(arguments.front().c_str());
 		workarea_ = read_positive(arguments.at(1));
 		max_resources_ = read_positive(arguments.at(2)) * 100U;
@@ -1316,7 +1350,9 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 				experience_chance_ = read_percent_to_int(item.second);
 			} else {
 				throw GameDataError(
-				   "Unknown argument '%s'. Usage: mine=<resource name> workarea:<radius> resources:<percent> depleted:<percent> [experience:<percent>]", item.first.c_str());
+				   "Unknown argument '%s'. Usage: mine=<resource name> workarea:<radius> "
+				   "resources:<percent> depleted:<percent> [experience:<percent>]",
+				   item.first.c_str());
 			}
 		}
 	}
@@ -1418,7 +1454,8 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  there is a sufficiently high chance, that the mine
 		//  will still produce enough.
 		//  e.g. mines have chance=5, wells have 65
-		if (depleted_chance_ <= game.world().get_resource(resource_)->max_amount() * MapObjectProgram::kMaxProbability / 100U) {
+		if (depleted_chance_ <= game.world().get_resource(resource_)->max_amount() *
+		                           MapObjectProgram::kMaxProbability / 100U) {
 			ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
@@ -1430,7 +1467,8 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		if (depleted_chance_ <= game.logic_rand() % MapObjectProgram::kMaxProbability) {
 
 			// Gain experience
-			if (experience_chance_ > 0 && experience_chance_ >= game.logic_rand() % MapObjectProgram::kMaxProbability) {
+			if (experience_chance_ > 0 &&
+			    experience_chance_ >= game.logic_rand() % MapObjectProgram::kMaxProbability) {
 				ps.train_workers(game);
 			}
 			return ps.program_end(game, ProgramResult::kFailed);
