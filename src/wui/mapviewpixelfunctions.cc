@@ -24,7 +24,8 @@
 /**
  * Compute a - b, taking care to handle wrap-around effects properly.
  */
-Vector2f MapviewPixelFunctions::calc_pix_difference(const Widelands::Map& map, Vector2f a, Vector2f b) {
+Vector2f
+MapviewPixelFunctions::calc_pix_difference(const Widelands::Map& map, Vector2f a, Vector2f b) {
 	normalize_pix(map, &a);
 	normalize_pix(map, &b);
 
@@ -104,7 +105,9 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 	int32_t upper_screen_dy,
 	   lower_screen_dy =
 	      screen_y_base -
-	      map[Widelands::Coords(slash ? right_col : left_col, row_number)].get_height() * kHeightFactor - y;
+	      map[Widelands::Coords(slash ? right_col : left_col, row_number)].get_height() *
+	         kHeightFactor -
+	      y;
 	for (;;) {
 		screen_y_base += kTriangleHeight;
 		next_row_number = row_number + 1;
@@ -114,7 +117,8 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 		upper_screen_dy = lower_screen_dy;
 		lower_screen_dy =
 		   screen_y_base -
-		   map[Widelands::Coords(slash ? left_col : right_col, next_row_number)].get_height() * kHeightFactor -
+		   map[Widelands::Coords(slash ? left_col : right_col, next_row_number)].get_height() *
+		      kHeightFactor -
 		   y;
 		if (lower_screen_dy < 0) {
 			row_number = next_row_number;
@@ -150,10 +154,10 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 
 	//  Find out which of the 4 possible triangles (x, y) is in.
 	if (slash) {
-		int32_t Y_a =
-		   screen_y_base - kTriangleHeight -
-		   map[Widelands::Coords((right_col == 0 ? mapwidth : right_col) - 1, row_number)].get_height() *
-		      kHeightFactor;
+		int32_t Y_a = screen_y_base - kTriangleHeight -
+		              map[Widelands::Coords((right_col == 0 ? mapwidth : right_col) - 1, row_number)]
+		                    .get_height() *
+		                 kHeightFactor;
 		int32_t Y_b = screen_y_base - kTriangleHeight -
 		              map[Widelands::Coords(right_col, row_number)].get_height() * kHeightFactor;
 		int32_t ldy = Y_b - Y_a, pdy = Y_b - y;
@@ -162,67 +166,78 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 		if (pdy * kTriangleWidth > ldy * pdx) {
 			//  (x, y) is in the upper triangle.
 			result_triangle = Widelands::TCoords<>(
-			   Widelands::Coords(left_col, (row_number == 0 ? mapheight : row_number) - 1), Widelands::TriangleIndex::D);
+			   Widelands::Coords(left_col, (row_number == 0 ? mapheight : row_number) - 1),
+			   Widelands::TriangleIndex::D);
 		} else {
-			Y_a = screen_y_base - map[Widelands::Coords(left_col, next_row_number)].get_height() * kHeightFactor;
+			Y_a = screen_y_base -
+			      map[Widelands::Coords(left_col, next_row_number)].get_height() * kHeightFactor;
 			ldy = Y_b - Y_a;
 			if (pdy * (kTriangleWidth / 2) > ldy * pdx) {
 				//  (x, y) is in the second triangle.
 				result_triangle = Widelands::TCoords<>(
-				   Widelands::Coords((right_col == 0 ? mapwidth : right_col) - 1, row_number), Widelands::TriangleIndex::R);
+				   Widelands::Coords((right_col == 0 ? mapwidth : right_col) - 1, row_number),
+				   Widelands::TriangleIndex::R);
 			} else {
-				Y_b = screen_y_base -
-				      map[Widelands::Coords(left_col + 1 == mapwidth ? 0 : left_col + 1, next_row_number)]
-				            .get_height() *
-				         kHeightFactor;
+				Y_b =
+				   screen_y_base -
+				   map[Widelands::Coords(left_col + 1 == mapwidth ? 0 : left_col + 1, next_row_number)]
+				         .get_height() *
+				      kHeightFactor;
 				ldy = Y_b - Y_a;
 				pdy = Y_b - y;
 				pdx = (col_number + 2) * (kTriangleWidth / 2) - x;
 				if (pdy * kTriangleWidth > ldy * pdx) {
 					//  (x, y) is in the third triangle.
-					result_triangle = Widelands::TCoords<>(Widelands::Coords(right_col, row_number), Widelands::TriangleIndex::D);
+					result_triangle = Widelands::TCoords<>(
+					   Widelands::Coords(right_col, row_number), Widelands::TriangleIndex::D);
 				} else {
 					//  (x, y) is in the lower triangle.
-					result_triangle = Widelands::TCoords<>(Widelands::Coords(left_col, next_row_number), Widelands::TriangleIndex::R);
+					result_triangle = Widelands::TCoords<>(
+					   Widelands::Coords(left_col, next_row_number), Widelands::TriangleIndex::R);
 				}
 			}
 		}
 	} else {
 		int32_t Y_a = screen_y_base - kTriangleHeight -
 		              map[Widelands::Coords(left_col, row_number)].get_height() * kHeightFactor;
-		int32_t Y_b =
-		   screen_y_base - kTriangleHeight -
-		   map[Widelands::Coords(left_col + 1 == mapwidth ? 0 : left_col + 1, row_number)].get_height() *
-		      kHeightFactor;
+		int32_t Y_b = screen_y_base - kTriangleHeight -
+		              map[Widelands::Coords(left_col + 1 == mapwidth ? 0 : left_col + 1, row_number)]
+		                    .get_height() *
+		                 kHeightFactor;
 		int32_t ldy = Y_b - Y_a, pdy = Y_b - y;
 		int32_t pdx = (col_number + 2) * (kTriangleWidth / 2) - x;
 		assert(pdx > 0);
 		if (pdy * kTriangleWidth > ldy * pdx) {
 			//  (x, y) is in the upper triangle.
 			result_triangle = Widelands::TCoords<>(
-			   Widelands::Coords(right_col, (row_number == 0 ? mapheight : row_number) - 1), Widelands::TriangleIndex::D);
+			   Widelands::Coords(right_col, (row_number == 0 ? mapheight : row_number) - 1),
+			   Widelands::TriangleIndex::D);
 		} else {
-			Y_b = screen_y_base - map[Widelands::Coords(right_col, next_row_number)].get_height() * kHeightFactor;
+			Y_b = screen_y_base -
+			      map[Widelands::Coords(right_col, next_row_number)].get_height() * kHeightFactor;
 			ldy = Y_b - Y_a;
 			pdy = Y_b - y;
 			pdx = (col_number + 1) * (kTriangleWidth / 2) - x;
 			if (pdy * (kTriangleWidth / 2) > ldy * pdx) {
 				//  (x, y) is in the second triangle.
-				result_triangle = Widelands::TCoords<>(Widelands::Coords(left_col, row_number), Widelands::TriangleIndex::R);
+				result_triangle = Widelands::TCoords<>(
+				   Widelands::Coords(left_col, row_number), Widelands::TriangleIndex::R);
 			} else {
-				Y_a = screen_y_base -
-				      map[Widelands::Coords((right_col == 0 ? mapwidth : right_col) - 1, next_row_number)]
-				            .get_height() *
-				         kHeightFactor;
+				Y_a =
+				   screen_y_base -
+				   map[Widelands::Coords((right_col == 0 ? mapwidth : right_col) - 1, next_row_number)]
+				         .get_height() *
+				      kHeightFactor;
 				ldy = Y_b - Y_a;
 				if (pdy * kTriangleWidth > ldy * pdx) {
 					//  (x, y) is in the third triangle.
-					result_triangle = Widelands::TCoords<>(Widelands::Coords(left_col, row_number), Widelands::TriangleIndex::D);
+					result_triangle = Widelands::TCoords<>(
+					   Widelands::Coords(left_col, row_number), Widelands::TriangleIndex::D);
 				} else {
 					//  (x, y) is in the lower triangle.
-					result_triangle =
-					   Widelands::TCoords<>(Widelands::Coords((right_col == 0 ? mapwidth : right_col) - 1, next_row_number),
-					             Widelands::TriangleIndex::R);
+					result_triangle = Widelands::TCoords<>(
+					   Widelands::Coords((right_col == 0 ? mapwidth : right_col) - 1, next_row_number),
+					   Widelands::TriangleIndex::R);
 				}
 			}
 		}

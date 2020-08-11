@@ -259,7 +259,8 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 		row_counters[tab_index] = 0;
 
 		for (const Widelands::DescriptionIndex id : buildings_to_add[tab_index]) {
-			const Widelands::BuildingDescr& descr = *iplayer().egbase().tribes().get_building_descr(id);
+			const Widelands::BuildingDescr& descr =
+			   *iplayer().egbase().tribes().get_building_descr(id);
 			add_button(id, descr, row);
 			++current_column;
 			if (current_column == 1) {
@@ -331,7 +332,8 @@ bool BuildingStatisticsMenu::own_building_is_valid(const Widelands::Player& play
 bool BuildingStatisticsMenu::foreign_tribe_building_is_valid(
    const Widelands::Player& player, Widelands::DescriptionIndex index) const {
 	if (!player.tribe().has_building(index) && !player.get_building_statistics(index).empty()) {
-		const Widelands::BuildingDescr& descr = *iplayer().egbase().tribes().get_building_descr(index);
+		const Widelands::BuildingDescr& descr =
+		   *iplayer().egbase().tribes().get_building_descr(index);
 		if (descr.type() == Widelands::MapObjectType::CONSTRUCTIONSITE ||
 		    descr.type() == Widelands::MapObjectType::DISMANTLESITE) {
 			return false;
@@ -616,7 +618,8 @@ void BuildingStatisticsMenu::update() {
 		assert(productivity_labels_[id] != nullptr);
 		assert(owned_labels_[id] != nullptr);
 
-		const std::vector<Widelands::Player::BuildingStats>& stats_vector = player.get_building_statistics(id);
+		const std::vector<Widelands::Player::BuildingStats>& stats_vector =
+		   player.get_building_statistics(id);
 
 		uint32_t nr_owned = 0;
 		uint32_t nr_build = 0;
@@ -630,10 +633,12 @@ void BuildingStatisticsMenu::update() {
 				++nr_build;
 			} else {
 				++nr_owned;
-				Widelands::BaseImmovable& immovable = *iplayer().game().map()[stats_vector[l].pos].get_immovable();
+				Widelands::BaseImmovable& immovable =
+				   *iplayer().game().map()[stats_vector[l].pos].get_immovable();
 				if (building.type() == Widelands::MapObjectType::PRODUCTIONSITE ||
 				    building.type() == Widelands::MapObjectType::TRAININGSITE) {
-					Widelands::ProductionSite& productionsite = dynamic_cast<Widelands::ProductionSite&>(immovable);
+					Widelands::ProductionSite& productionsite =
+					   dynamic_cast<Widelands::ProductionSite&>(immovable);
 					int percent = productionsite.get_statistics_percent();
 					total_prod += percent;
 

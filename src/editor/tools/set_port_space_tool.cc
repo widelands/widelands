@@ -78,17 +78,18 @@ EditorSetPortSpaceTool::nodecaps_for_buildhelp(const Widelands::FCoords& fcoords
 	return port_tool_nodecaps(fcoords, egbase.map());
 }
 
-int32_t EditorSetPortSpaceTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                                 EditorInteractive& parent,
-                                                 EditorActionArgs* args,
-                                                 Widelands::Map* map) {
+int32_t EditorSetPortSpaceTool::handle_undo_impl(
+   const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+   EditorInteractive& parent,
+   EditorActionArgs* args,
+   Widelands::Map* map) {
 	return parent.tools()->unset_port_space.handle_click_impl(center, parent, args, map);
 }
 
 int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                     EditorInteractive& eia,
                                                     EditorActionArgs* args,
-                                                   Widelands:: Map* map) {
+                                                    Widelands::Map* map) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map->get_width());
 	assert(0 <= center.node.y);
@@ -111,10 +112,11 @@ int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTria
 	return nr;
 }
 
-int32_t EditorUnsetPortSpaceTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                                   EditorInteractive& parent,
-                                                   EditorActionArgs* args,
-                                                   Widelands::Map* map) {
+int32_t EditorUnsetPortSpaceTool::handle_undo_impl(
+   const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+   EditorInteractive& parent,
+   EditorActionArgs* args,
+   Widelands::Map* map) {
 	return parent.tools()->set_port_space.handle_click_impl(center, parent, args, map);
 }
 

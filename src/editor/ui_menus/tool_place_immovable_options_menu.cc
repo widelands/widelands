@@ -29,7 +29,8 @@
 
 namespace {
 
-UI::Checkbox* create_immovable_checkbox(UI::Panel* parent, const Widelands::ImmovableDescr& immovable_descr) {
+UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
+                                        const Widelands::ImmovableDescr& immovable_descr) {
 	const Image* pic = immovable_descr.representative_image();
 	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i::zero(), pic, immovable_descr.descname());
 	const int kMinClickableArea = 24;
