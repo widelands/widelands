@@ -394,9 +394,10 @@ do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float 
 }
 
 inline float FullscreenMenuMain::calc_opacity(const uint32_t time) {
-	return last_image_ == draw_image_ ? 1.f :
-	   std::max(0.f, std::min(1.f,
-	   static_cast<float>(time - last_image_exchange_time_) / kImageExchangeDuration));
+	return last_image_ == draw_image_ ?
+	          1.f :
+	          std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
+	                                         kImageExchangeDuration));
 }
 
 void FullscreenMenuMain::draw(RenderTarget& r) {
