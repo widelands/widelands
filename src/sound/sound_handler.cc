@@ -285,7 +285,10 @@ FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
  * (to avoid "sonic overload"). Based on priority and on when it was last played.
  * System sounds and sounds with priority "kFxPriorityAlwaysPlay" always return 'true'.
  */
-bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint16_t const priority, bool allow_multiple) {
+bool SoundHandler::play_or_not(SoundType type,
+                               const FxId fx_id,
+                               uint16_t const priority,
+                               bool allow_multiple) {
 	assert(!SoundHandler::is_backend_disabled() && is_sound_enabled(type));
 	assert(priority >= kFxPriorityLowest);
 
@@ -328,8 +331,7 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint16_t const 
 
 	// Weighted total probability that this fx gets played; initially set according to priority
 	//  float division! not integer
-	float probability =
-	   (priority % kFxMaximumPriority) / static_cast<float>(kFxMaximumPriority);
+	float probability = (priority % kFxMaximumPriority) / static_cast<float>(kFxMaximumPriority);
 
 	// How many milliseconds in the past to consider
 	constexpr uint32_t kSlidingWindowSize = 20000;
@@ -361,7 +363,7 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint16_t const 
 void SoundHandler::play_fx(SoundType type,
                            const FxId fx_id,
                            uint16_t const priority,
-						   bool allow_multiple,
+                           bool allow_multiple,
                            int32_t const stereo_pos,
                            int distance) {
 	if (SoundHandler::is_backend_disabled() || !is_sound_enabled(type)) {

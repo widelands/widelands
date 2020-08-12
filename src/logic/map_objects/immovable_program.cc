@@ -166,8 +166,8 @@ ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arg
  * Whether the effect actually gets played is decided by the sound server itself.
  */
 void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) const {
-	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, parameters.fx, immovable.get_position(), parameters.priority, parameters.allow_multiple));
+	Notifications::publish(NoteSound(SoundType::kAmbient, parameters.fx, immovable.get_position(),
+	                                 parameters.priority, parameters.allow_multiple));
 	immovable.program_step(game);
 }
 

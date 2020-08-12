@@ -43,7 +43,7 @@ Animation::Animation(const LuaTable& table)
      play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false),
      sound_effect_(kNoSoundEffect),
      sound_priority_(kFxPriorityLowest),
-	 sound_allow_multiple_(false) {
+     sound_allow_multiple_(false) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
@@ -149,8 +149,8 @@ void Animation::trigger_sound(uint32_t time, const Widelands::Coords& coords) co
 		return;
 	}
 	if (current_frame(time) == 0) {
-		Notifications::publish(
-		   NoteSound(SoundType::kAmbient, sound_effect_, coords, sound_priority_, sound_allow_multiple_));
+		Notifications::publish(NoteSound(
+		   SoundType::kAmbient, sound_effect_, coords, sound_priority_, sound_allow_multiple_));
 	}
 }
 

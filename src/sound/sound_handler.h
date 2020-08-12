@@ -176,7 +176,7 @@ public:
 	void play_fx(SoundType type,
 	             FxId fx_id,
 	             uint16_t priority = kFxMaximumPriority,
-				 bool allow_multiple = true,
+	             bool allow_multiple = true,
 	             int32_t stereo_position = kStereoCenter,
 	             int distance = 0);
 	// Trigger loading of the sound files for the given effect.

@@ -37,8 +37,12 @@ struct NoteSound {
 	          FxId init_fx,
 	          Widelands::Coords init_coords,
 	          uint16_t init_priority,
-			  bool init_allow_multiple)
-	   : type(init_type), fx(init_fx), coords(init_coords), priority(init_priority), allow_multiple(init_allow_multiple) {
+	          bool init_allow_multiple)
+	   : type(init_type),
+	     fx(init_fx),
+	     coords(init_coords),
+	     priority(init_priority),
+	     allow_multiple(init_allow_multiple) {
 	}
 };
 
