@@ -122,9 +122,9 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 									*queue_iter = &mol.get<Worker>(leaver_serial);
 								} catch (const WException& e) {
 									throw GameDataError(
-									   "leave queue item #%li (%u): %s",
-									   static_cast<long int>(queue_iter - leave_queue.begin()),
-									   leaver_serial, e.what());
+									   "leave queue item #%" PRIuS " (%u): %s",
+									   static_cast<size_t>(queue_iter - leave_queue.begin()), leaver_serial,
+									   e.what());
 								}
 							} else {
 								*queue_iter = nullptr;

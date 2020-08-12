@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "field" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:45s",
          "transform=blackrootfield_medium",
       }

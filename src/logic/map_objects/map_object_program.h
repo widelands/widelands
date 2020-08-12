@@ -35,6 +35,8 @@ class MapObjectDescr;
 /// diverse parsing convenience functions. The creation and execution of program actions is left to
 /// the sub-classes.
 struct MapObjectProgram {
+	static constexpr const char* const kMainProgram = "main";
+
 	const std::string& name() const;
 
 	explicit MapObjectProgram(const std::string& init_name);
