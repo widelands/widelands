@@ -242,7 +242,7 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 			}
 		}
 	}
-	assert(result_triangle.node != Coords::null());
+	assert(result_triangle.node != Widelands::Coords::null());
 	return Widelands::NodeAndTriangle<>{result_node, result_triangle};
 }
 
