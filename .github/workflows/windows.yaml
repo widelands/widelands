@@ -1,8 +1,6 @@
 name: Deployment for MS-Windows
 
 on:
-  push:
-    branches: [ master, stacked-workflows ]
   pull_request:
     types: [ opened, synchronize ]
 

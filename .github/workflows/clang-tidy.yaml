@@ -2,7 +2,7 @@ name: Clang-Tidy
 
 on:
   push:
-    branches: [ master, stacked-workflows ]
+    branches: [ master ]
 
 jobs:
   check:
