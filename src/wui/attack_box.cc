@@ -45,17 +45,19 @@ AttackBox::AttackBox(UI::Panel* parent,
 std::vector<Widelands::Soldier*> AttackBox::get_max_attackers() {
 	assert(player_);
 	if (upcast(Building, building, map_.get_immovable(*node_coordinates_))) {
-		if (player_->is_seeing(map_.get_index(building->get_position(), map_.get_width()))) {
-			std::vector<Widelands::Soldier*> v;
-			// TODO(Nordfriese): This method decides by itself which soldier remains in the building.
-			// This soldier will not show up in the result vector. Perhaps we should show all
-			// available soldiers, grouped by building, so the player can choose between all soldiers
-			// knowing that at least one of each group will have to stay at home. However, this
-			// could clutter up the screen a lot. Especially if you have many small buildings.
-			player_->find_attack_soldiers(building->base_flag(), &v);
-			return v;
+		for (Widelands::Coords& coords : building->get_positions(player_->egbase())) {
+			if (player_->is_seeing(map_.get_index(coords, map_.get_width()))) {
+				std::vector<Widelands::Soldier*> v;
+				// TODO(Nordfriese): This method decides by itself which soldier remains in the building.
+				// This soldier will not show up in the result vector. Perhaps we should show all
+				// available soldiers, grouped by building, so the player can choose between all soldiers
+				// knowing that at least one of each group will have to stay at home. However, this
+				// could clutter up the screen a lot. Especially if you have many small buildings.
+				player_->find_attack_soldiers(building->base_flag(), &v);
+				return v;
+			}
 		}
-		// Player can't see the buildings door, so it can't be attacked
+		// Player can't see any part of the building, so it can't be attacked
 		// This is the same check as done later on in send_player_enemyflagaction()
 	}
 	return std::vector<Widelands::Soldier*>();
