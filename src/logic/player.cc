@@ -1237,6 +1237,9 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 						   fields_[map.get_fcoords(building->get_position()).field - &first_map_field];
 						field_main.map_object_descr = map_object_descr;
 						map_object_descr = nullptr;
+						if (upcast(ConstructionSite const, cs, building)) {
+							field_main.constructionsite = const_cast<ConstructionSite*>(cs)->get_info();
+						}
 					} else {
 						if (upcast(ConstructionSite const, cs, building)) {
 							field.constructionsite = const_cast<ConstructionSite*>(cs)->get_info();
