@@ -444,6 +444,11 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_END:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					select_until(d_->text.size());
+				} else {
+					d_->reset_selection();
+				}
 				d_->set_cursor_pos(d_->text.size());
 			} else {
 				d_->refresh_ww();
@@ -452,8 +457,18 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (cursorline + 1 < d_->ww.nrlines()) {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(d_->prev_char(d_->ww.line_offset(cursorline + 1)));
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(d_->prev_char(d_->ww.line_offset(cursorline + 1)));
 				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(d_->text.size());
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(d_->text.size());
 				}
 			}
@@ -463,6 +478,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RETURN:
 			d_->insert(d_->cursor_pos, "\n");
 			d_->update();
+			d_->reset_selection();
 			changed();
 			break;
 
