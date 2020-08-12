@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "field", "seed_reed" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:22s",
          "transform=reedfield_small",
       }

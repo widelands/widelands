@@ -16,7 +16,7 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m",
          "remove=chance:15.62%",
          "grow=liana_wasteland_pole",
@@ -44,7 +44,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
          "remove=chance:11.72%",
          "grow=liana_wasteland_mature",
@@ -72,7 +72,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
          "remove=chance:3.91%",
          "seed=liana_wasteland_sapling 30",
@@ -106,7 +106,7 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:24m15s",
          "transform=deadtree4 chance:18.75%",
          "seed=liana_wasteland_sapling 100",
