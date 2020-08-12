@@ -891,6 +891,7 @@ void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::
 
 	act->iparam1 = parameters.priority;
 	act->iparam2 = parameters.fx;
+	act->iparam3 = parameters.allow_multiple ? 1 : 0;
 	act->function = &Worker::run_playsound;
 }
 

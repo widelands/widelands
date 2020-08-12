@@ -164,7 +164,7 @@ ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arg
  */
 void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) const {
 	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, parameters.fx, immovable.get_position(), parameters.priority));
+	   NoteSound(SoundType::kAmbient, parameters.fx, immovable.get_position(), parameters.priority, parameters.allow_multiple));
 	immovable.program_step(game);
 }
 

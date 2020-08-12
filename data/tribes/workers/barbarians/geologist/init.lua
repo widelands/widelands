@@ -26,7 +26,7 @@ tribes:new_worker_type {
       search = {
          "animate=hack duration:5s",
          "animate=idle duration:2s",
-         "playsound=sound/hammering/geologist_hammer priority:150%",
+         "playsound=sound/hammering/geologist_hammer priority:50% allow_multiple",
          "animate=hack duration:3s",
          "findresources"
       }

@@ -51,7 +51,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs empire_donkey",
             "consume=wheat water",
             "sleep=duration:15s",
-            "playsound=sound/farm/donkey priority:150%",
+            "playsound=sound/farm/donkey priority:50% allow_multiple",
             "animate=working duration:15s", -- Feeding cute little baby donkeys ;)
             "recruit=empire_donkey"
          }

@@ -1575,7 +1575,7 @@ ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& ar
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
 	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, parameters.fx, ps.position_, parameters.priority));
+	   NoteSound(SoundType::kAmbient, parameters.fx, ps.position_, parameters.priority, parameters.allow_multiple));
 	return ps.program_step(game);
 }
 

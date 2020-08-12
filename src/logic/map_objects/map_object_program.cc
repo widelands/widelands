@@ -239,7 +239,7 @@ Unless specified otherwise by the program action, maximum value is ``100%``. Exa
 * ``25.13%``
 
 */
-unsigned MapObjectProgram::read_percent_to_int(const std::string& input, uint8_t factor) {
+unsigned MapObjectProgram::read_percent_to_int(const std::string& input) {
 	boost::smatch match;
 	boost::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
 	if (boost::regex_search(input, match, re)) {
@@ -250,8 +250,9 @@ unsigned MapObjectProgram::read_percent_to_int(const std::string& input, uint8_t
 		       0U :
 		       match[3].str().size() == 1 ? 10U * std::stoul(match[3]) : std::stoul(match[3]));
 
-		if (result > kMaxProbability * factor) {
-			throw GameDataError("Given percentage of '%s' is greater than the %d00%% allowed", input.c_str(), factor);
+		if (result > kMaxProbability) {
+			throw GameDataError(
+			   "Given percentage of '%s' is greater than the 100%% allowed", input.c_str());
 		}
 		return result;
 	}
@@ -373,7 +374,7 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 
 playsound
 ^^^^^^^^^^
-.. function:: playsound=\<sound_dir/sound_name\> priority:<\percent\>
+.. function:: playsound=\<sound_dir/sound_name\> priority:<\percent\> \[allow_multiple\]
 
    :arg string sound_dir/sound_name: The directory (folder) that the sound files are in,
       relative to the data directory, followed by the name of the particular sound to play.
@@ -382,52 +383,80 @@ playsound
       ...
 
    :arg percent priority: The priority to give this sound,
-      in :ref:`map_object_programs_datatypes_percent`. Maximum priority is ``200%``.
+      in :ref:`map_object_programs_datatypes_percent`. Maximum priority is ``100%``.
+
+   :arg allow_multiple: When this parameter is given, the sound can be played by different map
+      objects at the same time.
 
    Trigger a sound effect. Whether the sound effect is actually played is determined by the
    sound handler.
-   For priorities ``<= 100%``, this is the direct chance to be played, but only if this sound
-   effect is not already playing.
-   For priorities ``> 100%``, ``100`` is subtracted from the chance (so that ``101%-200%`` given
-   corresponds to an actual chance of ``1%-100%``), and the same sound effect can be played at the
-   same time for multiple map objects.
 
-   Example for a worker:
+   Examples:
 
 .. code-block:: lua
 
+      -- Worker
       harvest = {
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
-         "playsound=sound/farm/scythe priority:95%", -- Almost certainly play a swishy harvesting sound
+         -- Almost certainly play a swishy harvesting sound
+         "playsound=sound/farm/scythe priority:95%",
          "animate=harvesting duration:10s",
          "callobject=harvest",
          "animate=gathering duration:4s",
          "createware=wheat",
          "return"
       }
+
+      -- Production site
+     produce_ax = {
+         -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
+         descname = _"forging an ax",
+         actions = {
+            "return=skipped unless economy needs ax",
+            "consume=coal iron",
+            "sleep=duration:26s",
+            -- Play a banging sound 50% of the time.
+            -- Other buildings can also play this sound at the same time.
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:22s",
+            -- Play a sharpening sound 50% of the time,
+            -- but not if another building is already playing it right now.
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
+            "produce=ax"
+         }
+      }
 */
 MapObjectProgram::PlaySoundParameters
 MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments,
-									   const MapObjectDescr& descr) {
-	if (arguments.size() != 2) {
-		throw GameDataError("Usage: playsound=<sound_dir/sound_name> priority:<percent>");
+                                       const MapObjectDescr& descr) {
+	if (arguments.size() != 2 && arguments.size() != 3) {
+		throw GameDataError(
+		   "Usage: playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]");
 	}
 	PlaySoundParameters result;
 	result.fx = SoundHandler::register_fx(SoundType::kAmbient, arguments.at(0));
+	result.allow_multiple = false;
 
 	const std::pair<std::string, std::string> item = read_key_value_pair(arguments.at(1), ':');
 	if (item.first == "priority") {
-		result.priority = read_percent_to_int(item.second, 2U);
+		result.priority = read_percent_to_int(item.second);
 	} else if (item.second.empty()) {
-		// TODO(GunChleoc): Compatibility, remove this option after v1.0
-		result.priority = (read_positive(arguments.at(1)) * kMaxProbability * 2U) / 256;
-		log("WARNING: Deprecated usage in %s. Please convert playsound's 'priority' option to percentage, like this: "
-			"playsound=<sound_dir/sound_name> priority:<percent>\n",
-			descr.name().c_str());
+		if (item.first == "allow_multiple") {
+			result.allow_multiple = true;
+		} else {
+			// TODO(GunChleoc): Compatibility, remove this option after v1.0
+			result.priority = (read_positive(arguments.at(1)) * kMaxProbability * 2U) / 256;
+			log("WARNING: Deprecated usage in %s. Please convert playsound's 'priority' option to "
+			    "percentage, like this: "
+			    "playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]\n",
+			    descr.name().c_str());
+		}
 	} else {
-		throw GameDataError("Unknown argument '%s'. Usage: playsound=<sound_dir/sound_name> priority:<percent>",
-							arguments.at(1).c_str());
+		throw GameDataError("Unknown argument '%s'. Usage: playsound=<sound_dir/sound_name> "
+		                    "priority:<percent> [allow_multiple]",
+		                    arguments.at(1).c_str());
 	}
 
 	if (result.priority < kFxPriorityLowest) {

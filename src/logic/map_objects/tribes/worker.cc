@@ -1088,7 +1088,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
  */
 bool Worker::run_playsound(Game& game, State& state, const Action& action) {
 	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, action.iparam2, get_position(), action.iparam1));
+	   NoteSound(SoundType::kAmbient, action.iparam2, get_position(), action.iparam1, action.iparam3 == 1));
 
 	++state.ivar1;
 	schedule_act(game, 10);

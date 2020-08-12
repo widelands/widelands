@@ -32,7 +32,7 @@ tribes:new_worker_type {
       buildship = {
          "walk=object-or-coords",
          "plant=attrib:shipconstruction unless object",
-         "playsound=sound/sawmill/sawmill priority:180%",
+         "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
          "animate=idle duration:500ms",
          "construct",
          "animate=idle duration:5s",

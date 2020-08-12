@@ -42,7 +42,8 @@ Animation::Animation(const LuaTable& table)
      frametime_(table.has_key("fps") ? (1000 / get_positive_int(table, "fps")) : kFrameLength),
      play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false),
      sound_effect_(kNoSoundEffect),
-     sound_priority_(kFxPriorityLowest) {
+     sound_priority_(kFxPriorityLowest),
+	 sound_allow_multiple_(false) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
@@ -52,6 +53,9 @@ Animation::Animation(const LuaTable& table)
 
 			if (sound_effects->has_key<std::string>("priority")) {
 				sound_priority_ = sound_effects->get_int("priority");
+			}
+			if (sound_effects->has_key<std::string>("allow_multiple")) {
+				sound_allow_multiple_ = sound_effects->get_bool("allow_multiple");
 			}
 
 			if (sound_priority_ < kFxPriorityLowest) {
@@ -146,7 +150,7 @@ void Animation::trigger_sound(uint32_t time, const Widelands::Coords& coords) co
 	}
 	if (current_frame(time) == 0) {
 		Notifications::publish(
-		   NoteSound(SoundType::kAmbient, sound_effect_, coords, sound_priority_));
+		   NoteSound(SoundType::kAmbient, sound_effect_, coords, sound_priority_, sound_allow_multiple_));
 	}
 }
 
