@@ -314,12 +314,6 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_LEFT: {
 			if (d_->cursor_pos > 0) {
-				if (SDL_GetModState() & KMOD_SHIFT) {
-					start_selection();
-					d_->selection_end = d_->cursor_pos - 1;
-				} else {
-					d_->reset_selection();
-				}
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 					uint32_t newpos = d_->prev_char(d_->cursor_pos);
 					while (newpos > 0 && isspace(d_->text[newpos])) {
@@ -332,8 +326,20 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 						}
 						newpos = prev;
 					}
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						start_selection();
+						d_->selection_end = newpos;
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(newpos);
 				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						start_selection();
+						d_->selection_end = d_->prev_char(d_->cursor_pos);
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(d_->prev_char(d_->cursor_pos));
 				}
 			}
@@ -342,12 +348,6 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_RIGHT:
 			if (d_->cursor_pos < d_->text.size()) {
-				if (SDL_GetModState() & KMOD_SHIFT) {
-					start_selection();
-					d_->selection_end = d_->cursor_pos + 1;
-				} else {
-					d_->reset_selection();
-				}
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 					uint32_t newpos = d_->next_char(d_->cursor_pos);
 					while (newpos < d_->text.size() && isspace(d_->text[newpos])) {
@@ -356,8 +356,20 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 					while (newpos < d_->text.size() && !isspace(d_->text[newpos])) {
 						newpos = d_->next_char(newpos);
 					}
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						start_selection();
+						d_->selection_end = newpos;
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(newpos);
 				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						start_selection();
+						d_->selection_end = d_->next_char(d_->cursor_pos);
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(d_->next_char(d_->cursor_pos));
 				}
 			}
