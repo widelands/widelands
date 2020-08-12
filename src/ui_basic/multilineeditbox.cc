@@ -327,16 +327,14 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 						newpos = prev;
 					}
 					if (SDL_GetModState() & KMOD_SHIFT) {
-						start_selection();
-						d_->selection_end = newpos;
+						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
 					if (SDL_GetModState() & KMOD_SHIFT) {
-						start_selection();
-						d_->selection_end = d_->prev_char(d_->cursor_pos);
+						select_until(d_->prev_char(d_->cursor_pos));
 					} else {
 						d_->reset_selection();
 					}
@@ -357,16 +355,14 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 						newpos = d_->next_char(newpos);
 					}
 					if (SDL_GetModState() & KMOD_SHIFT) {
-						start_selection();
-						d_->selection_end = newpos;
+						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
 					if (SDL_GetModState() & KMOD_SHIFT) {
-						start_selection();
-						d_->selection_end = d_->next_char(d_->cursor_pos);
+						select_until(d_->next_char(d_->cursor_pos));
 					} else {
 						d_->reset_selection();
 					}
@@ -427,8 +423,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_HOME:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				if (SDL_GetModState() & KMOD_SHIFT) {
-					start_selection();
-					d_->selection_end = 0;
+					select_until(0);
 				} else {
 					d_->reset_selection();
 				}
@@ -439,8 +434,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (SDL_GetModState() & KMOD_SHIFT) {
-					start_selection();
-					d_->selection_end = d_->ww.line_offset(cursorline);
+					select_until(d_->ww.line_offset(cursorline));
 				} else {
 					d_->reset_selection();
 				}
@@ -480,12 +474,15 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 	return Panel::handle_key(down, code);
 }
-
-void MultilineEditbox::start_selection() const {
+/**
+ * Selects text from @p cursor until @p end
+ */
+void MultilineEditbox::select_until(uint32_t end) const {
 	if (d_->mode == Data::Mode::kNormal) {
 		d_->selection_start = d_->cursor_pos;
 		d_->mode = Data::Mode::kSelection;
 	}
+	d_->selection_end = end;
 }
 void MultilineEditbox::delete_selected_text() const {
 	uint32_t start, end;
