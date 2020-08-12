@@ -274,7 +274,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	for (const std::string& img : g_fs->list_directory("images/ui_fsmenu/backgrounds")) {
 		images_.push_back(img);
 	}
-	last_image_ = draw_image_ = std::rand() % images_.size();
+	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT
 
 	if (first_ever_init) {
 		init_time_ = SDL_GetTicks();
@@ -416,7 +416,7 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 	if (time - last_image_exchange_time_ > kImageExchangeInterval) {
 		last_image_ = draw_image_;
 		do {
-			draw_image_ = std::rand() % images_.size();
+			draw_image_ = std::rand() % images_.size();  // NOLINT
 		} while (draw_image_ == last_image_);
 		last_image_exchange_time_ = time;
 	}
