@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    size = "medium",
    attributes = { "field", "flowering" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:40s",
          "transform=grapevine_ripe",
       }

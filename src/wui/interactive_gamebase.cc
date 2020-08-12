@@ -118,7 +118,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 				   // Check whether the window is wanted
 				   if (wanted_building_windows_.count(coords.hash()) == 1) {
 					   const WantedBuildingWindow& wanted_building_window =
-					      *wanted_building_windows_.at(coords.hash()).get();
+					      *wanted_building_windows_.at(coords.hash());
 					   UI::UniqueWindow* building_window =
 					      show_building_window(coords, true, wanted_building_window.show_workarea);
 					   building_window->set_pos(wanted_building_window.window_position);

@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "field", "seed_corn" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:30s",
          "transform=cornfield_small",
       }
