@@ -52,6 +52,7 @@ protected:
 private:
 	void scrollpos_changed(int32_t);
 	void delete_selected_text() const;
+	void start_selection() const;
 	struct Data;
 	std::unique_ptr<Data> d_;
 };

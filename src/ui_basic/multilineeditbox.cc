@@ -315,10 +315,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LEFT: {
 			if (d_->cursor_pos > 0) {
 				if (SDL_GetModState() & KMOD_SHIFT) {
-					if (d_->mode == Data::Mode::kNormal) {
-						d_->selection_start = d_->cursor_pos;
-						d_->mode = Data::Mode::kSelection;
-					}
+					start_selection();
 					d_->selection_end = d_->cursor_pos - 1;
 				} else {
 					d_->reset_selection();
@@ -346,10 +343,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RIGHT:
 			if (d_->cursor_pos < d_->text.size()) {
 				if (SDL_GetModState() & KMOD_SHIFT) {
-					if (d_->mode == Data::Mode::kNormal) {
-						d_->selection_start = d_->cursor_pos;
-						d_->mode = Data::Mode::kSelection;
-					}
+					start_selection();
 					d_->selection_end = d_->cursor_pos + 1;
 				} else {
 					d_->reset_selection();
@@ -421,10 +415,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_HOME:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				if (SDL_GetModState() & KMOD_SHIFT) {
-					if (d_->mode == Data::Mode::kNormal) {
-						d_->selection_start = d_->cursor_pos;
-						d_->mode = Data::Mode::kSelection;
-					}
+					start_selection();
 					d_->selection_end = 0;
 				} else {
 					d_->reset_selection();
@@ -432,20 +423,15 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 				d_->set_cursor_pos(0);
 			} else {
 				d_->refresh_ww();
-
 				uint32_t cursorline, cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (SDL_GetModState() & KMOD_SHIFT) {
-					if (d_->mode == Data::Mode::kNormal) {
-						d_->selection_start = d_->cursor_pos;
-						d_->mode = Data::Mode::kSelection;
-					}
+					start_selection();
 					d_->selection_end = d_->ww.line_offset(cursorline);
 				} else {
 					d_->reset_selection();
 				}
-
 				d_->set_cursor_pos(d_->ww.line_offset(cursorline));
 			}
 			break;
@@ -481,6 +467,13 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 	}
 
 	return Panel::handle_key(down, code);
+}
+
+void MultilineEditbox::start_selection() const {
+	if (d_->mode == Data::Mode::kNormal) {
+		d_->selection_start = d_->cursor_pos;
+		d_->mode = Data::Mode::kSelection;
+	}
 }
 void MultilineEditbox::delete_selected_text() const {
 	uint32_t start, end;
