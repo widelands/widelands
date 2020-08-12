@@ -1205,7 +1205,7 @@ public:
 			nodestyle_.font_color = a["color"].get_color();
 		}
 		if (a.has("size")) {
-			nodestyle_.font_size = a["size"].get_int();
+			nodestyle_.font_size = a["size"].get_int(std::numeric_limits<uint16_t>::max());
 		}
 		if (a.has("face")) {
 			nodestyle_.font_face = a["face"].get_string();
@@ -1242,7 +1242,7 @@ public:
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
 		if (a.has("indent")) {
-			indent_ = a["indent"].get_int();
+			indent_ = a["indent"].get_int(std::numeric_limits<uint16_t>::max());
 		}
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
@@ -1266,7 +1266,7 @@ public:
 			}
 		}
 		if (a.has("spacing")) {
-			nodestyle_.spacing = a["spacing"].get_int();
+			nodestyle_.spacing = a["spacing"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 	}
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
@@ -1314,7 +1314,7 @@ public:
 			const std::string image_filename = a["src"].get_string();
 
 			if (a.has("width")) {
-				int width = a["width"].get_int();
+				int width = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (width > renderer_style_.overall_width) {
 					log("WARNING: Font renderer: Specified image width of %d exceeds the overall "
 					    "available "
@@ -1353,7 +1353,7 @@ public:
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
 
-		space_ = a["gap"].get_int();
+		space_ = a["gap"].get_int(std::numeric_limits<uint16_t>::max());
 	}
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		nodes.push_back(std::shared_ptr<RenderNode>(new SpaceNode(nodestyle_, 0, space_)));
@@ -1381,7 +1381,7 @@ public:
 		const AttrMap& a = tag_.attrs();
 
 		if (a.has("gap")) {
-			space_ = a["gap"].get_int();
+			space_ = a["gap"].get_int(std::numeric_limits<uint16_t>::max());
 		} else {
 			space_ = INFINITE_WIDTH;
 		}
@@ -1482,26 +1482,26 @@ public:
 			}
 		}
 		if (a.has("padding")) {
-			uint8_t p = a["padding"].get_int();
+			uint8_t p = a["padding"].get_int(std::numeric_limits<uint8_t>::max());
 			padding.left = padding.top = padding.right = padding.bottom = p;
 		}
 		// TODO(GunChleoc): padding_l and padding_r don't seem to produce balanced results.
 		// We ran into that with the game tips,
 		// using "<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>" there.
 		if (a.has("padding_r")) {
-			padding.right = a["padding_r"].get_int();
+			padding.right = a["padding_r"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 		if (a.has("padding_b")) {
-			padding.bottom = a["padding_b"].get_int();
+			padding.bottom = a["padding_b"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 		if (a.has("padding_l")) {
-			padding.left = a["padding_l"].get_int();
+			padding.left = a["padding_l"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 		if (a.has("padding_t")) {
-			padding.top = a["padding_t"].get_int();
+			padding.top = a["padding_t"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 		if (a.has("margin")) {
-			uint8_t p = a["margin"].get_int();
+			uint8_t p = a["margin"].get_int(std::numeric_limits<uint8_t>::max());
 			margin.left = margin.top = margin.right = margin.bottom = p;
 		}
 
@@ -1625,7 +1625,7 @@ public:
 				}
 				render_node_->set_desired_width(DesiredWidth(width_percent, WidthUnit::kPercent));
 			} else {
-				w_ = a["width"].get_int();
+				w_ = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (w_ > renderer_style_.overall_width) {
 					log("WARNING: Font renderer: Specified width of %d exceeds the overall available "
 					    "width of %d. Setting width to %d.\n",

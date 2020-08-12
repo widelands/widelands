@@ -226,7 +226,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 			if (scenario_data->visible) {
 				scenario_data->is_tutorial = false;
 				scenario_data->playable = scenario_data->path != "dummy.wmf";
-				scenarios_data_.push_back(*scenario_data.get());
+				scenarios_data_.push_back(*scenario_data);
 			} else {
 				break;
 			}

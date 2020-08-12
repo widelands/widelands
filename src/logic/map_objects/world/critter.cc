@@ -142,7 +142,7 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 	for (const std::string& program_name : programs->keys<std::string>()) {
 		try {
 			programs_[program_name] = std::unique_ptr<CritterProgram>(
-			   new CritterProgram(program_name, *programs->get_table(program_name).get()));
+			   new CritterProgram(program_name, *programs->get_table(program_name)));
 		} catch (const std::exception& e) {
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
 		}
