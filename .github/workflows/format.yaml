@@ -75,9 +75,9 @@ jobs:
             # grep returns 1 if the branch is not found
             set +e
             mkdir build
-            prnum=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$branch" | grep -m 1 '"url": "')
+            output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$branch" | grep "$branch")
             set -e
-            if [ -z "$prnum" ]
+            if [ -z "$output" ]
             then
               echo "Branch $branch in repository $forkname does not have an open pull request, so no changes will be pushed. Please note however that your code is not properly formatted:"
               git status -s
@@ -87,10 +87,8 @@ jobs:
               echo "Branch $branch in repository $forkname has an open pull request. Changes will be pushed."
               if [ -z "${{ secrets.FORMAT_TOKEN }}" ]
               then
-                prnum=${prnum#*: \"}
-                prnum=${prnum%\",}
-                prnum=${prnum##*/}
-                curl -n -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/widelands/widelands/issues/$prnum/comments" -d "{\"body\":\"Dear @${forkname%%/*}, you have not set a `FORMAT_TOKEN` secret in your repository yet. The `GITHUB_TOKEN` will be used instead to push your code formatting changes. Note however that this will not trigger the MS-Windows and Clang-Tidy integration checks. **It is strongly recommended** that you create an API token with push access to $forkname and store it as a secret named `FORMAT_TOKEN` in your repository (`$forkname` → Settings → Secrets). See [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) for more details. Thanks in advance :)\"}"
+                warning="Dear @${forkname%%/*}, you have not set a `FORMAT_TOKEN` secret in your repository yet. The `GITHUB_TOKEN` will be used instead to push your code formatting changes. Note however that this will not trigger the MS-Windows and Clang-Tidy integration checks. **It is strongly recommended** that you create an API token with push access to $forkname and store it as a secret named `FORMAT_TOKEN` in your repository (`$forkname` → Settings → Secrets). See [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) for more details. Thanks in advance :)"
+                echo "::warning::$warning"
               fi
             fi
           fi
