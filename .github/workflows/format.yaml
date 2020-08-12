@@ -26,23 +26,23 @@ jobs:
         # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
         if [ -n "${{ secrets.FORMAT_TOKEN }}" ]
         then
-          cat <<- EOF > $HOME/.netrc
+          cat <<- EOF1 > $HOME/.netrc
           machine github.com
           login $GITHUB_ACTOR
           password ${{ secrets.FORMAT_TOKEN }}
           machine api.github.com
           login $GITHUB_ACTOR
           password ${{ secrets.FORMAT_TOKEN }}
-          EOF
+          EOF1
         else
-          cat <<- EOF > $HOME/.netrc
+          cat <<- EOF2 > $HOME/.netrc
           machine github.com
           login $GITHUB_ACTOR
           password ${{ secrets.GITHUB_TOKEN }}
           machine api.github.com
           login $GITHUB_ACTOR
           password ${{ secrets.GITHUB_TOKEN }}
-          EOF
+          EOF2
         fi
         chmod 600 $HOME/.netrc
     - name: Installing python
