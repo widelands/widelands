@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
-    - name: Clang-Tidy
+    - name: Check
       run: |
         export CC=/usr/bin/clang
         export CXX=/usr/bin/clang++
@@ -25,4 +25,5 @@ jobs:
         cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
         python ../utils/run-clang-tidy.py -checks=-*,*braces*,cert*,clang-analyzer*,cppcoreguidelines-pro-type-static-cast-downcast,google*,performance* > ../clang-tidy.log
         popd
-        utils/check_clang_tidy_results.py clang-tidy.log
+    - name: Report
+      run: utils/check_clang_tidy_results.py clang-tidy.log
