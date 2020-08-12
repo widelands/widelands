@@ -718,11 +718,12 @@ void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
 }
 
 // static
-void InteractiveBase::draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
-                                               const InfoToDraw info_to_draw,
-                                               const Widelands::Player::Field& player_field,
-                                               const float scale,
-                                               RenderTarget* dst) {
+void InteractiveBase::draw_immovable_for_formerly_visible_field(
+   const FieldsToDraw::Field& field,
+   const InfoToDraw info_to_draw,
+   const Widelands::Player::Field& player_field,
+   const float scale,
+   RenderTarget* dst) {
 	if (player_field.map_object_descr == nullptr) {
 		return;
 	}

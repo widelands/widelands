@@ -781,7 +781,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	} else {
 		ownership_layer_cache_.clear();
 	}
-	auto* fields_to_draw = map_view()->draw_terrain(ebase, nullptr, ownership_layer_cache_, draw_grid_, &dst);
+	auto* fields_to_draw =
+	   map_view()->draw_terrain(ebase, nullptr, ownership_layer_cache_, draw_grid_, &dst);
 	const auto road_building_s = road_building_steepness_overlays();
 	const auto info_to_draw = get_info_to_draw(!map_view()->is_animating());
 

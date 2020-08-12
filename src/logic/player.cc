@@ -1676,9 +1676,9 @@ const std::string Player::pick_shipname() {
 	}
 
 	Game* game = dynamic_cast<Game*>(&egbase());
-	const size_t index = (game ? game->logic_rand() :
-			std::rand()  // NOLINT
-			) % remaining_shipnames_.size();
+	const size_t index = (game ? game->logic_rand() : std::rand()  // NOLINT
+	                      ) %
+	                     remaining_shipnames_.size();
 	auto it = remaining_shipnames_.begin();
 	std::advance(it, index);
 	std::string new_name = *it;
