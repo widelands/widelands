@@ -1,4 +1,7 @@
-# Widelands [![Build Status Travis-CI](https://travis-ci.org/widelands/widelands.svg?branch=master)](https://travis-ci.org/widelands/widelands) [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/widelands/widelands?branch=master&svg=true)](https://ci.appveyor.com/project/widelands-dev/widelands) ![Code Quality](https://github.com/widelands/widelands/workflows/Formatting%20your%20code/badge.svg) [![Mirrored on Launchpad](https://github.com/widelands/widelands/workflows/Launchpad%20Mirror/badge.svg)](https://code.launchpad.net/~widelands-dev/widelands/trunk)
+# Widelands
+
+[![Build Status Travis-CI](https://travis-ci.org/widelands/widelands.svg?branch=master)](https://travis-ci.org/widelands/widelands) [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/widelands/widelands?branch=master&svg=true)](https://ci.appveyor.com/project/widelands-dev/widelands) ![Code Quality](https://github.com/widelands/widelands/workflows/Formatting%20your%20code/badge.svg) ![Clang-Tidy](https://github.com/widelands/widelands/workflows/Clang-Tidy/badge.svg) [![Mirrored on Launchpad](https://github.com/widelands/widelands/workflows/Launchpad%20Mirror/badge.svg)](https://code.launchpad.net/~widelands-dev/widelands/trunk)
+
 Widelands is a free, open source real-time strategy game with singleplayer campaigns and a multiplayer mode.
 The game was inspired by Settlers II™ (© Bluebyte) but has significantly more variety and depth to it.
 
@@ -23,13 +26,13 @@ We support compiling Widelands for Linux, Windows under MSys2, and MacOs with GC
 You will need to install the following dependencies:
 
 *  [libSDL](http://www.libsdl.org/) >=2.0
-*  [libSDL_image](http://www.libsdl.org/projects/SDL_image) 
+*  [libSDL_image](http://www.libsdl.org/projects/SDL_image)
 *  [libSDL_mixer](http://www.libsdl.org/projects/SDL_mixer) >= 2.0
 *  [libSDL_ttf](http://www.libsdl.org/projects/SDL_ttf) >= 2.0
-*  [gettext](http://www.gnu.org/software/gettext/gettext.html) 
+*  [gettext](http://www.gnu.org/software/gettext/gettext.html)
 * libiconv (on same mirrors as gettext)
-*  [zlib](http://www.zlib.net/) 
-*  [libpng](http://www.libpng.org/pub/png/libpng.html) 
+*  [zlib](http://www.zlib.net/)
+*  [libpng](http://www.libpng.org/pub/png/libpng.html)
 *  [Boost](http://www.boost.org/) >= 1.48
 *  [Python](http://www.python.org) >= 1.5.2
 *  [libglew](http://glew.sourceforge.net) or [glbinding](https://glbinding.org/)
