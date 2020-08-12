@@ -29,12 +29,6 @@ tribes:new_productionsite_type {
       },
    },
 
-   indicate_workarea_overlaps = {
-      empire_farm = false,
-      empire_vineyard = false,
-      empire_foresters_house = false,
-   },
-
    aihints = {
       basic_amount = 1,
       space_consumer = true,
@@ -45,10 +39,6 @@ tribes:new_productionsite_type {
 
    working_positions = {
       empire_farmer = 1
-   },
-
-   outputs = {
-      "wheat"
    },
 
    programs = {
@@ -65,7 +55,7 @@ tribes:new_productionsite_type {
          descname = _"planting wheat",
          actions = {
             "callworker=plant",
-            "sleep=10000"
+            "sleep=duration:10s"
          }
       },
       harvest = {
@@ -73,7 +63,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting wheat",
          actions = {
             "callworker=harvest",
-            "sleep=4000"
+            "sleep=duration:4s"
          }
       },
    },

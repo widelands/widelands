@@ -10,8 +10,8 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "field", "flowering" },
    programs = {
-      program = {
-         "animate=idle 250000",
+      main = {
+         "animate=idle duration:4m10s",
          "transform=barleyfield_ripe",
       }
    },

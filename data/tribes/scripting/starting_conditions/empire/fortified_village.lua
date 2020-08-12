@@ -4,9 +4,9 @@
 
 include "scripting/infrastructure.lua"
 
-set_textdomain("tribes")
+push_textdomain("tribes")
 
-return {
+local r = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Fortified Village",
    -- TRANSLATORS: This is the tooltip for the "Fortified Village" starting condition
@@ -120,3 +120,5 @@ return {
       place_building_in_region(plr, "empire_stonemasons_house", sf:region(11))
    end
 }
+pop_textdomain()
+return r

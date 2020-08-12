@@ -22,7 +22,7 @@
 #include <memory>
 
 #include <SDL_timer.h>
-#include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -41,6 +41,7 @@
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/maphollowregion.h"
+#include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry.h"
@@ -184,9 +185,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      workareas_cache_(nullptr),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
-     display_flags_(dfDebug | kSoldierLevels),
+     display_flags_(dfDebug | dfShowSoldierLevels | dfShowBuildings),
 #else
-     display_flags_(kSoldierLevels),
+     display_flags_(dfShowSoldierLevels | dfShowBuildings),
 #endif
      lastframe_(SDL_GetTicks()),
      frametime_(0),
@@ -213,8 +214,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		for (;;) {  // The other buildhelp overlays.
 			++buildhelp_overlay;
 			++filename;
-			if (buildhelp_overlay == buildhelp_overlays_end)
+			if (buildhelp_overlay == buildhelp_overlays_end) {
 				break;
+			}
 			buildhelp_overlay->pic = g_gr->images().get(*filename);
 			buildhelp_overlay->hotspot =
 			   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
@@ -233,25 +235,17 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>(
 	   [this](const NoteSound& note) { play_sound_effect(note); });
-	shipnotes_subscriber_ =
-	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
-		   if (note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
-		       note.ship->get_ship_state() ==
-		          Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
-		   }
-	   });
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
 		   switch (note.action) {
 		   case Widelands::NoteBuilding::Action::kFinishWarp: {
-			   if (upcast(Widelands::Building const, building,
-			              egbase().objects().get_object(note.serial))) {
+			   if (upcast(
+			          Widelands::Building const, building, game().objects().get_object(note.serial))) {
 				   const Widelands::Coords coords = building->get_position();
 				   // Check whether the window is wanted
 				   if (wanted_building_windows_.count(coords.hash()) == 1) {
 					   const WantedBuildingWindow& wanted_building_window =
-					      *wanted_building_windows_.at(coords.hash()).get();
+					      *wanted_building_windows_.at(coords.hash());
 					   UI::UniqueWindow* building_window =
 					      show_building_window(coords, true, wanted_building_window.show_workarea);
 					   building_window->set_pos(wanted_building_window.window_position);
@@ -422,11 +416,17 @@ void InteractiveBase::set_sel_picture(const Image* image) {
 }
 
 InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
+	const auto display_flags = get_display_flags();
 	InfoToDraw info_to_draw = InfoToDraw::kNone;
+
+	if (display_flags & InteractiveBase::dfShowBuildings) {
+		info_to_draw = info_to_draw | InfoToDraw::kShowBuildings;
+	}
+
 	if (!show) {
 		return info_to_draw;
 	}
-	auto display_flags = get_display_flags();
+
 	if (display_flags & InteractiveBase::dfShowCensus) {
 		info_to_draw = info_to_draw | InfoToDraw::kCensus;
 	}
@@ -436,6 +436,7 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 	if (display_flags & InteractiveBase::dfShowSoldierLevels) {
 		info_to_draw = info_to_draw | InfoToDraw::kSoldierLevels;
 	}
+
 	return info_to_draw;
 }
 
@@ -477,15 +478,6 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 		}
 	}
 	return button;
-}
-
-bool InteractiveBase::has_expedition_port_space(const Widelands::Coords& coords) const {
-	for (const auto& pair : expedition_port_spaces_) {
-		if (pair.second == coords) {
-			return true;
-		}
-	}
-	return false;
 }
 
 std::map<Widelands::Coords, std::vector<uint8_t>>
@@ -726,25 +718,33 @@ void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
 }
 
 // static
-void InteractiveBase::draw_immovable_for_formerly_visible_field(
-   const FieldsToDraw::Field& field,
-   const Widelands::Player::Field& player_field,
-   const float scale,
-   RenderTarget* dst) {
+void InteractiveBase::draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
+                                               const InfoToDraw info_to_draw,
+                                               const Widelands::Player::Field& player_field,
+                                               const float scale,
+                                               RenderTarget* dst) {
 	if (player_field.map_object_descr == nullptr) {
 		return;
 	}
 
 	if (player_field.constructionsite.becomes) {
 		assert(field.owner != nullptr);
-		player_field.constructionsite.draw(
-		   field.rendertarget_pixel, field.fcoords, scale, field.owner->get_playercolor(), dst);
+		player_field.constructionsite.draw(field.rendertarget_pixel, field.fcoords, scale,
+		                                   (info_to_draw & InfoToDraw::kShowBuildings),
+		                                   field.owner->get_playercolor(), dst);
 
 	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
-		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-		                    building->get_unoccupied_animation(), 0, &field.owner->get_playercolor());
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+			                    building->get_unoccupied_animation(), 0,
+			                    &field.owner->get_playercolor());
+		} else {
+			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+			                    building->get_unoccupied_animation(), 0, nullptr,
+			                    Widelands::kBuildingSilhouetteOpacity);
+		}
 	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
 		assert(field.owner != nullptr);
 		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
@@ -763,16 +763,6 @@ Called once per frame by the UI code
 */
 void InteractiveBase::think() {
 	egbase().think();  // Call game logic here. The game advances.
-
-	// Cleanup found port spaces if the ship sailed on or was destroyed
-	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
-		if (!egbase().objects().object_still_available(it->first) ||
-		    it->first->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			expedition_port_spaces_.erase(it);
-			// If another port space also needs removing, we'll take care of it in the next frame
-			return;
-		}
-	}
 
 	UI::Panel::think();
 }
@@ -862,19 +852,21 @@ void InteractiveBase::blit_overlay(RenderTarget* dst,
                                    const Vector2i& position,
                                    const Image* image,
                                    const Vector2i& hotspot,
-                                   float scale) {
+                                   float scale,
+                                   float opacity) {
 	const Recti pixel_perfect_rect =
 	   Recti(position - hotspot * scale, image->width() * scale, image->height() * scale);
 	dst->blitrect_scale(pixel_perfect_rect.cast<float>(), image,
-	                    Recti(0, 0, image->width(), image->height()), 1.f, BlendMode::UseAlpha);
+	                    Recti(0, 0, image->width(), image->height()), opacity, BlendMode::UseAlpha);
 }
 
 void InteractiveBase::blit_field_overlay(RenderTarget* dst,
                                          const FieldsToDraw::Field& field,
                                          const Image* image,
                                          const Vector2i& hotspot,
-                                         float scale) {
-	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale);
+                                         float scale,
+                                         float opacity) {
+	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale, opacity);
 }
 
 void InteractiveBase::draw_bridges(RenderTarget* dst,
@@ -966,8 +958,9 @@ bool InteractiveBase::get_display_flag(uint32_t const flag) {
 void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
 	display_flags_ &= ~flag;
 
-	if (on)
+	if (on) {
 		display_flags_ |= flag;
+	}
 }
 
 /*
@@ -1037,8 +1030,9 @@ void InteractiveBase::abort_build_road() {
 		hide_workarea(road_building_mode_->path.get_start(), true);
 	}
 #ifndef NDEBUG
-	else
+	else {
 		assert(!road_building_mode_->work_area);
+	}
 #endif
 
 	road_building_remove_overlay();
@@ -1059,8 +1053,9 @@ void InteractiveBase::finish_build_road() {
 		hide_workarea(road_building_mode_->path.get_start(), true);
 	}
 #ifndef NDEBUG
-	else
+	else {
 		assert(!road_building_mode_->work_area);
+	}
 #endif
 
 	road_building_remove_overlay();
@@ -1509,7 +1504,7 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
 		return;
 	}
 
-	uint32_t serial = atoi(args[1].c_str());
+	uint32_t serial = boost::lexical_cast<uint32_t>(args[1]);
 	MapObject* obj = egbase().objects().get_object(serial);
 
 	if (!obj) {

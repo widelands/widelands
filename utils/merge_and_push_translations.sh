@@ -50,8 +50,10 @@ echo "Working tree is clean, continuing"
 # Print all commands.
 set -x
 
-# Force-pull translations from Transifex
-tx pull -fa
+# Pull translations from Transifex
+tx pull -a
+# We might need to force-pull translations during a release
+# tx pull -fa
 
 # Update authors file
 utils/update_authors.py
@@ -75,7 +77,7 @@ else
 fi
 
 # Update catalogs
-# Deactivated for string freeze utils/buildcat.py
+utils/buildcat.py
 
 # Update statistics
 utils/update_translation_stats.py
@@ -108,4 +110,4 @@ git commit -m "Fetched translations and updated catalogs."
 git push https://github.com/widelands/widelands.git master
 
 # Push catalogs to Transifex
-# Deactivated for string freeze tx push -s
+tx push -s

@@ -46,22 +46,13 @@ tribes:new_productionsite_type {
       frisians_woodcutter = 1
    },
 
-   outputs = {
-      "log"
-   },
-
-   indicate_workarea_overlaps = {
-      frisians_foresters_house = true,
-      frisians_woodcutters_house = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
          descname = _"felling trees",
          actions = {
             "callworker=harvest",
-            "sleep=20000"
+            "sleep=duration:20s"
          }
       },
    },

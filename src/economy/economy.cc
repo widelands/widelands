@@ -334,9 +334,16 @@ void Economy::reset_all_pathfinding_cycles() {
  *
  * This is called from Cmd_ResetTargetQuantity and Cmd_SetTargetQuantity
  */
-void Economy::set_target_quantity(DescriptionIndex const ware_or_worker_type,
+void Economy::set_target_quantity(WareWorker economy_type,
+                                  DescriptionIndex const ware_or_worker_type,
                                   Quantity const permanent,
                                   Time const mod_time) {
+	assert(economy_type == type_);
+	// Skip in release builds to get the most reasonable game state
+	if (economy_type != type_) {
+		log("WARNING: Economy type mismatch in set_target_quantity, skipping\n");
+		return;
+	}
 #ifndef NDEBUG
 	if (type_ == wwWARE) {
 		assert(owner().egbase().tribes().ware_exists(ware_or_worker_type));
@@ -484,7 +491,7 @@ Worker& Economy::soldier_prototype(const WorkerDescr* d) {
 			throw wexception("soldier_prototype_ not initialized and no SoldierDescr provided");
 		}
 		assert(d->type() == MapObjectType::SOLDIER);
-		soldier_prototype_.reset(&static_cast<Worker&>(d->create_object()));
+		soldier_prototype_.reset(&dynamic_cast<Worker&>(d->create_object()));
 		assert(soldier_prototype_->descr().type() == MapObjectType::SOLDIER);
 	}
 	return *soldier_prototype_;

@@ -56,7 +56,7 @@ public:
 			throw GameDataError(
 			   "already loaded (%s)", to_string(existing->second->descr().type()).c_str());
 		}
-		objects_.insert(std::pair<Serial, MapObject*>(n, &object));
+		objects_.insert(std::make_pair(n, &object));
 		loaded_objects_[&object] = false;
 		return object;
 	}
@@ -83,9 +83,6 @@ public:
 	void schedule_act(Bob&);
 
 	void load_finish_game(Game& g);
-
-	// TODO(Nordfriese): This is one exceedingly ugly hack for savegame compatibiliy.
-	Serial get_economy_savegame_compatibility(Serial ware_economy) const;
 
 private:
 	using ReverseMapObjectMap = std::map<Serial, MapObject*>;

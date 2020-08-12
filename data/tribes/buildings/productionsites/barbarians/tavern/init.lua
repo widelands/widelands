@@ -51,9 +51,6 @@ tribes:new_productionsite_type {
       { name = "meat", amount = 4 },
       { name = "barbarians_bread", amount = 4 }
    },
-   outputs = {
-      "ration"
-   },
 
    programs = {
       work = {
@@ -64,8 +61,8 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ration",
             "consume=barbarians_bread,fish,meat",
             "playsound=sound/barbarians/taverns/tavern 100",
-            "animate=working 23000",
-            "sleep=10000",
+            "animate=working duration:23s",
+            "sleep=duration:10s",
             "produce=ration"
          },
       },

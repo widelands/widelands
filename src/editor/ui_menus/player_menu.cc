@@ -214,6 +214,10 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 }
 
 void EditorPlayerMenu::layout() {
+	if (is_minimal()) {
+		return;
+	}
+	EditorToolOptionsMenu::layout();
 	assert(!rows_.empty());
 	const Widelands::PlayerNumber nr_players = eia().egbase().map().get_nrplayers();
 	box_.set_size(310, no_of_players_.get_h() + kMargin +

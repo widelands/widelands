@@ -9,8 +9,8 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/none.png",
    attributes = { "resi" },
    programs = {
-      program = {
-         "animate=idle 600000",
+      main = {
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -35,8 +35,8 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/water.png",
    attributes = { "resi" },
    programs = {
-      program = {
-         "animate=idle 600000",
+      main = {
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -61,8 +61,8 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/coal_few.png",
    attributes = { "resi" },
    programs = {
-      program = {
-         "animate=idle 600000",
+      main = {
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -87,8 +87,8 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/gold_few.png",
    attributes = { "resi" },
    programs = {
-      program = {
-         "animate=idle 600000",
+      main = {
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -113,8 +113,8 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/iron_few.png",
    attributes = { "resi" },
    programs = {
-      program = {
-         "animate=idle 600000",
+      main = {
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -139,8 +139,8 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/stone_few.png",
    attributes = { "resi" },
    programs = {
-      program = {
-         "animate=idle 600000",
+      main = {
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -165,8 +165,8 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/coal_much.png",
    attributes = { "resi" },
    programs = {
-      program = {
-         "animate=idle 600000",
+      main = {
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -191,8 +191,8 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/gold_much.png",
    attributes = { "resi" },
    programs = {
-      program = {
-         "animate=idle 600000",
+      main = {
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -217,8 +217,8 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/iron_much.png",
    attributes = { "resi" },
    programs = {
-      program = {
-         "animate=idle 600000",
+      main = {
+         "animate=idle duration:10m",
          "remove="
       }
    },
@@ -243,8 +243,8 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/stone_much.png",
    attributes = { "resi" },
    programs = {
-      program = {
-         "animate=idle 600000",
+      main = {
+         "animate=idle duration:10m",
          "remove="
       }
    },

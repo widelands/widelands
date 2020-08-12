@@ -10,8 +10,8 @@ tribes:new_immovable_type {
    size = "medium",
    attributes = { "field", "seed_grapes" },
    programs = {
-      program = {
-         "animate=idle 22000",
+      main = {
+         "animate=idle duration:22s",
          "transform=grapevine_small",
       }
    },

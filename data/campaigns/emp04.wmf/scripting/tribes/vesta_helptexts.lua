@@ -12,8 +12,11 @@ function building_helptext_lore_author()
 end
 
 function building_helptext_purpose()
+   push_textdomain("scenario_emp04.wmf")
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "In the temple of Vesta, the wares to worship are stored. It is the home of the priestesses and the guards of the goddess.")
+   local r = pgettext("building", "In the temple of Vesta, the wares to worship are stored. It is the home of the priestesses and the guards of the goddess.")
+   pop_textdomain()
+   return r
 end
 
 function building_helptext_note()

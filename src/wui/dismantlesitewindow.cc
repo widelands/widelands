@@ -59,6 +59,7 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 
 	subbox.set_max_size(500, 400);
 	subbox.set_scrolling(true);
+	subbox.set_scrollbar_style(UI::PanelStyle::kWui);
 	box.add(&subbox, UI::Box::Resizing::kFullSize);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));

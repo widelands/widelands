@@ -43,9 +43,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "wheat", amount = 6 }
    },
-   outputs = {
-      "flour"
-   },
 
    programs = {
       work = {
@@ -54,9 +51,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs flour",
             "consume=wheat",
-            "sleep=5000",
+            "sleep=duration:5s",
             "playsound=sound/mill/mill_turning 240",
-            "animate=working 10000",
+            "animate=working duration:10s",
             "produce=flour"
          }
       },

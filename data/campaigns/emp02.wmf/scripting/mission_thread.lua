@@ -102,10 +102,10 @@ function food_thread()
    set_objective_done(o)
 end
 
+local build_marble_mine_done = false
 function mining_infrastructure()
-   -- Wait till we see the mountains
-   local mountains = wl.Game().map:get_field(38,33)
-   while not p1:seen_field(mountains) do sleep(3458) end
+   -- Wait for marble mine
+   while not (build_marble_mine_done) do sleep(3459) end
 
    -- Reveal the other mountains
    local coal_mountain = wl.Game().map:get_field(49,22)
@@ -191,7 +191,7 @@ function expand_and_build_marblemine()
    p1:allow_buildings{"empire_marblemine", "empire_marblemine_deep"}
    o = add_campaign_objective(obj_build_marblemine)
    run(function() while not check_for_buildings(p1, {empire_marblemine = 1})
-      do sleep(2133) end set_objective_done(o, 0) end)
+      do sleep(2133) end set_objective_done(o, 0); build_marble_mine_done = true end)
 
    -- Go back to where we were
    scroll_to_map_pixel(prior_center)

@@ -462,7 +462,7 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
                                     const std::string& name,
                                     const std::string& title,
                                     const std::string& picname,
-                                    std::function<void()> callback) {
+                                    const std::function<void()>& callback) {
 	UI::Button* btn = new UI::Button(
 	   parent, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, g_gr->images().get(picname), title);
 	btn->sigclicked.connect(callback);
@@ -570,7 +570,8 @@ void ShipWindow::act_explore_island(IslandExploreDirection direction) {
 			moveable = true;
 		}
 	}
-	if (!coast_nearby || !moveable)
+	if (!coast_nearby || !moveable) {
 		return;
 	ibase_.game().send_player_ship_explore_island(*ship, direction);
+>>>>>>> 6b58ed3849c7b5d159bbae73bcb83c057f6b6c68
 }

@@ -59,11 +59,6 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      frisians_goldmine = false,
-      frisians_goldmine_deep = false,
-   },
-
    aihints = {
       mines = "gold",
       mines_percent = 50,
@@ -77,9 +72,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "ration", amount = 8 }
    },
-   outputs = {
-      "gold_ore"
-   },
 
    programs = {
       work = {
@@ -88,8 +80,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs gold_ore",
             "consume=ration",
-            "sleep=45000",
-            "animate=working 20000",
+            "sleep=duration:45s",
+            "animate=working duration:20s",
             "mine=gold 3 50 5 20", --name radius % chance_empty gain_exp_on_empty
             "produce=gold_ore"
          }

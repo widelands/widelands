@@ -192,8 +192,9 @@ void InputQueueDisplay::max_size_changed() {
  * Compare the current InputQueue state with the cached state; update if necessary.
  */
 void InputQueueDisplay::think() {
-	if (static_cast<uint32_t>(check_max_size()) != cache_size_)
+	if (static_cast<uint32_t>(check_max_size()) != cache_size_) {
 		max_size_changed();
+	}
 
 	// TODO(sirver): It seems cache_max_fill_ is not really useful for anything.
 	if (static_cast<uint32_t>(check_max_fill()) != cache_max_fill_) {
@@ -206,8 +207,9 @@ void InputQueueDisplay::think() {
  * Render the current InputQueue state.
  */
 void InputQueueDisplay::draw(RenderTarget& dst) {
-	if (!cache_size_)
+	if (!cache_size_) {
 		return;
+	}
 
 	cache_max_fill_ = check_max_fill();
 
@@ -259,8 +261,9 @@ inline bool InputQueueDisplay::check_can_act() const {
  */
 void InputQueueDisplay::update_priority_buttons() {
 
-	if (type_ != Widelands::wwWARE)
+	if (type_ != Widelands::wwWARE) {
 		return;
+	}
 
 	if (cache_size_ <= 0 || no_priority_buttons_) {
 		delete priority_radiogroup_;
@@ -320,8 +323,9 @@ void InputQueueDisplay::update_priority_buttons() {
 	priority_radiogroup_->clicked.connect([this]() { radiogroup_clicked(); });
 
 	bool const can_act = check_can_act();
-	if (!can_act)
+	if (!can_act) {
 		priority_radiogroup_->set_enabled(false);
+	}
 }
 
 /**
@@ -339,10 +343,11 @@ void InputQueueDisplay::update_max_fill_buttons() {
 		decrease_real_fill_ = nullptr;
 	}
 
-	if (cache_size_ <= 0 || no_capacity_buttons_)
+	if (cache_size_ <= 0 || no_capacity_buttons_) {
 		return;
-	boost::format tooltip_format("<p>%s%s%s</p>");
+	}
 
+	boost::format tooltip_format("<p>%s%s%s</p>");
 	const uint32_t y = Border + (total_height_ - 2 * Border - kWareMenuPicWidth) / 2;
 	if (cache_size_ > 0 && !no_capacity_buttons_) {
 		uint32_t x = Border;

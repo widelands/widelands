@@ -1,4 +1,4 @@
-set_textdomain("tribes_encyclopedia")
+push_textdomain("tribes_encyclopedia")
 
 include "scripting/richtext.lua"
 include "txts/help/common_helptexts.lua"
@@ -7,9 +7,7 @@ local toggle_minimap_hotkey = help_toggle_minimap_hotkey()
 local toggle_building_spaces_hotkey = help_toggle_building_spaces_hotkey()
 local toggle_fullscreen_hotkey = help_toggle_fullscreen_hotkey()
 
-set_textdomain("tribes_encyclopedia")
-
-return {
+local r = {
    title = _"Controls",
    text =
          h2(_"Window Control") ..
@@ -60,6 +58,10 @@ return {
                dl(help_format_hotkey("S"), _"Toggle statistics") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'l'
                dl(help_format_hotkey("L"), _"Toggle soldier health bars and level icons") ..
+               -- TRANSLATORS: This is an access key combination. The hotkey is 'u'
+               dl(help_format_hotkey("U"), _"Toggle building visibility") ..
+               -- TRANSLATORS: This is an access key combination. The hotkey is 'w'
+               dl(help_format_hotkey("W"), _"Toggle workarea overlap indicators") ..
                toggle_minimap_hotkey ..
                toggle_building_spaces_hotkey ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'o'
@@ -72,6 +74,8 @@ return {
                dl(help_format_hotkey("I"), _"Toggle stock inventory") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'b'
                dl(help_format_hotkey("B"), _"Toggle building statistics") ..
+               -- TRANSLATORS: This is an access key combination. The hotkey is 'x'
+               dl(help_format_hotkey("X"), _"Toggle soldier statistics") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'e'
                dl(help_format_hotkey("E"), _"Toggle seafaring statistics") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
@@ -148,3 +152,5 @@ return {
                dl(help_format_hotkey("W"), _"Watch the selected ship")
          )
 }
+pop_textdomain()
+return r

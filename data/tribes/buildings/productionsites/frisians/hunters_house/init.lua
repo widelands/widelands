@@ -43,17 +43,8 @@ tribes:new_productionsite_type {
       prohibited_till = 480
    },
 
-   indicate_workarea_overlaps = {
-      frisians_hunters_house = false,
-   },
-
    working_positions = {
       frisians_hunter = 1
-   },
-
-   outputs = {
-      "meat",
-      "fur"
    },
 
    programs = {
@@ -62,15 +53,15 @@ tribes:new_productionsite_type {
          descname = _"hunting",
          actions = {
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "produce=fur"
          }
       },

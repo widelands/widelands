@@ -213,8 +213,7 @@ void FullscreenMenuInternetLobby::clicked_ok() {
 
 /// connects Widelands with the metaserver
 void FullscreenMenuInternetLobby::connect_to_metaserver() {
-	const std::string& metaserver =
-	   get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	const std::string& metaserver = get_config_string("metaserver", INTERNET_GAMING_METASERVER);
 	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
 	std::string auth = is_registered_ ? password_ : get_config_string("uuid", "");
 	assert(!auth.empty());
@@ -227,8 +226,7 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 	opengames_list_.clear();
 	hostgame_.set_enabled(true);
 	joingame_.set_enabled(false);
-	std::string localservername = edit_servername_.text();
-	std::string localbuildid = build_id();
+	const std::string& localbuildid = build_id();
 
 	if (games != nullptr) {  // If no communication error occurred, fill the list.
 		for (const InternetGame& game : *games) {

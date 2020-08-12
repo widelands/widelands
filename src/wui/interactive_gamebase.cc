@@ -32,6 +32,7 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "network/gamehost.h"
+#include "wlapplication_options.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
 #include "wui/game_chat_menu.h"
@@ -58,13 +59,11 @@ constexpr uint16_t kSpeedFast = 10000;
 
 InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                                          Section& global_s,
-                                         PlayerType pt,
                                          bool const multiplayer,
                                          ChatProvider* chat_provider)
    : InteractiveBase(g, global_s),
      chat_provider_(chat_provider),
      multiplayer_(multiplayer),
-     playertype_(pt),
      showhidemenu_(toolbar(),
                    "dropdown_menu_showhide",
                    0,
@@ -206,6 +205,15 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                  ShowHideEntry::kSoldierLevels,
 	                  g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
 	                  "L");
+
+	showhidemenu_.add(get_display_flag(dfShowBuildings) ?
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * buildings are greyed out */
+	                     _("Hide Buildings") :
+	                     _("Show Buildings"),
+	                  ShowHideEntry::kBuildings,
+	                  g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"), false, "",
+	                  "U");
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
@@ -221,6 +229,9 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 	} break;
 	case ShowHideEntry::kSoldierLevels: {
 		set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
+	} break;
+	case ShowHideEntry::kBuildings: {
+		set_display_flag(dfShowBuildings, !get_display_flag(dfShowBuildings));
 	} break;
 	case ShowHideEntry::kWorkareaOverlap: {
 		set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
@@ -330,10 +341,15 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	if (InteractiveBase::handle_key(down, code)) {
 		return true;
 	}
+	const bool numpad_diagonalscrolling = get_config_bool("numpad_diagonalscrolling", false);
 
 	if (down) {
 		switch (code.sym) {
+		case SDLK_KP_9:
 		case SDLK_PAGEUP:
+			if (code.sym == SDLK_KP_9 && ((code.mod & KMOD_NUM) || numpad_diagonalscrolling)) {
+				break;
+			}
 			increase_gamespeed(
 			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 			return true;
@@ -344,7 +360,11 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 				toggle_game_paused();
 			}
 			return true;
+		case SDLK_KP_3:
 		case SDLK_PAGEDOWN:
+			if (code.sym == SDLK_KP_3 && ((code.mod & KMOD_NUM) || numpad_diagonalscrolling)) {
+				break;
+			}
 			decrease_gamespeed(
 			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 			return true;
@@ -360,6 +380,10 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 
 		case SDLK_l:
 			set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
+			return true;
+
+		case SDLK_u:
+			set_display_flag(dfShowBuildings, !get_display_flag(dfShowBuildings));
 			return true;
 
 		case SDLK_s:
@@ -445,7 +469,7 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 	if (upcast(InteractivePlayer, iplayer, this)) {
 		player = iplayer->get_player();
 		if (player != nullptr && !player->see_all() &&
-		    (1 >= player->vision(Widelands::Map::get_index(center.node, map.get_width())))) {
+		    (!player->is_seeing(Widelands::Map::get_index(center.node, map.get_width())))) {
 			return set_tooltip("");
 		}
 	}

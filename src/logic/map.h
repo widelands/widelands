@@ -106,6 +106,11 @@ struct FindBobByName : public FindBob {
 private:
 	std::string name_;
 };
+struct FindCritter : public FindBob {
+	bool accept(Bob* b) const override;
+	~FindCritter() override {
+	}
+};
 struct FindCarnivores : public FindBob {
 	bool accept(Bob* b) const override;
 	explicit FindCarnivores() {
@@ -302,6 +307,9 @@ public:
 	}
 
 	const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {
+		return suggested_teams_;
+	}
+	std::vector<SuggestedTeamLineup>& get_suggested_teams() {
 		return suggested_teams_;
 	}
 
@@ -542,7 +550,7 @@ public:
 	const PortSpacesSet& get_port_spaces() const {
 		return port_spaces_;
 	}
-	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
+	std::vector<Coords> find_portdock(const Widelands::Coords& c, bool force) const;
 
 	/// Return true if there are at least 2 port spaces that can be reached from each other by water
 	bool allows_seafaring() const;

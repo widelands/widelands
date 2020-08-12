@@ -42,16 +42,6 @@ tribes:new_productionsite_type {
       atlanteans_farmer = 1
    },
 
-   outputs = {
-      "corn"
-   },
-
-   indicate_workarea_overlaps = {
-      atlanteans_blackroot_farm = false,
-      atlanteans_farm = false,
-      atlanteans_foresters_house = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -66,7 +56,7 @@ tribes:new_productionsite_type {
          descname = _"planting corn",
          actions = {
             "callworker=plant",
-            "sleep=10000"
+            "sleep=duration:10s"
          }
       },
       harvest = {
@@ -74,7 +64,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting corn",
          actions = {
             "callworker=harvest",
-            "sleep=4000"
+            "sleep=duration:4s"
          }
       },
    },

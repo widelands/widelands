@@ -1,5 +1,7 @@
 dirname = "tribes/buildings/trainingsites/empire/trainingcamp/"
 
+push_textdomain("scenario_emp04.wmf")
+
 tribes:new_trainingsite_type {
    msgctxt = "empire_building",
    name = "empire_trainingcamp1",
@@ -52,9 +54,6 @@ tribes:new_trainingsite_type {
       { name = "armor", amount = 1 },
       { name = "armor_chain", amount = 1 },
       { name = "armor_gilded", amount = 1 },
-   },
-   outputs = {
-      "empire_soldier",
    },
 
    ["soldier attack"] = {
@@ -179,3 +178,4 @@ tribes:new_trainingsite_type {
    soldier_capacity = 2,
    trainer_patience = 12
 }
+pop_textdomain()

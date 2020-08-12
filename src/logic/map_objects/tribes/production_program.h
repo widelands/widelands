@@ -99,7 +99,6 @@ struct ProductionProgram : public MapObjectProgram {
 	/// match. Example: "fish:2".
 	static BillOfMaterials parse_bill_of_materials(const std::vector<std::string>& arguments,
 	                                               WareWorker ww,
-	                                               const ProductionSiteDescr& descr,
 	                                               const Tribes& tribes);
 
 	/// Returns from the program.
@@ -315,7 +314,8 @@ struct ProductionProgram : public MapObjectProgram {
 	///
 	/// Blocks the execution of the program for the specified duration.
 	struct ActSleep : public Action {
-		explicit ActSleep(const std::vector<std::string>& arguments);
+		explicit ActSleep(const std::vector<std::string>& arguments,
+		                  const ProductionSiteDescr& psite);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -413,7 +413,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// wares are handled is defined by the productionsite.
 	struct ActProduce : public Action {
 		ActProduce(const std::vector<std::string>& arguments,
-		           const ProductionSiteDescr&,
+		           ProductionSiteDescr&,
 		           const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
@@ -436,7 +436,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// recruited workers are handled is defined by the productionsite.
 	struct ActRecruit : public Action {
 		ActRecruit(const std::vector<std::string>& arguments,
-		           const ProductionSiteDescr&,
+		           ProductionSiteDescr&,
 		           const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
@@ -513,7 +513,8 @@ struct ProductionProgram : public MapObjectProgram {
 	struct ActConstruct : public Action {
 		ActConstruct(const std::vector<std::string>& arguments,
 		             const std::string& production_program_name,
-		             ProductionSiteDescr*);
+		             ProductionSiteDescr*,
+		             const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;

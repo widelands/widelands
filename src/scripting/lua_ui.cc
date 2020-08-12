@@ -431,11 +431,15 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	SDL_Keysym code;
 	// Ensure that we're at the top
 	code.sym = SDLK_UP;
+	code.scancode = SDL_SCANCODE_UP;
+	code.mod = KMOD_NONE;
+	code.unused = 0;
 	for (size_t i = 1; i < get()->size(); ++i) {
 		get()->handle_key(true, code);
 	}
 	// Press arrow down until the desired item is highlighted
 	code.sym = SDLK_DOWN;
+	code.scancode = SDL_SCANCODE_DOWN;
 	for (size_t i = 1; i < desired_item; ++i) {
 		get()->handle_key(true, code);
 	}
@@ -451,6 +455,9 @@ int LuaDropdown::select(lua_State* /* L */) {
 	log("Selecting current item in dropdown '%s'\n", get()->get_name().c_str());
 	SDL_Keysym code;
 	code.sym = SDLK_RETURN;
+	code.scancode = SDL_SCANCODE_RETURN;
+	code.mod = KMOD_NONE;
+	code.unused = 0;
 	get()->handle_key(true, code);
 	return 0;
 }

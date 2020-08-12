@@ -34,7 +34,7 @@
 #include "graphic/styles/ware_info_style.h"
 #include "scripting/lua_table.h"
 
-static const std::string kTemplateDir = "templates/default/";
+constexpr const char* const kTemplateDir = "templates/default/";
 
 class StyleManager {
 public:
@@ -60,6 +60,12 @@ public:
 	// Special elements
 	int minimum_font_size() const;
 	const RGBColor& minimap_icon_frame() const;
+	const RGBAColor& window_border_focused() const {
+		return window_border_focused_;
+	}
+	const RGBAColor& window_border_unfocused() const {
+		return window_border_unfocused_;
+	}
 	static std::string color_tag(const std::string& text, const RGBColor& color);
 
 private:
@@ -85,6 +91,8 @@ private:
 
 	int minimum_font_size_;
 	RGBColor minimap_icon_frame_;
+	RGBAColor window_border_focused_;
+	RGBAColor window_border_unfocused_;
 	std::map<UI::FontStyle, std::unique_ptr<const UI::FontStyleInfo>> fontstyles_;
 	std::unique_ptr<const UI::BuildingStatisticsStyleInfo> building_statistics_style_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::ProgressbarStyleInfo>> progressbar_styles_;

@@ -14,6 +14,7 @@ tribes:new_ship_type {
    name = "barbarians_ship",
    -- TRANSLATORS: This is the ship's name used in lists of units
    descname = _"Ship",
+   icon = dirname .. "menu.png",
    capacity = 30,
    vision_range = 4,
    icon = dirname .. "menu.png",

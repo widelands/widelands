@@ -10,9 +10,9 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "shipconstruction" },
    programs = {
-      program = {
+      main = {
          "construct=idle 5000 210000",
-         "transform=bob empire_ship",
+         "transform=bob:empire_ship",
       }
    },
    buildcost = {

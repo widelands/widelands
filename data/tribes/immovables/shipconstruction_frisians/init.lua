@@ -10,9 +10,9 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "shipconstruction" },
    programs = {
-      program = {
+      main = {
          "construct=idle 5000 210000",
-         "transform=bob frisians_ship",
+         "transform=bob:frisians_ship",
       }
    },
    buildcost = {

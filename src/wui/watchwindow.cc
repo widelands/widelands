@@ -103,8 +103,9 @@ void WatchWindow::draw(RenderTarget& dst) {
  * This also resets the view cycling timer.
  */
 void WatchWindow::add_view(Widelands::Coords const coords) {
-	if (views_.size() >= kViews)
+	if (views_.size() >= kViews) {
 		return;
+	}
 	WatchWindow::View view;
 
 	map_view_.scroll_to_field(coords, MapView::Transition::Jump);
@@ -115,8 +116,9 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 
 	views_.push_back(view);
 	set_current_view(views_.size() - 1, views_.size() > 1);
-	if (single_window_)
+	if (single_window_) {
 		toggle_buttons();
+	}
 }
 
 // Switch to next view
@@ -146,8 +148,9 @@ void WatchWindow::toggle_buttons() {
 void WatchWindow::set_current_view(uint8_t idx, bool save_previous) {
 	assert(idx < views_.size());
 
-	if (save_previous)
+	if (save_previous) {
 		save_coords();
+	}
 
 	if (single_window_) {
 		view_btns_[cur_index_]->set_perm_pressed(false);
@@ -182,7 +185,8 @@ void WatchWindow::think() {
 
 		// Drop the tracking if it leaves our vision range
 		InteractivePlayer* ipl = game().get_ipl();
-		if (ipl && 1 >= ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
+		if (ipl && Widelands::SeeUnseeNode::kUnexplored ==
+		              ipl->player().get_vision(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
 			views_[cur_index_].tracking = nullptr;
 		} else {
@@ -235,9 +239,11 @@ void WatchWindow::do_follow() {
 		                           map, center_map_pixel.x, center_map_pixel.y)
 		                           .node),
 		        2);
-		     area.radius <= 32; area.radius *= 2)
-			if (map.find_bobs(g, area, &bobs))
+		     area.radius <= 32; area.radius *= 2) {
+			if (map.find_bobs(g, area, &bobs)) {
 				break;
+			}
+		}
 		//  Find the bob closest to us
 		float closest_dist = 0;
 		Widelands::Bob* closest = nullptr;
@@ -250,7 +256,7 @@ void WatchWindow::do_follow() {
 			InteractivePlayer* ipl = game().get_ipl();
 			if ((!closest || closest_dist > dist) &&
 			    (!ipl ||
-			     1 < ipl->player().vision(map.get_index(bob->get_position(), map.get_width())))) {
+			     ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width())))) {
 				closest = bob;
 				closest_dist = dist;
 			}

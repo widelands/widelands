@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,11 +17,13 @@
  *
  */
 
-#ifndef WL_MAP_IO_MAP_EXPLORATION_PACKET_H
-#define WL_MAP_IO_MAP_EXPLORATION_PACKET_H
+#ifndef WL_MAP_IO_MAP_PACKET_VERSIONS_H
+#define WL_MAP_IO_MAP_PACKET_VERSIONS_H
 
-#include "map_io/map_data_packet.h"
+namespace Widelands {
+constexpr uint8_t kCurrentPacketVersionMapObject = 2;
+// Responsible for warehouses and expedition bootstraps
+constexpr uint16_t kCurrentPacketVersionWarehouseAndExpedition = 8;
+}  // namespace Widelands
 
-MAP_DATA_PACKET(MapExplorationPacket)
-
-#endif  // end of include guard: WL_MAP_IO_MAP_EXPLORATION_PACKET_H
+#endif  // end of include guard: WL_MAP_IO_MAP_PACKET_VERSIONS_H

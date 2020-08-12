@@ -33,6 +33,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/maphollowregion.h"
+#include "logic/mapregion.h"
 #include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -226,10 +227,10 @@ static const char* const pic_tab_buildhouse[] = {"images/wui/fieldaction/menu_ta
                                                  "images/wui/fieldaction/menu_tab_buildmedium.png",
                                                  "images/wui/fieldaction/menu_tab_buildbig.png",
                                                  "images/wui/fieldaction/menu_tab_buildport.png"};
-static const std::string tooltip_tab_build[] = {_("Build small building"),
+static const char* const tooltip_tab_build[] = {_("Build small building"),
                                                 _("Build medium building"), _("Build big building"),
                                                 _("Build port building")};
-static const std::string name_tab_build[] = {"small", "medium", "big", "port"};
+static const char* const name_tab_build[] = {"small", "medium", "big", "port"};
 
 static const char* const pic_tab_buildmine = "images/wui/fieldaction/menu_tab_buildmine.png";
 
@@ -294,7 +295,7 @@ void FieldActionWindow::think() {
 			}
 		}
 	}
-	if (player_ && player_->vision(node_.field - &ibase().egbase().map()[0]) <= 1 &&
+	if (player_ && !player_->is_seeing(node_.field - &ibase().egbase().map()[0]) &&
 	    !player_->see_all()) {
 		die();
 	}
@@ -359,17 +360,19 @@ void FieldActionWindow::add_buttons_auto() {
 
 				Building* const building = flag->get_building();
 
-				if (!building || (building->get_playercaps() & Building::PCap_Bulldoze))
+				if (!building || (building->get_playercaps() & Building::PCap_Bulldoze)) {
 					add_button(buildbox, "rip_flag", pic_ripflag, &FieldActionWindow::act_ripflag,
 					           _("Destroy this flag"));
+				}
 			}
 
 			if (dynamic_cast<Game const*>(&ibase().egbase())) {
 				add_button(buildbox, "configure_economy", "images/wui/stats/genstats_nrwares.png",
 				           &FieldActionWindow::act_configure_economy, _("Configure economy"));
-				if (can_act)
+				if (can_act) {
 					add_button(buildbox, "geologist", pic_geologist, &FieldActionWindow::act_geologist,
 					           _("Send geologist to explore site"));
+				}
 			}
 		} else {
 			const int32_t buildcaps = player_ ? player_->get_buildcaps(node_) : 0;
@@ -382,22 +385,25 @@ void FieldActionWindow::add_buttons_auto() {
 			}
 
 			// Add build actions
-			if (buildcaps & Widelands::BUILDCAPS_FLAG)
+			if (buildcaps & Widelands::BUILDCAPS_FLAG) {
 				add_button(buildbox, "build_flag", pic_buildflag, &FieldActionWindow::act_buildflag,
 				           _("Place a flag"));
+			}
 
-			if (can_act && dynamic_cast<const Widelands::Road*>(imm))
+			if (can_act && dynamic_cast<const Widelands::Road*>(imm)) {
 				add_button(buildbox, "destroy_road", pic_remroad, &FieldActionWindow::act_removeroad,
 				           _("Destroy a road"));
+			}
 
-			if (can_act && dynamic_cast<const Widelands::Waterway*>(imm))
+			if (can_act && dynamic_cast<const Widelands::Waterway*>(imm)) {
 				add_button(buildbox, "destroy_waterway", pic_remwaterway,
 				           &FieldActionWindow::act_removewaterway, _("Destroy a waterway"));
+			}
 		}
 	} else if (player_) {
 		if (upcast(Building, building, map_.get_immovable(node_))) {
-			if (1 < player_->vision(Widelands::Map::get_index(
-			           building->get_position(), ibase().egbase().map().get_width()))) {
+			if (player_->is_seeing(Widelands::Map::get_index(
+			       building->get_position(), ibase().egbase().map().get_width()))) {
 				add_buttons_attack();
 			}
 		}
@@ -409,13 +415,15 @@ void FieldActionWindow::add_buttons_auto() {
 		           _("Watch field in a separate window"));
 	}
 
-	if (ibase().get_display_flag(InteractiveBase::dfDebug))
+	if (ibase().get_display_flag(InteractiveBase::dfDebug)) {
 		add_button(
 		   &watchbox, "debug", pic_debug, &FieldActionWindow::act_debug, _("Show Debug Window"));
+	}
 
 	// Add tabs
-	if (buildbox && buildbox->get_nritems())
+	if (buildbox && buildbox->get_nritems()) {
 		add_tab("roads", pic_tab_buildroad, buildbox, _("Build road"));
+	}
 
 	add_tab("watch", pic_tab_watch, &watchbox, _("Watch"));
 }
@@ -544,15 +552,18 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 	}
 
 	// Add all necessary tabs
-	for (int32_t i = 0; i < 4; ++i)
-		if (bbg_house[i])
+	for (int32_t i = 0; i < 4; ++i) {
+		if (bbg_house[i]) {
 			tabpanel_.activate(best_tab_ =
 			                      add_tab(name_tab_build[i], pic_tab_buildhouse[i], bbg_house[i],
 			                              i18n::translate(tooltip_tab_build[i])));
+		}
+	}
 
-	if (bbg_mine)
+	if (bbg_mine) {
 		tabpanel_.activate(best_tab_ =
 		                      add_tab("mines", pic_tab_buildmine, bbg_mine, _("Build mines")));
+	}
 }
 
 /*
@@ -563,9 +574,10 @@ Buttons used during road building: Set flag here and Abort
 void FieldActionWindow::add_buttons_road(bool flag) {
 	UI::Box& buildbox = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
 
-	if (flag)
+	if (flag) {
 		add_button(&buildbox, "build_flag", pic_buildflag, &FieldActionWindow::act_buildflag,
 		           _("Build flag"));
+	}
 
 	add_button(&buildbox, "cancel_road", pic_abort, &FieldActionWindow::act_abort_buildroad,
 	           _("Cancel road"));
@@ -665,10 +677,11 @@ Build a flag at this field
 */
 void FieldActionWindow::act_buildflag() {
 	upcast(Game, game, &ibase().egbase());
-	if (game)
+	if (game) {
 		game->send_player_build_flag(player_->player_number(), node_);
-	else
+	} else {
 		player_->build_flag(node_);
+	}
 
 	if (ibase().in_road_building_mode()) {
 		ibase().finish_build_road();
@@ -881,7 +894,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 		   map, Widelands::Area<Widelands::FCoords>(
 		           node_, workarea_radius + ibase().egbase().tribes().get_largest_workarea()));
 		do {
-			if (player_->vision(map.get_index(mr.location())) > 1) {
+			if (player_->is_seeing(map.get_index(mr.location()))) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {
 					const Widelands::MapObjectType imm_type = imm->descr().type();
 					if (imm_type < Widelands::MapObjectType::BUILDING) {
@@ -979,12 +992,13 @@ void FieldActionWindow::act_geologist() {
 void FieldActionWindow::act_attack() {
 	assert(attack_box_);
 	upcast(Game, game, &ibase().egbase());
-	if (upcast(Building, building, game->map().get_immovable(node_)))
+	if (upcast(Building, building, game->map().get_immovable(node_))) {
 		if (attack_box_->count_soldiers() > 0) {
 			upcast(InteractivePlayer const, iaplayer, &ibase());
 			game->send_player_enemyflagaction(
 			   building->base_flag(), iaplayer->player_number(), attack_box_->soldiers());
 		}
+	}
 	reset_mouse_and_die();
 }
 

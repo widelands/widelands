@@ -61,13 +61,12 @@ void parse_working_positions(const Tribes& tribes,
 			if (!tribes.worker_exists(woi)) {
 				throw wexception("invalid");
 			}
-			working_positions->push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
+			working_positions->push_back(std::make_pair(woi, amount));
 		} catch (const WException& e) {
 			throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 		}
 	}
 }
-
 }  // namespace
 
 /*
@@ -117,29 +116,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("outputs")) {
-		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
-			try {
-				DescriptionIndex idx = tribes.ware_index(output);
-				if (tribes.ware_exists(idx)) {
-					if (output_ware_types_.count(idx)) {
-						throw wexception("this ware type has already been declared as an output");
-					}
-					output_ware_types_.insert(idx);
-				} else {
-					idx = tribes.worker_index(output);
-					if (tribes.worker_exists(idx)) {
-						if (output_worker_types_.count(idx)) {
-							throw wexception("this worker type has already been declared as an output");
-						}
-						output_worker_types_.insert(idx);
-					} else {
-						throw wexception("tribes do not define a ware or worker type with this name");
-					}
-				}
-			} catch (const WException& e) {
-				throw wexception("output \"%s\": %s", output.c_str(), e.what());
-			}
-		}
+		log("WARNING: The \"outputs\" table is no longer needed; you can remove it from %s\n",
+		    name().c_str());
 	}
 
 	if (table.has_key("inputs")) {
@@ -209,25 +187,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("indicate_workarea_overlaps")) {
-		items_table = table.get_table("indicate_workarea_overlaps");
-		for (const std::string& s : items_table->keys<std::string>()) {
-			if (highlight_overlapping_workarea_for_.find(s) !=
-			    highlight_overlapping_workarea_for_.end()) {
-				throw wexception("indicate_workarea_overlaps has duplicate entry");
-			}
-			highlight_overlapping_workarea_for_.emplace(s, items_table->get_bool(s));
-		}
-	}
-	if (workarea_info().empty() ^ highlight_overlapping_workarea_for_.empty()) {
-		if (highlight_overlapping_workarea_for_.empty()) {
-			log("WARNING: Productionsite %s has a workarea but does not inform about any conflicting "
-			    "buildings\n",
-			    name().c_str());
-		} else {
-			throw GameDataError(
-			   "Productionsite %s without a workarea must not inform about conflicting buildings",
-			   name().c_str());
-		}
+		log("WARNING: The \"indicate_workarea_overlaps\" table in %s has been deprecated and can be "
+		    "removed.\n",
+		    name().c_str());
 	}
 
 	// Verify that any map resource collected is valid
@@ -255,6 +217,11 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
         init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
 }
 
+void ProductionSiteDescr::clear_attributes() {
+	created_attributes_.clear();
+	collected_attributes_.clear();
+}
+
 /**
  * Get the program of the given name.
  */
@@ -264,6 +231,38 @@ const ProductionProgram* ProductionSiteDescr::get_program(const std::string& pro
 		throw wexception("%s has no program '%s'", name().c_str(), program_name.c_str());
 	}
 	return it->second.get();
+}
+
+bool ProductionSiteDescr::highlight_overlapping_workarea_for(const std::string& productionsite,
+                                                             bool* positive) const {
+	if (competes_with_productionsite(productionsite)) {
+		*positive = false;
+		return true;
+	}
+	if (supports_productionsite(productionsite) || is_supported_by_productionsite(productionsite)) {
+		*positive = true;
+		return true;
+	}
+	return false;
+}
+
+void ProductionSiteDescr::add_competing_productionsite(const std::string& productionsite) {
+	competing_productionsites_.insert(productionsite);
+}
+void ProductionSiteDescr::add_supports_productionsite(const std::string& productionsite) {
+	supported_productionsites_.insert(productionsite);
+}
+void ProductionSiteDescr::add_supported_by_productionsite(const std::string& productionsite) {
+	supported_by_productionsites_.insert(productionsite);
+}
+bool ProductionSiteDescr::competes_with_productionsite(const std::string& productionsite) const {
+	return competing_productionsites_.count(productionsite) == 1;
+}
+bool ProductionSiteDescr::supports_productionsite(const std::string& productionsite) const {
+	return supported_productionsites_.count(productionsite) == 1;
+}
+bool ProductionSiteDescr::is_supported_by_productionsite(const std::string& productionsite) const {
+	return supported_by_productionsites_.count(productionsite) == 1;
 }
 
 /**
@@ -1131,7 +1130,7 @@ const BuildingSettings* ProductionSite::create_building_settings() const {
 }
 
 /// Changes the default anim string to \li anim
-void ProductionSite::set_default_anim(std::string anim) {
+void ProductionSite::set_default_anim(const std::string& anim) {
 	if (default_anim_ == anim) {
 		return;
 	}

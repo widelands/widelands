@@ -37,10 +37,6 @@ int32_t ScenarioVisionTool::handle_click_impl(const Widelands::NodeAndTriangle<>
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	Widelands::Player& player = *eia.egbase().get_player(args->new_owner);
 	do {
-		if (args->vision == Widelands::SeeUnseeNode::kUnsee) {
-			// Unexplored fields need to be revealed and re-hidden
-			player.hide_or_reveal_field(0, mr.location(), Widelands::SeeUnseeNode::kReveal);
-		}
 		player.hide_or_reveal_field(0, mr.location(), args->vision);
 	} while (mr.advance(*map));
 	return mr.radius();

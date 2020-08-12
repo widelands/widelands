@@ -57,7 +57,7 @@ MapSizeBox::MapSizeBox(
 	add(&height_, UI::Box::Resizing::kFillSpace);
 }
 
-void MapSizeBox::set_selection_function(const std::function<void()> func) {
+void MapSizeBox::set_selection_function(const std::function<void()>& func) {
 	width_.selected.connect(func);
 	height_.selected.connect(func);
 }

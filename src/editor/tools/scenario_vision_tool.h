@@ -26,7 +26,7 @@
 // Define which fields are explicitly revealed to the player
 struct ScenarioVisionTool : public EditorTool {
 	ScenarioVisionTool()
-	   : EditorTool(*this, *this, false), player_(1), mode_(Widelands::SeeUnseeNode::kReveal) {
+	   : EditorTool(*this, *this, false), player_(1), mode_(Widelands::SeeUnseeNode::kVisible) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,

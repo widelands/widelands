@@ -43,6 +43,8 @@ add_directional_animation(animations, "sail", dirname, "sail", {89, 86}, 10)
 --    **descname**: The translatable display name. Use ``pgettext`` with the
 --    ``msgctxt`` above to fetch the string.
 --
+--    **icon**: Path to the menu icon file.
+--
 --    **capacity**: An int defining how many wares or workers this ship can transport
 --
 --    **vision_range**: How far the ship can see.
@@ -55,6 +57,7 @@ tribes:new_ship_type {
    name = "atlanteans_ship",
    -- TRANSLATORS: This is the ship's name used in lists of units
    descname = _"Ship",
+   icon = dirname .. "menu.png",
    capacity = 30,
    vision_range = 4,
    icon = dirname .. "menu.png",

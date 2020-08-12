@@ -44,6 +44,7 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 
@@ -655,7 +656,7 @@ void DefaultAI::late_initialization() {
 		bo.max_preciousness = 0;
 		bo.max_needed_preciousness = 0;
 
-		for (auto ph : bh.supported_production()) {
+		for (auto& ph : bh.supported_production()) {
 			bo.production_hints.insert(tribe_->safe_ware_index(ph));
 		}
 		// I just presume cut wood is named "log" in the game
@@ -2668,7 +2669,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				continue;
 			}
 
-			if (std::rand() % 3 == 0 && bo.total_count() > 0) {
+			if (std::rand() % 3 == 0 && bo.total_count() > 0) {  // NOLINT
 				continue;
 			}  // add randomnes and ease AI
 
@@ -3664,12 +3665,12 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	if (needs_warehouse) {
 		probability_score += 500;
 	}
-	if (std::rand() % 10 == 0) {
+	if (std::rand() % 10 == 0) {  // NOLINT
 		probability_score +=
 		   flag_warehouse_distance.get_distance(flag_coords_hash, gametime, &tmp_wh);
 	}
 
-	if (std::rand() % 200 < probability_score) {
+	if (std::rand() % 200 < probability_score) {  // NOLINT
 		create_shortcut_road(flag, 14, gametime);
 		return true;
 	}
@@ -6731,6 +6732,11 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 	const uint16_t multiplier = std::max<uint16_t>((productionsites.size() + num_ports * 5) / 5, 10);
 
 	for (EconomyObserver* observer : economies) {
+		if (observer->economy.type() != wwWARE) {
+			// Don't set ware target quantities for worker economies
+			continue;
+		}
+
 		DescriptionIndex nritems = player_->egbase().tribes().nrwares();
 		for (Widelands::DescriptionIndex id = 0; id < nritems; ++id) {
 

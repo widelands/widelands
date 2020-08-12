@@ -31,13 +31,10 @@
 
 struct ChatProvider;
 
-enum PlayerType { NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED };
-
 class InteractiveGameBase : public InteractiveBase {
 public:
 	InteractiveGameBase(Widelands::Game&,
 	                    Section& global_s,
-	                    PlayerType pt,
 	                    bool multiplayer,
 	                    ChatProvider* chat_provider);
 	~InteractiveGameBase() override {
@@ -54,12 +51,6 @@ public:
 	void set_sel_pos(Widelands::NodeAndTriangle<> const center) override;
 
 	virtual void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) = 0;
-	const PlayerType& get_playertype() const {
-		return playertype_;
-	}
-	void set_playertype(const PlayerType& pt) {
-		playertype_ = pt;
-	}
 
 	bool try_show_ship_window();
 	bool is_multiplayer() {
@@ -81,7 +72,8 @@ protected:
 		kCensus,
 		kStatistics,
 		kSoldierLevels,
-		kWorkareaOverlap
+		kWorkareaOverlap,
+		kBuildings
 	};
 
 	// Adds the mapviewmenu_ to the toolbar
@@ -108,6 +100,7 @@ protected:
 		UI::UniqueWindow::Registry stats_wares;
 		UI::UniqueWindow::Registry stats_stock;
 		UI::UniqueWindow::Registry stats_buildings;
+		UI::UniqueWindow::Registry stats_soldiers;
 		UI::UniqueWindow::Registry stats_seafaring;
 
 		UI::UniqueWindow::Registry help;
@@ -116,7 +109,6 @@ protected:
 	ChatProvider* chat_provider_;
 	UI::UniqueWindow::Registry chat_;
 	bool multiplayer_;
-	PlayerType playertype_;
 
 	// Show / Hide menu on the toolbar
 	UI::Dropdown<ShowHideEntry> showhidemenu_;

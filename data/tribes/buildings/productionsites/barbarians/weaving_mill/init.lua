@@ -47,20 +47,17 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "reed", amount = 8 }
    },
-   outputs = {
-      "cloth"
-   },
 
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
          descname = _"weaving",
          actions = {
-            "sleep=25000",
+            "sleep=duration:25s",
             "return=skipped unless economy needs cloth",
             "consume=reed",
             "playsound=sound/barbarians/weaver 120",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=cloth"
          }
       },

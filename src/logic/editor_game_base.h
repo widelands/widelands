@@ -144,13 +144,13 @@ public:
 	                                bool loading = false,
 	                                FormerBuildings former_buildings = FormerBuildings(),
 	                                const BuildingSettings* settings = nullptr,
-	                                std::map<DescriptionIndex, Quantity> preserved_wares =
+	                                const std::map<DescriptionIndex, Quantity>& preserved_wares =
 	                                   std::map<DescriptionIndex, Quantity>());
 	Building& warp_dismantlesite(const Coords&,
 	                             PlayerNumber,
 	                             bool loading = false,
 	                             FormerBuildings former_buildings = FormerBuildings(),
-	                             std::map<DescriptionIndex, Quantity> preserved_wares =
+	                             const std::map<DescriptionIndex, Quantity>& preserved_wares =
 	                                std::map<DescriptionIndex, Quantity>());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
@@ -163,7 +163,7 @@ public:
 	                                      const BuildingDescr* former_building);
 	Bob& create_ship(const Coords&, const DescriptionIndex ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
-	Bob& create_ferry(const Coords&, Player* owner);
+	Bob& create_worker(const Coords&, DescriptionIndex worker, Player* owner);
 
 	uint32_t get_gametime() const {
 		return gametime_;
