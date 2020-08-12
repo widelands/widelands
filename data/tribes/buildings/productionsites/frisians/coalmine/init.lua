@@ -88,7 +88,7 @@ tribes:new_productionsite_type {
          descname = _"mining coal",
          actions = {
             "animate=working duration:15s",
-            "mine=coal workarea:3 resources:50% depleted:5% experience:20%",
+            "mine=coal radius:3 yield:50% depleted:5% experience:20%",
             "produce=coal",
          }
       },

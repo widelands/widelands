@@ -70,7 +70,7 @@ tribes:new_productionsite_type {
          descname = _"mining iron",
          actions = {
             "animate=working duration:10s",
-            "mine=iron workarea:2 resources:100% depleted:10% experience:2%",
+            "mine=iron radius:2 yield:100% depleted:10% experience:2%",
             "produce=iron_ore",
          }
       },
