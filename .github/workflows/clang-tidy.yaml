@@ -23,6 +23,6 @@ jobs:
         export CXX=/usr/bin/clang++
         mkdir build && pushd build
         cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-        python ../utils/run-clang-tidy.py -checks=-*,*braces*,cert*,clang-analyzer*,cppcoreguidelines-pro-type-static-cast-downcast,google-readability-casting,performance* > ../clang-tidy.log
+        python ../utils/run-clang-tidy.py -checks=-*,*braces*,cert*,clang-analyzer*,cppcoreguidelines-pro-type-static-cast-downcast,google*,performance* > ../clang-tidy.log
         popd
         utils/check_clang_tidy_results.py clang-tidy.log
