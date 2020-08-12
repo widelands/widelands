@@ -275,14 +275,10 @@ void EditorGameBase::inform_players_about_ownership(MapIndex const i,
 }
 void EditorGameBase::inform_players_about_immovable(MapIndex const i,
                                                     MapObjectDescr const* const descr) {
-//	if (descr)
-//		log("-- EditorGameBase::inform_players_about_immovable(); i=%d; descr->name()=%s\n", i, descr->name().c_str());
-//	else
-//		log("-- EditorGameBase::inform_players_about_immovable(); i=%d\n", i);
 	if (!Road::is_road_descr(descr) && !Waterway::is_waterway_descr(descr)) {
 		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
-			if (SeeUnseeNode::kVisible == player_field.seeing) { // ?
+			if (SeeUnseeNode::kVisible == player_field.seeing) {
 				player_field.map_object_descr = descr;
 			}
 		}

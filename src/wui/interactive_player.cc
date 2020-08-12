@@ -105,7 +105,8 @@ void draw_immovables_for_visible_field(const Widelands::EditorGameBase& egbase,
 		imm->draw(egbase.get_gametime(), filter_info_to_draw(info_to_draw, imm, player),
 		          field.rendertarget_pixel, field.fcoords, scale, dst);
 	} else {
-		//log("-- Adding deferred coords: \n", imm->get_positions(egbase).front());
+		// This is not the building's main position so we can't draw it now.
+		// We remember it so we can draw it later.
 		deferred_coords.push_back(imm->get_positions(egbase).front());
 	}
 }
@@ -437,6 +438,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 	const float scale = 1.f / given_map_view->view().zoom;
 
+	// Store the coords of partially visible buildings
+	// so we can draw them later when we get to their main position.
 	std::vector<Widelands::Coords> deferred_coords;
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
@@ -465,19 +468,20 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 			draw_bridges(dst, f, f->seeing == Widelands::SeeUnseeNode::kVisible ? gametime : 0, scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
+		}
 
-			// Render stuff that belongs to the node.
-			if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
-				draw_immovables_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
-				draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
-			} else if (f->seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
-				// We never show census or statistics for objects in the fog.
-				draw_immovable_for_formerly_visible_field(*f, info_to_draw, player_field, scale, dst);
-			}
+		// Render stuff that belongs to the node.
+		if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
+			draw_immovables_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
+			draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
 		} else if (std::find(deferred_coords.begin(), deferred_coords.end(), f->fcoords) != deferred_coords.end()) {
-			log("-- Drawing deferred coords!\n");
+			// This is the main position of a building that is visible on another field
+			// so although this field isn't visible we draw the building as if it was.
 			draw_immovables_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
 		} else {
+			// We never show census or statistics for objects in the fog.
+			// We also call this for unexplored fields in case they contain a building
+			// that was previously partially seen.
 			draw_immovable_for_formerly_visible_field(*f, info_to_draw, player_field, scale, dst);
 		}
 
