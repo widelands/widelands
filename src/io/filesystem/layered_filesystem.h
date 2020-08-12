@@ -79,7 +79,7 @@ public:
 		return std::string();
 	}
 
-	unsigned long long disk_space() override;
+	unsigned long long disk_space() override;  // NOLINT
 
 private:
 	/// This is used to assemble an error message for exceptions that includes all file paths
