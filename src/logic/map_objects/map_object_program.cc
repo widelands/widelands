@@ -232,7 +232,7 @@ A percent value. Valid unit is:
 
 * ``%`` (percent)
 
-Unless specified otherwise by the program action, maximum value is ``100%``. Examples:
+Maximum value is ``100%``. Examples:
 
 * ``25%``
 * ``25.1%``
