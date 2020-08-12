@@ -45,6 +45,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
@@ -121,9 +122,9 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 									*queue_iter = &mol.get<Worker>(leaver_serial);
 								} catch (const WException& e) {
 									throw GameDataError(
-									   "leave queue item #%li (%u): %s",
-									   static_cast<long int>(queue_iter - leave_queue.begin()),
-									   leaver_serial, e.what());
+									   "leave queue item #%" PRIuS " (%u): %s",
+									   static_cast<size_t>(queue_iter - leave_queue.begin()), leaver_serial,
+									   e.what());
 								}
 							} else {
 								*queue_iter = nullptr;
@@ -498,8 +499,6 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 					   map.calc_influence(mr.location(), Area<>(a, a.radius));
 				} while (mr.advance(map));
 			}
-			player->see_area(Area<FCoords>(
-			   map.get_fcoords(warehouse.get_position()), warehouse.descr().vision_range()));
 			warehouse.next_military_act_ = game.get_gametime();
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse", packet_version,

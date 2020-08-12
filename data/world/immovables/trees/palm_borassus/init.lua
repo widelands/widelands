@@ -15,7 +15,7 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m10s",
          "remove=chance:31.25%",
          "grow=palm_borassus_desert_pole",
@@ -42,7 +42,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m10s",
          "remove=chance:27.34%",
          "grow=palm_borassus_desert_mature",
@@ -69,7 +69,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m5s",
          "remove=chance:15.62%",
          "grow=palm_borassus_desert_old",
@@ -98,7 +98,7 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:33m20s",
          "transform=deadtree5 chance:9.76%",
          "seed=palm_borassus_desert_sapling 160",

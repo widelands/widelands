@@ -65,13 +65,11 @@ constexpr uint16_t kSpeedFast = 10000;
 
 InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                                          Section& global_s,
-                                         PlayerType pt,
                                          bool const multiplayer,
                                          ChatProvider* chat_provider)
    : InteractiveBase(g, global_s),
      chat_provider_(chat_provider),
      multiplayer_(multiplayer),
-     playertype_(pt),
      showhidemenu_(toolbar(),
                    "dropdown_menu_showhide",
                    0,
@@ -120,7 +118,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 				   // Check whether the window is wanted
 				   if (wanted_building_windows_.count(coords.hash()) == 1) {
 					   const WantedBuildingWindow& wanted_building_window =
-					      *wanted_building_windows_.at(coords.hash()).get();
+					      *wanted_building_windows_.at(coords.hash());
 					   UI::UniqueWindow* building_window =
 					      show_building_window(coords, true, wanted_building_window.show_workarea);
 					   building_window->set_pos(wanted_building_window.window_position);
@@ -504,7 +502,7 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 	if (upcast(InteractivePlayer, iplayer, this)) {
 		player = iplayer->get_player();
 		if (player != nullptr && !player->see_all() &&
-		    (1 >= player->vision(Widelands::Map::get_index(center.node, map.get_width())))) {
+		    (!player->is_seeing(Widelands::Map::get_index(center.node, map.get_width())))) {
 			return set_tooltip("");
 		}
 	}
