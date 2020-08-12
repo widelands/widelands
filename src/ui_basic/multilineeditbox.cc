@@ -83,6 +83,8 @@ struct MultilineEditbox::Data {
 	void reset_selection();
 	void draw(RenderTarget& dst, bool with_caret);
 
+	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
+
 private:
 	MultilineEditbox& owner;
 };
@@ -134,11 +136,15 @@ void MultilineEditbox::Data::reset_selection() {
 	selection_start = cursor_pos;
 	selection_end = cursor_pos;
 }
+void MultilineEditbox::Data::calculate_selection_boundaries(uint32_t& start, uint32_t& end) {
+	start = snap_to_char(std::min(selection_start, selection_end));
+	end = std::max(selection_start, selection_end);
+	end = Utf8::is_utf8_extended(text[end]) ? next_char(end) : snap_to_char(end);
+}
 
 void MultilineEditbox::Data::draw(RenderTarget& dst, bool with_caret) {
-	auto start = snap_to_char(std::min(selection_start, selection_end));
-	auto end = std::max(selection_start, selection_end);
-	end = Utf8::is_utf8_extended(text[end]) ? next_char(end) : snap_to_char(end);
+	uint32_t start, end;
+	calculate_selection_boundaries(start, end);
 	ww.draw(dst, Vector2i(0, -int32_t(scrollbar.get_scrollpos())), UI::Align::kLeft,
 	        with_caret ? cursor_pos : std::numeric_limits<uint32_t>::max(),
 	        mode == Data::Mode::kSelection, start, end, scrollbar.get_scrollpos());
@@ -259,14 +265,12 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			return false;
 		case SDLK_c:
 			if ((SDL_GetModState() & KMOD_CTRL) && d_->mode == Data::Mode::kSelection) {
-				std::string selected_text;
-				auto start = d_->snap_to_char(std::min(d_->selection_start, d_->selection_end));
-				auto end = std::max(d_->selection_start, d_->selection_end);
-				end =
-				   Utf8::is_utf8_extended(d_->text[end]) ? d_->next_char(end) : d_->snap_to_char(end);
+
+				uint32_t start, end;
+				d_->calculate_selection_boundaries(start, end);
 
 				auto nr_characters = end - start;
-				selected_text = d_->text.substr(start, nr_characters);
+				std::string selected_text = d_->text.substr(start, nr_characters);
 
 				log("%s\n", selected_text.c_str());
 				SDL_SetClipboardText(selected_text.c_str());
@@ -416,12 +420,31 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_HOME:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					if (d_->mode == Data::Mode::kNormal) {
+						d_->selection_start = d_->cursor_pos;
+						d_->mode = Data::Mode::kSelection;
+					}
+					d_->selection_end = 0;
+				} else {
+					d_->reset_selection();
+				}
 				d_->set_cursor_pos(0);
 			} else {
 				d_->refresh_ww();
 
 				uint32_t cursorline, cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
+
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					if (d_->mode == Data::Mode::kNormal) {
+						d_->selection_start = d_->cursor_pos;
+						d_->mode = Data::Mode::kSelection;
+					}
+					d_->selection_end = d_->ww.line_offset(cursorline);
+				} else {
+					d_->reset_selection();
+				}
 
 				d_->set_cursor_pos(d_->ww.line_offset(cursorline));
 			}
@@ -460,15 +483,11 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 	return Panel::handle_key(down, code);
 }
 void MultilineEditbox::delete_selected_text() const {
-	if (this->d_->selection_start <= this->d_->selection_end) {
-		this->d_->erase_bytes(
-		   d_->snap_to_char(d_->selection_start), d_->snap_to_char(d_->selection_end));
-	} else {
-		this->d_->erase_bytes(
-		   d_->snap_to_char(d_->selection_end), d_->snap_to_char(d_->selection_start));
-	}
-	this->changed();
-	this->d_->reset_selection();
+	uint32_t start, end;
+	d_->calculate_selection_boundaries(start, end);
+	d_->erase_bytes(start, end);
+	changed();
+	d_->reset_selection();
 }
 
 bool MultilineEditbox::handle_textinput(const std::string& input_text) {
