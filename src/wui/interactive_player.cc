@@ -96,7 +96,7 @@ void draw_immovables_for_visible_field(const Widelands::EditorGameBase& egbase,
                                        const InfoToDraw info_to_draw,
                                        const Widelands::Player& player,
                                        RenderTarget* dst,
-                                       std::vector<Widelands::Coords>& deferred_coords) {
+                                       std::set<Widelands::Coords>& deferred_coords) {
 	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 	if (imm == nullptr) {
 		return;
@@ -107,7 +107,7 @@ void draw_immovables_for_visible_field(const Widelands::EditorGameBase& egbase,
 	} else {
 		// This is not the building's main position so we can't draw it now.
 		// We remember it so we can draw it later.
-		deferred_coords.push_back(imm->get_positions(egbase).front());
+		deferred_coords.insert(imm->get_positions(egbase).front());
 	}
 }
 
@@ -440,7 +440,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 	// Store the coords of partially visible buildings
 	// so we can draw them later when we get to their main position.
-	std::vector<Widelands::Coords> deferred_coords;
+	std::set<Widelands::Coords> deferred_coords;
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		FieldsToDraw::Field* f = fields_to_draw->mutable_field(idx);
@@ -475,8 +475,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			draw_immovables_for_visible_field(
 			   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
 			draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
-		} else if (std::find(deferred_coords.begin(), deferred_coords.end(), f->fcoords) !=
-		           deferred_coords.end()) {
+		} else if (deferred_coords.count(f->fcoords) > 0) {
 			// This is the main position of a building that is visible on another field
 			// so although this field isn't visible we draw the building as if it was.
 			draw_immovables_for_visible_field(
