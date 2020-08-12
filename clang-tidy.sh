@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Script for running clang-tidy in the CI pipeline
 
@@ -7,7 +7,7 @@ export CXX=/usr/bin/clang++
 
 if ! [ -d build ] ; then
   mkdir build
-end
+fi
 
 pushd build
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
