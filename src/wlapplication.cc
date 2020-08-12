@@ -171,7 +171,7 @@ void changedir_on_mac() {
 
 // Extracts a long from 'text' into 'val' returning true if all of the string
 // was valid. If not, the content of 'val' is undefined.
-bool to_long(const std::string& text, long* val) {
+bool to_long(const std::string& text, int64_t* val) {
 	const char* start = text.c_str();
 	char* end;
 	*val = strtol(start, &end, 10);
@@ -184,7 +184,7 @@ bool extract_creation_day(const std::string& path, tm* tfile) {
 	const std::string filename = FileSystem::fs_filename(path.c_str());
 	memset(tfile, 0, sizeof(tm));
 
-	long day, month, year;
+	int64_t day, month, year;
 	if (!to_long(filename.substr(8, 2), &day)) {
 		return false;
 	}
@@ -595,7 +595,7 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 void WLApplication::handle_input(InputCallback const* cb) {
 	// Container for keyboard events using the Alt key.
 	// <sym, mod>, type.
-	std::map<std::pair<int32_t, uint16_t>, uint32_t> alt_events;
+	std::map<std::pair<SDL_Keycode, uint16_t>, unsigned> alt_events;
 
 	SDL_Event ev;
 	while (poll_event(ev)) {
@@ -607,9 +607,7 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			// Don't accept the same key twice, so we use a map to squash them and handle them later.
 			if (ev.key.keysym.mod & KMOD_ALT) {
 				alt_events.insert(
-				   std::make_pair(std::make_pair(static_cast<int32_t>(ev.key.keysym.sym),
-				                                 static_cast<uint16_t>(ev.key.keysym.mod)),
-				                  static_cast<uint32_t>(ev.type)));
+				   std::make_pair(std::make_pair(ev.key.keysym.sym, ev.key.keysym.mod), ev.type));
 				handled = true;
 			}
 			if (!handled && cb && cb->key) {
@@ -854,7 +852,7 @@ bool WLApplication::init_settings() {
 	get_config_int("sound", "volume_ui", 128);
 	// KLUDGE!
 
-	long int last_start = get_config_int("last_start", 0);
+	int64_t last_start = get_config_int("last_start", 0);
 	if (last_start + 12 * 60 * 60 < time(nullptr) || !get_config_string("uuid", "").empty()) {
 		// First start of the game or not started for 12 hours. Create a (new) UUID.
 		// For the use of the UUID, see network/internet_gaming_protocol.h

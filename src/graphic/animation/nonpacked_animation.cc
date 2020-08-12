@@ -184,7 +184,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
 
 		// Frames
 		const NonPackedMipMapEntry& first =
-		   dynamic_cast<const NonPackedMipMapEntry&>(*mipmaps_.begin()->second.get());
+		   dynamic_cast<const NonPackedMipMapEntry&>(*mipmaps_.begin()->second);
 		nr_frames_ = first.image_files.size();
 		if (table.has_key("fps") && nr_frames_ == 1) {
 			throw Widelands::GameDataError(
@@ -201,7 +201,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
 		const bool should_have_playercolor = mipmaps_.begin()->second->has_playercolor_masks;
 		for (const auto& mipmap : mipmaps_) {
 			const NonPackedMipMapEntry& nonpacked_mipmap =
-			   dynamic_cast<const NonPackedMipMapEntry&>(*mipmap.second.get());
+			   dynamic_cast<const NonPackedMipMapEntry&>(*mipmap.second);
 			if (nonpacked_mipmap.image_files.size() != nr_frames_) {
 				throw Widelands::GameDataError(
 				   "Mismatched number of images for different scales in animation table: %" PRIuS
