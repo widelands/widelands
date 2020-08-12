@@ -85,7 +85,7 @@ jobs:
               exit 1
             else
               echo "Branch $branch in repository $forkname has an open pull request. Changes will be pushed."
-              if [ -n "${{ secrets.FORMAT_TOKEN }}" ]
+              if [ -z "${{ secrets.FORMAT_TOKEN }}" ]
               then
                 url=${url#*: \"}
                 url=${url%\",}
