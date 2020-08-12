@@ -56,6 +56,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
+#include "logic/mapregion.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
@@ -363,8 +364,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 					} else {
 						Coords const coord = imm->get_position();
 						MapIndex mapidx = map.get_index(coord, map.get_width());
-						Vision const visible = owner().vision(mapidx);
-						if (!visible) {
+						if (owner().get_vision(mapidx) == SeeUnseeNode::kUnexplored) {
 							list.erase(list.begin() + idx);
 						}
 					}
@@ -885,7 +885,8 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		total_weight += weight;
 	}
 
-	int choice = game.logic_rand() % total_weight;
+	// Avoid division by 0
+	int choice = game.logic_rand() % std::max(1, total_weight);
 	for (const auto& bsii : best_suited_immovables_index) {
 		const int weight = std::get<0>(bsii);
 		state.ivar2 = std::get<1>(bsii);
@@ -1495,7 +1496,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 
 	// We expect to always have a location at this point,
 	// but this assumption may fail when loading a corrupted savegame.
-	if (!location) {
+	if (location == nullptr) {
 		send_signal(game, "location");
 		return pop_task(game);
 	}
@@ -1651,10 +1652,9 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 			   "MO(%u): [transfer]: from road to bad nextstep %u", serial(), nextstep->serial());
 		}
 	} else {
-		// Scan-build reports Called C++ object pointer is null here.
-		// This is a false positive.
-		// See https://bugs.launchpad.net/widelands/+bug/1198918
-		throw wexception("MO(%u): location %u has bad type", serial(), location->serial());
+		// Check location to make clang-tidy happy
+		throw wexception(
+		   "MO(%u): location %u has bad type", serial(), location ? location->serial() : 0);
 	}
 }
 
@@ -2608,6 +2608,9 @@ void Worker::fugitive_update(Game& game, State& state) {
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
 		if (flag->get_owner() == get_owner() && flag->economy(wwWORKER).warehouses().size()) {
 			set_location(flag);
+			if (WareInstance* const ware = fetch_carried_ware(game)) {
+				flag->add_ware(game, *ware);
+			}
 			return pop_task(game);
 		}
 	}
@@ -2628,10 +2631,6 @@ void Worker::fugitive_update(Game& game, State& state) {
 		for (const ImmovableFound& tmp_flag : flags) {
 
 			Flag& flag = dynamic_cast<Flag&>(*tmp_flag.object);
-
-			if (game.logic_rand() % 2 == 0) {
-				continue;
-			}
 
 			uint32_t const dist = map.calc_distance(get_position(), tmp_flag.coords);
 
@@ -2865,7 +2864,7 @@ void Worker::check_visible_sites(const Map& map, const Player& player) {
 			return;  // Random walk never goes out of fashion.
 		} else {
 			MapIndex mt = map.get_index(scouts_worklist.back().scoutme, map.get_width());
-			if (1 < player.vision(mt)) {
+			if (player.is_seeing(mt)) {
 				// The military site is now visible. Either player
 				// has acquired possession of more military sites
 				// of own, or own folks are nearby.
@@ -2901,7 +2900,7 @@ void Worker::add_sites(Game& game,
 			const Coords buildingpos = a_building->get_positions(game)[0];
 			// Check the visibility: only invisible ones interest the scout.
 			MapIndex mx = map.get_index(buildingpos, map.get_width());
-			if (2 > player.vision(mx)) {
+			if (!player.is_seeing(mx)) {
 				// The find_reachable_immovable sometimes returns multiple instances.
 				// TODO(kxq): Is that okay? This could be a performance issue elsewhere.
 				// Let's not add duplicates to my work list.
@@ -3043,10 +3042,10 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 			Coords const coord = list[lidx];
 			list.erase(list.begin() + lidx);
 			MapIndex idx = map.get_index(coord, map.get_width());
-			Vision const visible = owner().vision(idx);
+			const SeeUnseeNode visible = owner().get_vision(idx);
 
 			// If the field is not yet discovered, go there
-			if (!visible) {
+			if (visible == SeeUnseeNode::kUnexplored) {
 				molog("[scout]: Go to interesting field (%i, %i)\n", coord.x, coord.y);
 				if (!start_task_movepath(
 				       game, coord, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
@@ -3061,7 +3060,7 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 			int dist = map.calc_distance(coord, get_position());
 			Time time = owner().fields()[idx].time_node_last_unseen;
 			// time is only valid if visible is 1
-			if (visible != 1) {
+			if (visible != SeeUnseeNode::kPreviouslySeen) {
 				time = oldest_time;
 			}
 
@@ -3362,7 +3361,7 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
 			const WorkerDescr* descr =
 			   egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));
 
-			Worker* worker = static_cast<Worker*>(&descr->create_object());
+			Worker* worker = dynamic_cast<Worker*>(&descr->create_object());
 			std::unique_ptr<Loader> loader(worker->create_loader());
 			loader->init(egbase, mol, *worker);
 			loader->load(fr);

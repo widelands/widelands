@@ -35,10 +35,6 @@ tribes:new_productionsite_type {
       empire_lumberjack = 1
    },
 
-   outputs = {
-      "log"
-   },
-
    programs = {
       work = {
          descname = "felling trees",

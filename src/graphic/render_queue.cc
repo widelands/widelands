@@ -35,7 +35,6 @@
 namespace {
 
 constexpr int kMaximumZValue = std::numeric_limits<uint16_t>::max();
-constexpr float kOpenGlZDelta = -2.f / kMaximumZValue;
 
 // Maps [0, kMaximumZValue] linearly to [1., -1.] for use in vertex shaders.
 inline float to_opengl_z(const int z) {

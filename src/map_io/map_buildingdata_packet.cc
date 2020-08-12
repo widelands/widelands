@@ -45,6 +45,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
@@ -498,8 +499,6 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 					   map.calc_influence(mr.location(), Area<>(a, a.radius));
 				} while (mr.advance(map));
 			}
-			player->see_area(Area<FCoords>(
-			   map.get_fcoords(warehouse.get_position()), warehouse.descr().vision_range()));
 			warehouse.next_military_act_ = game.get_gametime();
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse", packet_version,
@@ -1117,7 +1116,7 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 		for (Worker* temp_worker : cwt.second) {
 			const Worker& w = *temp_worker;
 			assert(mos.is_object_known(w));
-			workermap.insert(std::pair<uint32_t, const Worker*>(mos.get_object_file_index(w), &w));
+			workermap.insert(std::make_pair(mos.get_object_file_index(w), &w));
 		}
 	}
 

@@ -9,7 +9,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle duration:20s",
-         "remove=success:12"
+         "remove=chance:4.69%"
       }
    },
    animations = {
