@@ -92,8 +92,7 @@ uint32_t IdleWorkerSupply::nr_supplies(const Game& game, const Request& req) con
 	if (req.get_type() == wwWORKER &&
 	    (req.get_index() == worker_.descr().worker_index() ||
 	     (!req.get_exact_match() && worker_.descr().can_act_as(req.get_index()))) &&
-	    !worker_.get_carried_ware(game) &&
-	    req.get_requirements().check(worker_)) {
+	    !worker_.get_carried_ware(game) && req.get_requirements().check(worker_)) {
 		return 1;
 	}
 	return 0;

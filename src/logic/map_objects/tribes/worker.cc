@@ -2611,7 +2611,8 @@ void Worker::fugitive_update(Game& game, State& state) {
 			if (does_carry_ware()) {
 				if (flag->has_capacity()) {
 					if (WareInstance* const ware = fetch_carried_ware(game)) {
-						molog("[fugitive] is on flag, drop carried ware %s\n", ware->descr().name().c_str());
+						molog(
+						   "[fugitive] is on flag, drop carried ware %s\n", ware->descr().name().c_str());
 						flag->add_ware(game, *ware);
 					}
 				} else {
