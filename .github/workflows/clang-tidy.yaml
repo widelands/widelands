@@ -1,10 +1,13 @@
 name: Clang-Tidy
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  workflow_run:
+    workflows: ["Formatting your code"]
+    branches: [ master, stacked-workflows ]
+    pull_request:
+      types: [ opened, synchronize ]
+    types:
+      - completed
 
 jobs:
   check:
