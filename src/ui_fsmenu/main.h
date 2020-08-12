@@ -85,7 +85,6 @@ private:
 
 	const Image& splashscreen_;
 	const Image& title_image_;
-	const Image& title_image_background_;
 
 	uint32_t init_time_;
 
@@ -95,6 +94,7 @@ private:
 	Rectf image_pos(const Image&);
 	Rectf title_pos();
 	void draw_title(RenderTarget&, float);
+	float calc_opacity(uint32_t time);
 
 	bool visible_;
 	void set_button_visibility(bool);

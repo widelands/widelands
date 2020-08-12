@@ -111,10 +111,6 @@ private:
 	// Restores old options when canceled
 	void clicked_cancel();
 
-	FullscreenMenuMain& parent_;
-	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
-	   graphic_resolution_changed_subscriber_;
-
 	UI::Box button_box_;
 	UI::Button cancel_, apply_, ok_;
 

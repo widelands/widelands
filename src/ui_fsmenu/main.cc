@@ -151,7 +151,6 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                 g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
      splashscreen_(*g_gr->images().get("images/loadscreens/splash.jpg")),
      title_image_(*g_gr->images().get("images/ui_fsmenu/main_title.png")),
-     title_image_background_(*g_gr->images().get("images/loadscreens/tips_bg.png")),
      init_time_(kNoSplash),
      last_image_exchange_time_(0),
      draw_image_(0),
@@ -255,7 +254,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	singleplayer_.add(_("Tutorials"), FullscreenMenuBase::MenuTarget::kTutorial, nullptr, false,
 	                  _("Play one of our beginners’ tutorials"), "T");
 	singleplayer_.add(_("Load Game"), FullscreenMenuBase::MenuTarget::kLoadGame, nullptr, false,
-	                  _("Continue a saved game"), "G");
+	                  _("Continue a saved game"), "L");
 	if (!filename_for_continue_.empty()) {
 		singleplayer_.add(_("Continue Playing"), FullscreenMenuBase::MenuTarget::kContinueLastsave,
 		                  nullptr, false, continue_tooltip, "C");
@@ -275,14 +274,13 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	for (const std::string& img : g_fs->list_directory("images/ui_fsmenu/backgrounds")) {
 		images_.push_back(img);
 	}
-	last_image_ = std::rand() % images_.size();
-	do {
-		draw_image_ = std::rand() % images_.size();
-	} while (draw_image_ == last_image_);
+	last_image_ = draw_image_ = std::rand() % images_.size();
 
 	if (first_ever_init) {
 		init_time_ = SDL_GetTicks();
 		set_button_visibility(false);
+	} else {
+		last_image_exchange_time_ = SDL_GetTicks();
 	}
 	layout();
 }
@@ -395,9 +393,10 @@ do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float 
 	   dest, &img, Recti(0, 0, img.width(), img.height()), opacity, BlendMode::UseAlpha);
 }
 
-static inline float calc_opacity(const uint32_t time, const uint32_t last_image_exchange_time) {
-	return std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time) /
-	                                      kImageExchangeDuration));
+inline float FullscreenMenuMain::calc_opacity(const uint32_t time) {
+	return last_image_ == draw_image_ ? 1.f :
+	   std::max(0.f, std::min(1.f,
+	   static_cast<float>(time - last_image_exchange_time_) / kImageExchangeDuration));
 }
 
 void FullscreenMenuMain::draw(RenderTarget& r) {
@@ -434,7 +433,7 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 		float opacity = 1.f;
 		if (time - last_image_exchange_time_ < kImageExchangeDuration) {
 			const Image& img = *g_gr->images().get(images_[last_image_]);
-			opacity = calc_opacity(time, last_image_exchange_time_);
+			opacity = calc_opacity(time);
 			do_draw_image(r, image_pos(img), img, (1.f - opacity) * initial_fadeout_state);
 		}
 		const Image& img = *g_gr->images().get(images_[draw_image_]);
@@ -484,7 +483,7 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 		float opacity = 1.f;
 		if (time - last_image_exchange_time_ < kImageExchangeDuration) {
 			const Image& img = *g_gr->images().get(images_[last_image_]);
-			opacity = calc_opacity(time, last_image_exchange_time_);
+			opacity = calc_opacity(time);
 			do_draw_image(r, image_pos(img), img, (1.f - opacity) * factor);
 		}
 		const Image& img = *g_gr->images().get(images_[draw_image_]);

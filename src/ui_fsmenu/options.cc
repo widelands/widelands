@@ -68,17 +68,18 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 
 }  // namespace
 
+constexpr int16_t kWindowWidth = 600;
+constexpr int16_t kWindowHeight = 400;
 constexpr int16_t kPadding = 4;
 FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                                              OptionsCtrl::OptionsStruct opt)
    : UI::Window(&fsmm,
                 "options",
-                fsmm.get_w() / 4,
-                fsmm.get_h() / 4,
-                fsmm.get_w() / 2,
-                fsmm.get_h() / 2,
+                (fsmm.get_w() - kWindowWidth) / 2,
+                (fsmm.get_h() - kWindowHeight) / 2,
+                kWindowWidth,
+                kWindowHeight,
                 _("Options")),
-     parent_(fsmm),
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
@@ -223,9 +224,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
         &box_game_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
      os_(opt) {
 
-	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged&) { layout(); });
-
 	// Buttons
 	button_box_.add_inf_space();
 	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_);
@@ -357,8 +355,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 
 void FullscreenMenuOptions::layout() {
 	if (!is_minimal()) {
-		set_size(parent_.get_w() / 2, parent_.get_h() / 2);
-
 		const int16_t butw = get_w() / 5;
 		const int16_t buth = get_h() * 9 / 200;
 
@@ -366,8 +362,8 @@ void FullscreenMenuOptions::layout() {
 		cancel_.set_desired_size(butw, buth);
 		apply_.set_desired_size(butw, buth);
 		ok_.set_desired_size(butw, buth);
-		button_box_.set_pos(Vector2i(0, get_inner_h() - kPadding - button_box_.get_h()));
 		button_box_.set_size(get_inner_w(), buth);
+		button_box_.set_pos(Vector2i(0, get_inner_h() - kPadding - button_box_.get_h()));
 
 		// Tabs
 		tabs_.set_size(get_inner_w(), get_inner_h() - buth - 2 * kPadding);
