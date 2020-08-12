@@ -30,7 +30,7 @@ jobs:
         else
           token=${{ secrets.GITHUB_TOKEN }}
         fi
-        cat <<- EOF1 > $HOME/.netrc
+        cat <<- EOF > $HOME/.netrc
         machine github.com
         login $GITHUB_ACTOR
         password $token
