@@ -1,11 +1,12 @@
 name: Deployment for MS-Windows
 
+on:
+  branches: [ master, stacked-workflows ]
+  pull_request:
+    types: [ opened, synchronize ]
+
 jobs:
   clang_tidy:
-    on:
-      branches: [ master, stacked-workflows ]
-      pull_request:
-        types: [ opened, synchronize ]
     runs-on: ubuntu-latest
     steps:
     - name: Installing dependencies
@@ -27,10 +28,6 @@ jobs:
       run: utils/check_clang_tidy_results.py clang-tidy.log
 
   compile:
-    on:
-      branches: [ master, stacked-workflows ]
-      pull_request:
-        types: [ opened, synchronize ]
     strategy:
       matrix:
         config:
