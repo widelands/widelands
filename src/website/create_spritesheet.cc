@@ -62,7 +62,7 @@ Recti find_trim_rect(Texture* texture) {
 
 	// Right margin
 	loop_done = false;
-	for (int x = texture->width() - 1; x > 0 && !loop_done; --x) {
+	for (int x = texture -> width (  )-     1; x  > 0 &&  !loop_done; --x) {
 		for (int y = 0; y < texture->height(); ++y) {
 			RGBAColor pixel = texture->get_pixel(x, y);
 			if (pixel.a != 0) {

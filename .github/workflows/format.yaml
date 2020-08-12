@@ -87,7 +87,7 @@ jobs:
               echo "Branch $branch in repository $forkname has an open pull request. Changes will be pushed."
               if [ -z "${{ secrets.FORMAT_TOKEN }}" ]
               then
-                warning="Dear @${forkname%%/*}, you have not set a 'FORMAT_TOKEN' secret in your repository yet. The 'GITHUB_TOKEN' will be used instead to push your code formatting changes. Note however that this will not trigger the MS-Windows and Clang-Tidy integration checks. It is strongly recommended that you create an API token with push access to $forkname and store it as a secret named 'FORMAT_TOKEN' in your repository ($forkname → Settings → Secrets). See [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) for more details. Thanks in advance :)"
+                warning="Dear @${forkname%%/*}, you have not set a 'FORMAT_TOKEN' secret in your repository yet. The 'GITHUB_TOKEN' will be used instead to push your code formatting changes. Note however that this will not trigger the MS-Windows and Clang-Tidy integration checks. It is strongly recommended that you create an API token with push access to $forkname and store it as a secret named 'FORMAT_TOKEN' in your repository ($forkname → Settings → Secrets). See (https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) for more details. Thanks in advance :)"
                 echo "::warning::$warning"
               fi
             fi
