@@ -259,6 +259,9 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		switch (code.sym) {
 		case SDLK_v:
 			if ((SDL_GetModState() & KMOD_CTRL) && SDL_HasClipboardText()) {
+				if (d_->mode == Data::Mode::kSelection) {
+					delete_selected_text();
+				}
 				handle_textinput(SDL_GetClipboardText());
 				return true;
 			}
