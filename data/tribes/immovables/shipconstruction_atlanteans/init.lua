@@ -9,7 +9,7 @@ tribes:new_immovable_type {
    icon = dirname .. "menu.png",
    size = "small",
    programs = {
-      program = {
+      main = {
          "construct=idle 5000 210000",
          "transform=bob:atlanteans_ship",
       }

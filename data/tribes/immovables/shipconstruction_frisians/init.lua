@@ -9,7 +9,7 @@ tribes:new_immovable_type {
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    programs = {
-      program = {
+      main = {
          "construct=idle 5000 210000",
          "transform=bob:frisians_ship",
       }

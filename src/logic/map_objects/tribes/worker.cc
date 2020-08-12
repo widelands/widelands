@@ -2608,6 +2608,9 @@ void Worker::fugitive_update(Game& game, State& state) {
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
 		if (flag->get_owner() == get_owner() && flag->economy(wwWORKER).warehouses().size()) {
 			set_location(flag);
+			if (WareInstance* const ware = fetch_carried_ware(game)) {
+				flag->add_ware(game, *ware);
+			}
 			return pop_task(game);
 		}
 	}
@@ -2628,10 +2631,6 @@ void Worker::fugitive_update(Game& game, State& state) {
 		for (const ImmovableFound& tmp_flag : flags) {
 
 			Flag& flag = dynamic_cast<Flag&>(*tmp_flag.object);
-
-			if (game.logic_rand() % 2 == 0) {
-				continue;
-			}
 
 			uint32_t const dist = map.calc_distance(get_position(), tmp_flag.coords);
 
@@ -3362,7 +3361,7 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
 			const WorkerDescr* descr =
 			   egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));
 
-			Worker* worker = static_cast<Worker*>(&descr->create_object());
+			Worker* worker = dynamic_cast<Worker*>(&descr->create_object());
 			std::unique_ptr<Loader> loader(worker->create_loader());
 			loader->init(egbase, mol, *worker);
 			loader->load(fr);

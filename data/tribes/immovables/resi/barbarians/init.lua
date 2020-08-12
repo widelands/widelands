@@ -8,7 +8,7 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "../helptexts/none.lua",
    icon = dirname .. "pics/none_1.png",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -30,7 +30,7 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "../helptexts/water.lua",
    icon = dirname .. "pics/water_1.png",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -52,7 +52,7 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "../helptexts/coal_1.lua",
    icon = dirname .. "pics/coal_few_1.png",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -74,7 +74,7 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "../helptexts/gold_1.lua",
    icon = dirname .. "pics/gold_few_1.png",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -96,7 +96,7 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "../helptexts/iron_1.lua",
    icon = dirname .. "pics/iron_few_1.png",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -118,7 +118,7 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "../helptexts/stones_1.lua",
    icon = dirname .. "pics/stone_few_1.png",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -140,7 +140,7 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "../helptexts/coal_2.lua",
    icon = dirname .. "pics/coal_much_1.png",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -162,7 +162,7 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "../helptexts/gold_2.lua",
    icon = dirname .. "pics/gold_much_1.png",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -184,7 +184,7 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "../helptexts/iron_2.lua",
    icon = dirname .. "pics/iron_much_1.png",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -206,7 +206,7 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "../helptexts/stones_2.lua",
    icon = dirname .. "pics/stone_much_1.png",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }

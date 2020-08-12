@@ -510,9 +510,9 @@ BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 
 	BOOST_CHECK_EQUAL(rval, true);
 
-	add_dead_end(static_cast<TestingRoutingNode*>(chain[0]));
-	add_dead_end(static_cast<TestingRoutingNode*>(chain[3]));
-	add_dead_end(static_cast<TestingRoutingNode*>(chain[5]));
+	add_dead_end(dynamic_cast<TestingRoutingNode*>(chain[0]));
+	add_dead_end(dynamic_cast<TestingRoutingNode*>(chain[3]));
+	add_dead_end(dynamic_cast<TestingRoutingNode*>(chain[5]));
 
 	BOOST_CHECK(route.has_chain(chain));
 

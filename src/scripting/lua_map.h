@@ -1077,7 +1077,7 @@ public:
 	 */
 	CASTED_GET(RoadBase)
 	static bool create_new_worker(lua_State* L,
-	                              Widelands::PlayerImmovable&,
+	                              Widelands::RoadBase& r,
 	                              Widelands::EditorGameBase&,
 	                              const Widelands::WorkerDescr*);
 };
@@ -1211,7 +1211,7 @@ public:
 	 */
 	CASTED_GET(ProductionSite)
 	static bool create_new_worker(lua_State* L,
-	                              Widelands::PlayerImmovable&,
+	                              Widelands::ProductionSite& ps,
 	                              Widelands::EditorGameBase&,
 	                              const Widelands::WorkerDescr*);
 };

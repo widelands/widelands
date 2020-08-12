@@ -325,7 +325,7 @@ UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::stri
 		                    nullptr :
 		                    new GameTips(*loader_ui_, registered_game_tips_));
 	}
-	return *loader_ui_.get();
+	return *loader_ui_;
 }
 void EditorGameBase::change_loader_ui_background(const std::string& background) {
 	assert(has_loader_ui());

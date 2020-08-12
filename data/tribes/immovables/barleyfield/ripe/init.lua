@@ -9,7 +9,7 @@ tribes:new_immovable_type {
    icon = dirname .. "menu.png",
    helptext_script = dirname .. "helptexts.lua",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:41m40s",
          "remove=",
       },

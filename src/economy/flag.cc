@@ -309,7 +309,7 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 	}
 
 	if (building_ && building_->descr().get_isport()) {
-		Warehouse* wh = static_cast<Warehouse*>(building_);
+		Warehouse* wh = dynamic_cast<Warehouse*>(building_);
 		if (PortDock* pd = wh->get_portdock()) {
 			pd->add_neighbours(neighbours);
 		}

@@ -31,13 +31,10 @@
 
 struct ChatProvider;
 
-enum PlayerType { NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED };
-
 class InteractiveGameBase : public InteractiveBase {
 public:
 	InteractiveGameBase(Widelands::Game&,
 	                    Section& global_s,
-	                    PlayerType pt,
 	                    bool multiplayer,
 	                    ChatProvider* chat_provider);
 	~InteractiveGameBase() override {
@@ -58,13 +55,6 @@ public:
 	void set_sel_pos(Widelands::NodeAndTriangle<> const center) override;
 
 	virtual void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) = 0;
-	const PlayerType& get_playertype() const {
-		return playertype_;
-	}
-	void set_playertype(const PlayerType& pt) {
-		playertype_ = pt;
-	}
-
 	void add_wanted_building_window(const Widelands::Coords& coords,
 	                                const Vector2i point,
 	                                bool was_minimal,
@@ -130,7 +120,6 @@ protected:
 	ChatProvider* chat_provider_;
 	UI::UniqueWindow::Registry chat_;
 	bool multiplayer_;
-	PlayerType playertype_;
 
 	// Show / Hide menu on the toolbar
 	UI::Dropdown<ShowHideEntry> showhidemenu_;

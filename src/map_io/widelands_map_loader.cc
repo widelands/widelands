@@ -74,7 +74,7 @@ WidelandsMapLoader::~WidelandsMapLoader() {
  * get_info() functions (width, nrplayers..)
  */
 int32_t WidelandsMapLoader::preload_map(bool const scenario) {
-	assert(get_state() != STATE_LOADED);
+	assert(get_state() != State::kLoaded);
 
 	map_.cleanup();
 
@@ -102,7 +102,7 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 	}
 	map_.set_scenario_types(m);
 
-	set_state(STATE_PRELOADED);
+	set_state(State::kPreLoaded);
 
 	return 0;
 }
@@ -400,7 +400,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 	map_.ensure_resource_consistency(egbase.world());
 
-	set_state(STATE_LOADED);
+	set_state(State::kLoaded);
 
 	return 0;
 }

@@ -2546,7 +2546,7 @@ void Map::recalculate_allows_seafaring() {
 		FCoords fc = get_fcoords(c);
 
 		// Get portdock slots for this port
-		for (const Coords& portdock : find_portdock(fc, false)) {
+		for (const Coords& portdock : find_portdock(fc, true)) {
 			reachable_from_current_port.insert(portdock);
 			positions_to_check.push(portdock);
 		}

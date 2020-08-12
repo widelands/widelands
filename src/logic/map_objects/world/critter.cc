@@ -141,7 +141,7 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 	for (const std::string& program_name : programs->keys<std::string>()) {
 		try {
 			programs_[program_name] = std::unique_ptr<CritterProgram>(
-			   new CritterProgram(program_name, *programs->get_table(program_name).get()));
+			   new CritterProgram(program_name, *programs->get_table(program_name)));
 		} catch (const std::exception& e) {
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
 		}
@@ -262,6 +262,8 @@ Simply roam the map
 
 ==============================
 */
+
+constexpr double kPi = 3.1415926535897932384626433832795029;
 
 Bob::Task const Critter::taskRoam = {
    "roam", static_cast<Bob::Ptr>(&Critter::roam_update), nullptr, nullptr, true};
@@ -428,9 +430,9 @@ void Critter::roam_update(Game& game, State& state) {
 				const double weighted_success_chance =
 				   S <= -N ? 0.0 :
 				             S >= N ? 1.0 :
-				                      -(std::log(S * S + 1) - 2 * S * std::atan(S) - M_PI * S -
-				                        std::log(N * N + 1) + N * (2 * std::atan(N) - M_PI)) /
-				                         (2 * N * M_PI);
+				                      -(std::log(S * S + 1) - 2 * S * std::atan(S) - kPi * S -
+				                        std::log(N * N + 1) + N * (2 * std::atan(N) - kPi)) /
+				                         (2 * N * kPi);
 				molog("    *** [total strength %d] vs [prey %d] *** success chance %lf\n", S,
 				      defender_strength, weighted_success_chance);
 				assert(weighted_success_chance >= 0.0);

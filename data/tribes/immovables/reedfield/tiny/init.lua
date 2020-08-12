@@ -9,7 +9,7 @@ tribes:new_immovable_type {
    icon = dirname .. "menu.png",
    size = "small",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:22s",
          "transform=reedfield_small",
       }

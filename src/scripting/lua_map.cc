@@ -399,8 +399,8 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WaresWorkersMa
 }
 
 // Does most of the work of set_workers for player immovables (buildings and roads mainly).
-template <typename T>
-int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& valid_workers) {
+template <typename TLua, typename TMapObject>
+int do_set_workers(lua_State* L, TMapObject* pi, const WaresWorkersMap& valid_workers) {
 	EditorGameBase& egbase = get_egbase(L);
 	const TribeDescr& tribe = pi->owner().tribe();
 
@@ -454,7 +454,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 			}
 		} else if (d > 0) {
 			for (; d; --d) {
-				if (!T::create_new_worker(L, *pi, egbase, wdes)) {
+				if (!TLua::create_new_worker(L, *pi, egbase, wdes)) {
 					report_error(L, "No space left for worker '%s' at '%s'", wdes->name().c_str(),
 					             pi->descr().name().c_str());
 				}
@@ -721,7 +721,7 @@ const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tr
  * object available.
  */
 #define CAST_TO_LUA(klass, lua_klass)                                                              \
-	to_lua<lua_klass>(L, new lua_klass(static_cast<const klass*>(descr)))
+	to_lua<lua_klass>(L, new lua_klass(dynamic_cast<const klass*>(descr)))
 int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const descr) {
 	assert(descr != nullptr);
 
@@ -770,7 +770,7 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const d
  * Lua. We use this so that scripters always work with the highest class
  * object available.
  */
-#define CAST_TO_LUA(k) to_lua<Lua##k>(L, new Lua##k(*static_cast<k*>(mo)))
+#define CAST_TO_LUA(k) to_lua<Lua##k>(L, new Lua##k(*dynamic_cast<k*>(mo)))
 int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	if (!mo) {
 		return 0;
@@ -4147,7 +4147,7 @@ int LuaMapObject::get_serial(lua_State* L) {
 
 // use the dynamic type of BuildingDescription
 #define CAST_TO_LUA(klass, lua_klass)                                                              \
-	to_lua<lua_klass>(L, new lua_klass(static_cast<const klass*>(desc)))
+	to_lua<lua_klass>(L, new lua_klass(dynamic_cast<const klass*>(desc)))
 
 /* RST
    .. attribute:: descr
@@ -4774,11 +4774,9 @@ int LuaRoad::set_workers(lua_State* L) {
  */
 
 bool LuaRoad::create_new_worker(lua_State* L,
-                                PlayerImmovable& pi,
+                                RoadBase& rb,
                                 EditorGameBase& egbase,
                                 const WorkerDescr* wdes) {
-	RoadBase& rb = dynamic_cast<RoadBase&>(pi);
-
 	Road* r = dynamic_cast<Road*>(&rb);
 	const bool is_busy = r && r->is_busy();
 	if (is_busy) {
@@ -5619,10 +5617,9 @@ int LuaProductionSite::toggle_start_stop(lua_State* L) {
  */
 
 bool LuaProductionSite::create_new_worker(lua_State* /* L */,
-                                          PlayerImmovable& pi,
+                                          ProductionSite& ps,
                                           EditorGameBase& egbase,
                                           const WorkerDescr* wdes) {
-	ProductionSite& ps = static_cast<ProductionSite&>(pi);
 	return ps.warp_worker(egbase, *wdes);
 }
 
@@ -6373,7 +6370,7 @@ int LuaWorker::get_owner(lua_State* L) {
 int LuaWorker::get_location(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	return upcasted_map_object_to_lua(
-	   L, static_cast<BaseImmovable*>(get(L, egbase)->get_location(egbase)));
+	   L, dynamic_cast<BaseImmovable*>(get(L, egbase)->get_location(egbase)));
 }
 
 /*
