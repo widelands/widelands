@@ -260,13 +260,14 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_c:
 			if ((SDL_GetModState() & KMOD_CTRL) && d_->mode == Data::Mode::kSelection) {
 				std::string selected_text;
-				if (d_->selection_start <= d_->selection_end) {
-					size_t nr_characters = d_->selection_end - d_->selection_start;
-					selected_text = d_->text.substr(d_->selection_start, nr_characters);
-				} else {
-					size_t nr_characters = d_->selection_start - d_->selection_end;
-					selected_text = d_->text.substr(d_->selection_end, nr_characters);
-				}
+				auto start = d_->snap_to_char(std::min(d_->selection_start, d_->selection_end));
+				auto end = std::max(d_->selection_start, d_->selection_end);
+				end =
+				   Utf8::is_utf8_extended(d_->text[end]) ? d_->next_char(end) : d_->snap_to_char(end);
+
+				auto nr_characters = end - start;
+				selected_text = d_->text.substr(start, nr_characters);
+
 				log("%s\n", selected_text.c_str());
 				SDL_SetClipboardText(selected_text.c_str());
 				return true;
