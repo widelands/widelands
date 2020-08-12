@@ -494,7 +494,7 @@ construct
 
    :arg string animation_name: The animation to display while the immovable is being constructed.
    :arg duration duration: The :ref:`map_object_programs_datatypes_duration` of each construction
-      step in milliseconds for visualising the construction progress. Used only in drawing code.
+      step for visualising the construction progress. Used only in drawing code.
    :arg duration decay_after: When no construction material has been delivered for this
       :ref:`map_object_programs_datatypes_duration`, the construction progress starts to gradually
       reverse.
