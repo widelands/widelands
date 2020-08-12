@@ -390,8 +390,18 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 					} else {
 						newpos = d_->snap_to_char(newpos);
 					}
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(newpos);
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(newpos);
 				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(d_->text.size());
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(d_->text.size());
 				}
 			}
@@ -413,8 +423,18 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 					} else {
 						newpos = d_->snap_to_char(newpos);
 					}
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(newpos);
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(newpos);
 				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(0);
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(0);
 				}
 			}
