@@ -26,24 +26,18 @@ jobs:
         # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
         if [ -n "${{ secrets.FORMAT_TOKEN }}" ]
         then
-          cat <<- EOF1 > $HOME/.netrc
-          machine github.com
-          login $GITHUB_ACTOR
-          password ${{ secrets.FORMAT_TOKEN }}
-          machine api.github.com
-          login $GITHUB_ACTOR
-          password ${{ secrets.FORMAT_TOKEN }}
-          EOF1
+          token=${{ secrets.FORMAT_TOKEN }}
         else
-          cat <<- EOF2 > $HOME/.netrc
-          machine github.com
-          login $GITHUB_ACTOR
-          password ${{ secrets.GITHUB_TOKEN }}
-          machine api.github.com
-          login $GITHUB_ACTOR
-          password ${{ secrets.GITHUB_TOKEN }}
-          EOF2
+          token=${{ secrets.GITHUB_TOKEN }}
         fi
+        cat <<- EOF1 > $HOME/.netrc
+        machine github.com
+        login $GITHUB_ACTOR
+        password $token
+        machine api.github.com
+        login $GITHUB_ACTOR
+        password $token
+        EOF
         chmod 600 $HOME/.netrc
     - name: Installing python
       uses: actions/setup-python@v1
