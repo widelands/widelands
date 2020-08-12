@@ -47,8 +47,8 @@ int main(int argc, char** argv) {
 	try {
 		initialize();
 
-		std::string map_dir = FileSystem::fs_dirname(map_path);
-		if (map_dir.empty()) {
+		std::string  map_dir = FileSystem::fs_dirname(map_path);
+		if ( map_dir.empty ( ) ) {
 			map_dir = ".";
 		}
 		const std::string map_file = FileSystem::fs_filename(map_path.c_str());

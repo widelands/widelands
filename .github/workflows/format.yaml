@@ -24,14 +24,26 @@ jobs:
         git config --global user.name "The Widelands Code Formatting Bot"
         git config --global user.email "actions@github.com"
         # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
-        cat <<- EOF > $HOME/.netrc
-        machine github.com
-        login $GITHUB_ACTOR
-        password ${{ secrets.GITHUB_TOKEN }}
-        machine api.github.com
-        login $GITHUB_ACTOR
-        password ${{ secrets.GITHUB_TOKEN }}
-        EOF
+        if [ -n "${{ secrets.FORMAT_TOKEN }}" ]
+        then
+          cat <<- EOF > $HOME/.netrc
+          machine github.com
+          login $GITHUB_ACTOR
+          password ${{ secrets.FORMAT_TOKEN }}
+          machine api.github.com
+          login $GITHUB_ACTOR
+          password ${{ secrets.FORMAT_TOKEN }}
+          EOF
+        else
+          cat <<- EOF > $HOME/.netrc
+          machine github.com
+          login $GITHUB_ACTOR
+          password ${{ secrets.GITHUB_TOKEN }}
+          machine api.github.com
+          login $GITHUB_ACTOR
+          password ${{ secrets.GITHUB_TOKEN }}
+          EOF
+        fi
         chmod 600 $HOME/.netrc
     - name: Installing python
       uses: actions/setup-python@v1
@@ -68,9 +80,10 @@ jobs:
             forkname=${{ github.repository }}
             # grep returns 1 if the branch is not found
             set +e
-            output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$branch" | grep "$branch")
+            mkdir build
+            url=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$branch" | grep '"url": "')
             set -e
-            if [ -z "$output" ]
+            if [ -z "$url" ]
             then
               echo "Branch $branch in repository $forkname does not have an open pull request, so no changes will be pushed. Please note however that your code is not properly formatted:"
               git status -s
@@ -78,6 +91,12 @@ jobs:
               exit 1
             else
               echo "Branch $branch in repository $forkname has an open pull request. Changes will be pushed."
+              if [ -n "${{ secrets.FORMAT_TOKEN }}" ]
+              then
+                url=${url#*: \"}
+                url=${url%\",}
+                curl -X POST -H "Accept: application/vnd.github.v3+json" $url/comments -d '{"body":"Dear @${forkname%%/*}, you have not set a `FORMAT_TOKEN` secret in your repository instead. The `GITHUB_TOKEN` will be used instead to push your code formatting changes. Note however that this will not trigger the MS-Windows and Clang-Tidy integration checks. It is strongly recommended that you create an API token with push access to $forkname and store it as a secret named `FORMAT_TOKEN` in your repository (`$forkname` → Settings → Secrets). See [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) for more details. Thanks in advance :)"}'
+              fi
             fi
           fi
         fi
