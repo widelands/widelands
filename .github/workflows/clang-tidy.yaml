@@ -8,6 +8,7 @@ on:
       types: [ opened, synchronize ]
     types:
       - completed
+      - requested
 
 jobs:
   check:
