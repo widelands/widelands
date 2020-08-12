@@ -3,7 +3,8 @@ name: Clang-Tidy
 on:
   workflow_run:
     workflows: ["Formatting your code"]
-    branches: [ master, stacked-workflows ]
+    push:
+      branches: [ master, stacked-workflows ]
     pull_request:
       types: [ opened, synchronize ]
     types:
