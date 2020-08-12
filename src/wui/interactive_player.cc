@@ -472,12 +472,15 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		// Render stuff that belongs to the node.
 		if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
-			draw_immovables_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
+			draw_immovables_for_visible_field(
+			   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
 			draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
-		} else if (std::find(deferred_coords.begin(), deferred_coords.end(), f->fcoords) != deferred_coords.end()) {
+		} else if (std::find(deferred_coords.begin(), deferred_coords.end(), f->fcoords) !=
+		           deferred_coords.end()) {
 			// This is the main position of a building that is visible on another field
 			// so although this field isn't visible we draw the building as if it was.
-			draw_immovables_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
+			draw_immovables_for_visible_field(
+			   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
 		} else {
 			// We never show census or statistics for objects in the fog.
 			// We also call this for unexplored fields in case they contain a building

@@ -1231,9 +1231,10 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 					map_object_descr = nullptr;
 				} else if (upcast(Building const, building, base_immovable)) {
 					if (building->get_position() != f) {
-						// This is not the building's main position.
-						// We don't store the building's description here but in its main position instead.
-						Field& field_main = fields_[map.get_fcoords(building->get_position()).field - &first_map_field];
+						// This is not the building's main position. We don't store the building's
+						// description here but in its main position instead.
+						Field& field_main =
+						   fields_[map.get_fcoords(building->get_position()).field - &first_map_field];
 						field_main.map_object_descr = map_object_descr;
 						map_object_descr = nullptr;
 					} else {
