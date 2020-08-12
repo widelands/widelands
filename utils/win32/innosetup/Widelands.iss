@@ -134,7 +134,6 @@ Source: {#DLLFolder}\libFLAC-8.dll;                     DestDir: {app};         
 Source: {#DLLFolder}\libfluidsynth-2.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libportaudio-2.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libsndfile-1.dll;                  DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
-Source: {#DLLFolder}\libspeex-1.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libvorbisenc-2.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libmodplug-1.dll;                  DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libmpg123-0.dll;                   DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
