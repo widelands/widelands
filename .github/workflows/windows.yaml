@@ -30,6 +30,9 @@ jobs:
 
   compile:
     needs: [clang_tidy]
+    on:
+      pull_request:
+        types: [ opened, synchronize ]
     strategy:
       matrix:
         config:
