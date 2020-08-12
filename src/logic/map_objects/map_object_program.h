@@ -123,7 +123,8 @@ protected:
 		bool allow_multiple;
 	};
 	/// Parses the arguments for a play_sound action, e.g. { "sound/smiths/sharpening", "120" }
-	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments, const MapObjectDescr& descr);
+	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments,
+	                                                const MapObjectDescr& descr);
 
 private:
 	const std::string name_;

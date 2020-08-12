@@ -1569,7 +1569,8 @@ playsound
 ---------
 Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
-ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments, const ProductionSiteDescr& descr) {
+ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments,
+                                              const ProductionSiteDescr& descr) {
 	parameters = MapObjectProgram::parse_act_play_sound(arguments, descr);
 }
 
@@ -1815,8 +1816,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<ProductionProgram::Action>(new ActTrain(parseinput.arguments)));
 			} else if (parseinput.name == "playsound") {
-				actions_.push_back(
-				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments, *building)));
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActPlaySound(parseinput.arguments, *building)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActConstruct(parseinput.arguments, name(), building, tribes)));

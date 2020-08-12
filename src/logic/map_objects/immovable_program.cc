@@ -108,7 +108,8 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "playsound") {
-				actions_.push_back(std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments, immovable)));
+				actions_.push_back(
+				   std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, immovable)));
@@ -154,7 +155,8 @@ playsound
 ---------
 Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
-ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments, const ImmovableDescr& descr) {
+ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments,
+                                             const ImmovableDescr& descr) {
 	parameters = MapObjectProgram::parse_act_play_sound(arguments, descr);
 }
 
