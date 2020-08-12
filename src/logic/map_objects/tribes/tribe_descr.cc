@@ -369,7 +369,7 @@ void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const Wo
 	}
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("resource_indicators");
-	for (std::string resource : items_table->keys<std::string>()) {
+	for (const std::string& resource : items_table->keys<std::string>()) {
 		ResourceIndicatorList resis;
 		std::unique_ptr<LuaTable> tbl = items_table->get_table(resource);
 		const std::set<int> keys = tbl->keys<int>();
