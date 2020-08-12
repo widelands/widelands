@@ -73,7 +73,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 						}
 					}
 
-					player->read_statistics(fr, packet_version, *tribes_lookup_table.get());
+					player->read_statistics(fr, packet_version, *tribes_lookup_table);
 					player->read_remaining_shipnames(fr);
 
 					player->casualties_ = fr.unsigned_32();
