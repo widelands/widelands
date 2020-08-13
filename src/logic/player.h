@@ -398,14 +398,14 @@ public:
 		 * on this node. `dismantlesite.progress` equals the value of
 		 * `get_built_per64k()` at the time the dismantlesite was last seen.
 		 */
-		union PFB {
+		union PartiallyFinishedBuildingDetails {
 			ConstructionsiteInformation constructionsite;
 			struct {
 				uint32_t progress;
 				const BuildingDescr* building;
 			} dismantlesite;
-			PFB();
-			~PFB() {
+			PartiallyFinishedBuildingDetails();
+			~PartiallyFinishedBuildingDetails() {
 			}
 		} partially_finished_building;
 

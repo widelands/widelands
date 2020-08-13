@@ -93,8 +93,8 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 
 namespace Widelands {
 
-Player::Field::PFB::PFB() {
-	memset(this, 0, sizeof(Player::Field::PFB));
+Player::Field::PartiallyFinishedBuildingDetails::PartiallyFinishedBuildingDetails() {
+	memset(this, 0, sizeof(Player::Field::PartiallyFinishedBuildingDetails));
 }
 
 /**
