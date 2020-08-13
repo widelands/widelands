@@ -65,10 +65,15 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				if (p != player_no_from_packet) {
 					throw wexception("Wrong player number. Expected %d but read %d from packet\n", static_cast<unsigned>(p), static_cast<unsigned>(player_no_from_packet));
 				}
+
+				std::set<Player::Field*> seen_fields;
+
 				player->revealed_fields_.clear();
 				const unsigned no_revealed_fields = fr.unsigned_32();
 				for (unsigned i = 0; i < no_revealed_fields; ++i) {
-					player->revealed_fields_.insert(fr.unsigned_32());
+					const MapIndex revealed_index = fr.unsigned_32();
+					player->revealed_fields_.insert(revealed_index);
+					seen_fields.insert(&player->fields_[revealed_index]);
 				}
 
 				// Read numerical field infos as combined strings to reduce number of hard disk write operations
@@ -76,133 +81,154 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				std::vector<std::string> data_vector; // Single complex record for a field
 				std::string parseme;
 
-				// Owner
-				parseme = fr.c_string();
-				boost::split(field_vector, parseme, boost::is_any_of("|"));
-				assert(field_vector.size() == no_of_fields);
-
-				for (MapIndex m = 0; m < no_of_fields; ++m) {
-					player->fields_[m].owner = stoi(field_vector[m]);
-				}
-
 				// Seeing
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
 				assert(field_vector.size() == no_of_fields);
 
 				for (MapIndex m = 0; m < no_of_fields; ++m) {
-					player->fields_[m].seeing = static_cast<Widelands::SeeUnseeNode>(stoi(field_vector[m]));
+					Player::Field& f = player->fields_[m];
+					f.seeing = static_cast<Widelands::SeeUnseeNode>(stoi(field_vector[m]));
+					if (f.seeing != SeeUnseeNode::kUnexplored) {
+						seen_fields.insert(&f);
+					}
+				}
+
+				const MapIndex no_of_seen_fields = fr.unsigned_32();
+				if (seen_fields.size() != no_of_seen_fields) {
+					throw wexception("Read %" PRIuS " unseen fields but detected %d when the packet was written\n", seen_fields.size(), static_cast<unsigned>(no_of_seen_fields));
+				}
+
+				// Skip data for fields that were never seen
+				if (no_of_seen_fields == 0) {
+					continue;
+				}
+
+				// Owner
+				parseme = fr.c_string();
+				boost::split(field_vector, parseme, boost::is_any_of("|"));
+				assert(field_vector.size() == seen_fields.size());
+
+				size_t counter = 0;
+				for (auto& field : seen_fields) {
+					field->owner = stoi(field_vector[counter]);
+					++counter;
 				}
 
 				// Last Unseen
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
-				assert(field_vector.size() == no_of_fields);
+				assert(field_vector.size() == no_of_seen_fields);
 
-				for (MapIndex m = 0; m < no_of_fields; ++m) {
-					player->fields_[m].time_node_last_unseen = stoi(field_vector[m]);
+				counter = 0;
+				for (auto& field : seen_fields) {
+					field->time_node_last_unseen = stoi(field_vector[counter]);
+					++counter;
 				}
 
 				// Last Surveyed
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
-				assert(field_vector.size() == no_of_fields);
+				assert(field_vector.size() == no_of_seen_fields);
 
-				for (MapIndex m = 0; m < no_of_fields; ++m) {
-					boost::split(data_vector, field_vector[m], boost::is_any_of("*"));
+				counter = 0;
+				for (auto& field : seen_fields) {
+					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
 					assert(data_vector.size() == 2);
 
-					Player::Field& f = player->fields_[m];
-					f.time_triangle_last_surveyed[0] = stoi(data_vector[0]);
-					f.time_triangle_last_surveyed[1] = stoi(data_vector[1]);
+					field->time_triangle_last_surveyed[0] = stoi(data_vector[0]);
+					field->time_triangle_last_surveyed[1] = stoi(data_vector[1]);
+					++counter;
 				}
 
 				// Resource Amounts
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
-				assert(field_vector.size() == no_of_fields);
+				assert(field_vector.size() == no_of_seen_fields);
 
-				for (MapIndex m = 0; m < no_of_fields; ++m) {
-
-					boost::split(data_vector, field_vector[m], boost::is_any_of("*"));
+				counter = 0;
+				for (auto& field : seen_fields) {
+					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
 					assert(data_vector.size() == 2);
 
-					Player::Field& f = player->fields_[m];
-					f.resource_amounts.d = stoi(data_vector[0]);
-					f.resource_amounts.r = stoi(data_vector[1]);
+					field->resource_amounts.d = stoi(data_vector[0]);
+					field->resource_amounts.r = stoi(data_vector[1]);
+					++counter;
 				}
 
 				// Terrains
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
-				assert(field_vector.size() == no_of_fields);
+				assert(field_vector.size() == no_of_seen_fields);
 
-				for (MapIndex m = 0; m < no_of_fields; ++m) {
-					boost::split(data_vector, field_vector[m], boost::is_any_of("*"));
+				counter = 0;
+				for (auto& field : seen_fields) {
+					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
 					assert(data_vector.size() == 2);
 
-					Player::Field& f = player->fields_[m];
-					f.terrains.d = stoi(data_vector[0]);
-					f.terrains.r = stoi(data_vector[1]);
+					field->terrains.d = stoi(data_vector[0]);
+					field->terrains.r = stoi(data_vector[1]);
+					++counter;
 				}
 
 				// Roads
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
-				assert(field_vector.size() == no_of_fields);
+				assert(field_vector.size() == no_of_seen_fields);
 
-				for (MapIndex m = 0; m < no_of_fields; ++m) {
-					boost::split(data_vector, field_vector[m], boost::is_any_of("*"));
+				counter = 0;
+				for (auto& field : seen_fields) {
+					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
 					assert(data_vector.size() == 3);
 
-					Player::Field& f = player->fields_[m];
-					f.r_e = static_cast<Widelands::RoadSegment>(stoi(data_vector[0]));
-					f.r_se = static_cast<Widelands::RoadSegment>(stoi(data_vector[1]));
-					f.r_sw = static_cast<Widelands::RoadSegment>(stoi(data_vector[2]));
+					field->r_e = static_cast<Widelands::RoadSegment>(stoi(data_vector[0]));
+					field->r_se = static_cast<Widelands::RoadSegment>(stoi(data_vector[1]));
+					field->r_sw = static_cast<Widelands::RoadSegment>(stoi(data_vector[2]));
+					++counter;
 				}
 
 				// Borders
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
-				assert(field_vector.size() == no_of_fields);
+				assert(field_vector.size() == no_of_seen_fields);
 
-				for (MapIndex m = 0; m < no_of_fields; ++m) {
-					boost::split(data_vector, field_vector[m], boost::is_any_of("*"));
+				counter = 0;
+				for (auto& field : seen_fields) {
+					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
 					assert(data_vector.size() == 4);
 
-					Player::Field& f = player->fields_[m];
-					f.border = stoi(data_vector[0]);
-					f.border_r = stoi(data_vector[1]);
-					f.border_br = stoi(data_vector[2]);
-					f.border_bl = stoi(data_vector[3]);
+					field->border = stoi(data_vector[0]);
+					field->border_r = stoi(data_vector[1]);
+					field->border_br = stoi(data_vector[2]);
+					field->border_bl = stoi(data_vector[3]);
+					++counter;
 				}
 
 				// Map objects
-				for (MapIndex m = 0; m < no_of_fields; ++m) {
-					Player::Field& f = player->fields_[m];
+				for (auto& field : seen_fields) {
 					std::string descr = fr.string();
 					if (descr.empty()) {
-						f.map_object_descr = nullptr;
-						f.constructionsite.becomes = nullptr;
+						field->map_object_descr = nullptr;
+						field->constructionsite.becomes = nullptr;
 					} else {
 						// I here assume that no two immovables will have the same internal name
 						// NOCOM use the legacy tables
 						if (descr == "flag") {
-							f.map_object_descr = &g_flag_descr;
+							field->map_object_descr = &g_flag_descr;
 						} else if (descr == "portdock") {
-							f.map_object_descr = &g_portdock_descr;
+							field->map_object_descr = &g_portdock_descr;
 						} else {
 							DescriptionIndex di = egbase.tribes().building_index(descr);
 							if (di != INVALID_INDEX) {
-								f.map_object_descr = egbase.tribes().get_building_descr(di);
+								field->map_object_descr = egbase.tribes().get_building_descr(di);
 							} else {
 								di = egbase.world().get_immovable_index(descr);
 								if (di != INVALID_INDEX) {
-									f.map_object_descr = egbase.world().get_immovable_descr(di);
+									field->map_object_descr = egbase.world().get_immovable_descr(di);
 								} else {
 									di = egbase.tribes().immovable_index(descr);
 									if (di != INVALID_INDEX) {
-										f.map_object_descr = egbase.tribes().get_immovable_descr(di);
+										field->map_object_descr = egbase.tribes().get_immovable_descr(di);
 									} else {
 										throw GameDataError("invalid map_object_descr: %s", descr.c_str());
 									}
@@ -212,25 +238,25 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 						descr = fr.string();
 						if (descr.empty()) {
-							f.constructionsite.becomes = nullptr;
+							field->constructionsite.becomes = nullptr;
 						} else {
-							f.constructionsite.becomes = egbase.tribes().get_building_descr(
+							field->constructionsite.becomes = egbase.tribes().get_building_descr(
 							   egbase.tribes().safe_building_index(descr));
 
 							descr = fr.string();
-							f.constructionsite.was = descr.empty() ?
+							field->constructionsite.was = descr.empty() ?
 							                            nullptr :
 							                            egbase.tribes().get_building_descr(
 							                               egbase.tribes().safe_building_index(descr));
 
 							for (uint8_t j = fr.unsigned_32(); j; --j) {
-								f.constructionsite.intermediates.push_back(
+								field->constructionsite.intermediates.push_back(
 								   egbase.tribes().get_building_descr(
 								      egbase.tribes().safe_building_index(fr.string())));
 							}
 
-							f.constructionsite.totaltime = fr.unsigned_32();
-							f.constructionsite.completedtime = fr.unsigned_32();
+							field->constructionsite.totaltime = fr.unsigned_32();
+							field->constructionsite.completedtime = fr.unsigned_32();
 						}
 					}
 				}
@@ -342,117 +368,146 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 
 	const PlayerNumber nr_players = egbase.map().get_nrplayers();
 	fw.unsigned_8(nr_players);
-	MapIndex upper_bound = egbase.map().max_index() - 1;
 
 	iterate_players_existing(p, nr_players, egbase, player) {
 		fw.unsigned_8(p);
+		std::set<const Player::Field*> seen_fields;
 		// Explicitly revealed fields
 		fw.unsigned_32(player->revealed_fields_.size());
 		for (const MapIndex& m : player->revealed_fields_) {
 			fw.unsigned_32(m);
+			seen_fields.insert(&player->fields_[m]);
 		}
 
 		// Write numerical field infos as combined strings to reduce number of hard disk write operations
 		{
-			// Owner
-			std::ostringstream oss("");
-			for (MapIndex m = 0; m < upper_bound; ++m) {
-				oss << static_cast<unsigned>(player->fields_[m].owner) << "|";
-			}
-			oss << static_cast<unsigned>(player->fields_[upper_bound].owner);
-			fw.c_string(oss.str());
-		}
-		{
 			// Seeing
 			std::ostringstream oss("");
+			const MapIndex upper_bound = egbase.map().max_index() - 1;
 			for (MapIndex m = 0; m < upper_bound; ++m) {
-				oss << static_cast<unsigned>(player->fields_[m].seeing) << "|";
+				const Player::Field& f = player->fields_[m];
+				oss << static_cast<unsigned>(f.seeing) << "|";
+				if (f.seeing != SeeUnseeNode::kUnexplored) {
+					seen_fields.insert(&f);
+				}
 			}
-			oss << static_cast<unsigned>(player->fields_[upper_bound].seeing);
+			const Player::Field& f = player->fields_[upper_bound];
+			oss << static_cast<unsigned>(f.seeing);
+			if (f.seeing != SeeUnseeNode::kUnexplored) {
+				seen_fields.insert(&f);
+			}
+			fw.c_string(oss.str());
+		}
+
+		// Write number of seen fields
+		fw.unsigned_32(seen_fields.size());
+
+		// Skip data for fields that were never seen
+		if (seen_fields.empty()) {
+			continue;
+		}
+
+		{
+			// Owner
+			std::ostringstream oss("");
+			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
+				oss << static_cast<unsigned>((*it)->owner);
+				++it;
+				if (it != seen_fields.end()) {
+					oss << "|";
+				}
+			}
 			fw.c_string(oss.str());
 		}
 		{
 			// Last Unseen
 			std::ostringstream oss("");
-			for (MapIndex m = 0; m < upper_bound; ++m) {
-				oss << player->fields_[m].time_node_last_unseen << "|";
+			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
+				oss << static_cast<unsigned>((*it)->time_node_last_unseen);
+				++it;
+				if (it != seen_fields.end()) {
+					oss << "|";
+				}
 			}
-			oss << player->fields_[upper_bound].time_node_last_unseen;
 			fw.c_string(oss.str());
 		}
 		{
 			// Last Surveyed
 			std::ostringstream oss("");
-			for (MapIndex m = 0; m < upper_bound; ++m) {
-				const Player::Field& f = player->fields_[m];
-				oss << f.time_triangle_last_surveyed[0] << "*" << f.time_triangle_last_surveyed[1] << "|";
+			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
+				oss << (*it)->time_triangle_last_surveyed[0] << "*" << (*it)->time_triangle_last_surveyed[1];
+				++it;
+				if (it != seen_fields.end()) {
+					oss << "|";
+				}
 			}
-			const Player::Field& f = player->fields_[upper_bound];
-			oss << f.time_triangle_last_surveyed[0] << "*" << f.time_triangle_last_surveyed[1];
 			fw.c_string(oss.str());
 		}
 		{
 			// Resource Amounts
 			std::ostringstream oss("");
-			for (MapIndex m = 0; m < upper_bound; ++m) {
-				const Player::Field& f = player->fields_[m];
-				oss << static_cast<unsigned>(f.resource_amounts.d) << "*" << static_cast<unsigned>(f.resource_amounts.r) << "|";
+			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
+				oss << static_cast<unsigned>((*it)->resource_amounts.d) << "*" << static_cast<unsigned>((*it)->resource_amounts.r);
+				++it;
+				if (it != seen_fields.end()) {
+					oss << "|";
+				}
 			}
-			const Player::Field& f = player->fields_[upper_bound];
-			oss << static_cast<unsigned>(f.resource_amounts.d) << "*" << static_cast<unsigned>(f.resource_amounts.r);
 			fw.c_string(oss.str());
 		}
 		{
 			// Terrains
 			std::ostringstream oss("");
-			for (MapIndex m = 0; m < upper_bound; ++m) {
-				const Player::Field& f = player->fields_[m];
-				oss << f.terrains.d << "*" << f.terrains.r << "|";
+			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
+				oss << (*it)->terrains.d << "*" << (*it)->terrains.r;
+				++it;
+				if (it != seen_fields.end()) {
+					oss << "|";
+				}
 			}
-			const Player::Field& f = player->fields_[upper_bound];
-			oss << f.terrains.d << "*" << f.terrains.r;
 			fw.c_string(oss.str());
 		}
 		{
 			// Roads
 			std::ostringstream oss("");
-			for (MapIndex m = 0; m < upper_bound; ++m) {
-				const Player::Field& f = player->fields_[m];
-				oss << static_cast<unsigned>(f.r_e) << "*" << static_cast<unsigned>(f.r_se) << "*" << static_cast<unsigned>(f.r_sw) << "|";
+			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
+				oss << static_cast<unsigned>((*it)->r_e) << "*" << static_cast<unsigned>((*it)->r_se) << "*" << static_cast<unsigned>((*it)->r_sw);
+				++it;
+				if (it != seen_fields.end()) {
+					oss << "|";
+				}
 			}
-			const Player::Field& f = player->fields_[upper_bound];
-			oss << static_cast<unsigned>(f.r_e) << "*" << static_cast<unsigned>(f.r_se) << "*" << static_cast<unsigned>(f.r_sw);
 			fw.c_string(oss.str());
 		}
 		{
 			// Borders
 			std::ostringstream oss("");
-			for (MapIndex m = 0; m < upper_bound; ++m) {
-				const Player::Field& f = player->fields_[m];
-				oss << to_unsigned(f.border) << "*" << to_unsigned(f.border_r) << "*" << to_unsigned(f.border_br) << "*" << to_unsigned(f.border_bl) << "|";
+			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
+				oss << to_unsigned((*it)->border) << "*" << to_unsigned((*it)->border_r) << "*" << to_unsigned((*it)->border_br) << "*" << to_unsigned((*it)->border_bl);
+				++it;
+				if (it != seen_fields.end()) {
+					oss << "|";
+				}
 			}
-			const Player::Field& f = player->fields_[upper_bound];
-			oss << to_unsigned(f.border) << "*" << to_unsigned(f.border_r) << "*" << to_unsigned(f.border_br) << "*" << to_unsigned(f.border_bl);
 			fw.c_string(oss.str());
 		}
 
 		// Map objects
-		for (MapIndex m = 0; m <= upper_bound; ++m) {
-			const Player::Field& f = player->fields_[m];
-			if (f.map_object_descr) {
-				fw.string(f.map_object_descr->name());
+		for (const auto& field : seen_fields) {
+			if (field->map_object_descr) {
+				fw.string(field->map_object_descr->name());
 
-				if (f.constructionsite.becomes) {
-					fw.string(f.constructionsite.becomes->name());
-					fw.string(f.constructionsite.was ? f.constructionsite.was->name() : "");
+				if (field->constructionsite.becomes) {
+					fw.string(field->constructionsite.becomes->name());
+					fw.string(field->constructionsite.was ? field->constructionsite.was->name() : "");
 
-					fw.unsigned_32(f.constructionsite.intermediates.size());
-					for (const BuildingDescr* d : f.constructionsite.intermediates) {
+					fw.unsigned_32(field->constructionsite.intermediates.size());
+					for (const BuildingDescr* d : field->constructionsite.intermediates) {
 						fw.string(d->name());
 					}
 
-					fw.unsigned_32(f.constructionsite.totaltime);
-					fw.unsigned_32(f.constructionsite.completedtime);
+					fw.unsigned_32(field->constructionsite.totaltime);
+					fw.unsigned_32(field->constructionsite.completedtime);
 				} else {
 					fw.string("");
 				}
