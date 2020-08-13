@@ -12,12 +12,14 @@ jobs:
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        brew install boost cmake doxygen gcc gettext git glew graphviz icu4c jpeg libogg libpng libvorbis ninja python sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
+        brew install boost doxygen gcc glew graphviz ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
-    - name: Execute full install
+    - name: Compile
       run: |
-        cmake .. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF" -DCMAKE_EXE_LINKER_FLAGS="-L/usr/local/opt/gettext/lib -lintl" -DCMAKE_CXX_FLAGS="-I/usr/local/opt/gettext/include"
-        make -k -j3
+        mkdir build_wl
+        cp widelands/utils/macos/build_app.sh build_wl/
+        cd build_wl/
+        ./build_app.sh gcc release ../widelands/
