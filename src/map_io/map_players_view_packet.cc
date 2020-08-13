@@ -42,8 +42,10 @@ bool from_unsigned(unsigned value) {
 	return value == 1;
 }
 
-void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase, const WorldLegacyLookupTable& world_lookup_table,
-								const TribesLegacyLookupTable& tribes_lookup_table) {
+void MapPlayersViewPacket::read(FileSystem& fs,
+                                EditorGameBase& egbase,
+                                const WorldLegacyLookupTable& world_lookup_table,
+                                const TribesLegacyLookupTable& tribes_lookup_table) {
 	FileRead fr;
 	if (!fr.try_open(fs, "binary/view")) {
 		// TODO(Nordfriese): Savegame compatibility – require this packet after v1.0
@@ -57,14 +59,18 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase, const Wo
 		if (packet_version == kCurrentPacketVersion) {
 			const PlayerNumber nr_players = fr.unsigned_8();
 			if (egbase.map().get_nrplayers() != nr_players) {
-				throw wexception("Wrong number of players. Expected %d but read %d from packet\n", static_cast<unsigned>(egbase.map().get_nrplayers()), static_cast<unsigned>(nr_players));
+				throw wexception("Wrong number of players. Expected %d but read %d from packet\n",
+				                 static_cast<unsigned>(egbase.map().get_nrplayers()),
+				                 static_cast<unsigned>(nr_players));
 			}
 			MapIndex no_of_fields = egbase.map().max_index();
 
 			iterate_players_existing(p, nr_players, egbase, player) {
 				const unsigned player_no_from_packet = fr.unsigned_8();
 				if (p != player_no_from_packet) {
-					throw wexception("Wrong player number. Expected %d but read %d from packet\n", static_cast<unsigned>(p), static_cast<unsigned>(player_no_from_packet));
+					throw wexception("Wrong player number. Expected %d but read %d from packet\n",
+					                 static_cast<unsigned>(p),
+					                 static_cast<unsigned>(player_no_from_packet));
 				}
 
 				std::set<Player::Field*> seen_fields;
@@ -77,9 +83,10 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase, const Wo
 					seen_fields.insert(&player->fields_[revealed_index]);
 				}
 
-				// Read numerical field infos as combined strings to reduce number of hard disk write operations
-				std::vector<std::string> field_vector; // Some data for all player fields
-				std::vector<std::string> data_vector; // Single complex record for a field
+				// Read numerical field infos as combined strings to reduce number of hard disk write
+				// operations
+				std::vector<std::string> field_vector;  // Some data for all player fields
+				std::vector<std::string> data_vector;   // Single complex record for a field
 				std::string parseme;
 
 				// Seeing
@@ -97,7 +104,9 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase, const Wo
 
 				const MapIndex no_of_seen_fields = fr.unsigned_32();
 				if (seen_fields.size() != no_of_seen_fields) {
-					throw wexception("Read %" PRIuS " unseen fields but detected %d when the packet was written\n", seen_fields.size(), static_cast<unsigned>(no_of_seen_fields));
+					throw wexception("Read %" PRIuS
+					                 " unseen fields but detected %d when the packet was written\n",
+					                 seen_fields.size(), static_cast<unsigned>(no_of_seen_fields));
 				}
 
 				// Skip data for fields that were never seen
@@ -218,15 +227,18 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase, const Wo
 						} else if (descr == "portdock") {
 							field->map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di = egbase.tribes().building_index(tribes_lookup_table.lookup_building(descr));
+							DescriptionIndex di =
+							   egbase.tribes().building_index(tribes_lookup_table.lookup_building(descr));
 							if (di != INVALID_INDEX) {
 								field->map_object_descr = egbase.tribes().get_building_descr(di);
 							} else {
-								di = egbase.world().get_immovable_index(world_lookup_table.lookup_immovable(descr));
+								di = egbase.world().get_immovable_index(
+								   world_lookup_table.lookup_immovable(descr));
 								if (di != INVALID_INDEX) {
 									field->map_object_descr = egbase.world().get_immovable_descr(di);
 								} else {
-									di = egbase.tribes().immovable_index(tribes_lookup_table.lookup_immovable(descr));
+									di = egbase.tribes().immovable_index(
+									   tribes_lookup_table.lookup_immovable(descr));
 									if (di != INVALID_INDEX) {
 										field->map_object_descr = egbase.tribes().get_immovable_descr(di);
 									} else {
@@ -240,19 +252,21 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase, const Wo
 						if (descr.empty()) {
 							field->constructionsite.becomes = nullptr;
 						} else {
-							field->constructionsite.becomes = egbase.tribes().get_building_descr(
-							   egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(descr)));
+							field->constructionsite.becomes =
+							   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+							      tribes_lookup_table.lookup_building(descr)));
 
 							descr = fr.string();
-							field->constructionsite.was = descr.empty() ?
-							                            nullptr :
-							                            egbase.tribes().get_building_descr(
-							                               egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(descr)));
+							field->constructionsite.was =
+							   descr.empty() ?
+							      nullptr :
+							      egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+							         tribes_lookup_table.lookup_building(descr)));
 
 							for (uint8_t j = fr.unsigned_32(); j; --j) {
 								field->constructionsite.intermediates.push_back(
-								   egbase.tribes().get_building_descr(
-								      egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(fr.string()))));
+								   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+								      tribes_lookup_table.lookup_building(fr.string()))));
 							}
 
 							field->constructionsite.totaltime = fr.unsigned_32();
@@ -379,7 +393,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			seen_fields.insert(&player->fields_[m]);
 		}
 
-		// Write numerical field infos as combined strings to reduce number of hard disk write operations
+		// Write numerical field infos as combined strings to reduce number of hard disk write
+		// operations
 		{
 			// Seeing
 			std::ostringstream oss("");
@@ -435,7 +450,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			// Last Surveyed
 			std::ostringstream oss("");
 			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
-				oss << (*it)->time_triangle_last_surveyed[0] << "*" << (*it)->time_triangle_last_surveyed[1];
+				oss << (*it)->time_triangle_last_surveyed[0] << "*"
+				    << (*it)->time_triangle_last_surveyed[1];
 				++it;
 				if (it != seen_fields.end()) {
 					oss << "|";
@@ -447,7 +463,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			// Resource Amounts
 			std::ostringstream oss("");
 			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
-				oss << static_cast<unsigned>((*it)->resource_amounts.d) << "*" << static_cast<unsigned>((*it)->resource_amounts.r);
+				oss << static_cast<unsigned>((*it)->resource_amounts.d) << "*"
+				    << static_cast<unsigned>((*it)->resource_amounts.r);
 				++it;
 				if (it != seen_fields.end()) {
 					oss << "|";
@@ -471,7 +488,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			// Roads
 			std::ostringstream oss("");
 			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
-				oss << static_cast<unsigned>((*it)->r_e) << "*" << static_cast<unsigned>((*it)->r_se) << "*" << static_cast<unsigned>((*it)->r_sw);
+				oss << static_cast<unsigned>((*it)->r_e) << "*" << static_cast<unsigned>((*it)->r_se)
+				    << "*" << static_cast<unsigned>((*it)->r_sw);
 				++it;
 				if (it != seen_fields.end()) {
 					oss << "|";
@@ -483,7 +501,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			// Borders
 			std::ostringstream oss("");
 			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
-				oss << to_unsigned((*it)->border) << "*" << to_unsigned((*it)->border_r) << "*" << to_unsigned((*it)->border_br) << "*" << to_unsigned((*it)->border_bl);
+				oss << to_unsigned((*it)->border) << "*" << to_unsigned((*it)->border_r) << "*"
+				    << to_unsigned((*it)->border_br) << "*" << to_unsigned((*it)->border_bl);
 				++it;
 				if (it != seen_fields.end()) {
 					oss << "|";

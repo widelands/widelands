@@ -24,12 +24,14 @@
 #include "map_io/tribes_legacy_lookup_table.h"
 #include "map_io/world_legacy_lookup_table.h"
 
-
 namespace Widelands {
 
 class MapPlayersViewPacket {
 public:
-	void read(FileSystem&, EditorGameBase&, const WorldLegacyLookupTable& world_lookup_table, const TribesLegacyLookupTable& tribes_lookup_table);
+	void read(FileSystem&,
+	          EditorGameBase&,
+	          const WorldLegacyLookupTable& world_lookup_table,
+	          const TribesLegacyLookupTable& tribes_lookup_table);
 	void write(FileSystem&, EditorGameBase&);
 };
 }  // namespace Widelands
