@@ -2,6 +2,8 @@ name: MacOS
 
 on: [push]
 
+# cp utils/macos/build_app.sh build_wl/
+
 jobs:
   macos:
     runs-on: macOS-latest
@@ -19,6 +21,5 @@ jobs:
     - name: Build
       run: |
         mkdir build_wl
-        cp utils/macos/build_app.sh build_wl/
         cd build_wl/
-        ./build_app.sh gcc release ../widelands/
+        ../utils/build_app.sh gcc release ../widelands/
