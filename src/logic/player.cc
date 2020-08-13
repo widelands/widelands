@@ -1239,9 +1239,11 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 						map_object_descr = nullptr;
 					} else {
 						if (upcast(ConstructionSite const, cs, building)) {
-							field.partially_finished_building.constructionsite = const_cast<ConstructionSite*>(cs)->get_info();
+							field.partially_finished_building.constructionsite =
+							   const_cast<ConstructionSite*>(cs)->get_info();
 						} else if (upcast(DismantleSite const, ds, building)) {
-							field.partially_finished_building.dismantlesite.progress = ds->get_built_per64k();
+							field.partially_finished_building.dismantlesite.progress =
+							   ds->get_built_per64k();
 							field.partially_finished_building.dismantlesite.building = ds->get_building();
 						}
 					}

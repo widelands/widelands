@@ -130,22 +130,28 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 		// this is a building therefore we either draw unoccupied or idle animation
 		if (building->type() == Widelands::MapObjectType::CONSTRUCTIONSITE) {
 			player_field.partially_finished_building.constructionsite.draw(
-					field.rendertarget_pixel, field.fcoords, scale,
-					(info_to_draw & InfoToDraw::kShowBuildings),
-					field.owner->get_playercolor(), dst);
+			   field.rendertarget_pixel, field.fcoords, scale,
+			   (info_to_draw & InfoToDraw::kShowBuildings), field.owner->get_playercolor(), dst);
 		} else if (building->type() == Widelands::MapObjectType::DISMANTLESITE &&
-		    // TODO(Nordfriese): `building` can only be nullptr in savegame
-		    // compatibility cases – remove that check after v1.0
-		    player_field.partially_finished_building.dismantlesite.building) {
+		           // TODO(Nordfriese): `building` can only be nullptr in savegame
+		           // compatibility cases – remove that check after v1.0
+		           player_field.partially_finished_building.dismantlesite.building) {
 			if (info_to_draw & InfoToDraw::kShowBuildings) {
-				dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-						player_field.partially_finished_building.dismantlesite.building->get_unoccupied_animation(), 0,
-						&field.owner->get_playercolor(), 1.f, 100 - ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
+				dst->blit_animation(
+				   field.rendertarget_pixel, field.fcoords, scale,
+				   player_field.partially_finished_building.dismantlesite.building
+				      ->get_unoccupied_animation(),
+				   0, &field.owner->get_playercolor(), 1.f,
+				   100 -
+				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
 			} else {
-				dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-						player_field.partially_finished_building.dismantlesite.building->get_unoccupied_animation(), 0,
-						nullptr, Widelands::kBuildingSilhouetteOpacity,
-						100 - ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
+				dst->blit_animation(
+				   field.rendertarget_pixel, field.fcoords, scale,
+				   player_field.partially_finished_building.dismantlesite.building
+				      ->get_unoccupied_animation(),
+				   0, nullptr, Widelands::kBuildingSilhouetteOpacity,
+				   100 -
+				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
 			}
 		} else if (info_to_draw & InfoToDraw::kShowBuildings) {
 			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
