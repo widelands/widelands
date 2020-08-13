@@ -94,6 +94,10 @@ private:
 	std::string history_[CHAT_HISTORY_SIZE];
 	bool password_;
 	bool warning_;
+	uint32_t snap_to_char(uint32_t cursor);
+	void select_until(uint32_t end) const;
+	uint32_t next_char(uint32_t cursor);
+	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
 };
 }  // namespace UI
 

@@ -24,6 +24,7 @@
 #include <SDL_clipboard.h>
 #include <SDL_mouse.h>
 
+#include "base/utf8.h"
 #include "graphic/color.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -223,14 +224,12 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			return false;
 		case SDLK_c:
 			if ((SDL_GetModState() & KMOD_CTRL) && m_->mode == EditBoxImpl::Mode::kSelection) {
-				std::string selected_text;
-				if (m_->selection_start <= m_->selection_end) {
-					size_t nr_characters = m_->selection_end - m_->selection_start;
-					selected_text = m_->text.substr(m_->selection_start, nr_characters);
-				} else {
-					size_t nr_characters = m_->selection_start - m_->selection_end;
-					selected_text = m_->text.substr(m_->selection_end, nr_characters);
-				}
+				uint32_t start, end;
+				calculate_selection_boundaries(start, end);
+
+				auto nr_characters = end - start;
+				std::string selected_text = m_->text.substr(start, nr_characters);
+				log("%s\n", selected_text.c_str());
 				SDL_SetClipboardText(selected_text.c_str());
 				return true;
 			}
@@ -555,17 +554,13 @@ void EditBox::draw(RenderTarget& dst) {
 void EditBox::highlight_selection(RenderTarget& dst,
                                   const Vector2i& point,
                                   const uint16_t fontheight) {
-	std::string selected_text;
-	std::string text_before_selection;
-	if (m_->selection_start <= m_->selection_end) {
-		size_t nr_characters = m_->selection_end - m_->selection_start;
-		selected_text = m_->text.substr(m_->selection_start, nr_characters);
-		text_before_selection = m_->text.substr(0, m_->selection_start);
-	} else {
-		size_t nr_characters = m_->selection_start - m_->selection_end;
-		selected_text = m_->text.substr(m_->selection_end, nr_characters);
-		text_before_selection = m_->text.substr(0, m_->selection_end);
-	}
+
+	uint32_t start, end;
+	calculate_selection_boundaries(start, end);
+	auto nr_characters = end - start;
+
+	std::string selected_text = m_->text.substr(start, nr_characters);
+	std::string text_before_selection = m_->text.substr(0, start);
 
 	Vector2i selection_start = Vector2i(
 	   text_width(text_before_selection, *m_->font_style, m_->font_scale) + point.x, point.y);
@@ -579,6 +574,50 @@ void EditBox::reset_selection() {
 	m_->mode = EditBoxImpl::Mode::kNormal;
 	m_->selection_start = m_->caret;
 	m_->selection_end = m_->caret;
+}
+
+/**
+ * Return the starting offset of the (multi-byte) character that @p cursor points to.
+ */
+uint32_t EditBox::snap_to_char(uint32_t cursor) {
+	while (cursor > 0 && Utf8::is_utf8_extended(m_->text[cursor])) {
+		--cursor;
+	}
+	return cursor;
+}
+
+/**
+ * Find the starting byte of the next character
+ */
+uint32_t EditBox::next_char(uint32_t cursor) {
+	assert(cursor <= text.size());
+
+	if (cursor >= m_->text.size()) {
+		return cursor;
+	}
+
+	do {
+		++cursor;
+	} while (cursor < m_->text.size() && Utf8::is_utf8_extended(m_->text[cursor]));
+
+	return cursor;
+}
+
+/**
+ * Selects text from @p cursor until @p end
+ */
+void EditBox::select_until(uint32_t end) const {
+	if (m_->mode == EditBoxImpl::Mode::kNormal) {
+		m_->selection_start = m_->caret;
+		m_->mode = EditBoxImpl::Mode::kSelection;
+	}
+	m_->selection_end = end;
+}
+
+void EditBox::calculate_selection_boundaries(uint32_t& start, uint32_t& end) {
+	start = snap_to_char(std::min(m_->selection_start, m_->selection_end));
+	end = std::max(m_->selection_start, m_->selection_end);
+	end = Utf8::is_utf8_extended(m_->text[end]) ? next_char(end) : snap_to_char(end);
 }
 
 /**
