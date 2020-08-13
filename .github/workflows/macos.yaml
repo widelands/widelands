@@ -26,4 +26,4 @@ jobs:
         cd build_wl/
         pwd
         ls
-        ../utils/macos/build_app.sh gcc release ../widelands/
+        ../utils/macos/build_app.sh gcc release ../
