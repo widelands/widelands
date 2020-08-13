@@ -198,10 +198,10 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase, const Wo
 					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
 					assert(data_vector.size() == 4);
 
-					field->border = stoi(data_vector[0]);
-					field->border_r = stoi(data_vector[1]);
-					field->border_br = stoi(data_vector[2]);
-					field->border_bl = stoi(data_vector[3]);
+					field->border = from_unsigned(stoi(data_vector[0]));
+					field->border_r = from_unsigned(stoi(data_vector[1]));
+					field->border_br = from_unsigned(stoi(data_vector[2]));
+					field->border_bl = from_unsigned(stoi(data_vector[3]));
 					++counter;
 				}
 
