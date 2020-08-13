@@ -44,6 +44,7 @@
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -91,6 +92,10 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 }  // namespace
 
 namespace Widelands {
+
+Player::Field::PFB::PFB() {
+	memset(this, 0, sizeof(Player::Field::PFB));
+}
 
 /**
  * Find the longest possible enhancement chain leading to the given
@@ -1222,7 +1227,6 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		                  fields_[bl_index].border && fields_[bl_index].owner == field.owner;
 		{
 			const MapObjectDescr* map_object_descr;
-			field.constructionsite.becomes = nullptr;
 			if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
 
@@ -1235,7 +1239,10 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 						map_object_descr = nullptr;
 					} else {
 						if (upcast(ConstructionSite const, cs, building)) {
-							field.constructionsite = const_cast<ConstructionSite*>(cs)->get_info();
+							field.partially_finished_building.constructionsite = const_cast<ConstructionSite*>(cs)->get_info();
+						} else if (upcast(DismantleSite const, ds, building)) {
+							field.partially_finished_building.dismantlesite.progress = ds->get_built_per64k();
+							field.partially_finished_building.dismantlesite.building = ds->get_building();
 						}
 					}
 				}

@@ -393,9 +393,21 @@ public:
 		 */
 		const MapObjectDescr* map_object_descr;
 
-		/// Information for constructionsite's animation.
-		/// only valid, if there is a constructionsite on this node
-		ConstructionsiteInformation constructionsite;
+		/* Information for constructionSite and DismantleSite animation.
+		 * `constructionsite` is only valid if there is a constructionsite
+		 * on this node. `dismantlesite.progress` equals the value of
+		 * `get_built_per64k()` at the time the dismantlesite was last seen.
+		 */
+		union PFB {
+			ConstructionsiteInformation constructionsite;
+			struct {
+				uint32_t progress;
+				const BuildingDescr* building;
+			} dismantlesite;
+			PFB();
+			~PFB() {
+			}
+		} partially_finished_building;
 
 		/// Save whether the player saw a border the last time (s)he saw the node.
 		bool border;
