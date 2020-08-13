@@ -187,7 +187,8 @@ mine
 
    :arg string resource_name: The map resource to mine, e.g. ``fish``.
 
-   :arg int radius: After the worker has found a spot, the radius that is scanned for decreasing the map resource, e.g. ``1``.
+   :arg int radius: After the worker has found a spot, the radius that is scanned for decreasing the
+      map resource, e.g. ``1``.
 
    Mine on the current coordinates that the worker has walked to for resources decrease.
    Example::
@@ -217,7 +218,8 @@ void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::strin
 	if (read_key_value_pair(cmd[1], ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this option after v1.0
 		log("WARNING: 'mine' program without parameter names is deprecated, please use "
-			"'mine=<resource_name> radius:<number>' in %s\n", worker_.name().c_str());
+		    "'mine=<resource_name> radius:<number>' in %s\n",
+		    worker_.name().c_str());
 		act->sparam1 = cmd[0];
 		act->iparam1 = read_positive(cmd[1]);
 	} else {
@@ -228,7 +230,9 @@ void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::strin
 			} else if (item.second.empty()) {
 				act->sparam1 = item.first;
 			} else {
-				throw GameDataError("Unknown parameter '%s'. Usage: mine=<resource_name> radius:<number>", item.first.c_str());
+				throw GameDataError(
+				   "Unknown parameter '%s'. Usage: mine=<resource_name> radius:<number>",
+				   item.first.c_str());
 			}
 		}
 	}
@@ -241,7 +245,8 @@ breed
 
    :arg string resource_name: The map resource to breed, e.g. ``fish``.
 
-   :arg int radius: After the worker has found a spot, the radius that is scanned for increasing the map resource, e.g. ``1``.
+   :arg int radius: After the worker has found a spot, the radius that is scanned for increasing the
+      map resource, e.g. ``1``.
 
    Breed a resource on the current coordinates that the worker has walked to for
    resources increase. Example::
@@ -268,7 +273,8 @@ void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::stri
 	if (read_key_value_pair(cmd[1], ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this option after v1.0
 		log("WARNING: 'breed' program without parameter names is deprecated, please use "
-			"'breed=<resource_name> radius:<number>' in %s\n", worker_.name().c_str());
+		    "'breed=<resource_name> radius:<number>' in %s\n",
+		    worker_.name().c_str());
 		act->sparam1 = cmd[0];
 		act->iparam1 = read_positive(cmd[1]);
 	} else {
@@ -279,7 +285,9 @@ void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::stri
 			} else if (item.second.empty()) {
 				act->sparam1 = item.first;
 			} else {
-				throw GameDataError("Unknown parameter '%s'. Usage: breed=<resource_name> radius:<number>", item.first.c_str());
+				throw GameDataError(
+				   "Unknown parameter '%s'. Usage: breed=<resource_name> radius:<number>",
+				   item.first.c_str());
 			}
 		}
 	}
@@ -831,7 +839,7 @@ repeatsearch
 ^^^^^^^^^^^^
 .. function:: repeatsearch=\<program_name\> repetitions:\<number\> radius:\<number\>
 
-   :arg string program_name: The name of the program to call from this program
+   :arg string program_name: The name of the program to repeatedly call from this program.
 
    :arg int repetitions: The number of times that the worker will move to a
       different spot on the map to execute ``program_name``. Used by geologists.
@@ -842,7 +850,7 @@ repeatsearch
    your ``program_name`` for some of the fields. Example::
 
       expedition = {
-         "repeatsearch=15 5 search"
+         "repeatsearch=search repetitions:15 radius:5"
       },
 */
 /**
@@ -860,7 +868,8 @@ void WorkerProgram::parse_repeatsearch(Worker::Action* act, const std::vector<st
 	if (read_key_value_pair(cmd[1], ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this option after v1.0
 		log("WARNING: 'repeatsearch' program without parameter names is deprecated, please use "
-			"'repeatsearch=<program_name> repetitions:<number> radius:<number>' in %s\n", worker_.name().c_str());
+		    "'repeatsearch=<program_name> repetitions:<number> radius:<number>' in %s\n",
+		    worker_.name().c_str());
 		act->iparam1 = read_positive(cmd[0]);
 		act->iparam2 = read_positive(cmd[1]);
 		act->sparam1 = cmd[2];
@@ -874,7 +883,9 @@ void WorkerProgram::parse_repeatsearch(Worker::Action* act, const std::vector<st
 			} else if (item.second.empty()) {
 				act->sparam1 = item.first;
 			} else {
-				throw GameDataError("Unknown parameter '%s'. Usage: repeatsearch=<program_name> repetitions:<number> radius:<number>", item.first.c_str());
+				throw GameDataError("Unknown parameter '%s'. Usage: repeatsearch=<program_name> "
+				                    "repetitions:<number> radius:<number>",
+				                    item.first.c_str());
 			}
 		}
 	}
@@ -912,7 +923,8 @@ scout
 
    :arg int radius: The radius of map fields for the scout to explore.
 
-   :arg duration duration: The time :ref:`map_object_programs_datatypes_duration` that the scout will spend scouting.
+   :arg duration duration: The time :ref:`map_object_programs_datatypes_duration` that the scout
+      will spend scouting.
 
    Sends a scout out to run around scouting the area. Example::
 
@@ -934,7 +946,8 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 	if (read_key_value_pair(cmd[0], ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this option after v1.0
 		log("WARNING: 'scout' program without parameter names is deprecated, please use "
-			"'scout=radius:<number> duration:<duration>' in %s\n", worker_.name().c_str());
+		    "'scout=radius:<number> duration:<duration>' in %s\n",
+		    worker_.name().c_str());
 		act->iparam1 = read_positive(cmd[0]);
 		act->iparam2 = read_positive(cmd[1]);
 	} else {
@@ -945,7 +958,9 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 			} else if (item.first == "duration") {
 				act->iparam2 = read_duration(item.second, worker_);
 			} else {
-				throw GameDataError("Unknown parameter '%s'. Usage: scout=radius:<number> duration:<duration>", item.first.c_str());
+				throw GameDataError(
+				   "Unknown parameter '%s'. Usage: scout=radius:<number> duration:<duration>",
+				   item.first.c_str());
 			}
 		}
 	}
