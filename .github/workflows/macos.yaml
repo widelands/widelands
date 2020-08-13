@@ -12,14 +12,14 @@ jobs:
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        brew install boost doxygen gcc glew graphviz ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
+        brew install boost ccache doxygen gcc glew graphviz ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
-    - name: Compile
+    - name: Build
       run: |
         mkdir build_wl
-        cp widelands/utils/macos/build_app.sh build_wl/
+        cp utils/macos/build_app.sh build_wl/
         cd build_wl/
         ./build_app.sh gcc release ../widelands/
