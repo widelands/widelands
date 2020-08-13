@@ -262,7 +262,7 @@ private:
 
 	/// Absolute path to the locale directory.
 	std::string localedir_;
-	
+
 	/// Prevent toggling fullscreen on and off from flickering
 	uint32_t last_resolution_change_;
 
