@@ -1454,8 +1454,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  there is a sufficiently high chance, that the mine
 		//  will still produce enough.
 		//  e.g. mines have chance=5, wells have 65
-		if (depleted_chance_ <= game.world().get_resource(resource_)->max_amount() *
-		                           MapObjectProgram::kMaxProbability / 100U) {
+		if (depleted_chance_ <= 20 * MapObjectProgram::kMaxProbability / 100U) {
 			ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
