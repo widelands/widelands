@@ -218,6 +218,9 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		switch (code.sym) {
 		case SDLK_v:
 			if ((SDL_GetModState() & KMOD_CTRL) && SDL_HasClipboardText()) {
+				if (m_->mode == EditBoxImpl::Mode::kSelection) {
+					delete_selected_text();
+				}
 				handle_textinput(SDL_GetClipboardText());
 				return true;
 			}
@@ -237,7 +240,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_a:
 			if ((SDL_GetModState() & KMOD_CTRL)) {
-				//				m_->caret = 0;
 				m_->selection_start = 0;
 				m_->selection_end = m_->text.size();
 				m_->mode = EditBoxImpl::Mode::kSelection;
@@ -316,11 +318,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
 				if (SDL_GetModState() & KMOD_SHIFT) {
-					if (m_->mode == EditBoxImpl::Mode::kNormal) {
-						m_->selection_start = m_->caret;
-						m_->mode = EditBoxImpl::Mode::kSelection;
-					}
-					m_->selection_end = m_->caret - 1;
+					select_until(m_->caret - 1);
 				} else {
 					reset_selection();
 				}
@@ -342,11 +340,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
 				if (SDL_GetModState() & KMOD_SHIFT) {
-					if (m_->mode == EditBoxImpl::Mode::kNormal) {
-						m_->selection_start = m_->caret;
-						m_->mode = EditBoxImpl::Mode::kSelection;
-					}
-					m_->selection_end = m_->caret + 1;
+					select_until(m_->caret + 1);
 				} else {
 					reset_selection();
 				}
@@ -368,15 +362,11 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_HOME:
-			if (m_->caret != 0) {
+			if (m_->caret > 0) {
 				if (SDL_GetModState() & KMOD_SHIFT) {
-					if (m_->mode == EditBoxImpl::Mode::kNormal) {
-						m_->mode = EditBoxImpl::Mode::kSelection;
-						m_->selection_start = m_->caret;
-						m_->selection_end = 0;
-					} else {
-						m_->selection_end = 0;
-					}
+					select_until(0);
+				} else {
+					reset_selection();
 				}
 				m_->caret = 0;
 				check_caret();
@@ -386,13 +376,9 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_END:
 			if (m_->caret != m_->text.size()) {
 				if (SDL_GetModState() & KMOD_SHIFT) {
-					if (m_->mode == EditBoxImpl::Mode::kNormal) {
-						m_->mode = EditBoxImpl::Mode::kSelection;
-						m_->selection_start = m_->caret;
-						m_->selection_end = m_->text.size();
-					} else {
-						m_->selection_end = m_->text.size();
-					}
+					select_until(m_->text.size());
+				} else {
+					reset_selection();
 				}
 				m_->caret = m_->text.size();
 				check_caret();
