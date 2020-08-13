@@ -12,7 +12,7 @@ jobs:
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        brew install git cmake g++ gcc gettext libboost-dev libboost-regex-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev clang-tidy -y
+        brew install git cmake g++ gcc gettext libboost-dev libboost-regex-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev clang-tidy
     - name: Checkout
       uses: actions/checkout@v2
       with:
