@@ -67,7 +67,7 @@ tribes:new_productionsite_type {
          descname = _"mining marble",
          actions = {
             "animate=working duration:7s800ms",
-            "mine=stones radius:2 yield:100% depleted:5% experience:2%",
+            "mine=stones radius:2 yield:100% when_empty:5% experience_on_fail:2%",
             "produce=granite",
          }
       },
@@ -75,7 +75,7 @@ tribes:new_productionsite_type {
          descname = _"mining marble",
          actions = {
             "animate=working duration:7s800ms",
-            "mine=stones radius:2 yield:100% depleted:5% experience:2%",
+            "mine=stones radius:2 yield:100% when_empty:5% experience_on_fail:2%",
             "produce=marble",
          }
       },

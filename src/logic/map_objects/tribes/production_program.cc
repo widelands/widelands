@@ -1273,16 +1273,16 @@ bool ProductionProgram::ActRecruit::get_building_work(Game& game,
 mine
 ----
 
-.. function:: mine=\<resource_name\> radius:\<number\> resources:\<percent\> depleted:\<percent\>
-     \[experience:\<percent\>\]
+.. function:: mine=\<resource_name\> radius:\<number\> resources:\<percent\> when_empty:\<percent\>
+     \[experience_on_fail:\<percent\>\]
 
    :arg string resource_name: The name of the resource to mine, e.g. 'coal' or 'water'.
    :arg int radius: The workarea radius that is searched for resources. Must be ``>0``.
    :arg percent yield: The :ref:`map_object_programs_datatypes_percent` of resources that the
       mine can dig up before its resource is depleted.
-   :arg percent depleted: The :ref:`map_object_programs_datatypes_percent` chance that the mine will
+   :arg percent when_empty: The :ref:`map_object_programs_datatypes_percent` chance that the mine will
       still find some resources after it has been depleted.
-   :arg percent experience: The :ref:`map_object_programs_datatypes_percent` chance that the mine's
+   :arg percent experience_on_fail: The :ref:`map_object_programs_datatypes_percent` chance that the mine's
       workers will still gain some experience when mining fails after its resources have been
       depleted.
 
@@ -1300,7 +1300,7 @@ mine
           -- Search radius of 2 for iron. Will always find iron until 33.33% of it has been dug up.
           -- After that, there's still a chance of 5% for finding iron.
           -- If this fails, the workers still have a chance of 17% of gaining experience.
-         "mine=iron radius:2 yield:33.33% depleted:5% experience:17%",
+         "mine=iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
          "produce=iron_ore"
      }
 
@@ -1309,7 +1309,7 @@ mine
          "animate=working duration:20s",
           -- Search radius of 1 for water. Will always find water until 100% of it has been drawn.
           -- After that, there's still a chance of 65% for finding water.
-         "mine=water radius:1 yield:100% depleted:65%",
+         "mine=water radius:1 yield:100% when_empty:65%",
          "produce=water"
      }
 */
@@ -1319,14 +1319,14 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     ProductionSiteDescr* descr) {
 	if (arguments.size() != 5 && arguments.size() != 4) {
 		throw GameDataError("Usage: mine=<resource name> radius:<number> yield:<percent> "
-		                    "depleted:<percent> [experience:<percent>]");
+		                    "when_empty:<percent> [experience:<percent>]");
 	}
 	experience_chance_ = 0U;
 
 	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
 		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
 		log("WARNING: Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
-		    "yield:<percent> depleted:<percent> [experience:<percent>]'\n",
+		    "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
 		    descr->name().c_str());
 		resource_ = world.safe_resource_index(arguments.front().c_str());
 		workarea_ = read_positive(arguments.at(1));
@@ -1344,14 +1344,14 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 				workarea_ = read_positive(item.second);
 			} else if (item.first == "yield") {
 				max_resources_ = read_percent_to_int(item.second);
-			} else if (item.first == "depleted") {
+			} else if (item.first == "when_empty") {
 				depleted_chance_ = read_percent_to_int(item.second);
-			} else if (item.first == "experience") {
+			} else if (item.first == "experience_on_fail") {
 				experience_chance_ = read_percent_to_int(item.second);
 			} else {
 				throw GameDataError(
 				   "Unknown argument '%s'. Usage: mine=<resource name> radius:<number> "
-				   "yield:<percent> depleted:<percent> [experience:<percent>]",
+				   "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]",
 				   item.first.c_str());
 			}
 		}
