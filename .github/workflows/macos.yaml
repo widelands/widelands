@@ -2,8 +2,6 @@ name: MacOS
 
 on: [push]
 
-# macos-latest or macos-10.15
-
 jobs:
   macos:
     runs-on: macOS-latest
@@ -12,6 +10,7 @@ jobs:
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
+        brew install gcc@7
         brew install boost ccache doxygen gcc glew graphviz ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
     - name: Checkout
       uses: actions/checkout@v2
