@@ -582,6 +582,9 @@ void EditBox::highlight_selection(RenderTarget& dst,
 	   text_width(text_before_selection, *m_->font_style, m_->font_scale) + point.x, point.y);
 	Vector2i selection_end =
 	   Vector2i(text_width(selected_text, *m_->font_style, m_->font_scale), fontheight);
+	if (m_->scrolloffset != 0) {
+		selection_start.x += m_->scrolloffset;
+	}
 	dst.brighten_rect(
 	   Recti(selection_start, selection_end.x, selection_end.y), BUTTON_EDGE_BRIGHT_FACTOR);
 }
@@ -606,7 +609,7 @@ uint32_t EditBox::snap_to_char(uint32_t cursor) {
  * Find the starting byte of the next character
  */
 uint32_t EditBox::next_char(uint32_t cursor) const {
-	assert(cursor <= text.size());
+	assert(cursor <= m_->text.size());
 
 	if (cursor >= m_->text.size()) {
 		return cursor;
@@ -623,7 +626,7 @@ uint32_t EditBox::next_char(uint32_t cursor) const {
  * Find the starting byte of the previous character
  */
 uint32_t EditBox::prev_char(uint32_t cursor) const {
-	assert(cursor <= text.size());
+	assert(cursor <= m_->text.size());
 
 	if (cursor == 0) {
 		return cursor;
