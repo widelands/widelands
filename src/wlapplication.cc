@@ -880,7 +880,7 @@ bool WLApplication::init_settings() {
  */
 void WLApplication::init_language() {
 	// Set the locale dir
-	if (localedir_) {
+	if (!localedir_.empty()) {
 		i18n::set_localedir(g_fs->canonicalize_name(localedir_));
 	} else {
 		i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
