@@ -108,8 +108,9 @@ void TerrainProgram::draw(
 		// Down triangle.
 		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::DescriptionIndex terrain =
-			   player ? player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.d :
-			            field.fcoords.field->terrain_d();
+			   player && !player->see_all() ?
+			      player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.d :
+			      field.fcoords.field->terrain_d();
 			const Vector2f texture_offset =
 			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
@@ -120,8 +121,9 @@ void TerrainProgram::draw(
 		// Right triangle.
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::DescriptionIndex terrain =
-			   player ? player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.r :
-			            field.fcoords.field->terrain_r();
+			   player && !player->see_all() ?
+			      player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.r :
+			      field.fcoords.field->terrain_r();
 			const Vector2f texture_offset =
 			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);

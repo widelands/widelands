@@ -121,9 +121,9 @@ unsigned int
 MapObjectProgram::read_int(const std::string& input, int min_value, int64_t max_value) {
 	unsigned int result = 0U;
 	char* endp;
-	long int const value = strtol(input.c_str(), &endp, 0);
+	int64_t const value = strtol(input.c_str(), &endp, 0);
 	result = value;
-	if (*endp || static_cast<long>(result) != value) {
+	if (*endp || static_cast<int64_t>(result) != value) {
 		throw GameDataError("Expected a number but found \"%s\"", input.c_str());
 	}
 	if (value < min_value) {
@@ -244,7 +244,7 @@ unsigned MapObjectProgram::read_percent_to_int(const std::string& input) {
 	boost::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
 	if (boost::regex_search(input, match, re)) {
 		// Convert to range
-		unsigned long result =
+		uint64_t result =
 		   100U * std::stoul(match[1]) +
 		   (match[3].str().empty() ?
 		       0U :

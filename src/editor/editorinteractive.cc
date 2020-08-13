@@ -54,6 +54,7 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
@@ -652,7 +653,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					                         3);
 					const Image* pic = get_sel_picture();
 					blit_overlay(
-					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
 				}
 				if (selected_triangles.count(
 				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D))) {
@@ -664,7 +665,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					                         3);
 					const Image* pic = get_sel_picture();
 					blit_overlay(
-					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
 				}
 			}
 		}
