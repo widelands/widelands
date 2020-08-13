@@ -874,16 +874,16 @@ void WorkerProgram::parse_findresources(Worker::Action* act, const std::vector<s
 /* RST
 scout
 ^^^^^
-.. function:: scout=\<radius\> \<time\>
+.. function:: scout=radius:\<number\> duration:\<duration\>
 
    :arg int radius: The radius of map fields for the scout to explore.
 
-   :arg int time: The time in milliseconds that the scout will spend scouting.
+   :arg duration duration: The time :ref:`map_object_programs_datatypes_duration` that the scout will spend scouting.
 
    Sends a scout out to run around scouting the area. Example::
 
       scout = {
-         "scout=15 75000", -- Scout within a radius of 15 for 75 seconds
+         "scout=radius:15 duration:1m15s",
          "return"
       },
 */
@@ -893,12 +893,28 @@ scout
  */
 void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 2) {
-		throw GameDataError("Usage: scout=<radius> <time>");
+		throw GameDataError("Usage: scout=radius:<number> duration:<duration>");
 	}
-
-	act->iparam1 = read_positive(cmd[0]);
-	act->iparam2 = read_positive(cmd[1]);
 	act->function = &Worker::run_scout;
+
+	if (read_key_value_pair(cmd[0], ':').second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove this option after v1.0
+		log("WARNING: 'scout' program without parameter names is deprecated, please use "
+			"'scout=radius:<number> duration:<duration>' in %s\n", worker_.name().c_str());
+		act->iparam1 = read_positive(cmd[0]);
+		act->iparam2 = read_positive(cmd[1]);
+	} else {
+		for (const std::string& argument : cmd) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.first == "radius") {
+				act->iparam1 = read_positive(item.second);
+			} else if (item.first == "duration") {
+				act->iparam2 = read_duration(item.second, worker_);
+			} else {
+				throw GameDataError("Unknown parameter '%s'. Usage: scout=radius:<number> duration:<duration>", item.first.c_str());
+			}
+		}
+	}
 }
 
 /* RST
