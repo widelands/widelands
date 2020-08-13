@@ -52,7 +52,12 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << endl
 #ifdef __linux__
 	          << _("                      Default is ~/.widelands") << endl
+#elif _WIN32
+	          << _("                      Default is %USERPROFILE%\\.widelands") << endl
 #endif
+	          << endl
+	          << _(" --localedir=DIRNAME  Use specified directory for the widelands\n"
+	               "                      locale files")
 	          << endl
 	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
