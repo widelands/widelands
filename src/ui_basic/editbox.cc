@@ -237,6 +237,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_a:
 			if ((SDL_GetModState() & KMOD_CTRL)) {
+				//				m_->caret = 0;
 				m_->selection_start = 0;
 				m_->selection_end = m_->text.size();
 				m_->mode = EditBoxImpl::Mode::kSelection;
@@ -272,6 +273,16 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			FALLS_THROUGH;
 		case SDLK_DELETE:
+			if (m_->mode == EditBoxImpl::Mode::kSelection) {
+				delete_selected_text();
+				if (m_->text.empty()) {
+					m_->caret = 0;
+				}
+				check_caret();
+				changed();
+				return true;
+			}
+
 			if (m_->caret < m_->text.size()) {
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
 				}
@@ -283,13 +294,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_BACKSPACE:
 			log("start: %d, end: %d, caret: %d\n", m_->selection_start, m_->selection_end, m_->caret);
 			if (m_->mode == EditBoxImpl::Mode::kSelection) {
-				if (m_->selection_start <= m_->selection_end) {
-					size_t nr_characters = m_->selection_end - m_->selection_start;
-					m_->text.erase(m_->selection_start, nr_characters);
-				} else {
-					size_t nr_characters = m_->selection_start - m_->selection_end;
-					m_->text.erase(m_->selection_end, nr_characters);
-				}
+				delete_selected_text();
 				if (m_->text.empty()) {
 					m_->caret = 0;
 				}
@@ -441,6 +446,15 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 		changed();
 	}
 	return true;
+}
+
+void EditBox::delete_selected_text() {
+	uint32_t start, end;
+	calculate_selection_boundaries(start, end);
+	uint32_t nbytes = end - start;
+	m_->text.erase(start, nbytes);
+	changed();
+	reset_selection();
 }
 
 void EditBox::draw(RenderTarget& dst) {

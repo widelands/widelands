@@ -98,6 +98,7 @@ private:
 	void select_until(uint32_t end) const;
 	uint32_t next_char(uint32_t cursor);
 	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
+	void delete_selected_text();
 };
 }  // namespace UI
 
