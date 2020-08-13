@@ -42,7 +42,8 @@ bool from_unsigned(unsigned value) {
 	return value == 1;
 }
 
-void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
+void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase, const WorldLegacyLookupTable& world_lookup_table,
+								const TribesLegacyLookupTable& tribes_lookup_table) {
 	FileRead fr;
 	if (!fr.try_open(fs, "binary/view")) {
 		// TODO(Nordfriese): Savegame compatibility – require this packet after v1.0
@@ -212,21 +213,20 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 						field->constructionsite.becomes = nullptr;
 					} else {
 						// I here assume that no two immovables will have the same internal name
-						// NOCOM use the legacy tables
 						if (descr == "flag") {
 							field->map_object_descr = &g_flag_descr;
 						} else if (descr == "portdock") {
 							field->map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di = egbase.tribes().building_index(descr);
+							DescriptionIndex di = egbase.tribes().building_index(tribes_lookup_table.lookup_building(descr));
 							if (di != INVALID_INDEX) {
 								field->map_object_descr = egbase.tribes().get_building_descr(di);
 							} else {
-								di = egbase.world().get_immovable_index(descr);
+								di = egbase.world().get_immovable_index(world_lookup_table.lookup_immovable(descr));
 								if (di != INVALID_INDEX) {
 									field->map_object_descr = egbase.world().get_immovable_descr(di);
 								} else {
-									di = egbase.tribes().immovable_index(descr);
+									di = egbase.tribes().immovable_index(tribes_lookup_table.lookup_immovable(descr));
 									if (di != INVALID_INDEX) {
 										field->map_object_descr = egbase.tribes().get_immovable_descr(di);
 									} else {
@@ -241,18 +241,18 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 							field->constructionsite.becomes = nullptr;
 						} else {
 							field->constructionsite.becomes = egbase.tribes().get_building_descr(
-							   egbase.tribes().safe_building_index(descr));
+							   egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(descr)));
 
 							descr = fr.string();
 							field->constructionsite.was = descr.empty() ?
 							                            nullptr :
 							                            egbase.tribes().get_building_descr(
-							                               egbase.tribes().safe_building_index(descr));
+							                               egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(descr)));
 
 							for (uint8_t j = fr.unsigned_32(); j; --j) {
 								field->constructionsite.intermediates.push_back(
 								   egbase.tribes().get_building_descr(
-								      egbase.tribes().safe_building_index(fr.string())));
+								      egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(fr.string()))));
 							}
 
 							field->constructionsite.totaltime = fr.unsigned_32();
