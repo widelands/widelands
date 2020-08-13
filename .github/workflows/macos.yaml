@@ -21,5 +21,9 @@ jobs:
     - name: Build
       run: |
         mkdir build_wl
+        pwd
+        ls
         cd build_wl/
+        pwd
+        ls
         ../utils/build_app.sh gcc release ../widelands/
