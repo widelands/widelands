@@ -183,11 +183,11 @@ void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std:
 /* RST
 mine
 ^^^^
-.. function:: mine=\<resource_name\> \<area\>
+.. function:: mine=\<resource_name\> radius:\<number\>
 
    :arg string resource_name: The map resource to mine, e.g. ``fish``.
 
-   :arg int area: The radius that is scanned for decreasing the map resource, e.g. ``1``.
+   :arg int radius: The workarea radius that is scanned for decreasing the map resource, e.g. ``1``.
 
    Mine on the current coordinates that the worker has walked to for resources decrease.
    Example::
@@ -196,7 +196,7 @@ mine
          "findspace=size:any radius:7 resource:fish",
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net 192",
-         "mine=fish 1", -- Remove a fish in an area of 1
+         "mine=fish radius:1", -- Remove a fish in an area of 1
          "animate=fishing duration:3s",
          "playsound=sound/fisher/fisher_pull_net 192",
          "createware=fish",
@@ -209,12 +209,31 @@ mine
  */
 void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 2) {
-		throw GameDataError("Usage: mine=<ware type> <workarea radius>");
+		throw GameDataError("Usage: mine=<resource_name> radius:<number>");
 	}
 
 	act->function = &Worker::run_mine;
-	act->sparam1 = cmd[0];
-	act->iparam1 = read_positive(cmd[1]);
+
+
+
+	if (read_key_value_pair(cmd[1], ':').second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove this option after v1.0
+		log("WARNING: 'mine' program without parameter names is deprecated, please use "
+			"'mine=<resource_name> radius:<number>' in %s\n", worker_.name().c_str());
+		act->sparam1 = cmd[0];
+		act->iparam1 = read_positive(cmd[1]);
+	} else {
+		for (const std::string& argument : cmd) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.first == "radius") {
+				act->iparam1 = read_positive(item.second);
+			} else if (item.second.empty()) {
+				act->sparam1 = item.first;
+			} else {
+				throw GameDataError("Unknown parameter '%s'. Usage: mine=<resource_name> radius:<number>", item.first.c_str());
+			}
+		}
+	}
 }
 
 /* RST
