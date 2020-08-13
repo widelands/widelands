@@ -6,9 +6,7 @@ on: [push]
 
 jobs:
   macos:
-    strategy:
-      matrix:
-        os: [macOS-latest]
+    runs-on: macOS-latest
     steps:
     - name: Installing dependencies
       run: |
