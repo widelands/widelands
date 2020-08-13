@@ -204,7 +204,7 @@ private:
 
 	void initialization_error(const char* const msg, bool quit_sdl);
 
-	bool play_or_not(SoundType type, FxId fx_id, const uint16_t priority, bool allow_multiple);
+	bool play_or_not(SoundType type, FxId fx_id, uint16_t priority, bool allow_multiple);
 	void start_music(const std::string& songset_name);
 
 	static void music_finished_callback();
