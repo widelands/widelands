@@ -50,18 +50,16 @@ Animation::Animation(const LuaTable& table)
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
 			sound_effect_ =
 			   SoundHandler::register_fx(SoundType::kAmbient, sound_effects->get_string("path"));
+			sound_priority_ = 100 * sound_effects->get_double("priority");
 
-			if (sound_effects->has_key<std::string>("priority")) {
-				sound_priority_ = sound_effects->get_int("priority");
-			}
 			if (sound_effects->has_key<std::string>("allow_multiple")) {
 				sound_allow_multiple_ = sound_effects->get_bool("allow_multiple");
 			}
 
 			if (sound_priority_ < kFxPriorityLowest) {
 				throw Widelands::GameDataError(
-				   "Minmum priority for sounds is %d, but only %d was specified for %s",
-				   kFxPriorityLowest, sound_priority_, sound_effects->get_string("path").c_str());
+				   "Minmum priority for sounds is 0.01, but only %.2f was specified for %s",
+				   sound_effects->get_double("priority"), sound_effects->get_string("path").c_str());
 			}
 		}
 	} catch (const LuaError& e) {
