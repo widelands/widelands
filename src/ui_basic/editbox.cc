@@ -232,7 +232,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 				auto nr_characters = end - start;
 				std::string selected_text = m_->text.substr(start, nr_characters);
-				log("%s\n", selected_text.c_str());
 				SDL_SetClipboardText(selected_text.c_str());
 				return true;
 			}
@@ -294,7 +293,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			FALLS_THROUGH;
 		case SDLK_BACKSPACE:
-			log("start: %d, end: %d, caret: %d\n", m_->selection_start, m_->selection_end, m_->caret);
 			if (m_->mode == EditBoxImpl::Mode::kSelection) {
 				delete_selected_text();
 				if (m_->text.empty()) {
@@ -317,21 +315,33 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
-				if (SDL_GetModState() & KMOD_SHIFT) {
-					select_until(m_->caret - 1);
-				} else {
-					reset_selection();
-				}
-
-				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
-				}
 
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-					for (uint32_t new_caret = m_->caret;; m_->caret = new_caret) {
-						if (0 == new_caret || isspace(m_->text[--new_caret])) {
+					uint32_t newpos = prev_char(m_->caret);
+					while (newpos > 0 && isspace(m_->text[newpos])) {
+						newpos = prev_char(newpos);
+					}
+					while (newpos > 0) {
+						uint32_t prev = prev_char(newpos);
+						if (isspace(m_->text[prev])) {
 							break;
 						}
+						newpos = prev;
 					}
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(newpos);
+					} else {
+						reset_selection();
+					}
+					m_->caret = newpos;
+
+				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(prev_char(m_->caret));
+					} else {
+						reset_selection();
+					}
+					m_->caret = prev_char(m_->caret);
 				}
 				check_caret();
 			}
@@ -339,23 +349,29 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
-				if (SDL_GetModState() & KMOD_SHIFT) {
-					select_until(m_->caret + 1);
-				} else {
-					reset_selection();
-				}
-
-				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
-					// We're just advancing the caret
-				}
 
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-					for (uint32_t new_caret = m_->caret;; ++new_caret) {
-						if (new_caret == m_->text.size() || isspace(m_->text[new_caret - 1])) {
-							m_->caret = new_caret;
-							break;
-						}
+					uint32_t newpos = next_char(m_->caret);
+					while (newpos < m_->text.size() && isspace(m_->text[newpos])) {
+						newpos = next_char(newpos);
 					}
+					while (newpos < m_->text.size() && !isspace(m_->text[newpos])) {
+						newpos = next_char(newpos);
+					}
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(newpos);
+					} else {
+						reset_selection();
+					}
+					m_->caret = newpos;
+
+				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(next_char(m_->caret));
+					} else {
+						reset_selection();
+					}
+					m_->caret = next_char(m_->caret);
 				}
 				check_caret();
 			}
@@ -589,7 +605,7 @@ uint32_t EditBox::snap_to_char(uint32_t cursor) {
 /**
  * Find the starting byte of the next character
  */
-uint32_t EditBox::next_char(uint32_t cursor) {
+uint32_t EditBox::next_char(uint32_t cursor) const {
 	assert(cursor <= text.size());
 
 	if (cursor >= m_->text.size()) {
@@ -599,6 +615,24 @@ uint32_t EditBox::next_char(uint32_t cursor) {
 	do {
 		++cursor;
 	} while (cursor < m_->text.size() && Utf8::is_utf8_extended(m_->text[cursor]));
+
+	return cursor;
+}
+
+/**
+ * Find the starting byte of the previous character
+ */
+uint32_t EditBox::prev_char(uint32_t cursor) const {
+	assert(cursor <= text.size());
+
+	if (cursor == 0) {
+		return cursor;
+	}
+
+	do {
+		--cursor;
+		// TODO(GunChleoc): See if we can go full ICU here.
+	} while (cursor > 0 && Utf8::is_utf8_extended(m_->text[cursor]));
 
 	return cursor;
 }

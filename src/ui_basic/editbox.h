@@ -96,7 +96,8 @@ private:
 	bool warning_;
 	uint32_t snap_to_char(uint32_t cursor);
 	void select_until(uint32_t end) const;
-	uint32_t next_char(uint32_t cursor);
+	uint32_t next_char(uint32_t cursor) const;
+	uint32_t prev_char(uint32_t cursor) const;
 	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
 	void delete_selected_text();
 };

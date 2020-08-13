@@ -275,7 +275,6 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 				auto nr_characters = end - start;
 				std::string selected_text = d_->text.substr(start, nr_characters);
 
-				log("%s\n", selected_text.c_str());
 				SDL_SetClipboardText(selected_text.c_str());
 				return true;
 			}
