@@ -187,7 +187,7 @@ mine
 
    :arg string resource_name: The map resource to mine, e.g. ``fish``.
 
-   :arg int radius: The workarea radius that is scanned for decreasing the map resource, e.g. ``1``.
+   :arg int radius: After the worker has found a spot, the radius that is scanned for decreasing the map resource, e.g. ``1``.
 
    Mine on the current coordinates that the worker has walked to for resources decrease.
    Example::
@@ -214,8 +214,6 @@ void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::strin
 
 	act->function = &Worker::run_mine;
 
-
-
 	if (read_key_value_pair(cmd[1], ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this option after v1.0
 		log("WARNING: 'mine' program without parameter names is deprecated, please use "
@@ -239,11 +237,11 @@ void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::strin
 /* RST
 breed
 ^^^^^
-.. function:: breed=\<resource_name\> \<area\>
+.. function:: breed=\<resource_name\> radius:\<number\>
 
    :arg string resource_name: The map resource to breed, e.g. ``fish``.
 
-   :arg int area: The radius that is scanned for increasing the map resource, e.g. ``1``.
+   :arg int radius: After the worker has found a spot, the radius that is scanned for increasing the map resource, e.g. ``1``.
 
    Breed a resource on the current coordinates that the worker has walked to for
    resources increase. Example::
@@ -252,7 +250,7 @@ breed
          "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
          "animate=freeing duration:3s",
-         "breed=fish 1", -- Add a fish in an area of 1
+         "breed=fish radius:1", -- Add a fish in an area of 1
          "return"
       },
 */
@@ -262,12 +260,29 @@ breed
  */
 void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 2) {
-		throw GameDataError("Usage: breed=<ware type> <workarea radius>");
+		throw GameDataError("Usage: breed=<resource_name> radius:<number>");
 	}
 
 	act->function = &Worker::run_breed;
-	act->sparam1 = cmd[0];
-	act->iparam1 = read_positive(cmd[1]);
+
+	if (read_key_value_pair(cmd[1], ':').second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove this option after v1.0
+		log("WARNING: 'breed' program without parameter names is deprecated, please use "
+			"'breed=<resource_name> radius:<number>' in %s\n", worker_.name().c_str());
+		act->sparam1 = cmd[0];
+		act->iparam1 = read_positive(cmd[1]);
+	} else {
+		for (const std::string& argument : cmd) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.first == "radius") {
+				act->iparam1 = read_positive(item.second);
+			} else if (item.second.empty()) {
+				act->sparam1 = item.first;
+			} else {
+				throw GameDataError("Unknown parameter '%s'. Usage: breed=<resource_name> radius:<number>", item.first.c_str());
+			}
+		}
+	}
 }
 
 /* RST
