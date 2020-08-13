@@ -795,7 +795,9 @@ void WorkerProgram::parse_removeobject(Worker::Action* act, const std::vector<st
 /* RST
 repeatsearch
 ^^^^^^^^^^^^
-.. function:: repeatsearch=\<repetitions\> \<radius\> \<program_name\>
+.. function:: repeatsearch=\<program_name\> repetitions:\<number\> radius:\<number\>
+
+   :arg string program_name: The name of the program to call from this program
 
    :arg int repetitions: The number of times that the worker will move to a
       different spot on the map to execute ``program_name``. Used by geologists.
@@ -816,13 +818,32 @@ repeatsearch
  */
 void WorkerProgram::parse_repeatsearch(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 3) {
-		throw GameDataError("Usage: repeatsearch=<repeat #> <radius> <subcommand>");
+		throw GameDataError("Usage: repeatsearch=<program_name> repetitions<number> radius:<number>");
 	}
 
 	act->function = &Worker::run_repeatsearch;
-	act->iparam1 = read_positive(cmd[0]);
-	act->iparam2 = read_positive(cmd[1]);
-	act->sparam1 = cmd[2];
+
+	if (read_key_value_pair(cmd[1], ':').second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove this option after v1.0
+		log("WARNING: 'repeatsearch' program without parameter names is deprecated, please use "
+			"'repeatsearch=<program_name> repetitions:<number> radius:<number>' in %s\n", worker_.name().c_str());
+		act->iparam1 = read_positive(cmd[0]);
+		act->iparam2 = read_positive(cmd[1]);
+		act->sparam1 = cmd[2];
+	} else {
+		for (const std::string& argument : cmd) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.first == "repetitions") {
+				act->iparam1 = read_positive(item.second);
+			} else if (item.first == "radius") {
+				act->iparam2 = read_positive(item.second);
+			} else if (item.second.empty()) {
+				act->sparam1 = item.first;
+			} else {
+				throw GameDataError("Unknown parameter '%s'. Usage: repeatsearch=<program_name> repetitions:<number> radius:<number>", item.first.c_str());
+			}
+		}
+	}
 }
 
 /* RST
