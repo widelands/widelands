@@ -2,10 +2,17 @@ name: MacOS
 
 on: [push]
 
-# cp utils/macos/build_app.sh build_wl/
-
 jobs:
   macos:
+    strategy:
+      matrix:
+        config:
+          - release
+          - debug
+        compiler:
+          - gcc
+          - clang
+    name: MacOs ${{ matrix.config }} ${{ matrix.compiler }} Build
     runs-on: macOS-latest
     steps:
     - name: Installing dependencies
@@ -13,7 +20,7 @@ jobs:
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
         brew install gcc@7
-        brew install boost ccache doxygen gcc glew graphviz ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
+        brew install boost ccache doxygen glew graphviz ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -21,9 +28,5 @@ jobs:
     - name: Build
       run: |
         mkdir build_wl
-        pwd
-        ls
         cd build_wl/
-        pwd
-        ls
-        ../utils/macos/build_app.sh gcc release ../
+        ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
