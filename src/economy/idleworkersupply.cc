@@ -87,12 +87,12 @@ PlayerImmovable* IdleWorkerSupply::get_position(Game& game) {
 	return worker_.get_location(game);
 }
 
-uint32_t IdleWorkerSupply::nr_supplies(const Game&, const Request& req) const {
+uint32_t IdleWorkerSupply::nr_supplies(const Game& game, const Request& req) const {
 	assert(req.get_type() != wwWORKER || worker_.owner().tribe().has_worker(req.get_index()));
 	if (req.get_type() == wwWORKER &&
 	    (req.get_index() == worker_.descr().worker_index() ||
 	     (!req.get_exact_match() && worker_.descr().can_act_as(req.get_index()))) &&
-	    req.get_requirements().check(worker_)) {
+	    !worker_.get_carried_ware(game) && req.get_requirements().check(worker_)) {
 		return 1;
 	}
 	return 0;
