@@ -36,7 +36,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          descname = "felling trees",
          actions = {
             "sleep=400000", -- Barbarian lumberjack sleeps 25000
