@@ -2,6 +2,10 @@ name: MacOS
 
 on: [push]
 
+env:
+  release: notset
+  debug: notset
+
 jobs:
   macos:
     strategy:
@@ -23,9 +27,15 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
-    - name: Build
+    - name: Building
       run: |
         mkdir build_wl
         cd build_wl/
         ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
-        ls *.dmg
+        ls *.dmg > DMGFILE
+        echo "::set-env name=DMG_${{ matrix.config }}::$DMGFILE"
+    - name: Uploading DMG
+      uses: actions/upload-artifact@v2
+      with:
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} AppImage
+        path: ${{ github.workspace }}/build_wl/${{ env.config }}
