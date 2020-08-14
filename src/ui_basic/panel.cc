@@ -958,7 +958,8 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 	// text input. We don't know which ones they are, so we block all except
 	// those we know we want to pass through. This list may be expanded.
 	if (handles_textinput()) {
-		if (code.mod & KMOD_CTRL || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12)) {
+		if (code.mod & KMOD_CTRL || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12) ||
+		    code.sym == SDLK_PAUSE) {
 			return false;
 		}
 		return true;
