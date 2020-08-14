@@ -1226,7 +1226,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		field.border_bl = field.border && bl_vision != SeeUnseeNode::kUnexplored &&
 		                  fields_[bl_index].border && fields_[bl_index].owner == field.owner;
 		{
-			const MapObjectDescr* map_object_descr;
+			const MapObjectDescr* map_object_descr = nullptr;
 			if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
 
@@ -1237,6 +1237,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 					if (building->get_position() != f) {
 						// This is not the building's main position. We don't store the building's
 						// description here but in its main position instead.
+						map_object_descr = nullptr;
 						FCoords main_coords = map.get_fcoords(building->get_position());
 						Field& field_main = fields_[main_coords.field - &first_map_field];
 						if (field_main.seeing != SeeUnseeNode::kVisible) {
@@ -1255,8 +1256,6 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 						}
 					}
 				}
-			} else {
-				map_object_descr = nullptr;
 			}
 			field.map_object_descr = map_object_descr;
 		}
