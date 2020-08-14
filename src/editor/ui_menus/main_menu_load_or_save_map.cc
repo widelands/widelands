@@ -97,7 +97,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	display_mode_.add(_("File names"), MapData::DisplayType::kFilenames);
 	display_mode_.add(_("Original map names"), MapData::DisplayType::kMapnames);
 	display_mode_.add(
-	   _("Localized map names"), MapData::DisplayType::kMapnamesLocalized, nullptr, true);
+	   _("Translated map names"), MapData::DisplayType::kMapnamesLocalized, nullptr, true);
 
 	table_.focus();
 
