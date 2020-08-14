@@ -1237,12 +1237,13 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 					if (building->get_position() != f) {
 						// This is not the building's main position. We don't store the building's
 						// description here but in its main position instead.
+						FCoords main_coords = map.get_fcoords(building->get_position());
 						Field& field_main =
-						   fields_[map.get_fcoords(building->get_position()).field - &first_map_field];
-						field_main.map_object_descr = map_object_descr;
-						map_object_descr = nullptr;
-						if (upcast(ConstructionSite const, cs, building)) {
-							field_main.constructionsite = const_cast<ConstructionSite*>(cs)->get_info();
+						   fields_[main_coords.field - &first_map_field];
+						if (field_main.seeing != SeeUnseeNode::kVisible) {
+							rediscover_node(map, main_coords);
+							field_main.time_node_last_unseen = egbase().get_gametime();
+							field_main.seeing = SeeUnseeNode::kPreviouslySeen;
 						}
 					} else {
 						if (upcast(ConstructionSite const, cs, building)) {
