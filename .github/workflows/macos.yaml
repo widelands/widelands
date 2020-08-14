@@ -3,6 +3,7 @@ name: MacOS
 on: [push]
 
 jobs:
+  if: github.event_name == 'pull_request'
   macos:
     env:
       release: notset
