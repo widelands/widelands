@@ -812,9 +812,11 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
                                        const std::vector<Serial>& soldiers) {
-	if (player(who_attacks)
-	       .is_seeing(Map::get_index(flag.get_building()->get_position(), map().get_width()))) {
-		send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
+	for (Widelands::Coords& coords : flag.get_building()->get_positions(*this)) {
+		if (player(who_attacks).is_seeing(Map::get_index(coords, map().get_width()))) {
+			send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
+			break;
+		}
 	}
 }
 
