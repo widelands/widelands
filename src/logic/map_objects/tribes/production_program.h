@@ -546,7 +546,7 @@ struct ProductionProgram : public MapObjectProgram {
 	const ProductionProgram::Groups& consumed_wares_workers() const;
 	const Buildcost& produced_wares() const;
 	const Buildcost& recruited_workers() const;
-	// Throws a GameDataError if we're trying to call an illegal program
+	// Throws a GameDataError if we're trying to call an unknown program
 	void validate_calls(const ProductionSiteDescr& descr) const;
 
 private:

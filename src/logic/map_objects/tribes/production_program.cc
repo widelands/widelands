@@ -68,7 +68,7 @@ bool match_and_skip(const std::vector<std::string>& args,
 
 Productionsite Programs
 =======================
-Productionsites can have :ref:`programs <map_object_programs>` that will be executed by the game
+Productionsites have :ref:`programs <map_object_programs>` that will be executed by the game
 engine. Each productionsite must have a program named ``main``, which will be started automatically
 when the productionsite is created in the game, and then repeated until the productionsite is
 destroyed. (Note: the main program used to be called ``work``, which has been deprecated.)
