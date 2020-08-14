@@ -1,7 +1,9 @@
-name: Deployment for MS-Windows
+name: Build
 on:
   pull_request:
     types: [ opened, synchronize ]
+  push:
+    branches: [ master ]
 
 jobs:
   clang_tidy:
@@ -15,11 +17,20 @@ jobs:
       with:
         fetch-depth: 1
     - name: Check
-      run: ./clang-tidy.sh
+      run: |
+        export CC=/usr/bin/clang
+        export CXX=/usr/bin/clang++
+        mkdir build
+        pushd build
+        cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+        python ../utils/run-clang-tidy.py -checks=-*,*braces*,cert*,clang-analyzer*,cppcoreguidelines-pro-type-static-cast-downcast,google*,performance* > ../clang-tidy.log
+        popd
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log
 
-  compile:
+  windows:
+    # Skip this job on master branch
+    if: github.ref != 'refs/heads/master'
     needs: [clang_tidy]
     strategy:
       matrix:
@@ -29,7 +40,7 @@ jobs:
         arch:
           - x64
           - x86
-    name: ${{ matrix.config }} ${{ matrix.arch }} Build
+    name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build
     runs-on: windows-latest
     steps:
     - name: Installing dependencies
