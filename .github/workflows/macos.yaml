@@ -1,13 +1,13 @@
 name: MacOS
 
 on: [push]
-#on:
-#  workflow_run:
-#    workflows: ["Clang-Tidy"]
+on:
+  workflow_run:
+    workflows: ["Clang-Tidy"]
 
 jobs:
   macos:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref != 'refs/heads/master'
     env:
       release: notset
       debug: notset
