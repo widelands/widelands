@@ -956,10 +956,29 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 
 	// If we handle text, we want to block propagation of keypresses used for
 	// text input. We don't know which ones they are, so we block all except
-	// those we know we want to pass through. This list may be expanded.
+	// those we are reasonably sure that they aren't. This list may be expanded.
 	if (handles_textinput()) {
-		if (code.mod & KMOD_CTRL || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12) ||
-		    code.sym == SDLK_PAUSE) {
+		switch (code.sym) {
+		case SDLK_ESCAPE:
+		case SDLK_PAUSE:
+		case SDLK_PRINTSCREEN:
+		case SDLK_PAGEDOWN:
+		case SDLK_PAGEUP:
+		case SDLK_HOME:
+		case SDLK_END:
+		case SDLK_DELETE:
+		case SDLK_INSERT:
+		case SDLK_BACKSPACE:
+		case SDLK_LEFT:
+		case SDLK_RIGHT:
+		case SDLK_UP:
+		case SDLK_DOWN:
+		case SDLK_LCTRL:
+		case SDLK_RCTRL:
+		case SDLK_LALT:
+			return false;
+		}
+		if (code.mod & KMOD_CTRL || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12)) {
 			return false;
 		}
 		return true;
