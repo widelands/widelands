@@ -58,7 +58,7 @@ Animation::Animation(const LuaTable& table)
 
 			if (sound_priority_ < kFxPriorityLowest) {
 				throw Widelands::GameDataError(
-				   "Minmum priority for sounds is 0.01, but only %.2f was specified for %s",
+				   "Minimum priority for sounds is 0.01, but only %.2f was specified for %s",
 				   sound_effects->get_double("priority"), sound_effects->get_string("path").c_str());
 			}
 		}

@@ -460,7 +460,7 @@ MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments
 	}
 
 	if (result.priority < kFxPriorityLowest) {
-		throw GameDataError("Minmum priority for sounds is %d, but only %d was specified for %s",
+		throw GameDataError("Minimum priority for sounds is %d, but only %d was specified for %s",
 		                    kFxPriorityLowest, result.priority, arguments.at(0).c_str());
 	}
 	return result;
