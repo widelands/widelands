@@ -31,6 +31,7 @@ jobs:
         cd build_wl/
         ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
         DMGFILE="$(ls *.dmg)"
+        pwd
         echo "DMG file is: $DMGFILE"
         echo "::set-env name=dmg::${{ github.workspace }}/build_wl/$DMGFILE"
         echo "Environment variable: ${{ env.dmg }}"
