@@ -45,7 +45,7 @@ tribes:new_productionsite_type {
          descname = _"quarrying granite",
          actions = {
             "callworker=cut_granite",
-            "sleep=17500"
+            "sleep=duration:17s500ms"
          }
       },
    },

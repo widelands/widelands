@@ -230,7 +230,7 @@ SDL_GLContext initialize(
 
 	std::vector<std::string> shading_language_version_vector;
 	boost::split(
-	   shading_language_version_vector, shading_language_version_string, boost::is_any_of("."));
+	   shading_language_version_vector, shading_language_version_string, boost::is_any_of(". "));
 	if (shading_language_version_vector.size() >= 2) {
 		// The shading language version has been detected properly. Exit if the shading language
 		// version is too old.

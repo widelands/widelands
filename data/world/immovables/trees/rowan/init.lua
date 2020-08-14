@@ -15,9 +15,9 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m",
-         "remove=40",
+         "remove=chance:15.62%",
          "grow=rowan_summer_pole",
       },
    },
@@ -42,9 +42,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
-         "remove=30",
+         "remove=chance:11.72%",
          "grow=rowan_summer_mature",
       },
    },
@@ -69,12 +69,12 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
-         "remove=7",
+         "remove=chance:2.73%",
          "seed=rowan_summer_sapling 40",
          "animate=idle duration:30s",
-         "remove=10",
+         "remove=chance:3.91%",
          "grow=rowan_summer_old",
       },
    },
@@ -101,9 +101,9 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:23m52s",
-         "transform=deadtree4 26",
+         "transform=deadtree4 chance:10.16%",
          "seed=rowan_summer_sapling 180",
       },
       fall = {

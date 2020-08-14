@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs iron_ore",
             "consume=snack",
-            "sleep=40000",
+            "sleep=duration:40s",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

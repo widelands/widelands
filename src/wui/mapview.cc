@@ -345,6 +345,7 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 }
 
 FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
+                                    const Widelands::Player* player,
                                     const Workareas& workarea,
                                     bool grid,
                                     RenderTarget* dst) {
@@ -392,7 +393,7 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 	fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
 	const float scale = 1.f / view_.zoom;
 	::draw_terrain(
-	   egbase.get_gametime(), egbase.world(), fields_to_draw_, scale, workarea, grid, dst);
+	   egbase.get_gametime(), egbase.world(), fields_to_draw_, scale, workarea, grid, player, dst);
 	return &fields_to_draw_;
 }
 
@@ -598,6 +599,7 @@ Widelands::NodeAndTriangle<> MapView::track_sel(const Vector2i& p) {
 }
 
 bool MapView::scroll_map() {
+	const bool numpad_diagonalscrolling = get_config_bool("numpad_diagonalscrolling", false);
 	// arrow keys
 	const bool kUP = get_key_state(SDL_SCANCODE_UP);
 	const bool kDOWN = get_key_state(SDL_SCANCODE_DOWN);
@@ -619,16 +621,16 @@ bool MapView::scroll_map() {
 	int32_t distance_to_scroll_y = 0;
 
 	// check the directions
-	if (kUP || kNP7 || kNP8 || kNP9) {
+	if (kUP || kNP8 || (numpad_diagonalscrolling && (kNP7 || kNP9))) {
 		distance_to_scroll_y -= scroll_distance_y;
 	}
-	if (kDOWN || kNP1 || kNP2 || kNP3) {
+	if (kDOWN || kNP2 || (numpad_diagonalscrolling && (kNP1 || kNP3))) {
 		distance_to_scroll_y += scroll_distance_y;
 	}
-	if (kLEFT || kNP1 || kNP4 || kNP7) {
+	if (kLEFT || kNP4 || (numpad_diagonalscrolling && (kNP1 || kNP7))) {
 		distance_to_scroll_x -= scroll_distance_x;
 	}
-	if (kRIGHT || kNP3 || kNP6 || kNP9) {
+	if (kRIGHT || kNP6 || (numpad_diagonalscrolling && (kNP3 || kNP9))) {
 		distance_to_scroll_x += scroll_distance_x;
 	}
 

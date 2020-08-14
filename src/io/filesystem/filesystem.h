@@ -154,7 +154,7 @@ public:
 	                                              const std::string& basename,
 	                                              const std::string& extension) const;
 
-	virtual unsigned long long disk_space() = 0;
+	virtual unsigned long long disk_space() = 0;  // NOLINT
 
 protected:
 	/// To get a filesystem, use the Create methods

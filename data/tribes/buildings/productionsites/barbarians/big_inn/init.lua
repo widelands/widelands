@@ -68,7 +68,7 @@ tribes:new_productionsite_type {
             "consume=barbarians_bread,fish,meat",
             "playsound=sound/barbarians/taverns/tavern 100",
             "animate=working duration:23s",
-            "sleep=10000",
+            "sleep=duration:10s",
             "produce=ration"
          }
       },
@@ -81,7 +81,7 @@ tribes:new_productionsite_type {
             "consume=barbarians_bread fish,meat beer",
             "playsound=sound/barbarians/taverns/biginn 100",
             "animate=working duration:27s",
-            "sleep=10000",
+            "sleep=duration:10s",
             "produce=snack"
          }
       },
@@ -94,7 +94,7 @@ tribes:new_productionsite_type {
             "consume=barbarians_bread fish,meat beer_strong",
             "playsound=sound/barbarians/taverns/biginn 100",
             "animate=working duration:30s",
-            "sleep=10000",
+            "sleep=duration:10s",
             "produce=meal"
          }
       },
