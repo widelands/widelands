@@ -10,7 +10,7 @@ jobs:
           - release
           - debug
         compiler:
-          - gcc10
+          - clang
     name: MacOs ${{ matrix.config }} ${{ matrix.compiler }} Build
     runs-on: macOS-latest
     steps:
@@ -18,7 +18,6 @@ jobs:
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        brew install gcc
         brew install boost ccache doxygen glew graphviz ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
     - name: Checkout
       uses: actions/checkout@v2
