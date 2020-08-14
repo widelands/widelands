@@ -2,12 +2,11 @@ name: MacOS
 
 on: [push]
 
-env:
-  release: notset
-  debug: notset
-
 jobs:
   macos:
+    env:
+      release: notset
+      debug: notset
     strategy:
       matrix:
         config:
@@ -38,4 +37,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} AppImage
-        path: ${{ github.workspace }}/build_wl/${{ env.config }}
+        path: ${{ github.workspace }}/build_wl/${{ macos.env.config }}
