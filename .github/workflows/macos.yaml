@@ -32,7 +32,7 @@ jobs:
         mkdir build_wl
         cd build_wl/
         ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
-        ls *.dmg > DMGFILE
+        DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGFILE"
         echo "::set-env name=DMG_${{ matrix.config }}::$DMGFILE"
     #- name: Uploading DMG
