@@ -82,7 +82,7 @@ tribes:new_immovable_type{
    attributes = { "tree_ironwood_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
          "remove=chance:13.67%",
          "grow=ironwood_amazons_pole",
@@ -103,7 +103,7 @@ tribes:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m05s",
          "remove=chance:9.37%",
          "grow=ironwood_amazons_mature",
@@ -124,7 +124,7 @@ tribes:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m12s",
          "remove=chance:7.42%",
          "grow=ironwood_amazons_old",
@@ -147,7 +147,7 @@ tribes:new_immovable_type{
    attributes = { "tree_ironwood", "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m35s",
          "transform=deadtree7 chance:12.89%",
          "seed=ironwood_amazons_sapling 50",
@@ -172,7 +172,7 @@ tribes:new_immovable_type{
    attributes = { "tree_ironwood_sapling" },
    terrain_affinity = terrain_affinity_black,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
          "remove=chance:13.67%",
          "grow=ironwood_black_amazons_pole",
@@ -193,7 +193,7 @@ tribes:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity_black,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m05s",
          "remove=chance:9.37%",
          "grow=ironwood_black_amazons_mature",
@@ -214,7 +214,7 @@ tribes:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity_black,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m12s",
          "remove=chance:7.42%",
          "grow=ironwood_black_amazons_old",
@@ -237,7 +237,7 @@ tribes:new_immovable_type{
    attributes = { "tree_ironwood", "tree" },
    terrain_affinity = terrain_affinity_black,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m35s",
          "transform=deadtree7 chance:12.89%",
          "seed=ironwood_black_amazons_sapling 50",
@@ -262,7 +262,7 @@ tribes:new_immovable_type{
    attributes = { "tree_ironwood_sapling" },
    terrain_affinity = terrain_affinity_desert,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
          "remove=chance:13.67%",
          "grow=ironwood_desert_amazons_pole",
@@ -283,7 +283,7 @@ tribes:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity_desert,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m05s",
          "remove=chance:9.37%",
          "grow=ironwood_desert_amazons_mature",
@@ -304,7 +304,7 @@ tribes:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity_desert,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m12s",
          "remove=chance:7.42%",
          "grow=ironwood_desert_amazons_old",
@@ -327,7 +327,7 @@ tribes:new_immovable_type{
    attributes = { "tree_ironwood", "tree" },
    terrain_affinity = terrain_affinity_desert,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m35s",
          "transform=deadtree7 chance:12.89%",
          "seed=ironwood_desert_amazons_sapling 50",
@@ -352,7 +352,7 @@ tribes:new_immovable_type{
    attributes = { "tree_ironwood_sapling" },
    terrain_affinity = terrain_affinity_winter,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
          "remove=chance:13.67%",
          "grow=ironwood_winter_amazons_pole",
@@ -373,7 +373,7 @@ tribes:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity_winter,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m05s",
          "remove=chance:9.37%",
          "grow=ironwood_winter_amazons_mature",
@@ -394,7 +394,7 @@ tribes:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity_winter,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m12s",
          "remove=chance:7.42%",
          "grow=ironwood_winter_amazons_old",
@@ -417,7 +417,7 @@ tribes:new_immovable_type{
    attributes = { "tree_ironwood", "tree" },
    terrain_affinity = terrain_affinity_winter,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m35s",
          "transform=deadtree7 chance:12.89%",
          "seed=ironwood_winter_amazons_sapling 50",

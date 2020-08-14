@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "field", "seed_cassava" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:30s",
          "transform=cassavarootfield_small",
       }

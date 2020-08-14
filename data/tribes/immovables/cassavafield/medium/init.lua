@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "field", "flowering" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:50s",
          "transform=cassavarootfield_ripe",
       }

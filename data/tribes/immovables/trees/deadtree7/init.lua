@@ -11,7 +11,7 @@ tribes:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:20s",
          "remove=chance:6.25%",
       },

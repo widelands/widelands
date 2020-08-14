@@ -9,7 +9,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/none_2.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -28,7 +28,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/water_2.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -47,7 +47,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/gold_1_2.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -66,7 +66,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/stones_1_2.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -85,7 +85,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/gold_2_2.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -104,7 +104,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/stones_2_2.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }

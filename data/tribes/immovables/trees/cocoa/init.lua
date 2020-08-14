@@ -9,7 +9,7 @@ tribes:new_immovable_type {
    icon = dirname .. "menu_sapling.png",
    attributes = { "seed_cocoa" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:80s",
          "remove=chance:7.81%",
          "transform=cocoa_tree_pole",
@@ -35,7 +35,7 @@ tribes:new_immovable_type {
    icon = dirname .. "menu_pole.png",
    attributes = {},
    programs = {
-      program = {
+      main = {
          "animate=idle duration:60s",
          "remove=chance:5.86%",
          "transform=cocoa_tree_mature",
@@ -61,7 +61,7 @@ tribes:new_immovable_type {
    icon = dirname .. "menu_mature.png",
    attributes = { "flowering" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:60s",
          "remove=chance:3.91%",
          "transform=cocoa_tree_old",
@@ -87,7 +87,7 @@ tribes:new_immovable_type {
    icon = dirname .. "menu_old.png",
    attributes = { "ripe_cocoa", "field"},
    programs = {
-      program = {
+      main = {
          "animate=idle duration:8m20s",
          "remove=",
       },
