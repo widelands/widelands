@@ -1600,7 +1600,7 @@ construct
 
    :arg string immovable_name: The name of the immovable to be constructed, e.g. ``barbarians_shipconstruction``.
 
-   :arg string worker: The worker's program that makes the worker walk to the immovable's location and do some work.
+   :arg string worker: The :ref:`worker's program <tribes_worker_programs>` that makes the worker walk to the immovable's location and do some work.
 
    :arg radius radius: The radius used by the worker to find a suitable construction spot on the map.
 
