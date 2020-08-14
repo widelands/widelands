@@ -35,8 +35,9 @@ jobs:
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGFILE"
         echo "::set-env name=${{ matrix.config }}::$DMGFILE"
+        echo "ENvironment variable: ${{ env.${{ matrix.config }} }}"
     - name: Uploading DMG
       uses: actions/upload-artifact@v2
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} AppImage
-        path: ${{ github.workspace }}/build_wl/${{ env.config }}
+        path: ${{ github.workspace }}/build_wl/${{ env.${{ matrix.config }} }}
