@@ -1,13 +1,13 @@
 name: MacOS
 
-#on: [push]
-on:
-  workflow_run:
-    workflows: ["Clang-Tidy"]
+on: [push]
+#on:
+#  workflow_run:
+#    workflows: ["Clang-Tidy"]
 
 jobs:
   macos:
-    if: ${{ github.event_name }} == 'pull_request'
+    if: github.ref == 'refs/heads/master'
     env:
       release: notset
       debug: notset
