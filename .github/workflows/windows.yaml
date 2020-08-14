@@ -42,7 +42,7 @@ jobs:
         } else {
           $env:archname = "i686"
         }
-        pacman.exe --noconfirm -S mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glbinding mingw-w64-$env:archname-boost
+        pacman.exe --noconfirm -S mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-boost
     - name: Checkout
       uses: actions/checkout@v2
       with:
