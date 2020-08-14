@@ -728,7 +728,7 @@ void MapBuildingdataPacket::read_productionsite(
 					log(
 					   "WARNING: productionsite has unknown program \"%s\", replacing it with \"main\"\n",
 					   program_name.c_str());
-					program_name = "main";
+					program_name = MapObjectProgram::kMainProgram;
 				}
 
 				productionsite.stack_[i].program = productionsite.descr().get_program(program_name);

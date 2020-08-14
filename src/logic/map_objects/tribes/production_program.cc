@@ -68,9 +68,10 @@ bool match_and_skip(const std::vector<std::string>& args,
 
 Productionsite Programs
 =======================
-Productionsites can have programs that will be executed by the game engine. Each productionsite must
-have a program named ``work``, which will be started automatically when the productionsite is
-created in the game, and then repeated until the productionsite is destroyed.
+Productionsites can have :ref:`programs <map_object_programs>` that will be executed by the game
+engine. Each productionsite must have a program named ``main``, which will be started automatically
+when the productionsite is created in the game, and then repeated until the productionsite is
+destroyed. (Note: the main program used to be called ``work``, which has been deprecated.)
 
 Programs are defined as Lua tables. Each program must be declared as a subtable in the
 productionsite's Lua table called ``programs`` and have a unique table key. The entries in a
@@ -78,7 +79,7 @@ program's subtable are the translatable ``descname`` and the table of ``actions`
 this::
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -92,7 +93,7 @@ that you do this whenever workers are referenced, or if your tribes have multipl
 same name::
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
          descname = pgettext("atlanteans_building", "recruiting soldier"),
          actions = {
@@ -104,7 +105,7 @@ same name::
 A program can call another program, for example::
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -131,7 +132,6 @@ A program can call another program, for example::
 
 A program consists of a sequence of actions. An action is written as
 ``<type>=<parameters>``::
-
 
    produce_snack = {
       -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
@@ -1792,8 +1792,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActReturn(parseinput.arguments, *building, tribes)));
 			} else if (parseinput.name == "call") {
-				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActCall(parseinput.arguments)));
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActCall(parseinput.arguments)));
 			} else if (parseinput.name == "sleep") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActSleep(parseinput.arguments, *building)));
@@ -1886,19 +1886,19 @@ const Buildcost& ProductionProgram::recruited_workers() const {
 }
 
 void ProductionProgram::validate_calls(const ProductionSiteDescr& descr) const {
-	for (const auto& action: actions_) {
+	for (const auto& action : actions_) {
 		const ActCall* act_call = dynamic_cast<const ActCall*>(action.get());
 		if (act_call != nullptr) {
 			const std::string& program_name = act_call->program_name();
 			if (name() == program_name) {
 				throw GameDataError("Production program '%s' in %s is calling itself",
-									program_name.c_str(), descr.name().c_str());
+				                    program_name.c_str(), descr.name().c_str());
 			}
 			const ProductionSiteDescr::Programs& programs = descr.programs();
 			ProductionSiteDescr::Programs::const_iterator const it = programs.find(program_name);
 			if (it == programs.end()) {
-				throw GameDataError("Trying to call unknown program '%s' in %s",
-									program_name.c_str(), descr.name().c_str());
+				throw GameDataError("Trying to call unknown program '%s' in %s", program_name.c_str(),
+				                    descr.name().c_str());
 			}
 		}
 	}

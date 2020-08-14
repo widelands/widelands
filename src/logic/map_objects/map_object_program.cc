@@ -60,32 +60,47 @@ Map object programs are put in a Lua table, like this:
 .. code-block:: lua
 
    programs = {
-      default_program = {
-         "program_name2",
-         "program_name3",
-      }
-      program_name2 = {
+      main = {
          "action1=parameter1:value1 parameter2:value2",
          "action2=value1",
       },
-      program_name3 = {
+      program_name2 = {
          "action3",
          "action4=value1 value2 value3",
       },
-      program_name4 = {
+      program_name3 = {
          "action5=value1 value2 parameter:value3",
       }
    },
+
+For productionsites, there is a nested ``actions`` table, so that we can give them a descname for
+the tooltips:
+
+.. code-block:: lua
+
+   programs = {
+      main = {
+         -- TRANSLATORS: Completed/Skipped/Did not start doing something because ...
+         descname = _"doing something",
+         actions = {
+            "call=program_name2",
+            "call=program_name3",
+         }
+         ...
+     }
+   }
 
 * Named parameters of the form ``parameter:value`` can be given in any order, but we recommend using
   the order from the documentation for consistency. It will make your code easier to read.
 * Values without parameter name need to be given in the correct order.
 * Some actions combine both named and unnamed values, see ``action5`` in our example.
 
-The first program is the default program that calls all the other programs. For productionsites,
-this is ``"work"``, and for immovables, this is ``"program"``. Workers have no default program,
-because their individual programs are called from their production site.
-
+If there is a program called ``"main"``, this is the default program.
+For :ref:`productionsites <productionsite_programs>`, having a main program is mandatory.
+For :ref:`immovables <immovable_programs>`, having a main program is optional, because their
+programs can also be triggered by a productionsite or by a worker. :ref:`Workers
+<tribes_worker_programs>` have no default program, because their individual programs are always
+called from their production site.
 
 .. _map_object_programs_datatypes:
 
