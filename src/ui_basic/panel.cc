@@ -950,11 +950,20 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 		return false;
 	}
 
-	// If we handle text, it does not matter if we handled this key
-	// or not, it should not propagate.
-	if (handle_key(down, code) || handles_textinput()) {
+	if (handle_key(down, code)) {
 		return true;
 	}
+
+	// If we handle text, we want to block propagation of keypresses used for
+	// text input. We don't know which ones they are, so we block all except
+	// those we know we want to pass through. This list may be expanded.
+	if (handles_textinput()) {
+		if (code.mod & KMOD_CTRL || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12)) {
+			return false;
+		}
+		return true;
+	}
+
 	return false;
 }
 
