@@ -1,9 +1,6 @@
 name: MacOS
 
-#on: [push]
-on:
-  workflow_run:
-    workflows: ["Clang-Tidy"]
+on: [push]
 
 jobs:
   macos:
