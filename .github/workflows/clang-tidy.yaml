@@ -4,6 +4,8 @@ on:
   push:
     branches: [ master, build-macos ]
 
+# ./clang-tidy.sh
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -16,6 +18,6 @@ jobs:
       with:
         fetch-depth: 1
     - name: Check
-      run: ./clang-tidy.sh
+      run: echo "test"
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log
