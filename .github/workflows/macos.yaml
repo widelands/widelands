@@ -26,6 +26,9 @@ jobs:
         echo "Event name ${{ github.event_name }}"
         echo "Event ${{ github.event }}"
         brew install boost ccache doxygen glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
+        echo "**********************************************"
+        echo "Event name ${{ github.event_name }}"
+        echo "Event ${{ github.event }}"
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -33,6 +36,9 @@ jobs:
     - name: Building
       if: ${{ github.event_name }} == 'pull_request'
       run: |
+        echo "**********************************************"
+        echo "Event name ${{ github.event_name }}"
+        echo "Event ${{ github.event }}"
         mkdir build_wl
         cd build_wl/
         ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
