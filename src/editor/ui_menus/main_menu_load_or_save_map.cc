@@ -94,10 +94,13 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	table_and_details_box_.add(&map_details_box_, UI::Box::Resizing::kFullSize);
 	map_details_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 
+	const bool locale_is_en = i18n::get_locale() == "en" || i18n::get_locale().find("en_") == 0;
 	display_mode_.add(_("File names"), MapData::DisplayType::kFilenames);
-	display_mode_.add(_("Original map names"), MapData::DisplayType::kMapnames);
-	display_mode_.add(
-	   _("Translated map names"), MapData::DisplayType::kMapnamesLocalized, nullptr, true);
+	display_mode_.add(_("Original map names"), MapData::DisplayType::kMapnames, nullptr, locale_is_en);
+	if (!locale_is_en) {
+		display_mode_.add(
+		   _("Translated map names"), MapData::DisplayType::kMapnamesLocalized, nullptr, true);
+	}
 
 	table_.focus();
 
