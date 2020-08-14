@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   macos:
+    if: ${{ github.event_name }} == 'pull_request'
     env:
       release: notset
       debug: notset
