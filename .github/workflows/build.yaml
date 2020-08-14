@@ -120,14 +120,14 @@ jobs:
         mkdir build_wl
         cd build_wl/
         ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
-# Code for uploading artifact starts here. It's not being found although the paths match.
-#        DMGPATH="$(pwd)"
-#        DMGFILE="$(ls *.dmg)"
-#        echo "DMG file is: $DMGPATH/$DMGFILE"
-#        echo "::set-env name=dmg::$DMGPATH/$DMGFILE"
+        DMGPATH="$(pwd)"
+        DMGFILE="$(ls *.dmg)"
+        echo "DMG file is: $DMGPATH/$DMGFILE"
+        mv $DMGFILE ${{ github.workspace }}\Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.clang }}.dmg
+        #echo "::set-env name=dmg::$DMGPATH/$DMGFILE"
 
-#    - name: Uploading DMG
-#      uses: actions/upload-artifact@v2
-#      with:
-#        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} AppImage
-#        path: ${{ env.dmg }}
+    - name: Uploading DMG
+      uses: actions/upload-artifact@v2
+      with:
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} AppImage
+        path: ${{ github.workspace }}\Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.clang }}.dmg
