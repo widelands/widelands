@@ -3,7 +3,6 @@ name: MacOS
 on: [push]
 
 jobs:
-  if: github.event_name == 'pull_request'
   macos:
     env:
       release: notset
@@ -28,6 +27,7 @@ jobs:
       with:
         fetch-depth: 1
     - name: Building
+      if: github.event_name == 'pull_request'
       run: |
         mkdir build_wl
         cd build_wl/
