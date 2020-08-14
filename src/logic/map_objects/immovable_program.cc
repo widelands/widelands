@@ -490,45 +490,63 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 
 construct
 ---------
-Blocks execution until enough wares have been delivered to this immovable by a worker.
+.. function:: construct=\<animation_name\> duration:\<duration\> decay_after:\<duration\>
 
-Parameter syntax::
+   :arg string animation_name: The animation to display while the immovable is being constructed.
+   :arg duration duration: The :ref:`map_object_programs_datatypes_duration` of each construction
+      step for visualising the construction progress. Used only in drawing code.
+   :arg duration decay_after: When no construction material has been delivered for this
+      :ref:`map_object_programs_datatypes_duration`, the construction progress starts to gradually
+      reverse.
 
-  parameters ::= animation build decay
+   Blocks execution of subsequent programs until enough wares have been delivered to this immovable
+   by a worker. The wares to deliver are specified in the immovable's ``buildcost`` table which is
+   mandatory for immovables using the ``construct`` command. If no wares are being delivered for a
+   while, the progress gradually starts to reverse, increasing the number of wares left to deliver.
+   If the immovable keeps decaying, it will eventually be removed. Example:
 
-Parameter semantics:
+.. code-block:: lua
 
-``animation``
-    The animation to display while the immovable is being constructed.
-``build``
-    The duration of each construction step in milliseconds for visualising the construction
-    progress. Used only in drawing code.
-``decay``
-    When no construction material has been delivered for this many milliseconds, the construction
-    progress starts to gradually reverse.
-
-Blocks execution of subsequent programs until enough wares have been delivered to this immovable by
-a worker. The wares to deliver are specified in the immovable's ``buildcost`` table which is
-mandatory for immovables using the ``construct`` command. If no wares are being delivered for a
-while, the progress gradually starts to reverse, increasing the number of wares left to deliver. If
-the immovable keeps decaying, it will eventually be removed.
+      main = {
+         "construct=idle duration:5s decay_after:3m30s",
+         "transform=bob:frisians_ship",
+      }
 */
 ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments,
                                              const ImmovableDescr& descr) {
 	if (arguments.size() != 3) {
-		throw GameDataError("Usage: construct=<animation> <build duration> <decay duration>");
+		throw GameDataError(
+		   "Usage: construct=<animation_name> duration:<duration> decay_after:<duration>");
 	}
-	try {
+	if (read_key_value_pair(arguments[1], ':').second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
+		log("WARNING: Old-style syntax found for 'construct' program in %s, use "
+		    "construct=<animation_name> duration:<duration> decay_after:<duration> instead.\n",
+		    descr.name().c_str());
 		animation_name_ = arguments[0];
-		if (!descr.is_animation_known(animation_name_)) {
-			throw GameDataError("Unknown animation '%s' in immovable program for immovable '%s'",
-			                    animation_name_.c_str(), descr.name().c_str());
-		}
 
 		buildtime_ = read_positive(arguments[1]);
 		decaytime_ = read_positive(arguments[2]);
-	} catch (const WException& e) {
-		throw GameDataError("construct: %s", e.what());
+	} else {
+		for (const std::string& argument : arguments) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+
+			if (item.first == "duration") {
+				buildtime_ = read_duration(item.second, descr);
+			} else if (item.first == "decay_after") {
+				decaytime_ = read_duration(item.second, descr);
+			} else if (item.second.empty()) {
+				animation_name_ = item.first;
+			} else {
+				throw GameDataError("Unknown predicate '%s'. Usage: construct=<animation_name> "
+				                    "duration:<duration> decay_after:<duration>.",
+				                    argument.c_str());
+			}
+		}
+	}
+
+	if (!descr.is_animation_known(animation_name_)) {
+		throw GameDataError("Unknown animation '%s'", animation_name_.c_str());
 	}
 }
 
