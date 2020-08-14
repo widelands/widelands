@@ -481,14 +481,15 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 
 		// Add road building overlays if applicable.
-		const InfoToDraw info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			draw_road_building(*f);
 
 			draw_bridges(dst, f, f->seeing == Widelands::SeeUnseeNode::kVisible ? gametime : 0, scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 
-			// Render stuff that belongs to the node.
+			// Draw immovables and bobs.
+			const InfoToDraw info_to_draw = get_info_to_draw(!given_map_view->is_animating());
+
 			if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
 				draw_immovables_for_visible_field(
 				   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
