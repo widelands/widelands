@@ -1596,34 +1596,72 @@ void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) co
 /* RST
 construct
 ---------
-Construct an immovable on the seashore.
+.. function:: construct=\<immovable_name\> worker:\<program_name\> radius:\<number\>
 
-Parameter syntax::
+   :arg string immovable_name: The name of the :ref:`immovable <lua_tribes_immovables>` to be
+      constructed, e.g. ``barbarians_shipconstruction``.
 
-  parameters ::= <object_name> <worker_program> <workarea_radius>
+   :arg string worker: The :ref:`worker's program <tribes_worker_programs>` that makes the worker
+      walk to the immovable's location and do some work.
 
-Parameter semantics:
-
-``object_name``
-    The name of the immovable to be constructed, e.g. ``barbarians_shipconstruction``.
-``worker_program``
-    The worker's program that makes him walk to the immovable's location and do some work.
-``workarea_radius``
-    The radius used by the worker to find a suitable construction spot on the map.
+   :arg radius radius: The radius used by the worker to find a suitable construction spot on the
+      map.
 
 Sends the main worker to look for a suitable spot on the shore and to perform construction work on
-an immovable.
+an immovable. Example:
+
+.. code-block:: lua
+
+      -- Production program actions
+      actions = {
+         "construct=barbarians_shipconstruction worker:buildship radius:6",
+         "sleep=duration:20s",
+      }
+
+      -- Corresponding worker program
+      buildship = {
+         "walk=object-or-coords",
+         "plant=attrib:shipconstruction unless object",
+         "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
+         "animate=work duration:500ms",
+         "construct",
+         "animate=work duration:5s",
+         "return"
+      },
 */
 ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& arguments,
                                               const std::string& production_program_name,
                                               ProductionSiteDescr* descr,
                                               const Tribes& tribes) {
 	if (arguments.size() != 3) {
-		throw GameDataError("Usage: construct=<object name> <worker program> <workarea radius>");
+		throw GameDataError(
+		   "Usage: construct=<immovable_name> worker:<program_name> radius:<number>");
 	}
-	objectname = arguments.at(0);
-	workerprogram = arguments.at(1);
-	radius = read_positive(arguments.at(2));
+
+	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
+		log("WARNING: 'construct' program without parameter names is deprecated, please use "
+		    "'construct=<immovable_name> worker:<program_name> radius:<number>' in %s\n",
+		    descr->name().c_str());
+		objectname = arguments.at(0);
+		workerprogram = arguments.at(1);
+		radius = read_positive(arguments.at(2));
+	} else {
+		for (const std::string& argument : arguments) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.first == "worker") {
+				workerprogram = item.second;
+			} else if (item.first == "radius") {
+				radius = read_positive(item.second);
+			} else if (item.second.empty()) {
+				objectname = item.first;
+			} else {
+				throw GameDataError("Unknown parameter '%s'. Usage: construct=<immovable_name> "
+				                    "worker:<program_name> radius:<number>",
+				                    item.first.c_str());
+			}
+		}
+	}
 
 	const std::string description =
 	   descr->name() + ' ' + production_program_name + " construct " + objectname;
