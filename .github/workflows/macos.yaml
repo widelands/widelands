@@ -4,7 +4,8 @@ on: [push]
 
 jobs:
   macos:
-    if: github.ref != 'refs/heads/master'
+    env:
+      dmg: notset
     strategy:
       matrix:
         config:
@@ -40,4 +41,5 @@ jobs:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} AppImage
         path: ${{ env.dmg }}
         # path: ${{ github.workspace }}/build_wl/${{ env.dmg }}
+        # /Users/runner/work/widelands/widelands/build_wl/widelands_10.9_1.0~git1[1d5301b@build-macos].dmg
         # /Users/runner/work/widelands/widelands/build_wl/widelands_10.9_1.0~git1[1d5301b@build-macos].dmg
