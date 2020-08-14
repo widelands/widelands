@@ -1281,9 +1281,10 @@ mine
    :arg percent yield: The :ref:`map_object_programs_datatypes_percent` of resources that the
       mine can dig up before its resource is depleted.
    :arg percent when_empty: The :ref:`map_object_programs_datatypes_percent` chance that the mine
-will still find some resources after it has been depleted. :arg percent experience_on_fail: The
-:ref:`map_object_programs_datatypes_percent` chance that the mine's workers will still gain some
-experience when mining fails after its resources have been depleted.
+      will still find some resources after it has been depleted.
+   :arg percent experience_on_fail: The :ref:`map_object_programs_datatypes_percent` chance that the
+      mine's workers will still gain some experience when mining fails after its resources have been
+      depleted.
 
    Takes resources from the ground. A building that mines will deplete when the percentage of
    resources given in ``resources`` has been dug up, leaving a chance of ``depleted`` that it
