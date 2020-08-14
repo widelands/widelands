@@ -34,7 +34,7 @@ jobs:
         ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGFILE"
-        echo "::set-env name=DMG_${{ matrix.config }}::$DMGFILE"
+        echo "::set-env name=${{ matrix.config }}::$DMGFILE"
     - name: Uploading DMG
       uses: actions/upload-artifact@v2
       with:
