@@ -50,7 +50,7 @@ Animation::Animation(const LuaTable& table)
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
 			sound_effect_ =
 			   SoundHandler::register_fx(SoundType::kAmbient, sound_effects->get_string("path"));
-			sound_priority_ = 100 * sound_effects->get_double("priority");
+			sound_priority_ = std::round(100 * sound_effects->get_double("priority"));
 
 			if (sound_effects->has_key<std::string>("allow_multiple")) {
 				sound_allow_multiple_ = sound_effects->get_bool("allow_multiple");
