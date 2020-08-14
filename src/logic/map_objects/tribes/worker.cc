@@ -2608,8 +2608,16 @@ void Worker::fugitive_update(Game& game, State& state) {
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
 		if (flag->get_owner() == get_owner() && flag->economy(wwWORKER).warehouses().size()) {
 			set_location(flag);
-			if (WareInstance* const ware = fetch_carried_ware(game)) {
-				flag->add_ware(game, *ware);
+			if (does_carry_ware()) {
+				if (flag->has_capacity()) {
+					if (WareInstance* const ware = fetch_carried_ware(game)) {
+						molog(
+						   "[fugitive] is on flag, drop carried ware %s\n", ware->descr().name().c_str());
+						flag->add_ware(game, *ware);
+					}
+				} else {
+					molog("[fugitive] is on flag, which has no capacity for the carried ware!\n");
+				}
 			}
 			return pop_task(game);
 		}
