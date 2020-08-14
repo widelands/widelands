@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [ opened, synchronize ]
   push:
-    branches: [ master, build-macos ]
+    branches: [ master ]
 
 jobs:
   clang_tidy:
