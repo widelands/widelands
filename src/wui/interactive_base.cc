@@ -300,6 +300,7 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	switch (entry) {
 	case MapviewMenuEntry::kMinimap: {
 		toggle_minimap();
+		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kDecreaseZoom: {
 		map_view()->decrease_zoom();

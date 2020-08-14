@@ -434,6 +434,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 		toggle_resources();
 	} break;
 	}
+	showhidemenu_.toggle();
 }
 
 void EditorInteractive::load(const std::string& filename) {
