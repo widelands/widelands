@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "helptexts.lua",
    attributes = {},
    programs = {
-      program = {
+      main = {
          "animate=idle duration:2m20s",
          "transform=pond_mature",
       },
