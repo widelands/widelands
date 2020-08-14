@@ -96,7 +96,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
 	const bool locale_is_en = i18n::get_locale() == "en" || i18n::get_locale().find("en_") == 0;
 	display_mode_.add(_("File names"), MapData::DisplayType::kFilenames);
-	display_mode_.add(locale_is_en ? _("Map names") : _("Original map names"), MapData::DisplayType::kMapnames, nullptr, locale_is_en);
+	display_mode_.add(locale_is_en ? _("Map names") : _("Original map names"),
+	                  MapData::DisplayType::kMapnames, nullptr, locale_is_en);
 	if (!locale_is_en) {
 		display_mode_.add(
 		   _("Translated map names"), MapData::DisplayType::kMapnamesLocalized, nullptr, true);
