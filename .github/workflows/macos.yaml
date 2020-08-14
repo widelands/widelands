@@ -14,7 +14,7 @@ jobs:
           #- debug
         compiler:
           - clang
-    name: MacOs ${{ matrix.config }} ${{ matrix.compiler }} Build
+    name: MacOs ${{ matrix.config }} ${{ matrix.compiler }}
     runs-on: macOS-latest
     steps:
     - name: Installing dependencies
