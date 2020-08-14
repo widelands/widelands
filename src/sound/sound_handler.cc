@@ -331,7 +331,7 @@ bool SoundHandler::play_or_not(SoundType type,
 
 	// Weighted total probability that this fx gets played; initially set according to priority
 	//  float division! not integer
-	float probability = (priority % kFxMaximumPriority) / static_cast<float>(kFxMaximumPriority);
+	const float probability = static_cast<float>(priority) / kFxMaximumPriority;
 
 	// How many milliseconds in the past to consider
 	constexpr uint32_t kSlidingWindowSize = 20000;
