@@ -1887,8 +1887,7 @@ const Buildcost& ProductionProgram::recruited_workers() const {
 
 void ProductionProgram::validate_calls(const ProductionSiteDescr& descr) const {
 	for (const auto& action : actions_) {
-		const ActCall* act_call = dynamic_cast<const ActCall*>(action.get());
-		if (act_call != nullptr) {
+		if (upcast(const ActCall, act_call, action.get())) {
 			const std::string& program_name = act_call->program_name();
 			if (name() == program_name) {
 				throw GameDataError("Production program '%s' in %s is calling itself",
