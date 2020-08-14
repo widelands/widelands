@@ -1,6 +1,9 @@
 name: MacOS
 
-on: [push]
+#on: [push]
+on:
+  workflow_run:
+    workflows: ["Clang-Tidy"]
 
 jobs:
   macos:
@@ -19,7 +22,6 @@ jobs:
     runs-on: macOS-latest
     steps:
     - name: Installing dependencies
-      if: ${{ github.event_name }} == 'pull_request'
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
@@ -32,12 +34,10 @@ jobs:
         echo "Event name ${{ github.event_name }}"
         echo "Event ${{ github.event }}"
     - name: Checkout
-      if: ${{ github.event_name }} == 'pull_request'
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
     - name: Building
-      if: ${{ github.event_name }} == 'pull_request'
       run: |
         echo "**********************************************"
         echo "Event name ${{ github.event_name }}"
@@ -49,7 +49,6 @@ jobs:
         echo "DMG file is: $DMGFILE"
         echo "::set-env name=DMG_${{ matrix.config }}::$DMGFILE"
     - name: Uploading DMG
-      if: ${{ github.event_name }} == 'pull_request'
       uses: actions/upload-artifact@v2
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} AppImage
