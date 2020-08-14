@@ -142,7 +142,7 @@ Here's the example from above as spritesheets:
          hotspot = { 5, 7 }
          sound_effect = {
             path = "sound/foo/bar",
-            priority = 128
+            priority = 50
          },
          representative_frame = 3,
       },
