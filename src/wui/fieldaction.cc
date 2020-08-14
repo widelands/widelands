@@ -402,9 +402,12 @@ void FieldActionWindow::add_buttons_auto() {
 		}
 	} else if (player_) {
 		if (upcast(Building, building, map_.get_immovable(node_))) {
-			if (player_->is_seeing(Widelands::Map::get_index(
-			       building->get_position(), ibase().egbase().map().get_width()))) {
-				add_buttons_attack();
+			for (Widelands::Coords& coords : building->get_positions(igbase->egbase())) {
+				if (player_->is_seeing(
+				       Widelands::Map::get_index(coords, ibase().egbase().map().get_width()))) {
+					add_buttons_attack();
+					break;
+				}
 			}
 		}
 	}

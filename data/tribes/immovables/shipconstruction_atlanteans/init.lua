@@ -10,8 +10,8 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "shipconstruction" },
    programs = {
-      program = {
-         "construct=idle 5000 210000",
+      main = {
+         "construct=idle duration:5s decay_after:3m30s",
          "transform=bob:atlanteans_ship",
       }
    },

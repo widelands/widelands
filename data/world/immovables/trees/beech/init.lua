@@ -15,7 +15,7 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
          "remove=chance:13.67%",
          "grow=beech_summer_pole",
@@ -42,7 +42,7 @@ world:new_immovable_type{
    attributes = { "tree_pole" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m5s",
          "remove=chance:9.37%",
          "grow=beech_summer_mature",
@@ -69,7 +69,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m12s",
          "remove=chance:7.42%",
          "grow=beech_summer_old",
@@ -98,7 +98,7 @@ world:new_immovable_type{
    attributes = { "tree", "normal_tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m25s",
          "transform=deadtree2 chance:7.81%",
          "seed=beech_summer_sapling 250",

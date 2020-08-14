@@ -189,7 +189,7 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table,
 
 		// Perform some checks to make sure that the data is complete and consistent
 		const SpriteSheetMipMapEntry& first =
-		   dynamic_cast<const SpriteSheetMipMapEntry&>(*mipmaps_.begin()->second.get());
+		   dynamic_cast<const SpriteSheetMipMapEntry&>(*mipmaps_.begin()->second);
 		if (table.has_key("fps") && nr_frames_ == 1) {
 			throw Widelands::GameDataError(
 			   "'%s' sprite sheet animation with one frame must not have 'fps'", basename.c_str());

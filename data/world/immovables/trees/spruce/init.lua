@@ -15,7 +15,7 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
          "remove=chance:16.41%",
          "grow=spruce_summer_pole",
@@ -42,7 +42,7 @@ world:new_immovable_type{
    attributes = { "tree_pole" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
          "remove=chance:12.89%",
          "grow=spruce_summer_mature",
@@ -69,7 +69,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m",
          "remove=chance:8.98%",
          "grow=spruce_summer_old",
@@ -98,7 +98,7 @@ world:new_immovable_type{
    attributes = { "tree", "normal_tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m50s",
          "transform=deadtree3 chance:9.37%",
          "seed=spruce_summer_sapling 200",

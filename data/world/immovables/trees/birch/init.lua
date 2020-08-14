@@ -15,7 +15,7 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:42s",
          "remove=chance:12.5%",
          "grow=birch_summer_pole",
@@ -42,7 +42,7 @@ world:new_immovable_type{
    attributes = { "tree_pole" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:40s",
          "remove=chance:9.76%",
          "grow=birch_summer_mature",
@@ -69,7 +69,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25s",
          "remove=chance:3.91%",
          "seed=birch_summer_sapling 200",
@@ -101,7 +101,7 @@ world:new_immovable_type{
    attributes = { "tree", "normal_tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:13m20s",
          "transform=deadtree2 chance:10.55%",
          "seed=birch_summer_sapling 60",
