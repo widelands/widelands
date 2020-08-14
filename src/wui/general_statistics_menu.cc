@@ -36,8 +36,6 @@
 #include "ui_basic/slider.h"
 #include "wui/interactive_player.h"
 
-using namespace Widelands;
-
 #define PLOT_HEIGHT 145
 #define NR_BASE_DATASETS 11
 
@@ -62,9 +60,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	box_.set_border(5, 5, 5, 5);
 
 	// Setup plot data
-	Game& game = *parent.get_game();
-	const Game::GeneralStatsVector& genstats = game.get_general_statistics();
-	const Game::GeneralStatsVector::size_type general_statistics_size = genstats.size();
+	Widelands::Game& game = *parent.get_game();
+	const Widelands::Game::GeneralStatsVector& genstats = game.get_general_statistics();
+	const Widelands::Game::GeneralStatsVector::size_type general_statistics_size = genstats.size();
 
 	// Is there a hook dataset?
 	ndatasets_ = NR_BASE_DATASETS;
@@ -78,7 +76,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		ndatasets_++;
 	}
 
-	for (Game::GeneralStatsVector::size_type i = 0; i < general_statistics_size; ++i) {
+	for (Widelands::Game::GeneralStatsVector::size_type i = 0; i < general_statistics_size; ++i) {
 		const RGBColor& color = kPlayerColors[i];
 		plot_.register_plot_data(i * ndatasets_ + 0, &genstats[i].land_size, color);
 		plot_.register_plot_data(i * ndatasets_ + 1, &genstats[i].nr_workers, color);
@@ -107,7 +105,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	UI::Box* hbox1 = new UI::Box(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
 	uint32_t plr_in_game = 0;
-	PlayerNumber const nr_players = game.map().get_nrplayers();
+	Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, game)++ plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
@@ -202,12 +200,12 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 }
 
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {
-	Game& game = dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
+	Widelands::Game& game = dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
 	if (game.is_loaded()) {
 		// Save information for recreation, if window is reopened
 		my_registry_->selected_information = selected_information_;
 		my_registry_->time = plot_.get_time();
-		PlayerNumber const nr_players = game.map().get_nrplayers();
+		Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
 		iterate_players_existing_novar(p, nr_players, game) {
 			my_registry_->selected_players[p - 1] =
 			   cbs_[p - 1]->style() == UI::Button::VisualState::kPermpressed;

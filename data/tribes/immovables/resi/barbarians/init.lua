@@ -9,7 +9,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/none_1.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -32,7 +32,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/water_1.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -55,7 +55,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/coal_few_1.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -78,7 +78,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/gold_few_1.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -101,7 +101,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/iron_few_1.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -124,7 +124,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/stone_few_1.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -147,7 +147,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/coal_much_1.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -170,7 +170,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/gold_much_1.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -193,7 +193,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/iron_much_1.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }
@@ -216,7 +216,7 @@ tribes:new_immovable_type {
    icon = dirname .. "pics/stone_much_1.png",
    attributes = { "resi" },
    programs = {
-      program = {
+      main = {
          "animate=idle duration:10m",
          "remove="
       }

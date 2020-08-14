@@ -14,7 +14,7 @@ world:new_immovable_type{
    size = "none",
    attributes = {},
    programs = {
-      program = {
+      main = {
          "animate=idle duration:30s",
          "remove="
       }

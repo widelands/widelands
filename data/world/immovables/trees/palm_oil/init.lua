@@ -15,7 +15,7 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:42s",
          "remove=chance:12.5%",
          "grow=palm_oil_desert_pole",
@@ -42,7 +42,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:40s",
          "remove=chance:9.76%",
          "grow=palm_oil_desert_mature",
@@ -69,7 +69,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25s",
          "remove=chance:3.91%",
          "seed=palm_oil_desert_sapling 80",
@@ -102,7 +102,7 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:13m20s",
          "transform=deadtree5 chance:19.53%",
          "seed=palm_oil_desert_sapling 80",

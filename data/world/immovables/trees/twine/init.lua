@@ -16,7 +16,7 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
          "remove=chance:16.41%",
          "grow=twine_wasteland_pole",
@@ -44,7 +44,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
          "remove=chance:12.89%",
          "grow=twine_wasteland_mature",
@@ -72,7 +72,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m",
          "remove=chance:8.98%",
          "grow=twine_wasteland_old",
@@ -103,7 +103,7 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m50s",
          "transform=deadtree3 chance:14.06%",
          "seed=twine_wasteland_sapling 20",

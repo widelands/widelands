@@ -15,7 +15,7 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:57s500ms",
          "remove=chance:8.20%",
          "grow=maple_winter_pole",
@@ -42,7 +42,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:52s500ms",
          "remove=chance:7.42%",
          "grow=maple_winter_mature",
@@ -69,7 +69,7 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:50s",
          "remove=chance:7.03%",
          "grow=maple_winter_old",
@@ -98,7 +98,7 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m50s",
          "transform=deadtree4 chance:15.23%",
          "seed=maple_winter_sapling 240",
