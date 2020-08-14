@@ -1598,11 +1598,14 @@ construct
 ---------
 .. function:: construct=\<immovable_name\> worker:\<program_name\> radius:\<number\>
 
-   :arg string immovable_name: The name of the immovable to be constructed, e.g. ``barbarians_shipconstruction``.
+   :arg string immovable_name: The name of the :ref:`immovable <lua_tribes_immovables>` to be
+      constructed, e.g. ``barbarians_shipconstruction``.
 
-   :arg string worker: The :ref:`worker's program <tribes_worker_programs>` that makes the worker walk to the immovable's location and do some work.
+   :arg string worker: The :ref:`worker's program <tribes_worker_programs>` that makes the worker
+      walk to the immovable's location and do some work.
 
-   :arg radius radius: The radius used by the worker to find a suitable construction spot on the map.
+   :arg radius radius: The radius used by the worker to find a suitable construction spot on the
+      map.
 
 Sends the main worker to look for a suitable spot on the shore and to perform construction work on
 an immovable. Example:
@@ -1610,7 +1613,7 @@ an immovable. Example:
 .. code-block:: lua
 
       -- Production program actions
-	  actions = {
+      actions = {
          "construct=barbarians_shipconstruction worker:buildship radius:6",
          "sleep=duration:20s",
       }
@@ -1631,7 +1634,8 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
                                               ProductionSiteDescr* descr,
                                               const Tribes& tribes) {
 	if (arguments.size() != 3) {
-		throw GameDataError("Usage: construct=<immovable_name> worker:<program_name> radius:<number>");
+		throw GameDataError(
+		   "Usage: construct=<immovable_name> worker:<program_name> radius:<number>");
 	}
 
 	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
@@ -1652,7 +1656,9 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 			} else if (item.second.empty()) {
 				objectname = item.first;
 			} else {
-				throw GameDataError("Unknown parameter '%s'. Usage: construct=<immovable_name> worker:<program_name> radius:<number>", item.first.c_str());
+				throw GameDataError("Unknown parameter '%s'. Usage: construct=<immovable_name> "
+				                    "worker:<program_name> radius:<number>",
+				                    item.first.c_str());
 			}
 		}
 	}
