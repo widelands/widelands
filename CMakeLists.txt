@@ -1,7 +1,7 @@
 project (widelands)
 
-cmake_minimum_required (VERSION 3.9)
-cmake_policy(VERSION 3.9)
+cmake_minimum_required (VERSION 3.5)
+cmake_policy(VERSION 3.5)
 
 include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
 
@@ -13,6 +13,35 @@ option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 option(OPTION_BUILD_TESTS "Build tests" ON)
 option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
+
+# if set on such systems. This can be removed when cmake_minimum_required is set	
+# to 3.11 or newer  by using:	
+# cmake_policy(VERSION 3.11)	
+if(POLICY CMP0072)	
+  cmake_policy(SET CMP0072 NEW)	
+
+  # TODO(stonerl): Check on later Ubuntu releases whether this workaround is	
+  # still needed or not.	
+  if (CMAKE_SYSTEM MATCHES "Linux")	
+    distro_name (DISTRO_NAME)	
+    # DISTRO_NAME is different on the build-servers.	
+    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"	
+         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco"	
+         OR DISTRO_NAME MATCHES "Ubuntu 19.10" OR DISTRO_NAME MATCHES "Eoan"	
+         OR DISTRO_NAME MATCHES "Ubuntu 20.04" OR DISTRO_NAME MATCHES "Focal")	
+        AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")	
+      cmake_policy(SET CMP0072 OLD)	
+    endif()	
+  endif()	
+endif(POLICY CMP0072)	
+
+# This policy is not known to versions prior 3.12 and would result in errors,	
+# if set on such systems. This can be removed when cmake_minimum_required is set	
+# to 3.12 or newer  by using:	
+# cmake_policy(VERSION 3.12)	
+if(POLICY CMP0074)	
+  cmake_policy(SET CMP0074 NEW)	
+endif(POLICY CMP0074)
 
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
