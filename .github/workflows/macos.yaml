@@ -37,4 +37,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} AppImage
-        path: ${{ github.workspace }}/build_wl/${{ macos.env.config }}
+        path: ${{ github.workspace }}/build_wl/${{ env.config }}
