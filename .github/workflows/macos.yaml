@@ -5,8 +5,6 @@ on: [push]
 jobs:
   macos:
     if: github.ref != 'refs/heads/master'
-    env:
-      dmg: notset
     strategy:
       matrix:
         config:
@@ -33,10 +31,13 @@ jobs:
         ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGFILE"
-        echo "::set-env name=dmg::$DMGFILE"
+        echo "::set-env name=dmg::${{ github.workspace }}/build_wl/$DMGFILE"
         echo "Environment variable: ${{ env.dmg }}"
+
     - name: Uploading DMG
       uses: actions/upload-artifact@v2
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} AppImage
-        path: ${{ github.workspace }}/build_wl/${{ env.dmg }}
+        path: ${{ env.dmg }}
+        # path: ${{ github.workspace }}/build_wl/${{ env.dmg }}
+        # /Users/runner/work/widelands/widelands/build_wl/widelands_10.9_1.0~git1[1d5301b@build-macos].dmg
