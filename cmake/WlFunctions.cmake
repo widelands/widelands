@@ -142,7 +142,7 @@ macro(_common_compile_tasks)
     endif()
   endif()
 
-  if (ARG_USES_Intl)
+  if (ARG_USES_INTL)
     # libintl is not used on all systems, so only include it, when we actually
     # found it.
     if (Intl_FOUND)
