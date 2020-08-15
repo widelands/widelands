@@ -1672,7 +1672,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	const unsigned current_level = ts.checked_soldier_training().level;
 	assert(current_level != INVALID_INDEX);
 	assert(current_level < training_.level);
-	assert(ts.checked_soldier_training() == training_.attribute);
+	assert(ts.checked_soldier_training().attribute == training_.attribute);
 
 	ps.molog("  Training soldier's %u (%d to %d)", static_cast<unsigned int>(training_.attribute),
 	         current_level, training_.level);
