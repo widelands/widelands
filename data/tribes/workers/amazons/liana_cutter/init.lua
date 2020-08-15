@@ -18,9 +18,9 @@ tribes:new_worker_type {
       cut = {
          "findobject=attrib:tree radius:6",
          "walk=object",
-         "playsound=sound/woodcutting/woodcutting 255",
+         "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",
          "animate=work duration:4s",
-         "playsound=sound/woodcutting/tree_falling 130",
+         "playsound=sound/woodcutting/tree_falling priority:100%",
          "animate=work duration:1s",
          "createware=liana",
          "return"
