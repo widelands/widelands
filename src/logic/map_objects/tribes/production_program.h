@@ -491,7 +491,8 @@ struct ProductionProgram : public MapObjectProgram {
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
 	struct ActPlaySound : public Action {
-		explicit ActPlaySound(const std::vector<std::string>& arguments);
+		explicit ActPlaySound(const std::vector<std::string>& arguments,
+		                      const ProductionSiteDescr& descr);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:

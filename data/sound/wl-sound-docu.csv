@@ -40,8 +40,8 @@ tree_falling_00.ogg,11025 – 16,sound/woodcutting,woodcutters,ecfike,CC-0,yes,1
 tree_falling_01.ogg,11025 – 16,sound/woodcutting,woodcutters,Daniel Simion,CC-3,yes,Tree_Fall_Small-Daniel_Simion-1639156552.wav,http://soundbible.com/2039-Tree-Fall-Small.html,44100 – 16,new
 ,,,,,,,,,,
 boar.ogg,11025 – 16,data/sound/animals,,UNKNOWN,personal,yes,Pig-SoundBible.com-1026656068.wav,http://soundbible.com/736-Pig.html,11025,8019
-elk_00.ogg,16000,data/sound/animals,,fws.gov,PD,yes,Elk Bellowing In Forest-SoundBible.com-681308174.wav,http://soundbible.com/245-Elk-Bellowing-In-Forest.html,48000,8019
-elk_01.ogg,22050 – 16,data/sound/animals,,fws.gov,PD,yes,Elk Bellowing In Forest 2-SoundBible.com-860406835.wav,http://soundbible.com/246-Elk-Bellowing-In-Forest-2.html,48000,8029
+moose_00.ogg,16000,data/sound/animals,,fws.gov,PD,yes,Elk Bellowing In Forest-SoundBible.com-681308174.wav,http://soundbible.com/245-Elk-Bellowing-In-Forest.html,48000,8019
+moose_01.ogg,22050 – 16,data/sound/animals,,fws.gov,PD,yes,Elk Bellowing In Forest 2-SoundBible.com-860406835.wav,http://soundbible.com/246-Elk-Bellowing-In-Forest-2.html,48000,8029
 stag_00.ogg,11025 – 16,data/sound/animals,,Juan Carlos,PD,yes,Red_stag_roar-Juan_Carlos_-2004708707.wav,http://soundbible.com/2073-Red-Stag-Roar.html,44100 – 16,8019
 stag_01.ogg,11025 – 16,data/sound/animals,,Juan Carlos,PD,yes,Red_stag_roar-Juan_Carlos_-2004708707.wav,http://soundbible.com/2073-Red-Stag-Roar.html,44100 – 16,8019
 coyote_00.ogg,11025 – 16,data/sound/animals,,UNKNOWN,PD,yes,Coyote Call-SoundBible.com-2012388009.wav,http://soundbible.com/977-Coyote-Call.html,44100 – 16,8019
