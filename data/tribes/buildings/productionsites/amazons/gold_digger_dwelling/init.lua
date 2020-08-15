@@ -57,7 +57,7 @@ tribes:new_productionsite_type {
             "consume=ration water:5",
             "sleep=duration:45s",
             "animate=working duration:20s",
-            "mine=gold 1 100 5 5", --name radius % chance_empty gain_exp_on_empty
+            "mine=gold radius:1 yield:100% when_empty:5%",
             "produce=gold_dust"
          }
       },
