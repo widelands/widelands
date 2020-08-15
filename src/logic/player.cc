@@ -355,7 +355,7 @@ void Player::play_message_sound(const Message* message) {
 			fx = message_fx_;
 		}
 		Notifications::publish(
-		   NoteSound(SoundType::kMessage, fx, message->position(), kFxPriorityAlwaysPlay));
+		   NoteSound(SoundType::kMessage, fx, message->position(), kFxMaximumPriority, true));
 	}
 }
 

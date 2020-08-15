@@ -205,6 +205,8 @@ private:
 	FxId sound_effect_;
 	/// How likely it is that the sound effect will be played
 	int32_t sound_priority_;
+	/// Whether the sound can be played by different map objects at the same time
+	bool sound_allow_multiple_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_ANIMATION_H
