@@ -1518,7 +1518,7 @@ level. **Note:** This action is only available to :ref:`training sites
 .. code-block:: lua
 
       actions = {
-         -- Fails when aren't any soldiers with attack level 0
+         -- Fails when there aren't any soldiers with attack level 0
          "checksoldier=soldier:attack level:1",
          "return=failed unless site has ax_broad",
          "return=failed unless site has fish,meat",
@@ -1567,7 +1567,7 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 		return ps.program_end(game, ProgramResult::kSkipped);
 	}
 	ps.molog("  Checking soldier (%u) level %d)\n", static_cast<unsigned int>(training_.attribute),
-	         static_cast<unsigned int>(training_.level));
+	         training_.level);
 
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier*>::const_iterator it = soldiers.begin();; ++it) {
@@ -1675,7 +1675,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	assert(ts.checked_soldier_training() == training_.attribute);
 
 	ps.molog("  Training soldier's %u (%d to %d)", static_cast<unsigned int>(training_.attribute),
-	         current_level, static_cast<unsigned int>(training_.level));
+	         current_level, training_.level);
 
 	bool training_done = false;
 	for (auto it = soldiers.begin(); !training_done; ++it) {
