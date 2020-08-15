@@ -1505,8 +1505,30 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 /* RST
 checksoldier
 ------------
-Returns failure unless there are a specified amount of soldiers with specified level of specified
-properties. This command type is subject to change.
+.. function:: checksoldier=soldier:attack|defense|evade|health level:\<number\>
+
+   :arg string soldier: The soldier training attribute to check for.
+
+   :arg int level: The level that the soldier should have for the given training attribute.
+
+Returns failure unless there is a soldier present with the given training attribute at the given
+level. **Note:** This action is only available to :ref:`training sites
+<lua_tribes_buildings_trainingsites>`. Example:
+
+.. code-block:: lua
+
+      actions = {
+         -- Fails when aren't any soldiers with attack level 0
+         "checksoldier=soldier:attack level:1",
+         "return=failed unless site has ax_broad",
+         "return=failed unless site has fish,meat",
+         "return=failed unless site has barbarians_bread",
+         "sleep=duration:30s",
+         -- Check again because the soldier could have been expelled by the player
+         "checksoldier=soldier:attack level:1",
+         "consume=ax_broad fish,meat barbarians_bread",
+         "train=soldier:attack level:2"
+      }
 */
 ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::string>& arguments,
                                                     const ProductionSiteDescr& descr) {
@@ -1585,9 +1607,32 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 /* RST
 train
 -----
-Increases the level of a specified property of a soldier. No further documentation available.
+.. function:: train=soldier:attack|defense|evade|health level:\<number\>
+
+   :arg string soldier: The soldier training attribute to be trained.
+
+   :arg int level: The level that the soldier will receive for the given training attribute.
+
+Increases a soldier's training attribute to the given level. It is mandatory to call 'checksoldier'
+before calling this action to ensure that an appropriate soldier will be present at the site.
+**Note:** This action is only available to :ref:`training sites
+<lua_tribes_buildings_trainingsites>`. Example:
+
+.. code-block:: lua
+
+      actions = {
+         "checksoldier=soldier:attack level:1",
+         "return=failed unless site has ax_broad",
+         "return=failed unless site has fish,meat",
+         "return=failed unless site has barbarians_bread",
+         "sleep=duration:30s",
+         -- This is called first to ensure that we have a matching soldier
+         "checksoldier=soldier:attack level:1",
+         "consume=ax_broad fish,meat barbarians_bread",
+         -- Now train the soldier's attack to level 2
+         "train=soldier:attack level:2"
+      }
 */
-// NOCOM documentation
 ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments,
                                       const ProductionSiteDescr& descr) {
 	if (descr.type() != MapObjectType::TRAININGSITE) {
