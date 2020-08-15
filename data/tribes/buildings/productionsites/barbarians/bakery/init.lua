@@ -50,7 +50,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = pgettext("barbarians_building", "baking pitta bread"),
          actions = {
