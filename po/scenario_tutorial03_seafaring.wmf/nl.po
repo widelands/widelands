@@ -4,6 +4,7 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # FvZ, 2020
+# FvZ, 2020
 # Han van Venrooij <clerris@gmail.com>, 2016
 # Nora Ghaoui, 2016
 # Nora Ghaoui, 2016
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-05-09 21:24+0000\n"
-"Last-Translator: FvZ\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-07-08 15:39+0000\n"
+"Last-Translator: stdh\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -164,7 +165,7 @@ msgstr "Geweldig. Laten we een paar schepen bouwen terwijl de haven wordt gebouw
 msgid ""
 "Ships are constructed at the coastline near a shipyard by a shipwright. We "
 "have to build one somewhere close to the shore."
-msgstr "Schepen worden gemaakt in een scheepswerf door een scheepsbouwer.  We moeten er één bouwen nabij de kust."
+msgstr "Schepen worden gemaakt aan de kustlijn bij een scheepswerf door een scheepsbouwer.  We moeten er één bouwen nabij de kust."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
@@ -386,7 +387,7 @@ msgstr "Verkennen"
 #. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:182
 msgid "Found a settlement"
-msgstr "Nederzetting gevonden"
+msgstr "Sticht een nederzetting"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Navigate your ship to an island that could contain iron ore."
@@ -438,7 +439,7 @@ msgid ""
 "On this map, there is no enemy to fear. In other games, you should make "
 "building one or two military fortifications around your new colonies a "
 "priority."
-msgstr "Op deze kaart zijn is geen vijand te bekennen. In andere spellen moet je wellicht prioriteit geven aan één of twee militaire gebouwen ter bescherming van je nieuwe kolonie."
+msgstr "Op deze kaart is geen vijand te bekennen. In andere spellen moet je wellicht prioriteit geven aan één of twee militaire gebouwen ter bescherming van je nieuwe kolonie."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:205
 msgid "Our mission"
@@ -508,7 +509,7 @@ msgid ""
 "seperating it from our main colony are too wide to build bridges and too "
 "narrow for ships to pass them. Our roads would have to take long curves, "
 "which slows down ware transport a lot."
-msgstr "Kijk naar deze zuidelijke vallei. We hebben hier goud gevonden in een berg, maar we kunnen de erts niet delven omdat de weg wordt versperd door een rivier. De rivier is te breed om er een brug overheen te bouwen, maar te smal om met een schip te bevaren. We kunnen er een weg omheen leggen, maar die zou zo lang worden dat het goederentransport traag wordt."
+msgstr "Kijk naar deze zuidelijke vallei. We hebben hier goud gevonden in een berg, maar we kunnen het erts niet delven omdat de weg wordt versperd door een rivier. De rivier is te breed om er een brug overheen te bouwen, maar te smal om met een schip te bevaren. We kunnen er een weg omheen leggen, maar die zou zo lang worden dat het goederentransport traag wordt."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:241
 msgid "Rowboats & Ferry Yards"
@@ -662,7 +663,7 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr "En wanneer waterwegen aanzienlijk korter zijn dan dezelfde route over land, zullen veel waren over de waterwegen worden vervoerd. Omdat een waterweg slechts één veerboot kan bevatten – in tegenstelling tot wegen, die een tweede drager ontvangen als ze het erg druk hebben – en omdat ze vaak langer zijn dan de twee of drie velden die worden aanbevolen voor wegen, bestaat er altijd een risico dat waterwegen ernstige knelpunten in je economie worden. Probeer er meerdere parallel te bouwen om de spanning te verdelen. Als dit niet mogelijk is, is het in sommige gevallen zelfs efficiënter om geen waterwegen te gebruiken."
+msgstr "En wanneer waterwegen aanzienlijk korter zijn dan dezelfde route over land, zullen veel waren over de waterwegen worden vervoerd. Omdat een waterweg slechts één veerboot kan bevatten – in tegenstelling tot wegen, die een tweede drager ontvangen als ze het erg druk hebben – en omdat ze vaak langer zijn dan de twee of drie velden die worden aanbevolen voor wegen, bestaat er altijd een risico dat waterwegen ernstige knelpunten in je economie worden. Probeer er meerdere parallel te bouwen om de belasting te verdelen. Als dit niet mogelijk is, is het in sommige gevallen zelfs efficiënter om geen waterwegen te gebruiken."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
 msgid "Ferry yard production"

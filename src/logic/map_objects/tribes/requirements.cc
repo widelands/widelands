@@ -78,14 +78,16 @@ uint32_t RequirementsStorage::id() const {
 Requirements RequirementsStorage::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	uint32_t const id = fr.unsigned_16();
 
-	if (id == 0)
+	if (id == 0) {
 		return Requirements();
+	}
 
 	StorageMap& s = storageMap();
 	StorageMap::iterator it = s.find(id);
 
-	if (it == s.end())
+	if (it == s.end()) {
 		throw GameDataError("unknown requirement id %u", id);
+	}
 
 	return it->second->reader_(fr, egbase, mol);
 }

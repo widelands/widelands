@@ -51,15 +51,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "ration", amount = 6 }
    },
-   outputs = {
-      "coal"
-   },
-
-   indicate_workarea_overlaps = {
-      barbarians_coalmine = false,
-      barbarians_coalmine_deep = false,
-      barbarians_coalmine_deeper = false,
-   },
 
    programs = {
       work = {
@@ -68,7 +59,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs coal",
             "consume=ration",
-            "sleep=45000",
+            "sleep=duration:45s",
             "call=mine_produce",
             "call=mine_produce",
          }
@@ -76,8 +67,8 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining coal",
          actions = {
-            "animate=working 10000",
-            "mine=coal 2 33 5 17",
+            "animate=working duration:10s",
+            "mine=coal radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
             "produce=coal",
          }
       },

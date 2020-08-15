@@ -36,8 +36,6 @@
 #include "ui_basic/slider.h"
 #include "wui/interactive_player.h"
 
-using namespace Widelands;
-
 #define PLOT_HEIGHT 145
 #define NR_BASE_DATASETS 11
 
@@ -62,22 +60,23 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	box_.set_border(5, 5, 5, 5);
 
 	// Setup plot data
-	Game& game = *parent.get_game();
-	const Game::GeneralStatsVector& genstats = game.get_general_statistics();
-	const Game::GeneralStatsVector::size_type general_statistics_size = genstats.size();
+	Widelands::Game& game = *parent.get_game();
+	const Widelands::Game::GeneralStatsVector& genstats = game.get_general_statistics();
+	const Widelands::Game::GeneralStatsVector::size_type general_statistics_size = genstats.size();
 
 	// Is there a hook dataset?
 	ndatasets_ = NR_BASE_DATASETS;
 	std::unique_ptr<LuaTable> hook = game.lua().get_hook("custom_statistic");
 	std::string cs_name, cs_pic;
 	if (hook) {
+		i18n::Textdomain td("win_conditions");
 		hook->do_not_warn_about_unaccessed_keys();
-		cs_name = hook->get_string("name");
+		cs_name = _(hook->get_string("name"));
 		cs_pic = hook->get_string("pic");
 		ndatasets_++;
 	}
 
-	for (Game::GeneralStatsVector::size_type i = 0; i < general_statistics_size; ++i) {
+	for (Widelands::Game::GeneralStatsVector::size_type i = 0; i < general_statistics_size; ++i) {
 		const RGBColor& color = kPlayerColors[i];
 		plot_.register_plot_data(i * ndatasets_ + 0, &genstats[i].land_size, color);
 		plot_.register_plot_data(i * ndatasets_ + 1, &genstats[i].nr_workers, color);
@@ -93,8 +92,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		if (hook) {
 			plot_.register_plot_data(i * ndatasets_ + 11, &genstats[i].custom_statistic, color);
 		}
-		if (game.get_player(i + 1))  // Show area plot
+		if (game.get_player(i + 1)) {  // Show area plot
 			plot_.show_plot(i * ndatasets_ + selected_information_, my_registry_->selected_players[i]);
+		}
 	}
 
 	plot_.set_time(my_registry_->time);
@@ -105,7 +105,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	UI::Box* hbox1 = new UI::Box(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
 	uint32_t plr_in_game = 0;
-	PlayerNumber const nr_players = game.map().get_nrplayers();
+	Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, game)++ plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
@@ -200,12 +200,12 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 }
 
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {
-	Game& game = dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
+	Widelands::Game& game = dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
 	if (game.is_loaded()) {
 		// Save information for recreation, if window is reopened
 		my_registry_->selected_information = selected_information_;
 		my_registry_->time = plot_.get_time();
-		PlayerNumber const nr_players = game.map().get_nrplayers();
+		Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
 		iterate_players_existing_novar(p, nr_players, game) {
 			my_registry_->selected_players[p - 1] =
 			   cbs_[p - 1]->style() == UI::Button::VisualState::kPermpressed;
@@ -229,11 +229,12 @@ void GeneralStatisticsMenu::cb_changed_to(int32_t const id) {
 void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
 	size_t const statistics_size =
 	   dynamic_cast<InteractiveGameBase&>(*get_parent()).game().get_general_statistics().size();
-	for (uint32_t i = 0; i < statistics_size; ++i)
+	for (uint32_t i = 0; i < statistics_size; ++i) {
 		if (cbs_[i]) {
 			plot_.show_plot(
 			   i * ndatasets_ + id, cbs_[i]->style() == UI::Button::VisualState::kPermpressed);
 			plot_.show_plot(i * ndatasets_ + selected_information_, false);
 		}
+	}
 	selected_information_ = id;
 }

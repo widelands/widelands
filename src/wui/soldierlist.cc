@@ -189,10 +189,11 @@ void SoldierPanel::think() {
 		if (soldier) {
 			std::vector<Soldier*>::iterator it =
 			   std::find(soldierlist.begin(), soldierlist.end(), soldier);
-			if (it != soldierlist.end())
+			if (it != soldierlist.end()) {
 				soldierlist.erase(it);
-			else
+			} else {
 				soldier = nullptr;
+			}
 		}
 
 		if (!soldier) {
@@ -203,8 +204,9 @@ void SoldierPanel::think() {
 		}
 
 		while (icon.row && (row_occupancy[icon.row] >= kMaxColumns ||
-		                    icon.row * kMaxColumns + row_occupancy[icon.row] >= capacity))
+		                    icon.row * kMaxColumns + row_occupancy[icon.row] >= capacity)) {
 			icon.row--;
+		}
 
 		icon.col = row_occupancy[icon.row]++;
 	}
@@ -215,8 +217,9 @@ void SoldierPanel::think() {
 		icon.soldier = soldierlist.back();
 		soldierlist.pop_back();
 		icon.row = 0;
-		while (row_occupancy[icon.row] >= kMaxColumns)
+		while (row_occupancy[icon.row] >= kMaxColumns) {
 			icon.row++;
+		}
 		icon.col = row_occupancy[icon.row]++;
 		icon.pos = calc_pos(icon.row, icon.col);
 
@@ -228,8 +231,9 @@ void SoldierPanel::think() {
 		for (std::vector<Icon>::iterator icon_iter = icons_.begin(); icon_iter != icons_.end();
 		     ++icon_iter) {
 
-			if (icon_iter->row <= icon.row)
+			if (icon_iter->row <= icon.row) {
 				insertpos = icon_iter + 1;
+			}
 
 			icon.pos.x = std::max<int32_t>(icon.pos.x, icon_iter->pos.x + icon_width_);
 		}
@@ -251,8 +255,9 @@ void SoldierPanel::think() {
 		dp.x = std::min(std::max(dp.x, -maxdist), maxdist);
 		dp.y = std::min(std::max(dp.y, -maxdist), maxdist);
 
-		if (dp.x != 0 || dp.y != 0)
+		if (dp.x != 0 || dp.y != 0) {
 			changes = true;
+		}
 
 		icon.pos += dp;
 
@@ -295,8 +300,9 @@ void SoldierPanel::draw(RenderTarget& dst) {
 	// Draw icons
 	for (const Icon& icon : icons_) {
 		const Soldier* soldier = icon.soldier.get(egbase());
-		if (!soldier)
+		if (!soldier) {
 			continue;
+		}
 
 		constexpr float kNoZoom = 1.f;
 		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom,
@@ -323,22 +329,25 @@ const Soldier* SoldierPanel::find_soldier(int32_t x, int32_t y) const {
 }
 
 void SoldierPanel::handle_mousein(bool inside) {
-	if (!inside && mouseover_fn_)
+	if (!inside && mouseover_fn_) {
 		mouseover_fn_(nullptr);
+	}
 }
 
 bool SoldierPanel::handle_mousemove(
    uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
-	if (mouseover_fn_)
+	if (mouseover_fn_) {
 		mouseover_fn_(find_soldier(x, y));
+	}
 	return true;
 }
 
 bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		if (click_fn_) {
-			if (const Soldier* soldier = find_soldier(x, y))
+			if (const Soldier* soldier = find_soldier(x, y)) {
 				click_fn_(soldier);
+			}
 		}
 		return true;
 	}
@@ -473,8 +482,9 @@ void SoldierList::eject(const Soldier* soldier) {
 	bool can_act = igbase_.can_act(building_.owner().player_number());
 	bool over_min = capacity_min < soldiers()->present_soldiers().size();
 
-	if (can_act && over_min)
+	if (can_act && over_min) {
 		igbase_.game().send_player_drop_soldier(building_, soldier->serial());
+	}
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {

@@ -70,7 +70,7 @@ protected:
 	/// parses the win condition and returns it as a std::unique_ptr<LuaTable>.
 	/// If this win condition can't be played with the map tags, returns a unique_ptr to nullptr.
 	std::unique_ptr<LuaTable> win_condition_if_valid(const std::string& win_condition_script,
-	                                                 std::set<std::string> tags) const;
+	                                                 const std::set<std::string>& tags) const;
 
 	void toggle_peaceful();
 

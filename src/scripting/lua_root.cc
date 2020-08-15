@@ -79,7 +79,9 @@ Game
 */
 const char LuaGame::className[] = "Game";
 const MethodType<LuaGame> LuaGame::Methods[] = {
-   METHOD(LuaGame, launch_coroutine), METHOD(LuaGame, save), {nullptr, nullptr},
+   METHOD(LuaGame, launch_coroutine),
+   METHOD(LuaGame, save),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RO(LuaGame, real_speed),         PROP_RO(LuaGame, time),
@@ -214,6 +216,7 @@ int LuaGame::get_type(lua_State* L) {
 
 /* RST
    .. attribute:: scenario_difficulty
+
       (RO) The difficulty level of the current scenario. Values range from 1 to the number
       of levels specified in the campaign's configuration in campaigns.lua. By convention
       higher values mean more difficult. Throws an error if used outside of a scenario.
@@ -367,7 +370,9 @@ const MethodType<LuaWorld> LuaWorld::Methods[] = {
    {0, 0},
 };
 const PropertyType<LuaWorld> LuaWorld::Properties[] = {
-   PROP_RO(LuaWorld, immovable_descriptions), PROP_RO(LuaWorld, terrain_descriptions), {0, 0, 0},
+   PROP_RO(LuaWorld, immovable_descriptions),
+   PROP_RO(LuaWorld, terrain_descriptions),
+   {0, 0, 0},
 };
 
 LuaWorld::LuaWorld(lua_State* /* L */) {
@@ -944,7 +949,7 @@ int LuaTribes::new_tribe(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_tribe(table);
+		get_egbase(L).mutable_tribes()->add_tribe(table, get_egbase(L).world());
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

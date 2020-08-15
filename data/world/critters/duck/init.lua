@@ -5,6 +5,7 @@ animations = {
       pictures = path.list_files(dirname .. "idle_??.png"),
       sound_effect = {
          path = dirname .. "duck",
+         priority = 0.01
       },
       hotspot = { 5, 7 },
       fps = 4,
@@ -22,4 +23,6 @@ world:new_critter_type{
       remove = { "remove" },
    },
    animations = animations,
+   size = 1,
+   reproduction_rate = 10,
 }

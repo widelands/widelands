@@ -54,6 +54,7 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
@@ -433,7 +434,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 		toggle_resources();
 	} break;
 	}
-	rebuild_showhide_menu();
+	showhidemenu_.toggle();
 }
 
 void EditorInteractive::load(const std::string& filename) {
@@ -445,11 +446,12 @@ void EditorInteractive::load(const std::string& filename) {
 	cleanup_for_load();
 
 	std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(filename));
-	if (!ml.get())
+	if (!ml.get()) {
 		throw WLWarning(
 		   _("Unsupported Format"),
 		   _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
 		   filename.c_str());
+	}
 	ml->preload_map(true);
 
 	load_all_tribes(&egbase());
@@ -511,8 +513,9 @@ void EditorInteractive::exit() {
 			UI::WLMessageBox mmb(this, _("Unsaved Map"),
 			                     _("The map has not been saved, do you really want to quit?"),
 			                     UI::WLMessageBox::MBoxType::kOkCancel);
-			if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
+			if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 				return;
+			}
 		}
 	}
 	g_sh->change_music("menu", 200);
@@ -542,7 +545,7 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
-	auto* fields_to_draw = map_view()->draw_terrain(ebase, Workareas(), draw_grid_, &dst);
+	auto* fields_to_draw = map_view()->draw_terrain(ebase, nullptr, Workareas(), draw_grid_, &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const uint32_t gametime = ebase.get_gametime();
@@ -650,7 +653,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					                         3);
 					const Image* pic = get_sel_picture();
 					blit_overlay(
-					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
 				}
 				if (selected_triangles.count(
 				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D))) {
@@ -662,7 +665,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					                         3);
 					const Image* pic = get_sel_picture();
 					blit_overlay(
-					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
 				}
 			}
 		}
@@ -702,18 +705,22 @@ bool EditorInteractive::player_hears_field(const Widelands::Coords&) const {
 
 void EditorInteractive::toggle_resources() {
 	draw_resources_ = !draw_resources_;
+	rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_immovables() {
 	draw_immovables_ = !draw_immovables_;
+	rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_bobs() {
 	draw_bobs_ = !draw_bobs_;
+	rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_grid() {
 	draw_grid_ = !draw_grid_;
+	rebuild_showhide_menu();
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
@@ -831,8 +838,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_LSHIFT:
 		case SDLK_RSHIFT:
-			if (tools_->use_tool == EditorTool::First)
+			if (tools_->use_tool == EditorTool::First) {
 				select_tool(tools_->current(), EditorTool::Second);
+			}
 			return true;
 
 		case SDLK_LCTRL:
@@ -841,8 +849,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LALT:
 		case SDLK_RALT:
 		case SDLK_MODE:
-			if (tools_->use_tool == EditorTool::First)
+			if (tools_->use_tool == EditorTool::First) {
 				select_tool(tools_->current(), EditorTool::Third);
+			}
 			return true;
 
 		case SDLK_g:
@@ -878,15 +887,17 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_y:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				history_->redo_action();
+			}
 			return true;
 
 		case SDLK_z:
-			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) && (code.mod & (KMOD_LSHIFT | KMOD_RSHIFT)))
+			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) && (code.mod & (KMOD_LSHIFT | KMOD_RSHIFT))) {
 				history_->redo_action();
-			else if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
+			} else if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				history_->undo_action();
+			}
 			return true;
 
 		case SDLK_F1:
@@ -909,8 +920,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LALT:
 		case SDLK_RALT:
 		case SDLK_MODE:
-			if (tools_->use_tool != EditorTool::First)
+			if (tools_->use_tool != EditorTool::First) {
 				select_tool(tools_->current(), EditorTool::First);
+			}
 			return true;
 		default:
 			break;

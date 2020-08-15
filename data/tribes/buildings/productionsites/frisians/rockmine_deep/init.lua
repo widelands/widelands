@@ -58,11 +58,6 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      frisians_rockmine = false,
-      frisians_rockmine_deep = false,
-   },
-
    aihints = {
       mines = "stones",
    },
@@ -75,19 +70,16 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "meal", amount = 8 }
    },
-   outputs = {
-      "granite"
-   },
 
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped unless economy needs granite",
             "consume=meal",
-            "sleep=34900",
+            "sleep=duration:34s900ms",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
@@ -100,8 +92,8 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining granite",
          actions = {
-            "animate=working 8700",
-            "mine=stones 3 100 10 5",
+            "animate=working duration:8s700ms",
+            "mine=stones radius:3 yield:100% when_empty:10% experience_on_fail:5%",
             "produce=granite",
          }
       },

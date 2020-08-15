@@ -52,6 +52,8 @@ set -x
 
 # Pull translations from Transifex
 tx pull -a
+# We might need to force-pull translations during a release
+# tx pull -fa
 
 # Update authors file
 utils/update_authors.py

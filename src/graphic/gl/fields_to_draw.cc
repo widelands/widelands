@@ -85,8 +85,9 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 	// value of 'offset' to the actual dimension of the 'rect' to get to desired
 	// dimension of the 'rect'
 	const Vector2f br_map = MapviewPixelFunctions::panel_to_map(
-	   viewpoint, zoom, Vector2f(dst->get_rect().w + std::abs(dst->get_offset().x),
-	                             dst->get_rect().h + std::abs(dst->get_offset().y)));
+	   viewpoint, zoom,
+	   Vector2f(dst->get_rect().w + std::abs(dst->get_offset().x),
+	            dst->get_rect().h + std::abs(dst->get_offset().y)));
 	max_fx_ = std::ceil(br_map.x / kTriangleWidth);
 	max_fy_ = std::ceil(br_map.y / kTriangleHeight);
 
@@ -159,7 +160,7 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 			const Widelands::PlayerNumber owned_by = f.fcoords.field->get_owned_by();
 			f.owner = owned_by != 0 ? egbase.get_player(owned_by) : nullptr;
 			f.is_border = f.fcoords.field->is_border();
-			f.vision = 2;
+			f.seeing = Widelands::SeeUnseeNode::kVisible;
 			f.road_e = f.fcoords.field->get_road(Widelands::WALK_E);
 			f.road_se = f.fcoords.field->get_road(Widelands::WALK_SE);
 			f.road_sw = f.fcoords.field->get_road(Widelands::WALK_SW);

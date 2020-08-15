@@ -302,12 +302,14 @@ void RealFSImpl::unlink_directory(const std::string& file) {
  * if the dir can't be created or if a file with this name exists
  */
 void RealFSImpl::ensure_directory_exists(const std::string& dirname) {
-	std::string clean_dirname = dirname;
 #ifdef _WIN32
+	std::string clean_dirname = dirname;
 	// Make sure we always use "/" for splitting the directory, because
 	// directory names might be hardcoded in C++ or come from the file system.
 	// Calling canonicalize_name will take care of this working for all file systems.
 	boost::replace_all(clean_dirname, "\\", "/");
+#else
+	const std::string& clean_dirname = dirname;
 #endif
 
 	std::string::size_type it = 0;
@@ -462,8 +464,9 @@ void RealFSImpl::fs_rename(const std::string& old_name, const std::string& new_n
 	const std::string fullname1 = canonicalize_name(old_name);
 	const std::string fullname2 = canonicalize_name(new_name);
 	if (rename(fullname1.c_str(), fullname2.c_str()) != 0) {
-		throw FileError("RealFSImpl::fs_rename", fullname1, std::string("unable to rename file to ") +
-		                                                       fullname2 + ", " + strerror(errno));
+		throw FileError(
+		   "RealFSImpl::fs_rename", fullname1,
+		   std::string("unable to rename file to ") + fullname2 + ", " + strerror(errno));
 	}
 }
 
@@ -551,18 +554,19 @@ StreamWrite* RealFSImpl::open_stream_write(const std::string& fname) {
 	return new RealFSStreamWrite(fullname);
 }
 
-unsigned long long RealFSImpl::disk_space() {
+// Disk space is system dependent anyway, so we allow unspecific long long
+unsigned long long RealFSImpl::disk_space() {  // NOLINT
 #ifdef _WIN32
 	ULARGE_INTEGER freeavailable;
 	return GetDiskFreeSpaceEx(canonicalize_name(directory_).c_str(), &freeavailable, 0, 0) ?
 	          // If more than 2G free space report that much
-	          freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :
-	                                   freeavailable.LowPart :
+	          freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :  // NOLINT
+	             freeavailable.LowPart :
 	          0;
 #else
 	struct statvfs svfs;
 	if (statvfs(canonicalize_name(directory_).c_str(), &svfs) != -1) {
-		return static_cast<unsigned long long>(svfs.f_bsize) * svfs.f_bavail;
+		return static_cast<unsigned long long>(svfs.f_bsize) * svfs.f_bavail;  // NOLINT
 	}
 #endif
 	return 0;  //  can not check disk space

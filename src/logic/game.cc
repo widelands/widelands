@@ -74,13 +74,14 @@ namespace Widelands {
 
 Game::SyncWrapper::~SyncWrapper() {
 	if (dump_ != nullptr) {
-		if (!syncstreamsave_)
+		if (!syncstreamsave_) {
 			try {
 				g_fs->fs_unlink(dumpfname_);
 			} catch (const FileError& e) {
 				// not really a problem if deletion fails, but we'll log it
 				log("Deleting synchstream file %s failed: %s\n", dumpfname_.c_str(), e.what());
 			}
+		}
 	}
 }
 
@@ -236,7 +237,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 		std::string tribe = map().get_scenario_player_tribe(p);
 		if (tribe.empty()) {
 			log("Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
-			const DescriptionIndex random = std::rand() % tribes().nrtribes();
+			const DescriptionIndex random = std::rand() % tribes().nrtribes();  // NOLINT
 			tribe = tribes().get_tribe_descr(random)->name();
 		}
 		add_player(p, 0, tribe, map().get_scenario_player_name(p));
@@ -252,7 +253,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
-		bool const result = run(NewSPScenario, script_to_run, false, "single_player");
+		bool const result =
+		   run(StartGameType::kSinglePlayerScenario, script_to_run, false, "single_player");
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
@@ -291,9 +293,9 @@ void Game::init_newgame(const GameSettings& settings) {
 		const PlayerSettings& playersettings = settings.players[i];
 
 		if (playersettings.state == PlayerSettings::State::kClosed ||
-		    playersettings.state == PlayerSettings::State::kOpen)
+		    playersettings.state == PlayerSettings::State::kOpen) {
 			continue;
-		else if (playersettings.state == PlayerSettings::State::kShared) {
+		} else if (playersettings.state == PlayerSettings::State::kShared) {
 			shared.push_back(playersettings);
 			shared_num.push_back(i + 1);
 			continue;
@@ -414,7 +416,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
-		bool const result = run(Loaded, script_to_run, false, "single_player");
+		bool const result = run(StartGameType::kSaveGame, script_to_run, false, "single_player");
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
@@ -463,9 +465,9 @@ bool Game::run(StartGameType const start_game_type,
 	replay_ = replay;
 	postload();
 
-	if (start_game_type != Loaded) {
+	if (start_game_type != StartGameType::kSaveGame) {
 		PlayerNumber const nr_players = map().get_nrplayers();
-		if (start_game_type == NewNonScenario) {
+		if (start_game_type == StartGameType::kMap) {
 			step_loader_ui(_("Creating player infrastructure…"));
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
@@ -475,13 +477,14 @@ bool Game::run(StartGameType const start_game_type,
 			// Replays can't handle scenarios
 			set_write_replay(false);
 			iterate_players_existing_novar(p, nr_players, *this) {
-				if (!map().get_starting_pos(p))
+				if (!map().get_starting_pos(p)) {
 					throw WLWarning(_("Missing starting position"),
 					                _("Widelands could not start the game, because player %u has "
 					                  "no starting position.\n"
 					                  "You can manually add a starting position with the Widelands "
 					                  "Editor to fix this problem."),
 					                static_cast<unsigned int>(p));
+				}
 			}
 		}
 
@@ -511,16 +514,18 @@ bool Game::run(StartGameType const start_game_type,
 		}
 
 		// Run the init script, if the map provides one.
-		if (start_game_type == NewSPScenario)
+		if (start_game_type == StartGameType::kSinglePlayerScenario) {
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/init.lua"));
-		else if (start_game_type == NewMPScenario)
+		} else if (start_game_type == StartGameType::kMultiPlayerScenario) {
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
+		}
 
 		// Queue first statistics calculation
 		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
 	}
 
-	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
+	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
+	                               start_game_type == StartGameType::kSaveGame)) {
 		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
 	}
 
@@ -537,8 +542,9 @@ bool Game::run(StartGameType const start_game_type,
 			log("Replay writer has started\n");
 		}
 
-		if (writesyncstream_)
+		if (writesyncstream_) {
 			syncwrapper_.start_dump(fname);
+		}
 	}
 
 	sync_reset();
@@ -822,9 +828,12 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
                                        const std::vector<Serial>& soldiers) {
-	if (1 < player(who_attacks)
-	           .vision(Map::get_index(flag.get_building()->get_position(), map().get_width())))
-		send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
+	for (Widelands::Coords& coords : flag.get_building()->get_positions(*this)) {
+		if (player(who_attacks).is_seeing(Map::get_index(coords, map().get_width()))) {
+			send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
+			break;
+		}
+	}
 }
 
 void Game::send_player_ship_scouting_direction(Ship& ship, WalkingDir direction) {
@@ -873,6 +882,11 @@ void Game::send_player_set_stock_policy(Building& imm,
                                         StockPolicy sp) {
 	send_player_command(new CmdSetStockPolicy(
 	   get_gametime(), imm.get_owner()->player_number(), imm, ww == wwWORKER, di, sp));
+}
+
+void Game::send_player_toggle_mute(const Building& b, bool all) {
+	send_player_command(
+	   new CmdToggleMuteMessages(get_gametime(), b.owner().player_number(), b, all));
 }
 
 int Game::propose_trade(const Trade& trade) {
@@ -948,7 +962,7 @@ void Game::cancel_trade(int trade_id) {
 }
 
 LuaGameInterface& Game::lua() {
-	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
+	return dynamic_cast<LuaGameInterface&>(EditorGameBase::lua());
 }
 
 const std::string& Game::get_win_condition_displayname() const {
@@ -997,11 +1011,12 @@ void Game::sample_statistics() {
 	const Map& themap = map();
 	Extent const extent = themap.extent();
 	iterate_Map_FCoords(themap, extent, fc) {
-		if (PlayerNumber const owner = fc.field->get_owned_by())
+		if (PlayerNumber const owner = fc.field->get_owned_by()) {
 			++land_size[owner - 1];
+		}
 
 		// Get the immovable
-		if (upcast(Building, building, fc.field->get_immovable()))
+		if (upcast(Building, building, fc.field->get_immovable())) {
 			if (building->get_position() == fc) {  // only count main location
 				uint8_t const player_index = building->owner().player_number() - 1;
 				++nr_buildings[player_index];
@@ -1012,12 +1027,15 @@ void Game::sample_statistics() {
 					productivity[player_index] += productionsite->get_statistics_percent();
 				}
 			}
+		}
 
 		// Now, walk the bobs
-		for (Bob const* b = fc.field->get_first_bob(); b; b = b->get_next_bob())
-			if (upcast(Soldier const, s, b))
+		for (Bob const* b = fc.field->get_first_bob(); b; b = b->get_next_bob()) {
+			if (upcast(Soldier const, s, b)) {
 				miltary_strength[s->owner().player_number() - 1] +=
 				   s->get_level(TrainingAttribute::kTotal) + 1;  //  So that level 0 also counts.
+			}
+		}
 	}
 
 	//  Number of workers / wares / casualties / kills.
@@ -1055,8 +1073,9 @@ void Game::sample_statistics() {
 
 	// Now, divide the statistics
 	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
-		if (productivity[i])
+		if (productivity[i]) {
 			productivity[i] /= nr_production_sites[i];
+		}
 	}
 
 	// If there is a hook function defined to sample special statistics in this

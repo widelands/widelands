@@ -56,9 +56,6 @@ tribes:new_trainingsite_type {
       { name = "armor_chain", amount = 2 },
       { name = "armor_gilded", amount = 2 },
    },
-   outputs = {
-      "empire_soldier",
-   },
 
    ["soldier attack"] = {
       min_level = 0,
@@ -94,7 +91,7 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped",
          }
       },
@@ -106,7 +103,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has spear",
             "return=failed unless site has empire_bread",
             "return=failed unless site has fish,meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
             "consume=spear empire_bread fish,meat",
             "train=soldier attack 0 1"
@@ -120,7 +117,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has spear_advanced",
             "return=failed unless site has empire_bread",
             "return=failed unless site has fish,meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 1",
             "consume=spear_advanced empire_bread fish,meat",
             "train=soldier attack 1 2"
@@ -134,7 +131,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has spear_heavy",
             "return=failed unless site has empire_bread",
             "return=failed unless site has fish,meat:2",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 2",
             "consume=spear_heavy empire_bread fish,meat:2",
             "train=soldier attack 2 3"
@@ -148,7 +145,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has spear_war",
             "return=failed unless site has empire_bread:2",
             "return=failed unless site has fish,meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier attack 3",
             "consume=spear_war empire_bread:2 fish,meat",
             "train=soldier attack 3 4"
@@ -161,7 +158,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier health 0",
             "return=failed unless site has armor_helmet",
             "return=failed unless site has empire_bread,fish,meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier health 0",
             "consume=armor_helmet empire_bread,fish,meat",
             "train=soldier health 0 1"
@@ -175,7 +172,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has armor",
             "return=failed unless site has empire_bread",
             "return=failed unless site has fish,meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier health 1",
             "consume=armor empire_bread fish,meat",
             "train=soldier health 1 2"
@@ -189,7 +186,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has armor_chain",
             "return=failed unless site has empire_bread:2",
             "return=failed unless site has fish,meat:2",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier health 2",
             "consume=armor_chain empire_bread:2 fish,meat:2",
             "train=soldier health 2 3"
@@ -203,7 +200,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has armor_gilded",
             "return=failed unless site has empire_bread:2",
             "return=failed unless site has fish,meat:2",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier health 3",
             "consume=armor_gilded empire_bread:2 fish,meat:2",
             "train=soldier health 3 4"

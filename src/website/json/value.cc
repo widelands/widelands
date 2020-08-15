@@ -49,7 +49,7 @@ std::string Empty::as_string() const {
 	return "";
 }
 
-String::String(std::string value) : string_value(value) {
+String::String(const std::string& value) : string_value(value) {
 }
 std::string String::as_string() const {
 	return "\"" + string_value + "\"";

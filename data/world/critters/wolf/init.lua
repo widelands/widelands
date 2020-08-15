@@ -8,8 +8,15 @@ animations = {
       sound_effect = {
          -- Sound files with numbers starting from 10 are generating silence.
          path = "sound/animals/wolf",
+         priority = 3
       },
    },
+   eating = {
+      directory = dirname,
+      basename = "idle", -- TODO(Nordfriese): Make animation
+      hotspot = { 8, 15 },
+      fps = 10,
+   }
 }
 
 add_directional_animation(animations, "walk", dirname, "walk", {19, 19}, 20)
@@ -23,4 +30,8 @@ world:new_critter_type{
       remove = { "remove" },
    },
    animations = animations,
+   size = 5,
+   reproduction_rate = 80,
+   appetite = 100,
+   carnivore = true,
 }

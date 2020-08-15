@@ -42,18 +42,20 @@ void ReplayGameController::think() {
 	lastframe_ = curtime;
 
 	// prevent crazy frametimes
-	if (frametime < 0)
+	if (frametime < 0) {
 		frametime = 0;
-	else if (frametime > 1000)
+	} else if (frametime > 1000) {
 		frametime = 1000;
+	}
 
 	frametime = frametime * real_speed() / 1000;
 
 	time_ = game_.get_gametime() + frametime;
 
 	if (replayreader_) {
-		while (Widelands::Command* const cmd = replayreader_->get_next_command(time_))
+		while (Widelands::Command* const cmd = replayreader_->get_next_command(time_)) {
 			game_.enqueue_command(cmd);
+		}
 
 		if (replayreader_->end_of_replay()) {
 			replayreader_.reset(nullptr);

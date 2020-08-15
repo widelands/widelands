@@ -67,6 +67,17 @@ void World::load_graphics() {
 }
 
 void World::postload() {
+	// Validate immovable grows/transforms data
+	for (DescriptionIndex i = 0; i < immovables_->size(); ++i) {
+		const ImmovableDescr& imm = immovables_->get(i);
+		for (const auto& target : imm.becomes()) {
+			if (get_immovable_index(target.second) == INVALID_INDEX) {
+				throw GameDataError("Unknown grow/transform target '%s' for world immovable '%s'",
+				                    target.second.c_str(), imm.name().c_str());
+			}
+		}
+	}
+
 	const DescriptionIndex nr_t = get_nr_terrains();
 	for (size_t i = 0; i < nr_t; ++i) {
 		const TerrainDescription& t = terrain_descr(i);
@@ -132,8 +143,9 @@ const DescriptionMaintainer<EditorCategory>& World::editor_immovable_categories(
 DescriptionIndex World::safe_resource_index(const char* const resourcename) const {
 	DescriptionIndex const result = resource_index(resourcename);
 
-	if (result == INVALID_INDEX)
+	if (result == INVALID_INDEX) {
 		throw GameDataError("world does not define resource type \"%s\"", resourcename);
+	}
 	return result;
 }
 
@@ -152,6 +164,10 @@ DescriptionIndex World::get_terrain_index(const std::string& name) const {
 
 DescriptionIndex World::get_nr_terrains() const {
 	return terrains_->size();
+}
+
+DescriptionIndex World::get_nr_critters() const {
+	return critters_->size();
 }
 
 DescriptionIndex World::get_critter(char const* const l) const {

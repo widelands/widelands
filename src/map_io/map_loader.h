@@ -36,7 +36,7 @@ class MapLoader {
 public:
 	enum class LoadType { kGame, kScenario, kEditor };
 
-	MapLoader(const std::string& filename, Map& M) : map_(M), state_(STATE_INIT) {
+	MapLoader(const std::string& filename, Map& M) : map_(M), state_(State::kInit) {
 		map_.set_filename(filename);
 	}
 	virtual ~MapLoader() {
@@ -50,7 +50,7 @@ public:
 	}
 
 protected:
-	enum State { STATE_INIT, STATE_PRELOADED, STATE_LOADED };
+	enum class State { kInit, kPreLoaded, kLoaded };
 	void set_state(State const s) {
 		state_ = s;
 	}

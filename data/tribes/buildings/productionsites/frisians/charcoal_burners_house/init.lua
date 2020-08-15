@@ -54,16 +54,6 @@ tribes:new_productionsite_type {
       { name = "log", amount = 6 },
    },
 
-   outputs = {
-      "coal"
-   },
-
-   indicate_workarea_overlaps = {
-      frisians_aqua_farm = false,
-      frisians_charcoal_burners_house = false,
-      frisians_clay_pit = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -81,14 +71,14 @@ tribes:new_productionsite_type {
             "callworker=find_pond",
             "consume=log:3",
             "callworker=make_stack",
-            "sleep=15000",
+            "sleep=duration:15s",
          },
       },
       collect_coal = {
          -- TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
          descname = _"collecting coal",
          actions = {
-            "sleep=15000",
+            "sleep=duration:15s",
             "callworker=collect_coal",
          },
       },

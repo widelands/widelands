@@ -48,9 +48,6 @@ tribes:new_trainingsite_type {
       { name = "meat", amount = 8 },
       { name = "empire_bread", amount = 8 }
    },
-   outputs = {
-      "empire_soldier",
-   },
 
    ["soldier evade"] = {
       min_level = 0,
@@ -66,7 +63,7 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped",
          }
       },
@@ -77,7 +74,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
             "return=failed unless site has empire_bread",
             "return=failed unless site has fish,meat",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier evade 0", -- Because the soldier can be expelled by the player
             "consume=empire_bread fish,meat",
             "train=soldier evade 0 1"
@@ -90,7 +87,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
             "return=failed unless site has empire_bread",
             "return=failed unless site has fish,meat:2",
-            "sleep=30000",
+            "sleep=duration:30s",
             "checksoldier=soldier evade 1", -- Because the soldier can be expelled by the player
             "consume=empire_bread fish,meat:2",
             "train=soldier evade 1 2"

@@ -4,12 +4,18 @@ animations = {
    idle = {
       pictures = path.list_files(dirname .. "idle_??.png"),
       sound_effect = {
-         -- Sound files with numbers starting for 10 are generating silence. Remove when we move the sound triggering to programs
          path = "sound/animals/coyote",
+         priority = 0.01
       },
       hotspot = { 10, 13 },
       fps = 10,
    },
+   eating = {
+      directory = dirname,
+      basename = "idle", -- TODO(Nordfriese): Make animation
+      hotspot = { 10, 13 },
+      fps = 10,
+   }
 }
 
 add_directional_animation(animations, "walk", dirname, "walk", {11, 14}, 20)
@@ -23,4 +29,8 @@ world:new_critter_type{
       remove = { "remove" },
    },
    animations = animations,
+   size = 4,
+   reproduction_rate = 80,
+   appetite = 70,
+   carnivore = true,
 }

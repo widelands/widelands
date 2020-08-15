@@ -17,8 +17,8 @@ tribes:new_immovable_type {
    attributes = { "seed_berrybush" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 10000",
+      main = {
+         "animate=idle duration:10s",
          "grow=berry_bush_juniper_small",
       },
    },
@@ -44,8 +44,8 @@ tribes:new_immovable_type {
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 10000",
+      main = {
+         "animate=idle duration:10s",
          "grow=berry_bush_juniper_medium",
       },
    },
@@ -71,8 +71,8 @@ tribes:new_immovable_type {
    attributes = { "flowering" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 70000",
+      main = {
+         "animate=idle duration:1m10s",
          "grow=berry_bush_juniper_ripe",
       },
    },
@@ -98,8 +98,8 @@ tribes:new_immovable_type {
    attributes = { "ripe_bush" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 800000",
+      main = {
+         "animate=idle duration:13m20s",
          "remove=",
       },
       harvest = {

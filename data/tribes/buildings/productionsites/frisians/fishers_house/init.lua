@@ -44,16 +44,8 @@ tribes:new_productionsite_type {
       prohibited_till = 490
    },
 
-   indicate_workarea_overlaps = {
-      frisians_fishers_house = false,
-   },
-
    working_positions = {
       frisians_fisher = 1
-   },
-
-   outputs = {
-      "fish"
    },
 
    programs = {
@@ -62,7 +54,7 @@ tribes:new_productionsite_type {
          descname = _"fishing",
          actions = {
             "callworker=fish",
-            "sleep=16000" -- TODO(stonerl): reduce to 3000 and move 13000 to the worker
+            "sleep=duration:16s" -- TODO(stonerl): reduce to 3s and move 13s to the worker
          }
       },
    },

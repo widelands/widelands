@@ -40,6 +40,7 @@ struct S2MapLoader;
 
 namespace Widelands {
 
+class CritterDescr;
 class MapLoader;
 struct MapGenerator;
 struct PathfieldManager;
@@ -93,6 +94,41 @@ struct FindBobAlwaysTrue : public FindBob {
 	}
 	~FindBobAlwaysTrue() override {
 	}  // make gcc shut up
+};
+
+struct FindBobByName : public FindBob {
+	bool accept(Bob* b) const override;
+	explicit FindBobByName(const std::string& n) : name_(n) {
+	}
+	~FindBobByName() override {
+	}
+
+private:
+	std::string name_;
+};
+struct FindCritter : public FindBob {
+	bool accept(Bob* b) const override;
+	~FindCritter() override {
+	}
+};
+struct FindCarnivores : public FindBob {
+	bool accept(Bob* b) const override;
+	explicit FindCarnivores() {
+	}
+	~FindCarnivores() override {
+	}
+};
+struct FindCritterByClass : public FindBob {
+	enum class Class { Herbivore, Carnivore, Neither };
+	static Class classof(const CritterDescr&);
+	bool accept(Bob* b) const override;
+	explicit FindCritterByClass(const CritterDescr& b) : class_(classof(b)) {
+	}
+	~FindCritterByClass() override {
+	}
+
+private:
+	Class class_;
 };
 
 // Helper struct to save certain elemental data of a field without an actual instance of Field
@@ -271,6 +307,9 @@ public:
 	}
 
 	const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {
+		return suggested_teams_;
+	}
+	std::vector<SuggestedTeamLineup>& get_suggested_teams() {
 		return suggested_teams_;
 	}
 
@@ -510,7 +549,7 @@ public:
 	const PortSpacesSet& get_port_spaces() const {
 		return port_spaces_;
 	}
-	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
+	std::vector<Coords> find_portdock(const Widelands::Coords& c, bool force) const;
 
 	/// Return true if there are at least 2 port spaces that can be reached from each other by water
 	bool allows_seafaring() const;

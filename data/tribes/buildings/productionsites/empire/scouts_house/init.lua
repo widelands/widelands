@@ -45,7 +45,7 @@ tribes:new_productionsite_type {
          descname = _"scouting",
          actions = {
             "consume=ration",
-            "sleep=30000",
+            "sleep=duration:30s",
             "callworker=scout"
          }
       },

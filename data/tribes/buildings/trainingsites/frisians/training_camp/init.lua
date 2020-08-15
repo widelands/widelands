@@ -73,12 +73,6 @@ tribes:new_trainingsite_type {
       { name = "helmet", amount = 2 },
       { name = "fur_garment_studded", amount = 2 },
    },
-   outputs = {
-      "frisians_soldier",
-      "scrap_metal_mixed",
-      "scrap_iron",
-      "fur_garment_old",
-   },
 
    ["soldier attack"] = {
       min_level = 0,
@@ -122,7 +116,7 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped",
          }
       },
@@ -133,8 +127,8 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
             "return=failed unless site has sword_long",
             "return=failed unless site has bread_frisians,beer,smoked_fish,smoked_meat",
-            "sleep=12400",
-            "animate=working 14000",
+            "sleep=duration:12s400ms",
+            "animate=working duration:14s",
             "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
             "consume=sword_long bread_frisians,beer,smoked_fish,smoked_meat",
             "train=soldier attack 0 1",
@@ -149,8 +143,8 @@ tribes:new_trainingsite_type {
             "return=failed unless site has sword_broad",
             "return=failed unless site has bread_frisians",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=10800",
-            "animate=working 12000",
+            "sleep=duration:10s800ms",
+            "animate=working duration:12s",
             "checksoldier=soldier attack 1",
             "consume=sword_broad bread_frisians smoked_fish,smoked_meat",
             "train=soldier attack 1 2",
@@ -165,8 +159,8 @@ tribes:new_trainingsite_type {
             "return=failed unless site has sword_double",
             "return=failed unless site has beer",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=10800",
-            "animate=working 12000",
+            "sleep=duration:10s800ms",
+            "animate=working duration:12s",
             "checksoldier=soldier attack 2",
             "consume=sword_double beer smoked_fish,smoked_meat",
             "train=soldier attack 2 3",
@@ -181,8 +175,8 @@ tribes:new_trainingsite_type {
             "return=failed unless site has helmet",
             "return=failed unless site has bread_frisians,beer",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=15000",
-            "animate=working 15000",
+            "sleep=duration:15s",
+            "animate=working duration:15s",
             "checksoldier=soldier health 0",
             "consume=helmet bread_frisians,beer smoked_fish,smoked_meat",
             "train=soldier health 0 1"
@@ -196,8 +190,8 @@ tribes:new_trainingsite_type {
             "return=failed unless site has fur_garment_studded",
             "return=failed unless site has bread_frisians,beer",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=12400",
-            "animate=working 14000",
+            "sleep=duration:12s400ms",
+            "animate=working duration:14s",
             "checksoldier=soldier defense 0",
             "consume=fur_garment_studded bread_frisians,beer smoked_fish,smoked_meat",
             "train=soldier defense 0 1",

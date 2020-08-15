@@ -97,8 +97,9 @@ void Carrier::road_update(Game& game, State& state) {
 
 	// Move into idle position if necessary
 	if (start_task_movepath(game, road.get_path(), road.get_idle_index(),
-	                        descr().get_right_walk_anims(does_carry_ware(), this)))
+	                        descr().get_right_walk_anims(does_carry_ware(), this))) {
 		return;
+	}
 
 	// Be bored. There's nothing good on TV, either.
 	// TODO(unknown): idle animations
@@ -226,9 +227,8 @@ void Carrier::deliver_to_building(Game& game, State& state) {
 			} else {
 				molog("[Carrier]: Building switch from under us, return to road.\n");
 
-				state.ivar1 = &building->base_flag() ==
-				              &dynamic_cast<RoadBase&>(*get_location(game))
-				                  .get_flag(static_cast<RoadBase::FlagId>(0));
+				state.ivar1 = &building->base_flag() == &dynamic_cast<RoadBase&>(*get_location(game))
+				                                            .get_flag(static_cast<RoadBase::FlagId>(0));
 				break;
 			}
 		}
@@ -405,9 +405,11 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
 	//
 	// (Maybe the need for this lengthy explanation is proof that the
 	// ack system needs to be reworked.)
-	if (State const* const transport = get_state(taskTransport))
-		if ((transport->ivar1 == -1 && find_closest_flag(game) != flag) || flag == transport->ivar1)
+	if (State const* const transport = get_state(taskTransport)) {
+		if ((transport->ivar1 == -1 && find_closest_flag(game) != flag) || flag == transport->ivar1) {
 			return false;
+		}
+	}
 
 	// Ack it if we haven't
 	promised_pickup_to_ = flag;
@@ -477,14 +479,15 @@ int32_t Carrier::find_closest_flag(Game& game) {
 
 		map.get_brn(pos, &pos);
 
-		if (pos == startpath.get_start())
+		if (pos == startpath.get_start()) {
 			curidx = 0;
-		else if (pos == startpath.get_end())
+		} else if (pos == startpath.get_end()) {
 			curidx = startpath.get_nsteps();
-		else
+		} else {
 			throw wexception("MO(%u): Carrier::find_closest_flag: not on road, not on "
 			                 "building",
 			                 serial());
+		}
 	}
 
 	// Calculate the paths and their associated costs
@@ -513,12 +516,14 @@ bool Carrier::start_task_walktoflag(Game& game, int32_t const flag, bool const o
 
 	if (!flag) {
 		idx = 0;
-		if (offset)
+		if (offset) {
 			++idx;
+		}
 	} else {
 		idx = path.get_nsteps();
-		if (offset)
+		if (offset) {
 			--idx;
+		}
 	}
 
 	return start_task_movepath(
@@ -550,11 +555,9 @@ void Carrier::Loader::load(FileRead& fr) {
 
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
-		// TODO(GunChleoc): Remove savegame compatibility after Build 21.
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 1) {
+		if (packet_version == kCurrentPacketVersion) {
 			Carrier& carrier = get<Carrier>();
-			// TODO(GunChleoc): std::max is for savegame compatibility. Remove after Build 21.
-			carrier.promised_pickup_to_ = std::max(-1, fr.signed_32());
+			carrier.promised_pickup_to_ = fr.signed_32();
 		} else {
 			throw UnhandledVersionError("Carrier", packet_version, kCurrentPacketVersion);
 		}
@@ -564,10 +567,12 @@ void Carrier::Loader::load(FileRead& fr) {
 }
 
 const Bob::Task* Carrier::Loader::get_task(const std::string& name) {
-	if (name == "road")
+	if (name == "road") {
 		return &taskRoad;
-	if (name == "transport")
+	}
+	if (name == "transport") {
 		return &taskTransport;
+	}
 	return Worker::Loader::get_task(name);
 }
 

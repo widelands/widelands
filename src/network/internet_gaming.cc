@@ -427,11 +427,11 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			format_and_add_chat("", "", true, _("Welcome to the Widelands Metaserver!"));
 			const std::string assigned_name = packet.string();
 			if (clientname_ != assigned_name) {
-				format_and_add_chat(
-				   "", "", true, (boost::format(_("You have been logged in as '%s' since your "
-				                                  "requested name is already in use or reserved.")) %
-				                  assigned_name)
-				                    .str());
+				format_and_add_chat("", "", true,
+				                    (boost::format(_("You have been logged in as '%s' since your "
+				                                     "requested name is already in use or reserved.")) %
+				                     assigned_name)
+				                       .str());
 			}
 			clientname_ = assigned_name;
 			clientrights_ = packet.string();
@@ -616,7 +616,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			std::sort(clientlist_.begin(), clientlist_.end(),
 			          [](const InternetClient& left, const InternetClient& right) {
 				          return (left.name < right.name);
-				       });
+			          });
 
 			for (InternetClient& client : old) {
 				if (client.name.size()) {
@@ -1000,7 +1000,7 @@ void InternetGaming::send(const std::string& msg) {
  * \returns the boolean value of a string received from the metaserver.
  * If conversion fails, it throws a \ref warning
  */
-bool InternetGaming::str2bool(std::string str) {
+bool InternetGaming::str2bool(const std::string& str) {
 	if ((str != "true") && (str != "false")) {
 		throw WLWarning(_("Conversion error"),
 		                /** TRANSLATORS: Geeky message from the metaserver */
@@ -1043,7 +1043,7 @@ void InternetGaming::format_and_add_chat(const std::string& from,
 /**
  * Check for vaild username characters.
  */
-bool InternetGaming::valid_username(std::string username) {
+bool InternetGaming::valid_username(const std::string& username) {
 	if (username.empty() ||
 	    username.find_first_not_of("abcdefghijklmnopqrstuvwxyz"
 	                               "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= username.size()) {
