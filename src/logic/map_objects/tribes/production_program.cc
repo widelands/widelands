@@ -1272,33 +1272,94 @@ bool ProductionProgram::ActRecruit::get_building_work(Game& game,
 /* RST
 mine
 ----
-Takes resources from the ground. It takes as arguments first the resource
-name, after this the radius for searching for the resource around the building
-field. The next values is the percentage of starting resources that can be dug
-out before this mine is exhausted. The next value is the percentage that this
-building still produces something even if it is exhausted. And the last value
-is the percentage chance that a worker is gaining experience on failure - this
-is to guarantee that you can eventually extend a mine, even though it was
-exhausted for a while already.
+
+.. function:: mine=\<resource_name\> radius:\<number\> resources:\<percent\> when_empty:\<percent\>
+     \[experience_on_fail:\<percent\>\]
+
+   :arg string resource_name: The name of the resource to mine, e.g. 'coal' or 'water'.
+   :arg int radius: The workarea radius that is searched for resources. Must be ``>0``.
+   :arg percent yield: The :ref:`map_object_programs_datatypes_percent` of resources that the
+      mine can dig up before its resource is depleted.
+   :arg percent when_empty: The :ref:`map_object_programs_datatypes_percent` chance that the mine
+      will still find some resources after it has been depleted.
+   :arg percent experience_on_fail: The :ref:`map_object_programs_datatypes_percent` chance that the
+      mine's workers will still gain some experience when mining fails after its resources have been
+      depleted.
+
+   Takes resources from the ground. A building that mines will deplete when the percentage of
+   resources given in ``resources`` has been dug up, leaving a chance of ``depleted`` that it
+   will still find some resources anyway. Examples:
+
+.. code-block:: lua
+
+     actions = {
+         "return=skipped unless economy needs iron_ore",
+         "consume=ration",
+         "sleep=duration:45s",
+         "animate=working duration:20s",
+          -- Search radius of 2 for iron. Will always find iron until 33.33% of it has been dug up.
+          -- After that, there's still a chance of 5% for finding iron.
+          -- If this fails, the workers still have a chance of 17% of gaining experience.
+         "mine=iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
+         "produce=iron_ore"
+     }
+
+     actions = {
+         "sleep=duration:20s",
+         "animate=working duration:20s",
+          -- Search radius of 1 for water. Will always find water until 100% of it has been drawn.
+          -- After that, there's still a chance of 65% for finding water.
+         "mine=water radius:1 yield:100% when_empty:65%",
+         "produce=water"
+     }
 */
 ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     const World& world,
                                     const std::string& production_program_name,
                                     ProductionSiteDescr* descr) {
-	if (arguments.size() != 5) {
-		throw GameDataError(
-		   "Usage: mine=resource <workarea radius> <max> <chance> <worker experience gained>");
+	if (arguments.size() != 5 && arguments.size() != 4) {
+		throw GameDataError("Usage: mine=<resource name> radius:<number> yield:<percent> "
+		                    "when_empty:<percent> [experience:<percent>]");
 	}
+	experience_chance_ = 0U;
 
-	resource_ = world.safe_resource_index(arguments.front().c_str());
-	distance_ = read_positive(arguments.at(1));
-	max_ = read_positive(arguments.at(2));
-	chance_ = read_positive(arguments.at(3));
-	training_ = read_positive(arguments.at(4));
+	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
+		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
+		log("WARNING: Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
+		    "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
+		    descr->name().c_str());
+		resource_ = world.safe_resource_index(arguments.front().c_str());
+		workarea_ = read_positive(arguments.at(1));
+		max_resources_ = read_positive(arguments.at(2)) * 100U;
+		depleted_chance_ = read_positive(arguments.at(3)) * 100U;
+		if (arguments.size() == 5) {
+			experience_chance_ = read_positive(arguments.at(4)) * 100U;
+		}
+	} else {
+		for (const std::string& argument : arguments) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.second.empty()) {
+				resource_ = world.safe_resource_index(item.first.c_str());
+			} else if (item.first == "radius") {
+				workarea_ = read_positive(item.second);
+			} else if (item.first == "yield") {
+				max_resources_ = read_percent_to_int(item.second);
+			} else if (item.first == "when_empty") {
+				depleted_chance_ = read_percent_to_int(item.second);
+			} else if (item.first == "experience_on_fail") {
+				experience_chance_ = read_percent_to_int(item.second);
+			} else {
+				throw GameDataError(
+				   "Unknown argument '%s'. Usage: mine=<resource name> radius:<number> "
+				   "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]",
+				   item.first.c_str());
+			}
+		}
+	}
 
 	const std::string description = descr->name() + " " + production_program_name + " mine " +
 	                                world.get_resource(resource_)->name();
-	descr->workarea_info_[distance_].insert(description);
+	descr->workarea_info_[workarea_].insert(description);
 
 	descr->add_collected_resource(arguments.front());
 }
@@ -1313,7 +1374,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 	{
 		MapRegion<Area<FCoords>> mr(
-		   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), distance_));
+		   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), workarea_));
 		do {
 			DescriptionIndex fres = mr.location().field->get_resources();
 			ResourceAmount amount = mr.location().field->get_resources_amount();
@@ -1343,16 +1404,16 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		} while (mr.advance(*map));
 	}
 
-	//  how much is digged
-	int32_t digged_percentage = 100;
+	//  how much is dug
+	unsigned dug_percentage = MapObjectProgram::kMaxProbability;
 	if (totalstart) {
-		digged_percentage = (totalstart - totalres) * 100 / totalstart;
+		dug_percentage = (totalstart - totalres) * MapObjectProgram::kMaxProbability / totalstart;
 	}
 	if (!totalres) {
-		digged_percentage = 100;
+		dug_percentage = MapObjectProgram::kMaxProbability;
 	}
 
-	if (digged_percentage < max_) {
+	if (dug_percentage < max_resources_) {
 		//  mine can produce normally
 		if (totalres == 0) {
 			return ps.program_end(game, ProgramResult::kFailed);
@@ -1364,7 +1425,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 		{
 			MapRegion<Area<FCoords>> mr(
-			   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), distance_));
+			   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), workarea_));
 			do {
 				DescriptionIndex fres = mr.location().field->get_resources();
 				ResourceAmount amount = mr.location().field->get_resources_amount();
@@ -1393,7 +1454,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  there is a sufficiently high chance, that the mine
 		//  will still produce enough.
 		//  e.g. mines have chance=5, wells have 65
-		if (chance_ <= 20) {
+		if (depleted_chance_ <= 20 * MapObjectProgram::kMaxProbability / 100U) {
 			ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
@@ -1402,10 +1463,11 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
-		if (chance_ <= game.logic_rand() % 100) {
+		if (depleted_chance_ <= game.logic_rand() % MapObjectProgram::kMaxProbability) {
 
 			// Gain experience
-			if (training_ >= game.logic_rand() % 100) {
+			if (experience_chance_ > 0 &&
+			    experience_chance_ >= game.logic_rand() % MapObjectProgram::kMaxProbability) {
 				ps.train_workers(game);
 			}
 			return ps.program_end(game, ProgramResult::kFailed);
@@ -1596,34 +1658,72 @@ void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) co
 /* RST
 construct
 ---------
-Construct an immovable on the seashore.
+.. function:: construct=\<immovable_name\> worker:\<program_name\> radius:\<number\>
 
-Parameter syntax::
+   :arg string immovable_name: The name of the :ref:`immovable <lua_tribes_immovables>` to be
+      constructed, e.g. ``barbarians_shipconstruction``.
 
-  parameters ::= <object_name> <worker_program> <workarea_radius>
+   :arg string worker: The :ref:`worker's program <tribes_worker_programs>` that makes the worker
+      walk to the immovable's location and do some work.
 
-Parameter semantics:
-
-``object_name``
-    The name of the immovable to be constructed, e.g. ``barbarians_shipconstruction``.
-``worker_program``
-    The worker's program that makes him walk to the immovable's location and do some work.
-``workarea_radius``
-    The radius used by the worker to find a suitable construction spot on the map.
+   :arg radius radius: The radius used by the worker to find a suitable construction spot on the
+      map.
 
 Sends the main worker to look for a suitable spot on the shore and to perform construction work on
-an immovable.
+an immovable. Example:
+
+.. code-block:: lua
+
+      -- Production program actions
+      actions = {
+         "construct=barbarians_shipconstruction worker:buildship radius:6",
+         "sleep=duration:20s",
+      }
+
+      -- Corresponding worker program
+      buildship = {
+         "walk=object-or-coords",
+         "plant=attrib:shipconstruction unless object",
+         "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
+         "animate=work duration:500ms",
+         "construct",
+         "animate=work duration:5s",
+         "return"
+      },
 */
 ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& arguments,
                                               const std::string& production_program_name,
                                               ProductionSiteDescr* descr,
                                               const Tribes& tribes) {
 	if (arguments.size() != 3) {
-		throw GameDataError("Usage: construct=<object name> <worker program> <workarea radius>");
+		throw GameDataError(
+		   "Usage: construct=<immovable_name> worker:<program_name> radius:<number>");
 	}
-	objectname = arguments.at(0);
-	workerprogram = arguments.at(1);
-	radius = read_positive(arguments.at(2));
+
+	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
+		log("WARNING: 'construct' program without parameter names is deprecated, please use "
+		    "'construct=<immovable_name> worker:<program_name> radius:<number>' in %s\n",
+		    descr->name().c_str());
+		objectname = arguments.at(0);
+		workerprogram = arguments.at(1);
+		radius = read_positive(arguments.at(2));
+	} else {
+		for (const std::string& argument : arguments) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.first == "worker") {
+				workerprogram = item.second;
+			} else if (item.first == "radius") {
+				radius = read_positive(item.second);
+			} else if (item.second.empty()) {
+				objectname = item.first;
+			} else {
+				throw GameDataError("Unknown parameter '%s'. Usage: construct=<immovable_name> "
+				                    "worker:<program_name> radius:<number>",
+				                    item.first.c_str());
+			}
+		}
+	}
 
 	const std::string description =
 	   descr->name() + ' ' + production_program_name + " construct " + objectname;
