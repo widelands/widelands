@@ -194,7 +194,7 @@ transform
 
 .. code-block:: lua
 
-     program = {
+     main = {
          "animate=idle duration:25m50s",
          "transform=deadtree3 chance:9.37%",
          "seed=spruce_summer_sapling 200", -- This line will be skipped if the removal succeeds
@@ -276,25 +276,25 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 }
 
 /* RST
-
 grow
 ----
-Delete this immovable and instantly replace it with a different immovable with a chance depending on
-terrain affinity.
+.. function:: grow=\<immovable_name\>
 
-Parameter syntax::
+   :arg string \<immovable_name\>: The name of the immovable to turn into.
 
-  parameters ::= name
+   Deletes the immovable (preventing subsequent program steps from being called) and replaces it
+   with an immovable of the given name. The chance that this program step succeeds depends on how
+   well this immovable's terrain affinity matches the terrains it is growing on. If the growth
+   fails, the next program step is triggered. This command may be used only for immovables with a
+   terrain affinity. Example:
 
-Parameter semantics:
+.. code-block:: lua
 
-``name``
-    The name of the immovable to turn into.
-
-Deletes the immovable (preventing subsequent program steps from being called) and replaces it with
-an immovable of the given name. The chance that this program step succeeds depends on how well this
-immovable's terrain affinity matches the terrains it grows on. If the growth fails, the next program
-step is triggered. This command may be used only for immovables with a terrain affinity.
+      main = {
+         "animate=idle duration:57s500ms",
+         "remove=chance:8.2%",
+         "grow=alder_summer_pole",
+      },
 */
 ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, ImmovableDescr& descr) {
 	if (arguments.size() != 1) {
@@ -354,12 +354,12 @@ remove
 
 .. code-block:: lua
 
-      program = {
+      main = {
          "animate=idle duration:55s",
          "remove=chance:16.41%",
          "grow=spruce_summer_pole", -- This line will be skipped if the removal succeeds
       },
-     fall = {
+      fall = {
          "remove=", -- This object will always be removed when 'fall' is called
       },
 */
@@ -420,6 +420,7 @@ for in a higher radius can be influenced. Note that this program step will consi
 random location, and it will only seed there if the terrain is well suited. This command may be used
 only for immovables with a terrain affinity.
 */
+// NOCOM convert to percent
 ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
                                    const ImmovableDescr& descr) {
 	if (arguments.size() != 2) {
