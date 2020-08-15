@@ -125,6 +125,9 @@ void GameChatPanel::key_enter() {
 }
 
 void GameChatPanel::key_escape() {
+	if (editbox.text().empty()) {
+		unfocus_edit();
+	}
 	editbox.set_text("");
 	aborted();
 }
