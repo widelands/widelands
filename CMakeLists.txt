@@ -1,17 +1,9 @@
 project (widelands)
 
-cmake_minimum_required (VERSION 3.7)
-cmake_policy(VERSION 3.7)
+cmake_minimum_required (VERSION 3.5)
+cmake_policy(VERSION 3.5)
 
 include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
-
-# This policy is not known to versions prior 3.1 and would result in errors,
-# if set on such systems. This can be removed when cmake_minimum_required is set
-# to 3.1 or newer by using:
-# cmake_policy(VERSION 3.1)
-if(POLICY CMP0054)
-   cmake_policy(SET CMP0054 NEW)
-endif(POLICY CMP0054)
 
 # This policy is not known to versions prior 3.11 and would result in errors,
 # if set on such systems. This can be removed when cmake_minimum_required is set
@@ -52,8 +44,8 @@ option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 option(OPTION_BUILD_TESTS "Build tests" ON)
 option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
-
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
+
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
   ADD_DEFINITIONS(-DUSE_XDG)
   message(STATUS "Building with XDG support")
@@ -113,35 +105,7 @@ find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(PNG REQUIRED)
 
-find_package(Threads REQUIRED)
-find_package(SDL2 CONFIG)
-if(SDL2_FOUND)
-  message(STATUS "Found SDL2 configuration file")
-  if(TARGET SDL2::SDL2)
-    # SDL2 was built with CMake (e.g. Arch Linux)
-    message(STATUS "Target SDL2::SDL2 found")
-  elseif(SDL2_INCLUDE_DIRS AND SDL2_LIBRARIES)
-    # SDL2 was built with Autotools (e.g. Debian)
-    message(STATUS "SDL2_INCLUDE_DIRS: ${SDL2_INCLUDE_DIRS}")
-    message(STATUS "SDL2_LIBRARIES: ${SDL2_LIBRARIES}")
-    # Workaround for trailing whitespace problem (CMP0004) in some SDL2 versions
-    # See: https://hg.libsdl.org/SDL/rev/28be2719184c
-    string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
-  else()
-    # This should not happen but try to recover anyway
-    message(STATUS "SDL2 variables not set! Falling back to FindSDL2 module")
-    find_package(SDL2 REQUIRED MODULE)
-    SET(SDL2_LIBRARIES ${SDL2_LIBRARY})
-    SET(SDL2_INCLUDE_DIRS ${SDL2_INCLUDE_DIR})
-  endif()
-else()
-  # Fallback for old SDL2 versions that don't provide a CMake configuration file
-  message(STATUS "SDL2 configuration file not found - falling back to FindSDL2 module")
-  find_package(SDL2 REQUIRED MODULE)
-  SET(SDL2_LIBRARIES ${SDL2_LIBRARY})
-  SET(SDL2_INCLUDE_DIRS ${SDL2_INCLUDE_DIR})
-endif()
-
+find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
