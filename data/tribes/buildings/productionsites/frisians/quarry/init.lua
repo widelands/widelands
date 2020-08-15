@@ -47,7 +47,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
          descname = _"quarrying granite",
          actions = {
