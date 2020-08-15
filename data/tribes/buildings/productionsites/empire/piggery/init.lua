@@ -53,7 +53,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs meat",
             "consume=water wheat",
             "sleep=duration:10s",
-            "playsound=sound/farm/farm_animal 180",
+            "playsound=sound/farm/farm_animal priority:40% allow_multiple",
             "animate=working duration:20s",
             "produce=meat"
          }

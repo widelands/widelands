@@ -1176,12 +1176,12 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 		                  egbase().map(), area.rect().center(), position_pix) /
 		               kSoundDistanceDivisor;
 
-		distance = (note.priority == kFxPriorityAlwaysPlay) ?
+		distance = (note.priority == kFxMaximumPriority) ?
 		              (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
 		              distance;
 
 		if (distance < kSoundMaxDistance) {
-			g_sh->play_fx(note.type, note.fx, note.priority,
+			g_sh->play_fx(note.type, note.fx, note.priority, note.allow_multiple,
 			              math::clamp(stereo_pos, kStereoLeft, kStereoRight), distance);
 		}
 	}
