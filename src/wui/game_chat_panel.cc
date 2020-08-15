@@ -138,6 +138,7 @@ void GameChatPanel::key_escape() {
 bool GameChatPanel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus_edit();
+		clicked();
 		return true;
 	}
 

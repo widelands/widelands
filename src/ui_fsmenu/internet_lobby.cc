@@ -123,6 +123,25 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 	servername_.set_text(server);
 	servername_.changed.connect([this]() { change_servername(); });
 
+	// Handle focus interaction between our 2 edit boxes
+	servername_.clicked.connect([this]() {
+		log("NOCOM servername_.clicked\n");
+		servername_.focus();
+		chat_.unfocus_edit();
+	});
+	servername_.cancel.connect([this]() {
+		log("NOCOM servername_.cancel\n");
+		servername_.set_can_focus(false);
+		servername_.set_can_focus(true);
+		chat_.focus_edit();
+	});
+	chat_.clicked.connect([this]() {
+		log("NOCOM chat_.clicked\n");
+		servername_.set_can_focus(false);
+		servername_.set_can_focus(true);
+		chat_.focus_edit();
+	});
+
 	// Prepare the lists
 	const std::string t_tip =
 	   (boost::format("<rt padding=2><p align=center spacing=3>%s</p>"

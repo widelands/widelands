@@ -186,6 +186,7 @@ void EditBox::set_font_style_and_margin(const UI::FontStyleInfo& style, int marg
 bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
+		clicked();
 		return true;
 	}
 
