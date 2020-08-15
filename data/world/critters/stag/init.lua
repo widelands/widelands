@@ -4,8 +4,8 @@ animations = {
    idle = {
       pictures = path.list_files(dirname .. "idle_??.png"),
       sound_effect = {
-         -- Sound files with numbers starting for 10 are generating silence. Remove when we move the sound triggering to programs
          path = "sound/animals/stag",
+         priority = 2
       },
       hotspot = { 12, 26 },
       fps = 20,
