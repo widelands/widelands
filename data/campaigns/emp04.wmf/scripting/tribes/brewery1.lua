@@ -47,7 +47,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          descname = "brewing beer",
          actions = {
             "sleep=30000",
