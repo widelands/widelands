@@ -142,8 +142,9 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 	clientsonline_table_.add_column(
 	   0, _("Game"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	clientsonline_table_.set_column_compare(
-				0, [this](uint32_t a, uint32_t b) { return compare_clienttype(a, b); });
-	clientsonline_table_.double_clicked.connect([this](uint32_t a) { return client_doubleclicked(a); });
+	   0, [this](uint32_t a, uint32_t b) { return compare_clienttype(a, b); });
+	clientsonline_table_.double_clicked.connect(
+	   [this](uint32_t a) { return client_doubleclicked(a); });
 	opengames_list_.selected.connect([this](uint32_t) { server_selected(); });
 	opengames_list_.double_clicked.connect([this](uint32_t) { server_doubleclicked(); });
 
