@@ -103,7 +103,7 @@ jobs:
           - debug
         compiler:
           - clang
-    name: MacOs ${{ matrix.config }} ${{ matrix.compiler }}
+    name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
     runs-on: macOS-latest
     steps:
     - name: Installing dependencies
