@@ -27,11 +27,29 @@
 #include "economy/request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/production_program.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
+
+namespace {
+std::string training_attribute_to_string(Widelands::TrainingAttribute attribute) {
+	switch (attribute) {
+	case Widelands::TrainingAttribute::kAttack:
+		return "attack";
+	case Widelands::TrainingAttribute::kDefense:
+		return "defense";
+	case Widelands::TrainingAttribute::kEvade:
+		return "evade";
+	case Widelands::TrainingAttribute::kHealth:
+		return "health";
+	default:
+		return "unknown";
+	}
+}
+}  // namespace
 
 namespace Widelands {
 
@@ -97,6 +115,59 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 		max_evade_ = items_table->get_int("max_level");
 		add_training_inputs(*items_table, &food_evade_, &weapons_evade_);
 	}
+
+	// NOCOM max attribute semantics is ugly, we have an index shift of 1
+
+	// Check dependencies between 'checksoldier' & 'train', and verify min and max levels
+	for (const auto& program : programs()) {
+		// The value set by the latest call of 'checksoldier'
+		ProductionProgram::Action::TrainingParameters from_checksoldier;
+		for (size_t i = 0; i < program.second->size(); ++i) {
+			const ProductionProgram::Action& action = (*program.second)[i];
+			if (upcast(const ProductionProgram::ActCheckSoldier, checksoldier, &action)) {
+				// Set values from 'checksoldier' and warn on level out of range
+				const ProductionProgram::Action::TrainingParameters checkme = checksoldier->training();
+				from_checksoldier = checkme;
+				if (checkme.level < get_min_level(checkme.attribute) ||
+				    checkme.level > get_max_level(checkme.attribute) + 1) {
+					// We only log a warning here to allow statistics hack for empire04 scenario
+					log("WARNING: Trainingsite '%s': checksoldier '%s' attribute out of range. Expected "
+					    "values between %d and %d but found %d in program '%s'\n",
+					    name().c_str(), training_attribute_to_string(checkme.attribute).c_str(),
+					    get_min_level(checkme.attribute), get_max_level(checkme.attribute) + 1,
+					    checkme.level, program.first.c_str());
+				}
+			} else if (upcast(const ProductionProgram::ActTrain, train, &action)) {
+				// Check 'train' against 'checksoldier' and min/max levels. Fail on violation.
+				const ProductionProgram::Action::TrainingParameters checkme = train->training();
+				if (from_checksoldier.level == INVALID_INDEX) {
+					throw GameDataError("Trainingsite '%s' is trying to call 'train' action without "
+					                    "prior 'checksoldier' action in program '%s'",
+					                    name().c_str(), program.first.c_str());
+				} else if (checkme.level < get_min_level(checkme.attribute) ||
+				           checkme.level > get_max_level(checkme.attribute) + 1) {
+					throw GameDataError(
+					   "Trainingsite '%s': train '%s' attribute out of range. Expected values between "
+					   "%d and %d but found %d in program '%s'",
+					   name().c_str(), training_attribute_to_string(checkme.attribute).c_str(),
+					   get_min_level(checkme.attribute), get_max_level(checkme.attribute) + 1,
+					   checkme.level, program.first.c_str());
+				} else if (from_checksoldier.level >= checkme.level) {
+					throw GameDataError("Trainingsite '%s' is trying to train a soldier attribute from level "
+					                    "%d to %d, but the 'checksoldier' action's level must be lower "
+					                    "than the 'train' action's level in program '%s'",
+					                    name().c_str(), from_checksoldier.level, checkme.level,
+					                    program.first.c_str());
+				} else if (from_checksoldier.attribute != checkme.attribute) {
+					throw GameDataError(
+					   "Trainingsite '%s' is trying to train soldier attribute '%s', but 'checksoldier' checked "
+					   "for soldier attribute '%s' in program '%s'",
+					   name().c_str(), training_attribute_to_string(from_checksoldier.attribute).c_str(),
+					   training_attribute_to_string(checkme.attribute).c_str(), program.first.c_str());
+				}
+			}
+		}
+	}
 }
 
 /**
@@ -112,7 +183,7 @@ Building& TrainingSiteDescr::create_object() const {
  * \return  the minimum level to which this building can downgrade a
  * specified attribute
  */
-int32_t TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
+unsigned TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
 	switch (at) {
 	case TrainingAttribute::kHealth:
 		return min_health_;
@@ -134,7 +205,7 @@ int32_t TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
  * \param at  the attribute to investigate
  * \return  the maximum level to be attained at this site
  */
-int32_t TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
+unsigned TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
 	switch (at) {
 	case TrainingAttribute::kHealth:
 		return max_health_;
@@ -350,7 +421,7 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 }
 void TrainingSite::init_kick_state(const TrainingAttribute& art, const TrainingSiteDescr& d) {
 	// Now with kick-out state saving implemented, initializing is an overkill
-	for (int t = d.get_min_level(art); t <= d.get_max_level(art); t++) {
+	for (unsigned t = d.get_min_level(art); t <= d.get_max_level(art); t++) {
 		training_attempted(art, t);
 	}
 }
@@ -853,6 +924,8 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
  * If all priorities are zero, nothing will happen.
  */
 void TrainingSite::find_and_start_next_program(Game& game) {
+	checked_soldier_training_.level = INVALID_INDEX;
+	checked_soldier_training_.attribute = TrainingAttribute::kTotal;
 	for (;;) {
 		uint32_t maxprio = 0;
 		uint32_t maxcredit = 0;
@@ -1021,6 +1094,8 @@ void TrainingSite::calc_upgrades() {
 
 void TrainingSite::training_attempted(TrainingAttribute type, uint32_t level) {
 	TypeAndLevel key(type, level);
+	checked_soldier_training_.level = level;
+	checked_soldier_training_.attribute = type;
 	if (training_failure_count_.find(key) == training_failure_count_.end()) {
 		training_failure_count_[key] = std::make_pair(training_state_multiplier_, 0);
 	} else {
@@ -1048,5 +1123,9 @@ void TrainingSite::training_done() {
 			fail_and_presence.second.first--;
 		}
 	}
+}
+
+ProductionProgram::Action::TrainingParameters TrainingSite::checked_soldier_training() const {
+	return checked_soldier_training_;
 }
 }  // namespace Widelands

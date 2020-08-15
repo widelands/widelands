@@ -160,56 +160,56 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
-            "checksoldier=soldier attack 0",
+            "checksoldier=soldier:attack level:0",
             "return=failed unless site has trident_long",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=duration:30s",
-            "checksoldier=soldier attack 0",
+            "checksoldier=soldier:attack level:0",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_long",
-            "train=soldier attack 0 1"
+            "train=soldier:attack level:1"
          }
       },
       upgrade_soldier_attack_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier attack 1",
+            "checksoldier=soldier:attack level:1",
             "return=failed unless site has trident_steel",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=duration:30s",
-            "checksoldier=soldier attack 1",
+            "checksoldier=soldier:attack level:1",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_steel",
-            "train=soldier attack 1 2"
+            "train=soldier:attack level:2"
          }
       },
       upgrade_soldier_attack_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
-            "checksoldier=soldier attack 2",
+            "checksoldier=soldier:attack level:2",
             "return=failed unless site has trident_double",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=duration:30s",
-            "checksoldier=soldier attack 2",
+            "checksoldier=soldier:attack level:2",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_double",
-            "train=soldier attack 2 3"
+            "train=soldier:attack level:3"
          }
       },
       upgrade_soldier_attack_3 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
-            "checksoldier=soldier attack 3",
+            "checksoldier=soldier:attack level:3",
             "return=failed unless site has trident_heavy_double",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=duration:30s",
-            "checksoldier=soldier attack 3",
+            "checksoldier=soldier:attack level:3",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_heavy_double",
-            "train=soldier attack 3 4"
+            "train=soldier:attack level:4"
          }
       },
    },

@@ -50,6 +50,16 @@ struct ProductionProgram : public MapObjectProgram {
 
 	/// Can be executed on a ProductionSite.
 	struct Action {
+		struct TrainingParameters {
+			TrainingParameters() : attribute(TrainingAttribute::kTotal), level(INVALID_INDEX) {
+			}
+			static TrainingParameters parse(const std::vector<std::string>& arguments,
+			                                const std::string& action_name);
+
+			TrainingAttribute attribute;
+			unsigned level;
+		};
+
 		Action() = default;
 		virtual ~Action();
 		virtual void execute(Game&, ProductionSite&) const = 0;
@@ -458,22 +468,29 @@ struct ProductionProgram : public MapObjectProgram {
 	};
 
 	struct ActCheckSoldier : public Action {
-		explicit ActCheckSoldier(const std::vector<std::string>& arguments);
-		void execute(Game&, ProductionSite&) const override;
+		explicit ActCheckSoldier(const std::vector<std::string>& arguments,
+		                         const ProductionSiteDescr& descr);
+		void execute(Game&, ProductionSite& ps) const override;
+
+		TrainingParameters training() const {
+			return training_;
+		}
 
 	private:
-		TrainingAttribute attribute_;
-		uint8_t level_;
+		TrainingParameters training_;
 	};
 
 	struct ActTrain : public Action {
-		explicit ActTrain(const std::vector<std::string>& arguments);
-		void execute(Game&, ProductionSite&) const override;
+		explicit ActTrain(const std::vector<std::string>& arguments,
+		                  const ProductionSiteDescr& descr);
+		void execute(Game&, ProductionSite& ps) const override;
+
+		TrainingParameters training() const {
+			return training_;
+		}
 
 	private:
-		TrainingAttribute attribute_;
-		uint8_t level_;
-		uint8_t target_level_;
+		TrainingParameters training_;
 	};
 
 	/// Plays a sound effect.

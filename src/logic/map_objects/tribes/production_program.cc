@@ -185,6 +185,8 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(const std::str
 	}
 }
 
+// TODO(GunChleoc): Incorporate this into TrainingParameters constructor when we drop compatibility
+// after v1.0
 TrainingAttribute parse_training_attribute(const std::string& argument) {
 	if (argument == "health") {
 		return TrainingAttribute::kHealth;
@@ -285,6 +287,25 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(
 		                                  tribes.safe_worker_index(produceme.first);
 
 		result.push_back(std::make_pair(index, read_positive(produceme.second)));
+	}
+	return result;
+}
+
+ProductionProgram::Action::TrainingParameters
+ProductionProgram::Action::TrainingParameters::parse(const std::vector<std::string>& arguments,
+                                                     const std::string& action_name) {
+	ProductionProgram::Action::TrainingParameters result;
+	for (const std::string& argument : arguments) {
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+		if (item.first == "soldier") {
+			result.attribute = parse_training_attribute(item.second);
+		} else if (item.first == "level") {
+			result.level = read_int(item.second, 0);
+		} else {
+			throw GameDataError(
+			   "Unknown argument '%s'. Usage: %s=soldier:attack|defense|evade|health level:<number>",
+			   item.first.c_str(), action_name.c_str());
+		}
 	}
 	return result;
 }
@@ -1487,19 +1508,35 @@ checksoldier
 Returns failure unless there are a specified amount of soldiers with specified level of specified
 properties. This command type is subject to change.
 */
-ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::string>& arguments) {
-	if (arguments.size() != 3) {
-		throw GameDataError("Usage: checksoldier=soldier <training attribute> <level>");
+ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::string>& arguments,
+                                                    const ProductionSiteDescr& descr) {
+	if (descr.type() != MapObjectType::TRAININGSITE) {
+		throw GameDataError("Illegal 'checksoldier' action in productionsite '%s'. This action is "
+		                    "only available to trainingsites.",
+		                    descr.name().c_str());
+	}
+	if (arguments.size() != 2 && arguments.size() != 3) {
+		throw GameDataError("Usage: checksoldier=soldier:attack|defense|evade|health level:<number>");
 	}
 
-	if (arguments.front() != "soldier") {
-		throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
+	if (arguments.size() == 3) {
+		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
+		log("WARNING: Using old syntax in %s. Please use "
+		    "'checksoldier=soldier:attack|defense|evade|health level:<number>'\n",
+		    descr.name().c_str());
+
+		if (arguments.front() != "soldier") {
+			throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
+		}
+		training_.attribute = parse_training_attribute(arguments.at(1));
+		training_.level = read_int(arguments.at(2), 0);
+	} else {
+		training_ = TrainingParameters::parse(arguments, "checksoldier");
 	}
-	attribute_ = parse_training_attribute(arguments.at(1));
-	level_ = read_int(arguments.at(2), 0);
 }
 
 void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps) const {
+	assert(ps.descr().type() == MapObjectType::TRAININGSITE);
 	const SoldierControl* ctrl = ps.soldier_control();
 	assert(ctrl != nullptr);
 	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
@@ -1507,8 +1544,8 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 		ps.set_production_result(_("No soldier to train!"));
 		return ps.program_end(game, ProgramResult::kSkipped);
 	}
-	ps.molog("  Checking soldier (%u) level %d)\n", static_cast<unsigned int>(attribute_),
-	         static_cast<unsigned int>(level_));
+	ps.molog("  Checking soldier (%u) level %d)\n", static_cast<unsigned int>(training_.attribute),
+	         static_cast<unsigned int>(training_.level));
 
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier*>::const_iterator it = soldiers.begin();; ++it) {
@@ -1517,20 +1554,20 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 			return ps.program_end(game, ProgramResult::kSkipped);
 		}
 
-		if (attribute_ == TrainingAttribute::kHealth) {
-			if ((*it)->get_health_level() == level_) {
+		if (training_.attribute == TrainingAttribute::kHealth) {
+			if ((*it)->get_health_level() == training_.level) {
 				break;
 			}
-		} else if (attribute_ == TrainingAttribute::kAttack) {
-			if ((*it)->get_attack_level() == level_) {
+		} else if (training_.attribute == TrainingAttribute::kAttack) {
+			if ((*it)->get_attack_level() == training_.level) {
 				break;
 			}
-		} else if (attribute_ == TrainingAttribute::kDefense) {
-			if ((*it)->get_defense_level() == level_) {
+		} else if (training_.attribute == TrainingAttribute::kDefense) {
+			if ((*it)->get_defense_level() == training_.level) {
 				break;
 			}
-		} else if (attribute_ == TrainingAttribute::kEvade) {
-			if ((*it)->get_evade_level() == level_) {
+		} else if (training_.attribute == TrainingAttribute::kEvade) {
+			if ((*it)->get_evade_level() == training_.level) {
 				break;
 			}
 		}
@@ -1538,7 +1575,7 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 	ps.molog("    okay\n");  // okay, do nothing
 
 	upcast(TrainingSite, ts, &ps);
-	ts->training_attempted(attribute_, level_);
+	ts->training_attempted(training_.attribute, training_.level);
 
 	ps.molog("  Check done!\n");
 
@@ -1550,28 +1587,50 @@ train
 -----
 Increases the level of a specified property of a soldier. No further documentation available.
 */
-ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments) {
-	if (arguments.size() != 4) {
-		throw GameDataError(
-		   "Usage: checksoldier=soldier <training attribute> <level before> <level after>");
+// NOCOM documentation
+ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments,
+                                      const ProductionSiteDescr& descr) {
+	if (descr.type() != MapObjectType::TRAININGSITE) {
+		throw GameDataError("Illegal 'train' action in productionsite '%s'. This action is "
+		                    "only available to trainingsites.",
+		                    descr.name().c_str());
 	}
 
-	if (arguments.front() != "soldier") {
-		throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
+	if (arguments.size() != 2 && arguments.size() != 4) {
+		throw GameDataError("Usage: train=soldier:attack|defense|evade|health level:<number>");
 	}
 
-	attribute_ = parse_training_attribute(arguments.at(1));
-	level_ = read_int(arguments.at(2), 0);
-	target_level_ = read_positive(arguments.at(3));
+	if (arguments.size() == 4) {
+		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
+		log("WARNING: Using old syntax in %s. Please use train=soldier:attack|defense|evade|health "
+		    "level:<number>\n",
+		    descr.name().c_str());
+
+		if (arguments.front() != "soldier") {
+			throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
+		}
+
+		training_.attribute = parse_training_attribute(arguments.at(1));
+		training_.level = read_positive(arguments.at(3));
+	} else {
+		training_ = TrainingParameters::parse(arguments, "train");
+	}
 }
 
 void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const {
+	assert(ps.descr().type() == MapObjectType::TRAININGSITE);
+	TrainingSite& ts = dynamic_cast<TrainingSite&>(ps);
 	const SoldierControl* ctrl = ps.soldier_control();
 	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 
-	ps.molog("  Training soldier's %u (%d to %d)", static_cast<unsigned int>(attribute_),
-	         static_cast<unsigned int>(level_), static_cast<unsigned int>(target_level_));
+	const unsigned current_level = ts.checked_soldier_training().level;
+	assert(current_level != INVALID_INDEX);
+	assert(current_level < training_.level);
+	assert(ts.checked_soldier_training() == training_.attribute);
+
+	ps.molog("  Training soldier's %u (%d to %d)", static_cast<unsigned int>(training_.attribute),
+	         current_level, static_cast<unsigned int>(training_.level));
 
 	bool training_done = false;
 	for (auto it = soldiers.begin(); !training_done; ++it) {
@@ -1580,34 +1639,33 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 			return ps.program_end(game, ProgramResult::kSkipped);
 		}
 		try {
-			switch (attribute_) {
+			switch (training_.attribute) {
 			case TrainingAttribute::kHealth:
-				if ((*it)->get_health_level() == level_) {
-					(*it)->set_health_level(target_level_);
+				if ((*it)->get_health_level() == current_level) {
+					(*it)->set_health_level(training_.level);
 					training_done = true;
 				}
 				break;
 			case TrainingAttribute::kAttack:
-				if ((*it)->get_attack_level() == level_) {
-					(*it)->set_attack_level(target_level_);
+				if ((*it)->get_attack_level() == current_level) {
+					(*it)->set_attack_level(training_.level);
 					training_done = true;
 				}
 				break;
 			case TrainingAttribute::kDefense:
-				if ((*it)->get_defense_level() == level_) {
-					(*it)->set_defense_level(target_level_);
+				if ((*it)->get_defense_level() == current_level) {
+					(*it)->set_defense_level(training_.level);
 					training_done = true;
 				}
 				break;
 			case TrainingAttribute::kEvade:
-				if ((*it)->get_evade_level() == level_) {
-					(*it)->set_evade_level(target_level_);
+				if ((*it)->get_evade_level() == current_level) {
+					(*it)->set_evade_level(training_.level);
 					training_done = true;
 				}
 				break;
-			default:
-				throw wexception(
-				   "Unknown training attribute index %d", static_cast<unsigned int>(attribute_));
+			case TrainingAttribute::kTotal:
+				throw wexception("'total' training attribute can't be trained");
 			}
 		} catch (...) {
 			throw wexception("Fail training soldier!!");
@@ -1620,8 +1678,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	    * training program, e.g. Completed upgrading soldier evade from level 0 to level 1 */
 	   (boost::format(_("Completed %s")) % ps.top_state().program->descname()).str());
 
-	upcast(TrainingSite, ts, &ps);
-	ts->training_successful(attribute_, level_);
+	ts.training_successful(training_.attribute, current_level);
 
 	return ps.program_step(game);
 }
@@ -1911,10 +1968,10 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   new ActMine(parseinput.arguments, world, name(), building)));
 			} else if (parseinput.name == "checksoldier") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActCheckSoldier(parseinput.arguments)));
+				   new ActCheckSoldier(parseinput.arguments, *building)));
 			} else if (parseinput.name == "train") {
-				actions_.push_back(
-				   std::unique_ptr<ProductionProgram::Action>(new ActTrain(parseinput.arguments)));
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActTrain(parseinput.arguments, *building)));
 			} else if (parseinput.name == "playsound") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActPlaySound(parseinput.arguments, *building)));
