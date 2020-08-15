@@ -59,7 +59,7 @@ jobs:
         $env:CXX = "C:/msys64/mingw$env:bits/bin/g++.exe"
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
-        cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DCMAKE_JOB_POOLS="linking=1" -DCMAKE_JOB_POOL_LINK=linking -DOPTION_BUILD_WINSTATIC=ON -DPNG_LIBRARY_RELEASE=C:/msys64/mingw$env:bits/lib/libpng.a -DSDL2_IMAGE_LIBRARY=C:/msys64/mingw$env:bits/lib/libSDL2_image.a -DZLIB_LIBRARY_RELEASE=C:/msys64/mingw$env:bits/lib/libz.a -DSDL2_TTF_LIBRARY=C:/msys64/mingw$env:bits/lib/libSDL2_ttf.a -DSDL2_MIXER_LIBRARY=C:/msys64/mingw$env:bits/lib/libSDL2_mixer.a -DSDL2MAIN_LIBRARY=C:/msys64/mingw$env:bits/lib/libSDL2main.a -DSDL2_LIBRARY=C:/msys64/mingw$env:bits/lib/libSDL2.a -DICU_UC_LIBRARY_RELEASE=C:/msys64/mingw$env:bits/lib/libicuuc.a -DICU_DT_LIBRARY_RELEASE=C:/msys64/mingw$env:bits/lib/libicudt.a -DIntl_LIBRARY=C:/msys64/mingw$env:bits/lib/libintl.a -DGLEW_LIBRARY=C:/msys64/mingw$env:bits/lib/libglew32.a
+        cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DCMAKE_JOB_POOLS="linking=1" -DCMAKE_JOB_POOL_LINK=linking -DOPTION_BUILD_WINSTATIC=ON
         cmake.exe --build .
         strip -sv ./src/widelands.exe
     - name: InnoSetup
