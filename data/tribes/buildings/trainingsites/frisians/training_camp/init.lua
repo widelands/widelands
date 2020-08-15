@@ -75,8 +75,6 @@ tribes:new_trainingsite_type {
    },
 
    ["soldier attack"] = {
-      min_level = 0,
-      max_level = 2,
       food = {
          {"smoked_fish", "smoked_meat"},
          {"beer"},
@@ -89,8 +87,6 @@ tribes:new_trainingsite_type {
       }
    },
    ["soldier health"] = {
-      min_level = 0,
-      max_level = 0,
       food = {
          {"bread_frisians", "beer"},
          {"smoked_fish", "smoked_meat"},
@@ -100,8 +96,6 @@ tribes:new_trainingsite_type {
       }
    },
    ["soldier defense"] = {
-      min_level = 0,
-      max_level = 0,
       food = {
          {"bread_frisians", "beer"},
          {"smoked_fish", "smoked_meat"},

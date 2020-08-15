@@ -50,8 +50,6 @@ tribes:new_trainingsite_type {
    },
 
    ["soldier evade"] = {
-      min_level = 0,
-      max_level = 1,
       food = {
          {"fish", "meat"},
          {"empire_bread"}

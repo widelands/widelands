@@ -95,6 +95,8 @@ private:
 	                         std::vector<std::vector<std::string>>* food,
 	                         std::vector<std::string>* weapons);
 
+	void update_level(TrainingAttribute attrib, unsigned level);
+
 	//  TODO(unknown): These variables should be per soldier type. They should be in a
 	//  struct and there should be a vector, indexed by Soldier_Index,
 	//  with that struct structs as element type.

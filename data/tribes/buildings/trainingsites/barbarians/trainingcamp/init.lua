@@ -64,8 +64,6 @@ tribes:new_trainingsite_type {
    },
 
    ["soldier attack"] = {
-      min_level = 0,
-      max_level = 4,
       food = {
          {"fish", "meat"},
          {"barbarians_bread"}
@@ -79,8 +77,6 @@ tribes:new_trainingsite_type {
       }
    },
    ["soldier health"] = {
-      min_level = 0,
-      max_level = 2,
       food = {
          {"fish", "meat"},
          {"barbarians_bread"}

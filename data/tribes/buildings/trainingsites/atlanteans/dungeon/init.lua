@@ -35,11 +35,11 @@ dirname = path.dirname(__file__)
 --        It contains the following entries:
 --
 --        **min_level**
---            *Mandatory*. The minimum attack level that a soldier needs before it
+--            *Deprecated*. The minimum attack level that a soldier needs before it
 --            can be trained in attack at this training site.
 --
 --        **max_level**
---            *Mandatory*. The maximum level of attack that a soldier can be trained in.
+--            *Deprecated*. The maximum level of attack that a soldier can be trained in.
 --
 --        **food**
 --            *Optional*. A table with the types of food needed to train a
@@ -54,8 +54,6 @@ dirname = path.dirname(__file__)
 --        Example::
 --
 --            ["soldier attack"] = {
---                min_level = 0,
---                max_level = 3,
 --                food = {
 --                    {"smoked_fish", "smoked_meat"},
 --                    {"atlanteans_bread"}
@@ -133,8 +131,6 @@ tribes:new_trainingsite_type {
    },
 
    ["soldier attack"] = {
-      min_level = 0,
-      max_level = 3,
       food = {
          {"smoked_fish", "smoked_meat"},
          {"atlanteans_bread"}
