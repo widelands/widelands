@@ -481,29 +481,28 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 
 		// Add road building overlays if applicable.
-		const InfoToDraw info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			draw_road_building(*f);
 
 			draw_bridges(dst, f, f->seeing == Widelands::SeeUnseeNode::kVisible ? gametime : 0, scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
-		}
 
-		// Render stuff that belongs to the node.
-		if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
-			draw_immovables_for_visible_field(
-			   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
-			draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
-		} else if (deferred_coords.count(f->fcoords) > 0) {
-			// This is the main position of a building that is visible on another field
-			// so although this field isn't visible we draw the building as if it was.
-			draw_immovables_for_visible_field(
-			   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
-		} else {
-			// We never show census or statistics for objects in the fog.
-			// We also call this for unexplored fields in case they contain a building
-			// that was previously partially seen.
-			draw_immovable_for_formerly_visible_field(*f, info_to_draw, player_field, scale, dst);
+			// Draw immovables and bobs.
+			const InfoToDraw info_to_draw = get_info_to_draw(!given_map_view->is_animating());
+
+			if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
+				draw_immovables_for_visible_field(
+				   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
+				draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
+			} else if (deferred_coords.count(f->fcoords) > 0) {
+				// This is the main position of a building that is visible on another field
+				// so although this field isn't visible we draw the building as if it was.
+				draw_immovables_for_visible_field(
+				   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
+			} else {
+				// We never show census or statistics for objects in the fog.
+				draw_immovable_for_formerly_visible_field(*f, info_to_draw, player_field, scale, dst);
+			}
 		}
 
 		// Draw work area markers.
