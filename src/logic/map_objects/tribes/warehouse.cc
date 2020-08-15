@@ -802,7 +802,7 @@ void Warehouse::act(Game& game, uint32_t const data) {
 		if (incorporated_workers_.count(soldier_index)) {
 			WorkerList& soldiers = incorporated_workers_[soldier_index];
 
-			uint32_t total_heal = descr().get_heal_per_second();
+			unsigned total_heal = descr().get_heal_per_second();
 			// Using an explicit iterator, as we plan to erase some
 			// of those guys
 			for (WorkerList::iterator it = soldiers.begin(); it != soldiers.end(); ++it) {
