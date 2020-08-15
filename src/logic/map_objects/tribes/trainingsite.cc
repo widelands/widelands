@@ -90,7 +90,9 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 		items_table = table.get_table("soldier health");
 		// TODO(GunChleoc): Compatibility, remove these after v1.0
 		if (items_table->has_key<std::string>("min_level")) {
-			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier health' are no longer needed\n", name().c_str());
+			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			    "health' are no longer needed\n",
+			    name().c_str());
 		}
 		add_training_inputs(*items_table, &food_health_, &weapons_health_);
 	}
@@ -98,21 +100,27 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 	if (table.has_key("soldier attack")) {
 		items_table = table.get_table("soldier attack");
 		if (items_table->has_key<std::string>("min_level")) {
-			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier attack' are no longer needed\n", name().c_str());
+			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			    "attack' are no longer needed\n",
+			    name().c_str());
 		}
 		add_training_inputs(*items_table, &food_attack_, &weapons_attack_);
 	}
 	if (table.has_key("soldier defense")) {
 		items_table = table.get_table("soldier defense");
 		if (items_table->has_key<std::string>("min_level")) {
-			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier defense' are no longer needed\n", name().c_str());
+			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			    "defense' are no longer needed\n",
+			    name().c_str());
 		}
 		add_training_inputs(*items_table, &food_defense_, &weapons_defense_);
 	}
 	if (table.has_key("soldier evade")) {
 		items_table = table.get_table("soldier evade");
 		if (items_table->has_key<std::string>("min_level")) {
-			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier evade' are no longer needed\n", name().c_str());
+			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			    "evade' are no longer needed\n",
+			    name().c_str());
 		}
 		add_training_inputs(*items_table, &food_evade_, &weapons_evade_);
 	}
@@ -134,14 +142,15 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 					                    "prior 'checksoldier' action in program '%s'",
 					                    name().c_str(), program.first.c_str());
 				} else if (from_checksoldier.level >= checkme.level) {
-					throw GameDataError("Trainingsite '%s' is trying to train a soldier attribute from level "
-					                    "%d to %d, but the 'checksoldier' action's level must be lower "
-					                    "than the 'train' action's level in program '%s'",
-					                    name().c_str(), from_checksoldier.level, checkme.level,
-					                    program.first.c_str());
+					throw GameDataError(
+					   "Trainingsite '%s' is trying to train a soldier attribute from level "
+					   "%d to %d, but the 'checksoldier' action's level must be lower "
+					   "than the 'train' action's level in program '%s'",
+					   name().c_str(), from_checksoldier.level, checkme.level, program.first.c_str());
 				} else if (from_checksoldier.attribute != checkme.attribute) {
 					throw GameDataError(
-					   "Trainingsite '%s' is trying to train soldier attribute '%s', but 'checksoldier' checked "
+					   "Trainingsite '%s' is trying to train soldier attribute '%s', but 'checksoldier' "
+					   "checked "
 					   "for soldier attribute '%s' in program '%s'",
 					   name().c_str(), training_attribute_to_string(from_checksoldier.attribute).c_str(),
 					   training_attribute_to_string(checkme.attribute).c_str(), program.first.c_str());
