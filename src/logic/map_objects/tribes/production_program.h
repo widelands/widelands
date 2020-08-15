@@ -451,10 +451,10 @@ struct ProductionProgram : public MapObjectProgram {
 
 	private:
 		DescriptionIndex resource_;
-		uint8_t distance_;  // width/radius of mine
-		uint8_t max_;       // Can work up to this percent (of total mountain resources)
-		uint8_t chance_;    // odds of finding resources from empty mine
-		uint8_t training_;  // probability of training in _empty_ mines
+		uint8_t workarea_;            // width/radius of mine
+		unsigned max_resources_;      // Can work up to this percent (of total mountain resources)
+		unsigned depleted_chance_;    // odds of finding resources from empty mine
+		unsigned experience_chance_;  // probability of training in _empty_ mines
 	};
 
 	struct ActCheckSoldier : public Action {

@@ -300,6 +300,7 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	switch (entry) {
 	case MapviewMenuEntry::kMinimap: {
 		toggle_minimap();
+		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kDecreaseZoom: {
 		map_view()->decrease_zoom();
@@ -884,10 +885,14 @@ bool InteractiveBase::get_display_flag(uint32_t const flag) {
 }
 
 void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
+	const uint32_t old_value = display_flags_;
 	display_flags_ &= ~flag;
 
 	if (on) {
 		display_flags_ |= flag;
+	}
+	if (old_value != display_flags_) {
+		rebuild_showhide_menu();
 	}
 }
 
