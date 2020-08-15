@@ -270,7 +270,7 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 		set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
 	} break;
 	}
-	rebuild_showhide_menu();
+	showhidemenu_.toggle();
 }
 
 void InteractiveGameBase::add_gamespeed_menu() {
@@ -328,6 +328,7 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	case GameSpeedEntry::kPause: {
 		if (!is_multiplayer()) {
 			toggle_game_paused();
+			gamespeedmenu_.toggle();
 		}
 	} break;
 	}
