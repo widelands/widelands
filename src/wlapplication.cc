@@ -648,6 +648,13 @@ void WLApplication::handle_input(InputCallback const* cb) {
 				   ev.motion.state, ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
 			}
 			break;
+		case SDL_WINDOWEVENT:
+			if (ev.window.event == SDL_WINDOWEVENT_RESIZED) {
+				g_gr->change_resolution(ev.window.data1, ev.window.data2);
+				set_config_int("xres", ev.window.data1);
+				set_config_int("yres", ev.window.data2);
+			}
+			break;
 		case SDL_QUIT:
 			should_die_ = true;
 			break;
