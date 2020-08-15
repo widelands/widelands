@@ -125,18 +125,15 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 
 	// Handle focus interaction between our 2 edit boxes
 	servername_.clicked.connect([this]() {
-		log("NOCOM servername_.clicked\n");
 		servername_.focus();
 		chat_.unfocus_edit();
 	});
 	servername_.cancel.connect([this]() {
-		log("NOCOM servername_.cancel\n");
 		servername_.set_can_focus(false);
 		servername_.set_can_focus(true);
 		chat_.focus_edit();
 	});
 	chat_.clicked.connect([this]() {
-		log("NOCOM chat_.clicked\n");
 		servername_.set_can_focus(false);
 		servername_.set_can_focus(true);
 		chat_.focus_edit();
