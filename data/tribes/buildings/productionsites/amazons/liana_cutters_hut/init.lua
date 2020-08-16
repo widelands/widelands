@@ -36,7 +36,7 @@ tribes:new_productionsite_type {
 
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start making clay because ...
          descname = _"cutting lianas",
          actions = {

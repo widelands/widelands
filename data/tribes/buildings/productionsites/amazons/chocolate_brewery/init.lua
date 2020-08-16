@@ -50,7 +50,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
          descname = _"brewing chocolate",
          actions = {

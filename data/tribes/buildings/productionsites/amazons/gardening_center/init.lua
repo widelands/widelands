@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of land because ...
          descname = _"enhancing the fertility of land",
          actions = {

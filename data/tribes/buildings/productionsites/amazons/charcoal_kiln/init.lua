@@ -45,7 +45,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
          descname = _"producing charcoal",
          actions = {
