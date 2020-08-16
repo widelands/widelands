@@ -407,7 +407,7 @@ seed
    :arg percent proximity: The radius within which the immovable will seed is not limited and
       is determined by repeatedly generating a random number and comparing it with the proximity
       :ref:`map_object_programs_datatypes_percent` chance until the comparison fails. The higher
-      this number, the closer the saplings will be seeded.
+      this number, the closer the new imovable will be seeded.
 
    Finds a random location nearby and creates a new immovable with the given name there with a
    chance depending on *this* immovable's terrain affinity. The chance that such a location will be
@@ -479,7 +479,7 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 		do {
 			mr.extend(map);
 			fringe_size += 6;
-		} while (game.logic_rand() % std::numeric_limits<uint8_t>::max() < probability_);
+		} while (game.logic_rand() % kMaxProbability < probability_);
 
 		for (uint32_t n = game.logic_rand() % fringe_size; n; --n) {
 			mr.advance(map);
