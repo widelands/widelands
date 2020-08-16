@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-01 01:20+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1330,7 +1330,7 @@ msgid "Brewery"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery2.lua:53
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery2.lua:50
 msgid "brewing beer"
 msgstr ""
 
@@ -1341,29 +1341,29 @@ msgid "Farm"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:47
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:43
 msgid "working"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:55
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:51
 msgid "planting wheat"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:63
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:59
 msgid "harvesting wheat"
 msgstr ""
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:72
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:68
 msgid "No Fields"
 msgstr ""
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:73
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:69
 msgid "Out of Fields"
 msgstr ""
 
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:74
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:70
 msgctxt "empire_building"
 msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -1380,7 +1380,7 @@ msgid "Mill"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill2.lua:51
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill2.lua:48
 msgid "grinding wheat"
 msgstr ""
 
