@@ -77,13 +77,13 @@ jobs:
     ### Building on the oldest and newest gcc
     - stage: testsuite
     ### RELEASE BUILDS
-      name: "RELEASE: Ubuntu 14.04 with gcc 4.8"
+      name: "RELEASE: gcc 4.8"
       os: linux
       dist: trusty
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
       before_script: 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
 
-    - name: "RELEASE: Ubuntu 20.04 with gcc 10"
+    - name: "RELEASE: gcc 10"
       os: linux
       dist: focal
       addons:
@@ -107,13 +107,13 @@ jobs:
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=gcc-10 CXX=g++-10
       services: xvfb
     ### DEBUG BUILDS
-    - name: "DEBUG: Ubuntu 14.04 with gcc 4.8"
+    - name: "DEBUG: gcc 4.8"
       os: linux
       dist: trusty
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
       before_script: 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
 
-    - name: "DEBUG: Ubuntu 20.04 with gcc 10"
+    - name: "DEBUG: gcc 10"
       os: linux
       dist: focal
       addons:
@@ -139,7 +139,7 @@ jobs:
     ### Build on remaining Linux configurations, with translations off
     - stage: build
     ### RELEASE BUILDS
-      name: "RELEASE: Ubuntu 14.04 with clang 5"
+      name: "RELEASE: clang 5"
       os: linux
       dist: trusty
       compiler: clang
@@ -149,7 +149,7 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
         - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
 
-    - name: "RELEASE: Ubuntu 18.04 with clang 7"
+    - name: "RELEASE: clang 7"
       os: linux
       dist: bionic
       compiler: clang
@@ -159,7 +159,7 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
 
-    - name: "RELEASE: Ubuntu 18.04 with clang 8"
+    - name: "RELEASE: clang 8"
       os: linux
       dist: bionic
       compiler: clang
@@ -189,7 +189,7 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-8'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-8'
 
-    - name: "RELEASE: Ubuntu 18.04 with clang 9"
+    - name: "RELEASE: clang 9"
       os: linux
       dist: bionic
       compiler: clang
@@ -219,20 +219,20 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
 
-    - name: "RELEASE: Ubuntu 16.04 with gcc 5"
+    - name: "RELEASE: gcc 5"
       os: linux
       dist: xenial
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
       services: xvfb
 
-    - name: "RELEASE: Ubuntu 20.04 with gcc 9"
+    - name: "RELEASE: gcc 9"
       os: linux
       dist: focal
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
       services: xvfb
 
     ### DEBUG BUILDS
-    - name: "DEBUG: Ubuntu 14.04 with clang 5"
+    - name: "DEBUG: clang 5"
       os: linux
       dist: trusty
       compiler: clang
@@ -242,7 +242,7 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
         - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
 
-    - name: "DEBUG: Ubuntu 18.04 with clang 7"
+    - name: "DEBUG: clang 7"
       os: linux
       dist: bionic
       compiler: clang
@@ -252,7 +252,7 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
 
-    - name: "DEBUG: Ubuntu 18.04 with clang 8"
+    - name: "DEBUG: clang 8"
       os: linux
       dist: bionic
       compiler: clang
@@ -282,7 +282,7 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-8'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-8'
 
-    - name: "DEBUG: Ubuntu 18.04 with clang 9"
+    - name: "DEBUG: clang 9"
       os: linux
       dist: bionic
       compiler: clang
@@ -312,13 +312,13 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
 
-    - name: "DEBUG: Ubuntu 16.04 with gcc 5"
+    - name: "DEBUG: gcc 5"
       os: linux
       dist: xenial
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
       services: xvfb
 
-    - name: "DEBUG: Ubuntu 20.04 with gcc 9"
+    - name: "DEBUG: gcc 9"
       os: linux
       dist: focal
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
