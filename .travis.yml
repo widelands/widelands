@@ -81,7 +81,7 @@ jobs:
           sources:
             - sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
-            - g++-10
+            - g++-9
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -94,7 +94,7 @@ jobs:
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
             - zlib1g-dev
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=gcc-10 CXX=g++-10
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=gcc-9 CXX=g++-9
       services: xvfb
     #- name: "DEBUG: Ubuntu 14.04 with gcc 4.8"
     #  os: linux
