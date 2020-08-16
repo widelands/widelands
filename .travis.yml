@@ -73,9 +73,9 @@ jobs:
     ### Separate stage to speed things up in case the regression test suite fails
     ### Building on the oldest and newest gcc
     - stage: testsuite
-      name: "DEBUG: Ubuntu 20.04 with gcc 10"
+      name: "DEBUG: Ubuntu 18.04 with gcc 10"
       os: linux
-      dist: focal
+      dist: bionic
         apt:
           sources:
             - sourceline: 'ppa:ubuntu-toolchain-r/test'
