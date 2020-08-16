@@ -125,7 +125,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	/// sound effect is actually played is determined by the sound handler.
 	class ActPlaySound : public Action {
 	public:
-		ActPlaySound(const std::vector<std::string>& arguments);
+		ActPlaySound(const std::vector<std::string>& arguments, const ImmovableDescr& descr);
 		void execute(Game&, Immovable&) const override;
 
 	private:

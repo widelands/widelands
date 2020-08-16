@@ -44,14 +44,14 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
          descname = pgettext("barbarians_building", "rearing cattle"),
          actions = {
             "return=skipped unless economy needs barbarians_ox",
             "consume=wheat water",
             "sleep=duration:15s",
-            "playsound=sound/farm/ox 192",
+            "playsound=sound/farm/ox priority:50% allow_multiple",
             "animate=working duration:15s", -- Animation of feeding the cattle
             "recruit=barbarians_ox"
          }

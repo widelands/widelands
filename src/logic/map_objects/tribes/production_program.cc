@@ -68,9 +68,10 @@ bool match_and_skip(const std::vector<std::string>& args,
 
 Productionsite Programs
 =======================
-Productionsites can have programs that will be executed by the game engine. Each productionsite must
-have a program named ``work``, which will be started automatically when the productionsite is
-created in the game, and then repeated until the productionsite is destroyed.
+Productionsites have :ref:`programs <map_object_programs>` that will be executed by the game
+engine. Each productionsite must have a program named ``main``, which will be started automatically
+when the productionsite is created in the game, and then repeated until the productionsite is
+destroyed. (Note: the main program used to be called ``work``, which has been deprecated.)
 
 Programs are defined as Lua tables. Each program must be declared as a subtable in the
 productionsite's Lua table called ``programs`` and have a unique table key. The entries in a
@@ -78,7 +79,7 @@ program's subtable are the translatable ``descname`` and the table of ``actions`
 this::
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -92,7 +93,7 @@ that you do this whenever workers are referenced, or if your tribes have multipl
 same name::
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
          descname = pgettext("atlanteans_building", "recruiting soldier"),
          actions = {
@@ -104,7 +105,7 @@ same name::
 A program can call another program, for example::
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -131,7 +132,6 @@ A program can call another program, for example::
 
 A program consists of a sequence of actions. An action is written as
 ``<type>=<parameters>``::
-
 
    produce_snack = {
       -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
@@ -696,8 +696,7 @@ executing ``return=failed``).
 ``failure_handling_directive``
     If omitted, the value ``Skip`` is used for ``failure_handling_method``.
 */
-ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments,
-                                    const ProductionSiteDescr& descr) {
+ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments) {
 	if (arguments.size() < 1 || arguments.size() > 4) {
 		throw GameDataError(
 		   "Usage: call=<program name> [on failure|completion|skip fail|complete|skip|repeat]");
@@ -712,15 +711,7 @@ ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments,
 	   ProgramResultHandlingMethod::kContinue;
 
 	// Fetch program to call
-	const std::string& program_name = arguments.front();
-	const ProductionSiteDescr::Programs& programs = descr.programs();
-	ProductionSiteDescr::Programs::const_iterator const it = programs.find(program_name);
-	if (it == programs.end()) {
-		throw GameDataError("The program '%s' has not (yet) been declared in %s "
-		                    "(wrong declaration order?)",
-		                    program_name.c_str(), descr.name().c_str());
-	}
-	program_ = it->second.get();
+	program_name_ = arguments.front();
 
 	//  Override with specified handling methods.
 	if (arguments.size() > 1) {
@@ -767,13 +758,15 @@ ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments,
 		}
 		handling_methods_[program_result_index(result_to_set_method_for)] = handling_method;
 	}
+
+	assert(!program_name_.empty());
 }
 
 void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 	ProgramResult const program_result = ps.top_state().phase;
 
 	if (program_result == ProgramResult::kNone) {  //  The program has not yet been called.
-		return ps.program_start(game, program_->name());
+		return ps.program_start(game, program_name_);
 	}
 
 	switch (handling_methods_[program_result_index(program_result)]) {
@@ -1629,29 +1622,16 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 /* RST
 playsound
 ---------
-Plays a sound effect.
-
-Parameter syntax::
-
-  parameters ::= soundFX [priority]
-
-Parameter semantics:
-
-``filepath``
-    The path/base_filename of a soundFX (relative to the data directory).
-``priority``
-    An integer. If omitted, 127 is used.
-
-Plays the specified soundFX with the specified priority. Whether the soundFX is actually played is
-determined by the sound handler.
+Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
-ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
-	parameters = MapObjectProgram::parse_act_play_sound(arguments, kFxPriorityAllowMultiple - 1);
+ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments,
+                                              const ProductionSiteDescr& descr) {
+	parameters = MapObjectProgram::parse_act_play_sound(arguments, descr);
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
-	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, parameters.fx, ps.position_, parameters.priority));
+	Notifications::publish(NoteSound(SoundType::kAmbient, parameters.fx, ps.position_,
+	                                 parameters.priority, parameters.allow_multiple));
 	return ps.program_step(game);
 }
 
@@ -1899,8 +1879,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActReturn(parseinput.arguments, *building, tribes)));
 			} else if (parseinput.name == "call") {
-				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActCall(parseinput.arguments, *building)));
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActCall(parseinput.arguments)));
 			} else if (parseinput.name == "sleep") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActSleep(parseinput.arguments, *building)));
@@ -1929,8 +1909,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<ProductionProgram::Action>(new ActTrain(parseinput.arguments)));
 			} else if (parseinput.name == "playsound") {
-				actions_.push_back(
-				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments)));
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActPlaySound(parseinput.arguments, *building)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActConstruct(parseinput.arguments, name(), building, tribes)));
@@ -1990,5 +1970,23 @@ const Buildcost& ProductionProgram::produced_wares() const {
 }
 const Buildcost& ProductionProgram::recruited_workers() const {
 	return recruited_workers_;
+}
+
+void ProductionProgram::validate_calls(const ProductionSiteDescr& descr) const {
+	for (const auto& action : actions_) {
+		if (upcast(const ActCall, act_call, action.get())) {
+			const std::string& program_name = act_call->program_name();
+			if (name() == program_name) {
+				throw GameDataError("Production program '%s' in %s is calling itself",
+				                    program_name.c_str(), descr.name().c_str());
+			}
+			const ProductionSiteDescr::Programs& programs = descr.programs();
+			ProductionSiteDescr::Programs::const_iterator const it = programs.find(program_name);
+			if (it == programs.end()) {
+				throw GameDataError("Trying to call unknown program '%s' in %s", program_name.c_str(),
+				                    descr.name().c_str());
+			}
+		}
+	}
 }
 }  // namespace Widelands
