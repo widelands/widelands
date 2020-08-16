@@ -100,6 +100,7 @@ private:
 	uint32_t prev_char(uint32_t cursor) const;
 	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
 	void delete_selected_text();
+	void copy_selected_text();
 };
 }  // namespace UI
 

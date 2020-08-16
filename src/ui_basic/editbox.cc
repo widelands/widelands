@@ -227,12 +227,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			return false;
 		case SDLK_c:
 			if ((SDL_GetModState() & KMOD_CTRL) && m_->mode == EditBoxImpl::Mode::kSelection) {
-				uint32_t start, end;
-				calculate_selection_boundaries(start, end);
-
-				auto nr_characters = end - start;
-				std::string selected_text = m_->text.substr(start, nr_characters);
-				SDL_SetClipboardText(selected_text.c_str());
+				copy_selected_text();
 				return true;
 			}
 			return false;
@@ -245,6 +240,12 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				return true;
 			}
 			return false;
+      case SDLK_x:
+         if ((SDL_GetModState() & KMOD_CTRL) && m_->mode == EditBoxImpl::Mode::kSelection) {
+				copy_selected_text();
+				delete_selected_text();
+         }
+         return false;
 		case SDLK_ESCAPE:
 			cancel();
 			return true;
@@ -437,6 +438,14 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	}
 
 	return false;
+}
+void EditBox::copy_selected_text() {
+	uint32_t start, end;
+	calculate_selection_boundaries(start, end);
+
+	auto nr_characters = end - start;
+	std::string selected_text = m_->text.substr(start, nr_characters);
+	SDL_SetClipboardText(selected_text.c_str());
 }
 
 bool EditBox::handle_textinput(const std::string& input_text) {
