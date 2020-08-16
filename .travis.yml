@@ -137,17 +137,17 @@ jobs:
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=gcc-10 CXX=g++-10
       services: xvfb
     ### Build on remaining Linux configurations, with translations off
-    #- stage: build
-    #### RELEASE BUILDS
-    #  name: "RELEASE: Ubuntu 14.04 with clang 5"
-    #  os: linux
-    #  dist: trusty
-    #  compiler: clang
-    #  env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
-    #  before_script:
-    #    - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
-    #    - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
-    #    - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
+    - stage: build
+    ### RELEASE BUILDS
+      name: "RELEASE: Ubuntu 14.04 with clang 5"
+      os: linux
+      dist: trusty
+      compiler: clang
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
+      before_script:
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
+        - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
 
     #- name: "RELEASE: Ubuntu 18.04 with clang 7"
     #  os: linux
@@ -232,15 +232,15 @@ jobs:
     #  services: xvfb
 
     ### DEBUG BUILDS
-    #- name: "DEBUG: Ubuntu 14.04 with clang 5"
-    #  os: linux
-    #  dist: trusty
-    #  compiler: clang
-    #  env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
-    #  before_script:
-    #    - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
-    #    - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
-    #    - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
+    - name: "DEBUG: Ubuntu 14.04 with clang 5"
+      os: linux
+      dist: trusty
+      compiler: clang
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
+      before_script:
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
+        - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
 
     #- name: "DEBUG: Ubuntu 18.04 with clang 7"
     #  os: linux
@@ -332,4 +332,4 @@ stages:
   - tests
   - macos
   - testsuite
-  #- build
+  - build
