@@ -60,15 +60,15 @@ jobs:
       cache: false
 
     ### Compile something to fail early
-    #- stage: macos
-    #  name: "DEBUG: macOS 10.13 with Xcode 10.1"
-    #  os: osx
-    #  osx_image: xcode10.1
-    #  env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
-    #- name: "RELEASE: macOS 10.13 with Xcode 10.1"
-    #  os: osx
-    #  osx_image: xcode10.1
-    #  env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
+    - stage: macos
+      name: "DEBUG: macOS 10.13 with Xcode 10.1"
+      os: osx
+      osx_image: xcode10.1
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
+    - name: "RELEASE: macOS 10.13 with Xcode 10.1"
+      os: osx
+      osx_image: xcode10.1
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
 
     ### Separate stage to speed things up in case the regression test suite fails
     ### Building on the oldest and newest gcc
@@ -311,6 +311,6 @@ script: ./.travis.sh build
 
 stages:
   - tests
-  #- macos
+  - macos
   #- testsuite
   #- build
