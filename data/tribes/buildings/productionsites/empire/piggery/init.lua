@@ -46,7 +46,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
          descname = _"raising pigs",
          actions = {
