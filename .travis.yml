@@ -189,35 +189,35 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-8'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-8'
 
-    # -name: "RELEASE: Ubuntu 18.04 with clang 9"
-    #  os: linux
-    #  dist: bionic
-    #  compiler: clang
-    #  addons:
-    #    apt:
-    #      sources:
-    #        - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
-    #        - sourceline: 'deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
-    #          key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
-    #      packages:
-    #        - clang-9
-    #        - libboost-dev
-    #        - libboost-regex-dev
-    #        - libboost-system-dev
-    #        - libboost-test-dev
-    #        - libglew-dev
-    #        - libicu-dev
-    #        - libpng-dev
-    #        - libsdl2-dev
-    #        - libsdl2-image-dev
-    #        - libsdl2-mixer-dev
-    #        - libsdl2-ttf-dev
-    #        - zlib1g-dev
-    #  env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=clang-9 CXX=clang++-9
-    #  services: xvfb
-    #  before_script:
-    #    - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
-    #    - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
+     -name: "RELEASE: Ubuntu 18.04 with clang 9"
+      os: linux
+      dist: bionic
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
+            - sourceline: 'deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - clang-9
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - zlib1g-dev
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=clang-9 CXX=clang++-9
+      services: xvfb
+      before_script:
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
 
     #- name: "RELEASE: Ubuntu 16.04 with gcc 5"
     #  os: linux
@@ -282,35 +282,35 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-8'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-8'
 
-    #- name: "DEBUG: Ubuntu 18.04 with clang 9"
-    #  os: linux
-    #  dist: bionic
-    #  compiler: clang
-    #  addons:
-    #    apt:
-    #      sources:
-    #        - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
-    #        - sourceline: 'deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
-    #          key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
-    #      packages:
-    #        - clang-9
-    #        - libboost-dev
-    #        - libboost-regex-dev
-    #        - libboost-system-dev
-    #        - libboost-test-dev
-    #        - libglew-dev
-    #        - libicu-dev
-    #        - libpng-dev
-    #        - libsdl2-dev
-    #        - libsdl2-image-dev
-    #        - libsdl2-mixer-dev
-    #        - libsdl2-ttf-dev
-    #        - zlib1g-dev
-    #  env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=clang-9 CXX=clang++-9
-    #  services: xvfb
-    #  before_script:
-    #    - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
-    #    - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
+    - name: "DEBUG: Ubuntu 18.04 with clang 9"
+      os: linux
+      dist: bionic
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
+            - sourceline: 'deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - clang-9
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - zlib1g-dev
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=clang-9 CXX=clang++-9
+      services: xvfb
+      before_script:
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
 
     #- name: "DEBUG: Ubuntu 16.04 with gcc 5"
     #  os: linux
