@@ -268,18 +268,10 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			return false;
 		case SDLK_c:
 			if ((SDL_GetModState() & KMOD_CTRL) && d_->mode == Data::Mode::kSelection) {
-
-				uint32_t start, end;
-				d_->calculate_selection_boundaries(start, end);
-
-				auto nr_characters = end - start;
-				std::string selected_text = d_->text.substr(start, nr_characters);
-
-				SDL_SetClipboardText(selected_text.c_str());
+				copy_selected_text();
 				return true;
 			}
 			return false;
-
 		case SDLK_a:
 			if ((SDL_GetModState() & KMOD_CTRL)) {
 				d_->selection_start = 0;
@@ -288,6 +280,13 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 				return true;
 			}
 			return false;
+      case SDLK_x:
+         if ((SDL_GetModState() & KMOD_CTRL) && d_->mode == Data::Mode::kSelection) {
+            copy_selected_text();
+				delete_selected_text();
+            return true;
+         }
+         return false;
 		case SDLK_TAB:
 			// Let the panel handle the tab key
 			return get_parent()->handle_key(true, code);
@@ -511,6 +510,16 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 	}
 
 	return Panel::handle_key(down, code);
+}
+
+void MultilineEditbox::copy_selected_text() const {
+	uint32_t start, end;
+	this->d_->calculate_selection_boundaries(start, end);
+
+	auto nr_characters = end - start;
+	std::string selected_text = this->d_->text.substr(start, nr_characters);
+
+	SDL_SetClipboardText(selected_text.c_str());
 }
 /**
  * Selects text from @p cursor until @p end
