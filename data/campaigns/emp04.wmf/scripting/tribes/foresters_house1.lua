@@ -35,7 +35,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          descname = "planting trees",
          actions = {
             "sleep=66000",
