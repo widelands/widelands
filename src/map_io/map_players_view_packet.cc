@@ -226,15 +226,18 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} else if (descr == "portdock") {
 							field->map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di = egbase.tribes().building_index(tribes_lookup_table.lookup_building(descr));
+							DescriptionIndex di =
+							   egbase.tribes().building_index(tribes_lookup_table.lookup_building(descr));
 							if (di != INVALID_INDEX) {
 								field->map_object_descr = egbase.tribes().get_building_descr(di);
 							} else {
-								di = egbase.world().get_immovable_index(world_lookup_table.lookup_immovable(descr));
+								di = egbase.world().get_immovable_index(
+								   world_lookup_table.lookup_immovable(descr));
 								if (di != INVALID_INDEX) {
 									field->map_object_descr = egbase.world().get_immovable_descr(di);
 								} else {
-									di = egbase.tribes().immovable_index(tribes_lookup_table.lookup_immovable(descr));
+									di = egbase.tribes().immovable_index(
+									   tribes_lookup_table.lookup_immovable(descr));
 									if (di != INVALID_INDEX) {
 										field->map_object_descr = egbase.tribes().get_immovable_descr(di);
 									} else {
@@ -246,26 +249,28 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 						if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 							field->partially_finished_building.dismantlesite.building =
-							   egbase.tribes().get_building_descr(
-								  egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(fr.string())));
+							   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+							      tribes_lookup_table.lookup_building(fr.string())));
 							field->partially_finished_building.dismantlesite.progress = fr.unsigned_32();
 						} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 							field->partially_finished_building.constructionsite.becomes =
-							   egbase.tribes().get_building_descr(
-								  egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(fr.string())));
+							   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+							      tribes_lookup_table.lookup_building(fr.string())));
 							descr = fr.string();
 							field->partially_finished_building.constructionsite.was =
-							   descr.empty() ? nullptr :
-											   egbase.tribes().get_building_descr(
-												  egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(descr)));
+							   descr.empty() ?
+							      nullptr :
+							      egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+							         tribes_lookup_table.lookup_building(descr)));
 
 							for (uint32_t j = fr.unsigned_32(); j; --j) {
 								field->partially_finished_building.constructionsite.intermediates.push_back(
-								   egbase.tribes().get_building_descr(
-									  egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(fr.string()))));
+								   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+								      tribes_lookup_table.lookup_building(fr.string()))));
 							}
 
-							field->partially_finished_building.constructionsite.totaltime = fr.unsigned_32();
+							field->partially_finished_building.constructionsite.totaltime =
+							   fr.unsigned_32();
 							field->partially_finished_building.constructionsite.completedtime =
 							   fr.unsigned_32();
 						}
@@ -562,7 +567,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 					             field->partially_finished_building.constructionsite.was->name() :
 					             "");
 
-					fw.unsigned_32(field->partially_finished_building.constructionsite.intermediates.size());
+					fw.unsigned_32(
+					   field->partially_finished_building.constructionsite.intermediates.size());
 					for (const BuildingDescr* d :
 					     field->partially_finished_building.constructionsite.intermediates) {
 						fw.string(d->name());
