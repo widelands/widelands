@@ -27,7 +27,6 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
 #include "ui_fsmenu/load_map_or_game.h"
 #include "wui/game_chat_panel.h"
 
