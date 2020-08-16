@@ -1,6 +1,6 @@
 # Widelands
 
-[![Build Status Travis-CI](https://travis-ci.org/widelands/widelands.svg?branch=master)](https://travis-ci.org/widelands/widelands) [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/widelands/widelands?branch=master&svg=true)](https://ci.appveyor.com/project/widelands-dev/widelands) ![Code Quality](https://github.com/widelands/widelands/workflows/Formatting%20your%20code/badge.svg) ![Build](https://github.com/gunchleoc/widelands/workflows/Build/badge.svg) [![Mirrored on Launchpad](https://github.com/widelands/widelands/workflows/Launchpad%20Mirror/badge.svg)](https://code.launchpad.net/~widelands-dev/widelands/trunk)
+[![Build Status Travis-CI](https://travis-ci.org/widelands/widelands.svg?branch=master)](https://travis-ci.org/widelands/widelands) [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/widelands/widelands?branch=master&svg=true)](https://ci.appveyor.com/project/widelands-dev/widelands) ![Code Quality](https://github.com/widelands/widelands/workflows/Formatting%20your%20code/badge.svg) ![Build](https://github.com/widelands/widelands/workflows/Build/badge.svg) [![Mirrored on Launchpad](https://github.com/widelands/widelands/workflows/Launchpad%20Mirror/badge.svg)](https://code.launchpad.net/~widelands-dev/widelands/trunk)
 
 Widelands is a free, open source real-time strategy game with singleplayer campaigns and a multiplayer mode.
 The game was inspired by Settlers II™ (© Bluebyte) but has significantly more variety and depth to it.
