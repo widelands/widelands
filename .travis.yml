@@ -189,7 +189,7 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-8'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-8'
 
-     -name: "RELEASE: Ubuntu 18.04 with clang 9"
+    - name: "RELEASE: Ubuntu 18.04 with clang 9"
       os: linux
       dist: bionic
       compiler: clang
