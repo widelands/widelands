@@ -77,6 +77,7 @@ jobs:
       os: linux
       dist: bionic
       cache: false
+      addons:
         apt:
           sources:
             - sourceline: 'ppa:ubuntu-toolchain-r/test'
