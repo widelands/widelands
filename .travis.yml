@@ -63,12 +63,12 @@ jobs:
 
     ### Compile something to fail early
     - stage: macos
-      name: "RELEASE: macOS 10.13 with Xcode 10.1"
+      name: "RELEASE: Xcode 10.1"
       os: osx
       osx_image: xcode10.1
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
 
-    - name: "DEBUG: macOS 10.13 with Xcode 10.1"
+    - name: "DEBUG: Xcode 10.1"
       os: osx
       osx_image: xcode10.1
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
