@@ -6,8 +6,8 @@ animations = {
       hotspot = { 15, 27 },
       fps = 20,
       sound_effect = {
-         -- Sound files with numbers starting for 10 are generating silence. Remove when we move the sound triggering to programs
-         path = "sound/animals/elk",
+         path = "sound/animals/moose",
+         priority = 5
       },
    },
    eating = {

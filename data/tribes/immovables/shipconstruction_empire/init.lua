@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    attributes = { "shipconstruction" },
    programs = {
       main = {
-         "construct=idle 5000 210000",
+         "construct=idle duration:5s decay_after:3m30s",
          "transform=bob:empire_ship",
       }
    },
