@@ -106,8 +106,8 @@ struct ImmovableProgram : public MapObjectProgram {
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string type_name;
-		uint8_t probability;
+		std::string type_name_;
+		uint8_t probability_;
 	};
 
 	/// Plays a sound effect.
