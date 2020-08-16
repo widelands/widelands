@@ -240,12 +240,12 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				return true;
 			}
 			return false;
-      case SDLK_x:
-         if ((SDL_GetModState() & KMOD_CTRL) && m_->mode == EditBoxImpl::Mode::kSelection) {
+		case SDLK_x:
+			if ((SDL_GetModState() & KMOD_CTRL) && m_->mode == EditBoxImpl::Mode::kSelection) {
 				copy_selected_text();
 				delete_selected_text();
-         }
-         return false;
+			}
+			return false;
 		case SDLK_ESCAPE:
 			cancel();
 			return true;
@@ -664,7 +664,7 @@ void EditBox::calculate_selection_boundaries(uint32_t& start, uint32_t& end) {
  * Check the caret's position and scroll it into view if necessary.
  */
 void EditBox::check_caret() {
-	if(m_->caret > m_->text.size()) {
+	if (m_->caret > m_->text.size()) {
 		m_->caret = m_->text.size();
 	}
 	std::string leftstr(m_->text, 0, m_->caret);

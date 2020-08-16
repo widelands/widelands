@@ -280,13 +280,13 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 				return true;
 			}
 			return false;
-      case SDLK_x:
-         if ((SDL_GetModState() & KMOD_CTRL) && d_->mode == Data::Mode::kSelection) {
-            copy_selected_text();
+		case SDLK_x:
+			if ((SDL_GetModState() & KMOD_CTRL) && d_->mode == Data::Mode::kSelection) {
+				copy_selected_text();
 				delete_selected_text();
-            return true;
-         }
-         return false;
+				return true;
+			}
+			return false;
 		case SDLK_TAB:
 			// Let the panel handle the tab key
 			return get_parent()->handle_key(true, code);
