@@ -73,16 +73,16 @@ jobs:
     ### Separate stage to speed things up in case the regression test suite fails
     ### Building on the oldest and newest gcc
     - stage: testsuite
-      name: "DEBUG: Ubuntu 18.04 with gcc 9"
+      name: "DEBUG: Ubuntu 20.04 with gcc 19"
       os: linux
-      dist: bionic
+      dist: focal
       cache: false
       addons:
         apt:
           sources:
             - sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
-            - g++-9
+            - g++-10
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -95,7 +95,7 @@ jobs:
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
             - zlib1g-dev
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=gcc-9 CXX=g++-9
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=gcc-10 CXX=g++-10
       services: xvfb
     #- name: "DEBUG: Ubuntu 14.04 with gcc 4.8"
     #  os: linux
