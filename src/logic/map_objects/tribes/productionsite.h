@@ -401,7 +401,7 @@ protected:
 
 	/**
 	 * Determine the next program to be run when the last program has finished.
-	 * The default implementation starts program "work".
+	 * The default implementation starts program "main".
 	 */
 	virtual void find_and_start_next_program(Game&);
 

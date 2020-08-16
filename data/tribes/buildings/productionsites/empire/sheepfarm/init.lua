@@ -46,7 +46,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
          descname = _"breeding sheep",
          actions = {

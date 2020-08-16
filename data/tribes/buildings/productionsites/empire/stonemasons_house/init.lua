@@ -46,7 +46,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column because ...
          descname = _"sculpting a marble column",
          actions = {
