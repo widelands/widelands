@@ -219,17 +219,17 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
 
-    #- name: "RELEASE: Ubuntu 16.04 with gcc 5"
-    #  os: linux
-    #  dist: xenial
-    #  env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
-    #  services: xvfb
+    - name: "RELEASE: Ubuntu 16.04 with gcc 5"
+      os: linux
+      dist: xenial
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
+      services: xvfb
 
-    #- name: "RELEASE: Ubuntu 20.04 with gcc 9"
-    #  os: linux
-    #  dist: focal
-    #  env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
-    #  services: xvfb
+    - name: "RELEASE: Ubuntu 20.04 with gcc 9"
+      os: linux
+      dist: focal
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
+      services: xvfb
 
     ### DEBUG BUILDS
     - name: "DEBUG: Ubuntu 14.04 with clang 5"
@@ -312,17 +312,17 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
 
-    #- name: "DEBUG: Ubuntu 16.04 with gcc 5"
-    #  os: linux
-    #  dist: xenial
-    #  env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
-    #  services: xvfb
+    - name: "DEBUG: Ubuntu 16.04 with gcc 5"
+      os: linux
+      dist: xenial
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
+      services: xvfb
 
-    #- name: "DEBUG: Ubuntu 20.04 with gcc 9"
-    #  os: linux
-    #  dist: focal
-    #  env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
-    #  services: xvfb
+    - name: "DEBUG: Ubuntu 20.04 with gcc 9"
+      os: linux
+      dist: focal
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
+      services: xvfb
 
 language: cpp
 
