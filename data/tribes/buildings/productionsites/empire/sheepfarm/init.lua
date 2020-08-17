@@ -46,14 +46,14 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
          descname = _"breeding sheep",
          actions = {
             "return=skipped unless economy needs wool",
             "consume=water wheat",
             "sleep=duration:25s",
-            "playsound=sound/farm/sheep 192",
+            "playsound=sound/farm/sheep priority:50% allow_multiple",
             "animate=working duration:30s",
             "produce=wool"
          }

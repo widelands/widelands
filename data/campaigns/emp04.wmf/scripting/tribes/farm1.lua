@@ -26,7 +26,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          descname = "working",
          actions = {
             "call=plant",

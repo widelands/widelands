@@ -10,7 +10,7 @@ animations = {
       pictures = path.list_files(dirname .. "work_??.png"),
       sound_effect = {
          path = "sound/hammering/hammering",
-         priority = 64
+         priority = 50
       },
       hotspot = { 6, 22 },
       fps=10,

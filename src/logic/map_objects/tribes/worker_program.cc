@@ -883,35 +883,15 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 /* RST
 playsound
 ^^^^^^^^^^
-.. function:: playsound=\<sound_dir/sound_name\> [priority]
-
-   :arg string sound_dir/sound_name: The directory (folder) that the sound files are in,
-      relative to the data directory, followed by the name of the particular sound to play.
-      There can be multiple sound files to select from at random, e.g.
-      for `sound/farm/scythe`, we can have `sound/farm/scythe_00.ogg`, `sound/farm/scythe_01.ogg`
-      ...
-
-   :arg int priority: The priority to give this sound. Maximum priority is 255.
-
-   Play a sound effect. Example::
-
-      harvest = {
-         "findobject=attrib:ripe_wheat radius:2",
-         "walk=object",
-         "playsound=sound/farm/scythe 220", -- Almost certainly play a swishy harvesting sound
-         "animate=harvesting duration:10s",
-         "callobject=harvest",
-         "animate=gathering duration:4s",
-         "createware=wheat",
-         "return"
-      }
+Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
 void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd) {
 	//  50% chance to play, only one instance at a time
-	PlaySoundParameters parameters = MapObjectProgram::parse_act_play_sound(cmd, kFxPriorityMedium);
+	PlaySoundParameters parameters = MapObjectProgram::parse_act_play_sound(cmd, worker_);
 
 	act->iparam1 = parameters.priority;
 	act->iparam2 = parameters.fx;
+	act->iparam3 = parameters.allow_multiple ? 1 : 0;
 	act->function = &Worker::run_playsound;
 }
 

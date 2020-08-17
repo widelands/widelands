@@ -46,7 +46,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          descname = "grinding wheat",
          actions = {
             "sleep=5000",

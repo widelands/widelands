@@ -5,7 +5,7 @@ animations = {
       pictures = path.list_files(dirname .. "idle_??.png"),
       sound_effect = {
          path = "sound/hammering/hammering",
-         priority = 64
+         priority = 50
       },
       hotspot = { 12, 28 },
       fps = 10
@@ -32,7 +32,7 @@ tribes:new_worker_type {
       buildship = {
          "walk=object-or-coords",
          "plant=attrib:shipconstruction unless object",
-         "playsound=sound/sawmill/sawmill 230",
+         "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
          "animate=idle duration:500ms",
          "construct",
          "animate=idle duration:5s",

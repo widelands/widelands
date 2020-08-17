@@ -102,33 +102,24 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	SDL_GL_SwapWindow(sdl_window_);
 
 	/* Information about the video capabilities. */
-	{
-		SDL_DisplayMode disp_mode;
-		SDL_GetWindowDisplayMode(sdl_window_, &disp_mode);
-		log("**** GRAPHICS REPORT ****\n"
+	const char* drv = SDL_GetCurrentVideoDriver();
+	log("**** GRAPHICS REPORT ****\n"
 #ifdef WL_USE_GLVND
-		    " VIDEO DRIVER GLVND %s\n"
+	    "VIDEO DRIVER GLVND %s\n",
 #else
-		    " VIDEO DRIVER %s\n"
+	    "VIDEO DRIVER %s\n",
 #endif
-		    " pixel fmt %u\n"
-		    " size %d %d\n"
-		    "**** END GRAPHICS REPORT ****\n",
-		    SDL_GetCurrentVideoDriver(), disp_mode.format, disp_mode.w, disp_mode.h);
-		const int bytes_per_pixel = SDL_BYTESPERPIXEL(disp_mode.format);
-		if (bytes_per_pixel != 4) {
-			const std::string error_message =
-			   (boost::format(
-			       "SDL should report 4 bytes per pixel, but %d were reported instead.\nPlease check "
-			       "that everything's OK with your graphics driver.") %
-			    bytes_per_pixel)
-			      .str();
-			log("ERROR: %s\n", error_message.c_str());
-			SDL_ShowSimpleMessageBox(
-			   SDL_MESSAGEBOX_ERROR, "Video Error", error_message.c_str(), nullptr);
-			exit(1);
+	    drv ? drv : "NONE");
+	SDL_DisplayMode disp_mode;
+	for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
+		if (SDL_GetCurrentDisplayMode(i, &disp_mode) == 0) {
+			log("Display #%d: %dx%d @ %dhz %s\n", i, disp_mode.w, disp_mode.h, disp_mode.refresh_rate,
+			    SDL_GetPixelFormatName(disp_mode.format));
+		} else {
+			log("Couldn't get display mode for display #%d: %s\n", i, SDL_GetError());
 		}
 	}
+	log("**** END GRAPHICS REPORT ****\n");
 
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
