@@ -778,8 +778,8 @@ void WLApplication::set_mouse_lock(const bool locked) {
 }
 
 void WLApplication::refresh_graphics() {
-	g_gr->change_resolution(
-	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH), true);
+	g_gr->change_resolution(get_config_int("xres", kDefaultResolutionW),
+	                        get_config_int("yres", kDefaultResolutionH), true);
 	g_gr->set_fullscreen(get_config_bool("fullscreen", false));
 
 	// does only work with a window
