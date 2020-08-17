@@ -795,6 +795,7 @@ void Panel::do_draw_inner(RenderTarget& dst) {
  * \param dst RenderTarget for the parent Panel
  */
 void Panel::do_draw(RenderTarget& dst) {
+	// Make sure the panel's size is sane. If it's bigger than 10000 it's likely a bug.
 	assert(desired_w_ <= std::max(10000, g_gr->get_xres()));
 	assert(desired_h_ <= std::max(10000, g_gr->get_yres()));
 
