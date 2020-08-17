@@ -300,6 +300,7 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	switch (entry) {
 	case MapviewMenuEntry::kMinimap: {
 		toggle_minimap();
+		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kDecreaseZoom: {
 		map_view()->decrease_zoom();
@@ -884,10 +885,14 @@ bool InteractiveBase::get_display_flag(uint32_t const flag) {
 }
 
 void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
+	const uint32_t old_value = display_flags_;
 	display_flags_ &= ~flag;
 
 	if (on) {
 		display_flags_ |= flag;
+	}
+	if (old_value != display_flags_) {
+		rebuild_showhide_menu();
 	}
 }
 
@@ -1171,12 +1176,12 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 		                  egbase().map(), area.rect().center(), position_pix) /
 		               kSoundDistanceDivisor;
 
-		distance = (note.priority == kFxPriorityAlwaysPlay) ?
+		distance = (note.priority == kFxMaximumPriority) ?
 		              (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
 		              distance;
 
 		if (distance < kSoundMaxDistance) {
-			g_sh->play_fx(note.type, note.fx, note.priority,
+			g_sh->play_fx(note.type, note.fx, note.priority, note.allow_multiple,
 			              math::clamp(stereo_pos, kStereoLeft, kStereoRight), distance);
 		}
 	}

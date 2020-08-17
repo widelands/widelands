@@ -113,6 +113,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions&) { update_map_options(); });
 
+	fill_table();
 	layout();
 }
 

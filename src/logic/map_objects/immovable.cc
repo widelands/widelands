@@ -270,9 +270,9 @@ void ImmovableDescr::make_sure_default_program_is_there() {
 	if (!programs_.count(MapObjectProgram::kMainProgram)) {  //  default program
 		assert(is_animation_known("idle"));
 		std::vector<std::string> arguments{"idle"};
-		programs_[MapObjectProgram::kMainProgram] =
-		   new ImmovableProgram("main", std::unique_ptr<ImmovableProgram::Action>(
-		                                   new ImmovableProgram::ActAnimate(arguments, *this)));
+		programs_[MapObjectProgram::kMainProgram] = new ImmovableProgram(
+		   MapObjectProgram::kMainProgram, std::unique_ptr<ImmovableProgram::Action>(
+		                                      new ImmovableProgram::ActAnimate(arguments, *this)));
 	}
 }
 

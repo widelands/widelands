@@ -8,6 +8,7 @@ animations = {
       sound_effect = {
          -- Sound files with numbers starting from 10 are generating silence.
          path = "sound/animals/wolf",
+         priority = 3
       },
    },
    eating = {

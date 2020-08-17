@@ -421,7 +421,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 		toggle_resources();
 	} break;
 	}
-	rebuild_showhide_menu();
+	showhidemenu_.toggle();
 }
 
 void EditorInteractive::load(const std::string& filename) {
@@ -688,18 +688,22 @@ bool EditorInteractive::player_hears_field(const Widelands::Coords&) const {
 
 void EditorInteractive::toggle_resources() {
 	draw_resources_ = !draw_resources_;
+	rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_immovables() {
 	draw_immovables_ = !draw_immovables_;
+	rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_bobs() {
 	draw_bobs_ = !draw_bobs_;
+	rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_grid() {
 	draw_grid_ = !draw_grid_;
+	rebuild_showhide_menu();
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
