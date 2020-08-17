@@ -80,9 +80,9 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	}
 
 	log("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
-	sdl_window_ =
-	   SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-	                    window_mode_width_, window_mode_height_, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+	sdl_window_ = SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED,
+	                               SDL_WINDOWPOS_UNDEFINED, window_mode_width_, window_mode_height_,
+	                               SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 	SDL_SetWindowMinimumSize(sdl_window_, 800, 600);
 
 	GLint max;
