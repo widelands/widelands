@@ -78,7 +78,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	private:
 		std::string type_name_;
 		bool bob_;
-		uint8_t probability_;
+		unsigned probability_;
 	};
 
 	/// Like ActTransform but the probability is determined by the suitability.
@@ -97,7 +97,7 @@ struct ImmovableProgram : public MapObjectProgram {
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		uint8_t probability_;
+		unsigned probability_;
 	};
 
 	class ActSeed : public Action {
@@ -106,8 +106,8 @@ struct ImmovableProgram : public MapObjectProgram {
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string type_name;
-		uint8_t probability;
+		std::string type_name_;
+		unsigned probability_;
 	};
 
 	/// Plays a sound effect.
