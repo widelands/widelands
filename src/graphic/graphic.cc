@@ -29,6 +29,7 @@
 #include "build_info.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/build_texture_atlas.h"
+#include "graphic/default_resolution.h"
 #include "graphic/gl/initialize.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
@@ -83,7 +84,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	sdl_window_ = SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED,
 	                               SDL_WINDOWPOS_UNDEFINED, window_mode_width_, window_mode_height_,
 	                               SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
-	SDL_SetWindowMinimumSize(sdl_window_, 800, 600);
+	SDL_SetWindowMinimumSize(sdl_window_, kMinimumResolutionW, kMinimumResolutionH);
 
 	GLint max;
 	// LeakSanitizer reports a memory leak which is triggered somewhere in this function call,

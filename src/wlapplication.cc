@@ -386,7 +386,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
-	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H),
+	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
 	   get_config_bool("fullscreen", false));
 
 	g_mouse_cursor = new MouseCursor();
@@ -779,7 +779,7 @@ void WLApplication::set_mouse_lock(const bool locked) {
 
 void WLApplication::refresh_graphics() {
 	g_gr->change_resolution(
-	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H));
+	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH));
 	g_gr->set_fullscreen(get_config_bool("fullscreen", false));
 
 	// does only work with a window
