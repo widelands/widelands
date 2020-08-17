@@ -49,7 +49,6 @@ It is not mandatory for immovables to define programs. If the immovable defines 
 ``main``, this program will be started as the main program on creation. Immovables without such a
 program will simply display their 'idle' animation indefinitely.
 
-
 .. note:: The main program used to be called ``program``, which has been deprecated.
 
 Programs are defined as Lua tables. Each program must be declared as a subtable in the immovable's

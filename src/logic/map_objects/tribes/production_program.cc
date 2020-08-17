@@ -1703,7 +1703,6 @@ Example:
          -- Now train the soldier's attack to level 2
          "train=soldier:attack level:2"
       }
-
 */
 ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments,
                                       const ProductionSiteDescr& descr) {
