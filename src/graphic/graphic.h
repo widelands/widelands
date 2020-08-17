@@ -70,7 +70,9 @@ public:
 	initialize(const TraceGl& trace_gl, int window_mode_w, int window_mode_height, bool fullscreen);
 
 	// Gets and sets the resolution.
-	void change_resolution(int w, int h);
+	// Use 'resize_window = true' to resize the window to the new resolution.
+	// Use 'resize_window = false' if the window has already been resized.
+	void change_resolution(int w, int h, bool resize_window);
 	int get_xres();
 	int get_yres();
 
@@ -100,8 +102,11 @@ public:
 	void screenshot(const std::string& fname);
 
 private:
+	// Unmaximize the window and set its size.
+	void set_window_size(int w, int h);
+
 	// Called when the resolution (might) have changed.
-	void resolution_changed(int old_w = 0, int old_h = 0);
+	void resolution_changed();
 
 	// The height & width of the window should we be in window mode.
 	int window_mode_width_ = 0;

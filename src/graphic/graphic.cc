@@ -154,21 +154,38 @@ int Graphic::get_yres() {
 	return screen_->height();
 }
 
-void Graphic::change_resolution(int w, int h) {
+void Graphic::change_resolution(int w, int h, bool resize_window) {
 	window_mode_width_ = w;
 	window_mode_height_ = h;
 
-	if (!fullscreen()) {
-		int old_w, old_h;
-		SDL_GetWindowSize(sdl_window_, &old_w, &old_h);
-		SDL_SetWindowSize(sdl_window_, w, h);
-		resolution_changed(old_w, old_h);
+	if (!fullscreen() && resize_window) {
+		set_window_size(w, h);
 	}
+
+	resolution_changed();
 }
 
-void Graphic::resolution_changed(int old_w, int old_h) {
+void Graphic::set_window_size(int w, int h) {
+	// SDL can get badly confused when trying to resize a maximized window
+	// so we restore it first.
+	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
+	if (flags & SDL_WINDOW_MAXIMIZED) {
+		SDL_RestoreWindow(sdl_window_);
+	};
+
+	SDL_SetWindowSize(sdl_window_, w, h);
+}
+
+void Graphic::resolution_changed() {
+	int old_w = screen_ ? screen_->width() : 0;
+	int old_h = screen_ ? screen_->height() : 0;
+
 	int new_w, new_h;
 	SDL_GetWindowSize(sdl_window_, &new_w, &new_h);
+
+	if (old_w == new_w && old_h == new_h) {
+		return;
+	}
 
 	screen_.reset(new Screen(new_w, new_h));
 	render_target_.reset(new RenderTarget(screen_.get()));
@@ -203,9 +220,6 @@ void Graphic::set_fullscreen(const bool value) {
 		return;
 	}
 
-	int old_w, old_h;
-	SDL_GetWindowSize(sdl_window_, &old_w, &old_h);
-
 	// Widelands is not resolution agnostic, so when we set fullscreen, we want
 	// it at the full resolution of the desktop and we want to know about the
 	// true resolution (SDL supports hiding the true resolution from the
@@ -214,16 +228,16 @@ void Graphic::set_fullscreen(const bool value) {
 	if (value) {
 		SDL_DisplayMode display_mode;
 		SDL_GetDesktopDisplayMode(SDL_GetWindowDisplayIndex(sdl_window_), &display_mode);
-		SDL_SetWindowSize(sdl_window_, display_mode.w, display_mode.h);
+		set_window_size(display_mode.w, display_mode.h);
 
 		SDL_SetWindowFullscreen(sdl_window_, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	} else {
 		SDL_SetWindowFullscreen(sdl_window_, 0);
 
 		// Next line does not work. See comment in refresh().
-		SDL_SetWindowSize(sdl_window_, window_mode_width_, window_mode_height_);
+		set_window_size(window_mode_width_, window_mode_height_);
 	}
-	resolution_changed(old_w, old_h);
+	resolution_changed();
 }
 
 /**
@@ -238,8 +252,10 @@ void Graphic::refresh() {
 	if (!fullscreen()) {
 		int true_width, true_height;
 		SDL_GetWindowSize(sdl_window_, &true_width, &true_height);
+
 		if (true_width != window_mode_width_ || true_height != window_mode_height_) {
-			SDL_SetWindowSize(sdl_window_, window_mode_width_, window_mode_height_);
+			log("-- Resizing in refresh()\n");
+			set_window_size(window_mode_width_, window_mode_height_);
 		}
 	}
 
