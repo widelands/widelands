@@ -514,10 +514,10 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 void MultilineEditbox::copy_selected_text() const {
 	uint32_t start, end;
-	this->d_->calculate_selection_boundaries(start, end);
+	d_->calculate_selection_boundaries(start, end);
 
 	auto nr_characters = end - start;
-	std::string selected_text = this->d_->text.substr(start, nr_characters);
+	std::string selected_text = d_->text.substr(start, nr_characters);
 
 	SDL_SetClipboardText(selected_text.c_str());
 }
