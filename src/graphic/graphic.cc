@@ -254,7 +254,6 @@ void Graphic::refresh() {
 		SDL_GetWindowSize(sdl_window_, &true_width, &true_height);
 
 		if (true_width != window_mode_width_ || true_height != window_mode_height_) {
-			log("-- Resizing in refresh()\n");
 			set_window_size(window_mode_width_, window_mode_height_);
 		}
 	}
