@@ -71,7 +71,9 @@ Productionsite Programs
 Productionsites have :ref:`programs <map_object_programs>` that will be executed by the game
 engine. Each productionsite must have a program named ``main``, which will be started automatically
 when the productionsite is created in the game, and then repeated until the productionsite is
-destroyed. (Note: the main program used to be called ``work``, which has been deprecated.)
+destroyed.
+
+.. note:: The main program used to be called ``work``, which has been deprecated.
 
 Programs are defined as Lua tables. Each program must be declared as a subtable in the
 productionsite's Lua table called ``programs`` and have a unique table key. The entries in a
@@ -311,6 +313,8 @@ ProductionProgram::Action::TrainingParameters::parse(const std::vector<std::stri
 }
 
 /* RST
+.. _productionsite_programs_act_return:
+
 return
 ------
 Returns from the program.
@@ -691,31 +695,51 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 /* RST
 call
 ----
-Calls a program of the productionsite.
+.. function:: call=\<program_name\> \[on failure|completion|skip fail|complete|skip|repeat\]
 
-Parameter syntax::
+   :arg string program_name: The name of a :ref:`program <productionsite_programs>`
+      defined in this productionsite.
 
-  parameters                 ::= program [failure_handling_directive]
-  failure_handling_directive ::= on failure failure_handling_method
-  failure_handling_method    ::= Fail | Repeat | Skip
-  Fail                       ::= fail
-  Repeat                     ::= repeat
-  Skip                       ::= skip
+   :arg string on: Defines what to do if the program fails, completes or skips.
 
-Parameter semantics:
+      * ``fail``: The command fails, with the same effect as executing the :ref:`return program
+        <productionsite_programs_act_return>` with ``return=failed``.
+      * ``repeat``: The command is repeated.
+      * ``skip``: The failure is ignored, and the program is continued. This is the default setting
+        if ``on`` is ommitted.
 
-``program``
-    The name of a program defined in the productionsite.
-``failure_handling_method``
-    Specifies how to handle a failure of the called program.
+Calls another program of the same productionsite. Example:
 
-    - If ``failure_handling_method`` is ``fail``, the command fails (with the same effect as
-executing ``return=failed``).
-    - If ``failure_handling_method`` is ``repeat``, the command is repeated.
-    - If ``failure_handling_method`` is ``skip``, the failure is ignored (the program is continued).
+.. code-block:: lua
 
-``failure_handling_directive``
-    If omitted, the value ``Skip`` is used for ``failure_handling_method``.
+      -- Productionsite program that will mine marble 1 out of 3 times
+      programs = {
+         main = {
+            -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+            descname = _"working",
+            actions = {
+               "call=mine_granite on failure fail",
+               "call=mine_granite on failure fail",
+               "call=mine_marble on failure fail",
+            }
+         },
+         mine_granite = {
+            -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
+            descname = _"quarrying granite",
+            actions = {
+               "callworker=cut_granite",
+               "sleep=duration:17s500ms"
+            }
+         },
+         mine_marble = {
+            -- TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
+            descname = _"quarrying marble",
+            actions = {
+               "callworker=cut_marble",
+               "sleep=duration:17s500ms"
+            }
+         },
+      },
 */
 ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments) {
 	if (arguments.size() < 1 || arguments.size() > 4) {
@@ -808,23 +832,41 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 /* RST
 callworker
 ----------
-Calls a program of the productionsite's main worker.
+.. function:: callworker=\<worker_program_name\>
 
-Parameter syntax::
+   :arg string worker_program_name: The name of a :ref:`worker program <tribes_worker_programs>`
+      defined in the productionsite's main :ref:`worker <lua_tribes_basic_workers>`.
 
-    parameters ::= program
+Calls a program of the productionsite's main worker. Example:
 
-Parameter semantics:
+.. code-block:: lua
 
-``program``
-    The name of a program defined in the productionsite's main worker.
+      -- Productionsite program actions
+      actions = {
+         -- Send the farmer out to harvest wheat from a wheat field
+         "callworker=harvest",
+         "animate=working duration:3s",
+         "sleep=duration:1s"
+      }
+
+      -- Corresponding worker program for harvesting wheat from a wheat field
+      harvest = {
+         "findobject=attrib:ripe_wheat radius:2",
+         "walk=object",
+         "playsound=sound/farm/scythe priority:70% allow_multiple",
+         "animate=harvest duration:10s",
+         "callobject=harvest",
+         "animate=gather duration:4s",
+         "createware=wheat",
+         "return"
+      }
 */
 ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& arguments,
                                                 const std::string& production_program_name,
                                                 ProductionSiteDescr* descr,
                                                 const Tribes& tribes) {
 	if (arguments.size() != 1) {
-		throw GameDataError("Usage: callworker=<worker program name>");
+		throw GameDataError("Usage: callworker=<worker_program_name>");
 	}
 
 	program_ = arguments.front();
@@ -904,19 +946,22 @@ void ProductionProgram::ActCallWorker::building_work_failed(Game& game,
 /* RST
 sleep
 -----
-Does nothing.
+.. function:: sleep=duration:\<duration\>
 
-Parameter syntax::
+   :arg duration duration: The time :ref:`map_object_programs_datatypes_duration` for which the
+      program will wait before continuing on to the next action. If ``0``, the result from the most
+      recent command that returned a value is used.
 
-  parameters ::= duration:<duration>
+Blocks the execution of the program for the specified duration. Example:
 
-Parameter semantics:
+.. code-block:: lua
 
-``duration``
-    A natural integer. If 0, the result from the most recent command that
-    returned a value is used.
-
-Blocks the execution of the program for the specified duration.
+      actions = {
+         "consume=ration",
+         -- Do nothing for 30 seconds
+         "sleep=duration:30s",
+         "callworker=scout"
+      }
 */
 ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
                                       const ProductionSiteDescr& psite) {
@@ -961,22 +1006,16 @@ void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) cons
 /* RST
 consume
 -------
-Consumes wares from the input storages.
+.. function:: consume=ware_name\{,ware_name\}\[:count\] \[ware_name\{,ware_name\}\[:amount\]\]...\]
 
-Parameter syntax::
+   :arg string ware_name: a list of :ref:`ware types <lua_tribes_wares>` to choose from for
+      consumption. A ware type may only appear once in the command.
 
-  parameters ::= group {group}
-  group      ::= ware_type{,ware_type}[:count]
+   :arg int amount: The amount of wares of the chosen type to consume. A positive integer. If
+      omitted, the value ``1`` is used.
 
-Parameter semantics:
-
-``ware_type``
-    The name of a ware type (defined in the tribe).
-``count``
-    A positive integer. If omitted, the value 1 is used.
-
-For each group, the number of wares specified in count is consumed. The consumed wares may be of any
-type in the group.
+Consumes wares from the input storages. For each ware group, the number of wares specified in
+``amount`` is consumed. The consumed wares may be of any type in the group.
 
 If there are not enough wares in the input storages, the command fails (with the same effect as
 executing ``return=failed``). Then no wares will be consumed.
@@ -999,6 +1038,30 @@ succeeds.
 
 .. note:: It is not possible to reorder ware types within a group. ``a,b`` is equivalent to ``b,a``
     because in the internal representation the ware types of a group are sorted.
+
+Examples:
+
+.. code-block:: lua
+
+      actions = {
+         "return=skipped unless economy needs shield_advanced",
+         -- Try to consume 2x iron, then 2x coal, then 1x gold
+         "consume=iron:2 coal:2 gold",
+         "sleep=duration:32s",
+         "animate=working duration:45s",
+         "produce=shield_advanced"
+      },
+
+      actions = {
+         "checksoldier=soldier:evade level:0",
+         "return=failed unless site has empire_bread",
+         "return=failed unless site has fish,meat",
+         "sleep=duration:30s",
+         "checksoldier=soldier:evade level:0",
+         -- Try to consume 1x empire_bread, then 1x fish or 1x meat
+         "consume=empire_bread fish,meat",
+         "train=soldier:evade level:1"
+      }
 */
 ProductionProgram::ActConsume::ActConsume(const std::vector<std::string>& arguments,
                                           const ProductionSiteDescr& descr,
@@ -1133,23 +1196,29 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 /* RST
 produce
 -------
-Produces wares.
+.. function:: produce=\<ware_name\>\[:\<amount\>\] \[\<ware_name\>\[:\<amount\>\]...\]
 
-Parameter syntax::
+   :arg string ware_name: The name of a :ref:`ware type <lua_tribes_wares>`. A ware
+      type may only appear once in the command.
 
-  parameters ::= group {group}
-  group      ::= ware_type[:count]
+   :arg int amount: The amount of wares of this type to produce. A positive integer. If omitted,
+      the value ``1`` is used.
 
-Parameter semantics:
+Produces wares. For each group, the number of wares specified in ``amount`` is produced and then
+placed on the building's flag to be carried where they are needed. The produced wares are of the
+type specified by
+``ware_name`` in the group. Example:
 
-``ware_type``
-    The name of a ware type (defined in the tribe). A ware type may only
-    appear once in the command.
-``count``
-    A positive integer. If omitted, the value 1 is used.
+.. code-block:: lua
 
-For each group, the number of wares specified in count is produced. The produced wares are of the
-type specified in the group. How the produced wares are handled is defined by the productionsite.
+      actions = {
+         "return=skipped unless economy needs fur",
+         "consume=barley water",
+         "sleep=duration:15s",
+         "animate=working duration:20s",
+         -- Produce 2x fur and 1x meat
+         "produce=fur:2 meat"
+      }
 */
 ProductionProgram::ActProduce::ActProduce(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
@@ -1211,30 +1280,35 @@ bool ProductionProgram::ActProduce::get_building_work(Game& game,
 /* RST
 recruit
 -------
-Recruits workers.
+.. function:: recruit=\<worker_name\>\[:\<amount\>\] \[\<worker_name\>\[:\<amount\>\]...\]
 
-Parameter syntax::
+   :arg string worker_name: The name of a :ref:`worker type <lua_tribes_basic_workers>`. A worker
+      type may only appear once in the command.
 
-  parameters ::= group {group}
-  group      ::= worker_type[:count]
+   :arg int amount: The amount of workers of this type to create. A positive integer. If omitted,
+      the value ``1`` is used.
 
-Parameter semantics:
+Produces workers. For each group, the number of workers specified in ``amount`` is produced, which
+then leave the site looking for employment. The produced workers are of the type specified by
+``worker_name`` in the group. Example:
 
-``worker_type``
-    The name of a worker type (defined in the tribe). A worker type may only
-    appear once in the command.
-``count``
-    A positive integer. If omitted, the value 1 is used.
+.. code-block:: lua
 
-For each group, the number of workers specified in count is produced. The produced workers are of
-the type specified in the group. How the produced workers are handled is defined by the
-productionsite.
+      actions = {
+         "return=skipped unless economy needs atlanteans_horse",
+         "consume=corn water",
+         "sleep=duration:15s",
+         "playsound=sound/farm/horse priority:50% allow_multiple",
+         "animate=working duration:15s",
+         -- Create 2 horses
+         "recruit=atlanteans_horse:2"
+      }
 */
 ProductionProgram::ActRecruit::ActRecruit(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
                                           const Tribes& tribes) {
 	if (arguments.empty()) {
-		throw GameDataError("Usage: recruit=<worker name>[:<amount>] [<worker name>[:<amount>]...]");
+		throw GameDataError("Usage: recruit=<worker_name>[:<amount>] [<worker_name>[:<amount>]...]");
 	}
 	recruited_workers_ = parse_bill_of_materials(arguments, WareWorker::wwWORKER, tribes);
 
@@ -1504,9 +1578,11 @@ checksoldier
 
    :arg int level: The level that the soldier should have for the given training attribute.
 
+.. note:: This action is only available to :ref:`training sites
+   <lua_tribes_buildings_trainingsites>`.
+
 Returns failure unless there is a soldier present with the given training attribute at the given
-level. **Note:** This action is only available to :ref:`training sites
-<lua_tribes_buildings_trainingsites>`. Example:
+level. Example:
 
 .. code-block:: lua
 
@@ -1606,10 +1682,12 @@ train
 
    :arg int level: The level that the soldier will receive for the given training attribute.
 
+.. note:: This action is only available to :ref:`training sites
+   <lua_tribes_buildings_trainingsites>`.
+
 Increases a soldier's training attribute to the given level. It is mandatory to call 'checksoldier'
 before calling this action to ensure that an appropriate soldier will be present at the site.
-**Note:** This action is only available to :ref:`training sites
-<lua_tribes_buildings_trainingsites>`. Example:
+Example:
 
 .. code-block:: lua
 
@@ -1625,6 +1703,7 @@ before calling this action to ensure that an appropriate soldier will be present
          -- Now train the soldier's attack to level 2
          "train=soldier:attack level:2"
       }
+
 */
 ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments,
                                       const ProductionSiteDescr& descr) {
