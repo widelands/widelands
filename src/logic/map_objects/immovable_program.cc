@@ -424,7 +424,7 @@ seed
          -- then expand the radius and try again with a chance of 19.53%.
          -- Repeat until a location has been selected, then plant an
          -- 'umbrella_red_wasteland_sapling' if the terrain affinity check
-         -- for this immovable succeeds.
+         -- for this immovable succeeds at the selected location.
          "seed=umbrella_red_wasteland_sapling proximity:19.53%",
          "animate=idle duration:20s",
          "remove=chance:7.81%",
