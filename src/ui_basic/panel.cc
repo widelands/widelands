@@ -795,9 +795,8 @@ void Panel::do_draw_inner(RenderTarget& dst) {
  * \param dst RenderTarget for the parent Panel
  */
 void Panel::do_draw(RenderTarget& dst) {
-	// TODO(Niektory): Are the asserts needed/correct?
-	assert(desired_w_ <= std::max(3000, g_gr->get_xres()));
-	assert(desired_h_ <= std::max(3000, g_gr->get_yres()));
+	assert(desired_w_ <= std::max(10000, g_gr->get_xres()));
+	assert(desired_h_ <= std::max(10000, g_gr->get_yres()));
 
 	if (!is_visible()) {
 		return;
