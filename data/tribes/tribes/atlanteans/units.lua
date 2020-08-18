@@ -1,3 +1,4 @@
+-- TODO(GunChleoc): Remove compatibility/deprecation info after v1.0
 -- This is the documentation for the init.lua file
 
 -- RST
@@ -13,20 +14,14 @@
 -- This file returns a table with the basic information for a tribe that is
 -- needed before a game is loaded or the editor has been started. The table has the following entries:
 --
--- **name**: A string containing the internal name of the tribe.
---
--- **author**: The creator(s) of the tribe.
---
--- **descname**: In-game display name of the tribe.
---
--- **tooltip**: A description of the tribe to be shown in tooltips.
---
--- **icon**: File path to a png file to be used as button image.
---
--- **script**: File path to the :ref:`units.lua <lua_tribes_tribes_units>` file
--- that configures which units the tribe is using.
---
--- **starting_conditions**: A table of file paths to starting condition Lua scripts.
+-- * **name**: A string containing the internal name of the tribe
+-- * **author**: The creator(s) of the tribe
+-- * **descname**: In-game display name of the tribe
+-- * **tooltip**: A description of the tribe to be shown in tooltips
+-- * **icon**: File path to a png file to be used as button image
+-- * **script**: File path to the :ref:`units.lua <lua_tribes_tribes_units>` file
+--   that configures which units the tribe is using
+-- * **starting_conditions**: A table of file paths to starting condition Lua scripts
 --
 
 -- And now the documentation for this file
@@ -48,17 +43,24 @@
 --
 --    **name**: A string containing the internal name of the tribe.
 --
---    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``. Each animation needs the parameters ``pictures`` (table of filenames) and ``hotspot`` (2 integer coordinates), and may also define ``fps`` (integer frames per second).
+--    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``.
+--    Each animation needs the parameter ``hotspot`` (2 integer coordinates),
+--    and may also define ``fps`` (integer frames per second).
 --
 --    **animation_directory**: The location of the animation png files.
 --
---    **bridges**: Contains animations for ``normal_e``, ``normal_se``, ``normal_sw``, ``busy_e``, ``busy_se`` and ``busy_sw``.
+--    **bridges**: Contains animations for ``normal_e``, ``normal_se``, ``normal_sw``,
+--    ``busy_e``, ``busy_se`` and ``busy_sw``.
 --
 --    **bridge_height**: The height in pixels of each bridge at it's summit at 1x scale.
 --
---    **roads**: The file paths for the tribe's road textures in 3 subtables ``busy``, ``normal`` and ``waterway``.
+--    **roads**: The file paths for the tribe's road textures in 3 subtables ``busy``,
+--    ``normal`` and ``waterway``.
 --
---    **resource_indicators**: The names for the resource indicators. This table contains a subtable for each resource name plus a subtable named "" for no resources. Each subtable is an array, in which the index of each entry is the highest amount of resources the indicator may indicate.
+--    **resource_indicators**: The names for the resource indicators.
+--    This table contains a subtable for each resource name plus a subtable named
+--    ``""`` for no resources. Each subtable is an array, in which the index of
+--    each entry is the highest amount of resources the indicator may indicate.
 --
 --    **wares_order**: This defines all the wares that this tribe uses and their
 --    display order in the user interface. Each subtable defines a column in the
