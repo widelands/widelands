@@ -42,20 +42,17 @@ tribes:new_productionsite_type {
       { name = "water", amount = 8 },
       { name = "wheat", amount = 8 }
    },
-   outputs = {
-      "barbarians_ox"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
          descname = pgettext("barbarians_building", "rearing cattle"),
          actions = {
             "return=skipped unless economy needs barbarians_ox",
             "consume=wheat water",
-            "sleep=15000",
-            "playsound=sound/farm/ox 192",
-            "animate=working 15000", -- Animation of feeding the cattle
+            "sleep=duration:15s",
+            "playsound=sound/farm/ox priority:50% allow_multiple",
+            "animate=working duration:15s", -- Animation of feeding the cattle
             "recruit=barbarians_ox"
          }
       },

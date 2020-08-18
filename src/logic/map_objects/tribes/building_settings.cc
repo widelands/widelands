@@ -154,15 +154,11 @@ BuildingSettings* BuildingSettings::load(const Game& game,
                                          const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == 1 || packet_version == kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			const std::string name(fr.c_string());
 			const DescriptionIndex index =
 			   tribe.safe_building_index(tribes_lookup_table.lookup_building(name));
 			const BuildingDescr* descr = tribe.get_building_descr(index);
-			if (packet_version == 1) {
-				// TODO(GunChleoc): Savegame compatibility for Build 21
-				fr.unsigned_8();  // Consume unused building type
-			}
 			BuildingSettings* result = nullptr;
 			switch (descr->type()) {
 			case MapObjectType::TRAININGSITE: {
@@ -241,19 +237,14 @@ void ProductionsiteSettings::read(const Game& game,
 	BuildingSettings::read(game, fr, tribes_lookup_table);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == 1 || packet_version == kCurrentPacketVersionProductionsite) {
+		if (packet_version == kCurrentPacketVersionProductionsite) {
 			stopped = fr.unsigned_8();
 			const uint32_t nr_wares = fr.unsigned_32();
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {
 				DescriptionIndex di = Widelands::INVALID_INDEX;
-				if (packet_version == 1) {
-					// TODO(GunChleoc): Savegame compatibility for Build 21
-					di = fr.unsigned_32();
-				} else {
-					const std::string name(fr.c_string());
-					di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
-				}
+				const std::string name(fr.c_string());
+				di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
 				const uint32_t fill = fr.unsigned_32();
 				const int32_t priority = fr.signed_32();
 				// Set the fill and priority if the queue exists.
@@ -268,13 +259,8 @@ void ProductionsiteSettings::read(const Game& game,
 			}
 			for (uint32_t i = 0; i < nr_workers; ++i) {
 				DescriptionIndex di = Widelands::INVALID_INDEX;
-				if (packet_version == 1) {
-					// TODO(GunChleoc): Savegame compatibility for Build 21
-					di = fr.unsigned_32();
-				} else {
-					const std::string name(fr.c_string());
-					di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
-				}
+				const std::string name(fr.c_string());
+				di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
 				const uint32_t fill = fr.unsigned_32();
 				const int32_t priority = fr.signed_32();
 				// Set the fill and priority if the queue exists.
@@ -344,19 +330,14 @@ void WarehouseSettings::read(const Game& game,
 	BuildingSettings::read(game, fr, tribes_lookup_table);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == 1 || packet_version == kCurrentPacketVersionWarehouse) {
+		if (packet_version == kCurrentPacketVersionWarehouse) {
 			launch_expedition = fr.unsigned_8();
 			const uint32_t nr_wares = fr.unsigned_32();
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {
 				DescriptionIndex di = Widelands::INVALID_INDEX;
-				if (packet_version == 1) {
-					// TODO(GunChleoc): Savegame compatibility for Build 21
-					di = fr.unsigned_32();
-				} else {
-					const std::string name(fr.c_string());
-					di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
-				}
+				const std::string name(fr.c_string());
+				di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
 				const uint8_t pref = fr.unsigned_8();
 				// Condition protects against changes in the tribe's roster
 				if (tribe_.has_ware(di)) {
@@ -365,13 +346,8 @@ void WarehouseSettings::read(const Game& game,
 			}
 			for (uint32_t i = 0; i < nr_workers; ++i) {
 				DescriptionIndex di = Widelands::INVALID_INDEX;
-				if (packet_version == 1) {
-					// TODO(GunChleoc): Savegame compatibility for Build 21
-					di = fr.unsigned_32();
-				} else {
-					const std::string name(fr.c_string());
-					di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
-				}
+				const std::string name(fr.c_string());
+				di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
 				const uint8_t pref = fr.unsigned_8();
 				// Condition protects against changes in the tribe's roster
 				if (tribe_.has_worker(di)) {

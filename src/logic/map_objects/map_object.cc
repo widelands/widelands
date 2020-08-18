@@ -54,8 +54,9 @@ void CmdDestroyMapObject::execute(Game& game) {
 	game.syncstream().unsigned_8(SyncEntry::kDestroyObject);
 	game.syncstream().unsigned_32(obj_serial);
 
-	if (MapObject* obj = game.objects().get_object(obj_serial))
+	if (MapObject* obj = game.objects().get_object(obj_serial)) {
 		obj->destroy(game);
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersionDestroyMapObject = 1;
@@ -65,14 +66,15 @@ void CmdDestroyMapObject::read(FileRead& fr, EditorGameBase& egbase, MapObjectLo
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionDestroyMapObject) {
 			GameLogicCommand::read(fr, egbase, mol);
-			if (Serial const serial = fr.unsigned_32())
+			if (Serial const serial = fr.unsigned_32()) {
 				try {
 					obj_serial = mol.get<MapObject>(serial).serial();
 				} catch (const WException& e) {
 					throw GameDataError("%u: %s", serial, e.what());
 				}
-			else
+			} else {
 				obj_serial = 0;
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "CmdDestroyMapObject", packet_version, kCurrentPacketVersionDestroyMapObject);
@@ -116,14 +118,15 @@ void CmdAct::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionCmdAct) {
 			GameLogicCommand::read(fr, egbase, mol);
-			if (Serial const object_serial = fr.unsigned_32())
+			if (Serial const object_serial = fr.unsigned_32()) {
 				try {
 					obj_serial = mol.get<MapObject>(object_serial).serial();
 				} catch (const WException& e) {
 					throw GameDataError("object %u: %s", object_serial, e.what());
 				}
-			else
+			} else {
 				obj_serial = 0;
+			}
 			arg = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("CmdAct", packet_version, kCurrentPacketVersionCmdAct);
@@ -148,8 +151,9 @@ void CmdAct::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 
 ObjectManager::~ObjectManager() {
 	// better not throw an exception in a destructor...
-	if (!objects_.empty())
+	if (!objects_.empty()) {
 		log("ObjectManager: ouch! remaining objects\n");
+	}
 
 	log("lastserial: %i\n", lastserial_);
 }
@@ -158,6 +162,8 @@ ObjectManager::~ObjectManager() {
  * Clear all objects
  */
 void ObjectManager::cleanup(EditorGameBase& egbase) {
+	is_cleaning_up_ = true;
+
 	// If all wares (read: flags) of an economy are gone, but some workers remain,
 	// the economy is destroyed before workers detach. This can cause segfault.
 	// Destruction happens in correct order after this dirty quickie.
@@ -169,8 +175,9 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 	for (auto moi : killusfirst) {
 		while (!objects_.empty()) {
 			MapObjectMap::iterator it = objects_.begin();
-			while (it != objects_.end() && (moi) != it->second->descr_->type())
+			while (it != objects_.end() && (moi) != it->second->descr_->type()) {
 				it++;
+			}
 			if (it == objects_.end()) {
 				break;
 			} else {
@@ -184,6 +191,7 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 	}
 
 	lastserial_ = 0;
+	is_cleaning_up_ = false;
 }
 
 /**
@@ -219,11 +227,13 @@ std::vector<Serial> ObjectManager::all_object_serials_ordered() const {
 }
 
 MapObject* ObjectPointer::get(const EditorGameBase& egbase) {
-	if (!serial_)
+	if (!serial_) {
 		return nullptr;
+	}
 	MapObject* const obj = egbase.objects().get_object(serial_);
-	if (!obj)
+	if (!obj) {
 		serial_ = 0;
+	}
 	return obj;
 }
 
@@ -292,8 +302,7 @@ MapObjectDescr::~MapObjectDescr() {
 	anims_.clear();
 }
 
-uint32_t MapObjectDescr::dyn_attribhigh_ = MapObject::HIGHEST_FIXED_ATTRIBUTE;
-MapObjectDescr::AttribMap MapObjectDescr::dyn_attribs_;
+std::map<std::string, MapObjectDescr::AttributeIndex> MapObjectDescr::attribute_names_;
 
 bool MapObjectDescr::is_animation_known(const std::string& animname) const {
 	return (anims_.count(animname) == 1);
@@ -314,18 +323,33 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 			const bool is_directional =
 			   anim->has_key<std::string>("directional") ? anim->get_bool("directional") : false;
 			if (is_directional) {
-				for (int dir = 1; dir <= 6; ++dir) {
-					const std::string directional_animname =
-					   animname + animation_direction_names[dir - 1];
+				std::set<float> available_scales;
+				for (int dir = 0; dir < 6; ++dir) {
+					const std::string directional_animname = animname + animation_direction_names[dir];
 					if (is_animation_known(directional_animname)) {
 						throw GameDataError("Tried to add already existing directional animation '%s\'",
 						                    directional_animname.c_str());
 					}
-					const std::string directional_basename =
-					   basename + animation_direction_names[dir - 1];
-					anims_.insert(std::pair<std::string, uint32_t>(
-					   directional_animname, g_gr->animations().load(*anim, directional_basename,
-					                                                 animation_directory, anim_type)));
+					const std::string directional_basename = basename + animation_direction_names[dir];
+					uint32_t anim_id = 0;
+					try {
+						anim_id = g_gr->animations().load(
+						   *anim, directional_basename, animation_directory, anim_type);
+						anims_.insert(std::make_pair(directional_animname, anim_id));
+					} catch (const std::exception& e) {
+						throw GameDataError(
+						   "Direction '%s': %s", animation_direction_names[dir], e.what());
+					}
+					// Validate directions' scales
+					if (dir == 0) {
+						available_scales = g_gr->animations().get_animation(anim_id).available_scales();
+					}
+					if (available_scales.size() !=
+					    g_gr->animations().get_animation(anim_id).available_scales().size()) {
+						throw GameDataError("Direction '%s': number of available scales does not match "
+						                    "with direction '%s'",
+						                    animation_direction_names[dir], animation_direction_names[0]);
+					}
 				}
 			} else {
 				if (is_animation_known(animname)) {
@@ -333,11 +357,11 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 					   "Tried to add already existing animation '%s'", animname.c_str());
 				}
 				if (animname == "idle") {
-					anims_.insert(std::pair<std::string, uint32_t>(
+					anims_.insert(std::make_pair(
 					   animname,
 					   g_gr->animations().load(name_, *anim, basename, animation_directory, anim_type)));
 				} else {
-					anims_.insert(std::pair<std::string, uint32_t>(
+					anims_.insert(std::make_pair(
 					   animname,
 					   g_gr->animations().load(*anim, basename, animation_directory, anim_type)));
 				}
@@ -420,8 +444,8 @@ const std::string& MapObjectDescr::icon_filename() const {
 /**
  * Search for the attribute in the attribute list
  */
-bool MapObjectDescr::has_attribute(uint32_t const attr) const {
-	for (const uint32_t& attrib : attributes_) {
+bool MapObjectDescr::has_attribute(AttributeIndex attr) const {
+	for (const uint32_t& attrib : attribute_ids_) {
 		if (attrib == attr) {
 			return true;
 		}
@@ -432,56 +456,48 @@ bool MapObjectDescr::has_attribute(uint32_t const attr) const {
 /**
  * Add an attribute to the attribute list if it's not already there
  */
-void MapObjectDescr::add_attribute(uint32_t const attr) {
-	if (!has_attribute(attr))
-		attributes_.push_back(attr);
+void MapObjectDescr::add_attribute(AttributeIndex attr) {
+	if (!has_attribute(attr)) {
+		attribute_ids_.push_back(attr);
+	}
 }
 
-void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
-                                    const std::set<uint32_t>& allowed_special) {
-	for (const std::string& attribute : attributes) {
-		uint32_t const attrib = get_attribute_id(attribute, true);
-		if (attrib < MapObject::HIGHEST_FIXED_ATTRIBUTE) {
-			if (!allowed_special.count(attrib)) {
-				throw GameDataError("bad attribute \"%s\"", attribute.c_str());
-			}
-		}
-		add_attribute(attrib);
+void MapObjectDescr::add_attributes(const std::vector<std::string>& attribs) {
+	for (const std::string& attrib : attribs) {
+		uint32_t const attrib_id = get_attribute_id(attrib, true);
+		add_attribute(attrib_id);
 	}
+}
+
+const MapObjectDescr::Attributes& MapObjectDescr::attributes() const {
+	return attribute_ids_;
 }
 
 /**
  * Lookup an attribute by name. If the attribute name hasn't been encountered
  * before and add_if_not_exists = true, we add it to the map. Else, throws exception.
  */
-uint32_t MapObjectDescr::get_attribute_id(const std::string& name, bool add_if_not_exists) {
+MapObjectDescr::AttributeIndex MapObjectDescr::get_attribute_id(const std::string& name,
+                                                                bool add_if_not_exists) {
 	if (!add_if_not_exists) {
 		// Load on demand for objects that no player tribe owns
 		Notifications::publish(
 		   NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kAttribute));
 	}
 
-	AttribMap::iterator it = dyn_attribs_.find(name);
+	auto it = attribute_names_.find(name);
 
-	if (it != dyn_attribs_.end()) {
+	if (it != attribute_names_.end()) {
 		return it->second;
-	}
-
-	if (name == "worker") {
-		return MapObject::WORKER;
-	} else if (name == "resi") {
-		return MapObject::RESI;
 	}
 
 	if (!add_if_not_exists) {
 		throw GameDataError("get_attribute_id: attribute '%s' not found!\n", name.c_str());
 	} else {
-		++dyn_attribhigh_;
-		dyn_attribs_[name] = dyn_attribhigh_;
+		AttributeIndex attribute_id = attribute_names_.size();
+		attribute_names_[name] = attribute_id;
+		return attribute_id;
 	}
-	assert(dyn_attribhigh_ != 0);  // wrap around seems *highly* unlikely ;)
-
-	return dyn_attribhigh_;
 }
 
 /*
@@ -619,8 +635,9 @@ uint32_t MapObject::schedule_act(Game& game, uint32_t const tdelta, uint32_t con
 		game.cmdqueue().enqueue(new CmdAct(time, *this, data));
 
 		return time;
-	} else
+	} else {
 		return never();
+	}
 }
 
 /**
@@ -639,12 +656,20 @@ void MapObject::set_logsink(LogSink* const sink) {
 void MapObject::log_general_info(const EditorGameBase&) const {
 }
 
+const Player& MapObject::owner() const {
+	if (owner_ == nullptr) {
+		throw wexception("Attempted to get null owner reference for player");
+	}
+	return *owner_;
+}
+
 /**
  * Prints a log message prepended by the object's serial number.
  */
 void MapObject::molog(char const* fmt, ...) const {
-	if (!g_verbose && !logsink_)
+	if (!g_verbose && !logsink_) {
 		return;
+	}
 
 	va_list va;
 	char buffer[2048];
@@ -653,8 +678,9 @@ void MapObject::molog(char const* fmt, ...) const {
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (logsink_)
+	if (logsink_) {
 		logsink_->log(buffer);
+	}
 
 	log("MO(%u,%s): %s", serial_, descr().name().c_str(), buffer);
 }
@@ -681,8 +707,9 @@ constexpr uint8_t kCurrentPacketVersionMapObject = 2;
 void MapObject::Loader::load(FileRead& fr) {
 	try {
 		uint8_t const header = fr.unsigned_8();
-		if (header != HeaderMapObject)
+		if (header != HeaderMapObject) {
 			throw wexception("header is %u, expected %u", header, HeaderMapObject);
+		}
 
 		uint8_t const packet_version = fr.unsigned_8();
 		// Supporting older versions for map loading

@@ -113,6 +113,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions&) { update_map_options(); });
 
+	fill_table();
 	layout();
 }
 
@@ -335,14 +336,14 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	}
 
 	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
-	Notifications::publish(UI::NoteLoadingMessage("Saving the map…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Saving the map…")));
 
 	// Try saving the map.
 	GenericSaveHandler gsh(
 	   [&egbase](FileSystem& fs) {
 		   Widelands::MapSaver wms(fs, egbase);
 		   wms.save();
-		},
+	   },
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error = gsh.save();
 

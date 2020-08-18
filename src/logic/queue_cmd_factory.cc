@@ -59,12 +59,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdSetWarePriority();
 	case QueueCommandTypes::kSetWareTargetQuantity:
 		return *new CmdSetWareTargetQuantity();
-	case QueueCommandTypes::kResetWareTargetQuantity:
-		return *new CmdResetWareTargetQuantity();
 	case QueueCommandTypes::kSetWorkerTargetQuantity:
 		return *new CmdSetWorkerTargetQuantity();
-	case QueueCommandTypes::kResetWorkerTargetQuantity:
-		return *new CmdResetWorkerTargetQuantity();
 	case QueueCommandTypes::kSetInputMaxFill:
 		return *new CmdSetInputMaxFill();
 	case QueueCommandTypes::kMessageSetStatusRead:
@@ -109,6 +105,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdCalculateStatistics();
 	case QueueCommandTypes::kCallEconomyBalance:
 		return *new CmdCallEconomyBalance();
+	case QueueCommandTypes::kToggleMuteMessages:
+		return *new CmdToggleMuteMessages();
 	case QueueCommandTypes::kDeleteMessage:  // Not a logic command
 	case QueueCommandTypes::kNetCheckSync:
 	case QueueCommandTypes::kReplaySyncWrite:

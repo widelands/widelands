@@ -5,6 +5,7 @@ tribes:new_ship_type {
    name = "frisians_ship",
    -- TRANSLATORS: This is the Frisians' ship's name used in lists of units
    descname = pgettext("frisians_ship", "Ship"),
+   icon = dirname .. "menu.png",
    capacity = 30,
    vision_range = 4,
    spritesheets = {

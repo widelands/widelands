@@ -76,7 +76,8 @@ public:
 	                      const Widelands::TribeDescr& tribe,
 	                      std::function<void(Widelands::DescriptionIndex, bool)> callback_function,
 	                      std::vector<uint8_t>& color_map)
-	   : AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, callback_function),
+	   : AbstractWaresDisplay(
+	        parent, x, y, tribe, Widelands::wwWARE, true, std::move(callback_function)),
 	     color_map_(color_map) {
 		int w, h;
 		get_desired_size(&w, &h);
@@ -177,9 +178,10 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 		   cur_ware, parent.get_player()->get_ware_consumption_statistics(
 		                Widelands::DescriptionIndex(cur_ware)));
 
-		plot_stock_->register_plot_data(cur_ware, parent.get_player()->get_ware_stock_statistics(
-		                                             Widelands::DescriptionIndex(cur_ware)),
-		                                colors[kInactiveColorIndex]);
+		plot_stock_->register_plot_data(
+		   cur_ware,
+		   parent.get_player()->get_ware_stock_statistics(Widelands::DescriptionIndex(cur_ware)),
+		   colors[kInactiveColorIndex]);
 	}
 
 	display_ = new StatisticWaresDisplay(

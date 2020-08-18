@@ -78,7 +78,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 					                    key.c_str(), value);
 				}
 
-				buildcost_.insert(std::pair<std::string, uint8_t>(key, value));
+				buildcost_.insert(std::make_pair(key, value));
 			} catch (const WException& e) {
 				throw GameDataError("[buildcost] \"%s\": %s", key.c_str(), e.what());
 			}

@@ -99,7 +99,6 @@ struct ProductionProgram : public MapObjectProgram {
 	/// match. Example: "fish:2".
 	static BillOfMaterials parse_bill_of_materials(const std::vector<std::string>& arguments,
 	                                               WareWorker ww,
-	                                               const ProductionSiteDescr& descr,
 	                                               Tribes& tribes);
 
 	/// Returns from the program.
@@ -273,11 +272,15 @@ struct ProductionProgram : public MapObjectProgram {
 	///       * If handling_method is None the called program continues normal,
 	///         but no statistics are calculated
 	struct ActCall : public Action {
-		ActCall(const std::vector<std::string>& arguments, const ProductionSiteDescr&);
+		ActCall(const std::vector<std::string>& arguments);
 		void execute(Game&, ProductionSite&) const override;
 
+		const std::string& program_name() const {
+			return program_name_;
+		}
+
 	private:
-		ProductionProgram* program_;
+		std::string program_name_;
 		ProgramResultHandlingMethod handling_methods_[3];
 	};
 
@@ -315,7 +318,8 @@ struct ProductionProgram : public MapObjectProgram {
 	///
 	/// Blocks the execution of the program for the specified duration.
 	struct ActSleep : public Action {
-		explicit ActSleep(const std::vector<std::string>& arguments);
+		explicit ActSleep(const std::vector<std::string>& arguments,
+		                  const ProductionSiteDescr& psite);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -413,7 +417,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// wares are handled is defined by the productionsite.
 	struct ActProduce : public Action {
 		ActProduce(const std::vector<std::string>& arguments,
-		           const ProductionSiteDescr&,
+		           ProductionSiteDescr&,
 		           Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
@@ -436,7 +440,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// recruited workers are handled is defined by the productionsite.
 	struct ActRecruit : public Action {
 		ActRecruit(const std::vector<std::string>& arguments,
-		           const ProductionSiteDescr&,
+		           ProductionSiteDescr&,
 		           Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
@@ -451,10 +455,10 @@ struct ProductionProgram : public MapObjectProgram {
 
 	private:
 		DescriptionIndex resource_;
-		uint8_t distance_;  // width/radius of mine
-		uint8_t max_;       // Can work up to this percent (of total mountain resources)
-		uint8_t chance_;    // odds of finding resources from empty mine
-		uint8_t training_;  // probability of training in _empty_ mines
+		uint8_t workarea_;            // width/radius of mine
+		unsigned max_resources_;      // Can work up to this percent (of total mountain resources)
+		unsigned depleted_chance_;    // odds of finding resources from empty mine
+		unsigned experience_chance_;  // probability of training in _empty_ mines
 	};
 
 	struct ActCheckSoldier : public Action {
@@ -491,7 +495,8 @@ struct ProductionProgram : public MapObjectProgram {
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
 	struct ActPlaySound : public Action {
-		explicit ActPlaySound(const std::vector<std::string>& arguments);
+		explicit ActPlaySound(const std::vector<std::string>& arguments,
+		                      const ProductionSiteDescr& descr);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -513,7 +518,8 @@ struct ProductionProgram : public MapObjectProgram {
 	struct ActConstruct : public Action {
 		ActConstruct(const std::vector<std::string>& arguments,
 		             const std::string& production_program_name,
-		             ProductionSiteDescr*);
+		             ProductionSiteDescr*,
+		             const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;
@@ -541,6 +547,8 @@ struct ProductionProgram : public MapObjectProgram {
 	const ProductionProgram::Groups& consumed_wares_workers() const;
 	const Buildcost& produced_wares() const;
 	const Buildcost& recruited_workers() const;
+	// Throws a GameDataError if we're trying to call an unknown program
+	void validate_calls(const ProductionSiteDescr& descr) const;
 
 private:
 	std::string descname_;

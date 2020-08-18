@@ -63,19 +63,16 @@ tribes:new_productionsite_type {
       { name = "barley", amount = 7 },
       { name = "water", amount = 7 },
    },
-   outputs = {
-      "bread_frisians"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = _"baking bread",
          actions = {
             "return=skipped unless economy needs bread_frisians or workers need experience",
             "consume=water barley",
-            "sleep=20000",
-            "animate=working 20000",
+            "sleep=duration:20s",
+            "animate=working duration:20s",
             "produce=bread_frisians"
          },
       },

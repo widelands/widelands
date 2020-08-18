@@ -33,22 +33,13 @@ tribes:new_productionsite_type {
       empire_lumberjack = 1
    },
 
-   outputs = {
-      "log"
-   },
-
-   indicate_workarea_overlaps = {
-      empire_lumberjacks_house = false,
-      empire_foresters_house = true,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
          descname = _"felling trees",
          actions = {
             "callworker=harvest",
-            "sleep=20000"
+            "sleep=duration:20s"
          }
       },
    },

@@ -16,8 +16,8 @@ tribes:new_immovable_type {
    icon = dirname .. "tiny/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 20000",
+      main = {
+         "animate=idle duration:20s",
          "grow=berry_bush_currant_black_small",
       },
    },
@@ -42,8 +42,8 @@ tribes:new_immovable_type {
    icon = dirname .. "small/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 24000",
+      main = {
+         "animate=idle duration:24s",
          "grow=berry_bush_currant_black_medium",
       },
    },
@@ -68,8 +68,8 @@ tribes:new_immovable_type {
    icon = dirname .. "medium/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 22000",
+      main = {
+         "animate=idle duration:22s",
          "grow=berry_bush_currant_black_ripe",
       },
    },
@@ -94,8 +94,8 @@ tribes:new_immovable_type {
    icon = dirname .. "ripe/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 200000",
+      main = {
+         "animate=idle duration:3m20s",
          "remove=",
       },
       harvest = {

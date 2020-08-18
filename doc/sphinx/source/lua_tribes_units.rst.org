@@ -51,7 +51,7 @@ The matching ``register.lua`` would look like this:
       berry_bush_blueberry_ripe = { "ripe_bush" },
    }
 
-Note that if you are defining multiple unit types that can be enhanced or that will
+.. note: If you are defining multiple unit types that can be enhanced or that will
 transform into each other in the same ``init.lua``, the enhanced/transformed type
 needs to be listed first.
 Also, ``berry_bush_blueberry_small`` in this example has no attributes, so its

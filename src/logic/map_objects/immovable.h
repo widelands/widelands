@@ -40,11 +40,15 @@ namespace Widelands {
 class Building;
 class BuildingDescr;
 class Economy;
+class Immovable;
 class Map;
 class TerrainAffinity;
 class Worker;
 class World;
 struct Flag;
+struct ImmovableAction;
+struct ImmovableActionData;
+struct ImmovableProgram;
 struct PlayerImmovable;
 
 struct NoteImmovable {
@@ -114,27 +118,24 @@ protected:
 	void unset_position(EditorGameBase&, const Coords&);
 };
 
-class Immovable;
-struct ImmovableProgram;
-struct ImmovableAction;
-struct ImmovableActionData;
-
 /**
  * Immovable represents a standard immovable such as trees or rocks.
  */
 class ImmovableDescr : public MapObjectDescr {
+	friend struct ImmovableProgram;
+
 public:
 	using Programs = std::map<std::string, ImmovableProgram*>;
 
 	/// World immovable
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
-	               const std::vector<std::string>& attributes,
+	               const std::vector<std::string>& attribs,
 	               const World& world);
 	/// Tribes immovable
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
-	               const std::vector<std::string>& attributes,
+	               const std::vector<std::string>& attribs,
 	               Tribes& tribes);
 	~ImmovableDescr() override;
 
@@ -172,6 +173,11 @@ public:
 	// an undefined value.
 	const TerrainAffinity& terrain_affinity() const;
 
+	// Map object names that the immovable can transform/grow into
+	const std::set<std::pair<MapObjectType, std::string>>& becomes() const {
+		return becomes_;
+	}
+
 protected:
 	int32_t size_;
 	Programs programs_;
@@ -184,13 +190,14 @@ protected:
 	Buildcost buildcost_;
 
 	std::string species_;
+	std::set<std::pair<MapObjectType, std::string>> becomes_;
 
 private:
 	// Common constructor functions for tribes and world.
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
 	               MapObjectDescr::OwnerType type,
-	               const std::vector<std::string>& attributes);
+	               const std::vector<std::string>& attribs);
 
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
@@ -253,6 +260,11 @@ public:
 		return nullptr;
 	}
 
+	void delay_growth(uint32_t ms) {
+		growth_delay_ += ms;
+	}
+	bool apply_growth_delay(Game&);
+
 protected:
 	// The building type that created this immovable, if any.
 	const BuildingDescr* former_building_descr_;
@@ -291,6 +303,9 @@ protected:
 	 * \warning Use get_action_data to access this.
 	 */
 	std::unique_ptr<ImmovableActionData> action_data_;
+
+private:
+	uint32_t growth_delay_;
 
 	// Load/save support
 protected:

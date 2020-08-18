@@ -58,8 +58,9 @@ public:
 		dfShowStatistics = 2,     ///< show statistics report on buildings
 		dfShowSoldierLevels = 4,  ///< show level information above soldiers
 		dfShowWorkareaOverlap =
-		   8,         ///< highlight overlapping workareas when placing a constructionsite
-		dfDebug = 16  ///< general debugging info
+		   8,          ///< highlight overlapping workareas when placing a constructionsite
+		dfDebug = 16,  ///< general debugging info
+		dfShowBuildings = 32,
 	};
 
 	/// A build help overlay, i.e. small, big, mine, port ...
@@ -83,11 +84,6 @@ public:
 	                   Widelands::Coords coords,
 	                   std::map<Widelands::TCoords<>, uint32_t>& extra_data);
 	void hide_workarea(const Widelands::Coords& coords, bool is_additional);
-
-	bool has_expedition_port_space(const Widelands::Coords&) const;
-	std::map<Widelands::Ship*, Widelands::Coords>& get_expedition_port_spaces() {
-		return expedition_port_spaces_;
-	}
 
 	//  point of view for drawing
 	virtual Widelands::Player* get_player() const = 0;
@@ -210,7 +206,8 @@ protected:
 	                  const Vector2i& pos,
 	                  const Image* image,
 	                  const Vector2i& hotspot,
-	                  float scale);
+	                  float scale,
+	                  float opacity);
 	/**
 	 * Will blit the 'image' on the given 'field', offset by 'hotspot' and scaled according to the
 	 * given zoom 'scale'.
@@ -219,7 +216,8 @@ protected:
 	                        const FieldsToDraw::Field& field,
 	                        const Image* image,
 	                        const Vector2i& hotspot,
-	                        float scale);
+	                        float scale,
+	                        float opacity = 1.f);
 
 	void draw_bridges(RenderTarget* dst,
 	                  const FieldsToDraw::Field* f,
@@ -350,12 +348,9 @@ private:
 	std::unordered_set<std::unique_ptr<WorkareaPreview>> workarea_previews_;
 	std::unique_ptr<Workareas> workareas_cache_;
 
-	std::map<Widelands::Ship*, Widelands::Coords> expedition_port_spaces_;
-
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
 	uint32_t lastframe_;        //  system time (milliseconds)

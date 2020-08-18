@@ -370,7 +370,7 @@ S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
 /// Load the header. The map will then return valid information when
 /// get_width(), get_nrplayers(), get_author() and so on are called.
 int32_t S2MapLoader::preload_map(bool const scenario) {
-	assert(get_state() != STATE_LOADED);
+	assert(get_state() != State::kLoaded);
 
 	map_.cleanup();
 
@@ -397,7 +397,7 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
 		}
 	}
 
-	set_state(STATE_PRELOADED);
+	set_state(State::kPreLoaded);
 
 	return 0;
 }
@@ -419,7 +419,7 @@ int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoa
 
 	postload_set_port_spaces(egbase);
 
-	set_state(STATE_LOADED);
+	set_state(State::kLoaded);
 
 	return 0;
 }
@@ -772,8 +772,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  conversion. We will then convert them using the
 	//  OneWorldLegacyLookupTable.
 	// Puts an immovable with the 'old_immovable_name' onto the field 'locations'.
-	auto place_immovable = [&egbase, &lookup_table, &world](
-	   const Widelands::Coords& location, const std::string& old_immovable_name) {
+	auto place_immovable = [&egbase, &lookup_table, &world](const Widelands::Coords& location,
+	                                                        const std::string& old_immovable_name) {
 		const std::string new_immovable_name = lookup_table->lookup_immovable(old_immovable_name);
 		Widelands::DescriptionIndex const idx = world.get_immovable_index(new_immovable_name.c_str());
 		if (idx == Widelands::INVALID_INDEX) {

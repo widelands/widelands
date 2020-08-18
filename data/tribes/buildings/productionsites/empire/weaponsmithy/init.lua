@@ -52,16 +52,9 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
    },
-   outputs = {
-      "spear_wooden",
-      "spear",
-      "spear_advanced",
-      "spear_heavy",
-      "spear_war"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -79,11 +72,11 @@ tribes:new_productionsite_type {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs spear_wooden",
             "consume=planks",
-            "sleep=20000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 21000",
-            "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:20s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:21s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=spear_wooden"
          }
       },
@@ -94,11 +87,11 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear",
             "consume=coal iron planks",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
-            "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:36s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=spear"
          }
       },
@@ -109,11 +102,11 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_advanced",
             "consume=coal iron:2 planks",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
-            "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:36s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=spear_advanced"
          }
       },
@@ -124,11 +117,11 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_heavy",
             "consume=coal:2 gold iron planks",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
-            "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:36s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=spear_heavy"
          }
       },
@@ -139,11 +132,11 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_war",
             "consume=coal:2 gold iron:2 planks",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
-            "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:36s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=spear_war"
          }
       },

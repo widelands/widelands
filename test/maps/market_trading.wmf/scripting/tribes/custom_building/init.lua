@@ -6,6 +6,7 @@ tribes:new_productionsite_type {
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("custom_building", "Custom Building"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -18,35 +19,22 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 43, 45 },
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 43, 45 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 43, 45 },
       },
    },
 
    aihints = {
-      collects_ware_from_map = "custom_ware",
       basic_amount = 1,
    },
 
    working_positions = {
       barbarians_custom_worker = 1
-   },
-
-   outputs = {
-      "custom_ware"
-   },
-
-   indicate_workarea_overlaps = {
-      barbarians_rangers_hut = true,
-      barbarians_lumberjacks_hut = false,
    },
 
    programs = {
@@ -55,7 +43,7 @@ tribes:new_productionsite_type {
          descname = _"felling trees",
          actions = {
             "callworker=harvest",
-            "sleep=20000"
+            "sleep=duration:20s"
          }
       },
    },

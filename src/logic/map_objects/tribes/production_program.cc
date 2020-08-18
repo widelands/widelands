@@ -63,6 +63,112 @@ bool match_and_skip(const std::vector<std::string>& args,
 	return result;
 }
 
+/* RST
+.. _productionsite_programs:
+
+Productionsite Programs
+=======================
+Productionsites have :ref:`programs <map_object_programs>` that will be executed by the game
+engine. Each productionsite must have a program named ``main``, which will be started automatically
+when the productionsite is created in the game, and then repeated until the productionsite is
+destroyed. (Note: the main program used to be called ``work``, which has been deprecated.)
+
+Programs are defined as Lua tables. Each program must be declared as a subtable in the
+productionsite's Lua table called ``programs`` and have a unique table key. The entries in a
+program's subtable are the translatable ``descname`` and the table of ``actions`` to execute, like
+this::
+
+   programs = {
+      main = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            <list of actions>
+         }
+      },
+   },
+
+The translations for ``descname`` can also be fetched by ``pgettext`` to disambiguate. We recommend
+that you do this whenever workers are referenced, or if your tribes have multiple wares with the
+same name::
+
+   programs = {
+      main = {
+         -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+         descname = pgettext("atlanteans_building", "recruiting soldier"),
+         actions = {
+            <list of actions>
+         }
+      },
+   },
+
+A program can call another program, for example::
+
+   programs = {
+      main = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=produce_ration",
+            "call=produce_snack",
+            "return=skipped"
+         }
+      },
+      produce_ration = {
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         descname = _"preparing a ration",
+         actions = {
+            <list of actions>
+         }
+      },
+      produce_snack = {
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
+         descname = _"preparing a snack",
+         actions = {
+            <list of actions>
+         }
+      },
+   },
+
+A program consists of a sequence of actions. An action is written as
+``<type>=<parameters>``::
+
+   produce_snack = {
+      -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
+      descname = _"preparing a snack",
+      actions = {
+         "return=skipped unless economy needs snack",
+         "sleep=duration:2s500ms",
+         "consume=barbarians_bread fish,meat beer",
+         "playsound=sound/barbarians/taverns/inn 100",
+         "animate=working duration:22s",
+         "sleep=duration:10s",
+         "produce=snack"
+      }
+   },
+
+
+.. highlight:: default
+
+For general information about the format, see :ref:`map_object_programs_syntax`.
+
+Available actions are:
+
+- `animate`_
+- `call`_
+- `callworker`_
+- `checksoldier`_
+- `construct`_
+- `consume`_
+- `mine`_
+- `playsound`_
+- `recruit`_
+- `produce`_
+- `return`_
+- `sleep`_
+- `train`_
+*/
+
 ProductionProgram::ActReturn::Condition* create_economy_condition(const std::string& item,
                                                                   const ProductionSiteDescr& descr,
                                                                   const Tribes& tribes) {
@@ -174,7 +280,6 @@ ProductionProgram::parse_ware_type_groups(std::vector<std::string>::const_iterat
 BillOfMaterials
 ProductionProgram::parse_bill_of_materials(const std::vector<std::string>& arguments,
                                            WareWorker ww,
-                                           const ProductionSiteDescr& descr,
                                            Tribes& tribes) {
 	BillOfMaterials result;
 	for (const std::string& argument : arguments) {
@@ -182,28 +287,61 @@ ProductionProgram::parse_bill_of_materials(const std::vector<std::string>& argum
 
 		const DescriptionIndex index = ww == WareWorker::wwWARE ? tribes.load_ware(produceme.first) :
 		                                                          tribes.load_worker(produceme.first);
-
-		// Verify the building outputs
-		switch (ww) {
-		case WareWorker::wwWARE:
-			if (!descr.is_output_ware_type(index)) {
-				throw GameDataError("Ware '%s' is not listed in the building's 'outputs' table",
-				                    produceme.first.c_str());
-			}
-			break;
-		case WareWorker::wwWORKER:
-			if (!descr.is_output_worker_type(index)) {
-				throw GameDataError("Worker '%s' is not listed in the building's 'outputs' table",
-				                    produceme.first.c_str());
-			}
-			break;
-		}
-
 		result.push_back(std::make_pair(index, read_positive(produceme.second)));
 	}
 	return result;
 }
 
+/* RST
+return
+------
+Returns from the program.
+
+Parameter syntax::
+
+    parameters        ::= return_value [condition_part]
+    return_value      ::= Failed | Completed | Skipped
+    Failed            ::= failed
+    Completed         ::= completed
+    Skipped           ::= skipped
+    condition_part    ::= when_condition | unless_condition
+    when_condition    ::= when condition {and condition}
+    unless_condition  ::= unless condition {or condition}
+    condition         ::= negation | economy_condition | workers_condition
+    negation          ::= not condition
+    economy_condition ::= economy economy_needs
+    workers_condition ::= workers need_experience
+    economy_needs     ::= needs ware_type
+    need_experience   ::= need experience
+
+Parameter semantics:
+
+``return_value``
+    If return_value is Failed or Completed, the productionsite's
+    statistics is updated accordingly. If return_value is Skipped, the
+    statistics are not affected.
+``condition``
+    A boolean condition that can be evaluated to true or false.
+``condition_part``
+    If omitted, the return is unconditional.
+``when_condition``
+    This will cause the program to return when all conditions are true.
+``unless_condition``
+    This will cause the program to return unless some condition is true.
+``ware_type``
+    The name of a ware type (defined in the tribe). A ware type may only
+    appear once in the command.
+``economy_needs``
+    The result of this condition depends on whether the economy that this
+    productionsite belongs to needs a ware of the specified type. How
+    this is determined is defined by the economy.
+
+Aborts the execution of the program and sets a return value. Updates the productionsite's statistics
+depending on the return value.
+
+.. note:: If the execution reaches the end of the program, the return value is implicitly set to
+    Completed.
+*/
 ProductionProgram::ActReturn::Condition::~Condition() {
 }
 
@@ -296,8 +434,9 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 			if (input_type.first == ip_queue->get_index() &&
 			    input_type.second == ip_queue->get_type()) {
 				uint8_t const filled = ip_queue->get_filled();
-				if (count <= filled)
+				if (count <= filled) {
 					return true;
+				}
 				count -= filled;
 				break;
 			}
@@ -355,9 +494,11 @@ ProductionProgram::ActReturn::SiteHas::description_negation(const Tribes& tribes
 
 bool ProductionProgram::ActReturn::WorkersNeedExperience::evaluate(const ProductionSite& ps) const {
 	ProductionSite::WorkingPosition const* const wp = ps.working_positions_;
-	for (uint32_t i = ps.descr().nr_working_positions(); i;)
-		if (wp[--i].worker->needs_experience())
+	for (uint32_t i = ps.descr().nr_working_positions(); i;) {
+		if (wp[--i].worker->needs_experience()) {
 			return true;
+		}
+	}
 	return false;
 }
 std::string ProductionProgram::ActReturn::WorkersNeedExperience::description(const Tribes&) const {
@@ -423,6 +564,9 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 	if (match_and_skip(arguments, begin, "failed")) {
 		result_ = ProgramResult::kFailed;
 	} else if (match_and_skip(arguments, begin, "completed")) {
+		result_ = ProgramResult::kCompleted;
+	} else if (match_and_skip(arguments, begin, "no_stats")) {
+		// TODO(GunChleoc): Savegame cpmpatibility - remove no_stats after Build 21
 		result_ = ProgramResult::kCompleted;
 	} else if (match_and_skip(arguments, begin, "skipped")) {
 		result_ = ProgramResult::kSkipped;
@@ -526,8 +670,36 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 	return ps.program_end(game, result_);
 }
 
-ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments,
-                                    const ProductionSiteDescr& descr) {
+/* RST
+call
+----
+Calls a program of the productionsite.
+
+Parameter syntax::
+
+  parameters                 ::= program [failure_handling_directive]
+  failure_handling_directive ::= on failure failure_handling_method
+  failure_handling_method    ::= Fail | Repeat | Skip
+  Fail                       ::= fail
+  Repeat                     ::= repeat
+  Skip                       ::= skip
+
+Parameter semantics:
+
+``program``
+    The name of a program defined in the productionsite.
+``failure_handling_method``
+    Specifies how to handle a failure of the called program.
+
+    - If ``failure_handling_method`` is ``fail``, the command fails (with the same effect as
+executing ``return=failed``).
+    - If ``failure_handling_method`` is ``repeat``, the command is repeated.
+    - If ``failure_handling_method`` is ``skip``, the failure is ignored (the program is continued).
+
+``failure_handling_directive``
+    If omitted, the value ``Skip`` is used for ``failure_handling_method``.
+*/
+ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments) {
 	if (arguments.size() < 1 || arguments.size() > 4) {
 		throw GameDataError(
 		   "Usage: call=<program name> [on failure|completion|skip fail|complete|skip|repeat]");
@@ -542,15 +714,7 @@ ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments,
 	   ProgramResultHandlingMethod::kContinue;
 
 	// Fetch program to call
-	const std::string& program_name = arguments.front();
-	const ProductionSiteDescr::Programs& programs = descr.programs();
-	ProductionSiteDescr::Programs::const_iterator const it = programs.find(program_name);
-	if (it == programs.end()) {
-		throw GameDataError("The program '%s' has not (yet) been declared in %s "
-		                    "(wrong declaration order?)",
-		                    program_name.c_str(), descr.name().c_str());
-	}
-	program_ = it->second.get();
+	program_name_ = arguments.front();
 
 	//  Override with specified handling methods.
 	if (arguments.size() > 1) {
@@ -597,13 +761,15 @@ ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments,
 		}
 		handling_methods_[program_result_index(result_to_set_method_for)] = handling_method;
 	}
+
+	assert(!program_name_.empty());
 }
 
 void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 	ProgramResult const program_result = ps.top_state().phase;
 
 	if (program_result == ProgramResult::kNone) {  //  The program has not yet been called.
-		return ps.program_start(game, program_->name());
+		return ps.program_start(game, program_name_);
 	}
 
 	switch (handling_methods_[program_result_index(program_result)]) {
@@ -621,6 +787,20 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 	}
 }
 
+/* RST
+callworker
+----------
+Calls a program of the productionsite's main worker.
+
+Parameter syntax::
+
+    parameters ::= program
+
+Parameter semantics:
+
+``program``
+    The name of a program defined in the productionsite's main worker.
+*/
 ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& arguments,
                                                 const std::string& production_program_name,
                                                 ProductionSiteDescr* descr,
@@ -636,10 +816,16 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 	const WorkerDescr& main_worker_descr =
 	   *tribes.get_worker_descr(descr->working_positions().front().first);
 
+	WorkerProgram const* workerprogram = main_worker_descr.get_program(program_);
+
 	//  This will fail unless the main worker has a program with the given
 	//  name, so it also validates the parameter.
-	const WorkareaInfo& worker_workarea_info =
-	   main_worker_descr.get_program(program_)->get_workarea_info();
+	const WorkareaInfo& worker_workarea_info = workerprogram->get_workarea_info();
+
+	// Add to building outputs for help and AI
+	for (const DescriptionIndex produced_ware : workerprogram->produced_ware_types()) {
+		descr->add_output_ware_type(produced_ware);
+	}
 
 	for (const auto& area_info : worker_workarea_info) {
 		std::set<std::string>& building_radius_infos = descr->workarea_info_[area_info.first];
@@ -653,6 +839,22 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 			description += worker_name;
 			building_radius_infos.insert(description);
 		}
+	}
+
+	for (const auto& attribute_info : workerprogram->collected_attributes()) {
+		descr->add_collected_attribute(attribute_info);
+	}
+	for (const auto& attribute_info : workerprogram->created_attributes()) {
+		descr->add_created_attribute(attribute_info);
+	}
+	for (const std::string& resourcename : workerprogram->collected_resources()) {
+		descr->add_collected_resource(resourcename);
+	}
+	for (const std::string& resourcename : workerprogram->created_resources()) {
+		descr->add_created_resource(resourcename);
+	}
+	for (const std::string& bobname : workerprogram->created_bobs()) {
+		descr->add_created_bob(bobname);
 	}
 }
 
@@ -681,17 +883,52 @@ void ProductionProgram::ActCallWorker::building_work_failed(Game& game,
 	psite.program_end(game, ProgramResult::kFailed);
 }
 
-ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments) {
+/* RST
+sleep
+-----
+Does nothing.
+
+Parameter syntax::
+
+  parameters ::= duration:<duration>
+
+Parameter semantics:
+
+``duration``
+    A natural integer. If 0, the result from the most recent command that
+    returned a value is used.
+
+Blocks the execution of the program for the specified duration.
+*/
+ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
+                                      const ProductionSiteDescr& psite) {
 	if (arguments.size() != 1) {
-		throw GameDataError("Usage: sleep=<duration>");
+		throw GameDataError("Usage: sleep=duration:<duration>");
 	}
-	duration_ = read_positive(arguments.front());
+	const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
+	if (item.first == "duration") {
+		duration_ = read_duration(item.second, psite);
+	} else if (item.second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove after v1.0
+		duration_ = read_duration(item.first, psite);
+		log("WARNING: 'sleep' program without parameter name is deprecated, please use "
+		    "'sleep=duration:<duration>' in %s\n",
+		    psite.name().c_str());
+	} else {
+		throw GameDataError(
+		   "Unknown argument '%s'. Usage: duration:<duration>", arguments.front().c_str());
+	}
 }
 
 void ProductionProgram::ActSleep::execute(Game& game, ProductionSite& ps) const {
 	return ps.program_step(game, duration_ ? duration_ : 0, ps.top_state().phase);
 }
 
+/* RST
+animate
+-------
+Runs an animation. See :ref:`map_object_programs_animate`.
+*/
 ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr* descr) {
 	parameters = MapObjectProgram::parse_act_animate(arguments, *descr, false);
@@ -703,6 +940,48 @@ void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) cons
 	   game, parameters.duration ? parameters.duration : 0, ps.top_state().phase);
 }
 
+/* RST
+consume
+-------
+Consumes wares from the input storages.
+
+Parameter syntax::
+
+  parameters ::= group {group}
+  group      ::= ware_type{,ware_type}[:count]
+
+Parameter semantics:
+
+``ware_type``
+    The name of a ware type (defined in the tribe).
+``count``
+    A positive integer. If omitted, the value 1 is used.
+
+For each group, the number of wares specified in count is consumed. The consumed wares may be of any
+type in the group.
+
+If there are not enough wares in the input storages, the command fails (with the same effect as
+executing ``return=failed``). Then no wares will be consumed.
+
+Selecting which ware types to consume for a group so that the whole command succeeds is a constraint
+satisfaction problem. The implementation does not implement an exhaustive search for a solution to
+it. It is just a greedy algorithm which gives up instead of backtracking. Therefore the command may
+fail even if there is a solution.
+
+However it may be possible to help the algorithm by ordering the groups carefully. Suppose that the
+input storage has the wares ``a:1, b:1`` and a consume command has the parameters ``a,b:1 a:1``. The
+algorithm tries to consume its input wares in order. It starts with the first group and consumes 1
+ware of type ``a`` (the group becomes satisfied). Then it proceeds with the second group, but there
+are no wares of type ``a`` left to consume. Since there is no other ware type that can satisfy the
+group, the command will fail. If the groups are reordered so that the parameters become ``a:1
+a,b:1``, it will work. The algorithm will consume 1 ware of type ``a`` for the first group. When it
+proceeds with the second group, it will not have any wares of type ``a`` left. Then it will go on
+and consume 1 ware of type ``b`` for the second group (which becomes satisfied) and the command
+succeeds.
+
+.. note:: It is not possible to reorder ware types within a group. ``a,b`` is equivalent to ``b,a``
+    because in the internal representation the ware types of a group are sorted.
+*/
 ProductionProgram::ActConsume::ActConsume(const std::vector<std::string>& arguments,
                                           const ProductionSiteDescr& descr,
                                           const Tribes& tribes) {
@@ -754,8 +1033,9 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 				}
 			}
 			// group does not request ware
-			if (!found)
+			if (!found) {
 				++it;
+			}
 		}
 	}
 
@@ -832,13 +1112,39 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 	}
 }
 
+/* RST
+produce
+-------
+Produces wares.
+
+Parameter syntax::
+
+  parameters ::= group {group}
+  group      ::= ware_type[:count]
+
+Parameter semantics:
+
+``ware_type``
+    The name of a ware type (defined in the tribe). A ware type may only
+    appear once in the command.
+``count``
+    A positive integer. If omitted, the value 1 is used.
+
+For each group, the number of wares specified in count is produced. The produced wares are of the
+type specified in the group. How the produced wares are handled is defined by the productionsite.
+*/
 ProductionProgram::ActProduce::ActProduce(const std::vector<std::string>& arguments,
-                                          const ProductionSiteDescr& descr,
+                                          ProductionSiteDescr& descr,
                                           Tribes& tribes) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: produce=<ware name>[:<amount>] [<ware name>[:<amount>]...]");
 	}
-	produced_wares_ = parse_bill_of_materials(arguments, WareWorker::wwWARE, descr, tribes);
+	produced_wares_ = parse_bill_of_materials(arguments, WareWorker::wwWARE, tribes);
+
+	// Add to building outputs for help and AI
+	for (auto& produced_ware : produced_wares_) {
+		descr.add_output_ware_type(produced_ware.first);
+	}
 }
 
 void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) const {
@@ -884,13 +1190,40 @@ bool ProductionProgram::ActProduce::get_building_work(Game& game,
 	return false;
 }
 
+/* RST
+recruit
+-------
+Recruits workers.
+
+Parameter syntax::
+
+  parameters ::= group {group}
+  group      ::= worker_type[:count]
+
+Parameter semantics:
+
+``worker_type``
+    The name of a worker type (defined in the tribe). A worker type may only
+    appear once in the command.
+``count``
+    A positive integer. If omitted, the value 1 is used.
+
+For each group, the number of workers specified in count is produced. The produced workers are of
+the type specified in the group. How the produced workers are handled is defined by the
+productionsite.
+*/
 ProductionProgram::ActRecruit::ActRecruit(const std::vector<std::string>& arguments,
-                                          const ProductionSiteDescr& descr,
+                                          ProductionSiteDescr& descr,
                                           Tribes& tribes) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: recruit=<worker name>[:<amount>] [<worker name>[:<amount>]...]");
 	}
-	recruited_workers_ = parse_bill_of_materials(arguments, WareWorker::wwWORKER, descr, tribes);
+	recruited_workers_ = parse_bill_of_materials(arguments, WareWorker::wwWORKER, tribes);
+
+	// Add to building outputs for help and AI
+	for (auto& recruited_worker : recruited_workers_) {
+		descr.add_output_worker_type(recruited_worker.first);
+	}
 }
 
 void ProductionProgram::ActRecruit::execute(Game& game, ProductionSite& ps) const {
@@ -932,24 +1265,99 @@ bool ProductionProgram::ActRecruit::get_building_work(Game& game,
 	return false;
 }
 
+/* RST
+mine
+----
+
+.. function:: mine=\<resource_name\> radius:\<number\> resources:\<percent\> when_empty:\<percent\>
+     \[experience_on_fail:\<percent\>\]
+
+   :arg string resource_name: The name of the resource to mine, e.g. 'coal' or 'water'.
+   :arg int radius: The workarea radius that is searched for resources. Must be ``>0``.
+   :arg percent yield: The :ref:`map_object_programs_datatypes_percent` of resources that the
+      mine can dig up before its resource is depleted.
+   :arg percent when_empty: The :ref:`map_object_programs_datatypes_percent` chance that the mine
+      will still find some resources after it has been depleted.
+   :arg percent experience_on_fail: The :ref:`map_object_programs_datatypes_percent` chance that the
+      mine's workers will still gain some experience when mining fails after its resources have been
+      depleted.
+
+   Takes resources from the ground. A building that mines will deplete when the percentage of
+   resources given in ``resources`` has been dug up, leaving a chance of ``depleted`` that it
+   will still find some resources anyway. Examples:
+
+.. code-block:: lua
+
+     actions = {
+         "return=skipped unless economy needs iron_ore",
+         "consume=ration",
+         "sleep=duration:45s",
+         "animate=working duration:20s",
+          -- Search radius of 2 for iron. Will always find iron until 33.33% of it has been dug up.
+          -- After that, there's still a chance of 5% for finding iron.
+          -- If this fails, the workers still have a chance of 17% of gaining experience.
+         "mine=iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
+         "produce=iron_ore"
+     }
+
+     actions = {
+         "sleep=duration:20s",
+         "animate=working duration:20s",
+          -- Search radius of 1 for water. Will always find water until 100% of it has been drawn.
+          -- After that, there's still a chance of 65% for finding water.
+         "mine=water radius:1 yield:100% when_empty:65%",
+         "produce=water"
+     }
+*/
 ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     const World& world,
                                     const std::string& production_program_name,
                                     ProductionSiteDescr* descr) {
-	if (arguments.size() != 5) {
-		throw GameDataError(
-		   "Usage: mine=resource <workarea radius> <max> <chance> <worker experience gained>");
+	if (arguments.size() != 5 && arguments.size() != 4) {
+		throw GameDataError("Usage: mine=<resource name> radius:<number> yield:<percent> "
+		                    "when_empty:<percent> [experience:<percent>]");
 	}
+	experience_chance_ = 0U;
 
-	resource_ = world.safe_resource_index(arguments.front().c_str());
-	distance_ = read_positive(arguments.at(1));
-	max_ = read_positive(arguments.at(2));
-	chance_ = read_positive(arguments.at(3));
-	training_ = read_positive(arguments.at(4));
+	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
+		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
+		log("WARNING: Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
+		    "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
+		    descr->name().c_str());
+		resource_ = world.safe_resource_index(arguments.front().c_str());
+		workarea_ = read_positive(arguments.at(1));
+		max_resources_ = read_positive(arguments.at(2)) * 100U;
+		depleted_chance_ = read_positive(arguments.at(3)) * 100U;
+		if (arguments.size() == 5) {
+			experience_chance_ = read_positive(arguments.at(4)) * 100U;
+		}
+	} else {
+		for (const std::string& argument : arguments) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.second.empty()) {
+				resource_ = world.safe_resource_index(item.first.c_str());
+			} else if (item.first == "radius") {
+				workarea_ = read_positive(item.second);
+			} else if (item.first == "yield") {
+				max_resources_ = read_percent_to_int(item.second);
+			} else if (item.first == "when_empty") {
+				depleted_chance_ = read_percent_to_int(item.second);
+			} else if (item.first == "experience_on_fail") {
+				experience_chance_ = read_percent_to_int(item.second);
+			} else {
+				throw GameDataError(
+				   "Unknown argument '%s'. Usage: mine=<resource name> radius:<number> "
+				   "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]",
+				   item.first.c_str());
+			}
+		}
+	}
 
 	const std::string description = descr->name() + " " + production_program_name + " mine " +
 	                                world.get_resource(resource_)->name();
-	descr->workarea_info_[distance_].insert(description);
+	descr->workarea_info_[workarea_].insert(description);
+
+	descr->add_collected_resource(arguments.front());
 }
 
 void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
@@ -962,7 +1370,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 	{
 		MapRegion<Area<FCoords>> mr(
-		   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), distance_));
+		   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), workarea_));
 		do {
 			DescriptionIndex fres = mr.location().field->get_resources();
 			ResourceAmount amount = mr.location().field->get_resources_amount();
@@ -980,28 +1388,32 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 			// Add penalty for fields that are running out
 			// Except for totally depleted fields or wrong ressource fields
 			// if we already know there is no ressource (left) we won't mine there
-			if (amount == 0)
+			if (amount == 0) {
 				totalchance += 0;
-			else if (amount <= 2)
+			} else if (amount <= 2) {
 				totalchance += 6;
-			else if (amount <= 4)
+			} else if (amount <= 4) {
 				totalchance += 4;
-			else if (amount <= 6)
+			} else if (amount <= 6) {
 				totalchance += 2;
+			}
 		} while (mr.advance(*map));
 	}
 
-	//  how much is digged
-	int32_t digged_percentage = 100;
-	if (totalstart)
-		digged_percentage = (totalstart - totalres) * 100 / totalstart;
-	if (!totalres)
-		digged_percentage = 100;
+	//  how much is dug
+	unsigned dug_percentage = MapObjectProgram::kMaxProbability;
+	if (totalstart) {
+		dug_percentage = (totalstart - totalres) * MapObjectProgram::kMaxProbability / totalstart;
+	}
+	if (!totalres) {
+		dug_percentage = MapObjectProgram::kMaxProbability;
+	}
 
-	if (digged_percentage < max_) {
+	if (dug_percentage < max_resources_) {
 		//  mine can produce normally
-		if (totalres == 0)
+		if (totalres == 0) {
 			return ps.program_end(game, ProgramResult::kFailed);
+		}
 
 		//  second pass through nodes
 		assert(totalchance);
@@ -1009,13 +1421,14 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 		{
 			MapRegion<Area<FCoords>> mr(
-			   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), distance_));
+			   *map, Area<FCoords>(map->get_fcoords(ps.get_position()), workarea_));
 			do {
 				DescriptionIndex fres = mr.location().field->get_resources();
 				ResourceAmount amount = mr.location().field->get_resources_amount();
 
-				if (fres != resource_)
+				if (fres != resource_) {
 					amount = 0;
+				}
 
 				pick -= 8 * amount;
 				if (pick < 0) {
@@ -1037,7 +1450,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  there is a sufficiently high chance, that the mine
 		//  will still produce enough.
 		//  e.g. mines have chance=5, wells have 65
-		if (chance_ <= 20) {
+		if (depleted_chance_ <= 20 * MapObjectProgram::kMaxProbability / 100U) {
 			ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
@@ -1046,10 +1459,11 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
-		if (chance_ <= game.logic_rand() % 100) {
+		if (depleted_chance_ <= game.logic_rand() % MapObjectProgram::kMaxProbability) {
 
 			// Gain experience
-			if (training_ >= game.logic_rand() % 100) {
+			if (experience_chance_ > 0 &&
+			    experience_chance_ >= game.logic_rand() % MapObjectProgram::kMaxProbability) {
 				ps.train_workers(game);
 			}
 			return ps.program_end(game, ProgramResult::kFailed);
@@ -1063,6 +1477,12 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 	return ps.program_step(game);
 }
 
+/* RST
+checksoldier
+------------
+Returns failure unless there are a specified amount of soldiers with specified level of specified
+properties. This command type is subject to change.
+*/
 ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::string>& arguments) {
 	if (arguments.size() != 3) {
 		throw GameDataError("Usage: checksoldier=soldier <training attribute> <level>");
@@ -1121,6 +1541,11 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 	return ps.program_step(game);
 }
 
+/* RST
+train
+-----
+Increases the level of a specified property of a soldier. No further documentation available.
+*/
 ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments) {
 	if (arguments.size() != 4) {
 		throw GameDataError(
@@ -1197,36 +1622,111 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	return ps.program_step(game);
 }
 
-ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
-	parameters = MapObjectProgram::parse_act_play_sound(arguments, kFxPriorityAllowMultiple - 1);
+/* RST
+playsound
+---------
+Plays a sound effect. See :ref:`map_object_programs_playsound`.
+*/
+ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments,
+                                              const ProductionSiteDescr& descr) {
+	parameters = MapObjectProgram::parse_act_play_sound(arguments, descr);
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
-	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, parameters.fx, ps.position_, parameters.priority));
+	Notifications::publish(NoteSound(SoundType::kAmbient, parameters.fx, ps.position_,
+	                                 parameters.priority, parameters.allow_multiple));
 	return ps.program_step(game);
 }
 
+/* RST
+construct
+---------
+.. function:: construct=\<immovable_name\> worker:\<program_name\> radius:\<number\>
+
+   :arg string immovable_name: The name of the :ref:`immovable <lua_tribes_immovables>` to be
+      constructed, e.g. ``barbarians_shipconstruction``.
+
+   :arg string worker: The :ref:`worker's program <tribes_worker_programs>` that makes the worker
+      walk to the immovable's location and do some work.
+
+   :arg radius radius: The radius used by the worker to find a suitable construction spot on the
+      map.
+
+Sends the main worker to look for a suitable spot on the shore and to perform construction work on
+an immovable. Example:
+
+.. code-block:: lua
+
+      -- Production program actions
+      actions = {
+         "construct=barbarians_shipconstruction worker:buildship radius:6",
+         "sleep=duration:20s",
+      }
+
+      -- Corresponding worker program
+      buildship = {
+         "walk=object-or-coords",
+         "plant=attrib:shipconstruction unless object",
+         "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
+         "animate=work duration:500ms",
+         "construct",
+         "animate=work duration:5s",
+         "return"
+      },
+*/
 ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& arguments,
                                               const std::string& production_program_name,
-                                              ProductionSiteDescr* descr) {
+                                              ProductionSiteDescr* descr,
+                                              const Tribes& tribes) {
 	if (arguments.size() != 3) {
-		throw GameDataError("Usage: construct=<object name> <worker program> <workarea radius>");
+		throw GameDataError(
+		   "Usage: construct=<immovable_name> worker:<program_name> radius:<number>");
 	}
-	objectname = arguments.at(0);
-	workerprogram = arguments.at(1);
-	radius = read_positive(arguments.at(2));
+
+	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
+		log("WARNING: 'construct' program without parameter names is deprecated, please use "
+		    "'construct=<immovable_name> worker:<program_name> radius:<number>' in %s\n",
+		    descr->name().c_str());
+		objectname = arguments.at(0);
+		workerprogram = arguments.at(1);
+		radius = read_positive(arguments.at(2));
+	} else {
+		for (const std::string& argument : arguments) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.first == "worker") {
+				workerprogram = item.second;
+			} else if (item.first == "radius") {
+				radius = read_positive(item.second);
+			} else if (item.second.empty()) {
+				objectname = item.first;
+			} else {
+				throw GameDataError("Unknown parameter '%s'. Usage: construct=<immovable_name> "
+				                    "worker:<program_name> radius:<number>",
+				                    item.first.c_str());
+			}
+		}
+	}
 
 	const std::string description =
 	   descr->name() + ' ' + production_program_name + " construct " + objectname;
 	descr->workarea_info_[radius].insert(description);
+
+	// Register created immovable with productionsite
+	const WorkerDescr& main_worker_descr =
+	   *tribes.get_worker_descr(descr->working_positions().front().first);
+	for (const auto& attribute_info :
+	     main_worker_descr.get_program(workerprogram)->created_attributes()) {
+		descr->add_created_attribute(attribute_info);
+	}
 }
 
 const ImmovableDescr&
 ProductionProgram::ActConstruct::get_construction_descr(const Tribes& tribes) const {
 	const ImmovableDescr* descr = tribes.get_immovable_descr(tribes.immovable_index(objectname));
-	if (!descr)
+	if (!descr) {
 		throw wexception("ActConstruct: immovable '%s' does not exist", objectname.c_str());
+	}
 
 	return *descr;
 }
@@ -1255,7 +1755,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	const Map& map = game.map();
 	std::vector<ImmovableFound> immovables;
 	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
-	Area<FCoords> area(map.get_fcoords(psite.base_flag().get_position()), radius);
+	Area<FCoords> area(map.get_fcoords(psite.get_position()), radius);
 	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr))) {
 		state.objvar = immovables[0].object;
 
@@ -1382,11 +1882,11 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActReturn(parseinput.arguments, *building, tribes)));
 			} else if (parseinput.name == "call") {
-				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActCall(parseinput.arguments, *building)));
-			} else if (parseinput.name == "sleep") {
 				actions_.push_back(
-				   std::unique_ptr<ProductionProgram::Action>(new ActSleep(parseinput.arguments)));
+				   std::unique_ptr<ProductionProgram::Action>(new ActCall(parseinput.arguments)));
+			} else if (parseinput.name == "sleep") {
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActSleep(parseinput.arguments, *building)));
 			} else if (parseinput.name == "animate") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActAnimate(parseinput.arguments, building)));
@@ -1412,11 +1912,11 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<ProductionProgram::Action>(new ActTrain(parseinput.arguments)));
 			} else if (parseinput.name == "playsound") {
-				actions_.push_back(
-				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments)));
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActPlaySound(parseinput.arguments, *building)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActConstruct(parseinput.arguments, name(), building)));
+				   new ActConstruct(parseinput.arguments, name(), building, tribes)));
 			} else {
 				throw GameDataError(
 				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
@@ -1473,5 +1973,23 @@ const Buildcost& ProductionProgram::produced_wares() const {
 }
 const Buildcost& ProductionProgram::recruited_workers() const {
 	return recruited_workers_;
+}
+
+void ProductionProgram::validate_calls(const ProductionSiteDescr& descr) const {
+	for (const auto& action : actions_) {
+		if (upcast(const ActCall, act_call, action.get())) {
+			const std::string& program_name = act_call->program_name();
+			if (name() == program_name) {
+				throw GameDataError("Production program '%s' in %s is calling itself",
+				                    program_name.c_str(), descr.name().c_str());
+			}
+			const ProductionSiteDescr::Programs& programs = descr.programs();
+			ProductionSiteDescr::Programs::const_iterator const it = programs.find(program_name);
+			if (it == programs.end()) {
+				throw GameDataError("Trying to call unknown program '%s' in %s", program_name.c_str(),
+				                    descr.name().c_str());
+			}
+		}
+	}
 }
 }  // namespace Widelands

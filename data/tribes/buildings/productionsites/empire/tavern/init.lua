@@ -46,22 +46,19 @@ tribes:new_productionsite_type {
       { name = "meat", amount = 5 },
       { name = "empire_bread", amount = 5 }
    },
-   outputs = {
-      "ration"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
             -- time total: 33
             "return=skipped unless economy needs ration",
             "consume=empire_bread,fish,meat",
-            "sleep=5000",
-            "playsound=sound/empire/taverns/ration 100",
-            "animate=working 18000",
-            "sleep=10000",
+            "sleep=duration:5s",
+            "playsound=sound/empire/taverns/ration priority:80%",
+            "animate=working duration:18s",
+            "sleep=duration:10s",
             "produce=ration"
          }
       },

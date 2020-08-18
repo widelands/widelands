@@ -275,6 +275,8 @@ wl_library(wui
     soldiercapacitycontrol.h
     soldierlist.cc
     soldierlist.h
+    soldier_statistics_menu.cc
+    soldier_statistics_menu.h
     stock_menu.cc
     stock_menu.h
     story_message_box.cc

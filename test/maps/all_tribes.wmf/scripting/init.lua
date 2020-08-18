@@ -7,8 +7,6 @@
 -- Don't forget to define the tribe in player_names.
 -- Make sure that the building sizes are the same or smaller, and that ports go on port spaces etc.
 
--- TODO(GunChleoc): Place waterways when we have the Lua interface for them
-
 include "scripting/coroutine.lua"
 include "scripting/lunit.lua"
 include "scripting/infrastructure.lua"
@@ -74,6 +72,11 @@ end
 
 
 -- Placement functions
+
+-- Get a field with the coordinates shifted for the player
+function get_safe_field(player, starting_field, x, y)
+   return map:get_field((starting_field.x + x) % 512, (starting_field.y + y) % 512)
+end
 
 -- Add a building with coordinates not going out of range.
 -- Note that this has only been tested with starting_field.y == 1

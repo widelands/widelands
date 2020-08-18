@@ -3,9 +3,8 @@ include "txts/help/common_helptexts.lua"
 
 local online_help = help_online_help()
 
-set_textdomain("widelands_editor")
-
-return {
+push_textdomain("widelands_editor")
+local result = {
    title = _"The Widelands Editor",
    text =
       h1(_"Introduction") ..
@@ -16,3 +15,6 @@ return {
       online_help ..
       p(_"The wiki also includes a short tutorial on how to build a map.")
 }
+
+pop_textdomain()
+return result

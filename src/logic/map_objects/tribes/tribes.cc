@@ -55,13 +55,15 @@ Tribes::Tribes(LuaInterface* lua)
 	std::vector<std::string> attributes;
 	for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
 		description_manager_->register_description(tribeinfo.name, tribeinfo.script, attributes);
+		if (!attributes.empty()) {
+			throw GameDataError("Tribes can't have attributes - please remove all attributes in "
+			                    "'register.lua' for tribe '%s'.",
+			                    tribeinfo.name.c_str());
+		}
 	}
 
 	// Walk tribes directory and register objects
 	description_manager_->register_directory("tribes", g_fs, false);
-}
-
-Tribes::~Tribes() {
 }
 
 size_t Tribes::nrbuildings() const {
@@ -113,7 +115,7 @@ bool Tribes::tribe_exists(DescriptionIndex index) const {
 
 DescriptionIndex Tribes::safe_building_index(const std::string& buildingname) const {
 	const DescriptionIndex result =
-	   building_index(legacy_lookup_table_.get()->lookup_building(buildingname));
+	   building_index(legacy_lookup_table_->lookup_building(buildingname));
 	if (!building_exists(result)) {
 		throw GameDataError("Unknown building type \"%s\"", buildingname.c_str());
 	}
@@ -122,7 +124,7 @@ DescriptionIndex Tribes::safe_building_index(const std::string& buildingname) co
 
 DescriptionIndex Tribes::safe_immovable_index(const std::string& immovablename) const {
 	const DescriptionIndex result =
-	   immovable_index(legacy_lookup_table_.get()->lookup_immovable(immovablename));
+	   immovable_index(legacy_lookup_table_->lookup_immovable(immovablename));
 	if (!immovable_exists(result)) {
 		throw GameDataError("Unknown immovable type \"%s\"", immovablename.c_str());
 	}
@@ -130,7 +132,7 @@ DescriptionIndex Tribes::safe_immovable_index(const std::string& immovablename) 
 }
 
 DescriptionIndex Tribes::safe_ship_index(const std::string& shipname) const {
-	const DescriptionIndex result = ship_index(legacy_lookup_table_.get()->lookup_ship(shipname));
+	const DescriptionIndex result = ship_index(legacy_lookup_table_->lookup_ship(shipname));
 	if (!ship_exists(result)) {
 		throw GameDataError("Unknown ship type \"%s\"", shipname.c_str());
 	}
@@ -146,7 +148,7 @@ DescriptionIndex Tribes::safe_tribe_index(const std::string& tribename) const {
 }
 
 DescriptionIndex Tribes::safe_ware_index(const std::string& warename) const {
-	const DescriptionIndex result = ware_index(legacy_lookup_table_.get()->lookup_ware(warename));
+	const DescriptionIndex result = ware_index(legacy_lookup_table_->lookup_ware(warename));
 	if (!ware_exists(result)) {
 		throw GameDataError("Unknown ware type \"%s\"", warename.c_str());
 	}
@@ -154,8 +156,7 @@ DescriptionIndex Tribes::safe_ware_index(const std::string& warename) const {
 }
 
 DescriptionIndex Tribes::safe_worker_index(const std::string& workername) const {
-	const DescriptionIndex result =
-	   worker_index(legacy_lookup_table_.get()->lookup_worker(workername));
+	const DescriptionIndex result = worker_index(legacy_lookup_table_->lookup_worker(workername));
 	if (!worker_exists(result)) {
 		throw GameDataError("Unknown worker type \"%s\"", workername.c_str());
 	}
@@ -311,7 +312,7 @@ void Tribes::add_tribe(const LuaTable& table, const World& world) {
 			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, world, table));
 		}
 	} else {
-		throw GameDataError("The tribe '%s'' is not listed in data/tribes/init.lua.", name.c_str());
+		throw GameDataError("The tribe '%s' is not listed in data/tribes/init.lua.", name.c_str());
 	}
 
 	// Mark as done

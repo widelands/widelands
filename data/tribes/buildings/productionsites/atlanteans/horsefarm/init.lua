@@ -42,20 +42,17 @@ tribes:new_productionsite_type {
       { name = "water", amount = 8 },
       { name = "corn", amount = 8 }
    },
-   outputs = {
-      "atlanteans_horse"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
          descname = pgettext("atlanteans_building", "breeding horses"),
          actions = {
             "return=skipped unless economy needs atlanteans_horse",
             "consume=corn water",
-            "sleep=15000",
-            "playsound=sound/farm/horse 192",
-            "animate=working 15000", -- Feeding cute little foals ;)
+            "sleep=duration:15s",
+            "playsound=sound/farm/horse priority:50% allow_multiple",
+            "animate=working duration:15s", -- Feeding cute little foals ;)
             "recruit=atlanteans_horse"
          }
       },

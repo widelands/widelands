@@ -127,8 +127,9 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			const BuildingDescr* tmp_enhancement = tribes_.get_building_descr(en_i);
 			for (auto area : tmp_enhancement->workarea_info_) {
 				std::set<std::string>& strs = workarea_info_[area.first];
-				for (std::string str : area.second)
+				for (const std::string& str : area.second) {
 					strs.insert(str);
+				}
 			}
 		} else {
 			throw wexception(
@@ -327,7 +328,9 @@ Building::Building(const BuildingDescr& building_descr)
      seeing_(false),
      was_immovable_(nullptr),
      attack_target_(nullptr),
-     soldier_control_(nullptr) {
+     soldier_control_(nullptr),
+     mute_messages_(false),
+     is_destruction_blocked_(false) {
 }
 
 void Building::load_finish(EditorGameBase& egbase) {
@@ -386,7 +389,7 @@ Flag& Building::base_flag() {
 uint32_t Building::get_playercaps() const {
 	uint32_t caps = 0;
 	const BuildingDescr& tmp_descr = descr();
-	if (tmp_descr.is_destructible()) {
+	if (tmp_descr.is_destructible() && !is_destruction_blocked()) {
 		caps |= PCap_Bulldoze;
 		if (tmp_descr.can_be_dismantled()) {
 			caps |= PCap_Dismantle;
@@ -434,8 +437,9 @@ bool Building::init(EditorGameBase& egbase) {
 	map.get_brn(position_, &neighb);
 	{
 		Flag* flag = dynamic_cast<Flag*>(map.get_immovable(neighb));
-		if (!flag)
+		if (!flag) {
 			flag = new Flag(egbase, get_owner(), neighb);
+		}
 		flag_ = flag;
 		flag->attach_building(egbase, *this);
 	}
@@ -458,11 +462,19 @@ bool Building::init(EditorGameBase& egbase) {
 	// Start the animation
 	start_animation(egbase, descr().get_unoccupied_animation());
 
+	owner_->add_seer(*this);
+	if (descr().type() == MapObjectType::WAREHOUSE) {
+		set_seeing(true);
+	}
+
 	leave_time_ = egbase.get_gametime();
 	return true;
 }
 
 void Building::cleanup(EditorGameBase& egbase) {
+	owner_->remove_seer(
+	   *this, Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().vision_range()));
+
 	if (defeating_player_) {
 		Player* defeating_player = egbase.get_player(defeating_player_);
 		if (descr().get_conquers()) {
@@ -636,8 +648,9 @@ bool Building::leave_check_and_wait(Game& game, Worker& w) {
 void Building::leave_skip(Game&, Worker& w) {
 	LeaveQueue::iterator const it = std::find(leave_queue_.begin(), leave_queue_.end(), &w);
 
-	if (it != leave_queue_.end())
+	if (it != leave_queue_.end()) {
 		leave_queue_.erase(it);
+	}
 }
 
 /*
@@ -668,11 +681,12 @@ void Building::act(Game& game, uint32_t const data) {
 			}
 		}
 
-		if (!leave_queue_.empty())
+		if (!leave_queue_.empty()) {
 			schedule_act(game, leave_time_ - time);
-
-		if (!wakeup)
+		}
+		if (!wakeup) {
 			leave_time_ = time;  // make sure leave_time doesn't get too far behind
+		}
 	}
 
 	PlayerImmovable::act(game, data);
@@ -701,12 +715,22 @@ void Building::draw(uint32_t gametime,
                     const float scale,
                     RenderTarget* dst) {
 	if (was_immovable_) {
-		dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
-		                    gametime - animstart_, &get_owner()->get_playercolor());
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
+			                    gametime - animstart_, &get_owner()->get_playercolor());
+		} else {
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
+			                    gametime - animstart_, nullptr, kBuildingSilhouetteOpacity);
+		}
 	}
 
-	dst->blit_animation(
-	   point_on_dst, coords, scale, anim_, gametime - animstart_, &get_owner()->get_playercolor());
+	if (info_to_draw & InfoToDraw::kShowBuildings) {
+		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_,
+		                    &get_owner()->get_playercolor());
+	} else {
+		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_, nullptr,
+		                    kBuildingSilhouetteOpacity);
+	}
 
 	//  door animation?
 
@@ -736,8 +760,9 @@ Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool 
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
 		std::map<DescriptionIndex, int32_t>::const_iterator it = ware_priorities_.find(ware_index);
-		if (it != ware_priorities_.end())
+		if (it != ware_priorities_.end()) {
 			priority = adjust ? (priority * it->second / kPriorityNormal) : it->second;
+		}
 	}
 
 	return priority;
@@ -748,13 +773,15 @@ Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool 
  * priorities are identified by ware type and index
  */
 void Building::collect_priorities(std::map<int32_t, std::map<DescriptionIndex, int32_t>>& p) const {
-	if (ware_priorities_.empty())
+	if (ware_priorities_.empty()) {
 		return;
+	}
 	std::map<DescriptionIndex, int32_t>& ware_priorities = p[wwWARE];
 	std::map<DescriptionIndex, int32_t>::const_iterator it;
 	for (it = ware_priorities_.begin(); it != ware_priorities_.end(); ++it) {
-		if (it->second == kPriorityNormal)
+		if (it->second == kPriorityNormal) {
 			continue;
+		}
 		ware_priorities[it->first] = it->second;
 	}
 }
@@ -791,7 +818,7 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 }
 
 void Building::add_worker(Worker& worker) {
-	if (!get_workers().size()) {
+	if (get_workers().empty()) {
 		if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
 			set_seeing(true);
 		}
@@ -802,8 +829,9 @@ void Building::add_worker(Worker& worker) {
 
 void Building::remove_worker(Worker& worker) {
 	PlayerImmovable::remove_worker(worker);
-	if (!get_workers().size())
+	if (get_workers().empty() && descr().type() != MapObjectType::WAREHOUSE) {
 		set_seeing(false);
+	}
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
@@ -824,19 +852,10 @@ void Building::set_soldier_control(SoldierControl* new_soldier_control) {
  * \note Warehouses always see their surroundings; this is handled separately.
  */
 void Building::set_seeing(bool see) {
-	if (see == seeing_)
-		return;
-
-	Player* player = get_owner();
-	const Map& map = player->egbase().map();
-
-	if (see) {
-		player->see_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
-	} else {
-		player->unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
-	}
-
 	seeing_ = see;
+	get_owner()->update_vision(
+	   Area<FCoords>(owner().egbase().map().get_fcoords(get_position()), descr().vision_range()),
+	   see);
 }
 
 /**
@@ -866,6 +885,10 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
+	if (mute_messages() || owner().is_muted(game.tribes().safe_building_index(descr().name()))) {
+		return;
+	}
+
 	const std::string rt_description =
 	   as_mapobject_message(descr().name(), descr().representative_image()->width(), description,
 	                        &owner().get_playercolor());

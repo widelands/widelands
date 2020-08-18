@@ -42,11 +42,6 @@ tribes:new_productionsite_type {
       basic_amount = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_marblemine = false,
-      empire_marblemine_deep = false,
-   },
-
    working_positions = {
       empire_miner = 1
    },
@@ -55,13 +50,9 @@ tribes:new_productionsite_type {
       { name = "ration", amount = 6 },
       { name = "wine", amount = 6 }
    },
-   outputs = {
-      "marble",
-      "granite"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -75,7 +66,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=ration wine",
-            "sleep=18000",
+            "sleep=duration:18s",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_marble",
@@ -88,7 +79,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=wine ration",
-            "sleep=18000",
+            "sleep=duration:18s",
             "call=a_mine_produce_marble",
             "call=a_mine_produce_marble",
             "call=a_mine_produce_granite",
@@ -98,16 +89,16 @@ tribes:new_productionsite_type {
       a_mine_produce_granite = {
          descname = _"mining granite",
          actions = {
-            "animate=working 10500",
-            "mine=stones 2 50 5 17",
+            "animate=working duration:10s500ms",
+            "mine=stones radius:2 yield:50% when_empty:5% experience_on_fail:17%",
             "produce=granite",
          }
       },
       a_mine_produce_marble = {
          descname = _"mining marble",
          actions = {
-            "animate=working 10500",
-            "mine=stones 2 50 5 17",
+            "animate=working duration:10s500ms",
+            "mine=stones radius:2 yield:50% when_empty:5% experience_on_fail:17%",
             "produce=marble",
          }
       },

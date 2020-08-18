@@ -61,7 +61,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
      hgap_(hgap),
      vgap_(vgap),
      selection_anchor_(Widelands::INVALID_INDEX),
-     callback_function_(callback_function),
+     callback_function_(std::move(callback_function)),
      min_free_vertical_space_(290) {
 	for (const Widelands::DescriptionIndex& index : indices_) {
 		selected_.insert(std::make_pair(index, false));
@@ -155,6 +155,12 @@ bool AbstractWaresDisplay::handle_mousemove(uint8_t state, int32_t x, int32_t y,
 	return true;
 }
 
+void AbstractWaresDisplay::handle_mousein(bool inside) {
+	if (!inside) {
+		finalize_anchor_selection();
+	}
+}
+
 bool AbstractWaresDisplay::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		Widelands::DescriptionIndex ware = ware_at_point(x, y);
@@ -183,24 +189,7 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 	if (btn != SDL_BUTTON_LEFT || selection_anchor_ == Widelands::INVALID_INDEX) {
 		return UI::Panel::handle_mouserelease(btn, x, y);
 	}
-
-	bool to_be_selected = !ware_selected(selection_anchor_);
-
-	for (const Widelands::DescriptionIndex& index : indices_) {
-		if (in_selection_[index]) {
-			if (to_be_selected) {
-				select_ware(index);
-			} else {
-				unselect_ware(index);
-			}
-		}
-	}
-
-	// Release anchor, empty selection
-	selection_anchor_ = Widelands::INVALID_INDEX;
-	for (auto& resetme : in_selection_) {
-		in_selection_[resetme.first] = false;
-	}
+	finalize_anchor_selection();
 	return true;
 }
 
@@ -317,6 +306,30 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y) {
 				}
 			}
 		}
+	}
+}
+
+void AbstractWaresDisplay::finalize_anchor_selection() {
+	if (selection_anchor_ == Widelands::INVALID_INDEX) {
+		return;
+	}
+
+	bool to_be_selected = !ware_selected(selection_anchor_);
+
+	for (const Widelands::DescriptionIndex& index : indices_) {
+		if (in_selection_[index]) {
+			if (to_be_selected) {
+				select_ware(index);
+			} else {
+				unselect_ware(index);
+			}
+		}
+	}
+
+	// Release anchor, empty selection
+	selection_anchor_ = Widelands::INVALID_INDEX;
+	for (auto& resetme : in_selection_) {
+		in_selection_[resetme.first] = false;
 	}
 }
 
@@ -437,21 +450,25 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 
 // Wares highlighting/selecting
 void AbstractWaresDisplay::select_ware(Widelands::DescriptionIndex ware) {
-	if (selected_[ware])
+	if (selected_[ware]) {
 		return;
+	}
 
 	selected_[ware] = true;
-	if (callback_function_)
+	if (callback_function_) {
 		callback_function_(ware, true);
+	}
 }
 
 void AbstractWaresDisplay::unselect_ware(Widelands::DescriptionIndex ware) {
-	if (!selected_[ware])
+	if (!selected_[ware]) {
 		return;
+	}
 
 	selected_[ware] = false;
-	if (callback_function_)
+	if (callback_function_) {
 		callback_function_(ware, false);
+	}
 }
 
 bool AbstractWaresDisplay::ware_selected(Widelands::DescriptionIndex ware) {
@@ -460,8 +477,9 @@ bool AbstractWaresDisplay::ware_selected(Widelands::DescriptionIndex ware) {
 
 // Wares hiding
 void AbstractWaresDisplay::hide_ware(Widelands::DescriptionIndex ware) {
-	if (hidden_[ware])
+	if (hidden_[ware]) {
 		return;
+	}
 	hidden_[ware] = true;
 }
 
@@ -497,9 +515,9 @@ static const char* unit_suffixes[] = {
    /** TRANSLATORS: This is a large number with a suffix (e.g. 5G = 5,000,000,000). */
    /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
    _("%1%G")};
-static std::string get_amount_string(uint32_t amount) {
+std::string get_amount_string(uint32_t amount, bool cutoff1k) {
 	uint8_t size = 0;
-	while (amount >= (size ? 1000 : 10000)) {
+	while (amount >= (size || cutoff1k ? 1000 : 10000)) {
 		amount /= 1000;
 		size++;
 	}
@@ -536,8 +554,8 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 
 	const UI::WareInfoStyleInfo& style = g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal);
 
-	for (i = order.begin(); i != order.end(); ++i)
-		for (j = i->begin(); j != i->end(); ++j)
+	for (i = order.begin(); i != order.end(); ++i) {
+		for (j = i->begin(); j != i->end(); ++j) {
 			if ((c = map.find(*j)) != map.end()) {
 				ret += "<div width=30 padding=2><p align=center>"
 				       "<div width=26 background=" +
@@ -547,5 +565,7 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 				       "><p>" + style.info_font().as_font_tag(get_amount_string(c->second)) +
 				       "</p></div></p></div>";
 			}
+		}
+	}
 	return ret;
 }

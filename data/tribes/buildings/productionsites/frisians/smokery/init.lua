@@ -65,13 +65,9 @@ tribes:new_productionsite_type {
       { name = "fish", amount = 6 },
       { name = "log", amount = 6 },
    },
-   outputs = {
-      "smoked_meat",
-      "smoked_fish",
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -85,8 +81,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs smoked_fish",
             "consume=fish:2 log",
-            "sleep=16000",
-            "animate=working 30000",
+            "sleep=duration:16s",
+            "animate=working duration:30s",
             "produce=smoked_fish:2"
          },
       },
@@ -97,8 +93,8 @@ tribes:new_productionsite_type {
             "return=skipped when site has fish:2 and economy needs smoked_fish",
             "return=skipped unless economy needs smoked_meat",
             "consume=meat:2 log",
-            "sleep=16000",
-            "animate=working 30000",
+            "sleep=duration:16s",
+            "animate=working duration:30s",
             "produce=smoked_meat:2"
          },
       },

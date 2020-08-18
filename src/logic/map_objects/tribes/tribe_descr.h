@@ -165,9 +165,11 @@ private:
 	// Helper function for adding a special building type (port etc.)
 	DescriptionIndex add_special_building(const std::string& buildingname, Tribes& tribes);
 	// Make sure that everything is there and that dependencies are calculated
-	void finalize_loading(Tribes& tribes);
+	void finalize_loading(Tribes& tribes, const World& world);
 	// Helper function to calculate trainingsites proportions for the AI
 	void calculate_trainingsites_proportions(Tribes& tribes);
+
+	void process_productionsites(Tribes& tribes, const World& world);
 
 	const std::string name_;
 	const std::string descname_;

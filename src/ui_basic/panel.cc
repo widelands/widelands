@@ -592,31 +592,24 @@ bool Panel::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) 
 }
 
 bool Panel::handle_key(bool down, SDL_Keysym code) {
-	if (down) {
-		if (focus_) {
-			Panel* p = focus_->next_;
-			if (focus_ == last_child_) {
-				p = first_child_;
-			}
-
-			switch (code.sym) {
-
-			case SDLK_TAB:
-				while (p != focus_) {
-					if (p->get_can_focus()) {
-						p->focus();
-						break;
-					}
-					if (p == last_child_) {
-						p = first_child_;
-					} else {
-						p = p->next_;
-					}
+	if (down && focus_ && code.sym == SDLK_TAB) {
+		if (SDL_GetModState() & KMOD_SHIFT) {
+			Panel* next_focus = (focus_ == last_child_ ? first_child_ : focus_->next_);
+			while (next_focus != focus_) {
+				if (next_focus->get_can_focus()) {
+					next_focus->focus();
+					return true;
 				}
-				return true;
-
-			default:
-				return false;
+				next_focus = (next_focus == last_child_ ? first_child_ : next_focus->next_);
+			}
+		} else {
+			Panel* next_focus = (focus_ == first_child_ ? last_child_ : focus_->prev_);
+			while (next_focus != focus_) {
+				if (next_focus->get_can_focus()) {
+					next_focus->focus();
+					return true;
+				}
+				next_focus = (next_focus == first_child_ ? last_child_ : next_focus->prev_);
 			}
 		}
 	}
@@ -906,9 +899,9 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mou
 			continue;
 		}
 		// Found a child at the position
-		if (child->do_mousewheel(
-		       which, x, y, rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
-		                                             child->get_y() + child->get_tborder()))) {
+		if (child->do_mousewheel(which, x, y,
+		                         rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
+		                                                  child->get_y() + child->get_tborder()))) {
 			return true;
 		}
 	}
@@ -957,11 +950,40 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 		return false;
 	}
 
-	// If we handle text, it does not matter if we handled this key
-	// or not, it should not propagate.
-	if (handle_key(down, code) || handles_textinput()) {
+	if (handle_key(down, code)) {
 		return true;
 	}
+
+	// If we handle text, we want to block propagation of keypresses used for
+	// text input. We don't know which ones they are, so we block all except
+	// those we are reasonably sure that they aren't. This list may be expanded.
+	if (handles_textinput()) {
+		switch (code.sym) {
+		case SDLK_ESCAPE:
+		case SDLK_PAUSE:
+		case SDLK_PRINTSCREEN:
+		case SDLK_PAGEDOWN:
+		case SDLK_PAGEUP:
+		case SDLK_HOME:
+		case SDLK_END:
+		case SDLK_DELETE:
+		case SDLK_INSERT:
+		case SDLK_BACKSPACE:
+		case SDLK_LEFT:
+		case SDLK_RIGHT:
+		case SDLK_UP:
+		case SDLK_DOWN:
+		case SDLK_LCTRL:
+		case SDLK_RCTRL:
+		case SDLK_LALT:
+			return false;
+		}
+		if (code.mod & KMOD_CTRL || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12)) {
+			return false;
+		}
+		return true;
+	}
+
 	return false;
 }
 

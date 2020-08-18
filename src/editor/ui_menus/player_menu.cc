@@ -177,10 +177,10 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 				plr_tribe->add(_(tribeinfo.descname), tribeinfo.name,
 				               g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
 			}
-			plr_tribe->add(pgettext("tribe", "Random"), "",
-			               g_gr->images().get("images/ui_fsmenu/random.png"), false,
-			               _("The tribe will be selected at random"));
 		}
+		plr_tribe->add(pgettext("tribe", "Random"), "",
+		               g_gr->images().get("images/ui_fsmenu/random.png"), false,
+		               _("The tribe will be selected at random"));
 
 		plr_tribe->select(
 		   (p <= map.get_nrplayers() && eia().egbase().tribes().tribe_exists(map.get_scenario_player_tribe(p))) ?
@@ -226,6 +226,10 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 }
 
 void EditorPlayerMenu::layout() {
+	if (is_minimal()) {
+		return;
+	}
+	EditorToolOptionsMenu::layout();
 	assert(!rows_.empty());
 	const Widelands::PlayerNumber nr_players = eia().egbase().map().get_nrplayers();
 	box_.set_size(310, no_of_players_.get_h() + kMargin +

@@ -100,7 +100,7 @@ void Flag::load_finish(EditorGameBase& egbase) {
 			log("WARNING: worker %u is in the capacity wait queue of flag %u but "
 			    "its waitforcapacity task is for map object %u! Removing from "
 			    "queue.\n",
-			    worker.serial(), serial(), state->objvar1.serial());
+			    worker.serial(), serial(), state->objvar1.serial());  // NOLINT
 			return true;
 		}
 		return false;
@@ -309,7 +309,7 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 	}
 
 	if (building_ && building_->descr().get_isport()) {
-		Warehouse* wh = static_cast<Warehouse*>(building_);
+		Warehouse* wh = dynamic_cast<Warehouse*>(building_);
 		if (PortDock* pd = wh->get_portdock()) {
 			pd->add_neighbours(neighbours);
 		}
@@ -402,8 +402,9 @@ bool Flag::is_dead_end() const {
 			Flag& start = road->get_flag(RoadBase::FlagStart);
 			Flag& other = this == &start ? road->get_flag(RoadBase::FlagEnd) : start;
 			if (first_other_flag) {
-				if (&other != first_other_flag)
+				if (&other != first_other_flag) {
 					return false;
+				}
 			} else {
 				first_other_flag = &other;
 			}
@@ -435,8 +436,9 @@ void Flag::wait_for_capacity(Game&, Worker& bob) {
 void Flag::skip_wait_for_capacity(Game&, Worker& w) {
 	CapacityWaitQueue::iterator const it =
 	   std::find(capacity_wait_.begin(), capacity_wait_.end(), &w);
-	if (it != capacity_wait_.end())
+	if (it != capacity_wait_.end()) {
 		capacity_wait_.erase(it);
+	}
 }
 
 void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
@@ -719,79 +721,79 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 
 	// Find the PendingWare entry
 	for (; i < ware_filled_; ++i) {
+		// Find pending ware
 		if (wares_[i].ware != &ware) {
 			continue;
 		}
 
+		// Found; handle it
 		pi = &wares_[i];
-		break;
-	}
 
-	assert(pi);
-
-	// Deal with the non-moving case quickly
-	if (!nextstep) {
-		pi->nextstep = nullptr;
-		pi->pending = true;
-		return;
-	}
-
-	// Find out whether we need to do anything
-	if (pi->nextstep == nextstep && pi->nextstep != always_call_for_flag_) {
-		return;  // no update needed
-	}
-
-	pi->nextstep = nextstep;
-	pi->pending = false;
-
-	// Deal with the building case
-	if (nextstep == get_building()) {
-		molog("Flag::call_carrier(%u): Tell building to fetch this ware\n", ware.serial());
-
-		if (!get_building()->fetch_from_flag(game)) {
-			pi->ware->cancel_moving();
-			pi->ware->update(game);
-		}
-
-		return;
-	}
-
-	// Deal with the normal (flag) case
-	const Flag& nextflag = dynamic_cast<const Flag&>(*nextstep);
-
-	for (int32_t dir = WalkingDir::FIRST_DIRECTION; dir <= WalkingDir::LAST_DIRECTION; ++dir) {
-		RoadBase* const road = get_roadbase(dir);
-		Flag* other;
-		RoadBase::FlagId flagid;
-
-		if (!road) {
-			continue;
-		}
-
-		if (&road->get_flag(RoadBase::FlagStart) == this) {
-			flagid = RoadBase::FlagStart;
-			other = &road->get_flag(RoadBase::FlagEnd);
-		} else {
-			flagid = RoadBase::FlagEnd;
-			other = &road->get_flag(RoadBase::FlagStart);
-		}
-
-		if (other != &nextflag) {
-			continue;
-		}
-
-		// Yes, this is the road we want; inform it
-		if (road->notify_ware(game, flagid)) {
+		// Deal with the non-moving case quickly
+		if (!nextstep) {
+			pi->nextstep = nullptr;
+			pi->pending = true;
 			return;
 		}
 
-		// If the road doesn't react to the ware immediately, we try other roads:
-		// They might lead to the same flag!
-	}
+		// Find out whether we need to do anything
+		if (pi->nextstep == nextstep && pi->nextstep != always_call_for_flag_) {
+			return;  // no update needed
+		}
 
-	// Nothing found, just let it be picked up by somebody
-	pi->pending = true;
-	return;
+		pi->nextstep = nextstep;
+		pi->pending = false;
+
+		// Deal with the building case
+		if (nextstep == get_building()) {
+			molog("Flag::call_carrier(%u): Tell building to fetch this ware\n", ware.serial());
+
+			if (!get_building()->fetch_from_flag(game)) {
+				pi->ware->cancel_moving();
+				pi->ware->update(game);
+			}
+
+			return;
+		}
+
+		// Deal with the normal (flag) case
+		const Flag& nextflag = dynamic_cast<const Flag&>(*nextstep);
+
+		for (int32_t dir = WalkingDir::FIRST_DIRECTION; dir <= WalkingDir::LAST_DIRECTION; ++dir) {
+			RoadBase* const road = get_roadbase(dir);
+			Flag* other;
+			RoadBase::FlagId flagid;
+
+			if (!road) {
+				continue;
+			}
+
+			if (&road->get_flag(RoadBase::FlagStart) == this) {
+				flagid = RoadBase::FlagStart;
+				other = &road->get_flag(RoadBase::FlagEnd);
+			} else {
+				flagid = RoadBase::FlagEnd;
+				other = &road->get_flag(RoadBase::FlagStart);
+			}
+
+			if (other != &nextflag) {
+				continue;
+			}
+
+			// Yes, this is the road we want; inform it
+			if (road->notify_ware(game, flagid)) {
+				return;
+			}
+
+			// If the road doesn't react to the ware immediately, we try other roads:
+			// They might lead to the same flag!
+		}
+
+		// Nothing found, just let it be picked up by somebody
+		pi->pending = true;
+		return;
+	}
+	NEVER_HERE();
 }
 
 /**

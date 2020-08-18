@@ -43,20 +43,13 @@ tribes:new_productionsite_type {
       barbarians_ranger = 1
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_rangers_hut = false,
-      barbarians_lumberjacks_hut = true,
-      barbarians_farm = false,
-      barbarians_reed_yard = false,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
          descname = _"planting trees",
          actions = {
             "callworker=plant",
-            "sleep=11500"
+            "sleep=duration:11s500ms"
          }
       },
    },

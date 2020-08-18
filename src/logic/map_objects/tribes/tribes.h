@@ -30,7 +30,6 @@
 #include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/ship.h"
-#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
@@ -41,7 +40,7 @@ namespace Widelands {
 class Tribes {
 public:
 	Tribes(LuaInterface* lua);
-	~Tribes();
+	~Tribes() = default;
 
 	size_t nrbuildings() const;
 	size_t nrtribes() const;

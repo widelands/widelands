@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,12 +56,12 @@ enum class MapObjectType : uint8_t {
 
 	// everything below is at least a Building
 	BUILDING = 100,    // Building
-	CONSTRUCTIONSITE,  // Building -- Constructionsite
-	DISMANTLESITE,     // Building -- Dismantlesite
+	CONSTRUCTIONSITE,  // Building -- PartiallyFinishedBuilding -- Constructionsite
+	DISMANTLESITE,     // Building -- PartiallyFinishedBuilding -- Dismantlesite
 	WAREHOUSE,         // Building -- Warehouse
 	MARKET,            // Building -- Market
+	MILITARYSITE,      // Building -- Militarysite
 	PRODUCTIONSITE,    // Building -- Productionsite
-	MILITARYSITE,      // Building -- Productionsite -- Militarysite
 	TRAININGSITE       // Building -- Productionsite -- Trainingsite
 };
 

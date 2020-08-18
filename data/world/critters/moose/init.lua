@@ -6,10 +6,16 @@ animations = {
       hotspot = { 15, 27 },
       fps = 20,
       sound_effect = {
-         -- Sound files with numbers starting for 10 are generating silence. Remove when we move the sound triggering to programs
-         path = "sound/animals/elk",
+         path = "sound/animals/moose",
+         priority = 5
       },
    },
+   eating = {
+      directory = dirname,
+      basename = "idle", -- TODO(Nordfriese): Make animation
+      hotspot = { 15, 27 },
+      fps = 20,
+   }
 }
 
 add_directional_animation(animations, "walk", dirname, "walk", {21, 34}, 20)
@@ -23,4 +29,8 @@ world:new_critter_type{
       remove = { "remove" },
    },
    animations = animations,
+   size = 10,
+   reproduction_rate = 30,
+   appetite = 50,
+   herbivore = {"field"},
 }

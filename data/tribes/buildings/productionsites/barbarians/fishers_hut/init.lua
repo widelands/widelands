@@ -43,21 +43,13 @@ tribes:new_productionsite_type {
       barbarians_fisher = 1
    },
 
-   outputs = {
-      "fish"
-   },
-
-   indicate_workarea_overlaps = {
-      barbarians_fishers_hut = false,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _"fishing",
          actions = {
             "callworker=fish",
-            "sleep=10500"
+            "sleep=duration:10s500ms"
          }
       },
    },

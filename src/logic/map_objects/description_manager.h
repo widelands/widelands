@@ -100,7 +100,7 @@ private:
 
 	/// For loading any registered map object description via Lua in scenarios.
 	/// Do not use this for normal loading in tribes, since this will circumvent the check for
-	/// circular dependencies.1 If the object is not known, loading is skipped quietly.
+	/// circular dependencies. If the object is not known, loading is skipped quietly.
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteMapObjectDescription>>
 	   map_objecttype_subscriber_;
 

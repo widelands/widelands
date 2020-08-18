@@ -62,14 +62,9 @@ tribes:new_productionsite_type {
       { name = "coal", amount = 8 },
       { name = "iron", amount = 8 },
    },
-   outputs = {
-      "sword_short",
-      "sword_long",
-      "helmet",
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -86,11 +81,11 @@ tribes:new_productionsite_type {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs sword_short",
             "consume=coal iron",
-            "sleep=24000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 24000",
-            "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:24s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:24s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=sword_short"
          },
       },
@@ -101,11 +96,11 @@ tribes:new_productionsite_type {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs sword_long",
             "consume=coal iron:2",
-            "sleep=24000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 24000",
-            "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:24s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:24s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=sword_long"
          },
       },
@@ -116,9 +111,9 @@ tribes:new_productionsite_type {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs helmet",
             "consume=coal iron",
-            "sleep=30000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 37000",
+            "sleep=duration:30s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:37s",
             "produce=helmet"
          },
       },

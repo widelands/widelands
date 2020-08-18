@@ -1,5 +1,7 @@
 dirname = "tribes/buildings/productionsites/empire/brewery/"
 
+push_textdomain("scenario_emp04.wmf")
+
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_brewery2",
@@ -41,12 +43,9 @@ tribes:new_productionsite_type {
       { name = "water", amount = 7 },
       { name = "wheat", amount = 7 }
    },
-   outputs = {
-      "beer"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
          descname = _"brewing beer",
          actions = {
@@ -54,9 +53,10 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs beer",
             "consume=water wheat",
             "playsound=sound/empire/beerbubble 180",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "produce=beer"
          }
       },
    },
 }
+pop_textdomain()

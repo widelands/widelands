@@ -18,15 +18,15 @@ tribes:new_worker_type {
       fish = {
          "findspace=size:any radius:8 resource:fish",
          "walk=coords",
-         "mine=fish 1",
-         "animate=fishing 3000",
+         "mine=fish radius:1",
+         "animate=fishing duration:3s",
          "createware=fish",
          "return"
       },
       fish_in_pond = {
          "findobject=attrib:pond_mature radius:8",
          "walk=object",
-         "animate=fishing 3000",
+         "animate=fishing duration:3s",
          "callobject=fall_dry",
          "createware=fish",
          "return"
@@ -34,7 +34,7 @@ tribes:new_worker_type {
       breed_in_pond = {
          "findobject=attrib:pond_dry radius:8",
          "walk=object",
-         "animate=release 2000",
+         "animate=release duration:2s",
          "callobject=with_fish",
          "return"
       }

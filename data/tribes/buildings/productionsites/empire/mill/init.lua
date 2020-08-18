@@ -43,20 +43,17 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "wheat", amount = 6 }
    },
-   outputs = {
-      "flour"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
          descname = _"grinding wheat",
          actions = {
             "return=skipped unless economy needs flour",
             "consume=wheat",
-            "sleep=5000",
-            "playsound=sound/mill/mill_turning 240",
-            "animate=working 10000",
+            "sleep=duration:5s",
+            "playsound=sound/mill/mill_turning priority:90% allow_multiple",
+            "animate=working duration:10s",
             "produce=flour"
          }
       },

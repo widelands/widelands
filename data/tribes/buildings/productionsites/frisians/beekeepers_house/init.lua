@@ -38,13 +38,6 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      frisians_berry_farm = true,
-      frisians_reed_farm = true,
-      frisians_farm = true,
-      frisians_beekeepers_house = false,
-   },
-
    aihints = {
       collects_ware_from_map = "honey",
       prohibited_till = 620,
@@ -55,17 +48,13 @@ tribes:new_productionsite_type {
       frisians_beekeeper = 1
    },
 
-   outputs = {
-      "honey"
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "callworker=bees",
-            "sleep=45000"
+            "sleep=duration:45s"
          }
       },
    },

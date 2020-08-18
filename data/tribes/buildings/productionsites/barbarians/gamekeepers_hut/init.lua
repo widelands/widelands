@@ -43,18 +43,13 @@ tribes:new_productionsite_type {
       barbarians_gamekeeper = 1
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_hunters_hut = true,
-      barbarians_gamekeepers_hut = false,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "callworker=release",
-            "sleep=52500"
+            "sleep=duration:52s500ms"
          }
       },
    },

@@ -31,7 +31,8 @@ namespace Widelands {
 struct ImmovableProgram : public MapObjectProgram {
 
 	/// Can be executed on an Immovable.
-	struct Action {
+	class Action {
+	public:
 		Action() = default;
 		virtual ~Action();
 		virtual void execute(Game&, Immovable&) const = 0;
@@ -55,7 +56,8 @@ struct ImmovableProgram : public MapObjectProgram {
 	/// to equal the length of the animation. It will loop around. The animation
 	/// will not be stopped by this command. It will run until another animation
 	/// is started.)
-	struct ActAnimate : public Action {
+	class ActAnimate : public Action {
+	public:
 		ActAnimate(const std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 		uint32_t animation() const {
@@ -66,56 +68,46 @@ struct ImmovableProgram : public MapObjectProgram {
 		AnimationParameters parameters;
 	};
 
-	/// Transforms the immovable into another immovable or into a bob
-	///
-	/// Parameter syntax
-	///    parameters ::= {probability} {bob|immovable} world|tribe:name
-	/// Parameter semantics:
-	///    probability: (defaults to 0 -- i.e. always)
-	///       The probability (out of 255) for replacing the immovable with
-	///       a new one; if the probability is 0 (i.e. the default), then the
-	///       transformation always happens
-	///    bob|immovable: (defaults to immovable)
-	///       whether we'll be replaced by a bob or by an immovable
-	///    world|tribe:
-	///       whether the other object is taken from the world or from
-	///       the owner's tribe
-	///    name:
-	///       name of the replacement object
-	struct ActTransform : public Action {
-		ActTransform(std::vector<std::string>& arguments, const ImmovableDescr&);
+	/// Transforms the immovable into another immovable or into a bob.
+	/// For parameters, see scripting documentation.
+	class ActTransform : public Action {
+	public:
+		ActTransform(std::vector<std::string>& arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string type_name;
-		bool bob;
-		uint8_t probability;
+		std::string type_name_;
+		bool bob_;
+		unsigned probability_;
 	};
 
 	/// Like ActTransform but the probability is determined by the suitability.
-	struct ActGrow : public Action {
-		ActGrow(std::vector<std::string>& arguments, const ImmovableDescr&);
+	class ActGrow : public Action {
+	public:
+		ActGrow(std::vector<std::string>& arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string type_name;
+		std::string type_name_;
 	};
 
-	struct ActRemove : public Action {
-		ActRemove(std::vector<std::string>& arguments);
+	class ActRemove : public Action {
+	public:
+		ActRemove(std::vector<std::string>& arguments, const ImmovableDescr& descr);
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		uint8_t probability;
+		unsigned probability_;
 	};
 
-	struct ActSeed : public Action {
+	class ActSeed : public Action {
+	public:
 		ActSeed(std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string type_name;
-		uint8_t probability;
+		std::string type_name_;
+		unsigned probability_;
 	};
 
 	/// Plays a sound effect.
@@ -131,8 +123,9 @@ struct ImmovableProgram : public MapObjectProgram {
 	///
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
-	struct ActPlaySound : public Action {
-		ActPlaySound(const std::vector<std::string>& arguments);
+	class ActPlaySound : public Action {
+	public:
+		ActPlaySound(const std::vector<std::string>& arguments, const ImmovableDescr& descr);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -152,7 +145,8 @@ struct ImmovableProgram : public MapObjectProgram {
 	 *    decay-time:
 	 *       Time until construction decays one step if no progress has been made.
 	 */
-	struct ActConstruct : public Action {
+	class ActConstruct : public Action {
+	public:
 		ActConstruct(std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
@@ -175,7 +169,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	/// Create an immovable program from a number of lines.
 	ImmovableProgram(const std::string& init_name,
 	                 const std::vector<std::string>& lines,
-	                 const ImmovableDescr& immovable);
+	                 ImmovableDescr& immovable);
 
 	~ImmovableProgram() {
 	}

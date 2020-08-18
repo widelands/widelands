@@ -16,8 +16,8 @@ tribes:new_immovable_type {
    icon = dirname .. "tiny/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 20000",
+      main = {
+         "animate=idle duration:20s",
          "grow=berry_bush_raspberry_small",
       },
    },
@@ -42,8 +42,8 @@ tribes:new_immovable_type {
    icon = dirname .. "small/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 20000",
+      main = {
+         "animate=idle duration:20s",
          "grow=berry_bush_raspberry_medium",
       },
    },
@@ -68,8 +68,8 @@ tribes:new_immovable_type {
    icon = dirname .. "medium/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 40000",
+      main = {
+         "animate=idle duration:40s",
          "grow=berry_bush_raspberry_ripe",
       },
    },
@@ -94,8 +94,8 @@ tribes:new_immovable_type {
    icon = dirname .. "ripe/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 400000",
+      main = {
+         "animate=idle duration:6m40s",
          "remove=",
       },
       harvest = {

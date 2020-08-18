@@ -75,14 +75,9 @@ tribes:new_productionsite_type {
       { name = "scrap_metal_mixed", amount = 8 },
       { name = "fur_garment_old", amount = 8 },
    },
-   outputs = {
-      "iron",
-      "gold",
-      "fur"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -100,8 +95,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless site has fur_garment_old",
             "consume=fur_garment_old",
-            "sleep=40000",
-            "animate=working_fur 15000",
+            "sleep=duration:40s",
+            "animate=working_fur duration:15s",
             "produce=fur"
          }
       },
@@ -111,8 +106,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs iron or not economy needs coal", -- if the economy doesn't need coal the situation gets even improved because recycling saves coal
             "consume=scrap_iron:2 coal",
-            "sleep=40000",
-            "animate=working_metal 40000",
+            "sleep=duration:40s",
+            "animate=working_metal duration:40s",
             "produce=iron:2"
          }
       },
@@ -122,8 +117,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs iron or economy needs gold or not economy needs coal", -- if the economy doesn't need coal the situation gets even improved because recycling saves coal
             "consume=scrap_metal_mixed:2 coal",
-            "sleep=40000",
-            "animate=working_metal 40000",
+            "sleep=duration:40s",
+            "animate=working_metal duration:40s",
             "produce=iron gold"
          }
       },

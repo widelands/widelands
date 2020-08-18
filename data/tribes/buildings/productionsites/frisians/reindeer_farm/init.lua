@@ -62,14 +62,9 @@ tribes:new_productionsite_type {
       { name = "barley", amount = 8 },
       { name = "water", amount = 8 }
    },
-   outputs = {
-      "frisians_reindeer",
-      "fur",
-      "meat",
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -87,8 +82,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs frisians_reindeer",
             "consume=barley water",
-            "sleep=15000",
-            "animate=working 15000",
+            "sleep=duration:15s",
+            "animate=working duration:15s",
             "recruit=frisians_reindeer"
          }
       },
@@ -98,8 +93,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fur",
             "consume=barley water",
-            "sleep=15000",
-            "animate=working 20000",
+            "sleep=duration:15s",
+            "animate=working duration:20s",
             "produce=fur"
          }
       },
@@ -109,8 +104,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fur",
             "consume=barley water",
-            "sleep=15000",
-            "animate=working 20000",
+            "sleep=duration:15s",
+            "animate=working duration:20s",
             "produce=fur meat"
          }
       },

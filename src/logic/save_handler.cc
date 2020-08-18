@@ -193,8 +193,9 @@ void SaveHandler::think(Widelands::Game& game) {
  * Lazy intialisation on first call.
  */
 void SaveHandler::initialize(uint32_t realtime) {
-	if (initialized_)
+	if (initialized_) {
 		return;
+	}
 
 	fs_type_ = get_config_bool("nozip", false) ? FileSystem::DIR : FileSystem::ZIP;
 
@@ -245,7 +246,7 @@ bool SaveHandler::save_game(Widelands::Game& game,
 	   [&game](FileSystem& fs) {
 		   Widelands::GameSaver gs(fs, game);
 		   gs.save();
-		},
+	   },
 	   complete_filename, fs_type_);
 	gsh.save();
 	last_save_realtime_ = SDL_GetTicks();

@@ -389,8 +389,9 @@ int LuaPlayer::send_message(lua_State* L) {
 	}
 
 	MessageId const message = plr.add_message(
-	   game, std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(),
-	                                              title, icon, heading, body, c, 0, sub_type, st)),
+	   game,
+	   std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(), title,
+	                                        icon, heading, body, c, 0, sub_type, st)),
 	   popup);
 
 	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));
@@ -484,7 +485,7 @@ int LuaPlayer::sees_field(lua_State* L) {
 	Widelands::MapIndex const i =
 	   (*get_user_class<LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
-	lua_pushboolean(L, get(L, egbase).vision(i) > 1);
+	lua_pushboolean(L, get(L, egbase).is_seeing(i));
 	return 1;
 }
 
@@ -503,7 +504,7 @@ int LuaPlayer::seen_field(lua_State* L) {
 	Widelands::MapIndex const i =
 	   (*get_user_class<LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
-	lua_pushboolean(L, get(L, egbase).vision(i) >= 1);
+	lua_pushboolean(L, get(L, egbase).get_vision(i) != Widelands::SeeUnseeNode::kUnexplored);
 	return 1;
 }
 
@@ -595,8 +596,7 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.hide_or_reveal_field(
-		   game.get_gametime(), (*get_user_class<LuaField>(L, -1))->coords(), SeeUnseeNode::kReveal);
+		p.hide_or_reveal_field((*get_user_class<LuaField>(L, -1))->coords(), SeeUnseeNode::kVisible);
 		lua_pop(L, 1);
 	}
 
@@ -604,7 +604,7 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 }
 
 /* RST
-   .. method:: hide_fields(fields)
+   .. method:: hide_fields(fields[, unexplore = false])
 
       Make these fields hidden for the current player if they are not
       seen by a military building. See also :ref:`field_animations` for
@@ -624,13 +624,12 @@ int LuaPlayer::hide_fields(lua_State* L) {
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 	const SeeUnseeNode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
-	                             SeeUnseeNode::kUnexplore :
-	                             SeeUnseeNode::kUnsee;
+	                             SeeUnseeNode::kUnexplored :
+	                             SeeUnseeNode::kPreviouslySeen;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.hide_or_reveal_field(
-		   game.get_gametime(), (*get_user_class<LuaField>(L, -1))->coords(), mode);
+		p.hide_or_reveal_field((*get_user_class<LuaField>(L, -1))->coords(), mode);
 		lua_pop(L, 1);
 	}
 
@@ -728,13 +727,13 @@ int LuaPlayer::get_buildings(lua_State* L) {
 			cidx = 1;
 		}
 
-		for (uint32_t l = 0; l < vec.size(); ++l) {
-			if (vec[l].is_constructionsite) {
+		for (const auto& stats : vec) {
+			if (stats.is_constructionsite) {
 				continue;
 			}
 
 			lua_pushuint32(L, cidx++);
-			upcasted_map_object_to_lua(L, egbase.map()[vec[l].pos].get_immovable());
+			upcasted_map_object_to_lua(L, egbase.map()[stats.pos].get_immovable());
 			lua_rawset(L, -3);
 		}
 
@@ -979,7 +978,9 @@ Objective
 */
 const char LuaObjective::className[] = "Objective";
 const MethodType<LuaObjective> LuaObjective::Methods[] = {
-   METHOD(LuaObjective, remove), METHOD(LuaObjective, __eq), {nullptr, nullptr},
+   METHOD(LuaObjective, remove),
+   METHOD(LuaObjective, __eq),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaObjective> LuaObjective::Properties[] = {
    PROP_RO(LuaObjective, name),    PROP_RW(LuaObjective, title), PROP_RW(LuaObjective, body),
@@ -1141,7 +1142,8 @@ Message
 */
 const char LuaMessage::className[] = "Message";
 const MethodType<LuaMessage> LuaMessage::Methods[] = {
-   METHOD(LuaMessage, __eq), {nullptr, nullptr},
+   METHOD(LuaMessage, __eq),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaMessage> LuaMessage::Properties[] = {
    PROP_RO(LuaMessage, title),     PROP_RO(LuaMessage, body),   PROP_RO(LuaMessage, sent),

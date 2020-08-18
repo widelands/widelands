@@ -9,9 +9,9 @@ tribes:new_immovable_type {
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    programs = {
-      program = {
-         "construct=idle 5000 210000",
-         "transform=bob frisians_ship",
+      main = {
+         "construct=idle duration:5s decay_after:3m30s",
+         "transform=bob:frisians_ship",
       }
    },
    buildcost = {

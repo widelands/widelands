@@ -3,9 +3,9 @@
 -- It is documented in units.lua
 
 dirname = path.dirname(__file__)
-set_textdomain("tribes")
+push_textdomain("tribes")
 
-return {
+local r = {
    -- Basic information for the Atlantean tribe
    name = "atlanteans",
    author = _"The Widelands Development Team",
@@ -26,3 +26,5 @@ return {
       dirname .. "starting_conditions/new_world.lua";
    }
 }
+pop_textdomain()
+return r

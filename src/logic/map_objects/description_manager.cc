@@ -46,7 +46,7 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 			   }
 			   break;
 		   }
-		});
+	   });
 }
 
 DescriptionManager::~DescriptionManager() {
@@ -209,6 +209,7 @@ void DescriptionManager::load_description_on_demand(const std::string& descripti
 			load_description(description_name);
 		}
 	} else {
+		// TODO(GunChleoc): throw GameDataError once we use this for the world too
 		log("WARNING: Unknown map object type '%s'\n", description_name.c_str());
 	}
 }

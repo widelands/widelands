@@ -38,11 +38,6 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      frisians_berry_farm = true,
-      frisians_collectors_house = false,
-   },
-
    aihints = {
       collects_ware_from_map = "fruit",
       prohibited_till = 470,
@@ -53,16 +48,12 @@ tribes:new_productionsite_type {
       frisians_fruit_collector = 1
    },
 
-   outputs = {
-      "fruit"
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
          descname = _"gathering berries",
          actions = {
-            "sleep=21000",
+            "sleep=duration:21s",
             "callworker=harvest",
          }
       },

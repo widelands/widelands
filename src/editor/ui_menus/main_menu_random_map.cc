@@ -40,8 +40,6 @@ namespace {
 constexpr uint8_t kMaxMapgenPlayers = 8;
 }  // namespace
 
-using namespace Widelands;
-
 MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
                                            UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "random_map_menu", &registry, 400, 500, _("New Random Map")),
@@ -458,7 +456,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 	eia.cleanup_for_load();
 
-	UniqueRandomMapInfo map_info;
+	Widelands::UniqueRandomMapInfo map_info;
 	set_map_info(map_info);
 
 	std::stringstream sstrm;
@@ -469,7 +467,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	      << "Resources = " << resources_.get_title() << "\n"
 	      << "ID = " << map_id_edit_.text() << "\n";
 
-	MapGenerator gen(*map, map_info, egbase);
+	Widelands::MapGenerator gen(*map, map_info, egbase);
 	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")),
 	                      sstrm.str().c_str());
@@ -482,13 +480,13 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	log("Players:       %d\n", map_info.numPlayers);
 	log("World:         %s\n", map_info.world_name.c_str());
 	switch (map_info.resource_amount) {
-	case UniqueRandomMapInfo::ResourceAmount::raLow:
+	case Widelands::UniqueRandomMapInfo::ResourceAmount::raLow:
 		log("Resources:     low\n");
 		break;
-	case UniqueRandomMapInfo::ResourceAmount::raMedium:
+	case Widelands::UniqueRandomMapInfo::ResourceAmount::raMedium:
 		log("Resources:     medium\n");
 		break;
-	case UniqueRandomMapInfo::ResourceAmount::raHigh:
+	case Widelands::UniqueRandomMapInfo::ResourceAmount::raHigh:
 		log("Resources:     high\n");
 		break;
 	}
@@ -529,7 +527,7 @@ void MainMenuNewRandomMap::clicked_cancel() {
 }
 
 void MainMenuNewRandomMap::id_edit_box_changed() {
-	UniqueRandomMapInfo map_info;
+	Widelands::UniqueRandomMapInfo map_info;
 
 	std::string str = map_id_edit_.text();
 
@@ -539,9 +537,9 @@ void MainMenuNewRandomMap::id_edit_box_changed() {
 		world_names.push_back(descr.name);
 	}
 
-	if (!UniqueRandomMapInfo::set_from_id_string(map_info, str, world_names))
+	if (!Widelands::UniqueRandomMapInfo::set_from_id_string(map_info, str, world_names)) {
 		ok_button_.set_enabled(false);
-	else {
+	} else {
 		std::stringstream sstrm;
 		sstrm << map_info.mapNumber;
 		map_number_edit_.set_text(sstrm.str());
@@ -592,8 +590,9 @@ void MainMenuNewRandomMap::nr_edit_box_changed() {
 			map_id_edit_.set_text(id_string);
 
 			ok_button_.set_enabled(true);
-		} else
+		} else {
 			ok_button_.set_enabled(false);
+		}
 	} catch (...) {
 		ok_button_.set_enabled(false);
 	}

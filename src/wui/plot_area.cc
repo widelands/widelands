@@ -229,7 +229,7 @@ void draw_diagram(uint32_t time_ms,
 	how_many_ticks = std::min(how_many_ticks, calc_plot_x_max_ticks(inner_w));
 
 	// Make sure how_many_ticks is a divisor of max_x
-	while (max_x % how_many_ticks != 0) {
+	while (how_many_ticks > 0 && max_x % how_many_ticks != 0) {
 		how_many_ticks--;
 	}
 
@@ -342,9 +342,11 @@ uint32_t WuiPlotArea::get_game_time() const {
 	uint32_t game_time = 0;
 
 	// Find running time of the game, based on the plot data
-	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot)
-		if (game_time < plotdata_[plot].absolute_data->size() * sample_rate_)
+	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
+		if (game_time < plotdata_[plot].absolute_data->size() * sample_rate_) {
 			game_time = plotdata_[plot].absolute_data->size() * sample_rate_;
+		}
+	}
 	return game_time;
 }
 
@@ -436,7 +438,7 @@ void WuiPlotArea::update() {
 	// Calculate highest scale
 	highest_scale_ = 0;
 	if (plotmode_ == Plotmode::kAbsolute) {
-		for (uint32_t i = 0; i < plotdata_.size(); ++i)
+		for (uint32_t i = 0; i < plotdata_.size(); ++i) {
 			if (plotdata_[i].showplot) {
 				for (uint32_t l = 0; l < plotdata_[i].absolute_data->size(); ++l) {
 					if (highest_scale_ < (*plotdata_[i].absolute_data)[l]) {
@@ -444,6 +446,7 @@ void WuiPlotArea::update() {
 					}
 				}
 			}
+		}
 	} else {
 		for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 			if (plotdata_[plot].showplot) {
@@ -453,8 +456,9 @@ void WuiPlotArea::update() {
 				for (uint32_t i = 0; i < dataset.size(); ++i) {
 					add += dataset[i];
 					if (0 == ((i + 1) % how_many)) {
-						if (highest_scale_ < add)
+						if (highest_scale_ < add) {
 							highest_scale_ = add;
+						}
 						add = 0;
 					}
 				}
@@ -570,8 +574,9 @@ void WuiPlotArea::draw_plot_line(RenderTarget& dst,
 void WuiPlotArea::register_plot_data(uint32_t const id,
                                      std::vector<uint32_t> const* const data,
                                      RGBColor const color) {
-	if (id >= plotdata_.size())
+	if (id >= plotdata_.size()) {
 		plotdata_.resize(id + 1);
+	}
 
 	plotdata_[id].absolute_data = data;
 	plotdata_[id].relative_data.reset(
@@ -587,8 +592,9 @@ void WuiPlotArea::register_plot_data(uint32_t const id,
  * Change the plot color of a registed data stream
  */
 void WuiPlotArea::set_plotcolor(uint32_t id, RGBColor color) {
-	if (id > plotdata_.size())
+	if (id > plotdata_.size()) {
 		return;
+	}
 
 	plotdata_[id].plotcolor = color;
 	needs_update_ = true;
@@ -648,19 +654,22 @@ void DifferentialPlotArea::update() {
 	int32_t min = 0;
 
 	if (plotmode_ == Plotmode::kAbsolute) {
-		for (uint32_t i = 0; i < plotdata_.size(); ++i)
+		for (uint32_t i = 0; i < plotdata_.size(); ++i) {
 			if (plotdata_[i].showplot) {
 				for (uint32_t l = 0; l < plotdata_[i].absolute_data->size(); ++l) {
 					int32_t temp =
 					   (*plotdata_[i].absolute_data)[l] - (*negative_plotdata_[i].absolute_data)[l];
-					if (max < temp)
+					if (max < temp) {
 						max = temp;
-					if (min > temp)
+					}
+					if (min > temp) {
 						min = temp;
+					}
 				}
 			}
+		}
 	} else {
-		for (uint32_t plot = 0; plot < plotdata_.size(); ++plot)
+		for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 			if (plotdata_[plot].showplot) {
 
 				const std::vector<uint32_t>& dataset = *plotdata_[plot].absolute_data;
@@ -671,14 +680,17 @@ void DifferentialPlotArea::update() {
 				for (uint32_t i = 0; i < dataset.size(); ++i) {
 					add += dataset[i] - ndataset[i];
 					if (0 == ((i + 1) % how_many)) {
-						if (max < add)
+						if (max < add) {
 							max = add;
-						if (min > add)
+						}
+						if (min > add) {
 							min = add;
+						}
 						add = 0;
 					}
 				}
 			}
+		}
 	}
 
 	// Use equal positive and negative range
