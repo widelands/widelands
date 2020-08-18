@@ -449,12 +449,13 @@ void ShipWindow::think() {
 			   (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
 			coast_nearby |= !ship->exp_dir_swimmable(dir);
 		}
-		btn_explore_island_cw_->set_enabled(can_act && coast_nearby &&
-		                                    (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
-		btn_explore_island_ccw_->set_enabled(can_act && coast_nearby &&
-		                                     (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
+		btn_explore_island_cw_->set_enabled(
+		   can_act && coast_nearby && (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
+		btn_explore_island_ccw_->set_enabled(
+		   can_act && coast_nearby && (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
 		if (btn_sink_) {
-			btn_sink_->set_enabled(can_act && (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
+			btn_sink_->set_enabled(can_act &&
+			                       (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
 		}
 	}
 	btn_cancel_expedition_->set_enabled(

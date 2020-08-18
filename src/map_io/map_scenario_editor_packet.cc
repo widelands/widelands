@@ -126,8 +126,9 @@ void MapScenarioEditorPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 							Widelands::Waterway& ww =
 							   egbase.get_player(field.get_owned_by())->force_waterway(path);
 							if (fr.unsigned_8()) {
-								Widelands::Ferry& ferry = dynamic_cast<Widelands::Ferry&>(
-								   egbase.create_worker(coords, ww.owner().tribe().ferry(), ww.get_owner()));
+								Widelands::Ferry& ferry =
+								   dynamic_cast<Widelands::Ferry&>(egbase.create_worker(
+								      coords, ww.owner().tribe().ferry(), ww.get_owner()));
 								ww.assign_carrier(ferry, 0);
 							}
 						} break;
@@ -347,7 +348,8 @@ void MapScenarioEditorPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 					   *flag.get_economy(is_worker ? Widelands::wwWORKER : Widelands::wwWARE);
 					for (Widelands::DescriptionIndex di :
 					     (is_worker ? e.owner().tribe().workers() : e.owner().tribe().wares())) {
-						e.set_target_quantity(is_worker ? Widelands::wwWORKER : Widelands::wwWARE, di, fr.unsigned_32(), 0);
+						e.set_target_quantity(
+						   is_worker ? Widelands::wwWORKER : Widelands::wwWARE, di, fr.unsigned_32(), 0);
 					}
 				}
 

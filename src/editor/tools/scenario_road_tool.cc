@@ -74,8 +74,8 @@ static bool create_road(Widelands::EditorGameBase& egbase,
 			assert(!wws.empty());
 			for (Widelands::Waterway* w : wws) {
 				Widelands::CoordPath p(egbase.map(), w->get_path());
-				Widelands::Ferry& ferry = dynamic_cast<Widelands::Ferry&>(
-				   egbase.create_worker(p.get_coords()[w->get_idle_index()], player.tribe().ferry(), &player));
+				Widelands::Ferry& ferry = dynamic_cast<Widelands::Ferry&>(egbase.create_worker(
+				   p.get_coords()[w->get_idle_index()], player.tribe().ferry(), &player));
 				w->assign_carrier(ferry, 0);
 				ferry.set_location(w);
 			}
