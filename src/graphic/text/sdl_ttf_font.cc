@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/utf8.h"
 #include "graphic/sdl_utils.h"
 #include "graphic/text/rt_errors.h"
 
@@ -50,16 +51,29 @@ SdlTtfFont::~SdlTtfFont() {
 void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uint16_t* gh) {
 	set_style(style);
 
-	// Getting height from TTF_SizeUTF8() was sometimes causing misaligned text,
-	// so use TTF_FontHeight() to get it instead
 	int w, h;
-	TTF_SizeUTF8(font_, txt.c_str(), &w, nullptr);
-	h = TTF_FontHeight(font_);
+	TTF_SizeUTF8(font_, txt.c_str(), &w, &h);
+
+	// TODO(Niektory): A workaround for issue #530. If the descent of any character in the string
+	// exceeds the maximum descent of the font, adjust the height by 1 pixel.
+	// There has to be a better way.
+	std::string::size_type position = 0;
+	while (position < txt.size()) {
+		uint16_t codepoint = Utf8::utf8_to_unicode(txt, position);
+		int miny;
+		if (TTF_GlyphMetrics(font_, codepoint, nullptr, nullptr, &miny, nullptr, nullptr) == 0) {
+			if (miny < TTF_FontDescent(font_)) {
+				--h;
+				break;
+			}
+		}
+	}
 
 	if (style & SHADOW) {
 		w += SHADOW_OFFSET;
 		h += SHADOW_OFFSET;
 	}
+
 	*gw = w;
 	*gh = h;
 }
