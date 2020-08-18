@@ -144,7 +144,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
-                                             const Tribes& tribes)
+                                             Tribes& tribes)
    : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, tribes),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {

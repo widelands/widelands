@@ -30,7 +30,6 @@
 #include "logic/map.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/findnode.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"

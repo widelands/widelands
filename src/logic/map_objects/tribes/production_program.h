@@ -109,7 +109,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// match. Example: "fish:2".
 	static BillOfMaterials parse_bill_of_materials(const std::vector<std::string>& arguments,
 	                                               WareWorker ww,
-	                                               const Tribes& tribes);
+	                                               Tribes& tribes);
 
 	/// Returns from the program.
 	///
@@ -426,9 +426,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// produced wares are of the type specified in the group. How the produced
 	/// wares are handled is defined by the productionsite.
 	struct ActProduce : public Action {
-		ActProduce(const std::vector<std::string>& arguments,
-		           ProductionSiteDescr&,
-		           const Tribes& tribes);
+		ActProduce(const std::vector<std::string>& arguments, ProductionSiteDescr&, Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
@@ -449,9 +447,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// The recruited workers are of the type specified in the group. How the
 	/// recruited workers are handled is defined by the productionsite.
 	struct ActRecruit : public Action {
-		ActRecruit(const std::vector<std::string>& arguments,
-		           ProductionSiteDescr&,
-		           const Tribes& tribes);
+		ActRecruit(const std::vector<std::string>& arguments, ProductionSiteDescr&, Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
@@ -552,7 +548,7 @@ struct ProductionProgram : public MapObjectProgram {
 	ProductionProgram(const std::string& init_name,
 	                  const std::string& init_descname,
 	                  std::unique_ptr<LuaTable> actions_table,
-	                  const Tribes& tribes,
+	                  Tribes& tribes,
 	                  const World& world,
 	                  ProductionSiteDescr* building);
 
