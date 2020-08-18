@@ -277,16 +277,15 @@ ProductionProgram::parse_ware_type_groups(std::vector<std::string>::const_iterat
 	return result;
 }
 
-BillOfMaterials
-ProductionProgram::parse_bill_of_materials(const std::vector<std::string>& arguments,
-                                           WareWorker ww,
-                                           Tribes& tribes) {
+BillOfMaterials ProductionProgram::parse_bill_of_materials(
+   const std::vector<std::string>& arguments, WareWorker ww, Tribes& tribes) {
 	BillOfMaterials result;
 	for (const std::string& argument : arguments) {
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
 
 		const DescriptionIndex index = ww == WareWorker::wwWARE ? tribes.load_ware(produceme.first) :
 		                                                          tribes.load_worker(produceme.first);
+
 		result.push_back(std::make_pair(index, read_positive(produceme.second)));
 	}
 	return result;

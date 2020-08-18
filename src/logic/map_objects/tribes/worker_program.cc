@@ -173,9 +173,9 @@ void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std:
 		throw wexception("Usage: createware=<ware type>");
 	}
 
-	act->function = &Worker::run_createware;
-
 	const DescriptionIndex ware_index = tribes_.load_ware(cmd[0]);
+
+	act->function = &Worker::run_createware;
 	act->iparam1 = ware_index;
 	produced_ware_types_.insert(ware_index);
 }

@@ -183,6 +183,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 				throw wexception(
 				   "Immovable '%s' with type 'tree' must define a species", name().c_str());
 			}
+			species_ = table.get_string("species");
 		}
 	}
 

@@ -256,9 +256,10 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 		road_textures_.add_waterway_texture(g_gr->images().get(texture_path));
 	}
 
-	const auto load_bridge_if_present = [this](
-	   const LuaTable& animations_table, const std::string& animation_directory,
-	   Animation::Type animation_type, std::string s_dir, std::string s_type, uint32_t* id) {
+	const auto load_bridge_if_present = [this](const LuaTable& animations_table,
+	                                           const std::string& animation_directory,
+	                                           Animation::Type animation_type, std::string s_dir,
+	                                           std::string s_type, uint32_t* id) {
 		const std::string directional_name("bridge_" + s_type + "_" + s_dir);
 		if (animations_table.has_key(directional_name)) {
 			std::unique_ptr<LuaTable> animation_table = animations_table.get_table(directional_name);
@@ -268,10 +269,10 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 		}
 	};
 	// Frontier and flag animations can be a mix of file and spritesheet animations
-	// Frontier and flag animations can be a mix of file and spritesheet animations
 	const auto load_animations = [this, load_bridge_if_present](
-	   const LuaTable& animations_table, const std::string& animation_directory,
-	   Animation::Type animation_type) {
+	                                const LuaTable& animations_table,
+	                                const std::string& animation_directory,
+	                                Animation::Type animation_type) {
 		if (animations_table.has_key("frontier")) {
 			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
 			frontier_animation_id_ =
@@ -1086,5 +1087,4 @@ void TribeDescr::process_productionsites(Tribes& tribes, const World& world) {
 		}
 	}
 }
-
 }  // namespace Widelands
