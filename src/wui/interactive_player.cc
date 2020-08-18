@@ -95,11 +95,19 @@ void draw_immovables_for_visible_field(const Widelands::EditorGameBase& egbase,
                                        const float scale,
                                        const InfoToDraw info_to_draw,
                                        const Widelands::Player& player,
-                                       RenderTarget* dst) {
+                                       RenderTarget* dst,
+                                       std::set<Widelands::Coords>& deferred_coords) {
 	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
-	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
+	if (imm == nullptr) {
+		return;
+	}
+	if (imm->get_positions(egbase).front() == field.fcoords) {
 		imm->draw(egbase.get_gametime(), filter_info_to_draw(info_to_draw, imm, player),
 		          field.rendertarget_pixel, field.fcoords, scale, dst);
+	} else {
+		// This is not the building's main position so we can't draw it now.
+		// We remember it so we can draw it later.
+		deferred_coords.insert(imm->get_positions(egbase).front());
 	}
 }
 
@@ -125,16 +133,35 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 		return;
 	}
 
-	if (player_field.constructionsite.becomes) {
-		assert(field.owner != nullptr);
-		player_field.constructionsite.draw(field.rendertarget_pixel, field.fcoords, scale,
-		                                   (info_to_draw & InfoToDraw::kShowBuildings),
-		                                   field.owner->get_playercolor(), dst);
-
-	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
+	if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
-		if (info_to_draw & InfoToDraw::kShowBuildings) {
+		if (building->type() == Widelands::MapObjectType::CONSTRUCTIONSITE) {
+			player_field.partially_finished_building.constructionsite.draw(
+			   field.rendertarget_pixel, field.fcoords, scale,
+			   (info_to_draw & InfoToDraw::kShowBuildings), field.owner->get_playercolor(), dst);
+		} else if (building->type() == Widelands::MapObjectType::DISMANTLESITE &&
+		           // TODO(Nordfriese): `building` can only be nullptr in savegame
+		           // compatibility cases – remove that check after v1.0
+		           player_field.partially_finished_building.dismantlesite.building) {
+			if (info_to_draw & InfoToDraw::kShowBuildings) {
+				dst->blit_animation(
+				   field.rendertarget_pixel, field.fcoords, scale,
+				   player_field.partially_finished_building.dismantlesite.building
+				      ->get_unoccupied_animation(),
+				   0, &field.owner->get_playercolor(), 1.f,
+				   100 -
+				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
+			} else {
+				dst->blit_animation(
+				   field.rendertarget_pixel, field.fcoords, scale,
+				   player_field.partially_finished_building.dismantlesite.building
+				      ->get_unoccupied_animation(),
+				   0, nullptr, Widelands::kBuildingSilhouetteOpacity,
+				   100 -
+				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
+			}
+		} else if (info_to_draw & InfoToDraw::kShowBuildings) {
 			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
 			                    building->get_unoccupied_animation(), 0,
 			                    &field.owner->get_playercolor());
@@ -420,18 +447,22 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	assert(!get_sel_triangles());
 
 	const Widelands::Player& plr = player();
-	const auto& gbase = egbase();
+	const Widelands::EditorGameBase& gbase = egbase();
 	const Widelands::Map& map = gbase.map();
 	const uint32_t gametime = gbase.get_gametime();
 
 	Workareas workareas = get_workarea_overlays(map);
-	auto* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
+	FieldsToDraw* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
 	const auto& road_building_s = road_building_steepness_overlays();
 
 	const float scale = 1.f / given_map_view->view().zoom;
 
+	// Store the coords of partially visible buildings
+	// so we can draw them later when we get to their main position.
+	std::set<Widelands::Coords> deferred_coords;
+
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
-		auto* f = fields_to_draw->mutable_field(idx);
+		FieldsToDraw::Field* f = fields_to_draw->mutable_field(idx);
 
 		const Widelands::Player::Field& player_field =
 		   plr.fields()[map.get_index(f->fcoords, map.get_width())];
@@ -456,12 +487,19 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			draw_bridges(dst, f, f->seeing == Widelands::SeeUnseeNode::kVisible ? gametime : 0, scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 
-			// Render stuff that belongs to the node.
-			const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
+			// Draw immovables and bobs.
+			const InfoToDraw info_to_draw = get_info_to_draw(!given_map_view->is_animating());
+
 			if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
-				draw_immovables_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
+				draw_immovables_for_visible_field(
+				   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
 				draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
-			} else if (f->seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
+			} else if (deferred_coords.count(f->fcoords) > 0) {
+				// This is the main position of a building that is visible on another field
+				// so although this field isn't visible we draw the building as if it was.
+				draw_immovables_for_visible_field(
+				   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
+			} else {
 				// We never show census or statistics for objects in the fog.
 				draw_immovable_for_formerly_visible_field(*f, info_to_draw, player_field, scale, dst);
 			}

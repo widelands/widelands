@@ -101,7 +101,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:25m50s",
          "transform=deadtree4 chance:15.23%",
-         "seed=maple_winter_sapling 240",
+         "seed=maple_winter_sapling proximity:93.75%",
       },
       fall = {
          "remove=",
@@ -118,6 +118,7 @@ world:new_immovable_type{
          hotspot = { 24, 60 },
          sound_effect = {
             path = "sound/animals/bird4",
+            priority = 10
          },
       },
    },

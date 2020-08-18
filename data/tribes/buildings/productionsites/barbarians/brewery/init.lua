@@ -43,7 +43,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because ...
          descname = _"brewing strong beer",
          actions = {

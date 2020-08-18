@@ -44,6 +44,7 @@
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -91,6 +92,10 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 }  // namespace
 
 namespace Widelands {
+
+Player::Field::PartiallyFinishedBuildingDetails::PartiallyFinishedBuildingDetails() {
+	memset(this, 0, sizeof(Player::Field::PartiallyFinishedBuildingDetails));
+}
 
 /**
  * Find the longest possible enhancement chain leading to the given
@@ -355,7 +360,7 @@ void Player::play_message_sound(const Message* message) {
 			fx = message_fx_;
 		}
 		Notifications::publish(
-		   NoteSound(SoundType::kMessage, fx, message->position(), kFxPriorityAlwaysPlay));
+		   NoteSound(SoundType::kMessage, fx, message->position(), kFxMaximumPriority, true));
 	}
 }
 
@@ -1221,8 +1226,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		field.border_bl = field.border && bl_vision != SeeUnseeNode::kUnexplored &&
 		                  fields_[bl_index].border && fields_[bl_index].owner == field.owner;
 		{
-			const MapObjectDescr* map_object_descr;
-			field.constructionsite.becomes = nullptr;
+			const MapObjectDescr* map_object_descr = nullptr;
 			if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
 
@@ -1231,16 +1235,27 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 					map_object_descr = nullptr;
 				} else if (upcast(Building const, building, base_immovable)) {
 					if (building->get_position() != f) {
-						// This is not the building's main position so we can not see it.
+						// This is not the building's main position. We don't store the building's
+						// description here but in its main position instead.
 						map_object_descr = nullptr;
+						FCoords main_coords = map.get_fcoords(building->get_position());
+						Field& field_main = fields_[main_coords.field - &first_map_field];
+						if (field_main.seeing != SeeUnseeNode::kVisible) {
+							rediscover_node(map, main_coords);
+							field_main.time_node_last_unseen = egbase().get_gametime();
+							field_main.seeing = SeeUnseeNode::kPreviouslySeen;
+						}
 					} else {
 						if (upcast(ConstructionSite const, cs, building)) {
-							field.constructionsite = const_cast<ConstructionSite*>(cs)->get_info();
+							field.partially_finished_building.constructionsite =
+							   const_cast<ConstructionSite*>(cs)->get_info();
+						} else if (upcast(DismantleSite const, ds, building)) {
+							field.partially_finished_building.dismantlesite.progress =
+							   ds->get_built_per64k();
+							field.partially_finished_building.dismantlesite.building = ds->get_building();
 						}
 					}
 				}
-			} else {
-				map_object_descr = nullptr;
 			}
 			field.map_object_descr = map_object_descr;
 		}
