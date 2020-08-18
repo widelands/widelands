@@ -54,7 +54,7 @@ void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uin
 	int w, h;
 	TTF_SizeUTF8(font_, txt.c_str(), &w, &h);
 
-	// TODO(Niektory): A workaround for issue #530. If the descent of any character in the string
+	// TODO(Niektory): A workaround for issue #590. If the descent of any character in the string
 	// exceeds the maximum descent of the font, adjust the height by 1 pixel.
 	// There has to be a better way.
 	std::string::size_type position = 0;
