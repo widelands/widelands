@@ -52,9 +52,10 @@ add_directional_animation(animations, "sail", dirname, "sail", {89, 86}, 10)
 --    **animations**: A table containing all animations for this ship.
 --    Ships have an "idle", a "sinking" and a directional "sail" animation.
 tribes:new_ship_type {
+   msgctxt = "atlanteans_ship",
    name = "atlanteans_ship",
-   -- TRANSLATORS: This is the ship's name used in lists of units
-   descname = _"Ship",
+   -- TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
+   descname = pgettext("atlanteans_ship", "Ship"),
    icon = dirname .. "menu.png",
    capacity = 30,
    vision_range = 4,

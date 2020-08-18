@@ -8,7 +8,6 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
-   attributes = { "shipconstruction" },
    programs = {
       main = {
          "construct=idle duration:5s decay_after:3m30s",

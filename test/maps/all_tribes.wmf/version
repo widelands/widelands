@@ -1,0 +1,12 @@
+# Automatically created by Widelands r24458[ea6e6ce@tribes-filtering] (Debug)
+
+[global]
+map_source_url=
+map_release=
+map_creator_version="r24448[7b43008@tribes-filtering]"
+map_version_major="0"
+map_version_minor="21"
+map_version_timestamp="1581605811"
+packet_version="1"
+packet_compatibility="1"
+needs_widelands_version_after="20"

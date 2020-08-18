@@ -81,10 +81,10 @@ void MapSaver::save() {
 
 	bool is_game = is_a(Game, &egbase_);
 
-	auto set_progress_message = [this](std::string text, int step) {
-		egbase_.step_loader_ui(
+	auto set_progress_message = [](std::string text, int step) {
+		Notifications::publish(UI::NoteLoadingMessage(
 		   step < 0 ? text :
-		              (boost::format(_("Saving map: %1$s (%2$d/%3$d)")) % text % step % 22).str());
+		              (boost::format(_("Saving map: %1$s (%2$d/%3$d)")) % text % step % 22).str()));
 	};
 	set_progress_message(_("Autosaving map…"), -1);
 
@@ -254,7 +254,7 @@ void MapSaver::save() {
 		set_progress_message(_("Win condition"), 13);
 		{
 			MapWinconditionPacket p;
-			p.write(fs_, *egbase_.mutable_map(), *mos_);
+			p.write(fs_, *egbase_.mutable_map());
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
