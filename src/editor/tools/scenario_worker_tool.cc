@@ -22,6 +22,7 @@
 #include "editor/editorinteractive.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry.h"
 

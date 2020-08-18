@@ -73,14 +73,14 @@ ScenarioToolVisionOptionsMenu::ScenarioToolVisionOptionsMenu(EditorInteractive& 
 		      Widelands::get_tribeinfo(eia().egbase().map().get_scenario_player_tribe(p)).icon),
 		   sel == p);
 	}
-	modes_.add(_("Reveal"), Widelands::SeeUnseeNode::kReveal, nullptr,
-	           tool_.get_mode() == Widelands::SeeUnseeNode::kReveal,
+	modes_.add(_("Reveal"), Widelands::SeeUnseeNode::kVisible, nullptr,
+	           tool_.get_mode() == Widelands::SeeUnseeNode::kVisible,
 	           _("Make fields visible for this player"));
-	modes_.add(_("Hide"), Widelands::SeeUnseeNode::kUnexplore, nullptr,
-	           tool_.get_mode() == Widelands::SeeUnseeNode::kUnexplore,
+	modes_.add(_("Hide"), Widelands::SeeUnseeNode::kUnexplored, nullptr,
+	           tool_.get_mode() == Widelands::SeeUnseeNode::kUnexplored,
 	           _("Mark fields as never seen by the player"));
-	modes_.add(_("Previously seen"), Widelands::SeeUnseeNode::kUnsee, nullptr,
-	           tool_.get_mode() == Widelands::SeeUnseeNode::kUnsee,
+	modes_.add(_("Previously seen"), Widelands::SeeUnseeNode::kPreviouslySeen, nullptr,
+	           tool_.get_mode() == Widelands::SeeUnseeNode::kPreviouslySeen,
 	           _("Mark fields as previously revealed but not currently seen"));
 
 	box_.add(&players_, UI::Box::Resizing::kFullSize);

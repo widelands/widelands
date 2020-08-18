@@ -825,38 +825,38 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		                                  .fields()[map.get_index(field.fcoords, map.get_width())] :
 		                              nullptr;
 		if (player_field) {
-			field.vision = player_field->vision;
-			if (field.vision <= 1) {
-				field.road_e = field.vision ? player_field->r_e : Widelands::RoadSegment::kNone;
-				field.road_se = field.vision ? player_field->r_se : Widelands::RoadSegment::kNone;
-				field.road_sw = field.vision ? player_field->r_sw : Widelands::RoadSegment::kNone;
-				field.owner = field.vision && player_field->owner != 0 ?
+			field.seeing = player_field->seeing;
+			if (field.seeing != Widelands::SeeUnseeNode::kPreviouslySeen) {
+				field.road_e = field.seeing != Widelands::SeeUnseeNode::kUnexplored ? player_field->r_e : Widelands::RoadSegment::kNone;
+				field.road_se = field.seeing != Widelands::SeeUnseeNode::kUnexplored ? player_field->r_se : Widelands::RoadSegment::kNone;
+				field.road_sw = field.seeing != Widelands::SeeUnseeNode::kUnexplored ? player_field->r_sw : Widelands::RoadSegment::kNone;
+				field.owner = field.seeing != Widelands::SeeUnseeNode::kUnexplored && player_field->owner != 0 ?
 				                 ebase.get_player(player_field->owner) :
 				                 nullptr;
-				field.is_border = field.vision && player_field->border;
+				field.is_border = field.seeing != Widelands::SeeUnseeNode::kUnexplored && player_field->border;
 				// Allow the user a tiny sneak-peak at unseen fields for convenience
-				field.brightness /= field.vision ? 2.f : 8.f;
+				field.brightness /= field.seeing != Widelands::SeeUnseeNode::kUnexplored ? 2.f : 8.f;
 			}
 		}
 
-		if (field.vision > 0) {
+		if (field.seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			draw_road_building(field);
-			draw_bridges(&dst, &field, field.vision > 1 ? gametime : 0, scale);
+			draw_bridges(&dst, &field, field.seeing == Widelands::SeeUnseeNode::kVisible ? gametime : 0, scale);
 			draw_border_markers(field, scale, *fields_to_draw, &dst);
 
 			if (draw_immovables_) {
-				if (field.vision > 1) {
+				if (field.seeing == Widelands::SeeUnseeNode::kVisible) {
 					Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 					if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
 						imm->draw(
 						   gametime, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, &dst);
 					}
-				} else if (field.vision > 0) {
+				} else if (field.seeing != Widelands::SeeUnseeNode::kUnexplored) {
 					draw_immovable_for_formerly_visible_field(field, *player_field, scale, &dst);
 				}
 			}
 
-			if (draw_bobs_ && field.vision > 1) {
+			if (draw_bobs_ && field.seeing == Widelands::SeeUnseeNode::kVisible) {
 				for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 				     bob = bob->get_next_bob()) {
 					bob->draw(ebase, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, &dst);
@@ -936,7 +936,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		if (field.vision > 0) {
+		if (field.seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			const auto itb = road_building_s.find(field.fcoords);
 			if (itb != road_building_s.end()) {
 				blit_field_overlay(&dst, field, itb->second,

@@ -24,6 +24,7 @@
 #include "editor/editorinteractive.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/ferry.h"
+#include "logic/mapregion.h"
 
 static bool create_road(Widelands::EditorGameBase& egbase,
                         Widelands::Path path,
@@ -74,7 +75,7 @@ static bool create_road(Widelands::EditorGameBase& egbase,
 			for (Widelands::Waterway* w : wws) {
 				Widelands::CoordPath p(egbase.map(), w->get_path());
 				Widelands::Ferry& ferry = dynamic_cast<Widelands::Ferry&>(
-				   egbase.create_ferry(p.get_coords()[w->get_idle_index()], &player));
+				   egbase.create_worker(p.get_coords()[w->get_idle_index()], player.tribe().ferry(), &player));
 				w->assign_carrier(ferry, 0);
 				ferry.set_location(w);
 			}

@@ -471,7 +471,7 @@ void MainMenuMapOptions::clicked_ok() {
 	map.set_hint(hint_->get_text());
 	if (waterway_length_box_) {
 		assert(!eia().finalized());
-		map->set_waterway_max_length(waterway_length_box_->get_value());
+		map.set_waterway_max_length(waterway_length_box_->get_value());
 	}
 
 	map.get_suggested_teams().clear();

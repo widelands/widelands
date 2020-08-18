@@ -636,14 +636,13 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 					write(
 					   "%s:conquer(%s:get_field(%u, %u), 0)", pvar[p - 1], autogen_map_name, c.x, c.y);
 				}
-				const int vis = player.vision(map_index - 1);
-				if (vis > 0) {
+				const Widelands::SeeUnseeNode vis = player.get_vision(map_index - 1);
+				if (vis == Widelands::SeeUnseeNode::kVisible) {
 					write("%s:reveal_fields({%s:get_field(%u, %u)})", pvar[p - 1], autogen_map_name, c.x,
 					      c.y);
-					if (vis < 2) {
-						write("%s:hide_fields({%s:get_field(%u, %u)})", autogen_map_name, pvar[p - 1],
-						      c.x, c.y);
-					}
+				} else {
+					write("%s:hide_fields({%s:get_field(%u, %u)}, %s)", autogen_map_name, pvar[p - 1],
+					      c.x, c.y, Widelands::SeeUnseeNode::kUnexplored == vis ? "true" : "false");
 				}
 			}
 		}
