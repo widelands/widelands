@@ -346,7 +346,7 @@ bool SoldierPanel::handle_mousemove(
 bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		if (click_fn_) {
-			if (const Soldier* soldier = find_soldier(x, y)) {
+			if (Soldier* soldier = find_soldier(x, y)) {
 				click_fn_(soldier);
 			}
 		}

@@ -56,7 +56,7 @@ constexpr int kPadding = 5;
 
 constexpr uint16_t kShipCfgIconSize = 32;
 constexpr uint16_t kShipCfgMaxColumns = 10;
-ShipCfg::ShipCfg(InteractiveBase& ib, Ship& s)
+ShipCfg::ShipCfg(InteractiveBase& ib, Widelands::Ship& s)
    : UI::Window(&ib, "shipcfg", 0, 0, 240, 200, _("Configure Ship")),
      ibase_(ib),
      ship_(&s),
@@ -153,10 +153,10 @@ ShipCfg::ShipCfg(InteractiveBase& ib, Ship& s)
 	set_center_panel(&main_box_);
 	center_to_parent();
 }
-const Ship* ShipCfg::ship() const {
+const Widelands::Ship* ShipCfg::ship() const {
 	return ship_.get(ibase_.egbase());
 }
-Ship* ShipCfg::ship() {
+Widelands::Ship* ShipCfg::ship() {
 	return ship_.get(ibase_.egbase());
 }
 void ShipCfg::think() {

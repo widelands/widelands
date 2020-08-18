@@ -394,7 +394,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int delta) {
 					   game->get_gametime(), player_->player_number(), serial_, index, new_amount));
 				}
 			} else {
-				player_->get_economy(serial_)->set_target_quantity(index, new_amount, 0);
+				player_->get_economy(serial_)->set_target_quantity(is_wares ? Widelands::wwWARE : Widelands::wwWORKER, index, new_amount, 0);
 			}
 		}
 	}
@@ -427,7 +427,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 					   settings.workers.at(index)));
 				}
 			} else {
-				player_->get_economy(serial_)->set_target_quantity(index, settings.wares.at(index), 0);
+				player_->get_economy(serial_)->set_target_quantity(is_wares ? Widelands::wwWARE : Widelands::wwWORKER, index, settings.wares.at(index), 0);
 			}
 		}
 	}

@@ -69,7 +69,6 @@
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/trainingsite.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
@@ -837,7 +836,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 						   gametime, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, &dst);
 					}
 				} else if (field.seeing != Widelands::SeeUnseeNode::kUnexplored) {
-					draw_immovable_for_formerly_visible_field(field, *player_field, scale, &dst);
+					draw_immovable_for_formerly_visible_field(field, info_to_draw, *player_field, scale, &dst);
 				}
 			}
 

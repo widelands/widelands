@@ -354,7 +354,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			capsbuttons->add_inf_space();
 		}
 
-		if (allow_muting(building->descr())) {
+		if (ibase()->get_game() && allow_muting(building->descr())) {
 			mute_this_ =
 			   new UI::Button(capsbuttons, "mute_this", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  g_gr->images().get(pic_mute_this), "" /* set by next think() */);
@@ -561,7 +561,7 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 
 void BuildingWindow::act_mute(bool all) {
 	if (Widelands::Building* building = building_.get(parent_->egbase())) {
-		igbase()->game().send_player_toggle_mute(*building, all);
+		ibase()->game().send_player_toggle_mute(*building, all);
 	}
 }
 
