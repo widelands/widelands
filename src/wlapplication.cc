@@ -1165,7 +1165,7 @@ void WLApplication::mainmenu() {
 			messagetitle.clear();
 		}
 
-		try {
+		// NOCOM try {
 			switch (mm.run<FullscreenMenuBase::MenuTarget>()) {
 			case FullscreenMenuBase::MenuTarget::kTutorial:
 				mainmenu_tutorial();
@@ -1200,6 +1200,7 @@ void WLApplication::mainmenu() {
 			default:
 				return;
 			}
+			/*
 		} catch (const WLWarning& e) {
 			messagetitle = (boost::format("Warning: %s") % e.title()).str();
 			message = e.what();
@@ -1226,6 +1227,7 @@ void WLApplication::mainmenu() {
 			             .str();
 		}
 #endif
+*/
 	}
 }
 
@@ -1400,7 +1402,7 @@ bool WLApplication::new_game() {
 		}
 	} else {  // normal singleplayer
 		uint8_t const pn = sp.settings().playernum + 1;
-		try {
+		// try {
 			// Game controller needs the ibase pointer to init
 			// the chat
 			game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
@@ -1417,13 +1419,14 @@ bool WLApplication::new_game() {
 			game.set_game_controller(ctrl.get());
 			game.init_newgame(sp.settings());
 			game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
+			/* NOCOM
 		} catch (const std::exception& e) {
 			log("Fatal exception: %s\n", e.what());
 			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
 			game.set_game_controller(ctrl.get());
 			emergency_save(game);
 			throw;
-		}
+		} */
 	}
 	return true;
 }

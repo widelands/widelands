@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
 	          << std::endl;
 
 	WLApplication* g_app = nullptr;
-	try {
+	// NOCOM try {
 		g_app = WLApplication::get(argc, const_cast<char const**>(argv));
 		// TODO(unknown): handle exceptions from the constructor
 		g_app->run();
@@ -44,6 +44,7 @@ int main(int argc, char* argv[]) {
 		delete g_app;
 
 		return 0;
+		/*
 	} catch (const ParameterError& e) {
 		//  handle wrong commandline parameters
 		std::cerr << std::endl << e.what() << std::endl << std::endl;
@@ -75,4 +76,5 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 #endif
+*/
 }

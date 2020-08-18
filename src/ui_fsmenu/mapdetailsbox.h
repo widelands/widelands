@@ -22,7 +22,7 @@ public:
 	void update_from_savegame(GameSettingsProvider* settings);
 
 	/// passed callback is called when the select map button is clicked
-	void set_select_map_action(std::function<void()> action);
+	void set_select_map_action(const std::function<void()>& action);
 
 	void force_new_dimensions(float scale, uint32_t standard_element_height, uint32_t i);
 

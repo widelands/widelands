@@ -142,7 +142,7 @@ void MapDetailsBox::show_map_description(Widelands::Map& map, GameSettingsProvid
 	map_description_.set_text(infotext);
 }
 
-void MapDetailsBox::set_select_map_action(std::function<void()> action) {
+void MapDetailsBox::set_select_map_action(const std::function<void()>& action) {
 	select_map_.sigclicked.connect(action);
 }
 void MapDetailsBox::force_new_dimensions(float scale,

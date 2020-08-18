@@ -239,7 +239,8 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 		return;
 	}
 	PlayerSettings const position = settings().players.at(number);
-	PlayerSettings const player = settings().players.at(settings().playernum);
+	// Ensure that old player number isn't out of range when we switch to a map with less players
+	PlayerSettings const player = settings().players.at(settings().playernum < static_cast<int>(settings().players.size()) ? settings().playernum : 0);
 	if (number < settings().players.size() && (position.state == PlayerSettings::State::kOpen ||
 	                                           position.state == PlayerSettings::State::kClosed ||
 	                                           position.state == PlayerSettings::State::kComputer)) {
@@ -249,7 +250,11 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 		set_player_name(number, position.name);
 
 		set_player(settings().playernum, position);
-		set_player_name(settings().playernum, player.name);
+		// NOCOM fix player name properly. Display player name in front of each row?
+		// The condition is here to prevent crash when map is changed and the new map has less slots than the current player position.
+		if (settings().playernum < static_cast<int>(settings().players.size())) {
+			set_player_name(settings().playernum, player.name);
+		}
 		s.playernum = number;
 	}
 }
