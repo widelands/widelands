@@ -572,5 +572,6 @@ void ShipWindow::act_explore_island(IslandExploreDirection direction) {
 	}
 	if (!coast_nearby || !moveable) {
 		return;
+	}
 	ibase_.game().send_player_ship_explore_island(*ship, direction);
 }

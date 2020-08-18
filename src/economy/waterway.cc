@@ -209,8 +209,8 @@ void Waterway::postsplit(EditorGameBase& egbase, Flag& flag) {
 		// In the editor, if we have a ferry, we keep it, teleport it to the middle of the path, and
 		// create a duplicate on the new waterway
 		ferry_->set_position(egbase, path.get_coords()[get_idle_index()]);
-		Ferry& f = dynamic_cast<Ferry&>(
-		   egbase.create_worker(secondpath.get_coords()[newww.get_idle_index()], owner().tribe().ferry(), get_owner()));
+		Ferry& f = dynamic_cast<Ferry&>(egbase.create_worker(
+		   secondpath.get_coords()[newww.get_idle_index()], owner().tribe().ferry(), get_owner()));
 		newww.assign_carrier(f, 0);
 		f.set_location(&newww);
 	}
