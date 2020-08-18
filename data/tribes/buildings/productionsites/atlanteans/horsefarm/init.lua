@@ -44,14 +44,14 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
          descname = pgettext("atlanteans_building", "breeding horses"),
          actions = {
             "return=skipped unless economy needs atlanteans_horse",
             "consume=corn water",
             "sleep=duration:15s",
-            "playsound=sound/farm/horse 192",
+            "playsound=sound/farm/horse priority:50% allow_multiple",
             "animate=working duration:15s", -- Feeding cute little foals ;)
             "recruit=atlanteans_horse"
          }

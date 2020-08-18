@@ -32,7 +32,7 @@ tribes:new_worker_type {
          "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
          "animate=freeing duration:13s500ms", -- Play a freeing animation
-         "breed=fish 1",
+         "breed=fish radius:1",
          "return"
       }
    },

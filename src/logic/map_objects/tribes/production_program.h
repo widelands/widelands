@@ -272,11 +272,15 @@ struct ProductionProgram : public MapObjectProgram {
 	///       * If handling_method is None the called program continues normal,
 	///         but no statistics are calculated
 	struct ActCall : public Action {
-		ActCall(const std::vector<std::string>& arguments, const ProductionSiteDescr&);
+		ActCall(const std::vector<std::string>& arguments);
 		void execute(Game&, ProductionSite&) const override;
 
+		const std::string& program_name() const {
+			return program_name_;
+		}
+
 	private:
-		ProductionProgram* program_;
+		std::string program_name_;
 		ProgramResultHandlingMethod handling_methods_[3];
 	};
 
@@ -491,7 +495,8 @@ struct ProductionProgram : public MapObjectProgram {
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
 	struct ActPlaySound : public Action {
-		explicit ActPlaySound(const std::vector<std::string>& arguments);
+		explicit ActPlaySound(const std::vector<std::string>& arguments,
+		                      const ProductionSiteDescr& descr);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -542,6 +547,8 @@ struct ProductionProgram : public MapObjectProgram {
 	const ProductionProgram::Groups& consumed_wares_workers() const;
 	const Buildcost& produced_wares() const;
 	const Buildcost& recruited_workers() const;
+	// Throws a GameDataError if we're trying to call an unknown program
+	void validate_calls(const ProductionSiteDescr& descr) const;
 
 private:
 	std::string descname_;
