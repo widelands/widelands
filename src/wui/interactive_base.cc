@@ -333,6 +333,7 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	switch (entry) {
 	case MapviewMenuEntry::kMinimap: {
 		toggle_minimap();
+		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kDecreaseZoom: {
 		map_view()->decrease_zoom();
@@ -728,16 +729,35 @@ void InteractiveBase::draw_immovable_for_formerly_visible_field(
 		return;
 	}
 
-	if (player_field.constructionsite.becomes) {
-		assert(field.owner != nullptr);
-		player_field.constructionsite.draw(field.rendertarget_pixel, field.fcoords, scale,
-		                                   (info_to_draw & InfoToDraw::kShowBuildings),
-		                                   field.owner->get_playercolor(), dst);
-
-	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
+	if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
-		if (info_to_draw & InfoToDraw::kShowBuildings) {
+		if (building->type() == Widelands::MapObjectType::CONSTRUCTIONSITE) {
+			player_field.partially_finished_building.constructionsite.draw(
+			   field.rendertarget_pixel, field.fcoords, scale,
+			   (info_to_draw & InfoToDraw::kShowBuildings), field.owner->get_playercolor(), dst);
+		} else if (building->type() == Widelands::MapObjectType::DISMANTLESITE &&
+		           // TODO(Nordfriese): `building` can only be nullptr in savegame
+		           // compatibility cases – remove that check after v1.0
+		           player_field.partially_finished_building.dismantlesite.building) {
+			if (info_to_draw & InfoToDraw::kShowBuildings) {
+				dst->blit_animation(
+				   field.rendertarget_pixel, field.fcoords, scale,
+				   player_field.partially_finished_building.dismantlesite.building
+				      ->get_unoccupied_animation(),
+				   0, &field.owner->get_playercolor(), 1.f,
+				   100 -
+				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
+			} else {
+				dst->blit_animation(
+				   field.rendertarget_pixel, field.fcoords, scale,
+				   player_field.partially_finished_building.dismantlesite.building
+				      ->get_unoccupied_animation(),
+				   0, nullptr, Widelands::kBuildingSilhouetteOpacity,
+				   100 -
+				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
+			}
+		} else if (info_to_draw & InfoToDraw::kShowBuildings) {
 			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
 			                    building->get_unoccupied_animation(), 0,
 			                    &field.owner->get_playercolor());
@@ -957,10 +977,14 @@ bool InteractiveBase::get_display_flag(uint32_t const flag) {
 }
 
 void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
+	const uint32_t old_value = display_flags_;
 	display_flags_ &= ~flag;
 
 	if (on) {
 		display_flags_ |= flag;
+	}
+	if (old_value != display_flags_) {
+		rebuild_showhide_menu();
 	}
 }
 
@@ -1242,12 +1266,12 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 		                  egbase().map(), area.rect().center(), position_pix) /
 		               kSoundDistanceDivisor;
 
-		distance = (note.priority == kFxPriorityAlwaysPlay) ?
+		distance = (note.priority == kFxMaximumPriority) ?
 		              (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
 		              distance;
 
 		if (distance < kSoundMaxDistance) {
-			g_sh->play_fx(note.type, note.fx, note.priority,
+			g_sh->play_fx(note.type, note.fx, note.priority, note.allow_multiple,
 			              math::clamp(stereo_pos, kStereoLeft, kStereoRight), distance);
 		}
 	}

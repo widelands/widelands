@@ -44,14 +44,14 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
          descname = pgettext("empire_building", "rearing donkeys"),
          actions = {
             "return=skipped unless economy needs empire_donkey",
             "consume=wheat water",
             "sleep=duration:15s",
-            "playsound=sound/farm/donkey 192",
+            "playsound=sound/farm/donkey priority:50% allow_multiple",
             "animate=working duration:15s", -- Feeding cute little baby donkeys ;)
             "recruit=empire_donkey"
          }

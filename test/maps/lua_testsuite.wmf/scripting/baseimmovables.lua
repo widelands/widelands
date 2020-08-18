@@ -24,6 +24,10 @@ function immovable_creation_tests:test_create_tribe_immovables()
    imm = map:place_immovable("wheatfield_harvested", map:get_field(10,10), "tribes")
    imm:remove()
 end
+function immovable_creation_tests:test_create_foreign_tribe_immovables()
+   imm = map:place_immovable("pond_mature", map:get_field(10,10), "tribes")
+   imm:remove()
+end
 function immovable_creation_tests:test_create_world_immovables()
    imm = map:place_immovable("aspen_summer_old", map:get_field(10,10), "world")
    imm:remove()

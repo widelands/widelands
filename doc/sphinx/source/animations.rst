@@ -33,7 +33,8 @@ are available, and what your image files need to look like:
          fps = 4,
          sound_effect = {
             path = "sound/foo/bar",
-            priority = 128
+            priority = 50,
+            allow_multiple = true, -- If this is given and true, multiple mapobjects can play the same sound
          },
          representative_frame = 3,
       },
@@ -79,11 +80,7 @@ Let's have a detailed look at the ``idle`` animation:
    *Optional*. The frames per second for this animation if you want to deviate from the default fps. This will control the playback speed of the animation. Do not specify this value if you have only 1 animation frame.
 
 **sound_effect**
-   *Optional*. Our example will look for the sound files ``bar_00.ogg`` through ``bar_99.ogg`` in the directory ``data/sound/foo`` and play them in sequence. The priority is optional with the default being ``1``, and its range is:
-
-   * **0-127:** Probability between ``0.0`` and ``1.0``, only one instance can be playing at any time
-   * **128-254:** Probability between ``0.0`` and ``1.0``, many instances can be playing at any time
-   * **255:** Always play
+   *Optional*. Our example will look for the sound files ``bar_00.ogg`` through ``bar_99.ogg`` in the directory ``data/sound/foo`` and play one of them at random. The priority ranges from ``0.01`` to ``100`,` and it is the percent chance of the sound being played. If ``allow_multiple = true``, the same sound can be played by multiple map objects at the same time.
 
 
 .. _animations_directional:
@@ -145,7 +142,8 @@ Here's the example from above as spritesheets:
          hotspot = { 5, 7 }
          sound_effect = {
             path = "sound/foo/bar",
-            priority = 128
+            priority = 50,
+            allow_multiple = true
          },
          representative_frame = 3,
       },

@@ -55,12 +55,12 @@ public:
 	                    const std::string& msgctxt,
 	                    MapObjectType type,
 	                    const LuaTable& t,
-	                    const Tribes& tribes,
+	                    Tribes& tribes,
 	                    const World& world);
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const std::string& msgctxt,
 	                    const LuaTable& t,
-	                    const Tribes& tribes,
+	                    Tribes& tribes,
 	                    const World& world);
 
 	Building& create_object() const override;
@@ -402,7 +402,7 @@ protected:
 
 	/**
 	 * Determine the next program to be run when the last program has finished.
-	 * The default implementation starts program "work".
+	 * The default implementation starts program "main".
 	 */
 	virtual void find_and_start_next_program(Game&);
 

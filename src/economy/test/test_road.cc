@@ -26,7 +26,6 @@
 #include "economy/road.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/player.h"
 
 // Triggered by BOOST_AUTO_TEST_CASE

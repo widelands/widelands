@@ -1,0 +1,3 @@
+return {
+   empire_outpost = {},
+}

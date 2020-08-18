@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Juanjo, 2020\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -1162,8 +1162,3 @@ msgid ""
 msgstr ""
 "Heu completat la missió. Podeu avançar al proper escenari per ajudar-nos a "
 "construir una nova llar, lluny de l'abast d'aquest Déu impostor i venjatiu…"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "«%s»"

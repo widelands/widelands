@@ -1077,9 +1077,10 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(RoadBase)
-	static int create_new_worker(Widelands::RoadBase& r,
-	                             Widelands::EditorGameBase&,
-	                             const Widelands::WorkerDescr*);
+	static bool create_new_worker(lua_State* L,
+	                              Widelands::RoadBase& r,
+	                              Widelands::EditorGameBase&,
+	                              const Widelands::WorkerDescr*);
 };
 
 class LuaConstructionSite : public LuaBuilding {
@@ -1260,9 +1261,10 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(ProductionSite)
-	static int create_new_worker(Widelands::ProductionSite& ps,
-	                             Widelands::EditorGameBase&,
-	                             const Widelands::WorkerDescr*);
+	static bool create_new_worker(lua_State* L,
+	                              Widelands::ProductionSite& ps,
+	                              Widelands::EditorGameBase&,
+	                              const Widelands::WorkerDescr*);
 };
 
 class LuaMilitarySite : public LuaBuilding {

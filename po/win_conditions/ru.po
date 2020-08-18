@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-04-24 11:53+0000\n"
-"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-07-23 07:48+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -138,12 +138,12 @@ msgstr[1] "Всего: %i очка"
 msgstr[2] "Всего очков: %i"
 msgstr[3] "Всего очков: %i"
 
-#: ../../data/scripting/win_conditions/collectors.lua:169
+#: ../../data/scripting/win_conditions/collectors.lua:170
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Статус для команды %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:171
+#: ../../data/scripting/win_conditions/collectors.lua:172
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -208,12 +208,12 @@ msgstr[1] "Удерживайте территорию ещё в течение 
 msgstr[2] "Удерживайте территорию ещё в течение %i минут, чтобы победить."
 msgstr[3] "Удерживайте территорию ещё в течение %i минут, чтобы победить."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:238
+#: ../../data/scripting/win_conditions/territorial_functions.lua:239
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%s контролирует более половины карты."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:239
+#: ../../data/scripting/win_conditions/territorial_functions.lua:240
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
@@ -247,9 +247,9 @@ msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes, or the one with the most territory after 4 hours, "
-"whichever comes first.If the peaceful mode is selected, the game ends if one"
-" player has more land than any other player could gain."
-msgstr "Каждый игрок или команда пытается захватить более половины площади карты. Победителем станет тот, которая может удерживать эту зону в течение не менее 20 минут, или тот, кто имеет наибольшую территорию через 4 часа, в зависимости от того, что наступит раньше. Если выбран мирный режим, игра заканчивается, если один игрок имеет больше земли, чем любой другой игрок мог бы получить."
+"whichever comes first. If the peaceful mode is selected, the game ends if "
+"one player has more land than any other player could gain."
+msgstr ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'

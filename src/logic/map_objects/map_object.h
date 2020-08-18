@@ -30,6 +30,7 @@
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/info_to_draw.h"
+#include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
@@ -40,47 +41,6 @@ namespace Widelands {
 
 class MapObject;
 class Player;
-
-// This enum lists the available classes of Map Objects.
-enum class MapObjectType : uint8_t {
-	MAPOBJECT = 0,  // Root superclass
-
-	WARE,  //  class WareInstance
-	BATTLE,
-	SHIP_FLEET,
-	FERRY_FLEET,
-
-	BOB = 10,  // Bob
-	CRITTER,   // Bob -- Critter
-	SHIP,      // Bob -- Ship
-	WORKER,    // Bob -- Worker
-	CARRIER,   // Bob -- Worker -- Carrier
-	SOLDIER,   // Bob -- Worker -- Soldier
-	FERRY,     // Bob -- Worker -- Ferry
-
-	// everything below is at least a BaseImmovable
-	IMMOVABLE = 30,
-
-	// everything below is at least a PlayerImmovable
-	FLAG = 40,  // Flag
-	PORTDOCK,   // Portdock
-	ROADBASE,   // Roadbase
-	ROAD,       // Roadbase -- Road
-	WATERWAY,   // Roadbase -- Waterway
-
-	// everything below is at least a Building
-	BUILDING = 100,    // Building
-	CONSTRUCTIONSITE,  // Building -- Constructionsite
-	DISMANTLESITE,     // Building -- Dismantlesite
-	WAREHOUSE,         // Building -- Warehouse
-	MARKET,            // Building -- Market
-	PRODUCTIONSITE,    // Building -- Productionsite
-	MILITARYSITE,      // Building -- Productionsite -- Militarysite
-	TRAININGSITE       // Building -- Productionsite -- Trainingsite
-};
-
-// Returns a string representation for 'type'.
-std::string to_string(MapObjectType type);
 
 /**
  * Base class for descriptions of worker, files and so on. This must just

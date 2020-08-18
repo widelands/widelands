@@ -46,14 +46,14 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
          descname = _"brewing beer",
          actions = {
             "return=skipped unless economy needs beer",
             "consume=water wheat",
             "sleep=duration:30s",
-            "playsound=sound/empire/beerbubble 180",
+            "playsound=sound/empire/beerbubble priority:40% allow_multiple",
             "animate=working duration:30s",
             "produce=beer"
          }

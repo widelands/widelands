@@ -74,7 +74,7 @@ Player* PlayersManager::add_player(PlayerNumber const player_number,
 		}
 	}
 	const TribeDescr* player_tribe =
-	   egbase_.tribes().get_tribe_descr(egbase_.tribes().tribe_index(tribe));
+	   egbase_.tribes().get_tribe_descr(egbase_.mutable_tribes()->load_tribe(tribe));
 	if (player_tribe == nullptr && (is_a(Game, &egbase_) || !tribe.empty())) {
 		// empty (= random) tribe is allowed in editor
 		throw wexception("Tribe '%s' for player %d '%s' does not exist!", tribe.c_str(),

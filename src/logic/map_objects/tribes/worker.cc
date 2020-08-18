@@ -1087,8 +1087,8 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
  * Whether the effect actually gets played is decided only by the sound server.
  */
 bool Worker::run_playsound(Game& game, State& state, const Action& action) {
-	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, action.iparam2, get_position(), action.iparam1));
+	Notifications::publish(NoteSound(
+	   SoundType::kAmbient, action.iparam2, get_position(), action.iparam1, action.iparam3 == 1));
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -2623,8 +2623,16 @@ void Worker::fugitive_update(Game& game, State& state) {
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
 		if (flag->get_owner() == get_owner() && flag->economy(wwWORKER).warehouses().size()) {
 			set_location(flag);
-			if (WareInstance* const ware = fetch_carried_ware(game)) {
-				flag->add_ware(game, *ware);
+			if (does_carry_ware()) {
+				if (flag->has_capacity()) {
+					if (WareInstance* const ware = fetch_carried_ware(game)) {
+						molog(
+						   "[fugitive] is on flag, drop carried ware %s\n", ware->descr().name().c_str());
+						flag->add_ware(game, *ware);
+					}
+				} else {
+					molog("[fugitive] is on flag, which has no capacity for the carried ware!\n");
+				}
 			}
 			return pop_task(game);
 		}

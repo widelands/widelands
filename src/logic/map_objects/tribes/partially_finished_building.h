@@ -80,10 +80,14 @@ public:
 	const BuildingDescr& building() const {
 		return *building_;
 	}
+	const BuildingDescr* get_building() const {
+		return building_;
+	}
 
 	bool has_builder(const EditorGameBase& e) const {
 		return builder_.get(e) != nullptr;
 	}
+
 	uint32_t get_built_per64k() const;
 	Request* get_builder_request() {
 		return builder_request_;

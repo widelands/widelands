@@ -13,6 +13,7 @@ world:new_immovable_type{
          hotspot = { 10, 16 },
          sound_effect = {
             path = "sound/animals/frog",
+            priority = 0.01
          },
       },
    }

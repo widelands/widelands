@@ -45,7 +45,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -60,7 +60,7 @@ tribes:new_productionsite_type {
             -- time total: 33
             "return=skipped unless economy needs ration",
             "consume=empire_bread,fish,meat",
-            "playsound=sound/empire/taverns/ration 100",
+            "playsound=sound/empire/taverns/ration priority:80%",
             "animate=working duration:23s",
             "sleep=duration:10s",
             "produce=ration"
@@ -73,7 +73,7 @@ tribes:new_productionsite_type {
             -- time total: 40
             "return=skipped unless economy needs meal",
             "consume=empire_bread fish,meat",
-            "playsound=sound/empire/taverns/meal 100",
+            "playsound=sound/empire/taverns/meal priority:80%",
             "animate=working duration:30s",
             "sleep=duration:10s",
             "produce=meal"

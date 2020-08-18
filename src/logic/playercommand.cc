@@ -29,7 +29,6 @@
 #include "io/filewrite.h"
 #include "io/streamwrite.h"
 #include "logic/game.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -1688,19 +1687,22 @@ void CmdEnemyFlagAction::execute(Game& game) {
 		}
 
 		if (const Building* const building = flag->get_building()) {
-			if (player->is_hostile(flag->owner()) &&
-			    player->is_seeing(Map::get_index(building->get_position(), game.map().get_width()))) {
-				std::vector<Soldier*> result;
-				for (Serial s : soldiers) {
-					if (Soldier* soldier = dynamic_cast<Soldier*>(game.objects().get_object(s))) {
-						result.push_back(soldier);
+			if (player->is_hostile(flag->owner())) {
+				for (Widelands::Coords& coords : building->get_positions(game)) {
+					if (player->is_seeing(Map::get_index(coords, game.map().get_width()))) {
+						std::vector<Soldier*> result;
+						for (Serial s : soldiers) {
+							if (Soldier* soldier = dynamic_cast<Soldier*>(game.objects().get_object(s))) {
+								result.push_back(soldier);
+							}
+						}
+						player->enemyflagaction(*flag, sender(), result);
+						return;
 					}
 				}
-				player->enemyflagaction(*flag, sender(), result);
-			} else {
-				log("Cmd_EnemyFlagAction::execute: ERROR: wrong player target not "
-				    "seen or not hostile.\n");
 			}
+			log("Cmd_EnemyFlagAction::execute: ERROR: wrong player target not "
+			    "seen or not hostile.\n");
 		}
 	}
 }

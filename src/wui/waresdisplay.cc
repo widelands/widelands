@@ -33,7 +33,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "logic/player.h"
 #include "ui_basic/window.h"
 
 constexpr int kWareMenuInfoSize = 12;
@@ -156,6 +155,12 @@ bool AbstractWaresDisplay::handle_mousemove(uint8_t state, int32_t x, int32_t y,
 	return true;
 }
 
+void AbstractWaresDisplay::handle_mousein(bool inside) {
+	if (!inside) {
+		finalize_anchor_selection();
+	}
+}
+
 bool AbstractWaresDisplay::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		Widelands::DescriptionIndex ware = ware_at_point(x, y);
@@ -184,24 +189,7 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 	if (btn != SDL_BUTTON_LEFT || selection_anchor_ == Widelands::INVALID_INDEX) {
 		return UI::Panel::handle_mouserelease(btn, x, y);
 	}
-
-	bool to_be_selected = !ware_selected(selection_anchor_);
-
-	for (const Widelands::DescriptionIndex& index : indices_) {
-		if (in_selection_[index]) {
-			if (to_be_selected) {
-				select_ware(index);
-			} else {
-				unselect_ware(index);
-			}
-		}
-	}
-
-	// Release anchor, empty selection
-	selection_anchor_ = Widelands::INVALID_INDEX;
-	for (auto& resetme : in_selection_) {
-		in_selection_[resetme.first] = false;
-	}
+	finalize_anchor_selection();
 	return true;
 }
 
@@ -318,6 +306,30 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y) {
 				}
 			}
 		}
+	}
+}
+
+void AbstractWaresDisplay::finalize_anchor_selection() {
+	if (selection_anchor_ == Widelands::INVALID_INDEX) {
+		return;
+	}
+
+	bool to_be_selected = !ware_selected(selection_anchor_);
+
+	for (const Widelands::DescriptionIndex& index : indices_) {
+		if (in_selection_[index]) {
+			if (to_be_selected) {
+				select_ware(index);
+			} else {
+				unselect_ware(index);
+			}
+		}
+	}
+
+	// Release anchor, empty selection
+	selection_anchor_ = Widelands::INVALID_INDEX;
+	for (auto& resetme : in_selection_) {
+		in_selection_[resetme.first] = false;
 	}
 }
 
