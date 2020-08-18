@@ -84,16 +84,17 @@ void MapDetailsBox::show_map_description_savegame(const GameSettings& game_setti
 		}
 
 		// Check if this is a list of names, or just one name:
-		if (current_player.name.compare(0, 1, " "))
+		if (current_player.name.compare(0, 1, " ")) {
 			infotext += current_player.name;
-		else {
+		} else {
 			std::string temp = current_player.name;
 			bool firstrun = true;
 			while (temp.find(' ', 1) < temp.size()) {
-				if (firstrun)
+				if (firstrun) {
 					firstrun = false;
-				else
+				} else {
 					infotext += "\n    ";
+				}
 				uint32_t x = temp.find(' ', 1);
 				infotext += temp.substr(1, x);
 				temp = temp.substr(x + 1, temp.size());
@@ -130,8 +131,9 @@ void MapDetailsBox::show_map_description(Widelands::Map& map, GameSettingsProvid
 	             static_cast<unsigned int>(game_settings.players.size()))
 	               .str() +
 	            "\n";
-	if (game_settings.scenario)
+	if (game_settings.scenario) {
 		infotext += std::string("• ") + (boost::format(_("Scenario mode selected"))).str() + "\n";
+	}
 	infotext += "\n";
 	infotext += map.get_description();
 	infotext += "\n";

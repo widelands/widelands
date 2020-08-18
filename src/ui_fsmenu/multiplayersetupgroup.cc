@@ -754,6 +754,7 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 	}
 }
 
+// NOCOM When branch is ready, delete max_height if it's still unused
 void MultiPlayerSetupGroup::force_new_dimensions(float scale,
                                                  uint32_t max_width,
                                                  uint32_t max_height,

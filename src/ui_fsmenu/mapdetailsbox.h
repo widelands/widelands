@@ -8,7 +8,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
-struct GameSettingsProvider;
 class MapDetailsBox : public UI::Box {
 public:
 	MapDetailsBox(Panel* parent,
