@@ -15,9 +15,9 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:57s500ms",
-         "remove=21",
+         "remove=chance:8.20%",
          "grow=maple_winter_pole",
       },
    },
@@ -42,9 +42,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:52s500ms",
-         "remove=19",
+         "remove=chance:7.42%",
          "grow=maple_winter_mature",
       },
    },
@@ -69,9 +69,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:50s",
-         "remove=18",
+         "remove=chance:7.03%",
          "grow=maple_winter_old",
       },
    },
@@ -98,9 +98,9 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m50s",
-         "transform=deadtree4 39",
+         "transform=deadtree4 chance:15.23%",
          "seed=maple_winter_sapling 240",
       },
       fall = {
@@ -118,6 +118,7 @@ world:new_immovable_type{
          hotspot = { 24, 60 },
          sound_effect = {
             path = "sound/animals/bird4",
+            priority = 10
          },
       },
    },

@@ -51,13 +51,13 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
             "return=skipped unless economy needs iron_ore",
             "consume=ration beer",
-            "sleep=43000",
+            "sleep=duration:43s",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
@@ -67,7 +67,7 @@ tribes:new_productionsite_type {
          descname = _"mining iron",
          actions = {
             "animate=working duration:14s",
-            "mine=iron 2 50 5 17",
+            "mine=iron radius:2 yield:50% when_empty:5% experience_on_fail:17%",
             "produce=iron_ore",
          }
       },

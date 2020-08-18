@@ -39,16 +39,12 @@ tribes:new_productionsite_type {
       empire_carrier = 1
    },
 
-   outputs = {
-      "water"
-   },
-
    programs = {
-      work = {
+      main = {
          descname = "working",
          actions = {
             "sleep=30000",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "mine=water 5 100 5 2",
             "produce=water"
          }

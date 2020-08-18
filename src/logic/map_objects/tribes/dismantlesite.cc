@@ -124,7 +124,7 @@ Initialize the construction site by starting orders
 */
 bool DismantleSite::init(EditorGameBase& egbase) {
 	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
+	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxMaximumPriority, true));
 
 	PartiallyFinishedBuilding::init(egbase);
 

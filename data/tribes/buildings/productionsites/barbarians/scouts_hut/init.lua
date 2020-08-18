@@ -44,12 +44,12 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
          descname = _"scouting",
          actions = {
             "consume=ration",
-            "sleep=30000",
+            "sleep=duration:30s",
             "callworker=scout"
          }
       },

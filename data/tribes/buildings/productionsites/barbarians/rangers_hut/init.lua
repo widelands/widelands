@@ -44,12 +44,12 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
          descname = _"planting trees",
          actions = {
             "callworker=plant",
-            "sleep=11500"
+            "sleep=duration:11s500ms"
          }
       },
    },

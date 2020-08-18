@@ -51,13 +51,13 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
          descname = pgettext("empire_building", "recruiting soldier"),
          actions = {
             "return=skipped unless economy needs empire_soldier",
             "consume=armor_helmet spear_wooden empire_recruit",
-            "sleep=15000",
+            "sleep=duration:15s",
             "animate=working duration:15s",
             "recruit=empire_soldier"
          }

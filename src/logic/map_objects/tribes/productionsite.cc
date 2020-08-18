@@ -61,7 +61,7 @@ void parse_working_positions(const Tribes& tribes,
 			if (!tribes.worker_exists(woi)) {
 				throw wexception("invalid");
 			}
-			working_positions->push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
+			working_positions->push_back(std::make_pair(woi, amount));
 		} catch (const WException& e) {
 			throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 		}
@@ -177,13 +177,33 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			if (program_descname == program_descname_unlocalized) {
 				program_descname = pgettext_expr(msgctxt_char, program_descname_unlocalized.c_str());
 			}
-			programs_[program_name] = std::unique_ptr<ProductionProgram>(
-			   new ProductionProgram(program_name, program_descname,
-			                         program_table->get_table("actions"), tribes, world, this));
+			if (program_name == "work") {
+				log("WARNING: The main program for the building %s should be renamed from 'work' to "
+				    "'main'\n",
+				    name().c_str());
+				programs_[MapObjectProgram::kMainProgram] = std::unique_ptr<ProductionProgram>(
+				   new ProductionProgram(MapObjectProgram::kMainProgram, program_descname,
+				                         program_table->get_table("actions"), tribes, world, this));
+			} else {
+				programs_[program_name] = std::unique_ptr<ProductionProgram>(
+				   new ProductionProgram(program_name, program_descname,
+				                         program_table->get_table("actions"), tribes, world, this));
+			}
 		} catch (const std::exception& e) {
 			throw GameDataError("%s: Error in productionsite program %s: %s", name().c_str(),
 			                    program_name.c_str(), e.what());
 		}
+	}
+
+	if (init_type == MapObjectType::PRODUCTIONSITE &&
+	    programs_.count(MapObjectProgram::kMainProgram) == 0) {
+		throw GameDataError(
+		   "%s: Error in productionsite programs: no 'main' program defined", name().c_str());
+	}
+
+	// Check ActCall
+	for (const auto& caller : programs_) {
+		caller.second->validate_calls(*this);
 	}
 
 	if (table.has_key("indicate_workarea_overlaps")) {
@@ -782,7 +802,7 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 }
 
 void ProductionSite::find_and_start_next_program(Game& game) {
-	program_start(game, "work");
+	program_start(game, MapObjectProgram::kMainProgram);
 }
 
 /**

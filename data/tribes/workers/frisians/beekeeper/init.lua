@@ -17,7 +17,7 @@ tribes:new_worker_type {
       bees = {
          "findobject=attrib:flowering radius:5",
          "walk=object",
-         "animate=beeswarm 10000",
+         "animate=beeswarm duration:10s",
          "createware=honey",
          "return"
       }

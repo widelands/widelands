@@ -25,12 +25,8 @@ tribes:new_productionsite_type {
       empire_farmer = 1
    },
 
-   outputs = {
-      "wheat"
-   },
-
    programs = {
-      work = {
+      main = {
          descname = "working",
          actions = {
             "call=plant",

@@ -27,13 +27,20 @@
 #include "scripting/lua_interface.h"
 
 namespace {
-// Read RGB color from LuaTable
+// Read RGB(A) color from LuaTable
 RGBColor read_rgb_color(const LuaTable& table) {
 	std::vector<int> rgbcolor = table.array_entries<int>();
 	if (rgbcolor.size() != 3) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
 	}
 	return RGBColor(rgbcolor[0], rgbcolor[1], rgbcolor[2]);
+}
+RGBAColor read_rgba_color(const LuaTable& table) {
+	std::vector<int> rgbacolor = table.array_entries<int>();
+	if (rgbacolor.size() != 4) {
+		throw wexception("Expected 4 entries for RGBA color, but got %" PRIuS ".", rgbacolor.size());
+	}
+	return RGBAColor(rgbacolor[0], rgbacolor[1], rgbacolor[2], rgbacolor[3]);
 }
 
 // Read font style from LuaTable
@@ -123,10 +130,10 @@ void StyleManager::init() {
 	// Tabpanels
 	element_table = table->get_table("tabpanels");
 	style_table = element_table->get_table("fsmenu");
-	add_tabpanel_style(UI::TabPanelStyle::kFsMenu, *style_table->get_table("menu").get());
+	add_tabpanel_style(UI::TabPanelStyle::kFsMenu, *style_table->get_table("menu"));
 	style_table = element_table->get_table("wui");
-	add_tabpanel_style(UI::TabPanelStyle::kWuiLight, *style_table->get_table("light").get());
-	add_tabpanel_style(UI::TabPanelStyle::kWuiDark, *style_table->get_table("dark").get());
+	add_tabpanel_style(UI::TabPanelStyle::kWuiLight, *style_table->get_table("light"));
+	add_tabpanel_style(UI::TabPanelStyle::kWuiDark, *style_table->get_table("dark"));
 	check_completeness(
 	   "tabpanels", tabpanelstyles_.size(), static_cast<size_t>(UI::TabPanelStyle::kWuiDark));
 
@@ -140,18 +147,18 @@ void StyleManager::init() {
 	// Dropdowns
 	element_table = table->get_table("dropdowns");
 	style_table = element_table->get_table("fsmenu");
-	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &dropdownstyles_);
+	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu"), &dropdownstyles_);
 	style_table = element_table->get_table("wui");
-	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &dropdownstyles_);
+	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu"), &dropdownstyles_);
 	check_completeness(
 	   "dropdowns", dropdownstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Scrollbars
 	element_table = table->get_table("scrollbars");
 	style_table = element_table->get_table("fsmenu");
-	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &scrollbarstyles_);
+	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu"), &scrollbarstyles_);
 	style_table = element_table->get_table("wui");
-	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &scrollbarstyles_);
+	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu"), &scrollbarstyles_);
 	check_completeness(
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
@@ -187,6 +194,8 @@ void StyleManager::init() {
 		throw wexception("Font size too small for minimum_font_size, must be at least 1!");
 	}
 	minimap_icon_frame_ = read_rgb_color(*table->get_table("minimap_icon_frame"));
+	window_border_focused_ = read_rgba_color(*table->get_table("window_border_focused"));
+	window_border_unfocused_ = read_rgba_color(*table->get_table("window_border_unfocused"));
 
 	// Fonts
 	element_table = table->get_table("fonts");

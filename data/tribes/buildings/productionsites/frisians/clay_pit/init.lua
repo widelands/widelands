@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start making clay because ...
          descname = _"making clay",
          actions = {
@@ -72,9 +72,9 @@ tribes:new_productionsite_type {
             "return=failed unless site has water",
             "callworker=dig",
             "consume=water",
-            "sleep=22000",
+            "sleep=duration:22s",
             "animate=working duration:17s",
-            "sleep=1000",
+            "sleep=duration:1s",
             "produce=clay"
          },
       },

@@ -59,16 +59,27 @@ jobs:
       cache: false
 
     - stage: compiler
-      name: "Clang-tidy"
-      compiler: clang
-      script: ./.travis.sh clang-tidy
+      name: "DEBUG: macOS 10.14 with Xcode 11.3"
+      os: osx
+      osx_image: xcode11.3
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
+    - name: "RELEASE: macOS 10.14 with Xcode 11.3"
+      os: osx
+      osx_image: xcode11.3
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
+
+    # Separate stage to speed things up in case the regression test suite fails
+    - stage: testsuite
+      name: "DEBUG: Ubuntu 18.04 with gcc 9.1"
+      os: linux
+      dist: bionic
       cache: false
       addons:
         apt:
+          sources:
+            - sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
-            - clang
-            - clang-tidy
-            - python-yaml
+            - g++-9
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -81,16 +92,42 @@ jobs:
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
             - zlib1g-dev
-      # Run this stage to test whether there are any error during compiling.
-      # We use macOS, since it is the fastest to build (but also the most susceptible to transient errors…)
-    - name: "DEBUG: macOS 10.14 with Xcode 11.3"
-      os: osx
-      osx_image: xcode11.3
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
-    - name: "RELEASE: macOS 10.14 with Xcode 11.3"
-      os: osx
-      osx_image: xcode11.3
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=gcc-9 CXX=g++-9
+      services: xvfb
+    - name: "DEBUG: Ubuntu 14.04 with gcc 4.8"
+      os: linux
+      dist: trusty
+      cache: false
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
+      before_script: 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
+    - name: "RELEASE: Ubuntu 18.04 with gcc 9.1"
+      os: linux
+      dist: bionic
+      addons:
+        apt:
+          sources:
+            - sourceline: 'ppa:ubuntu-toolchain-r/test'
+          packages:
+            - g++-9
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - zlib1g-dev
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=gcc-9 CXX=g++-9
+      services: xvfb
+    - name: "RELEASE: Ubuntu 14.04 with gcc 4.8"
+      os: linux
+      dist: trusty
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
+      before_script: 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
 
     - stage: build
     ### DEBUG BUILDS
@@ -174,30 +211,6 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
         - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
-    - name: "DEBUG: Ubuntu 18.04 with gcc 9.1"
-      os: linux
-      dist: bionic
-      cache: false
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:ubuntu-toolchain-r/test'
-          packages:
-            - g++-9
-            - libboost-dev
-            - libboost-regex-dev
-            - libboost-system-dev
-            - libboost-test-dev
-            - libglew-dev
-            - libicu-dev
-            - libpng-dev
-            - libsdl2-dev
-            - libsdl2-image-dev
-            - libsdl2-mixer-dev
-            - libsdl2-ttf-dev
-            - zlib1g-dev
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=gcc-9 CXX=g++-9
-      services: xvfb
     - name: "DEBUG: Ubuntu 18.04 with gcc 7.4"
       os: linux
       dist: bionic
@@ -210,12 +223,6 @@ jobs:
       cache: false
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
       services: xvfb
-    - name: "DEBUG: Ubuntu 14.04 with gcc 4.8"
-      os: linux
-      dist: trusty
-      cache: false
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
-      before_script: 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
     - name: "DEBUG: macOS 10.13 with Xcode 10.1"
       os: osx
       osx_image: xcode10.1
@@ -297,29 +304,6 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
         - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
-    - name: "RELEASE: Ubuntu 18.04 with gcc 9.1"
-      os: linux
-      dist: bionic
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:ubuntu-toolchain-r/test'
-          packages:
-            - g++-9
-            - libboost-dev
-            - libboost-regex-dev
-            - libboost-system-dev
-            - libboost-test-dev
-            - libglew-dev
-            - libicu-dev
-            - libpng-dev
-            - libsdl2-dev
-            - libsdl2-image-dev
-            - libsdl2-mixer-dev
-            - libsdl2-ttf-dev
-            - zlib1g-dev
-      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=gcc-9 CXX=g++-9
-      services: xvfb
     - name: "RELEASE: Ubuntu 18.04 with gcc 7.4"
       os: linux
       dist: bionic
@@ -330,11 +314,6 @@ jobs:
       dist: xenial
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
       services: xvfb
-    - name: "RELEASE: Ubuntu 14.04 with gcc 4.8"
-      os: linux
-      dist: trusty
-      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
-      before_script: 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
     - name: "RELEASE: macOS 10.13 with Xcode 10.1"
       os: osx
       osx_image: xcode10.1
@@ -349,4 +328,5 @@ script: ./.travis.sh build
 stages:
   - tests
   - compiler
+  - testsuite
   - build

@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -78,7 +78,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs mead or workers need experience",
             "consume=barley water honey",
-            "sleep=30000",
+            "sleep=duration:30s",
             "animate=working duration:35s",
             "produce=mead"
          }
@@ -89,7 +89,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs mead or workers need experience",
             "consume=barley water honey",
-            "sleep=30000",
+            "sleep=duration:30s",
             "animate=working duration:35s",
             "produce=mead"
          }
@@ -100,7 +100,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs beer",
             "consume=barley water",
-            "sleep=30000",
+            "sleep=duration:30s",
             "animate=working duration:30s",
             "produce=beer"
          }

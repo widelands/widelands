@@ -37,12 +37,8 @@ tribes:new_productionsite_type {
       empire_farmer = 1
    },
 
-   outputs = {
-      "wheat"
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {

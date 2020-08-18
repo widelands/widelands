@@ -193,7 +193,7 @@ void BaseDropdown::layout() {
 	}
 
 	// Drop up instead of down if it doesn't fit
-	if (new_list_y + list_->get_h() > g_gr->get_yres()) {
+	if (new_list_y + display_button_.get_h() + list_->get_h() > g_gr->get_yres()) {
 		list_offset_y_ = -list_->get_h();
 	} else {
 		list_offset_y_ = display_button_.get_h();
@@ -333,12 +333,9 @@ void BaseDropdown::set_pos(Vector2i point) {
 }
 
 void BaseDropdown::clear() {
-	close();
 	list_->clear();
 	current_selection_ = list_->selection_index();
 	list_->set_size(list_->get_w(), 0);
-	list_->set_visible(false);
-	set_layout_toplevel(false);
 }
 
 void BaseDropdown::think() {

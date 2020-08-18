@@ -329,6 +329,7 @@ Building::Building(const BuildingDescr& building_descr)
      was_immovable_(nullptr),
      attack_target_(nullptr),
      soldier_control_(nullptr),
+     mute_messages_(false),
      is_destruction_blocked_(false) {
 }
 
@@ -461,11 +462,19 @@ bool Building::init(EditorGameBase& egbase) {
 	// Start the animation
 	start_animation(egbase, descr().get_unoccupied_animation());
 
+	owner_->add_seer(*this);
+	if (descr().type() == MapObjectType::WAREHOUSE) {
+		set_seeing(true);
+	}
+
 	leave_time_ = egbase.get_gametime();
 	return true;
 }
 
 void Building::cleanup(EditorGameBase& egbase) {
+	owner_->remove_seer(
+	   *this, Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().vision_range()));
+
 	if (defeating_player_) {
 		Player* defeating_player = egbase.get_player(defeating_player_);
 		if (descr().get_conquers()) {
@@ -809,7 +818,7 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 }
 
 void Building::add_worker(Worker& worker) {
-	if (!get_workers().size()) {
+	if (get_workers().empty()) {
 		if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
 			set_seeing(true);
 		}
@@ -820,7 +829,7 @@ void Building::add_worker(Worker& worker) {
 
 void Building::remove_worker(Worker& worker) {
 	PlayerImmovable::remove_worker(worker);
-	if (!get_workers().size()) {
+	if (get_workers().empty() && descr().type() != MapObjectType::WAREHOUSE) {
 		set_seeing(false);
 	}
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
@@ -843,20 +852,10 @@ void Building::set_soldier_control(SoldierControl* new_soldier_control) {
  * \note Warehouses always see their surroundings; this is handled separately.
  */
 void Building::set_seeing(bool see) {
-	if (see == seeing_) {
-		return;
-	}
-
-	Player* player = get_owner();
-	const Map& map = player->egbase().map();
-
-	if (see) {
-		player->see_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
-	} else {
-		player->unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
-	}
-
 	seeing_ = see;
+	get_owner()->update_vision(
+	   Area<FCoords>(owner().egbase().map().get_fcoords(get_position()), descr().vision_range()),
+	   see);
 }
 
 /**
@@ -886,6 +885,10 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
+	if (mute_messages() || owner().is_muted(game.tribes().safe_building_index(descr().name()))) {
+		return;
+	}
+
 	const std::string rt_description =
 	   as_mapobject_message(descr().name(), descr().representative_image()->width(), description,
 	                        &owner().get_playercolor());
