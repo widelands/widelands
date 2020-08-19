@@ -1,0 +1,188 @@
+Takao Fonts
+===========
+(c) 2010-2015 Takao Fonts Maintainers Team
+
+About Takao Fonts
+-----------------
+The Takao Fonts are a font family based on the IPA Fonts, the IPAex
+and the IPAmj Fonts. Its purpose is to make it possible to maintain
+and release the fonts by the community with changing their names.
+See https://launchpad.net/takao-fonts for detail.
+
+
+Families of Takao Fonts
+-----------------------
+### Takao Fonts
+
+| Font Name     | File Name         | Base Font   |
+| ------------- | ----------------- | ----------- |
+| TakaoGothic   | TakaoGothic.ttf   | IPAGothic   |
+| Takao PGothic | TakaoPGothic.ttf  | IPA PGothic |
+| TakaoMincho   | TakaoMincho.ttf   | IPAMincho   |
+| Takao PMincho | TakaoPMincho.ttf  | IPA PMincho |
+
+### Takao Ex Fonts
+
+| Font Name     | File Name         | Base Font   |
+| ------------- | ----------------- | ----------- |
+| TakaoExGothic | TakaoExGothic.ttf | IPAexGothic |
+| TakaoExMincho | TakaoExMincho.otf | IPAexMincho |
+
+### Takao Mj Fonts
+
+| Font Name     | File Name         | Base Font   |
+| ------------- | ----------------- | ----------- |
+| TakaoMjMincho | TakaoMjMincho.otf | IPAmjMincho |
+
+
+License
+-------
+According to IPA Font License Agreement v1.0, derived programs of IPA 
+Fonts must be licensed under the terms and conditions of the same 
+agreement. For that reason, Takao Fonts are licensed under the IPA 
+Font License Agreement v1.0. The file 
+IPA_Font_License_Agreement_v1.0.txt includes the whole sentence of the 
+agreement.
+
+
+Install
+-------
+Takao Fonts can be installed with the same way as IPA Fonts.
+Installation examples are on 
+http://ipafont.ipa.go.jp/fontinstall.html
+
+
+Modifications to IPA Fonts
+--------------------------
+ * Change names of fonts "IPA" to "Takao" to fulfil Article 3 
+   Paragraph 1 (4) of the IPA Font License Agreement v1.0.
+ * Change value of underlinePosition in post table to -20 to fix the 
+   problem underlines are hidden inputting Japanese characters with 
+   ibus-anthy or scim-anthy.
+ * Add the URL of Takao Font Project to name table.
+ * Add the copyright notice of Takao Font to name table.
+ * Change value of VendID to Takao in OS/2 table.
+ * Fix typo "Regulare" in Styles (SubFamily) string.
+   https://launchpad.net/bugs/1427123
+   Reported to the upstream on 2015-03-02.
+
+These modifications are made by a script made from one for ORCA Font 
+developed by Good-Day, Inc
+
+
+Developing programs and created files in addition to fonts
+----------------------------------------------------------
+According to Article 3 Paragraph 1 (1) of the IPA Font License 
+Agreement v1.0, we must distribute "(b)any additional file created by 
+the font developing program in the course of creating the Derived 
+Program that can be used for further modification of the Derived 
+Program" together with derived fonts or be made available online or 
+mailing to distribute derived fonts of IPA Fonts. We distribute the 
+script described above and files created by the script in another 
+archive file. It can be downloaded from following URL. It's named 
+"takao-fonts-additions_<version>.tar.gz".
+
+  https://launchpad.net/takao-fonts/+download
+
+
+How to replace Takao Fonts to IPA Fonts
+---------------------------------------
+According to Article 3 Paragraph 1 (2) of the IPA Font License 
+Agreement, we must enable the recipients to replace the derived fonts 
+to IPA Fonts. To fulfil this restriction, replace instructions as 
+below.
+
+ 1. Access http://ipafont.ipa.go.jp/
+ 2. Choose and download IPA Fonts.
+ 4. Install these fonts. Installation examples are on
+    http://ipafont.ipa.go.jp/fontinstall.html
+ 5. Uninstall Takao Fonts.
+ 6. Change settings in your OS and/or applications to use IPA Fonts if 
+    needed. See manuals of them to know the way.
+
+Additionally you can install both IPA Fonts, IPAex Fonts and Takao 
+Fonts and switch them as you like on many OS.
+
+If you install Takao Fonts with package management system built in 
+your OS, see the document of Takao Font package file used by your 
+system.
+
+Also, IPA Fonts which were used to generate Takao Fonts are included in 
+the file "takao-fonts-additions_<version>.tar.gz" described above.
+
+  https://launchpad.net/takao-fonts/+download
+
+
+Redistribution
+--------------
+You can redistribute Takao Fonts under the IPA Font License Agreement 
+v1.0. Be sure to fulfill Article 3 Paragraph 1.
+If you create packages for package management systems, provide a 
+method for install the IPA Fonts and IPAex Fonts using the same 
+package management system.
+
+
+How to bulid Takao Fonts
+------------------------
+To build Takao Fonts, TTX/FontTools(https://github.com/behdad/fonttools/)
+is required. On Debian/Ubuntu, you can install it by:
+
+    $ sudo apt-get install fonttools
+
+Steps to build on generic Linux systems:
+
+  1. Get Takao Fonts source
+
+         $ bzr branch lp:takao-fonts
+
+     or
+
+     Download takao-fonts-additions_*.tar.xz from
+     https://launchpad.net/takao-fonts/+download
+     and extract it.
+
+  2. Build
+
+         $ cd takao-fonts/
+         $ make
+
+You will get font files under "release" directory.
+
+
+About ttx files
+---------------
+The "*.ttx" files in this archive are generated by the build process.
+They fall under the files "any additional file created by the font 
+developing program in the course of creating the Derived Program that 
+can be used for further modification of the Derived Program" described 
+in Article 3 Paragraph 1 (1)(b).
+Because generated using IPA and IPAex Fonts, these are under IPA Font 
+License Agreement 1.0.
+
+After build run, "ttx/*.diff" are also generated. You can review it
+to see what was actually changed from base fonts.
+
+
+Making a new release (for maintainers)
+--------------------------------------
+
+  1. Check new upstream release
+
+         $ make scan
+
+  2. If there is a new release, update upstream font version and set
+     takao fonts revision in "VARS" file.
+
+  3. Download the new release
+
+         $ make download
+
+  4. Build
+
+         $ make build
+
+  5. Create release files
+
+         $ make release
+
+  6. Upload compressed files under "release".

@@ -410,7 +410,7 @@ const std::map<UChar, UChar> kArabicLegacyDiacritics = {
 
 const std::set<UI::FontSets::Selector> kLTRScripts = {
    // We omit the default fontset, because we won't define code blocks for it - it's a catch-all.
-   UI::FontSets::Selector::kCJK};
+   UI::FontSets::Selector::kCJK, UI::FontSets::Selector::kJapanese};
 
 // https://unicode.org/faq/blocks_ranges.html
 // https://unicode-table.com/en/blocks/
@@ -429,16 +429,32 @@ const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kLTRCodeBlocks = {
        UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B,
        UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C,
        UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D,
-       UBlockCode::UBLOCK_HIRAGANA,
-       UBlockCode::UBLOCK_KATAKANA,
-       UBlockCode::UBLOCK_KATAKANA_PHONETIC_EXTENSIONS,
        UBlockCode::UBLOCK_ENCLOSED_CJK_LETTERS_AND_MONTHS,
        UBlockCode::UBLOCK_HANGUL_COMPATIBILITY_JAMO,
        UBlockCode::UBLOCK_HANGUL_JAMO,
        UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_A,
        UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_B,
        UBlockCode::UBLOCK_HANGUL_SYLLABLES,
-    }}};
+    }},
+   {UI::FontSets::Selector::kJapanese,
+    {
+       UBlockCode::UBLOCK_CJK_COMPATIBILITY,
+       UBlockCode::UBLOCK_CJK_COMPATIBILITY_FORMS,
+       UBlockCode::UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS,
+       UBlockCode::UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT,
+       UBlockCode::UBLOCK_CJK_RADICALS_SUPPLEMENT,
+       UBlockCode::UBLOCK_CJK_STROKES,
+       UBlockCode::UBLOCK_CJK_SYMBOLS_AND_PUNCTUATION,
+       UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS,
+       UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A,
+       UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B,
+       UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C,
+       UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D,
+       UBlockCode::UBLOCK_HIRAGANA,
+       UBlockCode::UBLOCK_KATAKANA,
+       UBlockCode::UBLOCK_KATAKANA_PHONETIC_EXTENSIONS,
+       UBlockCode::UBLOCK_ENCLOSED_CJK_LETTERS_AND_MONTHS,
+}}};
 
 const std::set<UI::FontSets::Selector> kRTLScripts = {
    // Add "mandaic", "nko", "samaritan", "syriac", "thaana" if we get these languages.
@@ -725,6 +741,8 @@ UI::FontSet const* find_fontset(const char* word, const UI::FontSets& fontsets) 
 	UI::FontSets::Selector selector;
 	if (has_script_character(word, UI::FontSets::Selector::kArabic)) {
 		selector = UI::FontSets::Selector::kArabic;
+	} else if (has_script_character(word, UI::FontSets::Selector::kJapanese)) {
+		selector = UI::FontSets::Selector::kJapanese;
 	} else if (has_script_character(word, UI::FontSets::Selector::kCJK)) {
 		selector = UI::FontSets::Selector::kCJK;
 	} else if (has_script_character(word, UI::FontSets::Selector::kDevanagari)) {
