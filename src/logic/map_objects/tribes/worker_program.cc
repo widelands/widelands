@@ -197,7 +197,7 @@ mine
          "findspace=size:any radius:7 resource:fish",
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net 192",
-         "mine=fish radius:1", -- Remove a fish in an area of 1
+         "mine=resource_fish radius:1", -- Remove a fish in an area of 1
          "animate=fishing duration:3s",
          "playsound=sound/fisher/fisher_pull_net 192",
          "createware=fish",
@@ -255,7 +255,7 @@ breed
          "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
          "animate=freeing duration:3s",
-         "breed=fish radius:1", -- Add a fish in an area of 1
+         "breed=resource_fish radius:1", -- Add a fish in an area of 1
          "return"
       },
 */
@@ -411,7 +411,7 @@ findspace
          "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
          "animate=freeing duration:3s",
-         "breed=fish 1",
+         "breed=resource_fish 1",
          "return"
       },
 

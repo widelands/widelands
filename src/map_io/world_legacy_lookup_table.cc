@@ -82,6 +82,12 @@ immovables_
 resources_
 {
 	{"granite", "stones"},
+	{"stones", "resource_stones"},
+	{"gold", "resource_gold"},
+	{"iron", "resource_iron"},
+	{"coal", "resource_coal"},
+	{"water", "resource_water"},
+	{"fish", "resource_fish"}
 },
 
 // Renamed German spelled terrains into English

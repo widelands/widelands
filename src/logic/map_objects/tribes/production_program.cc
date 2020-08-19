@@ -1316,7 +1316,7 @@ mine
           -- Search radius of 2 for iron. Will always find iron until 33.33% of it has been dug up.
           -- After that, there's still a chance of 5% for finding iron.
           -- If this fails, the workers still have a chance of 17% of gaining experience.
-         "mine=iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
+         "mine=resource_iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
          "produce=iron_ore"
      }
 
@@ -1325,7 +1325,7 @@ mine
          "animate=working duration:20s",
           -- Search radius of 1 for water. Will always find water until 100% of it has been drawn.
           -- After that, there's still a chance of 65% for finding water.
-         "mine=water radius:1 yield:100% when_empty:65%",
+         "mine=resource_water radius:1 yield:100% when_empty:65%",
          "produce=water"
      }
 */

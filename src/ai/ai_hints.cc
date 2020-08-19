@@ -156,7 +156,7 @@ Production Sites
 **mines**
     The building will mine to obtain the given ware, e.g.::
 
-        mines = "gold",
+        mines = "resource_gold",
 
 **mines_percent**
     The percentage that a mine will mine of its resource before it needs enhancing, e.g.::
