@@ -68,7 +68,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -84,9 +84,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ration",
             "return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat",
             "consume=fruit,bread_frisians,smoked_fish,smoked_meat",
-            "sleep=5000",
-            "animate=working 34500",
-            "sleep=10000",
+            "sleep=duration:5s",
+            "animate=working duration:34s500ms",
+            "sleep=duration:10s",
             "produce=ration"
          },
       },
@@ -97,9 +97,9 @@ tribes:new_productionsite_type {
             -- time total: 66
             "return=skipped unless economy needs ration",
             "consume=fruit,bread_frisians smoked_fish,smoked_meat",
-            "sleep=5000",
-            "animate=working 51000",
-            "sleep=10000",
+            "sleep=duration:5s",
+            "animate=working duration:51s",
+            "sleep=duration:10s",
             "produce=ration:2"
          },
       },

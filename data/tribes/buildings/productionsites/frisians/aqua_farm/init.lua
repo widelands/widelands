@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -71,7 +71,7 @@ tribes:new_productionsite_type {
             "return=failed unless site has fruit",
             "callworker=breed_in_pond",
             "consume=fruit water:2",
-            "sleep=23000",
+            "sleep=duration:23s",
          },
       },
       fish_pond = {
@@ -79,7 +79,7 @@ tribes:new_productionsite_type {
          descname = _"fishing",
          actions = {
             "return=skipped unless economy needs fish",
-            "sleep=9000",
+            "sleep=duration:9s",
             "callworker=fish_in_pond",
          },
       },

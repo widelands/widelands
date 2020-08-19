@@ -69,7 +69,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -82,7 +82,7 @@ tribes:new_productionsite_type {
          descname = _"planting barley",
          actions = {
             "callworker=plant",
-            "sleep=10000"
+            "sleep=duration:10s"
          }
       },
       harvest_barley = {
@@ -90,8 +90,8 @@ tribes:new_productionsite_type {
          descname = _"harvesting barley",
          actions = {
             "callworker=harvest",
-            "animate=working 40000",
-            "sleep=4000",
+            "animate=working duration:40s",
+            "sleep=duration:4s",
             "produce=barley" --produces 2 barley per field
          }
       },

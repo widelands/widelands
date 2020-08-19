@@ -27,14 +27,15 @@
 
 namespace Widelands {
 
-TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
+TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
+   : name(table->get_string("name")),
+     icon(table->get_string("icon")),
+     script(table->get_string("script")) {
 	try {
 		i18n::Textdomain td("tribes");
-		name = table->get_string("name");
 		author = _(table->get_string("author"));
 		descname = _(table->get_string("descname"));
 		tooltip = _(table->get_string("tooltip"));
-		icon = table->get_string("icon");
 		std::unique_ptr<LuaTable> starting_conditions = table->get_table("starting_conditions");
 		LuaInterface lua;
 
@@ -60,7 +61,7 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 std::vector<std::string> get_all_tribenames() {
 	std::vector<std::string> tribenames;
 	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
+	std::unique_ptr<LuaTable> table(lua.run_script("tribes/init.lua"));
 	for (const int key : table->keys<int>()) {
 		std::unique_ptr<LuaTable> info = table->get_table(key);
 		info->do_not_warn_about_unaccessed_keys();
@@ -72,7 +73,7 @@ std::vector<std::string> get_all_tribenames() {
 std::vector<TribeBasicInfo> get_all_tribeinfos() {
 	std::vector<TribeBasicInfo> tribeinfos;
 	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
+	std::unique_ptr<LuaTable> table(lua.run_script("tribes/init.lua"));
 	for (const int key : table->keys<int>()) {
 		tribeinfos.push_back(TribeBasicInfo(table->get_table(key)));
 	}

@@ -660,7 +660,7 @@ void GameHost::run() {
 			tipstexts.push_back(d->hp.get_players_tribe());
 		}
 		game.create_loader_ui(tipstexts, false);
-		game.step_loader_ui(_("Preparing game"));
+		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 		d->game = &game;
 		game.set_game_controller(this);
@@ -705,9 +705,10 @@ void GameHost::run() {
 		// wait mode when there are no clients
 		check_hung_clients();
 		init_computer_players();
-		game.run(d->settings.savegame ? Widelands::Game::Loaded :
-		                                d->settings.scenario ? Widelands::Game::NewMPScenario :
-		                                                       Widelands::Game::NewNonScenario,
+		game.run(d->settings.savegame ?
+		            Widelands::Game::StartGameType::kSaveGame :
+		            d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
+		                                   Widelands::Game::StartGameType::kMap,
 		         "", false, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
@@ -1249,7 +1250,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 
 	if (random_tribe) {
 		uint8_t num_tribes = d->settings.tribes.size();
-		uint8_t random = (std::rand() % num_tribes);
+		uint8_t random = (std::rand() % num_tribes);  // NOLINT
 		actual_tribe = d->settings.tribes.at(random).name;
 	}
 

@@ -83,7 +83,9 @@ EditorGameBase
 const char LuaEditorGameBase::className[] = "EditorGameBase";
 const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
    METHOD(LuaEditorGameBase, get_immovable_description),
+   METHOD(LuaEditorGameBase, tribe_immovable_exists),
    METHOD(LuaEditorGameBase, get_building_description),
+   METHOD(LuaEditorGameBase, get_ship_description),
    METHOD(LuaEditorGameBase, get_tribe_description),
    METHOD(LuaEditorGameBase, get_ware_description),
    METHOD(LuaEditorGameBase, get_worker_description),
@@ -191,6 +193,24 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 }
 
 /* RST
+   .. function:: tribe_immovable_exists(immovable_name)
+
+      :arg immovable_name: the name of the tribe immovable
+
+      Returns whether the tribes know about an ImmovableDescription for the named object.
+
+      (RO) ``true`` if the named tribe immovable exists, ``false`` otherwise.
+*/
+int LuaEditorGameBase::tribe_immovable_exists(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string immovable_name = luaL_checkstring(L, 2);
+	lua_pushboolean(L, get_egbase(L).tribes().immovable_index(immovable_name) != INVALID_INDEX);
+	return 1;
+}
+
+/* RST
    .. function:: get_building_description(building_description.name)
 
       :arg building_name: the name of the building
@@ -215,11 +235,35 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 }
 
 /* RST
+   .. function:: get_ship_description(ship_description.name)
+
+      :arg ship_name: the name of the ship
+
+      Returns the description for the given ship.
+
+      (RO) The :class:`~wl.Game.Ship_description`.
+*/
+int LuaEditorGameBase::get_ship_description(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const Tribes& tribes = get_egbase(L).tribes();
+	const std::string ship_name = luaL_checkstring(L, 2);
+	const DescriptionIndex ship_index = tribes.ship_index(ship_name);
+	if (!tribes.ship_exists(ship_index)) {
+		report_error(L, "Ship %s does not exist", ship_name.c_str());
+	}
+	const ShipDescr* ship_description = tribes.get_ship_descr(ship_index);
+
+	return LuaMaps::upcasted_map_object_descr_to_lua(L, ship_description);
+}
+/* RST
    .. function:: get_tribe_description(tribe_name)
 
       :arg tribe_name: the name of the tribe
 
       Returns the tribe description of the given tribe.
+      Loads the tribe if it hasn't been loaded yet.
 
       (RO) The :class:`~wl.Game.Tribe_description`.
 */
@@ -227,14 +271,17 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	EditorGameBase& egbase = get_egbase(L);
+
 	const std::string tribe_name = luaL_checkstring(L, 2);
 	if (!Widelands::tribe_exists(tribe_name)) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	const TribeDescr* descr =
-	   egbase.tribes().get_tribe_descr(egbase.tribes().tribe_index(tribe_name));
-	return to_lua<LuaMaps::LuaTribeDescription>(L, new LuaMaps::LuaTribeDescription(descr));
+	Notifications::publish(
+	   NoteMapObjectDescription(tribe_name, NoteMapObjectDescription::LoadType::kObject));
+
+	const Tribes& tribes = get_egbase(L).tribes();
+	return to_lua<LuaMaps::LuaTribeDescription>(
+	   L, new LuaMaps::LuaTribeDescription(tribes.get_tribe_descr(tribes.tribe_index(tribe_name))));
 }
 
 /* RST
@@ -552,7 +599,7 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
       May be used from the init.lua files for tribe/world loading only.
 */
 int LuaEditorGameBase::set_loading_message(lua_State* L) {
-	get_egbase(L).step_loader_ui(luaL_checkstring(L, 2));
+	Notifications::publish(UI::NoteLoadingMessage(luaL_checkstring(L, 2)));
 	return 0;
 }
 
@@ -833,11 +880,25 @@ int LuaPlayerBase::place_building(lua_State* L) {
 
 	EditorGameBase& egbase = get_egbase(L);
 	const Tribes& tribes = egbase.tribes();
+	Player& player = get(L, egbase);
 
-	if (!tribes.building_exists(name)) {
+	// If the building belongs to a tribe that no player is playing, we need to load it now
+	Notifications::publish(
+	   NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kObject));
+
+	const DescriptionIndex building_index = tribes.building_index(name);
+
+	// Ensure that the loaded object was indeed a building
+	if (!tribes.building_exists(building_index)) {
 		report_error(L, "Unknown Building: '%s'", name.c_str());
 	}
-	DescriptionIndex building_index = tribes.building_index(name);
+
+	if (!player.tribe().has_building(building_index) &&
+	    tribes.get_building_descr(building_index)->type() !=
+	       Widelands::MapObjectType::MILITARYSITE) {
+		report_error(L, "Building: '%s' is not available for Player %d's tribe '%s'", name.c_str(),
+		             player.player_number(), player.tribe().name().c_str());
+	}
 
 	FormerBuildings former_buildings;
 	find_former_buildings(tribes, building_index, &former_buildings);
@@ -848,15 +909,18 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	Building* b = nullptr;
 	if (force) {
 		if (constructionsite) {
-			b = &get(L, egbase).force_csite(c->coords(), building_index, former_buildings);
+			b = &player.force_csite(c->coords(), building_index, former_buildings);
 		} else {
-			b = &get(L, egbase).force_building(c->coords(), former_buildings);
+			b = &player.force_building(c->coords(), former_buildings);
 		}
 	} else {
-		b = get(L, egbase).build(c->coords(), building_index, constructionsite, former_buildings);
+		b = player.build(c->coords(), building_index, constructionsite, former_buildings);
 	}
 	if (!b) {
-		report_error(L, "Couldn't place building!");
+		const std::string tempname(
+		   force ? constructionsite ? "force constructionsite" : "force building" : "place building");
+		report_error(L, "Couldn't %s '%s' at (%d, %d)!", tempname.c_str(), name.c_str(),
+		             c->coords().x, c->coords().y);
 	}
 
 	LuaMaps::upcasted_map_object_to_lua(L, b);

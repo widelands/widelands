@@ -49,11 +49,11 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
          descname = _"gathering berries",
          actions = {
-            "sleep=21000",
+            "sleep=duration:21s",
             "callworker=harvest",
          }
       },

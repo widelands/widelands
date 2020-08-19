@@ -30,7 +30,7 @@ Icon::Icon(Panel* const parent,
            const int32_t w,
            const int32_t h,
            const Image* picture_id)
-   : Panel(parent, x, y, w, h), pic_(picture_id), draw_frame_(false) {
+   : Panel(parent, x, y, w, h), pic_(picture_id), draw_frame_(false), grey_out_(false) {
 	set_handle_mouse(false);
 	set_thinks(false);
 }
@@ -66,8 +66,15 @@ void Icon::draw(RenderTarget& dst) {
 		const int height = scale * available_height;
 		const int x = (available_width - width) / 2;
 		const int y = (available_height - height) / 2;
-		dst.blitrect_scale(Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height),
-		                   pic_, Recti(0, 0, pic_->width(), pic_->height()), 1., BlendMode::UseAlpha);
+		if (grey_out_) {
+			dst.blitrect_scale_monochrome(
+			   Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height), pic_,
+			   Recti(0, 0, pic_->width(), pic_->height()), RGBAColor(191, 191, 191, 191));
+		} else {
+			dst.blitrect_scale(Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height),
+			                   pic_, Recti(0, 0, pic_->width(), pic_->height()), 1.,
+			                   BlendMode::UseAlpha);
+		}
 		if (draw_frame_) {
 			dst.draw_rect(Recti(x, y, width + 2, height + 2), framecolor_);
 		}

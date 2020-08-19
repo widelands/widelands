@@ -45,14 +45,14 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "return=skipped unless economy needs spider_silk",
             "consume=corn water",
-            "sleep=25000",
-            "animate=working 30000",
+            "sleep=duration:25s",
+            "animate=working duration:30s",
             "produce=spider_silk"
          }
       },

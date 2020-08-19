@@ -7,17 +7,13 @@ regressed."""
 import re
 import sys
 
+# Checks list: https://clang.llvm.org/extra/clang-tidy/checks/list.html
 SUPPRESSED_CHECKS = {
     '[android-cloexec-fopen]',
     '[boost-use-to-string]',
     '[bugprone-integer-division]',
-    '[cert-dcl50-cpp]',
-    '[cert-err34-c]',
+    '[cert-dcl50-cpp]',  # We need this for our logger
     '[cert-err58-cpp]',
-    '[cert-msc30-c]',
-    '[cert-msc50-cpp]',
-    '[clang-analyzer-core.CallAndMessage]',
-    '[clang-analyzer-core.DivideZero]',
     '[clang-analyzer-core.NonNullParamChecker]',
     '[clang-analyzer-core.UndefinedBinaryOperatorResult]',
     '[clang-analyzer-cplusplus.NewDelete]',
@@ -31,20 +27,15 @@ SUPPRESSED_CHECKS = {
     '[cppcoreguidelines-pro-type-const-cast]',
     '[cppcoreguidelines-pro-type-member-init]',
     '[cppcoreguidelines-pro-type-reinterpret-cast]',
-    '[cppcoreguidelines-pro-type-static-cast-downcast]',
     '[cppcoreguidelines-pro-type-union-access]',
     '[cppcoreguidelines-pro-type-vararg]',  # We need this for our logger
     '[cppcoreguidelines-slicing]',
     '[cppcoreguidelines-special-member-functions]',
     '[fuchsia-default-arguments]',
     '[fuchsia-overloaded-operator]',
-    '[google-build-explicit-make-pair]',
     '[google-build-using-namespace]',
     '[google-default-arguments]',
-    '[google-explicit-constructor]',
     '[google-readability-function-size]',
-    '[google-readability-redundant-smartptr-get]',
-    '[google-runtime-int]',
     '[google-runtime-references]',
     '[hicpp-member-init]',
     '[hicpp-move-const-arg]',
@@ -125,6 +116,9 @@ def main():
         contents = checkme.readlines()
         for line in contents:
             if 'third_party' in line:
+                continue
+            # We're not piloting alpha-level checks
+            if 'clang-analyzer-alpha' in line:
                 continue
             check_suppressed = False
             for check in SUPPRESSED_CHECKS:

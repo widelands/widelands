@@ -37,12 +37,12 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
          descname = _"breeding fish",
          actions = {
             "callworker=breed",
-            "sleep=13500"
+            "sleep=duration:13s500ms"
          }
       },
    },

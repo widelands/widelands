@@ -72,13 +72,13 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
             "return=skipped unless economy needs coal",
             "consume=meal",
-            "sleep=39900",
+            "sleep=duration:39s900ms",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
@@ -91,8 +91,8 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining coal",
          actions = {
-            "animate=working 8700",
-            "mine=coal 3 100 10 5",
+            "animate=working duration:8s700ms",
+            "mine=coal radius:3 yield:100% when_empty:10% experience_on_fail:5%",
             "produce=coal",
          }
       },

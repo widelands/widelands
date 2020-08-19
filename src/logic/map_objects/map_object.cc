@@ -162,6 +162,8 @@ ObjectManager::~ObjectManager() {
  * Clear all objects
  */
 void ObjectManager::cleanup(EditorGameBase& egbase) {
+	is_cleaning_up_ = true;
+
 	// If all wares (read: flags) of an economy are gone, but some workers remain,
 	// the economy is destroyed before workers detach. This can cause segfault.
 	// Destruction happens in correct order after this dirty quickie.
@@ -189,6 +191,7 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 	}
 
 	lastserial_ = 0;
+	is_cleaning_up_ = false;
 }
 
 /**
@@ -320,18 +323,33 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 			const bool is_directional =
 			   anim->has_key<std::string>("directional") ? anim->get_bool("directional") : false;
 			if (is_directional) {
-				for (int dir = 1; dir <= 6; ++dir) {
-					const std::string directional_animname =
-					   animname + animation_direction_names[dir - 1];
+				std::set<float> available_scales;
+				for (int dir = 0; dir < 6; ++dir) {
+					const std::string directional_animname = animname + animation_direction_names[dir];
 					if (is_animation_known(directional_animname)) {
 						throw GameDataError("Tried to add already existing directional animation '%s\'",
 						                    directional_animname.c_str());
 					}
-					const std::string directional_basename =
-					   basename + animation_direction_names[dir - 1];
-					anims_.insert(std::pair<std::string, uint32_t>(
-					   directional_animname, g_gr->animations().load(*anim, directional_basename,
-					                                                 animation_directory, anim_type)));
+					const std::string directional_basename = basename + animation_direction_names[dir];
+					uint32_t anim_id = 0;
+					try {
+						anim_id = g_gr->animations().load(
+						   *anim, directional_basename, animation_directory, anim_type);
+						anims_.insert(std::make_pair(directional_animname, anim_id));
+					} catch (const std::exception& e) {
+						throw GameDataError(
+						   "Direction '%s': %s", animation_direction_names[dir], e.what());
+					}
+					// Validate directions' scales
+					if (dir == 0) {
+						available_scales = g_gr->animations().get_animation(anim_id).available_scales();
+					}
+					if (available_scales.size() !=
+					    g_gr->animations().get_animation(anim_id).available_scales().size()) {
+						throw GameDataError("Direction '%s': number of available scales does not match "
+						                    "with direction '%s'",
+						                    animation_direction_names[dir], animation_direction_names[0]);
+					}
 				}
 			} else {
 				if (is_animation_known(animname)) {
@@ -339,11 +357,11 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 					   "Tried to add already existing animation '%s'", animname.c_str());
 				}
 				if (animname == "idle") {
-					anims_.insert(std::pair<std::string, uint32_t>(
+					anims_.insert(std::make_pair(
 					   animname,
 					   g_gr->animations().load(name_, *anim, basename, animation_directory, anim_type)));
 				} else {
-					anims_.insert(std::pair<std::string, uint32_t>(
+					anims_.insert(std::make_pair(
 					   animname,
 					   g_gr->animations().load(*anim, basename, animation_directory, anim_type)));
 				}
@@ -632,6 +650,13 @@ void MapObject::set_logsink(LogSink* const sink) {
 void MapObject::log_general_info(const EditorGameBase&) const {
 }
 
+const Player& MapObject::owner() const {
+	if (owner_ == nullptr) {
+		throw wexception("Attempted to get null owner reference for player");
+	}
+	return *owner_;
+}
+
 /**
  * Prints a log message prepended by the object's serial number.
  */
@@ -740,64 +765,4 @@ void MapObject::save(EditorGameBase&, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(reserved_by_worker_);
 }
 
-std::string to_string(const MapObjectType type) {
-	// The types are documented in scripting/lua_map.cc -> LuaMapObjectDescription::get_type_name for
-	// the Lua interface, so make sure to change the documentation there when changing anything in
-	// this function.
-	switch (type) {
-	case MapObjectType::BOB:
-		return "bob";
-	case MapObjectType::CRITTER:
-		return "critter";
-	case MapObjectType::SHIP:
-		return "ship";
-	case MapObjectType::WORKER:
-		return "worker";
-	case MapObjectType::CARRIER:
-		return "carrier";
-	case MapObjectType::FERRY:
-		return "ferry";
-	case MapObjectType::SOLDIER:
-		return "soldier";
-	case MapObjectType::WARE:
-		return "ware";
-	case MapObjectType::BATTLE:
-		return "battle";
-	case MapObjectType::SHIP_FLEET:
-		return "ship_fleet";
-	case MapObjectType::FERRY_FLEET:
-		return "ferry_fleet";
-	case MapObjectType::IMMOVABLE:
-		return "immovable";
-	case MapObjectType::FLAG:
-		return "flag";
-	case MapObjectType::ROAD:
-		return "road";
-	case MapObjectType::WATERWAY:
-		return "waterway";
-	case MapObjectType::ROADBASE:
-		return "roadbase";
-	case MapObjectType::PORTDOCK:
-		return "portdock";
-	case MapObjectType::BUILDING:
-		return "building";
-	case MapObjectType::CONSTRUCTIONSITE:
-		return "constructionsite";
-	case MapObjectType::DISMANTLESITE:
-		return "dismantlesite";
-	case MapObjectType::WAREHOUSE:
-		return "warehouse";
-	case MapObjectType::MARKET:
-		return "market";
-	case MapObjectType::PRODUCTIONSITE:
-		return "productionsite";
-	case MapObjectType::MILITARYSITE:
-		return "militarysite";
-	case MapObjectType::TRAININGSITE:
-		return "trainingsite";
-	case MapObjectType::MAPOBJECT:
-		throw wexception("Unknown MapObjectType %d.", static_cast<int>(type));
-	}
-	NEVER_HERE();
-}
 }  // namespace Widelands

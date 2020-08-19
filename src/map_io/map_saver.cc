@@ -38,7 +38,6 @@
 #include "map_io/map_building_packet.h"
 #include "map_io/map_buildingdata_packet.h"
 #include "map_io/map_elemental_packet.h"
-#include "map_io/map_exploration_packet.h"
 #include "map_io/map_flag_packet.h"
 #include "map_io/map_flagdata_packet.h"
 #include "map_io/map_heights_packet.h"
@@ -82,10 +81,10 @@ void MapSaver::save() {
 
 	bool is_game = is_a(Game, &egbase_);
 
-	auto set_progress_message = [this](std::string text, int step) {
-		egbase_.step_loader_ui(
+	auto set_progress_message = [](std::string text, int step) {
+		Notifications::publish(UI::NoteLoadingMessage(
 		   step < 0 ? text :
-		              (boost::format(_("Saving map: %1$s (%2$d/%3$d)")) % text % step % 23).str());
+		              (boost::format(_("Saving map: %1$s (%2$d/%3$d)")) % text % step % 22).str()));
 	};
 	set_progress_message(_("Autosaving map…"), -1);
 
@@ -255,7 +254,7 @@ void MapSaver::save() {
 		set_progress_message(_("Win condition"), 13);
 		{
 			MapWinconditionPacket p;
-			p.write(fs_, *egbase_.mutable_map(), *mos_);
+			p.write(fs_, *egbase_.mutable_map());
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
@@ -307,26 +306,18 @@ void MapSaver::save() {
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
-		log("Writing Exploration Data ... ");
-		set_progress_message(_("Exploration"), 18);
-		{
-			MapExplorationPacket p;
-			p.write(fs_, egbase_, *mos_);
-		}
-		log("took %ums\n ", timer.ms_since_last_query());
-
-		log("Writing Players Unseen Data ... ");
-		set_progress_message(_("Vision"), 19);
+		log("Writing Players View Data ... ");
+		set_progress_message(_("Vision"), 18);
 		{
 			MapPlayersViewPacket p;
-			p.write(fs_, egbase_, *mos_);
+			p.write(fs_, egbase_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	// We also want to write these in the editor.
 	log("Writing Scripting Data ... ");
-	set_progress_message(_("Scripting"), 20);
+	set_progress_message(_("Scripting"), 19);
 	{
 		MapScriptingPacket p;
 		p.write(fs_, egbase_, *mos_);
@@ -334,12 +325,12 @@ void MapSaver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Objective Data ... ");
-	set_progress_message(_("Objectives"), 21);
+	set_progress_message(_("Objectives"), 20);
 	write_objective_data(fs_, egbase_);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing map images ... ");
-	set_progress_message(_("Images"), 22);
+	set_progress_message(_("Images"), 21);
 	save_map_images(&fs_, map.filesystem());
 	log("took %ums\n ", timer.ms_since_last_query());
 
@@ -351,7 +342,7 @@ void MapSaver::save() {
 
 	// Write minimap
 	{
-		set_progress_message(_("Minimap"), 23);
+		set_progress_message(_("Minimap"), 22);
 		std::unique_ptr<Texture> minimap(
 		   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
 		FileWrite fw;

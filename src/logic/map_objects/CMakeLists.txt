@@ -7,6 +7,21 @@ wl_library(logic_map_objects_description_maintainer
     logic_constants
 )
 
+wl_library(logic_map_objects_description_manager
+  SRCS
+    description_manager.cc
+    description_manager.h
+  DEPENDS
+    base_log
+    base_macros
+    io_filesystem
+    logic_exceptions
+    logic_map_object_type
+    scripting_lua_interface
+    scripting_lua_table
+)
+
+
 wl_library(logic_tribe_basic_info
   SRCS
     tribes/tribe_basic_info.cc
@@ -118,6 +133,7 @@ wl_library(logic_map_objects
     world/terrain_description.h
     world/world.cc
     world/world.h
+  USES_BOOST_REGEX
   DEPENDS
     ai_hints
     base_exceptions
@@ -126,6 +142,7 @@ wl_library(logic_map_objects
     base_log
     base_macros
     base_math
+    base_scoped_timer
     economy
     graphic
     graphic_animation
@@ -143,7 +160,9 @@ wl_library(logic_map_objects
     logic_exceptions
     logic_game_controller
     logic_map # TODO(GunChleoc): Circular dependency
+    logic_map_object_type
     logic_map_objects_description_maintainer
+    logic_map_objects_description_manager
     logic_tribe_basic_info
     logic_widelands_geometry
     logic_widelands_geometry_io
@@ -153,5 +172,15 @@ wl_library(logic_map_objects
     scripting_lua_table
     sound_constants
     sound
+    ui_basic_loading_message
     wui_mapview_pixelconstants
+)
+
+wl_library(logic_map_object_type
+  SRCS
+    map_object_type.cc
+    map_object_type.h
+  DEPENDS
+    base_exceptions
+    notifications
 )

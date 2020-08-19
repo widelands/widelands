@@ -9,7 +9,7 @@ animations = {
       pictures = path.list_files(dirname .. "work_??.png"),
       sound_effect = {
          path = "sound/hammering/hammering",
-         priority = 64
+         priority = 50
       },
       hotspot = { 12, 27 },
       fps = 10
@@ -37,10 +37,10 @@ tribes:new_worker_type {
       buildship = {
          "walk=object-or-coords",
          "plant=attrib:shipconstruction unless object",
-         "playsound=sound/sawmill/sawmill 230",
-         "animate=work 500",
+         "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
+         "animate=work duration:500ms",
          "construct",
-         "animate=work 5000",
+         "animate=work duration:5s",
          "return"
       },
       buildferry_1 = {
@@ -49,7 +49,7 @@ tribes:new_worker_type {
       buildferry_2 = {
          "findspace=size:swim radius:5",
          "walk=coords",
-         "animate=work 10000",
+         "animate=work duration:10s",
          "createbob=empire_ferry",
          "return"
       },

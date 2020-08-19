@@ -65,14 +65,14 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
          descname = _"weaving cloth",
          actions = {
             "return=skipped unless economy needs cloth",
             "consume=fur reed",
-            "sleep=25000",
-            "animate=working 20000",
+            "sleep=duration:25s",
+            "animate=working duration:20s",
             "produce=cloth"
          },
       },

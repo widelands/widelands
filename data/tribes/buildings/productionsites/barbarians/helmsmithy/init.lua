@@ -58,7 +58,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -74,9 +74,9 @@ tribes:new_productionsite_type {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs helmet",
             "consume=coal iron",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=helmet"
          }
       },
@@ -87,9 +87,9 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs helmet_mask",
             "consume=coal iron:2",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 45000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:45s",
             "produce=helmet_mask"
          }
       },
@@ -100,9 +100,9 @@ tribes:new_productionsite_type {
             -- time total: 87 + 3.6
             "return=skipped unless economy needs helmet_warhelm",
             "consume=coal gold iron:2",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 55000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:55s",
             "produce=helmet_warhelm"
          }
       },

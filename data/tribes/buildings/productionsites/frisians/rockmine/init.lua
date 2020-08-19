@@ -74,14 +74,14 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped unless economy needs granite",
             "consume=ration",
-            "sleep=38000",
+            "sleep=duration:38s",
             "call=mine_produce",
             "call=mine_produce",
          }
@@ -89,8 +89,8 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining granite",
          actions = {
-            "animate=working 21000",
-            "mine=stones 3 50 5 20",
+            "animate=working duration:21s",
+            "mine=stones radius:3 yield:50% when_empty:5% experience_on_fail:20%",
             "produce=granite",
          }
       },

@@ -29,7 +29,9 @@
 #include "economy/roadbase.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/editor_game_base.h"
 #include "logic/filesystem_constants.h"
+#include "logic/map_objects/bob.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/findnode.h"
@@ -80,6 +82,9 @@ bool FindCarnivores::accept(Bob* b) const {
 		return c->descr().is_carnivore();
 	}
 	return false;
+}
+bool FindCritter::accept(Bob* b) const {
+	return is_a(Critter, b);
 }
 bool FindBobByName::accept(Bob* b) const {
 	assert(b);
@@ -2541,7 +2546,7 @@ void Map::recalculate_allows_seafaring() {
 		FCoords fc = get_fcoords(c);
 
 		// Get portdock slots for this port
-		for (const Coords& portdock : find_portdock(fc, false)) {
+		for (const Coords& portdock : find_portdock(fc, true)) {
 			reachable_from_current_port.insert(portdock);
 			positions_to_check.push(portdock);
 		}

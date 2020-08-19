@@ -47,14 +47,14 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = pgettext("atlanteans_building", "baking bread"),
          actions = {
             "return=skipped unless economy needs atlanteans_bread",
             "consume=water:2 blackroot_flour cornmeal",
-            "animate=working 35000",
-            "sleep=30000",
+            "animate=working duration:35s",
+            "sleep=duration:30s",
             "produce=atlanteans_bread:2"
          }
       },

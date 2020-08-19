@@ -115,8 +115,11 @@ std::string Element::values_as_string(const std::string& tabs) const {
 		for (size_t i = 0; i < values_.size() - 1; ++i) {
 			const auto& element = values_.at(i);
 			const std::string element_as_string = element->value->as_string();
-			result += tabs + tab_ + key_to_string(element->key, element_as_string.empty()) +
-			          element_as_string + ",\n";
+			result.append(tabs)
+			   .append(tab_)
+			   .append(key_to_string(element->key, element_as_string.empty()))
+			   .append(element_as_string)
+			   .append(",\n");
 		}
 		const auto& element = values_.at(values_.size() - 1);
 		const std::string element_as_string = element->value->as_string();

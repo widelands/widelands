@@ -44,6 +44,7 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 
@@ -1584,8 +1585,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   map.find_immovables(game(), Area<FCoords>(map.get_fcoords(field.coords), kProductionArea),
 		                       nullptr, FindImmovableAttribute(tree_attr));
 
-		// Counting bushes nearby
-		int32_t const bush_attr = MapObjectDescr::get_attribute_id("ripe_bush");
+		// Counting bushes nearby. Only the Frisians have this, so we need to create the attribute if
+		// it doesn't exist.
+		int32_t const bush_attr = MapObjectDescr::get_attribute_id("ripe_bush", true);
 		field.bushes_nearby =
 		   map.find_immovables(game(), Area<FCoords>(map.get_fcoords(field.coords), kProductionArea),
 		                       nullptr, FindImmovableAttribute(bush_attr));
@@ -2669,7 +2671,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				continue;
 			}
 
-			if (std::rand() % 3 == 0 && bo.total_count() > 0) {
+			if (std::rand() % 3 == 0 && bo.total_count() > 0) {  // NOLINT
 				continue;
 			}  // add randomnes and ease AI
 
@@ -3662,12 +3664,12 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	if (needs_warehouse) {
 		probability_score += 500;
 	}
-	if (std::rand() % 10 == 0) {
+	if (std::rand() % 10 == 0) {  // NOLINT
 		probability_score +=
 		   flag_warehouse_distance.get_distance(flag_coords_hash, gametime, &tmp_wh);
 	}
 
-	if (std::rand() % 200 < probability_score) {
+	if (std::rand() % 200 < probability_score) {  // NOLINT
 		create_shortcut_road(flag, 14, gametime);
 		return true;
 	}
@@ -5192,7 +5194,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		// it seems there are wares with 0 preciousness (no entry in init files?), but we need
 		// positive value here.
-		// TODO(GunChleoc): Since we require in Tribes::postload() that this is set for all wares used
+		// TODO(GunChleoc): Since we require in TribeDescr::load_wares that this is set for all wares
+		// used
 		// by a tribe, something seems to be wrong here. It should always be > 0.
 		const uint16_t preciousness =
 		   std::max<uint16_t>(wares.at(bo.ware_outputs.at(m)).preciousness, 1);

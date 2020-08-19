@@ -49,15 +49,15 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
          descname = _"weaving",
          actions = {
-            "sleep=25000",
+            "sleep=duration:25s",
             "return=skipped unless economy needs cloth",
             "consume=reed",
-            "playsound=sound/barbarians/weaver 120",
-            "animate=working 20000",
+            "playsound=sound/barbarians/weaver priority:90%",
+            "animate=working duration:20s",
             "produce=cloth"
          }
       },

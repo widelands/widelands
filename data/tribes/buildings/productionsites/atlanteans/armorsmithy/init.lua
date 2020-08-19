@@ -146,7 +146,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -161,8 +161,8 @@ tribes:new_productionsite_type {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs shield_steel",
             "consume=iron:2 coal:2",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=shield_steel"
          }
       },
@@ -173,8 +173,8 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs shield_advanced",
             "consume=iron:2 coal:2 gold",
-            "sleep=32000",
-            "animate=working 45000",
+            "sleep=duration:32s",
+            "animate=working duration:45s",
             "produce=shield_advanced"
          }
       },

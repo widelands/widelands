@@ -20,7 +20,10 @@
 #ifndef WL_LOGIC_MAP_H
 #define WL_LOGIC_MAP_H
 
+#include <map>
 #include <memory>
+#include <set>
+#include <string>
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
@@ -41,6 +44,7 @@ struct S2MapLoader;
 namespace Widelands {
 
 class CritterDescr;
+class EditorGameBase;
 class MapLoader;
 struct MapGenerator;
 struct PathfieldManager;
@@ -105,6 +109,11 @@ struct FindBobByName : public FindBob {
 
 private:
 	std::string name_;
+};
+struct FindCritter : public FindBob {
+	bool accept(Bob* b) const override;
+	~FindCritter() override {
+	}
 };
 struct FindCarnivores : public FindBob {
 	bool accept(Bob* b) const override;
@@ -302,6 +311,9 @@ public:
 	}
 
 	const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {
+		return suggested_teams_;
+	}
+	std::vector<SuggestedTeamLineup>& get_suggested_teams() {
 		return suggested_teams_;
 	}
 

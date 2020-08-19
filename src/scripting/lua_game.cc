@@ -485,7 +485,7 @@ int LuaPlayer::sees_field(lua_State* L) {
 	Widelands::MapIndex const i =
 	   (*get_user_class<LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
-	lua_pushboolean(L, get(L, egbase).vision(i) > 1);
+	lua_pushboolean(L, get(L, egbase).is_seeing(i));
 	return 1;
 }
 
@@ -504,7 +504,7 @@ int LuaPlayer::seen_field(lua_State* L) {
 	Widelands::MapIndex const i =
 	   (*get_user_class<LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
-	lua_pushboolean(L, get(L, egbase).vision(i) >= 1);
+	lua_pushboolean(L, get(L, egbase).get_vision(i) != Widelands::SeeUnseeNode::kUnexplored);
 	return 1;
 }
 
@@ -596,8 +596,7 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.hide_or_reveal_field(
-		   game.get_gametime(), (*get_user_class<LuaField>(L, -1))->coords(), SeeUnseeNode::kReveal);
+		p.hide_or_reveal_field((*get_user_class<LuaField>(L, -1))->coords(), SeeUnseeNode::kVisible);
 		lua_pop(L, 1);
 	}
 
@@ -605,7 +604,7 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 }
 
 /* RST
-   .. method:: hide_fields(fields)
+   .. method:: hide_fields(fields[, unexplore = false])
 
       Make these fields hidden for the current player if they are not
       seen by a military building. See also :ref:`field_animations` for
@@ -625,13 +624,12 @@ int LuaPlayer::hide_fields(lua_State* L) {
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 	const SeeUnseeNode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
-	                             SeeUnseeNode::kUnexplore :
-	                             SeeUnseeNode::kUnsee;
+	                             SeeUnseeNode::kUnexplored :
+	                             SeeUnseeNode::kPreviouslySeen;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.hide_or_reveal_field(
-		   game.get_gametime(), (*get_user_class<LuaField>(L, -1))->coords(), mode);
+		p.hide_or_reveal_field((*get_user_class<LuaField>(L, -1))->coords(), mode);
 		lua_pop(L, 1);
 	}
 

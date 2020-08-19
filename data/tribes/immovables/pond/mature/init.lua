@@ -8,10 +8,9 @@ tribes:new_immovable_type {
    icon = dirname .. "menu.png",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
-   attributes = { "pond_mature" },
    programs = {
-      program = {
-         "animate=idle 400000",
+      main = {
+         "animate=idle duration:6m40s",
          "transform=pond_dry",
       },
       fall_dry = {

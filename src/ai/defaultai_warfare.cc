@@ -18,7 +18,6 @@
  */
 
 #include "ai/defaultai.h"
-
 #include "economy/wares_queue.h"
 #include "logic/map_objects/tribes/militarysite.h"
 
@@ -166,7 +165,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		bool is_attackable = false;
 		// we cannot attack unvisible site and there is no other way to find out
 		const bool is_visible =
-		   (1 < player_->vision(Map::get_index(Coords::unhash(site->first), map.get_width())));
+		   player_->is_seeing(Map::get_index(Coords::unhash(site->first), map.get_width()));
 		uint16_t owner_number = 100;
 
 		// testing if we can attack the building - result is a flag
@@ -580,7 +579,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// we dont want to send all of them so we limit the surplus value above attackgroup
 	const uint8_t attack_group = std::abs(management_data.get_military_number_at(6)) / 10;
 	if (attackers > attack_group) {
-		attackers = attack_group + std::rand() % (attackers - attack_group);
+		attackers = attack_group + std::rand() % (attackers - attack_group);  // NOLINT
 	}
 
 	assert(attackers < 500);
@@ -613,8 +612,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	    (gametime - enemy_sites[best_target].last_time_attacked) / 1000);
 
 	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers);
-	assert(1 <
-	       player_->vision(Map::get_index(flag->get_building()->get_position(), map.get_width())));
+	assert(
+	   player_->is_seeing(Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
 	enemy_sites[best_target].last_time_attacked = gametime;
 	++enemy_sites[best_target].attack_counter;
