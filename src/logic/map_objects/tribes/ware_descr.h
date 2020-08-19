@@ -52,11 +52,11 @@ public:
 	/// checked
 	///  and should not be configurable.
 	Quantity default_target_quantity(const std::string& tribename) const;
-    /// Sets the default target quantity for the given tribe. Overwrites if it already exists.
-    void set_default_target_quantity(const std::string& tribename, int quantity);
+	/// Sets the default target quantity for the given tribe. Overwrites if it already exists.
+	void set_default_target_quantity(const std::string& tribename, int quantity);
 
-    /// This is an AI hint
-    void set_preciousness(const std::string& tribename, int preciousness);
+	/// This is an AI hint
+	void set_preciousness(const std::string& tribename, int preciousness);
 
 	bool has_demand_check(const std::string& tribename) const;
 

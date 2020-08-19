@@ -128,14 +128,15 @@ WorkerDescr::~WorkerDescr() {
 }
 
 void WorkerDescr::set_default_target_quantity(int quantity) {
-    if (quantity < 0) {
-        throw GameDataError("default_target_quantity %d for worker '%s' must be >=0", quantity, name().c_str());
-    }
-    default_target_quantity_ = quantity;
+	if (quantity < 0) {
+		throw GameDataError(
+		   "default_target_quantity %d for worker '%s' must be >=0", quantity, name().c_str());
+	}
+	default_target_quantity_ = quantity;
 }
 
 void WorkerDescr::set_preciousness(const std::string& tribename, int preciousness) {
-    ai_hints_->set_preciousness(name(), tribename, preciousness);
+	ai_hints_->set_preciousness(name(), tribename, preciousness);
 }
 
 /**

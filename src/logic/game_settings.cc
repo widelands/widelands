@@ -22,12 +22,12 @@
 #include "logic/game_data_error.h"
 
 Widelands::TribeBasicInfo GameSettings::get_tribeinfo(const std::string& tribename) const {
-    for (const Widelands::TribeBasicInfo& info : tribes) {
-        if (info.name == tribename) {
-            return info;
-        }
-    }
-    throw Widelands::GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
+	for (const Widelands::TribeBasicInfo& info : tribes) {
+		if (info.name == tribename) {
+			return info;
+		}
+	}
+	throw Widelands::GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
 }
 
 Widelands::PlayerNumber GameSettings::find_shared(PlayerSlot slot) const {

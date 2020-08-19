@@ -54,14 +54,15 @@ Quantity WareDescr::default_target_quantity(const std::string& tribename) const 
 }
 
 void WareDescr::set_default_target_quantity(const std::string& tribename, int quantity) {
-    if (quantity < 0) {
-        throw GameDataError("default_target_quantity %d for tribe '%s', ware '%s' must be >=0", quantity, tribename.c_str(), name().c_str());
-    }
-    default_target_quantities_[tribename] = quantity;
+	if (quantity < 0) {
+		throw GameDataError("default_target_quantity %d for tribe '%s', ware '%s' must be >=0",
+		                    quantity, tribename.c_str(), name().c_str());
+	}
+	default_target_quantities_[tribename] = quantity;
 }
 
 void WareDescr::set_preciousness(const std::string& tribename, int preciousness) {
-    ai_hints_->set_preciousness(name(), tribename, preciousness);
+	ai_hints_->set_preciousness(name(), tribename, preciousness);
 }
 
 bool WareDescr::has_demand_check(const std::string& tribename) const {

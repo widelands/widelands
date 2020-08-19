@@ -60,28 +60,28 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 }
 
 std::vector<TribeBasicInfo> get_all_tribeinfos() {
-    std::vector<TribeBasicInfo> tribeinfos;
+	std::vector<TribeBasicInfo> tribeinfos;
 	LuaInterface lua;
-    FilenameSet dirs = g_fs->list_directory("tribes/tribes");
-    for (const std::string& dir : dirs) {
-        for (const std::string& file :g_fs->list_directory(dir)) {
-            if (strcmp(g_fs->fs_filename(file.c_str()), "init.lua") == 0) {
-                tribeinfos.push_back(Widelands::TribeBasicInfo(lua.run_script(file)));
-            }
-        }
-    }
-    if (tribeinfos.empty()) {
-        throw GameDataError("No tribe infos found at 'tribes/tribes/<tribename>/init.lua'");
-    }
+	FilenameSet dirs = g_fs->list_directory("tribes/tribes");
+	for (const std::string& dir : dirs) {
+		for (const std::string& file : g_fs->list_directory(dir)) {
+			if (strcmp(g_fs->fs_filename(file.c_str()), "init.lua") == 0) {
+				tribeinfos.push_back(Widelands::TribeBasicInfo(lua.run_script(file)));
+			}
+		}
+	}
+	if (tribeinfos.empty()) {
+		throw GameDataError("No tribe infos found at 'tribes/tribes/<tribename>/init.lua'");
+	}
 	return tribeinfos;
 }
 
 TribeBasicInfo get_tribeinfo(const std::string& tribename) {
-    for (const TribeBasicInfo& info : Widelands::get_all_tribeinfos()) {
-        if (info.name == tribename) {
-            return info;
-        }
-    }
+	for (const TribeBasicInfo& info : Widelands::get_all_tribeinfos()) {
+		if (info.name == tribename) {
+			return info;
+		}
+	}
 	throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
 }
 

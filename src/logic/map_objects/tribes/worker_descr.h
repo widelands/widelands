@@ -71,11 +71,11 @@ public:
 	Quantity default_target_quantity() const {
 		return default_target_quantity_;
 	}
-    /// Sets the default target quantity. Overwrites if it already exists.
-    void set_default_target_quantity(int quantity);
+	/// Sets the default target quantity. Overwrites if it already exists.
+	void set_default_target_quantity(int quantity);
 
-    /// This is an AI hint
-    void set_preciousness(const std::string& tribename, int preciousness);
+	/// This is an AI hint
+	void set_preciousness(const std::string& tribename, int preciousness);
 
 	bool has_demand_check() const {
 		return default_target_quantity() != kInvalidWare;
@@ -85,9 +85,9 @@ public:
 	/// parsing. If there was no default target quantity set in the ware type's
 	/// configuration, set the default value 1.
 	void set_has_demand_check() {
-        if (default_target_quantity_ == kInvalidWare) {
+		if (default_target_quantity_ == kInvalidWare) {
 			default_target_quantity_ = 1;
-        }
+		}
 	}
 
 	virtual const DirAnimations& get_right_walk_anims(bool const carries_ware, Worker*) const {

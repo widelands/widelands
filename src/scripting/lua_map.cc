@@ -704,7 +704,7 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const TribeDescr&
 }
 
 const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tribename) {
-    const Tribes& tribes = get_egbase(L).tribes();
+	const Tribes& tribes = get_egbase(L).tribes();
 	if (!tribes.tribe_exists(tribename)) {
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}

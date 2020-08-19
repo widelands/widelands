@@ -324,29 +324,29 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
 
 	for (const int column_key : items_table->keys<int>()) {
 		std::vector<DescriptionIndex> column;
-        std::unique_ptr<LuaTable> column_table = items_table->get_table(column_key);
+		std::unique_ptr<LuaTable> column_table = items_table->get_table(column_key);
 		for (const int ware_key : column_table->keys<int>()) {
-            std::unique_ptr<LuaTable> ware_table = column_table->get_table(ware_key);
-            std::string ware_name = ware_table->get_string("name");
+			std::unique_ptr<LuaTable> ware_table = column_table->get_table(ware_key);
+			std::string ware_name = ware_table->get_string("name");
 			try {
 				DescriptionIndex wareindex = tribes.load_ware(ware_name);
 				if (has_ware(wareindex)) {
 					throw GameDataError("Duplicate definition of ware");
 				}
 
-                // Set default_target_quantity (optional) and preciousness
-                WareDescr* ware_descr = tribes.get_mutable_ware_descr(wareindex);
-                if (ware_table->has_key("default_target_quantity")) {
-                    ware_descr->set_default_target_quantity(name(), ware_table->get_int("default_target_quantity"));
-                }
-                ware_descr->set_preciousness(name(), ware_table->get_int("preciousness"));
+				// Set default_target_quantity (optional) and preciousness
+				WareDescr* ware_descr = tribes.get_mutable_ware_descr(wareindex);
+				if (ware_table->has_key("default_target_quantity")) {
+					ware_descr->set_default_target_quantity(
+					   name(), ware_table->get_int("default_target_quantity"));
+				}
+				ware_descr->set_preciousness(name(), ware_table->get_int("preciousness"));
 
-                // Add to tribe
+				// Add to tribe
 				wares_.insert(wareindex);
 				column.push_back(wareindex);
 			} catch (const WException& e) {
-				throw GameDataError(
-				   "Failed adding ware '%s': %s", ware_name.c_str(), e.what());
+				throw GameDataError("Failed adding ware '%s': %s", ware_name.c_str(), e.what());
 			}
 		}
 		if (!column.empty()) {
@@ -400,43 +400,45 @@ void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const Wo
 void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("workers_order");
 
-    for (const int column_key : items_table->keys<int>()) {
+	for (const int column_key : items_table->keys<int>()) {
 		std::vector<DescriptionIndex> column;
-        std::unique_ptr<LuaTable> column_table = items_table->get_table(column_key);
+		std::unique_ptr<LuaTable> column_table = items_table->get_table(column_key);
 		for (const int worker_key : column_table->keys<int>()) {
-            std::unique_ptr<LuaTable> worker_table = column_table->get_table(worker_key);
-            std::string workername = worker_table->get_string("name");
-            try {
-                DescriptionIndex workerindex = tribes.load_worker(workername);
-                if (has_worker(workerindex)) {
-                    throw GameDataError("Duplicate definition of worker");
-                }
+			std::unique_ptr<LuaTable> worker_table = column_table->get_table(worker_key);
+			std::string workername = worker_table->get_string("name");
+			try {
+				DescriptionIndex workerindex = tribes.load_worker(workername);
+				if (has_worker(workerindex)) {
+					throw GameDataError("Duplicate definition of worker");
+				}
 
-                // Set default_target_quantity and preciousness (both optional)
-                WorkerDescr* worker_descr = tribes.get_mutable_worker_descr(workerindex);
-                if (worker_table->has_key("default_target_quantity")) {
-                    if (!worker_table->has_key("preciousness")) {
-                        throw GameDataError("It has a default_target_quantity but no preciousness for tribe '%s'",
-                                            name().c_str());
-                    }
-                    worker_descr->set_default_target_quantity(worker_table->get_int("default_target_quantity"));
-                }
-                if (worker_table->has_key("preciousness")) {
-                    worker_descr->set_preciousness(name(), worker_table->get_int("preciousness"));
-                }
+				// Set default_target_quantity and preciousness (both optional)
+				WorkerDescr* worker_descr = tribes.get_mutable_worker_descr(workerindex);
+				if (worker_table->has_key("default_target_quantity")) {
+					if (!worker_table->has_key("preciousness")) {
+						throw GameDataError(
+						   "It has a default_target_quantity but no preciousness for tribe '%s'",
+						   name().c_str());
+					}
+					worker_descr->set_default_target_quantity(
+					   worker_table->get_int("default_target_quantity"));
+				}
+				if (worker_table->has_key("preciousness")) {
+					worker_descr->set_preciousness(name(), worker_table->get_int("preciousness"));
+				}
 
-                // Add to tribe
-                workers_.insert(workerindex);
-                column.push_back(workerindex);
+				// Add to tribe
+				workers_.insert(workerindex);
+				column.push_back(workerindex);
 
-                if (worker_descr->is_buildable() && worker_descr->buildcost().empty()) {
-                    worker_types_without_cost_.push_back(workerindex);
-                }
-            } catch (const WException& e) {
-                throw GameDataError("Failed adding worker '%s': %s", workername.c_str(), e.what());
-            }
+				if (worker_descr->is_buildable() && worker_descr->buildcost().empty()) {
+					worker_types_without_cost_.push_back(workerindex);
+				}
+			} catch (const WException& e) {
+				throw GameDataError("Failed adding worker '%s': %s", workername.c_str(), e.what());
+			}
 		}
-        if (!column.empty()) {
+		if (!column.empty()) {
 			workers_order_.push_back(column);
 		}
 	}

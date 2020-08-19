@@ -157,7 +157,7 @@ private:
 	void load_workers(const LuaTable& table, Tribes& tribes);
 	void load_buildings(const LuaTable& table, Tribes& tribes);
 
-    /// Registers a building with the tribe
+	/// Registers a building with the tribe
 	void add_building(const std::string& buildingname, Tribes& tribes);
 
 	// Helper function for adding a special worker type (carriers etc.)
