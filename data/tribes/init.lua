@@ -91,7 +91,7 @@ result = {
          dirname .. "scripting/starting_conditions/frisians/discovery.lua";
          dirname .. "scripting/starting_conditions/frisians/new_world.lua";
       }
-   }
+   },
 
       -- Basic information for the Amazon tribe
    {
@@ -110,7 +110,7 @@ result = {
          dirname .. "scripting/starting_conditions/amazons/poor_hamlet.lua";
          dirname .. "scripting/starting_conditions/amazons/struggling_outpost.lua";
       }
-   }
+   },
 }
 
 pop_textdomain()
