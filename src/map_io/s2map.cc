@@ -411,6 +411,7 @@ int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoa
 	timer_message += map_.get_name();
 	timer_message += "' took %ums";
 	ScopedTimer timer(timer_message);
+	Notifications::publish(UI::NoteLoadingMessage(_("Loading map…")));
 
 	load_s2mf(egbase);
 

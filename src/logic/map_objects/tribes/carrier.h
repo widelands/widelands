@@ -29,7 +29,7 @@ class CarrierDescr : public WorkerDescr {
 public:
 	CarrierDescr(const std::string& init_descname,
 	             const LuaTable& table,
-	             const Tribes& tribes,
+	             Tribes& tribes,
 	             MapObjectType t = MapObjectType::CARRIER);
 	~CarrierDescr() override {
 	}

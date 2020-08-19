@@ -393,9 +393,21 @@ public:
 		 */
 		const MapObjectDescr* map_object_descr;
 
-		/// Information for constructionsite's animation.
-		/// only valid, if there is a constructionsite on this node
-		ConstructionsiteInformation constructionsite;
+		/* Information for constructionSite and DismantleSite animation.
+		 * `constructionsite` is only valid if there is a constructionsite
+		 * on this node. `dismantlesite.progress` equals the value of
+		 * `get_built_per64k()` at the time the dismantlesite was last seen.
+		 */
+		union PartiallyFinishedBuildingDetails {
+			ConstructionsiteInformation constructionsite;
+			struct {
+				uint32_t progress;
+				const BuildingDescr* building;
+			} dismantlesite;
+			PartiallyFinishedBuildingDetails();
+			~PartiallyFinishedBuildingDetails() {
+			}
+		} partially_finished_building;
 
 		/// Save whether the player saw a border the last time (s)he saw the node.
 		bool border;
@@ -438,15 +450,12 @@ public:
 		return fields_[i].military_influence;
 	}
 
-	bool is_worker_type_allowed(const DescriptionIndex& i) const {
-		return allowed_worker_types_.at(i);
-	}
+	bool is_worker_type_allowed(const DescriptionIndex& i) const;
 	void allow_worker_type(DescriptionIndex, bool allow);
 
-	// Allowed buildings
-	bool is_building_type_allowed(const DescriptionIndex& i) const {
-		return allowed_building_types_[i];
-	}
+	// Allowed buildings. A building is also allowed if it's a militarysite that the player's tribe
+	// doesn't have.
+	bool is_building_type_allowed(const DescriptionIndex& i) const;
 	void allow_building_type(DescriptionIndex, bool allow);
 
 	// Player commands
@@ -533,6 +542,7 @@ public:
 
 	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
 
+	void init_statistics();
 	void
 	read_statistics(FileRead&, uint16_t packet_version, const TribesLegacyLookupTable& lookup_table);
 	void write_statistics(FileWrite&) const;
@@ -611,8 +621,8 @@ private:
 	uint32_t ship_name_counter_;
 
 	std::unique_ptr<Field[]> fields_;
-	std::vector<bool> allowed_worker_types_;
-	std::vector<bool> allowed_building_types_;
+	std::set<DescriptionIndex> allowed_worker_types_;
+	std::set<DescriptionIndex> allowed_building_types_;
 	std::map<Serial, std::unique_ptr<Economy>> economies_;
 	std::set<Serial> ships_;
 	std::string name_;  // Player name
@@ -629,31 +639,33 @@ private:
 	/**
 	 * Wares produced (by ware id) since the last call to @ref sample_statistics
 	 */
-	std::vector<uint32_t> current_produced_statistics_;
+	std::map<DescriptionIndex, Quantity> current_produced_statistics_;
 
 	/**
 	 * Wares consumed (by ware id) since the last call to @ref sample_statistics
 	 */
-	std::vector<uint32_t> current_consumed_statistics_;
+	std::map<DescriptionIndex, Quantity> current_consumed_statistics_;
+
+	using StatisticsMap = std::map<DescriptionIndex, std::vector<Quantity>>;
 
 	/**
 	 * Statistics of wares produced over the life of the game, indexed as
 	 * ware_productions_[ware id][time index]
 	 */
-	std::vector<std::vector<uint32_t>> ware_productions_;
+	StatisticsMap ware_productions_;
 
 	/**
 	 * Statistics of wares consumed over the life of the game, indexed as
 	 * ware_consumptions_[ware_id][time_index]
 	 */
-	std::vector<std::vector<uint32_t>> ware_consumptions_;
+	StatisticsMap ware_consumptions_;
 
 	/**
 	 * Statistics of wares stored inside of warehouses over the
 	 * life of the game, indexed as
 	 * ware_stocks_[ware_id][time_index]
 	 */
-	std::vector<std::vector<uint32_t>> ware_stocks_;
+	StatisticsMap ware_stocks_;
 
 	std::set<DescriptionIndex> muted_building_types_;
 

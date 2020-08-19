@@ -19,12 +19,12 @@ build)
    # On macOS it always fails with a broken GL installation message, so we omit it.
    if [ "$TRAVIS_OS_NAME" = linux ]; then
       cd ..
-      ./regression_test.py -b build/src/widelands
       if [ "$BUILD_WEBSITE_TOOLS" = ON ]; then
          mkdir temp_web
          build/src/website/wl_map_object_info temp_web
          build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf
       fi
+      ./regression_test.py -b build/src/widelands
    fi
    ;;
 codecheck)

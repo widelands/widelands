@@ -880,7 +880,11 @@ bool WLApplication::init_settings() {
  */
 void WLApplication::init_language() {
 	// Set the locale dir
-	i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
+	if (!localedir_.empty()) {
+		i18n::set_localedir(g_fs->canonicalize_name(localedir_));
+	} else {
+		i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
+	}
 
 	// If locale dir is not a directory, barf. We can handle it not being there tough.
 	if (g_fs->file_exists(i18n::get_localedir()) && !g_fs->is_directory(i18n::get_localedir())) {
@@ -999,7 +1003,10 @@ void WLApplication::handle_commandline_parameters() {
 		set_config_bool("nozip", true);
 		commandline_.erase("nozip");
 	}
-
+	if (commandline_.count("localedir")) {
+		localedir_ = commandline_["localedir"];
+		commandline_.erase("localedir");
+	}
 	if (commandline_.count("datadir")) {
 		datadir_ = commandline_["datadir"];
 		commandline_.erase("datadir");
@@ -1405,7 +1412,7 @@ bool WLApplication::new_game() {
 			}
 			game.create_loader_ui(tipstexts, false);
 
-			game.step_loader_ui(_("Preparing game"));
+			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 			game.set_game_controller(ctrl.get());
 			game.init_newgame(sp.settings());
@@ -1519,7 +1526,6 @@ void WLApplication::replay() {
 
 	try {
 		game.create_loader_ui({"general_game"}, true);
-		game.step_loader_ui(_("Loading…"));
 
 		game.set_ibase(new InteractiveSpectator(game, get_config_section()));
 		game.set_write_replay(false);
