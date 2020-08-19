@@ -21,6 +21,7 @@
 #define WL_UI_FSMENU_CAMPAIGNS_H
 
 #include <memory>
+#include <unordered_set>
 
 #include "graphic/image.h"
 #include "wui/mapauthordata.h"

@@ -660,7 +660,7 @@ void GameHost::run() {
 			tipstexts.push_back(d->hp.get_players_tribe());
 		}
 		game.create_loader_ui(tipstexts, false);
-		game.step_loader_ui(_("Preparing game"));
+		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 		d->game = &game;
 		game.set_game_controller(this);

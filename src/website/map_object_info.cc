@@ -275,7 +275,6 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 	JSON::Array* json_tribes_array = json->add_array("tribes");
 
 	/// Tribes
-	egbase.mutable_tribes()->postload();  // Make sure that all values have been set.
 	const Tribes& tribes = egbase.tribes();
 
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
@@ -323,6 +322,7 @@ int main(int argc, char** argv) {
 		initialize();
 		std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
 		EditorGameBase egbase(nullptr);
+		egbase.load_all_tribes();
 		write_tribes(egbase, out_filesystem.get());
 	} catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());

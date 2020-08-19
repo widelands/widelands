@@ -1,3 +1,5 @@
+.. _defining_tribe_units:
+
 Defining Units
 ==============
 
@@ -11,6 +13,48 @@ file. The ``init.lua`` script will load the unit to be used in the game, and
 ``helptexts.lua`` will provide the information used by the in-game help
 ('Tribal Encyclopedia') and by our website's online
 `Encyclopedia <https://wlww.widelands.org/encyclopedia/>`_.
+
+Each ``init.lua`` file also needs to have a matching ``register.lua`` file that
+will list the names of all units defined in the ``init.lua``, and their attributes if they have any.
+This is needed for registering the objects before they are loaded. For a given ``init.lua``:
+
+.. code-block:: lua
+
+   tribes:new_immovable_type {
+      name = "berry_bush_blueberry_tiny",
+      ...
+   }
+
+   tribes:new_immovable_type {
+      name = "berry_bush_blueberry_small",
+      ...
+   }
+
+   tribes:new_immovable_type {
+      name = "berry_bush_blueberry_medium",
+      ...
+   }
+
+   tribes:new_immovable_type {
+      name = "berry_bush_blueberry_ripe",
+      ...
+   }
+
+The matching ``register.lua`` would look like this:
+
+.. code-block:: lua
+
+   return {
+      berry_bush_blueberry_tiny = { "seed_berrybush" },
+      berry_bush_blueberry_small = {},
+      berry_bush_blueberry_medium = { "flowering" },
+      berry_bush_blueberry_ripe = { "ripe_bush" },
+   }
+
+Note that ``berry_bush_blueberry_small`` in this example has no attributes, so its
+attribute table is empty.
+
+Available unit types:
 
 .. toctree::
    :maxdepth: 3

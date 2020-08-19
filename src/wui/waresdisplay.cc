@@ -33,7 +33,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "logic/player.h"
 #include "ui_basic/window.h"
 
 constexpr int kWareMenuInfoSize = 12;

@@ -57,7 +57,7 @@ public:
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
-	              const Tribes& tribes);
+	              Tribes& tribes);
 	~BuildingDescr() override {
 	}
 
