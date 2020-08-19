@@ -79,13 +79,11 @@ jobs:
     ### Building on the oldest and newest gcc
     - stage: testsuite
     ### RELEASE BUILDS
-    - name: "RELEASE: gcc 5"
-      os: linux
+      name: "RELEASE: gcc 5"
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
       services: xvfb
 
     - name: "RELEASE: gcc 10"
-      os: linux
       dist: focal
       addons:
         apt:
@@ -109,12 +107,10 @@ jobs:
       services: xvfb
     ### DEBUG BUILDS
     - name: "DEBUG: gcc 5"
-      os: linux
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
       services: xvfb
 
     - name: "DEBUG: gcc 10"
-      os: linux
       dist: focal
       addons:
         apt:
