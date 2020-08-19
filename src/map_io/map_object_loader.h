@@ -56,7 +56,7 @@ public:
 			throw GameDataError(
 			   "already loaded (%s)", to_string(existing->second->descr().type()).c_str());
 		}
-		objects_.insert(std::pair<Serial, MapObject*>(n, &object));
+		objects_.insert(std::make_pair(n, &object));
 		loaded_objects_[&object] = false;
 		return object;
 	}

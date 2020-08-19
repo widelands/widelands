@@ -16,9 +16,9 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m1s",
-         "remove=success:44",
+         "remove=chance:17.19%",
          "grow=cirrus_wasteland_pole",
       },
    },
@@ -44,9 +44,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:59s",
-         "remove=success:34",
+         "remove=chance:13.28%",
          "grow=cirrus_wasteland_mature",
       },
    },
@@ -72,9 +72,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
-         "remove=success:24",
+         "remove=chance:9.37%",
          "grow=cirrus_wasteland_old",
       },
    },
@@ -103,10 +103,10 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:24m15s",
-         "transform=deadtree3 success:34",
-         "seed=cirrus_wasteland_sapling 100",
+         "transform=deadtree3 chance:13.28%",
+         "seed=cirrus_wasteland_sapling proximity:39%",
       },
       fall = {
          "remove=",

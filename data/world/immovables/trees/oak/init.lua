@@ -15,9 +15,9 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m12s500ms",
-         "remove=success:80",
+         "remove=chance:31.25%",
          "grow=oak_summer_pole",
       },
    },
@@ -42,9 +42,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m12s500ms",
-         "remove=success:70",
+         "remove=chance:27.34%",
          "grow=oak_summer_mature",
       },
    },
@@ -69,9 +69,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m15s",
-         "remove=success:40",
+         "remove=chance:15.62%",
          "grow=oak_summer_old",
       },
    },
@@ -98,13 +98,13 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:37m30s",
-         "transform=deadtree2 success:12",
-         "seed=oak_summer_sapling 100",
+         "transform=deadtree2 chance:4.69%",
+         "seed=oak_summer_sapling proximity:39%",
       },
       fall = {
-         "animate=falling 1s400ms",
+         "animate=falling duration:1s400ms",
          "transform=fallentree",
       },
    },
@@ -119,6 +119,7 @@ world:new_immovable_type{
          hotspot = { 25, 61 },
          sound_effect = {
             path = "sound/animals/bird2",
+            priority = 10
          },
       },
       falling = {

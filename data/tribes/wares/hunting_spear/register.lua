@@ -1,0 +1,3 @@
+return {
+   hunting_spear = {},
+}

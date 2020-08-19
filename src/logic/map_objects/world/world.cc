@@ -102,7 +102,11 @@ const DescriptionMaintainer<ImmovableDescr>& World::immovables() const {
 
 void World::add_immovable_type(const LuaTable& table) {
 	i18n::Textdomain td("world");
-	immovables_->add(new ImmovableDescr(_(table.get_string("descname")), table, *this));
+	std::vector<std::string> attributes;
+	if (table.has_key("attributes")) {
+		attributes = table.get_table("attributes")->array_entries<std::string>();
+	}
+	immovables_->add(new ImmovableDescr(_(table.get_string("descname")), table, attributes, *this));
 }
 
 void World::add_editor_terrain_category(const LuaTable& table) {

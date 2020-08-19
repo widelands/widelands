@@ -42,22 +42,24 @@ Animation::Animation(const LuaTable& table)
      frametime_(table.has_key("fps") ? (1000 / get_positive_int(table, "fps")) : kFrameLength),
      play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false),
      sound_effect_(kNoSoundEffect),
-     sound_priority_(kFxPriorityLowest) {
+     sound_priority_(kFxPriorityLowest),
+     sound_allow_multiple_(false) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
 			sound_effect_ =
 			   SoundHandler::register_fx(SoundType::kAmbient, sound_effects->get_string("path"));
+			sound_priority_ = std::round(100 * sound_effects->get_double("priority"));
 
-			if (sound_effects->has_key<std::string>("priority")) {
-				sound_priority_ = sound_effects->get_int("priority");
+			if (sound_effects->has_key<std::string>("allow_multiple")) {
+				sound_allow_multiple_ = sound_effects->get_bool("allow_multiple");
 			}
 
 			if (sound_priority_ < kFxPriorityLowest) {
 				throw Widelands::GameDataError(
-				   "Minmum priority for sounds is %d, but only %d was specified for %s",
-				   kFxPriorityLowest, sound_priority_, sound_effects->get_string("path").c_str());
+				   "Minimum priority for sounds is 0.01, but only %.2f was specified for %s",
+				   sound_effects->get_double("priority"), sound_effects->get_string("path").c_str());
 			}
 		}
 	} catch (const LuaError& e) {
@@ -145,8 +147,8 @@ void Animation::trigger_sound(uint32_t time, const Widelands::Coords& coords) co
 		return;
 	}
 	if (current_frame(time) == 0) {
-		Notifications::publish(
-		   NoteSound(SoundType::kAmbient, sound_effect_, coords, sound_priority_));
+		Notifications::publish(NoteSound(
+		   SoundType::kAmbient, sound_effect_, coords, sound_priority_, sound_allow_multiple_));
 	}
 }
 

@@ -15,9 +15,9 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
-         "remove=success:42",
+         "remove=chance:16.41%",
          "grow=palm_coconut_desert_pole",
       },
    },
@@ -42,9 +42,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
-         "remove=success:33",
+         "remove=chance:12.89%",
          "grow=palm_coconut_desert_mature",
       },
    },
@@ -69,9 +69,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m",
-         "remove=success:23",
+         "remove=chance:8.98%",
          "grow=palm_coconut_desert_old",
       },
    },
@@ -98,10 +98,10 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m50s",
-         "transform=deadtree6 success:36",
-         "seed=palm_coconut_desert_sapling 100",
+         "transform=deadtree6 chance:14.06%",
+         "seed=palm_coconut_desert_sapling proximity:39%",
       },
       fall = {
          "remove=",
@@ -118,6 +118,7 @@ world:new_immovable_type{
          hotspot = { 25, 60 },
          sound_effect = {
             path = "sound/animals/bird3",
+            priority = 10
          },
       }
    },

@@ -16,9 +16,9 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:38s",
-         "remove=success:50",
+         "remove=chance:19.53%",
          "grow=umbrella_red_wasteland_pole",
       },
    },
@@ -44,9 +44,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:38s",
-         "remove=success:47",
+         "remove=chance:18.36%",
          "grow=umbrella_red_wasteland_mature",
       },
    },
@@ -72,12 +72,12 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:20s",
-         "remove=success:30",
-         "seed=umbrella_red_wasteland_sapling 50",
+         "remove=chance:11.72%",
+         "seed=umbrella_red_wasteland_sapling proximity:19.53%",
          "animate=idle duration:20s",
-         "remove=success:20",
+         "remove=chance:7.81%",
          "grow=umbrella_red_wasteland_old",
       },
    },
@@ -106,10 +106,10 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:17m30s",
-         "transform=deadtree2 success:32",
-         "seed=umbrella_red_wasteland_sapling 90",
+         "transform=deadtree2 chance:12.5%",
+         "seed=umbrella_red_wasteland_sapling proximity:35.16%",
       },
       fall = {
          "remove=",

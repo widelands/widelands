@@ -384,7 +384,17 @@ int main(int argc, char** argv) {
 		initialize();
 		std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
 		Widelands::EditorGameBase egbase(nullptr);
+		// Load tribe info
+		egbase.tribes();
+		// Load a tribe to create the global 'tribes' Lua variable
+		Notifications::publish(Widelands::NoteMapObjectDescription(
+		   "barbarians", Widelands::NoteMapObjectDescription::LoadType::kObject));
+		// Load the object for the animation
+		Notifications::publish(Widelands::NoteMapObjectDescription(
+		   map_object_name, Widelands::NoteMapObjectDescription::LoadType::kObject));
+		// Write spritesheet
 		write_animation_spritesheets(egbase, map_object_name, animation_name, out_filesystem.get());
+		// Cleanup
 		egbase.cleanup_objects();
 	} catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());

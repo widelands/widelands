@@ -7,9 +7,9 @@ world:new_immovable_type{
    size = "none",
    attributes = {},
    programs = {
-      program = {
+      main = {
          "animate=idle duration:20s",
-         "remove=success:12"
+         "remove=chance:4.69%"
       }
    },
    animations = {

@@ -181,9 +181,14 @@ FilenameSet ZipFilesystem::list_directory(const std::string& path_in) const {
 		                      sizeof(filename_inzip), nullptr, 0, nullptr, 0);
 
 		std::string complete_filename = zip_file_->strip_basename(filename_inzip);
-		std::string filename = fs_filename(complete_filename.c_str());
-		std::string filepath =
-		   complete_filename.substr(0, complete_filename.size() - filename.size());
+
+		// Ensure that subdirectories will be listed - fs_filename can't handle trailing slashes.
+		if (complete_filename.size() > 1 && strcmp(&complete_filename.back(), "/") == 0) {
+			complete_filename.pop_back();
+		}
+		const std::string filename(fs_filename(complete_filename.c_str()));
+		const std::string filepath(
+		   complete_filename.substr(0, complete_filename.size() - filename.size()));
 
 		//  TODO(unknown): Something strange is going on with regard to the leading slash!
 		//  This is just an ugly workaround and does not solve the real
@@ -511,7 +516,7 @@ void ZipFilesystem::fs_rename(const std::string&, const std::string&) {
 	throw wexception("rename inside zip FS is not implemented yet");
 }
 
-unsigned long long ZipFilesystem::disk_space() {
+unsigned long long ZipFilesystem::disk_space() {  // NOLINT
 	return 0;
 }
 

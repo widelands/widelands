@@ -15,9 +15,9 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:38s",
-         "remove=success:50",
+         "remove=chance:19.53%",
          "grow=palm_date_desert_pole",
       },
    },
@@ -42,9 +42,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:38s",
-         "remove=success:47",
+         "remove=chance:18.36%",
          "grow=palm_date_desert_mature",
       },
    },
@@ -69,12 +69,12 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:20s",
-         "remove=success:30",
-         "seed=palm_date_desert_sapling 20",
+         "remove=chance:11.72%",
+         "seed=palm_date_desert_sapling proximity:7.8%",
          "animate=idle duration:20s",
-         "remove=success:20",
+         "remove=chance:7.81%",
          "grow=palm_date_desert_old",
       },
    },
@@ -101,10 +101,10 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:17m30s",
-         "transform=deadtree5 success:32",
-         "seed=palm_date_desert_sapling 200",
+         "transform=deadtree5 chance:12.5%",
+         "seed=palm_date_desert_sapling proximity:78.12%",
       },
       fall = {
          "remove=",
@@ -121,6 +121,7 @@ world:new_immovable_type{
          hotspot = { 25, 61 },
          sound_effect = {
             path = "sound/animals/crickets1",
+            priority = 10
          },
       }
    },

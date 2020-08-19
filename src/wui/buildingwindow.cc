@@ -85,7 +85,9 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		// The building's state has changed
 		case Widelands::NoteBuilding::Action::kChanged:
 			if (!is_dying_) {
+				const std::string active_tab = tabs_->tabs()[tabs_->active()]->get_name();
 				init(true, showing_workarea_);
+				tabs_->activate(active_tab);
 			}
 			break;
 		// The building is no more. Next think() will call die().
@@ -181,8 +183,10 @@ void BuildingWindow::think() {
 		caps_setup_ = true;
 	}
 
-	if (mute_this_ || mute_all_) {
-		assert(mute_this_ && mute_all_);
+	if (mute_this_) {
+		if (!mute_all_) {
+			NEVER_HERE();
+		}
 		mute_this_->set_pic(
 		   g_gr->images().get(building->mute_messages() ? pic_unmute_this : pic_mute_this));
 		mute_this_->set_tooltip(building->mute_messages() ? _("Muted – click to unmute") :

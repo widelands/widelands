@@ -53,7 +53,7 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
-                             const Tribes& tribes)
+                             Tribes& tribes)
    : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
      tribes_(tribes),
      buildable_(table.has_key("buildcost")),
@@ -118,7 +118,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		if (enh == name()) {
 			throw wexception("enhancement to same type");
 		}
-		DescriptionIndex const en_i = tribes_.building_index(enh);
+		DescriptionIndex const en_i = tribes.load_building(enh);
 		if (tribes_.building_exists(en_i)) {
 			enhancement_ = en_i;
 
@@ -143,14 +143,14 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	// However, we support "return_on_dismantle" without "buildable", because this is used by custom
 	// scenario buildings.
 	if (table.has_key("return_on_dismantle")) {
-		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), tribes_);
+		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), tribes);
 	}
 	if (table.has_key("buildcost")) {
 		if (!table.has_key("return_on_dismantle")) {
 			throw wexception(
 			   "The building '%s' has a \"buildcost\" but no \"return_on_dismantle\"", name().c_str());
 		}
-		buildcost_ = Buildcost(table.get_table("buildcost"), tribes_);
+		buildcost_ = Buildcost(table.get_table("buildcost"), tribes);
 	}
 
 	if (table.has_key("enhancement_cost")) {
@@ -160,8 +160,8 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			                 "\"return_on_dismantle_on_enhanced\"",
 			                 name().c_str());
 		}
-		enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), tribes_);
-		return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes_);
+		enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), tribes);
+		return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes);
 	}
 
 	needs_seafaring_ = false;
@@ -462,11 +462,19 @@ bool Building::init(EditorGameBase& egbase) {
 	// Start the animation
 	start_animation(egbase, descr().get_unoccupied_animation());
 
+	owner_->add_seer(*this);
+	if (descr().type() == MapObjectType::WAREHOUSE) {
+		set_seeing(true);
+	}
+
 	leave_time_ = egbase.get_gametime();
 	return true;
 }
 
 void Building::cleanup(EditorGameBase& egbase) {
+	owner_->remove_seer(
+	   *this, Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().vision_range()));
+
 	if (defeating_player_) {
 		Player* defeating_player = egbase.get_player(defeating_player_);
 		if (descr().get_conquers()) {
@@ -810,7 +818,7 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 }
 
 void Building::add_worker(Worker& worker) {
-	if (!get_workers().size()) {
+	if (get_workers().empty()) {
 		if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
 			set_seeing(true);
 		}
@@ -821,7 +829,7 @@ void Building::add_worker(Worker& worker) {
 
 void Building::remove_worker(Worker& worker) {
 	PlayerImmovable::remove_worker(worker);
-	if (!get_workers().size()) {
+	if (get_workers().empty() && descr().type() != MapObjectType::WAREHOUSE) {
 		set_seeing(false);
 	}
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
@@ -844,20 +852,10 @@ void Building::set_soldier_control(SoldierControl* new_soldier_control) {
  * \note Warehouses always see their surroundings; this is handled separately.
  */
 void Building::set_seeing(bool see) {
-	if (see == seeing_) {
-		return;
-	}
-
-	Player* player = get_owner();
-	const Map& map = player->egbase().map();
-
-	if (see) {
-		player->see_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
-	} else {
-		player->unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
-	}
-
 	seeing_ = see;
+	get_owner()->update_vision(
+	   Area<FCoords>(owner().egbase().map().get_fcoords(get_position()), descr().vision_range()),
+	   see);
 }
 
 /**

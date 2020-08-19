@@ -15,9 +15,9 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:42s",
-         "remove=success:32",
+         "remove=chance:12.5%",
          "grow=birch_summer_pole",
       },
    },
@@ -42,9 +42,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:40s",
-         "remove=success:25",
+         "remove=chance:9.76%",
          "grow=birch_summer_mature",
       },
    },
@@ -69,12 +69,12 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25s",
-         "remove=success:10",
-         "seed=birch_summer_sapling 200",
+         "remove=chance:3.91%",
+         "seed=birch_summer_sapling proximity:78.12%",
          "animate=idle duration:30s",
-         "remove=success:10",
+         "remove=chance:3.91%",
          "grow=birch_summer_old",
       },
    },
@@ -101,10 +101,10 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:13m20s",
-         "transform=deadtree2 success:27",
-         "seed=birch_summer_sapling 60",
+         "transform=deadtree2 chance:10.55%",
+         "seed=birch_summer_sapling proximity:23.44%",
       },
       fall = {
          "remove=",
@@ -121,6 +121,7 @@ world:new_immovable_type{
          hotspot = { 24, 59 },
          sound_effect = {
             path = "sound/animals/bird5",
+            priority = 10
          },
       }
    },

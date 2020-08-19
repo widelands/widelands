@@ -25,12 +25,10 @@ wl_library(wui_chat_ui
     base_i18n
     chat
     graphic
-    graphic_color
     graphic_fonthandler
     graphic_playercolor
     graphic_text
     graphic_text_layout
-    logic
     sound
     ui_basic
     widelands_options
@@ -277,6 +275,8 @@ wl_library(wui
     soldiercapacitycontrol.h
     soldierlist.cc
     soldierlist.h
+    soldier_statistics_menu.cc
+    soldier_statistics_menu.h
     stock_menu.cc
     stock_menu.h
     story_message_box.cc

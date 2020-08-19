@@ -13,7 +13,7 @@ the tribes. It contains the following subdirectories:
   unit's ``helptexts.lua`` script.
 * ``data/tribes/scripting/starting_conditions``: Contains a subdirectory with
   the game starting conditions available for each tribe. These scripts need to
-  be listed in ``data/tribes/preload.lua`` in order for Widelands to find them.
+  be listed in ``data/tribes/init.lua`` in order for Widelands to find them.
 
 
 .. toctree::

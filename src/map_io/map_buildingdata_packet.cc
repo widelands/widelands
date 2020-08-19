@@ -45,6 +45,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
@@ -121,9 +122,9 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 									*queue_iter = &mol.get<Worker>(leaver_serial);
 								} catch (const WException& e) {
 									throw GameDataError(
-									   "leave queue item #%li (%u): %s",
-									   static_cast<long int>(queue_iter - leave_queue.begin()),
-									   leaver_serial, e.what());
+									   "leave queue item #%" PRIuS " (%u): %s",
+									   static_cast<size_t>(queue_iter - leave_queue.begin()), leaver_serial,
+									   e.what());
 								}
 							} else {
 								*queue_iter = nullptr;
@@ -498,8 +499,6 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 					   map.calc_influence(mr.location(), Area<>(a, a.radius));
 				} while (mr.advance(map));
 			}
-			player->see_area(Area<FCoords>(
-			   map.get_fcoords(warehouse.get_position()), warehouse.descr().vision_range()));
 			warehouse.next_military_act_ = game.get_gametime();
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse", packet_version,
@@ -726,10 +725,10 @@ void MapBuildingdataPacket::read_productionsite(
 				std::string program_name = fr.c_string();
 				std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 				if (!pr_descr.programs().count(program_name)) {
-					log(
-					   "WARNING: productionsite has unknown program \"%s\",replacing it with \"work\"\n",
-					   program_name.c_str());
-					program_name = "work";
+					log("WARNING: productionsite has unknown program \"%s\", replacing it with "
+					    "\"main\"\n",
+					    program_name.c_str());
+					program_name = MapObjectProgram::kMainProgram;
 				}
 
 				productionsite.stack_[i].program = productionsite.descr().get_program(program_name);
@@ -1117,7 +1116,7 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 		for (Worker* temp_worker : cwt.second) {
 			const Worker& w = *temp_worker;
 			assert(mos.is_object_known(w));
-			workermap.insert(std::pair<uint32_t, const Worker*>(mos.get_object_file_index(w), &w));
+			workermap.insert(std::make_pair(mos.get_object_file_index(w), &w));
 		}
 	}
 

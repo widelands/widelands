@@ -39,7 +39,7 @@ public:
 	Attr(const std::string& gname, const std::string& value);
 
 	const std::string& name() const;
-	long get_int() const;
+	int64_t get_int(int64_t max_value) const;
 	bool get_bool() const;
 	std::string get_string() const;
 	RGBColor get_color() const;

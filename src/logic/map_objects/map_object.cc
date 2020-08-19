@@ -162,6 +162,8 @@ ObjectManager::~ObjectManager() {
  * Clear all objects
  */
 void ObjectManager::cleanup(EditorGameBase& egbase) {
+	is_cleaning_up_ = true;
+
 	// If all wares (read: flags) of an economy are gone, but some workers remain,
 	// the economy is destroyed before workers detach. This can cause segfault.
 	// Destruction happens in correct order after this dirty quickie.
@@ -189,6 +191,7 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 	}
 
 	lastserial_ = 0;
+	is_cleaning_up_ = false;
 }
 
 /**
@@ -647,6 +650,13 @@ void MapObject::set_logsink(LogSink* const sink) {
 void MapObject::log_general_info(const EditorGameBase&) const {
 }
 
+const Player& MapObject::owner() const {
+	if (owner_ == nullptr) {
+		throw wexception("Attempted to get null owner reference for player");
+	}
+	return *owner_;
+}
+
 /**
  * Prints a log message prepended by the object's serial number.
  */
@@ -755,64 +765,4 @@ void MapObject::save(EditorGameBase&, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(reserved_by_worker_);
 }
 
-std::string to_string(const MapObjectType type) {
-	// The types are documented in scripting/lua_map.cc -> LuaMapObjectDescription::get_type_name for
-	// the Lua interface, so make sure to change the documentation there when changing anything in
-	// this function.
-	switch (type) {
-	case MapObjectType::BOB:
-		return "bob";
-	case MapObjectType::CRITTER:
-		return "critter";
-	case MapObjectType::SHIP:
-		return "ship";
-	case MapObjectType::WORKER:
-		return "worker";
-	case MapObjectType::CARRIER:
-		return "carrier";
-	case MapObjectType::FERRY:
-		return "ferry";
-	case MapObjectType::SOLDIER:
-		return "soldier";
-	case MapObjectType::WARE:
-		return "ware";
-	case MapObjectType::BATTLE:
-		return "battle";
-	case MapObjectType::SHIP_FLEET:
-		return "ship_fleet";
-	case MapObjectType::FERRY_FLEET:
-		return "ferry_fleet";
-	case MapObjectType::IMMOVABLE:
-		return "immovable";
-	case MapObjectType::FLAG:
-		return "flag";
-	case MapObjectType::ROAD:
-		return "road";
-	case MapObjectType::WATERWAY:
-		return "waterway";
-	case MapObjectType::ROADBASE:
-		return "roadbase";
-	case MapObjectType::PORTDOCK:
-		return "portdock";
-	case MapObjectType::BUILDING:
-		return "building";
-	case MapObjectType::CONSTRUCTIONSITE:
-		return "constructionsite";
-	case MapObjectType::DISMANTLESITE:
-		return "dismantlesite";
-	case MapObjectType::WAREHOUSE:
-		return "warehouse";
-	case MapObjectType::MARKET:
-		return "market";
-	case MapObjectType::PRODUCTIONSITE:
-		return "productionsite";
-	case MapObjectType::MILITARYSITE:
-		return "militarysite";
-	case MapObjectType::TRAININGSITE:
-		return "trainingsite";
-	case MapObjectType::MAPOBJECT:
-		throw wexception("Unknown MapObjectType %d.", static_cast<int>(type));
-	}
-	NEVER_HERE();
-}
 }  // namespace Widelands
