@@ -138,7 +138,7 @@ struct WareWorkerHints {
 	/// Returns the preciousness of the ware/worker, or kInvalidWare if the tribe doesn't use the
 	/// ware/worker or the worker has no preciousness defined for the tribe.
 	int preciousness(const std::string& tribename) const;
-    void set_preciousness(const std::string& ware_worker, const std::string& tribename, int preciousness);
+    void set_preciousness(const std::string& ware_worker, const std::string& tribename, int p);
 
 private:
 	// tribename, preciousness. No default.

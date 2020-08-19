@@ -291,16 +291,16 @@ int WareWorkerHints::preciousness(const std::string& tribename) const {
 	return Widelands::kInvalidWare;
 }
 
-void WareWorkerHints::set_preciousness(const std::string& ware_worker, const std::string& tribename, int preciousness) {
+void WareWorkerHints::set_preciousness(const std::string& ware_worker, const std::string& tribename, int p) {
     constexpr int kMaxRecommendedPreciousness = 50;
-    if (preciousness > 200) {
+    if (p > 200) {
         throw Widelands::GameDataError("Preciousness of %d is far too high for ware/worker '%s' and tribe '%s'. "
                          "We recommend not going over %d.",
-                         preciousness, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
-    } else if (preciousness > kMaxRecommendedPreciousness) {
+                         p, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
+    } else if (p > kMaxRecommendedPreciousness) {
         log("WARNING: Preciousness of %d is a bit high for ware/worker '%s' and tribe '%s'. We "
             "recommend not going over %d.\n",
-            preciousness, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
+            p, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
     }
-    preciousnesses_.insert(std::make_pair(tribename, preciousness));
+    preciousnesses_.insert(std::make_pair(tribename, p));
 }
