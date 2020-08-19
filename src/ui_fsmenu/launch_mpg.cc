@@ -543,7 +543,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 		// get translated tribename
 		for (const Widelands::TribeBasicInfo& tribeinfo : settings_->settings().tribes) {
 			if (tribeinfo.name == player_save_tribe[i - 1]) {
-				i18n::Textdomain td("tribes");  // for translated initialisation
+				i18n::Textdomain td("tribes");  // for translated initialization
 				player_save_tribe[i - 1] = _(tribeinfo.descname);
 				break;
 			}

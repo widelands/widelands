@@ -303,7 +303,7 @@ void PlayerDescriptionGroup::update_playerinit() {
 		}
 	}
 
-	i18n::Textdomain td("tribes");  // for translated initialisation
+	i18n::Textdomain td("tribes");  // for translated initialization
 	for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 		if (tribeinfo.name == player.tribe) {
 			const size_t nr_inits = tribeinfo.initializations.size();

@@ -523,7 +523,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init_dropdown_.set_label(_("Saved Game"));
 		} else {
 			init_dropdown_.set_label("");
-			i18n::Textdomain td("tribes");  // for translated initialisation
+			i18n::Textdomain td("tribes");  // for translated initialization
 			const Widelands::TribeBasicInfo tribeinfo = settings.get_tribeinfo(player_setting.tribe);
 			std::set<std::string> tags;
 			if (!settings.mapfilename.empty()) {
