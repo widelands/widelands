@@ -65,7 +65,7 @@ void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uin
 		if (TTF_GlyphMetrics(font_, codepoint, nullptr, nullptr, &miny, nullptr, nullptr) == 0) {
 			if (miny < font_descent) {
 				h -= font_descent - miny;
-				break;
+				font_descent = miny;
 			}
 		}
 	}
