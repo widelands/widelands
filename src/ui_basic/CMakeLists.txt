@@ -1,3 +1,12 @@
+wl_library(ui_basic_loading_message
+  SRCS
+    note_loading_message.cc
+    note_loading_message.h
+  DEPENDS
+    notifications
+)
+
+
 wl_library(ui_basic
   SRCS
     box.cc

@@ -139,6 +139,7 @@ wl_library(logic_map
     graphic_playercolor
     io_fileread
     io_filesystem
+    logic
     logic_constants
     logic_exceptions
     logic_filesystem_constants
@@ -256,6 +257,7 @@ wl_library(logic
     sound
     sound_constants
     ui_basic
+    ui_basic_loading_message
     widelands_options
     wui # TODO(GunChleoc): Circular dependency
     wui_game_tips

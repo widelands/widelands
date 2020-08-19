@@ -72,7 +72,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:55s",
          "remove=chance:2.73%",
-         "seed=rowan_summer_sapling 40",
+         "seed=rowan_summer_sapling proximity:15.62%",
          "animate=idle duration:30s",
          "remove=chance:3.91%",
          "grow=rowan_summer_old",
@@ -104,7 +104,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:23m52s",
          "transform=deadtree4 chance:10.16%",
-         "seed=rowan_summer_sapling 180",
+         "seed=rowan_summer_sapling proximity:70.31%",
       },
       fall = {
          "remove=",

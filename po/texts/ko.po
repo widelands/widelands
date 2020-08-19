@@ -3,17 +3,19 @@
 # 
 # Translators:
 # GunChleoc, 2018
-# GunChleoc, 2018
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# GunChleoc, 2015,2018
 # ks k, 2017
 # ks k, 2017-2020
 # Moon Yeonki <backnii@gmail.com>, 2017
+# TaeMin An, 2017,2019
 # TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-07-02 12:18+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-08-17 08:49+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -342,11 +344,11 @@ msgid ""
 " wiki there."
 msgstr "와이드랜드 또는 와이드랜드 편집자를 위해 더 많은 문서 또는 도움말이 필요하면 홈페이지 %s 를 방문하십시오. 우리의 위키에서 온라인 도움말을 찾을 수 있습니다."
 
-#: ../../data/txts/help/common_helptexts.lua:17
+#: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
 msgstr "소개"
 
-#: ../../data/txts/help/common_helptexts.lua:18
+#: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer "
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -354,7 +356,7 @@ msgid ""
 "started through playable tutorials."
 msgstr "와이드랜드는 혼자놀기 캠페인과 여럿놀기 모드를 갖춘 무료 오픈 소스 실시간 전략 게임입니다. 이 게임은 세틀러 2에 의해 영감을 받았지만 훨씬 더 다양하고 깊이 있습니다. 그러나 놀기 가능한 자습서를 통해 쉽게 시작할수 있습니다."
 
-#: ../../data/txts/help/common_helptexts.lua:19
+#: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
 "In this game, you start out on a small piece of land with just a few "
 "resources. Using these, you’ll create an empire with many thousands of "
@@ -363,20 +365,20 @@ msgid ""
 "tribes."
 msgstr "이 게임은 작은 땅에서 약간의 자원이 게임을 시작합니다. 이것들을 이용하여 수천 명의 주민이 있는 제국을 만들게됩니다. 이 목표를 향해 나아가는 길에 경제 기반 시설을 구축하고, 주위의 땅을 탐험하고, 경쟁 부족과 맞서야 할 것입니다."
 
-#: ../../data/txts/help/common_helptexts.lua:25
+#: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
 msgstr "다시보기"
 
-#: ../../data/txts/help/common_helptexts.lua:26
+#: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
 "Widelands records every game you play in two files. One of these files has a"
 " .wrpl.wgf extension and contains an initial savegame. The other file has a "
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr "와이드랜드는 당신이 하는 모든 게임을 두 개의 파일로 기록합니다. 하나는 확장자가 .wrpl.wgf이고 초기 상태를 저장 합니다. 다른 파일에는 .wrpl 확장자가 있으며, 도로를 건설하거나 적을 공격하는 등 모든 플레이어가 실행한 모든 명령이 포함되어 있습니다. 파일 이름의 앞부분은 당신이 게임을 시작한 시간을 나타냅니다."
+msgstr "와이드랜드는 당신이 하는 모든 게임을 두 개의 파일로 기록합니다. 하나는 확장자가 .wrpl.wgf이고 초기 상태를 저장 합니다. 다른 파일에는 .wrpl 확장자가 있으며, 땅길을 건설하거나 적을 공격하는 등 모든 플레이어가 실행한 모든 명령이 포함되어 있습니다. 파일 이름의 앞부분은 당신이 게임을 시작한 시간을 나타냅니다."
 
-#: ../../data/txts/help/common_helptexts.lua:27
+#: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -386,7 +388,7 @@ msgid ""
 "players has a different version of the game."
 msgstr "메인 메뉴의 게임 다시보기 옵션을 사용하면 이전에 재생한 게임을 정확하게 재구성하여 볼 수 있습니다. 그러나 게임 데이터 파일이나 와이드랜드 실행 파일의 작은 변경으로 인해 재생이 호환되지 않아 '동기화되지 않음'이 발생할 수 있습니다. 이는 플레이어 중 한 명이 다른 버전의 게임을 사용하는 경우 네트워크 게임이 동기화 해제 문제를 겪는 것과 유사합니다."
 
-#: ../../data/txts/help/common_helptexts.lua:28
+#: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
@@ -396,7 +398,7 @@ msgid ""
 msgstr "다시보기는 게임 논리에서 버그를 찾는 데 매우 유용한 도구이므로 버그 보고서에 첨부 파일로 유용 할 수 있습니다. 재생 파일은 리눅스 및 Mac OS X의 %s 디렉토리에 저장됩니다. 윈도우즈에서는 와이드랜드 설치의 'replays'하위 디렉토리에 있습니다."
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../data/txts/help/common_helptexts.lua:35
+#: ../../data/txts/help/common_helptexts.lua:41
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
@@ -404,27 +406,27 @@ msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgctxt "hotkey"
 msgid "Space"
 msgstr "스페이스"
 
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
 msgstr "건물공간 켜기/끄기"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgctxt "hotkey"
 msgid "Ctrl + F"
 msgstr "Ctrl + F"
 
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "전체화면 켜기/끄기 (운영체제가 지원하는 경우)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:56
+#: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "약도 켜기/끄기"
 
@@ -493,7 +495,7 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr "뒤의 세 개는 선수의 ‘유형’ 버튼을 마우스 왼쪽 버튼으로 클릭해야만 호스팅 손님에서 설정할 수 있습니다. 방장 선수는 또한 각 선수(선수가 시작하는 건물, 창고 및 작업자 설정)와 컴퓨터 선수 부족 및 팀의 초기화를 설정할 수 있습니다."
+msgstr "뒤의 세 개는 선수의 ‘유형’ 버튼을 마우스 왼쪽 버튼으로 클릭해야만 호스팅 손님에서 설정할 수 있습니다. 방장 선수는 또한 각 선수(선수가 시작하는 건물들, 물품들, 일꾼들의 설정)와 컴퓨터 선수 부족 및 팀의 초기화를 설정할 수 있습니다."
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid ""
@@ -524,7 +526,7 @@ msgstr "낚시꾼들을 잘 감시하고 어장 집을 지으십시오. 물고�
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr "항상 통나무가 고갈되지 않도록 숲지기와 벌목꾼의 집을 지으십시오."
+msgstr "항상 통나무가 고갈되지 않도록 숲꾼과 나무꾼의 집을 지으십시오."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
@@ -542,14 +544,14 @@ msgstr "낚시꾼을 잘 보십시오. 물고기 자원이 작업 영역에서 �
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
-msgstr "항상 숲지기와 짐승 키움이의 오두막을 지어서 통나무나 짐승들이 부족하지 않도록 하십시오."
+msgstr "항상 숲 지킴이와 사냥터지기의 오두막을 지어서 통나무나 짐승들이 부족하지 않도록 하십시오."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 #: ../../data/txts/tips/frisians.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
-msgstr "대부분의 고급 건물에는 숙련된 근로자가 필요합니다. 필요한 근로자가 없는 한 건물을 개선하지 마십시오."
+msgstr "대부분의 고급 건물들에는 숙련된 일꾼들 필요합니다. 필요한 일꾼들이 없는 한 건물을 강화하지 마십시오."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:7
@@ -623,7 +625,7 @@ msgstr "당신은 서쪽, 북서쪽, 북동쪽을 향해 장애물이나 생존�
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr "항상 통나무가 고갈되지 않도록 숲지기의 집을 지으십시오."
+msgstr "항상 통나무가 고갈되지 않도록 숲꾼의 집을 지으십시오."
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
@@ -638,13 +640,13 @@ msgstr "벽돌을 생산하려면 화강암이 필요합니다. 화강암을 생
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr "항상 통나무가 고갈되지 않도록 숲지기의 집을 지으십시오."
+msgstr "항상 통나무가 고갈되지 않도록 숲꾼의 집을 지으십시오."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr "건설 과정은 건설 현장까지 도로가 건설된 후 시작됩니다."
+msgstr "건설 과정은 건설 현장까지 땅길이 건설된 후 시작됩니다."
 
 #: ../../data/txts/tips/general_game.lua:10
 msgid ""
@@ -702,8 +704,8 @@ msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
-msgid "Ctrl+(1-9)"
-msgstr "Ctrl+(1-9)"
+msgid "Ctrl + (1-9)"
+msgstr "컨트롤 + (1-9)"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -719,7 +721,7 @@ msgstr "컨트롤 키를 누른 상태에서 길을 제거하면 첫 번째 교�
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
-msgstr "신병들이 병영에 모집되었습니다. 그들의 능력은 훈련소에서 향상 될 수 있습니다.\n신병들이 막사에 채용되었다. 그들의 능력은 훈련 현장에서 향상될 수 있다."
+msgstr "새로운 군인들이 병영에 모집되었습니다. 그들의 능력은 훈련소에서 향상 될 수 있습니다."
 
 #: ../../data/txts/tips/general_game.lua:55
 msgid ""
@@ -741,17 +743,17 @@ msgstr "경제는 길로 연결된 모든 건물과 깃발로 이루어져 있�
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "농장과 같은 몇몇 건물은 작업 공간이 매우 작습니다. 만약 그 건물이 나무나 도로로 둘러싸버리면, 생산은 중단될 것입니다."
+msgstr "농장과 같은 몇몇 건물은 작업 공간이 매우 작습니다. 만약 그 건물이 나무나 땅길로 둘러싸버리면, 생산은 중단될 것입니다."
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+(+/-)"
-msgstr "Ctrl+(+/-)"
+msgid "Ctrl + (+/-)"
+msgstr "컨트롤 + (+/-)"
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+0"
-msgstr "Ctrl+0"
+msgid "Ctrl + 0"
+msgstr "컨트롤 + 0"
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
@@ -765,8 +767,8 @@ msgstr "‘,’(쉼표) 와 ‘.’(마침표) 키를 사용하여 최근에 방
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Ctrl+(Page Up/Page Down)"
-msgstr "컨트롤+(페이지 업/페이지 다운)"
+msgid "Ctrl + (Page Up/Page Down)"
+msgstr "컨트롤 + (페이지 업/페이지 다운)"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
@@ -775,8 +777,8 @@ msgstr "페이지 업/페이지 다운"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Shift+(Page Up/Page Down)"
-msgstr "쉬프트+(페이지 업/페이지 다운)"
+msgid "Shift + (Page Up/Page Down)"
+msgstr "쉬프트 + (페이지 업/페이지 다운)"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgid ""
@@ -791,8 +793,8 @@ msgstr "화살키"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
-msgstr "컨트롤+화살키"
+msgid "Ctrl + Arrow keys"
+msgstr "컨트롤 + 화살키"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
@@ -801,8 +803,8 @@ msgstr "%1%를 사용하여 지도 보기 이동하십시오. %2%는 보기를 �
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Shift+Arrow keys"
-msgstr "쉬프트+화살키"
+msgid "Shift + Arrow keys"
+msgstr "쉬프트 + 화살키"
 
 #: ../../data/txts/tips/general_game.lua:87
 msgid ""
@@ -810,7 +812,7 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr "건물이 파괴되면, 노동자들은 도로 근처의 연결된 창고로 이동할 수 있는 가까운 깃발을 찾기 시작할 것입니다. 주변에 그런 깃발이 없다면 주변을 방황하다가 결국 죽게될 것입니다."
+msgstr "건물이 파괴되면, 일꾼들은 땅길 근처의 연결된 창고로 이동할 수 있는 가까운 깃발을 찾기 시작할 것입니다. 주변에 그런 깃발이 없다면 주변을 방황하다가 결국 죽게될 것입니다."
 
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
@@ -822,7 +824,7 @@ msgstr "’페이지 업’ 과 ‘페이지 다운’ 키를 사용하여 원�
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr "채팅메시지를 시작할 때 '/me는 피곤하다'를 사용할 수 있다. '-> 닉네임은 피곤하다'로 출력된다.\n채팅 메시지 시작 부분에서 '/me'를 사용할 수 있습니다 : '/ me is tired'는 '-> Nickname is tired'로 인쇄됩니다.\n\n채팅 메시지의 시작부분에 ‘/me’  를 사용할수있습니다:  ‘/me 는 지쳤습니다.' 로입력하면 ‘->대화명님은 지쳤습니다.' 로 표시됩니다."
+msgstr "대화 메시지의 시작부분에 ‘/me’  를 사용할 수 있습니다:  ‘/me 는 피곤합니다' 로 입력하면 ‘-> 대화명님은 지쳤습니다.' 로 출력됩니다."
 
 #: ../../data/txts/tips/multiplayer.lua:12
 msgid ""
