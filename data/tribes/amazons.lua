@@ -1,3 +1,4 @@
+tribes = wl.Tribes()                  
 image_dirname = path.dirname(__file__) .. "images/amazons/"
 
 tribes:new_tribe {
@@ -301,13 +302,20 @@ tribes:new_tribe {
    },
 
    ship_names = {
-      "Orinoco",
-      "Amazonas",
-      "Abacaxis",
-      "Anchicaya",
-      "Guaitara",
-      "Iscuande",
-      "Putumayo",
+      -- TRANSLATORS: This Barbarian ship is named after a river
+      pgettext("shipname", "Orinoco"),
+      -- TRANSLATORS: This Barbarian ship is named after a river
+      pgettext("shipname", "Amazonas"),
+      -- TRANSLATORS: This Barbarian ship is named after a river
+      pgettext("shipname", "Abacaxis"),
+      -- TRANSLATORS: This Barbarian ship is named after a river
+      pgettext("shipname", "Anchicaya"),
+      -- TRANSLATORS: This Barbarian ship is named after a river
+      pgettext("shipname", "Guaitara"),
+      -- TRANSLATORS: This Barbarian ship is named after a river
+      pgettext("shipname", "Iscuande"),
+      -- TRANSLATORS: This Barbarian ship is named after a river
+      pgettext("shipname", "Putumayo"),
    },
 
    -- Special types
