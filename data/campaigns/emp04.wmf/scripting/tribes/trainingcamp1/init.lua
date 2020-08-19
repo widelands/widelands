@@ -86,7 +86,7 @@ tribes:new_trainingsite_type {
          descname = "sleeping",
          actions = {
             "sleep=duration:5s",
-            "checksoldier=soldier:attack level:9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "return=skipped"
          }
       },
       upgrade_soldier_attack_0 = {
