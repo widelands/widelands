@@ -4,7 +4,7 @@
 packet_version="1"
 map_w="64"
 map_h="80"
-nr_players="3"
+nr_players="4"
 name="lua_testsuite"
 author="Unknown"
 descr="no description defined"
