@@ -10,7 +10,6 @@ terrain_affinity = {
 world:new_immovable_type{
    name = "spruce_summer_sapling",
    descname = _ "Spruce (Sapling)",
-   editor_category = "trees_coniferous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -36,7 +35,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "spruce_summer_pole",
    descname = _ "Spruce (Pole)",
-   editor_category = "trees_coniferous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -62,7 +60,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "spruce_summer_mature",
    descname = _ "Spruce (Mature)",
-   editor_category = "trees_coniferous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -90,7 +87,6 @@ world:new_immovable_type{
    descname = _ "Spruce (Old)",
    species = _ "Spruce",
    icon = dirname .. "menu.png",
-   editor_category = "trees_coniferous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

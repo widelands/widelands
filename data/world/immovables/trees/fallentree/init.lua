@@ -10,7 +10,6 @@ animations = {
 world:new_immovable_type{
    name = "fallentree",
    descname = _ "Fallen Tree",
-   editor_category = "trees_dead",
    size = "none",
    programs = {
       main = {

@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "summer_mountain_meadow",
    descname = _ "Mountain Meadow",
-   editor_category = "summer",
    is = "arable",
    valid_resources = {},
    default_resource = "",

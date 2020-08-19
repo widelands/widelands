@@ -18,7 +18,6 @@ terrain_affinity = {
 world:new_immovable_type{
    name = "alder_summer_sapling",
    descname = _ "Alder (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -44,7 +43,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "alder_summer_pole",
    descname = _ "Alder (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -70,7 +68,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "alder_summer_mature",
    descname = _ "Alder (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -98,7 +95,6 @@ world:new_immovable_type{
    descname = _ "Alder (Old)",
    species = _ "Alder",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "snow",
    descname = _ "Snow",
-   editor_category = "winter",
    is = "arable",
    valid_resources = { "water" },
    default_resource = "",

@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "summer_beach",
    descname = _ "Beach",
-   editor_category = "summer",
    is = "walkable",
    valid_resources = {},
    default_resource = "",

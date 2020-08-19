@@ -4,7 +4,6 @@ world:new_critter_type{
    name = "duck",
    descname = _ "Duck",
    animation_directory = dirname,
-   editor_category = "critters_aquatic",
    attributes = { "swimming" },
    programs = {
       remove = { "remove" },

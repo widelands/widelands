@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "tundra3",
    descname = _ "Tundra 3",
-   editor_category = "winter",
    is = "arable",
    tooltips = {
       -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.

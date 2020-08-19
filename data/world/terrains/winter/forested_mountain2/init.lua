@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "winter_forested_mountain2",
    descname = _ "Forested Mountain 2",
-   editor_category = "winter",
    is = "mineable",
    tooltips = {
       -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.

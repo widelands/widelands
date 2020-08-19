@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "wasteland_water",
    descname = _ "Water",
-   editor_category = "wasteland",
    is = "water",
    valid_resources = { "resource_fish" },
    default_resource = "resource_fish",

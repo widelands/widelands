@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "lava",
    descname = _ "Lava",
-   editor_category = "summer",
    is = "unreachable",
    valid_resources = {},
    default_resource = "",

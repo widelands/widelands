@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "desert4",
    descname = _ "Desert 4",
-   editor_category = "desert",
    is = "arable",
    valid_resources = {"resource_water"},
    default_resource = "resource_water",

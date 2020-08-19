@@ -10,7 +10,6 @@ terrain_affinity = {
 world:new_immovable_type{
    name = "maple_winter_sapling",
    descname = _ "Maple (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -36,7 +35,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "maple_winter_pole",
    descname = _ "Maple (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -62,7 +60,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "maple_winter_mature",
    descname = _ "Maple (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -90,7 +87,6 @@ world:new_immovable_type{
    descname = _ "Maple (Old)",
    species = _ "Maple",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "lava-stone1",
    descname = _ "Lava Rocks 1",
-   editor_category = "wasteland",
    is = "unreachable",
    valid_resources = {},
    default_resource = "",

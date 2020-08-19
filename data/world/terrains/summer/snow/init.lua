@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "summer_snow",
    descname = _ "Snow",
-   editor_category = "summer",
    is = "unreachable",
    valid_resources = {},
    default_resource = "",

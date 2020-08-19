@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "taiga",
    descname = _ "Taiga",
-   editor_category = "winter",
    is = "arable",
    valid_resources = { "water" },
    default_resource = "resource_water",

@@ -3,7 +3,6 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "pebble2",
    descname = _ "Pebble",
-   editor_category = "miscellaneous",
    size = "none",
    programs = {},
    animations = {

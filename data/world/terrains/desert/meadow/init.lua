@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "meadow",
    descname = _ "Meadow",
-   editor_category = "desert",
    is = "arable",
    tooltips = {
       -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.

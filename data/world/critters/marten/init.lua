@@ -2,7 +2,6 @@ world:new_critter_type{
    name = "marten",
    descname = _ "Marten",
    animation_directory = path.dirname(__file__),
-   editor_category = "critters_carnivores",
    programs = {
       remove = { "remove" },
    },

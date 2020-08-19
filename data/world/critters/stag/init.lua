@@ -2,7 +2,7 @@ world:new_critter_type{
    name = "stag",
    descname = _ "Stag",
    animation_directory = path.dirname(__file__),
-   editor_category = "critters_herbivores",
+
    programs = {
       remove = { "remove" },
    },

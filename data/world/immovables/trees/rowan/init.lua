@@ -10,7 +10,6 @@ terrain_affinity = {
 world:new_immovable_type{
    name = "rowan_summer_sapling",
    descname = _ "Rowan (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -36,7 +35,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "rowan_summer_pole",
    descname = _ "Rowan (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -62,7 +60,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "rowan_summer_mature",
    descname = _ "Rowan (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -93,7 +90,6 @@ world:new_immovable_type{
    descname = _ "Rowan (Old)",
    species = _ "Rowan",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

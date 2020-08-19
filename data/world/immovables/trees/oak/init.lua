@@ -10,7 +10,6 @@ terrain_affinity = {
 world:new_immovable_type{
    name = "oak_summer_sapling",
    descname = _ "Oak (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -36,7 +35,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "oak_summer_pole",
    descname = _ "Oak (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -62,7 +60,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "oak_summer_mature",
    descname = _ "Oak (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -90,7 +87,6 @@ world:new_immovable_type{
    descname = _ "Oak (Old)",
    species = _ "Oak",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

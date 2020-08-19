@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "summer_mountain3",
    descname = _ "Mountain 3",
-   editor_category = "summer",
    is = "mineable",
    valid_resources = {"resource_coal", "resource_iron", "resource_gold", "resource_stones"},
    default_resource = "",

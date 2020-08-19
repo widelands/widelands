@@ -2,7 +2,6 @@ world:new_critter_type{
    name = "wildboar",
    descname = _ "Wild boar",
    animation_directory = path.dirname(__file__),
-   editor_category = "critters_herbivores",
    programs = {
       remove = { "remove" },
    },

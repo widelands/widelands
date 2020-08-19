@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "wasteland_forested_mountain1",
    descname = _ "Forested Mountain 1",
-   editor_category = "wasteland",
    is = "mineable",
    tooltips = {
       -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.

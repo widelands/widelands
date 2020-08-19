@@ -26,7 +26,7 @@
 --            descname = _"Badger",
 --
 --    **editor_category**
---        *Mandatory*. The category that is used in the editor tools for placing a critter of this type on the map, e.g.::
+--        *Deprecated*. The category that is used in the editor tools for placing a critter of this type on the map, e.g.::
 --
 --            editor_category = "critters_carnivores",
 --
@@ -75,7 +75,6 @@ world:new_critter_type{
    name = "badger",
    descname = _ "Badger",
    animation_directory = path.dirname(__file__),
-   editor_category = "critters_carnivores",
    programs = {
       remove = { "remove" },
    },

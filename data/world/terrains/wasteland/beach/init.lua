@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "wasteland_beach",
    descname = _ "Beach",
-   editor_category = "wasteland",
    is = "walkable",
    valid_resources = {},
    default_resource = "",

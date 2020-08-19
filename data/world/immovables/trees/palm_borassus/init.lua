@@ -10,7 +10,6 @@ terrain_affinity = {
 world:new_immovable_type{
    name = "palm_borassus_desert_sapling",
    descname = _ "Borassus Palm (Sapling)",
-   editor_category = "trees_palm",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -36,7 +35,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "palm_borassus_desert_pole",
    descname = _ "Borassus Palm (Pole)",
-   editor_category = "trees_palm",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -62,7 +60,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "palm_borassus_desert_mature",
    descname = _ "Borassus Palm (Mature)",
-   editor_category = "trees_palm",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -90,7 +87,6 @@ world:new_immovable_type{
    descname = _ "Borassus Palm (Old)",
    species = _ "Borassus Palm",
    icon = dirname .. "menu.png",
-   editor_category = "trees_palm",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

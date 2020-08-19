@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "hardlava",
    descname = _ "Igneous Rocks",
-   editor_category = "wasteland",
    is = "arable",
    valid_resources = { "water" },
    default_resource = "",

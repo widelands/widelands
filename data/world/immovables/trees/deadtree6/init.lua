@@ -3,7 +3,6 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "deadtree6",
    descname = _ "Dead Tree",
-   editor_category = "trees_dead",
    size = "none",
    programs = {
       main = {

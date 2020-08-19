@@ -10,7 +10,6 @@ terrain_affinity = {
 world:new_immovable_type{
    name = "beech_summer_sapling",
    descname = _ "Beech (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -36,7 +35,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "beech_summer_pole",
    descname = _ "Beech (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -62,7 +60,6 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "beech_summer_mature",
    descname = _ "Beech (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -90,7 +87,6 @@ world:new_immovable_type{
    descname = _ "Beech (Old)",
    species = _ "Beech",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

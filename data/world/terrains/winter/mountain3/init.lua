@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "winter_mountain3",
    descname = _ "Mountain 3",
-   editor_category = "winter",
    is = "mineable",
    valid_resources = { "resource_coal", "resource_iron", "resource_gold", "resource_stones" },
    default_resource = "",

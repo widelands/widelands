@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "summer_water",
    descname = _ "Water",
-   editor_category = "summer",
    is = "water",
    valid_resources = {"resource_fish"},
    default_resource = "resource_fish",

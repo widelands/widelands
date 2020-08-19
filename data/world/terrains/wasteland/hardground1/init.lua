@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "hardground1",
    descname = _ "Hard Ground 1",
-   editor_category = "wasteland",
    is = "arable",
    tooltips = {
       -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.

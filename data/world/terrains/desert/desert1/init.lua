@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "desert1",
    descname = _ "Desert 1",
-   editor_category = "desert",
    is = "walkable",
    valid_resources = {},
    default_resource = "",

@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "summer_steppe",
    descname = _ "Steppe",
-   editor_category = "summer",
    is = "arable",
    valid_resources = { "resource_water" },
    default_resource = "resource_water",

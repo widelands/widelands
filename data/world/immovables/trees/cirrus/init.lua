@@ -11,7 +11,6 @@ world:new_immovable_type{
    name = "cirrus_wasteland_sapling",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Cirrus Tree (Sapling)",
-   editor_category = "trees_wasteland",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -38,7 +37,6 @@ world:new_immovable_type{
    name = "cirrus_wasteland_pole",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Cirrus Tree (Pole)",
-   editor_category = "trees_wasteland",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -65,7 +63,6 @@ world:new_immovable_type{
    name = "cirrus_wasteland_mature",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Cirrus Tree (Mature)",
-   editor_category = "trees_wasteland",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -95,7 +92,6 @@ world:new_immovable_type{
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Cirrus Tree",
    icon = dirname .. "menu.png",
-   editor_category = "trees_wasteland",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

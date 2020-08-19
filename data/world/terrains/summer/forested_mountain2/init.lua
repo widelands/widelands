@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "summer_forested_mountain2",
    descname = _ "Forested Mountain 2",
-   editor_category = "summer",
    is = "mineable",
    -- You can add custom additional tooltip entries here.
    tooltips = {

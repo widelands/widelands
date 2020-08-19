@@ -44,7 +44,7 @@
 --            descname = _"Meadow 1",
 --
 --    **editor_category**
---        *Mandatory*. The category that is used in the editor tools for placing a
+--        *Deprecated*. The category that is used in the editor tools for placing a
 --        terrain of this type on the map, e.g.::
 --
 --            editor_category = "summer",
@@ -149,7 +149,6 @@
 world:new_terrain_type{
    name = "desert_beach",
    descname = _ "Beach",
-   editor_category = "desert",
    is = "walkable",
    valid_resources = {},
    default_resource = "",

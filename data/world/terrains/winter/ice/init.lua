@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "ice",
    descname = _ "Ice",
-   editor_category = "winter",
    is = "walkable",
    valid_resources = {},
    default_resource = "",

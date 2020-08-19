@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "mountain4",
    descname = _ "Mountain 4",
-   editor_category = "desert",
    is = "mineable",
    valid_resources = { "resource_coal", "resource_iron", "resource_gold", "resource_stones" },
    default_resource = "",

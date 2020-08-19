@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "tundra_taiga",
    descname = _ "Tundra Taiga",
-   editor_category = "winter",
    is = "arable",
    valid_resources = { "water" },
    default_resource = "resource_water",

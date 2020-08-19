@@ -4,7 +4,6 @@ world:new_immovable_type{
    name = "blackland_rocks1",
    descname = _ "Rocks 1",
    animation_directory = dirname,
-   editor_category = "rocks",
    size = "big",
    programs = {
       shrink = {
@@ -23,7 +22,6 @@ world:new_immovable_type{
    name = "blackland_rocks2",
    descname = _ "Rocks 2",
    animation_directory = dirname,
-   editor_category = "rocks",
    size = "big",
    attributes = { "rocks" },
    programs = {
@@ -43,7 +41,6 @@ world:new_immovable_type{
    name = "blackland_rocks3",
    descname = _ "Rocks 3",
    animation_directory = dirname,
-   editor_category = "rocks",
    size = "big",
    attributes = { "rocks" },
    programs = {
@@ -63,7 +60,6 @@ world:new_immovable_type{
    name = "blackland_rocks4",
    descname = _ "Rocks 4",
    animation_directory = dirname,
-   editor_category = "rocks",
    size = "big",
    attributes = { "rocks" },
    programs = {
@@ -83,7 +79,6 @@ world:new_immovable_type{
    name = "blackland_rocks5",
    descname = _ "Rocks 5",
    animation_directory = dirname,
-   editor_category = "rocks",
    size = "big",
    attributes = { "rocks" },
    programs = {
@@ -103,7 +98,6 @@ world:new_immovable_type{
    name = "blackland_rocks6",
    descname = _ "Rocks 6",
    animation_directory = dirname,
-   editor_category = "rocks",
    size = "big",
    attributes = { "rocks" },
    programs = {

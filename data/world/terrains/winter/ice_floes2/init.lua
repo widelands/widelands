@@ -1,7 +1,6 @@
 world:new_terrain_type{
    name = "ice_floes2",
    descname = _ "Ice Floes 2",
-   editor_category = "winter",
    is = "water",
    valid_resources = {"resource_fish"},
    default_resource = "",
