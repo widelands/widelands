@@ -62,8 +62,9 @@ void FullscreenMenuLaunchSPG::start() {
  * Returns whether a map has been selected.
  */
 bool FullscreenMenuLaunchSPG::clicked_select_map() {
-	if (!settings_->can_change_map())
+	if (!settings_->can_change_map()) {
 		return false;
+	}
 
 	FullscreenMenuMapSelect msm(settings_, nullptr);
 	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
@@ -156,7 +157,7 @@ void FullscreenMenuLaunchSPG::win_condition_selected() {
 
 void FullscreenMenuLaunchSPG::clicked_ok() {
 	const std::string filename = settings_->settings().mapfilename;
-	if (!g_fs->file_exists(filename))
+	if (!g_fs->file_exists(filename)) {
 		throw WLWarning(_("File not found"),
 		                _("Widelands tried to start a game with a file that could not be "
 		                  "found at the given path.\n"
@@ -166,6 +167,7 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 		                  "from the host to you, but perhaps the transfer was not yet "
 		                  "finished!?!"),
 		                filename.c_str());
+	}
 	if (settings_->can_launch()) {
 		if (settings_->settings().scenario) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);

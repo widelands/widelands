@@ -1012,8 +1012,8 @@ void WLApplication::handle_commandline_parameters() {
 		commandline_.erase("datadir");
 	} else {
 		datadir_ = is_absolute_path(INSTALL_DATADIR) ?
-		              INSTALL_DATADIR :
-		              get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
+                    INSTALL_DATADIR :
+                    get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
 #ifdef USE_XDG
 		// Overwrite with first folder found in XDG_DATA_DIRS
 		for (const auto& datadir : FileSystem::get_xdgdatadirs()) {
@@ -1165,67 +1165,69 @@ void WLApplication::mainmenu() {
 			messagetitle.clear();
 		}
 
-		try {
-			switch (mm.run<FullscreenMenuBase::MenuTarget>()) {
-			case FullscreenMenuBase::MenuTarget::kTutorial:
-				mainmenu_tutorial();
-				break;
-			case FullscreenMenuBase::MenuTarget::kSinglePlayer:
-				mainmenu_singleplayer();
-				break;
-			case FullscreenMenuBase::MenuTarget::kMultiplayer:
-				mainmenu_multiplayer();
-				break;
-			case FullscreenMenuBase::MenuTarget::kReplay:
-				replay();
-				break;
-			case FullscreenMenuBase::MenuTarget::kOptions: {
-				Section& s = get_config_section();
-				OptionsCtrl om(s);
-				break;
-			}
-			case FullscreenMenuBase::MenuTarget::kAbout: {
-				FullscreenMenuAbout ff;
-				ff.run<FullscreenMenuBase::MenuTarget>();
-				break;
-			}
-			case FullscreenMenuBase::MenuTarget::kContinueLastsave: {
-				load_game(mm.get_filename_for_continue());
-				break;
-			}
-			case FullscreenMenuBase::MenuTarget::kEditor:
-				EditorInteractive::run_editor(filename_, script_to_run_);
-				break;
-			case FullscreenMenuBase::MenuTarget::kExit:
-			default:
-				return;
-			}
-		} catch (const WLWarning& e) {
-			messagetitle = (boost::format("Warning: %s") % e.title()).str();
-			message = e.what();
-		} catch (const Widelands::GameDataError& e) {
-			messagetitle = _("Game data error");
-			message = e.what();
+		// NOCOM try {
+		switch (mm.run<FullscreenMenuBase::MenuTarget>()) {
+		case FullscreenMenuBase::MenuTarget::kTutorial:
+			mainmenu_tutorial();
+			break;
+		case FullscreenMenuBase::MenuTarget::kSinglePlayer:
+			mainmenu_singleplayer();
+			break;
+		case FullscreenMenuBase::MenuTarget::kMultiplayer:
+			mainmenu_multiplayer();
+			break;
+		case FullscreenMenuBase::MenuTarget::kReplay:
+			replay();
+			break;
+		case FullscreenMenuBase::MenuTarget::kOptions: {
+			Section& s = get_config_section();
+			OptionsCtrl om(s);
+			break;
 		}
+		case FullscreenMenuBase::MenuTarget::kAbout: {
+			FullscreenMenuAbout ff;
+			ff.run<FullscreenMenuBase::MenuTarget>();
+			break;
+		}
+		case FullscreenMenuBase::MenuTarget::kContinueLastsave: {
+			load_game(mm.get_filename_for_continue());
+			break;
+		}
+		case FullscreenMenuBase::MenuTarget::kEditor:
+			EditorInteractive::run_editor(filename_, script_to_run_);
+			break;
+		case FullscreenMenuBase::MenuTarget::kExit:
+		default:
+			return;
+		}
+		/*
+	} catch (const WLWarning& e) {
+		messagetitle = (boost::format("Warning: %s") % e.title()).str();
+		message = e.what();
+	} catch (const Widelands::GameDataError& e) {
+		messagetitle = _("Game data error");
+		message = e.what();
+	}
 #ifdef NDEBUG
-		catch (const std::exception& e) {
-			messagetitle = "Unexpected error during the game";
-			message = e.what();
-			message += "\n\n";
-			message += (boost::format(_("Please report this problem to help us improve Widelands. "
-			                            "You will find related messages in the standard output "
-			                            "(stdout.txt on Windows). You are using build %1$s (%2$s).")) %
-			            build_id().c_str() % build_type().c_str())
-			              .str();
+	catch (const std::exception& e) {
+		messagetitle = "Unexpected error during the game";
+		message = e.what();
+		message += "\n\n";
+		message += (boost::format(_("Please report this problem to help us improve Widelands. "
+		                            "You will find related messages in the standard output "
+		                            "(stdout.txt on Windows). You are using build %1$s (%2$s).")) %
+		            build_id().c_str() % build_type().c_str())
+		              .str();
 
-			message = (boost::format("%s\n\n%s") % message %
-			           _("Please add this information to your report.\n\n"
-			             "Widelands attempts to create a savegame when errors occur "
-			             "during the game. It is often – though not always – possible "
-			             "to load it and continue playing."))
-			             .str();
-		}
+		message = (boost::format("%s\n\n%s") % message %
+		           _("Please add this information to your report.\n\n"
+		             "Widelands attempts to create a savegame when errors occur "
+		             "during the game. It is often – though not always – possible "
+		             "to load it and continue playing."))
+		             .str();
+	}
 #endif
+*/
 	}
 }
 
@@ -1400,30 +1402,32 @@ bool WLApplication::new_game() {
 		}
 	} else {  // normal singleplayer
 		uint8_t const pn = sp.settings().playernum + 1;
-		try {
-			// Game controller needs the ibase pointer to init
-			// the chat
-			game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
-			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
+		// try {
+		// Game controller needs the ibase pointer to init
+		// the chat
+		game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
+		std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
 
-			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
-			if (sp.has_players_tribe()) {
-				tipstexts.push_back(sp.get_players_tribe());
-			}
-			game.create_loader_ui(tipstexts, false);
-
-			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
-
-			game.set_game_controller(ctrl.get());
-			game.init_newgame(sp.settings());
-			game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
-		} catch (const std::exception& e) {
-			log("Fatal exception: %s\n", e.what());
-			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
-			game.set_game_controller(ctrl.get());
-			emergency_save(game);
-			throw;
+		std::vector<std::string> tipstexts{"general_game", "singleplayer"};
+		if (sp.has_players_tribe()) {
+			tipstexts.push_back(sp.get_players_tribe());
 		}
+		game.create_loader_ui(tipstexts, false);
+
+		game.step_loader_ui(_("Preparing game"));
+		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
+
+		game.set_game_controller(ctrl.get());
+		game.init_newgame(sp.settings());
+		game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
+		/* NOCOM
+	} catch (const std::exception& e) {
+		log("Fatal exception: %s\n", e.what());
+		std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
+		game.set_game_controller(ctrl.get());
+		emergency_save(game);
+		throw;
+	} */
 	}
 	return true;
 }

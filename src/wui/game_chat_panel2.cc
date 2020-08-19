@@ -129,8 +129,9 @@ void GameChatPanel2::unfocus_edit() {
 void GameChatPanel2::key_enter() {
 	const std::string& str = editbox.text();
 
-	if (str.size())
+	if (!str.empty()) {
 		chat_.send(str);
+	}
 
 	editbox.set_text("");
 	sent();
