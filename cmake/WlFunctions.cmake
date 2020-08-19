@@ -5,7 +5,7 @@ macro(_parse_common_args ARGS)
     THIRD_PARTY  # Is a third party lib. Less warnings, no codecheck.
     C_LIBRARY # Pure C library. No CXX flags.
     WIN32 # Windows binary/library.
-    USES_BOOST_REGEX
+    USES_BOOST_LIBRARIES
     USES_INTL
     USES_OPENGL
     USES_PNG
@@ -152,7 +152,7 @@ macro(_common_compile_tasks)
     endif()
   endif()
 
-  if (ARG_USES_BOOST_REGEX)
+  if (ARG_USES_BOOST_LIBRARIES)
     target_link_libraries(${NAME} ${Boost_LIBRARIES})
   endif()
 
