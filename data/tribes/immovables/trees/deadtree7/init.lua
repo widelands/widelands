@@ -8,7 +8,6 @@ tribes:new_immovable_type{
    descname = _ "Dead Tree",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {

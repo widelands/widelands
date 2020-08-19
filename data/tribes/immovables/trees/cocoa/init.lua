@@ -7,7 +7,6 @@ tribes:new_immovable_type {
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu_sapling.png",
-   attributes = { "seed_cocoa" },
    programs = {
       main = {
          "animate=idle duration:80s",
@@ -33,7 +32,6 @@ tribes:new_immovable_type {
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu_pole.png",
-   attributes = {},
    programs = {
       main = {
          "animate=idle duration:60s",
@@ -59,7 +57,6 @@ tribes:new_immovable_type {
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu_mature.png",
-   attributes = { "flowering" },
    programs = {
       main = {
          "animate=idle duration:60s",
@@ -85,7 +82,6 @@ tribes:new_immovable_type {
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu_old.png",
-   attributes = { "ripe_cocoa", "field"},
    programs = {
       main = {
          "animate=idle duration:8m20s",

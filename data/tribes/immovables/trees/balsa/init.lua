@@ -79,7 +79,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Sapling)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "tree_balsa_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -100,7 +99,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Pole)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -121,7 +119,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Mature)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -144,7 +141,6 @@ tribes:new_immovable_type{
    species = _ "Balsa Tree",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "tree_balsa", "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -169,7 +165,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Sapling)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "tree_balsa_sapling" },
    terrain_affinity = terrain_affinity_black,
    programs = {
       main = {
@@ -190,7 +185,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Pole)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity_black,
    programs = {
       main = {
@@ -211,7 +205,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Mature)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity_black,
    programs = {
       main = {
@@ -234,7 +227,6 @@ tribes:new_immovable_type{
    species = _ "Balsa Tree",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "tree_balsa", "tree" },
    terrain_affinity = terrain_affinity_black,
    programs = {
       main = {
@@ -259,7 +251,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Sapling)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "tree_balsa_sapling" },
    terrain_affinity = terrain_affinity_desert,
    programs = {
       main = {
@@ -280,7 +271,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Pole)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity_desert,
    programs = {
       main = {
@@ -301,7 +291,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Mature)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity_desert,
    programs = {
       main = {
@@ -324,7 +313,6 @@ tribes:new_immovable_type{
    species = _ "Balsa Tree",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "tree_balsa", "tree" },
    terrain_affinity = terrain_affinity_desert,
    programs = {
       main = {
@@ -349,7 +337,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Sapling)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "tree_balsa_sapling" },
    terrain_affinity = terrain_affinity_winter,
    programs = {
       main = {
@@ -370,7 +357,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Pole)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity_winter,
    programs = {
       main = {
@@ -391,7 +377,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Mature)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity_winter,
    programs = {
       main = {
@@ -414,7 +399,6 @@ tribes:new_immovable_type{
    species = _ "Balsa Tree",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "tree_balsa", "tree" },
    terrain_affinity = terrain_affinity_winter,
    programs = {
       main = {

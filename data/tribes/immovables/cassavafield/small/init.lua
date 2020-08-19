@@ -8,7 +8,6 @@ tribes:new_immovable_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
-   attributes = { "field" },
    programs = {
       main = {
          "animate=idle duration:45s",
