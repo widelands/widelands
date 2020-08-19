@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-06-01 04:06+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-08-07 21:25+0000\n"
 "Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -342,9 +342,9 @@ msgstr "Gotowy do drogi!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
 msgid ""
-"Well done, your scout’s hut has been built. While our scout is moving in, "
+"Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr "Dobra robota, twoja chata zwiadowcy została zbudowana. Póki nasz zwiadowca się wprowadza, dowiedzmy się o nim więcej."
+msgstr "Dobra robota! Twoja chata zwiadowcy została zbudowana. Póki nasz zwiadowca się wprowadza, dowiedzmy się o nim więcej."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
@@ -675,8 +675,3 @@ msgid ""
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
 msgstr "Jesteś już gotów, by spróbować swych sił w kampaniach. Stanowią one również samouczki dla poszczególnych gospodarek plemion. Możesz również zagrać w pozostałe samouczki, lecz nie są one niezbędne do zwycięstwa w kampaniach."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "„%s”"

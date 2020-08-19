@@ -106,7 +106,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:24m15s",
          "transform=deadtree3 chance:13.28%",
-         "seed=cirrus_wasteland_sapling 100",
+         "seed=cirrus_wasteland_sapling proximity:39%",
       },
       fall = {
          "remove=",

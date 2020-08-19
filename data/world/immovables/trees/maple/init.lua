@@ -101,7 +101,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:25m50s",
          "transform=deadtree4 chance:15.23%",
-         "seed=maple_winter_sapling 240",
+         "seed=maple_winter_sapling proximity:93.75%",
       },
       fall = {
          "remove=",

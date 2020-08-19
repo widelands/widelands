@@ -36,7 +36,7 @@ class Tribes;
 struct Buildcost : std::map<DescriptionIndex, uint8_t> {
 
 	Buildcost();
-	Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes);
+	Buildcost(std::unique_ptr<LuaTable> table, Widelands::Tribes& tribes);
 
 	Quantity total() const;
 

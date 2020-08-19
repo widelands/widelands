@@ -75,7 +75,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:27s",
          "remove=chance:3.91%",
-         "seed=mushroom_red_wasteland_sapling 100",
+         "seed=mushroom_red_wasteland_sapling proximity:39%",
          "animate=idle duration:29s",
          "remove=chance:3.91%",
          "grow=mushroom_red_wasteland_old",
@@ -109,7 +109,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:13m20s",
          "transform=deadtree2 chance:19.53%",
-         "seed=mushroom_red_wasteland_sapling 40",
+         "seed=mushroom_red_wasteland_sapling proximity:15.62%",
       },
       fall = {
          "remove=",

@@ -72,7 +72,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:20s",
          "remove=chance:11.72%",
-         "seed=palm_date_desert_sapling 20",
+         "seed=palm_date_desert_sapling proximity:7.8%",
          "animate=idle duration:20s",
          "remove=chance:7.81%",
          "grow=palm_date_desert_old",
@@ -104,7 +104,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:17m30s",
          "transform=deadtree5 chance:12.5%",
-         "seed=palm_date_desert_sapling 200",
+         "seed=palm_date_desert_sapling proximity:78.12%",
       },
       fall = {
          "remove=",

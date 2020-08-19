@@ -29,9 +29,7 @@
 
 namespace Widelands {
 
-FerryDescr::FerryDescr(const std::string& init_descname,
-                       const LuaTable& table,
-                       const Tribes& tribes)
+FerryDescr::FerryDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes)
    : CarrierDescr(init_descname, table, tribes, MapObjectType::FERRY) {
 }
 

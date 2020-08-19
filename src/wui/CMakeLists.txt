@@ -25,12 +25,10 @@ wl_library(wui_chat_ui
     base_i18n
     chat
     graphic
-    graphic_color
     graphic_fonthandler
     graphic_playercolor
     graphic_text
     graphic_text_layout
-    logic
     sound
     ui_basic
     widelands_options
