@@ -80,10 +80,12 @@ jobs:
     - stage: testsuite
     ### RELEASE BUILDS
     - name: "RELEASE: gcc 5"
+      os: linux
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
       services: xvfb
 
     - name: "RELEASE: gcc 10"
+      os: linux
       dist: focal
       addons:
         apt:
@@ -107,10 +109,12 @@ jobs:
       services: xvfb
     ### DEBUG BUILDS
     - name: "DEBUG: gcc 5"
+      os: linux
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
       services: xvfb
 
     - name: "DEBUG: gcc 10"
+      os: linux
       dist: focal
       addons:
         apt:
@@ -132,6 +136,7 @@ jobs:
             - zlib1g-dev
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=gcc-10 CXX=g++-10
       services: xvfb
+
     ### Build on remaining Linux configurations, with translations off
     - stage: build
     ### RELEASE BUILDS
