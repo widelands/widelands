@@ -10,13 +10,8 @@ tribes:new_warehouse_type {
    size = "big",
    destructible = false,
 
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {119, 136},
-         fps = 10,
-      },
-   },
+   animation_directory = dirname,
+   animations = { idle = {hotspot = {92, 89}}},
 
    aihints = {},
 
