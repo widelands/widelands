@@ -25,7 +25,7 @@ tribes:new_worker_type {
          "findspace=size:swim radius:7",
          "walk=coords",
          "animate=release duration:12s545ms",
-         "breed=fish 1",
+         "breed=fish radius:1",
          "return"
       }
    },
