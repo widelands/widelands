@@ -1507,23 +1507,35 @@ checksoldier
    :arg int level: The level that the soldier should have for the given training attribute.
 
 Returns failure unless there is a soldier present with the given training attribute at the given
-level. **Note:** This action is only available to :ref:`training sites
-<lua_tribes_buildings_trainingsites>`. Example:
+level.
+
+.. note:: This action is only available to :ref:`training sites
+   <lua_tribes_buildings_trainingsites>`.
+
+.. note:: The program's name must match the attribute to be trained and the level checked for, in
+   the form ``upgrade_soldier_<attribute>_<level>``.
+
+Example:
 
 .. code-block:: lua
 
-      actions = {
-         -- Fails when there aren't any soldiers with attack level 0
-         "checksoldier=soldier:attack level:1",
-         "return=failed unless site has ax_broad",
-         "return=failed unless site has fish,meat",
-         "return=failed unless site has barbarians_bread",
-         "sleep=duration:30s",
-         -- Check again because the soldier could have been expelled by the player
-         "checksoldier=soldier:attack level:1",
-         "consume=ax_broad fish,meat barbarians_bread",
-         "train=soldier:attack level:2"
-      }
+      upgrade_soldier_attack_3 = {
+         -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+         descname = _"upgrading soldier attack from level 3 to level 4",
+         actions = {
+            -- Fails when there aren't any soldiers with attack level 3
+            "checksoldier=soldier:attack level:3",
+            "return=failed unless site has sword_long",
+            "return=failed unless site has honey_bread,mead",
+            "return=failed unless site has smoked_fish,smoked_meat",
+            "sleep=duration:10s800ms",
+            "animate=working duration:12s",
+            -- Check again because the soldier could have been expelled by the player
+            "checksoldier=soldier:attack level:3",
+            "consume=sword_long honey_bread,mead smoked_fish,smoked_meat",
+            "train=soldier:attack level:4"
+         }
+      },
 */
 ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::string>& arguments,
                                                     const ProductionSiteDescr& descr) {
