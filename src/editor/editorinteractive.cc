@@ -51,7 +51,6 @@
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
@@ -66,18 +65,6 @@
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
-
-namespace {
-using Widelands::Building;
-
-// Load all tribes from disk.
-void load_all_tribes(Widelands::EditorGameBase* egbase) {
-	assert(egbase->has_loader_ui());
-	egbase->step_loader_ui(_("Loading tribes"));
-	egbase->tribes();
-}
-
-}  // namespace
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
    : InteractiveBase(e, get_config_section()),
@@ -454,11 +441,8 @@ void EditorInteractive::load(const std::string& filename) {
 	}
 	ml->preload_map(true);
 
-	load_all_tribes(&egbase());
-
 	// Create the players. TODO(SirVer): this must be managed better
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
-	egbase().step_loader_ui(_("Creating players"));
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
 			egbase().add_player(
@@ -468,7 +452,6 @@ void EditorInteractive::load(const std::string& filename) {
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
 	egbase().create_tempfile_and_save_mapdata(FileSystem::ZIP);
-	egbase().load_graphics();
 	map_changed(MapWas::kReplaced);
 }
 
@@ -964,10 +947,11 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
 		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
+		egbase.tribes();
 
 		{
 			if (filename.empty()) {
-				egbase.step_loader_ui(_("Creating empty map…"));
+				Notifications::publish(UI::NoteLoadingMessage(_("Creating empty map…")));
 				egbase.mutable_map()->create_empty_map(
 				   egbase, 64, 64, 0,
 				   /** TRANSLATORS: Default name for new map */
@@ -975,13 +959,9 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				   get_config_string("realname",
 				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
 				                     pgettext("author_name", "Unknown")));
-
-				load_all_tribes(&egbase);
-
-				egbase.load_graphics();
-				egbase.step_loader_ui(std::string());
 			} else {
-				egbase.step_loader_ui((boost::format(_("Loading map “%s”…")) % filename).str());
+				Notifications::publish(
+				   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
 				eia.load(filename);
 			}
 		}

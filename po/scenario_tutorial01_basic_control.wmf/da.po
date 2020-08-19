@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-05-05 09:04+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -781,10 +781,10 @@ msgstr "Ville det ikke være godt at kontrollere vores stenbruds fremskridt uden
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:504
 msgid ""
-"In addition to the buildings’ census, you can also activate statictics "
+"In addition to the buildings’ census, you can also activate statistics "
 "labels on them. This will display information about the productivity of "
 "buildings or the progress of construction sites."
-msgstr "Udover bygningernes optælling (census), så kan du også aktivere statistiketiketter på dem. Dette vil vise information om produktiviteten for bygninger eller status for byggepladser."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:514
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -1074,8 +1074,3 @@ msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
 msgstr "Tak fordi du spillede denne øvelse. Nyd Wideland og husk at besøge os på"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "»%s«"

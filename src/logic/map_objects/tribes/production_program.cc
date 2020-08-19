@@ -172,16 +172,19 @@ Available actions are:
 ProductionProgram::ActReturn::Condition* create_economy_condition(const std::string& item,
                                                                   const ProductionSiteDescr& descr,
                                                                   const Tribes& tribes) {
-	DescriptionIndex index = tribes.ware_index(item);
-	if (tribes.ware_exists(index)) {
-		descr.ware_demand_checks()->insert(index);
-		return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
-	} else if (tribes.worker_exists(tribes.worker_index(item))) {
-		index = tribes.worker_index(item);
-		descr.worker_demand_checks()->insert(index);
-		return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
-	} else {
-		throw GameDataError("Expected ware or worker type but found '%s'", item.c_str());
+	try {
+		const WareWorker wareworker = tribes.try_load_ware_or_worker(item);
+		if (wareworker == WareWorker::wwWARE) {
+			const DescriptionIndex index = tribes.ware_index(item);
+			descr.ware_demand_checks()->insert(index);
+			return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
+		} else {
+			const DescriptionIndex index = tribes.worker_index(item);
+			descr.worker_demand_checks()->insert(index);
+			return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
+		}
+	} catch (const GameDataError& e) {
+		throw GameDataError("economy condition: %s", e.what());
 	}
 }
 
@@ -275,14 +278,13 @@ ProductionProgram::parse_ware_type_groups(std::vector<std::string>::const_iterat
 }
 
 BillOfMaterials ProductionProgram::parse_bill_of_materials(
-   const std::vector<std::string>& arguments, WareWorker ww, const Tribes& tribes) {
+   const std::vector<std::string>& arguments, WareWorker ww, Tribes& tribes) {
 	BillOfMaterials result;
 	for (const std::string& argument : arguments) {
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
 
-		const DescriptionIndex index = ww == WareWorker::wwWARE ?
-		                                  tribes.safe_ware_index(produceme.first) :
-		                                  tribes.safe_worker_index(produceme.first);
+		const DescriptionIndex index = ww == WareWorker::wwWARE ? tribes.load_ware(produceme.first) :
+		                                                          tribes.load_worker(produceme.first);
 
 		result.push_back(std::make_pair(index, read_positive(produceme.second)));
 	}
@@ -1132,7 +1134,7 @@ type specified in the group. How the produced wares are handled is defined by th
 */
 ProductionProgram::ActProduce::ActProduce(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
-                                          const Tribes& tribes) {
+                                          Tribes& tribes) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: produce=<ware name>[:<amount>] [<ware name>[:<amount>]...]");
 	}
@@ -1211,7 +1213,7 @@ productionsite.
 */
 ProductionProgram::ActRecruit::ActRecruit(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
-                                          const Tribes& tribes) {
+                                          Tribes& tribes) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: recruit=<worker name>[:<amount>] [<worker name>[:<amount>]...]");
 	}
@@ -1863,7 +1865,7 @@ void ProductionProgram::ActConstruct::building_work_failed(Game& game,
 ProductionProgram::ProductionProgram(const std::string& init_name,
                                      const std::string& init_descname,
                                      std::unique_ptr<LuaTable> actions_table,
-                                     const Tribes& tribes,
+                                     Tribes& tribes,
                                      const World& world,
                                      ProductionSiteDescr* building)
    : MapObjectProgram(init_name), descname_(init_descname) {

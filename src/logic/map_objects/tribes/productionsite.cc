@@ -48,22 +48,27 @@ namespace {
 // Parses the descriptions of the working positions from 'items_table' and
 // fills in 'working_positions'. Throws an error if the table contains invalid
 // values.
-void parse_working_positions(const Tribes& tribes,
+void parse_working_positions(Tribes& tribes,
                              LuaTable* items_table,
                              BillOfMaterials* working_positions) {
 	for (const std::string& worker_name : items_table->keys<std::string>()) {
 		int amount = items_table->get_int(worker_name);
 		try {
 			if (amount < 1 || 255 < amount) {
-				throw wexception("count is out of range 1 .. 255");
+				throw GameDataError("count is out of range 1 .. 255");
 			}
+			// Try to load the worker if an object with this name has been registered
+			Notifications::publish(
+			   NoteMapObjectDescription(worker_name, NoteMapObjectDescription::LoadType::kObject));
+
+			// Ensure that we did indeed load a worker
 			DescriptionIndex const woi = tribes.worker_index(worker_name);
 			if (!tribes.worker_exists(woi)) {
-				throw wexception("invalid");
+				throw GameDataError("not a worker");
 			}
 			working_positions->push_back(std::make_pair(woi, amount));
 		} catch (const WException& e) {
-			throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
+			throw GameDataError("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 		}
 	}
 }
@@ -85,7 +90,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          MapObjectType init_type,
                                          const LuaTable& table,
-                                         const Tribes& tribes,
+                                         Tribes& tribes,
                                          const World& world)
    : BuildingDescr(init_descname, init_type, table, tribes),
      ware_demand_checks_(new std::set<DescriptionIndex>()),
@@ -124,35 +129,37 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		std::vector<std::unique_ptr<LuaTable>> input_entries =
 		   table.get_table("inputs")->array_entries<std::unique_ptr<LuaTable>>();
 		for (std::unique_ptr<LuaTable>& entry_table : input_entries) {
-			const std::string& ware_name = entry_table->get_string("name");
+			const std::string& ware_or_worker_name = entry_table->get_string("name");
+			// Check if ware/worker exists already and if not, try to load it. Will throw a
+			// GameDataError on failure.
+			const WareWorker wareworker = tribes.try_load_ware_or_worker(ware_or_worker_name);
+
 			int amount = entry_table->get_int("amount");
 			try {
 				if (amount < 1 || 255 < amount) {
-					throw wexception("amount is out of range 1 .. 255");
+					throw GameDataError("amount is out of range 1 .. 255");
 				}
-				DescriptionIndex idx = tribes.ware_index(ware_name);
-				if (tribes.ware_exists(idx)) {
+				if (wareworker == WareWorker::wwWARE) {
+					const DescriptionIndex idx = tribes.ware_index(ware_or_worker_name);
 					for (const auto& temp_inputs : input_wares()) {
 						if (temp_inputs.first == idx) {
-							throw wexception("duplicated");
+							throw GameDataError(
+							   "ware type '%s' was declared multiple times", ware_or_worker_name.c_str());
 						}
 					}
 					input_wares_.push_back(WareAmount(idx, amount));
 				} else {
-					idx = tribes.worker_index(ware_name);
-					if (tribes.worker_exists(idx)) {
-						for (const auto& temp_inputs : input_workers()) {
-							if (temp_inputs.first == idx) {
-								throw wexception("duplicated");
-							}
+					const DescriptionIndex idx = tribes.worker_index(ware_or_worker_name);
+					for (const auto& temp_inputs : input_workers()) {
+						if (temp_inputs.first == idx) {
+							throw GameDataError("worker type '%s' was declared multiple times",
+							                    ware_or_worker_name.c_str());
 						}
-						input_workers_.push_back(WareAmount(idx, amount));
-					} else {
-						throw wexception("tribes do not define a ware or worker type with this name");
 					}
+					input_workers_.push_back(WareAmount(idx, amount));
 				}
 			} catch (const WException& e) {
-				throw wexception("input \"%s=%d\": %s", ware_name.c_str(), amount, e.what());
+				throw wexception("input \"%s=%d\": %s", ware_or_worker_name.c_str(), amount, e.what());
 			}
 		}
 	}
@@ -218,8 +225,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			throw GameDataError("ai_hints for building %s collects nonexistent ware %s from map",
 			                    name().c_str(), hints().collects_ware_from_map().c_str());
 		}
-		const DescriptionIndex collects_index =
-		   tribes.safe_ware_index(hints().collects_ware_from_map());
+		const DescriptionIndex collects_index = tribes.load_ware(hints().collects_ware_from_map());
 		if (!is_output_ware_type(collects_index)) {
 			throw GameDataError("ai_hints for building %s collects ware %s from map, but it's not "
 			                    "listed in the building's output",
@@ -231,7 +237,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          const LuaTable& table,
-                                         const Tribes& tribes,
+                                         Tribes& tribes,
                                          const World& world)
    : ProductionSiteDescr(
         init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
@@ -602,9 +608,9 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
 /**
  * Create a new worker inside of us out of thin air
  *
- * returns 0 on success -1 if there is no room for this worker
+ * returns true on success and false if there is no room for this worker
  */
-int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes) {
+bool ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes) {
 	bool assigned = false;
 	WorkingPosition* current = working_positions_;
 	for (WorkingPosition* const end = current + descr().nr_working_positions(); current < end;
@@ -631,13 +637,13 @@ int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes)
 		break;
 	}
 	if (!assigned) {
-		return -1;
+		return false;
 	}
 
 	if (upcast(Game, game, &egbase)) {
 		try_start_working(*game);
 	}
-	return 0;
+	return true;
 }
 
 /**
