@@ -35,12 +35,16 @@ class MapObjectDescr;
 /// diverse parsing convenience functions. The creation and execution of program actions is left to
 /// the sub-classes.
 struct MapObjectProgram {
+	static constexpr const char* const kMainProgram = "main";
+
 	const std::string& name() const;
 
 	explicit MapObjectProgram(const std::string& init_name);
 	virtual ~MapObjectProgram() = default;
 
 protected:
+	static constexpr unsigned kMaxProbability = 10000U;
+
 	/// Splits a string by separators.
 	/// \note This ignores empty elements, so do not use this for example to split
 	/// a string with newline characters into lines, because it would ignore empty
@@ -72,12 +76,20 @@ protected:
 	                    const std::string& expected_key = "");
 
 	/**
-	 * @brief Reads time duration with a unit from a string
-	 * @param A positive integer, optionally followed by 'ms' (milliseconds), 's' (seconds) or 'm'
+	 * @brief Reads time duration with units from a string
+	 * @param input: A positive integer, followed by 'ms' (milliseconds), 's' (seconds) or 'm'
 	 * (minutes). This can be repeated to form units like '1m20s500ms'.
+	 * @param descr: For error messages
 	 * @return The duration in SDL ticks (milliseconds)
 	 */
-	static Duration read_duration(const std::string& input);
+	static Duration read_duration(const std::string& input, const MapObjectDescr& descr);
+
+	/**
+	 * @brief Reads a percentage
+	 * @param input A percentage in the format 12%, 12.5% or 12.53%.
+	 * @return Scaled precentage as integer, where 100% corresponds to kMaxProbability.
+	 * */
+	static unsigned read_percent_to_int(const std::string& input);
 
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"
@@ -94,7 +106,7 @@ protected:
 	struct AnimationParameters {
 		/// Animation ID
 		uint32_t animation = 0;
-		/// Animation duration. 0 will play the animation forever.
+		/// Animation duration before the next action will be called by the program.
 		Duration duration = 0;
 	};
 	/// Parses the arguments for an animation action, e.g. { "working", "24000" }. If
@@ -108,15 +120,15 @@ protected:
 		/// Sound effect ID
 		FxId fx;
 		/// Sound effect priority
-		uint8_t priority = 0;
+		uint16_t priority = 0;
+		/// Whether the sound can be played by different map objects at the same time
+		bool allow_multiple;
 	};
 	/// Parses the arguments for a play_sound action, e.g. { "sound/smiths/sharpening", "120" }
 	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments,
-	                                                uint8_t default_priority);
+	                                                const MapObjectDescr& descr);
 
 private:
-	static Widelands::Duration as_ms(Widelands::Duration number, const std::string& unit);
-
 	const std::string name_;
 };
 }  // namespace Widelands

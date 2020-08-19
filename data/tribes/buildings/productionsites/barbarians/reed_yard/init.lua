@@ -35,7 +35,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -48,7 +48,7 @@ tribes:new_productionsite_type {
          descname = _"planting reed",
          actions = {
             "callworker=plant",
-            "sleep=8000" -- orig sleep=20000 but gardener animation was increased by 2sec
+            "sleep=duration:8s" -- orig sleep=duration:20s but gardener animation was increased by 2sec
          }
       },
       harvest = {
@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting reed",
          actions = {
             "callworker=harvest",
-            "sleep=3000"
+            "sleep=duration:3s"
          }
       },
    },

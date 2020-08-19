@@ -72,13 +72,13 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
             "return=skipped unless economy needs gold_ore",
             "consume=meal",
-            "sleep=39800",
+            "sleep=duration:39s800ms",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
@@ -90,7 +90,7 @@ tribes:new_productionsite_type {
          descname = _"mining gold",
          actions = {
             "animate=working duration:12s200ms",
-            "mine=gold 3 100 10 5",
+            "mine=gold radius:3 yield:100% when_empty:10% experience_on_fail:5%",
             "produce=gold_ore",
          }
       },

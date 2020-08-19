@@ -370,7 +370,7 @@ S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
 /// Load the header. The map will then return valid information when
 /// get_width(), get_nrplayers(), get_author() and so on are called.
 int32_t S2MapLoader::preload_map(bool const scenario) {
-	assert(get_state() != STATE_LOADED);
+	assert(get_state() != State::kLoaded);
 
 	map_.cleanup();
 
@@ -397,7 +397,7 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
 		}
 	}
 
-	set_state(STATE_PRELOADED);
+	set_state(State::kPreLoaded);
 
 	return 0;
 }
@@ -411,6 +411,7 @@ int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoa
 	timer_message += map_.get_name();
 	timer_message += "' took %ums";
 	ScopedTimer timer(timer_message);
+	Notifications::publish(UI::NoteLoadingMessage(_("Loading map…")));
 
 	load_s2mf(egbase);
 
@@ -418,7 +419,7 @@ int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoa
 
 	postload_set_port_spaces(egbase);
 
-	set_state(STATE_LOADED);
+	set_state(State::kLoaded);
 
 	return 0;
 }

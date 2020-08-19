@@ -121,7 +121,6 @@ wl_library(ui_fsmenu_gameloading
     logic_game_controller
     logic_game_settings
     logic_map
-    logic_map_objects
     logic_tribe_basic_info
     map_io_map_loader
     network

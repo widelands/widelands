@@ -44,12 +44,12 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "callworker=release",
-            "sleep=52500"
+            "sleep=duration:52s500ms"
          }
       },
    },

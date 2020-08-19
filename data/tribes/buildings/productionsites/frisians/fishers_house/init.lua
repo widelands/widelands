@@ -49,12 +49,12 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _"fishing",
          actions = {
             "callworker=fish",
-            "sleep=16000" -- TODO(stonerl): reduce to 3000 and move 13000 to the worker
+            "sleep=duration:16s" -- TODO(stonerl): reduce to 3s and move 13s to the worker
          }
       },
    },

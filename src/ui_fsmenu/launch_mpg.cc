@@ -31,7 +31,6 @@
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/map.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"

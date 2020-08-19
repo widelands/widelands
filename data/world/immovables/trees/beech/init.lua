@@ -15,9 +15,9 @@ world:new_immovable_type{
    attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
-         "remove=35",
+         "remove=chance:13.67%",
          "grow=beech_summer_pole",
       },
    },
@@ -42,9 +42,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m5s",
-         "remove=24",
+         "remove=chance:9.37%",
          "grow=beech_summer_mature",
       },
    },
@@ -69,9 +69,9 @@ world:new_immovable_type{
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m12s",
-         "remove=19",
+         "remove=chance:7.42%",
          "grow=beech_summer_old",
       },
    },
@@ -98,10 +98,10 @@ world:new_immovable_type{
    attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m25s",
-         "transform=deadtree2 20",
-         "seed=beech_summer_sapling 250",
+         "transform=deadtree2 chance:7.81%",
+         "seed=beech_summer_sapling proximity:97.66%",
       },
       fall = {
          "remove=",
@@ -118,6 +118,7 @@ world:new_immovable_type{
          hotspot = { 25, 61 },
          sound_effect = {
             path = "sound/animals/bird6",
+            priority = 10
          },
       }
    },

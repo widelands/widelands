@@ -52,16 +52,16 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
          descname = _"weaving",
          actions = {
             "return=skipped unless economy needs cloth",
             "consume=wool",
-            "sleep=20000",
-            "playsound=sound/mill/weaving 120",
+            "sleep=duration:20s",
+            "playsound=sound/mill/weaving priority:90%",
             "animate=working duration:15s", -- Unsure of balancing CW
-            "sleep=5000",
+            "sleep=duration:5s",
             "produce=cloth"
          }
       },

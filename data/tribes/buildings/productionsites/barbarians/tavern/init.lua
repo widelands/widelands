@@ -53,16 +53,16 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
              -- time total: 33
             "return=skipped unless economy needs ration",
             "consume=barbarians_bread,fish,meat",
-            "playsound=sound/barbarians/taverns/tavern 100",
+            "playsound=sound/barbarians/taverns/tavern priority:80%",
             "animate=working duration:23s",
-            "sleep=10000",
+            "sleep=duration:10s",
             "produce=ration"
          },
       },

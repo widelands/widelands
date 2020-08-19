@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -71,8 +71,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
          descname = _"constructing a ship",
          actions = {
-            "construct=atlanteans_shipconstruction buildship 6",
-            "sleep=20000",
+            "construct=atlanteans_shipconstruction worker:buildship radius:6",
+            "sleep=duration:20s",
          }
       },
       ship_preparation = {

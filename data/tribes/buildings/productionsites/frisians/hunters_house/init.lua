@@ -48,20 +48,20 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _"hunting",
          actions = {
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "produce=fur"
          }
       },

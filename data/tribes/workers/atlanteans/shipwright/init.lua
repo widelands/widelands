@@ -5,7 +5,7 @@ animations = {
       pictures = path.list_files(dirname .. "idle_??.png"),
       sound_effect = {
          path = "sound/hammering/hammering",
-         priority = 64
+         priority = 50
       },
       hotspot = { 12, 28 },
       fps = 10
@@ -32,10 +32,10 @@ tribes:new_worker_type {
       buildship = {
          "walk=object-or-coords",
          "plant=attrib:shipconstruction unless object",
-         "playsound=sound/sawmill/sawmill 230",
-         "animate=idle 500",
+         "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
+         "animate=idle duration:500ms",
          "construct",
-         "animate=idle 5000",
+         "animate=idle duration:5s",
          "return"
       },
       buildferry_1 = {
@@ -45,7 +45,7 @@ tribes:new_worker_type {
       buildferry_2 = {
          "findspace=size:swim radius:5",
          "walk=coords",
-         "animate=idle 10000",
+         "animate=idle duration:10s",
          "createbob=atlanteans_ferry",
          "return"
       },

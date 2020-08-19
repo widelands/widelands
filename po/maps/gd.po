@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-06-27 07:54+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-07-23 07:47+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -333,8 +333,8 @@ msgid "Astoria 2.R"
 msgstr "Astoria 2"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:10
-msgid "Long, economic play in beautyfull land, try every player!!"
-msgstr "Cluich eaconamach fhada air tìr àlainn. Feuch gach cluicheadair!"
+msgid "Long, economic play in beautiful land. Try every player!"
+msgstr ""
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
@@ -414,6 +414,10 @@ msgstr "Thairis air an fhàire"
 msgid "Man your ship and sail to the horizon."
 msgstr "Cruinnich sgioba is seòl dhan aineolach."
 
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+msgid "This map is not winnable with the ‘Autocrat’ win condition."
+msgstr ""
+
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
 msgstr "Cleasachd an fhàsaich"
@@ -440,13 +444,12 @@ msgstr "’S e na Dolaimitich a th’ ann an seud nan Alpannan agus chaidh iad a
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
-"- there is lot of flat ground on the mountains. Unfortunately, most of it is"
-" vertical. Use wisely the little building space you have. - A fortress at "
-"the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
-" army. Use the terrain to your advantage - chop all trees and expand "
-"wherever you can; it's the only way to find all the precious farm spaces - "
-"suggested teams: red+orange+blue+violet"
-msgstr "Tha tòrr talmhainn rèidhe air na beanntan. Gu mì-fhortanach, ’s ann inghearach a tha a’ mhòrchuid dheth. Cleachd na th’ agad a rùm togail gu glic. Faodaidh dùn aig bun a’ bhealaich chumhaing a bhith ’na chnap-starra mòr dha dh’airm an nàmhad. Cleachd an cruth-tìre gus do chuideachadh. Leag na craobhan uile far an urrainn dhut sin a dhèanamh; seo an t-aon dòigh air an lorg thu rùm dha na tuathanasan agad - sgiobaidhean a mholamaid: dearg+orains+gorm+purpaidh"
+"There is lot of flat ground on the mountains. Unfortunately, most of it is "
+"vertical – use the little building space you have wisely. A fortress at the "
+"mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"army – use the terrain to your advantage. Chop all trees and expand wherever"
+" you can – it's the only way to find all the precious farm spaces."
+msgstr ""
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -472,9 +475,9 @@ msgstr "(tionndadh 0.2)"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:10
 msgid ""
-"A huge europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
+"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr "Mapa glè mhòr na Roinn-eòrpa. Ghorm = An t-Suain, Dearg = An Eadailt, Buidhe = An Spàinnt, Uaine = An Tuirc, Dubh = An Ruis, Orains = Sasainn, Purpaidh = An Fhraing, Gheal = A’ Phòlainn"
+msgstr ""
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:8
 msgid "Europa 1.1"
@@ -713,11 +716,11 @@ msgstr "Dùbhlan gun mheatailt 2"
 #: ../../data/maps/No challenge metal v2.wmf/elemental:10
 msgid ""
 "This map is intended as a solo challenge for those very skilled players that"
-" find 1v6 against the AI too easy.  Blue player has no metal (except a bit "
-"of iron to kickstart your economy), so you have to rely on the 5% production"
-" of an empty mine. And you're still 1v6 (though of course you can remove "
-"some AI players to make it a bit easier). Good luck"
-msgstr "Tha am mapa seo ag amas air modh aon-chluicheadair dhan fheadhainn a tha glè sgileil agus a nì a’ chùis an aghaidh air 6 IFan gun duilgheadas sam bith air mapa àbhaisteach. Chan eil meatailt aig a’ chluicheadair ghorm (ach beagan iarainn gus an eaconamaidh a stèidheachadh), mar sin bidh thu an eisimeil air an t-saothrachadh dhe 5% a nì mèinnean falamh. Agus bidh thu a’ cluich an aghaidh sianar fhathast (ged as urrainn dhut cluicheadair IF no dhà a thoirt air falbh airson cùisean a dhèanamh beagan nas fhasa). Gura math a thèid leat!"
+" find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
+" of iron to kickstart your economy), so you have to rely on the 5% "
+"production of an empty mine. And you're still 1 vs 6 (though of course you "
+"can remove some AI players to make it a bit easier). Good luck!"
+msgstr ""
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"

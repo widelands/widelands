@@ -486,7 +486,7 @@ Worker& Economy::soldier_prototype(const WorkerDescr* d) {
 			throw wexception("soldier_prototype_ not initialized and no SoldierDescr provided");
 		}
 		assert(d->type() == MapObjectType::SOLDIER);
-		soldier_prototype_.reset(&static_cast<Worker&>(d->create_object()));
+		soldier_prototype_.reset(&dynamic_cast<Worker&>(d->create_object()));
 		assert(soldier_prototype_->descr().type() == MapObjectType::SOLDIER);
 	}
 	return *soldier_prototype_;

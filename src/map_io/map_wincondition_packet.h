@@ -26,8 +26,8 @@ namespace Widelands {
 
 /// The anything needed by win conditions
 struct MapWinconditionPacket {
-	void read(FileSystem&, Map& map, MapObjectLoader&);
-	void write(FileSystem&, Map& map, MapObjectSaver&);
+	void read(FileSystem&, Map& map);
+	void write(FileSystem&, Map& map);
 };
 }  // namespace Widelands
 

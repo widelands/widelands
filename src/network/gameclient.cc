@@ -147,7 +147,7 @@ bool GameClientImpl::run_map_menu(GameClient* parent) {
 InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressWindow& loader) {
 	modal = &loader;
 
-	game->step_loader_ui(_("Preparing game"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 	game->set_game_controller(parent);
 	uint8_t const pn = settings.playernum + 1;
@@ -179,9 +179,10 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 
 	modal = igb;
 
-	game->run(settings.savegame ? Widelands::Game::Loaded :
-	                              settings.scenario ? Widelands::Game::NewMPScenario :
-	                                                  Widelands::Game::NewNonScenario,
+	game->run(settings.savegame ?
+	             Widelands::Game::StartGameType::kSaveGame :
+	             settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
+	                                 Widelands::Game::StartGameType::kMap,
 	          "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
 
 	// if this is an internet game, tell the metaserver that the game is done.
