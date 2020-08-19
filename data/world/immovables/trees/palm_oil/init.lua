@@ -12,7 +12,6 @@ world:new_immovable_type{
    descname = _ "Oil Palm (Sapling)",
    editor_category = "trees_palm",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -39,7 +38,6 @@ world:new_immovable_type{
    descname = _ "Oil Palm (Pole)",
    editor_category = "trees_palm",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -66,7 +64,6 @@ world:new_immovable_type{
    descname = _ "Oil Palm (Mature)",
    editor_category = "trees_palm",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -99,7 +96,6 @@ world:new_immovable_type{
    icon = dirname .. "menu.png",
    editor_category = "trees_palm",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {

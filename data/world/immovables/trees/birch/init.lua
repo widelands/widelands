@@ -12,7 +12,6 @@ world:new_immovable_type{
    descname = _ "Birch (Sapling)",
    editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -39,7 +38,6 @@ world:new_immovable_type{
    descname = _ "Birch (Pole)",
    editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -66,7 +64,6 @@ world:new_immovable_type{
    descname = _ "Birch (Mature)",
    editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -98,7 +95,6 @@ world:new_immovable_type{
    icon = dirname .. "menu.png",
    editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {

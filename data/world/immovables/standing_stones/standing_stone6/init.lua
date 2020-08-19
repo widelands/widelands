@@ -5,7 +5,6 @@ world:new_immovable_type{
    descname = _ "Standing Stone",
    editor_category = "standing_stones",
    size = "none",
-   attributes = {},
    programs = {},
    animations = {
       idle = {

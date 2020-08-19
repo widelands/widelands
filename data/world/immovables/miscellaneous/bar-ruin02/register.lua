@@ -1,0 +1,3 @@
+return {
+   bar-ruin02 = {}
+}

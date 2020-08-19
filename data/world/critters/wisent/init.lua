@@ -3,7 +3,6 @@ world:new_critter_type{
    descname = _ "Wisent",
    animation_directory = path.dirname(__file__),
    editor_category = "critters_herbivores",
-   attributes = { "eatable" },
    programs = {
       remove = { "remove" },
    },

@@ -13,7 +13,6 @@ world:new_immovable_type{
    descname = _ "Green Umbrella Tree (Sapling)",
    editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -41,7 +40,6 @@ world:new_immovable_type{
    descname = _ "Green Umbrella Tree (Pole)",
    editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -69,7 +67,6 @@ world:new_immovable_type{
    descname = _ "Green Umbrella Tree (Mature)",
    editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -100,7 +97,6 @@ world:new_immovable_type{
    icon = dirname .. "menu.png",
    editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {

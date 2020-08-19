@@ -12,7 +12,6 @@ world:new_immovable_type{
    descname = _ "Fallen Tree",
    editor_category = "trees_dead",
    size = "none",
-   attributes = {},
    programs = {
       main = {
          "animate=idle duration:30s",

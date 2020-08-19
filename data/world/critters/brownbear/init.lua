@@ -3,7 +3,6 @@ world:new_critter_type{
    descname = _ "Brown bear",
    animation_directory = path.dirname(__file__),
    editor_category = "critters_carnivores",
-   attributes = { "eatable" },
    programs = {
       remove = { "remove" },
    },
