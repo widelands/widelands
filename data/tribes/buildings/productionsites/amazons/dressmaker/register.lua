@@ -1,3 +1,3 @@
 return {
-   amazons_dressmaker = {},
+   amazons_dressmakery = {},
 }

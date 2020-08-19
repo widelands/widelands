@@ -2,7 +2,7 @@ dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "amazons_building",
-   name = "amazons_dressmaker",
+   name = "amazons_dressmakery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("amazons_building", "Dressmaker"),
    helptext_script = dirname .. "helptexts.lua",

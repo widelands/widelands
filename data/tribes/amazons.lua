@@ -262,7 +262,7 @@ tribes:new_tribe {
       "amazons_furnace",
       "amazons_rare_tree_plantation",
       "amazons_stonecarvery",
-      "amazons_dressmaker",
+      "amazons_dressmakery",
       "amazons_charcoal_kiln",
       "amazons_cassava_root_cooker",
       "amazons_chocolate_brewery",

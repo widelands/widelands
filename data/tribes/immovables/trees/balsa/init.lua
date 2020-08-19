@@ -146,7 +146,7 @@ tribes:new_immovable_type{
       main = {
          "animate=idle duration:25m35s",
          "transform=deadtree7 chance:12.89%",
-         "seed=balsa_amazons_sapling proximity:19.53&",
+         "seed=balsa_amazons_sapling proximity:19.53%",
       },
       fall = {
          "animate=fall duration:1s",
@@ -232,7 +232,7 @@ tribes:new_immovable_type{
       main = {
          "animate=idle duration:25m35s",
          "transform=deadtree7 chance:12.89%",
-         "seed=balsa_black_amazons_sapling proximity:19.53&",
+         "seed=balsa_black_amazons_sapling proximity:19.53%",
       },
       fall = {
          "animate=fall duration:1s",
@@ -318,7 +318,7 @@ tribes:new_immovable_type{
       main = {
          "animate=idle duration:25m35s",
          "transform=deadtree7 chance:12.89%",
-         "seed=balsa_desert_amazons_sapling proximity:19.53&",
+         "seed=balsa_desert_amazons_sapling proximity:19.53%",
       },
       fall = {
          "animate=fall duration:1s",
@@ -404,7 +404,7 @@ tribes:new_immovable_type{
       main = {
          "animate=idle duration:25m35s",
          "transform=deadtree7 chance:12.89%",
-         "seed=balsa_winter_amazons_sapling proximity:19.53&",
+         "seed=balsa_winter_amazons_sapling proximity:19.53%",
       },
       fall = {
          "animate=fall duration:1s",

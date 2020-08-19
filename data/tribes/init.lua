@@ -101,6 +101,7 @@ result = {
       descname = _"Amazons (experimental)",
       tooltip = _("The people of the amazonian jungle. Very early experimental state yet"),
       icon = dirname .. "images/amazons/icon.png",
+      script = dirname .. "amazons.lua",
 
       starting_conditions = {
          dirname .. "scripting/starting_conditions/amazons/headquarters.lua";

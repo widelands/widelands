@@ -1,3 +1,3 @@
 return {
-   bread_amazons = {},
+   amazons_bread = {},
 }
