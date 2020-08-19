@@ -1622,8 +1622,11 @@ train
 
 Increases a soldier's training attribute to the given level. It is mandatory to call 'checksoldier'
 before calling this action to ensure that an appropriate soldier will be present at the site.
-**Note:** This action is only available to :ref:`training sites
-<lua_tribes_buildings_trainingsites>`. Example:
+
+.. note:: This action is only available to :ref:`training sites
+   <lua_tribes_buildings_trainingsites>`.
+
+Example:
 
 .. code-block:: lua
 
