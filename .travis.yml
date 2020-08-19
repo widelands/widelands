@@ -1,3 +1,5 @@
+os: linux
+dist: xenial
 addons:
   apt:
     packages:
@@ -77,14 +79,11 @@ jobs:
     ### Building on the oldest and newest gcc
     - stage: testsuite
     ### RELEASE BUILDS
-      name: "RELEASE: gcc 4.8"
-      os: linux
-      dist: trusty
-      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
-      before_script: 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
+    - name: "RELEASE: gcc 5"
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
+      services: xvfb
 
     - name: "RELEASE: gcc 10"
-      os: linux
       dist: focal
       addons:
         apt:
@@ -107,14 +106,11 @@ jobs:
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=gcc-10 CXX=g++-10
       services: xvfb
     ### DEBUG BUILDS
-    - name: "DEBUG: gcc 4.8"
-      os: linux
-      dist: trusty
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
-      before_script: 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
+    - name: "DEBUG: gcc 5"
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
+      services: xvfb
 
     - name: "DEBUG: gcc 10"
-      os: linux
       dist: focal
       addons:
         apt:
@@ -140,7 +136,6 @@ jobs:
     - stage: build
     ### RELEASE BUILDS
       name: "RELEASE: clang 5"
-      os: linux
       dist: trusty
       compiler: clang
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
@@ -150,7 +145,6 @@ jobs:
         - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
 
     - name: "RELEASE: clang 7"
-      os: linux
       dist: bionic
       compiler: clang
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
@@ -160,7 +154,6 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
 
     - name: "RELEASE: clang 8"
-      os: linux
       dist: bionic
       compiler: clang
       addons:
@@ -190,7 +183,6 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-8'
 
     - name: "RELEASE: clang 9"
-      os: linux
       dist: bionic
       compiler: clang
       addons:
@@ -219,21 +211,21 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
 
-    - name: "RELEASE: gcc 5"
-      os: linux
-      dist: xenial
-      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
+    - name: "RELEASE: gcc 6"
+      addons:
+        apt:
+          packages:
+            - g++-6
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=gcc-6 CXX=g++-6
       services: xvfb
 
     - name: "RELEASE: gcc 9"
-      os: linux
       dist: focal
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
       services: xvfb
 
     ### DEBUG BUILDS
     - name: "DEBUG: clang 5"
-      os: linux
       dist: trusty
       compiler: clang
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
@@ -243,7 +235,6 @@ jobs:
         - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
 
     - name: "DEBUG: clang 7"
-      os: linux
       dist: bionic
       compiler: clang
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
@@ -253,7 +244,6 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
 
     - name: "DEBUG: clang 8"
-      os: linux
       dist: bionic
       compiler: clang
       addons:
@@ -283,7 +273,6 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-8'
 
     - name: "DEBUG: clang 9"
-      os: linux
       dist: bionic
       compiler: clang
       addons:
@@ -312,14 +301,14 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
 
-    - name: "DEBUG: gcc 5"
-      os: linux
-      dist: xenial
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
-      services: xvfb
+    - name: "DEBUG: gcc 6"
+      addons:
+        apt:
+          packages:
+            - g++-6
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=gcc-6 CXX=g++-6
 
     - name: "DEBUG: gcc 9"
-      os: linux
       dist: focal
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
       services: xvfb
