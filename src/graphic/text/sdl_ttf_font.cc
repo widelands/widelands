@@ -55,15 +55,16 @@ void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uin
 	TTF_SizeUTF8(font_, txt.c_str(), &w, &h);
 
 	// TODO(Niektory): A workaround for issue #590. If the descent of any character in the string
-	// exceeds the maximum descent of the font, adjust the height by 1 pixel.
+	// exceeds the maximum descent of the font, adjust the height by the difference.
 	// There has to be a better way.
 	std::string::size_type position = 0;
+	int font_descent = TTF_FontDescent(font_);
 	while (position < txt.size()) {
 		uint16_t codepoint = Utf8::utf8_to_unicode(txt, position);
 		int miny;
 		if (TTF_GlyphMetrics(font_, codepoint, nullptr, nullptr, &miny, nullptr, nullptr) == 0) {
-			if (miny < TTF_FontDescent(font_)) {
-				--h;
+			if (miny < font_descent) {
+				h -= font_descent - miny;
 				break;
 			}
 		}
