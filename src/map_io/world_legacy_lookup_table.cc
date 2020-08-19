@@ -108,6 +108,7 @@ terrains_
 	{"strand", "summer_beach"},
 	{"schnee", "summer_snow"},
 	{"wasser", "summer_water"},
+	{"ashes", "ashes1"},
 }
 {
 }

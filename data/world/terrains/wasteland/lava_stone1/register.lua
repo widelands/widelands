@@ -1,0 +1,3 @@
+return {
+   lava-stone1 = {}
+}
