@@ -67,17 +67,6 @@ void World::load_graphics() {
 }
 
 void World::postload() {
-	// Validate immovable grows/transforms data
-	for (DescriptionIndex i = 0; i < immovables_->size(); ++i) {
-		const ImmovableDescr& imm = immovables_->get(i);
-		for (const auto& target : imm.becomes()) {
-			if (get_immovable_index(target.second) == INVALID_INDEX) {
-				throw GameDataError("Unknown grow/transform target '%s' for world immovable '%s'",
-				                    target.second.c_str(), imm.name().c_str());
-			}
-		}
-	}
-
 	const DescriptionIndex nr_t = get_nr_terrains();
 	for (size_t i = 0; i < nr_t; ++i) {
 		const TerrainDescription& t = terrain_descr(i);
@@ -113,7 +102,11 @@ const DescriptionMaintainer<ImmovableDescr>& World::immovables() const {
 
 void World::add_immovable_type(const LuaTable& table) {
 	i18n::Textdomain td("world");
-	immovables_->add(new ImmovableDescr(_(table.get_string("descname")), table, *this));
+	std::vector<std::string> attributes;
+	if (table.has_key("attributes")) {
+		attributes = table.get_table("attributes")->array_entries<std::string>();
+	}
+	immovables_->add(new ImmovableDescr(_(table.get_string("descname")), table, attributes, *this));
 }
 
 void World::add_editor_terrain_category(const LuaTable& table) {

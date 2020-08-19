@@ -39,7 +39,7 @@ enum class SoldierPreference : uint8_t {
 
 class MilitarySiteDescr : public BuildingDescr {
 public:
-	MilitarySiteDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
+	MilitarySiteDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
 	~MilitarySiteDescr() override {
 	}
 

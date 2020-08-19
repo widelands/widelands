@@ -1,7 +1,8 @@
-# Automatically created by Widelands  (Release)
+# Automatically created by Widelands r24491[6424378@tribes-filtering] (Debug)
 
 [global]
 packet_version="1"
+waterway_max_length="0"
 number_of_port_spaces="0"
 
 [port_spaces]
