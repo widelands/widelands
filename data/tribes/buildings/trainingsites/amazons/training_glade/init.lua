@@ -70,8 +70,6 @@ tribes:new_trainingsite_type {
    },
 
    ["soldier evade"] = {
-      min_level = 0,
-      max_level = 2,
       food = {
          {"fish", "meat"},
          {"chocolate"},
@@ -84,8 +82,6 @@ tribes:new_trainingsite_type {
       }
    },
    ["soldier health"] = {
-      min_level = 0,
-      max_level = 2,
       food = {
          {"fish", "meat"},
          {"chocolate"},
@@ -98,8 +94,6 @@ tribes:new_trainingsite_type {
       }
    },
    ["soldier defense"] = {
-      min_level = 0,
-      max_level = 1,
       food = {
          {"fish", "meat"},
          {"chocolate"},
@@ -124,115 +118,115 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("amazons_building", "upgrading soldier evade from level 0 to level 1"),
          actions = {
-            "checksoldier=soldier evade 0",
+            "checksoldier=soldier:evade level:0",
             "return=failed unless site has boots_sturdy",
             "return=failed unless site has chocolate",
             "return=failed unless site has fish,meat",
             "animate=working duration:22s800ms",
-            "checksoldier=soldier evade 0", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:evade level:0", -- Because the soldier can be expelled by the player
             "consume=boots_sturdy chocolate fish,meat",
-            "train=soldier evade 0 1"
+            "train=soldier:evade 0 level:1"
          }
       },
       upgrade_soldier_evade_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("amazons_building", "upgrading soldier evade from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier evade 1",
+            "checksoldier=soldier:evade level:1",
             "return=failed unless site has boots_swift",
             "return=failed unless site has chocolate",
             "return=failed unless site has amazons_bread",
             "animate=working duration:15s600ms",
-            "checksoldier=soldier evade 1", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:evade level:1", -- Because the soldier can be expelled by the player
             "consume=boots_swift amazons_bread chocolate",
-            "train=soldier evade 1 2",
+            "train=soldier:evade 1 level:2",
          }
       },
       upgrade_soldier_evade_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("amazons_building", "upgrading soldier evade from level 2 to level 3"),
          actions = {
-            "checksoldier=soldier evade 2",
+            "checksoldier=soldier:evade level:2",
             "return=failed unless site has boots_hero",
             "return=failed unless site has chocolate:2",
             "return=failed unless site has amazons_bread:2",
             "return=failed unless site has fish,meat:2",
             "animate=working duration:15s600ms",
-            "checksoldier=soldier evade 2", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:evade level:2", -- Because the soldier can be expelled by the player
             "consume=boots_hero amazons_bread:2 chocolate:2 fish,meat:2",
-            "train=soldier evade 2 3",
+            "train=soldier:evade 2 level:3",
          }
       },
       upgrade_soldier_health_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("amazons_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
-            "checksoldier=soldier health 0",
+            "checksoldier=soldier:health level:0",
             "return=failed unless site has armor_wooden",
             "return=failed unless site has chocolate",
             "return=failed unless site has fish,meat",
             "animate=working duration:22s800ms",
-            "checksoldier=soldier health 0", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:health level:0", -- Because the soldier can be expelled by the player
             "consume=armor_wooden chocolate fish,meat",
-            "train=soldier health 0 1"
+            "train=soldier:health level:1"
          }
       },
       upgrade_soldier_health_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("amazons_building", "upgrading soldier health from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier health 1",
+            "checksoldier=soldier:health level:1",
             "return=failed unless site has helmet_wooden",
             "return=failed unless site has chocolate",
             "return=failed unless site has amazons_bread",
             "animate=working duration:15s600ms",
-            "checksoldier=soldier health 1", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:health level:1", -- Because the soldier can be expelled by the player
             "consume=helmet_wooden amazons_bread chocolate",
-            "train=soldier health 1 2",
+            "train=soldier:health level:2",
          }
       },
       upgrade_soldier_health_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("amazons_building", "upgrading soldier health from level 2 to level 3"),
          actions = {
-            "checksoldier=soldier health 2",
+            "checksoldier=soldier:health level:2",
             "return=failed unless site has warriors_coat",
             "return=failed unless site has chocolate",
             "return=failed unless site has amazons_bread",
             "return=failed unless site has fish,meat",
             "animate=working duration:15s600ms",
-            "checksoldier=soldier health 2", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:health level:2", -- Because the soldier can be expelled by the player
             "consume=warriors_coat amazons_bread chocolate fish,meat",
-            "train=soldier health 2 3",
+            "train=soldier:health level:3",
          }
       },
       upgrade_soldier_defense_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("amazons_building", "upgrading soldier defense from level 0 to level 1"),
          actions = {
-            "checksoldier=soldier defense 0",
+            "checksoldier=soldier:defense level:0",
             "return=failed unless site has vest_padded",
             "return=failed unless site has chocolate",
             "return=failed unless site has amazons_bread",
             "animate=working duration:22s800ms",
-            "checksoldier=soldier defense 0", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:defense level:0", -- Because the soldier can be expelled by the player
             "consume=vest_padded amazons_bread chocolate",
-            "train=soldier defense 0 1",
+            "train=soldier:defense level:1",
          }
       },
       upgrade_soldier_defense_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("amazons_building", "upgrading soldier defense from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier defense 1",
+            "checksoldier=soldier:defense level:1",
             "return=failed unless site has protector_padded",
             "return=failed unless site has chocolate",
             "return=failed unless site has amazons_bread",
             "return=failed unless site has fish,meat",
             "animate=working duration:22s800ms",
-            "checksoldier=soldier defense 1", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:defense level:1", -- Because the soldier can be expelled by the player
             "consume=protector_padded amazons_bread chocolate fish,meat",
-            "train=soldier defense 1 2",
+            "train=soldier:defense level:2",
 
          }
       },

@@ -63,8 +63,6 @@ tribes:new_trainingsite_type {
    },
 
    ["soldier attack"] = {
-      min_level = 0,
-      max_level = 1,
       food = {
          {"fish", "meat"},
          {"chocolate"},
@@ -89,29 +87,29 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("amazons_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
-            "checksoldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
+            "checksoldier=soldier:attack level:0", -- Fails when aren't any soldier of level 0 attack
             "return=failed unless site has fish,meat",
             "return=failed unless site has chocolate",
             "return=failed unless site has spear_stone_tipped",
             "animate=working duration:30s",
-            "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:attack level:0", -- Because the soldier can be expelled by the player
             "consume=fish,meat chocolate spear_stone_tipped",
-            "train=soldier attack 0 1"
+            "train=soldier:attack level:1"
          }
       },
       upgrade_soldier_attack_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("amazons_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier attack 1", -- Fails when aren't any soldier of level 1 attack
+            "checksoldier=soldier:attack level:1", -- Fails when aren't any soldier of level 1 attack
             "return=failed unless site has amazons_bread",
             "return=failed unless site has fish,meat",
             "return=failed unless site has chocolate",
             "return=failed unless site has spear_hardened",
             "animate=working duration:30s",
-            "checksoldier=soldier attack 1", -- Because the soldier can be expulsed by the player
+            "checksoldier=soldier:attack level:1", -- Because the soldier can be expulsed by the player
             "consume=amazons_bread fish,meat chocolate spear_hardened",
-            "train=soldier attack 1 2"
+            "train=soldier:attack level:2"
          }
       },
    },
