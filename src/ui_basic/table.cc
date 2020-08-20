@@ -627,7 +627,7 @@ bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 }
 
 void Table<void*>::layout() {
-	if (columns_.empty() || get_w() == 0) {
+	if (columns_.empty() || get_h() == 0 || get_w() == 0) {
 		return;
 	}
 

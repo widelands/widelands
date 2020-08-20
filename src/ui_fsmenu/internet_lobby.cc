@@ -43,96 +43,101 @@ const uint8_t kClientUnregistered = 2;
 const uint8_t kClientIRC = 4;
 }  // namespace
 
-FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
-                                                         char const* const pwd,
+FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
+                                                         std::string& pwd,
                                                          bool registered)
-   : FullscreenMenuBase(),
+   : FullscreenMenuLoadMapOrGame(),
+     // Main title
+     title_(this,
+            0,
+            0,
+            0,
+            0,
+            _("Metaserver Lobby"),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
-     // Values for alignment and size
-     butx_(get_w() * 13 / 40),
-     butw_(get_w() * 36 / 125),
-     buth_(get_h() * 19 / 400),
-     lisw_(get_w() * 635 / 1000),
-     prev_clientlist_len_(1000),
-     new_client_fx_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_freshmen")),
+     // Boxes
+     left_column_(this, 0, 0, UI::Box::Vertical),
+     right_column_(this, 0, 0, UI::Box::Vertical),
 
-     // Text labels
-     title(this,
-           get_w() / 2,
-           get_h() / 20,
-           0,
-           0,
-           _("Metaserver Lobby"),
-           UI::Align::kCenter,
-           g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
-     clients_(this, get_w() * 4 / 125, get_h() * 15 / 100, 0, 0, _("Clients online:")),
-     opengames_(this, get_w() * 17 / 25, get_h() * 15 / 100, 0, 0, _("Open Games:")),
-     servername_(this, get_w() * 17 / 25, get_h() * 63 / 100, 0, 0, _("Name of your server:")),
+     // Left column content
+     label_clients_online_(&left_column_, 0, 0, 0, 0, _("Clients online:")),
+     clientsonline_table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     chat_(&left_column_, 0, 0, 0, 0, InternetGaming::ref(), UI::PanelStyle::kFsMenu),
 
-     // Buttons
-     joingame_(this,
+     // Right column content
+     label_opengames_(&right_column_, 0, 0, 0, 0, _("Open Games:")),
+     opengames_list_(&right_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     joingame_(&right_column_,
                "join_game",
-               get_w() * 17 / 25,
-               get_h() * 55 / 100,
-               butw_,
-               buth_,
+               0,
+               0,
+               0,
+               0,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
-     hostgame_(this,
+     servername_label_(&right_column_, 0, 0, 0, 0, _("Name of your server:")),
+     servername_(&right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     hostgame_(&right_column_,
                "host_game",
-               get_w() * 17 / 25,
-               get_h() * 73 / 100,
-               butw_,
-               buth_,
+               0,
+               0,
+               0,
+               0,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Open a new game")),
-     back_(this,
-           "back",
-           get_w() * 17 / 25,
-           get_h() * 90 / 100,
-           butw_,
-           buth_,
-           UI::ButtonStyle::kFsMenuSecondary,
-           _("Leave Lobby")),
-
-     // Edit boxes
-     edit_servername_(this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, UI::PanelStyle::kFsMenu),
-
-     // List
-     clientsonline_list_(
-        this, get_w() * 4 / 125, get_h() / 5, lisw_, get_h() * 3 / 10, UI::PanelStyle::kFsMenu),
-     opengames_list_(
-        this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20, UI::PanelStyle::kFsMenu),
-
-     // The chat UI
-     chat(this,
-          get_w() * 4 / 125,
-          get_h() * 51 / 100,
-          lisw_,
-          get_h() * 90 / 100 - get_h() * 51 / 100 + buth_ - 1,
-          InternetGaming::ref(),
-          UI::PanelStyle::kFsMenu),
-
+     prev_clientlist_len_(1000),
+     new_client_fx_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_freshmen")),
      // Login information
      nickname_(nick),
      password_(pwd),
      is_registered_(registered) {
+
+	ok_.set_visible(false);  // We have 2 starting buttons, so we need a different layout here.
+	back_.set_title(_("Leave Lobby"));
+
+	left_column_.set_inner_spacing(padding_);
+	left_column_.add(&label_clients_online_, UI::Box::Resizing::kFullSize);
+	left_column_.add(&clientsonline_table_, UI::Box::Resizing::kExpandBoth);
+	left_column_.add(&chat_, UI::Box::Resizing::kFullSize);
+
+	right_column_.set_inner_spacing(padding_);
+	right_column_.add(&label_opengames_, UI::Box::Resizing::kFullSize);
+	right_column_.add(&opengames_list_, UI::Box::Resizing::kFullSize);
+	right_column_.add_space(0);
+	right_column_.add(&joingame_, UI::Box::Resizing::kFullSize);
+	right_column_.add_inf_space();
+	right_column_.add(&servername_label_, UI::Box::Resizing::kFullSize);
+	right_column_.add(&servername_, UI::Box::Resizing::kFullSize);
+	right_column_.add_space(0);
+	right_column_.add(&hostgame_, UI::Box::Resizing::kFullSize);
+	right_column_.add_inf_space();
 
 	joingame_.sigclicked.connect([this]() { clicked_joingame(); });
 	hostgame_.sigclicked.connect([this]() { clicked_hostgame(); });
 	back_.sigclicked.connect([this]() { clicked_back(); });
 
 	// Set the texts and style of UI elements
-	title.set_font_scale(scale_factor());
+	const std::string server = get_config_string("servername", "");
+	servername_.set_text(server);
+	servername_.changed.connect([this]() { change_servername(); });
 
-	opengames_.set_font_scale(scale_factor());
-	clients_.set_font_scale(scale_factor());
-	servername_.set_font_scale(scale_factor());
-
-	std::string server = get_config_string("servername", "");
-	edit_servername_.set_font_scale(scale_factor());
-	edit_servername_.set_text(server);
-	edit_servername_.changed.connect([this]() { change_servername(); });
+	// Handle focus interaction between our 2 edit boxes
+	servername_.clicked.connect([this]() {
+		servername_.focus();
+		chat_.unfocus_edit();
+	});
+	servername_.cancel.connect([this]() {
+		servername_.set_can_focus(false);
+		servername_.set_can_focus(true);
+		chat_.focus_edit();
+	});
+	chat_.clicked.connect([this]() {
+		servername_.set_can_focus(false);
+		servername_.set_can_focus(true);
+		chat_.focus_edit();
+	});
 
 	// Prepare the lists
 	const std::string t_tip =
@@ -145,15 +150,16 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Registered")) %
 	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Unregistered")))
 	      .str();
-	clientsonline_list_.add_column(22, "*", t_tip);
+	clientsonline_table_.add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
-	clientsonline_list_.add_column((lisw_ - 22) * 3 / 8, pgettext("player", "Name"));
-	clientsonline_list_.add_column((lisw_ - 22) * 2 / 8, _("Version"));
-	clientsonline_list_.add_column(
-	   (lisw_ - 22) * 3 / 8, _("Game"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
-	clientsonline_list_.set_column_compare(
+	clientsonline_table_.add_column(180, pgettext("player", "Name"));
+	/** TRANSLATORS: Widelands version */
+	clientsonline_table_.add_column(120, _("Version"));
+	clientsonline_table_.add_column(
+	   0, _("Game"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
+	clientsonline_table_.set_column_compare(
 	   0, [this](uint32_t a, uint32_t b) { return compare_clienttype(a, b); });
-	clientsonline_list_.double_clicked.connect(
+	clientsonline_table_.double_clicked.connect(
 	   [this](uint32_t a) { return client_doubleclicked(a); });
 	opengames_list_.selected.connect([this](uint32_t) { server_selected(); });
 	opengames_list_.double_clicked.connect([this](uint32_t) { server_doubleclicked(); });
@@ -163,13 +169,44 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 		connect_to_metaserver();
 	}
 
+	layout();
 	// set focus to chat input
-	chat.focus_edit();
+	chat_.focus_edit();
 }
 
 void FullscreenMenuInternetLobby::layout() {
-	// TODO(GunChleoc): Box layout and then implement
-	clientsonline_list_.layout();
+	FullscreenMenuLoadMapOrGame::layout();
+
+	title_.set_font_scale(scale_factor());
+	label_opengames_.set_font_scale(scale_factor());
+	label_clients_online_.set_font_scale(scale_factor());
+	servername_label_.set_font_scale(scale_factor());
+
+	uint32_t butw = get_w() - right_column_x_ - right_column_margin_;
+	uint32_t buth = (text_height(UI::FontStyle::kLabel) + 8) * scale_factor();
+
+	tabley_ = tabley_ / 2;
+	tableh_ += tabley_;
+
+	title_.set_size(get_w(), title_.get_h());
+	title_.set_pos(Vector2i(0, tabley_ / 3));
+
+	left_column_.set_size(tablew_, tableh_);
+	left_column_.set_pos(Vector2i(tablex_, tabley_));
+
+	right_column_.set_size(get_right_column_w(right_column_x_), tableh_ - buth - 4 * padding_);
+	right_column_.set_pos(Vector2i(right_column_x_, tabley_));
+
+	// Chat
+	chat_.set_desired_size(tablew_, tableh_ * 7 / 12);
+
+	// Identical list height
+	opengames_list_.set_desired_size(opengames_list_.get_w(), clientsonline_table_.get_h());
+
+	// Buttons
+	joingame_.set_size(butw, buth);
+	hostgame_.set_size(butw, buth);
+	back_.set_size(butw, buth);
 }
 
 /// think function of the UI (main loop)
@@ -195,10 +232,10 @@ void FullscreenMenuInternetLobby::think() {
 		fill_games_list(InternetGaming::ref().games());
 	}
 	// unfocus chat window when other UI element has focus
-	if (!chat.has_focus()) {
-		chat.unfocus_edit();
+	if (!chat_.has_focus()) {
+		chat_.unfocus_edit();
 	}
-	if (edit_servername_.has_focus()) {
+	if (servername_.has_focus()) {
 		change_servername();
 	}
 }
@@ -226,6 +263,7 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 	opengames_list_.clear();
 	hostgame_.set_enabled(true);
 	joingame_.set_enabled(false);
+
 	const std::string& localbuildid = build_id();
 
 	if (games != nullptr) {  // If no communication error occurred, fill the list.
@@ -266,18 +304,19 @@ uint8_t FullscreenMenuInternetLobby::convert_clienttype(const std::string& type)
  * row \p rowb when sorted according to clienttype
  */
 bool FullscreenMenuInternetLobby::compare_clienttype(unsigned int rowa, unsigned int rowb) {
-	const InternetClient* playera = clientsonline_list_[rowa];
-	const InternetClient* playerb = clientsonline_list_[rowb];
+	const InternetClient* playera = clientsonline_table_[rowa];
+	const InternetClient* playerb = clientsonline_table_[rowb];
 
 	return convert_clienttype(playera->type) < convert_clienttype(playerb->type);
 }
 
 /// fills the client list
 void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetClient>* clients) {
-	clientsonline_list_.clear();
+	clientsonline_table_.clear();
 	if (clients != nullptr) {  // If no communication error occurred, fill the list.
 		for (const InternetClient& client : *clients) {
-			UI::Table<const InternetClient* const>::EntryRecord& er = clientsonline_list_.add(&client);
+			UI::Table<const InternetClient* const>::EntryRecord& er =
+			   clientsonline_table_.add(&client);
 			er.set_string(1, client.name);
 			er.set_string(2, client.build_id);
 			er.set_string(3, client.game);
@@ -311,18 +350,18 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 		}
 		prev_clientlist_len_ = clients->size();
 	}
-	clientsonline_list_.sort();
+	clientsonline_table_.sort();
 }
 
 /// called when an entry of the client list was doubleclicked
 void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 	// add a @clientname to the current edit text.
-	if (clientsonline_list_.has_selection()) {
-		UI::Table<const InternetClient* const>::EntryRecord& er = clientsonline_list_.get_record(i);
+	if (clientsonline_table_.has_selection()) {
+		UI::Table<const InternetClient* const>::EntryRecord& er = clientsonline_table_.get_record(i);
 
 		std::string temp("@");
 		temp += er.get_string(1);
-		std::string text(chat.get_edit_text());
+		std::string text(chat_.get_edit_text());
 
 		if (text.size() && (text.at(0) == '@')) {  // already PM ?
 			if (text.find(' ') <= text.size()) {
@@ -335,8 +374,8 @@ void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 		}
 
 		temp += text;
-		chat.set_edit_text(temp);
-		chat.focus_edit();
+		chat_.set_edit_text(temp);
+		chat_.focus_edit();
 	}
 }
 
@@ -366,17 +405,17 @@ void FullscreenMenuInternetLobby::server_doubleclicked() {
 void FullscreenMenuInternetLobby::change_servername() {
 	// Allow client to enter a servername manually
 	hostgame_.set_enabled(true);
-	edit_servername_.set_tooltip("");
-	edit_servername_.set_warning(false);
+	servername_.set_tooltip("");
+	servername_.set_warning(false);
 	// Check whether a server of that name is already open.
 	// And disable 'hostgame' button if yes.
 	const std::vector<InternetGame>* games = InternetGaming::ref().games();
 	if (games != nullptr) {
 		for (const InternetGame& game : *games) {
-			if (game.name == edit_servername_.text()) {
+			if (game.name == servername_.text()) {
 				hostgame_.set_enabled(false);
-				edit_servername_.set_warning(true);
-				edit_servername_.set_tooltip(
+				servername_.set_warning(true);
+				servername_.set_tooltip(
 				   (boost::format(
 				       _("The game %s is already running. Please choose a different name.")) %
 				    g_gr->styles().font_style(UI::FontStyle::kWarning).as_font_tag(game.name))
@@ -426,7 +465,7 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 void FullscreenMenuInternetLobby::clicked_hostgame() {
 	// Save selected servername as default for next time and during that take care that the name is
 	// not empty.
-	std::string servername_ui = edit_servername_.text();
+	std::string servername_ui = servername_.text();
 
 	const std::vector<InternetGame>* games = InternetGaming::ref().games();
 	if (games != nullptr) {
