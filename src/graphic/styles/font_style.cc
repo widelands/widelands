@@ -80,7 +80,7 @@ FontStyleInfo::Face FontStyleInfo::string_to_face(const std::string& init_face) 
 }
 
 std::string FontStyleInfo::as_font_tag(const std::string& text) const {
-	static boost::format f("<font face=%s size=%d color=%s%s>%s</font>");
+	boost::format f("<font face=%s size=%d color=%s%s>%s</font>");
 	std::string optionals = "";
 	if (bold_) {
 		optionals += " bold=1";

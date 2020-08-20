@@ -743,12 +743,12 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	std::string node_text("");
 	if (game == nullptr) {
 		// Always blit node information in the editor
-		static boost::format node_format("(%i, %i, %i)");
+		boost::format node_format("(%i, %i, %i)");
 		const int32_t height = egbase().map()[sel_.pos.node].get_height();
 		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y % height).str();
 	} else if (get_display_flag(dfDebug)) {
 		// Blit node information for games in debug mode - we're not interested in the height
-		static boost::format node_format("(%i, %i)");
+		boost::format node_format("(%i, %i)");
 		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y).str();
 	}
 	if (!node_text.empty()) {
@@ -768,7 +768,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
-			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
+			boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
 			rendered_text = UI::g_fh->render(
 			   as_richtext_paragraph((fps_format % (1000.0 / frametime_) % average_fps()).str(),
 			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));

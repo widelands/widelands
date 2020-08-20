@@ -116,12 +116,15 @@ class CmdQueue {
 		uint32_t serial;
 
 		bool operator<(const CmdItem& c) const {
-			if (cmd->duetime() != c.cmd->duetime())
-				return cmd->duetime() > c.cmd->duetime();
-			else if (category != c.category)
+			const uint32_t d1 = cmd ? cmd->duetime() : 0;
+			const uint32_t d2 = c.cmd ? c.cmd->duetime() : 0;
+			if (d1 != d2) {
+				return d1 > d2;
+			} else if (category != c.category) {
 				return category > c.category;
-			else
+			} else {
 				return serial > c.serial;
+			}
 		}
 	};
 

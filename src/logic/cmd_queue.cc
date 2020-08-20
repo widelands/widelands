@@ -102,11 +102,12 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 		std::priority_queue<CmdItem>& current_cmds = cmds_[game_time_var % kCommandQueueBucketSize];
 
 		while (!current_cmds.empty()) {
-			Command& c = *current_cmds.top().cmd;
+			CmdItem& item = const_cast<CmdItem&>(current_cmds.top());
+			Command& c = *item.cmd;
 			if (game_time_var < c.duetime()) {
 				break;
 			}
-
+			item.cmd = nullptr;
 			current_cmds.pop();
 			--ncmds_;
 			assert(game_time_var == c.duetime());

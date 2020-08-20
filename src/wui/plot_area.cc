@@ -60,7 +60,7 @@ enum class Units {
 };
 
 std::string ytick_text_style(const std::string& text, const UI::FontStyleInfo& style) {
-	static boost::format f("<rt keep_spaces=1><p>%s</p></rt>");
+	boost::format f("<rt keep_spaces=1><p>%s</p></rt>");
 	f % style.as_font_tag(text);
 	return f.str();
 }

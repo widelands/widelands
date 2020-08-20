@@ -156,17 +156,10 @@ void* Panel::runthread(void* p) {
 	uint32_t next_think_time = initial_ticks + kGameLogicDelay;
 
 	while (panel.running_) {
-log("NOCOM LOGIC thread\n");
 		const uint32_t start_time = SDL_GetTicks();
 
 		if (start_time >= next_think_time) {
-
-			panel.do_think();
-
-			if (panel.flags_ & pf_child_die) {
-				panel.check_child_death();
-			}
-
+			panel.do_think();  // actual logic
 			next_think_time = start_time + kGameLogicDelay;
 		}
 
@@ -215,18 +208,23 @@ int Panel::do_run() {
 	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
 	uint32_t next_draw_time = initial_ticks + draw_delay;
 
+	// We put the game logic code into a thread of its own. Note that the drawing code
+	// has to be run by the same thread that took care of the OpenGL initialization!
 	pthread_t thread;
 	if (int i = pthread_create(&thread, NULL, &Panel::runthread, this)) {
 		throw wexception("PThread creation failed with error code %d", i);
 	}
 
 	while (running_) {
-log("NOCOM DRAW thread\n");
 		const uint32_t start_time = SDL_GetTicks();
 
 		app->handle_input(&input_callback);
 		if (app->should_die()) {
 			end_modal<Returncodes>(Returncodes::kBack);
+		}
+
+		if (flags_ & pf_child_die) {
+			check_child_death();
 		}
 
 		if (start_time >= next_draw_time) {

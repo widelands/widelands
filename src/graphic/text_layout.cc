@@ -52,7 +52,7 @@ std::string as_richtext_paragraph(const std::string& text, UI::Align align) {
 		break;
 	}
 
-	static boost::format f("<rt><p align=%s>%s</p></rt>");
+	boost::format f("<rt><p align=%s>%s</p></rt>");
 	f % alignment;
 	f % text;
 	return f.str();
@@ -87,7 +87,7 @@ std::string richtext_escape(const std::string& given_text) {
 
 /// Bullet list item
 std::string as_listitem(const std::string& txt, UI::FontStyle style) {
-	static boost::format f("<div width=100%%><div><p><font size=%d "
+	boost::format f("<div width=100%%><div><p><font size=%d "
 	                       "color=%s>•</font></p></div><div><p><space gap=6></p></div><div "
 	                       "width=*><p><font size=%d color=%s>%s<vspace "
 	                       "gap=6></font></p></div></div>");
@@ -98,7 +98,7 @@ std::string as_listitem(const std::string& txt, UI::FontStyle style) {
 }
 
 std::string as_richtext(const std::string& txt) {
-	static boost::format f("<rt>%s</rt>");
+	boost::format f("<rt>%s</rt>");
 	f % txt;
 	return f.str();
 }
@@ -113,13 +113,13 @@ as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style, U
 }
 
 std::string as_editor_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style) {
-	static boost::format f("<rt keep_spaces=1><p>%s</p></rt>");
+	boost::format f("<rt keep_spaces=1><p>%s</p></rt>");
 	f % style.as_font_tag(text);
 	return f.str();
 }
 
 std::string as_game_tip(const std::string& txt) {
-	static boost::format f("<rt><p align=center>%s</p></rt>");
+	boost::format f("<rt><p align=center>%s</p></rt>");
 	f % g_gr->styles().font_style(UI::FontStyle::kFsMenuGameTip).as_font_tag(txt);
 	return f.str();
 }
@@ -131,9 +131,9 @@ std::string as_mapobject_message(const std::string& image,
 	assert(!image.empty());
 	assert(!txt.empty());
 	const std::string image_type = g_gr->images().has(image) ? "src" : "object";
-	static boost::format f_color("<div padding_r=10><p><img width=%d %s=%s color=%s></p></div>"
+	boost::format f_color("<div padding_r=10><p><img width=%d %s=%s color=%s></p></div>"
 	                             "<div width=*><p>%s</p></div>");
-	static boost::format f_nocolor("<div padding_r=10><p><img width=%d %s=%s></p></div>"
+	boost::format f_nocolor("<div padding_r=10><p><img width=%d %s=%s></p></div>"
 	                               "<div width=*><p>%s</p></div>");
 	if (player_color != nullptr) {
 		f_color % width;
@@ -246,7 +246,7 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 }
 
 std::string as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey) {
-	static boost::format f("<rt><p>%s %s</p></rt>");
+	boost::format f("<rt><p>%s %s</p></rt>");
 	f % g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(text);
 	f % g_gr->styles().font_style(UI::FontStyle::kTooltipHotkey).as_font_tag("(" + hotkey + ")");
 	return f.str();
