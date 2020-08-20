@@ -71,6 +71,7 @@
 --        *Mandatory*. A table containing all animations for this critter. Every critter
 --        needs to have an ``idle`` and a directional ``walk`` animation. Herbivores and carnivores additionally need an ``eating`` animation.
 --        See :doc:`animations` for a detailed description of the animation format.
+
 -- NOCOM document animations_directory
 wl.World():new_critter_type{
    name = "badger",

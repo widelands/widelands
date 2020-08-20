@@ -10,14 +10,9 @@
 -- Place Immovable etc.). There are three categories available,
 -- each with their own function:
 
-push_textdomain("world")
+-- NOCOM add test
 
--- NOCOM get rid of:
--- new_editor_critter_category
--- new_editor_terrain_category
--- new_editor_immovable_category
--- print_loading_message?
--- Resources handling?
+push_textdomain("world")
 
 local result = {
    -- Items shown in the place critter tool. Each subtable is a tab in the tool.
