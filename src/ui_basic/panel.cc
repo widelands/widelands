@@ -170,6 +170,7 @@ void* Panel::runthread(void* p) {
 	}
 
 	pthread_exit(NULL);
+	return nullptr;
 }
 
 /**
