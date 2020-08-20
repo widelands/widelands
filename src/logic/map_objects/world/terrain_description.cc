@@ -121,7 +121,6 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Widelands::World& 
 	}
 
 	// NOCOM handle terrain changes and placement of immovables & critters via Lua
-	// NOCOM map loading
 
 	if (!(0 < fertility_ && fertility_ < 1000)) {
 		throw GameDataError("%s: fertility is not in (0, 1000).", name_.c_str());
@@ -171,9 +170,6 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Widelands::World& 
 		}
 		add_texture(g_gr->images().get(texture_paths()[j]));
 	}
-}
-
-TerrainDescription::~TerrainDescription() {
 }
 
 const Image& TerrainDescription::get_texture(uint32_t gametime) const {

@@ -44,23 +44,23 @@ tribes:new_tribe {
       [""] = {
          [0] = "frisians_resi_none",
       },
-      coal = {
+      resource_coal = {
          [10] = "frisians_resi_coal_1",
          [20] = "frisians_resi_coal_2",
       },
-      iron = {
+      resource_iron = {
          [10] = "frisians_resi_iron_1",
          [20] = "frisians_resi_iron_2",
       },
-      gold = {
+      resource_gold = {
          [10] = "frisians_resi_gold_1",
          [20] = "frisians_resi_gold_2",
       },
-      stones = {
+      resource_stones = {
          [10] = "frisians_resi_stones_1",
          [20] = "frisians_resi_stones_2",
       },
-      water = {
+      resource_water = {
          [100] = "frisians_resi_water",
       },
    },

@@ -63,7 +63,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
                                      const std::string& msgctxt,
                                      const LuaTable& table,
                                      Tribes& tribes,
-                                     const World& world)
+                                     World& world)
    : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::TRAININGSITE, table, tribes, world),
      num_soldiers_(table.get_int("soldier_capacity")),
      max_stall_(table.get_int("trainer_patience")),

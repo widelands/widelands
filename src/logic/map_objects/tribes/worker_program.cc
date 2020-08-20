@@ -236,6 +236,8 @@ void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::strin
 			}
 		}
 	}
+	Notifications::publish(
+	   NoteMapObjectDescription(act->sparam1, NoteMapObjectDescription::LoadType::kObject));
 }
 
 /* RST
@@ -291,6 +293,8 @@ void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::stri
 			}
 		}
 	}
+	Notifications::publish(
+	   NoteMapObjectDescription(act->sparam1, NoteMapObjectDescription::LoadType::kObject));
 }
 
 /* RST
@@ -504,6 +508,8 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	workarea_info_[act->iparam1].insert(" findspace");
 
 	if (!act->sparam1.empty()) {
+		Notifications::publish(
+		   NoteMapObjectDescription(act->sparam1, NoteMapObjectDescription::LoadType::kObject));
 		if (act->iparam4 == 1) {
 			// breeds
 			created_resources_.insert(act->sparam1);
@@ -777,6 +783,8 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 	// Register created bobs
 	for (const std::string& bobname : act->sparamv) {
 		created_bobs_.insert(bobname);
+		Notifications::publish(
+		   NoteMapObjectDescription(bobname, NoteMapObjectDescription::LoadType::kObject));
 	}
 }
 

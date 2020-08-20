@@ -151,7 +151,7 @@ CritterDescr::~CritterDescr() {
 }
 
 bool CritterDescr::is_swimming() const {
-	const static uint32_t swimming_attribute = get_attribute_id("swimming");
+	const static uint32_t swimming_attribute = get_attribute_id("swimming", true);
 	return has_attribute(swimming_attribute);
 }
 
@@ -533,7 +533,7 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 
 			if (critter_owner == "world") {
 				critter_name = lookup_table.lookup_critter(critter_name, packet_version);
-				descr = egbase.world().get_critter_descr(critter_name);
+				descr = egbase.world().get_critter_descr(egbase.mutable_world()->load_critter(critter_name));
 			} else {
 				throw GameDataError(
 				   "Tribes don't have critters %s/%s", critter_owner.c_str(), critter_name.c_str());

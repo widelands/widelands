@@ -54,7 +54,7 @@ public:
 	};
 
 	TerrainDescription(const LuaTable& table, World&);
-	~TerrainDescription();
+	~TerrainDescription() = default;
 
 	/// The name used internally for this terrain.
 	const std::string& name() const;

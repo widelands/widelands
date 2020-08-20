@@ -232,7 +232,7 @@ void Tribes::register_scenario_tribes(FileSystem* filesystem) {
 	}
 }
 
-void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, MapObjectType type) {
+void Tribes::add_tribe_object_type(const LuaTable& table, World& world, MapObjectType type) {
 	i18n::Textdomain td("tribes");
 	const std::string& type_name = table.get_string("name");
 	const std::string& msgctxt = table.get_string("msgctxt");
