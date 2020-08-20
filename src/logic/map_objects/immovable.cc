@@ -217,17 +217,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 }
 
 /**
- * Parse a world immovable from its init file.
- */
-ImmovableDescr::ImmovableDescr(const std::string& init_descname,
-                               const LuaTable& table,
-                               const std::vector<std::string>& attribs,
-                               const World& /* world */)
-   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld, attribs) {
-	// NOCOM fix constructor chain
-}
-
-/**
  * Parse a tribes immovable from its init file.
  *
  * The contents of 'table' are documented in

@@ -120,8 +120,6 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Widelands::World& 
 		enhancement_ = "";
 	}
 
-	// NOCOM handle terrain changes and placement of immovables & critters via Lua
-
 	if (!(0 < fertility_ && fertility_ < 1000)) {
 		throw GameDataError("%s: fertility is not in (0, 1000).", name_.c_str());
 	}
@@ -151,7 +149,6 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Widelands::World& 
 
 	const std::string default_resource(table.get_string("default_resource"));
 	default_resource_index_ = !default_resource.empty() ? world.load_resource(default_resource) : Widelands::INVALID_INDEX;
-
 
 	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
 		throw GameDataError("Default resource is not in valid resources.\n");

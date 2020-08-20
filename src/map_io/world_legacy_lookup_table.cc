@@ -81,7 +81,7 @@ immovables_
 },
 resources_
 {
-	{"granite", "stones"},
+	{"granite", "resource_stones"},
 	{"stones", "resource_stones"},
 	{"gold", "resource_gold"},
 	{"iron", "resource_iron"},
@@ -172,7 +172,12 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
    : old_world_name_(old_world_name),
      // RESOURCES - They were all the same for all worlds.
      resources_{
-        {"granit", "stones"},
+        {"granit", "resource_stones"},
+		{"gold", "resource_gold"},
+		{"iron", "resource_iron"},
+		{"coal", "resource_coal"},
+		{"water", "resource_water"},
+		{"fish", "resource_fish"}
      },
 
      // TERRAINS

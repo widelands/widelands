@@ -65,7 +65,7 @@ void World::add_world_object_type(const LuaTable& table, MapObjectType type) {
 		break;
 	case MapObjectType::IMMOVABLE:
 		immovables_->add(new ImmovableDescr(
-		   type_descname, table, description_manager_->get_attributes(type_name), *this));
+		   type_descname, table, MapObjectDescr::OwnerType::kWorld, description_manager_->get_attributes(type_name)));
 		break;
 	case MapObjectType::RESOURCE:
 		resources_->add(new ResourceDescription(table));

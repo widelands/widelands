@@ -50,7 +50,7 @@ void MapResourcesPacket::read(FileSystem& fs,
 			std::map<uint8_t, uint8_t> smap;
 			for (uint8_t i = 0; i < nr_res; ++i) {
 				uint8_t const id = fr.unsigned_16();
-				const std::string resource_name = lookup_table.lookup_resource(fr.c_string());
+				const std::string resource_name(lookup_table.lookup_resource(fr.c_string()));
 				const DescriptionIndex res = egbase.mutable_world()->load_resource(resource_name);
 				if (res == Widelands::INVALID_INDEX) {
 					throw GameDataError(
