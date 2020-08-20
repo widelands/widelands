@@ -9,7 +9,7 @@
 --
 -- Each tribe needs to have some basic information defined for displaying it in menus
 -- and for loading its game starting conditions.
--- The file **has to be located in** ``tribes/initialisation/<tribename>/init.lua`` so that the engine can find it.
+-- The file **has to be located in** ``tribes/initialization/<tribename>/init.lua`` so that the engine can find it.
 --
 -- This file returns a table with the basic information for a tribe that is
 -- needed before a game is loaded or the editor has been started. The table has the following entries:
@@ -32,7 +32,7 @@
 -- Configuring a Tribe's Units Usage
 -- ---------------------------------
 --
--- The ``tribes/initialisation/<tribename>/units.lua`` file configures the units that a tribe can use.
+-- The ``tribes/initialization/<tribename>/units.lua`` file configures the units that a tribe can use.
 --
 -- .. function:: new_tribe{table}
 --
