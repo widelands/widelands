@@ -125,7 +125,7 @@ tribes:new_trainingsite_type {
             "animate=working duration:22s800ms",
             "checksoldier=soldier:evade level:0", -- Because the soldier can be expelled by the player
             "consume=boots_sturdy chocolate fish,meat",
-            "train=soldier:evade 0 level:1"
+            "train=soldier:evade level:1"
          }
       },
       upgrade_soldier_evade_1 = {
@@ -139,7 +139,7 @@ tribes:new_trainingsite_type {
             "animate=working duration:15s600ms",
             "checksoldier=soldier:evade level:1", -- Because the soldier can be expelled by the player
             "consume=boots_swift amazons_bread chocolate",
-            "train=soldier:evade 1 level:2",
+            "train=soldier:evade level:2",
          }
       },
       upgrade_soldier_evade_2 = {
@@ -154,7 +154,7 @@ tribes:new_trainingsite_type {
             "animate=working duration:15s600ms",
             "checksoldier=soldier:evade level:2", -- Because the soldier can be expelled by the player
             "consume=boots_hero amazons_bread:2 chocolate:2 fish,meat:2",
-            "train=soldier:evade 2 level:3",
+            "train=soldier:evade level:3",
          }
       },
       upgrade_soldier_health_0 = {
