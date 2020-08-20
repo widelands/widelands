@@ -450,28 +450,28 @@ int32_t Soldier::get_training_attribute(TrainingAttribute const attr) const {
 	return Worker::get_training_attribute(attr);
 }
 
-uint32_t Soldier::get_max_health() const {
+unsigned Soldier::get_max_health() const {
 	return descr().get_base_health() + health_level_ * descr().get_health_incr_per_level();
 }
 
-uint32_t Soldier::get_min_attack() const {
+unsigned Soldier::get_min_attack() const {
 	return descr().get_base_min_attack() + attack_level_ * descr().get_attack_incr_per_level();
 }
 
-uint32_t Soldier::get_max_attack() const {
+unsigned Soldier::get_max_attack() const {
 	return descr().get_base_max_attack() + attack_level_ * descr().get_attack_incr_per_level();
 }
 
-uint32_t Soldier::get_defense() const {
+unsigned Soldier::get_defense() const {
 	return descr().get_base_defense() + defense_level_ * descr().get_defense_incr_per_level();
 }
 
-uint32_t Soldier::get_evade() const {
+unsigned Soldier::get_evade() const {
 	return descr().get_base_evade() + evade_level_ * descr().get_evade_incr_per_level();
 }
 
 //  Unsignedness ensures that we can only heal, not hurt through this method.
-void Soldier::heal(const uint32_t health) {
+void Soldier::heal(const unsigned health) {
 	molog("[soldier] healing (%d+)%d/%d\n", health, current_health_, get_max_health());
 	assert(health);
 	assert(current_health_ < get_max_health());
@@ -482,7 +482,7 @@ void Soldier::heal(const uint32_t health) {
 /**
  * This only subs the specified number of health points, don't do anything more.
  */
-void Soldier::damage(const uint32_t value) {
+void Soldier::damage(const unsigned value) {
 	assert(current_health_ > 0);
 
 	molog("[soldier] damage %d(-%d)/%d\n", current_health_, value, get_max_health());
