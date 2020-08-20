@@ -225,6 +225,8 @@ void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 	   this, get_w() * 3 / 80, mpsg_->get_y() + mpsg_->get_h() + padding_, get_w() * 53 / 80,
 	   ok_.get_y() + ok_.get_h() - mpsg_->get_y() - mpsg_->get_h() - padding_ - 1, chat,
 	   UI::PanelStyle::kFsMenu);
+	// set focus to chat input
+	chat_->focus_edit();
 }
 
 /**
