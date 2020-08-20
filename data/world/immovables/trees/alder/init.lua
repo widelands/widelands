@@ -15,7 +15,7 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "alder_summer_sapling",
    descname = _ "Alder (Sapling)",
    size = "small",
@@ -40,7 +40,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "alder_summer_pole",
    descname = _ "Alder (Pole)",
    size = "small",
@@ -65,7 +65,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "alder_summer_mature",
    descname = _ "Alder (Mature)",
    size = "small",
@@ -90,7 +90,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "alder_summer_old",
    descname = _ "Alder (Old)",
    species = _ "Alder",

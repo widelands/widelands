@@ -1,6 +1,6 @@
 dirname = path.dirname(__file__)
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "winterland_rocks1",
    descname = _ "Rocks 1",
    animation_directory = dirname,
@@ -18,7 +18,7 @@ world:new_immovable_type{
    }
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "winterland_rocks2",
    descname = _ "Rocks 2",
    animation_directory = dirname,
@@ -36,7 +36,7 @@ world:new_immovable_type{
    }
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "winterland_rocks3",
    descname = _ "Rocks 3",
    animation_directory = dirname,
@@ -54,7 +54,7 @@ world:new_immovable_type{
    }
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "winterland_rocks4",
    descname = _ "Rocks 4",
    animation_directory = dirname,
@@ -72,7 +72,7 @@ world:new_immovable_type{
    }
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "winterland_rocks5",
    descname = _ "Rocks 5",
    animation_directory = dirname,
@@ -90,7 +90,7 @@ world:new_immovable_type{
    }
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "winterland_rocks6",
    descname = _ "Rocks 6",
    animation_directory = dirname,

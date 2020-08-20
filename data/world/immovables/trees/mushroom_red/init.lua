@@ -7,7 +7,7 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "mushroom_red_wasteland_sapling",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Red Mushroom Tree (Sapling)",
@@ -33,7 +33,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "mushroom_red_wasteland_pole",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Red Mushroom Tree (Pole)",
@@ -59,7 +59,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "mushroom_red_wasteland_mature",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Red Mushroom Tree (Mature)",
@@ -88,7 +88,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "mushroom_red_wasteland_old",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Red Mushroom Tree (Old)",

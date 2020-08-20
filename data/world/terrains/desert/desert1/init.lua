@@ -1,4 +1,4 @@
-world:new_terrain_type{
+wl.World():new_terrain_type{
    name = "desert1",
    descname = _ "Desert 1",
    is = "walkable",

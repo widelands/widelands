@@ -1,8 +1,7 @@
-world:new_critter_type{
+wl.World():new_critter_type{
    name = "stag",
    descname = _ "Stag",
    animation_directory = path.dirname(__file__),
-
    programs = {
       remove = { "remove" },
    },

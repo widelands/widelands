@@ -17,6 +17,7 @@ push_textdomain("world")
 -- new_editor_terrain_category
 -- new_editor_immovable_category
 -- print_loading_message?
+-- Resources handling?
 
 local result = {
    -- Items shown in the place critter tool. Each subtable is a tab in the tool.
@@ -65,6 +66,7 @@ local result = {
          }
       }
    },
+
    -- Items shown in the place immovable tool. Each subtable is a tab in the tool.
    immovables = {
       {
@@ -372,6 +374,18 @@ local result = {
          }
       }
    },
+
+   -- Items shown in the set resources tool.
+   resources = {
+      "resource_coal",
+      "resource_gold",
+      "resource_iron",
+      "resource_stones",
+      "resource_water",
+      "resource_fish",
+   },
+
+   -- Items shown in the place terrain tool. Each subtable is a tab in the tool.
    terrains = {
       {
          name = "summer",

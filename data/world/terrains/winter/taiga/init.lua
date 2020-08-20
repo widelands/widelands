@@ -1,8 +1,8 @@
-world:new_terrain_type{
+wl.World():new_terrain_type{
    name = "taiga",
    descname = _ "Taiga",
    is = "arable",
-   valid_resources = { "water" },
+   valid_resources = { "resource_water" },
    default_resource = "resource_water",
    default_resource_amount = 10,
    textures = { path.dirname(__file__) .. "idle.png" },

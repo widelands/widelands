@@ -7,7 +7,7 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "maple_winter_sapling",
    descname = _ "Maple (Sapling)",
    size = "small",
@@ -32,7 +32,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "maple_winter_pole",
    descname = _ "Maple (Pole)",
    size = "small",
@@ -57,7 +57,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "maple_winter_mature",
    descname = _ "Maple (Mature)",
    size = "small",
@@ -82,7 +82,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "maple_winter_old",
    descname = _ "Maple (Old)",
    species = _ "Maple",

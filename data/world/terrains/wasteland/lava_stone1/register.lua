@@ -1,3 +1,3 @@
 return {
-   lava-stone1 = {}
+   ["lava-stone1"] = {}
 }

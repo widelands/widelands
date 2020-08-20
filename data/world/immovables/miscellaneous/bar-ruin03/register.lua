@@ -1,3 +1,3 @@
 return {
-   bar-ruin03 = {}
+   ["bar-ruin03"] = {}
 }

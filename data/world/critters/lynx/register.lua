@@ -1,3 +1,3 @@
 return {
-   fox = { "eatable" }
+   lynx = { "eatable" }
 }

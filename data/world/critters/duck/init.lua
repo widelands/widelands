@@ -1,10 +1,7 @@
-dirname = path.dirname(__file__)
-
-world:new_critter_type{
+wl.World():new_critter_type{
    name = "duck",
    descname = _ "Duck",
    animation_directory = dirname,
-   attributes = { "swimming" },
    programs = {
       remove = { "remove" },
    },

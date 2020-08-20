@@ -1,4 +1,4 @@
-world:new_terrain_type{
+wl.World():new_terrain_type{
    name = "desert_forested_mountain2",
    descname = _ "Forested Mountain 2",
    is = "mineable",

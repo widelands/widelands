@@ -7,7 +7,7 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "larch_summer_sapling",
    descname = _ "Larch (Sapling)",
    size = "small",
@@ -32,7 +32,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "larch_summer_pole",
    descname = _ "Larch (Pole)",
    size = "small",
@@ -57,7 +57,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "larch_summer_mature",
    descname = _ "Larch (Mature)",
    size = "small",
@@ -82,7 +82,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "larch_summer_old",
    descname = _ "Larch (Old)",
    species = _ "Larch",

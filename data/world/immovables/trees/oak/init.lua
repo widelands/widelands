@@ -7,7 +7,7 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "oak_summer_sapling",
    descname = _ "Oak (Sapling)",
    size = "small",
@@ -32,7 +32,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "oak_summer_pole",
    descname = _ "Oak (Pole)",
    size = "small",
@@ -57,7 +57,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "oak_summer_mature",
    descname = _ "Oak (Mature)",
    size = "small",
@@ -82,7 +82,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "oak_summer_old",
    descname = _ "Oak (Old)",
    species = _ "Oak",

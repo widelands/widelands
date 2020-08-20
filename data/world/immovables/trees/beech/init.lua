@@ -7,7 +7,7 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "beech_summer_sapling",
    descname = _ "Beech (Sapling)",
    size = "small",
@@ -32,7 +32,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "beech_summer_pole",
    descname = _ "Beech (Pole)",
    size = "small",
@@ -57,7 +57,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "beech_summer_mature",
    descname = _ "Beech (Mature)",
    size = "small",
@@ -82,7 +82,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "beech_summer_old",
    descname = _ "Beech (Old)",
    species = _ "Beech",

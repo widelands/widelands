@@ -1,6 +1,6 @@
 dirname = path.dirname(__file__)
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "deadtree5",
    descname = _ "Dead Tree",
    size = "none",

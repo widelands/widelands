@@ -1,4 +1,4 @@
-world:new_critter_type{
+wl.World():new_critter_type{
    name = "marten",
    descname = _ "Marten",
    animation_directory = path.dirname(__file__),

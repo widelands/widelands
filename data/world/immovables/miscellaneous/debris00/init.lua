@@ -1,6 +1,6 @@
 dirname = path.dirname(__file__)
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "debris00",
    descname = _ "Debris",
    size = "small",

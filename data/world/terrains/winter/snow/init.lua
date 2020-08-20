@@ -1,8 +1,8 @@
-world:new_terrain_type{
+wl.World():new_terrain_type{
    name = "snow",
    descname = _ "Snow",
    is = "arable",
-   valid_resources = { "water" },
+   valid_resources = { "resource_water" },
    default_resource = "",
    default_resource_amount = 0,
    textures = { path.dirname(__file__) .. "idle.png" },

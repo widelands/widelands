@@ -1,4 +1,4 @@
-world:new_terrain_type{
+wl.World():new_terrain_type{
    name = "ashes2",
    descname = _ "Ashes 2",
    is = "arable",
@@ -6,7 +6,7 @@ world:new_terrain_type{
       -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
       _"likes trees",
    },
-   valid_resources = { "water" },
+   valid_resources = { "resource_water" },
    default_resource = "resource_water",
    default_resource_amount = 4,
    textures = { path.dirname(__file__) .. "idle.png" },

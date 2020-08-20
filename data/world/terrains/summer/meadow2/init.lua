@@ -1,4 +1,4 @@
-world:new_terrain_type{
+wl.World():new_terrain_type{
    name = "summer_meadow2",
    descname = _ "Meadow 2",
    is = "arable",

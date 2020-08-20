@@ -1,4 +1,4 @@
-world:new_terrain_type{
+wl.World():new_terrain_type{
    name = "lava-stone1",
    descname = _ "Lava Rocks 1",
    is = "unreachable",

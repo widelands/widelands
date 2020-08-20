@@ -7,7 +7,7 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_borassus_desert_sapling",
    descname = _ "Borassus Palm (Sapling)",
    size = "small",
@@ -32,7 +32,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_borassus_desert_pole",
    descname = _ "Borassus Palm (Pole)",
    size = "small",
@@ -57,7 +57,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_borassus_desert_mature",
    descname = _ "Borassus Palm (Mature)",
    size = "small",
@@ -82,7 +82,7 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_borassus_desert_old",
    descname = _ "Borassus Palm (Old)",
    species = _ "Borassus Palm",

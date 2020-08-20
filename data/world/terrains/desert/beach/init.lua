@@ -146,7 +146,7 @@
 --            enhancement = "summer_meadow3",
 --
 
-world:new_terrain_type{
+wl.World():new_terrain_type{
    name = "desert_beach",
    descname = _ "Beach",
    is = "walkable",
