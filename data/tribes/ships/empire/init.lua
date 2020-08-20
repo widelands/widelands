@@ -12,7 +12,6 @@ tribes:new_ship_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 115, 100 },
          fps = 10
       },

@@ -15,7 +15,6 @@ tribes:new_carrier_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 10, 25 },
          fps = 20
       },

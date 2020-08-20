@@ -35,7 +35,7 @@ tribes:new_worker_type {
       },
       walk = {
          hotspot = { 11, 23 },
-         fps = 10,
+         fps = 20,
          directional = true
       }
    }

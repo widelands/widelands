@@ -14,7 +14,7 @@ world:new_critter_type{
 
    animations = {
       idle = {
-         hotspot = {21, 16},
+         hotspot = { 21, 16 },
          fps = 20
       },
       eating = {
@@ -23,7 +23,7 @@ world:new_critter_type{
          fps = 20,
       },
       walk = {
-         hotspot = {24, 24},
+         hotspot = { 24, 24 },
          fps = 4,
          directional = true
       }

@@ -19,11 +19,11 @@ world:new_critter_type{
       },
       eating = {
          basename = "idle", -- TODO(Nordfriese): Make animation
-         hotspot = {14, 27},
+         hotspot = { 14, 27 },
          fps = 20,
       },
       walk = {
-         hotspot = {24, 32},
+         hotspot = { 24, 32 },
          fps = 20,
          directional = true
       }

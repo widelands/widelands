@@ -262,12 +262,14 @@ For example, a fisher's animations could look like this:
 .. code-block:: lua
 
    animation_directory = path.dirname(__file__),
+   -- A file animation for the idle. Ideally, we'll only have those if the animation only has 1 frame.
    animations = {
       idle = {
          hotspot = { 7, 33 },
       },
    },
    spritesheets = {
+      -- A directional animation as a spritesheet
       walk = {
          fps = 10,
          frames = 10,
@@ -276,7 +278,7 @@ For example, a fisher's animations could look like this:
          directional = true,
          hotspot = { 8, 32 }
       },
-      -- TODO(GunChleoc): Needs walkload animation, or some ware hotspot/sizing magic.
+      -- A stationary animation as a spritesheet
       fish = {
          fps = 10,
          frames = 30,
@@ -315,7 +317,6 @@ For example, attacking towards the west can be defined like this:
 
       animations = {
          idle = {
-            pictures = path.list_files(dirname .. "idle_??.png"),
             hotspot = { 16, 31 },
             fps = 5
          },

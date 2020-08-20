@@ -24,7 +24,7 @@ tribes:new_worker_type {
          directional = true
       },
       walkload = {
-         hotspot = { 14, 24 },
+         hotspot = { 10, 22 },
          fps = 10,
          directional = true
       }

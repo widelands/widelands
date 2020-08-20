@@ -23,7 +23,7 @@ world:new_critter_type{
          fps = 20,
       },
       walk = {
-         hotspot = {11, 20},
+         hotspot = { 11, 20 },
          fps = 20,
          directional = true
       }

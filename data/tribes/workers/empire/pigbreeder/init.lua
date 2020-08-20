@@ -20,13 +20,13 @@ tribes:new_worker_type {
       },
       walk = {
          hotspot = { 27, 29 },
-         fps = 10,
+         fps = 20,
          directional = true
       },
       walkload = {
          basename = "walk",
          hotspot = { 27, 29 },
-         fps = 10,
+         fps = 20,
          directional = true
       }
    }
