@@ -22,9 +22,9 @@
 #include "base/i18n.h"
 #include "graphic/animation/animation.h"
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/world.h"
 #include "scripting/lua_table.h"
 
@@ -94,11 +94,10 @@ TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 	}
 }
 
-TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::World& world)
+TerrainDescription::TerrainDescription(const LuaTable& table, Widelands::World& world)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      is_(terrain_type_from_string(table.get_string("is"))),
-     default_resource_index_(world.resource_index(table.get_string("default_resource").c_str())),
      default_resource_amount_(table.get_int("default_resource_amount")),
      dither_layer_(table.get_int("dither_layer")),
      temperature_(table.get_int("temperature")),
@@ -114,10 +113,15 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 		if (enhancement_ == name_) {
 			throw GameDataError("%s: a terrain cannot be enhanced to itself", name_.c_str());
 		}
-		// Other invalid terrains will be detected in World::postload
+		// Ensure terrain exists and is loaded
+		Notifications::publish(
+		   NoteMapObjectDescription(enhancement_, NoteMapObjectDescription::LoadType::kObject));
 	} else {
 		enhancement_ = "";
 	}
+
+	// NOCOM handle terrain changes and placement of immovables & critters via Lua
+	// NOCOM map loading
 
 	if (!(0 < fertility_ && fertility_ < 1000)) {
 		throw GameDataError("%s: fertility is not in (0, 1000).", name_.c_str());
@@ -143,20 +147,30 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 
 	for (const std::string& resource :
 	     table.get_table("valid_resources")->array_entries<std::string>()) {
-		valid_resources_.push_back(world.safe_resource_index(resource.c_str()));
+		valid_resources_.push_back(world.load_resource(resource));
 	}
+
+	const std::string default_resource(table.get_string("default_resource"));
+	default_resource_index_ = !default_resource.empty() ? world.load_resource(default_resource) : Widelands::INVALID_INDEX;
+
 
 	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
 		throw GameDataError("Default resource is not in valid resources.\n");
 	}
 
-	const DescriptionIndex editor_category_index =
-	   world.editor_terrain_categories().get_index(table.get_string("editor_category"));
-	if (editor_category_index == Widelands::INVALID_INDEX) {
-		throw GameDataError(
-		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
+	for (size_t j = 0; j < texture_paths().size(); ++j) {
+		// Set the minimap color on the first loaded image.
+		if (j == 0) {
+			SDL_Surface* sdl_surface = load_image_as_sdl_surface(texture_paths()[j]);
+			uint8_t top_left_pixel = static_cast<uint8_t*>(sdl_surface->pixels)[0];
+			const SDL_Color top_left_pixel_color =
+			   sdl_surface->format->palette->colors[top_left_pixel];
+			set_minimap_color(
+			   RGBColor(top_left_pixel_color.r, top_left_pixel_color.g, top_left_pixel_color.b));
+			SDL_FreeSurface(sdl_surface);
+		}
+		add_texture(g_gr->images().get(texture_paths()[j]));
 	}
-	editor_category_ = world.editor_terrain_categories().get_mutable(editor_category_index);
 }
 
 TerrainDescription::~TerrainDescription() {
@@ -211,10 +225,6 @@ const std::string& TerrainDescription::name() const {
 
 const std::string& TerrainDescription::descname() const {
 	return descname_;
-}
-
-const EditorCategory* TerrainDescription::editor_category() const {
-	return editor_category_;
 }
 
 DescriptionIndex TerrainDescription::get_valid_resource(DescriptionIndex index) const {

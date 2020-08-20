@@ -39,7 +39,7 @@ namespace Widelands {
 
 class Tribes {
 public:
-	Tribes(LuaInterface* lua);
+	Tribes(DescriptionManager* description_manager, LuaInterface* lua);
 	~Tribes() = default;
 
 	size_t nrbuildings() const;
@@ -128,8 +128,7 @@ private:
 	std::unique_ptr<LuaTable> scenario_tribes_;
 
 	LuaInterface* lua_;  // Not owned
-
-	std::unique_ptr<DescriptionManager> description_manager_;
+	DescriptionManager* description_manager_; // Not owned
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };
 

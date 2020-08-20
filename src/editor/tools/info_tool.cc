@@ -130,9 +130,6 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 	    i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND))
 	      .str(),
 	   font_style);
-	buf += as_listitem(
-	   (boost::format(_("Editor Category: %s")) % ter.editor_category()->descname()).str(),
-	   font_style);
 
 	// *** Map Object info
 	const Widelands::BaseImmovable* immovable = f.get_immovable();

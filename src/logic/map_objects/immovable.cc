@@ -137,8 +137,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const std::vector<std::string>& attribs)
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
      size_(BaseImmovable::NONE),
-     owner_type_(input_type),
-     editor_category_(nullptr) {
+     owner_type_(input_type) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", table.get_string("name").c_str());
 	}
@@ -154,9 +153,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		terrain_affinity_.reset(new TerrainAffinity(*table.get_table("terrain_affinity"), name()));
 	}
 
-	if (table.has_key("attributes") && input_type == Widelands::MapObjectDescr::OwnerType::kTribe) {
-		throw GameDataError("Tribe attributes need to be defined in 'register.lua' now");
-	}
 	if (!attribs.empty()) {
 		add_attributes(attribs);
 
@@ -226,16 +222,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
                                const std::vector<std::string>& attribs,
-                               const World& world)
+                               const World& /* world */)
    : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld, attribs) {
-
-	const DescriptionIndex editor_category_index =
-	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
-	if (editor_category_index == Widelands::INVALID_INDEX) {
-		throw GameDataError(
-		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
-	}
-	editor_category_ = world.editor_immovable_categories().get_mutable(editor_category_index);
+	// NOCOM fix constructor chain
 }
 
 /**
@@ -252,10 +241,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	if (table.has_key("buildcost")) {
 		buildcost_ = Buildcost(table.get_table("buildcost"), tribes);
 	}
-}
-
-const EditorCategory* ImmovableDescr::editor_category() const {
-	return editor_category_;
 }
 
 bool ImmovableDescr::has_terrain_affinity() const {

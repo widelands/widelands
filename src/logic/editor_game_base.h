@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "logic/map_objects/description_manager.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/building.h"
@@ -271,6 +272,7 @@ private:
 	std::unique_ptr<LuaInterface> lua_;
 	std::unique_ptr<PlayersManager> player_manager_;
 
+	std::unique_ptr<DescriptionManager> description_manager_;
 	std::unique_ptr<World> world_;
 	std::unique_ptr<Tribes> tribes_;
 	std::unique_ptr<InteractiveBase> ibase_;

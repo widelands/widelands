@@ -27,7 +27,6 @@
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/wareworker.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
@@ -156,10 +155,6 @@ public:
 		return buildcost_;
 	}
 
-	// Returns the editor category, or nullptr if the immovable has no editor category
-	// (e.g. Tribe immovables never have one).
-	const EditorCategory* editor_category() const;
-
 	// A basic localized name for the immovable, used by trees
 	const std::string& species() const {
 		return species_;
@@ -202,7 +197,6 @@ private:
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
 
-	EditorCategory* editor_category_;  // not owned.
 	std::unique_ptr<TerrainAffinity> terrain_affinity_;
 	DISALLOW_COPY_AND_ASSIGN(ImmovableDescr);
 };

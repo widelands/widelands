@@ -361,9 +361,6 @@ World
 const char LuaWorld::className[] = "World";
 const MethodType<LuaWorld> LuaWorld::Methods[] = {
    METHOD(LuaWorld, new_critter_type),
-   METHOD(LuaWorld, new_editor_critter_category),
-   METHOD(LuaWorld, new_editor_immovable_category),
-   METHOD(LuaWorld, new_editor_terrain_category),
    METHOD(LuaWorld, new_immovable_type),
    METHOD(LuaWorld, new_resource_type),
    METHOD(LuaWorld, new_terrain_type),
@@ -447,7 +444,7 @@ int LuaWorld::new_resource_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_world()->add_resource_type(table);
+		get_egbase(L).mutable_world()->add_world_object_type(table, MapObjectType::RESOURCE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -463,7 +460,7 @@ int LuaWorld::new_terrain_type(lua_State* L) {
 	}
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_world()->add_terrain_type(table);
+		get_egbase(L).mutable_world()->add_world_object_type(table, MapObjectType::TERRAIN);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -479,7 +476,7 @@ int LuaWorld::new_critter_type(lua_State* L) {
 	}
 	try {
 		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_critter_type(table);
+		get_egbase(L).mutable_world()->add_world_object_type(table, MapObjectType::CRITTER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -492,54 +489,10 @@ int LuaWorld::new_immovable_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	try {
-		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_immovable_type(table);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
 
-// Documented in data/world/init.lua.
-// See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_editor_terrain_category(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
 	try {
-		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_editor_terrain_category(table);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
-
-// Documented in data/world/init.lua.
-// See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_editor_critter_category(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-	try {
-		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_editor_critter_category(table);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
-
-// Documented in data/world/init.lua.
-// See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_editor_immovable_category(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-	try {
-		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_editor_immovable_category(table);
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_world()->add_world_object_type(table, MapObjectType::IMMOVABLE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

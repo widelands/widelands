@@ -1344,7 +1344,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 		log("WARNING: Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
 		    "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
 		    descr->name().c_str());
-		resource_ = world.safe_resource_index(arguments.front().c_str());
+		resource_ = world.safe_resource_index(arguments.front());
 		workarea_ = read_positive(arguments.at(1));
 		max_resources_ = read_positive(arguments.at(2)) * 100U;
 		depleted_chance_ = read_positive(arguments.at(3)) * 100U;
@@ -1355,7 +1355,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 		for (const std::string& argument : arguments) {
 			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 			if (item.second.empty()) {
-				resource_ = world.safe_resource_index(item.first.c_str());
+				resource_ = world.safe_resource_index(item.first);
 			} else if (item.first == "radius") {
 				workarea_ = read_positive(item.second);
 			} else if (item.first == "yield") {

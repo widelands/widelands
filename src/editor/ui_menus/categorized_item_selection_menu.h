@@ -93,13 +93,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {
 		const Widelands::EditorCategory& category = categories.get(category_index);
 
-		std::vector<int> item_indices;
-		for (size_t j = 0; j < descriptions_.size(); ++j) {
-			if (descriptions_.get(j).editor_category()->name() != category.name()) {
-				continue;
-			}
-			item_indices.push_back(j);
-		}
+		const std::vector<Widelands::DescriptionIndex>& item_indices = category.items();
 
 		UI::Box* vertical = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
 		const int kSpacing = 5;

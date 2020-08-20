@@ -345,7 +345,7 @@ int LuaEditorGameBase::get_resource_description(lua_State* L) {
 	}
 	const std::string resource_name = luaL_checkstring(L, 2);
 	const World& world = get_egbase(L).world();
-	const DescriptionIndex idx = world.resource_index(resource_name.c_str());
+	const DescriptionIndex idx = world.resource_index(resource_name);
 
 	if (idx == INVALID_INDEX) {
 		report_error(L, "Resource %s does not exist", resource_name.c_str());

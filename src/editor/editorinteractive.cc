@@ -947,6 +947,9 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
 		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
+
+		Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
+		egbase.mutable_world()->load_editor_categories(egbase.lua());
 		egbase.tribes();
 
 		{

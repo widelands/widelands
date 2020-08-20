@@ -95,16 +95,15 @@ bool Critter::run_remove(Game& game, State& state, const CritterAction&) {
 
 CritterDescr::CritterDescr(const std::string& init_descname,
                            const LuaTable& table,
-                           const World& world)
+						   const std::vector<std::string>& attribs)
    : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
-     editor_category_(nullptr),
      size_(table.get_int("size")),
      carnivore_(table.has_key("carnivore") && table.get_bool("carnivore")),
      appetite_(0),
      reproduction_rate_(table.get_int("reproduction_rate")) {
 	assign_directional_animation(&walk_anims_, "walk");
 
-	add_attributes(table.get_table("attributes")->array_entries<std::string>());
+	add_attributes(attribs);
 
 	if (size_ < 1 || size_ > 10) {
 		throw GameDataError(
@@ -146,13 +145,6 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
 		}
 	}
-	const DescriptionIndex editor_category_index =
-	   world.editor_critter_categories().get_index(table.get_string("editor_category"));
-	if (editor_category_index == Widelands::INVALID_INDEX) {
-		throw GameDataError(
-		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
-	}
-	editor_category_ = world.editor_critter_categories().get_mutable(editor_category_index);
 }
 
 CritterDescr::~CritterDescr() {
@@ -178,10 +170,6 @@ CritterProgram const* CritterDescr::get_program(const std::string& program_name)
 
 uint32_t CritterDescr::movecaps() const {
 	return is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;
-}
-
-const EditorCategory* CritterDescr::editor_category() const {
-	return editor_category_;
 }
 
 /*

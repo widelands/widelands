@@ -2181,6 +2181,7 @@ int LuaImmovableDescription::get_becomes(lua_State* L) {
          none.
 */
 int LuaImmovableDescription::get_editor_category(lua_State* L) {
+	/* NOCOM
 	const EditorCategory* editor_category = get()->editor_category();
 	if (editor_category != nullptr) {
 		lua_newtable(L);
@@ -2193,6 +2194,7 @@ int LuaImmovableDescription::get_editor_category(lua_State* L) {
 	} else {
 		lua_pushnil(L);
 	}
+	*/
 	return 1;
 }
 
@@ -3670,7 +3672,7 @@ void LuaResourceDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
 	const World& world = get_egbase(L).world();
-	const ResourceDescription* descr = world.get_resource(world.safe_resource_index(name.c_str()));
+	const ResourceDescription* descr = world.get_resource(world.safe_resource_index(name));
 	set_description_pointer(descr);
 }
 
@@ -3858,6 +3860,7 @@ int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
       none.
 */
 int LuaTerrainDescription::get_editor_category(lua_State* L) {
+	/* NOCOM
 	const EditorCategory* editor_category = get()->editor_category();
 	if (editor_category != nullptr) {
 		lua_newtable(L);
@@ -3870,6 +3873,7 @@ int LuaTerrainDescription::get_editor_category(lua_State* L) {
 	} else {
 		lua_pushnil(L);
 	}
+	*/
 	return 1;
 }
 

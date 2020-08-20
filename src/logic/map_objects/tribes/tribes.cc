@@ -38,7 +38,7 @@
 #include "logic/map_objects/tribes/warehouse.h"
 
 namespace Widelands {
-Tribes::Tribes(LuaInterface* lua)
+Tribes::Tribes(DescriptionManager* description_manager, LuaInterface* lua)
    : buildings_(new DescriptionMaintainer<BuildingDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      ships_(new DescriptionMaintainer<ShipDescr>()),
@@ -49,7 +49,7 @@ Tribes::Tribes(LuaInterface* lua)
      largest_workarea_(0),
      scenario_tribes_(nullptr),
      lua_(lua),
-     description_manager_(new Widelands::DescriptionManager(lua_)) {
+     description_manager_(description_manager) {
 
 	// Register tribe names. Tribes have no attributes.
 	std::vector<std::string> attributes;
