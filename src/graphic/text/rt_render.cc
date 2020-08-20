@@ -633,7 +633,32 @@ TextNode::TextNode(FontCache& font, NodeStyle& ns, const std::string& txt)
 	check_size();
 }
 uint16_t TextNode::hotspot_y() const {
-	return font_.ascent(nodestyle_.font_style);
+	log("A");
+	const icu::UnicodeString unicode_txt(txt_.c_str(), "UTF-8");
+	log("B");
+	int ascent = TTF_FontAscent(font_.get_ttf_font()); //font_.ascent(nodestyle_.font_style);
+	int descent = TTF_FontDescent(font_.get_ttf_font());
+	log("C %d %d ", descent, ascent);
+	for (int i = 0; i < unicode_txt.length(); ++i) {
+		log("D");
+		UChar codepoint = unicode_txt.charAt(i);
+		log("E %u ", codepoint);
+		int miny, maxy;
+		if (TTF_GlyphMetrics(font_.get_ttf_font(), codepoint, nullptr, nullptr, &miny, &maxy, nullptr) == 0) {
+			log("F %d %d ", miny, maxy);
+			if (ascent < maxy) {
+				log("G");
+				ascent = maxy;
+			}
+			if (descent > miny) {
+				log("H");
+				descent = miny;
+			}
+		}
+	}
+	log("I\n");
+	log("-- hotspot_y() = %d %d --        %s\n", descent, ascent, txt_.c_str());
+	return -descent;
 }
 
 std::shared_ptr<UI::RenderedText> TextNode::render(TextureCache* texture_cache) {
