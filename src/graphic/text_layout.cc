@@ -88,9 +88,9 @@ std::string richtext_escape(const std::string& given_text) {
 /// Bullet list item
 std::string as_listitem(const std::string& txt, UI::FontStyle style) {
 	boost::format f("<div width=100%%><div><p><font size=%d "
-	                       "color=%s>•</font></p></div><div><p><space gap=6></p></div><div "
-	                       "width=*><p><font size=%d color=%s>%s<vspace "
-	                       "gap=6></font></p></div></div>");
+	                "color=%s>•</font></p></div><div><p><space gap=6></p></div><div "
+	                "width=*><p><font size=%d color=%s>%s<vspace "
+	                "gap=6></font></p></div></div>");
 	const UI::FontStyleInfo& font_style = g_gr->styles().font_style(style);
 	f % font_style.size() % font_style.color().hex_value() % font_style.size() %
 	   font_style.color().hex_value() % txt;
@@ -132,9 +132,9 @@ std::string as_mapobject_message(const std::string& image,
 	assert(!txt.empty());
 	const std::string image_type = g_gr->images().has(image) ? "src" : "object";
 	boost::format f_color("<div padding_r=10><p><img width=%d %s=%s color=%s></p></div>"
-	                             "<div width=*><p>%s</p></div>");
+	                      "<div width=*><p>%s</p></div>");
 	boost::format f_nocolor("<div padding_r=10><p><img width=%d %s=%s></p></div>"
-	                               "<div width=*><p>%s</p></div>");
+	                        "<div width=*><p>%s</p></div>");
 	if (player_color != nullptr) {
 		f_color % width;
 		f_color % image_type;
