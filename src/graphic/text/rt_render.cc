@@ -538,14 +538,10 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 		int line_height = 0;
 		int line_start = INFINITE_WIDTH;
 		// Compute real line height and width, taking into account alignment
-		for (const std::shared_ptr<RenderNode>& n : nodes_in_line) {
+		for (const auto& n : nodes_in_line) {
 			if (n->get_floating() == RenderNode::Floating::kNone) {
 				line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
 				n->set_y(h_ + biggest_hotspot - n->hotspot_y());
-				log(
-				   "%s n->y=%d h_=%u line_height=%d biggest_hotspot=%u n->hotspot_y=%u, n->height=%u\n",
-				   n->debug_info().c_str(), n->y(), h_, line_height, biggest_hotspot, n->hotspot_y(),
-				   n->height());
 			}
 			if (line_start >= INFINITE_WIDTH || n->x() < line_start) {
 				line_start = n->x() - p.left;
@@ -554,7 +550,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 		}
 
 		// Go over again and adjust position for VALIGN
-		for (const std::shared_ptr<RenderNode>& n : nodes_in_line) {
+		for (const auto& n : nodes_in_line) {
 			int space = line_height - n->height();
 			if (!space || n->valign() == UI::Align::kBottom) {
 				continue;
@@ -567,8 +563,6 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 			// So, we fix the sign.
 			if (n->get_floating() == RenderNode::Floating::kNone) {
 				n->set_y(std::abs(n->y() - space));
-				log("%s n->y=%d space=%d n->valign=%u\n", n->debug_info().c_str(), n->y(), space,
-				    n->valign());
 			}
 		}
 		rv->insert(rv->end(), nodes_in_line.begin(), nodes_in_line.end());
@@ -642,34 +636,20 @@ TextNode::TextNode(FontCache& font, NodeStyle& ns, const std::string& txt)
 	check_size();
 }
 uint16_t TextNode::hotspot_y() const {
-	// log("A");
 	const icu::UnicodeString unicode_txt(txt_.c_str(), "UTF-8");
-	// log("B");
-	int ascent = TTF_FontAscent(font_.get_ttf_font());  // font_.ascent(nodestyle_.font_style);
-	int descent = TTF_FontDescent(font_.get_ttf_font());
-	// log("C %d %d ", descent, ascent);
+	int ascent = TTF_FontAscent(font_.get_ttf_font());
+	int shadow_offset = font_.ascent(nodestyle_.font_style) - ascent;
 	for (int i = 0; i < unicode_txt.length(); ++i) {
-		// log("D");
 		UChar codepoint = unicode_txt.charAt(i);
-		// log("E %u ", codepoint);
-		int miny, maxy;
+		int maxy;
 		if (TTF_GlyphMetrics(
-		       font_.get_ttf_font(), codepoint, nullptr, nullptr, &miny, &maxy, nullptr) == 0) {
-			// log("F %d %d ", miny, maxy);
+		       font_.get_ttf_font(), codepoint, nullptr, nullptr, nullptr, &maxy, nullptr) == 0) {
 			if (ascent < maxy) {
-				// log("G");
 				ascent = maxy;
-			}
-			if (descent > miny) {
-				// log("H");
-				descent = miny;
 			}
 		}
 	}
-	// log("I\n");
-	// log("-- hotspot_y() = %d %d --        %s\n", descent, ascent, txt_.c_str());
-	return ascent;
-	// return font_.ascent(nodestyle_.font_style);
+	return ascent + shadow_offset;
 }
 
 std::shared_ptr<UI::RenderedText> TextNode::render(TextureCache* texture_cache) {

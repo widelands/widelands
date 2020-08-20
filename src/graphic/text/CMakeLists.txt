@@ -33,7 +33,6 @@ wl_library(graphic_text
     base_i18n
     base_log
     base_macros
-    base_utf8
     graphic
     graphic_align
     graphic_animation

@@ -57,7 +57,6 @@ void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uin
 		w += SHADOW_OFFSET;
 		h += SHADOW_OFFSET;
 	}
-
 	*gw = w;
 	*gh = h;
 }
