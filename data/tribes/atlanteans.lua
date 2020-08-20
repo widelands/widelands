@@ -66,6 +66,8 @@
 --       }
 --
 
+tribes = wl.Tribes()
+
 image_dirname = path.dirname(__file__) .. "images/atlanteans/"
 
 tribes:new_tribe {

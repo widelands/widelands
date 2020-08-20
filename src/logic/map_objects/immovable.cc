@@ -133,7 +133,8 @@ ImmovableDescr IMPLEMENTATION
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               MapObjectDescr::OwnerType input_type)
+                               MapObjectDescr::OwnerType input_type,
+                               const std::vector<std::string>& attribs)
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
      size_(BaseImmovable::NONE),
      owner_type_(input_type),
@@ -153,14 +154,15 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		terrain_affinity_.reset(new TerrainAffinity(*table.get_table("terrain_affinity"), name()));
 	}
 
-	if (table.has_key("attributes")) {
-		std::vector<std::string> attribs =
-		   table.get_table("attributes")->array_entries<std::string>();
+	if (table.has_key("attributes") && input_type == Widelands::MapObjectDescr::OwnerType::kTribe) {
+		throw GameDataError("Tribe attributes need to be defined in 'register.lua' now");
+	}
+	if (!attribs.empty()) {
 		add_attributes(attribs);
 
-		// All resource indicators must have a menu icon
 		for (const std::string& attribute : attribs) {
 			if (attribute == "resi") {
+				// All resource indicators must have a menu icon
 				if (icon_filename().empty()) {
 					throw GameDataError("Resource indicator %s has no menu icon", name().c_str());
 				}
@@ -223,8 +225,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
+                               const std::vector<std::string>& attribs,
                                const World& world)
-   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld) {
+   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld, attribs) {
 
 	const DescriptionIndex editor_category_index =
 	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
@@ -243,8 +246,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               const Tribes& tribes)
-   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe) {
+                               const std::vector<std::string>& attribs,
+                               Tribes& tribes)
+   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe, attribs) {
 	if (table.has_key("buildcost")) {
 		buildcost_ = Buildcost(table.get_table("buildcost"), tribes);
 	}
@@ -718,6 +722,9 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 
 			if (owner_type != "world") {  //  It is a tribe immovable.
 				const std::string name = tribes_lookup_table.lookup_immovable(fr.c_string());
+				Notifications::publish(
+				   NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kObject));
+
 				const DescriptionIndex idx = egbase.tribes().immovable_index(name);
 				if (idx != Widelands::INVALID_INDEX) {
 					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));

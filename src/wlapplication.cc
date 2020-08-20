@@ -1325,7 +1325,7 @@ void WLApplication::mainmenu_multiplayer() {
 			}
 
 			// reinitalise in every run, else graphics look strange
-			FullscreenMenuInternetLobby ns(playername.c_str(), password.c_str(), registered);
+			FullscreenMenuInternetLobby ns(playername, password, registered);
 			ns.run<FullscreenMenuBase::MenuTarget>();
 
 			if (InternetGaming::ref().logged_in()) {
@@ -1412,7 +1412,7 @@ bool WLApplication::new_game() {
 			}
 			game.create_loader_ui(tipstexts, false);
 
-			game.step_loader_ui(_("Preparing game"));
+			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 			game.set_game_controller(ctrl.get());
 			game.init_newgame(sp.settings());
@@ -1526,7 +1526,6 @@ void WLApplication::replay() {
 
 	try {
 		game.create_loader_ui({"general_game"}, true);
-		game.step_loader_ui(_("Loading…"));
 
 		game.set_ibase(new InteractiveSpectator(game, get_config_section()));
 		game.set_write_replay(false);

@@ -14,7 +14,6 @@ tribes:new_immovable_type {
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "tiny/menu.png",
-   attributes = { "seed_berrybush" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -41,7 +40,6 @@ tribes:new_immovable_type {
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "small/menu.png",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -68,7 +66,6 @@ tribes:new_immovable_type {
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "medium/menu.png",
-   attributes = { "flowering" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -95,7 +92,6 @@ tribes:new_immovable_type {
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "ripe/menu.png",
-   attributes = { "ripe_bush" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {

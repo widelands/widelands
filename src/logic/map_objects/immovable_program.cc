@@ -215,8 +215,6 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 			if (!item.second.empty()) {
 				if (item.first == "bob") {
 					bob_ = true;
-					// TODO(GunChleoc): If would be nice to check if target exists, but we can't
-					// guarantee the load order. Maybe in postload() one day.
 					type_name_ = item.second;
 				} else if (item.first == "chance") {
 					probability_ = read_percent_to_int(item.second);
@@ -236,20 +234,21 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 				    descr.name().c_str());
 				probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
 			} else {
-				// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee
-				// the load order. Maybe in postload() one day.
-				type_name_ = item.first;
+				type_name_ = argument;
 			}
 		}
 		if (type_name_ == descr.name()) {
 			throw GameDataError("illegal transformation to the same type");
 		}
+
+		// This ensures that the object we're transforming to is loaded and known. It does not
+		// ensure that it's an appropriate immovable/bob.
+		Notifications::publish(
+		   NoteMapObjectDescription(type_name_, NoteMapObjectDescription::LoadType::kObject));
+
 		// Register target at ImmovableDescr
-		if (bob_) {
-			descr.becomes_.insert(std::make_pair(MapObjectType::BOB, type_name_));
-		} else {
-			descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name_));
-		}
+		descr.becomes_.insert(
+		   std::make_pair(bob_ ? MapObjectType::BOB : MapObjectType::IMMOVABLE, type_name_));
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
 	}
@@ -309,9 +308,12 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, Immovabl
 		throw GameDataError("illegal growth to the same type");
 	}
 
-	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load
-	// order. Maybe in postload() one day.
 	type_name_ = arguments.front();
+	// This ensures that the object we're transforming to is loaded and known. It does not ensure
+	// that it's an appropriate immovable.
+	Notifications::publish(
+	   NoteMapObjectDescription(type_name_, NoteMapObjectDescription::LoadType::kObject));
+
 	// Register target at ImmovableDescr
 	descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name_));
 }
@@ -464,6 +466,11 @@ ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
 			}
 		}
 	}
+
+	// This ensures that the object we're transforming to is loaded and known. It does not ensure
+	// that it's an appropriate immovable.
+	Notifications::publish(
+	   NoteMapObjectDescription(type_name_, NoteMapObjectDescription::LoadType::kObject));
 }
 
 void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const {

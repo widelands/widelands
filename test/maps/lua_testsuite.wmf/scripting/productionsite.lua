@@ -236,3 +236,14 @@ function productionsite_tests:test_get_inputs_non_existant_name()
       self.inn:get_inputs{"meat", "balloon"}
    end)
 end
+function productionsite_tests:test_foreign_productionsite_new_tribe_fails()
+   local field = map:get_field(13,13)
+   -- Includes unknown wares in build, dismantle, input and output
+   assert_error("Should not be able to place a production site that the tribe can't use", function()
+      player1:place_building("frisians_brick_kiln", field, false, true)
+   end)
+   -- Includes unknown immovable placed by worker
+   assert_error("Should not be able to place a production site that the tribe can't use", function()
+      player1:place_building("frisians_farm", field, false, true)
+   end)
+end

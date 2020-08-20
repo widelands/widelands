@@ -23,7 +23,6 @@
 
 #include "graphic/graphic.h"
 #include "io/profile.h"
-#include "logic/editor_game_base.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"

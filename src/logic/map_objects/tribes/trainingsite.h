@@ -36,7 +36,7 @@ public:
 	TrainingSiteDescr(const std::string& init_descname,
 	                  const std::string& msgctxt,
 	                  const LuaTable& table,
-	                  const Tribes& tribes,
+	                  Tribes& tribes,
 	                  const World& world);
 	~TrainingSiteDescr() override {
 	}
