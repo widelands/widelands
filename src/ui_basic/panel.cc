@@ -22,6 +22,7 @@
 #include <memory>
 
 #include <SDL_timer.h>
+#include <pthread.h>
 
 #include "base/log.h"
 #include "graphic/font_handler.h"
@@ -143,6 +144,41 @@ void Panel::free_children() {
 	first_child_ = nullptr;
 }
 
+// static
+void* Panel::runthread(void* p) {
+	assert(p);
+	UI::Panel& panel = *static_cast<Panel*>(p);
+
+	const uint32_t initial_ticks = SDL_GetTicks();
+
+	// think() is called at most 15 times per second, that is roughly ever 66ms.
+	const uint32_t kGameLogicDelay = 1000 / 15;
+	uint32_t next_think_time = initial_ticks + kGameLogicDelay;
+
+	while (panel.running_) {
+log("NOCOM LOGIC thread\n");
+		const uint32_t start_time = SDL_GetTicks();
+
+		if (start_time >= next_think_time) {
+
+			panel.do_think();
+
+			if (panel.flags_ & pf_child_die) {
+				panel.check_child_death();
+			}
+
+			next_think_time = start_time + kGameLogicDelay;
+		}
+
+		const int32_t delay = next_think_time - SDL_GetTicks();
+		if (delay > 0) {
+			SDL_Delay(delay);
+		}
+	}
+
+	pthread_exit(NULL);
+}
+
 /**
  * Enters the event loop; all events will be handled by this panel.
  *
@@ -158,9 +194,9 @@ int Panel::do_run() {
 	mousegrab_ = nullptr;        // good ol' paranoia
 	app->set_mouse_lock(false);  // more paranoia :-)
 
-	Panel* forefather = this;
-	while (forefather->parent_ != nullptr) {
-		forefather = forefather->parent_;
+	UI::Panel* forefather = this;
+	while (forefather->get_parent()) {
+		forefather = forefather->get_parent();
 	}
 
 	// Loop
@@ -169,36 +205,28 @@ int Panel::do_run() {
 	// Panel-specific startup code. This might call end_modal()!
 	start();
 
-	// think() is called at most 15 times per second, that is roughly ever 66ms.
-	const uint32_t kGameLogicDelay = 1000 / 15;
-
-	// With the default of 30FPS, the game will be drawn every 33ms.
-	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
-
 	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
 	                                       Panel::ui_mousemove,  Panel::ui_key,
 	                                       Panel::ui_textinput,  Panel::ui_mousewheel};
 
 	const uint32_t initial_ticks = SDL_GetTicks();
-	uint32_t next_think_time = initial_ticks + kGameLogicDelay;
+
+	// With the default of 30 FPS, the game will be drawn every 33 ms
+	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
 	uint32_t next_draw_time = initial_ticks + draw_delay;
+
+	pthread_t thread;
+	if (int i = pthread_create(&thread, NULL, &Panel::runthread, this)) {
+		throw wexception("PThread creation failed with error code %d", i);
+	}
+
 	while (running_) {
+log("NOCOM DRAW thread\n");
 		const uint32_t start_time = SDL_GetTicks();
 
 		app->handle_input(&input_callback);
-
-		if (start_time >= next_think_time) {
-			if (app->should_die()) {
-				end_modal<Returncodes>(Returncodes::kBack);
-			}
-
-			do_think();
-
-			if (flags_ & pf_child_die) {
-				check_child_death();
-			}
-
-			next_think_time = start_time + kGameLogicDelay;
+		if (app->should_die()) {
+			end_modal<Returncodes>(Returncodes::kBack);
 		}
 
 		if (start_time >= next_draw_time) {
@@ -218,11 +246,13 @@ int Panel::do_run() {
 			next_draw_time = start_time + draw_delay;
 		}
 
-		int32_t delay = std::min<int32_t>(next_draw_time, next_think_time) - SDL_GetTicks();
+		const int32_t delay = next_draw_time - SDL_GetTicks();
 		if (delay > 0) {
 			SDL_Delay(delay);
 		}
 	}
+	pthread_cancel(thread);
+
 	end();
 
 	// Done

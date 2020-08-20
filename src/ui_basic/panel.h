@@ -352,6 +352,8 @@ private:
 	void do_draw_inner(RenderTarget&);
 	void do_think();
 
+	static void* runthread(void*);
+
 	Panel* child_at_mouse_cursor(int32_t mouse_x, int32_t mouse_y, Panel* child);
 	void do_mousein(bool inside);
 	bool do_mousepress(const uint8_t btn, int32_t x, int32_t y);

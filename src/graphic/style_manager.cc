@@ -307,7 +307,7 @@ const RGBColor& StyleManager::minimap_icon_frame() const {
 }
 
 std::string StyleManager::color_tag(const std::string& text, const RGBColor& color) {
-	static boost::format f("<font color=%s>%s</font>");
+	boost::format f("<font color=%s>%s</font>");
 	f % color.hex_value();
 	f % text;
 	return f.str();
