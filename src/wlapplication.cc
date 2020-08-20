@@ -1325,7 +1325,7 @@ void WLApplication::mainmenu_multiplayer() {
 			}
 
 			// reinitalise in every run, else graphics look strange
-			FullscreenMenuInternetLobby ns(playername.c_str(), password.c_str(), registered);
+			FullscreenMenuInternetLobby ns(playername, password, registered);
 			ns.run<FullscreenMenuBase::MenuTarget>();
 
 			if (InternetGaming::ref().logged_in()) {
