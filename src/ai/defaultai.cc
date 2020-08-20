@@ -21,6 +21,7 @@
 
 #include <algorithm>
 #include <memory>
+#include <queue>
 
 #include "ai/ai_hints.h"
 #include "base/macros.h"

@@ -38,7 +38,7 @@ CmdQueue::CmdQueue(Game& game)
    : game_(game),
      nextserial_(0),
      ncmds_(0),
-     cmds_(kCommandQueueBucketSize, std::priority_queue<CmdItem>()) {
+     cmds_(kCommandQueueBucketSize, std::multiset<CmdItem>()) {
 }
 
 CmdQueue::~CmdQueue() {
@@ -54,11 +54,11 @@ CmdQueue::~CmdQueue() {
 void CmdQueue::flush() {
 	uint32_t cbucket = 0;
 	while (ncmds_ && cbucket < kCommandQueueBucketSize) {
-		std::priority_queue<CmdItem>& current_cmds = cmds_[cbucket];
+		std::multiset<CmdItem>& current_cmds = cmds_[cbucket];
 
 		while (!current_cmds.empty()) {
-			Command* cmd = current_cmds.top().cmd;
-			current_cmds.pop();
+			Command* cmd = current_cmds.begin()->cmd;
+			current_cmds.erase(current_cmds.begin());
 			delete cmd;
 			--ncmds_;
 		}
@@ -91,7 +91,7 @@ void CmdQueue::enqueue(Command* const cmd) {
 		ci.serial = 0;
 	}
 
-	cmds_[cmd->duetime() % kCommandQueueBucketSize].push(ci);
+	cmds_[cmd->duetime() % kCommandQueueBucketSize].insert(ci);
 	++ncmds_;
 }
 
@@ -99,16 +99,15 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 	uint32_t const final = game_time_var + interval;
 
 	while (game_time_var < final) {
-		std::priority_queue<CmdItem>& current_cmds = cmds_[game_time_var % kCommandQueueBucketSize];
+		std::multiset<CmdItem>& current_cmds = cmds_[game_time_var % kCommandQueueBucketSize];
 
 		while (!current_cmds.empty()) {
-			CmdItem& item = const_cast<CmdItem&>(current_cmds.top());
-			Command& c = *item.cmd;
+			const auto item = current_cmds.begin();
+			Command& c = *item->cmd;
 			if (game_time_var < c.duetime()) {
 				break;
 			}
-			item.cmd = nullptr;
-			current_cmds.pop();
+			current_cmds.erase(item);
 			--ncmds_;
 			assert(game_time_var == c.duetime());
 

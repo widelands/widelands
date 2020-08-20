@@ -20,7 +20,8 @@
 #ifndef WL_LOGIC_CMD_QUEUE_H
 #define WL_LOGIC_CMD_QUEUE_H
 
-#include <queue>
+#include <set>
+#include <vector>
 
 #include "logic/queue_cmd_ids.h"
 
@@ -116,14 +117,12 @@ class CmdQueue {
 		uint32_t serial;
 
 		bool operator<(const CmdItem& c) const {
-			const uint32_t d1 = cmd ? cmd->duetime() : 0;
-			const uint32_t d2 = c.cmd ? c.cmd->duetime() : 0;
-			if (d1 != d2) {
-				return d1 > d2;
+			if (cmd->duetime() != c.cmd->duetime()) {
+				return cmd->duetime() < c.cmd->duetime();
 			} else if (category != c.category) {
-				return category > c.category;
+				return category < c.category;
 			} else {
-				return serial > c.serial;
+				return serial < c.serial;
 			}
 		}
 	};
@@ -147,7 +146,7 @@ private:
 	Game& game_;
 	uint32_t nextserial_;
 	uint32_t ncmds_;
-	using CommandsContainer = std::vector<std::priority_queue<CmdItem>>;
+	using CommandsContainer = std::vector<std::multiset<CmdItem>>;
 	CommandsContainer cmds_;
 };
 }  // namespace Widelands

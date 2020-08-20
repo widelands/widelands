@@ -20,6 +20,8 @@
 #ifndef WL_WUI_MAPVIEW_H
 #define WL_WUI_MAPVIEW_H
 
+#include <queue>
+
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"

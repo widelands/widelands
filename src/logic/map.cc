@@ -20,6 +20,7 @@
 #include "logic/map.h"
 
 #include <memory>
+#include <queue>
 
 #include "base/log.h"
 #include "base/macros.h"

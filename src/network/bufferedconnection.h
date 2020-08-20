@@ -22,6 +22,7 @@
 
 #include <memory>
 #include <mutex>
+#include <queue>
 #include <thread>
 
 #include "network/network.h"

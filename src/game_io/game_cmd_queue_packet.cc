@@ -64,7 +64,7 @@ void GameCmdQueuePacket::read(FileSystem& fs, Game& game, MapObjectLoader* const
 
 				item.cmd = &cmd;
 
-				cmdq.cmds_[cmd.duetime() % kCommandQueueBucketSize].push(item);
+				cmdq.cmds_[cmd.duetime() % kCommandQueueBucketSize].insert(item);
 				++cmdq.ncmds_;
 			}
 		} else {
@@ -95,23 +95,22 @@ void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const
 
 	while (nhandled < cmdq.ncmds_) {
 		// Make a copy, so we can pop stuff
-		std::priority_queue<CmdQueue::CmdItem> p = cmdq.cmds_[time % kCommandQueueBucketSize];
+		std::multiset<CmdQueue::CmdItem> p = cmdq.cmds_[time % kCommandQueueBucketSize];
 
 		while (!p.empty()) {
-			const CmdQueue::CmdItem& it = p.top();
-			if (it.cmd->duetime() > time) {
+			if (p.begin()->cmd->duetime() > time) {
 				// Time is the primary sorting key, so we can't have any additional commands in this
 				// queue for this time
 				break;
 			}
-			if (it.cmd->duetime() == time) {
-				if (upcast(GameLogicCommand, cmd, it.cmd)) {
+			if (p.begin()->cmd->duetime() == time) {
+				if (upcast(GameLogicCommand, cmd, p.begin()->cmd)) {
 					// The id (aka command type)
 					fw.unsigned_16(static_cast<uint16_t>(cmd->id()));
 
 					// Serial number
-					fw.signed_32(it.category);
-					fw.unsigned_32(it.serial);
+					fw.signed_32(p.begin()->category);
+					fw.unsigned_32(p.begin()->serial);
 
 					// Now the command itself
 					cmd->write(fw, game, *os);
@@ -120,7 +119,7 @@ void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const
 			}
 
 			// DONE: next command
-			p.pop();
+			p.erase(p.begin());
 		}
 		++time;
 	}

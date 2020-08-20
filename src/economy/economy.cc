@@ -20,6 +20,7 @@
 #include "economy/economy.h"
 
 #include <memory>
+#include <queue>
 
 #include "base/macros.h"
 #include "base/wexception.h"
