@@ -1,9 +1,19 @@
 project (widelands)
 
-cmake_minimum_required (VERSION 3.5)
-cmake_policy(VERSION 3.5)
+cmake_minimum_required (VERSION 3.9)
+cmake_policy(VERSION 3.9)
+
+option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
+option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
+option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
+option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
+option(OPTION_BUILD_TESTS "Build tests" ON)
+option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
+option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
+option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
 include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
+include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
 # This policy is not known to versions prior 3.11 and would result in errors,
 # if set on such systems. This can be removed when cmake_minimum_required is set
@@ -34,17 +44,6 @@ endif(POLICY CMP0072)
 if(POLICY CMP0074)
   cmake_policy(SET CMP0074 NEW)
 endif(POLICY CMP0074)
-
-include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
-
-option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
-option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
-option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
-option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
-option(OPTION_BUILD_TESTS "Build tests" ON)
-option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
-option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
-option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
   ADD_DEFINITIONS(-DUSE_XDG)
