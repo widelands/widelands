@@ -20,3 +20,9 @@ name="Awesome Atlantean"
 tribe="atlanteans"
 ai="very_weak"
 closeable="false"
+
+[player_4]
+name="Feisty Frisian"
+tribe="frisians"
+ai=
+closeable="false"

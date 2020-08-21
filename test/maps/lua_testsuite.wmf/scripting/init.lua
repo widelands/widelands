@@ -18,6 +18,9 @@ player1 = egbase.players[1]
 player2 = egbase.players[2]
 player3 = egbase.players[3]
 
+-- TODO(GunChleoc): Editor does not conquer properly
+player1:place_building("barbarians_headquarters", map.player_slots[1].starting_field, false, true)
+
 -- =================================
 -- Tests for the core functionality
 -- =================================

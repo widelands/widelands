@@ -3,14 +3,17 @@
 # 
 # Translators:
 # GunChleoc, 2018
+# GunChleoc, 2018
 # ks k, 2020
+# ks k, 2020
+# TaeMin An, 2017,2019
 # TaeMin An, 2017,2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-06-28 12:38+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-08-17 08:52+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +44,7 @@ msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
-msgstr "가장 중요한 건물들이 세워진 작은 마을을 보여드리겠습니다. 충분한 용품들을 가지고 있어서, 무기 생산에 대해 걱정하지 않으셔도 됩니다. 실제 게임에서는, 이런 사치를 누리지 못할 겁니다."
+msgstr "가장 중요한 건물들이 세워진 작은 마을을 보여드리겠습니다. 충분한 물품들을 가지고 있어서, 무기 생산에 대해 걱정하지 않으셔도 됩니다. 실제 게임에서는, 이런 사치를 누리지 못할 겁니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid "Soldiers’ abilities"
@@ -53,7 +56,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr "새로운 군인들은 일반적인 일꾼들과는 다르게 생성됩니다: 신병들은 창고 (혹은 본부) 에서 기초 훈련을 받을 병영으로 이동해서 군인이 됩니다. 야만인들의 기초 병사들은 갑옷을 사용하지 않고, 오직 도끼만 필요합니다."
+msgstr "새로운 군인들은 일반적인 일꾼들과는 다르게 생성됩니다: 신병들은 창고 (혹은 본부) 에서 기초 훈련을 받을 병영으로 이동해서 군인이 됩니다. 야만인들의 기본 군사들은 갑옷을 사용하지 않고, 오직 도끼만 필요합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
 msgid ""
@@ -190,7 +193,7 @@ msgstr "아주 좋습니다. 건설 경기장이 완성돼서, 군인들이 이�
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
 " pitta bread and strong beer, as well as either fish or meat."
-msgstr "필요한 용품들 또한 운반되고 있습니다. 성공적으로 훈련시키려면, 물고기나 고기뿐만 아니라 피타 빵과 고도 맥주가 필요합니다."
+msgstr "필요한 물품들 또한 운반되고 있습니다. 성공적으로 훈련시키려면, 물고기나 고기뿐만 아니라 피타 빵과 고도 맥주가 필요합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:90
 msgid ""
@@ -273,7 +276,7 @@ msgid ""
 "This equipment is produced in smithies out of coal, iron, and sometimes "
 "gold. You will learn more about this in the second scenario of the Barbarian"
 " campaign."
-msgstr "이런 장비들은 제작소에서 석탄과 철, 그리고 때때로 금을 이용해서 생산됩니다. 이에 대한 더 많은 것들은 야만인 캠페인의 두번째 시나리오에서 배울 것입니다."
+msgstr "이런 장비들은 제작소들에서 석탄과 철, 그리고 때때로 금을 이용해서 생산됩니다. 이에 대한 더 많은 것들은 야만인 캠페인의 두번째 시나리오에서 배울 것입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:125
 msgid ""
@@ -282,7 +285,7 @@ msgid ""
 " ability levels cannot be compared: an Imperial soldier has a base attack of"
 " %1% at level 0, while a Barbarian soldier at the same level only has a base"
 " attack of %2%."
-msgstr "당신은 또한 Widelands 의 세 부족들이 각자만의 훈련 방식이 있고, 그래서 건물과 용품이 다르다는 것을 명심해야 합니다. 또한 능력 레벨도 비교할 수 없습니다: 야만인 군인들이 레벨 0에서 %2%의 기초 공격을 가하는 동안, 제국 군인은 같은 레벨에서 %1% 의 기초 공격을 가합니다."
+msgstr "당신은 또한 Widelands 의 세 부족들이 각자만의 훈련 방식이 있고, 그래서 건물과 물품이 다르다는 것을 명심해야 합니다. 또한 능력 레벨도 비교할 수 없습니다: 야만인 군인들이 레벨 0에서 %2%의 기초 공격을 가하는 동안, 제국 군인은 같은 레벨에서 %1% 의 기초 공격을 가합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
@@ -316,7 +319,7 @@ msgstr "정찰대의 오두막을 지으십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
 msgid "Build a scout’s hut"
-msgstr "정찰대의 오두막 짓기"
+msgstr "정찰대의 오두막을 지으십시오"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
 msgid ""
@@ -338,9 +341,9 @@ msgstr "갈 준비가 되었습니다!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
 msgid ""
-"Well done, your scout’s hut has been built. While our scout is moving in, "
+"Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr "잘했어요, 정찰대의 오두막이 지어졌습니다. 정찰대가 입주하는 동안, 그에 대해 조금 더 배워보도록 합시다."
+msgstr "잘했어요! 정찰대의 오두막이 지어졌습니다. 정찰대가 주둔하는 동안, 그에 대해 조금 더 배워보도록 합시다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
@@ -611,7 +614,7 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr "훌륭합니다, 성채가 완성되었습니다. 하지만 이게 뭡니까? 적대적인 부족이 성채가 건설되는 중에 우리 옆에 자리잡았습니다. 어떻게 그들이 우리 땅의 일부를 강탈하는지 보셨습니까? 그리고 우리 나무꾼은 이제 일할 공간을 잃어버렸습니다. 제가 할 말은 다 했습니다. 우리의 땅을 되찾고 적을 물리칩시다!"
+msgstr "훌륭합니다, 성채가 완성되었습니다. 하지만 이게 뭡니까? 적대적인 부족이 성채가 건설되는 중에 우리 옆에 자리잡았습니다. 어떻게 그들이 우리 땅의 일부를 강탈하는지 보셨습니까? 그리고 우리 벌목꾼은 이제 일할 공간을 잃어버렸습니다. 제가 할 말은 다 했습니다. 우리의 땅을 되찾고 적을 물리칩시다!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:274
@@ -671,8 +674,3 @@ msgid ""
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
 msgstr "이제 캠페인을 플레이하실 준비가 되셨습니다. 거기서는 부족들의 각각 다른 경제에 대해 알려줄 것입니다. 또한 남은 튜토리얼을 플레이하셔도 되지만, 캠페인에서 승리하는데 꼭 필요한 것은 아닙니다."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

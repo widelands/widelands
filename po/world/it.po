@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
 "PO-Revision-Date: 2020-04-07 09:55+0000\n"
 "Last-Translator: Aba Baba <pietrodenicola2014@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -22,67 +22,67 @@ msgstr ""
 "Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/world/critters/badger/init.lua:64
+#: ../../data/world/critters/badger/init.lua:95
 msgid "Badger"
 msgstr "Tasso"
 
-#: ../../data/world/critters/brownbear/init.lua:15
+#: ../../data/world/critters/brownbear/init.lua:21
 msgid "Brown bear"
 msgstr "Orso bruno"
 
-#: ../../data/world/critters/bunny/init.lua:14
+#: ../../data/world/critters/bunny/init.lua:19
 msgid "Bunny"
 msgstr "Coniglio"
 
-#: ../../data/world/critters/chamois/init.lua:15
+#: ../../data/world/critters/chamois/init.lua:21
 msgid "Chamois"
 msgstr "Camoscio"
 
-#: ../../data/world/critters/deer/init.lua:15
+#: ../../data/world/critters/deer/init.lua:21
 msgid "Deer"
 msgstr "Cervo"
 
-#: ../../data/world/critters/duck/init.lua:18
+#: ../../data/world/critters/duck/init.lua:19
 msgid "Duck"
 msgstr "Anatra"
 
-#: ../../data/world/critters/fox/init.lua:19
+#: ../../data/world/critters/fox/init.lua:25
 msgid "Fox"
 msgstr "Volpe"
 
-#: ../../data/world/critters/lynx/init.lua:16
+#: ../../data/world/critters/lynx/init.lua:22
 msgid "Lynx"
 msgstr "Lince"
 
-#: ../../data/world/critters/marten/init.lua:15
+#: ../../data/world/critters/marten/init.lua:21
 msgid "Marten"
 msgstr "Martora"
 
-#: ../../data/world/critters/moose/init.lua:19
+#: ../../data/world/critters/moose/init.lua:25
 msgid "Moose"
 msgstr "Alce"
 
-#: ../../data/world/critters/reindeer/init.lua:16
+#: ../../data/world/critters/reindeer/init.lua:22
 msgid "Reindeer"
 msgstr "Renna"
 
-#: ../../data/world/critters/sheep/init.lua:18
+#: ../../data/world/critters/sheep/init.lua:25
 msgid "Sheep"
 msgstr "Pecora"
 
-#: ../../data/world/critters/stag/init.lua:19
+#: ../../data/world/critters/stag/init.lua:25
 msgid "Stag"
 msgstr "Cervo maschio"
 
-#: ../../data/world/critters/wildboar/init.lua:18
+#: ../../data/world/critters/wildboar/init.lua:25
 msgid "Wild boar"
 msgstr "Cinghiale selvatico"
 
-#: ../../data/world/critters/wisent/init.lua:15
+#: ../../data/world/critters/wisent/init.lua:21
 msgid "Wisent"
 msgstr "Bisonte"
 
-#: ../../data/world/critters/wolf/init.lua:19
+#: ../../data/world/critters/wolf/init.lua:26
 msgid "Wolf"
 msgstr "Lupo"
 

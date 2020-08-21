@@ -294,7 +294,7 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
  */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
-                                     const Tribes& tribes)
+                                     Tribes& tribes)
    : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, tribes),
      conquer_radius_(0),
      num_soldiers_(0),
@@ -740,7 +740,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 
 	// Heal soldiers
 	if (nexthealtime_ <= timeofgame) {
-		const uint32_t total_heal = descr().get_heal_per_second();
+		const unsigned total_heal = descr().get_heal_per_second();
 		uint32_t max_total_level = 0;
 		float max_health = 0;
 		Soldier* soldier_to_heal = nullptr;

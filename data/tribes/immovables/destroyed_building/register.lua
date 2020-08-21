@@ -1,0 +1,3 @@
+return {
+   destroyed_building = {},
+}

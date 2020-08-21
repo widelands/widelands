@@ -51,9 +51,9 @@ echo "Working tree is clean, continuing"
 set -x
 
 # Pull translations from Transifex
-tx pull -a
-# We might need to force-pull translations during a release
-# tx pull -fa
+# tx pull -a
+# Force-pull translations because some would get skipped accidentally
+tx pull -fa
 
 # Update authors file
 utils/update_authors.py
@@ -92,6 +92,20 @@ fi
 # Fix formatting for Lua
 python utils/fix_formatting.py --lua --dir data/i18n
 python utils/fix_formatting.py --lua --dir data/txts
+
+# Undo one-liner diffs in po directory - these are pure timestamps with no other content
+set +x
+while IFS= read -r line; do
+  row=($(echo $line | tr "\t" "\n"))
+
+  if [ ${#row[@]} -eq 3 ] ; then
+    if [ ${row[0]} -eq 1 -a ${row[1]} -eq 1 ] ; then
+      echo "Skipping changes to ${row[2]}"
+      git checkout ${row[2]}
+    fi
+  fi
+done < <(git diff --numstat po)
+set -x
 
 # Stage changes
 # - Translations

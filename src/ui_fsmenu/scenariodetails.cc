@@ -18,6 +18,8 @@
 
 #include "ui_fsmenu/scenariodetails.h"
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/scrollbar.h"

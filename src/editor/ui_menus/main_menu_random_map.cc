@@ -33,7 +33,6 @@
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/messagebox.h"
-#include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
 
 namespace {
@@ -472,7 +471,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")),
 	                      sstrm.str().c_str());
-	egbase.step_loader_ui(_("Generating random map…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Generating random map…")));
 
 	log("============== Generating Map ==============\n");
 	log("ID:            %s\n", map_id_edit_.text().c_str());
@@ -501,7 +500,6 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	gen.create_random_map();
 
 	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
-	egbase.load_graphics();
 
 	map->recalc_whole_map(egbase);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);

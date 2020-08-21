@@ -1,0 +1,3 @@
+return {
+   fire_tongs = {},
+}
