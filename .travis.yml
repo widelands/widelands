@@ -221,6 +221,18 @@ jobs:
             - sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
             - g++-6
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - zlib1g-dev
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=gcc-6 CXX=g++-6
       services: xvfb
 
@@ -313,6 +325,18 @@ jobs:
             - sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
             - g++-6
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - zlib1g-dev
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=gcc-6 CXX=g++-6
 
     - name: "DEBUG: gcc 9"
