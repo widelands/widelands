@@ -5,7 +5,6 @@ tribes:new_productionsite_type {
    name = "barbarians_weaving_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Weaving Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
    map_check = {"seafaring", "waterways"},

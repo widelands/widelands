@@ -5,7 +5,6 @@ tribes:new_trainingsite_type {
    name = "barbarians_battlearena",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Battle Arena"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 

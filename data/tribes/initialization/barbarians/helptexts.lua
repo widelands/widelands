@@ -1,5 +1,9 @@
 -- Barbarian ware helptexts
 
+-- For formatting time strings
+include "tribes/scripting/help/global_helptexts.lua"
+
+
 local buildingctxt = "barbarians_building"
 local immctxt = "barbarians_immovable"
 local warectxt = "barbarians_ware"
@@ -104,7 +108,7 @@ return {
          note = {
             -- TRANSLATORS: Note helptext for a barbarian military site: Sentry
             pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
-         },
+         }
       },
       barbarians_tower = {
          lore = {
@@ -137,7 +141,6 @@ return {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Ax Workshop
             pgettext(buildingctxt, "Produces axes, sharp axes and broad axes.")
          },
-
          note = {
             -- TRANSLATORS: Note helptext for a barbarian production site: Ax Workshop
             pgettext(buildingctxt, "The Barbarian ax workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualification for the worker.")
@@ -148,7 +151,7 @@ return {
             pgettext(buildingctxt, "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(ngettext("%d second", "%d seconds", 57):bformat(57)),
             -- TRANSLATORS: Performance helptext for a barbarian production site: Ax Workshop
             pgettext("barbarians_building", "All three weapons take the same time for making, but the required raw materials vary.")
-         },
+         }
       },
       barbarians_bakery = {
          lore = {
@@ -229,7 +232,7 @@ return {
          performance = {
             -- TRANSLATORS: Performance helptext for a barbarian production site: Cattle Farm
             pgettext(buildingctxt, "If all needed wares are delivered in time, this building can produce an ox in %s on average."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
-         },
+         }
       },
       barbarians_charcoal_kiln = {
          lore = {
@@ -270,7 +273,7 @@ return {
          performance = {
             -- TRANSLATORS: Performance helptext for production site: Coal Mine
             pgettext(buildingctxt, "If the food supply is steady, this mine can produce coal in 32.5 seconds on average.")
-         },
+         }
       },
       barbarians_coalmine_deep = {
          lore = {
@@ -290,7 +293,7 @@ return {
          performance = {
             -- TRANSLATORS: Performance helptext for production site: Deep Coal Mine
             pgettext(buildingctxt, "If the food supply is steady, this mine can produce coal in 19.5 seconds on average.")
-         },
+         }
       },
       barbarians_coalmine_deeper = {
          lore = {
@@ -310,7 +313,142 @@ return {
          performance = {
             -- TRANSLATORS: Performance helptext for production site: Deeper Coal Mine
             pgettext(buildingctxt, "If the food supply is steady, this mine can produce coal in 14.4 seconds on average.")
+         }
+      },
+      barbarians_farm = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Farm
+            pgettext(buildingctxt, [[‘See the crop fields from here to the horizons. They are a huge, heaving, golden sea.<br>]] ..
+               [[Oh wheat, source of wealth, soul of beer, strength of our warriors!’]])
          },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Farm
+            pgettext(buildingctxt, "Line from the harvesting song ‘The Wealth of the Fields’")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for production site: Farm
+            pgettext(buildingctxt, "Sows and harvests wheat.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for production site: Farm
+            pgettext(buildingctxt, "The farmer needs %1% on average to sow and harvest a sheaf of wheat."):bformat(format_minutes_seconds(1, 40))
+         }
+      },
+      barbarians_ferry_yard = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for production site: Ferry Yard
+            pgettext(buildingctxt, "Builds ferries.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for production site: Ferry Yard
+            pgettext(buildingctxt, "Needs water nearby.")
+         }
+      },
+      barbarians_fishers_hut = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Fisher's Hut
+            pgettext(buildingctxt, "‘What do you mean, my fish ain’t fresh?!’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Fisher's Hut
+            pgettext(buildingctxt, "Frequent response of a barbarian fisherman,<br>often followed by an enjoyable brawl")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for production site: Fisher's Hut
+            pgettext(buildingctxt, "Fishes on the coast near the fisher’s hut.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for production site: Fisher's Hut
+            pgettext(buildingctxt, "The fisher’s hut needs water full of fish within the work area.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for production site: Fisher's Hut
+            pgettext(buildingctxt, "The fisher pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 18):bformat(18))
+         }
+      },
+      barbarians_gamekeepers_hut = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Gamekeeper's Hut
+            pgettext(buildingctxt, "‘He loves the animals and to breed them<br>as we love to cook and eat them.’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Gamekeeper's Hut
+            pgettext(buildingctxt, "Barbarian nursery rhyme")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for production site: Gamekeeper's Hut
+            pgettext(buildingctxt, "Releases animals into the wild to steady the meat production.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for production site: Gamekeeper's Hut
+            pgettext(buildingctxt, "The gamekeeper pauses 52.5 seconds before going to work again.")
+         }
+      },
+      barbarians_goldmine = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Gold Mine
+            pgettext(buildingctxt, "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity…’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Gold Mine
+            pgettext(buildingctxt, "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song.")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for production site: Gold Mine
+            pgettext(buildingctxt, "Digs gold ore out of the ground in mountain terrain.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for production site: Gold Mine
+            pgettext(buildingctxt, "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any gold ore."):bformat("1/3")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for production site: Gold Mine
+            pgettext(buildingctxt, "If the food supply is steady, this mine can produce gold ore in %s on average."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
+         }
+      },
+      barbarians_goldmine_deep = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Deep Gold Mine
+            pgettext(buildingctxt, "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity…’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Deep Gold Mine
+            pgettext(buildingctxt, "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song.")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
+            pgettext(buildingctxt, "Digs gold ore out of the ground in mountain terrain.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for production site: Deep Gold Mine
+            pgettext(buildingctxt, "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any gold ore."):bformat("2/3")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for production site: Deep Gold Mine
+            pgettext(buildingctxt, "If the food supply is steady, this mine can produce gold ore in 19.5 seconds on average.")
+         }
+      },
+      barbarians_goldmine_deeper = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Deeper Gold Mine
+            pgettext(buildingctxt, "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity…’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Deeper Gold Mine
+            pgettext(buildingctxt, "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song.")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
+            pgettext(buildingctxt, "Digs gold ore out of the ground in mountain terrain.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for production site: Deeper Gold Mine
+            pgettext(buildingctxt, "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more gold ore."):bformat("10%")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for production site: Deeper Gold Mine
+            pgettext(buildingctxt, "If the food supply is steady, this mine can produce gold ore in 18.5 seconds on average.")
+         }
       },
       barbarians_granitemine = {
          lore = {
@@ -337,7 +475,7 @@ return {
          performance = {
             -- TRANSLATORS: Performance helptext for a barbarian production site: Granite Mine
             pgettext(buildingctxt, "If the food supply is steady, this mine can produce granite in %s on average."):bformat(ngettext("%d second", "%d seconds", 20):bformat(20))
-         },
+         }
       },
       barbarians_helmsmithy = {
          lore = {
@@ -366,7 +504,6 @@ return {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
             pgettext(buildingctxt, "Hunts animals to produce meat.")
          },
-
          note = {
             -- TRANSLATORS: Note helptext for a barbarian production site: Hunter's Hut
             pgettext(buildingctxt, "The hunter’s hut needs animals to hunt within the work area.")
@@ -374,7 +511,7 @@ return {
          performance = {
             -- TRANSLATORS: Performance helptext for a barbarian production site: Hunter's Hut
             pgettext(buildingctxt, "The hunter pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 35):bformat(35))
-         },
+         }
       },
       barbarians_inn = {
          lore = {
@@ -410,7 +547,7 @@ return {
          performance = {
             -- TRANSLATORS: Performance helptext for a barbarian production site: Iron Mine
             pgettext(buildingctxt, "If the food supply is steady, this mine can produce iron ore in %s on average."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
-         },
+         }
       },
       barbarians_ironmine_deep = {
          lore = {
@@ -425,7 +562,6 @@ return {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron Mine
             pgettext(buildingctxt, "Digs iron ore out of the ground in mountain terrain.")
          },
-
          note = {
             -- TRANSLATORS: Note helptext for a barbarian production site: Deep Iron Mine
             pgettext(buildingctxt, "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any iron ore."):bformat("2/3")
@@ -433,7 +569,7 @@ return {
          performance = {
             -- TRANSLATORS: Performance helptext for a barbarian production site: Deep Iron Mine
             pgettext(buildingctxt, "If the food supply is steady, this mine can produce iron ore in 39.5 seconds on average.")
-         },
+         }
       },
       barbarians_ironmine_deeper = {
          lore = {
@@ -456,1067 +592,394 @@ return {
          performance = {
             -- TRANSLATORS: Performance helptext for a barbarian production site: Deeper Iron Mine
             pgettext(buildingctxt, "If the food supply is steady, this mine can produce iron ore in 17.6 seconds on average.")
-         },
+         }
       },
-      XXXX = {
+      barbarians_lime_kiln = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Lime Kiln
+            pgettext(buildingctxt, "‘Forming new stone from old with fire and water.’")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Lime Kiln
+            pgettext(buildingctxt, "Ragnald the Child’s answer to the question, what he’s doing in the dirt. His ‘new stone’ now is an important building material.")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Lime Kiln
+            pgettext(buildingctxt, "Processes granite to make ‘grout’, a substance that solidifies and so reinforces masonry.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a barbarian production site: Lime Kiln
+            pgettext(buildingctxt, "The lime kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Lime Kiln
+            pgettext(buildingctxt, "If all needed wares are delivered in time, this building can produce grout in about %s on average."):bformat(ngettext("%d second", "%d seconds", 41):bformat(41))
+         }
+      },
+      barbarians_lumberjacks_hut = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Lumberjack_s Hut
+            pgettext(buildingctxt, "Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable lumberjack.’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Lumberjack_s Hut
+            pgettext(buildingctxt, "Krumta, carpenter of Chat’Karuth")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s Hut
+            pgettext(buildingctxt, "Fells trees in the surrounding area and processes them into logs.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a barbarian production site: Lumberjack_s Hut
+            pgettext(buildingctxt, "The lumberjack’s hut needs trees to fell within the work area.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Lumberjack_s Hut
+            pgettext(buildingctxt, "The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again."):bformat(ngettext("%d second", "%d seconds", 12):bformat(12))
+         }
+      },
+      barbarians_metal_workshop = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Metal Workshop
+            pgettext(buildingctxt, "‘We make it work!’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Metal Workshop
+            pgettext(buildingctxt, "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, the eldest known smithy.")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Metal Workshop
+            pgettext(buildingctxt, "Forges all the tools that your workers need.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a barbarian production site: Metal Workshop
+            pgettext(buildingctxt, "The Barbarian metal workshop is the basic production site in a series of three buildings and creates all the tools that Barbarians need. The others are for weapons.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Metal Workshop
+            pgettext(buildingctxt, "If all needed wares are delivered in time, this building can produce each tool in about %s on average."):bformat(ngettext("%d second", "%d seconds", 67):bformat(67))
+         }
+      },
+      barbarians_micro_brewery = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Micro Brewery
+            pgettext(buildingctxt, "‘Let the first one drive away the hunger, the second one put you at ease; when you have swallowed up your third one, it’s time for the next shift!’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Micro Brewery
+            pgettext(buildingctxt, "Widespread toast among miners")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Micro Brewery
+            pgettext(buildingctxt, "Produces beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Micro Brewery
+            pgettext(buildingctxt, "If all needed wares are delivered in time, this building can produce beer in about %s on average."):bformat(ngettext("%d second", "%d seconds", 60):bformat(60))
+         }
+      },
+      barbarians_quarry = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Quarry
+            pgettext(buildingctxt, "‘We open up roads and make houses from mountains.’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Quarry
+            pgettext(buildingctxt, "Slogan of the stonemasons’ guild")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Quarry
+            pgettext(buildingctxt, "Cuts raw pieces of granite out of rocks in the vicinity.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a barbarian production site: Quarry
+            pgettext(buildingctxt, "The quarry needs rocks to cut within the work area.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Quarry
+            pgettext(buildingctxt, "The stonemason pauses %s before going back to work again."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
+         }
+      },
+      barbarians_rangers_hut = {
+         lore = {
+            --"Wer zwei Halme dort wachsen lässt, wo sonst nur einer wächst, der ist größer als der größte Feldherr!" – Friedrich der Große
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Ranger's Hut
+            pgettext(buildingctxt, "‘He who can grow two trees where normally only one will grow exceeds the most important general!’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Ranger's Hut
+            pgettext(buildingctxt, "Chat’Karuth in a conversation with a Ranger")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
+            pgettext(buildingctxt, "Plants trees in the surrounding area.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a barbarian production site: Ranger's Hut
+            pgettext(buildingctxt, "The ranger’s hut needs free space within the work area to plant the trees.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Ranger's Hut
+            pgettext(buildingctxt, "The ranger needs %s to plant a tree, not counting the time he needs to reach the destination and go home again."):bformat(ngettext("%d second", "%d seconds", 5):bformat(5))
+         }
+      },
+      barbarians_reed_yard = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Reed Yard
+            pgettext(buildingctxt, "‘We grow roofs’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Reed Yard
+            pgettext(buildingctxt, "Slogan of the Guild of Gardeners")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Reed Yard
+            pgettext(buildingctxt, "Cultivates reed that serves two different purposes for the Barbarian tribe.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a barbarian production site: Reed Yard
+            pgettext(buildingctxt, "Reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Reed Yard
+            pgettext(buildingctxt, "A reed yard can produce a sheaf of reed in about %s on average."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
+         }
+      },
+      barbarians_scouts_hut = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Scout's Hut
+            pgettext(buildingctxt, "‘Behind the next hill there might be wealth and happiness but also hostility and doom.<br>He who will not explore it commits the crime of stupidity.’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Scout's Hut
+            pgettext(buildingctxt, "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
+            pgettext(buildingctxt, "Explores unknown territory.")
+         }
+      },
+      barbarians_shipyard = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Shipyard
+            pgettext(buildingctxt, [[‘When I saw the Saxnot for the first time, her majestic dragon head already looked up to the skies and the master was about to install the square sail.<br>]] ..
+               [[It was the most noble ship I ever saw.’]])
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Shipyard
+            pgettext(buildingctxt, "Captain Thanlas the Elder,<br>Explorer")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
+            pgettext(buildingctxt, "Constructs ships that are used for overseas colonization and for trading between ports.")
+         }
+      },
+      barbarians_smelting_works = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Smelting Works
+            pgettext(buildingctxt, [[‘From inferior looking rubble they form shiny gold and gleaming iron.<br>]] ..
+               [[The smelters are real magicians among our craftsmen.’]])
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Smelting Works
+            pgettext(buildingctxt, "Chat’Karuth<br>at the 5ᵗʰ conference of master craftsmen")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Smelting Works
+            pgettext(buildingctxt, "Smelts iron ore into iron and gold ore into gold.")
+         }
+      },
+      barbarians_tavern = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Tavern
+            pgettext(buildingctxt, "‘Fresh from the countryside: Bread, fish or game to go.’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Tavern
+            pgettext(buildingctxt, "Menu of the tavern ‘Ye Ol’ Bronze Axe’")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
+            pgettext(buildingctxt, "Prepares rations to feed the scouts and miners.")
+         }
+      },
+      barbarians_warmill = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Warmill
+            pgettext(buildingctxt, "‘A new warrior’s ax brings forth the best in its wielder – or the worst in its maker.’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Warmill
+            pgettext(buildingctxt, "An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]])")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Warmill
+            pgettext(buildingctxt, "Produces all the axes that the Barbarians use for warfare.")
          },
 
          note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a barbarian production site: Warmill
+            pgettext(buildingctxt, "The Barbarian war mill is their most advanced production site for weapons. As such you will need to enhance an ax workshop in order to get one.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Warmill, part 1
+            pgettext(buildingctxt, "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(ngettext("%d second", "%d seconds", 57):bformat(57)),
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Warmill, part 2
+            pgettext(buildingctxt, "All weapons require the same time for making, but the consumption of the same raw materials increases from step to step. The last two need gold.")
+         }
       },
-      XXXX = {
+      barbarians_weaving_mill = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Weaving Mill
+            pgettext(buildingctxt, [[‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>]] ..
+            [[But a noble sail in the wind will please his eyes.’]])
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Weaving Mill
+            pgettext(buildingctxt, "Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and Conquest’")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Weaving Mill
+            pgettext(buildingctxt, "Weaves cloth out of reed.")
+         }
       },
-      XXXX = {
+      barbarians_well = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Well
+            pgettext(buildingctxt, [[‘Oh how sweet is the source of life,<br> that comes down from the sky <br> and lets the earth drink.’]])
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Well
+            pgettext(buildingctxt, "Song written by Sigurd the Bard when the first rain fell after the Great Drought in the 21ˢᵗ year of Chat’Karuth’s reign.")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Well
+            pgettext(buildingctxt, "Draws water out of the deep.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Well
+            pgettext(buildingctxt, "The carrier needs %s to get one bucket full of water."):bformat(ngettext("%d second", "%d seconds", 40):bformat(40))
+         }
       },
-      XXXX = {
+      barbarians_wood_hardener = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a barbarian production site: Wood Hardener
+            pgettext(buildingctxt, [[‘Then he hit the door with his ax and, behold,<br>]] ..
+                                   [[the door only trembled, but the shaft of the ax burst into a thousand pieces.’]])
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a barbarian production site: Wood Hardener
+            pgettext(buildingctxt, "Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor is said to be the inventor of blackwood")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Wood Hardener
+            pgettext(buildingctxt, "Hardens logs by fire into blackwood, which is used to construct robust buildings.")
+         }
       },
-      XXXX = {
+      barbarians_battlearena = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a barbarian training site: Battle Arena
+            pgettext(buildingctxt, "‘No better friend you have in battle than the enemy’s blow that misses.’")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a barbarian training site: Battle Arena
+            pgettext(buildingctxt, "Said to originate from Neidhardt, the famous trainer.")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a barbarian training site: Battle Arena, part 1
+            pgettext(buildingctxt, "Trains soldiers in ‘Evade’."),
+            -- TRANSLATORS: Purpose helptext for a barbarian training site: Battle Arena, part 2
+            pgettext(buildingctxt, "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
          },
-
          note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a barbarian training site: Battle Arena
+            pgettext(buildingctxt, "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
+            -- TRANSLATORS: Performance helptext for a barbarian training site: Battle Arena
+            pgettext(buildingctxt, "If all needed wares are delivered in time, a battle arena can train evade for one soldier from 0 to the highest level in %1$s and %2$s on average."):bformat(ngettext("%d minute", "%d minutes", 1):bformat(1), ngettext("%d second", "%d seconds", 10):bformat(10))
+         }
       },
-      XXXX = {
+      barbarians_trainingcamp = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a barbarian training site: Training Camp
+            pgettext(buildingctxt, "‘He who is strong shall neither forgive nor forget, but revenge injustice suffered – in the past and for all future.’")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a barbarian training site: Training Camp
+            pgettext(buildingctxt, "Chief Chat’Karuth in a speech to his army.")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a barbarian training site: Training Camp, part 1
+            pgettext(buildingctxt, "Trains soldiers in ‘Attack’ and in ‘Health’."),
+            -- TRANSLATORS: Purpose helptext for a barbarian training site: Training Camp, part 2
+            pgettext(buildingctxt, "Equips the soldiers with all necessary weapons and armor parts.")
          },
-
          note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a barbarian building: Training Camp
+            pgettext(buildingctxt, "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
+            -- TRANSLATORS: Performance helptext for a barbarian training site: Training Camp
+            pgettext(buildingctxt, "If all needed wares are delivered in time, a training camp can train one new soldier in attack and health to the final level in %1$s and %2$s on average."):bformat(ngettext("%d minute", "%d minutes", 4):bformat(4), ngettext("%d second", "%d seconds", 40):bformat(40))
+         }
       },
-      XXXX = {
+      barbarians_headquarters = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a barbarian warehouse: Headquarters
+            pgettext(buildingctxt, "‘Steep like the slopes of Kal’mavrath, shiny like the most delicate armor and strong like our ancestors, that’s how the headquarters of Chat’Karuth presented itself to us.’")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a barbarian warehouse: Headquarters
+            pgettext(buildingctxt, "Ballad ‘The Battle of Kal’mavrath’ by Hakhor the Bard")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a barbarian warehouse: Headquarters
+            pgettext(buildingctxt, "Accommodation for your people. Also stores your wares and tools.")
          },
-
          note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
+            -- TRANSLATORS: Note helptext for a barbarian warehouse: Headquarters
+            pgettext(buildingctxt, "The headquarters is your main building.")
+         }
       },
-      XXXX = {
+      barbarians_headquarters_interim = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian warehouse: Headquarters
+            pgettext(buildingctxt, "Accommodation for your people. Also stores your wares and tools.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a barbarian warehouse: Headquarters
+            pgettext(buildingctxt, "The headquarters is your main building.")
+         }
+      },
+      barbarians_port = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a barbarian warehouse: Port
+            pgettext(buildingctxt, "‘I prefer the planks of a ship to any fortress, no matter how strong it is.’")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a barbarian warehouse: Port
+            pgettext(buildingctxt, "Captain Thanlas the Elder,<br>Explorer")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
+            -- TRANSLATORS: Purpose helptext for a barbarian warehouse: Port
+            pgettext(buildingctxt, "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
+         }
       },
-      XXXX = {
+      barbarians_warehouse = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a barbarian warehouse: Warehouse
+            pgettext(buildingctxt, "‘Who still owns a warehouse is not yet defeated!’")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a barbarian warehouse: Warehouse
+            pgettext(buildingctxt, "Berthron, chief military adviser of Chat’Karuth,<br>when they lost the headquarters in the battle around the heights of Kal’Megarath")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-
-         note = {
-            -- TRANSLATORS: Note helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a barbarian building: XXXX
-            pgettext(buildingctxt, "")
-         },
-      },
-
+            -- TRANSLATORS: Purpose helptext for a barbarian warehouse: Warehouse
+            pgettext(buildingctxt, "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
+         }
+      }
    },
    immovables = {
       ashes = {
