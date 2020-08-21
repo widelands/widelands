@@ -131,29 +131,6 @@ void walk_tribe_immovables(
 }
 
 // Read helptext from Lua table
-std::string read_helptext(const Widelands::MapObjectDescr* descr, const std::string& msgctxt, const LuaTable& table) {
-	if (table.has_key(descr->name())) {
-		// Concatenate text from entries with the localized sentence joiner
-		std::unique_ptr<LuaTable> helptext_table = table.get_table(descr->name());
-		std::set<int> helptext_keys = helptext_table->keys<int>();
-		if (!helptext_keys.empty()) {
-			auto it = helptext_keys.begin();
-			std::string helptext = pgettext_expr(msgctxt.c_str(), helptext_table->get_string(*it).c_str());
-			++it;
-			for (; it != helptext_keys.end(); ++it) {
-				helptext = i18n::join_sentences(helptext, pgettext_expr(msgctxt.c_str(), helptext_table->get_string(*it).c_str()));
-			}
-			return helptext;
-		} else {
-			log("WARNING: Empty helptext defined for '%s'\n", descr->name().c_str());
-			return "";
-		}
-	} else {
-		log("WARNING: No helptext defined for '%s'\n", descr->name().c_str());
-		return "";
-	}
-}
-
 std::map<std::string, std::string> read_helptexts(const Widelands::MapObjectDescr* descr, const std::string& msgctxt, const LuaTable& table) {
 	std::map<std::string, std::string> result;
 	if (table.has_key(descr->name())) {
@@ -399,7 +376,7 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, LuaTable* hel
 
                 // Add helptext
 				if (helptexts) {
-					ware_descr->set_helptexts(name(), {{"purpose", read_helptext(ware_descr, ware_msgctxt, *helptexts)}});
+					ware_descr->set_helptexts(name(), read_helptexts(ware_descr, ware_msgctxt, *helptexts));
 				}
 
                 // Add to tribe
@@ -430,7 +407,7 @@ void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const Wo
 			ImmovableDescr* imm_descr = tribes.get_mutable_immovable_descr(index);
 			// Add helptext
 			if (helptexts) {
-				imm_descr->set_helptexts(name(), {{"purpose", read_helptext(imm_descr, ware_msgctxt, *helptexts)}});
+				imm_descr->set_helptexts(name(), read_helptexts(imm_descr, ware_msgctxt, *helptexts));
 			}
 		} catch (const WException& e) {
 			throw GameDataError("Failed adding immovable '%s': %s", immovablename.c_str(), e.what());
