@@ -1,20 +1,5 @@
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      hotspot = { 62, 48 },
-   },
-   build = {
-      hotspot = { 62, 48 },
-   },
-   unoccupied = {
-      hotspot = { 62, 48 },
-   },
-   working = {
-      hotspot = { 62, 48 },
-   },
-}
-
 tribes:new_productionsite_type {
    msgctxt = "barbarians_building",
    name = "barbarians_shipyard",
@@ -38,7 +23,20 @@ tribes:new_productionsite_type {
    },
 
    animation_directory = dirname,
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 62, 48 },
+      },
+      build = {
+         hotspot = { 62, 48 },
+      },
+      unoccupied = {
+         hotspot = { 62, 48 },
+      },
+      working = {
+         hotspot = { 62, 48 },
+      },
+   },
 
    aihints = {
       needs_water = true,

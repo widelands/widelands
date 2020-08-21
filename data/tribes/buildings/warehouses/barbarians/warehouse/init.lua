@@ -1,14 +1,5 @@
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      hotspot = { 60, 78 },
-   },
-   build = {
-      hotspot = { 60, 78 },
-   }
-}
-
 tribes:new_warehouse_type {
    msgctxt = "barbarians_building",
    name = "barbarians_warehouse",
@@ -33,7 +24,14 @@ tribes:new_warehouse_type {
    },
 
    animation_directory = dirname,
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 60, 78 },
+      },
+      build = {
+         hotspot = { 60, 78 },
+      }
+   },
 
    aihints = {},
 
