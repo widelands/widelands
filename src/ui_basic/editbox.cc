@@ -41,6 +41,12 @@ namespace {
 
 constexpr int kMarginX = 4;
 constexpr int kLineMargin = 1;
+bool inline ctrl() {
+#ifdef __APPLE__
+   return SDL_GetModState() & KMOD_GUI;
+#endif
+   return SDL_GetModState() & KMOD_CTRL;
+}
 
 }  // namespace
 
@@ -217,7 +223,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_v:
-			if ((SDL_GetModState() & KMOD_CTRL) && SDL_HasClipboardText()) {
+			if (ctrl() && SDL_HasClipboardText()) {
 				if (m_->mode == EditBoxImpl::Mode::kSelection) {
 					delete_selected_text();
 				}
@@ -226,14 +232,14 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return false;
 		case SDLK_c:
-			if ((SDL_GetModState() & KMOD_CTRL) && m_->mode == EditBoxImpl::Mode::kSelection) {
+			if (ctrl() && m_->mode == EditBoxImpl::Mode::kSelection) {
 				copy_selected_text();
 				return true;
 			}
 			return false;
 
 		case SDLK_a:
-			if ((SDL_GetModState() & KMOD_CTRL)) {
+			if (ctrl()) {
 				m_->selection_start = 0;
 				m_->selection_end = m_->text.size();
 				m_->mode = EditBoxImpl::Mode::kSelection;
@@ -241,7 +247,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return false;
 		case SDLK_x:
-			if ((SDL_GetModState() & KMOD_CTRL) && m_->mode == EditBoxImpl::Mode::kSelection) {
+			if (ctrl() && m_->mode == EditBoxImpl::Mode::kSelection) {
 				copy_selected_text();
 				delete_selected_text();
 			}
@@ -452,6 +458,8 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 	}
 	return true;
 }
+
+
 
 void EditBox::delete_selected_text() {
 	uint32_t start, end;
