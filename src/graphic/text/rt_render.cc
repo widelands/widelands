@@ -259,9 +259,13 @@ public:
 	void set_valign(UI::Align gvalign) {
 		valign_ = gvalign;
 	}
+
+	// True for nodes that need to stay aligned to the text baseline.
+	// False for the rest.
 	virtual bool align_to_baseline() const {
 		return false;
 	}
+
 	void set_x(int32_t nx) {
 		x_ = nx;
 	}
@@ -560,15 +564,21 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 
 		// Go over again and adjust position for VALIGN
 		for (const auto& n : nodes_in_line) {
+			// Empty space above the node, below the node, and their sum
 			int space_top;
 			int space_bottom;
-			int space;
+			int space_total;
 			if (n->align_to_baseline()) {
+				// Text nodes: Treat them as a group. That is, make sure that each text node
+				// is moved the same amount up or down as all other text nodes in the line. This
+				// way they stay aligned to the same baseline (if they use the same valign()).
 				space_top = biggest_hotspot - biggest_text_ascent;
 				space_bottom = line_height - biggest_hotspot - biggest_text_descent;
-				space = space_top + space_bottom;
+				space_total = space_top + space_bottom;
 			} else {
-				space = line_height - n->height();
+				// Non-text nodes: Align each node independently to the top/bottom/center of
+				// the line.
+				space_total = line_height - n->height();
 				space_top = biggest_hotspot - n->hotspot_y();
 				space_bottom = space - space_top;
 			}
@@ -654,6 +664,9 @@ TextNode::TextNode(FontCache& font, NodeStyle& ns, const std::string& txt)
 	check_size();
 }
 uint16_t TextNode::hotspot_y() const {
+	// Getting the real ascent of a string from SDL_ttf is tricky.
+	// It's equal to TTF_FontAscent() or the maximum 'maxy' value of any glyph in the string,
+	// whichever is bigger.
 	const icu::UnicodeString unicode_txt(txt_.c_str(), "UTF-8");
 	int ascent = TTF_FontAscent(font_.get_ttf_font());
 	int shadow_offset = font_.ascent(nodestyle_.font_style) - ascent;
@@ -662,9 +675,7 @@ uint16_t TextNode::hotspot_y() const {
 		int maxy;
 		if (TTF_GlyphMetrics(
 		       font_.get_ttf_font(), codepoint, nullptr, nullptr, nullptr, &maxy, nullptr) == 0) {
-			if (ascent < maxy) {
-				ascent = maxy;
-			}
+			ascent = std::max(ascent, maxy);
 		}
 	}
 	return ascent + shadow_offset;
