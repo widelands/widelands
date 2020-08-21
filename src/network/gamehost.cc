@@ -784,8 +784,10 @@ void GameHost::think() {
 			for (size_t i = 0; i < nr_ais_; ++i) {
 				if (!threads_[i].running) {
 					threads_[i].running = true;
-					if (int e = pthread_create(&threads_[i].thread_id, NULL, &ComputerPlayer::runthread, d->computerplayers[i])) {
-						throw wexception("PThread creation for AI no. %" PRIuS " failed with error code %d", i, e);
+					if (int e = pthread_create(&threads_[i].thread_id, NULL, &ComputerPlayer::runthread,
+					                           d->computerplayers[i])) {
+						throw wexception(
+						   "PThread creation for AI no. %" PRIuS " failed with error code %d", i, e);
 					}
 				}
 			}

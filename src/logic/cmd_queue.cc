@@ -94,9 +94,9 @@ void CmdQueue::enqueue(Command* const cmd) {
 		ci.serial = 0;
 	}
 
-if (cmd->duetime() < game_.get_gametime()) {
-log("NOCOM Enqueuing a command for %u at %u\n", cmd->duetime(), game_.get_gametime());
-}
+	if (cmd->duetime() < game_.get_gametime()) {
+		log("NOCOM Enqueuing a command for %u at %u\n", cmd->duetime(), game_.get_gametime());
+	}
 
 	cmds_[cmd->duetime() % kCommandQueueBucketSize].insert(ci);
 	++ncmds_;
@@ -120,9 +120,9 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 			}
 			current_cmds.erase(item);
 			--ncmds_;
-/* if (game_time_var != c.duetime()) {
-log("NOCOM: ERROR: game_time_var (%u) != c.duetime (%u)\n", game_time_var, c.duetime());
-} */
+			/* if (game_time_var != c.duetime()) {
+			log("NOCOM: ERROR: game_time_var (%u) != c.duetime (%u)\n", game_time_var, c.duetime());
+			} */
 			assert(game_time_var == c.duetime());
 			// free the mutex the moment we don't need it any more
 			// m.reset();

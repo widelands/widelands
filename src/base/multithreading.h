@@ -72,6 +72,7 @@ struct MutexLock {
 	bool is_valid() const {
 		return mutex_ != nullptr;
 	}
+
 private:
 	pthread_mutex_t* mutex_;  // not owned
 };

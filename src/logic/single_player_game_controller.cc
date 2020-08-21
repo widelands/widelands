@@ -82,8 +82,11 @@ void SinglePlayerGameController::think() {
 				   ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p));
 			} else if (!computerplayers_[p - 1]->running) {
 				computerplayers_[p - 1]->running = true;
-				if (int i = pthread_create(&computerplayers_[p - 1]->thread_id, NULL, &ComputerPlayer::runthread, computerplayers_[p - 1]->ai.get())) {
-					throw wexception("PThread creation for AI %u failed with error code %d", static_cast<unsigned>(p), i);
+				if (int i =
+				       pthread_create(&computerplayers_[p - 1]->thread_id, NULL,
+				                      &ComputerPlayer::runthread, computerplayers_[p - 1]->ai.get())) {
+					throw wexception("PThread creation for AI %u failed with error code %d",
+					                 static_cast<unsigned>(p), i);
 				}
 			}
 		}
