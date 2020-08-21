@@ -1,5 +1,38 @@
 -- Atlantean ware helptexts
--- NOCOM document
+
+-- RST
+-- Helptexts
+-- ---------
+--
+-- Helptexts are defined in ``tribes/initialization/<tribename>/helptexts.lua``.
+--
+-- First, you will need to define a message context. The form is ``"<tribe_name>_<table_key>"``.
+-- Do not deviate from this -- the translations will not work otherwise.
+--
+-- You will then need to return a table of helptexts by map object type. It looks like this:
+--
+-- .. code-block:: lua
+--
+--    local warectxt = "atlanteans_ware"
+--    return {
+--       wares = {
+--          atlanteans_bread = {
+--             -- TRANSLATORS: Helptext for a ware: Bread
+--             pgettext(warectxt, "This tasty bread is made in bakeries out of cornmeal, blackroot flour and water.")
+--          },
+--          bread_paddle = {
+--             -- TRANSLATORS: Helptext for a ware: Bread Paddle
+--             pgettext(warectxt, "The bread paddle is the tool of the baker, each baker needs one."),
+--             -- TRANSLATORS: Helptext for a ware: Bread Paddle
+--             pgettext(warectxt, "Bread paddles are produced by the toolsmith.")
+--          },
+--          ...
+--       }
+--    }
+--
+-- To make life easier for our translators, you can split long helptexts into multiple entries as with the ``bread_paddle`` example above.
+-- The helptexts are then joined by the engine.
+-- In our example, we will get ``"The bread paddle is the tool of the baker, each baker needs one. Bread paddles are produced by the toolsmith."``
 
 local warectxt = "atlanteans_ware"
 
