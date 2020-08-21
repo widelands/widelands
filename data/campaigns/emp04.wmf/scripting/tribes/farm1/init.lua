@@ -7,6 +7,7 @@ tribes:new_productionsite_type {
    name = "empire_farm1",
    descname = "Farm",
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "big",
    enhancement = "empire_farm2",
@@ -36,14 +37,14 @@ tribes:new_productionsite_type {
       plant = {
          descname = "planting wheat",
          actions = {
-            "sleep=14000",
+            "sleep=duration:14s",
             "callworker=harvest"
          }
       },
       harvest = {
          descname = "harvesting wheat",
          actions = {
-            "sleep=4000",
+            "sleep=duration:4s",
             "callworker=harvest"
          }
       },

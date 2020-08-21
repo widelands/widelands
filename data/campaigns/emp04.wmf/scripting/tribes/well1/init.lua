@@ -7,6 +7,7 @@ tribes:new_productionsite_type {
    name = "empire_well1",
    descname = pgettext("empire_building", "Well"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -22,11 +23,10 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 43, 43 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle",
          hotspot = { 43, 43 },
       },
    },
@@ -43,9 +43,9 @@ tribes:new_productionsite_type {
       main = {
          descname = "working",
          actions = {
-            "sleep=30000",
+            "sleep=duration:30s",
             "animate=working duration:30s",
-            "mine=water 5 100 5 2",
+            "mine=water radius:5 yield:100% when_empty:5%",
             "produce=water"
          }
       },

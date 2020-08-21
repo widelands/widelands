@@ -7,6 +7,7 @@ tribes:new_productionsite_type {
    name = "empire_lumberjacks_house1",
    descname = "Lumberjack’s House",
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -22,7 +23,6 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 40, 59 },
       },
    },
@@ -39,7 +39,7 @@ tribes:new_productionsite_type {
       main = {
          descname = "felling trees",
          actions = {
-            "sleep=400000", -- Barbarian lumberjack sleeps 25000
+            "sleep=duration:6m40s",
             "callworker=harvest"
          }
       },

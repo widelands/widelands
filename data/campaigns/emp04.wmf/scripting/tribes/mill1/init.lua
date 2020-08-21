@@ -7,6 +7,7 @@ tribes:new_productionsite_type {
    name = "empire_mill1",
    descname = pgettext("empire_building", "Mill"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
    enhancement = "empire_mill2",
@@ -24,11 +25,9 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 41, 87 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 41, 87 },
          fps = 25
       },
@@ -49,10 +48,10 @@ tribes:new_productionsite_type {
       main = {
          descname = "grinding wheat",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped unless economy needs flour",
             "consume=wheat:2",
-            "playsound=sound/mill/mill_turning 240",
+            "playsound=sound/mill/mill_turning priority:90% allow_multiple",
             "animate=working duration:10s",
             "produce=flour"
          }

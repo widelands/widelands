@@ -7,6 +7,7 @@ tribes:new_productionsite_type {
    name = "empire_foresters_house1",
    descname = "Forester’s House",
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -21,7 +22,6 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 52, 54 },
       },
    },
@@ -38,7 +38,7 @@ tribes:new_productionsite_type {
       main = {
          descname = "planting trees",
          actions = {
-            "sleep=66000",
+            "sleep=duration:1m6s",
             "callworker=plant"
          }
       },

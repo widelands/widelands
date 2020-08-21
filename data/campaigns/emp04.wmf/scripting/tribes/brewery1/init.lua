@@ -7,6 +7,7 @@ tribes:new_productionsite_type {
    name = "empire_brewery1",
    descname = pgettext("empire_building", "Brewery"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
    enhancement = "empire_brewery2",
@@ -24,11 +25,10 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 39, 62 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle",
          hotspot = { 39, 62 },
       },
    },
@@ -50,10 +50,10 @@ tribes:new_productionsite_type {
       main = {
          descname = "brewing beer",
          actions = {
-            "sleep=30000",
+            "sleep=duration:30s",
             "return=skipped unless economy needs beer",
             "consume=water:3 wheat",
-            "playsound=sound/empire/beerbubble 180",
+            "playsound=sound/empire/beerbubble priority:40% allow_multiple",
             "animate=working duration:30s",
             "produce=beer"
          }

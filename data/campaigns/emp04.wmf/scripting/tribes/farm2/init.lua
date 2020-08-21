@@ -8,6 +8,7 @@ tribes:new_productionsite_type {
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Farm"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -25,7 +26,6 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 82, 74 },
       },
    },
@@ -50,7 +50,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
          descname = _"planting wheat",
          actions = {
-            "sleep=14000",
+            "sleep=duration:14s",
             "callworker=plant"
          }
       },
@@ -58,7 +58,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
          descname = _"harvesting wheat",
          actions = {
-            "sleep=4000",
+            "sleep=duration:4s",
             "callworker=harvest"
          }
       },
