@@ -116,7 +116,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					                 seen_fields.size(), static_cast<unsigned>(no_of_seen_fields));
 				}
 
-				// Skip data for fields that were never seen, e.g. this happens during saveloading a backup while starting a new game
+				// Skip data for fields that were never seen, e.g. this happens during saveloading a
+				// backup while starting a new game
 				if (no_of_seen_fields == 0) {
 					continue;
 				}
