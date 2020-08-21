@@ -12,7 +12,6 @@ tribes:new_immovable_type {
    name = "berry_bush_juniper_tiny",
    descname = _ "Juniper (tiny)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "tiny/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -38,7 +37,6 @@ tribes:new_immovable_type {
    name = "berry_bush_juniper_small",
    descname = _ "Juniper (small)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "small/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -64,7 +62,6 @@ tribes:new_immovable_type {
    name = "berry_bush_juniper_medium",
    descname = _ "Juniper (medium)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "medium/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -90,7 +87,6 @@ tribes:new_immovable_type {
    name = "berry_bush_juniper_ripe",
    descname = _ "Juniper (ripe)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "ripe/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {

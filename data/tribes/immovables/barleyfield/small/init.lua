@@ -7,7 +7,6 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Barley Field (small)"),
    icon = dirname .. "menu.png",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    programs = {
       main = {
          "animate=idle duration:3m45s",

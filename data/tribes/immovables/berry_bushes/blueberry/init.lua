@@ -14,7 +14,6 @@ tribes:new_immovable_type {
    name = "berry_bush_blueberry_tiny",
    descname = _ "Blueberry Bush (tiny)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "tiny/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -40,7 +39,6 @@ tribes:new_immovable_type {
    name = "berry_bush_blueberry_small",
    descname = _ "Blueberry Bush (small)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "small/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -66,7 +64,6 @@ tribes:new_immovable_type {
    name = "berry_bush_blueberry_medium",
    descname = _ "Blueberry Bush (medium)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "medium/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -92,7 +89,6 @@ tribes:new_immovable_type {
    name = "berry_bush_blueberry_ripe",
    descname = _ "Blueberry Bush (ripe)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "ripe/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {

@@ -36,7 +36,7 @@ WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table)
      ai_hints_(new WareWorkerHints()) {
 	if (!helptext_script().empty()) {
         // TODO(GunChleoc): Compatibility - remove after v1.0
-		log("WARNING: Helptexts script for ware %s is obsolete - please move strings to tribes/<tribename>/helptexts.lua\n", name().c_str());
+		log("WARNING: Helptexts script for ware %s is obsolete - please move strings to tribes/initializations/<tribename>/helptexts.lua\n", name().c_str());
 	}
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Ware %s has no idle animation", name().c_str());

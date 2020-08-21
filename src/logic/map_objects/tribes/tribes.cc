@@ -198,7 +198,9 @@ BuildingDescr* Tribes::get_mutable_building_descr(DescriptionIndex buildingindex
 const ImmovableDescr* Tribes::get_immovable_descr(DescriptionIndex immovableindex) const {
 	return immovables_->get_mutable(immovableindex);
 }
-
+ImmovableDescr* Tribes::get_mutable_immovable_descr(DescriptionIndex immovableindex) const {
+	return immovables_->get_mutable(immovableindex);
+}
 const ShipDescr* Tribes::get_ship_descr(DescriptionIndex shipindex) const {
 	return ships_->get_mutable(shipindex);
 }

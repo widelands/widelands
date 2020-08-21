@@ -34,7 +34,7 @@ dirname = path.dirname(__file__)
 --    ``msgctxt`` above to fetch the string.
 --
 --    **helptext_script**: The full path to the ``helptexts.lua`` script for this ware.
---    **NOTE: Ware helptexts have been shifted to tribes initialization in the current
+--    **NOTE: Deprecated. Ware helptexts have been shifted to tribes initialization in the current
 --    development version.**
 --
 --    **icon**: The full path to the menu icon for this ware.

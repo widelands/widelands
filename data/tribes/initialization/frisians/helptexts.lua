@@ -1,8 +1,115 @@
 -- Frisian ware helptexts
 
 local warectxt = "frisians_ware"
+local immctxt = "frisians_immovable"
 
 return {
+   immovables = {
+      ashes = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Ashes
+         pgettext(immctxt, "The remains of a destroyed building.")
+      },
+      barleyfield_harvested = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Barley Field
+         pgettext(immctxt, "This field has been harvested.")
+      },
+      barleyfield_medium = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Barley Field
+         pgettext(immctxt, "This field is growing.")
+      },
+      barleyfield_ripe = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Barley Field
+         pgettext(immctxt, "This field is ready for harvesting.")
+      },
+      barleyfield_small = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Barley Field
+         pgettext(immctxt, "This field is growing.")
+      },
+      barleyfield_tiny = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Barley Field
+         pgettext(immctxt, "This field has just been planted.")
+      },
+      destroyed_building = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Destroyed Building
+         pgettext(immctxt, "The remains of a destroyed building.")
+      },
+      reedfield_medium = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Reed Field
+         pgettext(immctxt, "This reed field is growing.")
+      },
+      reedfield_ripe = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Reed Field
+         pgettext(immctxt, "This reed field is ready for harvesting.")
+      },
+      reedfield_small = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Reed Field
+         pgettext(immctxt, "This reed field is growing.")
+      },
+      reedfield_tiny = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Reed Field
+         pgettext(immctxt, "This reed field has just been planted.")
+      },
+      frisians_resi_coal_1 = {
+         -- TRANSLATORS: Helptext for a resource indicator: Coal
+         pgettext(immctxt, "Coal veins contain coal that can be dug up by coal mines."),
+         -- TRANSLATORS: Helptext for a resource indicator: Coal
+         pgettext(immctxt, "There is only a little bit of coal here.")
+      },
+      frisians_resi_coal_2 = {
+         -- TRANSLATORS: Helptext for a resource indicator: Coal
+         pgettext(immctxt, "Coal veins contain coal that can be dug up by coal mines."),
+         -- TRANSLATORS: Helptext for a resource indicator: Coal
+         pgettext(immctxt, "There is a lot of coal here.")
+      },
+      frisians_resi_gold_1 = {
+         -- TRANSLATORS: Helptext for a resource indicator: Gold
+         pgettext(immctxt, "Gold veins contain gold ore that can be dug up by gold mines."),
+         -- TRANSLATORS: Helptext for a resource indicator: Gold
+         pgettext(immctxt, "There is only a little bit of gold here.")
+      },
+      frisians_resi_gold_2 = {
+         -- TRANSLATORS: Helptext for a resource indicator: Gold
+         pgettext(immctxt, "Gold veins contain gold ore that can be dug up by gold mines."),
+         -- TRANSLATORS: Helptext for a resource indicator: Gold
+         pgettext(immctxt, "There is a lot of gold here.")
+      },
+      frisians_resi_iron_1 = {
+         -- TRANSLATORS: Helptext for a resource indicator: Iron
+         pgettext(immctxt, "Iron veins contain iron ore that can be dug up by iron mines."),
+         -- TRANSLATORS: Helptext for a resource indicator: Iron
+         pgettext(immctxt, "There is only a little bit of iron here.")
+      },
+      frisians_resi_iron_2 = {
+         -- TRANSLATORS: Helptext for a resource indicator: Iron
+         pgettext(immctxt, "Iron veins contain iron ore that can be dug up by iron mines."),
+         -- TRANSLATORS: Helptext for a resource indicator: Iron
+         pgettext(immctxt, "There is a lot of iron here.")
+      },
+      frisians_resi_none = {
+         -- TRANSLATORS: Helptext for a resource indicator: No resources
+         pgettext(immctxt, "There are no resources in the ground here.")
+      },
+      frisians_resi_water = {
+         -- TRANSLATORS: Helptext for a resource indicator: Water
+         pgettext(immctxt, "There is water in the ground here that can be pulled up by a well.")
+      },
+      frisians_resi_stones_1 = {
+         -- TRANSLATORS: Helptext for a Frisian resource indicator: Stones
+         pgettext(immctxt, "Granite is a basic building material and can be dug up by a rock mine."),
+         -- TRANSLATORS: Helptext for a Frisian resource indicator: Stones
+         pgettext(immctxt, "There is only a little bit of granite here.")
+      },
+      frisians_resi_stones_2 = {
+         -- TRANSLATORS: Helptext for a Frisian resource indicator: Stones
+         pgettext(immctxt, "Granite is a basic building material and can be dug up by a rock mine."),
+         -- TRANSLATORS: Helptext for a Frisian resource indicator: Stones
+         pgettext(immctxt, "There is a lot of granite here.")
+      },
+      frisians_shipconstruction = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Ship Under Construction
+         pgettext(immctxt, "A ship is being constructed at this site.")
+      }
+   },
    wares = {
       barley = {
          -- TRANSLATORS: Helptext for a ware: Barley

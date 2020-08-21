@@ -12,7 +12,6 @@ tribes:new_immovable_type {
    name = "berry_bush_currant_black_tiny",
    descname = _ "Black Currant (tiny)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "tiny/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -38,7 +37,6 @@ tribes:new_immovable_type {
    name = "berry_bush_currant_black_small",
    descname = _ "Black Currant (small)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "small/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -64,7 +62,6 @@ tribes:new_immovable_type {
    name = "berry_bush_currant_black_medium",
    descname = _ "Black Currant (medium)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "medium/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -90,7 +87,6 @@ tribes:new_immovable_type {
    name = "berry_bush_currant_black_ripe",
    descname = _ "Black Currant (ripe)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "ripe/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {

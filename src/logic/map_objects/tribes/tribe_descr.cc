@@ -131,7 +131,7 @@ void walk_tribe_immovables(
 }
 
 // Read helptext from Lua table
-std::string read_helptext(Widelands::MapObjectDescr* descr, const std::string& msgctxt, const LuaTable& table) {
+std::string read_helptext(const Widelands::MapObjectDescr* descr, const std::string& msgctxt, const LuaTable& table) {
 	if (table.has_key(descr->name())) {
 		// Concatenate text from entries with the localized sentence joiner
 		std::unique_ptr<LuaTable> helptext_table = table.get_table(descr->name());
@@ -145,11 +145,11 @@ std::string read_helptext(Widelands::MapObjectDescr* descr, const std::string& m
 			}
 			return helptext;
 		} else {
-			log("WARNING: Empty helptext defined for '%s'", descr->name().c_str());
+			log("WARNING: Empty helptext defined for '%s'\n", descr->name().c_str());
 			return "";
 		}
 	} else {
-		log("WARNING: No helptext defined for '%s'", descr->name().c_str());
+		log("WARNING: No helptext defined for '%s'\n", descr->name().c_str());
 		return "";
 	}
 }
@@ -190,6 +190,8 @@ TribeDescr::TribeDescr(LuaInterface* lua, const Widelands::TribeBasicInfo& info,
 		   (boost::format(_("Loading %1%: %2% (%3%/%4%)")) % descname() % str % i % 6).str()));
 	};
 
+	i18n::Textdomain td("tribes_encyclopedia");
+
 	try {
 		log("┃    Ships: ");
 		set_progress_message(_("Ships"), 1);
@@ -198,7 +200,7 @@ TribeDescr::TribeDescr(LuaInterface* lua, const Widelands::TribeBasicInfo& info,
 
 		log("┃    Immovables: ");
 		set_progress_message(_("Immovables"), 2);
-		load_immovables(table, tribes, world);
+		load_immovables(table, tribes, world, helptexts->get_table("immovables"));
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Wares: ");
@@ -348,7 +350,6 @@ void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
 void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, std::unique_ptr<LuaTable> helptexts) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("wares_order");
 
-    i18n::Textdomain td("tribes_encyclopedia");
     const std::string ware_msgctxt(name() + "_ware");
 
 	for (const int column_key : items_table->keys<int>()) {
@@ -372,9 +373,7 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, std::unique_p
 				ware_descr->set_preciousness(name(), ware_table->get_int("preciousness"));
 
                 // Add helptext
-                if (helptexts) {
-					ware_descr->set_helptext(name(), read_helptext(ware_descr, ware_msgctxt, *helptexts));
-                }
+				ware_descr->set_helptext(name(), read_helptext(ware_descr, ware_msgctxt, *helptexts));
 
                 // Add to tribe
 				wares_.insert(wareindex);
@@ -389,7 +388,9 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, std::unique_p
 	}
 }
 
-void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const World& world) {
+void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const World& world, std::unique_ptr<LuaTable> helptexts) {
+	const std::string ware_msgctxt(name() + "_immovable");
+
 	for (const std::string& immovablename :
 	     table.get_table("immovables")->array_entries<std::string>()) {
 		try {
@@ -398,6 +399,9 @@ void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const Wo
 				throw GameDataError("Duplicate definition of immovable '%s'", immovablename.c_str());
 			}
 			immovables_.insert(index);
+			ImmovableDescr* imm_descr = tribes.get_mutable_immovable_descr(index);
+			// Add helptext
+			imm_descr->set_helptext(name(), read_helptext(imm_descr, ware_msgctxt, *helptexts));
 		} catch (const WException& e) {
 			throw GameDataError("Failed adding immovable '%s': %s", immovablename.c_str(), e.what());
 		}

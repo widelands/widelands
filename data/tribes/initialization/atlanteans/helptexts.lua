@@ -8,7 +8,7 @@
 --
 -- Helptexts are defined in ``tribes/initialization/<tribename>/helptexts.lua`` and linked to from :ref:`units.lua <lua_tribes_tribes_units>`.
 --
--- First, you will need to define a message context. The form is ``"<tribe_name>_<table_key>"``.
+-- First, you will need to define a message context. The form is ``"<tribe_name>_<category>"``.
 -- Do not deviate from this -- the translations will not work otherwise.
 --
 -- You will then need to return a table of helptexts by map object type. It looks like this:
@@ -37,8 +37,119 @@
 -- In our example, we will get ``"The bread paddle is the tool of the baker, each baker needs one. Bread paddles are produced by the toolsmith."``
 
 local warectxt = "atlanteans_ware"
+local immctxt = "atlanteans_immovable"
 
 return {
+   immovables = {
+      ashes = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Ashes
+         pgettext(immctxt, "The remains of a destroyed building.")
+      },
+      blackrootfield_harvested = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Blackroot Field
+         pgettext(immctxt, "This field has been harvested.")
+      },
+      blackrootfield_medium = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Blackroot Field
+         pgettext(immctxt, "This field is growing.")
+      },
+      blackrootfield_ripe = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Blackroot Field
+         pgettext(immctxt, "This field is ready for harvesting.")
+      },
+      blackrootfield_small = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Blackroot Field
+         pgettext(immctxt, "This field is growing.")
+      },
+      blackrootfield_tiny = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Blackroot Field
+         pgettext(immctxt, "This field has just been planted.")
+      },
+      cornfield_harvested = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Corn Field
+         pgettext(immctxt, "This field has been harvested.")
+      },
+      cornfield_medium = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Corn Field
+         pgettext(immctxt, "This field is growing.")
+      },
+      cornfield_ripe = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Corn Field
+         pgettext(immctxt, "This field is ready for harvesting.")
+      },
+      cornfield_small = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Corn Field
+         pgettext(immctxt, "This field is growing.")
+      },
+      cornfield_tiny = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Corn Field
+         pgettext(immctxt, "This field has just been planted.")
+      },
+      destroyed_building = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Destroyed Building
+         pgettext(immctxt, "The remains of a destroyed building.")
+      },
+      atlanteans_resi_coal_1 = {
+         -- TRANSLATORS: Helptext for a resource indicator: Coal
+         pgettext(immctxt, "Coal veins contain coal that can be dug up by coal mines."),
+         -- TRANSLATORS: Helptext for a resource indicator: Coal
+         pgettext(immctxt, "There is only a little bit of coal here.")
+      },
+      atlanteans_resi_coal_2 = {
+         -- TRANSLATORS: Helptext for a resource indicator: Coal
+         pgettext(immctxt, "Coal veins contain coal that can be dug up by coal mines."),
+         -- TRANSLATORS: Helptext for a resource indicator: Coal
+         pgettext(immctxt, "There is a lot of coal here.")
+      },
+      atlanteans_resi_gold_1 = {
+         -- TRANSLATORS: Helptext for a resource indicator: Gold
+         pgettext(immctxt, "Gold veins contain gold ore that can be dug up by gold mines."),
+         -- TRANSLATORS: Helptext for a resource indicator: Gold
+         pgettext(immctxt, "There is only a little bit of gold here.")
+      },
+      atlanteans_resi_gold_2 = {
+         -- TRANSLATORS: Helptext for a resource indicator: Gold
+         pgettext(immctxt, "Gold veins contain gold ore that can be dug up by gold mines."),
+         -- TRANSLATORS: Helptext for a resource indicator: Gold
+         pgettext(immctxt, "There is a lot of gold here.")
+      },
+      atlanteans_resi_iron_1 = {
+         -- TRANSLATORS: Helptext for a resource indicator: Iron
+         pgettext(immctxt, "Iron veins contain iron ore that can be dug up by iron mines."),
+         -- TRANSLATORS: Helptext for a resource indicator: Iron
+         pgettext(immctxt, "There is only a little bit of iron here.")
+      },
+      atlanteans_resi_iron_2 = {
+         -- TRANSLATORS: Helptext for a resourc indicatore: Iron
+         pgettext(immctxt, "Iron veins contain iron ore that can be dug up by iron mines."),
+         -- TRANSLATORS: Helptext for a resource indicator: Iron
+         pgettext(immctxt, "There is a lot of iron here.")
+      },
+      atlanteans_resi_none = {
+         -- TRANSLATORS: Helptext for a resource indicator: No resources
+         pgettext(immctxt, "There are no resources in the ground here.")
+      },
+      atlanteans_resi_water = {
+         -- TRANSLATORS: Helptext for a resource indicator: Water
+         pgettext(immctxt, "There is water in the ground here that can be pulled up by a well.")
+      },
+      atlanteans_resi_stones_1 = {
+         -- TRANSLATORS: Helptext for an Atlantean resource indicator: Stones
+         pgettext(immctxt, "Precious stones are used in the construction of big buildings. They can be dug up by a crystal mine. You will also get granite from the mine."),
+         -- TRANSLATORS: Helptext for an Atlantean resource indicator: Stones
+         pgettext(immctxt, "There are only a few precious stones here.")
+      },
+      atlanteans_resi_stones_2 = {
+         -- TRANSLATORS: Helptext for an Atlantean resource indicator: Stones
+         pgettext(immctxt, "Precious stones are used in the construction of big buildings. They can be dug up by a crystal mine. You will also get granite from the mine."),
+         -- TRANSLATORS: Helptext for an Atlantean resource indicator: Stones
+         pgettext(immctxt, "There are many precious stones here.")
+      },
+      atlanteans_shipconstruction = {
+         -- TRANSLATORS: Helptext for a tribe immovable: Ship Under Construction
+         pgettext(immctxt, "A ship is being constructed at this site.")
+      }
+   },
    wares = {
       atlanteans_bread = {
          -- TRANSLATORS: Helptext for a ware: Bread
