@@ -25,6 +25,9 @@
 --
 --            descname = _"Badger",
 --
+--    **animation_directory**
+--        *Mandatory*. The location of the animation png files.
+--
 --    **editor_category**
 --        *Deprecated*. The category that is used in the editor tools for placing a critter of this type on the map, e.g.::
 --
@@ -72,7 +75,6 @@
 --        needs to have an ``idle`` and a directional ``walk`` animation. Herbivores and carnivores additionally need an ``eating`` animation.
 --        See :doc:`animations` for a detailed description of the animation format.
 
--- NOCOM document animations_directory
 wl.World():new_critter_type{
    name = "badger",
    descname = _ "Badger",

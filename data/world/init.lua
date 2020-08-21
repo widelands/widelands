@@ -2,13 +2,78 @@
 -- init.lua
 -- --------
 --
--- World initialization.
+-- World initialization for the editor.
 -- All world entities are loaded via this file.
+-- In a game, world entities are loaded on demand using their ``register.lua`` files.
+-- See :ref:`lua_world_defining_units` for more details.
 --
 -- This file also defines the editor categories for world elements like terrains or
 -- immovables so that they will be added to their respective editor tools (Place Terrain,
--- Place Immovable etc.). There are three categories available,
--- each with their own function:
+-- Place Immovable etc.).
+--
+-- Returns a table with 4 keys:
+--
+-- * ``critters``: A table of editor categories for placing animals in the editor
+-- * ``immovables``: A table of editor categories for placing immovables in the editor
+-- * ``resources``: A list of all resources: ``{ "resource_coal", "resource_gold", ... }``
+-- * ``terrains``: A table of editor categories for placing terrains in the editor
+--
+-- An editor category has the following table entries:
+--
+-- **name**
+--     *Mandatory*. A string containing the internal name of this editor category
+--     for reference by UI code, e.g.::
+--
+--         name = "summer",
+--
+-- **descname**
+--     *Mandatory*. The translatable display name, e.g.::
+--
+--         descname = _"Summer",
+--
+-- **picture**
+--     *Mandatory*. An image to represent this category in the editor tool's tab, e.g.::
+--
+--         picture = "world/pics/editor_terrain_category_green.png",
+--
+-- **items_per_row**
+--     *Mandatory*. How many items will be displayed in each row by the tool, e.g.::
+--
+--         items_per_row = 6,
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    -- Items shown in the place critter tool. Each subtable is a tab in the tool.
+--    critters = {
+--       {
+--          name = "critters_herbivores",
+--          -- TRANSLATORS: A category in the editor for placing animals on the map.
+--          descname = _"Herbivores",
+--          picture = "world/critters/sheep/idle_00.png",
+--          items_per_row = 10,
+--          items = {
+--             "bunny",
+--             "sheep",
+--          }
+--       },
+--       {
+--          name = "critters_carnivores",
+--          -- TRANSLATORS: A category in the editor for placing animals on the map.
+--          descname = _"Carnivores",
+--          picture = "world/critters/fox/idle_00.png",
+--          items_per_row = 10,
+--          items = {
+--             "marten",
+--             "badger",
+--             "lynx",
+--             "fox",
+--             "wolf",
+--             "brownbear",
+--          }
+--       },
+--    },
 
 -- NOCOM add test
 
@@ -497,34 +562,6 @@ local result = {
       },
    }
 }
-
-
--- NOCOM update documentation
-
--- RST
---    :arg table: This table contains all the data that the game engine will
---       add to these editor categories.
---
---    **name**
---        *Mandatory*. A string containing the internal name of this editor category
---        for reference, e.g.::
---
---            name = "summer",
---
---    **descname**
---        *Mandatory*. The translatable display name, e.g.::
---
---            descname = _"Summer",
---
---    **picture**
---        *Mandatory*. An image to represent this category in the editor tool's tab, e.g.::
---
---            picture = "world/pics/editor_terrain_category_green.png",
---
---    **items_per_row**
---        *Mandatory*. How many items will be displayed in each row by the tool, e.g.::
---
---            items_per_row = 6,
 
 pop_textdomain()
 
