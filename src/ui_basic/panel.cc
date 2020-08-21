@@ -305,9 +305,6 @@ void Panel::set_desired_size(int w, int h) {
 		return;
 	}
 
-	assert(w >= 0);
-	assert(h >= 0);
-
 	// Make sure that we never get negative width/height.
 	desired_w_ = std::max(0, w);
 	desired_h_ = std::max(0, h);
