@@ -7,7 +7,6 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Wheat Field (harvested)"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   attributes = { "field" },
    programs = {
       main = {
          "animate=idle duration:8m20s",

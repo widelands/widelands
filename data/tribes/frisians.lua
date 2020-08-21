@@ -1,3 +1,5 @@
+tribes = wl.Tribes()
+
 image_dirname = path.dirname(__file__) .. "images/frisians/"
 
 tribes:new_tribe {

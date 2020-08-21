@@ -101,7 +101,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:24m15s",
          "transform=deadtree3 chance:8.98%",
-         "seed=larch_summer_sapling 30",
+         "seed=larch_summer_sapling proximity:11.72%",
       },
       fall = {
          "remove=",

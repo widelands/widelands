@@ -18,7 +18,6 @@
  */
 
 #include "ai/defaultai.h"
-
 #include "economy/wares_queue.h"
 #include "logic/map_objects/tribes/militarysite.h"
 

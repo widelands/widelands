@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2019
+# GunChleoc, 2015-2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-06-27 07:09+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-08-16 21:22+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -338,9 +338,9 @@ msgstr "Deiseil ’s deònach!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
 msgid ""
-"Well done, your scout’s hut has been built. While our scout is moving in, "
+"Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr "Glè mhath, tha am bothan-rabhadair air a thogail. Fhad ’s a tha an rabhadair againn ag imrich a-steach, ionnsaichidh sinn beagan mu dhèidhinn."
+msgstr "Glè mhath! Tha am bothan-rabhadair air a thogail. Fhad ’s a tha an rabhadair againn ag imrich a-steach, ionnsaichidh sinn beagan mu dhèidhinn."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
@@ -671,8 +671,3 @@ msgid ""
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
 msgstr "Tha thu ullamh a-nis gus na h-iomairtean a chluiche. Ionnsaichidh iad dhut mun eaconamaidh eadar-dhealaichte a tha aig gach treubh. ’S urrainn dhut na h-oideachaidhean eile a chluiche cuideachd ach cha leig thu leas ach an dèid na h-iomairtean leat."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

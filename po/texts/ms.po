@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-03-29 19:01+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-07-23 07:47+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -338,11 +338,11 @@ msgid ""
 " wiki there."
 msgstr "Jika anda perlukan dokumentasi atau bantuan berkenaan Widelands ataupun penyunting Widelands, pastikan anda melayari laman sesawang kami di %s. Anda boleh temui bantuan atas-talian yang terkini di dalam Wiki kami."
 
-#: ../../data/txts/help/common_helptexts.lua:17
+#: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
 msgstr "Pengenalan"
 
-#: ../../data/txts/help/common_helptexts.lua:18
+#: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer "
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -350,7 +350,7 @@ msgid ""
 "started through playable tutorials."
 msgstr "Widelands merupakan permainan strategi masa-nyata percuma dan bersumber terbuka dengan kempen seorang pemain dan juga mod pemain-berbilang. Permainan ini diilham daripada Settlers II tetapi ia lebih banyak variasi dan juga mendalam permainannya. Walaubagaimanapun, permainan ini boleh dimulakan\ndengan tutorial-tutorial yang seronok dimainkan."
 
-#: ../../data/txts/help/common_helptexts.lua:19
+#: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
 "In this game, you start out on a small piece of land with just a few "
 "resources. Using these, you’ll create an empire with many thousands of "
@@ -359,11 +359,11 @@ msgid ""
 "tribes."
 msgstr "Dalam permainan ini, anda bermula dengan sebidang tanah yang kecil dengan sedikit sumber. Dengan sumber ini, anda akan membina sebuah empayar yang terdiri daripada beribu-ribu orang penduduknya. Untuk mencapai matlamat ini, anda akan menubuhkan infastruktur ekonomi, jelajahi tanah disekitar anda dan juga menghadapi puak-puak yang memusuhi anda."
 
-#: ../../data/txts/help/common_helptexts.lua:25
+#: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
 msgstr "Main Semula"
 
-#: ../../data/txts/help/common_helptexts.lua:26
+#: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
 "Widelands records every game you play in two files. One of these files has a"
 " .wrpl.wgf extension and contains an initial savegame. The other file has a "
@@ -372,7 +372,7 @@ msgid ""
 "will tell you the time you started the game."
 msgstr "Widelands merekod setiap permainan yang anda main kepada dua fail. Salah satu dari fail ini memiliki sambungan .wrpl.wgf dan mengandungi  permainansimpan awalan. Fail kedua mempunyai sambungan.wrpl dan mengandungi semua perintah yang telah dibuat oleh semua pemain, seperti membina jalan atau menyerang musuh. Nama fail selebihnya memberitahu anda masa anda memulakan permainan."
 
-#: ../../data/txts/help/common_helptexts.lua:27
+#: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -382,7 +382,7 @@ msgid ""
 "players has a different version of the game."
 msgstr "Penggunaan pilihan Tonton Main Semula dalam menu utama, permainan sebelum ini yang telah dimainkan akan dijalankan semula untuk tontonan anda. Kadangkala, sedikit perubahan dalam fail data permainan atau bolehlaku Widelands boleh menyebabkan main semula menjadi tidak serasi dan 'terkeluar dari penyegerakan'. Ia seakan dengan permainan rangkaian yang mengalami masalah penyahgerakan jika salah seorang pemain mempunyai versi permainan yang berlainan."
 
-#: ../../data/txts/help/common_helptexts.lua:28
+#: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
@@ -392,7 +392,7 @@ msgid ""
 msgstr "Main semula adalah alat yang sangat berguna untuk mencari pepijat dalam logik permainan, supaya diberguna sebagai lampiran dalam laporan pepijat. Fail main semula disimpan dalam direktori %s pada Linux dan Mac OS X. Manakala, dalam Windows, ia berada dalam subdirektori ‘replays’ di dalam pemasangan Widelands anda."
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../data/txts/help/common_helptexts.lua:35
+#: ../../data/txts/help/common_helptexts.lua:41
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
@@ -400,27 +400,27 @@ msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Ruang"
 
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
 msgstr "Togol ruang bangunan"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgctxt "hotkey"
 msgid "Ctrl + F"
 msgstr ""
 
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Togol skrin penuh (jika disokong oleh OS)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:56
+#: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "Togol peta mini"
 
@@ -698,8 +698,8 @@ msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
-msgid "Ctrl+(1-9)"
-msgstr "Ctrl+(1-9)"
+msgid "Ctrl + (1-9)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:43
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -741,13 +741,13 @@ msgstr "Sesetengah bangunan, seperti ladang, mempunyai kawasan kerja yang sangat
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+(+/-)"
-msgstr "Ctrl+(+/-)"
+msgid "Ctrl + (+/-)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+0"
-msgstr "Ctrl+0"
+msgid "Ctrl + 0"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
@@ -761,7 +761,7 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Ctrl+(Page Up/Page Down)"
+msgid "Ctrl + (Page Up/Page Down)"
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
@@ -771,7 +771,7 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Shift+(Page Up/Page Down)"
+msgid "Shift + (Page Up/Page Down)"
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
@@ -787,7 +787,7 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
+msgid "Ctrl + Arrow keys"
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:83
@@ -797,7 +797,7 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Shift+Arrow keys"
+msgid "Shift + Arrow keys"
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:87

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
 "PO-Revision-Date: 2020-06-08 14:34+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -154,7 +154,7 @@ msgid "General"
 msgstr "Général"
 
 #: ../../data/scripting/editor/editor_help.lua:59
-#: ../../data/scripting/editor/editor_introduction.lua:11
+#: ../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
 msgstr "Introduction"
 
@@ -171,23 +171,23 @@ msgstr "Terrains"
 msgid "Trees"
 msgstr "Arbres"
 
-#: ../../data/scripting/editor/editor_introduction.lua:9
+#: ../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
 msgstr "L'éditeur de Widelands"
 
-#: ../../data/scripting/editor/editor_introduction.lua:13
+#: ../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
 msgstr "Cet éditeur est prévu pour les joueurs désirant créer leurs propres cartes utilisables dans Widelands."
 
-#: ../../data/scripting/editor/editor_introduction.lua:14
+#: ../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
 msgstr "Comme vous pouvez le voir, cet éditeur est en développement et celui-ci devient meilleur de jour en jour, ce texte deviendra aussi plus long et plus complet."
 
-#: ../../data/scripting/editor/editor_introduction.lua:17
+#: ../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
 msgstr "Le wiki inclus aussi un petit tutoriel sur comment construire une carte."
 

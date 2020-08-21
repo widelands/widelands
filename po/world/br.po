@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
 "PO-Revision-Date: 2020-01-10 13:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
@@ -17,67 +17,67 @@ msgstr ""
 "Language: br\n"
 "Plural-Forms: nplurals=5; plural=((n%10 == 1) && (n%100 != 11) && (n%100 !=71) && (n%100 !=91) ? 0 :(n%10 == 2) && (n%100 != 12) && (n%100 !=72) && (n%100 !=92) ? 1 :(n%10 ==3 || n%10==4 || n%10==9) && (n%100 < 10 || n% 100 > 19) && (n%100 < 70 || n%100 > 79) && (n%100 < 90 || n%100 > 99) ? 2 :(n != 0 && n % 1000000 == 0) ? 3 : 4);\n"
 
-#: ../../data/world/critters/badger/init.lua:64
+#: ../../data/world/critters/badger/init.lua:95
 msgid "Badger"
 msgstr "Broc'h"
 
-#: ../../data/world/critters/brownbear/init.lua:15
+#: ../../data/world/critters/brownbear/init.lua:21
 msgid "Brown bear"
 msgstr "Arzh Gell"
 
-#: ../../data/world/critters/bunny/init.lua:14
+#: ../../data/world/critters/bunny/init.lua:19
 msgid "Bunny"
 msgstr "Konifl"
 
-#: ../../data/world/critters/chamois/init.lua:15
+#: ../../data/world/critters/chamois/init.lua:21
 msgid "Chamois"
 msgstr "Gavr-Menez"
 
-#: ../../data/world/critters/deer/init.lua:15
+#: ../../data/world/critters/deer/init.lua:21
 msgid "Deer"
 msgstr "Karv"
 
-#: ../../data/world/critters/duck/init.lua:18
+#: ../../data/world/critters/duck/init.lua:19
 msgid "Duck"
 msgstr "Houad"
 
-#: ../../data/world/critters/fox/init.lua:19
+#: ../../data/world/critters/fox/init.lua:25
 msgid "Fox"
 msgstr "Louarn"
 
-#: ../../data/world/critters/lynx/init.lua:16
+#: ../../data/world/critters/lynx/init.lua:22
 msgid "Lynx"
 msgstr "Lynks"
 
-#: ../../data/world/critters/marten/init.lua:15
+#: ../../data/world/critters/marten/init.lua:21
 msgid "Marten"
 msgstr ""
 
-#: ../../data/world/critters/moose/init.lua:19
+#: ../../data/world/critters/moose/init.lua:25
 msgid "Moose"
 msgstr ""
 
-#: ../../data/world/critters/reindeer/init.lua:16
+#: ../../data/world/critters/reindeer/init.lua:22
 msgid "Reindeer"
 msgstr "Karv-Erc'h"
 
-#: ../../data/world/critters/sheep/init.lua:18
+#: ../../data/world/critters/sheep/init.lua:25
 msgid "Sheep"
 msgstr "Dañvad"
 
-#: ../../data/world/critters/stag/init.lua:19
+#: ../../data/world/critters/stag/init.lua:25
 msgid "Stag"
 msgstr "Karv"
 
-#: ../../data/world/critters/wildboar/init.lua:18
+#: ../../data/world/critters/wildboar/init.lua:25
 msgid "Wild boar"
 msgstr "Morc'h-gouez"
 
-#: ../../data/world/critters/wisent/init.lua:15
+#: ../../data/world/critters/wisent/init.lua:21
 msgid "Wisent"
 msgstr ""
 
-#: ../../data/world/critters/wolf/init.lua:19
+#: ../../data/world/critters/wolf/init.lua:26
 msgid "Wolf"
 msgstr ""
 

@@ -101,7 +101,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:25m50s",
          "transform=deadtree6 chance:14.06%",
-         "seed=palm_coconut_desert_sapling 100",
+         "seed=palm_coconut_desert_sapling proximity:39%",
       },
       fall = {
          "remove=",

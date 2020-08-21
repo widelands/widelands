@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: GunChleoc, 2020\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -661,8 +661,8 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:347
 msgid ""
 "First of all, we need more construction materials. So, we should build at "
-"least three lumberjacks’ houses and two quarries. Be sure to have "
-"dismanteled all of the unproductive buildings though."
+"least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
+" all of the unproductive buildings though."
 msgstr ""
 "Feumaidh sinn barrachd stuthan-togail an toiseach. Mar sin, bu chòir dhuinn "
 "co-dhiù trì taighean coillteir is dà chuaraidh a thogail. Dèan cinnteach gun"
@@ -837,15 +837,12 @@ msgid ""
 "The only solution is to build two new forester’s houses near our "
 "lumberjacks. Be sure to first build a new forester’s house and then "
 "eventually destroy the old one or at least expel the forester to change "
-"houses. Dismantling them is also possible but will not return any wares "
-"because they are so torn."
+"houses."
 msgstr ""
 "Chan eil fuasgladh ann ach gun tog sinn dà thaigh planntair-choille faisg "
 "air na coilltearan againn. Dèan cinnteach gun tog thu taigh planntair-"
 "choille ùr mus mill thu an seann-fhear no gun cuir thu am planntair-coille "
-"a-mach à dreuchd ach an dèid e dhan taigh eile. Gabhaidh an toirt às a "
-"chèile cuideachd ach chan fhaigh thu bathar sam bith às on a chaidh iad gu "
-"tur a dholaidh."
+"a-mach à dreuchd ach an dèid e dhan taigh eile."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
 msgid "Amalea Laughs Sarcastically"
@@ -1655,7 +1652,86 @@ msgstr ""
 "dia Vesta! Gum bhiodh an droch-fhortan air ur beatha ’s ur dùthaich agus gun"
 " sgiùrsadh fearg na ban-dia ar teaghlach às an t-saoghal!"
 
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1.lua:8
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery2.lua:9
+msgctxt "empire_building"
+msgid "Brewery"
+msgstr "Taigh-grùide"
+
+#. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery2.lua:50
+msgid "brewing beer"
+msgstr "togail grùdaireachd"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:9
+msgctxt "empire_building"
+msgid "Farm"
+msgstr "Tuathanas"
+
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:43
+msgid "working"
+msgstr "obair"
+
+#. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:51
+msgid "planting wheat"
+msgstr "cruithneachd a chur"
+
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:59
+msgid "harvesting wheat"
+msgstr "cruithneachd a bhuain"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:68
+msgid "No Fields"
+msgstr "Dìth achaidh"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:69
+msgid "Out of Fields"
+msgstr "Chan eil achadh ann"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:70
+msgctxt "empire_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
+"Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig "
+"an tuathanas seo sìol."
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:9
+msgid "Loading campaign-specific tribe units"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1.lua:8
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill2.lua:9
+msgctxt "empire_building"
+msgid "Mill"
+msgstr "Muileann"
+
+#. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill2.lua:48
+msgid "grinding wheat"
+msgstr "cruithneachd a bhleith"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta.lua:9
+msgctxt "empire_building"
+msgid "Temple of Vesta"
+msgstr ""
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/vesta_helptexts.lua:17
+msgctxt "building"
+msgid ""
+"In the temple of Vesta, the wares to worship are stored. It is the home of "
+"the priestesses and the guards of the goddess."
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1.lua:8
+msgctxt "empire_building"
+msgid "Well"
+msgstr "Tobar"

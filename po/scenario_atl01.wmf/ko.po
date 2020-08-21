@@ -5,13 +5,14 @@
 # ks k, 2018
 # ks k, 2018-2020
 # TaeMin An, 2019
+# TaeMin An, 2019
 # wig sejo <sejojun@gmail.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-06-25 17:58+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-08-17 12:38+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -22,15 +23,15 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:29
 msgid "Ensure the supply of building wares"
-msgstr "건축 자재 공급 체제를 정비하십시오."
+msgstr "건물 용품 공급 체제를 정비하십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:31
 msgid "Supply Building Wares"
-msgstr "건축 자재 공급"
+msgstr "건물 용품을 공급하십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Supply basic building material for your economy:"
-msgstr "경제를 위한 기초 건축자재 공급:"
+msgstr "경제를 위한 기초 건축 자재 공급:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Build a quarry"
@@ -38,11 +39,11 @@ msgstr "채석장을 지으십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Build two woodcutter’s houses"
-msgstr "벌목꾼의 집 두 곳을 지으십시오."
+msgstr "나무꾼의 집 2 곳을 지으십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Build two forester’s houses"
-msgstr "두곳의 숲 지킴이의 집을 지으십시오."
+msgstr "숲꾼의 집 2 곳을 지으십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a sawmill"
@@ -81,7 +82,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "음식이 아주 중요한 곳은 광산들과 군사훈련 지역입니다.\n잘 작동하는 음식 환경을 만들어야 하는데 \n그 방법은 적어도 하나의 농장과 하나의 blackroot 농장과 제분소를 만드는 것입니다.\n우물물과 함께 두 종류의 밀을 구우면 빵집의 빵이 되니 빵집과 우물도 만들어야 합니다."
+msgstr "음식이 아주 중요한 곳은 광산들과 군사훈련 지역입니다. 잘 작동하는 음식 환경을 만들어야 하는데 그 방법은 적어도 하나의 농장과 하나의 검은 뿌리 농장과 제분소를 만드는 것입니다. 우물물과 함께 두 종류의 밀을 구우면 빵집의 빵이 되니 빵집과 우물도 만들어야 합니다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""
@@ -91,7 +92,7 @@ msgid ""
 "breeding more. Make sure that there are always fish left, otherwise the fish"
 " breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
-msgstr "이들의 주식은 훈제한 생선과 고기였다.\n날고기는 사냥꾼들로부터 공급되었다.\n어부는 바다에서 고기를 잡았는데, 물고기를 관리하던 책임자들은 물고기가 씨를 말릴만큼 많이 잡지 않도록 어획량을 확인했다.\n언제나 물고기가 남아 있도록 확인했는데, 남은 물고기가 없으면 양식업자 는 물고기를 새끼칠 수가 없었다. \n훈연 작업은 훈연 작업실에서 이뤄졌는데, 훈연에는 작업실이 최소 두 개가 필요했다."
+msgstr "이들의 주식은 훈제한 생선과 고기였다. 날고기는 사냥꾼들로부터 공급되었다. 어부는 바다에서 고기를 잡았는데, 물고기를 관리하던 책임자들은 물고기가 씨를 말릴만큼 많이 잡지 않도록 어획량을 확인했다. 언제나 물고기가 남아 있도록 확인했는데, 남은 물고기가 없으면 양식업자 는 물고기를 새끼칠 수가 없었다. 훈연 작업은 훈연 작업실에서 이뤄졌는데, 훈연에는 작업실이 최소 두 개가 필요했다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
@@ -177,7 +178,7 @@ msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr "광석들은 사용될 수 있기 전에 제련소에서 제련되어야만 한다. 그 후에 정제된 재료는 무기 제작소, 갑옷 제작소과 도구 제작소에서 사용된다."
+msgstr "광석들은 사용될 수 있기 전에 제련소에서 제련되어야만 한다. 그 후에 정제된 재료는 무기 제작소, 갑옷 제작소, 도구 제작소에서 사용된다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:87
 msgid ""
@@ -187,24 +188,24 @@ msgstr "각 유형의 광산을 만드십시오. 먼저 지질학자를 산으�
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Build a smelting works"
-msgstr "제련소 짓기"
+msgstr "제련소를 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid "Build an armor smithy and a weapon smithy"
-msgstr "갑옷 대장간과 무기 대장간을 지으십시오."
+msgstr "갑옷 제작소와 무기 제작소를 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid "Build a toolsmithy"
-msgstr "도구 대장간 짓기"
+msgstr "도구 제작소를 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:96
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:100
 msgid "Build a barracks"
-msgstr "병영 짓기"
+msgstr "병영을 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 msgid "Recruiting new soldiers"
-msgstr "신병을 모집하는중"
+msgstr "새로운 군인을 모집하고 있음"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 msgid ""
@@ -228,7 +229,7 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr "다른 모든 부족들과 마찬가지로, 아틀란티스인들은 또한 군인들을 훈련시킬 수 있다: 지하감옥 열차 공격 – 아틀란테인의 주요 속성 – 그리고 미로 같은 열차 탈피, 건강, 방어. 업계에서 생산한 품목은 두 훈련장에서 더 나은 병사들을 훈련시키는 데 사용된다."
+msgstr "다른 모든 부족들과 마찬가지로, 아틀란티스인들은 또한 군인들을 훈련시킬 수 있다: 지하감옥 열차 공격 – 아틀란티스인의 주요 속성 – 그리고 미로 같은 열차 탈피, 체력, 방어. 업계에서 생산한 품목은 두 훈련장에서 더 나은 군인들을 훈련시키는 데 사용된다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Build a dungeon and a labyrinth"
@@ -248,7 +249,7 @@ msgid ""
 "horses to help out your carriers. Horses are bred at horse farms using water"
 " and corn. A warehouse will also help to ensure that your transportation "
 "system does not collapse."
-msgstr "당신의 도로망이 점점 더 복잡해짐에 따라, 당신은 당신의 운송업자들을 돕기 위해 말을 고용해야 한다. 말은 물과 옥수수를 이용하여 말 농장에서 사육된다. 창고는 또한 당신의 운송 시스템이 붕괴되지 않도록 하는 데 도움이 될 것이다."
+msgstr "당신의 땅길망이 점점 더 복잡해짐에 따라, 당신은 당신의 짐꾼들을 돕기 위해 말을 고용해야 한다. 말은 물과 옥수수를 이용하여 말 농장에서 사육된다. 창고는 또한 당신의 운송 시스템이 붕괴되지 않도록 하는 데 도움이 될 것이다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build a warehouse"
@@ -271,7 +272,7 @@ msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
-msgstr "섬 꼭대기에 호수가 있습니다. \n이 호수에 3 척의 배를 만들면, 당신은 섬이 바다로 완전히 잠기기 전에 사람들을 구출 할 수 있습니다."
+msgstr "섬 꼭대기에 호수가 있습니다. 이 호수에 3 척의 배를 만들면, 당신은 섬이 바다로 완전히 잠기기 전에 사람들을 구출 할 수 있습니다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Build a shipyard close to the lake to start building ships"
@@ -293,7 +294,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr "숨겨지고 버려진 이 Atlantis 섬에는\n자부심 강한 민족이 세계의 문명이 아직 여명에 잠겨있을 때부터 터를 잡았었다. \nAjanthul왕가와 Lutas와 소통할 수 있었던 현명한 성직자들 다스리던 왕국으로, 이 민족들은 바다의 신 Lutas로부터 해수면 위로 숨을 쉴 수 있는 권한을 부여받았다.\n이 민족들은 번영했고 또한 문명을 꽃 피웠다."
+msgstr "숨겨지고 버려진 이 아틀란티스 섬에는 자부심 강한 민족이 세계의 문명이 아직 여명에 잠겨있을 때부터 터를 잡았었다. 아잔툴 왕가와 루타스와 소통할 수 있었던 현명한 성직자들 다스리던 왕국으로, 이 민족들은 바다의 신 루타스로부터 해수면 위로 숨을 쉴 수 있는 권한을 부여받았다. 이 민족들은 번영했고 또한 문명을 꽃 피웠다."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:148
@@ -304,7 +305,7 @@ msgid ""
 "began looking for a cure for death even though most clerics warned him "
 "against it. Some said that endless life was only for the gods and that to "
 "seek for it was forbidden."
-msgstr "이 이야기는 Ajanthul왕의 43대 손, Askandor왕의 치세동안 있었던 일이다.\nAskandor왕은 한때 좋은 왕이었고 아틀란티스 국민들을 지혜와 예지로 다스렸다.\n그런데 나이를 먹으면서 죽는게 두려웠고\n대부분의 성직자들이 반대했음에도 불구하고 불사의 방법을 찾기 시작했다.\n성직자들 몇몇은 불멸은 오로지 신들의 것이며 불멸을 구하는 것은 금지된 일이라고 말했다."
+msgstr "이 이야기는 아잔툴왕의 43대 손, 아스칸도르왕의 치세동안 있었던 일이다. 아스칸도르왕은 한때 좋은 왕이었고 아틀란티스 국민들을 지혜와 예지로 다스렸다. 그런데 나이를 먹으면서 죽는게 두려웠고 대부분의 성직자들이 반대했음에도 불구하고 불사의 방법을 찾기 시작했다. 성직자들 몇몇은 불멸은 오로지 신들의 것이며 불멸을 구하는 것은 금지된 일이라고 말했다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:152
 msgid "Disgraced Before the God"
@@ -321,7 +322,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr "그런데 모든 것은 잘 돌아가는 것처럼 보였다.\n오직 말들만이 뭔가 잘못되었다는 낌새를 느꼈다. \n여러 밤에 걸쳐 말들은 미쳐 날뛰고 두려움에 떨었다.\n얼마 지나지 않아 말의 사육을 맡고 있던 Xydra가 말에게 무슨 문제가 생겼는지 알아보았다.\n마굿간 앞에 있던 바닷물의 수위가 지금껏 없던 속도로 차올라오고 있었다."
+msgstr "그런데 모든 것은 잘 돌아가는 것처럼 보였다. 오직 말들만이 뭔가 잘못되었다는 낌새를 느꼈다. 여러 밤에 걸쳐 말들은 미쳐 날뛰고 두려움에 떨었다. 얼마 지나지 않아 말의 사육을 맡고 있던 사이드라가 말에게 무슨 문제가 생겼는지 알아보았다. 마굿간 앞에 있던 바닷물의 수위가 지금껏 없던 속도로 차올라오고 있었다."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:158
@@ -331,7 +332,7 @@ msgid ""
 " of the boldness of their king. He decided to withdraw the rights that were "
 "granted to King Ajanthul and his children. And so, he called them back below"
 " the sea again."
-msgstr "성직자들은 명상에 들어갔고 물이 범람한 이유는 곧 밝혀지게 되었다.\nLutas신이 아틀란티스인들을 저버렸는데, 아틀란티스인 왕의 분방함을 노엽게 여겼기 때문이었다.\n그래서 Lutas신은 Ajanthul왕과 그들의 자손에게 부여했던 왕권을 철회해버렸다.\n그래서 아틀란티스를 바다 밑에 다시 묻어버렸다."
+msgstr "성직자들은 명상에 들어갔고 물이 범람한 이유는 곧 밝혀지게 되었다. 루타스 신이 아틀란티스인들을 저버렸는데, 아틀란티스인 왕의 분방함을 노엽게 여겼기 때문이었다. 그래서 루타스 신은 아잔툴왕과 그들의 자손에게 부여했던 왕권을 철회해버렸다. 그래서 아틀란티스를 바다 밑에 다시 묻어버렸다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:162
 msgid "Uproar and Confusion"
@@ -339,7 +340,7 @@ msgstr "소란과 혼란"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:164
 msgid "Emerging Chaos…"
-msgstr "혼란이 드러나고 있습니다..."
+msgstr "혼란이 드러나고 있습니다…"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:166
@@ -348,7 +349,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail…"
-msgstr "죄책감에 시달린 나머지, 왕은 자살했다.\n군주가 사라지자 사람들은 성직자들에게 의지했다\n그러나 성직자들은 실질적인 도움을 줄 수 없었다.\n대부분은 망국의 운명을 받아들였지만, 다른 사람들은 신전에 제물을 받쳐 신의 노여움을 거둬보려고 했다.\n그러나 헛된 일이었다..."
+msgstr "죄책감에 시달린 나머지, 왕은 자살했다. 군주가 사라지자 사람들은 성직자들에게 의지했다. 그러나 성직자들은 실질적인 도움을 줄 수 없었다. 대부분은 망국의 운명을 받아들였지만, 다른 사람들은 신전에 제물을 받쳐 신의 노여움을 거둬보려고 했다. 그러나 헛된 일이었다…"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:168
@@ -358,7 +359,7 @@ msgid ""
 "situation, she convinced herself that to soothe the god, an offer of great "
 "personal value was needed. So she offered him her most beloved: her husband,"
 " the father of her only child."
-msgstr "선왕의 딸이자 신의 최고 제사장인 Jundlina는 가장 단호한 성직자였다. 수많은 제물들이 상황을 변화시키지 않자, 그녀는 신을 달래기 위해서는 엄청난 가치를 지닌 제물이 필요하다고 스스로를 확신시켰다. 그래서 그녀는  가장 사랑하는 남편이자 그녀의 외동 아들의 아버지를 바쳤다."
+msgstr "선왕의 딸이자 신의 최고 제사장인 준드리나는 가장 단호한 성직자였다. 수많은 제물들이 상황을 변화시키지 않자, 그녀는 신을 달래기 위해서는 엄청난 가치를 지닌 제물이 필요하다고 스스로를 확신시켰다. 그래서 그녀는  가장 사랑하는 남편이자 그녀의 외동 아들의 아버지를 바쳤다."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:170
@@ -415,7 +416,7 @@ msgid ""
 "it a home. I reckon we need to establish a sustainable economy and to "
 "explore our surroundings. I called for specialists and will follow their "
 "advice."
-msgstr "우리는 이 섬에 자리를 잡았다.\n다음 단계는 이 섬에 적응하는 것이다.\n나는 우리가 오랫동안 지속 가능한 경제체계를 확립하고 우리 주변환경을 탐색해야 한다고 생각한다.\n나는 전문가를 데려왔고 그들의 조언에 따를 것이다."
+msgstr "우리는 이 섬에 자리를 잡았다. 다음 단계는 이 섬에 적응하는 것이다. 나는 우리가 오랫동안 지속 가능한 경제체계를 확립하고 우리 주변환경을 탐색해야 한다고 생각한다. 나는 전문가를 데려왔고 그들의 조언에 따를 것이다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:191
 msgid "Loftomor and Sidolus Arrive"
@@ -448,7 +449,7 @@ msgstr "Satul이 너희 둘을 다 따듯하게 해주길. Loftomor, 당신은 �
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Loftomor Speaks"
-msgstr "로프토머가 말한다"
+msgstr "로프토모르가 말했다"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:200
@@ -460,11 +461,11 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr "사툴이 당신을 따뜻하게 해줄 수 있습니다, 준드리나! 정착지를 짓기 위해 가장 중요한 것은 건축 자재입니다. 여기 나무가 좀 있으니까 나무꾼들을 위한 집도 지어야 하고 물론 숲꾼들을 위한 집도 지어야하므로 나무가 부족하지는 않을 것입니다. 아, 그리고 우리는 제재소를 잊어서는 안됩니다. 대부분의 건물들은 통나무만으로 만들 수 없기 때문입니다. 더 튼튼한 건물들 또한 화강암을 필요로 하지만 이곳 북동쪽에는 충분한 양의 화강암이 있습니다. 우리는 채석장을 짓기만 하면 됩니다. 그리고 내 석공들은 즉시 일하러 갈 것입니다."
+msgstr "사툴이 당신을 따뜻하게 해줄 수 있습니다, 준드리나! 정착지를 짓기 위해 가장 중요한 것은 건축 자재들입니다. 여기 나무가 좀 있으니까 나무꾼들을 위한 집도 지어야 하고 물론 숲꾼들을 위한 집도 지어야하므로 나무가 부족하지는 않을 것입니다. 아, 그리고 우리는 제재소를 잊어서는 안됩니다. 대부분의 건물들은 통나무만으로 만들 수 없기 때문입니다. 더 튼튼한 건물들 또한 화강암을 필요로 하지만 이곳 북동쪽에는 충분한 양의 화강암이 있습니다. 우리는 채석장을 짓기만 하면 됩니다. 그리고 내 석공들은 즉시 일하러 갈 것입니다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:204
 msgid "Sidolus Speaks"
-msgstr "시도루스가 말한다"
+msgstr "시도루스가 말했다"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
@@ -474,7 +475,7 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr "사툴이 당신을 따뜻하게 해줄 수 있습니다, 준드리나! 로프토모어가 제안한 것에 동의합니다. 우리는 빨리 영토를 확장해야하기 때문에 좋은 건축 자재 공급이 필요합니다. 우리가 이 섬의 해안을 다 보지 못한 이상 저는 이 섬에서 안전하다고 느끼지 못할 것입니다. 저는 아틀란티스에서 좋은 사람들을 많이 데려왔습니다. 군대가 가능할 수도 있습니다. 우리는 살기 위해 약간의 주택이 필요합니다."
+msgstr "사툴이 당신을 따뜻하게 해줄 수 있습니다, 준드리나! 로프토모어가 제안한 것에 동의합니다. 우리는 빨리 영토를 확장해야하기 때문에 좋은 건축 자재들 공급이 필요합니다. 우리가 이 섬의 해안을 다 보지 못한 이상 저는 이 섬에서 안전하다고 느끼지 못할 것입니다. 저는 아틀란티스에서 좋은 사람들을 많이 데려왔습니다. 군대가 가능할 수도 있습니다. 우리는 살기 위해 약간의 주택이 필요합니다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:214
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:254
@@ -601,7 +602,7 @@ msgid ""
 "We offer to also produce the tabards for young soldiers and the golden "
 "tabards for officers for you in exchange. You will need them for sure as "
 "soon as you want to recruit new soldiers."
-msgstr "우리는 또한 젊은 병사를위한 휘장과 장교를 위한 황금 휘장도 대신 생산해 드리겠습니다. 새로운 군인을 모집하는 즉시 반드시 필요하게 될 것입니다."
+msgstr "우리는 또한 젊은 군인들을 위한 휘장과 장교를 위한 황금 휘장도 대신 생산해 드리겠습니다. 새로운 군인을 모집하는 즉시 반드시 필요하게 될 것입니다."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:275
@@ -645,7 +646,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr "사툴님께서 당신을 따뜻하게 해주길 빕니다, 준드리나. 당신은 우리 주변 산에서 자원을 채굴하는 것을 고려해 본 적이 있나요? 우리 건물에 쓸 석영과 다이아몬드가 부족합니다. 또한, 우리는 더 많은 철, 금, 그리고 특히 석탄을 사용할 수 있습니다. 만약 우리가 그 물품들의 충분한 공급을 찾는다면, 우리는 무기와 도구를 생산할 수 있습니다. 이것은 매우 큰 도움이 될 것입니다. 물론, 제련소, 무기 대장간, 갑옷 대장간, 도구 대장간 등이 필요합니다. 그리고 어쩌면 더 많이 필요할지도 모릅니다."
+msgstr "사툴님께서 당신을 따뜻하게 해주길 빕니다, 준드리나. 당신은 우리 주변 산에서 자원을 채굴하는 것을 고려해 본 적이 있나요? 우리 건물에 쓸 석영과 다이아몬드가 부족합니다. 또한, 우리는 더 많은 철, 금, 그리고 특히 석탄을 사용할 수 있습니다. 만약 우리가 그 물품들의 충분한 공급을 찾는다면, 우리는 무기와 도구를 생산할 수 있습니다. 이것은 매우 큰 도움이 될 것입니다. 물론, 제련소, 무기 제작소, 갑옷 제작소, 도구 제작소 등이 필요합니다. 그리고 어쩌면 더 많이 필요할지도 모릅니다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
@@ -668,14 +669,14 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr "우리 광산업이 일하기 시작했다는 소식을 받았습니다. 이제 무기를 만들어 내고, 막사를 짓고 군인들을 모집할 때가 되었음을 알리는 편지를 시돌로스에게 보내겠습니다. or 보냅니다."
+msgstr "우리 광산업이 일하기 시작했다는 소식을 받았습니다. 이제 무기를 만들어 내고, 병영를 짓고 군인들을 모집할 때가 되었음을 알리는 편지를 시돌로스에게 보내겠습니다. or 보냅니다."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:327
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr "오늘 저는 새로운 막사 앞에서 첫 번째 신병들이 모이는 것을 보았습니다. 모든 일이 잘 풀리면, 그들은 곧 훈련을 받게 될것입니다."
+msgstr "오늘 저는 새로운 병영 앞에서 첫 번째 신병들이 모이는 것을 보았습니다. 모든 일이 잘 풀리면, 그들은 곧 훈련을 받게 될것입니다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:333
 msgid "Jundlina Summons Sidolus"
@@ -742,7 +743,7 @@ msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
 "farm so that the horses can help with the heavy wares."
-msgstr "사람들이 붐비는 거리와 느린 교통에 대해 불평하고 있습니다. 우리는 도로에서 운송업자들을 도와야 합니다. 나는 말들이 무거운 물건에 도움을 줄 수 있도록 말농장을 짓기로 결정했습니다."
+msgstr "사람들이 붐비는 거리와 느린 교통에 대해 불평하고 있습니다. 우리는 땅길에서 짐꾼들을 도와야 합니다. 나는 말들이 무거운 물건에 도움을 줄 수 있도록 말농장을 짓기로 결정했습니다."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:370
@@ -750,7 +751,7 @@ msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
-msgstr "우리의 도로에서 짐을 싣는 또 다른 방법은 창고를 짓는 것입니다. 우리는 지금 그 산을 주장했는데, 모든 것을 비탈길을 오르내리지 않도록 고원에 창고를 두는 것이 좋을 것 같습니다."
+msgstr "우리의 땅길에서 짐을 싣는 또 다른 방법은 창고를 짓는 것입니다. 우리는 지금 그 산을 주장했는데, 모든 것을 비탈길을 오르내리지 않도록 고원에 창고를 두는 것이 좋을 것 같습니다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:382
 msgid "A Dangerous Discovery"
@@ -897,7 +898,7 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr "사툴을 칭찬하세요! 젊은 배만드는 사람 오스터가 해냈습니다. 우리에게는 3 척의 배가 있습니다. – 결코 더 튼튼한 배는 본 적이 없습니다. – 우리 모두와 몇 가지 물품을 실어 나르기에 충분한 공간이 있습니다. 그리고 이 구조물은 때맞춰 찾아왔습니다: 루타스는 이 섬의 나머지 부분을 삼키려 합니다. 물은 시간이 지나면서 물이 더 빨리 올라갑니다. 하지만 우리는 지금 탈출해서 더 먼 나라에서 다시 시작할 수 있습니다..."
+msgstr "사툴을 칭찬하세요! 젊은 배만드는 사람 오스터가 해냈습니다. 우리에게는 3 척의 배가 있습니다. – 결코 더 튼튼한 배는 본 적이 없습니다. – 우리 모두와 몇 가지 물품을 실어 나르기에 충분한 공간이 있습니다. 그리고 이 구조물은 때맞춰 찾아왔습니다: 루타스는 이 섬의 나머지 부분을 삼키려 합니다. 물은 시간이 지나면서 물이 더 빨리 올라갑니다. 하지만 우리는 지금 탈출해서 더 먼 나라에서 다시 시작할 수 있습니다…"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:475
@@ -926,8 +927,3 @@ msgstr "잃어버린 건물!"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
 msgid "We lost a building to the ocean!"
 msgstr "우리는 바다에 건물을 잃었다!"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
