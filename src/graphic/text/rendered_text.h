@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "base/multithreading.h"
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/image.h"
@@ -144,6 +145,8 @@ struct RenderedText {
 	/// Draw the rects without cropping. 'position' and 'align' are used to control the overall
 	/// drawing position
 	void draw(RenderTarget& dst, const Vector2i& position, UI::Align align = UI::Align::kLeft) const;
+
+	static MutexLockHandler text_renderer_mutex;
 
 private:
 	/// Helper function for draw(). Blits the rect's background color and images. The rect will be

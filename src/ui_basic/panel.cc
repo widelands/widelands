@@ -213,7 +213,7 @@ int Panel::do_run() {
 	// has to be run by the same thread that took care of the OpenGL initialization!
 	pthread_t thread;
 	if (int i = pthread_create(&thread, NULL, &Panel::runthread, this)) {
-		throw wexception("PThread creation failed with error code %d", i);
+		throw wexception("PThread creation for Panel failed with error code %d", i);
 	}
 
 	MutexLockHandler& mutex_handler = MutexLockHandler::push();

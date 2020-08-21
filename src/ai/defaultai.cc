@@ -25,6 +25,7 @@
 
 #include "ai/ai_hints.h"
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
@@ -227,6 +228,7 @@ DefaultAI::~DefaultAI() {
  * General behaviour is defined here.
  */
 void DefaultAI::think() {
+	MutexLock m;
 
 	if (tribe_ == nullptr) {
 		late_initialization();

@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H
 #define WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H
 
+#include <memory>
+
 #include "ai/computer_player.h"
 #include "logic/game_controller.h"
 #include "logic/player_end_result.h"
@@ -42,6 +44,10 @@ public:
 	                   Widelands::PlayerEndResult result,
 	                   const std::string& info) override;
 
+	// Function signature prescribed by the PThread API.
+	// The argument must be a pointer to the AIData object. Returns nullptr.
+	static void* runthread(void*);
+
 private:
 	Widelands::Game& game_;
 	bool use_ai_;
@@ -51,7 +57,13 @@ private:
 	bool paused_;
 	uint32_t player_cmdserial_;
 	Widelands::PlayerNumber local_;
-	std::vector<ComputerPlayer*> computerplayers_;
+
+	struct AIData {
+		std::shared_ptr<ComputerPlayer> ai = nullptr;
+		bool running = false;
+		pthread_t thread_id;
+	};
+	std::vector<std::shared_ptr<AIData>> computerplayers_;
 };
 
 #endif  // end of include guard: WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H

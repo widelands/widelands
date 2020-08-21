@@ -24,7 +24,7 @@
 
 #include <pthread.h>
 
-// This class is meant to be used ONLY by UI::Panel::do_run()
+// Wrapper for a mutex that can be locked and unlocked using a MutexLock
 struct MutexLockHandler {
 	explicit MutexLockHandler();
 	~MutexLockHandler() {
@@ -34,9 +34,12 @@ struct MutexLockHandler {
 		return mutex_.get();
 	}
 
+	// get the global mutex
+	static MutexLockHandler& get();
+
+	// these two functions are intended to be used ONLY by UI::Panel::do_run
 	static MutexLockHandler& push();
 	static void pop(MutexLockHandler&);
-	static MutexLockHandler& get();
 
 private:
 	std::shared_ptr<pthread_mutex_t> mutex_;
@@ -58,6 +61,8 @@ private:
  *         critical_code();
  *     }
  *     non_critical_code();
+ * Note that mutexes are recursive, that is, a thread may lock a mutex several times,
+ * but needs to free it the same number of times before another thread can claim it.
  * Some good explanations here: https://stackoverflow.com/questions/14888027/mutex-lock-threads
  */
 struct MutexLock {

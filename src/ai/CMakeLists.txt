@@ -27,6 +27,7 @@ wl_library(ai
     base_i18n
     base_log
     base_macros
+    base_multithreading
     base_time_string
     economy
     logic

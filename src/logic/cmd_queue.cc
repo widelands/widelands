@@ -94,6 +94,10 @@ void CmdQueue::enqueue(Command* const cmd) {
 		ci.serial = 0;
 	}
 
+if (cmd->duetime() < game_.get_gametime()) {
+log("NOCOM Enqueuing a command for %u at %u\n", cmd->duetime(), game_.get_gametime());
+}
+
 	cmds_[cmd->duetime() % kCommandQueueBucketSize].insert(ci);
 	++ncmds_;
 }
@@ -102,10 +106,12 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 	uint32_t const final = game_time_var + interval;
 
 	while (game_time_var < final) {
+		MutexLock m;
+
 		std::multiset<CmdItem>& current_cmds = cmds_[game_time_var % kCommandQueueBucketSize];
 
 		while (!current_cmds.empty()) {
-			std::unique_ptr<MutexLock> m(new MutexLock());
+			// std::unique_ptr<MutexLock> m(new MutexLock());
 
 			const auto item = current_cmds.begin();
 			Command& c = *item->cmd;
@@ -114,9 +120,12 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 			}
 			current_cmds.erase(item);
 			--ncmds_;
+/* if (game_time_var != c.duetime()) {
+log("NOCOM: ERROR: game_time_var (%u) != c.duetime (%u)\n", game_time_var, c.duetime());
+} */
 			assert(game_time_var == c.duetime());
 			// free the mutex the moment we don't need it any more
-			m.reset();
+			// m.reset();
 
 			if (dynamic_cast<GameLogicCommand*>(&c)) {
 				StreamWrite& ss = game_.syncstream();
@@ -129,6 +138,8 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 
 			delete &c;
 		}
+
+		// MutexLock m;
 		++game_time_var;
 	}
 

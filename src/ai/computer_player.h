@@ -29,6 +29,9 @@
 // that the AI names don't contain the separator that's used to parse the strings there.
 #define AI_NAME_SEPARATOR "|"
 
+// The number of milliseconds realtime how frequently an AI wants to be allowed to think()
+constexpr uint32_t kAIThinkDelay = 50;
+
 namespace Widelands {
 class Game;
 }  // namespace Widelands

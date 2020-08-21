@@ -60,6 +60,7 @@ wl_library(logic_game_controller
   USES_SDL2
   DEPENDS
     ai
+    base_multithreading
     logic
     logic_commands
     logic_game_settings
