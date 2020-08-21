@@ -706,10 +706,7 @@ const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tr
 	if (!Widelands::tribe_exists(tribename)) {
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}
-	Notifications::publish(
-	   NoteMapObjectDescription(tribename, NoteMapObjectDescription::LoadType::kObject));
-	const Tribes& tribes = get_egbase(L).tribes();
-	return *tribes.get_tribe_descr(tribes.tribe_index(tribename));
+	return *get_egbase(L).tribes().get_tribe_descr(get_egbase(L).mutable_tribes()->load_tribe(tribename));
 }
 
 }  // namespace
@@ -774,6 +771,7 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	if (!mo) {
 		return 0;
 	}
+
 	switch (mo->descr().type()) {
 	case MapObjectType::CRITTER:
 		return CAST_TO_LUA(Bob);
@@ -1493,8 +1491,12 @@ int LuaMap::place_immovable(lua_State* const L) {
 	}
 
 	// The immovable type might not have been loaded yet
-	Notifications::publish(
-	   NoteMapObjectDescription(objname, NoteMapObjectDescription::LoadType::kObject));
+	try {
+		Notifications::publish(
+		   NoteMapObjectDescription(objname, NoteMapObjectDescription::LoadType::kObject));
+	} catch (const Widelands::GameDataError&) {
+		report_error(L, "Unknown immovable <%s>", objname.c_str());
+	}
 
 	EditorGameBase& egbase = get_egbase(L);
 	BaseImmovable* m = nullptr;
@@ -1669,10 +1671,10 @@ void LuaTribeDescription::__persist(lua_State* L) {
 void LuaTribeDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	Notifications::publish(
-	   NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kObject));
-	const Tribes& tribes = get_egbase(L).tribes();
-	set_description_pointer(tribes.get_tribe_descr(tribes.tribe_index(name)));
+	if (!Widelands::tribe_exists(name)) {
+		report_error(L, "Tribe '%s' does not exist", name.c_str());
+	}
+	set_description_pointer(get_egbase(L).tribes().get_tribe_descr(get_egbase(L).mutable_tribes()->load_tribe(name)));
 }
 
 /*
@@ -4108,6 +4110,7 @@ int LuaMapObject::get_serial(lua_State* L) {
 int LuaMapObject::get_descr(lua_State* L) {
 	const MapObjectDescr* desc = &get(L, get_egbase(L))->descr();
 	assert(desc != nullptr);
+
 	switch (desc->type()) {
 	case MapObjectType::BUILDING:
 		return CAST_TO_LUA(BuildingDescr, LuaBuildingDescription);
@@ -6725,9 +6728,12 @@ int LuaField::get_terr(lua_State* L) {
 int LuaField::set_terr(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
-	const DescriptionIndex td = egbase.mutable_world()->load_terrain(name);
-
-	egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
+	try {
+		const DescriptionIndex td = egbase.mutable_world()->load_terrain(name);
+		egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
+	} catch (const Widelands::GameDataError& e) {
+		report_error(L, "set_terr: %s", e.what());
+	}
 
 	lua_pushstring(L, name);
 	return 1;
@@ -6741,9 +6747,12 @@ int LuaField::get_terd(lua_State* L) {
 int LuaField::set_terd(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
-	const DescriptionIndex td = egbase.mutable_world()->load_terrain(name);
-
-	egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
+	try {
+		const DescriptionIndex td = egbase.mutable_world()->load_terrain(name);
+		egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
+	} catch (const Widelands::GameDataError& e) {
+		report_error(L, "set_terd: %s", e.what());
+	}
 
 	lua_pushstring(L, name);
 	return 1;
