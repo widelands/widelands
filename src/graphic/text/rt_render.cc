@@ -580,15 +580,15 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 				// the line.
 				space_total = line_height - n->height();
 				space_top = biggest_hotspot - n->hotspot_y();
-				space_bottom = space - space_top;
+				space_bottom = space_total - space_top;
 			}
-			if (!space || n->get_floating() != RenderNode::Floating::kNone) {
+			if (!space_total || n->get_floating() != RenderNode::Floating::kNone) {
 				continue;
 			}
 			if (n->valign() == UI::Align::kTop) {
 				n->set_y(n->y() - space_top);
 			} else if (n->valign() == UI::Align::kCenter) {
-				n->set_y(n->y() - space_top + space / 2);
+				n->set_y(n->y() - space_top + space_total / 2);
 			} else if (n->valign() == UI::Align::kBottom) {
 				n->set_y(n->y() + space_bottom);
 			}
