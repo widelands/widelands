@@ -624,7 +624,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				bobname = "duck";
 				break;
 			case 0x09:
-				bobname = "elk";
+				bobname = "moose";
 				break;  // original "donkey"
 			default:
 				cerr << "Unsupported animal: " << static_cast<int32_t>(section[i]) << endl;
