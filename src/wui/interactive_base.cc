@@ -780,13 +780,17 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
 			rendered_text = UI::g_fh->render(
-			   as_richtext_paragraph((boost::format("DISPLAY: %5.1f fps (avg: %5.1f fps)") % (1000.0 / frametime_) % average_fps()).str(),
+			   as_richtext_paragraph((boost::format("DISPLAY: %5.1f fps (avg: %5.1f fps)") %
+			                          (1000.0 / frametime_) % average_fps())
+			                            .str(),
 			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
 			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 			const int16_t y = rendered_text->height() + 8;
 
 			rendered_text = UI::g_fh->render(
-			   as_richtext_paragraph((boost::format("LOGIC: %5.1f fps (avg: %5.1f fps)") % (1000.0 / frametime_logic_) % average_fps_logic()).str(),
+			   as_richtext_paragraph((boost::format("LOGIC: %5.1f fps (avg: %5.1f fps)") %
+			                          (1000.0 / frametime_logic_) % average_fps_logic())
+			                            .str(),
 			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
 			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, y));
 		}
