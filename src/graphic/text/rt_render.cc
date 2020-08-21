@@ -253,11 +253,14 @@ public:
 	UI::Align halign() const {
 		return halign_;
 	}
-	virtual UI::Align valign() const {
+	UI::Align valign() const {
 		return valign_;
 	}
 	void set_valign(UI::Align gvalign) {
 		valign_ = gvalign;
+	}
+	virtual bool align_to_baseline() const {
+		return false;
 	}
 	void set_x(int32_t nx) {
 		x_ = nx;
@@ -536,12 +539,18 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 		uint16_t biggest_hotspot = fit_line(w, p, &nodes_in_line, trim_spaces);
 
 		int line_height = 0;
+		uint16_t biggest_text_ascent = 0;
+		int biggest_text_descent = 0;
 		int line_start = INFINITE_WIDTH;
 		// Compute real line height and width, taking into account alignment
 		for (const auto& n : nodes_in_line) {
 			if (n->get_floating() == RenderNode::Floating::kNone) {
 				line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
 				n->set_y(h_ + biggest_hotspot - n->hotspot_y());
+				if (n->align_to_baseline()) {
+					biggest_text_ascent = std::max(biggest_text_ascent, n->hotspot_y());
+					biggest_text_descent = std::max(biggest_text_descent, n->height() - n->hotspot_y());
+				}
 			}
 			if (line_start >= INFINITE_WIDTH || n->x() < line_start) {
 				line_start = n->x() - p.left;
@@ -551,20 +560,27 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 
 		// Go over again and adjust position for VALIGN
 		for (const auto& n : nodes_in_line) {
-			int space = line_height - n->height();
-			int space_top = biggest_hotspot - n->hotspot_y();
-			int space_bottom = space - space_top;
-			if (!space) {
+			int space_top;
+			int space_bottom;
+			int space;
+			if (n->align_to_baseline()) {
+				space_top = biggest_hotspot - biggest_text_ascent;
+				space_bottom = line_height - biggest_hotspot - biggest_text_descent;
+				space = space_top + space_bottom;
+			} else {
+				space = line_height - n->height();
+				space_top = biggest_hotspot - n->hotspot_y();
+				space_bottom = space - space_top;
+			}
+			if (!space || n->get_floating() != RenderNode::Floating::kNone) {
 				continue;
 			}
-			if (n->get_floating() == RenderNode::Floating::kNone) {
-				if (n->valign() == UI::Align::kTop) {
-					n->set_y(n->y() - space_top);
-				} else if (n->valign() == UI::Align::kCenter) {
-					n->set_y(n->y() - space_top + space/2);
-				} else if (n->valign() == UI::Align::kBottom) {
-					n->set_y(n->y() + space_bottom);
-				}
+			if (n->valign() == UI::Align::kTop) {
+				n->set_y(n->y() - space_top);
+			} else if (n->valign() == UI::Align::kCenter) {
+				n->set_y(n->y() - space_top + space/2);
+			} else if (n->valign() == UI::Align::kBottom) {
+				n->set_y(n->y() + space_bottom);
 			}
 		}
 		rv->insert(rv->end(), nodes_in_line.begin(), nodes_in_line.end());
@@ -605,9 +621,9 @@ public:
 	uint16_t height() const override {
 		return h_ + nodestyle_.spacing;
 	}
-	/*UI::Align valign() const override {
-		return UI::Align::kBottom;
-	}*/
+	bool align_to_baseline() const override {
+		return true;
+	}
 	uint16_t hotspot_y() const override;
 	const std::vector<Reference> get_references() override {
 		std::vector<Reference> rv;
