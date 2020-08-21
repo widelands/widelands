@@ -434,7 +434,6 @@ seed
          "grow=umbrella_red_wasteland_old",
      },
 */
-// NOCOM convert to percent
 ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
                                    const ImmovableDescr& descr) {
 	if (arguments.size() != 2) {

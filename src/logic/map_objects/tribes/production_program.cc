@@ -1748,10 +1748,11 @@ train
 
    :arg int level: The level that the soldier will receive for the given training attribute.
 
-Increases a soldier's training attribute to the given level. It is mandatory to call 'checksoldier'
-before calling this action to ensure that an appropriate soldier will be present at the site.
+.. note:: This action is only available to :ref:`training sites
+   <lua_tribes_buildings_trainingsites>`.
 
-Example:
+Increases a soldier's training attribute to the given level. It is mandatory to call 'checksoldier'
+before calling this action to ensure that an appropriate soldier will be present at the site. Example:
 
 .. code-block:: lua
 
