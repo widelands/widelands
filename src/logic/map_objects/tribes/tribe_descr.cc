@@ -129,6 +129,30 @@ void walk_tribe_immovables(
 		}
 	}
 }
+
+// Read helptext from Lua table
+std::string read_helptext(Widelands::MapObjectDescr* descr, const std::string& msgctxt, const LuaTable& table) {
+	if (table.has_key(descr->name())) {
+		// Concatenate text from entries with the localized sentence joiner
+		std::unique_ptr<LuaTable> helptext_table = table.get_table(descr->name());
+		std::set<int> helptext_keys = helptext_table->keys<int>();
+		if (!helptext_keys.empty()) {
+			auto it = helptext_keys.begin();
+			std::string helptext = pgettext_expr(msgctxt.c_str(), helptext_table->get_string(*it).c_str());
+			++it;
+			for (; it != helptext_keys.end(); ++it) {
+				helptext = i18n::join_sentences(helptext, pgettext_expr(msgctxt.c_str(), helptext_table->get_string(*it).c_str()));
+			}
+			return helptext;
+		} else {
+			log("WARNING: Empty helptext defined for '%s'", descr->name().c_str());
+			return "";
+		}
+	} else {
+		log("WARNING: No helptext defined for '%s'", descr->name().c_str());
+		return "";
+	}
+}
 }  // namespace
 
 namespace Widelands {
@@ -324,8 +348,6 @@ void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
 void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, std::unique_ptr<LuaTable> helptexts) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("wares_order");
 
-    // NOCOM load helptexts for interactive player only?
-    // NOCOM test website encyclopedia
     i18n::Textdomain td("tribes_encyclopedia");
     const std::string ware_msgctxt(name() + "_ware");
 
@@ -351,26 +373,7 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, std::unique_p
 
                 // Add helptext
                 if (helptexts) {
-                    if (helptexts->has_key(ware_name)) {
-                        // Assemble localized helptext
-                        std::unique_ptr<LuaTable> ware_helptext_table = helptexts->get_table(ware_name);
-                        std::set<int> helptext_keys = ware_helptext_table->keys<int>();
-                        if (!helptext_keys.empty()) {
-                            auto it = helptext_keys.begin();
-                            std::string helptext = pgettext_expr(ware_msgctxt.c_str(), ware_helptext_table->get_string(*it).c_str());
-                            ++it;
-                            for (; it != helptext_keys.end(); ++it) {
-                                helptext = i18n::join_sentences(helptext, pgettext_expr(ware_msgctxt.c_str(), ware_helptext_table->get_string(*it).c_str()));
-                            }
-                            ware_descr->set_helptext(name(), helptext);
-                        } else {
-                            log("WARNING: Empty helptext defined for ware %s", ware_name.c_str());
-                            ware_descr->set_helptext(name(), "");
-                        }
-                    } else {
-                        log("WARNING: No helptext defined for ware %s", ware_name.c_str());
-                        ware_descr->set_helptext(name(), "");
-                    }
+					ware_descr->set_helptext(name(), read_helptext(ware_descr, ware_msgctxt, *helptexts));
                 }
 
                 // Add to tribe

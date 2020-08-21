@@ -189,21 +189,7 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* ou
 		json_ware->add_string("name", ware.name());
 		json_ware->add_string("descname", ware.descname());
 		json_ware->add_string("icon", ware.icon_filename());
-
-		// Helptext
-		try {
-			std::unique_ptr<LuaTable> table(
-			   egbase.lua().run_script("tribes/scripting/mapobject_info/ware_helptext.lua"));
-			std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-			cr->push_arg(tribe.name());
-			cr->push_arg(ware.helptext_script());
-			cr->resume();
-			std::string help_text = cr->pop_string();
-			boost::algorithm::trim(help_text);
-			json_ware->add_string("helptext", help_text);
-		} catch (LuaError& err) {
-			json_ware->add_string("helptext", err.what());
-		}
+		json_ware->add_string("helptext", ware.get_helptext(tribe.name()));
 	}
 
 	json->write_to_file(
