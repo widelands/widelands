@@ -35,4 +35,5 @@ wl_library(ai
     logic_commands
     logic_map
     logic_map_objects
+  USES_SDL2
 )

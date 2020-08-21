@@ -19,7 +19,10 @@
 
 #include "ai/computer_player.h"
 
+#include <SDL_timer.h>
+
 #include "ai/defaultai.h"
+#include "base/multithreading.h"
 
 ComputerPlayer::ComputerPlayer(Widelands::Game& g, Widelands::PlayerNumber const pid)
    : game_(g), player_number_(pid) {
@@ -77,4 +80,30 @@ const ComputerPlayer::Implementation* ComputerPlayer::get_implementation(const s
 		}
 	}
 	return vec[0];
+}
+
+// The number of milliseconds realtime how frequently an AI wants to be allowed to think()
+constexpr uint32_t kThinkDelay = 200;
+
+void* ComputerPlayer::runthread(void* cp) {
+	assert(cp);
+	ComputerPlayer& ai = *static_cast<ComputerPlayer*>(cp);
+	uint32_t next_time = SDL_GetTicks() + kThinkDelay;
+	for (;;) {
+		const uint32_t time = SDL_GetTicks();
+		if (time >= next_time) {
+			MutexLock m;
+			if (!m.is_valid()) {
+				// end of game
+				break;
+			}
+			ai.think();
+		}
+		const int32_t delay = next_time - SDL_GetTicks();
+		if (delay > 0) {
+			SDL_Delay(delay);
+		}
+	}
+	pthread_exit(NULL);
+	return nullptr;
 }

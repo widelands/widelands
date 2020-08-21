@@ -82,31 +82,12 @@ void SinglePlayerGameController::think() {
 				   ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p));
 			} else if (!computerplayers_[p - 1]->running) {
 				computerplayers_[p - 1]->running = true;
-				if (int i = pthread_create(&computerplayers_[p - 1]->thread_id, NULL, &SinglePlayerGameController::runthread, computerplayers_[p - 1].get())) {
+				if (int i = pthread_create(&computerplayers_[p - 1]->thread_id, NULL, &ComputerPlayer::runthread, computerplayers_[p - 1]->ai.get())) {
 					throw wexception("PThread creation for AI %u failed with error code %d", static_cast<unsigned>(p), i);
 				}
 			}
 		}
 	}
-}
-
-void* SinglePlayerGameController::runthread(void* aidata) {
-	assert(aidata);
-	AIData& ai = *static_cast<AIData*>(aidata);
-	uint32_t next_time = SDL_GetTicks() + kAIThinkDelay;
-	for (;;) {
-		const uint32_t time = SDL_GetTicks();
-		if (time >= next_time) {
-			MutexLock m;
-			ai.ai->think();
-		}
-		const int32_t delay = next_time - SDL_GetTicks();
-		if (delay > 0) {
-			SDL_Delay(delay);
-		}
-	}
-	// Thread will be killed when the game ends
-	NEVER_HERE();
 }
 
 void SinglePlayerGameController::send_player_command(Widelands::PlayerCommand* pc) {

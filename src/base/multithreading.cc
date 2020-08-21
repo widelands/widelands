@@ -26,20 +26,21 @@
 
 MutexLock::MutexLock() : MutexLock(MutexLockHandler::get()) {
 }
-MutexLock::MutexLock(MutexLockHandler& m) : mutex_(m.mutex()) {
-	pthread_mutex_lock(mutex_);
+MutexLock::MutexLock(MutexLockHandler* m) : mutex_(m ? m->mutex() : nullptr) {
+	if (mutex_) {
+		pthread_mutex_lock(mutex_);
+	}
 }
 MutexLock::~MutexLock() {
-	pthread_mutex_unlock(mutex_);
+	if (mutex_) {
+		pthread_mutex_unlock(mutex_);
+	}
 }
 
 static std::list<MutexLockHandler> handlers;
 
-MutexLockHandler& MutexLockHandler::get() {
-	if (handlers.empty()) {
-		throw wexception("MutexLockHandler::get(): Stack is empty");
-	}
-	return handlers.back();
+MutexLockHandler* MutexLockHandler::get() {
+	return handlers.empty() ? nullptr : &handlers.back();
 }
 
 MutexLockHandler& MutexLockHandler::push() {

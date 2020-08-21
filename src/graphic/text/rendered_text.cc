@@ -123,7 +123,7 @@ RenderedRect::DrawMode RenderedRect::mode() const {
 MutexLockHandler RenderedText::text_renderer_mutex;
 
 int RenderedText::width() const {
-	MutexLock m(text_renderer_mutex);
+	MutexLock m(&text_renderer_mutex);
 	int result = 0;
 	for (const auto& rect : rects) {
 		result = std::max(result, rect->x() + rect->width());
@@ -131,7 +131,7 @@ int RenderedText::width() const {
 	return result;
 }
 int RenderedText::height() const {
-	MutexLock m(text_renderer_mutex);
+	MutexLock m(&text_renderer_mutex);
 	int result = 0;
 	for (const auto& rect : rects) {
 		result = std::max(result, rect->y() + rect->height());
@@ -144,7 +144,7 @@ void RenderedText::draw(RenderTarget& dst,
                         const Recti& region,
                         Align align,
                         CropMode cropmode) const {
-	MutexLock m(text_renderer_mutex);
+	MutexLock m(&text_renderer_mutex);
 
 	// Un-const the position and adjust for alignment according to region width
 	Vector2i aligned_pos(position.x, position.y);
@@ -180,7 +180,7 @@ void RenderedText::blit_rect(RenderTarget& dst,
                              const Recti& region,
                              Align align,
                              CropMode cropmode) const {
-	MutexLock m(text_renderer_mutex);
+	MutexLock m(&text_renderer_mutex);
 	const Vector2i blit_point(aligned_position.x + rect.x(), aligned_position.y + rect.y());
 
 	// Draw Solid background Color
@@ -219,7 +219,7 @@ void RenderedText::blit_rect(RenderTarget& dst,
 }
 
 void RenderedText::draw(RenderTarget& dst, const Vector2i& position, UI::Align align) const {
-	MutexLock m(text_renderer_mutex);
+	MutexLock m(&text_renderer_mutex);
 	draw(dst, position, Recti(0, 0, width(), height()), align);
 }
 
@@ -231,7 +231,7 @@ void RenderedText::blit_cropped(RenderTarget& dst,
                                 const RenderedRect& rect,
                                 const Recti& region,
                                 Align align) const {
-	MutexLock m(text_renderer_mutex);
+	MutexLock m(&text_renderer_mutex);
 
 	int blit_width = rect.width();
 	int cropped_left = 0;

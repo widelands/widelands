@@ -29,9 +29,6 @@
 // that the AI names don't contain the separator that's used to parse the strings there.
 #define AI_NAME_SEPARATOR "|"
 
-// The number of milliseconds realtime how frequently an AI wants to be allowed to think()
-constexpr uint32_t kAIThinkDelay = 50;
-
 namespace Widelands {
 class Game;
 }  // namespace Widelands
@@ -93,6 +90,10 @@ struct ComputerPlayer {
 	 * Get the best matching implementation for this name.
 	 */
 	static const Implementation* get_implementation(const std::string& name);
+
+	// Function signature prescribed by the PThread API.
+	// The argument must be a pointer to the ComputerPlayer object. Returns nullptr.
+	static void* runthread(void*);
 
 private:
 	Widelands::Game& game_;

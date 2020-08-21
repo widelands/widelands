@@ -184,6 +184,13 @@ private:
 	bool internet_;
 	bool forced_pause_;  // triggered by the forcePause host chat command, see HostChatProvider in
 	                     // gamehost.cc
+
+	struct AIData {
+		bool running = false;
+		pthread_t thread_id;
+	};
+	size_t nr_ais_;
+	std::unique_ptr<AIData[]> threads_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMEHOST_H

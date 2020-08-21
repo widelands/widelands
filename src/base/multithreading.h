@@ -34,8 +34,8 @@ struct MutexLockHandler {
 		return mutex_.get();
 	}
 
-	// get the global mutex
-	static MutexLockHandler& get();
+	// get the global mutex, if any
+	static MutexLockHandler* get();
 
 	// these two functions are intended to be used ONLY by UI::Panel::do_run
 	static MutexLockHandler& push();
@@ -67,8 +67,11 @@ private:
  */
 struct MutexLock {
 	explicit MutexLock();                   // claims the global mutex
-	explicit MutexLock(MutexLockHandler&);  // claims a specified other mutex
+	explicit MutexLock(MutexLockHandler*);  // claims a specified other mutex
 	~MutexLock();
+	bool is_valid() const {
+		return mutex_ != nullptr;
+	}
 private:
 	pthread_mutex_t* mutex_;  // not owned
 };

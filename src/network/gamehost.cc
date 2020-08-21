@@ -552,6 +552,15 @@ GameHost::~GameHost() {
 		reaper();
 	}
 
+	if (threads_) {
+		for (size_t i = 0; i < nr_ais_; ++i) {
+			if (threads_[i].running) {
+				threads_[i].running = false;
+				pthread_cancel(threads_[i].thread_id);
+			}
+		}
+	}
+
 	// close all open sockets
 	d->net.reset();
 	d->promoter.reset();
@@ -767,8 +776,19 @@ void GameHost::think() {
 			}
 		}
 
-		for (ComputerPlayer* cp : d->computerplayers) {
-			cp->think();
+		if (!threads_) {
+			nr_ais_ = d->computerplayers.size();
+			threads_.reset(new AIData[nr_ais_]);
+		} else {
+			// delayed initialization, see comment in SinglePlayerGameController::think
+			for (size_t i = 0; i < nr_ais_; ++i) {
+				if (!threads_[i].running) {
+					threads_[i].running = true;
+					if (int e = pthread_create(&threads_[i].thread_id, NULL, &ComputerPlayer::runthread, d->computerplayers[i])) {
+						throw wexception("PThread creation for AI no. %" PRIuS " failed with error code %d", i, e);
+					}
+				}
+			}
 		}
 	}
 }

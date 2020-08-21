@@ -44,10 +44,6 @@ public:
 	                   Widelands::PlayerEndResult result,
 	                   const std::string& info) override;
 
-	// Function signature prescribed by the PThread API.
-	// The argument must be a pointer to the AIData object. Returns nullptr.
-	static void* runthread(void*);
-
 private:
 	Widelands::Game& game_;
 	bool use_ai_;
