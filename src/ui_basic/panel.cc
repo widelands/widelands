@@ -261,10 +261,7 @@ void Panel::set_size(const int nw, const int nh) {
 		return;
 	}
 
-	assert(nw >= 0);
-	assert(nh >= 0);
-
-	// Make sure that we never get negative width/height in release builds.
+	// Make sure that we never get negative width/height.
 	w_ = std::max(0, nw);
 	h_ = std::max(0, nh);
 
@@ -311,7 +308,7 @@ void Panel::set_desired_size(int w, int h) {
 	assert(w >= 0);
 	assert(h >= 0);
 
-	// Make sure that we never get negative width/height in release builds.
+	// Make sure that we never get negative width/height.
 	desired_w_ = std::max(0, w);
 	desired_h_ = std::max(0, h);
 	if (!get_layout_toplevel() && parent_) {
