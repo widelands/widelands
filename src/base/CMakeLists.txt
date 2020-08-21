@@ -89,3 +89,11 @@ wl_library(base_math
     math.h
     math.cc
 )
+
+wl_library(base_multithreading
+  SRCS
+    multithreading.h
+    multithreading.cc
+  DEPENDS
+    base_exceptions
+)

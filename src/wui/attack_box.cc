@@ -24,6 +24,7 @@
 #include <SDL_mouse.h>
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/soldier.h"
 
@@ -102,7 +103,7 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
  */
 void AttackBox::think() {
 	if ((player_->egbase().get_gametime() - lastupdate_) > kUpdateTimeInGametimeMs) {
-		Widelands::MutexLock m(player_->egbase());
+		MutexLock m();
 		update_attack(false);
 	}
 }

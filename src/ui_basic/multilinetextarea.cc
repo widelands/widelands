@@ -147,7 +147,7 @@ void MultilineTextarea::layout() {
  * Redraw the textarea
  */
 void MultilineTextarea::draw(RenderTarget& dst) {
-	if (text_.empty()) {
+	if (text_.empty() || !rendered_text_.get()) {
 		return;
 	}
 	int anchor = 0;

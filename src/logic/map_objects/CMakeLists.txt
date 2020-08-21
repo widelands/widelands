@@ -138,6 +138,7 @@ wl_library(logic_map_objects
     ai_hints
     base_exceptions
     base_geometry
+    base_multithreading
     base_i18n
     base_log
     base_macros

@@ -1779,8 +1779,11 @@ Renderer::layout(const std::string& text, uint16_t width, bool is_rtl, const Tag
 	return nodes[0];
 }
 
+MutexLockHandler Renderer::mutex_;
+
 std::shared_ptr<const UI::RenderedText>
 Renderer::render(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags) {
+	MutexLock m(mutex_);
 	std::shared_ptr<RenderNode> node(layout(text, width, is_rtl, allowed_tags));
 	return std::shared_ptr<const UI::RenderedText>(node->render(texture_cache_));
 }

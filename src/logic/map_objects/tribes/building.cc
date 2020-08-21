@@ -24,6 +24,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/input_queue.h"
@@ -413,7 +414,7 @@ derived class' init.
 ===============
 */
 bool Building::init(EditorGameBase& egbase) {
-	Widelands::MutexLock m(egbase);
+	MutexLock m;
 
 	PlayerImmovable::init(egbase);
 

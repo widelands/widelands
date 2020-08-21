@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -104,7 +105,7 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 		std::multiset<CmdItem>& current_cmds = cmds_[game_time_var % kCommandQueueBucketSize];
 
 		while (!current_cmds.empty()) {
-			std::unique_ptr<Widelands::MutexLock> m(new Widelands::MutexLock(game_));
+			std::unique_ptr<MutexLock> m(new MutexLock());
 
 			const auto item = current_cmds.begin();
 			Command& c = *item->cmd;

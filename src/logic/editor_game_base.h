@@ -219,11 +219,6 @@ public:
 
 	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
-	// While you *can* use those functions directly,
-	// it is recommended to use a MutexLock object instead.
-	void mutex_lock();
-	void mutex_unlock();
-
 private:
 	/// Common function for create_critter and create_ship.
 	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
@@ -296,35 +291,6 @@ private:
 	void delete_tempfile();
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
-};
-
-/* This struct handles the global mutex. The logic and drawing code are executed in
- * parallel, but some functions assume that the game state doesn't change while they
- * are executing. Create a MutexLock when entering such a critical section. This will
- * suspend the current thread until the lock is available, then claim the lock for
- * this thread. You HAVE TO ensure the MutexLock's deletion as soon as you leave the
- * section, otherwise other threads that need the lock will not be able to resume!
- * In order to prevent the threads suspending each other for too long, claim the
- * lock only for the shortest pieces of code possible.
- * The intended usage is:
- *     non_critical_code();
- *     {
- *         MutexLock m(egbase);
- *         critical_code();
- *     }
- *     non_critical_code();
- * Some good explanations here: https://stackoverflow.com/questions/14888027/mutex-lock-threads
- */
-struct MutexLock {
-	explicit MutexLock(EditorGameBase& e) : egbase_(e) {
-		egbase_.mutex_lock();
-	}
-	~MutexLock() {
-		egbase_.mutex_unlock();
-	}
-	DISALLOW_COPY_AND_ASSIGN(MutexLock);
-private:
-	EditorGameBase& egbase_;
 };
 
 #define iterate_players_existing(p, nr_players, egbase, player)                                    \

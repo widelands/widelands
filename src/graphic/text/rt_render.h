@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "base/multithreading.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "graphic/text/font_set.h"
@@ -70,6 +71,8 @@ public:
 private:
 	std::shared_ptr<RenderNode>
 	layout(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags);
+
+	static MutexLockHandler mutex_;
 
 	std::unique_ptr<FontCache> font_cache_;
 	std::unique_ptr<Parser> parser_;

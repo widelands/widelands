@@ -42,14 +42,14 @@ are performed in parallel.
 
 Some pieces of the code assume that the game state does not change while they
 are executing. For this, use the `struct MutexLock` (see documentation in
-`logic/editor_game_base.h`). Take care to lock the global mutex only for as
-long as really necessary, otherwise you defeat the whole point of
-multithreading. When in doubt, first write your code without obtaining a
-lock, and if it crashes, create a lock and extend its scope one line at a
-time until you can no longer reproduce the crash.
+`base/multithreading.h`). Take care to lock a mutex only for as long as
+really necessary, otherwise you defeat the whole point of multithreading.
+When in doubt, first write your code without obtaining a lock, and if it
+crashes, create a lock and extend its scope one line at a time until you
+can no longer reproduce the crash.
 
 If you ever notice that the user interface is responding slowly or hangs,
-you have created a lock with far too large a scope.
+you have probably created a lock with far too large a scope.
 
 Static variables that may be referenced by multiple threads are a no-go.
 
