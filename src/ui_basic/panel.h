@@ -326,6 +326,8 @@ protected:
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
+	virtual Panel* get_open_dropdown();
+
 private:
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;

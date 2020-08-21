@@ -173,6 +173,10 @@ void BaseDropdown::set_height(int height) {
 	layout();
 }
 
+UI::Panel* BaseDropdown::get_open_dropdown() {
+	return list_ && list_->is_visible() ? list_ : nullptr;
+}
+
 void BaseDropdown::layout() {
 	int list_width = list_->calculate_desired_width();
 

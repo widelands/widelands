@@ -177,6 +177,8 @@ protected:
 	/// loses focus.
 	void think() override;
 
+	UI::Panel* get_open_dropdown() override;
+
 private:
 	static void layout_if_alive(int);
 	void layout() override;
