@@ -115,12 +115,12 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					                 seen_fields.size(), static_cast<unsigned>(no_of_seen_fields));
 				}
 
-				// Skip data for fields that were never seen
+				// Skip data for fields that were never seen, e.g. this happens during saveloading a backup while starting a new game
 				if (no_of_seen_fields == 0) {
 					continue;
 				}
 
-				// Owner
+				// Owner: playernumber|playernumber|playernumber ...
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
 				assert(field_vector.size() == seen_fields.size());
@@ -132,7 +132,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				}
 				assert (counter == no_of_seen_fields);
 
-				// Last Unseen
+				// Last Unseen: time|time|time ...
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
 				assert(field_vector.size() == no_of_seen_fields);
@@ -144,7 +144,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				}
 				assert (counter == no_of_seen_fields);
 
-				// Last Surveyed
+				// Last Surveyed: time|time|time ...
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
 				assert(field_vector.size() == no_of_seen_fields);
@@ -160,7 +160,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				}
 				assert (counter == no_of_seen_fields);
 
-				// Resource Amounts
+				// Resource Amounts: down*right|down*right|down*right| ...
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
 				assert(field_vector.size() == no_of_seen_fields);
@@ -176,7 +176,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				}
 				assert (counter == no_of_seen_fields);
 
-				// Terrains
+				// Terrains: down*right|down*right|down*right| ...
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
 				assert(field_vector.size() == no_of_seen_fields);
@@ -192,7 +192,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				}
 				assert (counter == no_of_seen_fields);
 
-				// Roads
+				// Roads east*southeast*southwest|east*southeast*southwest| ...
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
 				assert(field_vector.size() == no_of_seen_fields);
@@ -209,7 +209,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				}
 				assert (counter == no_of_seen_fields);
 
-				// Borders
+				// Borders: here*right*bottom_right*bottom_left|here*right*bottom_right*bottom_left| ...
 				parseme = fr.c_string();
 				boost::split(field_vector, parseme, boost::is_any_of("|"));
 				assert(field_vector.size() == no_of_seen_fields);
