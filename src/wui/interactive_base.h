@@ -354,6 +354,8 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
+	// The plain variables measure the rendering frame speed and
+	// the `logic` variables the frequency of the `egbase_.think()` calls.
 	uint32_t lastframe_, lastframe_logic_;              //  system time (milliseconds)
 	uint32_t frametime_, frametime_logic_;              //  in millseconds
 	uint32_t avg_usframetime_, avg_usframetime_logic_;  //  in microseconds!

@@ -19,6 +19,8 @@
 
 #include "logic/cmd_queue.h"
 
+#include <memory>
+
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
@@ -102,18 +104,18 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 		std::multiset<CmdItem>& current_cmds = cmds_[game_time_var % kCommandQueueBucketSize];
 
 		while (!current_cmds.empty()) {
-			game_.mutex_lock();
+			std::unique_ptr<Widelands::MutexLock> m(new Widelands::MutexLock(game_));
 
 			const auto item = current_cmds.begin();
 			Command& c = *item->cmd;
 			if (game_time_var < c.duetime()) {
-				game_.mutex_unlock();
 				break;
 			}
 			current_cmds.erase(item);
 			--ncmds_;
 			assert(game_time_var == c.duetime());
-			game_.mutex_unlock();
+			// free the mutex the moment we don't need it any more
+			m.reset();
 
 			if (dynamic_cast<GameLogicCommand*>(&c)) {
 				StreamWrite& ss = game_.syncstream();

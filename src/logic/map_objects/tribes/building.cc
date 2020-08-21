@@ -413,7 +413,7 @@ derived class' init.
 ===============
 */
 bool Building::init(EditorGameBase& egbase) {
-	egbase.mutex_lock();
+	Widelands::MutexLock m(egbase);
 
 	PlayerImmovable::init(egbase);
 
@@ -471,7 +471,6 @@ bool Building::init(EditorGameBase& egbase) {
 
 	leave_time_ = egbase.get_gametime();
 
-	egbase.mutex_unlock();
 	return true;
 }
 

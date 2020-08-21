@@ -307,6 +307,7 @@ const RGBColor& StyleManager::minimap_icon_frame() const {
 }
 
 std::string StyleManager::color_tag(const std::string& text, const RGBColor& color) {
+	// NOTE: It is tempting to make those `boost::format`s static, but this is not thread-safe!
 	boost::format f("<font color=%s>%s</font>");
 	f % color.hex_value();
 	f % text;

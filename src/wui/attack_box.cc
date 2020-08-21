@@ -102,9 +102,8 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
  */
 void AttackBox::think() {
 	if ((player_->egbase().get_gametime() - lastupdate_) > kUpdateTimeInGametimeMs) {
-		player_->egbase().mutex_lock();
+		Widelands::MutexLock m(player_->egbase());
 		update_attack(false);
-		player_->egbase().mutex_unlock();
 	}
 }
 

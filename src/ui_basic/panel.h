@@ -359,6 +359,8 @@ private:
 	void do_draw_inner(RenderTarget&);
 	void do_think();
 
+	// The argument must be a pointer to the running Panel object. Returns nullptr.
+	// The function signature is prescribed by the PThread API…
 	static void* runthread(void*);
 
 	Panel* child_at_mouse_cursor(int32_t mouse_x, int32_t mouse_y, Panel* child);

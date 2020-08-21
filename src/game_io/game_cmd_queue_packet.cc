@@ -98,19 +98,20 @@ void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const
 		std::multiset<CmdQueue::CmdItem> p = cmdq.cmds_[time % kCommandQueueBucketSize];
 
 		while (!p.empty()) {
-			if (p.begin()->cmd->duetime() > time) {
+			const CmdQueue::CmdItem& item = *p.begin();
+			if (item.cmd->duetime() > time) {
 				// Time is the primary sorting key, so we can't have any additional commands in this
 				// queue for this time
 				break;
 			}
-			if (p.begin()->cmd->duetime() == time) {
-				if (upcast(GameLogicCommand, cmd, p.begin()->cmd)) {
+			if (item.cmd->duetime() == time) {
+				if (upcast(GameLogicCommand, cmd, item.cmd)) {
 					// The id (aka command type)
 					fw.unsigned_16(static_cast<uint16_t>(cmd->id()));
 
 					// Serial number
-					fw.signed_32(p.begin()->category);
-					fw.unsigned_32(p.begin()->serial);
+					fw.signed_32(item.category);
+					fw.unsigned_32(item.serial);
 
 					// Now the command itself
 					cmd->write(fw, game, *os);
