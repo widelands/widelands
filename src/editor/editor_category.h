@@ -17,27 +17,25 @@
  *
  */
 
-#ifndef WL_LOGIC_MAP_OBJECTS_WORLD_EDITOR_CATEGORY_H
-#define WL_LOGIC_MAP_OBJECTS_WORLD_EDITOR_CATEGORY_H
+#ifndef WL_EDITOR_EDITOR_CATEGORY_H
+#define WL_EDITOR_EDITOR_CATEGORY_H
 
 #include <string>
 #include <vector>
 
 #include "base/macros.h"
 #include "logic/map_objects/map_object_type.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/widelands.h"
 
 class Image;
 class LuaTable;
 
-namespace Widelands {
-class World;
-
 /// Represents a category for grouping items in the Editor, so purely a UI
 /// distinction and not a logical one.
 class EditorCategory {
 public:
-	explicit EditorCategory(const LuaTable& table, Widelands::MapObjectType type, World& world);
+	explicit EditorCategory(const LuaTable& table, Widelands::MapObjectType type, Widelands::World& world);
 
 	/// Internal name.
 	const std::string& name() const;
@@ -62,6 +60,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(EditorCategory);
 };
 
-}  // namespace Widelands
-
-#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_WORLD_EDITOR_CATEGORY_H
+#endif  // end of include guard: WL_EDITOR_EDITOR_CATEGORY_H

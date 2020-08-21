@@ -17,40 +17,35 @@
  *
  */
 
-#include "logic/map_objects/world/editor_category.h"
+#include "editor/editor_category.h"
 
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/world/world.h"
 #include "scripting/lua_table.h"
 
-namespace Widelands {
-
-EditorCategory::EditorCategory(const LuaTable& table, Widelands::MapObjectType type, World& world)
+EditorCategory::EditorCategory(const LuaTable& table, Widelands::MapObjectType type, Widelands::World& world)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      image_file_(table.get_string("picture")),
      items_per_row_(table.get_int("items_per_row")) {
 	if (!g_fs->file_exists(image_file_)) {
-		throw GameDataError("EditorCategory %s has non-existing \"picture\".", name_.c_str());
+		throw Widelands::GameDataError("EditorCategory %s has non-existing \"picture\".", name_.c_str());
 	}
 	if (items_per_row_ <= 0) {
-		throw GameDataError("EditorCategory %s has less than 1 item per row.", name_.c_str());
+		throw Widelands::GameDataError("EditorCategory %s has less than 1 item per row.", name_.c_str());
 	}
 
 	for (const std::string& item :
 		 table.get_table("items")->array_entries<std::string>()) {
-		Notifications::publish(
-		   NoteMapObjectDescription(item, NoteMapObjectDescription::LoadType::kObject));
 		switch (type) {
-		case MapObjectType::CRITTER:
+		case Widelands::MapObjectType::CRITTER:
 			items_.push_back(world.load_critter(item));
 			break;
-		case MapObjectType::IMMOVABLE:
+		case Widelands::MapObjectType::IMMOVABLE:
 			items_.push_back(world.load_immovable(item));
 			break;
-		case MapObjectType::TERRAIN:
+		case Widelands::MapObjectType::TERRAIN:
 			items_.push_back(world.load_terrain(item));
 			break;
 		default:
@@ -80,5 +75,3 @@ int EditorCategory::items_per_row() const {
 const std::vector<Widelands::DescriptionIndex>& EditorCategory::items() const {
 	return items_;
 }
-
-}  // namespace Widelands

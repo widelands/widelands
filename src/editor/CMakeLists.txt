@@ -2,6 +2,8 @@ wl_library(editor
   SRCS
     editorinteractive.cc
     editorinteractive.h
+    editor_category.cc
+    editor_category.h
     map_generator.cc
     map_generator.h
     tools/action_args.h

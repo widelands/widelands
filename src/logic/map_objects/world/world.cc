@@ -27,7 +27,6 @@
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/world/critter.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "scripting/lua_table.h"
@@ -39,9 +38,7 @@ World::World(DescriptionManager* description_manager)
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
      resources_(new DescriptionMaintainer<ResourceDescription>()),
-     editor_terrain_categories_(new DescriptionMaintainer<EditorCategory>()),
-     editor_critter_categories_(new DescriptionMaintainer<EditorCategory>()),
-     editor_immovable_categories_(new DescriptionMaintainer<EditorCategory>()),
+
 	 description_manager_(description_manager) {
 
 	// Walk world directory and register objects
@@ -87,41 +84,6 @@ const DescriptionMaintainer<TerrainDescription>& World::terrains() const {
 
 const DescriptionMaintainer<ImmovableDescr>& World::immovables() const {
 	return *immovables_;
-}
-
-void World::load_editor_categories(LuaInterface& lua) {
-	std::unique_ptr<LuaTable> table(lua.run_script("world/init.lua"));
-	for (const auto& category_table :
-		 table->get_table("critters")->array_entries<std::unique_ptr<LuaTable>>()) {
-		editor_critter_categories_->add(new EditorCategory(*category_table, MapObjectType::CRITTER, *this));
-	}
-	for (const auto& category_table :
-		 table->get_table("immovables")->array_entries<std::unique_ptr<LuaTable>>()) {
-		editor_immovable_categories_->add(new EditorCategory(*category_table, MapObjectType::IMMOVABLE, *this));
-	}
-	for (const auto& category_table :
-		 table->get_table("terrains")->array_entries<std::unique_ptr<LuaTable>>()) {
-		editor_terrain_categories_->add(new EditorCategory(*category_table, MapObjectType::TERRAIN, *this));
-	}
-
-	for (const std::string& item :
-		 table->get_table("resources")->array_entries<std::string>()) {
-		Notifications::publish(
-		   NoteMapObjectDescription(item, NoteMapObjectDescription::LoadType::kObject));
-	}
-}
-
-
-const DescriptionMaintainer<EditorCategory>& World::editor_terrain_categories() const {
-	return *editor_terrain_categories_;
-}
-
-const DescriptionMaintainer<EditorCategory>& World::editor_critter_categories() const {
-	return *editor_critter_categories_;
-}
-
-const DescriptionMaintainer<EditorCategory>& World::editor_immovable_categories() const {
-	return *editor_immovable_categories_;
 }
 
 DescriptionIndex World::load_critter(const std::string& crittername) {

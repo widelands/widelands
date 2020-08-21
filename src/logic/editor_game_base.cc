@@ -44,7 +44,6 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/critter.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"

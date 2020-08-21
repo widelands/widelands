@@ -27,7 +27,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/checkbox.h"
@@ -85,7 +84,7 @@ EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>(
-	      this, world.editor_terrain_categories(), world.terrains(),
+	      this, parent.editor_categories(Widelands::MapObjectType::TERRAIN), world.terrains(),
 	      [this](UI::Panel* cb_parent, const Widelands::TerrainDescription& terrain_descr) {
 		      return create_terrain_checkbox(cb_parent, terrain_descr, &offscreen_images_);
 	      },

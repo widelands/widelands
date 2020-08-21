@@ -51,6 +51,7 @@
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
+#include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
@@ -945,11 +946,11 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
+
 	{
 		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 
-		Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
-		egbase.mutable_world()->load_editor_categories(egbase.lua());
+		eia.load_world_units();
 		egbase.tribes();
 
 		{
@@ -982,6 +983,32 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	eia.run<UI::Panel::Returncodes>();
 
 	egbase.cleanup_objects();
+}
+
+void EditorInteractive::load_world_units() {
+	Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
+
+	/// Ensure all world units have been loaded and fill editor categories
+	std::unique_ptr<LuaTable> table(egbase().lua().run_script("world/init.lua"));
+	Widelands::World* world = egbase().mutable_world();
+	for (const auto& category_table :
+		 table->get_table("critters")->array_entries<std::unique_ptr<LuaTable>>()) {
+		editor_categories_[Widelands::MapObjectType::CRITTER].push_back(std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, Widelands::MapObjectType::CRITTER, *world)));
+	}
+	for (const auto& category_table :
+		 table->get_table("immovables")->array_entries<std::unique_ptr<LuaTable>>()) {
+		editor_categories_[Widelands::MapObjectType::IMMOVABLE].push_back(std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, Widelands::MapObjectType::IMMOVABLE, *world)));
+	}
+	for (const auto& category_table :
+		 table->get_table("terrains")->array_entries<std::unique_ptr<LuaTable>>()) {
+		editor_categories_[Widelands::MapObjectType::TERRAIN].push_back(std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, Widelands::MapObjectType::TERRAIN, *world)));
+	}
+
+	for (const std::string& item :
+		 table->get_table("resources")->array_entries<std::string>()) {
+		Notifications::publish(
+		   Widelands::NoteMapObjectDescription(item, Widelands::NoteMapObjectDescription::LoadType::kObject));
+	}
 }
 
 void EditorInteractive::map_changed(const MapWas& action) {
@@ -1019,4 +1046,9 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 EditorInteractive::Tools* EditorInteractive::tools() {
 	return tools_.get();
+}
+
+const std::vector<std::unique_ptr<EditorCategory>>& EditorInteractive::editor_categories(Widelands::MapObjectType type) const {
+	assert(editor_categories_.count(type) == 1);
+	return editor_categories_.at(type);
 }

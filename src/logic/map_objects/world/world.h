@@ -31,7 +31,6 @@ class LuaTable;
 namespace Widelands {
 
 class CritterDescr;
-class EditorCategory;
 class ImmovableDescr;
 class ResourceDescription;
 class TerrainDescription;
@@ -83,22 +82,12 @@ public:
 	/// Load a terrain that has been registered previously with 'register_description'
 	DescriptionIndex load_terrain(const std::string& terrainname);
 
-	/// Add editor categories for grouping items in the editor.
-	void load_editor_categories(LuaInterface& lua);
-
-	/// Access to the editor categories.
-	const DescriptionMaintainer<EditorCategory>& editor_terrain_categories() const;
-	const DescriptionMaintainer<EditorCategory>& editor_critter_categories() const;
-	const DescriptionMaintainer<EditorCategory>& editor_immovable_categories() const;
-
 private:
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
 	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;
-	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_terrain_categories_;
-	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_critter_categories_;
-	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_immovable_categories_;
+
 
 	DescriptionManager* description_manager_; // Not owned
 	DISALLOW_COPY_AND_ASSIGN(World);
