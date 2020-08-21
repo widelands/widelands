@@ -319,52 +319,106 @@ ProductionProgram::Action::TrainingParameters::parse(const std::vector<std::stri
 
 return
 ------
-Returns from the program.
 
-Parameter syntax::
+.. function:: return=completed|failed|skipped \[\<\condition\>\]
 
-    parameters        ::= return_value [condition_part]
-    return_value      ::= Failed | Completed | Skipped
-    Failed            ::= failed
-    Completed         ::= completed
-    Skipped           ::= skipped
-    condition_part    ::= when_condition | unless_condition
-    when_condition    ::= when condition {and condition}
-    unless_condition  ::= unless condition {or condition}
-    condition         ::= negation | economy_condition | workers_condition
-    negation          ::= not condition
-    economy_condition ::= economy economy_needs
-    workers_condition ::= workers need_experience
-    economy_needs     ::= needs ware_type
-    need_experience   ::= need experience
+The ``return`` action determines how the program's result will update the productivity statistics
+when any of its steps can't be completed:
 
-Parameter semantics:
-
-``return_value``
-    If return_value is Failed or Completed, the productionsite's
-    statistics is updated accordingly. If return_value is Skipped, the
-    statistics are not affected.
-``condition``
-    A boolean condition that can be evaluated to true or false.
-``condition_part``
-    If omitted, the return is unconditional.
-``when_condition``
-    This will cause the program to return when all conditions are true.
-``unless_condition``
-    This will cause the program to return unless some condition is true.
-``ware_type``
-    The name of a ware type (defined in the tribe). A ware type may only
-    appear once in the command.
-``economy_needs``
-    The result of this condition depends on whether the economy that this
-    productionsite belongs to needs a ware of the specified type. How
-    this is determined is defined by the economy.
-
-Aborts the execution of the program and sets a return value. Updates the productionsite's statistics
-depending on the return value.
+* **completed**: Counts as a success for the productivity statistics.
+* **failed**: Counts as a failure for the productivity statistics.
+* **skipped**: Will be ignored by the productivity statistics.
 
 .. note:: If the execution reaches the end of the program, the return value is implicitly set to
-    Completed.
+   ``completed``.
+
+If ``condition`` is specified, this will cause an immediate termination of the program if the
+condition can't be satisfied. There are two types of conditions, using Boolean arithmetic:
+
+   :when \<statement1\> \[and \<statement2\> ...\]: If any of these statements is false, the program
+      will terminate immediately.
+   :unless \<statement1\> \[or \<statement2\> ...\]: If none of these statements is true, the
+      program will terminate immediately.
+
+The individual statements can also be negated:
+
+   :when not <statement1> and <statement2>: If ``<statement1>`` is true or ``<statement2>`` is
+      false, the program will terminate immediately.
+   :unless not <statement>: If ``<statement>`` is false, the program will terminate immediately.
+
+The following statements are available:
+
+   :site has <ware_types>|<worker_types>: Checks whether the building's input queues are filled
+      with a certain amount of wares/workers. A ware or worker type may only appear once in the
+      command. You can specify more than one ware. For example, ``site has fish,meat:2`` is true if
+      the building has 1 fish or if the building has 2 meat or both.
+   :workers need experience: This is true if a worker working at the building can currently gain
+      some experience.
+   :economy needs <ware_type>|<worker_type>: The result of this condition depends on
+      whether the economy that this productionsite belongs to needs a ware or worker of the
+      specified type. How this is determined is defined by the economy. A ware or worker type may
+      only appear once in the command.
+
+Examples for ``return=failed`` -- The building will be considered as having failed to produce
+something when any of the program's steps are aborted.
+
+.. code-block:: lua
+
+   -- If the building has no 'ax_sharp' in its input queues, the program will fail immediately.
+   return=failed unless site has ax_sharp
+
+   -- If the building has less than 2 items of 'barbarians_bread' in its input queues, the program
+   -- will fail immediately.
+   return=failed unless site has barbarians_bread:2
+
+   -- The building needs 1 item of 'bread_frisians', 'beer', 'smoked_fish' or 'smoked_meat' in its
+   -- input queues. Otherwise, the program will fail immediately.
+   return=failed unless site has bread_frisians,beer,smoked_fish,smoked_meat
+
+   -- The building needs 1 item of 'fish' or 2 items of 'meat' in its input queues. Otherwise, the
+   -- program will fail immediately.
+   return=failed unless site has fish,meat:2
+
+Examples for ``return=skipped`` -- There will be no change in the building's productivity statistics
+when any of the program steps are aborted.
+
+.. code-block:: lua
+
+   -- If any subsequent step fails, don't cause a hit on the statistics.
+   return=skipped
+
+   -- Only run this program if the economy needs an 'ax_sharp'.
+   return=skipped unless economy needs ax_sharp
+
+   -- Only run this program if the economy needs a 'beer' or if any of the workers working at the
+   -- building can gain more experience.
+   return=skipped unless economy needs beer or workers need experience
+
+   -- Only run this program if the economy needs at least one of the listed wares: 'clay', 'fish' or
+   -- 'coal'.
+   return=skipped unless economy needs clay or economy needs fish or economy needs coal
+
+   -- Only run this program if the economy needs at least one of the listed wares: 'iron' or 'gold'.
+   -- If the economy has sufficient 'coal', run anyway even if none of these two wares are needed.
+   return=skipped unless economy needs iron or economy needs gold or not economy needs coal
+
+   -- If the building has no 'fur_garment_old' in its input queues, skip running this progam.
+   return=skipped unless site has fur_garment_old
+
+   -- If the building has 'wheat' in its input queue and if the economy needs the ware
+   -- 'flour' but does not need the ware 'cornmeal', skip running this program so we can run another
+   -- program for producing 'flour' rather than 'cornmeal'.
+   return=skipped when site has wheat and economy needs flour and not economy needs cornmeal
+
+   -- If the building has at least 2 items of 'fish' in its input queues and if the economy needs
+   -- any 'smoked_fish', skip running this program because we will want to produce some
+   -- 'smoked_fish' instead of whatever this program produces.
+   return=skipped when site has fish:2 and economy needs smoked_fish
+
+   -- If the building has at least one item of 'fruit' or 'bread_frisians' and at least one item of
+   -- 'smoked_fish' or 'smoked_meat', skip running this program. We want to do something more useful
+   -- with these wares with another program.
+   return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat
 */
 ProductionProgram::ActReturn::Condition::~Condition() {
 }
