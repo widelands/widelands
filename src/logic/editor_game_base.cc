@@ -822,4 +822,19 @@ void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> con
 		}
 	}
 }
+
+void EditorGameBase::mutex_lock() {
+	if (ibase_) {
+		if (pthread_mutex_t* m = ibase_->mutex()) {
+			pthread_mutex_lock(m);
+		}
+	}
+}
+void EditorGameBase::mutex_unlock() {
+	if (ibase_) {
+		if (pthread_mutex_t* m = ibase_->mutex()) {
+			pthread_mutex_unlock(m);
+		}
+	}
+}
 }  // namespace Widelands

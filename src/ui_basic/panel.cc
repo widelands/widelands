@@ -22,7 +22,6 @@
 #include <memory>
 
 #include <SDL_timer.h>
-#include <pthread.h>
 
 #include "base/log.h"
 #include "graphic/font_handler.h"
@@ -216,10 +215,19 @@ int Panel::do_run() {
 		throw wexception("PThread creation failed with error code %d", i);
 	}
 
+	assert(!mutex_);
+	mutex_.reset(new pthread_mutex_t(PTHREAD_MUTEX_INITIALIZER));
+	pthread_mutexattr_t mutextype;
+	pthread_mutexattr_settype(&mutextype, PTHREAD_MUTEX_RECURSIVE);
+	pthread_mutex_init(mutex_.get(), &mutextype);
+
 	while (running_) {
 		const uint32_t start_time = SDL_GetTicks();
 
+		pthread_mutex_lock(mutex_.get());
 		app->handle_input(&input_callback);
+		pthread_mutex_unlock(mutex_.get());
+
 		if (app->should_die()) {
 			end_modal<Returncodes>(Returncodes::kBack);
 		}
@@ -229,6 +237,8 @@ int Panel::do_run() {
 		}
 
 		if (start_time >= next_draw_time) {
+			pthread_mutex_lock(mutex_.get());
+
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
 			if (g_mouse_cursor->is_visible()) {
@@ -243,6 +253,8 @@ int Panel::do_run() {
 
 			g_gr->refresh();
 			next_draw_time = start_time + draw_delay;
+
+			pthread_mutex_unlock(mutex_.get());
 		}
 
 		const int32_t delay = next_draw_time - SDL_GetTicks();
@@ -251,6 +263,7 @@ int Panel::do_run() {
 		}
 	}
 	pthread_cancel(thread);
+	mutex_.reset();
 
 	end();
 

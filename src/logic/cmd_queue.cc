@@ -102,14 +102,18 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 		std::multiset<CmdItem>& current_cmds = cmds_[game_time_var % kCommandQueueBucketSize];
 
 		while (!current_cmds.empty()) {
+			game_.mutex_lock();
+
 			const auto item = current_cmds.begin();
 			Command& c = *item->cmd;
 			if (game_time_var < c.duetime()) {
+				game_.mutex_unlock();
 				break;
 			}
 			current_cmds.erase(item);
 			--ncmds_;
 			assert(game_time_var == c.duetime());
+			game_.mutex_unlock();
 
 			if (dynamic_cast<GameLogicCommand*>(&c)) {
 				StreamWrite& ss = game_.syncstream();

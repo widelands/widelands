@@ -20,9 +20,12 @@
 #ifndef WL_UI_BASIC_PANEL_H
 #define WL_UI_BASIC_PANEL_H
 
+#include <memory>
+
 #include <SDL_keyboard.h>
 #include <boost/signals2/signal.hpp>
 #include <boost/signals2/trackable.hpp>
+#include <pthread.h>
 
 #include "base/macros.h"
 #include "base/rect.h"
@@ -294,6 +297,10 @@ public:
 	virtual void die();
 	static void register_click();
 
+	pthread_mutex_t* mutex() {
+		return mutex_.get();
+	}
+
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
@@ -404,6 +411,8 @@ private:
 	static bool allow_user_input_;
 
 	static FxId click_fx_;
+
+	std::unique_ptr<pthread_mutex_t> mutex_;
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };

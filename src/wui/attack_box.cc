@@ -102,7 +102,9 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
  */
 void AttackBox::think() {
 	if ((player_->egbase().get_gametime() - lastupdate_) > kUpdateTimeInGametimeMs) {
+		player_->egbase().mutex_lock();
 		update_attack(false);
+		player_->egbase().mutex_unlock();
 	}
 }
 
@@ -113,9 +115,13 @@ static inline std::string slider_heading(uint32_t num_attackers) {
 }
 
 void AttackBox::update_attack(bool action_on_panel) {
+	if (!soldiers_slider_.get()) {
+		// Not initialized yet. Race condition, happens.
+		return;
+	}
+
 	lastupdate_ = player_->egbase().get_gametime();
 
-	assert(soldiers_slider_.get());
 	assert(soldiers_text_.get());
 	assert(less_soldiers_.get());
 	assert(more_soldiers_.get());

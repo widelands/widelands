@@ -48,6 +48,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
+		const Widelands::Map& map = egbase.map();
 		// TODO(Nordfriese): Savegame compatibility, remove after v1.0
 		if (packet_version >= 1 && packet_version <= kCurrentPacketVersion) {
 			for (uint8_t i = fr.unsigned_8(); i; --i) {
@@ -58,7 +59,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					player.revealed_fields_.insert(fr.unsigned_32());
 				}
 
-				for (MapIndex m = egbase.map().max_index(); m; --m) {
+				for (MapIndex m = map.max_index(); m; --m) {
 					Player::Field& f = player.fields_[m - 1];
 
 					f.owner = fr.unsigned_8();
@@ -66,6 +67,9 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					f.seeing = static_cast<SeeUnseeNode>(fr.unsigned_8());
 
 					if (f.seeing != SeeUnseeNode::kPreviouslySeen && packet_version > 1) {
+						if (f.seeing == SeeUnseeNode::kVisible) {
+							player.rediscover_node(map, map.get_fcoords(map[m - 1]));
+						}
 						continue;
 					}
 

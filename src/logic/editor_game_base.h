@@ -219,6 +219,9 @@ public:
 
 	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
+	void mutex_lock();
+	void mutex_unlock();
+
 private:
 	/// Common function for create_critter and create_ship.
 	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);

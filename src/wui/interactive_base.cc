@@ -183,8 +183,11 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      display_flags_(dfShowSoldierLevels | dfShowBuildings),
 #endif
      lastframe_(SDL_GetTicks()),
+     lastframe_logic_(SDL_GetTicks()),
      frametime_(0),
+     frametime_logic_(0),
      avg_usframetime_(0),
+     avg_usframetime_logic_(0),
      road_building_mode_(nullptr),
      unique_window_handler_(new UniqueWindowHandler()) {
 
@@ -693,11 +696,18 @@ Called once per frame by the UI code
 void InteractiveBase::think() {
 	egbase().think();  // Call game logic here. The game advances.
 
+	const uint32_t curframe = SDL_GetTicks();
+	frametime_logic_ = curframe - lastframe_logic_;
+	lastframe_logic_ = curframe;
+
 	UI::Panel::think();
 }
 
 double InteractiveBase::average_fps() const {
 	return 1000.0 * 1000.0 / avg_usframetime_;
+}
+double InteractiveBase::average_fps_logic() const {
+	return 1000.0 * 1000.0 / avg_usframetime_logic_;
 }
 
 /*
@@ -711,6 +721,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 	frametime_ = curframe - lastframe_;
 	avg_usframetime_ = ((avg_usframetime_ * 15) + (frametime_ * 1000)) / 16;
+	avg_usframetime_logic_ = ((avg_usframetime_logic_ * 15) + (frametime_logic_ * 1000)) / 16;
 	lastframe_ = curframe;
 
 	Game* game = dynamic_cast<Game*>(&egbase());
@@ -719,7 +730,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	// range 13 - 15, this is used for training of AI
 	if (game != nullptr) {
 		if (game->is_auto_speed()) {
-			const uint32_t cur_fps = average_fps();
+			const uint32_t cur_fps = average_fps_logic();
 			int32_t speed_diff = 0;
 			if (cur_fps < 13) {
 				speed_diff = -100;
@@ -768,11 +779,16 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
-			boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
 			rendered_text = UI::g_fh->render(
-			   as_richtext_paragraph((fps_format % (1000.0 / frametime_) % average_fps()).str(),
+			   as_richtext_paragraph((boost::format("DISPLAY: %5.1f fps (avg: %5.1f fps)") % (1000.0 / frametime_) % average_fps()).str(),
 			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
 			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
+			const int16_t y = rendered_text->height() + 8;
+
+			rendered_text = UI::g_fh->render(
+			   as_richtext_paragraph((boost::format("LOGIC: %5.1f fps (avg: %5.1f fps)") % (1000.0 / frametime_logic_) % average_fps_logic()).str(),
+			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
+			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, y));
 		}
 	}
 }

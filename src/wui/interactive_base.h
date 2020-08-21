@@ -90,6 +90,7 @@ public:
 
 	void think() override;
 	double average_fps() const;
+	double average_fps_logic() const;
 	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
 
@@ -353,9 +354,9 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
-	uint32_t lastframe_;        //  system time (milliseconds)
-	uint32_t frametime_;        //  in millseconds
-	uint32_t avg_usframetime_;  //  in microseconds!
+	uint32_t lastframe_, lastframe_logic_;              //  system time (milliseconds)
+	uint32_t frametime_, frametime_logic_;              //  in millseconds
+	uint32_t avg_usframetime_, avg_usframetime_logic_;  //  in microseconds!
 
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 

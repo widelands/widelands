@@ -413,6 +413,8 @@ derived class' init.
 ===============
 */
 bool Building::init(EditorGameBase& egbase) {
+	egbase.mutex_lock();
+
 	PlayerImmovable::init(egbase);
 
 	// Set the building onto the map
@@ -468,6 +470,8 @@ bool Building::init(EditorGameBase& egbase) {
 	}
 
 	leave_time_ = egbase.get_gametime();
+
+	egbase.mutex_unlock();
 	return true;
 }
 
