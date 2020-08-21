@@ -28,12 +28,12 @@ MutexLock::MutexLock() : MutexLock(MutexLockHandler::get()) {
 }
 MutexLock::MutexLock(MutexLockHandler* m) : mutex_(m ? m->mutex() : nullptr) {
 	if (mutex_) {
-		pthread_mutex_lock(mutex_);
+		mutex_->lock();
 	}
 }
 MutexLock::~MutexLock() {
 	if (mutex_) {
-		pthread_mutex_unlock(mutex_);
+		mutex_->unlock();
 	}
 }
 
@@ -58,8 +58,5 @@ void MutexLockHandler::pop(MutexLockHandler& h) {
 	handlers.pop_back();
 }
 
-MutexLockHandler::MutexLockHandler() : mutex_(new pthread_mutex_t(PTHREAD_MUTEX_INITIALIZER)) {
-	pthread_mutexattr_t a;
-	pthread_mutexattr_settype(&a, PTHREAD_MUTEX_RECURSIVE);
-	pthread_mutex_init(mutex_.get(), &a);
+MutexLockHandler::MutexLockHandler() : mutex_(new std::recursive_mutex()) {
 }

@@ -21,6 +21,7 @@
 #define WL_BASE_MULTITHREADING_H
 
 #include <memory>
+#include <mutex>
 
 #include <pthread.h>
 
@@ -31,7 +32,7 @@ struct MutexLockHandler {
 	~MutexLockHandler() {
 	}
 
-	pthread_mutex_t* mutex() const {
+	std::recursive_mutex* mutex() const {
 		return mutex_.get();
 	}
 
@@ -43,7 +44,7 @@ struct MutexLockHandler {
 	static void pop(MutexLockHandler&);
 
 private:
-	std::shared_ptr<pthread_mutex_t> mutex_;
+	std::shared_ptr<std::recursive_mutex> mutex_;
 };
 
 /*
@@ -75,7 +76,7 @@ struct MutexLock {
 	}
 
 private:
-	pthread_mutex_t* mutex_;  // not owned
+	std::recursive_mutex* mutex_;  // not owned
 };
 
 #endif  // end of include guard: WL_BASE_MULTITHREADING_H
