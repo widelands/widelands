@@ -43,9 +43,9 @@ constexpr int kMarginX = 4;
 constexpr int kLineMargin = 1;
 bool inline ctrl() {
 #ifdef __APPLE__
-   return SDL_GetModState() & KMOD_GUI;
+	return SDL_GetModState() & KMOD_GUI;
 #endif
-   return SDL_GetModState() & KMOD_CTRL;
+	return SDL_GetModState() & KMOD_CTRL;
 }
 
 }  // namespace
@@ -458,8 +458,6 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 	}
 	return true;
 }
-
-
 
 void EditBox::delete_selected_text() {
 	uint32_t start, end;
