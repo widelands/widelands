@@ -588,7 +588,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 			if (n->valign() == UI::Align::kTop) {
 				n->set_y(n->y() - space_top);
 			} else if (n->valign() == UI::Align::kCenter) {
-				n->set_y(n->y() - space_top + space/2);
+				n->set_y(n->y() - space_top + space / 2);
 			} else if (n->valign() == UI::Align::kBottom) {
 				n->set_y(n->y() + space_bottom);
 			}
