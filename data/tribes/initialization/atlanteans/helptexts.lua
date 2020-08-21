@@ -1,10 +1,12 @@
 -- Atlantean ware helptexts
 
 -- RST
+-- .. _lua_tribes_tribes_helptexts:
+--
 -- Helptexts
 -- ---------
 --
--- Helptexts are defined in ``tribes/initialization/<tribename>/helptexts.lua``.
+-- Helptexts are defined in ``tribes/initialization/<tribename>/helptexts.lua`` and linked to from :ref:`units.lua <lua_tribes_tribes_units>`.
 --
 -- First, you will need to define a message context. The form is ``"<tribe_name>_<table_key>"``.
 -- Do not deviate from this -- the translations will not work otherwise.
