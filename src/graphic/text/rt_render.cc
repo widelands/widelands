@@ -564,7 +564,8 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 		for (const auto& n : nodes_in_line) {
 			// Nodes are already aligned to the bottom at this point.
 			// Note: "Bottom" means the text baseline; we don't consider the space below it.
-			if (n->get_floating() != RenderNode::Floating::kNone || n->valign() == UI::Align::kBottom) {
+			if (n->get_floating() != RenderNode::Floating::kNone ||
+			    n->valign() == UI::Align::kBottom) {
 				continue;
 			}
 
