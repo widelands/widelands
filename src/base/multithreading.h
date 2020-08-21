@@ -27,6 +27,7 @@
 // Wrapper for a mutex that can be locked and unlocked using a MutexLock
 struct MutexLockHandler {
 	explicit MutexLockHandler();
+	MutexLockHandler(const MutexLockHandler&) = default;
 	~MutexLockHandler() {
 	}
 
