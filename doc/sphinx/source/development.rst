@@ -51,7 +51,8 @@ can no longer reproduce the crash.
 If you ever notice that the user interface is responding slowly or hangs,
 you have probably created a lock with far too large a scope.
 
-Static variables that may be referenced by multiple threads are a no-go.
+Static variables that could be modified by multiple threads
+concurrently are a no-go.
 
 
 Why std::set<SomePointer*> is a bad idea
