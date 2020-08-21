@@ -351,7 +351,7 @@ The following statements are available:
    :site has <ware_types>|<worker_types>: Checks whether the building's input queues are filled
       with a certain amount of wares/workers. A ware or worker type may only appear once in the
       command. You can specify more than one ware. For example, ``site has fish,meat:2`` is true if
-      the building has 1 fish or if the building has 2 meat or both.
+      the building has at least 1 fish or if the building has at least 2 meat.
    :workers need experience: This is true if a worker working at the building can currently gain
       some experience.
    :economy needs <ware_type>|<worker_type>: The result of this condition depends on
@@ -359,8 +359,7 @@ The following statements are available:
       specified type. How this is determined is defined by the economy. A ware or worker type may
       only appear once in the command.
 
-Examples for ``return=failed`` -- The building will be considered as having failed to produce
-something when any of the program's steps are aborted.
+Examples for ``return=failed``:
 
 .. code-block:: lua
 
@@ -379,8 +378,7 @@ something when any of the program's steps are aborted.
    -- program will fail immediately.
    return=failed unless site has fish,meat:2
 
-Examples for ``return=skipped`` -- There will be no change in the building's productivity statistics
-when any of the program steps are aborted.
+Examples for ``return=skipped``:
 
 .. code-block:: lua
 
@@ -758,6 +756,7 @@ call
 
    :arg string on: Defines what to do if the program fails, completes or skips.
 
+      * ``complete``: The failure is ignored, and the program returns as successful.
       * ``fail``: The command fails, with the same effect as executing the :ref:`return program
         <productionsite_programs_act_return>` with ``return=failed``.
       * ``repeat``: The command is repeated.
@@ -1752,7 +1751,8 @@ train
    <lua_tribes_buildings_trainingsites>`.
 
 Increases a soldier's training attribute to the given level. It is mandatory to call 'checksoldier'
-before calling this action to ensure that an appropriate soldier will be present at the site. Example:
+before calling this action to ensure that an appropriate soldier will be present at the site.
+Example:
 
 .. code-block:: lua
 
