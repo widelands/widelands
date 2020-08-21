@@ -219,20 +219,20 @@ public:
 	void set_defense_level(uint32_t);
 	void set_evade_level(uint32_t);
 	void set_retreat_health(uint32_t);
-	uint32_t get_level(TrainingAttribute) const;
-	uint32_t get_health_level() const {
+	unsigned get_level(TrainingAttribute) const;
+	unsigned get_health_level() const {
 		return health_level_;
 	}
-	uint32_t get_attack_level() const {
+	unsigned get_attack_level() const {
 		return attack_level_;
 	}
-	uint32_t get_defense_level() const {
+	unsigned get_defense_level() const {
 		return defense_level_;
 	}
-	uint32_t get_evade_level() const {
+	unsigned get_evade_level() const {
 		return evade_level_;
 	}
-	uint32_t get_total_level() const {
+	unsigned get_total_level() const {
 		return health_level_ + attack_level_ + defense_level_ + evade_level_;
 	}
 
@@ -261,17 +261,17 @@ public:
 	                    const InfoToDraw info_to_draw,
 	                    RenderTarget*) const;
 
-	uint32_t get_current_health() const {
+	unsigned get_current_health() const {
 		return current_health_;
 	}
-	uint32_t get_retreat_health() const {
+	unsigned get_retreat_health() const {
 		return retreat_health_;
 	}
-	uint32_t get_max_health() const;
-	uint32_t get_min_attack() const;
-	uint32_t get_max_attack() const;
-	uint32_t get_defense() const;
-	uint32_t get_evade() const;
+	unsigned get_max_health() const;
+	unsigned get_min_attack() const;
+	unsigned get_max_attack() const;
+	unsigned get_defense() const;
+	unsigned get_evade() const;
 
 	const Image* get_health_level_pic() const {
 		return descr().get_health_level_pic(health_level_);
@@ -292,8 +292,8 @@ public:
 	void start_animation(EditorGameBase&, const std::string& animname, uint32_t time);
 
 	/// Heal quantity of health points instantly
-	void heal(uint32_t);
-	void damage(uint32_t);  /// Damage quantity of health points
+	void heal(unsigned);
+	void damage(unsigned);  /// Damage quantity of health points
 
 	void log_general_info(const EditorGameBase&) const override;
 
@@ -344,12 +344,12 @@ protected:
 	bool is_evict_allowed() override;
 
 private:
-	uint32_t current_health_;
-	uint32_t health_level_;
-	uint32_t attack_level_;
-	uint32_t defense_level_;
-	uint32_t evade_level_;
-	uint32_t retreat_health_;
+	unsigned current_health_;
+	unsigned health_level_;
+	unsigned attack_level_;
+	unsigned defense_level_;
+	unsigned evade_level_;
+	unsigned retreat_health_;
 
 	/// This is used to replicate walk for soldiers but only just before and
 	/// just after figthing in a battle, to draw soldier at proper position.
