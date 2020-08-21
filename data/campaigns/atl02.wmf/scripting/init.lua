@@ -17,8 +17,8 @@ set_textdomain("scenario_atl02.wmf")
 game = wl.Game()
 map = game.map
 p1 = game.players[1]
-kalitath = game.players[3]
-maletus = game.players[2]
+Kalitath = game.players[3]
+Maletus = game.players[2]
 
 -- =================
 -- global variables and functions

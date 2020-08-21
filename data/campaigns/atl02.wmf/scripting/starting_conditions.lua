@@ -75,15 +75,15 @@
    })
 
 -- Initialize Maletus (Player 2)
-   maletus:allow_buildings("all")
+   Maletus:allow_buildings("all")
 
    sf = map.player_slots[2].starting_field
-   maletus:place_flag(sf.brn,true)
+   Maletus:place_flag(sf.brn,true)
    create_economy_for_plr_2()
 
 -- Initialize Kalitath (Player 3)
-   kalitath:allow_buildings("all")
+   Kalitath:allow_buildings("all")
 
    sf = map.player_slots[3].starting_field
-   kalitath:place_flag(sf.brn,true)
+   Kalitath:place_flag(sf.brn,true)
    create_economy_for_plr_3()

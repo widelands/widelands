@@ -55,7 +55,7 @@ function enemy()
       for x=40, 70 do
          for y=120, 160 do
             local field = map:get_field(x,y)
-            if field.owner == kalitath and p1:sees_field(field) then
+            if field.owner == Kalitath and p1:sees_field(field) then
                seen = true
             end
          end
@@ -82,13 +82,13 @@ function enemy()
    end
    while not contact do
       sleep(2000)
-      if scout.field.owner == kalitath and
-         scout.field.brn.owner == kalitath and
-         scout.field.bln.owner == kalitath and
-         scout.field.trn.owner == kalitath and
-         scout.field.tln.owner == kalitath and
-         scout.field.rn.owner == kalitath and
-         scout.field.ln.owner == kalitath then
+      if scout.field.owner == Kalitath and
+         scout.field.brn.owner == Kalitath and
+         scout.field.bln.owner == Kalitath and
+         scout.field.trn.owner == Kalitath and
+         scout.field.tln.owner == Kalitath and
+         scout.field.rn.owner == Kalitath and
+         scout.field.ln.owner == Kalitath then
          contact = true
       end
    end
@@ -99,19 +99,19 @@ function enemy()
    set_objective_done(explore)
    msg_boxes(allies)
    run(allies)
-   run(maletus)
+   run(maletus_defeated)
    run(check_defeat)
 end
 
 function allies()
    p1:set_attack_forbidden(3, true)
-   kalitath:set_attack_forbidden(1, true)
+   Kalitath:set_attack_forbidden(1, true)
    sleep(300000)
    msg_boxes(tribute)
 end
 
-function maletus()
-   while not maletus.defeated do sleep(6000) end
+function maletus_defeated()
+   while not Maletus.defeated do sleep(6000) end
    msg_boxes(maletus_defeated)
 end
 
