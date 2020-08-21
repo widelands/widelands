@@ -38,7 +38,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 3;
 
-bool from_unsigned(unsigned value) {
+inline bool from_unsigned(unsigned value) {
 	return value == 1;
 }
 
@@ -85,8 +85,14 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				// Read numerical field infos as combined strings to reduce number of hard disk write
 				// operations
-				std::vector<std::string> field_vector;  // Some data for all player fields
-				std::vector<std::string> data_vector;   // Single complex record for a field
+
+				// Some data for all player fields
+				// While saving, we iterated all fields for a property and separated the fields by '|'.
+				std::vector<std::string> field_vector;
+
+				// Single complex record for a field
+				// If a property is multidimensional (e.g. each field has 3 roads), the values are separated by '*'.
+				std::vector<std::string> data_vector;
 				std::string parseme;
 
 				// Seeing
@@ -124,6 +130,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					field->owner = stoi(field_vector[counter]);
 					++counter;
 				}
+				assert (counter == no_of_seen_fields);
 
 				// Last Unseen
 				parseme = fr.c_string();
@@ -135,6 +142,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					field->time_node_last_unseen = stoi(field_vector[counter]);
 					++counter;
 				}
+				assert (counter == no_of_seen_fields);
 
 				// Last Surveyed
 				parseme = fr.c_string();
@@ -150,6 +158,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					field->time_triangle_last_surveyed[1] = stoi(data_vector[1]);
 					++counter;
 				}
+				assert (counter == no_of_seen_fields);
 
 				// Resource Amounts
 				parseme = fr.c_string();
@@ -165,6 +174,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					field->resource_amounts.r = stoi(data_vector[1]);
 					++counter;
 				}
+				assert (counter == no_of_seen_fields);
 
 				// Terrains
 				parseme = fr.c_string();
@@ -180,6 +190,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					field->terrains.r = stoi(data_vector[1]);
 					++counter;
 				}
+				assert (counter == no_of_seen_fields);
 
 				// Roads
 				parseme = fr.c_string();
@@ -196,6 +207,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					field->r_sw = static_cast<Widelands::RoadSegment>(stoi(data_vector[2]));
 					++counter;
 				}
+				assert (counter == no_of_seen_fields);
 
 				// Borders
 				parseme = fr.c_string();
@@ -213,6 +225,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					field->border_bl = from_unsigned(stoi(data_vector[3]));
 					++counter;
 				}
+				assert (counter == no_of_seen_fields);
 
 				// Map objects
 				for (auto& field : seen_fields) {
@@ -226,18 +239,15 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} else if (descr == "portdock") {
 							field->map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di =
-							   egbase.tribes().building_index(tribes_lookup_table.lookup_building(descr));
+							DescriptionIndex di = egbase.tribes().building_index(tribes_lookup_table.lookup_building(descr));
 							if (di != INVALID_INDEX) {
 								field->map_object_descr = egbase.tribes().get_building_descr(di);
 							} else {
-								di = egbase.world().get_immovable_index(
-								   world_lookup_table.lookup_immovable(descr));
+								di = egbase.world().get_immovable_index(world_lookup_table.lookup_immovable(descr));
 								if (di != INVALID_INDEX) {
 									field->map_object_descr = egbase.world().get_immovable_descr(di);
 								} else {
-									di = egbase.tribes().immovable_index(
-									   tribes_lookup_table.lookup_immovable(descr));
+									di = egbase.tribes().immovable_index(tribes_lookup_table.lookup_immovable(descr));
 									if (di != INVALID_INDEX) {
 										field->map_object_descr = egbase.tribes().get_immovable_descr(di);
 									} else {
@@ -249,28 +259,26 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 						if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 							field->partially_finished_building.dismantlesite.building =
-							   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
-							      tribes_lookup_table.lookup_building(fr.string())));
+							   egbase.tribes().get_building_descr(
+								  egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(fr.string())));
 							field->partially_finished_building.dismantlesite.progress = fr.unsigned_32();
 						} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 							field->partially_finished_building.constructionsite.becomes =
-							   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
-							      tribes_lookup_table.lookup_building(fr.string())));
+							   egbase.tribes().get_building_descr(
+								  egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(fr.string())));
 							descr = fr.string();
 							field->partially_finished_building.constructionsite.was =
-							   descr.empty() ?
-							      nullptr :
-							      egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
-							         tribes_lookup_table.lookup_building(descr)));
+							   descr.empty() ? nullptr :
+											   egbase.tribes().get_building_descr(
+												  egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(descr)));
 
 							for (uint32_t j = fr.unsigned_32(); j; --j) {
 								field->partially_finished_building.constructionsite.intermediates.push_back(
-								   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
-								      tribes_lookup_table.lookup_building(fr.string()))));
+								   egbase.tribes().get_building_descr(
+									  egbase.tribes().safe_building_index(tribes_lookup_table.lookup_building(fr.string()))));
 							}
 
-							field->partially_finished_building.constructionsite.totaltime =
-							   fr.unsigned_32();
+							field->partially_finished_building.constructionsite.totaltime = fr.unsigned_32();
 							field->partially_finished_building.constructionsite.completedtime =
 							   fr.unsigned_32();
 						}
@@ -409,7 +417,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 	}
 }
 
-unsigned to_unsigned(bool value) {
+inline unsigned to_unsigned(bool value) {
 	return value ? 1 : 0;
 }
 
@@ -567,8 +575,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 					             field->partially_finished_building.constructionsite.was->name() :
 					             "");
 
-					fw.unsigned_32(
-					   field->partially_finished_building.constructionsite.intermediates.size());
+					fw.unsigned_32(field->partially_finished_building.constructionsite.intermediates.size());
 					for (const BuildingDescr* d :
 					     field->partially_finished_building.constructionsite.intermediates) {
 						fw.string(d->name());
