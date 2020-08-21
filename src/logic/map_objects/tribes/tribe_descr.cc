@@ -239,6 +239,7 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 	};
 
 	// Add textures for roads/waterways.
+	// Note: Road and flag texures are loaded in "graphic/build_texture_atlas.h"
 	std::vector<std::string> road_images;
 
 	load_roads("normal", &road_images);
