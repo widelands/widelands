@@ -552,17 +552,19 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 		// Go over again and adjust position for VALIGN
 		for (const auto& n : nodes_in_line) {
 			int space = line_height - n->height();
-			if (!space || n->valign() == UI::Align::kBottom) {
+			int space_top = biggest_hotspot - n->hotspot_y();
+			int space_bottom = space - space_top;
+			if (!space) {
 				continue;
 			}
-			if (n->valign() == UI::Align::kCenter) {
-				space /= 2;
-			}
-			// Space can become negative, for example when we have mixed fontsets on the same line
-			// (e.g. "default" and "arabic"), due to differing font heights and hotspots.
-			// So, we fix the sign.
 			if (n->get_floating() == RenderNode::Floating::kNone) {
-				n->set_y(std::abs(n->y() - space));
+				if (n->valign() == UI::Align::kTop) {
+					n->set_y(n->y() - space_top);
+				} else if (n->valign() == UI::Align::kCenter) {
+					n->set_y(n->y() - space_top + space/2);
+				} else if (n->valign() == UI::Align::kBottom) {
+					n->set_y(n->y() + space_bottom);
+				}
 			}
 		}
 		rv->insert(rv->end(), nodes_in_line.begin(), nodes_in_line.end());
@@ -603,9 +605,9 @@ public:
 	uint16_t height() const override {
 		return h_ + nodestyle_.spacing;
 	}
-	UI::Align valign() const override {
+	/*UI::Align valign() const override {
 		return UI::Align::kBottom;
-	}
+	}*/
 	uint16_t hotspot_y() const override;
 	const std::vector<Reference> get_references() override {
 		std::vector<Reference> rv;
