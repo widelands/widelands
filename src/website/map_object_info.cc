@@ -41,6 +41,12 @@ using namespace Widelands;
 
 namespace {
 
+const std::string& get_helptext(const MapObjectDescr& mo) {
+	const std::map<std::string, std::string>& helptexts = mo.get_helptexts(tribe.name());
+	auto it = std::find(helptexts.begin(), helptexts.end(), "purpose");
+	return it != helptexts.end() ? *it : "";
+}
+
 /*
  ==========================================================
  BUILDINGS
@@ -153,17 +159,7 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 		}
 
 		// Helptext
-		try {
-			std::unique_ptr<LuaTable> table(
-			   egbase.lua().run_script("tribes/scripting/mapobject_info/building_helptext.lua"));
-			std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-			cr->push_arg(building.helptext_script());
-			cr->resume();
-			const std::string help_text = cr->pop_string();
-			json_building->add_string("helptext", help_text);
-		} catch (LuaError& err) {
-			json_building->add_string("helptext", err.what());
-		}
+		json_building->add_string("helptext", get_helptext(building));
 	}
 
 	json->write_to_file(
@@ -189,7 +185,7 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* ou
 		json_ware->add_string("name", ware.name());
 		json_ware->add_string("descname", ware.descname());
 		json_ware->add_string("icon", ware.icon_filename());
-		json_ware->add_string("helptext", ware.get_helptext(tribe.name()));
+		json_ware->add_string("helptext", get_helptext(ware));
 	}
 
 	json->write_to_file(
@@ -215,19 +211,7 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* 
 		json_worker->add_string("name", worker.name());
 		json_worker->add_string("descname", worker.descname());
 		json_worker->add_string("icon", worker.icon_filename());
-
-		// Helptext
-		try {
-			std::unique_ptr<LuaTable> table(
-			   egbase.lua().run_script("tribes/scripting/mapobject_info/worker_helptext.lua"));
-			std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-			cr->push_arg(worker.helptext_script());
-			cr->resume();
-			const std::string help_text = cr->pop_string();
-			json_worker->add_string("helptext", help_text);
-		} catch (LuaError& err) {
-			json_worker->add_string("helptext", err.what());
-		}
+		json_worker->add_string("helptext", get_helptext(worker));
 
 		if (worker.becomes() != INVALID_INDEX) {
 			const WorkerDescr& becomes = *tribe.get_worker_descr(worker.becomes());

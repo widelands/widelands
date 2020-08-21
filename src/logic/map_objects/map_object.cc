@@ -500,12 +500,12 @@ MapObjectDescr::AttributeIndex MapObjectDescr::get_attribute_id(const std::strin
 	}
 }
 
-void MapObjectDescr::set_helptext(const std::string& tribename, const std::string& localized_helptext) {
+void MapObjectDescr::set_helptexts(const std::string& tribename, std::map<std::string, std::string> localized_helptext) {
     // Create or overwrite
-    helptexts_[tribename] = localized_helptext;
+    helptexts_[tribename] = std::move(localized_helptext);
 }
 
-const std::string& MapObjectDescr::get_helptext(const std::string& tribename) const {
+const std::map<std::string, std::string>& MapObjectDescr::get_helptexts(const std::string& tribename) const {
     if (!has_helptext(tribename)) {
         throw wexception("MapObject '%s' has no helptext for tribe '%s'", name().c_str(), tribename.c_str());
     }

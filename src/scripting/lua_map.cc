@@ -1939,11 +1939,11 @@ MapObjectDescription
 */
 const char LuaMapObjectDescription::className[] = "MapObjectDescription";
 const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
-    METHOD(LuaImmovableDescription, helptext),
+    METHOD(LuaImmovableDescription, helptexts),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[] = {
-   PROP_RO(LuaMapObjectDescription, descname),  PROP_RO(LuaMapObjectDescription, helptext_script),
+   PROP_RO(LuaMapObjectDescription, descname),
    PROP_RO(LuaMapObjectDescription, icon_name), PROP_RO(LuaMapObjectDescription, name),
    PROP_RO(LuaMapObjectDescription, type_name), {nullptr, nullptr, nullptr},
 };
@@ -1971,16 +1971,6 @@ void LuaMapObjectDescription::__unpersist(lua_State*) {
 
 int LuaMapObjectDescription::get_descname(lua_State* L) {
 	lua_pushstring(L, get()->descname());
-	return 1;
-}
-
-/* RST
-   .. attribute:: helptext_script
-
-         (RO) The path and filename to the helptext script. Can be empty.
-*/
-int LuaMapObjectDescription::get_helptext_script(lua_State* L) {
-	lua_pushstring(L, get()->helptext_script());
 	return 1;
 }
 
@@ -2090,22 +2080,28 @@ int LuaMapObjectDescription::get_type_name(lua_State* L) {
 /* RST
    .. method:: helptext
 
-      Returns the tribe-specific helptext for this object.
+      Returns the tribe-specific helptexts for this object.
 
       :arg tribename: The tribe for which we want to fetch the helptext.
       :type tribename: :class:`string`
 
-         (RO) a helptext if it exists for the given tribe, an empty string otherwise.
+         (RO) a table of helptexts if it exists for the given tribe, an empty table otherwise.
+         Keys are ``lore``, ``lore_author``, ``purpose``, ``note``, ``performance``, all of them optional.
 */
-int LuaMapObjectDescription::helptext(lua_State* L) {
+int LuaMapObjectDescription::helptexts(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
     std::string tribename = luaL_checkstring(L, 2);
+	lua_newtable(L);
     if (get()->has_helptext(tribename)) {
-        lua_pushstring(L, get()->get_helptext(tribename));
-    } else {
-        lua_pushstring(L, "");
+		for (const auto& item : get()->get_helptexts(tribename)) {
+			if (!item.second.empty()) {
+				lua_pushstring(L, item.first);
+				lua_pushstring(L, item.second);
+				lua_settable(L, -3);
+			}
+		}
     }
 	return 1;
 }

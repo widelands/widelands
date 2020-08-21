@@ -24,9 +24,12 @@ include "tribes/scripting/help/format_help.lua"
 --
 function ware_help_general_string(tribe, ware_description)
    -- TODO(GunChleoc): Split into purpose and note
-   local result = h2(_"Purpose") ..
-      li_image(ware_description.icon_name, ware_description:helptext(tribe.name))
-   return result
+   local helptexts = ware_description:helptexts(tribe.name)
+   if helptexts["purpose"] ~= nil then
+      return h2(_"Purpose") .. li_image(ware_description.icon_name, helptexts["purpose"])
+   else
+      return img(ware_description.icon_name)
+   end
 end
 
 -- RST

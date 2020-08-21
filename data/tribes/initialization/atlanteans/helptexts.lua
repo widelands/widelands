@@ -36,10 +36,41 @@
 -- The helptexts are then joined by the engine.
 -- In our example, we will get ``"The bread paddle is the tool of the baker, each baker needs one. Bread paddles are produced by the toolsmith."``
 
-local warectxt = "atlanteans_ware"
+local buildingctxt = "atlanteans_building"
 local immctxt = "atlanteans_immovable"
+local warectxt = "atlanteans_ware"
 
 return {
+   buildings = {
+      constructionsite = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian building: Construction Site
+            pgettext(buildingctxt, "‘Don’t swear at the builder who is short of building materials.’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian building: Construction Site
+            pgettext(buildingctxt, "Proverb widely used for impossible tasks of any kind")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
+            pgettext(buildingctxt, "A new building is being built at this construction site.")
+         }
+      },
+      dismantlesite = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
+            pgettext(buildingctxt, "‘New paths will appear when you are willing to tear down the old.’")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
+            pgettext(buildingctxt, "Proverb")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
+            pgettext(buildingctxt, "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
+         }
+      },
+   },
    immovables = {
       ashes = {
          -- TRANSLATORS: Helptext for a tribe immovable: Ashes
