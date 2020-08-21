@@ -29,6 +29,7 @@
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
+#include "ui_basic/note_loading_message.h"
 #include "wui/game_tips.h"
 
 namespace UI {
@@ -101,9 +102,9 @@ public:
 	virtual Player* get_safe_player(PlayerNumber);
 
 	// loading stuff
+	void load_all_tribes();
 	void allocate_player_maps();
 	virtual void postload();
-	void load_graphics();
 	virtual void cleanup_for_load();
 
 	/// Create a new loader UI and register which type of gametips to select from.
@@ -279,6 +280,7 @@ private:
 	std::unique_ptr<UI::ProgressWindow> loader_ui_;
 	std::unique_ptr<GameTips> game_tips_;
 	std::vector<std::string> registered_game_tips_;
+	std::unique_ptr<Notifications::Subscriber<UI::NoteLoadingMessage>> loading_message_subscriber_;
 
 	/// Even after a map is fully loaded, some static data (images, scripts)
 	/// will still be read from a filesystem whenever a map/game is saved.

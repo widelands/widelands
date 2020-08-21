@@ -72,7 +72,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:25s",
          "remove=chance:3.91%",
-         "seed=birch_summer_sapling 200",
+         "seed=birch_summer_sapling proximity:78.12%",
          "animate=idle duration:30s",
          "remove=chance:3.91%",
          "grow=birch_summer_old",
@@ -104,7 +104,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:13m20s",
          "transform=deadtree2 chance:10.55%",
-         "seed=birch_summer_sapling 60",
+         "seed=birch_summer_sapling proximity:23.44%",
       },
       fall = {
          "remove=",

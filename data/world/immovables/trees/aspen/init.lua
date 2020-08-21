@@ -72,7 +72,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:20s",
          "remove=chance:11.72%",
-         "seed=aspen_summer_sapling 60",
+         "seed=aspen_summer_sapling proximity:23.44%",
          "animate=idle duration:20s",
          "remove=chance:7.81%",
          "grow=aspen_summer_old",
@@ -104,7 +104,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:17m30s",
          "transform=deadtree2 chance:5.86%",
-         "seed=aspen_summer_sapling 100",
+         "seed=aspen_summer_sapling proximity:39%",
       },
       fall = {
          "animate=falling duration:1s400ms",

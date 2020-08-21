@@ -101,7 +101,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:37m30s",
          "transform=deadtree2 chance:4.69%",
-         "seed=oak_summer_sapling 100",
+         "seed=oak_summer_sapling proximity:39%",
       },
       fall = {
          "animate=falling duration:1s400ms",

@@ -101,7 +101,7 @@ world:new_immovable_type{
       main = {
          "animate=idle duration:25m50s",
          "transform=deadtree4 chance:15.23%",
-         "seed=palm_roystonea_desert_sapling 30",
+         "seed=palm_roystonea_desert_sapling proximity:11.72%",
       },
       fall = {
          "remove=",

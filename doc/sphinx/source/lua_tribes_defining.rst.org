@@ -3,15 +3,22 @@ Defining Tribes
 
 Each tribe is bootstrapped with the following scripts:
 
-* ``data/tribes/init.lua``: This file loads all the scripts that define the
-  tribes. So, if you add a new tribe or a new unit to a tribe, it needs to be
-  listed in this file.
-* ``data/tribes/preload.lua``: Provides basic information about all available
+* ``data/tribes/init.lua``: Provides basic information about all available
   tribes to the game launching screens. The player won't be able to select a
   tribe without it being defined in this file.
 * ``data/tribes/<tribe name>.lua``: These scripts tell the engine which units
   belong to each tribe. They also define some global animated images for each
   tribe (flags, borders, roads).
+
+The tribe objects are then defined by the following scripts:
+
+* ``data/tribes/<path>/init.lua``: This file defines the map objects to load
+  from its path.
+* ``data/tribes/<path>/register.lua``: This file has to list the names of all
+  objects defined in the path's ``init.lua`` file. Only tribe objects that are
+  listed in these files will be registered for loading, and the names must match
+  with the respective ``init.lua`` file.
+* See :ref:`defining_tribe_units` for further details.
 
 .. toctree::
    :maxdepth: 3

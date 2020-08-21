@@ -174,16 +174,19 @@ Available actions are:
 ProductionProgram::ActReturn::Condition* create_economy_condition(const std::string& item,
                                                                   const ProductionSiteDescr& descr,
                                                                   const Tribes& tribes) {
-	DescriptionIndex index = tribes.ware_index(item);
-	if (tribes.ware_exists(index)) {
-		descr.ware_demand_checks()->insert(index);
-		return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
-	} else if (tribes.worker_exists(tribes.worker_index(item))) {
-		index = tribes.worker_index(item);
-		descr.worker_demand_checks()->insert(index);
-		return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
-	} else {
-		throw GameDataError("Expected ware or worker type but found '%s'", item.c_str());
+	try {
+		const WareWorker wareworker = tribes.try_load_ware_or_worker(item);
+		if (wareworker == WareWorker::wwWARE) {
+			const DescriptionIndex index = tribes.ware_index(item);
+			descr.ware_demand_checks()->insert(index);
+			return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
+		} else {
+			const DescriptionIndex index = tribes.worker_index(item);
+			descr.worker_demand_checks()->insert(index);
+			return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
+		}
+	} catch (const GameDataError& e) {
+		throw GameDataError("economy condition: %s", e.what());
 	}
 }
 
@@ -279,14 +282,13 @@ ProductionProgram::parse_ware_type_groups(std::vector<std::string>::const_iterat
 }
 
 BillOfMaterials ProductionProgram::parse_bill_of_materials(
-   const std::vector<std::string>& arguments, WareWorker ww, const Tribes& tribes) {
+   const std::vector<std::string>& arguments, WareWorker ww, Tribes& tribes) {
 	BillOfMaterials result;
 	for (const std::string& argument : arguments) {
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
 
-		const DescriptionIndex index = ww == WareWorker::wwWARE ?
-		                                  tribes.safe_ware_index(produceme.first) :
-		                                  tribes.safe_worker_index(produceme.first);
+		const DescriptionIndex index = ww == WareWorker::wwWARE ? tribes.load_ware(produceme.first) :
+		                                                          tribes.load_worker(produceme.first);
 
 		result.push_back(std::make_pair(index, read_positive(produceme.second)));
 	}
@@ -1222,7 +1224,7 @@ type specified by
 */
 ProductionProgram::ActProduce::ActProduce(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
-                                          const Tribes& tribes) {
+                                          Tribes& tribes) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: produce=<ware name>[:<amount>] [<ware name>[:<amount>]...]");
 	}
@@ -1306,7 +1308,7 @@ then leave the site looking for employment. The produced workers are of the type
 */
 ProductionProgram::ActRecruit::ActRecruit(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
-                                          const Tribes& tribes) {
+                                          Tribes& tribes) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: recruit=<worker_name>[:<amount>] [<worker_name>[:<amount>]...]");
 	}
@@ -1582,22 +1584,32 @@ checksoldier
    <lua_tribes_buildings_trainingsites>`.
 
 Returns failure unless there is a soldier present with the given training attribute at the given
-level. Example:
+level.
+
+.. note:: The program's name must match the attribute to be trained and the level checked for, in
+   the form ``upgrade_soldier_<attribute>_<level>``.
+
+Example:
 
 .. code-block:: lua
 
-      actions = {
-         -- Fails when there aren't any soldiers with attack level 0
-         "checksoldier=soldier:attack level:1",
-         "return=failed unless site has ax_broad",
-         "return=failed unless site has fish,meat",
-         "return=failed unless site has barbarians_bread",
-         "sleep=duration:30s",
-         -- Check again because the soldier could have been expelled by the player
-         "checksoldier=soldier:attack level:1",
-         "consume=ax_broad fish,meat barbarians_bread",
-         "train=soldier:attack level:2"
-      }
+      upgrade_soldier_attack_3 = {
+         -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+         descname = _"upgrading soldier attack from level 3 to level 4",
+         actions = {
+            -- Fails when there aren't any soldiers with attack level 3
+            "checksoldier=soldier:attack level:3",
+            "return=failed unless site has sword_long",
+            "return=failed unless site has honey_bread,mead",
+            "return=failed unless site has smoked_fish,smoked_meat",
+            "sleep=duration:10s800ms",
+            "animate=working duration:12s",
+            -- Check again because the soldier could have been expelled by the player
+            "checksoldier=soldier:attack level:3",
+            "consume=sword_long honey_bread,mead smoked_fish,smoked_meat",
+            "train=soldier:attack level:4"
+         }
+      },
 */
 ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::string>& arguments,
                                                     const ProductionSiteDescr& descr) {
@@ -1682,11 +1694,9 @@ train
 
    :arg int level: The level that the soldier will receive for the given training attribute.
 
-.. note:: This action is only available to :ref:`training sites
-   <lua_tribes_buildings_trainingsites>`.
-
 Increases a soldier's training attribute to the given level. It is mandatory to call 'checksoldier'
 before calling this action to ensure that an appropriate soldier will be present at the site.
+
 Example:
 
 .. code-block:: lua
@@ -2043,7 +2053,7 @@ void ProductionProgram::ActConstruct::building_work_failed(Game& game,
 ProductionProgram::ProductionProgram(const std::string& init_name,
                                      const std::string& init_descname,
                                      std::unique_ptr<LuaTable> actions_table,
-                                     const Tribes& tribes,
+                                     Tribes& tribes,
                                      const World& world,
                                      ProductionSiteDescr* building)
    : MapObjectProgram(init_name), descname_(init_descname) {
