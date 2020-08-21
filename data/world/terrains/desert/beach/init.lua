@@ -4,7 +4,7 @@
 -- Terrains
 -- --------
 --
--- Terrains define the basic look of the map, and all terrains are defined in ``data/world/terrains/init.lua``.
+-- Terrains define the basic look of the map.
 --
 -- .. code-block:: none
 --

@@ -102,7 +102,7 @@ wl.World():new_immovable_type{
    },
    animations = {
       idle = {
-         basename = "rocks5",
+         basename = "rocks6",
          hotspot = { 30, 75 }
       },
    }

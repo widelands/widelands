@@ -946,10 +946,8 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
-
 	{
 		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
-
 		eia.load_world_units();
 		egbase.tribes();
 
@@ -988,9 +986,9 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 void EditorInteractive::load_world_units() {
 	Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
 
-	/// Ensure all world units have been loaded and fill editor categories
 	std::unique_ptr<LuaTable> table(egbase().lua().run_script("world/init.lua"));
 	Widelands::World* world = egbase().mutable_world();
+
 	for (const auto& category_table :
 		 table->get_table("critters")->array_entries<std::unique_ptr<LuaTable>>()) {
 		editor_categories_[Widelands::MapObjectType::CRITTER].push_back(std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, Widelands::MapObjectType::CRITTER, *world)));

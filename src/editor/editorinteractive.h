@@ -93,7 +93,6 @@ public:
 	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
 	// map and run 'script_to_run' directly after all initialization is done.
 	static void run_editor(const std::string& filename, const std::string& script_to_run);
-	void load_world_units();
 
 	void load(const std::string& filename);
 	void cleanup_for_load() override;
@@ -196,6 +195,9 @@ private:
 	// Show / hide the bobs in the mapview
 	void toggle_bobs();
 	void toggle_grid();
+
+	/// Ensure all world units have been loaded and fill editor categories
+	void load_world_units();
 
 	//  state variables
 	bool need_save_;

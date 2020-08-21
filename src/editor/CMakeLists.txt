@@ -103,9 +103,11 @@ wl_library(editor
     io_filesystem
     logic
     logic_constants
+    logic_exceptions
     logic_filesystem_constants
     logic_generic_save_handler
     logic_map
+    logic_map_object_type
     logic_map_objects
     logic_map_objects_description_maintainer
     logic_tribe_basic_info
