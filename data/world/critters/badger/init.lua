@@ -8,26 +8,7 @@
 --
 -- Critters are defined in
 -- ``data/world/critters/<critter_name>/init.lua``.
-
-dirname = path.dirname(__file__)
-
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 9, 12 },
-      fps = 20,
-   },
-   eating = {
-      directory = dirname,
-      basename = "idle", -- TODO(Nordfriese): Make animation
-      hotspot = { 9, 12 },
-      fps = 20,
-   }
-}
-
-add_directional_animation(animations, "walk", dirname, "walk", {13, 15}, 20)
-
--- RST
+--
 -- .. function:: new_critter_type{table}
 --
 --    This function adds the definition of a critter to the engine.
@@ -93,14 +74,32 @@ add_directional_animation(animations, "walk", dirname, "walk", {13, 15}, 20)
 world:new_critter_type{
    name = "badger",
    descname = _ "Badger",
+   animation_directory = path.dirname(__file__),
    editor_category = "critters_carnivores",
    attributes = { "eatable" },
    programs = {
       remove = { "remove" },
    },
-   animations = animations,
    size = 4,
    reproduction_rate = 70,
    appetite = 50,
    carnivore = true,
+
+   animations = {
+      idle = {
+         hotspot = { 9, 12 },
+         fps = 20,
+      },
+      eating = {
+         basename = "idle", -- TODO(Nordfriese): Make animation
+         hotspot = { 9, 12 },
+         fps = 20,
+      },
+      walk = {
+         hotspot = { 13, 15 },
+         fps = 20,
+         directional = true
+      }
+   }
+
 }
