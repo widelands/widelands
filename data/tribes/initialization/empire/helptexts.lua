@@ -8,7 +8,9 @@ local immctxt = "empire_immovable"
 local warectxt = "empire_ware"
 local workerctxt = "empire_worker"
 
-return {
+push_textdomain("tribes_encyclopedia")
+
+local result = {
    buildings = {
       constructionsite = {
          lore = {
@@ -840,3 +842,5 @@ return {
       },
    }
 }
+pop_textdomain()
+return result

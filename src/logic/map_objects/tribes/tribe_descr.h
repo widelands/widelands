@@ -64,8 +64,7 @@ public:
 	           Tribes& tribes,
 	           const World& world,
 	           const LuaTable& table,
-	           const LuaTable* scenario_table = nullptr,
-			   const std::string& scenario_textdomain = "tribes_encyclopedia");
+	           const LuaTable* scenario_table = nullptr);
 
 	const std::string& name() const;
 	const std::string& descname() const;
@@ -154,10 +153,10 @@ private:
 	// Helper functions for loading everything in the constructor
 	void load_frontiers_flags_roads(const LuaTable& table);
 	void load_ships(const LuaTable& table, Tribes& tribes);
-	void load_wares(const LuaTable& table, Tribes& tribes, LuaTable* helptexts, const std::string& textdomain);
-	void load_immovables(const LuaTable& table, Tribes& tribes, const World& world, LuaTable* helptexts, const std::string& textdomain);
-	void load_workers(const LuaTable& table, Tribes& tribes, LuaTable* helptexts, const std::string& textdomain);
-	void load_buildings(const LuaTable& table, Tribes& tribes, LuaTable* helptexts, const std::string& textdomain);
+	void load_wares(const LuaTable& table, Tribes& tribes, LuaTable* helptexts);
+	void load_immovables(const LuaTable& table, Tribes& tribes, const World& world, LuaTable* helptexts);
+	void load_workers(const LuaTable& table, Tribes& tribes, LuaTable* helptexts);
+	void load_buildings(const LuaTable& table, Tribes& tribes, LuaTable* helptexts);
 
 	/// Registers a building with the tribe
 	void add_building(const std::string& buildingname, Tribes& tribes, LuaTable* helptexts);

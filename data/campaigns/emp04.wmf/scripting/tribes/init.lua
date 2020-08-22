@@ -67,8 +67,10 @@
 
 local buildingctxt = "empire_building"
 
-return {
-   textdomain = "scenario_emp04.wmf",
+
+push_textdomain("tribes_encyclopedia")
+
+local result = {
    empire = {
       buildings = {
          "empire_brewery1",
@@ -95,3 +97,5 @@ return {
       }
    }
 }
+pop_textdomain()
+return result

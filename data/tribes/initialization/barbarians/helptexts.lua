@@ -9,7 +9,9 @@ local immctxt = "barbarians_immovable"
 local warectxt = "barbarians_ware"
 local workerctxt = "barbarians_worker"
 
-return {
+push_textdomain("tribes_encyclopedia")
+
+local result = {
    buildings = {
       constructionsite = {
          lore = {
@@ -147,7 +149,6 @@ return {
             pgettext(buildingctxt, "The Barbarian ax workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualification for the worker.")
          },
          performance = {
-            -- NOCOM this will break, we need fo fix push/pop_textdomain for this
             -- TRANSLATORS: Performance helptext for a barbarian production site: Ax Workshop
             pgettext(buildingctxt, "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(ngettext("%d second", "%d seconds", 57):bformat(57)),
             -- TRANSLATORS: Performance helptext for a barbarian production site: Ax Workshop
@@ -1349,3 +1350,5 @@ return {
       },
    }
 }
+pop_textdomain()
+return result

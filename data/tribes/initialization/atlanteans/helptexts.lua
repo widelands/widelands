@@ -45,7 +45,9 @@ local immctxt = "atlanteans_immovable"
 local warectxt = "atlanteans_ware"
 local workerctxt = "atlanteans_worker"
 
-return {
+push_textdomain("tribes_encyclopedia")
+
+local result = {
    buildings = {
       constructionsite = {
          lore = {
@@ -776,3 +778,5 @@ return {
       },
    }
 }
+pop_textdomain()
+return result
