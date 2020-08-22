@@ -459,8 +459,10 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 		r.fill_rect(Recti((get_w() - max_w - padding_) / 2, version_.get_y() - padding_ / 2,
 		                  max_w + padding_, get_h() - version_.get_y() + padding_ / 2),
 		            bg, BlendMode::Default);
+	}
 
-		draw_title(r, factor);
+	if (init_time_ == kNoSplash) {
+		draw_title(r, 1.f);
 	}
 
 	if (initial_fadeout_state < 1.f) {
@@ -489,7 +491,10 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 		}
 		const Image& img = *g_gr->images().get(images_[draw_image_]);
 		do_draw_image(r, image_pos(img), img, opacity * factor);
-		draw_title(r, 1.f - factor);
+	}
+
+	if (init_time_ != kNoSplash && time - init_time_ > kInitialFadeoutDelay) {
+		draw_title(r, std::min(1.f, static_cast<float>(time - init_time_ - kInitialFadeoutDelay) / kInitialFadeoutDuration));
 	}
 }
 
