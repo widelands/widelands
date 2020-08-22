@@ -52,7 +52,6 @@ ScenarioToolFieldOwnerOptionsMenu::ScenarioToolFieldOwnerOptionsMenu(
 	list_.add(_("Unset Owner"), 0, nullptr, sel == 0 || sel > max, _("Mark fields as unowned"));
 	for (Widelands::PlayerNumber p = 1; p <= max; ++p) {
 		const std::string& name = map.get_scenario_player_name(p);
-		const std::string& tribe = map.get_scenario_player_tribe(p);
 		list_.add(
 		   (boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name)
 		      .str(),
