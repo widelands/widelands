@@ -565,7 +565,7 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 							fw.unsigned_32(egbase.tribes().safe_building_index(ps.descr().name()));
 						}
 						fw.unsigned_8(ps.is_stopped() ? 1 : 0);
-						const std::vector<Widelands::InputQueue*> qs = ps.inputqueues();
+						const std::vector<Widelands::InputQueue*>& qs = ps.inputqueues();
 						fw.unsigned_32(qs.size());
 						for (const Widelands::InputQueue* q : qs) {
 							fw.unsigned_8(q->get_type() == Widelands::wwWARE ? 0 : 1);
