@@ -494,7 +494,8 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 	}
 
 	if (init_time_ != kNoSplash && time - init_time_ > kInitialFadeoutDelay) {
-		draw_title(r, std::min(1.f, static_cast<float>(time - init_time_ - kInitialFadeoutDelay) / kInitialFadeoutDuration));
+		draw_title(r, std::min(1.f, static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
+		                               kInitialFadeoutDuration));
 	}
 }
 
