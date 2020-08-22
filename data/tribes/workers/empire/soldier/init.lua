@@ -55,9 +55,13 @@ animations = {
       pictures = path.list_files(dirname .. "die_??.png"),
       hotspot = { 10, 36 },
       fps = 10
+   },
+   walk = {
+      hotspot = { 10, 36 },
+      fps = 10,
+      directional = true
    }
 }
-add_directional_animation(animations, "walk", dirname, "walk", {10, 36}, 10)
 
 all_levels_emp = {
    min_health = 0,
@@ -76,6 +80,7 @@ tribes:new_soldier_type {
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Soldier"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
