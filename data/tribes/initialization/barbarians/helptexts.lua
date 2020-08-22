@@ -1348,6 +1348,135 @@ local result = {
          -- TRANSLATORS: Helptext for a barbarian worker: Baker
          purpose = { pgettext(workerctxt, "Bakes pitta bread for the miners, soldiers and scouts.") }
       },
+      barbarians_blacksmith = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Blacksmith
+         purpose = { pgettext(workerctxt, "Produces weapons for soldiers and tools for workers.") }
+      },
+      barbarians_blacksmith_master = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Master Blacksmith
+         purpose = { pgettext(workerctxt, "Produces weapons for soldiers and tools for workers.") }
+      },
+      barbarians_brewer = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Brewer
+         purpose = { pgettext(workerctxt, "Produces beer to keep the miners strong and happy.") }
+      },
+      barbarians_brewer_master = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Master Brewer
+         purpose = { pgettext(workerctxt, "Produces the finest ales to keep soldiers strong and happy in training.") }
+      },
+      barbarians_builder = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Builder
+         purpose = { pgettext(workerctxt, "Works at construction sites to raise new buildings.") }
+      },
+      barbarians_carrier = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Carrier
+         purpose = { pgettext(workerctxt, "Carries items along your roads.") }
+      },
+      barbarians_cattlebreeder = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Cattle Breeder
+         purpose = { pgettext(workerctxt, "Breeds strong oxen for adding them to the transportation system.") }
+      },
+      barbarians_charcoal_burner = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Charcoal Burner
+         purpose = { pgettext(workerctxt, "Burns coal.") }
+      },
+      barbarians_farmer = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Farmer
+         purpose = { pgettext(workerctxt, "Plants fields.") }
+      },
+      barbarians_ferry = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Ferry
+         purpose = { pgettext(workerctxt, "Ships wares across narrow rivers.") }
+      },
+      barbarians_fisher = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Fisher
+         purpose = { pgettext(workerctxt, "Catches fish in the sea.") }
+      },
+      barbarians_gamekeeper = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Gamekeeper
+         purpose = { pgettext(workerctxt, "The gamekeeper makes sure that the natural population of animals never drops too low.") }
+      },
+      barbarians_gardener = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Gardener
+         purpose = { pgettext(workerctxt, "Plants and harvests reed fields.") }
+      },
+      barbarians_geologist = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Geologist
+         purpose = { pgettext(workerctxt, "Discovers resources for mining.") }
+      },
+      barbarians_helmsmith = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Helmsmith
+         purpose = { pgettext(workerctxt, "Forges helmets for soldiers.") }
+      },
+      barbarians_hunter = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Hunter
+         purpose = { pgettext(workerctxt, "The hunter brings fresh, raw meat to the colonists.") }
+      },
+      barbarians_innkeeper = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Innkeeper
+         purpose = { pgettext(workerctxt, "Produces food for miners.") }
+      },
+      barbarians_lime_burner = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Lime-Burner
+         purpose = { pgettext(workerctxt, "Mixes grout out of granite, water and coal in the lime kiln.") }
+      },
+      barbarians_lumberjack = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Helmsmith
+         purpose = { pgettext(workerctxt, "Fells trees.") }
+      },
+      barbarians_miner = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Miner
+         purpose = { pgettext(workerctxt, "Works deep in the mines to obtain coal, iron, gold or granite.") }
+      },
+      barbarians_miner_chief = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Chief Miner
+         purpose = { pgettext(workerctxt, "Works deep in the mines to obtain coal, iron, gold or granite.") }
+      },
+      barbarians_miner_master = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Master Miner
+         purpose = { pgettext(workerctxt, "Works deep in the mines to obtain coal, iron, gold or granite.") }
+      },
+      barbarians_ox = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Ox
+         purpose = { pgettext(workerctxt, "Oxen help to carry items along busy roads. They are reared in a cattle farm.") }
+      },
+      barbarians_ranger = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Ranger
+         purpose = { pgettext(workerctxt, "Plants trees.") }
+      },
+      barbarians_recruit = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Recruit
+         purpose = { pgettext(workerctxt, "Eager to become a soldier and defend his tribe!") }
+      },
+      barbarians_scout = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Scout
+         purpose = { pgettext(workerctxt, "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion.") }
+         -- (c) WiHack Team 02.01.2010
+      },
+      barbarians_shipwright = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Shipwright
+         purpose = { pgettext(workerctxt, "Works at the shipyard and constructs new ships.") }
+      },
+      barbarians_smelter = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Smelter
+         purpose = { pgettext(workerctxt, "Smelts ores into metal.") }
+      },
+      barbarians_soldier = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Soldier
+         purpose = { pgettext(workerctxt, "Defend and Conquer!") }
+      },
+      barbarians_stonemason = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Stonemason
+         purpose = { pgettext(workerctxt, "Cuts raw pieces of granite out of rocks in the vicinity.") }
+      },
+      barbarians_trainer = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Trainer
+         purpose = { pgettext(workerctxt, "Trains the soldiers.") }
+      },
+      barbarians_weaver = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Weaver
+         purpose = { pgettext(workerctxt, "Produces cloth for ships’ sails.") }
+      }
    }
 }
 pop_textdomain()

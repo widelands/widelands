@@ -5,7 +5,6 @@ tribes:new_worker_type {
    name = "barbarians_lime_burner",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Lime-Burner"),
-   helptext_script = dirname .. "helptexts.lua",
    animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
