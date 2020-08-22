@@ -89,8 +89,8 @@ local result = {
          buildings = {
             empire_temple_of_vesta = {
                purpose = {
-                  -- TRANSLATORS: Purpose helptext for a barbarian production site: Quarry
-                  pgettext(buildingctxt, "In the temple of Vesta, the wares to worship are stored. It is the home of the priestesses and the guards of the goddess.")
+                  -- TRANSLATORS: Purpose helptext for an empire warehouse: Temple of Vesta
+                  pgettext("empire_building", "In the temple of Vesta, the wares to worship are stored. It is the home of the priestesses and the guards of the goddess.")
                }
             }
          }
