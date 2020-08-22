@@ -520,8 +520,9 @@ void ShipWindow::act_debug() {
 }
 
 void ShipWindow::act_editorcfg() {
-	if (Widelands::Ship* ship = ship_.get(ibase_.egbase()))
+	if (Widelands::Ship* ship = ship_.get(ibase_.egbase())) {
 		new ShipCfg(ibase_, *ship);
+	}
 }
 
 /// Cancel expedition if confirmed

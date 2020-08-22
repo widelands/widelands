@@ -201,9 +201,10 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 						   *construction_site_.get(ibase()->egbase()),
 						   SDL_GetModState() & KMOD_CTRL ? 0 : ts->desired_capacity - 1);
 					} else {
-						if (ts->desired_capacity > 0)
+						if (ts->desired_capacity > 0) {
 							ts->desired_capacity =
 							   SDL_GetModState() & KMOD_CTRL ? 0 : ts->desired_capacity - 1;
+						}
 					}
 				});
 				cs_soldier_capacity_increase_->sigclicked.connect([this, ts]() {
@@ -212,9 +213,10 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 						   *construction_site_.get(ibase()->egbase()),
 						   SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1);
 					} else {
-						if (ts->desired_capacity < ts->max_capacity)
+						if (ts->desired_capacity < ts->max_capacity) {
 							ts->desired_capacity =
 							   SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1;
+						}
 					}
 				});
 				soldier_capacity_box.add(cs_soldier_capacity_decrease_);

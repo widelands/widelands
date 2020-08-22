@@ -38,7 +38,7 @@ int32_t ScenarioPlaceWorkerTool::handle_click_impl(const Widelands::NodeAndTrian
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	args->infrastructure_placed = 0;
 	if (args->random_index == kRandomIndexNotSet) {
-		args->random_index = std::rand() % nr_items;
+		args->random_index = std::rand() % nr_items;  // NOLINT
 	}
 	Widelands::Player* player = egbase.get_player(args->new_owner);
 	const Widelands::WorkerDescr* wd = args->worker_types[args->random_index];
@@ -59,7 +59,7 @@ int32_t ScenarioPlaceWorkerTool::handle_click_impl(const Widelands::NodeAndTrian
 	} else if ((*map)[center.node].nodecaps() & Widelands::MOVECAPS_SWIM) {
 		bob = &egbase.create_ship(center.node, player->tribe().ship(), player);
 	}
-	args->infrastructure_placed = bob->serial();
+	args->infrastructure_placed = bob->serial();  // NOLINT
 	return 1;
 }
 

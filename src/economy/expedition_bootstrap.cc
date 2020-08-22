@@ -147,8 +147,9 @@ void ExpeditionBootstrap::demand_additional_item(EditorGameBase& egbase,
 		}
 		wq->set_callback(input_callback, this);
 		queues_.push_back(std::make_pair(std::unique_ptr<InputQueue>(wq), true));
-		if (upcast(Game, g, &egbase))
+		if (upcast(Game, g, &egbase)) {
 			return is_ready(*g);
+		}
 		return;
 	} else {
 		// Remove the last matching additional queue
@@ -167,8 +168,9 @@ void ExpeditionBootstrap::demand_additional_item(EditorGameBase& egbase,
 				}
 				it->first->cleanup();
 				queues_.erase(it);
-				if (upcast(Game, g, &egbase))
+				if (upcast(Game, g, &egbase)) {
 					return is_ready(*g);
+				}
 				return;
 			}
 		}
@@ -229,8 +231,9 @@ std::vector<InputQueue*> ExpeditionBootstrap::queues(bool all) const {
 
 bool ExpeditionBootstrap::is_additional(const InputQueue& q) const {
 	for (const auto& pair : queues_) {
-		if (pair.first.get() == &q)
+		if (pair.first.get() == &q) {
 			return pair.second;
+		}
 	}
 	NEVER_HERE();
 }

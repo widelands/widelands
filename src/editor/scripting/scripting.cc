@@ -31,13 +31,17 @@
 
 // Identifier helper functions
 bool is_name_valid(const char* name) {
-	if (name == nullptr)
+	if (name == nullptr) {
 		return false;
-	if ((name[0] < 'a' || name[0] > 'z') && name[0] != '_')
+	}
+	if ((name[0] < 'a' || name[0] > 'z') && name[0] != '_') {
 		return false;
-	for (const char* c = name; *c; ++c)
-		if ((*c < 'a' || *c > 'z') && (*c < '0' || *c > '9') && *c != '_')
+	}
+	for (const char* c = name; *c; ++c) {
+		if ((*c < 'a' || *c > 'z') && (*c < '0' || *c > '9') && *c != '_') {
 			return false;
+		}
+	}
 	return true;
 }
 bool is_name_valid(const std::string& name) {
@@ -60,8 +64,9 @@ constexpr uint16_t kCurrentPacketVersionScriptingObjectHeader = 1;
 constexpr uint16_t kCurrentPacketVersionScriptingObject = 1;
 
 void ScriptingObject::selftest() const {
-	if (!serial_)
+	if (!serial_) {
 		throw wexception("not initialized");
+	}
 }
 void ScriptingObject::init(ScriptingSaver& s, bool init_serial) {
 	if (init_serial) {
@@ -478,8 +483,9 @@ void ScriptingSaver::selftest() const {
 void ScriptingSaver::save(FileWrite& fw) const {
 	fw.unsigned_16(kCurrentPacketVersionScripting);
 	fw.unsigned_32(list_.size());
-	for (const auto& a : list_)
+	for (const auto& a : list_) {
 		a->save(fw);
+	}
 }
 
 void ScriptingSaver::delete_unused(const EditorInteractive& eia) {
@@ -509,8 +515,9 @@ void ScriptingSaver::delete_unused(const EditorInteractive& eia) {
 			remove.push_back(s->serial());
 		}
 	}
-	if (remove.empty())
+	if (remove.empty()) {
 		return;
+	}
 	log("ScriptingSaver::delete_unused(): Deleting %" PRIuS " item(s):\n", remove.size());
 	while (!remove.empty()) {
 		bool found = false;
@@ -523,10 +530,11 @@ void ScriptingSaver::delete_unused(const EditorInteractive& eia) {
 				break;
 			}
 		}
-		if (!found)
+		if (!found) {
 			throw wexception(
 			   "ScriptingSaver::delete_unused(): Attempt to delete nonexistent object %u",
 			   remove.back());
+		}
 	}
 }
 

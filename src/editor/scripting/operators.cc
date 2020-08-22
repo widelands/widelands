@@ -74,14 +74,18 @@ void OperatorBase::write_lua(int32_t i, FileWrite& fw) const {
 }
 void OperatorBase::selftest() const {
 	Assignable::selftest();
-	if (!a_)
+	if (!a_) {
 		throw wexception("first parameter not set");
-	if (!b_)
+	}
+	if (!b_) {
 		throw wexception("first parameter not set");
-	if (input_type_.id() == VariableTypeID::Nil)
+	}
+	if (input_type_.id() == VariableTypeID::Nil) {
 		throw wexception("input type is nil");
-	if (output_type_.id() == VariableTypeID::Nil)
+	}
+	if (output_type_.id() == VariableTypeID::Nil) {
 		throw wexception("output type is nil");
+	}
 }
 
 // The '..' operator
@@ -147,14 +151,18 @@ void OperatorStringConcat::write_lua(int32_t i, FileWrite& fw) const {
 }
 void OperatorStringConcat::selftest() const {
 	Assignable::selftest();
-	if (!a_)
+	if (!a_) {
 		throw wexception("first parameter not set");
-	if (!b_)
+	}
+	if (!b_) {
 		throw wexception("second parameter not set");
-	if (!is_string_convertible(a_->type().id()))
+	}
+	if (!is_string_convertible(a_->type().id())) {
 		throw wexception("first parameter is not a string");
-	if (!is_string_convertible(b_->type().id()))
+	}
+	if (!is_string_convertible(b_->type().id())) {
 		throw wexception("second parameter is not a string");
+	}
 }
 
 // The 'not' operator
@@ -199,8 +207,9 @@ void OperatorNot::write_lua(int32_t i, FileWrite& fw) const {
 }
 void OperatorNot::selftest() const {
 	Assignable::selftest();
-	if (!a_)
+	if (!a_) {
 		throw wexception("parameter not set");
+	}
 }
 
 // The '== nil' operator
@@ -245,6 +254,7 @@ void OperatorIsNil::write_lua(int32_t i, FileWrite& fw) const {
 }
 void OperatorIsNil::selftest() const {
 	Assignable::selftest();
-	if (!a_)
+	if (!a_) {
 		throw wexception("parameter not set");
+	}
 }

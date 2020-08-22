@@ -30,7 +30,7 @@ FunctionBase::FunctionBase(const std::string& n,
                            const VariableType& c,
                            const VariableType& r,
                            std::list<std::pair<std::string, VariableType>> p)
-   : parameters_(p), name_(n), class_(c), returns_(r) {
+   : parameters_(std::move(p)), name_(n), class_(c), returns_(r) {
 }
 FunctionBase::FunctionBase(const std::string& n)
    : name_(n), class_(VariableTypeID::Nil), returns_(VariableTypeID::Nil) {

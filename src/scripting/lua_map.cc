@@ -520,9 +520,10 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const SoldierDescr&
 	lua_pop(L, 1);
 	const int32_t maxhealth =
 	   sd.get_base_health() + soldier_descr.health * sd.get_health_incr_per_level();
-	if (soldier_descr.total_health >= 0 && soldier_descr.total_health > maxhealth)
+	if (soldier_descr.total_health >= 0 && soldier_descr.total_health > maxhealth) {
 		report_error(L, "total health (%u) > max possible health (%u @ level %i)",
 		             soldier_descr.total_health, maxhealth, soldier_descr.health);
+	}
 
 	return soldier_descr;
 }

@@ -63,8 +63,8 @@ ScenarioToolVisionOptionsMenu::ScenarioToolVisionOptionsMenu(EditorInteractive& 
 	const Widelands::PlayerNumber max = map.get_nrplayers();
 	const Widelands::PlayerNumber sel = tool_.get_player();
 	for (Widelands::PlayerNumber p = 1; p <= max; ++p) {
-		const std::string name = map.get_scenario_player_name(p);
-		const std::string tribe = map.get_scenario_player_tribe(p);
+		const std::string& name = map.get_scenario_player_name(p);
+		const std::string& tribe = map.get_scenario_player_tribe(p);
 		players_.add(
 		   (boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name)
 		      .str(),

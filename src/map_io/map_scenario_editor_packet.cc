@@ -559,10 +559,11 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 					}
 						FALLS_THROUGH;
 					case Widelands::MapObjectType::PRODUCTIONSITE: {
-						const Widelands::ProductionSite& ps =
+						const Widelands::ProductionSite& ps =  // NOLINT
 						   dynamic_cast<const Widelands::ProductionSite&>(*f.get_immovable());
-						if (type != Widelands::MapObjectType::TRAININGSITE)
+						if (type != Widelands::MapObjectType::TRAININGSITE) {
 							fw.unsigned_32(egbase.tribes().safe_building_index(ps.descr().name()));
+						}
 						fw.unsigned_8(ps.is_stopped() ? 1 : 0);
 						const std::vector<Widelands::InputQueue*> qs = ps.inputqueues();
 						fw.unsigned_32(qs.size());

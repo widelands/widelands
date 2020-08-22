@@ -54,8 +54,9 @@ void FS_Return::save(FileWrite& fw) const {
 }
 std::set<uint32_t> FS_Return::references() const {
 	auto set = FunctionStatement::references();
-	if (return_)
+	if (return_) {
 		set.insert(return_->serial());
+	}
 	return set;
 }
 std::string FS_Return::readable() const {
@@ -125,17 +126,20 @@ std::string FS_LocalVarDeclOrAssign::readable() const {
 std::set<uint32_t> FS_LocalVarDeclOrAssign::references() const {
 	auto set = FunctionStatement::references();
 	set.insert(variable_->serial());
-	if (value_)
+	if (value_) {
 		set.insert(value_->serial());
+	}
 	return set;
 }
 void FS_LocalVarDeclOrAssign::selftest() const {
 	FunctionStatement::selftest();
-	if (!variable_)
+	if (!variable_) {
 		throw wexception("variable not set");
-	if (value_ && !value_->type().is_subclass(variable_->type()))
+	}
+	if (value_ && !value_->type().is_subclass(variable_->type())) {
 		throw wexception("%s cannot be casted to %s", descname(value_->type()).c_str(),
 		                 descname(variable_->type()).c_str());
+	}
 }
 
 // Function invoking
@@ -332,18 +336,23 @@ std::set<uint32_t> FS_SetProperty::references() const {
 }
 void FS_SetProperty::selftest() const {
 	FunctionStatement::selftest();
-	if (!variable_)
+	if (!variable_) {
 		throw wexception("variable not set");
-	if (!property_)
+	}
+	if (!property_) {
 		throw wexception("property not set");
-	if (!value_)
+	}
+	if (!value_) {
 		throw wexception("value not set");
-	if (!variable_->type().is_subclass(property_->get_class()))
+	}
+	if (!variable_->type().is_subclass(property_->get_class())) {
 		throw wexception("variable %s cannot be casted to %s", descname(variable_->type()).c_str(),
 		                 descname(property_->get_class()).c_str());
-	if (!value_->type().is_subclass(property_->get_type()))
+	}
+	if (!value_->type().is_subclass(property_->get_type())) {
 		throw wexception("value %s cannot be casted to %s", descname(value_->type()).c_str(),
 		                 descname(property_->get_type()).c_str());
+	}
 }
 
 // Table manipulation
@@ -403,18 +412,23 @@ void FS_SetTable::set_table(Assignable& t) {
 }
 void FS_SetTable::selftest() const {
 	FunctionStatement::selftest();
-	if (!table_)
+	if (!table_) {
 		throw wexception("table not set");
-	if (!property_)
+	}
+	if (!property_) {
 		throw wexception("property not set");
-	if (!value_)
+	}
+	if (!value_) {
 		throw wexception("value not set");
-	if (!property_->type().is_subclass(table_->type().key_type()))
+	}
+	if (!property_->type().is_subclass(table_->type().key_type())) {
 		throw wexception("%s cannot be casted to key type %s", descname(property_->type()).c_str(),
 		                 descname(table_->type().key_type()).c_str());
-	if (!value_->type().is_subclass(table_->type().value_type()))
+	}
+	if (!value_->type().is_subclass(table_->type().value_type())) {
 		throw wexception("%s cannot be casted to value type %s", descname(value_->type()).c_str(),
 		                 descname(table_->type().value_type()).c_str());
+	}
 }
 void FS_SetTable::write_lua(int32_t i, FileWrite& fw) const {
 	table_->write_lua(i, fw);
@@ -482,6 +496,7 @@ std::set<uint32_t> FS_LaunchCoroutine::references() const {
 }
 void FS_LaunchCoroutine::selftest() const {
 	FunctionStatement::selftest();
-	if (!function_)
+	if (!function_) {
 		throw wexception("function not set");
+	}
 }

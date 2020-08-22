@@ -118,7 +118,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 					i = ig_mine;
 				} else if (descr->get_isport()) {
 					i = ig_port;
-				} else
+				} else {
 					switch (descr->get_size()) {
 					case Widelands::BaseImmovable::BIG:
 						i = ig_big;
@@ -132,6 +132,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 					default:
 						NEVER_HERE();
 					}
+				}
 				assert(i);
 				i->add(descr->name(), descr->representative_image(), reinterpret_cast<void*>(di),
 				       descr->descname());

@@ -27,7 +27,7 @@
 #include "logic/mapregion.h"
 
 static bool create_road(Widelands::EditorGameBase& egbase,
-                        Widelands::Path path,
+                        const Widelands::Path& path,
                         EditorActionArgs::RoadMode mode,
                         bool primary_carrier,
                         bool secondary_carrier,
@@ -96,9 +96,11 @@ static bool create_road(Widelands::EditorGameBase& egbase,
 		if (primary_carrier || secondary_carrier) {
 			std::set<Widelands::Road*> roads;
 			for (auto it = first; it <= last; ++it) {
-				if (upcast(Widelands::Road, r, egbase.map()[*it].get_immovable()))
-					if (!roads.count(r))
+				if (upcast(Widelands::Road, r, egbase.map()[*it].get_immovable())) {
+					if (!roads.count(r)) {
 						roads.insert(r);
+					}
+				}
 			}
 			assert(!roads.empty());
 			for (Widelands::Road* r : roads) {

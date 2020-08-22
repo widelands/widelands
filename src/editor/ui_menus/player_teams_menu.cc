@@ -183,8 +183,9 @@ bool EditorPlayerTeamsMenu::PlayerRelationsPanel::handle_mousepress(uint8_t b,
 }
 
 inline int8_t EditorPlayerTeamsMenu::PlayerRelationsPanel::player_at(int32_t xy) const {
-	if (xy < 0)
+	if (xy < 0) {
 		return -1;
+	}
 	xy /= kPlayerRelationsCellSize;
 	return xy > nr_players_ ? -1 : xy;
 }

@@ -442,8 +442,9 @@ void BuildingWindow::act_bulldoze() {
 
 	if (ibase()->get_game()) {
 		if (SDL_GetModState() & KMOD_CTRL) {
-			if (building->get_playercaps() & Widelands::Building::PCap_Bulldoze)
+			if (building->get_playercaps() & Widelands::Building::PCap_Bulldoze) {
 				ibase()->game().send_player_bulldoze(*building);
+			}
 		} else {
 			show_bulldoze_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *building);
 		}
@@ -549,8 +550,9 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 
 	if (ibase()->get_game()) {
 		if (SDL_GetModState() & KMOD_CTRL) {
-			if (building->get_playercaps() & Widelands::Building::PCap_Enhancable)
+			if (building->get_playercaps() & Widelands::Building::PCap_Enhancable) {
 				ibase()->game().send_player_enhance_building(*building, id, false);
+			}
 		} else {
 			show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *building, id);
 		}

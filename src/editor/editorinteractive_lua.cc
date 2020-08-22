@@ -253,7 +253,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 		auto generate_unused_name = [this](std::string basename) {
 			while (scripting_saver_->get<Variable>(basename) ||
 			       scripting_saver_->get<LuaFunction>(basename)) {
-				basename = "_" + basename;
+				basename = "_" + basename;  // NOLINT
 			}
 			return basename;
 		};
@@ -305,10 +305,12 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 						case Widelands::MapObjectType::FLAG: {
 							const Widelands::Flag& flag =
 							   dynamic_cast<const Widelands::Flag&>(*f.get_immovable());
-							if (!economies_to_save.count(flag.get_economy(Widelands::wwWARE)))
+							if (!economies_to_save.count(flag.get_economy(Widelands::wwWARE))) {
 								economies_to_save.insert(flag.get_economy(Widelands::wwWARE));
-							if (!economies_to_save.count(flag.get_economy(Widelands::wwWORKER)))
+							}
+							if (!economies_to_save.count(flag.get_economy(Widelands::wwWORKER))) {
 								economies_to_save.insert(flag.get_economy(Widelands::wwWORKER));
+							}
 							write("%s = %s:place_flag(%s:get_field(%u, %u), "
 							      "true)",
 							      var, pvar[flag.owner().player_number() - 1], autogen_map_name, coords.x,
@@ -324,8 +326,9 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 									}
 								}
 								write("%s:set_wares({", var);
-								for (const auto& pair : wares)
+								for (const auto& pair : wares) {
 									write("   %s = %u,", pair.first.c_str(), pair.second);
+								}
 								fw.string("   })\n");
 							}
 						} break;
@@ -361,8 +364,9 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 									}
 								}
 								write("%s:set_workers({", var);
-								for (const auto& pair : workers)
+								for (const auto& pair : workers) {
 									write("   %s = %u,", pair.first.c_str(), pair.second);
+								}
 								fw.string("   })\n");
 							} else {
 								if (const Widelands::Ferry* ferry =
@@ -392,8 +396,9 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 								}
 							}
 							write("%s:set_wares({", var);
-							for (const auto& pair : wares_workers)
+							for (const auto& pair : wares_workers) {
 								write("   %s = %u,", pair.first.c_str(), pair.second);
+							}
 							fw.string("   })\n");
 
 							wares_workers.clear();
@@ -409,8 +414,9 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 								}
 							}
 							write("%s:set_workers({", var);
-							for (const auto& pair : wares_workers)
+							for (const auto& pair : wares_workers) {
 								write("   %s = %u,", pair.first.c_str(), pair.second);
+							}
 							fw.string("   })\n");
 						} break;
 						case Widelands::MapObjectType::MILITARYSITE: {
@@ -603,18 +609,20 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 				      flag.y);
 				for (Widelands::DescriptionIndex di : e->owner().tribe().wares()) {
 					const Widelands::WareDescr& d = *egbase().tribes().get_ware_descr(di);
-					if (d.has_demand_check(e->owner().tribe().name()))
+					if (d.has_demand_check(e->owner().tribe().name())) {
 						write("%s:set_target_quantity(\"%s\", %u)", var, d.name().c_str(),
 						      e->target_quantity(di).permanent);
+					}
 				}
 			} else {
 				write("%s = %s:get_field(%u, %u).immovable.worker_economy", var, autogen_map_name,
 				      flag.x, flag.y);
 				for (Widelands::DescriptionIndex di : e->owner().tribe().workers()) {
 					const Widelands::WorkerDescr& d = *egbase().tribes().get_worker_descr(di);
-					if (d.has_demand_check())
+					if (d.has_demand_check()) {
 						write("%s:set_target_quantity(\"%s\", %u)", var, d.name().c_str(),
 						      e->target_quantity(di).permanent);
+					}
 				}
 			}
 		}

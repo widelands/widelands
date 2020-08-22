@@ -30,10 +30,11 @@ constexpr uint16_t kCurrentPacketVersionVariable = 1;
 void Variable::selftest() const {
 	Assignable::selftest();
 	check_name_valid(name_);
-	if (type_.id() == VariableTypeID::Nil)
+	if (type_.id() == VariableTypeID::Nil) {
 		throw wexception("type is nil");
-	else if (type_.id() == VariableTypeID::Any)
+	} else if (type_.id() == VariableTypeID::Any) {
 		throw wexception("type is any");
+	}
 }
 
 void Variable::load(FileRead& fr, Loader& l) {
@@ -114,13 +115,16 @@ void GetProperty::write_lua(int32_t i, FileWrite& fw) const {
 }
 void GetProperty::selftest() const {
 	Assignable::selftest();
-	if (!variable_)
+	if (!variable_) {
 		throw wexception("variable not set");
-	if (!property_)
+	}
+	if (!property_) {
 		throw wexception("property not set");
-	if (!variable_->type().is_subclass(property_->get_class()))
+	}
+	if (!variable_->type().is_subclass(property_->get_class())) {
 		throw wexception("%s cannot be casted to %s", descname(variable_->type()).c_str(),
 		                 descname(property_->get_class()).c_str());
+	}
 }
 std::string GetProperty::readable() const {
 	return variable_->readable() + "." + property_->get_name();
@@ -189,13 +193,16 @@ void GetTable::write_lua(int32_t i, FileWrite& fw) const {
 }
 void GetTable::selftest() const {
 	Assignable::selftest();
-	if (!table_)
+	if (!table_) {
 		throw wexception("table not set");
-	if (!property_)
+	}
+	if (!property_) {
 		throw wexception("property not set");
-	if (!property_->type().is_subclass(table_->type().key_type()))
+	}
+	if (!property_->type().is_subclass(table_->type().key_type())) {
 		throw wexception("%s cannot be casted to %s", descname(property_->type()).c_str(),
 		                 descname(table_->type().key_type()).c_str());
+	}
 }
 std::string GetTable::readable() const {
 	return table_->readable() + "[" + property_->readable() + "]";

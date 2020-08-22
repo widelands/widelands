@@ -91,8 +91,9 @@ void ControlStructure::selftest_body(const LuaFunction& f,
 		} else if (is_a(FS_Break, a)) {
 			last_statement_is_break = true;
 			last_statement_is_return = false;
-			if (!allow_break)
+			if (!allow_break) {
 				throw wexception("break statement outside for or while loop");
+			}
 		} else if (upcast(const FS_Return, r, a)) {
 			last_statement_is_return = true;
 			last_statement_is_break = false;
@@ -457,8 +458,9 @@ void FS_If::selftest() const {
 void FS_If::selftest_body(const LuaFunction& f) const {
 	ControlStructure::selftest_body(f);
 	ControlStructure::selftest_body(f, else_body_, false, false);
-	for (const auto& pair : elseif_bodies_)
+	for (const auto& pair : elseif_bodies_) {
 		ControlStructure::selftest_body(f, pair.second, false, false);
+	}
 }
 std::string FS_If::readable() const {
 	std::string str = "if " + condition_->readable() + " then …";

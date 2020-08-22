@@ -197,11 +197,12 @@ public:
 			}
 		}
 		if (new_sel.second != Widelands::INVALID_INDEX) {
-			if (upcast(Widelands::Game, game, &egbase_))
+			if (upcast(Widelands::Game, game, &egbase_)) {
 				game->send_player_expedition_config(portdock_, new_sel.first, new_sel.second, true);
-			else
+			} else {
 				portdock_.expedition_bootstrap()->demand_additional_item(
 				   egbase_, new_sel.first, new_sel.second, true);
+			}
 		}
 	}
 

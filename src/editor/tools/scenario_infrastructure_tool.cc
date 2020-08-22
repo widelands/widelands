@@ -38,7 +38,7 @@ int32_t ScenarioInfrastructureTool::handle_click_impl(const Widelands::NodeAndTr
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	args->infrastructure_placed = 0;
 	if (args->random_index == kRandomIndexNotSet) {
-		args->random_index = std::rand() % nr_items;
+		args->random_index = std::rand() % nr_items;  // NOLINT
 	}
 	const std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>& item_to_place =
 	   args->infrastructure_types[args->random_index];
@@ -106,8 +106,9 @@ ScenarioInfrastructureDeleteTool::handle_click_impl(const Widelands::NodeAndTria
 			if (imm->descr().type() != Widelands::MapObjectType::FLAG &&
 			    !is_a(Widelands::Building, imm)) {
 				upcast(Widelands::Immovable, i, imm);
-				if (!i || i->descr().owner_type() != Widelands::MapObjectDescr::OwnerType::kTribe)
+				if (!i || i->descr().owner_type() != Widelands::MapObjectDescr::OwnerType::kTribe) {
 					continue;
+				}
 			}
 			imm->remove(eia.egbase());
 		}
