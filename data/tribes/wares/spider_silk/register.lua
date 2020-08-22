@@ -1,0 +1,3 @@
+return {
+   spider_silk = {},
+}

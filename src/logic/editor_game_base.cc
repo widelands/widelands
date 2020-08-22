@@ -77,6 +77,9 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
 	if (!lua_) {  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
 	}
+
+	loading_message_subscriber_ = Notifications::subscribe<UI::NoteLoadingMessage>(
+	   [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); });
 }
 
 EditorGameBase::~EditorGameBase() {
@@ -192,6 +195,7 @@ World* EditorGameBase::mutable_world() {
 		// world immediately though, because the lua scripts need to have access
 		// to world through this method already.
 		ScopedTimer timer("Loading the world took %ums");
+		Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
 		world_.reset(new World());
 
 		try {
@@ -221,15 +225,9 @@ Tribes* EditorGameBase::mutable_tribes() {
 		// Lazy initialization of Tribes. We need to create the pointer to the
 		// tribe immediately though, because the lua scripts need to have access
 		// to tribes through this method already.
-		ScopedTimer timer("Loading the tribes took %ums");
-		tribes_.reset(new Tribes());
-
-		try {
-			lua_->run_script("tribes/init.lua");
-		} catch (const WException& e) {
-			log("Could not read tribes information: %s", e.what());
-			throw;
-		}
+		ScopedTimer timer("Registering the tribes took %ums");
+		Notifications::publish(UI::NoteLoadingMessage(_("Loading tribes…")));
+		tribes_.reset(new Tribes(lua_.get()));
 	}
 	return tribes_.get();
 }
@@ -253,6 +251,8 @@ Player* EditorGameBase::add_player(PlayerNumber const player_number,
                                    const std::string& tribe,
                                    const std::string& name,
                                    TeamNumber team) {
+	Notifications::publish(UI::NoteLoadingMessage(
+	   (boost::format(_("Creating player %d…")) % static_cast<unsigned int>(player_number)).str()));
 	return player_manager_->add_player(player_number, initialization_index, tribe, name, team);
 }
 
@@ -285,6 +285,14 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 	}
 }
 
+// Loads map object descriptions for all tribes
+void EditorGameBase::load_all_tribes() {
+	// Load all tribes
+	for (const std::string& tribe_name : Widelands::get_all_tribenames()) {
+		mutable_tribes()->load_tribe(tribe_name);
+	}
+}
+
 void EditorGameBase::allocate_player_maps() {
 	iterate_players_existing(plnum, kMaxPlayers, *this, p) {
 		p->allocate_map();
@@ -300,41 +308,10 @@ void EditorGameBase::postload() {
 	create_tempfile_and_save_mapdata(FileSystem::ZIP);
 
 	// Postload tribes and world
-	step_loader_ui(_("Postloading world and tribes…"));
-
-	assert(tribes_);
-	tribes_->postload();
+	// Tribes don't have a postload at this point.
+	Notifications::publish(UI::NoteLoadingMessage(_("Postloading world and tribes…")));
 	assert(world_);
 	world_->postload();
-
-	for (DescriptionIndex i = 0; i < tribes_->nrtribes(); i++) {
-		const TribeDescr* tribe = tribes_->get_tribe_descr(i);
-		for (DescriptionIndex j = 0; j < world_->get_nr_resources(); j++) {
-			const ResourceDescription* res = world_->get_resource(j);
-			if (res->detectable()) {
-				// This function will throw an exception if this tribe doesn't
-				// have a high enough resource indicator for this resource
-				tribe->get_resource_indicator(res, res->max_amount());
-			}
-		}
-		// For the "none" indicator
-		tribe->get_resource_indicator(nullptr, 0);
-	}
-
-	// TODO(unknown): postload players? (maybe)
-}
-
-/**
- * Load all graphics.
- * This function needs to be called once at startup when the graphics system is ready.
- * If the graphics system is to be replaced at runtime, the function must be called after that has
- * happened.
- */
-void EditorGameBase::load_graphics() {
-	assert(tribes_);
-	assert(has_loader_ui());
-	step_loader_ui(_("Loading graphics"));
-	tribes_->load_graphics();
 }
 
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
@@ -572,13 +549,13 @@ Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
  * make this object ready to load new data
  */
 void EditorGameBase::cleanup_for_load() {
-	step_loader_ui(_("Cleaning up for loading: Map objects (1/3)"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Cleaning up for loading: Map objects (1/3)")));
 	cleanup_objects();  /// Clean all the stuff up, so we can load.
 
-	step_loader_ui(_("Cleaning up for loading: Players (2/3)"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Cleaning up for loading: Players (2/3)")));
 	player_manager_->cleanup();
 
-	step_loader_ui(_("Cleaning up for loading: Map (3/3)"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Cleaning up for loading: Map (3/3)")));
 	map_.cleanup();
 
 	delete_tempfile();

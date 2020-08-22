@@ -116,6 +116,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	timer_message += map_.get_name();
 	timer_message += "' took %ums";
 	ScopedTimer timer(timer_message);
+	Notifications::publish(UI::NoteLoadingMessage(_("Loading map…")));
 
 	const bool is_game = load_type == MapLoader::LoadType::kGame;
 	const bool is_editor = load_type == MapLoader::LoadType::kEditor;
@@ -126,10 +127,10 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN
-	auto set_progress_message = [&egbase, is_editor](std::string text, unsigned step) {
-		egbase.step_loader_ui(
+	auto set_progress_message = [is_editor](std::string text, unsigned step) {
+		Notifications::publish(UI::NoteLoadingMessage(
 		   (boost::format(_("Loading map: %1$s (%2$u/%3$d)")) % text % step % (is_editor ? 9 : 23))
-		      .str());
+		      .str()));
 	};
 
 	set_progress_message(_("Elemental data"), 1);
@@ -338,7 +339,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		set_progress_message(_("Vision"), 17);
 		{
 			MapPlayersViewPacket p;
-			p.read(*fs_, egbase);
+			p.read(*fs_, egbase, *world_lookup_table, *tribes_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
@@ -358,7 +359,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		set_progress_message(_("Win condition"), 19);
 		{
 			MapWinconditionPacket p;
-			p.read(*fs_, *egbase.mutable_map(), *mol_);
+			p.read(*fs_, *egbase.mutable_map());
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 

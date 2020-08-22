@@ -39,6 +39,7 @@ lua_dirs = (
     ('data/scripting/win_conditions', '', 'auxiliary'),
     ('data/scripting/editor', '', 'lua_world_other'),
     ('data/tribes', '', 'lua_tribes_defining'),
+    ('data/campaigns/emp04.wmf/scripting/tribes', '', 'lua_tribes_defining'),
     ('data/tribes/scripting', '', 'lua_tribes_other'),
     ('data/tribes/scripting/mapobject_info', '', 'lua_tribes_other'),
     ('data/tribes/scripting/help', '', 'lua_tribes_other'),

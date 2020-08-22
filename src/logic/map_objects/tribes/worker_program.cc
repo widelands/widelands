@@ -107,7 +107,7 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 WorkerProgram::WorkerProgram(const std::string& init_name,
                              const LuaTable& actions_table,
                              const WorkerDescr& worker,
-                             const Tribes& tribes)
+                             Tribes& tribes)
    : MapObjectProgram(init_name), worker_(worker), tribes_(tribes) {
 
 	for (const std::string& line : actions_table.array_entries<std::string>()) {
@@ -173,7 +173,7 @@ void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std:
 		throw wexception("Usage: createware=<ware type>");
 	}
 
-	const DescriptionIndex ware_index = tribes_.safe_ware_index(cmd[0]);
+	const DescriptionIndex ware_index = tribes_.load_ware(cmd[0]);
 
 	act->function = &Worker::run_createware;
 	act->iparam1 = ware_index;
@@ -345,6 +345,8 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 		if (item.first == "radius") {
 			act->iparam1 = read_positive(item.second);
 		} else if (item.first == "attrib") {
+			Notifications::publish(
+			   NoteMapObjectDescription(item.second, NoteMapObjectDescription::LoadType::kAttribute));
 			act->iparam2 = MapObjectDescr::get_attribute_id(item.second);
 		} else if (item.first == "type") {
 			act->sparam1 = item.second;
@@ -726,6 +728,8 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 		}
 
 		const std::string attrib_name = read_key_value_pair(cmd[i], ':', "", "attrib").second;
+		Notifications::publish(
+		   NoteMapObjectDescription(attrib_name, NoteMapObjectDescription::LoadType::kAttribute));
 		act->sparamv.push_back(attrib_name);
 		// get_attribute_id will throw a GameDataError if the attribute doesn't exist.
 		created_attributes_.insert(
