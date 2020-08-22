@@ -82,7 +82,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					const MapIndex revealed_index = fr.unsigned_32();
 					player->revealed_fields_.insert(revealed_index);
 					seen_fields.insert(&player->fields_[revealed_index]);
-					player.rediscover_node(map, map.get_fcoords(map[revealed_index]));
+					player->rediscover_node(map, map.get_fcoords(map[revealed_index]));
 				}
 
 				// Read numerical field infos as combined strings to reduce number of hard disk write
@@ -302,8 +302,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				player.revealed_fields_.clear();
 				for (uint32_t j = fr.unsigned_32(); j; --j) {
 					const MapIndex mi = fr.unsigned_32();
-					player.rediscover_node(map, map.get_fcoords(map[mi]));
 					player.revealed_fields_.insert(mi);
+					player.rediscover_node(map, map.get_fcoords(map[mi]));
 				}
 
 				for (MapIndex m = map.max_index(); m; --m) {
@@ -437,7 +437,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	const PlayerNumber nr_players = map.get_nrplayers();
+	const PlayerNumber nr_players = egbase.map().get_nrplayers();
 	fw.unsigned_8(nr_players);
 
 	iterate_players_existing(p, nr_players, egbase, player) {
@@ -455,7 +455,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 		{
 			// Seeing
 			std::ostringstream oss("");
-			const MapIndex upper_bound = map.max_index() - 1;
+			const MapIndex upper_bound = egbase.map().max_index() - 1;
 			for (MapIndex m = 0; m < upper_bound; ++m) {
 				const Player::Field& f = player->fields_[m];
 				oss << static_cast<unsigned>(f.seeing) << "|";
