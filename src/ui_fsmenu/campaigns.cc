@@ -62,9 +62,8 @@ Campaigns::Campaigns() {
 	std::vector<std::pair<const std::string, const std::string>> difficulty_levels;
 	for (const auto& difficulty_level_table :
 	     difficulties_table->array_entries<std::unique_ptr<LuaTable>>()) {
-		difficulty_levels.push_back(
-		   std::make_pair(_(difficulty_level_table->get_string("descname")),
-		                  difficulty_level_table->get_string("image")));
+		difficulty_levels.push_back(std::make_pair(_(difficulty_level_table->get_string("descname")),
+		                                           difficulty_level_table->get_string("image")));
 	}
 
 	// Read the campaigns themselves

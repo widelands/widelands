@@ -150,7 +150,10 @@ void GameSummaryScreen::fill_data() {
 		UI::Table<uintptr_t const>::EntryRecord& te = players_table_->add(i);
 		// Player name & pic
 		const unsigned pc_index = pes.player - 1;
-		te.set_picture(0, [pc_index]() { return playercolor_image(pc_index, "images/players/genstats_player.png"); }, p->get_name());
+		te.set_picture(
+		   0,
+		   [pc_index]() { return playercolor_image(pc_index, "images/players/genstats_player.png"); },
+		   p->get_name());
 		// Team
 		std::string teastr_ =
 		   p->team_number() == 0 ?
