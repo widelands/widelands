@@ -47,7 +47,8 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      style_(&g_gr->styles().font_style(FontStyle::kLabel)),
      font_scale_(1.0f),
      align_(align),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false),
+     needs_recompute_(true) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { scrollpos_changed(a); });
@@ -59,12 +60,12 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 
 void MultilineTextarea::set_style(const UI::FontStyleInfo& style) {
 	style_ = &style;
-	recompute();
+	needs_recompute_ = true;
 }
 void MultilineTextarea::set_font_scale(float scale) {
 	font_scale_ = scale;
 	scrollbar_.set_singlestepsize(text_height(*style_, font_scale_));
-	recompute();
+	needs_recompute_ = true;
 }
 
 /**
@@ -73,7 +74,7 @@ void MultilineTextarea::set_font_scale(float scale) {
  */
 void MultilineTextarea::set_text(const std::string& text) {
 	text_ = text;
-	recompute();
+	needs_recompute_ = true;
 }
 
 /**
@@ -81,6 +82,7 @@ void MultilineTextarea::set_text(const std::string& text) {
  * and adjust scrollbar settings accordingly.
  */
 void MultilineTextarea::recompute() {
+	assert(needs_recompute_);
 	// We wrap the text twice. We need to do this to account for the presence/absence of the
 	// scrollbar. We first try without the scrollbar (unless it's forced) so it's only enabled
 	// when necessary.
@@ -125,6 +127,7 @@ void MultilineTextarea::recompute() {
 			break;  // No need to wrap twice.
 		}
 	}
+	needs_recompute_ = false;
 }
 
 /**
@@ -135,7 +138,7 @@ void MultilineTextarea::scrollpos_changed(int32_t const /* pixels */) {
 
 /// Take care of the scrollbar on resize
 void MultilineTextarea::layout() {
-	recompute();
+	needs_recompute_ = true;
 
 	// Take care of the scrollbar
 	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
@@ -147,6 +150,9 @@ void MultilineTextarea::layout() {
  * Redraw the textarea
  */
 void MultilineTextarea::draw(RenderTarget& dst) {
+	if (needs_recompute_) {
+		recompute();
+	}
 	if (text_.empty() || !rendered_text_.get()) {
 		return;
 	}

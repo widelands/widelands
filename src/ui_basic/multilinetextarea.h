@@ -100,6 +100,8 @@ private:
 
 	Scrollbar scrollbar_;
 	ScrollMode scrollmode_;
+
+	bool needs_recompute_;
 };
 }  // namespace UI
 
