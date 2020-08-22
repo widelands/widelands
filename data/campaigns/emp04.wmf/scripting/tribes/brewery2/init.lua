@@ -8,7 +8,6 @@ tribes:new_productionsite_type {
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Brewery"),
    helptext_script = dirname .. "helptexts.lua",
-   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -21,10 +20,11 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 39, 62 },
       },
       working = {
-         basename = "idle",
+         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
          hotspot = { 39, 62 },
       },
    },

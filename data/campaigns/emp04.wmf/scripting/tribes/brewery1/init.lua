@@ -7,7 +7,6 @@ tribes:new_productionsite_type {
    name = "empire_brewery1",
    descname = pgettext("empire_building", "Brewery"),
    helptext_script = dirname .. "helptexts.lua",
-   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
    enhancement = "empire_brewery2",
@@ -25,10 +24,11 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 39, 62 },
       },
       working = {
-         basename = "idle",
+         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
          hotspot = { 39, 62 },
       },
    },

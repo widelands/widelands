@@ -7,7 +7,7 @@ tribes:new_warehouse_type {
    name = "empire_temple_of_vesta",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Temple of Vesta"),
-   animation_directory = dirname,
+   helptext_script = path.dirname(__file__) .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -20,6 +20,7 @@ tribes:new_warehouse_type {
 
    animations = {
       idle = {
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 58, 55  },
       },
    },
