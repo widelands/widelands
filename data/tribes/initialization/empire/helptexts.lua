@@ -602,7 +602,7 @@ local result = {
       bread_paddle = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Bread Paddle
-            pgettext(warectxt, "The bread paddle is the tool of the baker, each baker needs one."),
+            pgettext("ware", "The bread paddle is the tool of the baker, each baker needs one."),
             -- TRANSLATORS: Helptext for a ware: Bread Paddle
             pgettext(warectxt, "Bread paddles are produced by the toolsmith.")
          }
@@ -614,7 +614,7 @@ local result = {
       coal = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Coal
-            pgettext(warectxt, "Coal is mined in coal mines or produced out of logs by a charcoal kiln."),
+            pgettext("ware", "Coal is mined in coal mines or produced out of logs by a charcoal kiln."),
             -- TRANSLATORS: Helptext for a ware: Coal
             pgettext(warectxt, "The fires of the Empire smelting works, armor smithies and weapon smithies are usually fed with coal.")
          }
@@ -626,7 +626,7 @@ local result = {
       felling_ax = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Felling Ax
-            pgettext(warectxt, "The felling ax is the tool to chop down trees."),
+            pgettext("ware", "The felling ax is the tool to chop down trees."),
             -- TRANSLATORS: Helptext for a ware: Felling Ax
             pgettext(warectxt, "Felling axes are used by lumberjacks and produced by the toolsmithy.")
          }
@@ -634,7 +634,7 @@ local result = {
       fire_tongs = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Fire Tongs
-            pgettext(warectxt, "Fire tongs are the tools for smelting ores."),
+            pgettext("ware", "Fire tongs are the tools for smelting ores."),
             -- TRANSLATORS: Helptext for a ware: Fire Tongs
             pgettext(warectxt, "They are used in the smelting works and produced by the toolsmith.")
          }
@@ -646,7 +646,7 @@ local result = {
       fishing_rod = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Fishing Rod
-            pgettext(warectxt, "Fishing rods are needed by fishers to catch fish."),
+            pgettext("ware", "Fishing rods are needed by fishers to catch fish."),
             -- TRANSLATORS: Helptext for a ware: Fishing Rod
             pgettext(warectxt, "They are produced by the toolsmith.")
          }
@@ -658,7 +658,7 @@ local result = {
       gold = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Gold
-            pgettext(warectxt, "Gold is the most valuable of all metals, and it is smelted out of gold ore."),
+            pgettext("ware", "Gold is the most valuable of all metals, and it is smelted out of gold ore."),
             -- TRANSLATORS: Helptext for a ware: Gold
             pgettext(warectxt, "It is produced by the smelting works. Armor and weapons are embellished with gold in the armor smithy and the weapon smithy.")
          }
@@ -666,7 +666,7 @@ local result = {
       gold_ore = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Gold Ore
-            pgettext(warectxt, "Gold ore is mined in a gold mine."),
+            pgettext("ware", "Gold ore is mined in a gold mine."),
             -- TRANSLATORS: Helptext for a ware: Gold Ore
             pgettext(warectxt, "Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor.")
          }
@@ -674,7 +674,7 @@ local result = {
       granite = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Granite
-            pgettext(warectxt, "Granite is a basic building material."),
+            pgettext("ware", "Granite is a basic building material."),
             -- TRANSLATORS: Helptext for a ware: Granite
             pgettext(warectxt, "The Empire produces granite blocks in quarries and marble mines.")
          }
@@ -686,7 +686,7 @@ local result = {
       hammer = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Hammer
-            pgettext(warectxt, "The hammer is an essential tool."),
+            pgettext("ware", "The hammer is an essential tool."),
             -- TRANSLATORS: Helptext for a ware: Hammer
             pgettext(warectxt, "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith.")
          }
@@ -694,7 +694,7 @@ local result = {
       hunting_spear = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Hunting Spear
-            pgettext(warectxt, "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by hunters."),
+            pgettext("ware", "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by hunters."),
             -- TRANSLATORS: Helptext for a ware: Hunting Spear
             pgettext(warectxt, "They are produced by the toolsmith.")
          }
@@ -702,7 +702,7 @@ local result = {
       iron = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Iron
-            pgettext(warectxt, "Iron is smelted out of iron ores."),
+            pgettext("ware", "Iron is smelted out of iron ores."),
             -- TRANSLATORS: Helptext for a ware: Iron
             pgettext(warectxt, "It is produced by the smelting works. Weapons, armor and tools are made of iron.")
          }
@@ -710,7 +710,7 @@ local result = {
       iron_ore = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Iron Ore
-            pgettext(warectxt, "Iron ore is mined in iron mines."),
+            pgettext("default_ware", "Iron ore is mined in iron mines."),
             -- TRANSLATORS: Helptext for a ware: Iron Ore
             pgettext(warectxt, "It is smelted in a smelting works to retrieve the iron.")
          }
@@ -722,7 +722,7 @@ local result = {
       log = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Log
-            pgettext(warectxt, "Logs are an important basic building material. They are produced by felling trees."),
+            pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
             -- TRANSLATORS: Helptext for a ware: Log
             pgettext(warectxt, "Imperial lumberjacks fell the trees; foresters take care of the supply of trees. Logs are also used by the charcoal kiln, the toolsmithy and the sawmill.")
          }
@@ -742,7 +742,7 @@ local result = {
       meat = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Meat
-            pgettext(warectxt, "Meat contains a lot of energy, and it is obtained from wild game taken by hunters."),
+            pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunters."),
             -- TRANSLATORS: Helptext for a ware: Meat
             pgettext(warectxt, "Meat can also be obtained as pork from piggeries. It is used in the inns and taverns to prepare lunch for the miners and is consumed at the training sites (arena, colosseum, training camp).")
          }
@@ -754,7 +754,7 @@ local result = {
       planks = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Planks
-            pgettext(warectxt, "Planks are an important building material."),
+            pgettext("ware", "Planks are an important building material."),
             -- TRANSLATORS: Helptext for a ware: Planks
             pgettext(warectxt, "They are produced out of logs by the sawmill."),
             -- TRANSLATORS: Helptext for a ware: Planks
@@ -764,7 +764,7 @@ local result = {
       ration = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Ration
-            pgettext(warectxt, "A small bite to keep miners strong and working. The scout also consumes rations on his scouting trips."),
+            pgettext("ware", "A small bite to keep miners strong and working. The scout also consumes rations on his scouting trips."),
             -- TRANSLATORS: Helptext for a ware: Ration
             pgettext(warectxt, "Rations are produced in a tavern out of fish or meat or bread.")
          }
@@ -776,7 +776,7 @@ local result = {
       scythe = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Scythe
-            pgettext(warectxt, "The scythe is the tool of the farmers."),
+            pgettext("ware", "The scythe is the tool of the farmers."),
             -- TRANSLATORS: Helptext for a ware: Scythe
             pgettext(warectxt, "Scythes are produced by the toolsmith.")
          }
@@ -784,7 +784,7 @@ local result = {
       shovel = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Shovel
-            pgettext(warectxt, "Shovels are needed for the proper handling of plants."),
+            pgettext("ware", "Shovels are needed for the proper handling of plants."),
             -- TRANSLATORS: Helptext for a ware: Shovel
             pgettext(warectxt, "Therefore the forester and the vine farmer use them. They are produced by the toolsmith.")
          }
@@ -812,7 +812,7 @@ local result = {
       water = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Water
-            pgettext(warectxt, "Water is the essence of life!"),
+            pgettext("ware", "Water is the essence of life!"),
             -- TRANSLATORS: Helptext for a ware: Water
             pgettext(warectxt, "Water is used in the bakery and the brewery. The donkey farm, the sheep farm and the piggery also need to be supplied with water.")
          }
@@ -820,7 +820,7 @@ local result = {
       wheat = {
          purpose = {
             -- TRANSLATORS: Helptext for a ware: Wheat
-            pgettext(warectxt, "Wheat is essential for survival."),
+            pgettext("ware", "Wheat is essential for survival."),
             -- TRANSLATORS: Helptext for a ware: Wheat
             pgettext(warectxt, "Wheat is produced by farms and used by mills and breweries. Donkey farms, sheep farms and piggeries also need to be supplied with wheat.")
          }
