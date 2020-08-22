@@ -15,29 +15,29 @@ local result = {
       constructionsite = {
          lore = {
             -- TRANSLATORS: Lore helptext for a frisian building: Construction Site
-            pgettext(buildingctxt, "‘Don’t swear at the builder who is short of building materials.’")
+            pgettext("building", "‘Don’t swear at the builder who is short of building materials.’")
          },
          lore_author = {
             -- TRANSLATORS: Lore author helptext for a frisian building: Construction Site
-            pgettext(buildingctxt, "Proverb widely used for impossible tasks of any kind")
+            pgettext("building", "Proverb widely used for impossible tasks of any kind")
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a frisian building: Construction Site
-            pgettext(buildingctxt, "A new building is being built at this construction site.")
+            pgettext("building", "A new building is being built at this construction site.")
          }
       },
       dismantlesite = {
          lore = {
             -- TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
-            pgettext(buildingctxt, "‘New paths will appear when you are willing to tear down the old.’")
+            pgettext("building", "‘New paths will appear when you are willing to tear down the old.’")
          },
          lore_author = {
             -- TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
-            pgettext(buildingctxt, "Proverb")
+            pgettext("building", "Proverb")
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
-            pgettext(buildingctxt, "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
+            pgettext("building", "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
          }
       },
       frisians_fortress = {
@@ -100,972 +100,798 @@ local result = {
             pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
-      XXXX = {
+      frisians_aqua_farm = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Aqua Farm
+            pgettext(buildingctxt, "Why on earth shouldn’t we be able to catch fish even in the desert?")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Aqua Farm
+            pgettext(buildingctxt, "The fisherman who invented aqua farming")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Aqua Farm
+            pgettext("building", "Breeds fish as food for soldiers and miners.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Aqua Farm
+            pgettext("building", "The aqua farm needs holes in the ground that were dug by a clay pit’s worker nearby to use as fishing ponds.")
          }
       },
-      XXXX = {
+      frisians_armor_smithy_large = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Large Armor Smithy
+            pgettext(buildingctxt, "Of course I could still forge short and long swords, but it is beneath my honor to bother with such basic equipment now.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Large Armor Smithy
+            pgettext(buildingctxt, "A master blacksmith refusing to forge anything but the most sophisticated helmets and weapons")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Large Armor Smithy
+            pgettext("building", "Produces advanced weapons and golden helmets for the soldiers.")
          }
       },
-      XXXX = {
+      frisians_armor_smithy_small = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Small Armor Smithy
+            pgettext(buildingctxt, "I don’t forge swords because soldiers need ’em, but soldiers get ’em because I forge ’em.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Small Armor Smithy
+            pgettext(buildingctxt, "A blacksmith pointing out his influence on soldier training")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Small Armor Smithy
+            pgettext("building", "Produces basic weapons and helmets for the soldiers.")
          }
       },
-      XXXX = {
+      frisians_bakery = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Bakery
+            pgettext(buildingctxt, "Why shouldn’t my bread taste good? It’s only barley and water!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Bakery
+            pgettext(buildingctxt, "A baker")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Bakery
+            pgettext("building", "Bakes bread out of barley and water to feed miners and soldiers.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Bakery
+            pgettext(buildingctxt, "The bakery needs %s on average to produce one loaf of bread."):bformat(ngettext("%d second", "%d seconds", 40):bformat(40))
          }
       },
-      XXXX = {
+      frisians_barracks = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Barracks
+            pgettext(buildingctxt, "You have thirty seconds to learn the basics of swordfighting and how to stay alive in battle. A third of that time has gone by for the introduction alone! You’d better pay close attention to me in order to make the most of it. Now here is your new short sword, forged just for you by our best blacksmiths. Time’s up everyone, now go occupy your sentinels!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Barracks
+            pgettext(buildingctxt, "A trainer greeting the new recruits")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Barracks
+            pgettext(buildingctxt, "Equips recruits and trains them as soldiers.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Barracks
+            pgettext(buildingctxt, "The barracks needs %s on average to recruit one soldier."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
          }
       },
-      XXXX = {
+      frisians_beekeepers_house = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Beekeeper's House
+            pgettext(buildingctxt, "If my honey tastes bitter, I must have left some bee stings in it. There are never any bee stings in my honey, therefore, it is not bitter.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Beekeeper's House
+            pgettext(buildingctxt, "A beekeeper ignoring a customer’s complaint")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Beekeeper's House
+            pgettext(buildingctxt, "Keeps bees and lets them swarm over flowering fields to produce honey.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Beekeeper's House
+            pgettext(buildingctxt, "Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes (berry bushes or grapevines) nearby.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Beekeeper's House
+            pgettext(buildingctxt, "The beekeeper pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 45):bformat(45))
          }
       },
-      XXXX = {
+      frisians_berry_farm = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Berry Farm
+            pgettext(buildingctxt, "My bushes may not be as tall as your trees, but I don’t know anybody who likes to eat bark!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Berry Farm
+            pgettext(buildingctxt, "A berry farmer to a forester")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Berry Farm
+            pgettext("building", "Plants berry bushes in the surrounding area.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Berry Farm
+            pgettext(buildingctxt, "The berry farm needs free space within the work area to plant the bushes.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Berry Farm
+            pgettext(buildingctxt, "The berry farmer pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 21):bformat(21))
          }
       },
-      XXXX = {
+      frisians_blacksmithy = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Blacksmithy
+            pgettext(buildingctxt, "If you don’t have iron, change your name from blacksmith to lacksmith!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Blacksmithy
+            pgettext(buildingctxt, "Irritated chieftain during a metal shortage")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Blacksmithy
+            pgettext("building", "Forges tools to equip new workers.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Blacksmithy
+            pgettext(buildingctxt, "The blacksmith needs %s on average to produce one tool."):bformat(ngettext("%d second", "%d seconds", 67):bformat(67))
          }
       },
-      XXXX = {
+      frisians_brewery = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Brewery
+            pgettext(buildingctxt, "I know no single master miner who’ll ever work without a nice pint of beer!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Brewery
+            pgettext(buildingctxt, "A brewer boasting about the importance of his profession")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Brewery
+            pgettext("building", "Brews beer for miners and soldier training.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Brewery
+            pgettext(buildingctxt, "The brewery needs %s on average to brew one mug of beer."):bformat(ngettext("%d second", "%d seconds", 60):bformat(60))
          }
       },
-      XXXX = {
+      frisians_brick_kiln = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Brick Kiln
+            pgettext(buildingctxt, "If there is not enough coal, only the most foolish of leaders would deprive his brick kilns of it first.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Brick Kiln
+            pgettext(buildingctxt, "A brickmaker arguing with his chieftain who was doing just that")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Brick Kiln
+            pgettext("building", "Burns bricks using granite and clay, and coal as fuel. Bricks are the most important building material.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Brick Kiln
+            pgettext(buildingctxt, "The brick kiln needs %s on average to produce three bricks."):bformat(ngettext("%d second", "%d seconds", 84):bformat(84))
          }
       },
-      XXXX = {
+      frisians_charcoal_burners_house = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Charcoal Burner's House
+            pgettext(buildingctxt, "No other tribe has ever mastered the art of charcoal burning as we have!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Charcoal Burner's House
+            pgettext(buildingctxt, "The inventor of the Frisian charcoal kiln")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Burner's House
+            pgettext("building", "Burns logs into charcoal.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Charcoal Burner's House
+            pgettext("building", "The charcoal burner's house needs holes in the ground that were dug by a clay pit’s worker nearby to erect charcoal stacks in them.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Charcoal Burner's House
+            pgettext(buildingctxt, "The charcoal burner's house needs %s on average to produce one coal."):bformat(ngettext("%d second", "%d seconds", 80):bformat(80))
          }
       },
-      XXXX = {
+      frisians_charcoal_kiln = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Charcoal Kiln
+            pgettext(buildingctxt, "No other tribe has ever mastered the art of charcoal burning as we have!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Charcoal Kiln
+            pgettext(buildingctxt, "The inventor of the Frisian charcoal kiln")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Kiln
+            pgettext("building", "Burns logs into charcoal.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Charcoal Kiln
+            pgettext(buildingctxt, "The charcoal kiln needs %s on average to produce one coal."):bformat(ngettext("%d second", "%d seconds", 60):bformat(60))
          }
       },
-      XXXX = {
+      frisians_clay_pit = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Clay Pit
+            pgettext(buildingctxt, "You think you can build a house without my help?")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Clay Pit
+            pgettext(buildingctxt, "A clay digger arguing with a builder")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Clay Pit
+            pgettext("building", "Digs up mud from the ground and uses water to turn it into clay. Clay is used to make bricks, reinforce the charcoal kiln and to build ships.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      frisians_coalmine = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
+            pgettext("building", "Digs coal out of the ground in mountain terrain.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Coal Mine
+            pgettext(buildingctxt, "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal."):bformat("1/2")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Coal Mine
+            pgettext(buildingctxt, "If the food supply is steady, the coal mine can produce two pieces of coal in %s on average."):bformat(ngettext("%d second", "%d seconds", 85):bformat(85))
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      frisians_coalmine_deep = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
+            pgettext("building", "Digs coal out of the ground in mountain terrain.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Deep Coal Mine
+            pgettext(buildingctxt, "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more coal."):bformat("10%")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Deep Coal Mine
+            pgettext(buildingctxt, "If the food supply is steady, the deep coal mine can produce four pieces of coal in %s on average."):bformat(ngettext("%d second", "%d seconds", 76):bformat(76))
          }
       },
-      XXXX = {
+      frisians_collectors_house = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Fruit Collector's House
+            pgettext(buildingctxt, "Meat doesn’t grow on bushes. Fruit does.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Fruit Collector's House
+            pgettext(buildingctxt, "A fruit collector advertising his harvest to a landlady")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Fruit Collector's House
+            pgettext("building", "Collects berries from nearby bushes.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Fruit Collector's House
+            pgettext(buildingctxt, "The fruit collector needs bushes full of berries within the work area.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Fruit Collector's House
+            pgettext(buildingctxt, "The fruit collector pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 21):bformat(21))
          }
       },
-      XXXX = {
+      frisians_drinking_hall = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Drinking Hall
+            pgettext(buildingctxt, "All I need to be happy is a slice of honey bread with some smoked meat and a beer.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Drinking Hall
+            pgettext(buildingctxt, "A master miner to the landlady")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Drinking Hall
+            pgettext(buildingctxt, "Prepares rations for scouts and rations and meals to feed the miners in all mines.")
          }
       },
-      XXXX = {
+      frisians_farm = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Farm
+            pgettext(buildingctxt, "No frost, no heat; no rain, no drought; no rats, no locusts; naught can destroy my harvest.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Farm
+            pgettext(buildingctxt, "A farmer’s reply when asked by his chieftain why he was planting such a slow-growing grain.")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Farm
+            pgettext("building", "Sows and harvests barley.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Farm
+            pgettext(buildingctxt, "The farm needs free space within the work area to plant seeds.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      frisians_ferry_yard = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
+            pgettext("building", "Builds ferries.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
+            pgettext("building", "Needs water nearby.")
          }
       },
-      XXXX = {
+      frisians_fishers_house = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Fisher's House
+            pgettext(buildingctxt, "Hunters can’t sell anything on a Friday, but fishers don’t have such problems.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Fisher's House
+            pgettext(buildingctxt, "A hunter admiring a fisher")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Fisher's House
+            pgettext(buildingctxt, "Fishes on the coast near the fisher’s house.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Fisher's House
+            pgettext(buildingctxt, "The fisher’s house needs water full of fish within the work area.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Fisher's House
+            pgettext(buildingctxt, "The fisher pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 16):bformat(16))
          }
       },
-      XXXX = {
+      frisians_foresters_house = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Forester's House
+            pgettext(buildingctxt, "What can ever be more beautiful than the brilliant sun’s beams shining through the glistering canopy of leaves?")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Forester's House
+            pgettext(buildingctxt, "A forester explaining his choice of profession")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Forester's House
+            pgettext("building", "Plants trees in the surrounding area.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Forester's House
+            pgettext(buildingctxt, "The forester’s house needs free space within the work area to plant the trees.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Forester's House
+            pgettext(buildingctxt, "The forester pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 12):bformat(12))
          }
       },
-      XXXX = {
+      frisians_furnace = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Furnace
+            pgettext(buildingctxt, "Miners get ores from the depths of the hills; but without our work, their labour is in vain.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Furnace
+            pgettext(buildingctxt, "Slogan of the Smelters’ Guild")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Furnace
+            pgettext("building", "Smelts iron ore and gold ore into iron and gold ingots using coal.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      frisians_goldmine = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
+            pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Gold Mine
+            pgettext(buildingctxt, "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any gold ore."):bformat("1/2")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Gold Mine
+            pgettext(buildingctxt, "If the food supply is steady, the gold mine can produce one piece of gold ore in %s on average."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      frisians_goldmine_deep = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
+            pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Deep Gold Mine
+            pgettext(buildingctxt, "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more gold ore."):bformat("10%")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Deep Gold Mine
+            pgettext(buildingctxt, "If the food supply is steady, the deep gold mine can produce two pieces of gold ore in %s on average."):bformat(ngettext("%d second", "%d seconds", 76):bformat(76))
          }
       },
-      XXXX = {
+      frisians_honey_bread_bakery = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Honey Bread Bakery
+            pgettext(buildingctxt, "Rookies will say that vengeance is sweet. Heroes will say that honey bread is sweeter.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Honey Bread Bakery
+            pgettext(buildingctxt, "A trainer in conversation with a baker")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Honey Bread Bakery
+            pgettext("building", "Bakes honey bread out of barley, water and honey to feed miners in deep mines and soldiers in advanced training.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      frisians_hunters_house = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
+            pgettext("building", "Hunts animals to produce meat.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Hunter's House
+            pgettext(buildingctxt, "The hunter’s house needs animals to hunt within the work area.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Hunter's House
+            pgettext(buildingctxt, "The hunter pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 35):bformat(35))
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      frisians_ironmine = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
+            pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Iron Mine
+            pgettext(buildingctxt, "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any iron ore."):bformat("1/2")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Iron Mine
+            pgettext(buildingctxt, "If the food supply is steady, the iron mine can produce one piece of iron ore in %s on average."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      frisians_ironmine_deep = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
+            pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Deep Iron Mine
+            pgettext(buildingctxt, "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more iron ore."):bformat("10%")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Deep Iron Mine
+            pgettext(buildingctxt, "If the food supply is steady, the deep iron mine can produce two pieces of iron ore in %s on average."):bformat(ngettext("%d second", "%d seconds", 76):bformat(76))
          }
       },
-      XXXX = {
+      frisians_mead_brewery = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Mead Brewery
+            pgettext(buildingctxt, "If you like beer, you’ve never tasted mead.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Mead Brewery
+            pgettext(buildingctxt, "Slogan over a mead brewery")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Mead Brewery
+            pgettext("building", "Brews beer out of barley and water. It also brews mead, which is beer refined with honey. Mead is consumed by experienced soldiers.")
          }
       },
-      XXXX = {
+      frisians_quarry = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Quarry
+            pgettext(buildingctxt, "When I swing my pick, whole mountains fall before me!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Quarry
+            pgettext(buildingctxt, "A stonemason")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Quarry
+            pgettext(buildingctxt, "Cuts raw pieces of granite out of rocks in the vicinity.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Quarry
+            pgettext(buildingctxt, "The quarry needs rocks to cut within the work area.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Quarry
+            pgettext(buildingctxt, "The stonemason pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 25):bformat(25))
          }
       },
-      XXXX = {
+      frisians_recycling_center = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Recycling Center
+            pgettext(buildingctxt, "Of course these weapons could be used by other soldiers again without being smelted down first! The only drawback is that they’d break in two at the first blow.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Recycling Center
+            pgettext(buildingctxt, "A smelter explaining the need for recycling to his impatient chieftain")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Recycling Center
+            pgettext(buildingctxt, "Recycles old armor and weapon parts that have been discarded by training sites into fur, iron and gold.")
          }
       },
-      XXXX = {
+      frisians_reed_farm = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Reed Farm
+            pgettext(buildingctxt, "No worse fortune can befall a reed farmer than to see his roof leaking.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Reed Farm
+            pgettext(buildingctxt, "Anonymous reed farmer")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Reed Farm
+            pgettext(buildingctxt, "Cultivates reed that serves three different purposes for the Frisians.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Reed Farm
+            pgettext(buildingctxt, "Reed is the traditional material for roofing. It is also needed for producing buckets and fishing nets, and it is woven – together with reindeer fur – into the cloth used for ships’ sails.")
          }
       },
-      XXXX = {
+      frisians_reindeer_farm = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Reindeer Farm
+            pgettext(buildingctxt, "Who says a beast of burden cannot be useful for other things than transport?")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Reindeer Farm
+            pgettext(buildingctxt, "The reindeer breeder who first proposed using reindeer fur for clothing")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Reindeer Farm
+            pgettext(buildingctxt, "Breeds strong reindeer for adding them to the transportation system. Also keeps them for their fur, which is turned into armor and cloth.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Reindeer Farm
+            pgettext(buildingctxt, "If the supply is steady, the reindeer farm produces one meat after producing three pieces of fur.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      frisians_rockmine = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Rock Mine
+            pgettext("building", "Digs granite out of the ground in mountain terrain.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Rock Mine
+            pgettext(buildingctxt, "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any granite."):bformat("1/2")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Rock Mine
+            pgettext(buildingctxt, "If the food supply is steady, the rock mine can produce two blocks of granite in %s on average."):bformat(ngettext("%d second", "%d seconds", 85):bformat(85))
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      frisians_rockmine_deep = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Deep Rock Mine
+            pgettext("building", "Digs granite out of the ground in mountain terrain.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Deep Rock Mine
+            pgettext(buildingctxt, "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more granite."):bformat("10%")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Deep Rock Mine
+            pgettext(buildingctxt, "If the food supply is steady, the deep rock mine can produce three blocks of granite in %s on average."):bformat(ngettext("%d second", "%d seconds", 76):bformat(76))
          }
       },
-      XXXX = {
+      frisians_scouts_house = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Scout's House
+            pgettext(buildingctxt, "Everyone has their own ideas on how exactly we should explore the enemy’s territory… One more ‘improvement’ suggestion and we’ll demand meals instead of rations!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Scout's House
+            pgettext(buildingctxt, "The spokesman of the scouts’ labor union")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
+            pgettext("building", "Explores unknown territory.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Scout's House
+            pgettext(buildingctxt, "The scout pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
          }
       },
-      XXXX = {
+      frisians_sewing_room = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Sewing Room
+            pgettext(buildingctxt, "You soldiers think a good sword is everything, but where would you be if you had no garments?")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Sewing Room
+            pgettext(buildingctxt, "A seamstress scolding a soldier for disrespecting her profession")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Sewing Room
+            pgettext("building", "Sews fur garments out of reindeer fur.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Sewing Room
+            pgettext(buildingctxt, "The sewing room needs %s on average to produce one fur garment."):bformat(ngettext("%d second", "%d seconds", 45):bformat(45))
          }
       },
-      XXXX = {
+      frisians_shipyard = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Shipyard
+            pgettext(buildingctxt, "This house may be called a shipyard, but my ships are rather longer than one yard!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Shipyard
+            pgettext(buildingctxt, "A shipwright who only constructed toy ships after being chid that his ships were too small")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
+            pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports.")
          }
       },
-      XXXX = {
+      frisians_smokery = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Smokery
+            pgettext(buildingctxt, "Miners and soldiers are so picky… But who am I to complain, as I make my living from it?")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Smokery
+            pgettext(buildingctxt, "A smoker explaining his profession")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Smokery
+            pgettext("building", "Smokes fish and meat using logs. Only smoked meat and fish are good enough to be eaten by miners and soldiers.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Smokery
+            pgettext(buildingctxt, "The smokery needs %s on average to smoke two fish or two meat."):bformat(ngettext("%d second", "%d seconds", 46):bformat(46))
          }
       },
-      XXXX = {
+      frisians_tailors_shop = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Tailor's Shop
+            pgettext(buildingctxt, "Don’t complain if these garments are too heavy – they’re not supposed to be light but to keep you alive a bit longer!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Tailor's Shop
+            pgettext(buildingctxt, "A trainer scolding a soldier")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Tailor's Shop
+            pgettext("building", "Equips fur garments with iron or gold to produce good armor.")
          }
       },
-      XXXX = {
+      frisians_tavern = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Tavern
+            pgettext(buildingctxt, "Nothing but fruit all day… Couldn’t you hurry up a bit?")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Tavern
+            pgettext(buildingctxt, "Hungry customers in times of a shortage of smoked fish and meat")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Tavern
+            pgettext("building", "Prepares rations to feed the scouts and miners.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Tavern
+            pgettext(buildingctxt, "The tavern can produce one ration in %s on average if the supply is steady; otherwise, it will take 50%% longer."):bformat(ngettext("%d second", "%d seconds", 33):bformat(33))
          }
       },
-      XXXX = {
+      frisians_weaving_mill = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Weaving Mill
+            pgettext(buildingctxt, "Reindeer’s fur and roofing reed<br>These items two make up the seed<br>For ships of wood to chain the gales<br>In sturdy, beautious, blowing sails!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Weaving Mill
+            pgettext(buildingctxt, "A seamstress’ work song")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Weaving Mill
+            pgettext("building", "Sews cloth for ship sails out of reed and reindeer fur.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Weaving Mill
+            pgettext(buildingctxt, "The weaving mill needs %s on average to produce one piece of cloth."):bformat(ngettext("%d second", "%d seconds", 45):bformat(45))
          }
       },
-      XXXX = {
+      frisians_well = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Well
+            pgettext(buildingctxt, "We love the sea so much that we don’t want to drink it empty!")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Well
+            pgettext(buildingctxt, "Chieftain Arldor’s retort when he was asked why his tribe can’t drink salt water")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Well
+            pgettext("building", "Draws water out of the deep.")
          },
          performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Performance helptext for a frisian production site: Well
+            pgettext(buildingctxt, "The well needs %s on average to produce one bucket of water."):bformat(ngettext("%d second", "%d seconds", 40):bformat(40))
          }
       },
-      XXXX = {
+      frisians_woodcutters_house = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore helptext for a frisian production site: Woodcutter's House
+            pgettext(buildingctxt, "I cannot see a tree without imagining what it would look like in terms of furniture.")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Lore author helptext for a frisian production site: Woodcutter's House
+            pgettext(buildingctxt, "An over-enthusiastic woodcutter")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Woodcutter's House
+            pgettext("building", "Fells trees in the surrounding area and processes them into logs.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for a frisian production site: Woodcutter's House
+            pgettext(buildingctxt, "The woodcutter’s house needs trees to fell within the work area.")
+         }
+      },
+      frisians_training_camp = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian training site: Training Camp
+            pgettext(buildingctxt, "Just be quiet, listen carefully, and do try not to stab yourself until I’ve explained to you how to hold a broadsword.")
          },
-         performance = {
-            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
-            pgettext(buildingctxt, "")
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian training site: Training Camp
+            pgettext(buildingctxt, "A trainer training a soldier")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian training site: Training Camp
+            pgettext(buildingctxt, "Trains soldiers in Attack up to level 3 as well as in Defense and Health to level 1. Equips the soldiers with all necessary weapons and armor parts.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian training site: Training Camp
+            pgettext(buildingctxt, "Frisian soldiers cannot train in Evade and will remain at their initial level.")
+         }
+      },
+      frisians_training_arena = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian training site: Training Arena
+            pgettext(buildingctxt, "Now that you have two swords, there’s more of a risk you’ll accidentally stab yourself, but if you got this far, you’ll likely master this challenge as well.")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian training site: Training Arena
+            pgettext(buildingctxt, "A trainer training a soldier")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian training site: Training Arena
+            pgettext(buildingctxt, "Trains soldiers in Attack, Defense and Health to the final level. Equips the soldiers with all necessary weapons and armor parts.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian training site: Training Arena
+            pgettext(buildingctxt, "Trains only soldiers who have been trained to the maximum level by the Training Camp.")
+         }
+      },
+      frisians_headquarters = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian warehouse: Headquarters
+            pgettext(buildingctxt, "Accommodation for your people. Also stores your wares and tools.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian warehouse: Headquarters
+            pgettext(buildingctxt, "The headquarters is your main building.")
+         }
+      },
+      frisians_port = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian warehouse: Port
+            pgettext(buildingctxt, "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
+         }
+      },
+      frisians_warehouse = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian warehouse: Warehouse
+            pgettext("building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
          }
       },
    },

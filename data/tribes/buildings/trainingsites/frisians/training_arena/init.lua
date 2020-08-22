@@ -5,7 +5,6 @@ tribes:new_trainingsite_type {
    name = "frisians_training_arena",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Training Arena"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
