@@ -5,7 +5,6 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 
 local buildingctxt = "barbarians_building"
-local immctxt = "barbarians_immovable"
 local warectxt = "barbarians_ware"
 local workerctxt = "barbarians_worker"
 
@@ -987,123 +986,123 @@ local result = {
    immovables = {
       ashes = {
          -- TRANSLATORS: Helptext for a tribe immovable: Ashes
-         purpose = { pgettext(immctxt, "The remains of a destroyed building.") }
+         purpose = { _("The remains of a destroyed building.") }
       },
       destroyed_building = {
          -- TRANSLATORS: Helptext for a tribe immovable: Destroyed Building
-         purpose = { pgettext(immctxt, "The remains of a destroyed building.") }
+         purpose = { _("The remains of a destroyed building.") }
       },
       reedfield_medium = {
          -- TRANSLATORS: Helptext for a tribe immovable: Reed Field
-         purpose = { pgettext(immctxt, "This reed field is growing.") }
+         purpose = { _("This reed field is growing.") }
       },
       reedfield_ripe = {
          -- TRANSLATORS: Helptext for a tribe immovable: Reed Field
-         purpose = { pgettext(immctxt, "This reed field is ready for harvesting.") }
+         purpose = { _("This reed field is ready for harvesting.") }
       },
       reedfield_small = {
          -- TRANSLATORS: Helptext for a tribe immovable: Reed Field
-         purpose = { pgettext(immctxt, "This reed field is growing.") }
+         purpose = { _("This reed field is growing.") }
       },
       reedfield_tiny = {
          -- TRANSLATORS: Helptext for a tribe immovable: Reed Field
-         purpose = { pgettext(immctxt, "This reed field has just been planted.") }
+         purpose = { _("This reed field has just been planted.") }
       },
       barbarians_resi_coal_1 = {
          purpose = {
             -- TRANSLATORS: Helptext for a resource indicator: Coal, part 1
-            pgettext(immctxt, "Coal veins contain coal that can be dug up by coal mines."),
+            _("Coal veins contain coal that can be dug up by coal mines."),
             -- TRANSLATORS: Helptext for a resource indicator: Coal part 2
-            pgettext(immctxt, "There is only a little bit of coal here.")
+            _("There is only a little bit of coal here.")
          }
       },
       barbarians_resi_coal_2 = {
          purpose = {
             -- TRANSLATORS: Helptext for a resource indicator: Coal, part 1
-            pgettext(immctxt, "Coal veins contain coal that can be dug up by coal mines."),
+            _("Coal veins contain coal that can be dug up by coal mines."),
             -- TRANSLATORS: Helptext for a resource indicator: Coal, part 2
-            pgettext(immctxt, "There is a lot of coal here.")
+            _("There is a lot of coal here.")
          }
       },
       barbarians_resi_gold_1 = {
          purpose = {
             -- TRANSLATORS: Helptext for a resource indicator: Gold, part 1
-            pgettext(immctxt, "Gold veins contain gold ore that can be dug up by gold mines."),
+            _("Gold veins contain gold ore that can be dug up by gold mines."),
             -- TRANSLATORS: Helptext for a resource indicator: Gold, part 2
-            pgettext(immctxt, "There is only a little bit of gold here.")
+            _("There is only a little bit of gold here.")
          }
       },
       barbarians_resi_gold_2 = {
          purpose = {
             -- TRANSLATORS: Helptext for a resource indicator: Gold, part 1
-            pgettext(immctxt, "Gold veins contain gold ore that can be dug up by gold mines."),
+            _("Gold veins contain gold ore that can be dug up by gold mines."),
             -- TRANSLATORS: Helptext for a resource indicator: Gold, part 2
-            pgettext(immctxt, "There is a lot of gold here.")
+            _("There is a lot of gold here.")
          }
       },
       barbarians_resi_iron_1 = {
          purpose = {
             -- TRANSLATORS: Helptext for a resource indicator: Iron, part 1
-            pgettext(immctxt, "Iron veins contain iron ore that can be dug up by iron mines."),
+            _("Iron veins contain iron ore that can be dug up by iron mines."),
             -- TRANSLATORS: Helptext for a resource indicator: Iron, part 2
-            pgettext(immctxt, "There is only a little bit of iron here.")
+            _("There is only a little bit of iron here.")
          }
       },
       barbarians_resi_iron_2 = {
          purpose = {
             -- TRANSLATORS: Helptext for a resource indicator: Iron, part 1
-            pgettext(immctxt, "Iron veins contain iron ore that can be dug up by iron mines."),
+            _("Iron veins contain iron ore that can be dug up by iron mines."),
             -- TRANSLATORS: Helptext for a resource indicator: Iron, part 2
-            pgettext(immctxt, "There is a lot of iron here.")
+            _("There is a lot of iron here.")
          }
       },
       barbarians_resi_none = {
          -- TRANSLATORS: Helptext for a resource indicator: No resources
-         purpose = { pgettext(immctxt, "There are no resources in the ground here.") }
+         purpose = { _("There are no resources in the ground here.") }
       },
       barbarians_resi_water = {
          -- TRANSLATORS: Helptext for a resource indicator: Water
-         purpose = { pgettext(immctxt, "There is water in the ground here that can be pulled up by a well.") }
+         purpose = { _("There is water in the ground here that can be pulled up by a well.") }
       },
       barbarians_resi_stones_1 = {
          purpose = {
             -- TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 1
-            pgettext(immctxt, "Granite is a basic building material and can be dug up by a granite mine."),
+            _("Granite is a basic building material and can be dug up by a granite mine."),
             -- TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
-            pgettext(immctxt, "There is only a little bit of granite here."),
+            _("There is only a little bit of granite here."),
          }
       },
       barbarians_resi_stones_2 = {
          purpose = {
             -- TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 1
-            pgettext(immctxt, "Granite is a basic building material and can be dug up by a granite mine."),
+            _("Granite is a basic building material and can be dug up by a granite mine."),
             -- TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
-            pgettext(immctxt, "There is a lot of granite here.")
+            _("There is a lot of granite here.")
          }
       },
       barbarians_shipconstruction = {
          -- TRANSLATORS: Helptext for a tribe immovable: Ship Under Construction
-         purpose = { pgettext(immctxt, "A ship is being constructed at this site.") }
+         purpose = { _("A ship is being constructed at this site.") }
       },
       wheatfield_harvested = {
          -- TRANSLATORS: Helptext for a tribe immovable: Wheat field
-         purpose = { pgettext(immctxt, "This field has been harvested.") }
+         purpose = { _("This field has been harvested.") }
       },
       wheatfield_medium = {
          -- TRANSLATORS: Helptext for a tribe immovable: Wheat field
-         purpose = { pgettext(immctxt, "This field is growing.") }
+         purpose = { _("This field is growing.") }
       },
       wheatfield_ripe = {
          -- TRANSLATORS: Helptext for a tribe immovable: Wheat field
-         purpose = { pgettext(immctxt, "This field is ready for harvesting.") }
+         purpose = { _("This field is ready for harvesting.") }
       },
       wheatfield_small = {
          -- TRANSLATORS: Helptext for a tribe immovable: Wheat field
-         purpose = { pgettext(immctxt, "This field is growing.") }
+         purpose = { _("This field is growing.") }
       },
       wheatfield_tiny = {
          -- TRANSLATORS: Helptext for a tribe immovable: Wheat field
-         purpose = { pgettext(immctxt, "This field has just been planted.") }
+         purpose = { _("This field has just been planted.") }
       }
    },
    wares = {
