@@ -65,7 +65,10 @@
 --
 -- See :ref:`defining_tribe_units` for further details on these files.
 
+local buildingctxt = "empire_building"
+
 return {
+   textdomain = "scenario_emp04.wmf",
    empire = {
       buildings = {
          "empire_brewery1",
@@ -79,6 +82,16 @@ return {
          "empire_trainingcamp1",
          "empire_well1",
          "empire_temple_of_vesta"
+      },
+      helptexts = {
+         buildings = {
+            empire_temple_of_vesta = {
+               purpose = {
+                  -- TRANSLATORS: Purpose helptext for a barbarian production site: Quarry
+                  pgettext(buildingctxt, "In the temple of Vesta, the wares to worship are stored. It is the home of the priestesses and the guards of the goddess.")
+               }
+            }
+         }
       }
    }
 }

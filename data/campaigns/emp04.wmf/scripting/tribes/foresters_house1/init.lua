@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_foresters_house1",
    descname = "Forester’s House",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 

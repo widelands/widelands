@@ -6,7 +6,6 @@ tribes:new_trainingsite_type {
    msgctxt = "empire_building",
    name = "empire_trainingcamp1",
    descname = "Training Camp",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 

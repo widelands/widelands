@@ -168,7 +168,7 @@ TribeDescr::TribeDescr(LuaInterface* lua, const Widelands::TribeBasicInfo& info,
                        Tribes& tribes,
                        const World& world,
                        const LuaTable& table,
-                       const LuaTable* scenario_table)
+                       const LuaTable* scenario_table, const std::string& scenario_textdomain)
    : name_(table.get_string("name")),
      descname_(info.descname),
      tribes_(tribes),
@@ -186,6 +186,7 @@ TribeDescr::TribeDescr(LuaInterface* lua, const Widelands::TribeBasicInfo& info,
 	ScopedTimer timer("┗━ took: %ums");
 
     std::unique_ptr<LuaTable> helptexts = lua->run_script(table.get_string("helptext_script"));
+	std::unique_ptr<LuaTable> scenario_helptexts = scenario_table && scenario_table->has_key<std::string>("helptexts") ? scenario_table->get_table("helptexts") : nullptr;
 
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
@@ -201,14 +202,14 @@ TribeDescr::TribeDescr(LuaInterface* lua, const Widelands::TribeBasicInfo& info,
 
 		log("┃    Immovables: ");
 		set_progress_message(_("Immovables"), 2);
-		load_immovables(table, tribes, world, helptexts->get_table("immovables").get());
+		load_immovables(table, tribes, world, helptexts->get_table("immovables").get(), "tribes_encyclopedia");
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Wares: ");
 		set_progress_message(_("Wares"), 3);
-		load_wares(table, tribes, helptexts->get_table("wares").get());
+		load_wares(table, tribes, helptexts->get_table("wares").get(), "tribes_encyclopedia");
 		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
-			load_wares(*scenario_table, tribes, helptexts->has_key("wares") ? helptexts->get_table("wares").get() : nullptr);
+			load_wares(*scenario_table, tribes, scenario_helptexts && scenario_helptexts->has_key("wares") ? scenario_helptexts->get_table("wares").get() : nullptr, scenario_textdomain);
 		}
 		log("%ums\n", timer.ms_since_last_query());
 
@@ -222,9 +223,9 @@ TribeDescr::TribeDescr(LuaInterface* lua, const Widelands::TribeBasicInfo& info,
 
 		log("┃    Buildings: ");
 		set_progress_message(_("Buildings"), 5);
-		load_buildings(table, tribes, helptexts->get_table("buildings").get());
+		load_buildings(table, tribes, helptexts->get_table("buildings").get(), "tribes_encyclopedia");
 		if (scenario_table != nullptr && scenario_table->has_key("buildings")) {
-			load_buildings(*scenario_table, tribes, helptexts->has_key("buildings") ? helptexts->get_table("buildings").get() : nullptr);
+			load_buildings(*scenario_table, tribes, scenario_helptexts && scenario_helptexts->has_key("buildings") ? scenario_helptexts->get_table("buildings").get() : nullptr, scenario_textdomain);
 		}
 		log("%ums\n", timer.ms_since_last_query());
 
@@ -348,10 +349,10 @@ void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
 	ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
 }
 
-void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, LuaTable* helptexts) {
+void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, LuaTable* helptexts, const std::string& textdomain) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("wares_order");
 
-	i18n::Textdomain td("tribes_encyclopedia");
+	i18n::Textdomain td(textdomain);
     const std::string ware_msgctxt(name() + "_ware");
 
 	for (const int column_key : items_table->keys<int>()) {
@@ -392,8 +393,8 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, LuaTable* hel
 	}
 }
 
-void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const World& world, LuaTable* helptexts) {
-	i18n::Textdomain td("tribes_encyclopedia");
+void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const World& world, LuaTable* helptexts, const std::string& textdomain) {
+	i18n::Textdomain td(textdomain);
 	const std::string ware_msgctxt(name() + "_immovable");
 
 	for (const std::string& immovablename :
@@ -508,8 +509,8 @@ void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
 	}
 }
 
-void TribeDescr::load_buildings(const LuaTable& table, Tribes& tribes, LuaTable* helptexts) {
-	i18n::Textdomain td("tribes_encyclopedia");
+void TribeDescr::load_buildings(const LuaTable& table, Tribes& tribes, LuaTable* helptexts, const std::string& textdomain) {
+	i18n::Textdomain td(textdomain);
 	for (const std::string& buildingname :
 	     table.get_table("buildings")->array_entries<std::string>()) {
 		add_building(buildingname, tribes, helptexts);

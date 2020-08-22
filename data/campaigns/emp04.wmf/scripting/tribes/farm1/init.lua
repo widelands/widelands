@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_farm1",
    descname = "Farm",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
    enhancement = "empire_farm2",
