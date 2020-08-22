@@ -142,10 +142,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", table.get_string("name").c_str());
 	}
-	if (!helptext_script().empty()) {
-        // TODO(GunChleoc): Compatibility - remove after v1.0
-		log("WARNING: Helptexts script for immovable %s is obsolete - please move strings to tribes/initializations/<tribename>/helptexts.lua\n", name().c_str());
-	}
 
 	if (table.has_key("size")) {
 		size_ = BaseImmovable::string_to_size(table.get_string("size"));

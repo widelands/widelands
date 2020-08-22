@@ -7,6 +7,7 @@ include "tribes/scripting/help/global_helptexts.lua"
 local buildingctxt = "barbarians_building"
 local immctxt = "barbarians_immovable"
 local warectxt = "barbarians_ware"
+local workerctxt = "barbarians_worker"
 
 return {
    buildings = {
@@ -1340,5 +1341,11 @@ return {
             pgettext(warectxt, "Wheat is produced by farms and consumed by bakeries, micro breweries and breweries. Cattle farms also need to be supplied with wheat.")
          }
       }
+   },
+   workers = {
+      barbarians_baker = {
+         -- TRANSLATORS: Helptext for a barbarian worker: Baker
+         purpose = { pgettext(workerctxt, "Bakes pitta bread for the miners, soldiers and scouts.") }
+      },
    }
 }

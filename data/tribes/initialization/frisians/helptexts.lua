@@ -3,6 +3,7 @@
 local buildingctxt = "frisians_building"
 local immctxt = "frisians_immovable"
 local warectxt = "frisians_ware"
+local workerctxt = "frisians_worker"
 
 return {
    buildings = {
@@ -426,5 +427,11 @@ return {
             pgettext(warectxt, "Water is used to bake bread and brew beer. Reindeer farms and aqua farms also consume it.")
          }
       }
-    }
+   },
+   workers = {
+      frisians_baker = {
+         -- TRANSLATORS: Helptext for a frisian worker: Baker
+         purpose = { pgettext(workerctxt, "Bakes bread for miners and soldiers.") }
+      },
+   }
 }

@@ -156,7 +156,7 @@ private:
 	void load_ships(const LuaTable& table, Tribes& tribes);
 	void load_wares(const LuaTable& table, Tribes& tribes, LuaTable* helptexts, const std::string& textdomain);
 	void load_immovables(const LuaTable& table, Tribes& tribes, const World& world, LuaTable* helptexts, const std::string& textdomain);
-	void load_workers(const LuaTable& table, Tribes& tribes);
+	void load_workers(const LuaTable& table, Tribes& tribes, LuaTable* helptexts, const std::string& textdomain);
 	void load_buildings(const LuaTable& table, Tribes& tribes, LuaTable* helptexts, const std::string& textdomain);
 
 	/// Registers a building with the tribe

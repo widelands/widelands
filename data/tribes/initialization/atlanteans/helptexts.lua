@@ -36,9 +36,11 @@
 -- The helptexts are then joined by the engine.
 -- In our example, we will get ``"The bread paddle is the tool of the baker, each baker needs one. Bread paddles are produced by the toolsmith."``
 
+-- NOCOM update documentation + document scenario helptexts
 local buildingctxt = "atlanteans_building"
 local immctxt = "atlanteans_immovable"
 local warectxt = "atlanteans_ware"
+local workerctxt = "atlanteans_worker"
 
 return {
    buildings = {
@@ -436,5 +438,11 @@ return {
             pgettext(warectxt, "Water is used in the bakery and the horse and spider farms.")
          }
       }
+   },
+   workers = {
+      atlanteans_armorsmith = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Armorsmith
+         purpose = { pgettext(workerctxt, "Produces armor for the soldiers.") }
+      },
    }
 }

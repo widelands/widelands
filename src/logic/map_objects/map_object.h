@@ -55,8 +55,7 @@ public:
 
 	MapObjectDescr(const MapObjectType init_type,
 	               const std::string& init_name,
-	               const std::string& init_descname,
-	               const std::string& init_helptext_script);
+	               const std::string& init_descname);
 	MapObjectDescr(const MapObjectType init_type,
 	               const std::string& init_name,
 	               const std::string& init_descname,
@@ -68,10 +67,6 @@ public:
 	}
 	const std::string& descname() const {
 		return descname_;
-	}
-
-	const std::string& helptext_script() const {
-		return helptext_script_;
 	}
 
 	// Type of the MapObjectDescr.
@@ -134,9 +129,6 @@ private:
 	const MapObjectType type_;    /// Subclasses pick from the enum above
 	std::string const name_;      /// The name for internal reference
 	std::string const descname_;  /// A localized Descriptive name
-	/// The path and filename to the helptext script. Can be empty, but some subtypes like buildings,
-	/// wares and workers require it.
-	const std::string helptext_script_;
 
     /// Tribe-specific helptexts. Format: <tribename, <category, localized_text>>
     std::map<std::string, std::map<std::string, std::string>> helptexts_;

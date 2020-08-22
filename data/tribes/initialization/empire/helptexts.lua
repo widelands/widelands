@@ -3,6 +3,7 @@
 local buildingctxt = "empire_building"
 local immctxt = "empire_immovable"
 local warectxt = "empire_ware"
+local workerctxt = "empire_worker"
 
 return {
    buildings = {
@@ -416,5 +417,11 @@ return {
          -- TRANSLATORS: Helptext for a ware: Wool
          purpose = { pgettext(warectxt, "Wool is the hair of sheep. Weaving mills use it to make cloth.") }
       }
+   },
+   workers = {
+      empire_armorsmith = {
+         -- TRANSLATORS: Helptext for an empire worker: Armorsmith
+         purpose = { pgettext(workerctxt, "Produces armor for the soldiers.") }
+      },
    }
 }

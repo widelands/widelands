@@ -215,9 +215,9 @@ TribeDescr::TribeDescr(LuaInterface* lua, const Widelands::TribeBasicInfo& info,
 
 		log("┃    Workers: ");
 		set_progress_message(_("Workers"), 4);
-		load_workers(table, tribes);
+		load_workers(table, tribes,  helptexts->get_table("workers").get(), "tribes_encyclopedia");
 		if (scenario_table != nullptr && scenario_table->has_key("workers_order")) {
-			load_workers(*scenario_table, tribes);
+			load_workers(*scenario_table, tribes, scenario_helptexts && scenario_helptexts->has_key("workers") ? scenario_helptexts->get_table("workers").get() : nullptr, scenario_textdomain);
 		}
 		log("%ums\n", timer.ms_since_last_query());
 
@@ -443,7 +443,10 @@ void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const Wo
 	get_resource_indicator(nullptr, 0);
 }
 
-void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
+void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes, LuaTable* helptexts, const std::string& textdomain) {
+	i18n::Textdomain td(textdomain);
+	const std::string worker_msgctxt(name() + "_worker");
+
 	std::unique_ptr<LuaTable> items_table = table.get_table("workers_order");
 
 	for (const int column_key : items_table->keys<int>()) {
@@ -471,6 +474,11 @@ void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
 				}
 				if (worker_table->has_key("preciousness")) {
 					worker_descr->set_preciousness(name(), worker_table->get_int("preciousness"));
+				}
+
+				// Add helptext
+				if (helptexts) {
+					worker_descr->set_helptexts(name(), read_helptexts(worker_descr, worker_msgctxt, *helptexts));
 				}
 
 				// Add to tribe

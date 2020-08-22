@@ -68,10 +68,6 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
      enhanced_building_(false),
      hints_(table.get_table("aihints")),
      vision_range_(0) {
-	if (!helptext_script().empty()) {
-        // TODO(GunChleoc): Compatibility - remove after v1.0
-		log("WARNING: Helptexts script for building %s is obsolete - please move strings to tribes/initializations/<tribename>/helptexts.lua\n", name().c_str());
-	}
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Building %s has no idle animation", name().c_str());
 	}
