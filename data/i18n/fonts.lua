@@ -49,8 +49,9 @@ return {
    },
 
    japanese = {
-      sans = "Takao/TakaoPGothic.ttf",
-      serif = "Takao/TakaoPMincho.ttf",
+      sans = "Takao/TakaoExGothic.ttf",
+      serif = "Takao/TakaoMincho.ttf",
+      condensed = "Takao/TakaoPGothic.ttf",
       representative_character = "あ",
       size_offset = 4
    },
