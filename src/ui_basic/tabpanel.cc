@@ -209,6 +209,7 @@ void TabPanel::activate(uint32_t idx) {
 	}
 	if (idx < tabs_.size()) {
 		tabs_[idx]->panel->set_visible(true);
+		tabs_[idx]->panel->focus();
 	}
 
 	active_ = idx;

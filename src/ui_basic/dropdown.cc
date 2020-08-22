@@ -407,6 +407,7 @@ void BaseDropdown::set_list_visibility(bool open) {
 }
 
 void BaseDropdown::toggle_list() {
+	focus();
 	if (!is_enabled_) {
 		list_->set_visible(false);
 		return;
@@ -445,9 +446,13 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_SPACE:
 			if (list_->is_visible()) {
 				set_value();
-				return true;
+				if (code.sym != SDLK_SPACE) {
+					set_list_visibility(false);
+				}
+			} else {
+				set_list_visibility(true);
 			}
-			break;
+			return true;
 		case SDLK_ESCAPE:
 			if (list_->is_visible()) {
 				list_->select(current_selection_);

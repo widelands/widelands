@@ -471,7 +471,11 @@ void Panel::draw_border(RenderTarget&) {
  * Draw overlays that appear over all child panels.
  * This can be used e.g. for debug information.
  */
-void Panel::draw_overlay(RenderTarget&) {
+void Panel::draw_overlay(RenderTarget& r) {
+	if (has_focus()) {
+		// if (parent_ && parent_->focus_ == this) {
+		r.fill_rect(Recti(0, 0, get_w(), get_h()), g_gr->styles().window_border_focused(), BlendMode::Default);
+	}
 }
 
 /**
@@ -668,6 +672,10 @@ void Panel::set_can_focus(bool const yes) {
 
 	if (yes) {
 		flags_ |= pf_can_focus;
+
+		if (!parent_ || !parent_->focus_) {
+			focus();
+		}
 	} else {
 		flags_ &= ~pf_can_focus;
 

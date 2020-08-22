@@ -19,6 +19,8 @@
 
 #include "ui_basic/spinbox.h"
 
+#include <SDL_mouse.h>
+
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
@@ -32,11 +34,14 @@ namespace UI {
 
 struct SpinBoxImpl {
 	/// Value hold by the spinbox
-	int32_t value;
+	int32_t value = 0;
 
 	/// Minimum and maximum that \ref value may reach
-	int32_t min;
-	int32_t max;
+	int32_t min = 0;
+	int32_t max = 0;
+
+	int32_t step_size = 0;
+	int32_t big_step_size = 0;
 
 	/// List of possible values for type kValueList
 	std::vector<int32_t> values;
@@ -51,12 +56,12 @@ struct SpinBoxImpl {
 	std::map<int32_t, std::string> value_replacements;
 
 	/// The UI parts
-	Textarea* text;
-	UI::MultilineTextarea* label;
-	Button* button_plus;
-	Button* button_minus;
-	Button* button_ten_plus;
-	Button* button_ten_minus;
+	Textarea* text = nullptr;
+	UI::MultilineTextarea* label = nullptr;
+	Button* button_plus = nullptr;
+	Button* button_minus = nullptr;
+	Button* button_ten_plus = nullptr;
+	Button* button_ten_minus = nullptr;
 };
 
 /**
@@ -111,6 +116,9 @@ SpinBox::SpinBox(Panel* const parent,
 
 	bool is_big = type_ == SpinBox::Type::kBig;
 
+	sbi_->step_size = step_size;
+	sbi_->big_step_size = big_step_size;
+
 	sbi_->button_minus =
 	   new Button(box_, "-", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_gr->images().get(is_big ? "images/ui_basic/scrollbar_left.png" :
@@ -133,9 +141,9 @@ SpinBox::SpinBox(Panel* const parent,
 		              _("Increase the value by 10"));
 
 		sbi_->button_ten_plus->sigclicked.connect(
-		   [this, big_step_size]() { change_value(big_step_size); });
+		   [this]() { change_value(sbi_->big_step_size); });
 		sbi_->button_ten_minus->sigclicked.connect(
-		   [this, big_step_size]() { change_value(-big_step_size); });
+		   [this]() { change_value(-sbi_->big_step_size); });
 		sbi_->button_ten_plus->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);
@@ -152,13 +160,14 @@ SpinBox::SpinBox(Panel* const parent,
 		box_->add(sbi_->button_plus);
 	}
 
-	sbi_->button_plus->sigclicked.connect([this, step_size]() { change_value(step_size); });
-	sbi_->button_minus->sigclicked.connect([this, step_size]() { change_value(-step_size); });
+	sbi_->button_plus->sigclicked.connect([this]() { change_value(sbi_->step_size); });
+	sbi_->button_minus->sigclicked.connect([this]() { change_value(-sbi_->step_size); });
 	sbi_->button_plus->set_repeating(true);
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
 	buttons_.push_back(sbi_->button_plus);
 
+	set_can_focus(true);
 	layout();
 	update();
 }
@@ -166,6 +175,69 @@ SpinBox::SpinBox(Panel* const parent,
 SpinBox::~SpinBox() {
 	delete sbi_;
 	sbi_ = nullptr;
+}
+
+bool SpinBox::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+
+		// Up and Right behave like clicking the Increase button
+		case SDLK_KP_6:
+		case SDLK_KP_8:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_UP:
+		case SDLK_RIGHT:
+			if (sbi_->button_plus) {
+				change_value(sbi_->step_size);
+				return true;
+			} break;
+
+		// Down and Left behave like clicking the Decrease button
+		case SDLK_KP_2:
+		case SDLK_KP_4:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_DOWN:
+		case SDLK_LEFT:
+			if (sbi_->button_minus) {
+				change_value(-sbi_->step_size);
+				return true;
+			} break;
+
+		// PageUp behaves like clicking the IncreaseFast button (if any)
+		case SDLK_KP_9:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEUP:
+			if (sbi_->button_ten_plus) {
+				change_value(sbi_->big_step_size);
+				return true;
+			} break;
+
+		// PageDown behaves like clicking the DecreaseFast button (if any)
+		case SDLK_KP_3:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEDOWN:
+			if (sbi_->button_ten_minus) {
+				change_value(-sbi_->big_step_size);
+				return true;
+			} break;
+
+		default:
+			break;
+		}
+	}
+	return Panel::handle_key(down, code);
 }
 
 void SpinBox::layout() {
