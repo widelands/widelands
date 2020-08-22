@@ -1,5 +1,8 @@
 -- Empire ware helptexts
 
+-- For formatting time strings
+include "tribes/scripting/help/global_helptexts.lua"
+
 local buildingctxt = "empire_building"
 local immctxt = "empire_immovable"
 local warectxt = "empire_ware"
@@ -9,30 +12,442 @@ return {
    buildings = {
       constructionsite = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: Construction Site
+            -- TRANSLATORS: Lore helptext for an empire building: Construction Site
             pgettext(buildingctxt, "‘Don’t swear at the builder who is short of building materials.’")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: Construction Site
+            -- TRANSLATORS: Lore author helptext for an empire building: Construction Site
             pgettext(buildingctxt, "Proverb widely used for impossible tasks of any kind")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
+            -- TRANSLATORS: Purpose helptext for an empire building: Construction Site
             pgettext(buildingctxt, "A new building is being built at this construction site.")
          }
       },
       dismantlesite = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
+            -- TRANSLATORS: Lore helptext for an empire building: Dismantle Site
             pgettext(buildingctxt, "‘New paths will appear when you are willing to tear down the old.’")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
+            -- TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
             pgettext(buildingctxt, "Proverb")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
+            -- TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
             pgettext(buildingctxt, "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
+         }
+      },
+      empire_barrier = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire military site: Barrier
+            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire military site: Barrier
+            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      empire_blockhouse = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire military site: Blockhouse
+            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire military site: Blockhouse
+            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      empire_castle = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire military site: Castle
+            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire military site: Castle
+            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      empire_fortress = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire military site: Fortress
+            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire military site: Fortress
+            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      empire_outpost = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire military site: Outpost
+            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire military site: Outpost
+            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      empire_sentry = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire military site: Sentry
+            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire military site: Sentry
+            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      empire_tower = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire military site: Tower
+            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire military site: Tower
+            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      empire_armorsmithy = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Armor Smithy
+            pgettext(buildingctxt, "Forges armor and helmets that are used for training soldiers’ health in the training camp.")
+         }
+      },
+      empire_bakery = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Bakery
+            pgettext(buildingctxt, "Bakes bread for soldiers and miners alike.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for an empire production site: Bakery
+            pgettext(buildingctxt, "The baker needs %1% on average to bake a loaf of bread."):bformat(format_seconds(34))
+         }
+      },
+      empire_barracks = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Barracks
+            pgettext(buildingctxt, "Equips recruits and trains them as soldiers.")
+         }
+      },
+      empire_brewery = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Brewery
+            pgettext(buildingctxt, "Produces beer to keep the miners strong and happy.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for an empire production site: Brewery
+            pgettext(buildingctxt, "The brewer needs %1% on average to brew a vat of beer."):bformat(format_minutes_seconds(1, 5))
+         }
+      },
+      empire_charcoal_kiln = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
+            pgettext(buildingctxt, "Burns logs into charcoal.")
+         }
+      },
+      empire_coalmine = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
+            pgettext(buildingctxt, "Digs coal out of the ground in mountain terrain.")
+         }
+      },
+      empire_coalmine_deep = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
+            pgettext(buildingctxt, "Digs coal out of the ground in mountain terrain.")
+         },
+      },
+      empire_donkeyfarm = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Donkey Farm
+            pgettext(buildingctxt, "Breeds cute and helpful donkeys for adding them to the transportation system.")
+         }
+      },
+      empire_farm = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Farm
+            pgettext(buildingctxt, "Sows and harvests wheat.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for an empire production site: Farm
+            pgettext(buildingctxt, "The farmer needs %1% on average to sow and harvest a sheaf of wheat."):bformat(format_minutes_seconds(1, 20))
+         }
+      },
+      empire_ferry_yard = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
+            pgettext(buildingctxt, "Builds ferries.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire production site: Ferry Yard
+            pgettext(buildingctxt, "Needs water nearby.")
+         }
+      },
+      empire_fishers_house = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Fisher's House
+            pgettext(buildingctxt, "Fishes on the coast near the fisher’s house.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire production site: Fisher's House
+            pgettext(buildingctxt, "The fisher’s house needs water full of fish within the work area.")
+         }
+      },
+      empire_foresters_house = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Forester's House
+            pgettext(buildingctxt, "Plants trees in the surrounding area.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire production site: Forester's House
+            pgettext(buildingctxt, "The forester’s house needs free space within the work area to plant the trees.")
+         }
+      },
+      empire_goldmine = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
+            pgettext(buildingctxt, "Digs gold ore out of the ground in mountain terrain.")
+         }
+      },
+      empire_goldmine_deep = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
+            pgettext(buildingctxt, "Digs gold ore out of the ground in mountain terrain.")
+         }
+      },
+      empire_hunters_house = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
+            pgettext(buildingctxt, "Hunts animals to produce meat.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire production site: Hunter's House
+            pgettext(buildingctxt, "The hunter’s house needs animals to hunt within the work area.")
+         }
+      },
+      empire_inn = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Inn
+            pgettext(buildingctxt, "Prepares rations for scouts and rations and snacks to feed the miners in all mines.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for an empire production site: Inn
+            pgettext(buildingctxt, "The innkeeper needs %1% on average to prepare a ration and a meal. If the economy doesn’t need both, the innkeeper needs %2% on average to prepare one ration or one meal."):bformat(format_minutes_seconds(1, 25), format_seconds(48))
+         }
+      },
+      empire_ironmine = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
+            pgettext(buildingctxt, "Digs iron ore out of the ground in mountain terrain.")
+         }
+      },
+      empire_ironmine_deep = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
+            pgettext(buildingctxt, "Digs iron ore out of the ground in mountain terrain.")
+         }
+      },
+      empire_lumberjacks_house = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's House
+            pgettext(buildingctxt, "Fells trees in the surrounding area and processes them into logs.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire production site: Lumberjack's House
+            pgettext(buildingctxt, "The lumberjack's house needs trees to fell within the work area.")
+         }
+      },
+      empire_marblemine = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Marble Mine
+            pgettext(buildingctxt, "Carves marble and granite out of the rock in mountain terrain.")
+         }
+      },
+      empire_marblemine_deep = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Deep Marble Mine
+            pgettext(buildingctxt, "Carves marble and granite out of the rock in mountain terrain.")
+         }
+      },
+      empire_mill = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Mill
+            pgettext(buildingctxt, "Grinds wheat to produce flour.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for an empire production site: Mill
+            pgettext(buildingctxt, "The miller needs %1% on average to grind wheat into a sack of flour."):bformat(format_seconds(19))
+         }
+      },
+      empire_piggery = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Piggery
+            pgettext(buildingctxt, "Breeds pigs for their meat.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for an empire production site: Piggery
+            pgettext(buildingctxt, "The pig breeder needs %1% on average to raise and slaughter a pig."):bformat(format_minutes(1))
+         }
+      },
+      empire_quarry = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Quarry
+            pgettext(buildingctxt, "Cuts blocks of granite and marble out of rocks in the vicinity.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire production site: Quarry
+            pgettext(buildingctxt, "The quarry needs rocks to cut within the work area.")
+         }
+      },
+      empire_sawmill = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Sawmill
+            pgettext(buildingctxt, "Saws logs to produce planks.")
+         }
+      },
+      empire_scouts_house = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Scout's House
+            pgettext(buildingctxt, "Explores unknown territory.")
+         }
+      },
+      empire_sheepfarm = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Sheep Farm
+            pgettext(buildingctxt, "Keeps sheep for their wool.")
+         }
+      },
+      empire_shipyard = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Shipyard
+            pgettext(buildingctxt, "Constructs ships that are used for overseas colonization and for trading between ports.")
+         }
+      },
+      empire_smelting_works = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Smelting Works
+            pgettext(buildingctxt, "Smelts iron ore into iron and gold ore into gold.")
+         }
+      },
+      empire_stonemasons_house = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Stonemason's House
+            pgettext(buildingctxt, "Carves marble columns out of marble.")
+         }
+      },
+      empire_tavern = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Tavern
+            pgettext(buildingctxt, "Prepares rations to feed the scouts and miners.")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for an empire production site: Tavern
+            pgettext(buildingctxt, "The innkeeper needs %1% on average to prepare a ration."):bformat(format_seconds(36))
+         }
+      },
+      empire_toolsmithy = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Toolsmithy
+            pgettext(buildingctxt, "Forges all the tools that your workers need.")
+         }
+      },
+      empire_vineyard = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Vineyard
+            pgettext(buildingctxt, "Plants grapevines and harvests grapes.")
+         }
+      },
+      empire_weaponsmithy = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Weapon Smithy
+            pgettext(buildingctxt, "Forges spears to equip the soldiers and to train their attack in the training camp.")
+         }
+      },
+      empire_weaving_mill = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Weaving Mill
+            pgettext(buildingctxt, "Weaves cloth out of wool.")
+         }
+      },
+      empire_well = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Well
+            pgettext(buildingctxt, "Draws water out of the deep.")
+         }
+      },
+      empire_winery = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Winery
+            pgettext(buildingctxt, "Produces wine.")
+         }
+      },
+      empire_arena = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire training site: Arena, part 1
+            pgettext(buildingctxt, "Trains soldiers in ‘Evade’."),
+            -- TRANSLATORS: Purpose helptext for an empire training site: Arena, part 2
+            pgettext(buildingctxt, "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire training site: Arena
+            pgettext(buildingctxt, "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+         }
+      },
+      empire_colosseum = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire training site: Colosseum, part 1
+            pgettext(buildingctxt, "Trains soldiers in ‘Evade’."),
+            -- TRANSLATORS: Purpose helptext for an empire training site: Colosseum, part 2
+            pgettext(buildingctxt, "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire training site: Colosseum
+            pgettext(buildingctxt, "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+         }
+      },
+      empire_trainingcamp = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire training site: Training Camp, part 1
+            pgettext(buildingctxt, "Trains soldiers in ‘Attack’ and in ‘Health’."),
+            -- TRANSLATORS: Purpose helptext for an empire training site: Training Camp, part 2
+            pgettext(buildingctxt, "Equips the soldiers with all necessary weapons and armor parts.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire training site: Training Camp
+            pgettext(buildingctxt, "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+         }
+      },
+      empire_headquarters = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire warehouse: Headquarters
+            pgettext(buildingctxt, "Accommodation for your people. Also stores your wares and tools.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire warehouse: Headquarters
+            pgettext(buildingctxt, "The headquarters is your main building.")
+         }
+      },
+      empire_headquarters_shipwreck = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire warehouse: Headquarters Shipwreck
+            pgettext(buildingctxt, "Although this ship ran aground, it still serves as accommodation for your people. It also stores your wares and tools.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for an empire warehouse: Headquarters Shipwreck
+            pgettext(buildingctxt, "The headquarters shipwreck is your main building.")
+         }
+      },
+      empire_port = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire warehouse: Port
+            pgettext(buildingctxt, "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
+         }
+      },
+      empire_warehouse = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
+            pgettext(buildingctxt, "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
          }
       },
    },

@@ -1,5 +1,8 @@
 -- Frisian ware helptexts
 
+-- For formatting time strings
+include "tribes/scripting/help/global_helptexts.lua"
+
 local buildingctxt = "frisians_building"
 local immctxt = "frisians_immovable"
 local warectxt = "frisians_ware"

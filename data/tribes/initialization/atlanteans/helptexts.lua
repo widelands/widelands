@@ -1,5 +1,8 @@
 -- Atlantean ware helptexts
 
+-- For formatting time strings
+include "tribes/scripting/help/global_helptexts.lua"
+
 -- RST
 -- .. _lua_tribes_tribes_helptexts:
 --
@@ -237,491 +240,168 @@ return {
             pgettext(buildingctxt, "The forester’s house needs free space within the work area to plant the trees.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      atlanteans_goldmine = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
+            pgettext(buildingctxt, "Digs gold ore out of the ground in mountain terrain.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      atlanteans_gold_spinning_mill = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Gold Spinning Mill
+            pgettext(buildingctxt, "Spins gold thread out of gold.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      atlanteans_horsefarm = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Horse Farm
+            pgettext(buildingctxt, "Breeds the strong Atlantean horses for adding them to the transportation system.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      atlanteans_hunters_house = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's House
+            pgettext(buildingctxt, "Hunts animals to produce meat.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for an atlantean production site: Hunter's House
+            pgettext(buildingctxt, "The hunter’s house needs animals to hunt within the work area.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      atlanteans_ironmine = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
+            pgettext(buildingctxt, "Digs iron ore out of the ground in mountain terrain.")
+         }
+      },
+      atlanteans_mill = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Mill
+            pgettext(buildingctxt, "Grinds blackroots and corn to produce blackroot flour and cornmeal, respectively.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for an atlantean production site: Mill
+            pgettext(buildingctxt, "When no cornmeal is required, the mill will try to produce blackroot flour even when there is no demand for it.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      atlanteans_quarry = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Quarry
+            pgettext(buildingctxt, "Cuts blocks of granite out of rocks in the vicinity.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for an atlantean production site: Quarry
+            pgettext(buildingctxt, "The quarry needs rocks to cut within the work area.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      atlanteans_sawmill = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Sawmill
+            pgettext(buildingctxt, "Saws logs to produce planks.")
+         }
+      },
+      atlanteans_scouts_house = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Scout's House
+            pgettext(buildingctxt, "Explores unknown territory.")
+         }
+      },
+      atlanteans_shipyard = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
+            pgettext(buildingctxt, "Constructs ships that are used for overseas colonization and for trading between ports.")
+         }
+      },
+      atlanteans_smelting_works = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Smelting Works
+            pgettext(buildingctxt, "Smelts iron ore into iron and gold ore into gold.")
+         }
+      },
+      atlanteans_smokery = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Smokery
+            pgettext(buildingctxt, "Smokes meat and fish to feed the scouts and miners and to train soldiers in the dungeon.")
+         }
+      },
+      atlanteans_spiderfarm = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Spider Farm
+            pgettext(buildingctxt, "Breeds spiders for silk.")
+         }
+      },
+      atlanteans_toolsmithy = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+            pgettext(buildingctxt, "Forges all the tools that your workers need.")
+         }
+      },
+      atlanteans_weaponsmithy = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Weapon Smithy
+            pgettext(buildingctxt, "Forges tridents to equip the soldiers and to train their attack in the dungeon.")
+         }
+      },
+      atlanteans_weaving_mill = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Weaving Mill
+            pgettext(buildingctxt, "Weaves spidercloth for buildings and ships’ sails, and tabards to equip and train the soldiers.")
+         }
+      },
+      atlanteans_well = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Well
+            pgettext(buildingctxt, "Draws water out of the deep.")
+         }
+      },
+      atlanteans_woodcutters_house = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Woodcutter's House
+            pgettext(buildingctxt, "Fells trees in the surrounding area and processes them into logs.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for an atlantean production site: Woodcutter's House
+            pgettext(buildingctxt, "The woodcutter’s house needs trees to fell within the work area.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      atlanteans_dungeon = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for an atlantean training site: Dungeon, part 1
+            pgettext("atlanteans_building", "Trains soldiers in ‘Attack’."),
+            -- TRANSLATORS: Purpose helptext for an atlantean training site: Dungeon, part 2
+            pgettext("atlanteans_building", "Equips the soldiers with all necessary weapons and armor parts.")
+         }
+      },
+      atlanteans_labyrinth = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean training site: Labyrinth, part 1
+            pgettext("atlanteans_building", "Trains soldiers in ‘Defense’, ‘Evade’, and ‘Health’."),
+            -- TRANSLATORS: Purpose helptext for an atlantean training site: Labyrinth, part 2
+            pgettext("atlanteans_building", "Equips the soldiers with all necessary weapons and armor parts.")
+         }
+      },
+      atlanteans_headquarters = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Headquarters
+            pgettext(buildingctxt, "Accommodation for your people. Also stores your wares and tools.")
          },
          note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Note helptext for an atlantean warehouse: Headquarters
+            pgettext(buildingctxt, "The headquarters is your main building.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      atlanteans_port = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Port
+            pgettext(buildingctxt, "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
          }
       },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
+      atlanteans_warehouse = {
          purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
+            -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Warehouse
+            pgettext(buildingctxt, "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
          }
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         }
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         }
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         }
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         }
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         }
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         }
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         }
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         }
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         }
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         }
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         }
-      },
-      XXXX = {
-         lore = {
-            -- TRANSLATORS: Lore helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         lore_author = {
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         purpose = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         note = {
-            -- TRANSLATORS: Note helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         },
-         performance = {
-            -- TRANSLATORS: Performance helptext for an atlantean production site: XXXX
-            pgettext(buildingctxt, "")
-         }
-      },
-
+      }
    },
    immovables = {
       ashes = {
