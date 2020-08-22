@@ -748,7 +748,7 @@ void Table<void*>::EntryRecord::set_picture(uint8_t const col,
                                             const std::string& str) {
 	assert(col < data_.size());
 
-	data_.at(col).d_picture = pic;
+	data_.at(col).d_picture = std::move(pic);
 	data_.at(col).d_string = str;
 }
 void Table<void*>::EntryRecord::set_string(uint8_t const col, const std::string& str) {
