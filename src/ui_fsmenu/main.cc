@@ -35,8 +35,8 @@
 #include "wui/login_box.h"
 #include "wui/savegameloader.h"
 
-constexpr uint32_t kInitialFadeoutDelay = 2000;
-constexpr uint32_t kInitialFadeoutDuration = 6000;
+constexpr uint32_t kInitialFadeoutDelay = 2500;
+constexpr uint32_t kInitialFadeoutDuration = 4000;
 constexpr uint32_t kImageExchangeInterval = 20000;
 constexpr uint32_t kImageExchangeDuration = 2500;
 
