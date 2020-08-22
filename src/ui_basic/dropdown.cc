@@ -442,6 +442,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
+		case SDLK_SPACE:
 			if (list_->is_visible()) {
 				set_value();
 				return true;
