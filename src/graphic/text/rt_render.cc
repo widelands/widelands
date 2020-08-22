@@ -674,7 +674,8 @@ uint16_t TextNode::hotspot_y() const {
 		// (UChar32, char32At, TTF_GlyphIsProvided32, TTF_GlyphMetrics32)
 		UChar codepoint = unicode_txt.charAt(i);
 		int maxy;
-		if (TTF_GlyphIsProvided(font_.get_ttf_font(), codepoint) && TTF_GlyphMetrics(
+		if (TTF_GlyphIsProvided(font_.get_ttf_font(), codepoint) &&
+		    TTF_GlyphMetrics(
 		       font_.get_ttf_font(), codepoint, nullptr, nullptr, nullptr, &maxy, nullptr) == 0) {
 			ascent = std::max(ascent, maxy);
 		}
