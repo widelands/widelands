@@ -314,10 +314,12 @@ void GameMessageMenu::think() {
 
 void GameMessageMenu::update_record(UI::Table<uintptr_t>::EntryRecord& er,
                                     const Widelands::Message& message) {
-	er.set_picture(ColType, g_gr->images().get(display_message_type_icon(message)));
-	er.set_picture(
-	   ColStatus, g_gr->images().get(status_picture_filename[static_cast<int>(message.status())]));
-	er.set_picture(ColTitle, message.icon(), message.title());
+	const std::string img1 = display_message_type_icon(message);
+	const std::string img2 = status_picture_filename[static_cast<int>(message.status())];
+	const std::string img3 = message.icon_filename();
+	er.set_picture(ColType, FN_GET_IMAGE_(img1, img1));
+	er.set_picture(ColStatus, FN_GET_IMAGE_(img2, img2));
+	er.set_picture(ColTitle, FN_GET_IMAGE_(img3, img3), message.title());
 
 	const uint32_t time = message.sent();
 	er.set_string(ColTimeSent, gametimestring(time));

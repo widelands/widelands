@@ -100,11 +100,11 @@ void SavegameTable::create_directory_entry(UI::Table<const uintptr_t>::EntryReco
 		te.set_string(col_index, "");
 	}
 	if (savegame.is_parent_directory()) {
-		te.set_picture(last_column_index, g_gr->images().get("images/ui_basic/ls_dir.png"),
+		te.set_picture(last_column_index, FN_GET_IMAGE("images/ui_basic/ls_dir.png"),
 		               /** TRANSLATORS: Parent directory/folder */
 		               (boost::format("<%s>") % _("parent")).str());
 	} else if (savegame.is_sub_directory()) {
-		te.set_picture(last_column_index, g_gr->images().get("images/ui_basic/ls_dir.png"),
+		te.set_picture(last_column_index, FN_GET_IMAGE("images/ui_basic/ls_dir.png"),
 		               FileSystem::filename_without_ext(savegame.filename.c_str()));
 	}
 }
@@ -137,7 +137,7 @@ void SavegameTableSinglePlayer::create_valid_entry(UI::Table<uintptr_t const>::E
 		create_directory_entry(te, savegame);
 	} else {
 		te.set_string(0, savegame.savedatestring);
-		te.set_picture(1, g_gr->images().get("images/ui_basic/ls_wlmap.png"),
+		te.set_picture(1, FN_GET_IMAGE("images/ui_basic/ls_wlmap.png"),
 		               map_filename(savegame.filename, savegame.mapname));
 	}
 }
@@ -194,7 +194,7 @@ void SavegameTableReplay::create_valid_entry(UI::Table<uintptr_t const>::EntryRe
 		te.set_string(1, find_game_type(savegame));
 		const std::string map_basename =
 		   show_filenames_ ? map_filename(savegame.filename, savegame.mapname) : savegame.mapname;
-		te.set_picture(2, g_gr->images().get("images/ui_basic/ls_wlmap.png"),
+		te.set_picture(2, FN_GET_IMAGE("images/ui_basic/ls_wlmap.png"),
 		               (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) % map_basename %
 		                savegame.gametime)
 		                  .str());
@@ -252,7 +252,7 @@ void SavegameTableMultiplayer::create_valid_entry(UI::Table<uintptr_t const>::En
 	} else {
 		te.set_string(0, savegame.savedatestring);
 		te.set_string(1, find_game_type(savegame));
-		te.set_picture(2, g_gr->images().get("images/ui_basic/ls_wlmap.png"),
+		te.set_picture(2, FN_GET_IMAGE("images/ui_basic/ls_wlmap.png"),
 		               map_filename(savegame.filename, savegame.mapname));
 	}
 }

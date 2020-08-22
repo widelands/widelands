@@ -23,7 +23,6 @@
 #include <memory>
 #include <unordered_set>
 
-#include "graphic/image.h"
 #include "wui/mapauthordata.h"
 
 /**
@@ -48,7 +47,7 @@ struct CampaignData {
 	std::string descname;
 	std::string tribename;
 	uint32_t difficulty_level;
-	const Image* difficulty_image;
+	std::string difficulty_image;
 	std::string difficulty_description;
 	std::string description;
 	std::set<std::string> prerequisites;

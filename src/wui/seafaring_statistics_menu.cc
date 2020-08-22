@@ -284,7 +284,8 @@ void SeafaringStatisticsMenu::set_entry_record(UI::Table<uintptr_t>::EntryRecord
                                                const ShipInfo& info) {
 	if (info.status != ShipFilterStatus::kAll) {
 		er->set_string(ColName, info.name);
-		er->set_picture(ColStatus, status_to_image(info.status), status_to_string(info.status));
+		const ShipFilterStatus s = info.status;
+		er->set_picture(ColStatus, [s, this]() { return status_to_image(s); }, status_to_string(info.status));
 	}
 }
 
@@ -335,7 +336,8 @@ void SeafaringStatisticsMenu::remove_ship(Widelands::Serial serial) {
 
 void SeafaringStatisticsMenu::update_entry_record(UI::Table<uintptr_t>::EntryRecord& er,
                                                   const ShipInfo& info) {
-	er.set_picture(ColStatus, status_to_image(info.status), status_to_string(info.status));
+	const ShipFilterStatus s = info.status;
+	er.set_picture(ColStatus, [s, this]() { return status_to_image(s); }, status_to_string(info.status));
 }
 
 void SeafaringStatisticsMenu::selected() {

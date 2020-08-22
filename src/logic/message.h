@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_MESSAGE_H
 #define WL_LOGIC_MESSAGE_H
 
-#include "graphic/graphic.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
@@ -72,7 +71,6 @@ struct Message {
 	     sub_type_(subt),
 	     title_(init_title),
 	     icon_filename_(init_icon_filename),
-	     icon_(g_gr->images().get(init_icon_filename)),
 	     heading_(init_heading),
 	     body_(init_body),
 	     sent_(sent_time),
@@ -95,9 +93,6 @@ struct Message {
 	}
 	const std::string& icon_filename() const {
 		return icon_filename_;
-	}
-	const Image* icon() const {
-		return icon_;
 	}
 	const std::string& heading() const {
 		return heading_;
@@ -137,7 +132,6 @@ private:
 	const std::string sub_type_;
 	const std::string title_;
 	const std::string icon_filename_;
-	const Image* icon_;  // Pointer to icon into picture stack
 	const std::string heading_;
 	const std::string body_;
 	uint32_t sent_;

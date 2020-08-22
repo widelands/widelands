@@ -122,16 +122,20 @@ public:
 	bool handle_key(bool down, SDL_Keysym code);
 };
 
+using ImageFn = std::function<const Image*()>;
+#define FN_GET_IMAGE(name) []() { return g_gr->images().get(name); }
+#define FN_GET_IMAGE_(name, ...) [__VA_ARGS__]() { return g_gr->images().get(name); }
+
 template <> class Table<void*> : public Panel {
 public:
 	struct EntryRecord {
 		explicit EntryRecord(void* entry);
 
 		/// Text conventions: Title Case for the 'str'
-		void set_picture(uint8_t col, const Image* pic, const std::string& str = std::string());
+		void set_picture(uint8_t col, ImageFn pic, const std::string& str = std::string());
 		/// Text conventions: Title Case for the 'str'
 		void set_string(uint8_t col, const std::string& str);
-		const Image* get_picture(uint8_t col) const;
+		ImageFn get_picture(uint8_t col) const;
 		const std::string& get_string(uint8_t col) const;
 		void* entry() const {
 			return entry_;
@@ -157,7 +161,7 @@ public:
 		void* entry_;
 		const UI::FontStyleInfo* font_style_;
 		struct Data {
-			const Image* d_picture;
+			ImageFn d_picture;
 			std::string d_string;
 		};
 		std::vector<Data> data_;

@@ -166,7 +166,7 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 		UI::Table<uintptr_t>::EntryRecord& er = worker_table_->get_record(i);
 
 		if (worker) {
-			er.set_picture(0, worker->descr().icon(), worker->descr().descname());
+			er.set_picture(0, [worker]() { return worker->descr().icon(); }, worker->descr().descname());
 
 			if (worker->get_current_experience() != Widelands::INVALID_INDEX &&
 			    worker->descr().get_needed_experience() != Widelands::INVALID_INDEX) {
@@ -189,7 +189,7 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 		} else if (request) {
 			const Widelands::WorkerDescr* desc =
 			   production_site->owner().tribe().get_worker_descr(request->get_index());
-			er.set_picture(0, desc->icon(), request->is_open() ? _("(vacant)") : _("(coming)"));
+			er.set_picture(0, [desc]() { return desc->icon() ;}, request->is_open() ? _("(vacant)") : _("(coming)"));
 
 			er.set_string(1, "");
 			er.set_string(2, "");

@@ -54,6 +54,10 @@ you have probably created a lock with far too large a scope.
 Static variables that could be modified by multiple threads
 concurrently are a no-go.
 
+Some of our external libraries are not thread-safe. Therefore, images must
+not be loaded or rendered by any thread other than the one that performed
+the initialization of the image-related libaries.
+
 
 Why std::set<SomePointer*> is a bad idea
 ----------------------------------------

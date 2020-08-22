@@ -251,13 +251,14 @@ void Table<void*>::draw(RenderTarget& dst) {
 			const int curw = column.width;
 			Align alignment = mirror_alignment(column.alignment, g_fh->fontset()->is_rtl());
 
-			const Image* entry_picture = er.get_picture(i);
+			ImageFn fn = er.get_picture(i);
+			const Image* entry_picture = fn ? fn() : nullptr;
 			const std::string& entry_string = er.get_string(i);
 
 			Vector2i point(curx, y);
 			int picw = 0;
 
-			if (entry_picture != nullptr) {
+			if (entry_picture) {
 				picw = entry_picture->width();
 				const int pich = entry_picture->height();
 
@@ -743,7 +744,7 @@ Table<void*>::EntryRecord::EntryRecord(void* const e)
 }
 
 void Table<void*>::EntryRecord::set_picture(uint8_t const col,
-                                            const Image* pic,
+                                            ImageFn pic,
                                             const std::string& str) {
 	assert(col < data_.size());
 
@@ -756,7 +757,7 @@ void Table<void*>::EntryRecord::set_string(uint8_t const col, const std::string&
 	data_.at(col).d_picture = nullptr;
 	data_.at(col).d_string = str;
 }
-const Image* Table<void*>::EntryRecord::get_picture(uint8_t const col) const {
+ImageFn Table<void*>::EntryRecord::get_picture(uint8_t const col) const {
 	assert(col < data_.size());
 
 	return data_.at(col).d_picture;

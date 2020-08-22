@@ -148,7 +148,6 @@ wl_library(ui_fsmenu_maploading
     base_log
     graphic
     graphic_fonthandler
-    graphic_surface
     graphic_text_layout
     io_filesystem
     io_profile

@@ -321,20 +321,16 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			er.set_string(2, client.build_id);
 			er.set_string(3, client.game);
 
-			const Image* pic;
 			switch (convert_clienttype(client.type)) {
 			case kClientUnregistered:
-				pic = g_gr->images().get("images/wui/overlays/road_building_red.png");
-				er.set_picture(0, pic);
+				er.set_picture(0, FN_GET_IMAGE("images/wui/overlays/road_building_red.png"));
 				break;
 			case kClientRegistered:
-				pic = g_gr->images().get("images/wui/overlays/road_building_yellow.png");
-				er.set_picture(0, pic);
+				er.set_picture(0, FN_GET_IMAGE("images/wui/overlays/road_building_yellow.png"));
 				break;
 			case kClientSuperuser:
-				pic = g_gr->images().get("images/wui/overlays/road_building_green.png");
+				er.set_picture(0, FN_GET_IMAGE("images/wui/overlays/road_building_green.png"));
 				er.set_font_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupSuperuser));
-				er.set_picture(0, pic);
 				break;
 			case kClientIRC:
 				// No icon for IRC users

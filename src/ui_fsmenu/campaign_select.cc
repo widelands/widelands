@@ -122,7 +122,8 @@ void FullscreenMenuCampaignSelect::fill_table() {
 		const CampaignData& campaign_data = *campaigns_->get_campaign(i);
 
 		UI::Table<uintptr_t const>::EntryRecord& tableEntry = table_.add(i);
-		tableEntry.set_picture(0, campaign_data.difficulty_image);
+		const std::string str = campaign_data.difficulty_image;
+		tableEntry.set_picture(0, FN_GET_IMAGE_(str, str));
 		tableEntry.set_string(1, campaign_data.tribename);
 		tableEntry.set_string(2, campaign_data.descname);
 		tableEntry.set_disabled(!campaign_data.visible);

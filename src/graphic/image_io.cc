@@ -19,7 +19,9 @@
 
 #include "graphic/image_io.h"
 
+#include <list>
 #include <memory>
+#include <thread>
 
 #include <SDL_image.h>
 #include <png.h>
@@ -31,29 +33,25 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 
-namespace {
+static std::unique_ptr<std::thread::id> initializer_thread;
+static inline void ensure_sdl_image_is_initialized() {
+	if (!initializer_thread.get()) {
+		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
+		initializer_thread.reset(new std::thread::id(std::this_thread::get_id()));
+	}
+}
 
 // A helper function for save_to_png. Writes the compressed data to
 // the StreamWrite.
-void png_write_function(png_structp png_ptr, png_bytep png_data, png_size_t length) {
+static void png_write_function(png_structp png_ptr, png_bytep png_data, png_size_t length) {
 	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->data(png_data, length);
 }
 
 // A helper function for save_to_png.
 // Flush function to avoid crashes with default libpng flush function
-void png_flush_function(png_structp png_ptr) {
+static void png_flush_function(png_structp png_ptr) {
 	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->flush();
 }
-
-inline void ensure_sdl_image_is_initialized() {
-	static bool is_initialized = false;
-	if (!is_initialized) {
-		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
-		is_initialized = true;
-	}
-}
-
-}  // namespace
 
 std::unique_ptr<Texture> load_image(const std::string& fname, FileSystem* fs) {
 	return std::unique_ptr<Texture>(new Texture(load_image_as_sdl_surface(fname, fs)));
@@ -61,6 +59,10 @@ std::unique_ptr<Texture> load_image(const std::string& fname, FileSystem* fs) {
 
 SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs) {
 	ensure_sdl_image_is_initialized();
+
+	if (!initializer_thread.get() || *initializer_thread != std::this_thread::get_id()) {
+		throw wexception("load_image_as_sdl_surface must be called only by the initializer thread");
+	}
 
 	FileRead fr;
 	bool found;

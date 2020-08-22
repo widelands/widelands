@@ -258,8 +258,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 		// Now add to table
 		UI::Table<uintptr_t>::EntryRecord& te = table_.add(i);
 		te.set_string(0, (boost::format("%d") % (i + 1)).str());
-		te.set_picture(
-		   1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data->descname);
+		te.set_picture(1, FN_GET_IMAGE("images/ui_basic/ls_wlmap.png"), scenario_data->descname);
 		te.set_disabled(!scenario_data->playable);
 	}
 
