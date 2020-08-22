@@ -14,30 +14,1058 @@ local result = {
    buildings = {
       constructionsite = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: Construction Site
+            -- TRANSLATORS: Lore helptext for a frisian building: Construction Site
             pgettext(buildingctxt, "‘Don’t swear at the builder who is short of building materials.’")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: Construction Site
+            -- TRANSLATORS: Lore author helptext for a frisian building: Construction Site
             pgettext(buildingctxt, "Proverb widely used for impossible tasks of any kind")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
+            -- TRANSLATORS: Purpose helptext for a frisian building: Construction Site
             pgettext(buildingctxt, "A new building is being built at this construction site.")
          }
       },
       dismantlesite = {
          lore = {
-            -- TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
+            -- TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
             pgettext(buildingctxt, "‘New paths will appear when you are willing to tear down the old.’")
          },
          lore_author = {
-            -- TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
+            -- TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
             pgettext(buildingctxt, "Proverb")
          },
          purpose = {
-            -- TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
+            -- TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
             pgettext(buildingctxt, "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
+         }
+      },
+      frisians_fortress = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian military site: Fortress
+            pgettext("building", "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian military site: Fortress
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      frisians_outpost = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian military site: Outpost
+            pgettext("building", "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian military site: Outpost
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      frisians_sentinel = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian military site: Sentinel
+            pgettext("building", "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian military site: Sentinel
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      frisians_tower = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian military site: Tower
+            pgettext("building", "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian military site: Tower
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      frisians_wooden_tower = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian military site: Wooden Tower
+            pgettext("building", "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian military site: Wooden Tower
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      frisians_wooden_tower_high = {
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian military site: High Wooden Tower
+            pgettext("building", "Garrisons soldiers to expand your territory.")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian military site: High Wooden Tower
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         }
+      },
+      XXXX = {
+         lore = {
+            -- TRANSLATORS: Lore helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         lore_author = {
+            -- TRANSLATORS: Lore author helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         purpose = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         note = {
+            -- TRANSLATORS: Note helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
+         },
+         performance = {
+            -- TRANSLATORS: Performance helptext for a frisian production site: XXXX
+            pgettext(buildingctxt, "")
          }
       },
    },

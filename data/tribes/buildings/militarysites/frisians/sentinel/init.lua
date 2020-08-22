@@ -5,7 +5,6 @@ tribes:new_militarysite_type {
    name = "frisians_sentinel",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Sentinel"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
    vision_range = 8,

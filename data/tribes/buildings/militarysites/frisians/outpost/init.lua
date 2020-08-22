@@ -5,7 +5,6 @@ tribes:new_militarysite_type {
    name = "frisians_outpost",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Outpost"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
