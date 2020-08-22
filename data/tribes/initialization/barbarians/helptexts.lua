@@ -16,29 +16,29 @@ local result = {
       constructionsite = {
          lore = {
             -- TRANSLATORS: Lore helptext for a barbarian building: Construction Site
-            pgettext(buildingctxt, "‘Don’t swear at the builder who is short of building materials.’")
+            pgettext("building", "‘Don’t swear at the builder who is short of building materials.’")
          },
          lore_author = {
             -- TRANSLATORS: Lore author helptext for a barbarian building: Construction Site
-            pgettext(buildingctxt, "Proverb widely used for impossible tasks of any kind")
+            pgettext("building", "Proverb widely used for impossible tasks of any kind")
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
-            pgettext(buildingctxt, "A new building is being built at this construction site.")
+            pgettext("building", "A new building is being built at this construction site.")
          }
       },
       dismantlesite = {
          lore = {
             -- TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
-            pgettext(buildingctxt, "‘New paths will appear when you are willing to tear down the old.’")
+            pgettext("building", "‘New paths will appear when you are willing to tear down the old.’")
          },
          lore_author = {
             -- TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
-            pgettext(buildingctxt, "Proverb")
+            pgettext("building", "Proverb")
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
-            pgettext(buildingctxt, "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
+            pgettext("building", "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
          }
       },
       barbarians_barrier = {
@@ -52,17 +52,18 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Barrier
-            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+            pgettext("building", "Garrisons soldiers to expand your territory.")
          },
          note = {
             -- TRANSLATORS: Note helptext for a barbarian military site: Barrier
-            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       barbarians_citadel = {
          lore = {
             -- TRANSLATORS: Lore helptext for a barbarian military site: Citadel
-            pgettext(buildingctxt, "The Citadel of Adlen surely is the finest masterpiece of Barbarian craftsmanship. Nothing as strong and big and beautiful has ever been built in such a short time.’")
+            pgettext(buildingctxt, [[‘The Citadel of Adlen surely is the finest masterpiece of Barbarian craftsmanship. ]] ..
+               [[Nothing as strong and big and beautiful has ever been built in such a short time.’]])
          },
          lore_author = {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Citadel
@@ -70,11 +71,11 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Citadel
-            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+            pgettext("building", "Garrisons soldiers to expand your territory.")
          },
          note = {
             -- TRANSLATORS: Note helptext for a barbarian military site: Citadel
-            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       barbarians_fortress = {
@@ -88,11 +89,11 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Fortress
-            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+            pgettext("building", "Garrisons soldiers to expand your territory.")
          },
          note = {
             -- TRANSLATORS: Note helptext for a barbarian military site: Fortress
-            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       barbarians_sentry = {
@@ -106,11 +107,11 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Sentry
-            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+            pgettext("building", "Garrisons soldiers to expand your territory.")
          },
          note = {
             -- TRANSLATORS: Note helptext for a barbarian military site: Sentry
-            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       barbarians_tower = {
@@ -124,11 +125,11 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Tower
-            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+            pgettext("building", "Garrisons soldiers to expand your territory.")
          },
          note = {
             -- TRANSLATORS: Note helptext for a barbarian military site: Tower
-            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       barbarians_ax_workshop = {
@@ -215,7 +216,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Brewery
-            pgettext(buildingctxt, "Produces beer to keep the miners strong and happy.")
+            pgettext("building", "Produces beer to keep the miners strong and happy.")
          }
       },
       barbarians_cattlefarm = {
@@ -225,7 +226,7 @@ local result = {
          },
          lore_author = {
             -- TRANSLATORS: Lore author helptext for a barbarian production site: Cattle Farm
-            pgettext(buildingctxt, "‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and Logistics’")
+            pgettext(buildingctxt, "Khantarakh, ‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and Logistics’")
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Cattle Farm
@@ -254,7 +255,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal Kiln
-            pgettext(buildingctxt, "Burns logs into charcoal.")
+            pgettext("building", "Burns logs into charcoal.")
          }
       },
       barbarians_coalmine = {
@@ -266,7 +267,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for production site: Coal Mine
-            pgettext(buildingctxt, "Digs coal out of the ground in mountain terrain.")
+            pgettext("building", "Digs coal out of the ground in mountain terrain.")
          },
          note = {
             -- TRANSLATORS: Note helptext for production site: Coal Mine
@@ -286,7 +287,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
-            pgettext(buildingctxt, "Digs coal out of the ground in mountain terrain.")
+            pgettext("building", "Digs coal out of the ground in mountain terrain.")
          },
          note = {
             -- TRANSLATORS: Note helptext for production site: Deep Coal Mine
@@ -306,7 +307,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
-            pgettext(buildingctxt, "Digs coal out of the ground in mountain terrain.")
+            pgettext("building", "Digs coal out of the ground in mountain terrain.")
          },
          note = {
             -- TRANSLATORS: Note helptext for production site: Deeper Coal Mine
@@ -329,7 +330,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for production site: Farm
-            pgettext(buildingctxt, "Sows and harvests wheat.")
+            pgettext("building", "Sows and harvests wheat.")
          },
          performance = {
             -- TRANSLATORS: Performance helptext for production site: Farm
@@ -339,11 +340,11 @@ local result = {
       barbarians_ferry_yard = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for production site: Ferry Yard
-            pgettext(buildingctxt, "Builds ferries.")
+            pgettext("building", "Builds ferries.")
          },
          note = {
             -- TRANSLATORS: Note helptext for production site: Ferry Yard
-            pgettext(buildingctxt, "Needs water nearby.")
+            pgettext("building", "Needs water nearby.")
          }
       },
       barbarians_fishers_hut = {
@@ -397,7 +398,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for production site: Gold Mine
-            pgettext(buildingctxt, "Digs gold ore out of the ground in mountain terrain.")
+            pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
          },
          note = {
             -- TRANSLATORS: Note helptext for production site: Gold Mine
@@ -419,7 +420,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
-            pgettext(buildingctxt, "Digs gold ore out of the ground in mountain terrain.")
+            pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
          },
          note = {
             -- TRANSLATORS: Note helptext for production site: Deep Gold Mine
@@ -441,7 +442,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
-            pgettext(buildingctxt, "Digs gold ore out of the ground in mountain terrain.")
+            pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
          },
          note = {
             -- TRANSLATORS: Note helptext for production site: Deeper Gold Mine
@@ -504,7 +505,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
-            pgettext(buildingctxt, "Hunts animals to produce meat.")
+            pgettext("building", "Hunts animals to produce meat.")
          },
          note = {
             -- TRANSLATORS: Note helptext for a barbarian production site: Hunter's Hut
@@ -526,7 +527,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Inn
-            pgettext(buildingctxt, "Prepares rations for scouts and rations and snacks to feed the miners in the basic and deep mines.")
+            pgettext("building", "Prepares rations for scouts and rations and snacks to feed the miners in the basic and deep mines.")
          }
       },
       barbarians_ironmine = {
@@ -540,7 +541,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Iron Mine
-            pgettext(buildingctxt, "Digs iron ore out of the ground in mountain terrain.")
+            pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          },
          note = {
             -- TRANSLATORS: Note helptext for a barbarian production site: Iron Mine
@@ -562,7 +563,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron Mine
-            pgettext(buildingctxt, "Digs iron ore out of the ground in mountain terrain.")
+            pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          },
          note = {
             -- TRANSLATORS: Note helptext for a barbarian production site: Deep Iron Mine
@@ -584,7 +585,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron Mine
-            pgettext(buildingctxt, "Digs iron ore out of the ground in mountain terrain.")
+            pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          },
 
          note = {
@@ -621,7 +622,7 @@ local result = {
       barbarians_lumberjacks_hut = {
          lore = {
             -- TRANSLATORS: Lore helptext for a barbarian production site: Lumberjack_s Hut
-            pgettext(buildingctxt, "Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable lumberjack.’")
+            pgettext(buildingctxt, "‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable lumberjack.’")
          },
          lore_author = {
             -- TRANSLATORS: Lore author helptext for a barbarian production site: Lumberjack_s Hut
@@ -629,7 +630,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s Hut
-            pgettext(buildingctxt, "Fells trees in the surrounding area and processes them into logs.")
+            pgettext("building", "Fells trees in the surrounding area and processes them into logs.")
          },
          note = {
             -- TRANSLATORS: Note helptext for a barbarian production site: Lumberjack_s Hut
@@ -651,7 +652,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Metal Workshop
-            pgettext(buildingctxt, "Forges all the tools that your workers need.")
+            pgettext("building", "Forges all the tools that your workers need.")
          },
          note = {
             -- TRANSLATORS: Note helptext for a barbarian production site: Metal Workshop
@@ -714,7 +715,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
-            pgettext(buildingctxt, "Plants trees in the surrounding area.")
+            pgettext("building", "Plants trees in the surrounding area.")
          },
          note = {
             -- TRANSLATORS: Note helptext for a barbarian production site: Ranger's Hut
@@ -758,7 +759,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
-            pgettext(buildingctxt, "Explores unknown territory.")
+            pgettext("building", "Explores unknown territory.")
          }
       },
       barbarians_shipyard = {
@@ -773,7 +774,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
-            pgettext(buildingctxt, "Constructs ships that are used for overseas colonization and for trading between ports.")
+            pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports.")
          }
       },
       barbarians_smelting_works = {
@@ -788,7 +789,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Smelting Works
-            pgettext(buildingctxt, "Smelts iron ore into iron and gold ore into gold.")
+            pgettext("building", "Smelts iron ore into iron and gold ore into gold.")
          }
       },
       barbarians_tavern = {
@@ -802,7 +803,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
-            pgettext(buildingctxt, "Prepares rations to feed the scouts and miners.")
+            pgettext("building", "Prepares rations to feed the scouts and miners.")
          }
       },
       barbarians_warmill = {
@@ -856,7 +857,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Well
-            pgettext(buildingctxt, "Draws water out of the deep.")
+            pgettext("building", "Draws water out of the deep.")
          },
          performance = {
             -- TRANSLATORS: Performance helptext for a barbarian production site: Well
@@ -979,7 +980,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian warehouse: Warehouse
-            pgettext(buildingctxt, "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
+            pgettext("building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
          }
       }
    },

@@ -52,89 +52,89 @@ local result = {
       constructionsite = {
          lore = {
             -- TRANSLATORS: Lore helptext for an atlantean building: Construction Site
-            pgettext(buildingctxt, "‘Don’t swear at the builder who is short of building materials.’")
+            pgettext("building", "‘Don’t swear at the builder who is short of building materials.’")
          },
          lore_author = {
             -- TRANSLATORS: Lore author helptext for an atlantean building: Construction Site
-            pgettext(buildingctxt, "Proverb widely used for impossible tasks of any kind")
+            pgettext("building", "Proverb widely used for impossible tasks of any kind")
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
-            pgettext(buildingctxt, "A new building is being built at this construction site.")
+            pgettext("building", "A new building is being built at this construction site.")
          }
       },
       dismantlesite = {
          lore = {
             -- TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
-            pgettext(buildingctxt, "‘New paths will appear when you are willing to tear down the old.’")
+            pgettext("building", "‘New paths will appear when you are willing to tear down the old.’")
          },
          lore_author = {
             -- TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
-            pgettext(buildingctxt, "Proverb")
+            pgettext("building", "Proverb")
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
-            pgettext(buildingctxt, "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
+            pgettext("building", "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
          }
       },
       atlanteans_castle = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: Castle
-            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+            pgettext("building", "Garrisons soldiers to expand your territory.")
          },
          note = {
             -- TRANSLATORS: Note helptext for an atlantean military site: Castle
-            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       atlanteans_guardhall = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: Guardhall
-            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+            pgettext("building", "Garrisons soldiers to expand your territory.")
          },
          note = {
             -- TRANSLATORS: Note helptext for an atlantean military site: Guardhall
-            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       atlanteans_guardhouse = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: Guardhouse
-            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+            pgettext("building", "Garrisons soldiers to expand your territory.")
          },
          note = {
             -- TRANSLATORS: Note helptext for an atlantean military site: Guardhouse
-            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       atlanteans_tower = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: Tower
-            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+            pgettext("building", "Garrisons soldiers to expand your territory.")
          },
          note = {
             -- TRANSLATORS: Note helptext for an atlantean military site: Tower
-            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       atlanteans_tower_high = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: High Tower
-            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+            pgettext("building", "Garrisons soldiers to expand your territory.")
          },
          note = {
             -- TRANSLATORS: Note helptext for an atlantean military site: High Tower
-            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       atlanteans_tower_small = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: Small Tower
-            pgettext(buildingctxt, "Garrisons soldiers to expand your territory.")
+            pgettext("building", "Garrisons soldiers to expand your territory.")
          },
          note = {
             -- TRANSLATORS: Note helptext for an atlantean military site: Small Tower
-            pgettext(buildingctxt, "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       atlanteans_armorsmithy = {
@@ -168,13 +168,13 @@ local result = {
       atlanteans_charcoal_kiln = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal Kiln
-            pgettext(buildingctxt, "Burns logs into charcoal.")
+            pgettext("building", "Burns logs into charcoal.")
          }
       },
       atlanteans_coalmine = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
-            pgettext(buildingctxt, "Digs coal out of the ground in mountain terrain.")
+            pgettext("building", "Digs coal out of the ground in mountain terrain.")
          }
       },
       atlanteans_crystalmine = {
@@ -196,11 +196,11 @@ local result = {
       atlanteans_ferry_yard = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
-            pgettext(buildingctxt, "Builds ferries.")
+            pgettext("building", "Builds ferries.")
          },
          note = {
             -- TRANSLATORS: Note helptext for an atlantean production site: Ferry Yard
-            pgettext(buildingctxt, "Needs water nearby.")
+            pgettext("building", "Needs water nearby.")
          }
       },
       atlanteans_fishbreeders_house = {
@@ -235,7 +235,7 @@ local result = {
       atlanteans_foresters_house = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Forester's House
-            pgettext(buildingctxt, "Plants trees in the surrounding area.")
+            pgettext("building", "Plants trees in the surrounding area.")
          },
          note = {
             -- TRANSLATORS: Note helptext for an atlantean production site: Forester's House
@@ -245,7 +245,7 @@ local result = {
       atlanteans_goldmine = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
-            pgettext(buildingctxt, "Digs gold ore out of the ground in mountain terrain.")
+            pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
          }
       },
       atlanteans_gold_spinning_mill = {
@@ -263,7 +263,7 @@ local result = {
       atlanteans_hunters_house = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's House
-            pgettext(buildingctxt, "Hunts animals to produce meat.")
+            pgettext("building", "Hunts animals to produce meat.")
          },
          note = {
             -- TRANSLATORS: Note helptext for an atlantean production site: Hunter's House
@@ -273,7 +273,7 @@ local result = {
       atlanteans_ironmine = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
-            pgettext(buildingctxt, "Digs iron ore out of the ground in mountain terrain.")
+            pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          }
       },
       atlanteans_mill = {
@@ -299,25 +299,25 @@ local result = {
       atlanteans_sawmill = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Sawmill
-            pgettext(buildingctxt, "Saws logs to produce planks.")
+            pgettext("building", "Saws logs to produce planks.")
          }
       },
       atlanteans_scouts_house = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Scout's House
-            pgettext(buildingctxt, "Explores unknown territory.")
+            pgettext("building", "Explores unknown territory.")
          }
       },
       atlanteans_shipyard = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
-            pgettext(buildingctxt, "Constructs ships that are used for overseas colonization and for trading between ports.")
+            pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports.")
          }
       },
       atlanteans_smelting_works = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Smelting Works
-            pgettext(buildingctxt, "Smelts iron ore into iron and gold ore into gold.")
+            pgettext("building", "Smelts iron ore into iron and gold ore into gold.")
          }
       },
       atlanteans_smokery = {
@@ -329,13 +329,13 @@ local result = {
       atlanteans_spiderfarm = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Spider Farm
-            pgettext(buildingctxt, "Breeds spiders for silk.")
+            pgettext("building", "Breeds spiders for silk.")
          }
       },
       atlanteans_toolsmithy = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-            pgettext(buildingctxt, "Forges all the tools that your workers need.")
+            pgettext("building", "Forges all the tools that your workers need.")
          }
       },
       atlanteans_weaponsmithy = {
@@ -353,13 +353,13 @@ local result = {
       atlanteans_well = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Well
-            pgettext(buildingctxt, "Draws water out of the deep.")
+            pgettext("building", "Draws water out of the deep.")
          }
       },
       atlanteans_woodcutters_house = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Woodcutter's House
-            pgettext(buildingctxt, "Fells trees in the surrounding area and processes them into logs.")
+            pgettext("building", "Fells trees in the surrounding area and processes them into logs.")
          },
          note = {
             -- TRANSLATORS: Note helptext for an atlantean production site: Woodcutter's House
@@ -401,7 +401,7 @@ local result = {
       atlanteans_warehouse = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Warehouse
-            pgettext(buildingctxt, "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
+            pgettext("building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
          }
       }
    },
