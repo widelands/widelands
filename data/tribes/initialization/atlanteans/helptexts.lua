@@ -775,6 +775,127 @@ local result = {
          -- TRANSLATORS: Helptext for an atlantean worker: Armorsmith
          purpose = { pgettext(workerctxt, "Produces armor for the soldiers.") }
       },
+      atlanteans_baker = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Baker
+         purpose = { pgettext(workerctxt, "Bakes bread for workers.") }
+      },
+      atlanteans_blackroot_farmer = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Blackroot Farmer
+         purpose = { pgettext(workerctxt, "Plants and harvests blackroot.") }
+      },
+      atlanteans_builder = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Builder
+         purpose = { pgettext(workerctxt, "Works at construction sites to raise new buildings.") }
+      },
+      atlanteans_carrier = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Carrier
+         purpose = { pgettext(workerctxt, "Carries items along your roads.") }
+      },
+      atlanteans_charcoal_burner = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Charcoal Burner
+         purpose = { pgettext(workerctxt, "Burns coal.") }
+      },
+      atlanteans_farmer = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Farmer
+         purpose = { pgettext(workerctxt, "Plants and harvests cornfields.") }
+      },
+      atlanteans_ferry = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Ferry
+         purpose = { pgettext(workerctxt, "Ships wares across narrow rivers.") }
+      },
+      atlanteans_fishbreeder = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Fish Breeder
+         purpose = { pgettext(workerctxt, "Breeds fish.") }
+      },
+      atlanteans_fisher = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Fisher
+         purpose = { pgettext(workerctxt, "The fisher fishes delicious fish.") }
+      },
+      atlanteans_forester = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Forester
+         purpose = { pgettext(workerctxt, "Plants trees.") }
+      },
+      atlanteans_geologist = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Geologist
+         purpose = { pgettext(workerctxt, "Discovers resources for mining.") }
+      },
+      atlanteans_horse = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Horse
+         purpose = { pgettext(workerctxt, "Horses help to carry items along busy roads. They are reared in a horse farm.") }
+      },
+      atlanteans_horsebreeder = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Horse Breeder
+         purpose = { pgettext(workerctxt, "Breeds the strong Atlantean horses for adding them to the transportation system.") }
+      },
+      atlanteans_hunter = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Hunter
+         purpose = { pgettext(workerctxt, "The hunter brings fresh, raw meat to the colonists.") }
+      },
+      atlanteans_miller = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Miller
+         purpose = { pgettext(workerctxt, "Grinds blackroots and corn to produce blackroot flour and cornmeal, respectively.") }
+      },
+      atlanteans_miner = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Miner
+         purpose = { pgettext(workerctxt, "Works deep in the mines to obtain coal, iron, gold or precious stones.") }
+      },
+      atlanteans_recruit = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Recruit
+         purpose = { pgettext(workerctxt, "Eager to become a soldier and defend his tribe!") }
+      },
+      atlanteans_sawyer = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Sawyer
+         purpose = { pgettext(workerctxt, "Saws logs to produce planks.") }
+      },
+      atlanteans_scout = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Scout
+         purpose = { pgettext(workerctxt, "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion.") }
+         -- (c) WiHack Team 02.01.2010
+      },
+      atlanteans_shipwright = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Shipwright
+         purpose = { pgettext(workerctxt, "Works at the shipyard and constructs new ships.") }
+      },
+      atlanteans_smelter = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Smelter
+         purpose = { pgettext(workerctxt, "Smelts ores into metal.") }
+      },
+      atlanteans_smoker = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Smoker
+         purpose = { pgettext(workerctxt, "Smokes meat and fish.") }
+      },
+      atlanteans_soldier = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Soldier
+         purpose = { pgettext(workerctxt, "Defend and Conquer!") }
+      },
+      atlanteans_spiderbreeder = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Spider Breeder
+         purpose = { pgettext(workerctxt, "Breeds spiders for silk.") }
+      },
+      atlanteans_stonecutter = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
+         purpose = { pgettext(workerctxt, "Cuts blocks of granite out of rocks in the vicinity.") }
+      },
+      atlanteans_toolsmith = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Toolsmith
+         purpose = { pgettext(workerctxt, "Produces tools for the workers.") }
+      },
+      atlanteans_trainer = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Trainer
+         purpose = { pgettext(workerctxt, "Trains the soldiers.") }
+      },
+      atlanteans_weaponsmith = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Weaponsmith
+         purpose = { pgettext(workerctxt, "Produces weapons for the soldiers.") }
+      },
+      atlanteans_weaver = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Weaver
+         purpose = { pgettext(workerctxt, "Produces spidercloth for buildings, ships and soldiers.") }
+      },
+      atlanteans_woodcutter = {
+         -- TRANSLATORS: Helptext for an atlantean worker: Woodcutter
+         purpose = { pgettext(workerctxt, "Fells trees.") }
+      }
    }
 }
 pop_textdomain()
