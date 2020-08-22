@@ -21,6 +21,7 @@
 
 #include <unicode/utypes.h>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/text/font_set.h"
@@ -741,10 +742,16 @@ UI::FontSet const* find_fontset(const char* word, const UI::FontSets& fontsets) 
 	UI::FontSets::Selector selector;
 	if (has_script_character(word, UI::FontSets::Selector::kArabic)) {
 		selector = UI::FontSets::Selector::kArabic;
-	} else if (has_script_character(word, UI::FontSets::Selector::kJapanese)) {
+	} else if (strcmp(word, "简体中文") == 0 || strcmp(word, "繁體中文") == 0) {
+		selector = UI::FontSets::Selector::kCJK;
+	} else if (strcmp(word, "日本語") == 0) {
+		selector = UI::FontSets::Selector::kJapanese;
+	} else if (get_locale().rfind("ja", 0) == 0 && has_script_character(word, UI::FontSets::Selector::kJapanese)) {
 		selector = UI::FontSets::Selector::kJapanese;
 	} else if (has_script_character(word, UI::FontSets::Selector::kCJK)) {
 		selector = UI::FontSets::Selector::kCJK;
+	} else if (has_script_character(word, UI::FontSets::Selector::kJapanese)) {
+		selector = UI::FontSets::Selector::kJapanese;
 	} else if (has_script_character(word, UI::FontSets::Selector::kDevanagari)) {
 		selector = UI::FontSets::Selector::kDevanagari;
 	} else if (has_script_character(word, UI::FontSets::Selector::kHebrew)) {
