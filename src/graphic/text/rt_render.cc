@@ -667,14 +667,18 @@ uint16_t TextNode::hotspot_y() const {
 	const icu::UnicodeString unicode_txt(txt_.c_str(), "UTF-8");
 	int ascent = TTF_FontAscent(font_.get_ttf_font());
 	int shadow_offset = font_.ascent(nodestyle_.font_style) - ascent;
+
 	for (int i = 0; i < unicode_txt.length(); ++i) {
+		// TODO(Niektory): Use the 32-bit functions when we can use SDL_ttf 2.0.16
+		// (UChar32, char32At, TTF_GlyphIsProvided32, TTF_GlyphMetrics32)
 		UChar codepoint = unicode_txt.charAt(i);
 		int maxy;
-		if (TTF_GlyphMetrics(
+		if (TTF_GlyphIsProvided(font_.get_ttf_font(), codepoint) && TTF_GlyphMetrics(
 		       font_.get_ttf_font(), codepoint, nullptr, nullptr, nullptr, &maxy, nullptr) == 0) {
 			ascent = std::max(ascent, maxy);
 		}
 	}
+
 	return ascent + shadow_offset;
 }
 
