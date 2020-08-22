@@ -339,7 +339,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		set_progress_message(_("Vision"), 17);
 		{
 			MapPlayersViewPacket p;
-			p.read(*fs_, egbase);
+			p.read(*fs_, egbase, *world_lookup_table, *tribes_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
