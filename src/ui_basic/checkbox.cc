@@ -194,8 +194,8 @@ bool Statebox::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_
 }
 
 bool Statebox::handle_key(bool down, SDL_Keysym code) {
-	if (down && code.sym == SDLK_SPACE) {
-		set_state(!get_state());
+	if (down && (code.sym == SDLK_SPACE || code.sym == SDLK_RETURN || code.sym == SDLK_KP_ENTER)) {
+		button_clicked();
 		return true;
 	}
 	return Panel::handle_key(down, code);

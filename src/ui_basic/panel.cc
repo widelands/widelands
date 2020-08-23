@@ -605,8 +605,19 @@ bool Panel::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) 
 }
 
 bool Panel::handle_key(bool down, SDL_Keysym code) {
-	if (down && focus_ && code.sym == SDLK_TAB) {
-		return handle_tab_pressed(SDL_GetModState() & KMOD_SHIFT);
+	if (down) {
+		switch (code.sym) {
+		case SDLK_TAB:
+			return handle_tab_pressed(SDL_GetModState() & KMOD_SHIFT);
+		case SDLK_ESCAPE:
+			if (parent_ && parent_->focus_ == this && get_can_focus()) {
+				parent_->focus_ = nullptr;
+				return true;
+			}
+			break;
+		default:
+			break;
+		}
 	}
 	return false;
 }
@@ -644,7 +655,7 @@ bool Panel::handle_tab_pressed(const bool reverse) {
 
 	if (focus_ == nullptr || !focus_->is_visible() || list_size <= 1) {
 		// no focus yet – select the first item
-		list[0]->focus();
+		list[reverse ? 0 : list_size - 1]->focus();
 		return true;
 	}
 
@@ -660,7 +671,7 @@ bool Panel::handle_tab_pressed(const bool reverse) {
 		}
 	}
 
-	list[0]->focus();
+	list[reverse ? 0 : list_size - 1]->focus();
 	return true;
 }
 
