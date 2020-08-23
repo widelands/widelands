@@ -290,7 +290,7 @@ tribute = {
          .. paragraphdivider() ..
          _([[Oh I almost forgot this one. We demand to have your princess in our headquarters as well to coordinate our warplannings.]]))
    },
-   
+
    {
       title = _"Pitfall!",
       body = sidolus(
