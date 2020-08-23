@@ -93,7 +93,6 @@ private:
 	size_t draw_image_, last_image_;
 	Rectf image_pos(const Image&);
 	Rectf title_pos();
-	void draw_title(RenderTarget&, float);
 	float calc_opacity(uint32_t time);
 
 	bool visible_;
