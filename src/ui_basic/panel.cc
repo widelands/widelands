@@ -451,6 +451,8 @@ void Panel::set_visible(bool const on) {
 	flags_ &= ~pf_visible;
 	if (on) {
 		flags_ |= pf_visible;
+	} else if (parent_ && parent_->focus_ == this) {
+		parent_->focus_ = nullptr;
 	}
 }
 
@@ -471,10 +473,17 @@ void Panel::draw_border(RenderTarget&) {
  * Draw overlays that appear over all child panels.
  * This can be used e.g. for debug information.
  */
-void Panel::draw_overlay(RenderTarget& r) {
+void Panel::draw_overlay(RenderTarget& dst) {
 	if (has_focus()) {
-		// if (parent_ && parent_->focus_ == this) {
-		r.fill_rect(Recti(0, 0, get_w(), get_h()), g_gr->styles().window_border_focused(), BlendMode::Default);
+		bool has_toplevel_focus = (focus_ == nullptr);
+		for (Panel* p = this; p->parent_; p = p->parent_) {
+			if (p->parent_->focus_ != p) {
+				has_toplevel_focus = false;
+				break;
+			}
+		}
+		dst.fill_rect(Recti(0, 0, get_w(), get_h()), has_toplevel_focus ?
+				g_gr->styles().focused_color() : g_gr->styles().semi_focused_color(), BlendMode::Default);
 	}
 }
 
@@ -597,25 +606,7 @@ bool Panel::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) 
 
 bool Panel::handle_key(bool down, SDL_Keysym code) {
 	if (down && focus_ && code.sym == SDLK_TAB) {
-		if (SDL_GetModState() & KMOD_SHIFT) {
-			Panel* next_focus = (focus_ == last_child_ ? first_child_ : focus_->next_);
-			while (next_focus != focus_) {
-				if (next_focus->get_can_focus()) {
-					next_focus->focus();
-					return true;
-				}
-				next_focus = (next_focus == last_child_ ? first_child_ : next_focus->next_);
-			}
-		} else {
-			Panel* next_focus = (focus_ == first_child_ ? last_child_ : focus_->prev_);
-			while (next_focus != focus_) {
-				if (next_focus->get_can_focus()) {
-					next_focus->focus();
-					return true;
-				}
-				next_focus = (next_focus == first_child_ ? last_child_ : next_focus->prev_);
-			}
-		}
+		return handle_tab_pressed(SDL_GetModState() & KMOD_SHIFT);
 	}
 	return false;
 }
@@ -631,6 +622,65 @@ bool Panel::handle_textinput(const std::string& /* text */) {
  */
 bool Panel::handle_tooltip() {
 	return draw_tooltip(tooltip());
+}
+
+// Whether TAB events should be handled by this panel's parent (`false`) or by `this` (`true`)
+bool Panel::is_focus_toplevel() const {
+	return !parent_ || this == modal_;
+}
+
+// Let the toplevel panel transfer the focus to the next/prev focusable child
+bool Panel::handle_tab_pressed(const bool reverse) {
+	if (!is_focus_toplevel()) {
+		return parent_->handle_tab_pressed(reverse);
+	}
+
+	std::deque<Panel*> list = gather_focusable_children();
+	if (list.empty()) {
+		// nothing to do
+		return false;
+	}
+	const size_t list_size = list.size();
+
+	if (focus_ == nullptr || !focus_->is_visible() || list_size <= 1) {
+		// no focus yet – select the first item
+		list[0]->focus();
+		return true;
+	}
+
+	Panel* currently_focused = focus_;
+	while (currently_focused->focus_ && currently_focused->focus_->is_visible()) {
+		currently_focused = currently_focused->focus_;
+	}
+	// tell the next/prev panel to focus
+	for (size_t i = 0; i < list_size; ++i) {
+		if (list[i] == currently_focused) {
+			list[(i + (reverse ? 1 : list_size - 1)) % list_size]->focus();
+			return true;
+		}
+	}
+
+	list[0]->focus();
+	return true;
+}
+
+// Recursively create a sorted list of all children that can get the focus
+std::deque<Panel*> Panel::gather_focusable_children() {
+	if (get_can_focus() && !has_focus()) {
+		return {this};
+	}
+	std::deque<Panel*> list;
+	for (Panel* child = first_child_; child; child = child->next_) {
+		if (child->is_visible()) {
+			for (Panel* p : child->gather_focusable_children()) {
+				list.push_back(p);
+			}
+		}
+	}
+	if (get_can_focus()) {
+		list.push_back(this);
+	}
+	return list;
 }
 
 /**
@@ -673,7 +723,7 @@ void Panel::set_can_focus(bool const yes) {
 	if (yes) {
 		flags_ |= pf_can_focus;
 
-		if (!parent_ || !parent_->focus_) {
+		if ((!parent_ || !parent_->focus_) && is_visible()) {
 			focus();
 		}
 	} else {
@@ -700,6 +750,7 @@ void Panel::focus(const bool topcaller) {
 				SDL_StopTextInput();
 			}
 		}
+		focus_ = nullptr;
 	}
 
 	if (!parent_ || this == modal_) {

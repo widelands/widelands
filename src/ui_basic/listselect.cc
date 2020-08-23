@@ -519,7 +519,7 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 }
 
 bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
-	if (down) {
+	if (down && size() > 1) {
 		bool handle = true;
 		uint32_t selected_idx = selection_index();
 		const uint32_t max = size() - 1;

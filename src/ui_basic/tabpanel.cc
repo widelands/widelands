@@ -100,6 +100,67 @@ TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
      active_(0),
      highlight_(kNotFound),
      background_style_(g_gr->styles().tabpanel_style(style)) {
+	set_can_focus(true);
+}
+
+bool TabPanel::handle_key(bool down, SDL_Keysym code) {
+	if (down && tabs_.size() > 1) {
+		bool handle = true;
+		uint32_t selected_idx = active();
+		const uint32_t max = tabs_.size() - 1;
+
+		if ((code.sym >= SDLK_1 && code.sym <= SDLK_9) || (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM))) {
+			// Keys 1-9 directly address the 1st through 9th item in tabpanels with less than 10 tabs
+			if (max < 9) {
+				if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {
+					selected_idx = code.sym - SDLK_1;
+				} else if (code.sym >= SDLK_KP_1 && code.sym <= static_cast<int>(SDLK_KP_1 + max)) {
+					selected_idx = code.sym - SDLK_KP_1;
+				} else {
+					// don't handle the '9' when there are less than 9 tabs
+					handle = false;
+				}
+			} else {
+				// 10 or more tabs – ignore number keys
+				handle = false;
+			}
+		} else {
+			switch (code.sym) {
+			case SDLK_KP_6:
+			case SDLK_RIGHT:
+				if (selected_idx < max) {
+					++selected_idx;
+				} else if (selected_idx > max) {
+					selected_idx = 0;
+				}
+				break;
+			case SDLK_KP_4:
+			case SDLK_LEFT:
+				if (selected_idx > max) {
+					selected_idx = max;
+				} else if (selected_idx > 0) {
+					--selected_idx;
+				}
+				break;
+			case SDLK_KP_7:
+			case SDLK_HOME:
+				selected_idx = 0;
+				break;
+			case SDLK_KP_1:
+			case SDLK_END:
+				selected_idx = max;
+				break;
+			default:
+				handle = false;
+				break;  // not handled
+			}
+			if (handle) {
+				activate(selected_idx);
+				return true;
+			}
+		}
+	}
+	return Panel::handle_key(down, code);
 }
 
 /**
@@ -209,7 +270,6 @@ void TabPanel::activate(uint32_t idx) {
 	}
 	if (idx < tabs_.size()) {
 		tabs_[idx]->panel->set_visible(true);
-		tabs_[idx]->panel->focus();
 	}
 
 	active_ = idx;
