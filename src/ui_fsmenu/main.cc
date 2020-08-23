@@ -466,11 +466,7 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 	}
 
 	if (initial_fadeout_state < 1.f) {
-		do_draw_image(
-		   r,
-		   Rectf((get_w() - splashscreen_.width()) / 2.f, (get_h() - splashscreen_.height()) / 2.f,
-		         splashscreen_.width(), splashscreen_.height()),
-		   splashscreen_, 1.f - initial_fadeout_state);
+		do_draw_image(r, image_pos(splashscreen_), splashscreen_, 1.f - initial_fadeout_state);
 	}
 }
 
@@ -493,8 +489,8 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 		do_draw_image(r, image_pos(img), img, opacity * factor);
 	}
 
-	if (init_time_ != kNoSplash && time - init_time_ > kInitialFadeoutDelay) {
-		draw_title(r, std::min(1.f, static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
+	if (init_time_ != kNoSplash && time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) {
+		draw_title(r, std::min(1.f, static_cast<float>(time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) /
 		                               kInitialFadeoutDuration));
 	}
 }
