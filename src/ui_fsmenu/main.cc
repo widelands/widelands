@@ -489,8 +489,10 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 		do_draw_image(r, image_pos(img), img, opacity * factor);
 	}
 
-	if (init_time_ != kNoSplash && time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		draw_title(r, std::min(1.f, static_cast<float>(time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) /
+	if (init_time_ != kNoSplash &&
+	    time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) {
+		draw_title(r, std::min(1.f, static_cast<float>(time - init_time_ - kInitialFadeoutDelay -
+		                                               kInitialFadeoutDuration) /
 		                               kInitialFadeoutDuration));
 	}
 }
