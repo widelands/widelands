@@ -1,3 +1,5 @@
+dirname = path.dirname(__file__)
+
 wl.World():new_critter_type{
    name = "duck",
    descname = _ "Duck",
