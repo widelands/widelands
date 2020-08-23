@@ -839,6 +839,139 @@ local result = {
          -- TRANSLATORS: Helptext for an empire worker: Armorsmith
          purpose = { pgettext(workerctxt, "Produces armor for the soldiers.") }
       },
+      empire_baker = {
+         -- TRANSLATORS: Helptext for an empire worker: Baker
+         purpose = { pgettext(workerctxt, "Bakes bread for workers.") }
+      },
+      empire_brewer = {
+         -- TRANSLATORS: Helptext for an empire worker: Brewer
+         purpose = { pgettext(workerctxt, "Produces beer.") }
+      },
+      empire_builder = {
+         -- TRANSLATORS: Helptext for an empire worker: Builder
+         purpose = { pgettext(workerctxt, "Works at construction sites to raise new buildings.") }
+      },
+      empire_carpenter = {
+         -- TRANSLATORS: Helptext for an empire worker: Carpenter
+         purpose = { pgettext(workerctxt, "Works in the sawmill.") }
+      },
+      empire_carrier = {
+         -- TRANSLATORS: Helptext for an empire worker: Carrier
+         purpose = { pgettext(workerctxt, "Carries items along your roads.") }
+      },
+      empire_charcoal_burner = {
+         -- TRANSLATORS: Helptext for an empire worker: Charcoal Burner
+         purpose = { pgettext(workerctxt, "Burns coal.") }
+      },
+      empire_donkey = {
+         -- TRANSLATORS: Helptext for an empire worker: Donkey
+         purpose = { pgettext(workerctxt, "Donkeys help to carry items along busy roads. They are reared in a donkey farm.") }
+      },
+      empire_donkeybreeder = {
+         -- TRANSLATORS: Helptext for an empire worker: Donkey Breeder
+         purpose = { pgettext(workerctxt, "Breeds cute and helpful donkeys for adding them to the transportation system.") }
+      },
+      empire_farmer = {
+         -- TRANSLATORS: Helptext for an empire worker: Farmer
+         purpose = { pgettext(workerctxt, "Plants fields.") }
+      },
+      empire_ferry = {
+         -- TRANSLATORS: Helptext for an empire worker: Ferry
+         purpose = { pgettext(workerctxt, "Ships wares across narrow rivers.") }
+      },
+      empire_fisher = {
+         -- TRANSLATORS: Helptext for an empire worker: Fisher
+         purpose = { pgettext(workerctxt, "Catches fish in the sea.") }
+      },
+      empire_forester = {
+         -- TRANSLATORS: Helptext for an empire worker: Forester
+         purpose = { pgettext(workerctxt, "Plants trees.") }
+      },
+      empire_geologist = {
+         -- TRANSLATORS: Helptext for an empire worker: Geologist
+         purpose = { pgettext(workerctxt, "Discovers resources for mining.") }
+      },
+      empire_hunter = {
+         -- TRANSLATORS: Helptext for an empire worker: Hunter
+         purpose = { pgettext(workerctxt, "The hunter brings fresh, raw meat to the colonists.") }
+      },
+      empire_innkeeper = {
+         -- TRANSLATORS: Helptext for an empire worker: Innkeeper
+         purpose = { pgettext(workerctxt, "Produces food for miners.") }
+      },
+      empire_lumberjack = {
+         -- TRANSLATORS: Helptext for an empire worker: Lumberjack
+         purpose = { pgettext(workerctxt, "Fells trees.") }
+      },
+      empire_miller = {
+         -- TRANSLATORS: Helptext for an empire worker: Miller
+         purpose = { pgettext(workerctxt, "Grinds wheat to produce flour.") }
+      },
+      empire_miner = {
+         -- TRANSLATORS: Helptext for an empire worker: Miner
+         purpose = { pgettext(workerctxt, "Works deep in the mines to obtain coal, iron, gold or marble.") }
+      },
+      empire_miner_master = {
+         -- TRANSLATORS: Helptext for an empire worker: Master Miner
+         purpose = { pgettext(workerctxt, "Works deep in the mines to obtain coal, iron, gold or marble.") }
+      },
+      empire_pigbreeder = {
+         -- TRANSLATORS: Helptext for an empire worker: Pig Breeder
+         purpose = { pgettext(workerctxt, "Breeds pigs.") }
+      },
+      empire_recruit = {
+         -- TRANSLATORS: Helptext for an empire worker: Recruit
+         purpose = { pgettext(workerctxt, "Eager to become a soldier and defend his tribe!") }
+      },
+      empire_scout = {
+         -- TRANSLATORS: Helptext for an empire worker: Scout
+         purpose = { pgettext(workerctxt, "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion.") }
+         -- (c) WiHack Team 02.01.2010
+      },
+      empire_shepherd = {
+         -- TRANSLATORS: Helptext for an empire worker: Shepherd
+         purpose = { pgettext(workerctxt, "Keeping sheep.") }
+      },
+      empire_shipwright = {
+         -- TRANSLATORS: Helptext for an empire worker: Shipwright
+         purpose = { pgettext(workerctxt, "Works at the shipyard and constructs new ships.") }
+      },
+      empire_smelter = {
+         -- TRANSLATORS: Helptext for an empire worker: Smelter
+         purpose = { pgettext(workerctxt, "Smelts ores into metal.") }
+      },
+      empire_soldier = {
+         -- TRANSLATORS: Helptext for an empire worker: Soldier
+         purpose = { pgettext(workerctxt, "Defend and Conquer!") }
+      },
+      empire_stonemason = {
+         -- TRANSLATORS: Helptext for an empire worker: Stonemason
+         purpose = { pgettext(workerctxt, "Cuts blocks of granite and marble out of rocks in the vicinity.") }
+      },
+      empire_toolsmith = {
+         -- TRANSLATORS: Helptext for an empire worker: Toolsmith
+         purpose = { pgettext(workerctxt, "Produces tools for the workers.") }
+      },
+      empire_trainer = {
+         -- TRANSLATORS: Helptext for an empire worker: Trainer
+         purpose = { pgettext(workerctxt, "Trains the soldiers.") }
+      },
+      empire_vinefarmer = {
+         -- TRANSLATORS: Helptext for an empire worker: Vine Farmer
+         purpose = { pgettext(workerctxt, "Grows grapevines.") }
+      },
+      empire_vintner = {
+         -- TRANSLATORS: Helptext for an empire worker: Vintner
+         purpose = { pgettext(workerctxt, "Produces wine.") }
+      },
+      empire_weaponsmith = {
+         -- TRANSLATORS: Helptext for an empire worker: Weaponsmith
+         purpose = { pgettext(workerctxt, "Produces weapons for the soldiers.") }
+      },
+      empire_weaver = {
+         -- TRANSLATORS: Helptext for an empire worker: Weaver
+         purpose = { pgettext(workerctxt, "Produces cloth for ships and soldiers.") }
+      }
    }
 }
 pop_textdomain()
