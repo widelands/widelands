@@ -544,6 +544,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 
 		int line_height = 0;
 		uint16_t biggest_text_ascent = 0;
+		int biggest_text_descent = 0;
 		int line_start = INFINITE_WIDTH;
 		// Compute real line height and width, taking into account alignment
 		for (const auto& n : nodes_in_line) {
@@ -552,6 +553,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 				n->set_y(h_ + biggest_hotspot - n->hotspot_y());
 				if (n->align_to_baseline()) {
 					biggest_text_ascent = std::max(biggest_text_ascent, n->hotspot_y());
+					biggest_text_descent = std::max(biggest_text_descent, n->height() - n->hotspot_y());
 				}
 			}
 			if (line_start >= INFINITE_WIDTH || n->x() < line_start) {
@@ -562,33 +564,39 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 
 		// Go over again and adjust position for VALIGN
 		for (const auto& n : nodes_in_line) {
-			// Nodes are already aligned to the bottom at this point.
-			// Note: "Bottom" means the text baseline; we don't consider the space below it.
-			if (n->get_floating() != RenderNode::Floating::kNone ||
-			    n->valign() == UI::Align::kBottom) {
+			if (n->get_floating() != RenderNode::Floating::kNone) {
 				continue;
 			}
 
-			// Empty space above the node.
-			int space;
+			// Empty space above the node, below the node, and their sum
+			int space_top;
+			int space_bottom;
+			int space_total;
 			if (n->align_to_baseline()) {
 				// Text nodes: Treat them as a group. That is, make sure that each text node
-				// is moved the same distance as all other text nodes in the line. This
+				// is moved the same amount up or down as all other text nodes in the line. This
 				// way they stay aligned to the same baseline (if they use the same valign()).
-				space = biggest_hotspot - biggest_text_ascent;
+				space_top = biggest_hotspot - biggest_text_ascent;
+				space_bottom = line_height - biggest_hotspot - biggest_text_descent;
+				space_total = space_top + space_bottom;
 			} else {
 				// Non-text nodes: Align each node independently to the top/bottom/center of
 				// the line.
-				space = biggest_hotspot - n->hotspot_y();
+				space_total = line_height - n->height();
+				space_top = biggest_hotspot - n->hotspot_y();
+				space_bottom = space_total - space_top;
 			}
-			if (space == 0) {
+
+			if (space_total == 0) {
 				continue;
 			}
 
 			if (n->valign() == UI::Align::kTop) {
-				n->set_y(n->y() - space);
+				n->set_y(n->y() - space_top);
 			} else if (n->valign() == UI::Align::kCenter) {
-				n->set_y(n->y() - space / 2);
+				n->set_y(n->y() - space_top + space_total / 2);
+			} else if (n->valign() == UI::Align::kBottom) {
+				n->set_y(n->y() + space_bottom);
 			}
 		}
 		rv->insert(rv->end(), nodes_in_line.begin(), nodes_in_line.end());
