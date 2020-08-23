@@ -49,10 +49,10 @@ tribes:new_productionsite_type {
       main = {
          descname = "grinding wheat",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped unless economy needs flour",
             "consume=wheat:2",
-            "playsound=sound/mill/mill_turning 240",
+            "playsound=sound/mill/mill_turning priority:90% allow_multiple",
             "animate=working duration:10s",
             "produce=flour"
          }

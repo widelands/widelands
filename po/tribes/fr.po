@@ -15,6 +15,7 @@
 # Papa Ben <ben-oni@hotmail.fr>, 2019
 # Renaud Bouchard, 2015
 # Renaud Bouchard, 2015-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Tubuntu <tubuntu@testimonium.be>, 2015
 # zecas <jjorge@free.fr>, 2018
 msgid ""
@@ -22,8 +23,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-16 16:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"PO-Revision-Date: 2020-08-18 06:27+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +42,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:340
 msgctxt "shipname"
 msgid "Agate"
-msgstr ""
+msgstr "Agate"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:342
@@ -53,7 +54,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:344
 msgctxt "shipname"
 msgid "Amber"
-msgstr ""
+msgstr "Ambre"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:346
@@ -77,7 +78,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:352
 msgctxt "shipname"
 msgid "Aquamarine"
-msgstr ""
+msgstr "Aigue-Marine"
 
 #: ../../data/tribes/atlanteans.lua:353
 msgctxt "shipname"
@@ -111,7 +112,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:362
 msgctxt "shipname"
 msgid "Beryl"
-msgstr ""
+msgstr "Béryl"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/atlanteans.lua:364
@@ -147,7 +148,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:374
 msgctxt "shipname"
 msgid "Colionder"
-msgstr ""
+msgstr "Colionder"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/atlanteans.lua:376
@@ -189,7 +190,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:388
 msgctxt "shipname"
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #: ../../data/tribes/atlanteans.lua:389
 msgctxt "shipname"
@@ -218,7 +219,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:397
 msgctxt "shipname"
 msgid "Loftomor"
-msgstr ""
+msgstr "Loftomor"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:399
@@ -278,7 +279,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:417
 msgctxt "shipname"
 msgid "Opol"
-msgstr ""
+msgstr "Opol"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/atlanteans.lua:419
@@ -290,7 +291,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:421
 msgctxt "shipname"
 msgid "Ostur"
-msgstr ""
+msgstr "Ostur"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:423
@@ -308,13 +309,13 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:427
 msgctxt "shipname"
 msgid "Satul"
-msgstr ""
+msgstr "Satul"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/atlanteans.lua:429
 msgctxt "shipname"
 msgid "Sidolus"
-msgstr ""
+msgstr "Sidolus"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:431
@@ -404,13 +405,13 @@ msgstr ""
 #: ../../data/tribes/barbarians.lua:289
 msgctxt "shipname"
 msgid "Boldreth"
-msgstr ""
+msgstr "Boldreth"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/barbarians.lua:291
 msgctxt "shipname"
 msgid "Chat’Karuth"
-msgstr ""
+msgstr "Chat’Karuth"
 
 #: ../../data/tribes/barbarians.lua:292
 msgctxt "shipname"
@@ -466,7 +467,7 @@ msgstr ""
 #: ../../data/tribes/barbarians.lua:303
 msgctxt "shipname"
 msgid "Khantrukh"
-msgstr ""
+msgstr "Khantrukh"
 
 #: ../../data/tribes/barbarians.lua:304
 msgctxt "shipname"
@@ -492,7 +493,7 @@ msgstr ""
 #: ../../data/tribes/barbarians.lua:309
 msgctxt "shipname"
 msgid "Saxnot"
-msgstr ""
+msgstr "Saxnot"
 
 #: ../../data/tribes/barbarians.lua:310
 msgctxt "shipname"
@@ -503,7 +504,7 @@ msgstr ""
 #: ../../data/tribes/barbarians.lua:312
 msgctxt "shipname"
 msgid "Sigurd"
-msgstr ""
+msgstr "Sigurd"
 
 #: ../../data/tribes/barbarians.lua:313
 msgctxt "shipname"
@@ -519,7 +520,7 @@ msgstr ""
 #: ../../data/tribes/barbarians.lua:316
 msgctxt "shipname"
 msgid "Thron"
-msgstr ""
+msgstr "Thron"
 
 #: ../../data/tribes/barbarians.lua:317
 msgctxt "shipname"
@@ -3981,7 +3982,7 @@ msgstr ""
 #: ../../data/tribes/empire.lua:286
 msgctxt "shipname"
 msgid "Amalea"
-msgstr ""
+msgstr "Amalea"
 
 #: ../../data/tribes/empire.lua:287
 msgctxt "shipname"
@@ -4135,7 +4136,7 @@ msgstr ""
 #: ../../data/tribes/empire.lua:320
 msgctxt "shipname"
 msgid "Lutius"
-msgstr ""
+msgstr "Lutius"
 
 #: ../../data/tribes/empire.lua:321
 msgctxt "shipname"
@@ -4210,7 +4211,7 @@ msgstr ""
 #: ../../data/tribes/empire.lua:339
 msgctxt "shipname"
 msgid "Saledus"
-msgstr ""
+msgstr "Saledus"
 
 #. TRANSLATORS: This Empire ship is named after a Roman deity
 #: ../../data/tribes/empire.lua:341

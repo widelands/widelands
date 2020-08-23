@@ -1,52 +1,52 @@
-# Automatically created by Widelands bzr7905[trunk] (Debug)
+# Automatically created by Widelands 1.0~git24808[f59d577@1482_nodecapsmaths] (Release)
 
 [global]
 packet_version="2"
 
 [player_1]
 name="Harado"
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 
 [player_2]
 name="Semor"
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 
 [player_3]
 name="Rekis"
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 
 [player_4]
 name="Kal’Lak"
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 
 [player_5]
 name="Zimok"
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 
 [player_6]
 name="Meodor"
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 
 [player_7]
 name="Tohrwen"
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 
 [player_8]
 name="Yanviar"
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
