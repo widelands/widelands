@@ -79,7 +79,9 @@ void write_tribes_dir(FileSystem& target_fs, FileSystem* map_fs, const std::stri
 }  // namespace
 
 [[noreturn]] static void abort_handler(int) {
-	throw wexception(_("The engine received a SIGABRT signal which was most likely triggered by a corrupted savegame. No solution for this bug has been implemented yet. We are sorry, but this savegame seems to be broken beyond repair."));
+	throw wexception(_("The engine received a SIGABRT signal which was most likely triggered by a "
+	                   "corrupted savegame. No solution for this bug has been implemented yet. We "
+	                   "are sorry, but this savegame seems to be broken beyond repair."));
 }
 
 /*
