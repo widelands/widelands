@@ -416,7 +416,8 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 	const uint32_t time = SDL_GetTicks();
 	assert(init_time_ == kNoSplash || time >= init_time_);
 
-	if (init_time_ != kNoSplash && time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
+	if (init_time_ != kNoSplash &&
+	    time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
 		// still in splash phase
 		return;
 	}
@@ -458,18 +459,20 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 		const RGBAColor bg(0, 0, 0, 130);
 
 		r.fill_rect(Recti(box_rect_.x - padding_, box_rect_.y - padding_, box_rect_.w + 2 * padding_,
-			              box_rect_.h + 2 * padding_),
-			        bg, BlendMode::Default);
+		                  box_rect_.h + 2 * padding_),
+		            bg, BlendMode::Default);
 
 		const int max_w = std::max(copyright_.get_w(), version_.get_w());
 		r.fill_rect(Recti((get_w() - max_w - padding_) / 2, version_.get_y() - padding_ / 2,
-			              max_w + padding_, get_h() - version_.get_y() + padding_ / 2),
-			        bg, BlendMode::Default);
+		                  max_w + padding_, get_h() - version_.get_y() + padding_ / 2),
+		            bg, BlendMode::Default);
 	}
 
 	// Widelands logo
 	const Rectf rect = title_pos();
-	do_draw_image(r, Rectf(rect.x + rect.w * 0.2f, rect.y + rect.h * 0.2f, rect.w * 0.6f, rect.h * 0.6f), title_image_, 1.f);
+	do_draw_image(
+	   r, Rectf(rect.x + rect.w * 0.2f, rect.y + rect.h * 0.2f, rect.w * 0.6f, rect.h * 0.6f),
+	   title_image_, 1.f);
 }
 
 void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
@@ -481,11 +484,14 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 
 	if (time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
 		const float opacity = time - init_time_ > kInitialFadeoutDelay ?
-				1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) / kInitialFadeoutDuration
-				: 1.f;
+		                         1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
+		                                  kInitialFadeoutDuration :
+		                         1.f;
 		do_draw_image(r, image_pos(splashscreen_), splashscreen_, opacity);
 	} else {
-		const unsigned opacity = 255 - 255.f * (time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) / kInitialFadeoutDuration;
+		const unsigned opacity =
+		   255 - 255.f * (time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) /
+		            kInitialFadeoutDuration;
 		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, opacity), BlendMode::Default);
 	}
 }
