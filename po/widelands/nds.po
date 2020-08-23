@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-16 18:01+0000\n"
+"POT-Creation-Date: 2020-08-17 14:37+0000\n"
+"PO-Revision-Date: 2020-08-18 12:25+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -807,7 +807,7 @@ msgstr "Rutfödderungen för mennig Spelers"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:276
 #, c-format
 msgid "Current directory: %s"
-msgstr "Aktuelle Verteeknis: %s"
+msgstr "Stedenwies Verteeknis: %s"
 
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:59
@@ -5736,14 +5736,14 @@ msgstr "Söök"
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:499
+#: ../../src/wui/waresdisplay.cc:512
 msgid "%1%k"
 msgstr "%1%k"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:502
+#: ../../src/wui/waresdisplay.cc:515
 msgid "%1%M"
 msgstr "%1%M"
 
@@ -5751,7 +5751,7 @@ msgstr "%1%M"
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:505
+#: ../../src/wui/waresdisplay.cc:518
 msgid "%1%G"
 msgstr "%1%G"
 

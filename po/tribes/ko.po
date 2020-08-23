@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-17 14:34+0000\n"
+"PO-Revision-Date: 2020-08-17 14:56+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -218,102 +218,102 @@ msgstr "공작석[광석]"
 #: ../../data/tribes/atlanteans.lua:401
 msgctxt "shipname"
 msgid "Martinique"
-msgstr ""
+msgstr "마르티니크[지역]"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/atlanteans.lua:403
 msgctxt "shipname"
 msgid "Montserrat"
-msgstr ""
+msgstr "몬트서래트[지역]"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:405
 msgctxt "shipname"
 msgid "Moonstone"
-msgstr ""
+msgstr "월장석[광석]"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:407
 msgctxt "shipname"
 msgid "Mystic Quartz"
-msgstr ""
+msgstr "미스틱 수정[광석]"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/atlanteans.lua:409
 msgctxt "shipname"
 msgid "Nassau"
-msgstr ""
+msgstr "나사우[지역]"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/atlanteans.lua:411
 msgctxt "shipname"
 msgid "Nevis"
-msgstr ""
+msgstr "네비스[지역]"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:413
 msgctxt "shipname"
 msgid "Obsidian"
-msgstr ""
+msgstr "흑요석[광석]"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:415
 msgctxt "shipname"
 msgid "Onyx"
-msgstr ""
+msgstr "호마노[광석]"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/atlanteans.lua:417
 msgctxt "shipname"
 msgid "Opol"
-msgstr ""
+msgstr "오폴[지역]"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/atlanteans.lua:419
 msgctxt "shipname"
 msgid "Orchila"
-msgstr ""
+msgstr "오르칠라[지역]"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/atlanteans.lua:421
 msgctxt "shipname"
 msgid "Ostur"
-msgstr ""
+msgstr "오스투르"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:423
 msgctxt "shipname"
 msgid "Pearl"
-msgstr ""
+msgstr "진주[광석]"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:425
 msgctxt "shipname"
 msgid "Sapphire"
-msgstr ""
+msgstr "청옥[광석]"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/atlanteans.lua:427
 msgctxt "shipname"
 msgid "Satul"
-msgstr ""
+msgstr "사툴"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/atlanteans.lua:429
 msgctxt "shipname"
 msgid "Sidolus"
-msgstr ""
+msgstr "시도루스"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:431
 msgctxt "shipname"
 msgid "Sphalerite"
-msgstr ""
+msgstr "섬아연석[광석]"
 
 #: ../../data/tribes/atlanteans.lua:432
 msgctxt "shipname"
 msgid "Spider"
-msgstr ""
+msgstr "거미"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:434
@@ -507,42 +507,42 @@ msgstr "토르"
 #: ../../data/tribes/barbarians.lua:316
 msgctxt "shipname"
 msgid "Thron"
-msgstr ""
+msgstr "번역확인->왕좌"
 
 #: ../../data/tribes/barbarians.lua:317
 msgctxt "shipname"
 msgid "Ullr"
-msgstr ""
+msgstr "울르"
 
 #: ../../data/tribes/barbarians.lua:318
 msgctxt "shipname"
 msgid "Valdar"
-msgstr ""
+msgstr "발다르"
 
 #: ../../data/tribes/barbarians.lua:319
 msgctxt "shipname"
 msgid "Vili"
-msgstr ""
+msgstr "빌리"
 
 #: ../../data/tribes/barbarians.lua:320
 msgctxt "shipname"
 msgid "Volf"
-msgstr ""
+msgstr "볼프"
 
 #: ../../data/tribes/barbarians.lua:321
 msgctxt "shipname"
 msgid "Wild Boar"
-msgstr ""
+msgstr "멧돼지"
 
 #: ../../data/tribes/barbarians.lua:322
 msgctxt "shipname"
 msgid "Wolverine"
-msgstr ""
+msgstr "울버린"
 
 #: ../../data/tribes/barbarians.lua:323
 msgctxt "shipname"
 msgid "Yrsa"
-msgstr ""
+msgstr "이르사"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53

@@ -36,14 +36,14 @@ tribes:new_productionsite_type {
       plant = {
          descname = "planting wheat",
          actions = {
-            "sleep=14000",
+            "sleep=duration:14s",
             "callworker=harvest"
          }
       },
       harvest = {
          descname = "harvesting wheat",
          actions = {
-            "sleep=4000",
+            "sleep=duration:4s",
             "callworker=harvest"
          }
       },
