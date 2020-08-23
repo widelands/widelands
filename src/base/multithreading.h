@@ -25,6 +25,9 @@
 
 #include <pthread.h>
 
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
+
 // Wrapper for a mutex that can be locked and unlocked using a MutexLock
 struct MutexLockHandler {
 	explicit MutexLockHandler();
@@ -65,11 +68,14 @@ private:
  *     non_critical_code();
  * Note that mutexes are recursive, that is, a thread may lock a mutex several times,
  * but needs to free it the same number of times before another thread can claim it.
+ * If the `optional` parameter is `true`, the constructor returns immediately without
+ * locking the mutex if it is already being held by another thread. In this case,
+ * `is_valid()` will return `false`.
  * Some good explanations here: https://stackoverflow.com/questions/14888027/mutex-lock-threads
  */
 struct MutexLock {
-	explicit MutexLock();                   // claims the global mutex
-	explicit MutexLock(MutexLockHandler*);  // claims a specified other mutex
+	explicit MutexLock(bool optional = false);             // claims the global mutex
+	explicit MutexLock(MutexLockHandler*, bool optional);  // claims a specified other mutex
 	~MutexLock();
 	bool is_valid() const {
 		return mutex_ != nullptr;
@@ -77,6 +83,15 @@ struct MutexLock {
 
 private:
 	std::recursive_mutex* mutex_;  // not owned
+};
+
+// Informs the drawing thread to run the given function ASAP. Intended for
+// image-checking functions, such as MapObjectDescr::check_representative_image().
+struct NoteDelayedCheck {
+	CAN_BE_SENT_AS_NOTE(NoteId::DelayedCheck)
+	const std::function<void()> run;
+	NoteDelayedCheck(const std::function<void()>& f) : run(f) {
+	}
 };
 
 #endif  // end of include guard: WL_BASE_MULTITHREADING_H

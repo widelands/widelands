@@ -24,11 +24,17 @@
 
 #include "base/wexception.h"
 
-MutexLock::MutexLock() : MutexLock(MutexLockHandler::get()) {
+MutexLock::MutexLock(const bool optional) : MutexLock(MutexLockHandler::get(), optional) {
 }
-MutexLock::MutexLock(MutexLockHandler* m) : mutex_(m ? m->mutex() : nullptr) {
+MutexLock::MutexLock(MutexLockHandler* m, const bool optional) : mutex_(m ? m->mutex() : nullptr) {
 	if (mutex_) {
-		mutex_->lock();
+		if (optional) {
+			if (!mutex_->try_lock()) {
+				mutex_ = nullptr;
+			}
+		} else {
+			mutex_->lock();
+		}
 	}
 }
 MutexLock::~MutexLock() {

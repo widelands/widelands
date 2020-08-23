@@ -96,4 +96,5 @@ wl_library(base_multithreading
     multithreading.cc
   DEPENDS
     base_exceptions
+    notifications
 )

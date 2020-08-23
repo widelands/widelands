@@ -82,7 +82,7 @@ public:
 	// applied.
 	std::shared_ptr<const UI::RenderedText> render(const std::string& text,
 	                                               uint16_t w = 0) override {
-		MutexLock m(&UI::RenderedText::text_renderer_mutex);
+		MutexLock m(&UI::RenderedText::text_renderer_mutex, false);
 		const std::string hash = boost::lexical_cast<std::string>(w) + text;
 		std::shared_ptr<const RenderedText> rendered_text = render_cache_->get(hash);
 		if (rendered_text == nullptr) {

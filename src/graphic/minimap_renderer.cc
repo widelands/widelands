@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "economy/flag.h"
 #include "economy/roadbase.h"
 #include "logic/field.h"
@@ -225,6 +226,8 @@ std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
                                       const Rectf& view_area,
                                       const MiniMapType& minimap_type,
                                       MiniMapLayer layers) {
+	MutexLock m;
+
 	// TODO(sirver): Currently the minimap is redrawn every frame. That is not really
 	//       necessary. The created texture could be cached and only redrawn two
 	//       or three times per second

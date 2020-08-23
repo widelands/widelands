@@ -218,12 +218,28 @@ int Panel::do_run() {
 
 	MutexLockHandler& mutex_handler = MutexLockHandler::push();
 
+	std::list<NoteDelayedCheck> checks;
+	auto subscriber = Notifications::subscribe<NoteDelayedCheck>(
+	   [&checks](const NoteDelayedCheck& note) {
+	      checks.push_back(note);
+	   });
+	auto handle_checks = [&checks]() {
+		while (!checks.empty()) {
+			checks.front().run();
+			checks.pop_front();
+		}
+	};
+
 	while (running_) {
 		const uint32_t start_time = SDL_GetTicks();
 
-		{
-			MutexLock m;
-			app->handle_input(&input_callback);
+		for (;;) {
+			handle_checks();
+			MutexLock m(true);
+			if (m.is_valid()) {
+				app->handle_input(&input_callback);
+				break;
+			}
 		}
 
 		if (app->should_die()) {
@@ -235,22 +251,27 @@ int Panel::do_run() {
 		}
 
 		if (start_time >= next_draw_time) {
-			MutexLock m;
+			for (;;) {
+				handle_checks();
+				MutexLock m(true);
+				if (m.is_valid()) {
+					RenderTarget& rt = *g_gr->get_render_target();
+					forefather->do_draw(rt);
+					if (g_mouse_cursor->is_visible()) {
+						g_mouse_cursor->change_cursor(app->is_mouse_pressed());
+						g_mouse_cursor->draw(rt, app->get_mouse_position());
+						if (is_modal()) {
+							do_tooltip();
+						} else {
+							forefather->do_tooltip();
+						}
+					}
 
-			RenderTarget& rt = *g_gr->get_render_target();
-			forefather->do_draw(rt);
-			if (g_mouse_cursor->is_visible()) {
-				g_mouse_cursor->change_cursor(app->is_mouse_pressed());
-				g_mouse_cursor->draw(rt, app->get_mouse_position());
-				if (is_modal()) {
-					do_tooltip();
-				} else {
-					forefather->do_tooltip();
+					g_gr->refresh();
+					next_draw_time = start_time + draw_delay;
+					break;
 				}
 			}
-
-			g_gr->refresh();
-			next_draw_time = start_time + draw_delay;
 		}
 
 		const int32_t delay = next_draw_time - SDL_GetTicks();
@@ -258,6 +279,7 @@ int Panel::do_run() {
 			SDL_Delay(delay);
 		}
 	}
+	subscriber.reset();
 	pthread_cancel(thread);
 	MutexLockHandler::pop(mutex_handler);
 

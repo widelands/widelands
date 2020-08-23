@@ -288,7 +288,6 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 			throw GameDataError(
 			   "Map object %s has animations but no idle animation", init_name.c_str());
 		}
-		assert(g_gr->animations().get_representative_image(name())->width() > 0);
 	}
 	if (table.has_key("icon")) {
 		icon_filename_ = table.get_string("icon");
@@ -424,11 +423,13 @@ const Image* MapObjectDescr::representative_image(const RGBColor* player_color) 
 }
 
 void MapObjectDescr::check_representative_image() {
-	if (representative_image() == nullptr) {
-		throw Widelands::GameDataError(
-		   "The %s %s has no representative image. Does it have an \"idle\" animation?",
-		   to_string(type()).c_str(), name().c_str());
-	}
+	Notifications::publish(NoteDelayedCheck([this]() {
+		if (representative_image() == nullptr) {
+			throw Widelands::GameDataError(
+			   "The %s %s has no representative image. Does it have an \"idle\" animation?",
+			   to_string(type()).c_str(), name().c_str());
+		}
+	}));
 }
 
 const Image* MapObjectDescr::icon() const {
