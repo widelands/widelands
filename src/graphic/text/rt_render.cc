@@ -517,7 +517,9 @@ uint16_t Layout::fit_line(const uint16_t w_max,  // Maximum width of line
 		if (node->get_floating() != RenderNode::Floating::kNone) {
 			continue;
 		}
-		cur_line_hotspot = std::max(cur_line_hotspot, node->hotspot_y());
+		if (node->align_to_baseline()) {
+			cur_line_hotspot = std::max(cur_line_hotspot, node->hotspot_y());
+		}
 	}
 	return cur_line_hotspot;
 }
@@ -543,61 +545,54 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 		uint16_t biggest_hotspot = fit_line(w, p, &nodes_in_line, trim_spaces);
 
 		int line_height = 0;
-		uint16_t biggest_text_ascent = 0;
-		int biggest_text_descent = 0;
+		int biggest_descent = 0;
 		int line_start = INFINITE_WIDTH;
+
 		// Compute real line height and width, taking into account alignment
 		for (const auto& n : nodes_in_line) {
 			if (n->get_floating() == RenderNode::Floating::kNone) {
-				line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
-				n->set_y(h_ + biggest_hotspot - n->hotspot_y());
 				if (n->align_to_baseline()) {
-					biggest_text_ascent = std::max(biggest_text_ascent, n->hotspot_y());
-					biggest_text_descent = std::max(biggest_text_descent, n->height() - n->hotspot_y());
+					biggest_descent = std::max(biggest_descent, n->height() - n->hotspot_y());
+					line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
+				} else {
+					line_height = std::max(line_height, static_cast<int>(n->height()));
 				}
 			}
+
 			if (line_start >= INFINITE_WIDTH || n->x() < line_start) {
 				line_start = n->x() - p.left;
 			}
 			max_line_width = std::max<int>(max_line_width, n->x() + n->width() + p.right - line_start);
 		}
 
-		// Go over again and adjust position for VALIGN
+		// Go over again and set vertical positions of nodes depending on VALIGN
 		for (const auto& n : nodes_in_line) {
 			if (n->get_floating() != RenderNode::Floating::kNone) {
 				continue;
 			}
 
-			// Empty space above the node, below the node, and their sum
-			int space_top;
-			int space_bottom;
-			int space_total;
+			// Empty space: how much the node can be moved within line boundaries
+			int space;
+			int baseline_correction;
 			if (n->align_to_baseline()) {
-				// Text nodes: Treat them as a group. That is, make sure that each text node
-				// is moved the same amount up or down as all other text nodes in the line. This
-				// way they stay aligned to the same baseline (if they use the same valign()).
-				space_top = biggest_hotspot - biggest_text_ascent;
-				space_bottom = line_height - biggest_hotspot - biggest_text_descent;
-				space_total = space_top + space_bottom;
+				// Text nodes: Treat them as a group. Calculate the space using the same values
+				// for all nodes and correct for hotspot differences to align them to one common
+				// baseline.
+				space = line_height - biggest_hotspot - biggest_descent;
+				baseline_correction = biggest_hotspot - n->hotspot_y();
 			} else {
 				// Non-text nodes: Align each node independently to the top/bottom/center of
 				// the line.
-				space_total = line_height - n->height();
-				space_top = biggest_hotspot - n->hotspot_y();
-				space_bottom = space_total - space_top;
-			}
-
-			if (space_total == 0) {
-				continue;
+				space = line_height - n->height();
+				baseline_correction = 0;
 			}
 
 			if (n->valign() == UI::Align::kTop) {
-				n->set_y(n->y() - space_top);
+				space = 0;
 			} else if (n->valign() == UI::Align::kCenter) {
-				n->set_y(n->y() - space_top + space_total / 2);
-			} else if (n->valign() == UI::Align::kBottom) {
-				n->set_y(n->y() + space_bottom);
+				space /= 2;
 			}
+			n->set_y(h_ + space + baseline_correction);
 		}
 		rv->insert(rv->end(), nodes_in_line.begin(), nodes_in_line.end());
 
