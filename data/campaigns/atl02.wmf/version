@@ -1,12 +1,12 @@
-# Automatically created by Widelands master-5536_Release_x64 (Release)
+# Automatically created by Widelands 1.0~git24923[de6c28e@static_link] (Release)
 
 [global]
 map_source_url=
 map_release=
 map_creator_version="master-4587_Release_x64"
 map_version_major="0"
-map_version_minor="3"
-map_version_timestamp="1572209468"
+map_version_minor="4"
+map_version_timestamp="1598126332"
 packet_version="1"
 packet_compatibility="1"
 needs_widelands_version_after="20"

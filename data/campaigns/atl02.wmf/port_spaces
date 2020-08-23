@@ -1,7 +1,13 @@
-# Automatically created by Widelands master-5536_Release_x64 (Release)
+# Automatically created by Widelands 1.0~git24923[de6c28e@static_link] (Release)
 
 [global]
 packet_version="1"
-number_of_port_spaces="0"
+waterway_max_length="0"
+number_of_port_spaces="5"
 
 [port_spaces]
+0="129 3"
+1="122 80"
+2="138 109"
+3="119 115"
+4="44 167"

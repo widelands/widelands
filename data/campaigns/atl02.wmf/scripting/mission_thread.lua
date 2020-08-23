@@ -130,12 +130,17 @@ function intro()
    sleep(500)
 
    p1.see_all = true -- TODO: remove this
+   msg_boxes(initial_messages)
    include "map:scripting/starting_conditions.lua"
-
+   local port = add_campaign_objective(obj_find_port)
+   while not check_for_buildings(p1, {
+      atlanteans_port = 1,
+   }) do sleep(3731) end
+   port.done = true
    basic_infrastructure = add_campaign_objective(obj_basic_infrastructure)
    tools = add_campaign_objective(obj_tools)
    explore = add_campaign_objective(obj_explore)
-   msg_boxes(initial_messages)
+   msg_boxes(initial_messages1)
 
    run(spidercloth)
    run(infrastructure)

@@ -1,4 +1,4 @@
-# Automatically created by Widelands master-5536_Release_x64 (Release)
+# Automatically created by Widelands 1.0~git24923[de6c28e@static_link] (Release)
 
 [global]
 packet_version="1"
@@ -10,4 +10,4 @@ author="SirVer,Nasenbaer,hessenfarmer"
 descr="After the quick escape from the drowning island, the atlanteans around Jundlina are faced with new challenges."
 hint=
 background="campaigns/atl02.wmf/pics/background.jpg"
-tags=
+tags="seafaring"
