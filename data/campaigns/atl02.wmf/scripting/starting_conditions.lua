@@ -30,14 +30,14 @@
       spider_silk = 4,
       planks = 20,
       atlanteans_bread = 16,
-      log = 14,
+      log = 16,
       })
 
    ship = p1:place_ship(map:get_field(44,0))
    ship.capacity = 110
    ship:make_expedition({
       iron_ore = 40,
-      log = 19,
+      log = 17,
       coal = 9,
       spidercloth = 2,
       atlanteans_bread = 4,
