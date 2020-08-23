@@ -48,7 +48,8 @@ woodcutters to remove the tree).
 It is not mandatory for immovables to define programs. If the immovable defines a program named
 ``main``, this program will be started as the main program on creation. Immovables without such a
 program will simply display their 'idle' animation indefinitely.
-(Note: the main program used to be called ``program``, which has been deprecated.)
+
+.. note:: The main program used to be called ``program``, which has been deprecated.
 
 Programs are defined as Lua tables. Each program must be declared as a subtable in the immovable's
 Lua table called ``programs`` and have a unique table key. The entries in a program's subtable are
