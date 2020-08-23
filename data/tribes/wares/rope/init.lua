@@ -1,7 +1,5 @@
 dirname = path.dirname(__file__)
 
-animations = {}
-add_animation(animations, "idle", dirname, "idle", {10, 8})
 
 tribes:new_ware_type {
    msgctxt = "ware",
@@ -9,11 +7,16 @@ tribes:new_ware_type {
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Rope"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    default_target_quantity = {},
    preciousness = {
       amazons = 2
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 10, 8 },
+      }
+   },
 }

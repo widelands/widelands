@@ -9,6 +9,7 @@ tribes:new_ware_type {
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Rubber"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    default_target_quantity = {
       amazons = 30
@@ -17,5 +18,9 @@ tribes:new_ware_type {
       amazons = 40
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 6, 6 },
+      }
+   },
 }
