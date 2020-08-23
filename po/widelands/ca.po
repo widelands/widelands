@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-17 10:51+0000\n"
+"POT-Creation-Date: 2020-08-17 14:37+0000\n"
+"PO-Revision-Date: 2020-08-17 20:51+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -810,7 +810,7 @@ msgstr "Directori actual: %s"
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:59
 msgid "Display"
-msgstr ""
+msgstr "Mostra"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:70
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:231
@@ -864,7 +864,7 @@ msgstr "Esborra"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:57
 msgid "Delete this suggested team lineup"
-msgstr ""
+msgstr "Esborra aquest suggeriment d'equips"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:103
 msgid "+"
@@ -876,11 +876,11 @@ msgstr "Afegiu un jugador a aquest equip"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:269
 msgid "Add lineup"
-msgstr ""
+msgstr "Afegeix un suggeriment d'equips "
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:270
 msgid "Add another suggested team lineup"
-msgstr ""
+msgstr "Afegeix un altre suggeriment d'equips"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:289
 msgid "Map name:"
@@ -3533,7 +3533,7 @@ msgstr "Mostra el temps de partida a la part superior esquerra"
 
 #: ../../src/ui_fsmenu/options.cc:227
 msgid "Allow diagonal scrolling with the numeric keypad"
-msgstr ""
+msgstr "Permet el moviment en diagonal amb el teclat numèric"
 
 #: ../../src/ui_fsmenu/options.cc:238
 msgid "Interface"
@@ -3658,7 +3658,7 @@ msgstr "Autors"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:38
 msgid "New Game"
-msgstr "Nova partida"
+msgstr "Partida nova"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:40
 msgid "Campaigns"
@@ -3898,7 +3898,7 @@ msgstr "Silencia els missatges d'aquest edifici"
 
 #: ../../src/wui/buildingwindow.cc:198
 msgid "All buildings of this type are muted – click to unmute"
-msgstr ""
+msgstr "Tots els edificis d'aquest tipus estan silenciats – feu clic per canviar-ho."
 
 #: ../../src/wui/buildingwindow.cc:202
 msgid "Mute all buildings of this type"
@@ -5734,14 +5734,14 @@ msgstr "Expedició"
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:499
+#: ../../src/wui/waresdisplay.cc:512
 msgid "%1%k"
 msgstr "%1%k"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:502
+#: ../../src/wui/waresdisplay.cc:515
 msgid "%1%M"
 msgstr "%1%M"
 
@@ -5749,7 +5749,7 @@ msgstr "%1%M"
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:505
+#: ../../src/wui/waresdisplay.cc:518
 msgid "%1%G"
 msgstr "%1%G"
 

@@ -24,9 +24,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-16 16:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-08-17 14:37+0000\n"
+"PO-Revision-Date: 2020-08-18 06:24+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -856,15 +856,15 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:99
 msgid "Map names"
-msgstr ""
+msgstr "Noms des cartes"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:99
 msgid "Original map names"
-msgstr ""
+msgstr "Noms originaux des cartes"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:103
 msgid "Translated map names"
-msgstr ""
+msgstr "Noms traduits des cartes"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:46
 msgid "Click player to remove"
@@ -882,7 +882,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:103
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:109
 msgid "Add a player to this team"
@@ -1984,7 +1984,7 @@ msgstr "Livraison"
 #: ../../src/wui/seafaring_statistics_menu.cc:207
 msgctxt "ship_state"
 msgid "Empty"
-msgstr ""
+msgstr "Vide"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
@@ -5518,7 +5518,7 @@ msgstr "Afficher tous les navires"
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:540
 msgid "Show empty ships"
-msgstr ""
+msgstr "Afficher les navires vides"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:543
@@ -5611,29 +5611,29 @@ msgstr ""
 #: ../../src/wui/soldier_statistics_menu.cc:115
 #, c-format
 msgid "Health: %u"
-msgstr ""
+msgstr "Santé: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:74
 #: ../../src/wui/soldier_statistics_menu.cc:129
 #, c-format
 msgid "Attack: %u"
-msgstr ""
+msgstr "Attaque: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:75
 #: ../../src/wui/soldier_statistics_menu.cc:143
 #, c-format
 msgid "Defense: %u"
-msgstr ""
+msgstr "Défense: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:76
 #: ../../src/wui/soldier_statistics_menu.cc:157
 #, c-format
 msgid "Evade: %u"
-msgstr ""
+msgstr "Esquive: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:98
 msgid "Overview"
-msgstr ""
+msgstr "Aperçu"
 
 #: ../../src/wui/soldier_statistics_menu.cc:168
 msgid "By Attribute"
@@ -5645,7 +5645,7 @@ msgstr ""
 #: ../../src/wui/soldier_statistics_menu.cc:219
 #, c-format
 msgid "×%u"
-msgstr ""
+msgstr "×%u"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:85
 msgid "Capacity"
@@ -5748,14 +5748,14 @@ msgstr "Expédition"
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:499
+#: ../../src/wui/waresdisplay.cc:512
 msgid "%1%k"
 msgstr "%1%k"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:502
+#: ../../src/wui/waresdisplay.cc:515
 msgid "%1%M"
 msgstr "%1%M"
 
@@ -5763,7 +5763,7 @@ msgstr "%1%M"
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:505
+#: ../../src/wui/waresdisplay.cc:518
 msgid "%1%G"
 msgstr "%1%G"
 
