@@ -3,47 +3,48 @@ project (widelands)
 cmake_minimum_required (VERSION 3.9)
 cmake_policy(VERSION 3.9)
 
-include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
-
-include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
-
 option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 option(OPTION_BUILD_TESTS "Build tests" ON)
 option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
+option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
+option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
-# if set on such systems. This can be removed when cmake_minimum_required is set	
-# to 3.11 or newer  by using:	
-# cmake_policy(VERSION 3.11)	
-if(POLICY CMP0072)	
-  cmake_policy(SET CMP0072 NEW)	
+include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
+include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
-  # TODO(stonerl): Check on later Ubuntu releases whether this workaround is	
-  # still needed or not.	
-  if (CMAKE_SYSTEM MATCHES "Linux")	
-    distro_name (DISTRO_NAME)	
-    # DISTRO_NAME is different on the build-servers.	
-    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"	
-         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco"	
-         OR DISTRO_NAME MATCHES "Ubuntu 19.10" OR DISTRO_NAME MATCHES "Eoan"	
-         OR DISTRO_NAME MATCHES "Ubuntu 20.04" OR DISTRO_NAME MATCHES "Focal")	
-        AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")	
-      cmake_policy(SET CMP0072 OLD)	
-    endif()	
-  endif()	
-endif(POLICY CMP0072)	
+# This policy is not known to versions prior 3.11 and would result in errors,
+# if set on such systems. This can be removed when cmake_minimum_required is set
+# to 3.11 or newer  by using:
+# cmake_policy(VERSION 3.11)
+if(POLICY CMP0072)
+  cmake_policy(SET CMP0072 NEW)
 
-# This policy is not known to versions prior 3.12 and would result in errors,	
-# if set on such systems. This can be removed when cmake_minimum_required is set	
-# to 3.12 or newer  by using:	
-# cmake_policy(VERSION 3.12)	
-if(POLICY CMP0074)	
-  cmake_policy(SET CMP0074 NEW)	
+  # TODO(stonerl): Check on later Ubuntu releases whether this workaround is
+  # still needed or not.
+  if (CMAKE_SYSTEM MATCHES "Linux")
+    distro_name (DISTRO_NAME)
+    # DISTRO_NAME is different on the build-servers.
+    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"
+         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco"
+         OR DISTRO_NAME MATCHES "Ubuntu 19.10" OR DISTRO_NAME MATCHES "Eoan"
+         OR DISTRO_NAME MATCHES "Ubuntu 20.04" OR DISTRO_NAME MATCHES "Focal")
+        AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      cmake_policy(SET CMP0072 OLD)
+    endif()
+  endif()
+endif(POLICY CMP0072)
+
+# This policy is not known to versions prior 3.12 and would result in errors,
+# if set on such systems. This can be removed when cmake_minimum_required is set
+# to 3.12 or newer  by using:
+# cmake_policy(VERSION 3.12)
+if(POLICY CMP0074)
+  cmake_policy(SET CMP0074 NEW)
 endif(POLICY CMP0074)
 
-option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
   ADD_DEFINITIONS(-DUSE_XDG)
   message(STATUS "Building with XDG support")
@@ -84,6 +85,35 @@ if (WIN32)
   set (Boost_USE_STATIC_LIBS  ON)
   link_libraries(wsock32 ws2_32 bcrypt)
 endif()
+if (OPTION_BUILD_WINSTATIC)
+  add_definitions(-DGLBINDING_STATIC_DEFINE)
+  if (CMAKE_SIZEOF_VOID_P EQUAL 8)
+    set(PNG_LIBRARY_RELEASE "C:/msys64/mingw64/lib/libpng.a" CACHE INTERNAL "")
+    set(SDL2_IMAGE_LIBRARY "C:/msys64/mingw64/lib/libSDL2_image.a" CACHE INTERNAL "")
+    set(ZLIB_LIBRARY_RELEASE "C:/msys64/mingw64/lib/libz.a" CACHE INTERNAL "")
+    set(SDL2_TTF_LIBRARY "C:/msys64/mingw64/lib/libSDL2_ttf.a" CACHE INTERNAL "")
+    set(SDL2_MIXER_LIBRARY "C:/msys64/mingw64/lib/libSDL2_mixer.a" CACHE INTERNAL "")
+    set(SDL2_LIBRARY "C:/msys64/mingw64/lib/libSDL2.a" CACHE INTERNAL "")
+    set(SDL2MAIN_LIBRARY "C:/msys64/mingw64/lib/libSDL2main.a" CACHE INTERNAL "")
+    set(ICU_UC_LIBRARY_RELEASE "C:/msys64/mingw64/lib/libicuuc.a" CACHE INTERNAL "")
+    set(ICU_DT_LIBRARY_RELEASE "C:/msys64/mingw64/lib/libicudt.a" CACHE INTERNAL "")
+    set(Intl_LIBRARY "C:/msys64/mingw64/lib/libintl.a" CACHE INTERNAL "")
+    set(GLEW_LIBRARY "C:/msys64/mingw64/lib/libglew32.a" CACHE INTERNAL "")
+  else()
+    set(PNG_LIBRARY_RELEASE "C:/msys64/mingw32/lib/libpng.a" CACHE INTERNAL "")
+    set(SDL2_IMAGE_LIBRARY "C:/msys64/mingw32/lib/libSDL2_image.a" CACHE INTERNAL "")
+    set(ZLIB_LIBRARY_RELEASE "C:/msys64/mingw32/lib/libz.a" CACHE INTERNAL "")
+    set(SDL2_TTF_LIBRARY "C:/msys64/mingw32/lib/libSDL2_ttf.a" CACHE INTERNAL "")
+    set(SDL2_MIXER_LIBRARY "C:/msys64/mingw32/lib/libSDL2_mixer.a" CACHE INTERNAL "")
+    set(SDL2_LIBRARY "C:/msys64/mingw32/lib/libSDL2.a" CACHE INTERNAL "")
+    set(SDL2MAIN_LIBRARY "C:/msys64/mingw32/lib/libSDL2main.a" CACHE INTERNAL "")
+    set(ICU_UC_LIBRARY_RELEASE "C:/msys64/mingw32/lib/libicuuc.a" CACHE INTERNAL "")
+    set(ICU_DT_LIBRARY_RELEASE "C:/msys64/mingw32/lib/libicudt.a" CACHE INTERNAL "")
+    set(Intl_LIBRARY "C:/msys64/mingw32/lib/libintl.a" CACHE INTERNAL "")
+    set(GLEW_LIBRARY "C:/msys64/mingw32/lib/libglew32.a" CACHE INTERNAL "")
+  endif()
+  set (OPTION_GLEW_STATIC ON)
+endif()
 set (Boost_USE_MULTITHREADED ON)
 set (Boost_DETAILED_FAILURE_MSG ON)
 find_package(Boost 1.48
@@ -100,7 +130,6 @@ find_package(OpenGL REQUIRED)
 find_package(PNG REQUIRED)
 
 find_package(SDL2 REQUIRED)
-
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
@@ -225,6 +254,10 @@ else()
   if(WIN32)
     # This is needed for getenv().
     wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
+    if (OPTION_BUILD_WINSTATIC)
+      set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ ${CMAKE_CXX_STANDARD_LIBRARIES}")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic")
+    endif()
   else()
     # SDL and MinGW both declare 'unsigned int __builtin_ia32_crc32qi(unsigned int, unsigned char)', resulting in lots of warnings. So, we can't have this flag in Windows.
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
