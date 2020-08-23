@@ -129,6 +129,8 @@ protected:
 
 	UI::TabPanelStyle style_;
 
+	Recti focus_overlay_rect() override;
+
 private:
 	// Common adding function for textual and pictorial tabs
 	uint32_t add_tab(const std::string& name,

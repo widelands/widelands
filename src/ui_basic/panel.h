@@ -330,6 +330,8 @@ protected:
 
 	virtual bool is_focus_toplevel() const;
 
+	virtual Recti focus_overlay_rect();
+
 private:
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;

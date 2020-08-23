@@ -469,6 +469,10 @@ void Panel::draw(RenderTarget&) {
 void Panel::draw_border(RenderTarget&) {
 }
 
+Recti Panel::focus_overlay_rect() {
+	return Recti(0, 0, get_w(), get_h());
+}
+
 /**
  * Draw overlays that appear over all child panels.
  * This can be used e.g. for debug information.
@@ -483,7 +487,7 @@ void Panel::draw_overlay(RenderTarget& dst) {
 			}
 		}
 		dst.fill_rect(
-		   Recti(0, 0, get_w(), get_h()),
+		   focus_overlay_rect(),
 		   has_toplevel_focus ? g_gr->styles().focused_color() : g_gr->styles().semi_focused_color(),
 		   BlendMode::Default);
 	}
