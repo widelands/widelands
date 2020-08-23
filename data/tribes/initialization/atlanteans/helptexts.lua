@@ -11,35 +11,60 @@ include "tribes/scripting/help/global_helptexts.lua"
 --
 -- Helptexts are defined in ``tribes/initialization/<tribename>/helptexts.lua`` and linked to from :ref:`units.lua <lua_tribes_tribes_units>`.
 --
--- First, you will need to define a message context. The form is ``"<tribe_name>_<category>"``.
--- Do not deviate from this -- the translations will not work otherwise.
 --
--- You will then need to return a table of helptexts by map object type. It looks like this:
+-- You will need to return a table of helptexts by map object type and category. It looks like this:
 --
 -- .. code-block:: lua
 --
---    local warectxt = "atlanteans_ware"
---    return {
---       wares = {
---          atlanteans_bread = {
---             -- TRANSLATORS: Helptext for a ware: Bread
---             pgettext(warectxt, "This tasty bread is made in bakeries out of cornmeal, blackroot flour and water.")
+--    push_textdomain("tribes_encyclopedia")
+--    local result = {
+--       buildings {
+--          barbarians_ax_workshop = {
+--             lore = {
+--                -- TRANSLATORS: Lore helptext for a barbarian production site: Ax Workshop
+--                pgettext("barbarians_building", "‘A new warrior’s ax brings forth the best in its wielder – or the worst in its maker.’")
+--             },
+--             lore_author = {
+--                -- TRANSLATORS: Lore author helptext for a barbarian production site: Ax Workshop
+--                pgettext("barbarians_building", "An old Barbarian proverb<br> meaning that you need to take some risks sometimes.")
+--             },
+--             purpose = {
+--                -- TRANSLATORS: Purpose helptext for a barbarian production site: Ax Workshop
+--                pgettext("barbarians_building", "Produces axes, sharp axes and broad axes.")
+--             },
+--             note = {
+--                -- TRANSLATORS: Note helptext for a barbarian production site: Ax Workshop
+--                pgettext("barbarians_building", "The Barbarian ax workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualification for the worker.")
+--             },
+--             performance = {
+--                -- TRANSLATORS: Performance helptext for a barbarian production site: Ax Workshop, part 1
+--                pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(ngettext("%d second", "%d seconds", 57):bformat(57)),
+--                -- TRANSLATORS: Performance helptext for a barbarian production site: Ax Workshop, part 2
+--                pgettext("barbarians_building", "All three weapons take the same time for making, but the required raw materials vary.")
+--             }
 --          },
---          bread_paddle = {
---             -- TRANSLATORS: Helptext for a ware: Bread Paddle
---             pgettext(warectxt, "The bread paddle is the tool of the baker, each baker needs one."),
---             -- TRANSLATORS: Helptext for a ware: Bread Paddle
---             pgettext(warectxt, "Bread paddles are produced by the toolsmith.")
---          },
+--          ...
+--       },
+--       immovables {
+--          ...
+--       },
+--       wares {
+--          ...
+--       },
+--       workers {
 --          ...
 --       }
 --    }
+--    pop_textdomain()
+--    return result
 --
--- To make life easier for our translators, you can split long helptexts into multiple entries as with the ``bread_paddle`` example above.
--- The helptexts are then joined by the engine.
--- In our example, we will get ``"The bread paddle is the tool of the baker, each baker needs one. Bread paddles are produced by the toolsmith."``
+-- * All units should have a ``purpose`` helptext, but this it not enforced by the engine. In fact, the game will still run if ``buildings``, ``immovables``, ``wares`` and ``workers`` are all empty. However, these 4 table keys and their subtables do need to be present (except in custom scenario tribes).
+-- * ``lore``, ``lore_author`` and ``note`` are only used by buildings, ``performance`` is only used by training site and production site buildings.
+-- * We recommend that you use ``pgettext`` to disambiguate the strings for the different tribes.
+-- * To make life easier for our translators, you can split long helptexts into multiple entries as with the ``performance`` example above.
+--   The helptexts are then joined by the engine.
+--   In our example, we will get *"If all needed wares are delivered in time, this building can produce each type of ax in about 57 seconds on average. All three weapons take the same time for making, but the required raw materials vary."*
 
--- NOCOM update documentation + document scenario helptexts
 local buildingctxt = "atlanteans_building"
 local warectxt = "atlanteans_ware"
 local workerctxt = "atlanteans_worker"
