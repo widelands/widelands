@@ -1327,6 +1327,146 @@ local result = {
          -- TRANSLATORS: Helptext for a frisian worker: Baker
          purpose = { pgettext(workerctxt, "Bakes bread for miners and soldiers.") }
       },
+      frisians_baker_master = {
+         -- TRANSLATORS: Helptext for a frisian worker: Master Baker
+         purpose = { pgettext(workerctxt, "This baker is skilled enough to bake bread sweetened with honey.") }
+      },
+      frisians_beekeeper = {
+         -- TRANSLATORS: Helptext for a frisian worker: Beekeeper
+         purpose = { pgettext(workerctxt, "Lets bees swarm over flowers, then gathers the honey.") }
+      },
+      frisians_berry_farmer = {
+         -- TRANSLATORS: Helptext for a frisian worker: Berry Farmer
+         purpose = { pgettext(workerctxt, "Plants berry bushes.") }
+      },
+      frisians_blacksmith = {
+         -- TRANSLATORS: Helptext for a frisian worker: Blacksmith
+         purpose = { pgettext(workerctxt, "Produces weapons and armor for soldiers and tools for workers.") }
+      },
+      frisians_blacksmith_master = {
+         -- TRANSLATORS: Helptext for a frisian worker: Master Blacksmith
+         purpose = { pgettext(workerctxt, "Produces the best weapons and armor for soldiers and tools for workers.") }
+      },
+      frisians_brewer = {
+         -- TRANSLATORS: Helptext for a frisian worker: Brewer
+         purpose = { pgettext(workerctxt, "Brews beer.") }
+      },
+      frisians_brewer_master = {
+         -- TRANSLATORS: Helptext for a frisian worker: Master Brewer
+         purpose = { pgettext(workerctxt, "Brews beer and mead.") }
+      },
+      frisians_brickmaker = {
+         -- TRANSLATORS: Helptext for a frisian worker: Brickmaker
+         purpose = { pgettext(workerctxt, "Burns bricks out of clay and granite.") }
+      },
+      frisians_builder = {
+         -- TRANSLATORS: Helptext for a frisian worker: Builder
+         purpose = { pgettext(workerctxt, "Works at construction sites to raise new buildings.") }
+      },
+      frisians_carrier = {
+         -- TRANSLATORS: Helptext for a frisian worker: Carrier
+         purpose = { pgettext(workerctxt, "Carries items along your roads.") }
+      },
+      frisians_charcoal_burner = {
+         -- TRANSLATORS: Helptext for a frisian worker: Charcoal Burner
+         purpose = { pgettext(workerctxt, "Burns logs and clay to produce coal.") }
+      },
+      frisians_claydigger = {
+         -- TRANSLATORS: Helptext for a frisian worker: Clay Digger
+         purpose = { pgettext(workerctxt, "Makes clay out of mud and water.") }
+      },
+      frisians_farmer = {
+         -- TRANSLATORS: Helptext for a frisian worker: Farmer
+         purpose = { pgettext(workerctxt, "Plants fields.") }
+      },
+      frisians_ferry = {
+         -- TRANSLATORS: Helptext for a frisian worker: Ferry
+         purpose = { pgettext(workerctxt, "Ships wares across narrow rivers.") }
+      },
+      frisians_fisher = {
+         -- TRANSLATORS: Helptext for a frisian worker: Fisher
+         purpose = { pgettext(workerctxt, "Catches fish in the sea.") }
+      },
+      frisians_forester = {
+         -- TRANSLATORS: Helptext for a frisian worker: Forester
+         purpose = { pgettext(workerctxt, "Plants trees.") }
+      },
+      frisians_fruit_collector = {
+         -- TRANSLATORS: Helptext for a frisian worker: Fruit Collector
+         purpose = { pgettext(workerctxt, "Gathers berries.") }
+      },
+      frisians_geologist = {
+         -- TRANSLATORS: Helptext for a frisian worker: Geologist
+         purpose = { pgettext(workerctxt, "Discovers resources for mining.") }
+      },
+      frisians_hunter = {
+         -- TRANSLATORS: Helptext for a frisian worker: Hunter
+         purpose = { pgettext(workerctxt, "The hunter brings fresh, raw meat to the colonists.") }
+      },
+      frisians_landlady = {
+         -- TRANSLATORS: Helptext for a frisian worker: Landlady
+         purpose = { pgettext(workerctxt, "Prepares rations and meals for miners and scouts.") }
+      },
+      frisians_miner = {
+         -- TRANSLATORS: Helptext for a frisian worker: Miner
+         purpose = { pgettext(workerctxt, "Works deep in the mines to obtain coal, iron, gold or granite.") }
+      },
+      frisians_miner_master = {
+         -- TRANSLATORS: Helptext for a frisian worker: Master Miner
+         purpose = { pgettext(workerctxt, "Works deep in the mines to obtain coal, iron, gold or granite.") }
+      },
+      frisians_reed_farmer = {
+         -- TRANSLATORS: Helptext for a frisian worker: Gardener
+         purpose = { pgettext(workerctxt, "Plants and harvests reed fields.") }
+      },
+      frisians_reindeer = {
+         -- TRANSLATORS: Helptext for a frisian worker: Reindeer
+         purpose = { pgettext(workerctxt, "Reindeer help to carry items along busy roads. They are reared in a reindeer farm.") }
+      },
+      frisians_reindeer_breeder = {
+         -- TRANSLATORS: Helptext for a frisian worker: Reindeer Breeder
+         purpose = { pgettext(workerctxt, "Breeds reindeer as carriers and for their fur.") }
+      },
+      frisians_scout = {
+         -- TRANSLATORS: Helptext for a frisian worker: Scout
+         purpose = { pgettext(workerctxt, "Explores unknown territory.") }
+      },
+      frisians_seamstress = {
+         -- TRANSLATORS: Helptext for a frisian worker: Seamstress
+         purpose = { pgettext(workerctxt, "Produces cloth and sews fur garments.") }
+      },
+      frisians_seamstress_master = {
+         -- TRANSLATORS: Helptext for a frisian worker: Master Seamstress
+         purpose = { pgettext(workerctxt, "Sews armor out of fur garments and metal.") }
+      },
+      frisians_shipwright = {
+         -- TRANSLATORS: Helptext for a frisian worker: Shipwright
+         purpose = { pgettext(workerctxt, "Works at the shipyard and constructs new ships.") }
+      },
+      frisians_smelter = {
+         -- TRANSLATORS: Helptext for a frisian worker: Smelter
+         purpose = { pgettext(workerctxt, "Smelts iron and gold at furnaces or recycling centers.") }
+      },
+      frisians_smoker = {
+         -- TRANSLATORS: Helptext for a frisian worker: Smoker
+         purpose = { pgettext(workerctxt, "Refines meat and fish by smoking them.") }
+      },
+      frisians_soldier = {
+         -- TRANSLATORS: Helptext for a frisian worker: Soldier
+         purpose = { pgettext(workerctxt, "Defend and Conquer!") }
+      },
+      frisians_stonemason = {
+         -- TRANSLATORS: Helptext for a frisian worker: Stonemason
+         purpose = { pgettext(workerctxt, "Cuts raw pieces of granite out of rocks in the vicinity.") }
+      },
+      frisians_trainer = {
+         -- TRANSLATORS: Helptext for a frisian worker: Trainer
+         purpose = { pgettext(workerctxt, "Trains the soldiers.") }
+      },
+      frisians_woodcutter = {
+         -- TRANSLATORS: Helptext for a frisian worker: Woodcutter
+         purpose = { pgettext(workerctxt, "Fells trees.") }
+      }
    }
 }
 pop_textdomain()
