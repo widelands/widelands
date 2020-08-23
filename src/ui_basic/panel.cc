@@ -220,9 +220,7 @@ int Panel::do_run() {
 
 	std::list<NoteDelayedCheck> checks;
 	auto subscriber = Notifications::subscribe<NoteDelayedCheck>(
-	   [&checks](const NoteDelayedCheck& note) {
-	      checks.push_back(note);
-	   });
+	   [&checks](const NoteDelayedCheck& note) { checks.push_back(note); });
 	auto handle_checks = [&checks]() {
 		while (!checks.empty()) {
 			checks.front().run();

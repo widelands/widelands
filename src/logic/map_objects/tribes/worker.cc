@@ -1064,20 +1064,19 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
 			const uint32_t time = game.get_gametime();
 			Notifications::publish(NoteDelayedCheck([this, &game, &ri, time, rdescr, position]() {
+				const std::string rt_description = as_mapobject_message(
+				   ri.descr().name(), g_gr->images().get(rdescr->representative_image())->width(),
+				   _("A geologist found resources."));
 
-			const std::string rt_description = as_mapobject_message(
-			   ri.descr().name(), g_gr->images().get(rdescr->representative_image())->width(),
-			   _("A geologist found resources."));
-
-			//  We should add a message to the player's message queue - but only,
-			//  if there is not already a similar one in list.
-			get_owner()->add_message_with_timeout(
-			   game,
-			   std::unique_ptr<Message>(new Message(Message::Type::kGeologists, time,
-			                                        rdescr->descname(), rdescr->representative_image(),
-			                                        ri.descr().descname(), rt_description, position,
-			                                        serial_, rdescr->name())),
-			   rdescr->timeout_ms(), rdescr->timeout_radius());
+				//  We should add a message to the player's message queue - but only,
+				//  if there is not already a similar one in list.
+				get_owner()->add_message_with_timeout(
+				   game,
+				   std::unique_ptr<Message>(
+				      new Message(Message::Type::kGeologists, time, rdescr->descname(),
+				                  rdescr->representative_image(), ri.descr().descname(), rt_description,
+				                  position, serial_, rdescr->name())),
+				   rdescr->timeout_ms(), rdescr->timeout_radius());
 			}));
 		}
 	}

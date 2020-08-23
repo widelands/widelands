@@ -893,18 +893,20 @@ void Building::send_message(Game& game,
 		return;
 	}
 
-	Notifications::publish(NoteDelayedCheck([this, &game, msgtype,
-			throttle_time, throttle_radius, link_to_building_lifetime, title, icon_filename, heading, description]() {
+	Notifications::publish(NoteDelayedCheck([this, &game, msgtype, throttle_time, throttle_radius,
+	                                         link_to_building_lifetime, title, icon_filename,
+	                                         heading, description]() {
 		const std::string rt_description =
 		   as_mapobject_message(descr().name(), descr().representative_image()->width(), description,
-			                    &owner().get_playercolor());
+		                        &owner().get_playercolor());
 
 		std::unique_ptr<Message> msg(new Message(msgtype, game.get_gametime(), title, icon_filename,
-			                                     heading, rt_description, get_position(),
-			                                     (link_to_building_lifetime ? serial_ : 0)));
+		                                         heading, rt_description, get_position(),
+		                                         (link_to_building_lifetime ? serial_ : 0)));
 
 		if (throttle_time) {
-			get_owner()->add_message_with_timeout(game, std::move(msg), throttle_time, throttle_radius);
+			get_owner()->add_message_with_timeout(
+			   game, std::move(msg), throttle_time, throttle_radius);
 		} else {
 			get_owner()->add_message(game, std::move(msg));
 		}
