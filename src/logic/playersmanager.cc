@@ -73,7 +73,7 @@ Player* PlayersManager::add_player(PlayerNumber const player_number,
 			number_of_players_--;
 		}
 	}
-	const TribeDescr* player_tribe =
+	const TribeDescr* player_tribe = tribe.empty() ? nullptr :
 	   egbase_.tribes().get_tribe_descr(egbase_.mutable_tribes()->load_tribe(tribe));
 	if (player_tribe == nullptr && (is_a(Game, &egbase_) || !tribe.empty())) {
 		// empty (= random) tribe is allowed in editor

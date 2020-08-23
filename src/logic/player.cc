@@ -150,16 +150,6 @@ Player::Player(EditorGameBase& the_egbase,
 
 	init_statistics();
 
-	// Allow workers that the player's tribe has.
-	for (DescriptionIndex worker_index : tribe().workers()) {
-		allow_worker_type(worker_index, true);
-	}
-
-	// Allow buildings that the player's tribe has
-	for (DescriptionIndex building_index : tribe().buildings()) {
-		allow_building_type(building_index, true);
-	}
-
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
 	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
@@ -178,8 +168,18 @@ Player::Player(EditorGameBase& the_egbase,
 		   }
 	   });
 
-	// Populating remaining_shipnames vector
 	if (tribe_descr) {
+		// Allow workers that the player's tribe has.
+		for (DescriptionIndex worker_index : tribe().workers()) {
+			allow_worker_type(worker_index, true);
+		}
+
+		// Allow buildings that the player's tribe has
+		for (DescriptionIndex building_index : tribe().buildings()) {
+			allow_building_type(building_index, true);
+		}
+
+		// Populating remaining_shipnames vector
 		for (const auto& shipname : tribe_descr->get_ship_names()) {
 			remaining_shipnames_.push_back(shipname);
 		}
@@ -1726,6 +1726,11 @@ void Player::init_statistics() {
 	ware_consumptions_.clear();
 	ware_productions_.clear();
 	ware_stocks_.clear();
+
+	if (!tribe_) {
+		// in the editor, we may not have a tribe yet
+		return;
+	}
 
 	for (DescriptionIndex ware_index : tribe().wares()) {
 		current_produced_statistics_.insert(std::make_pair(ware_index, 0U));
