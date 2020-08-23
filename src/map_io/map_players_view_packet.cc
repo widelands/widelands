@@ -56,8 +56,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		const Widelands::Map& map = egbase.map();
-		if (packet_version >= 3) {
+		const Map& map = egbase.map();
+		if (packet_version == kCurrentPacketVersion) {
 			const PlayerNumber nr_players = fr.unsigned_8();
 			if (map.get_nrplayers() != nr_players) {
 				throw wexception("Wrong number of players. Expected %d but read %d from packet\n",
@@ -81,7 +81,6 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				for (unsigned i = 0; i < no_revealed_fields; ++i) {
 					const MapIndex revealed_index = fr.unsigned_32();
 					player->revealed_fields_.insert(revealed_index);
-					seen_fields.insert(&player->fields_[revealed_index]);
 					player->rediscover_node(map, map.get_fcoords(map[revealed_index]));
 				}
 
@@ -106,7 +105,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				for (MapIndex m = 0; m < no_of_fields; ++m) {
 					Player::Field& f = player->fields_[m];
 					f.seeing = static_cast<Widelands::SeeUnseeNode>(stoi(field_vector[m]));
-					if (f.seeing != SeeUnseeNode::kUnexplored) {
+					if (f.seeing == SeeUnseeNode::kPreviouslySeen) {
 						seen_fields.insert(&f);
 					}
 				}
@@ -447,7 +446,6 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 		fw.unsigned_32(player->revealed_fields_.size());
 		for (const MapIndex& m : player->revealed_fields_) {
 			fw.unsigned_32(m);
-			seen_fields.insert(&player->fields_[m]);
 		}
 
 		// Write numerical field infos as combined strings to reduce number of hard disk write
@@ -459,13 +457,13 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			for (MapIndex m = 0; m < upper_bound; ++m) {
 				const Player::Field& f = player->fields_[m];
 				oss << static_cast<unsigned>(f.seeing) << "|";
-				if (f.seeing != SeeUnseeNode::kUnexplored) {
+				if (f.seeing == SeeUnseeNode::kPreviouslySeen) {
 					seen_fields.insert(&f);
 				}
 			}
 			const Player::Field& f = player->fields_[upper_bound];
 			oss << static_cast<unsigned>(f.seeing);
-			if (f.seeing != SeeUnseeNode::kUnexplored) {
+			if (f.seeing == SeeUnseeNode::kPreviouslySeen) {
 				seen_fields.insert(&f);
 			}
 			fw.c_string(oss.str());

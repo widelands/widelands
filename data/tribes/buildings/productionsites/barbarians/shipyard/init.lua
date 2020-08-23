@@ -1,11 +1,5 @@
 dirname = path.dirname(__file__)
 
-animations = {}
-add_animation(animations, "idle", dirname, "idle", { 62, 48 })
-add_animation(animations, "build", dirname, "build", { 62, 48 })
-add_animation(animations, "unoccupied", dirname, "unoccupied", { 62, 48 })
-add_animation(animations, "working", dirname, "working", { 62, 48 })
-
 tribes:new_productionsite_type {
    msgctxt = "barbarians_building",
    name = "barbarians_shipyard",
@@ -28,7 +22,21 @@ tribes:new_productionsite_type {
       granite = 2
    },
 
-   animations = animations,
+   animation_directory = dirname,
+   animations = {
+      idle = {
+         hotspot = { 62, 48 },
+      },
+      build = {
+         hotspot = { 62, 48 },
+      },
+      unoccupied = {
+         hotspot = { 62, 48 },
+      },
+      working = {
+         hotspot = { 62, 48 },
+      },
+   },
 
    aihints = {
       needs_water = true,
