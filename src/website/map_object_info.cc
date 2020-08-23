@@ -41,10 +41,15 @@ using namespace Widelands;
 
 namespace {
 
-const std::string& get_helptext(const MapObjectDescr& mo) {
+std::string get_helptext(const MapObjectDescr& mo, const TribeDescr& tribe) {
+	if (!mo.has_helptext(tribe.name())) {
+		return "";
+	}
 	const std::map<std::string, std::string>& helptexts = mo.get_helptexts(tribe.name());
-	auto it = std::find(helptexts.begin(), helptexts.end(), "purpose");
-	return it != helptexts.end() ? *it : "";
+	if (helptexts.count("purpose")) {
+		return helptexts.at("purpose");
+	}
+	return "";
 }
 
 /*
@@ -53,7 +58,7 @@ const std::string& get_helptext(const MapObjectDescr& mo) {
  ==========================================================
  */
 
-void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* out_filesystem) {
+void write_buildings(const TribeDescr& tribe, FileSystem* out_filesystem) {
 	log("\n==================\nWriting buildings:\n==================\n");
 
 	// We don't want any partially finished buildings
@@ -159,7 +164,7 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 		}
 
 		// Helptext
-		json_building->add_string("helptext", get_helptext(building));
+		json_building->add_string("helptext", get_helptext(building, tribe));
 	}
 
 	json->write_to_file(
@@ -173,7 +178,7 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
  ==========================================================
  */
 
-void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* out_filesystem) {
+void write_wares(const TribeDescr& tribe, FileSystem* out_filesystem) {
 	log("\n===============\nWriting wares:\n===============\n");
 
 	std::unique_ptr<JSON::Element> json(new JSON::Element());
@@ -185,7 +190,7 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* ou
 		json_ware->add_string("name", ware.name());
 		json_ware->add_string("descname", ware.descname());
 		json_ware->add_string("icon", ware.icon_filename());
-		json_ware->add_string("helptext", get_helptext(ware));
+		json_ware->add_string("helptext", get_helptext(ware, tribe));
 	}
 
 	json->write_to_file(
@@ -199,7 +204,7 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* ou
  ==========================================================
  */
 
-void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* out_filesystem) {
+void write_workers(const TribeDescr& tribe, FileSystem* out_filesystem) {
 	log("\n================\nWriting workers:\n================\n");
 
 	std::unique_ptr<JSON::Element> json(new JSON::Element());
@@ -211,7 +216,7 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* 
 		json_worker->add_string("name", worker.name());
 		json_worker->add_string("descname", worker.descname());
 		json_worker->add_string("icon", worker.icon_filename());
-		json_worker->add_string("helptext", get_helptext(worker));
+		json_worker->add_string("helptext", get_helptext(worker, tribe));
 
 		if (worker.becomes() != INVALID_INDEX) {
 			const WorkerDescr& becomes = *tribe.get_worker_descr(worker.becomes());
@@ -264,9 +269,9 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 		   *out_filesystem, (boost::format("tribe_%s.json") % tribe_info.name).str().c_str());
 
 		const TribeDescr& tribe = *tribes.get_tribe_descr(tribes.tribe_index(tribe_info.name));
-		write_buildings(tribe, egbase, out_filesystem);
-		write_wares(tribe, egbase, out_filesystem);
-		write_workers(tribe, egbase, out_filesystem);
+		write_buildings(tribe, out_filesystem);
+		write_wares(tribe, out_filesystem);
+		write_workers(tribe, out_filesystem);
 	}
 
 	json->write_to_file(*out_filesystem, "tribes.json");

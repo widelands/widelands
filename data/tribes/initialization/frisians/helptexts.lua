@@ -923,25 +923,9 @@ local result = {
          -- TRANSLATORS: Helptext for a tribe immovable: Blackroot Field
          purpose = { _("This field is growing.") }
       },
-      cornfield_harvested = {
-         -- TRANSLATORS: Helptext for a tribe immovable: Corn Field
-         purpose = { _("This field has been harvested.") }
-      },
       cornfield_medium = {
          -- TRANSLATORS: Helptext for a tribe immovable: Corn Field
          purpose = { _("This field is growing.") }
-      },
-      cornfield_ripe = {
-         -- TRANSLATORS: Helptext for a tribe immovable: Corn Field
-         purpose = { _("This field is ready for harvesting.") }
-      },
-      cornfield_small = {
-         -- TRANSLATORS: Helptext for a tribe immovable: Corn Field
-         purpose = { _("This field is growing.") }
-      },
-      cornfield_tiny = {
-         -- TRANSLATORS: Helptext for a tribe immovable: Corn Field
-         purpose = { _("This field has just been planted.") }
       },
       destroyed_building = {
          -- TRANSLATORS: Helptext for a tribe immovable: Destroyed Building
