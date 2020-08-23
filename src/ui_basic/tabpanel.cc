@@ -155,10 +155,10 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 				handle = false;
 				break;  // not handled
 			}
-			if (handle) {
-				activate(selected_idx);
-				return true;
-			}
+		}
+		if (handle) {
+			activate(selected_idx);
+			return true;
 		}
 	}
 	return Panel::handle_key(down, code);
