@@ -129,6 +129,8 @@ SpinBox::SpinBox(Panel* const parent,
 	              g_gr->images().get(is_big ? "images/ui_basic/scrollbar_right.png" :
 	                                          "images/ui_basic/scrollbar_up.png"),
 	              _("Increase the value"));
+	sbi_->button_minus->set_can_focus(false);
+	sbi_->button_plus->set_can_focus(false);
 
 	if (is_big) {
 		sbi_->button_ten_minus =
@@ -139,6 +141,8 @@ SpinBox::SpinBox(Panel* const parent,
 		   new Button(box_, "++", 0, 0, 2 * button_height_, button_height_, sbi_->button_style,
 		              g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"),
 		              _("Increase the value by 10"));
+	sbi_->button_ten_minus->set_can_focus(false);
+	sbi_->button_ten_plus->set_can_focus(false);
 
 		sbi_->button_ten_plus->sigclicked.connect(
 		   [this]() { change_value(sbi_->big_step_size); });
