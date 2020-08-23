@@ -525,7 +525,8 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		const uint32_t max = size() - 1;
 		const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
 
-		if ((code.sym >= SDLK_1 && code.sym <= SDLK_9) || (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM))) {
+		if ((code.sym >= SDLK_1 && code.sym <= SDLK_9) ||
+		    (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM))) {
 			// Keys 1-9 directly address the 1st through 9th item in lists with less than 10 entries
 			if (max < 9) {
 				if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {

@@ -141,13 +141,11 @@ SpinBox::SpinBox(Panel* const parent,
 		   new Button(box_, "++", 0, 0, 2 * button_height_, button_height_, sbi_->button_style,
 		              g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"),
 		              _("Increase the value by 10"));
-	sbi_->button_ten_minus->set_can_focus(false);
-	sbi_->button_ten_plus->set_can_focus(false);
+		sbi_->button_ten_minus->set_can_focus(false);
+		sbi_->button_ten_plus->set_can_focus(false);
 
-		sbi_->button_ten_plus->sigclicked.connect(
-		   [this]() { change_value(sbi_->big_step_size); });
-		sbi_->button_ten_minus->sigclicked.connect(
-		   [this]() { change_value(-sbi_->big_step_size); });
+		sbi_->button_ten_plus->sigclicked.connect([this]() { change_value(sbi_->big_step_size); });
+		sbi_->button_ten_minus->sigclicked.connect([this]() { change_value(-sbi_->big_step_size); });
 		sbi_->button_ten_plus->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);
@@ -197,7 +195,8 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 			if (sbi_->button_plus) {
 				change_value(sbi_->step_size);
 				return true;
-			} break;
+			}
+			break;
 
 		// Down and Left behave like clicking the Decrease button
 		case SDLK_KP_2:
@@ -211,7 +210,8 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 			if (sbi_->button_minus) {
 				change_value(-sbi_->step_size);
 				return true;
-			} break;
+			}
+			break;
 
 		// PageUp behaves like clicking the IncreaseFast button (if any)
 		case SDLK_KP_9:
@@ -223,7 +223,8 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 			if (sbi_->button_ten_plus) {
 				change_value(sbi_->big_step_size);
 				return true;
-			} break;
+			}
+			break;
 
 		// PageDown behaves like clicking the DecreaseFast button (if any)
 		case SDLK_KP_3:
@@ -235,7 +236,8 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 			if (sbi_->button_ten_minus) {
 				change_value(-sbi_->big_step_size);
 				return true;
-			} break;
+			}
+			break;
 
 		default:
 			break;
