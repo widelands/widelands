@@ -56,8 +56,12 @@ animations = {
       hotspot = { 16, 31 },
       fps = 20
    },
+   walk = {
+      hotspot = { 16, 31 },
+      fps = 10,
+      directional = true
+   },
 }
-add_directional_animation(animations, "walk", dirname, "walk", {16, 31}, 10)
 
 all_levels_bar = {
    min_health = 0,
@@ -79,6 +83,7 @@ tribes:new_soldier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   animation_directory = dirname,
    animations = animations,
 
    default_target_quantity = 10,
