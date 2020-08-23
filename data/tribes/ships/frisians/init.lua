@@ -8,7 +8,6 @@ tribes:new_ship_type {
    icon = dirname .. "menu.png",
    capacity = 30,
    vision_range = 4,
-   icon = dirname .. "menu.png",
    spritesheets = {
       idle = {
          directory = dirname,

@@ -12,21 +12,6 @@
 
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 89, 86 },
-      fps = 10
-   },
-   sinking = {
-      pictures = path.list_files(dirname .. "sinking_??.png"),
-      hotspot = { 89, 86 },
-      fps = 7
-   }
-}
-add_directional_animation(animations, "sail", dirname, "sail", {89, 86}, 10)
-
-
 -- RST
 -- .. function:: new_ship_type(table)
 --
@@ -58,9 +43,24 @@ tribes:new_ship_type {
    name = "atlanteans_ship",
    -- TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
    descname = pgettext("atlanteans_ship", "Ship"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    capacity = 30,
    vision_range = 4,
-   icon = dirname .. "menu.png",
-   animations = animations,
+
+   animations = {
+      idle = {
+         hotspot = { 89, 86 },
+         fps = 10
+      },
+      sinking = {
+         hotspot = { 89, 86 },
+         fps = 7
+      },
+      sail = {
+         hotspot = { 89, 86 },
+         fps = 10,
+         directional = true
+      }
+   }
 }
