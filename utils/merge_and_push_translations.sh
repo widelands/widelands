@@ -95,6 +95,7 @@ python utils/fix_formatting.py --lua --dir data/txts
 
 # Undo one-liner diffs in po directory - these are pure timestamps with no other content
 set +x
+DIFF_RESULTS=$(git diff --numstat po)
 while IFS= read -r line; do
   row=($(echo $line | tr "\t" "\n"))
 
@@ -104,7 +105,7 @@ while IFS= read -r line; do
       git checkout ${row[2]}
     fi
   fi
-done < <(git diff --numstat po)
+done < $DIFF_RESULTS
 set -x
 
 # Stage changes
