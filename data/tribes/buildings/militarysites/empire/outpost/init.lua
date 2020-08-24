@@ -13,9 +13,9 @@ tribes:new_militarysite_type {
       name = "empire_barrier",
       buildcost = {
          log = 1,
-      planks = 2,
-      granite = 1,
-      marble = 1
+         planks = 2,
+         granite = 1,
+         marble = 1
       },
       return_on_dismantle = {
          planks = 1,

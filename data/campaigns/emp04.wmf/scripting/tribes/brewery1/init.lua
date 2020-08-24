@@ -14,7 +14,7 @@ tribes:new_productionsite_type {
       name = "empire_brewery",
       buildcost = {
          planks = 1,
-      granite = 1
+         granite = 1
       },
       return_on_dismantle = {
       }
@@ -29,7 +29,6 @@ tribes:new_productionsite_type {
       planks = 1,
       granite = 1
    },
-
 
    animations = {
       idle = {

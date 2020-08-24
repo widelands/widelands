@@ -69,9 +69,9 @@ Buildings are defined with Lua functions called ``new_<building_type>_type{table
         buildcost = { log = 2, granite = 1 }
 
 **enhancement**
-    *Optional*. A table defining name of a building that this building can be enhanced to,
-    and its additional build cost and wares that this building will give back to the player
-    when it is dismantled, e.g.::
+    *Optional*. A table defining the name of a building that this building can be enhanced to,
+    and its additional build cost and wares that this enhanced building will give back to the player
+    when it is dismantled. The table contents can be empty. Example::
 
         enhancement = {
            name = "atlanteans_fancy_building",
