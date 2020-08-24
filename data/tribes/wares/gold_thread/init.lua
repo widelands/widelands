@@ -7,12 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Gold Thread"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      atlanteans = 5
-   },
-   preciousness = {
-      atlanteans = 2
-   },
 
    animations = {
       idle = {
