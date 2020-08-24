@@ -32,6 +32,7 @@
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "logic/cmd_queue.h"

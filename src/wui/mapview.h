@@ -23,7 +23,6 @@
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
-#include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/panel.h"
@@ -69,22 +68,11 @@ public:
 		View() : View(Vector2f::zero(), 1.0f) {
 		}
 
-		bool zoom_near(float other_zoom) const {
-			constexpr float epsilon = 1e-5;
-			return std::abs(zoom - other_zoom) < epsilon;
-		}
+		bool zoom_near(float other_zoom) const;
 
-		bool view_near(const View& other) const {
-			constexpr float epsilon = 1e-5;
-			return zoom_near(other.zoom) && std::abs(viewpoint.x - other.viewpoint.x) < epsilon &&
-			       std::abs(viewpoint.y - other.viewpoint.y) < epsilon;
-		}
+		bool view_near(const View& other) const;
 
-		bool view_roughly_near(const View& other) const {
-			return zoom_near(other.zoom) &&
-			       std::abs(viewpoint.x - other.viewpoint.x) < g_gr->get_xres() / 2 &&
-			       std::abs(viewpoint.y - other.viewpoint.y) < g_gr->get_yres() / 2;
-		}
+		bool view_roughly_near(const View& other) const;
 
 		// Mappixel of top-left pixel of this MapView.
 		Vector2f viewpoint;

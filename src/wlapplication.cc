@@ -47,6 +47,7 @@
 #include "editor/editorinteractive.h"
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
