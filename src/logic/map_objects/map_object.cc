@@ -357,8 +357,8 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 				}
 				if (animname == "idle") {
 					anims_.insert(std::make_pair(
-					   animname,
-					   g_animation_manager->load(name_, *anim, basename, animation_directory, anim_type)));
+					   animname, g_animation_manager->load(
+					                name_, *anim, basename, animation_directory, anim_type)));
 				} else {
 					anims_.insert(std::make_pair(
 					   animname,

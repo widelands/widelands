@@ -53,18 +53,20 @@ namespace UI {
  */
 struct Textarea : public Panel {
 public:
-	explicit Textarea(Panel* const parent,
-	                  int32_t x,
-	                  int32_t y,
-	                  uint32_t w,
-	                  uint32_t h,
-	                  const std::string& text = std::string(),
-	                  Align align = UI::Align::kLeft,
-	                  const UI::FontStyleInfo& style = g_style_manager->font_style(FontStyle::kLabel));
-	explicit Textarea(Panel* parent,
-	                  const std::string& text = std::string(),
-	                  Align align = UI::Align::kLeft,
-	                  const UI::FontStyleInfo& style = g_style_manager->font_style(FontStyle::kLabel));
+	explicit Textarea(
+	   Panel* const parent,
+	   int32_t x,
+	   int32_t y,
+	   uint32_t w,
+	   uint32_t h,
+	   const std::string& text = std::string(),
+	   Align align = UI::Align::kLeft,
+	   const UI::FontStyleInfo& style = g_style_manager->font_style(FontStyle::kLabel));
+	explicit Textarea(
+	   Panel* parent,
+	   const std::string& text = std::string(),
+	   Align align = UI::Align::kLeft,
+	   const UI::FontStyleInfo& style = g_style_manager->font_style(FontStyle::kLabel));
 
 	/**
 	 * If fixed_width > 0, the Textarea will not change its width.

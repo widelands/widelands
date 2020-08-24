@@ -340,8 +340,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	   this, "decrease_max_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
 	   UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/ui_basic/scrollbar_left.png"),
 	   (tooltip_format %
-	    g_style_manager->
-	       font_style(UI::FontStyle::kTooltipHeader)
+	    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 	       .as_font_tag(
 	          /** TRANSLATORS: Button tooltip in in a building's wares input queue */
 	          _("Decrease the number of wares you want to be stored here"))
@@ -366,8 +365,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	   UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/ui_basic/scrollbar_right.png"),
 	   (tooltip_format
 
-	    % g_style_manager->
-	         font_style(UI::FontStyle::kTooltipHeader)
+	    % g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 	         .as_font_tag(
 	            /** TRANSLATORS: Button tooltip in a building's wares input queue */
 	            _("Increase the number of wares you want to be stored here"))

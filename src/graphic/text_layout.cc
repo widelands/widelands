@@ -188,20 +188,16 @@ std::string as_heading_with_content(const std::string& header,
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format("<p>%s%s %s</p>") % (is_first ? "" : "<vspace gap=9>") %
-		        g_style_manager->
-		           font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+		        g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		           .as_font_tag(noescape ? header : richtext_escape(header)) %
-		        g_style_manager->
-		           font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		        g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 		           .as_font_tag(noescape ? content : richtext_escape(content)))
 		   .str();
 	case UI::PanelStyle::kWui:
 		return (boost::format("<p>%s%s %s</p>") % (is_first ? "" : "<vspace gap=6>") %
-		        g_style_manager->
-		           font_style(UI::FontStyle::kWuiInfoPanelHeading)
+		        g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelHeading)
 		           .as_font_tag(noescape ? header : richtext_escape(header)) %
-		        g_style_manager->
-		           font_style(UI::FontStyle::kWuiInfoPanelParagraph)
+		        g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelParagraph)
 		           .as_font_tag(noescape ? content : richtext_escape(content)))
 		   .str();
 	}
@@ -212,14 +208,12 @@ std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_fir
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format("<p>%s%s</p>") % (is_first ? "" : "<vspace gap=9>") %
-		        g_style_manager->
-		           font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+		        g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		           .as_font_tag(richtext_escape(txt)))
 		   .str();
 	case UI::PanelStyle::kWui:
 		return (boost::format("<p>%s%s</p>") % (is_first ? "" : "<vspace gap=6>") %
-		        g_style_manager->
-		           font_style(UI::FontStyle::kWuiInfoPanelHeading)
+		        g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelHeading)
 		           .as_font_tag(richtext_escape(txt)))
 		   .str();
 	}
@@ -230,14 +224,12 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format("<p><vspace gap=2>%s</p>") %
-		        g_style_manager->
-		           font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		        g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 		           .as_font_tag(richtext_escape(txt)))
 		   .str();
 	case UI::PanelStyle::kWui:
 		return (boost::format("<p><vspace gap=2>%s</p>") %
-		        g_style_manager->
-		           font_style(UI::FontStyle::kWuiInfoPanelParagraph)
+		        g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelParagraph)
 		           .as_font_tag(richtext_escape(txt)))
 		   .str();
 	}

@@ -60,7 +60,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		   known ? d->get_animation("build", nullptr) : d->get_unoccupied_animation();
 		// If there is no build animation, we use only the first frame or we
 		// would get many build steps with almost the same image...
-		const uint32_t nrframes = known ? g_animation_manager->get_animation(anim_idx).nr_frames() : 1;
+		const uint32_t nrframes =
+		   known ? g_animation_manager->get_animation(anim_idx).nr_frames() : 1;
 		assert(nrframes);
 		*tf += nrframes;
 		anims->push_back(std::make_pair(anim_idx, nrframes));
@@ -175,7 +176,8 @@ ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
 
 void ConstructionSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = g_style_manager->color_tag((boost::format(_("%i%% built")) % percent).str(),
+	*s =
+	   g_style_manager->color_tag((boost::format(_("%i%% built")) % percent).str(),
 	                              g_style_manager->building_statistics_style().construction_color());
 }
 

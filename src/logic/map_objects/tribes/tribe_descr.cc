@@ -265,7 +265,7 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 			std::unique_ptr<LuaTable> animation_table = animations_table.get_table(directional_name);
 			*id =
 			   g_animation_manager->load(name_ + std::string("_") + directional_name, *animation_table,
-			                           directional_name, animation_directory, animation_type);
+			                             directional_name, animation_directory, animation_type);
 		}
 	};
 	// Frontier and flag animations can be a mix of file and spritesheet animations
@@ -276,14 +276,14 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 		if (animations_table.has_key("frontier")) {
 			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
 			frontier_animation_id_ =
-			   g_animation_manager->load(name_ + std::string("_frontier"), *animation_table, "frontier",
-			                           animation_directory, animation_type);
+			   g_animation_manager->load(name_ + std::string("_frontier"), *animation_table,
+			                             "frontier", animation_directory, animation_type);
 		}
 		if (animations_table.has_key("flag")) {
 			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("flag");
 			flag_animation_id_ =
 			   g_animation_manager->load(name_ + std::string("_flag"), *animation_table, "flag",
-			                           animation_directory, animation_type);
+			                             animation_directory, animation_type);
 		}
 		load_bridge_if_present(
 		   animations_table, animation_directory, animation_type, "e", "normal", &bridges_normal_.e);

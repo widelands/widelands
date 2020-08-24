@@ -32,8 +32,7 @@ std::string as_playercolor(const int16_t playern, const std::string& text) {
 	const RGBColor& playercolor = ((playern >= 0) && playern < kMaxPlayers) ?
 	                                 kPlayerColors[playern] :
 	                                 g_style_manager->font_style(UI::FontStyle::kChatServer).color();
-	return g_style_manager->
-	   font_style(UI::FontStyle::kChatPlayername)
+	return g_style_manager->font_style(UI::FontStyle::kChatPlayername)
 	   .as_font_tag(g_style_manager->color_tag(text, playercolor));
 }
 
@@ -66,7 +65,8 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 			   as_playercolor(
 			      chat_message.playern,
 			      ((boost::format("@%s: %s") % recipient_escaped % sender_escaped).str())) +
-			   g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag(sanitized.substr(3));
+			   g_style_manager->font_style(UI::FontStyle::kChatWhisper)
+			      .as_font_tag(sanitized.substr(3));
 		}
 	} else {
 		// Normal messages handling
@@ -74,7 +74,8 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 			message = message =
 			   as_playercolor(
 			      chat_message.playern, (chat_message.sender.empty() ? "***" : sender_escaped)) +
-			   g_style_manager->font_style(UI::FontStyle::kChatMessage).as_font_tag(sanitized.substr(3));
+			   g_style_manager->font_style(UI::FontStyle::kChatMessage)
+			      .as_font_tag(sanitized.substr(3));
 		} else if (chat_message.sender.size()) {
 			const std::string sender_formatted =
 			   as_playercolor(chat_message.playern, (boost::format("%s:") % sender_escaped).str());

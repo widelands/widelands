@@ -169,8 +169,7 @@ void SavegameTableReplay::add_columns() {
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
 	game_mode_tooltip += as_listitem(_("H = Multiplayer (Host)"), UI::FontStyle::kTooltip);
 
-	game_mode_tooltip += g_style_manager->
-	                        font_style(UI::FontStyle::kTooltip)
+	game_mode_tooltip += g_style_manager->font_style(UI::FontStyle::kTooltip)
 	                        .as_font_tag(_("Numbers are the number of players."));
 
 	add_column(65,
@@ -230,8 +229,7 @@ void SavegameTableMultiplayer::add_columns() {
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
 	game_mode_tooltip += as_listitem(_("H = Multiplayer (Host)"), UI::FontStyle::kTooltip);
 
-	game_mode_tooltip += g_style_manager->
-	                        font_style(UI::FontStyle::kTooltip)
+	game_mode_tooltip += g_style_manager->font_style(UI::FontStyle::kTooltip)
 	                        .as_font_tag(_("Numbers are the number of players."));
 
 	add_column(65,

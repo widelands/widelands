@@ -552,7 +552,8 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 	std::vector<Widelands::DescriptionIndex>::iterator j;
 	Widelands::TribeDescr::WaresOrder order = tribe.wares_order();
 
-	const UI::WareInfoStyleInfo& style = g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
+	const UI::WareInfoStyleInfo& style =
+	   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
 
 	for (i = order.begin(); i != order.end(); ++i) {
 		for (j = i->begin(); j != i->end(); ++j) {

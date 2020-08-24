@@ -504,7 +504,7 @@ void Immovable::draw_construction(const uint32_t gametime,
 	do_draw_info(
 	   info_to_draw, descr().descname(),
 	   g_style_manager->color_tag((boost::format(_("%i%% built")) % (100 * done / total)).str(),
-	                            g_style_manager->building_statistics_style().construction_color()),
+	                              g_style_manager->building_statistics_style().construction_color()),
 	   point_on_dst, scale, dst);
 }
 

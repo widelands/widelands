@@ -230,8 +230,7 @@ void AttackBox::init() {
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(
 		   (tooltip_format %
-		    g_style_manager->
-		       font_style(UI::FontStyle::kTooltipHeader)
+		    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 		       .as_font_tag(_("Click on a soldier to remove him from the list of attackers")) %
 		    as_listitem(
 		       _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kTooltip) %
@@ -247,8 +246,7 @@ void AttackBox::init() {
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(
 		   (tooltip_format %
-		    g_style_manager->
-		       font_style(UI::FontStyle::kTooltipHeader)
+		    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 		       .as_font_tag(_("Click on a soldier to add him to the list of attackers")) %
 		    as_listitem(
 		       _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kTooltip) %
