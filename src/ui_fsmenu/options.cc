@@ -294,7 +294,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	for (int modes = 0; modes < SDL_GetNumDisplayModes(0); ++modes) {
 		SDL_DisplayMode mode;
 		SDL_GetDisplayMode(0, modes, &mode);
-		if (800 <= mode.w && 600 <= mode.h &&
+		if (kMinimumResolutionW <= mode.w && kMinimumResolutionH <= mode.h &&
 		    (SDL_BITSPERPIXEL(mode.format) == 32 || SDL_BITSPERPIXEL(mode.format) == 24)) {
 			ScreenResolution this_res = {
 			   mode.w, mode.h, static_cast<int32_t>(SDL_BITSPERPIXEL(mode.format))};
@@ -625,7 +625,7 @@ void OptionsCtrl::handle_menu() {
 	}
 	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
-		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres);
+		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
 		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
 		opt_dialog_.reset(new FullscreenMenuOptions(options_struct(active_tab)));
 		handle_menu();  // Restart general options menu
@@ -635,8 +635,8 @@ void OptionsCtrl::handle_menu() {
 OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	OptionsStruct opt;
 	// Interface options
-	opt.xres = opt_section_.get_int("xres", DEFAULT_RESOLUTION_W);
-	opt.yres = opt_section_.get_int("yres", DEFAULT_RESOLUTION_H);
+	opt.xres = opt_section_.get_int("xres", kDefaultResolutionW);
+	opt.yres = opt_section_.get_int("yres", kDefaultResolutionH);
 	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
 	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
 	opt.maxfps = opt_section_.get_int("maxfps", 25);

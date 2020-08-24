@@ -49,10 +49,10 @@ tribes:new_productionsite_type {
       main = {
          descname = "brewing beer",
          actions = {
-            "sleep=30000",
+            "sleep=duration:30s",
             "return=skipped unless economy needs beer",
             "consume=water:3 wheat",
-            "playsound=sound/empire/beerbubble 180",
+            "playsound=sound/empire/beerbubble priority:40% allow_multiple",
             "animate=working duration:30s",
             "produce=beer"
          }
