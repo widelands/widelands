@@ -8,7 +8,22 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_honey_bread_bakery",
+
+   enhancement = {
+      name = "frisians_honey_bread_bakery",
+      buildcost = {
+         brick = 3,
+         log = 3,
+         granite = 1,
+         reed = 1
+      },
+      return_on_dismantle = {
+         brick = 2,
+         granite = 1,
+         log = 1,
+         reed = 2
+      }
+   },
 
    buildcost = {
       brick = 3,

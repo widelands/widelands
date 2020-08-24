@@ -8,7 +8,22 @@ tribes:new_militarysite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-   enhancement = "barbarians_citadel",
+
+   enhancement = {
+      name = "barbarians_citadel",
+      buildcost = {
+         blackwood = 9,
+         log = 5,
+         granite = 4,
+         grout = 2
+      },
+      return_on_dismantle = {
+         blackwood = 4,
+         log = 2,
+         granite = 3,
+         grout = 1
+      }
+   },
 
    buildcost = {
       blackwood = 9,

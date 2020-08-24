@@ -28,9 +28,6 @@
 
 namespace Widelands {
 
-Buildcost::Buildcost() : std::map<DescriptionIndex, uint8_t>() {
-}
-
 Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Tribes& tribes)
    : std::map<DescriptionIndex, uint8_t>() {
 	for (const std::string& warename : table->keys<std::string>()) {

@@ -20,16 +20,6 @@ tribes:new_militarysite_type {
       planks = 1,
       granite = 1
    },
-   enhancement_cost = {
-      log = 1,
-      planks = 2,
-      granite = 1,
-      marble = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      planks = 1,
-      granite = 1
-   },
 
    animations = {
       idle = {

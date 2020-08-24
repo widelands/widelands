@@ -9,19 +9,6 @@ tribes:new_militarysite_type {
    icon = dirname .. "menu.png",
    size = "big",
 
-   enhancement_cost = {
-      planks = 5,
-      marble_column = 4,
-      marble = 4,
-      granite = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      planks = 2,
-      marble_column = 2,
-      marble = 3,
-      granite = 1
-   },
-
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),

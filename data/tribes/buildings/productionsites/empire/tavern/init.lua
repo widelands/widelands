@@ -8,7 +8,19 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "empire_inn",
+
+   enhancement = {
+      name = "empire_inn",
+      buildcost = {
+         planks = 2,
+         marble = 2,
+         marble_column = 1
+      },
+      return_on_dismantle = {
+         planks = 1,
+         marble = 2
+      }
+   },
 
    buildcost = {
       planks = 2,

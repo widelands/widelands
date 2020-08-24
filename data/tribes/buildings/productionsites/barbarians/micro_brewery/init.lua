@@ -8,7 +8,19 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "barbarians_brewery",
+
+   enhancement = {
+      name = "barbarians_brewery",
+      buildcost = {
+         log = 3,
+         granite = 1,
+         reed = 1
+      },
+      return_on_dismantle = {
+         log = 1,
+         granite = 1
+      }
+   },
 
    buildcost = {
       log = 3,

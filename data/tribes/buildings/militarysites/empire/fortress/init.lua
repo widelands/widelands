@@ -8,7 +8,22 @@ tribes:new_militarysite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-   enhancement = "empire_castle",
+
+   enhancement = {
+      name = "empire_castle",
+      buildcost = {
+         planks = 5,
+         marble_column = 4,
+         marble = 4,
+         granite = 2
+      },
+      return_on_dismantle = {
+         planks = 2,
+         marble_column = 2,
+         marble = 3,
+         granite = 1
+      }
+   },
 
    buildcost = {
       planks = 5,

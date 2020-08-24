@@ -9,7 +9,17 @@ tribes:new_militarysite_type {
    icon = dirname .. "menu.png",
    size = "small",
    vision_range = 14,
-   enhancement = "frisians_wooden_tower_high",
+
+   enhancement = {
+      name = "frisians_wooden_tower_high",
+      buildcost = {
+         log = 2,
+         reed = 1
+      },
+      return_on_dismantle = {
+         log = 1,
+      }
+   },
 
    buildcost = {
       log = 3,

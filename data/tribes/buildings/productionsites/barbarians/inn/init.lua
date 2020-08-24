@@ -8,16 +8,17 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "barbarians_big_inn",
 
-   enhancement_cost = {
-      log = 2,
-      grout = 2,
-      reed = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      log = 1,
-      grout = 1
+   enhancement = {
+      name = "barbarians_big_inn",
+      buildcost = {
+         log = 1,
+         grout = 3,
+         reed = 2
+      },
+      return_on_dismantle = {
+         grout = 2
+      }
    },
 
    animations = {

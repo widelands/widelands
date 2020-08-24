@@ -8,7 +8,17 @@ tribes:new_militarysite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
-   enhancement = "empire_sentry",
+
+   enhancement = {
+      name = "empire_sentry",
+      buildcost = {
+         planks = 1,
+         granite = 1
+      },
+      return_on_dismantle = {
+         granite = 1
+      }
+   },
 
    buildcost = {
       log = 1,

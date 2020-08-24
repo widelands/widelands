@@ -9,19 +9,6 @@ tribes:new_militarysite_type {
    icon = dirname .. "menu.png",
    size = "big",
 
-   enhancement_cost = {
-      blackwood = 9,
-      log = 5,
-      granite = 4,
-      grout = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      blackwood = 4,
-      log = 2,
-      granite = 3,
-      grout = 1
-   },
-
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),

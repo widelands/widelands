@@ -8,7 +8,25 @@ tribes:new_trainingsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-   enhancement = "empire_colosseum",
+
+   enhancement = {
+      name = "empire_colosseum",
+      buildcost = {
+         planks = 2,
+         granite = 4,
+         marble = 4,
+         cloth = 2,
+         gold = 4,
+         marble_column = 4
+      },
+      return_on_dismantle = {
+         planks = 1,
+         granite = 2,
+         marble = 2,
+         gold = 2,
+         marble_column = 2
+      }
+   },
 
    buildcost = {
       log = 2,

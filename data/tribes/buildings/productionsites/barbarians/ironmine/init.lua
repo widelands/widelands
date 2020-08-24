@@ -8,7 +8,6 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "barbarians_ironmine_deep",
 
    buildcost = {
       log = 4,
@@ -17,6 +16,18 @@ tribes:new_productionsite_type {
    return_on_dismantle = {
       log = 2,
       granite = 1
+   },
+
+   enhancement = {
+      name = "barbarians_ironmine_deep",
+      buildcost = {
+         log = 4,
+         granite = 2
+      },
+      return_on_dismantle = {
+         log = 2,
+         granite = 1
+      }
    },
 
    animations = {

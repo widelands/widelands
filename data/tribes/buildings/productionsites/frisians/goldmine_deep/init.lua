@@ -9,18 +9,6 @@ tribes:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "mine",
 
-   enhancement_cost = {
-      brick = 2,
-      granite = 1,
-      log = 1,
-      reed = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      brick = 1,
-      log = 1,
-      reed = 1
-   },
-
    spritesheets = {
       idle = {
          directory = dirname,

@@ -8,7 +8,21 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_drinking_hall",
+
+   enhancement = {
+      name = "frisians_drinking_hall",
+      buildcost = {
+         brick = 1,
+         granite = 2,
+         log = 1,
+         reed = 1
+      },
+      return_on_dismantle = {
+         brick = 1,
+         granite = 1,
+         reed = 1
+      }
+   },
 
    buildcost = {
       brick = 3,

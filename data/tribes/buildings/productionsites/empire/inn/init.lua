@@ -9,16 +9,6 @@ tribes:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "medium",
 
-   enhancement_cost = {
-      planks = 2,
-      marble = 2,
-      marble_column = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      planks = 1,
-      marble = 2
-   },
-
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),

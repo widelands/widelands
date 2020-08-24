@@ -20,7 +20,6 @@
 --       empire = {
 --          buildings = {
 --             "empire_brewery1",
---             "empire_brewery2",
 --             "empire_well1",
 --             "empire_temple_of_vesta"
 --          }
@@ -69,13 +68,10 @@ return {
    empire = {
       buildings = {
          "empire_brewery1",
-         "empire_brewery2",
          "empire_farm1",
-         "empire_farm2",
          "empire_foresters_house1",
          "empire_lumberjacks_house1",
          "empire_mill1",
-         "empire_mill2",
          "empire_trainingcamp1",
          "empire_well1",
          "empire_temple_of_vesta"
