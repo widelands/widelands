@@ -1,6 +1,8 @@
 tribes = wl.Tribes()
 
-image_dirname = path.dirname(__file__) .. "images/barbarians/"
+image_dirname = path.dirname(__file__) .. "images/"
+
+push_textdomain("tribes")
 
 tribes:new_tribe {
    name = "barbarians",
@@ -36,7 +38,7 @@ tribes:new_tribe {
          image_dirname .. "roadt_normal_01.png",
       },
       waterway = {
-         "tribes/images/barbarians/waterway_0.png",
+         image_dirname .. "waterway_0.png",
       },
    },
 
@@ -71,58 +73,212 @@ tribes:new_tribe {
    wares_order = {
       {
          -- Building Materials
-         "granite",
-         "log",
-         "blackwood",
-         "grout",
-         "reed",
-         "cloth"
+         {
+            name = "granite",
+            default_target_quantity = 20,
+            preciousness = 5
+         },
+         {
+            name = "log",
+            preciousness = 14
+         },
+         {
+            name = "blackwood",
+            default_target_quantity = 40,
+            preciousness = 10
+         },
+         {
+            name = "grout",
+            default_target_quantity = 10,
+            preciousness = 5
+         },
+         {
+            name = "reed",
+            preciousness = 5
+         },
+         {
+            name = "cloth",
+            default_target_quantity = 10,
+            preciousness = 0
+         }
       },
       {
          -- Food
-          "fish",
-          "meat",
-          "water",
-          "wheat",
-          "barbarians_bread",
-          "beer",
-          "beer_strong",
-          "ration",
-          "snack",
-          "meal"
+         {
+            name = "fish",
+            preciousness = 3
+         },
+         {
+            name = "meat",
+            preciousness = 3
+         },
+         {
+            name = "water",
+            preciousness = 8
+         },
+         {
+            name = "wheat",
+            preciousness = 12
+         },
+         {
+            name = "barbarians_bread",
+            default_target_quantity = 20,
+            preciousness = 4
+         },
+         {
+            name = "beer",
+            default_target_quantity = 15,
+            preciousness =  2
+         },
+         {
+            name = "beer_strong",
+            default_target_quantity = 15,
+            preciousness = 2
+         },
+         {
+            name = "ration",
+            default_target_quantity = 20,
+            preciousness = 5
+         },
+         {
+            name = "snack",
+            default_target_quantity = 15,
+            preciousness = 5
+         },
+         {
+            name = "meal",
+            default_target_quantity = 10,
+            preciousness = 5
+         }
       },
       {
          -- Mining
-          "coal",
-          "iron_ore",
-          "iron",
-          "gold_ore",
-          "gold"
+         {
+            name = "coal",
+            default_target_quantity = 20,
+            preciousness = 20
+         },
+         {
+            name = "iron_ore",
+            default_target_quantity = 15,
+            preciousness = 4
+         },
+         {
+            name = "iron",
+            default_target_quantity = 20,
+            preciousness = 4
+         },
+         {
+            name = "gold_ore",
+            default_target_quantity = 15,
+            preciousness = 2
+         },
+         {
+            name = "gold",
+            default_target_quantity = 20,
+            preciousness = 2
+         }
       },
       {
          -- Tools
-          "pick",
-          "felling_ax",
-          "shovel",
-          "hammer",
-          "fishing_rod",
-          "hunting_spear",
-          "scythe",
-          "bread_paddle",
-          "kitchen_tools",
-          "fire_tongs"
+         {
+            name = "pick",
+            default_target_quantity = 2,
+            preciousness = 1
+         },
+         {
+            name = "felling_ax",
+            default_target_quantity = 5,
+            preciousness = 3
+         },
+         {
+            name = "shovel",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "hammer",
+            default_target_quantity = 2,
+            preciousness = 1
+         },
+         {
+            name = "fishing_rod",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "hunting_spear",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "scythe",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "bread_paddle",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "kitchen_tools",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "fire_tongs",
+            default_target_quantity = 1,
+            preciousness = 0,
+         }
       },
       {
          -- Weapons & Armor
-          "ax",
-          "ax_sharp",
-          "ax_broad",
-          "ax_bronze",
-          "ax_battle",
-          "ax_warriors",
-          "helmet",
-          "helmet_mask",
-          "helmet_warhelm"
+         {
+            name = "ax",
+            default_target_quantity = 30,
+            preciousness = 3
+         },
+         {
+            name = "ax_sharp",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "ax_broad",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "ax_bronze",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "ax_battle",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "ax_warriors",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "helmet",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "helmet_mask",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "helmet_warhelm",
+            default_target_quantity = 1,
+            preciousness = 2
+         }
       }
    },
 
@@ -132,54 +288,62 @@ tribes:new_tribe {
    workers_order = {
       {
          -- Carriers
-         "barbarians_carrier",
-         "barbarians_ferry",
-         "barbarians_ox",
-         "barbarians_cattlebreeder"
+         { name = "barbarians_carrier" },
+         { name = "barbarians_ferry" },
+         {
+            name = "barbarians_ox",
+            default_target_quantity = 10,
+            preciousness = 2
+         },
+         { name = "barbarians_cattlebreeder" }
       },
       {
          -- Building Materials
-         "barbarians_stonemason",
-         "barbarians_lumberjack",
-         "barbarians_ranger",
-         "barbarians_builder",
-         "barbarians_lime_burner",
-         "barbarians_gardener",
-         "barbarians_weaver",
-         "barbarians_shipwright"
+         { name = "barbarians_stonemason" },
+         { name = "barbarians_lumberjack" },
+         { name = "barbarians_ranger" },
+         { name = "barbarians_builder" },
+         { name = "barbarians_lime_burner" },
+         { name = "barbarians_gardener" },
+         { name = "barbarians_weaver" },
+         { name = "barbarians_shipwright" }
       },
       {
          -- Food
-         "barbarians_fisher",
-         "barbarians_hunter",
-         "barbarians_gamekeeper",
-         "barbarians_farmer",
-         "barbarians_baker",
-         "barbarians_brewer",
-         "barbarians_brewer_master",
-         "barbarians_innkeeper"
+         { name = "barbarians_fisher" },
+         { name = "barbarians_hunter" },
+         { name = "barbarians_gamekeeper" },
+         { name = "barbarians_farmer" },
+         { name = "barbarians_baker" },
+         { name = "barbarians_brewer" },
+         { name = "barbarians_brewer_master" },
+         { name = "barbarians_innkeeper" }
       },
       {
          -- Mining
-         "barbarians_geologist",
-         "barbarians_miner",
-         "barbarians_miner_chief",
-         "barbarians_miner_master",
-         "barbarians_charcoal_burner",
-         "barbarians_smelter"
+         { name = "barbarians_geologist" },
+         { name = "barbarians_miner" },
+         { name = "barbarians_miner_chief" },
+         { name = "barbarians_miner_master" },
+         { name = "barbarians_charcoal_burner" },
+         { name = "barbarians_smelter" }
       },
       {
          -- Tools
-         "barbarians_blacksmith",
-         "barbarians_blacksmith_master"
+         { name = "barbarians_blacksmith" },
+         { name = "barbarians_blacksmith_master" }
       },
       {
          -- Military
-         "barbarians_recruit",
-         "barbarians_soldier",
-         "barbarians_trainer",
-         "barbarians_helmsmith",
-         "barbarians_scout"
+         { name = "barbarians_recruit" },
+         {
+            name = "barbarians_soldier",
+            default_target_quantity = 10,
+            preciousness = 5
+         },
+         { name = "barbarians_trainer" },
+         { name = "barbarians_helmsmith" },
+         { name = "barbarians_scout" }
       }
    },
 
@@ -335,3 +499,5 @@ tribes:new_tribe {
    ferry = "barbarians_ferry",
    port = "barbarians_port",
 }
+
+pop_textdomain()

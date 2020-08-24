@@ -41,9 +41,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
      ware_hotspot_(table.has_key("ware_hotspot") ?
                       table.get_vector<std::string, int>("ware_hotspot") :
                       Vector2i(0, 15)),
-     default_target_quantity_(table.has_key("default_target_quantity") ?
-                                 table.get_int("default_target_quantity") :
-                                 std::numeric_limits<uint32_t>::max()),
+     default_target_quantity_(kInvalidWare),
      buildable_(table.has_key("buildcost")),
      // Read what the worker can become and the needed experience. If one of the keys is there, the
      // other key must be there too. So, we cross the checks to trigger an exception if this is
@@ -51,9 +49,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
      becomes_(table.has_key("experience") ? tribes.load_worker(table.get_string("becomes")) :
                                             INVALID_INDEX),
      needed_experience_(table.has_key("becomes") ? table.get_int("experience") : INVALID_INDEX),
-     ai_hints_(table.has_key("aihints") ?
-                  new WorkerHints(table.get_string("name"), *table.get_table("aihints")) :
-                  nullptr),
+     ai_hints_(new WareWorkerHints()),
      tribes_(tribes) {
 	if (helptext_script().empty()) {
 		throw GameDataError("Worker %s has no helptext script", name().c_str());
@@ -129,6 +125,18 @@ WorkerDescr::WorkerDescr(const std::string& init_descname, const LuaTable& table
 }
 
 WorkerDescr::~WorkerDescr() {
+}
+
+void WorkerDescr::set_default_target_quantity(int quantity) {
+	if (quantity < 0) {
+		throw GameDataError(
+		   "default_target_quantity %d for worker '%s' must be >=0", quantity, name().c_str());
+	}
+	default_target_quantity_ = quantity;
+}
+
+void WorkerDescr::set_preciousness(const std::string& tribename, int preciousness) {
+	ai_hints_->set_preciousness(name(), tribename, preciousness);
 }
 
 /**

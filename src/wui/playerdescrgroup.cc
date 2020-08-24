@@ -153,7 +153,7 @@ void PlayerDescriptionGroup::update() {
 			}
 			d->btnPlayerType->set_title(title);
 
-			Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(player.tribe);
+			Widelands::TribeBasicInfo info = settings.get_tribeinfo(player.tribe);
 			if (!tribenames_[player.tribe].size()) {
 				// Tribe's localized name
 				tribenames_[player.tribe] = info.descname;
@@ -303,7 +303,7 @@ void PlayerDescriptionGroup::update_playerinit() {
 		}
 	}
 
-	i18n::Textdomain td("tribes");  // for translated initialisation
+	i18n::Textdomain td("tribes");  // for translated initialization
 	for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 		if (tribeinfo.name == player.tribe) {
 			const size_t nr_inits = tribeinfo.initializations.size();
