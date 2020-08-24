@@ -142,7 +142,7 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 	std::unique_ptr<GenericSaveHandler::Error> result;
 	NoteDelayedCheck::instantiate([this, &result]() {
 		try {  // everything additionally in one big try block
-			   // to catch any unexpected errors
+			    // to catch any unexpected errors
 			clear();
 
 			//  Make sure that the current directory exists and is writeable.

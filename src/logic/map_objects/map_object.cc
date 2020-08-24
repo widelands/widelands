@@ -437,9 +437,8 @@ void MapObjectDescr::check_representative_image() {
 const Image* MapObjectDescr::icon() const {
 	if (!icon_filename_.empty()) {
 		const Image* result = nullptr;
-		NoteDelayedCheck::instantiate([this, &result]() {
-			result = g_gr->images().get(icon_filename_);
-		});
+		NoteDelayedCheck::instantiate(
+		   [this, &result]() { result = g_gr->images().get(icon_filename_); });
 		while (!result) {
 			SDL_Delay(20);
 		}

@@ -28,7 +28,8 @@
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
-// Remember the current thread as the initializer thread. Throws an exception if this is already set.
+// Remember the current thread as the initializer thread. Throws an exception if this is already
+// set.
 void set_initializer_thread();
 // Whether the current thread is the initializer thread. If the initializer thread
 // has not been set yet and the argument is `true`, calls `set_initializer_thread()`.
