@@ -143,6 +143,7 @@ Player::Player(EditorGameBase& the_egbase,
      civil_blds_defeated_(0),
      ship_name_counter_(0),
      fields_(nullptr),
+     is_picking_custom_starting_position_(false),
      message_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/message")),
      attack_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack")),
      occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")) {
@@ -190,6 +191,9 @@ Player::~Player() {
 }
 
 void Player::create_default_infrastructure() {
+	if (is_picking_custom_starting_position_) {
+		return;
+	}
 	const Map& map = egbase().map();
 	if (map.get_starting_pos(player_number_)) {
 		const Widelands::TribeBasicInfo::Initialization& initialization =
@@ -235,6 +239,41 @@ void Player::allocate_map() {
 	assert(map.get_width());
 	assert(map.get_height());
 	fields_.reset(new Field[map.max_index()]);
+}
+
+bool Player::pick_custom_starting_position(const Coords& c) {
+	assert(is_picking_custom_starting_position_);
+	if (!get_starting_position_suitability(c)) {
+		return false;
+	}
+	dynamic_cast<Game&>(egbase()).send_player_command(new CmdPickCustomStartingPosition(
+			egbase().get_gametime(), player_number(), c));
+	return true;
+}
+
+void Player::do_pick_custom_starting_position(const Coords& c) {
+	is_picking_custom_starting_position_ = false;
+	egbase().mutable_map()->set_starting_pos(player_number(), c);
+	create_default_infrastructure();
+}
+
+bool Player::get_starting_position_suitability(const Coords& c) const {
+	const Map& map = egbase().map();
+	const FCoords f = map.get_fcoords(c);
+	if (f.field->get_owned_by() != 0 || (f.field->nodecaps() & BUILDCAPS_BIG) != BUILDCAPS_BIG) {
+		return false;
+	}
+	const Widelands::Field& neighbour = map[map.br_n(c)];
+	if (neighbour.get_owned_by() != 0 || !(neighbour.nodecaps() & BUILDCAPS_FLAG)) {
+		return false;
+	}
+	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(f, kMinSpaceAroundPlayers));
+	do {
+		if (mr.location().field->get_owned_by()) {
+			return false;
+		}
+	} while (mr.advance(map));
+	return true;
 }
 
 /**

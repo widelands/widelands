@@ -475,6 +475,14 @@ bool GameClient::is_peaceful_mode() {
 	return d->settings.peaceful;
 }
 
+void GameClient::set_custom_starting_positions(bool c) {
+	d->settings.custom_starting_positions = c;
+}
+
+bool GameClient::get_custom_starting_positions() {
+	return d->settings.custom_starting_positions;
+}
+
 std::string GameClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
@@ -1005,6 +1013,9 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		break;
 	case NETCMD_PEACEFUL_MODE:
 		d->settings.peaceful = packet.unsigned_8();
+		break;
+	case NETCMD_CUSTOM_STARTING_POSITIONS:
+		d->settings.custom_starting_positions = packet.unsigned_8();
 		break;
 	case NETCMD_LAUNCH:
 		if (!d->modal || d->game) {
