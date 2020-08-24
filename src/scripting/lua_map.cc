@@ -704,12 +704,13 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const TribeDescr&
 }
 
 const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tribename) {
-	if (!Widelands::tribe_exists(tribename)) {
+	const Tribes& tribes = get_egbase(L).tribes();
+	if (!tribes.tribe_exists(tribename)) {
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}
 	Notifications::publish(
 	   NoteMapObjectDescription(tribename, NoteMapObjectDescription::LoadType::kObject));
-	const Tribes& tribes = get_egbase(L).tribes();
+
 	return *tribes.get_tribe_descr(tribes.tribe_index(tribename));
 }
 
@@ -3317,7 +3318,7 @@ int LuaWareDescription::consumers(lua_State* L) {
 int LuaWareDescription::is_construction_material(lua_State* L) {
 	std::string tribename = luaL_checkstring(L, -1);
 	const Tribes& tribes = get_egbase(L).tribes();
-	if (Widelands::tribe_exists(tribename)) {
+	if (tribes.tribe_exists(tribename)) {
 		const DescriptionIndex& ware_index = tribes.safe_ware_index(get()->name());
 		int tribeindex = tribes.tribe_index(tribename);
 		lua_pushboolean(L, tribes.get_tribe_descr(tribeindex)->is_construction_material(ware_index));

@@ -953,7 +953,7 @@ int LuaTribes::new_worker_type(lua_State* L) {
    .. method:: new_tribe{table}
 
       Adds a new tribe. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_<tribename>.lua` for detailed
+      the descriptions. See :ref:`lua_tribes_tribes_units` for detailed
       documentation.
 
       :returns: :const:`0`

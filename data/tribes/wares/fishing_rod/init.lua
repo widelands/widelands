@@ -7,14 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Fishing Rod"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      barbarians = 1,
-      empire = 1
-   },
-   preciousness = {
-      barbarians = 0,
-      empire = 0
-   },
 
    animations = {
       idle = {

@@ -25,6 +25,7 @@ addons:
       - sdl2_image
       - sdl2_mixer
       - sdl2_ttf
+      - icu4c
     update: true
 
 before_script:
@@ -57,6 +58,7 @@ jobs:
         apt:
           packages:
             - python-pip
+            - libicu-dev
       install: pip install sphinx
       script: ./.travis.sh documentation
 
