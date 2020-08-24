@@ -138,23 +138,11 @@ struct WareWorkerHints {
 	/// Returns the preciousness of the ware/worker, or kInvalidWare if the tribe doesn't use the
 	/// ware/worker or the worker has no preciousness defined for the tribe.
 	int preciousness(const std::string& tribename) const;
-
-protected:
-	void read_preciousness(const std::string& name, const LuaTable& table);
+	void set_preciousness(const std::string& ware_worker, const std::string& tribename, int p);
 
 private:
 	// tribename, preciousness. No default.
 	std::unordered_map<std::string, int> preciousnesses_;
-};
-
-/// Hints for wares
-struct WareHints : WareWorkerHints {
-	explicit WareHints(const std::string& ware_name, const LuaTable& table);
-};
-
-/// Hints for workers
-struct WorkerHints : WareWorkerHints {
-	explicit WorkerHints(const std::string& worker_name, const LuaTable& table);
 };
 
 #endif  // end of include guard: WL_AI_AI_HINTS_H

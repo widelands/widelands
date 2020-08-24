@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-16 16:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"PO-Revision-Date: 2020-08-19 13:42+0000\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,7 +88,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:354
 msgctxt "shipname"
 msgid "Atlantis"
-msgstr ""
+msgstr "Atlantis"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/atlanteans.lua:356
@@ -100,7 +100,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:358
 msgctxt "shipname"
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/atlanteans.lua:360
@@ -136,7 +136,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:370
 msgctxt "shipname"
 msgid "Cat’s Eye"
-msgstr ""
+msgstr "Cat's Eye"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:372
@@ -291,7 +291,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:421
 msgctxt "shipname"
 msgid "Ostur"
-msgstr ""
+msgstr "Ostur"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:423
@@ -326,7 +326,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:432
 msgctxt "shipname"
 msgid "Spider"
-msgstr ""
+msgstr "Spider"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:434
@@ -338,7 +338,7 @@ msgstr ""
 #: ../../data/tribes/atlanteans.lua:436
 msgctxt "shipname"
 msgid "Sunstone"
-msgstr ""
+msgstr "Sunstone"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/atlanteans.lua:438
@@ -399,7 +399,7 @@ msgstr ""
 #: ../../data/tribes/barbarians.lua:287
 msgctxt "shipname"
 msgid "Beowulf"
-msgstr ""
+msgstr "Beowulf"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/barbarians.lua:289
@@ -416,12 +416,12 @@ msgstr ""
 #: ../../data/tribes/barbarians.lua:292
 msgctxt "shipname"
 msgid "Dellingr"
-msgstr ""
+msgstr "Dellingr"
 
 #: ../../data/tribes/barbarians.lua:293
 msgctxt "shipname"
 msgid "Fulla"
-msgstr ""
+msgstr "Fulla"
 
 #: ../../data/tribes/barbarians.lua:294
 msgctxt "shipname"
@@ -431,7 +431,7 @@ msgstr ""
 #: ../../data/tribes/barbarians.lua:295
 msgctxt "shipname"
 msgid "Hagbard"
-msgstr ""
+msgstr "Hagbard"
 
 #: ../../data/tribes/barbarians.lua:296
 msgctxt "shipname"
@@ -441,7 +441,7 @@ msgstr ""
 #: ../../data/tribes/barbarians.lua:297
 msgctxt "shipname"
 msgid "Heimdallr"
-msgstr ""
+msgstr "Heimdallr"
 
 #: ../../data/tribes/barbarians.lua:298
 msgctxt "shipname"
@@ -504,7 +504,7 @@ msgstr ""
 #: ../../data/tribes/barbarians.lua:312
 msgctxt "shipname"
 msgid "Sigurd"
-msgstr ""
+msgstr "Sigurd"
 
 #: ../../data/tribes/barbarians.lua:313
 msgctxt "shipname"
@@ -3993,12 +3993,12 @@ msgstr ""
 #: ../../data/tribes/empire.lua:289
 msgctxt "shipname"
 msgid "Apollo"
-msgstr ""
+msgstr "Apollo"
 
 #: ../../data/tribes/empire.lua:290
 msgctxt "shipname"
 msgid "Augustus"
-msgstr ""
+msgstr "Augustus"
 
 #: ../../data/tribes/empire.lua:291
 msgctxt "shipname"
@@ -4136,7 +4136,7 @@ msgstr ""
 #: ../../data/tribes/empire.lua:320
 msgctxt "shipname"
 msgid "Lutius"
-msgstr ""
+msgstr "Lutius"
 
 #: ../../data/tribes/empire.lua:321
 msgctxt "shipname"
@@ -4263,7 +4263,7 @@ msgstr ""
 #: ../../data/tribes/empire.lua:351
 msgctxt "shipname"
 msgid "Vesta"
-msgstr ""
+msgstr "Vesta"
 
 #: ../../data/tribes/empire.lua:352
 msgctxt "shipname"
@@ -4279,7 +4279,7 @@ msgstr ""
 #: ../../data/tribes/frisians.lua:347
 msgctxt "shipname"
 msgid "Amrum"
-msgstr ""
+msgstr "Amrum"
 
 #. TRANSLATORS: This frisian ship is named after a no longer existing island
 #. in Northern Frisia
@@ -4299,7 +4299,7 @@ msgstr ""
 #: ../../data/tribes/frisians.lua:353
 msgctxt "shipname"
 msgid "Föhr"
-msgstr ""
+msgstr "Föhr"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/frisians.lua:355
@@ -4317,7 +4317,7 @@ msgstr ""
 #: ../../data/tribes/frisians.lua:359
 msgctxt "shipname"
 msgid "Hamburger Hallig"
-msgstr ""
+msgstr "Hamburger Hallig"
 
 #. TRANSLATORS: This frisian ship is named after an island in the North Sea
 #: ../../data/tribes/frisians.lua:361
@@ -4434,7 +4434,7 @@ msgstr ""
 #: ../../data/tribes/frisians.lua:397
 msgctxt "shipname"
 msgid "Sylt"
-msgstr ""
+msgstr "Sylt"
 
 #. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/frisians.lua:399
