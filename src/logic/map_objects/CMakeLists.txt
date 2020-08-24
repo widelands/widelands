@@ -176,6 +176,7 @@ wl_library(logic_map_objects
     sound
     ui_basic_loading_message
     wui_mapview_pixelconstants
+  USES_SDL2
 )
 
 wl_library(logic_map_object_type

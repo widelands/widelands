@@ -27,17 +27,17 @@
 #include <png.h>
 
 #include "base/log.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 
-static std::unique_ptr<std::thread::id> initializer_thread;
 static inline void ensure_sdl_image_is_initialized() {
-	if (!initializer_thread.get()) {
+	if (!is_initializer_thread_set()) {
+		set_initializer_thread();
 		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
-		initializer_thread.reset(new std::thread::id(std::this_thread::get_id()));
 	}
 }
 
@@ -60,7 +60,7 @@ std::unique_ptr<Texture> load_image(const std::string& fname, FileSystem* fs) {
 SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs) {
 	ensure_sdl_image_is_initialized();
 
-	if (!initializer_thread.get() || *initializer_thread != std::this_thread::get_id()) {
+	if (!is_initializer_thread(true)) {
 		throw wexception("load_image_as_sdl_surface must be called only by the initializer thread");
 	}
 

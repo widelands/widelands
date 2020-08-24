@@ -140,9 +140,9 @@ void GenericSaveHandler::save_file() {
 GenericSaveHandler::Error GenericSaveHandler::save() {
 	// This needs to be done by the main thread so we can generate the minimap
 	std::unique_ptr<GenericSaveHandler::Error> result;
-	Notifications::publish(NoteDelayedCheck([this, &result]() {
+	NoteDelayedCheck::instantiate([this, &result]() {
 		try {  // everything additionally in one big try block
-			    // to catch any unexpected errors
+			   // to catch any unexpected errors
 			clear();
 
 			//  Make sure that the current directory exists and is writeable.
@@ -227,7 +227,7 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 		}
 
 		result.reset(new GenericSaveHandler::Error(error_));
-	}));
+	});
 	while (!result.get()) {
 		SDL_Delay(20);
 	}

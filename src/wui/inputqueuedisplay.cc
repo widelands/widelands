@@ -201,7 +201,7 @@ void InputQueueDisplay::think() {
  * Render the current InputQueue state.
  */
 void InputQueueDisplay::draw(RenderTarget& dst) {
-	if (!cache_size_) {
+	if (!cache_size_ || !igb_.egbase().objects().object_still_available(&building_)) {
 		return;
 	}
 

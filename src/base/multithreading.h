@@ -28,6 +28,13 @@
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
+// Remember the current thread as the initializer thread. Throws an exception if this is already set.
+void set_initializer_thread();
+// Whether the current thread is the initializer thread. If the initializer thread
+// has not been set yet and the argument is `true`, calls `set_initializer_thread()`.
+bool is_initializer_thread(bool set_if_not_set_yet);
+bool is_initializer_thread_set();
+
 // Wrapper for a mutex that can be locked and unlocked using a MutexLock
 struct MutexLockHandler {
 	explicit MutexLockHandler();
@@ -85,11 +92,19 @@ private:
 	std::recursive_mutex* mutex_;  // not owned
 };
 
-// Informs the drawing thread to run the given function ASAP. Intended for
-// image-checking functions, such as MapObjectDescr::check_representative_image().
+/*
+ * Informs the drawing thread to run the given function ASAP. Intended for
+ * image-checking functions, such as MapObjectDescr::check_representative_image().
+ * This must not be instantiated directly – use `instantiate()` instead,
+ * which will also take care of publishing the note.
+ */
 struct NoteDelayedCheck {
 	CAN_BE_SENT_AS_NOTE(NoteId::DelayedCheck)
+	static void instantiate(std::function<void()>);
+
 	const std::function<void()> run;
+
+private:
 	NoteDelayedCheck(const std::function<void()>& f) : run(f) {
 	}
 };

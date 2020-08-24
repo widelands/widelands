@@ -68,6 +68,7 @@ wl_library(graphic_image_io
   DEPENDS
     base_exceptions
     base_log
+    base_multithreading
     graphic_surface
     io_fileread
     io_filesystem

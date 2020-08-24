@@ -23,6 +23,8 @@
 #include <cstdarg>
 #include <memory>
 
+#include <SDL_timer.h>
+
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/animation/animation_manager.h"
@@ -423,18 +425,25 @@ const Image* MapObjectDescr::representative_image(const RGBColor* player_color) 
 }
 
 void MapObjectDescr::check_representative_image() {
-	Notifications::publish(NoteDelayedCheck([this]() {
+	NoteDelayedCheck::instantiate([this]() {
 		if (representative_image() == nullptr) {
 			throw Widelands::GameDataError(
 			   "The %s %s has no representative image. Does it have an \"idle\" animation?",
 			   to_string(type()).c_str(), name().c_str());
 		}
-	}));
+	});
 }
 
 const Image* MapObjectDescr::icon() const {
 	if (!icon_filename_.empty()) {
-		return g_gr->images().get(icon_filename_);
+		const Image* result = nullptr;
+		NoteDelayedCheck::instantiate([this, &result]() {
+			result = g_gr->images().get(icon_filename_);
+		});
+		while (!result) {
+			SDL_Delay(20);
+		}
+		return result;
 	}
 	return nullptr;
 }

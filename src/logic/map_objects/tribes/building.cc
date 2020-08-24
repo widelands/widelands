@@ -893,7 +893,7 @@ void Building::send_message(Game& game,
 		return;
 	}
 
-	Notifications::publish(NoteDelayedCheck([this, &game, msgtype, throttle_time, throttle_radius,
+	NoteDelayedCheck::instantiate([this, &game, msgtype, throttle_time, throttle_radius,
 	                                         link_to_building_lifetime, title, icon_filename,
 	                                         heading, description]() {
 		const std::string rt_description =
@@ -910,6 +910,6 @@ void Building::send_message(Game& game,
 		} else {
 			get_owner()->add_message(game, std::move(msg));
 		}
-	}));
+	});
 }
 }  // namespace Widelands

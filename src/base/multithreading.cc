@@ -21,8 +21,46 @@
 
 #include <list>
 #include <memory>
+#include <thread>
 
 #include "base/wexception.h"
+
+static std::unique_ptr<std::thread::id> initializer_thread;
+
+void set_initializer_thread() {
+	if (initializer_thread.get()) {
+		throw wexception("attempt to set initializer thread again");
+	}
+	initializer_thread.reset(new std::thread::id(std::this_thread::get_id()));
+}
+
+bool is_initializer_thread_set() {
+	return initializer_thread.get() != nullptr;
+}
+
+bool is_initializer_thread(const bool set_if_not_set_yet) {
+	if (!initializer_thread.get()) {
+		if (set_if_not_set_yet) {
+			set_initializer_thread();
+		} else {
+			return false;
+		}
+	}
+	return *initializer_thread == std::this_thread::get_id();
+}
+
+void NoteDelayedCheck::instantiate(std::function<void()> fn) {
+	if (!is_initializer_thread_set()) {
+		throw wexception("NoteDelayedCheck::instantiate: initializer thread was not set yet");
+	} else if (is_initializer_thread(false)) {
+		// The initializer thread may run the desired function directly. Publishing
+		// it might result in a deadlock if the caller needs to wait for a result.
+		fn();
+	} else {
+		// All other threads must ask it politely to do this for them.
+		Notifications::publish(NoteDelayedCheck(std::move(fn)));
+	}
+}
 
 MutexLock::MutexLock(const bool optional) : MutexLock(MutexLockHandler::get(), optional) {
 }

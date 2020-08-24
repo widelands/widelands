@@ -1063,7 +1063,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 		// TODO(GunChleoc): We keep formatting this even when timeout has not elapsed
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
 			const uint32_t time = game.get_gametime();
-			Notifications::publish(NoteDelayedCheck([this, &game, &ri, time, rdescr, position]() {
+			NoteDelayedCheck::instantiate([this, &game, &ri, time, rdescr, position]() {
 				const std::string rt_description = as_mapobject_message(
 				   ri.descr().name(), g_gr->images().get(rdescr->representative_image())->width(),
 				   _("A geologist found resources."));
@@ -1077,7 +1077,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 				                  rdescr->representative_image(), ri.descr().descname(), rt_description,
 				                  position, serial_, rdescr->name())),
 				   rdescr->timeout_ms(), rdescr->timeout_radius());
-			}));
+			});
 		}
 	}
 
