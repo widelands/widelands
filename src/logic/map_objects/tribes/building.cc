@@ -149,8 +149,8 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 				enhancement_ = enhancement_idx;
 				BuildingDescr* enhanced_building = tribes_.get_mutable_building_descr(enhancement_idx);
 				enhanced_building->set_enhancement_cost(
-							Buildcost(enhancement_table->get_table("buildcost"), tribes),
-							Buildcost(enhancement_table->get_table("return_on_dismantle"), tribes));
+				   Buildcost(enhancement_table->get_table("buildcost"), tribes),
+				   Buildcost(enhancement_table->get_table("return_on_dismantle"), tribes));
 
 				//  Merge the enhancements workarea info into this building's
 				//  workarea info.
@@ -161,9 +161,8 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 					}
 				}
 			} else {
-				throw GameDataError(
-				   "'%s' has enhancement to unknown building '%s'", name().c_str(),
-				   enhancement_name.c_str());
+				throw GameDataError("'%s' has enhancement to unknown building '%s'", name().c_str(),
+				                    enhancement_name.c_str());
 			}
 		}
 	}
@@ -188,12 +187,11 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		log("WARNING: Deprecated enhancement_cost code found in building '%s'\n", name().c_str());
 		if (!table.has_key("return_on_dismantle_on_enhanced")) {
 			throw GameDataError("The enhanced building '%s' has an \"enhancement_cost\" but no "
-			                 "\"return_on_dismantle_on_enhanced\"",
-			                 name().c_str());
+			                    "\"return_on_dismantle_on_enhanced\"",
+			                    name().c_str());
 		}
-		set_enhancement_cost(
-					Buildcost(table.get_table("enhancement_cost"), tribes),
-					Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes));
+		set_enhancement_cost(Buildcost(table.get_table("enhancement_cost"), tribes),
+		                     Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes));
 	}
 
 	needs_seafaring_ = false;
@@ -342,7 +340,8 @@ Building& BuildingDescr::create_constructionsite() const {
 	return csite;
 }
 
-void BuildingDescr::set_enhancement_cost(const Buildcost& enhance_cost, const Buildcost& return_enhanced) {
+void BuildingDescr::set_enhancement_cost(const Buildcost& enhance_cost,
+                                         const Buildcost& return_enhanced) {
 	enhanced_building_ = true;
 	if (!return_enhanced.empty()) {
 		can_be_dismantled_ = true;

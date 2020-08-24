@@ -177,9 +177,9 @@ private:
 	void set_enhancement_cost(const Buildcost& enhance_cost, const Buildcost& return_enhanced);
 
 	const Tribes& tribes_;
-	const bool buildable_;          // the player can build this himself
-	bool can_be_dismantled_;  // the player can dismantle this building
-	const bool destructible_;       // the player can destruct this himself
+	const bool buildable_;     // the player can build this himself
+	bool can_be_dismantled_;   // the player can dismantle this building
+	const bool destructible_;  // the player can destruct this himself
 	Buildcost buildcost_;
 	Buildcost return_dismantle_;  // Returned wares on dismantle
 	Buildcost enhance_cost_;      // cost for enhancing
