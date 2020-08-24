@@ -28,14 +28,14 @@
 static std::unique_ptr<std::thread::id> initializer_thread;
 
 void set_initializer_thread() {
-	if (initializer_thread.get()) {
+	if (initializer_thread) {
 		throw wexception("attempt to set initializer thread again");
 	}
 	initializer_thread.reset(new std::thread::id(std::this_thread::get_id()));
 }
 
 bool is_initializer_thread_set() {
-	return initializer_thread.get() != nullptr;
+	return initializer_thread != nullptr;
 }
 
 bool is_initializer_thread(const bool set_if_not_set_yet) {
@@ -58,7 +58,7 @@ void NoteDelayedCheck::instantiate(std::function<void()> fn) {
 		fn();
 	} else {
 		// All other threads must ask it politely to do this for them.
-		Notifications::publish(NoteDelayedCheck(std::move(fn)));
+		Notifications::publish(NoteDelayedCheck(fn));
 	}
 }
 
