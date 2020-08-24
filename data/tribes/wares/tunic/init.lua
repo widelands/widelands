@@ -7,12 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Tunic"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      amazons = 30,
-   },
-   preciousness = {
-      amazons = 3,
-   },
 
    animations = {
       idle = {

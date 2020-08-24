@@ -10,8 +10,6 @@ tribes:new_carrier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   default_target_quantity = 10,
-
    animation_directory = dirname,
    ware_hotspot = { 0, 18 },
    spritesheets = {
@@ -41,9 +39,5 @@ tribes:new_carrier_type {
       },
    },
 
-   aihints = {
-      preciousness = {
-         amazons = 2
-      },
-   }
+   aihints = {}
 }

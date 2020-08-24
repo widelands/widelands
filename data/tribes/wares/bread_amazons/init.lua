@@ -7,12 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("amazons_ware", "Bread"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      amazons = 20
-   },
-   preciousness = {
-      amazons = 5
-   },
 
    animations = {
       idle = {

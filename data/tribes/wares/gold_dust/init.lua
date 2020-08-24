@@ -7,13 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Gold Dust"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      amazons = 15,
-   },
-
-   preciousness = {
-      amazons = 2,
-   },
 
    animations = {
       idle = {

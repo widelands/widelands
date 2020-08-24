@@ -21,8 +21,6 @@ tribes:new_soldier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   default_target_quantity = 10,
-
    -- Battle attributes - initial values and per level increase
    health = {
       max_level = 3,
@@ -50,11 +48,7 @@ tribes:new_soldier_type {
       pictures = path.list_files (dirname .. "evade_level?.png"),
    },
 
-   aihints = {
-      preciousness = {
-         amazons = 5
-      },
-   },
+   aihints = {},
 
    -- Random animations for battle
    attack_success_w = {

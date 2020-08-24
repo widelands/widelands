@@ -7,12 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("atlanteans_ware", "Swift Boots"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      amazons = 1
-   },
-   preciousness = {
-      amazons = 5
-   },
 
    animations = {
       idle = {

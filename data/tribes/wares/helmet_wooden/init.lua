@@ -7,12 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Wooden Helmet"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      amazons = 2
-   },
-   preciousness = {
-      amazons = 3
-   },
 
    animations = {
       idle = {
