@@ -1,7 +1,7 @@
--- Empire ware helptexts
+-- Empire helptexts
 
 -- For formatting time strings
-include "tribes/scripting/help/global_helptexts.lua"
+include "tribes/scripting/help/time_strings.lua"
 
 local buildingctxt = "empire_building"
 local warectxt = "empire_ware"

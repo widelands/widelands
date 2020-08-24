@@ -1,7 +1,7 @@
--- Barbarian ware helptexts
+-- Barbarian helptexts
 
 -- For formatting time strings
-include "tribes/scripting/help/global_helptexts.lua"
+include "tribes/scripting/help/time_strings.lua"
 
 
 local buildingctxt = "barbarians_building"
