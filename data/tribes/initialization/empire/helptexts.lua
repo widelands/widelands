@@ -1,4 +1,4 @@
--- Empire ware helptexts
+-- Empire helptexts
 
 -- For formatting time strings
 include "tribes/scripting/help/global_helptexts.lua"
@@ -198,7 +198,7 @@ local result = {
       empire_foresters_house = {
          purpose = {
             -- TRANSLATORS: Purpose helptext for an empire production site: Forester's House
-            pgettext(buildingctxt, "Plants trees in the surrounding area.")
+            pgettext("building", "Plants trees in the surrounding area.")
          },
          note = {
             -- TRANSLATORS: Note helptext for an empire production site: Forester's House

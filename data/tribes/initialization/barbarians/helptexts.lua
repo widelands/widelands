@@ -1,4 +1,4 @@
--- Barbarian ware helptexts
+-- Barbarian helptexts
 
 -- For formatting time strings
 include "tribes/scripting/help/global_helptexts.lua"
@@ -61,8 +61,7 @@ local result = {
       barbarians_citadel = {
          lore = {
             -- TRANSLATORS: Lore helptext for a barbarian military site: Citadel
-            pgettext(buildingctxt, [[‘The Citadel of Adlen surely is the finest masterpiece of Barbarian craftsmanship. ]] ..
-               [[Nothing as strong and big and beautiful has ever been built in such a short time.’]])
+            pgettext(buildingctxt, "‘The Citadel of Adlen surely is the finest masterpiece of Barbarian craftsmanship. Nothing as strong and big and beautiful has ever been built in such a short time.’")
          },
          lore_author = {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Citadel
@@ -120,7 +119,7 @@ local result = {
          },
          lore_author = {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Tower
-            pgettext(buildingctxt, "The Battle of Kal’mavrath’ by Hakhor the Bard")
+            pgettext(buildingctxt, "Ballad ‘The Battle of Kal’mavrath’ by Hakhor the Bard")
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Tower
@@ -812,7 +811,7 @@ local result = {
          },
          lore_author = {
             -- TRANSLATORS: Lore author helptext for a barbarian production site: Warmill
-            pgettext(buildingctxt, "An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]])")
+            pgettext(buildingctxt, "An old Barbarian proverb<br> meaning that you need to take some risks sometimes.")
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Warmill

@@ -1,4 +1,4 @@
--- Atlantean ware helptexts
+-- Atlantean helptexts
 
 -- For formatting time strings
 include "tribes/scripting/help/global_helptexts.lua"
@@ -241,7 +241,7 @@ local result = {
          },
          purpose = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Fish Breeder's House
-            pgettext(buildingctxt, "Breeds fish.")
+            pgettext("building", "Breeds fish.")
          }
       },
       atlanteans_fishers_house = {

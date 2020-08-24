@@ -1,4 +1,4 @@
--- Frisian ware helptexts
+-- Frisian helptexts
 
 -- For formatting time strings
 include "tribes/scripting/help/global_helptexts.lua"
