@@ -382,7 +382,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	}
 
 	UI::g_fh = UI::create_fonthandler(
-	   &g_gr->images(), i18n::get_locale());  // This will create the fontset, so loading it first.
+	   g_image_cache, i18n::get_locale());  // This will create the fontset, so loading it first.
 
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,

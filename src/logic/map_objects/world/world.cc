@@ -21,8 +21,10 @@
 
 #include <memory>
 
+#include <SDL_surface.h>
+
 #include "base/i18n.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"
@@ -61,7 +63,7 @@ void World::load_graphics() {
 				   RGBColor(top_left_pixel_color.r, top_left_pixel_color.g, top_left_pixel_color.b));
 				SDL_FreeSurface(sdl_surface);
 			}
-			terrain->add_texture(g_gr->images().get(terrain->texture_paths()[j]));
+			terrain->add_texture(g_image_cache->get(terrain->texture_paths()[j]));
 		}
 	}
 }

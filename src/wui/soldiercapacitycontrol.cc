@@ -19,7 +19,6 @@
 
 #include "wui/soldiercapacitycontrol.h"
 
-#include "graphic/graphic.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"
 #include "ui_basic/button.h"
@@ -67,7 +66,7 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                32,
                32,
                UI::ButtonStyle::kWuiMenu,
-               g_gr->images().get("images/wui/buildings/menu_down_train.png"),
+               g_image_cache->get("images/wui/buildings/menu_down_train.png"),
                _("Decrease capacity. Hold down Ctrl to set the capacity to the lowest value")),
      increase_(this,
                "increase",
@@ -76,7 +75,7 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                32,
                32,
                UI::ButtonStyle::kWuiMenu,
-               g_gr->images().get("images/wui/buildings/menu_up_train.png"),
+               g_image_cache->get("images/wui/buildings/menu_up_train.png"),
                _("Increase capacity. Hold down Ctrl to set the capacity to the highest value")),
      value_(this, "199", UI::Align::kCenter) {
 	decrease_.sigclicked.connect([this]() { click_decrease(); });

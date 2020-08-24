@@ -231,6 +231,7 @@ wl_library(logic
     economy
     game_io
     graphic
+    graphic_image_cache
     graphic_color
     graphic_playercolor
     io_fileread

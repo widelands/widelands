@@ -21,11 +21,9 @@
 #define WL_GRAPHIC_GRAPHIC_H
 
 #include <memory>
+#include <string>
 
 #include <SDL_video.h>
-
-#include "graphic/image_cache.h"
-#include "graphic/style_manager.h"
 
 class AnimationManager;
 class RenderTarget;
@@ -73,16 +71,6 @@ public:
 
 	int max_texture_size_for_font_rendering() const;
 
-	ImageCache& images() const {
-		return *image_cache_.get();
-	}
-	AnimationManager& animations() const {
-		return *animation_manager_.get();
-	}
-	StyleManager& styles() const {
-		return *style_manager_.get();
-	}
-
 	// Requests a screenshot being taken on the next frame.
 	void screenshot(const std::string& fname);
 
@@ -112,15 +100,6 @@ private:
 
 	/// A RenderTarget for screen_. This is initialized during init()
 	std::unique_ptr<RenderTarget> render_target_;
-
-	/// Non-volatile cache of independent images.
-	std::unique_ptr<ImageCache> image_cache_;
-
-	/// This holds all animations.
-	std::unique_ptr<AnimationManager> animation_manager_;
-
-	/// This holds all GUI styles.
-	std::unique_ptr<StyleManager> style_manager_;
 
 	/// Screenshot filename. If a screenshot is requested, this will be set to
 	/// the requested filename. On the next frame the screenshot will be written

@@ -21,7 +21,7 @@
 
 #include "base/i18n.h"
 #include "graphic/animation/animation.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/texture.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/world/editor_category.h"
@@ -64,32 +64,32 @@ TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 	case Is::kArable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("arable");
-		icon = g_gr->images().get("images/wui/editor/terrain_arable.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_arable.png");
 		break;
 	case Is::kWalkable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("walkable");
-		icon = g_gr->images().get("images/wui/editor/terrain_walkable.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_walkable.png");
 		break;
 	case Is::kWater:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("navigable");
-		icon = g_gr->images().get("images/wui/editor/terrain_water.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_water.png");
 		break;
 	case Is::kUnreachable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("unreachable");
-		icon = g_gr->images().get("images/wui/editor/terrain_unreachable.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_unreachable.png");
 		break;
 	case Is::kMineable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("mineable");
-		icon = g_gr->images().get("images/wui/editor/terrain_mineable.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_mineable.png");
 		break;
 	case Is::kUnwalkable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("unwalkable");
-		icon = g_gr->images().get("images/wui/editor/terrain_unwalkable.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_unwalkable.png");
 		break;
 	}
 }

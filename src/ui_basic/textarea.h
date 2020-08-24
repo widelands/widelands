@@ -23,7 +23,7 @@
 #include <memory>
 
 #include "graphic/align.h"
-#include "graphic/graphic.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 
@@ -60,11 +60,11 @@ public:
 	                  uint32_t h,
 	                  const std::string& text = std::string(),
 	                  Align align = UI::Align::kLeft,
-	                  const UI::FontStyleInfo& style = g_gr->styles().font_style(FontStyle::kLabel));
+	                  const UI::FontStyleInfo& style = g_style_manager->font_style(FontStyle::kLabel));
 	explicit Textarea(Panel* parent,
 	                  const std::string& text = std::string(),
 	                  Align align = UI::Align::kLeft,
-	                  const UI::FontStyleInfo& style = g_gr->styles().font_style(FontStyle::kLabel));
+	                  const UI::FontStyleInfo& style = g_style_manager->font_style(FontStyle::kLabel));
 
 	/**
 	 * If fixed_width > 0, the Textarea will not change its width.

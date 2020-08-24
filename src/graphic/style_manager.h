@@ -103,4 +103,6 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(StyleManager);
 };
 
+extern StyleManager* g_style_manager;
+
 #endif  // end of include guard: WL_GRAPHIC_STYLE_MANAGER_H

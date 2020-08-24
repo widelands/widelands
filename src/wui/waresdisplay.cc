@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
@@ -424,8 +425,8 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 
 	//  draw a background
 	const UI::WareInfoStyleInfo& style =
-	   draw_selected ? g_gr->styles().ware_info_style(UI::WareInfoStyle::kHighlight) :
-	                   g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal);
+	   draw_selected ? g_style_manager->ware_info_style(UI::WareInfoStyle::kHighlight) :
+	                   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
 
 	uint16_t w = style.icon_background_image()->width();
 
@@ -496,7 +497,7 @@ WaresDisplay::WaresDisplay(UI::Panel* const parent,
 }
 
 RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::DescriptionIndex /* ware */) {
-	return g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal).info_background();
+	return g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal).info_background();
 }
 
 WaresDisplay::~WaresDisplay() {
@@ -551,7 +552,7 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 	std::vector<Widelands::DescriptionIndex>::iterator j;
 	Widelands::TribeDescr::WaresOrder order = tribe.wares_order();
 
-	const UI::WareInfoStyleInfo& style = g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal);
+	const UI::WareInfoStyleInfo& style = g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
 
 	for (i = order.begin(); i != order.end(); ++i) {
 		for (j = i->begin(); j != i->end(); ++j) {

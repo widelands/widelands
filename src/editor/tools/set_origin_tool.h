@@ -40,7 +40,7 @@ struct EditorSetOriginTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/ui_basic/fsel.png");
+		return g_image_cache->get("images/ui_basic/fsel.png");
 	}
 
 	bool has_size_one() const override {

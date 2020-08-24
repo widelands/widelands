@@ -33,11 +33,13 @@
 #include "graphic/gl/initialize.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
+#include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 #include "graphic/note_graphic_resolution_changed.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
+#include "graphic/style_manager.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
@@ -61,10 +63,7 @@ void set_icon(SDL_Window* sdl_window) {
 
 }  // namespace
 
-Graphic::Graphic()
-   : image_cache_(new ImageCache()),
-     animation_manager_(new AnimationManager()),
-     style_manager_(new StyleManager()) {
+Graphic::Graphic() {
 }
 
 /**
@@ -125,12 +124,21 @@ void Graphic::initialize(const TraceGl& trace_gl,
 
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
-	image_cache_->fill_with_texture_atlases(
+	g_image_cache = new ImageCache();
+	g_image_cache->fill_with_texture_atlases(
 	   std::move(texture_atlases), std::move(textures_in_atlas));
-	styles().init();
+	g_style_manager = new StyleManager();
+	g_style_manager->init();
+	g_animation_manager = new AnimationManager();
 }
 
 Graphic::~Graphic() {
+	delete g_animation_manager;
+	g_animation_manager = nullptr;
+	delete g_image_cache;
+	g_image_cache = nullptr;
+	delete g_style_manager;
+	g_style_manager = nullptr;
 	if (sdl_window_) {
 		SDL_DestroyWindow(sdl_window_);
 		sdl_window_ = nullptr;

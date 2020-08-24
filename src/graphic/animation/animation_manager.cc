@@ -23,8 +23,9 @@
 
 #include "graphic/animation/nonpacked_animation.h"
 #include "graphic/animation/spritesheet_animation.h"
-#include "graphic/graphic.h"
 #include "graphic/texture.h"
+
+AnimationManager* g_animation_manager;
 
 uint32_t AnimationManager::load(const LuaTable& table,
                                 const std::string& basename,
@@ -63,7 +64,7 @@ const Image* AnimationManager::get_representative_image(uint32_t id, const RGBCo
 	if (representative_images_.count(hash) != 1) {
 		representative_images_.insert(
 		   std::make_pair(hash, std::unique_ptr<const Image>(
-		                           g_gr->animations().get_animation(id).representative_image(clr))));
+		                           g_animation_manager->get_animation(id).representative_image(clr))));
 	}
 	return representative_images_.at(hash).get();
 }

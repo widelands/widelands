@@ -95,7 +95,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			if (tab_icon.empty()) {
 				tabs_.add("encyclopedia_" + tab_name, tab_title, wrapper_boxes_.at(tab_name).get());
 			} else if (g_fs->file_exists(tab_icon)) {
-				tabs_.add("encyclopedia_" + tab_name, g_gr->images().get(tab_icon),
+				tabs_.add("encyclopedia_" + tab_name, g_image_cache->get(tab_icon),
 				          wrapper_boxes_.at(tab_name).get(), tab_title);
 			} else {
 				throw wexception(
@@ -124,7 +124,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 				if (entry_icon.empty()) {
 					lists_.at(tab_name)->add(entry_title, entry);
 				} else if (g_fs->file_exists(entry_icon)) {
-					lists_.at(tab_name)->add(entry_title, entry, g_gr->images().get(entry_icon));
+					lists_.at(tab_name)->add(entry_title, entry, g_image_cache->get(entry_icon));
 				} else {
 					throw wexception("Icon path '%s' for tab entry '%s' does not exist!",
 					                 entry_icon.c_str(), entry_name.c_str());

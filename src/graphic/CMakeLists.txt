@@ -12,7 +12,7 @@ wl_library(graphic_toolbar_imageset
     toolbar_imageset.cc
     toolbar_imageset.h
   DEPENDS
-    graphic
+    graphic_image_cache
     graphic_surface
     scripting_lua_table
 )
@@ -37,7 +37,6 @@ wl_library(graphic_playercolor
     playercolor.cc
     playercolor.h
   DEPENDS
-    graphic
     graphic_color
     graphic_image_cache
     graphic_surface
@@ -309,6 +308,7 @@ wl_library(graphic_mouse_cursor
   DEPENDS
     base_geometry
     graphic
+    graphic_image_cache
     graphic_image_io
     io_filesystem
 )

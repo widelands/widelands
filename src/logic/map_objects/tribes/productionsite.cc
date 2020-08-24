@@ -30,6 +30,7 @@
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
 #include "economy/workers_queue.h"
+#include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -367,32 +368,32 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	}
 
 	if (nr_requests > 0) {
-		*s = g_gr->styles().color_tag(
+		*s = g_style_manager->color_tag(
 		   (nr_requests == 1 ?
 		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
 		       _("Worker missing") :
 		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
 		          missing. If you need plural forms here, please let us know. */
 		       _("Workers missing")),
-		   g_gr->styles().building_statistics_style().low_color());
+		   g_style_manager->building_statistics_style().low_color());
 		return;
 	}
 
 	if (nr_coming > 0) {
-		*s = g_gr->styles().color_tag(
+		*s = g_style_manager->color_tag(
 		   (nr_coming == 1 ?
 		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
 		       _("Worker is coming") :
 		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
 		          missing. If you need plural forms here, please let us know. */
 		       _("Workers are coming")),
-		   g_gr->styles().building_statistics_style().low_color());
+		   g_style_manager->building_statistics_style().low_color());
 		return;
 	}
 
 	if (is_stopped_) {
-		*s = g_gr->styles().color_tag(
-		   _("(stopped)"), g_gr->styles().building_statistics_style().neutral_color());
+		*s = g_style_manager->color_tag(
+		   _("(stopped)"), g_style_manager->building_statistics_style().neutral_color());
 		return;
 	}
 	*s = statistics_string_on_changed_statistics_;
@@ -475,32 +476,32 @@ void ProductionSite::format_statistics_string() {
 
 	// boost::format would treat uint8_t as char
 	const unsigned int percent = std::min(get_actual_statistics() * 100 / 98, 100);
-	const std::string perc_str = g_gr->styles().color_tag(
+	const std::string perc_str = g_style_manager->color_tag(
 	   (boost::format(_("%i%%")) % percent).str(),
-	   (percent < 33) ? g_gr->styles().building_statistics_style().low_color() :
-	                    (percent < 66) ? g_gr->styles().building_statistics_style().medium_color() :
-	                                     g_gr->styles().building_statistics_style().high_color());
+	   (percent < 33) ? g_style_manager->building_statistics_style().low_color() :
+	                    (percent < 66) ? g_style_manager->building_statistics_style().medium_color() :
+	                                     g_style_manager->building_statistics_style().high_color());
 
 	if (0 < percent && percent < 100) {
-		RGBColor color = g_gr->styles().building_statistics_style().high_color();
+		RGBColor color = g_style_manager->building_statistics_style().high_color();
 		std::string trend;
 		if (last_stat_percent_ < actual_percent_) {
 			trend_ = Trend::kRising;
-			color = g_gr->styles().building_statistics_style().high_color();
+			color = g_style_manager->building_statistics_style().high_color();
 			trend = "+";
 		} else if (last_stat_percent_ > actual_percent_) {
 			trend_ = Trend::kFalling;
-			color = g_gr->styles().building_statistics_style().low_color();
+			color = g_style_manager->building_statistics_style().low_color();
 			trend = "-";
 		} else {
 			trend_ = Trend::kUnchanged;
-			color = g_gr->styles().building_statistics_style().neutral_color();
+			color = g_style_manager->building_statistics_style().neutral_color();
 			trend = "=";
 		}
 
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
 		statistics_string_on_changed_statistics_ =
-		   (boost::format("%s\u2009%s") % perc_str % g_gr->styles().color_tag(trend, color)).str();
+		   (boost::format("%s\u2009%s") % perc_str % g_style_manager->color_tag(trend, color)).str();
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}

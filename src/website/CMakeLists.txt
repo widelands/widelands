@@ -18,7 +18,6 @@ wl_binary(wl_create_spritesheet
   DEPENDS
     base_log
     base_macros
-    graphic
     graphic_animation
     graphic_image_io
     graphic_surface

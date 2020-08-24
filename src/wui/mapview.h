@@ -23,6 +23,7 @@
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
+#include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/panel.h"
