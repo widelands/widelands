@@ -244,7 +244,7 @@ void DefaultAI::think() {
 	if (player_->is_picking_custom_starting_position()) {
 		// TODO(Nordfriese): In picking_custom_starting_position mode, try to find
 		// a nice spot somewhere instead of just picking the default position.
-		// This here may crash if another player has already chosen a spot
+		// This here will not work if another player has already chosen a spot
 		// close to our default location…
 		if (!player_->pick_custom_starting_position(game().map().get_starting_pos(player_number()))) {
 			log("WARNING: AI %u: default starting position already taken!\n", static_cast<unsigned>(player_number()));
