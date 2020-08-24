@@ -24,7 +24,7 @@
 
 #include <memory>
 
-#include "graphic/graphic.h"
+#include "graphic/note_graphic_resolution_changed.h"
 
 namespace UI {
 /**

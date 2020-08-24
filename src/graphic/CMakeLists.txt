@@ -321,6 +321,7 @@ wl_library(graphic
     default_resolution.h
     graphic.cc
     graphic.h
+    note_graphic_resolution_changed.h
     style_manager.cc
     style_manager.h
     rendertarget.cc

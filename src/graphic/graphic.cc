@@ -34,6 +34,7 @@
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
+#include "graphic/note_graphic_resolution_changed.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"

@@ -26,8 +26,6 @@
 
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
-#include "notifications/note_ids.h"
-#include "notifications/notifications.h"
 
 class AnimationManager;
 class RenderTarget;
@@ -36,19 +34,6 @@ class Screen;
 // A graphics card must at least support this size for texture for Widelands to
 // run.
 constexpr int kMinimumSizeForTextures = 2048;
-
-// Will be send whenever the resolution changes.
-struct GraphicResolutionChanged {
-	CAN_BE_SENT_AS_NOTE(NoteId::GraphicResolutionChanged)
-
-	// Old width and height in pixels.
-	int old_width;
-	int old_height;
-
-	// New width and height in pixels.
-	int new_width;
-	int new_height;
-};
 
 /**
  * This class is a kind of Swiss Army knife for your graphics need.
