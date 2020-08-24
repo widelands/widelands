@@ -7,14 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Water"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {},
-   preciousness = {
-      amazons = 15,
-      atlanteans = 7,
-      barbarians = 8,
-      frisians = 7,
-      empire = 7,
-   },
 
    animations = {
       idle = {

@@ -7,14 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Wooden Spear"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      amazons = 30,
-      empire = 30
-   },
-   preciousness = {
-      amazons = 3,
-      empire = 1
-   },
 
    animations = {
       idle = {

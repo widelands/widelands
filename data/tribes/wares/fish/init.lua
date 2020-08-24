@@ -7,16 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Fish"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      frisians = 20,
-   },
-   preciousness = {
-      amazons = 4,
-      atlanteans = 4,
-      barbarians = 3,
-      frisians = 1,
-      empire = 3,
-   },
 
    animations = {
       idle = {

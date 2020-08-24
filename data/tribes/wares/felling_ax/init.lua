@@ -7,18 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Felling Ax"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      amazons = 5,
-      barbarians = 5,
-      frisians = 3,
-      empire = 3
-   },
-   preciousness = {
-      amazons = 3,
-      barbarians = 3,
-      frisians = 0,
-      empire = 1
-   },
 
    animations = {
       idle = {

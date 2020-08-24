@@ -7,3 +7,8 @@ packet_version="2"
 name="Player 1"
 tribe="barbarians"
 ai=
+
+[player_2]
+name="Player 2"
+tribe="atlanteans"
+ai=
