@@ -53,7 +53,9 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
      peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
-     custom_starting_positions_(this, Vector2i(get_w() * 7 / 10, get_h() * 21 / 40 + buth_), _("Custom starting positions")),
+     custom_starting_positions_(this,
+                                Vector2i(get_w() * 7 / 10, get_h() * 21 / 40 + buth_),
+                                _("Custom starting positions")),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
@@ -114,7 +116,8 @@ void FullscreenMenuLaunchGame::update_custom_starting_positions() {
 	} else if (settings_->settings().savegame) {
 		custom_starting_positions_.set_tooltip(_("The starting positions are set by the saved game"));
 	} else {
-		custom_starting_positions_.set_tooltip(_("Allow the players to choose their own starting positions at the beginning of the game"));
+		custom_starting_positions_.set_tooltip(_(
+		   "Allow the players to choose their own starting positions at the beginning of the game"));
 	}
 }
 

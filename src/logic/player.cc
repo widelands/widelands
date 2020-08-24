@@ -246,8 +246,8 @@ bool Player::pick_custom_starting_position(const Coords& c) {
 	if (!get_starting_position_suitability(c)) {
 		return false;
 	}
-	dynamic_cast<Game&>(egbase()).send_player_command(new CmdPickCustomStartingPosition(
-			egbase().get_gametime(), player_number(), c));
+	dynamic_cast<Game&>(egbase()).send_player_command(
+	   new CmdPickCustomStartingPosition(egbase().get_gametime(), player_number(), c));
 	return true;
 }
 

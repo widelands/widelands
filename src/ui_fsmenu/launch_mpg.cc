@@ -167,9 +167,9 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	   Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_));
 	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ +
 	                                               win_condition_dropdown_.get_h() + padding_));
-	custom_starting_positions_.set_pos(Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ +
-	                                               win_condition_dropdown_.get_h() + peaceful_.get_h() +
-	                                               2 * padding_));
+	custom_starting_positions_.set_pos(Vector2i(
+	   right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ + win_condition_dropdown_.get_h() +
+	                       peaceful_.get_h() + 2 * padding_));
 	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240 - buth_ - padding_));
 	ok_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 

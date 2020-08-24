@@ -384,7 +384,8 @@ void InteractivePlayer::think() {
 	InteractiveBase::think();
 
 	if (player().is_picking_custom_starting_position()) {
-		set_sel_picture(playercolor_image(player_number() - 1, "images/players/player_position_menu.png"));
+		set_sel_picture(
+		   playercolor_image(player_number() - 1, "images/players/player_position_menu.png"));
 	}
 
 	if (flag_to_connect_) {
@@ -511,7 +512,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 
 		// Draw the player starting position overlays.
-		const bool suited_as_starting_pos = picking_starting_pos && plr.get_starting_position_suitability(f->fcoords);
+		const bool suited_as_starting_pos =
+		   picking_starting_pos && plr.get_starting_position_suitability(f->fcoords);
 		if (suited_as_starting_pos) {
 			for (unsigned p = map.get_nrplayers(); p; --p) {
 				if (map.get_starting_pos(p) == f->fcoords) {
@@ -519,7 +521,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 					   playercolor_image(p - 1, "images/players/player_position.png");
 					static constexpr int kStartingPosHotspotY = 55;
 					blit_field_overlay(dst, *f, player_image,
-							           Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
+					                   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
 					break;
 				}
 			}
@@ -535,10 +537,12 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			// Draw build help.
 			bool show_port_space = has_expedition_port_space(f->fcoords);
-			if (show_port_space || (buildhelp() && !(picking_starting_pos && !suited_as_starting_pos))) {
-				if (const auto* overlay =
-				       get_buildhelp_overlay(show_port_space ?
-				       f->fcoords.field->maxcaps() : picking_starting_pos ? f->fcoords.field->nodecaps() : plr.get_buildcaps(f->fcoords))) {
+			if (show_port_space ||
+			    (buildhelp() && !(picking_starting_pos && !suited_as_starting_pos))) {
+				if (const auto* overlay = get_buildhelp_overlay(
+				       show_port_space ? f->fcoords.field->maxcaps() :
+				                         picking_starting_pos ? f->fcoords.field->nodecaps() :
+				                                                plr.get_buildcaps(f->fcoords))) {
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale,
 					                   f->seeing == Widelands::SeeUnseeNode::kVisible ? 1.f : 0.3f);
 				}
