@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_brewery1",
    descname = pgettext("empire_building", "Brewery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    enhancement = "empire_brewery2",

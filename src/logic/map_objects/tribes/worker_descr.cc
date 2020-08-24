@@ -51,9 +51,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
      needed_experience_(table.has_key("becomes") ? table.get_int("experience") : INVALID_INDEX),
      ai_hints_(new WareWorkerHints()),
      tribes_(tribes) {
-	if (helptext_script().empty()) {
-		throw GameDataError("Worker %s has no helptext script", name().c_str());
-	}
 	if (icon_filename().empty()) {
 		throw GameDataError("Worker %s has no menu icon", name().c_str());
 	}

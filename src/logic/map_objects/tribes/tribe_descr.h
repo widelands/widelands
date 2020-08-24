@@ -59,7 +59,8 @@ Two players can choose the same tribe.
 */
 class TribeDescr {
 public:
-	TribeDescr(const Widelands::TribeBasicInfo& info,
+	TribeDescr(LuaInterface* lua,
+               const Widelands::TribeBasicInfo& info,
 	           Tribes& tribes,
 	           const World& world,
 	           const LuaTable& table,
@@ -152,13 +153,13 @@ private:
 	// Helper functions for loading everything in the constructor
 	void load_frontiers_flags_roads(const LuaTable& table);
 	void load_ships(const LuaTable& table, Tribes& tribes);
-	void load_wares(const LuaTable& table, Tribes& tribes);
-	void load_immovables(const LuaTable& table, Tribes& tribes, const World& world);
-	void load_workers(const LuaTable& table, Tribes& tribes);
-	void load_buildings(const LuaTable& table, Tribes& tribes);
+	void load_wares(const LuaTable& table, Tribes& tribes, LuaTable* helptexts);
+	void load_immovables(const LuaTable& table, Tribes& tribes, const World& world, LuaTable* helptexts);
+	void load_workers(const LuaTable& table, Tribes& tribes, LuaTable* helptexts);
+	void load_buildings(const LuaTable& table, Tribes& tribes, LuaTable* helptexts);
 
 	/// Registers a building with the tribe
-	void add_building(const std::string& buildingname, Tribes& tribes);
+	void add_building(const std::string& buildingname, Tribes& tribes, LuaTable* helptexts);
 
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername, Tribes& tribes);

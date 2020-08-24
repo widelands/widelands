@@ -198,7 +198,9 @@ BuildingDescr* Tribes::get_mutable_building_descr(DescriptionIndex buildingindex
 const ImmovableDescr* Tribes::get_immovable_descr(DescriptionIndex immovableindex) const {
 	return immovables_->get_mutable(immovableindex);
 }
-
+ImmovableDescr* Tribes::get_mutable_immovable_descr(DescriptionIndex immovableindex) const {
+	return immovables_->get_mutable(immovableindex);
+}
 const ShipDescr* Tribes::get_ship_descr(DescriptionIndex shipindex) const {
 	return ships_->get_mutable(shipindex);
 }
@@ -305,11 +307,11 @@ void Tribes::add_tribe(const LuaTable& table, const World& world) {
 	if (Widelands::tribe_exists(name)) {
 		if (scenario_tribes_ != nullptr && scenario_tribes_->has_key(name)) {
 			// If we're loading a scenario with custom tribe entites, load them here.
-			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, world, table,
+			tribes_->add(new TribeDescr(lua_, Widelands::get_tribeinfo(name), *this, world, table,
 			                            scenario_tribes_->get_table(name).get()));
 		} else {
 			// Normal tribes loading without scenario entities
-			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, world, table));
+			tribes_->add(new TribeDescr(lua_, Widelands::get_tribeinfo(name), *this, world, table));
 		}
 	} else {
 		throw GameDataError("The tribe '%s' is not listed in data/tribes/init.lua.", name.c_str());

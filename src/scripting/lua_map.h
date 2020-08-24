@@ -195,13 +195,13 @@ public:
 	 */
 	int get_descname(lua_State*);
 	int get_icon_name(lua_State*);
-	int get_helptext_script(lua_State*);
 	int get_name(lua_State*);
 	int get_type_name(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
+    int helptexts(lua_State*);
 
 	/*
 	 * C methods

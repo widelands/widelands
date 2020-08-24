@@ -43,6 +43,8 @@
 --
 --    **name**: A string containing the internal name of the tribe.
 --
+--    **helptext_script**: Path to the tribe's main :ref:`lua_tribes_tribes_helptexts` file.
+--
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``.
 --    Each animation needs the parameter ``hotspot`` (2 integer coordinates),
 --    and may also define ``fps`` (integer frames per second).
@@ -167,6 +169,7 @@ push_textdomain("tribes")
 
 tribes:new_tribe {
    name = "atlanteans",
+   helptext_script = path.dirname(__file__) .. "helptexts.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {3, 12} },

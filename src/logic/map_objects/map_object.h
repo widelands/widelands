@@ -55,8 +55,7 @@ public:
 
 	MapObjectDescr(const MapObjectType init_type,
 	               const std::string& init_name,
-	               const std::string& init_descname,
-	               const std::string& init_helptext_script);
+	               const std::string& init_descname);
 	MapObjectDescr(const MapObjectType init_type,
 	               const std::string& init_name,
 	               const std::string& init_descname,
@@ -68,10 +67,6 @@ public:
 	}
 	const std::string& descname() const {
 		return descname_;
-	}
-
-	const std::string& helptext_script() const {
-		return helptext_script_;
 	}
 
 	// Type of the MapObjectDescr.
@@ -102,6 +97,13 @@ public:
 	const MapObjectDescr::Attributes& attributes() const;
 	static AttributeIndex get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
+    /// Sets a tribe-specific ware or immovable helptext for this MapObject
+    void set_helptexts(const std::string& tribename, std::map<std::string, std::string> localized_helptext);
+    /// Gets the tribe-specific ware or immovable helptext for the given tribe. Fails if it doesn't exist.
+    const std::map<std::string, std::string>& get_helptexts(const std::string& tribename) const;
+    /// Returns whether a tribe-specific helptext exists for the given tribe
+    bool has_helptext(const std::string& tribename) const;
+
 protected:
 	// Add attributes to the attribute list
 	void add_attributes(const std::vector<std::string>& attribs);
@@ -127,9 +129,10 @@ private:
 	const MapObjectType type_;    /// Subclasses pick from the enum above
 	std::string const name_;      /// The name for internal reference
 	std::string const descname_;  /// A localized Descriptive name
-	/// The path and filename to the helptext script. Can be empty, but some subtypes like buildings,
-	/// wares and workers require it.
-	const std::string helptext_script_;
+
+    /// Tribe-specific helptexts. Format: <tribename, <category, localized_text>>
+    std::map<std::string, std::map<std::string, std::string>> helptexts_;
+
 	Anims anims_;
 	std::string icon_filename_;  // Filename for the menu icon
 

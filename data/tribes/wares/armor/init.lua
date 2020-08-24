@@ -34,6 +34,8 @@ dirname = path.dirname(__file__)
 --    ``msgctxt`` above to fetch the string.
 --
 --    **helptext_script**: The full path to the ``helptexts.lua`` script for this ware.
+--    **NOTE: Deprecated. Ware helptexts have been shifted to tribes initialization in the current
+--    development version.**
 --
 --    **icon**: The full path to the menu icon for this ware.
 --
@@ -60,7 +62,6 @@ tribes:new_ware_type {
    name = "armor",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Armor"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
 
    animations = {

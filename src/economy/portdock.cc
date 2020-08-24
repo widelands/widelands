@@ -47,7 +47,7 @@ const PortdockDescr& PortDock::descr() const {
 }
 
 PortdockDescr::PortdockDescr(char const* const init_name, char const* const init_descname)
-   : MapObjectDescr(MapObjectType::PORTDOCK, init_name, init_descname, "") {
+   : MapObjectDescr(MapObjectType::PORTDOCK, init_name, init_descname) {
 }
 
 PortDock::PortDock(Warehouse* wh)
