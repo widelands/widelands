@@ -388,7 +388,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
 	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
-	   get_config_bool("fullscreen", false));
+	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
 
 	g_mouse_cursor = new MouseCursor();
 	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
@@ -420,6 +420,16 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 // TODO(unknown): Handle errors that happen here!
 WLApplication::~WLApplication() {
 	// Do use the opposite order of WLApplication::init()
+
+	if (!g_gr->fullscreen() && !g_gr->maximized()) {
+		log("++ Saving res: %d %d\n", g_gr->get_xres(), g_gr->get_yres());
+		set_config_int("xres", g_gr->get_xres());
+		set_config_int("yres", g_gr->get_yres());
+	} else {
+		log("++ Not saving res\n");
+	}
+	log("++ Saving maximized: %s\n", g_gr->maximized() ? "true" : "false");
+	set_config_bool("maximized", g_gr->maximized());
 
 	shutdown_hardware();
 	shutdown_settings();
@@ -652,8 +662,17 @@ void WLApplication::handle_input(InputCallback const* cb) {
 		case SDL_WINDOWEVENT:
 			if (ev.window.event == SDL_WINDOWEVENT_RESIZED) {
 				g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
-				set_config_int("xres", ev.window.data1);
-				set_config_int("yres", ev.window.data2);
+				log("++ SDL_WINDOWEVENT_RESIZED %d %d", ev.window.data1, ev.window.data2);
+				/*if (!(SDL_GetWindowFlags(g_gr->get_sdlwindow()) & SDL_WINDOW_MAXIMIZED)) {
+					log(" saving");
+					//set_config_int("xres", ev.window.data1);
+					//set_config_int("yres", ev.window.data2);
+				}*/
+				log("\n");
+			} else if (ev.window.event == SDL_WINDOWEVENT_MAXIMIZED) {
+				log("++ SDL_WINDOWEVENT_MAXIMIZED\n");
+			} else if (ev.window.event == SDL_WINDOWEVENT_RESTORED) {
+				log("++ SDL_WINDOWEVENT_RESTORED\n");
 			}
 			break;
 		case SDL_QUIT:
@@ -782,6 +801,7 @@ void WLApplication::refresh_graphics() {
 	g_gr->change_resolution(get_config_int("xres", kDefaultResolutionW),
 	                        get_config_int("yres", kDefaultResolutionH), true);
 	g_gr->set_fullscreen(get_config_bool("fullscreen", false));
+	g_gr->set_maximized(get_config_bool("maximized", false));
 
 	// does only work with a window
 	set_input_grab(get_config_bool("inputgrab", false));
@@ -812,6 +832,7 @@ bool WLApplication::init_settings() {
 	get_config_bool("auto_speed", false);
 	get_config_bool("dock_windows_to_edges", false);
 	get_config_bool("fullscreen", false);
+	get_config_bool("maximized", false);
 	get_config_bool("sdl_cursor", true);
 	get_config_bool("snap_windows_only_when_overlapping", false);
 	get_config_bool("animate_map_panning", false);
@@ -1158,7 +1179,7 @@ void WLApplication::mainmenu() {
 
 	for (;;) {
 		// Refresh graphics system in case we just changed resolution.
-		refresh_graphics();
+		//refresh_graphics();
 
 		FullscreenMenuMain mm;
 

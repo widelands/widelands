@@ -308,22 +308,35 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 		}
 	}
 
+	//int cur_win_res_x;
+	//int cur_win_res_y;
+	//if (g_gr->fullscreen() || g_gr->maximized()) {
+	//	log("++ Options: fullscreen or maximized\n");
+	//	cur_win_res_x = opt.xres;
+	//	cur_win_res_y = opt.yres;
+	//} else {
+	int cur_win_res_x = g_gr->get_window_mode_xres();
+	int cur_win_res_y = g_gr->get_window_mode_yres();
+	//}
 	bool did_select_a_res = false;
+
 	for (uint32_t i = 0; i < resolutions_.size(); ++i) {
-		const bool selected = resolutions_[i].xres == opt.xres && resolutions_[i].yres == opt.yres;
+		const bool selected = resolutions_[i].xres == cur_win_res_x && resolutions_[i].yres == cur_win_res_y;
 		did_select_a_res |= selected;
 		resolution_dropdown_.add(
 		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
 		   (boost::format(_("%1% x %2%")) % resolutions_[i].xres % resolutions_[i].yres).str(), i,
 		   nullptr, selected);
 	}
+
 	if (!did_select_a_res) {
 		uint32_t entry = resolutions_.size();
 		resolutions_.resize(entry + 1);
-		resolutions_[entry].xres = opt.xres;
-		resolutions_[entry].yres = opt.yres;
+		resolutions_[entry].xres = cur_win_res_x;
+		resolutions_[entry].yres = cur_win_res_y;
+		log("++ Options: Adding res %d %d\n", cur_win_res_x, cur_win_res_y);
 		resolution_dropdown_.add(
-		   (boost::format(_("%1% x %2%")) % opt.xres % opt.yres).str(), entry, nullptr, true);
+		   (boost::format(_("%1% x %2%")) % cur_win_res_x % cur_win_res_y).str(), entry, nullptr, true);
 	}
 
 	fullscreen_.set_state(opt.fullscreen);
@@ -622,11 +635,11 @@ void OptionsCtrl::handle_menu() {
 	FullscreenMenuBase::MenuTarget i = opt_dialog_->run<FullscreenMenuBase::MenuTarget>();
 	if (i != FullscreenMenuBase::MenuTarget::kBack) {
 		save_options();
+		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
+		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
 	}
 	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
-		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
-		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
 		opt_dialog_.reset(new FullscreenMenuOptions(options_struct(active_tab)));
 		handle_menu();  // Restart general options menu
 	}

@@ -72,7 +72,8 @@ Graphic::Graphic() {
 void Graphic::initialize(const TraceGl& trace_gl,
                          int window_mode_w,
                          int window_mode_h,
-                         bool init_fullscreen) {
+                         bool init_fullscreen,
+                         bool init_maximized) {
 	window_mode_width_ = window_mode_w;
 	window_mode_height_ = window_mode_h;
 
@@ -96,6 +97,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 
 	resolution_changed();
 	set_fullscreen(init_fullscreen);
+	set_maximized(init_maximized);
 
 	SDL_SetWindowTitle(sdl_window_, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 	set_icon(sdl_window_);
@@ -150,15 +152,23 @@ Graphic::~Graphic() {
 /**
  * Return the screen x resolution
  */
-int Graphic::get_xres() {
+int Graphic::get_xres() const {
 	return screen_->width();
 }
 
 /**
  * Return the screen x resolution
  */
-int Graphic::get_yres() {
+int Graphic::get_yres() const {
 	return screen_->height();
+}
+
+int Graphic::get_window_mode_xres() const {
+	return window_mode_width_;
+}
+
+int Graphic::get_window_mode_yres() const {
+	return window_mode_height_;
 }
 
 void Graphic::change_resolution(int w, int h, bool resize_window) {
@@ -175,8 +185,7 @@ void Graphic::change_resolution(int w, int h, bool resize_window) {
 void Graphic::set_window_size(int w, int h) {
 	// SDL can get badly confused when trying to resize a maximized window
 	// so we restore it first.
-	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
-	if (flags & SDL_WINDOW_MAXIMIZED) {
+	if (maximized()) {
 		SDL_RestoreWindow(sdl_window_);
 	};
 
@@ -217,8 +226,27 @@ int Graphic::max_texture_size_for_font_rendering() const {
 #endif
 }
 
-bool Graphic::fullscreen() {
+bool Graphic::maximized() const {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
+	log("++ maximized() = %s\n", flags & SDL_WINDOW_MAXIMIZED ? "true" : "false");
+	return flags & SDL_WINDOW_MAXIMIZED;
+}
+
+void Graphic::set_maximized(const bool to_maximize) {
+	if (fullscreen() || maximized() == to_maximize) {
+		return;
+	}
+	log("++ set_maximized(%s)\n", to_maximize ? "true" : "false");
+	if (to_maximize) {
+		SDL_MaximizeWindow(sdl_window_);
+	} else {
+		SDL_RestoreWindow(sdl_window_);
+	}
+}
+
+bool Graphic::fullscreen() const {
+	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
+	//log("++ fullscreen() = %s\n", (flags & SDL_WINDOW_FULLSCREEN) || (flags & SDL_WINDOW_FULLSCREEN_DESKTOP) ? "true" : "false");
 	return (flags & SDL_WINDOW_FULLSCREEN) || (flags & SDL_WINDOW_FULLSCREEN_DESKTOP);
 }
 

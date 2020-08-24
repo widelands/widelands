@@ -49,22 +49,27 @@ public:
 	// 'Gl::initialize'.
 	enum class TraceGl { kNo, kYes };
 	void
-	initialize(const TraceGl& trace_gl, int window_mode_w, int window_mode_height, bool fullscreen);
+	initialize(const TraceGl& trace_gl, int window_mode_w, int window_mode_height, bool fullscreen, bool maximized);
 
 	// Gets and sets the resolution.
 	// Use 'resize_window = true' to resize the window to the new resolution.
 	// Use 'resize_window = false' if the window has already been resized.
 	void change_resolution(int w, int h, bool resize_window);
-	int get_xres();
-	int get_yres();
+	int get_xres() const;
+	int get_yres() const;
+	int get_window_mode_xres() const;
+	int get_window_mode_yres() const;
+
+	bool maximized() const;
+	void set_maximized(bool);
 
 	// Changes the window to be fullscreen or not.
-	bool fullscreen();
+	bool fullscreen() const;
 	void set_fullscreen(bool);
 
 	RenderTarget* get_render_target();
 	void refresh();
-	SDL_Window* get_sdlwindow() {
+	SDL_Window* get_sdlwindow() const {
 		return sdl_window_;
 	}
 
