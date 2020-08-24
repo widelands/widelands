@@ -508,9 +508,7 @@ void MapObjectDescr::set_helptexts(const std::string& tribename, std::map<std::s
 }
 
 const std::map<std::string, std::string>& MapObjectDescr::get_helptexts(const std::string& tribename) const {
-    if (!has_helptext(tribename)) {
-        throw wexception("MapObject '%s' has no helptext for tribe '%s'", name().c_str(), tribename.c_str());
-    }
+    assert(has_helptext(tribename));
     return helptexts_.at(tribename);
 }
 bool MapObjectDescr::has_helptext(const std::string& tribename) const {

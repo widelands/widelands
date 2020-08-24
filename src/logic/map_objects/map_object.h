@@ -99,7 +99,7 @@ public:
 
     /// Sets a tribe-specific ware or immovable helptext for this MapObject
     void set_helptexts(const std::string& tribename, std::map<std::string, std::string> localized_helptext);
-    /// Gets the tribe-specific ware or immovable helptext for the given tribe. Fails if it doesn't exist.
+    /// Gets the tribe-specific ware or immovable helptext for the given tribe. Assumes that one exists.
     const std::map<std::string, std::string>& get_helptexts(const std::string& tribename) const;
     /// Returns whether a tribe-specific helptext exists for the given tribe
     bool has_helptext(const std::string& tribename) const;

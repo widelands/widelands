@@ -2078,7 +2078,7 @@ int LuaMapObjectDescription::get_type_name(lua_State* L) {
 }
 
 /* RST
-   .. method:: helptext
+   .. method:: helptext(tribename)
 
       Returns the tribe-specific helptexts for this object.
 
