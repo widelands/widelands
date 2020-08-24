@@ -98,9 +98,11 @@ wl_library(logic_generic_save_handler
   DEPENDS
     base_i18n
     base_log
+    base_multithreading
     base_time_string
     io_filesystem
     logic_filesystem_constants
+  USES_SDL2
 )
 
 wl_library(logic_map

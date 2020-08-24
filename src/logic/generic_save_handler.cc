@@ -21,10 +21,12 @@
 
 #include <memory>
 
+#include <SDL_timer.h>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/multithreading.h"
 #include "base/time_string.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
@@ -136,6 +138,9 @@ void GenericSaveHandler::save_file() {
 }
 
 GenericSaveHandler::Error GenericSaveHandler::save() {
+	// This needs to be done by the main thread so we can generate the minimap
+	std::unique_ptr<GenericSaveHandler::Error> result;
+	Notifications::publish(NoteDelayedCheck([this, &result]() {
 	try {  // everything additionally in one big try block
 		    // to catch any unexpected errors
 		clear();
@@ -151,7 +156,8 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 			                     dir_.c_str() % e.what())
 			                       .str();
 			log("%s", error_msg_[index].c_str());
-			return error_;
+			result.reset(new GenericSaveHandler::Error(error_));
+			return;
 		}
 
 		// Make a backup if file already exists.
@@ -159,7 +165,8 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 			make_backup();
 		}
 		if (error_ != Error::kNone) {
-			return error_;
+			result.reset(new GenericSaveHandler::Error(error_));
+			return;
 		}
 
 		// Write data to file/dir.
@@ -216,7 +223,12 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 		log("%s", error_msg_[index].c_str());
 	}
 
-	return error_;
+	result.reset(new GenericSaveHandler::Error(error_));
+	}));
+	while (!result.get()) {
+		SDL_Delay(20);
+	}
+	return *result;
 }
 
 std::string GenericSaveHandler::error_message(GenericSaveHandler::Error error_mask) {
