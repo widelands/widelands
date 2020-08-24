@@ -760,7 +760,8 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
 	log("ind. contentbox - clientbox: %d\n", max_width - clientbox.get_w());
 	log("scrollable before: %d\n", scrollable_playerbox.get_w());
 	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
-		multiPlayerPlayerGroup->set_desired_size(get_w() - 32 - clientbox.get_w() - UI::Scrollbar::kSize, multiPlayerPlayerGroup->get_h());
+		multiPlayerPlayerGroup->set_desired_size(
+		   get_w() - 32 - clientbox.get_w() - UI::Scrollbar::kSize, multiPlayerPlayerGroup->get_h());
 	}
 	log("scrollable after: %d\n", scrollable_playerbox.get_w());
 }
