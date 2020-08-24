@@ -130,6 +130,8 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Widelands::World& 
 		throw GameDataError("%s: temperature is not possible.", name_.c_str());
 	}
 
+	// Note: Terrain texures are loaded in "graphic/build_texture_atlas.h"
+
 	texture_paths_ = table.get_table("textures")->array_entries<std::string>();
 	frame_length_ = kFrameLength;
 	if (texture_paths_.empty()) {

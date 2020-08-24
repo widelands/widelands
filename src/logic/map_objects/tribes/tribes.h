@@ -55,6 +55,7 @@ public:
 	bool building_exists(DescriptionIndex index) const;
 	bool immovable_exists(DescriptionIndex index) const;
 	bool ship_exists(DescriptionIndex index) const;
+	bool tribe_exists(const std::string& tribename) const;
 	bool tribe_exists(DescriptionIndex index) const;
 
 	DescriptionIndex safe_building_index(const std::string& buildingname) const;

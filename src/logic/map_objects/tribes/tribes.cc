@@ -106,6 +106,9 @@ bool Tribes::immovable_exists(DescriptionIndex index) const {
 bool Tribes::ship_exists(DescriptionIndex index) const {
 	return ships_->get_mutable(index) != nullptr;
 }
+bool Tribes::tribe_exists(const std::string& tribename) const {
+	return tribes_->exists(tribename) != nullptr;
+}
 bool Tribes::tribe_exists(DescriptionIndex index) const {
 	return tribes_->get_mutable(index) != nullptr;
 }

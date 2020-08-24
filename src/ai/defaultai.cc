@@ -689,12 +689,11 @@ void DefaultAI::late_initialization() {
 					if (temp_output == tribe_->soldier()) {
 						bo.set_is(BuildingAttribute::kBarracks);
 					}
-					const WorkerHints* worker_hints = tribe_->get_worker_descr(temp_output)->ai_hints();
-					if (worker_hints != nullptr) {
-						const int worker_preciousness = worker_hints->preciousness(tribe_->name());
-						if (worker_preciousness != Widelands::kInvalidWare) {
-							bo.initial_preciousness += worker_preciousness;
-						}
+					const WareWorkerHints* worker_hints =
+					   tribe_->get_worker_descr(temp_output)->ai_hints();
+					const int worker_preciousness = worker_hints->preciousness(tribe_->name());
+					if (worker_preciousness != Widelands::kInvalidWare) {
+						bo.initial_preciousness += worker_preciousness;
 					}
 				}
 				if (!bo.is(BuildingAttribute::kBarracks) && bo.ware_outputs.empty()) {

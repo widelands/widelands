@@ -8,15 +8,17 @@ partially_finished, productionsites, trainingsites and warehouses; headquarters
 are a special case of warehouse), immovables, workers, wares, and a ship.
 
 The definitions for the tribes' units are located in the subdirectories of
-``data/tribes``. Each unit needs to have an ``init.lua`` and a ``helptexts.lua``
-file. The ``init.lua`` script will load the unit to be used in the game, and
-``helptexts.lua`` will provide the information used by the in-game help
-('Tribal Encyclopedia') and by our website's online
-`Encyclopedia <https://wlww.widelands.org/encyclopedia/>`_.
+``data/tribes``. Each subdirectory needs to have a ``register.lua``, an ``init.lua`` and a ``helptexts.lua``
+file.
 
-Each ``init.lua`` file also needs to have a matching ``register.lua`` file that
-will list the names of all units defined in the ``init.lua``, and their attributes if they have any.
-This is needed for registering the objects before they are loaded. For a given ``init.lua``:
+* ``register.lua`` will inform the engine about the existence of units and their attributes if they have any.
+  This is needed for registering the objects before they are loaded.
+* ``init.lua`` will load the units if they are used in the game
+* ``helptexts.lua`` will provide the information used by the in-game help
+  ('Tribal Encyclopedia') and by our website's online
+  `Encyclopedia <https://wlww.widelands.org/encyclopedia/>`_.
+
+Example for ``init.lua``:
 
 .. code-block:: lua
 
@@ -51,8 +53,11 @@ The matching ``register.lua`` would look like this:
       berry_bush_blueberry_ripe = { "ripe_bush" },
    }
 
-Note that ``berry_bush_blueberry_small`` in this example has no attributes, so its
-attribute table is empty.
+.. note: If you are defining multiple unit types that can be enhanced or that will
+   transform into each other in the same ``init.lua``, the enhanced/transformed type
+   needs to be listed first.
+   Also, ``berry_bush_blueberry_small`` in this example has no attributes, so its
+   attribute table is empty.
 
 Available unit types:
 

@@ -7,18 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Iron Ore"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      atlanteans = 15,
-      barbarians = 15,
-      frisians = 15,
-      empire = 15
-   },
-   preciousness = {
-      atlanteans = 4,
-      barbarians = 4,
-      frisians = 2,
-      empire = 4
-   },
 
    animations = {
       idle = {
