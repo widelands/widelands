@@ -131,6 +131,9 @@ struct GameSettings {
 		}
 	}
 
+	/// Returns the basic preload info for a tribe.
+	Widelands::TribeBasicInfo get_tribeinfo(const std::string& tribename) const;
+
 	/// Find a player number that the slot could share in. Does not guarantee that a viable slot was
 	/// actually found.
 	Widelands::PlayerNumber find_shared(PlayerSlot slot) const;

@@ -20,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-16 16:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-08-17 14:37+0000\n"
+"PO-Revision-Date: 2020-08-20 12:58+0000\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -820,7 +820,7 @@ msgstr "Directorio actual: %s"
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:59
 msgid "Display"
-msgstr ""
+msgstr "Mostrar"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:70
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:231
@@ -848,23 +848,23 @@ msgstr "Cancelar"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:98
 msgid "File names"
-msgstr ""
+msgstr "Nombres de archivos"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:99
 msgid "Map names"
-msgstr ""
+msgstr "Nombres de mapas"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:99
 msgid "Original map names"
-msgstr ""
+msgstr "Nombres originales de mapas"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:103
 msgid "Translated map names"
-msgstr ""
+msgstr "Nombres traducidos de mapas"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:46
 msgid "Click player to remove"
-msgstr ""
+msgstr "Clic en jugador para removerlo"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:56
 #: ../../src/wui/economy_options_window.cc:616
@@ -5744,14 +5744,14 @@ msgstr "Expedición"
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:499
+#: ../../src/wui/waresdisplay.cc:512
 msgid "%1%k"
 msgstr "%1%k"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:502
+#: ../../src/wui/waresdisplay.cc:515
 msgid "%1%M"
 msgstr "%1%M"
 
@@ -5759,7 +5759,7 @@ msgstr "%1%M"
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:505
+#: ../../src/wui/waresdisplay.cc:518
 msgid "%1%G"
 msgstr "%1%G"
 

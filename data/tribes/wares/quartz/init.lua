@@ -7,12 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Quartz"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      atlanteans = 5
-   },
-   preciousness = {
-      atlanteans = 1
-   },
 
    animations = {
       idle = {

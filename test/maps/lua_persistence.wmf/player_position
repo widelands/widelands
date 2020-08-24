@@ -3,3 +3,4 @@
 [global]
 packet_version="2"
 player_1="40 40"
+player_2="0 0"
