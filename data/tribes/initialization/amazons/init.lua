@@ -25,4 +25,4 @@ local r = {
    }
 }
 pop_textdomain()
-return result
+return r
