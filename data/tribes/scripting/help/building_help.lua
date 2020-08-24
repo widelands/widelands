@@ -730,8 +730,7 @@ function building_help(tribe, building_description)
       if (building_description.is_port) then
          return building_help_general_string(tribe, building_description) ..
             -- TODO(GunChleoc) expedition costs here?
-            building_help_building_section(building_description) ..
-            building_help_production_section(tribe, building_description)
+            building_help_building_section(building_description)
       else
          return building_help_general_string(tribe, building_description) ..
             building_help_building_section(building_description)
