@@ -35,7 +35,9 @@ class LuaTable;
 /// distinction and not a logical one.
 class EditorCategory {
 public:
-	explicit EditorCategory(const LuaTable& table, Widelands::MapObjectType type, Widelands::World& world);
+	explicit EditorCategory(const LuaTable& table,
+	                        Widelands::MapObjectType type,
+	                        Widelands::World& world);
 
 	/// Internal name.
 	const std::string& name() const;

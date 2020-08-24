@@ -128,8 +128,8 @@ private:
 	/// Custom scenario tribes
 	std::unique_ptr<LuaTable> scenario_tribes_;
 
-	LuaInterface* lua_;  // Not owned
-	DescriptionManager* description_manager_; // Not owned
+	LuaInterface* lua_;                        // Not owned
+	DescriptionManager* description_manager_;  // Not owned
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };
 

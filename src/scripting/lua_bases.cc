@@ -279,7 +279,8 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	}
 
 	return to_lua<LuaMaps::LuaTribeDescription>(
-	   L, new LuaMaps::LuaTribeDescription(get_egbase(L).tribes().get_tribe_descr(get_egbase(L).mutable_tribes()->load_tribe(tribe_name))));
+	   L, new LuaMaps::LuaTribeDescription(get_egbase(L).tribes().get_tribe_descr(
+	         get_egbase(L).mutable_tribes()->load_tribe(tribe_name))));
 }
 
 /* RST
@@ -885,10 +886,10 @@ int LuaPlayerBase::place_building(lua_State* L) {
 		const DescriptionIndex building_index = egbase.mutable_tribes()->load_building(name);
 
 		if (!player.tribe().has_building(building_index) &&
-			tribes.get_building_descr(building_index)->type() !=
-			   Widelands::MapObjectType::MILITARYSITE) {
+		    tribes.get_building_descr(building_index)->type() !=
+		       Widelands::MapObjectType::MILITARYSITE) {
 			report_error(L, "Building: '%s' is not available for Player %d's tribe '%s'", name.c_str(),
-						 player.player_number(), player.tribe().name().c_str());
+			             player.player_number(), player.tribe().name().c_str());
 		}
 
 		FormerBuildings former_buildings;
@@ -908,10 +909,11 @@ int LuaPlayerBase::place_building(lua_State* L) {
 			b = player.build(c->coords(), building_index, constructionsite, former_buildings);
 		}
 		if (!b) {
-			const std::string tempname(
-			   force ? constructionsite ? "force constructionsite" : "force building" : "place building");
+			const std::string tempname(force ? constructionsite ? "force constructionsite" :
+			                                                      "force building" :
+			                                   "place building");
 			report_error(L, "Couldn't %s '%s' at (%d, %d)!", tempname.c_str(), name.c_str(),
-						 c->coords().x, c->coords().y);
+			             c->coords().x, c->coords().y);
 		}
 
 		LuaMaps::upcasted_map_object_to_lua(L, b);

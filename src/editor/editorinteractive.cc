@@ -993,10 +993,12 @@ void EditorInteractive::load_world_units() {
 
 	std::unique_ptr<LuaTable> table(egbase().lua().run_script("world/init.lua"));
 
-	auto load_category = [this, world](const LuaTable& t, const std::string& key, Widelands::MapObjectType type) {
+	auto load_category = [this, world](const LuaTable& t, const std::string& key,
+	                                   Widelands::MapObjectType type) {
 		for (const auto& category_table :
-			 t.get_table(key)->array_entries<std::unique_ptr<LuaTable>>()) {
-			editor_categories_[type].push_back(std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, type, *world)));
+		     t.get_table(key)->array_entries<std::unique_ptr<LuaTable>>()) {
+			editor_categories_[type].push_back(
+			   std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, type, *world)));
 		}
 	};
 
@@ -1013,10 +1015,9 @@ void EditorInteractive::load_world_units() {
 	log("%ums\n", timer.ms_since_last_query());
 
 	log("┃    Resources: ");
-	for (const std::string& item :
-		 table->get_table("resources")->array_entries<std::string>()) {
-		Notifications::publish(
-		   Widelands::NoteMapObjectDescription(item, Widelands::NoteMapObjectDescription::LoadType::kObject));
+	for (const std::string& item : table->get_table("resources")->array_entries<std::string>()) {
+		Notifications::publish(Widelands::NoteMapObjectDescription(
+		   item, Widelands::NoteMapObjectDescription::LoadType::kObject));
 	}
 	log("%ums\n", timer.ms_since_last_query());
 }
@@ -1058,7 +1059,8 @@ EditorInteractive::Tools* EditorInteractive::tools() {
 	return tools_.get();
 }
 
-const std::vector<std::unique_ptr<EditorCategory>>& EditorInteractive::editor_categories(Widelands::MapObjectType type) const {
+const std::vector<std::unique_ptr<EditorCategory>>&
+EditorInteractive::editor_categories(Widelands::MapObjectType type) const {
 	assert(editor_categories_.count(type) == 1);
 	return editor_categories_.at(type);
 }

@@ -69,10 +69,10 @@ initialization
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
    : gametime_(0),
-	 // TODO(SirVer): this is sooo ugly, I can't say
+     // TODO(SirVer): this is sooo ugly, I can't say
      lua_(lua_interface ? lua_interface : new LuaEditorInterface(this)),
      player_manager_(new PlayersManager(*this)),
-	 description_manager_(new Widelands::DescriptionManager(lua_.get())),
+     description_manager_(new Widelands::DescriptionManager(lua_.get())),
      ibase_(nullptr),
      loader_ui_(nullptr),
      game_tips_(nullptr),

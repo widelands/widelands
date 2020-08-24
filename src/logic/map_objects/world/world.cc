@@ -39,7 +39,7 @@ World::World(DescriptionManager* description_manager)
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
      resources_(new DescriptionMaintainer<ResourceDescription>()),
 
-	 description_manager_(description_manager) {
+     description_manager_(description_manager) {
 
 	// Walk world directory and register objects
 	description_manager_->register_directory("world", g_fs, false);
@@ -49,20 +49,23 @@ void World::add_world_object_type(const LuaTable& table, MapObjectType type) {
 	// TODO(GunChleoc): Push/pop textdomain in Lua and get rid of localization code here
 	i18n::Textdomain td("world");
 	const std::string& type_name = table.get_string("name");
-	const std::string& msgctxt = table.has_key<std::string>("msgctxt") ? table.get_string("msgctxt") : "";
-	const std::string& type_descname = msgctxt.empty() ? _(table.get_string("descname").c_str()) :
-	   pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str());
+	const std::string& msgctxt =
+	   table.has_key<std::string>("msgctxt") ? table.get_string("msgctxt") : "";
+	const std::string& type_descname =
+	   msgctxt.empty() ? _(table.get_string("descname").c_str()) :
+	                     pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str());
 
 	description_manager_->mark_loading_in_progress(type_name);
 
 	// Add
 	switch (type) {
 	case MapObjectType::CRITTER:
-		critters_->add(new CritterDescr(_(table.get_string("descname")), table, description_manager_->get_attributes(type_name)));
+		critters_->add(new CritterDescr(
+		   _(table.get_string("descname")), table, description_manager_->get_attributes(type_name)));
 		break;
 	case MapObjectType::IMMOVABLE:
-		immovables_->add(new ImmovableDescr(
-		   type_descname, table, MapObjectDescr::OwnerType::kWorld, description_manager_->get_attributes(type_name)));
+		immovables_->add(new ImmovableDescr(type_descname, table, MapObjectDescr::OwnerType::kWorld,
+		                                    description_manager_->get_attributes(type_name)));
 		break;
 	case MapObjectType::RESOURCE:
 		resources_->add(new ResourceDescription(table));
@@ -122,7 +125,6 @@ DescriptionIndex World::load_terrain(const std::string& terrainname) {
 	}
 	return safe_terrain_index(terrainname);
 }
-
 
 TerrainDescription& World::terrain_descr(DescriptionIndex const i) const {
 	return *terrains_->get_mutable(i);
@@ -196,7 +198,6 @@ DescriptionIndex World::get_nr_immovables() const {
 ImmovableDescr const* World::get_immovable_descr(DescriptionIndex const index) const {
 	return immovables_->get_mutable(index);
 }
-
 
 DescriptionIndex World::resource_index(const std::string& name) const {
 	return name != "none" ? resources_->get_index(name) : Widelands::kNoResource;

@@ -23,9 +23,9 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "logic/map_objects/description_manager.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/description_manager.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/player_area.h"
 #include "notifications/notifications.h"

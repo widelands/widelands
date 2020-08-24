@@ -188,7 +188,6 @@ protected:
 	std::set<std::pair<MapObjectType, std::string>> becomes_;
 
 private:
-
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
 

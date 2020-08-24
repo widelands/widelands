@@ -707,7 +707,8 @@ const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tr
 	if (!tribes.tribe_exists(tribename)) {
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}
-	return *get_egbase(L).tribes().get_tribe_descr(get_egbase(L).mutable_tribes()->load_tribe(tribename));
+	return *get_egbase(L).tribes().get_tribe_descr(
+	   get_egbase(L).mutable_tribes()->load_tribe(tribename));
 }
 
 }  // namespace
@@ -1675,7 +1676,8 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
 	if (!Widelands::tribe_exists(name)) {
 		report_error(L, "Tribe '%s' does not exist", name.c_str());
 	}
-	set_description_pointer(get_egbase(L).tribes().get_tribe_descr(get_egbase(L).mutable_tribes()->load_tribe(name)));
+	set_description_pointer(
+	   get_egbase(L).tribes().get_tribe_descr(get_egbase(L).mutable_tribes()->load_tribe(name)));
 }
 
 /*
@@ -6731,7 +6733,8 @@ int LuaField::set_terr(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	try {
 		const DescriptionIndex td = egbase.mutable_world()->load_terrain(name);
-		egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
+		egbase.mutable_map()->change_terrain(
+		   egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
 	} catch (const Widelands::GameDataError& e) {
 		report_error(L, "set_terr: %s", e.what());
 	}
@@ -6750,7 +6753,8 @@ int LuaField::set_terd(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	try {
 		const DescriptionIndex td = egbase.mutable_world()->load_terrain(name);
-		egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
+		egbase.mutable_map()->change_terrain(
+		   egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
 	} catch (const Widelands::GameDataError& e) {
 		report_error(L, "set_terd: %s", e.what());
 	}

@@ -92,7 +92,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
      tool_(tool) {
 	add(&tab_panel_);
 
-	for (const auto& category: categories) {
+	for (const auto& category : categories) {
 		UI::Box* vertical = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
 		const int kSpacing = 5;
 		vertical->add_space(kSpacing);

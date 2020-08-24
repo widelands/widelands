@@ -696,10 +696,12 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 
 			if (owner_type != "world") {  //  It is a tribe immovable.
 				const std::string name = tribes_lookup_table.lookup_immovable(fr.c_string());
-				imm = new Immovable(*egbase.tribes().get_immovable_descr(egbase.mutable_tribes()->load_immovable(name)));
+				imm = new Immovable(
+				   *egbase.tribes().get_immovable_descr(egbase.mutable_tribes()->load_immovable(name)));
 			} else {  //  world immovable
 				const std::string name = world_lookup_table.lookup_immovable(fr.c_string());
-				imm = new Immovable(*egbase.world().get_immovable_descr(egbase.mutable_world()->load_immovable(name)));
+				imm = new Immovable(
+				   *egbase.world().get_immovable_descr(egbase.mutable_world()->load_immovable(name)));
 			}
 
 			loader->init(egbase, mol, *imm);

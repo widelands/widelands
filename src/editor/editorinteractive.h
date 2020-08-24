@@ -140,7 +140,8 @@ public:
 	Tools* tools();
 
 	/// Access to the editor categories
-	const std::vector<std::unique_ptr<EditorCategory>>& editor_categories(Widelands::MapObjectType type) const;
+	const std::vector<std::unique_ptr<EditorCategory>>&
+	editor_categories(Widelands::MapObjectType type) const;
 
 private:
 	// For referencing the items in mainmenu_
@@ -229,7 +230,8 @@ private:
 		UI::UniqueWindow::Registry resizemap;
 	} tool_windows_;
 
-	std::map<Widelands::MapObjectType, std::vector<std::unique_ptr<EditorCategory>>> editor_categories_;
+	std::map<Widelands::MapObjectType, std::vector<std::unique_ptr<EditorCategory>>>
+	   editor_categories_;
 
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;

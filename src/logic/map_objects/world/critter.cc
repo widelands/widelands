@@ -95,7 +95,7 @@ bool Critter::run_remove(Game& game, State& state, const CritterAction&) {
 
 CritterDescr::CritterDescr(const std::string& init_descname,
                            const LuaTable& table,
-						   const std::vector<std::string>& attribs)
+                           const std::vector<std::string>& attribs)
    : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
      size_(table.get_int("size")),
      carnivore_(table.has_key("carnivore") && table.get_bool("carnivore")),
@@ -533,7 +533,8 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 
 			if (critter_owner == "world") {
 				critter_name = lookup_table.lookup_critter(critter_name, packet_version);
-				descr = egbase.world().get_critter_descr(egbase.mutable_world()->load_critter(critter_name));
+				descr =
+				   egbase.world().get_critter_descr(egbase.mutable_world()->load_critter(critter_name));
 			} else {
 				throw GameDataError(
 				   "Tribes don't have critters %s/%s", critter_owner.c_str(), critter_name.c_str());

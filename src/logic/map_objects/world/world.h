@@ -67,7 +67,6 @@ public:
 	DescriptionIndex get_nr_immovables() const;
 	ImmovableDescr const* get_immovable_descr(DescriptionIndex index) const;
 
-
 	DescriptionIndex resource_index(const std::string& name) const;
 	DescriptionIndex safe_resource_index(const std::string& warename) const;
 	ResourceDescription const* get_resource(DescriptionIndex res) const;
@@ -88,8 +87,7 @@ private:
 	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
 	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;
 
-
-	DescriptionManager* description_manager_; // Not owned
+	DescriptionManager* description_manager_;  // Not owned
 	DISALLOW_COPY_AND_ASSIGN(World);
 };
 
