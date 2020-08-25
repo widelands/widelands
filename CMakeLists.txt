@@ -3,7 +3,7 @@ project (widelands)
 cmake_minimum_required (VERSION 3.5)
 cmake_policy(VERSION 3.5)
 
-message(STATUS "Using CMake version $(CMAKE_VERSION)")
+message(STATUS "Using CMake version ${CMAKE_VERSION}")
 
 option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
