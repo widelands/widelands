@@ -506,9 +506,10 @@ void MapObjectDescr::set_helptexts(const std::string& tribename,
 	helptexts_[tribename] = std::move(localized_helptext);
 }
 
-const std::map<std::string, std::string>& MapObjectDescr::get_helptexts(const std::string& tribename) const {
-    assert(has_helptext(tribename));
-    return helptexts_.at(tribename);
+const std::map<std::string, std::string>&
+MapObjectDescr::get_helptexts(const std::string& tribename) const {
+	assert(has_helptext(tribename));
+	return helptexts_.at(tribename);
 }
 bool MapObjectDescr::has_helptext(const std::string& tribename) const {
 	return helptexts_.count(tribename) == 1;
