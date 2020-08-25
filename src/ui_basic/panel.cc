@@ -731,10 +731,6 @@ void Panel::set_can_focus(bool const yes) {
 
 	if (yes) {
 		flags_ |= pf_can_focus;
-
-		if ((!parent_ || !parent_->focus_) && is_visible()) {
-			focus();
-		}
 	} else {
 		flags_ &= ~pf_can_focus;
 
