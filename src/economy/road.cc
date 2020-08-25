@@ -179,8 +179,8 @@ void Road::request_carrier_callback(
 	 * Oops! We got a request_callback but don't have the request.
 	 * Try to send him home.
 	 */
-	log_warn_time(game.get_gametime(), "Road(%u): got a request_callback but do not have the request\n",
-	         road.serial());
+	log_warn_time(game.get_gametime(),
+	              "Road(%u): got a request_callback but do not have the request\n", road.serial());
 	delete &rq;
 	w->start_task_gowarehouse(game);
 }

@@ -60,10 +60,10 @@ public:
 
 		if (hash_ != myhash) {
 			log_err_time(game.get_gametime(),
-			        "REPLAY: Lost synchronization at time %u\n"
-			        "I have:     %s\n"
-			        "Replay has: %s\n",
-			        duetime(), myhash.str().c_str(), hash_.str().c_str());
+			             "REPLAY: Lost synchronization at time %u\n"
+			             "I have:     %s\n"
+			             "Replay has: %s\n",
+			             duetime(), myhash.str().c_str(), hash_.str().c_str());
 
 			// In case syncstream logging is on, save it for analysis
 			game.save_syncstream(true);

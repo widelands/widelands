@@ -164,7 +164,7 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 				// this test, might be removed after some time
 				if (dock->get_fleet() == nullptr) {
 					log_warn_time(egbase.get_gametime(), "The dock on %3dx%3d without a fleet!\n",
-					         dock->dockpoints_.front().x, dock->dockpoints_.front().y);
+					              dock->dockpoints_.front().x, dock->dockpoints_.front().y);
 				}
 				if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
 					return dock->get_fleet()->merge(egbase, this);
@@ -517,7 +517,7 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 
 			if (pd->get_fleet() && pd->get_fleet() != this) {
 				log_err_time(egbase.get_gametime(),
-				        "ShipFleet::connect_port: different fleets despite reachability\n");
+				             "ShipFleet::connect_port: different fleets despite reachability\n");
 				continue;
 			}
 

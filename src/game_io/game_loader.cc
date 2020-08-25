@@ -97,7 +97,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		log_info_time(game_.get_gametime(), "Game: Reading Scenario Tribes ... ");
 		game_.mutable_tribes()->register_scenario_tribes(map_fs);
 		log_info_time(game_.get_gametime(), "Game: Reading Scenario Tribes took %ums\n",
-		         timer.ms_since_last_query());
+		              timer.ms_since_last_query());
 	}
 
 	// This also triggers loading the world and tribes, so we need a newline at the end of the log
@@ -112,7 +112,8 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 	log_info_time(game_.get_gametime(), "Game: Calling read_complete()\n");
 	map_packet.read_complete(game_);
-	log_info_time(game_.get_gametime(), "Game: read_complete took: %ums\n", timer.ms_since_last_query());
+	log_info_time(
+	   game_.get_gametime(), "Game: read_complete took: %ums\n", timer.ms_since_last_query());
 
 	MapObjectLoader* const mol = map_packet.get_map_object_loader();
 

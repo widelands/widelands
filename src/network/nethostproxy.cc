@@ -138,8 +138,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	time_t endtime = time(nullptr) + 10;
 	while (!BufferedConnection::Peeker(conn_.get()).cmd()) {
 		if (time(nullptr) > endtime) {
-			log_err(
-			   "[NetHostProxy] Handshaking error (1): No message from relay server in time\n");
+			log_err("[NetHostProxy] Handshaking error (1): No message from relay server in time\n");
 			conn_->close();
 			conn_.reset();
 			return;
@@ -150,10 +149,9 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	conn_->receive(&cmd);
 
 	if (cmd != RelayCommand::kWelcome) {
-		log_err(
-		   "[NetHostProxy] Handshaking error (2): Received command code %i from relay server "
-		   "instead of Welcome (%i)\n",
-		   static_cast<uint8_t>(cmd), static_cast<uint8_t>(RelayCommand::kWelcome));
+		log_err("[NetHostProxy] Handshaking error (2): Received command code %i from relay server "
+		        "instead of Welcome (%i)\n",
+		        static_cast<uint8_t>(cmd), static_cast<uint8_t>(RelayCommand::kWelcome));
 		conn_->close();
 		conn_.reset();
 		return;
@@ -163,8 +161,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	endtime = time(nullptr) + 10;
 	while (!BufferedConnection::Peeker(conn_.get()).uint8_t()) {
 		if (time(nullptr) > endtime) {
-			log_err(
-			   "[NetHostProxy] Handshaking error (3): No message from relay server in time\n");
+			log_err("[NetHostProxy] Handshaking error (3): No message from relay server in time\n");
 			conn_->close();
 			conn_.reset();
 			return;
@@ -186,8 +183,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	endtime = time(nullptr) + 10;
 	while (!BufferedConnection::Peeker(conn_.get()).string()) {
 		if (time(nullptr) > endtime) {
-			log_err(
-			   "[NetHostProxy] Handshaking error (5): No message from relay server in time\n");
+			log_err("[NetHostProxy] Handshaking error (5): No message from relay server in time\n");
 			conn_->close();
 			conn_.reset();
 			return;

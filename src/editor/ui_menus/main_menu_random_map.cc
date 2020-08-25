@@ -491,7 +491,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 		break;
 	}
 	log_info("Land: %0.2f  Water: %0.2f  Wasteland: %0.2f\n", map_info.landRatio,
-	                     map_info.waterRatio, map_info.wastelandRatio);
+	         map_info.waterRatio, map_info.wastelandRatio);
 	if (map_info.islandMode) {
 		log_info("Using Island Mode\n");
 	}

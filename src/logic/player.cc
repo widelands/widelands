@@ -518,10 +518,12 @@ Road* Player::build_road(const Path& path) {
 			}
 			return &Road::create(egbase(), *start, *end, path);
 		} else {
-			log_warn_time(egbase().get_gametime(), "%i: building road, missed end flag\n", player_number());
+			log_warn_time(
+			   egbase().get_gametime(), "%i: building road, missed end flag\n", player_number());
 		}
 	} else {
-		log_warn_time(egbase().get_gametime(), "%i: building road, missed start flag\n", player_number());
+		log_warn_time(
+		   egbase().get_gametime(), "%i: building road, missed start flag\n", player_number());
 	}
 
 	return nullptr;
@@ -579,19 +581,19 @@ Waterway* Player::build_waterway(const Path& path) {
 				}
 				if (!CheckStepFerry(egbase()).reachable_dest(map, fc)) {
 					log_warn_time(egbase().get_gametime(),
-					         "%i: building waterway aborted, unreachable for ferries\n",
-					         static_cast<unsigned int>(player_number()));
+					              "%i: building waterway aborted, unreachable for ferries\n",
+					              static_cast<unsigned int>(player_number()));
 					return nullptr;
 				}
 			}
 			return &Waterway::create(egbase(), *start, *end, path);
 		} else {
 			log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing end flag\n",
-			         static_cast<unsigned int>(player_number()));
+			              static_cast<unsigned int>(player_number()));
 		}
 	} else {
 		log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing start flag\n",
-		         static_cast<unsigned int>(player_number()));
+		              static_cast<unsigned int>(player_number()));
 	}
 	return nullptr;
 }
@@ -762,9 +764,9 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 			if (Building* const flagbuilding = flag->get_building()) {
 				if (!(flagbuilding->get_playercaps() & Building::PCap_Bulldoze)) {
 					log_warn_time(egbase().get_gametime(),
-					         "Player trying to rip flag (%u) with undestroyable "
-					         "building (%u)\n",
-					         flag->serial(), flagbuilding->serial());
+					              "Player trying to rip flag (%u) with undestroyable "
+					              "building (%u)\n",
+					              flag->serial(), flagbuilding->serial());
 					return;
 				}
 			}
@@ -784,8 +786,8 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 						                         primary_start;
 						primary_road->destroy(egbase());
 						log_info_time(egbase().get_gametime(),
-						         "destroying road/waterway from (%i, %i) going in dir %u\n",
-						         flag->get_position().x, flag->get_position().y, primary_road_id);
+						              "destroying road/waterway from (%i, %i) going in dir %u\n",
+						              flag->get_position().x, flag->get_position().y, primary_road_id);
 						//  The primary road is gone. Now see if the flag at the other
 						//  end of it is a dead-end.
 						if (primary_other.is_dead_end()) {
@@ -1166,7 +1168,7 @@ void Player::enemyflagaction(Flag& flag,
                              const std::vector<Widelands::Soldier*>& soldiers) {
 	if (attacker != player_number()) {
 		log_warn_time(egbase().get_gametime(), "Player (%d) is not the sender of an attack (%d)\n",
-		         attacker, player_number());
+		              attacker, player_number());
 	} else if (soldiers.empty()) {
 		log_warn_time(egbase().get_gametime(), "enemyflagaction: no soldiers given\n");
 	} else if (is_hostile(flag.owner())) {
@@ -1776,7 +1778,7 @@ void Player::read_statistics(FileRead& fr,
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log_warn_time(egbase().get_gametime(), "Player %u statistics: unknown ware name %s",
-			         player_number(), name.c_str());
+			              player_number(), name.c_str());
 			continue;
 		}
 
@@ -1797,8 +1799,9 @@ void Player::read_statistics(FileRead& fr,
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
-			log_warn_time(egbase().get_gametime(), "Player %u consumption statistics: unknown ware name %s",
-			         player_number(), name.c_str());
+			log_warn_time(egbase().get_gametime(),
+			              "Player %u consumption statistics: unknown ware name %s", player_number(),
+			              name.c_str());
 			continue;
 		}
 
@@ -1820,7 +1823,7 @@ void Player::read_statistics(FileRead& fr,
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log_warn_time(egbase().get_gametime(), "Player %u stock statistics: unknown ware name %s",
-			         player_number(), name.c_str());
+			              player_number(), name.c_str());
 			continue;
 		}
 

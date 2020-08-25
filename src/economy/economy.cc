@@ -660,13 +660,13 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 				   type_ ? "WORKER" : "WARE", serial_, owner_.player_number());
 				// To help to debug this a bit:
 				log_err_time(game.get_gametime(),
-				        " ... ware/worker at: %3dx%3d, requestor at: %3dx%3d! Item: %s.\n",
-				        supp.get_position(game)->base_flag().get_position().x,
-				        supp.get_position(game)->base_flag().get_position().y,
-				        target_flag.get_position().x, target_flag.get_position().y,
-				        type_ == wwWARE ?
-				           game.tribes().get_ware_descr(req.get_index())->name().c_str() :
-				           game.tribes().get_worker_descr(req.get_index())->name().c_str());
+				             " ... ware/worker at: %3dx%3d, requestor at: %3dx%3d! Item: %s.\n",
+				             supp.get_position(game)->base_flag().get_position().x,
+				             supp.get_position(game)->base_flag().get_position().y,
+				             target_flag.get_position().x, target_flag.get_position().y,
+				             type_ == wwWARE ?
+				                game.tribes().get_ware_descr(req.get_index())->name().c_str() :
+				                game.tribes().get_worker_descr(req.get_index())->name().c_str());
 			}
 			continue;
 		}
@@ -1052,7 +1052,7 @@ void Economy::handle_active_supplies(Game& game) {
 		}
 		if (!wh) {
 			log_warn_time(game.get_gametime(), "Warning: Economy::handle_active_supplies "
-			                              "didn't find warehouse\n");
+			                                   "didn't find warehouse\n");
 			return;
 		}
 

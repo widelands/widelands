@@ -1057,8 +1057,8 @@ void Bob::Loader::load(FileRead& fr) {
 			} else {
 				bob.anim_ = bob.descr().main_animation();
 				log_warn_time(egbase().get_gametime(),
-				         "Unknown animation '%s' for bob '%s', using main animation instead.\n",
-				         animname.c_str(), bob.descr().name().c_str());
+				              "Unknown animation '%s' for bob '%s', using main animation instead.\n",
+				              animname.c_str(), bob.descr().name().c_str());
 			}
 
 			bob.animstart_ = fr.signed_32();

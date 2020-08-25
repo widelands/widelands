@@ -180,8 +180,8 @@ void MainMenuSaveMap::clicked_make_directory() {
 					g_fs->make_directory(fullname);
 				} catch (const FileError& e) {
 					log_err("directory creation failed in MainMenuSaveMap::"
-					                    "clicked_make_directory: %s\n",
-					                    e.what());
+					        "clicked_make_directory: %s\n",
+					        e.what());
 					const std::string s =
 					   (boost::format(_("Error while creating directory ‘%s’.")) % fullname).str();
 					UI::WLMessageBox mbox(

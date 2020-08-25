@@ -126,9 +126,9 @@ void write_spritesheet(const std::vector<std::unique_ptr<const Texture>>& imgs,
                        int spritesheet_width,
                        int spritesheet_height,
                        FileSystem* out_filesystem) {
-	log_info(
-	   "CREATING %d x %d spritesheet with %d columns, %" PRIuS " frames. Image size: %d x %d.\n",
-	   spritesheet_width, spritesheet_height, columns, imgs.size(), rect.w, rect.h);
+	log_info("CREATING %d x %d spritesheet with %d columns, %" PRIuS
+	         " frames. Image size: %d x %d.\n",
+	         spritesheet_width, spritesheet_height, columns, imgs.size(), rect.w, rect.h);
 	std::unique_ptr<Texture> spritesheet(new Texture(spritesheet_width, spritesheet_height));
 	spritesheet->fill_rect(
 	   Rectf(Vector2f::zero(), spritesheet_width, spritesheet_height), RGBAColor(0, 0, 0, 0));
@@ -142,8 +142,7 @@ void write_spritesheet(const std::vector<std::unique_ptr<const Texture>>& imgs,
 		const Texture* image = imgs[i].get();
 		const int x = col * rect.w;
 		const int y = row * rect.h;
-		log_info(
-		   "Frame %" PRIuS " at: %d, %d, %d, %d\n", i, x, y, x + rect.w, y + rect.h);
+		log_info("Frame %" PRIuS " at: %d, %d, %d, %d\n", i, x, y, x + rect.w, y + rect.h);
 		spritesheet->blit(Rectf(x, y, rect.w, rect.h), *image, Rectf(rect.x, rect.y, rect.w, rect.h),
 		                  1., BlendMode::Copy);
 	}
@@ -211,8 +210,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		}
 	}
 	if (!is_fontier_or_flag_animation && descr == nullptr) {
-		log_err(
-		   "ABORTING. Unable to find map object for '%s'!\n", map_object_name.c_str());
+		log_err("ABORTING. Unable to find map object for '%s'!\n", map_object_name.c_str());
 		return;
 	}
 	assert(is_fontier_or_flag_animation || (descr->name() == map_object_name));
@@ -226,7 +224,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		if (!descr->is_animation_known(animation_name) &&
 		    !descr->is_animation_known(animation_name + "_ne")) {
 			log_err("ABORTING. Unknown animation '%s' for '%s'\n", animation_name.c_str(),
-			                    map_object_name.c_str());
+			        map_object_name.c_str());
 			return;
 		}
 	}
@@ -253,10 +251,9 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		}
 	}
 
-	log_info("WRITING '%s' animation for '%s'. It has %d pictures and %" PRIuS
-	                     " scales.\n",
-	                     animation_name.c_str(), map_object_name.c_str(), nr_frames,
-	                     representative_animation.available_scales().size());
+	log_info("WRITING '%s' animation for '%s'. It has %d pictures and %" PRIuS " scales.\n",
+	         animation_name.c_str(), map_object_name.c_str(), nr_frames,
+	         representative_animation.available_scales().size());
 
 	const int columns = floor(sqrt(nr_frames));
 	int rows = 1;
@@ -269,10 +266,9 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		lua_animation->add_int("rows", rows);
 		lua_animation->add_int("columns", columns);
 	} else {
-		log_warn(
-		   "NOTE: Animation '%s' for '%s' has less than 2 images and doesn't need a "
-		   "spritesheet. Add it to the \"animations\" table.\n",
-		   animation_name.c_str(), map_object_name.c_str());
+		log_warn("NOTE: Animation '%s' for '%s' has less than 2 images and doesn't need a "
+		         "spritesheet. Add it to the \"animations\" table.\n",
+		         animation_name.c_str(), map_object_name.c_str());
 	}
 
 	const int representative_frame = representative_animation.representative_frame();
@@ -378,8 +374,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 
 int main(int argc, char** argv) {
 	if (argc != 4) {
-		log_err(
-		   "Usage: %s <mapobject_name> <animation_name> <existing-output-path>\n", argv[0]);
+		log_err("Usage: %s <mapobject_name> <animation_name> <existing-output-path>\n", argv[0]);
 		return 1;
 	}
 

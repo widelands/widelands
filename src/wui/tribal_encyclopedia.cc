@@ -50,8 +50,8 @@ TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
 		cr->resume();
 		init(parent, cr->pop_table());
 	} catch (LuaError& err) {
-		log_err_time(parent.egbase().get_gametime(), "Error loading script for tribal encyclopedia:\n%s\n",
-		        err.what());
+		log_err_time(parent.egbase().get_gametime(),
+		             "Error loading script for tribal encyclopedia:\n%s\n", err.what());
 		UI::WLMessageBox wmb(
 		   &parent, _("Error!"),
 		   (boost::format("Error loading script for tribal encyclopedia:\n%s") % err.what()).str(),

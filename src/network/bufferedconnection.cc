@@ -118,7 +118,7 @@ void BufferedConnection::close() {
 	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
 	if (!ec) {
 		log_info("[BufferedConnection] Closing network socket connected to %s:%i.\n",
-		                     remote.address().to_string().c_str(), remote.port());
+		         remote.address().to_string().c_str(), remote.port());
 	} else {
 		log_info("[BufferedConnection] Closing network socket.\n");
 	}
@@ -248,9 +248,8 @@ void BufferedConnection::start_sending() {
 			   start_sending();
 		   } else {
 			   if (socket_.is_open()) {
-				   log_err(
-				      "[BufferedConnection] Error when sending packet to host (error %i: %s)\n",
-				      ec.value(), ec.message().c_str());
+				   log_err("[BufferedConnection] Error when sending packet to host (error %i: %s)\n",
+				           ec.value(), ec.message().c_str());
 				   log_err("[BufferedConnection] Closing socket\n");
 				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
 				   socket_.close();
@@ -282,9 +281,8 @@ void BufferedConnection::start_receiving() {
 			   start_receiving();
 		   } else {
 			   if (socket_.is_open()) {
-				   log_err(
-				      "[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
-				      ec.value(), ec.message().c_str());
+				   log_err("[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
+				           ec.value(), ec.message().c_str());
 				   log_err("[BufferedConnection] Closing socket\n");
 				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
 				   socket_.close();
@@ -316,8 +314,8 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 
 	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
 
-	log_info("[BufferedConnection] Trying to connect to %s:%u ... ",
-	                     host.ip.to_string().c_str(), host.port);
+	log_info("[BufferedConnection] Trying to connect to %s:%u ... ", host.ip.to_string().c_str(),
+	         host.port);
 	boost::system::error_code ec;
 	socket_.connect(destination, ec);
 	if (!ec && is_connected()) {
@@ -349,7 +347,7 @@ void BufferedConnection::notify_connected() {
 	assert(is_connected());
 
 	log_info("[BufferedConnection] Connection to %s.\n",
-	                     socket_.remote_endpoint().address().to_string().c_str());
+	         socket_.remote_endpoint().address().to_string().c_str());
 
 	reduce_send_buffer(socket_);
 

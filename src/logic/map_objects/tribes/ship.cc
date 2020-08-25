@@ -604,8 +604,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				}
 				// if we are here, it seems something really strange happend.
 				log_warn_time(game.get_gametime(),
-				         "ship %s was not able to start exploration. Entering WAIT mode.",
-				         shipname_.c_str());
+				              "ship %s was not able to start exploration. Entering WAIT mode.",
+				              shipname_.c_str());
 				set_ship_state_and_notify(
 				   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 				start_task_idle(game, descr().main_animation(), kShipInterval);
@@ -818,10 +818,11 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 		start_task_movepath(game, path, descr().get_sail_anims());
 		return;
 	} else {
-		log_warn_time(game.get_gametime(),
-		         "start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
-		         get_position().x, get_position().y, pd.get_positions(game)[0].x,
-		         pd.get_positions(game)[0].y);
+		log_warn_time(
+		   game.get_gametime(),
+		   "start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
+		   get_position().x, get_position().y, pd.get_positions(game)[0].x,
+		   pd.get_positions(game)[0].y);
 		// This should not happen, but in theory there could be some inconstinency
 		// I (tiborb) failed to invoke this situation when testing so
 		// I am not sure if following line behaves allright

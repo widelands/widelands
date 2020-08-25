@@ -1600,8 +1600,8 @@ void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
 	const int64_t t = e.get_gametime();
 	for (const auto& plan : plans_) {
 		log_dbg_time(t, "· %s: carrying %u items (capacity %u)\n",
-		        plan.first.get(e)->get_shipname().c_str(), plan.first.get(e)->get_nritems(),
-		        plan.first.get(e)->get_capacity());
+		             plan.first.get(e)->get_shipname().c_str(), plan.first.get(e)->get_nritems(),
+		             plan.first.get(e)->get_capacity());
 		std::map<Serial, uint32_t> dests;
 		for (uint32_t i = plan.first.get(e)->get_nritems(); i; --i) {
 			const Serial si = plan.first.get(e)->get_item(i - 1).destination_dock_.serial();
@@ -1618,7 +1618,7 @@ void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
 		log_dbg_time(t, "  SCHEDULE: %" PRIuS " stations\n", plan.second.size());
 		for (const SchedulingState& ss : plan.second) {
 			log_dbg_time(t, "          · in %u ms at %u\n", ss.duration_from_previous_location,
-			        ss.dock.serial());
+			             ss.dock.serial());
 			log_dbg_time(t, "            load there: ");
 			if (ss.expedition) {
 				log_dbg_time(t, "expedition\n");

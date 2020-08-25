@@ -247,8 +247,9 @@ uint32_t SoldierDescr::get_rand_anim(Game& game,
 	}
 
 	if (!is_animation_known(run)) {
-		log_warn_time(game.get_gametime(), "Missing animation '%s' for soldier %s. Reverting to idle.\n",
-		         run.c_str(), name().c_str());
+		log_warn_time(game.get_gametime(),
+		              "Missing animation '%s' for soldier %s. Reverting to idle.\n", run.c_str(),
+		              name().c_str());
 		run = "idle";
 	}
 	return get_animation(run, soldier);

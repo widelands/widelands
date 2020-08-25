@@ -80,7 +80,7 @@ Game::SyncWrapper::~SyncWrapper() {
 			} catch (const FileError& e) {
 				// not really a problem if deletion fails, but we'll log it
 				log_warn_time(game_.get_gametime(), "Deleting synchstream file %s failed: %s\n",
-				         dumpfname_.c_str(), e.what());
+				              dumpfname_.c_str(), e.what());
 			}
 		}
 	}
@@ -107,7 +107,8 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 		next_diskspacecheck_ = counter_ + 16 * 1024 * 1024;
 
 		if (g_fs->disk_space() < kMinimumDiskSpace) {
-			log_warn_time(game_.get_gametime(), "Stop writing to syncstream file: disk is getting full.\n");
+			log_warn_time(
+			   game_.get_gametime(), "Stop writing to syncstream file: disk is getting full.\n");
 			dump_.reset();
 		}
 	}
@@ -117,8 +118,8 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 			dump_->data(sync_data, size);
 		} catch (const WException&) {
 			log_warn_time(game_.get_gametime(),
-			         "Writing to syncstream file %s failed. Stop synctream dump.\n",
-			         dumpfname_.c_str());
+			              "Writing to syncstream file %s failed. Stop synctream dump.\n",
+			              dumpfname_.c_str());
 			dump_.reset();
 		}
 		assert(current_excerpt_id_ < kExcerptSize);
@@ -639,7 +640,7 @@ void Game::report_sync_request() {
 void Game::report_desync(int32_t playernumber) {
 	if (syncwrapper_.dumpfname_.empty()) {
 		log_err_time(get_gametime(),
-		        "Error: A desync occurred but no filename for the syncstream has been set.");
+		             "Error: A desync occurred but no filename for the syncstream has been set.");
 		return;
 	}
 	// Replace .wss extension of syncstream file with .wse extension for syncstream extract
@@ -910,7 +911,8 @@ int Game::propose_trade(const Trade& trade) {
 void Game::accept_trade(const int trade_id) {
 	auto it = trade_agreements_.find(trade_id);
 	if (it == trade_agreements_.end()) {
-		log_warn_time(get_gametime(), "Game::accept_trade: Trade %d has vanished. Ignoring.\n", trade_id);
+		log_warn_time(
+		   get_gametime(), "Game::accept_trade: Trade %d has vanished. Ignoring.\n", trade_id);
 		return;
 	}
 	const Trade& trade = it->second.trade;

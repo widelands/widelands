@@ -48,9 +48,9 @@ void MapResourcesPacket::read(FileSystem& fs,
 			int32_t const nr_res = fr.unsigned_16();
 			if (world.get_nr_resources() < nr_res) {
 				log_warn_time(egbase.get_gametime(),
-				         "Number of resources in map (%i) is bigger than in world "
-				         "(%i)",
-				         nr_res, world.get_nr_resources());
+				              "Number of resources in map (%i) is bigger than in world "
+				              "(%i)",
+				              nr_res, world.get_nr_resources());
 			}
 
 			// construct ids and map

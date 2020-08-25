@@ -547,7 +547,7 @@ static void push_table_recursively(lua_State* L,
 		} else {
 			// this code should not be reached unless the user manually edited the .wcd file
 			log_warn("Illegal data type %s in campaign data file, setting key %s to nil\n",
-			                     type.c_str(), luaL_checkstring(L, -1));
+			         type.c_str(), luaL_checkstring(L, -1));
 			lua_pushnil(L);
 		}
 		lua_settable(L, -3);

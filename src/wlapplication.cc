@@ -565,7 +565,7 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 			if (ctrl) {
 				if (g_fs->disk_space() < kMinimumDiskSpace) {
 					log_warn("Omitting screenshot because diskspace is lower than %lluMB\n",
-					                     kMinimumDiskSpace / (1000 * 1000));
+					         kMinimumDiskSpace / (1000 * 1000));
 					break;
 				}
 				g_fs->ensure_directory_exists(kScreenshotsDir);
@@ -899,8 +899,7 @@ void WLApplication::init_language() {
 		   SDL_MESSAGEBOX_ERROR, "'locale' directory not valid",
 		   std::string(i18n::get_localedir() + "\nis not a directory. Please fix this.").c_str(),
 		   NULL);
-		log_err(
-		   "%s is not a directory. Please fix this.\n", i18n::get_localedir().c_str());
+		log_err("%s is not a directory. Please fix this.\n", i18n::get_localedir().c_str());
 		exit(1);
 	}
 
@@ -1585,9 +1584,8 @@ void WLApplication::cleanup_replays() {
 			try {
 				g_fs->fs_unlink(filename);
 			} catch (const FileError& e) {
-				log_warn(
-				   "WLApplication::cleanup_replays: File %s couldn't be deleted: %s\n",
-				   filename.c_str(), e.what());
+				log_warn("WLApplication::cleanup_replays: File %s couldn't be deleted: %s\n",
+				         filename.c_str(), e.what());
 			}
 		}
 	}
@@ -1605,9 +1603,8 @@ void WLApplication::cleanup_ai_files() {
 			try {
 				g_fs->fs_unlink(filename);
 			} catch (const FileError& e) {
-				log_warn(
-				   "WLApplication::cleanup_ai_files: File %s couldn't be deleted: %s\n",
-				   filename.c_str(), e.what());
+				log_warn("WLApplication::cleanup_ai_files: File %s couldn't be deleted: %s\n",
+				         filename.c_str(), e.what());
 			}
 		}
 	}
@@ -1625,9 +1622,8 @@ void WLApplication::cleanup_temp_files() {
 			try {
 				g_fs->fs_unlink(filename);
 			} catch (const FileError& e) {
-				log_warn(
-				   "WLApplication::cleanup_temp_files: File %s couldn't be deleted: %s\n",
-				   filename.c_str(), e.what());
+				log_warn("WLApplication::cleanup_temp_files: File %s couldn't be deleted: %s\n",
+				         filename.c_str(), e.what());
 			}
 		}
 	}
@@ -1644,9 +1640,8 @@ void WLApplication::cleanup_temp_backups(const std::string& dir) {
 			try {
 				g_fs->fs_unlink(filename);
 			} catch (const FileError& e) {
-				log_warn(
-				   "WLApplication::cleanup_temp_backups: File %s couldn't be deleted: %s\n",
-				   filename.c_str(), e.what());
+				log_warn("WLApplication::cleanup_temp_backups: File %s couldn't be deleted: %s\n",
+				         filename.c_str(), e.what());
 			}
 		}
 	}

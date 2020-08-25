@@ -69,8 +69,8 @@ void write_tribes_dir(FileSystem& target_fs, FileSystem* map_fs, const std::stri
 				free(input_data);
 			} else {
 				log_warn("File name '%s' is not allowed in scenario tribes – expecting "
-				                     "'init.lua', 'register.lua', 'helptexts.lua' or a *.png file\n",
-				                     file.c_str());
+				         "'init.lua', 'register.lua', 'helptexts.lua' or a *.png file\n",
+				         file.c_str());
 			}
 		}
 	}

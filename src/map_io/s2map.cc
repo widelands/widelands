@@ -1050,7 +1050,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	map_.recalc_whole_map(egbase);  //  to initialize buildcaps
 
 	const Widelands::PlayerNumber nr_players = map_.get_nrplayers();
-	log_info_time(egbase.get_gametime(), "Checking starting position for all %u players:\n", nr_players);
+	log_info_time(
+	   egbase.get_gametime(), "Checking starting position for all %u players:\n", nr_players);
 	iterate_player_numbers(p, nr_players) {
 		log_info_time(egbase.get_gametime(), "-> Player %u: ", p);
 
@@ -1089,7 +1090,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				log_err_time(egbase.get_gametime(), "FAILED!\n");
 				log_err_time(
 				   egbase.get_gametime(), "   Invalid starting position, that could not be fixed.\n");
-				log_err_time(egbase.get_gametime(), "   Please try to fix it manually in the editor.\n");
+				log_err_time(
+				   egbase.get_gametime(), "   Please try to fix it manually in the editor.\n");
 			}
 		} else {
 			log_info_time(egbase.get_gametime(), "OK\n");

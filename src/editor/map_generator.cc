@@ -821,9 +821,8 @@ void MapGenerator::create_random_map() {
 			// map_.get_fcoords(coords2).field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK
 			// != Widelands::BUILDCAPS_BIG)
 
-			log_warn(
-			   "Player %u has no starting position - illegal coordinates (%d, %d).\n", n, coords2.x,
-			   coords2.y);
+			log_warn("Player %u has no starting position - illegal coordinates (%d, %d).\n", n,
+			         coords2.x, coords2.y);
 			coords2 = Coords::null();
 		}
 

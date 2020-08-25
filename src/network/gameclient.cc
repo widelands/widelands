@@ -657,7 +657,7 @@ void GameClient::handle_setting_map(RecvPacket& packet) {
 	d->settings.savegame = packet.unsigned_8() == 1;
 	d->settings.scenario = packet.unsigned_8() == 1;
 	log_info("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(),
-	                     d->settings.mapfilename.c_str());
+	         d->settings.mapfilename.c_str());
 
 	// New map was set, so we clean up the buffer of a previously requested file
 	d->file_.reset(nullptr);
@@ -702,8 +702,8 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 			g_fs->fs_rename(path, backup_file_name(path));
 		} catch (const FileError& e) {
 			log_err("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
-			                    "%s\n",
-			                    e.what());
+			        "%s\n",
+			        e.what());
 			// TODO(Arty): What now? It just means the next step will fail
 			// or possibly result in some corrupt file
 		}
@@ -801,8 +801,8 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 				g_fs->fs_unlink(d->file_->filename);
 			} catch (const FileError& e) {
 				log_err("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
-				                    "%s\n",
-				                    e.what());
+				        "%s\n",
+				        e.what());
 			}
 		}
 		// Check file for validity
@@ -832,8 +832,8 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 				}
 			} catch (const FileError& e) {
 				log_err("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
-				                    "%s\n",
-				                    e.what());
+				        "%s\n",
+				        e.what());
 			}
 			s.reset();
 			s.unsigned_8(NETCMD_CHAT);
@@ -948,7 +948,7 @@ void GameClient::handle_system_message(RecvPacket& packet) {
  */
 void GameClient::handle_desync(RecvPacket&) {
 	log_err("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some "
-	                    "information for debugging.\n");
+	        "information for debugging.\n");
 	if (d->game) {
 		d->game->save_syncstream(true);
 		// We don't know our playernumber, so report as -1

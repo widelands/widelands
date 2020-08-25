@@ -1317,11 +1317,10 @@ public:
 			if (a.has("width")) {
 				int width = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (width > renderer_style_.overall_width) {
-					log_warn(
-					   "Font renderer: Specified image width of %d exceeds the overall "
-					   "available "
-					   "width of %d. Setting width to %d.\n",
-					   width, renderer_style_.overall_width, renderer_style_.overall_width);
+					log_warn("Font renderer: Specified image width of %d exceeds the overall "
+					         "available "
+					         "width of %d. Setting width to %d.\n",
+					         width, renderer_style_.overall_width, renderer_style_.overall_width);
 					width = renderer_style_.overall_width;
 				}
 				const int image_width = image_cache_->get(image_filename)->width();
@@ -1629,10 +1628,9 @@ public:
 			} else {
 				w_ = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (w_ > renderer_style_.overall_width) {
-					log_warn(
-					   "Font renderer: Specified width of %d exceeds the overall available "
-					   "width of %d. Setting width to %d.\n",
-					   w_, renderer_style_.overall_width, renderer_style_.overall_width);
+					log_warn("Font renderer: Specified width of %d exceeds the overall available "
+					         "width of %d. Setting width to %d.\n",
+					         w_, renderer_style_.overall_width, renderer_style_.overall_width);
 					w_ = renderer_style_.overall_width;
 				}
 				render_node_->set_desired_width(DesiredWidth(w_, WidthUnit::kAbsolute));

@@ -917,10 +917,11 @@ void MilitarySite::send_attacker(Soldier& soldier, Building& target) {
 		// The soldier may not be present anymore due to having been kicked out. Most of the time
 		// the function calling us will notice this, but there are cornercase where it might not,
 		// e.g. when a soldier was ordered to leave but did not physically quit the building yet.
-		log_warn_time(owner().egbase().get_gametime(),
-		         "MilitarySite(%3dx%3d)::send_attacker: Not sending soldier %u because he left the "
-		         "building\n",
-		         get_position().x, get_position().y, soldier.serial());
+		log_warn_time(
+		   owner().egbase().get_gametime(),
+		   "MilitarySite(%3dx%3d)::send_attacker: Not sending soldier %u because he left the "
+		   "building\n",
+		   get_position().x, get_position().y, soldier.serial());
 		return;
 	}
 

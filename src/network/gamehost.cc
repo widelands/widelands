@@ -1292,8 +1292,8 @@ void GameHost::set_player_init(uint8_t const number, uint8_t const index) {
 				return;
 			} else {
 				log_warn("Attempted to change to out-of-range initialization index %u "
-				                     "for player %u.\n",
-				                     index, number);
+				         "for player %u.\n",
+				         index, number);
 			}
 			return;
 		}
@@ -1790,8 +1790,8 @@ void GameHost::receive_client_time(uint32_t const number, int32_t const time) {
 	log_info("[Host]: Client %i: Time %i\n", number, time);
 
 	if (d->waiting) {
-		log_info("[Host]: Client %i reports time %i (networktime = %i) during hang\n",
-		                     number, time, d->committed_networktime);
+		log_info("[Host]: Client %i reports time %i (networktime = %i) during hang\n", number, time,
+		         d->committed_networktime);
 		check_hung_clients();
 	}
 }
@@ -1818,7 +1818,7 @@ void GameHost::check_hung_clients() {
 			if (delta >
 			    (5 * CLIENT_TIMESTAMP_INTERVAL * static_cast<int32_t>(d->networkspeed)) / 1000) {
 				log_info("[Host]: Client %i (%s) hung\n", i,
-				                     d->settings.users.at(d->clients.at(i).usernum).name.c_str());
+				         d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
 				if (d->clients.at(i).hung_since == 0) {
 					d->clients.at(i).hung_since = time(nullptr);
@@ -1991,9 +1991,9 @@ void GameHost::check_sync_reports() {
 
 		if (client.syncreport != d->syncreport) {
 			log_err("[Host]: lost synchronization with client %u!\n"
-			                    "I have:     %s\n"
-			                    "Client has: %s\n",
-			                    i, d->syncreport.str().c_str(), client.syncreport.str().c_str());
+			        "I have:     %s\n"
+			        "Client has: %s\n",
+			        i, d->syncreport.str().c_str(), client.syncreport.str().c_str());
 
 			d->game->save_syncstream(true);
 			// Create syncstream excerpt and add faulting player number
@@ -2211,9 +2211,8 @@ void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, 
 	}
 	int32_t time = r.signed_32();
 	Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
-	log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n",
-	                     client_num, client.playernum, static_cast<unsigned int>(plcmd->id()),
-	                     plcmd->sender(), time);
+	log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n", client_num,
+	         client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time);
 	receive_client_time(client_num, time);
 	if (plcmd->sender() != client.playernum + 1) {
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
@@ -2350,7 +2349,7 @@ void GameHost::handle_file_part(Client& client, RecvPacket& r) {
 	std::string md5sum = r.string();
 	if (md5sum != file_->md5sum) {
 		log_err("[Host]: File transfer checksum mismatch %s != %s\n", md5sum.c_str(),
-		                    file_->md5sum.c_str());
+		        file_->md5sum.c_str());
 		return;  // Surely the file was changed, so we cancel here.
 	}
 	if (part >= file_->parts.size()) {
@@ -2461,8 +2460,7 @@ void GameHost::disconnect_client(uint32_t const client_number,
 	} else {
 		send_system_message_code("UNKNOWN_LEFT_GAME", reason, arg);
 	}
-	log_warn(
-	   "[Host]: disconnect_client(%u, %s, %s)\n", client_number, reason.c_str(), arg.c_str());
+	log_warn("[Host]: disconnect_client(%u, %s, %s)\n", client_number, reason.c_str(), arg.c_str());
 
 	if (client.sock_id > 0) {
 		if (sendreason) {
@@ -2529,5 +2527,5 @@ void GameHost::report_result(uint8_t p_nr,
 	}
 
 	log_info("GameHost::report_result(%d, %u, %s)\n", player->player_number(),
-	                     static_cast<uint8_t>(result), info.c_str());
+	         static_cast<uint8_t>(result), info.c_str());
 }

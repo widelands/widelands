@@ -621,7 +621,7 @@ UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coo
 	// TODO(sirver,trading): Add UI for market.
 	default:
 		log_err_time(egbase().get_gametime(), "Unable to show window for building '%s', type '%s'.\n",
-		        building->descr().name().c_str(), to_string(building->descr().type()).c_str());
+		             building->descr().name().c_str(), to_string(building->descr().type()).c_str());
 		NEVER_HERE();
 	}
 	registry.create();

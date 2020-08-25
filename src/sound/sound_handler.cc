@@ -77,8 +77,8 @@ SoundHandler::SoundHandler()
 	SDL_GetVersion(&sdl_version);
 	log_dbg("**** SOUND REPORT ****\n");
 	log_dbg("SDL version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
-	                    static_cast<unsigned int>(sdl_version.minor),
-	                    static_cast<unsigned int>(sdl_version.patch));
+	        static_cast<unsigned int>(sdl_version.minor),
+	        static_cast<unsigned int>(sdl_version.patch));
 
 	// SDL 2.0.6 will crash due to an upstream bug:
 	// https://bugs.launchpad.net/ubuntu/+source/libsdl2/+bug/1722060
@@ -88,9 +88,9 @@ SoundHandler::SoundHandler()
 	}
 
 	SDL_MIXER_VERSION(&sdl_version)
-	log_dbg(
-	   "SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
-	   static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
+	log_dbg("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	        static_cast<unsigned int>(sdl_version.minor),
+	        static_cast<unsigned int>(sdl_version.patch));
 
 	log_dbg("**** END SOUND REPORT ****\n");
 
@@ -148,9 +148,8 @@ SoundHandler::~SoundHandler() {
 	int numtimesopened, frequency, channels;
 	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
-	log_info("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n",
-	                     numtimesopened, numtimesopened == 1 ? "" : "s", frequency, format, channels,
-	                     channels == 1 ? "" : "s");
+	log_info("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
+	         numtimesopened == 1 ? "" : "s", frequency, format, channels, channels == 1 ? "" : "s");
 
 	if (numtimesopened == 0) {
 		return;
@@ -165,8 +164,7 @@ SoundHandler::~SoundHandler() {
 	log_dbg("SoundHandler: SDL_AUDIODRIVER %s\n", SDL_GetCurrentAudioDriver());
 
 	if (numtimesopened != 1) {
-		log_warn(
-		   "SoundHandler: PROBLEM: sound device opened multiple times, trying to close");
+		log_warn("SoundHandler: PROBLEM: sound device opened multiple times, trying to close");
 	}
 	for (int i = 0; i < numtimesopened; ++i) {
 		Mix_CloseAudio();

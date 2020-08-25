@@ -79,9 +79,9 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 							player->allow_building_type(index, allowed);
 						} else {
 							log_warn_time(egbase.get_gametime(),
-							         "MapAllowedBuildingTypesPacket - tribe %s does not define "
-							         "building type \"%s\"\n",
-							         tribe.name().c_str(), name);
+							              "MapAllowedBuildingTypesPacket - tribe %s does not define "
+							              "building type \"%s\"\n",
+							              tribe.name().c_str(), name);
 						}
 					}
 				} catch (const WException& e) {

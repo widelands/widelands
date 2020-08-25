@@ -72,10 +72,9 @@ const Image* AnimationManager::get_representative_image(uint32_t id, const RGBCo
 const Image* AnimationManager::get_representative_image(const std::string& map_object_name,
                                                         const RGBColor* clr) {
 	if (representative_animations_by_map_object_name_.count(map_object_name) != 1) {
-		log_warn(
-		   "%s has no animation assigned for its representative image, or it's not a known "
-		   "map object\n",
-		   map_object_name.c_str());
+		log_warn("%s has no animation assigned for its representative image, or it's not a known "
+		         "map object\n",
+		         map_object_name.c_str());
 		return new Texture(0, 0);
 	}
 	return get_representative_image(
