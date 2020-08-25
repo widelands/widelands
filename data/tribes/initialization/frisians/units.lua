@@ -1,6 +1,8 @@
 tribes = wl.Tribes()
 
-image_dirname = path.dirname(__file__) .. "images/frisians/"
+image_dirname = path.dirname(__file__) .. "images/"
+
+push_textdomain("tribes")
 
 tribes:new_tribe {
    name = "frisians",
@@ -36,7 +38,7 @@ tribes:new_tribe {
          image_dirname .. "roadt_normal_01.png",
       },
       waterway = {
-         "tribes/images/frisians/waterway_0.png",
+         image_dirname .. "waterway_0.png",
       },
    },
 
@@ -71,68 +73,258 @@ tribes:new_tribe {
    wares_order = {
       {
          -- Building Materials
-         "log",
-         "granite",
-         "clay",
-         "brick",
-         "reed",
-         "fur",
-         "cloth"
+         {
+            name = "log",
+            preciousness = 4
+         },
+         {
+            name = "granite",
+            default_target_quantity = 30,
+            preciousness = 3
+         },
+         {
+            name = "clay",
+            default_target_quantity = 30,
+            preciousness = 9
+         },
+         {
+            name = "brick",
+            default_target_quantity = 40,
+            preciousness = 3
+         },
+         {
+            name = "reed",
+            preciousness = 8
+         },
+         {
+            name = "fur",
+            default_target_quantity = 10,
+            preciousness = 1
+         },
+         {
+            name = "cloth",
+            default_target_quantity = 10,
+            preciousness = 0
+         },
       },
       {
          -- Food
-          "fruit",
-          "water",
-          "barley",
-          "honey",
-          "bread_frisians",
-          "honey_bread",
-          "beer",
-          "mead",
-          "fish",
-          "meat",
-          "smoked_fish",
-          "smoked_meat",
-          "ration",
-          "meal"
+         {
+            name = "fruit",
+            preciousness = 1
+         },
+         {
+            name = "water",
+            preciousness = 2
+         },
+         {
+            name = "barley",
+            preciousness = 25
+         },
+         {
+            name = "honey",
+            preciousness = 1
+         },
+         {
+            name = "bread_frisians",
+            default_target_quantity = 20,
+            preciousness = 3
+         },
+         {
+            name = "honey_bread",
+            default_target_quantity = 20,
+            preciousness = 5
+         },
+         {
+            name = "beer",
+            default_target_quantity = 15,
+            preciousness = 3
+         },
+         {
+            name = "mead",
+            default_target_quantity = 15,
+            preciousness = 5
+         },
+         {
+            name = "fish",
+            default_target_quantity = 20,
+            preciousness = 1
+         },
+         {
+            name = "meat",
+            preciousness = 2
+         },
+         {
+            name = "smoked_fish",
+            default_target_quantity = 20,
+            preciousness = 5
+         },
+         {
+            name = "smoked_meat",
+            default_target_quantity = 10,
+            preciousness = 7
+         },
+         {
+            name = "ration",
+            default_target_quantity = 20,
+            preciousness = 3
+         },
+         {
+            name = "meal",
+            default_target_quantity = 5,
+            preciousness = 6
+         }
       },
       {
          -- Mining
-          "coal",
-          "iron_ore",
-          "iron",
-          "gold_ore",
-          "gold",
-          "scrap_iron",
-          "scrap_metal_mixed",
-          "fur_garment_old",
+         {
+            name = "coal",
+            default_target_quantity = 20,
+            preciousness = 40
+         },
+         {
+            name = "iron_ore",
+            default_target_quantity = 15,
+            preciousness = 2
+         },
+         {
+            name = "iron",
+            default_target_quantity = 20,
+            preciousness = 4
+         },
+         {
+            name = "gold_ore",
+            default_target_quantity = 15,
+            preciousness = 3
+         },
+         {
+            name = "gold",
+            default_target_quantity = 20,
+            preciousness = 6
+         },
+         {
+            name = "scrap_iron",
+            preciousness = 0
+         },
+         {
+            name = "scrap_metal_mixed",
+            preciousness = 1
+         },
+         {
+            name = "fur_garment_old",
+            preciousness = 0
+         }
       },
       {
          -- Tools
-          "pick",
-          "felling_ax",
-          "shovel",
-          "hammer",
-          "fishing_net",
-          "hunting_spear",
-          "scythe",
-          "bread_paddle",
-          "kitchen_tools",
-          "fire_tongs",
-          "basket",
-          "needles"
+         {
+            name = "pick",
+            default_target_quantity = 3,
+            preciousness = 0
+         },
+         {
+            name = "felling_ax",
+            default_target_quantity = 3,
+            preciousness = 0
+         },
+         {
+            name = "shovel",
+            default_target_quantity = 4,
+            preciousness = 0
+         },
+         {
+            name = "hammer",
+            default_target_quantity = 2,
+            preciousness = 0
+         },
+         {
+            name = "fishing_net",
+            default_target_quantity = 2,
+            preciousness = 0
+         },
+         {
+            name = "hunting_spear",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "scythe",
+            default_target_quantity = 2,
+            preciousness = 0
+         },
+         {
+            name = "bread_paddle",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "kitchen_tools",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "fire_tongs",
+            default_target_quantity = 2,
+            preciousness = 0
+         },
+         {
+            name = "basket",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "needles",
+            default_target_quantity = 1,
+            preciousness = 0
+         }
       },
       {
          -- Weapons & Armor
-          "sword_short",
-          "sword_long",
-          "sword_broad",
-          "sword_double",
-          "fur_garment",
-          "fur_garment_studded",
-          "fur_garment_golden",
-          "helmet",
-          "helmet_golden",
+         {
+            name = "sword_short",
+            default_target_quantity = 30,
+            preciousness = 4
+         },
+         {
+            name = "sword_long",
+            default_target_quantity = 2,
+            preciousness = 3
+         },
+         {
+            name = "sword_broad",
+            default_target_quantity = 2,
+            preciousness = 3
+         },
+         {
+            name = "sword_double",
+            default_target_quantity = 2,
+            preciousness = 3
+         },
+         {
+            name = "fur_garment",
+            default_target_quantity = 30,
+            preciousness = 3
+         },
+         {
+            name = "fur_garment_studded",
+            default_target_quantity = 2,
+            preciousness = 3,
+         },
+         {
+            name = "fur_garment_golden",
+            default_target_quantity = 2,
+            preciousness = 3
+         },
+         {
+            name = "helmet",
+            default_target_quantity = 2,
+            preciousness = 3
+         },
+         {
+            name = "helmet_golden",
+            default_target_quantity = 2,
+            preciousness = 3
+         }
       }
    },
 
@@ -142,54 +334,62 @@ tribes:new_tribe {
    workers_order = {
       {
          -- Carriers
-         "frisians_carrier",
-         "frisians_ferry",
-         "frisians_reindeer",
-         "frisians_reindeer_breeder"
+         { name = "frisians_carrier" },
+         { name = "frisians_ferry" },
+         {
+            name = "frisians_reindeer",
+            default_target_quantity = 10,
+            preciousness = 2
+         },
+         { name = "frisians_reindeer_breeder" }
       },
       {
          -- Building Materials
-         "frisians_stonemason",
-         "frisians_woodcutter",
-         "frisians_forester",
-         "frisians_claydigger",
-         "frisians_brickmaker",
-         "frisians_builder",
-         "frisians_reed_farmer",
-         "frisians_seamstress",
-         "frisians_seamstress_master",
-         "frisians_shipwright"
+         { name = "frisians_stonemason" },
+         { name = "frisians_woodcutter" },
+         { name = "frisians_forester" },
+         { name = "frisians_claydigger" },
+         { name = "frisians_brickmaker" },
+         { name = "frisians_builder" },
+         { name = "frisians_reed_farmer" },
+         { name = "frisians_seamstress" },
+         { name = "frisians_seamstress_master" },
+         { name = "frisians_shipwright" }
       },
       {
          -- Food
-         "frisians_fisher",
-         "frisians_hunter",
-         "frisians_farmer",
-         "frisians_berry_farmer",
-         "frisians_fruit_collector",
-         "frisians_smoker",
-         "frisians_beekeeper",
-         "frisians_baker",
-         "frisians_baker_master",
-         "frisians_brewer",
-         "frisians_brewer_master",
-         "frisians_landlady"
+         { name = "frisians_fisher" },
+         { name = "frisians_hunter" },
+         { name = "frisians_farmer" },
+         { name = "frisians_berry_farmer" },
+         { name = "frisians_fruit_collector" },
+         { name = "frisians_smoker" },
+         { name = "frisians_beekeeper" },
+         { name = "frisians_baker" },
+         { name = "frisians_baker_master" },
+         { name = "frisians_brewer" },
+         { name = "frisians_brewer_master" },
+         { name = "frisians_landlady" }
       },
       {
          -- Mining
-         "frisians_geologist",
-         "frisians_miner",
-         "frisians_miner_master",
-         "frisians_charcoal_burner",
-         "frisians_smelter",
-         "frisians_blacksmith",
-         "frisians_blacksmith_master"
+         { name = "frisians_geologist" },
+         { name = "frisians_miner" },
+         { name = "frisians_miner_master" },
+         { name = "frisians_charcoal_burner" },
+         { name = "frisians_smelter" },
+         { name = "frisians_blacksmith" },
+         { name = "frisians_blacksmith_master" }
       },
       {
          -- Military
-         "frisians_soldier",
-         "frisians_trainer",
-         "frisians_scout"
+         {
+            name = "frisians_soldier",
+            default_target_quantity = 10,
+            preciousness = 5
+         },
+         { name = "frisians_trainer" },
+         { name = "frisians_scout" }
       }
    },
 
@@ -411,3 +611,5 @@ tribes:new_tribe {
    ferry = "frisians_ferry",
    port = "frisians_port",
 }
+
+pop_textdomain()

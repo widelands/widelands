@@ -403,7 +403,7 @@ enum {
 
 	/**
 	 * During game setup, this is sent by the client to indicate that the
-	 * client wants to change a player's initialisation.
+	 * client wants to change a player's initialization.
 	 *
 	 * \li unsigned_8: number of the player
 	 * \li unsigned_8: index of the initialization
