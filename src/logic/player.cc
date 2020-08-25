@@ -252,6 +252,9 @@ bool Player::pick_custom_starting_position(const Coords& c) {
 }
 
 void Player::do_pick_custom_starting_position(const Coords& c) {
+	if (!is_picking_custom_starting_position_) {
+		return;
+	}
 	is_picking_custom_starting_position_ = false;
 	egbase().mutable_map()->set_starting_pos(player_number(), c);
 	create_default_infrastructure();
