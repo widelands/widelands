@@ -128,7 +128,6 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	g_image_cache->fill_with_texture_atlases(
 	   std::move(texture_atlases), std::move(textures_in_atlas));
 	g_style_manager = new StyleManager();
-	g_style_manager->init();
 	g_animation_manager = new AnimationManager();
 }
 

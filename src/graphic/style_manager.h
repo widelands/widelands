@@ -38,7 +38,7 @@ constexpr const char* const kTemplateDir = "templates/default/";
 
 class StyleManager {
 public:
-	StyleManager() = default;
+	StyleManager();
 	~StyleManager() = default;
 
 	// Late initialization, because Graphics needs to load the image files first.
