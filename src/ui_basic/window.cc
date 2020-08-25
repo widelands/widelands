@@ -24,7 +24,6 @@
 #include <SDL_mouse.h>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"

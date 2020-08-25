@@ -116,7 +116,7 @@ void set_config_string(const std::string& section,
 void set_config_directory(const std::string& userconfigdir) {
 	config_dir.reset(new RealFSImpl(userconfigdir));
 	config_dir->ensure_directory_exists(".");
-	log_info_notimestamp(
+	log_info(
 	   "Set configuration file: %s/%s\n", userconfigdir.c_str(), kConfigFile.c_str());
 }
 
@@ -130,8 +130,8 @@ void write_config() {
 	try {  //  overwrite the old config file
 		g_options.write(kConfigFile.c_str(), true, *config_dir);
 	} catch (const std::exception& e) {
-		log_warn_notimestamp("could not save configuration: %s\n", e.what());
+		log_warn("could not save configuration: %s\n", e.what());
 	} catch (...) {
-		log_warn_notimestamp("could not save configuration");
+		log_warn("could not save configuration");
 	}
 }

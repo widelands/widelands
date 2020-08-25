@@ -20,7 +20,6 @@
 #include "ui_fsmenu/internet_lobby.h"
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "base/random.h"
 #include "build_info.h"
 #include "graphic/graphic.h"

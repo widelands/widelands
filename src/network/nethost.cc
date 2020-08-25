@@ -69,7 +69,7 @@ void NetHost::stop_listening() {
 	static const auto do_stop = [](boost::asio::ip::tcp::acceptor& acceptor) {
 		boost::system::error_code ec;
 		if (acceptor.is_open()) {
-			log_info_notimestamp(
+			log_info(
 			   "[NetHost] Closing a listening IPv%d socket.\n", get_ip_version(acceptor));
 			acceptor.close(ec);
 		}
@@ -172,21 +172,21 @@ NetHost::NetHost(const uint16_t port)
 
 	if (open_acceptor(
 	       &acceptor_v4_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))) {
-		log_info_notimestamp("[NetHost] Opening a listening IPv4 socket on TCP port %u\n", port);
+		log_info("[NetHost] Opening a listening IPv4 socket on TCP port %u\n", port);
 	}
 	if (open_acceptor(
 	       &acceptor_v6_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v6(), port))) {
-		log_info_notimestamp("[NetHost] Opening a listening IPv6 socket on TCP port %u\n", port);
+		log_info("[NetHost] Opening a listening IPv6 socket on TCP port %u\n", port);
 	}
 
-	log_info_notimestamp("[NetHost] Starting to listen for network connections\n");
+	log_info("[NetHost] Starting to listen for network connections\n");
 	start_accepting(acceptor_v4_, accept_pair_v4_);
 	start_accepting(acceptor_v6_, accept_pair_v6_);
 
 	asio_thread_ = std::thread([this]() {
-		log_info_notimestamp("[NetHost] Starting networking thread\n");
+		log_info("[NetHost] Starting networking thread\n");
 		io_service_.run();
-		log_info_notimestamp("[NetHost] Stopping networking thread\n");
+		log_info("[NetHost] Stopping networking thread\n");
 	});
 }
 

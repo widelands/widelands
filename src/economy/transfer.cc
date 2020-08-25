@@ -19,6 +19,7 @@
 
 #include "economy/transfer.h"
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -88,7 +89,7 @@ void Transfer::set_request(Request* req) {
 
 	if (&req->target() != destination_.get(game_)) {
 		if (destination_.is_set()) {
-			log_warn(game_.get_gametime(),
+			log_warn_time(game_.get_gametime(),
 			         "Transfer::set_request req->target (%u) "
 			         "vs. destination (%u) mismatch\n",
 			         req->target().serial(), destination_.serial());
@@ -284,7 +285,7 @@ void Transfer::tlog(char const* const fmt, ...) {
 		serial = 0;
 	}
 
-	log_dbg(game_.get_gametime(), "T%c(%u): %s", id, serial, buffer);
+	log_dbg_time(game_.get_gametime(), "T%c(%u): %s", id, serial, buffer);
 }
 
 /*

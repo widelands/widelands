@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/terrain_affinity.h"
@@ -226,12 +227,12 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 			} else if (item.first == "bob") {
 				// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
 				bob_ = true;
-				log_warn_notimestamp(
+				log_warn(
 				   "%s: Deprecated 'bob' in 'transform' program, use 'bob:<name>' instead.\n",
 				   descr.name().c_str());
 			} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 				// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
-				log_warn_notimestamp(
+				log_warn(
 				   "%s: Deprecated chance in 'transform' program, use 'chance:<percent>' "
 				   "instead.\n",
 				   descr.name().c_str());
@@ -382,7 +383,7 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
 			probability_ = read_percent_to_int(item.second);
 		} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 			// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
-			log_warn_notimestamp(
+			log_warn(
 			   "%s: Deprecated chance in 'remove' program, use 'chance:<percent>' instead.\n",
 			   descr.name().c_str());
 			probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
@@ -448,7 +449,7 @@ ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
 
 	if (read_key_value_pair(arguments.at(1), ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
-		log_warn_notimestamp("'seed' program without parameter names is deprecated, please use "
+		log_warn("'seed' program without parameter names is deprecated, please use "
 		                     "'seed=<immovable_name> proximity:<percent>' in %s\n",
 		                     descr.name().c_str());
 		type_name_ = arguments.front();
@@ -543,7 +544,7 @@ ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments
 	}
 	if (read_key_value_pair(arguments[1], ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
-		log_warn_notimestamp(
+		log_warn(
 		   "Old-style syntax found for 'construct' program in %s, use "
 		   "construct=<animation_name> duration:<duration> decay_after:<duration> instead.\n",
 		   descr.name().c_str());
@@ -654,7 +655,7 @@ ImmovableActionData::load(FileRead& fr, Immovable& imm, const std::string& name)
 	if (name == "construct") {
 		return ActConstructData::load(fr, imm);
 	} else {
-		log_err_notimestamp("ImmovableActionData::load: type %s not known", name.c_str());
+		log_err("ImmovableActionData::load: type %s not known", name.c_str());
 		return nullptr;
 	}
 }

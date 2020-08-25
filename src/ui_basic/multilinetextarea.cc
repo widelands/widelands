@@ -21,6 +21,7 @@
 
 #include <boost/algorithm/string.hpp>
 
+#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -99,7 +100,7 @@ void MultilineTextarea::recompute() {
 			try {
 				rendered_text_ = UI::g_fh->render(text_, text_width);
 			} catch (const std::exception& e) {
-				log_warn_notimestamp(
+				log_warn(
 				   "Error rendering richtext: %s. Text is:\n%s\n", e.what(), text_.c_str());
 				text_ = make_richtext();
 				rendered_text_ = UI::g_fh->render(text_, text_width);

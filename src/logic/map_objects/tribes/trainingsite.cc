@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/request.h"
@@ -90,7 +91,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 		items_table = table.get_table("soldier health");
 		// TODO(GunChleoc): Compatibility, remove these after v1.0
 		if (items_table->has_key<std::string>("min_level")) {
-			log_warn_notimestamp(
+			log_warn(
 			   "Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
 			   "health' are no longer needed\n",
 			   name().c_str());
@@ -101,7 +102,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 	if (table.has_key("soldier attack")) {
 		items_table = table.get_table("soldier attack");
 		if (items_table->has_key<std::string>("min_level")) {
-			log_warn_notimestamp(
+			log_warn(
 			   "Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
 			   "attack' are no longer needed\n",
 			   name().c_str());
@@ -111,7 +112,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 	if (table.has_key("soldier defense")) {
 		items_table = table.get_table("soldier defense");
 		if (items_table->has_key<std::string>("min_level")) {
-			log_warn_notimestamp(
+			log_warn(
 			   "Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
 			   "defense' are no longer needed\n",
 			   name().c_str());
@@ -121,7 +122,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 	if (table.has_key("soldier evade")) {
 		items_table = table.get_table("soldier evade");
 		if (items_table->has_key<std::string>("min_level")) {
-			log_warn_notimestamp(
+			log_warn(
 			   "Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
 			   "evade' are no longer needed\n",
 			   name().c_str());
@@ -848,7 +849,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 					TypeAndLevel train_tl(upgrade.attribute, level);
 					TrainFailCount::iterator tstep = training_failure_count_.find(train_tl);
 					if (tstep == training_failure_count_.end()) {
-						log_warn_notimestamp("TrainingSite::drop_stalled_soldiers: training step %d,%d "
+						log_warn("TrainingSite::drop_stalled_soldiers: training step %d,%d "
 						                     "not found in this school!\n",
 						                     static_cast<unsigned int>(upgrade.attribute), level);
 						break;
@@ -873,7 +874,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 
 	// Finally drop the soldier.
 	if (nullptr != soldier_to_drop) {
-		log_info_notimestamp("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
+		log_info("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
 		uint8_t level = soldier_to_drop->get_level(TrainingAttribute::kTotal);
 		if (level > highest_trainee_level_seen_) {
 			highest_trainee_level_seen_ = level;

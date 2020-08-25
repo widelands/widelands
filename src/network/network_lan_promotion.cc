@@ -133,22 +133,22 @@ LanBase::LanBase(uint16_t port) : io_service(), socket_v4(io_service), socket_v6
 
 	if (!is_open()) {
 		// Hm, not good. Just try to open them and hope for the best
-		log_info_notimestamp("[LAN] Trying to open both sockets.\n");
+		log_info("[LAN] Trying to open both sockets.\n");
 		start_socket(&socket_v4, boost::asio::ip::udp::v4(), port);
 		start_socket(&socket_v6, boost::asio::ip::udp::v6(), port);
 	}
 
 	if (!is_open()) {
 		// Still not open? Go back to main menu.
-		log_err_notimestamp("[LAN] Error: No sockets could be opened.\n");
+		log_err("[LAN] Error: No sockets could be opened.\n");
 		report_network_error();
 	}
 
 	for (const std::string& ip : broadcast_addresses_v4) {
-		log_info_notimestamp("[LAN] Will broadcast to %s.\n", ip.c_str());
+		log_info("[LAN] Will broadcast to %s.\n", ip.c_str());
 	}
 	if (socket_v6.is_open()) {
-		log_info_notimestamp("[LAN] Will broadcast for IPv6.\n");
+		log_info("[LAN] Will broadcast for IPv6.\n");
 	}
 }
 
@@ -162,7 +162,7 @@ bool LanBase::is_available() {
 		boost::system::error_code ec;
 		bool available = (socket.is_open() && socket.available(ec) > 0);
 		if (ec) {
-			log_err_notimestamp(
+			log_err(
 			   "[LAN] Error when checking whether data is available on IPv%d socket, closing it: "
 			   "%s.\n",
 			   get_ip_version(socket.local_endpoint().protocol()), ec.message().c_str());
@@ -197,7 +197,7 @@ ssize_t LanBase::receive(void* const buf, size_t const len, NetAddress* addr) {
 				}
 			} catch (const boost::system::system_error& ec) {
 				// Some network error. Close the socket
-				log_err_notimestamp(
+				log_err(
 				   "[LAN] Error when receiving data on IPv%d socket, closing it: %s.\n",
 				   get_ip_version(socket.local_endpoint().protocol()), ec.what());
 				close_socket(&socket);
@@ -235,14 +235,14 @@ bool LanBase::send(void const* const buf, size_t const len, const NetAddress& ad
 	if (!socket->is_open()) {
 		// I think this shouldn't happen normally. It might happen, though, if we receive
 		// a broadcast and learn the IP, then our sockets goes down, then we try to send
-		log_err_notimestamp(
+		log_err(
 		   "[LAN] Error: trying to send to an IPv%d address but socket is not open.\n",
 		   get_ip_version(addr.ip));
 		return false;
 	}
 	socket->send_to(boost::asio::buffer(buf, len), destination, 0, ec);
 	if (ec) {
-		log_err_notimestamp(
+		log_err(
 		   "[LAN] Error when trying to send something over IPv%d, closing socket: %s.\n",
 		   get_ip_version(addr.ip), ec.message().c_str());
 		close_socket(socket);
@@ -266,13 +266,13 @@ bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const 
 #ifdef __APPLE__
 			if (get_ip_version(destination.address()) == 4) {
 #endif  // __APPLE__
-				log_err_notimestamp(
+				log_err(
 				   "[LAN] Error when broadcasting on IPv%d socket to %s, closing it: %s.\n",
 				   get_ip_version(destination.address()), address.c_str(), ec.message().c_str());
 				close_socket(&socket);
 #ifdef __APPLE__
 			} else {
-				log_err_notimestamp("[LAN] Error when broadcasting on IPv6 socket to %s: %s.\n",
+				log_err("[LAN] Error when broadcasting on IPv6 socket to %s: %s.\n",
 				                    address.c_str(), ec.message().c_str());
 			}
 #endif  // __APPLE__
@@ -300,7 +300,7 @@ bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const 
 			// Remove this interface id from the set
 			it = interface_indices_v6.erase(it);
 			if (interface_indices_v6.empty()) {
-				log_warn_notimestamp("[LAN] Warning: No more multicast capable IPv6 interfaces. "
+				log_warn("[LAN] Warning: No more multicast capable IPv6 interfaces. "
 				                     "Other LAN players won't find your game.\n");
 			}
 		} else {
@@ -323,7 +323,7 @@ void LanBase::start_socket(boost::asio::ip::udp::socket* socket,
 	// Try to open the socket
 	socket->open(version, ec);
 	if (ec) {
-		log_err_notimestamp("[LAN] Failed to start an IPv%d socket: %s.\n", get_ip_version(version),
+		log_err("[LAN] Failed to start an IPv%d socket: %s.\n", get_ip_version(version),
 		                    ec.message().c_str());
 		return;
 	}
@@ -331,7 +331,7 @@ void LanBase::start_socket(boost::asio::ip::udp::socket* socket,
 	const boost::asio::socket_base::broadcast option_broadcast(true);
 	socket->set_option(option_broadcast, ec);
 	if (ec) {
-		log_err_notimestamp("[LAN] Error setting options for IPv%d socket, closing socket: %s.\n",
+		log_err("[LAN] Error setting options for IPv%d socket, closing socket: %s.\n",
 		                    get_ip_version(version), ec.message().c_str());
 		// Retrieve the error code to avoid throwing but ignore it
 		close_socket(socket);
@@ -350,13 +350,13 @@ void LanBase::start_socket(boost::asio::ip::udp::socket* socket,
 
 	socket->bind(boost::asio::ip::udp::endpoint(version, port), ec);
 	if (ec) {
-		log_err_notimestamp("[LAN] Error binding IPv%d socket to UDP port %d, closing socket: %s.\n",
+		log_err("[LAN] Error binding IPv%d socket to UDP port %d, closing socket: %s.\n",
 		                    get_ip_version(version), port, ec.message().c_str());
 		close_socket(socket);
 		return;
 	}
 
-	log_info_notimestamp(
+	log_info(
 	   "[LAN] Started an IPv%d socket on UDP port %d.\n", get_ip_version(version), port);
 }
 
@@ -380,7 +380,7 @@ void LanBase::close_socket(boost::asio::ip::udp::socket* socket) {
 	if (socket->is_open()) {
 		const boost::asio::ip::udp::endpoint& endpoint = socket->local_endpoint(ec);
 		if (!ec) {
-			log_info_notimestamp(
+			log_info(
 			   "[LAN] Closing an IPv%d socket.\n", get_ip_version(endpoint.protocol()));
 		}
 		socket->shutdown(boost::asio::ip::udp::socket::shutdown_both, ec);
@@ -431,7 +431,7 @@ void LanGamePromoter::run() {
 			continue;
 		}
 
-		log_info_notimestamp("Received %s packet from %s\n", magic, addr.ip.to_string().c_str());
+		log_info("Received %s packet from %s\n", magic, addr.ip.to_string().c_str());
 
 		if (!strncmp(magic, "QUERY", 6) && magic[6] == LAN_PROMOTION_PROTOCOL_VERSION) {
 			if (!send(&gameinfo, sizeof(gameinfo), addr)) {
@@ -477,7 +477,7 @@ void LanGameFinder::run() {
 			continue;
 		}
 
-		log_info_notimestamp("Received %s packet from %s\n", info.magic, addr.ip.to_string().c_str());
+		log_info("Received %s packet from %s\n", info.magic, addr.ip.to_string().c_str());
 
 		if (strncmp(info.magic, "GAME", 6) || info.version != LAN_PROMOTION_PROTOCOL_VERSION) {
 			continue;

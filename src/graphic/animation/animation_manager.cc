@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "graphic/animation/nonpacked_animation.h"
 #include "graphic/animation/spritesheet_animation.h"
 #include "graphic/graphic.h"
@@ -71,7 +72,7 @@ const Image* AnimationManager::get_representative_image(uint32_t id, const RGBCo
 const Image* AnimationManager::get_representative_image(const std::string& map_object_name,
                                                         const RGBColor* clr) {
 	if (representative_animations_by_map_object_name_.count(map_object_name) != 1) {
-		log_warn_notimestamp(
+		log_warn(
 		   "%s has no animation assigned for its representative image, or it's not a known "
 		   "map object\n",
 		   map_object_name.c_str());

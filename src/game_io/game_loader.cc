@@ -69,24 +69,24 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		   (boost::format(_("Loading game: %1$s (%2$u/%3$d)")) % text % step % 6).str()));
 	};
 	set_progress_message(_("Elemental data"), 1);
-	log_info(game_.get_gametime(), "Game: Reading Preload Data ... ");
+	log_info_time(game_.get_gametime(), "Game: Reading Preload Data ... ");
 	{
 		GamePreloadPacket p;
 		p.read(fs_, game_);
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 
-	log_info(game_.get_gametime(), "Game: Reading Game Class Data ... ");
+	log_info_time(game_.get_gametime(), "Game: Reading Game Class Data ... ");
 	{
 		GameClassPacket p;
 		p.read(fs_, game_);
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 
-	log_info(game_.get_gametime(), "Game: Reading Map Data ... ");
+	log_info_time(game_.get_gametime(), "Game: Reading Map Data ... ");
 	GameMapPacket map_packet;
 	map_packet.read(fs_, game_);
-	log_info(
+	log_info_time(
 	   game_.get_gametime(), "Game: Reading Map Data took %ums\n", timer.ms_since_last_query());
 
 	// This has to be loaded after the map packet so that the map's filesystem will exist.
@@ -94,54 +94,54 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// to load them as early as possible here.
 	FileSystem* map_fs = game_.map().filesystem();
 	if (map_fs->file_exists("scripting/tribes")) {
-		log_info(game_.get_gametime(), "Game: Reading Scenario Tribes ... ");
+		log_info_time(game_.get_gametime(), "Game: Reading Scenario Tribes ... ");
 		game_.mutable_tribes()->register_scenario_tribes(map_fs);
-		log_info(game_.get_gametime(), "Game: Reading Scenario Tribes took %ums\n",
+		log_info_time(game_.get_gametime(), "Game: Reading Scenario Tribes took %ums\n",
 		         timer.ms_since_last_query());
 	}
 
 	// This also triggers loading the world and tribes, so we need a newline at the end of the log
 	// output
-	log_info(game_.get_gametime(), "Game: Reading Player Info ...\n");
+	log_info_time(game_.get_gametime(), "Game: Reading Player Info ...\n");
 	{
 		GamePlayerInfoPacket p;
 		p.read(fs_, game_);
 	}
-	log_info(
+	log_info_time(
 	   game_.get_gametime(), "Game: Reading Player Info took %ums\n", timer.ms_since_last_query());
 
-	log_info(game_.get_gametime(), "Game: Calling read_complete()\n");
+	log_info_time(game_.get_gametime(), "Game: Calling read_complete()\n");
 	map_packet.read_complete(game_);
-	log_info(game_.get_gametime(), "Game: read_complete took: %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "Game: read_complete took: %ums\n", timer.ms_since_last_query());
 
 	MapObjectLoader* const mol = map_packet.get_map_object_loader();
 
-	log_info(game_.get_gametime(), "Game: Reading Player Economies Info ... ");
+	log_info_time(game_.get_gametime(), "Game: Reading Player Economies Info ... ");
 	set_progress_message(_("Economies"), 2);
 	{
 		GamePlayerEconomiesPacket p;
 		p.read(fs_, game_, mol);
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 
-	log_info(game_.get_gametime(), "Game: Reading ai persistent data ... ");
+	log_info_time(game_.get_gametime(), "Game: Reading ai persistent data ... ");
 	set_progress_message(_("AI"), 3);
 	{
 		GamePlayerAiPersistentPacket p;
 		p.read(fs_, game_, mol);
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 
-	log_info(game_.get_gametime(), "Game: Reading Command Queue Data ... ");
+	log_info_time(game_.get_gametime(), "Game: Reading Command Queue Data ... ");
 	set_progress_message(_("Command queue"), 4);
 	{
 		GameCmdQueuePacket p;
 		p.read(fs_, game_, mol);
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 
 	//  This must be after the command queue has been read.
-	log_info(game_.get_gametime(), "Game: Parsing messages ... ");
+	log_info_time(game_.get_gametime(), "Game: Parsing messages ... ");
 	set_progress_message(_("Messages"), 5);
 	PlayerNumber const nr_players = game_.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game_, player) {
@@ -158,7 +158,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			}
 		}
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 
 	set_progress_message(_("Finishing"), 6);
 	// For compatibility hacks only
@@ -168,12 +168,12 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// In multiplayer games every client needs to create a new interactive
 	// player.
 	if (!multiplayer) {
-		log_info(game_.get_gametime(), "Game: Reading Interactive Player Data ... ");
+		log_info_time(game_.get_gametime(), "Game: Reading Interactive Player Data ... ");
 		{
 			GameInteractivePlayerPacket p;
 			p.read(fs_, game_, mol);
 		}
-		log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+		log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 	}
 
 	return 0;

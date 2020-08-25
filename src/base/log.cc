@@ -163,7 +163,7 @@ static const char* to_string(const LogType& type) {
 	}
 }
 
-void log_to_stdout(const LogType type, long gametime, const char* const fmt, ...) {
+void log_to_stdout(const LogType type, int64_t gametime, const char* const fmt, ...) {
 	assert(logger != nullptr);
 
 	{  // message type

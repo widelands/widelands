@@ -152,10 +152,10 @@ void CmdAct::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 ObjectManager::~ObjectManager() {
 	// better not throw an exception in a destructor...
 	if (!objects_.empty()) {
-		log_warn_notimestamp("ObjectManager: ouch! remaining objects\n");
+		log_warn("ObjectManager: ouch! remaining objects\n");
 	}
 
-	log_dbg_notimestamp("lastserial: %i\n", lastserial_);
+	log_dbg("lastserial: %i\n", lastserial_);
 }
 
 /**
@@ -666,7 +666,7 @@ const Player& MapObject::owner() const {
 /**
  * Prints a log message prepended by the object's serial number.
  */
-void MapObject::molog(const long gametime, char const* fmt, ...) const {
+void MapObject::molog(const int64_t gametime, char const* fmt, ...) const {
 	if (!g_verbose && !logsink_) {
 		return;
 	}
@@ -682,7 +682,7 @@ void MapObject::molog(const long gametime, char const* fmt, ...) const {
 		logsink_->log(buffer);
 	}
 
-	log_dbg(gametime, "MO(%u,%s): %s", serial_, descr().name().c_str(), buffer);
+	log_dbg_time(gametime, "MO(%u,%s): %s", serial_, descr().name().c_str(), buffer);
 }
 
 bool MapObject::is_reserved_by_worker() const {

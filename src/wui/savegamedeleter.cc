@@ -66,7 +66,7 @@ uint32_t SavegameDeleter::try_to_delete(const std::vector<SavegameData>& to_be_d
 		try {
 			g_fs->fs_unlink(delete_me.filename);
 		} catch (const FileError& e) {
-			log_err_notimestamp("player-requested file deletion failed: %s", e.what());
+			log_err("player-requested file deletion failed: %s", e.what());
 			++failed_deletions;
 		}
 	}
@@ -142,7 +142,7 @@ uint32_t ReplayDeleter::try_to_delete(const std::vector<SavegameData>& to_be_del
 		try {
 			g_fs->fs_unlink(file_to_be_deleted);
 		} catch (const FileError& e) {
-			log_err_notimestamp("player-requested file deletion failed: %s", e.what());
+			log_err("player-requested file deletion failed: %s", e.what());
 			failed = true;
 		}
 
@@ -158,7 +158,7 @@ uint32_t ReplayDeleter::try_to_delete(const std::vector<SavegameData>& to_be_del
 				g_fs->fs_unlink(file_to_be_deleted + kSyncstreamExtension);
 			}
 		} catch (const FileError& e) {
-			log_err_notimestamp("player-requested file deletion failed: %s", e.what());
+			log_err("player-requested file deletion failed: %s", e.what());
 		}
 
 		if (failed) {

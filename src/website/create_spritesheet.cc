@@ -126,7 +126,7 @@ void write_spritesheet(const std::vector<std::unique_ptr<const Texture>>& imgs,
                        int spritesheet_width,
                        int spritesheet_height,
                        FileSystem* out_filesystem) {
-	log_info_notimestamp(
+	log_info(
 	   "CREATING %d x %d spritesheet with %d columns, %" PRIuS " frames. Image size: %d x %d.\n",
 	   spritesheet_width, spritesheet_height, columns, imgs.size(), rect.w, rect.h);
 	std::unique_ptr<Texture> spritesheet(new Texture(spritesheet_width, spritesheet_height));
@@ -142,14 +142,14 @@ void write_spritesheet(const std::vector<std::unique_ptr<const Texture>>& imgs,
 		const Texture* image = imgs[i].get();
 		const int x = col * rect.w;
 		const int y = row * rect.h;
-		log_info_notimestamp(
+		log_info(
 		   "Frame %" PRIuS " at: %d, %d, %d, %d\n", i, x, y, x + rect.w, y + rect.h);
 		spritesheet->blit(Rectf(x, y, rect.w, rect.h), *image, Rectf(rect.x, rect.y, rect.w, rect.h),
 		                  1., BlendMode::Copy);
 	}
 	std::unique_ptr<::StreamWrite> sw(out_filesystem->open_stream_write(filename));
 	save_to_png(spritesheet.get(), sw.get(), ColorType::RGBA);
-	log_info_notimestamp(
+	log_info(
 	   "Wrote spritesheet to %s/%s\n", out_filesystem->get_basename().c_str(), filename.c_str());
 }
 
@@ -173,7 +173,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
                                   FileSystem* out_filesystem) {
 	const Widelands::Tribes& tribes = egbase.tribes();
 	const Widelands::World& world = egbase.world();
-	log_info_notimestamp("==========================================\n");
+	log_info("==========================================\n");
 
 	bool is_fontier_or_flag_animation = false;
 	uint32_t frontier_or_flag_animation_id = 0;
@@ -211,7 +211,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		}
 	}
 	if (!is_fontier_or_flag_animation && descr == nullptr) {
-		log_err_notimestamp(
+		log_err(
 		   "ABORTING. Unable to find map object for '%s'!\n", map_object_name.c_str());
 		return;
 	}
@@ -225,7 +225,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	if (!is_fontier_or_flag_animation) {
 		if (!descr->is_animation_known(animation_name) &&
 		    !descr->is_animation_known(animation_name + "_ne")) {
-			log_err_notimestamp("ABORTING. Unknown animation '%s' for '%s'\n", animation_name.c_str(),
+			log_err("ABORTING. Unknown animation '%s' for '%s'\n", animation_name.c_str(),
 			                    map_object_name.c_str());
 			return;
 		}
@@ -253,7 +253,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		}
 	}
 
-	log_info_notimestamp("WRITING '%s' animation for '%s'. It has %d pictures and %" PRIuS
+	log_info("WRITING '%s' animation for '%s'. It has %d pictures and %" PRIuS
 	                     " scales.\n",
 	                     animation_name.c_str(), map_object_name.c_str(), nr_frames,
 	                     representative_animation.available_scales().size());
@@ -269,7 +269,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		lua_animation->add_int("rows", rows);
 		lua_animation->add_int("columns", columns);
 	} else {
-		log_warn_notimestamp(
+		log_warn(
 		   "NOTE: Animation '%s' for '%s' has less than 2 images and doesn't need a "
 		   "spritesheet. Add it to the \"animations\" table.\n",
 		   animation_name.c_str(), map_object_name.c_str());
@@ -364,8 +364,8 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		}
 	}
 
-	log_info_notimestamp("LUA CODE:\n%s\n", lua_animation->as_string().c_str());
-	log_info_notimestamp("Done!\n");
+	log_info("LUA CODE:\n%s\n", lua_animation->as_string().c_str());
+	log_info("Done!\n");
 }
 
 }  // namespace
@@ -378,7 +378,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 
 int main(int argc, char** argv) {
 	if (argc != 4) {
-		log_err_notimestamp(
+		log_err(
 		   "Usage: %s <mapobject_name> <animation_name> <existing-output-path>\n", argv[0]);
 		return 1;
 	}
@@ -404,7 +404,7 @@ int main(int argc, char** argv) {
 		// Cleanup
 		egbase.cleanup_objects();
 	} catch (std::exception& e) {
-		log_err_notimestamp("Exception: %s.\n", e.what());
+		log_err("Exception: %s.\n", e.what());
 		cleanup();
 		return 1;
 	}

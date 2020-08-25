@@ -20,6 +20,8 @@
 #ifndef WL_BASE_LOG_H
 #define WL_BASE_LOG_H
 
+#include <cstdint>
+
 #include "base/macros.h"
 
 #ifdef _WIN32
@@ -35,16 +37,16 @@ enum class LogType {
 
 // Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
 // If `gametime` is >= 0, a timestamp will be prepended to the output.
-void log_to_stdout(LogType, long gametime, const char*, ...) PRINTF_FORMAT(3, 4);
-#define log_info(time, ...) log_to_stdout(LogType::kInfo, time, __VA_ARGS__)
-#define log_dbg(time, ...) log_to_stdout(LogType::kDebug, time, __VA_ARGS__)
-#define log_warn(time, ...) log_to_stdout(LogType::kWarning, time, __VA_ARGS__)
-#define log_err(time, ...) log_to_stdout(LogType::kError, time, __VA_ARGS__)
+void log_to_stdout(LogType, int64_t gametime, const char*, ...) PRINTF_FORMAT(3, 4);
+#define log_info_time(time, ...) log_to_stdout(LogType::kInfo, time, __VA_ARGS__)
+#define log_dbg_time(time, ...) log_to_stdout(LogType::kDebug, time, __VA_ARGS__)
+#define log_warn_time(time, ...) log_to_stdout(LogType::kWarning, time, __VA_ARGS__)
+#define log_err_time(time, ...) log_to_stdout(LogType::kError, time, __VA_ARGS__)
 
-#define log_info_notimestamp(...) log_to_stdout(LogType::kInfo, -1, __VA_ARGS__)
-#define log_dbg_notimestamp(...) log_to_stdout(LogType::kDebug, -1, __VA_ARGS__)
-#define log_warn_notimestamp(...) log_to_stdout(LogType::kWarning, -1, __VA_ARGS__)
-#define log_err_notimestamp(...) log_to_stdout(LogType::kError, -1, __VA_ARGS__)
+#define log_info(...) log_to_stdout(LogType::kInfo, -1, __VA_ARGS__)
+#define log_dbg(...) log_to_stdout(LogType::kDebug, -1, __VA_ARGS__)
+#define log_warn(...) log_to_stdout(LogType::kWarning, -1, __VA_ARGS__)
+#define log_err(...) log_to_stdout(LogType::kError, -1, __VA_ARGS__)
 
 extern bool g_verbose;
 

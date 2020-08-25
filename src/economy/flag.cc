@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <iterator>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -67,21 +68,21 @@ Flag::Flag()
  */
 Flag::~Flag() {
 	if (ware_filled_) {
-		log_warn_notimestamp("Flag: ouch! wares left\n");
+		log_warn("Flag: ouch! wares left\n");
 	}
 	delete[] wares_;
 
 	if (building_) {
-		log_warn_notimestamp("Flag: ouch! building left\n");
+		log_warn("Flag: ouch! building left\n");
 	}
 
 	if (flag_jobs_.size()) {
-		log_warn_notimestamp("Flag: ouch! flagjobs left\n");
+		log_warn("Flag: ouch! flagjobs left\n");
 	}
 
 	for (const RoadBase* const road : roads_) {
 		if (road) {
-			log_warn_notimestamp("Flag: ouch! road left\n");
+			log_warn("Flag: ouch! road left\n");
 		}
 	}
 }
@@ -91,14 +92,14 @@ void Flag::load_finish(EditorGameBase& egbase) {
 		Worker& worker = *r.get(egbase);
 		Bob::State const* const state = worker.get_state(Worker::taskWaitforcapacity);
 		if (state == nullptr) {
-			log_warn(egbase.get_gametime(),
+			log_warn_time(egbase.get_gametime(),
 			         "worker %u is in the capacity wait queue of flag %u but "
 			         "does not have a waitforcapacity task! Removing from queue.\n",
 			         worker.serial(), serial());
 			return true;
 		}
 		if (state->objvar1 != this) {
-			log_warn(egbase.get_gametime(),
+			log_warn_time(egbase.get_gametime(),
 			         "worker %u is in the capacity wait queue of flag %u but "
 			         "its waitforcapacity task is for map object %u! Removing from "
 			         "queue.\n",

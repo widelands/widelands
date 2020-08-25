@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "ai/ai_hints.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
@@ -264,7 +265,7 @@ void DefaultAI::think() {
 
 	// And printing it now and resetting counter
 	if (scheduler_delay_counter_ > 10) {
-		log_info(gametime, " %d: AI: game speed too high, jobs are too late (now %2d seconds)\n",
+		log_info_time(gametime, " %d: AI: game speed too high, jobs are too late (now %2d seconds)\n",
 		         player_number(), static_cast<int32_t>(delay_time / 1000));
 		scheduler_delay_counter_ = 0;
 	}
@@ -459,7 +460,7 @@ void DefaultAI::think() {
 				}
 				if (!basic_economy_established) {
 					assert(!persistent_data->remaining_basic_buildings.empty());
-					log_info(
+					log_info_time(
 					   gametime,
 					   "AI %2d: Basic economy not achieved, %" PRIuS " building(s) missing, f.e.: %s\n",
 					   player_number(), persistent_data->remaining_basic_buildings.size(),
@@ -467,7 +468,7 @@ void DefaultAI::think() {
 					      .name);
 				}
 				if (!enemy_warehouses.empty()) {
-					log_info(gametime, "Conquered warehouses: %d / %" PRIuS "\n", conquered_wh,
+					log_info_time(gametime, "Conquered warehouses: %d / %" PRIuS "\n", conquered_wh,
 					         enemy_warehouses.size());
 				}
 				management_data.review(
@@ -511,10 +512,10 @@ void DefaultAI::late_initialization() {
 	}
 	const uint32_t gametime = game().get_gametime();
 
-	log_info(gametime, "ComputerPlayer(%d): initializing as type %u%s\n", player_number(),
+	log_info_time(gametime, "ComputerPlayer(%d): initializing as type %u%s\n", player_number(),
 	         static_cast<unsigned int>(type_), (ai_training_mode_) ? ", in ai training mode" : "");
 	if (player_->team_number() > 0) {
-		log_info(gametime, "    ... member of team %d\n", player_->team_number());
+		log_info_time(gametime, "    ... member of team %d\n", player_->team_number());
 	}
 
 	wares.resize(game().tribes().nrwares());
@@ -564,7 +565,7 @@ void DefaultAI::late_initialization() {
 		}
 
 		if (ai_training_mode_) {
-			log_dbg(
+			log_dbg_time(
 			   gametime, "AI %2d: reinitializing dna (kAITrainingMode set true)", player_number());
 			management_data.new_dna_for_persistent(player_number(), type_);
 			management_data.copy_persistent_to_local();
@@ -577,7 +578,7 @@ void DefaultAI::late_initialization() {
 
 		management_data.test_consistency(true);
 
-		log_info(gametime, " AI %2d: %" PRIuS " basic buildings in savegame file. %s\n",
+		log_info_time(gametime, " AI %2d: %" PRIuS " basic buildings in savegame file. %s\n",
 		         player_number(), persistent_data->remaining_basic_buildings.size(),
 		         (create_basic_buildings_list) ?
 		            "New list will be recreated though (kAITrainingMode is true)" :
@@ -647,7 +648,7 @@ void DefaultAI::late_initialization() {
 		bo.requires_supporters = bh.requires_supporters();
 		bo.set_collected_map_resource(*tribe_, bh.collects_ware_from_map());
 		if (bo.requires_supporters) {
-			log_dbg(gametime, " AI %d: %s strictly requires supporters\n", player_number(), bo.name);
+			log_dbg_time(gametime, " AI %d: %s strictly requires supporters\n", player_number(), bo.name);
 		}
 		bo.prohibited_till = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
 		bo.forced_after = bh.get_forced_after() * 1000;        // value in conf is in seconds
@@ -1060,10 +1061,10 @@ void DefaultAI::late_initialization() {
 	// printing identified basic buildings if we are in the basic economy mode
 	basic_economy_established = persistent_data->remaining_basic_buildings.empty();
 	if (!basic_economy_established) {
-		log_dbg(gametime, "%2d: Initializing in the basic economy mode, required buildings:\n",
+		log_dbg_time(gametime, "%2d: Initializing in the basic economy mode, required buildings:\n",
 		        player_number());
 		for (auto bb : persistent_data->remaining_basic_buildings) {
-			log_dbg(gametime, "   %3d / %-28s- target %d\n", bb.first,
+			log_dbg_time(gametime, "   %3d / %-28s- target %d\n", bb.first,
 			        get_building_observer(bb.first).name, bb.second);
 		}
 	}
@@ -1084,7 +1085,7 @@ void DefaultAI::late_initialization() {
 	expedition_max_duration =
 	   kExpeditionMinDuration +
 	   static_cast<double>(off) * (kExpeditionMaxDuration - kExpeditionMinDuration) / scope;
-	log_dbg(gametime, " %d: expedition max duration = %u (%u minutes), map area root: %u\n",
+	log_dbg_time(gametime, " %d: expedition max duration = %u (%u minutes), map area root: %u\n",
 	        player_number(), expedition_max_duration / 1000, expedition_max_duration / kOneMinute,
 	        map_area_root);
 	assert(expedition_max_duration >= kExpeditionMinDuration);
@@ -2001,11 +2002,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	if (ai_training_mode_) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
-			log_dbg(gametime, "Warning field.military_score_ %5d, compounds: ", field.military_score_);
+			log_dbg_time(gametime, "Warning field.military_score_ %5d, compounds: ", field.military_score_);
 			for (uint16_t i = 0; i < score_parts_size; i++) {
-				log_dbg(gametime, "%d, ", score_parts[i]);
+				log_dbg_time(gametime, "%d, ", score_parts[i]);
 			}
-			log_dbg(gametime, "\n");
+			log_dbg_time(gametime, "\n");
 		}
 	}
 
@@ -2210,7 +2211,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// Do we have basic economy established? Informing that we just left the basic economy mode.
 	if (!basic_economy_established && persistent_data->remaining_basic_buildings.empty()) {
-		log_info(gametime, "AI %2d: Player has achieved the basic economy at %s\n", player_number(),
+		log_info_time(gametime, "AI %2d: Player has achieved the basic economy at %s\n", player_number(),
 		         gamestring_with_leading_zeros(gametime));
 		basic_economy_established = true;
 		assert(persistent_data->remaining_basic_buildings.empty());
@@ -2218,7 +2219,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	if (!basic_economy_established && player_statistics.any_enemy_seen_lately(gametime) &&
 	    management_data.f_neuron_pool[17].get_position(0)) {
-		log_info(gametime,
+		log_info_time(gametime,
 		         "AI %2d: Player has not all buildings for basic economy yet (%" PRIuS
 		         " missing), but enemy is "
 		         "nearby, so quitting the mode at %s\n",
@@ -2628,7 +2629,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		                         bo.new_building == BuildingNecessity::kNeeded);
 		if (ai_training_mode_ && bo.type == BuildingObserver::Type::kProductionsite &&
 		    (gametime % 20 == 0 || log_needed)) {
-			log_dbg(gametime,
+			log_dbg_time(gametime,
 			        "AI %2d: %-35s(%2d now) %-11s: max prec: %2d/%2d, primary priority: %4d, overdue: "
 			        "%3d\n",
 			        player_number(), bo.name, bo.total_count(), (log_needed) ? "needed" : "not needed",
@@ -3448,7 +3449,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 
 	if (best_building->is(BuildingAttribute::kRecruitment)) {
-		log_info(gametime, "AI %2d: Building a recruitment site: %s\n", player_number(),
+		log_info_time(gametime, "AI %2d: Building a recruitment site: %s\n", player_number(),
 		         best_building->name);
 	}
 
@@ -4267,7 +4268,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// Inform if we are above ai type limit.
 	if (site.bo->total_count() > site.bo->cnt_limit_by_aimode) {
-		log_warn(gametime, "AI check_productionsites: Too many %s: %d, ai limit: %d\n", site.bo->name,
+		log_warn_time(gametime, "AI check_productionsites: Too many %s: %d, ai limit: %d\n", site.bo->name,
 		         site.bo->total_count(), site.bo->cnt_limit_by_aimode);
 	}
 
@@ -4345,7 +4346,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			}
 		}
 		if (resetting_wares) {
-			log_info(gametime, " %d: AI: input queues were reset to max for %s (game just loaded?)\n",
+			log_info_time(gametime, " %d: AI: input queues were reset to max for %s (game just loaded?)\n",
 			         player_number(), site.bo->name);
 			return true;
 		}
@@ -4455,7 +4456,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (site.bo->is(BuildingAttribute::kBarracks)) {
 		// If we somehow have more than one barracks we will dismantle current one
 		if (site.bo->total_count() > 1) {
-			log_info(
+			log_info_time(
 			   gametime,
 			   "AI %2d: We have %d barracks, that is not supported by AI and if caused by AI it is an "
 			   "error; dismantling the barracks at %3dx%3d\n",
@@ -5306,7 +5307,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	if (purpose == PerfEvaluation::kForConstruction) {
 		// Inform if we are above ai type limit.
 		if (bo.total_count() > bo.cnt_limit_by_aimode) {
-			log_warn(gametime, "AI check_building_necessity: Too many %s: %d, ai limit: %d\n", bo.name,
+			log_warn_time(gametime, "AI check_building_necessity: Too many %s: %d, ai limit: %d\n", bo.name,
 			         bo.total_count(), bo.cnt_limit_by_aimode);
 		}
 
@@ -6271,7 +6272,7 @@ Widelands::BuildingObserver& DefaultAI::get_building_observer(const DescriptionI
 		}
 	}
 
-	log_err(
+	log_err_time(
 	   game().get_gametime(), "Sorry, cannot find building with id %d", static_cast<int32_t>(di));
 	// I noticed that exception test is being lost so will will print it into log as well
 	throw wexception("Sorry, cannot find building with id %d", static_cast<int32_t>(di));
@@ -6720,7 +6721,7 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 				                      cur_strength, old_strength, old60_strength, cass, cur_land,
 				                      old_land, old60_land);
 			} catch (const std::out_of_range&) {
-				log_warn(gametime, "ComputerPlayer(%d): genstats entry missing - size :%d\n",
+				log_warn_time(gametime, "ComputerPlayer(%d): genstats entry missing - size :%d\n",
 				         static_cast<unsigned int>(player_number()),
 				         static_cast<unsigned int>(genstats.size()));
 			}
@@ -6894,14 +6895,14 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	}
 
 	if (false) {
-		log_dbg(gametime, " AI %1d: %s Buildings count: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u.\n", pn,
+		log_dbg_time(gametime, " AI %1d: %s Buildings count: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u.\n", pn,
 		        gamestring_with_leading_zeros(gametime),
 		        static_cast<uint32_t>(productionsites.size()),
 		        static_cast<uint32_t>(militarysites.size()), static_cast<uint32_t>(mines_.size()),
 		        static_cast<uint32_t>(warehousesites.size() - num_ports), num_ports);
 	}
 	if (false) {
-		log_dbg(gametime, " %1s %-30s   %5s(perf)  %6s %6s %6s %8s %5s %5s %5s %5s\n", "T",
+		log_dbg_time(gametime, " %1s %-30s   %5s(perf)  %6s %6s %6s %8s %5s %5s %5s %5s\n", "T",
 		        "Buildings", "work.", "const.", "unocc.", "uncon.", "needed", "prec.", "pprio",
 		        "stock", "targ.");
 	}
@@ -6944,7 +6945,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 			}
 
 			if (true) {
-				log_dbg(gametime, " %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n",
+				log_dbg_time(gametime, " %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n",
 				        btype.c_str(), bo.name,
 				        bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count -
 				           bo.unconnected_count,
@@ -6972,7 +6973,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	}
 
 	if (false) {
-		log_dbg(gametime, "Prodsites in constr: %2d, mines in constr: %2d %s %s\n",
+		log_dbg_time(gametime, "Prodsites in constr: %2d, mines in constr: %2d %s %s\n",
 		        numof_psites_in_constr, mines_in_constr(),
 		        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ?
 		           "NEW BUILDING STOP" :
@@ -6981,7 +6982,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	}
 
 	if (false) {
-		log_dbg(gametime,
+		log_dbg_time(gametime,
 		        "Least military score: %5d/%3d, msites in constr: %3d,"
 		        "soldier st: %2d, strength: %3d\n",
 		        persistent_data->least_military_score,
@@ -6994,14 +6995,14 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 template <typename T>
 void DefaultAI::check_range(T value, T bottom_range, T upper_range, const char* value_name) {
 	if (value < bottom_range || value > upper_range) {
-		log_dbg(game().get_gametime(), " %d: unexpected value for %s: %d\n", player_number(),
+		log_dbg_time(game().get_gametime(), " %d: unexpected value for %s: %d\n", player_number(),
 		        value_name, value);
 	}
 }
 
 template <typename T> void DefaultAI::check_range(T value, T upper_range, const char* value_name) {
 	if (value > upper_range) {
-		log_dbg(game().get_gametime(), " %d: unexpected value for %s: %d\n", player_number(),
+		log_dbg_time(game().get_gametime(), " %d: unexpected value for %s: %d\n", player_number(),
 		        value_name, value);
 	}
 }

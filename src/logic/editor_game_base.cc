@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
 #include "base/time_string.h"
@@ -109,7 +110,7 @@ void EditorGameBase::delete_tempfile() {
 	} catch (const std::exception& e) {
 		// if file deletion fails then we have an abandoned file lying around, but otherwise that's
 		// unproblematic
-		log_warn(get_gametime(),
+		log_warn_time(get_gametime(),
 		         "EditorGameBase::delete_tempfile: deleting temporary file/dir failed: %s\n",
 		         e.what());
 	}
@@ -175,7 +176,7 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 		// destructs).
 		tmp_fs_->file_exists("binary");
 	} catch (const WException& e) {
-		log_err(get_gametime(), "EditorGameBase: saving map to temporary file failed: %s", e.what());
+		log_err_time(get_gametime(), "EditorGameBase: saving map to temporary file failed: %s", e.what());
 		throw;
 	}
 }
@@ -203,7 +204,7 @@ World* EditorGameBase::mutable_world() {
 		try {
 			lua_->run_script("world/init.lua");
 		} catch (const WException& e) {
-			log_err(get_gametime(), "Could not read world information: %s", e.what());
+			log_err_time(get_gametime(), "Could not read world information: %s", e.what());
 			throw;
 		}
 

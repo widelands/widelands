@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
@@ -274,7 +275,7 @@ void ConstructionSite::init_settings() {
 		settings_.reset(new MilitarysiteSettings(*md, tribe));
 	} else {
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log_warn_notimestamp(
+		log_warn(
 		   "Created constructionsite for a %s, which is not of any known building type\n",
 		   building_->name().c_str());
 	}
@@ -524,7 +525,7 @@ void ConstructionSite::enhance(Game& game) {
 	} break;
 	default:
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log_warn(game.get_gametime(),
+		log_warn_time(game.get_gametime(),
 		         "Enhanced constructionsite to a %s, which is not of any known building type\n",
 		         building_->name().c_str());
 	}

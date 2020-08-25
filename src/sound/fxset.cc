@@ -99,7 +99,7 @@ Mix_Chunk* FXset::get_fx(uint32_t random) {
 void FXset::load_sound_file(const std::string& path) {
 	FileRead fr;
 	if (!fr.try_open(*g_fs, path)) {
-		log_err_notimestamp("WARNING: Could not open %s for reading!\n", path.c_str());
+		log_err("WARNING: Could not open %s for reading!\n", path.c_str());
 		return;
 	}
 
@@ -109,7 +109,7 @@ void FXset::load_sound_file(const std::string& path) {
 		assert(m);
 		fxs_.push_back(m);
 	} else {
-		log_err_notimestamp(
+		log_err(
 		   "FXset: loading sound effect file \"%s\" failed: %s\n", path.c_str(), Mix_GetError());
 	}
 }

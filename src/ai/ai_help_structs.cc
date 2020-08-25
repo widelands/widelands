@@ -21,6 +21,7 @@
 
 #include <algorithm>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "logic/ai_dna_handler.h"
@@ -609,7 +610,7 @@ void ManagementData::review(const uint32_t gametime,
 	score = territory_bonus + iron_mine_bonus + attack_bonus + training_bonus + land_score +
 	        strength_score + ps_sites_score + attack_score;
 
-	log_dbg(gametime,
+	log_dbg_time(gametime,
 	        " %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s A:%s Tr:%s, "
 	        "Scores:Land:%5d Str:%4d PS:%4d, Att:%4d\n",
 	        pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
@@ -617,7 +618,7 @@ void ManagementData::review(const uint32_t gametime,
 	        (training_bonus) ? "Y" : "N", land_score, strength_score, ps_sites_score, attack_score);
 
 	if (score < -10000 || score > 30000) {
-		log_dbg(gametime, "%2d %s: reviewing AI mngm. data, score too extreme: %4d\n", pn,
+		log_dbg_time(gametime, "%2d %s: reviewing AI mngm. data, score too extreme: %4d\n", pn,
 		        gamestring_with_leading_zeros(gametime), score);
 	}
 	assert(score > -10000 && score < 100000);
@@ -629,7 +630,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 
 	ai_type = type;
 
-	log_dbg_notimestamp("%2d: DNA initialization... \n", pn);
+	log_dbg("%2d: DNA initialization... \n", pn);
 
 	primary_parent = std::rand() % 4;         // NOLINT
 	const uint8_t parent2 = std::rand() % 4;  // NOLINT
@@ -650,7 +651,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	ai_dna_handler.fetch_dna(
 	   AI_military_numbers_P2, input_weights_P2, input_func_P2, f_neurons_P2, parent2 + 1);
 
-	log_dbg_notimestamp(
+	log_dbg(
 	   "    ... Primary parent: %d, secondary parent: %d\n", primary_parent, parent2);
 
 	// First setting of military numbers, they go directly to persistent data
@@ -770,7 +771,7 @@ void ManagementData::mutate(const uint8_t pn) {
 
 	assert(probability > 0 && probability <= 201);
 
-	log_dbg_notimestamp(
+	log_dbg(
 	   "%2d: mutating DNA with probability 1 / %3d, preffered numbers target %d%s:\n", pn,
 	   probability, preferred_numbers_count, (wild_card) ? ", wild card" : "");
 
@@ -798,7 +799,7 @@ void ManagementData::mutate(const uint8_t pn) {
 					const int16_t new_value = shift_weight_value(
 					   get_military_number_at(i), mutating_intensity == MutatingIntensity::kAgressive);
 					set_military_number_at(i, new_value);
-					log_dbg_notimestamp(
+					log_dbg(
 					   "      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
 					   new_value,
 					   (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
@@ -830,7 +831,7 @@ void ManagementData::mutate(const uint8_t pn) {
 						item.set_weight(new_value);
 						persistent_data->neuron_weights[item.get_id()] = item.get_weight();
 					}
-					log_dbg_notimestamp(
+					log_dbg(
 					   "      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
 					   old_value, item.get_weight(), item.get_type(),
 					   (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
@@ -871,7 +872,7 @@ void ManagementData::mutate(const uint8_t pn) {
 
 				if (changed_bits) {
 					persistent_data->f_neurons[item.get_id()] = item.get_int();
-					log_dbg_notimestamp(
+					log_dbg(
 					   "      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n", item.get_id(),
 					   item.get_int(), changed_bits,
 					   (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
@@ -907,7 +908,7 @@ void ManagementData::copy_persistent_to_local() {
 	       Widelands::Player::AiPersistentState::kMagicNumbersSize);
 
 	test_consistency();
-	log_dbg_notimestamp("    ... DNA initialized\n");
+	log_dbg("    ... DNA initialized\n");
 }
 
 void ManagementData::test_consistency(bool itemized) {
@@ -1064,11 +1065,11 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 		all_stats[opn].old60_players_land = oland;
 		assert(this_player_number == pn);
 		if (this_player_team != mytn) {
-			log_dbg_notimestamp("%2d: Team changed %d -> %d\n", pn, this_player_team, mytn);
+			log_dbg("%2d: Team changed %d -> %d\n", pn, this_player_team, mytn);
 			this_player_team = mytn;
 		}
 		if (all_stats[opn].team_number != pltn) {
-			log_dbg_notimestamp("%2d: Team changed for player %d: %d -> %d\n", pn, opn,
+			log_dbg("%2d: Team changed for player %d: %d -> %d\n", pn, opn,
 			                    all_stats[opn].team_number, pltn);
 			all_stats[opn].team_number = pltn;
 		}
@@ -1079,7 +1080,7 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 // does not exist anymore
 void PlayersStrengths::remove_stat(const Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) > 0) {
-		log_dbg_notimestamp("%d: AI: Erasing statistics for player %d\n", this_player_number, pn);
+		log_dbg("%d: AI: Erasing statistics for player %d\n", this_player_number, pn);
 		all_stats.erase(pn);
 	}
 }
@@ -1138,7 +1139,7 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number)
 	}
 	if (all_stats.count(other_player_number) == 0) {
 		// Should happen only rarely so we print a warning here
-		log_warn_notimestamp("AI %d: player has no statistics yet for player %d\n",
+		log_warn("AI %d: player has no statistics yet for player %d\n",
 		                     this_player_number, other_player_number);
 		return false;
 	}
@@ -1150,7 +1151,7 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number)
 bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const uint32_t gametime) {
 	if (all_stats.count(pn) == 0) {
 		// Should happen only rarely so we print a warning here
-		log_warn_notimestamp("AI %d: player has no statistics yet\n", this_player_number);
+		log_warn("AI %d: player has no statistics yet\n", this_player_number);
 		return false;
 	}
 	if (all_stats[pn].last_time_seen == kNever) {
@@ -1256,7 +1257,7 @@ uint32_t PlayersStrengths::get_old60_player_power(Widelands::PlayerNumber pn) {
 
 uint32_t PlayersStrengths::get_old_player_land(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
-		log_dbg_notimestamp(" AI %d: Players statistics are still empty\n", pn);
+		log_dbg(" AI %d: Players statistics are still empty\n", pn);
 		return 0;
 	}
 	return all_stats[pn].old_players_land;
@@ -1264,7 +1265,7 @@ uint32_t PlayersStrengths::get_old_player_land(Widelands::PlayerNumber pn) {
 
 uint32_t PlayersStrengths::get_old60_player_land(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
-		log_dbg_notimestamp(" AI %d: Players statistics are still empty\n", pn);
+		log_dbg(" AI %d: Players statistics are still empty\n", pn);
 		return 0;
 	}
 	return all_stats[pn].old60_players_land;

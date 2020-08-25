@@ -55,66 +55,66 @@ void GameSaver::save() {
 
 	fs_.ensure_directory_exists("binary");
 
-	log_info(game_.get_gametime(), "Game: Writing Preload Data ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing Preload Data ... ");
 	set_progress_message(_("Elemental data"), 1);
 	{
 		GamePreloadPacket p;
 		p.write(fs_, game_, nullptr);
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 
-	log_info(game_.get_gametime(), "Game: Writing Game Class Data ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing Game Class Data ... ");
 	{
 		GameClassPacket p;
 		p.write(fs_, game_, nullptr);
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 
-	log_info(game_.get_gametime(), "Game: Writing Player Info ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing Player Info ... ");
 	{
 		GamePlayerInfoPacket p;
 		p.write(fs_, game_, nullptr);
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 
-	log_info(game_.get_gametime(), "Game: Writing Map Data!\n");
+	log_info_time(game_.get_gametime(), "Game: Writing Map Data!\n");
 	GameMapPacket map_packet;
 	map_packet.write(fs_, game_, nullptr);
-	log_info(
+	log_info_time(
 	   game_.get_gametime(), "Game: Writing Map Data took %ums\n", timer.ms_since_last_query());
 
 	MapObjectSaver* const mos = map_packet.get_map_object_saver();
 
-	log_info(game_.get_gametime(), "Game: Writing Player Economies Info ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing Player Economies Info ... ");
 	set_progress_message(_("Economies"), 2);
 	{
 		GamePlayerEconomiesPacket p;
 		p.write(fs_, game_, mos);
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 
-	log_info(game_.get_gametime(), "Game: Writing ai persistent data ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing ai persistent data ... ");
 	set_progress_message(_("AI"), 3);
 	{
 		GamePlayerAiPersistentPacket p;
 		p.write(fs_, game_, mos);
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 
-	log_info(game_.get_gametime(), "Game: Writing Command Queue Data ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing Command Queue Data ... ");
 	set_progress_message(_("Command queue"), 4);
 	{
 		GameCmdQueuePacket p;
 		p.write(fs_, game_, mos);
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 
-	log_info(game_.get_gametime(), "Game: Writing Interactive Player Data ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing Interactive Player Data ... ");
 	set_progress_message(_("Interactive player"), 5);
 	{
 		GameInteractivePlayerPacket p;
 		p.write(fs_, game_, mos);
 	}
-	log_info(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
 }
 }  // namespace Widelands

@@ -103,6 +103,7 @@ wl_library(ui_fsmenu_gameloading
   DEPENDS
     base_exceptions
     base_i18n
+    base_log
     graphic
     graphic_playercolor
     io_filesystem
@@ -172,7 +173,6 @@ wl_library(ui_fsmenu_network
     netsetup_lan.h
   DEPENDS
     base_i18n
-    base_log
     base_random
     build_info
     graphic

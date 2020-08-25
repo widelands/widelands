@@ -50,14 +50,14 @@ NetClient::NetClient(const NetAddress& host) {
 
 	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
 
-	log_info_notimestamp(
+	log_info(
 	   "[NetClient]: Trying to connect to %s:%u ... ", host.ip.to_string().c_str(), host.port);
 	conn_ = BufferedConnection::connect(host);
 	if (conn_) {
-		log_info_notimestamp("success.\n");
+		log_info("success.\n");
 		assert(is_connected());
 	} else {
-		log_err_notimestamp("failed.\n");
+		log_err("failed.\n");
 		assert(!is_connected());
 	}
 }

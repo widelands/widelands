@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/wexception.h"
@@ -246,7 +247,7 @@ uint32_t SoldierDescr::get_rand_anim(Game& game,
 	}
 
 	if (!is_animation_known(run)) {
-		log_warn(game.get_gametime(), "Missing animation '%s' for soldier %s. Reverting to idle.\n",
+		log_warn_time(game.get_gametime(), "Missing animation '%s' for soldier %s. Reverting to idle.\n",
 		         run.c_str(), name().c_str());
 		run = "idle";
 	}

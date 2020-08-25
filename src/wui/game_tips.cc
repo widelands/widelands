@@ -24,6 +24,7 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -74,7 +75,7 @@ void GameTips::load_tips(const std::string& name) {
 			tips_.push_back(tip);
 		}
 	} catch (LuaError& err) {
-		log_err_notimestamp("Error loading tips script for %s:\n%s\n", name.c_str(), err.what());
+		log_err("Error loading tips script for %s:\n%s\n", name.c_str(), err.what());
 		// No further handling necessary - tips do not impact game
 	}
 }

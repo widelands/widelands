@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -231,7 +232,7 @@ void FerryFleet::add_ferry(Ferry* ferry) {
 void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
 	auto it = std::find(ferries_.begin(), ferries_.end(), ferry);
 	if (it == ferries_.end()) {
-		log_warn(egbase.get_gametime(),
+		log_warn_time(egbase.get_gametime(),
 		         "FerryFleet %u: Requested to remove ferry %u which is not in this fleet\n", serial(),
 		         ferry ? ferry->serial() : 0);
 		return;
@@ -301,7 +302,7 @@ void FerryFleet::reroute_ferry_request(Game& game, Waterway* oldww, Waterway* ne
 			return;
 		}
 	}
-	log_warn(game.get_gametime(),
+	log_warn_time(game.get_gametime(),
 	         "FerryFleet::reroute_ferry_request: received order to reroute inexistent request\n");
 }
 
@@ -368,7 +369,7 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 			   game.map().findpath(temp_ferry->get_position(), ww.base_flag().get_position(), 0, path,
 			                       CheckStepFerry(game));
 			if (f_distance < 0) {
-				log_err(game.get_gametime(),
+				log_err_time(game.get_gametime(),
 				        "FerryFleet(%u)::act: We have a ferry (%u at %dx%d) "
 				        "that can't reach one of our waterways (%u at %dx%d)!\n",
 				        serial_, temp_ferry->serial(), temp_ferry->get_position().x,

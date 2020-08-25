@@ -38,7 +38,7 @@ using namespace Widelands;
 
 int main(int argc, char** argv) {
 	if (!(2 <= argc && argc <= 3)) {
-		log_err_notimestamp("Usage: %s <map file>\n", argv[0]);
+		log_err("Usage: %s <map file>\n", argv[0]);
 		return 1;
 	}
 
@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
 		std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(map_file));
 
 		if (!ml) {
-			log_err_notimestamp("Cannot load map file.\n");
+			log_err("Cannot load map file.\n");
 			return 1;
 		}
 
@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
 		}
 		egbase.cleanup_objects();
 	} catch (std::exception& e) {
-		log_err_notimestamp("Exception: %s.\n", e.what());
+		log_err("Exception: %s.\n", e.what());
 		cleanup();
 		return 1;
 	}

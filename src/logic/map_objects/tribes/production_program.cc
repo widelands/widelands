@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"
@@ -1029,7 +1030,7 @@ ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
 	} else if (item.second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove after v1.0
 		duration_ = read_duration(item.first, psite);
-		log_warn_notimestamp("'sleep' program without parameter name is deprecated, please use "
+		log_warn("'sleep' program without parameter name is deprecated, please use "
 		                     "'sleep=duration:<duration>' in %s\n",
 		                     psite.name().c_str());
 	} else {
@@ -1468,7 +1469,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 
 	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
 		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log_warn_notimestamp(
+		log_warn(
 		   "Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
 		   "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
 		   descr->name().c_str());
@@ -1678,7 +1679,7 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::strin
 
 	if (arguments.size() == 3) {
 		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log_warn_notimestamp("Using old syntax in %s. Please use "
+		log_warn("Using old syntax in %s. Please use "
 		                     "'checksoldier=soldier:attack|defense|evade|health level:<number>'\n",
 		                     descr.name().c_str());
 
@@ -1784,7 +1785,7 @@ ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments,
 
 	if (arguments.size() == 4) {
 		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log_warn_notimestamp(
+		log_warn(
 		   "Using old syntax in %s. Please use train=soldier:attack|defense|evade|health "
 		   "level:<number>\n",
 		   descr.name().c_str());
@@ -1929,7 +1930,7 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 
 	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
-		log_warn_notimestamp(
+		log_warn(
 		   "'construct' program without parameter names is deprecated, please use "
 		   "'construct=<immovable_name> worker:<program_name> radius:<number>' in %s\n",
 		   descr->name().c_str());

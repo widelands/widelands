@@ -22,6 +22,7 @@
 #include <memory>
 #include <set>
 
+#include "base/log.h"
 #include "economy/expedition_bootstrap.h"
 #include "economy/portdock.h"
 #include "economy/ship_fleet.h"
@@ -73,7 +74,7 @@ constexpr int16_t kNearbyDockMaxDistanceFactor = 8 * 1800;
 
 #define sslog(...)                                                                                 \
 	if (g_verbose)                                                                                  \
-	log_dbg(game.get_gametime(), __VA_ARGS__)
+	log_dbg_time(game.get_gametime(), __VA_ARGS__)
 
 ShippingSchedule::ShippingSchedule(ShipFleet& f) : fleet_(f), last_updated_(0), loader_(nullptr) {
 	assert(!fleet_.active());
@@ -1596,9 +1597,9 @@ Duration ShippingSchedule::update(Game& game) {
 }
 
 void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
-	const long t = e.get_gametime();
+	const int64_t t = e.get_gametime();
 	for (const auto& plan : plans_) {
-		log_dbg(t, "· %s: carrying %u items (capacity %u)\n",
+		log_dbg_time(t, "· %s: carrying %u items (capacity %u)\n",
 		        plan.first.get(e)->get_shipname().c_str(), plan.first.get(e)->get_nritems(),
 		        plan.first.get(e)->get_capacity());
 		std::map<Serial, uint32_t> dests;
@@ -1612,20 +1613,20 @@ void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
 			}
 		}
 		for (const auto& pair : dests) {
-			log_dbg(t, "  – %u items to %u\n", pair.second, pair.first);
+			log_dbg_time(t, "  – %u items to %u\n", pair.second, pair.first);
 		}
-		log_dbg(t, "  SCHEDULE: %" PRIuS " stations\n", plan.second.size());
+		log_dbg_time(t, "  SCHEDULE: %" PRIuS " stations\n", plan.second.size());
 		for (const SchedulingState& ss : plan.second) {
-			log_dbg(t, "          · in %u ms at %u\n", ss.duration_from_previous_location,
+			log_dbg_time(t, "          · in %u ms at %u\n", ss.duration_from_previous_location,
 			        ss.dock.serial());
-			log_dbg(t, "            load there: ");
+			log_dbg_time(t, "            load there: ");
 			if (ss.expedition) {
-				log_dbg(t, "expedition\n");
+				log_dbg_time(t, "expedition\n");
 				assert(ss.load_there.empty());
 			} else {
-				log_dbg(t, "cargo for %" PRIuS " destinations\n", ss.load_there.size());
+				log_dbg_time(t, "cargo for %" PRIuS " destinations\n", ss.load_there.size());
 				for (const auto& pair : ss.load_there) {
-					log_dbg(t, "            – %u items to %u\n", pair.second, pair.first.serial());
+					log_dbg_time(t, "            – %u items to %u\n", pair.second, pair.first.serial());
 				}
 			}
 		}

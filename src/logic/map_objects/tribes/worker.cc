@@ -1848,7 +1848,7 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 	signal_handled();
 	if (!signal.empty()) {
 		// TODO(sirver,trading): Remove once signals are correctly handled.
-		log_dbg(
+		log_dbg_time(
 		   game.get_gametime(), "carry_trade_item_update: signal received: %s\n", signal.c_str());
 	}
 	if (signal == "evict") {

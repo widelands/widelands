@@ -341,7 +341,7 @@ void FullscreenMenuMapSelect::fill_table() {
 				if (!mapdata.tags.count("balanced") && !mapdata.tags.count("unbalanced")) {
 					unspecified_balancing_found = true;
 				} else if (mapdata.tags.count("balanced") && mapdata.tags.count("unbalanced")) {
-					log_warn_notimestamp(
+					log_warn(
 					   "Map '%s' is both balanced and unbalanced - please fix the 'elemental' "
 					   "packet\n",
 					   mapfilename.c_str());
@@ -357,10 +357,10 @@ void FullscreenMenuMapSelect::fill_table() {
 				}
 				maps_data_.push_back(mapdata);
 			} catch (const std::exception& e) {
-				log_warn_notimestamp(
+				log_warn(
 				   "Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
 			} catch (...) {
-				log_warn_notimestamp(
+				log_warn(
 				   "Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
 			}
 		} else if (g_fs->is_directory(mapfilename)) {

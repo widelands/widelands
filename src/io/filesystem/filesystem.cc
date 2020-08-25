@@ -292,7 +292,7 @@ std::string FileSystem::get_homedir() {
 	TRY_USE_AS_HOMEDIR("HOME")
 	TRY_USE_AS_HOMEDIR("APPDATA")
 
-	log_warn_notimestamp("None of the directories was useable - falling back to \".\"\n");
+	log_warn("None of the directories was useable - falling back to \".\"\n");
 #else
 #ifdef HAS_GETENV
 	if (char const* const h = getenv("HOME")) {
@@ -302,12 +302,12 @@ std::string FileSystem::get_homedir() {
 #endif
 
 	if (homedir.empty()) {
-		log_warn_notimestamp("\neither we can not detect your home directory "
+		log_warn("\neither we can not detect your home directory "
 		                     "or you do not have one! Please contact the developers.\n\n");
 
 		// TODO(unknown): is it really a good idea to set homedir to "." then ??
 
-		log_warn_notimestamp("Instead of your home directory, '.' will be used.\n\n");
+		log_warn("Instead of your home directory, '.' will be used.\n\n");
 		homedir = ".";
 	}
 
@@ -658,7 +658,7 @@ bool FileSystem::check_writeable_for_data(char const* const path) {
 		fs.fs_unlink(".widelands");
 		return true;
 	} catch (const FileError& e) {
-		log_warn_notimestamp("Directory %s is not writeable - next try: %s\n", path, e.what());
+		log_warn("Directory %s is not writeable - next try: %s\n", path, e.what());
 	}
 
 	return false;

@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -132,7 +133,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			}
 		}
 	} catch (WException& err) {
-		log_err(parent.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
+		log_err_time(parent.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
 		        err.what());
 		UI::WLMessageBox wmb(
 		   &parent, _("Error!"),

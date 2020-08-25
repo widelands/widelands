@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/cmd_call_economy_balance.h"
@@ -41,7 +42,7 @@ namespace Widelands {
 Serial Economy::last_economy_serial_ = 0;
 
 void Economy::initialize_serial() {
-	log_dbg_notimestamp("Initializing economy serial\n");
+	log_dbg("Initializing economy serial\n");
 	last_economy_serial_ = 0;
 }
 
@@ -87,13 +88,13 @@ Economy::~Economy() {
 	Notifications::publish(NoteEconomy{serial_, serial_, NoteEconomy::Action::kDeleted});
 
 	if (requests_.size()) {
-		log_warn_notimestamp("Economy still has requests left on destruction\n");
+		log_warn("Economy still has requests left on destruction\n");
 	}
 	if (flags_.size()) {
-		log_warn_notimestamp("Economy still has flags left on destruction\n");
+		log_warn("Economy still has flags left on destruction\n");
 	}
 	if (warehouses_.size()) {
-		log_warn_notimestamp("Economy still has warehouses left on destruction\n");
+		log_warn("Economy still has warehouses left on destruction\n");
 	}
 
 	delete[] target_quantities_;
@@ -336,7 +337,7 @@ void Economy::set_target_quantity(WareWorker economy_type,
 	assert(economy_type == type_);
 	// Skip in release builds to get the most reasonable game state
 	if (economy_type != type_) {
-		log_warn(mod_time, "Economy type mismatch in set_target_quantity, skipping\n");
+		log_warn_time(mod_time, "Economy type mismatch in set_target_quantity, skipping\n");
 		return;
 	}
 #ifndef NDEBUG
@@ -451,7 +452,7 @@ void Economy::remove_request(Request& req) {
 
 	if (it == requests_.end()) {
 		FORMAT_WARNINGS_OFF
-		log_warn(owner().egbase().get_gametime(), "remove_request(%p) not in list\n", &req);
+		log_warn_time(owner().egbase().get_gametime(), "remove_request(%p) not in list\n", &req);
 		FORMAT_WARNINGS_ON
 		return;
 	}
@@ -652,13 +653,13 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 
 		if (!find_route(supp.get_position(game)->base_flag(), target_flag, route, best_cost)) {
 			if (!best_route) {
-				log_err(
+				log_err_time(
 				   game.get_gametime(),
 				   "Economy::find_best_supply: %s-Economy %u of player %u: Error, COULD NOT FIND A "
 				   "ROUTE!\n",
 				   type_ ? "WORKER" : "WARE", serial_, owner_.player_number());
 				// To help to debug this a bit:
-				log_err(game.get_gametime(),
+				log_err_time(game.get_gametime(),
 				        " ... ware/worker at: %3dx%3d, requestor at: %3dx%3d! Item: %s.\n",
 				        supp.get_position(game)->base_flag().get_position().x,
 				        supp.get_position(game)->base_flag().get_position().y,
@@ -1050,7 +1051,7 @@ void Economy::handle_active_supplies(Game& game) {
 			   });
 		}
 		if (!wh) {
-			log_warn(game.get_gametime(), "Warning: Economy::handle_active_supplies "
+			log_warn_time(game.get_gametime(), "Warning: Economy::handle_active_supplies "
 			                              "didn't find warehouse\n");
 			return;
 		}

@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"

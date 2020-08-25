@@ -157,7 +157,7 @@ void NetClientProxy::receive_commands() {
 	default:
 		// Other commands should not be possible.
 		// Then is either something wrong with the protocol or there is an implementation mistake
-		log_err_notimestamp(
+		log_err(
 		   "Received command code %i from relay server, do not know what to do with it\n",
 		   static_cast<uint8_t>(cmd));
 		NEVER_HERE();

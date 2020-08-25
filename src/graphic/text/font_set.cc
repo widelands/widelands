@@ -128,14 +128,14 @@ void FontSet::parse_fontset(const std::string& fontset_name) {
 			size_offset_ = font_set_table->get_int("size_offset");
 		}
 	} catch (LuaError& err) {
-		log_err_notimestamp("Could not read font set '%s': %s\n", fontset_name.c_str(), err.what());
+		log_err("Could not read font set '%s': %s\n", fontset_name.c_str(), err.what());
 	}
 
 	is_rtl_ = false;
 	if (direction_string == "rtl") {
 		is_rtl_ = true;
 	} else if (direction_string != "ltr") {
-		log_warn_notimestamp("Unknown script direction '%s'. Using to left-to-right rendering.\n",
+		log_warn("Unknown script direction '%s'. Using to left-to-right rendering.\n",
 		                     direction_string.c_str());
 	}
 }
@@ -211,18 +211,18 @@ FontSets::FontSets() {
 				if (fontset_selectors.count(fontsetname) == 1) {
 					selector = fontset_selectors.at(fontsetname);
 				} else {
-					log_warn_notimestamp(
+					log_warn(
 					   "No selector for fontset: %s in locale: %s. Falling back to default\n",
 					   fontsetname.c_str(), localename.c_str());
 				}
 				locale_fontsets.insert(std::make_pair(localename, selector));
 			} catch (const WException&) {
-				log_err_notimestamp("Could not read locale fontset for: %s\n", localename.c_str());
+				log_err("Could not read locale fontset for: %s\n", localename.c_str());
 				locale_fontsets.insert(std::make_pair(localename, FontSets::Selector::kDefault));
 			}  // End read locale from table
 		}     // End scan locales directory
 	} catch (const LuaError& err) {
-		log_err_notimestamp("Could not read locales fontset information from file: %s\n", err.what());
+		log_err("Could not read locales fontset information from file: %s\n", err.what());
 		return;  // Nothing more can be done now.
 	}           // End read locales table
 
@@ -230,7 +230,7 @@ FontSets::FontSets() {
 	for (int i = static_cast<int>(FontSets::Selector::kDefault);
 	     i < static_cast<int>(FontSets::Selector::kUnknown); ++i) {
 		if (fontsets.count(static_cast<FontSets::Selector>(i)) != 1) {
-			log_warn_notimestamp("No fontset defined for FontSets::Selector enum member #%d\n", i);
+			log_warn("No fontset defined for FontSets::Selector enum member #%d\n", i);
 		}
 	}
 }

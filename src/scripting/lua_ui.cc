@@ -21,6 +21,7 @@
 
 #include <SDL_mouse.h>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
@@ -328,7 +329,7 @@ int LuaButton::get_name(lua_State* L) {
       event in tutorials
 */
 int LuaButton::press(lua_State* /* L */) {
-	log_info_notimestamp("Pressing button '%s'\n", get()->get_name().c_str());
+	log_info("Pressing button '%s'\n", get()->get_name().c_str());
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	return 0;
@@ -340,7 +341,7 @@ int LuaButton::press(lua_State* /* L */) {
       it.
 */
 int LuaButton::click(lua_State* /* L */) {
-	log_info_notimestamp("Clicking button '%s'\n", get()->get_name().c_str());
+	log_info("Clicking button '%s'\n", get()->get_name().c_str());
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);
@@ -403,7 +404,7 @@ int LuaDropdown::get_no_of_items(lua_State* L) {
       Open this dropdown menu.
 */
 int LuaDropdown::open(lua_State* /* L */) {
-	log_info_notimestamp("Opening dropdown '%s'\n", get()->get_name().c_str());
+	log_info("Opening dropdown '%s'\n", get()->get_name().c_str());
 	get()->set_list_visibility(true);
 	return 0;
 }
@@ -424,7 +425,7 @@ int LuaDropdown::highlight_item(lua_State* L) {
 		             "dropdown is 1-%d.",
 		             desired_item, get()->get_name().c_str(), get()->size());
 	}
-	log_info_notimestamp(
+	log_info(
 	   "Highlighting item %d in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 	// Open the dropdown
 	get()->set_list_visibility(true);
@@ -453,7 +454,7 @@ int LuaDropdown::highlight_item(lua_State* L) {
       Selects the currently highlighted item in this dropdown.
 */
 int LuaDropdown::select(lua_State* /* L */) {
-	log_info_notimestamp("Selecting current item in dropdown '%s'\n", get()->get_name().c_str());
+	log_info("Selecting current item in dropdown '%s'\n", get()->get_name().c_str());
 	SDL_Keysym code;
 	code.sym = SDLK_RETURN;
 	code.scancode = SDL_SCANCODE_RETURN;
@@ -517,7 +518,7 @@ int LuaTab::get_active(lua_State* L) {
       Click this tab making it the active one.
 */
 int LuaTab::click(lua_State* /* L */) {
-	log_info_notimestamp("Clicking tab '%s'\n", get()->get_name().c_str());
+	log_info("Clicking tab '%s'\n", get()->get_name().c_str());
 	get()->activate();
 	return 0;
 }
@@ -567,7 +568,7 @@ int LuaWindow::get_name(lua_State* L) {
       not use it any longer.
 */
 int LuaWindow::close(lua_State* /* L */) {
-	log_info_notimestamp("Closing window '%s'\n", get()->get_name().c_str());
+	log_info("Closing window '%s'\n", get()->get_name().c_str());
 	delete panel_;
 	panel_ = nullptr;
 	return 0;

@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -162,7 +163,7 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 				// here might be a problem so I (tiborb) put here
 				// this test, might be removed after some time
 				if (dock->get_fleet() == nullptr) {
-					log_warn(egbase.get_gametime(), "The dock on %3dx%3d without a fleet!\n",
+					log_warn_time(egbase.get_gametime(), "The dock on %3dx%3d without a fleet!\n",
 					         dock->dockpoints_.front().x, dock->dockpoints_.front().y);
 				}
 				if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
@@ -515,7 +516,7 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 			}
 
 			if (pd->get_fleet() && pd->get_fleet() != this) {
-				log_err(egbase.get_gametime(),
+				log_err_time(egbase.get_gametime(),
 				        "ShipFleet::connect_port: different fleets despite reachability\n");
 				continue;
 			}
@@ -550,7 +551,7 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 	}
 
 	if (!se.targets.empty()) {
-		log_err(egbase.get_gametime(), "ShipFleet::connect_port: Could not reach all ports!\n");
+		log_err_time(egbase.get_gametime(), "ShipFleet::connect_port: Could not reach all ports!\n");
 	}
 }
 

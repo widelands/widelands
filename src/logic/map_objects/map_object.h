@@ -22,7 +22,6 @@
 
 #include <boost/signals2/signal.hpp>
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
 #include "graphic/animation/diranimations.h"
@@ -352,7 +351,7 @@ protected:
 	                  const float scale,
 	                  RenderTarget* dst) const;
 
-	void molog(long gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
+	void molog(int64_t gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
 
 	const MapObjectDescr* descr_;
 	Serial serial_;

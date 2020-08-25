@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
@@ -619,7 +620,7 @@ UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coo
 		break;
 	// TODO(sirver,trading): Add UI for market.
 	default:
-		log_err(egbase().get_gametime(), "Unable to show window for building '%s', type '%s'.\n",
+		log_err_time(egbase().get_gametime(), "Unable to show window for building '%s', type '%s'.\n",
 		        building->descr().name().c_str(), to_string(building->descr().type()).c_str());
 		NEVER_HERE();
 	}

@@ -23,7 +23,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/log.h"
 #include "graphic/rendertarget.h"
 
 /*

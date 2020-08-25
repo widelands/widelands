@@ -117,10 +117,10 @@ void BufferedConnection::close() {
 	boost::system::error_code ec;
 	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
 	if (!ec) {
-		log_info_notimestamp("[BufferedConnection] Closing network socket connected to %s:%i.\n",
+		log_info("[BufferedConnection] Closing network socket connected to %s:%i.\n",
 		                     remote.address().to_string().c_str(), remote.port());
 	} else {
-		log_info_notimestamp("[BufferedConnection] Closing network socket.\n");
+		log_info("[BufferedConnection] Closing network socket.\n");
 	}
 	// Stop the thread
 	io_service_.stop();
@@ -248,10 +248,10 @@ void BufferedConnection::start_sending() {
 			   start_sending();
 		   } else {
 			   if (socket_.is_open()) {
-				   log_err_notimestamp(
+				   log_err(
 				      "[BufferedConnection] Error when sending packet to host (error %i: %s)\n",
 				      ec.value(), ec.message().c_str());
-				   log_err_notimestamp("[BufferedConnection] Closing socket\n");
+				   log_err("[BufferedConnection] Closing socket\n");
 				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
 				   socket_.close();
 			   }
@@ -282,10 +282,10 @@ void BufferedConnection::start_receiving() {
 			   start_receiving();
 		   } else {
 			   if (socket_.is_open()) {
-				   log_err_notimestamp(
+				   log_err(
 				      "[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
 				      ec.value(), ec.message().c_str());
-				   log_err_notimestamp("[BufferedConnection] Closing socket\n");
+				   log_err("[BufferedConnection] Closing socket\n");
 				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
 				   socket_.close();
 			   }
@@ -306,7 +306,7 @@ void BufferedConnection::reduce_send_buffer(boost::asio::ip::tcp::socket& socket
 		// Ignore error. When it fails, chat messages will lag while transmitting files,
 		// but nothing really bad happens
 		if (ec) {
-			log_warn_notimestamp("[BufferedConnection] Warning: Failed to reduce send buffer size\n");
+			log_warn("[BufferedConnection] Warning: Failed to reduce send buffer size\n");
 		}
 	}
 }
@@ -316,12 +316,12 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 
 	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
 
-	log_info_notimestamp("[BufferedConnection] Trying to connect to %s:%u ... ",
+	log_info("[BufferedConnection] Trying to connect to %s:%u ... ",
 	                     host.ip.to_string().c_str(), host.port);
 	boost::system::error_code ec;
 	socket_.connect(destination, ec);
 	if (!ec && is_connected()) {
-		log_info_notimestamp("success.\n");
+		log_info("success.\n");
 
 		reduce_send_buffer(socket_);
 
@@ -330,12 +330,12 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 		start_receiving();
 		asio_thread_ = std::thread([this]() {
 			// The output might actually be messed up if it collides with the main thread...
-			log_info_notimestamp("[BufferedConnection] Starting networking thread\n");
+			log_info("[BufferedConnection] Starting networking thread\n");
 			io_service_.run();
-			log_info_notimestamp("[BufferedConnection] Stopping networking thread\n");
+			log_info("[BufferedConnection] Stopping networking thread\n");
 		});
 	} else {
-		log_err_notimestamp("failed.\n");
+		log_err("failed.\n");
 		socket_.close();
 		assert(!is_connected());
 	}
@@ -348,7 +348,7 @@ BufferedConnection::BufferedConnection()
 void BufferedConnection::notify_connected() {
 	assert(is_connected());
 
-	log_info_notimestamp("[BufferedConnection] Connection to %s.\n",
+	log_info("[BufferedConnection] Connection to %s.\n",
 	                     socket_.remote_endpoint().address().to_string().c_str());
 
 	reduce_send_buffer(socket_);
@@ -356,9 +356,9 @@ void BufferedConnection::notify_connected() {
 	start_receiving();
 	asio_thread_ = std::thread([this]() {
 		// The output might actually be messed up if it collides with the main thread...
-		log_info_notimestamp("[BufferedConnection] Starting networking thread\n");
+		log_info("[BufferedConnection] Starting networking thread\n");
 		io_service_.run();
-		log_info_notimestamp("[BufferedConnection] Stopping networking thread\n");
+		log_info("[BufferedConnection] Stopping networking thread\n");
 	});
 }
 

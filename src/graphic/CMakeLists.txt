@@ -67,7 +67,6 @@ wl_library(graphic_image_io
   USES_SDL2_IMAGE
   DEPENDS
     base_exceptions
-    base_log
     graphic_surface
     io_fileread
     io_filesystem
@@ -127,7 +126,6 @@ wl_library(graphic_surface
   DEPENDS
     base_exceptions
     base_geometry
-    base_log
     base_macros
     graphic_color
     graphic_draw_programs
@@ -161,7 +159,6 @@ wl_library(graphic_draw_programs
     base_macros
     base_geometry
     graphic_gl_utils
-    base_log
     graphic_color
 )
 
@@ -218,6 +215,7 @@ wl_library(graphic_fields_to_draw
     gl/fields_to_draw.h
   DEPENDS
     base_geometry
+    base_log
     graphic
     graphic_gl_utils
     logic
@@ -241,7 +239,6 @@ wl_library(graphic_terrain_programs
   DEPENDS
     base_exceptions
     base_geometry
-    base_log
     base_macros
     graphic
     graphic_fields_to_draw
@@ -289,7 +286,6 @@ wl_library(graphic_wordwrap
   USES_ICU
   DEPENDS
     base_geometry
-    base_log
     graphic
     graphic_align
     graphic_color

@@ -19,6 +19,7 @@
 
 #include "logic/map_objects/bob.h"
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/wexception.h"
@@ -609,7 +610,7 @@ bool Bob::start_task_movepath(Game& game,
 			molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 		}
 		log_general_info(game);
-		log_err(game.get_gametime(), "%s", get_backtrace().c_str());
+		log_err_time(game.get_gametime(), "%s", get_backtrace().c_str());
 		throw wexception("MO(%u): start_task_movepath(index): not on path", serial());
 	}
 
@@ -1055,7 +1056,7 @@ void Bob::Loader::load(FileRead& fr) {
 				bob.anim_ = bob.descr().get_animation(animname, &bob);
 			} else {
 				bob.anim_ = bob.descr().main_animation();
-				log_warn(egbase().get_gametime(),
+				log_warn_time(egbase().get_gametime(),
 				         "Unknown animation '%s' for bob '%s', using main animation instead.\n",
 				         animname.c_str(), bob.descr().name().c_str());
 			}
@@ -1093,7 +1094,7 @@ void Bob::Loader::load(FileRead& fr) {
 							anims[j] = bob.descr().get_animation(dir_animname, &bob);
 						} else {
 							anims[j] = bob.descr().main_animation();
-							log_warn(
+							log_warn_time(
 							   egbase().get_gametime(),
 							   "Unknown directional animation '%s' for bob '%s', using main animation "
 							   "instead.\n",
