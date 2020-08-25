@@ -445,7 +445,8 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 		window->closed.connect([button] { button->set_perm_pressed(false); });
 
 		if (bind_default_toggle) {
-			button->sigclicked.connect([window]() { NoteDelayedCheck::instantiate([window]() { window->toggle(); }); });
+			button->sigclicked.connect(
+			   [window]() { NoteDelayedCheck::instantiate([window]() { window->toggle(); }); });
 		}
 	}
 	return button;
