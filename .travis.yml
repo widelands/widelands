@@ -217,27 +217,6 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
 
     # GCC 6 is failing with a boost::regex problem. Let's revisit after updating to std::regex.
-    #- name: "RELEASE: gcc 6"
-    #  addons:
-    #    apt:
-    #      sources:
-    #        - sourceline: 'ppa:ubuntu-toolchain-r/test'
-    #      packages:
-    #        - g++-6
-    #        - libboost-dev
-    #        - libboost-regex-dev
-    #        - libboost-system-dev
-    #        - libboost-test-dev
-    #        - libglew-dev
-    #        - libicu-dev
-    #        - libpng-dev
-    #        - libsdl2-dev
-    #        - libsdl2-image-dev
-    #        - libsdl2-mixer-dev
-    #        - libsdl2-ttf-dev
-    #        - zlib1g-dev
-    #  env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=gcc-6 CXX=g++-6
-    #  services: xvfb
 
     - name: "RELEASE: gcc 9"
       dist: focal
@@ -321,26 +300,7 @@ jobs:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
 
-    #- name: "DEBUG: gcc 6"
-    #  addons:
-    #    apt:
-    #      sources:
-    #        - sourceline: 'ppa:ubuntu-toolchain-r/test'
-    #      packages:
-    #        - g++-6
-    #        - libboost-dev
-    #        - libboost-regex-dev
-    #        - libboost-system-dev
-    #        - libboost-test-dev
-    #        - libglew-dev
-    #        - libicu-dev
-    #        - libpng-dev
-    #        - libsdl2-dev
-    #        - libsdl2-image-dev
-    #        - libsdl2-mixer-dev
-    #        - libsdl2-ttf-dev
-    #        - zlib1g-dev
-    #  env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=gcc-6 CXX=g++-6
+    # GCC 6 is failing with a boost::regex problem. Let's revisit after updating to std::regex.
 
     - name: "DEBUG: gcc 9"
       dist: focal
