@@ -20,6 +20,8 @@
 #include "ui_fsmenu/about.h"
 
 #include "base/i18n.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 
 FullscreenMenuAbout::FullscreenMenuAbout()
    : FullscreenMenuBase(),
@@ -33,12 +35,25 @@ FullscreenMenuAbout::FullscreenMenuAbout()
             g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
      close_(this, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
      tabs_(this, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
-	tabs_.add_tab("txts/README.lua");
-	tabs_.add_tab("txts/LICENSE.lua");
-	tabs_.add_tab("txts/AUTHORS.lua");
-	tabs_.add_tab("txts/TRANSLATORS.lua");
+	try {
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> t(lua.run_script("txts/ABOUT.lua"));
+		for (const auto& entry : t->array_entries<std::unique_ptr<LuaTable>>()) {
+			try {
+				tabs_.add_tab(entry->get_string("name"), entry->get_string("script"));
+			} catch (LuaError& err) {
+				tabs_.add_tab(_("Lua Error"), "");
+				log("%s\n", err.what());
+			}
+		}
+	} catch (LuaError& err) {
+		tabs_.add_tab(_("Lua Error"), "");
+		log("%s\n", err.what());
+	}
+
 	close_.sigclicked.connect([this]() { clicked_back(); });
 	layout();
+	tabs_.load_tab_contents();
 }
 
 void FullscreenMenuAbout::layout() {
