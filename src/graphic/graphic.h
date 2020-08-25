@@ -25,7 +25,6 @@
 
 #include <SDL_video.h>
 
-class AnimationManager;
 class RenderTarget;
 class Screen;
 
