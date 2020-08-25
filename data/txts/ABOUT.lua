@@ -1,4 +1,4 @@
-include "scripting/richtext.lua"
+-- Index for the "About" screen tabs
 
 push_textdomain("texts")
 
