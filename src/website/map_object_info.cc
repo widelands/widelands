@@ -33,7 +33,6 @@
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
-#include "logic/map_objects/world/world.h"
 #include "website/json/json.h"
 #include "website/website_common.h"
 

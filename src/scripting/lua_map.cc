@@ -2089,7 +2089,7 @@ int LuaMapObjectDescription::get_type_name(lua_State* L) {
 
          (RO) a table of helptexts if it exists for the given tribe, an empty table otherwise.
          Keys are ``lore``, ``lore_author``, ``purpose``, ``note``, ``performance``, all of them
-   optional.
+         optional.
 */
 int LuaMapObjectDescription::helptexts(lua_State* L) {
 	if (lua_gettop(L) != 2) {
