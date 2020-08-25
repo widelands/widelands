@@ -74,7 +74,7 @@ void GameTips::load_tips(const std::string& name) {
 			tips_.push_back(tip);
 		}
 	} catch (LuaError& err) {
-		log("Error loading tips script for %s:\n%s\n", name.c_str(), err.what());
+		log_err_notimestamp("Error loading tips script for %s:\n%s\n", name.c_str(), err.what());
 		// No further handling necessary - tips do not impact game
 	}
 }

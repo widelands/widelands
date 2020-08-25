@@ -171,7 +171,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
 			                           table.get_table("pictures")->array_entries<std::string>()))));
 			if (g_verbose) {
 				assert(!table.get_table("pictures")->array_entries<std::string>().empty());
-				log("Found deprecated 'pictures' parameter in animation with file\n   %s\n",
+				log_dbg_notimestamp("Found deprecated 'pictures' parameter in animation with file\n   %s\n",
 				    table.get_table("pictures")->array_entries<std::string>().front().c_str());
 			}
 		} else {

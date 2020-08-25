@@ -59,7 +59,7 @@ public:
 		const Md5Checksum myhash = game.get_sync_hash();
 
 		if (hash_ != myhash) {
-			log("REPLAY: Lost synchronization at time %u\n"
+			log_err(game.get_gametime(), "REPLAY: Lost synchronization at time %u\n"
 			    "I have:     %s\n"
 			    "Replay has: %s\n",
 			    duetime(), myhash.str().c_str(), hash_.str().c_str());
@@ -164,7 +164,7 @@ Command* ReplayReader::get_next_command(const uint32_t time) {
 
 		case pkt_end: {
 			uint32_t endtime = cmdlog_->unsigned_32();
-			log("REPLAY: End of replay (gametime: %u)\n", endtime);
+			log_err(time, "REPLAY: End of replay (gametime: %u)\n", endtime);
 			delete cmdlog_;
 			cmdlog_ = nullptr;
 			return nullptr;
@@ -174,7 +174,7 @@ Command* ReplayReader::get_next_command(const uint32_t time) {
 			throw wexception("Unknown packet %u", pkt);
 		}
 	} catch (const WException& e) {
-		log("REPLAY: Caught exception %s\n", e.what());
+		log_err(time, "REPLAY: Caught exception %s\n", e.what());
 		delete cmdlog_;
 		cmdlog_ = nullptr;
 	}
@@ -229,13 +229,13 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 	}
 
-	log("Reloading the game from replay\n");
+	log_info(game.get_gametime(), "Reloading the game from replay\n");
 	game.cleanup_for_load();
 	{
 		GameLoader gl(filename_ + kSavegameExtension, game);
 		gl.load_game();
 	}
-	log("Done reloading the game from replay\n");
+	log_info(game.get_gametime(), "Done reloading the game from replay\n");
 
 	game.enqueue_command(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
 

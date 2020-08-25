@@ -106,7 +106,7 @@ void grab_textdomain(const std::string& domain) {
  */
 void release_textdomain() {
 	if (textdomains.empty()) {
-		log("ERROR: trying to pop textdomain from empty stack");
+		log_err_notimestamp("trying to pop textdomain from empty stack");
 		return;
 	}
 	textdomains.pop_back();
@@ -218,7 +218,7 @@ void set_locale(const std::string& name) {
 
 	std::string lang(name);
 
-	log("selected language: %s\n", lang.empty() ? "(system language)" : lang.c_str());
+	log_info_notimestamp("selected language: %s\n", lang.empty() ? "(system language)" : lang.c_str());
 
 #ifndef _WIN32
 #ifndef __AMIGAOS4__
@@ -275,7 +275,7 @@ void set_locale(const std::string& name) {
 			res = SETLOCALE(LC_MESSAGES, try_locale.c_str());
 			if (res) {
 				locale = try_locale;
-				log("using locale %s\n", try_locale.c_str());
+				log_info_notimestamp("using locale %s\n", try_locale.c_str());
 				leave_while = true;
 				break;
 			} else {
@@ -293,8 +293,8 @@ void set_locale(const std::string& name) {
 		setenv("LANG", locale.c_str(), 1);
 		setenv("LANGUAGE", locale.c_str(), 1);
 	} else {
-		log("No corresponding locale found\n");
-		log(" - Set LANGUAGE, LANG and LC_ALL to '%s'\n", lang.c_str());
+		log_warn_notimestamp("No corresponding locale found\n");
+		log_warn_notimestamp(" - Set LANGUAGE, LANG and LC_ALL to '%s'\n", lang.c_str());
 
 		setenv("LANGUAGE", lang.c_str(), 1);
 		setenv("LANG", lang.c_str(), 1);
@@ -303,7 +303,7 @@ void set_locale(const std::string& name) {
 		try {
 			SETLOCALE(LC_MESSAGES, "en_US.utf8");  // set locale according to the env. variables
 			                                       // --> see  $ man 3 setlocale
-			log(" - Set system locale to 'en_US.utf8' to make '%s' accessible to libintl\n",
+			log_warn_notimestamp(" - Set system locale to 'en_US.utf8' to make '%s' accessible to libintl\n",
 			    lang.c_str());
 		} catch (std::exception&) {
 			SETLOCALE(LC_MESSAGES, "");  // set locale according to the env. variables

@@ -108,10 +108,10 @@ Mix_Music* Songset::get_song(uint32_t random) {
 	}
 
 	if (m_) {
-		log("Songset: Loaded song \"%s\"\n", filename.c_str());
+		log_info_notimestamp("Songset: Loaded song \"%s\"\n", filename.c_str());
 	} else {
-		log("Songset: Loading song \"%s\" failed!\n", filename.c_str());
-		log("Songset: %s\n", Mix_GetError());
+		log_err_notimestamp("Songset: Loading song \"%s\" failed!\n", filename.c_str());
+		log_err_notimestamp("Songset: %s\n", Mix_GetError());
 	}
 
 	return m_;

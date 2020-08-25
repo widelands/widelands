@@ -163,7 +163,7 @@ void Request::read(FileRead& fr,
 					}
 
 					if (!transfer) {
-						log("WARNING: loading request, transferred object %u has no transfer\n",
+						log_warn(game.get_gametime(), "loading request, transferred object %u has no transfer\n",
 						    obj->serial());
 					} else {
 						transfer->set_request(this);
@@ -240,7 +240,7 @@ Flag& Request::target_flag() const {
 int32_t Request::get_base_required_time(EditorGameBase& egbase, uint32_t const nr) const {
 	if (count_ <= nr) {
 		if (!(count_ == 1 && nr == 1)) {
-			log("Request::get_base_required_time: WARNING nr = %u but count is %u, "
+			log_warn(egbase.get_gametime(), "Request::get_base_required_time: WARNING nr = %u but count is %u, "
 			    "which is not allowed according to the comment for this function\n",
 			    nr, count_);
 		}

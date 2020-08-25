@@ -148,9 +148,44 @@ void set_logging_dir() {
 std::unique_ptr<Logger> logger(new Logger());
 #endif
 
-void log(const char* const fmt, ...) {
+static const char* to_string(const LogType& type) {
+	switch (type) {
+	case LogType::kInfo:
+		return "Info   ";
+	case LogType::kDebug:
+		return "Debug  ";
+	case LogType::kWarning:
+		return "WARNING";
+	case LogType::kError:
+		return "ERROR  ";
+	default:
+		NEVER_HERE();
+	}
+}
+
+void log_to_stdout(const LogType type, long gametime, const char* const fmt, ...) {
 	assert(logger != nullptr);
 
+	{  // message type
+		char buffer[16];
+		sprintf(buffer, "[%s", to_string(type));
+		logger->log_cstring(buffer);
+	}
+	if (gametime >= 0) {  // timestamp
+		const unsigned hours = gametime / (1000 * 60 * 60);
+		gametime -= hours * 1000 * 60 * 60;
+		const unsigned minutes = gametime / (1000 * 60);
+		gametime -= minutes * 1000 * 60;
+		const unsigned seconds = gametime / 1000;
+		gametime -= seconds * 1000;
+
+		char buffer[32];
+		sprintf(buffer, " @ %u:%u:%u.%li", hours, minutes, seconds, gametime);
+		logger->log_cstring(buffer);
+	}
+	logger->log_cstring("] ");
+
+	// actual log output
 	char buffer[2048];
 	va_list va;
 	va_start(va, fmt);

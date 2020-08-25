@@ -88,11 +88,11 @@ void MilitarySite::SoldierControl::drop_soldier(Soldier& soldier) {
 	if (!military_site_->is_present(soldier)) {
 		// This can happen when the "drop soldier" player command is delayed
 		// by network delay or a client has bugs.
-		military_site_->molog("MilitarySite::drop_soldier(%u): not present\n", soldier.serial());
+		military_site_->molog(game.get_gametime(), "MilitarySite::drop_soldier(%u): not present\n", soldier.serial());
 		return;
 	}
 	if (present_soldiers().size() <= min_soldier_capacity()) {
-		military_site_->molog("cannot drop last soldier(s)\n");
+		military_site_->molog(game.get_gametime(), "cannot drop last soldier(s)\n");
 		return;
 	}
 
@@ -916,7 +916,7 @@ void MilitarySite::send_attacker(Soldier& soldier, Building& target) {
 		// The soldier may not be present anymore due to having been kicked out. Most of the time
 		// the function calling us will notice this, but there are cornercase where it might not,
 		// e.g. when a soldier was ordered to leave but did not physically quit the building yet.
-		log("MilitarySite(%3dx%3d)::send_attacker: Not sending soldier %u because he left the "
+		log_warn(owner().egbase().get_gametime(), "MilitarySite(%3dx%3d)::send_attacker: Not sending soldier %u because he left the "
 		    "building\n",
 		    get_position().x, get_position().y, soldier.serial());
 		return;

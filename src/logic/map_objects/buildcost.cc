@@ -81,7 +81,7 @@ void Buildcost::load(FileRead& fr, const Widelands::TribeDescr& tribe) {
 
 		DescriptionIndex index = tribe.ware_index(name);
 		if (!tribe.has_ware(index)) {
-			log("buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
+			log_warn_notimestamp("buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
 			fr.unsigned_8();
 		} else {
 			(*this)[index] = fr.unsigned_8();

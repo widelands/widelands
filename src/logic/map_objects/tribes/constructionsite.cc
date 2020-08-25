@@ -274,7 +274,7 @@ void ConstructionSite::init_settings() {
 		settings_.reset(new MilitarysiteSettings(*md, tribe));
 	} else {
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log("WARNING: Created constructionsite for a %s, which is not of any known building type\n",
+		log_warn_notimestamp("Created constructionsite for a %s, which is not of any known building type\n",
 		    building_->name().c_str());
 	}
 }
@@ -383,7 +383,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 Start building the next enhancement even before the base building is completed.
 ===============
 */
-void ConstructionSite::enhance(Game&) {
+void ConstructionSite::enhance(Game& game) {
 	assert(building_->enhancement() != INVALID_INDEX);
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
@@ -523,7 +523,7 @@ void ConstructionSite::enhance(Game&) {
 	} break;
 	default:
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log("WARNING: Enhanced constructionsite to a %s, which is not of any known building type\n",
+		log_warn(game.get_gametime(), "Enhanced constructionsite to a %s, which is not of any known building type\n",
 		    building_->name().c_str());
 	}
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));

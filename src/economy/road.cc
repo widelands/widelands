@@ -178,7 +178,7 @@ void Road::request_carrier_callback(
 	 * Oops! We got a request_callback but don't have the request.
 	 * Try to send him home.
 	 */
-	log("Road(%u): got a request_callback but do not have the request\n", road.serial());
+	log_warn(game.get_gametime(), "Road(%u): got a request_callback but do not have the request\n", road.serial());
 	delete &rq;
 	w->start_task_gowarehouse(game);
 }
@@ -251,13 +251,13 @@ void Road::postsplit(Game& game, Flag& flag) {
 	path.truncate(index);
 	secondpath.trim_start(index);
 
-	molog("splitting road: first part:\n");
+	molog(game.get_gametime(), "splitting road: first part:\n");
 	for (const Coords& coords : path.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
-	molog("                second part:\n");
+	molog(game.get_gametime(), "                second part:\n");
 	for (const Coords& coords : secondpath.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
 
 	// change road size and reattach
@@ -509,6 +509,6 @@ void Road::pay_for_building() {
 
 void Road::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
-	molog("wallet: %i\n", wallet_);
+	molog(egbase.get_gametime(), "wallet: %i\n", wallet_);
 }
 }  // namespace Widelands

@@ -195,7 +195,7 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 	try {
 		font.reset(load_font(ns->font_face, font_size));
 	} catch (FileNotFoundError& e) {
-		log("Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
+		log_warn_notimestamp("Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
 		font.reset(load_font(ns->fontset->sans(), font_size));
 	}
 	assert(font != nullptr);
@@ -282,7 +282,7 @@ protected:
 			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % check_w % check_h %
 			    maximum_size)
 			      .str();
-			log("%s\n", error_message.c_str());
+			log_err_notimestamp("%s\n", error_message.c_str());
 			throw TextureTooBig(error_message);
 		}
 	}
@@ -1316,7 +1316,7 @@ public:
 			if (a.has("width")) {
 				int width = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (width > renderer_style_.overall_width) {
-					log("WARNING: Font renderer: Specified image width of %d exceeds the overall "
+					log_warn_notimestamp("Font renderer: Specified image width of %d exceeds the overall "
 					    "available "
 					    "width of %d. Setting width to %d.\n",
 					    width, renderer_style_.overall_width, renderer_style_.overall_width);
@@ -1620,14 +1620,14 @@ public:
 				width_string = width_string.substr(0, width_string.length() - 1);
 				uint8_t width_percent = strtol(width_string.c_str(), nullptr, 10);
 				if (width_percent > 100) {
-					log("WARNING: Font renderer: Do not use width > 100%%\n");
+					log_warn_notimestamp("Font renderer: Do not use width > 100%%\n");
 					width_percent = 100;
 				}
 				render_node_->set_desired_width(DesiredWidth(width_percent, WidthUnit::kPercent));
 			} else {
 				w_ = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (w_ > renderer_style_.overall_width) {
-					log("WARNING: Font renderer: Specified width of %d exceeds the overall available "
+					log_warn_notimestamp("Font renderer: Specified width of %d exceeds the overall available "
 					    "width of %d. Setting width to %d.\n",
 					    w_, renderer_style_.overall_width, renderer_style_.overall_width);
 					w_ = renderer_style_.overall_width;

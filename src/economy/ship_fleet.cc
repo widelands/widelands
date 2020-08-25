@@ -102,7 +102,7 @@ bool ShipFleet::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
 	if (empty()) {
-		molog("Empty fleet initialized; disband immediately\n");
+		molog(egbase.get_gametime(), "Empty fleet initialized; disband immediately\n");
 		remove(egbase);
 		return false;
 	}
@@ -162,7 +162,7 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 				// here might be a problem so I (tiborb) put here
 				// this test, might be removed after some time
 				if (dock->get_fleet() == nullptr) {
-					log("The dock on %3dx%3d withouth a fleet!\n", dock->dockpoints_.front().x,
+					log_warn(egbase.get_gametime(), "The dock on %3dx%3d without a fleet!\n", dock->dockpoints_.front().x,
 					    dock->dockpoints_.front().y);
 				}
 				if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
@@ -515,7 +515,7 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 			}
 
 			if (pd->get_fleet() && pd->get_fleet() != this) {
-				log("ShipFleet::connect_port: different fleets despite reachability\n");
+				log_err(egbase.get_gametime(), "ShipFleet::connect_port: different fleets despite reachability\n");
 				continue;
 			}
 
@@ -549,7 +549,7 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 	}
 
 	if (!se.targets.empty()) {
-		log("ShipFleet::connect_port: Could not reach all ports!\n");
+		log_err(egbase.get_gametime(), "ShipFleet::connect_port: Could not reach all ports!\n");
 	}
 }
 
@@ -610,7 +610,7 @@ void ShipFleet::remove_port(EditorGameBase& egbase, PortDock* port) {
 	} else if (upcast(Game, g, &egbase)) {
 		// Some ship perhaps lose their destination now, so new a destination must be appointed (if
 		// any)
-		molog("Port removed from fleet, triggering fleet update\n");
+		molog(egbase.get_gametime(), "Port removed from fleet, triggering fleet update\n");
 		schedule_.port_removed(*g, port);
 		update(egbase);
 	}
@@ -687,12 +687,12 @@ void ShipFleet::act(Game& game, uint32_t) {
 	act_pending_ = false;
 
 	if (empty()) {
-		molog("ShipFleet::act: remove empty fleet\n");
+		molog(game.get_gametime(), "ShipFleet::act: remove empty fleet\n");
 		remove(game);
 		return;
 	}
 
-	molog("ShipFleet::act\n");
+	molog(game.get_gametime(), "ShipFleet::act\n");
 
 	// All the work is done by the schedule
 	const Duration next = schedule_.update(game);
@@ -705,10 +705,10 @@ void ShipFleet::act(Game& game, uint32_t) {
 void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
-	molog("%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(), ports_.size());
-	molog("Schedule:\n");
+	molog(egbase.get_gametime(), "%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(), ports_.size());
+	molog(egbase.get_gametime(), "Schedule:\n");
 	schedule_.log_general_info(egbase);
-	molog("\n");
+	molog(egbase.get_gametime(), "\n");
 }
 
 // Changelog of version 4 → 5: Added ShippingSchedule

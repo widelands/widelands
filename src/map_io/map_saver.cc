@@ -98,105 +98,105 @@ void MapSaver::save() {
 	// MANDATORY PACKETS
 	// Start with writing the map out, first Elemental data
 	// PRELOAD DATA BEGIN
-	log("Writing Elemental Data ... ");
+	log_info(egbase_.get_gametime(), "Writing Elemental Data ... ");
 	set_progress_message(_("Elemental data"), 1);
 	{
 		MapElementalPacket p;
 		p.write(fs_, egbase_, *mos_);
 	}
-	log("took %ums\n ", timer.ms_since_last_query());
+	log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
-	log("Writing Player Names And Tribe Data ... ");
+	log_info(egbase_.get_gametime(), "Writing Player Names And Tribe Data ... ");
 	{
 		MapPlayerNamesAndTribesPacket p;
 		p.write(fs_, egbase_, *mos_);
 	}
-	log("took %ums\n ", timer.ms_since_last_query());
+	log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 	//  PRELOAD DATA END
 
-	log("Writing Port Spaces Data ... ");
+	log_info(egbase_.get_gametime(), "Writing Port Spaces Data ... ");
 	{
 		MapPortSpacesPacket p;
 		p.write(fs_, egbase_, *mos_);
 	}
-	log("took %ums\n ", timer.ms_since_last_query());
+	log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
-	log("Writing Heights Data ... ");
+	log_info(egbase_.get_gametime(), "Writing Heights Data ... ");
 	set_progress_message(_("Heights"), 2);
 	{
 		MapHeightsPacket p;
 		p.write(fs_, egbase_, *mos_);
 	}
-	log("took %ums\n ", timer.ms_since_last_query());
+	log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
-	log("Writing Terrain Data ... ");
+	log_info(egbase_.get_gametime(), "Writing Terrain Data ... ");
 	set_progress_message(_("Terrains"), 3);
 	{
 		MapTerrainPacket p;
 		p.write(fs_, egbase_);
 	}
-	log("took %ums\n ", timer.ms_since_last_query());
+	log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
-	log("Writing Player Start Position Data ... ");
+	log_info(egbase_.get_gametime(), "Writing Player Start Position Data ... ");
 	set_progress_message(_("Starting positions"), 4);
 	{
 		MapPlayerPositionPacket p;
 		p.write(fs_, egbase_, *mos_);
 	}
-	log("took %ums\n ", timer.ms_since_last_query());
+	log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
 	// We don't save these when saving a map in the editor.
 	if (is_game) {
 		//  This must come before anything that references messages, such as:
 		//    * command queue (PlayerMessageCommand, inherited by
 		//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
-		log("Writing Player Message Data ... ");
+		log_info(egbase_.get_gametime(), "Writing Player Message Data ... ");
 		set_progress_message(_("Messages"), 5);
 		{
 			MapPlayersMessagesPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
-		log("took %ums\n ", timer.ms_since_last_query());
+		log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 	}
 
-	log("Writing Resources Data ... ");
+	log_info(egbase_.get_gametime(), "Writing Resources Data ... ");
 	set_progress_message(_("Resources"), 6);
 	{
 		MapResourcesPacket p;
 		p.write(fs_, egbase_);
 	}
-	log("took %ums\n ", timer.ms_since_last_query());
+	log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
-	log("Writing Map Version ... ");
+	log_info(egbase_.get_gametime(), "Writing Map Version ... ");
 	set_progress_message(_("Map version"), 7);
 	{
 		MapVersionPacket p;
 		p.write(fs_, egbase_);
 	}
-	log("took %ums\n ", timer.ms_since_last_query());
+	log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
 	// We don't save these when saving a map in the editor.
 	if (is_game) {
 		PlayerNumber const nr_players = map.get_nrplayers();
 
 		//  allowed worker types
-		log("Writing Allowed Worker Types Data ... ");
+		log_info(egbase_.get_gametime(), "Writing Allowed Worker Types Data ... ");
 		set_progress_message(_("Building restrictions"), 8);
 		{
 			MapAllowedWorkerTypesPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
-		log("took %ums\n ", timer.ms_since_last_query());
+		log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
 		//  allowed building types
 		iterate_players_existing_const(plnum, nr_players, egbase_, player) {
 			for (DescriptionIndex i = 0; i < egbase_.tribes().nrbuildings(); ++i) {
 				if (!player->is_building_type_allowed(i)) {
-					log("Writing Allowed Building Types Data ... ");
+					log_info(egbase_.get_gametime(), "Writing Allowed Building Types Data ... ");
 					MapAllowedBuildingTypesPacket p;
 					p.write(fs_, egbase_, *mos_);
-					log("took %ums\n ", timer.ms_since_last_query());
+					log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 					goto end_find_a_forbidden_building_type_loop;
 				}
 			}
@@ -207,132 +207,132 @@ void MapSaver::save() {
 		// This packet must be written before any building or road packet. So do not
 		// change this order unless you know what you are doing
 		// EXISTING PACKETS
-		log("Writing Flag Data ... ");
+		log_info(egbase_.get_gametime(), "Writing Flag Data ... ");
 		set_progress_message(_("Flags"), 9);
 		{
 			MapFlagPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
-		log("took %ums\n ", timer.ms_since_last_query());
+		log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
-		log("Writing Road Data ... ");
+		log_info(egbase_.get_gametime(), "Writing Road Data ... ");
 		set_progress_message(_("Roads and waterways"), 10);
 		{
 			MapRoadPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
-		log("took %ums\n ", timer.ms_since_last_query());
+		log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
-		log("Writing Waterway Data ... ");
+		log_info(egbase_.get_gametime(), "Writing Waterway Data ... ");
 		{
 			MapWaterwayPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
-		log("took %ums\n ", timer.ms_since_last_query());
+		log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
-		log("Writing Building Data ... ");
+		log_info(egbase_.get_gametime(), "Writing Building Data ... ");
 		set_progress_message(_("Buildings"), 11);
 		{
 			MapBuildingPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
-		log("took %ums\n ", timer.ms_since_last_query());
+		log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 	}
 
 	// We do need to save this one in the editor!
-	log("Writing Map Objects ... ");
+	log_info(egbase_.get_gametime(), "Writing Map Objects ... ");
 	set_progress_message(_("Map objects"), 12);
 	{
 		MapObjectPacket p;
 		p.write(fs_, egbase_, *mos_);
 	}
-	log("took %ums\n ", timer.ms_since_last_query());
+	log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
 	if (is_game) {
 		// Map data used by win conditions
-		log("Writing Wincondition Data ... ");
+		log_info(egbase_.get_gametime(), "Writing Wincondition Data ... ");
 		set_progress_message(_("Win condition"), 13);
 		{
 			MapWinconditionPacket p;
 			p.write(fs_, *egbase_.mutable_map());
 		}
-		log("took %ums\n ", timer.ms_since_last_query());
+		log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
 		// DATA PACKETS
 		if (mos_->get_nr_flags()) {
-			log("Writing Flagdata Data ... ");
+			log_info(egbase_.get_gametime(), "Writing Flagdata Data ... ");
 			set_progress_message(_("Flag details"), 14);
 			{
 				MapFlagdataPacket p;
 				p.write(fs_, egbase_, *mos_);
 			}
-			log("took %ums\n ", timer.ms_since_last_query());
+			log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 		}
 
 		if (mos_->get_nr_roads()) {
-			log("Writing Roaddata Data ... ");
+			log_info(egbase_.get_gametime(), "Writing Roaddata Data ... ");
 			set_progress_message(_("Road and waterway details"), 15);
 			{
 				MapRoaddataPacket p;
 				p.write(fs_, egbase_, *mos_);
 			}
-			log("took %ums\n ", timer.ms_since_last_query());
+			log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 		}
 
 		if (mos_->get_nr_waterways()) {
-			log("Writing Waterwaydata Data ... ");
+			log_info(egbase_.get_gametime(), "Writing Waterwaydata Data ... ");
 			{
 				MapWaterwaydataPacket p;
 				p.write(fs_, egbase_, *mos_);
 			}
-			log("took %ums\n ", timer.ms_since_last_query());
+			log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 		}
 
 		if (mos_->get_nr_buildings()) {
-			log("Writing Buildingdata Data ... ");
+			log_info(egbase_.get_gametime(), "Writing Buildingdata Data ... ");
 			set_progress_message(_("Building details"), 16);
 			{
 				MapBuildingdataPacket p;
 				p.write(fs_, egbase_, *mos_);
 			}
-			log("took %ums\n ", timer.ms_since_last_query());
+			log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 		}
 
-		log("Writing Node Ownership Data ... ");
+		log_info(egbase_.get_gametime(), "Writing Node Ownership Data ... ");
 		set_progress_message(_("Territory"), 17);
 		{
 			MapNodeOwnershipPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
-		log("took %ums\n ", timer.ms_since_last_query());
+		log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
-		log("Writing Players View Data ... ");
+		log_info(egbase_.get_gametime(), "Writing Players View Data ... ");
 		set_progress_message(_("Vision"), 18);
 		{
 			MapPlayersViewPacket p;
 			p.write(fs_, egbase_);
 		}
-		log("took %ums\n ", timer.ms_since_last_query());
+		log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 	}
 
 	// We also want to write these in the editor.
-	log("Writing Scripting Data ... ");
+	log_info(egbase_.get_gametime(), "Writing Scripting Data ... ");
 	set_progress_message(_("Scripting"), 19);
 	{
 		MapScriptingPacket p;
 		p.write(fs_, egbase_, *mos_);
 	}
-	log("took %ums\n ", timer.ms_since_last_query());
+	log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
-	log("Writing Objective Data ... ");
+	log_info(egbase_.get_gametime(), "Writing Objective Data ... ");
 	set_progress_message(_("Objectives"), 20);
 	write_objective_data(fs_, egbase_);
-	log("took %ums\n ", timer.ms_since_last_query());
+	log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
-	log("Writing map images ... ");
+	log_info(egbase_.get_gametime(), "Writing map images ... ");
 	set_progress_message(_("Images"), 21);
 	save_map_images(&fs_, map.filesystem());
-	log("took %ums\n ", timer.ms_since_last_query());
+	log_info(egbase_.get_gametime(), "took %ums\n ", timer.ms_since_last_query());
 
 #ifndef NDEBUG
 	if (is_game) {

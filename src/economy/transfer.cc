@@ -88,7 +88,7 @@ void Transfer::set_request(Request* req) {
 
 	if (&req->target() != destination_.get(game_)) {
 		if (destination_.is_set()) {
-			log("WARNING: Transfer::set_request req->target (%u) "
+			log_warn(game_.get_gametime(), "Transfer::set_request req->target (%u) "
 			    "vs. destination (%u) mismatch\n",
 			    req->target().serial(), destination_.serial());
 		}
@@ -283,7 +283,7 @@ void Transfer::tlog(char const* const fmt, ...) {
 		serial = 0;
 	}
 
-	log("T%c(%u): %s", id, serial, buffer);
+	log_dbg(game_.get_gametime(), "T%c(%u): %s", id, serial, buffer);
 }
 
 /*

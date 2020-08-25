@@ -178,7 +178,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 					//  Create directory.
 					g_fs->make_directory(fullname);
 				} catch (const FileError& e) {
-					log("directory creation failed in MainMenuSaveMap::"
+					log_err_notimestamp("directory creation failed in MainMenuSaveMap::"
 					    "clicked_make_directory: %s\n",
 					    e.what());
 					const std::string s =

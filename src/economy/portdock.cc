@@ -453,18 +453,18 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
 
 	if (warehouse_) {
 		Coords pos(warehouse_->get_position());
-		molog(
+		molog(egbase.get_gametime(),
 		   "PortDock for warehouse %u (at %i,%i) in fleet %u, expedition_ready: %s, waiting: %" PRIuS
 		   "\n",
 		   warehouse_->serial(), pos.x, pos.y, fleet_ ? fleet_->serial() : 0,
 		   expedition_ready_ ? "true" : "false", waiting_.size());
 	} else {
-		molog("PortDock without a warehouse in fleet %u, expedition_ready: %s, waiting: %" PRIuS "\n",
+		molog(egbase.get_gametime(), "PortDock without a warehouse in fleet %u, expedition_ready: %s, waiting: %" PRIuS "\n",
 		      fleet_ ? fleet_->serial() : 0, expedition_ready_ ? "true" : "false", waiting_.size());
 	}
 
 	for (const ShippingItem& shipping_item : waiting_) {
-		molog("  IT %u, destination %u\n", shipping_item.object_.serial(),
+		molog(egbase.get_gametime(), "  IT %u, destination %u\n", shipping_item.object_.serial(),
 		      shipping_item.destination_dock_.serial());
 	}
 }
@@ -522,7 +522,7 @@ void PortDock::Loader::load_finish() {
 	PortDock& pd = get<PortDock>();
 
 	if (pd.warehouse_->get_portdock() != &pd) {
-		log("Inconsistent PortDock <> Warehouse link\n");
+		log_warn(egbase().get_gametime(), "Inconsistent PortDock <> Warehouse link\n");
 		if (upcast(Game, game, &egbase())) {
 			pd.schedule_destroy(*game);
 		}

@@ -63,18 +63,18 @@ SDL_GLContext initialize(
 		   glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
 		   {"glGetError"});
 		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
-			log("%s(", call.function->name());
+			log_dbg_notimestamp("%s(", call.function->name());
 			for (size_t i = 0; i < call.parameters.size(); ++i) {
-				log("%s", call.parameters[i]->asString().c_str());
+				log_dbg_notimestamp("%s", call.parameters[i]->asString().c_str());
 				if (i < call.parameters.size() - 1)
-					log(", ");
+					log_dbg_notimestamp(", ");
 			}
-			log(")");
+			log_dbg_notimestamp(")");
 			if (call.returnValue) {
-				log(" -> %s", call.returnValue->asString().c_str());
+				log_dbg_notimestamp(" -> %s", call.returnValue->asString().c_str());
 			}
 			const auto error = glGetError();
-			log(" [%s]\n", gl_error_to_string(error));
+			log_dbg_notimestamp(" [%s]\n", gl_error_to_string(error));
 			// The next few lines will terminate Widelands if there was any OpenGL
 			// error. This is useful for super aggressive debugging, but probably
 			// not for regular builds. Comment it in if you need to understand
@@ -99,22 +99,22 @@ SDL_GLContext initialize(
 		   glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
 		   {"glGetError"});
 		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
-			log("%s(", call.function->name());
+			log_dbg_notimestamp("%s(", call.function->name());
 			for (size_t i = 0; i < call.parameters.size(); ++i) {
 				FORMAT_WARNINGS_OFF
-				log("%p", call.parameters[i].get());
+				log_dbg_notimestamp("%p", call.parameters[i].get());
 				FORMAT_WARNINGS_ON
 				if (i < call.parameters.size() - 1)
-					log(", ");
+					log_dbg_notimestamp(", ");
 			}
-			log(")");
+			log_dbg_notimestamp(")");
 			if (call.returnValue) {
 				FORMAT_WARNINGS_OFF
-				log(" -> %p", call.returnValue.get());
+				log_dbg_notimestamp(" -> %p", call.returnValue.get());
 				FORMAT_WARNINGS_ON
 			}
 			const auto error = glGetError();
-			log(" [%s]\n", gl_error_to_string(error));
+			log_dbg_notimestamp(" [%s]\n", gl_error_to_string(error));
 			// The next few lines will terminate Widelands if there was any OpenGL
 			// error. This is useful for super aggressive debugging, but probably
 			// not for regular builds. Comment it in if you need to understand
@@ -133,20 +133,20 @@ SDL_GLContext initialize(
 	// coming from the gaphics drivers
 
 	if (err != GLEW_OK) {
-		log("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
+		log_err_notimestamp("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
 		    glewGetErrorString(err));
 		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
 	}
 #endif
 
-	log(
+	log_dbg_notimestamp(
 	   "Graphics: OpenGL: Version \"%s\"\n", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 
 #define LOG_SDL_GL_ATTRIBUTE(x)                                                                    \
 	{                                                                                               \
 		int value;                                                                                   \
 		SDL_GL_GetAttribute(x, &value);                                                              \
-		log("Graphics: %s is %d\n", #x, value);                                                      \
+		log_dbg_notimestamp("Graphics: %s is %d\n", #x, value);                                                      \
 	}
 
 	LOG_SDL_GL_ATTRIBUTE(SDL_GL_RED_SIZE)
@@ -175,14 +175,14 @@ SDL_GLContext initialize(
 
 	GLboolean glBool;
 	glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
-	log("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
+	log_dbg_notimestamp("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
 
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, max_texture_size);
-	log("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
+	log_dbg_notimestamp("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
 
 	const char* const shading_language_version_string =
 	   reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
-	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
+	log_dbg_notimestamp("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
 
 	// Show a basic SDL window with an error message, and log it too, then exit 1. Since font support
 	// does not exist for all languages, we show both the original and a localized text.
@@ -200,7 +200,7 @@ SDL_GLContext initialize(
 		}
 
 		/** TRANSLATORS: Error message printed to console/command line/log file */
-		log(_("ERROR: %s\n"), display_message.c_str());
+		log_err_notimestamp("%s\n", display_message.c_str());
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error", display_message.c_str(), NULL);
 		exit(1);
 	};

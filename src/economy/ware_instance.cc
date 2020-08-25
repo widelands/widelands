@@ -36,6 +36,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
@@ -194,7 +195,7 @@ WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware
 WareInstance::~WareInstance() {
 	if (supply_) {
 		FORMAT_WARNINGS_OFF
-		molog("Ware %u still has supply %p\n", descr_index_, supply_);
+		molog(-1, "Ware %u still has supply %p\n", descr_index_, supply_);
 		FORMAT_WARNINGS_ON
 		delete supply_;
 	}
@@ -503,7 +504,7 @@ bool WareInstance::is_moving() const {
  * whatever reason.
  */
 void WareInstance::cancel_moving() {
-	molog("cancel_moving\n");
+	molog(-1, "cancel_moving\n");
 
 	if (transfer_) {
 		transfer_->has_failed();
@@ -523,8 +524,8 @@ PlayerImmovable* WareInstance::get_next_move_step(Game& game) {
 void WareInstance::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
-	molog("Ware: %s\n", descr().name().c_str());
-	molog("Location: %u\n", location_.serial());
+	molog(egbase.get_gametime(), "Ware: %s\n", descr().name().c_str());
+	molog(egbase.get_gametime(), "Location: %u\n", location_.serial());
 }
 
 /*

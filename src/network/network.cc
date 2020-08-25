@@ -38,18 +38,18 @@ bool do_resolve(const boost::asio::ip::tcp& protocol,
 		boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
 		if (iter == boost::asio::ip::tcp::resolver::iterator()) {
 			// Resolution failed
-			log("Could not resolve network name '%s:%u' to %s-address\n", hostname.c_str(), port,
+			log_err_notimestamp("Could not resolve network name '%s:%u' to %s-address\n", hostname.c_str(), port,
 			    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"));
 			return false;
 		}
 		addr->ip = iter->endpoint().address();
 		addr->port = port;
-		log("Resolved network name '%s:%u' to %s\n", hostname.c_str(), port,
+		log_info_notimestamp("Resolved network name '%s:%u' to %s\n", hostname.c_str(), port,
 		    addr->ip.to_string().c_str());
 		return true;
 	} catch (const boost::system::system_error& ec) {
 		// Resolution failed
-		log("Could not resolve network name '%s:%u' to %s-address: %s\n", hostname.c_str(), port,
+		log_err_notimestamp("Could not resolve network name '%s:%u' to %s-address: %s\n", hostname.c_str(), port,
 		    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"), ec.what());
 		return false;
 	}

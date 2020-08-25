@@ -473,29 +473,29 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	                      sstrm.str().c_str());
 	Notifications::publish(UI::NoteLoadingMessage(_("Generating random map…")));
 
-	log("============== Generating Map ==============\n");
-	log("ID:            %s\n", map_id_edit_.text().c_str());
-	log("Random number: %u\n", map_info.mapNumber);
-	log("Dimensions:    %d x %d\n", map_info.w, map_info.h);
-	log("Players:       %d\n", map_info.numPlayers);
-	log("World:         %s\n", map_info.world_name.c_str());
+	log_info_notimestamp("============== Generating Map ==============\n");
+	log_info_notimestamp("ID:            %s\n", map_id_edit_.text().c_str());
+	log_info_notimestamp("Random number: %u\n", map_info.mapNumber);
+	log_info_notimestamp("Dimensions:    %d x %d\n", map_info.w, map_info.h);
+	log_info_notimestamp("Players:       %d\n", map_info.numPlayers);
+	log_info_notimestamp("World:         %s\n", map_info.world_name.c_str());
 	switch (map_info.resource_amount) {
 	case Widelands::UniqueRandomMapInfo::ResourceAmount::raLow:
-		log("Resources:     low\n");
+		log_info_notimestamp("Resources:     low\n");
 		break;
 	case Widelands::UniqueRandomMapInfo::ResourceAmount::raMedium:
-		log("Resources:     medium\n");
+		log_info_notimestamp("Resources:     medium\n");
 		break;
 	case Widelands::UniqueRandomMapInfo::ResourceAmount::raHigh:
-		log("Resources:     high\n");
+		log_info_notimestamp("Resources:     high\n");
 		break;
 	}
-	log("Land: %0.2f  Water: %0.2f  Wasteland: %0.2f\n", map_info.landRatio, map_info.waterRatio,
+	log_info_notimestamp("Land: %0.2f  Water: %0.2f  Wasteland: %0.2f\n", map_info.landRatio, map_info.waterRatio,
 	    map_info.wastelandRatio);
 	if (map_info.islandMode) {
-		log("Using Island Mode\n");
+		log_info_notimestamp("Using Island Mode\n");
 	}
-	log("\n");
+	log_info_notimestamp("\n");
 
 	gen.create_random_map();
 

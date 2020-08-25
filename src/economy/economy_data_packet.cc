@@ -54,7 +54,7 @@ void EconomyDataPacket::read(FileRead& fr) {
 						if (tribe.has_ware(i)) {
 							if (tribe.get_ware_descr(i)->default_target_quantity(tribe.name()) ==
 							    kInvalidWare) {
-								log("WARNING: target quantity configured for ware %s, "
+								log_warn_notimestamp("target quantity configured for ware %s, "
 								    "which should not have target quantity, "
 								    "ignoring\n",
 								    type_name);
@@ -70,7 +70,7 @@ void EconomyDataPacket::read(FileRead& fr) {
 							i = tribe.worker_index(type_name);
 							if (tribe.has_worker(i)) {
 								if (tribe.get_worker_descr(i)->default_target_quantity() == kInvalidWare) {
-									log("WARNING: target quantity configured for worker %s, "
+									log_warn_notimestamp("target quantity configured for worker %s, "
 									    "which should not have target quantity, "
 									    "ignoring\n",
 									    type_name);
@@ -83,13 +83,13 @@ void EconomyDataPacket::read(FileRead& fr) {
 									tq.last_modified = last_modified;
 								}
 							} else {
-								log("WARNING: target quantity configured for \"%s\" in worker economy, "
+								log_warn_notimestamp("target quantity configured for \"%s\" in worker economy, "
 								    "which is not a worker type defined in tribe "
 								    "%s, ignoring\n",
 								    type_name, tribe.name().c_str());
 							}
 						} else {
-							log("WARNING: target quantity configured for \"%s\" in ware economy, "
+							log_warn_notimestamp("target quantity configured for \"%s\" in ware economy, "
 							    "which is not a ware type defined in tribe "
 							    "%s, ignoring\n",
 							    type_name, tribe.name().c_str());
@@ -99,7 +99,7 @@ void EconomyDataPacket::read(FileRead& fr) {
 						i = tribe.worker_index(type_name);
 						if (tribe.has_worker(i)) {
 							if (tribe.get_worker_descr(i)->default_target_quantity() == kInvalidWare) {
-								log("WARNING: target quantity configured for worker %s, "
+								log_warn_notimestamp("target quantity configured for worker %s, "
 								    "which should not have target quantity, "
 								    "ignoring\n",
 								    type_name);
@@ -112,7 +112,7 @@ void EconomyDataPacket::read(FileRead& fr) {
 								tq.last_modified = last_modified;
 							}
 						} else {
-							log("WARNING: target quantity configured for \"%s\" in worker economy, "
+							log_warn_notimestamp("target quantity configured for \"%s\" in worker economy, "
 							    "which is not a worker type defined in tribe "
 							    "%s, ignoring\n",
 							    type_name, tribe.name().c_str());

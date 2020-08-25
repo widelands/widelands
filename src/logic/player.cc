@@ -461,7 +461,7 @@ Flag* Player::build_flag(const Coords& c) {
 }
 
 Flag& Player::force_flag(const FCoords& c) {
-	log("Forcing flag at (%i, %i)\n", c.x, c.y);
+	log_info(egbase().get_gametime(), "Forcing flag at (%i, %i)\n", c.x, c.y);
 	const Map& map = egbase().map();
 	if (BaseImmovable* const immovable = c.field->get_immovable()) {
 		if (upcast(Flag, existing_flag, immovable)) {
@@ -511,16 +511,16 @@ Road* Player::build_road(const Path& path) {
 					}
 				}
 				if (!(get_buildcaps(fc) & MOVECAPS_WALK)) {
-					log("%i: building road, unwalkable\n", player_number());
+					log_warn(egbase().get_gametime(), "%i: building road, unwalkable\n", player_number());
 					return nullptr;
 				}
 			}
 			return &Road::create(egbase(), *start, *end, path);
 		} else {
-			log("%i: building road, missed end flag\n", player_number());
+			log_warn(egbase().get_gametime(), "%i: building road, missed end flag\n", player_number());
 		}
 	} else {
-		log("%i: building road, missed start flag\n", player_number());
+		log_warn(egbase().get_gametime(), "%i: building road, missed start flag\n", player_number());
 	}
 
 	return nullptr;
@@ -535,7 +535,7 @@ Road& Player::force_road(const Path& path) {
 	Path::StepVector::size_type const laststep = path.get_nsteps() - 1;
 	for (Path::StepVector::size_type i = 0; i < laststep; ++i) {
 		c = map.get_neighbour(c, path[i]);
-		log("Clearing for road at (%i, %i)\n", c.x, c.y);
+		log_info(egbase().get_gametime(), "Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
 		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
@@ -554,7 +554,7 @@ Waterway* Player::build_waterway(const Path& path) {
 	const Map& map = egbase().map();
 
 	if (path.get_nsteps() > map.get_waterway_max_length()) {
-		log("%d: Refused to build a waterway because it is too long. Permitted length %d, actual "
+		log_warn(egbase().get_gametime(), "%d: Refused to build a waterway because it is too long. Permitted length %d, actual "
 		    "length %" PRIuS ".",
 		    static_cast<unsigned int>(player_number()), map.get_waterway_max_length(),
 		    path.get_nsteps());
@@ -575,18 +575,18 @@ Waterway* Player::build_waterway(const Path& path) {
 					}
 				}
 				if (!CheckStepFerry(egbase()).reachable_dest(map, fc)) {
-					log("%i: building waterway aborted, unreachable for ferries\n",
+					log_warn(egbase().get_gametime(), "%i: building waterway aborted, unreachable for ferries\n",
 					    static_cast<unsigned int>(player_number()));
 					return nullptr;
 				}
 			}
 			return &Waterway::create(egbase(), *start, *end, path);
 		} else {
-			log("%i: building waterway aborted, missing end flag\n",
+			log_warn(egbase().get_gametime(), "%i: building waterway aborted, missing end flag\n",
 			    static_cast<unsigned int>(player_number()));
 		}
 	} else {
-		log("%i: building waterway aborted, missing start flag\n",
+		log_warn(egbase().get_gametime(), "%i: building waterway aborted, missing start flag\n",
 		    static_cast<unsigned int>(player_number()));
 	}
 	return nullptr;
@@ -601,7 +601,7 @@ Waterway& Player::force_waterway(const Path& path) {
 	Path::StepVector::size_type const laststep = path.get_nsteps() - 1;
 	for (Path::StepVector::size_type i = 0; i < laststep; ++i) {
 		c = map.get_neighbour(c, path[i]);
-		log("Clearing for waterway at (%i, %i)\n", c.x, c.y);
+		log_info(egbase().get_gametime(), "Clearing for waterway at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
 		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
@@ -757,7 +757,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 		} else if (upcast(Flag, flag, immovable)) {
 			if (Building* const flagbuilding = flag->get_building()) {
 				if (!(flagbuilding->get_playercaps() & Building::PCap_Bulldoze)) {
-					log("Player trying to rip flag (%u) with undestroyable "
+					log_warn(egbase().get_gametime(), "Player trying to rip flag (%u) with undestroyable "
 					    "building (%u)\n",
 					    flag->serial(), flagbuilding->serial());
 					return;
@@ -778,7 +778,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 						                         primary_road->get_flag(RoadBase::FlagEnd) :
 						                         primary_start;
 						primary_road->destroy(egbase());
-						log("destroying road/waterway from (%i, %i) going in dir %u\n",
+						log_info(egbase().get_gametime(), "destroying road/waterway from (%i, %i) going in dir %u\n",
 						    flag->get_position().x, flag->get_position().y, primary_road_id);
 						//  The primary road is gone. Now see if the flag at the other
 						//  end of it is a dead-end.
@@ -1159,9 +1159,9 @@ void Player::enemyflagaction(Flag& flag,
                              PlayerNumber const attacker,
                              const std::vector<Widelands::Soldier*>& soldiers) {
 	if (attacker != player_number()) {
-		log("Player (%d) is not the sender of an attack (%d)\n", attacker, player_number());
+		log_warn(egbase().get_gametime(), "Player (%d) is not the sender of an attack (%d)\n", attacker, player_number());
 	} else if (soldiers.empty()) {
-		log("enemyflagaction: no soldiers given\n");
+		log_warn(egbase().get_gametime(), "enemyflagaction: no soldiers given\n");
 	} else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
 			if (const AttackTarget* attack_target = building->attack_target()) {
@@ -1175,7 +1175,7 @@ void Player::enemyflagaction(Flag& flag,
 						} else {
 							// The soldier may not be in a militarysite anymore if he was kicked out
 							// in the short delay between sending and executing a playercommand
-							log("Player(%u)::enemyflagaction: Not sending soldier %u because he left the "
+							log_warn(egbase().get_gametime(), "Player(%u)::enemyflagaction: Not sending soldier %u because he left the "
 							    "building\n",
 							    player_number(), temp_attacker->serial());
 						}
@@ -1766,7 +1766,7 @@ void Player::read_statistics(FileRead& fr,
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
-			log("Player %u statistics: unknown ware name %s", player_number(), name.c_str());
+			log_warn(egbase().get_gametime(), "Player %u statistics: unknown ware name %s", player_number(), name.c_str());
 			continue;
 		}
 
@@ -1787,7 +1787,7 @@ void Player::read_statistics(FileRead& fr,
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
-			log("Player %u consumption statistics: unknown ware name %s", player_number(),
+			log_warn(egbase().get_gametime(), "Player %u consumption statistics: unknown ware name %s", player_number(),
 			    name.c_str());
 			continue;
 		}
@@ -1809,7 +1809,7 @@ void Player::read_statistics(FileRead& fr,
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
-			log("Player %u stock statistics: unknown ware name %s", player_number(), name.c_str());
+			log_warn(egbase().get_gametime(), "Player %u stock statistics: unknown ware name %s", player_number(), name.c_str());
 			continue;
 		}
 

@@ -79,7 +79,7 @@ Game::SyncWrapper::~SyncWrapper() {
 				g_fs->fs_unlink(dumpfname_);
 			} catch (const FileError& e) {
 				// not really a problem if deletion fails, but we'll log it
-				log("Deleting synchstream file %s failed: %s\n", dumpfname_.c_str(), e.what());
+				log_warn(game_.get_gametime(), "Deleting synchstream file %s failed: %s\n", dumpfname_.c_str(), e.what());
 			}
 		}
 	}
@@ -95,17 +95,18 @@ void Game::SyncWrapper::start_dump(const std::string& fname) {
 void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
 	uint32_t time = game_.get_gametime();
-	log("[sync:%08u t=%6u]", counter_, time);
-	for (size_t i = 0; i < size; ++i)
-		log(" %02x", (static_cast<uint8_t const*>(sync_data))[i]);
-	log("\n");
+	log_dbg(game_.get_gametime(), "[sync:%08u t=%6u]", counter_, time);
+	for (size_t i = 0; i < size; ++i) {
+		log_dbg(game_.get_gametime(), " %02x", (static_cast<uint8_t const*>(sync_data))[i]);
+	}
+	log_dbg(game_.get_gametime(), "\n");
 #endif
 
 	if (dump_ != nullptr && static_cast<int32_t>(counter_ - next_diskspacecheck_) >= 0) {
 		next_diskspacecheck_ = counter_ + 16 * 1024 * 1024;
 
 		if (g_fs->disk_space() < kMinimumDiskSpace) {
-			log("Stop writing to syncstream file: disk is getting full.\n");
+			log_warn(game_.get_gametime(), "Stop writing to syncstream file: disk is getting full.\n");
 			dump_.reset();
 		}
 	}
@@ -114,7 +115,7 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 		try {
 			dump_->data(sync_data, size);
 		} catch (const WException&) {
-			log("Writing to syncstream file %s failed. Stop synctream dump.\n", dumpfname_.c_str());
+			log_warn(game_.get_gametime(), "Writing to syncstream file %s failed. Stop synctream dump.\n", dumpfname_.c_str());
 			dump_.reset();
 		}
 		assert(current_excerpt_id_ < kExcerptSize);
@@ -150,7 +151,7 @@ void Game::sync_reset() {
 	syncwrapper_.counter_ = 0;
 
 	synchash_.reset();
-	log("[sync] Reset\n");
+	log_dbg(get_gametime(), "[sync] Reset\n");
 }
 
 /**
@@ -230,7 +231,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 		// If tribe name is empty, pick a random tribe
 		std::string tribe = map().get_scenario_player_tribe(p);
 		if (tribe.empty()) {
-			log("Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
+			log_info(get_gametime(), "Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
 			const DescriptionIndex random = std::rand() % tribes().nrtribes();  // NOLINT
 			tribe = tribes().get_tribe_descr(random)->name();
 		}
@@ -520,12 +521,12 @@ bool Game::run(StartGameType const start_game_type,
 		const std::string fname = kReplayDir + g_fs->file_separator() + std::string(timestring()) +
 		                          std::string("_") + prefix_for_replays + kReplayExtension;
 		if (writereplay_) {
-			log("Starting replay writer\n");
+			log_info(get_gametime(), "Starting replay writer\n");
 
 			assert(!replaywriter_);
 			replaywriter_.reset(new ReplayWriter(*this, fname));
 
-			log("Replay writer has started\n");
+			log_info(get_gametime(), "Replay writer has started\n");
 		}
 
 		if (writesyncstream_) {
@@ -633,7 +634,7 @@ void Game::report_sync_request() {
  */
 void Game::report_desync(int32_t playernumber) {
 	if (syncwrapper_.dumpfname_.empty()) {
-		log("Error: A desync occurred but no filename for the syncstream has been set.");
+		log_err(get_gametime(), "Error: A desync occurred but no filename for the syncstream has been set.");
 		return;
 	}
 	// Replace .wss extension of syncstream file with .wse extension for syncstream extract
@@ -904,7 +905,7 @@ int Game::propose_trade(const Trade& trade) {
 void Game::accept_trade(const int trade_id) {
 	auto it = trade_agreements_.find(trade_id);
 	if (it == trade_agreements_.end()) {
-		log("Game::accept_trade: Trade %d has vanished. Ignoring.\n", trade_id);
+		log_warn(get_gametime(), "Game::accept_trade: Trade %d has vanished. Ignoring.\n", trade_id);
 		return;
 	}
 	const Trade& trade = it->second.trade;

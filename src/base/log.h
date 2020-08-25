@@ -26,8 +26,25 @@
 #include <string>
 #endif
 
+enum class LogType {
+	kInfo,     // normal info messages
+	kDebug,    // additional debug output
+	kWarning,  // warnings
+	kError     // fatal errors
+};
+
 // Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
-void log(const char*, ...) PRINTF_FORMAT(1, 2);
+// If `gametime` is >= 0, a timestamp will be prepended to the output.
+void log_to_stdout(LogType, long gametime, const char*, ...) PRINTF_FORMAT(3, 4);
+#define log_info(time, ...) log_to_stdout(LogType::kInfo, time, __VA_ARGS__)
+#define log_dbg(time, ...) log_to_stdout(LogType::kDebug, time, __VA_ARGS__)
+#define log_warn(time, ...) log_to_stdout(LogType::kWarning, time, __VA_ARGS__)
+#define log_err(time, ...) log_to_stdout(LogType::kError, time, __VA_ARGS__)
+
+#define log_info_notimestamp(...) log_to_stdout(LogType::kInfo, -1, __VA_ARGS__)
+#define log_dbg_notimestamp(...) log_to_stdout(LogType::kDebug, -1, __VA_ARGS__)
+#define log_warn_notimestamp(...) log_to_stdout(LogType::kWarning, -1, __VA_ARGS__)
+#define log_err_notimestamp(...) log_to_stdout(LogType::kError, -1, __VA_ARGS__)
 
 extern bool g_verbose;
 

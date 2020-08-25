@@ -91,7 +91,7 @@ void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t
 	                                  std::string("_ai_player_") +
 	                                  std::to_string(static_cast<int>(pn)) + kAiExtension;
 
-	log(" %d: AI to be dumped to %s\n", pn, full_filename.c_str());
+	log_dbg_notimestamp(" %d: AI to be dumped to %s\n", pn, full_filename.c_str());
 
 	Profile prof;
 

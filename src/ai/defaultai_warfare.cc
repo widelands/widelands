@@ -209,7 +209,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			// Site is still there but not visible for us
 			if (!is_visible) {
 				if (site->second.last_time_seen + 20 * 60 * 1000 < gametime) {
-					log("site %d not visible for more than 20 minutes\n", site->first);
+					log_dbg(gametime, "site %d not visible for more than 20 minutes\n", site->first);
 					disappeared_sites.push_back(site->first);
 				}
 				continue;
@@ -493,20 +493,20 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					if (management_data.f_neuron_pool[47].get_position(j)) {
 						site->second.score += inputs[j];
 						if (inputs[j] < -10 || inputs[j] > 10) {
-							log(" pos: %d - value %d\n", j, inputs[j]);
+							log_dbg(gametime, " pos: %d - value %d\n", j, inputs[j]);
 						}
 					}
 					if (management_data.f_neuron_pool[0].get_position(j)) {
 						site->second.score += inputs[j + kFNeuronBitSize];
 						if (inputs[j + kFNeuronBitSize] < -10 || inputs[j + kFNeuronBitSize] > 10) {
-							log(" pos: %d - value %d\n", j + kFNeuronBitSize, inputs[j + kFNeuronBitSize]);
+							log_dbg(gametime, " pos: %d - value %d\n", j + kFNeuronBitSize, inputs[j + kFNeuronBitSize]);
 						}
 					}
 					if (management_data.f_neuron_pool[16].get_position(j)) {
 						site->second.score += inputs[j + 2 * kFNeuronBitSize];
 						if (inputs[j + 2 * kFNeuronBitSize] < -10 ||
 						    inputs[j + 2 * kFNeuronBitSize] > 10) {
-							log(" pos: %d - value %d\n", j + 2 * kFNeuronBitSize,
+							log_dbg(gametime, " pos: %d - value %d\n", j + 2 * kFNeuronBitSize,
 							    inputs[j + 2 * kFNeuronBitSize]);
 						}
 					}
@@ -514,7 +514,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 						site->second.score += inputs[j + 3 * kFNeuronBitSize];
 						if (inputs[j + 3 * kFNeuronBitSize] < -10 ||
 						    inputs[j + 3 * kFNeuronBitSize] > 10) {
-							log(" pos: %d - value %d\n", j + 3 * kFNeuronBitSize,
+							log_dbg(gametime, " pos: %d - value %d\n", j + 3 * kFNeuronBitSize,
 							    inputs[j + 3 * kFNeuronBitSize]);
 						}
 					}
@@ -605,7 +605,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		}
 		++b;
 	}
-	log("%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2d times, after "
+	log_info(gametime, "%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2d times, after "
 	    "%5d seconds\n",
 	    player_number(), flag->get_position().x, flag->get_position().y, best_score, a,
 	    enemy_sites[best_target].attack_counter + 1,
@@ -690,7 +690,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 	// Inform if we are above ai type limit.
 	if (tso.bo->total_count() > tso.bo->cnt_limit_by_aimode) {
-		log("AI check_trainingsites: AI player %d: count of %s exceeds an AI limit %d: actual count: "
+		log_warn(gametime, "AI check_trainingsites: AI player %d: count of %s exceeds an AI limit %d: actual count: "
 		    "%d\n",
 		    player_number(), tso.bo->name, tso.bo->cnt_limit_by_aimode, tso.bo->total_count());
 	}
@@ -928,7 +928,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 
 	// Inform if we are above ai type limit.
 	if (militarysites.front().bo->total_count() > militarysites.front().bo->cnt_limit_by_aimode) {
-		log("AI check_militarysites: Too many %s: %d, ai limit: %d\n", militarysites.front().bo->name,
+		log_warn(gametime, "AI check_militarysites: Too many %s: %d, ai limit: %d\n", militarysites.front().bo->name,
 		    militarysites.front().bo->total_count(), militarysites.front().bo->cnt_limit_by_aimode);
 	}
 
@@ -1364,7 +1364,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 	for (int i = 0; i < 4 * kFNeuronBitSize; i = i + 1) {
 		if (inputs[i] < -35 || inputs[i] > 6) {
-			log("Warning check_building_necessity score on position %2d too high %2d\n", i, inputs[i]);
+			log_warn(gametime, "Warning check_building_necessity score on position %2d too high %2d\n", i, inputs[i]);
 		}
 	}
 
@@ -1414,5 +1414,5 @@ void DefaultAI::soldier_trained(const TrainingSite& site) {
 		}
 	}
 
-	log(" %d: Computer player error - trainingsite not found\n", player_number());
+	log_err(gametime, " %d: Computer player error - trainingsite not found\n", player_number());
 }
