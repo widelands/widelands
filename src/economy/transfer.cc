@@ -88,9 +88,10 @@ void Transfer::set_request(Request* req) {
 
 	if (&req->target() != destination_.get(game_)) {
 		if (destination_.is_set()) {
-			log_warn(game_.get_gametime(), "Transfer::set_request req->target (%u) "
-			    "vs. destination (%u) mismatch\n",
-			    req->target().serial(), destination_.serial());
+			log_warn(game_.get_gametime(),
+			         "Transfer::set_request req->target (%u) "
+			         "vs. destination (%u) mismatch\n",
+			         req->target().serial(), destination_.serial());
 		}
 		destination_ = &req->target();
 	}

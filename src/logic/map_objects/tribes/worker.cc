@@ -1032,8 +1032,8 @@ bool Worker::run_removeobject(Game& game, State& state, const Action&) {
  * sparam1 = subcommand
  */
 bool Worker::run_repeatsearch(Game& game, State& state, const Action& action) {
-	molog(game.get_gametime(), "  Start Repeat Search (%i attempts, %i radius -> %s)\n", action.iparam1, action.iparam2,
-	      action.sparam1.c_str());
+	molog(game.get_gametime(), "  Start Repeat Search (%i attempts, %i radius -> %s)\n",
+	      action.iparam1, action.iparam2, action.sparam1.c_str());
 
 	++state.ivar1;
 	start_task_geologist(game, action.iparam1, action.iparam2, action.sparam1);
@@ -1179,7 +1179,8 @@ void Worker::log_general_info(const EditorGameBase& egbase) const {
 		FORMAT_WARNINGS_ON
 	}
 
-	molog(egbase.get_gametime(), "current_exp: %i / %i\n", current_exp_, descr().get_needed_experience());
+	molog(egbase.get_gametime(), "current_exp: %i / %i\n", current_exp_,
+	      descr().get_needed_experience());
 
 	FORMAT_WARNINGS_OFF
 	molog(egbase.get_gametime(), "supply: %p\n", supply_);
@@ -1606,7 +1607,8 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 				path.reverse();
 			}
 
-			molog(game.get_gametime(), "[transfer]: starting task [movepath] and setting location to road %u\n",
+			molog(game.get_gametime(),
+			      "[transfer]: starting task [movepath] and setting location to road %u\n",
 			      road.serial());
 			start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware(), this));
 			set_location(&road);
@@ -1636,7 +1638,8 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 			if (index >= 0) {
 				if (start_task_movepath(
 				       game, path, index, descr().get_right_walk_anims(does_carry_ware(), this))) {
-					molog(game.get_gametime(), "[transfer]: from road %u to flag %u\n", road->serial(), nextstep->serial());
+					molog(game.get_gametime(), "[transfer]: from road %u to flag %u\n", road->serial(),
+					      nextstep->serial());
 					return;
 				}
 			} else if (nextstep != map[get_position()].get_immovable()) {
@@ -1725,7 +1728,8 @@ void Worker::shipping_update(Game& game, State& state) {
 		if (signal == "endshipping") {
 			signal_handled();
 			if (!dynamic_cast<Warehouse*>(location)) {
-				molog(game.get_gametime(), "shipping_update: received signal 'endshipping' while not in warehouse!\n");
+				molog(game.get_gametime(),
+				      "shipping_update: received signal 'endshipping' while not in warehouse!\n");
 				pop_task(game);
 				return;
 			}
@@ -1844,7 +1848,8 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 	signal_handled();
 	if (!signal.empty()) {
 		// TODO(sirver,trading): Remove once signals are correctly handled.
-		log_dbg(game.get_gametime(), "carry_trade_item_update: signal received: %s\n", signal.c_str());
+		log_dbg(
+		   game.get_gametime(), "carry_trade_item_update: signal received: %s\n", signal.c_str());
 	}
 	if (signal == "evict") {
 		return pop_task(game);
@@ -2209,7 +2214,8 @@ void Worker::dropoff_update(Game& game, State&) {
 	// If the building just got destroyed, pop the task
 	PlayerImmovable* current_location = get_location(game);
 	if (current_location == nullptr) {
-		molog(game.get_gametime(), "%s: Unable to dropoff ware in building at (%d,%d) - there is no building there\n",
+		molog(game.get_gametime(),
+		      "%s: Unable to dropoff ware in building at (%d,%d) - there is no building there\n",
 		      descr().name().c_str(), get_position().x, get_position().y);
 		return pop_task(game);
 	}
@@ -2270,7 +2276,8 @@ void Worker::dropoff_update(Game& game, State&) {
 /// Give the recruit his diploma and say farwell to him.
 void Worker::start_task_releaserecruit(Game& game, Worker& recruit) {
 	push_task(game, taskReleaserecruit);
-	molog(game.get_gametime(), "Starting to release %s %u...\n", recruit.descr().name().c_str(), recruit.serial());
+	molog(game.get_gametime(), "Starting to release %s %u...\n", recruit.descr().name().c_str(),
+	      recruit.serial());
 	return schedule_act(game, 5000);
 }
 
@@ -2348,7 +2355,8 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 		// E.g. the player destroyed the building, it is destroyed, through an
 		// enemy player, or it got destroyed through rising water (atlantean
 		// scenario)
-		molog(game.get_gametime(), "[fetchfromflag]: building dissappeared - searching for alternative\n");
+		molog(game.get_gametime(),
+		      "[fetchfromflag]: building dissappeared - searching for alternative\n");
 		return pop_task(game);
 	}
 
@@ -2367,7 +2375,8 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 			// While we walk back into the building with the ware, the player enhances
 			// the building, so that we now belong to the newly created construction site.
 			// Obviously the construction site no longer has any use for the ware.
-			molog(game.get_gametime(), "[fetchfromflag]: ware no longer wants to go into building, drop off\n");
+			molog(game.get_gametime(),
+			      "[fetchfromflag]: ware no longer wants to go into building, drop off\n");
 			pop_task(game);
 			start_task_dropoff(game, *ware);
 			return;
@@ -2514,7 +2523,8 @@ void Worker::leavebuilding_update(Game& game, State& state) {
 
 		if (!start_task_movepath(
 		       game, flagpos, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
-			molog(game.get_gametime(), "[leavebuilding]: outside of building, but failed to walk back to flag");
+			molog(game.get_gametime(),
+			      "[leavebuilding]: outside of building, but failed to walk back to flag");
 			set_location(nullptr);
 			return pop_task(game);
 		}
@@ -2611,12 +2621,13 @@ void Worker::fugitive_update(Game& game, State& state) {
 			if (does_carry_ware()) {
 				if (flag->has_capacity()) {
 					if (WareInstance* const ware = fetch_carried_ware(game)) {
-						molog(game.get_gametime(),
-						   "[fugitive] is on flag, drop carried ware %s\n", ware->descr().name().c_str());
+						molog(game.get_gametime(), "[fugitive] is on flag, drop carried ware %s\n",
+						      ware->descr().name().c_str());
 						flag->add_ware(game, *ware);
 					}
 				} else {
-					molog(game.get_gametime(), "[fugitive] is on flag, which has no capacity for the carried ware!\n");
+					molog(game.get_gametime(),
+					      "[fugitive] is on flag, which has no capacity for the carried ware!\n");
 				}
 			}
 			return pop_task(game);
@@ -2825,7 +2836,8 @@ const Bob::Task Worker::taskScout = {
  * iparam2 = maximum search time (in msecs)
  */
 bool Worker::run_scout(Game& game, State& state, const Action& action) {
-	molog(game.get_gametime(), "  Try scouting for %i ms with search in radius of %i\n", action.iparam2, action.iparam1);
+	molog(game.get_gametime(), "  Try scouting for %i ms with search in radius of %i\n",
+	      action.iparam2, action.iparam1);
 	if (upcast(ProductionSite, productionsite, get_location(game))) {
 		productionsite->unnotify_player();
 	}
@@ -3054,7 +3066,8 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 
 			// If the field is not yet discovered, go there
 			if (visible == SeeUnseeNode::kUnexplored) {
-				molog(game.get_gametime(), "[scout]: Go to interesting field (%i, %i)\n", coord.x, coord.y);
+				molog(game.get_gametime(), "[scout]: Go to interesting field (%i, %i)\n", coord.x,
+				      coord.y);
 				if (!start_task_movepath(
 				       game, coord, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
 					molog(game.get_gametime(), "[scout]: failed to reach destination\n");
@@ -3082,8 +3095,8 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 		// All fields discovered, go to second choice target
 
 		if (oldest_coords != get_position()) {
-			molog(game.get_gametime(),
-			   "[scout]: All fields discovered. Go to (%i, %i)\n", oldest_coords.x, oldest_coords.y);
+			molog(game.get_gametime(), "[scout]: All fields discovered. Go to (%i, %i)\n",
+			      oldest_coords.x, oldest_coords.y);
 			if (!start_task_movepath(
 			       game, oldest_coords, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
 				molog(game.get_gametime(), "[scout]: Failed to reach destination\n");

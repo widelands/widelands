@@ -218,7 +218,8 @@ void set_locale(const std::string& name) {
 
 	std::string lang(name);
 
-	log_info_notimestamp("selected language: %s\n", lang.empty() ? "(system language)" : lang.c_str());
+	log_info_notimestamp(
+	   "selected language: %s\n", lang.empty() ? "(system language)" : lang.c_str());
 
 #ifndef _WIN32
 #ifndef __AMIGAOS4__
@@ -303,8 +304,9 @@ void set_locale(const std::string& name) {
 		try {
 			SETLOCALE(LC_MESSAGES, "en_US.utf8");  // set locale according to the env. variables
 			                                       // --> see  $ man 3 setlocale
-			log_warn_notimestamp(" - Set system locale to 'en_US.utf8' to make '%s' accessible to libintl\n",
-			    lang.c_str());
+			log_warn_notimestamp(
+			   " - Set system locale to 'en_US.utf8' to make '%s' accessible to libintl\n",
+			   lang.c_str());
 		} catch (std::exception&) {
 			SETLOCALE(LC_MESSAGES, "");  // set locale according to the env. variables
 			                             // --> see  $ man 3 setlocale

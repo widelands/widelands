@@ -79,7 +79,8 @@ Game::SyncWrapper::~SyncWrapper() {
 				g_fs->fs_unlink(dumpfname_);
 			} catch (const FileError& e) {
 				// not really a problem if deletion fails, but we'll log it
-				log_warn(game_.get_gametime(), "Deleting synchstream file %s failed: %s\n", dumpfname_.c_str(), e.what());
+				log_warn(game_.get_gametime(), "Deleting synchstream file %s failed: %s\n",
+				         dumpfname_.c_str(), e.what());
 			}
 		}
 	}
@@ -115,7 +116,9 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 		try {
 			dump_->data(sync_data, size);
 		} catch (const WException&) {
-			log_warn(game_.get_gametime(), "Writing to syncstream file %s failed. Stop synctream dump.\n", dumpfname_.c_str());
+			log_warn(game_.get_gametime(),
+			         "Writing to syncstream file %s failed. Stop synctream dump.\n",
+			         dumpfname_.c_str());
 			dump_.reset();
 		}
 		assert(current_excerpt_id_ < kExcerptSize);
@@ -231,7 +234,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 		// If tribe name is empty, pick a random tribe
 		std::string tribe = map().get_scenario_player_tribe(p);
 		if (tribe.empty()) {
-			log_info(get_gametime(), "Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
+			log_info(
+			   get_gametime(), "Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
 			const DescriptionIndex random = std::rand() % tribes().nrtribes();  // NOLINT
 			tribe = tribes().get_tribe_descr(random)->name();
 		}
@@ -634,7 +638,8 @@ void Game::report_sync_request() {
  */
 void Game::report_desync(int32_t playernumber) {
 	if (syncwrapper_.dumpfname_.empty()) {
-		log_err(get_gametime(), "Error: A desync occurred but no filename for the syncstream has been set.");
+		log_err(get_gametime(),
+		        "Error: A desync occurred but no filename for the syncstream has been set.");
 		return;
 	}
 	// Replace .wss extension of syncstream file with .wse extension for syncstream extract

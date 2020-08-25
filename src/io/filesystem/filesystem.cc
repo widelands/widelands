@@ -303,7 +303,7 @@ std::string FileSystem::get_homedir() {
 
 	if (homedir.empty()) {
 		log_warn_notimestamp("\neither we can not detect your home directory "
-		    "or you do not have one! Please contact the developers.\n\n");
+		                     "or you do not have one! Please contact the developers.\n\n");
 
 		// TODO(unknown): is it really a good idea to set homedir to "." then ??
 

@@ -449,7 +449,7 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 		} catch (LuaTableKeyError& e) {
 			log_err_notimestamp("LaunchMPG: Error loading win condition: %s %s\n",
-			    settings_->get_win_condition_script().c_str(), e.what());
+			                    settings_->get_win_condition_script().c_str(), e.what());
 		}
 		win_condition_dropdown_.set_enabled(false);
 	}

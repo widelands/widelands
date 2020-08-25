@@ -136,7 +136,7 @@ void FontSet::parse_fontset(const std::string& fontset_name) {
 		is_rtl_ = true;
 	} else if (direction_string != "ltr") {
 		log_warn_notimestamp("Unknown script direction '%s'. Using to left-to-right rendering.\n",
-		    direction_string.c_str());
+		                     direction_string.c_str());
 	}
 }
 
@@ -211,8 +211,9 @@ FontSets::FontSets() {
 				if (fontset_selectors.count(fontsetname) == 1) {
 					selector = fontset_selectors.at(fontsetname);
 				} else {
-					log_warn_notimestamp("No selector for fontset: %s in locale: %s. Falling back to default\n",
-					    fontsetname.c_str(), localename.c_str());
+					log_warn_notimestamp(
+					   "No selector for fontset: %s in locale: %s. Falling back to default\n",
+					   fontsetname.c_str(), localename.c_str());
 				}
 				locale_fontsets.insert(std::make_pair(localename, selector));
 			} catch (const WException&) {

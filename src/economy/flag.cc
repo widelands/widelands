@@ -91,16 +91,18 @@ void Flag::load_finish(EditorGameBase& egbase) {
 		Worker& worker = *r.get(egbase);
 		Bob::State const* const state = worker.get_state(Worker::taskWaitforcapacity);
 		if (state == nullptr) {
-			log_warn(egbase.get_gametime(), "worker %u is in the capacity wait queue of flag %u but "
-			    "does not have a waitforcapacity task! Removing from queue.\n",
-			    worker.serial(), serial());
+			log_warn(egbase.get_gametime(),
+			         "worker %u is in the capacity wait queue of flag %u but "
+			         "does not have a waitforcapacity task! Removing from queue.\n",
+			         worker.serial(), serial());
 			return true;
 		}
 		if (state->objvar1 != this) {
-			log_warn(egbase.get_gametime(), "worker %u is in the capacity wait queue of flag %u but "
-			    "its waitforcapacity task is for map object %u! Removing from "
-			    "queue.\n",
-			    worker.serial(), serial(), state->objvar1.serial());  // NOLINT
+			log_warn(egbase.get_gametime(),
+			         "worker %u is in the capacity wait queue of flag %u but "
+			         "its waitforcapacity task is for map object %u! Removing from "
+			         "queue.\n",
+			         worker.serial(), serial(), state->objvar1.serial());  // NOLINT
 			return true;
 		}
 		return false;
@@ -746,7 +748,8 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 
 		// Deal with the building case
 		if (nextstep == get_building()) {
-			molog(game.get_gametime(), "Flag::call_carrier(%u): Tell building to fetch this ware\n", ware.serial());
+			molog(game.get_gametime(), "Flag::call_carrier(%u): Tell building to fetch this ware\n",
+			      ware.serial());
 
 			if (!get_building()->fetch_from_flag(game)) {
 				pi->ware->cancel_moving();

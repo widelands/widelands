@@ -95,7 +95,8 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 						if (building.descr().is_animation_known(animname)) {
 							building.anim_ = building.descr().get_animation(animname, &building);
 						} else {
-							log_warn(egbase.get_gametime(),
+							log_warn(
+							   egbase.get_gametime(),
 							   "Unknown animation '%s' for building '%s', using main animation instead.\n",
 							   animname, building.descr().name().c_str());
 							building.anim_ = building.descr().main_animation();
@@ -170,20 +171,22 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					if (fr.unsigned_8()) {
 						if (upcast(ProductionSite, productionsite, &building)) {
 							if (building.descr().type() == MapObjectType::MILITARYSITE) {
-								log_warn(egbase.get_gametime(), "Found a stopped %s at (%i, %i) in the "
-								    "savegame. Militarysites are not stoppable. "
-								    "Ignoring.",
-								    building.descr().name().c_str(), building.get_position().x,
-								    building.get_position().y);
+								log_warn(egbase.get_gametime(),
+								         "Found a stopped %s at (%i, %i) in the "
+								         "savegame. Militarysites are not stoppable. "
+								         "Ignoring.",
+								         building.descr().name().c_str(), building.get_position().x,
+								         building.get_position().y);
 							} else {
 								productionsite->set_stopped(true);
 							}
 						} else {
-							log_warn(egbase.get_gametime(), "Found a stopped %s at (%i, %i) in the "
-							    "savegame. Only productionsites are stoppable. "
-							    "Ignoring.",
-							    building.descr().name().c_str(), building.get_position().x,
-							    building.get_position().y);
+							log_warn(egbase.get_gametime(),
+							         "Found a stopped %s at (%i, %i) in the "
+							         "savegame. Only productionsites are stoppable. "
+							         "Ignoring.",
+							         building.descr().name().c_str(), building.get_position().x,
+							         building.get_position().y);
 						}
 					}
 
@@ -416,18 +419,20 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				uint32_t const next_spawn = fr.unsigned_32();
 				DescriptionIndex const worker_index = tribe.safe_worker_index(worker_typename);
 				if (!game.tribes().worker_exists(worker_index)) {
-					log_warn(game.get_gametime(), "%s %u has a next_spawn time for nonexistent "
-					    "worker type \"%s\" set to %u, ignoring\n",
-					    warehouse.descr().name().c_str(), warehouse.serial(), worker_typename.c_str(),
-					    next_spawn);
+					log_warn(game.get_gametime(),
+					         "%s %u has a next_spawn time for nonexistent "
+					         "worker type \"%s\" set to %u, ignoring\n",
+					         warehouse.descr().name().c_str(), warehouse.serial(),
+					         worker_typename.c_str(), next_spawn);
 					continue;
 				}
 				if (tribe.get_worker_descr(worker_index)->buildcost().size()) {
-					log_warn(game.get_gametime(), "%s %u has a next_spawn time for worker type "
-					    "\"%s\", that costs something to build, set to %u, "
-					    "ignoring\n",
-					    warehouse.descr().name().c_str(), warehouse.serial(), worker_typename.c_str(),
-					    next_spawn);
+					log_warn(game.get_gametime(),
+					         "%s %u has a next_spawn time for worker type "
+					         "\"%s\", that costs something to build, set to %u, "
+					         "ignoring\n",
+					         warehouse.descr().name().c_str(), warehouse.serial(),
+					         worker_typename.c_str(), next_spawn);
 					continue;
 				}
 				for (uint8_t i = 0;; ++i) {
@@ -579,18 +584,20 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 		//  queue. But that would not work because the command queue is not read
 		//  yet and will be cleared before it is read.
 		if (militarysite.capacity_ < militarysite.soldier_control()->min_soldier_capacity()) {
-			log_warn(game.get_gametime(), "militarysite %u of player %u at (%i, %i) has capacity "
-			    "set to %u but it must be at least %u. Changing to that value.\n",
-			    militarysite.serial(), militarysite.owner().player_number(),
-			    militarysite.get_position().x, militarysite.get_position().y, militarysite.capacity_,
-			    militarysite.soldier_control()->min_soldier_capacity());
+			log_warn(game.get_gametime(),
+			         "militarysite %u of player %u at (%i, %i) has capacity "
+			         "set to %u but it must be at least %u. Changing to that value.\n",
+			         militarysite.serial(), militarysite.owner().player_number(),
+			         militarysite.get_position().x, militarysite.get_position().y,
+			         militarysite.capacity_, militarysite.soldier_control()->min_soldier_capacity());
 			militarysite.capacity_ = militarysite.soldier_control()->min_soldier_capacity();
 		} else if (militarysite.soldier_control()->max_soldier_capacity() < militarysite.capacity_) {
-			log_warn(game.get_gametime(), "militarysite %u of player %u at (%i, %i) has capacity "
-			    "set to %u but it can be at most %u. Changing to that value.\n",
-			    militarysite.serial(), militarysite.owner().player_number(),
-			    militarysite.get_position().x, militarysite.get_position().y, militarysite.capacity_,
-			    militarysite.soldier_control()->max_soldier_capacity());
+			log_warn(game.get_gametime(),
+			         "militarysite %u of player %u at (%i, %i) has capacity "
+			         "set to %u but it can be at most %u. Changing to that value.\n",
+			         militarysite.serial(), militarysite.owner().player_number(),
+			         militarysite.get_position().x, militarysite.get_position().y,
+			         militarysite.capacity_, militarysite.soldier_control()->max_soldier_capacity());
 			militarysite.capacity_ = militarysite.soldier_control()->max_soldier_capacity();
 		}
 	} catch (const WException& e) {
@@ -712,9 +719,10 @@ void MapBuildingdataPacket::read_productionsite(
 					productionsite.failed_skipped_programs_[program_name] = skip_time;
 				} else {
 					fr.unsigned_32();  // eat skip time
-					log_warn(game.get_gametime(), "productionsite has failed/skipped program \"%s\", which "
-					    "does not exist\n",
-					    program_name);
+					log_warn(game.get_gametime(),
+					         "productionsite has failed/skipped program \"%s\", which "
+					         "does not exist\n",
+					         program_name);
 				}
 			}
 
@@ -725,9 +733,10 @@ void MapBuildingdataPacket::read_productionsite(
 				std::string program_name = fr.c_string();
 				std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 				if (!pr_descr.programs().count(program_name)) {
-					log_warn(game.get_gametime(), "productionsite has unknown program \"%s\", replacing it with "
-					    "\"main\"\n",
-					    program_name.c_str());
+					log_warn(game.get_gametime(),
+					         "productionsite has unknown program \"%s\", replacing it with "
+					         "\"main\"\n",
+					         program_name.c_str());
 					program_name = MapObjectProgram::kMainProgram;
 				}
 
@@ -892,18 +901,20 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 		//  queue. But that would not work because the command queue is not read
 		//  yet and will be cleared before it is read.
 		if (trainingsite.capacity_ < trainingsite.soldier_control()->min_soldier_capacity()) {
-			log_warn(game.get_gametime(), "trainingsite %u of player %u at (%i, %i) has capacity "
-			    "set to %u but it must be at least %u. Changing to that value.\n",
-			    trainingsite.serial(), trainingsite.owner().player_number(),
-			    trainingsite.get_position().x, trainingsite.get_position().y, trainingsite.capacity_,
-			    trainingsite.soldier_control()->min_soldier_capacity());
+			log_warn(game.get_gametime(),
+			         "trainingsite %u of player %u at (%i, %i) has capacity "
+			         "set to %u but it must be at least %u. Changing to that value.\n",
+			         trainingsite.serial(), trainingsite.owner().player_number(),
+			         trainingsite.get_position().x, trainingsite.get_position().y,
+			         trainingsite.capacity_, trainingsite.soldier_control()->min_soldier_capacity());
 			trainingsite.capacity_ = trainingsite.soldier_control()->min_soldier_capacity();
 		} else if (trainingsite.soldier_control()->max_soldier_capacity() < trainingsite.capacity_) {
-			log_warn(game.get_gametime(), "trainingsite %u of player %u at (%i, %i) has capacity "
-			    "set to %u but it can be at most %u. Changing to that value.\n",
-			    trainingsite.serial(), trainingsite.owner().player_number(),
-			    trainingsite.get_position().x, trainingsite.get_position().y, trainingsite.capacity_,
-			    trainingsite.soldier_control()->max_soldier_capacity());
+			log_warn(game.get_gametime(),
+			         "trainingsite %u of player %u at (%i, %i) has capacity "
+			         "set to %u but it can be at most %u. Changing to that value.\n",
+			         trainingsite.serial(), trainingsite.owner().player_number(),
+			         trainingsite.get_position().x, trainingsite.get_position().y,
+			         trainingsite.capacity_, trainingsite.soldier_control()->max_soldier_capacity());
 			trainingsite.capacity_ = trainingsite.soldier_control()->max_soldier_capacity();
 		}
 	} catch (const WException& e) {
@@ -1330,8 +1341,9 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 		fw.signed_8(upgrade.lastsuccess);
 	}
 	if (255 < trainingsite.training_failure_count_.size()) {
-		log_warn(game.get_gametime(), "Save TrainingSite: Failure counter has ridiculously many entries! (%u)\n",
-		    static_cast<uint16_t>(trainingsite.training_failure_count_.size()));
+		log_warn(game.get_gametime(),
+		         "Save TrainingSite: Failure counter has ridiculously many entries! (%u)\n",
+		         static_cast<uint16_t>(trainingsite.training_failure_count_.size()));
 	}
 	fw.unsigned_16(static_cast<uint16_t>(trainingsite.training_failure_count_.size()));
 	for (const auto& fail_and_presence : trainingsite.training_failure_count_) {

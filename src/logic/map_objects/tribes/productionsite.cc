@@ -121,8 +121,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("outputs")) {
-		log_warn_notimestamp("The \"outputs\" table is no longer needed; you can remove it from %s\n",
-		    name().c_str());
+		log_warn_notimestamp(
+		   "The \"outputs\" table is no longer needed; you can remove it from %s\n", name().c_str());
 	}
 
 	if (table.has_key("inputs")) {
@@ -185,9 +185,10 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				program_descname = pgettext_expr(msgctxt_char, program_descname_unlocalized.c_str());
 			}
 			if (program_name == "work") {
-				log_warn_notimestamp("The main program for the building %s should be renamed from 'work' to "
-				    "'main'\n",
-				    name().c_str());
+				log_warn_notimestamp(
+				   "The main program for the building %s should be renamed from 'work' to "
+				   "'main'\n",
+				   name().c_str());
 				programs_[MapObjectProgram::kMainProgram] = std::unique_ptr<ProductionProgram>(
 				   new ProductionProgram(MapObjectProgram::kMainProgram, program_descname,
 				                         program_table->get_table("actions"), tribes, world, this));
@@ -214,9 +215,10 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("indicate_workarea_overlaps")) {
-		log_warn_notimestamp("The \"indicate_workarea_overlaps\" table in %s has been deprecated and can be "
-		    "removed.\n",
-		    name().c_str());
+		log_warn_notimestamp(
+		   "The \"indicate_workarea_overlaps\" table in %s has been deprecated and can be "
+		   "removed.\n",
+		   name().c_str());
 	}
 
 	// Verify that any map resource collected is valid

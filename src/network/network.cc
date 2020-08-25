@@ -38,19 +38,21 @@ bool do_resolve(const boost::asio::ip::tcp& protocol,
 		boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
 		if (iter == boost::asio::ip::tcp::resolver::iterator()) {
 			// Resolution failed
-			log_err_notimestamp("Could not resolve network name '%s:%u' to %s-address\n", hostname.c_str(), port,
-			    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"));
+			log_err_notimestamp("Could not resolve network name '%s:%u' to %s-address\n",
+			                    hostname.c_str(), port,
+			                    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"));
 			return false;
 		}
 		addr->ip = iter->endpoint().address();
 		addr->port = port;
 		log_info_notimestamp("Resolved network name '%s:%u' to %s\n", hostname.c_str(), port,
-		    addr->ip.to_string().c_str());
+		                     addr->ip.to_string().c_str());
 		return true;
 	} catch (const boost::system::system_error& ec) {
 		// Resolution failed
-		log_err_notimestamp("Could not resolve network name '%s:%u' to %s-address: %s\n", hostname.c_str(), port,
-		    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"), ec.what());
+		log_err_notimestamp("Could not resolve network name '%s:%u' to %s-address: %s\n",
+		                    hostname.c_str(), port,
+		                    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"), ec.what());
 		return false;
 	}
 }

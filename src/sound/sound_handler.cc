@@ -77,7 +77,8 @@ SoundHandler::SoundHandler()
 	SDL_GetVersion(&sdl_version);
 	log_dbg_notimestamp("**** SOUND REPORT ****\n");
 	log_dbg_notimestamp("SDL version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
-	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
+	                    static_cast<unsigned int>(sdl_version.minor),
+	                    static_cast<unsigned int>(sdl_version.patch));
 
 	// SDL 2.0.6 will crash due to an upstream bug:
 	// https://bugs.launchpad.net/ubuntu/+source/libsdl2/+bug/1722060
@@ -87,8 +88,9 @@ SoundHandler::SoundHandler()
 	}
 
 	SDL_MIXER_VERSION(&sdl_version)
-	log_dbg_notimestamp("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
-	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
+	log_dbg_notimestamp(
+	   "SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	   static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
 
 	log_dbg_notimestamp("**** END SOUND REPORT ****\n");
 
@@ -146,8 +148,9 @@ SoundHandler::~SoundHandler() {
 	int numtimesopened, frequency, channels;
 	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
-	log_info_notimestamp("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
-	    numtimesopened == 1 ? "" : "s", frequency, format, channels, channels == 1 ? "" : "s");
+	log_info_notimestamp("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n",
+	                     numtimesopened, numtimesopened == 1 ? "" : "s", frequency, format, channels,
+	                     channels == 1 ? "" : "s");
 
 	if (numtimesopened == 0) {
 		return;
@@ -162,7 +165,8 @@ SoundHandler::~SoundHandler() {
 	log_dbg_notimestamp("SoundHandler: SDL_AUDIODRIVER %s\n", SDL_GetCurrentAudioDriver());
 
 	if (numtimesopened != 1) {
-		log_warn_notimestamp("SoundHandler: PROBLEM: sound device opened multiple times, trying to close");
+		log_warn_notimestamp(
+		   "SoundHandler: PROBLEM: sound device opened multiple times, trying to close");
 	}
 	for (int i = 0; i < numtimesopened; ++i) {
 		Mix_CloseAudio();
@@ -459,7 +463,8 @@ void SoundHandler::start_music(const std::string& songset_name) {
 			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
 		} else {
-			log_err_notimestamp("SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
+			log_err_notimestamp(
+			   "SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
 		}
 	}
 }

@@ -1087,7 +1087,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				//  the editor. Player initialization will keep track of
 				//  wrong starting positions.
 				log_err(egbase.get_gametime(), "FAILED!\n");
-				log_err(egbase.get_gametime(), "   Invalid starting position, that could not be fixed.\n");
+				log_err(
+				   egbase.get_gametime(), "   Invalid starting position, that could not be fixed.\n");
 				log_err(egbase.get_gametime(), "   Please try to fix it manually in the editor.\n");
 			}
 		} else {
@@ -1113,9 +1114,11 @@ void S2MapLoader::postload_set_port_spaces(const Widelands::EditorGameBase& egba
 			} while (!was_set && mr.advance(map_));
 		}
 		if (!was_set) {
-			log_err(egbase.get_gametime(), "FAILED! No port buildspace for (%i, %i) found!\n", fc.x, fc.y);
+			log_err(
+			   egbase.get_gametime(), "FAILED! No port buildspace for (%i, %i) found!\n", fc.x, fc.y);
 		} else {
-			log_info(egbase.get_gametime(), "SUCCESS! Port buildspace set for (%i, %i) \n", fc.x, fc.y);
+			log_info(
+			   egbase.get_gametime(), "SUCCESS! Port buildspace set for (%i, %i) \n", fc.x, fc.y);
 		}
 	}
 	map_.recalculate_allows_seafaring();

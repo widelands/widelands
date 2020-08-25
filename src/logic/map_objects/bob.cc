@@ -603,7 +603,8 @@ bool Bob::start_task_movepath(Game& game,
 	int32_t const curidx = path.get_index(get_position());
 
 	if (curidx == -1) {
-		molog(game.get_gametime(), "ERROR: (%i, %i) is not on the given path:\n", get_position().x, get_position().y);
+		molog(game.get_gametime(), "ERROR: (%i, %i) is not on the given path:\n", get_position().x,
+		      get_position().y);
 		for (const Coords& coords : path.get_coords()) {
 			molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 		}
@@ -662,7 +663,8 @@ void Bob::movepath_update(Game& game, State& state) {
 			   game, Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
 			assert(ships_count > 0);
 			if (ships_count > 1) {
-				molog(game.get_gametime(), "Pausing the ship because %d ships on the same spot\n", ships_count);
+				molog(game.get_gametime(), "Pausing the ship because %d ships on the same spot\n",
+				      ships_count);
 				return start_task_idle(
 				   game, state.diranims.get_animation(dir), ((game.logic_rand() % 3) + 1) * 5000);
 			}
@@ -954,7 +956,8 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "Postition: (%i, %i)\n", position_.x, position_.y);
 	molog(egbase.get_gametime(), "ActID: %i\n", actid_);
 	molog(egbase.get_gametime(), "ActScheduled: %s\n", actscheduled_ ? "true" : "false");
-	molog(egbase.get_gametime(), "Animation: %s\n", anim_ ? descr().get_animation_name(anim_).c_str() : "\\<none\\>");
+	molog(egbase.get_gametime(), "Animation: %s\n",
+	      anim_ ? descr().get_animation_name(anim_).c_str() : "\\<none\\>");
 
 	molog(egbase.get_gametime(), "AnimStart: %i\n", animstart_);
 	molog(egbase.get_gametime(), "WalkingDir: %i\n", walking_);
@@ -990,7 +993,8 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 		if (stack_[i].path) {
 			const Path& path = *stack_[i].path;
 			molog(egbase.get_gametime(), "** Path length: %" PRIuS "\n", path.get_nsteps());
-			molog(egbase.get_gametime(), "** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
+			molog(
+			   egbase.get_gametime(), "** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
 			molog(egbase.get_gametime(), "** End: (%i, %i)\n", path.get_end().x, path.get_end().y);
 			// Printing all coordinates of the path
 			CoordPath coordpath(egbase.map(), path);
@@ -1051,8 +1055,9 @@ void Bob::Loader::load(FileRead& fr) {
 				bob.anim_ = bob.descr().get_animation(animname, &bob);
 			} else {
 				bob.anim_ = bob.descr().main_animation();
-				log_warn(egbase().get_gametime(), "Unknown animation '%s' for bob '%s', using main animation instead.\n",
-				    animname.c_str(), bob.descr().name().c_str());
+				log_warn(egbase().get_gametime(),
+				         "Unknown animation '%s' for bob '%s', using main animation instead.\n",
+				         animname.c_str(), bob.descr().name().c_str());
 			}
 
 			bob.animstart_ = fr.signed_32();
@@ -1088,9 +1093,11 @@ void Bob::Loader::load(FileRead& fr) {
 							anims[j] = bob.descr().get_animation(dir_animname, &bob);
 						} else {
 							anims[j] = bob.descr().main_animation();
-							log_warn(egbase().get_gametime(), "Unknown directional animation '%s' for bob '%s', using main animation "
-							    "instead.\n",
-							    dir_animname.c_str(), bob.descr().name().c_str());
+							log_warn(
+							   egbase().get_gametime(),
+							   "Unknown directional animation '%s' for bob '%s', using main animation "
+							   "instead.\n",
+							   dir_animname.c_str(), bob.descr().name().c_str());
 						}
 					}
 					state.diranims =

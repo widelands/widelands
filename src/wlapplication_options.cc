@@ -116,7 +116,8 @@ void set_config_string(const std::string& section,
 void set_config_directory(const std::string& userconfigdir) {
 	config_dir.reset(new RealFSImpl(userconfigdir));
 	config_dir->ensure_directory_exists(".");
-	log_info_notimestamp("Set configuration file: %s/%s\n", userconfigdir.c_str(), kConfigFile.c_str());
+	log_info_notimestamp(
+	   "Set configuration file: %s/%s\n", userconfigdir.c_str(), kConfigFile.c_str());
 }
 
 void read_config() {

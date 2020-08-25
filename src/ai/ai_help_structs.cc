@@ -609,15 +609,16 @@ void ManagementData::review(const uint32_t gametime,
 	score = territory_bonus + iron_mine_bonus + attack_bonus + training_bonus + land_score +
 	        strength_score + ps_sites_score + attack_score;
 
-	log_dbg(gametime, " %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s A:%s Tr:%s, "
-	    "Scores:Land:%5d Str:%4d PS:%4d, Att:%4d\n",
-	    pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
-	    (territory_bonus) ? "Y" : "N", (iron_mine_bonus) ? "Y" : "N", (attack_bonus) ? "Y" : "N",
-	    (training_bonus) ? "Y" : "N", land_score, strength_score, ps_sites_score, attack_score);
+	log_dbg(gametime,
+	        " %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s A:%s Tr:%s, "
+	        "Scores:Land:%5d Str:%4d PS:%4d, Att:%4d\n",
+	        pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
+	        (territory_bonus) ? "Y" : "N", (iron_mine_bonus) ? "Y" : "N", (attack_bonus) ? "Y" : "N",
+	        (training_bonus) ? "Y" : "N", land_score, strength_score, ps_sites_score, attack_score);
 
 	if (score < -10000 || score > 30000) {
 		log_dbg(gametime, "%2d %s: reviewing AI mngm. data, score too extreme: %4d\n", pn,
-		    gamestring_with_leading_zeros(gametime), score);
+		        gamestring_with_leading_zeros(gametime), score);
 	}
 	assert(score > -10000 && score < 100000);
 }
@@ -649,7 +650,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	ai_dna_handler.fetch_dna(
 	   AI_military_numbers_P2, input_weights_P2, input_func_P2, f_neurons_P2, parent2 + 1);
 
-	log_dbg_notimestamp("    ... Primary parent: %d, secondary parent: %d\n", primary_parent, parent2);
+	log_dbg_notimestamp(
+	   "    ... Primary parent: %d, secondary parent: %d\n", primary_parent, parent2);
 
 	// First setting of military numbers, they go directly to persistent data
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
@@ -768,8 +770,9 @@ void ManagementData::mutate(const uint8_t pn) {
 
 	assert(probability > 0 && probability <= 201);
 
-	log_dbg_notimestamp("%2d: mutating DNA with probability 1 / %3d, preffered numbers target %d%s:\n", pn,
-	    probability, preferred_numbers_count, (wild_card) ? ", wild card" : "");
+	log_dbg_notimestamp(
+	   "%2d: mutating DNA with probability 1 / %3d, preffered numbers target %d%s:\n", pn,
+	   probability, preferred_numbers_count, (wild_card) ? ", wild card" : "");
 
 	if (probability < 201) {
 
@@ -795,9 +798,10 @@ void ManagementData::mutate(const uint8_t pn) {
 					const int16_t new_value = shift_weight_value(
 					   get_military_number_at(i), mutating_intensity == MutatingIntensity::kAgressive);
 					set_military_number_at(i, new_value);
-					log_dbg_notimestamp("      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
-					    new_value,
-					    (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
+					log_dbg_notimestamp(
+					   "      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
+					   new_value,
+					   (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
 				}
 			}
 		}
@@ -826,9 +830,10 @@ void ManagementData::mutate(const uint8_t pn) {
 						item.set_weight(new_value);
 						persistent_data->neuron_weights[item.get_id()] = item.get_weight();
 					}
-					log_dbg_notimestamp("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
-					    old_value, item.get_weight(), item.get_type(),
-					    (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
+					log_dbg_notimestamp(
+					   "      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
+					   old_value, item.get_weight(), item.get_type(),
+					   (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
 
 					item.recalculate();
 				}
@@ -866,9 +871,10 @@ void ManagementData::mutate(const uint8_t pn) {
 
 				if (changed_bits) {
 					persistent_data->f_neurons[item.get_id()] = item.get_int();
-					log_dbg_notimestamp("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n", item.get_id(),
-					    item.get_int(), changed_bits,
-					    (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
+					log_dbg_notimestamp(
+					   "      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n", item.get_id(),
+					   item.get_int(), changed_bits,
+					   (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
 				}
 			}
 		}
@@ -1062,8 +1068,8 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 			this_player_team = mytn;
 		}
 		if (all_stats[opn].team_number != pltn) {
-			log_dbg_notimestamp("%2d: Team changed for player %d: %d -> %d\n", pn, opn, all_stats[opn].team_number,
-			    pltn);
+			log_dbg_notimestamp("%2d: Team changed for player %d: %d -> %d\n", pn, opn,
+			                    all_stats[opn].team_number, pltn);
 			all_stats[opn].team_number = pltn;
 		}
 	}
@@ -1132,8 +1138,8 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number)
 	}
 	if (all_stats.count(other_player_number) == 0) {
 		// Should happen only rarely so we print a warning here
-		log_warn_notimestamp("AI %d: player has no statistics yet for player %d\n", this_player_number,
-		    other_player_number);
+		log_warn_notimestamp("AI %d: player has no statistics yet for player %d\n",
+		                     this_player_number, other_player_number);
 		return false;
 	}
 	// finally we compare my team number of the other player team number

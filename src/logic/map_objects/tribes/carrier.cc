@@ -225,7 +225,8 @@ void Carrier::deliver_to_building(Game& game, State& state) {
 				fetch_carried_ware(game);
 				ware->enter_building(game, *building);
 			} else {
-				molog(game.get_gametime(), "[Carrier]: Building switch from under us, return to road.\n");
+				molog(
+				   game.get_gametime(), "[Carrier]: Building switch from under us, return to road.\n");
 
 				state.ivar1 = &building->base_flag() == &dynamic_cast<RoadBase&>(*get_location(game))
 				                                            .get_flag(static_cast<RoadBase::FlagId>(0));
@@ -295,7 +296,7 @@ void Carrier::drop_ware(Game& game, State& state) {
 
 		if (!other && !flag.has_capacity()) {
 			molog(game.get_gametime(), "[Carrier]: strange: acked ware from busy flag no longer "
-			      "present.\n");
+			                           "present.\n");
 
 			promised_pickup_to_ = NOONE;
 			set_animation(game, descr().get_animation("idle", this));

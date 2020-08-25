@@ -90,9 +90,10 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 		items_table = table.get_table("soldier health");
 		// TODO(GunChleoc): Compatibility, remove these after v1.0
 		if (items_table->has_key<std::string>("min_level")) {
-			log_warn_notimestamp("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			    "health' are no longer needed\n",
-			    name().c_str());
+			log_warn_notimestamp(
+			   "Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			   "health' are no longer needed\n",
+			   name().c_str());
 		}
 		add_training_inputs(*items_table, &food_health_, &weapons_health_);
 	}
@@ -100,27 +101,30 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 	if (table.has_key("soldier attack")) {
 		items_table = table.get_table("soldier attack");
 		if (items_table->has_key<std::string>("min_level")) {
-			log_warn_notimestamp("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			    "attack' are no longer needed\n",
-			    name().c_str());
+			log_warn_notimestamp(
+			   "Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			   "attack' are no longer needed\n",
+			   name().c_str());
 		}
 		add_training_inputs(*items_table, &food_attack_, &weapons_attack_);
 	}
 	if (table.has_key("soldier defense")) {
 		items_table = table.get_table("soldier defense");
 		if (items_table->has_key<std::string>("min_level")) {
-			log_warn_notimestamp("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			    "defense' are no longer needed\n",
-			    name().c_str());
+			log_warn_notimestamp(
+			   "Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			   "defense' are no longer needed\n",
+			   name().c_str());
 		}
 		add_training_inputs(*items_table, &food_defense_, &weapons_defense_);
 	}
 	if (table.has_key("soldier evade")) {
 		items_table = table.get_table("soldier evade");
 		if (items_table->has_key<std::string>("min_level")) {
-			log_warn_notimestamp("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			    "evade' are no longer needed\n",
-			    name().c_str());
+			log_warn_notimestamp(
+			   "Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			   "evade' are no longer needed\n",
+			   name().c_str());
 		}
 		add_training_inputs(*items_table, &food_evade_, &weapons_evade_);
 	}
@@ -355,7 +359,8 @@ void TrainingSite::SoldierControl::drop_soldier(Soldier& soldier) {
 	std::vector<Soldier*>::iterator it =
 	   std::find(training_site_->soldiers_.begin(), training_site_->soldiers_.end(), &soldier);
 	if (it == training_site_->soldiers_.end()) {
-		training_site_->molog(game.get_gametime(),
+		training_site_->molog(
+		   game.get_gametime(),
 		   "TrainingSite::SoldierControl::drop_soldier: soldier not in training site");
 		return;
 	}
@@ -843,8 +848,9 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 					TypeAndLevel train_tl(upgrade.attribute, level);
 					TrainFailCount::iterator tstep = training_failure_count_.find(train_tl);
 					if (tstep == training_failure_count_.end()) {
-						log_warn_notimestamp("TrainingSite::drop_stalled_soldiers: training step %d,%d not found in this school!\n",
-						    static_cast<unsigned int>(upgrade.attribute), level);
+						log_warn_notimestamp("TrainingSite::drop_stalled_soldiers: training step %d,%d "
+						                     "not found in this school!\n",
+						                     static_cast<unsigned int>(upgrade.attribute), level);
 						break;
 					}
 

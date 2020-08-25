@@ -195,7 +195,8 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 	try {
 		font.reset(load_font(ns->font_face, font_size));
 	} catch (FileNotFoundError& e) {
-		log_warn_notimestamp("Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
+		log_warn_notimestamp(
+		   "Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
 		font.reset(load_font(ns->fontset->sans(), font_size));
 	}
 	assert(font != nullptr);
@@ -1316,10 +1317,11 @@ public:
 			if (a.has("width")) {
 				int width = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (width > renderer_style_.overall_width) {
-					log_warn_notimestamp("Font renderer: Specified image width of %d exceeds the overall "
-					    "available "
-					    "width of %d. Setting width to %d.\n",
-					    width, renderer_style_.overall_width, renderer_style_.overall_width);
+					log_warn_notimestamp(
+					   "Font renderer: Specified image width of %d exceeds the overall "
+					   "available "
+					   "width of %d. Setting width to %d.\n",
+					   width, renderer_style_.overall_width, renderer_style_.overall_width);
 					width = renderer_style_.overall_width;
 				}
 				const int image_width = image_cache_->get(image_filename)->width();
@@ -1627,9 +1629,10 @@ public:
 			} else {
 				w_ = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (w_ > renderer_style_.overall_width) {
-					log_warn_notimestamp("Font renderer: Specified width of %d exceeds the overall available "
-					    "width of %d. Setting width to %d.\n",
-					    w_, renderer_style_.overall_width, renderer_style_.overall_width);
+					log_warn_notimestamp(
+					   "Font renderer: Specified width of %d exceeds the overall available "
+					   "width of %d. Setting width to %d.\n",
+					   w_, renderer_style_.overall_width, renderer_style_.overall_width);
 					w_ = renderer_style_.overall_width;
 				}
 				render_node_->set_desired_width(DesiredWidth(w_, WidthUnit::kAbsolute));

@@ -343,7 +343,8 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 				uint32_t dist = map.calc_distance(get_position(), cur);
 
 				if (dist == 0) {
-					molog(game.get_gametime(), "Follow pre-computed path from (%i,%i)  [idx = %u]\n", cur.x, cur.y, idx);
+					molog(game.get_gametime(), "Follow pre-computed path from (%i,%i)  [idx = %u]\n",
+					      cur.x, cur.y, idx);
 
 					Path subpath(cur);
 					while (idx < path.get_nsteps()) {
@@ -370,7 +371,8 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 			}
 
 			if (closest_target) {
-				molog(game.get_gametime(), "Closest target en route is (%i,%i)\n", closest_target.x, closest_target.y);
+				molog(game.get_gametime(), "Closest target en route is (%i,%i)\n", closest_target.x,
+				      closest_target.y);
 				if (start_task_movepath(game, closest_target, 0, descr().get_sail_anims())) {
 					return true;
 				}
@@ -600,8 +602,9 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					}
 				}
 				// if we are here, it seems something really strange happend.
-				log_warn(game.get_gametime(), "ship %s was not able to start exploration. Entering WAIT mode.",
-				    shipname_.c_str());
+				log_warn(game.get_gametime(),
+				         "ship %s was not able to start exploration. Entering WAIT mode.",
+				         shipname_.c_str());
 				set_ship_state_and_notify(
 				   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 				start_task_idle(game, descr().main_animation(), kShipInterval);
@@ -814,9 +817,10 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 		start_task_movepath(game, path, descr().get_sail_anims());
 		return;
 	} else {
-		log_warn(game.get_gametime(), "start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
-		    get_position().x, get_position().y, pd.get_positions(game)[0].x,
-		    pd.get_positions(game)[0].y);
+		log_warn(game.get_gametime(),
+		         "start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
+		         get_position().x, get_position().y, pd.get_positions(game)[0].x,
+		         pd.get_positions(game)[0].y);
 		// This should not happen, but in theory there could be some inconstinency
 		// I (tiborb) failed to invoke this situation when testing so
 		// I am not sure if following line behaves allright
@@ -1059,7 +1063,8 @@ void Ship::draw(const EditorGameBase& egbase,
 void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
-	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\n", fleet_ ? fleet_->serial() : 0,
+	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\n",
+	      fleet_ ? fleet_->serial() : 0,
 	      (lastdock_.is_set()) ? (boost::format("%u (%d x %d)") % lastdock_.serial() %
 	                              lastdock_.get(egbase)->get_positions(egbase)[0].x %
 	                              lastdock_.get(egbase)->get_positions(egbase)[0].y)
@@ -1080,7 +1085,8 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 		molog(egbase.get_gametime(), "Currently in destination portdock\n");
 	}
 
-	molog(egbase.get_gametime(), "Carrying %" PRIuS " items%s\n", items_.size(), (items_.empty()) ? "." : ":");
+	molog(egbase.get_gametime(), "Carrying %" PRIuS " items%s\n", items_.size(),
+	      (items_.empty()) ? "." : ":");
 
 	for (const ShippingItem& shipping_item : items_) {
 		molog(egbase.get_gametime(), "  * %u (%s), destination: %s\n", shipping_item.object_.serial(),

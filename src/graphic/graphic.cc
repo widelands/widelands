@@ -80,7 +80,8 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		throw wexception("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
 	}
 
-	log_dbg_notimestamp("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
+	log_dbg_notimestamp(
+	   "Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
 	sdl_window_ = SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED,
 	                               SDL_WINDOWPOS_UNDEFINED, window_mode_width_, window_mode_height_,
 	                               SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
@@ -113,8 +114,8 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	SDL_DisplayMode disp_mode;
 	for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
 		if (SDL_GetCurrentDisplayMode(i, &disp_mode) == 0) {
-			log_dbg_notimestamp("Display #%d: %dx%d @ %dhz %s\n", i, disp_mode.w, disp_mode.h, disp_mode.refresh_rate,
-			    SDL_GetPixelFormatName(disp_mode.format));
+			log_dbg_notimestamp("Display #%d: %dx%d @ %dhz %s\n", i, disp_mode.w, disp_mode.h,
+			                    disp_mode.refresh_rate, SDL_GetPixelFormatName(disp_mode.format));
 		} else {
 			log_warn_notimestamp("Couldn't get display mode for display #%d: %s\n", i, SDL_GetError());
 		}

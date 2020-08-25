@@ -390,9 +390,10 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	set_progress_message(_("Checking map"), is_editor ? 9 : 23);
 	if (!is_editor) {
 		if (mol_->get_nr_unloaded_objects()) {
-			log_warn(egbase.get_gametime(), "There are %i unloaded objects. This is a bug, please "
-			    "consider committing!\n",
-			    mol_->get_nr_unloaded_objects());
+			log_warn(egbase.get_gametime(),
+			         "There are %i unloaded objects. This is a bug, please "
+			         "consider committing!\n",
+			         mol_->get_nr_unloaded_objects());
 		}
 	}  // load_type != MapLoader::LoadType::kEditor
 

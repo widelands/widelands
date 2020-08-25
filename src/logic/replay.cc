@@ -59,10 +59,11 @@ public:
 		const Md5Checksum myhash = game.get_sync_hash();
 
 		if (hash_ != myhash) {
-			log_err(game.get_gametime(), "REPLAY: Lost synchronization at time %u\n"
-			    "I have:     %s\n"
-			    "Replay has: %s\n",
-			    duetime(), myhash.str().c_str(), hash_.str().c_str());
+			log_err(game.get_gametime(),
+			        "REPLAY: Lost synchronization at time %u\n"
+			        "I have:     %s\n"
+			        "Replay has: %s\n",
+			        duetime(), myhash.str().c_str(), hash_.str().c_str());
 
 			// In case syncstream logging is on, save it for analysis
 			game.save_syncstream(true);

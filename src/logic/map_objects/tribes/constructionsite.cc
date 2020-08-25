@@ -274,8 +274,9 @@ void ConstructionSite::init_settings() {
 		settings_.reset(new MilitarysiteSettings(*md, tribe));
 	} else {
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log_warn_notimestamp("Created constructionsite for a %s, which is not of any known building type\n",
-		    building_->name().c_str());
+		log_warn_notimestamp(
+		   "Created constructionsite for a %s, which is not of any known building type\n",
+		   building_->name().c_str());
 	}
 }
 
@@ -523,8 +524,9 @@ void ConstructionSite::enhance(Game& game) {
 	} break;
 	default:
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log_warn(game.get_gametime(), "Enhanced constructionsite to a %s, which is not of any known building type\n",
-		    building_->name().c_str());
+		log_warn(game.get_gametime(),
+		         "Enhanced constructionsite to a %s, which is not of any known building type\n",
+		         building_->name().c_str());
 	}
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));

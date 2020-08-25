@@ -64,7 +64,8 @@ bool SaveHandler::roll_save_files(const std::string& filename, std::string* cons
 
 	// If there is a file missing in the sequence; no need to delete any file.
 	if (rolls < number_of_rolls_) {
-		log_info_notimestamp("Autosave: Rolling savefiles (count): %d of %d\n", rolls, number_of_rolls_);
+		log_info_notimestamp(
+		   "Autosave: Rolling savefiles (count): %d of %d\n", rolls, number_of_rolls_);
 	} else {
 		log_info_notimestamp("Autosave: Rolling savefiles (count): %d\n", rolls);
 		rolls--;
@@ -75,7 +76,8 @@ bool SaveHandler::roll_save_files(const std::string& filename, std::string* cons
 				g_fs->fs_unlink(filename_previous);  // Delete last of the rolling files
 				log_info_notimestamp("Autosave: Deleted %s\n", filename_previous.c_str());
 			} catch (const FileError& e) {
-				log_warn_notimestamp("Autosave: Unable to delete file %s: %s\n", filename_previous.c_str(), e.what());
+				log_warn_notimestamp(
+				   "Autosave: Unable to delete file %s: %s\n", filename_previous.c_str(), e.what());
 				if (error) {
 					*error = (boost::format("Autosave: Unable to delete file %s: %s\n") %
 					          filename_previous.c_str() % e.what())
@@ -93,10 +95,11 @@ bool SaveHandler::roll_save_files(const std::string& filename, std::string* cons
 		try {
 			g_fs->fs_rename(
 			   filename_next, filename_previous);  // e.g. wl_autosave_08 -> wl_autosave_09
-			log_info_notimestamp("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
+			log_info_notimestamp(
+			   "Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
 		} catch (const FileError& e) {
-			log_warn_notimestamp("Autosave: Unable to roll file %s to %s: %s\n", filename_previous.c_str(),
-			    filename_next.c_str(), e.what());
+			log_warn_notimestamp("Autosave: Unable to roll file %s to %s: %s\n",
+			                     filename_previous.c_str(), filename_next.c_str(), e.what());
 			return false;
 		}
 		filename_previous = filename_next;
@@ -121,8 +124,9 @@ bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) {
 		return false;
 	}
 
-	log_info(game.get_gametime(), "Autosave: %d ms interval elapsed, current gametime: %s, saving...\n",
-	    autosave_interval_in_ms_, gametimestring(game.get_gametime(), true).c_str());
+	log_info(game.get_gametime(),
+	         "Autosave: %d ms interval elapsed, current gametime: %s, saving...\n",
+	         autosave_interval_in_ms_, gametimestring(game.get_gametime(), true).c_str());
 
 	game.get_ibase()->log_message(_("Saving game…"));
 

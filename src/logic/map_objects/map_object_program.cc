@@ -222,8 +222,8 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 		// TODO(GunChleoc): Compatibility, remove unitless option after v1.0
 		boost::regex without_unit("^(\\d+)$");
 		if (boost::regex_match(input, without_unit)) {
-			log_warn_notimestamp("Duration '%s' without unit in %s's program is deprecated\n", input.c_str(),
-			    descr.name().c_str());
+			log_warn_notimestamp("Duration '%s' without unit in %s's program is deprecated\n",
+			                     input.c_str(), descr.name().c_str());
 			return read_positive(input, endless());
 		}
 	} catch (const WException& e) {
@@ -373,8 +373,8 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 			// TODO(GunChleoc): Compatibility, remove this option after v1.0
 			result.duration = read_duration(item.first, descr);
 			log_warn_notimestamp("'animate' program without parameter name is deprecated, please use "
-			    "'animate=<animation_name> duration:<duration>' in %s\n",
-			    descr.name().c_str());
+			                     "'animate=<animation_name> duration:<duration>' in %s\n",
+			                     descr.name().c_str());
 		} else {
 			throw GameDataError("Unknown argument '%s'. Usage: <animation_name> [duration:<duration>]",
 			                    arguments.at(1).c_str());
@@ -463,10 +463,11 @@ MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments
 		} else {
 			// TODO(GunChleoc): Compatibility, remove this option after v1.0
 			result.priority = (read_positive(arguments.at(1)) * kMaxProbability * 2U) / 256;
-			log_warn_notimestamp("Deprecated usage in %s. Please convert playsound's 'priority' option to "
-			    "percentage, like this: "
-			    "playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]\n",
-			    descr.name().c_str());
+			log_warn_notimestamp(
+			   "Deprecated usage in %s. Please convert playsound's 'priority' option to "
+			   "percentage, like this: "
+			   "playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]\n",
+			   descr.name().c_str());
 		}
 	} else {
 		throw GameDataError("Unknown argument '%s'. Usage: playsound=<sound_dir/sound_name> "

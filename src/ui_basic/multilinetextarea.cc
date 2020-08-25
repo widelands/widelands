@@ -99,7 +99,8 @@ void MultilineTextarea::recompute() {
 			try {
 				rendered_text_ = UI::g_fh->render(text_, text_width);
 			} catch (const std::exception& e) {
-				log_warn_notimestamp("Error rendering richtext: %s. Text is:\n%s\n", e.what(), text_.c_str());
+				log_warn_notimestamp(
+				   "Error rendering richtext: %s. Text is:\n%s\n", e.what(), text_.c_str());
 				text_ = make_richtext();
 				rendered_text_ = UI::g_fh->render(text_, text_width);
 			}

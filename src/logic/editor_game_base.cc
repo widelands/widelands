@@ -109,7 +109,9 @@ void EditorGameBase::delete_tempfile() {
 	} catch (const std::exception& e) {
 		// if file deletion fails then we have an abandoned file lying around, but otherwise that's
 		// unproblematic
-		log_warn(get_gametime(), "EditorGameBase::delete_tempfile: deleting temporary file/dir failed: %s\n", e.what());
+		log_warn(get_gametime(),
+		         "EditorGameBase::delete_tempfile: deleting temporary file/dir failed: %s\n",
+		         e.what());
 	}
 }
 

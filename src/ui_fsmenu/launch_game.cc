@@ -170,8 +170,8 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 					                            t->get_string("description"));
 				}
 			} catch (LuaTableKeyError& e) {
-				log_err_notimestamp("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
-				    e.what());
+				log_err_notimestamp("Launch Game: Error loading win condition: %s %s\n",
+				                    win_condition_script.c_str(), e.what());
 			}
 		}
 	} catch (const std::exception& e) {
@@ -204,8 +204,8 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 			}
 		}
 	} catch (LuaTableKeyError& e) {
-		log_err_notimestamp("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
-		    e.what());
+		log_err_notimestamp("Launch Game: Error loading win condition: %s %s\n",
+		                    win_condition_script.c_str(), e.what());
 	}
 	if (!is_usable) {
 		t.reset(nullptr);

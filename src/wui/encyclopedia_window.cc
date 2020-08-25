@@ -132,7 +132,8 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			}
 		}
 	} catch (WException& err) {
-		log_err(parent.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n", err.what());
+		log_err(parent.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
+		        err.what());
 		UI::WLMessageBox wmb(
 		   &parent, _("Error!"),
 		   (boost::format("Error loading script for encyclopedia:\n%s") % err.what()).str(),

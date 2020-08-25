@@ -280,8 +280,9 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {
 		const Widelands::TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
-		log_info_notimestamp("\n\n=========================\nWriting tribe: %s\n=========================\n",
-		    tribe_info.name.c_str());
+		log_info_notimestamp(
+		   "\n\n=========================\nWriting tribe: %s\n=========================\n",
+		   tribe_info.name.c_str());
 
 		// Main file
 		JSON::Object* json_tribe = json_tribes_array->add_object();

@@ -182,11 +182,12 @@ void SpinBox::layout() {
 	}
 
 	if (unit_width_ < (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_)) {
-		log_warn_notimestamp("Not enough space to draw spinbox \"%s\".\n"
-		    "Width %d is smaller than required width %d."
-		    "Please report as a bug.\n",
-		    sbi_->label->get_text().c_str(), unit_width_,
-		    (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_));
+		log_warn_notimestamp(
+		   "Not enough space to draw spinbox \"%s\".\n"
+		   "Width %d is smaller than required width %d."
+		   "Please report as a bug.\n",
+		   sbi_->label->get_text().c_str(), unit_width_,
+		   (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_));
 	}
 
 	// 10 is arbitrary, the actual height will be set by the Multilinetextarea itself

@@ -133,8 +133,9 @@ SDL_GLContext initialize(
 	// coming from the gaphics drivers
 
 	if (err != GLEW_OK) {
-		log_err_notimestamp("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
-		    glewGetErrorString(err));
+		log_err_notimestamp(
+		   "glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
+		   glewGetErrorString(err));
 		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
 	}
 #endif
@@ -146,7 +147,7 @@ SDL_GLContext initialize(
 	{                                                                                               \
 		int value;                                                                                   \
 		SDL_GL_GetAttribute(x, &value);                                                              \
-		log_dbg_notimestamp("Graphics: %s is %d\n", #x, value);                                                      \
+		log_dbg_notimestamp("Graphics: %s is %d\n", #x, value);                                      \
 	}
 
 	LOG_SDL_GL_ATTRIBUTE(SDL_GL_RED_SIZE)
@@ -175,14 +176,16 @@ SDL_GLContext initialize(
 
 	GLboolean glBool;
 	glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
-	log_dbg_notimestamp("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
+	log_dbg_notimestamp(
+	   "Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
 
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, max_texture_size);
 	log_dbg_notimestamp("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
 
 	const char* const shading_language_version_string =
 	   reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
-	log_dbg_notimestamp("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
+	log_dbg_notimestamp(
+	   "Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
 
 	// Show a basic SDL window with an error message, and log it too, then exit 1. Since font support
 	// does not exist for all languages, we show both the original and a localized text.

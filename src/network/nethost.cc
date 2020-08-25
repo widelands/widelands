@@ -69,7 +69,8 @@ void NetHost::stop_listening() {
 	static const auto do_stop = [](boost::asio::ip::tcp::acceptor& acceptor) {
 		boost::system::error_code ec;
 		if (acceptor.is_open()) {
-			log_info_notimestamp("[NetHost] Closing a listening IPv%d socket.\n", get_ip_version(acceptor));
+			log_info_notimestamp(
+			   "[NetHost] Closing a listening IPv%d socket.\n", get_ip_version(acceptor));
 			acceptor.close(ec);
 		}
 		// Ignore errors

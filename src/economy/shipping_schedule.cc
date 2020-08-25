@@ -217,7 +217,7 @@ bool ShippingSchedule::do_remove_port_from_plan(Game& game,
 			}
 			if (closest) {
 				sslog("Ship %s is carrying %u items, rerouting to NEW destination %u\n",
-				    ship.get_shipname().c_str(), ship.get_nritems(), closest->serial());
+				      ship.get_shipname().c_str(), ship.get_nritems(), closest->serial());
 				ship_plan.push_back(SchedulingState(closest, false, dist));
 				ship.set_destination(game, closest);
 			} else {
@@ -225,8 +225,8 @@ bool ShippingSchedule::do_remove_port_from_plan(Game& game,
 				// But we might still have cargo!!! What should we do????
 				// Stay calm. Just do nothing. Nothing at all.
 				sslog("Ship %s is carrying %u items and there are no ports left, setting NO "
-				    "destination\n",
-				    ship.get_shipname().c_str(), ship.get_nritems());
+				      "destination\n",
+				      ship.get_shipname().c_str(), ship.get_nritems());
 				ship.set_destination(game, nullptr);
 			}
 		} else {  // the ships has more destinations in its plan, just reroute to the next one
@@ -1598,8 +1598,9 @@ Duration ShippingSchedule::update(Game& game) {
 void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
 	const long t = e.get_gametime();
 	for (const auto& plan : plans_) {
-		log_dbg(t, "· %s: carrying %u items (capacity %u)\n", plan.first.get(e)->get_shipname().c_str(),
-		    plan.first.get(e)->get_nritems(), plan.first.get(e)->get_capacity());
+		log_dbg(t, "· %s: carrying %u items (capacity %u)\n",
+		        plan.first.get(e)->get_shipname().c_str(), plan.first.get(e)->get_nritems(),
+		        plan.first.get(e)->get_capacity());
 		std::map<Serial, uint32_t> dests;
 		for (uint32_t i = plan.first.get(e)->get_nritems(); i; --i) {
 			const Serial si = plan.first.get(e)->get_item(i - 1).destination_dock_.serial();
@@ -1615,7 +1616,8 @@ void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
 		}
 		log_dbg(t, "  SCHEDULE: %" PRIuS " stations\n", plan.second.size());
 		for (const SchedulingState& ss : plan.second) {
-			log_dbg(t, "          · in %u ms at %u\n", ss.duration_from_previous_location, ss.dock.serial());
+			log_dbg(t, "          · in %u ms at %u\n", ss.duration_from_previous_location,
+			        ss.dock.serial());
 			log_dbg(t, "            load there: ");
 			if (ss.expedition) {
 				log_dbg(t, "expedition\n");

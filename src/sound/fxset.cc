@@ -109,6 +109,7 @@ void FXset::load_sound_file(const std::string& path) {
 		assert(m);
 		fxs_.push_back(m);
 	} else {
-		log_err_notimestamp("FXset: loading sound effect file \"%s\" failed: %s\n", path.c_str(), Mix_GetError());
+		log_err_notimestamp(
+		   "FXset: loading sound effect file \"%s\" failed: %s\n", path.c_str(), Mix_GetError());
 	}
 }

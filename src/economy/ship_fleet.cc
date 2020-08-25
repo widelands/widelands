@@ -162,8 +162,8 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 				// here might be a problem so I (tiborb) put here
 				// this test, might be removed after some time
 				if (dock->get_fleet() == nullptr) {
-					log_warn(egbase.get_gametime(), "The dock on %3dx%3d without a fleet!\n", dock->dockpoints_.front().x,
-					    dock->dockpoints_.front().y);
+					log_warn(egbase.get_gametime(), "The dock on %3dx%3d without a fleet!\n",
+					         dock->dockpoints_.front().x, dock->dockpoints_.front().y);
 				}
 				if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
 					return dock->get_fleet()->merge(egbase, this);
@@ -515,7 +515,8 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 			}
 
 			if (pd->get_fleet() && pd->get_fleet() != this) {
-				log_err(egbase.get_gametime(), "ShipFleet::connect_port: different fleets despite reachability\n");
+				log_err(egbase.get_gametime(),
+				        "ShipFleet::connect_port: different fleets despite reachability\n");
 				continue;
 			}
 
@@ -705,7 +706,8 @@ void ShipFleet::act(Game& game, uint32_t) {
 void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
-	molog(egbase.get_gametime(), "%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(), ports_.size());
+	molog(egbase.get_gametime(), "%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(),
+	      ports_.size());
 	molog(egbase.get_gametime(), "Schedule:\n");
 	schedule_.log_general_info(egbase);
 	molog(egbase.get_gametime(), "\n");

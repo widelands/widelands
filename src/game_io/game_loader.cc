@@ -86,7 +86,8 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	log_info(game_.get_gametime(), "Game: Reading Map Data ... ");
 	GameMapPacket map_packet;
 	map_packet.read(fs_, game_);
-	log_info(game_.get_gametime(), "Game: Reading Map Data took %ums\n", timer.ms_since_last_query());
+	log_info(
+	   game_.get_gametime(), "Game: Reading Map Data took %ums\n", timer.ms_since_last_query());
 
 	// This has to be loaded after the map packet so that the map's filesystem will exist.
 	// The custom tribe scripts are saved when the map scripting packet is saved, but we need
@@ -95,7 +96,8 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	if (map_fs->file_exists("scripting/tribes")) {
 		log_info(game_.get_gametime(), "Game: Reading Scenario Tribes ... ");
 		game_.mutable_tribes()->register_scenario_tribes(map_fs);
-		log_info(game_.get_gametime(), "Game: Reading Scenario Tribes took %ums\n", timer.ms_since_last_query());
+		log_info(game_.get_gametime(), "Game: Reading Scenario Tribes took %ums\n",
+		         timer.ms_since_last_query());
 	}
 
 	// This also triggers loading the world and tribes, so we need a newline at the end of the log
@@ -105,7 +107,8 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		GamePlayerInfoPacket p;
 		p.read(fs_, game_);
 	}
-	log_info(game_.get_gametime(), "Game: Reading Player Info took %ums\n", timer.ms_since_last_query());
+	log_info(
+	   game_.get_gametime(), "Game: Reading Player Info took %ums\n", timer.ms_since_last_query());
 
 	log_info(game_.get_gametime(), "Game: Calling read_complete()\n");
 	map_packet.read_complete(game_);

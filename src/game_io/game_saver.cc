@@ -80,7 +80,8 @@ void GameSaver::save() {
 	log_info(game_.get_gametime(), "Game: Writing Map Data!\n");
 	GameMapPacket map_packet;
 	map_packet.write(fs_, game_, nullptr);
-	log_info(game_.get_gametime(), "Game: Writing Map Data took %ums\n", timer.ms_since_last_query());
+	log_info(
+	   game_.get_gametime(), "Game: Writing Map Data took %ums\n", timer.ms_since_last_query());
 
 	MapObjectSaver* const mos = map_packet.get_map_object_saver();
 
