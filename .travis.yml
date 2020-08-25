@@ -83,9 +83,14 @@ jobs:
     ### Building on the oldest and newest gcc
     - stage: testsuite
     ### RELEASE BUILDS
-      name: "RELEASE: gcc 5"
+      name: "RELEASE: clang 5"
+      dist: trusty
+      compiler: clang
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
-      services: xvfb
+      before_script:
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
+        - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
 
     - name: "RELEASE: gcc 10"
       dist: focal
@@ -110,9 +115,14 @@ jobs:
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=gcc-10 CXX=g++-10
       services: xvfb
     ### DEBUG BUILDS
-    - name: "DEBUG: gcc 5"
+    - name: "DEBUG: clang 5"
+      dist: trusty
+      compiler: clang
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
-      services: xvfb
+      before_script:
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
+        - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
 
     - name: "DEBUG: gcc 10"
       dist: focal
@@ -140,14 +150,9 @@ jobs:
     ### Build on remaining Linux configurations, with translations off
     - stage: build
     ### RELEASE BUILDS
-      name: "RELEASE: clang 5"
-      dist: trusty
-      compiler: clang
+      name: "RELEASE: gcc 5"
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
-      before_script:
-        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
-        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
-        - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
+      services: xvfb
 
     - name: "RELEASE: clang 7"
       dist: bionic
@@ -224,14 +229,9 @@ jobs:
       services: xvfb
 
     ### DEBUG BUILDS
-    - name: "DEBUG: clang 5"
-      dist: trusty
-      compiler: clang
+    - name: "DEBUG: gcc 5"
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
-      before_script:
-        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
-        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
-        - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
+      services: xvfb
 
     - name: "DEBUG: clang 7"
       dist: bionic
