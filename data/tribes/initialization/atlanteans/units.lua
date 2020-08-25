@@ -542,6 +542,19 @@ tribes:new_tribe {
       "atlanteans_resi_gold_2",
       "atlanteans_resi_stones_2",
       "atlanteans_shipconstruction",
+      -- non atlantean Immovables used by the woodcutter
+      "ironwood_amazons_old",
+      "ironwood_black_amazons_old",
+      "ironwood_desert_amazons_old",
+      "ironwood_winter_amazons_old",
+      "balsa_amazons_old",
+      "balsa_black_amazons_old",
+      "balsa_desert_amazons_old",
+      "balsa_winter_amazons_old",
+      "rubber_amazons_old",
+      "rubber_black_amazons_old",
+      "rubber_desert_amazons_old",
+      "rubber_winter_amazons_old",
    },
 
    -- The order here also determines the order in lists on screen.
