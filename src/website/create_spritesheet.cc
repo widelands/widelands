@@ -26,6 +26,7 @@
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
 #include "graphic/animation/animation_manager.h"
+#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "io/filesystem/filesystem.h"
