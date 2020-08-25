@@ -1,8 +1,5 @@
 dirname = path.dirname(__file__)
 
-animations = {}
-add_animation(animations, "idle", dirname, "idle", {6, 6})
-
 tribes:new_ware_type {
    msgctxt = "ware",
    name = "rubber",

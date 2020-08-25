@@ -480,9 +480,8 @@ tribes:new_tribe {
       },
       {
          -- Military
-         { name = "aamazons_recruit" },
          {
-            name = "amazons_soldier_soldier",
+            name = "amazons_soldier",
             default_target_quantity = 10,
             preciousness = 5
          },
