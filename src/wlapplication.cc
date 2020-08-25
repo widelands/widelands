@@ -1174,21 +1174,15 @@ void WLApplication::mainmenu() {
 				break;
 			case FullscreenMenuBase::MenuTarget::kNewGame:
 				need_to_reset = true;
-				if (new_game()) {
-					return;
-				}
+				new_game();
 				break;
 			case FullscreenMenuBase::MenuTarget::kLoadGame:
 				need_to_reset = true;
-				if (load_game()) {
-					return;
-				}
+				load_game();
 				break;
 			case FullscreenMenuBase::MenuTarget::kCampaign:
 				need_to_reset = true;
-				if (campaign_game()) {
-					return;
-				}
+				campaign_game();
 				break;
 			case FullscreenMenuBase::MenuTarget::kMetaserver:
 				need_to_reset = true;
