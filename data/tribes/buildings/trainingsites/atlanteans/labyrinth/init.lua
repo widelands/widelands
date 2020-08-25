@@ -65,7 +65,6 @@ tribes:new_trainingsite_type {
    ["soldier health"] = {
       food = {
          {"smoked_fish", "smoked_meat"},
-         {"atlanteans_bread"}
       },
       weapons = {
          "tabard_golden"
@@ -74,6 +73,7 @@ tribes:new_trainingsite_type {
    ["soldier evade"] = {
       food = {
          {"smoked_fish", "smoked_meat"}
+         {"atlanteans_bread"}
       }
    },
 
