@@ -350,6 +350,10 @@ void Bob::reset_tasks(Game& game) {
 		do_pop_task(game);
 	}
 
+	if (game.objects().is_cleaning_up()) {
+		return;
+	}
+
 	signal_.clear();
 
 	++actid_;

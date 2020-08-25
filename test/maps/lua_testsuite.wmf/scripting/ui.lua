@@ -26,80 +26,6 @@ function ui_tests:test_buttons_property()
    assert_not_nil(self.mv.buttons.help)
 end
 
-function ui_tests:test_window_property()
-   -- No window to start with
-   assert_equal(0, self:_cnt(self.mv.windows))
-
-   self.mv.buttons.messages:click()
-   assert_equal(1, self:_cnt(self.mv.windows))
-
-   assert_not_nil(self.mv.windows.messages)
-end
-
-function ui_tests:test_window_property1()
-   assert_equal(0, self:_cnt(self.mv.windows))
-
-   self.mv.buttons.objectives:click()
-   assert_equal(1, self:_cnt(self.mv.windows))
-
-   assert_not_nil(self.mv.windows.objectives)
-   assert_nil(self.mv.windows.messages)
-end
-
-function ui_tests:test_position_x()
-   self.mv.buttons.messages:click()
-   local w = self.mv.windows.messages
-
-   w.position_x = 50
-   assert_equal(50, w.position_x)
-end
-function ui_tests:test_position_y()
-   self.mv.buttons.messages:click()
-   local w = self.mv.windows.messages
-
-   w.position_y = 60
-   assert_equal(60, w.position_y)
-end
-
-function ui_tests:test_descendant_position()
-   self.mv.buttons.messages:click()
-   local w = self.mv.windows.messages
-   local b = w.buttons.toggle_between_inbox_or_archive
-
-   w.position_x = 50
-   w.position_y = 50
-
-   local abs_x, abs_y = self.mv:get_descendant_position(b)
-
-   assert_equal(w.position_x + b.position_x, abs_x)
-   assert_equal(w.position_y + b.position_y, abs_y)
-end
-
-function ui_tests:test_descendant_position_not_child()
-   self.mv.buttons.messages:click()
-   local w = self.mv.windows.messages
-   local b = self.mv.buttons.help
-
-   assert_error("Not a descendant!", function()
-      w:get_descendant_position(b)
-   end)
-end
-
-function ui_tests:test_width(x)
-   self.mv.buttons.messages:click()
-   local w = self.mv.windows.messages
-
-   w.width = 300
-   assert_equal(300, w.width)
-end
-function ui_tests:test_height(x)
-   self.mv.buttons.messages:click()
-   local w = self.mv.windows.messages
-
-   w.height = 200
-   assert_equal(200, w.height)
-end
-
 -- ========
 -- Buttons
 -- ========
@@ -111,11 +37,6 @@ end
 
 function button_tests:test_name()
    assert_equal("help", self.b.name)
-end
-function button_tests:test_click()
-   self.b:click()
-
-   assert_not_nil(wl.ui.MapView().windows.encyclopedia)
 end
 
 -- =========
@@ -181,8 +102,8 @@ function mv_tests:test_statistics()
 end
 
 
--- =========
--- Dropdowns
--- =========
+-- =============================
+-- Dropdowns and toolbar buttons
+-- =============================
 
---[[Dropdowns are tested in plain.wmf/test_ui.lua, because we need to call sleep()]]
+--[[These are tested in plain.wmf/test_ui.lua, because we need to call sleep()]]

@@ -222,8 +222,8 @@ void GameDetails::layout() {
 		   std::min(1.f, std::min<float>(available_width / minimap_image_->width(),
 		                                 available_height / minimap_image_->height()));
 
-		const int w = scale * minimap_image_->width();
-		const int h = scale * minimap_image_->height();
+		const int w = std::max<int>(0, scale * minimap_image_->width());
+		const int h = std::max<int>(0, scale * minimap_image_->height());
 
 		// Center the minimap in the available space
 		const int xpos = (get_w() - w) / 2;
