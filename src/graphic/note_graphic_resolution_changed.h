@@ -23,7 +23,7 @@
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
-// Will be send whenever the resolution changes.
+// Will be sent whenever the resolution changes.
 struct GraphicResolutionChanged {
 	CAN_BE_SENT_AS_NOTE(NoteId::GraphicResolutionChanged)
 
