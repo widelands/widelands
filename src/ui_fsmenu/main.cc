@@ -80,63 +80,26 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                   UI::DropdownType::kTextualMenu,
                   UI::PanelStyle::kFsMenu,
                   UI::ButtonStyle::kFsMenuMenu),
-     replay_(&vbox1_,
-             "replay",
-             0,
-             0,
-             butw_,
-             buth_,
-             UI::ButtonStyle::kFsMenuMenu, ""),
-     editor_(&vbox1_,
-             "editor",
-             0,
-             0,
-             butw_,
-             buth_,
-             UI::ButtonStyle::kFsMenuMenu,
-             ""),
-     addons_(&vbox2_,
-             "addons",
-             0,
-             0,
-             butw_,
-             buth_,
-             UI::ButtonStyle::kFsMenuMenu,
-             ""),
-     options_(&vbox2_,
-              "options",
+     replay_(&vbox1_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
+     editor_(&vbox1_, "editor", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
+     addons_(&vbox2_, "addons", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
+     options_(&vbox2_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
+     about_(&vbox2_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
+     exit_(&vbox2_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
+     version_(this,
               0,
               0,
-              butw_,
-              buth_,
-              UI::ButtonStyle::kFsMenuMenu,
-              ""),
-     about_(&vbox2_,
-            "about",
-            0,
-            0,
-            butw_,
-            buth_,
-            UI::ButtonStyle::kFsMenuMenu,
-            ""),
-     exit_(&vbox2_,
-           "exit",
-           0,
-           0,
-           butw_,
-           buth_,
-           UI::ButtonStyle::kFsMenuMenu,
-           ""),
-     version_(
-        this,
-        0,
-        0,
-        0,
-        0,
-        "",
-                UI::Align::kCenter,
-                g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
-     copyright_(this, 0, 0, 0, 0, "",
+              0,
+              0,
+              "",
+              UI::Align::kCenter,
+              g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
+     copyright_(this,
+                0,
+                0,
+                0,
+                0,
+                "",
                 UI::Align::kCenter,
                 g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
      splashscreen_(*g_gr->images().get("images/loadscreens/splash.jpg")),
@@ -228,45 +191,47 @@ void FullscreenMenuMain::set_labels() {
 		SavegameData* newest_singleplayer = nullptr;
 		for (SavegameData& data : games) {
 			if (!data.is_directory() && data.is_singleplayer() &&
-				(newest_singleplayer == nullptr || newest_singleplayer->compare_save_time(data))) {
+			    (newest_singleplayer == nullptr || newest_singleplayer->compare_save_time(data))) {
 				newest_singleplayer = &data;
 			}
 		}
 		if (newest_singleplayer) {
 			filename_for_continue_ = newest_singleplayer->filename;
-			singleplayer_.add(_("Continue Playing"), FullscreenMenuBase::MenuTarget::kContinueLastsave,
-				              nullptr, false,
+			singleplayer_.add(
+			   _("Continue Playing"), FullscreenMenuBase::MenuTarget::kContinueLastsave, nullptr,
+			   false,
 			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>") %
-				g_gr->styles()
-				   .font_style(UI::FontStyle::kTooltipHeader)
-				   .as_font_tag(
-				      /* strip leading "save/" and trailing ".wgf" */
-				      filename_for_continue_.substr(
-				         kSaveDir.length() + 1, filename_for_continue_.length() - kSaveDir.length() -
-				                                   kSavegameExtension.length() - 1)) %
-				(boost::format(_("Map: %s")) % g_gr->styles()
-				                                  .font_style(UI::FontStyle::kTooltip)
-				                                  .as_font_tag(newest_singleplayer->mapname))
-				   .str() %
-				(boost::format(_("Win Condition: %s")) %
-				 g_gr->styles()
-				    .font_style(UI::FontStyle::kTooltip)
-				    .as_font_tag(newest_singleplayer->wincondition))
-				   .str() %
-				(boost::format(_("Players: %s")) % g_gr->styles()
-				                                      .font_style(UI::FontStyle::kTooltip)
-				                                      .as_font_tag(newest_singleplayer->nrplayers))
-				   .str() %
-				(boost::format(_("Gametime: %s")) % g_gr->styles()
-				                                       .font_style(UI::FontStyle::kTooltip)
-				                                       .as_font_tag(newest_singleplayer->gametime))
-				   .str() %
-				/** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
-				(boost::format(_("Saved: %s")) % g_gr->styles()
-				                                    .font_style(UI::FontStyle::kTooltip)
-				                                    .as_font_tag(newest_singleplayer->savedatestring))
-				   .str())
-				  .str(), "C");
+			    g_gr->styles()
+			       .font_style(UI::FontStyle::kTooltipHeader)
+			       .as_font_tag(
+			          /* strip leading "save/" and trailing ".wgf" */
+			          filename_for_continue_.substr(
+			             kSaveDir.length() + 1, filename_for_continue_.length() - kSaveDir.length() -
+			                                       kSavegameExtension.length() - 1)) %
+			    (boost::format(_("Map: %s")) % g_gr->styles()
+			                                      .font_style(UI::FontStyle::kTooltip)
+			                                      .as_font_tag(newest_singleplayer->mapname))
+			       .str() %
+			    (boost::format(_("Win Condition: %s")) %
+			     g_gr->styles()
+			        .font_style(UI::FontStyle::kTooltip)
+			        .as_font_tag(newest_singleplayer->wincondition))
+			       .str() %
+			    (boost::format(_("Players: %s")) % g_gr->styles()
+			                                          .font_style(UI::FontStyle::kTooltip)
+			                                          .as_font_tag(newest_singleplayer->nrplayers))
+			       .str() %
+			    (boost::format(_("Gametime: %s")) % g_gr->styles()
+			                                           .font_style(UI::FontStyle::kTooltip)
+			                                           .as_font_tag(newest_singleplayer->gametime))
+			       .str() %
+			    /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
+			    (boost::format(_("Saved: %s")) % g_gr->styles()
+			                                        .font_style(UI::FontStyle::kTooltip)
+			                                        .as_font_tag(newest_singleplayer->savedatestring))
+			       .str())
+			      .str(),
+			   "C");
 		}
 	}
 
@@ -290,24 +255,26 @@ void FullscreenMenuMain::set_labels() {
 	editor_.set_title(_("Editor"));
 	editor_.set_tooltip(as_tooltip_text_with_hotkey(_("Launch the map editor"), "E"));
 	addons_.set_title(_("Add-Ons"));
-	addons_.set_tooltip(as_tooltip_text_with_hotkey(_("This feature is still under development"), "A"));
+	addons_.set_tooltip(
+	   as_tooltip_text_with_hotkey(_("This feature is still under development"), "A"));
 	options_.set_title(_("Options"));
 	options_.set_tooltip(as_tooltip_text_with_hotkey(_("Technical and game-related settings"), "O"));
 	about_.set_title(_("About Widelands"));
-	about_.set_tooltip(as_tooltip_text_with_hotkey(_("Readme, License, and Credits"), pgettext("hotkey", "F1")));
+	about_.set_tooltip(
+	   as_tooltip_text_with_hotkey(_("Readme, License, and Credits"), pgettext("hotkey", "F1")));
 	exit_.set_title(_("Exit Widelands"));
 	exit_.set_tooltip(as_tooltip_text_with_hotkey(
-              _("You do not want to press this button"), pgettext("hotkey", "Esc")));
+	   _("You do not want to press this button"), pgettext("hotkey", "Esc")));
 
 	version_.set_text(
-	/** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
-        (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str());
+	   /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
+	   (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str());
 	copyright_.set_text(
 	   /** TRANSLATORS: Placeholders are the copyright years */
-                (boost::format(_("(C) %1%-%2% by the Widelands Development Team · Licensed under "
-                                 "the GNU General Public License V2.0")) %
-                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
-                   .str());
+	   (boost::format(_("(C) %1%-%2% by the Widelands Development Team · Licensed under "
+	                    "the GNU General Public License V2.0")) %
+	    kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
+	      .str());
 }
 
 void FullscreenMenuMain::set_button_visibility(const bool v) {
