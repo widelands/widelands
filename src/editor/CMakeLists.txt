@@ -2,6 +2,8 @@ wl_library(editor
   SRCS
     editorinteractive.cc
     editorinteractive.h
+    editor_category.cc
+    editor_category.h
     map_generator.cc
     map_generator.h
     tools/action_args.h
@@ -92,6 +94,7 @@ wl_library(editor
     base_log
     base_macros
     base_random
+    base_scoped_timer
     graphic
     graphic_fonthandler
     graphic_mouse_cursor
@@ -101,9 +104,11 @@ wl_library(editor
     io_filesystem
     logic
     logic_constants
+    logic_exceptions
     logic_filesystem_constants
     logic_generic_save_handler
     logic_map
+    logic_map_object_type
     logic_map_objects
     logic_map_objects_description_maintainer
     logic_tribe_basic_info

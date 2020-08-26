@@ -25,8 +25,11 @@
 --
 --            descname = _"Badger",
 --
+--    **animation_directory**
+--        *Mandatory*. The location of the animation png files.
+--
 --    **editor_category**
---        *Mandatory*. The category that is used in the editor tools for placing a critter of this type on the map, e.g.::
+--        *Deprecated*. The category that is used in the editor tools for placing a critter of this type on the map, e.g.::
 --
 --            editor_category = "critters_carnivores",
 --
@@ -71,12 +74,11 @@
 --        *Mandatory*. A table containing all animations for this critter. Every critter
 --        needs to have an ``idle`` and a directional ``walk`` animation. Herbivores and carnivores additionally need an ``eating`` animation.
 --        See :doc:`animations` for a detailed description of the animation format.
-world:new_critter_type{
+
+wl.World():new_critter_type{
    name = "badger",
    descname = _ "Badger",
    animation_directory = path.dirname(__file__),
-   editor_category = "critters_carnivores",
-   attributes = { "eatable" },
    programs = {
       remove = { "remove" },
    },
