@@ -41,7 +41,7 @@ namespace {
 
 constexpr int kMarginX = 4;
 constexpr int kLineMargin = 1;
-bool inline ctrl() {
+bool inline copy_paste_modifier() {
 #ifdef __APPLE__
 	return SDL_GetModState() & KMOD_GUI;
 #endif
@@ -223,7 +223,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_v:
-			if (ctrl() && SDL_HasClipboardText()) {
+			if (copy_paste_modifier() && SDL_HasClipboardText()) {
 				if (m_->mode == EditBoxImpl::Mode::kSelection) {
 					delete_selected_text();
 				}
@@ -232,14 +232,14 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return false;
 		case SDLK_c:
-			if (ctrl() && m_->mode == EditBoxImpl::Mode::kSelection) {
+			if (copy_paste_modifier() && m_->mode == EditBoxImpl::Mode::kSelection) {
 				copy_selected_text();
 				return true;
 			}
 			return false;
 
 		case SDLK_a:
-			if (ctrl()) {
+			if (copy_paste_modifier()) {
 				m_->selection_start = 0;
 				m_->selection_end = m_->text.size();
 				m_->mode = EditBoxImpl::Mode::kSelection;
@@ -247,7 +247,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return false;
 		case SDLK_x:
-			if (ctrl() && m_->mode == EditBoxImpl::Mode::kSelection) {
+			if (copy_paste_modifier() && m_->mode == EditBoxImpl::Mode::kSelection) {
 				copy_selected_text();
 				delete_selected_text();
 			}

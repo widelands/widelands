@@ -29,7 +29,7 @@
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 namespace {
-bool inline ctrl() {
+bool inline copy_paste_modifier() {
 #ifdef __APPLE__
 	return SDL_GetModState() & KMOD_GUI;
 #endif
@@ -265,7 +265,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_v:
-			if (ctrl() && SDL_HasClipboardText()) {
+			if (copy_paste_modifier() && SDL_HasClipboardText()) {
 				if (d_->mode == Data::Mode::kSelection) {
 					delete_selected_text();
 				}
@@ -274,13 +274,13 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return false;
 		case SDLK_c:
-			if (ctrl() && d_->mode == Data::Mode::kSelection) {
+			if (copy_paste_modifier() && d_->mode == Data::Mode::kSelection) {
 				copy_selected_text();
 				return true;
 			}
 			return false;
 		case SDLK_a:
-			if (ctrl()) {
+			if (copy_paste_modifier()) {
 				d_->selection_start = 0;
 				d_->selection_end = d_->text.size();
 				d_->mode = Data::Mode::kSelection;
@@ -288,7 +288,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return false;
 		case SDLK_x:
-			if (ctrl() && d_->mode == Data::Mode::kSelection) {
+			if (copy_paste_modifier() && d_->mode == Data::Mode::kSelection) {
 				copy_selected_text();
 				delete_selected_text();
 				return true;
