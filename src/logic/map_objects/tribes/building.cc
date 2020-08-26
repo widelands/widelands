@@ -340,28 +340,25 @@ void Building::load_finish(EditorGameBase& egbase) {
 		OPtr<PlayerImmovable> const worker_location = worker.get_location();
 		if (worker_location.serial() != serial() &&
 		    worker_location.serial() != base_flag().serial()) {
-			log_warn(
-			              "worker %u is in the leave queue of building %u with "
-			              "base flag %u but is neither inside the building nor at the "
-			              "flag!\n",
-			              worker.serial(), serial(), base_flag().serial());
+			log_warn("worker %u is in the leave queue of building %u with "
+			         "base flag %u but is neither inside the building nor at the "
+			         "flag!\n",
+			         worker.serial(), serial(), base_flag().serial());
 			return true;
 		}
 
 		Bob::State const* const state = worker.get_state(Worker::taskLeavebuilding);
 		if (!state) {
-			log_warn(
-			              "worker %u is in the leave queue of building %u but "
-			              "does not have a leavebuilding task! Removing from queue.\n",
-			              worker.serial(), serial());
+			log_warn("worker %u is in the leave queue of building %u but "
+			         "does not have a leavebuilding task! Removing from queue.\n",
+			         worker.serial(), serial());
 			return true;
 		}
 
 		if (state->objvar1 != this) {
-			log_warn(
-			              "worker %u is in the leave queue of building %u but its "
-			              "leavebuilding task is for map object %u! Removing from queue.\n",
-			              worker.serial(), serial(), state->objvar1.serial());
+			log_warn("worker %u is in the leave queue of building %u but its "
+			         "leavebuilding task is for map object %u! Removing from queue.\n",
+			         worker.serial(), serial(), state->objvar1.serial());
 			return true;
 		}
 		return false;

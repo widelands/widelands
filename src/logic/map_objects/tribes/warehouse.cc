@@ -508,12 +508,12 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 				   schedule_act(dynamic_cast<Game&>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 			}
 			next_worker_without_cost_spawn_[i] = next_spawn;
-			log_warn(
-			   "player %u is allowed to create worker type %s but his "
-			   "%s %u at (%i, %i) does not have a next_spawn time set for that "
-			   "worker type; setting it to %u\n",
-			   owner().player_number(), owner().tribe().get_worker_descr(worker_index)->name().c_str(),
-			   descr().name().c_str(), serial(), get_position().x, get_position().y, next_spawn);
+			log_warn("player %u is allowed to create worker type %s but his "
+			         "%s %u at (%i, %i) does not have a next_spawn time set for that "
+			         "worker type; setting it to %u\n",
+			         owner().player_number(),
+			         owner().tribe().get_worker_descr(worker_index)->name().c_str(),
+			         descr().name().c_str(), serial(), get_position().x, get_position().y, next_spawn);
 		}
 	}
 

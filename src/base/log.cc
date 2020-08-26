@@ -166,7 +166,7 @@ static const char* to_string(const LogType& type) {
 
 std::vector<std::string> split(std::string s) {
 	/* if (s[s.length() - 1] == '\n') {
-		s.pop_back();
+	   s.pop_back();
 	} */
 	std::vector<std::string> result;
 	for (std::string::size_type pos = 0, endpos;

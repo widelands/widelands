@@ -78,10 +78,9 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 						if (tribe.has_building(index)) {
 							player->allow_building_type(index, allowed);
 						} else {
-							log_warn(
-							              "MapAllowedBuildingTypesPacket - tribe %s does not define "
-							              "building type \"%s\"\n",
-							              tribe.name().c_str(), name);
+							log_warn("MapAllowedBuildingTypesPacket - tribe %s does not define "
+							         "building type \"%s\"\n",
+							         tribe.name().c_str(), name);
 						}
 					}
 				} catch (const WException& e) {

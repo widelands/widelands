@@ -47,8 +47,8 @@ void MapResourcesPacket::read(FileSystem& fs,
 		if (packet_version == kCurrentPacketVersion) {
 			int32_t const nr_res = fr.unsigned_16();
 			if (world.get_nr_resources() < nr_res) {
-				log_warn("Number of resources in map (%i) is bigger than in world (%i)",
-				         nr_res, world.get_nr_resources());
+				log_warn("Number of resources in map (%i) is bigger than in world (%i)", nr_res,
+				         world.get_nr_resources());
 			}
 
 			// construct ids and map

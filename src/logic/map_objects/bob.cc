@@ -1056,9 +1056,8 @@ void Bob::Loader::load(FileRead& fr) {
 				bob.anim_ = bob.descr().get_animation(animname, &bob);
 			} else {
 				bob.anim_ = bob.descr().main_animation();
-				log_warn(
-				              "Unknown animation '%s' for bob '%s', using main animation instead.\n",
-				              animname.c_str(), bob.descr().name().c_str());
+				log_warn("Unknown animation '%s' for bob '%s', using main animation instead.\n",
+				         animname.c_str(), bob.descr().name().c_str());
 			}
 
 			bob.animstart_ = fr.signed_32();
