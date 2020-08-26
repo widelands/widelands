@@ -1470,8 +1470,8 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
 		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
 		log_warn("Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
-		    "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
-		    descr->name().c_str());
+		         "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
+		         descr->name().c_str());
 		resource_ = world.load_resource(arguments.front());
 		workarea_ = read_positive(arguments.at(1));
 		max_resources_ = read_positive(arguments.at(2)) * 100U;
