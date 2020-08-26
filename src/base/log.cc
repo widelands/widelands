@@ -205,7 +205,7 @@ void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt,
 		if (str.find_first_not_of(' ') == std::string::npos) {
 			continue;
 		}
-		if (gametime != kNoTimestamp) {
+		if (gametime != kNoTimestamp && gametime > 0) {
 			logger->log_cstring(buffer_timestamp);
 		}
 		logger->log_cstring(buffer_prefix);
