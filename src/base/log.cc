@@ -179,7 +179,7 @@ void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt,
 
 	// message type
 	char buffer_prefix[8];
-	sprintf(buffer_prefix, "%s", to_string(type));
+	snprintf(buffer_prefix, sizeof(buffer_prefix), "%s", to_string(type));
 	char buffer_timestamp[32];
 	if (gametime != kNoTimestamp && gametime > 0) {  // timestamp
 		const uint32_t hours = gametime / (1000 * 60 * 60);
@@ -189,7 +189,7 @@ void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt,
 		const uint32_t seconds = gametime / 1000;
 		gametime -= seconds * 1000;
 
-		sprintf(buffer_timestamp, "%u:%02u:%02u.%03u ", hours, minutes, seconds, gametime);
+		snprintf(buffer_timestamp, sizeof(buffer_timestamp), "%u:%02u:%02u.%03u ", hours, minutes, seconds, gametime);
 	}
 
 	// actual log output
