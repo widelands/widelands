@@ -72,7 +72,7 @@ tribes:new_trainingsite_type {
    },
    ["soldier evade"] = {
       food = {
-         {"smoked_fish", "smoked_meat"}
+         {"smoked_fish", "smoked_meat"},
          {"atlanteans_bread"}
       }
    },
