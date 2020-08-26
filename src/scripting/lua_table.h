@@ -42,14 +42,7 @@ public:
 /// they return a Lua table with (string,value) pairs.
 class LuaTable {
 public:
-	enum class DataType {
-		kError,
-		kBoolean,
-		kFunction,
-		kNumber,
-		kString,
-		kTable
-	};
+	enum class DataType { kError, kBoolean, kFunction, kNumber, kString, kTable };
 
 	explicit LuaTable(lua_State* L);
 

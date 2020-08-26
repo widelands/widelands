@@ -136,30 +136,33 @@ std::map<std::string, std::string> read_helptexts(const Widelands::MapObjectDesc
 	std::map<std::string, std::string> result;
 	if (table.has_key(descr->name())) {
 		std::unique_ptr<LuaTable> helptext_table = table.get_table(descr->name());
-			for (const std::string& category_key : helptext_table->keys<std::string>()) {
-				LuaTable::DataType datatype = helptext_table->get_datatype(category_key);
-				switch (datatype) {
-				case LuaTable::DataType::kString: {
-					result[category_key] = helptext_table->get_string(category_key);
-				} break;
-				case LuaTable::DataType::kTable: {
-					// Concatenate text from entries with the localized sentence joiner
-					std::unique_ptr<LuaTable> category_table = helptext_table->get_table(category_key);
-					std::set<int> helptext_keys = category_table->keys<int>();
-					if (!helptext_keys.empty()) {
-						auto it = helptext_keys.begin();
-						std::string helptext = category_table->get_string(*it).c_str();
-						++it;
-						for (; it != helptext_keys.end(); ++it) {
-							helptext = i18n::join_sentences(helptext, category_table->get_string(*it).c_str());
-						}
-						result[category_key] = helptext;
-					} else {
-						log("WARNING: Empty helptext defined for '%s'\n", descr->name().c_str());
+		for (const std::string& category_key : helptext_table->keys<std::string>()) {
+			LuaTable::DataType datatype = helptext_table->get_datatype(category_key);
+			switch (datatype) {
+			case LuaTable::DataType::kString: {
+				result[category_key] = helptext_table->get_string(category_key);
+			} break;
+			case LuaTable::DataType::kTable: {
+				// Concatenate text from entries with the localized sentence joiner
+				std::unique_ptr<LuaTable> category_table = helptext_table->get_table(category_key);
+				std::set<int> helptext_keys = category_table->keys<int>();
+				if (!helptext_keys.empty()) {
+					auto it = helptext_keys.begin();
+					std::string helptext = category_table->get_string(*it).c_str();
+					++it;
+					for (; it != helptext_keys.end(); ++it) {
+						helptext =
+						   i18n::join_sentences(helptext, category_table->get_string(*it).c_str());
 					}
-				} break;
-				default:
-					log("WARNING: Wrong helptext data type for '%s', category '%s'. Expecting a table or a string.\n", descr->name().c_str(), category_key.c_str());
+					result[category_key] = helptext;
+				} else {
+					log("WARNING: Empty helptext defined for '%s'\n", descr->name().c_str());
+				}
+			} break;
+			default:
+				log("WARNING: Wrong helptext data type for '%s', category '%s'. Expecting a table or a "
+				    "string.\n",
+				    descr->name().c_str(), category_key.c_str());
 			}
 		}
 	} else {
