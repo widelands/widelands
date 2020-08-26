@@ -789,6 +789,10 @@ void GameHost::think() {
 						throw wexception(
 						   "PThread creation for AI no. %" PRIuS " failed with error code %d", i, e);
 					}
+					if (int e = pthread_detach(threads_[i].thread_id)) {
+						throw wexception(
+						   "PThread detaching for AI no. %" PRIuS " failed with error code %d", i, e);
+					}
 				}
 			}
 		}

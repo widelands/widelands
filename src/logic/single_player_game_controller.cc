@@ -88,6 +88,10 @@ void SinglePlayerGameController::think() {
 					throw wexception("PThread creation for AI %u failed with error code %d",
 					                 static_cast<unsigned>(p), i);
 				}
+				if (int i = pthread_detach(computerplayers_[p - 1]->thread_id)) {
+					throw wexception("PThread detaching for AI %u failed with error code %d",
+					                 static_cast<unsigned>(p), i);
+				}
 			}
 		}
 	}

@@ -215,6 +215,9 @@ int Panel::do_run() {
 	if (int i = pthread_create(&thread, NULL, &Panel::runthread, this)) {
 		throw wexception("PThread creation for Panel failed with error code %d", i);
 	}
+	if (int i = pthread_detach(thread)) {
+		throw wexception("PThread detaching for Panel failed with error code %d", i);
+	}
 
 	MutexLockHandler& mutex_handler = MutexLockHandler::push();
 
