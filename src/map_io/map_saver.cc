@@ -196,7 +196,8 @@ void MapSaver::save() {
 					log_info_time(egbase_.get_gametime(), "Writing Allowed Building Types Data ... ");
 					MapAllowedBuildingTypesPacket p;
 					p.write(fs_, egbase_, *mos_);
-					log_info_time(egbase_.get_gametime(), " → took %ums\n ", timer.ms_since_last_query());
+					log_info_time(
+					   egbase_.get_gametime(), " → took %ums\n ", timer.ms_since_last_query());
 					goto end_find_a_forbidden_building_type_loop;
 				}
 			}
