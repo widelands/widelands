@@ -34,7 +34,6 @@
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warelist.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
@@ -708,10 +707,8 @@ const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tr
 	if (!tribes.tribe_exists(tribename)) {
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}
-	Notifications::publish(
-	   NoteMapObjectDescription(tribename, NoteMapObjectDescription::LoadType::kObject));
-
-	return *tribes.get_tribe_descr(tribes.tribe_index(tribename));
+	return *get_egbase(L).tribes().get_tribe_descr(
+	   get_egbase(L).mutable_tribes()->load_tribe(tribename));
 }
 
 }  // namespace
@@ -827,6 +824,8 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case MapObjectType::TRAININGSITE:
 		return CAST_TO_LUA(TrainingSite);
 	case MapObjectType::MAPOBJECT:
+	case MapObjectType::RESOURCE:
+	case MapObjectType::TERRAIN:
 	case MapObjectType::BATTLE:
 	case MapObjectType::BOB:
 	case MapObjectType::SHIP_FLEET:
@@ -1493,8 +1492,15 @@ int LuaMap::place_immovable(lua_State* const L) {
 		}
 	}
 
-	EditorGameBase& egbase = get_egbase(L);
+	// The immovable type might not have been loaded yet
+	try {
+		Notifications::publish(
+		   NoteMapObjectDescription(objname, NoteMapObjectDescription::LoadType::kObject));
+	} catch (const Widelands::GameDataError&) {
+		report_error(L, "Unknown immovable <%s>", objname.c_str());
+	}
 
+	EditorGameBase& egbase = get_egbase(L);
 	BaseImmovable* m = nullptr;
 	if (from_where == "world") {
 		DescriptionIndex const imm_idx = egbase.world().get_immovable_index(objname);
@@ -1505,10 +1511,6 @@ int LuaMap::place_immovable(lua_State* const L) {
 		m = &egbase.create_immovable(
 		   c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld, nullptr /* owner */);
 	} else if (from_where == "tribes") {
-		// The immovable type might not have been loaded yet
-		Notifications::publish(
-		   NoteMapObjectDescription(objname, NoteMapObjectDescription::LoadType::kObject));
-
 		DescriptionIndex const imm_idx = egbase.tribes().immovable_index(objname);
 		if (imm_idx == Widelands::INVALID_INDEX) {
 			report_error(L, "Unknown tribes immovable <%s>", objname.c_str());
@@ -1671,10 +1673,11 @@ void LuaTribeDescription::__persist(lua_State* L) {
 void LuaTribeDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	Notifications::publish(
-	   NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kObject));
-	const Tribes& tribes = get_egbase(L).tribes();
-	set_description_pointer(tribes.get_tribe_descr(tribes.tribe_index(name)));
+	if (!Widelands::tribe_exists(name)) {
+		report_error(L, "Tribe '%s' does not exist", name.c_str());
+	}
+	set_description_pointer(
+	   get_egbase(L).tribes().get_tribe_descr(get_egbase(L).mutable_tribes()->load_tribe(name)));
 }
 
 /*
@@ -2131,7 +2134,6 @@ const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[
    PROP_RO(LuaImmovableDescription, species),
    PROP_RO(LuaImmovableDescription, buildcost),
    PROP_RO(LuaImmovableDescription, becomes),
-   PROP_RO(LuaImmovableDescription, editor_category),
    PROP_RO(LuaImmovableDescription, terrain_affinity),
    PROP_RO(LuaImmovableDescription, owner_type),
    PROP_RO(LuaImmovableDescription, size),
@@ -2192,30 +2194,6 @@ int LuaImmovableDescription::get_becomes(lua_State* L) {
 		lua_pushuint32(L, ++counter);
 		lua_pushstring(L, target.second);
 		lua_settable(L, -3);
-	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: editor_category
-
-         the name and descname of the editor category of this immovable
-
-         (RO) a table with "name" and "descname" entries for the editor category, or nil if it has
-         none.
-*/
-int LuaImmovableDescription::get_editor_category(lua_State* L) {
-	const EditorCategory* editor_category = get()->editor_category();
-	if (editor_category != nullptr) {
-		lua_newtable(L);
-		lua_pushstring(L, "name");
-		lua_pushstring(L, editor_category->name());
-		lua_settable(L, -3);
-		lua_pushstring(L, "descname");
-		lua_pushstring(L, editor_category->descname());
-		lua_settable(L, -3);
-	} else {
-		lua_pushnil(L);
 	}
 	return 1;
 }
@@ -3694,7 +3672,7 @@ void LuaResourceDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
 	const World& world = get_egbase(L).world();
-	const ResourceDescription* descr = world.get_resource(world.safe_resource_index(name.c_str()));
+	const ResourceDescription* descr = world.get_resource(world.safe_resource_index(name));
 	set_description_pointer(descr);
 }
 
@@ -3797,7 +3775,6 @@ const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = 
    PROP_RO(LuaTerrainDescription, descname),
    PROP_RO(LuaTerrainDescription, default_resource),
    PROP_RO(LuaTerrainDescription, default_resource_amount),
-   PROP_RO(LuaTerrainDescription, editor_category),
    PROP_RO(LuaTerrainDescription, fertility),
    PROP_RO(LuaTerrainDescription, humidity),
    PROP_RO(LuaTerrainDescription, representative_image),
@@ -3872,28 +3849,6 @@ int LuaTerrainDescription::get_default_resource(lua_State* L) {
 
 int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
 	lua_pushinteger(L, get()->get_default_resource_amount());
-	return 1;
-}
-
-/* RST
-   .. attribute:: the name and descname of the editor category of this terrain
-
-      (RO) a table with "name" and "descname" entries for the editor category, or nil if it has
-      none.
-*/
-int LuaTerrainDescription::get_editor_category(lua_State* L) {
-	const EditorCategory* editor_category = get()->editor_category();
-	if (editor_category != nullptr) {
-		lua_newtable(L);
-		lua_pushstring(L, "name");
-		lua_pushstring(L, editor_category->name());
-		lua_settable(L, -3);
-		lua_pushstring(L, "descname");
-		lua_pushstring(L, editor_category->descname());
-		lua_settable(L, -3);
-	} else {
-		lua_pushnil(L);
-	}
 	return 1;
 }
 
@@ -4208,6 +4163,10 @@ int LuaMapObject::get_descr(lua_State* L) {
 		return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
 	case MapObjectType::SHIP:
 		return CAST_TO_LUA(ShipDescr, LuaShipDescription);
+	case MapObjectType::RESOURCE:
+		return CAST_TO_LUA(ResourceDescription, LuaResourceDescription);
+	case MapObjectType::TERRAIN:
+		return CAST_TO_LUA(TerrainDescription, LuaTerrainDescription);
 	case MapObjectType::MAPOBJECT:
 	case MapObjectType::BATTLE:
 	case MapObjectType::BOB:
@@ -6795,12 +6754,13 @@ int LuaField::get_terr(lua_State* L) {
 int LuaField::set_terr(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
-	const DescriptionIndex td = egbase.world().terrains().get_index(name);
-	if (td == static_cast<DescriptionIndex>(Widelands::INVALID_INDEX)) {
-		report_error(L, "Unknown terrain '%s'", name);
+	try {
+		const DescriptionIndex td = egbase.mutable_world()->load_terrain(name);
+		egbase.mutable_map()->change_terrain(
+		   egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
+	} catch (const Widelands::GameDataError& e) {
+		report_error(L, "set_terr: %s", e.what());
 	}
-
-	egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
 
 	lua_pushstring(L, name);
 	return 1;
@@ -6814,12 +6774,13 @@ int LuaField::get_terd(lua_State* L) {
 int LuaField::set_terd(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
-	const DescriptionIndex td = egbase.world().terrains().get_index(name);
-	if (td == static_cast<DescriptionIndex>(INVALID_INDEX)) {
-		report_error(L, "Unknown terrain '%s'", name);
+	try {
+		const DescriptionIndex td = egbase.mutable_world()->load_terrain(name);
+		egbase.mutable_map()->change_terrain(
+		   egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
+	} catch (const Widelands::GameDataError& e) {
+		report_error(L, "set_terd: %s", e.what());
 	}
-
-	egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
 
 	lua_pushstring(L, name);
 	return 1;

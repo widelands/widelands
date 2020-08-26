@@ -82,7 +82,7 @@ tribes:new_productionsite_type {
             "consume=ration",
             "sleep=duration:45s",
             "animate=working duration:20s",
-            "mine=gold radius:3 yield:50% when_empty:5% experience_on_fail:20%",
+            "mine=resource_gold radius:3 yield:50% when_empty:5% experience_on_fail:20%",
             "produce=gold_ore"
          }
       },

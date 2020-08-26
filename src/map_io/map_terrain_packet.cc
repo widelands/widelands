@@ -40,8 +40,6 @@ void MapTerrainPacket::read(FileSystem& fs,
 	fr.open(fs, "binary/terrain");
 
 	const Map& map = egbase.map();
-	const World& world = egbase.world();
-
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
@@ -56,12 +54,13 @@ void MapTerrainPacket::read(FileSystem& fs,
 					throw GameDataError(
 					   "MapTerrainPacket::read: WARNING: Found duplicate terrain id %i.", id);
 				}
-				const std::string terrain_name = lookup_table.lookup_terrain(fr.c_string());
-				if (!world.terrain_descr(terrain_name)) {
+				const std::string terrain_name(lookup_table.lookup_terrain(fr.c_string()));
+				const DescriptionIndex terrain_idx = egbase.mutable_world()->load_terrain(terrain_name);
+				if (terrain_idx == Widelands::INVALID_INDEX) {
 					throw GameDataError(
 					   "Terrain '%s' exists in map, not in world!", terrain_name.c_str());
 				}
-				smap[id] = world.terrains().get_index(terrain_name);
+				smap[id] = terrain_idx;
 			}
 
 			MapIndex const max_index = map.max_index();
