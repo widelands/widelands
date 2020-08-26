@@ -508,8 +508,7 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 				   schedule_act(dynamic_cast<Game&>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 			}
 			next_worker_without_cost_spawn_[i] = next_spawn;
-			log_warn_time(
-			   egbase.get_gametime(),
+			log_warn(
 			   "player %u is allowed to create worker type %s but his "
 			   "%s %u at (%i, %i) does not have a next_spawn time set for that "
 			   "worker type; setting it to %u\n",

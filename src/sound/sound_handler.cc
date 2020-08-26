@@ -148,7 +148,7 @@ SoundHandler::~SoundHandler() {
 	int numtimesopened, frequency, channels;
 	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
-	log_info("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
+	log_dbg("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
 	         numtimesopened == 1 ? "" : "s", frequency, format, channels, channels == 1 ? "" : "s");
 
 	if (numtimesopened == 0) {

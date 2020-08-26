@@ -92,14 +92,14 @@ void Flag::load_finish(EditorGameBase& egbase) {
 		Worker& worker = *r.get(egbase);
 		Bob::State const* const state = worker.get_state(Worker::taskWaitforcapacity);
 		if (state == nullptr) {
-			log_warn_time(egbase.get_gametime(),
+			log_warn(
 			              "worker %u is in the capacity wait queue of flag %u but "
 			              "does not have a waitforcapacity task! Removing from queue.\n",
 			              worker.serial(), serial());
 			return true;
 		}
 		if (state->objvar1 != this) {
-			log_warn_time(egbase.get_gametime(),
+			log_warn(
 			              "worker %u is in the capacity wait queue of flag %u but "
 			              "its waitforcapacity task is for map object %u! Removing from "
 			              "queue.\n",

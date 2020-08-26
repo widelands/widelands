@@ -524,7 +524,7 @@ void PortDock::Loader::load_finish() {
 	PortDock& pd = get<PortDock>();
 
 	if (pd.warehouse_->get_portdock() != &pd) {
-		log_warn_time(egbase().get_gametime(), "Inconsistent PortDock <> Warehouse link\n");
+		log_warn("Inconsistent PortDock <> Warehouse link\n");
 		if (upcast(Game, game, &egbase())) {
 			pd.schedule_destroy(*game);
 		}

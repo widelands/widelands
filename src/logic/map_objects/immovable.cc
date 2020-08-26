@@ -108,7 +108,7 @@ void BaseImmovable::unset_position(EditorGameBase& egbase, const Coords& c) {
 	if (f.field->immovable != this) {
 		log_err_time(
 		   egbase.get_gametime(),
-		   " Internal error: Immovable at %3dx%3d does not match: is %s but %s was expected.\n", c.x,
+		   "Internal error: Immovable at %3dx%3d does not match: is %s but %s was expected.\n", c.x,
 		   c.y, (f.field->immovable) ? f.field->immovable->descr().name().c_str() : "None",
 		   descr().name().c_str());
 	}
@@ -663,7 +663,7 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
 		if (get_owner() == nullptr) {
 			log_warn_time(
-			   egbase.get_gametime(), " Tribe immovable '%s' has no owner!! ", descr().name().c_str());
+			   egbase.get_gametime(), "Tribe immovable '%s' has no owner!", descr().name().c_str());
 		}
 		fw.c_string("tribes");
 	} else {
@@ -851,7 +851,7 @@ PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
  */
 PlayerImmovable::~PlayerImmovable() {
 	if (workers_.size()) {
-		log_warn_time(owner().egbase().get_gametime(),
+		log_warn(
 		              "PlayerImmovable::~PlayerImmovable: %" PRIuS " workers left!\n",
 		              workers_.size());
 	}

@@ -164,7 +164,7 @@ void Request::read(FileRead& fr,
 					}
 
 					if (!transfer) {
-						log_warn_time(game.get_gametime(),
+						log_warn(
 						              "loading request, transferred object %u has no transfer\n",
 						              obj->serial());
 					} else {

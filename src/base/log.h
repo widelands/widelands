@@ -25,9 +25,7 @@
 
 #include "base/macros.h"
 
-#ifdef _WIN32
 #include <string>
-#endif
 
 enum class LogType {
 	kInfo,     // normal info messages

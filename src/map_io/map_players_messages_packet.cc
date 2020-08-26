@@ -63,8 +63,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 			{
 				const auto begin = messages->begin();
 				if (begin != messages->end()) {
-					log_err_time(
-					   egbase.get_gametime(),
+					log_err(
 					   "ERROR: The message queue for player %u contains a message "
 					   "before any messages have been loaded into it. This is a bug "
 					   "in the savegame loading code. It created a new message and "

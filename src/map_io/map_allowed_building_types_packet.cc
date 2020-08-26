@@ -78,7 +78,7 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 						if (tribe.has_building(index)) {
 							player->allow_building_type(index, allowed);
 						} else {
-							log_warn_time(egbase.get_gametime(),
+							log_warn(
 							              "MapAllowedBuildingTypesPacket - tribe %s does not define "
 							              "building type \"%s\"\n",
 							              tribe.name().c_str(), name);

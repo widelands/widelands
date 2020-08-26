@@ -1050,23 +1050,22 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	map_.recalc_whole_map(egbase);  //  to initialize buildcaps
 
 	const Widelands::PlayerNumber nr_players = map_.get_nrplayers();
-	log_info_time(
-	   egbase.get_gametime(), "Checking starting position for all %u players:\n", nr_players);
+	log_info("Checking starting position for all %u players:\n", nr_players);
 	iterate_player_numbers(p, nr_players) {
-		log_info_time(egbase.get_gametime(), "-> Player %u: ", p);
+		log_info("-> Player %u: ", p);
 
 		Widelands::Coords starting_pos = map_.get_starting_pos(p);
 		if (!starting_pos) {
 			//  Do not throw exception, else map will not be loadable in the
 			//  editor. Player initialization will keep track of wrong starting
 			//  positions.
-			log_warn_time(egbase.get_gametime(), "Has no starting position.\n");
+			log_warn("Has no starting position.\n");
 			continue;
 		}
 		Widelands::FCoords fpos = map_.get_fcoords(starting_pos);
 
 		if (!(map_.get_max_nodecaps(egbase, fpos) & Widelands::BUILDCAPS_BIG)) {
-			log_warn_time(egbase.get_gametime(), "wrong size - trying to fix it: ");
+			log_warn("wrong size - trying to fix it: ");
 			bool fixed = false;
 
 			Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -1082,19 +1081,17 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 			// check whether starting position was fixed.
 			if (fixed) {
-				log_info_time(egbase.get_gametime(), "Fixed!\n");
+				log_info("Fixed!\n");
 			} else {
 				//  Do not throw exception, else map will not be loadable in
 				//  the editor. Player initialization will keep track of
 				//  wrong starting positions.
-				log_err_time(egbase.get_gametime(), "FAILED!\n");
-				log_err_time(
-				   egbase.get_gametime(), "   Invalid starting position, that could not be fixed.\n");
-				log_err_time(
-				   egbase.get_gametime(), "   Please try to fix it manually in the editor.\n");
+				log_err("FAILED!\n");
+				log_err("Invalid starting position, that could not be fixed.\n");
+				log_err("Please try to fix it manually in the editor.\n");
 			}
 		} else {
-			log_info_time(egbase.get_gametime(), "OK\n");
+			log_info("OK\n");
 		}
 	}
 }
@@ -1116,11 +1113,9 @@ void S2MapLoader::postload_set_port_spaces(const Widelands::EditorGameBase& egba
 			} while (!was_set && mr.advance(map_));
 		}
 		if (!was_set) {
-			log_err_time(
-			   egbase.get_gametime(), "FAILED! No port buildspace for (%i, %i) found!\n", fc.x, fc.y);
+			log_err("FAILED! No port buildspace for (%i, %i) found!\n", fc.x, fc.y);
 		} else {
-			log_info_time(
-			   egbase.get_gametime(), "SUCCESS! Port buildspace set for (%i, %i) \n", fc.x, fc.y);
+			log_info("SUCCESS! Port buildspace set for (%i, %i) \n", fc.x, fc.y);
 		}
 	}
 	map_.recalculate_allows_seafaring();

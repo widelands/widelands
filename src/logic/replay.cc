@@ -230,13 +230,13 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 	}
 
-	log_info_time(game.get_gametime(), "Reloading the game from replay\n");
+	log_info("Reloading the game from replay\n");
 	game.cleanup_for_load();
 	{
 		GameLoader gl(filename_ + kSavegameExtension, game);
 		gl.load_game();
 	}
-	log_info_time(game.get_gametime(), "Done reloading the game from replay\n");
+	log_info("Done reloading the game from replay\n");
 
 	game.enqueue_command(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
 
