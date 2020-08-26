@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -195,7 +196,7 @@ WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware
 WareInstance::~WareInstance() {
 	if (supply_) {
 		FORMAT_WARNINGS_OFF
-		molog(-1, "Ware %u still has supply %p\n", descr_index_, supply_);
+		molog(kNoTimestamp, "Ware %u still has supply %p\n", descr_index_, supply_);
 		FORMAT_WARNINGS_ON
 		delete supply_;
 	}
@@ -504,7 +505,7 @@ bool WareInstance::is_moving() const {
  * whatever reason.
  */
 void WareInstance::cancel_moving() {
-	molog(-1, "cancel_moving\n");
+	molog(kNoTimestamp, "cancel_moving\n");
 
 	if (transfer_) {
 		transfer_->has_failed();

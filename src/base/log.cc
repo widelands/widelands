@@ -163,7 +163,7 @@ static const char* to_string(const LogType& type) {
 	}
 }
 
-void log_to_stdout(const LogType type, int64_t gametime, const char* const fmt, ...) {
+void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt, ...) {
 	assert(logger != nullptr);
 
 	{  // message type
@@ -171,16 +171,16 @@ void log_to_stdout(const LogType type, int64_t gametime, const char* const fmt, 
 		sprintf(buffer, "[%s", to_string(type));
 		logger->log_cstring(buffer);
 	}
-	if (gametime >= 0) {  // timestamp
-		const unsigned hours = gametime / (1000 * 60 * 60);
+	if (gametime != kNoTimestamp) {  // timestamp
+		const uint32_t hours = gametime / (1000 * 60 * 60);
 		gametime -= hours * 1000 * 60 * 60;
-		const unsigned minutes = gametime / (1000 * 60);
+		const uint32_t minutes = gametime / (1000 * 60);
 		gametime -= minutes * 1000 * 60;
-		const unsigned seconds = gametime / 1000;
+		const uint32_t seconds = gametime / 1000;
 		gametime -= seconds * 1000;
 
 		char buffer[32];
-		sprintf(buffer, " @ %u:%u:%u.%li", hours, minutes, seconds, gametime);
+		sprintf(buffer, " @ %u:%u:%u.%u", hours, minutes, seconds, gametime);
 		logger->log_cstring(buffer);
 	}
 	logger->log_cstring("] ");

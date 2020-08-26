@@ -351,7 +351,7 @@ protected:
 	                  const float scale,
 	                  RenderTarget* dst) const;
 
-	void molog(int64_t gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
+	void molog(uint32_t gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
 
 	const MapObjectDescr* descr_;
 	Serial serial_;

@@ -666,7 +666,7 @@ const Player& MapObject::owner() const {
 /**
  * Prints a log message prepended by the object's serial number.
  */
-void MapObject::molog(const int64_t gametime, char const* fmt, ...) const {
+void MapObject::molog(const uint32_t gametime, char const* fmt, ...) const {
 	if (!g_verbose && !logsink_) {
 		return;
 	}
