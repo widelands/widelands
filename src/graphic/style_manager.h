@@ -38,11 +38,9 @@ constexpr const char* const kTemplateDir = "templates/default/";
 
 class StyleManager {
 public:
+	// Only create after ImageCache has been initialized.
 	StyleManager();
 	~StyleManager() = default;
-
-	// Late initialization, because Graphics needs to load the image files first.
-	void init();
 
 	const UI::BuildingStatisticsStyleInfo& building_statistics_style() const;
 	const UI::ButtonStyleInfo& button_style(UI::ButtonStyle) const;
