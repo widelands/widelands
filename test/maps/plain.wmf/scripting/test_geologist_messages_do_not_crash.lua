@@ -21,13 +21,15 @@ run(function()
    sleep(1000)
 
    sleep(360000)
+   game.desired_speed = 1000
+   sleep(4000)
 
    assert_true(#p1.inbox >= 6)
    mv.buttons.messages:click()
 
    for t=0,6 do
-     sleep(1000)
-     mv.windows.messages.buttons.archive_or_restore_selected_messages:click()
+      sleep(1500)
+      mv.windows.messages.buttons.archive_or_restore_selected_messages:click()
    end
 
    print("# All Tests passed.")

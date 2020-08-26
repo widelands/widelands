@@ -31,6 +31,8 @@ local function open_and_close_sound_options(dropdown, is_debug_build)
 end
 
 local function reset_windows()
+   game.desired_speed = 1000
+   sleep(500)
    for name,win in pairs(wl.ui.MapView().windows) do
       win:close()
    end
@@ -46,9 +48,6 @@ local function count_windows()
 end
 
 run(function()
-   game.desired_speed = 1000
-   sleep(100)
-
    ----------------------------------------------------------------------------------------
    -- Toolbar menus
    ----------------------------------------------------------------------------------------
@@ -58,35 +57,35 @@ run(function()
    reset_windows()
    assert_equal(0, count_windows())
    mv.buttons.messages:click()
-   sleep(100)
+   sleep(500)
    assert_equal(1, count_windows())
    assert_not_nil(mv.windows.messages)
 
    reset_windows()
    assert_equal(0, count_windows())
    mv.buttons.objectives:click()
-   sleep(100)
+   sleep(500)
    assert_equal(1, count_windows())
    assert_not_nil(mv.windows.objectives)
    assert_nil(mv.windows.messages)
 
    reset_windows()
    mv.buttons.messages:click()
-   sleep(100)
+   sleep(500)
    local w = mv.windows.messages
    w.position_x = 50
    assert_equal(50, w.position_x)
 
    reset_windows()
    mv.buttons.messages:click()
-   sleep(100)
+   sleep(500)
    local w = mv.windows.messages
    w.position_y = 60
    assert_equal(60, w.position_y)
 
    reset_windows()
    mv.buttons.messages:click()
-   sleep(100)
+   sleep(500)
    local w = mv.windows.messages
    local b = w.buttons.toggle_between_inbox_or_archive
    w.position_x = 50
@@ -97,7 +96,7 @@ run(function()
 
    reset_windows()
    mv.buttons.messages:click()
-   sleep(100)
+   sleep(500)
    local w = mv.windows.messages
    local b = mv.buttons.help
    assert_error("Not a descendant!", function()
@@ -106,22 +105,26 @@ run(function()
 
    reset_windows()
    mv.buttons.messages:click()
-   sleep(100)
+   sleep(500)
    local w = mv.windows.messages
    w.width = 300
    assert_equal(300, w.width)
 
    reset_windows()
    mv.buttons.messages:click()
-   sleep(100)
+   sleep(500)
    local w = mv.windows.messages
    w.height = 200
    assert_equal(200, w.height)
 
    reset_windows()
    mv.buttons.help:click()
-   sleep(100)
+   sleep(500)
    assert_not_nil(wl.ui.MapView().windows.encyclopedia)
+   sleep(500)
+   mv.buttons.help:click()
+   sleep(500)
+   assert_nil(wl.ui.MapView().windows.encyclopedia)
 
    ----------------------------------------------------------------------------------------
    -- Dropdowns
