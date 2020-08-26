@@ -42,6 +42,14 @@ constexpr uint32_t kImageExchangeDuration = 2500;
 
 constexpr uint32_t kNoSplash = std::numeric_limits<uint32_t>::max();
 
+int16_t calc_desired_window_width(const FullscreenMenuMain& parent) {
+	return std::max(600, parent.get_w() / 2);
+}
+
+int16_t calc_desired_window_height(const FullscreenMenuMain& parent) {
+	return std::max(400, parent.get_h() / 2);
+}
+
 FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
    : FullscreenMenuBase(),
      box_rect_(0, 0, 0, 0),

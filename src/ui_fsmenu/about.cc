@@ -24,10 +24,10 @@
 FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
    : UI::Window(&fsmm,
                 "about",
-                fsmm.get_w() / 4,
-                fsmm.get_h() / 4,
-                fsmm.get_w() / 2,
-                fsmm.get_h() / 2,
+                (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
+                (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,
+                calc_desired_window_width(fsmm),
+                calc_desired_window_height(fsmm),
                 _("About Widelands")),
      parent_(fsmm),
      close_(this, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
@@ -65,7 +65,7 @@ bool FullscreenMenuAbout::handle_key(bool down, SDL_Keysym code) {
 constexpr int16_t kPadding = 4;
 void FullscreenMenuAbout::layout() {
 	if (!is_minimal()) {
-		set_size(parent_.get_w() / 2, parent_.get_h() / 2);
+		set_size(calc_desired_window_width(parent_), calc_desired_window_height(parent_));
 
 		close_.set_size(get_inner_w() / 2, get_h() / 20);
 		close_.set_pos(Vector2i(get_inner_w() / 4, get_inner_h() - kPadding - close_.get_h()));

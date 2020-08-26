@@ -68,17 +68,15 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 
 }  // namespace
 
-constexpr int16_t kWindowWidth = 600;
-constexpr int16_t kWindowHeight = 400;
 constexpr int16_t kPadding = 4;
 FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                                              OptionsCtrl::OptionsStruct opt)
    : UI::Window(&fsmm,
                 "options",
-                (fsmm.get_w() - kWindowWidth) / 2,
-                (fsmm.get_h() - kWindowHeight) / 2,
-                kWindowWidth,
-                kWindowHeight,
+                (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
+                (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,
+                calc_desired_window_width(fsmm),
+                calc_desired_window_height(fsmm),
                 _("Options")),
 
      // Buttons

@@ -105,4 +105,7 @@ private:
 	bool register_;
 };
 
+int16_t calc_desired_window_width(const FullscreenMenuMain& parent);
+int16_t calc_desired_window_height(const FullscreenMenuMain& parent);
+
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H
