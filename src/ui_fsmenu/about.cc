@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/about.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
