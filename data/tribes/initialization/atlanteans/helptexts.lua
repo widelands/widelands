@@ -20,22 +20,14 @@ include "tribes/scripting/help/global_helptexts.lua"
 --    local result = {
 --       buildings {
 --          barbarians_ax_workshop = {
---             lore = {
---                -- TRANSLATORS: Lore helptext for a barbarian production site: Ax Workshop
---                pgettext("barbarians_building", "‘A new warrior’s ax brings forth the best in its wielder – or the worst in its maker.’")
---             },
---             lore_author = {
---                -- TRANSLATORS: Lore author helptext for a barbarian production site: Ax Workshop
---                pgettext("barbarians_building", "An old Barbarian proverb<br> meaning that you need to take some risks sometimes.")
---             },
---             purpose = {
---                -- TRANSLATORS: Purpose helptext for a barbarian production site: Ax Workshop
---                pgettext("barbarians_building", "Produces axes, sharp axes and broad axes.")
---             },
---             note = {
---                -- TRANSLATORS: Note helptext for a barbarian production site: Ax Workshop
---                pgettext("barbarians_building", "The Barbarian ax workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualification for the worker.")
---             },
+--             -- TRANSLATORS: Lore helptext for a barbarian production site: Ax Workshop
+--             lore = pgettext("barbarians_building", "‘A new warrior’s ax brings forth the best in its wielder – or the worst in its maker.’"),
+--             -- TRANSLATORS: Lore author helptext for a barbarian production site: Ax Workshop
+--             lore_author = pgettext("barbarians_building", "An old Barbarian proverb<br> meaning that you need to take some risks sometimes."),
+--             -- TRANSLATORS: Purpose helptext for a barbarian production site: Ax Workshop
+--             purpose = pgettext("barbarians_building", "Produces axes, sharp axes and broad axes."),
+--             -- TRANSLATORS: Note helptext for a barbarian production site: Ax Workshop
+--             note = pgettext("barbarians_building", "The Barbarian ax workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualification for the worker."),
 --             performance = {
 --                -- TRANSLATORS: Performance helptext for a barbarian production site: Ax Workshop, part 1
 --                pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(ngettext("%d second", "%d seconds", 57):bformat(57)),
