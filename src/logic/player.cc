@@ -179,7 +179,8 @@ Player::Player(EditorGameBase& the_egbase,
 	   });
 
 	// Populating remaining_shipnames vector
-	for (const std::string& shipname : egbase_.tribes().get_ship_descr(tribe().ship())->get_ship_names()) {
+	for (const std::string& shipname :
+	     egbase_.tribes().get_ship_descr(tribe().ship())->get_ship_names()) {
 		remaining_shipnames_.push_back(shipname);
 	}
 

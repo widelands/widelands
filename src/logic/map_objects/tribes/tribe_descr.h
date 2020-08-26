@@ -149,8 +149,7 @@ private:
 	void load_frontiers_flags_roads(const LuaTable& table);
 	void load_ships(const LuaTable& table, Tribes& tribes);
 	void load_wares(const LuaTable& table, Tribes& tribes);
-	void
-	load_immovables(const LuaTable& table, Tribes& tribes, const World& world);
+	void load_immovables(const LuaTable& table, Tribes& tribes, const World& world);
 	void load_workers(const LuaTable& table, Tribes& tribes);
 	void load_buildings(const LuaTable& table, Tribes& tribes);
 

@@ -131,7 +131,9 @@ void walk_tribe_immovables(
 }
 
 // Read helptext from Lua table
-void load_helptexts(Widelands::MapObjectDescr* descr, const LuaTable& table, const std::string& tribe_name) {
+void load_helptexts(Widelands::MapObjectDescr* descr,
+                    const LuaTable& table,
+                    const std::string& tribe_name) {
 	std::map<std::string, std::string> helptexts;
 	if (table.has_key("helptexts")) {
 		std::unique_ptr<LuaTable> helptext_table = table.get_table("helptexts");
@@ -397,10 +399,9 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
 	}
 }
 
-void TribeDescr::load_immovables(const LuaTable& table,
-                                 Tribes& tribes,
-                                 const World& world) {
-	for (const auto& immovable_table : table.get_table("immovables")->array_entries<std::unique_ptr<LuaTable>>()) {
+void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const World& world) {
+	for (const auto& immovable_table :
+	     table.get_table("immovables")->array_entries<std::unique_ptr<LuaTable>>()) {
 		const std::string immovablename(immovable_table->get_string("name"));
 		try {
 			DescriptionIndex index = tribes.load_immovable(immovablename);
@@ -514,7 +515,8 @@ void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
 }
 
 void TribeDescr::load_buildings(const LuaTable& table, Tribes& tribes) {
-	for (const auto& building_table : table.get_table("buildings")->array_entries<std::unique_ptr<LuaTable>>()) {
+	for (const auto& building_table :
+	     table.get_table("buildings")->array_entries<std::unique_ptr<LuaTable>>()) {
 		const std::string buildingname(building_table->get_string("name"));
 		try {
 			DescriptionIndex index = tribes.load_building(buildingname);
