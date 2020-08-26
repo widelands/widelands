@@ -414,7 +414,6 @@ void BaseDropdown::set_list_visibility(bool open) {
 }
 
 void BaseDropdown::toggle_list() {
-	focus();
 	if (!is_enabled_) {
 		list_->set_visible(false);
 		return;
