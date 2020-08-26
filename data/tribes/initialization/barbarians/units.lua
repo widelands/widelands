@@ -446,50 +446,6 @@ tribes:new_tribe {
       "dismantlesite",
    },
 
-   ship_names = {
-      pgettext("shipname", "Agilaz"),
-      pgettext("shipname", "Aslaug"),
-      pgettext("shipname", "Baldr"),
-      pgettext("shipname", "Bear"),
-      pgettext("shipname", "Beowulf"),
-      -- TRANSLATORS: This Barbarian ship is named after an in-game character
-      pgettext("shipname", "Boldreth"),
-      -- TRANSLATORS: This Barbarian ship is named after an in-game character
-      pgettext("shipname", "Chat’Karuth"),
-      pgettext("shipname", "Dellingr"),
-      pgettext("shipname", "Fulla"),
-      pgettext("shipname", "Gersemi"),
-      pgettext("shipname", "Hagbard"),
-      pgettext("shipname", "Heidrek"),
-      pgettext("shipname", "Heimdallr"),
-      pgettext("shipname", "Hnoss"),
-      pgettext("shipname", "Hrothgar"),
-      pgettext("shipname", "Ingeld"),
-      pgettext("shipname", "Karl Hundason"),
-      -- TRANSLATORS: This Barbarian ship is named after an in-game character
-      pgettext("shipname", "Khantrukh"),
-      pgettext("shipname", "Lynx"),
-      pgettext("shipname", "Mani"),
-      pgettext("shipname", "Odin"),
-      pgettext("shipname", "Red Fox"),
-      -- TRANSLATORS: This Barbarian ship is mentioned in some lore texts
-      pgettext("shipname", "Saxnot"),
-      pgettext("shipname", "Sigmund"),
-      -- TRANSLATORS: This Barbarian ship is named after a barbarian bard
-      pgettext("shipname", "Sigurd"),
-      pgettext("shipname", "Snotra"),
-      pgettext("shipname", "Thor"),
-      -- TRANSLATORS: This Barbarian ship is named after an in-game character
-      pgettext("shipname", "Thron"),
-      pgettext("shipname", "Ullr"),
-      pgettext("shipname", "Valdar"),
-      pgettext("shipname", "Vili"),
-      pgettext("shipname", "Volf"),
-      pgettext("shipname", "Wild Boar"),
-      pgettext("shipname", "Wolverine"),
-      pgettext("shipname", "Yrsa"),
-   },
-
    -- Special types
    builder = "barbarians_builder",
    carrier = "barbarians_carrier",

@@ -373,7 +373,6 @@ void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
 	} catch (const WException& e) {
 		throw GameDataError("Failed adding ship '%s': %s", shipname.c_str(), e.what());
 	}
-	ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
 }
 
 void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, LuaTable* helptexts) {

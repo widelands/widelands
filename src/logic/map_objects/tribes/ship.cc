@@ -107,14 +107,12 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
  * /data/tribes/ships/atlanteans/init.lua
  */
 ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
-   : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table) {
-
-	i18n::Textdomain td("tribes");
+   : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table),
+	 default_capacity_(table.has_key("capacity") ? table.get_int("capacity") : 20),
+	ship_names_(table.get_table("names")->array_entries<std::string>()) {
 
 	// Read the sailing animations
 	assign_directional_animation(&sail_anims_, "sail");
-
-	default_capacity_ = table.has_key("capacity") ? table.get_int("capacity") : 20;
 }
 
 uint32_t ShipDescr::movecaps() const {
