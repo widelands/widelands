@@ -278,11 +278,10 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	if (!tribes.tribe_exists(tribe_name)) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	Notifications::publish(
-	   NoteMapObjectDescription(tribe_name, NoteMapObjectDescription::LoadType::kObject));
 
 	return to_lua<LuaMaps::LuaTribeDescription>(
-	   L, new LuaMaps::LuaTribeDescription(tribes.get_tribe_descr(tribes.tribe_index(tribe_name))));
+	   L, new LuaMaps::LuaTribeDescription(get_egbase(L).tribes().get_tribe_descr(
+	         get_egbase(L).mutable_tribes()->load_tribe(tribe_name))));
 }
 
 /* RST
@@ -346,7 +345,7 @@ int LuaEditorGameBase::get_resource_description(lua_State* L) {
 	}
 	const std::string resource_name = luaL_checkstring(L, 2);
 	const World& world = get_egbase(L).world();
-	const DescriptionIndex idx = world.resource_index(resource_name.c_str());
+	const DescriptionIndex idx = world.resource_index(resource_name);
 
 	if (idx == INVALID_INDEX) {
 		report_error(L, "Resource %s does not exist", resource_name.c_str());
@@ -883,48 +882,46 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	const Tribes& tribes = egbase.tribes();
 	Player& player = get(L, egbase);
 
-	// If the building belongs to a tribe that no player is playing, we need to load it now
-	Notifications::publish(
-	   NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kObject));
+	try {
+		// If the building belongs to a tribe that no player is playing, we need to load it now
+		const DescriptionIndex building_index = egbase.mutable_tribes()->load_building(name);
 
-	const DescriptionIndex building_index = tribes.building_index(name);
-
-	// Ensure that the loaded object was indeed a building
-	if (!tribes.building_exists(building_index)) {
-		report_error(L, "Unknown Building: '%s'", name.c_str());
-	}
-
-	if (!player.tribe().has_building(building_index) &&
-	    tribes.get_building_descr(building_index)->type() !=
-	       Widelands::MapObjectType::MILITARYSITE) {
-		report_error(L, "Building: '%s' is not available for Player %d's tribe '%s'", name.c_str(),
-		             player.player_number(), player.tribe().name().c_str());
-	}
-
-	FormerBuildings former_buildings;
-	find_former_buildings(tribes, building_index, &former_buildings);
-	if (constructionsite) {
-		former_buildings.pop_back();
-	}
-
-	Building* b = nullptr;
-	if (force) {
-		if (constructionsite) {
-			b = &player.force_csite(c->coords(), building_index, former_buildings);
-		} else {
-			b = &player.force_building(c->coords(), former_buildings);
+		if (!player.tribe().has_building(building_index) &&
+		    tribes.get_building_descr(building_index)->type() !=
+		       Widelands::MapObjectType::MILITARYSITE) {
+			report_error(L, "Building: '%s' is not available for Player %d's tribe '%s'", name.c_str(),
+			             player.player_number(), player.tribe().name().c_str());
 		}
-	} else {
-		b = player.build(c->coords(), building_index, constructionsite, former_buildings);
-	}
-	if (!b) {
-		const std::string tempname(
-		   force ? constructionsite ? "force constructionsite" : "force building" : "place building");
-		report_error(L, "Couldn't %s '%s' at (%d, %d)!", tempname.c_str(), name.c_str(),
-		             c->coords().x, c->coords().y);
+
+		FormerBuildings former_buildings;
+		find_former_buildings(tribes, building_index, &former_buildings);
+		if (constructionsite) {
+			former_buildings.pop_back();
+		}
+
+		Building* b = nullptr;
+		if (force) {
+			if (constructionsite) {
+				b = &player.force_csite(c->coords(), building_index, former_buildings);
+			} else {
+				b = &player.force_building(c->coords(), former_buildings);
+			}
+		} else {
+			b = player.build(c->coords(), building_index, constructionsite, former_buildings);
+		}
+		if (!b) {
+			const std::string tempname(force ? constructionsite ? "force constructionsite" :
+			                                                      "force building" :
+			                                   "place building");
+			report_error(L, "Couldn't %s '%s' at (%d, %d)!", tempname.c_str(), name.c_str(),
+			             c->coords().x, c->coords().y);
+		}
+
+		LuaMaps::upcasted_map_object_to_lua(L, b);
+	} catch (const Widelands::GameDataError&) {
+		report_error(L, "Unknown building <%s>", name.c_str());
 	}
 
-	LuaMaps::upcasted_map_object_to_lua(L, b);
 	return 1;
 }
 

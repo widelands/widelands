@@ -453,7 +453,7 @@ struct ProductionProgram : public MapObjectProgram {
 
 	struct ActMine : public Action {
 		ActMine(const std::vector<std::string>& arguments,
-		        const World&,
+		        World&,
 		        const std::string& production_program_name,
 		        ProductionSiteDescr*);
 		void execute(Game&, ProductionSite&) const override;
@@ -548,7 +548,7 @@ struct ProductionProgram : public MapObjectProgram {
 	                  const std::string& init_descname,
 	                  std::unique_ptr<LuaTable> actions_table,
 	                  Tribes& tribes,
-	                  const World& world,
+	                  World& world,
 	                  ProductionSiteDescr* building);
 
 	const std::string& descname() const;

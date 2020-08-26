@@ -624,7 +624,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				bobname = "duck";
 				break;
 			case 0x09:
-				bobname = "elk";
+				bobname = "moose";
 				break;  // original "donkey"
 			default:
 				cerr << "Unsupported animal: " << static_cast<int32_t>(section[i]) << endl;
@@ -632,7 +632,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			}
 
 			if (!bobname.empty()) {
-				Widelands::DescriptionIndex const idx = world.get_critter(bobname.c_str());
+				Widelands::DescriptionIndex const idx = world.critter_index(bobname);
 				if (idx == Widelands::INVALID_INDEX) {
 					throw wexception("Missing bob type %s", bobname.c_str());
 				}
@@ -704,19 +704,19 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 			switch (value & 0xF8) {
 			case 0x40:
-				res = "coal";
+				res = "resource_coal";
 				amount = value & 7;
 				break;
 			case 0x48:
-				res = "iron";
+				res = "resource_iron";
 				amount = value & 7;
 				break;
 			case 0x50:
-				res = "gold";
+				res = "resource_gold";
 				amount = value & 7;
 				break;
 			case 0x59:
-				res = "granite";
+				res = "resource_stones";
 				amount = value & 7;
 				break;
 			default:

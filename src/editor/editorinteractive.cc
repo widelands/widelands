@@ -26,6 +26,8 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
+#include "base/scoped_timer.h"
 #include "base/warning.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_resources_tool.h"
@@ -51,6 +53,7 @@
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
+#include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
@@ -947,6 +950,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
 		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
+		eia.load_world_units();
 		egbase.tribes();
 
 		{
@@ -979,6 +983,44 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	eia.run<UI::Panel::Returncodes>();
 
 	egbase.cleanup_objects();
+}
+
+void EditorInteractive::load_world_units() {
+	Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
+	Widelands::World* world = egbase().mutable_world();
+
+	log_info("┏━ Loading world:\n");
+	ScopedTimer timer("┗━ took: %ums");
+
+	std::unique_ptr<LuaTable> table(egbase().lua().run_script("world/init.lua"));
+
+	auto load_category = [this, world](const LuaTable& t, const std::string& key,
+	                                   Widelands::MapObjectType type) {
+		for (const auto& category_table :
+		     t.get_table(key)->array_entries<std::unique_ptr<LuaTable>>()) {
+			editor_categories_[type].push_back(
+			   std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, type, *world)));
+		}
+	};
+
+	log_info("┃    Critters: ");
+	load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
+	log_info("┃    → took %ums\n", timer.ms_since_last_query());
+
+	log_info("┃    Immovables: ");
+	load_category(*table, "immovables", Widelands::MapObjectType::IMMOVABLE);
+	log_info("┃    → took %ums\n", timer.ms_since_last_query());
+
+	log_info("┃    Terrains: ");
+	load_category(*table, "terrains", Widelands::MapObjectType::TERRAIN);
+	log_info("┃    → took %ums\n", timer.ms_since_last_query());
+
+	log_info("┃    Resources: ");
+	for (const std::string& item : table->get_table("resources")->array_entries<std::string>()) {
+		Notifications::publish(Widelands::NoteMapObjectDescription(
+		   item, Widelands::NoteMapObjectDescription::LoadType::kObject));
+	}
+	log_info("┃    → took %ums\n", timer.ms_since_last_query());
 }
 
 void EditorInteractive::map_changed(const MapWas& action) {
@@ -1016,4 +1058,10 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 EditorInteractive::Tools* EditorInteractive::tools() {
 	return tools_.get();
+}
+
+const std::vector<std::unique_ptr<EditorCategory>>&
+EditorInteractive::editor_categories(Widelands::MapObjectType type) const {
+	assert(editor_categories_.count(type) == 1);
+	return editor_categories_.at(type);
 }

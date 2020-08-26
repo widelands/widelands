@@ -718,7 +718,7 @@ void DefaultAI::late_initialization() {
 				bo.set_is(BuildingAttribute::kSupportingProducer);
 			}
 
-			iron_resource_id = game().world().resource_index("iron");
+			iron_resource_id = game().world().resource_index("resource_iron");
 			if (iron_resource_id == INVALID_INDEX) {
 				throw wexception("The AI needs the world to define the resource 'iron'");
 			}

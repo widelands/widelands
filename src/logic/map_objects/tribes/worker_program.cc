@@ -197,7 +197,7 @@ mine
          "findspace=size:any radius:7 resource:fish",
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net 192",
-         "mine=fish radius:1", -- Remove a fish in an area of 1
+         "mine=resource_fish radius:1", -- Remove a fish in an area of 1
          "animate=fishing duration:3s",
          "playsound=sound/fisher/fisher_pull_net 192",
          "createware=fish",
@@ -236,6 +236,8 @@ void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::strin
 			}
 		}
 	}
+	Notifications::publish(
+	   NoteMapObjectDescription(act->sparam1, NoteMapObjectDescription::LoadType::kObject));
 }
 
 /* RST
@@ -255,7 +257,7 @@ breed
          "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
          "animate=freeing duration:3s",
-         "breed=fish radius:1", -- Add a fish in an area of 1
+         "breed=resource_fish radius:1", -- Add a fish in an area of 1
          "return"
       },
 */
@@ -291,6 +293,8 @@ void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::stri
 			}
 		}
 	}
+	Notifications::publish(
+	   NoteMapObjectDescription(act->sparam1, NoteMapObjectDescription::LoadType::kObject));
 }
 
 /* RST
@@ -411,7 +415,7 @@ findspace
          "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
          "animate=freeing duration:3s",
-         "breed=fish 1",
+         "breed=resource_fish 1",
          "return"
       },
 
@@ -504,6 +508,8 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	workarea_info_[act->iparam1].insert(" findspace");
 
 	if (!act->sparam1.empty()) {
+		Notifications::publish(
+		   NoteMapObjectDescription(act->sparam1, NoteMapObjectDescription::LoadType::kObject));
 		if (act->iparam4 == 1) {
 			// breeds
 			created_resources_.insert(act->sparam1);
@@ -777,6 +783,8 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 	// Register created bobs
 	for (const std::string& bobname : act->sparamv) {
 		created_bobs_.insert(bobname);
+		Notifications::publish(
+		   NoteMapObjectDescription(bobname, NoteMapObjectDescription::LoadType::kObject));
 	}
 }
 
