@@ -393,7 +393,7 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 	// If zoom is 1x align to whole pixels to get pixel-perfect sprite rendering.
 	if (view_.zoom_near(1)) {
 		fields_to_draw_.reset(
-		    egbase, Vector2f(round(view_.viewpoint.x), round(view_.viewpoint.y)), view_.zoom, dst);
+		   egbase, Vector2f(round(view_.viewpoint.x), round(view_.viewpoint.y)), view_.zoom, dst);
 	} else {
 		fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
 	}
@@ -528,8 +528,7 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 		return true;
 	}
 	constexpr float kPercentPerMouseWheelTick = 0.02f;
-	float zoom = view_.zoom * static_cast<float>(
-	                             std::pow(1.f - kPercentPerMouseWheelTick, y));
+	float zoom = view_.zoom * static_cast<float>(std::pow(1.f - kPercentPerMouseWheelTick, y));
 	zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
 	return true;
 }
