@@ -61,21 +61,21 @@ void GameSaver::save() {
 		GamePreloadPacket p;
 		p.write(fs_, game_, nullptr);
 	}
-	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), " → took %ums\n", timer.ms_since_last_query());
 
 	log_info_time(game_.get_gametime(), "Game: Writing Game Class Data ... ");
 	{
 		GameClassPacket p;
 		p.write(fs_, game_, nullptr);
 	}
-	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), " → took %ums\n", timer.ms_since_last_query());
 
 	log_info_time(game_.get_gametime(), "Game: Writing Player Info ... ");
 	{
 		GamePlayerInfoPacket p;
 		p.write(fs_, game_, nullptr);
 	}
-	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), " → took %ums\n", timer.ms_since_last_query());
 
 	log_info_time(game_.get_gametime(), "Game: Writing Map Data!\n");
 	GameMapPacket map_packet;
@@ -91,7 +91,7 @@ void GameSaver::save() {
 		GamePlayerEconomiesPacket p;
 		p.write(fs_, game_, mos);
 	}
-	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), " → took %ums\n", timer.ms_since_last_query());
 
 	log_info_time(game_.get_gametime(), "Game: Writing ai persistent data ... ");
 	set_progress_message(_("AI"), 3);
@@ -99,7 +99,7 @@ void GameSaver::save() {
 		GamePlayerAiPersistentPacket p;
 		p.write(fs_, game_, mos);
 	}
-	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), " → took %ums\n", timer.ms_since_last_query());
 
 	log_info_time(game_.get_gametime(), "Game: Writing Command Queue Data ... ");
 	set_progress_message(_("Command queue"), 4);
@@ -107,7 +107,7 @@ void GameSaver::save() {
 		GameCmdQueuePacket p;
 		p.write(fs_, game_, mos);
 	}
-	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), " → took %ums\n", timer.ms_since_last_query());
 
 	log_info_time(game_.get_gametime(), "Game: Writing Interactive Player Data ... ");
 	set_progress_message(_("Interactive player"), 5);
@@ -115,6 +115,6 @@ void GameSaver::save() {
 		GameInteractivePlayerPacket p;
 		p.write(fs_, game_, mos);
 	}
-	log_info_time(game_.get_gametime(), "took %ums\n", timer.ms_since_last_query());
+	log_info_time(game_.get_gametime(), " → took %ums\n", timer.ms_since_last_query());
 }
 }  // namespace Widelands

@@ -170,12 +170,12 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		log_info("┃    Ships: ");
 		set_progress_message(_("Ships"), 1);
 		load_ships(table, tribes);
-		log_info("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		log_info("┃    Immovables: ");
 		set_progress_message(_("Immovables"), 2);
 		load_immovables(table, tribes, world);
-		log_info("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		log_info("┃    Wares: ");
 		set_progress_message(_("Wares"), 3);
@@ -183,7 +183,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
 			load_wares(*scenario_table, tribes);
 		}
-		log_info("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		log_info("┃    Workers: ");
 		set_progress_message(_("Workers"), 4);
@@ -191,7 +191,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		if (scenario_table != nullptr && scenario_table->has_key("workers_order")) {
 			load_workers(*scenario_table, tribes);
 		}
-		log_info("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		log_info("┃    Buildings: ");
 		set_progress_message(_("Buildings"), 5);
@@ -199,20 +199,20 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		if (scenario_table != nullptr && scenario_table->has_key("buildings")) {
 			load_buildings(*scenario_table, tribes);
 		}
-		log_info("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		set_progress_message(_("Finishing"), 6);
 
 		log_info("┃    Frontiers, flags and roads: ");
 		load_frontiers_flags_roads(table);
-		log_info("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		log_info("┃    Finalizing: ");
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
 		}
 		finalize_loading(tribes, world);
-		log_info("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}

@@ -313,7 +313,7 @@ size_t Map::count_all_conquerable_fields() {
 	std::set<FCoords> coords_to_check;
 
 	log_info("Collecting valuable fields ... ");
-	ScopedTimer timer("took %ums");
+	ScopedTimer timer(" → took %ums");
 
 	// If we don't have the given coordinates yet, walk the map and collect conquerable fields,
 	// initialized with the given radius around the coordinates
@@ -403,7 +403,7 @@ size_t Map::count_all_fields_excluding_caps(NodeCaps caps) {
 	}
 
 	log_info("Collecting valuable fields ... ");
-	ScopedTimer timer("took %ums");
+	ScopedTimer timer(" → took %ums");
 
 	for (MapIndex i = 0; i < max_index(); ++i) {
 		Field& field = fields_[i];

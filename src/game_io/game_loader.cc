@@ -74,14 +74,14 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		GamePreloadPacket p;
 		p.read(fs_, game_);
 	}
-	log_info("took %ums\n", timer.ms_since_last_query());
+	log_info(" → took %ums\n", timer.ms_since_last_query());
 
 	log_info("Game: Reading Game Class Data ... ");
 	{
 		GameClassPacket p;
 		p.read(fs_, game_);
 	}
-	log_info("took %ums\n", timer.ms_since_last_query());
+	log_info(" → took %ums\n", timer.ms_since_last_query());
 
 	log_info("Game: Reading Map Data ... ");
 	GameMapPacket map_packet;
@@ -119,7 +119,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		GamePlayerEconomiesPacket p;
 		p.read(fs_, game_, mol);
 	}
-	log_info("took %ums\n", timer.ms_since_last_query());
+	log_info(" → took %ums\n", timer.ms_since_last_query());
 
 	log_info("Game: Reading ai persistent data ... ");
 	set_progress_message(_("AI"), 3);
@@ -127,7 +127,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		GamePlayerAiPersistentPacket p;
 		p.read(fs_, game_, mol);
 	}
-	log_info("took %ums\n", timer.ms_since_last_query());
+	log_info(" → took %ums\n", timer.ms_since_last_query());
 
 	log_info("Game: Reading Command Queue Data ... ");
 	set_progress_message(_("Command queue"), 4);
@@ -135,7 +135,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		GameCmdQueuePacket p;
 		p.read(fs_, game_, mol);
 	}
-	log_info("took %ums\n", timer.ms_since_last_query());
+	log_info(" → took %ums\n", timer.ms_since_last_query());
 
 	//  This must be after the command queue has been read.
 	log_info("Game: Parsing messages ... ");
@@ -155,7 +155,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			}
 		}
 	}
-	log_info("took %ums\n", timer.ms_since_last_query());
+	log_info(" → took %ums\n", timer.ms_since_last_query());
 
 	set_progress_message(_("Finishing"), 6);
 	// For compatibility hacks only
@@ -170,7 +170,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			GameInteractivePlayerPacket p;
 			p.read(fs_, game_, mol);
 		}
-		log_info("took %ums\n", timer.ms_since_last_query());
+		log_info(" → took %ums\n", timer.ms_since_last_query());
 	}
 
 	return 0;
