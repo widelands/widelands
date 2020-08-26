@@ -2,11 +2,10 @@ tribes = wl.Tribes()
 
 image_dirname = path.dirname(__file__) .. "images/"
 
-push_textdomain("tribes")
+push_textdomain("tribes_encyclopedia")
 
 tribes:new_tribe {
    name = "frisians",
-   helptext_script = path.dirname(__file__) .. "helptexts.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {8, 26} },

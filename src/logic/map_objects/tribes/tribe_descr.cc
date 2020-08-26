@@ -131,16 +131,15 @@ void walk_tribe_immovables(
 }
 
 // Read helptext from Lua table
-std::map<std::string, std::string> read_helptexts(const Widelands::MapObjectDescr* descr,
-                                                  const LuaTable& table) {
-	std::map<std::string, std::string> result;
-	if (table.has_key(descr->name())) {
-		std::unique_ptr<LuaTable> helptext_table = table.get_table(descr->name());
+void load_helptexts(Widelands::MapObjectDescr* descr, const LuaTable& table, const std::string& tribe_name) {
+	std::map<std::string, std::string> helptexts;
+	if (table.has_key("helptexts")) {
+		std::unique_ptr<LuaTable> helptext_table = table.get_table("helptexts");
 		for (const std::string& category_key : helptext_table->keys<std::string>()) {
 			LuaTable::DataType datatype = helptext_table->get_datatype(category_key);
 			switch (datatype) {
 			case LuaTable::DataType::kString: {
-				result[category_key] = helptext_table->get_string(category_key);
+				helptexts[category_key] = helptext_table->get_string(category_key);
 			} break;
 			case LuaTable::DataType::kTable: {
 				// Concatenate text from entries with the localized sentence joiner
@@ -154,7 +153,7 @@ std::map<std::string, std::string> read_helptexts(const Widelands::MapObjectDesc
 						helptext =
 						   i18n::join_sentences(helptext, category_table->get_string(*it).c_str());
 					}
-					result[category_key] = helptext;
+					helptexts[category_key] = helptext;
 				} else {
 					log("WARNING: Empty helptext defined for '%s'\n", descr->name().c_str());
 				}
@@ -168,7 +167,7 @@ std::map<std::string, std::string> read_helptexts(const Widelands::MapObjectDesc
 	} else {
 		log("WARNING: No helptext defined for '%s'\n", descr->name().c_str());
 	}
-	return result;
+	descr->set_helptexts(tribe_name, helptexts);
 }
 }  // namespace
 
@@ -178,8 +177,7 @@ namespace Widelands {
  * The contents of 'table' are documented in
  * /data/tribes/atlanteans.lua
  */
-TribeDescr::TribeDescr(LuaInterface* lua,
-                       const Widelands::TribeBasicInfo& info,
+TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
                        Tribes& tribes,
                        const World& world,
                        const LuaTable& table,
@@ -200,12 +198,6 @@ TribeDescr::TribeDescr(LuaInterface* lua,
 	log("┏━ Loading %s:\n", name_.c_str());
 	ScopedTimer timer("┗━ took: %ums");
 
-	std::unique_ptr<LuaTable> helptexts = lua->run_script(table.get_string("helptext_script"));
-	std::unique_ptr<LuaTable> scenario_helptexts =
-	   scenario_table && scenario_table->has_key<std::string>("helptexts") ?
-	      scenario_table->get_table("helptexts") :
-	      nullptr;
-
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
 		   /** TRANSLATORS: Example: Loading Barbarians: Buildings (2/6) */
@@ -220,39 +212,30 @@ TribeDescr::TribeDescr(LuaInterface* lua,
 
 		log("┃    Immovables: ");
 		set_progress_message(_("Immovables"), 2);
-		load_immovables(table, tribes, world, helptexts->get_table("immovables").get());
+		load_immovables(table, tribes, world);
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Wares: ");
 		set_progress_message(_("Wares"), 3);
-		load_wares(table, tribes, helptexts->get_table("wares").get());
+		load_wares(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
-			load_wares(*scenario_table, tribes,
-			           scenario_helptexts && scenario_helptexts->has_key("wares") ?
-			              scenario_helptexts->get_table("wares").get() :
-			              nullptr);
+			load_wares(*scenario_table, tribes);
 		}
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Workers: ");
 		set_progress_message(_("Workers"), 4);
-		load_workers(table, tribes, helptexts->get_table("workers").get());
+		load_workers(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("workers_order")) {
-			load_workers(*scenario_table, tribes,
-			             scenario_helptexts && scenario_helptexts->has_key("workers") ?
-			                scenario_helptexts->get_table("workers").get() :
-			                nullptr);
+			load_workers(*scenario_table, tribes);
 		}
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Buildings: ");
 		set_progress_message(_("Buildings"), 5);
-		load_buildings(table, tribes, helptexts->get_table("buildings").get());
+		load_buildings(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("buildings")) {
-			load_buildings(*scenario_table, tribes,
-			               scenario_helptexts && scenario_helptexts->has_key("buildings") ?
-			                  scenario_helptexts->get_table("buildings").get() :
-			                  nullptr);
+			load_buildings(*scenario_table, tribes);
 		}
 		log("%ums\n", timer.ms_since_last_query());
 
@@ -375,7 +358,7 @@ void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
 	}
 }
 
-void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, LuaTable* helptexts) {
+void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("wares_order");
 
 	for (const int column_key : items_table->keys<int>()) {
@@ -398,10 +381,8 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, LuaTable* hel
 				}
 				ware_descr->set_preciousness(name(), ware_table->get_int("preciousness"));
 
-				// Add helptext
-				if (helptexts) {
-					ware_descr->set_helptexts(name(), read_helptexts(ware_descr, *helptexts));
-				}
+				// Add helptexts
+				load_helptexts(ware_descr, *ware_table, name());
 
 				// Add to tribe
 				wares_.insert(wareindex);
@@ -418,21 +399,18 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, LuaTable* hel
 
 void TribeDescr::load_immovables(const LuaTable& table,
                                  Tribes& tribes,
-                                 const World& world,
-                                 LuaTable* helptexts) {
-	for (const std::string& immovablename :
-	     table.get_table("immovables")->array_entries<std::string>()) {
+                                 const World& world) {
+	for (const auto& immovable_table : table.get_table("immovables")->array_entries<std::unique_ptr<LuaTable>>()) {
+		const std::string immovablename(immovable_table->get_string("name"));
 		try {
 			DescriptionIndex index = tribes.load_immovable(immovablename);
 			if (immovables_.count(index) == 1) {
 				throw GameDataError("Duplicate definition of immovable '%s'", immovablename.c_str());
 			}
 			immovables_.insert(index);
-			ImmovableDescr* imm_descr = tribes.get_mutable_immovable_descr(index);
 			// Add helptext
-			if (helptexts) {
-				imm_descr->set_helptexts(name(), read_helptexts(imm_descr, *helptexts));
-			}
+			load_helptexts(tribes.get_mutable_immovable_descr(index), *immovable_table, name());
+
 		} catch (const WException& e) {
 			throw GameDataError("Failed adding immovable '%s': %s", immovablename.c_str(), e.what());
 		}
@@ -466,7 +444,7 @@ void TribeDescr::load_immovables(const LuaTable& table,
 	get_resource_indicator(nullptr, 0);
 }
 
-void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes, LuaTable* helptexts) {
+void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("workers_order");
 
 	for (const int column_key : items_table->keys<int>()) {
@@ -496,10 +474,8 @@ void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes, LuaTable* h
 					worker_descr->set_preciousness(name(), worker_table->get_int("preciousness"));
 				}
 
-				// Add helptext
-				if (helptexts) {
-					worker_descr->set_helptexts(name(), read_helptexts(worker_descr, *helptexts));
-				}
+				// Add helptexts
+				load_helptexts(worker_descr, *worker_table, name());
 
 				// Add to tribe
 				workers_.insert(workerindex);
@@ -537,10 +513,46 @@ void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes, LuaTable* h
 	}
 }
 
-void TribeDescr::load_buildings(const LuaTable& table, Tribes& tribes, LuaTable* helptexts) {
-	for (const std::string& buildingname :
-	     table.get_table("buildings")->array_entries<std::string>()) {
-		add_building(buildingname, tribes, helptexts);
+void TribeDescr::load_buildings(const LuaTable& table, Tribes& tribes) {
+	for (const auto& building_table : table.get_table("buildings")->array_entries<std::unique_ptr<LuaTable>>()) {
+		const std::string buildingname(building_table->get_string("name"));
+		try {
+			DescriptionIndex index = tribes.load_building(buildingname);
+			if (has_building(index)) {
+				throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
+			}
+			buildings_.push_back(index);
+
+			BuildingDescr* building_descr = tribes.get_mutable_building_descr(index);
+
+			// Add helptexts
+			load_helptexts(building_descr, *building_table, name());
+
+			// Register at enhanced building
+			const DescriptionIndex& enhancement = building_descr->enhancement();
+			if (enhancement != INVALID_INDEX) {
+				tribes.get_mutable_building_descr(enhancement)->set_enhanced_from(index);
+			}
+
+			// Register trainigsites
+			if (building_descr->type() == MapObjectType::TRAININGSITE) {
+				trainingsites_.push_back(index);
+			}
+
+			// Register construction materials
+			for (const auto& build_cost : building_descr->buildcost()) {
+				if (!is_construction_material(build_cost.first)) {
+					construction_materials_.insert(build_cost.first);
+				}
+			}
+			for (const auto& enhancement_cost : building_descr->enhancement_cost()) {
+				if (!is_construction_material(enhancement_cost.first)) {
+					construction_materials_.insert(enhancement_cost.first);
+				}
+			}
+		} catch (const WException& e) {
+			throw GameDataError("Failed adding building '%s': %s", buildingname.c_str(), e.what());
+		}
 	}
 
 	if (table.has_key("port")) {
@@ -743,48 +755,6 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	}
 
 	return list->second.find(lowest)->second;
-}
-
-void TribeDescr::add_building(const std::string& buildingname,
-                              Tribes& tribes,
-                              LuaTable* helptexts) {
-	try {
-		DescriptionIndex index = tribes.load_building(buildingname);
-		if (has_building(index)) {
-			throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
-		}
-		buildings_.push_back(index);
-
-		BuildingDescr* building_descr = tribes.get_mutable_building_descr(index);
-		if (helptexts) {
-			building_descr->set_helptexts(name(), read_helptexts(building_descr, *helptexts));
-		}
-
-		// Register at enhanced building
-		const DescriptionIndex& enhancement = building_descr->enhancement();
-		if (enhancement != INVALID_INDEX) {
-			tribes.get_mutable_building_descr(enhancement)->set_enhanced_from(index);
-		}
-
-		// Register trainigsites
-		if (building_descr->type() == MapObjectType::TRAININGSITE) {
-			trainingsites_.push_back(index);
-		}
-
-		// Register construction materials
-		for (const auto& build_cost : building_descr->buildcost()) {
-			if (!is_construction_material(build_cost.first)) {
-				construction_materials_.insert(build_cost.first);
-			}
-		}
-		for (const auto& enhancement_cost : building_descr->enhancement_cost()) {
-			if (!is_construction_material(enhancement_cost.first)) {
-				construction_materials_.insert(enhancement_cost.first);
-			}
-		}
-	} catch (const WException& e) {
-		throw GameDataError("Failed adding building '%s': %s", buildingname.c_str(), e.what());
-	}
 }
 
 ToolbarImageset* TribeDescr::toolbar_image_set() const {
