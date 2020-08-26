@@ -65,7 +65,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                    butw_,
                    6,
                    buth_,
-                   _("Single Player…"),
+                   "",
                    UI::DropdownType::kTextualMenu,
                    UI::PanelStyle::kFsMenu,
                    UI::ButtonStyle::kFsMenuMenu),
@@ -76,7 +76,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                   butw_,
                   6,
                   buth_,
-                  _("Multiplayer…"),
+                  "",
                   UI::DropdownType::kTextualMenu,
                   UI::PanelStyle::kFsMenu,
                   UI::ButtonStyle::kFsMenuMenu),
@@ -86,9 +86,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
              0,
              butw_,
              buth_,
-             UI::ButtonStyle::kFsMenuMenu,
-             _("Watch Replay"),
-             as_tooltip_text_with_hotkey(_("Watch the replay of an old game"), "R")),
+             UI::ButtonStyle::kFsMenuMenu, ""),
      editor_(&vbox1_,
              "editor",
              0,
@@ -96,8 +94,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
              butw_,
              buth_,
              UI::ButtonStyle::kFsMenuMenu,
-             _("Editor"),
-             as_tooltip_text_with_hotkey(_("Launch the map editor"), "E")),
+             ""),
      addons_(&vbox2_,
              "addons",
              0,
@@ -105,8 +102,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
              butw_,
              buth_,
              UI::ButtonStyle::kFsMenuMenu,
-             _("Add-Ons"),
-             as_tooltip_text_with_hotkey(_("This feature is still under development"), "A")),
+             ""),
      options_(&vbox2_,
               "options",
               0,
@@ -114,8 +110,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
               butw_,
               buth_,
               UI::ButtonStyle::kFsMenuMenu,
-              _("Options"),
-              as_tooltip_text_with_hotkey(_("Technical and game-related settings"), "O")),
+              ""),
      about_(&vbox2_,
             "about",
             0,
@@ -123,8 +118,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
             butw_,
             buth_,
             UI::ButtonStyle::kFsMenuMenu,
-            _("About Widelands"),
-            as_tooltip_text_with_hotkey(_("Readme and Credits"), pgettext("hotkey", "F1"))),
+            ""),
      exit_(&vbox2_,
            "exit",
            0,
@@ -132,29 +126,17 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
            butw_,
            buth_,
            UI::ButtonStyle::kFsMenuMenu,
-           _("Exit Widelands"),
-           as_tooltip_text_with_hotkey(
-              _("You do not want to press this button"), pgettext("hotkey", "Esc"))),
+           ""),
      version_(
         this,
         0,
         0,
         0,
         0,
-        /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
-        (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str(),
-        UI::Align::kCenter,
-        g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
-     copyright_(this,
-                0,
-                0,
-                0,
-                0,
-                /** TRANSLATORS: Placeholders are the copyright years */
-                (boost::format(_("(C) %1%-%2% by the Widelands Development Team · Licensed under "
-                                 "the GNU General Public License V2.0")) %
-                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
-                   .str(),
+        "",
+                UI::Align::kCenter,
+                g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
+     copyright_(this, 0, 0, 0, 0, "",
                 UI::Align::kCenter,
                 g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
      splashscreen_(*g_gr->images().get("images/loadscreens/splash.jpg")),
@@ -208,77 +190,6 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 
 	addons_.set_enabled(false);  // Not yet implemented
 
-	Widelands::Game game;
-	SinglePlayerLoader loader(game);
-	std::vector<SavegameData> games = loader.load_files(kSaveDir);
-	SavegameData* newest_singleplayer = nullptr;
-	for (SavegameData& data : games) {
-		if (!data.is_directory() && data.is_singleplayer() &&
-		    (newest_singleplayer == nullptr || newest_singleplayer->compare_save_time(data))) {
-			newest_singleplayer = &data;
-		}
-	}
-	std::string continue_tooltip = "";
-	if (newest_singleplayer) {
-		filename_for_continue_ = newest_singleplayer->filename;
-		continue_tooltip =
-		   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>") %
-		    g_gr->styles()
-		       .font_style(UI::FontStyle::kTooltipHeader)
-		       .as_font_tag(
-		          /* strip leading "save/" and trailing ".wgf" */
-		          filename_for_continue_.substr(
-		             kSaveDir.length() + 1, filename_for_continue_.length() - kSaveDir.length() -
-		                                       kSavegameExtension.length() - 1)) %
-		    (boost::format(_("Map: %s")) % g_gr->styles()
-		                                      .font_style(UI::FontStyle::kTooltip)
-		                                      .as_font_tag(newest_singleplayer->mapname))
-		       .str() %
-		    (boost::format(_("Win Condition: %s")) %
-		     g_gr->styles()
-		        .font_style(UI::FontStyle::kTooltip)
-		        .as_font_tag(newest_singleplayer->wincondition))
-		       .str() %
-		    (boost::format(_("Players: %s")) % g_gr->styles()
-		                                          .font_style(UI::FontStyle::kTooltip)
-		                                          .as_font_tag(newest_singleplayer->nrplayers))
-		       .str() %
-		    (boost::format(_("Gametime: %s")) % g_gr->styles()
-		                                           .font_style(UI::FontStyle::kTooltip)
-		                                           .as_font_tag(newest_singleplayer->gametime))
-		       .str() %
-		    /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
-		    (boost::format(_("Saved: %s")) % g_gr->styles()
-		                                        .font_style(UI::FontStyle::kTooltip)
-		                                        .as_font_tag(newest_singleplayer->savedatestring))
-		       .str())
-		      .str();
-	}
-
-	singleplayer_.add(_("New Game"), FullscreenMenuBase::MenuTarget::kNewGame, nullptr, false,
-	                  _("Begin a new game"), "N");
-	singleplayer_.add(_("Campaigns"), FullscreenMenuBase::MenuTarget::kCampaign, nullptr, false,
-	                  _("Play a campaign"), "H");
-	singleplayer_.add(_("Tutorials"), FullscreenMenuBase::MenuTarget::kTutorial, nullptr, false,
-	                  _("Play one of our beginners’ tutorials"), "T");
-	singleplayer_.add(_("Load Game"), FullscreenMenuBase::MenuTarget::kLoadGame, nullptr, false,
-	                  _("Continue a saved game"), "L");
-	if (!filename_for_continue_.empty()) {
-		singleplayer_.add(_("Continue Playing"), FullscreenMenuBase::MenuTarget::kContinueLastsave,
-		                  nullptr, false, continue_tooltip, "C");
-	}
-	multiplayer_.add(_("Online Game"), FullscreenMenuBase::MenuTarget::kMetaserver, nullptr, false,
-	                 _("Join the Widelands lobby"), "J");
-	multiplayer_.add(_("Online Game Settings"), FullscreenMenuBase::MenuTarget::kOnlineGameSettings,
-	                 nullptr, false, _("Log in as a registered user"), "U");
-	multiplayer_.add(_("LAN / Direct IP"), FullscreenMenuBase::MenuTarget::kLan, nullptr, false,
-	                 _("Play a private online game"), "P");
-
-	singleplayer_.set_tooltip(
-	   as_tooltip_text_with_hotkey(_("Begin or load a single-player campaign or free game"), "S"));
-	multiplayer_.set_tooltip(
-	   as_tooltip_text_with_hotkey(_("Play with your friends over the internet"), "M"));
-
 	for (const std::string& img : g_fs->list_directory("images/ui_fsmenu/backgrounds")) {
 		images_.push_back(img);
 	}
@@ -290,7 +201,113 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	} else {
 		last_image_exchange_time_ = SDL_GetTicks();
 	}
+	set_labels();
 	layout();
+}
+
+void FullscreenMenuMain::set_labels() {
+	singleplayer_.clear();
+	multiplayer_.clear();
+
+	singleplayer_.add(_("New Game"), FullscreenMenuBase::MenuTarget::kNewGame, nullptr, false,
+	                  _("Begin a new game"), "N");
+	singleplayer_.add(_("Campaigns"), FullscreenMenuBase::MenuTarget::kCampaign, nullptr, false,
+	                  _("Play a campaign"), "H");
+	singleplayer_.add(_("Tutorials"), FullscreenMenuBase::MenuTarget::kTutorial, nullptr, false,
+	                  _("Play one of our beginners’ tutorials"), "T");
+	singleplayer_.add(_("Load Game"), FullscreenMenuBase::MenuTarget::kLoadGame, nullptr, false,
+	                  _("Continue a saved game"), "L");
+
+	// Refresh the Continue tooltip. The SavegameData must be reloaded after
+	// every language switch because it contains localized strings.
+	{
+		filename_for_continue_ = "";
+		Widelands::Game game;
+		SinglePlayerLoader loader(game);
+		std::vector<SavegameData> games = loader.load_files(kSaveDir);
+		SavegameData* newest_singleplayer = nullptr;
+		for (SavegameData& data : games) {
+			if (!data.is_directory() && data.is_singleplayer() &&
+				(newest_singleplayer == nullptr || newest_singleplayer->compare_save_time(data))) {
+				newest_singleplayer = &data;
+			}
+		}
+		if (newest_singleplayer) {
+			filename_for_continue_ = newest_singleplayer->filename;
+			singleplayer_.add(_("Continue Playing"), FullscreenMenuBase::MenuTarget::kContinueLastsave,
+				              nullptr, false,
+			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>") %
+				g_gr->styles()
+				   .font_style(UI::FontStyle::kTooltipHeader)
+				   .as_font_tag(
+				      /* strip leading "save/" and trailing ".wgf" */
+				      filename_for_continue_.substr(
+				         kSaveDir.length() + 1, filename_for_continue_.length() - kSaveDir.length() -
+				                                   kSavegameExtension.length() - 1)) %
+				(boost::format(_("Map: %s")) % g_gr->styles()
+				                                  .font_style(UI::FontStyle::kTooltip)
+				                                  .as_font_tag(newest_singleplayer->mapname))
+				   .str() %
+				(boost::format(_("Win Condition: %s")) %
+				 g_gr->styles()
+				    .font_style(UI::FontStyle::kTooltip)
+				    .as_font_tag(newest_singleplayer->wincondition))
+				   .str() %
+				(boost::format(_("Players: %s")) % g_gr->styles()
+				                                      .font_style(UI::FontStyle::kTooltip)
+				                                      .as_font_tag(newest_singleplayer->nrplayers))
+				   .str() %
+				(boost::format(_("Gametime: %s")) % g_gr->styles()
+				                                       .font_style(UI::FontStyle::kTooltip)
+				                                       .as_font_tag(newest_singleplayer->gametime))
+				   .str() %
+				/** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
+				(boost::format(_("Saved: %s")) % g_gr->styles()
+				                                    .font_style(UI::FontStyle::kTooltip)
+				                                    .as_font_tag(newest_singleplayer->savedatestring))
+				   .str())
+				  .str(), "C");
+		}
+	}
+
+	multiplayer_.add(_("Online Game"), FullscreenMenuBase::MenuTarget::kMetaserver, nullptr, false,
+	                 _("Join the Widelands lobby"), "J");
+	multiplayer_.add(_("Online Game Settings"), FullscreenMenuBase::MenuTarget::kOnlineGameSettings,
+	                 nullptr, false, _("Log in as a registered user"), "U");
+	multiplayer_.add(_("LAN / Direct IP"), FullscreenMenuBase::MenuTarget::kLan, nullptr, false,
+	                 _("Play a private online game"), "P");
+
+	singleplayer_.set_label(_("Single Player…"));
+	multiplayer_.set_label(_("Multiplayer…"));
+	singleplayer_.set_tooltip(
+	   as_tooltip_text_with_hotkey(_("Begin or load a single-player campaign or free game"), "S"));
+	multiplayer_.set_tooltip(
+	   as_tooltip_text_with_hotkey(_("Play with your friends over the internet"), "M"));
+
+	replay_.set_title(_("Watch Replay"));
+	replay_.set_tooltip(as_tooltip_text_with_hotkey(_("Watch the replay of an old game"), "R"));
+
+	editor_.set_title(_("Editor"));
+	editor_.set_tooltip(as_tooltip_text_with_hotkey(_("Launch the map editor"), "E"));
+	addons_.set_title(_("Add-Ons"));
+	addons_.set_tooltip(as_tooltip_text_with_hotkey(_("This feature is still under development"), "A"));
+	options_.set_title(_("Options"));
+	options_.set_tooltip(as_tooltip_text_with_hotkey(_("Technical and game-related settings"), "O"));
+	about_.set_title(_("About Widelands"));
+	about_.set_tooltip(as_tooltip_text_with_hotkey(_("Readme, License, and Credits"), pgettext("hotkey", "F1")));
+	exit_.set_title(_("Exit Widelands"));
+	exit_.set_tooltip(as_tooltip_text_with_hotkey(
+              _("You do not want to press this button"), pgettext("hotkey", "Esc")));
+
+	version_.set_text(
+	/** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
+        (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str());
+	copyright_.set_text(
+	   /** TRANSLATORS: Placeholders are the copyright years */
+                (boost::format(_("(C) %1%-%2% by the Widelands Development Team · Licensed under "
+                                 "the GNU General Public License V2.0")) %
+                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
+                   .str());
 }
 
 void FullscreenMenuMain::set_button_visibility(const bool v) {
@@ -330,6 +347,9 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kTutorial);
 			return true;
 		case SDLK_c:
+			if (filename_for_continue_.empty()) {
+				return false;
+			}
 			end_modal<FullscreenMenuBase::MenuTarget>(
 			   FullscreenMenuBase::MenuTarget::kContinueLastsave);
 			return true;

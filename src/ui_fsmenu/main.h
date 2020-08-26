@@ -57,6 +57,9 @@ public:
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 	bool handle_key(bool, SDL_Keysym) override;
 
+	// Set the labels for all buttons etc. This needs to be called after language switching.
+	void set_labels();
+
 protected:
 	void clicked_ok() override {
 	}

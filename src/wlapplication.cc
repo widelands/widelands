@@ -1201,6 +1201,7 @@ void WLApplication::mainmenu() {
 				break;
 			case FullscreenMenuBase::MenuTarget::kOptions: {
 				OptionsCtrl om(*mm, get_config_section());
+				mm->set_labels();  // update buttons for new language
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kAbout: {
@@ -1209,8 +1210,11 @@ void WLApplication::mainmenu() {
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kContinueLastsave: {
-				need_to_reset = true;
-				load_game(mm->get_filename_for_continue());
+				const std::string& file = mm->get_filename_for_continue();
+				if (!file.empty()) {
+					need_to_reset = true;
+					load_game(file);
+				}
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kEditor:
