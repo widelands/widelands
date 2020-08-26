@@ -312,7 +312,7 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 			}
 
 			for (size_t jx = 0; jx < category.num_critters(); jx++) {
-				if (world.get_critter(category.get_critter(jx).c_str()) == Widelands::INVALID_INDEX) {
+				if (world.critter_index(category.get_critter(jx)) == Widelands::INVALID_INDEX) {
 					throw wexception("unknown critter %s", category.get_critter(jx).c_str());
 				}
 			}

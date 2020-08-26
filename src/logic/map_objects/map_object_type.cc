@@ -28,6 +28,10 @@ std::string to_string(const MapObjectType type) {
 	// the Lua interface, so make sure to change the documentation there when changing anything in
 	// this function.
 	switch (type) {
+	case MapObjectType::RESOURCE:
+		return "resource";
+	case MapObjectType::TERRAIN:
+		return "terrain";
 	case MapObjectType::BOB:
 		return "bob";
 	case MapObjectType::CRITTER:

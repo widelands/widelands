@@ -26,6 +26,10 @@ and what your image files need to look like:
 
 .. code-block:: lua
 
+   -- Tell the engine where the png files are located
+   animation_directory = path.dirname(__file__),
+
+   -- Define the animations
    animations = {
       idle = {
          hotspot = { 5, 7 },

@@ -92,7 +92,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          MapObjectType init_type,
                                          const LuaTable& table,
                                          Tribes& tribes,
-                                         const World& world)
+                                         World& world)
    : BuildingDescr(init_descname, init_type, table, tribes),
      ware_demand_checks_(new std::set<DescriptionIndex>()),
      worker_demand_checks_(new std::set<DescriptionIndex>()),
@@ -239,7 +239,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          const LuaTable& table,
                                          Tribes& tribes,
-                                         const World& world)
+                                         World& world)
    : ProductionSiteDescr(
         init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
 }
