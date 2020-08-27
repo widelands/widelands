@@ -169,7 +169,6 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 		}
 	}
 	return Panel::handle_key(down, code);
->>>>>>> master
 }
 
 /**
