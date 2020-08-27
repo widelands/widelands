@@ -26,7 +26,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
-// TODO(jmoerschbach): replace with gamechatpanel2 once internetlobby is using boxlayout also
 /**
  * Provides a panel that contains chat message scrollbar and a chat message
  * entry field.
