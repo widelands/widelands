@@ -1415,9 +1415,9 @@ bool WLApplication::load_game(std::string filename) {
 
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
 	SinglePlayerGameSettingsProvider sp;
-	FullscreenMenuLoadGame ssg(game, &sp);
 
 	if (filename.empty()) {
+		FullscreenMenuLoadGame ssg(game, &sp);
 		if (ssg.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
 			filename = ssg.filename();
 		} else {
