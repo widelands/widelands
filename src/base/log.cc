@@ -180,7 +180,7 @@ void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt,
 	// message type
 	char buffer_prefix[8];
 	snprintf(buffer_prefix, sizeof(buffer_prefix), "%s", to_string(type));
-	char buffer_timestamp[32];
+	char buffer_timestamp[32] = "\0";
 	if (gametime != kNoTimestamp && gametime > 0) {  // timestamp
 		const uint32_t hours = gametime / (1000 * 60 * 60);
 		gametime -= hours * 1000 * 60 * 60;
@@ -205,7 +205,7 @@ void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt,
 		if (str.find_first_not_of(' ') == std::string::npos) {
 			continue;
 		}
-		if (gametime != kNoTimestamp && gametime > 0) {
+		if (buffer_timestamp[0]) {
 			logger->log_cstring(buffer_timestamp);
 		}
 		logger->log_cstring(buffer_prefix);
