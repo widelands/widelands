@@ -27,7 +27,7 @@
 #include "ui_fsmenu/helpwindow.h"
 #include "ui_fsmenu/launch_game.h"
 #include "ui_fsmenu/multiplayersetupgroup.h"
-#include "wui/game_chat_panel2.h"
+#include "wui/game_chat_panel.h"
 
 struct ChatProvider;
 
@@ -64,7 +64,7 @@ private:
 
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;
 	MultiPlayerSetupGroup mpsg_;
-	GameChatPanel2 chat_;
+	GameChatPanel chat_;
 	std::string filename_proof_;  // local variable to check state
 };
 

@@ -62,6 +62,7 @@ private:
 	void recalculate(bool has_new_message = false);
 	void key_enter();
 	void key_escape();
+	void draw(RenderTarget& dst) override;
 
 	ChatProvider& chat_;
 	UI::Box box_;

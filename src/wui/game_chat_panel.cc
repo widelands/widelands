@@ -22,6 +22,7 @@
 #include <SDL_mouse.h>
 
 #include "sound/sound_handler.h"
+#include "ui_basic/mouse_constants.h"
 #include "wui/chat_msg_layout.h"
 
 /**
@@ -45,7 +46,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              style,
              "",
              UI::Align::kLeft,
-             UI::MultilineTextarea::ScrollMode::kScrollLogForced),
+             UI::MultilineTextarea::ScrollMode::kScrollLog),
      editbox(this, 0, 0, w, style),
      chat_message_counter(0),
      chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
@@ -143,4 +144,8 @@ bool GameChatPanel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	}
 
 	return false;
+}
+void GameChatPanel::draw(RenderTarget& dst) {
+	dst.brighten_rect(Recti(chatbox.get_x(), chatbox.get_y(), chatbox.get_w(), chatbox.get_h()),
+	                  -MOUSE_OVER_BRIGHT_FACTOR);
 }
