@@ -46,14 +46,12 @@ World::World(DescriptionManager* description_manager)
 }
 
 void World::add_world_object_type(const LuaTable& table, MapObjectType type) {
-	// TODO(GunChleoc): Push/pop textdomain in Lua and get rid of localization code here
-	i18n::Textdomain td("world");
 	const std::string& type_name = table.get_string("name");
-	const std::string& msgctxt =
-	   table.has_key<std::string>("msgctxt") ? table.get_string("msgctxt") : "";
-	const std::string& type_descname =
-	   msgctxt.empty() ? _(table.get_string("descname").c_str()) :
-	                     pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str());
+
+	// TODO(GunChleoc): Compatibility, remove after v1.0
+	if (table.has_key<std::string>("msgctxt")) {
+		log("WARNING: The 'msgctxt' entry is no longer needed in '%s', please remove it\n", type_name.c_str());
+	}
 
 	description_manager_->mark_loading_in_progress(type_name);
 
@@ -61,10 +59,10 @@ void World::add_world_object_type(const LuaTable& table, MapObjectType type) {
 	switch (type) {
 	case MapObjectType::CRITTER:
 		critters_->add(new CritterDescr(
-		   _(table.get_string("descname")), table, description_manager_->get_attributes(type_name)));
+		   table.get_string("descname"), table, description_manager_->get_attributes(type_name)));
 		break;
 	case MapObjectType::IMMOVABLE:
-		immovables_->add(new ImmovableDescr(type_descname, table, MapObjectDescr::OwnerType::kWorld,
+		immovables_->add(new ImmovableDescr(table.get_string("descname"), table, MapObjectDescr::OwnerType::kWorld,
 		                                    description_manager_->get_attributes(type_name)));
 		break;
 	case MapObjectType::RESOURCE:

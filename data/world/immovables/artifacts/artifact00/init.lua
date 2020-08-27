@@ -139,6 +139,7 @@
 --   commands in their program. They also need to specify a ``fall`` program,
 --   which will be triggered when a lumberjack fells them.
 
+push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
@@ -154,3 +155,5 @@ wl.World():new_immovable_type{
       },
    }
 }
+
+pop_textdomain()

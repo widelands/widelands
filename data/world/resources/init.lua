@@ -15,6 +15,8 @@
 -- Which resource can be placed where on the map is defined in each terrain's
 -- ``valid_resources`` table.
 
+push_textdomain("world")
+
 pics_dir = path.dirname(__file__) .. "pics/"
 
 -- RST
@@ -171,3 +173,5 @@ wl.World():new_resource_type{
       [1000] = pics_dir .. "fish4.png",
    }
 }
+
+pop_textdomain()
