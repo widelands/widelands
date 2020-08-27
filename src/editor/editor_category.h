@@ -29,7 +29,6 @@
 #include "logic/widelands.h"
 
 class Image;
-class LuaTable;
 
 /// Represents a category for grouping items in the Editor, so purely a UI
 /// distinction and not a logical one.
