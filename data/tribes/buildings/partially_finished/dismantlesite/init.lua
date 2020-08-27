@@ -13,6 +13,8 @@
 -- The building will also need its help texts, which are defined in
 -- ``buildings/partially_finished/dismantlesite/helptexts.lua``
 
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 -- RST
@@ -24,7 +26,6 @@ dirname = path.dirname(__file__)
 --                It only contains :ref:`lua_tribes_buildings_common`.
 --
 tribes:new_dismantlesite_type {
-   msgctxt = "building",
    name = "dismantlesite",
    -- TRANSLATORS: This is a name used in lists of buildings for buildings being taken apart
    descname = pgettext("building", "Dismantle Site"),
@@ -41,3 +42,5 @@ tribes:new_dismantlesite_type {
 
    aihints = {},
 }
+
+pop_textdomain()

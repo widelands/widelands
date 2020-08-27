@@ -15,6 +15,8 @@
 -- the function out of ``data/tribes/wares/bread_paddle/helptexts.lua``
 -- and use it as a base for creating your ware's helptexts.
 
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 -- RST
@@ -25,13 +27,9 @@ dirname = path.dirname(__file__)
 --    :arg table: This table contains all the data that the game engine will add
 --                to this ware. It contains the following entries:
 --
---    **msgctxt**: The context that Gettext will use to disambiguate the
---    translations for strings in this table.
---
 --    **name**: A string containing the internal name of this ware.
 --
---    **descname**: The translatable display name. Use ``pgettext`` with the
---    ``msgctxt`` above to fetch the string.
+--    **descname**: The translatable display name. Use ``pgettext`` to fetch the string.
 --
 --    **helptext_script**: The full path to the ``helptexts.lua`` script for this ware.
 --
@@ -56,7 +54,6 @@ dirname = path.dirname(__file__)
 --    Wares have an "idle" animation.
 --
 tribes:new_ware_type {
-   msgctxt = "ware",
    name = "armor",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Armor"),
@@ -70,6 +67,8 @@ tribes:new_ware_type {
       },
    }
 }
+
+pop_textdomain()
 
 -- RST
 --

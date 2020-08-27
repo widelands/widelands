@@ -13,6 +13,8 @@
 -- The building will also need its help texts, which are defined in
 -- ``data/tribes/buildings/trainingsites/<tribe_name>/<building_name>/helptexts.lua``
 
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 -- RST
@@ -76,7 +78,6 @@ dirname = path.dirname(__file__)
 --            *Optional*. Just like ``soldier attack``, but for evade training.
 --
 tribes:new_trainingsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_dungeon",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Dungeon"),
@@ -213,3 +214,5 @@ tribes:new_trainingsite_type {
    soldier_capacity = 8,
    trainer_patience = 16
 }
+
+pop_textdomain()

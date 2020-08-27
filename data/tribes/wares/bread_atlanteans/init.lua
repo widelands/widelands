@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_ware_type {
-   msgctxt = "atlanteans_ware",
    name = "atlanteans_bread",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("atlanteans_ware", "Bread"),
@@ -15,3 +16,5 @@ tribes:new_ware_type {
       },
    }
 }
+
+pop_textdomain()

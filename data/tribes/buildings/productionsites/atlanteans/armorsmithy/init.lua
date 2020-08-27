@@ -13,6 +13,7 @@
 -- The building will also need its help texts, which are defined in
 -- ``data/tribes/buildings/productionsites/<tribe_name>/<building_name>/helptexts.lua``
 
+push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
@@ -100,7 +101,6 @@ dirname = path.dirname(__file__)
 --        Look at the Atlantean Fish Breeder's House for an example.
 --
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_armorsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Armor Smithy"),
@@ -180,3 +180,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

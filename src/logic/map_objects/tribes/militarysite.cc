@@ -299,7 +299,6 @@ MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
      conquer_radius_(0),
      num_soldiers_(0),
      heal_per_second_(0) {
-	i18n::Textdomain td("tribes");
 
 	conquer_radius_ = table.get_int("conquers");
 	num_soldiers_ = table.get_int("max_soldiers");
@@ -311,11 +310,11 @@ MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
 	prefers_heroes_at_start_ = table.get_bool("prefer_heroes");
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("messages");
-	occupied_str_ = _(items_table->get_string("occupied"));
-	aggressor_str_ = _(items_table->get_string("aggressor"));
-	attack_str_ = _(items_table->get_string("attack"));
-	defeated_enemy_str_ = _(items_table->get_string("defeated_enemy"));
-	defeated_you_str_ = _(items_table->get_string("defeated_you"));
+	occupied_str_ = items_table->get_string("occupied");
+	aggressor_str_ = items_table->get_string("aggressor");
+	attack_str_ = items_table->get_string("attack");
+	defeated_enemy_str_ = items_table->get_string("defeated_enemy");
+	defeated_you_str_ = items_table->get_string("defeated_you");
 }
 
 /**

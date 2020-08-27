@@ -33,10 +33,9 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
      icon(table->get_string("icon")),
      script(table->get_string("script")) {
 	try {
-		i18n::Textdomain td("tribes");
-		author = _(table->get_string("author"));
-		descname = _(table->get_string("descname"));
-		tooltip = _(table->get_string("tooltip"));
+		author = table->get_string("author");
+		descname = table->get_string("descname");
+		tooltip = table->get_string("tooltip");
 		std::unique_ptr<LuaTable> starting_conditions = table->get_table("starting_conditions");
 		LuaInterface lua;
 

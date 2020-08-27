@@ -12,6 +12,8 @@
 -- The soldier will also need its :ref:`help texts <lua_tribes_workers_helptexts>`,
 -- which are defined in ``data/tribes/wares/<tribe name>/soldier/helptexts.lua``
 
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 animations = {
@@ -249,7 +251,6 @@ all_levels_atl = {
 --    decide whether they will actually be used (by assigning them (or not) to a table below).
 
 tribes:new_soldier_type {
-   msgctxt = "atlanteans_worker",
    name = "atlanteans_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Soldier"),
@@ -334,3 +335,5 @@ tribes:new_soldier_type {
       },
    },
 }
+
+pop_textdomain()

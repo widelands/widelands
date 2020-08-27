@@ -16,6 +16,8 @@
 -- The building will also need its help texts, which are defined in
 -- ``data/tribes/buildings/warehouses/<tribe_name>/<building_name>/helptexts.lua``
 
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 -- RST
@@ -41,7 +43,6 @@ dirname = path.dirname(__file__)
 --        *Optional. Default:* ``true``. Set this to ``false`` for headquarters.
 
 tribes:new_warehouse_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_headquarters",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Headquarters"),
@@ -62,3 +63,5 @@ tribes:new_warehouse_type {
    heal_per_second = 220,
    conquers = 9,
 }
+
+pop_textdomain()

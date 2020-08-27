@@ -13,6 +13,8 @@
 -- The carrier will also need its :ref:`help texts <lua_tribes_workers_helptexts>`,
 -- which are defined in ``data/tribes/wares/<tribe name>/<worker_name>/helptexts.lua``
 
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 -- RST
@@ -24,8 +26,6 @@ dirname = path.dirname(__file__)
 --                to this carrier. It contains the :ref:`lua_tribes_workers_common`.
 --
 tribes:new_carrier_type {
-   msgctxt = "atlanteans_worker",
-   --msgctxt = msgctxt,
    name = "atlanteans_carrier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Carrier"),
@@ -53,3 +53,5 @@ tribes:new_carrier_type {
       }
    }
 }
+
+pop_textdomain()

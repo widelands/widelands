@@ -2106,12 +2106,13 @@ void ProductionProgram::ActConstruct::building_work_failed(Game& game,
 }
 
 ProductionProgram::ProductionProgram(const std::string& init_name,
-                                     const std::string& init_descname,
-                                     std::unique_ptr<LuaTable> actions_table,
+                                     const LuaTable& program_table,
                                      Tribes& tribes,
                                      World& world,
                                      ProductionSiteDescr* building)
-   : MapObjectProgram(init_name), descname_(init_descname) {
+   : MapObjectProgram(init_name), descname_(program_table.get_string("descname")) {
+
+	std::unique_ptr<LuaTable> actions_table = program_table.get_table("actions");
 
 	for (const std::string& line : actions_table->array_entries<std::string>()) {
 		if (line.empty()) {

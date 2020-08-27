@@ -20,21 +20,13 @@ Common Building Properties
 
 Buildings are defined with Lua functions called ``new_<building_type>_type{table}``. The contents of ``table`` depend on the type of building that you are defining. The common properties shared by all buildings are:
 
-
-**msgctxt**
-    *Mandatory*. The context that Gettext will use to disambiguate the translations for
-    strings in this table, e.g.::
-
-        msgctxt = "atlanteans_building",
-
 **name**
     *Mandatory*. A string containing the internal name of this building, e.g.::
 
         name = "atlanteans_fortress",
 
 **descname**
-    *Mandatory*. The translatable display name. Use ``pgettext`` with the ``msgctxt``
-    above to fetch the string, e.g.::
+    *Mandatory*. The translatable display name. Use ``pgettext`` to fetch the string, e.g.::
 
         descname = pgettext("atlanteans_building", "Fortress"),
 

@@ -13,6 +13,8 @@
 -- The building will also need its help texts, which are defined in
 -- ``buildings/partially_finished/constructionsite/helptexts.lua``
 
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 -- RST
@@ -24,7 +26,6 @@ dirname = path.dirname(__file__)
 --                It only contains :ref:`lua_tribes_buildings_common`.
 --
 tribes:new_constructionsite_type {
-   msgctxt = "building",
    name = "constructionsite",
    -- TRANSLATORS: This is a name used in lists of buildings for buildings under construction
    descname = pgettext("building", "Construction Site"),
@@ -47,3 +48,5 @@ tribes:new_constructionsite_type {
 
    aihints = {},
 }
+
+pop_textdomain()
