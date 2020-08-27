@@ -466,7 +466,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		} else {
 			for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 				tribes_dropdown_.add(tribeinfo.descname, tribeinfo.name,
-									 g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
+				                     g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
 			}
 
 			tribes_dropdown_.add(pgettext("tribe", "Random"), "random",

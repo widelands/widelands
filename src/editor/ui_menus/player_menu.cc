@@ -173,8 +173,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		   UI::ButtonStyle::kWuiSecondary);
 
 		for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-			plr_tribe->add(_(tribeinfo.descname), tribeinfo.name,
-						   g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
+			plr_tribe->add(_(tribeinfo.descname), tribeinfo.name, g_gr->images().get(tribeinfo.icon),
+			               false, tribeinfo.tooltip);
 		}
 
 		plr_tribe->add(pgettext("tribe", "Random"), "",

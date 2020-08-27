@@ -172,8 +172,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				log("WARNING: The main program for the building %s should be renamed from 'work' to "
 				    "'main'\n",
 				    name().c_str());
-				programs_[MapObjectProgram::kMainProgram] = std::unique_ptr<ProductionProgram>(
-				   new ProductionProgram(MapObjectProgram::kMainProgram, *program_table, tribes, world, this));
+				programs_[MapObjectProgram::kMainProgram] =
+				   std::unique_ptr<ProductionProgram>(new ProductionProgram(
+				      MapObjectProgram::kMainProgram, *program_table, tribes, world, this));
 			} else {
 				programs_[program_name] = std::unique_ptr<ProductionProgram>(
 				   new ProductionProgram(program_name, *program_table, tribes, world, this));
@@ -220,8 +221,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const LuaTable& table,
                                          Tribes& tribes,
                                          World& world)
-   : ProductionSiteDescr(
-        init_descname, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
+   : ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
 }
 
 void ProductionSiteDescr::clear_attributes() {
