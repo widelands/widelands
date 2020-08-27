@@ -580,7 +580,7 @@ void Panel::think() {
  * (grand-)children for which set_thinks(false) has not been called.
  */
 void Panel::do_think() {
-	if (thinks()) {
+	if (thinks() && !(flags_ & pf_die)) {
 		think();
 	}
 
