@@ -38,6 +38,4 @@ tribes:new_carrier_type {
          hotspot = {22, 15}
       },
    },
-
-   aihints = {}
 }

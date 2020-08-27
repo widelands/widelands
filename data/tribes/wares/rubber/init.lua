@@ -8,12 +8,6 @@ tribes:new_ware_type {
    helptext_script = dirname .. "helptexts.lua",
    animation_directory = dirname,
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      amazons = 30
-   },
-   preciousness = {
-      amazons = 40
-   },
 
    animations = {
       idle = {

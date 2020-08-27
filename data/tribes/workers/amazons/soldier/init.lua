@@ -48,8 +48,6 @@ tribes:new_soldier_type {
       pictures = path.list_files (dirname .. "evade_level?.png"),
    },
 
-   aihints = {},
-
    -- Random animations for battle
    attack_success_w = {
       atk_ok_w = all_levels_ama,
