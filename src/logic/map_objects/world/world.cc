@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"
