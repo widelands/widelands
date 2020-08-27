@@ -335,7 +335,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->delete_tag("artifacts");
 	}
 
-	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
+	egbase.create_loader_ui({"editor"}, true, kEditorSplashImage);
 	Notifications::publish(UI::NoteLoadingMessage(_("Saving the map…")));
 
 	// Try saving the map.

@@ -44,6 +44,8 @@
 
 class EditorTool;
 
+constexpr const char* const kEditorSplashImage = "loadscreens/editor.jpg";
+
 /**
  * This is the EditorInteractive. It is like the InteractivePlayer class,
  * but for the Editor instead of the game

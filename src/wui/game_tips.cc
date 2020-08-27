@@ -31,8 +31,6 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
-#define BG_IMAGE "images/loadscreens/tips_bg.png"
-
 constexpr int kTextPadding = 48;
 
 GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>& names)
@@ -106,7 +104,7 @@ void GameTips::stop() {
 void GameTips::show_tip(int32_t index) {
 	RenderTarget& rt = *g_gr->get_render_target();
 
-	const Image* pic_background = g_gr->images().get(BG_IMAGE);
+	const Image* pic_background = g_gr->images().get("loadscreens/gametips.png");
 	const int w = pic_background->width();
 	const int h = pic_background->height();
 	Vector2i pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
