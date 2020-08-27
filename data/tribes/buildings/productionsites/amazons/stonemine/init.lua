@@ -63,7 +63,7 @@ tribes:new_productionsite_type {
          descname = _"mining granite",
          actions = {
             "animate=working duration:10s",
-            "mine=stones radius:1 yield:100% when_empty:20%",
+            "mine=resource_stones radius:1 yield:100% when_empty:20%",
             "produce=granite",
          }
       },
