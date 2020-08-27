@@ -56,6 +56,8 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 	scrollbar_.set_singlestepsize(text_height(*style_, font_scale_));
 	scrollbar_.set_steps(1);
 	set_scrollmode(scroll_mode);
+
+	set_can_focus(scrollbar_.is_enabled());
 }
 
 void MultilineTextarea::set_style(const UI::FontStyleInfo& style) {
@@ -128,6 +130,7 @@ void MultilineTextarea::recompute() {
 		}
 	}
 	needs_recompute_ = false;
+	set_can_focus(scrollbar_.is_enabled());
 }
 
 /**
@@ -196,6 +199,7 @@ void MultilineTextarea::set_scrollmode(MultilineTextarea::ScrollMode scroll_mode
 	scrollmode_ = scroll_mode;
 	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
 	                          scrollmode_ == ScrollMode::kScrollLogForced);
+	set_can_focus(scrollbar_.is_enabled());
 	layout();
 }
 

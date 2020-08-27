@@ -298,6 +298,11 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		}
 	}
 	check_representative_image();
+
+	// TODO(GunChleoc): Compatibility, remove after v1.0
+	if (table.has_key("attributes")) {
+		throw GameDataError("Attributes need to be defined in 'register.lua' now");
+	}
 }
 MapObjectDescr::~MapObjectDescr() {
 	anims_.clear();

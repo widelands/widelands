@@ -71,6 +71,7 @@ struct Statebox : public Panel {
 	void handle_mousein(bool inside) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
+	bool handle_key(bool, SDL_Keysym) override;
 
 private:
 	void layout() override;
@@ -86,8 +87,9 @@ private:
 	uint8_t flags_;
 	void set_flags(uint8_t const flags, bool const enable) {
 		flags_ &= ~flags;
-		if (enable)
+		if (enable) {
 			flags_ |= flags;
+		}
 	}
 	const Image* pic_graphics_;
 	std::shared_ptr<const UI::RenderedText> rendered_text_;

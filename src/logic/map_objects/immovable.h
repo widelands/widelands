@@ -27,7 +27,6 @@
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/wareworker.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
@@ -127,11 +126,11 @@ class ImmovableDescr : public MapObjectDescr {
 public:
 	using Programs = std::map<std::string, ImmovableProgram*>;
 
-	/// World immovable
+	/// Common constructor functions for tribes and world.
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
-	               const std::vector<std::string>& attribs,
-	               const World& world);
+	               MapObjectDescr::OwnerType type,
+	               const std::vector<std::string>& attribs);
 	/// Tribes immovable
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
@@ -155,10 +154,6 @@ public:
 	const Buildcost& buildcost() const {
 		return buildcost_;
 	}
-
-	// Returns the editor category, or nullptr if the immovable has no editor category
-	// (e.g. Tribe immovables never have one).
-	const EditorCategory* editor_category() const;
 
 	// A basic localized name for the immovable, used by trees
 	const std::string& species() const {
@@ -193,16 +188,9 @@ protected:
 	std::set<std::pair<MapObjectType, std::string>> becomes_;
 
 private:
-	// Common constructor functions for tribes and world.
-	ImmovableDescr(const std::string& init_descname,
-	               const LuaTable&,
-	               MapObjectDescr::OwnerType type,
-	               const std::vector<std::string>& attribs);
-
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
 
-	EditorCategory* editor_category_;  // not owned.
 	std::unique_ptr<TerrainAffinity> terrain_affinity_;
 	DISALLOW_COPY_AND_ASSIGN(ImmovableDescr);
 };

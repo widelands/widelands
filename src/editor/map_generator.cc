@@ -103,10 +103,8 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 	}
 
 	if (set_moveable && (num = bobCategory->num_critters())) {
-		egbase_.create_critter(
-		   fc, egbase_.world().get_critter(
-		          bobCategory->get_critter(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
-		             .c_str()));
+		egbase_.create_critter(fc, egbase_.world().critter_index(bobCategory->get_critter(
+		                              static_cast<size_t>(rng.rand() / (kMaxElevation / num)))));
 	}
 }
 

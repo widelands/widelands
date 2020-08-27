@@ -250,6 +250,7 @@ wl_library(logic
     logic_generic_save_handler
     logic_map
     logic_map_objects
+    logic_map_objects_description_manager
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io

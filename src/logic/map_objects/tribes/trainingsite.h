@@ -37,7 +37,7 @@ public:
 	                  const std::string& msgctxt,
 	                  const LuaTable& table,
 	                  Tribes& tribes,
-	                  const World& world);
+	                  World& world);
 	~TrainingSiteDescr() override {
 	}
 

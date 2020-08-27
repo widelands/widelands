@@ -124,8 +124,6 @@ wl_library(logic_map_objects
     world/critter.cc
     world/critter.h
     world/critter_program.h
-    world/editor_category.cc
-    world/editor_category.h
     world/map_gen.cc
     world/map_gen.h
     world/resource_description.cc

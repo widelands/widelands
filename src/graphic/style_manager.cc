@@ -196,6 +196,8 @@ void StyleManager::init() {
 	minimap_icon_frame_ = read_rgb_color(*table->get_table("minimap_icon_frame"));
 	window_border_focused_ = read_rgba_color(*table->get_table("window_border_focused"));
 	window_border_unfocused_ = read_rgba_color(*table->get_table("window_border_unfocused"));
+	focused_color_ = read_rgba_color(*table->get_table("background_focused"));
+	semi_focused_color_ = read_rgba_color(*table->get_table("background_semi_focused"));
 
 	// Fonts
 	element_table = table->get_table("fonts");
