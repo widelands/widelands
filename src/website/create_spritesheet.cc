@@ -18,6 +18,7 @@
  */
 
 #include <cassert>
+#include <iostream>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
@@ -360,7 +361,8 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		}
 	}
 
-	log_info("LUA CODE:\n%s\n", lua_animation->as_string().c_str());
+	log_info("LUA CODE:");
+	std::cout << lua_animation->as_string() << std::endl;
 	log_info("Done!\n");
 }
 
