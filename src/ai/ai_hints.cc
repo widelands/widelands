@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include "logic/game_data_error.h"
+
 /* RST
 AI Hints and Restrictions
 =========================
@@ -60,7 +62,7 @@ make sure that you don't combine any incompatible features (for example,
 ``shipyard`` and ``mines`` don't combine).
 
 With the exception of the barracks and the building that produces carrier2
-(see: :ref:`lua_tribes_<tribename>.lua`), production of workers in production sites
+(see: :ref:`lua_tribes_tribes_units`), production of workers in production sites
 is not supported at this time.
 
 .. _ai_hints_common:
@@ -156,7 +158,7 @@ Production Sites
 **mines**
     The building will mine to obtain the given ware, e.g.::
 
-        mines = "gold",
+        mines = "resource_gold",
 
 **mines_percent**
     The percentage that a mine will mine of its resource before it needs enhancing, e.g.::
@@ -281,26 +283,6 @@ int16_t BuildingHints::get_ai_limit(const Widelands::AiType ai_type) const {
 	NEVER_HERE();
 }
 
-// TODO(GunChleoc): WareDescr has a bare "preciousness" table that should be moved below a new
-// "aihints" table.
-void WareWorkerHints::read_preciousness(const std::string& name, const LuaTable& table) {
-	constexpr int kMaxRecommendedPreciousness = 50;
-	for (const std::string& key : table.keys<std::string>()) {
-		const int value = table.get_int(key);
-		if (value > 200) {
-			throw wexception("Preciousness of %d is far too high for ware/worker '%s' and tribe '%s'. "
-			                 "We recommend not going over %d.",
-			                 value, name.c_str(), key.c_str(), kMaxRecommendedPreciousness);
-		} else if (value > kMaxRecommendedPreciousness) {
-			log("WARNING: Preciousness of %d is a bit high for ware/worker '%s' and tribe '%s'. We "
-			    "recommend not going over %d.\n",
-			    value, name.c_str(), key.c_str(), kMaxRecommendedPreciousness);
-		}
-
-		preciousnesses_.insert(std::make_pair(key, value));
-	}
-}
-
 /// Returns the preciousness of the ware, or kInvalidWare if the tribe doesn't use the ware.
 int WareWorkerHints::preciousness(const std::string& tribename) const {
 	if (preciousnesses_.count(tribename) > 0) {
@@ -309,11 +291,19 @@ int WareWorkerHints::preciousness(const std::string& tribename) const {
 	return Widelands::kInvalidWare;
 }
 
-WareHints::WareHints(const std::string& ware_name, const LuaTable& table) : WareWorkerHints() {
-	read_preciousness(ware_name, table);
-}
-
-WorkerHints::WorkerHints(const std::string& worker_name, const LuaTable& table)
-   : WareWorkerHints() {
-	read_preciousness(worker_name, *table.get_table("preciousness"));
+void WareWorkerHints::set_preciousness(const std::string& ware_worker,
+                                       const std::string& tribename,
+                                       int p) {
+	constexpr int kMaxRecommendedPreciousness = 50;
+	if (p > 200) {
+		throw Widelands::GameDataError(
+		   "Preciousness of %d is far too high for ware/worker '%s' and tribe '%s'. "
+		   "We recommend not going over %d.",
+		   p, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
+	} else if (p > kMaxRecommendedPreciousness) {
+		log("WARNING: Preciousness of %d is a bit high for ware/worker '%s' and tribe '%s'. We "
+		    "recommend not going over %d.\n",
+		    p, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
+	}
+	preciousnesses_.insert(std::make_pair(tribename, p));
 }

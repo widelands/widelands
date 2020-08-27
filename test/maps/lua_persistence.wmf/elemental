@@ -4,7 +4,7 @@
 packet_version="1"
 map_w="64"
 map_h="64"
-nr_players="1"
+nr_players="2"
 world="greenland"
 name="00Test"
 author="Unknown"

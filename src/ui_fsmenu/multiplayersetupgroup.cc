@@ -441,7 +441,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		} else {
 			{
 				i18n::Textdomain td("tribes");
-				for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
+				for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 					tribes_dropdown_.add(_(tribeinfo.descname), tribeinfo.name,
 					                     g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
 				}
@@ -498,8 +498,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init_dropdown_.set_label(_("Saved Game"));
 		} else {
 			init_dropdown_.set_label("");
-			i18n::Textdomain td("tribes");  // for translated initialisation
-			const Widelands::TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
+			i18n::Textdomain td("tribes");  // for translated initialization
+			const Widelands::TribeBasicInfo tribeinfo = settings.get_tribeinfo(player_setting.tribe);
 			std::set<std::string> tags;
 			if (!settings.mapfilename.empty()) {
 				Widelands::Map map;

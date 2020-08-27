@@ -54,8 +54,6 @@ tribes:new_trainingsite_type {
    },
 
    ["soldier evade"] = {
-      min_level = 0,
-      max_level = 0,
       food = {
          {"fish", "meat"},
          {"empire_bread"}
@@ -76,13 +74,13 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier evade from level 0 to level 1"),
          actions = {
-            "checksoldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
+            "checksoldier=soldier:evade level:0", -- Fails when aren't any soldier of level 0 evade
             "return=failed unless site has empire_bread",
             "return=failed unless site has fish,meat",
             "sleep=duration:30s",
-            "checksoldier=soldier evade 0", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:evade level:0", -- Because the soldier can be expelled by the player
             "consume=empire_bread fish,meat",
-            "train=soldier evade 0 1"
+            "train=soldier:evade level:1"
          }
       },
    },

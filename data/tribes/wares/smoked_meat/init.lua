@@ -7,14 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Smoked Meat"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      atlanteans = 20,
-      frisians = 10
-   },
-   preciousness = {
-      atlanteans = 2,
-      frisians = 7
-   },
 
    animations = {
       idle = {

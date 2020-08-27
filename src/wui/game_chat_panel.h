@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "chat/chat.h"
+#include "ui_basic/box.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 // TODO(jmoerschbach): replace with gamechatpanel2 once internetlobby is using boxlayout also
@@ -57,11 +58,13 @@ struct GameChatPanel : public UI::Panel {
 	void unfocus_edit();
 
 private:
+	void layout() override;
 	void recalculate(bool has_new_message = false);
 	void key_enter();
 	void key_escape();
 
 	ChatProvider& chat_;
+	UI::Box box_;
 	UI::MultilineTextarea chatbox;
 	UI::EditBox editbox;
 	size_t chat_message_counter;

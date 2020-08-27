@@ -75,7 +75,7 @@ void MapDetailsBox::show_map_description_savegame(const GameSettings& game_setti
 		// get translated tribename
 		for (const Widelands::TribeBasicInfo& tribeinfo : game_settings.tribes) {
 			if (tribeinfo.name == current_player.tribe) {
-				i18n::Textdomain td("tribes");  // for translated initialisation
+				i18n::Textdomain td("tribes");  // for translated initialization
 				infotext += " (";
 				infotext += _(tribeinfo.descname);
 				infotext += "):\n    ";

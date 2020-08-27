@@ -32,6 +32,7 @@ wl_library(logic_game_settings
   DEPENDS
     io_filesystem
     logic_constants
+    logic_exceptions
     logic_tribe_basic_info
     notifications
     scripting_lua_interface
@@ -245,6 +246,7 @@ wl_library(logic
     logic_generic_save_handler
     logic_map
     logic_map_objects
+    logic_map_objects_description_manager
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io

@@ -189,7 +189,6 @@ wl_library(ui_fsmenu_network
     network
     sound
     ui_basic
-    ui_fsmenu_base
     ui_fsmenu_loading_common
     widelands_options
     wui_chat_ui

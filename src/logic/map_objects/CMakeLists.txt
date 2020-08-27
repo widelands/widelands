@@ -28,6 +28,7 @@ wl_library(logic_tribe_basic_info
     tribes/tribe_basic_info.h
   DEPENDS
     base_i18n
+    io_filesystem
     logic_exceptions
     scripting_lua_table
     scripting_lua_interface
@@ -123,8 +124,6 @@ wl_library(logic_map_objects
     world/critter.cc
     world/critter.h
     world/critter_program.h
-    world/editor_category.cc
-    world/editor_category.h
     world/map_gen.cc
     world/map_gen.h
     world/resource_description.cc

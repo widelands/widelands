@@ -38,7 +38,7 @@
 #include "logic/map_objects/tribes/warehouse.h"
 
 namespace Widelands {
-Tribes::Tribes(LuaInterface* lua)
+Tribes::Tribes(DescriptionManager* description_manager, LuaInterface* lua)
    : buildings_(new DescriptionMaintainer<BuildingDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      ships_(new DescriptionMaintainer<ShipDescr>()),
@@ -49,7 +49,7 @@ Tribes::Tribes(LuaInterface* lua)
      largest_workarea_(0),
      scenario_tribes_(nullptr),
      lua_(lua),
-     description_manager_(new Widelands::DescriptionManager(lua_)) {
+     description_manager_(description_manager) {
 
 	// Register tribe names. Tribes have no attributes.
 	std::vector<std::string> attributes;
@@ -105,6 +105,9 @@ bool Tribes::immovable_exists(DescriptionIndex index) const {
 }
 bool Tribes::ship_exists(DescriptionIndex index) const {
 	return ships_->get_mutable(index) != nullptr;
+}
+bool Tribes::tribe_exists(const std::string& tribename) const {
+	return tribes_->exists(tribename) != nullptr;
 }
 bool Tribes::tribe_exists(DescriptionIndex index) const {
 	return tribes_->get_mutable(index) != nullptr;
@@ -232,7 +235,7 @@ void Tribes::register_scenario_tribes(FileSystem* filesystem) {
 	}
 }
 
-void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, MapObjectType type) {
+void Tribes::add_tribe_object_type(const LuaTable& table, World& world, MapObjectType type) {
 	i18n::Textdomain td("tribes");
 	const std::string& type_name = table.get_string("name");
 	const std::string& msgctxt = table.get_string("msgctxt");

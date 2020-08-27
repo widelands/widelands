@@ -167,6 +167,8 @@ void FullscreenMenuLaunchMPG::layout() {
 	chat_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, get_h() / 4);
 
 	FullscreenMenuLaunchGame::layout();
+	// set focus to chat input
+	chat_.focus_edit();
 }
 
 /**

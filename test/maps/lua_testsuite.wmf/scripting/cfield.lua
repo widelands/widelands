@@ -181,9 +181,9 @@ function field_resources_tests:teardown()
 end
 
 function field_resources_tests:test_set_resource_amount()
-   self.f.resource = "water"
+   self.f.resource = "resource_water"
    self.f.resource_amount = 25
-   assert_equal("water", self.f.resource)
+   assert_equal("resource_water", self.f.resource)
    assert_equal(25, self.f.resource_amount)
 end
 function field_resources_tests:test_set_resource_amount_negative()
@@ -194,8 +194,8 @@ function field_resources_tests:test_set_resource_amount_too_much()
    assert_error("too big!", function () self.f.resource_amount = 1000 end)
 end
 function field_resources_tests:test_set_resource_type()
-   self.f.resource = "coal"
-   assert_equal("coal", self.f.resource)
+   self.f.resource = "resource_coal"
+   assert_equal("resource_coal", self.f.resource)
    assert_equal(self._amount, self.f.resource_amount)
 end
 function field_resources_tests:test_set_resource_type_illegal_resource()

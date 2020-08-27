@@ -43,9 +43,9 @@ tribes:new_productionsite_type {
       main = {
          descname = "working",
          actions = {
-            "sleep=30000",
+            "sleep=duration:30s",
             "animate=working duration:30s",
-            "mine=water 5 100 5 2",
+            "mine=water radius:5 yield:100% when_empty:5%",
             "produce=water"
          }
       },

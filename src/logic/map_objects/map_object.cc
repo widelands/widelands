@@ -297,6 +297,11 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		}
 	}
 	check_representative_image();
+
+	// TODO(GunChleoc): Compatibility, remove after v1.0
+	if (table.has_key("attributes")) {
+		throw GameDataError("Attributes need to be defined in 'register.lua' now");
+	}
 }
 MapObjectDescr::~MapObjectDescr() {
 	anims_.clear();
@@ -479,6 +484,12 @@ const MapObjectDescr::Attributes& MapObjectDescr::attributes() const {
  */
 MapObjectDescr::AttributeIndex MapObjectDescr::get_attribute_id(const std::string& name,
                                                                 bool add_if_not_exists) {
+	if (!add_if_not_exists) {
+		// Load on demand for objects that no player tribe owns
+		Notifications::publish(
+		   NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kAttribute));
+	}
+
 	auto it = attribute_names_.find(name);
 
 	if (it != attribute_names_.end()) {

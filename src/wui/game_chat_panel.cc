@@ -36,18 +36,23 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                              UI::PanelStyle style)
    : UI::Panel(parent, x, y, w, h),
      chat_(chat),
-     chatbox(this,
+     box_(this, 0, 0, UI::Box::Vertical),
+     chatbox(&box_,
              0,
              0,
-             w,
-             h - 30,
+             0,
+             0,
              style,
              "",
              UI::Align::kLeft,
-             UI::MultilineTextarea::ScrollMode::kScrollLog),
-     editbox(this, 0, h - 25, w, style),
+             UI::MultilineTextarea::ScrollMode::kScrollLogForced),
+     editbox(this, 0, 0, w, style),
      chat_message_counter(0),
      chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
+
+	box_.add(&chatbox, UI::Box::Resizing::kExpandBoth);
+	box_.add_space(4);
+	box_.add(&editbox, UI::Box::Resizing::kFullSize);
 
 	editbox.ok.connect([this]() { key_enter(); });
 	editbox.cancel.connect([this]() { key_escape(); });
@@ -58,7 +63,11 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 
 	chat_message_subscriber_ =
 	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recalculate(true); });
-	recalculate();
+	layout();
+}
+
+void GameChatPanel::layout() {
+	box_.set_size(get_inner_w(), get_inner_h());
 }
 
 /**
@@ -116,6 +125,9 @@ void GameChatPanel::key_enter() {
 }
 
 void GameChatPanel::key_escape() {
+	if (editbox.text().empty()) {
+		unfocus_edit();
+	}
 	editbox.set_text("");
 	aborted();
 }
@@ -126,6 +138,7 @@ void GameChatPanel::key_escape() {
 bool GameChatPanel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus_edit();
+		clicked();
 		return true;
 	}
 

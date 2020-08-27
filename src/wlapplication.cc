@@ -386,7 +386,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
-	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H),
+	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
 	   get_config_bool("fullscreen", false));
 
 	g_mouse_cursor = new MouseCursor();
@@ -648,6 +648,13 @@ void WLApplication::handle_input(InputCallback const* cb) {
 				   ev.motion.state, ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
 			}
 			break;
+		case SDL_WINDOWEVENT:
+			if (ev.window.event == SDL_WINDOWEVENT_RESIZED) {
+				g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
+				set_config_int("xres", ev.window.data1);
+				set_config_int("yres", ev.window.data2);
+			}
+			break;
 		case SDL_QUIT:
 			should_die_ = true;
 			break;
@@ -771,8 +778,8 @@ void WLApplication::set_mouse_lock(const bool locked) {
 }
 
 void WLApplication::refresh_graphics() {
-	g_gr->change_resolution(
-	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H));
+	g_gr->change_resolution(get_config_int("xres", kDefaultResolutionW),
+	                        get_config_int("yres", kDefaultResolutionH), true);
 	g_gr->set_fullscreen(get_config_bool("fullscreen", false));
 
 	// does only work with a window
@@ -1327,7 +1334,7 @@ void WLApplication::mainmenu_multiplayer() {
 			}
 
 			// reinitalise in every run, else graphics look strange
-			FullscreenMenuInternetLobby ns(playername.c_str(), password.c_str(), registered);
+			FullscreenMenuInternetLobby ns(playername, password, registered);
 			ns.run<FullscreenMenuBase::MenuTarget>();
 
 			if (InternetGaming::ref().logged_in()) {
