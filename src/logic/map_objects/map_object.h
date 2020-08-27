@@ -194,8 +194,7 @@ public:
 
 protected:
 	explicit MapObject(MapObjectDescr const* descr);
-	virtual ~MapObject() {
-	}
+	virtual ~MapObject();
 
 public:
 	Serial serial() const {

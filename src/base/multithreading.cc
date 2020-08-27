@@ -49,7 +49,7 @@ bool is_initializer_thread(const bool set_if_not_set_yet) {
 	return *initializer_thread == std::this_thread::get_id();
 }
 
-void NoteDelayedCheck::instantiate(const std::function<void()>& fn) {
+void NoteDelayedCheck::instantiate(const void* caller, const std::function<void()>& fn) {
 	if (!is_initializer_thread_set()) {
 		throw wexception("NoteDelayedCheck::instantiate: initializer thread was not set yet");
 	} else if (is_initializer_thread(false)) {
@@ -58,7 +58,7 @@ void NoteDelayedCheck::instantiate(const std::function<void()>& fn) {
 		fn();
 	} else {
 		// All other threads must ask it politely to do this for them.
-		Notifications::publish(NoteDelayedCheck(fn));
+		Notifications::publish(NoteDelayedCheck(caller, fn));
 	}
 }
 

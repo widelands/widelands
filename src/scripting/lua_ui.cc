@@ -621,10 +621,10 @@ void LuaMapView::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: average_fps
 
-      (RO) The average frames per second that the user interface is being drawn at.
+      (RO) The average frames per second that the logic thread is being refreshed at.
 */
 int LuaMapView::get_average_fps(lua_State* L) {
-	lua_pushdouble(L, get()->average_fps());
+	lua_pushdouble(L, get()->average_fps_logic());
 	return 1;
 }
 /* RST

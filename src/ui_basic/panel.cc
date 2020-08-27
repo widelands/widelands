@@ -215,20 +215,23 @@ int Panel::do_run() {
 	if (int i = pthread_create(&thread, NULL, &Panel::runthread, this)) {
 		throw wexception("PThread creation for Panel failed with error code %d", i);
 	}
-	if (int i = pthread_detach(thread)) {
-		throw wexception("PThread detaching for Panel failed with error code %d", i);
-	}
 
 	MutexLockHandler& mutex_handler = MutexLockHandler::push();
 
 	std::list<NoteDelayedCheck> checks;
-	auto subscriber = Notifications::subscribe<NoteDelayedCheck>(
+	std::set<const void*> cancelled_checks;
+	auto subscriber1 = Notifications::subscribe<NoteDelayedCheckCancel>(
+	   [&cancelled_checks](const NoteDelayedCheckCancel& note) { cancelled_checks.insert(note.caller); });
+	auto subscriber2 = Notifications::subscribe<NoteDelayedCheck>(
 	   [&checks](const NoteDelayedCheck& note) { checks.push_back(note); });
-	auto handle_checks = [&checks]() {
+	auto handle_checks = [&checks, &cancelled_checks]() {
 		while (!checks.empty()) {
-			checks.front().run();
+			if (!cancelled_checks.count(checks.front().caller)) {
+				checks.front().run();
+			}
 			checks.pop_front();
 		}
+		cancelled_checks.clear();
 	};
 
 	while (running_) {
@@ -280,7 +283,8 @@ int Panel::do_run() {
 			SDL_Delay(delay);
 		}
 	}
-	subscriber.reset();
+	subscriber1.reset();
+	subscriber2.reset();
 	pthread_cancel(thread);
 	MutexLockHandler::pop(mutex_handler);
 

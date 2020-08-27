@@ -46,7 +46,8 @@ enum class NoteId : uint32_t {
 	MapOptions,
 	MapObjectDescription,
 	LoadingMessage,
-	DelayedCheck
+	DelayedCheck,
+	DelayedCheckCancel
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

@@ -430,7 +430,7 @@ const Image* MapObjectDescr::representative_image(const RGBColor* player_color) 
 }
 
 void MapObjectDescr::check_representative_image() {
-	NoteDelayedCheck::instantiate([this]() {
+	NoteDelayedCheck::instantiate(this, [this]() {
 		if (representative_image() == nullptr) {
 			throw Widelands::GameDataError(
 			   "The %s %s has no representative image. Does it have an \"idle\" animation?",
@@ -443,7 +443,7 @@ const Image* MapObjectDescr::icon() const {
 	if (!icon_filename_.empty()) {
 		const Image* result = nullptr;
 		NoteDelayedCheck::instantiate(
-		   [this, &result]() { result = g_gr->images().get(icon_filename_); });
+		   this, [this, &result]() { result = g_gr->images().get(icon_filename_); });
 		while (!result) {
 			SDL_Delay(20);
 		}
@@ -527,6 +527,10 @@ MapObject IMPLEMENTATION
  */
 MapObject::MapObject(const MapObjectDescr* const the_descr)
    : descr_(the_descr), serial_(0), logsink_(nullptr), owner_(nullptr), reserved_by_worker_(false) {
+}
+
+MapObject::~MapObject() {
+	Notifications::publish(NoteDelayedCheckCancel(this));
 }
 
 /**

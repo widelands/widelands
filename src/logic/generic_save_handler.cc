@@ -140,7 +140,7 @@ void GenericSaveHandler::save_file() {
 GenericSaveHandler::Error GenericSaveHandler::save() {
 	// This needs to be done by the main thread so we can generate the minimap
 	std::unique_ptr<GenericSaveHandler::Error> result;
-	NoteDelayedCheck::instantiate([this, &result]() {
+	NoteDelayedCheck::instantiate(this, [this, &result]() {
 		try {  // everything additionally in one big try block
 			    // to catch any unexpected errors
 			clear();

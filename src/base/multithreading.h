@@ -101,12 +101,24 @@ private:
  */
 struct NoteDelayedCheck {
 	CAN_BE_SENT_AS_NOTE(NoteId::DelayedCheck)
-	static void instantiate(const std::function<void()>&);
+	static void instantiate(const void*, const std::function<void()>&);
 
+	const void* caller;
 	const std::function<void()> run;
 
 private:
-	NoteDelayedCheck(const std::function<void()>& f) : run(f) {
+	NoteDelayedCheck(const void* c, const std::function<void()>& f) : caller(c), run(f) {
+	}
+};
+// Informs the caller that any pending NoteDelayedCheck's requested by this object must NOT
+// be executed any more. The destructor of EVERY class that may dispatch a NoteDelayedCheck
+// MUST publish such a notification!
+struct NoteDelayedCheckCancel {
+	CAN_BE_SENT_AS_NOTE(NoteId::DelayedCheckCancel)
+
+	const void* caller;
+
+	NoteDelayedCheckCancel(const void* c) : caller(c) {
 	}
 };
 

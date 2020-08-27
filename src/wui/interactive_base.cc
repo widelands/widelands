@@ -258,6 +258,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 }
 
 InteractiveBase::~InteractiveBase() {
+	Notifications::publish(NoteDelayedCheckCancel(this));
 	if (road_building_mode_) {
 		abort_build_road();
 	}
@@ -448,7 +449,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 
 		if (bind_default_toggle) {
 			button->sigclicked.connect(
-			   [window]() { NoteDelayedCheck::instantiate([window]() { window->toggle(); }); });
+			   [this, window]() { NoteDelayedCheck::instantiate(this, [window]() { window->toggle(); }); });
 		}
 	}
 	return button;
