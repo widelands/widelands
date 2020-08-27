@@ -119,6 +119,10 @@ protected:
 
 	virtual void clicked_button_close();
 
+	bool is_focus_toplevel() const override {
+		return true;
+	}
+
 private:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note);
 
