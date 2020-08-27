@@ -97,3 +97,5 @@ tribes:new_productionsite_type {
          pgettext("empire_building", "This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

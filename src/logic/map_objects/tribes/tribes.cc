@@ -239,6 +239,7 @@ void Tribes::add_tribe_object_type(const LuaTable& table, World& world, MapObjec
 	const std::string& type_name = table.get_string("name");
 	const std::string& type_descname = table.get_string("descname").c_str();
 
+	// TODO(GunChleoc): Compatibility, remove after v1.0
 	if (table.has_key<std::string>("msgctxt")) {
 		log("WARNING: The 'msgctxt' entry is no longer needed in '%s', please remove it\n", type_name.c_str());
 	}
