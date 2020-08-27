@@ -137,8 +137,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const std::vector<std::string>& attribs)
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
      size_(BaseImmovable::NONE),
-     owner_type_(input_type),
-     editor_category_(nullptr) {
+     owner_type_(input_type) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", table.get_string("name").c_str());
 	}
@@ -154,9 +153,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		terrain_affinity_.reset(new TerrainAffinity(*table.get_table("terrain_affinity"), name()));
 	}
 
-	if (table.has_key("attributes") && input_type == Widelands::MapObjectDescr::OwnerType::kTribe) {
-		throw GameDataError("Tribe attributes need to be defined in 'register.lua' now");
-	}
 	if (!attribs.empty()) {
 		add_attributes(attribs);
 
@@ -221,24 +217,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 }
 
 /**
- * Parse a world immovable from its init file.
- */
-ImmovableDescr::ImmovableDescr(const std::string& init_descname,
-                               const LuaTable& table,
-                               const std::vector<std::string>& attribs,
-                               const World& world)
-   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld, attribs) {
-
-	const DescriptionIndex editor_category_index =
-	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
-	if (editor_category_index == Widelands::INVALID_INDEX) {
-		throw GameDataError(
-		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
-	}
-	editor_category_ = world.editor_immovable_categories().get_mutable(editor_category_index);
-}
-
-/**
  * Parse a tribes immovable from its init file.
  *
  * The contents of 'table' are documented in
@@ -252,10 +230,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	if (table.has_key("buildcost")) {
 		buildcost_ = Buildcost(table.get_table("buildcost"), tribes);
 	}
-}
-
-const EditorCategory* ImmovableDescr::editor_category() const {
-	return editor_category_;
 }
 
 bool ImmovableDescr::has_terrain_affinity() const {
@@ -722,23 +696,12 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 
 			if (owner_type != "world") {  //  It is a tribe immovable.
 				const std::string name = tribes_lookup_table.lookup_immovable(fr.c_string());
-				Notifications::publish(
-				   NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kObject));
-
-				const DescriptionIndex idx = egbase.tribes().immovable_index(name);
-				if (idx != Widelands::INVALID_INDEX) {
-					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
-				} else {
-					throw GameDataError("tribes do not define immovable type \"%s\"", name.c_str());
-				}
+				imm = new Immovable(
+				   *egbase.tribes().get_immovable_descr(egbase.mutable_tribes()->load_immovable(name)));
 			} else {  //  world immovable
-				const World& world = egbase.world();
 				const std::string name = world_lookup_table.lookup_immovable(fr.c_string());
-				const DescriptionIndex idx = world.get_immovable_index(name.c_str());
-				if (idx == Widelands::INVALID_INDEX) {
-					throw GameDataError("world does not define immovable type \"%s\"", name.c_str());
-				}
-				imm = new Immovable(*world.get_immovable_descr(idx));
+				imm = new Immovable(
+				   *egbase.world().get_immovable_descr(egbase.mutable_world()->load_immovable(name)));
 			}
 
 			loader->init(egbase, mol, *imm);

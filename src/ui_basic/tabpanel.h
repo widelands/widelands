@@ -121,11 +121,15 @@ struct TabPanel : public Panel {
 
 	boost::signals2::signal<void()> sigclicked;
 
+	bool handle_key(bool, SDL_Keysym) override;
+
 protected:
 	void layout() override;
 	void update_desired_size() override;
 
 	UI::TabPanelStyle style_;
+
+	Recti focus_overlay_rect() override;
 
 private:
 	// Common adding function for textual and pictorial tabs

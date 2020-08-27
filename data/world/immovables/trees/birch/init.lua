@@ -7,12 +7,10 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "birch_summer_sapling",
    descname = _ "Birch (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -34,12 +32,11 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "birch_summer_pole",
    descname = _ "Birch (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree_pole" },
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -61,12 +58,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "birch_summer_mature",
    descname = _ "Birch (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -91,14 +86,13 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "birch_summer_old",
    descname = _ "Birch (Old)",
    species = _ "Birch",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree", "normal_tree" },
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
