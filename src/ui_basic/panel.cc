@@ -28,6 +28,7 @@
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "sound/sound_handler.h"
@@ -480,7 +481,7 @@ void Panel::draw_overlay(RenderTarget& dst) {
 		}
 		dst.fill_rect(
 		   focus_overlay_rect(),
-		   has_toplevel_focus ? g_gr->styles().focused_color() : g_gr->styles().semi_focused_color(),
+		   has_toplevel_focus ? g_style_manager->focused_color() : g_style_manager->semi_focused_color(),
 		   BlendMode::Default);
 	}
 }
