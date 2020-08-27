@@ -164,6 +164,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	} else {
 		last_image_exchange_time_ = SDL_GetTicks();
 	}
+	focus();
 	set_labels();
 	layout();
 }
@@ -309,17 +310,17 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 				end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 				return true;
 			}
-			return false;
+			break;
 		case SDLK_t:
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kTutorial);
 			return true;
 		case SDLK_c:
-			if (filename_for_continue_.empty()) {
-				return false;
+			if (!filename_for_continue_.empty()) {
+				end_modal<FullscreenMenuBase::MenuTarget>(
+				   FullscreenMenuBase::MenuTarget::kContinueLastsave);
+				return true;
 			}
-			end_modal<FullscreenMenuBase::MenuTarget>(
-			   FullscreenMenuBase::MenuTarget::kContinueLastsave);
-			return true;
+			break;
 		case SDLK_n:
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNewGame);
 			return true;
@@ -361,10 +362,10 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			multiplayer_.toggle();
 			return true;
 		default:
-			return false;
+			break;
 		}
 	}
-	return false;
+	return UI::Panel::handle_key(down, code);
 }
 
 // Position the image at the screen center, as large as possible without upscaling
