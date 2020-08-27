@@ -193,6 +193,8 @@ wl_library(ui_fsmenu_misc
     intro.h
   DEPENDS
     base_i18n
+    scripting_lua_interface
+    scripting_lua_table
     ui_basic
     ui_fsmenu_base
 )
