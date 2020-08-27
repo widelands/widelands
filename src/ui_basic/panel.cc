@@ -221,7 +221,9 @@ int Panel::do_run() {
 	std::list<NoteDelayedCheck> checks;
 	std::set<const void*> cancelled_checks;
 	auto subscriber1 = Notifications::subscribe<NoteDelayedCheckCancel>(
-	   [&cancelled_checks](const NoteDelayedCheckCancel& note) { cancelled_checks.insert(note.caller); });
+	   [&cancelled_checks](const NoteDelayedCheckCancel& note) {
+		   cancelled_checks.insert(note.caller);
+	   });
 	auto subscriber2 = Notifications::subscribe<NoteDelayedCheck>(
 	   [&checks](const NoteDelayedCheck& note) { checks.push_back(note); });
 	auto handle_checks = [&checks, &cancelled_checks]() {

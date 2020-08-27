@@ -894,8 +894,8 @@ void Building::send_message(Game& game,
 	}
 
 	NoteDelayedCheck::instantiate(this, [this, &game, msgtype, throttle_time, throttle_radius,
-	                               link_to_building_lifetime, title, icon_filename, heading,
-	                               description]() {
+	                                     link_to_building_lifetime, title, icon_filename, heading,
+	                                     description]() {
 		const std::string rt_description =
 		   as_mapobject_message(descr().name(), descr().representative_image()->width(), description,
 		                        &owner().get_playercolor());
