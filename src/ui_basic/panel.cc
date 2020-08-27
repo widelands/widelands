@@ -479,10 +479,10 @@ void Panel::draw_overlay(RenderTarget& dst) {
 				break;
 			}
 		}
-		dst.fill_rect(
-		   focus_overlay_rect(),
-		   has_toplevel_focus ? g_style_manager->focused_color() : g_style_manager->semi_focused_color(),
-		   BlendMode::Default);
+		dst.fill_rect(focus_overlay_rect(),
+		              has_toplevel_focus ? g_style_manager->focused_color() :
+		                                   g_style_manager->semi_focused_color(),
+		              BlendMode::Default);
 	}
 }
 
