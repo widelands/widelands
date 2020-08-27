@@ -28,6 +28,10 @@ function test_descr:test_immovable_descr()
    end)
 end
 
+function test_descr:test_immovable_loading()
+   assert_equal("bush1", egbase:get_immovable_description("bush1").name)
+end
+
 function test_descr:test_immovable_species()
    assert_equal("", egbase:get_immovable_description("bush1").species)
    assert_equal("", egbase:get_immovable_description("cornfield_ripe").species)
@@ -74,18 +78,6 @@ function test_descr:test_immovable_buildcost()
       return cost
    end
    assert_equal(16, total_cost(buildcost))
-end
-
-function test_descr:test_immovable_editor_category()
-   assert_equal("plants", egbase:get_immovable_description("bush1").editor_category.name)
-   assert_equal("Plants", egbase:get_immovable_description("bush1").editor_category.descname)
-   assert_equal(nil, egbase:get_immovable_description("cornfield_ripe").editor_category)
-   assert_equal("trees_deciduous", egbase:get_immovable_description(
-      "alder_summer_sapling").editor_category.name)
-   assert_equal("Deciduous Trees", egbase:get_immovable_description(
-      "alder_summer_sapling").editor_category.descname)
-   assert_equal("trees_deciduous", egbase:get_immovable_description(
-      "alder_summer_old").editor_category.name)
 end
 
 function test_descr:test_immovable_terrain_affinity()

@@ -108,10 +108,11 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
      tab_panel_(nullptr),
      display_(nullptr),
      slider_(nullptr) {
-	uint8_t const nr_wares = parent.get_player()->egbase().tribes().nrwares();
+
+	const Widelands::TribeDescr& player_tribe = parent.get_player()->tribe();
 
 	// Init color sets
-	color_map_.resize(nr_wares);
+	color_map_.resize(player_tribe.get_nrwares());
 	std::fill(color_map_.begin(), color_map_.end(), kInactiveColorIndex);
 	active_colors_.resize(colors_length);
 	std::fill(active_colors_.begin(), active_colors_.end(), 0);
@@ -158,7 +159,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	main_box_->add(tab_panel_, UI::Box::Resizing::kFullSize);
 
 	// Register statistics data
-	for (Widelands::DescriptionIndex cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
+	for (Widelands::DescriptionIndex cur_ware : player_tribe.wares()) {
 		plot_production_->register_plot_data(
 		   cur_ware,
 		   parent.get_player()->get_ware_production_statistics(Widelands::DescriptionIndex(cur_ware)),
