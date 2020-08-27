@@ -79,7 +79,7 @@ Slider::Slider(Panel* const parent,
      bar_size_(bar_size),
      cursor_size_(cursor_size) {
 	set_thinks(false);
-	assert(!get_can_focus());
+	set_can_focus(enabled_);
 	calculate_cursor_position();
 }
 
@@ -213,6 +213,7 @@ void Slider::set_enabled(const bool enabled) {
 		highlighted_ = false;
 		grab_mouse(false);
 	}
+	set_can_focus(enabled_);
 }
 
 /**
@@ -224,6 +225,58 @@ void Slider::set_highlighted(bool highlighted) {
 	}
 
 	highlighted_ = highlighted;
+}
+
+constexpr int16_t kLargeStepSize = 50;
+bool Slider::handle_key(bool down, SDL_Keysym code) {
+	if (down && enabled_) {
+		switch (code.sym) {
+
+		case SDLK_KP_6:
+		case SDLK_KP_8:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_UP:
+		case SDLK_RIGHT:
+			set_value(get_value() + 1);
+			return true;
+
+		case SDLK_KP_2:
+		case SDLK_KP_4:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_DOWN:
+		case SDLK_LEFT:
+			set_value(get_value() - 1);
+			return true;
+
+		case SDLK_KP_9:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEUP:
+			set_value(get_value() + kLargeStepSize);
+			return true;
+
+		case SDLK_KP_3:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEDOWN:
+			set_value(get_value() - kLargeStepSize);
+			return true;
+
+		default:
+			break;
+		}
+	}
+	return Panel::handle_key(down, code);
 }
 
 /**

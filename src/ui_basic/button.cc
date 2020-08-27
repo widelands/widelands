@@ -63,8 +63,7 @@ Button::Button  //  Common constructor
      title_image_(title_image),
      style_(&g_style_manager->button_style(init_style)) {
 	set_thinks(false);
-	// Don't allow focus
-	assert(!get_can_focus());
+	set_can_focus(enabled_);
 }
 
 /// For textual buttons. If h = 0, h will resize according to the font's height. If both h = 0 and w
@@ -173,6 +172,7 @@ void Button::set_enabled(bool const on) {
 		enabled_ = false;
 		highlighted_ = false;
 	}
+	set_can_focus(enabled_);
 }
 
 /**
@@ -309,6 +309,15 @@ void Button::think() {
 			//  longer be accessed.
 		}
 	}
+}
+
+bool Button::handle_key(bool down, SDL_Keysym code) {
+	if (down && (code.sym == SDLK_SPACE || code.sym == SDLK_RETURN || code.sym == SDLK_KP_ENTER)) {
+		play_click();
+		sigclicked();
+		return true;
+	}
+	return NamedPanel::handle_key(down, code);
 }
 
 /**
