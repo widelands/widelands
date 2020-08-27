@@ -172,6 +172,8 @@ int Graphic::get_window_mode_yres() const {
 }
 
 void Graphic::change_resolution(int w, int h, bool resize_window) {
+	log("++ change_resolution(): %dx%d to %dx%d; resize_window=%s\n",
+	    window_mode_width_, window_mode_height_, w, h, resize_window ? "true" : "false");
 	window_mode_width_ = w;
 	window_mode_height_ = h;
 
@@ -213,6 +215,7 @@ void Graphic::resolution_changed() {
 	int new_w, new_h;
 	SDL_GetWindowSize(sdl_window_, &new_w, &new_h);
 
+	log("++ resolution_changed(): %dx%d to %dx%d\n", old_w, old_h, new_w, new_h);
 	if (old_w == new_w && old_h == new_h) {
 		return;
 	}
@@ -269,6 +272,7 @@ void Graphic::set_fullscreen(const bool value) {
 		return;
 	}
 
+	log("++ set_fullscreen(): %s\n", value ? "true" : "false");
 	// Widelands is not resolution agnostic, so when we set fullscreen, we want
 	// it at the full resolution of the desktop and we want to know about the
 	// true resolution (SDL supports hiding the true resolution from the
@@ -303,6 +307,7 @@ void Graphic::refresh() {
 		SDL_GetWindowSize(sdl_window_, &true_width, &true_height);
 
 		if (true_width != window_mode_width_ || true_height != window_mode_height_) {
+			log("++ refresh(): resizing %dx%d to %dx%d\n", true_width, true_height, window_mode_width_, window_mode_height_);
 			set_window_size(window_mode_width_, window_mode_height_);
 		}
 	}

@@ -463,7 +463,7 @@ WLApplication::~WLApplication() {
 // dispatching events until it is time to quit.
 void WLApplication::run() {
 	// This also grabs the mouse cursor if so desired.
-	refresh_graphics();
+	//refresh_graphics();
 
 	if (game_type_ == GameType::kEditor) {
 		g_sh->change_music("ingame");
@@ -661,14 +661,17 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			break;
 		case SDL_WINDOWEVENT:
 			if (ev.window.event == SDL_WINDOWEVENT_RESIZED) {
-				g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
-				log("++ SDL_WINDOWEVENT_RESIZED %d %d", ev.window.data1, ev.window.data2);
+				log("++ SDL_WINDOWEVENT_RESIZED %d %d\n", ev.window.data1, ev.window.data2);
+				if (!g_gr->fullscreen()) {
+					g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
+				}
 				/*if (!(SDL_GetWindowFlags(g_gr->get_sdlwindow()) & SDL_WINDOW_MAXIMIZED)) {
 					log(" saving");
 					//set_config_int("xres", ev.window.data1);
 					//set_config_int("yres", ev.window.data2);
 				}*/
-				log("\n");
+			} else if (ev.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
+				log("++ SDL_WINDOWEVENT_SIZE_CHANGED %d %d\n", ev.window.data1, ev.window.data2);
 			} else if (ev.window.event == SDL_WINDOWEVENT_MAXIMIZED) {
 				log("++ SDL_WINDOWEVENT_MAXIMIZED\n");
 			} else if (ev.window.event == SDL_WINDOWEVENT_RESTORED) {
@@ -798,10 +801,11 @@ void WLApplication::set_mouse_lock(const bool locked) {
 }
 
 void WLApplication::refresh_graphics() {
-	g_gr->change_resolution(get_config_int("xres", kDefaultResolutionW),
-	                        get_config_int("yres", kDefaultResolutionH), true);
-	g_gr->set_fullscreen(get_config_bool("fullscreen", false));
-	g_gr->set_maximized(get_config_bool("maximized", false));
+	log("++ refresh_graphics()\n");
+	//g_gr->change_resolution(get_config_int("xres", kDefaultResolutionW),
+	//                        get_config_int("yres", kDefaultResolutionH), true);
+	//g_gr->set_fullscreen(get_config_bool("fullscreen", false));
+	//g_gr->set_maximized(get_config_bool("maximized", false));
 
 	// does only work with a window
 	set_input_grab(get_config_bool("inputgrab", false));
