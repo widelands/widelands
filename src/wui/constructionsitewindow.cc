@@ -19,6 +19,7 @@
 
 #include "wui/constructionsitewindow.h"
 
+#include "graphic/image_cache.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "wui/actionconfirm.h"
 #include "wui/inputqueuedisplay.h"

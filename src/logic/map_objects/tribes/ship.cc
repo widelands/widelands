@@ -28,6 +28,7 @@
 #include "economy/portdock.h"
 #include "economy/ship_fleet.h"
 #include "economy/wares_queue.h"
+#include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"

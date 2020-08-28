@@ -330,7 +330,7 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 				break;
 			case kClientSuperuser:
 				er.set_picture(0, FN_GET_IMAGE("images/wui/overlays/road_building_green.png"));
-				er.set_font_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupSuperuser));
+				er.set_font_style(g_style_manager->font_style(UI::FontStyle::kFsGameSetupSuperuser));
 				break;
 			case kClientIRC:
 				// No icon for IRC users

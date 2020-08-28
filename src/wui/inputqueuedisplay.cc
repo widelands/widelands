@@ -21,6 +21,7 @@
 
 #include "economy/input_queue.h"
 #include "economy/request.h"
+#include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"

@@ -27,6 +27,7 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "graphic/animation/animation_manager.h"
+#include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"

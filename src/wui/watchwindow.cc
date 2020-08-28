@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/rect.h"
+#include "graphic/image_cache.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"

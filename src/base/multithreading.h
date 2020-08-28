@@ -22,8 +22,7 @@
 
 #include <memory>
 #include <mutex>
-
-#include <pthread.h>
+#include <thread>
 
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
@@ -90,7 +89,7 @@ struct MutexLock {
 	}
 
 private:
-	std::recursive_mutex* mutex_;  // not owned
+	MutexLockHandler* mutex_;  // not owned!
 };
 
 /*

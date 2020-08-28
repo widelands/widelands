@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
+#include "graphic/image_cache.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribes.h"

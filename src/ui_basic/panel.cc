@@ -145,22 +145,18 @@ void Panel::free_children() {
 	first_child_ = nullptr;
 }
 
-// static
-void* Panel::runthread(void* p) {
-	assert(p);
-	UI::Panel& panel = *static_cast<Panel*>(p);
-
+void Panel::runthread() {
 	const uint32_t initial_ticks = SDL_GetTicks();
 
 	// think() is called at most 15 times per second, that is roughly ever 66ms.
 	const uint32_t kGameLogicDelay = 1000 / 15;
 	uint32_t next_think_time = initial_ticks + kGameLogicDelay;
 
-	while (panel.running_) {
+	while (running_) {
 		const uint32_t start_time = SDL_GetTicks();
 
 		if (start_time >= next_think_time) {
-			panel.do_think();  // actual logic
+			do_think();  // actual logic
 			next_think_time = start_time + kGameLogicDelay;
 		}
 
@@ -169,9 +165,6 @@ void* Panel::runthread(void* p) {
 			SDL_Delay(delay);
 		}
 	}
-
-	pthread_exit(NULL);
-	return nullptr;
 }
 
 /**
@@ -210,24 +203,28 @@ int Panel::do_run() {
 	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
 	uint32_t next_draw_time = initial_ticks + draw_delay;
 
-	// We put the game logic code into a thread of its own. Note that the drawing code
-	// has to be run by the same thread that took care of the OpenGL initialization!
-	pthread_t thread;
-	if (int i = pthread_create(&thread, NULL, &Panel::runthread, this)) {
-		throw wexception("PThread creation for Panel failed with error code %d", i);
-	}
+	// We put the game logic code into a thread of its own. Note that the
+	// drawing code as well as all image I/O-related code has to be run
+	// by the same thread that took care of the OpenGL initialization!!!
+	std::unique_ptr<std::thread> thread(new std::thread(&Panel::runthread, this));
 
 	MutexLockHandler& mutex_handler = MutexLockHandler::push();
 
 	std::list<NoteDelayedCheck> checks;
 	std::set<const void*> cancelled_checks;
+	MutexLockHandler local_handler;
 	auto subscriber1 = Notifications::subscribe<NoteDelayedCheckCancel>(
-	   [&cancelled_checks](const NoteDelayedCheckCancel& note) {
+	   [&cancelled_checks, &local_handler](const NoteDelayedCheckCancel& note) {
+		   MutexLock m(&local_handler, false);
 		   cancelled_checks.insert(note.caller);
 	   });
 	auto subscriber2 = Notifications::subscribe<NoteDelayedCheck>(
-	   [&checks](const NoteDelayedCheck& note) { checks.push_back(note); });
-	auto handle_checks = [&checks, &cancelled_checks]() {
+	   [&checks, &local_handler](const NoteDelayedCheck& note) {
+		   MutexLock m(&local_handler, false);
+		   checks.push_back(note);
+	   });
+	auto handle_checks = [&checks, &local_handler, &cancelled_checks]() {
+		MutexLock m(&local_handler, false);
 		while (!checks.empty()) {
 			if (!cancelled_checks.count(checks.front().caller)) {
 				checks.front().run();
@@ -286,9 +283,10 @@ int Panel::do_run() {
 			SDL_Delay(delay);
 		}
 	}
+	thread->join();
+	thread.reset();
 	subscriber1.reset();
 	subscriber2.reset();
-	pthread_cancel(thread);
 	MutexLockHandler::pop(mutex_handler);
 
 	end();

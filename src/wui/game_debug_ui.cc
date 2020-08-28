@@ -21,6 +21,7 @@
 #include "wui/game_debug_ui.h"
 
 #include "base/i18n.h"
+#include "graphic/image_cache.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"

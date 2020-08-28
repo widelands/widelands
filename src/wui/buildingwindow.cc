@@ -21,6 +21,7 @@
 
 #include "base/macros.h"
 #include "graphic/image.h"
+#include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"

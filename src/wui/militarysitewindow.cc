@@ -19,6 +19,7 @@
 
 #include "wui/militarysitewindow.h"
 
+#include "graphic/image_cache.h"
 #include "wui/soldiercapacitycontrol.h"
 #include "wui/soldierlist.h"
 

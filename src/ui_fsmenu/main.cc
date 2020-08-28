@@ -21,6 +21,7 @@
 
 #include "base/i18n.h"
 #include "build_info.h"
+#include "graphic/image_cache.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "wui/savegameloader.h"

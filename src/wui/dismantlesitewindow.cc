@@ -19,6 +19,8 @@
 
 #include "wui/dismantlesitewindow.h"
 
+#include "graphic/image_cache.h"
+
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
 DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,

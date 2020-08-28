@@ -24,6 +24,7 @@
 #include <set>
 
 #include "graphic/align.h"
+#include "graphic/image_cache.h"
 #include "graphic/styles/font_style.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"

@@ -21,6 +21,7 @@
 
 #include "economy/expedition_bootstrap.h"
 #include "economy/portdock.h"
+#include "graphic/image_cache.h"
 #include "logic/player.h"
 #include "ui_basic/icon.h"
 #include "wui/inputqueuedisplay.h"

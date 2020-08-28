@@ -30,6 +30,7 @@
 #include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/transfer.h"
+#include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "io/fileread.h"

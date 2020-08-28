@@ -25,6 +25,7 @@
 
 #include "base/macros.h"
 #include "base/multithreading.h"
+#include "graphic/image_cache.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/soldier.h"
 

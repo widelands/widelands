@@ -43,10 +43,9 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
 }
 
 SinglePlayerGameController::~SinglePlayerGameController() {
-	for (uint32_t i = 0; i < computerplayers_.size(); ++i) {
-		if (computerplayers_[i].get() && computerplayers_[i]->running) {
-			computerplayers_[i]->running = false;
-			pthread_cancel(computerplayers_[i]->thread_id);
+	for (auto& cp : computerplayers_) {
+		if (cp) {
+			cp->thread.join();
 		}
 	}
 	computerplayers_.clear();
@@ -71,30 +70,18 @@ void SinglePlayerGameController::think() {
 	if (use_ai_ && game_.is_loaded()) {
 		const Widelands::PlayerNumber nr_players = game_.map().get_nrplayers();
 		iterate_players_existing(p, nr_players, game_, plr) if (p != local_) {
-			// Deliberately use else-if's here to ensure the AI threads will be started with a
-			// short delay. This fixes a race condition with the DefaultAI's lazy initialization.
 			if (p > computerplayers_.size()) {
 				computerplayers_.resize(p);
 			} else if (!computerplayers_[p - 1].get()) {
-				computerplayers_[p - 1].reset(new AIData());
-			} else if (!computerplayers_[p - 1]->ai.get()) {
-				computerplayers_[p - 1]->ai.reset(
-				   ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p));
-			} else if (!computerplayers_[p - 1]->running) {
-				computerplayers_[p - 1]->running = true;
-				if (int i =
-				       pthread_create(&computerplayers_[p - 1]->thread_id, NULL,
-				                      &ComputerPlayer::runthread, computerplayers_[p - 1]->ai.get())) {
-					throw wexception("PThread creation for AI %u failed with error code %d",
-					                 static_cast<unsigned>(p), i);
-				}
-				if (int i = pthread_detach(computerplayers_[p - 1]->thread_id)) {
-					throw wexception("PThread detaching for AI %u failed with error code %d",
-					                 static_cast<unsigned>(p), i);
-				}
+				// Deliberately use an else-if here to ensure the AI threads will be started with a
+				// brief delay. This fixes a race condition with the DefaultAI's lazy initialization.
+				computerplayers_[p - 1].reset(new AIData(ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p)));
 			}
 		}
 	}
+}
+
+SinglePlayerGameController::AIData::AIData(ComputerPlayer* cp) : ai(cp), thread(&ComputerPlayer::runthread, cp) {
 }
 
 void SinglePlayerGameController::send_player_command(Widelands::PlayerCommand* pc) {

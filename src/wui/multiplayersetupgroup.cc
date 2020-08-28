@@ -28,6 +28,7 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"

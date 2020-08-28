@@ -310,6 +310,7 @@ wl_library(wui
     graphic_color
     graphic_fonthandler
     graphic_game_renderer
+    graphic_image_cache
     graphic_minimap_renderer
     graphic_mouse_cursor
     graphic_playercolor

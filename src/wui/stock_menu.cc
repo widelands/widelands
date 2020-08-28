@@ -21,6 +21,7 @@
 
 #include "base/i18n.h"
 #include "economy/economy.h"
+#include "graphic/image_cache.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "ui_basic/tabpanel.h"

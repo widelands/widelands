@@ -21,6 +21,7 @@
 #define WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H
 
 #include <memory>
+#include <thread>
 
 #include "ai/computer_player.h"
 #include "logic/game_controller.h"
@@ -55,9 +56,10 @@ private:
 	Widelands::PlayerNumber local_;
 
 	struct AIData {
-		std::shared_ptr<ComputerPlayer> ai = nullptr;
-		bool running = false;
-		pthread_t thread_id;
+		explicit AIData(ComputerPlayer*);
+
+		std::shared_ptr<ComputerPlayer> ai;
+		std::thread thread;
 	};
 	std::vector<std::shared_ptr<AIData>> computerplayers_;
 };

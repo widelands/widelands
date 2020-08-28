@@ -21,7 +21,6 @@
 
 #include <list>
 #include <memory>
-#include <thread>
 
 #include "base/wexception.h"
 
@@ -64,20 +63,21 @@ void NoteDelayedCheck::instantiate(const void* caller, const std::function<void(
 
 MutexLock::MutexLock(const bool optional) : MutexLock(MutexLockHandler::get(), optional) {
 }
-MutexLock::MutexLock(MutexLockHandler* m, const bool optional) : mutex_(m ? m->mutex() : nullptr) {
-	if (mutex_) {
+MutexLock::MutexLock(MutexLockHandler* m, const bool optional) : mutex_(nullptr) {
+	if (m && m->mutex()) {
 		if (optional) {
-			if (!mutex_->try_lock()) {
-				mutex_ = nullptr;
+			if (m->mutex()->try_lock()) {
+				mutex_ = m;
 			}
 		} else {
-			mutex_->lock();
+			m->mutex()->lock();
+			mutex_ = m;
 		}
 	}
 }
 MutexLock::~MutexLock() {
-	if (mutex_) {
-		mutex_->unlock();
+	if (mutex_ && mutex_->mutex()) {
+		mutex_->mutex()->unlock();
 	}
 }
 

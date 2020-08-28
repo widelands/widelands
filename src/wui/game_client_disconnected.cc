@@ -22,6 +22,7 @@
 #include "ai/computer_player.h"
 #include "ai/defaultai.h"
 #include "base/i18n.h"
+#include "graphic/image_cache.h"
 #include "network/gamehost.h"
 #include "wui/game_exit_confirm_box.h"
 #include "wui/interactive_gamebase.h"

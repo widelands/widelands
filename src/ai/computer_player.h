@@ -91,9 +91,7 @@ struct ComputerPlayer {
 	 */
 	static const Implementation* get_implementation(const std::string& name);
 
-	// Function signature prescribed by the PThread API.
-	// The argument must be a pointer to the ComputerPlayer object. Returns nullptr.
-	static void* runthread(void*);
+	void runthread();
 
 private:
 	Widelands::Game& game_;

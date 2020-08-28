@@ -53,6 +53,7 @@ wl_library(ui_fsmenu_main
   DEPENDS
     base_i18n
     build_info
+    graphic_image_cache
     logic
     logic_filesystem_constants
     ui_basic
@@ -102,6 +103,7 @@ wl_library(ui_fsmenu_gameloading
   DEPENDS
     base_exceptions
     base_i18n
+    graphic_image_cache
     graphic_playercolor
     io_filesystem
     io_profile

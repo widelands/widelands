@@ -85,25 +85,25 @@ const ComputerPlayer::Implementation* ComputerPlayer::get_implementation(const s
 // The number of milliseconds realtime how frequently an AI wants to be allowed to think()
 constexpr uint32_t kThinkDelay = 200;
 
-void* ComputerPlayer::runthread(void* cp) {
-	assert(cp);
-	ComputerPlayer& ai = *static_cast<ComputerPlayer*>(cp);
+void ComputerPlayer::runthread() {
 	uint32_t next_time = SDL_GetTicks() + kThinkDelay;
-	for (;;) {
+	while (game().is_loaded()) {
 		const uint32_t time = SDL_GetTicks();
 		if (time >= next_time) {
-			MutexLock m;
-			if (!m.is_valid()) {
-				// end of game
-				break;
+			for (;;) {
+				if (!game().is_loaded()) {
+					return;
+				}
+				MutexLock m(true);
+				if (m.is_valid()) {
+					think();
+					break;
+				}
 			}
-			ai.think();
 		}
 		const int32_t delay = next_time - SDL_GetTicks();
 		if (delay > 0) {
 			SDL_Delay(delay);
 		}
 	}
-	pthread_exit(NULL);
-	return nullptr;
 }

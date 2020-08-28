@@ -19,6 +19,7 @@
 
 #include "wui/soldiercapacitycontrol.h"
 
+#include "graphic/image_cache.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"
 #include "ui_basic/button.h"

@@ -552,15 +552,6 @@ GameHost::~GameHost() {
 		reaper();
 	}
 
-	if (threads_) {
-		for (size_t i = 0; i < nr_ais_; ++i) {
-			if (threads_[i].running) {
-				threads_[i].running = false;
-				pthread_cancel(threads_[i].thread_id);
-			}
-		}
-	}
-
 	// close all open sockets
 	d->net.reset();
 	d->promoter.reset();
@@ -576,6 +567,14 @@ int16_t GameHost::get_local_playerposition() {
 }
 
 void GameHost::clear_computer_players() {
+	if (threads_) {
+		for (unsigned i = 0; i < nr_ais_; ++i) {
+			if (threads_[i]) {
+				threads_[i]->join();
+			}
+		}
+	}
+	threads_.reset();
 	for (uint32_t i = 0; i < d->computerplayers.size(); ++i) {
 		delete d->computerplayers.at(i);
 	}
@@ -778,17 +777,13 @@ void GameHost::think() {
 
 		if (!threads_) {
 			nr_ais_ = d->computerplayers.size();
-			threads_.reset(new AIData[nr_ais_]);
+			threads_.reset(new std::unique_ptr<std::thread>[nr_ais_]);
 		} else {
 			// delayed initialization, see comment in SinglePlayerGameController::think
 			for (size_t i = 0; i < nr_ais_; ++i) {
-				if (!threads_[i].running) {
-					threads_[i].running = true;
-					if (int e = pthread_create(&threads_[i].thread_id, NULL, &ComputerPlayer::runthread,
-					                           d->computerplayers[i])) {
-						throw wexception(
-						   "PThread creation for AI no. %" PRIuS " failed with error code %d", i, e);
-					}
+				if (!threads_[i]) {
+					threads_[i].reset(new std::thread(&ComputerPlayer::runthread, d->computerplayers[i]));
+					return;
 				}
 			}
 		}

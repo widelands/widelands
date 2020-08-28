@@ -22,6 +22,7 @@
 #include <functional>
 
 #include "base/i18n.h"
+#include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/tribe_descr.h"

@@ -226,11 +226,12 @@ std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
                                       const Rectf& view_area,
                                       const MiniMapType& minimap_type,
                                       MiniMapLayer layers) {
-	MutexLock m;
-
 	// TODO(sirver): Currently the minimap is redrawn every frame. That is not really
 	//       necessary. The created texture could be cached and only redrawn two
 	//       or three times per second
+	// TODO(Nordfriese): Should be addressed sometime soon as the minimap renderer
+	// strictly requires a MutexLock so the game logic progresses extreeeemely slowly
+	// while the rendering is happening.
 	const Widelands::Map& map = egbase.map();
 	const int16_t map_w = map.get_width() * scale_map(map, layers & MiniMapLayer::Zoom2);
 	const int16_t map_h = map.get_height() * scale_map(map, layers & MiniMapLayer::Zoom2);
@@ -248,6 +249,7 @@ std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
 	   MapviewPixelFunctions::calc_node_and_triangle(map, top_left.x, top_left.y).node;
 
 	texture->lock();
+	MutexLock m;
 	do_draw_minimap(texture.get(), egbase, player, Vector2i(node.x, node.y), layers);
 
 	if (layers & MiniMapLayer::ViewWindow) {

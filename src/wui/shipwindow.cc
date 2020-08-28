@@ -22,6 +22,7 @@
 #include "base/macros.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
+#include "graphic/image_cache.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"

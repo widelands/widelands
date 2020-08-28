@@ -19,6 +19,7 @@
 
 #include "wui/warehousewindow.h"
 
+#include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
