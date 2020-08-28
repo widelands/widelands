@@ -363,6 +363,8 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 
 void InteractiveBase::finalize_toolbar() {
 	toolbar_.finalize();
+	// prevent toolbar dropdowns from grabbing the Space button
+	focus();
 }
 
 /*

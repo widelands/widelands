@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=duration:20s",
             "animate=working duration:20s",
-            "mine=water radius:1 yield:100% when_empty:65%",
+            "mine=resource_water radius:1 yield:100% when_empty:65%",
             "produce=water",
          }
       },

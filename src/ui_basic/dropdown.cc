@@ -141,7 +141,14 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	button_box_.set_size(w, get_h());
 	list_->clicked.connect([this]() { set_value(); });
 	list_->clicked.connect([this]() { toggle_list(); });
+
+	if (push_button_) {
+		push_button_->set_can_focus(false);
+	}
+	display_button_.set_can_focus(false);
+	list_->set_can_focus(false);
 	set_can_focus(true);
+
 	set_value();
 
 	const int serial = id_;  // Not a member variable, because when the lambda below is triggered we
@@ -442,11 +449,16 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
+		case SDLK_SPACE:
 			if (list_->is_visible()) {
 				set_value();
-				return true;
+				if (code.sym != SDLK_SPACE) {
+					set_list_visibility(false);
+				}
+			} else {
+				set_list_visibility(true);
 			}
-			break;
+			return true;
 		case SDLK_ESCAPE:
 			if (list_->is_visible()) {
 				list_->select(current_selection_);

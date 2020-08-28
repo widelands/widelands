@@ -7,12 +7,10 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "larch_summer_sapling",
    descname = _ "Larch (Sapling)",
-   editor_category = "trees_coniferous",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -34,12 +32,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "larch_summer_pole",
    descname = _ "Larch (Pole)",
-   editor_category = "trees_coniferous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -61,12 +57,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "larch_summer_mature",
    descname = _ "Larch (Mature)",
-   editor_category = "trees_coniferous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -88,14 +82,12 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "larch_summer_old",
    descname = _ "Larch (Old)",
    species = _ "Larch",
    icon = dirname .. "menu.png",
-   editor_category = "trees_coniferous",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {

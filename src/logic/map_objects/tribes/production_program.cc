@@ -1443,7 +1443,7 @@ mine
           -- Search radius of 2 for iron. Will always find iron until 33.33% of it has been dug up.
           -- After that, there's still a chance of 5% for finding iron.
           -- If this fails, the workers still have a chance of 17% of gaining experience.
-         "mine=iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
+         "mine=resource_iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
          "produce=iron_ore"
      }
 
@@ -1452,12 +1452,12 @@ mine
          "animate=working duration:20s",
           -- Search radius of 1 for water. Will always find water until 100% of it has been drawn.
           -- After that, there's still a chance of 65% for finding water.
-         "mine=water radius:1 yield:100% when_empty:65%",
+         "mine=resource_water radius:1 yield:100% when_empty:65%",
          "produce=water"
      }
 */
 ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
-                                    const World& world,
+                                    World& world,
                                     const std::string& production_program_name,
                                     ProductionSiteDescr* descr) {
 	if (arguments.size() != 5 && arguments.size() != 4) {
@@ -1471,7 +1471,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 		log("WARNING: Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
 		    "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
 		    descr->name().c_str());
-		resource_ = world.safe_resource_index(arguments.front().c_str());
+		resource_ = world.load_resource(arguments.front());
 		workarea_ = read_positive(arguments.at(1));
 		max_resources_ = read_positive(arguments.at(2)) * 100U;
 		depleted_chance_ = read_positive(arguments.at(3)) * 100U;
@@ -1482,7 +1482,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 		for (const std::string& argument : arguments) {
 			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 			if (item.second.empty()) {
-				resource_ = world.safe_resource_index(item.first.c_str());
+				resource_ = world.load_resource(item.first);
 			} else if (item.first == "radius") {
 				workarea_ = read_positive(item.second);
 			} else if (item.first == "yield") {
@@ -2109,7 +2109,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
                                      const std::string& init_descname,
                                      std::unique_ptr<LuaTable> actions_table,
                                      Tribes& tribes,
-                                     const World& world,
+                                     World& world,
                                      ProductionSiteDescr* building)
    : MapObjectProgram(init_name), descname_(init_descname) {
 

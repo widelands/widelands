@@ -125,6 +125,7 @@ public:
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
+	bool handle_key(bool, SDL_Keysym) override;
 
 	/// Sets the visual style of the button
 	void set_visual_state(UI::Button::VisualState state);

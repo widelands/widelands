@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
          descname = _"mining gold",
          actions = {
             "animate=working duration:13s",
-            "mine=gold radius:2 yield:100% when_empty:5% experience_on_fail:2%",
+            "mine=resource_gold radius:2 yield:100% when_empty:5% experience_on_fail:2%",
             "produce=gold_ore",
          }
       },

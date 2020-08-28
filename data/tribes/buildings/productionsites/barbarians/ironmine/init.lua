@@ -72,7 +72,7 @@ tribes:new_productionsite_type {
             "consume=ration",
             "sleep=duration:45s",
             "animate=working duration:20s",
-            "mine=iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
+            "mine=resource_iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
             "produce=iron_ore"
          }
       },
