@@ -69,79 +69,127 @@ tribes:new_tribe {
          {
             name = "granite",
             default_target_quantity = 30,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "log",
-            preciousness = 14
+            preciousness = 14,
+            helptexts = {
+
+            }
          },
          {
             name = "planks",
             default_target_quantity = 20,
-            preciousness = 10
+            preciousness = 10,
+            helptexts = {
+
+            }
          },
          {
             name = "wool",
             default_target_quantity = 10,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          },
          {
             name = "cloth",
             default_target_quantity = 15,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          }
       },
       {
          -- Food
          {
             name = "fish",
-            preciousness = 3
+            preciousness = 3,
+            helptexts = {
+
+            }
          },
          {
             name = "meat",
             default_target_quantity = 20,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          },
          {
             name = "water",
-            preciousness = 7
+            preciousness = 7,
+            helptexts = {
+
+            }
          },
          {
             name = "wheat",
-            preciousness = 12
+            preciousness = 12,
+            helptexts = {
+
+            }
          },
          {
             name = "flour",
             default_target_quantity = 20,
-            preciousness = 9
+            preciousness = 9,
+            helptexts = {
+
+            }
          },
          {
             name = "empire_bread",
             default_target_quantity = 20,
-            preciousness = 7
+            preciousness = 7,
+            helptexts = {
+
+            }
          },
          {
             name = "beer",
             default_target_quantity = 15,
-            preciousness = 5
+            preciousness = 5,
+            helptexts = {
+
+            }
          },
          {
             name = "grape",
-            preciousness = 10
+            preciousness = 10,
+            helptexts = {
+
+            }
          },
          {
             name = "wine",
-            preciousness = 8
+            preciousness = 8,
+            helptexts = {
+
+            }
          },
          {
             name = "ration",
             default_target_quantity = 20,
-            preciousness = 4
+            preciousness = 4,
+            helptexts = {
+
+            }
          },
          {
             name = "meal",
             default_target_quantity = 20,
-            preciousness = 4
+            preciousness = 4,
+            helptexts = {
+
+            }
          }
       },
       {
@@ -149,37 +197,58 @@ tribes:new_tribe {
          {
             name = "marble",
             default_target_quantity = 30,
-            preciousness = 3
+            preciousness = 3,
+            helptexts = {
+
+            }
          },
          {
             name = "marble_column",
             default_target_quantity = 10,
-            preciousness = 5
+            preciousness = 5,
+            helptexts = {
+
+            }
          },
          {
             name = "coal",
             default_target_quantity = 20,
-            preciousness = 10
+            preciousness = 10,
+            helptexts = {
+
+            }
          },
          {
             name = "iron_ore",
             default_target_quantity = 15,
-            preciousness = 4
+            preciousness = 4,
+            helptexts = {
+
+            }
          },
          {
             name = "iron",
             default_target_quantity = 20,
-            preciousness = 4
+            preciousness = 4,
+            helptexts = {
+
+            }
          },
          {
             name = "gold_ore",
             default_target_quantity = 15,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          },
          {
             name = "gold",
             default_target_quantity = 20,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          }
       },
       {
@@ -187,62 +256,98 @@ tribes:new_tribe {
          {
             name = "pick",
             default_target_quantity = 2,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "felling_ax",
             default_target_quantity = 3,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "saw",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "shovel",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "hammer",
             default_target_quantity = 2,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "fishing_rod",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "hunting_spear",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "scythe",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "bread_paddle",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "basket",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "kitchen_tools",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "fire_tongs",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          }
       },
       {
@@ -250,47 +355,74 @@ tribes:new_tribe {
          {
             name = "spear_wooden",
             default_target_quantity = 30,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "spear",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "spear_advanced",
             default_target_quantity = 1,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "spear_heavy",
             default_target_quantity = 1,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "spear_war",
             default_target_quantity = 1,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "armor_helmet",
             default_target_quantity = 30,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          },
          {
             name = "armor",
             default_target_quantity = 1,
             preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "armor_chain",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "armor_gilded",
             default_target_quantity = 1,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          }
       }
    },
@@ -300,164 +432,704 @@ tribes:new_tribe {
    workers_order = {
       {
          -- Carriers
-         { name = "empire_carrier" },
-         { name = "empire_ferry" },
+         {
+            name = "empire_carrier",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_ferry",
+            helptexts = {
+
+            }
+         },
          {
             name = "empire_donkey",
             default_target_quantity = 10,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          },
-         { name = "empire_donkeybreeder" }
+         {
+            name = "empire_donkeybreeder",
+            helptexts = {
+
+            }
+         }
       },
       {
          -- Building Materials
-         { name = "empire_stonemason" },
-         { name = "empire_carpenter" },
-         { name = "empire_lumberjack" },
-         { name = "empire_forester" },
-         { name = "empire_builder" },
-         { name = "empire_shepherd" },
-         { name = "empire_weaver" },
-         { name = "empire_shipwright" }
+         {
+            name = "empire_stonemason",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_carpenter",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_lumberjack",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_forester",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_builder",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_shepherd",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_weaver",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_shipwright",
+            helptexts = {
+
+            }
+         }
       },
       {
          -- Food
-         { name = "empire_fisher" },
-         { name = "empire_hunter" },
-         { name = "empire_farmer" },
-         { name = "empire_miller" },
-         { name = "empire_baker" },
-         { name = "empire_brewer" },
-         { name = "empire_vinefarmer" },
-         { name = "empire_vintner" },
-         { name = "empire_pigbreeder" },
-         { name = "empire_innkeeper" }
+         {
+            name = "empire_fisher",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_hunter",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_farmer",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_miller",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_baker",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_brewer",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_vinefarmer",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_vintner",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_pigbreeder",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_innkeeper",
+            helptexts = {
+
+            }
+         }
       },
       {
          -- Mining
-         { name = "empire_geologist" },
-         { name = "empire_miner" },
-         { name = "empire_miner_master" },
-         { name = "empire_charcoal_burner" },
-         { name = "empire_smelter" }
+         {
+            name = "empire_geologist",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_miner",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_miner_master",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_charcoal_burner",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_smelter",
+            helptexts = {
+
+            }
+         }
       },
       {
          -- Tools
-         { name = "empire_toolsmith" }
+         {
+            name = "empire_toolsmith",
+            helptexts = {
+
+            }
+         }
       },
       {
          -- Military
-         { name = "empire_recruit" },
+         {
+            name = "empire_recruit",
+            helptexts = {
+
+            }
+         },
          {
             name = "empire_soldier",
             default_target_quantity = 10,
-            preciousness = 5
+            preciousness = 5,
+            helptexts = {
+
+            }
          },
-         { name = "empire_trainer" },
-         { name = "empire_weaponsmith" },
-         { name = "empire_armorsmith" },
-         { name = "empire_scout" }
+         {
+            name = "empire_trainer",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_weaponsmith",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_armorsmith",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "empire_scout",
+            helptexts = {
+
+            }
+         }
       }
    },
 
    immovables = {
-      "ashes",
-      "destroyed_building",
-      "wheatfield_tiny",
-      "wheatfield_small",
-      "wheatfield_medium",
-      "wheatfield_ripe",
-      "wheatfield_harvested",
-      "grapevine_tiny",
-      "grapevine_small",
-      "grapevine_medium",
-      "grapevine_ripe",
-      "empire_resi_none",
-      "empire_resi_water",
-      "empire_resi_coal_1",
-      "empire_resi_iron_1",
-      "empire_resi_gold_1",
-      "empire_resi_stones_1",
-      "empire_resi_coal_2",
-      "empire_resi_iron_2",
-      "empire_resi_gold_2",
-      "empire_resi_stones_2",
-      "empire_shipconstruction",
+      {
+         name = "ashes",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "destroyed_building",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "wheatfield_tiny",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "wheatfield_small",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "wheatfield_medium",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "wheatfield_ripe",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "wheatfield_harvested",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "grapevine_tiny",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "grapevine_small",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "grapevine_medium",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "grapevine_ripe",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_resi_none",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_resi_water",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_resi_coal_1",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_resi_iron_1",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_resi_gold_1",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_resi_stones_1",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_resi_coal_2",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_resi_iron_2",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_resi_gold_2",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_resi_stones_2",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_shipconstruction",
+         helptexts = {
+
+         }
+      }
    },
 
    -- The order here also determines the order in lists on screen.
    buildings = {
       -- Warehouses
-      "empire_headquarters",
-      "empire_headquarters_shipwreck",
-      "empire_warehouse",
-      "empire_port",
+      {
+         name = "empire_headquarters",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_headquarters_shipwreck",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_warehouse",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_port",
+         helptexts = {
+
+         }
+      },
 
       -- Small
-      "empire_quarry",
-      "empire_lumberjacks_house",
-      "empire_foresters_house",
-      "empire_fishers_house",
-      "empire_hunters_house",
-      "empire_well",
-      "empire_scouts_house",
+      {
+         name = "empire_quarry",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_lumberjacks_house",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_foresters_house",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_fishers_house",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_hunters_house",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_well",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_scouts_house",
+         helptexts = {
+
+         }
+      },
 
       -- Medium
-      "empire_stonemasons_house",
-      "empire_sawmill",
-      "empire_mill",
-      "empire_bakery",
-      "empire_brewery",
-      "empire_vineyard",
-      "empire_winery",
-      "empire_tavern",
-      "empire_inn",
-      "empire_charcoal_kiln",
-      "empire_smelting_works",
-      "empire_toolsmithy",
-      "empire_armorsmithy",
-      "empire_barracks",
+      {
+         name = "empire_stonemasons_house",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_sawmill",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_mill",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_bakery",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_brewery",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_vineyard",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_winery",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_tavern",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_inn",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_charcoal_kiln",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_smelting_works",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_toolsmithy",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_armorsmithy",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_barracks",
+         helptexts = {
+
+         }
+      },
 
       -- Big
-      "empire_donkeyfarm",
-      "empire_farm",
-      "empire_piggery",
-      "empire_sheepfarm",
-      "empire_weaving_mill",
-      "empire_weaponsmithy",
+      {
+         name = "empire_donkeyfarm",
+         helptexts = {
 
+         }
+      },
+      {
+         name = "empire_farm",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_piggery",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_sheepfarm",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_weaving_mill",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_weaponsmithy",
+         helptexts = {
+
+         }
+      },
 
       -- Mines
-      "empire_marblemine",
-      "empire_marblemine_deep",
-      "empire_coalmine",
-      "empire_coalmine_deep",
-      "empire_ironmine",
-      "empire_ironmine_deep",
-      "empire_goldmine",
-      "empire_goldmine_deep",
+      {
+         name = "empire_marblemine",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_marblemine_deep",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_coalmine",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_coalmine_deep",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_ironmine",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_ironmine_deep",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_goldmine",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_goldmine_deep",
+         helptexts = {
+
+         }
+      },
 
       -- Training Sites
-      "empire_arena",
-      "empire_colosseum",
-      "empire_trainingcamp",
+      {
+         name = "empire_arena",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_colosseum",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_trainingcamp",
+         helptexts = {
+
+         }
+      },
 
       -- Military Sites
-      "empire_blockhouse",
-      "empire_sentry",
-      "empire_outpost",
-      "empire_barrier",
-      "empire_tower",
-      "empire_fortress",
-      "empire_castle",
+      {
+         name = "empire_blockhouse",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_sentry",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_outpost",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_barrier",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_tower",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_fortress",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_castle",
+         helptexts = {
+
+         }
+      },
 
       -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
-      "empire_ferry_yard",
-      "empire_shipyard",
+      {
+         name = "empire_ferry_yard",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "empire_shipyard",
+         helptexts = {
+
+         }
+      },
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
-      "constructionsite",
-      "dismantlesite",
+      {
+         name = "constructionsite",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "dismantlesite",
+         helptexts = {
+
+         }
+      }
    },
 
    -- Special types

@@ -157,6 +157,7 @@
 --       }
 --
 
+-- NOCOM documentation
 tribes = wl.Tribes()
 
 image_dirname = path.dirname(__file__) .. "images/"
@@ -227,74 +228,119 @@ tribes:new_tribe {
          {
             name = "granite",
             default_target_quantity = 20,
-            preciousness = 5
+            preciousness = 5,
+            helptexts = {
+
+            }
          },
          {
             name = "log",
-            preciousness = 14
+            preciousness = 14,
+            helptexts = {
+
+            }
          },
          {
             name = "planks",
             default_target_quantity = 40,
-            preciousness = 10
+            preciousness = 10,
+            helptexts = {
+
+            }
          },
          {
             name = "spider_silk",
             default_target_quantity = 10,
-            preciousness = 11
+            preciousness = 11,
+            helptexts = {
+
+            }
          },
          {
             name = "spidercloth",
             default_target_quantity = 20,
-            preciousness = 7
+            preciousness = 7,
+            helptexts = {
+
+            }
          },
       },
       {
          -- Food
          {
             name = "fish",
-            preciousness = 4
+            preciousness = 4,
+            helptexts = {
+
+            }
          },
          {
             name = "smoked_fish",
             default_target_quantity = 30,
-            preciousness = 3
+            preciousness = 3,
+            helptexts = {
+
+            }
          },
          {
             name = "meat",
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          },
          {
             name = "smoked_meat",
             default_target_quantity = 20,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          },
          {
             name = "water",
-            preciousness = 7
+            preciousness = 7,
+            helptexts = {
+
+            }
          },
          {
             name = "corn",
-            preciousness = 12
+            preciousness = 12,
+            helptexts = {
+
+            }
          },
          {
             name = "cornmeal",
             default_target_quantity = 15,
-            preciousness = 7
+            preciousness = 7,
+            helptexts = {
+
+            }
          },
          {
             name = "blackroot",
-            preciousness = 10
+            preciousness = 10,
+            helptexts = {
+
+            }
          },
          {
             name = "blackroot_flour",
             default_target_quantity = 0,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          },
          {
             name = "atlanteans_bread",
             default_target_quantity = 20,
-            preciousness = 5
+            preciousness = 5,
+            helptexts = {
+
+            }
          }
       },
       {
@@ -302,37 +348,58 @@ tribes:new_tribe {
          {
             name = "quartz",
             default_target_quantity = 5,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "diamond",
             default_target_quantity = 5,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          },
          {
             name = "coal",
             default_target_quantity = 20,
-            preciousness = 10
+            preciousness = 10,
+            helptexts = {
+
+            }
          },
          {
             name = "iron_ore",
             default_target_quantity = 15,
-            preciousness = 4
+            preciousness = 4,
+            helptexts = {
+
+            }
          },
          {
             name = "iron",
             default_target_quantity = 20,
-            preciousness = 4
+            preciousness = 4,
+            helptexts = {
+
+            }
          },
          {
             name = "gold_ore",
             default_target_quantity = 15,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          },
          {
             name = "gold",
             default_target_quantity = 20,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          }
       },
       {
@@ -340,62 +407,98 @@ tribes:new_tribe {
          {
             name = "pick",
             default_target_quantity = 3,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "saw",
             default_target_quantity = 2,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "shovel",
             default_target_quantity = 2,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "hammer",
             default_target_quantity = 2,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "milking_tongs",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "fishing_net",
             default_target_quantity = 2,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "buckets",
             default_target_quantity = 2,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "hunting_bow",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "hook_pole",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "scythe",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "bread_paddle",
             default_target_quantity = 1,
-            preciousness = 0
+            preciousness = 0,
+            helptexts = {
+
+            }
          },
          {
             name = "fire_tongs",
             default_target_quantity = 1,
             preciousness = 0,
+            helptexts = {
+
+            }
          }
       },
       {
@@ -403,52 +506,82 @@ tribes:new_tribe {
          {
             name = "trident_light",
             default_target_quantity = 30,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "trident_long",
             default_target_quantity = 1,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "trident_steel",
             default_target_quantity = 1,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "trident_double",
             default_target_quantity = 1,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "trident_heavy_double",
             default_target_quantity = 1,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "shield_steel",
             default_target_quantity = 1,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "shield_advanced",
             default_target_quantity = 1,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "tabard",
             default_target_quantity = 30,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          },
          {
             name = "gold_thread",
             default_target_quantity = 5,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          },
          {
             name = "tabard_golden",
             default_target_quantity = 1,
-            preciousness = 1
+            preciousness = 1,
+            helptexts = {
+
+            }
          }
       }
    },
@@ -459,151 +592,632 @@ tribes:new_tribe {
    workers_order = {
       {
          -- Carriers
-         { name = "atlanteans_carrier" },
-         { name = "atlanteans_ferry" },
+         {
+            name = "atlanteans_carrier",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_ferry",
+            helptexts = {
+
+            }
+         },
          {
             name = "atlanteans_horse",
             default_target_quantity = 10,
-            preciousness = 2
+            preciousness = 2,
+            helptexts = {
+
+            }
          },
-         { name = "atlanteans_horsebreeder" }
+         {
+            name = "atlanteans_horsebreeder",
+            helptexts = {
+
+            }
+         }
       },
       {
          -- Building Materials
-         { name = "atlanteans_stonecutter" },
-         { name = "atlanteans_woodcutter" },
-         { name = "atlanteans_sawyer" },
-         { name = "atlanteans_forester" },
-         { name = "atlanteans_builder" },
-         { name = "atlanteans_spiderbreeder" },
-         { name = "atlanteans_weaver" },
-         { name = "atlanteans_shipwright" }
+         {
+            name = "atlanteans_stonecutter",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_woodcutter",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_sawyer",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_forester",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_builder",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_spiderbreeder",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_weaver",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_shipwright",
+            helptexts = {
+
+            }
+         }
       },
       {
          -- Food
-         { name = "atlanteans_fisher" },
-         { name = "atlanteans_fishbreeder" },
-         { name = "atlanteans_hunter" },
-         { name = "atlanteans_smoker" },
-         { name = "atlanteans_farmer" },
-         { name = "atlanteans_blackroot_farmer" },
-         { name = "atlanteans_miller" },
-         { name = "atlanteans_baker" }
+         {
+            name = "atlanteans_fisher",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_fishbreeder",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_hunter",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_smoker",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_farmer",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_blackroot_farmer",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_miller",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_baker",
+            helptexts = {
+
+            }
+         }
       },
       {
          -- Mining
-         { name = "atlanteans_geologist" },
-         { name = "atlanteans_miner" },
-         { name = "atlanteans_charcoal_burner" },
-         { name = "atlanteans_smelter" }
+         {
+            name = "atlanteans_geologist",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_miner",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_charcoal_burner",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_smelter",
+            helptexts = {
+
+            }
+         }
       },
       {
          -- Tools
-         { name = "atlanteans_toolsmith" }
+         {
+            name = "atlanteans_toolsmith",
+            helptexts = {
+
+            }
+         }
       },
       {
          -- Military
-         { name = "atlanteans_recruit" },
+         {
+            name = "atlanteans_recruit",
+            helptexts = {
+
+            }
+         },
          {
             name = "atlanteans_soldier",
             default_target_quantity = 10,
-            preciousness = 5
+            preciousness = 5,
+            helptexts = {
+
+            }
          },
-         { name = "atlanteans_trainer" },
-         { name = "atlanteans_weaponsmith" },
-         { name = "atlanteans_armorsmith" },
-         { name = "atlanteans_scout" }
+         {
+            name = "atlanteans_trainer",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_weaponsmith",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_armorsmith",
+            helptexts = {
+
+            }
+         },
+         {
+            name = "atlanteans_scout",
+            helptexts = {
+
+            }
+         }
       }
    },
 
    immovables = {
-      "ashes",
-      "blackrootfield_tiny",
-      "blackrootfield_small",
-      "blackrootfield_medium",
-      "blackrootfield_ripe",
-      "blackrootfield_harvested",
-      "cornfield_tiny",
-      "cornfield_small",
-      "cornfield_medium",
-      "cornfield_ripe",
-      "cornfield_harvested",
-      "destroyed_building",
-      "atlanteans_resi_none",
-      "atlanteans_resi_water",
-      "atlanteans_resi_coal_1",
-      "atlanteans_resi_iron_1",
-      "atlanteans_resi_gold_1",
-      "atlanteans_resi_stones_1",
-      "atlanteans_resi_coal_2",
-      "atlanteans_resi_iron_2",
-      "atlanteans_resi_gold_2",
-      "atlanteans_resi_stones_2",
-      "atlanteans_shipconstruction",
+      {
+         name = "ashes",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "blackrootfield_tiny",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "blackrootfield_small",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "blackrootfield_medium",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "blackrootfield_ripe",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "blackrootfield_harvested",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "cornfield_tiny",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "cornfield_small",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "cornfield_medium",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "cornfield_ripe",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "cornfield_harvested",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "destroyed_building",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_resi_none",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_resi_water",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_resi_coal_1",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_resi_iron_1",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_resi_gold_1",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_resi_stones_1",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_resi_coal_2",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_resi_iron_2",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_resi_gold_2",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_resi_stones_2",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_shipconstruction",
+         helptexts = {
+
+         }
+      }
    },
 
    -- The order here also determines the order in lists on screen.
    buildings = {
       -- Warehouses
-      "atlanteans_headquarters",
-      "atlanteans_warehouse",
-      "atlanteans_port",
+      {
+         name = "atlanteans_headquarters",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_warehouse",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_port",
+         helptexts = {
+
+         }
+      },
 
       -- Small
-      "atlanteans_quarry",
-      "atlanteans_woodcutters_house",
-      "atlanteans_foresters_house",
-      "atlanteans_fishers_house",
-      "atlanteans_fishbreeders_house",
-      "atlanteans_hunters_house",
-      "atlanteans_well",
-      "atlanteans_gold_spinning_mill",
-      "atlanteans_scouts_house",
+      {
+         name = "atlanteans_quarry",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_woodcutters_house",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_foresters_house",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_fishers_house",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_fishbreeders_house",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_hunters_house",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_well",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_gold_spinning_mill",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_scouts_house",
+         helptexts = {
+
+         }
+      },
 
       -- Medium
-      "atlanteans_sawmill",
-      "atlanteans_smokery",
-      "atlanteans_mill",
-      "atlanteans_bakery",
-      "atlanteans_charcoal_kiln",
-      "atlanteans_smelting_works",
-      "atlanteans_toolsmithy",
-      "atlanteans_weaponsmithy",
-      "atlanteans_armorsmithy",
-      "atlanteans_barracks",
+      {
+         name = "atlanteans_sawmill",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_smokery",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_mill",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_bakery",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_charcoal_kiln",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_smelting_works",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_toolsmithy",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_weaponsmithy",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_armorsmithy",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_barracks",
+         helptexts = {
+
+         }
+      },
 
       -- Big
-      "atlanteans_horsefarm",
-      "atlanteans_farm",
-      "atlanteans_blackroot_farm",
-      "atlanteans_spiderfarm",
-      "atlanteans_weaving_mill",
+      {
+         name = "atlanteans_horsefarm",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_farm",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_blackroot_farm",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_spiderfarm",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_weaving_mill",
+         helptexts = {
+
+         }
+      },
 
       -- Mines
-      "atlanteans_crystalmine",
-      "atlanteans_coalmine",
-      "atlanteans_ironmine",
-      "atlanteans_goldmine",
+      {
+         name = "atlanteans_crystalmine",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_coalmine",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_ironmine",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_goldmine",
+         helptexts = {
+
+         }
+      },
 
       -- Training Sites
-      "atlanteans_dungeon",
-      "atlanteans_labyrinth",
+      {
+         name = "atlanteans_dungeon",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_labyrinth",
+         helptexts = {
+
+         }
+      },
 
       -- Military Sites
-      "atlanteans_guardhouse",
-      "atlanteans_guardhall",
-      "atlanteans_tower_small",
-      "atlanteans_tower",
-      "atlanteans_tower_high",
-      "atlanteans_castle",
+      {
+         name = "atlanteans_guardhouse",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_guardhall",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_tower_small",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_tower",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_tower_high",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_castle",
+         helptexts = {
+
+         }
+      },
 
       -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
-      "atlanteans_ferry_yard",
-      "atlanteans_shipyard",
+      {
+         name = "atlanteans_ferry_yard",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "atlanteans_shipyard",
+         helptexts = {
+
+         }
+      },
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
-      "constructionsite",
-      "dismantlesite",
+      {
+         name = "constructionsite",
+         helptexts = {
+
+         }
+      },
+      {
+         name = "dismantlesite",
+         helptexts = {
+
+         }
+      }
    },
 
    -- Special types
