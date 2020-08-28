@@ -85,9 +85,9 @@ tribes:new_tribe {
             preciousness = 4,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Log
+                  -- TRANSLATORS: Helptext for a frisian ware: Log
                   pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
-                  -- TRANSLATORS: Helptext for a ware: Log
+                  -- TRANSLATORS: Helptext for a frisian ware: Log
                   pgettext(warectxt, "Woodcutters fell the trees; foresters take care of the supply of trees. Logs are also used in the blacksmithy to build basic tools, and in the charcoal kiln for the production of coal. Smokeries use logs as fuel for smoking meat and fish.")
                }
             }
@@ -98,9 +98,9 @@ tribes:new_tribe {
             preciousness = 3,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Granite
+                  -- TRANSLATORS: Helptext for a frisian ware: Granite
                   pgettext("ware", "Granite is a basic building material."),
-                  -- TRANSLATORS: Helptext for a ware: Granite
+                  -- TRANSLATORS: Helptext for a frisian ware: Granite
                   pgettext(warectxt, "The Frisians produce granite blocks in quarries and rock mines. They can be refined in a brick kiln.")
                }
             }
@@ -110,7 +110,7 @@ tribes:new_tribe {
             default_target_quantity = 30,
             preciousness = 9,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Clay
+               -- TRANSLATORS: Helptext for a frisian ware: Clay
                purpose = pgettext(warectxt, "Clay is made out of water and mud to be turned into bricks, used in ship construction and to improve the charcoal kiln.")
             }
          },
@@ -119,7 +119,7 @@ tribes:new_tribe {
             default_target_quantity = 40,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Brick
+               -- TRANSLATORS: Helptext for a frisian ware: Brick
                purpose = pgettext(warectxt, "Bricks are the best and most important building material. They are made out of a mix of clay and granite dried in a coal fire.")
             }
          },
@@ -127,7 +127,7 @@ tribes:new_tribe {
             name = "reed",
             preciousness = 8,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Reed
+               -- TRANSLATORS: Helptext for a frisian ware: Reed
                purpose = pgettext(warectxt, "Reed is grown in a reed farm. Nothing is better suited to make roofs waterproof. It is also used to make buckets and fishing nets as well as cloth." )
             }
          },
@@ -136,7 +136,7 @@ tribes:new_tribe {
             default_target_quantity = 10,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Fur
+               -- TRANSLATORS: Helptext for a frisian ware: Fur
                purpose = pgettext(warectxt, "Fur is won from reindeer in a reindeer farm. It is woven into cloth or turned into fur garments for soldiers.")
             }
          },
@@ -145,7 +145,7 @@ tribes:new_tribe {
             default_target_quantity = 10,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Cloth
+               -- TRANSLATORS: Helptext for a frisian ware: Cloth
                purpose = pgettext(warectxt, "Cloth is needed for ships. It is produced out of reindeer fur and reed.")
             }
          },
@@ -156,7 +156,7 @@ tribes:new_tribe {
             name = "fruit",
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Fruit
+               -- TRANSLATORS: Helptext for a frisian ware: Fruit
                purpose = pgettext(warectxt, "Fruit are berries gathered from berry bushes by a fruit collector. They are used for rations and for feeding the fish at the aqua farms.")
             }
          },
@@ -165,9 +165,9 @@ tribes:new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Water
+                  -- TRANSLATORS: Helptext for a frisian ware: Water
                   pgettext("ware", "Water is the essence of life!"),
-                  -- TRANSLATORS: Helptext for a ware: Water
+                  -- TRANSLATORS: Helptext for a frisian ware: Water
                   pgettext(warectxt, "Water is used to bake bread and brew beer. Reindeer farms and aqua farms also consume it.")
                }
             }
@@ -176,7 +176,7 @@ tribes:new_tribe {
             name = "barley",
             preciousness = 25,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Barley
+               -- TRANSLATORS: Helptext for a frisian ware: Barley
                purpose = pgettext(warectxt, "Barley is a slow-growing grain that is used for baking bread and brewing beer. It is also eaten by reindeer.")
             }
          },
@@ -184,7 +184,7 @@ tribes:new_tribe {
             name = "honey",
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Honey
+               -- TRANSLATORS: Helptext for a frisian ware: Honey
                purpose = pgettext(warectxt, "Honey is produced by bees belonging to a beekeeper. It is used to bake honey bread and brew mead.")
             }
          },
@@ -193,7 +193,7 @@ tribes:new_tribe {
             default_target_quantity = 20,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Bread
+               -- TRANSLATORS: Helptext for a frisian ware: Bread
                purpose = pgettext(warectxt, "Bread is made out of barley and water and is used in the taverns to prepare rations. It is also consumed by training soldiers.")
             }
          },
@@ -202,7 +202,7 @@ tribes:new_tribe {
             default_target_quantity = 20,
             preciousness = 5,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Honey Bread
+               -- TRANSLATORS: Helptext for a frisian ware: Honey Bread
                purpose = pgettext(warectxt, "This bread is sweetened with honey. It is consumed by the most experienced miners and in advanced soldier training.")
             }
          },
@@ -211,7 +211,7 @@ tribes:new_tribe {
             default_target_quantity = 15,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Beer
+               -- TRANSLATORS: Helptext for a frisian ware: Beer
                purpose = pgettext(warectxt, "Beer is produced in breweries and used in drinking halls to produce meals. Soldiers drink beer while receiving basic training.")
             }
          },
@@ -220,7 +220,7 @@ tribes:new_tribe {
             default_target_quantity = 15,
             preciousness = 5,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Mead
+               -- TRANSLATORS: Helptext for a frisian ware: Mead
                purpose = pgettext(warectxt, "Mead is produced by mead breweries. Soldiers drink mead during advanced training.")
             }
          },
@@ -229,7 +229,7 @@ tribes:new_tribe {
             default_target_quantity = 20,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Fish
+               -- TRANSLATORS: Helptext for a frisian ware: Fish
                purpose = pgettext(warectxt, "Fish is a very important food resource for the Frisians. It is fished from the shore or reared in aqua farms." )
             }
          },
@@ -238,9 +238,9 @@ tribes:new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Meat
+                  -- TRANSLATORS: Helptext for a frisian ware: Meat
                   pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunters."),
-                  -- TRANSLATORS: Helptext for a ware: Meat
+                  -- TRANSLATORS: Helptext for a frisian ware: Meat
                   pgettext(warectxt, "Meat has to be smoked in a smokery before being delivered to taverns, drinking halls and training sites.")
                }
             }
@@ -250,7 +250,7 @@ tribes:new_tribe {
             default_target_quantity = 20,
             preciousness = 5,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Smoked Fish
+               -- TRANSLATORS: Helptext for a frisian ware: Smoked Fish
                purpose = pgettext(warectxt, "Fish is smoked in a smokery. Smoked fish is then consumed by soldiers in training or turned into rations and meals for miners and scouts.")
             }
          },
@@ -259,7 +259,7 @@ tribes:new_tribe {
             default_target_quantity = 10,
             preciousness = 7,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Smoked Meat
+               -- TRANSLATORS: Helptext for a frisian ware: Smoked Meat
                purpose = pgettext(warectxt, "Meat is smoked in a smokery. Smoked meat is then consumed by soldiers in training or turned into rations and meals for miners and scouts.")
             }
          },
@@ -269,9 +269,9 @@ tribes:new_tribe {
             preciousness = 3,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Ration
+                  -- TRANSLATORS: Helptext for a frisian ware: Ration
                   pgettext("ware", "A small bite to keep miners strong and working. The scout also consumes rations on his scouting trips."),
-                  -- TRANSLATORS: Helptext for a ware: Ration
+                  -- TRANSLATORS: Helptext for a frisian ware: Ration
                   pgettext(warectxt, "Rations are produced in taverns and drinking halls out of something to eat: Fruit, bread or smoked meat or fish.")
                }
             }
@@ -281,7 +281,7 @@ tribes:new_tribe {
             default_target_quantity = 5,
             preciousness = 6,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Meal
+               -- TRANSLATORS: Helptext for a frisian ware: Meal
                purpose = pgettext(warectxt, "A meal is made out of honey bread and beer and either smoked fish or meat. It is consumed by miners in deep mines.")
             }
          }
@@ -294,9 +294,9 @@ tribes:new_tribe {
             preciousness = 40,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Coal
+                  -- TRANSLATORS: Helptext for a frisian ware: Coal
                   pgettext("ware", "Coal is mined in coal mines or produced out of logs by a charcoal kiln."),
-                  -- TRANSLATORS: Helptext for a ware: Coal
+                  -- TRANSLATORS: Helptext for a frisian ware: Coal
                   pgettext(warectxt, "The fires of the brick kilns, furnaces and armor smithies are fed with coal.")
                }
             }
@@ -307,9 +307,9 @@ tribes:new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Iron Ore
+                  -- TRANSLATORS: Helptext for a frisian ware: Iron Ore
                   pgettext("default_ware", "Iron ore is mined in iron mines."),
-                  -- TRANSLATORS: Helptext for a ware: Iron Ore
+                  -- TRANSLATORS: Helptext for a frisian ware: Iron Ore
                   pgettext(warectxt, "It is smelted in a furnace to retrieve the iron.")
                }
             }
@@ -320,9 +320,9 @@ tribes:new_tribe {
             preciousness = 4,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Iron
+                  -- TRANSLATORS: Helptext for a frisian ware: Iron
                   pgettext("ware", "Iron is smelted out of iron ores."),
-                  -- TRANSLATORS: Helptext for a ware: Iron
+                  -- TRANSLATORS: Helptext for a frisian ware: Iron
                   pgettext(warectxt, "It is produced by the furnace. Tools and weapons are made of iron. It is also used as jewellery for fur garment armor to give it a silver shine.")
                }
             }
@@ -333,9 +333,9 @@ tribes:new_tribe {
             preciousness = 3,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Gold Ore
+                  -- TRANSLATORS: Helptext for a frisian ware: Gold Ore
                   pgettext("ware", "Gold ore is mined in a gold mine."),
-                  -- TRANSLATORS: Helptext for a ware: Gold Ore
+                  -- TRANSLATORS: Helptext for a frisian ware: Gold Ore
                   pgettext(warectxt, "Smelted in a furnace, it turns into gold which is used as a precious building material and to produce weapons and armor.")
                }
             }
@@ -346,9 +346,9 @@ tribes:new_tribe {
             preciousness = 6,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Gold
+                  -- TRANSLATORS: Helptext for a frisian ware: Gold
                   pgettext("ware", "Gold is the most valuable of all metals, and it is smelted out of gold ore."),
-                  -- TRANSLATORS: Helptext for a ware: Gold
+                  -- TRANSLATORS: Helptext for a frisian ware: Gold
                   pgettext(warectxt, "Only very important things are embellished with gold. It is produced by the furnace and is used to produce better swords and the best helmets. The best armor is also decorated with gold.")
                }
             }
@@ -357,7 +357,7 @@ tribes:new_tribe {
             name = "scrap_iron",
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Scrap Iron
+               -- TRANSLATORS: Helptext for a frisian ware: Scrap Iron
                purpose = pgettext(warectxt, "Discarded weapons and armor can be recycled in a recycling center to produce new tools, weapon and armor.")
             }
          },
@@ -365,7 +365,7 @@ tribes:new_tribe {
             name = "scrap_metal_mixed",
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Scrap metal (mixed)
+               -- TRANSLATORS: Helptext for a frisian ware: Scrap metal (mixed)
                purpose = pgettext(warectxt, "Discarded weapons and armor can be recycled in a recycling center to produce new tools, weapon and armor.")
             }
          },
@@ -373,7 +373,7 @@ tribes:new_tribe {
             name = "fur_garment_old",
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Old Fur Garment
+               -- TRANSLATORS: Helptext for a frisian ware: Old Fur Garment
                purpose = pgettext(warectxt, "Old garments can be turned into fur in a recycling center.")
             }
          }
@@ -385,7 +385,7 @@ tribes:new_tribe {
             default_target_quantity = 3,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Pick
+               -- TRANSLATORS: Helptext for a frisian ware: Pick
                purpose = pgettext(warectxt, "Picks are used by stonemasons and miners.")
             }
          },
@@ -395,9 +395,9 @@ tribes:new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Felling Ax
+                  -- TRANSLATORS: Helptext for a frisian ware: Felling Ax
                   pgettext("ware", "The felling ax is the tool to chop down trees."),
-                  -- TRANSLATORS: Helptext for a ware: Felling Ax
+                  -- TRANSLATORS: Helptext for a frisian ware: Felling Ax
                   pgettext(warectxt, "Felling axes are used by woodcutters and produced by the blacksmithy.")
                }
             }
@@ -408,9 +408,9 @@ tribes:new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Shovel
+                  -- TRANSLATORS: Helptext for a frisian ware: Shovel
                   pgettext("ware", "Shovels are needed for the proper handling of plants."),
-                  -- TRANSLATORS: Helptext for a ware: Shovel
+                  -- TRANSLATORS: Helptext for a frisian ware: Shovel
                   pgettext(warectxt, "They are used by berry and reed farmers as well as foresters. Clay diggers also need them to dig mud out of hard soil.")
                }
             }
@@ -421,9 +421,9 @@ tribes:new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Hammer
+                  -- TRANSLATORS: Helptext for a frisian ware: Hammer
                   pgettext("ware", "The hammer is an essential tool."),
-                  -- TRANSLATORS: Helptext for a ware: Hammer
+                  -- TRANSLATORS: Helptext for a frisian ware: Hammer
                   pgettext(warectxt, "Geologists, builders and blacksmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the blacksmithy.")
                }
             }
@@ -433,7 +433,7 @@ tribes:new_tribe {
             default_target_quantity = 2,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Fishing Net
+               -- TRANSLATORS: Helptext for a frisian ware: Fishing Net
                purpose = pgettext(warectxt, "Fishing nets are the tool used by fishers." )
             }
          },
@@ -443,9 +443,9 @@ tribes:new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Hunting Spear
+                  -- TRANSLATORS: Helptext for a frisian ware: Hunting Spear
                   pgettext("ware", "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by hunters."),
-                  -- TRANSLATORS: Helptext for a ware: Hunting Spear
+                  -- TRANSLATORS: Helptext for a frisian ware: Hunting Spear
                   pgettext(warectxt, "Hunting spears are produced by the blacksmithy")
                }
             }
@@ -456,9 +456,9 @@ tribes:new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Scythe
+                  -- TRANSLATORS: Helptext for a frisian ware: Scythe
                   pgettext("ware", "The scythe is the tool of the farmers."),
-                  -- TRANSLATORS: Helptext for a ware: Scythe
+                  -- TRANSLATORS: Helptext for a frisian ware: Scythe
                   pgettext(warectxt, "Scythes are produced by the blacksmithy.")
                }
             }
@@ -469,9 +469,9 @@ tribes:new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Bread Paddle
+                  -- TRANSLATORS: Helptext for a frisian ware: Bread Paddle
                   pgettext("ware", "The bread paddle is the tool of the baker, each baker needs one."),
-                  -- TRANSLATORS: Helptext for a ware: Bread Paddle
+                  -- TRANSLATORS: Helptext for a frisian ware: Bread Paddle
                   pgettext(warectxt, "Bread paddles are produced by the blacksmithy.")
                }
             }
@@ -481,7 +481,7 @@ tribes:new_tribe {
             default_target_quantity = 1,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Kitchen Tools
+               -- TRANSLATORS: Helptext for a frisian ware: Kitchen Tools
                purpose = pgettext(warectxt, "Kitchen tools are needed for preparing rations and meals. The smoker also needs them.")
             }
          },
@@ -491,9 +491,9 @@ tribes:new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for a ware: Fire Tongs
+                  -- TRANSLATORS: Helptext for a frisian ware: Fire Tongs
                   pgettext("ware", "Fire tongs are the tools for smelting ores."),
-                  -- TRANSLATORS: Helptext for a ware: Fire Tongs
+                  -- TRANSLATORS: Helptext for a frisian ware: Fire Tongs
                   pgettext(warectxt, "They are used in the furnace and the brick kiln and produced by the blacksmithy.")
                }
             }
@@ -503,7 +503,7 @@ tribes:new_tribe {
             default_target_quantity = 1,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Basket
+               -- TRANSLATORS: Helptext for a frisian ware: Basket
                purpose = pgettext(warectxt, "Baskets are needed by the fruit collector to gather berries. They are woven from reed and wood by the blacksmith.")
             }
          },
@@ -512,7 +512,7 @@ tribes:new_tribe {
             default_target_quantity = 1,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Needles
+               -- TRANSLATORS: Helptext for a frisian ware: Needles
                purpose = pgettext(warectxt, "Needles are used by seamstresses to sew cloth and fur garments.")
             }
          }
@@ -524,7 +524,7 @@ tribes:new_tribe {
             default_target_quantity = 30,
             preciousness = 4,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Short sword
+               -- TRANSLATORS: Helptext for a frisian ware: Short sword
                purpose = pgettext(warectxt, "This is the basic weapon of the Frisian soldiers. Together with a fur garment, it makes up the equipment of young soldiers. Short swords are produced by the small armor smithy.")
             }
          },
@@ -533,7 +533,7 @@ tribes:new_tribe {
             default_target_quantity = 2,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Long Sword
+               -- TRANSLATORS: Helptext for a frisian ware: Long Sword
                purpose = pgettext(warectxt, "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are equipped with a long and a double-edged sword.")
             }
          },
@@ -542,7 +542,7 @@ tribes:new_tribe {
             default_target_quantity = 2,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Broadsword
+               -- TRANSLATORS: Helptext for a frisian ware: Broadsword
                purpose = pgettext(warectxt, "The broadsword is the weapon used by level 2 soldiers. Level 5 soldiers are equipped with a broadsword and a double-edged sword.")
             }
          },
@@ -551,7 +551,7 @@ tribes:new_tribe {
             default_target_quantity = 2,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Double-edged Sword
+               -- TRANSLATORS: Helptext for a frisian ware: Double-edged Sword
                purpose = pgettext(warectxt, "The double-edged sword is the weapon used by level 3 soldiers. Level 6 soldiers are equipped with two of these ferocious swords.")
             }
          },
@@ -560,7 +560,7 @@ tribes:new_tribe {
             default_target_quantity = 30,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Fur Garment
+               -- TRANSLATORS: Helptext for a frisian ware: Fur Garment
                purpose = pgettext(warectxt, "Fur can be sewn into garments. They are used as basic armor. All new soldiers are clothed in a fur garment.")
             }
          },
@@ -569,7 +569,7 @@ tribes:new_tribe {
             default_target_quantity = 2,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Studded Fur Garment
+               -- TRANSLATORS: Helptext for a frisian ware: Studded Fur Garment
                purpose = pgettext(warectxt, "Ordinary fur garments can be decorated with iron to give them a silvery shine. These clothes make good armor.")
             }
          },
@@ -578,7 +578,7 @@ tribes:new_tribe {
             default_target_quantity = 2,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Golden Fur Garment
+               -- TRANSLATORS: Helptext for a frisian ware: Golden Fur Garment
                purpose = pgettext(warectxt, "Ordinary fur garments can be decorated with iron and gold. Such clothes are the best armor.")
             }
          },
@@ -587,7 +587,7 @@ tribes:new_tribe {
             default_target_quantity = 2,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Helmet
+               -- TRANSLATORS: Helptext for a frisian ware: Helmet
                purpose = pgettext(warectxt, "A helmet is a basic tool to protect soldiers. It is produced in the small armor smithy and used to train soldiers from health level 0 to level 1.")
             }
          },
@@ -596,7 +596,7 @@ tribes:new_tribe {
             default_target_quantity = 2,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for a ware: Golden Helmet
+               -- TRANSLATORS: Helptext for a frisian ware: Golden Helmet
                purpose = pgettext(warectxt, "A golden helmet protects soldiers. It is produced in the large armor smithy and used to train soldiers from health level 1 to level 2.")
             }
          }
