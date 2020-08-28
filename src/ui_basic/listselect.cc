@@ -25,7 +25,6 @@
 #include "base/log.h"
 #include "graphic/align.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
@@ -81,9 +80,9 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     table_style_(g_gr->styles().table_style(style)),
+     table_style_(g_style_manager->table_style(style)),
      background_style_(selection_mode == ListselectLayout::kDropdown ?
-                          g_gr->styles().dropdown_style(style) :
+                          g_style_manager->dropdown_style(style) :
                           nullptr),
      lineheight_(text_height(table_style_.enabled()) + kMargin),
      notify_on_delete_(nullptr) {
@@ -92,7 +91,7 @@ BaseListselect::BaseListselect(Panel* const parent,
 	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
-		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");
+		check_pic_ = g_image_cache->get("images/ui_basic/list_selected.png");
 		max_pic_width_ = check_pic_->width();
 		int pic_h = check_pic_->height();
 		if (pic_h > lineheight_) {
@@ -457,6 +456,14 @@ void BaseListselect::draw(RenderTarget& dst) {
  * Handle mouse wheel events
  */
 bool BaseListselect::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+	const uint32_t selected_idx = selection_index();
+	const uint32_t max = size() - 1;
+	if (y > 0 && selected_idx > 0) {
+		select(selected_idx - 1);
+	} else if (y < 0 && selected_idx < max) {
+		select(selected_idx + 1);
+	}
+
 	return scrollbar_.handle_mousewheel(which, x, y);
 }
 
@@ -511,32 +518,76 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 }
 
 bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
-	if (down) {
-		uint32_t selected_idx;
-		switch (code.sym) {
-		case SDLK_DOWN:
-			selected_idx = selection_index() + 1;
-			if (selected_idx < size()) {
-				select(selected_idx);
+	if (down && size() > 1) {
+		bool handle = true;
+		uint32_t selected_idx = selection_index();
+		const uint32_t max = size() - 1;
+		const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
+
+		if ((code.sym >= SDLK_1 && code.sym <= SDLK_9) ||
+		    (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM))) {
+			// Keys 1-9 directly address the 1st through 9th item in lists with less than 10 entries
+			if (max < 9) {
+				if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {
+					selected_idx = code.sym - SDLK_1;
+				} else if (code.sym >= SDLK_KP_1 && code.sym <= static_cast<int>(SDLK_KP_1 + max)) {
+					selected_idx = code.sym - SDLK_KP_1;
+				} else {
+					// don't handle the '9' when there are less than 9 items
+					handle = false;
+				}
+			} else {
+				// 10 or more items – ignore number keys
+				handle = false;
 			}
-			if ((selection_index() + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
+		} else {
+			// Up, Down, PageUp, PageDown, Home, End
+			switch (code.sym) {
+			case SDLK_KP_2:
+			case SDLK_DOWN:
+				if (selected_idx < max) {
+					++selected_idx;
+				}
+				break;
+			case SDLK_KP_8:
+			case SDLK_UP:
+				if (selected_idx > 0) {
+					--selected_idx;
+				}
+				break;
+			case SDLK_KP_7:
+			case SDLK_HOME:
+				selected_idx = 0;
+				break;
+			case SDLK_KP_1:
+			case SDLK_END:
+				selected_idx = max;
+				break;
+			case SDLK_KP_3:
+			case SDLK_PAGEDOWN:
+				selected_idx = std::min(max, selected_idx + pagesize);
+				break;
+			case SDLK_KP_9:
+			case SDLK_PAGEUP:
+				selected_idx = selected_idx > pagesize ? selected_idx - pagesize : 0;
+				break;
+			default:
+				handle = false;
+				break;  // not handled
+			}
+		}
+		assert(selected_idx <= max);
+		if (handle) {
+			select(selected_idx);
+			if (selection_index() * get_lineheight() < scrollpos_) {
+				scrollpos_ = selection_index() * get_lineheight();
+				scrollbar_.set_scrollpos(scrollpos_);
+			} else if ((selected_idx + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
 				int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
 				scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
 				scrollbar_.set_scrollpos(scrollpos_);
 			}
 			return true;
-		case SDLK_UP:
-			selected_idx = selection_index();
-			if (selected_idx > 0) {
-				select(selected_idx - 1);
-			}
-			if (selection_index() * get_lineheight() < scrollpos_) {
-				scrollpos_ = selection_index() * get_lineheight();
-				scrollbar_.set_scrollpos(scrollpos_);
-			}
-			return true;
-		default:
-			break;  // not handled
 		}
 	}
 

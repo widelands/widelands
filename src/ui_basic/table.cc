@@ -25,8 +25,8 @@
 #include <SDL_timer.h>
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
@@ -51,7 +51,7 @@ Table<void*>::Table(Panel* const parent,
                     TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
-     lineheight_(text_height(g_gr->styles().table_style(style).enabled())),
+     lineheight_(text_height(g_style_manager->table_style(style).enabled())),
      headerheight_(lineheight_ + 4),
      style_(style),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
@@ -314,8 +314,8 @@ void Table<void*>::draw(RenderTarget& dst) {
 			const UI::FontStyleInfo& font_style = er.font_style() != nullptr ?
 			                                         *er.font_style() :
 			                                         er.is_disabled() ?
-			                                         g_gr->styles().table_style(style_).disabled() :
-			                                         g_gr->styles().table_style(style_).enabled();
+			                                         g_style_manager->table_style(style_).disabled() :
+			                                         g_style_manager->table_style(style_).enabled();
 			std::shared_ptr<const UI::RenderedText> rendered_text =
 			   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 

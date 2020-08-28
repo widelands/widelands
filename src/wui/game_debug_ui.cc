@@ -21,7 +21,6 @@
 #include "wui/game_debug_ui.h"
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
@@ -125,7 +124,7 @@ MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::M
 	serial_ = obj.serial();
 	set_title(std::to_string(serial_));
 
-	tabs_.add("debug", g_gr->images().get("images/wui/fieldaction/menu_debug.png"),
+	tabs_.add("debug", g_image_cache->get("images/wui/fieldaction/menu_debug.png"),
 	          new MapObjectDebugPanel(tabs_, parent.egbase(), obj));
 
 	set_center_panel(&tabs_);

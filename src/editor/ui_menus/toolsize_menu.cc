@@ -22,7 +22,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/tool.h"
-#include "graphic/graphic.h"
 
 inline EditorInteractive& EditorToolsizeMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
@@ -42,7 +41,7 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                20,
                20,
                UI::ButtonStyle::kWuiSecondary,
-               g_gr->images().get("images/ui_basic/scrollbar_up.png")),
+               g_image_cache->get("images/ui_basic/scrollbar_up.png")),
      decrease_(this,
                "decr",
                get_inner_w() / 2 + 10,
@@ -50,7 +49,7 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                20,
                20,
                UI::ButtonStyle::kWuiSecondary,
-               g_gr->images().get("images/ui_basic/scrollbar_down.png")),
+               g_image_cache->get("images/ui_basic/scrollbar_down.png")),
      value_(0) {
 	increase_.sigclicked.connect([this]() { increase_radius(); });
 	decrease_.sigclicked.connect([this]() { decrease_radius(); });

@@ -76,6 +76,8 @@ public:
 
 	void set_enabled(bool enabled);
 
+	bool handle_key(bool, SDL_Keysym) override;
+
 protected:
 	void layout() override;
 	void calculate_cursor_position();

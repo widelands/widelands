@@ -25,6 +25,7 @@
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
 #include "map_io/map_loader.h"
 
@@ -90,12 +91,12 @@ void SinglePlayerTribeDropdown::rebuild() {
 		{
 			i18n::Textdomain td("tribes");
 			for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-				dropdown_.add(_(tribeinfo.descname), tribeinfo.name, g_gr->images().get(tribeinfo.icon),
+				dropdown_.add(_(tribeinfo.descname), tribeinfo.name, g_image_cache->get(tribeinfo.icon),
 				              false, tribeinfo.tooltip);
 			}
 		}
 		dropdown_.add(pgettext("tribe", "Random"), RANDOM,
-		              g_gr->images().get("images/ui_fsmenu/random.png"), false,
+		              g_image_cache->get("images/ui_fsmenu/random.png"), false,
 		              _("The tribe will be selected at random"));
 		if (player_setting.random_tribe) {
 			dropdown_.select(RANDOM);
@@ -119,8 +120,8 @@ void SinglePlayerTribeDropdown::rebuild() {
 void SinglePlayerTribeDropdown::selection_action() {
 	const PlayerSettings& player_settings = settings_->settings().players[id_];
 	dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-	                               UI::ButtonDisableStyle::kPermpressed :
-	                               UI::ButtonDisableStyle::kFlat);
+                                  UI::ButtonDisableStyle::kPermpressed :
+                                  UI::ButtonDisableStyle::kFlat);
 	if (dropdown_.has_selection()) {
 		if (player_settings.state == PlayerSettings::State::kShared) {
 			settings_->set_player_shared(
@@ -170,19 +171,19 @@ void SinglePlayerPlayerTypeDropdown::fill() {
 	// AIs
 	for (const auto* impl : ComputerPlayer::get_implementations()) {
 		dropdown_.add(_(impl->descname), (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
-		              g_gr->images().get(impl->icon_filename), false, _(impl->descname));
+		              g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 	}
 	/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 	dropdown_.add(_("Random AI"), AI_NAME_PREFIX RANDOM,
-	              g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
+	              g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
 	dropdown_.add(
 	   /** TRANSLATORS: This is the "name" of the single player */
-	   _("You"), kHuman_player, g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
+	   _("You"), kHuman_player, g_image_cache->get("images/wui/stats/genstats_nrworkers.png"));
 
 	// Do not close a player in savegames or scenarios
 	if (!settings.uncloseable(id_)) {
 		dropdown_.add(
-		   _("Closed"), kClosed, g_gr->images().get("images/ui_basic/stop.png"), false, _("Closed"));
+		   _("Closed"), kClosed, g_image_cache->get("images/ui_basic/stop.png"), false, _("Closed"));
 	}
 }
 
@@ -190,7 +191,7 @@ void SinglePlayerPlayerTypeDropdown::select_entry() {
 	const GameSettings& settings = settings_->settings();
 	const PlayerSettings& player_setting = settings.players[id_];
 	if (player_setting.state == PlayerSettings::State::kHuman) {
-		dropdown_.set_image(g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
+		dropdown_.set_image(g_image_cache->get("images/wui/stats/genstats_nrworkers.png"));
 		dropdown_.set_tooltip((boost::format(_("%1%: %2%")) % _("Type") % _("Human")).str());
 		dropdown_.set_enabled(false);
 	} else if (player_setting.state == PlayerSettings::State::kClosed) {
@@ -363,7 +364,7 @@ void SinglePlayerTeamDropdown::rebuild() {
 	}
 
 	dropdown_.clear();
-	dropdown_.add(_("No Team"), 0, g_gr->images().get("images/players/no_team.png"));
+	dropdown_.add(_("No Team"), 0, g_image_cache->get("images/players/no_team.png"));
 #ifndef NDEBUG
 	const size_t no_of_team_colors = sizeof(kTeamColors) / sizeof(kTeamColors[0]);
 #endif

@@ -22,8 +22,8 @@
 #include <boost/algorithm/string.hpp>
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
@@ -44,7 +44,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, x, y, w, h),
      text_(text),
-     style_(&g_gr->styles().font_style(FontStyle::kLabel)),
+     style_(&g_style_manager->font_style(FontStyle::kLabel)),
      font_scale_(1.0f),
      align_(align),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
@@ -55,6 +55,8 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 	scrollbar_.set_singlestepsize(text_height(*style_, font_scale_));
 	scrollbar_.set_steps(1);
 	set_scrollmode(scroll_mode);
+
+	set_can_focus(scrollbar_.is_enabled());
 }
 
 void MultilineTextarea::set_style(const UI::FontStyleInfo& style) {
@@ -125,6 +127,7 @@ void MultilineTextarea::recompute() {
 			break;  // No need to wrap twice.
 		}
 	}
+	set_can_focus(scrollbar_.is_enabled());
 }
 
 /**
@@ -190,6 +193,7 @@ void MultilineTextarea::set_scrollmode(MultilineTextarea::ScrollMode scroll_mode
 	scrollmode_ = scroll_mode;
 	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
 	                          scrollmode_ == ScrollMode::kScrollLogForced);
+	set_can_focus(scrollbar_.is_enabled());
 	layout();
 }
 
@@ -205,7 +209,7 @@ std::string MultilineTextarea::make_richtext() {
 	boost::replace_all(temp, "\n", "<br>");
 
 	FontStyleInfo scaled_style(*style_);
-	scaled_style.set_size(std::max(g_gr->styles().minimum_font_size(),
+	scaled_style.set_size(std::max(g_style_manager->minimum_font_size(),
 	                               static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
 	return as_richtext_paragraph(temp, scaled_style, align_);
 }

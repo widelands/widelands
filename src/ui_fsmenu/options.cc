@@ -82,7 +82,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
             0,
             _("Options"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),

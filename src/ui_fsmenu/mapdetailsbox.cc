@@ -1,5 +1,6 @@
 #include "ui_fsmenu/mapdetailsbox.h"
 
+#include "graphic/image_cache.h"
 #include "map_io/map_loader.h"
 
 MapDetailsBox::MapDetailsBox(
@@ -12,7 +13,7 @@ MapDetailsBox::MapDetailsBox(
             0,
             _("Map"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+            g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      title_box_(this, 0, 0, UI::Box::Horizontal),
      map_name_(&title_box_,
                0,
@@ -21,7 +22,7 @@ MapDetailsBox::MapDetailsBox(
                0,
                _("No map selected"),
                UI::Align::kLeft,
-               g_gr->styles().font_style(UI::FontStyle::kLabel)),
+               g_style_manager->font_style(UI::FontStyle::kLabel)),
      select_map_(&title_box_,
                  "change_map_or_save",
                  0,
@@ -29,7 +30,7 @@ MapDetailsBox::MapDetailsBox(
                  standard_element_height,
                  standard_element_height,
                  UI::ButtonStyle::kFsMenuSecondary,
-                 g_gr->images().get("images/wui/menus/toggle_minimap.png"),
+                 g_image_cache->get("images/wui/menus/toggle_minimap.png"),
                  _("Change map or saved game")),
      map_description_(this,
                       0,

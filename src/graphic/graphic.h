@@ -21,34 +21,16 @@
 #define WL_GRAPHIC_GRAPHIC_H
 
 #include <memory>
+#include <string>
 
 #include <SDL_video.h>
 
-#include "graphic/image_cache.h"
-#include "graphic/style_manager.h"
-#include "notifications/note_ids.h"
-#include "notifications/notifications.h"
-
-class AnimationManager;
 class RenderTarget;
 class Screen;
 
 // A graphics card must at least support this size for texture for Widelands to
 // run.
 constexpr int kMinimumSizeForTextures = 2048;
-
-// Will be send whenever the resolution changes.
-struct GraphicResolutionChanged {
-	CAN_BE_SENT_AS_NOTE(NoteId::GraphicResolutionChanged)
-
-	// Old width and height in pixels.
-	int old_width;
-	int old_height;
-
-	// New width and height in pixels.
-	int new_width;
-	int new_height;
-};
 
 /**
  * This class is a kind of Swiss Army knife for your graphics need.
@@ -88,16 +70,6 @@ public:
 
 	int max_texture_size_for_font_rendering() const;
 
-	ImageCache& images() const {
-		return *image_cache_.get();
-	}
-	AnimationManager& animations() const {
-		return *animation_manager_.get();
-	}
-	StyleManager& styles() const {
-		return *style_manager_.get();
-	}
-
 	// Requests a screenshot being taken on the next frame.
 	void screenshot(const std::string& fname);
 
@@ -127,15 +99,6 @@ private:
 
 	/// A RenderTarget for screen_. This is initialized during init()
 	std::unique_ptr<RenderTarget> render_target_;
-
-	/// Non-volatile cache of independent images.
-	std::unique_ptr<ImageCache> image_cache_;
-
-	/// This holds all animations.
-	std::unique_ptr<AnimationManager> animation_manager_;
-
-	/// This holds all GUI styles.
-	std::unique_ptr<StyleManager> style_manager_;
 
 	/// Screenshot filename. If a screenshot is requested, this will be set to
 	/// the requested filename. On the next frame the screenshot will be written

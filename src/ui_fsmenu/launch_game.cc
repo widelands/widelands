@@ -55,7 +55,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                         0,
                         _("Type of game"),
                         UI::Align::kCenter,
-                        g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+                        g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      win_condition_dropdown_(&map_box_,
                              "dropdown_wincondition",
                              0,
@@ -92,7 +92,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
             0,
             "",
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      suggested_teams_box_(&map_box_, 0, 0, UI::Box::Vertical, padding_, 0, 0, 0),
      // Variables and objects used in the menu
      settings_(settings),

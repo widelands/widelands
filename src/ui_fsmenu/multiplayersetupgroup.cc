@@ -131,7 +131,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			}
 		}
 		slot_dropdown_.add(_("Spectator"), UserSettings::none(),
-		                   g_gr->images().get("images/wui/fieldaction/menu_tab_watch.png"),
+		                   g_image_cache->get("images/wui/fieldaction/menu_tab_watch.png"),
 		                   user_setting.position == UserSettings::none());
 		slot_dropdown_.set_visible(true);
 		slot_dropdown_.set_enabled(id_ == settings.usernum);
@@ -326,34 +326,34 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		for (const auto* impl : ComputerPlayer::get_implementations()) {
 			type_dropdown_.add(_(impl->descname),
 			                   (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
-			                   g_gr->images().get(impl->icon_filename), false, _(impl->descname));
+			                   g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 		}
 		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 		type_dropdown_.add(_("Random AI"), AI_NAME_PREFIX "random",
-		                   g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
+		                   g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
 
 		// Slot state. Only add shared_in if there are viable slots
 		if (settings.is_shared_usable(id_, settings.find_shared(id_))) {
 			type_dropdown_.add(_("Shared in"), "shared_in",
-			                   g_gr->images().get("images/ui_fsmenu/shared_in.png"), false,
+			                   g_image_cache->get("images/ui_fsmenu/shared_in.png"), false,
 			                   _("Shared in"));
 		}
 
 		// Do not close a player in savegames or scenarios
 		if (!settings.uncloseable(id_)) {
-			type_dropdown_.add(_("Closed"), "closed", g_gr->images().get("images/ui_basic/stop.png"),
+			type_dropdown_.add(_("Closed"), "closed", g_image_cache->get("images/ui_basic/stop.png"),
 			                   false, _("Closed"));
 		}
 
 		type_dropdown_.add(
-		   _("Open"), "open", g_gr->images().get("images/ui_basic/continue.png"), false, _("Open"));
+		   _("Open"), "open", g_image_cache->get("images/ui_basic/continue.png"), false, _("Open"));
 
 		type_dropdown_.set_enabled(settings_->can_change_player_state(id_));
 
 		// Now select the entry according to server settings
 		const PlayerSettings& player_setting = settings.players[id_];
 		if (player_setting.state == PlayerSettings::State::kHuman) {
-			type_dropdown_.set_image(g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
+			type_dropdown_.set_image(g_image_cache->get("images/wui/stats/genstats_nrworkers.png"));
 			type_dropdown_.set_tooltip((boost::format(_("%1%: %2%")) % _("Type") % _("Human")).str());
 		} else if (player_setting.state == PlayerSettings::State::kClosed) {
 			type_dropdown_.select("closed");
@@ -381,8 +381,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Whether the client who is running the UI is allowed to change the tribe for this player slot.
 	bool has_tribe_access() {
 		return settings_->settings().players[id_].state == PlayerSettings::State::kShared ?
-		          settings_->can_change_player_init(id_) :
-		          settings_->can_change_player_tribe(id_);
+                settings_->can_change_player_init(id_) :
+                settings_->can_change_player_tribe(id_);
 	}
 
 	/// This will update the game settings for the tribe or shared_in with the value
@@ -394,8 +394,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_settings = settings_->settings().players[id_];
 		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-		                                      UI::ButtonDisableStyle::kPermpressed :
-		                                      UI::ButtonDisableStyle::kFlat);
+                                            UI::ButtonDisableStyle::kPermpressed :
+                                            UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
 				n->set_player_shared(
@@ -443,11 +443,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				i18n::Textdomain td("tribes");
 				for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 					tribes_dropdown_.add(_(tribeinfo.descname), tribeinfo.name,
-					                     g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
+					                     g_image_cache->get(tribeinfo.icon), false, tribeinfo.tooltip);
 				}
 			}
 			tribes_dropdown_.add(pgettext("tribe", "Random"), "random",
-			                     g_gr->images().get("images/ui_fsmenu/random.png"), false,
+			                     g_image_cache->get("images/ui_fsmenu/random.png"), false,
 			                     _("The tribe will be selected at random"));
 			if (player_setting.random_tribe) {
 				tribes_dropdown_.select("random");
@@ -552,7 +552,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 
 		team_dropdown_.clear();
-		team_dropdown_.add(_("No Team"), 0, g_gr->images().get("images/players/no_team.png"));
+		team_dropdown_.add(_("No Team"), 0, g_image_cache->get("images/players/no_team.png"));
 #ifndef NDEBUG
 		const size_t no_of_team_colors = sizeof(kTeamColors) / sizeof(kTeamColors[0]);
 #endif
@@ -647,7 +647,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
               0,
               _("Clients"),
               UI::Align::kCenter,
-              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+              g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      players_(&playerbox,
               0,
               0,
@@ -655,7 +655,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
               0,
               _("Players"),
               UI::Align::kCenter,
-              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+              g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      buth_(buth) {
 
 	clientbox.add(&clients_, Resizing::kAlign, UI::Align::kCenter);

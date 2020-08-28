@@ -22,8 +22,8 @@
 #include <memory>
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 
 namespace UI {
@@ -40,7 +40,7 @@ ProgressBar::ProgressBar(Panel* const parent,
      orientation_(orientation),
      state_(0),
      total_(100),
-     style_(g_gr->styles().progressbar_style(UI::PanelStyle::kWui)) {
+     style_(g_style_manager->progressbar_style(UI::PanelStyle::kWui)) {
 }
 
 /**

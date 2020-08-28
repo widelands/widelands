@@ -23,6 +23,7 @@
 
 #include "base/i18n.h"
 #include "graphic/playercolor.h"
+#include "graphic/style_manager.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
@@ -40,7 +41,7 @@ SinglePlayerActivePlayerSetupBox::SinglePlayerActivePlayerSetupBox(
             0,
             _("Players"),
             UI::Align::kRight,
-            g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+            g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      settings_(settings) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
