@@ -121,7 +121,7 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 
 	content_box_.add_space(10 * padding_);
 	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
-	content_box_.add_inf_space();
+	//	content_box_.add_inf_space();
 	content_box_.add(&map_box_, UI::Box::Resizing::kFullSize);
 	content_box_.add_space(10 * padding_);
 
@@ -149,8 +149,10 @@ void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
 	map_details.set_select_map_action([this]() { clicked_select_map(); });
 }
 void FullscreenMenuLaunchGame::layout() {
+	main_box_.set_size(get_w(), get_h());
 	standard_element_width_ = get_w() / 4;
 	standard_element_height_ = get_h() * 9 / 200;
+
 	ok_.set_desired_size(standard_element_width_, standard_element_height_);
 	back_.set_desired_size(standard_element_width_, standard_element_height_);
 	win_condition_dropdown_.set_desired_size(standard_element_width_, standard_element_height_);
@@ -160,8 +162,6 @@ void FullscreenMenuLaunchGame::layout() {
 	   scale_factor(), standard_element_width_, standard_element_height_);
 	map_box_.set_desired_size(standard_element_width_, 0);
 	win_condition_type.set_font_scale(scale_factor());
-
-	main_box_.set_size(get_w(), get_h());
 }
 
 void FullscreenMenuLaunchGame::update_peaceful_mode() {

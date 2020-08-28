@@ -100,23 +100,9 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   g_image_cache->get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
      help_(nullptr),
-     // Variables and objects used in the menu
 
-     mpsg_(&individual_content_box,
-           0,
-           0,
-           individual_content_box.get_w(),
-           individual_content_box.get_h() / 3,
-           settings,
-           standard_element_height_,
-           padding_),
-     chat_(&individual_content_box,
-           0,
-           0,
-           individual_content_box.get_w(),
-           individual_content_box.get_h() / 3,
-           chat,
-           UI::PanelStyle::kFsMenu) {
+     mpsg_(&individual_content_box, 0, 0, 0, 0, settings, standard_element_height_, padding_),
+     chat_(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu) {
 
 	title_.set_text(_("Multiplayer Game Setup"));
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
@@ -147,8 +133,7 @@ FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
 }
 
 void FullscreenMenuLaunchMPG::layout() {
-	standard_element_width_ = get_w() / 4;
-	standard_element_height_ = get_h() * 9 / 200;
+	FullscreenMenuLaunchGame::layout();
 	// hardcode help button because it does not fit in any box, align it to the map button...
 	help_button_.set_size(standard_element_height_, standard_element_height_);
 	help_button_.set_pos(
@@ -158,13 +143,14 @@ void FullscreenMenuLaunchMPG::layout() {
 	log("window width/2: %d\n", get_w() * 1 / 2);
 	log("individual box width: %d\n", individual_content_box.get_w());
 
+	//	mpsg_.force_new_dimensions(
+	//	   scale_factor(), get_w() * 1 / 2, get_h() / 2, standard_element_height_);
+
 	mpsg_.force_new_dimensions(
-	   scale_factor(), get_w() * 1 / 2, get_h() / 2, standard_element_height_);
-	// mpsg_.force_new_dimensions(
-	// scale_factor(), individual_content_box.get_w(), get_h() / 2, standard_element_height_);
+	   scale_factor(), individual_content_box.get_w(), get_h() / 2, standard_element_height_);
+
 	// chat_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, get_h() / 4);
 
-	FullscreenMenuLaunchGame::layout();
 	// set focus to chat input
 	chat_.focus_edit();
 }

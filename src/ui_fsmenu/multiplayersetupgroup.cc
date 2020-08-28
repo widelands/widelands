@@ -49,16 +49,16 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                    (boost::format("dropdown_slot%d") % static_cast<unsigned int>(id)).str(),
 	                    0,
 	                    0,
-	                    h,
+	                    0,
 	                    16,
-	                    h,
+	                    0,
 	                    _("Role"),
 	                    UI::DropdownType::kPictorial,
 	                    UI::PanelStyle::kFsMenu,
 	                    UI::ButtonStyle::kFsMenuSecondary),
 	     // Name needs to be initialized after the dropdown, otherwise the layout function will
 	     // crash.
-	     name(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h),
+	     name(this, 0, 0, 0, 0),
 	     settings_(settings),
 	     id_(id),
 	     slot_selection_locked_(false) {
@@ -381,8 +381,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Whether the client who is running the UI is allowed to change the tribe for this player slot.
 	bool has_tribe_access() {
 		return settings_->settings().players[id_].state == PlayerSettings::State::kShared ?
-		          settings_->can_change_player_init(id_) :
-		          settings_->can_change_player_tribe(id_);
+                settings_->can_change_player_init(id_) :
+                settings_->can_change_player_tribe(id_);
 	}
 
 	/// This will update the game settings for the tribe or shared_in with the value
@@ -394,8 +394,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_settings = settings_->settings().players[id_];
 		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-		                                      UI::ButtonDisableStyle::kPermpressed :
-		                                      UI::ButtonDisableStyle::kFlat);
+                                            UI::ButtonDisableStyle::kPermpressed :
+                                            UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
 				n->set_player_shared(
@@ -639,7 +639,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
      npsb(new NetworkPlayerSettingsBackend(settings_)),
      clientbox(this, 0, 0, UI::Box::Vertical),
      playerbox(this, 0, 0, UI::Box::Vertical, 0, h, kPadding),
-     scrollable_playerbox(&playerbox, 0, 0, UI::Box::Vertical, 0, h - 50),
+     scrollable_playerbox(&playerbox, 0, 0, UI::Box::Vertical, 0, h),
      clients_(&clientbox,
               0,
               0,
@@ -757,11 +757,13 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
 	}
 	// playerbox.set_max_size(max_width - clientbox.get_w(), max_height);
 
-	log("ind. contentbox - clientbox: %d\n", max_width - clientbox.get_w());
-	log("scrollable before: %d\n", scrollable_playerbox.get_w());
-	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
-		multiPlayerPlayerGroup->set_desired_size(
-		   get_w() - 32 - clientbox.get_w() - UI::Scrollbar::kSize, multiPlayerPlayerGroup->get_h());
-	}
+	//	log("ind. contentbox - clientbox: %d\n", max_width - clientbox.get_w());
+	log("total: %d, client: %d,  player before: %d, scrollable before: %d,\n", get_w(),
+	    clientbox.get_w(), playerbox.get_w(), scrollable_playerbox.get_w());
+	//	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
+	//		multiPlayerPlayerGroup->set_desired_size(
+	//		   get_w() - 32 - clientbox.get_w() - UI::Scrollbar::kSize,
+	// multiPlayerPlayerGroup->get_h());
+	//	}
 	log("scrollable after: %d\n", scrollable_playerbox.get_w());
 }
