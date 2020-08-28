@@ -63,4 +63,6 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ImageCache);
 };
 
+extern ImageCache* g_image_cache;
+
 #endif  // end of include guard: WL_GRAPHIC_IMAGE_CACHE_H

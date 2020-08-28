@@ -23,7 +23,6 @@
 #include <SDL_mouse.h>
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -74,7 +73,7 @@ Slider::Slider(Panel* const parent,
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
-     cursor_style_(&g_gr->styles().slider_style(style).background()),
+     cursor_style_(&g_style_manager->slider_style(style).background()),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
@@ -566,7 +565,7 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
                                const uint32_t cursor_size,
                                const bool enabled)
    : Panel(parent, x, y, w, h, tooltip_text),
-     style(g_gr->styles().slider_style(init_style)),
+     style(g_style_manager->slider_style(init_style)),
      slider(this,
             // here, we take into account the h_gap introduced by HorizontalSlider
             w / (2 * labels_in.size()) - cursor_size / 2,

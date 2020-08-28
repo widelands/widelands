@@ -32,7 +32,7 @@ FullscreenMenuIntro::FullscreenMenuIntro()
               0,
               _("Press any key or click to continue…"),
               UI::Align::kCenter,
-              g_gr->styles().font_style(UI::FontStyle::kFsMenuIntro)) {
+              g_style_manager->font_style(UI::FontStyle::kFsMenuIntro)) {
 	message_.set_font_scale(scale_factor());
 	add_overlay_image("images/loadscreens/splash.jpg",
 	                  FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));

@@ -23,7 +23,7 @@
 #include "base/log.h"
 #include "base/random.h"
 #include "build_info.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/text_layout.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
@@ -55,7 +55,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
             0,
             _("Metaserver Lobby"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Boxes
      left_column_(this, 0, 0, UI::Box::Vertical),
@@ -145,10 +145,10 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 	                  "<p valign=bottom><img src=images/wui/overlays/road_building_green.png> %s"
 	                  "<br><img src=images/wui/overlays/road_building_yellow.png> %s"
 	                  "<br><img src=images/wui/overlays/road_building_red.png> %s</p></rt>") %
-	    g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("User Status")) %
-	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Administrator")) %
-	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Registered")) %
-	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Unregistered")))
+	    g_style_manager->font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("User Status")) %
+	    g_style_manager->font_style(UI::FontStyle::kTooltip).as_font_tag(_("Administrator")) %
+	    g_style_manager->font_style(UI::FontStyle::kTooltip).as_font_tag(_("Registered")) %
+	    g_style_manager->font_style(UI::FontStyle::kTooltip).as_font_tag(_("Unregistered")))
 	      .str();
 	clientsonline_table_.add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
@@ -271,14 +271,14 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 			if (game.connectable == INTERNET_GAME_SETUP && game.build_id == localbuildid) {
 				// only clients with the same build number are displayed
 				opengames_list_.add(richtext_escape(game.name), game,
-				                    g_gr->images().get("images/ui_basic/continue.png"), false,
+				                    g_image_cache->get("images/ui_basic/continue.png"), false,
 				                    game.build_id);
 			} else if (game.connectable == INTERNET_GAME_SETUP &&
 			           game.build_id.compare(0, 6, "build-") != 0 &&
 			           localbuildid.compare(0, 6, "build-") != 0) {
 				// only development clients are allowed to see games openend by such
 				opengames_list_.add(richtext_escape(game.name), game,
-				                    g_gr->images().get("images/ui_basic/different.png"), false,
+				                    g_image_cache->get("images/ui_basic/different.png"), false,
 				                    game.build_id);
 			}
 		}
@@ -324,21 +324,21 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			const Image* pic;
 			switch (convert_clienttype(client.type)) {
 			case kClientUnregistered:
-				pic = g_gr->images().get("images/wui/overlays/road_building_red.png");
+				pic = g_image_cache->get("images/wui/overlays/road_building_red.png");
 				er.set_picture(0, pic);
 				break;
 			case kClientRegistered:
-				pic = g_gr->images().get("images/wui/overlays/road_building_yellow.png");
+				pic = g_image_cache->get("images/wui/overlays/road_building_yellow.png");
 				er.set_picture(0, pic);
 				break;
 			case kClientSuperuser:
-				pic = g_gr->images().get("images/wui/overlays/road_building_green.png");
-				er.set_font_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupSuperuser));
+				pic = g_image_cache->get("images/wui/overlays/road_building_green.png");
+				er.set_font_style(g_style_manager->font_style(UI::FontStyle::kFsGameSetupSuperuser));
 				er.set_picture(0, pic);
 				break;
 			case kClientIRC:
 				// No icon for IRC users
-				er.set_font_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupIrcClient));
+				er.set_font_style(g_style_manager->font_style(UI::FontStyle::kFsGameSetupIrcClient));
 				continue;
 			default:
 				continue;
@@ -418,7 +418,7 @@ void FullscreenMenuInternetLobby::change_servername() {
 				servername_.set_tooltip(
 				   (boost::format(
 				       _("The game %s is already running. Please choose a different name.")) %
-				    g_gr->styles().font_style(UI::FontStyle::kWarning).as_font_tag(game.name))
+				    g_style_manager->font_style(UI::FontStyle::kWarning).as_font_tag(game.name))
 				      .str());
 			}
 		}
