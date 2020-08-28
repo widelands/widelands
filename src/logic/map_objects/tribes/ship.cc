@@ -30,6 +30,7 @@
 #include "economy/ship_fleet.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -1054,8 +1055,8 @@ void Ship::draw(const EditorGameBase& egbase,
 		case (ShipStates::kSinkAnimation):
 			break;
 		}
-		statistics_string = g_gr->styles().color_tag(
-		   statistics_string, g_gr->styles().building_statistics_style().medium_color());
+		statistics_string = g_style_manager->color_tag(
+		   statistics_string, g_style_manager->building_statistics_style().medium_color());
 	}
 
 	do_draw_info(info_to_draw, shipname_, statistics_string,
@@ -1121,7 +1122,7 @@ void Ship::send_message(Game& game,
                         const std::string& description,
                         const std::string& picture) {
 	const std::string rt_description =
-	   as_mapobject_message(picture, g_gr->images().get(picture)->width(), description);
+	   as_mapobject_message(picture, g_image_cache->get(picture)->width(), description);
 
 	get_owner()->add_message(game, std::unique_ptr<Message>(new Message(
 	                                  Message::Type::kSeafaring, game.get_gametime(), title, picture,

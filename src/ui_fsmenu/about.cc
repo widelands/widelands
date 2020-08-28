@@ -35,7 +35,7 @@ FullscreenMenuAbout::FullscreenMenuAbout()
             0,
             _("About Widelands"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      close_(this, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
      tabs_(this, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
 	try {

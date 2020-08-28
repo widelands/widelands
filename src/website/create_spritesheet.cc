@@ -231,7 +231,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	}
 
 	// Representative animation for collecting global paramaters for the animation set
-	const Animation& representative_animation = g_gr->animations().get_animation(
+	const Animation& representative_animation = g_animation_manager->get_animation(
 	   is_fontier_or_flag_animation ?
 	      frontier_or_flag_animation_id :
 	      descr->get_animation(is_directional ? animation_name + "_ne" : animation_name, nullptr));
@@ -296,7 +296,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 				const std::string filename_base = (boost::format("%s%s_%d") % animation_name %
 				                                   animation_direction_names[dir - 1] % scale)
 				                                     .str();
-				const Animation& directional_animation = g_gr->animations().get_animation(
+				const Animation& directional_animation = g_animation_manager->get_animation(
 				   descr->get_animation(directional_animname, nullptr));
 				spritesheets_to_write.emplace_back(
 				   new SpritesheetData(filename_base, directional_animation, scale));

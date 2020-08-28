@@ -30,7 +30,6 @@
 #include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/transfer.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
@@ -1063,7 +1062,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 		// TODO(GunChleoc): We keep formatting this even when timeout has not elapsed
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
 			const std::string rt_description = as_mapobject_message(
-			   ri.descr().name(), g_gr->images().get(rdescr->representative_image())->width(),
+			   ri.descr().name(), g_image_cache->get(rdescr->representative_image())->width(),
 			   _("A geologist found resources."));
 
 			//  We should add a message to the player's message queue - but only,

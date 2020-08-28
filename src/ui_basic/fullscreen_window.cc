@@ -23,7 +23,10 @@
 
 #include <boost/format.hpp>
 
+#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 
 /*
 ==============================================================================
@@ -60,7 +63,7 @@ FullscreenWindow::~FullscreenWindow() {
 
 void FullscreenWindow::add_overlay_image(const std::string& filename, Alignment align) {
 	overlays_.push_back(
-	   std::unique_ptr<const Overlay>(new Overlay(g_gr->images().get(filename), align)));
+	   std::unique_ptr<const Overlay>(new Overlay(g_image_cache->get(filename), align)));
 }
 
 void FullscreenWindow::clear_overlays() {
@@ -68,7 +71,7 @@ void FullscreenWindow::clear_overlays() {
 }
 
 void FullscreenWindow::set_frame_image(FullscreenWindow::Frames id, const std::string& filename) {
-	frame_overlays_.insert(std::make_pair(id, g_gr->images().get(kTemplateDir + filename)));
+	frame_overlays_.insert(std::make_pair(id, g_image_cache->get(kTemplateDir + filename)));
 }
 
 const Image* FullscreenWindow::get_frame_image(FullscreenWindow::Frames id) const {
@@ -84,7 +87,7 @@ const Image* FullscreenWindow::get_frame_image(FullscreenWindow::Frames id) cons
  */
 void FullscreenWindow::draw(RenderTarget& dst) {
 	// Overall background
-	dst.tile(Recti(0, 0, get_w(), get_h()), g_gr->images().get(background_image_), Vector2i::zero());
+	dst.tile(Recti(0, 0, get_w(), get_h()), g_image_cache->get(background_image_), Vector2i::zero());
 
 	// Center background
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCenter),

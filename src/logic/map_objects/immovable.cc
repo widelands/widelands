@@ -24,6 +24,7 @@
 #include "base/log.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game_data_error.h"
@@ -457,9 +458,9 @@ void Immovable::draw_construction(const uint32_t gametime,
 		done = total;
 	}
 
-	const Animation& anim = g_gr->animations().get_animation(anim_);
+	const Animation& anim = g_animation_manager->get_animation(anim_);
 	const size_t nr_frames = anim.nr_frames();
-	uint32_t frametime = g_gr->animations().get_animation(anim_).frametime();
+	uint32_t frametime = g_animation_manager->get_animation(anim_).frametime();
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
 	const size_t current_frame = done / units_per_frame;
 
@@ -479,8 +480,8 @@ void Immovable::draw_construction(const uint32_t gametime,
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(
 	   info_to_draw, descr().descname(),
-	   g_gr->styles().color_tag((boost::format(_("%i%% built")) % (100 * done / total)).str(),
-	                            g_gr->styles().building_statistics_style().construction_color()),
+	   g_style_manager->color_tag((boost::format(_("%i%% built")) % (100 * done / total)).str(),
+	                              g_style_manager->building_statistics_style().construction_color()),
 	   point_on_dst, scale, dst);
 }
 

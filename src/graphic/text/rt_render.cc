@@ -975,7 +975,7 @@ public:
 	              bool use_playercolor)
 	   : RenderNode(ns),
 	     image_(use_playercolor ? playercolor_image(color, image_filename) :
-	                              g_gr->images().get(image_filename)),
+	                              g_image_cache->get(image_filename)),
 	     filename_(image_filename),
 	     scale_(scale),
 	     color_(color),
@@ -1020,7 +1020,7 @@ std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_ca
 	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 
 	if (scale_ == 1.0 || filename_.empty()) {
-		// Image can be used as is, and has already been cached in g_gr->images()
+		// Image can be used as is, and has already been cached in g_image_cache
 		assert(image_ != nullptr);
 		rendered_text->rects.push_back(
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(image_)));
@@ -1308,7 +1308,7 @@ public:
 			use_playercolor = true;
 		}
 		if (a.has("object")) {
-			const Image* representative_image = g_gr->animations().get_representative_image(
+			const Image* representative_image = g_animation_manager->get_representative_image(
 			   a["object"].get_string(), use_playercolor ? &color : nullptr);
 			render_node_.reset(new ImgRenderNode(nodestyle_, representative_image));
 		} else {

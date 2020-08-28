@@ -64,7 +64,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
             0,
             "",
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),

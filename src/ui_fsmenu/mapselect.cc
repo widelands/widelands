@@ -51,7 +51,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
             0,
             _("Choose a map"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
      table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      map_details_(this,

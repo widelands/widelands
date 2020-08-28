@@ -107,7 +107,7 @@ void GameTips::stop() {
 void GameTips::show_tip(int32_t index) {
 	RenderTarget& rt = *g_gr->get_render_target();
 
-	const Image* pic_background = g_gr->images().get(BG_IMAGE);
+	const Image* pic_background = g_image_cache->get(BG_IMAGE);
 	const int w = pic_background->width();
 	const int h = pic_background->height();
 	Vector2i pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
