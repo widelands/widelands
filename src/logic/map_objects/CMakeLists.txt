@@ -133,6 +133,7 @@ wl_library(logic_map_objects
     world/world.cc
     world/world.h
   USES_BOOST_REGEX
+  USES_SDL2
   DEPENDS
     ai_hints
     base_exceptions
@@ -148,6 +149,7 @@ wl_library(logic_map_objects
     graphic_animation
     graphic_color
     graphic_fonthandler
+    graphic_image_cache
     graphic_image_io
     graphic_surface
     graphic_text_layout

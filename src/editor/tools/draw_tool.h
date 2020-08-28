@@ -22,6 +22,7 @@
 
 #include "editor/tools/tool.h"
 #include "editor/tools/tool_action.h"
+#include "graphic/image_cache.h"
 
 ///  This is not a real editor tool. It serves to combine 'hold down mouse and move'
 ///  tool actions in one class.
@@ -42,7 +43,7 @@ struct EditorDrawTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/novalue.png");
+		return g_image_cache->get("images/novalue.png");
 	}
 
 	void add_action(const EditorToolAction& ac, EditorActionArgs& args);

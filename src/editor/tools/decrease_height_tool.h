@@ -21,6 +21,7 @@
 #define WL_EDITOR_TOOLS_DECREASE_HEIGHT_TOOL_H
 
 #include "editor/tools/tool.h"
+#include "graphic/image_cache.h"
 
 ///  Decreases the height of a node by a value.
 struct EditorDecreaseHeightTool : public EditorTool {
@@ -40,7 +41,7 @@ struct EditorDecreaseHeightTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor//fsel_editor_decrease_height.png");
+		return g_image_cache->get("images/wui/editor//fsel_editor_decrease_height.png");
 	}
 
 	int32_t get_change_by() const {

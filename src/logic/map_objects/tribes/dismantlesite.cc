@@ -23,6 +23,7 @@
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -113,8 +114,9 @@ Print completion percentage.
 */
 void DismantleSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = g_gr->styles().color_tag((boost::format(_("%u%% dismantled")) % percent).str(),
-	                              g_gr->styles().building_statistics_style().construction_color());
+	*s =
+	   g_style_manager->color_tag((boost::format(_("%u%% dismantled")) % percent).str(),
+	                              g_style_manager->building_statistics_style().construction_color());
 }
 
 /*

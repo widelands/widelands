@@ -23,8 +23,8 @@
 #include <deque>
 #include <memory>
 
-#include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "graphic/note_graphic_resolution_changed.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 #include "ui_basic/box.h"

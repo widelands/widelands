@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "base/log.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"

@@ -32,6 +32,7 @@
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "logic/cmd_queue.h"
@@ -201,7 +202,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		const char* const* filename = filenames;
 
 		//  Special case for flag, which has a different formula for hotspot_y.
-		buildhelp_overlay->pic = g_gr->images().get(*filename);
+		buildhelp_overlay->pic = g_image_cache->get(*filename);
 		buildhelp_overlay->hotspot =
 		   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() - 1);
 
@@ -213,7 +214,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 			if (buildhelp_overlay == buildhelp_overlays_end) {
 				break;
 			}
-			buildhelp_overlay->pic = g_gr->images().get(*filename);
+			buildhelp_overlay->pic = g_image_cache->get(*filename);
 			buildhelp_overlay->hotspot =
 			   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
 		}
@@ -265,7 +266,7 @@ InteractiveBase::~InteractiveBase() {
 }
 
 void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
-	mapviewmenu_.set_image(g_gr->images().get("images/wui/menus/toggle_minimap.png"));
+	mapviewmenu_.set_image(g_image_cache->get("images/wui/menus/toggle_minimap.png"));
 	toolbar()->add(&mapviewmenu_);
 
 	minimap_registry_.open_window = [this] { toggle_minimap(); };
@@ -282,21 +283,21 @@ void InteractiveBase::rebuild_mapview_menu() {
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(minimap_registry_.window != nullptr ? _("Hide Minimap") : _("Show Minimap"),
 	                 MapviewMenuEntry::kMinimap,
-	                 g_gr->images().get("images/wui/menus/toggle_minimap.png"), false, "", "M");
+	                 g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, "", "M");
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
-	                 g_gr->images().get("images/wui/menus/zoom_increase.png"), false, "",
+	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
 	                 pgettext("hotkey", "Ctrl++"));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom,
-	                 g_gr->images().get("images/wui/menus/zoom_reset.png"), false, "",
+	                 g_image_cache->get("images/wui/menus/zoom_reset.png"), false, "",
 	                 pgettext("hotkey", "Ctrl+0"));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom -"), MapviewMenuEntry::kDecreaseZoom,
-	                 g_gr->images().get("images/wui/menus/zoom_decrease.png"), false, "",
+	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
 	                 pgettext("hotkey", "Ctrl+-"));
 }
 
@@ -415,7 +416,7 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 }
 
 void InteractiveBase::unset_sel_picture() {
-	set_sel_picture(g_gr->images().get("images/ui_basic/fsel.png"));
+	set_sel_picture(g_image_cache->get("images/ui_basic/fsel.png"));
 }
 
 bool InteractiveBase::buildhelp() const {
@@ -441,7 +442,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 bool bind_default_toggle) {
 	UI::Button* button =
 	   new UI::Button(&toolbar_.box, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiPrimary,
-	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
+	                  g_image_cache->get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.box.add(button);
 	if (window) {
 		window->opened.connect([button] { button->set_perm_pressed(true); });
@@ -933,7 +934,7 @@ void InteractiveBase::start_build_road(Coords road_start,
 	road_building_mode_.reset(new RoadBuildingMode(player, road_start, t));
 
 	road_building_add_overlay();
-	set_sel_picture(g_gr->images().get(t == RoadBuildingType::kWaterway ?
+	set_sel_picture(g_image_cache->get(t == RoadBuildingType::kWaterway ?
 	                                      "images/ui_basic/fsel_waterwaybuilding.png" :
 	                                      "images/ui_basic/fsel_roadbuilding.png"));
 
@@ -1327,7 +1328,7 @@ void InteractiveBase::road_building_add_overlay() {
 				name = "images/wui/overlays/road_building_red.png";
 			}
 		}
-		road_building_mode_->overlay_steepness_indicators[neighb] = g_gr->images().get(name);
+		road_building_mode_->overlay_steepness_indicators[neighb] = g_image_cache->get(name);
 	}
 }
 

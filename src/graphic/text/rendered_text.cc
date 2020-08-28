@@ -19,6 +19,7 @@
 
 #include "graphic/text/rendered_text.h"
 
+#include <cassert>
 #include <memory>
 
 #include "graphic/graphic.h"

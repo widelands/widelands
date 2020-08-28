@@ -21,6 +21,7 @@
 #define WL_EDITOR_TOOLS_NOISE_HEIGHT_TOOL_H
 
 #include "editor/tools/set_height_tool.h"
+#include "graphic/image_cache.h"
 
 /// Set the height of a node to a random value within a defined interval.
 struct EditorNoiseHeightTool : public EditorTool {
@@ -43,7 +44,7 @@ struct EditorNoiseHeightTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor/fsel_editor_noise_height.png");
+		return g_image_cache->get("images/wui/editor/fsel_editor_noise_height.png");
 	}
 
 	Widelands::HeightInterval get_interval() const {

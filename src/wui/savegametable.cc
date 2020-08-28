@@ -1,9 +1,11 @@
 #include "wui/savegametable.h"
 
 #include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
 
@@ -154,7 +156,7 @@ void SavegameTableReplay::add_columns() {
 	std::string game_mode_tooltip = "";
 	/** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
 	load.*/
-	g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
+	g_style_manager->font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
 
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
@@ -167,8 +169,7 @@ void SavegameTableReplay::add_columns() {
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
 	game_mode_tooltip += as_listitem(_("H = Multiplayer (Host)"), UI::FontStyle::kTooltip);
 
-	game_mode_tooltip += g_gr->styles()
-	                        .font_style(UI::FontStyle::kTooltip)
+	game_mode_tooltip += g_style_manager->font_style(UI::FontStyle::kTooltip)
 	                        .as_font_tag(_("Numbers are the number of players."));
 
 	add_column(65,
@@ -219,7 +220,7 @@ void SavegameTableMultiplayer::add_columns() {
 	std::string game_mode_tooltip = "";
 	/** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
 	load.*/
-	g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
+	g_style_manager->font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
 
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
@@ -228,8 +229,7 @@ void SavegameTableMultiplayer::add_columns() {
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
 	game_mode_tooltip += as_listitem(_("H = Multiplayer (Host)"), UI::FontStyle::kTooltip);
 
-	game_mode_tooltip += g_gr->styles()
-	                        .font_style(UI::FontStyle::kTooltip)
+	game_mode_tooltip += g_style_manager->font_style(UI::FontStyle::kTooltip)
 	                        .as_font_tag(_("Numbers are the number of players."));
 
 	add_column(65,

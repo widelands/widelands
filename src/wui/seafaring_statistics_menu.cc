@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "economy/ship_fleet.h"
-#include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "logic/game.h"
 #include "logic/player.h"
@@ -95,7 +94,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                kButtonSize,
                kButtonSize,
                UI::ButtonStyle::kWuiPrimary,
-               g_gr->images().get("images/wui/menus/watch_follow.png"),
+               g_image_cache->get("images/wui/menus/watch_follow.png"),
                /** TRANSLATORS: Tooltip in the seafaring statistics window */
                as_tooltip_text_with_hotkey(_("Watch the selected ship"), "w")),
      openwindowbtn_(&navigation_box_,
@@ -105,7 +104,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     kButtonSize,
                     kButtonSize,
                     UI::ButtonStyle::kWuiPrimary,
-                    g_gr->images().get("images/ui_basic/fsel.png"),
+                    g_image_cache->get("images/ui_basic/fsel.png"),
                     (boost::format("%s<br>%s") %
                      as_tooltip_text_with_hotkey(
                         /** TRANSLATORS: Tooltip in the seafaring statistics window */
@@ -123,7 +122,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     kButtonSize,
                     kButtonSize,
                     UI::ButtonStyle::kWuiPrimary,
-                    g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
+                    g_image_cache->get("images/wui/ship/menu_ship_goto.png"),
                     as_tooltip_text_with_hotkey(
                        /** TRANSLATORS: Tooltip in the seafaring statistics window */
                        _("Center the map on the selected ship"),
@@ -246,7 +245,7 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 		filename = "images/wui/ship/ship_scout_ne.png";
 		break;
 	}
-	return g_gr->images().get(filename);
+	return g_image_cache->get(filename);
 }
 
 std::unique_ptr<const SeafaringStatisticsMenu::ShipInfo>

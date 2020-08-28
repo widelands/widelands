@@ -23,8 +23,10 @@
 
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "scripting/lua_interface.h"
+
+StyleManager* g_style_manager;
 
 namespace {
 // Read RGB(A) color from LuaTable
@@ -67,7 +69,7 @@ UI::PanelStyleInfo* read_panel_style(const LuaTable& table) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
 	}
 	return new UI::PanelStyleInfo(
-	   image.empty() ? nullptr : g_gr->images().get(image),
+	   image.empty() ? nullptr : g_image_cache->get(image),
 	   RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0),
 	   table.has_key<std::string>("margin") ? table.get_int("margin") : 0);
 }
@@ -88,8 +90,7 @@ void check_completeness(const std::string& name, size_t map_size, size_t last_en
 }
 }  // namespace
 
-void StyleManager::init() {
-
+StyleManager::StyleManager() {
 	ScopedTimer timer("Style Manager: Reading style templates took %ums");
 
 	buttonstyles_.clear();
@@ -386,7 +387,7 @@ void StyleManager::add_ware_info_style(UI::WareInfoStyle style, const LuaTable& 
 	ware_info_styles_.insert(std::make_pair(
 	   style, std::unique_ptr<const UI::WareInfoStyleInfo>(new UI::WareInfoStyleInfo(
 	             read_font_style(*fonts_table, "header"), read_font_style(*fonts_table, "info"),
-	             g_gr->images().get(table.get_string("icon_background_image")),
+	             g_image_cache->get(table.get_string("icon_background_image")),
 	             read_rgb_color(*colors_table->get_table("icon_frame")),
 	             read_rgb_color(*colors_table->get_table("icon_background")),
 	             read_rgb_color(*colors_table->get_table("info_background"))))));

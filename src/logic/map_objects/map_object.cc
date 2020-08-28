@@ -29,7 +29,6 @@
 #include "base/wexception.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -339,7 +338,7 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 					const std::string directional_basename = basename + animation_direction_names[dir];
 					uint32_t anim_id = 0;
 					try {
-						anim_id = g_gr->animations().load(
+						anim_id = g_animation_manager->load(
 						   *anim, directional_basename, animation_directory, anim_type);
 						anims_.insert(std::make_pair(directional_animname, anim_id));
 					} catch (const std::exception& e) {
@@ -348,10 +347,10 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 					}
 					// Validate directions' scales
 					if (dir == 0) {
-						available_scales = g_gr->animations().get_animation(anim_id).available_scales();
+						available_scales = g_animation_manager->get_animation(anim_id).available_scales();
 					}
 					if (available_scales.size() !=
-					    g_gr->animations().get_animation(anim_id).available_scales().size()) {
+					    g_animation_manager->get_animation(anim_id).available_scales().size()) {
 						throw GameDataError("Direction '%s': number of available scales does not match "
 						                    "with direction '%s'",
 						                    animation_direction_names[dir], animation_direction_names[0]);
@@ -364,12 +363,12 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 				}
 				if (animname == "idle") {
 					anims_.insert(std::make_pair(
-					   animname,
-					   g_gr->animations().load(name_, *anim, basename, animation_directory, anim_type)));
+					   animname, g_animation_manager->load(
+					                name_, *anim, basename, animation_directory, anim_type)));
 				} else {
 					anims_.insert(std::make_pair(
 					   animname,
-					   g_gr->animations().load(*anim, basename, animation_directory, anim_type)));
+					   g_animation_manager->load(*anim, basename, animation_directory, anim_type)));
 				}
 			}
 		} catch (const std::exception& e) {
@@ -417,13 +416,13 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 
 void MapObjectDescr::load_graphics() const {
 	for (const auto& temp_anim : anims_) {
-		g_gr->animations().get_animation(temp_anim.second).load_default_scale_and_sounds();
+		g_animation_manager->get_animation(temp_anim.second).load_default_scale_and_sounds();
 	}
 }
 
 const Image* MapObjectDescr::representative_image(const RGBColor* player_color) const {
 	if (is_animation_known("idle")) {
-		return g_gr->animations().get_representative_image(
+		return g_animation_manager->get_representative_image(
 		   get_animation("idle", nullptr), player_color);
 	}
 	return nullptr;
@@ -443,7 +442,7 @@ const Image* MapObjectDescr::icon() const {
 	if (!icon_filename_.empty()) {
 		const Image* result = nullptr;
 		NoteDelayedCheck::instantiate(
-		   this, [this, &result]() { result = g_gr->images().get(icon_filename_); });
+		   this, [this, &result]() { result = g_image_cache->get(icon_filename_); });
 		while (!result) {
 			SDL_Delay(20);
 		}
@@ -606,7 +605,7 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 		return;
 	}
 
-	UI::FontStyleInfo census_font(g_gr->styles().building_statistics_style().census_font());
+	UI::FontStyleInfo census_font(g_style_manager->building_statistics_style().census_font());
 	census_font.set_size(scale * census_font.size());
 
 	// We always render this so we can have a stable position for the statistics string.
@@ -620,7 +619,7 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 	// Draw statistics if we want them, they are available and they fill fit
 	if (info_to_draw & InfoToDraw::kStatistics && !statictics.empty() && scale >= 0.5f) {
 		UI::FontStyleInfo statistics_font(
-		   g_gr->styles().building_statistics_style().statistics_font());
+		   g_style_manager->building_statistics_style().statistics_font());
 		statistics_font.set_size(scale * statistics_font.size());
 
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =

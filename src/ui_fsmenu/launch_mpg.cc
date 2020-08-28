@@ -23,7 +23,6 @@
 
 #include "base/i18n.h"
 #include "base/warning.h"
-#include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
@@ -116,7 +115,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   buth_,
                   buth_,
                   UI::ButtonStyle::kFsMenuSecondary,
-                  g_gr->images().get("images/ui_basic/menu_help.png"),
+                  g_image_cache->get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
 
      // Text labels
@@ -128,7 +127,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
               get_h() / 10,
               _("Clients"),
               UI::Align::kCenter,
-              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+              g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      players_(this,
               get_w() / 4,
               get_h() / 10,
@@ -136,7 +135,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
               get_h() / 10,
               _("Players"),
               UI::Align::kCenter,
-              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+              g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      map_(this,
           right_column_x_,
           get_h() / 10,
@@ -144,7 +143,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
           get_h() / 10,
           _("Map"),
           UI::Align::kCenter,
-          g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+          g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      wincondition_type_(this,
                         right_column_x_ + (butw_ / 2),
                         get_h() * 15 / 20 - 9 * label_height_,
@@ -152,7 +151,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                         0,
                         _("Type of game"),
                         UI::Align::kCenter,
-                        g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+                        g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      map_info_(this,
                right_column_x_,
                get_h() * 2 / 10,
@@ -393,12 +392,12 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	if (settings.mapfilename != filename_proof_) {
 		if (!g_fs->file_exists(settings.mapfilename)) {
-			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
+			map_info_.set_style(g_style_manager->font_style(UI::FontStyle::kWarning));
 			map_info_.set_text(_("The selected file can not be found. If it is not automatically "
 			                     "transferred to you, please write to the host about this problem."));
 		} else {
 			// Reset font color
-			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
+			map_info_.set_style(g_style_manager->font_style(UI::FontStyle::kLabel));
 
 			// Update local nr of players - needed for the client UI
 			nr_players_ = settings.players.size();

@@ -23,7 +23,6 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/time_string.h"
-#include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -48,7 +47,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	// Init boxes
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, PADDING);
 	title_area_ = new UI::Textarea(
-	   vbox, "", UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
+	   vbox, "", UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuTitle));
 	vbox->add(title_area_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	vbox->add_space(PADDING);
 
@@ -86,11 +85,11 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 
 	continue_button_ =
 	   new UI::Button(bottom_box, "continue_button", 0, 0, 35, 35, UI::ButtonStyle::kWuiMenu,
-	                  g_gr->images().get("images/ui_basic/continue.png"), _("Continue playing"));
+	                  g_image_cache->get("images/ui_basic/continue.png"), _("Continue playing"));
 	bottom_box->add(continue_button_);
 	bottom_box->add_space(PADDING);
 	stop_button_ = new UI::Button(bottom_box, "stop_button", 0, 0, 35, 35, UI::ButtonStyle::kWuiMenu,
-	                              g_gr->images().get("images/wui/menus/exit.png"), _("Exit Game"));
+	                              g_image_cache->get("images/wui/menus/exit.png"), _("Exit Game"));
 	bottom_box->add(stop_button_);
 	bottom_box->add_space(PADDING);
 

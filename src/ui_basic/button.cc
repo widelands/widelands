@@ -25,7 +25,6 @@
 #include <SDL_timer.h>
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -62,7 +61,7 @@ Button::Button  //  Common constructor
      time_nextact_(0),
      title_(title_text),
      title_image_(title_image),
-     style_(&g_gr->styles().button_style(init_style)) {
+     style_(&g_style_manager->button_style(init_style)) {
 	set_thinks(false);
 	set_can_focus(enabled_);
 }
@@ -95,8 +94,8 @@ Button::Button(Panel* const parent,
 		// Automatically resize for font height and give it a margin.
 		int new_width = get_w();
 		const int new_height =
-		   std::max(text_height(g_gr->styles().button_style(init_style).enabled().font()),
-		            text_height(g_gr->styles().button_style(init_style).disabled().font())) +
+		   std::max(text_height(g_style_manager->button_style(init_style).enabled().font()),
+		            text_height(g_style_manager->button_style(init_style).disabled().font())) +
 		   4 * kButtonImageMargin;
 		if (w == 0) {
 			// Automatically resize for text width too.
@@ -398,7 +397,7 @@ void Button::set_perm_pressed(bool pressed) {
 }
 
 void Button::set_style(UI::ButtonStyle bstyle) {
-	style_ = &g_gr->styles().button_style(bstyle);
+	style_ = &g_style_manager->button_style(bstyle);
 }
 
 void Button::toggle() {

@@ -123,8 +123,8 @@ public:
 };
 
 using ImageFn = std::function<const Image*()>;
-#define FN_GET_IMAGE(name) []() { return g_gr->images().get(name); }
-#define FN_GET_IMAGE_(name, ...) [__VA_ARGS__]() { return g_gr->images().get(name); }
+#define FN_GET_IMAGE(name) []() { return g_image_cache->get(name); }
+#define FN_GET_IMAGE_(name, ...) [__VA_ARGS__]() { return g_image_cache->get(name); }
 
 template <> class Table<void*> : public Panel {
 public:

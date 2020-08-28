@@ -21,6 +21,7 @@
 #define WL_EDITOR_TOOLS_SET_PORT_SPACE_TOOL_H
 
 #include "editor/tools/tool.h"
+#include "graphic/image_cache.h"
 
 #define FSEL_ESPS_FILENAME "images/wui/editor/fsel_editor_set_port_space.png"
 #define FSEL_EUPS_FILENAME "images/wui/editor/fsel_editor_unset_port_space.png"
@@ -41,7 +42,7 @@ public:
 	                         Widelands::Map* map) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get(FSEL_EUPS_FILENAME);
+		return g_image_cache->get(FSEL_EUPS_FILENAME);
 	}
 	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
 	                                           const Widelands::EditorGameBase& egbase) override;
@@ -63,7 +64,7 @@ public:
 	                         Widelands::Map* map) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get(FSEL_ESPS_FILENAME);
+		return g_image_cache->get(FSEL_ESPS_FILENAME);
 	}
 	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
 	                                           const Widelands::EditorGameBase& egbase) override;

@@ -22,6 +22,7 @@
 
 #include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/set_height_tool.h"
+#include "graphic/image_cache.h"
 
 ///  Increases the height of a field by a value.
 struct EditorIncreaseHeightTool : public EditorTool {
@@ -46,7 +47,7 @@ struct EditorIncreaseHeightTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor/fsel_editor_increase_height.png");
+		return g_image_cache->get("images/wui/editor/fsel_editor_increase_height.png");
 	}
 
 	int32_t get_change_by() const {

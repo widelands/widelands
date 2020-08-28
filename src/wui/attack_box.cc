@@ -82,7 +82,7 @@ UI::Textarea& AttackBox::add_text(UI::Box& parent,
                                   UI::Align alignment,
                                   const UI::FontStyle style) {
 	UI::Textarea& result =
-	   *new UI::Textarea(&parent, str.c_str(), UI::Align::kLeft, g_gr->styles().font_style(style));
+	   *new UI::Textarea(&parent, str.c_str(), UI::Align::kLeft, g_style_manager->font_style(style));
 	parent.add(&result, UI::Box::Resizing::kAlign, alignment);
 	return result;
 }
@@ -217,7 +217,7 @@ void AttackBox::init() {
 
 	attack_button_.reset(new UI::Button(
 	   &linebox, "attack", 8, 8, 34, 34, UI::ButtonStyle::kWuiPrimary,
-	   g_gr->images().get("images/wui/buildings/menu_attack.png"), _("Start attack")));
+	   g_image_cache->get("images/wui/buildings/menu_attack.png"), _("Start attack")));
 	linebox.add(attack_button_.get());
 
 	attacking_soldiers_.reset(new ListOfSoldiers(&mainbox, this, 0, 0, 30, 30));
@@ -236,8 +236,7 @@ void AttackBox::init() {
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(
 		   (tooltip_format %
-		    g_gr->styles()
-		       .font_style(UI::FontStyle::kTooltipHeader)
+		    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 		       .as_font_tag(_("Click on a soldier to remove him from the list of attackers")) %
 		    as_listitem(
 		       _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kTooltip) %
@@ -253,8 +252,7 @@ void AttackBox::init() {
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(
 		   (tooltip_format %
-		    g_gr->styles()
-		       .font_style(UI::FontStyle::kTooltipHeader)
+		    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 		       .as_font_tag(_("Click on a soldier to add him to the list of attackers")) %
 		    as_listitem(
 		       _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kTooltip) %
