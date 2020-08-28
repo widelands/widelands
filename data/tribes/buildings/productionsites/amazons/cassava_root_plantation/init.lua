@@ -20,25 +20,10 @@ tribes:new_productionsite_type {
       granite = 1,
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {105, 138},
-         fps = 10,
-      },
-      working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {105, 138},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {105, 111},
-      },
-      build = {
-         pictures = path.list_files (dirname .. "build_?.png"),
-         hotspot = {105, 111},
-      },
+      idle = {hotspot = {92, 73}},
+      unoccupied = {hotspot = {92, 73}},
    },
 
    aihints = {
