@@ -20,17 +20,15 @@ tribes:new_productionsite_type {
       granite = 1,
    },
 
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 89},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 66},
-      },
-   },
+   animation_directory = dirname,
+   animations = { unoccupied = {hotspot = {92, 73}}},
+   spritesheets = { idle = {
+      hotspot = {92, 112},
+      fps = 8,
+      frames = 4,
+      columns = 2,
+      rows = 2
+   }},
 
    aihints = {
       space_consumer = true,
