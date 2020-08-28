@@ -1,0 +1,82 @@
+#!/usr/bin/make -f
+
+# Hardening flags
+CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
+CFLAGS:=$(shell dpkg-buildflags --get CFLAGS) $(CPPFLAGS)
+CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS) $(CPPFLAGS)
+LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
+
+%:
+	dh $@ $(DH_ARGS) --buildsystem=cmake
+
+
+override_dh_auto_configure:
+	CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" CPPFLAGS="$(CPPFLAGS)" CXXFLAGS="$(CXXFLAGS)" \
+	  dh_auto_configure -Scmake -- \
+		-DWL_INSTALL_BASEDIR=/usr/share/games/widelands \
+		-DWL_INSTALL_BINDIR=games \
+		-DWL_INSTALL_DATADIR=/usr/share/games/widelands/data \
+		-DWL_INSTALL_PREFIX=/usr \
+		-DOPTION_USE_GLBINDING:BOOL=OFF \
+		-DOPTION_ASAN=OFF \
+		-DCMAKE_BUILD_TYPE=Release
+
+override_dh_auto_install:
+	dh_auto_install --parallel
+	# Take care of the fonts (use system-wide ones)
+	# Not doing so would violate the Debian Policy, preventing the package to enter the official repositories
+	# Skip this part for our packages, since we use the embedded fonts :/
+	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/amiri
+	# ln -s /usr/share/fonts/opentype/fonts-hosny-amiri debian/tmp/usr/share/games/widelands/data/i18n/fonts/amiri
+	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/DejaVu
+	# ln -s /usr/share/fonts/truetype/dejavu debian/tmp/usr/share/games/widelands/data/i18n/fonts/DejaVu
+	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/MicroHei
+	# ln -s /usr/share/fonts/truetype/wqy debian/tmp/usr/share/games/widelands/data/i18n/fonts/MicroHei
+	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/Nakula
+	# ln -s /usr/share/fonts/truetype/Nakula debian/tmp/usr/share/games/widelands/data/i18n/fonts
+	# Remove the licenses that are included in debian/copyright
+	rm debian/tmp/usr/share/games/widelands/data/i18n/fonts/Culmus/LICENSE
+	rm debian/tmp/usr/share/games/widelands/data/i18n/fonts/Widelands/LICENSE
+	# The GPL-2 license is listed from the user interface, so dont kill it completely
+	# (we cannot patch the user interface because that's in a translated text)
+	if cmp --quiet debian/tmp/usr/share/games/widelands/COPYING /usr/share/common-licenses/GPL-2 ; then \
+	  rm debian/tmp/usr/share/games/widelands/COPYING; \
+	  cd debian/tmp/usr/share/games/widelands/ ; \
+	  ln -s /usr/share/common-licenses/GPL-2 COPYING ; \
+	else \
+	  echo "Error: Licence file changed. Please check it out:"; \
+	  diff -u debian/tmp/usr/share/games/widelands/COPYING /usr/share/common-licenses/GPL-2; \
+	  exit 1; \
+	fi
+	# Remove binaries that are not intended for the user (according to SirVer)
+	# We want all binaries for our PPA...
+	# for b in wl_map_info wl_map_object_info wl_render_richtext wl_create_spritesheet ; do \
+	#  rm debian/tmp/usr/$${b} ;\
+	# done
+	# ... but we want to place them in the right location so that the .install files work
+	# mv debian/tmp/usr/widelands debian/tmp/usr/games
+
+	# TODO(GunChleoc): wl_render_richtext is currently unmaintained
+	# Move the main binary to the right location (no idea why it's misplaced)
+	mkdir debian/tmp/usr/games
+	for b in wl_map_info wl_map_object_info widelands wl_create_spritesheet ; do \
+	  mv debian/tmp/usr/$${b} debian/tmp/usr/games ;\
+	done
+	# Take care of the logo
+	for size in 16 32 48 64 128 ; do \
+	  mkdir -p debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps ; \
+	  cp ./debian/tmp/usr/share/games/widelands/data/images/logos/wl-ico-$${size}.png \
+	     debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps/widelands.png; \
+	done
+	# appdata
+	mkdir -p debian/tmp/usr/share/applications/
+	cp xdg/org.widelands.Widelands.desktop debian/tmp/usr/share/applications/
+	mkdir -p debian/tmp/usr/share/metainfo/
+	cp xdg/org.widelands.Widelands.appdata.xml debian/tmp/usr/share/metainfo/
+
+override_dh_missing:
+	dh_missing --list-missing
+
+# Just build the current trunk, don't replace with any potentially newer versions.
+# get-orig-source:
+#	uscan --verbose --force-download
