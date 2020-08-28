@@ -782,7 +782,8 @@ void GameHost::think() {
 			// delayed initialization, see comment in SinglePlayerGameController::think
 			for (size_t i = 0; i < nr_ais_; ++i) {
 				if (!threads_[i]) {
-					threads_[i].reset(new std::thread(&ComputerPlayer::runthread, d->computerplayers[i]));
+					threads_[i].reset(
+					   new std::thread(&ComputerPlayer::runthread, d->computerplayers[i]));
 					return;
 				}
 			}

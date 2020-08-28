@@ -75,13 +75,15 @@ void SinglePlayerGameController::think() {
 			} else if (!computerplayers_[p - 1].get()) {
 				// Deliberately use an else-if here to ensure the AI threads will be started with a
 				// brief delay. This fixes a race condition with the DefaultAI's lazy initialization.
-				computerplayers_[p - 1].reset(new AIData(ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p)));
+				computerplayers_[p - 1].reset(new AIData(
+				   ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p)));
 			}
 		}
 	}
 }
 
-SinglePlayerGameController::AIData::AIData(ComputerPlayer* cp) : ai(cp), thread(&ComputerPlayer::runthread, cp) {
+SinglePlayerGameController::AIData::AIData(ComputerPlayer* cp)
+   : ai(cp), thread(&ComputerPlayer::runthread, cp) {
 }
 
 void SinglePlayerGameController::send_player_command(Widelands::PlayerCommand* pc) {
