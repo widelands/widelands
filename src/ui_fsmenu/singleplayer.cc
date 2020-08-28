@@ -32,7 +32,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
            0,
            _("Single Player"),
            UI::Align::kCenter,
-           g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+           g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
      new_game(&vbox_, "new_game", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("New Game")),

@@ -97,6 +97,7 @@ wl_library(editor
     base_scoped_timer
     graphic
     graphic_fonthandler
+    graphic_image_cache
     graphic_mouse_cursor
     graphic_playercolor
     graphic_surface

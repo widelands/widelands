@@ -27,7 +27,6 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "graphic/animation/animation_manager.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -187,7 +186,7 @@ SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) 
 		   image_filenames.size());
 	}
 	for (const std::string& image_filename : image_filenames) {
-		images.push_back(g_gr->images().get(image_filename));
+		images.push_back(g_image_cache->get(image_filename));
 	}
 }
 
@@ -566,7 +565,7 @@ void Soldier::draw(const EditorGameBase& game,
 	const Vector2f point_on_dst = calc_drawpos(game, field_on_dst, scale);
 	draw_info_icon(
 	   point_on_dst.cast<int>() -
-	      Vector2i(0, (g_gr->animations().get_animation(get_current_anim()).height() - 7) * scale),
+	      Vector2i(0, (g_animation_manager->get_animation(get_current_anim()).height() - 7) * scale),
 	   scale, InfoMode::kWalkingAround, info_to_draw, dst);
 	draw_inner(game, point_on_dst, coords, scale, dst);
 }

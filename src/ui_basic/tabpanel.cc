@@ -22,7 +22,6 @@
 #include <SDL_mouse.h>
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -99,7 +98,7 @@ TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
      style_(style),
      active_(0),
      highlight_(kNotFound),
-     background_style_(g_gr->styles().tabpanel_style(style)) {
+     background_style_(g_style_manager->tabpanel_style(style)) {
 	set_can_focus(true);
 }
 

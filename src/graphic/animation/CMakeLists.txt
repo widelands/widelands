@@ -14,8 +14,8 @@ wl_library(graphic_animation
     base_geometry
     base_log
     base_macros
-    graphic
     graphic_color
+    graphic_image_cache
     graphic_playercolor
     graphic_surface
     io_filesystem

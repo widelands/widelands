@@ -90,7 +90,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                 width,
                 35,
                 UI::ButtonStyle::kWuiMenu,
-                g_gr->images().get("images/wui/menus/exit.png"),
+                g_image_cache->get("images/wui/menus/exit.png"),
                 /** TRANSLATORS: Button tooltip */
                 _("Exit Game")) {
 
@@ -108,7 +108,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 
 	// Add all AI types
 	for (const auto* impl : ComputerPlayer::get_implementations()) {
-		type_dropdown_.add(impl->descname, impl->name, g_gr->images().get(impl->icon_filename), false,
+		type_dropdown_.add(impl->descname, impl->name, g_image_cache->get(impl->icon_filename), false,
 		                   /** TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 		                      will be used as replacement for a disconnected player */
 		                   (boost::format(_("Replace player with %s")) % impl->descname).str());
