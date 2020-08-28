@@ -139,7 +139,7 @@ void FullscreenMenuLaunchMPG::layout() {
 	help_button_.set_pos(
 	   Vector2i(get_w() - 10 * padding_ - standard_element_height_, 10 * padding_));
 
-	// mpsg_.set_max_size(0, get_h() / 2);
+	//	mpsg_.set_max_size(0, get_h() / 2);
 	log("window width/2: %d\n", get_w() * 1 / 2);
 	log("individual box width: %d\n", individual_content_box.get_w());
 

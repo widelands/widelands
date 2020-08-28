@@ -604,6 +604,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 	}
 
+	void force_new_dimensions(float scale, uint32_t height) {
+		player.set_desired_size(height, height);
+		type_dropdown_.set_desired_size(height, height);
+		tribes_dropdown_.set_desired_size(height, height);
+		team_dropdown_.set_desired_size(height, height);
+		init_dropdown_.set_desired_size(height, height);
+	}
+
 	GameSettingsProvider* const settings_;
 	NetworkPlayerSettingsBackend* const n;
 	PlayerSlot const id_;
@@ -748,7 +756,7 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 // NOCOM When branch is ready, delete max_height if it's still unused
 void MultiPlayerSetupGroup::force_new_dimensions(float scale,
                                                  uint32_t max_width,
-                                                 uint32_t /* max_height */,
+                                                 uint32_t max_height,
                                                  uint32_t standard_element_height) {
 	players_.set_font_scale(scale);
 	clients_.set_font_scale(scale);
@@ -760,10 +768,14 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
 	//	log("ind. contentbox - clientbox: %d\n", max_width - clientbox.get_w());
 	log("total: %d, client: %d,  player before: %d, scrollable before: %d,\n", get_w(),
 	    clientbox.get_w(), playerbox.get_w(), scrollable_playerbox.get_w());
-	//	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
-	//		multiPlayerPlayerGroup->set_desired_size(
-	//		   get_w() - 32 - clientbox.get_w() - UI::Scrollbar::kSize,
-	// multiPlayerPlayerGroup->get_h());
-	//	}
+	//	playerbox.set_max_size(0, max_height);
+	log("total: %d, client: %d,  player before: %d, scrollable before: %d,\n", get_w(),
+	    clientbox.get_w(), playerbox.get_w(), scrollable_playerbox.get_w());
+	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
+		multiPlayerPlayerGroup->force_new_dimensions(scale, standard_element_height);
+		//		multiPlayerPlayerGroup->set_desired_size(
+		//		   get_w() - 32 - clientbox.get_w() - UI::Scrollbar::kSize,
+		// multiPlayerPlayerGroup->get_h());
+	}
 	log("scrollable after: %d\n", scrollable_playerbox.get_w());
 }
