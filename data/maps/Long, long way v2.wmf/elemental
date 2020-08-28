@@ -1,12 +1,12 @@
-# Automatically created by Widelands 1.0~git24808[f59d577@1482_nodecapsmaths] (Release)
+# Automatically created by Widelands 1.0~git24821[7f72ddf@master] (Release)
 
 [global]
 packet_version="1"
 map_w="256"
 map_h="256"
 nr_players="8"
-name=_"Long, long way v2"
+name="Long, long way v2"
 author="Einstein13,Nordfriese"
-descr=_">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go long, long way to conquere all the islands. Good luck!"
+descr=">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go long, long way to conquere all the islands. Good luck!"
 hint=
 tags="1v1,2teams,4teams,artifacts,balanced,ferries,official,seafaring"
