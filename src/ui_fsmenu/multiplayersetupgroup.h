@@ -68,8 +68,6 @@ private:
 	UI::Textarea clients_, players_;
 	int32_t buth_;
 
-	bool needs_scrolling_;
-
 	std::map<std::string, const Image*> tribepics_;
 	std::map<std::string, std::string> tribenames_;
 };

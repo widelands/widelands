@@ -116,7 +116,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 
 	individual_content_box.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
 	// individual_content_box.add_inf_space();
-	individual_content_box.add_space(10 * padding_);
+	// individual_content_box.add_space(10 * padding_);
 	individual_content_box.add(&chat_, UI::Box::Resizing::kExpandBoth);
 	layout();
 	// If we are the host, open the map or save selection menu at startup
@@ -139,9 +139,9 @@ void FullscreenMenuLaunchMPG::layout() {
 	help_button_.set_pos(
 	   Vector2i(get_w() - 10 * padding_ - standard_element_height_, 10 * padding_));
 
-	//	mpsg_.set_max_size(0, get_h() / 2);
-	log("window width/2: %d\n", get_w() * 1 / 2);
-	log("individual box width: %d\n", individual_content_box.get_w());
+	mpsg_.set_max_size(0, get_h() / 2);
+	log("window height/2: %d\n", get_h() / 2);
+	//	log("individual box width: %d\n", individual_content_box.get_w());
 
 	//	mpsg_.force_new_dimensions(
 	//	   scale_factor(), get_w() * 1 / 2, get_h() / 2, standard_element_height_);

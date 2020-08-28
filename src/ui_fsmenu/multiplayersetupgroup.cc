@@ -676,6 +676,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	add(&playerbox, Resizing::kFillSpace);
 	// add_inf_space();
 	playerbox.add(&players_, Resizing::kAlign, UI::Align::kCenter);
+	scrollable_playerbox.set_scrolling(true);
 	playerbox.add_space(padding);
 
 	multi_player_player_groups.resize(kMaxPlayers);
@@ -686,6 +687,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
 	}
 
+	//	scrollable_playerbox.set_force_scrolling(true);
 	playerbox.add(&scrollable_playerbox, Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
@@ -726,8 +728,6 @@ void MultiPlayerSetupGroup::update() {
 			multi_player_player_groups.at(i)->set_visible(should_be_visible);
 		}
 	}
-	needs_scrolling_ = number_of_players * buth_ > scrollable_playerbox.get_h();
-	scrollable_playerbox.set_scrolling(needs_scrolling_);
 }
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
@@ -766,16 +766,16 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
 	// playerbox.set_max_size(max_width - clientbox.get_w(), max_height);
 
 	//	log("ind. contentbox - clientbox: %d\n", max_width - clientbox.get_w());
-	log("total: %d, client: %d,  player before: %d, scrollable before: %d,\n", get_w(),
-	    clientbox.get_w(), playerbox.get_w(), scrollable_playerbox.get_w());
+	//	log("total: %d, client: %d,  player before: %d, scrollable before: %d,\n", get_w(),
+	//	    clientbox.get_w(), playerbox.get_w(), scrollable_playerbox.get_w());
 	//	playerbox.set_max_size(0, max_height);
-	log("total: %d, client: %d,  player before: %d, scrollable before: %d,\n", get_w(),
-	    clientbox.get_w(), playerbox.get_w(), scrollable_playerbox.get_w());
+	log("total: %d, client: %d,  player before: %d, scrollable before: %d,\n", get_h(),
+	    clientbox.get_h(), playerbox.get_h(), scrollable_playerbox.get_h());
 	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
 		multiPlayerPlayerGroup->force_new_dimensions(scale, standard_element_height);
 		//		multiPlayerPlayerGroup->set_desired_size(
 		//		   get_w() - 32 - clientbox.get_w() - UI::Scrollbar::kSize,
 		// multiPlayerPlayerGroup->get_h());
 	}
-	log("scrollable after: %d\n", scrollable_playerbox.get_w());
+	log("scrollable after: %d\n", scrollable_playerbox.get_h());
 }
