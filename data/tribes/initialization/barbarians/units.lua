@@ -1,6 +1,6 @@
 tribes = wl.Tribes()
 
--- NOCOM ware and worker translations are broken. Mines have broken scripts.
+-- NOCOM ware and worker translations are broken.
 
 image_dirname = path.dirname(__file__) .. "images/"
 

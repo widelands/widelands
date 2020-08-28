@@ -166,6 +166,9 @@ void load_helptexts(Widelands::MapObjectDescr* descr,
 				    descr->name().c_str(), category_key.c_str());
 			}
 		}
+		if (helptexts.empty()) {
+			log("WARNING: No helptext defined for '%s'\n", descr->name().c_str());
+		}
 	} else {
 		log("WARNING: No helptext defined for '%s'\n", descr->name().c_str());
 	}

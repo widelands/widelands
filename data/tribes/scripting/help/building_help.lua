@@ -301,12 +301,15 @@ function building_help_dependencies_production(tribe, building_description)
 
          -- Need to hack this, because resource != produced ware.
          local resi_name = ware_description.name
-         if(resi_name == "iron_ore") then resi_name = "iron"
-         elseif(resi_name == "granite") then resi_name = "stones"
-         elseif(resi_name == "diamond") then resi_name = "stones"
-         elseif(resi_name == "quartz") then resi_name = "stones"
-         elseif(resi_name == "marble") then resi_name = "stones"
-         elseif(resi_name == "gold_ore") then resi_name = "gold" end
+         if(resi_name == "coal") then resi_name = "resource_coal"
+         elseif(resi_name == "iron_ore") then resi_name = "resource_iron"
+         elseif(resi_name == "granite") then resi_name = "resource_stones"
+         elseif(resi_name == "diamond") then resi_name = "resource_stones"
+         elseif(resi_name == "quartz") then resi_name = "resource_stones"
+         elseif(resi_name == "marble") then resi_name = "resource_stones"
+         elseif(resi_name == "gold_ore") then resi_name = "resource_gold"
+         elseif(resi_name == "water") then resi_name = "water" end
+
          result = result .. dependencies_resi(tribe.name,
             resi_name,
             {building_description, ware_description},
@@ -359,7 +362,6 @@ function building_help_dependencies_production(tribe, building_description)
       end
    end
    if (outgoing ~= "") then result = result .. h3(_"Outgoing:") .. outgoing end
-
    if (result == "") then result = p(_"None") end
    return h2(_"Dependencies") .. result
 end
