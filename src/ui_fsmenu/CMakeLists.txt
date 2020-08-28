@@ -112,6 +112,8 @@ wl_library(ui_fsmenu_gameloading
     base_exceptions
     base_i18n
     graphic_playercolor
+    graphic
+    graphic_image_cache
     io_filesystem
     io_profile
     logic
