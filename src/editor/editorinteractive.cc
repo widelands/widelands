@@ -26,6 +26,7 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
+#include "base/scoped_timer.h"
 #include "base/warning.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_resources_tool.h"
@@ -46,12 +47,11 @@
 #include "editor/ui_menus/tool_resize_options_menu.h"
 #include "editor/ui_menus/tool_set_terrain_options_menu.h"
 #include "editor/ui_menus/toolsize_menu.h"
-#include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
@@ -66,18 +66,6 @@
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
-
-namespace {
-using Widelands::Building;
-
-// Load all tribes from disk.
-void load_all_tribes(Widelands::EditorGameBase* egbase) {
-	assert(egbase->has_loader_ui());
-	egbase->step_loader_ui(_("Loading tribes"));
-	egbase->tribes();
-}
-
-}  // namespace
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
    : InteractiveBase(e, get_config_section()),
@@ -171,26 +159,26 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 }
 
 void EditorInteractive::add_main_menu() {
-	mainmenu_.set_image(g_gr->images().get("images/wui/editor/menus/main_menu.png"));
+	mainmenu_.set_image(g_image_cache->get("images/wui/editor/menus/main_menu.png"));
 
 	menu_windows_.newmap.open_window = [this] { new MainMenuNewMap(*this, menu_windows_.newmap); };
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Map"), MainMenuEntry::kNewMap,
-	              g_gr->images().get("images/wui/editor/menus/new_map.png"));
+	              g_image_cache->get("images/wui/editor/menus/new_map.png"));
 
 	menu_windows_.newrandommap.open_window = [this] {
 		new MainMenuNewRandomMap(*this, menu_windows_.newrandommap);
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap,
-	              g_gr->images().get("images/wui/editor/menus/new_random_map.png"));
+	              g_image_cache->get("images/wui/editor/menus/new_random_map.png"));
 
 	menu_windows_.loadmap.open_window = [this] {
 		new MainMenuLoadMap(*this, menu_windows_.loadmap);
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap,
-	              g_gr->images().get("images/wui/editor/menus/load_map.png"), false, "",
+	              g_image_cache->get("images/wui/editor/menus/load_map.png"), false, "",
 	              pgettext("hotkey", "Ctrl+L"));
 
 	menu_windows_.savemap.open_window = [this] {
@@ -198,7 +186,7 @@ void EditorInteractive::add_main_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap,
-	              g_gr->images().get("images/wui/editor/menus/save_map.png"), false, "",
+	              g_image_cache->get("images/wui/editor/menus/save_map.png"), false, "",
 	              pgettext("hotkey", "Ctrl+S"));
 
 	menu_windows_.mapoptions.open_window = [this] {
@@ -206,11 +194,11 @@ void EditorInteractive::add_main_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions,
-	              g_gr->images().get("images/wui/editor/menus/map_options.png"));
+	              g_image_cache->get("images/wui/editor/menus/map_options.png"));
 
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor,
-	              g_gr->images().get("images/wui/menus/exit.png"));
+	              g_image_cache->get("images/wui/menus/exit.png"));
 	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
 	toolbar()->add(&mainmenu_);
 }
@@ -239,14 +227,14 @@ void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
 }
 
 void EditorInteractive::add_tool_menu() {
-	toolmenu_.set_image(g_gr->images().get("images/wui/editor/menus/tools.png"));
+	toolmenu_.set_image(g_image_cache->get("images/wui/editor/menus/tools.png"));
 
 	tool_windows_.height.open_window = [this] {
 		new EditorToolChangeHeightOptionsMenu(*this, tools()->increase_height, tool_windows_.height);
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Change height"), ToolMenuEntry::kChangeHeight,
-	              g_gr->images().get("images/wui/editor/tools/height.png"), false,
+	              g_image_cache->get("images/wui/editor/tools/height.png"), false,
 	              /** TRANSLATORS: Tooltip for the change height tool in the editor */
 	              _("Change the terrain height"));
 
@@ -255,7 +243,7 @@ void EditorInteractive::add_tool_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Random height"), ToolMenuEntry::kRandomHeight,
-	              g_gr->images().get("images/wui/editor/tools/noise_height.png"), false,
+	              g_image_cache->get("images/wui/editor/tools/noise_height.png"), false,
 	              /** TRANSLATORS: Tooltip for the random height tool in the editor */
 	              _("Set the terrain height to random values"));
 
@@ -264,7 +252,7 @@ void EditorInteractive::add_tool_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Terrain"), ToolMenuEntry::kTerrain,
-	              g_gr->images().get("images/wui/editor/tools/terrain.png"), false,
+	              g_image_cache->get("images/wui/editor/tools/terrain.png"), false,
 	              /** TRANSLATORS: Tooltip for the terrain tool in the editor */
 	              _("Change the map’s terrain"));
 
@@ -274,7 +262,7 @@ void EditorInteractive::add_tool_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Immovables"), ToolMenuEntry::kImmovables,
-	              g_gr->images().get("images/wui/editor/tools/immovables.png"), false,
+	              g_image_cache->get("images/wui/editor/tools/immovables.png"), false,
 	              /** TRANSLATORS: Tooltip for the immovables tool in the editor */
 	              _("Add or remove immovables"));
 
@@ -283,7 +271,7 @@ void EditorInteractive::add_tool_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Animals"), ToolMenuEntry::kAnimals,
-	              g_gr->images().get("images/wui/editor/tools/critters.png"), false,
+	              g_image_cache->get("images/wui/editor/tools/critters.png"), false,
 	              /** TRANSLATORS: Tooltip for the animals tool in the editor */
 	              _("Add or remove animals"));
 
@@ -293,13 +281,13 @@ void EditorInteractive::add_tool_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Resources"), ToolMenuEntry::kResources,
-	              g_gr->images().get("images/wui/editor/tools/resources.png"), false,
+	              g_image_cache->get("images/wui/editor/tools/resources.png"), false,
 	              /** TRANSLATORS: Tooltip for the resources tool in the editor */
 	              _("Set or change resources"));
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Port spaces"), ToolMenuEntry::kPortSpace,
-	              g_gr->images().get("images/wui/editor/tools/port_spaces.png"), false,
+	              g_image_cache->get("images/wui/editor/tools/port_spaces.png"), false,
 	              /** TRANSLATORS: Tooltip for the port spaces tool in the editor */
 	              _("Add or remove port spaces"));
 
@@ -308,13 +296,13 @@ void EditorInteractive::add_tool_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Players"), ToolMenuEntry::kPlayers,
-	              g_gr->images().get("images/wui/editor/tools/players.png"), false,
+	              g_image_cache->get("images/wui/editor/tools/players.png"), false,
 	              /** TRANSLATORS: Tooltip for the map size tool in the editor */
 	              _("Set number of players and their names, tribes and starting positions"), "P");
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
-	              g_gr->images().get("images/wui/editor/tools/map_origin.png"), false,
+	              g_image_cache->get("images/wui/editor/tools/map_origin.png"), false,
 	              /** TRANSLATORS: Tooltip for the map origin tool in the editor */
 	              _("Set the position that will have the coordinates (0, 0). This will be the "
 	                "top-left corner of a generated minimap."));
@@ -324,13 +312,13 @@ void EditorInteractive::add_tool_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map size"), ToolMenuEntry::kMapSize,
-	              g_gr->images().get("images/wui/editor/tools/resize_map.png"), false,
+	              g_image_cache->get("images/wui/editor/tools/resize_map.png"), false,
 	              /** TRANSLATORS: Tooltip for the map size tool in the editor */
 	              _("Change the map’s size"));
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Information"), ToolMenuEntry::kFieldInfo,
-	              g_gr->images().get("images/wui/editor/fsel_editor_info.png"), false,
+	              g_image_cache->get("images/wui/editor/fsel_editor_info.png"), false,
 	              /** TRANSLATORS: Tooltip for the map information tool in the editor */
 	              _("Click on a field to show information about it"), "I");
 	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
@@ -377,7 +365,7 @@ void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 }
 
 void EditorInteractive::add_showhide_menu() {
-	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/showhide.png"));
+	showhidemenu_.set_image(g_image_cache->get("images/wui/menus/showhide.png"));
 	toolbar()->add(&showhidemenu_);
 
 	rebuild_showhide_menu();
@@ -392,28 +380,28 @@ void EditorInteractive::rebuild_showhide_menu() {
 	 * shown */
 	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
 	                  ShowHideEntry::kBuildingSpaces,
-	                  g_gr->images().get("images/wui/menus/toggle_buildhelp.png"), false, "",
+	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
 	                  pgettext("hotkey", "Space"));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
 	 */
 	showhidemenu_.add(draw_grid_ ? _("Hide Grid") : _("Show Grid"), ShowHideEntry::kGrid,
-	                  g_gr->images().get("images/wui/menus/menu_toggle_grid.png"), false, "", "G");
+	                  g_image_cache->get("images/wui/menus/menu_toggle_grid.png"), false, "", "G");
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether immovables (trees,
 	 * rocks etc.) are shown */
 	showhidemenu_.add(draw_immovables_ ? _("Hide Immovables") : _("Show Immovables"),
 	                  ShowHideEntry::kImmovables,
-	                  g_gr->images().get("images/wui/menus/toggle_immovables.png"));
+	                  g_image_cache->get("images/wui/menus/toggle_immovables.png"));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether animals are shown */
 	showhidemenu_.add(draw_bobs_ ? _("Hide Animals") : _("Show Animals"), ShowHideEntry::kAnimals,
-	                  g_gr->images().get("images/wui/menus/toggle_bobs.png"));
+	                  g_image_cache->get("images/wui/menus/toggle_bobs.png"));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether resources are shown */
 	showhidemenu_.add(draw_resources_ ? _("Hide Resources") : _("Show Resources"),
 	                  ShowHideEntry::kResources,
-	                  g_gr->images().get("images/wui/menus/toggle_resources.png"));
+	                  g_image_cache->get("images/wui/menus/toggle_resources.png"));
 }
 
 void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
@@ -434,7 +422,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 		toggle_resources();
 	} break;
 	}
-	rebuild_showhide_menu();
+	showhidemenu_.toggle();
 }
 
 void EditorInteractive::load(const std::string& filename) {
@@ -454,11 +442,8 @@ void EditorInteractive::load(const std::string& filename) {
 	}
 	ml->preload_map(true);
 
-	load_all_tribes(&egbase());
-
 	// Create the players. TODO(SirVer): this must be managed better
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
-	egbase().step_loader_ui(_("Creating players"));
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
 			egbase().add_player(
@@ -468,7 +453,6 @@ void EditorInteractive::load(const std::string& filename) {
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
 	egbase().create_tempfile_and_save_mapdata(FileSystem::ZIP);
-	egbase().load_graphics();
 	map_changed(MapWas::kReplaced);
 }
 
@@ -604,7 +588,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			const std::string& immname =
 			   world.get_resource(field.fcoords.field->get_resources())->editor_image(amount);
 			if (!immname.empty()) {
-				const auto* pic = g_gr->images().get(immname);
+				const auto* pic = g_image_cache->get(immname);
 				blit_field_overlay(
 				   &dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 			}
@@ -705,18 +689,22 @@ bool EditorInteractive::player_hears_field(const Widelands::Coords&) const {
 
 void EditorInteractive::toggle_resources() {
 	draw_resources_ = !draw_resources_;
+	rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_immovables() {
 	draw_immovables_ = !draw_immovables_;
+	rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_bobs() {
 	draw_bobs_ = !draw_bobs_;
+	rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_grid() {
 	draw_grid_ = !draw_grid_;
+	rebuild_showhide_menu();
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
@@ -960,10 +948,12 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
 		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
+		eia.load_world_units();
+		egbase.tribes();
 
 		{
 			if (filename.empty()) {
-				egbase.step_loader_ui(_("Creating empty map…"));
+				Notifications::publish(UI::NoteLoadingMessage(_("Creating empty map…")));
 				egbase.mutable_map()->create_empty_map(
 				   egbase, 64, 64, 0,
 				   /** TRANSLATORS: Default name for new map */
@@ -971,13 +961,9 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				   get_config_string("realname",
 				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
 				                     pgettext("author_name", "Unknown")));
-
-				load_all_tribes(&egbase);
-
-				egbase.load_graphics();
-				egbase.step_loader_ui(std::string());
 			} else {
-				egbase.step_loader_ui((boost::format(_("Loading map “%s”…")) % filename).str());
+				Notifications::publish(
+				   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
 				eia.load(filename);
 			}
 		}
@@ -995,6 +981,44 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	eia.run<UI::Panel::Returncodes>();
 
 	egbase.cleanup_objects();
+}
+
+void EditorInteractive::load_world_units() {
+	Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
+	Widelands::World* world = egbase().mutable_world();
+
+	log("┏━ Loading world:\n");
+	ScopedTimer timer("┗━ took: %ums");
+
+	std::unique_ptr<LuaTable> table(egbase().lua().run_script("world/init.lua"));
+
+	auto load_category = [this, world](const LuaTable& t, const std::string& key,
+	                                   Widelands::MapObjectType type) {
+		for (const auto& category_table :
+		     t.get_table(key)->array_entries<std::unique_ptr<LuaTable>>()) {
+			editor_categories_[type].push_back(
+			   std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, type, *world)));
+		}
+	};
+
+	log("┃    Critters: ");
+	load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
+	log("%ums\n", timer.ms_since_last_query());
+
+	log("┃    Immovables: ");
+	load_category(*table, "immovables", Widelands::MapObjectType::IMMOVABLE);
+	log("%ums\n", timer.ms_since_last_query());
+
+	log("┃    Terrains: ");
+	load_category(*table, "terrains", Widelands::MapObjectType::TERRAIN);
+	log("%ums\n", timer.ms_since_last_query());
+
+	log("┃    Resources: ");
+	for (const std::string& item : table->get_table("resources")->array_entries<std::string>()) {
+		Notifications::publish(Widelands::NoteMapObjectDescription(
+		   item, Widelands::NoteMapObjectDescription::LoadType::kObject));
+	}
+	log("%ums\n", timer.ms_since_last_query());
 }
 
 void EditorInteractive::map_changed(const MapWas& action) {
@@ -1032,4 +1056,10 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 EditorInteractive::Tools* EditorInteractive::tools() {
 	return tools_.get();
+}
+
+const std::vector<std::unique_ptr<EditorCategory>>&
+EditorInteractive::editor_categories(Widelands::MapObjectType type) const {
+	assert(editor_categories_.count(type) == 1);
+	return editor_categories_.at(type);
 }

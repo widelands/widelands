@@ -1,0 +1,3 @@
+return {
+   milking_tongs = {},
+}

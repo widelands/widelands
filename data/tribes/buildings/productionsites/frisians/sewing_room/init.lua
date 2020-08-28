@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
          descname = _"sewing fur garment",
          actions = {

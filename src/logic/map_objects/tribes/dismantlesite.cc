@@ -23,6 +23,7 @@
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -39,7 +40,7 @@ namespace Widelands {
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
-                                       const Tribes& tribes)
+                                       Tribes& tribes)
    : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, tribes),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
@@ -113,8 +114,9 @@ Print completion percentage.
 */
 void DismantleSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = g_gr->styles().color_tag((boost::format(_("%u%% dismantled")) % percent).str(),
-	                              g_gr->styles().building_statistics_style().construction_color());
+	*s =
+	   g_style_manager->color_tag((boost::format(_("%u%% dismantled")) % percent).str(),
+	                              g_style_manager->building_statistics_style().construction_color());
 }
 
 /*
@@ -124,7 +126,7 @@ Initialize the construction site by starting orders
 */
 bool DismantleSite::init(EditorGameBase& egbase) {
 	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
+	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxMaximumPriority, true));
 
 	PartiallyFinishedBuilding::init(egbase);
 

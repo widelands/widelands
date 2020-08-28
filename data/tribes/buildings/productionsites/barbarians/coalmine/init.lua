@@ -53,7 +53,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
@@ -68,7 +68,7 @@ tribes:new_productionsite_type {
          descname = _"mining coal",
          actions = {
             "animate=working duration:10s",
-            "mine=coal 2 33 5 17",
+            "mine=resource_coal radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
             "produce=coal",
          }
       },

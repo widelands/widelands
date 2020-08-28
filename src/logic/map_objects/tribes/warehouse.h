@@ -39,7 +39,7 @@ struct WarehouseSupply;
 
 class WarehouseDescr : public BuildingDescr {
 public:
-	WarehouseDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
+	WarehouseDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
 	~WarehouseDescr() override {
 	}
 
@@ -49,13 +49,13 @@ public:
 		return conquers_;
 	}
 
-	uint32_t get_heal_per_second() const {
+	unsigned get_heal_per_second() const {
 		return heal_per_second_;
 	}
 
 private:
 	int32_t conquers_;
-	uint32_t heal_per_second_;
+	unsigned heal_per_second_;
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 

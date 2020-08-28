@@ -6,17 +6,17 @@
 # David D, 2018
 # GunChleoc, 2018
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018
 # zecas <jjorge@free.fr>, 2018
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
 # Kura Go <kurago@ml1.net>, 2019
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Renaud Bouchard, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Renaud Bouchard, 2020\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -655,8 +655,8 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:347
 msgid ""
 "First of all, we need more construction materials. So, we should build at "
-"least three lumberjacks’ houses and two quarries. Be sure to have "
-"dismanteled all of the unproductive buildings though."
+"least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
+" all of the unproductive buildings though."
 msgstr ""
 "En premier lieu, nous avons besoin de plus de matériaux de construction. "
 "Nous devrions donc bâtir trois maisons de bucherons et deux clairières. "
@@ -829,14 +829,12 @@ msgid ""
 "The only solution is to build two new forester’s houses near our "
 "lumberjacks. Be sure to first build a new forester’s house and then "
 "eventually destroy the old one or at least expel the forester to change "
-"houses. Dismantling them is also possible but will not return any wares "
-"because they are so torn."
+"houses."
 msgstr ""
 "La seule solution est de construire deux nouvelles maisons pour eux près de "
 "nos bucherons. Assurez-vous de construire au moins une nouvelle maison avant"
 " de raser l'ancienne ou au moins expulsez le garde-forestier pour qu'il "
-"change de maison. Vous pouvez aussi les démanteler mais cela ne nous "
-"apportera aucune matière première tellement elles sont dégradées."
+"change de maison."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
 msgid "Amalea Laughs Sarcastically"
@@ -1635,7 +1633,88 @@ msgstr ""
 "Vesta ! Que votre vie et votre terre soient maudites et que la colère de la "
 "déesse éradique votre famille de la surface de la terre !"
 
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1.lua:8
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery2.lua:9
+msgctxt "empire_building"
+msgid "Brewery"
+msgstr "Brasserie"
+
+#. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery2.lua:50
+msgid "brewing beer"
+msgstr "brasse de la bière"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:9
+msgctxt "empire_building"
+msgid "Farm"
+msgstr "Ferme"
+
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:43
+msgid "working"
+msgstr "travaille"
+
+#. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:51
+msgid "planting wheat"
+msgstr "plante du blé"
+
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:59
+msgid "harvesting wheat"
+msgstr "récolte du blé"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:68
+msgid "No Fields"
+msgstr "Pas de champs"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:69
+msgid "Out of Fields"
+msgstr "En dehors des champs"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:70
+msgctxt "empire_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
+"Le fermier qui travaille à cette ferme n'a pas défriché le sol pour planter "
+"ses graines."
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:9
+msgid "Loading campaign-specific tribe units"
+msgstr "Chargement des unités tribales spécifiques à la campagne"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1.lua:8
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill2.lua:9
+msgctxt "empire_building"
+msgid "Mill"
+msgstr "Moulin"
+
+#. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill2.lua:48
+msgid "grinding wheat"
+msgstr "Moud du blé"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta.lua:9
+msgctxt "empire_building"
+msgid "Temple of Vesta"
+msgstr "Temple de Vesta"
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/vesta_helptexts.lua:17
+msgctxt "building"
+msgid ""
+"In the temple of Vesta, the wares to worship are stored. It is the home of "
+"the priestesses and the guards of the goddess."
+msgstr ""
+"Dans le temple de Vesta, sont stockés les marchandises du culte. C'est la "
+"demeure de la prêtresse et des gardes de la déesse."
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1.lua:8
+msgctxt "empire_building"
+msgid "Well"
+msgstr "Puits"

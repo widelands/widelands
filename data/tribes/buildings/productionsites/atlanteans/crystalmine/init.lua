@@ -50,7 +50,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -105,7 +105,7 @@ tribes:new_productionsite_type {
          descname = _"mining granite",
          actions = {
             "animate=working duration:15s",
-            "mine=stones 4 100 5 2",
+            "mine=resource_stones radius:4 yield:100% when_empty:5%",
             "produce=granite",
          }
       },
@@ -113,7 +113,7 @@ tribes:new_productionsite_type {
          descname = _"mining quartz",
          actions = {
             "animate=working duration:10s",
-            "mine=stones 4 100 5 2",
+            "mine=resource_stones radius:4 yield:100% when_empty:5%",
             "produce=quartz",
          }
       },
@@ -121,7 +121,7 @@ tribes:new_productionsite_type {
          descname = _"mining diamonds",
          actions = {
             "animate=working duration:25s",
-            "mine=stones 4 100 5 2",
+            "mine=resource_stones radius:4 yield:100% when_empty:5%",
             "produce=diamond",
          }
       },

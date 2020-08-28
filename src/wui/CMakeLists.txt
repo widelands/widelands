@@ -25,12 +25,10 @@ wl_library(wui_chat_ui
     base_i18n
     chat
     graphic
-    graphic_color
     graphic_fonthandler
     graphic_playercolor
     graphic_text
     graphic_text_layout
-    logic
     sound
     ui_basic
     widelands_options
@@ -43,7 +41,6 @@ wl_library(wui_economy_options
     economy_options_window.h
   DEPENDS
     economy
-    graphic
     logic
     logic_commands
     logic_filesystem_constants
@@ -77,7 +74,7 @@ wl_library(wui_common_suggested_teams
     suggested_teams_box.h
   DEPENDS
     base_i18n
-    graphic
+    graphic_image_cache
     graphic_playercolor
     logic_constants
     ui_basic
@@ -103,6 +100,7 @@ wl_library(wui_common_gamedetails
     base_time_string
     game_io
     graphic
+    graphic_image_cache
     graphic_image_io
     graphic_surface
     graphic_text_layout
@@ -129,7 +127,7 @@ wl_library(wui_common_mapdetails
     base_exceptions
     base_i18n
     base_log
-    graphic
+    graphic_image_cache
     graphic_text_layout
     io_filesystem
     logic_game_settings

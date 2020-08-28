@@ -56,7 +56,7 @@ tribes:new_worker_type {
          hotspot = {9, 24},
          sound_effect = {
             path = "sound/hammering/hammering",
-            priority = 64
+            priority = 50
          },
       },
    },

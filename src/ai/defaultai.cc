@@ -689,12 +689,11 @@ void DefaultAI::late_initialization() {
 					if (temp_output == tribe_->soldier()) {
 						bo.set_is(BuildingAttribute::kBarracks);
 					}
-					const WorkerHints* worker_hints = tribe_->get_worker_descr(temp_output)->ai_hints();
-					if (worker_hints != nullptr) {
-						const int worker_preciousness = worker_hints->preciousness(tribe_->name());
-						if (worker_preciousness != Widelands::kInvalidWare) {
-							bo.initial_preciousness += worker_preciousness;
-						}
+					const WareWorkerHints* worker_hints =
+					   tribe_->get_worker_descr(temp_output)->ai_hints();
+					const int worker_preciousness = worker_hints->preciousness(tribe_->name());
+					if (worker_preciousness != Widelands::kInvalidWare) {
+						bo.initial_preciousness += worker_preciousness;
 					}
 				}
 				if (!bo.is(BuildingAttribute::kBarracks) && bo.ware_outputs.empty()) {
@@ -713,7 +712,7 @@ void DefaultAI::late_initialization() {
 				bo.set_is(BuildingAttribute::kSupportingProducer);
 			}
 
-			iron_resource_id = game().world().resource_index("iron");
+			iron_resource_id = game().world().resource_index("resource_iron");
 			if (iron_resource_id == INVALID_INDEX) {
 				throw wexception("The AI needs the world to define the resource 'iron'");
 			}
@@ -1585,8 +1584,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   map.find_immovables(game(), Area<FCoords>(map.get_fcoords(field.coords), kProductionArea),
 		                       nullptr, FindImmovableAttribute(tree_attr));
 
-		// Counting bushes nearby
-		int32_t const bush_attr = MapObjectDescr::get_attribute_id("ripe_bush");
+		// Counting bushes nearby. Only the Frisians have this, so we need to create the attribute if
+		// it doesn't exist.
+		int32_t const bush_attr = MapObjectDescr::get_attribute_id("ripe_bush", true);
 		field.bushes_nearby =
 		   map.find_immovables(game(), Area<FCoords>(map.get_fcoords(field.coords), kProductionArea),
 		                       nullptr, FindImmovableAttribute(bush_attr));
@@ -5195,7 +5195,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		// it seems there are wares with 0 preciousness (no entry in init files?), but we need
 		// positive value here.
-		// TODO(GunChleoc): Since we require in Tribes::postload() that this is set for all wares used
+		// TODO(GunChleoc): Since we require in TribeDescr::load_wares that this is set for all wares
+		// used
 		// by a tribe, something seems to be wrong here. It should always be > 0.
 		const uint16_t preciousness =
 		   std::max<uint16_t>(wares.at(bo.ware_outputs.at(m)).preciousness, 1);

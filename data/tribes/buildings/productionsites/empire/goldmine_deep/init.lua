@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
          descname = _"mining gold",
          actions = {
             "animate=working duration:13s",
-            "mine=gold 2 100 5 2",
+            "mine=resource_gold radius:2 yield:100% when_empty:5% experience_on_fail:2%",
             "produce=gold_ore",
          }
       },

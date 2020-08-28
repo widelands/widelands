@@ -26,6 +26,7 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/request.h"
+#include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/findbob.h"
@@ -294,7 +295,7 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
  */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
-                                     const Tribes& tribes)
+                                     Tribes& tribes)
    : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, tribes),
      conquer_radius_(0),
      num_soldiers_(0),
@@ -395,9 +396,9 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			        .str();
 		}
 	}
-	*s = g_gr->styles().color_tag(
+	*s = g_style_manager->color_tag(
 	   // Line break to make Codecheck happy.
-	   *s, g_gr->styles().building_statistics_style().medium_color());
+	   *s, g_style_manager->building_statistics_style().medium_color());
 }
 
 bool MilitarySite::init(EditorGameBase& egbase) {
@@ -740,7 +741,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 
 	// Heal soldiers
 	if (nexthealtime_ <= timeofgame) {
-		const uint32_t total_heal = descr().get_heal_per_second();
+		const unsigned total_heal = descr().get_heal_per_second();
 		uint32_t max_total_level = 0;
 		float max_health = 0;
 		Soldier* soldier_to_heal = nullptr;

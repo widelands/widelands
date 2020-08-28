@@ -27,11 +27,29 @@
 #include "economy/request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/production_program.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
+
+namespace {
+std::string training_attribute_to_string(Widelands::TrainingAttribute attribute) {
+	switch (attribute) {
+	case Widelands::TrainingAttribute::kAttack:
+		return "attack";
+	case Widelands::TrainingAttribute::kDefense:
+		return "defense";
+	case Widelands::TrainingAttribute::kEvade:
+		return "evade";
+	case Widelands::TrainingAttribute::kHealth:
+		return "health";
+	default:
+		return "unknown";
+	}
+}
+}  // namespace
 
 namespace Widelands {
 
@@ -44,8 +62,8 @@ const uint32_t TrainingSite::training_state_multiplier_ = 12;
 TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
                                      const std::string& msgctxt,
                                      const LuaTable& table,
-                                     const Tribes& tribes,
-                                     const World& world)
+                                     Tribes& tribes,
+                                     World& world)
    : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::TRAININGSITE, table, tribes, world),
      num_soldiers_(table.get_int("soldier_capacity")),
      max_stall_(table.get_int("trainer_patience")),
@@ -54,10 +72,10 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
      train_attack_(false),
      train_defense_(false),
      train_evade_(false),
-     min_health_(0),
-     min_attack_(0),
-     min_defense_(0),
-     min_evade_(0),
+     min_health_(std::numeric_limits<uint32_t>::max()),
+     min_attack_(std::numeric_limits<uint32_t>::max()),
+     min_defense_(std::numeric_limits<uint32_t>::max()),
+     min_evade_(std::numeric_limits<uint32_t>::max()),
      max_health_(0),
      max_attack_(0),
      max_defense_(0),
@@ -70,32 +88,77 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 	std::unique_ptr<LuaTable> items_table;
 	if (table.has_key("soldier health")) {
 		items_table = table.get_table("soldier health");
-		train_health_ = true;
-		min_health_ = items_table->get_int("min_level");
-		max_health_ = items_table->get_int("max_level");
+		// TODO(GunChleoc): Compatibility, remove these after v1.0
+		if (items_table->has_key<std::string>("min_level")) {
+			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			    "health' are no longer needed\n",
+			    name().c_str());
+		}
 		add_training_inputs(*items_table, &food_health_, &weapons_health_);
 	}
 
 	if (table.has_key("soldier attack")) {
 		items_table = table.get_table("soldier attack");
-		train_attack_ = true;
-		min_attack_ = items_table->get_int("min_level");
-		max_attack_ = items_table->get_int("max_level");
+		if (items_table->has_key<std::string>("min_level")) {
+			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			    "attack' are no longer needed\n",
+			    name().c_str());
+		}
 		add_training_inputs(*items_table, &food_attack_, &weapons_attack_);
 	}
 	if (table.has_key("soldier defense")) {
 		items_table = table.get_table("soldier defense");
-		train_defense_ = true;
-		min_defense_ = items_table->get_int("min_level");
-		max_defense_ = items_table->get_int("max_level");
+		if (items_table->has_key<std::string>("min_level")) {
+			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			    "defense' are no longer needed\n",
+			    name().c_str());
+		}
 		add_training_inputs(*items_table, &food_defense_, &weapons_defense_);
 	}
 	if (table.has_key("soldier evade")) {
 		items_table = table.get_table("soldier evade");
-		train_evade_ = true;
-		min_evade_ = items_table->get_int("min_level");
-		max_evade_ = items_table->get_int("max_level");
+		if (items_table->has_key<std::string>("min_level")) {
+			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			    "evade' are no longer needed\n",
+			    name().c_str());
+		}
 		add_training_inputs(*items_table, &food_evade_, &weapons_evade_);
+	}
+
+	// Check dependencies between 'checksoldier' & 'train', and set min and max levels
+	for (const auto& program : programs()) {
+		// The value set by the latest call of 'checksoldier'
+		ProductionProgram::Action::TrainingParameters from_checksoldier;
+		for (size_t i = 0; i < program.second->size(); ++i) {
+			const ProductionProgram::Action& action = (*program.second)[i];
+			if (upcast(const ProductionProgram::ActCheckSoldier, checksoldier, &action)) {
+				// Get values from 'checksoldier', which is a prerequisite for calling 'train'
+				from_checksoldier = checksoldier->training();
+			} else if (upcast(const ProductionProgram::ActTrain, train, &action)) {
+				// Check 'train' against 'checksoldier' and set min/max levels. Fail on violation.
+				const ProductionProgram::Action::TrainingParameters checkme = train->training();
+				if (from_checksoldier.level == INVALID_INDEX) {
+					throw GameDataError("Trainingsite '%s' is trying to call 'train' action without "
+					                    "prior 'checksoldier' action in program '%s'",
+					                    name().c_str(), program.first.c_str());
+				} else if (from_checksoldier.level >= checkme.level) {
+					throw GameDataError(
+					   "Trainingsite '%s' is trying to train a soldier attribute from level "
+					   "%d to %d, but the 'checksoldier' action's level must be lower "
+					   "than the 'train' action's level in program '%s'",
+					   name().c_str(), from_checksoldier.level, checkme.level, program.first.c_str());
+				} else if (from_checksoldier.attribute != checkme.attribute) {
+					throw GameDataError(
+					   "Trainingsite '%s' is trying to train soldier attribute '%s', but 'checksoldier' "
+					   "checked "
+					   "for soldier attribute '%s' in program '%s'",
+					   name().c_str(), training_attribute_to_string(from_checksoldier.attribute).c_str(),
+					   training_attribute_to_string(checkme.attribute).c_str(), program.first.c_str());
+				}
+				// All clear, let's add the training information
+				update_level(from_checksoldier.attribute, from_checksoldier.level);
+			}
+		}
 	}
 }
 
@@ -112,7 +175,7 @@ Building& TrainingSiteDescr::create_object() const {
  * \return  the minimum level to which this building can downgrade a
  * specified attribute
  */
-int32_t TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
+unsigned TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
 	switch (at) {
 	case TrainingAttribute::kHealth:
 		return min_health_;
@@ -134,7 +197,7 @@ int32_t TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
  * \param at  the attribute to investigate
  * \return  the maximum level to be attained at this site
  */
-int32_t TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
+unsigned TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
 	switch (at) {
 	case TrainingAttribute::kHealth:
 		return max_health_;
@@ -197,6 +260,34 @@ void TrainingSiteDescr::add_training_inputs(const LuaTable& table,
 			weapons->push_back(weapon);
 		}
 	}
+}
+
+void TrainingSiteDescr::update_level(TrainingAttribute attrib, unsigned level) {
+	switch (attrib) {
+	case TrainingAttribute::kHealth:
+		min_health_ = std::min(min_health_, level);
+		max_health_ = std::max(max_health_, level);
+		train_health_ = true;
+		return;
+	case TrainingAttribute::kAttack:
+		min_attack_ = std::min(min_attack_, level);
+		max_attack_ = std::max(max_attack_, level);
+		train_attack_ = true;
+		return;
+	case TrainingAttribute::kDefense:
+		min_defense_ = std::min(min_defense_, level);
+		max_defense_ = std::max(max_defense_, level);
+		train_defense_ = true;
+		return;
+	case TrainingAttribute::kEvade:
+		min_evade_ = std::min(min_evade_, level);
+		max_evade_ = std::max(max_evade_, level);
+		train_evade_ = true;
+		return;
+	case TrainingAttribute::kTotal:
+		throw wexception("Unknown attribute value!");
+	}
+	NEVER_HERE();
 }
 
 // TODO(sirver): This SoldierControl looks very similar to te one in
@@ -350,7 +441,7 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 }
 void TrainingSite::init_kick_state(const TrainingAttribute& art, const TrainingSiteDescr& d) {
 	// Now with kick-out state saving implemented, initializing is an overkill
-	for (int t = d.get_min_level(art); t <= d.get_max_level(art); t++) {
+	for (unsigned t = d.get_min_level(art); t <= d.get_max_level(art); t++) {
 		training_attempted(art, t);
 	}
 }
@@ -853,6 +944,8 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
  * If all priorities are zero, nothing will happen.
  */
 void TrainingSite::find_and_start_next_program(Game& game) {
+	checked_soldier_training_.level = INVALID_INDEX;
+	checked_soldier_training_.attribute = TrainingAttribute::kTotal;
 	for (;;) {
 		uint32_t maxprio = 0;
 		uint32_t maxcredit = 0;
@@ -1021,6 +1114,8 @@ void TrainingSite::calc_upgrades() {
 
 void TrainingSite::training_attempted(TrainingAttribute type, uint32_t level) {
 	TypeAndLevel key(type, level);
+	checked_soldier_training_.level = level;
+	checked_soldier_training_.attribute = type;
 	if (training_failure_count_.find(key) == training_failure_count_.end()) {
 		training_failure_count_[key] = std::make_pair(training_state_multiplier_, 0);
 	} else {
@@ -1048,5 +1143,9 @@ void TrainingSite::training_done() {
 			fail_and_presence.second.first--;
 		}
 	}
+}
+
+ProductionProgram::Action::TrainingParameters TrainingSite::checked_soldier_training() const {
+	return checked_soldier_training_;
 }
 }  // namespace Widelands

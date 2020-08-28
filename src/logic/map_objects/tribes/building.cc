@@ -53,7 +53,7 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
-                             const Tribes& tribes)
+                             Tribes& tribes)
    : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
      tribes_(tribes),
      buildable_(table.has_key("buildcost")),
@@ -118,7 +118,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		if (enh == name()) {
 			throw wexception("enhancement to same type");
 		}
-		DescriptionIndex const en_i = tribes_.building_index(enh);
+		DescriptionIndex const en_i = tribes.load_building(enh);
 		if (tribes_.building_exists(en_i)) {
 			enhancement_ = en_i;
 
@@ -143,14 +143,14 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	// However, we support "return_on_dismantle" without "buildable", because this is used by custom
 	// scenario buildings.
 	if (table.has_key("return_on_dismantle")) {
-		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), tribes_);
+		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), tribes);
 	}
 	if (table.has_key("buildcost")) {
 		if (!table.has_key("return_on_dismantle")) {
 			throw wexception(
 			   "The building '%s' has a \"buildcost\" but no \"return_on_dismantle\"", name().c_str());
 		}
-		buildcost_ = Buildcost(table.get_table("buildcost"), tribes_);
+		buildcost_ = Buildcost(table.get_table("buildcost"), tribes);
 	}
 
 	if (table.has_key("enhancement_cost")) {
@@ -160,8 +160,8 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			                 "\"return_on_dismantle_on_enhanced\"",
 			                 name().c_str());
 		}
-		enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), tribes_);
-		return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes_);
+		enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), tribes);
+		return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes);
 	}
 
 	needs_seafaring_ = false;

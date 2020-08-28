@@ -27,7 +27,6 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
-#include "logic/map_objects/map_object.h"
 #include "map_io/map_loader.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -64,7 +63,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
             0,
             "",
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),

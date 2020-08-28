@@ -7,12 +7,10 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "maple_winter_sapling",
    descname = _ "Maple (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -34,12 +32,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "maple_winter_pole",
    descname = _ "Maple (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -61,12 +57,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "maple_winter_mature",
    descname = _ "Maple (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -88,20 +82,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "maple_winter_old",
    descname = _ "Maple (Old)",
    species = _ "Maple",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
          "animate=idle duration:25m50s",
          "transform=deadtree4 chance:15.23%",
-         "seed=maple_winter_sapling 240",
+         "seed=maple_winter_sapling proximity:93.75%",
       },
       fall = {
          "remove=",
@@ -118,6 +110,7 @@ world:new_immovable_type{
          hotspot = { 24, 60 },
          sound_effect = {
             path = "sound/animals/bird4",
+            priority = 10
          },
       },
    },

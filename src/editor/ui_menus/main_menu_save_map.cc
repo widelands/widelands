@@ -113,6 +113,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions&) { update_map_options(); });
 
+	fill_table();
 	layout();
 }
 
@@ -335,7 +336,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	}
 
 	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
-	egbase.step_loader_ui(_("Saving the map…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Saving the map…")));
 
 	// Try saving the map.
 	GenericSaveHandler gsh(

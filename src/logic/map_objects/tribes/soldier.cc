@@ -27,7 +27,6 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "graphic/animation/animation_manager.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -93,9 +92,7 @@ bool SoldierLevelRange::matches(const Soldier* soldier) const {
 	               soldier->get_defense_level(), soldier->get_evade_level());
 }
 
-SoldierDescr::SoldierDescr(const std::string& init_descname,
-                           const LuaTable& table,
-                           const Tribes& tribes)
+SoldierDescr::SoldierDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes)
    : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, tribes),
      health_(table.get_table("health")),
      attack_(table.get_table("attack")),
@@ -189,7 +186,7 @@ SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) 
 		   image_filenames.size());
 	}
 	for (const std::string& image_filename : image_filenames) {
-		images.push_back(g_gr->images().get(image_filename));
+		images.push_back(g_image_cache->get(image_filename));
 	}
 }
 
@@ -452,28 +449,28 @@ int32_t Soldier::get_training_attribute(TrainingAttribute const attr) const {
 	return Worker::get_training_attribute(attr);
 }
 
-uint32_t Soldier::get_max_health() const {
+unsigned Soldier::get_max_health() const {
 	return descr().get_base_health() + health_level_ * descr().get_health_incr_per_level();
 }
 
-uint32_t Soldier::get_min_attack() const {
+unsigned Soldier::get_min_attack() const {
 	return descr().get_base_min_attack() + attack_level_ * descr().get_attack_incr_per_level();
 }
 
-uint32_t Soldier::get_max_attack() const {
+unsigned Soldier::get_max_attack() const {
 	return descr().get_base_max_attack() + attack_level_ * descr().get_attack_incr_per_level();
 }
 
-uint32_t Soldier::get_defense() const {
+unsigned Soldier::get_defense() const {
 	return descr().get_base_defense() + defense_level_ * descr().get_defense_incr_per_level();
 }
 
-uint32_t Soldier::get_evade() const {
+unsigned Soldier::get_evade() const {
 	return descr().get_base_evade() + evade_level_ * descr().get_evade_incr_per_level();
 }
 
 //  Unsignedness ensures that we can only heal, not hurt through this method.
-void Soldier::heal(const uint32_t health) {
+void Soldier::heal(const unsigned health) {
 	molog("[soldier] healing (%d+)%d/%d\n", health, current_health_, get_max_health());
 	assert(health);
 	assert(current_health_ < get_max_health());
@@ -484,7 +481,7 @@ void Soldier::heal(const uint32_t health) {
 /**
  * This only subs the specified number of health points, don't do anything more.
  */
-void Soldier::damage(const uint32_t value) {
+void Soldier::damage(const unsigned value) {
 	assert(current_health_ > 0);
 
 	molog("[soldier] damage %d(-%d)/%d\n", current_health_, value, get_max_health());
@@ -568,7 +565,7 @@ void Soldier::draw(const EditorGameBase& game,
 	const Vector2f point_on_dst = calc_drawpos(game, field_on_dst, scale);
 	draw_info_icon(
 	   point_on_dst.cast<int>() -
-	      Vector2i(0, (g_gr->animations().get_animation(get_current_anim()).height() - 7) * scale),
+	      Vector2i(0, (g_animation_manager->get_animation(get_current_anim()).height() - 7) * scale),
 	   scale, InfoMode::kWalkingAround, info_to_draw, dst);
 	draw_inner(game, point_on_dst, coords, scale, dst);
 }

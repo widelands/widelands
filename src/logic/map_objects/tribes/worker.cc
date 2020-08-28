@@ -30,7 +30,6 @@
 #include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/transfer.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
@@ -111,7 +110,7 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
-	DescriptionIndex const res = game.world().resource_index(action.sparam1.c_str());
+	DescriptionIndex const res = game.world().resource_index(action.sparam1);
 	if (res == Widelands::INVALID_INDEX) {
 		throw GameDataError(_("should mine resource %s, which does not exist in world; tribe "
 		                      "is not compatible with world"),
@@ -216,7 +215,7 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
-	DescriptionIndex const res = game.world().resource_index(action.sparam1.c_str());
+	DescriptionIndex const res = game.world().resource_index(action.sparam1);
 	if (res == Widelands::INVALID_INDEX) {
 		throw GameDataError(_("should breed resource type %s, which does not exist in world; "
 		                      "tribe is not compatible with world"),
@@ -565,9 +564,9 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 	if (action.sparam1.size()) {
 		if (action.iparam4) {
-			functor.add(FindNodeResourceBreedable(world.resource_index(action.sparam1.c_str())));
+			functor.add(FindNodeResourceBreedable(world.resource_index(action.sparam1)));
 		} else {
-			functor.add(FindNodeResource(world.resource_index(action.sparam1.c_str())));
+			functor.add(FindNodeResource(world.resource_index(action.sparam1)));
 		}
 	}
 
@@ -593,7 +592,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			FindNodeAnd functorAnyFull;
 			functorAnyFull.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 			functorAnyFull.add(FindNodeResourceBreedable(
-			   world.resource_index(action.sparam1.c_str()), AnimalBreedable::kAnimalFull));
+			   world.resource_index(action.sparam1), AnimalBreedable::kAnimalFull));
 
 			if (action.iparam5 > -1) {
 				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
@@ -926,7 +925,7 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
 	if (owner_->tribe().has_worker(index)) {
 		game.create_worker(get_position(), index, owner_);
 	} else {
-		const DescriptionIndex critter = game.world().get_critter(bob.c_str());
+		const DescriptionIndex critter = game.world().critter_index(bob);
 		if (critter == INVALID_INDEX) {
 			molog("  WARNING: Unknown bob %s\n", bob.c_str());
 			send_signal(game, "fail");
@@ -1063,7 +1062,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 		// TODO(GunChleoc): We keep formatting this even when timeout has not elapsed
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
 			const std::string rt_description = as_mapobject_message(
-			   ri.descr().name(), g_gr->images().get(rdescr->representative_image())->width(),
+			   ri.descr().name(), g_image_cache->get(rdescr->representative_image())->width(),
 			   _("A geologist found resources."));
 
 			//  We should add a message to the player's message queue - but only,
@@ -1087,8 +1086,8 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
  * Whether the effect actually gets played is decided only by the sound server.
  */
 bool Worker::run_playsound(Game& game, State& state, const Action& action) {
-	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, action.iparam2, get_position(), action.iparam1));
+	Notifications::publish(NoteSound(
+	   SoundType::kAmbient, action.iparam2, get_position(), action.iparam1, action.iparam3 == 1));
 
 	++state.ivar1;
 	schedule_act(game, 10);

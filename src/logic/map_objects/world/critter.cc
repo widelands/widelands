@@ -28,8 +28,7 @@
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/map_object_program.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/world/critter_program.h"
 #include "logic/map_objects/world/world.h"
 #include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_table.h"
@@ -96,16 +95,15 @@ bool Critter::run_remove(Game& game, State& state, const CritterAction&) {
 
 CritterDescr::CritterDescr(const std::string& init_descname,
                            const LuaTable& table,
-                           const World& world)
+                           const std::vector<std::string>& attribs)
    : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
-     editor_category_(nullptr),
      size_(table.get_int("size")),
      carnivore_(table.has_key("carnivore") && table.get_bool("carnivore")),
      appetite_(0),
      reproduction_rate_(table.get_int("reproduction_rate")) {
 	assign_directional_animation(&walk_anims_, "walk");
 
-	add_attributes(table.get_table("attributes")->array_entries<std::string>());
+	add_attributes(attribs);
 
 	if (size_ < 1 || size_ > 10) {
 		throw GameDataError(
@@ -147,20 +145,13 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
 		}
 	}
-	const DescriptionIndex editor_category_index =
-	   world.editor_critter_categories().get_index(table.get_string("editor_category"));
-	if (editor_category_index == Widelands::INVALID_INDEX) {
-		throw GameDataError(
-		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
-	}
-	editor_category_ = world.editor_critter_categories().get_mutable(editor_category_index);
 }
 
 CritterDescr::~CritterDescr() {
 }
 
 bool CritterDescr::is_swimming() const {
-	const static uint32_t swimming_attribute = get_attribute_id("swimming");
+	const static uint32_t swimming_attribute = get_attribute_id("swimming", true);
 	return has_attribute(swimming_attribute);
 }
 
@@ -179,10 +170,6 @@ CritterProgram const* CritterDescr::get_program(const std::string& program_name)
 
 uint32_t CritterDescr::movecaps() const {
 	return is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;
-}
-
-const EditorCategory* CritterDescr::editor_category() const {
-	return editor_category_;
 }
 
 /*
@@ -546,7 +533,8 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 
 			if (critter_owner == "world") {
 				critter_name = lookup_table.lookup_critter(critter_name, packet_version);
-				descr = egbase.world().get_critter_descr(critter_name);
+				descr =
+				   egbase.world().get_critter_descr(egbase.mutable_world()->load_critter(critter_name));
 			} else {
 				throw GameDataError(
 				   "Tribes don't have critters %s/%s", critter_owner.c_str(), critter_name.c_str());

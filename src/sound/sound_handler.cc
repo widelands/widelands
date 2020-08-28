@@ -285,7 +285,10 @@ FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
  * (to avoid "sonic overload"). Based on priority and on when it was last played.
  * System sounds and sounds with priority "kFxPriorityAlwaysPlay" always return 'true'.
  */
-bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const priority) {
+bool SoundHandler::play_or_not(SoundType type,
+                               const FxId fx_id,
+                               uint16_t const priority,
+                               bool allow_multiple) {
 	assert(!SoundHandler::is_backend_disabled() && is_sound_enabled(type));
 	assert(priority >= kFxPriorityLowest);
 
@@ -299,27 +302,25 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const p
 	}
 
 	// We always play important sounds
-	if (priority == kFxPriorityAlwaysPlay) {
+	if (priority == kFxMaximumPriority && allow_multiple) {
 		return true;
 	}
 
 	// Do not run multiple instances of the same sound effect if the priority is too low
-	bool too_many_playing = false;
-	if (priority < kFxPriorityAllowMultiple) {
-		lock_fx();
+	if (!allow_multiple) {
 		// Find out if an fx called 'fx_name' is already running
+		lock_fx();
 		for (const auto& fx_pair : active_fx_) {
 			if (fx_pair.second == fx_id) {
-				too_many_playing = true;
-				break;
+				release_fx_lock();
+				return false;
 			}
 		}
-	}
-
-	release_fx_lock();
-
-	if (too_many_playing) {
-		return false;
+		release_fx_lock();
+		// We always play sounds with 100% chance at least once
+		if (priority == kFxMaximumPriority) {
+			return true;
+		}
 	}
 
 	// TODO(unknown): long time since any play increases weighted_priority
@@ -330,8 +331,7 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const p
 
 	// Weighted total probability that this fx gets played; initially set according to priority
 	//  float division! not integer
-	float probability =
-	   (priority % kFxPriorityAllowMultiple) / static_cast<float>(kFxPriorityAllowMultiple);
+	float probability = static_cast<float>(priority) / kFxMaximumPriority;
 
 	// How many milliseconds in the past to consider
 	constexpr uint32_t kSlidingWindowSize = 20000;
@@ -348,7 +348,7 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const p
 
 	// finally: the decision
 	// float division! not integer
-	return (rng_.rand() % kFxPriorityAlwaysPlay) / static_cast<float>(kFxPriorityAlwaysPlay) <=
+	return (rng_.rand() % kFxMaximumPriority) / static_cast<float>(kFxMaximumPriority) <=
 	       probability;
 }
 
@@ -362,7 +362,8 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const p
  */
 void SoundHandler::play_fx(SoundType type,
                            const FxId fx_id,
-                           uint8_t const priority,
+                           uint16_t const priority,
+                           bool allow_multiple,
                            int32_t const stereo_pos,
                            int distance) {
 	if (SoundHandler::is_backend_disabled() || !is_sound_enabled(type)) {
@@ -383,7 +384,7 @@ void SoundHandler::play_fx(SoundType type,
 	}
 
 	// See if the FX should be played
-	if (!play_or_not(type, fx_id, priority)) {
+	if (!play_or_not(type, fx_id, priority, allow_multiple)) {
 		return;
 	}
 

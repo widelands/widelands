@@ -22,7 +22,6 @@
 #include <SDL_mouse.h>
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 
@@ -53,6 +52,7 @@ Statebox::Statebox(Panel* const parent,
 	set_desired_size(w, h);
 	set_size(w, h);
 	set_flags(Has_Custom_Picture, true);
+	set_can_focus(true);
 }
 
 Statebox::Statebox(Panel* const parent,
@@ -62,10 +62,11 @@ Statebox::Statebox(Panel* const parent,
                    int width)
    : Panel(parent, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
-     pic_graphics_(g_gr->images().get("images/ui_basic/checkbox_light.png")),
+     pic_graphics_(g_image_cache->get("images/ui_basic/checkbox_light.png")),
      rendered_text_(nullptr),
      label_text_(label_text) {
 	set_flags(Has_Text, !label_text_.empty());
+	set_can_focus(true);
 	layout();
 }
 
@@ -108,7 +109,7 @@ void Statebox::set_enabled(bool const enabled) {
 	set_flags(Is_Enabled, enabled);
 
 	if (!(flags_ & Has_Custom_Picture)) {
-		pic_graphics_ = g_gr->images().get(enabled ? "images/ui_basic/checkbox_light.png" :
+		pic_graphics_ = g_image_cache->get(enabled ? "images/ui_basic/checkbox_light.png" :
 		                                             "images/ui_basic/checkbox.png");
 		set_flags(Is_Highlighted, (flags_ & Is_Highlighted) && (flags_ & Is_Enabled));
 	}
@@ -189,6 +190,14 @@ bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 
 bool Statebox::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
 	return true;  // We handle this always by lighting up
+}
+
+bool Statebox::handle_key(bool down, SDL_Keysym code) {
+	if (down && (code.sym == SDLK_SPACE || code.sym == SDLK_RETURN || code.sym == SDLK_KP_ENTER)) {
+		button_clicked();
+		return true;
+	}
+	return Panel::handle_key(down, code);
 }
 
 /**

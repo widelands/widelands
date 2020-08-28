@@ -29,9 +29,8 @@
 
 namespace {
 
-using namespace Widelands;
-
-UI::Checkbox* create_immovable_checkbox(UI::Panel* parent, const ImmovableDescr& immovable_descr) {
+UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
+                                        const Widelands::ImmovableDescr& immovable_descr) {
 	const Image* pic = immovable_descr.representative_image();
 	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i::zero(), pic, immovable_descr.descname());
 	const int kMinClickableArea = 24;
@@ -48,8 +47,8 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>(
-	      this, world.editor_immovable_categories(), world.immovables(),
-	      [](UI::Panel* cb_parent, const ImmovableDescr& immovable_descr) {
+	      this, parent.editor_categories(Widelands::MapObjectType::IMMOVABLE), world.immovables(),
+	      [](UI::Panel* cb_parent, const Widelands::ImmovableDescr& immovable_descr) {
 		      return create_immovable_checkbox(cb_parent, immovable_descr);
 	      },
 	      [this] { select_correct_tool(); }, &tool));

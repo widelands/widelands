@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-07-01 06:10+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-07-23 07:47+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -339,11 +339,11 @@ msgid ""
 " wiki there."
 msgstr "Ma tha thu feumach air barrachd mhìneachaidhean no cobhair airson Widelands no an deasaiche Widelands, tadhail air an làrach-lìn againn air %s. Tha cobhair air loidhne san uicidh againn an-siud."
 
-#: ../../data/txts/help/common_helptexts.lua:17
+#: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
 msgstr "Ro-ràdh"
 
-#: ../../data/txts/help/common_helptexts.lua:18
+#: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer "
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -351,7 +351,7 @@ msgid ""
 "started through playable tutorials."
 msgstr "’S e geama ro-innleachd fìor-ùine saor is open source a th’ ann an Widelands le iomairtean aon-chluicheadair is modh ioma-chluicheadair. ’S ann gun do chuir Settlers II an geama ’nar n-inntinn ach tha barrachd caochlaidh is doimhne ann. Tha e furasta gu leòr tòiseachadh air co-dhiù le oideachadh a ghabhas cluiche."
 
-#: ../../data/txts/help/common_helptexts.lua:19
+#: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
 "In this game, you start out on a small piece of land with just a few "
 "resources. Using these, you’ll create an empire with many thousands of "
@@ -360,11 +360,11 @@ msgid ""
 "tribes."
 msgstr "Tòisichidh tu le cnap tìre beag le stòras beag sa gheama seo. Cruthaichidh tu ìmpireachd le mìltean dhe shaoranaich asta. Feumaidh tu bun-structar an eaconamaidh a stèidheachadh, an tìr timcheall ort a rùrachadh agus strì an aghaidh threubhan eile gus an t-amas seo a choileanadh."
 
-#: ../../data/txts/help/common_helptexts.lua:25
+#: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
 msgstr "Ath-chluichean"
 
-#: ../../data/txts/help/common_helptexts.lua:26
+#: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
 "Widelands records every game you play in two files. One of these files has a"
 " .wrpl.wgf extension and contains an initial savegame. The other file has a "
@@ -373,7 +373,7 @@ msgid ""
 "will tell you the time you started the game."
 msgstr "Clàraichidh Widelands na h-uile geama a chluicheas tu ann an dà fhaidhle. Tha leudachan .wrpl.wgf air an dàrna fear is thèid toiseach a’ gheama a shàbhaladh ann. Tha leudachan .wrpl air an fhear eile is tha na h-uile àithne a chuir gach cluicheadair seachad na bhroinn a leithid togail rathaid no ionnsaigh air an nàmhaid. Innsidh an còrr dhe na h-ainmean faidhle dhut cuin a thòisich thu air a’ gheama."
 
-#: ../../data/txts/help/common_helptexts.lua:27
+#: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -383,7 +383,7 @@ msgid ""
 "players has a different version of the game."
 msgstr "Leis an roghainn “Coimhead air ath-chluiche” sa phrìomh chlàr-taice, thèid geama a chluich thu roimhe ath-thogail ach an coimhead thu air. Thoir an aire co-dhiù gum faod atharraichean beaga air faidhlichean dàta a’ gheama no air an fhaidhle so-ghnìomhaichte Widelands adhbharachadh nach eil ath-chluiche co-chòrdail tuilleadh is gun caill i an “sioncronachadh”. Tha seo coltach ris na duilgheadasan leis an t-sioncronachadh ann an geama lìonraidh nuair a bhios tionndadh dhen gheama eadar-dhealaichte aig aonar dhe na cluicheadairean."
 
-#: ../../data/txts/help/common_helptexts.lua:28
+#: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
@@ -393,7 +393,7 @@ msgid ""
 msgstr "’S e uidheamachd glè fheumail gus bugaichean ann an loidsig a’ gheama a lorg a th’ anns na h-ath-chluichean, mar sin bidh iad feumail ma cheanglas tu ri aithris air buga iad. Thèid na h-ath-chluichean a shàbhaladh sa phasgan %s air Linux is Mac OS X. Air Windows, bidh iad ann am pasgan “replays” fon phasgan stàlaidh Widelands agad."
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../data/txts/help/common_helptexts.lua:35
+#: ../../data/txts/help/common_helptexts.lua:41
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
@@ -401,27 +401,27 @@ msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Space"
 
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
 msgstr "Toglaich an dèid ionadan togail a shealltainn"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgctxt "hotkey"
 msgid "Ctrl + F"
 msgstr "Ctrl + F"
 
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Toglaich am modh làn-sgrìn (ma chuireas an siostam-obrachaidh taic ris)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:56
+#: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "Toglaich am meanbh-mhapa"
 
@@ -699,8 +699,8 @@ msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
-msgid "Ctrl+(1-9)"
-msgstr "Ctrl+(1-9)"
+msgid "Ctrl + (1-9)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:43
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -742,13 +742,13 @@ msgstr "Tha raon-obrach glè bheag aig cuid a thogalaichean, can an tuathanas. M
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+(+/-)"
-msgstr "Ctrl+(+/-)"
+msgid "Ctrl + (+/-)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+0"
-msgstr "Ctrl+0"
+msgid "Ctrl + 0"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
@@ -762,8 +762,8 @@ msgstr "Cleachd iuchraichean “,” (cromag) agus “.” (puing-stad) airson l
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Ctrl+(Page Up/Page Down)"
-msgstr "Ctrl+(Page Up/Page Down)"
+msgid "Ctrl + (Page Up/Page Down)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
@@ -772,8 +772,8 @@ msgstr "Page Up/Page Down"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Shift+(Page Up/Page Down)"
-msgstr "Shift+(Page Up/Page Down)"
+msgid "Shift + (Page Up/Page Down)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
 msgid ""
@@ -788,8 +788,8 @@ msgstr "Iuchraichean saighde"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
-msgstr "Ctrl+Iuchraichean saighde"
+msgid "Ctrl + Arrow keys"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
@@ -798,8 +798,8 @@ msgstr "Gluais sealladh a’ mhapa le %1%. Gluaisidh %2% an sealladh nas luaithe
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Shift+Arrow keys"
-msgstr "Shift+Iuchraichean saighde"
+msgid "Shift + Arrow keys"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:87
 msgid ""

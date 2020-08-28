@@ -23,6 +23,7 @@
 
 #include "graphic/animation/animation_manager.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game_data_error.h"
@@ -133,11 +134,11 @@ ImmovableDescr IMPLEMENTATION
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               MapObjectDescr::OwnerType input_type)
+                               MapObjectDescr::OwnerType input_type,
+                               const std::vector<std::string>& attribs)
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
      size_(BaseImmovable::NONE),
-     owner_type_(input_type),
-     editor_category_(nullptr) {
+     owner_type_(input_type) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", table.get_string("name").c_str());
 	}
@@ -153,14 +154,12 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		terrain_affinity_.reset(new TerrainAffinity(*table.get_table("terrain_affinity"), name()));
 	}
 
-	if (table.has_key("attributes")) {
-		std::vector<std::string> attribs =
-		   table.get_table("attributes")->array_entries<std::string>();
+	if (!attribs.empty()) {
 		add_attributes(attribs);
 
-		// All resource indicators must have a menu icon
 		for (const std::string& attribute : attribs) {
 			if (attribute == "resi") {
+				// All resource indicators must have a menu icon
 				if (icon_filename().empty()) {
 					throw GameDataError("Resource indicator %s has no menu icon", name().c_str());
 				}
@@ -219,23 +218,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 }
 
 /**
- * Parse a world immovable from its init file.
- */
-ImmovableDescr::ImmovableDescr(const std::string& init_descname,
-                               const LuaTable& table,
-                               const World& world)
-   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld) {
-
-	const DescriptionIndex editor_category_index =
-	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
-	if (editor_category_index == Widelands::INVALID_INDEX) {
-		throw GameDataError(
-		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
-	}
-	editor_category_ = world.editor_immovable_categories().get_mutable(editor_category_index);
-}
-
-/**
  * Parse a tribes immovable from its init file.
  *
  * The contents of 'table' are documented in
@@ -243,15 +225,12 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               const Tribes& tribes)
-   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe) {
+                               const std::vector<std::string>& attribs,
+                               Tribes& tribes)
+   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe, attribs) {
 	if (table.has_key("buildcost")) {
 		buildcost_ = Buildcost(table.get_table("buildcost"), tribes);
 	}
-}
-
-const EditorCategory* ImmovableDescr::editor_category() const {
-	return editor_category_;
 }
 
 bool ImmovableDescr::has_terrain_affinity() const {
@@ -266,9 +245,9 @@ void ImmovableDescr::make_sure_default_program_is_there() {
 	if (!programs_.count(MapObjectProgram::kMainProgram)) {  //  default program
 		assert(is_animation_known("idle"));
 		std::vector<std::string> arguments{"idle"};
-		programs_[MapObjectProgram::kMainProgram] =
-		   new ImmovableProgram("main", std::unique_ptr<ImmovableProgram::Action>(
-		                                   new ImmovableProgram::ActAnimate(arguments, *this)));
+		programs_[MapObjectProgram::kMainProgram] = new ImmovableProgram(
+		   MapObjectProgram::kMainProgram, std::unique_ptr<ImmovableProgram::Action>(
+		                                      new ImmovableProgram::ActAnimate(arguments, *this)));
 	}
 }
 
@@ -476,9 +455,9 @@ void Immovable::draw_construction(const uint32_t gametime,
 		done = total;
 	}
 
-	const Animation& anim = g_gr->animations().get_animation(anim_);
+	const Animation& anim = g_animation_manager->get_animation(anim_);
 	const size_t nr_frames = anim.nr_frames();
-	uint32_t frametime = g_gr->animations().get_animation(anim_).frametime();
+	uint32_t frametime = g_animation_manager->get_animation(anim_).frametime();
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
 	const size_t current_frame = done / units_per_frame;
 
@@ -498,8 +477,8 @@ void Immovable::draw_construction(const uint32_t gametime,
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(
 	   info_to_draw, descr().descname(),
-	   g_gr->styles().color_tag((boost::format(_("%i%% built")) % (100 * done / total)).str(),
-	                            g_gr->styles().building_statistics_style().construction_color()),
+	   g_style_manager->color_tag((boost::format(_("%i%% built")) % (100 * done / total)).str(),
+	                              g_style_manager->building_statistics_style().construction_color()),
 	   point_on_dst, scale, dst);
 }
 
@@ -718,20 +697,12 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 
 			if (owner_type != "world") {  //  It is a tribe immovable.
 				const std::string name = tribes_lookup_table.lookup_immovable(fr.c_string());
-				const DescriptionIndex idx = egbase.tribes().immovable_index(name);
-				if (idx != Widelands::INVALID_INDEX) {
-					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
-				} else {
-					throw GameDataError("tribes do not define immovable type \"%s\"", name.c_str());
-				}
+				imm = new Immovable(
+				   *egbase.tribes().get_immovable_descr(egbase.mutable_tribes()->load_immovable(name)));
 			} else {  //  world immovable
-				const World& world = egbase.world();
 				const std::string name = world_lookup_table.lookup_immovable(fr.c_string());
-				const DescriptionIndex idx = world.get_immovable_index(name.c_str());
-				if (idx == Widelands::INVALID_INDEX) {
-					throw GameDataError("world does not define immovable type \"%s\"", name.c_str());
-				}
-				imm = new Immovable(*world.get_immovable_descr(idx));
+				imm = new Immovable(
+				   *egbase.world().get_immovable_descr(egbase.mutable_world()->load_immovable(name)));
 			}
 
 			loader->init(egbase, mol, *imm);

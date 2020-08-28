@@ -18,7 +18,7 @@ tribes:new_worker_type {
       fish = {
          "findspace=size:any radius:8 resource:fish",
          "walk=coords",
-         "mine=fish 1",
+         "mine=resource_fish radius:1",
          "animate=fishing duration:3s",
          "createware=fish",
          "return"

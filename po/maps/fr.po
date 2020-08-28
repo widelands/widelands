@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-06-08 14:24+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-07-23 14:10+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -342,8 +342,8 @@ msgid "Astoria 2.R"
 msgstr "Astoria 2.R"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:10
-msgid "Long, economic play in beautyfull land, try every player!!"
-msgstr "Long jeu économique dans un pays magnifique, essayez toutes les campagnes !!"
+msgid "Long, economic play in beautiful land. Try every player!"
+msgstr "Long jeu économique dans un pays magnifique. Essayez toutes les joueurs!"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
@@ -423,6 +423,10 @@ msgstr "Franchir l'horizon"
 msgid "Man your ship and sail to the horizon."
 msgstr "Équipez votre navire et naviguez vers l'horizon."
 
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+msgid "This map is not winnable with the ‘Autocrat’ win condition."
+msgstr "Cette carte n'est pas gagnable avec la condition de victoire \"Autodidacte\". "
+
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
 msgstr "Le Tournoi du Désert"
@@ -449,13 +453,12 @@ msgstr "Le joyau des Alpes, la chaine des montagnes Dolomites a été déclaré 
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
-"- there is lot of flat ground on the mountains. Unfortunately, most of it is"
-" vertical. Use wisely the little building space you have. - A fortress at "
-"the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
-" army. Use the terrain to your advantage - chop all trees and expand "
-"wherever you can; it's the only way to find all the precious farm spaces - "
-"suggested teams: red+orange+blue+violet"
-msgstr "Il y a beaucoup de terrain plat sur les montagnes. \nMalheureusement, la majeure partie est verticale. \nUtilisez judicieusement le peu d'espace de construction dont vous disposez. \nUne forteresse à l'embouchure d'un col étroit peut être un formidable obstacle pour une armée ennemie. Utilisez le terrain à votre avantage. \nCoupez tous les arbres pour vous étendre où vous le pouvez; c'est le seul moyen de trouver tous les précieux espaces agricoles. \néquipes suggérées: rouge + orange + bleu + violet"
+"There is lot of flat ground on the mountains. Unfortunately, most of it is "
+"vertical – use the little building space you have wisely. A fortress at the "
+"mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"army – use the terrain to your advantage. Chop all trees and expand wherever"
+" you can – it's the only way to find all the precious farm spaces."
+msgstr "Il y a beaucoup de terrain plat sur les montagnes. Malheureusement, la majeure partie est verticale – utilisez judicieusement le peu d'espace de construction dont vous disposez. Une forteresse à l'embouchure d'un col étroit peut être un formidable obstacle pour une armée ennemie – utilisez le terrain à votre avantage. Coupez tous les arbres pour vous étendre où vous le pouvez – c'est le seul moyen de trouver tous les précieux espaces agricoles."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -481,7 +484,7 @@ msgstr "v0.2"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:10
 msgid ""
-"A huge europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
+"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
 msgstr "Une immense carte de l'Europe. Bleu = Suède, Rouge = Italie, Jaune = Espagne, Vert = Turquie, Noir = Russie, Orange = Angleterre, Violet = France, Blanc = Pologne"
 
@@ -722,11 +725,11 @@ msgstr "Challenge sans métal v2"
 #: ../../data/maps/No challenge metal v2.wmf/elemental:10
 msgid ""
 "This map is intended as a solo challenge for those very skilled players that"
-" find 1v6 against the AI too easy.  Blue player has no metal (except a bit "
-"of iron to kickstart your economy), so you have to rely on the 5% production"
-" of an empty mine. And you're still 1v6 (though of course you can remove "
-"some AI players to make it a bit easier). Good luck"
-msgstr "Cette carte est conçue comme un défi solo pour les joueurs très qualifiés qui trouvent le 1v6 contre l'IA trop facile. Le joueur bleu n'a pas de métal (sauf un peu de fer pour lancer votre économie), vous devez donc compter sur la production de 5% d'une mine vide. Et vous êtes toujours en 1v6 (bien que vous puissiez bien sûr supprimer certains joueurs IA pour le rendre un peu plus facile). Bonne chance\n "
+" find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
+" of iron to kickstart your economy), so you have to rely on the 5% "
+"production of an empty mine. And you're still 1 vs 6 (though of course you "
+"can remove some AI players to make it a bit easier). Good luck!"
+msgstr "Cette carte est conçue comme un défi solo pour les joueurs très qualifiés qui trouvent le 1 vs 6 contre l'IA trop facile. Le joueur bleu n'a pas de métal (sauf un peu de fer pour lancer votre économie), vous devez donc compter sur la production de 5% d'une mine vide. Et vous êtes toujours en 1 vs 6 (bien que vous puissiez bien sûr supprimer certains joueurs IA pour le rendre un peu plus facile). Bonne chance!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"

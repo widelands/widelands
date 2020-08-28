@@ -50,6 +50,16 @@ struct ProductionProgram : public MapObjectProgram {
 
 	/// Can be executed on a ProductionSite.
 	struct Action {
+		struct TrainingParameters {
+			TrainingParameters() : attribute(TrainingAttribute::kTotal), level(INVALID_INDEX) {
+			}
+			static TrainingParameters parse(const std::vector<std::string>& arguments,
+			                                const std::string& action_name);
+
+			TrainingAttribute attribute;
+			unsigned level;
+		};
+
 		Action() = default;
 		virtual ~Action();
 		virtual void execute(Game&, ProductionSite&) const = 0;
@@ -99,7 +109,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// match. Example: "fish:2".
 	static BillOfMaterials parse_bill_of_materials(const std::vector<std::string>& arguments,
 	                                               WareWorker ww,
-	                                               const Tribes& tribes);
+	                                               Tribes& tribes);
 
 	/// Returns from the program.
 	///
@@ -272,11 +282,15 @@ struct ProductionProgram : public MapObjectProgram {
 	///       * If handling_method is None the called program continues normal,
 	///         but no statistics are calculated
 	struct ActCall : public Action {
-		ActCall(const std::vector<std::string>& arguments, const ProductionSiteDescr&);
+		ActCall(const std::vector<std::string>& arguments);
 		void execute(Game&, ProductionSite&) const override;
 
+		const std::string& program_name() const {
+			return program_name_;
+		}
+
 	private:
-		ProductionProgram* program_;
+		std::string program_name_;
 		ProgramResultHandlingMethod handling_methods_[3];
 	};
 
@@ -412,9 +426,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// produced wares are of the type specified in the group. How the produced
 	/// wares are handled is defined by the productionsite.
 	struct ActProduce : public Action {
-		ActProduce(const std::vector<std::string>& arguments,
-		           ProductionSiteDescr&,
-		           const Tribes& tribes);
+		ActProduce(const std::vector<std::string>& arguments, ProductionSiteDescr&, Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
@@ -435,45 +447,50 @@ struct ProductionProgram : public MapObjectProgram {
 	/// The recruited workers are of the type specified in the group. How the
 	/// recruited workers are handled is defined by the productionsite.
 	struct ActRecruit : public Action {
-		ActRecruit(const std::vector<std::string>& arguments,
-		           ProductionSiteDescr&,
-		           const Tribes& tribes);
+		ActRecruit(const std::vector<std::string>& arguments, ProductionSiteDescr&, Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
 
 	struct ActMine : public Action {
 		ActMine(const std::vector<std::string>& arguments,
-		        const World&,
+		        World&,
 		        const std::string& production_program_name,
 		        ProductionSiteDescr*);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
 		DescriptionIndex resource_;
-		uint8_t distance_;  // width/radius of mine
-		uint8_t max_;       // Can work up to this percent (of total mountain resources)
-		uint8_t chance_;    // odds of finding resources from empty mine
-		uint8_t training_;  // probability of training in _empty_ mines
+		uint8_t workarea_;            // width/radius of mine
+		unsigned max_resources_;      // Can work up to this percent (of total mountain resources)
+		unsigned depleted_chance_;    // odds of finding resources from empty mine
+		unsigned experience_chance_;  // probability of training in _empty_ mines
 	};
 
 	struct ActCheckSoldier : public Action {
-		explicit ActCheckSoldier(const std::vector<std::string>& arguments);
-		void execute(Game&, ProductionSite&) const override;
+		explicit ActCheckSoldier(const std::vector<std::string>& arguments,
+		                         const ProductionSiteDescr& descr);
+		void execute(Game&, ProductionSite& ps) const override;
+
+		TrainingParameters training() const {
+			return training_;
+		}
 
 	private:
-		TrainingAttribute attribute_;
-		uint8_t level_;
+		TrainingParameters training_;
 	};
 
 	struct ActTrain : public Action {
-		explicit ActTrain(const std::vector<std::string>& arguments);
-		void execute(Game&, ProductionSite&) const override;
+		explicit ActTrain(const std::vector<std::string>& arguments,
+		                  const ProductionSiteDescr& descr);
+		void execute(Game&, ProductionSite& ps) const override;
+
+		TrainingParameters training() const {
+			return training_;
+		}
 
 	private:
-		TrainingAttribute attribute_;
-		uint8_t level_;
-		uint8_t target_level_;
+		TrainingParameters training_;
 	};
 
 	/// Plays a sound effect.
@@ -491,7 +508,8 @@ struct ProductionProgram : public MapObjectProgram {
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
 	struct ActPlaySound : public Action {
-		explicit ActPlaySound(const std::vector<std::string>& arguments);
+		explicit ActPlaySound(const std::vector<std::string>& arguments,
+		                      const ProductionSiteDescr& descr);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -530,8 +548,8 @@ struct ProductionProgram : public MapObjectProgram {
 	ProductionProgram(const std::string& init_name,
 	                  const std::string& init_descname,
 	                  std::unique_ptr<LuaTable> actions_table,
-	                  const Tribes& tribes,
-	                  const World& world,
+	                  Tribes& tribes,
+	                  World& world,
 	                  ProductionSiteDescr* building);
 
 	const std::string& descname() const;
@@ -542,6 +560,8 @@ struct ProductionProgram : public MapObjectProgram {
 	const ProductionProgram::Groups& consumed_wares_workers() const;
 	const Buildcost& produced_wares() const;
 	const Buildcost& recruited_workers() const;
+	// Throws a GameDataError if we're trying to call an unknown program
+	void validate_calls(const ProductionSiteDescr& descr) const;
 
 private:
 	std::string descname_;

@@ -27,7 +27,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/checkbox.h"
@@ -35,10 +34,8 @@
 
 namespace {
 
-using namespace Widelands;
-
 UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
-                                      const TerrainDescription& terrain_descr,
+                                      const Widelands::TerrainDescription& terrain_descr,
                                       std::vector<std::unique_ptr<const Image>>* offscreen_images) {
 
 	constexpr int kSmallPicSize = 20;
@@ -54,7 +51,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	Vector2i pt(1, terrain_texture.height() - kSmallPicSize - 1);
 
 	// Collect tooltips and blit small icons representing "is" values
-	for (const TerrainDescription::Type& terrain_type : terrain_descr.get_types()) {
+	for (const Widelands::TerrainDescription::Type& terrain_type : terrain_descr.get_types()) {
 		tooltips.insert(tooltips.end(), terrain_descr.custom_tooltips().begin(),
 		                terrain_descr.custom_tooltips().end());
 		tooltips.push_back(terrain_type.descname);
@@ -87,8 +84,8 @@ EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>(
-	      this, world.editor_terrain_categories(), world.terrains(),
-	      [this](UI::Panel* cb_parent, const TerrainDescription& terrain_descr) {
+	      this, parent.editor_categories(Widelands::MapObjectType::TERRAIN), world.terrains(),
+	      [this](UI::Panel* cb_parent, const Widelands::TerrainDescription& terrain_descr) {
 		      return create_terrain_checkbox(cb_parent, terrain_descr, &offscreen_images_);
 	      },
 	      [this] { select_correct_tool(); }, &tool));

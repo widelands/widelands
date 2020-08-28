@@ -228,7 +228,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	}
 
 	// Representative animation for collecting global paramaters for the animation set
-	const Animation& representative_animation = g_gr->animations().get_animation(
+	const Animation& representative_animation = g_animation_manager->get_animation(
 	   is_fontier_or_flag_animation ?
 	      frontier_or_flag_animation_id :
 	      descr->get_animation(is_directional ? animation_name + "_ne" : animation_name, nullptr));
@@ -293,7 +293,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 				const std::string filename_base = (boost::format("%s%s_%d") % animation_name %
 				                                   animation_direction_names[dir - 1] % scale)
 				                                     .str();
-				const Animation& directional_animation = g_gr->animations().get_animation(
+				const Animation& directional_animation = g_animation_manager->get_animation(
 				   descr->get_animation(directional_animname, nullptr));
 				spritesheets_to_write.emplace_back(
 				   new SpritesheetData(filename_base, directional_animation, scale));
@@ -384,7 +384,17 @@ int main(int argc, char** argv) {
 		initialize();
 		std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
 		Widelands::EditorGameBase egbase(nullptr);
+		// Load tribe info
+		egbase.tribes();
+		// Load a tribe to create the global 'tribes' Lua variable
+		Notifications::publish(Widelands::NoteMapObjectDescription(
+		   "barbarians", Widelands::NoteMapObjectDescription::LoadType::kObject));
+		// Load the object for the animation
+		Notifications::publish(Widelands::NoteMapObjectDescription(
+		   map_object_name, Widelands::NoteMapObjectDescription::LoadType::kObject));
+		// Write spritesheet
 		write_animation_spritesheets(egbase, map_object_name, animation_name, out_filesystem.get());
+		// Cleanup
 		egbase.cleanup_objects();
 	} catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());
