@@ -21,6 +21,7 @@
 #define WL_NETWORK_GAMEHOST_H
 
 #include <memory>
+#include <thread>
 
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
