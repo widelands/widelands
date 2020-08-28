@@ -21,7 +21,9 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
@@ -29,7 +31,7 @@
 namespace {
 int base_height(int button_dimension, UI::PanelStyle style) {
 	int result =
-	   std::max(button_dimension, text_height(g_gr->styles().table_style(style).enabled()) + 2);
+	   std::max(button_dimension, text_height(g_style_manager->table_style(style).enabled()) + 2);
 	return result;
 }
 }  // namespace
@@ -85,7 +87,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                                     button_dimension,
                                     get_h(),
                                     button_style,
-                                    g_gr->images().get("images/ui_basic/scrollbar_down.png")) :
+                                    g_image_cache->get("images/ui_basic/scrollbar_down.png")) :
                      nullptr),
      display_button_(&button_box_,
                      "dropdown_label",
@@ -261,7 +263,7 @@ void BaseDropdown::add(const std::string& name,
 		const std::string fitme =
 		   label_.empty() ? name : (boost::format(_("%1%: %2%")) % label_ % name).str();
 		const int new_width =
-		   text_width(fitme, g_gr->styles().button_style(button_style_).enabled().font()) + 8;
+		   text_width(fitme, g_style_manager->button_style(button_style_).enabled().font()) + 8;
 		if (new_width > display_button_.get_w()) {
 			set_desired_size(get_w() + new_width - display_button_.get_w(), get_h());
 			set_size(get_w() + new_width - display_button_.get_w(), get_h());
@@ -310,7 +312,7 @@ void BaseDropdown::set_errored(const std::string& error_message) {
 	if (type_ != DropdownType::kPictorial && type_ != DropdownType::kPictorialMenu) {
 		set_label(_("Error"));
 	} else {
-		set_image(g_gr->images().get("images/ui_basic/different.png"));
+		set_image(g_image_cache->get("images/ui_basic/different.png"));
 	}
 }
 
@@ -380,7 +382,7 @@ void BaseDropdown::update() {
 	} else {
 		display_button_.set_pic(list_->has_selection() ?
 		                           list_->get_selected_image() :
-		                           g_gr->images().get("images/ui_basic/different.png"));
+		                           g_image_cache->get("images/ui_basic/different.png"));
 		display_button_.set_tooltip((boost::format(_("%1%: %2%")) % label_ % name).str());
 	}
 }
@@ -478,7 +480,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 	if (list_->is_visible()) {
 		return list_->handle_key(down, code);
 	}
-	return false;
+	return NamedPanel::handle_key(down, code);
 }
 
 }  // namespace UI

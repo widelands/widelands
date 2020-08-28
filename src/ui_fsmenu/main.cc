@@ -93,7 +93,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
               0,
               "",
               UI::Align::kCenter,
-              g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
+              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
      copyright_(this,
                 0,
                 0,
@@ -101,9 +101,9 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                 0,
                 "",
                 UI::Align::kCenter,
-                g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
-     splashscreen_(*g_gr->images().get("loadscreens/splash.jpg")),
-     title_image_(*g_gr->images().get("loadscreens/logo.png")),
+                g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
+     splashscreen_(*g_image_cache->get("loadscreens/splash.jpg")),
+     title_image_(*g_image_cache->get("loadscreens/logo.png")),
      init_time_(kNoSplash),
      last_image_exchange_time_(0),
      draw_image_(0),
@@ -202,33 +202,33 @@ void FullscreenMenuMain::set_labels() {
 			   _("Continue Playing"), FullscreenMenuBase::MenuTarget::kContinueLastsave, nullptr,
 			   false,
 			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>") %
-			    g_gr->styles()
-			       .font_style(UI::FontStyle::kTooltipHeader)
+			    g_style_manager
+			       ->font_style(UI::FontStyle::kTooltipHeader)
 			       .as_font_tag(
 			          /* strip leading "save/" and trailing ".wgf" */
 			          filename_for_continue_.substr(
 			             kSaveDir.length() + 1, filename_for_continue_.length() - kSaveDir.length() -
 			                                       kSavegameExtension.length() - 1)) %
-			    (boost::format(_("Map: %s")) % g_gr->styles()
-			                                      .font_style(UI::FontStyle::kTooltip)
+			    (boost::format(_("Map: %s")) % g_style_manager
+			                                      ->font_style(UI::FontStyle::kTooltip)
 			                                      .as_font_tag(newest_singleplayer->mapname))
 			       .str() %
 			    (boost::format(_("Win Condition: %s")) %
-			     g_gr->styles()
-			        .font_style(UI::FontStyle::kTooltip)
+			     g_style_manager
+			        ->font_style(UI::FontStyle::kTooltip)
 			        .as_font_tag(newest_singleplayer->wincondition))
 			       .str() %
-			    (boost::format(_("Players: %s")) % g_gr->styles()
-			                                          .font_style(UI::FontStyle::kTooltip)
+			    (boost::format(_("Players: %s")) % g_style_manager
+			                                          ->font_style(UI::FontStyle::kTooltip)
 			                                          .as_font_tag(newest_singleplayer->nrplayers))
 			       .str() %
-			    (boost::format(_("Gametime: %s")) % g_gr->styles()
-			                                           .font_style(UI::FontStyle::kTooltip)
+			    (boost::format(_("Gametime: %s")) % g_style_manager
+			                                           ->font_style(UI::FontStyle::kTooltip)
 			                                           .as_font_tag(newest_singleplayer->gametime))
 			       .str() %
 			    /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
-			    (boost::format(_("Saved: %s")) % g_gr->styles()
-			                                        .font_style(UI::FontStyle::kTooltip)
+			    (boost::format(_("Saved: %s")) % g_style_manager
+			                                        ->font_style(UI::FontStyle::kTooltip)
 			                                        .as_font_tag(newest_singleplayer->savedatestring))
 			       .str())
 			      .str(),
@@ -442,12 +442,12 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 		float opacity = 1.f;
 
 		if (time - last_image_exchange_time_ < kImageExchangeDuration) {
-			const Image& img = *g_gr->images().get(images_[last_image_]);
+			const Image& img = *g_image_cache->get(images_[last_image_]);
 			opacity = calc_opacity(time);
 			do_draw_image(r, image_pos(img), img, 1.f - opacity);
 		}
 
-		const Image& img = *g_gr->images().get(images_[draw_image_]);
+		const Image& img = *g_image_cache->get(images_[draw_image_]);
 		do_draw_image(r, image_pos(img), img, opacity);
 	}
 

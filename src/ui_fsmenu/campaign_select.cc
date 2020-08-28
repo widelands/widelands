@@ -21,7 +21,6 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "scripting/lua_table.h"
 
 /**
@@ -40,7 +39,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
             0,
             _("Choose a campaign"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Campaign description
      campaign_details_(this),
