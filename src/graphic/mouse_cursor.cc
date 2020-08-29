@@ -23,7 +23,7 @@
 
 #include <SDL_events.h>
 
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -38,8 +38,8 @@ MouseCursor::MouseCursor() {
 }
 
 void MouseCursor::initialize(bool init_use_sdl) {
-	default_cursor_ = g_gr->images().get(default_filename);
-	default_cursor_click_ = g_gr->images().get(default_click_filename);
+	default_cursor_ = g_image_cache->get(default_filename);
+	default_cursor_click_ = g_image_cache->get(default_click_filename);
 
 	default_cursor_sdl_surface_ = load_image_as_sdl_surface(default_filename, g_fs);
 	default_cursor_sdl_ =

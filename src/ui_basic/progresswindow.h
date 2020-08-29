@@ -21,6 +21,7 @@
 #define WL_UI_BASIC_PROGRESSWINDOW_H
 
 #include "base/rect.h"
+#include "graphic/styles/progress_bar_style.h"
 #include "ui_basic/fullscreen_window.h"
 
 class RenderTarget;

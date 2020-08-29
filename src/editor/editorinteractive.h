@@ -23,6 +23,7 @@
 #include <map>
 #include <memory>
 
+#include "editor/editor_category.h"
 #include "editor/scripting/function_statements.h"
 #include "editor/tools/history.h"
 #include "editor/tools/increase_height_tool.h"
@@ -220,6 +221,10 @@ public:
 		return includes_;
 	}
 
+	/// Access to the editor categories
+	const std::vector<std::unique_ptr<EditorCategory>>&
+	editor_categories(Widelands::MapObjectType type) const;
+
 private:
 	// For referencing the items in mainmenu_
 	enum class MainMenuEntry {
@@ -297,6 +302,9 @@ private:
 	void toggle_bobs();
 	void toggle_grid();
 
+	/// Ensure all world units have been loaded and fill editor categories
+	void load_world_units();
+
 	//  state variables
 	bool need_save_;
 	uint32_t realtime_;
@@ -347,6 +355,9 @@ private:
 	Widelands::PlayerNumber illustrating_vision_for_;
 
 	void unfinalize();
+
+	std::map<Widelands::MapObjectType, std::vector<std::unique_ptr<EditorCategory>>>
+	   editor_categories_;
 
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;

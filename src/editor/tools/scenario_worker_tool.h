@@ -38,7 +38,7 @@ struct ScenarioDeleteWorkerTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor/fsel_editor_delete_worker.png");
+		return g_image_cache->get("images/wui/editor/fsel_editor_delete_worker.png");
 	}
 };
 
@@ -58,7 +58,7 @@ struct ScenarioPlaceWorkerTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor/fsel_editor_place_worker.png");
+		return g_image_cache->get("images/wui/editor/fsel_editor_place_worker.png");
 	}
 	bool has_size_one() const override {
 		return true;

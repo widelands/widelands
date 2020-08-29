@@ -53,7 +53,7 @@ EditorPlayerTeamsMenu::PlayerRelationsPanel::PlayerRelationsPanel(UI::Panel* par
 		      .str(),
 		   UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 		const unsigned team = eia_.egbase().player(i + 1).team_number();
-		dd->add("-", 0, g_gr->images().get("images/players/no_team.png"), team == 0, _("No team"));
+		dd->add("-", 0, g_image_cache->get("images/players/no_team.png"), team == 0, _("No team"));
 		for (unsigned j = 1; j <= nr_players_ / 2; ++j) {
 			dd->add(std::to_string(j), j, playercolor_image(j - 1, "images/players/team.png"),
 			        team == j, (boost::format(_("Team %u")) % j).str());
@@ -68,7 +68,7 @@ EditorPlayerTeamsMenu::PlayerRelationsPanel::PlayerRelationsPanel(UI::Panel* par
 		   this, "allowed_buildings_" + std::to_string(static_cast<unsigned>(i)),
 		   (n + 1) * kPlayerRelationsCellSize, (i + 1) * kPlayerRelationsCellSize,
 		   kPlayerRelationsCellSize, kPlayerRelationsCellSize, UI::ButtonStyle::kWuiSecondary,
-		   g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"),
+		   g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"),
 		   (boost::format(_("Configure allowed building types for %s")) %
 		    eia_.egbase().map().get_scenario_player_name(i + 1))
 		      .str());
@@ -78,7 +78,7 @@ EditorPlayerTeamsMenu::PlayerRelationsPanel::PlayerRelationsPanel(UI::Panel* par
 		                   (i + 1) * kPlayerRelationsCellSize, (n + 1) * kPlayerRelationsCellSize,
 		                   kPlayerRelationsCellSize, kPlayerRelationsCellSize,
 		                   UI::ButtonStyle::kWuiSecondary,
-		                   g_gr->images().get("images/wui/fieldaction/menu_tab_attack.png"),
+		                   g_image_cache->get("images/wui/fieldaction/menu_tab_attack.png"),
 		                   /** TRANSLATORS: %s is the name of a player */
 		                   (boost::format(_("Go to %s’s starting position")) %
 		                    eia_.egbase().map().get_scenario_player_name(i + 1))
@@ -93,7 +93,7 @@ EditorPlayerTeamsMenu::PlayerRelationsPanel::PlayerRelationsPanel(UI::Panel* par
 
 static void
 draw_image(RenderTarget& r, const std::string& i, int32_t x, int32_t y, int player = -1) {
-	const Image* img = player >= 0 ? playercolor_image(player, i) : g_gr->images().get(i);
+	const Image* img = player >= 0 ? playercolor_image(player, i) : g_image_cache->get(i);
 	assert(img);
 	r.blit(Vector2i(x - img->width() / 2, y - img->height() / 2), img, BlendMode::UseAlpha);
 }

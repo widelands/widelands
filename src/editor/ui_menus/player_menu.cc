@@ -24,7 +24,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_starting_pos_tool.h"
-#include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
@@ -164,11 +163,11 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 			i18n::Textdomain td("tribes");
 			for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
 				plr_tribe->add(_(tribeinfo.descname), tribeinfo.name,
-				               g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
+				               g_image_cache->get(tribeinfo.icon), false, tribeinfo.tooltip);
 			}
 		}
 		plr_tribe->add(pgettext("tribe", "Random"), "",
-		               g_gr->images().get("images/ui_fsmenu/random.png"), false,
+		               g_image_cache->get("images/ui_fsmenu/random.png"), false,
 		               _("The tribe will be selected at random"));
 
 		plr_tribe->select((p <= map.get_nrplayers() &&
@@ -293,7 +292,6 @@ void EditorPlayerMenu::player_tribe_clicked(size_t row) {
 	EditorInteractive& menu = eia();
 	assert(!menu.finalized());
 	const std::string& tribename = rows_.at(row)->tribe->get_selected();
-	assert(tribename.empty() || menu.egbase().tribes().tribe_exists(tribename));
 	menu.egbase().mutable_map()->set_scenario_player_tribe(row + 1, tribename);
 	menu.set_need_save(true);
 }

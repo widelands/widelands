@@ -19,7 +19,6 @@
 
 #include "wui/militarysitewindow.h"
 
-#include "graphic/graphic.h"
 #include "wui/soldiercapacitycontrol.h"
 #include "wui/soldierlist.h"
 
@@ -38,7 +37,7 @@ void MilitarySiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted
 	Widelands::MilitarySite* military_site = military_site_.get(ibase()->egbase());
 	assert(military_site != nullptr);
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
-	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
+	get_tabs()->add("soldiers", g_image_cache->get(pic_tab_military),
 	                create_soldier_list(*get_tabs(), *ibase(), *military_site), _("Soldiers"));
 	think();
 }

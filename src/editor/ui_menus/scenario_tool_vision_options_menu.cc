@@ -68,7 +68,7 @@ ScenarioToolVisionOptionsMenu::ScenarioToolVisionOptionsMenu(EditorInteractive& 
 		   (boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name)
 		      .str(),
 		   p,
-		   g_gr->images().get(
+		   g_image_cache->get(
 		      Widelands::get_tribeinfo(eia().egbase().map().get_scenario_player_tribe(p)).icon),
 		   sel == p);
 	}

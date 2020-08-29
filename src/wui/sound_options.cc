@@ -49,12 +49,11 @@ public:
 	             SoundType type,
 	             FxId representative_fx = kNoSoundEffect)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
-	     enable_(this, Vector2i::zero(), title),
 	     volume_(this,
 	             0,
 	             0,
 	             kSliderWidth,
-	             enable_.get_h(),
+	             kSpacing,
 	             0,
 	             g_sh->get_max_volume(),
 	             g_sh->get_volume(type),
@@ -62,6 +61,7 @@ public:
 	             /** TRANSLATORS: Tooltip for volume slider in sound options */
 	             _("Changes the volume. Click to hear a sample."),
 	             kCursorWidth),
+	     enable_(this, Vector2i::zero(), title),
 	     type_(type),
 	     fx_(representative_fx) {
 		set_inner_spacing(kSpacing);
@@ -103,10 +103,10 @@ private:
 		g_sh->set_volume(type_, value);
 	}
 
-	/// Enable / disable sound type
-	UI::Checkbox enable_;
 	/// Control the volume for the sound type
 	UI::HorizontalSlider volume_;
+	/// Enable / disable sound type
+	UI::Checkbox enable_;
 	/// The sound type to control
 	const SoundType type_;
 	/// Representative sound effect to play

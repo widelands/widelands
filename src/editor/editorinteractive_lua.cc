@@ -23,6 +23,7 @@
 #include <vector>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "build_info.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
@@ -197,7 +198,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 			}
 		}
 		if (textdomain.empty()) {
-			log("WARNING: Map name '%s' unsuited for creating a set_textdomain() argument\n", mapname);
+			log_warn("Map name '%s' unsuited for creating a set_textdomain() argument\n", mapname);
 			textdomain = "invalid_name";
 		}
 		fw.print_f("set_textdomain(\"scenario_%s.wmf\")\n", textdomain.c_str());

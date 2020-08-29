@@ -24,9 +24,8 @@
 
 #include <boost/algorithm/string/replace.hpp>
 
-#include "base/log.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
@@ -71,10 +70,10 @@ void SpriteSheetAnimation::SpriteSheetMipMapEntry::ensure_graphics_are_loaded() 
 }
 
 void SpriteSheetAnimation::SpriteSheetMipMapEntry::load_graphics() {
-	sheet = g_gr->images().get(sheet_file);
+	sheet = g_image_cache->get(sheet_file);
 
 	if (!playercolor_mask_sheet_file.empty()) {
-		playercolor_mask_sheet = g_gr->images().get(playercolor_mask_sheet_file);
+		playercolor_mask_sheet = g_image_cache->get(playercolor_mask_sheet_file);
 
 		if (sheet->width() != playercolor_mask_sheet->width()) {
 			throw Widelands::GameDataError("animation sprite sheet has width %d but playercolor mask "

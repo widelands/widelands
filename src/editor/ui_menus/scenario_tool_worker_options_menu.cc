@@ -130,7 +130,7 @@ void ScenarioToolWorkerOptionsMenu::select_tab() {
 
 	ware_.clear();
 	ware_.add(_("(Empty)"), Widelands::INVALID_INDEX,
-	          g_gr->images().get("images/wui/editor/no_ware.png"),
+	          g_image_cache->get("images/wui/editor/no_ware.png"),
 	          tool_.get_carried_ware() == Widelands::INVALID_INDEX);
 	for (Widelands::DescriptionIndex di : tribe.wares()) {
 		const Widelands::WareDescr* w = tribe.get_ware_descr(di);

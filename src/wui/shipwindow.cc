@@ -24,7 +24,6 @@
 #include "base/macros.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
-#include "graphic/graphic.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
@@ -122,7 +121,7 @@ ShipCfg::ShipCfg(InteractiveBase& ib, Widelands::Ship& s)
 				s.get_item(i).get(ib.egbase(), &shipping_ware, &shipping_worker);
 			}
 			dd->add(_("(Empty)"), std::make_pair(Widelands::wwWARE, Widelands::INVALID_INDEX),
-			        g_gr->images().get("images/wui/editor/no_ware.png"),
+			        g_image_cache->get("images/wui/editor/no_ware.png"),
 			        !shipping_ware && !shipping_worker, _("Empty slot"));
 			for (Widelands::DescriptionIndex di : s.owner().tribe().wares()) {
 				const Widelands::WareDescr& w = *s.owner().tribe().get_ware_descr(di);
@@ -471,7 +470,7 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
                                     const std::string& picname,
                                     const std::function<void()>& callback) {
 	UI::Button* btn = new UI::Button(
-	   parent, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, g_gr->images().get(picname), title);
+	   parent, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, g_image_cache->get(picname), title);
 	btn->sigclicked.connect(callback);
 	return btn;
 }

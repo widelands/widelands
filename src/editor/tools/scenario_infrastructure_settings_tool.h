@@ -39,7 +39,7 @@ struct ScenarioInfrastructureSettingsTool : public EditorTool {
 	                          Widelands::Map* map) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor/fsel_editor_infra_settings.png");
+		return g_image_cache->get("images/wui/editor/fsel_editor_infra_settings.png");
 	}
 
 	bool has_size_one() const override {

@@ -19,8 +19,6 @@
 
 #include "wui/dismantlesitewindow.h"
 
-#include "graphic/graphic.h"
-
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
 DismantleSiteWindow::DismantleSiteWindow(InteractiveBase& parent,
@@ -62,7 +60,7 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 	subbox.set_scrollbar_style(UI::PanelStyle::kWui);
 	box.add(&subbox, UI::Box::Resizing::kFullSize);
 
-	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
+	get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), &box, _("Building materials"));
 	think();
 }
 

@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "editor/editorinteractive.h"
 #include "editor/scripting/constexpr.h"
 #include "editor/scripting/control_structures.h"
@@ -518,13 +519,13 @@ void ScriptingSaver::delete_unused(const EditorInteractive& eia) {
 	if (remove.empty()) {
 		return;
 	}
-	log("ScriptingSaver::delete_unused(): Deleting %" PRIuS " item(s):\n", remove.size());
+	log_info("ScriptingSaver::delete_unused(): Deleting %" PRIuS " item(s):\n", remove.size());
 	while (!remove.empty()) {
 		bool found = false;
 		for (auto it = list_.begin(); it != list_.end(); ++it) {
 			if ((*it)->serial() == remove.back()) {
 				found = true;
-				log(" · %u %s\n", (*it)->serial(), typeid(**it).name());
+				log_info(" · %u %s\n", (*it)->serial(), typeid(**it).name());
 				remove.pop_back();
 				list_.erase(it);
 				break;

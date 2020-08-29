@@ -69,7 +69,7 @@ ScenarioFlagSettingsWindow::ScenarioFlagSettingsWindow(EditorInteractive& parent
 		   &wares_box_, "ware_" + std::to_string(i), 50, 50, 34, 10, 34, _("Ware"),
 		   UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary));
 		dropdowns_[i]->add(_("(Empty)"), Widelands::INVALID_INDEX,
-		                   g_gr->images().get("images/wui/editor/no_ware.png"));
+		                   g_image_cache->get("images/wui/editor/no_ware.png"));
 		for (Widelands::DescriptionIndex di = 0; di < nr_wares; ++di) {
 			if (tribe.has_ware(di)) {
 				const Widelands::WareDescr& d = *parent.egbase().tribes().get_ware_descr(di);

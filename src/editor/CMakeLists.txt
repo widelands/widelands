@@ -3,6 +3,8 @@ wl_library(editor
     editorinteractive.cc
     editorinteractive_lua.cc
     editorinteractive.h
+    editor_category.cc
+    editor_category.h
     map_generator.cc
     map_generator.h
     tools/action_args.h
@@ -41,6 +43,13 @@ wl_library(editor
     logic
     base_i18n
     io_fileread
+    logic_constants
+    logic_exceptions
+    graphic_image_cache
+    base_log
+    io_filesystem
+    logic_map_object_type
+    base_scoped_timer
   USES_SDL2
 )
 
@@ -65,6 +74,7 @@ wl_library(editor_scripting
   DEPENDS
     base_exceptions
     base_i18n
+    base_log
     base_macros
     editor
     io_fileread
@@ -196,7 +206,6 @@ wl_library(editor_ui
     map_io
     logic_generic_save_handler
     widelands_options
-    graphic
     graphic_text_layout
     scripting_lua_interface
     logic_map

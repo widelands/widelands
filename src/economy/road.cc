@@ -19,6 +19,7 @@
 
 #include "economy/road.h"
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -186,7 +187,8 @@ void Road::request_carrier_callback(
 	 * Oops! We got a request_callback but don't have the request.
 	 * Try to send him home.
 	 */
-	log("Road(%u): got a request_callback but do not have the request\n", road.serial());
+	log_warn_time(game.get_gametime(),
+	              "Road(%u): got a request_callback but do not have the request\n", road.serial());
 	delete &rq;
 	w->start_task_gowarehouse(game);
 }
@@ -262,13 +264,13 @@ void Road::postsplit(EditorGameBase& egbase, Flag& flag) {
 	path.truncate(index);
 	secondpath.trim_start(index);
 
-	molog("splitting road: first part:\n");
+	molog(egbase.get_gametime(), "splitting road: first part:\n");
 	for (const Coords& coords : path.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(egbase.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
-	molog("                second part:\n");
+	molog(egbase.get_gametime(), "                second part:\n");
 	for (const Coords& coords : secondpath.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(egbase.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
 
 	// change road size and reattach
@@ -386,7 +388,7 @@ void Road::postsplit(EditorGameBase& egbase, Flag& flag) {
 				   egbase, get_owner(), &newroad, secondpath.get_coords()[newroad.get_idle_index()]));
 				newroad.assign_carrier(new_carrier, slot_idx);
 			} else {
-				log("ERROR: Road::postsplit found worker %s which is not one of our carriers!\n",
+				log_err_time(egbase.get_gametime(), "Road::postsplit found worker %s which is not one of our carriers!\n",
 				    w->descr().name().c_str());
 			}
 		}
@@ -547,6 +549,6 @@ void Road::pay_for_building() {
 
 void Road::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
-	molog("wallet: %i\n", wallet_);
+	molog(egbase.get_gametime(), "wallet: %i\n", wallet_);
 }
 }  // namespace Widelands

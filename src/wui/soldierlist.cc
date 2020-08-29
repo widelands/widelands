@@ -27,7 +27,6 @@
 
 #include "base/macros.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/building.h"
@@ -421,10 +420,10 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 	const bool can_act = check_can_act();
 	if (upcast(Widelands::MilitarySite, ms, &building)) {
 		soldier_preference_.add_button(buttons, Vector2i::zero(),
-		                               g_gr->images().get("images/wui/buildings/prefer_rookies.png"),
+		                               g_image_cache->get("images/wui/buildings/prefer_rookies.png"),
 		                               _("Prefer rookies"));
 		soldier_preference_.add_button(buttons, Vector2i(32, 0),
-		                               g_gr->images().get("images/wui/buildings/prefer_heroes.png"),
+		                               g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
 		                               _("Prefer heroes"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();
 		while (button) {

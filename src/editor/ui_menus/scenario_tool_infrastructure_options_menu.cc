@@ -174,7 +174,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 
 #define ADD_TAB(size, tt)                                                                          \
 	buildingtabs->add(#size,                                                                        \
-	                  g_gr->images().get("images/wui/fieldaction/menu_tab_build" #size ".png"),     \
+	                  g_image_cache->get("images/wui/fieldaction/menu_tab_build" #size ".png"),     \
 	                  ig_##size, tt);
 			ADD_TAB(small, _("Small buildings"))
 			ADD_TAB(medium, _("Medium buildings"))
@@ -183,11 +183,11 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 			ADD_TAB(mine, _("Mines"))
 #undef ADD_TAB
 			box->add(buildingtabs, UI::Box::Resizing::kFullSize);
-			tab->add("buildings", g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"), box,
+			tab->add("buildings", g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"), box,
 			         _("Buildings"));
 		}
 		{
-			const Image* icon = g_gr->images().get("images/wui/fieldaction/menu_build_flag.png");
+			const Image* icon = g_image_cache->get("images/wui/fieldaction/menu_build_flag.png");
 			UI::IconGrid* i = new UI::IconGrid(tab, 0, 0, kIconGridCellSize, kIconGridCellSize, 1);
 			i->add("flag", icon, reinterpret_cast<void*>(Widelands::INVALID_INDEX), _("Flag"));
 			i->icon_clicked.connect(
@@ -203,7 +203,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 			}
 			i->icon_clicked.connect(
 			   [this, i](int32_t x) { toggle_selected(i, Widelands::MapObjectType::IMMOVABLE, x); });
-			tab->add("immovables", g_gr->images().get("images/wui/menus/toggle_immovables.png"), i,
+			tab->add("immovables", g_image_cache->get("images/wui/menus/toggle_immovables.png"), i,
 			         _("Immovables"));
 		}
 		tabs_.add("player_" + std::to_string(static_cast<unsigned>(p)),

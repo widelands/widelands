@@ -46,7 +46,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                                                UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(
         &parent, "building_statistics", &registry, kWindowWidth, 100, _("Building Statistics")),
-     style_(g_gr->styles().building_statistics_style()),
+     style_(g_style_manager->building_statistics_style()),
      tab_panel_(this, UI::TabPanelStyle::kWuiDark),
      navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(
@@ -137,32 +137,32 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	navigation_buttons_[NavigationButton::PrevOwned] = new UI::Button(
 	   &navigation_panel_, "previous_owned", get_inner_w() - 2 * kButtonRowHeight, kButtonRowHeight,
 	   kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
+	   g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextOwned] = new UI::Button(
 	   &navigation_panel_, "next_owned", get_inner_w() - kButtonRowHeight, kButtonRowHeight,
 	   kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
+	   g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevConstruction] = new UI::Button(
 	   &navigation_panel_, "previous_constructed", get_inner_w() - 2 * kButtonRowHeight,
 	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
+	   g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextConstruction] = new UI::Button(
 	   &navigation_panel_, "next_constructed", get_inner_w() - kButtonRowHeight,
 	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
+	   g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevUnproductive] = new UI::Button(
 	   &navigation_panel_, "previous_unproductive", get_inner_w() - 2 * kButtonRowHeight,
 	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
+	   g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextUnproductive] = new UI::Button(
 	   &navigation_panel_, "next_unproductive", get_inner_w() - kButtonRowHeight,
 	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
+	   g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect(
 	   [this]() { jump_building(JumpTarget::kOwned, true); });
@@ -284,7 +284,7 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 	                  int tab_index, const std::string& name, const std::string& image,
 	                  const std::string& descr) {
 		if (row_counters[tab_index] > 0) {
-			tab_panel_.add(name, g_gr->images().get(image), tabs_[tab_index], descr);
+			tab_panel_.add(name, g_image_cache->get(image), tabs_[tab_index], descr);
 			if (last_selected_tab == tab_index) {
 				tab_panel_.activate(tab_counter);
 			}

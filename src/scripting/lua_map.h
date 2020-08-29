@@ -249,7 +249,6 @@ public:
 	int get_species(lua_State*);
 	int get_buildcost(lua_State*);
 	int get_becomes(lua_State*);
-	int get_editor_category(lua_State*);
 	int get_terrain_affinity(lua_State*);
 	int get_owner_type(lua_State*);
 	int get_size(lua_State*);
@@ -776,7 +775,6 @@ public:
 	int get_descname(lua_State*);
 	int get_default_resource(lua_State*);
 	int get_default_resource_amount(lua_State*);
-	int get_editor_category(lua_State*);
 	int get_fertility(lua_State*);
 	int get_humidity(lua_State*);
 	int get_representative_image(lua_State*);

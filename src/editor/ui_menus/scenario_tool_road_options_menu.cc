@@ -91,14 +91,14 @@ ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& pare
 	});
 
 	type_.add_button(&buttons_, Vector2i(0, 0),
-	                 g_gr->images().get("images/wui/fieldaction/menu_build_way.png"),
+	                 g_image_cache->get("images/wui/fieldaction/menu_build_way.png"),
 	                 _("Normal road"));
 	type_.add_button(&buttons_, Vector2i(kButtonSize, 0),
-	                 g_gr->images().get("images/wui/fieldaction/menu_tab_buildroad.png"),
+	                 g_image_cache->get("images/wui/fieldaction/menu_tab_buildroad.png"),
 	                 _("Busy road"));
 	if (parent.egbase().map().get_waterway_max_length() >= 2) {
 		type_.add_button(&buttons_, Vector2i(2 * kButtonSize, 0),
-		                 g_gr->images().get("images/wui/fieldaction/menu_tab_buildwaterway.png"),
+		                 g_image_cache->get("images/wui/fieldaction/menu_tab_buildwaterway.png"),
 		                 _("Waterway"));
 	}
 	main_box_.add(&buttons_, UI::Box::Resizing::kAlign, UI::Align::kCenter);

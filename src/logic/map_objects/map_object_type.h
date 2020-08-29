@@ -31,6 +31,9 @@ namespace Widelands {
 enum class MapObjectType : uint8_t {
 	MAPOBJECT = 0,  // Root superclass
 
+	RESOURCE,
+	TERRAIN,
+
 	WARE,  //  class WareInstance
 	BATTLE,
 	SHIP_FLEET,

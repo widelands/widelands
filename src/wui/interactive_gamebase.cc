@@ -108,13 +108,13 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 }
 
 void InteractiveGameBase::add_main_menu() {
-	mainmenu_.set_image(g_gr->images().get("images/wui/menus/main_menu.png"));
+	mainmenu_.set_image(g_image_cache->get("images/wui/menus/main_menu.png"));
 	toolbar()->add(&mainmenu_);
 
 #ifndef NDEBUG  //  only in debug builds
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
-	              g_gr->images().get("images/wui/menus/lua.png"), false,
+	              g_image_cache->get("images/wui/menus/lua.png"), false,
 	              /** TRANSLATORS: Tooltip for Script Console in the game's main menu */
 	              "", pgettext("hotkey", "F6"));
 #endif
@@ -124,7 +124,7 @@ void InteractiveGameBase::add_main_menu() {
 	};
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Sound Options"), MainMenuEntry::kOptions,
-	              g_gr->images().get("images/wui/menus/options.png"), false,
+	              g_image_cache->get("images/wui/menus/options.png"), false,
 	              /** TRANSLATORS: Tooltip for Sound Options in the game's main menu */
 	              _("Set sound effect and music options"));
 
@@ -133,11 +133,11 @@ void InteractiveGameBase::add_main_menu() {
 	};
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Save Game"), MainMenuEntry::kSaveMap,
-	              g_gr->images().get("images/wui/menus/save_game.png"));
+	              g_image_cache->get("images/wui/menus/save_game.png"));
 
 	mainmenu_.add(
 	   /** TRANSLATORS: An entry in the game's main menu */
-	   _("Exit Game"), MainMenuEntry::kExitGame, g_gr->images().get("images/wui/menus/exit.png"));
+	   _("Exit Game"), MainMenuEntry::kExitGame, g_image_cache->get("images/wui/menus/exit.png"));
 
 	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
 }
@@ -166,7 +166,7 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 }
 
 void InteractiveGameBase::add_showhide_menu() {
-	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/showhide.png"));
+	showhidemenu_.set_image(g_image_cache->get("images/wui/menus/showhide.png"));
 	toolbar()->add(&showhidemenu_);
 
 	rebuild_showhide_menu();
@@ -180,14 +180,14 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	 * shown */
 	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
 	                  ShowHideEntry::kBuildingSpaces,
-	                  g_gr->images().get("images/wui/menus/toggle_buildhelp.png"), false, "",
+	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
 	                  pgettext("hotkey", "Space"));
 
 	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building names are shown
 	 */
 	showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
 	                  ShowHideEntry::kCensus,
-	                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "C");
+	                  g_image_cache->get("images/wui/menus/toggle_census.png"), false, "", "C");
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
@@ -195,7 +195,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                     _("Hide Statistics") :
 	                     _("Show Statistics"),
 	                  ShowHideEntry::kStatistics,
-	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "S");
+	                  g_image_cache->get("images/wui/menus/toggle_statistics.png"), false, "", "S");
 
 	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
@@ -203,7 +203,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                     _("Hide Soldier Levels") :
 	                     _("Show Soldier Levels"),
 	                  ShowHideEntry::kSoldierLevels,
-	                  g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
+	                  g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
 	                  "L");
 
 	showhidemenu_.add(get_display_flag(dfShowBuildings) ?
@@ -212,7 +212,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                     _("Hide Buildings") :
 	                     _("Show Buildings"),
 	                  ShowHideEntry::kBuildings,
-	                  g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"), false, "",
+	                  g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"), false, "",
 	                  "U");
 }
 
@@ -241,7 +241,7 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 }
 
 void InteractiveGameBase::add_gamespeed_menu() {
-	gamespeedmenu_.set_image(g_gr->images().get("images/wui/menus/gamespeed.png"));
+	gamespeedmenu_.set_image(g_image_cache->get("images/wui/menus/gamespeed.png"));
 	toolbar()->add(&gamespeedmenu_);
 	rebuild_gamespeed_menu();
 	gamespeedmenu_.selected.connect(
@@ -252,24 +252,24 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 	gamespeedmenu_.clear();
 
 	gamespeedmenu_.add(_("Speed +"), GameSpeedEntry::kIncrease,
-	                   g_gr->images().get("images/wui/menus/gamespeed_increase.png"), false,
+	                   g_image_cache->get("images/wui/menus/gamespeed_increase.png"), false,
 	                   /** TRANSLATORS: Tooltip for Speed + in the game's game speed menu */
 	                   _("Increase the game speed"), pgettext("hotkey", "Page Up"));
 
 	gamespeedmenu_.add(_("Speed -"), GameSpeedEntry::kDecrease,
-	                   g_gr->images().get("images/wui/menus/gamespeed_decrease.png"), false,
+	                   g_image_cache->get("images/wui/menus/gamespeed_decrease.png"), false,
 	                   /** TRANSLATORS: Tooltip for Speed - in the game's game speed menu */
 	                   _("Decrease the game speed"), pgettext("hotkey", "Page Down"));
 
 	if (!is_multiplayer()) {
 		if (get_game()->game_controller() && get_game()->game_controller()->is_paused()) {
 			gamespeedmenu_.add(_("Resume"), GameSpeedEntry::kPause,
-			                   g_gr->images().get("images/wui/menus/gamespeed_resume.png"), false,
+			                   g_image_cache->get("images/wui/menus/gamespeed_resume.png"), false,
 			                   /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
 			                   _("Resume the Game"), pgettext("hotkey", "Pause"));
 		} else {
 			gamespeedmenu_.add(_("Pause"), GameSpeedEntry::kPause,
-			                   g_gr->images().get("images/wui/menus/gamespeed_pause.png"), false,
+			                   g_image_cache->get("images/wui/menus/gamespeed_pause.png"), false,
 			                   /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
 			                   _("Pause the Game"), pgettext("hotkey", "Pause"));
 		}
