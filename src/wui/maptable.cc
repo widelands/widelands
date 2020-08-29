@@ -18,8 +18,10 @@
 
 #include "wui/maptable.h"
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
 
 MapTable::MapTable(
@@ -44,7 +46,7 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 		if (mapdata.maptype == MapData::MapType::kDirectory) {
 			te.set_string(0, "");
 			te.set_picture(
-			   1, g_gr->images().get("images/ui_basic/ls_dir.png"), mapdata.localized_name);
+			   1, g_image_cache->get("images/ui_basic/ls_dir.png"), mapdata.localized_name);
 			te.set_string(2, "");
 		} else {
 			te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
@@ -58,14 +60,14 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 
 			if (type == MapData::DisplayType::kFilenames) {
 				set_column_title(1, _("Filename"));
-				te.set_picture(1, g_gr->images().get(picture),
+				te.set_picture(1, g_image_cache->get(picture),
 				               FileSystem::filename_without_ext(mapdata.filename.c_str()));
 			} else {
 				set_column_title(1, _("Map Name"));
 				if (type == MapData::DisplayType::kMapnames) {
-					te.set_picture(1, g_gr->images().get(picture), mapdata.name);
+					te.set_picture(1, g_image_cache->get(picture), mapdata.name);
 				} else {
-					te.set_picture(1, g_gr->images().get(picture), mapdata.localized_name);
+					te.set_picture(1, g_image_cache->get(picture), mapdata.localized_name);
 				}
 			}
 

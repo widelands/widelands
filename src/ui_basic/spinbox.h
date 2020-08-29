@@ -76,6 +76,8 @@ public:
 	}
 	void set_unit_width(uint32_t width);
 
+	bool handle_key(bool, SDL_Keysym) override;
+
 private:
 	void layout() override;
 	void update();

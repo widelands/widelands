@@ -67,14 +67,14 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
          descname = _"hardening wood",
          actions = {
             "return=skipped unless economy needs blackwood",
             "consume=log:2",
             "sleep=duration:43s",
-            "playsound=sound/barbarians/blackwood 80",
+            "playsound=sound/barbarians/blackwood priority:60%",
             "animate=working duration:24s",
             "produce=blackwood"
          }

@@ -17,59 +17,59 @@ function test_terrains_resource_descr:test_resource_descr()
 end
 
 function test_terrains_resource_descr:test_resource_descname()
-   assert_equal("Coal", egbase:get_resource_description("coal").descname)
-   assert_equal("Stones", egbase:get_resource_description("stones").descname)
-   assert_equal("Water", egbase:get_resource_description("water").descname)
-   assert_equal("Fish", egbase:get_resource_description("fish").descname)
+   assert_equal("Coal", egbase:get_resource_description("resource_coal").descname)
+   assert_equal("Stones", egbase:get_resource_description("resource_stones").descname)
+   assert_equal("Water", egbase:get_resource_description("resource_water").descname)
+   assert_equal("Fish", egbase:get_resource_description("resource_fish").descname)
 end
 
 function test_terrains_resource_descr:test_resource_name()
-   assert_equal("coal", egbase:get_resource_description("coal").name)
-   assert_equal("stones", egbase:get_resource_description("stones").name)
-   assert_equal("water", egbase:get_resource_description("water").name)
-   assert_equal("fish", egbase:get_resource_description("fish").name)
+   assert_equal("resource_coal", egbase:get_resource_description("resource_coal").name)
+   assert_equal("resource_stones", egbase:get_resource_description("resource_stones").name)
+   assert_equal("resource_water", egbase:get_resource_description("resource_water").name)
+   assert_equal("resource_fish", egbase:get_resource_description("resource_fish").name)
 end
 
 function test_terrains_resource_descr:test_resource_is_detectable()
-   assert_equal(true, egbase:get_resource_description("coal").is_detectable)
-   assert_equal(true, egbase:get_resource_description("stones").is_detectable)
-   assert_equal(true, egbase:get_resource_description("water").is_detectable)
-   assert_equal(false, egbase:get_resource_description("fish").is_detectable)
+   assert_equal(true, egbase:get_resource_description("resource_coal").is_detectable)
+   assert_equal(true, egbase:get_resource_description("resource_stones").is_detectable)
+   assert_equal(true, egbase:get_resource_description("resource_water").is_detectable)
+   assert_equal(false, egbase:get_resource_description("resource_fish").is_detectable)
 end
 
 function test_terrains_resource_descr:test_resource_max_amount()
-   assert_equal(20, egbase:get_resource_description("coal").max_amount)
-   assert_equal(20, egbase:get_resource_description("stones").max_amount)
-   assert_equal(50, egbase:get_resource_description("water").max_amount)
-   assert_equal(20, egbase:get_resource_description("fish").max_amount)
+   assert_equal(20, egbase:get_resource_description("resource_coal").max_amount)
+   assert_equal(20, egbase:get_resource_description("resource_stones").max_amount)
+   assert_equal(50, egbase:get_resource_description("resource_water").max_amount)
+   assert_equal(20, egbase:get_resource_description("resource_fish").max_amount)
 end
 
 function test_terrains_resource_descr:test_resource_representative_image()
    assert_equal("world/resources/pics/coal4.png",
-      egbase:get_resource_description("coal").representative_image)
+      egbase:get_resource_description("resource_coal").representative_image)
    assert_equal("world/resources/pics/stones4.png",
-      egbase:get_resource_description("stones").representative_image)
+      egbase:get_resource_description("resource_stones").representative_image)
    assert_equal("world/resources/pics/water4.png",
-      egbase:get_resource_description("water").representative_image)
+      egbase:get_resource_description("resource_water").representative_image)
    assert_equal("world/resources/pics/fish.png",
-      egbase:get_resource_description("fish").representative_image)
+      egbase:get_resource_description("resource_fish").representative_image)
 end
 
 function test_terrains_resource_descr:test_resource_editor_image()
    assert_equal("world/resources/pics/coal1.png",
-      egbase:get_resource_description("coal"):editor_image(0))
+      egbase:get_resource_description("resource_coal"):editor_image(0))
    assert_equal("world/resources/pics/coal1.png",
-      egbase:get_resource_description("coal"):editor_image(5))
+      egbase:get_resource_description("resource_coal"):editor_image(5))
    assert_equal("world/resources/pics/coal2.png",
-      egbase:get_resource_description("coal"):editor_image(6))
+      egbase:get_resource_description("resource_coal"):editor_image(6))
    assert_equal("world/resources/pics/coal2.png",
-      egbase:get_resource_description("coal"):editor_image(10))
+      egbase:get_resource_description("resource_coal"):editor_image(10))
    assert_equal("world/resources/pics/coal3.png",
-      egbase:get_resource_description("coal"):editor_image(15))
+      egbase:get_resource_description("resource_coal"):editor_image(15))
    assert_equal("world/resources/pics/coal4.png",
-      egbase:get_resource_description("coal"):editor_image(16))
+      egbase:get_resource_description("resource_coal"):editor_image(16))
    assert_equal("world/resources/pics/coal4.png",
-      egbase:get_resource_description("coal"):editor_image(1000))
+      egbase:get_resource_description("resource_coal"):editor_image(1000))
 end
 
 --  =======================================================
@@ -106,11 +106,11 @@ function test_terrains_resource_descr:test_terrain_name()
 end
 
 function test_terrains_resource_descr:test_terrain_default_resource()
-   assert_equal("water", egbase:get_terrain_description("summer_meadow1").default_resource.name)
+   assert_equal("resource_water", egbase:get_terrain_description("summer_meadow1").default_resource.name)
    assert_equal(nil, egbase:get_terrain_description("wasteland_beach").default_resource)
    assert_equal(nil,
       egbase:get_terrain_description("desert_forested_mountain2").default_resource)
-   assert_equal("fish",
+   assert_equal("resource_fish",
       egbase:get_terrain_description("winter_water").default_resource.name)
 end
 
@@ -121,23 +121,6 @@ function test_terrains_resource_descr:test_terrain_default_resource_amount()
       "desert_forested_mountain2").default_resource_amount)
    assert_equal(4, egbase:get_terrain_description(
       "winter_water").default_resource_amount)
-end
-
-function test_terrains_resource_descr:test_terrain_editor_category()
-   assert_equal("summer", egbase:get_terrain_description("summer_meadow1").editor_category.name)
-   assert_equal("Summer", egbase:get_terrain_description("summer_meadow1").editor_category.descname)
-   assert_equal("wasteland",
-      egbase:get_terrain_description("wasteland_beach").editor_category.name)
-   assert_equal("Wasteland",
-      egbase:get_terrain_description("wasteland_beach").editor_category.descname)
-   assert_equal("desert",
-      egbase:get_terrain_description("desert_forested_mountain2").editor_category.name)
-   assert_equal("Desert",
-      egbase:get_terrain_description("desert_forested_mountain2").editor_category.descname)
-   assert_equal("winter",
-      egbase:get_terrain_description("winter_water").editor_category.name)
-   assert_equal("Winter",
-      egbase:get_terrain_description("winter_water").editor_category.descname)
 end
 
 function test_terrains_resource_descr:test_terrain_fertility()
@@ -162,19 +145,19 @@ function test_terrains_resource_descr:test_terrain_temperature()
 end
 
 function test_terrains_resource_descr:test_terrain_representative_image()
-   assert_equal("world/terrains/pics/summer/meadow1_00.png",
+   assert_equal("world/terrains/summer/meadow1/idle.png",
       egbase:get_terrain_description("summer_meadow1").representative_image)
-   assert_equal("world/terrains/pics/wasteland/beach_00.png",
+   assert_equal("world/terrains/wasteland/beach/idle.png",
       egbase:get_terrain_description("wasteland_beach").representative_image)
-   assert_equal("world/terrains/pics/desert/forested_mountain2_00.png",
+   assert_equal("world/terrains/desert/forested_mountain2/idle.png",
       egbase:get_terrain_description("desert_forested_mountain2").representative_image)
-   assert_equal("world/terrains/pics/winter/water/water_00.png",
+   assert_equal("world/terrains/winter/water/water_00.png",
       egbase:get_terrain_description("winter_water").representative_image)
 end
 
 function test_terrains_resource_descr:test_valid_resources()
-   assert_equal("water", egbase:get_terrain_description("summer_meadow1").valid_resources[1].name)
+   assert_equal("resource_water", egbase:get_terrain_description("summer_meadow1").valid_resources[1].name)
    assert_equal(0, #egbase:get_terrain_description("wasteland_beach").valid_resources)
    assert_equal(4, #egbase:get_terrain_description("desert_forested_mountain2").valid_resources)
-   assert_equal("fish", egbase:get_terrain_description("winter_water").valid_resources[1].name)
+   assert_equal("resource_fish", egbase:get_terrain_description("winter_water").valid_resources[1].name)
 end

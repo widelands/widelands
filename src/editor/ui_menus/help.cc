@@ -20,6 +20,7 @@
 #include "editor/ui_menus/help.h"
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "editor/editorinteractive.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_interface.h"
@@ -33,7 +34,7 @@ EditorHelp::EditorHelp(EditorInteractive& parent,
 	try {
 		init(parent, lua_->run_script("scripting/editor/editor_help.lua"));
 	} catch (LuaError& err) {
-		log("Error loading script for editor help:\n%s\n", err.what());
+		log_err("Error loading script for editor help:\n%s\n", err.what());
 		UI::WLMessageBox wmb(
 		   &parent, _("Error!"),
 		   (boost::format("Error loading script for editor help:\n%s") % err.what()).str(),

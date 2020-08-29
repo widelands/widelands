@@ -21,6 +21,7 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -45,6 +46,33 @@ void write_lua_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string&
 		void* input_data = map_fs->load(script, length);
 		target_fs.write(script, input_data, length);
 		free(input_data);
+	}
+}
+
+// Write a selection of .lua files and all .png files that exist in the given 'path' in 'map_fs' to
+// the 'target_fs'.
+void write_tribes_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string& path) {
+	assert(map_fs);
+	target_fs.ensure_directory_exists(path);
+	for (const std::string& file : map_fs->list_directory(path)) {
+		if (map_fs->is_directory(file)) {
+			// Write subdirectories
+			write_tribes_dir(target_fs, map_fs, file);
+		} else {
+			// Write file
+			const std::string filename(map_fs->fs_filename(file.c_str()));
+			if (filename == "init.lua" || filename == "register.lua" || filename == "helptexts.lua" ||
+			    boost::ends_with(filename, ".png")) {
+				size_t length;
+				void* input_data = map_fs->load(file, length);
+				target_fs.write(file, input_data, length);
+				free(input_data);
+			} else {
+				log_warn("File name '%s' is not allowed in scenario tribes – expecting "
+				         "'init.lua', 'register.lua', 'helptexts.lua' or a *.png file\n",
+				         file.c_str());
+			}
+		}
 	}
 }
 }  // namespace
@@ -81,8 +109,8 @@ void MapScriptingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	if (map_fs) {
 		write_lua_dir(fs, map_fs, "scripting");
 		// Write any custom scenario tribe entities
-		if (map_fs->file_exists("scripting/tribes/init.lua")) {
-			write_lua_dir(fs, map_fs, "scripting/tribes");
+		if (map_fs->file_exists("scripting/tribes")) {
+			write_tribes_dir(fs, map_fs, "scripting/tribes");
 		}
 	}
 

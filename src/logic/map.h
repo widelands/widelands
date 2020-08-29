@@ -20,7 +20,10 @@
 #ifndef WL_LOGIC_MAP_H
 #define WL_LOGIC_MAP_H
 
+#include <map>
 #include <memory>
+#include <set>
+#include <string>
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
@@ -41,6 +44,7 @@ struct S2MapLoader;
 namespace Widelands {
 
 class CritterDescr;
+class EditorGameBase;
 class MapLoader;
 struct MapGenerator;
 struct PathfieldManager;
@@ -603,7 +607,7 @@ private:
 	                   bool* ismine = nullptr,
 	                   bool consider_mobs = true,
 	                   NodeCaps initcaps = CAPS_NONE) const;
-	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const;
+	bool is_cycle_connected(const FCoords& start, const std::vector<WalkingDir>&) const;
 	template <typename functorT>
 	void
 	find_reachable(const EditorGameBase&, const Area<FCoords>&, const CheckStep&, functorT&) const;

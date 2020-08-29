@@ -8,26 +8,7 @@
 --
 -- Critters are defined in
 -- ``data/world/critters/<critter_name>/init.lua``.
-
-dirname = path.dirname(__file__)
-
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 9, 12 },
-      fps = 20,
-   },
-   eating = {
-      directory = dirname,
-      basename = "idle", -- TODO(Nordfriese): Make animation
-      hotspot = { 9, 12 },
-      fps = 20,
-   }
-}
-
-add_directional_animation(animations, "walk", dirname, "walk", {13, 15}, 20)
-
--- RST
+--
 -- .. function:: new_critter_type{table}
 --
 --    This function adds the definition of a critter to the engine.
@@ -44,8 +25,11 @@ add_directional_animation(animations, "walk", dirname, "walk", {13, 15}, 20)
 --
 --            descname = _"Badger",
 --
+--    **animation_directory**
+--        *Mandatory*. The location of the animation png files.
+--
 --    **editor_category**
---        *Mandatory*. The category that is used in the editor tools for placing a critter of this type on the map, e.g.::
+--        *Deprecated*. The category that is used in the editor tools for placing a critter of this type on the map, e.g.::
 --
 --            editor_category = "critters_carnivores",
 --
@@ -90,17 +74,34 @@ add_directional_animation(animations, "walk", dirname, "walk", {13, 15}, 20)
 --        *Mandatory*. A table containing all animations for this critter. Every critter
 --        needs to have an ``idle`` and a directional ``walk`` animation. Herbivores and carnivores additionally need an ``eating`` animation.
 --        See :doc:`animations` for a detailed description of the animation format.
-world:new_critter_type{
+
+wl.World():new_critter_type{
    name = "badger",
    descname = _ "Badger",
-   editor_category = "critters_carnivores",
-   attributes = { "eatable" },
+   animation_directory = path.dirname(__file__),
    programs = {
       remove = { "remove" },
    },
-   animations = animations,
    size = 4,
    reproduction_rate = 70,
    appetite = 50,
    carnivore = true,
+
+   animations = {
+      idle = {
+         hotspot = { 9, 12 },
+         fps = 20,
+      },
+      eating = {
+         basename = "idle", -- TODO(Nordfriese): Make animation
+         hotspot = { 9, 12 },
+         fps = 20,
+      },
+      walk = {
+         hotspot = { 13, 15 },
+         fps = 20,
+         directional = true
+      }
+   }
+
 }

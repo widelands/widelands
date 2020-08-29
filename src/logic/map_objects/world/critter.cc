@@ -28,8 +28,7 @@
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/map_object_program.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/world/critter_program.h"
 #include "logic/map_objects/world/world.h"
 #include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_table.h"
@@ -96,16 +95,15 @@ bool Critter::run_remove(Game& game, State& state, const CritterAction&) {
 
 CritterDescr::CritterDescr(const std::string& init_descname,
                            const LuaTable& table,
-                           const World& world)
+                           const std::vector<std::string>& attribs)
    : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
-     editor_category_(nullptr),
      size_(table.get_int("size")),
      carnivore_(table.has_key("carnivore") && table.get_bool("carnivore")),
      appetite_(0),
      reproduction_rate_(table.get_int("reproduction_rate")) {
 	assign_directional_animation(&walk_anims_, "walk");
 
-	add_attributes(table.get_table("attributes")->array_entries<std::string>());
+	add_attributes(attribs);
 
 	if (size_ < 1 || size_ > 10) {
 		throw GameDataError(
@@ -147,20 +145,13 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
 		}
 	}
-	const DescriptionIndex editor_category_index =
-	   world.editor_critter_categories().get_index(table.get_string("editor_category"));
-	if (editor_category_index == Widelands::INVALID_INDEX) {
-		throw GameDataError(
-		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
-	}
-	editor_category_ = world.editor_critter_categories().get_mutable(editor_category_index);
 }
 
 CritterDescr::~CritterDescr() {
 }
 
 bool CritterDescr::is_swimming() const {
-	const static uint32_t swimming_attribute = get_attribute_id("swimming");
+	const static uint32_t swimming_attribute = get_attribute_id("swimming", true);
 	return has_attribute(swimming_attribute);
 }
 
@@ -179,10 +170,6 @@ CritterProgram const* CritterDescr::get_program(const std::string& program_name)
 
 uint32_t CritterDescr::movecaps() const {
 	return is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;
-}
-
-const EditorCategory* CritterDescr::editor_category() const {
-	return editor_category_;
 }
 
 /*
@@ -235,7 +222,7 @@ void Critter::start_task_program(Game& game, const std::string& programname) {
 
 void Critter::program_update(Game& game, State& state) {
 	if (get_signal().size()) {
-		molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
+		molog(game.get_gametime(), "[program]: Interrupted by signal '%s'\n", get_signal().c_str());
 		return pop_task(game);
 	}
 
@@ -337,7 +324,7 @@ void Critter::roam_update(Game& game, State& state) {
 		if (game.logic_rand() % kMinCritterLifetime <
 		    d * kMinCritterLifetime * nearby_critters1 * nearby_critters1 * nearby_critters2) {
 			// :(
-			molog("Goodbye world :(\n");
+			molog(game.get_gametime(), "Goodbye world :(\n");
 			return schedule_destroy(game);
 		}
 	}
@@ -399,11 +386,11 @@ void Critter::roam_update(Game& game, State& state) {
 				assert(can_eat_immovable);
 				upcast(Immovable, imm, get_position().field->get_immovable());
 				assert(imm);
-				molog("Yummy, I love a %s...\n", imm->descr().name().c_str());
+				molog(game.get_gametime(), "Yummy, I love a %s...\n", imm->descr().name().c_str());
 				imm->delay_growth(descr().get_size() * 2000);
 			} else {
 				Critter* food = candidates_for_eating[idx];
-				molog("Yummy, I love a %s...\n", food->descr().name().c_str());
+				molog(game.get_gametime(), "Yummy, I love a %s...\n", food->descr().name().c_str());
 				// find hunting partners
 				int32_t attacker_strength = 0;
 				int32_t defender_strength = 0;
@@ -434,15 +421,16 @@ void Critter::roam_update(Game& game, State& state) {
 				                      -(std::log(S * S + 1) - 2 * S * std::atan(S) - kPi * S -
 				                        std::log(N * N + 1) + N * (2 * std::atan(N) - kPi)) /
 				                         (2 * N * kPi);
-				molog("    *** [total strength %d] vs [prey %d] *** success chance %lf\n", S,
+				molog(game.get_gametime(),
+				      "    *** [total strength %d] vs [prey %d] *** success chance %lf\n", S,
 				      defender_strength, weighted_success_chance);
 				assert(weighted_success_chance >= 0.0);
 				assert(weighted_success_chance <= 1.0);
 				if (game.logic_rand() % (N != 0 ? N : 1) < weighted_success_chance * N) {
-					molog("    SUCCESS :)\n");
+					molog(game.get_gametime(), "    SUCCESS :)\n");
 					food->remove(game);
 				} else {
-					molog("    failed :(\n");
+					molog(game.get_gametime(), "    failed :(\n");
 					skipped = true;
 				}
 			}
@@ -479,7 +467,7 @@ void Critter::roam_update(Game& game, State& state) {
 		if ((game.logic_rand() % (reproduction_rate * reproduction_rate)) *
 		       std::exp2(weighted_population - mating_partners - 1) <
 		    reproduction_rate * reproduction_rate * weighted_population) {
-			molog("A cute little %s cub :)\n", descr().name().c_str());
+			molog(game.get_gametime(), "A cute little %s cub :)\n", descr().name().c_str());
 			game.create_critter(get_position(), descr().name());
 		}
 	}
@@ -546,7 +534,8 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 
 			if (critter_owner == "world") {
 				critter_name = lookup_table.lookup_critter(critter_name, packet_version);
-				descr = egbase.world().get_critter_descr(critter_name);
+				descr =
+				   egbase.world().get_critter_descr(egbase.mutable_world()->load_critter(critter_name));
 			} else {
 				throw GameDataError(
 				   "Tribes don't have critters %s/%s", critter_owner.c_str(), critter_name.c_str());

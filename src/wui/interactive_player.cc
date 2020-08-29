@@ -133,16 +133,35 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 		return;
 	}
 
-	if (player_field.constructionsite.becomes) {
-		assert(field.owner != nullptr);
-		player_field.constructionsite.draw(field.rendertarget_pixel, field.fcoords, scale,
-		                                   (info_to_draw & InfoToDraw::kShowBuildings),
-		                                   field.owner->get_playercolor(), dst);
-
-	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
+	if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
-		if (info_to_draw & InfoToDraw::kShowBuildings) {
+		if (building->type() == Widelands::MapObjectType::CONSTRUCTIONSITE) {
+			player_field.partially_finished_building.constructionsite.draw(
+			   field.rendertarget_pixel, field.fcoords, scale,
+			   (info_to_draw & InfoToDraw::kShowBuildings), field.owner->get_playercolor(), dst);
+		} else if (building->type() == Widelands::MapObjectType::DISMANTLESITE &&
+		           // TODO(Nordfriese): `building` can only be nullptr in savegame
+		           // compatibility cases – remove that check after v1.0
+		           player_field.partially_finished_building.dismantlesite.building) {
+			if (info_to_draw & InfoToDraw::kShowBuildings) {
+				dst->blit_animation(
+				   field.rendertarget_pixel, field.fcoords, scale,
+				   player_field.partially_finished_building.dismantlesite.building
+				      ->get_unoccupied_animation(),
+				   0, &field.owner->get_playercolor(), 1.f,
+				   100 -
+				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
+			} else {
+				dst->blit_animation(
+				   field.rendertarget_pixel, field.fcoords, scale,
+				   player_field.partially_finished_building.dismantlesite.building
+				      ->get_unoccupied_animation(),
+				   0, nullptr, Widelands::kBuildingSilhouetteOpacity,
+				   100 -
+				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
+			}
+		} else if (info_to_draw & InfoToDraw::kShowBuildings) {
 			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
 			                    building->get_unoccupied_animation(), 0,
 			                    &field.owner->get_playercolor());
@@ -184,7 +203,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      UI::DropdownType::kPictorialMenu,
                      UI::PanelStyle::kWui,
                      UI::ButtonStyle::kWuiPrimary),
-     grid_marker_pic_(g_gr->images().get("images/wui/overlays/grid_marker.png")) {
+     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")) {
 	add_main_menu();
 
 	set_display_flag(InteractiveBase::dfShowWorkareaOverlap, true);  // enable by default
@@ -243,7 +262,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 }
 
 void InteractivePlayer::add_statistics_menu() {
-	statisticsmenu_.set_image(g_gr->images().get("images/wui/menus/statistics.png"));
+	statisticsmenu_.set_image(g_image_cache->get("images/wui/menus/statistics.png"));
 	toolbar()->add(&statisticsmenu_);
 
 	menu_windows_.stats_seafaring.open_window = [this] {
@@ -282,31 +301,31 @@ void InteractivePlayer::rebuild_statistics_menu() {
 	if (egbase().map().allows_seafaring()) {
 		/** TRANSLATORS: An entry in the game's statistics menu */
 		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring,
-		                    g_gr->images().get("images/wui/menus/statistics_seafaring.png"), false,
+		                    g_image_cache->get("images/wui/menus/statistics_seafaring.png"), false,
 		                    "", "E");
 	}
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Soldiers"), StatisticsMenuEntry::kSoldiers,
-	                    g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
+	                    g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
 	                    "X");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
-	                    g_gr->images().get("images/wui/menus/statistics_stock.png"), false, "", "I");
+	                    g_image_cache->get("images/wui/menus/statistics_stock.png"), false, "", "I");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
-	                    g_gr->images().get("images/wui/menus/statistics_buildings.png"), false, "",
+	                    g_image_cache->get("images/wui/menus/statistics_buildings.png"), false, "",
 	                    "B");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare,
-	                    g_gr->images().get("images/wui/menus/statistics_wares.png"), false, "", "P");
+	                    g_image_cache->get("images/wui/menus/statistics_wares.png"), false, "", "P");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral,
-	                    g_gr->images().get("images/wui/menus/statistics_general.png"), false, "",
+	                    g_image_cache->get("images/wui/menus/statistics_general.png"), false, "",
 	                    "G");
 }
 
@@ -348,7 +367,7 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	       * are highlighted */
 	      _("Show Workarea Overlaps"),
 	   ShowHideEntry::kWorkareaOverlap,
-	   g_gr->images().get("images/wui/menus/show_workarea_overlap.png"), false,
+	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"), false,
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), "W");
 }
 
@@ -397,7 +416,7 @@ void InteractivePlayer::think() {
 			    nr_new_messages)
 			      .str();
 		}
-		toggle_message_menu_->set_pic(g_gr->images().get(msg_icon));
+		toggle_message_menu_->set_pic(g_image_cache->get(msg_icon));
 		toggle_message_menu_->set_tooltip(msg_tooltip);
 	}
 
@@ -462,29 +481,28 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 
 		// Add road building overlays if applicable.
-		const InfoToDraw info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			draw_road_building(*f);
 
 			draw_bridges(dst, f, f->seeing == Widelands::SeeUnseeNode::kVisible ? gametime : 0, scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
-		}
 
-		// Render stuff that belongs to the node.
-		if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
-			draw_immovables_for_visible_field(
-			   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
-			draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
-		} else if (deferred_coords.count(f->fcoords) > 0) {
-			// This is the main position of a building that is visible on another field
-			// so although this field isn't visible we draw the building as if it was.
-			draw_immovables_for_visible_field(
-			   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
-		} else {
-			// We never show census or statistics for objects in the fog.
-			// We also call this for unexplored fields in case they contain a building
-			// that was previously partially seen.
-			draw_immovable_for_formerly_visible_field(*f, info_to_draw, player_field, scale, dst);
+			// Draw immovables and bobs.
+			const InfoToDraw info_to_draw = get_info_to_draw(!given_map_view->is_animating());
+
+			if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
+				draw_immovables_for_visible_field(
+				   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
+				draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
+			} else if (deferred_coords.count(f->fcoords) > 0) {
+				// This is the main position of a building that is visible on another field
+				// so although this field isn't visible we draw the building as if it was.
+				draw_immovables_for_visible_field(
+				   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
+			} else {
+				// We never show census or statistics for objects in the fog.
+				draw_immovable_for_formerly_visible_field(*f, info_to_draw, player_field, scale, dst);
+			}
 		}
 
 		// Draw work area markers.

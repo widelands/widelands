@@ -16,7 +16,7 @@ tribes:new_worker_type {
 
    programs = {
       expedition = {
-         "repeatsearch=15 5 search"
+         "repeatsearch=search repetitions:15 radius:5"
       },
       search = {
          "animate=hacking duration:3s",

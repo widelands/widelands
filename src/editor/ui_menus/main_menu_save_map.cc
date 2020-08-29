@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
@@ -113,6 +114,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions&) { update_map_options(); });
 
+	fill_table();
 	layout();
 }
 
@@ -177,9 +179,9 @@ void MainMenuSaveMap::clicked_make_directory() {
 					//  Create directory.
 					g_fs->make_directory(fullname);
 				} catch (const FileError& e) {
-					log("directory creation failed in MainMenuSaveMap::"
-					    "clicked_make_directory: %s\n",
-					    e.what());
+					log_err("directory creation failed in MainMenuSaveMap::"
+					        "clicked_make_directory: %s\n",
+					        e.what());
 					const std::string s =
 					   (boost::format(_("Error while creating directory ‘%s’.")) % fullname).str();
 					UI::WLMessageBox mbox(
@@ -335,7 +337,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	}
 
 	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
-	egbase.step_loader_ui(_("Saving the map…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Saving the map…")));
 
 	// Try saving the map.
 	GenericSaveHandler gsh(

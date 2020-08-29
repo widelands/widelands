@@ -20,7 +20,7 @@
 #ifndef WL_LOGIC_MESSAGE_H
 #define WL_LOGIC_MESSAGE_H
 
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
@@ -72,7 +72,7 @@ struct Message {
 	     sub_type_(subt),
 	     title_(init_title),
 	     icon_filename_(init_icon_filename),
-	     icon_(g_gr->images().get(init_icon_filename)),
+	     icon_(g_image_cache->get(init_icon_filename)),
 	     heading_(init_heading),
 	     body_(init_body),
 	     sent_(sent_time),

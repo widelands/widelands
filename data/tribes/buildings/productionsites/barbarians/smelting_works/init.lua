@@ -51,7 +51,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -68,9 +68,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
             "sleep=duration:29s",
-            "playsound=sound/metal/furnace 192",
+            "playsound=sound/metal/furnace priority:50% allow_multiple",
             "animate=working duration:35s",
-            "playsound=sound/metal/ironping 80",
+            "playsound=sound/metal/ironping priority:60%",
             "produce=iron"
          }
       },
@@ -81,9 +81,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
             "sleep=duration:29s",
-            "playsound=sound/metal/furnace 192",
+            "playsound=sound/metal/furnace priority:50% allow_multiple",
             "animate=working duration:35s",
-            "playsound=sound/metal/ironping 80",
+            "playsound=sound/metal/ironping priority:60%",
             "produce=iron"
          }
       },
@@ -94,9 +94,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs gold",
             "consume=coal gold_ore",
             "sleep=duration:29s",
-            "playsound=sound/metal/furnace 192",
+            "playsound=sound/metal/furnace priority:50% allow_multiple",
             "animate=working duration:35s",
-            "playsound=sound/metal/goldping 80",
+            "playsound=sound/metal/goldping priority:60%",
             "produce=gold"
          }
       },

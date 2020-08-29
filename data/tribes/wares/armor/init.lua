@@ -44,9 +44,13 @@ dirname = path.dirname(__file__)
 --    If set to zero the economy will not demand this ware unless it is required in a
 --    production building. If not set or set to zero the actual target quantity will
 --    not be available in the economy settings window.
+--    **NOTE: This parameter has been shifted to tribes initialization in the current
+--    development version.**
 --
 --    **preciousness**: How precious this ware is to each tribe. For example,
 --    ``{ atlanteans = 0, empire = 1 }``. We recommend not going higher than ``25``.
+--    **NOTE: This parameter has been shifted to tribes initialization in the current
+--    development version.**
 --
 --    **animations**: A table containing all animations for this ware.
 --    Wares have an "idle" animation.
@@ -58,12 +62,7 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Armor"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      empire = 1
-   },
-   preciousness = {
-      empire = 0
-   },
+
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle.png"),

@@ -21,9 +21,7 @@
 
 #include <memory>
 
-#include "graphic/graphic.h"
 #include "io/profile.h"
-#include "logic/editor_game_base.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
@@ -66,20 +64,20 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
      save_profile_dialog_(nullptr) {
 	set_center_panel(&main_box_);
 
-	tabpanel_.add("wares", g_gr->images().get(pic_tab_wares), ware_panel_, _("Wares"));
-	tabpanel_.add("workers", g_gr->images().get(pic_tab_workers), worker_panel_, _("Workers"));
+	tabpanel_.add("wares", g_image_cache->get(pic_tab_wares), ware_panel_, _("Wares"));
+	tabpanel_.add("workers", g_image_cache->get(pic_tab_workers), worker_panel_, _("Workers"));
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 	UI::Button* b = new UI::Button(
 	   buttons, "decrease_target_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
-	   g_gr->images().get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));
+	   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));
 	b->sigclicked.connect([this] { change_target(-10); });
 	buttons->add(b);
 	b->set_repeating(true);
 	b->set_enabled(can_act);
 	buttons->add_space(6);
 	b = new UI::Button(buttons, "decrease_target", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/ui_basic/scrollbar_down.png"),
+	                   g_image_cache->get("images/ui_basic/scrollbar_down.png"),
 	                   _("Decrease target"));
 	b->sigclicked.connect([this] { change_target(-1); });
 	buttons->add(b);
@@ -88,7 +86,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	buttons->add_space(6);
 
 	b = new UI::Button(buttons, "toggle_infinite", 0, 0, 32, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/wui/menus/infinity.png"),
+	                   g_image_cache->get("images/wui/menus/infinity.png"),
 	                   _("Toggle infinite target"));
 	b->sigclicked.connect([this] { toggle_infinite(); });
 	buttons->add(b);
@@ -97,14 +95,14 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	buttons->add_space(6);
 
 	b = new UI::Button(buttons, "increase_target", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/ui_basic/scrollbar_up.png"), _("Increase target"));
+	                   g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Increase target"));
 	b->sigclicked.connect([this] { change_target(1); });
 	buttons->add(b);
 	b->set_repeating(true);
 	b->set_enabled(can_act);
 	buttons->add_space(6);
 	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/ui_basic/scrollbar_up_fast.png"),
+	                   g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"),
 	                   _("Increase target by 10"));
 	b->sigclicked.connect([this] { change_target(10); });
 	buttons->add(b);
@@ -121,7 +119,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	}
 
 	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-	                   g_gr->images().get("images/wui/menus/save_game.png"),
+	                   g_image_cache->get("images/wui/menus/save_game.png"),
 	                   _("Save target settings"));
 	b->sigclicked.connect([this] { create_target(); });
 	dropdown_box_.add_space(8);
@@ -256,7 +254,7 @@ EconomyOptionsWindow::TargetWaresDisplay::info_for_ware(Widelands::DescriptionIn
 	const Widelands::Quantity amount = economy->target_quantity(ware).permanent;
 	if (amount == Widelands::kEconomyTargetInfinity) {
 		/** TRANSLATORS: Infinite number of wares or workers */
-		return g_gr->styles().font_style(UI::FontStyle::kLabel).as_font_tag(_("∞"));
+		return g_style_manager->font_style(UI::FontStyle::kLabel).as_font_tag(_("∞"));
 	}
 	return boost::lexical_cast<std::string>(amount);
 }

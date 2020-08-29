@@ -19,6 +19,7 @@
 
 #include "graphic/gl/fields_to_draw.h"
 
+#include "base/log.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -112,8 +113,9 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 	size_t dimension = w_ * h_;
 	const size_t max_dimension = fields_.max_size();
 	if (dimension > max_dimension) {
-		log("WARNING: Not enough memory allocated to redraw the whole map!\nWe recommend that you "
-		    "restart Widelands\n");
+		log_warn_time(egbase.get_gametime(),
+		              "Not enough memory allocated to redraw the whole map!\nWe recommend that you "
+		              "restart Widelands\n");
 		dimension = max_dimension;
 	}
 	// Now resize the vector

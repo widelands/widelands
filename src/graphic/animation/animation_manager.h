@@ -76,4 +76,6 @@ private:
 	std::map<std::string, uint32_t> representative_animations_by_map_object_name_;
 };
 
+extern AnimationManager* g_animation_manager;
+
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_ANIMATION_MANAGER_H
