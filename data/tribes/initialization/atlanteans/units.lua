@@ -66,7 +66,8 @@
 --    display order in the user interface. Each subtable defines a column in the
 --    user interface, and in a current development version it contains subtables
 --    in turn for each ware referenced. The subtables define the ware's ``name``,
---    ``default_target_quantity`` and ``preciousness``, like this:
+--    ``default_target_quantity``, ``preciousness``, and :ref:`lua_tribes_tribes_helptexts`,
+--    like this:
 --
 --    .. code-block:: lua
 --
@@ -76,7 +77,11 @@
 --             {
 --                name = "granite",
 --                default_target_quantity = 20,
---                preciousness = 5
+--                preciousness = 5,
+--                helptexts = {
+--                   -- TRANSLATORS: Helptext for an atlantean ware: Granite
+--                   purpose = pgettext("ware", "Granite is a basic building material.")
+--                }
 --             },
 --             {
 --               ...
@@ -100,14 +105,21 @@
 --    display order in the user interface. Each subtable defines a column in the user
 --    interface, and in a current development version it contains subtables
 --    in turn for each worker referenced. The subtables define the worker's ``name``,
---    ``default_target_quantity`` and ``preciousness``, like this:
+--    ``default_target_quantity``, ``preciousness`` and :ref:`lua_tribes_tribes_helptexts`,
+--    like this:
 --
 --    .. code-block:: lua
 --
 --       workers_order = {
 --          {
 --             -- Carriers
---             { name = "atlanteans_carrier" },
+--             {
+--                name = "atlanteans_carrier",
+--                helptexts = {
+--                   -- TRANSLATORS: Helptext for an atlantean worker: Carrier
+--                   purpose = pgettext(workerctxt, "Carries items along your roads.")
+--                }
+--             },
 --             { name = "atlanteans_ferry" },
 --             {
 --                name = "atlanteans_horse",
@@ -124,9 +136,37 @@
 --    However, when ``default_target_quantity`` has been set, you will also need
 --    to set ``preciousness``.
 --
---    **immovables**: This defines all the immovables that this tribe uses.
+--    **immovables**: This defines the name and :ref:`lua_tribes_tribes_helptexts`
+--    for all the immovables that this tribe uses, like this:
 --
---    **buildings**: This defines all the buildings that this tribe uses and their display order in the user interface.
+--    .. code-block:: lua
+--
+--       immovables = {
+--          {
+--             name = "ashes",
+--             helptexts = {
+--                -- TRANSLATORS: Helptext for a tribe immovable: Ashes
+--                purpose = _("The remains of a destroyed building.")
+--             }
+--          },
+--          {
+--             ...
+--       }
+--
+--    **buildings**: This defines the name and :ref:`lua_tribes_tribes_helptexts`
+--    for all the buildings that this tribe uses and their display order in the user interface, like this:
+--
+--    .. code-block:: lua
+--
+--       buildings = {
+--          {
+--             name = "atlanteans_shipyard",
+--             helptexts = {
+--                -- TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
+--                purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports.")
+--             }
+--          },
+--       }
 --
 --    **builder**:  The internal name of the tribe's builder. This unit needs to be defined in the ``workers_order`` table too.
 --
@@ -156,34 +196,36 @@
 --          right_corner = dirname .. "images/atlanteans/toolbar_right_corner.png"
 --       }
 --
-
--- NOCOM documentation
-
--- RST
+--
 -- .. _lua_tribes_tribes_helptexts:
 --
 -- Helptexts
 -- ---------
 --
--- Helptexts are defined in ``tribes/initialization/<tribename>/helptexts.lua`` and linked to from :ref:`units.lua <lua_tribes_tribes_units>`.
+-- Helptexts are used in the Tribal Encyclopedia to give the users some basic
+-- information and lore about units.
+-- They are optional and defined in a ``helptexts`` subtable in the unit's listing.
 --
---
--- You will need to return a table of helptexts by map object type and category. It looks like this:
+-- Example for a building:
 --
 -- .. code-block:: lua
 --
---    push_textdomain("tribes_encyclopedia")
---    local result = {
---       buildings {
---          barbarians_ax_workshop = {
+--    buildings = {
+--       {
+--          name = "barbarians_ax_workshop",
+--          helptexts = {
 --             -- TRANSLATORS: Lore helptext for a barbarian production site: Ax Workshop
 --             lore = pgettext("barbarians_building", "‘A new warrior’s ax brings forth the best in its wielder – or the worst in its maker.’"),
+--
 --             -- TRANSLATORS: Lore author helptext for a barbarian production site: Ax Workshop
 --             lore_author = pgettext("barbarians_building", "An old Barbarian proverb<br> meaning that you need to take some risks sometimes."),
+--
 --             -- TRANSLATORS: Purpose helptext for a barbarian production site: Ax Workshop
 --             purpose = pgettext("barbarians_building", "Produces axes, sharp axes and broad axes."),
+--
 --             -- TRANSLATORS: Note helptext for a barbarian production site: Ax Workshop
 --             note = pgettext("barbarians_building", "The Barbarian ax workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualification for the worker."),
+--
 --             performance = {
 --                -- TRANSLATORS: Performance helptext for a barbarian production site: Ax Workshop, part 1
 --                pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(ngettext("%d second", "%d seconds", 57):bformat(57)),
@@ -203,14 +245,12 @@
 --          ...
 --       }
 --    }
---    pop_textdomain()
---    return result
 --
--- * All units should have a ``purpose`` helptext, but this it not enforced by the engine.
---   In fact, the game will still run if ``buildings``, ``immovables``, ``wares`` and ``workers`` are all empty.
---   However, these 4 table keys and their subtables do need to be present (except in custom scenario tribes).
+-- * All units should have a ``purpose`` helptext, but this is not enforced by the engine.
+-- * Empty helptexts are allowed, although they will log a warning to the console to
+--   help you find missing helptexts.
 -- * ``lore``, ``lore_author`` and ``note`` are only used by buildings,
---   `performance`` is only used by training site and production site buildings.
+--   ``performance`` is only used by training site and production site buildings.
 -- * We recommend that you use ``pgettext`` to disambiguate the strings for the different tribes.
 -- * To make life easier for our translators, you can split long helptexts into multiple entries
 --   as with the ``performance`` example above.
