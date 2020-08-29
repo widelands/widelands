@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/warning.h"
 #include "graphic/playercolor.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -447,8 +448,8 @@ void FullscreenMenuLaunchMPG::refresh() {
 			      .str());
 
 		} catch (LuaTableKeyError& e) {
-			log("LaunchMPG: Error loading win condition: %s %s\n",
-			    settings_->get_win_condition_script().c_str(), e.what());
+			log_err("LaunchMPG: Error loading win condition: %s %s\n",
+			        settings_->get_win_condition_script().c_str(), e.what());
 		}
 		win_condition_dropdown_.set_enabled(false);
 	}

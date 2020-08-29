@@ -102,6 +102,7 @@ wl_library(ui_fsmenu_gameloading
   DEPENDS
     base_exceptions
     base_i18n
+    base_log
     graphic_playercolor
     io_filesystem
     io_profile
@@ -170,7 +171,6 @@ wl_library(ui_fsmenu_network
     netsetup_lan.h
   DEPENDS
     base_i18n
-    base_log
     base_random
     build_info
     graphic_image_cache
@@ -191,6 +191,7 @@ wl_library(ui_fsmenu_misc
     intro.h
   DEPENDS
     base_i18n
+    base_log
     scripting_lua_interface
     scripting_lua_table
     ui_basic

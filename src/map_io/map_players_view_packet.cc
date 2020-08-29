@@ -49,8 +49,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 	FileRead fr;
 	if (!fr.try_open(fs, "binary/view")) {
 		// TODO(Nordfriese): Savegame compatibility – require this packet after v1.0
-		log("WARNING: New-style view packet not found. There may be strange effects regarding unseen "
-		    "areas.\n");
+		log_warn("New-style view packet not found. There may be strange effects regarding unseen "
+		         "areas.\n");
 		return;
 	}
 
