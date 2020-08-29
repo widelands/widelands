@@ -22,7 +22,6 @@
 #include "base/macros.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
-#include "graphic/graphic.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
@@ -291,7 +290,7 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
                                     const std::string& picname,
                                     const std::function<void()>& callback) {
 	UI::Button* btn = new UI::Button(
-	   parent, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, g_gr->images().get(picname), title);
+	   parent, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, g_image_cache->get(picname), title);
 	btn->sigclicked.connect(callback);
 	return btn;
 }

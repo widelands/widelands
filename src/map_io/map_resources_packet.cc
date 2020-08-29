@@ -19,7 +19,6 @@
 
 #include "map_io/map_resources_packet.h"
 
-#include "base/log.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"

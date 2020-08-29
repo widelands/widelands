@@ -21,6 +21,7 @@
 
 #include <boost/algorithm/string.hpp>
 
+#include "base/log.h"
 #include "economy/economy.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
@@ -544,8 +545,8 @@ static void push_table_recursively(lua_State* L,
 			                       type_section, size_section);
 		} else {
 			// this code should not be reached unless the user manually edited the .wcd file
-			log("Illegal data type %s in campaign data file, setting key %s to nil\n", type.c_str(),
-			    luaL_checkstring(L, -1));
+			log_warn("Illegal data type %s in campaign data file, setting key %s to nil\n",
+			         type.c_str(), luaL_checkstring(L, -1));
 			lua_pushnil(L);
 		}
 		lua_settable(L, -3);
@@ -580,7 +581,7 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 	Section* size_section = profile.get_section("size");
 	if (data_section == nullptr || keys_section == nullptr || type_section == nullptr ||
 	    size_section == nullptr) {
-		log("Unable to read campaign data file, returning nil\n");
+		log_warn("Unable to read campaign data file, returning nil\n");
 		lua_pushnil(L);
 	} else {
 		push_table_recursively(L, "", data_section, keys_section, type_section, size_section);

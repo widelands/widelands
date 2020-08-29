@@ -24,7 +24,6 @@
 #include <SDL_image.h>
 #include <png.h>
 
-#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"

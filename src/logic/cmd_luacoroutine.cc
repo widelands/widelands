@@ -48,9 +48,9 @@ void CmdLuaCoroutine::execute(Game& game) {
 			cr_.reset();
 		}
 	} catch (LuaError& e) {
-		log("Error in Lua Coroutine\n");
-		log("%s\n", e.what());
-		log("Send message to all players and pause game\n");
+		log_err_time(game.get_gametime(), "Error in Lua Coroutine\n");
+		log_err_time(game.get_gametime(), "%s\n", e.what());
+		log_err_time(game.get_gametime(), "Send message to all players and pause game\n");
 		const std::string error_message = richtext_escape(e.what());
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
 			// Send message only to open player slots
