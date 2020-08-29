@@ -172,8 +172,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 
 			if (program_name == "work") {
 				log_warn("The main program for the building %s should be renamed from 'work' to "
-				    "'main'",
-				    name().c_str());
+				         "'main'",
+				         name().c_str());
 				programs_[MapObjectProgram::kMainProgram] =
 				   std::unique_ptr<ProductionProgram>(new ProductionProgram(
 				      MapObjectProgram::kMainProgram, *program_table, tribes, world, this));

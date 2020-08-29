@@ -242,8 +242,8 @@ void Tribes::add_tribe_object_type(const LuaTable& table, World& world, MapObjec
 
 	// TODO(GunChleoc): Compatibility, remove after v1.0
 	if (table.has_key<std::string>("msgctxt")) {
-		log_warn("The 'msgctxt' entry is no longer needed in '%s', please remove it",
-		    type_name.c_str());
+		log_warn(
+		   "The 'msgctxt' entry is no longer needed in '%s', please remove it", type_name.c_str());
 	}
 
 	description_manager_->mark_loading_in_progress(type_name);
