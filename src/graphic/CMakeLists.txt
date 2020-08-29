@@ -66,7 +66,6 @@ wl_library(graphic_image_io
   USES_SDL2_IMAGE
   DEPENDS
     base_exceptions
-    base_log
     base_multithreading
     graphic_surface
     io_fileread

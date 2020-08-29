@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "graphic/image_cache.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
