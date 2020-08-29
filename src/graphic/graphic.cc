@@ -95,9 +95,11 @@ void Graphic::initialize(const TraceGl& trace_gl,
 
 	max_texture_size_ = static_cast<int>(max);
 
-	resolution_changed();
 	set_fullscreen(init_fullscreen);
-	set_maximized(init_maximized);
+	if (init_maximized) {
+		set_maximized(true);
+	}
+	resolution_changed();
 
 	SDL_SetWindowTitle(sdl_window_, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 	set_icon(sdl_window_);
@@ -250,6 +252,7 @@ bool Graphic::maximized() const {
 }
 
 void Graphic::set_maximized(const bool to_maximize) {
+	window_mode_maximized_ = to_maximize;
 	if (fullscreen() || maximized() == to_maximize) {
 		return;
 	}
@@ -277,8 +280,9 @@ void Graphic::set_fullscreen(const bool value) {
 	// it at the full resolution of the desktop and we want to know about the
 	// true resolution (SDL supports hiding the true resolution from the
 	// application). Since SDL ignores requests to change the size of the window
-	// whet fullscreen, we do it when in windowed mode.
+	// when fullscreen, we do it when in windowed mode.
 	if (value) {
+		window_mode_maximized_ = maximized();
 		SDL_DisplayMode display_mode;
 		SDL_GetDesktopDisplayMode(SDL_GetWindowDisplayIndex(sdl_window_), &display_mode);
 		set_window_size(display_mode.w, display_mode.h);
@@ -288,7 +292,9 @@ void Graphic::set_fullscreen(const bool value) {
 		SDL_SetWindowFullscreen(sdl_window_, 0);
 
 		// Next line does not work. See comment in refresh().
+		// Note(Niektory): For me it works. I'm keeping the fail-safe just in case.
 		set_window_size(window_mode_width_, window_mode_height_);
+		set_maximized(window_mode_maximized_);
 	}
 	resolution_changed();
 }
@@ -309,6 +315,8 @@ void Graphic::refresh() {
 		if (true_width != window_mode_width_ || true_height != window_mode_height_) {
 			log("++ refresh(): resizing %dx%d to %dx%d\n", true_width, true_height, window_mode_width_, window_mode_height_);
 			set_window_size(window_mode_width_, window_mode_height_);
+			set_maximized(window_mode_maximized_);
+			resolution_changed();
 		}
 	}
 

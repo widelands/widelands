@@ -43,6 +43,7 @@ public:
 		// Interface options
 		int32_t xres;
 		int32_t yres;
+		bool maximized;
 		bool fullscreen;
 		bool inputgrab;
 		uint32_t maxfps;
@@ -128,8 +129,7 @@ private:
 
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
-	UI::Dropdown<uintptr_t> resolution_dropdown_;
-	UI::Checkbox fullscreen_;
+	UI::Dropdown<int> resolution_dropdown_;
 	UI::Checkbox inputgrab_;
 	UI::Checkbox sdl_cursor_;
 	UI::SpinBox sb_maxfps_;

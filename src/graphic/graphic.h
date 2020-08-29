@@ -88,6 +88,7 @@ private:
 	// The height & width of the window should we be in window mode.
 	int window_mode_width_ = 0;
 	int window_mode_height_ = 0;
+	bool window_mode_maximized_ = false;
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
