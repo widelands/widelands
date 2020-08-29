@@ -421,7 +421,9 @@ run(function()
    verify_buildings(playernumber, expected_number_of_buildings)
 
    -- Sleep a bit so the tribe units can run some programs
-   sleep_with_fps(30 * 10)
+   -- sleep_with_fps(30 * 10)
+   game.desired_speed = 1000
+   sleep(300000)
 
    -- Test saveloading and verify the buildings again
    stable_save(game, "atlantean_tribe", 1000)
