@@ -176,6 +176,8 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string immovable_name = luaL_checkstring(L, 2);
+	Notifications::publish(
+	   NoteMapObjectDescription(immovable_name, NoteMapObjectDescription::LoadType::kObject));
 	EditorGameBase& egbase = get_egbase(L);
 	const World& world = egbase.world();
 	DescriptionIndex idx = world.get_immovable_index(immovable_name);
@@ -207,6 +209,8 @@ int LuaEditorGameBase::tribe_immovable_exists(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string immovable_name = luaL_checkstring(L, 2);
+	Notifications::publish(
+	   NoteMapObjectDescription(immovable_name, NoteMapObjectDescription::LoadType::kObject));
 	lua_pushboolean(L, get_egbase(L).tribes().immovable_index(immovable_name) != INVALID_INDEX);
 	return 1;
 }
@@ -224,15 +228,14 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	Tribes* tribes = get_egbase(L).mutable_tribes();
 	const std::string building_name = luaL_checkstring(L, 2);
-	const DescriptionIndex building_index = tribes.building_index(building_name);
-	if (!tribes.building_exists(building_index)) {
+	try {
+		const BuildingDescr* building_description = tribes->get_building_descr(tribes->load_building(building_name));
+		return LuaMaps::upcasted_map_object_descr_to_lua(L, building_description);
+	} catch (const Widelands::GameDataError&) {
 		report_error(L, "Building %s does not exist", building_name.c_str());
 	}
-	const BuildingDescr* building_description = tribes.get_building_descr(building_index);
-
-	return LuaMaps::upcasted_map_object_descr_to_lua(L, building_description);
 }
 
 /* RST
@@ -248,15 +251,14 @@ int LuaEditorGameBase::get_ship_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	Tribes* tribes = get_egbase(L).mutable_tribes();
 	const std::string ship_name = luaL_checkstring(L, 2);
-	const DescriptionIndex ship_index = tribes.ship_index(ship_name);
-	if (!tribes.ship_exists(ship_index)) {
+	try {
+		const ShipDescr* ship_description = tribes->get_ship_descr(tribes->load_ship(ship_name));
+		return LuaMaps::upcasted_map_object_descr_to_lua(L, ship_description);
+	} catch (const Widelands::GameDataError&) {
 		report_error(L, "Ship %s does not exist", ship_name.c_str());
 	}
-	const ShipDescr* ship_description = tribes.get_ship_descr(ship_index);
-
-	return LuaMaps::upcasted_map_object_descr_to_lua(L, ship_description);
 }
 /* RST
    .. function:: get_tribe_description(tribe_name)
@@ -273,15 +275,15 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 
-	const Tribes& tribes = get_egbase(L).tribes();
+	Tribes* tribes = get_egbase(L).mutable_tribes();
 	const std::string tribe_name = luaL_checkstring(L, 2);
-	if (!tribes.tribe_exists(tribe_name)) {
+	try {
+		const TribeDescr* tribe_description = tribes->get_tribe_descr(tribes->load_tribe(tribe_name));
+		return to_lua<LuaMaps::LuaTribeDescription>(
+		   L, new LuaMaps::LuaTribeDescription(tribe_description));
+	} catch (const Widelands::GameDataError&) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-
-	return to_lua<LuaMaps::LuaTribeDescription>(
-	   L, new LuaMaps::LuaTribeDescription(get_egbase(L).tribes().get_tribe_descr(
-	         get_egbase(L).mutable_tribes()->load_tribe(tribe_name))));
 }
 
 /* RST
@@ -297,14 +299,14 @@ int LuaEditorGameBase::get_ware_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	Tribes* tribes = get_egbase(L).mutable_tribes();
 	const std::string ware_name = luaL_checkstring(L, 2);
-	DescriptionIndex ware_index = tribes.ware_index(ware_name);
-	if (!tribes.ware_exists(ware_index)) {
+	try {
+		const WareDescr* ware_description = tribes->get_ware_descr(tribes->load_ware(ware_name));
+		return LuaMaps::upcasted_map_object_descr_to_lua(L, ware_description);
+	} catch (const Widelands::GameDataError&) {
 		report_error(L, "Ware %s does not exist", ware_name.c_str());
 	}
-	const WareDescr* ware_description = tribes.get_ware_descr(ware_index);
-	return LuaMaps::upcasted_map_object_descr_to_lua(L, ware_description);
 }
 
 /* RST
@@ -320,14 +322,14 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	Tribes* tribes = get_egbase(L).mutable_tribes();
 	const std::string worker_name = luaL_checkstring(L, 2);
-	const DescriptionIndex worker_index = tribes.worker_index(worker_name);
-	if (!tribes.worker_exists(worker_index)) {
+	try {
+		const WorkerDescr* worker_description = tribes->get_worker_descr(tribes->load_worker(worker_name));
+		return LuaMaps::upcasted_map_object_descr_to_lua(L, worker_description);
+	} catch (const Widelands::GameDataError&) {
 		report_error(L, "Worker %s does not exist", worker_name.c_str());
 	}
-	const WorkerDescr* worker_description = tribes.get_worker_descr(worker_index);
-	return LuaMaps::upcasted_map_object_descr_to_lua(L, worker_description);
 }
 
 /* RST
@@ -367,11 +369,13 @@ int LuaEditorGameBase::get_terrain_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string terrain_name = luaL_checkstring(L, 2);
-	const TerrainDescription* descr = get_egbase(L).world().terrain_descr(terrain_name);
-	if (!descr) {
+	World* world = get_egbase(L).mutable_world();
+	try {
+		const TerrainDescription& descr = world->terrain_descr(world->load_terrain(terrain_name));
+		return to_lua<LuaMaps::LuaTerrainDescription>(L, new LuaMaps::LuaTerrainDescription(&descr));
+	} catch (const Widelands::GameDataError&) {
 		report_error(L, "Terrain %s does not exist", terrain_name.c_str());
 	}
-	return to_lua<LuaMaps::LuaTerrainDescription>(L, new LuaMaps::LuaTerrainDescription(descr));
 }
 
 /* Helper function for save_campaign_data()
