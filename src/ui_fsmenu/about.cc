@@ -84,7 +84,7 @@ void FullscreenMenuAbout::layout() {
 	if (!is_minimal()) {
 		set_size(calc_desired_window_width(parent_), calc_desired_window_height(parent_));
 
-		close_.set_size(get_inner_w() / 2, get_h() / 20);
+		close_.set_size(get_inner_w() / 2, get_h() / 16);
 		close_.set_pos(Vector2i(get_inner_w() / 4, get_inner_h() - kPadding - close_.get_h()));
 
 		tabs_.set_size(get_inner_w(), get_inner_h() - close_.get_h() - 2 * kPadding);

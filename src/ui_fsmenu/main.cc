@@ -102,8 +102,8 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                 "",
                 UI::Align::kCenter,
                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
-     splashscreen_(*g_image_cache->get("loadscreens/splash.jpg")),
-     title_image_(*g_image_cache->get("loadscreens/logo.png")),
+     splashscreen_(*g_image_cache->get(std::string(kTemplateDir) + "loadscreens/splash.jpg")),
+     title_image_(*g_image_cache->get(std::string(kTemplateDir) + "loadscreens/logo.png")),
      init_time_(kNoSplash),
      last_image_exchange_time_(0),
      draw_image_(0),
@@ -153,7 +153,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 
 	addons_.set_enabled(false);  // Not yet implemented
 
-	for (const std::string& img : g_fs->list_directory("loadscreens/mainmenu")) {
+	for (const std::string& img : g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/mainmenu")) {
 		images_.push_back(img);
 	}
 	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT
