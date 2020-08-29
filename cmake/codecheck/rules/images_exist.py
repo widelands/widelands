@@ -9,9 +9,9 @@ import os.path
 import re
 
 
-FIND_LITERALS = re.compile(r"""g_gr->images\(\)\.get\("(.*?)"\)""")
+FIND_LITERALS = re.compile(r"""g_image_cache->get\("(.*?)"\)""")
 # We skip pointers and function calls here
-FIND_VARIABLE_NAMES = re.compile(r"""g_gr->images\(\)\.get\(([0-9a-zA-Z_-]*?)\)""")
+FIND_VARIABLE_NAMES = re.compile(r"""g_image_cache->get\(([0-9a-zA-Z_-]*?)\)""")
 
 # Find the data path
 base_path = os.getcwd()
@@ -75,13 +75,13 @@ def evaluate_matches(lines, fn):
 # File this is called on is always called testdir/test.h
 forbidden = [
     # Loading image file that does not exist
-    'g_gr->images().get("FoofakeImage")',
+    'g_image_cache->get("FoofakeImage")',
 ]
 
 allowed = [
     # Loading image file that exists
-    'g_gr->images().get("images/logos/wl-ico-128.png")',
-    'g_gr->images().get(kConstexpr)',
-    'g_gr->images().get("images/" + "foo/nonexistent.png")',
-    'g_gr->images().get((boost::format("images/%s") % "foo/nonexistent.png").str())',
+    'g_image_cache->get("images/logos/wl-ico-128.png")',
+    'g_image_cache->get(kConstexpr)',
+    'g_image_cache->get("images/" + "foo/nonexistent.png")',
+    'g_image_cache->get((boost::format("images/%s") % "foo/nonexistent.png").str())',
 ]
