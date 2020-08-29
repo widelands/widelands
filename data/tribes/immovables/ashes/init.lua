@@ -9,12 +9,7 @@
 --
 -- Tribe Immovables are defined in
 -- ``data/tribes/immovables/<immovable_name>/init.lua``.
-
-push_textdomain("tribes")
-
-dirname = path.dirname(__file__)
-
--- RST
+--
 -- .. function:: new_immovable_type(table)
 --
 --    This function adds the definition of a tribe immovable to the engine.
@@ -33,6 +28,43 @@ dirname = path.dirname(__file__)
 --
 --    **animations**: A table containing all animations for this immovable.
 --
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("tribes")
+--
+--    dirname = path.dirname(__file__)
+--
+--    tribes:new_immovable_type {
+--       name = "ashes",
+--       -- TRANSLATORS: This is an immovable name used in lists of immovables
+--       descname = pgettext("immovable", "Ashes"),
+--       anmation_directory = dirname,
+--       icon = dirname .. "menu.png",
+--       size = "small",
+--       programs = {
+--          main = {
+--             "animate=idle duration:45s",
+--             "remove=",
+--          }
+--       },
+--
+--       animations = {
+--          idle = {
+--             hotspot = { 40, 39 },
+--          },
+--       }
+--    }
+--
+--    pop_textdomain()
+
+push_textdomain("tribes")
+
+dirname = path.dirname(__file__)
+
 tribes:new_immovable_type {
    name = "ashes",
    -- TRANSLATORS: This is an immovable name used in lists of immovables

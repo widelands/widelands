@@ -9,12 +9,7 @@
 --
 -- Ships are defined in
 -- ``data/tribes/ships/<tribe_name>/init.lua``.
-
-push_textdomain("tribes")
-
-dirname = path.dirname(__file__)
-
--- RST
+--
 -- .. function:: new_ship_type(table)
 --
 --    This function adds the definition of a ship to the engine.
@@ -34,6 +29,49 @@ dirname = path.dirname(__file__)
 --
 --    **animations**: A table containing all animations for this ship.
 --    Ships have an "idle", a "sinking" and a directional "sail" animation.
+--
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("tribes")
+--
+--    dirname = path.dirname(__file__)
+--
+--    tribes:new_ship_type {
+--       name = "atlanteans_ship",
+--       -- TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
+--       descname = pgettext("atlanteans_ship", "Ship"),
+--       animation_directory = dirname,
+--       icon = dirname .. "menu.png",
+--       capacity = 30,
+--       vision_range = 4,
+--
+--       animations = {
+--          idle = {
+--             hotspot = { 89, 86 },
+--             fps = 10
+--          },
+--          sinking = {
+--             hotspot = { 89, 86 },
+--             fps = 7
+--          },
+--          sail = {
+--             hotspot = { 89, 86 },
+--             fps = 10,
+--             directional = true
+--          }
+--       }
+--    }
+--
+--    pop_textdomain()
+
+push_textdomain("tribes")
+
+dirname = path.dirname(__file__)
+
 tribes:new_ship_type {
    name = "atlanteans_ship",
    -- TRANSLATORS: This is the Atlanteans' ship's name used in lists of units

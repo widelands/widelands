@@ -14,12 +14,7 @@
 -- Fetching the helptext for a ware depends on the current tribe. So, best copy
 -- the function out of ``data/tribes/wares/bread_paddle/helptexts.lua``
 -- and use it as a base for creating your ware's helptexts.
-
-push_textdomain("tribes")
-
-dirname = path.dirname(__file__)
-
--- RST
+--
 -- .. function:: new_ware_type(table)
 --
 --    This function adds the definition of a ware to the engine.
@@ -53,6 +48,36 @@ dirname = path.dirname(__file__)
 --    **animations**: A table containing all animations for this ware.
 --    Wares have an "idle" animation.
 --
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("tribes")
+--
+--    dirname = path.dirname(__file__)
+--
+--    tribes:new_ware_type {
+--       name = "armor",
+--       -- TRANSLATORS: This is a ware name used in lists of wares
+--       descname = pgettext("ware", "Armor"),
+--       animation_directory = dirname,
+--       icon = dirname .. "menu.png",
+--
+--       animations = {
+--          idle = {
+--             hotspot = { 3, 11 },
+--          },
+--       }
+--    }
+--
+--    pop_textdomain()
+
+push_textdomain("tribes")
+
+dirname = path.dirname(__file__)
+
 tribes:new_ware_type {
    name = "armor",
    -- TRANSLATORS: This is a ware name used in lists of wares

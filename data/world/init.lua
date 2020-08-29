@@ -18,6 +18,8 @@
 -- * ``resources``: A list of all resources: ``{ "resource_coal", "resource_gold", ... }``
 -- * ``terrains``: A table of editor categories for placing terrains in the editor
 --
+-- For making the editor category names translatable, we also need to push/pop the correct textdomain.
+--
 -- An editor category has the following table entries:
 --
 -- **name**
@@ -45,35 +47,70 @@
 --
 -- .. code-block:: lua
 --
---    -- Items shown in the place critter tool. Each subtable is a tab in the tool.
---    critters = {
---       {
---          name = "critters_herbivores",
---          -- TRANSLATORS: A category in the editor for placing animals on the map.
---          descname = _"Herbivores",
---          picture = "world/critters/sheep/idle_00.png",
---          items_per_row = 10,
---          items = {
---             "bunny",
---             "sheep",
---          }
+--    push_textdomain("world")
+--
+--    local result = {
+--       -- Items shown in the place critter tool. Each subtable is a tab in the tool.
+--       critters = {
+--          {
+--             name = "critters_herbivores",
+--             -- TRANSLATORS: A category in the editor for placing animals on the map.
+--             descname = _"Herbivores",
+--             picture = "world/critters/sheep/idle_00.png",
+--             items_per_row = 10,
+--             items = {
+--                "bunny",
+--                "sheep",
+--             }
+--          },
+--          {
+--             name = "critters_carnivores",
+--             -- TRANSLATORS: A category in the editor for placing animals on the map.
+--             descname = _"Carnivores",
+--             picture = "world/critters/fox/idle_00.png",
+--             items_per_row = 10,
+--             items = {
+--                "marten",
+--                "badger",
+--                "lynx",
+--                "fox",
+--                "wolf",
+--                "brownbear",
+--             }
+--          },
+--          ...
 --       },
---       {
---          name = "critters_carnivores",
---          -- TRANSLATORS: A category in the editor for placing animals on the map.
---          descname = _"Carnivores",
---          picture = "world/critters/fox/idle_00.png",
---          items_per_row = 10,
---          items = {
---             "marten",
---             "badger",
---             "lynx",
---             "fox",
---             "wolf",
---             "brownbear",
---          }
+--
+--       -- Items shown in the place immovable tool. Each subtable is a tab in the tool.
+--       immovables = {
+--          {
+--             name = "immovables_miscellaneous",
+--             ...
+--          },
+--          ...
 --       },
---    },
+--
+--       -- Items shown in the set resources tool.
+--       resources = {
+--          "resource_coal",
+--          "resource_gold",
+--          "resource_iron",
+--          "resource_stones",
+--          "resource_water",
+--          "resource_fish",
+--       },
+--
+--       -- Items shown in the place terrain tool. Each subtable is a tab in the tool.
+--       terrains = {
+--          {
+--             name = "terrains_summer",
+--             ...
+--          },
+--          ...
+--       }
+--    }
+--    pop_textdomain()
+--    return result
 
 push_textdomain("world")
 

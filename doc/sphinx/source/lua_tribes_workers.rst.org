@@ -38,8 +38,9 @@ Workers are defined with Lua functions called ``new_<worker_type>_type{table}``.
     *Optional*. An int defining the default target quantity for the worker's
     tribe's economy. Use this if the worker is produced by a production site
     rather than the warehouses. For example, ``default_target_quantity = 10``
-    **NOTE: This parameter has been shifted to tribes initialization in the current
-    development version.**
+
+    .. note:: This parameter has been shifted to tribes initialization in the current
+       development version.**
 
 **experience**
     *Optional*. The amount of experience that the worker needs to gather
@@ -80,8 +81,69 @@ Workers are defined with Lua functions called ``new_<worker_type>_type{table}``.
         **preciousness**: How precious this worker is to each tribe. For example,
         ``{ atlanteans = 0, empire = 1 }``. You can use this for workers that are recruited.
 
-    **NOTE: This parameter has been shifted to tribes initialization in the current
-    development version.**
+    .. note:: This parameter has been shifted to tribes initialization in the current
+       development version.
+
+For making the UI texts translateable, we also need to push/pop the correct textdomain.
+
+Example:
+
+.. code-block:: lua
+
+    push_textdomain("tribes")
+
+    dirname = path.dirname (__file__)
+
+    tribes:new_worker_type {
+       name = "frisians_baker",
+       -- TRANSLATORS: This is a worker name used in lists of workers
+       descname = pgettext("frisians_worker", "Baker"),
+       icon = dirname .. "menu.png",
+       vision_range = 2,
+
+       buildcost = {
+          frisians_carrier = 1,
+          bread_paddle = 1
+       },
+
+       experience = 13,
+       becomes = "frisians_baker_master",
+
+       ware_hotspot = {0, 20},
+
+       spritesheets = {
+          walk = {
+             directory = dirname,
+             basename = "walk",
+             fps = 15,
+             frames = 10,
+             columns = 5,
+             rows = 2,
+             directional = true,
+             hotspot = {11, 23}
+          },
+          walkload = {
+             directory = dirname,
+             basename = "walkload",
+             fps = 15,
+             frames = 10,
+             columns = 5,
+             rows = 2,
+             directional = true,
+             hotspot = {10, 26}
+          },
+       },
+       animations = {
+          idle = {
+             directory = dirname,
+             basename = "idle",
+             hotspot = {8, 23}
+          },
+       },
+    }
+
+    pop_textdomain()
+
 
 .. _lua_tribes_workers_helptexts:
 

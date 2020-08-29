@@ -15,12 +15,7 @@
 -- ``data/tribes/buildings/warehouses/<tribe_name>/<building_name>/init.lua``.
 -- The building will also need its help texts, which are defined in
 -- ``data/tribes/buildings/warehouses/<tribe_name>/<building_name>/helptexts.lua``
-
-push_textdomain("tribes")
-
-dirname = path.dirname(__file__)
-
--- RST
+--
 -- .. function:: new_warehouse_type{table}
 --
 --    This function adds the definition of a warehouse building to the engine.
@@ -41,6 +36,43 @@ dirname = path.dirname(__file__)
 --
 --    **destructible**
 --        *Optional. Default:* ``true``. Set this to ``false`` for headquarters.
+--
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("tribes")
+--
+--    dirname = path.dirname(__file__)
+--
+--    tribes:new_warehouse_type {
+--       name = "atlanteans_headquarters",
+--       -- TRANSLATORS: This is a building name used in lists of buildings
+--       descname = pgettext("atlanteans_building", "Headquarters"),
+--       animation_directory = dirname,
+--       icon = dirname .. "menu.png",
+--       size = "big",
+--       destructible = false,
+--
+--       animations = {
+--          idle = {
+--             hotspot = { 81, 110 },
+--          },
+--       },
+--
+--       aihints = {},
+--
+--       heal_per_second = 220,
+--       conquers = 9,
+--    }
+--
+--    pop_textdomain()
+
+push_textdomain("tribes")
+
+dirname = path.dirname(__file__)
 
 tribes:new_warehouse_type {
    name = "atlanteans_headquarters",
