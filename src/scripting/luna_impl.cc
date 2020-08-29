@@ -19,7 +19,6 @@
 
 #include "scripting/luna_impl.h"
 
-#include "base/log.h"
 #include "scripting/luna.h"
 
 /*

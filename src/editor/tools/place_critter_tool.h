@@ -41,7 +41,7 @@ struct EditorPlaceCritterTool : public EditorTool, public MultiSelect {
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor/fsel_editor_place_critter.png");
+		return g_image_cache->get("images/wui/editor/fsel_editor_place_critter.png");
 	}
 };
 

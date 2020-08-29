@@ -1,9 +1,7 @@
-world:new_critter_type{
+wl.World():new_critter_type{
    name = "moose",
    descname = _ "Moose",
    animation_directory = path.dirname(__file__),
-   editor_category = "critters_herbivores",
-   attributes = { "eatable" },
    programs = {
       remove = { "remove" },
    },

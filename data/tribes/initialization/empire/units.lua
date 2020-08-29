@@ -39,23 +39,23 @@ tribes:new_tribe {
       [""] = {
          [0] = "empire_resi_none",
       },
-      coal = {
+      resource_coal = {
          [10] = "empire_resi_coal_1",
          [20] = "empire_resi_coal_2",
       },
-      iron = {
+      resource_iron = {
          [10] = "empire_resi_iron_1",
          [20] = "empire_resi_iron_2",
       },
-      gold = {
+      resource_gold = {
          [10] = "empire_resi_gold_1",
          [20] = "empire_resi_gold_2",
       },
-      stones = {
+      resource_stones = {
          [10] = "empire_resi_stones_1",
          [20] = "empire_resi_stones_2",
       },
-      water = {
+      resource_water = {
          [100] = "empire_resi_water",
       },
    },

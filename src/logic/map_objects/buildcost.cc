@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -81,7 +82,8 @@ void Buildcost::load(FileRead& fr, const Widelands::TribeDescr& tribe) {
 
 		DescriptionIndex index = tribe.ware_index(name);
 		if (!tribe.has_ware(index)) {
-			log("buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
+			log_warn(
+			   "buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
 			fr.unsigned_8();
 		} else {
 			(*this)[index] = fr.unsigned_8();

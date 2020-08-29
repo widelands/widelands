@@ -138,7 +138,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	time_t endtime = time(nullptr) + 10;
 	while (!BufferedConnection::Peeker(conn_.get()).cmd()) {
 		if (time(nullptr) > endtime) {
-			log("[NetHostProxy] Handshaking error (1): No message from relay server in time\n");
+			log_err("[NetHostProxy] Handshaking error (1): No message from relay server in time\n");
 			conn_->close();
 			conn_.reset();
 			return;
@@ -149,9 +149,9 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	conn_->receive(&cmd);
 
 	if (cmd != RelayCommand::kWelcome) {
-		log("[NetHostProxy] Handshaking error (2): Received command code %i from relay server "
-		    "instead of Welcome (%i)\n",
-		    static_cast<uint8_t>(cmd), static_cast<uint8_t>(RelayCommand::kWelcome));
+		log_err("[NetHostProxy] Handshaking error (2): Received command code %i from relay server "
+		        "instead of Welcome (%i)\n",
+		        static_cast<uint8_t>(cmd), static_cast<uint8_t>(RelayCommand::kWelcome));
 		conn_->close();
 		conn_.reset();
 		return;
@@ -161,7 +161,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	endtime = time(nullptr) + 10;
 	while (!BufferedConnection::Peeker(conn_.get()).uint8_t()) {
 		if (time(nullptr) > endtime) {
-			log("[NetHostProxy] Handshaking error (3): No message from relay server in time\n");
+			log_err("[NetHostProxy] Handshaking error (3): No message from relay server in time\n");
 			conn_->close();
 			conn_.reset();
 			return;
@@ -170,9 +170,10 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	uint8_t relay_proto_version;
 	conn_->receive(&relay_proto_version);
 	if (relay_proto_version != kRelayProtocolVersion) {
-		log("[NetHostProxy] Handshaking error (4): Relay server uses protocol version %i instead of "
-		    "our version %i\n",
-		    static_cast<uint8_t>(relay_proto_version), static_cast<uint8_t>(kRelayProtocolVersion));
+		log_err(
+		   "[NetHostProxy] Handshaking error (4): Relay server uses protocol version %i instead of "
+		   "our version %i\n",
+		   static_cast<uint8_t>(relay_proto_version), static_cast<uint8_t>(kRelayProtocolVersion));
 		conn_->close();
 		conn_.reset();
 		return;
@@ -182,7 +183,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	endtime = time(nullptr) + 10;
 	while (!BufferedConnection::Peeker(conn_.get()).string()) {
 		if (time(nullptr) > endtime) {
-			log("[NetHostProxy] Handshaking error (5): No message from relay server in time\n");
+			log_err("[NetHostProxy] Handshaking error (5): No message from relay server in time\n");
 			conn_->close();
 			conn_.reset();
 			return;
@@ -191,14 +192,15 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	std::string game_name;
 	conn_->receive(&game_name);
 	if (game_name != name) {
-		log("[NetHostProxy] Handshaking error (6): Relay wants to connect us to game '%s' instead of "
-		    "our game '%s'\n",
-		    game_name.c_str(), name.c_str());
+		log_err(
+		   "[NetHostProxy] Handshaking error (6): Relay wants to connect us to game '%s' instead of "
+		   "our game '%s'\n",
+		   game_name.c_str(), name.c_str());
 		conn_->close();
 		conn_.reset();
 		return;
 	}
-	log("[NetHostProxy] Handshaking with relay server done\n");
+	log_info("[NetHostProxy] Handshaking with relay server done\n");
 }
 
 void NetHostProxy::receive_commands() {
@@ -289,9 +291,10 @@ void NetHostProxy::receive_commands() {
 	default:
 		// Other commands should not be possible.
 		// Then is either something wrong with the protocol or there is an implementation mistake
-		log("[NetHostProxy] Received command code %i from relay server, do not know what to do with "
-		    "it\n",
-		    static_cast<uint8_t>(cmd));
+		log_err(
+		   "[NetHostProxy] Received command code %i from relay server, do not know what to do with "
+		   "it\n",
+		   static_cast<uint8_t>(cmd));
 		NEVER_HERE();
 	}
 }

@@ -22,10 +22,10 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "graphic/animation/animation_manager.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"
@@ -154,7 +154,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      ship_(Widelands::INVALID_INDEX),
      ferry_(Widelands::INVALID_INDEX),
      port_(Widelands::INVALID_INDEX) {
-	log("┏━ Loading %s:\n", name_.c_str());
+	log_info("┏━ Loading %s:\n", name_.c_str());
 	ScopedTimer timer("┗━ took: %ums");
 
 	initializations_ = info.initializations;
@@ -166,52 +166,52 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 	};
 
 	try {
-		log("┃    Ships: ");
+		log_info("┃    Ships: ");
 		set_progress_message(_("Ships"), 1);
 		load_ships(table, tribes);
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-		log("┃    Immovables: ");
+		log_info("┃    Immovables: ");
 		set_progress_message(_("Immovables"), 2);
 		load_immovables(table, tribes, world);
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-		log("┃    Wares: ");
+		log_info("┃    Wares: ");
 		set_progress_message(_("Wares"), 3);
 		load_wares(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
 			load_wares(*scenario_table, tribes);
 		}
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-		log("┃    Workers: ");
+		log_info("┃    Workers: ");
 		set_progress_message(_("Workers"), 4);
 		load_workers(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("workers_order")) {
 			load_workers(*scenario_table, tribes);
 		}
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-		log("┃    Buildings: ");
+		log_info("┃    Buildings: ");
 		set_progress_message(_("Buildings"), 5);
 		load_buildings(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("buildings")) {
 			load_buildings(*scenario_table, tribes);
 		}
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		set_progress_message(_("Finishing"), 6);
 
-		log("┃    Frontiers, flags and roads: ");
+		log_info("┃    Frontiers, flags and roads: ");
 		load_frontiers_flags_roads(table);
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-		log("┃    Finalizing: ");
+		log_info("┃    Finalizing: ");
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
 		}
 		finalize_loading(tribes, world);
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
@@ -244,17 +244,17 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 
 	load_roads("normal", &road_images);
 	for (const std::string& texture_path : road_images) {
-		road_textures_.add_normal_road_texture(g_gr->images().get(texture_path));
+		road_textures_.add_normal_road_texture(g_image_cache->get(texture_path));
 	}
 
 	load_roads("busy", &road_images);
 	for (const std::string& texture_path : road_images) {
-		road_textures_.add_busy_road_texture(g_gr->images().get(texture_path));
+		road_textures_.add_busy_road_texture(g_image_cache->get(texture_path));
 	}
 
 	load_roads("waterway", &road_images);
 	for (const std::string& texture_path : road_images) {
-		road_textures_.add_waterway_texture(g_gr->images().get(texture_path));
+		road_textures_.add_waterway_texture(g_image_cache->get(texture_path));
 	}
 
 	const auto load_bridge_if_present = [this](const LuaTable& animations_table,
@@ -265,8 +265,8 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 		if (animations_table.has_key(directional_name)) {
 			std::unique_ptr<LuaTable> animation_table = animations_table.get_table(directional_name);
 			*id =
-			   g_gr->animations().load(name_ + std::string("_") + directional_name, *animation_table,
-			                           directional_name, animation_directory, animation_type);
+			   g_animation_manager->load(name_ + std::string("_") + directional_name, *animation_table,
+			                             directional_name, animation_directory, animation_type);
 		}
 	};
 	// Frontier and flag animations can be a mix of file and spritesheet animations
@@ -277,14 +277,14 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 		if (animations_table.has_key("frontier")) {
 			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
 			frontier_animation_id_ =
-			   g_gr->animations().load(name_ + std::string("_frontier"), *animation_table, "frontier",
-			                           animation_directory, animation_type);
+			   g_animation_manager->load(name_ + std::string("_frontier"), *animation_table,
+			                             "frontier", animation_directory, animation_type);
 		}
 		if (animations_table.has_key("flag")) {
 			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("flag");
 			flag_animation_id_ =
-			   g_gr->animations().load(name_ + std::string("_flag"), *animation_table, "flag",
-			                           animation_directory, animation_type);
+			   g_animation_manager->load(name_ + std::string("_flag"), *animation_table, "flag",
+			                             animation_directory, animation_type);
 		}
 		load_bridge_if_present(
 		   animations_table, animation_directory, animation_type, "e", "normal", &bridges_normal_.e);

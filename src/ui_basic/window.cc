@@ -24,9 +24,7 @@
 #include <SDL_mouse.h>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -119,11 +117,11 @@ Window::Window(Panel* const parent,
      drag_start_mouse_x_(0),
      drag_start_mouse_y_(0),
      pinned_(false),
-     pic_lborder_(g_gr->images().get(window_image_path(kWindowImageLeft))),
-     pic_rborder_(g_gr->images().get(window_image_path(kWindowImageRight))),
-     pic_top_(g_gr->images().get(window_image_path(kWindowImageTop))),
-     pic_bottom_(g_gr->images().get(window_image_path(kWindowImageBottom))),
-     pic_background_(g_gr->images().get(window_image_path(kWindowImageBackground))),
+     pic_lborder_(g_image_cache->get(window_image_path(kWindowImageLeft))),
+     pic_rborder_(g_image_cache->get(window_image_path(kWindowImageRight))),
+     pic_top_(g_image_cache->get(window_image_path(kWindowImageTop))),
+     pic_bottom_(g_image_cache->get(window_image_path(kWindowImageBottom))),
+     pic_background_(g_image_cache->get(window_image_path(kWindowImageBackground))),
      center_panel_(nullptr),
      fastclick_panel_(nullptr),
      button_close_(new Button(this,
@@ -134,7 +132,7 @@ Window::Window(Panel* const parent,
                               kWindowTitlebarButtonsSize,
                               kWindowTitlebarButtonsSize,
                               ButtonStyle::kWuiSecondary,
-                              g_gr->images().get(window_image_path(kWindowImageClose)),
+                              g_image_cache->get(window_image_path(kWindowImageClose)),
                               _("Close"))),
      button_pin_(new Button(this,
                             "b_pin",
@@ -143,7 +141,7 @@ Window::Window(Panel* const parent,
                             kWindowTitlebarButtonsSize,
                             kWindowTitlebarButtonsSize,
                             ButtonStyle::kWuiSecondary,
-                            g_gr->images().get(window_image_path(kWindowImageUnpinned)),
+                            g_image_cache->get(window_image_path(kWindowImageUnpinned)),
                             "")),
      button_minimize_(new Button(this,
                                  "b_minimize",
@@ -152,7 +150,7 @@ Window::Window(Panel* const parent,
                                  kWindowTitlebarButtonsSize,
                                  kWindowTitlebarButtonsSize,
                                  ButtonStyle::kWuiSecondary,
-                                 g_gr->images().get(window_image_path(kWindowImageMinimize)),
+                                 g_image_cache->get(window_image_path(kWindowImageMinimize)),
                                  "")) {
 	set_title(title);
 
@@ -186,13 +184,13 @@ Window::Window(Panel* const parent,
 }
 
 void Window::update_toolbar_buttons() {
-	button_minimize_->set_pic(g_gr->images().get(is_minimal_ ?
+	button_minimize_->set_pic(g_image_cache->get(is_minimal_ ?
 	                                                window_image_path(kWindowImageMaximize) :
 	                                                window_image_path(kWindowImageMinimize)));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
 	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed :
 	                                                 Button::VisualState::kRaised);
-	button_pin_->set_pic(g_gr->images().get(pinned_ ? window_image_path(kWindowImagePinned) :
+	button_pin_->set_pic(g_image_cache->get(pinned_ ? window_image_path(kWindowImagePinned) :
 	                                                  window_image_path(kWindowImageUnpinned)));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
 	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed :
@@ -369,8 +367,8 @@ void Window::draw_border(RenderTarget& dst) {
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - kHorizontalBorderMiddleLength;
 
 	const RGBAColor& focus_color = get_parent() && get_parent()->focused_child() == this ?
-	                                  g_gr->styles().window_border_focused() :
-	                                  g_gr->styles().window_border_unfocused();
+	                                  g_style_manager->window_border_focused() :
+	                                  g_style_manager->window_border_unfocused();
 
 	{  //  Top border.
 		int32_t pos = kCornerWidth;
@@ -401,7 +399,7 @@ void Window::draw_border(RenderTarget& dst) {
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
 		std::shared_ptr<const UI::RenderedText> text = autofit_text(
-		   richtext_escape(title_), g_gr->styles().font_style(UI::FontStyle::kWuiWindowTitle),
+		   richtext_escape(title_), g_style_manager->font_style(UI::FontStyle::kWuiWindowTitle),
 		   get_inner_w() - kTopBorderThickness);
 
 		Vector2i pos(

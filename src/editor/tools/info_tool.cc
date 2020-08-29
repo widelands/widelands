@@ -22,7 +22,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/text_layout.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
@@ -129,9 +128,6 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 	   (boost::format(_("Is: %s")) %
 	    i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND))
 	      .str(),
-	   font_style);
-	buf += as_listitem(
-	   (boost::format(_("Editor Category: %s")) % ter.editor_category()->descname()).str(),
 	   font_style);
 
 	// *** Map Object info

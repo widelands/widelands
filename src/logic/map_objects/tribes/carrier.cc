@@ -71,7 +71,7 @@ void Carrier::road_update(Game& game, State& state) {
 		return schedule_act(game, 250);
 	} else if (signal.size()) {
 		// Something else happened (probably a location signal)
-		molog("[road]: Terminated by signal '%s'\n", signal.c_str());
+		molog(game.get_gametime(), "[road]: Terminated by signal '%s'\n", signal.c_str());
 		return pop_task(game);
 	}
 
@@ -159,7 +159,7 @@ void Carrier::transport_update(Game& game, State& state) {
 		set_animation(game, descr().get_animation("idle", this));
 		return schedule_act(game, 250);
 	} else if (signal.size()) {
-		molog("[transport]: Interrupted by signal '%s'\n", signal.c_str());
+		molog(game.get_gametime(), "[transport]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
 	}
 
@@ -225,7 +225,8 @@ void Carrier::deliver_to_building(Game& game, State& state) {
 				fetch_carried_ware(game);
 				ware->enter_building(game, *building);
 			} else {
-				molog("[Carrier]: Building switch from under us, return to road.\n");
+				molog(
+				   game.get_gametime(), "[Carrier]: Building switch from under us, return to road.\n");
 
 				state.ivar1 = &building->base_flag() == &dynamic_cast<RoadBase&>(*get_location(game))
 				                                            .get_flag(static_cast<RoadBase::FlagId>(0));
@@ -238,7 +239,7 @@ void Carrier::deliver_to_building(Game& game, State& state) {
 		   game, WALK_SE, descr().get_right_walk_anims(does_carry_ware(), this), true);
 	} else {
 		//  tough luck, the building has disappeared
-		molog("[Carrier]: Building disappeared while in building.\n");
+		molog(game.get_gametime(), "[Carrier]: Building disappeared while in building.\n");
 		set_location(nullptr);
 	}
 }
@@ -270,7 +271,7 @@ void Carrier::pickup_from_flag(Game& game, State& state) {
 			set_animation(game, descr().get_animation("idle", this));
 			return schedule_act(game, 20);
 		} else {
-			molog("[Carrier]: Nothing suitable on flag.\n");
+			molog(game.get_gametime(), "[Carrier]: Nothing suitable on flag.\n");
 			return pop_task(game);
 		}
 	}
@@ -294,8 +295,8 @@ void Carrier::drop_ware(Game& game, State& state) {
 		other = flag.fetch_pending_ware(game, otherflag);
 
 		if (!other && !flag.has_capacity()) {
-			molog("[Carrier]: strange: acked ware from busy flag no longer "
-			      "present.\n");
+			molog(game.get_gametime(), "[Carrier]: strange: acked ware from busy flag no longer "
+			                           "present.\n");
 
 			promised_pickup_to_ = NOONE;
 			set_animation(game, descr().get_animation("idle", this));
@@ -531,11 +532,11 @@ bool Carrier::start_task_walktoflag(Game& game, int32_t const flag, bool const o
 }
 
 void Carrier::log_general_info(const Widelands::EditorGameBase& egbase) const {
-	molog("Carrier at %i,%i\n", get_position().x, get_position().y);
+	molog(egbase.get_gametime(), "Carrier at %i,%i\n", get_position().x, get_position().y);
 
 	Worker::log_general_info(egbase);
 
-	molog("promised_pickup_to = %i\n", promised_pickup_to_);
+	molog(egbase.get_gametime(), "promised_pickup_to = %i\n", promised_pickup_to_);
 }
 
 /*
