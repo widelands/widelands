@@ -3,16 +3,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Walter Benkel <tromaster@gmail.com>, 2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Walter Benkel <tromaster@gmail.com>, 2020\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1619,89 +1619,3 @@ msgstr ""
 "¡Maldito seas, Lutius, por matar a pacíficos sirvientes de la diosa Vesta! "
 "¡Que tu vida y tu tierra sean malditos y que la ira de la diosa borre a tu "
 "familia de la faz de la tierra!"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1.lua:8
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery2.lua:9
-msgctxt "empire_building"
-msgid "Brewery"
-msgstr "Cervecería"
-
-#. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery2.lua:50
-msgid "brewing beer"
-msgstr "fabricación de cerveza"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:9
-msgctxt "empire_building"
-msgid "Farm"
-msgstr "Granja"
-
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:43
-msgid "working"
-msgstr "trabajando"
-
-#. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:51
-msgid "planting wheat"
-msgstr "plantando trigo"
-
-#. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:59
-msgid "harvesting wheat"
-msgstr "cosechando trigo"
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:68
-msgid "No Fields"
-msgstr "Sin Campos"
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:69
-msgid "Out of Fields"
-msgstr "Sin Parcelas"
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:70
-msgctxt "empire_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
-"El granjero que trabaja en esta granja no ha limpiado tierra para plantar "
-"sus semillas."
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:9
-msgid "Loading campaign-specific tribe units"
-msgstr "Cargando unidades de tribu específicos de la campaña"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1.lua:8
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill2.lua:9
-msgctxt "empire_building"
-msgid "Mill"
-msgstr "Molino"
-
-#. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill2.lua:48
-msgid "grinding wheat"
-msgstr "moliendo trigo"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta.lua:9
-msgctxt "empire_building"
-msgid "Temple of Vesta"
-msgstr "Templo de Vesta"
-
-#. TRANSLATORS: Purpose helptext for a building
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/vesta_helptexts.lua:17
-msgctxt "building"
-msgid ""
-"In the temple of Vesta, the wares to worship are stored. It is the home of "
-"the priestesses and the guards of the goddess."
-msgstr ""
-"En el templo de Vesta se almacenan las mercancías para la adoración. Es el "
-"hogar de las sacerdotisas y los guardias de la diosa."
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1.lua:8
-msgctxt "empire_building"
-msgid "Well"
-msgstr "Pozo"
