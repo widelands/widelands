@@ -536,10 +536,10 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			// Draw build help.
-			bool show_port_space = has_expedition_port_space(f->fcoords);
-			if (show_port_space ||
-			    (buildhelp() && !(picking_starting_pos && !suited_as_starting_pos))) {
-				if (const auto* overlay = get_buildhelp_overlay(
+			const bool show_port_space = has_expedition_port_space(f->fcoords);
+			if (show_port_space || suited_as_starting_pos || buildhelp()) {
+				if (const auto* overlay = (!show_port_space && picking_starting_pos && !suited_as_starting_pos && !buildhelp()) ? nullptr :
+					get_buildhelp_overlay(
 				       show_port_space ? f->fcoords.field->maxcaps() :
 				                         picking_starting_pos ? f->fcoords.field->nodecaps() :
 				                                                plr.get_buildcaps(f->fcoords))) {
