@@ -162,8 +162,8 @@ void load_helptexts(Widelands::MapObjectDescr* descr,
 			} break;
 			default:
 				log_warn("Wrong helptext data type for '%s', category '%s'. Expecting a table or a "
-				    "string.",
-				    descr->name().c_str(), category_key.c_str());
+				         "string.",
+				         descr->name().c_str(), category_key.c_str());
 			}
 		}
 		if (helptexts.empty()) {
