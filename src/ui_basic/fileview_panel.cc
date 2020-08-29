@@ -36,25 +36,35 @@ FileViewPanel::FileViewPanel(Panel* parent,
      contents_height_(0),
      panel_style_(scrollbar_style) {
 	layout();
+
+	sigclicked.connect([this]() { load_tab_contents(); });
 }
 
-void FileViewPanel::add_tab(const std::string& lua_script) {
-	std::string content, title;
-	try {
-		LuaInterface lua;
-		std::unique_ptr<LuaTable> t(lua.run_script(lua_script));
-		content = t->get_string("text");
-		title = t->get_string("title");
-	} catch (LuaError& err) {
-		content = err.what();
-		title = "Lua error";
+void FileViewPanel::load_tab_contents() {
+	const unsigned index = active();
+	const std::string& lua_script = script_paths_.at(index);
+	std::string contents;
+	if (!lua_script.empty()) {
+		try {
+			LuaInterface lua;
+			std::unique_ptr<LuaTable> t(lua.run_script(lua_script));
+			contents = t->get_string(1);
+		} catch (LuaError& err) {
+			contents = err.what();
+		}
+		textviews_.at(index)->set_text(contents);
+		script_paths_.at(index) = "";
 	}
+}
+
+void FileViewPanel::add_tab(const std::string& title, const std::string& lua_script) {
+	script_paths_.push_back(lua_script);
 	boxes_.push_back(
 	   std::unique_ptr<UI::Box>(new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, padding_)));
 	size_t index = boxes_.size() - 1;
 
-	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
-	   boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, panel_style_, content);
+	UI::MultilineTextarea* textarea =
+	   new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, panel_style_);
 
 	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(textarea));
 	add((boost::format("about_%" PRIuS) % index).str(), title, boxes_.at(index).get(), "");

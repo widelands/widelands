@@ -320,14 +320,14 @@ void GameClient::send_player_command(Widelands::PlayerCommand* pc) {
 	// TODDO(Klaus Halfmann)should this be an assert?
 	if (pc->sender() == d->settings.playernum + 1)  //  allow command for current player only
 	{
-		log("[Client]: send playercommand at time %i\n", d->game->get_gametime());
+		log_info("[Client]: send playercommand at time %i\n", d->game->get_gametime());
 
 		d->send_player_command(pc);
 
 		d->lasttimestamp = d->game->get_gametime();
 		d->lasttimestamp_realtime = SDL_GetTicks();
 	} else {
-		log("[Client]: Playercommand is not for current player? %i\n", pc->sender());
+		log_warn("[Client]: Playercommand is not for current player? %i\n", pc->sender());
 	}
 
 	delete pc;
@@ -597,7 +597,7 @@ const std::vector<ChatMessage>& GameClient::get_messages() const {
 void GameClient::send_time() {
 	assert(d->game);
 
-	log("[Client]: sending timestamp: %i\n", d->game->get_gametime());
+	log_info("[Client]: sending timestamp: %i\n", d->game->get_gametime());
 
 	SendPacket s;
 	s.unsigned_8(NETCMD_TIME);
@@ -653,7 +653,7 @@ void GameClient::handle_ping(RecvPacket&) {
 	s.unsigned_8(NETCMD_PONG);
 	d->net->send(s);
 
-	log("[Client] Pong!\n");
+	log_info("[Client] Pong!\n");
 }
 
 /**
@@ -664,8 +664,8 @@ void GameClient::handle_setting_map(RecvPacket& packet) {
 	d->settings.mapfilename = g_fs->FileSystem::fix_cross_file(packet.string());
 	d->settings.savegame = packet.unsigned_8() == 1;
 	d->settings.scenario = packet.unsigned_8() == 1;
-	log("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(),
-	    d->settings.mapfilename.c_str());
+	log_info("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(),
+	         d->settings.mapfilename.c_str());
 
 	// New map was set, so we clean up the buffer of a previously requested file
 	d->file_.reset(nullptr);
@@ -709,9 +709,9 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 		try {
 			g_fs->fs_rename(path, backup_file_name(path));
 		} catch (const FileError& e) {
-			log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
-			    "%s\n",
-			    e.what());
+			log_err("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+			        "%s\n",
+			        e.what());
 			// TODO(Arty): What now? It just means the next step will fail
 			// or possibly result in some corrupt file
 		}
@@ -755,7 +755,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 
 	// TODO(Klaus Halfmann): read directly into FilePart?
 	if (packet.data(buf, size) != size) {
-		log("Readproblem. Will try to go on anyways\n");
+		log_warn("Readproblem. Will try to go on anyways\n");
 	}
 	memcpy(fp.part, &buf[0], size);
 	d->file_->parts.push_back(fp);
@@ -808,9 +808,9 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			try {
 				g_fs->fs_unlink(d->file_->filename);
 			} catch (const FileError& e) {
-				log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
-				    "%s\n",
-				    e.what());
+				log_err("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+				        "%s\n",
+				        e.what());
 			}
 		}
 		// Check file for validity
@@ -839,9 +839,9 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 					g_fs->fs_rename(backup_file_name(d->file_->filename), d->file_->filename);
 				}
 			} catch (const FileError& e) {
-				log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
-				    "%s\n",
-				    e.what());
+				log_err("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+				        "%s\n",
+				        e.what());
 			}
 			s.reset();
 			s.unsigned_8(NETCMD_CHAT);
@@ -955,8 +955,8 @@ void GameClient::handle_system_message(RecvPacket& packet) {
  *
  */
 void GameClient::handle_desync(RecvPacket&) {
-	log("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some "
-	    "information for debugging.\n");
+	log_err("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some "
+	        "information for debugging.\n");
 	if (d->game) {
 		d->game->save_syncstream(true);
 		// We don't know our playernumber, so report as -1
@@ -1025,13 +1025,13 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		break;
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.unsigned_16();
-		log("[Client] speed: %u.%03u\n", d->realspeed / 1000, d->realspeed % 1000);
+		log_info("[Client] speed: %u.%03u\n", d->realspeed / 1000, d->realspeed % 1000);
 		break;
 	case NETCMD_TIME:
 		d->time.receive(packet.signed_32());
 		break;
 	case NETCMD_WAIT:
-		log("[Client]: server is waiting.\n");
+		log_info("[Client]: server is waiting.\n");
 		d->server_is_waiting = true;
 		break;
 	case NETCMD_PLAYERCOMMAND:
@@ -1083,7 +1083,7 @@ void GameClient::disconnect(const std::string& reason,
                             const std::string& arg,
                             bool const sendreason,
                             bool const showmsg) {
-	log("[Client]: disconnect(%s, %s)\n", reason.c_str(), arg.c_str());
+	log_info("[Client]: disconnect(%s, %s)\n", reason.c_str(), arg.c_str());
 
 	assert(d->net != nullptr);
 	if (d->net->is_connected()) {

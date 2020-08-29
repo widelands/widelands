@@ -21,7 +21,6 @@
 
 #include <cassert>
 
-#include "base/log.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"

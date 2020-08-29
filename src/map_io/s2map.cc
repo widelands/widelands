@@ -352,7 +352,7 @@ Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType worl
 		break;  // unknown texture
 
 	default:
-		log("Unknown texture %x. Defaulting to water.\n", c);
+		log_warn("Unknown texture %x. Defaulting to water.\n", c);
 		c = 7;
 		break;
 	}
@@ -624,7 +624,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				bobname = "duck";
 				break;
 			case 0x09:
-				bobname = "elk";
+				bobname = "moose";
 				break;  // original "donkey"
 			default:
 				cerr << "Unsupported animal: " << static_cast<int32_t>(section[i]) << endl;
@@ -632,7 +632,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			}
 
 			if (!bobname.empty()) {
-				Widelands::DescriptionIndex const idx = world.get_critter(bobname.c_str());
+				Widelands::DescriptionIndex const idx = world.critter_index(bobname);
 				if (idx == Widelands::INVALID_INDEX) {
 					throw wexception("Missing bob type %s", bobname.c_str());
 				}
@@ -704,19 +704,19 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 			switch (value & 0xF8) {
 			case 0x40:
-				res = "coal";
+				res = "resource_coal";
 				amount = value & 7;
 				break;
 			case 0x48:
-				res = "iron";
+				res = "resource_iron";
 				amount = value & 7;
 				break;
 			case 0x50:
-				res = "gold";
+				res = "resource_gold";
 				amount = value & 7;
 				break;
 			case 0x59:
-				res = "granite";
+				res = "resource_stones";
 				amount = value & 7;
 				break;
 			default:
@@ -1050,22 +1050,22 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	map_.recalc_whole_map(egbase);  //  to initialize buildcaps
 
 	const Widelands::PlayerNumber nr_players = map_.get_nrplayers();
-	log("Checking starting position for all %u players:\n", nr_players);
+	log_info("Checking starting position for all %u players:\n", nr_players);
 	iterate_player_numbers(p, nr_players) {
-		log("-> Player %u: ", p);
+		log_info("-> Player %u: ", p);
 
 		Widelands::Coords starting_pos = map_.get_starting_pos(p);
 		if (!starting_pos) {
 			//  Do not throw exception, else map will not be loadable in the
 			//  editor. Player initialization will keep track of wrong starting
 			//  positions.
-			log("Has no starting position.\n");
+			log_warn("Has no starting position.\n");
 			continue;
 		}
 		Widelands::FCoords fpos = map_.get_fcoords(starting_pos);
 
 		if (!(map_.get_max_nodecaps(egbase, fpos) & Widelands::BUILDCAPS_BIG)) {
-			log("wrong size - trying to fix it: ");
+			log_warn("wrong size - trying to fix it: ");
 			bool fixed = false;
 
 			Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -1081,17 +1081,17 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 			// check whether starting position was fixed.
 			if (fixed) {
-				log("Fixed!\n");
+				log_info("Fixed!\n");
 			} else {
 				//  Do not throw exception, else map will not be loadable in
 				//  the editor. Player initialization will keep track of
 				//  wrong starting positions.
-				log("FAILED!\n");
-				log("   Invalid starting position, that could not be fixed.\n");
-				log("   Please try to fix it manually in the editor.\n");
+				log_err("FAILED!\n");
+				log_err("Invalid starting position, that could not be fixed.\n");
+				log_err("Please try to fix it manually in the editor.\n");
 			}
 		} else {
-			log("OK\n");
+			log_info("OK\n");
 		}
 	}
 }
@@ -1113,9 +1113,9 @@ void S2MapLoader::postload_set_port_spaces(const Widelands::EditorGameBase& egba
 			} while (!was_set && mr.advance(map_));
 		}
 		if (!was_set) {
-			log("FAILED! No port buildspace for (%i, %i) found!\n", fc.x, fc.y);
+			log_err("FAILED! No port buildspace for (%i, %i) found!\n", fc.x, fc.y);
 		} else {
-			log("SUCCESS! Port buildspace set for (%i, %i) \n", fc.x, fc.y);
+			log_info("SUCCESS! Port buildspace set for (%i, %i) \n", fc.x, fc.y);
 		}
 	}
 	map_.recalculate_allows_seafaring();
