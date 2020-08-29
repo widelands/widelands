@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "scripting/eris.h"

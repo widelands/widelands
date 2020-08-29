@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "logic/game.h"
@@ -251,8 +252,8 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 					                            t->get_string("description"));
 				}
 			} catch (LuaTableKeyError& e) {
-				log("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
-				    e.what());
+				log_err("Launch Game: Error loading win condition: %s %s\n",
+				        win_condition_script.c_str(), e.what());
 			}
 		}
 	} catch (const std::exception& e) {
@@ -262,7 +263,7 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 		    settings_->settings().mapfilename)
 		      .str();
 		win_condition_dropdown_.set_errored(error_message);
-		log("Launch Game: Exception: %s %s\n", error_message.c_str(), e.what());
+		log_err("Launch Game: Exception: %s %s\n", error_message.c_str(), e.what());
 	}
 }
 
@@ -285,8 +286,8 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 			}
 		}
 	} catch (LuaTableKeyError& e) {
-		log("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
-		    e.what());
+		log_err("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
+		        e.what());
 	}
 	if (!is_usable) {
 		t.reset(nullptr);

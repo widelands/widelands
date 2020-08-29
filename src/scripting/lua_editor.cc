@@ -19,7 +19,6 @@
 
 #include "scripting/lua_editor.h"
 
-#include "base/log.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "wui/interactive_player.h"

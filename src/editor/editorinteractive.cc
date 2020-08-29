@@ -26,6 +26,7 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/scoped_timer.h"
 #include "base/warning.h"
 #include "editor/tools/decrease_resources_tool.h"
@@ -987,7 +988,7 @@ void EditorInteractive::load_world_units() {
 	Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
 	Widelands::World* world = egbase().mutable_world();
 
-	log("┏━ Loading world:\n");
+	log_info("┏━ Loading world:\n");
 	ScopedTimer timer("┗━ took: %ums");
 
 	std::unique_ptr<LuaTable> table(egbase().lua().run_script("world/init.lua"));
@@ -1001,24 +1002,24 @@ void EditorInteractive::load_world_units() {
 		}
 	};
 
-	log("┃    Critters: ");
+	log_info("┃    Critters: ");
 	load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
-	log("%ums\n", timer.ms_since_last_query());
+	log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-	log("┃    Immovables: ");
+	log_info("┃    Immovables: ");
 	load_category(*table, "immovables", Widelands::MapObjectType::IMMOVABLE);
-	log("%ums\n", timer.ms_since_last_query());
+	log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-	log("┃    Terrains: ");
+	log_info("┃    Terrains: ");
 	load_category(*table, "terrains", Widelands::MapObjectType::TERRAIN);
-	log("%ums\n", timer.ms_since_last_query());
+	log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-	log("┃    Resources: ");
+	log_info("┃    Resources: ");
 	for (const std::string& item : table->get_table("resources")->array_entries<std::string>()) {
 		Notifications::publish(Widelands::NoteMapObjectDescription(
 		   item, Widelands::NoteMapObjectDescription::LoadType::kObject));
 	}
-	log("%ums\n", timer.ms_since_last_query());
+	log_info("┃    → took %ums\n", timer.ms_since_last_query());
 }
 
 void EditorInteractive::map_changed(const MapWas& action) {

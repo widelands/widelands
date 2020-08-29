@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
@@ -276,8 +277,8 @@ void ConstructionSite::init_settings() {
 		settings_.reset(new MilitarysiteSettings(*md, tribe));
 	} else {
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log("WARNING: Created constructionsite for a %s, which is not of any known building type\n",
-		    building_->name().c_str());
+		log_warn("Created constructionsite for a %s, which is not of any known building type\n",
+		         building_->name().c_str());
 	}
 }
 
@@ -385,7 +386,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 Start building the next enhancement even before the base building is completed.
 ===============
 */
-void ConstructionSite::enhance(Game&) {
+void ConstructionSite::enhance(Game& game) {
 	assert(building_->enhancement() != INVALID_INDEX);
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
@@ -525,8 +526,9 @@ void ConstructionSite::enhance(Game&) {
 	} break;
 	default:
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log("WARNING: Enhanced constructionsite to a %s, which is not of any known building type\n",
-		    building_->name().c_str());
+		log_warn_time(game.get_gametime(),
+		              "Enhanced constructionsite to a %s, which is not of any known building type\n",
+		              building_->name().c_str());
 	}
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));

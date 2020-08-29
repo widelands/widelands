@@ -135,7 +135,7 @@ std::string get_executable_directory() {
 	executabledir = filename;
 	executabledir = executabledir.substr(0, executabledir.rfind('\\'));
 #endif
-	log("Widelands executable directory: %s\n", executabledir.c_str());
+	log_info("Widelands executable directory: %s\n", executabledir.c_str());
 	return executabledir;
 }
 
@@ -150,7 +150,7 @@ std::string absolute_path_if_not_windows(const std::string& path) {
 	char buffer[PATH_MAX];
 	// https://pubs.opengroup.org/onlinepubs/009695399/functions/realpath.html
 	char* rp = realpath(path.c_str(), buffer);
-	log("Realpath: %s\n", rp);
+	log_info("Realpath: %s\n", rp);
 	if (!rp) {
 		throw wexception("Unable to get absolute path for %s", path.c_str());
 	}
@@ -267,7 +267,7 @@ void WLApplication::setup_homedir() {
 		}
 #endif
 		// Homedir is ready, so we can log normally from now on
-		log("Set home directory: %s\n", homedir_.c_str());
+		log_info("Set home directory: %s\n", homedir_.c_str());
 	}
 
 #ifdef USE_XDG
@@ -346,11 +346,11 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	datadir_ = g_fs->canonicalize_name(datadir_);
 	datadir_for_testing_ = g_fs->canonicalize_name(datadir_for_testing_);
 
-	log("Adding directory: %s\n", datadir_.c_str());
+	log_info("Adding directory: %s\n", datadir_.c_str());
 	g_fs->add_file_system(&FileSystem::create(datadir_));
 
 	if (!datadir_for_testing_.empty()) {
-		log("Adding directory: %s\n", datadir_for_testing_.c_str());
+		log_info("Adding directory: %s\n", datadir_for_testing_.c_str());
 		g_fs->add_file_system(&FileSystem::create(datadir_for_testing_));
 	}
 
@@ -362,23 +362,23 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_temp_backups();
 
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
-	log("Byte order: little-endian\n");
+	log_dbg("Byte order: little-endian\n");
 #else
-	log("Byte order: big-endian\n");
+	log_dbg("Byte order: big-endian\n");
 #endif
 
 	// Start the SDL core
 	if (SDL_Init(SDL_INIT_VIDEO) == -1) {
 		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
 		// too frequent failures
-		log("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
+		log_err("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
 		exit(2);
 	}
 
 	g_gr = new Graphic();
 
 	if (TTF_Init() == -1) {
-		log("True Type library did not initialize: %s\n", TTF_GetError());
+		log_err("True Type library did not initialize: %s\n", TTF_GetError());
 		exit(2);
 	}
 
@@ -466,9 +466,9 @@ void WLApplication::run() {
 		try {
 			game.run_load_game(filename_, script_to_run_);
 		} catch (const Widelands::GameDataError& e) {
-			log("Game not loaded: Game data error: %s\n", e.what());
+			log_err("Game not loaded: Game data error: %s\n", e.what());
 		} catch (const std::exception& e) {
-			log("Fatal exception: %s\n", e.what());
+			log_err("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -477,9 +477,9 @@ void WLApplication::run() {
 		try {
 			game.run_splayer_scenario_direct(filename_.c_str(), script_to_run_);
 		} catch (const Widelands::GameDataError& e) {
-			log("Scenario not started: Game data error: %s\n", e.what());
+			log_err("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception& e) {
-			log("Fatal exception: %s\n", e.what());
+			log_err("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -565,8 +565,8 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 			// Takes a screenshot.
 			if (ctrl) {
 				if (g_fs->disk_space() < kMinimumDiskSpace) {
-					log("Omitting screenshot because diskspace is lower than %lluMB\n",
-					    kMinimumDiskSpace / (1000 * 1000));
+					log_warn("Omitting screenshot because diskspace is lower than %lluMB\n",
+					         kMinimumDiskSpace / (1000 * 1000));
 					break;
 				}
 				g_fs->ensure_directory_exists(kScreenshotsDir);
@@ -900,13 +900,13 @@ void WLApplication::init_language() {
 		   SDL_MESSAGEBOX_ERROR, "'locale' directory not valid",
 		   std::string(i18n::get_localedir() + "\nis not a directory. Please fix this.").c_str(),
 		   NULL);
-		log("ERROR: %s is not a directory. Please fix this.\n", i18n::get_localedir().c_str());
+		log_err("%s is not a directory. Please fix this.\n", i18n::get_localedir().c_str());
 		exit(1);
 	}
 
 	if (!g_fs->is_directory(i18n::get_localedir()) ||
 	    g_fs->list_directory(i18n::get_localedir()).empty()) {
-		log("WARNING: No locale translations found in %s\n", i18n::get_localedir().c_str());
+		log_warn("No locale translations found in %s\n", i18n::get_localedir().c_str());
 	}
 
 	// Initialize locale and grab "widelands" textdomain
@@ -1038,7 +1038,7 @@ void WLApplication::handle_commandline_parameters() {
 			datadir_ = absolute_path_if_not_windows(FileSystem::get_working_directory() +
 			                                        FileSystem::file_separator() + datadir_);
 		} catch (const WException& e) {
-			log("Error parsing datadir: %s\n", e.what());
+			log_err("Error parsing datadir: %s\n", e.what());
 			exit(1);
 		}
 	}
@@ -1163,7 +1163,7 @@ void WLApplication::mainmenu() {
 		FullscreenMenuMain mm;
 
 		if (message.size()) {
-			log("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
+			log_err("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
 
 			UI::WLMessageBox mmb(&mm, messagetitle, richtext_escape(message),
 			                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
@@ -1173,69 +1173,67 @@ void WLApplication::mainmenu() {
 			messagetitle.clear();
 		}
 
-		// NOCOM try {
-		switch (mm.run<FullscreenMenuBase::MenuTarget>()) {
-		case FullscreenMenuBase::MenuTarget::kTutorial:
-			mainmenu_tutorial();
-			break;
-		case FullscreenMenuBase::MenuTarget::kSinglePlayer:
-			mainmenu_singleplayer();
-			break;
-		case FullscreenMenuBase::MenuTarget::kMultiplayer:
-			mainmenu_multiplayer();
-			break;
-		case FullscreenMenuBase::MenuTarget::kReplay:
-			replay();
-			break;
-		case FullscreenMenuBase::MenuTarget::kOptions: {
-			Section& s = get_config_section();
-			OptionsCtrl om(s);
-			break;
+		try {
+			switch (mm.run<FullscreenMenuBase::MenuTarget>()) {
+			case FullscreenMenuBase::MenuTarget::kTutorial:
+				mainmenu_tutorial();
+				break;
+			case FullscreenMenuBase::MenuTarget::kSinglePlayer:
+				mainmenu_singleplayer();
+				break;
+			case FullscreenMenuBase::MenuTarget::kMultiplayer:
+				mainmenu_multiplayer();
+				break;
+			case FullscreenMenuBase::MenuTarget::kReplay:
+				replay();
+				break;
+			case FullscreenMenuBase::MenuTarget::kOptions: {
+				Section& s = get_config_section();
+				OptionsCtrl om(s);
+				break;
+			}
+			case FullscreenMenuBase::MenuTarget::kAbout: {
+				FullscreenMenuAbout ff;
+				ff.run<FullscreenMenuBase::MenuTarget>();
+				break;
+			}
+			case FullscreenMenuBase::MenuTarget::kContinueLastsave: {
+				load_game(mm.get_filename_for_continue());
+				break;
+			}
+			case FullscreenMenuBase::MenuTarget::kEditor:
+				EditorInteractive::run_editor(filename_, script_to_run_);
+				break;
+			case FullscreenMenuBase::MenuTarget::kExit:
+			default:
+				return;
+			}
+		} catch (const WLWarning& e) {
+			messagetitle = (boost::format("Warning: %s") % e.title()).str();
+			message = e.what();
+		} catch (const Widelands::GameDataError& e) {
+			messagetitle = _("Game data error");
+			message = e.what();
 		}
-		case FullscreenMenuBase::MenuTarget::kAbout: {
-			FullscreenMenuAbout ff;
-			ff.run<FullscreenMenuBase::MenuTarget>();
-			break;
-		}
-		case FullscreenMenuBase::MenuTarget::kContinueLastsave: {
-			load_game(mm.get_filename_for_continue());
-			break;
-		}
-		case FullscreenMenuBase::MenuTarget::kEditor:
-			EditorInteractive::run_editor(filename_, script_to_run_);
-			break;
-		case FullscreenMenuBase::MenuTarget::kExit:
-		default:
-			return;
-		}
-		/*
-	} catch (const WLWarning& e) {
-		messagetitle = (boost::format("Warning: %s") % e.title()).str();
-		message = e.what();
-	} catch (const Widelands::GameDataError& e) {
-		messagetitle = _("Game data error");
-		message = e.what();
-	}
 #ifdef NDEBUG
-	catch (const std::exception& e) {
-		messagetitle = "Unexpected error during the game";
-		message = e.what();
-		message += "\n\n";
-		message += (boost::format(_("Please report this problem to help us improve Widelands. "
-		                            "You will find related messages in the standard output "
-		                            "(stdout.txt on Windows). You are using build %1$s (%2$s).")) %
-		            build_id().c_str() % build_type().c_str())
-		              .str();
+		catch (const std::exception& e) {
+			messagetitle = "Unexpected error during the game";
+			message = e.what();
+			message += "\n\n";
+			message += (boost::format(_("Please report this problem to help us improve Widelands. "
+			                            "You will find related messages in the standard output "
+			                            "(stdout.txt on Windows). You are using build %1$s (%2$s).")) %
+			            build_id().c_str() % build_type().c_str())
+			              .str();
 
-		message = (boost::format("%s\n\n%s") % message %
-		           _("Please add this information to your report.\n\n"
-		             "Widelands attempts to create a savegame when errors occur "
-		             "during the game. It is often – though not always – possible "
-		             "to load it and continue playing."))
-		             .str();
-	}
+			message = (boost::format("%s\n\n%s") % message %
+			           _("Please add this information to your report.\n\n"
+			             "Widelands attempts to create a savegame when errors occur "
+			             "during the game. It is often – though not always – possible "
+			             "to load it and continue playing."))
+			             .str();
+		}
 #endif
-*/
 	}
 }
 
@@ -1258,7 +1256,7 @@ void WLApplication::mainmenu_tutorial() {
 			game.run_splayer_scenario_direct(filename.c_str(), "");
 		}
 	} catch (const std::exception& e) {
-		log("Fatal exception: %s\n", e.what());
+		log_err("Fatal exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
 	}
@@ -1404,38 +1402,36 @@ bool WLApplication::new_game() {
 		try {
 			game.run_splayer_scenario_direct(sp.get_map().c_str(), "");
 		} catch (const std::exception& e) {
-			log("Fatal exception: %s\n", e.what());
+			log_err("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
 	} else {  // normal singleplayer
 		uint8_t const pn = sp.settings().playernum + 1;
-		// try {
-		// Game controller needs the ibase pointer to init
-		// the chat
-		game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
-		std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
+		try {
+			// Game controller needs the ibase pointer to init
+			// the chat
+			game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
+			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
 
-		std::vector<std::string> tipstexts{"general_game", "singleplayer"};
-		if (sp.has_players_tribe()) {
-			tipstexts.push_back(sp.get_players_tribe());
+			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
+			if (sp.has_players_tribe()) {
+				tipstexts.push_back(sp.get_players_tribe());
+			}
+			game.create_loader_ui(tipstexts, false);
+
+			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
+
+			game.set_game_controller(ctrl.get());
+			game.init_newgame(sp.settings());
+			game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
+		} catch (const std::exception& e) {
+			log_err("Fatal exception: %s\n", e.what());
+			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
+			game.set_game_controller(ctrl.get());
+			emergency_save(game);
+			throw;
 		}
-		game.create_loader_ui(tipstexts, false);
-
-		game.step_loader_ui(_("Preparing game"));
-		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
-
-		game.set_game_controller(ctrl.get());
-		game.init_newgame(sp.settings());
-		game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
-		/* NOCOM
-	} catch (const std::exception& e) {
-		log("Fatal exception: %s\n", e.what());
-		std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
-		game.set_game_controller(ctrl.get());
-		emergency_save(game);
-		throw;
-	} */
 	}
 	return true;
 }
@@ -1467,7 +1463,7 @@ bool WLApplication::load_game(std::string filename) {
 			return true;
 		}
 	} catch (const std::exception& e) {
-		log("Fatal exception: %s\n", e.what());
+		log_err("Fatal exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
 	}
@@ -1514,7 +1510,7 @@ bool WLApplication::campaign_game() {
 			return game.run_splayer_scenario_direct(filename.c_str(), "");
 		}
 	} catch (const std::exception& e) {
-		log("Fatal exception: %s\n", e.what());
+		log_err("Fatal exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
 	}
@@ -1547,7 +1543,7 @@ void WLApplication::replay() {
 
 		game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
 	} catch (const std::exception& e) {
-		log("Fatal Exception: %s\n", e.what());
+		log_err("Fatal Exception: %s\n", e.what());
 		emergency_save(game);
 		filename_.clear();
 		throw;
@@ -1559,17 +1555,17 @@ void WLApplication::replay() {
  * Try to save the game instance if possible
  */
 void WLApplication::emergency_save(Widelands::Game& game) {
-	log("FATAL ERROR - game crashed. Attempting emergency save.\n");
+	log_err("FATAL ERROR - game crashed. Attempting emergency save.\n");
 	if (game.is_loaded()) {
 		try {
 			SaveHandler& save_handler = game.save_handler();
 			std::string error;
 			if (!save_handler.save_game(
 			       game, save_handler.create_file_name(kSaveDir, timestring()), &error)) {
-				log("Emergency save failed: %s\n", error.c_str());
+				log_err("Emergency save failed: %s\n", error.c_str());
 			}
 		} catch (...) {
-			log("Emergency save failed");
+			log_err("Emergency save failed");
 			throw;
 		}
 	}
@@ -1585,12 +1581,12 @@ void WLApplication::cleanup_replays() {
 		        fn, (boost::format("%s%s") % kReplayExtension % kSyncstreamExtension).str());
 	     })) {
 		if (is_autogenerated_and_expired(filename, kReplayKeepAroundTime)) {
-			log("Delete syncstream or replay %s\n", filename.c_str());
+			log_info("Delete syncstream or replay %s\n", filename.c_str());
 			try {
 				g_fs->fs_unlink(filename);
 			} catch (const FileError& e) {
-				log("WLApplication::cleanup_replays: File %s couldn't be deleted: %s\n",
-				    filename.c_str(), e.what());
+				log_warn("WLApplication::cleanup_replays: File %s couldn't be deleted: %s\n",
+				         filename.c_str(), e.what());
 			}
 		}
 	}
@@ -1604,12 +1600,12 @@ void WLApplication::cleanup_ai_files() {
 		     return boost::ends_with(fn, kAiExtension) || boost::contains(fn, "ai_player");
 	     })) {
 		if (is_autogenerated_and_expired(filename, kAIFilesKeepAroundTime)) {
-			log("Deleting generated ai file: %s\n", filename.c_str());
+			log_info("Deleting generated ai file: %s\n", filename.c_str());
 			try {
 				g_fs->fs_unlink(filename);
 			} catch (const FileError& e) {
-				log("WLApplication::cleanup_ai_files: File %s couldn't be deleted: %s\n",
-				    filename.c_str(), e.what());
+				log_warn("WLApplication::cleanup_ai_files: File %s couldn't be deleted: %s\n",
+				         filename.c_str(), e.what());
 			}
 		}
 	}
@@ -1623,12 +1619,12 @@ void WLApplication::cleanup_temp_files() {
 	        kTempFileDir,
 	        [](const std::string& fn) { return boost::ends_with(fn, kTempFileExtension); })) {
 		if (is_autogenerated_and_expired(filename, kTempFilesKeepAroundTime)) {
-			log("Deleting old temp file: %s\n", filename.c_str());
+			log_info("Deleting old temp file: %s\n", filename.c_str());
 			try {
 				g_fs->fs_unlink(filename);
 			} catch (const FileError& e) {
-				log("WLApplication::cleanup_temp_files: File %s couldn't be deleted: %s\n",
-				    filename.c_str(), e.what());
+				log_warn("WLApplication::cleanup_temp_files: File %s couldn't be deleted: %s\n",
+				         filename.c_str(), e.what());
 			}
 		}
 	}
@@ -1641,12 +1637,12 @@ void WLApplication::cleanup_temp_backups(const std::string& dir) {
 	for (const std::string& filename : g_fs->filter_directory(
 	        dir, [](const std::string& fn) { return boost::ends_with(fn, kTempBackupExtension); })) {
 		if (is_autogenerated_and_expired(filename, kTempBackupsKeepAroundTime)) {
-			log("Deleting old temp backup file: %s\n", filename.c_str());
+			log_info("Deleting old temp backup file: %s\n", filename.c_str());
 			try {
 				g_fs->fs_unlink(filename);
 			} catch (const FileError& e) {
-				log("WLApplication::cleanup_temp_backups: File %s couldn't be deleted: %s\n",
-				    filename.c_str(), e.what());
+				log_warn("WLApplication::cleanup_temp_backups: File %s couldn't be deleted: %s\n",
+				         filename.c_str(), e.what());
 			}
 		}
 	}

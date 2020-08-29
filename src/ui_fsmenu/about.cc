@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
@@ -45,12 +46,12 @@ FullscreenMenuAbout::FullscreenMenuAbout()
 				tabs_.add_tab(entry->get_string("name"), entry->get_string("script"));
 			} catch (LuaError& err) {
 				tabs_.add_tab(_("Lua Error"), "");
-				log("%s\n", err.what());
+				log_err("%s", err.what());
 			}
 		}
 	} catch (LuaError& err) {
 		tabs_.add_tab(_("Lua Error"), "");
-		log("%s\n", err.what());
+		log_err("%s", err.what());
 	}
 
 	close_.sigclicked.connect([this]() { clicked_back(); });

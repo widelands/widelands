@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/warning.h"
 #include "graphic/playercolor.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -140,11 +141,11 @@ void FullscreenMenuLaunchMPG::layout() {
 	   Vector2i(get_w() - 10 * padding_ - standard_element_height_, 10 * padding_));
 
 	mpsg_.set_max_size(0, get_h() / 2);
-	log("window height/2: %d\n", get_h() / 2);
-	//	log("individual box width: %d\n", individual_content_box.get_w());
+	log_dbg("window height/2: %d\n", get_h() / 2);
+	// log("individual box width: %d\n", individual_content_box.get_w());
 
-	//	mpsg_.force_new_dimensions(
-	//	   scale_factor(), get_w() * 1 / 2, get_h() / 2, standard_element_height_);
+	// mpsg_.force_new_dimensions(
+	//    scale_factor(), get_w() * 1 / 2, get_h() / 2, standard_element_height_);
 
 	mpsg_.force_new_dimensions(
 	   scale_factor(), individual_content_box.get_w(), get_h() / 2, standard_element_height_);
@@ -376,8 +377,8 @@ void FullscreenMenuLaunchMPG::refresh() {
 			      .str());
 
 		} catch (LuaTableKeyError& e) {
-			log("LaunchMPG: Error loading win condition: %s %s\n",
-			    settings_->get_win_condition_script().c_str(), e.what());
+			log_err("LaunchMPG: Error loading win condition: %s %s\n",
+			        settings_->get_win_condition_script().c_str(), e.what());
 		}
 		win_condition_dropdown_.set_enabled(false);
 	}

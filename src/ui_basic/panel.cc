@@ -23,7 +23,6 @@
 
 #include <SDL_timer.h>
 
-#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"

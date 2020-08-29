@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -289,7 +290,7 @@ int LuaGame::save(lua_State* L) {
 
 	// DO NOT REMOVE THIS OUTPUT. It is used by the regression test suite to
 	// figure out which files to load after a save was requested in a test.
-	log("Script requests save to: %s\n", filename.c_str());
+	log_info_time(get_game(L).get_gametime(), "Script requests save to: %s\n", filename.c_str());
 
 	return 0;
 }
