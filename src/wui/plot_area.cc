@@ -699,15 +699,15 @@ void DifferentialPlotArea::update() {
 	if (plotmode_ == Plotmode::kRelative) {
 		for (const auto& plot : plotdata_) {
 			if (plot.second.showplot) {
-				std::vector<uint32_t> const* dataset = plotdata_[plot.first].absolute_data;
+				std::vector<uint32_t> const* dataset = plot.second.absolute_data;
 				std::vector<uint32_t> const* ndataset = negative_plotdata_[plot.first].absolute_data;
 				uint32_t add = 0;
 				// Relative data, first entry is always zero
-				plotdata_[plot.first].relative_data->push_back(0);
+				plot.second.relative_data->push_back(0);
 				for (uint32_t i = 0; i < dataset->size(); ++i) {
 					add += (*dataset)[i] - (*ndataset)[i];
 					if (0 == ((i + 1) % how_many)) {
-						plotdata_[plot.first].relative_data->push_back(add);
+						plot.second.relative_data->push_back(add);
 						add = 0;
 					}
 				}
