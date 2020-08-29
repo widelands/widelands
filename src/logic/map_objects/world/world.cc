@@ -24,6 +24,7 @@
 #include <SDL_surface.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"
@@ -51,7 +52,7 @@ void World::add_world_object_type(const LuaTable& table, MapObjectType type) {
 
 	// TODO(GunChleoc): Compatibility, remove after v1.0
 	if (table.has_key<std::string>("msgctxt")) {
-		log("WARNING: The 'msgctxt' entry is no longer needed in '%s', please remove it\n",
+		log_warn("The 'msgctxt' entry is no longer needed in '%s', please remove it",
 		    type_name.c_str());
 	}
 
