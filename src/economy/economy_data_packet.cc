@@ -19,6 +19,7 @@
 
 #include "economy/economy_data_packet.h"
 
+#include "base/log.h"
 #include "economy/economy.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -54,10 +55,10 @@ void EconomyDataPacket::read(FileRead& fr) {
 						if (tribe.has_ware(i)) {
 							if (tribe.get_ware_descr(i)->default_target_quantity(tribe.name()) ==
 							    kInvalidWare) {
-								log("WARNING: target quantity configured for ware %s, "
-								    "which should not have target quantity, "
-								    "ignoring\n",
-								    type_name);
+								log_warn("target quantity configured for ware %s, "
+								         "which should not have target quantity, "
+								         "ignoring\n",
+								         type_name);
 							} else {
 								Economy::TargetQuantity& tq = eco_->target_quantities_[i];
 								if (tq.last_modified) {
@@ -70,10 +71,10 @@ void EconomyDataPacket::read(FileRead& fr) {
 							i = tribe.worker_index(type_name);
 							if (tribe.has_worker(i)) {
 								if (tribe.get_worker_descr(i)->default_target_quantity() == kInvalidWare) {
-									log("WARNING: target quantity configured for worker %s, "
-									    "which should not have target quantity, "
-									    "ignoring\n",
-									    type_name);
+									log_warn("target quantity configured for worker %s, "
+									         "which should not have target quantity, "
+									         "ignoring\n",
+									         type_name);
 								} else {
 									Economy::TargetQuantity& tq = other_eco->target_quantities_[i];
 									if (tq.last_modified) {
@@ -83,26 +84,26 @@ void EconomyDataPacket::read(FileRead& fr) {
 									tq.last_modified = last_modified;
 								}
 							} else {
-								log("WARNING: target quantity configured for \"%s\" in worker economy, "
-								    "which is not a worker type defined in tribe "
-								    "%s, ignoring\n",
-								    type_name, tribe.name().c_str());
+								log_warn("target quantity configured for \"%s\" in worker economy, "
+								         "which is not a worker type defined in tribe "
+								         "%s, ignoring\n",
+								         type_name, tribe.name().c_str());
 							}
 						} else {
-							log("WARNING: target quantity configured for \"%s\" in ware economy, "
-							    "which is not a ware type defined in tribe "
-							    "%s, ignoring\n",
-							    type_name, tribe.name().c_str());
+							log_warn("target quantity configured for \"%s\" in ware economy, "
+							         "which is not a ware type defined in tribe "
+							         "%s, ignoring\n",
+							         type_name, tribe.name().c_str());
 						}
 						break;
 					case wwWORKER:
 						i = tribe.worker_index(type_name);
 						if (tribe.has_worker(i)) {
 							if (tribe.get_worker_descr(i)->default_target_quantity() == kInvalidWare) {
-								log("WARNING: target quantity configured for worker %s, "
-								    "which should not have target quantity, "
-								    "ignoring\n",
-								    type_name);
+								log_warn("target quantity configured for worker %s, "
+								         "which should not have target quantity, "
+								         "ignoring\n",
+								         type_name);
 							} else {
 								Economy::TargetQuantity& tq = eco_->target_quantities_[i];
 								if (tq.last_modified) {
@@ -112,10 +113,10 @@ void EconomyDataPacket::read(FileRead& fr) {
 								tq.last_modified = last_modified;
 							}
 						} else {
-							log("WARNING: target quantity configured for \"%s\" in worker economy, "
-							    "which is not a worker type defined in tribe "
-							    "%s, ignoring\n",
-							    type_name, tribe.name().c_str());
+							log_warn("target quantity configured for \"%s\" in worker economy, "
+							         "which is not a worker type defined in tribe "
+							         "%s, ignoring\n",
+							         type_name, tribe.name().c_str());
 						}
 						break;
 					}

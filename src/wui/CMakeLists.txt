@@ -126,7 +126,6 @@ wl_library(wui_common_mapdetails
   DEPENDS
     base_exceptions
     base_i18n
-    base_log
     graphic_text_layout
     io_filesystem
     logic_game_settings
@@ -188,6 +187,7 @@ wl_library(wui_game_tips
   USES_SDL2
   DEPENDS
     base_i18n
+    base_log
     graphic
     graphic_fonthandler
     graphic_text_layout

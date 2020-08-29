@@ -197,7 +197,7 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 			minimap_icon_.set_visible(true);
 			minimap_icon_.set_icon(minimap_image_.get());
 		} catch (const std::exception& e) {
-			log("Failed to load the minimap image : %s\n", e.what());
+			log_err("Failed to load the minimap image : %s\n", e.what());
 		}
 	}
 }

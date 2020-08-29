@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/pathfield.h"

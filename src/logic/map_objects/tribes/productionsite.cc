@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -122,8 +123,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("outputs")) {
-		log("WARNING: The \"outputs\" table is no longer needed; you can remove it from %s\n",
-		    name().c_str());
+		log_warn(
+		   "The \"outputs\" table is no longer needed; you can remove it from %s\n", name().c_str());
 	}
 
 	if (table.has_key("inputs")) {
@@ -186,9 +187,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				program_descname = pgettext_expr(msgctxt_char, program_descname_unlocalized.c_str());
 			}
 			if (program_name == "work") {
-				log("WARNING: The main program for the building %s should be renamed from 'work' to "
-				    "'main'\n",
-				    name().c_str());
+				log_warn("The main program for the building %s should be renamed from 'work' to "
+				         "'main'\n",
+				         name().c_str());
 				programs_[MapObjectProgram::kMainProgram] = std::unique_ptr<ProductionProgram>(
 				   new ProductionProgram(MapObjectProgram::kMainProgram, program_descname,
 				                         program_table->get_table("actions"), tribes, world, this));
@@ -215,9 +216,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("indicate_workarea_overlaps")) {
-		log("WARNING: The \"indicate_workarea_overlaps\" table in %s has been deprecated and can be "
-		    "removed.\n",
-		    name().c_str());
+		log_warn("The \"indicate_workarea_overlaps\" table in %s has been deprecated and can be "
+		         "removed.\n",
+		         name().c_str());
 	}
 
 	// Verify that any map resource collected is valid
@@ -652,7 +653,7 @@ bool ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes
  * Intercept remove_worker() calls to unassign our worker, if necessary.
  */
 void ProductionSite::remove_worker(Worker& w) {
-	molog("%s leaving\n", w.descr().name().c_str());
+	molog(owner().egbase().get_gametime(), "%s leaving\n", w.descr().name().c_str());
 	WorkingPosition* wp = working_positions_;
 	int32_t wp_index = 0;
 
@@ -851,8 +852,8 @@ bool ProductionSite::fetch_from_flag(Game& game) {
 void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
-	molog("is_stopped: %u\n", is_stopped_);
-	molog("main_worker: %i\n", main_worker_);
+	molog(egbase.get_gametime(), "is_stopped: %u\n", is_stopped_);
+	molog(egbase.get_gametime(), "main_worker: %i\n", main_worker_);
 }
 
 void ProductionSite::set_stopped(bool const stopped) {

@@ -81,7 +81,7 @@ void GenericSaveHandler::make_backup() {
 			                  "was %s)\n") %
 			    complete_filename_.c_str() % backup_filename_)
 			      .str();
-			log("%s", error_msg_[index].c_str());
+			log_err("%s", error_msg_[index].c_str());
 			return;
 		}
 	}
@@ -96,7 +96,7 @@ void GenericSaveHandler::make_backup() {
 		                                   "could not be renamed to %s: %s\n") %
 		                     complete_filename_.c_str() % backup_filename_ % e.what())
 		                       .str();
-		log("%s", error_msg_[index].c_str());
+		log_err("%s", error_msg_[index].c_str());
 		return;
 	}
 
@@ -115,7 +115,7 @@ void GenericSaveHandler::save_file() {
 		                                   "written to file %s: %s\n") %
 		                     complete_filename_.c_str() % e.what())
 		                       .str();
-		log("%s", error_msg_[index].c_str());
+		log_err("%s", error_msg_[index].c_str());
 	}
 
 	if ((error_ & Error::kSavingDataFailed) != Error::kNone) {
@@ -130,7 +130,7 @@ void GenericSaveHandler::save_file() {
 				                                   "file %s could not be deleted: %s\n") %
 				                     complete_filename_.c_str() % e.what())
 				                       .str();
-				log("%s", error_msg_[index].c_str());
+				log_err("%s", error_msg_[index].c_str());
 			}
 		}
 	}
@@ -156,7 +156,7 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 				                  "created: %s\n") %
 				    dir_.c_str() % e.what())
 				      .str();
-				log("%s", error_msg_[index].c_str());
+				log_err("%s", error_msg_[index].c_str());
 				result.reset(new GenericSaveHandler::Error(error_));
 				return;
 			}
@@ -187,7 +187,7 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 						                  "not be deleted: %s\n") %
 						    backup_filename_.c_str() % e.what())
 						      .str();
-						log("%s", error_msg_[index].c_str());
+						log_err("%s", error_msg_[index].c_str());
 					}
 
 				} else {
@@ -199,7 +199,7 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 						                  "restored from backup %s: file still exists\n") %
 						    complete_filename_.c_str() % backup_filename_.c_str())
 						      .str();
-						log("%s", error_msg_[index].c_str());
+						log_err("%s", error_msg_[index].c_str());
 					} else {
 						// Restore backup.
 						try {
@@ -212,7 +212,7 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 							                  "be restored from backup %s: %s\n") %
 							    backup_filename_.c_str() % backup_filename_.c_str() % e.what())
 							      .str();
-							log("%s", error_msg_[index].c_str());
+							log_err("%s", error_msg_[index].c_str());
 						}
 					}
 				}
@@ -223,7 +223,7 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 			uint32_t index = get_index(Error::kUnexpectedError);
 			error_msg_[index] =
 			   (boost::format("GenericSaveHandler::save: unknown error: %s\n") % e.what()).str();
-			log("%s", error_msg_[index].c_str());
+			log_err("%s", error_msg_[index].c_str());
 		}
 
 		result.reset(new GenericSaveHandler::Error(error_));

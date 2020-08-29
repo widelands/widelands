@@ -187,7 +187,7 @@ void Campaigns::update_legacy_campvis() {
 		return;
 	}
 
-	log("Converting legacy campvis\n");
+	log_info("Converting legacy campvis\n");
 
 	using LegacyList = std::vector<std::pair<std::string, std::string>>;
 
