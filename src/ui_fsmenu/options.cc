@@ -466,12 +466,12 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 				}
 
 			} catch (const WException&) {
-				log("Could not read locale for: %s\n", localename.c_str());
+				log_err("Could not read locale for: %s\n", localename.c_str());
 				entries.insert(std::make_pair(localename, LanguageEntry(localename, localename)));
 			}  // End read locale from table
 		}     // End scan locales directory
 	} catch (const LuaError& err) {
-		log("Could not read locales information from file: %s\n", err.what());
+		log_err("Could not read locales information from file: %s\n", err.what());
 		return;  // Nothing more can be done now.
 	}           // End read locales table
 

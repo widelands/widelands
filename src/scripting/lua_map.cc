@@ -19,7 +19,6 @@
 
 #include "scripting/lua_map.h"
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/input_queue.h"

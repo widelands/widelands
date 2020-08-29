@@ -24,7 +24,6 @@
 
 #include <boost/algorithm/string/replace.hpp>
 
-#include "base/log.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"

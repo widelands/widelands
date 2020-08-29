@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
@@ -178,9 +179,9 @@ void MainMenuSaveMap::clicked_make_directory() {
 					//  Create directory.
 					g_fs->make_directory(fullname);
 				} catch (const FileError& e) {
-					log("directory creation failed in MainMenuSaveMap::"
-					    "clicked_make_directory: %s\n",
-					    e.what());
+					log_err("directory creation failed in MainMenuSaveMap::"
+					        "clicked_make_directory: %s\n",
+					        e.what());
 					const std::string s =
 					   (boost::format(_("Error while creating directory ‘%s’.")) % fullname).str();
 					UI::WLMessageBox mbox(

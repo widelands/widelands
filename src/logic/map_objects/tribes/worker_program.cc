@@ -217,9 +217,9 @@ void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::strin
 
 	if (read_key_value_pair(cmd[1], ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this option after v1.0
-		log("WARNING: 'mine' program without parameter names is deprecated, please use "
-		    "'mine=<resource_name> radius:<number>' in %s\n",
-		    worker_.name().c_str());
+		log_warn("'mine' program without parameter names is deprecated, please use "
+		         "'mine=<resource_name> radius:<number>' in %s\n",
+		         worker_.name().c_str());
 		act->sparam1 = cmd[0];
 		act->iparam1 = read_positive(cmd[1]);
 	} else {
@@ -274,9 +274,9 @@ void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::stri
 
 	if (read_key_value_pair(cmd[1], ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this option after v1.0
-		log("WARNING: 'breed' program without parameter names is deprecated, please use "
-		    "'breed=<resource_name> radius:<number>' in %s\n",
-		    worker_.name().c_str());
+		log_warn("'breed' program without parameter names is deprecated, please use "
+		         "'breed=<resource_name> radius:<number>' in %s\n",
+		         worker_.name().c_str());
 		act->sparam1 = cmd[0];
 		act->iparam1 = read_positive(cmd[1]);
 	} else {
@@ -879,9 +879,9 @@ void WorkerProgram::parse_repeatsearch(Worker::Action* act, const std::vector<st
 
 	if (read_key_value_pair(cmd[1], ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this option after v1.0
-		log("WARNING: 'repeatsearch' program without parameter names is deprecated, please use "
-		    "'repeatsearch=<program_name> repetitions:<number> radius:<number>' in %s\n",
-		    worker_.name().c_str());
+		log_warn("'repeatsearch' program without parameter names is deprecated, please use "
+		         "'repeatsearch=<program_name> repetitions:<number> radius:<number>' in %s\n",
+		         worker_.name().c_str());
 		act->iparam1 = read_positive(cmd[0]);
 		act->iparam2 = read_positive(cmd[1]);
 		act->sparam1 = cmd[2];
@@ -957,9 +957,9 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 
 	if (read_key_value_pair(cmd[0], ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this option after v1.0
-		log("WARNING: 'scout' program without parameter names is deprecated, please use "
-		    "'scout=radius:<number> duration:<duration>' in %s\n",
-		    worker_.name().c_str());
+		log_warn("'scout' program without parameter names is deprecated, please use "
+		         "'scout=radius:<number> duration:<duration>' in %s\n",
+		         worker_.name().c_str());
 		act->iparam1 = read_positive(cmd[0]);
 		act->iparam2 = read_positive(cmd[1]);
 	} else {

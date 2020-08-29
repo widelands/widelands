@@ -80,7 +80,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		throw wexception("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
 	}
 
-	log("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
+	log_dbg("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
 	sdl_window_ = SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED,
 	                               SDL_WINDOWPOS_UNDEFINED, window_mode_width_, window_mode_height_,
 	                               SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
@@ -104,23 +104,22 @@ void Graphic::initialize(const TraceGl& trace_gl,
 
 	/* Information about the video capabilities. */
 	const char* drv = SDL_GetCurrentVideoDriver();
-	log("**** GRAPHICS REPORT ****\n"
+	log_dbg("**** GRAPHICS REPORT ****\n");
 #ifdef WL_USE_GLVND
-	    "VIDEO DRIVER GLVND %s\n",
+	log_dbg("VIDEO DRIVER GLVND %s\n", drv ? drv : "NONE");
 #else
-	    "VIDEO DRIVER %s\n",
+	log_dbg("VIDEO DRIVER %s\n", drv ? drv : "NONE");
 #endif
-	    drv ? drv : "NONE");
 	SDL_DisplayMode disp_mode;
 	for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
 		if (SDL_GetCurrentDisplayMode(i, &disp_mode) == 0) {
-			log("Display #%d: %dx%d @ %dhz %s\n", i, disp_mode.w, disp_mode.h, disp_mode.refresh_rate,
-			    SDL_GetPixelFormatName(disp_mode.format));
+			log_dbg("Display #%d: %dx%d @ %dhz %s\n", i, disp_mode.w, disp_mode.h,
+			        disp_mode.refresh_rate, SDL_GetPixelFormatName(disp_mode.format));
 		} else {
-			log("Couldn't get display mode for display #%d: %s\n", i, SDL_GetError());
+			log_warn("Couldn't get display mode for display #%d: %s\n", i, SDL_GetError());
 		}
 	}
-	log("**** END GRAPHICS REPORT ****\n");
+	log_dbg("**** END GRAPHICS REPORT ****\n");
 
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
@@ -270,7 +269,7 @@ void Graphic::refresh() {
 	// we should better take it now, before this is swapped out to the
 	// frontbuffer and becomes inaccessible to us.
 	if (!screenshot_filename_.empty()) {
-		log("Save screenshot to %s\n", screenshot_filename_.c_str());
+		log_info("Save screenshot to %s\n", screenshot_filename_.c_str());
 		std::unique_ptr<StreamWrite> sw(g_fs->open_stream_write(screenshot_filename_));
 		save_to_png(screen_->to_texture().get(), sw.get(), ColorType::RGB);
 		screenshot_filename_.clear();
