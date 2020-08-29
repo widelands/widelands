@@ -249,7 +249,7 @@ void DefaultAI::think() {
 		// close to our default location…
 		if (!player_->pick_custom_starting_position(game().map().get_starting_pos(player_number()))) {
 			log_warn_time(gametime, "AI %u: default starting position already taken!\n",
-			    static_cast<unsigned>(player_number()));
+			              static_cast<unsigned>(player_number()));
 		}
 		return;
 	}

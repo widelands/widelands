@@ -538,11 +538,14 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			// Draw build help.
 			const bool show_port_space = has_expedition_port_space(f->fcoords);
 			if (show_port_space || suited_as_starting_pos || buildhelp()) {
-				if (const auto* overlay = (!show_port_space && picking_starting_pos && !suited_as_starting_pos && !buildhelp()) ? nullptr :
-					get_buildhelp_overlay(
-				       show_port_space ? f->fcoords.field->maxcaps() :
-				                         picking_starting_pos ? f->fcoords.field->nodecaps() :
-				                                                plr.get_buildcaps(f->fcoords))) {
+				if (const auto* overlay =
+				       (!show_port_space && picking_starting_pos && !suited_as_starting_pos &&
+				        !buildhelp()) ?
+				          nullptr :
+				          get_buildhelp_overlay(show_port_space ? f->fcoords.field->maxcaps() :
+				                                                  picking_starting_pos ?
+				                                                  f->fcoords.field->nodecaps() :
+				                                                  plr.get_buildcaps(f->fcoords))) {
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale,
 					                   f->seeing == Widelands::SeeUnseeNode::kVisible ? 1.f : 0.3f);
 				}
