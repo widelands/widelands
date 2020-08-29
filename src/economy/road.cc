@@ -388,8 +388,9 @@ void Road::postsplit(EditorGameBase& egbase, Flag& flag) {
 				   egbase, get_owner(), &newroad, secondpath.get_coords()[newroad.get_idle_index()]));
 				newroad.assign_carrier(new_carrier, slot_idx);
 			} else {
-				log_err_time(egbase.get_gametime(), "Road::postsplit found worker %s which is not one of our carriers!\n",
-				    w->descr().name().c_str());
+				log_err_time(egbase.get_gametime(),
+				             "Road::postsplit found worker %s which is not one of our carriers!\n",
+				             w->descr().name().c_str());
 			}
 		}
 	}

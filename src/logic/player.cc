@@ -794,8 +794,9 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 						                         primary_start;
 						primary_road->destroy(egbase());
 						if (g_verbose) {
-							log_info_time(egbase().get_gametime(), "destroying road/waterway from (%i, %i) going in dir %u\n",
-							    flag->get_position().x, flag->get_position().y, primary_road_id);
+							log_info_time(egbase().get_gametime(),
+							              "destroying road/waterway from (%i, %i) going in dir %u\n",
+							              flag->get_position().x, flag->get_position().y, primary_road_id);
 						}
 						//  The primary road is gone. Now see if the flag at the other
 						//  end of it is a dead-end.

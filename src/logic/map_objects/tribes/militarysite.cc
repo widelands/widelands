@@ -87,12 +87,13 @@ void MilitarySite::SoldierControl::drop_soldier(Soldier& soldier) {
 	if (!military_site_->is_present(soldier)) {
 		// This can happen when the "drop soldier" player command is delayed
 		// by network delay or a client has bugs.
-		military_site_->molog(
-		   military_site_->owner().egbase().get_gametime(), "MilitarySite::drop_soldier(%u): not present\n", soldier.serial());
+		military_site_->molog(military_site_->owner().egbase().get_gametime(),
+		                      "MilitarySite::drop_soldier(%u): not present\n", soldier.serial());
 		return;
 	}
 	if (present_soldiers().size() <= min_soldier_capacity()) {
-		military_site_->molog(military_site_->owner().egbase().get_gametime(), "cannot drop last soldier(s)\n");
+		military_site_->molog(
+		   military_site_->owner().egbase().get_gametime(), "cannot drop last soldier(s)\n");
 		return;
 	}
 
