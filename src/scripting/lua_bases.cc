@@ -231,7 +231,8 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 	Tribes* tribes = get_egbase(L).mutable_tribes();
 	const std::string building_name = luaL_checkstring(L, 2);
 	try {
-		const BuildingDescr* building_description = tribes->get_building_descr(tribes->load_building(building_name));
+		const BuildingDescr* building_description =
+		   tribes->get_building_descr(tribes->load_building(building_name));
 		return LuaMaps::upcasted_map_object_descr_to_lua(L, building_description);
 	} catch (const Widelands::GameDataError&) {
 		report_error(L, "Building %s does not exist", building_name.c_str());
@@ -325,7 +326,8 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	Tribes* tribes = get_egbase(L).mutable_tribes();
 	const std::string worker_name = luaL_checkstring(L, 2);
 	try {
-		const WorkerDescr* worker_description = tribes->get_worker_descr(tribes->load_worker(worker_name));
+		const WorkerDescr* worker_description =
+		   tribes->get_worker_descr(tribes->load_worker(worker_name));
 		return LuaMaps::upcasted_map_object_descr_to_lua(L, worker_description);
 	} catch (const Widelands::GameDataError&) {
 		report_error(L, "Worker %s does not exist", worker_name.c_str());
