@@ -24,6 +24,7 @@
 
 #include <boost/algorithm/string/replace.hpp>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
@@ -171,8 +172,8 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
 			                           table.get_table("pictures")->array_entries<std::string>()))));
 			if (g_verbose) {
 				assert(!table.get_table("pictures")->array_entries<std::string>().empty());
-				log("Found deprecated 'pictures' parameter in animation with file\n   %s\n",
-				    table.get_table("pictures")->array_entries<std::string>().front().c_str());
+				log_dbg("Found deprecated 'pictures' parameter in animation with file\n   %s\n",
+				        table.get_table("pictures")->array_entries<std::string>().front().c_str());
 			}
 		} else {
 			// TODO(GunChleoc): When all animations have been converted, require that

@@ -121,15 +121,15 @@ AttackTarget::AttackResult Warehouse::AttackTarget::attack(Soldier* enemy) const
 
 WarehouseSupply::~WarehouseSupply() {
 	if (ware_economy_) {
-		log("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
-		    "a ware_economy",
-		    warehouse_->serial());
+		log_warn("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
+		         "a ware_economy",
+		         warehouse_->serial());
 		set_economy(nullptr, wwWARE);
 	}
 	if (worker_economy_) {
-		log("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
-		    "a worker_economy",
-		    warehouse_->serial());
+		log_warn("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
+		         "a worker_economy",
+		         warehouse_->serial());
 		set_economy(nullptr, wwWORKER);
 	}
 
@@ -476,16 +476,16 @@ bool Warehouse::load_finish_planned_worker(PlannedWorkers& pw) {
 			}
 		}
 
-		log("load_finish_planned_worker: old savegame: "
-		    "need to create new request for '%s'\n",
-		    cost_it->first.c_str());
+		log_warn("load_finish_planned_worker: old savegame: "
+		         "need to create new request for '%s'\n",
+		         cost_it->first.c_str());
 		pw.requests.insert(
 		   pw.requests.begin() + idx, new Request(*this, wareindex, &Warehouse::request_cb, type));
 	}
 
 	while (pw.requests.size() > idx) {
-		log("load_finish_planned_worker: old savegame: "
-		    "removing outdated request.\n");
+		log_warn("load_finish_planned_worker: old savegame: "
+		         "removing outdated request.\n");
 		delete pw.requests.back();
 		pw.requests.pop_back();
 	}
@@ -508,12 +508,12 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 				   schedule_act(dynamic_cast<Game&>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 			}
 			next_worker_without_cost_spawn_[i] = next_spawn;
-			log("WARNING: player %u is allowed to create worker type %s but his "
-			    "%s %u at (%i, %i) does not have a next_spawn time set for that "
-			    "worker type; setting it to %u\n",
-			    owner().player_number(),
-			    owner().tribe().get_worker_descr(worker_index)->name().c_str(), descr().name().c_str(),
-			    serial(), get_position().x, get_position().y, next_spawn);
+			log_warn("player %u is allowed to create worker type %s but his "
+			         "%s %u at (%i, %i) does not have a next_spawn time set for that "
+			         "worker type; setting it to %u\n",
+			         owner().player_number(),
+			         owner().tribe().get_worker_descr(worker_index)->name().c_str(),
+			         descr().name().c_str(), serial(), get_position().x, get_position().y, next_spawn);
 		}
 	}
 
@@ -563,8 +563,9 @@ bool Warehouse::init(EditorGameBase& egbase) {
 
 		next_stock_remove_act_ = schedule_act(*game, 4000);
 
-		log("Message: adding %s for player %i at (%d, %d)\n", to_string(descr().type()).c_str(),
-		    player->player_number(), position_.x, position_.y);
+		log_info_time(egbase.get_gametime(), "Message: adding %s for player %i at (%d, %d)\n",
+		              to_string(descr().type()).c_str(), player->player_number(), position_.x,
+		              position_.y);
 
 		if (descr().get_isport()) {
 			send_message(*game, Message::Type::kSeafaring, descr().descname(), descr().icon_filename(),
@@ -591,8 +592,8 @@ bool Warehouse::init(EditorGameBase& egbase) {
 		PortDock* pd = portdock_;
 		// should help diagnose problems with marine
 		if (!pd->get_fleet()) {
-			log(" Warning: portdock without a fleet created (%3dx%3d)\n", get_position().x,
-			    get_position().y);
+			log_warn_time(egbase.get_gametime(), " Portdock without a fleet created (%3dx%3d)\n",
+			              get_position().x, get_position().y);
 		}
 	}
 	cleanup_in_progress_ = false;
@@ -617,12 +618,14 @@ void Warehouse::init_containers(const Player& player) {
  * and initialize the @ref PortDock instance.
  */
 void Warehouse::init_portdock(EditorGameBase& egbase) {
-	molog("Setting up port dock fields\n");
+	molog(egbase.get_gametime(), "Setting up port dock fields\n");
 
 	std::vector<Coords> dock = egbase.map().find_portdock(get_position(), false);
 	if (dock.empty()) {
-		log("No suitable portdock space around %3dx%3d found! Attempting to force the portdock...\n",
-		    get_position().x, get_position().y);
+		log_warn_time(
+		   egbase.get_gametime(),
+		   "No suitable portdock space around %3dx%3d found! Attempting to force the portdock...\n",
+		   get_position().x, get_position().y);
 
 		dock = egbase.map().find_portdock(get_position(), true);
 		if (dock.empty()) {
@@ -636,7 +639,8 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 		Field& field = egbase.map()[dock.back()];
 
 		if (field.get_owned_by() != owner().player_number()) {
-			log("Conquering territory at %3dx%3d for portdock\n", dock.back().x, dock.back().y);
+			log_info_time(egbase.get_gametime(), "Conquering territory at %3dx%3d for portdock\n",
+			              dock.back().x, dock.back().y);
 			egbase.conquer_area(
 			   PlayerArea<Area<FCoords>>(
 			      owner().player_number(), Area<FCoords>(egbase.map().get_fcoords(dock.back()), 1)),
@@ -644,8 +648,8 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 		}
 
 		if (field.get_immovable()) {
-			log("Clearing immovable '%s' at %3dx%3d for portdock\n",
-			    field.get_immovable()->descr().name().c_str(), dock.back().x, dock.back().y);
+			log_info_time(egbase.get_gametime(), "Clearing immovable '%s' at %3dx%3d for portdock\n",
+			              field.get_immovable()->descr().name().c_str(), dock.back().x, dock.back().y);
 			// currently only waterways and portdocks can be built on water
 			assert(field.get_immovable()->descr().type() == MapObjectType::WATERWAY);
 			if (upcast(Game, game, &egbase)) {
@@ -660,7 +664,7 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 		}
 	}
 
-	molog("Found %" PRIuS " fields for the dock\n", dock.size());
+	molog(egbase.get_gametime(), "Found %" PRIuS " fields for the dock\n", dock.size());
 
 	portdock_ = new PortDock(this);
 	portdock_->set_owner(get_owner());
@@ -681,8 +685,9 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 	// this is just to indicate something wrong is going on
 	PortDock* pd_tmp = portdock_;
 	if (!pd_tmp->get_fleet()) {
-		log(" portdock for port at %3dx%3d created but without a fleet!\n", get_position().x,
-		    get_position().y);
+		log_warn_time(egbase.get_gametime(),
+		              " portdock for port at %3dx%3d created but without a fleet!\n",
+		              get_position().x, get_position().y);
 	}
 }
 
@@ -694,14 +699,15 @@ void Warehouse::destroy(EditorGameBase& egbase) {
 void Warehouse::restore_portdock_or_destroy(EditorGameBase& egbase) {
 	Warehouse::init_portdock(egbase);
 	if (!portdock_) {
-		log(" Portdock could not be restored, removing the port now (coords: %3dx%3d)\n",
-		    get_position().x, get_position().y);
+		log_warn_time(egbase.get_gametime(),
+		              " Portdock could not be restored, removing the port now (coords: %3dx%3d)\n",
+		              get_position().x, get_position().y);
 		Building::destroy(egbase);
 	} else {
-		molog("Message: portdock restored\n");
+		molog(egbase.get_gametime(), "Message: portdock restored\n");
 		PortDock* pd_tmp = portdock_;
 		if (!pd_tmp->get_fleet()) {
-			log(" Portdock restored but without a fleet!\n");
+			log_warn_time(egbase.get_gametime(), " Portdock restored but without a fleet!\n");
 		}
 	}
 }
@@ -1457,19 +1463,23 @@ void Warehouse::log_general_info(const EditorGameBase& egbase) const {
 
 	if (descr().get_isport()) {
 		if (portdock_) {
-			molog("Port dock: %u\n", portdock_->serial());
-			molog("wares and workers waiting: %u\n", portdock_->count_waiting());
-			molog("exped. in progr.: %s\n", (portdock_->expedition_started()) ? "true" : "false");
+			molog(egbase.get_gametime(), "Port dock: %u\n", portdock_->serial());
+			molog(
+			   egbase.get_gametime(), "wares and workers waiting: %u\n", portdock_->count_waiting());
+			molog(egbase.get_gametime(), "exped. in progr.: %s\n",
+			      (portdock_->expedition_started()) ? "true" : "false");
 			ShipFleet* fleet = portdock_->get_fleet();
 			if (fleet) {
-				molog("* fleet: %u\n", fleet->serial());
-				molog("  ships: %u, ports: %u\n", fleet->count_ships(), fleet->count_ports());
-				molog("  act_pending: %s\n", (fleet->get_act_pending()) ? "true" : "false");
+				molog(egbase.get_gametime(), "* fleet: %u\n", fleet->serial());
+				molog(egbase.get_gametime(), "  ships: %u, ports: %u\n", fleet->count_ships(),
+				      fleet->count_ports());
+				molog(egbase.get_gametime(), "  act_pending: %s\n",
+				      (fleet->get_act_pending()) ? "true" : "false");
 			} else {
-				molog("No fleet?!\n");
+				molog(egbase.get_gametime(), "No fleet?!\n");
 			}
 		} else {
-			molog("No port dock!?\n");
+			molog(egbase.get_gametime(), "No port dock!?\n");
 		}
 	}
 }
