@@ -21,7 +21,6 @@
 
 #include "base/i18n.h"
 #include "economy/economy.h"
-#include "graphic/graphic.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "ui_basic/tabpanel.h"
@@ -38,19 +37,19 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 	set_center_panel(tabs);
 
 	all_wares_ = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
-	tabs->add("total_wares", g_gr->images().get(pic_tab_wares), all_wares_, _("Wares (total)"));
+	tabs->add("total_wares", g_image_cache->get(pic_tab_wares), all_wares_, _("Wares (total)"));
 
 	all_workers_ = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
 	tabs->add(
-	   "workers_total", g_gr->images().get(pic_tab_workers), all_workers_, _("Workers (total)"));
+	   "workers_total", g_image_cache->get(pic_tab_workers), all_workers_, _("Workers (total)"));
 
 	warehouse_wares_ = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
-	tabs->add("wares_in_warehouses", g_gr->images().get(pic_tab_wares_warehouse), warehouse_wares_,
+	tabs->add("wares_in_warehouses", g_image_cache->get(pic_tab_wares_warehouse), warehouse_wares_,
 	          _("Wares in warehouses"));
 
 	warehouse_workers_ =
 	   new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
-	tabs->add("workers_in_warehouses", g_gr->images().get(pic_tab_workers_warehouse),
+	tabs->add("workers_in_warehouses", g_image_cache->get(pic_tab_workers_warehouse),
 	          warehouse_workers_, _("Workers in warehouses"));
 
 	// Preselect the wares_in_warehouses tab

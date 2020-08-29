@@ -29,7 +29,6 @@
 
 #undef main  // No, we do not want SDL_main
 
-#include "base/log.h"
 #include "config.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"

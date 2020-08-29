@@ -203,7 +203,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      UI::DropdownType::kPictorialMenu,
                      UI::PanelStyle::kWui,
                      UI::ButtonStyle::kWuiPrimary),
-     grid_marker_pic_(g_gr->images().get("images/wui/overlays/grid_marker.png")) {
+     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")) {
 	add_main_menu();
 
 	set_display_flag(InteractiveBase::dfShowWorkareaOverlap, true);  // enable by default
@@ -262,7 +262,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 }
 
 void InteractivePlayer::add_statistics_menu() {
-	statisticsmenu_.set_image(g_gr->images().get("images/wui/menus/statistics.png"));
+	statisticsmenu_.set_image(g_image_cache->get("images/wui/menus/statistics.png"));
 	toolbar()->add(&statisticsmenu_);
 
 	menu_windows_.stats_seafaring.open_window = [this] {
@@ -301,31 +301,31 @@ void InteractivePlayer::rebuild_statistics_menu() {
 	if (egbase().map().allows_seafaring()) {
 		/** TRANSLATORS: An entry in the game's statistics menu */
 		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring,
-		                    g_gr->images().get("images/wui/menus/statistics_seafaring.png"), false,
+		                    g_image_cache->get("images/wui/menus/statistics_seafaring.png"), false,
 		                    "", "E");
 	}
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Soldiers"), StatisticsMenuEntry::kSoldiers,
-	                    g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
+	                    g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
 	                    "X");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
-	                    g_gr->images().get("images/wui/menus/statistics_stock.png"), false, "", "I");
+	                    g_image_cache->get("images/wui/menus/statistics_stock.png"), false, "", "I");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
-	                    g_gr->images().get("images/wui/menus/statistics_buildings.png"), false, "",
+	                    g_image_cache->get("images/wui/menus/statistics_buildings.png"), false, "",
 	                    "B");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare,
-	                    g_gr->images().get("images/wui/menus/statistics_wares.png"), false, "", "P");
+	                    g_image_cache->get("images/wui/menus/statistics_wares.png"), false, "", "P");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral,
-	                    g_gr->images().get("images/wui/menus/statistics_general.png"), false, "",
+	                    g_image_cache->get("images/wui/menus/statistics_general.png"), false, "",
 	                    "G");
 }
 
@@ -367,7 +367,7 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	       * are highlighted */
 	      _("Show Workarea Overlaps"),
 	   ShowHideEntry::kWorkareaOverlap,
-	   g_gr->images().get("images/wui/menus/show_workarea_overlap.png"), false,
+	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"), false,
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), "W");
 }
 
@@ -416,7 +416,7 @@ void InteractivePlayer::think() {
 			    nr_new_messages)
 			      .str();
 		}
-		toggle_message_menu_->set_pic(g_gr->images().get(msg_icon));
+		toggle_message_menu_->set_pic(g_image_cache->get(msg_icon));
 		toggle_message_menu_->set_tooltip(msg_tooltip);
 	}
 

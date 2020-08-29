@@ -3,8 +3,7 @@ include "scripting/richtext.lua"
 push_textdomain("texts")
 
 local r = {
-   title = _"License",
-   text = rt(
+   rt(
       p_font("align=center", "size=28 color=2F9131", _"Licensing information for Widelands") ..
       -- TRANSLATORS: Placeholder is copyright end year
       p_font("align=center", "size=14 italic=1 color=D1D1D1", _"Copyright 2002 - %1% by the Widelands Development Team."):bformat(2020) ..

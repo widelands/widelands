@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
@@ -803,7 +804,7 @@ void MapGenerator::create_random_map() {
 
 		if (coords.empty()) {
 			// TODO(unknown): inform players via popup
-			log("WARNING: Could not find a suitable place for player %u\n", n);
+			log_warn("Could not find a suitable place for player %u\n", n);
 			// Let's hope that one is at least on dry ground.
 			coords2 = playerstart;
 		}
@@ -818,8 +819,8 @@ void MapGenerator::create_random_map() {
 			// map_.get_fcoords(coords2).field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK
 			// != Widelands::BUILDCAPS_BIG)
 
-			log("WARNING: Player %u has no starting position - illegal coordinates (%d, %d).\n", n,
-			    coords2.x, coords2.y);
+			log_warn("Player %u has no starting position - illegal coordinates (%d, %d).\n", n,
+			         coords2.x, coords2.y);
 			coords2 = Coords::null();
 		}
 
