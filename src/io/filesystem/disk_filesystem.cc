@@ -554,18 +554,19 @@ StreamWrite* RealFSImpl::open_stream_write(const std::string& fname) {
 	return new RealFSStreamWrite(fullname);
 }
 
-unsigned long long RealFSImpl::disk_space() {
+// Disk space is system dependent anyway, so we allow unspecific long long
+unsigned long long RealFSImpl::disk_space() {  // NOLINT
 #ifdef _WIN32
 	ULARGE_INTEGER freeavailable;
 	return GetDiskFreeSpaceEx(canonicalize_name(directory_).c_str(), &freeavailable, 0, 0) ?
 	          // If more than 2G free space report that much
-	          freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :
-	                                   freeavailable.LowPart :
+	          freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :  // NOLINT
+	             freeavailable.LowPart :
 	          0;
 #else
 	struct statvfs svfs;
 	if (statvfs(canonicalize_name(directory_).c_str(), &svfs) != -1) {
-		return static_cast<unsigned long long>(svfs.f_bsize) * svfs.f_bavail;
+		return static_cast<unsigned long long>(svfs.f_bsize) * svfs.f_bavail;  // NOLINT
 	}
 #endif
 	return 0;  //  can not check disk space

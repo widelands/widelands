@@ -22,7 +22,6 @@
 
 #include <boost/signals2/signal.hpp>
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
 #include "graphic/animation/diranimations.h"
@@ -30,6 +29,7 @@
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/info_to_draw.h"
+#include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
@@ -40,47 +40,6 @@ namespace Widelands {
 
 class MapObject;
 class Player;
-
-// This enum lists the available classes of Map Objects.
-enum class MapObjectType : uint8_t {
-	MAPOBJECT = 0,  // Root superclass
-
-	WARE,  //  class WareInstance
-	BATTLE,
-	SHIP_FLEET,
-	FERRY_FLEET,
-
-	BOB = 10,  // Bob
-	CRITTER,   // Bob -- Critter
-	SHIP,      // Bob -- Ship
-	WORKER,    // Bob -- Worker
-	CARRIER,   // Bob -- Worker -- Carrier
-	SOLDIER,   // Bob -- Worker -- Soldier
-	FERRY,     // Bob -- Worker -- Ferry
-
-	// everything below is at least a BaseImmovable
-	IMMOVABLE = 30,
-
-	// everything below is at least a PlayerImmovable
-	FLAG = 40,  // Flag
-	PORTDOCK,   // Portdock
-	ROADBASE,   // Roadbase
-	ROAD,       // Roadbase -- Road
-	WATERWAY,   // Roadbase -- Waterway
-
-	// everything below is at least a Building
-	BUILDING = 100,    // Building
-	CONSTRUCTIONSITE,  // Building -- Constructionsite
-	DISMANTLESITE,     // Building -- Dismantlesite
-	WAREHOUSE,         // Building -- Warehouse
-	MARKET,            // Building -- Market
-	PRODUCTIONSITE,    // Building -- Productionsite
-	MILITARYSITE,      // Building -- Productionsite -- Militarysite
-	TRAININGSITE       // Building -- Productionsite -- Trainingsite
-};
-
-// Returns a string representation for 'type'.
-std::string to_string(MapObjectType type);
 
 /**
  * Base class for descriptions of worker, files and so on. This must just
@@ -288,10 +247,7 @@ public:
 		return owner_;
 	}
 
-	const Player& owner() const {
-		assert(get_owner());
-		return *owner_;
-	}
+	const Player& owner() const;
 
 	// Header bytes to distinguish between data packages for the different
 	// MapObject classes. Be careful in changing those, since they are written
@@ -395,11 +351,7 @@ protected:
 	                  const float scale,
 	                  RenderTarget* dst) const;
 
-#ifdef _WIN32
-	void molog(char const* fmt, ...) const __attribute__((format(gnu_printf, 2, 3)));
-#else
-	void molog(char const* fmt, ...) const __attribute__((format(__printf__, 2, 3)));
-#endif
+	void molog(uint32_t gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
 
 	const MapObjectDescr* descr_;
 	Serial serial_;
@@ -429,8 +381,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
 struct ObjectManager {
 	using MapObjectMap = std::unordered_map<Serial, MapObject*>;
 
-	ObjectManager() {
-		lastserial_ = 0;
+	ObjectManager() : lastserial_(0), is_cleaning_up_(false) {
 	}
 	~ObjectManager();
 
@@ -462,9 +413,15 @@ struct ObjectManager {
 	 */
 	std::vector<Serial> all_object_serials_ordered() const;
 
+	bool is_cleaning_up() const {
+		return is_cleaning_up_;
+	}
+
 private:
 	Serial lastserial_;
 	MapObjectMap objects_;
+
+	bool is_cleaning_up_;
 
 	DISALLOW_COPY_AND_ASSIGN(ObjectManager);
 };

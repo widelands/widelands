@@ -55,13 +55,13 @@ public:
 	                    const std::string& msgctxt,
 	                    MapObjectType type,
 	                    const LuaTable& t,
-	                    const Tribes& tribes,
-	                    const World& world);
+	                    Tribes& tribes,
+	                    World& world);
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const std::string& msgctxt,
 	                    const LuaTable& t,
-	                    const Tribes& tribes,
-	                    const World& world);
+	                    Tribes& tribes,
+	                    World& world);
 
 	Building& create_object() const override;
 
@@ -344,7 +344,7 @@ public:
 	void act(Game&, uint32_t data) override;
 
 	void remove_worker(Worker&) override;
-	int warp_worker(EditorGameBase&, const WorkerDescr& wd);
+	bool warp_worker(EditorGameBase&, const WorkerDescr& wd);
 
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
@@ -401,7 +401,7 @@ protected:
 
 	/**
 	 * Determine the next program to be run when the last program has finished.
-	 * The default implementation starts program "work".
+	 * The default implementation starts program "main".
 	 */
 	virtual void find_and_start_next_program(Game&);
 

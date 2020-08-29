@@ -1,3 +1,7 @@
+# default values
+os: linux
+dist: xenial
+
 addons:
   apt:
     packages:
@@ -21,6 +25,7 @@ addons:
       - sdl2_image
       - sdl2_mixer
       - sdl2_ttf
+      - icu4c
     update: true
 
 before_script:
@@ -51,6 +56,7 @@ jobs:
         apt:
           packages:
             - python-pip
+            - libicu-dev
       install: pip install sphinx
       script: ./.travis.sh documentation
     - name: "Includes"
@@ -59,31 +65,7 @@ jobs:
       cache: false
 
     - stage: compiler
-      name: "Clang-tidy"
-      compiler: clang
-      script: ./.travis.sh clang-tidy
-      cache: false
-      addons:
-        apt:
-          packages:
-            - clang
-            - clang-tidy
-            - python-yaml
-            - libboost-dev
-            - libboost-regex-dev
-            - libboost-system-dev
-            - libboost-test-dev
-            - libglew-dev
-            - libicu-dev
-            - libpng-dev
-            - libsdl2-dev
-            - libsdl2-image-dev
-            - libsdl2-mixer-dev
-            - libsdl2-ttf-dev
-            - zlib1g-dev
-      # Run this stage to test whether there are any error during compiling.
-      # We use macOS, since it is the fastest to build (but also the most susceptible to transient errors…)
-    - name: "DEBUG: macOS 10.14 with Xcode 11.3"
+      name: "DEBUG: macOS 10.14 with Xcode 11.3"
       os: osx
       osx_image: xcode11.3
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON

@@ -82,7 +82,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
             0,
             _("Options"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
@@ -281,7 +281,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_game_.add(&numpad_diagonalscrolling_);
 
 	// Bind actions
-	language_dropdown_.selected.connect([this]() { update_language_stats(false); });
+	language_dropdown_.selected.connect([this]() { update_language_stats(); });
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
@@ -294,7 +294,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	for (int modes = 0; modes < SDL_GetNumDisplayModes(0); ++modes) {
 		SDL_DisplayMode mode;
 		SDL_GetDisplayMode(0, modes, &mode);
-		if (800 <= mode.w && 600 <= mode.h &&
+		if (kMinimumResolutionW <= mode.w && kMinimumResolutionH <= mode.h &&
 		    (SDL_BITSPERPIXEL(mode.format) == 32 || SDL_BITSPERPIXEL(mode.format) == 24)) {
 			ScreenResolution this_res = {
 			   mode.w, mode.h, static_cast<int32_t>(SDL_BITSPERPIXEL(mode.format))};
@@ -349,7 +349,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Language options
 	add_languages_to_list(opt.language);
-	update_language_stats(true);
+	update_language_stats();
 	layout();
 }
 
@@ -473,12 +473,12 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 				}
 
 			} catch (const WException&) {
-				log("Could not read locale for: %s\n", localename.c_str());
+				log_err("Could not read locale for: %s\n", localename.c_str());
 				entries.insert(std::make_pair(localename, LanguageEntry(localename, localename)));
 			}  // End read locale from table
 		}     // End scan locales directory
 	} catch (const LuaError& err) {
-		log("Could not read locales information from file: %s\n", err.what());
+		log_err("Could not read locales information from file: %s\n", err.what());
 		return;  // Nothing more can be done now.
 	}           // End read locales table
 
@@ -495,13 +495,13 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
  * @param include_system_lang We only want to include the system lang if it matches the Widelands
  * locale.
  */
-void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
+void FullscreenMenuOptions::update_language_stats() {
 	int percent = 100;
 	std::string message = "";
 	if (language_dropdown_.has_selection()) {
 		std::string locale = language_dropdown_.get_selected();
 		// Empty locale means try system locale
-		if (locale.empty() && include_system_lang) {
+		if (locale.empty()) {
 			std::vector<std::string> parts;
 			boost::split(parts, i18n::get_locale(), boost::is_any_of("."));
 			if (language_entries_.count(parts[0]) == 1) {
@@ -625,7 +625,7 @@ void OptionsCtrl::handle_menu() {
 	}
 	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
-		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres);
+		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
 		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
 		opt_dialog_.reset(new FullscreenMenuOptions(options_struct(active_tab)));
 		handle_menu();  // Restart general options menu
@@ -635,8 +635,8 @@ void OptionsCtrl::handle_menu() {
 OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	OptionsStruct opt;
 	// Interface options
-	opt.xres = opt_section_.get_int("xres", DEFAULT_RESOLUTION_W);
-	opt.yres = opt_section_.get_int("yres", DEFAULT_RESOLUTION_H);
+	opt.xres = opt_section_.get_int("xres", kDefaultResolutionW);
+	opt.yres = opt_section_.get_int("yres", kDefaultResolutionH);
 	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
 	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
 	opt.maxfps = opt_section_.get_int("maxfps", 25);

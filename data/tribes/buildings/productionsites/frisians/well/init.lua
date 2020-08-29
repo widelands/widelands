@@ -48,13 +48,13 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "sleep=duration:20s",
             "animate=working duration:20s",
-            "mine=water 1 100 65 2",
+            "mine=resource_water radius:1 yield:100% when_empty:65%",
             "produce=water",
          }
       },

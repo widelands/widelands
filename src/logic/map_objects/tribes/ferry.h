@@ -33,7 +33,7 @@ struct Coords;
 
 class FerryDescr : public CarrierDescr {
 public:
-	FerryDescr(const std::string& init_descname, const LuaTable& table, const Tribes& tribes);
+	FerryDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes);
 	~FerryDescr() override {
 	}
 
@@ -69,7 +69,7 @@ struct Ferry : public Carrier {
 
 	void init_auto_task(Game& game) override;
 	void start_task_unemployed(Game&);
-	void start_task_row(Game&, Waterway*);
+	void start_task_row(Game&, const Waterway&);
 
 	bool unemployed();
 

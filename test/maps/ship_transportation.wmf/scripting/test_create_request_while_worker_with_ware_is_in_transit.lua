@@ -40,8 +40,8 @@ run(function()
       sleep(100)
    end
    assert_equal(1, ship:get_workers())
-   -- no wares since the worker is still carrying the log
-   assert_equal(0, ship:get_wares())
+   -- the worker will have dropped the log so it is also shipping now
+   assert_equal(1, ship:get_wares())
 
    -- start to build a lumberjack on the second port while the required log is still in transit
    local cons = p1:place_building("barbarians_lumberjacks_hut", map:get_field(17, 17), true, true)

@@ -75,7 +75,7 @@ local r = {
                -- TRANSLATORS: This is an access key combination. The hotkey is 'b'
                dl(help_format_hotkey("B"), _"Toggle building statistics") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'x'
-               dl(help_format_hotkey("x"), _"Toggle soldier statistics") ..
+               dl(help_format_hotkey("X"), _"Toggle soldier statistics") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'e'
                dl(help_format_hotkey("E"), _"Toggle seafaring statistics") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.

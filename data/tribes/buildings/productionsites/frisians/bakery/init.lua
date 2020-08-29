@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = _"baking bread",
          actions = {

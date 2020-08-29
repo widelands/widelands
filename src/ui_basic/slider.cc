@@ -23,7 +23,6 @@
 #include <SDL_mouse.h>
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -74,13 +73,13 @@ Slider::Slider(Panel* const parent,
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
-     cursor_style_(&g_gr->styles().slider_style(style).background()),
+     cursor_style_(&g_style_manager->slider_style(style).background()),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
      cursor_size_(cursor_size) {
 	set_thinks(false);
-	assert(!get_can_focus());
+	set_can_focus(enabled_);
 	calculate_cursor_position();
 }
 
@@ -214,6 +213,7 @@ void Slider::set_enabled(const bool enabled) {
 		highlighted_ = false;
 		grab_mouse(false);
 	}
+	set_can_focus(enabled_);
 }
 
 /**
@@ -225,6 +225,58 @@ void Slider::set_highlighted(bool highlighted) {
 	}
 
 	highlighted_ = highlighted;
+}
+
+constexpr int16_t kLargeStepSize = 50;
+bool Slider::handle_key(bool down, SDL_Keysym code) {
+	if (down && enabled_) {
+		switch (code.sym) {
+
+		case SDLK_KP_6:
+		case SDLK_KP_8:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_UP:
+		case SDLK_RIGHT:
+			set_value(get_value() + 1);
+			return true;
+
+		case SDLK_KP_2:
+		case SDLK_KP_4:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_DOWN:
+		case SDLK_LEFT:
+			set_value(get_value() - 1);
+			return true;
+
+		case SDLK_KP_9:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEUP:
+			set_value(get_value() + kLargeStepSize);
+			return true;
+
+		case SDLK_KP_3:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEDOWN:
+			set_value(get_value() - kLargeStepSize);
+			return true;
+
+		default:
+			break;
+		}
+	}
+	return Panel::handle_key(down, code);
 }
 
 /**
@@ -513,7 +565,7 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
                                const uint32_t cursor_size,
                                const bool enabled)
    : Panel(parent, x, y, w, h, tooltip_text),
-     style(g_gr->styles().slider_style(init_style)),
+     style(g_style_manager->slider_style(init_style)),
      slider(this,
             // here, we take into account the h_gap introduced by HorizontalSlider
             w / (2 * labels_in.size()) - cursor_size / 2,

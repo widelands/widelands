@@ -1,15 +1,13 @@
 dirname = path.dirname(__file__)
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "deadtree5",
    descname = _ "Dead Tree",
-   editor_category = "trees_dead",
    size = "none",
-   attributes = {},
    programs = {
-      program = {
+      main = {
          "animate=idle duration:20s",
-         "remove=success:12"
+         "remove=chance:4.69%"
       }
    },
    animations = {

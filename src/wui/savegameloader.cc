@@ -4,7 +4,6 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "io/filesystem/layered_filesystem.h"

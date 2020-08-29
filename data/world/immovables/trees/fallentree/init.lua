@@ -1,23 +1,17 @@
-dirname = path.dirname(__file__)
-
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "fallentree_idle.png"),
-      hotspot = { 2, 31 },
-   },
-}
-
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "fallentree",
    descname = _ "Fallen Tree",
-   editor_category = "trees_dead",
+   animation_directory = path.dirname(__file__),
    size = "none",
-   attributes = {},
    programs = {
-      program = {
+      main = {
          "animate=idle duration:30s",
          "remove="
       }
    },
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 2, 31 },
+      },
+   }
 }

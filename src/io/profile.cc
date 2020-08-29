@@ -94,7 +94,7 @@ void Section::Value::mark_used() {
 
 int32_t Section::Value::get_int() const {
 	char* endp;
-	long int const i = strtol(value_.get(), &endp, 0);
+	int64_t const i = strtol(value_.get(), &endp, 0);
 	if (*endp) {
 		throw wexception("%s: '%s' is not an integer", get_name(), get_string());
 	}
@@ -108,7 +108,7 @@ int32_t Section::Value::get_int() const {
 
 uint32_t Section::Value::get_natural() const {
 	char* endp;
-	long long int i = strtoll(value_.get(), &endp, 0);
+	int64_t i = strtoll(value_.get(), &endp, 0);
 	if (*endp || i < 0) {
 		throw wexception("%s: '%s' is not natural", get_name(), get_string());
 	}
@@ -117,7 +117,7 @@ uint32_t Section::Value::get_natural() const {
 
 uint32_t Section::Value::get_positive() const {
 	char* endp;
-	long long int i = strtoll(value_.get(), &endp, 0);
+	int64_t i = strtoll(value_.get(), &endp, 0);
 	if (*endp || i < 1) {
 		throw wexception("%s: '%s' is not positive", get_name(), get_string());
 	}
@@ -141,12 +141,19 @@ bool Section::Value::get_bool() const {
 
 Vector2i Section::Value::get_point() const {
 	char* endp = value_.get();
-	long int const x = strtol(endp, &endp, 0);
-	long int const y = strtol(endp, &endp, 0);
+	int64_t const x = strtol(endp, &endp, 0);
+	int64_t const y = strtol(endp, &endp, 0);
 	if (*endp) {
 		throw wexception("%s: '%s' is not a Vector2i", get_name(), get_string());
 	}
-
+	if (x > std::numeric_limits<int32_t>::max()) {
+		throw wexception("%s: '%s' x coordinate too large (> %d)", get_name(), get_string(),
+		                 std::numeric_limits<int32_t>::max());
+	}
+	if (y > std::numeric_limits<int32_t>::max()) {
+		throw wexception("%s: '%s' y coordinate too large (> %d)", get_name(), get_string(),
+		                 std::numeric_limits<int32_t>::max());
+	}
 	return Vector2i(x, y);
 }
 
@@ -524,7 +531,7 @@ void Profile::error(char const* const fmt, ...) const {
 	va_end(va);
 
 	if (error_level_ == err_log) {
-		log("[%s] %s\n", filename_.c_str(), buffer);
+		log_err("[%s] %s\n", filename_.c_str(), buffer);
 	} else {
 		throw wexception("[%s] %s", filename_.c_str(), buffer);
 	}
@@ -773,7 +780,7 @@ void Profile::read(char const* const filename, char const* const global_section,
 	} catch (const FileNotFoundError&) {
 		// It's no problem if the config file does not exist. (It'll get
 		// written on exit anyway)
-		log("There's no configuration file, using default values.\n");
+		log_warn("There's no configuration file, using default values.\n");
 	} catch (const std::exception& e) {
 		error("%s:%u: %s", filename, linenr, e.what());
 	}

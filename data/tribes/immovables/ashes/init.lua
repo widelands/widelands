@@ -44,7 +44,7 @@ tribes:new_immovable_type {
    icon = dirname .. "menu.png",
    size = "small",
    programs = {
-      program = {
+      main = {
          "animate=idle duration:45s",
          "remove=",
       }

@@ -21,6 +21,7 @@
 
 #include <boost/regex.hpp>
 
+#include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
@@ -37,7 +38,7 @@ table.
 
 * :ref:`map_object_programs_syntax`
 * :ref:`map_object_programs_datatypes`
-* :ref:`map_object_programs_actions`.
+* :ref:`map_object_programs_actions`
 
 Map objects that can have programs are:
 
@@ -55,35 +56,52 @@ Critters all run the same built-in program, so you don't need to define any prog
 Syntax
 ------
 
-Map object programs are put in a Lua table, like this::
+Map object programs are put in a Lua table, like this:
+
+.. code-block:: lua
 
    programs = {
-      default_program = {
-         "program_name2",
-         "program_name3",
-      }
-      program_name2 = {
+      main = {
          "action1=parameter1:value1 parameter2:value2",
          "action2=value1",
       },
-      program_name3 = {
+      program_name2 = {
          "action3",
          "action4=value1 value2 value3",
       },
-      program_name4 = {
+      program_name3 = {
          "action5=value1 value2 parameter:value3",
       }
    },
+
+For productionsites, there is a nested ``actions`` table, so that we can give them a descname for
+the tooltips:
+
+.. code-block:: lua
+
+   programs = {
+      main = {
+         -- TRANSLATORS: Completed/Skipped/Did not start doing something because ...
+         descname = _"doing something",
+         actions = {
+            "call=program_name2",
+            "call=program_name3",
+         }
+         ...
+     }
+   }
 
 * Named parameters of the form ``parameter:value`` can be given in any order, but we recommend using
   the order from the documentation for consistency. It will make your code easier to read.
 * Values without parameter name need to be given in the correct order.
 * Some actions combine both named and unnamed values, see ``action5`` in our example.
 
-The first program is the default program that calls all the other programs. For productionsites,
-this is ``"work"``, and for immovables, this is ``"program"``. Workers have no default program,
-because their individual programs are called from their production site.
-
+If there is a program called ``"main"``, this is the default program.
+For :ref:`productionsites <productionsite_programs>`, having a main program is mandatory.
+For :ref:`immovables <immovable_programs>`, having a main program is optional, because their
+programs can also be triggered by a productionsite or by a worker. :ref:`Workers
+<tribes_worker_programs>` have no default program, because their individual programs are always
+called from their production site.
 
 .. _map_object_programs_datatypes:
 
@@ -119,9 +137,9 @@ unsigned int
 MapObjectProgram::read_int(const std::string& input, int min_value, int64_t max_value) {
 	unsigned int result = 0U;
 	char* endp;
-	long int const value = strtol(input.c_str(), &endp, 0);
+	int64_t const value = strtol(input.c_str(), &endp, 0);
 	result = value;
-	if (*endp || static_cast<long>(result) != value) {
+	if (*endp || static_cast<int64_t>(result) != value) {
 		throw GameDataError("Expected a number but found \"%s\"", input.c_str());
 	}
 	if (value < min_value) {
@@ -205,8 +223,8 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 		// TODO(GunChleoc): Compatibility, remove unitless option after v1.0
 		boost::regex without_unit("^(\\d+)$");
 		if (boost::regex_match(input, without_unit)) {
-			log("WARNING: Duration '%s' without unit in %s's program is deprecated\n", input.c_str(),
-			    descr.name().c_str());
+			log_warn("Duration '%s' without unit in %s's program is deprecated\n", input.c_str(),
+			         descr.name().c_str());
 			return read_positive(input, endless());
 		}
 	} catch (const WException& e) {
@@ -216,6 +234,46 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 	}
 	throw GameDataError(
 	   "Illegal duration: %s. Usage: <numbers>{m|s|ms}[<numbers>{s|ms}][<numbers>ms]",
+	   input.c_str());
+}
+
+/* RST
+
+.. _map_object_programs_datatypes_percent:
+
+Percent
+^^^^^^^
+
+A percent value. Valid unit is:
+
+* ``%`` (percent)
+
+Maximum value is ``100%``. Examples:
+
+* ``25%``
+* ``25.1%``
+* ``25.13%``
+
+*/
+unsigned MapObjectProgram::read_percent_to_int(const std::string& input) {
+	boost::smatch match;
+	boost::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
+	if (boost::regex_search(input, match, re)) {
+		// Convert to range
+		uint64_t result =
+		   100U * std::stoul(match[1]) +
+		   (match[3].str().empty() ?
+		       0U :
+		       match[3].str().size() == 1 ? 10U * std::stoul(match[3]) : std::stoul(match[3]));
+
+		if (result > kMaxProbability) {
+			throw GameDataError(
+			   "Given percentage of '%s' is greater than the 100%% allowed", input.c_str());
+		}
+		return result;
+	}
+	throw GameDataError(
+	   "Wrong format for percentage '%s'. Must look like '25%%', '25.4%%' or '25.26%%'.",
 	   input.c_str());
 }
 
@@ -269,7 +327,9 @@ animate
       program will wait before continuing on to the next action. If omitted, the program will
       continue to the next step immediately.
 
-   Example for a worker::
+   Example for a worker:
+
+.. code-block:: lua
 
       plantvine = {
          "findspace=size:any radius:1",
@@ -313,9 +373,9 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 		} else if (item.second.empty()) {
 			// TODO(GunChleoc): Compatibility, remove this option after v1.0
 			result.duration = read_duration(item.first, descr);
-			log("WARNING: 'animate' program without parameter name is deprecated, please use "
-			    "'animate=<animation_name> duration:<duration>' in %s\n",
-			    descr.name().c_str());
+			log_warn("'animate' program without parameter name is deprecated, please use "
+			         "'animate=<animation_name> duration:<duration>' in %s\n",
+			         descr.name().c_str());
 		} else {
 			throw GameDataError("Unknown argument '%s'. Usage: <animation_name> [duration:<duration>]",
 			                    arguments.at(1).c_str());
@@ -324,29 +384,100 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 	return result;
 }
 
+/* RST
+
+.. _map_object_programs_playsound:
+
+playsound
+^^^^^^^^^^
+.. function:: playsound=\<sound_dir/sound_name\> priority:<\percent\> \[allow_multiple\]
+
+   :arg string sound_dir/sound_name: The directory (folder) that the sound files are in,
+      relative to the data directory, followed by the name of the particular sound to play.
+      There can be multiple sound files to select from at random, e.g.
+      for `sound/farm/scythe`, we can have `sound/farm/scythe_00.ogg`, `sound/farm/scythe_01.ogg`
+      ...
+
+   :arg percent priority: The priority to give this sound,
+      in :ref:`map_object_programs_datatypes_percent`. Maximum priority is ``100%``.
+
+   :arg allow_multiple: When this parameter is given, the sound can be played by different map
+      objects at the same time.
+
+   Trigger a sound effect. Whether the sound effect is actually played is determined by the
+   sound handler.
+
+   Examples:
+
+.. code-block:: lua
+
+      -- Worker
+      harvest = {
+         "findobject=attrib:ripe_wheat radius:2",
+         "walk=object",
+         -- Almost certainly play a swishy harvesting sound
+         "playsound=sound/farm/scythe priority:95%",
+         "animate=harvesting duration:10s",
+         "callobject=harvest",
+         "animate=gathering duration:4s",
+         "createware=wheat",
+         "return"
+      }
+
+      -- Production site
+     produce_ax = {
+         -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
+         descname = _"forging an ax",
+         actions = {
+            "return=skipped unless economy needs ax",
+            "consume=coal iron",
+            "sleep=duration:26s",
+            -- Play a banging sound 50% of the time.
+            -- Other buildings can also play this sound at the same time.
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:22s",
+            -- Play a sharpening sound 50% of the time,
+            -- but not if another building is already playing it right now.
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
+            "produce=ax"
+         }
+      }
+*/
 MapObjectProgram::PlaySoundParameters
 MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments,
-                                       uint8_t default_priority) {
-	std::string filepath = "";
+                                       const MapObjectDescr& descr) {
+	if (arguments.size() != 2 && arguments.size() != 3) {
+		throw GameDataError(
+		   "Usage: playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]");
+	}
 	PlaySoundParameters result;
+	result.fx = SoundHandler::register_fx(SoundType::kAmbient, arguments.at(0));
+	result.allow_multiple = false;
 
-	// TODO(GunChleoc): Savegame compabitility. Remove after Build 21.
-	if (arguments.size() == 3) {
-		filepath = arguments.at(0) + "/" + arguments.at(1);
-		result.priority = read_positive(arguments.at(2));
-	} else {
-		if (arguments.size() < 1 || arguments.size() > 2) {
-			throw GameDataError("Usage: playsound=<sound_dir/sound_name> [priority]");
+	const std::pair<std::string, std::string> item = read_key_value_pair(arguments.at(1), ':');
+	if (item.first == "priority") {
+		result.priority = read_percent_to_int(item.second);
+	} else if (item.second.empty()) {
+		if (item.first == "allow_multiple") {
+			result.allow_multiple = true;
+		} else {
+			// TODO(GunChleoc): Compatibility, remove this option after v1.0
+			result.priority = (read_positive(arguments.at(1)) * kMaxProbability * 2U) / 256;
+			log_warn("Deprecated usage in %s. Please convert playsound's 'priority' option to "
+			         "percentage, like this: "
+			         "playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]\n",
+			         descr.name().c_str());
 		}
-		filepath = arguments.at(0);
-		result.priority = arguments.size() == 2 ? read_positive(arguments.at(1)) : default_priority;
+	} else {
+		throw GameDataError("Unknown argument '%s'. Usage: playsound=<sound_dir/sound_name> "
+		                    "priority:<percent> [allow_multiple]",
+		                    arguments.at(1).c_str());
 	}
 
-	result.fx = SoundHandler::register_fx(SoundType::kAmbient, filepath);
-
 	if (result.priority < kFxPriorityLowest) {
-		throw GameDataError("Minmum priority for sounds is %d, but only %d was specified for %s",
-		                    kFxPriorityLowest, result.priority, filepath.c_str());
+		throw GameDataError("Minimum priority for sounds is %d, but only %d was specified for %s",
+		                    kFxPriorityLowest, result.priority, arguments.at(0).c_str());
 	}
 	return result;
 }

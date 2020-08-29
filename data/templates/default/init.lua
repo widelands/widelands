@@ -66,6 +66,12 @@ return {
    minimum_font_size = 10,
    minimap_icon_frame = fs_font_color,
 
+   -- red, green, blue, alpha
+   window_border_focused = {220, 220, 250, 40},
+   window_border_unfocused = {50, 0, 0, 40},
+   background_focused = {220, 220, 250, 30},
+   background_semi_focused = {150, 100, 100, 20},
+
    -- Buttons
    buttons = {
       -- Buttons used in Fullscreen menus

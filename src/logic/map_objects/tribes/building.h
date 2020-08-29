@@ -57,7 +57,7 @@ public:
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
-	              const Tribes& tribes);
+	              Tribes& tribes);
 	~BuildingDescr() override {
 	}
 
@@ -348,6 +348,10 @@ public:
 	}
 
 	void start_animation(EditorGameBase&, uint32_t anim);
+
+	bool is_seeing() const {
+		return seeing_;
+	}
 
 protected:
 	// Updates 'statistics_string' with the string that should be displayed for

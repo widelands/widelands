@@ -24,8 +24,8 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 
@@ -66,7 +66,7 @@ std::string ytick_text_style(const std::string& text, const UI::FontStyleInfo& s
 }
 
 std::string xtick_text_style(const std::string& text) {
-	return ytick_text_style(text, g_gr->styles().statistics_plot_style().x_tick_font());
+	return ytick_text_style(text, g_style_manager->statistics_plot_style().x_tick_font());
 }
 
 /**
@@ -184,7 +184,7 @@ int calc_slider_label_width(const std::string& label) {
 	// Font size and style as used by DiscreteSlider
 	return UI::g_fh
 	   ->render(as_richtext_paragraph(
-	      label, g_gr->styles().slider_style(UI::SliderStyle::kWuiLight).font()))
+	      label, g_style_manager->slider_style(UI::SliderStyle::kWuiLight).font()))
 	   ->width();
 }
 
@@ -196,7 +196,7 @@ void draw_diagram(uint32_t time_ms,
                   const uint32_t inner_h,
                   const float xline_length,
                   RenderTarget& dst) {
-	const RGBColor& axis_line_color = g_gr->styles().statistics_plot_style().axis_line_color();
+	const RGBColor& axis_line_color = g_style_manager->statistics_plot_style().axis_line_color();
 
 	uint32_t how_many_ticks, max_x;
 
@@ -229,7 +229,7 @@ void draw_diagram(uint32_t time_ms,
 	how_many_ticks = std::min(how_many_ticks, calc_plot_x_max_ticks(inner_w));
 
 	// Make sure how_many_ticks is a divisor of max_x
-	while (max_x % how_many_ticks != 0) {
+	while (how_many_ticks > 0 && max_x % how_many_ticks != 0) {
 		how_many_ticks--;
 	}
 
@@ -490,7 +490,7 @@ void WuiPlotArea::update() {
  * Draw this. This is the main function
  */
 void WuiPlotArea::draw(RenderTarget& dst) {
-	dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC),
+	dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), g_image_cache->get(BG_PIC),
 	         Vector2i::zero());
 	if (needs_update_) {
 		update();
@@ -501,7 +501,7 @@ void WuiPlotArea::draw(RenderTarget& dst) {
 	}
 	// Print the 0
 	draw_value((boost::format("%u") % (0)).str(),
-	           g_gr->styles().statistics_plot_style().x_tick_font(),
+	           g_style_manager->statistics_plot_style().x_tick_font(),
 	           Vector2i(get_inner_w() - kSpaceRight + 3, get_inner_h() - kSpaceBottom + 10), dst);
 }
 
@@ -523,7 +523,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
 
 	//  print the maximal value into the top right corner
-	draw_value(yscale_label, g_gr->styles().statistics_plot_style().y_max_value_font(),
+	draw_value(yscale_label, g_style_manager->statistics_plot_style().y_max_value_font(),
 	           Vector2i(get_inner_w() - kSpaceRight + 3, kSpacing + 2), dst);
 }
 
@@ -721,7 +721,7 @@ void DifferentialPlotArea::update() {
 void DifferentialPlotArea::draw(RenderTarget& dst) {
 
 	// first, tile the background
-	dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC),
+	dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), g_image_cache->get(BG_PIC),
 	         Vector2i::zero());
 
 	// yoffset of the zero line
@@ -730,13 +730,13 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
 	                     Vector2f(get_inner_w() - kSpaceRight - xline_length_, yoffset)},
-	                    g_gr->styles().statistics_plot_style().zero_line_color(), kPlotLinesWidth);
+	                    g_style_manager->statistics_plot_style().zero_line_color(), kPlotLinesWidth);
 
 	// Draw data and diagram
 	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
 	// Print the min value
 	draw_value((boost::format("-%u") % (highest_scale_)).str(),
-	           g_gr->styles().statistics_plot_style().y_min_value_font(),
+	           g_style_manager->statistics_plot_style().y_min_value_font(),
 	           Vector2i(get_inner_w() - kSpaceRight + 3, get_inner_h() - kSpaceBottom + 10), dst);
 }
 

@@ -22,13 +22,14 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/animation/animation.h"
 #include "graphic/animation/animation_manager.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -60,7 +61,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		   known ? d->get_animation("build", nullptr) : d->get_unoccupied_animation();
 		// If there is no build animation, we use only the first frame or we
 		// would get many build steps with almost the same image...
-		const uint32_t nrframes = known ? g_gr->animations().get_animation(anim_idx).nr_frames() : 1;
+		const uint32_t nrframes =
+		   known ? g_animation_manager->get_animation(anim_idx).nr_frames() : 1;
 		assert(nrframes);
 		*tf += nrframes;
 		anims->push_back(std::make_pair(anim_idx, nrframes));
@@ -111,12 +113,12 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		if (visible) {
 			dst->blit_animation(
 			   point_on_dst, Widelands::Coords::null(), scale, unocc,
-			   kFrameLength * (g_gr->animations().get_animation(unocc).nr_frames() - 1),
+			   kFrameLength * (g_animation_manager->get_animation(unocc).nr_frames() - 1),
 			   &player_color);
 		} else {
 			dst->blit_animation(
 			   point_on_dst, Widelands::Coords::null(), scale, unocc,
-			   kFrameLength * (g_gr->animations().get_animation(unocc).nr_frames() - 1), nullptr,
+			   kFrameLength * (g_animation_manager->get_animation(unocc).nr_frames() - 1), nullptr,
 			   kBuildingSilhouetteOpacity);
 		}
 	}
@@ -144,7 +146,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
-                                             const Tribes& tribes)
+                                             Tribes& tribes)
    : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, tribes),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
@@ -175,8 +177,9 @@ ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
 
 void ConstructionSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = g_gr->styles().color_tag((boost::format(_("%i%% built")) % percent).str(),
-	                              g_gr->styles().building_statistics_style().construction_color());
+	*s =
+	   g_style_manager->color_tag((boost::format(_("%i%% built")) % percent).str(),
+	                              g_style_manager->building_statistics_style().construction_color());
 }
 
 /*
@@ -218,7 +221,7 @@ Initialize the construction site by starting orders
 */
 bool ConstructionSite::init(EditorGameBase& egbase) {
 	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
+	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxMaximumPriority, true));
 	PartiallyFinishedBuilding::init(egbase);
 
 	const std::map<DescriptionIndex, uint8_t>* buildcost = nullptr;
@@ -274,8 +277,8 @@ void ConstructionSite::init_settings() {
 		settings_.reset(new MilitarysiteSettings(*md, tribe));
 	} else {
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log("WARNING: Created constructionsite for a %s, which is not of any known building type\n",
-		    building_->name().c_str());
+		log_warn("Created constructionsite for a %s, which is not of any known building type\n",
+		         building_->name().c_str());
 	}
 }
 
@@ -383,7 +386,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 Start building the next enhancement even before the base building is completed.
 ===============
 */
-void ConstructionSite::enhance(Game&) {
+void ConstructionSite::enhance(Game& game) {
 	assert(building_->enhancement() != INVALID_INDEX);
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
@@ -523,8 +526,9 @@ void ConstructionSite::enhance(Game&) {
 	} break;
 	default:
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log("WARNING: Enhanced constructionsite to a %s, which is not of any known building type\n",
-		    building_->name().c_str());
+		log_warn_time(game.get_gametime(),
+		              "Enhanced constructionsite to a %s, which is not of any known building type\n",
+		              building_->name().c_str());
 	}
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));

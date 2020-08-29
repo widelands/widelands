@@ -44,8 +44,6 @@ wl_library(map_io
     map_data_packet.h
     map_elemental_packet.cc
     map_elemental_packet.h
-    map_exploration_packet.cc
-    map_exploration_packet.h
     map_flag_packet.cc
     map_flag_packet.h
     map_flagdata_packet.cc
@@ -102,7 +100,6 @@ wl_library(map_io
     base_macros
     base_scoped_timer
     economy
-    graphic
     graphic_image_cache
     graphic_image_io
     graphic_minimap_renderer

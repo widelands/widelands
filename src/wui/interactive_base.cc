@@ -32,6 +32,7 @@
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "logic/cmd_queue.h"
@@ -41,6 +42,7 @@
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/maphollowregion.h"
+#include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry.h"
@@ -197,7 +199,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		const char* const* filename = filenames;
 
 		//  Special case for flag, which has a different formula for hotspot_y.
-		buildhelp_overlay->pic = g_gr->images().get(*filename);
+		buildhelp_overlay->pic = g_image_cache->get(*filename);
 		buildhelp_overlay->hotspot =
 		   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() - 1);
 
@@ -209,7 +211,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 			if (buildhelp_overlay == buildhelp_overlays_end) {
 				break;
 			}
-			buildhelp_overlay->pic = g_gr->images().get(*filename);
+			buildhelp_overlay->pic = g_image_cache->get(*filename);
 			buildhelp_overlay->hotspot =
 			   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
 		}
@@ -227,14 +229,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>(
 	   [this](const NoteSound& note) { play_sound_effect(note); });
-	shipnotes_subscriber_ =
-	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
-		   if (note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
-		       note.ship->get_ship_state() ==
-		          Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
-		   }
-	   });
 
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });
@@ -268,7 +262,7 @@ InteractiveBase::~InteractiveBase() {
 }
 
 void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
-	mapviewmenu_.set_image(g_gr->images().get("images/wui/menus/toggle_minimap.png"));
+	mapviewmenu_.set_image(g_image_cache->get("images/wui/menus/toggle_minimap.png"));
 	toolbar()->add(&mapviewmenu_);
 
 	minimap_registry_.open_window = [this] { toggle_minimap(); };
@@ -285,21 +279,21 @@ void InteractiveBase::rebuild_mapview_menu() {
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(minimap_registry_.window != nullptr ? _("Hide Minimap") : _("Show Minimap"),
 	                 MapviewMenuEntry::kMinimap,
-	                 g_gr->images().get("images/wui/menus/toggle_minimap.png"), false, "", "M");
+	                 g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, "", "M");
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
-	                 g_gr->images().get("images/wui/menus/zoom_increase.png"), false, "",
+	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
 	                 pgettext("hotkey", "Ctrl++"));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom,
-	                 g_gr->images().get("images/wui/menus/zoom_reset.png"), false, "",
+	                 g_image_cache->get("images/wui/menus/zoom_reset.png"), false, "",
 	                 pgettext("hotkey", "Ctrl+0"));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom -"), MapviewMenuEntry::kDecreaseZoom,
-	                 g_gr->images().get("images/wui/menus/zoom_decrease.png"), false, "",
+	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
 	                 pgettext("hotkey", "Ctrl+-"));
 }
 
@@ -307,6 +301,7 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	switch (entry) {
 	case MapviewMenuEntry::kMinimap: {
 		toggle_minimap();
+		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kDecreaseZoom: {
 		map_view()->decrease_zoom();
@@ -369,6 +364,8 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 
 void InteractiveBase::finalize_toolbar() {
 	toolbar_.finalize();
+	// prevent toolbar dropdowns from grabbing the Space button
+	focus();
 }
 
 /*
@@ -415,7 +412,7 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 }
 
 void InteractiveBase::unset_sel_picture() {
-	set_sel_picture(g_gr->images().get("images/ui_basic/fsel.png"));
+	set_sel_picture(g_image_cache->get("images/ui_basic/fsel.png"));
 }
 
 bool InteractiveBase::buildhelp() const {
@@ -441,7 +438,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 bool bind_default_toggle) {
 	UI::Button* button =
 	   new UI::Button(&toolbar_.box, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiPrimary,
-	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
+	                  g_image_cache->get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.box.add(button);
 	if (window) {
 		window->opened.connect([button] { button->set_perm_pressed(true); });
@@ -452,15 +449,6 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 		}
 	}
 	return button;
-}
-
-bool InteractiveBase::has_expedition_port_space(const Widelands::Coords& coords) const {
-	for (const auto& pair : expedition_port_spaces_) {
-		if (pair.second == coords) {
-			return true;
-		}
-	}
-	return false;
 }
 
 std::map<Widelands::Coords, std::vector<uint8_t>>
@@ -708,16 +696,6 @@ Called once per frame by the UI code
 void InteractiveBase::think() {
 	egbase().think();  // Call game logic here. The game advances.
 
-	// Cleanup found port spaces if the ship sailed on or was destroyed
-	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
-		if (!egbase().objects().object_still_available(it->first) ||
-		    it->first->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			expedition_port_spaces_.erase(it);
-			// If another port space also needs removing, we'll take care of it in the next frame
-			return;
-		}
-	}
-
 	UI::Panel::think();
 }
 
@@ -806,19 +784,21 @@ void InteractiveBase::blit_overlay(RenderTarget* dst,
                                    const Vector2i& position,
                                    const Image* image,
                                    const Vector2i& hotspot,
-                                   float scale) {
+                                   float scale,
+                                   float opacity) {
 	const Recti pixel_perfect_rect =
 	   Recti(position - hotspot * scale, image->width() * scale, image->height() * scale);
 	dst->blitrect_scale(pixel_perfect_rect.cast<float>(), image,
-	                    Recti(0, 0, image->width(), image->height()), 1.f, BlendMode::UseAlpha);
+	                    Recti(0, 0, image->width(), image->height()), opacity, BlendMode::UseAlpha);
 }
 
 void InteractiveBase::blit_field_overlay(RenderTarget* dst,
                                          const FieldsToDraw::Field& field,
                                          const Image* image,
                                          const Vector2i& hotspot,
-                                         float scale) {
-	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale);
+                                         float scale,
+                                         float opacity) {
+	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale, opacity);
 }
 
 void InteractiveBase::draw_bridges(RenderTarget* dst,
@@ -908,10 +888,14 @@ bool InteractiveBase::get_display_flag(uint32_t const flag) {
 }
 
 void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
+	const uint32_t old_value = display_flags_;
 	display_flags_ &= ~flag;
 
 	if (on) {
 		display_flags_ |= flag;
+	}
+	if (old_value != display_flags_) {
+		rebuild_showhide_menu();
 	}
 }
 
@@ -927,7 +911,7 @@ void InteractiveBase::start_build_road(Coords road_start,
 	road_building_mode_.reset(new RoadBuildingMode(player, road_start, t));
 
 	road_building_add_overlay();
-	set_sel_picture(g_gr->images().get(t == RoadBuildingType::kWaterway ?
+	set_sel_picture(g_image_cache->get(t == RoadBuildingType::kWaterway ?
 	                                      "images/ui_basic/fsel_waterwaybuilding.png" :
 	                                      "images/ui_basic/fsel_roadbuilding.png"));
 
@@ -1017,8 +1001,9 @@ void InteractiveBase::finish_build_road() {
 	const size_t length = road_building_mode_->path.get_nsteps();
 	if (road_building_mode_->type == RoadBuildingType::kWaterway &&
 	    length > egbase().map().get_waterway_max_length()) {
-		log("Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n", length,
-		    egbase().map().get_waterway_max_length());
+		log_warn_time(egbase().get_gametime(),
+		              "Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n",
+		              length, egbase().map().get_waterway_max_length());
 	} else if (length) {
 		upcast(Game, g, &egbase());
 
@@ -1195,12 +1180,12 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 		                  egbase().map(), area.rect().center(), position_pix) /
 		               kSoundDistanceDivisor;
 
-		distance = (note.priority == kFxPriorityAlwaysPlay) ?
+		distance = (note.priority == kFxMaximumPriority) ?
 		              (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
 		              distance;
 
 		if (distance < kSoundMaxDistance) {
-			g_sh->play_fx(note.type, note.fx, note.priority,
+			g_sh->play_fx(note.type, note.fx, note.priority, note.allow_multiple,
 			              math::clamp(stereo_pos, kStereoLeft, kStereoRight), distance);
 		}
 	}
@@ -1321,7 +1306,7 @@ void InteractiveBase::road_building_add_overlay() {
 				name = "images/wui/overlays/road_building_red.png";
 			}
 		}
-		road_building_mode_->overlay_steepness_indicators[neighb] = g_gr->images().get(name);
+		road_building_mode_->overlay_steepness_indicators[neighb] = g_image_cache->get(name);
 	}
 }
 

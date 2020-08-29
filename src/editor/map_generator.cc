@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
@@ -51,7 +52,7 @@ MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorG
 void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
                                  const Coords& fc,
                                  RNG& rng,
-                                 MapGenAreaInfo::MapGenTerrainType const terrType) {
+                                 MapGenAreaInfo::Terrain const terrType) {
 	//  Figure out which bob area is due here...
 	size_t num = map_gen_info_->get_num_land_resources();
 	size_t found = num;
@@ -103,10 +104,8 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 	}
 
 	if (set_moveable && (num = bobCategory->num_critters())) {
-		egbase_.create_critter(
-		   fc, egbase_.world().get_critter(
-		          bobCategory->get_critter(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
-		             .c_str()));
+		egbase_.create_critter(fc, egbase_.world().critter_index(bobCategory->get_critter(
+		                              static_cast<size_t>(rng.rand() / (kMaxElevation / num)))));
 	}
 }
 
@@ -439,9 +438,10 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
                                                   uint32_t const h2,
                                                   uint32_t const h3,
                                                   RNG& rng,
-                                                  MapGenAreaInfo::MapGenTerrainType& terrType) {
-	uint32_t numLandAreas = map_gen_info_->get_num_areas(MapGenAreaInfo::atLand);
-	uint32_t const numWasteLandAreas = map_gen_info_->get_num_areas(MapGenAreaInfo::atWasteland);
+                                                  MapGenAreaInfo::Terrain& terrType) {
+	uint32_t numLandAreas = map_gen_info_->get_num_areas(MapGenAreaInfo::Area::kLand);
+	uint32_t const numWasteLandAreas =
+	   map_gen_info_->get_num_areas(MapGenAreaInfo::Area::kWasteland);
 
 	bool isDesert = false;
 	bool isDesertOuter = false;
@@ -478,16 +478,18 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
 		}
 	}
 
-	MapGenAreaInfo::MapGenAreaType atp = MapGenAreaInfo::atLand;
-	MapGenAreaInfo::MapGenTerrainType ttp = MapGenAreaInfo::ttLandLand;
+	MapGenAreaInfo::Area atp = MapGenAreaInfo::Area::kLand;
+	MapGenAreaInfo::Terrain ttp = MapGenAreaInfo::Terrain::kLandLand;
 
 	if (!isDesert) {  //  see what kind of land it is
 
 		if (numLandAreas == 1) {
 			landAreaIndex = 0;
 		} else if (numLandAreas == 2) {
-			uint32_t const weight1 = map_gen_info_->get_area(MapGenAreaInfo::atLand, 0).get_weight();
-			uint32_t const weight2 = map_gen_info_->get_area(MapGenAreaInfo::atLand, 1).get_weight();
+			uint32_t const weight1 =
+			   map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 0).get_weight();
+			uint32_t const weight2 =
+			   map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 1).get_weight();
 			uint32_t const sum = map_gen_info_->get_sum_land_weight();
 			if (weight1 * (random2[c0.x + map_info_.w * c0.y] / sum) >=
 			    weight2 * (kAverageElevation / sum)) {
@@ -496,9 +498,12 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
 				landAreaIndex = 1;
 			}
 		} else {
-			uint32_t const weight1 = map_gen_info_->get_area(MapGenAreaInfo::atLand, 0).get_weight();
-			uint32_t const weight2 = map_gen_info_->get_area(MapGenAreaInfo::atLand, 1).get_weight();
-			uint32_t const weight3 = map_gen_info_->get_area(MapGenAreaInfo::atLand, 2).get_weight();
+			uint32_t const weight1 =
+			   map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 0).get_weight();
+			uint32_t const weight2 =
+			   map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 1).get_weight();
+			uint32_t const weight3 =
+			   map_gen_info_->get_area(MapGenAreaInfo::Area::kLand, 2).get_weight();
 			uint32_t const sum = map_gen_info_->get_sum_land_weight();
 			uint32_t const randomX = (rand2 + rand3) / 2;
 			if (weight1 * (rand2 / sum) > weight2 * (rand3 / sum) &&
@@ -512,19 +517,19 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
 			}
 		}
 
-		atp = MapGenAreaInfo::atLand;
-		ttp = MapGenAreaInfo::ttLandLand;
+		atp = MapGenAreaInfo::Area::kLand;
+		ttp = MapGenAreaInfo::Terrain::kLandLand;
 	} else {
-		atp = MapGenAreaInfo::atWasteland;
-		ttp = MapGenAreaInfo::ttWastelandInner;
+		atp = MapGenAreaInfo::Area::kWasteland;
+		ttp = MapGenAreaInfo::Terrain::kWastelandInner;
 	}
 
 	//  see whether it is water
 
 	uint32_t const coast_h = map_gen_info_->get_land_coast_height();
 	if (h1 <= coast_h && h2 <= coast_h && h3 <= coast_h) {  //  water or coast...
-		atp = MapGenAreaInfo::atLand;
-		ttp = MapGenAreaInfo::ttLandCoast;
+		atp = MapGenAreaInfo::Area::kLand;
+		ttp = MapGenAreaInfo::Terrain::kLandCoast;
 
 		uint32_t const ocean_h = map_gen_info_->get_water_ocean_height();
 		uint32_t const shelf_h = map_gen_info_->get_water_shelf_height();
@@ -534,14 +539,14 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
 		//  there will never be an ocean yet
 
 		if (h1 <= ocean_h && h2 <= ocean_h && h3 <= ocean_h) {
-			atp = MapGenAreaInfo::atWater;
-			ttp = MapGenAreaInfo::ttWaterOcean;
+			atp = MapGenAreaInfo::Area::kWater;
+			ttp = MapGenAreaInfo::Terrain::kWaterOcean;
 		} else if (h1 <= shelf_h && h2 <= shelf_h && h3 <= shelf_h) {
-			atp = MapGenAreaInfo::atWater;
-			ttp = MapGenAreaInfo::ttWaterShelf;
+			atp = MapGenAreaInfo::Area::kWater;
+			ttp = MapGenAreaInfo::Terrain::kWaterShelf;
 		} else if (h1 <= shallow_h && h2 <= shallow_h && h3 <= shallow_h) {
-			atp = MapGenAreaInfo::atWater;
-			ttp = MapGenAreaInfo::ttWaterShallow;
+			atp = MapGenAreaInfo::Area::kWater;
+			ttp = MapGenAreaInfo::Terrain::kWaterShallow;
 		}
 	} else {  //  it is not water
 		uint32_t const upper_h = map_gen_info_->get_land_upper_height();
@@ -549,29 +554,30 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
 		uint32_t const mount_h = map_gen_info_->get_mountain_height();
 		uint32_t const snow_h = map_gen_info_->get_snow_height();
 		if (h1 >= snow_h && h2 >= snow_h && h3 >= snow_h) {
-			atp = MapGenAreaInfo::atMountains;
-			ttp = MapGenAreaInfo::ttMountainsSnow;
+			atp = MapGenAreaInfo::Area::kMountains;
+			ttp = MapGenAreaInfo::Terrain::kMountainsSnow;
 		} else if (h1 >= mount_h && h2 >= mount_h && h3 >= mount_h) {
-			atp = MapGenAreaInfo::atMountains;
-			ttp = MapGenAreaInfo::ttMountainsMountain;
+			atp = MapGenAreaInfo::Area::kMountains;
+			ttp = MapGenAreaInfo::Terrain::kMountainsMountain;
 		} else if (h1 >= foot_h && h2 >= foot_h && h3 >= foot_h) {
-			atp = MapGenAreaInfo::atMountains;
-			ttp = MapGenAreaInfo::ttMountainsFoot;
+			atp = MapGenAreaInfo::Area::kMountains;
+			ttp = MapGenAreaInfo::Terrain::kMountainsFoot;
 		} else if (h1 >= upper_h && h2 >= upper_h && h3 >= upper_h) {
-			atp = MapGenAreaInfo::atLand;
-			ttp = MapGenAreaInfo::ttLandUpper;
+			atp = MapGenAreaInfo::Area::kLand;
+			ttp = MapGenAreaInfo::Terrain::kLandUpper;
 		}
 	}
 
 	//  Aftermath for land/Wasteland.
 
 	uint32_t usedLandIndex = landAreaIndex;
-	if (atp != MapGenAreaInfo::atLand && atp != MapGenAreaInfo::atWasteland) {
+	if (atp != MapGenAreaInfo::Area::kLand && atp != MapGenAreaInfo::Area::kWasteland) {
 		usedLandIndex = 0;
 	} else if (isDesert) {
-		atp = MapGenAreaInfo::atWasteland;
-		ttp = ttp == MapGenAreaInfo::ttLandCoast || isDesertOuter ? MapGenAreaInfo::ttWastelandOuter :
-		                                                            MapGenAreaInfo::ttWastelandInner;
+		atp = MapGenAreaInfo::Area::kWasteland;
+		ttp = ttp == MapGenAreaInfo::Terrain::kLandCoast || isDesertOuter ?
+		         MapGenAreaInfo::Terrain::kWastelandOuter :
+		         MapGenAreaInfo::Terrain::kWastelandInner;
 	}
 
 	// Return terrain type
@@ -666,7 +672,7 @@ void MapGenerator::create_random_map() {
 		uint8_t height_x0_y1 = map_[Coords(lower_x, lower_y)].get_height();
 		uint8_t height_x1_y1 = map_[Coords(lower_right_x, lower_y)].get_height();
 
-		MapGenAreaInfo::MapGenTerrainType terrType;
+		MapGenAreaInfo::Terrain terrType;
 
 		fc.field->set_terrain_d(figure_out_terrain(
 		   random2.get(), random3.get(), random4.get(), fc, Coords(lower_x, lower_y),
@@ -798,7 +804,7 @@ void MapGenerator::create_random_map() {
 
 		if (coords.empty()) {
 			// TODO(unknown): inform players via popup
-			log("WARNING: Could not find a suitable place for player %u\n", n);
+			log_warn("Could not find a suitable place for player %u\n", n);
 			// Let's hope that one is at least on dry ground.
 			coords2 = playerstart;
 		}
@@ -813,8 +819,8 @@ void MapGenerator::create_random_map() {
 			// map_.get_fcoords(coords2).field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK
 			// != Widelands::BUILDCAPS_BIG)
 
-			log("WARNING: Player %u has no starting position - illegal coordinates (%d, %d).\n", n,
-			    coords2.x, coords2.y);
+			log_warn("Player %u has no starting position - illegal coordinates (%d, %d).\n", n,
+			         coords2.x, coords2.y);
 			coords2 = Coords::null();
 		}
 

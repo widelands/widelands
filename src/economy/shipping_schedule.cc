@@ -22,6 +22,7 @@
 #include <memory>
 #include <set>
 
+#include "base/log.h"
 #include "economy/expedition_bootstrap.h"
 #include "economy/portdock.h"
 #include "economy/ship_fleet.h"
@@ -73,7 +74,7 @@ constexpr int16_t kNearbyDockMaxDistanceFactor = 8 * 1800;
 
 #define sslog(...)                                                                                 \
 	if (g_verbose)                                                                                  \
-	log(__VA_ARGS__)
+	log_dbg_time(game.get_gametime(), __VA_ARGS__)
 
 ShippingSchedule::ShippingSchedule(ShipFleet& f) : fleet_(f), last_updated_(0), loader_(nullptr) {
 	assert(!fleet_.active());
@@ -216,17 +217,17 @@ bool ShippingSchedule::do_remove_port_from_plan(Game& game,
 				}
 			}
 			if (closest) {
-				log("Ship %s is carrying %u items, rerouting to NEW destination %u\n",
-				    ship.get_shipname().c_str(), ship.get_nritems(), closest->serial());
+				sslog("Ship %s is carrying %u items, rerouting to NEW destination %u\n",
+				      ship.get_shipname().c_str(), ship.get_nritems(), closest->serial());
 				ship_plan.push_back(SchedulingState(closest, false, dist));
 				ship.set_destination(game, closest);
 			} else {
 				// PANIC! There are no ports at all left!!
 				// But we might still have cargo!!! What should we do????
 				// Stay calm. Just do nothing. Nothing at all.
-				log("Ship %s is carrying %u items and there are no ports left, setting NO "
-				    "destination\n",
-				    ship.get_shipname().c_str(), ship.get_nritems());
+				sslog("Ship %s is carrying %u items and there are no ports left, setting NO "
+				      "destination\n",
+				      ship.get_shipname().c_str(), ship.get_nritems());
 				ship.set_destination(game, nullptr);
 			}
 		} else {  // the ships has more destinations in its plan, just reroute to the next one
@@ -358,7 +359,8 @@ void ShippingSchedule::ship_added(Game& game, Ship& s) {
 	}
 	plans_[&s].push_back(SchedulingState(closest, false, dist));
 	s.set_destination(game, closest);
-	sslog("Sent to %u\n\n", closest->serial());
+	// Check for closest to make clang-tidy happy
+	sslog("Sent to %u\n\n", closest ? closest->serial() : 0);
 }
 
 void ShippingSchedule::port_added(Game& game, PortDock& dock) {
@@ -1570,7 +1572,9 @@ Duration ShippingSchedule::update(Game& game) {
 		}
 		assert(closest);
 		if (dist < kNearbyDockMaxDistanceFactor) {
-			sslog("%s is already near %u\n", ship->get_shipname().c_str(), closest->serial());
+			// Check for closest to make clang-tidy happy
+			sslog("%s is already near %u\n", ship->get_shipname().c_str(),
+			      closest ? closest->serial() : 0);
 		} else {
 			plans_[ship].push_back(SchedulingState(closest, false, dist));
 			ship->set_destination(game, closest);
@@ -1593,9 +1597,11 @@ Duration ShippingSchedule::update(Game& game) {
 }
 
 void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
+	const int64_t t = e.get_gametime();
 	for (const auto& plan : plans_) {
-		log("· %s: carrying %u items (capacity %u)\n", plan.first.get(e)->get_shipname().c_str(),
-		    plan.first.get(e)->get_nritems(), plan.first.get(e)->get_capacity());
+		log_dbg_time(t, "· %s: carrying %u items (capacity %u)\n",
+		             plan.first.get(e)->get_shipname().c_str(), plan.first.get(e)->get_nritems(),
+		             plan.first.get(e)->get_capacity());
 		std::map<Serial, uint32_t> dests;
 		for (uint32_t i = plan.first.get(e)->get_nritems(); i; --i) {
 			const Serial si = plan.first.get(e)->get_item(i - 1).destination_dock_.serial();
@@ -1607,19 +1613,20 @@ void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
 			}
 		}
 		for (const auto& pair : dests) {
-			log("  – %u items to %u\n", pair.second, pair.first);
+			log_dbg_time(t, "  – %u items to %u\n", pair.second, pair.first);
 		}
-		log("  SCHEDULE: %" PRIuS " stations\n", plan.second.size());
+		log_dbg_time(t, "  SCHEDULE: %" PRIuS " stations\n", plan.second.size());
 		for (const SchedulingState& ss : plan.second) {
-			log("          · in %u ms at %u\n", ss.duration_from_previous_location, ss.dock.serial());
-			log("            load there: ");
+			log_dbg_time(t, "          · in %u ms at %u\n", ss.duration_from_previous_location,
+			             ss.dock.serial());
+			log_dbg_time(t, "            load there: ");
 			if (ss.expedition) {
-				log("expedition\n");
+				log_dbg_time(t, "expedition\n");
 				assert(ss.load_there.empty());
 			} else {
-				log("cargo for %" PRIuS " destinations\n", ss.load_there.size());
+				log_dbg_time(t, "cargo for %" PRIuS " destinations\n", ss.load_there.size());
 				for (const auto& pair : ss.load_there) {
-					log("            – %u items to %u\n", pair.second, pair.first.serial());
+					log_dbg_time(t, "            – %u items to %u\n", pair.second, pair.first.serial());
 				}
 			}
 		}

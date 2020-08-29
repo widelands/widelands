@@ -39,7 +39,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            Section& global_s,
                                            bool const multiplayer,
                                            ChatProvider* chat_provider)
-   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer, chat_provider) {
+   : InteractiveGameBase(g, global_s, multiplayer, chat_provider) {
 	add_main_menu();
 
 	add_toolbar_button("wui/menus/statistics_general", "general_stats", _("Statistics"),

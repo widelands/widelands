@@ -92,8 +92,9 @@ def collect_pngs(d, prefix):
     """
     pngs = []
     for root, dirs, files in os.walk(d):
+        dirs.sort()
         pngs.extend(os.path.join(root, f)
-                    for f in files
+                    for f in sorted(files)
                     if os.path.splitext(f)[-1].lower() == '.png'
                     and (not prefix or f.startswith(prefix)))
 
@@ -122,6 +123,7 @@ def main():
 
     tools = filter(lambda t: t.found,  [
         Tool('optipng', '-q -zc1-9 -zm1-9 -zs0-3 -f0-5', True),
+        Tool('advdef', '-z4', True),
         Tool('advpng', '-z4', True),
         Tool('pngcrush', '-reduce -brute'),
     ])

@@ -22,7 +22,6 @@
 #include "base/macros.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
-#include "graphic/graphic.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
@@ -51,9 +50,7 @@ static const char pic_construct_port[] = "images/wui/ship/ship_construct_port_sp
 constexpr int kPadding = 5;
 }  // namespace
 
-using namespace Widelands;
-
-ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Ship* ship)
+ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Widelands::Ship* ship)
    : UniqueWindow(&igb, "shipwindow", &reg, 0, 0, ship->get_shipname()),
      igbase_(igb),
      ship_(ship),
@@ -75,44 +72,50 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 	UI::Box* exp_bot = new UI::Box(&navigation_box_, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_bot, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	btn_scout_[WALK_NW - 1] = make_button(exp_top, "scnw", _("Scout towards the north west"),
-	                                      pic_scout_nw, [this]() { act_scout_towards(WALK_NW); });
-	exp_top->add(btn_scout_[WALK_NW - 1]);
+	btn_scout_[Widelands::WALK_NW - 1] =
+	   make_button(exp_top, "scnw", _("Scout towards the north west"), pic_scout_nw,
+	               [this]() { act_scout_towards(Widelands::WALK_NW); });
+	exp_top->add(btn_scout_[Widelands::WALK_NW - 1]);
 
 	btn_explore_island_cw_ =
 	   make_button(exp_top, "expcw", _("Explore the island’s coast clockwise"), pic_explore_cw,
-	               [this]() { act_explore_island(IslandExploreDirection::kClockwise); });
+	               [this]() { act_explore_island(Widelands::IslandExploreDirection::kClockwise); });
 	exp_top->add(btn_explore_island_cw_);
 
-	btn_scout_[WALK_NE - 1] = make_button(exp_top, "scne", _("Scout towards the north east"),
-	                                      pic_scout_ne, [this]() { act_scout_towards(WALK_NE); });
-	exp_top->add(btn_scout_[WALK_NE - 1]);
+	btn_scout_[Widelands::WALK_NE - 1] =
+	   make_button(exp_top, "scne", _("Scout towards the north east"), pic_scout_ne,
+	               [this]() { act_scout_towards(Widelands::WALK_NE); });
+	exp_top->add(btn_scout_[Widelands::WALK_NE - 1]);
 
-	btn_scout_[WALK_W - 1] = make_button(exp_mid, "scw", _("Scout towards the west"), pic_scout_w,
-	                                     [this]() { act_scout_towards(WALK_W); });
-	exp_mid->add(btn_scout_[WALK_W - 1]);
+	btn_scout_[Widelands::WALK_W - 1] =
+	   make_button(exp_mid, "scw", _("Scout towards the west"), pic_scout_w,
+	               [this]() { act_scout_towards(Widelands::WALK_W); });
+	exp_mid->add(btn_scout_[Widelands::WALK_W - 1]);
 
 	btn_construct_port_ =
 	   make_button(exp_mid, "buildport", _("Construct a port at the current location"),
 	               pic_construct_port, [this]() { act_construct_port(); });
 	exp_mid->add(btn_construct_port_);
 
-	btn_scout_[WALK_E - 1] = make_button(exp_mid, "sce", _("Scout towards the east"), pic_scout_e,
-	                                     [this]() { act_scout_towards(WALK_E); });
-	exp_mid->add(btn_scout_[WALK_E - 1]);
+	btn_scout_[Widelands::WALK_E - 1] =
+	   make_button(exp_mid, "sce", _("Scout towards the east"), pic_scout_e,
+	               [this]() { act_scout_towards(Widelands::WALK_E); });
+	exp_mid->add(btn_scout_[Widelands::WALK_E - 1]);
 
-	btn_scout_[WALK_SW - 1] = make_button(exp_bot, "scsw", _("Scout towards the south west"),
-	                                      pic_scout_sw, [this]() { act_scout_towards(WALK_SW); });
-	exp_bot->add(btn_scout_[WALK_SW - 1]);
+	btn_scout_[Widelands::WALK_SW - 1] =
+	   make_button(exp_bot, "scsw", _("Scout towards the south west"), pic_scout_sw,
+	               [this]() { act_scout_towards(Widelands::WALK_SW); });
+	exp_bot->add(btn_scout_[Widelands::WALK_SW - 1]);
 
 	btn_explore_island_ccw_ = make_button(
 	   exp_bot, "expccw", _("Explore the island’s coast counter clockwise"), pic_explore_ccw,
-	   [this]() { act_explore_island(IslandExploreDirection::kCounterClockwise); });
+	   [this]() { act_explore_island(Widelands::IslandExploreDirection::kCounterClockwise); });
 	exp_bot->add(btn_explore_island_ccw_);
 
-	btn_scout_[WALK_SE - 1] = make_button(exp_bot, "scse", _("Scout towards the south east"),
-	                                      pic_scout_se, [this]() { act_scout_towards(WALK_SE); });
-	exp_bot->add(btn_scout_[WALK_SE - 1]);
+	btn_scout_[Widelands::WALK_SE - 1] =
+	   make_button(exp_bot, "scse", _("Scout towards the south east"), pic_scout_se,
+	               [this]() { act_scout_towards(Widelands::WALK_SE); });
+	exp_bot->add(btn_scout_[Widelands::WALK_SE - 1]);
 
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -244,7 +247,7 @@ void ShipWindow::think() {
 		}
 	}
 
-	Ship::ShipStates state = ship->get_ship_state();
+	Widelands::Ship::ShipStates state = ship->get_ship_state();
 	if (ship->state_is_expedition()) {
 		/* The following rules apply:
 		 * - The "construct port" button is only active, if the ship is waiting for commands and found
@@ -257,23 +260,26 @@ void ShipWindow::think() {
 		 * matter if
 		 *   in waiting or already expedition/scouting mode)
 		 */
-		btn_construct_port_->set_enabled(can_act &&
-		                                 (state == Ship::ShipStates::kExpeditionPortspaceFound));
+		btn_construct_port_->set_enabled(
+		   can_act && (state == Widelands::Ship::ShipStates::kExpeditionPortspaceFound));
 		bool coast_nearby = false;
-		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
+		for (Widelands::Direction dir = 1; dir <= Widelands::LAST_DIRECTION; ++dir) {
 			// NOTE buttons are saved in the format DIRECTION - 1
-			btn_scout_[dir - 1]->set_enabled(can_act && ship->exp_dir_swimmable(dir) &&
-			                                 (state != Ship::ShipStates::kExpeditionColonizing));
+			btn_scout_[dir - 1]->set_enabled(
+			   can_act && ship->exp_dir_swimmable(dir) &&
+			   (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
 			coast_nearby |= !ship->exp_dir_swimmable(dir);
 		}
-		btn_explore_island_cw_->set_enabled(can_act && coast_nearby &&
-		                                    (state != Ship::ShipStates::kExpeditionColonizing));
-		btn_explore_island_ccw_->set_enabled(can_act && coast_nearby &&
-		                                     (state != Ship::ShipStates::kExpeditionColonizing));
-		btn_sink_->set_enabled(can_act && (state != Ship::ShipStates::kExpeditionColonizing));
+		btn_explore_island_cw_->set_enabled(
+		   can_act && coast_nearby && (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
+		btn_explore_island_ccw_->set_enabled(
+		   can_act && coast_nearby && (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
+		btn_sink_->set_enabled(can_act &&
+		                       (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
 	}
-	btn_cancel_expedition_->set_enabled(ship->state_is_expedition() && can_act &&
-	                                    (state != Ship::ShipStates::kExpeditionColonizing));
+	btn_cancel_expedition_->set_enabled(
+	   ship->state_is_expedition() && can_act &&
+	   (state != Widelands::Ship::ShipStates::kExpeditionColonizing));
 	// Expedition specific buttons
 	set_button_visibility();
 }
@@ -284,7 +290,7 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
                                     const std::string& picname,
                                     const std::function<void()>& callback) {
 	UI::Button* btn = new UI::Button(
-	   parent, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, g_gr->images().get(picname), title);
+	   parent, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, g_image_cache->get(picname), title);
 	btn->sigclicked.connect(callback);
 	return btn;
 }
@@ -304,7 +310,7 @@ void ShipWindow::act_destination() {
 	if (ship == nullptr) {
 		return;
 	}
-	if (PortDock* destination = ship->get_destination()) {
+	if (Widelands::PortDock* destination = ship->get_destination()) {
 		igbase_.map_view()->scroll_to_field(
 		   destination->get_warehouse()->get_position(), MapView::Transition::Smooth);
 	}
@@ -346,13 +352,13 @@ void ShipWindow::act_cancel_expedition() {
 }
 
 /// Sends a player command to the ship to scout towards a specific direction
-void ShipWindow::act_scout_towards(WalkingDir direction) {
+void ShipWindow::act_scout_towards(Widelands::WalkingDir direction) {
 	Widelands::Ship* ship = ship_.get(igbase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
 	// ignore request if the direction is not swimmable at all
-	if (!ship->exp_dir_swimmable(static_cast<Direction>(direction))) {
+	if (!ship->exp_dir_swimmable(static_cast<Widelands::Direction>(direction))) {
 		return;
 	}
 	igbase_.game().send_player_ship_scouting_direction(*ship, direction);
@@ -371,14 +377,15 @@ void ShipWindow::act_construct_port() {
 }
 
 /// Explores the island cw or ccw
-void ShipWindow::act_explore_island(IslandExploreDirection direction) {
+void ShipWindow::act_explore_island(Widelands::IslandExploreDirection direction) {
 	Widelands::Ship* ship = ship_.get(igbase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
 	bool coast_nearby = false;
 	bool moveable = false;
-	for (Direction dir = 1; (dir <= LAST_DIRECTION) && (!coast_nearby || !moveable); ++dir) {
+	for (Widelands::Direction dir = 1;
+	     (dir <= Widelands::LAST_DIRECTION) && (!coast_nearby || !moveable); ++dir) {
 		if (!ship->exp_dir_swimmable(dir)) {
 			coast_nearby = true;
 		} else {

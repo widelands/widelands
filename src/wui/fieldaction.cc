@@ -25,7 +25,6 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
-#include "graphic/graphic.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/attack_target.h"
@@ -33,6 +32,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/maphollowregion.h"
+#include "logic/mapregion.h"
 #include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -94,8 +94,7 @@ void BuildGrid::add(Widelands::DescriptionIndex id) {
 	UI::IconGrid::add(descr.name(), descr.representative_image(&plr_->get_playercolor()),
 	                  reinterpret_cast<void*>(id),
 	                  descr.descname() + "<br>" +
-	                     g_gr->styles()
-	                        .ware_info_style(UI::WareInfoStyle::kNormal)
+	                     g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
 	                        .header_font()
 	                        .as_font_tag(_("Construction costs:")) +
 	                     "<br>" + waremap_to_richtext(plr_->tribe(), descr.buildcost()));
@@ -294,7 +293,7 @@ void FieldActionWindow::think() {
 			}
 		}
 	}
-	if (player_ && player_->vision(node_.field - &ibase().egbase().map()[0]) <= 1 &&
+	if (player_ && !player_->is_seeing(node_.field - &ibase().egbase().map()[0]) &&
 	    !player_->see_all()) {
 		die();
 	}
@@ -401,9 +400,12 @@ void FieldActionWindow::add_buttons_auto() {
 		}
 	} else if (player_) {
 		if (upcast(Building, building, map_.get_immovable(node_))) {
-			if (1 < player_->vision(Widelands::Map::get_index(
-			           building->get_position(), ibase().egbase().map().get_width()))) {
-				add_buttons_attack();
+			for (Widelands::Coords& coords : building->get_positions(igbase->egbase())) {
+				if (player_->is_seeing(
+				       Widelands::Map::get_index(coords, ibase().egbase().map().get_width()))) {
+					add_buttons_attack();
+					break;
+				}
 			}
 		}
 	}
@@ -620,7 +622,7 @@ uint32_t FieldActionWindow::add_tab(const std::string& name,
                                     const char* picname,
                                     UI::Panel* panel,
                                     const std::string& tooltip_text) {
-	return tabpanel_.add(name, g_gr->images().get(picname), panel, tooltip_text);
+	return tabpanel_.add(name, g_image_cache->get(picname), panel, tooltip_text);
 }
 
 UI::Button& FieldActionWindow::add_button(UI::Box* const box,
@@ -630,7 +632,7 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
                                           const std::string& tooltip_text,
                                           bool repeating) {
 	UI::Button& button = *new UI::Button(box, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiPrimary,
-	                                     g_gr->images().get(picname), tooltip_text);
+	                                     g_image_cache->get(picname), tooltip_text);
 	button.sigclicked.connect([this, fn]() { (this->*fn)(); });
 	button.set_repeating(repeating);
 	box->add(&button);
@@ -895,7 +897,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 		   map, Widelands::Area<Widelands::FCoords>(
 		           node_, workarea_radius + ibase().egbase().tribes().get_largest_workarea()));
 		do {
-			if (player_->vision(map.get_index(mr.location())) > 1) {
+			if (player_->is_seeing(map.get_index(mr.location()))) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {
 					const Widelands::MapObjectType imm_type = imm->descr().type();
 					if (imm_type < Widelands::MapObjectType::BUILDING) {

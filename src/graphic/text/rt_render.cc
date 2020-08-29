@@ -195,7 +195,8 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 	try {
 		font.reset(load_font(ns->font_face, font_size));
 	} catch (FileNotFoundError& e) {
-		log("Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
+		log_warn(
+		   "Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
 		font.reset(load_font(ns->fontset->sans(), font_size));
 	}
 	assert(font != nullptr);
@@ -282,7 +283,7 @@ protected:
 			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % check_w % check_h %
 			    maximum_size)
 			      .str();
-			log("%s\n", error_message.c_str());
+			log_err("%s\n", error_message.c_str());
 			throw TextureTooBig(error_message);
 		}
 	}
@@ -974,7 +975,7 @@ public:
 	              bool use_playercolor)
 	   : RenderNode(ns),
 	     image_(use_playercolor ? playercolor_image(color, image_filename) :
-	                              g_gr->images().get(image_filename)),
+	                              g_image_cache->get(image_filename)),
 	     filename_(image_filename),
 	     scale_(scale),
 	     color_(color),
@@ -1019,7 +1020,7 @@ std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_ca
 	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 
 	if (scale_ == 1.0 || filename_.empty()) {
-		// Image can be used as is, and has already been cached in g_gr->images()
+		// Image can be used as is, and has already been cached in g_image_cache
 		assert(image_ != nullptr);
 		rendered_text->rects.push_back(
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(image_)));
@@ -1205,7 +1206,7 @@ public:
 			nodestyle_.font_color = a["color"].get_color();
 		}
 		if (a.has("size")) {
-			nodestyle_.font_size = a["size"].get_int();
+			nodestyle_.font_size = a["size"].get_int(std::numeric_limits<uint16_t>::max());
 		}
 		if (a.has("face")) {
 			nodestyle_.font_face = a["face"].get_string();
@@ -1242,7 +1243,7 @@ public:
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
 		if (a.has("indent")) {
-			indent_ = a["indent"].get_int();
+			indent_ = a["indent"].get_int(std::numeric_limits<uint16_t>::max());
 		}
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
@@ -1266,7 +1267,7 @@ public:
 			}
 		}
 		if (a.has("spacing")) {
-			nodestyle_.spacing = a["spacing"].get_int();
+			nodestyle_.spacing = a["spacing"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 	}
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
@@ -1307,19 +1308,19 @@ public:
 			use_playercolor = true;
 		}
 		if (a.has("object")) {
-			const Image* representative_image = g_gr->animations().get_representative_image(
+			const Image* representative_image = g_animation_manager->get_representative_image(
 			   a["object"].get_string(), use_playercolor ? &color : nullptr);
 			render_node_.reset(new ImgRenderNode(nodestyle_, representative_image));
 		} else {
 			const std::string image_filename = a["src"].get_string();
 
 			if (a.has("width")) {
-				int width = a["width"].get_int();
+				int width = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (width > renderer_style_.overall_width) {
-					log("WARNING: Font renderer: Specified image width of %d exceeds the overall "
-					    "available "
-					    "width of %d. Setting width to %d.\n",
-					    width, renderer_style_.overall_width, renderer_style_.overall_width);
+					log_warn("Font renderer: Specified image width of %d exceeds the overall "
+					         "available "
+					         "width of %d. Setting width to %d.\n",
+					         width, renderer_style_.overall_width, renderer_style_.overall_width);
 					width = renderer_style_.overall_width;
 				}
 				const int image_width = image_cache_->get(image_filename)->width();
@@ -1353,7 +1354,7 @@ public:
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
 
-		space_ = a["gap"].get_int();
+		space_ = a["gap"].get_int(std::numeric_limits<uint16_t>::max());
 	}
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		nodes.push_back(std::shared_ptr<RenderNode>(new SpaceNode(nodestyle_, 0, space_)));
@@ -1381,7 +1382,7 @@ public:
 		const AttrMap& a = tag_.attrs();
 
 		if (a.has("gap")) {
-			space_ = a["gap"].get_int();
+			space_ = a["gap"].get_int(std::numeric_limits<uint16_t>::max());
 		} else {
 			space_ = INFINITE_WIDTH;
 		}
@@ -1482,26 +1483,26 @@ public:
 			}
 		}
 		if (a.has("padding")) {
-			uint8_t p = a["padding"].get_int();
+			uint8_t p = a["padding"].get_int(std::numeric_limits<uint8_t>::max());
 			padding.left = padding.top = padding.right = padding.bottom = p;
 		}
 		// TODO(GunChleoc): padding_l and padding_r don't seem to produce balanced results.
 		// We ran into that with the game tips,
 		// using "<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>" there.
 		if (a.has("padding_r")) {
-			padding.right = a["padding_r"].get_int();
+			padding.right = a["padding_r"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 		if (a.has("padding_b")) {
-			padding.bottom = a["padding_b"].get_int();
+			padding.bottom = a["padding_b"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 		if (a.has("padding_l")) {
-			padding.left = a["padding_l"].get_int();
+			padding.left = a["padding_l"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 		if (a.has("padding_t")) {
-			padding.top = a["padding_t"].get_int();
+			padding.top = a["padding_t"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 		if (a.has("margin")) {
-			uint8_t p = a["margin"].get_int();
+			uint8_t p = a["margin"].get_int(std::numeric_limits<uint8_t>::max());
 			margin.left = margin.top = margin.right = margin.bottom = p;
 		}
 
@@ -1620,16 +1621,16 @@ public:
 				width_string = width_string.substr(0, width_string.length() - 1);
 				uint8_t width_percent = strtol(width_string.c_str(), nullptr, 10);
 				if (width_percent > 100) {
-					log("WARNING: Font renderer: Do not use width > 100%%\n");
+					log_warn("Font renderer: Do not use width > 100%%\n");
 					width_percent = 100;
 				}
 				render_node_->set_desired_width(DesiredWidth(width_percent, WidthUnit::kPercent));
 			} else {
-				w_ = a["width"].get_int();
+				w_ = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (w_ > renderer_style_.overall_width) {
-					log("WARNING: Font renderer: Specified width of %d exceeds the overall available "
-					    "width of %d. Setting width to %d.\n",
-					    w_, renderer_style_.overall_width, renderer_style_.overall_width);
+					log_warn("Font renderer: Specified width of %d exceeds the overall available "
+					         "width of %d. Setting width to %d.\n",
+					         w_, renderer_style_.overall_width, renderer_style_.overall_width);
 					w_ = renderer_style_.overall_width;
 				}
 				render_node_->set_desired_width(DesiredWidth(w_, WidthUnit::kAbsolute));

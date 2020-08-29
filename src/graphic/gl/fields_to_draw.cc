@@ -19,6 +19,7 @@
 
 #include "graphic/gl/fields_to_draw.h"
 
+#include "base/log.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -112,8 +113,9 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 	size_t dimension = w_ * h_;
 	const size_t max_dimension = fields_.max_size();
 	if (dimension > max_dimension) {
-		log("WARNING: Not enough memory allocated to redraw the whole map!\nWe recommend that you "
-		    "restart Widelands\n");
+		log_warn_time(egbase.get_gametime(),
+		              "Not enough memory allocated to redraw the whole map!\nWe recommend that you "
+		              "restart Widelands\n");
 		dimension = max_dimension;
 	}
 	// Now resize the vector
@@ -160,7 +162,7 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 			const Widelands::PlayerNumber owned_by = f.fcoords.field->get_owned_by();
 			f.owner = owned_by != 0 ? egbase.get_player(owned_by) : nullptr;
 			f.is_border = f.fcoords.field->is_border();
-			f.vision = 2;
+			f.seeing = Widelands::SeeUnseeNode::kVisible;
 			f.road_e = f.fcoords.field->get_road(Widelands::WALK_E);
 			f.road_se = f.fcoords.field->get_road(Widelands::WALK_SE);
 			f.road_sw = f.fcoords.field->get_road(Widelands::WALK_SW);

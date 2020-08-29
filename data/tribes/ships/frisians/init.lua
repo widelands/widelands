@@ -1,9 +1,11 @@
 dirname = path.dirname (__file__)
 
 tribes:new_ship_type {
+   msgctxt = "frisians_ship",
    name = "frisians_ship",
-   -- TRANSLATORS: This is the ship's name used in lists of units
-   descname = _"Ship",
+   -- TRANSLATORS: This is the Frisians' ship's name used in lists of units
+   descname = pgettext("frisians_ship", "Ship"),
+   icon = dirname .. "menu.png",
    capacity = 30,
    vision_range = 4,
    spritesheets = {

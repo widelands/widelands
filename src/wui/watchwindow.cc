@@ -22,7 +22,6 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/rect.h"
-#include "graphic/graphic.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
@@ -55,12 +54,12 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
      cur_index_(0) {
 	UI::Button* followbtn =
 	   new UI::Button(this, "follow", 0, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
-	                  g_gr->images().get("images/wui/menus/watch_follow.png"), _("Follow"));
+	                  g_image_cache->get("images/wui/menus/watch_follow.png"), _("Follow"));
 	followbtn->sigclicked.connect([this]() { do_follow(); });
 
 	UI::Button* gotobtn = new UI::Button(
 	   this, "center_mainview_here", 34, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
-	   g_gr->images().get("images/wui/menus/goto.png"), _("Center the main view on this"));
+	   g_image_cache->get("images/wui/menus/goto.png"), _("Center the main view on this"));
 	gotobtn->sigclicked.connect([this]() { do_goto(); });
 
 	if (init_single_window) {
@@ -72,7 +71,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 
 		UI::Button* closebtn =
 		   new UI::Button(this, "close", w - 34, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
-		                  g_gr->images().get("images/wui/menu_abort.png"), _("Close"));
+		                  g_image_cache->get("images/wui/menu_abort.png"), _("Close"));
 		closebtn->sigclicked.connect([this]() { close_cur_view(); });
 	}
 
@@ -185,7 +184,8 @@ void WatchWindow::think() {
 
 		// Drop the tracking if it leaves our vision range
 		InteractivePlayer* ipl = game().get_ipl();
-		if (ipl && 1 >= ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
+		if (ipl && Widelands::SeeUnseeNode::kUnexplored ==
+		              ipl->player().get_vision(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
 			views_[cur_index_].tracking = nullptr;
 		} else {
@@ -255,7 +255,7 @@ void WatchWindow::do_follow() {
 			InteractivePlayer* ipl = game().get_ipl();
 			if ((!closest || closest_dist > dist) &&
 			    (!ipl ||
-			     1 < ipl->player().vision(map.get_index(bob->get_position(), map.get_width())))) {
+			     ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width())))) {
 				closest = bob;
 				closest_dist = dist;
 			}

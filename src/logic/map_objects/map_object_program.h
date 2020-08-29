@@ -35,12 +35,16 @@ class MapObjectDescr;
 /// diverse parsing convenience functions. The creation and execution of program actions is left to
 /// the sub-classes.
 struct MapObjectProgram {
+	static constexpr const char* const kMainProgram = "main";
+
 	const std::string& name() const;
 
 	explicit MapObjectProgram(const std::string& init_name);
 	virtual ~MapObjectProgram() = default;
 
 protected:
+	static constexpr unsigned kMaxProbability = 10000U;
+
 	/// Splits a string by separators.
 	/// \note This ignores empty elements, so do not use this for example to split
 	/// a string with newline characters into lines, because it would ignore empty
@@ -80,6 +84,13 @@ protected:
 	 */
 	static Duration read_duration(const std::string& input, const MapObjectDescr& descr);
 
+	/**
+	 * @brief Reads a percentage
+	 * @param input A percentage in the format 12%, 12.5% or 12.53%.
+	 * @return Scaled precentage as integer, where 100% corresponds to kMaxProbability.
+	 * */
+	static unsigned read_percent_to_int(const std::string& input);
+
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"
 	struct ProgramParseInput {
@@ -109,11 +120,13 @@ protected:
 		/// Sound effect ID
 		FxId fx;
 		/// Sound effect priority
-		uint8_t priority = 0;
+		uint16_t priority = 0;
+		/// Whether the sound can be played by different map objects at the same time
+		bool allow_multiple;
 	};
 	/// Parses the arguments for a play_sound action, e.g. { "sound/smiths/sharpening", "120" }
 	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments,
-	                                                uint8_t default_priority);
+	                                                const MapObjectDescr& descr);
 
 private:
 	const std::string name_;

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-06-01 04:28+0000\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-08-07 21:27+0000\n"
 "Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -460,7 +460,7 @@ msgid ""
 msgstr "Dobra robota. Budowa pierwszego z naszych dużych budynków wojskowych jest ukończona, a infrastruktura górnicza wygląda coraz lepiej. Nadszedł czas, by rozpocząć przygotowania do bitwy."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:268
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid "Victory"
 msgstr "Zwycięstwo"
 
@@ -480,9 +480,9 @@ msgstr "Paru Barbarzyńców wciąż ukrywa się na naszej wyspie, ale jestem pew
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
 msgid ""
-"You have established a working economy, trained new soldiers and driven the "
-"Barbarians from the island."
-msgstr "Utworzyłeś sprawną gospodarkę, wyszkoliłeś nowych żołnierzy i przepędziłeś Barbarzyńców z wyspy."
+"We have established a working economy, trained new soldiers and driven the "
+"Barbarians from the island. Now we can think about our next steps."
+msgstr "Utworzyliśmy sprawną gospodarkę, wyszkoliliśmy nowych żołnierzy i przepędziliśmy Barbarzyńców z wyspy. Teraz możemy pomyśleć o kolejnych posunięciach."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"
@@ -517,8 +517,3 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Udało ci się zakończyć tę misję. Możesz kontynuować rozgrywkę bądź przejść do następnej misji."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "„%s”"

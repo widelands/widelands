@@ -1,12 +1,12 @@
-# Automatically created by Widelands r24475[3abcee7@HEAD] (Release)
+# Automatically created by Widelands 1.0~git24808[f59d577@1482_nodecapsmaths] (Release)
 
 [global]
 map_source_url=
 map_release=
 map_creator_version="unknown"
 map_version_major="0"
-map_version_minor="6"
-map_version_timestamp="1584179769"
+map_version_minor="7"
+map_version_timestamp="1598112563"
 packet_version="1"
 packet_compatibility="1"
 needs_widelands_version_after="20"

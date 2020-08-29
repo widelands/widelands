@@ -100,7 +100,7 @@ private:
 
 	// Fills the language selection list
 	void add_languages_to_list(const std::string& current_locale);
-	void update_language_stats(bool include_system_lang);
+	void update_language_stats();
 
 	// Saves the options and reloads the active tab
 	void clicked_apply();

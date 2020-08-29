@@ -7,18 +7,16 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "umbrella_red_wasteland_sapling",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Red Umbrella Tree (Sapling)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:38s",
-         "remove=success:50",
+         "remove=chance:19.53%",
          "grow=umbrella_red_wasteland_pole",
       },
    },
@@ -35,18 +33,16 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "umbrella_red_wasteland_pole",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Red Umbrella Tree (Pole)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:38s",
-         "remove=success:47",
+         "remove=chance:18.36%",
          "grow=umbrella_red_wasteland_mature",
       },
    },
@@ -63,21 +59,19 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "umbrella_red_wasteland_mature",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Red Umbrella Tree (Mature)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:20s",
-         "remove=success:30",
-         "seed=umbrella_red_wasteland_sapling 50",
+         "remove=chance:11.72%",
+         "seed=umbrella_red_wasteland_sapling proximity:19.53%",
          "animate=idle duration:20s",
-         "remove=success:20",
+         "remove=chance:7.81%",
          "grow=umbrella_red_wasteland_old",
       },
    },
@@ -94,22 +88,20 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "umbrella_red_wasteland_old",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Red Umbrella Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Red Umbrella Tree",
    icon = dirname .. "menu.png",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:17m30s",
-         "transform=deadtree2 success:32",
-         "seed=umbrella_red_wasteland_sapling 90",
+         "transform=deadtree2 chance:12.5%",
+         "seed=umbrella_red_wasteland_sapling proximity:35.16%",
       },
       fall = {
          "remove=",

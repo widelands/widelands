@@ -53,7 +53,7 @@ public:
 	std::string get_basename() override {
 		return directory_;
 	}
-	unsigned long long disk_space() override;
+	unsigned long long disk_space() override;  // NOLINT
 
 private:
 	void unlink_directory(const std::string& file);

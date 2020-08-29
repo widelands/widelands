@@ -22,7 +22,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "logic/note_map_options.h"
@@ -45,7 +44,7 @@ SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo,
                                          Widelands::SuggestedTeamLineup t)
    : UI::Panel(parent, 0, 0, w, kSuggestedTeamsUnitSize, _("Click player to remove")),
      map_(map),
-     team_(t),
+     team_(std::move(t)),
      delete_(this,
              "delete",
              0,
@@ -321,7 +320,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
 	UI::Box* ww_box = new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_);
-	waterway_length_warning_ = new UI::Icon(ww_box, g_gr->images().get("images/ui_basic/stop.png"));
+	waterway_length_warning_ = new UI::Icon(ww_box, g_image_cache->get("images/ui_basic/stop.png"));
 	waterway_length_warning_->set_handle_mouse(true);
 	waterway_length_box_ =
 	   new UI::SpinBox(ww_box, 0, 0, max_w_ - waterway_length_warning_->get_w(), max_w_ * 2 / 3, 1,
@@ -369,11 +368,11 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tab_box_.add(&tabs_, UI::Box::Resizing::kFullSize);
 	tab_box_.add_space(4);
 	tab_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
-	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/toggle_minimap.png"),
+	tabs_.add("main_map_options", g_image_cache->get("images/wui/menus/toggle_minimap.png"),
 	          &main_box_, _("Main Options"));
-	tabs_.add("map_tags", g_gr->images().get("images/ui_basic/checkbox_checked.png"), &tags_box_,
+	tabs_.add("map_tags", g_image_cache->get("images/ui_basic/checkbox_checked.png"), &tags_box_,
 	          _("Tags"));
-	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/tools/players.png"), &teams_box_,
+	tabs_.add("map_teams", g_image_cache->get("images/wui/editor/tools/players.png"), &teams_box_,
 	          _("Teams"));
 
 	set_center_panel(&tab_box_);
@@ -403,7 +402,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 void MainMenuMapOptions::update_waterway_length_warning() {
 	const uint32_t len = waterway_length_box_->get_value();
 	if (len > kMaxRecommendedWaterwayLengthLimit) {
-		waterway_length_warning_->set_icon(g_gr->images().get("images/ui_basic/stop.png"));
+		waterway_length_warning_->set_icon(g_image_cache->get("images/ui_basic/stop.png"));
 		waterway_length_warning_->set_tooltip(
 		   (boost::format(_("It is not recommended to permit waterway lengths greater than %u")) %
 		    kMaxRecommendedWaterwayLengthLimit)

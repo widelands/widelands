@@ -7,17 +7,15 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_borassus_desert_sapling",
    descname = _ "Borassus Palm (Sapling)",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m10s",
-         "remove=success:80",
+         "remove=chance:31.25%",
          "grow=palm_borassus_desert_pole",
       },
    },
@@ -34,17 +32,15 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_borassus_desert_pole",
    descname = _ "Borassus Palm (Pole)",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m10s",
-         "remove=success:70",
+         "remove=chance:27.34%",
          "grow=palm_borassus_desert_mature",
       },
    },
@@ -61,17 +57,15 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_borassus_desert_mature",
    descname = _ "Borassus Palm (Mature)",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m5s",
-         "remove=success:40",
+         "remove=chance:15.62%",
          "grow=palm_borassus_desert_old",
       },
    },
@@ -88,20 +82,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_borassus_desert_old",
    descname = _ "Borassus Palm (Old)",
    species = _ "Borassus Palm",
    icon = dirname .. "menu.png",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:33m20s",
-         "transform=deadtree5 success:25",
-         "seed=palm_borassus_desert_sapling 160",
+         "transform=deadtree5 chance:9.76%",
+         "seed=palm_borassus_desert_sapling proximity:62.5%",
       },
       fall = {
          "remove=",
@@ -118,6 +110,7 @@ world:new_immovable_type{
          hotspot = { 25, 61 },
          sound_effect = {
             path = "sound/animals/crickets1",
+            priority = 10
          },
       }
    },

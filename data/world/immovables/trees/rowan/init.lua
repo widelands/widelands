@@ -7,17 +7,15 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "rowan_summer_sapling",
    descname = _ "Rowan (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:1m",
-         "remove=success:40",
+         "remove=chance:15.62%",
          "grow=rowan_summer_pole",
       },
    },
@@ -34,17 +32,15 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "rowan_summer_pole",
    descname = _ "Rowan (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
-         "remove=success:30",
+         "remove=chance:11.72%",
          "grow=rowan_summer_mature",
       },
    },
@@ -61,20 +57,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "rowan_summer_mature",
    descname = _ "Rowan (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:55s",
-         "remove=success:7",
-         "seed=rowan_summer_sapling 40",
+         "remove=chance:2.73%",
+         "seed=rowan_summer_sapling proximity:15.62%",
          "animate=idle duration:30s",
-         "remove=success:10",
+         "remove=chance:3.91%",
          "grow=rowan_summer_old",
       },
    },
@@ -91,20 +85,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "rowan_summer_old",
    descname = _ "Rowan (Old)",
    species = _ "Rowan",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:23m52s",
-         "transform=deadtree4 success:26",
-         "seed=rowan_summer_sapling 180",
+         "transform=deadtree4 chance:10.16%",
+         "seed=rowan_summer_sapling proximity:70.31%",
       },
       fall = {
          "remove=",
@@ -121,6 +113,7 @@ world:new_immovable_type{
          hotspot = { 24, 60 },
          sound_effect = {
             path = "sound/animals/bird6",
+            priority = 10
          },
       }
    },

@@ -38,7 +38,7 @@ using namespace Widelands;
 
 int main(int argc, char** argv) {
 	if (!(2 <= argc && argc <= 3)) {
-		log("Usage: %s <map file>\n", argv[0]);
+		log_err("Usage: %s <map file>\n", argv[0]);
 		return 1;
 	}
 
@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
 		std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(map_file));
 
 		if (!ml) {
-			log("Cannot load map file.\n");
+			log_err("Cannot load map file.\n");
 			return 1;
 		}
 
@@ -90,14 +90,14 @@ int main(int argc, char** argv) {
 			json->add_int("needs_widelands_version_after", map->needs_widelands_version_after());
 
 			const std::string world_name =
-			   static_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();
+			   dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();
 			json->add_string("world_name", world_name);
 			json->add_string("minimap", map_path + ".png");
 			json->write_to_file(*in_out_filesystem, (map_file + ".json").c_str());
 		}
 		egbase.cleanup_objects();
 	} catch (std::exception& e) {
-		log("Exception: %s.\n", e.what());
+		log_err("Exception: %s.\n", e.what());
 		cleanup();
 		return 1;
 	}

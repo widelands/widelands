@@ -19,12 +19,12 @@ build)
    # On macOS it always fails with a broken GL installation message, so we omit it.
    if [ "$TRAVIS_OS_NAME" = linux ]; then
       cd ..
-      ./regression_test.py -b build/src/widelands
       if [ "$BUILD_WEBSITE_TOOLS" = ON ]; then
          mkdir temp_web
          build/src/website/wl_map_object_info temp_web
          build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf
       fi
+      ./regression_test.py -b build/src/widelands
    fi
    ;;
 codecheck)
@@ -55,15 +55,5 @@ includes)
    pushd ../src
    ../utils/find_unused_includes.py
    popd
-   ;;
-clang-tidy)
-   # Check for clang-tidy warnings that were cleaned up previously.
-   # We only check for missing optional braces at this point.
-   # We can add more checks later when we have cleaned up more.
-   cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-   python ../utils/run-clang-tidy.py -checks=-*,*braces*,cert*,google-readability-casting,performance* > ../clang-tidy.log
-   pushd ..
-   utils/check_clang_tidy_results.py clang-tidy.log
-   pushd build
    ;;
 esac

@@ -6,14 +6,15 @@
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Renaud Bouchard, 2015-2019
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Tubuntu <tubuntu@testimonium.be>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-06-08 14:35+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -459,7 +460,7 @@ msgid ""
 msgstr "C'est bien. Le premier bâtiment militaire est construit et l'infrastructure minière va de mieux en mieux. Il faut maintenant penser à nous préparer au combat."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:268
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid "Victory"
 msgstr "Victoire"
 
@@ -479,9 +480,9 @@ msgstr "Il y a encore quelques barbares qui se cachent sur notre île, mais je s
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
 msgid ""
-"You have established a working economy, trained new soldiers and driven the "
-"Barbarians from the island."
-msgstr "Vous avez établi une économie fonctionnelle, entraîné de nouveaux soldats et éconduit les barbares de l'île."
+"We have established a working economy, trained new soldiers and driven the "
+"Barbarians from the island. Now we can think about our next steps."
+msgstr "Nous avons établi une économie fonctionnelle, entraîné de nouveaux soldats et éconduit les barbares de l'île. Maintenant nous pouvons penser à nos démarches à suivre."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"
@@ -516,8 +517,3 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Vous avez rempli votre mission. Vous pouvez continuer à jouer si vous le désirez, ou passer à la mission suivante."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

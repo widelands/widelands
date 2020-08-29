@@ -126,6 +126,6 @@ void Route::insert_as_first(RoutingNode* node) {
 	// we are sure that node is a Flag, since it is the only
 	// RoutingNode ever used in the path finder (outside tests)
 	// That's why we can make this cast
-	route_.insert(route_.begin(), static_cast<Flag*>(node));
+	route_.insert(route_.begin(), dynamic_cast<Flag*>(node));
 }
 }  // namespace Widelands

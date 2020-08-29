@@ -54,7 +54,7 @@ public:
 	void fs_unlink(const std::string& fs_filename) override;
 	void fs_rename(const std::string&, const std::string&) override;
 
-	unsigned long long disk_space() override;
+	unsigned long long disk_space() override;  // NOLINT
 
 	static FileSystem* create_from_directory(const std::string& directory);
 

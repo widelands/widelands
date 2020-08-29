@@ -68,6 +68,11 @@ public:
 	void think() override;
 	void draw(RenderTarget& dst) override;
 
+	std::map<Widelands::Ship*, Widelands::Coords>& get_expedition_port_spaces() {
+		return expedition_port_spaces_;
+	}
+	bool has_expedition_port_space(const Widelands::Coords&) const;
+
 	void set_flag_to_connect(const Widelands::Coords& location) {
 		flag_to_connect_ = location;
 	}
@@ -104,7 +109,10 @@ private:
 
 	const Image* grid_marker_pic_;
 
+	std::map<Widelands::Ship*, Widelands::Coords> expedition_port_spaces_;
+
 	std::unique_ptr<Notifications::Subscriber<NoteMapOptions>> map_options_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_PLAYER_H

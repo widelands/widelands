@@ -7,18 +7,16 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "umbrella_green_wasteland_sapling",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Green Umbrella Tree (Sapling)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:57s",
-         "remove=success:21",
+         "remove=chance:8.20%",
          "grow=umbrella_green_wasteland_pole",
       },
    },
@@ -35,18 +33,16 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "umbrella_green_wasteland_pole",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Green Umbrella Tree (Pole)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:53s",
-         "remove=success:19",
+         "remove=chance:7.42%",
          "grow=umbrella_green_wasteland_mature",
       },
    },
@@ -63,18 +59,16 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "umbrella_green_wasteland_mature",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Green Umbrella Tree (Mature)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:50s",
-         "remove=success:18",
+         "remove=chance:7.03%",
          "grow=umbrella_green_wasteland_old",
       },
    },
@@ -91,22 +85,20 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "umbrella_green_wasteland_old",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Green Umbrella Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Green Umbrella Tree",
    icon = dirname .. "menu.png",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m50s",
-         "transform=deadtree4 success:39",
-         "seed=umbrella_green_wasteland_sapling 100",
+         "transform=deadtree4 chance:15.23%",
+         "seed=umbrella_green_wasteland_sapling proximity:39%",
       },
       fall = {
          "remove=",
