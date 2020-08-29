@@ -153,7 +153,8 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 
 	addons_.set_enabled(false);  // Not yet implemented
 
-	for (const std::string& img : g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/mainmenu")) {
+	for (const std::string& img :
+	     g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/mainmenu")) {
 		images_.push_back(img);
 	}
 	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT

@@ -105,7 +105,8 @@ void ProgressWindow::draw(RenderTarget& rt) {
 /// Set a picture to render in the background
 void ProgressWindow::set_background(std::string file_name) {
 	if (file_name.empty() || !g_fs->file_exists(file_name)) {
-		const std::set<std::string> images = g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/gameloading");
+		const std::set<std::string> images =
+		   g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/gameloading");
 		auto it = images.begin();
 		std::advance(it, std::rand() % images.size());  // NOLINT
 		file_name = *it;
