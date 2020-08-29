@@ -312,8 +312,8 @@ size_t Map::count_all_conquerable_fields() {
 
 	std::set<FCoords> coords_to_check;
 
-	log("Collecting valuable fields ... ");
-	ScopedTimer timer("took %ums");
+	log_info("Collecting valuable fields ... ");
+	ScopedTimer timer(" → took %ums");
 
 	// If we don't have the given coordinates yet, walk the map and collect conquerable fields,
 	// initialized with the given radius around the coordinates
@@ -392,7 +392,7 @@ size_t Map::count_all_conquerable_fields() {
 		}
 	}
 
-	log("%" PRIuS " found ... ", valuable_fields_.size());
+	log_info("%" PRIuS " found ... ", valuable_fields_.size());
 	return valuable_fields_.size();
 }
 
@@ -402,8 +402,8 @@ size_t Map::count_all_fields_excluding_caps(NodeCaps caps) {
 		return valuable_fields_.size();
 	}
 
-	log("Collecting valuable fields ... ");
-	ScopedTimer timer("took %ums");
+	log_info("Collecting valuable fields ... ");
+	ScopedTimer timer(" → took %ums");
 
 	for (MapIndex i = 0; i < max_index(); ++i) {
 		Field& field = fields_[i];
@@ -412,7 +412,7 @@ size_t Map::count_all_fields_excluding_caps(NodeCaps caps) {
 		}
 	}
 
-	log("%" PRIuS " found ... ", valuable_fields_.size());
+	log_info("%" PRIuS " found ... ", valuable_fields_.size());
 	return valuable_fields_.size();
 }
 
@@ -579,7 +579,7 @@ void Map::set_origin(const Coords& new_origin) {
 		new_port_spaces.insert(temp);
 	}
 	port_spaces_ = new_port_spaces;
-	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
+	log_info("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
 // Helper function for resize()
@@ -727,7 +727,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 		}
 	}
 
-	log("Map was resized to %d×%d\n", width_, height_);
+	log_info("Map was resized to %d×%d\n", width_, height_);
 }
 
 ResizeHistory Map::dump_state(const EditorGameBase&) const {
@@ -1578,15 +1578,13 @@ NodeCaps Map::calc_nodecaps_pass2(const EditorGameBase& egbase,
 
 	// Reduce building size if it would block connectivity
 	if (buildsize == BaseImmovable::BIG) {
-		static const WalkingDir cycledirs[10] = {
-		   WALK_NE, WALK_NE, WALK_NW, WALK_W, WALK_W, WALK_SW, WALK_SW, WALK_SE, WALK_E, WALK_E};
-		if (!is_cycle_connected(br, 10, cycledirs)) {
+		if (!is_cycle_connected(br, {WALK_NE, WALK_NE, WALK_NW, WALK_W, WALK_W, WALK_SW, WALK_SW,
+		                             WALK_SE, WALK_E, WALK_E})) {
 			buildsize = BUILDCAPS_MEDIUM;
 		}
 	}
 	if (buildsize < BaseImmovable::BIG) {
-		static const WalkingDir cycledirs[6] = {WALK_NE, WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E};
-		if (!is_cycle_connected(br, 6, cycledirs)) {
+		if (!is_cycle_connected(br, {WALK_NE, WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E})) {
 			return static_cast<NodeCaps>(caps);
 		}
 	}
@@ -1738,31 +1736,23 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 }
 
 /**
- * We call a cycle on the map simply connected
- * if the subgraph of the cycle which can be walked on is connected.
+ * We call a cycle on the map simply 'connected' if it can be walked on.
  *
  * The cycle is described as a \p start point plus
  * a description of the directions in which to walk from the starting point.
- * The array \p dirs must have length \p length, where \p length is
- * the length of the cycle.
  */
-bool Map::is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const {
+bool Map::is_cycle_connected(const FCoords& start, const std::vector<WalkingDir>& dirs) const {
+	if (!(start.field->maxcaps() & MOVECAPS_WALK)) {
+		return false;
+	}
 	FCoords f = start;
-	bool prev_walkable = start.field->get_caps() & MOVECAPS_WALK;
-	uint32_t alternations = 0;
-
-	for (uint32_t i = 0; i < length; ++i) {
-		f = get_neighbour(f, dirs[i]);
-		const bool walkable = f.field->get_caps() & MOVECAPS_WALK;
-		alternations += walkable != prev_walkable;
-		if (alternations > 2) {
+	for (const WalkingDir& dir : dirs) {
+		f = get_neighbour(f, dir);
+		if (!(f.field->maxcaps() & MOVECAPS_WALK)) {
 			return false;
 		}
-		prev_walkable = walkable;
 	}
-
 	assert(start == f);
-
 	return true;
 }
 
@@ -2107,9 +2097,9 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
 		}
 	} catch (const FileError& e) {
 		// file might not have existed
-		log("Map::get_correct_loader: File error: %s\n", e.what());
+		log_err("Map::get_correct_loader: File error: %s\n", e.what());
 	} catch (std::exception& e) {
-		log("Map::get_correct_loader: Unknown error: %s\n", e.what());
+		log_err("Map::get_correct_loader: Unknown error: %s\n", e.what());
 	}
 	return result;
 }

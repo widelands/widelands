@@ -24,6 +24,7 @@
 #include "base/macros.h"
 #include "base/math.h"
 #include "graphic/game_renderer.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/map_objects/world/world.h"
 #include "wlapplication.h"
@@ -295,6 +296,23 @@ bool MapView::ViewArea::contains_map_pixel(const Vector2f& map_pixel) const {
 	return std::abs(dist.x) <= (rect_.w / 2.f) && std::abs(dist.y) <= (rect_.h / 2.f);
 }
 
+bool MapView::View::zoom_near(float other_zoom) const {
+	constexpr float epsilon = 1e-5;
+	return std::abs(zoom - other_zoom) < epsilon;
+}
+
+bool MapView::View::view_near(const View& other) const {
+	constexpr float epsilon = 1e-5;
+	return zoom_near(other.zoom) && std::abs(viewpoint.x - other.viewpoint.x) < epsilon &&
+	       std::abs(viewpoint.y - other.viewpoint.y) < epsilon;
+}
+
+bool MapView::View::view_roughly_near(const View& other) const {
+	return zoom_near(other.zoom) &&
+	       std::abs(viewpoint.x - other.viewpoint.x) < g_gr->get_xres() / 2 &&
+	       std::abs(viewpoint.y - other.viewpoint.y) < g_gr->get_yres() / 2;
+}
+
 MapView::MapView(
    UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
    : UI::Panel(parent, x, y, w, h),
@@ -390,7 +408,13 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 		break;
 	}
 
-	fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
+	// If zoom is 1x align to whole pixels to get pixel-perfect sprite rendering.
+	if (view_.zoom_near(1)) {
+		fields_to_draw_.reset(
+		   egbase, Vector2f(round(view_.viewpoint.x), round(view_.viewpoint.y)), view_.zoom, dst);
+	} else {
+		fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
+	}
 	const float scale = 1.f / view_.zoom;
 	::draw_terrain(
 	   egbase.get_gametime(), egbase.world(), fields_to_draw_, scale, workarea, grid, player, dst);
@@ -522,8 +546,7 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 		return true;
 	}
 	constexpr float kPercentPerMouseWheelTick = 0.02f;
-	float zoom = view_.zoom * static_cast<float>(std::pow(
-	                             1.f - math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
+	float zoom = view_.zoom * static_cast<float>(std::pow(1.f - kPercentPerMouseWheelTick, y));
 	zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
 	return true;
 }

@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "base/log.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
@@ -64,7 +64,7 @@ Campaigns::Campaigns() {
 	     difficulties_table->array_entries<std::unique_ptr<LuaTable>>()) {
 		difficulty_levels.push_back(
 		   std::make_pair(_(difficulty_level_table->get_string("descname")),
-		                  g_gr->images().get(difficulty_level_table->get_string("image"))));
+		                  g_image_cache->get(difficulty_level_table->get_string("image"))));
 	}
 
 	// Read the campaigns themselves
@@ -188,7 +188,7 @@ void Campaigns::update_legacy_campvis() {
 		return;
 	}
 
-	log("Converting legacy campvis\n");
+	log_info("Converting legacy campvis\n");
 
 	using LegacyList = std::vector<std::pair<std::string, std::string>>;
 

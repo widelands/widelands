@@ -8,6 +8,7 @@ wl_library(ai_hints
     base_log
     base_macros
     logic_constants
+    logic_exceptions
     scripting_lua_table
 )
 

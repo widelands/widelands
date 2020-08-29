@@ -39,7 +39,7 @@ namespace Widelands {
 
 class Tribes {
 public:
-	Tribes(LuaInterface* lua);
+	Tribes(DescriptionManager* description_manager, LuaInterface* lua);
 	~Tribes() = default;
 
 	size_t nrbuildings() const;
@@ -55,6 +55,7 @@ public:
 	bool building_exists(DescriptionIndex index) const;
 	bool immovable_exists(DescriptionIndex index) const;
 	bool ship_exists(DescriptionIndex index) const;
+	bool tribe_exists(const std::string& tribename) const;
 	bool tribe_exists(DescriptionIndex index) const;
 
 	DescriptionIndex safe_building_index(const std::string& buildingname) const;
@@ -88,7 +89,7 @@ public:
 	void register_scenario_tribes(FileSystem* filesystem);
 
 	/// Add a tribe object type to the tribes.
-	void add_tribe_object_type(const LuaTable& table, const World& world, MapObjectType type);
+	void add_tribe_object_type(const LuaTable& table, World& world, MapObjectType type);
 
 	/// Adds a specific tribe's configuration.
 	void add_tribe(const LuaTable& table, const World& world);
@@ -127,9 +128,8 @@ private:
 	/// Custom scenario tribes
 	std::unique_ptr<LuaTable> scenario_tribes_;
 
-	LuaInterface* lua_;  // Not owned
-
-	std::unique_ptr<DescriptionManager> description_manager_;
+	LuaInterface* lua_;                        // Not owned
+	DescriptionManager* description_manager_;  // Not owned
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };
 

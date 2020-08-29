@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/terrain_affinity.h"
@@ -48,7 +49,8 @@ woodcutters to remove the tree).
 It is not mandatory for immovables to define programs. If the immovable defines a program named
 ``main``, this program will be started as the main program on creation. Immovables without such a
 program will simply display their 'idle' animation indefinitely.
-(Note: the main program used to be called ``program``, which has been deprecated.)
+
+.. note:: The main program used to be called ``program``, which has been deprecated.
 
 Programs are defined as Lua tables. Each program must be declared as a subtable in the immovable's
 Lua table called ``programs`` and have a unique table key. The entries in a program's subtable are
@@ -225,13 +227,13 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 			} else if (item.first == "bob") {
 				// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
 				bob_ = true;
-				log("WARNING: %s: Deprecated 'bob' in 'transform' program, use 'bob:<name>' instead.\n",
-				    descr.name().c_str());
+				log_warn("%s: Deprecated 'bob' in 'transform' program, use 'bob:<name>' instead.\n",
+				         descr.name().c_str());
 			} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 				// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
-				log("WARNING: %s: Deprecated chance in 'transform' program, use 'chance:<percent>' "
-				    "instead.\n",
-				    descr.name().c_str());
+				log_warn("%s: Deprecated chance in 'transform' program, use 'chance:<percent>' "
+				         "instead.\n",
+				         descr.name().c_str());
 				probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
 			} else {
 				type_name_ = argument;
@@ -379,9 +381,8 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
 			probability_ = read_percent_to_int(item.second);
 		} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 			// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
-			log(
-			   "WARNING: %s: Deprecated chance in 'remove' program, use 'chance:<percent>' instead.\n",
-			   descr.name().c_str());
+			log_warn("%s: Deprecated chance in 'remove' program, use 'chance:<percent>' instead.\n",
+			         descr.name().c_str());
 			probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
 		} else {
 			throw GameDataError(
@@ -445,9 +446,9 @@ ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
 
 	if (read_key_value_pair(arguments.at(1), ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
-		log("WARNING: 'seed' program without parameter names is deprecated, please use "
-		    "'seed=<immovable_name> proximity:<percent>' in %s\n",
-		    descr.name().c_str());
+		log_warn("'seed' program without parameter names is deprecated, please use "
+		         "'seed=<immovable_name> proximity:<percent>' in %s\n",
+		         descr.name().c_str());
 		type_name_ = arguments.front();
 		probability_ = (read_positive(arguments.at(1), 254) * kMaxProbability) / 256;
 	} else {
@@ -540,9 +541,9 @@ ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments
 	}
 	if (read_key_value_pair(arguments[1], ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
-		log("WARNING: Old-style syntax found for 'construct' program in %s, use "
-		    "construct=<animation_name> duration:<duration> decay_after:<duration> instead.\n",
-		    descr.name().c_str());
+		log_warn("Old-style syntax found for 'construct' program in %s, use "
+		         "construct=<animation_name> duration:<duration> decay_after:<duration> instead.\n",
+		         descr.name().c_str());
 		animation_name_ = arguments[0];
 
 		buildtime_ = read_positive(arguments[1]);
@@ -650,7 +651,7 @@ ImmovableActionData::load(FileRead& fr, Immovable& imm, const std::string& name)
 	if (name == "construct") {
 		return ActConstructData::load(fr, imm);
 	} else {
-		log("ImmovableActionData::load: type %s not known", name.c_str());
+		log_err("ImmovableActionData::load: type %s not known", name.c_str());
 		return nullptr;
 	}
 }

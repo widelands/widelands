@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/request.h"
@@ -63,7 +64,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
                                      const std::string& msgctxt,
                                      const LuaTable& table,
                                      Tribes& tribes,
-                                     const World& world)
+                                     World& world)
    : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::TRAININGSITE, table, tribes, world),
      num_soldiers_(table.get_int("soldier_capacity")),
      max_stall_(table.get_int("trainer_patience")),
@@ -90,9 +91,9 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 		items_table = table.get_table("soldier health");
 		// TODO(GunChleoc): Compatibility, remove these after v1.0
 		if (items_table->has_key<std::string>("min_level")) {
-			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			    "health' are no longer needed\n",
-			    name().c_str());
+			log_warn("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			         "health' are no longer needed\n",
+			         name().c_str());
 		}
 		add_training_inputs(*items_table, &food_health_, &weapons_health_);
 	}
@@ -100,27 +101,27 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 	if (table.has_key("soldier attack")) {
 		items_table = table.get_table("soldier attack");
 		if (items_table->has_key<std::string>("min_level")) {
-			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			    "attack' are no longer needed\n",
-			    name().c_str());
+			log_warn("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			         "attack' are no longer needed\n",
+			         name().c_str());
 		}
 		add_training_inputs(*items_table, &food_attack_, &weapons_attack_);
 	}
 	if (table.has_key("soldier defense")) {
 		items_table = table.get_table("soldier defense");
 		if (items_table->has_key<std::string>("min_level")) {
-			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			    "defense' are no longer needed\n",
-			    name().c_str());
+			log_warn("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			         "defense' are no longer needed\n",
+			         name().c_str());
 		}
 		add_training_inputs(*items_table, &food_defense_, &weapons_defense_);
 	}
 	if (table.has_key("soldier evade")) {
 		items_table = table.get_table("soldier evade");
 		if (items_table->has_key<std::string>("min_level")) {
-			log("WARNING: Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			    "evade' are no longer needed\n",
-			    name().c_str());
+			log_warn("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
+			         "evade' are no longer needed\n",
+			         name().c_str());
 		}
 		add_training_inputs(*items_table, &food_evade_, &weapons_evade_);
 	}
@@ -356,6 +357,7 @@ void TrainingSite::SoldierControl::drop_soldier(Soldier& soldier) {
 	   std::find(training_site_->soldiers_.begin(), training_site_->soldiers_.end(), &soldier);
 	if (it == training_site_->soldiers_.end()) {
 		training_site_->molog(
+		   game.get_gametime(),
 		   "TrainingSite::SoldierControl::drop_soldier: soldier not in training site");
 		return;
 	}
@@ -506,6 +508,11 @@ void TrainingSite::add_worker(Worker& w) {
 			schedule_act(*game, 100);
 		}
 	}
+}
+
+void TrainingSite::switch_heroes() {
+	build_heroes_ = !build_heroes_;
+	molog(owner().egbase().get_gametime(), "BUILD_HEROES: %s", build_heroes_ ? "TRUE" : "FALSE");
 }
 
 void TrainingSite::remove_worker(Worker& w) {
@@ -838,9 +845,9 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 					TypeAndLevel train_tl(upgrade.attribute, level);
 					TrainFailCount::iterator tstep = training_failure_count_.find(train_tl);
 					if (tstep == training_failure_count_.end()) {
-						log("\nTrainingSite::drop_stalled_soldiers: ");
-						log("training step %d,%d not found in this school!\n",
-						    static_cast<unsigned int>(upgrade.attribute), level);
+						log_warn("TrainingSite::drop_stalled_soldiers: training step %d,%d "
+						         "not found in this school!\n",
+						         static_cast<unsigned int>(upgrade.attribute), level);
 						break;
 					}
 
@@ -863,7 +870,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 
 	// Finally drop the soldier.
 	if (nullptr != soldier_to_drop) {
-		log("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
+		log_info("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
 		uint8_t level = soldier_to_drop->get_level(TrainingAttribute::kTotal);
 		if (level > highest_trainee_level_seen_) {
 			highest_trainee_level_seen_ = level;

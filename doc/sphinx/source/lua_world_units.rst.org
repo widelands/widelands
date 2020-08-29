@@ -1,3 +1,5 @@
+.. _lua_world_defining_units:
+
 Defining Units
 ==============
 
@@ -10,6 +12,47 @@ A world can have the following types of units:
 
 The definitions for the world's units are located in the subdirectories of
 ``data/world``. Each unit needs to have an ``init.lua`` file, which will load the unit to be used in the game.
+
+Each ``init.lua`` file needs to have a matching ``register.lua`` file that
+will list the names of all units defined in the ``init.lua``, and their attributes if they have any.
+This is needed for registering the objects before they are loaded. For a given ``init.lua``:
+
+.. code-block:: lua
+
+   wl.World():new_immovable_type{
+      name = "alder_summer_sapling",
+      ...
+   }
+
+   wl.World():new_immovable_type{
+      name = "alder_summer_pole",
+      ...
+   }
+
+   wl.World():new_immovable_type{
+      name = "alder_summer_mature",
+      ...
+   }
+
+   wl.World():new_immovable_type{
+      name = "alder_summer_old",
+      ...
+   }
+
+The matching ``register.lua`` would look like this:
+
+.. code-block:: lua
+
+   return {
+      alder_summer_sapling = { "tree_sapling" },
+      alder_summer_pole = {},
+      alder_summer_mature = {},
+      alder_summer_old = { "tree" }
+   }
+
+
+Note that ``alder_summer_pole`` and ``alder_summer_mature`` in this example have no attributes, so their
+attribute tables are empty.
 
 .. toctree::
    :maxdepth: 3

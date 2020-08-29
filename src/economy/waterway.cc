@@ -146,13 +146,13 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 	path.truncate(index);
 	secondpath.trim_start(index);
 
-	molog("splitting waterway: first part:\n");
+	molog(game.get_gametime(), "splitting waterway: first part:\n");
 	for (const Coords& coords : path.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
-	molog("                    second part:\n");
+	molog(game.get_gametime(), "                    second part:\n");
 	for (const Coords& coords : secondpath.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
 
 	// change waterway size and reattach
@@ -191,11 +191,11 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 		}
 
 		if (other) {
-			molog("Assigning the ferry to the NEW waterway\n");
+			molog(game.get_gametime(), "Assigning the ferry to the NEW waterway\n");
 			ferry_->set_destination(game, &newww);
 			request_ferry(game);
 		} else {
-			molog("Assigning the ferry to the OLD waterway\n");
+			molog(game.get_gametime(), "Assigning the ferry to the OLD waterway\n");
 			ferry_->set_destination(game, this);
 			newww.request_ferry(game);
 		}
@@ -227,8 +227,8 @@ void Waterway::cleanup(EditorGameBase& egbase) {
 void Waterway::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
-	molog("Ferry %u\n", ferry_ ? ferry_->serial() : 0);
-	molog("FerryFleet %u\n", fleet_ ? fleet_->serial() : 0);
+	molog(egbase.get_gametime(), "Ferry %u\n", ferry_ ? ferry_->serial() : 0);
+	molog(egbase.get_gametime(), "FerryFleet %u\n", fleet_ ? fleet_->serial() : 0);
 }
 
 }  // namespace Widelands

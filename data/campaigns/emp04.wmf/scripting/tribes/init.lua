@@ -26,12 +26,20 @@
 --          }
 --          workers_order = {
 --             {
---                "empire_vesta_priestess"
+--                {
+--                   name = "empire_vesta_priestess",
+--                   default_target_quantity = 1,
+--                   preciousness = 15
+--                }
 --             },
 --          },
 --          wares_order = {
 --             {
---                "empire_vesta_wine"
+--                {
+--                   name = "empire_vesta_wine"
+--                   default_target_quantity = 10,
+--                   preciousness = 4
+--                }
 --             },
 --          }
 --       },
