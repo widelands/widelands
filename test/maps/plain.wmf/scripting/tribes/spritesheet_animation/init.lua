@@ -25,10 +25,6 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_spritesheet_animation = false
-   },
-
    spritesheets = {
       idle = {
          frames = 20,
@@ -71,7 +67,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
