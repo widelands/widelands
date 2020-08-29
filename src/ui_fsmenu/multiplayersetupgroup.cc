@@ -385,8 +385,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Whether the client who is running the UI is allowed to change the tribe for this player slot.
 	bool has_tribe_access() {
 		return settings_->settings().players[id_].state == PlayerSettings::State::kShared ?
-		          settings_->can_change_player_init(id_) :
-		          settings_->can_change_player_tribe(id_);
+                settings_->can_change_player_init(id_) :
+                settings_->can_change_player_tribe(id_);
 	}
 
 	/// This will update the game settings for the tribe or shared_in with the value
@@ -398,8 +398,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_settings = settings_->settings().players[id_];
 		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-		                                      UI::ButtonDisableStyle::kPermpressed :
-		                                      UI::ButtonDisableStyle::kFlat);
+                                            UI::ButtonDisableStyle::kPermpressed :
+                                            UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
 				n->set_player_shared(
@@ -734,35 +734,37 @@ void MultiPlayerSetupGroup::update() {
 }
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
-	const int32_t total_box_height = scrollable_playerbox.get_y() + scrollable_playerbox.get_h();
-	// log("scrollable now: %d\n", scrollable_playerbox.get_w());
-	for (MultiPlayerPlayerGroup* current_player : multi_player_player_groups) {
-		if (current_player->is_visible()) {
-			if (current_player->get_y() < 0 && current_player->get_y() > -current_player->get_h()) {
-				dst.brighten_rect(
-				   Recti(playerbox.get_x(), scrollable_playerbox.get_y(), scrollable_playerbox.get_w(),
-				         current_player->get_h() + current_player->get_y()),
-				   -MOUSE_OVER_BRIGHT_FACTOR);
-			} else if (current_player->get_y() >= 0) {
-				auto rect_height =
-				   std::min(total_box_height - (scrollable_playerbox.get_y() + current_player->get_y()),
-				            current_player->get_h());
-				dst.brighten_rect(
-				   Recti(playerbox.get_x(), scrollable_playerbox.get_y() + current_player->get_y(),
-				         scrollable_playerbox.get_w(), rect_height < 0 ? 0 : rect_height),
-				   -MOUSE_OVER_BRIGHT_FACTOR);
-			}
-		}
-	}
+	//	const int32_t total_box_height = scrollable_playerbox.get_y() + scrollable_playerbox.get_h();
+	//	// log("scrollable now: %d\n", scrollable_playerbox.get_w());
+	//	for (MultiPlayerPlayerGroup* current_player : multi_player_player_groups) {
+	//		if (current_player->is_visible()) {
+	//			if (current_player->get_y() < 0 && current_player->get_y() > -current_player->get_h()) {
+	//				dst.brighten_rect(
+	//				   Recti(playerbox.get_x(), scrollable_playerbox.get_y(),
+	// scrollable_playerbox.get_w(), 				         current_player->get_h() +
+	// current_player->get_y()), 				   -MOUSE_OVER_BRIGHT_FACTOR); 			} else if
+	// (current_player->get_y() >= 0)
+	//{ 				auto rect_height = 				   std::min(total_box_height - (scrollable_playerbox.get_y()
+	//+
+	// current_player->get_y()), 				            current_player->get_h());
+	// dst.brighten_rect( 				   Recti(playerbox.get_x(), scrollable_playerbox.get_y() +
+	// current_player->get_y(), 				         scrollable_playerbox.get_w(), rect_height < 0 ? 0
+	// : rect_height), 				   -MOUSE_OVER_BRIGHT_FACTOR);
+	//			}
+	//		}
+	//	}
 }
 
 // NOCOM When branch is ready, delete max_height if it's still unused
 void MultiPlayerSetupGroup::force_new_dimensions(float scale,
-                                                 uint32_t /*max_width*/,
-                                                 uint32_t /*max_height*/,
+                                                 uint32_t max_width,
+                                                 uint32_t max_height,
                                                  uint32_t standard_element_height) {
 	players_.set_font_scale(scale);
 	clients_.set_font_scale(scale);
+	clientbox.set_min_desired_breadth(max_width / 3);
+	playerbox.set_max_size(max_width / 2, max_height);
+	scrollable_playerbox.set_max_size(max_width / 2, max_height);
 	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
 		multiPlayerClientGroup->force_new_dimensions(scale, standard_element_height);
 	}
@@ -772,15 +774,19 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
 	// log("total: %d, client: %d,  player before: %d, scrollable before: %d,\n", get_w(),
 	//     clientbox.get_w(), playerbox.get_w(), scrollable_playerbox.get_w());
 	// playerbox.set_max_size(0, max_height);
-	log_dbg("total: %d, client: %d,  player before: %d, scrollable before: %d,\n", get_h(),
-	        clientbox.get_h(), playerbox.get_h(), scrollable_playerbox.get_h());
+
 	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
 		multiPlayerPlayerGroup->force_new_dimensions(scale, standard_element_height);
 		// multiPlayerPlayerGroup->set_desired_size(
 		//    get_w() - 32 - clientbox.get_w() - UI::Scrollbar::kSize,
 		// multiPlayerPlayerGroup->get_h());
 	}
-	log_dbg("groups size: #elements * height = %" PRIuS "  * %d = %" PRIuS "\n",
+	log_dbg("max_w: %d, max_h: %d\n", max_width, max_height);
+	log_dbg("total: %dx%d, client: %dx%d,  player: %dx%d, scrollable: %dx%d,\n", get_w(), get_h(),
+	        clientbox.get_w(), clientbox.get_h(), playerbox.get_w(), playerbox.get_h(),
+	        scrollable_playerbox.get_w(), scrollable_playerbox.get_h());
+	//	log_dbg("box max_y: %d\n", scrollable_playerbox.g)
+	log_dbg("#elements * height = %" PRIuS "  * %d = %" PRIuS "\n",
 	        multi_player_player_groups.size(), standard_element_height,
 	        multi_player_player_groups.size() * standard_element_height);
 }
