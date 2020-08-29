@@ -23,6 +23,7 @@
 
 #include <boost/algorithm/string.hpp>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
@@ -336,25 +337,25 @@ void Building::load_finish(EditorGameBase& egbase) {
 		OPtr<PlayerImmovable> const worker_location = worker.get_location();
 		if (worker_location.serial() != serial() &&
 		    worker_location.serial() != base_flag().serial()) {
-			log("WARNING: worker %u is in the leave queue of building %u with "
-			    "base flag %u but is neither inside the building nor at the "
-			    "flag!\n",
-			    worker.serial(), serial(), base_flag().serial());
+			log_warn("worker %u is in the leave queue of building %u with "
+			         "base flag %u but is neither inside the building nor at the "
+			         "flag!\n",
+			         worker.serial(), serial(), base_flag().serial());
 			return true;
 		}
 
 		Bob::State const* const state = worker.get_state(Worker::taskLeavebuilding);
 		if (!state) {
-			log("WARNING: worker %u is in the leave queue of building %u but "
-			    "does not have a leavebuilding task! Removing from queue.\n",
-			    worker.serial(), serial());
+			log_warn("worker %u is in the leave queue of building %u but "
+			         "does not have a leavebuilding task! Removing from queue.\n",
+			         worker.serial(), serial());
 			return true;
 		}
 
 		if (state->objvar1 != this) {
-			log("WARNING: worker %u is in the leave queue of building %u but its "
-			    "leavebuilding task is for map object %u! Removing from queue.\n",
-			    worker.serial(), serial(), state->objvar1.serial());
+			log_warn("worker %u is in the leave queue of building %u but its "
+			         "leavebuilding task is for map object %u! Removing from queue.\n",
+			         worker.serial(), serial(), state->objvar1.serial());
 			return true;
 		}
 		return false;
@@ -699,8 +700,8 @@ Return true if we can service that request (even if it is delayed), or false
 otherwise.
 ===============
 */
-bool Building::fetch_from_flag(Game&) {
-	molog("TODO(unknown): Implement Building::fetch_from_flag\n");
+bool Building::fetch_from_flag(Game& game) {
+	molog(game.get_gametime(), "TODO(unknown): Implement Building::fetch_from_flag\n");
 
 	return false;
 }
@@ -797,20 +798,21 @@ void Building::set_priority(int32_t const type,
 void Building::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
 
-	molog("position: (%i, %i)\n", position_.x, position_.y);
+	molog(egbase.get_gametime(), "position: (%i, %i)\n", position_.x, position_.y);
 	FORMAT_WARNINGS_OFF
-	molog("flag: %p\n", flag_);
+	molog(egbase.get_gametime(), "flag: %p\n", flag_);
 	FORMAT_WARNINGS_ON
-	molog("* position: (%i, %i)\n", flag_->get_position().x, flag_->get_position().y);
+	molog(egbase.get_gametime(), "* position: (%i, %i)\n", flag_->get_position().x,
+	      flag_->get_position().y);
 
-	molog("anim: %s\n", descr().get_animation_name(anim_).c_str());
-	molog("animstart: %i\n", animstart_);
+	molog(egbase.get_gametime(), "anim: %s\n", descr().get_animation_name(anim_).c_str());
+	molog(egbase.get_gametime(), "animstart: %i\n", animstart_);
 
-	molog("leave_time: %i\n", leave_time_);
+	molog(egbase.get_gametime(), "leave_time: %i\n", leave_time_);
 
-	molog("leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
+	molog(egbase.get_gametime(), "leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
 	FORMAT_WARNINGS_OFF
-	molog("leave_allow.get(): %p\n", leave_allow_.get(egbase));
+	molog(egbase.get_gametime(), "leave_allow.get(): %p\n", leave_allow_.get(egbase));
 	FORMAT_WARNINGS_ON
 }
 

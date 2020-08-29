@@ -19,7 +19,6 @@
 
 #include "map_io/map_images.h"
 
-#include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 
@@ -35,8 +34,8 @@ void load_map_images(FileSystem& fs) {
 			continue;
 		}
 		const std::string hash = std::string("map:") + FileSystem::fs_filename(pname.c_str());
-		if (!g_gr->images().has(hash)) {
-			g_gr->images().insert(hash, load_image(pname, &fs));
+		if (!g_image_cache->has(hash)) {
+			g_image_cache->insert(hash, load_image(pname, &fs));
 		}
 	}
 }
