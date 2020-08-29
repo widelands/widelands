@@ -38,7 +38,8 @@ lua_dirs = (
     ('data/scripting', '', 'auxiliary'),
     ('data/scripting/win_conditions', '', 'auxiliary'),
     ('data/scripting/editor', '', 'lua_world_other'),
-    ('data/tribes', '', 'lua_tribes_defining'),
+    ('data/tribes/initialization/atlanteans', '', 'lua_tribes_defining'),
+    ('data/campaigns/emp04.wmf/scripting/tribes', '', 'lua_tribes_defining'),
     ('data/tribes/scripting', '', 'lua_tribes_other'),
     ('data/tribes/scripting/mapobject_info', '', 'lua_tribes_other'),
     ('data/tribes/scripting/help', '', 'lua_tribes_other'),
@@ -75,7 +76,7 @@ lua_dirs = (
      'immovables', 'lua_world_units'),
      ('data/world/resources',
      'resources', 'lua_world_units'),
-     ('data/world/terrains',
+     ('data/world/terrains/desert/beach',
      'terrains', 'lua_world_units'),
 )
 

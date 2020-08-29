@@ -26,6 +26,7 @@
 #endif
 #include <iostream>
 #include <memory>
+#include <vector>
 
 #include <SDL_log.h>
 #ifdef _WIN32
@@ -148,13 +149,68 @@ void set_logging_dir() {
 std::unique_ptr<Logger> logger(new Logger());
 #endif
 
-void log(const char* const fmt, ...) {
+static const char* to_string(const LogType& type) {
+	switch (type) {
+	case LogType::kInfo:
+		return "INFO";
+	case LogType::kDebug:
+		return "DEBUG";
+	case LogType::kWarning:
+		return "WARNING";
+	case LogType::kError:
+		return "ERROR";
+	default:
+		NEVER_HERE();
+	}
+}
+
+std::vector<std::string> split(const std::string& s) {
+	std::vector<std::string> result;
+	for (std::string::size_type pos = 0, endpos;
+	     (pos = s.find_first_not_of('\n', pos)) != std::string::npos; pos = endpos) {
+		endpos = s.find('\n', pos);
+		result.push_back(s.substr(pos, endpos - pos));
+	}
+	return result;
+}
+
+void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt, ...) {
 	assert(logger != nullptr);
 
+	// message type
+	char buffer_prefix[8];
+	snprintf(buffer_prefix, sizeof(buffer_prefix), "%s", to_string(type));
+	char buffer_timestamp[32] = "\0";
+	if (gametime != kNoTimestamp && gametime > 0) {  // timestamp
+		const uint32_t hours = gametime / (1000 * 60 * 60);
+		gametime -= hours * 1000 * 60 * 60;
+		const uint32_t minutes = gametime / (1000 * 60);
+		gametime -= minutes * 1000 * 60;
+		const uint32_t seconds = gametime / 1000;
+		gametime -= seconds * 1000;
+
+		snprintf(buffer_timestamp, sizeof(buffer_timestamp), "%u:%02u:%02u.%03u ", hours, minutes,
+		         seconds, gametime);
+	}
+
+	// actual log output
 	char buffer[2048];
 	va_list va;
 	va_start(va, fmt);
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
-	logger->log_cstring(buffer);
+
+	// split by '\n'
+	for (std::string str : split(buffer)) {
+		if (str.find_first_not_of(' ') == std::string::npos) {
+			continue;
+		}
+		if (buffer_timestamp[0]) {
+			logger->log_cstring(buffer_timestamp);
+		}
+		logger->log_cstring(buffer_prefix);
+		str.insert(0, ": ");
+		str.push_back('\n');
+		logger->log_cstring(str.c_str());
+	}
 }

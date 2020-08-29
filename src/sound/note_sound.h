@@ -30,13 +30,19 @@ struct NoteSound {
 	const SoundType type;
 	const FxId fx;
 	const Widelands::Coords coords;
-	const uint8_t priority;
+	const uint16_t priority;
+	bool allow_multiple;
 
 	NoteSound(SoundType init_type,
 	          FxId init_fx,
 	          Widelands::Coords init_coords,
-	          uint8_t init_priority)
-	   : type(init_type), fx(init_fx), coords(init_coords), priority(init_priority) {
+	          uint16_t init_priority,
+	          bool init_allow_multiple)
+	   : type(init_type),
+	     fx(init_fx),
+	     coords(init_coords),
+	     priority(init_priority),
+	     allow_multiple(init_allow_multiple) {
 	}
 };
 

@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -185,11 +184,11 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	}
 
 	if (soldier.get_current_health() < 1) {
-		molog("[battle] soldier %u lost the battle\n", soldier.serial());
+		molog(game.get_gametime(), "[battle] soldier %u lost the battle\n", soldier.serial());
 		soldier.get_owner()->count_casualty();
 		opponent(soldier)->get_owner()->count_kill();
 		soldier.start_task_die(game);
-		molog("[battle] waking up winner %d\n", opponent(soldier)->serial());
+		molog(game.get_gametime(), "[battle] waking up winner %d\n", opponent(soldier)->serial());
 		opponent(soldier)->send_signal(game, "wakeup");
 		return schedule_destroy(game);
 	}
@@ -201,6 +200,7 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	// Here is a timeout to prevent battle freezes
 	if (waitingForOpponent && (game.get_gametime() - creationtime_) > 90 * 1000) {
 		molog(
+		   game.get_gametime(),
 		   "[battle] soldier %u waiting for opponent %u too long (%5d sec), cancelling battle...\n",
 		   soldier.serial(), opponent(soldier)->serial(),
 		   (game.get_gametime() - creationtime_) / 1000);
@@ -256,8 +256,9 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	// The function calculate_round inverts value of first_strikes_, so
 	// attacker will be the first_ when first_strikes_ = false and
 	// attacker will be second_ when first_strikes_ = true
-	molog("[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n", soldier.serial(),
-	      opponent(soldier)->serial(), this_soldier_is, first_strikes_, last_attack_hits_);
+	molog(game.get_gametime(), "[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n",
+	      soldier.serial(), opponent(soldier)->serial(), this_soldier_is, first_strikes_,
+	      last_attack_hits_);
 
 	bool shorten_animation = false;
 	if (this_soldier_is == 1) {
@@ -294,7 +295,8 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	// If the soldier will die as soon as the animation is complete, don't
 	// show it for the full length to prevent overlooping (bug 1817664)
 	shorten_animation &= damage_ >= soldier.get_current_health();
-	molog("[battle] Starting animation %s for soldier %d\n", what_anim.c_str(), soldier.serial());
+	molog(game.get_gametime(), "[battle] Starting animation %s for soldier %d\n", what_anim.c_str(),
+	      soldier.serial());
 	soldier.start_task_idle(game, soldier.descr().get_rand_anim(game, what_anim, &soldier),
 	                        shorten_animation ? 850 : 1000);
 }

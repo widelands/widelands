@@ -48,7 +48,7 @@ namespace {
  */
 
 void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* out_filesystem) {
-	log("\n==================\nWriting buildings:\n==================\n");
+	log_info("\n==================\nWriting buildings:\n==================\n");
 
 	// We don't want any partially finished buildings
 	std::vector<const BuildingDescr*> buildings;
@@ -64,7 +64,7 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 	JSON::Array* json_buildings_array = json->add_array("buildings");
 	for (size_t i = 0; i < buildings.size(); ++i) {
 		const BuildingDescr& building = *buildings[i];
-		log(" %s", building.name().c_str());
+		log_info(" %s", building.name().c_str());
 
 		JSON::Object* json_building = json_buildings_array->add_object();
 		json_building->add_string("name", building.name());
@@ -168,7 +168,7 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 
 	json->write_to_file(
 	   *out_filesystem, (boost::format("%s_buildings.json") % tribe.name()).str().c_str());
-	log("\n");
+	log_info("\n");
 }
 
 /*
@@ -178,13 +178,13 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
  */
 
 void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* out_filesystem) {
-	log("\n===============\nWriting wares:\n===============\n");
+	log_info("\n===============\nWriting wares:\n===============\n");
 
 	std::unique_ptr<JSON::Element> json(new JSON::Element());
 	JSON::Array* json_wares_array = json->add_array("wares");
 	for (DescriptionIndex ware_index : tribe.wares()) {
 		const WareDescr& ware = *tribe.get_ware_descr(ware_index);
-		log(" %s", ware.name().c_str());
+		log_info(" %s", ware.name().c_str());
 		JSON::Object* json_ware = json_wares_array->add_object();
 		json_ware->add_string("name", ware.name());
 		json_ware->add_string("descname", ware.descname());
@@ -208,7 +208,7 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* ou
 
 	json->write_to_file(
 	   *out_filesystem, (boost::format("%s_wares.json") % tribe.name()).str().c_str());
-	log("\n");
+	log_info("\n");
 }
 
 /*
@@ -218,13 +218,13 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* ou
  */
 
 void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* out_filesystem) {
-	log("\n================\nWriting workers:\n================\n");
+	log_info("\n================\nWriting workers:\n================\n");
 
 	std::unique_ptr<JSON::Element> json(new JSON::Element());
 	JSON::Array* json_workers_array = json->add_array("workers");
 	for (DescriptionIndex worker_index : tribe.workers()) {
 		const WorkerDescr& worker = *tribe.get_worker_descr(worker_index);
-		log(" %s", worker.name().c_str());
+		log_info(" %s", worker.name().c_str());
 		JSON::Object* json_worker = json_workers_array->add_object();
 		json_worker->add_string("name", worker.name());
 		json_worker->add_string("descname", worker.descname());
@@ -253,7 +253,7 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* 
 
 	json->write_to_file(
 	   *out_filesystem, (boost::format("%s_workers.json") % tribe.name()).str().c_str());
-	log("\n");
+	log_info("\n");
 }
 
 /*
@@ -275,14 +275,13 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 	JSON::Array* json_tribes_array = json->add_array("tribes");
 
 	/// Tribes
-	egbase.mutable_tribes()->postload();  // Make sure that all values have been set.
 	const Tribes& tribes = egbase.tribes();
 
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {
 		const Widelands::TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
-		log("\n\n=========================\nWriting tribe: %s\n=========================\n",
-		    tribe_info.name.c_str());
+		log_info("\n\n=========================\nWriting tribe: %s\n=========================\n",
+		         tribe_info.name.c_str());
 
 		// Main file
 		JSON::Object* json_tribe = json_tribes_array->add_object();
@@ -313,7 +312,7 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 
 int main(int argc, char** argv) {
 	if (argc != 2) {
-		log("Usage: %s <existing-output-path>\n", argv[0]);
+		log_err("Usage: %s <existing-output-path>\n", argv[0]);
 		return 1;
 	}
 
@@ -323,9 +322,10 @@ int main(int argc, char** argv) {
 		initialize();
 		std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
 		EditorGameBase egbase(nullptr);
+		egbase.load_all_tribes();
 		write_tribes(egbase, out_filesystem.get());
 	} catch (std::exception& e) {
-		log("Exception: %s.\n", e.what());
+		log_err("Exception: %s.\n", e.what());
 		cleanup();
 		return 1;
 	}

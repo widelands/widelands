@@ -6,15 +6,11 @@ the tribes. It contains the following subdirectories:
 
 * ``data/tribes/scripting/help``: These scripts load all information used by the
   in-game help ('Tribal Encyclopedia'). Unit-specific help is loaded with the
-  help of each unit's ``helptexts.lua`` script.
+  help of each unit's and tribe's ``helptexts.lua`` script.
 * ``data/tribes/scripting/mapobject_info``: These scripts are used to generate
   help information for the `Encyclopedia <https://www.widelands.org/encyclopedia/>`_
   on our website. Again, unit-specific help is loaded with the help of each
-  unit's ``helptexts.lua`` script.
-* ``data/tribes/scripting/starting_conditions``: Contains a subdirectory with
-  the game starting conditions available for each tribe. These scripts need to
-  be listed in ``data/tribes/preload.lua`` in order for Widelands to find them.
-
+  unit's and tribe's ``helptexts.lua`` scripts.
 
 .. toctree::
    :maxdepth: 3

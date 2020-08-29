@@ -8,10 +8,9 @@ tribes:new_immovable_type {
    icon = dirname .. "menu.png",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
-   attributes = { "shipconstruction" },
    programs = {
       main = {
-         "construct=idle 5000 210000",
+         "construct=idle duration:5s decay_after:3m30s",
          "transform=bob:frisians_ship",
       }
    },

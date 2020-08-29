@@ -18,6 +18,23 @@ player1 = egbase.players[1]
 player2 = egbase.players[2]
 player3 = egbase.players[3]
 
+-- TODO(GunChleoc): Editor does not conquer properly
+player1:place_building("barbarians_headquarters", map.player_slots[1].starting_field, false, true)
+
+-- For immovables_descriptions.lua
+local field = map:get_field(63,79)
+if (field.immovable == nil) then
+   map:place_immovable("bush1", field, "world")
+end
+field = map:get_field(62,79)
+if (field.immovable == nil) then
+   map:place_immovable("alder_summer_sapling", field, "world")
+end
+field = map:get_field(61,79)
+if (field.immovable == nil) then
+   map:place_immovable("alder_summer_old", field, "world")
+end
+
 -- =================================
 -- Tests for the core functionality
 -- =================================

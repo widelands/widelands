@@ -47,7 +47,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -63,7 +63,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs cornmeal",
             "sleep=duration:3s500ms",
             "consume=corn",
-            "playsound=sound/mill/mill_turning 240",
+            "playsound=sound/mill/mill_turning priority:85% allow_multiple",
             "animate=working duration:15s",
             "produce=cornmeal"
          }
@@ -76,7 +76,7 @@ tribes:new_productionsite_type {
             "return=skipped when site has corn and economy needs cornmeal and not economy needs blackroot_flour",
             "consume=blackroot",
             "sleep=duration:3s500ms",
-            "playsound=sound/mill/mill_turning 240",
+            "playsound=sound/mill/mill_turning priority:85% allow_multiple",
             "animate=working duration:15s",
             "produce=blackroot_flour"
          }

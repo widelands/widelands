@@ -21,132 +21,110 @@
 
 #include <memory>
 
+#include <SDL_surface.h>
+
 #include "base/i18n.h"
-#include "graphic/graphic.h"
-#include "graphic/image_io.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/world/critter.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
 
-World::World()
+World::World(DescriptionManager* description_manager)
    : critters_(new DescriptionMaintainer<CritterDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
      resources_(new DescriptionMaintainer<ResourceDescription>()),
-     editor_terrain_categories_(new DescriptionMaintainer<EditorCategory>()),
-     editor_critter_categories_(new DescriptionMaintainer<EditorCategory>()),
-     editor_immovable_categories_(new DescriptionMaintainer<EditorCategory>()) {
+
+     description_manager_(description_manager) {
+
+	// Walk world directory and register objects
+	description_manager_->register_directory("world", g_fs, false);
 }
 
-World::~World() {
-}
+void World::add_world_object_type(const LuaTable& table, MapObjectType type) {
+	// TODO(GunChleoc): Push/pop textdomain in Lua and get rid of localization code here
+	i18n::Textdomain td("world");
+	const std::string& type_name = table.get_string("name");
+	const std::string& msgctxt =
+	   table.has_key<std::string>("msgctxt") ? table.get_string("msgctxt") : "";
+	const std::string& type_descname =
+	   msgctxt.empty() ? _(table.get_string("descname").c_str()) :
+	                     pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str());
 
-void World::load_graphics() {
-	for (size_t i = 0; i < terrains_->size(); ++i) {
-		TerrainDescription* terrain = terrains_->get_mutable(i);
-		for (size_t j = 0; j < terrain->texture_paths().size(); ++j) {
-			// Set the minimap color on the first loaded image.
-			if (j == 0) {
-				SDL_Surface* sdl_surface = load_image_as_sdl_surface(terrain->texture_paths()[j]);
-				uint8_t top_left_pixel = static_cast<uint8_t*>(sdl_surface->pixels)[0];
-				const SDL_Color top_left_pixel_color =
-				   sdl_surface->format->palette->colors[top_left_pixel];
-				terrain->set_minimap_color(
-				   RGBColor(top_left_pixel_color.r, top_left_pixel_color.g, top_left_pixel_color.b));
-				SDL_FreeSurface(sdl_surface);
-			}
-			terrain->add_texture(g_gr->images().get(terrain->texture_paths()[j]));
-		}
-	}
-}
+	description_manager_->mark_loading_in_progress(type_name);
 
-void World::postload() {
-	// Validate immovable grows/transforms data
-	for (DescriptionIndex i = 0; i < immovables_->size(); ++i) {
-		const ImmovableDescr& imm = immovables_->get(i);
-		for (const auto& target : imm.becomes()) {
-			if (get_immovable_index(target.second) == INVALID_INDEX) {
-				throw GameDataError("Unknown grow/transform target '%s' for world immovable '%s'",
-				                    target.second.c_str(), imm.name().c_str());
-			}
-		}
+	// Add
+	switch (type) {
+	case MapObjectType::CRITTER:
+		critters_->add(new CritterDescr(
+		   _(table.get_string("descname")), table, description_manager_->get_attributes(type_name)));
+		break;
+	case MapObjectType::IMMOVABLE:
+		immovables_->add(new ImmovableDescr(type_descname, table, MapObjectDescr::OwnerType::kWorld,
+		                                    description_manager_->get_attributes(type_name)));
+		break;
+	case MapObjectType::RESOURCE:
+		resources_->add(new ResourceDescription(table));
+		break;
+	case MapObjectType::TERRAIN:
+		terrains_->add(new TerrainDescription(table, *this));
+		break;
+	default:
+		NEVER_HERE();
 	}
 
-	const DescriptionIndex nr_t = get_nr_terrains();
-	for (size_t i = 0; i < nr_t; ++i) {
-		const TerrainDescription& t = terrain_descr(i);
-		if (!t.enhancement().empty()) {
-			if (!terrain_descr(t.enhancement())) {
-				throw GameDataError(
-				   "Terrain %s: Unknown enhancement %s", t.name().c_str(), t.enhancement().c_str());
-			}
-		}
-	}
+	// Update status
+	description_manager_->mark_loading_done(type_name);
 }
 
 const DescriptionMaintainer<TerrainDescription>& World::terrains() const {
 	return *terrains_;
 }
 
-void World::add_resource_type(const LuaTable& table) {
-	resources_->add(new ResourceDescription(table));
-}
-
-void World::add_terrain_type(const LuaTable& table) {
-	terrains_->add(new TerrainDescription(table, *this));
-}
-
-void World::add_critter_type(const LuaTable& table) {
-	i18n::Textdomain td("world");
-	critters_->add(new CritterDescr(_(table.get_string("descname")), table, *this));
-}
-
 const DescriptionMaintainer<ImmovableDescr>& World::immovables() const {
 	return *immovables_;
 }
 
-void World::add_immovable_type(const LuaTable& table) {
-	i18n::Textdomain td("world");
-	immovables_->add(new ImmovableDescr(_(table.get_string("descname")), table, *this));
-}
-
-void World::add_editor_terrain_category(const LuaTable& table) {
-	editor_terrain_categories_->add(new EditorCategory(table));
-}
-
-const DescriptionMaintainer<EditorCategory>& World::editor_terrain_categories() const {
-	return *editor_terrain_categories_;
-}
-
-void World::add_editor_critter_category(const LuaTable& table) {
-	editor_critter_categories_->add(new EditorCategory(table));
-}
-
-const DescriptionMaintainer<EditorCategory>& World::editor_critter_categories() const {
-	return *editor_critter_categories_;
-}
-
-void World::add_editor_immovable_category(const LuaTable& table) {
-	editor_immovable_categories_->add(new EditorCategory(table));
-}
-
-const DescriptionMaintainer<EditorCategory>& World::editor_immovable_categories() const {
-	return *editor_immovable_categories_;
-}
-
-DescriptionIndex World::safe_resource_index(const char* const resourcename) const {
-	DescriptionIndex const result = resource_index(resourcename);
-
-	if (result == INVALID_INDEX) {
-		throw GameDataError("world does not define resource type \"%s\"", resourcename);
+DescriptionIndex World::load_critter(const std::string& crittername) {
+	try {
+		description_manager_->load_description(crittername);
+	} catch (WException& e) {
+		throw GameDataError(
+		   "Error while loading critter type '%s': %s", crittername.c_str(), e.what());
 	}
-	return result;
+	return safe_critter_index(crittername);
+}
+DescriptionIndex World::load_immovable(const std::string& immovablename) {
+	try {
+		description_manager_->load_description(immovablename);
+	} catch (WException& e) {
+		throw GameDataError(
+		   "Error while loading immovable type '%s': %s", immovablename.c_str(), e.what());
+	}
+	return safe_immovable_index(immovablename);
+}
+DescriptionIndex World::load_resource(const std::string& resourcename) {
+	try {
+		description_manager_->load_description(resourcename);
+	} catch (WException& e) {
+		throw GameDataError(
+		   "Error while loading resource type '%s': %s", resourcename.c_str(), e.what());
+	}
+	return safe_resource_index(resourcename);
+}
+DescriptionIndex World::load_terrain(const std::string& terrainname) {
+	try {
+		description_manager_->load_description(terrainname);
+	} catch (WException& e) {
+		throw GameDataError(
+		   "Error while loading terrain type '%s': %s", terrainname.c_str(), e.what());
+	}
+	return safe_terrain_index(terrainname);
 }
 
 TerrainDescription& World::terrain_descr(DescriptionIndex const i) const {
@@ -161,6 +139,14 @@ const TerrainDescription* World::terrain_descr(const std::string& name) const {
 DescriptionIndex World::get_terrain_index(const std::string& name) const {
 	return terrains_->get_index(name);
 }
+DescriptionIndex World::safe_terrain_index(const std::string& name) const {
+	DescriptionIndex const result = get_terrain_index(name);
+
+	if (result == INVALID_INDEX) {
+		throw GameDataError("world does not define terrain type \"%s\"", name.c_str());
+	}
+	return result;
+}
 
 DescriptionIndex World::get_nr_terrains() const {
 	return terrains_->size();
@@ -170,8 +156,16 @@ DescriptionIndex World::get_nr_critters() const {
 	return critters_->size();
 }
 
-DescriptionIndex World::get_critter(char const* const l) const {
-	return critters_->get_index(l);
+DescriptionIndex World::critter_index(const std::string& name) const {
+	return critters_->get_index(name);
+}
+DescriptionIndex World::safe_critter_index(const std::string& name) const {
+	DescriptionIndex const result = critter_index(name);
+
+	if (result == INVALID_INDEX) {
+		throw GameDataError("world does not define critter type \"%s\"", name.c_str());
+	}
+	return result;
 }
 
 const DescriptionMaintainer<CritterDescr>& World::critters() const {
@@ -189,6 +183,14 @@ CritterDescr const* World::get_critter_descr(const std::string& name) const {
 DescriptionIndex World::get_immovable_index(const std::string& name) const {
 	return immovables_->get_index(name);
 }
+DescriptionIndex World::safe_immovable_index(const std::string& name) const {
+	DescriptionIndex const result = get_immovable_index(name);
+
+	if (result == INVALID_INDEX) {
+		throw GameDataError("world does not define immovable type \"%s\"", name.c_str());
+	}
+	return result;
+}
 
 DescriptionIndex World::get_nr_immovables() const {
 	return immovables_->size();
@@ -198,8 +200,16 @@ ImmovableDescr const* World::get_immovable_descr(DescriptionIndex const index) c
 	return immovables_->get_mutable(index);
 }
 
-DescriptionIndex World::resource_index(const char* const name) const {
-	return strcmp(name, "none") ? resources_->get_index(name) : Widelands::kNoResource;
+DescriptionIndex World::resource_index(const std::string& name) const {
+	return name != "none" ? resources_->get_index(name) : Widelands::kNoResource;
+}
+DescriptionIndex World::safe_resource_index(const std::string& resourcename) const {
+	DescriptionIndex const result = resource_index(resourcename);
+
+	if (result == INVALID_INDEX) {
+		throw GameDataError("world does not define resource type \"%s\"", resourcename.c_str());
+	}
+	return result;
 }
 
 /***

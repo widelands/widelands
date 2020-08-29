@@ -72,7 +72,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
@@ -92,7 +92,7 @@ tribes:new_productionsite_type {
          descname = _"mining iron",
          actions = {
             "animate=working duration:8s700ms",
-            "mine=iron 3 100 10 5",
+            "mine=resource_iron radius:3 yield:100% when_empty:10% experience_on_fail:5%",
             "produce=iron_ore",
          }
       },

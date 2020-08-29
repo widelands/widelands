@@ -27,7 +27,6 @@
 #include "base/wexception.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -152,10 +151,10 @@ void CmdAct::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 ObjectManager::~ObjectManager() {
 	// better not throw an exception in a destructor...
 	if (!objects_.empty()) {
-		log("ObjectManager: ouch! remaining objects\n");
+		log_warn("ObjectManager: ouch! remaining objects\n");
 	}
 
-	log("lastserial: %i\n", lastserial_);
+	log_dbg("lastserial: %i\n", lastserial_);
 }
 
 /**
@@ -288,7 +287,7 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 			throw GameDataError(
 			   "Map object %s has animations but no idle animation", init_name.c_str());
 		}
-		assert(g_gr->animations().get_representative_image(name())->width() > 0);
+		assert(g_animation_manager->get_representative_image(name())->width() > 0);
 	}
 	if (table.has_key("icon")) {
 		icon_filename_ = table.get_string("icon");
@@ -297,6 +296,11 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		}
 	}
 	check_representative_image();
+
+	// TODO(GunChleoc): Compatibility, remove after v1.0
+	if (table.has_key("attributes")) {
+		throw GameDataError("Attributes need to be defined in 'register.lua' now");
+	}
 }
 MapObjectDescr::~MapObjectDescr() {
 	anims_.clear();
@@ -333,7 +337,7 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 					const std::string directional_basename = basename + animation_direction_names[dir];
 					uint32_t anim_id = 0;
 					try {
-						anim_id = g_gr->animations().load(
+						anim_id = g_animation_manager->load(
 						   *anim, directional_basename, animation_directory, anim_type);
 						anims_.insert(std::make_pair(directional_animname, anim_id));
 					} catch (const std::exception& e) {
@@ -342,10 +346,10 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 					}
 					// Validate directions' scales
 					if (dir == 0) {
-						available_scales = g_gr->animations().get_animation(anim_id).available_scales();
+						available_scales = g_animation_manager->get_animation(anim_id).available_scales();
 					}
 					if (available_scales.size() !=
-					    g_gr->animations().get_animation(anim_id).available_scales().size()) {
+					    g_animation_manager->get_animation(anim_id).available_scales().size()) {
 						throw GameDataError("Direction '%s': number of available scales does not match "
 						                    "with direction '%s'",
 						                    animation_direction_names[dir], animation_direction_names[0]);
@@ -358,12 +362,12 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 				}
 				if (animname == "idle") {
 					anims_.insert(std::make_pair(
-					   animname,
-					   g_gr->animations().load(name_, *anim, basename, animation_directory, anim_type)));
+					   animname, g_animation_manager->load(
+					                name_, *anim, basename, animation_directory, anim_type)));
 				} else {
 					anims_.insert(std::make_pair(
 					   animname,
-					   g_gr->animations().load(*anim, basename, animation_directory, anim_type)));
+					   g_animation_manager->load(*anim, basename, animation_directory, anim_type)));
 				}
 			}
 		} catch (const std::exception& e) {
@@ -411,13 +415,13 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 
 void MapObjectDescr::load_graphics() const {
 	for (const auto& temp_anim : anims_) {
-		g_gr->animations().get_animation(temp_anim.second).load_default_scale_and_sounds();
+		g_animation_manager->get_animation(temp_anim.second).load_default_scale_and_sounds();
 	}
 }
 
 const Image* MapObjectDescr::representative_image(const RGBColor* player_color) const {
 	if (is_animation_known("idle")) {
-		return g_gr->animations().get_representative_image(
+		return g_animation_manager->get_representative_image(
 		   get_animation("idle", nullptr), player_color);
 	}
 	return nullptr;
@@ -433,7 +437,7 @@ void MapObjectDescr::check_representative_image() {
 
 const Image* MapObjectDescr::icon() const {
 	if (!icon_filename_.empty()) {
-		return g_gr->images().get(icon_filename_);
+		return g_image_cache->get(icon_filename_);
 	}
 	return nullptr;
 }
@@ -479,6 +483,12 @@ const MapObjectDescr::Attributes& MapObjectDescr::attributes() const {
  */
 MapObjectDescr::AttributeIndex MapObjectDescr::get_attribute_id(const std::string& name,
                                                                 bool add_if_not_exists) {
+	if (!add_if_not_exists) {
+		// Load on demand for objects that no player tribe owns
+		Notifications::publish(
+		   NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kAttribute));
+	}
+
 	auto it = attribute_names_.find(name);
 
 	if (it != attribute_names_.end()) {
@@ -582,7 +592,7 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 		return;
 	}
 
-	UI::FontStyleInfo census_font(g_gr->styles().building_statistics_style().census_font());
+	UI::FontStyleInfo census_font(g_style_manager->building_statistics_style().census_font());
 	census_font.set_size(scale * census_font.size());
 
 	// We always render this so we can have a stable position for the statistics string.
@@ -596,7 +606,7 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 	// Draw statistics if we want them, they are available and they fill fit
 	if (info_to_draw & InfoToDraw::kStatistics && !statictics.empty() && scale >= 0.5f) {
 		UI::FontStyleInfo statistics_font(
-		   g_gr->styles().building_statistics_style().statistics_font());
+		   g_style_manager->building_statistics_style().statistics_font());
 		statistics_font.set_size(scale * statistics_font.size());
 
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =
@@ -660,7 +670,7 @@ const Player& MapObject::owner() const {
 /**
  * Prints a log message prepended by the object's serial number.
  */
-void MapObject::molog(char const* fmt, ...) const {
+void MapObject::molog(const uint32_t gametime, char const* fmt, ...) const {
 	if (!g_verbose && !logsink_) {
 		return;
 	}
@@ -676,7 +686,7 @@ void MapObject::molog(char const* fmt, ...) const {
 		logsink_->log(buffer);
 	}
 
-	log("MO(%u,%s): %s", serial_, descr().name().c_str(), buffer);
+	log_dbg_time(gametime, "MO(%u,%s): %s", serial_, descr().name().c_str(), buffer);
 }
 
 bool MapObject::is_reserved_by_worker() const {
@@ -765,64 +775,4 @@ void MapObject::save(EditorGameBase&, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(reserved_by_worker_);
 }
 
-std::string to_string(const MapObjectType type) {
-	// The types are documented in scripting/lua_map.cc -> LuaMapObjectDescription::get_type_name for
-	// the Lua interface, so make sure to change the documentation there when changing anything in
-	// this function.
-	switch (type) {
-	case MapObjectType::BOB:
-		return "bob";
-	case MapObjectType::CRITTER:
-		return "critter";
-	case MapObjectType::SHIP:
-		return "ship";
-	case MapObjectType::WORKER:
-		return "worker";
-	case MapObjectType::CARRIER:
-		return "carrier";
-	case MapObjectType::FERRY:
-		return "ferry";
-	case MapObjectType::SOLDIER:
-		return "soldier";
-	case MapObjectType::WARE:
-		return "ware";
-	case MapObjectType::BATTLE:
-		return "battle";
-	case MapObjectType::SHIP_FLEET:
-		return "ship_fleet";
-	case MapObjectType::FERRY_FLEET:
-		return "ferry_fleet";
-	case MapObjectType::IMMOVABLE:
-		return "immovable";
-	case MapObjectType::FLAG:
-		return "flag";
-	case MapObjectType::ROAD:
-		return "road";
-	case MapObjectType::WATERWAY:
-		return "waterway";
-	case MapObjectType::ROADBASE:
-		return "roadbase";
-	case MapObjectType::PORTDOCK:
-		return "portdock";
-	case MapObjectType::BUILDING:
-		return "building";
-	case MapObjectType::CONSTRUCTIONSITE:
-		return "constructionsite";
-	case MapObjectType::DISMANTLESITE:
-		return "dismantlesite";
-	case MapObjectType::WAREHOUSE:
-		return "warehouse";
-	case MapObjectType::MARKET:
-		return "market";
-	case MapObjectType::PRODUCTIONSITE:
-		return "productionsite";
-	case MapObjectType::MILITARYSITE:
-		return "militarysite";
-	case MapObjectType::TRAININGSITE:
-		return "trainingsite";
-	case MapObjectType::MAPOBJECT:
-		throw wexception("Unknown MapObjectType %d.", static_cast<int>(type));
-	}
-	NEVER_HERE();
-}
 }  // namespace Widelands

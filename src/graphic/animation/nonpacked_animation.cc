@@ -24,9 +24,10 @@
 
 #include <boost/algorithm/string/replace.hpp>
 
+#include "base/log.h"
 #include "base/macros.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -83,7 +84,7 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 	}
 
 	for (const std::string& filename : image_files) {
-		const Image* image = g_gr->images().get(filename);
+		const Image* image = g_image_cache->get(filename);
 		if (frames.size() && (frames.front()->width() != image->width() ||
 		                      frames.front()->height() != image->height())) {
 			throw Widelands::GameDataError(
@@ -97,7 +98,7 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 	for (const std::string& filename : playercolor_mask_image_files) {
 		// TODO(unknown): Do not load playercolor mask as opengl texture or use it as
 		//     opengl texture.
-		const Image* pc_image = g_gr->images().get(filename);
+		const Image* pc_image = g_image_cache->get(filename);
 		if (frames.front()->width() != pc_image->width() ||
 		    frames.front()->height() != pc_image->height()) {
 			throw Widelands::GameDataError("playercolor mask %s has wrong size: (%u, %u), should "
@@ -137,7 +138,7 @@ NonPackedAnimation::NonPackedMipMapEntry::frame_textures(bool return_playercolor
 	     return_playercolor_masks ? playercolor_mask_image_files : image_files) {
 		std::unique_ptr<Texture> texture(new Texture(width(), height()));
 		texture->fill_rect(rect, RGBAColor(0, 0, 0, 0));
-		texture->blit(rect, *g_gr->images().get(filename), rect, 1., BlendMode::Copy);
+		texture->blit(rect, *g_image_cache->get(filename), rect, 1., BlendMode::Copy);
 		result.push_back(std::move(texture));
 	}
 	return result;
@@ -171,8 +172,8 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
 			                           table.get_table("pictures")->array_entries<std::string>()))));
 			if (g_verbose) {
 				assert(!table.get_table("pictures")->array_entries<std::string>().empty());
-				log("Found deprecated 'pictures' parameter in animation with file\n   %s\n",
-				    table.get_table("pictures")->array_entries<std::string>().front().c_str());
+				log_dbg("Found deprecated 'pictures' parameter in animation with file\n   %s\n",
+				        table.get_table("pictures")->array_entries<std::string>().front().c_str());
 			}
 		} else {
 			// TODO(GunChleoc): When all animations have been converted, require that
@@ -230,7 +231,7 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	const std::string& image_filename = mipmap.image_files[representative_frame()];
 	const Image* image = (mipmap.has_playercolor_masks && clr) ?
 	                        playercolor_image(*clr, image_filename) :
-	                        g_gr->images().get(image_filename);
+	                        g_image_cache->get(image_filename);
 
 	const int w = image->width();
 	const int h = image->height();

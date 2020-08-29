@@ -26,6 +26,7 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/request.h"
+#include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/findbob.h"
@@ -88,11 +89,12 @@ void MilitarySite::SoldierControl::drop_soldier(Soldier& soldier) {
 	if (!military_site_->is_present(soldier)) {
 		// This can happen when the "drop soldier" player command is delayed
 		// by network delay or a client has bugs.
-		military_site_->molog("MilitarySite::drop_soldier(%u): not present\n", soldier.serial());
+		military_site_->molog(
+		   game.get_gametime(), "MilitarySite::drop_soldier(%u): not present\n", soldier.serial());
 		return;
 	}
 	if (present_soldiers().size() <= min_soldier_capacity()) {
-		military_site_->molog("cannot drop last soldier(s)\n");
+		military_site_->molog(game.get_gametime(), "cannot drop last soldier(s)\n");
 		return;
 	}
 
@@ -294,7 +296,7 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
  */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
-                                     const Tribes& tribes)
+                                     Tribes& tribes)
    : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, tribes),
      conquer_radius_(0),
      num_soldiers_(0),
@@ -395,9 +397,9 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			        .str();
 		}
 	}
-	*s = g_gr->styles().color_tag(
+	*s = g_style_manager->color_tag(
 	   // Line break to make Codecheck happy.
-	   *s, g_gr->styles().building_statistics_style().medium_color());
+	   *s, g_style_manager->building_statistics_style().medium_color());
 }
 
 bool MilitarySite::init(EditorGameBase& egbase) {
@@ -740,7 +742,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 
 	// Heal soldiers
 	if (nexthealtime_ <= timeofgame) {
-		const uint32_t total_heal = descr().get_heal_per_second();
+		const unsigned total_heal = descr().get_heal_per_second();
 		uint32_t max_total_level = 0;
 		float max_health = 0;
 		Soldier* soldier_to_heal = nullptr;
@@ -916,9 +918,11 @@ void MilitarySite::send_attacker(Soldier& soldier, Building& target) {
 		// The soldier may not be present anymore due to having been kicked out. Most of the time
 		// the function calling us will notice this, but there are cornercase where it might not,
 		// e.g. when a soldier was ordered to leave but did not physically quit the building yet.
-		log("MilitarySite(%3dx%3d)::send_attacker: Not sending soldier %u because he left the "
-		    "building\n",
-		    get_position().x, get_position().y, soldier.serial());
+		log_warn_time(
+		   owner().egbase().get_gametime(),
+		   "MilitarySite(%3dx%3d)::send_attacker: Not sending soldier %u because he left the "
+		   "building\n",
+		   get_position().x, get_position().y, soldier.serial());
 		return;
 	}
 

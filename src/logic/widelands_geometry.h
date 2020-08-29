@@ -110,7 +110,10 @@ struct FCoords : public Coords {
 	Field* field;
 };
 
-enum class TriangleIndex { D, R };
+enum class TriangleIndex {
+	D,  // Downward
+	R   // Right
+};
 
 // This uniquely indexes a single Triangle on the map. A Triangle is identified
 // by its owning node and the triangle index (down or right).
