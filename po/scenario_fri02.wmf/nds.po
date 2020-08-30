@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2020\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -1048,9 +1048,3 @@ msgid ""
 msgstr ""
 "Du hest deese Rutfödderung ofsloten. Wenn du willst, kannst du wiederspölen,"
 " anners de token Rutfödderung anfangen."
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/fri02.wmf/scripting/tribes/warehouse_empire.lua:9
-msgctxt "frisians_building"
-msgid "Empire Warehouse"
-msgstr "Rieks-Kraamhuus"
