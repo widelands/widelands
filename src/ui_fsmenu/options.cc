@@ -309,21 +309,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 		}
 	}
 
-	//int cur_win_res_x;
-	//int cur_win_res_y;
-	//if (g_gr->fullscreen() || g_gr->maximized()) {
-	//	log("++ Options: fullscreen or maximized\n");
-	//	cur_win_res_x = opt.xres;
-	//	cur_win_res_y = opt.yres;
-	//} else {
 	int cur_win_res_x = g_gr->get_window_mode_xres();
 	int cur_win_res_y = g_gr->get_window_mode_yres();
-	//}
-	//bool did_select_a_res = false;
 
-	log("++ FullscreenMenuOptions(): cur_win_res=%dx%d; opt.fullscreen=%s; opt.maximized=%s; g_gr->fullscreen()=%s; g_gr->maximized()=%s\n",
-	    cur_win_res_x, cur_win_res_y, opt.fullscreen ? "true" : "false", opt.maximized ? "true" : "false",
-	    g_gr->fullscreen() ? "true" : "false", g_gr->maximized() ? "true" : "false");
 	resolution_dropdown_.add(
 		   _("Fullscreen"), kDropdownFullscreen, nullptr, opt.fullscreen);
 	resolution_dropdown_.add(
@@ -331,7 +319,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	for (uint32_t i = 0; i < resolutions_.size(); ++i) {
 		const bool selected = !resolution_dropdown_.has_selection() && resolutions_[i].xres == cur_win_res_x && resolutions_[i].yres == cur_win_res_y;
-		//did_select_a_res |= selected;
 		resolution_dropdown_.add(
 		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
 		   (boost::format(_("%1% x %2%")) % resolutions_[i].xres % resolutions_[i].yres).str(), i,
@@ -343,7 +330,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 		resolutions_.resize(entry + 1);
 		resolutions_[entry].xres = cur_win_res_x;
 		resolutions_[entry].yres = cur_win_res_y;
-		log("++ Options: Adding res %d %d\n", cur_win_res_x, cur_win_res_y);
 		resolution_dropdown_.add(
 		   (boost::format(_("%1% x %2%")) % cur_win_res_x % cur_win_res_y).str(), entry, nullptr, true);
 	}
@@ -594,7 +580,6 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	}
 	if (resolution_dropdown_.has_selection()) {
 		const int res_index = resolution_dropdown_.get_selected();
-		log("++ res_index=%d\n", res_index);
 		os_.fullscreen = res_index == kDropdownFullscreen;
 		os_.maximized = res_index == kDropdownMaximized;
 		if (res_index != kDropdownFullscreen && res_index != kDropdownMaximized) {
@@ -643,10 +628,8 @@ OptionsCtrl::OptionsCtrl(Section& s)
 }
 
 void OptionsCtrl::handle_menu() {
-	log("++ handle_menu()\n");
 	FullscreenMenuBase::MenuTarget i = opt_dialog_->run<FullscreenMenuBase::MenuTarget>();
 	if (i != FullscreenMenuBase::MenuTarget::kBack) {
-		log("++ handle_menu(): %d\n", i);
 		save_options();
 		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
 		if (opt_dialog_->get_values().maximized) {

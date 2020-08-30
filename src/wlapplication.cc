@@ -421,13 +421,9 @@ WLApplication::~WLApplication() {
 	// Do use the opposite order of WLApplication::init()
 
 	if (!g_gr->fullscreen() && !g_gr->maximized()) {
-		log("++ Saving res: %dx%d\n", g_gr->get_xres(), g_gr->get_yres());
 		set_config_int("xres", g_gr->get_xres());
 		set_config_int("yres", g_gr->get_yres());
-	} else {
-		log("++ Not saving res\n");
 	}
-	log("++ Saving maximized: %s\n", g_gr->maximized() ? "true" : "false");
 	set_config_bool("maximized", g_gr->maximized());
 
 	shutdown_hardware();
@@ -656,24 +652,18 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			}
 			break;
 		case SDL_WINDOWEVENT:
-			if (ev.window.event == SDL_WINDOWEVENT_RESIZED) {
-				log("++ SDL_WINDOWEVENT_RESIZED %d %d\n", ev.window.data1, ev.window.data2);
+			switch (ev.window.event) {
+			case SDL_WINDOWEVENT_RESIZED:
 				if (!g_gr->fullscreen()) {
 					g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
 				}
-				/*if (!(SDL_GetWindowFlags(g_gr->get_sdlwindow()) & SDL_WINDOW_MAXIMIZED)) {
-					log(" saving");
-					//set_config_int("xres", ev.window.data1);
-					//set_config_int("yres", ev.window.data2);
-				}*/
-			} else if (ev.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
-				log("++ SDL_WINDOWEVENT_SIZE_CHANGED %d %d\n", ev.window.data1, ev.window.data2);
-			} else if (ev.window.event == SDL_WINDOWEVENT_MAXIMIZED) {
-				log("++ SDL_WINDOWEVENT_MAXIMIZED\n");
+				break;
+			case SDL_WINDOWEVENT_MAXIMIZED:
 				set_config_bool("maximized", true);
-			} else if (ev.window.event == SDL_WINDOWEVENT_RESTORED) {
-				log("++ SDL_WINDOWEVENT_RESTORED\n");
+				break;
+			case SDL_WINDOWEVENT_RESTORED:
 				set_config_bool("maximized", g_gr->maximized());
+				break;
 			}
 			break;
 		case SDL_QUIT:
