@@ -116,6 +116,7 @@ private:
 	void update_positions();
 	void update_items(const NotePanel& p);
 	void on_death(Panel* p) override;
+	void on_visibility_changed() override;
 
 	// Don't resize beyond this size
 	int max_x_, max_y_;

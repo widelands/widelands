@@ -447,9 +447,15 @@ void Panel::set_visible(bool const on) {
 	} else if (parent_ && parent_->focus_ == this) {
 		parent_->focus_ = nullptr;
 	}
-	Notifications::publish(
-	   NotePanel(this, NotePanel::Action::kVisibility,
-	             on ? NotePanel::Visibility::kVisible : NotePanel::Visibility::kInvisible));
+	if (parent_) {
+		parent_->on_visibility_changed();
+	}
+	//	Notifications::publish(
+	//	   NotePanel(this, NotePanel::Action::kVisibility,
+	//	             on ? NotePanel::Visibility::kVisible : NotePanel::Visibility::kInvisible));
+}
+
+void Panel::on_visibility_changed() {
 }
 
 /**

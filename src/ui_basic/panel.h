@@ -356,7 +356,7 @@ private:
 	}
 
 	void check_child_death();
-
+	virtual void on_visibility_changed();
 	friend class Window;
 	void do_draw(RenderTarget&);
 	void do_draw_inner(RenderTarget&);
