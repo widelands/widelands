@@ -30,9 +30,23 @@
 namespace {
 
 UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
+										LuaInterface* lua,
                                         const Widelands::ImmovableDescr& immovable_descr) {
 	const Image* pic = immovable_descr.representative_image();
-	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i::zero(), pic, immovable_descr.descname());
+
+	std::string tooltip = immovable_descr.descname();
+
+	if (immovable_descr.has_terrain_affinity()) {
+
+		// Get information about preferred terrains
+		std::unique_ptr<LuaTable> table(lua->run_script("scripting/editor/tree_tooltip.lua"));
+		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+		cr->push_arg(immovable_descr.name());
+		cr->resume();
+		tooltip.append(cr->pop_table()->get_string("text"));
+	}
+
+	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i::zero(), pic, tooltip);
 	const int kMinClickableArea = 24;
 	cb->set_desired_size(std::max<int>(pic->width(), kMinClickableArea),
 	                     std::max<int>(pic->height(), kMinClickableArea));
@@ -45,11 +59,12 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
    EditorInteractive& parent, EditorPlaceImmovableTool& tool, UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Immovables"), tool) {
 	const Widelands::World& world = parent.egbase().world();
+	LuaInterface* lua = &parent.egbase().lua();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>(
 	      this, parent.editor_categories(Widelands::MapObjectType::IMMOVABLE), world.immovables(),
-	      [](UI::Panel* cb_parent, const Widelands::ImmovableDescr& immovable_descr) {
-		      return create_immovable_checkbox(cb_parent, immovable_descr);
+	      [lua](UI::Panel* cb_parent, const Widelands::ImmovableDescr& immovable_descr) {
+		      return create_immovable_checkbox(cb_parent, lua, immovable_descr);
 	      },
 	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());

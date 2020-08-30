@@ -7,22 +7,19 @@
 
 include "scripting/richtext.lua"
 
-
 -- RST
--- .. function:: terrain_affinity_help(immovable_description)
+-- .. function:: terrain_affinity_list(immovable_description)
 --
---    Returns a formatted help string for the terrains that the given
---    immovable is most likely to grow on.
+--    Returns list of terrains that the given
+--    immovable is most likely to grow on, sorted in descending order by probability.
 --
 --    :arg immovable_description: The immovable type that we want the information for.
 --    :type immovable_description: :class:`LuaImmovableDescription`
---    :returns: a richtext-formatted list of terrain images, terrain names and probabilities.
+--    :returns: list of :class:`LuaTerrainDescription` and probabilities.
 --
-function terrain_affinity_help(immovable_description)
-   push_textdomain("widelands")
+function terrain_affinity_list(immovable_description)
    local world = wl.World();
-   local result = ""
-   terrain_list = {}
+   local terrain_list = {}
    for i, terrain in ipairs(world.terrain_descriptions) do
       local probability = immovable_description:probability_to_grow(terrain)
       if (probability > 0.01) then
@@ -38,6 +35,25 @@ function terrain_affinity_help(immovable_description)
          terrain_list[i] = {terrain = terrain, probability = probability}
       end
    end
+   return terrain_list
+end
+
+
+-- RST
+-- .. function:: terrain_affinity_help(immovable_description)
+--
+--    Returns a formatted help string for the terrains that the given
+--    immovable is most likely to grow on.
+--
+--    :arg immovable_description: The immovable type that we want the information for.
+--    :type immovable_description: :class:`LuaImmovableDescription`
+--    :returns: a richtext-formatted list of terrain images, terrain names and probabilities.
+--
+function terrain_affinity_help(immovable_description)
+   push_textdomain("widelands")
+   local world = wl.World();
+   local result = ""
+   local terrain_list = terrain_affinity_list(immovable_description)
 
    for k,v in ipairs(terrain_list) do
       if (k <= 10 or v.probability > 0.25) then
