@@ -48,8 +48,11 @@ public:
 	// window that fills the screen. The 'trace_gl' parameter gets passed on to
 	// 'Gl::initialize'.
 	enum class TraceGl { kNo, kYes };
-	void
-	initialize(const TraceGl& trace_gl, int window_mode_w, int window_mode_height, bool fullscreen, bool maximized);
+	void initialize(const TraceGl& trace_gl,
+	                int window_mode_w,
+	                int window_mode_height,
+	                bool fullscreen,
+	                bool maximized);
 
 	// Gets and sets the resolution.
 	// Use 'resize_window = true' to resize the window to the new resolution.

@@ -312,13 +312,14 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	int cur_win_res_x = g_gr->get_window_mode_xres();
 	int cur_win_res_y = g_gr->get_window_mode_yres();
 
-	resolution_dropdown_.add(
-		   _("Fullscreen"), kDropdownFullscreen, nullptr, opt.fullscreen);
-	resolution_dropdown_.add(
-		   _("Maximized"), kDropdownMaximized, nullptr, !resolution_dropdown_.has_selection() && opt.maximized);
+	resolution_dropdown_.add(_("Fullscreen"), kDropdownFullscreen, nullptr, opt.fullscreen);
+	resolution_dropdown_.add(_("Maximized"), kDropdownMaximized, nullptr,
+	                         !resolution_dropdown_.has_selection() && opt.maximized);
 
 	for (uint32_t i = 0; i < resolutions_.size(); ++i) {
-		const bool selected = !resolution_dropdown_.has_selection() && resolutions_[i].xres == cur_win_res_x && resolutions_[i].yres == cur_win_res_y;
+		const bool selected = !resolution_dropdown_.has_selection() &&
+		                      resolutions_[i].xres == cur_win_res_x &&
+		                      resolutions_[i].yres == cur_win_res_y;
 		resolution_dropdown_.add(
 		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
 		   (boost::format(_("%1% x %2%")) % resolutions_[i].xres % resolutions_[i].yres).str(), i,
@@ -331,7 +332,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 		resolutions_[entry].xres = cur_win_res_x;
 		resolutions_[entry].yres = cur_win_res_y;
 		resolution_dropdown_.add(
-		   (boost::format(_("%1% x %2%")) % cur_win_res_x % cur_win_res_y).str(), entry, nullptr, true);
+		   (boost::format(_("%1% x %2%")) % cur_win_res_x % cur_win_res_y).str(), entry, nullptr,
+		   true);
 	}
 
 	inputgrab_.set_state(opt.inputgrab);
@@ -634,9 +636,9 @@ void OptionsCtrl::handle_menu() {
 		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
 		if (opt_dialog_->get_values().maximized) {
 			g_gr->set_maximized(true);
-		} else
-		if (!opt_dialog_->get_values().fullscreen && !opt_dialog_->get_values().maximized) {
-			g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
+		} else if (!opt_dialog_->get_values().fullscreen && !opt_dialog_->get_values().maximized) {
+			g_gr->change_resolution(
+			   opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
 		}
 	}
 	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
