@@ -20,7 +20,7 @@
 #include "ui_fsmenu/netsetup_lan.h"
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/network.h"
@@ -36,7 +36,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
             0,
             _("Begin Network Game"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Boxes
      left_column_(this, 0, 0, UI::Box::Vertical),
@@ -60,7 +60,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                    hostname_.get_h(),
                    hostname_.get_h(),
                    UI::ButtonStyle::kFsMenuSecondary,
-                   g_gr->images().get("images/ui_fsmenu/menu_load_game.png"),
+                   g_image_cache->get("images/ui_fsmenu/menu_load_game.png"),
                    _("Load previous host")),
      // Buttons
      joingame_(&right_column_,

@@ -312,8 +312,8 @@ size_t Map::count_all_conquerable_fields() {
 
 	std::set<FCoords> coords_to_check;
 
-	log("Collecting valuable fields ... ");
-	ScopedTimer timer("took %ums");
+	log_info("Collecting valuable fields ... ");
+	ScopedTimer timer(" → took %ums");
 
 	// If we don't have the given coordinates yet, walk the map and collect conquerable fields,
 	// initialized with the given radius around the coordinates
@@ -392,7 +392,7 @@ size_t Map::count_all_conquerable_fields() {
 		}
 	}
 
-	log("%" PRIuS " found ... ", valuable_fields_.size());
+	log_info("%" PRIuS " found ... ", valuable_fields_.size());
 	return valuable_fields_.size();
 }
 
@@ -402,8 +402,8 @@ size_t Map::count_all_fields_excluding_caps(NodeCaps caps) {
 		return valuable_fields_.size();
 	}
 
-	log("Collecting valuable fields ... ");
-	ScopedTimer timer("took %ums");
+	log_info("Collecting valuable fields ... ");
+	ScopedTimer timer(" → took %ums");
 
 	for (MapIndex i = 0; i < max_index(); ++i) {
 		Field& field = fields_[i];
@@ -412,7 +412,7 @@ size_t Map::count_all_fields_excluding_caps(NodeCaps caps) {
 		}
 	}
 
-	log("%" PRIuS " found ... ", valuable_fields_.size());
+	log_info("%" PRIuS " found ... ", valuable_fields_.size());
 	return valuable_fields_.size();
 }
 
@@ -579,7 +579,7 @@ void Map::set_origin(const Coords& new_origin) {
 		new_port_spaces.insert(temp);
 	}
 	port_spaces_ = new_port_spaces;
-	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
+	log_info("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
 // Helper function for resize()
@@ -727,7 +727,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 		}
 	}
 
-	log("Map was resized to %d×%d\n", width_, height_);
+	log_info("Map was resized to %d×%d\n", width_, height_);
 }
 
 ResizeHistory Map::dump_state(const EditorGameBase&) const {
@@ -2097,9 +2097,9 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
 		}
 	} catch (const FileError& e) {
 		// file might not have existed
-		log("Map::get_correct_loader: File error: %s\n", e.what());
+		log_err("Map::get_correct_loader: File error: %s\n", e.what());
 	} catch (std::exception& e) {
-		log("Map::get_correct_loader: Unknown error: %s\n", e.what());
+		log_err("Map::get_correct_loader: Unknown error: %s\n", e.what());
 	}
 	return result;
 }

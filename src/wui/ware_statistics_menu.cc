@@ -22,7 +22,6 @@
 #include <functional>
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -131,27 +130,27 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	                   Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
-	   "production", g_gr->images().get(pic_tab_production), plot_production_, _("Production"));
+	   "production", g_image_cache->get(pic_tab_production), plot_production_, _("Production"));
 
 	plot_consumption_ =
 	   new WuiPlotArea(tab_panel_, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                   Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
-	   "consumption", g_gr->images().get(pic_tab_consumption), plot_consumption_, _("Consumption"));
+	   "consumption", g_image_cache->get(pic_tab_consumption), plot_consumption_, _("Consumption"));
 
 	plot_economy_ =
 	   new DifferentialPlotArea(tab_panel_, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                            Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
-	   "economy_health", g_gr->images().get(pic_tab_economy), plot_economy_, _("Economy health"));
+	   "economy_health", g_image_cache->get(pic_tab_economy), plot_economy_, _("Economy health"));
 
 	plot_stock_ =
 	   new WuiPlotArea(tab_panel_, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                   Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kAbsolute);
 
-	tab_panel_->add("stock", g_gr->images().get(pic_tab_stock), plot_stock_, _("Stock"));
+	tab_panel_->add("stock", g_image_cache->get(pic_tab_stock), plot_stock_, _("Stock"));
 
 	tab_panel_->activate(0);
 
