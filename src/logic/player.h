@@ -151,7 +151,7 @@ public:
 		see_all_ = t;
 	}
 	bool see_all() const {
-		return see_all_;
+		return see_all_ || is_picking_custom_starting_position_;
 	}
 
 	/// Data that are used and managed by AI. They are here to have it saved as a part of player's
@@ -585,6 +585,17 @@ public:
 	}
 	void set_muted(DescriptionIndex, bool mute);
 
+	void start_picking_custom_starting_position() {
+		assert(!is_picking_custom_starting_position_);
+		is_picking_custom_starting_position_ = true;
+	}
+	bool pick_custom_starting_position(const Coords&);
+	void do_pick_custom_starting_position(const Coords&);
+	bool is_picking_custom_starting_position() const {
+		return is_picking_custom_starting_position_;
+	}
+	bool get_starting_position_suitability(const Coords&) const;
+
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
@@ -685,6 +696,8 @@ private:
 		}
 	};
 	std::vector<SoldierStatistics> soldier_stats_;
+
+	bool is_picking_custom_starting_position_;
 
 	FxId message_fx_;
 	FxId attack_fx_;

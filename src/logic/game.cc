@@ -326,6 +326,11 @@ void Game::init_newgame(const GameSettings& settings) {
 				}
 			}
 		}
+		if (settings.custom_starting_positions) {
+			iterate_players_existing(p, map().get_nrplayers(), *this, pl) {
+				pl->start_picking_custom_starting_position();
+			}
+		}
 
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();

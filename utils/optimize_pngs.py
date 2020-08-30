@@ -122,7 +122,8 @@ def main():
     o, a = parse_args()
 
     tools = filter(lambda t: t.found,  [
-        Tool('optipng', '-q -zc1-9 -zm1-9 -zs0-3 -f0-5', True),
+        # This tool is destroying deadtree5 after it was cropped
+        # Tool('optipng', '-q -zc1-9 -zm1-9 -zs0-3 -f0-5', True),
         Tool('advdef', '-z4', True),
         Tool('advpng', '-z4', True),
         Tool('pngcrush', '-reduce -brute'),
