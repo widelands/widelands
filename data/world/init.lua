@@ -54,7 +54,6 @@
 --       critters = {
 --          {
 --             name = "critters_herbivores",
---             -- TRANSLATORS: A category in the editor for placing animals on the map.
 --             descname = _"Herbivores",
 --             picture = "world/critters/sheep/idle_00.png",
 --             items_per_row = 10,
@@ -65,7 +64,6 @@
 --          },
 --          {
 --             name = "critters_carnivores",
---             -- TRANSLATORS: A category in the editor for placing animals on the map.
 --             descname = _"Carnivores",
 --             picture = "world/critters/fox/idle_00.png",
 --             items_per_row = 10,

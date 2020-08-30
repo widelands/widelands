@@ -40,7 +40,6 @@
 --
 --    tribes:new_immovable_type {
 --       name = "ashes",
---       -- TRANSLATORS: This is an immovable name used in lists of immovables
 --       descname = pgettext("immovable", "Ashes"),
 --       anmation_directory = dirname,
 --       icon = dirname .. "menu.png",

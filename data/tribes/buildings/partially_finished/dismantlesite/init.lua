@@ -32,7 +32,6 @@
 --
 --    tribes:new_dismantlesite_type {
 --       name = "dismantlesite",
---       -- TRANSLATORS: This is a name used in lists of buildings for buildings being taken apart
 --       descname = pgettext("building", "Dismantle Site"),
 --       animation_directory = dirname,
 --       icon = dirname .. "menu.png",

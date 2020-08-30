@@ -84,7 +84,6 @@
 --
 --    tribes:new_trainingsite_type {
 --       name = "empire_arena",
---       -- TRANSLATORS: This is a building name used in lists of buildings
 --       descname = pgettext("empire_building", "Arena"),
 --       icon = dirname .. "menu.png",
 --       animation_directory = dirname,
@@ -141,7 +140,6 @@
 --
 --       programs = {
 --          sleep = {
---             -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
 --             descname = _"sleeping",
 --             actions = {
 --                "sleep=duration:5s",
@@ -149,7 +147,6 @@
 --             }
 --          },
 --          upgrade_soldier_evade_0 = {
---             -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 --             descname = pgettext("empire_building", "upgrading soldier evade from level 0 to level 1"),
 --             actions = {
 --                "checksoldier=soldier:evade level:0", -- Fails when aren't any soldier of level 0 evade

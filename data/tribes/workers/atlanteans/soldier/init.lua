@@ -194,7 +194,6 @@
 --
 --    tribes:new_soldier_type {
 --       name = "atlanteans_soldier",
---       -- TRANSLATORS: This is a worker name used in lists of workers
 --       descname = pgettext("atlanteans_worker", "Soldier"),
 --       animation_directory = dirname,
 --       icon = dirname .. "menu.png",
@@ -246,7 +245,6 @@
 --       },
 --
 --       -- Random animations for battle
---       -- TODO(GunChleoc): Make more animations to use the random function
 --       attack_success_w = {
 --          atk_ok_w = all_levels_atl,
 --       },

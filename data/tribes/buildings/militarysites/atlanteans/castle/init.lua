@@ -56,7 +56,6 @@
 --
 --    tribes:new_militarysite_type {
 --       name = "atlanteans_castle",
---       -- TRANSLATORS: This is a building name used in lists of buildings
 --       descname = pgettext("atlanteans_building", "Castle"),
 --       animation_directory = dirname,
 --       icon = dirname .. "menu.png",

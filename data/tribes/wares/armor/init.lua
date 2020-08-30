@@ -60,7 +60,6 @@
 --
 --    tribes:new_ware_type {
 --       name = "armor",
---       -- TRANSLATORS: This is a ware name used in lists of wares
 --       descname = pgettext("ware", "Armor"),
 --       animation_directory = dirname,
 --       icon = dirname .. "menu.png",

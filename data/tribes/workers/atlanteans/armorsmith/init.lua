@@ -32,7 +32,6 @@
 --
 --    tribes:new_worker_type {
 --       name = "empire_fisher",
---       -- TRANSLATORS: This is a worker name used in lists of workers
 --       descname = pgettext("empire_worker", "Fisher"),
 --       animation_directory = dirname,
 --       icon = dirname .. "menu.png",

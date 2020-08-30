@@ -49,7 +49,6 @@
 --
 --    tribes:new_warehouse_type {
 --       name = "atlanteans_headquarters",
---       -- TRANSLATORS: This is a building name used in lists of buildings
 --       descname = pgettext("atlanteans_building", "Headquarters"),
 --       animation_directory = dirname,
 --       icon = dirname .. "menu.png",
