@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-17 08:47+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-25 12:26+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgstr "두번째 제국"
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr "야만족을 소개합니다."
+msgstr "야만인들을 소개합니다."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52
@@ -121,7 +121,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr "6개월 전에,  – 제국의 젊은 장군인 – 루티우스는 제국이 지배하는 땅으로 야만인 부족들이 가로질러 오고 있는 북부의 숲 지대 너머 국경으로 150명의 군대와 함께 파견되었습니다. 그의 임무는 제국의 땅을 방어하는 것이었습니다. 처음에는, 모든 것이 평화로웠습니다. 그는 심지어 몇몇 야만족 아이들과 이야기를 나누고 평화로운 삶을 생각했습니다 – 이 고풍스러운 사람들과 나란히말입니다. 그는 더욱 안전해질 거라 믿었고 그의 군대는 잠재적인 적에 대한 관심을 끄기 시작했습니다. 그것이 그들의 실패였습니다. 3월의 어느 밤 그의 준비되지 않은 군대는 100명의 야만인 보병들에게 공격받았고 완전히 전멸했습니다. 간신히 몸만 빠져나와서 그와 소수의 군인들만이 살아남았습니다."
+msgstr "6개월 전에,  – 제국의 젊은 장군인 – 루티우스는 제국이 지배하는 땅으로 야만인 부족들이 가로질러 오고 있는 북부의 숲 지대 너머 국경으로 150명의 군대와 함께 파견되었습니다. 그의 임무는 제국의 땅을 방어하는 것이었습니다. 처음에는, 모든 것이 평화로웠습니다. 그는 심지어 몇몇 야만인 아이들과 이야기를 나누고 평화로운 삶을 생각했습니다 – 이 고풍스러운 사람들과 나란히말입니다. 그는 더욱 안전해질 거라 믿었고 그의 군대는 잠재적인 적에 대한 관심을 끄기 시작했습니다. 그것이 그들의 실패였습니다. 3월의 어느 밤 그의 준비되지 않은 군대는 100명의 야만인 보병들에게 공격받았고 완전히 전멸했습니다. 간신히 몸만 빠져나와서 그와 소수의 군인들만이 살아남았습니다."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
@@ -151,7 +151,7 @@ msgstr "물에서 얼음으로"
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:110
 msgid "Introduces the Frisians."
-msgstr "프리지아를 소개하십시오."
+msgstr "프리지아인들을 소개합니다."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:115
@@ -327,7 +327,7 @@ msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr "이 작은 섬들에는 큰 건설 터가 부족합니다. 큰 건물을 먼저 지으십시오. 때때로 다른 섬으로 향하는 길을 확장할 대형 군사 건물들이 필요할 것입니다. AI는 거지같이 활약합니다."
+msgstr "이 작은 섬들에는 큰 건물 터가 부족합니다. 큰 건물을 먼저 지으십시오. 때때로 다른 섬으로 향하는 길을 확장할 대형 군사 건물들이 필요할 것입니다. AI는 거지같이 활약합니다."
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:8
 msgid "Astoria 2.R"
@@ -638,7 +638,7 @@ msgstr "최후의 요새"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
-msgstr "또다른 야만족 - king_of_nowhere 가 편집 함"
+msgstr "또다른 야만인 - king_of_nowhere 가 편집 함"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
 msgid ""
@@ -899,7 +899,7 @@ msgid ""
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr "또 다른 해빙이 시작되었습니다.  세 부족이 웅장한 산들 사이에서 혹독한 겨울을 피했습니다.  그들은 혼신(번역확인??)의 순간에 신탁을 듣고 전쟁에 나갔습니다. 유일한 생존자는 그의 적들의 보물을 고대 제단에 바치고, 화려한 성을 세우고, 선의의 호의를 얻고 신들에 대한 존경을 받을 것입니다."
+msgstr "또 다른 해빙이 시작되었습니다. 3 부족이 웅장한 산들 사이에서 혹독한 겨울을 피했습니다. 그들은 혼신(번역확인??)의 순간에 신탁을 듣고 전쟁에 나갔습니다. 유일한 생존자는 그의 적들의 보물을 고대 제단에 바치고, 화려한 성을 세우고, 선의의 호의를 얻고 신들에 대한 존경을 받을 것입니다."
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:8
 msgid "Three Warriors"
