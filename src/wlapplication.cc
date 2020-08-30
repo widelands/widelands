@@ -404,8 +404,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// register it once.
 	UI::Panel::register_click();
 
-	// This might grab the input.
-	refresh_graphics();
+	set_input_grab(get_config_bool("inputgrab", false));
 
 	// seed random number generator used for random tribe selection
 	std::srand(time(nullptr));
@@ -462,9 +461,6 @@ WLApplication::~WLApplication() {
 // In the future: push the first event on the event queue, then keep
 // dispatching events until it is time to quit.
 void WLApplication::run() {
-	// This also grabs the mouse cursor if so desired.
-	//refresh_graphics();
-
 	if (game_type_ == GameType::kEditor) {
 		g_sh->change_music("ingame");
 		EditorInteractive::run_editor(filename_, script_to_run_);
@@ -800,17 +796,6 @@ void WLApplication::set_mouse_lock(const bool locked) {
 	if (g_mouse_cursor->is_using_sdl()) {
 		g_mouse_cursor->set_visible(!mouse_locked_);
 	}
-}
-
-void WLApplication::refresh_graphics() {
-	log("++ refresh_graphics()\n");
-	//g_gr->change_resolution(get_config_int("xres", kDefaultResolutionW),
-	//                        get_config_int("yres", kDefaultResolutionH), true);
-	//g_gr->set_fullscreen(get_config_bool("fullscreen", false));
-	//g_gr->set_maximized(get_config_bool("maximized", false));
-
-	// does only work with a window
-	set_input_grab(get_config_bool("inputgrab", false));
 }
 
 /**
@@ -1184,9 +1169,6 @@ void WLApplication::mainmenu() {
 	std::string message;
 
 	for (;;) {
-		// Refresh graphics system in case we just changed resolution.
-		//refresh_graphics();
-
 		FullscreenMenuMain mm;
 
 		if (message.size()) {
