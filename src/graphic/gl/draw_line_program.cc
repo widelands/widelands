@@ -21,8 +21,6 @@
 
 #include <cassert>
 
-#include "base/log.h"
-
 // static
 DrawLineProgram& DrawLineProgram::instance() {
 	static DrawLineProgram draw_line_program;

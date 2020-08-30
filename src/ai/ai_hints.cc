@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "logic/game_data_error.h"
 
 /* RST
@@ -301,9 +302,9 @@ void WareWorkerHints::set_preciousness(const std::string& ware_worker,
 		   "We recommend not going over %d.",
 		   p, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
 	} else if (p > kMaxRecommendedPreciousness) {
-		log("WARNING: Preciousness of %d is a bit high for ware/worker '%s' and tribe '%s'. We "
-		    "recommend not going over %d.\n",
-		    p, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
+		log_warn("Preciousness of %d is a bit high for ware/worker '%s' and tribe '%s'. We "
+		         "recommend not going over %d.\n",
+		         p, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
 	}
 	preciousnesses_.insert(std::make_pair(tribename, p));
 }

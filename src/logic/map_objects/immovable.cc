@@ -21,8 +21,10 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game_data_error.h"
@@ -105,9 +107,11 @@ void BaseImmovable::unset_position(EditorGameBase& egbase, const Coords& c) {
 
 	// this is to help to debug failing assertion below (see bug 1542238)
 	if (f.field->immovable != this) {
-		log(" Internal error: Immovable at %3dx%3d does not match: is %s but %s was expected.\n", c.x,
-		    c.y, (f.field->immovable) ? f.field->immovable->descr().name().c_str() : "None",
-		    descr().name().c_str());
+		log_err_time(
+		   egbase.get_gametime(),
+		   "Internal error: Immovable at %3dx%3d does not match: is %s but %s was expected.\n", c.x,
+		   c.y, (f.field->immovable) ? f.field->immovable->descr().name().c_str() : "None",
+		   descr().name().c_str());
 	}
 
 	assert(f.field->immovable == this);
@@ -193,11 +197,11 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		try {
 			// TODO(GunChleoc): Compatibility, remove after v1.0
 			if (program_name == "program") {
-				log("WARNING: The main program for the immovable %s should be renamed from 'program' "
-				    "to 'main'\n",
-				    name().c_str());
+				log_warn("The main program for the immovable %s should be renamed from 'program' "
+				         "to 'main'\n",
+				         name().c_str());
 				if (programs->keys<std::string>().count(MapObjectProgram::kMainProgram)) {
-					log("         This also clashes with an already existing 'main' program\n");
+					log_err("         This also clashes with an already existing 'main' program\n");
 				}
 				programs_[MapObjectProgram::kMainProgram] = new ImmovableProgram(
 				   MapObjectProgram::kMainProgram,
@@ -454,9 +458,9 @@ void Immovable::draw_construction(const uint32_t gametime,
 		done = total;
 	}
 
-	const Animation& anim = g_gr->animations().get_animation(anim_);
+	const Animation& anim = g_animation_manager->get_animation(anim_);
 	const size_t nr_frames = anim.nr_frames();
-	uint32_t frametime = g_gr->animations().get_animation(anim_).frametime();
+	uint32_t frametime = g_animation_manager->get_animation(anim_).frametime();
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
 	const size_t current_frame = done / units_per_frame;
 
@@ -476,8 +480,8 @@ void Immovable::draw_construction(const uint32_t gametime,
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(
 	   info_to_draw, descr().descname(),
-	   g_gr->styles().color_tag((boost::format(_("%i%% built")) % (100 * done / total)).str(),
-	                            g_gr->styles().building_statistics_style().construction_color()),
+	   g_style_manager->color_tag((boost::format(_("%i%% built")) % (100 * done / total)).str(),
+	                              g_style_manager->building_statistics_style().construction_color()),
 	   point_on_dst, scale, dst);
 }
 
@@ -542,8 +546,8 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	if (imm.descr().is_animation_known(animname)) {
 		imm.anim_ = imm.descr().get_animation(animname, &imm);
 	} else {
-		log("Unknown animation '%s' for immovable '%s', using main animation instead.\n", animname,
-		    imm.descr().name().c_str());
+		log_warn("Unknown animation '%s' for immovable '%s', using main animation instead.\n",
+		         animname, imm.descr().name().c_str());
 		imm.anim_ = imm.descr().main_animation();
 	}
 
@@ -579,9 +583,8 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 			// significantly.
 			// Note that in some cases, the immovable may end up broken despite
 			// the fixup, but there isn't really anything we can do against that.
-			log("Warning: Immovable '%s', size of program '%s' seems to have "
-			    "changed.\n",
-			    imm.descr().name().c_str(), imm.program_->name().c_str());
+			log_warn("Immovable '%s', size of program '%s' seems to have changed.\n",
+			         imm.descr().name().c_str(), imm.program_->name().c_str());
 			imm.program_ptr_ = 0;
 		}
 	}
@@ -634,7 +637,8 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 
 	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
 		if (get_owner() == nullptr) {
-			log(" Tribe immovable '%s' has no owner!! ", descr().name().c_str());
+			log_warn_time(
+			   egbase.get_gametime(), "Tribe immovable '%s' has no owner!", descr().name().c_str());
 		}
 		fw.c_string("tribes");
 	} else {
@@ -760,7 +764,7 @@ bool Immovable::construct_ware(Game& game, DescriptionIndex index) {
 		return false;
 	}
 
-	molog("construct_ware: index %u", index);
+	molog(game.get_gametime(), "construct_ware: index %u", index);
 
 	Buildcost::iterator it = d->delivered.find(index);
 	if (it != d->delivered.end()) {
@@ -772,7 +776,7 @@ bool Immovable::construct_ware(Game& game, DescriptionIndex index) {
 	anim_construction_done_ = d->delivered.total();
 	animstart_ = game.get_gametime();
 
-	molog("construct_ware: total %u delivered: %u", index, d->delivered[index]);
+	molog(game.get_gametime(), "construct_ware: total %u delivered: %u", index, d->delivered[index]);
 
 	Buildcost remaining;
 	construct_remaining_buildcost(game, &remaining);
@@ -811,7 +815,7 @@ PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
  */
 PlayerImmovable::~PlayerImmovable() {
 	if (workers_.size()) {
-		log("PlayerImmovable::~PlayerImmovable: %" PRIuS " workers left!\n", workers_.size());
+		log_warn("PlayerImmovable::~PlayerImmovable: %" PRIuS " workers left!\n", workers_.size());
 	}
 }
 
@@ -919,13 +923,13 @@ void PlayerImmovable::log_general_info(const EditorGameBase& egbase) const {
 	BaseImmovable::log_general_info(egbase);
 
 	FORMAT_WARNINGS_OFF
-	molog("this: %p\n", this);
-	molog("owner_: %p\n", owner_);
+	molog(egbase.get_gametime(), "this: %p\n", this);
+	molog(egbase.get_gametime(), "owner_: %p\n", owner_);
 	FORMAT_WARNINGS_ON
-	molog("player_number: %i\n", owner_->player_number());
+	molog(egbase.get_gametime(), "player_number: %i\n", owner_->player_number());
 	FORMAT_WARNINGS_OFF
-	molog("ware_economy_: %p\n", ware_economy_);
-	molog("worker_economy_: %p\n", worker_economy_);
+	molog(egbase.get_gametime(), "ware_economy_: %p\n", ware_economy_);
+	molog(egbase.get_gametime(), "worker_economy_: %p\n", worker_economy_);
 	FORMAT_WARNINGS_ON
 }
 

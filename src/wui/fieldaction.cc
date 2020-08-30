@@ -25,7 +25,6 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
-#include "graphic/graphic.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/attack_target.h"
@@ -95,8 +94,7 @@ void BuildGrid::add(Widelands::DescriptionIndex id) {
 	UI::IconGrid::add(descr.name(), descr.representative_image(&plr_->get_playercolor()),
 	                  reinterpret_cast<void*>(id),
 	                  descr.descname() + "<br>" +
-	                     g_gr->styles()
-	                        .ware_info_style(UI::WareInfoStyle::kNormal)
+	                     g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
 	                        .header_font()
 	                        .as_font_tag(_("Construction costs:")) +
 	                     "<br>" + waremap_to_richtext(plr_->tribe(), descr.buildcost()));
@@ -624,7 +622,7 @@ uint32_t FieldActionWindow::add_tab(const std::string& name,
                                     const char* picname,
                                     UI::Panel* panel,
                                     const std::string& tooltip_text) {
-	return tabpanel_.add(name, g_gr->images().get(picname), panel, tooltip_text);
+	return tabpanel_.add(name, g_image_cache->get(picname), panel, tooltip_text);
 }
 
 UI::Button& FieldActionWindow::add_button(UI::Box* const box,
@@ -634,7 +632,7 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
                                           const std::string& tooltip_text,
                                           bool repeating) {
 	UI::Button& button = *new UI::Button(box, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiPrimary,
-	                                     g_gr->images().get(picname), tooltip_text);
+	                                     g_image_cache->get(picname), tooltip_text);
 	button.sigclicked.connect([this, fn]() { (this->*fn)(); });
 	button.set_repeating(repeating);
 	box->add(&button);

@@ -19,6 +19,7 @@
 
 #include "logic/map_objects/bob.h"
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/wexception.h"
@@ -102,8 +103,7 @@ Bob::Bob(const BobDescr& init_descr)
  */
 Bob::~Bob() {
 	if (position_.field) {
-		molog("MapObject::~MapObject: pos_.field != 0, cleanup() not "
-		      "called!\n");
+		molog(owner().egbase().get_gametime(), "Bob::~Bob: pos_.field != 0, cleanup() not called!\n");
 		abort();
 	}
 }
@@ -604,12 +604,13 @@ bool Bob::start_task_movepath(Game& game,
 	int32_t const curidx = path.get_index(get_position());
 
 	if (curidx == -1) {
-		molog("ERROR: (%i, %i) is not on the given path:\n", get_position().x, get_position().y);
+		molog(game.get_gametime(), "ERROR: (%i, %i) is not on the given path:\n", get_position().x,
+		      get_position().y);
 		for (const Coords& coords : path.get_coords()) {
-			molog("* (%i, %i)\n", coords.x, coords.y);
+			molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 		}
 		log_general_info(game);
-		log("%s", get_backtrace().c_str());
+		log_err_time(game.get_gametime(), "%s", get_backtrace().c_str());
 		throw wexception("MO(%u): start_task_movepath(index): not on path", serial());
 	}
 
@@ -663,7 +664,8 @@ void Bob::movepath_update(Game& game, State& state) {
 			   game, Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
 			assert(ships_count > 0);
 			if (ships_count > 1) {
-				molog("Pausing the ship because %d ships on the same spot\n", ships_count);
+				molog(game.get_gametime(), "Pausing the ship because %d ships on the same spot\n",
+				      ships_count);
 				return start_task_idle(
 				   game, state.diranims.get_animation(dir), ((game.logic_rand() % 3) + 1) * 5000);
 			}
@@ -950,58 +952,60 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 /// Give debug information.
 void Bob::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_OFF
-	molog("Owner: %p\n", owner_);
+	molog(egbase.get_gametime(), "Owner: %p\n", owner_);
 	FORMAT_WARNINGS_ON
-	molog("Postition: (%i, %i)\n", position_.x, position_.y);
-	molog("ActID: %i\n", actid_);
-	molog("ActScheduled: %s\n", actscheduled_ ? "true" : "false");
-	molog("Animation: %s\n", anim_ ? descr().get_animation_name(anim_).c_str() : "\\<none\\>");
+	molog(egbase.get_gametime(), "Postition: (%i, %i)\n", position_.x, position_.y);
+	molog(egbase.get_gametime(), "ActID: %i\n", actid_);
+	molog(egbase.get_gametime(), "ActScheduled: %s\n", actscheduled_ ? "true" : "false");
+	molog(egbase.get_gametime(), "Animation: %s\n",
+	      anim_ ? descr().get_animation_name(anim_).c_str() : "\\<none\\>");
 
-	molog("AnimStart: %i\n", animstart_);
-	molog("WalkingDir: %i\n", walking_);
-	molog("WalkingStart: %i\n", walkstart_);
-	molog("WalkEnd: %i\n", walkend_);
+	molog(egbase.get_gametime(), "AnimStart: %i\n", animstart_);
+	molog(egbase.get_gametime(), "WalkingDir: %i\n", walking_);
+	molog(egbase.get_gametime(), "WalkingStart: %i\n", walkstart_);
+	molog(egbase.get_gametime(), "WalkEnd: %i\n", walkend_);
 
-	molog("Signal: %s\n", signal_.c_str());
+	molog(egbase.get_gametime(), "Signal: %s\n", signal_.c_str());
 
-	molog("Stack size: %" PRIuS "\n", stack_.size());
+	molog(egbase.get_gametime(), "Stack size: %" PRIuS "\n", stack_.size());
 
 	for (size_t i = 0; i < stack_.size(); ++i) {
-		molog("Stack dump %" PRIuS "/%" PRIuS "\n", i + 1, stack_.size());
+		molog(egbase.get_gametime(), "Stack dump %" PRIuS "/%" PRIuS "\n", i + 1, stack_.size());
 
-		molog("* task->name: %s\n", stack_[i].task->name);
+		molog(egbase.get_gametime(), "* task->name: %s\n", stack_[i].task->name);
 
-		molog("* ivar1: %i\n", stack_[i].ivar1);
-		molog("* ivar2: %i\n", stack_[i].ivar2);
-		molog("* ivar3: %i\n", stack_[i].ivar3);
+		molog(egbase.get_gametime(), "* ivar1: %i\n", stack_[i].ivar1);
+		molog(egbase.get_gametime(), "* ivar2: %i\n", stack_[i].ivar2);
+		molog(egbase.get_gametime(), "* ivar3: %i\n", stack_[i].ivar3);
 
 		FORMAT_WARNINGS_OFF
-		molog("* object pointer: %p\n", stack_[i].objvar1.get(egbase));
+		molog(egbase.get_gametime(), "* object pointer: %p\n", stack_[i].objvar1.get(egbase));
 		FORMAT_WARNINGS_ON
-		molog("* svar1: %s\n", stack_[i].svar1.c_str());
+		molog(egbase.get_gametime(), "* svar1: %s\n", stack_[i].svar1.c_str());
 
-		molog("* coords: (%i, %i)\n", stack_[i].coords.x, stack_[i].coords.y);
-		molog("* diranims:");
+		molog(egbase.get_gametime(), "* coords: (%i, %i)\n", stack_[i].coords.x, stack_[i].coords.y);
+		molog(egbase.get_gametime(), "* diranims:");
 		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			molog(" %d", stack_[i].diranims.get_animation(dir));
+			molog(egbase.get_gametime(), " %d", stack_[i].diranims.get_animation(dir));
 		}
 		FORMAT_WARNINGS_OFF
-		molog("\n* path: %p\n", stack_[i].path);
+		molog(egbase.get_gametime(), "\n* path: %p\n", stack_[i].path);
 		FORMAT_WARNINGS_ON
 		if (stack_[i].path) {
 			const Path& path = *stack_[i].path;
-			molog("** Path length: %" PRIuS "\n", path.get_nsteps());
-			molog("** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
-			molog("** End: (%i, %i)\n", path.get_end().x, path.get_end().y);
+			molog(egbase.get_gametime(), "** Path length: %" PRIuS "\n", path.get_nsteps());
+			molog(
+			   egbase.get_gametime(), "** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
+			molog(egbase.get_gametime(), "** End: (%i, %i)\n", path.get_end().x, path.get_end().y);
 			// Printing all coordinates of the path
 			CoordPath coordpath(egbase.map(), path);
 			for (const Coords& coords : coordpath.get_coords()) {
-				molog("*  (%i, %i)\n", coords.x, coords.y);
+				molog(egbase.get_gametime(), "*  (%i, %i)\n", coords.x, coords.y);
 			}
 		}
 		FORMAT_WARNINGS_OFF
-		molog("* route: %p\n", stack_[i].route);
-		molog("* program: %p\n", stack_[i].route);
+		molog(egbase.get_gametime(), "* route: %p\n", stack_[i].route);
+		molog(egbase.get_gametime(), "* program: %p\n", stack_[i].route);
 		FORMAT_WARNINGS_ON
 	}
 }
@@ -1052,8 +1056,8 @@ void Bob::Loader::load(FileRead& fr) {
 				bob.anim_ = bob.descr().get_animation(animname, &bob);
 			} else {
 				bob.anim_ = bob.descr().main_animation();
-				log("Unknown animation '%s' for bob '%s', using main animation instead.\n",
-				    animname.c_str(), bob.descr().name().c_str());
+				log_warn("Unknown animation '%s' for bob '%s', using main animation instead.\n",
+				         animname.c_str(), bob.descr().name().c_str());
 			}
 
 			bob.animstart_ = fr.signed_32();
@@ -1089,9 +1093,10 @@ void Bob::Loader::load(FileRead& fr) {
 							anims[j] = bob.descr().get_animation(dir_animname, &bob);
 						} else {
 							anims[j] = bob.descr().main_animation();
-							log("Unknown directional animation '%s' for bob '%s', using main animation "
-							    "instead.\n",
-							    dir_animname.c_str(), bob.descr().name().c_str());
+							log_warn(
+							   "Unknown directional animation '%s' for bob '%s', using main animation "
+							   "instead.\n",
+							   dir_animname.c_str(), bob.descr().name().c_str());
 						}
 					}
 					state.diranims =

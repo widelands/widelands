@@ -100,7 +100,6 @@ wl_library(map_io
     base_macros
     base_scoped_timer
     economy
-    graphic
     graphic_image_cache
     graphic_image_io
     graphic_minimap_renderer
