@@ -655,8 +655,8 @@ void DifferentialPlotArea::update() {
 		for (const auto& plot : plotdata_) {
 			if (plot.second.showplot) {
 				for (uint32_t l = 0; l < plot.second.absolute_data->size(); ++l) {
-					int32_t temp =
-					   (*plot.second.absolute_data)[l] - (*negative_plotdata_[plot.first].absolute_data)[l];
+					int32_t temp = (*plot.second.absolute_data)[l] -
+					               (*negative_plotdata_[plot.first].absolute_data)[l];
 					if (max < temp) {
 						max = temp;
 					}
