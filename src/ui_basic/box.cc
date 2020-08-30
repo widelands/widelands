@@ -463,4 +463,7 @@ void Box::on_death(Panel* p) {
 
 	update_desired_size();
 }
+void Box::on_visibility_changed() {
+	update_desired_size();
+}
 }  // namespace UI

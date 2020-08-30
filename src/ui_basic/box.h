@@ -94,6 +94,7 @@ private:
 	void scrollbar_moved(int32_t);
 	void update_positions();
 	void on_death(Panel* p) override;
+	void on_visibility_changed() override;
 
 	// Don't resize beyond this size
 	int max_x_, max_y_;

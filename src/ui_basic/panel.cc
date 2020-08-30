@@ -446,6 +446,16 @@ void Panel::set_visible(bool const on) {
 	} else if (parent_ && parent_->focus_ == this) {
 		parent_->focus_ = nullptr;
 	}
+	if (parent_) {
+		parent_->on_visibility_changed();
+	}
+}
+
+/**
+ * Called on a child's parent when visibility of child changed
+ * Overridden in UI::Box
+ */
+void Panel::on_visibility_changed() {
 }
 
 /**
@@ -796,7 +806,10 @@ void Panel::die() {
 		}
 	}
 }
-
+/**
+ * Called on a child's parent just before child is deleted.
+ * Overridden in UI::Box
+ */
 void Panel::on_death(Panel*) {
 }
 
