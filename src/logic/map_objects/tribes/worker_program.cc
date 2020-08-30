@@ -412,7 +412,7 @@ findspace
 
       breed = {
          -- Find any field that can have fish in it for adding a fish to it below
-         "findspace=size:any radius:7 breed resource:fish",
+         "findspace=size:any radius:7 breed resource:resource_fish",
          "walk=coords",
          "animate=freeing duration:3s",
          "breed=resource_fish 1",

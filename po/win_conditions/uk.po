@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# Dmytro Kyrychuk <dmytro.kyrychuck@gmail.com>, 2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-07-23 07:48+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-28 08:16+0000\n"
+"Last-Translator: Dmytro Kyrychuk <dmytro.kyrychuck@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/widelands/widelands/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,21 +21,21 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/artifacts.lua:15
 msgid "Artifacts"
-msgstr ""
+msgstr "Артифатки"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:17
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr ""
+msgstr "Шукайте старовинні артифакти. Коли їх всі знайдено, перемагає команда, яка має їх найбільше."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:18
 msgid "Artifacts owned"
-msgstr ""
+msgstr "Власні артефакти"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:73
 msgid "No Artifacts"
-msgstr ""
+msgstr "Немає артефактів"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:73
 #, lua-format
@@ -48,54 +49,54 @@ msgstr ""
 #. "New artifact"
 #: ../../data/scripting/win_conditions/artifacts.lua:80
 msgid "Artifact Found"
-msgstr ""
+msgstr "Знайдені артефакти"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:81
 msgid "Your team found a new artifact."
-msgstr ""
+msgstr "Ваша команда знайшла новий артефакт."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:85
 msgid "Artifact Lost"
-msgstr ""
+msgstr "Втрачені артефакти"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:86
 msgid "One of your team’s artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Ворожа команда викрала один з артефактів вашої команди."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:90
 msgid "Artifact Conquered"
-msgstr ""
+msgstr "Захоплені артефакти"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "Your team stole an artifact from an enemy."
-msgstr ""
+msgstr "Ваша команда викрала артефакт ворожої команди."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:174
 msgid "Overview:"
-msgstr ""
+msgstr "Звіт:"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:177
 #: ../../data/scripting/win_conditions/artifacts.lua:190
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%i артефакт"
+msgstr[1] "%iартефакти"
+msgstr[2] "%iартефактів"
+msgstr[3] "%i артефактів"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../data/scripting/win_conditions/artifacts.lua:179
 msgid "%1$s owns %2$s."
-msgstr ""
+msgstr "%1$s має %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
 #: ../../data/scripting/win_conditions/artifacts.lua:192
 msgid "Team %1$i (%2$s) owns %3$s."
-msgstr ""
+msgstr "Команда %1$i (%2$s) має %3$s."
 
 #: ../../data/scripting/win_conditions/collectors.lua:17
 msgid "Collectors"
@@ -109,7 +110,7 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/collectors.lua:23
 msgid "Points"
-msgstr ""
+msgstr "Бали"
 
 #: ../../data/scripting/win_conditions/collectors.lua:131
 #, lua-format
@@ -125,15 +126,15 @@ msgstr ""
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Загалом: %i бал"
+msgstr[1] "Загалом: %i бали"
+msgstr[2] "Загалом: %i балів"
+msgstr[3] "Загалом: %i балів"
 
 #: ../../data/scripting/win_conditions/collectors.lua:170
 #, lua-format
 msgid "Status for Team %d"
-msgstr ""
+msgstr "Стан для команди %d"
 
 #: ../../data/scripting/win_conditions/collectors.lua:172
 #, lua-format
