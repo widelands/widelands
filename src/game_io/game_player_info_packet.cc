@@ -33,7 +33,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 24;
+constexpr uint16_t kCurrentPacketVersion = 25;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -88,6 +88,10 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 						for (size_t j = fr.unsigned_32(); j; --j) {
 							player->muted_building_types_.insert(fr.unsigned_32());
 						}
+					}
+					if (packet_version >= 25) {
+						player->is_picking_custom_starting_position_ = fr.unsigned_8();
+						player->initialization_index_ = fr.unsigned_8();
 					}
 				}
 			}
@@ -157,6 +161,8 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 		for (const DescriptionIndex& di : plr->muted_building_types_) {
 			fw.unsigned_32(di);
 		}
+		fw.unsigned_8(plr->is_picking_custom_starting_position() ? 1 : 0);
+		fw.unsigned_8(plr->initialization_index_);
 	}
 	else {
 		fw.unsigned_8(0);  //  Player is NOT in game.

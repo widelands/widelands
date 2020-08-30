@@ -157,6 +157,9 @@ struct ResizeHistory {
 	std::vector<Coords> starting_positions;
 };
 
+// Minimum distance between two starting positions
+constexpr uint16_t kMinSpaceAroundPlayers = 24;
+
 /** class Map
  *
  * This really identifies a map like it is in the game

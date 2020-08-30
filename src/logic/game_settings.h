@@ -117,7 +117,8 @@ struct GameSettings {
 	     scenario(false),
 	     multiplayer(false),
 	     savegame(false),
-	     peaceful(false) {
+	     peaceful(false),
+	     custom_starting_positions(false) {
 		std::unique_ptr<LuaInterface> lua(new LuaInterface);
 		std::unique_ptr<LuaTable> win_conditions(
 		   lua->run_script("scripting/win_conditions/init.lua"));
@@ -167,6 +168,9 @@ struct GameSettings {
 
 	// Is all fighting forbidden?
 	bool peaceful;
+
+	// Whether players may pick their own starting positions
+	bool custom_starting_positions;
 
 	/// List of tribes that players are allowed to choose
 	std::vector<Widelands::TribeBasicInfo> tribes;
@@ -224,6 +228,9 @@ struct GameSettingsProvider {
 
 	virtual void set_peaceful_mode(bool peace) = 0;
 	virtual bool is_peaceful_mode() = 0;
+
+	virtual void set_custom_starting_positions(bool) = 0;
+	virtual bool get_custom_starting_positions() = 0;
 
 	bool has_players_tribe() {
 		return UserSettings::highest_playernum() >= settings().playernum;
