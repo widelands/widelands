@@ -30,15 +30,14 @@
 namespace {
 
 UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
-										LuaInterface* lua,
+                                        LuaInterface* lua,
                                         const Widelands::ImmovableDescr& immovable_descr) {
 	const Image* pic = immovable_descr.representative_image();
 
 	std::string tooltip = immovable_descr.descname();
 
+	// Get information about preferred terrains
 	if (immovable_descr.has_terrain_affinity()) {
-
-		// Get information about preferred terrains
 		std::unique_ptr<LuaTable> table(lua->run_script("scripting/editor/tree_tooltip.lua"));
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 		cr->push_arg(immovable_descr.name());
