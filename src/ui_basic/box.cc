@@ -450,4 +450,10 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 		break;  //  no need to do anything
 	}
 }
+void Box::on_death(Panel* p) {
+	auto is_deleted_panel = [p](Box::Item i) { return p == i.u.panel.panel; };
+	items_.erase(std::remove_if(items_.begin(), items_.end(), is_deleted_panel));
+
+	update_desired_size();
+}
 }  // namespace UI

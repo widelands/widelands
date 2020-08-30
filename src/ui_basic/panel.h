@@ -352,6 +352,7 @@ private:
 	}
 
 	void check_child_death();
+	virtual void on_death(Panel* p);
 
 	friend class Window;
 	void do_draw(RenderTarget&);

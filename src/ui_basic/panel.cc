@@ -480,7 +480,7 @@ void Panel::draw_overlay(RenderTarget& dst) {
 		}
 		dst.fill_rect(focus_overlay_rect(),
 		              has_toplevel_focus ? g_style_manager->focused_color() :
-		                                   g_style_manager->semi_focused_color(),
+                                         g_style_manager->semi_focused_color(),
 		              BlendMode::Default);
 	}
 }
@@ -797,6 +797,9 @@ void Panel::die() {
 	}
 }
 
+void Panel::on_death(Panel*) {
+}
+
 /**
  * Wrapper around SoundHandler::play_fx() to prevent having to include
  * sound_handler.h in every UI subclass just for playing a 'click'
@@ -825,6 +828,7 @@ void Panel::check_child_death() {
 		next = p->next_;
 
 		if (p->flags_ & pf_die) {
+			p->parent_->on_death(p);
 			delete p;
 			p = nullptr;
 		} else if (p->flags_ & pf_child_die) {
