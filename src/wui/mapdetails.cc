@@ -21,7 +21,6 @@
 #include <algorithm>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
