@@ -174,6 +174,8 @@ int Graphic::get_window_mode_yres() const {
 }
 
 void Graphic::change_resolution(int w, int h, bool resize_window) {
+	log_dbg("++ change_resolution(): %dx%d to %dx%d; resize_window=%s\n",
+	    window_mode_width_, window_mode_height_, w, h, resize_window ? "true" : "false");
 	window_mode_width_ = w;
 	window_mode_height_ = h;
 
@@ -185,9 +187,27 @@ void Graphic::change_resolution(int w, int h, bool resize_window) {
 }
 
 void Graphic::set_window_size(int w, int h) {
+	int debug_w, debug_h;
+	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
+	if (flags & SDL_WINDOW_MAXIMIZED) {
+		SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
+		log_dbg("++ set_window_size(): (not) restoring window from %dx%d\n", debug_w, debug_h);
+		//SDL_RestoreWindow(sdl_window_);
+		//SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
+		//log_dbg("++ set_window_size(): restored window to %dx%d\n", debug_w, debug_h);
+	};
+
+	SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
+	log_dbg("++ set_window_size(): attempting resize %dx%d to %dx%d\n", debug_w, debug_h, w, h);
 	SDL_SetWindowResizable(sdl_window_, SDL_FALSE);
+	flags = SDL_GetWindowFlags(sdl_window_);
+	log_dbg("++ set_window_size(): %sresizable\n", flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
 	SDL_SetWindowSize(sdl_window_, w, h);
+	SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
+	log_dbg("++ set_window_size(): resized to %dx%d\n", debug_w, debug_h);
 	SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
+	flags = SDL_GetWindowFlags(sdl_window_);
+	log_dbg("++ set_window_size(): %sresizable\n", flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
 }
 
 void Graphic::resolution_changed() {
@@ -197,6 +217,7 @@ void Graphic::resolution_changed() {
 	int new_w, new_h;
 	SDL_GetWindowSize(sdl_window_, &new_w, &new_h);
 
+	log_dbg("++ resolution_changed(): %dx%d to %dx%d\n", old_w, old_h, new_w, new_h);
 	if (old_w == new_w && old_h == new_h) {
 		return;
 	}
@@ -226,6 +247,7 @@ int Graphic::max_texture_size_for_font_rendering() const {
 
 bool Graphic::maximized() const {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
+	log_dbg("++ maximized() = %s\n", flags & SDL_WINDOW_MAXIMIZED ? "true" : "false");
 	return flags & SDL_WINDOW_MAXIMIZED;
 }
 
@@ -234,6 +256,7 @@ void Graphic::set_maximized(const bool to_maximize) {
 	if (fullscreen() || maximized() == to_maximize) {
 		return;
 	}
+	log_dbg("++ set_maximized(%s)\n", to_maximize ? "true" : "false");
 	if (to_maximize) {
 		SDL_MaximizeWindow(sdl_window_);
 	} else {
@@ -251,6 +274,7 @@ void Graphic::set_fullscreen(const bool value) {
 		return;
 	}
 
+	log_dbg("++ set_fullscreen(): %s\n", value ? "true" : "false");
 	// Widelands is not resolution agnostic, so when we set fullscreen, we want
 	// it at the full resolution of the desktop and we want to know about the
 	// true resolution (SDL supports hiding the true resolution from the
@@ -276,6 +300,8 @@ void Graphic::set_fullscreen(const bool value) {
 	resolution_changed();
 }
 
+static int debug_width = 0;
+static int debug_height = 0;
 /**
  * Bring the screen uptodate.
  */
@@ -289,7 +315,15 @@ void Graphic::refresh() {
 		int true_width, true_height;
 		SDL_GetWindowSize(sdl_window_, &true_width, &true_height);
 
+		if (true_width != debug_width || true_height != debug_height) {
+			uint32_t debug_flags = SDL_GetWindowFlags(sdl_window_);
+			log_dbg("++ refresh(): window size %dx%d %sresizable\n", true_width, true_height,
+			    debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
+		}
+		debug_width = true_width;
+		debug_height = true_height;
 		if (true_width != window_mode_width_ || true_height != window_mode_height_) {
+			log_dbg("++ refresh(): resizing %dx%d to %dx%d\n", true_width, true_height, window_mode_width_, window_mode_height_);
 			set_window_size(window_mode_width_, window_mode_height_);
 			set_maximized(window_mode_maximized_);
 			resolution_changed();
