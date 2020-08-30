@@ -697,7 +697,19 @@ void MapObject::set_reserved_by_worker(bool reserve) {
 	reserved_by_worker_ = reserve;
 }
 
-constexpr uint8_t kCurrentPacketVersionMapObject = 2;
+bool MapObject::is_marked_for_removal(PlayerNumber p) const {
+	return marked_for_removal_.count(p) > 0;
+}
+
+void MapObject::set_marked_for_removal(PlayerNumber p, bool mark) {
+	if (mark) {
+		marked_for_removal_.insert(p);
+	} else {
+		marked_for_removal_.erase(p);
+	}
+}
+
+constexpr uint8_t kCurrentPacketVersionMapObject = 3;
 
 /**
  * Load the entire data package from the given file.
@@ -728,8 +740,14 @@ void MapObject::Loader::load(FileRead& fr) {
 			throw wexception("%u: %s", serial, e.what());
 		}
 
-		if (packet_version == kCurrentPacketVersionMapObject) {
-			get_object()->reserved_by_worker_ = fr.unsigned_8();
+		MapObject& obj = *get_object();
+		if (packet_version >= 2) {
+			obj.reserved_by_worker_ = fr.unsigned_8();
+			if (packet_version >= 3) {
+				for (uint8_t i = fr.unsigned_8(); i; --i) {
+					obj.marked_for_removal_.insert(fr.unsigned_8());
+				}
+			}
 		}
 	} catch (const WException& e) {
 		throw wexception("map object: %s", e.what());
@@ -773,6 +791,10 @@ void MapObject::save(EditorGameBase&, MapObjectSaver& mos, FileWrite& fw) {
 
 	fw.unsigned_32(mos.get_object_file_index(*this));
 	fw.unsigned_8(reserved_by_worker_);
+	fw.unsigned_8(marked_for_removal_.size());
+	for (const PlayerNumber& p : marked_for_removal_) {
+		fw.unsigned_8(p);
+	}
 }
 
 }  // namespace Widelands

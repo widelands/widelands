@@ -912,6 +912,30 @@ private:
 	bool all_;
 };
 
+struct CmdMarkMapObjectForRemoval : PlayerCommand {
+	CmdMarkMapObjectForRemoval(uint32_t t, PlayerNumber p, const MapObject& mo, bool m)
+	   : PlayerCommand(t, p), object_(mo.serial()), mark_(m) {
+	}
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kMarkMapObjectForRemoval;
+	}
+
+	void execute(Game& game) override;
+
+	explicit CmdMarkMapObjectForRemoval(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	CmdMarkMapObjectForRemoval() : PlayerCommand() {
+	}
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial object_;
+	bool mark_;
+};
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYERCOMMAND_H

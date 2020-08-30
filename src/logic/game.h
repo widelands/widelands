@@ -267,6 +267,7 @@ public:
 	void send_player_drop_soldier(Building&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
 	void send_player_enemyflagaction(const Flag&, PlayerNumber, const std::vector<Serial>&);
+	void send_player_mark_object_for_removal(PlayerNumber, MapObject&, bool);
 
 	void send_player_ship_scouting_direction(Ship&, WalkingDir);
 	void send_player_ship_construct_port(Ship&, Coords);

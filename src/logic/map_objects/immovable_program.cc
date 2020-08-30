@@ -264,13 +264,18 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 		Player* player = immovable.get_owner();
 		Coords const c = immovable.get_position();
 		MapObjectDescr::OwnerType owner_type = immovable.descr().owner_type();
+		std::set<PlayerNumber> mfr = immovable.get_marked_for_removal();
+
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 
 		if (bob_) {
 			game.create_ship(c, type_name_, player);
 		} else {
-			game.create_immovable_with_name(
+			Immovable& i = game.create_immovable_with_name(
 			   c, type_name_, owner_type, player, nullptr /* former_building_descr */);
+			for (const PlayerNumber& p : mfr) {
+				i.set_marked_for_removal(p, true);
+			}
 		}
 	} else {
 		immovable.program_step(game);
@@ -333,9 +338,15 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
 		MapObjectDescr::OwnerType owner_type = descr.owner_type();
 		Player* owner = immovable.get_owner();
+		std::set<PlayerNumber> mfr = immovable.get_marked_for_removal();
+
 		immovable.remove(game);  //  Now immovable is a dangling reference!
-		game.create_immovable_with_name(
+
+		Immovable& i = game.create_immovable_with_name(
 		   f, type_name_, owner_type, owner, nullptr /* former_building_descr */);
+		for (const PlayerNumber& p : mfr) {
+			i.set_marked_for_removal(p, true);
+		}
 	} else {
 		immovable.program_step(game);
 	}
