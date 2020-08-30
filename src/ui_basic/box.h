@@ -78,23 +78,7 @@ struct Box : public Panel {
 		return scrollbar_.get();
 	}
 	void set_scrollbar_style(UI::PanelStyle);
-
-protected:
-	void layout() override;
-	void update_desired_size() override;
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
-	bool handle_key(bool down, SDL_Keysym code) override;
-
-private:
-	void get_item_desired_size(uint32_t idx, int* depth, int* breadth);
-	void get_item_size(uint32_t idx, int* depth, int* breadth);
-	void set_item_size(uint32_t idx, int depth, int breadth);
-	void set_item_pos(uint32_t idx, int32_t pos);
-	void scrollbar_moved(int32_t);
-	void update_positions();
-
-	// Don't resize beyond this size
-	int max_x_, max_y_;
+	size_t number_of_children() const;
 
 	struct Item {
 		enum Type {
@@ -116,6 +100,25 @@ private:
 		bool fillspace;
 		int assigned_var_depth;
 	};
+
+protected:
+	void layout() override;
+	void update_desired_size() override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
+
+private:
+	void get_item_desired_size(uint32_t idx, int* depth, int* breadth);
+	void get_item_size(uint32_t idx, int* depth, int* breadth);
+	void set_item_size(uint32_t idx, int depth, int breadth);
+	void set_item_pos(uint32_t idx, int32_t pos);
+	void scrollbar_moved(int32_t);
+	void update_positions();
+	void update_items(const NotePanel& p);
+	void on_death(Panel* p) override;
+
+	// Don't resize beyond this size
+	int max_x_, max_y_;
 
 	bool scrolling_, force_scrolling_;
 	std::unique_ptr<Scrollbar> scrollbar_;

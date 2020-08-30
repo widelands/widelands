@@ -23,6 +23,7 @@
 
 #include <SDL_timer.h>
 
+#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
@@ -446,7 +447,9 @@ void Panel::set_visible(bool const on) {
 	} else if (parent_ && parent_->focus_ == this) {
 		parent_->focus_ = nullptr;
 	}
-	Notifications::publish(NotePanel(on));
+	Notifications::publish(
+	   NotePanel(this, NotePanel::Action::kVisibility,
+	             on ? NotePanel::Visibility::kVisible : NotePanel::Visibility::kInvisible));
 }
 
 /**
@@ -481,7 +484,7 @@ void Panel::draw_overlay(RenderTarget& dst) {
 		}
 		dst.fill_rect(focus_overlay_rect(),
 		              has_toplevel_focus ? g_style_manager->focused_color() :
-		                                   g_style_manager->semi_focused_color(),
+                                         g_style_manager->semi_focused_color(),
 		              BlendMode::Default);
 	}
 }
@@ -789,13 +792,16 @@ void Panel::set_thinks(bool const yes) {
  */
 void Panel::die() {
 	flags_ |= pf_die;
-
 	for (Panel* p = parent_; p; p = p->parent_) {
 		p->flags_ |= pf_child_die;
+
 		if (p == modal_) {
 			break;
 		}
 	}
+}
+
+void Panel::on_death(Panel*) {
 }
 
 /**
@@ -826,6 +832,8 @@ void Panel::check_child_death() {
 		next = p->next_;
 
 		if (p->flags_ & pf_die) {
+			p->parent_->on_death(p);
+			//			Notifications::publish(NotePanel(p, NotePanel::Action::kLifecycle));
 			delete p;
 			p = nullptr;
 		} else if (p->flags_ & pf_child_die) {

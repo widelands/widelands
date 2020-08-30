@@ -35,17 +35,9 @@
 #include "sound/constants.h"
 
 class RenderTarget;
+class Panel;
 
 namespace UI {
-// We use this to make sure that only 1 dropdown is open at the same time.
-struct NotePanel {
-	CAN_BE_SENT_AS_NOTE(NoteId::Panel)
-
-	bool visible;
-
-	explicit NotePanel(bool init_visible) : visible(init_visible) {
-	}
-};
 
 /**
  * Panel is a basic rectangular UI element.
@@ -348,6 +340,7 @@ private:
 		return (flags_ & pf_handle_mouse) != 0;
 	}
 
+	virtual void on_death(Panel* p);
 	bool handles_keypresses() const {
 		if (get_parent() != nullptr && !get_parent()->handles_keypresses()) {
 			return false;
@@ -457,6 +450,22 @@ struct NamedPanel : public Panel {
 
 private:
 	std::string name_;
+};
+struct NotePanel {
+	CAN_BE_SENT_AS_NOTE(NoteId::Panel)
+
+	enum class Action { kVisibility, kLifecycle };
+	enum class Visibility { kVisible, kInvisible };
+
+	Panel* panel;
+	Action action;
+	Visibility visibility;
+
+	explicit NotePanel(Panel* const p,
+	                   Action const init_action,
+	                   Visibility const init_visible = Visibility::kInvisible)
+	   : panel(p), action(init_action), visibility(init_visible) {
+	}
 };
 }  // namespace UI
 

@@ -682,13 +682,13 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	scrollable_playerbox.set_scrolling(true);
 	// playerbox.add_space(padding);
 
-	multi_player_player_groups.resize(kMaxPlayers);
-	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
-		multi_player_player_groups.at(i) =
-		   new MultiPlayerPlayerGroup(&scrollable_playerbox, playerbox.get_w() - UI::Scrollbar::kSize,
-		                              buth_, i, settings, npsb.get());
-		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
-	}
+	//	multi_player_player_groups.resize(kMaxPlayers);
+	//	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
+	//		multi_player_player_groups.at(i) =
+	//		   new MultiPlayerPlayerGroup(&scrollable_playerbox, playerbox.get_w() -
+	// UI::Scrollbar::kSize, 		                              buth_, i, settings, npsb.get());
+	//		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
+	//	}
 
 	// scrollable_playerbox.set_force_scrolling(true);
 	playerbox.add(&scrollable_playerbox, Resizing::kExpandBoth);
@@ -723,14 +723,31 @@ void MultiPlayerSetupGroup::update() {
 	}
 
 	const int number_of_players = settings.players.size();
-
-	// Keep track of which player slots are visible
-	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
-		const bool should_be_visible = i < number_of_players;
-		if (should_be_visible != multi_player_player_groups.at(i)->is_visible()) {
-			multi_player_player_groups.at(i)->set_visible(should_be_visible);
-		}
+	for (auto& p : multi_player_player_groups) {
+		log_dbg("let a mppg die");
+		p->die();
 	}
+
+	multi_player_player_groups.resize(number_of_players);
+	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
+		multi_player_player_groups.at(i) =
+		   new MultiPlayerPlayerGroup(&scrollable_playerbox, playerbox.get_w() - UI::Scrollbar::kSize,
+		                              buth_, i, settings_, npsb.get());
+		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
+	}
+
+	//	// Keep track of which player slots are visible
+	//		for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
+	//			const bool should_be_visible = i < number_of_players;
+	//			//		if (should_be_visible != multi_player_player_groups.at(i)->is_visible()) {
+	//			//			multi_player_player_groups.at(i)->set_visible(should_be_visible);
+	//			//		}
+	//			if (should_be_visible) {
+	//				multi_player_player_groups.at(i)->set_visible(true);
+	//			} else {
+	//				multi_player_player_groups.at(i)->die();
+	//			}
+	//}
 }
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
@@ -744,7 +761,8 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 	// scrollable_playerbox.get_w(), 				         current_player->get_h() +
 	// current_player->get_y()), 				   -MOUSE_OVER_BRIGHT_FACTOR); 			} else if
 	// (current_player->get_y() >= 0)
-	//{ 				auto rect_height = 				   std::min(total_box_height - (scrollable_playerbox.get_y()
+	//{ 				auto rect_height = 				   std::min(total_box_height -
+	//(scrollable_playerbox.get_y()
 	//+
 	// current_player->get_y()), 				            current_player->get_h());
 	// dst.brighten_rect( 				   Recti(playerbox.get_x(), scrollable_playerbox.get_y() +
