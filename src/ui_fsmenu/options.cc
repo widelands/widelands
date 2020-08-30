@@ -312,9 +312,11 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	int cur_win_res_x = g_gr->get_window_mode_xres();
 	int cur_win_res_y = g_gr->get_window_mode_yres();
 
-	log_dbg("++ FullscreenMenuOptions(): cur_win_res=%dx%d; opt.fullscreen=%s; opt.maximized=%s; g_gr->fullscreen()=%s; g_gr->maximized()=%s\n",
-	    cur_win_res_x, cur_win_res_y, opt.fullscreen ? "true" : "false", opt.maximized ? "true" : "false",
-	    g_gr->fullscreen() ? "true" : "false", g_gr->maximized() ? "true" : "false");
+	log_dbg("++ FullscreenMenuOptions(): cur_win_res=%dx%d; opt.fullscreen=%s; opt.maximized=%s; "
+	        "g_gr->fullscreen()=%s; g_gr->maximized()=%s\n",
+	        cur_win_res_x, cur_win_res_y, opt.fullscreen ? "true" : "false",
+	        opt.maximized ? "true" : "false", g_gr->fullscreen() ? "true" : "false",
+	        g_gr->maximized() ? "true" : "false");
 	resolution_dropdown_.add(_("Fullscreen"), kDropdownFullscreen, nullptr, opt.fullscreen);
 	resolution_dropdown_.add(_("Maximized"), kDropdownMaximized, nullptr,
 	                         !resolution_dropdown_.has_selection() && opt.maximized);
@@ -701,8 +703,8 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 void OptionsCtrl::save_options() {
 	OptionsCtrl::OptionsStruct opt = opt_dialog_->get_values();
 
-	log_dbg("++ save_options(): %dx%d%s%s\n", opt.xres, opt.yres,
-	        opt.maximized ? " maximized" : "", opt.fullscreen ? " fullscreen" : "");
+	log_dbg("++ save_options(): %dx%d%s%s\n", opt.xres, opt.yres, opt.maximized ? " maximized" : "",
+	        opt.fullscreen ? " fullscreen" : "");
 
 	// Interface options
 	opt_section_.set_int("xres", opt.xres);

@@ -174,8 +174,8 @@ int Graphic::get_window_mode_yres() const {
 }
 
 void Graphic::change_resolution(int w, int h, bool resize_window) {
-	log_dbg("++ change_resolution(): %dx%d to %dx%d; resize_window=%s\n",
-	    window_mode_width_, window_mode_height_, w, h, resize_window ? "true" : "false");
+	log_dbg("++ change_resolution(): %dx%d to %dx%d; resize_window=%s\n", window_mode_width_,
+	        window_mode_height_, w, h, resize_window ? "true" : "false");
 	window_mode_width_ = w;
 	window_mode_height_ = h;
 
@@ -192,9 +192,9 @@ void Graphic::set_window_size(int w, int h) {
 	if (flags & SDL_WINDOW_MAXIMIZED) {
 		SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
 		log_dbg("++ set_window_size(): (not) restoring window from %dx%d\n", debug_w, debug_h);
-		//SDL_RestoreWindow(sdl_window_);
-		//SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
-		//log_dbg("++ set_window_size(): restored window to %dx%d\n", debug_w, debug_h);
+		// SDL_RestoreWindow(sdl_window_);
+		// SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
+		// log_dbg("++ set_window_size(): restored window to %dx%d\n", debug_w, debug_h);
 	};
 
 	SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
@@ -318,12 +318,13 @@ void Graphic::refresh() {
 		if (true_width != debug_width || true_height != debug_height) {
 			uint32_t debug_flags = SDL_GetWindowFlags(sdl_window_);
 			log_dbg("++ refresh(): window size %dx%d %sresizable\n", true_width, true_height,
-			    debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
+			        debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
 		}
 		debug_width = true_width;
 		debug_height = true_height;
 		if (true_width != window_mode_width_ || true_height != window_mode_height_) {
-			log_dbg("++ refresh(): resizing %dx%d to %dx%d\n", true_width, true_height, window_mode_width_, window_mode_height_);
+			log_dbg("++ refresh(): resizing %dx%d to %dx%d\n", true_width, true_height,
+			        window_mode_width_, window_mode_height_);
 			set_window_size(window_mode_width_, window_mode_height_);
 			set_maximized(window_mode_maximized_);
 			resolution_changed();
