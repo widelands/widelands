@@ -53,9 +53,6 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 	// Collect tooltips and blit small icons representing "is" values
 	for (const Widelands::TerrainDescription::Type& terrain_type : terrain_descr.get_types()) {
-		tooltips.insert(tooltips.end(), terrain_descr.custom_tooltips().begin(),
-		                terrain_descr.custom_tooltips().end());
-
 		tooltips.push_back(terrain_type.descname);
 
 		texture->blit(Rectf(pt.x, pt.y, terrain_type.icon->width(), terrain_type.icon->height()),

@@ -73,7 +73,7 @@
 --        *for more information.*
 --
 --    **tooltips**
---        *Optional*. Additional custom tooltip entries, e.g.::
+--        *Deprecated*. Additional custom tooltip entries, e.g.::
 --
 --            tooltips = {
 --               _"likes trees",
