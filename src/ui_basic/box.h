@@ -47,7 +47,8 @@ struct Box : public Panel {
 	    uint32_t orientation,
 	    int32_t max_x = 0,
 	    int32_t max_y = 0,
-	    uint32_t inner_spacing = 0);
+	    uint32_t inner_spacing = 0,
+	    bool ignore_invisible_items = false);
 
 	void set_scrolling(bool scroll);
 	void set_force_scrolling(bool);
@@ -124,6 +125,7 @@ private:
 	uint32_t orientation_;
 	uint32_t mindesiredbreadth_;
 	uint32_t inner_spacing_;
+	bool ignore_invisible_items_;
 
 	std::vector<Item> items_;
 };
