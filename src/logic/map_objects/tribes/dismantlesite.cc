@@ -160,6 +160,9 @@ const Buildcost DismantleSite::count_returned_wares(Building* building) {
 	}
 	assert(first_idx != INVALID_INDEX);
 	for (const auto& pair : building->get_former_buildings()) {
+		if (!pair.second.empty()) {
+			continue;
+		}
 		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(pair.first);
 		const Buildcost& return_wares = pair.first != first_idx ?
 		                                   former_descr->returned_wares_enhanced() :

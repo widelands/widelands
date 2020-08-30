@@ -149,9 +149,21 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 
 					if (packet_version >= 5) {
 						while (fr.unsigned_8()) {
-							DescriptionIndex oldidx =
-							   building.owner().tribe().safe_building_index(fr.c_string());
+							const std::string map_object_name(fr.c_string());
 							const std::string type(fr.c_string());
+							DescriptionIndex oldidx = INVALID_INDEX;
+							if (type.empty()) {
+								oldidx = building.owner().tribe().safe_building_index(map_object_name);
+							} else if (type == "tribe") {
+								oldidx = building.owner().tribe().immovable_index(map_object_name);
+							} else if (type == "world") {
+								oldidx = egbase.world().safe_immovable_index(map_object_name);
+							} else {
+								throw GameDataError(
+								   "Invalid FormerBuildings type %s, expected ''/'tribe'/'world'",
+								   type.c_str());
+							}
+							assert(oldidx != INVALID_INDEX);
 							building.old_buildings_.push_back(std::make_pair(oldidx, type));
 						}
 					} else {
@@ -963,7 +975,19 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 			{
 				const TribeDescr& td = building->owner().tribe();
 				for (const auto& pair : building->old_buildings_) {
-					const BuildingDescr* b_descr = td.get_building_descr(pair.first);
+					const MapObjectDescr* b_descr = nullptr;
+					if (pair.second.empty()) {
+						b_descr = td.get_building_descr(pair.first);
+					} else if (pair.second == "tribe") {
+						b_descr = td.get_immovable_descr(pair.first);
+					} else if (pair.second == "world") {
+						b_descr = egbase.world().get_immovable_descr(pair.first);
+					} else {
+						throw GameDataError(
+						   "Invalid FormerBuildings type %s, expected ''/'tribe'/'world'",
+						   pair.second.c_str());
+					}
+					assert(b_descr);
 					fw.unsigned_8(1);
 					fw.string(b_descr->name());
 					fw.string(pair.second);
