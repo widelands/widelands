@@ -7,6 +7,41 @@
 
 include "scripting/richtext.lua"
 
+
+
+-- RST
+-- .. function:: tree_affinity_list(terrain_description)
+--
+--    Returns list of trees that is most likely to grow on the given
+--    terrain, sorted in descending order by probability.
+--
+--    :arg terrain_description: The terrain type that we want the information for.
+--    :type terrain_description: :class:`LuaTerrainDescription`
+--    :returns: list of :class:`LuaImmovableDescription` that have the attribute "tree" and probabilities.
+--
+function tree_affinity_list(terrain_description)
+   local world = wl.World();
+   local tree_list = {}
+   for i, immovable in ipairs(world.immovable_descriptions) do
+      if (immovable:has_attribute("tree")) then
+         local probability = immovable:probability_to_grow(terrain_description)
+         if (probability > 0.01) then
+            -- sort the trees by percentage
+            i = 1
+            while (tree_list[i] and (tree_list[i].probability > probability)) do
+               i = i + 1
+            end
+
+            for j = #tree_list, i, -1 do
+               tree_list[j+1] = tree_list[j]
+            end
+            tree_list[i] = {tree = immovable, probability = probability}
+         end
+      end
+   end
+   return tree_list
+end
+
 -- RST
 -- .. function:: terrain_affinity_list(immovable_description)
 --
@@ -37,7 +72,6 @@ function terrain_affinity_list(immovable_description)
    end
    return terrain_list
 end
-
 
 -- RST
 -- .. function:: terrain_affinity_help(immovable_description)
