@@ -19,6 +19,8 @@ This is needed for registering the objects before they are loaded. For a given `
 
 .. code-block:: lua
 
+   push_textdomain("world")
+
    wl.World():new_immovable_type{
       name = "alder_summer_sapling",
       ...
@@ -38,6 +40,8 @@ This is needed for registering the objects before they are loaded. For a given `
       name = "alder_summer_old",
       ...
    }
+
+   pop_textdomain()
 
 The matching ``register.lua`` would look like this:
 

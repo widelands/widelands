@@ -234,6 +234,7 @@ void FullscreenMenuLaunchSPG::update(bool map_was_changed) {
 		select_map_.set_enabled(settings_->can_change_map());
 
 		peaceful_.set_state(settings_->is_peaceful_mode());
+		custom_starting_positions_.set_state(settings_->get_custom_starting_positions());
 
 		set_player_names_and_tribes();
 	}
@@ -283,6 +284,7 @@ bool FullscreenMenuLaunchSPG::select_map() {
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
 	update_win_conditions();
 	update_peaceful_mode();
+	update_custom_starting_positions();
 	update(true);
 	return true;
 }
