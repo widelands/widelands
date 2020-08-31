@@ -47,6 +47,7 @@ constexpr float kBuildingSilhouetteOpacity = 0.3f;
  * OwnerType kTribe/kWorld, as happens e.g. with amazon treetop sentry. This immovable
  * should therefore always be painted below the building image.
  */
+// NOCOM replace string with MapObjectType
 using FormerBuildings = std::vector<std::pair<DescriptionIndex, std::string>>;
 
 /*
@@ -57,7 +58,7 @@ public:
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
-	              Descriptions& tribes);
+	              Descriptions& descriptions);
 	~BuildingDescr() override {
 	}
 
@@ -174,7 +175,7 @@ protected:
 	Building& create_constructionsite() const;
 
 private:
-	const Descriptions& tribes_;
+	const Descriptions& descriptions_;
 	const bool buildable_;          // the player can build this himself
 	const bool can_be_dismantled_;  // the player can dismantle this building
 	const bool destructible_;       // the player can destruct this himself

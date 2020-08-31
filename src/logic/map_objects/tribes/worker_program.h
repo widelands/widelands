@@ -37,7 +37,7 @@ struct WorkerProgram : public MapObjectProgram {
 	WorkerProgram(const std::string& init_name,
 	              const LuaTable& actions_table,
 	              const WorkerDescr& worker,
-	              Descriptions& tribes);
+	              Descriptions& descriptions);
 
 	using Actions = std::vector<Worker::Action>;
 	Actions::size_type get_size() const {
@@ -112,7 +112,7 @@ private:
 	void parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd);
 
 	const WorkerDescr& worker_;
-	Descriptions& tribes_;
+	Descriptions& descriptions_;
 	Actions actions_;
 	static ParseMap const parsemap_[];
 	std::set<DescriptionIndex> produced_ware_types_;

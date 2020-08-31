@@ -157,10 +157,9 @@ public:
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
 	Immovable&
-	create_immovable(const Coords&, DescriptionIndex idx, MapObjectDescr::OwnerType, Player* owner);
+	create_immovable(const Coords&, DescriptionIndex idx, Player* owner);
 	Immovable& create_immovable_with_name(const Coords&,
 	                                      const std::string& name,
-	                                      MapObjectDescr::OwnerType,
 	                                      Player* owner,
 	                                      const BuildingDescr* former_building);
 	Bob& create_ship(const Coords&, const DescriptionIndex ship_type_idx, Player* owner = nullptr);
@@ -206,17 +205,11 @@ public:
 
 	InteractiveGameBase* get_igbase();
 
-	// Returns the world.
-	const World& world() const;
+	// Returns the tribe and world descriptions.
+	const Descriptions& descriptions() const;
 
-	// Returns the world that can be modified. Prefer world() whenever possible.
-	World* mutable_world();
-
-	// Returns the tribes.
-	const Descriptions& tribes() const;
-
-	// Returns the mutable tribes. Prefer tribes() whenever possible.
-	Descriptions* mutable_tribes();
+	// Returns the mutable descriptions. Prefer descriptions() whenever possible.
+	Descriptions* mutable_descriptions();
 
 	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
@@ -262,7 +255,6 @@ private:
 
 	Immovable& do_create_immovable(const Coords& c,
 	                               DescriptionIndex const idx,
-	                               MapObjectDescr::OwnerType type,
 	                               Player* owner,
 	                               const BuildingDescr* former_building_descr);
 
@@ -273,8 +265,7 @@ private:
 	std::unique_ptr<PlayersManager> player_manager_;
 
 	std::unique_ptr<DescriptionManager> description_manager_;
-	std::unique_ptr<World> world_;
-	std::unique_ptr<Descriptions> tribes_;
+	std::unique_ptr<Descriptions> descriptions_;
 	std::unique_ptr<InteractiveBase> ibase_;
 	Map map_;
 

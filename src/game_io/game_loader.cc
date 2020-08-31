@@ -94,12 +94,10 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	FileSystem* map_fs = game_.map().filesystem();
 	if (map_fs->file_exists("scripting/tribes")) {
 		log_info("Game: Reading Scenario Tribes ... ");
-		game_.mutable_tribes()->register_scenario_tribes(map_fs);
+		game_.mutable_descriptions()->register_scenario_tribes(map_fs);
 		log_info("Game: Reading Scenario Tribes took %ums\n", timer.ms_since_last_query());
 	}
 
-	// This also triggers loading the world and tribes, so we need a newline at the end of the log
-	// output
 	log_info("Game: Reading Player Info ...\n");
 	{
 		GamePlayerInfoPacket p;

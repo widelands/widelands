@@ -28,9 +28,9 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/immovable_program.h"
 #include "logic/map_objects/terrain_affinity.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/world_legacy_lookup_table.h"
@@ -229,10 +229,10 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
                                const std::vector<std::string>& attribs,
-                               Descriptions& tribes)
+                               Descriptions& descriptions)
    : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe, attribs) {
 	if (table.has_key("buildcost")) {
-		buildcost_ = Buildcost(table.get_table("buildcost"), tribes);
+		buildcost_ = Buildcost(table.get_table("buildcost"), descriptions);
 	}
 }
 
@@ -635,6 +635,7 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	                                  kCurrentPacketVersionImmovable;
 	fw.unsigned_8(packet_version);
 
+	// NOCOM
 	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
 		if (get_owner() == nullptr) {
 			log_warn_time(
@@ -695,18 +696,13 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersionImmovable) {
 
-			const std::string owner_type = fr.c_string();
+			// NOCOM bump packet version
+			fr.c_string(); // COnsume old owner type
 			Immovable* imm = nullptr;
 
-			if (owner_type != "world") {  //  It is a tribe immovable.
-				const std::string name = tribes_lookup_table.lookup_immovable(fr.c_string());
-				imm = new Immovable(
-				   *egbase.tribes().get_immovable_descr(egbase.mutable_tribes()->load_immovable(name)));
-			} else {  //  world immovable
-				const std::string name = world_lookup_table.lookup_immovable(fr.c_string());
-				imm = new Immovable(
-				   *egbase.world().get_immovable_descr(egbase.mutable_world()->load_immovable(name)));
-			}
+			const std::string name = tribes_lookup_table.lookup_immovable(world_lookup_table.lookup_immovable(fr.c_string()));
+			imm = new Immovable(
+			   *egbase.descriptions().get_immovable_descr(egbase.mutable_descriptions()->load_immovable(name)));
 
 			loader->init(egbase, mol, *imm);
 			loader->load(fr, packet_version);

@@ -30,8 +30,8 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -243,45 +243,39 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							field->map_object_descr = &g_portdock_descr;
 						} else {
 							DescriptionIndex di =
-							   egbase.tribes().building_index(tribes_lookup_table.lookup_building(descr));
+							   egbase.descriptions().building_index(tribes_lookup_table.lookup_building(descr));
 							if (di != INVALID_INDEX) {
-								field->map_object_descr = egbase.tribes().get_building_descr(di);
+								field->map_object_descr = egbase.descriptions().get_building_descr(di);
 							} else {
-								di = egbase.world().get_immovable_index(
-								   world_lookup_table.lookup_immovable(descr));
+								di = egbase.descriptions().immovable_index(
+								   tribes_lookup_table.lookup_immovable(world_lookup_table.lookup_immovable(descr)));
 								if (di != INVALID_INDEX) {
-									field->map_object_descr = egbase.world().get_immovable_descr(di);
+									field->map_object_descr = egbase.descriptions().get_immovable_descr(di);
 								} else {
-									di = egbase.tribes().immovable_index(
-									   tribes_lookup_table.lookup_immovable(descr));
-									if (di != INVALID_INDEX) {
-										field->map_object_descr = egbase.tribes().get_immovable_descr(di);
-									} else {
-										throw GameDataError("invalid map_object_descr: %s", descr.c_str());
-									}
+									throw GameDataError("invalid map_object_descr: %s", descr.c_str());
 								}
 							}
 						}
 
 						if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 							field->partially_finished_building.dismantlesite.building =
-							   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+							   egbase.descriptions().get_building_descr(egbase.descriptions().safe_building_index(
 							      tribes_lookup_table.lookup_building(fr.string())));
 							field->partially_finished_building.dismantlesite.progress = fr.unsigned_32();
 						} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 							field->partially_finished_building.constructionsite.becomes =
-							   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+							   egbase.descriptions().get_building_descr(egbase.descriptions().safe_building_index(
 							      tribes_lookup_table.lookup_building(fr.string())));
 							descr = fr.string();
 							field->partially_finished_building.constructionsite.was =
 							   descr.empty() ?
 							      nullptr :
-							      egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+							      egbase.descriptions().get_building_descr(egbase.descriptions().safe_building_index(
 							         tribes_lookup_table.lookup_building(descr)));
 
 							for (uint32_t j = fr.unsigned_32(); j; --j) {
 								field->partially_finished_building.constructionsite.intermediates.push_back(
-								   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+								   egbase.descriptions().get_building_descr(egbase.descriptions().safe_building_index(
 								      tribes_lookup_table.lookup_building(fr.string()))));
 							}
 
@@ -343,20 +337,15 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} else if (descr == "portdock") {
 							f.map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di = egbase.tribes().building_index(descr);
+							DescriptionIndex di = egbase.descriptions().building_index(descr);
 							if (di != INVALID_INDEX) {
-								f.map_object_descr = egbase.tribes().get_building_descr(di);
+								f.map_object_descr = egbase.descriptions().get_building_descr(di);
 							} else {
-								di = egbase.world().get_immovable_index(descr);
+								di = egbase.descriptions().immovable_index(descr);
 								if (di != INVALID_INDEX) {
-									f.map_object_descr = egbase.world().get_immovable_descr(di);
+									f.map_object_descr = egbase.descriptions().get_immovable_descr(di);
 								} else {
-									di = egbase.tribes().immovable_index(descr);
-									if (di != INVALID_INDEX) {
-										f.map_object_descr = egbase.tribes().get_immovable_descr(di);
-									} else {
-										throw GameDataError("invalid map_object_descr: %s", descr.c_str());
-									}
+									throw GameDataError("invalid map_object_descr: %s", descr.c_str());
 								}
 							}
 						}
@@ -364,23 +353,23 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						if (packet_version > 1) {
 							if (f.map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 								f.partially_finished_building.dismantlesite.building =
-								   egbase.tribes().get_building_descr(
-								      egbase.tribes().safe_building_index(fr.string()));
+								   egbase.descriptions().get_building_descr(
+								      egbase.descriptions().safe_building_index(fr.string()));
 								f.partially_finished_building.dismantlesite.progress = fr.unsigned_32();
 							} else if (f.map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 								f.partially_finished_building.constructionsite.becomes =
-								   egbase.tribes().get_building_descr(
-								      egbase.tribes().safe_building_index(fr.string()));
+								   egbase.descriptions().get_building_descr(
+								      egbase.descriptions().safe_building_index(fr.string()));
 								descr = fr.string();
 								f.partially_finished_building.constructionsite.was =
 								   descr.empty() ? nullptr :
-								                   egbase.tribes().get_building_descr(
-								                      egbase.tribes().safe_building_index(descr));
+								                   egbase.descriptions().get_building_descr(
+								                      egbase.descriptions().safe_building_index(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
 									f.partially_finished_building.constructionsite.intermediates.push_back(
-									   egbase.tribes().get_building_descr(
-									      egbase.tribes().safe_building_index(fr.string())));
+									   egbase.descriptions().get_building_descr(
+									      egbase.descriptions().safe_building_index(fr.string())));
 								}
 
 								f.partially_finished_building.constructionsite.totaltime = fr.unsigned_32();
@@ -394,19 +383,19 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 								f.partially_finished_building.dismantlesite.progress = 0;
 							} else {
 								f.partially_finished_building.constructionsite.becomes =
-								   egbase.tribes().get_building_descr(
-								      egbase.tribes().safe_building_index(descr));
+								   egbase.descriptions().get_building_descr(
+								      egbase.descriptions().safe_building_index(descr));
 
 								descr = fr.string();
 								f.partially_finished_building.constructionsite.was =
 								   descr.empty() ? nullptr :
-								                   egbase.tribes().get_building_descr(
-								                      egbase.tribes().safe_building_index(descr));
+								                   egbase.descriptions().get_building_descr(
+								                      egbase.descriptions().safe_building_index(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
 									f.partially_finished_building.constructionsite.intermediates.push_back(
-									   egbase.tribes().get_building_descr(
-									      egbase.tribes().safe_building_index(fr.string())));
+									   egbase.descriptions().get_building_descr(
+									      egbase.descriptions().safe_building_index(fr.string())));
 								}
 
 								f.partially_finished_building.constructionsite.totaltime = fr.unsigned_32();

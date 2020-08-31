@@ -24,8 +24,8 @@
 #include "base/log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/terrain_affinity.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
 #include "logic/player.h"
 #include "sound/note_sound.h"
@@ -263,14 +263,12 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 	if (probability_ == 0 || game.logic_rand() % kMaxProbability < probability_) {
 		Player* player = immovable.get_owner();
 		Coords const c = immovable.get_position();
-		MapObjectDescr::OwnerType owner_type = immovable.descr().owner_type();
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 
 		if (bob_) {
 			game.create_ship(c, type_name_, player);
 		} else {
-			game.create_immovable_with_name(
-			   c, type_name_, owner_type, player, nullptr /* former_building_descr */);
+			game.create_immovable_with_name(c, type_name_, player, nullptr /* former_building_descr */);
 		}
 	} else {
 		immovable.program_step(game);
@@ -330,12 +328,10 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 	const ImmovableDescr& descr = immovable.descr();
 
 	if ((game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
-	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
-		MapObjectDescr::OwnerType owner_type = descr.owner_type();
+	    probability_to_grow(descr.terrain_affinity(), f, map, game.descriptions().terrains())) {
 		Player* owner = immovable.get_owner();
 		immovable.remove(game);  //  Now immovable is a dangling reference!
-		game.create_immovable_with_name(
-		   f, type_name_, owner_type, owner, nullptr /* former_building_descr */);
+		game.create_immovable_with_name(f, type_name_, owner, nullptr /* former_building_descr */);
 	} else {
 		immovable.program_step(game);
 	}
@@ -480,7 +476,7 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 	const ImmovableDescr& descr = immovable.descr();
 
 	if ((game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
-	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
+	    probability_to_grow(descr.terrain_affinity(), f, map, game.descriptions().terrains())) {
 		// Seed a new tree.
 		MapFringeRegion<> mr(map, Area<>(f, 0));
 		uint32_t fringe_size = 0;
@@ -498,8 +494,8 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 		    (new_location.field->nodecaps() & MOVECAPS_WALK) &&
 		    (game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
 		       probability_to_grow(
-		          descr.terrain_affinity(), new_location, map, game.world().terrains())) {
-			game.create_immovable_with_name(mr.location(), type_name_, descr.owner_type(),
+		          descr.terrain_affinity(), new_location, map, game.descriptions().terrains())) {
+			game.create_immovable_with_name(mr.location(), type_name_,
 			                                nullptr /* owner */, nullptr /* former_building_descr */);
 		}
 	}

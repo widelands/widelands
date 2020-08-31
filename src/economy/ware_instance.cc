@@ -608,8 +608,8 @@ MapObject::Loader* WareInstance::load(EditorGameBase& egbase,
 		if (packet_version == kCurrentPacketVersion) {
 			const std::string warename = lookup_table.lookup_ware(fr.c_string());
 
-			DescriptionIndex wareindex = egbase.tribes().ware_index(warename);
-			const WareDescr* descr = egbase.tribes().get_ware_descr(wareindex);
+			DescriptionIndex wareindex = egbase.descriptions().ware_index(warename);
+			const WareDescr* descr = egbase.descriptions().get_ware_descr(wareindex);
 
 			std::unique_ptr<Loader> loader(new Loader);
 			loader->init(egbase, mol, *new WareInstance(wareindex, descr));

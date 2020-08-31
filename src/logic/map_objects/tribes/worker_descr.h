@@ -46,8 +46,8 @@ public:
 	WorkerDescr(const std::string& init_descname,
 	            MapObjectType type,
 	            const LuaTable& table,
-	            Descriptions& tribes);
-	WorkerDescr(const std::string& init_descname, const LuaTable& t, Descriptions& tribes);
+	            Descriptions& descriptions);
+	WorkerDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
 	~WorkerDescr() override;
 
 	Bob& create_object() const override;
@@ -157,7 +157,7 @@ private:
 	// Hints for the AI
 	std::unique_ptr<WareWorkerHints> ai_hints_;
 
-	const Descriptions& tribes_;
+	const Descriptions& descriptions_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };
 }  // namespace Widelands

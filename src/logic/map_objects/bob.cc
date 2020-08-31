@@ -62,8 +62,8 @@ BobDescr::BobDescr(const std::string& init_descname,
 }
 
 /**
- * Only tribe bobs have a vision range, since it would be irrelevant
- * for world bobs.
+ * Only tribe bobs (workers) have a vision range, since it would be irrelevant
+ * for world bobs (critters).
  *
  * \returns radius (in fields) of area that the bob can see
  */

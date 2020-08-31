@@ -25,10 +25,10 @@
 #include "base/wexception.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/world/map_gen.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
@@ -46,7 +46,7 @@ MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorG
 	map_gen_config->do_not_warn_about_unaccessed_keys();
 
 	map_gen_info_.reset(
-	   new MapGenInfo(*map_gen_config->get_table(mapInfo.world_name), egbase.world()));
+	   new MapGenInfo(*map_gen_config->get_table(mapInfo.world_name), egbase.descriptions()));
 }
 
 void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
@@ -99,12 +99,12 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 	if (set_immovable && (num = bobCategory->num_immovables())) {
 		egbase_.create_immovable_with_name(
 		   fc, bobCategory->get_immovable(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
-		   MapObjectDescr::OwnerType::kWorld, nullptr /* owner */, nullptr /* former_building_descr */
+		   nullptr /* owner */, nullptr /* former_building_descr */
 		);
 	}
 
 	if (set_moveable && (num = bobCategory->num_critters())) {
-		egbase_.create_critter(fc, egbase_.world().critter_index(bobCategory->get_critter(
+		egbase_.create_critter(fc, egbase_.descriptions().critter_index(bobCategory->get_critter(
 		                              static_cast<size_t>(rng.rand() / (kMaxElevation / num)))));
 	}
 }
@@ -117,20 +117,20 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 	// We'll take the "D" terrain at first...
 	// TODO(unknown): Check how the editor handles this...
 
-	const World& world = egbase_.world();
+	const Descriptions& descriptions = egbase_.descriptions();
 	DescriptionIndex const tix = fc.field->get_terrains().d;
-	const TerrainDescription& terrain_description = egbase_.world().terrain_descr(tix);
+	const TerrainDescription& terrain_description = descriptions.terrain_descr(tix);
 
-	const auto set_resource_helper = [this, &world, &terrain_description, &fc](
+	const auto set_resource_helper = [this, &descriptions, &terrain_description, &fc](
 	                                    const uint32_t random_value,
 	                                    const int valid_resource_index) {
 		const DescriptionIndex res_idx = terrain_description.get_valid_resource(valid_resource_index);
-		const ResourceAmount max_amount = world.get_resource(res_idx)->max_amount();
+		const ResourceAmount max_amount = descriptions.get_resource(res_idx)->max_amount();
 		ResourceAmount res_val =
 		   static_cast<ResourceAmount>(random_value / (kMaxElevation / max_amount));
 		res_val *= static_cast<ResourceAmount>(map_info_.resource_amount) + 1;
 		res_val /= 3;
-		if (map_.is_resource_valid(world, fc, res_idx)) {
+		if (map_.is_resource_valid(descriptions, fc, res_idx)) {
 			map_.initialize_resources(fc, res_idx, res_val);
 		}
 	};

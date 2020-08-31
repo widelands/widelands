@@ -1396,7 +1396,7 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const uint32_t init_duetime,
 
 void CmdSetWareTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
-	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
+	if (player->has_economy(economy()) && game.descriptions().ware_exists(ware_type())) {
 		player->get_economy(economy())->set_target_quantity(
 		   wwWARE, ware_type(), permanent_, duetime());
 	}
@@ -1449,7 +1449,7 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_dueti
 
 void CmdSetWorkerTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
-	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
+	if (player->has_economy(economy()) && game.descriptions().worker_exists(ware_type())) {
 		player->get_economy(economy())->set_target_quantity(
 		   wwWORKER, ware_type(), permanent_, duetime());
 	}
@@ -1876,7 +1876,7 @@ void CmdSetStockPolicy::execute(Game& game) {
 			}
 
 			if (isworker_) {
-				if (!(game.tribes().worker_exists(ware_))) {
+				if (!(game.descriptions().worker_exists(ware_))) {
 					log_warn_time(game.get_gametime(),
 					              "Cmd_SetStockPolicy: sender %u, worker %u does not exist\n", sender(),
 					              ware_);
@@ -1884,7 +1884,7 @@ void CmdSetStockPolicy::execute(Game& game) {
 				}
 				warehouse->set_worker_policy(ware_, policy_);
 			} else {
-				if (!(game.tribes().ware_exists(ware_))) {
+				if (!(game.descriptions().ware_exists(ware_))) {
 					log_warn_time(game.get_gametime(),
 					              "Cmd_SetStockPolicy: sender %u, ware %u does not exist\n", sender(),
 					              ware_);
@@ -2016,7 +2016,7 @@ void CmdProposeTrade::write(FileWrite& /* fw */,
 void CmdToggleMuteMessages::execute(Game& game) {
 	if (upcast(Building, b, game.objects().get_object(building_))) {
 		if (all_) {
-			const DescriptionIndex di = game.tribes().safe_building_index(b->descr().name());
+			const DescriptionIndex di = game.descriptions().safe_building_index(b->descr().name());
 			b->get_owner()->set_muted(di, !b->owner().is_muted(di));
 		} else {
 			b->set_mute_messages(!b->mute_messages());

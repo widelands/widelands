@@ -27,8 +27,8 @@
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
 
@@ -81,10 +81,10 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
    EditorInteractive& parent, EditorSetTerrainTool& tool, UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Terrain"), tool) {
-	const Widelands::World& world = parent.egbase().world();
+	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>(
-	      this, parent.editor_categories(Widelands::MapObjectType::TERRAIN), world.terrains(),
+	      this, parent.editor_categories(Widelands::MapObjectType::TERRAIN), descriptions.terrains(),
 	      [this](UI::Panel* cb_parent, const Widelands::TerrainDescription& terrain_descr) {
 		      return create_terrain_checkbox(cb_parent, terrain_descr, &offscreen_images_);
 	      },

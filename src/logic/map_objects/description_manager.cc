@@ -209,8 +209,7 @@ void DescriptionManager::load_description_on_demand(const std::string& descripti
 			load_description(description_name);
 		}
 	} else {
-		// TODO(GunChleoc): throw GameDataError once we use this for the world too
-		log_err("Unknown map object type '%s'\n", description_name.c_str());
+		throw GameDataError("Unknown map object type '%s'", description_name.c_str());
 	}
 }
 

@@ -107,8 +107,8 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 WorkerProgram::WorkerProgram(const std::string& init_name,
                              const LuaTable& actions_table,
                              const WorkerDescr& worker,
-                             Descriptions& tribes)
-   : MapObjectProgram(init_name), worker_(worker), tribes_(tribes) {
+                             Descriptions& descriptions)
+   : MapObjectProgram(init_name), worker_(worker), descriptions_(descriptions) {
 
 	for (const std::string& line : actions_table.array_entries<std::string>()) {
 		if (line.empty()) {
@@ -173,7 +173,7 @@ void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std:
 		throw wexception("Usage: createware=<ware type>");
 	}
 
-	const DescriptionIndex ware_index = tribes_.load_ware(cmd[0]);
+	const DescriptionIndex ware_index = descriptions_.load_ware(cmd[0]);
 
 	act->function = &Worker::run_createware;
 	act->iparam1 = ware_index;
@@ -667,8 +667,8 @@ plant
 ^^^^^
 .. function:: plant attrib:\<attribute\> [attrib:\<attribute\> ...] [unless object]
 
-   :arg string attrib\:\<attribute\>: Select at random any world immovable or immovable
-      of the worker's tribe that has this attribute.
+   :arg string attrib\:\<attribute\>: Select at random any immovable
+      that has this attribute.
 
    :arg empty unless object: Do not plant the immovable if it already exists at
       the current position.

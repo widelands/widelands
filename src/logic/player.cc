@@ -102,7 +102,7 @@ Player::Field::PartiallyFinishedBuildingDetails::PartiallyFinishedBuildingDetail
  * building descr. The FormerBuildings given in reference must be empty and will be
  * filled with the BuildingDescr.
  */
-void find_former_buildings(const Descriptions& tribes,
+void find_former_buildings(const Descriptions& descriptions,
                            const Widelands::DescriptionIndex bi,
                            Widelands::FormerBuildings* former_buildings) {
 	assert(former_buildings && former_buildings->empty());
@@ -110,12 +110,12 @@ void find_former_buildings(const Descriptions& tribes,
 
 	for (;;) {
 		Widelands::DescriptionIndex oldest_idx = former_buildings->front().first;
-		const Widelands::BuildingDescr* oldest = tribes.get_building_descr(oldest_idx);
+		const Widelands::BuildingDescr* oldest = descriptions.get_building_descr(oldest_idx);
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		for (DescriptionIndex i = 0; i < tribes.nrbuildings(); ++i) {
-			const BuildingDescr* building_descr = tribes.get_building_descr(i);
+		for (DescriptionIndex i = 0; i < descriptions.nrbuildings(); ++i) {
+			const BuildingDescr* building_descr = descriptions.get_building_descr(i);
 			if (building_descr->enhancement() == oldest_idx) {
 				former_buildings->insert(former_buildings->begin(), std::make_pair(i, ""));
 				break;
@@ -696,7 +696,7 @@ Waterway& Player::force_waterway(const Path& path) {
 Building& Player::force_building(Coords const location, const FormerBuildings& former_buildings) {
 	const Map& map = egbase().map();
 	DescriptionIndex idx = former_buildings.back().first;
-	const BuildingDescr* descr = egbase().tribes().get_building_descr(idx);
+	const BuildingDescr* descr = egbase().descriptions().get_building_descr(idx);
 	terraform_for_building(egbase(), player_number(), location, descr);
 	FCoords flag_loc;
 	map.get_brn(map.get_fcoords(location), &flag_loc);
@@ -710,19 +710,19 @@ Building& Player::force_csite(Coords const location,
                               const FormerBuildings& former_buildings) {
 	EditorGameBase& eg = egbase();
 	const Map& map = eg.map();
-	const Descriptions& tribes = eg.tribes();
+	const Descriptions& descriptions = eg.descriptions();
 	const PlayerNumber pn = player_number();
 
 	if (!former_buildings.empty()) {
 		DescriptionIndex idx = former_buildings.back().first;
-		const BuildingDescr* descr = tribes.get_building_descr(idx);
+		const BuildingDescr* descr = descriptions.get_building_descr(idx);
 		terraform_for_building(eg, pn, location, descr);
 	}
 	FCoords flag_loc;
 	map.get_brn(map.get_fcoords(location), &flag_loc);
 	force_flag(flag_loc);
 
-	terraform_for_building(eg, pn, location, tribes.get_building_descr(b_idx));
+	terraform_for_building(eg, pn, location, descriptions.get_building_descr(b_idx));
 
 	return eg.warp_constructionsite(
 	   map.get_fcoords(location), player_number_, b_idx, false, former_buildings);
@@ -742,7 +742,7 @@ Building* Player::build(Coords c,
 		return nullptr;
 	}
 
-	const BuildingDescr* descr = egbase().tribes().get_building_descr(idx);
+	const BuildingDescr* descr = egbase().descriptions().get_building_descr(idx);
 
 	if (!descr->is_buildable()) {
 		return nullptr;
@@ -1558,7 +1558,7 @@ void Player::sample_statistics() {
  */
 void Player::ware_produced(DescriptionIndex const wareid) {
 	assert(tribe().has_ware(wareid));
-	assert(egbase().tribes().ware_exists(wareid));
+	assert(egbase().descriptions().ware_exists(wareid));
 	++current_produced_statistics_.at(wareid);
 }
 
@@ -1615,7 +1615,7 @@ Player::get_building_statistics(const DescriptionIndex& i) const {
 }
 
 Player::BuildingStatsVector* Player::get_mutable_building_statistics(const DescriptionIndex& i) {
-	DescriptionIndex const nr_buildings = egbase().tribes().nrbuildings();
+	DescriptionIndex const nr_buildings = egbase().descriptions().nrbuildings();
 	if (building_stats_.size() < nr_buildings) {
 		building_stats_.resize(nr_buildings);
 	}
@@ -1631,7 +1631,7 @@ void Player::update_building_statistics(Building& building, NoteImmovable::Owner
 	const std::string& building_name =
 	   constructionsite ? constructionsite->building().name() : building.descr().name();
 
-	const size_t nr_buildings = egbase().tribes().nrbuildings();
+	const size_t nr_buildings = egbase().descriptions().nrbuildings();
 
 	// Get the valid vector for this
 	if (building_stats_.size() < nr_buildings) {
@@ -1639,7 +1639,7 @@ void Player::update_building_statistics(Building& building, NoteImmovable::Owner
 	}
 
 	std::vector<BuildingStats>& stat =
-	   *get_mutable_building_statistics(egbase().tribes().building_index(building_name.c_str()));
+	   *get_mutable_building_statistics(egbase().descriptions().building_index(building_name.c_str()));
 
 	if (ownership == NoteImmovable::Ownership::GAINED) {
 		BuildingStats new_building;
@@ -1846,8 +1846,8 @@ void Player::read_statistics(FileRead& fr,
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
-		const DescriptionIndex idx = egbase().tribes().ware_index(name);
-		if (!egbase().tribes().ware_exists(idx)) {
+		const DescriptionIndex idx = egbase().descriptions().ware_index(name);
+		if (!egbase().descriptions().ware_exists(idx)) {
 			log_warn_time(egbase().get_gametime(), "Player %u statistics: unknown ware name %s",
 			              player_number(), name.c_str());
 			continue;
@@ -1868,8 +1868,8 @@ void Player::read_statistics(FileRead& fr,
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
-		const DescriptionIndex idx = egbase().tribes().ware_index(name);
-		if (!egbase().tribes().ware_exists(idx)) {
+		const DescriptionIndex idx = egbase().descriptions().ware_index(name);
+		if (!egbase().descriptions().ware_exists(idx)) {
 			log_warn_time(egbase().get_gametime(),
 			              "Player %u consumption statistics: unknown ware name %s", player_number(),
 			              name.c_str());
@@ -1891,8 +1891,8 @@ void Player::read_statistics(FileRead& fr,
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
-		const DescriptionIndex idx = egbase().tribes().ware_index(name);
-		if (!egbase().tribes().ware_exists(idx)) {
+		const DescriptionIndex idx = egbase().descriptions().ware_index(name);
+		if (!egbase().descriptions().ware_exists(idx)) {
 			log_warn_time(egbase().get_gametime(), "Player %u stock statistics: unknown ware name %s",
 			              player_number(), name.c_str());
 			continue;
@@ -1937,7 +1937,7 @@ void Player::write_statistics(FileWrite& fw) const {
 		fw.c_string(oss.str());
 	};
 
-	const Descriptions& tribes = egbase().tribes();
+	const Descriptions& descriptions = egbase().descriptions();
 	const std::set<DescriptionIndex>& tribe_wares = tribe().wares();
 	const size_t nr_wares = tribe_wares.size();
 
@@ -1946,7 +1946,7 @@ void Player::write_statistics(FileWrite& fw) const {
 	fw.unsigned_16(ware_productions_.begin()->second.size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
-		fw.c_string(tribes.get_ware_descr(ware_index)->name());
+		fw.c_string(descriptions.get_ware_descr(ware_index)->name());
 		fw.unsigned_32(current_produced_statistics_.at(ware_index));
 		write_stats(ware_productions_, ware_index);
 	}
@@ -1956,7 +1956,7 @@ void Player::write_statistics(FileWrite& fw) const {
 	fw.unsigned_16(ware_consumptions_.begin()->second.size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
-		fw.c_string(tribes.get_ware_descr(ware_index)->name());
+		fw.c_string(descriptions.get_ware_descr(ware_index)->name());
 		fw.unsigned_32(current_consumed_statistics_.at(ware_index));
 		write_stats(ware_consumptions_, ware_index);
 	}
@@ -1966,7 +1966,7 @@ void Player::write_statistics(FileWrite& fw) const {
 	fw.unsigned_16(ware_stocks_.begin()->second.size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
-		fw.c_string(tribes.get_ware_descr(ware_index)->name());
+		fw.c_string(descriptions.get_ware_descr(ware_index)->name());
 		write_stats(ware_stocks_, ware_index);
 	}
 }

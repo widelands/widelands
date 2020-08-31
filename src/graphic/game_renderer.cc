@@ -51,7 +51,7 @@ void draw_border_markers(const FieldsToDraw::Field& field,
 }
 
 void draw_terrain(uint32_t gametime,
-                  const Widelands::World& world,
+                  const Widelands::Descriptions& descriptions,
                   const FieldsToDraw& fields_to_draw,
                   const float scale,
                   const Workareas& workarea,
@@ -73,7 +73,7 @@ void draw_terrain(uint32_t gametime,
 	i.terrain_arguments.gametime = gametime;
 	i.terrain_arguments.renderbuffer_width = surface_width;
 	i.terrain_arguments.renderbuffer_height = surface_height;
-	i.terrain_arguments.terrains = &world.terrains();
+	i.terrain_arguments.terrains = &descriptions.terrains();
 	i.terrain_arguments.fields_to_draw = &fields_to_draw;
 	i.terrain_arguments.scale = scale;
 	i.terrain_arguments.player = player;

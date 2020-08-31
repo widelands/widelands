@@ -42,7 +42,6 @@
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -54,9 +53,9 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
-                             Descriptions& tribes)
+                             Descriptions& descriptions)
    : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
-     tribes_(tribes),
+     descriptions_(descriptions),
      buildable_(table.has_key("buildcost")),
      can_be_dismantled_(table.has_key("return_on_dismantle") ||
                         table.has_key("return_on_dismantle_on_enhanced")),
@@ -117,13 +116,13 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		if (enh == name()) {
 			throw wexception("enhancement to same type");
 		}
-		DescriptionIndex const en_i = tribes.load_building(enh);
-		if (tribes_.building_exists(en_i)) {
+		DescriptionIndex const en_i = descriptions.load_building(enh);
+		if (descriptions_.building_exists(en_i)) {
 			enhancement_ = en_i;
 
 			//  Merge the enhancements workarea info into this building's
 			//  workarea info.
-			const BuildingDescr* tmp_enhancement = tribes_.get_building_descr(en_i);
+			const BuildingDescr* tmp_enhancement = descriptions_.get_building_descr(en_i);
 			for (auto area : tmp_enhancement->workarea_info_) {
 				std::set<std::string>& strs = workarea_info_[area.first];
 				for (const std::string& str : area.second) {
@@ -142,14 +141,14 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	// However, we support "return_on_dismantle" without "buildable", because this is used by custom
 	// scenario buildings.
 	if (table.has_key("return_on_dismantle")) {
-		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), tribes);
+		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), descriptions);
 	}
 	if (table.has_key("buildcost")) {
 		if (!table.has_key("return_on_dismantle")) {
 			throw wexception(
 			   "The building '%s' has a \"buildcost\" but no \"return_on_dismantle\"", name().c_str());
 		}
-		buildcost_ = Buildcost(table.get_table("buildcost"), tribes);
+		buildcost_ = Buildcost(table.get_table("buildcost"), descriptions);
 	}
 
 	if (table.has_key("enhancement_cost")) {
@@ -159,8 +158,8 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			                 "\"return_on_dismantle_on_enhanced\"",
 			                 name().c_str());
 		}
-		enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), tribes);
-		return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes);
+		enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), descriptions);
+		return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), descriptions);
 	}
 
 	needs_seafaring_ = false;
@@ -195,11 +194,12 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 		bool immovable_previously_found = false;
 		for (const auto& pair : former_buildings) {
 			if (!pair.second.empty()) {
+				// NOCOM
 				const MapObjectDescr* d;
 				if (pair.second == "world") {
-					d = egbase.world().get_immovable_descr(pair.first);
+					d = egbase.descriptions().get_immovable_descr(pair.first);
 				} else if (pair.second == "tribe") {
-					d = egbase.tribes().get_immovable_descr(pair.first);
+					d = egbase.descriptions().get_immovable_descr(pair.first);
 				} else {
 					throw wexception("Invalid FormerBuildings type: %s", pair.second.c_str());
 				}
@@ -216,10 +216,11 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 			    f.field->get_immovable()->has_attribute(built_over_immovable_)) {
 				upcast(const ImmovableDescr, imm, &f.field->get_immovable()->descr());
 				assert(imm);
+				// NOCOM
 				immovable =
 				   imm->owner_type() == MapObjectDescr::OwnerType::kWorld ?
-				      std::make_pair(egbase.world().get_immovable_index(imm->name()), "world") :
-				      std::make_pair(egbase.tribes().safe_immovable_index(imm->name()), "tribe");
+				      std::make_pair(egbase.descriptions().immovable_index(imm->name()), "world") :
+				      std::make_pair(egbase.descriptions().safe_immovable_index(imm->name()), "tribe");
 			} else {
 				throw wexception(
 				   "Attempting to build %s at %dx%d – no immovable with required attribute %i found",
@@ -302,7 +303,7 @@ Create a construction site for this type of building
 */
 Building& BuildingDescr::create_constructionsite() const {
 	BuildingDescr const* const descr =
-	   tribes_.get_building_descr(tribes_.safe_building_index("constructionsite"));
+	   descriptions_.get_building_descr(descriptions_.safe_building_index("constructionsite"));
 	ConstructionSite& csite = dynamic_cast<ConstructionSite&>(descr->create_object());
 	csite.set_building(*this);
 
@@ -446,10 +447,11 @@ bool Building::init(EditorGameBase& egbase) {
 	for (const auto& pair : old_buildings_) {
 		if (!pair.second.empty()) {
 			assert(!was_immovable_);
+			// NOCOM
 			if (pair.second == "world") {
-				was_immovable_ = egbase.world().get_immovable_descr(pair.first);
+				was_immovable_ = egbase.descriptions().get_immovable_descr(pair.first);
 			} else if (pair.second == "tribe") {
-				was_immovable_ = egbase.tribes().get_immovable_descr(pair.first);
+				was_immovable_ = egbase.descriptions().get_immovable_descr(pair.first);
 			} else {
 				throw wexception("Invalid FormerBuildings type: %s", pair.second.c_str());
 			}
@@ -557,9 +559,7 @@ void Building::destroy(EditorGameBase& egbase) {
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire) {
-		egbase.create_immovable_with_name(pos, "destroyed_building",
-		                                  MapObjectDescr::OwnerType::kTribe, building_owner,
-		                                  building_descr);
+		egbase.create_immovable_with_name(pos, "destroyed_building", building_owner, building_descr);
 	}
 }
 
@@ -885,7 +885,7 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
-	if (mute_messages() || owner().is_muted(game.tribes().safe_building_index(descr().name()))) {
+	if (mute_messages() || owner().is_muted(game.descriptions().safe_building_index(descr().name()))) {
 		return;
 	}
 

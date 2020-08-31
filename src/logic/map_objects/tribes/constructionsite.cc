@@ -32,13 +32,13 @@
 #include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
@@ -146,8 +146,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
-                                             Descriptions& tribes)
-   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, tribes),
+                                             Descriptions& descriptions)
+   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, descriptions),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 }

@@ -43,7 +43,6 @@ class Immovable;
 class Map;
 class TerrainAffinity;
 class Worker;
-class World;
 struct Flag;
 struct ImmovableAction;
 struct ImmovableActionData;
@@ -126,7 +125,7 @@ class ImmovableDescr : public MapObjectDescr {
 public:
 	using Programs = std::map<std::string, ImmovableProgram*>;
 
-	/// Common constructor functions for tribes and world.
+	/// NOCOM only 1 constructor, get rid of type. Common constructor functions for tribes and world.
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
 	               MapObjectDescr::OwnerType type,
@@ -135,7 +134,7 @@ public:
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
 	               const std::vector<std::string>& attribs,
-	               Descriptions& tribes);
+	               Descriptions& descriptions);
 	~ImmovableDescr() override;
 
 	int32_t get_size() const {
@@ -178,6 +177,7 @@ protected:
 	Programs programs_;
 
 	/// Whether this ImmovableDescr belongs to a tribe or the world
+	/// NOCOM get rid
 	const MapObjectDescr::OwnerType owner_type_;
 
 	/// Buildcost for externally constructible immovables (for ship construction)

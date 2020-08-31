@@ -29,14 +29,11 @@ struct TrainingSiteWindow;
 
 namespace Widelands {
 
-class World;
-
 class TrainingSiteDescr : public ProductionSiteDescr {
 public:
 	TrainingSiteDescr(const std::string& init_descname,
 	                  const LuaTable& table,
-	                  Descriptions& tribes,
-	                  World& world);
+	                  Descriptions& descriptions);
 	~TrainingSiteDescr() override {
 	}
 

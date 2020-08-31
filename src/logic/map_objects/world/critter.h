@@ -32,8 +32,6 @@ class WorldLegacyLookupTable;
 
 namespace Widelands {
 
-class World;
-
 //
 // Description
 //

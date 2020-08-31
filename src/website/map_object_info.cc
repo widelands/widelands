@@ -33,7 +33,6 @@
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
-#include "logic/map_objects/world/world.h"
 #include "website/json/json.h"
 #include "website/website_common.h"
 
@@ -275,7 +274,7 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 	JSON::Array* json_tribes_array = json->add_array("tribes");
 
 	/// Tribes
-	const Descriptions& tribes = egbase.tribes();
+	const Descriptions& descriptions = egbase.descriptions();
 
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {
@@ -293,7 +292,7 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 		json_tribe_for_file->write_to_file(
 		   *out_filesystem, (boost::format("tribe_%s.json") % tribe_info.name).str().c_str());
 
-		const TribeDescr& tribe = *tribes.get_tribe_descr(tribes.tribe_index(tribe_info.name));
+		const TribeDescr& tribe = *descriptions.get_tribe_descr(descriptions.tribe_index(tribe_info.name));
 		write_buildings(tribe, egbase, out_filesystem);
 		write_wares(tribe, egbase, out_filesystem);
 		write_workers(tribe, egbase, out_filesystem);

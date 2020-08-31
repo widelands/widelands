@@ -61,9 +61,9 @@ void MapAllowedWorkerTypesPacket::read(FileSystem& fs,
 					}
 
 					// Only allow workers that the player's tribe has.
-					for (size_t i = 0; i < egbase.tribes().nrworkers(); ++i) {
+					for (size_t i = 0; i < egbase.descriptions().nrworkers(); ++i) {
 						const DescriptionIndex& worker_index = static_cast<DescriptionIndex>(i);
-						const WorkerDescr& worker_descr = *egbase.tribes().get_worker_descr(worker_index);
+						const WorkerDescr& worker_descr = *egbase.descriptions().get_worker_descr(worker_index);
 						if (worker_descr.is_buildable() && player->tribe().has_worker(worker_index)) {
 							player->allow_worker_type(
 							   worker_index, s->get_bool(worker_descr.name().c_str(), true));
@@ -98,7 +98,7 @@ void MapAllowedWorkerTypesPacket::write(FileSystem& fs, EditorGameBase& egbase, 
 		// Only write the workers which are disabled.
 		for (const DescriptionIndex& worker_index : tribe.workers()) {
 			if (!player->is_worker_type_allowed(worker_index)) {
-				const WorkerDescr* worker_descr = egbase.tribes().get_worker_descr(worker_index);
+				const WorkerDescr* worker_descr = egbase.descriptions().get_worker_descr(worker_index);
 				section.set_bool(worker_descr->name().c_str(), false);
 				forbidden_worker_seen = true;
 			}

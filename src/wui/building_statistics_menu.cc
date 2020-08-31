@@ -113,7 +113,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      was_minimized_(false),
      low_production_(33),
      has_selection_(false),
-     nr_building_types_(parent.egbase().tribes().nrbuildings()) {
+     nr_building_types_(parent.egbase().descriptions().nrbuildings()) {
 
 	building_buttons_ = std::vector<UI::Button*>(nr_building_types_);
 	owned_labels_ = std::vector<UI::Textarea*>(nr_building_types_);
@@ -260,7 +260,7 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 
 		for (const Widelands::DescriptionIndex id : buildings_to_add[tab_index]) {
 			const Widelands::BuildingDescr& descr =
-			   *iplayer().egbase().tribes().get_building_descr(id);
+			   *iplayer().egbase().descriptions().get_building_descr(id);
 			add_button(id, descr, row);
 			++current_column;
 			if (current_column == 1) {
@@ -333,7 +333,7 @@ bool BuildingStatisticsMenu::foreign_tribe_building_is_valid(
    const Widelands::Player& player, Widelands::DescriptionIndex index) const {
 	if (!player.tribe().has_building(index) && !player.get_building_statistics(index).empty()) {
 		const Widelands::BuildingDescr& descr =
-		   *iplayer().egbase().tribes().get_building_descr(index);
+		   *iplayer().egbase().descriptions().get_building_descr(index);
 		if (descr.type() == Widelands::MapObjectType::CONSTRUCTIONSITE ||
 		    descr.type() == Widelands::MapObjectType::DISMANTLESITE) {
 			return false;

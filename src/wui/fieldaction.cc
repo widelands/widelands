@@ -895,7 +895,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   map, Widelands::Area<Widelands::FCoords>(
-		           node_, workarea_radius + ibase().egbase().tribes().get_largest_workarea()));
+		           node_, workarea_radius + ibase().egbase().descriptions().get_largest_workarea()));
 		do {
 			if (player_->is_seeing(map.get_index(mr.location()))) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {

@@ -37,11 +37,17 @@
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/world/critter.h"
+#include "logic/map_objects/world/resource_description.h"
+#include "logic/map_objects/world/terrain_description.h"
 
 namespace Widelands {
 Descriptions::Descriptions(DescriptionManager* description_manager, LuaInterface* lua)
-   : buildings_(new DescriptionMaintainer<BuildingDescr>()),
-     immovables_(new DescriptionMaintainer<ImmovableDescr>()),
+   : critters_(new DescriptionMaintainer<CritterDescr>()),
+	 immovables_(new DescriptionMaintainer<ImmovableDescr>()),
+     terrains_(new DescriptionMaintainer<TerrainDescription>()),
+     resources_(new DescriptionMaintainer<ResourceDescription>()),
+	 buildings_(new DescriptionMaintainer<BuildingDescr>()),
      ships_(new DescriptionMaintainer<ShipDescr>()),
      wares_(new DescriptionMaintainer<WareDescr>()),
      workers_(new DescriptionMaintainer<WorkerDescr>()),
@@ -62,6 +68,9 @@ Descriptions::Descriptions(DescriptionManager* description_manager, LuaInterface
 			                    tribeinfo.name.c_str());
 		}
 	}
+
+	// Walk world directory and register objects
+	description_manager_->register_directory("world", g_fs, false);
 
 	// Walk tribes directory and register objects
 	description_manager_->register_directory("tribes", g_fs, false);
@@ -236,7 +245,7 @@ void Descriptions::register_scenario_tribes(FileSystem* filesystem) {
 	}
 }
 
-void Descriptions::add_tribe_object_type(const LuaTable& table, World& world, MapObjectType type) {
+void Descriptions::add_object_description(const LuaTable& table, MapObjectType type) {
 	const std::string& type_name = table.get_string("name");
 	const std::string& type_descname = table.get_string("descname").c_str();
 
@@ -250,6 +259,16 @@ void Descriptions::add_tribe_object_type(const LuaTable& table, World& world, Ma
 
 	// Add
 	switch (type) {
+	case MapObjectType::CRITTER:
+		critters_->add(new CritterDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name)));
+		break;
+	case MapObjectType::RESOURCE:
+		resources_->add(new ResourceDescription(table));
+		break;
+	case MapObjectType::TERRAIN:
+		terrains_->add(new TerrainDescription(table, *this));
+		break;
 	case MapObjectType::CARRIER:
 		workers_->add(new CarrierDescr(type_descname, table, *this));
 		break;
@@ -273,7 +292,7 @@ void Descriptions::add_tribe_object_type(const LuaTable& table, World& world, Ma
 		buildings_->add(new MilitarySiteDescr(type_descname, table, *this));
 		break;
 	case MapObjectType::PRODUCTIONSITE:
-		buildings_->add(new ProductionSiteDescr(type_descname, table, *this, world));
+		buildings_->add(new ProductionSiteDescr(type_descname, table, *this));
 		break;
 	case MapObjectType::SHIP:
 		ships_->add(new ShipDescr(type_descname, table));
@@ -282,7 +301,7 @@ void Descriptions::add_tribe_object_type(const LuaTable& table, World& world, Ma
 		workers_->add(new SoldierDescr(type_descname, table, *this));
 		break;
 	case MapObjectType::TRAININGSITE:
-		buildings_->add(new TrainingSiteDescr(type_descname, table, *this, world));
+		buildings_->add(new TrainingSiteDescr(type_descname, table, *this));
 		break;
 	case MapObjectType::WARE:
 		wares_->add(new WareDescr(type_descname, table));
@@ -301,7 +320,7 @@ void Descriptions::add_tribe_object_type(const LuaTable& table, World& world, Ma
 	description_manager_->mark_loading_done(type_name);
 }
 
-void Descriptions::add_tribe(const LuaTable& table, const World& world) {
+void Descriptions::add_tribe(const LuaTable& table) {
 	const std::string name = table.get_string("name");
 	// Register as in progress
 	description_manager_->mark_loading_in_progress(name);
@@ -309,11 +328,11 @@ void Descriptions::add_tribe(const LuaTable& table, const World& world) {
 	if (Widelands::tribe_exists(name)) {
 		if (scenario_tribes_ != nullptr && scenario_tribes_->has_key(name)) {
 			// If we're loading a scenario with custom tribe entites, load them here.
-			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, world, table,
+			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, table,
 			                            scenario_tribes_->get_table(name).get()));
 		} else {
 			// Normal tribes loading without scenario entities
-			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, world, table));
+			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, table));
 		}
 	} else {
 		throw GameDataError("The tribe '%s' is not listed in data/tribes/init.lua.", name.c_str());
@@ -398,4 +417,125 @@ uint32_t Descriptions::get_largest_workarea() const {
 void Descriptions::increase_largest_workarea(uint32_t workarea) {
 	largest_workarea_ = std::max(largest_workarea_, workarea);
 }
+
+// NOCOM sort
+
+const DescriptionMaintainer<TerrainDescription>& Descriptions::terrains() const {
+	return *terrains_;
+}
+
+const DescriptionMaintainer<ImmovableDescr>& Descriptions::immovables() const {
+	return *immovables_;
+}
+
+DescriptionIndex Descriptions::load_critter(const std::string& crittername) {
+	try {
+		description_manager_->load_description(crittername);
+	} catch (WException& e) {
+		throw GameDataError(
+		   "Error while loading critter type '%s': %s", crittername.c_str(), e.what());
+	}
+	return safe_critter_index(crittername);
+}
+
+DescriptionIndex Descriptions::load_resource(const std::string& resourcename) {
+	try {
+		description_manager_->load_description(resourcename);
+	} catch (WException& e) {
+		throw GameDataError(
+		   "Error while loading resource type '%s': %s", resourcename.c_str(), e.what());
+	}
+	return safe_resource_index(resourcename);
+}
+DescriptionIndex Descriptions::load_terrain(const std::string& terrainname) {
+	try {
+		description_manager_->load_description(terrainname);
+	} catch (WException& e) {
+		throw GameDataError(
+		   "Error while loading terrain type '%s': %s", terrainname.c_str(), e.what());
+	}
+	return safe_terrain_index(terrainname);
+}
+
+TerrainDescription& Descriptions::terrain_descr(DescriptionIndex const i) const {
+	return *terrains_->get_mutable(i);
+}
+
+const TerrainDescription* Descriptions::terrain_descr(const std::string& name) const {
+	DescriptionIndex const i = terrains_->get_index(name);
+	return i != INVALID_INDEX ? terrains_->get_mutable(i) : nullptr;
+}
+
+DescriptionIndex Descriptions::get_terrain_index(const std::string& name) const {
+	return terrains_->get_index(name);
+}
+DescriptionIndex Descriptions::safe_terrain_index(const std::string& name) const {
+	DescriptionIndex const result = get_terrain_index(name);
+
+	if (result == INVALID_INDEX) {
+		throw GameDataError("'%s' has not been registered as a terrain type", name.c_str());
+	}
+	return result;
+}
+
+DescriptionIndex Descriptions::get_nr_terrains() const {
+	return terrains_->size();
+}
+
+DescriptionIndex Descriptions::get_nr_critters() const {
+	return critters_->size();
+}
+
+DescriptionIndex Descriptions::critter_index(const std::string& name) const {
+	return critters_->get_index(name);
+}
+DescriptionIndex Descriptions::safe_critter_index(const std::string& name) const {
+	DescriptionIndex const result = critter_index(name);
+
+	if (result == INVALID_INDEX) {
+		throw GameDataError("'%s' has not been registered as a critter type", name.c_str());
+	}
+	return result;
+}
+
+const DescriptionMaintainer<CritterDescr>& Descriptions::critters() const {
+	return *critters_;
+}
+
+CritterDescr const* Descriptions::get_critter_descr(DescriptionIndex index) const {
+	return critters_->get_mutable(index);
+}
+
+CritterDescr const* Descriptions::get_critter_descr(const std::string& name) const {
+	return critters_->exists(name.c_str());
+}
+
+DescriptionIndex Descriptions::get_nr_immovables() const {
+	return immovables_->size();
+}
+
+DescriptionIndex Descriptions::resource_index(const std::string& name) const {
+	return name != "none" ? resources_->get_index(name) : Widelands::kNoResource;
+}
+DescriptionIndex Descriptions::safe_resource_index(const std::string& resourcename) const {
+	DescriptionIndex const result = resource_index(resourcename);
+
+	if (result == INVALID_INDEX) {
+		throw GameDataError("'%s' has not been registered as a resource type", resourcename.c_str());
+	}
+	return result;
+}
+
+/***
+ * @return The ResourceDescription for the given index. Returns Nullptr for kNoResource.
+ */
+ResourceDescription const* Descriptions::get_resource(DescriptionIndex const res) const {
+	assert(res < resources_->size() || res == Widelands::kNoResource);
+	return resources_->get_mutable(res);
+}
+
+DescriptionIndex Descriptions::get_nr_resources() const {
+	return resources_->size();
+}
+
 }  // namespace Widelands

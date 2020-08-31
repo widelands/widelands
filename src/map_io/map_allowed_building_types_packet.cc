@@ -64,7 +64,7 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 				//  All building types default to false in the game (not in the
 				//  editor).
 				if (game) {
-					for (DescriptionIndex i = 0; i < game->tribes().nrbuildings(); ++i) {
+					for (DescriptionIndex i = 0; i < game->descriptions().nrbuildings(); ++i) {
 						player->allow_building_type(i, false);
 					}
 				}
@@ -111,7 +111,7 @@ void MapAllowedBuildingTypesPacket::write(FileSystem& fs, EditorGameBase& egbase
 		for (const Widelands::DescriptionIndex& building_index : tribe.buildings()) {
 			if (player->is_building_type_allowed(building_index)) {
 				const BuildingDescr* building_descr =
-				   egbase.tribes().get_building_descr(building_index);
+				   egbase.descriptions().get_building_descr(building_index);
 				section.set_bool(building_descr->name().c_str(), true);
 			}
 		}

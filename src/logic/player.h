@@ -706,7 +706,7 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };
 
-void find_former_buildings(const Descriptions& tribes,
+void find_former_buildings(const Descriptions& descriptions,
                            const DescriptionIndex bi,
                            FormerBuildings* former_buildings);
 }  // namespace Widelands

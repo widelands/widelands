@@ -35,6 +35,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -44,7 +45,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker_program.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "sound/note_sound.h"
@@ -174,15 +174,15 @@ Available actions are:
 
 ProductionProgram::ActReturn::Condition* create_economy_condition(const std::string& item,
                                                                   const ProductionSiteDescr& descr,
-                                                                  const Descriptions& tribes) {
+                                                                  const Descriptions& descriptions) {
 	try {
-		const WareWorker wareworker = tribes.try_load_ware_or_worker(item);
+		const WareWorker wareworker = descriptions.try_load_ware_or_worker(item);
 		if (wareworker == WareWorker::wwWARE) {
-			const DescriptionIndex index = tribes.ware_index(item);
+			const DescriptionIndex index = descriptions.ware_index(item);
 			descr.ware_demand_checks()->insert(index);
 			return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
 		} else {
-			const DescriptionIndex index = tribes.worker_index(item);
+			const DescriptionIndex index = descriptions.worker_index(item);
 			descr.worker_demand_checks()->insert(index);
 			return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
 		}
@@ -223,7 +223,7 @@ ProductionProgram::Groups
 ProductionProgram::parse_ware_type_groups(std::vector<std::string>::const_iterator begin,
                                           std::vector<std::string>::const_iterator end,
                                           const ProductionSiteDescr& descr,
-                                          const Descriptions& tribes) {
+                                          const Descriptions& descriptions) {
 	ProductionProgram::Groups result;
 
 	for (auto& it = begin; it != end; ++it) {
@@ -235,10 +235,10 @@ ProductionProgram::parse_ware_type_groups(std::vector<std::string>::const_iterat
 		for (const std::string& item_name : split_string(names_to_amount.first, ",")) {
 			// Try as ware
 			WareWorker type = wwWARE;
-			DescriptionIndex item_index = tribes.ware_index(item_name);
-			if (!tribes.ware_exists(item_index)) {
-				item_index = tribes.worker_index(item_name);
-				if (tribes.worker_exists(item_index)) {
+			DescriptionIndex item_index = descriptions.ware_index(item_name);
+			if (!descriptions.ware_exists(item_index)) {
+				item_index = descriptions.worker_index(item_name);
+				if (descriptions.worker_exists(item_index)) {
 					// It is a worker
 					type = wwWORKER;
 				} else {
@@ -282,14 +282,13 @@ ProductionProgram::parse_ware_type_groups(std::vector<std::string>::const_iterat
 	return result;
 }
 
-BillOfMaterials ProductionProgram::parse_bill_of_materials(
-   const std::vector<std::string>& arguments, WareWorker ww, Descriptions& tribes) {
+BillOfMaterials ProductionProgram::parse_bill_of_materials(const std::vector<std::string>& arguments, WareWorker ww, Descriptions& descriptions) {
 	BillOfMaterials result;
 	for (const std::string& argument : arguments) {
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
 
-		const DescriptionIndex index = ww == WareWorker::wwWARE ? tribes.load_ware(produceme.first) :
-		                                                          tribes.load_worker(produceme.first);
+		const DescriptionIndex index = ww == WareWorker::wwWARE ? descriptions.load_ware(produceme.first) :
+		                                                          descriptions.load_worker(produceme.first);
 
 		result.push_back(std::make_pair(index, read_positive(produceme.second)));
 	}
@@ -426,8 +425,8 @@ ProductionProgram::ActReturn::Negation::Negation(const std::vector<std::string>&
                                                  std::vector<std::string>::const_iterator& begin,
                                                  std::vector<std::string>::const_iterator& end,
                                                  const ProductionSiteDescr& descr,
-                                                 const Descriptions& tribes)
-   : operand(create_condition(arguments, begin, end, descr, tribes)) {
+                                                 const Descriptions& descriptions)
+   : operand(create_condition(arguments, begin, end, descr, descriptions)) {
 }
 
 ProductionProgram::ActReturn::Negation::~Negation() {
@@ -451,20 +450,20 @@ bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSi
 	return ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type);
 }
 std::string
-ProductionProgram::ActReturn::EconomyNeedsWare::description(const Descriptions& tribes) const {
+ProductionProgram::ActReturn::EconomyNeedsWare::description(const Descriptions& descriptions) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware
 	 * '%s' */
 	std::string result = (boost::format(_("the economy needs the ware ‘%s’")) %
-	                      tribes.get_ware_descr(ware_type)->descname())
+	                      descriptions.get_ware_descr(ware_type)->descname())
 	                        .str();
 	return result;
 }
 std::string
-ProductionProgram::ActReturn::EconomyNeedsWare::description_negation(const Descriptions& tribes) const {
+ProductionProgram::ActReturn::EconomyNeedsWare::description_negation(const Descriptions& descriptions) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn't need the
 	 * ware '%s' */
 	std::string result = (boost::format(_("the economy doesn’t need the ware ‘%s’")) %
-	                      tribes.get_ware_descr(ware_type)->descname())
+	                      descriptions.get_ware_descr(ware_type)->descname())
 	                        .str();
 	return result;
 }
@@ -473,21 +472,21 @@ bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate(const Production
 	return ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type);
 }
 std::string
-ProductionProgram::ActReturn::EconomyNeedsWorker::description(const Descriptions& tribes) const {
+ProductionProgram::ActReturn::EconomyNeedsWorker::description(const Descriptions& descriptions) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker
 	 * '%s' */
 	std::string result = (boost::format(_("the economy needs the worker ‘%s’")) %
-	                      tribes.get_worker_descr(worker_type)->descname())
+	                      descriptions.get_worker_descr(worker_type)->descname())
 	                        .str();
 	return result;
 }
 
 std::string
-ProductionProgram::ActReturn::EconomyNeedsWorker::description_negation(const Descriptions& tribes) const {
+ProductionProgram::ActReturn::EconomyNeedsWorker::description_negation(const Descriptions& descriptions) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... */
 	/** TRANSLATORS:      ... because the economy doesn’t need the worker '%s' */
 	std::string result = (boost::format(_("the economy doesn’t need the worker ‘%s’")) %
-	                      tribes.get_worker_descr(worker_type)->descname())
+	                      descriptions.get_worker_descr(worker_type)->descname())
 	                        .str();
 	return result;
 }
@@ -495,9 +494,9 @@ ProductionProgram::ActReturn::EconomyNeedsWorker::description_negation(const Des
 ProductionProgram::ActReturn::SiteHas::SiteHas(std::vector<std::string>::const_iterator begin,
                                                std::vector<std::string>::const_iterator end,
                                                const ProductionSiteDescr& descr,
-                                               const Descriptions& tribes) {
+                                               const Descriptions& descriptions) {
 	try {
-		group = parse_ware_type_groups(begin, end, descr, tribes).front();
+		group = parse_ware_type_groups(begin, end, descr, descriptions).front();
 	} catch (const GameDataError& e) {
 		throw GameDataError("Expected <ware or worker>[,<ware or worker>[,...]][:<amount>] after "
 		                    "'site has' but got %s",
@@ -522,12 +521,12 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 	return false;
 }
 
-std::string ProductionProgram::ActReturn::SiteHas::description(const Descriptions& tribes) const {
+std::string ProductionProgram::ActReturn::SiteHas::description(const Descriptions& descriptions) const {
 	std::vector<std::string> condition_list;
 	for (const auto& entry : group.first) {
 		condition_list.push_back(entry.second == wwWARE ?
-		                            tribes.get_ware_descr(entry.first)->descname() :
-		                            tribes.get_worker_descr(entry.first)->descname());
+		                            descriptions.get_ware_descr(entry.first)->descname() :
+		                            descriptions.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -546,12 +545,12 @@ std::string ProductionProgram::ActReturn::SiteHas::description(const Description
 }
 
 std::string
-ProductionProgram::ActReturn::SiteHas::description_negation(const Descriptions& tribes) const {
+ProductionProgram::ActReturn::SiteHas::description_negation(const Descriptions& descriptions) const {
 	std::vector<std::string> condition_list;
 	for (const auto& entry : group.first) {
 		condition_list.push_back(entry.second == wwWARE ?
-		                            tribes.get_ware_descr(entry.first)->descname() :
-		                            tribes.get_worker_descr(entry.first)->descname());
+		                            descriptions.get_ware_descr(entry.first)->descname() :
+		                            descriptions.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -594,23 +593,23 @@ ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& a
                                                std::vector<std::string>::const_iterator& begin,
                                                std::vector<std::string>::const_iterator& end,
                                                const ProductionSiteDescr& descr,
-                                               const Descriptions& tribes) {
+                                               const Descriptions& descriptions) {
 	if (begin == end) {
 		throw GameDataError("Expected a condition after '%s'", (begin - 1)->c_str());
 	}
 	try {
 		if (match_and_skip(arguments, begin, "not")) {
-			return new ActReturn::Negation(arguments, begin, end, descr, tribes);
+			return new ActReturn::Negation(arguments, begin, end, descr, descriptions);
 		} else if (match_and_skip(arguments, begin, "economy")) {
 			if (!match_and_skip(arguments, begin, "needs")) {
 				throw GameDataError("Expected 'needs' after 'economy' but found '%s'", begin->c_str());
 			}
-			return create_economy_condition(*begin, descr, tribes);
+			return create_economy_condition(*begin, descr, descriptions);
 		} else if (match_and_skip(arguments, begin, "site")) {
 			if (!match_and_skip(arguments, begin, "has")) {
 				throw GameDataError("Expected 'has' after 'site' but found '%s'", begin->c_str());
 			}
-			return new ProductionProgram::ActReturn::SiteHas(begin, end, descr, tribes);
+			return new ProductionProgram::ActReturn::SiteHas(begin, end, descr, descriptions);
 		} else if (match_and_skip(arguments, begin, "workers")) {
 			if (!match_and_skip(arguments, begin, "need")) {
 				throw GameDataError(
@@ -632,7 +631,7 @@ ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& a
 
 ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& arguments,
                                         const ProductionSiteDescr& descr,
-                                        const Descriptions& tribes) {
+                                        const Descriptions& descriptions) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: return=failed|completed|skipped [when|unless <conditions>]");
 	}
@@ -653,7 +652,7 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 
 	// Parse all arguments starting from the given iterator into our 'conditions_', splitting
 	// individual conditions by the given 'separator'
-	auto parse_conditions = [this, &descr, &tribes](const std::vector<std::string>& args,
+	auto parse_conditions = [this, &descr, &descriptions](const std::vector<std::string>& args,
 	                                                std::vector<std::string>::const_iterator it,
 	                                                const std::string& separator) {
 		while (it != args.end()) {
@@ -666,7 +665,7 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 				   "Expected: [%s] <condition> after '%s'", separator.c_str(), (it - 1)->c_str());
 			}
 
-			conditions_.push_back(create_condition(args, it, end, descr, tribes));
+			conditions_.push_back(create_condition(args, it, end, descr, descriptions));
 			match_and_skip(args, end, separator);
 			it = end;
 		}
@@ -699,14 +698,14 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 				if (!condition->evaluate(ps)) {   //  A condition is false,
 					return ps.program_step(game);  //  continue program.
 				}
-				condition_list.push_back(condition->description(game.tribes()));
+				condition_list.push_back(condition->description(game.descriptions()));
 			}
 		} else {  //  "unless a or b or ..." (all conditions must be false)
 			for (const Condition* condition : conditions_) {
 				if (condition->evaluate(ps)) {    //  A condition is true,
 					return ps.program_step(game);  //  continue program.
 				}
-				condition_list.push_back(condition->description_negation(game.tribes()));
+				condition_list.push_back(condition->description_negation(game.descriptions()));
 			}
 		}
 		std::string condition_string =
@@ -920,7 +919,7 @@ Calls a program of the productionsite's main worker. Example:
 ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& arguments,
                                                 const std::string& production_program_name,
                                                 ProductionSiteDescr* descr,
-                                                const Descriptions& tribes) {
+                                                const Descriptions& descriptions) {
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: callworker=<worker_program_name>");
 	}
@@ -930,7 +929,7 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 	//  Quote from "void ProductionSite::program_act(Game &)":
 	//  "Always main worker is doing stuff"
 	const WorkerDescr& main_worker_descr =
-	   *tribes.get_worker_descr(descr->working_positions().front().first);
+	   *descriptions.get_worker_descr(descr->working_positions().front().first);
 
 	WorkerProgram const* workerprogram = main_worker_descr.get_program(program_);
 
@@ -1121,13 +1120,13 @@ Examples:
 */
 ProductionProgram::ActConsume::ActConsume(const std::vector<std::string>& arguments,
                                           const ProductionSiteDescr& descr,
-                                          const Descriptions& tribes) {
+                                          const Descriptions& descriptions) {
 	if (arguments.empty()) {
 		throw GameDataError(
 		   "Usage: consume=<ware or worker>[,<ware or worker>[,...]][:<amount>] ...");
 	}
 	consumed_wares_workers_ =
-	   parse_ware_type_groups(arguments.begin(), arguments.end(), descr, tribes);
+	   parse_ware_type_groups(arguments.begin(), arguments.end(), descr, descriptions);
 }
 
 void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) const {
@@ -1278,11 +1277,11 @@ type specified by
 */
 ProductionProgram::ActProduce::ActProduce(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
-                                          Descriptions& tribes) {
+                                          Descriptions& descriptions) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: produce=<ware name>[:<amount>] [<ware name>[:<amount>]...]");
 	}
-	produced_wares_ = parse_bill_of_materials(arguments, WareWorker::wwWARE, tribes);
+	produced_wares_ = parse_bill_of_materials(arguments, WareWorker::wwWARE, descriptions);
 
 	// Add to building outputs for help and AI
 	for (auto& produced_ware : produced_wares_) {
@@ -1362,11 +1361,11 @@ then leave the site looking for employment. The produced workers are of the type
 */
 ProductionProgram::ActRecruit::ActRecruit(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
-                                          Descriptions& tribes) {
+                                          Descriptions& descriptions) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: recruit=<worker_name>[:<amount>] [<worker_name>[:<amount>]...]");
 	}
-	recruited_workers_ = parse_bill_of_materials(arguments, WareWorker::wwWORKER, tribes);
+	recruited_workers_ = parse_bill_of_materials(arguments, WareWorker::wwWORKER, descriptions);
 
 	// Add to building outputs for help and AI
 	for (auto& recruited_worker : recruited_workers_) {
@@ -1458,7 +1457,7 @@ mine
      }
 */
 ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
-                                    World& world,
+                                    Descriptions& descriptions,
                                     const std::string& production_program_name,
                                     ProductionSiteDescr* descr) {
 	if (arguments.size() != 5 && arguments.size() != 4) {
@@ -1472,7 +1471,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 		log_warn("Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
 		         "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
 		         descr->name().c_str());
-		resource_ = world.load_resource(arguments.front());
+		resource_ = descriptions.load_resource(arguments.front());
 		workarea_ = read_positive(arguments.at(1));
 		max_resources_ = read_positive(arguments.at(2)) * 100U;
 		depleted_chance_ = read_positive(arguments.at(3)) * 100U;
@@ -1483,7 +1482,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 		for (const std::string& argument : arguments) {
 			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 			if (item.second.empty()) {
-				resource_ = world.load_resource(item.first);
+				resource_ = descriptions.load_resource(item.first);
 			} else if (item.first == "radius") {
 				workarea_ = read_positive(item.second);
 			} else if (item.first == "yield") {
@@ -1502,7 +1501,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	}
 
 	const std::string description = descr->name() + " " + production_program_name + " mine " +
-	                                world.get_resource(resource_)->name();
+	                                descriptions.get_resource(resource_)->name();
 	descr->workarea_info_[workarea_].insert(description);
 
 	descr->add_collected_resource(arguments.front());
@@ -1881,6 +1880,7 @@ void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) co
 	return ps.program_step(game);
 }
 
+// NOCOM lua_tribes_immovables
 /* RST
 construct
 ---------
@@ -1920,7 +1920,7 @@ an immovable. Example:
 ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& arguments,
                                               const std::string& production_program_name,
                                               ProductionSiteDescr* descr,
-                                              const Descriptions& tribes) {
+                                              const Descriptions& descriptions) {
 	if (arguments.size() != 3) {
 		throw GameDataError(
 		   "Usage: construct=<immovable_name> worker:<program_name> radius:<number>");
@@ -1957,7 +1957,7 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 
 	// Register created immovable with productionsite
 	const WorkerDescr& main_worker_descr =
-	   *tribes.get_worker_descr(descr->working_positions().front().first);
+	   *descriptions.get_worker_descr(descr->working_positions().front().first);
 	for (const auto& attribute_info :
 	     main_worker_descr.get_program(workerprogram)->created_attributes()) {
 		descr->add_created_attribute(attribute_info);
@@ -1965,8 +1965,8 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 }
 
 const ImmovableDescr&
-ProductionProgram::ActConstruct::get_construction_descr(const Descriptions& tribes) const {
-	const ImmovableDescr* descr = tribes.get_immovable_descr(tribes.immovable_index(objectname));
+ProductionProgram::ActConstruct::get_construction_descr(const Descriptions& descriptions) const {
+	const ImmovableDescr* descr = descriptions.get_immovable_descr(descriptions.immovable_index(objectname));
 	if (!descr) {
 		throw wexception("ActConstruct: immovable '%s' does not exist", objectname.c_str());
 	}
@@ -1976,7 +1976,7 @@ ProductionProgram::ActConstruct::get_construction_descr(const Descriptions& trib
 
 void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite) const {
 	ProductionSite::State& state = psite.top_state();
-	const ImmovableDescr& descr = get_construction_descr(game.tribes());
+	const ImmovableDescr& descr = get_construction_descr(game.descriptions());
 
 	// Early check for no resources
 	const Buildcost& buildcost = descr.buildcost();
@@ -2068,7 +2068,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 			return false;
 		}
 	} else {
-		const ImmovableDescr& descr = get_construction_descr(game.tribes());
+		const ImmovableDescr& descr = get_construction_descr(game.descriptions());
 		remaining = descr.buildcost();
 	}
 
@@ -2087,7 +2087,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 
 	// Second step: give ware to worker
 	WareInstance* ware =
-	   new WareInstance(wq->get_index(), game.tribes().get_ware_descr(wq->get_index()));
+	   new WareInstance(wq->get_index(), game.descriptions().get_ware_descr(wq->get_index()));
 	ware->init(game);
 	worker.set_carried_ware(game, ware);
 	wq->set_filled(wq->get_filled() - 1);
@@ -2109,8 +2109,7 @@ void ProductionProgram::ActConstruct::building_work_failed(Game& game,
 
 ProductionProgram::ProductionProgram(const std::string& init_name,
                                      const LuaTable& program_table,
-                                     Descriptions& tribes,
-                                     World& world,
+                                     Descriptions& descriptions,
                                      ProductionSiteDescr* building)
    : MapObjectProgram(init_name), descname_(program_table.get_string("descname")) {
 
@@ -2125,7 +2124,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 
 			if (parseinput.name == "return") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActReturn(parseinput.arguments, *building, tribes)));
+				   new ActReturn(parseinput.arguments, *building, descriptions)));
 			} else if (parseinput.name == "call") {
 				actions_.push_back(
 				   std::unique_ptr<ProductionProgram::Action>(new ActCall(parseinput.arguments)));
@@ -2137,19 +2136,19 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   new ActAnimate(parseinput.arguments, building)));
 			} else if (parseinput.name == "consume") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActConsume(parseinput.arguments, *building, tribes)));
+				   new ActConsume(parseinput.arguments, *building, descriptions)));
 			} else if (parseinput.name == "produce") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActProduce(parseinput.arguments, *building, tribes)));
+				   new ActProduce(parseinput.arguments, *building, descriptions)));
 			} else if (parseinput.name == "recruit") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActRecruit(parseinput.arguments, *building, tribes)));
+				   new ActRecruit(parseinput.arguments, *building, descriptions)));
 			} else if (parseinput.name == "callworker") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActCallWorker(parseinput.arguments, name(), building, tribes)));
+				   new ActCallWorker(parseinput.arguments, name(), building, descriptions)));
 			} else if (parseinput.name == "mine") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActMine(parseinput.arguments, world, name(), building)));
+				   new ActMine(parseinput.arguments, descriptions, name(), building)));
 			} else if (parseinput.name == "checksoldier") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActCheckSoldier(parseinput.arguments, *building)));
@@ -2161,7 +2160,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   new ActPlaySound(parseinput.arguments, *building)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActConstruct(parseinput.arguments, name(), building, tribes)));
+				   new ActConstruct(parseinput.arguments, name(), building, descriptions)));
 			} else {
 				throw GameDataError(
 				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());

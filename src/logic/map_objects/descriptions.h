@@ -37,10 +37,41 @@
 
 namespace Widelands {
 
+class CritterDescr;
+class ImmovableDescr;
+class ResourceDescription;
+class TerrainDescription;
+
 class Descriptions {
 public:
 	Descriptions(DescriptionManager* description_manager, LuaInterface* lua);
 	~Descriptions() = default;
+
+	// NOCOM sort these
+	const DescriptionMaintainer<TerrainDescription>& terrains() const;
+	TerrainDescription& terrain_descr(DescriptionIndex i) const;
+	const TerrainDescription* terrain_descr(const std::string& name) const;
+	DescriptionIndex get_terrain_index(const std::string& name) const;
+	DescriptionIndex safe_terrain_index(const std::string& name) const;
+	DescriptionIndex get_nr_terrains() const;
+
+	const DescriptionMaintainer<CritterDescr>& critters() const;
+	DescriptionIndex critter_index(const std::string& name) const;
+	DescriptionIndex safe_critter_index(const std::string& name) const;
+	CritterDescr const* get_critter_descr(DescriptionIndex index) const;
+	CritterDescr const* get_critter_descr(const std::string& name) const;
+	DescriptionIndex get_nr_critters() const;
+
+
+	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
+	DescriptionIndex get_nr_immovables() const;
+
+	DescriptionIndex resource_index(const std::string& name) const;
+	DescriptionIndex safe_resource_index(const std::string& warename) const;
+	ResourceDescription const* get_resource(DescriptionIndex res) const;
+	DescriptionIndex get_nr_resources() const;
+
+
 
 	size_t nrbuildings() const;
 	size_t nrtribes() const;
@@ -89,10 +120,18 @@ public:
 	void register_scenario_tribes(FileSystem* filesystem);
 
 	/// Add a tribe object type to the tribes.
-	void add_tribe_object_type(const LuaTable& table, World& world, MapObjectType type);
+	void add_object_description(const LuaTable& table, MapObjectType type);
 
 	/// Adds a specific tribe's configuration.
-	void add_tribe(const LuaTable& table, const World& world);
+	void add_tribe(const LuaTable& table);
+
+
+	/// Load a critter that has been registered previously with 'register_description'
+	DescriptionIndex load_critter(const std::string& crittername);
+	/// Load a resource that has been registered previously with 'register_description'
+	DescriptionIndex load_resource(const std::string& resourcename);
+	/// Load a terrain that has been registered previously with 'register_description'
+	DescriptionIndex load_terrain(const std::string& terrainname);
 
 	/// Load a tribe that has been registered previously with 'register_description'
 	DescriptionIndex load_tribe(const std::string& tribename);
@@ -115,8 +154,11 @@ public:
 	void increase_largest_workarea(uint32_t workarea);
 
 private:
-	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
+	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
+	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
+	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;
+	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ShipDescr>> ships_;
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;

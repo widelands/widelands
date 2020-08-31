@@ -223,11 +223,10 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	maploader->preload_map(true);
 	change_loader_ui_background(map().get_background());
 
-	world();
-	tribes();
+	descriptions();
 
 	// If the map is a scenario with custom tribe entites, load them too.
-	mutable_tribes()->register_scenario_tribes(map().filesystem());
+	mutable_descriptions()->register_scenario_tribes(map().filesystem());
 
 	// We have to create the players here.
 	PlayerNumber const nr_players = map().get_nrplayers();
@@ -237,8 +236,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 		if (tribe.empty()) {
 			log_info_time(
 			   get_gametime(), "Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
-			const DescriptionIndex random = std::rand() % tribes().nrtribes();  // NOLINT
-			tribe = tribes().get_tribe_descr(random)->name();
+			const DescriptionIndex random = std::rand() % descriptions().nrtribes();  // NOLINT
+			tribe = descriptions().get_tribe_descr(random)->name();
 		}
 		add_player(p, 0, tribe, map().get_scenario_player_name(p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
@@ -278,8 +277,7 @@ void Game::init_newgame(const GameSettings& settings) {
 	maploader->preload_map(settings.scenario);
 	change_loader_ui_background(map().get_background());
 
-	world();
-	tribes();
+	descriptions();
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
@@ -494,7 +492,7 @@ bool Game::run(StartGameType const start_game_type,
 		}
 
 		// Prepare the map, set default textures
-		mutable_map()->recalc_default_resources(world());
+		mutable_map()->recalc_default_resources(descriptions());
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players
@@ -739,7 +737,7 @@ void Game::send_player_dismantle(PlayerImmovable& pi, bool kw) {
 }
 
 void Game::send_player_build(int32_t const pid, const Coords& coords, DescriptionIndex const id) {
-	assert(tribes().building_exists(id));
+	assert(descriptions().building_exists(id));
 	send_player_command(new CmdBuild(get_gametime(), pid, coords, id));
 }
 

@@ -398,7 +398,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 	map_.recalc_whole_map(egbase);
 
-	map_.ensure_resource_consistency(egbase.world());
+	map_.ensure_resource_consistency(egbase.descriptions());
 
 	set_state(State::kLoaded);
 

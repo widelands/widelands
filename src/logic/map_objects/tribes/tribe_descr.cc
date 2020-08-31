@@ -40,16 +40,15 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/note_loading_message.h"
 
 namespace {
 
-// Recursively get attributes for world immovable growth cycle
-void walk_world_immovables(
+// Recursively get attributes for immovable growth cycle
+void walk_immovables(
    Widelands::DescriptionIndex index,
-   const Widelands::World& world,
+   const Widelands::Descriptions& descriptions,
    std::set<Widelands::DescriptionIndex>* walked_immovables,
    const std::set<Widelands::MapObjectDescr::AttributeIndex>& needed_attributes,
    std::set<std::string>* deduced_immovables,
@@ -61,7 +60,7 @@ void walk_world_immovables(
 	walked_immovables->insert(index);
 
 	// Insert this immovable's attributes
-	const Widelands::ImmovableDescr* immovable_descr = world.get_immovable_descr(index);
+	const Widelands::ImmovableDescr* immovable_descr = descriptions.get_immovable_descr(index);
 	for (const Widelands::MapObjectDescr::AttributeIndex id : immovable_descr->attributes()) {
 		if (needed_attributes.count(id) == 1) {
 			deduced_immovables->insert(immovable_descr->name());
@@ -77,51 +76,9 @@ void walk_world_immovables(
 			return;
 		case Widelands::MapObjectType::IMMOVABLE: {
 			const Widelands::DescriptionIndex becomes_index =
-			   world.get_immovable_index(imm_becomes.second);
+			   descriptions.immovable_index(imm_becomes.second);
 			assert(becomes_index != Widelands::INVALID_INDEX);
-			walk_world_immovables(becomes_index, world, walked_immovables, needed_attributes,
-			                      deduced_immovables, deduced_bobs);
-		} break;
-		default:
-			NEVER_HERE();
-		}
-	}
-}
-
-// Recursively get attributes for tribe immovable growth cycle
-void walk_tribe_immovables(
-   Widelands::DescriptionIndex index,
-   const Widelands::TribeDescr& tribe,
-   std::set<Widelands::DescriptionIndex>* walked_immovables,
-   const std::set<Widelands::MapObjectDescr::AttributeIndex>& needed_attributes,
-   std::set<std::string>* deduced_immovables,
-   std::set<std::string>* deduced_bobs) {
-	// Protect against endless recursion
-	if (walked_immovables->count(index) == 1) {
-		return;
-	}
-	walked_immovables->insert(index);
-
-	// Insert this immovable's attributes
-	const Widelands::ImmovableDescr* immovable_descr = tribe.get_immovable_descr(index);
-	for (const Widelands::MapObjectDescr::AttributeIndex id : immovable_descr->attributes()) {
-		if (needed_attributes.count(id) == 1) {
-			deduced_immovables->insert(immovable_descr->name());
-		}
-	}
-
-	// Check immovables that this immovable can turn into
-	for (const auto& imm_becomes : immovable_descr->becomes()) {
-		switch (imm_becomes.first) {
-		case Widelands::MapObjectType::BOB:
-			deduced_bobs->insert(imm_becomes.second);
-			// Bobs don't transform further
-			return;
-		case Widelands::MapObjectType::IMMOVABLE: {
-			const Widelands::DescriptionIndex becomes_index =
-			   tribe.immovable_index(imm_becomes.second);
-			assert(becomes_index != Widelands::INVALID_INDEX);
-			walk_tribe_immovables(becomes_index, tribe, walked_immovables, needed_attributes,
+			walk_immovables(becomes_index, descriptions, walked_immovables, needed_attributes,
 			                      deduced_immovables, deduced_bobs);
 		} break;
 		default:
@@ -138,13 +95,12 @@ namespace Widelands {
  * /data/tribes/atlanteans.lua
  */
 TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
-                       Descriptions& tribes,
-                       const World& world,
+                       Descriptions& descriptions,
                        const LuaTable& table,
                        const LuaTable* scenario_table)
    : name_(table.get_string("name")),
      descname_(info.descname),
-     tribes_(tribes),
+     descriptions_(descriptions),
      bridge_height_(table.get_int("bridge_height")),
      builder_(Widelands::INVALID_INDEX),
      carrier_(Widelands::INVALID_INDEX),
@@ -168,35 +124,35 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 	try {
 		log_info("┃    Ships: ");
 		set_progress_message(_("Ships"), 1);
-		load_ships(table, tribes);
+		load_ships(table, descriptions);
 		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		log_info("┃    Immovables: ");
 		set_progress_message(_("Immovables"), 2);
-		load_immovables(table, tribes, world);
+		load_immovables(table, descriptions);
 		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		log_info("┃    Wares: ");
 		set_progress_message(_("Wares"), 3);
-		load_wares(table, tribes);
+		load_wares(table, descriptions);
 		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
-			load_wares(*scenario_table, tribes);
+			load_wares(*scenario_table, descriptions);
 		}
 		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		log_info("┃    Workers: ");
 		set_progress_message(_("Workers"), 4);
-		load_workers(table, tribes);
+		load_workers(table, descriptions);
 		if (scenario_table != nullptr && scenario_table->has_key("workers_order")) {
-			load_workers(*scenario_table, tribes);
+			load_workers(*scenario_table, descriptions);
 		}
 		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		log_info("┃    Buildings: ");
 		set_progress_message(_("Buildings"), 5);
-		load_buildings(table, tribes);
+		load_buildings(table, descriptions);
 		if (scenario_table != nullptr && scenario_table->has_key("buildings")) {
-			load_buildings(*scenario_table, tribes);
+			load_buildings(*scenario_table, descriptions);
 		}
 		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
@@ -210,7 +166,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
 		}
-		finalize_loading(tribes, world);
+		finalize_loading(descriptions);
 		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
@@ -310,17 +266,17 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 	}
 }
 
-void TribeDescr::load_ships(const LuaTable& table, Descriptions& tribes) {
+void TribeDescr::load_ships(const LuaTable& table, Descriptions& descriptions) {
 	const std::string shipname(table.get_string("ship"));
 	try {
-		ship_ = tribes.load_ship(shipname);
+		ship_ = descriptions.load_ship(shipname);
 	} catch (const WException& e) {
 		throw GameDataError("Failed adding ship '%s': %s", shipname.c_str(), e.what());
 	}
 	ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
 }
 
-void TribeDescr::load_wares(const LuaTable& table, Descriptions& tribes) {
+void TribeDescr::load_wares(const LuaTable& table, Descriptions& descriptions) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("wares_order");
 
 	for (const int column_key : items_table->keys<int>()) {
@@ -330,13 +286,13 @@ void TribeDescr::load_wares(const LuaTable& table, Descriptions& tribes) {
 			std::unique_ptr<LuaTable> ware_table = column_table->get_table(ware_key);
 			std::string ware_name = ware_table->get_string("name");
 			try {
-				DescriptionIndex wareindex = tribes.load_ware(ware_name);
+				DescriptionIndex wareindex = descriptions.load_ware(ware_name);
 				if (has_ware(wareindex)) {
 					throw GameDataError("Duplicate definition of ware");
 				}
 
 				// Set default_target_quantity (optional) and preciousness
-				WareDescr* ware_descr = tribes.get_mutable_ware_descr(wareindex);
+				WareDescr* ware_descr = descriptions.get_mutable_ware_descr(wareindex);
 				if (ware_table->has_key("default_target_quantity")) {
 					ware_descr->set_default_target_quantity(
 					   name(), ware_table->get_int("default_target_quantity"));
@@ -356,11 +312,11 @@ void TribeDescr::load_wares(const LuaTable& table, Descriptions& tribes) {
 	}
 }
 
-void TribeDescr::load_immovables(const LuaTable& table, Descriptions& tribes, const World& world) {
+void TribeDescr::load_immovables(const LuaTable& table, Descriptions& descriptions) {
 	for (const std::string& immovablename :
 	     table.get_table("immovables")->array_entries<std::string>()) {
 		try {
-			DescriptionIndex index = tribes.load_immovable(immovablename);
+			DescriptionIndex index = descriptions.load_immovable(immovablename);
 			if (immovables_.count(index) == 1) {
 				throw GameDataError("Duplicate definition of immovable '%s'", immovablename.c_str());
 			}
@@ -376,7 +332,7 @@ void TribeDescr::load_immovables(const LuaTable& table, Descriptions& tribes, co
 		std::unique_ptr<LuaTable> tbl = items_table->get_table(resource);
 		const std::set<int> keys = tbl->keys<int>();
 		for (int upper_limit : keys) {
-			resis[upper_limit] = tribes.load_immovable(tbl->get_string(upper_limit));
+			resis[upper_limit] = descriptions.load_immovable(tbl->get_string(upper_limit));
 		}
 		if (resis.empty()) {
 			throw GameDataError("Tribe has no indicators for resource %s.", resource.c_str());
@@ -385,9 +341,9 @@ void TribeDescr::load_immovables(const LuaTable& table, Descriptions& tribes, co
 	};
 
 	// Verify the resource indicators
-	for (DescriptionIndex resource_index = 0; resource_index < world.get_nr_resources();
+	for (DescriptionIndex resource_index = 0; resource_index < descriptions.get_nr_resources();
 	     resource_index++) {
-		const ResourceDescription* res = world.get_resource(resource_index);
+		const ResourceDescription* res = descriptions.get_resource(resource_index);
 		if (res->detectable()) {
 			// This function will throw an exception if this tribe doesn't have a high enough resource
 			// indicator for this resource
@@ -398,7 +354,7 @@ void TribeDescr::load_immovables(const LuaTable& table, Descriptions& tribes, co
 	get_resource_indicator(nullptr, 0);
 }
 
-void TribeDescr::load_workers(const LuaTable& table, Descriptions& tribes) {
+void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("workers_order");
 
 	for (const int column_key : items_table->keys<int>()) {
@@ -408,13 +364,13 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& tribes) {
 			std::unique_ptr<LuaTable> worker_table = column_table->get_table(worker_key);
 			std::string workername = worker_table->get_string("name");
 			try {
-				DescriptionIndex workerindex = tribes.load_worker(workername);
+				DescriptionIndex workerindex = descriptions.load_worker(workername);
 				if (has_worker(workerindex)) {
 					throw GameDataError("Duplicate definition of worker");
 				}
 
 				// Set default_target_quantity and preciousness (both optional)
-				WorkerDescr* worker_descr = tribes.get_mutable_worker_descr(workerindex);
+				WorkerDescr* worker_descr = descriptions.get_mutable_worker_descr(workerindex);
 				if (worker_table->has_key("default_target_quantity")) {
 					if (!worker_table->has_key("preciousness")) {
 						throw GameDataError(
@@ -445,33 +401,33 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& tribes) {
 	}
 
 	if (table.has_key("builder")) {
-		builder_ = add_special_worker(table.get_string("builder"), tribes);
+		builder_ = add_special_worker(table.get_string("builder"), descriptions);
 	}
 	if (table.has_key("carrier")) {
-		carrier_ = add_special_worker(table.get_string("carrier"), tribes);
+		carrier_ = add_special_worker(table.get_string("carrier"), descriptions);
 	}
 	if (table.has_key("carrier2")) {
-		carrier2_ = add_special_worker(table.get_string("carrier2"), tribes);
+		carrier2_ = add_special_worker(table.get_string("carrier2"), descriptions);
 	}
 	if (table.has_key("geologist")) {
-		geologist_ = add_special_worker(table.get_string("geologist"), tribes);
+		geologist_ = add_special_worker(table.get_string("geologist"), descriptions);
 	}
 	if (table.has_key("soldier")) {
-		soldier_ = add_special_worker(table.get_string("soldier"), tribes);
+		soldier_ = add_special_worker(table.get_string("soldier"), descriptions);
 	}
 	if (table.has_key("ferry")) {
-		ferry_ = add_special_worker(table.get_string("ferry"), tribes);
+		ferry_ = add_special_worker(table.get_string("ferry"), descriptions);
 	}
 }
 
-void TribeDescr::load_buildings(const LuaTable& table, Descriptions& tribes) {
+void TribeDescr::load_buildings(const LuaTable& table, Descriptions& descriptions) {
 	for (const std::string& buildingname :
 	     table.get_table("buildings")->array_entries<std::string>()) {
-		add_building(buildingname, tribes);
+		add_building(buildingname, descriptions);
 	}
 
 	if (table.has_key("port")) {
-		port_ = add_special_building(table.get_string("port"), tribes);
+		port_ = add_special_building(table.get_string("port"), descriptions);
 	}
 }
 
@@ -526,74 +482,74 @@ bool TribeDescr::is_construction_material(const DescriptionIndex& index) const {
 }
 
 DescriptionIndex TribeDescr::building_index(const std::string& buildingname) const {
-	return tribes_.building_index(buildingname);
+	return descriptions_.building_index(buildingname);
 }
 
 DescriptionIndex TribeDescr::immovable_index(const std::string& immovablename) const {
-	return tribes_.immovable_index(immovablename);
+	return descriptions_.immovable_index(immovablename);
 }
 DescriptionIndex TribeDescr::ware_index(const std::string& warename) const {
-	return tribes_.ware_index(warename);
+	return descriptions_.ware_index(warename);
 }
 DescriptionIndex TribeDescr::worker_index(const std::string& workername) const {
-	return tribes_.worker_index(workername);
+	return descriptions_.worker_index(workername);
 }
 
 DescriptionIndex TribeDescr::safe_building_index(const std::string& buildingname) const {
-	return tribes_.safe_building_index(buildingname);
+	return descriptions_.safe_building_index(buildingname);
 }
 
 DescriptionIndex TribeDescr::safe_ware_index(const std::string& warename) const {
-	return tribes_.safe_ware_index(warename);
+	return descriptions_.safe_ware_index(warename);
 }
 DescriptionIndex TribeDescr::safe_worker_index(const std::string& workername) const {
-	return tribes_.safe_worker_index(workername);
+	return descriptions_.safe_worker_index(workername);
 }
 
 WareDescr const* TribeDescr::get_ware_descr(const DescriptionIndex& index) const {
-	return tribes_.get_ware_descr(index);
+	return descriptions_.get_ware_descr(index);
 }
 WorkerDescr const* TribeDescr::get_worker_descr(const DescriptionIndex& index) const {
-	return tribes_.get_worker_descr(index);
+	return descriptions_.get_worker_descr(index);
 }
 
 BuildingDescr const* TribeDescr::get_building_descr(const DescriptionIndex& index) const {
-	return tribes_.get_building_descr(index);
+	return descriptions_.get_building_descr(index);
 }
 ImmovableDescr const* TribeDescr::get_immovable_descr(const DescriptionIndex& index) const {
-	return tribes_.get_immovable_descr(index);
+	return descriptions_.get_immovable_descr(index);
 }
 
 DescriptionIndex TribeDescr::builder() const {
-	assert(tribes_.worker_exists(builder_));
+	assert(descriptions_.worker_exists(builder_));
 	return builder_;
 }
 DescriptionIndex TribeDescr::carrier() const {
-	assert(tribes_.worker_exists(carrier_));
+	assert(descriptions_.worker_exists(carrier_));
 	return carrier_;
 }
 DescriptionIndex TribeDescr::carrier2() const {
-	assert(tribes_.worker_exists(carrier2_));
+	assert(descriptions_.worker_exists(carrier2_));
 	return carrier2_;
 }
 DescriptionIndex TribeDescr::geologist() const {
-	assert(tribes_.worker_exists(geologist_));
+	assert(descriptions_.worker_exists(geologist_));
 	return geologist_;
 }
 DescriptionIndex TribeDescr::soldier() const {
-	assert(tribes_.worker_exists(soldier_));
+	assert(descriptions_.worker_exists(soldier_));
 	return soldier_;
 }
 DescriptionIndex TribeDescr::ship() const {
-	assert(tribes_.ship_exists(ship_));
+	assert(descriptions_.ship_exists(ship_));
 	return ship_;
 }
 DescriptionIndex TribeDescr::port() const {
-	assert(tribes_.building_exists(port_));
+	assert(descriptions_.building_exists(port_));
 	return port_;
 }
 DescriptionIndex TribeDescr::ferry() const {
-	assert(tribes_.worker_exists(ferry_));
+	assert(descriptions_.worker_exists(ferry_));
 	return ferry_;
 }
 
@@ -672,9 +628,9 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	return list->second.find(lowest)->second;
 }
 
-void TribeDescr::add_building(const std::string& buildingname, Descriptions& tribes) {
+void TribeDescr::add_building(const std::string& buildingname, Descriptions& descriptions) {
 	try {
-		DescriptionIndex index = tribes.load_building(buildingname);
+		DescriptionIndex index = descriptions.load_building(buildingname);
 		if (has_building(index)) {
 			throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
 		}
@@ -685,7 +641,7 @@ void TribeDescr::add_building(const std::string& buildingname, Descriptions& tri
 		// Register at enhanced building
 		const DescriptionIndex& enhancement = building_descr->enhancement();
 		if (enhancement != INVALID_INDEX) {
-			tribes.get_mutable_building_descr(enhancement)->set_enhanced_from(index);
+			descriptions.get_mutable_building_descr(enhancement)->set_enhanced_from(index);
 		}
 
 		// Register trainigsites
@@ -717,9 +673,9 @@ ToolbarImageset* TribeDescr::toolbar_image_set() const {
  * Helper functions
  */
 
-DescriptionIndex TribeDescr::add_special_worker(const std::string& workername, Descriptions& tribes) {
+DescriptionIndex TribeDescr::add_special_worker(const std::string& workername, Descriptions& descriptions) {
 	try {
-		DescriptionIndex worker = tribes.load_worker(workername);
+		DescriptionIndex worker = descriptions.load_worker(workername);
 		if (!has_worker(worker)) {
 			throw GameDataError("This tribe doesn't have the worker '%s'", workername.c_str());
 		}
@@ -729,9 +685,9 @@ DescriptionIndex TribeDescr::add_special_worker(const std::string& workername, D
 	}
 }
 
-DescriptionIndex TribeDescr::add_special_building(const std::string& buildingname, Descriptions& tribes) {
+DescriptionIndex TribeDescr::add_special_building(const std::string& buildingname, Descriptions& descriptions) {
 	try {
-		DescriptionIndex building = tribes.load_building(buildingname);
+		DescriptionIndex building = descriptions.load_building(buildingname);
 		if (!has_building(building)) {
 			throw GameDataError("This tribe doesn't have the building '%s'", buildingname.c_str());
 		}
@@ -742,7 +698,7 @@ DescriptionIndex TribeDescr::add_special_building(const std::string& buildingnam
 	}
 }
 
-void TribeDescr::finalize_loading(Descriptions& tribes, const World& world) {
+void TribeDescr::finalize_loading(Descriptions& descriptions) {
 	// Validate special units
 	if (builder_ == Widelands::INVALID_INDEX) {
 		throw GameDataError("special worker 'builder' not defined");
@@ -769,17 +725,17 @@ void TribeDescr::finalize_loading(Descriptions& tribes, const World& world) {
 		throw GameDataError("special unit 'ship' not defined");
 	}
 
-	calculate_trainingsites_proportions(tribes);
-	process_productionsites(tribes, world);
+	calculate_trainingsites_proportions(descriptions);
+	process_productionsites(descriptions);
 }
 
 // Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
-void TribeDescr::calculate_trainingsites_proportions(Descriptions& tribes) {
+void TribeDescr::calculate_trainingsites_proportions(Descriptions& descriptions) {
 	unsigned int trainingsites_without_percent = 0;
 	int used_percent = 0;
 	std::vector<BuildingDescr*> traingsites_with_percent;
 	for (const DescriptionIndex& index : trainingsites()) {
-		BuildingDescr* descr = tribes.get_mutable_building_descr(index);
+		BuildingDescr* descr = descriptions.get_mutable_building_descr(index);
 		if (descr->hints().trainingsites_max_percent() == 0) {
 			++trainingsites_without_percent;
 		} else {
@@ -815,7 +771,7 @@ void TribeDescr::calculate_trainingsites_proportions(Descriptions& tribes) {
 			   name().c_str(), used_percent);
 		}
 		for (const DescriptionIndex& index : trainingsites()) {
-			BuildingDescr* descr = tribes.get_mutable_building_descr(index);
+			BuildingDescr* descr = descriptions.get_mutable_building_descr(index);
 			if (descr->hints().trainingsites_max_percent() == 0) {
 				descr->set_hints_trainingsites_max_percent(percent_to_use);
 				used_percent += percent_to_use;
@@ -829,19 +785,19 @@ void TribeDescr::calculate_trainingsites_proportions(Descriptions& tribes) {
 }
 
 // Calculate building properties that have circular dependencies
-void TribeDescr::process_productionsites(Descriptions& tribes, const World& world) {
+void TribeDescr::process_productionsites(Descriptions& descriptions) {
 	// Get a list of productionsites - we will need to iterate them more than once
 	// The temporary use of pointers here is fine, because it doesn't affect the game state.
 	std::set<ProductionSiteDescr*> productionsites;
 
 	// Iterate buildings and update circular dependencies
 	for (const DescriptionIndex index : buildings()) {
-		BuildingDescr* building = tribes_.get_mutable_building_descr(index);
+		BuildingDescr* building = descriptions_.get_mutable_building_descr(index);
 		assert(building != nullptr);
 
 		// Calculate largest possible workarea radius
 		for (const auto& pair : building->workarea_info()) {
-			tribes.increase_largest_workarea(pair.first);
+			descriptions.increase_largest_workarea(pair.first);
 		}
 
 		ProductionSiteDescr* productionsite = dynamic_cast<ProductionSiteDescr*>(building);
@@ -852,20 +808,21 @@ void TribeDescr::process_productionsites(Descriptions& tribes, const World& worl
 			// Add consumers and producers to wares.
 			for (const auto& ware_amount : productionsite->input_wares()) {
 				assert(has_ware(ware_amount.first));
-				tribes.get_mutable_ware_descr(ware_amount.first)->add_consumer(index);
+				descriptions.get_mutable_ware_descr(ware_amount.first)->add_consumer(index);
 			}
 			for (const DescriptionIndex& wareindex : productionsite->output_ware_types()) {
 				assert(has_ware(wareindex));
-				tribes.get_mutable_ware_descr(wareindex)->add_producer(index);
+				descriptions.get_mutable_ware_descr(wareindex)->add_producer(index);
 			}
 			for (const auto& job : productionsite->working_positions()) {
 				assert(has_worker(job.first));
-				tribes.get_mutable_worker_descr(job.first)->add_employer(index);
+				descriptions.get_mutable_worker_descr(job.first)->add_employer(index);
 			}
 		}
 	}
 
-	const DescriptionMaintainer<ImmovableDescr>& world_immovables = world.immovables();
+	// NOCOM get rid of world/tribe immovable distinction
+	const DescriptionMaintainer<ImmovableDescr>& world_immovables = descriptions.immovables();
 
 	// Find all attributes that we need to collect from map
 	std::set<MapObjectDescr::AttributeIndex> needed_attributes;
@@ -893,8 +850,8 @@ void TribeDescr::process_productionsites(Descriptions& tribes, const World& worl
 			} break;
 			case MapObjectType::BOB: {
 				// We only support critters here, because no other bobs are collected so far
-				for (DescriptionIndex i = 0; i < world.get_nr_critters(); ++i) {
-					const CritterDescr* critter = world.get_critter_descr(i);
+				for (DescriptionIndex i = 0; i < descriptions.get_nr_critters(); ++i) {
+					const CritterDescr* critter = descriptions.get_critter_descr(i);
 					if (critter->has_attribute(attribute_id)) {
 						prod->add_collected_bob(critter->name());
 					}
@@ -930,7 +887,7 @@ void TribeDescr::process_productionsites(Descriptions& tribes, const World& worl
 	for (ProductionSiteDescr* prod : productionsites) {
 		// Add bobs that are created directly
 		for (const std::string& bobname : prod->created_bobs()) {
-			const CritterDescr* critter = world.get_critter_descr(bobname);
+			const CritterDescr* critter = descriptions.get_critter_descr(bobname);
 			if (critter == nullptr) {
 				if (worker_index(bobname) == Widelands::INVALID_INDEX) {
 					throw GameDataError(
@@ -945,8 +902,7 @@ void TribeDescr::process_productionsites(Descriptions& tribes, const World& worl
 		std::set<std::string> deduced_bobs;
 		std::set<std::string> deduced_immovables;
 		// Remember where we walked in case of circular dependencies
-		std::set<DescriptionIndex> walked_world_immovables;
-		std::set<DescriptionIndex> walked_tribe_immovables;
+		std::set<DescriptionIndex> walked_immovables;
 
 		for (const auto& attribinfo : prod->created_attributes()) {
 			const MapObjectType mapobjecttype = attribinfo.first;
@@ -954,21 +910,11 @@ void TribeDescr::process_productionsites(Descriptions& tribes, const World& worl
 			if (mapobjecttype != MapObjectType::IMMOVABLE) {
 				continue;
 			}
-			for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
-				const ImmovableDescr& immovable_descr = world_immovables.get(i);
-				if (immovable_descr.has_attribute(attribute_id)) {
-					walk_world_immovables(i, world, &walked_world_immovables, needed_attributes,
-					                      &deduced_immovables, &deduced_bobs);
-					if (needed_attributes.count(attribute_id) == 1) {
-						prod->add_created_immovable(immovable_descr.name());
-						add_creator(immovable_descr.name(), prod);
-					}
-				}
-			}
+
 			for (const DescriptionIndex i : immovables()) {
 				const ImmovableDescr& immovable_descr = *get_immovable_descr(i);
 				if (immovable_descr.has_attribute(attribute_id)) {
-					walk_tribe_immovables(i, *this, &walked_tribe_immovables, needed_attributes,
+					walk_immovables(i, descriptions, &walked_immovables, needed_attributes,
 					                      &deduced_immovables, &deduced_bobs);
 					if (needed_attributes.count(attribute_id) == 1) {
 						prod->add_created_immovable(immovable_descr.name());

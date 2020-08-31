@@ -29,10 +29,10 @@
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -252,19 +252,19 @@ struct FindNodeMineable {
 
 // Fishers and fishbreeders must be built near water
 struct FindNodeWater {
-	explicit FindNodeWater(const World& world);
+	explicit FindNodeWater(const Descriptions& descriptions);
 
 	bool accept(const EditorGameBase&, const FCoords& coord) const;
 
 private:
-	const World& world_;
+	const Descriptions& descriptions_;
 };
 
 // This is to be used for shipyards to make sure the water is wide enough
 // Open water is a field where all 6 adjacent triangles are water
 struct FindNodeOpenWater {
-	// 'world' is unused, but we need to fit the template.
-	explicit FindNodeOpenWater(const World& /* world */) {
+	// 'descriptions' is unused, but we need to fit the template.
+	explicit FindNodeOpenWater(const Descriptions& /* descriptions */) {
 	}
 
 	bool accept(const EditorGameBase&, const FCoords& coord) const;

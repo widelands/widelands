@@ -38,7 +38,6 @@ class ImmovableDescr;
 class ProductionSiteDescr;
 class ProductionSite;
 class Worker;
-class World;
 
 /// Ordered sequence of actions (at least 1). Has a name.
 struct ProductionProgram : public MapObjectProgram {
@@ -102,13 +101,13 @@ struct ProductionProgram : public MapObjectProgram {
 	static Groups parse_ware_type_groups(std::vector<std::string>::const_iterator begin,
 	                                     std::vector<std::string>::const_iterator end,
 	                                     const ProductionSiteDescr& descr,
-	                                     const Descriptions& tribes);
+	                                     const Descriptions& descriptions);
 
 	/// Parse a ware or worker list with optional amounts and ensure that the building's outputs
 	/// match. Example: "fish:2".
 	static BillOfMaterials parse_bill_of_materials(const std::vector<std::string>& arguments,
 	                                               WareWorker ww,
-	                                               Descriptions& tribes);
+	                                               Descriptions& descriptions);
 
 	/// Returns from the program.
 	///
@@ -161,7 +160,7 @@ struct ProductionProgram : public MapObjectProgram {
 	struct ActReturn : public Action {
 		ActReturn(const std::vector<std::string>& arguments,
 		          const ProductionSiteDescr&,
-		          const Descriptions& tribes);
+		          const Descriptions& descriptions);
 		~ActReturn() override;
 		void execute(Game&, ProductionSite&) const override;
 
@@ -175,14 +174,14 @@ struct ProductionProgram : public MapObjectProgram {
 		                                   std::vector<std::string>::const_iterator& begin,
 		                                   std::vector<std::string>::const_iterator& end,
 		                                   const ProductionSiteDescr&,
-		                                   const Descriptions& tribes);
+		                                   const Descriptions& descriptions);
 
 		struct Negation : public Condition {
 			Negation(const std::vector<std::string>& arguments,
 			         std::vector<std::string>::const_iterator& begin,
 			         std::vector<std::string>::const_iterator& end,
 			         const ProductionSiteDescr& descr,
-			         const Descriptions& tribes);
+			         const Descriptions& descriptions);
 			~Negation() override;
 			bool evaluate(const ProductionSite&) const override;
 			// Just a dummy to satisfy the superclass interface. Do not use.
@@ -199,8 +198,8 @@ struct ProductionProgram : public MapObjectProgram {
 			explicit EconomyNeedsWare(const DescriptionIndex& i) : ware_type(i) {
 			}
 			bool evaluate(const ProductionSite&) const override;
-			std::string description(const Descriptions& tribes) const override;
-			std::string description_negation(const Descriptions& tribes) const override;
+			std::string description(const Descriptions& descriptions) const override;
+			std::string description_negation(const Descriptions& descriptions) const override;
 
 		private:
 			DescriptionIndex ware_type;
@@ -211,8 +210,8 @@ struct ProductionProgram : public MapObjectProgram {
 			explicit EconomyNeedsWorker(const DescriptionIndex& i) : worker_type(i) {
 			}
 			bool evaluate(const ProductionSite&) const override;
-			std::string description(const Descriptions& tribes) const override;
-			std::string description_negation(const Descriptions& tribes) const override;
+			std::string description(const Descriptions& descriptions) const override;
+			std::string description_negation(const Descriptions& descriptions) const override;
 
 		private:
 			DescriptionIndex worker_type;
@@ -225,10 +224,10 @@ struct ProductionProgram : public MapObjectProgram {
 			SiteHas(std::vector<std::string>::const_iterator begin,
 			        std::vector<std::string>::const_iterator end,
 			        const ProductionSiteDescr& descr,
-			        const Descriptions& tribes);
+			        const Descriptions& descriptions);
 			bool evaluate(const ProductionSite&) const override;
-			std::string description(const Descriptions& tribes) const override;
-			std::string description_negation(const Descriptions& tribes) const override;
+			std::string description(const Descriptions& descriptions) const override;
+			std::string description_negation(const Descriptions& descriptions) const override;
 
 		private:
 			WareTypeGroup group;
@@ -304,7 +303,7 @@ struct ProductionProgram : public MapObjectProgram {
 		ActCallWorker(const std::vector<std::string>& arguments,
 		              const std::string& production_program_name,
 		              ProductionSiteDescr*,
-		              const Descriptions& tribes);
+		              const Descriptions& descriptions);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;
@@ -405,7 +404,7 @@ struct ProductionProgram : public MapObjectProgram {
 	struct ActConsume : public Action {
 		ActConsume(const std::vector<std::string>& arguments,
 		           const ProductionSiteDescr& descr,
-		           const Descriptions& tribes);
+		           const Descriptions& descriptions);
 		void execute(Game&, ProductionSite&) const override;
 	};
 
@@ -425,7 +424,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// produced wares are of the type specified in the group. How the produced
 	/// wares are handled is defined by the productionsite.
 	struct ActProduce : public Action {
-		ActProduce(const std::vector<std::string>& arguments, ProductionSiteDescr&, Descriptions& tribes);
+		ActProduce(const std::vector<std::string>& arguments, ProductionSiteDescr&, Descriptions& descriptions);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
@@ -446,14 +445,14 @@ struct ProductionProgram : public MapObjectProgram {
 	/// The recruited workers are of the type specified in the group. How the
 	/// recruited workers are handled is defined by the productionsite.
 	struct ActRecruit : public Action {
-		ActRecruit(const std::vector<std::string>& arguments, ProductionSiteDescr&, Descriptions& tribes);
+		ActRecruit(const std::vector<std::string>& arguments, ProductionSiteDescr&, Descriptions& descriptions);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
 
 	struct ActMine : public Action {
 		ActMine(const std::vector<std::string>& arguments,
-		        World&,
+		        Descriptions& descriptions,
 		        const std::string& production_program_name,
 		        ProductionSiteDescr*);
 		void execute(Game&, ProductionSite&) const override;
@@ -531,12 +530,12 @@ struct ProductionProgram : public MapObjectProgram {
 		ActConstruct(const std::vector<std::string>& arguments,
 		             const std::string& production_program_name,
 		             ProductionSiteDescr*,
-		             const Descriptions& tribes);
+		             const Descriptions& descriptions);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;
 
-		const ImmovableDescr& get_construction_descr(const Descriptions& tribes) const;
+		const ImmovableDescr& get_construction_descr(const Descriptions& descriptions) const;
 
 	private:
 		std::string objectname;
@@ -546,8 +545,7 @@ struct ProductionProgram : public MapObjectProgram {
 
 	ProductionProgram(const std::string& init_name,
 	                  const LuaTable& program_table,
-	                  Descriptions& tribes,
-	                  World& world,
+	                  Descriptions& descriptions,
 	                  ProductionSiteDescr* building);
 
 	const std::string& descname() const;

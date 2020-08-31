@@ -40,8 +40,8 @@ namespace Widelands {
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
-                                       Descriptions& tribes)
-   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, tribes),
+                                       Descriptions& descriptions)
+   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, descriptions),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 }
@@ -97,10 +97,8 @@ void DismantleSite::cleanup(EditorGameBase& egbase) {
 		// Put the old immovable in place again
 		for (const auto& pair : old_buildings_) {
 			if (!pair.second.empty()) {
-				egbase.create_immovable(position_, pair.first,
-				                        pair.second == "world" ? MapObjectDescr::OwnerType::kWorld :
-				                                                 MapObjectDescr::OwnerType::kTribe,
-				                        get_owner());
+				// NOCOM update create_immovable not to care about OwnerType
+				egbase.create_immovable(position_, pair.first, get_owner());
 				break;
 			}
 		}

@@ -35,7 +35,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/critter.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/widelands.h"
 #include "website/lua/lua_tree.h"
 #include "website/website_common.h"
@@ -171,8 +170,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
                                   const std::string& map_object_name,
                                   const std::string& animation_name,
                                   FileSystem* out_filesystem) {
-	const Widelands::Descriptions& tribes = egbase.tribes();
-	const Widelands::World& world = egbase.world();
+	const Widelands::Descriptions& descriptions = egbase.descriptions();
 	log_info("==========================================\n");
 
 	bool is_fontier_or_flag_animation = false;
@@ -180,27 +178,25 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 
 	// Get the map object
 	const Widelands::MapObjectDescr* descr = nullptr;
-	if (tribes.building_exists(tribes.building_index(map_object_name))) {
-		descr = tribes.get_building_descr(tribes.building_index(map_object_name));
-	} else if (tribes.ware_exists(tribes.ware_index(map_object_name))) {
-		descr = tribes.get_ware_descr(tribes.ware_index(map_object_name));
-	} else if (tribes.worker_exists(tribes.worker_index(map_object_name))) {
-		descr = tribes.get_worker_descr(tribes.worker_index(map_object_name));
-	} else if (tribes.immovable_exists(tribes.immovable_index(map_object_name))) {
-		descr = tribes.get_immovable_descr(tribes.immovable_index(map_object_name));
-	} else if (tribes.ship_exists(tribes.ship_index(map_object_name))) {
-		descr = tribes.get_ship_descr(tribes.ship_index(map_object_name));
-	} else if (world.get_immovable_index(map_object_name) != Widelands::INVALID_INDEX) {
-		descr = world.get_immovable_descr(world.get_immovable_index(map_object_name));
-	} else if (world.get_critter_descr(map_object_name)) {
-		descr = world.get_critter_descr(map_object_name);
+	if (descriptions.building_exists(descriptions.building_index(map_object_name))) {
+		descr = descriptions.get_building_descr(descriptions.building_index(map_object_name));
+	} else if (descriptions.ware_exists(descriptions.ware_index(map_object_name))) {
+		descr = descriptions.get_ware_descr(descriptions.ware_index(map_object_name));
+	} else if (descriptions.worker_exists(descriptions.worker_index(map_object_name))) {
+		descr = descriptions.get_worker_descr(descriptions.worker_index(map_object_name));
+	} else if (descriptions.immovable_exists(descriptions.immovable_index(map_object_name))) {
+		descr = descriptions.get_immovable_descr(descriptions.immovable_index(map_object_name));
+	} else if (descriptions.ship_exists(descriptions.ship_index(map_object_name))) {
+		descr = descriptions.get_ship_descr(descriptions.ship_index(map_object_name));
+	} else if (descriptions.get_critter_descr(map_object_name)) {
+		descr = descriptions.get_critter_descr(map_object_name);
 	} else {
 		// Frontier and flag animations need special treatment
 		std::vector<std::string> map_object_name_vector;
 		boost::split(map_object_name_vector, map_object_name, boost::is_any_of("_"));
 		if (map_object_name_vector.size() == 2) {
 			const Widelands::TribeDescr* tribe =
-			   tribes.get_tribe_descr(tribes.tribe_index(map_object_name_vector.front()));
+			   descriptions.get_tribe_descr(descriptions.tribe_index(map_object_name_vector.front()));
 			if (map_object_name_vector.back() == "frontier") {
 				is_fontier_or_flag_animation = true;
 				frontier_or_flag_animation_id = tribe->frontier_animation();
@@ -389,7 +385,7 @@ int main(int argc, char** argv) {
 		std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
 		Widelands::EditorGameBase egbase(nullptr);
 		// Load tribe info
-		egbase.tribes();
+		egbase.descriptions();
 		// Load a tribe to create the global 'tribes' Lua variable
 		Notifications::publish(Widelands::NoteMapObjectDescription(
 		   "barbarians", Widelands::NoteMapObjectDescription::LoadType::kObject));

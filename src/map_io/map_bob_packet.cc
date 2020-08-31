@@ -20,9 +20,9 @@
 #include "map_io/map_bob_packet.h"
 
 #include "io/fileread.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/world/critter.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
@@ -50,8 +50,8 @@ void MapBobPacket::read_bob(FileRead& fr,
 
 	const std::string name = lookup_table.lookup_critter(read_name, packet_version);
 	try {
-		World* world = egbase.mutable_world();
-		const CritterDescr& descr = *world->get_critter_descr(world->load_critter(name));
+		Descriptions* descriptions = egbase.mutable_descriptions();
+		const CritterDescr& descr = *descriptions->get_critter_descr(descriptions->load_critter(name));
 		descr.create(egbase, nullptr, coords);
 		// We do not register this object as needing loading. This packet is only
 		// in fresh maps, that are just started. As soon as the game saves

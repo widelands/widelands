@@ -658,18 +658,18 @@ void EconomyOptionsWindow::close_save_profile_window() {
 void EconomyOptionsWindow::do_create_target(const std::string& name) {
 	assert(!name.empty());
 	assert(name != kDefaultEconomyProfile);
-	const Widelands::Descriptions& tribes = player_->egbase().tribes();
+	const Widelands::Descriptions& descriptions = player_->egbase().descriptions();
 	const Widelands::TribeDescr& tribe = player_->tribe();
 	Widelands::Economy* ware_economy = player_->get_economy(ware_serial_);
 	Widelands::Economy* worker_economy = player_->get_economy(worker_serial_);
 	PredefinedTargets t;
 	for (Widelands::DescriptionIndex di : tribe.wares()) {
-		if (tribes.get_ware_descr(di)->has_demand_check(tribe.name())) {
+		if (descriptions.get_ware_descr(di)->has_demand_check(tribe.name())) {
 			t.wares[di] = ware_economy->target_quantity(di).permanent;
 		}
 	}
 	for (Widelands::DescriptionIndex di : tribe.workers()) {
-		if (tribes.get_worker_descr(di)->has_demand_check()) {
+		if (descriptions.get_worker_descr(di)->has_demand_check()) {
 			t.workers[di] = worker_economy->target_quantity(di).permanent;
 		}
 	}
@@ -680,7 +680,7 @@ void EconomyOptionsWindow::do_create_target(const std::string& name) {
 }
 
 void EconomyOptionsWindow::save_targets() {
-	const Widelands::Descriptions& tribes = player_->egbase().tribes();
+	const Widelands::Descriptions& descriptions = player_->egbase().descriptions();
 	Profile profile;
 
 	std::map<std::string, uint32_t> serials;
@@ -700,11 +700,11 @@ void EconomyOptionsWindow::save_targets() {
 		}
 		Section& section = profile.create_section(std::to_string(serials.at(pair.first)).c_str());
 		for (const auto& setting : pair.second.wares) {
-			section.set_natural(tribes.get_ware_descr(setting.first)->name().c_str(), setting.second);
+			section.set_natural(descriptions.get_ware_descr(setting.first)->name().c_str(), setting.second);
 		}
 		for (const auto& setting : pair.second.workers) {
 			section.set_natural(
-			   tribes.get_worker_descr(setting.first)->name().c_str(), setting.second);
+			   descriptions.get_worker_descr(setting.first)->name().c_str(), setting.second);
 		}
 	}
 
@@ -726,20 +726,20 @@ void EconomyOptionsWindow::save_targets() {
 
 void EconomyOptionsWindow::read_targets() {
 	predefined_targets_.clear();
-	const Widelands::Descriptions& tribes = player_->egbase().tribes();
+	const Widelands::Descriptions& descriptions = player_->egbase().descriptions();
 	const Widelands::TribeDescr& tribe = player_->tribe();
 
 	{
 		PredefinedTargets t;
 		t.undeletable = true;
 		for (Widelands::DescriptionIndex di : tribe.wares()) {
-			const Widelands::WareDescr* descr = tribes.get_ware_descr(di);
+			const Widelands::WareDescr* descr = descriptions.get_ware_descr(di);
 			if (descr->has_demand_check(tribe.name())) {
 				t.wares.insert(std::make_pair(di, descr->default_target_quantity(tribe.name())));
 			}
 		}
 		for (Widelands::DescriptionIndex di : tribe.workers()) {
-			const Widelands::WorkerDescr* descr = tribes.get_worker_descr(di);
+			const Widelands::WorkerDescr* descr = descriptions.get_worker_descr(di);
 			if (descr->has_demand_check()) {
 				t.workers.insert(std::make_pair(di, descr->default_target_quantity()));
 			}
@@ -764,9 +764,9 @@ void EconomyOptionsWindow::read_targets() {
 			PredefinedTargets t;
 			while (Section::Value* v = section->get_next_val()) {
 				const std::string name(v->get_name());
-				Widelands::DescriptionIndex di = tribes.ware_index(name);
+				Widelands::DescriptionIndex di = descriptions.ware_index(name);
 				if (di == Widelands::INVALID_INDEX) {
-					di = tribes.worker_index(name);
+					di = descriptions.worker_index(name);
 					assert(di != Widelands::INVALID_INDEX);
 					t.workers.insert(std::make_pair(di, v->get_natural()));
 				} else {

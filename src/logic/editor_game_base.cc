@@ -47,7 +47,6 @@
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
@@ -187,44 +186,22 @@ void EditorGameBase::think() {
 	// by a given number of milliseconds
 }
 
-const World& EditorGameBase::world() const {
+const Descriptions& EditorGameBase::descriptions() const {
 	// Const casts are evil, but this is essentially lazy evaluation and the
 	// caller should really not modify this.
-	return *const_cast<EditorGameBase*>(this)->mutable_world();
+	return *const_cast<EditorGameBase*>(this)->mutable_descriptions();
 }
 
-World* EditorGameBase::mutable_world() {
-	if (!world_) {
-		// Lazy initialization of World. We need to create the pointer to the
-		// world immediately though, because the lua scripts need to have access
-		// to world through this method already.
-		ScopedTimer timer("Registering the world took %ums");
-		Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
-		world_.reset(new World(description_manager_.get()));
+Descriptions* EditorGameBase::mutable_descriptions() {
+	if (!descriptions_) {
+		// Lazy initialization of Descriptions. We need to create the pointer to the
+		// descriptions immediately though, because the lua scripts need to have access
+		// to descriptions through this method already.
+		ScopedTimer timer("Registering the descriptions took %ums");
+		Notifications::publish(UI::NoteLoadingMessage(_("Loading world and tribes…")));
+		descriptions_.reset(new Descriptions(description_manager_.get(), lua_.get()));
 	}
-	return world_.get();
-}
-
-const Descriptions& EditorGameBase::tribes() const {
-	// Const casts are evil, but this is essentially lazy evaluation and the
-	// caller should really not modify this.
-	return *const_cast<EditorGameBase*>(this)->mutable_tribes();
-}
-
-Descriptions* EditorGameBase::mutable_tribes() {
-	if (!tribes_) {
-		// We need to make sure that the world is loaded first for some attribute checks in the worker
-		// programs.
-		world();
-
-		// Lazy initialization of Tribes. We need to create the pointer to the
-		// tribe immediately though, because the lua scripts need to have access
-		// to tribes through this method already.
-		ScopedTimer timer("Registering the tribes took %ums");
-		Notifications::publish(UI::NoteLoadingMessage(_("Loading tribes…")));
-		tribes_.reset(new Descriptions(description_manager_.get(), lua_.get()));
-	}
-	return tribes_.get();
+	return descriptions_.get();
 }
 
 void EditorGameBase::set_ibase(InteractiveBase* const b) {
@@ -284,7 +261,7 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 void EditorGameBase::load_all_tribes() {
 	// Load all tribes
 	for (const auto& tribe_info : Widelands::get_all_tribeinfos()) {
-		mutable_tribes()->load_tribe(tribe_info.name);
+		mutable_descriptions()->load_tribe(tribe_info.name);
 	}
 }
 
@@ -301,11 +278,7 @@ void EditorGameBase::allocate_player_maps() {
  */
 void EditorGameBase::postload() {
 	create_tempfile_and_save_mapdata(FileSystem::ZIP);
-
-	// Postload tribes and world
-	// Tribes don't have a postload at this point.
-	Notifications::publish(UI::NoteLoadingMessage(_("Postloading world and tribes…")));
-	assert(world_);
+	assert(descriptions_);
 }
 
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
@@ -423,12 +396,12 @@ Bob& EditorGameBase::create_bob(Coords c, const BobDescr& descr, Player* owner) 
 Bob& EditorGameBase::create_critter(const Coords& c,
                                     DescriptionIndex const bob_type_idx,
                                     Player* owner) {
-	const BobDescr* descr = dynamic_cast<const BobDescr*>(world().get_critter_descr(bob_type_idx));
+	const BobDescr* descr = dynamic_cast<const BobDescr*>(descriptions().get_critter_descr(bob_type_idx));
 	return create_bob(c, *descr, owner);
 }
 
 Bob& EditorGameBase::create_critter(const Coords& c, const std::string& name, Player* owner) {
-	const BobDescr* descr = dynamic_cast<const BobDescr*>(world().get_critter_descr(name));
+	const BobDescr* descr = dynamic_cast<const BobDescr*>(descriptions().get_critter_descr(name));
 	if (descr == nullptr) {
 		throw GameDataError("create_critter(%i,%i,%s,%s): critter not found", c.x, c.y, name.c_str(),
 		                    owner->get_name().c_str());
@@ -448,45 +421,30 @@ information about it.
 */
 Immovable& EditorGameBase::create_immovable(const Coords& c,
                                             DescriptionIndex const idx,
-                                            MapObjectDescr::OwnerType type,
                                             Player* owner) {
-	return do_create_immovable(c, idx, type, owner, nullptr);
+	return do_create_immovable(c, idx, owner, nullptr);
 }
 
 Immovable& EditorGameBase::create_immovable_with_name(const Coords& c,
                                                       const std::string& name,
-                                                      MapObjectDescr::OwnerType type,
                                                       Player* owner,
                                                       const BuildingDescr* former_building_descr) {
-	DescriptionIndex idx;
-	if (type == MapObjectDescr::OwnerType::kTribe) {
-		idx = tribes().immovable_index(name.c_str());
-		if (!tribes().immovable_exists(idx)) {
-			throw wexception(
-			   "EditorGameBase::create_immovable_with_name(%i, %i): %s is not defined for the tribes",
-			   c.x, c.y, name.c_str());
-		}
-	} else {
-		idx = world().get_immovable_index(name.c_str());
-		if (idx == INVALID_INDEX) {
-			throw wexception(
-			   "EditorGameBase::create_immovable_with_name(%i, %i): %s is not defined for the world",
-			   c.x, c.y, name.c_str());
-		}
+	const DescriptionIndex idx = descriptions().immovable_index(name.c_str());
+	if (!descriptions().immovable_exists(idx)) {
+		throw wexception(
+		   "EditorGameBase::create_immovable_with_name(%i, %i): %s is not defined",
+		   c.x, c.y, name.c_str());
 	}
-	return do_create_immovable(c, idx, type, owner, former_building_descr);
+	return do_create_immovable(c, idx, owner, former_building_descr);
 }
 
 Immovable& EditorGameBase::do_create_immovable(const Coords& c,
                                                DescriptionIndex const idx,
-                                               MapObjectDescr::OwnerType type,
                                                Player* owner,
                                                const BuildingDescr* former_building_descr) {
-	const ImmovableDescr& descr =
-	   *(type == MapObjectDescr::OwnerType::kTribe ? tribes().get_immovable_descr(idx) :
-	                                                 world().get_immovable_descr(idx));
-	inform_players_about_immovable(Map::get_index(c, map().get_width()), &descr);
-	Immovable& immovable = descr.create(*this, c, former_building_descr);
+	const ImmovableDescr* descr = descriptions().get_immovable_descr(idx);
+	inform_players_about_immovable(Map::get_index(c, map().get_width()), descr);
+	Immovable& immovable = descr->create(*this, c, former_building_descr);
 	if (owner != nullptr) {
 		immovable.set_owner(owner);
 	}
@@ -502,13 +460,13 @@ Immovable& EditorGameBase::do_create_immovable(const Coords& c,
 Bob& EditorGameBase::create_ship(const Coords& c,
                                  DescriptionIndex const ship_type_idx,
                                  Player* owner) {
-	const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_ship_descr(ship_type_idx));
+	const BobDescr* descr = dynamic_cast<const BobDescr*>(descriptions().get_ship_descr(ship_type_idx));
 	return create_bob(c, *descr, owner);
 }
 
 Bob& EditorGameBase::create_ship(const Coords& c, const std::string& name, Player* owner) {
 	try {
-		return create_ship(c, tribes().safe_ship_index(name), owner);
+		return create_ship(c, descriptions().safe_ship_index(name), owner);
 	} catch (const GameDataError& e) {
 		throw GameDataError("create_ship(%i,%i,%s,%s): ship not found: %s", c.x, c.y, name.c_str(),
 		                    owner->get_name().c_str(), e.what());
@@ -520,7 +478,7 @@ Bob& EditorGameBase::create_worker(const Coords& c, DescriptionIndex worker, Pla
 		throw GameDataError(
 		   "Tribe %s does not have worker with index %d", owner->tribe().name().c_str(), worker);
 	}
-	const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_worker_descr(worker));
+	const BobDescr* descr = dynamic_cast<const BobDescr*>(descriptions().get_worker_descr(worker));
 	return create_bob(c, *descr, owner);
 }
 

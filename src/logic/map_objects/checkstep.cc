@@ -23,8 +23,8 @@
 #include "economy/road.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -149,9 +149,9 @@ bool CheckStepFerry::allowed(
 		fr = to;
 		break;
 	}
-	const World& world = egbase_.world();
-	return (world.terrain_descr(fd.field->terrain_d()).get_is() & TerrainDescription::Is::kWater) &&
-	       (world.terrain_descr(fr.field->terrain_r()).get_is() & TerrainDescription::Is::kWater);
+	const Descriptions& descriptions = egbase_.descriptions();
+	return (descriptions.terrain_descr(fd.field->terrain_d()).get_is() & TerrainDescription::Is::kWater) &&
+	       (descriptions.terrain_descr(fr.field->terrain_r()).get_is() & TerrainDescription::Is::kWater);
 }
 
 bool CheckStepFerry::reachable_dest(const Map& map, const FCoords& dest) const {

@@ -52,9 +52,9 @@
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
@@ -564,7 +564,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 	}
 
-	const auto& world = ebase.world();
+	const Widelands::Descriptions& descriptions = ebase.descriptions();
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 		if (draw_immovables_) {
@@ -587,7 +587,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		uint8_t const amount = field.fcoords.field->get_resources_amount();
 		if (draw_resources_ && amount > 0) {
 			const std::string& immname =
-			   world.get_resource(field.fcoords.field->get_resources())->editor_image(amount);
+			   descriptions.get_resource(field.fcoords.field->get_resources())->editor_image(amount);
 			if (!immname.empty()) {
 				const auto* pic = g_image_cache->get(immname);
 				blit_field_overlay(
@@ -950,7 +950,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	{
 		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 		eia.load_world_units();
-		egbase.tribes();
+		egbase.descriptions();
 
 		{
 			if (filename.empty()) {
@@ -986,19 +986,19 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 
 void EditorInteractive::load_world_units() {
 	Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
-	Widelands::World* world = egbase().mutable_world();
+	Widelands::Descriptions* descriptions = egbase().mutable_descriptions();
 
 	log_info("┏━ Loading world:\n");
 	ScopedTimer timer("┗━ took: %ums");
 
 	std::unique_ptr<LuaTable> table(egbase().lua().run_script("world/init.lua"));
 
-	auto load_category = [this, world](const LuaTable& t, const std::string& key,
+	auto load_category = [this, descriptions](const LuaTable& t, const std::string& key,
 	                                   Widelands::MapObjectType type) {
 		for (const auto& category_table :
 		     t.get_table(key)->array_entries<std::unique_ptr<LuaTable>>()) {
 			editor_categories_[type].push_back(
-			   std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, type, *world)));
+			   std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, type, *descriptions)));
 		}
 	};
 

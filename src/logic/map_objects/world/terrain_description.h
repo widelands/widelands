@@ -29,7 +29,7 @@ class LuaTable;
 class Texture;
 
 namespace Widelands {
-class World;
+class Descriptions;
 
 /// TerrainTextures have a fixed size and are squares.
 constexpr int kTextureSideLength = 64;
@@ -53,7 +53,7 @@ public:
 		const Image* icon;
 	};
 
-	TerrainDescription(const LuaTable& table, World&);
+	TerrainDescription(const LuaTable& table, Descriptions& descriptions);
 	~TerrainDescription() = default;
 
 	/// The name used internally for this terrain.
