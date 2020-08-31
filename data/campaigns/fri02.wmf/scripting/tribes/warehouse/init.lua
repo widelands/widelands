@@ -3,7 +3,6 @@ dirname = "tribes/buildings/warehouses/empire/warehouse/"
 push_textdomain("scenario_fri02.wmf")
 
 tribes:new_warehouse_type {
-   msgctxt = "frisians_building",
    name = "frisians_warehouse_empire",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("frisians_building", "Empire Warehouse"),

@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "destroyed_building",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Destroyed building"),
@@ -23,3 +24,5 @@ tribes:new_immovable_type {
       },
    }
 }
+
+pop_textdomain()
