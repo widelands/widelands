@@ -153,7 +153,7 @@ function stormflood()
       end
       for idx,fields in ipairs(place_ashes) do
          for idy,f in ipairs(fields) do
-            map:place_immovable("ashes", f, "tribes")
+            map:place_immovable("ashes", f)
          end
       end
       x = next_field.x

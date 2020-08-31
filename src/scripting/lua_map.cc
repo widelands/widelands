@@ -19,6 +19,7 @@
 
 #include "scripting/lua_map.h"
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/input_queue.h"
@@ -1458,32 +1459,25 @@ int LuaMap::find_ocean_fields(lua_State* L) {
 }
 
 /* RST
-   .. method:: place_immovable(name, field, from_where)
+   .. method:: place_immovable(name, field)
 
-      Creates an immovable that is defined by the world (e.g. trees, rocks...)
-      or a tribe (field) on a given field. If there is already an immovable on
+      Creates an immovable on a given field. If there is already an immovable on
       the field, an error is reported.
 
       :arg name: The name of the immovable to create
       :type name: :class:`string`
       :arg field: The immovable is created on this field.
       :type field: :class:`wl.map.Field`
-      :arg from_where: "world" if the immovable is defined in the world,
-         "tribes" if it is defined in the tribes.
-      :type from_where: :class:`string`
 
       :returns: The created immovable.
 */
-
-// NOCOM
 int LuaMap::place_immovable(lua_State* const L) {
-	std::string from_where;
 
 	const std::string objname = luaL_checkstring(L, 2);
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 3);
 	if (lua_gettop(L) > 3 && !lua_isnil(L, 4)) {
-		// NOCOM obsolete
-		from_where = luaL_checkstring(L, 4);
+		// TODO(GunChleoc): Compatibility, remove after v1.0
+		log_warn("Found deprecated parameter '%s' in place_immovable call, placing '%s'", luaL_checkstring(L, 4), objname.c_str());
 	}
 
 	// Check if the map is still free here
@@ -2094,7 +2088,6 @@ const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[
    PROP_RO(LuaImmovableDescription, buildcost),
    PROP_RO(LuaImmovableDescription, becomes),
    PROP_RO(LuaImmovableDescription, terrain_affinity),
-   PROP_RO(LuaImmovableDescription, owner_type),
    PROP_RO(LuaImmovableDescription, size),
    {nullptr, nullptr, nullptr},
 };
@@ -2178,25 +2171,6 @@ int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
 		lua_settable(L, -3);
 	} else {
 		lua_pushnil(L);
-	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: owner_type
-
-         the owner type of this immovable
-
-         (RO) "world" for world immovables and "tribe" for tribe immovables.
-*/
-int LuaImmovableDescription::get_owner_type(lua_State* L) {
-	switch (get()->owner_type()) {
-	case MapObjectDescr::OwnerType::kWorld:
-		lua_pushstring(L, "world");
-		break;
-	case MapObjectDescr::OwnerType::kTribe:
-		lua_pushstring(L, "tribe");
-		break;
 	}
 	return 1;
 }

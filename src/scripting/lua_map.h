@@ -250,7 +250,6 @@ public:
 	int get_buildcost(lua_State*);
 	int get_becomes(lua_State*);
 	int get_terrain_affinity(lua_State*);
-	int get_owner_type(lua_State*);
 	int get_size(lua_State*);
 
 	/*

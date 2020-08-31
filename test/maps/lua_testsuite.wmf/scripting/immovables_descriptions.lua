@@ -114,13 +114,6 @@ function test_descr:test_immovable_terrain_affinity()
    assert_equal(110, aff_umbrella_green_mature["preferred_temperature"])
 end
 
-function test_descr:test_immovable_owner_type()
-   assert_equal("world", egbase:get_immovable_description("bush1").owner_type)
-   assert_equal("tribe", egbase:get_immovable_description("cornfield_ripe").owner_type)
-   assert_equal("world", egbase:get_immovable_description("alder_summer_sapling").owner_type)
-   assert_equal("world", egbase:get_immovable_description("alder_summer_old").owner_type)
-end
-
 function test_descr:test_immovable_size()
    assert_equal("none", egbase:get_immovable_description("bush1").size)
    assert_equal("small", egbase:get_immovable_description("cornfield_ripe").size)

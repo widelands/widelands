@@ -83,7 +83,7 @@ EditorGameBase
 const char LuaEditorGameBase::className[] = "EditorGameBase";
 const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
    METHOD(LuaEditorGameBase, get_immovable_description),
-   METHOD(LuaEditorGameBase, tribe_immovable_exists),
+   METHOD(LuaEditorGameBase, immovable_exists),
    METHOD(LuaEditorGameBase, get_building_description),
    METHOD(LuaEditorGameBase, get_ship_description),
    METHOD(LuaEditorGameBase, get_tribe_description),
@@ -185,16 +185,15 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 }
 
 /* RST
-   .. function:: tribe_immovable_exists(immovable_name)
+   .. function:: immovable_exists(immovable_name)
 
-      :arg immovable_name: the name of the tribe immovable
+      :arg immovable_name: the name of the immovable
 
       Returns whether the descriptions know about an ImmovableDescription for the named object.
 
-      (RO) ``true`` if the named tribe immovable exists, ``false`` otherwise.
+      (RO) ``true`` if the named immovable exists, ``false`` otherwise.
 */
-// NOCOM get rid of the tribe part
-int LuaEditorGameBase::tribe_immovable_exists(lua_State* L) {
+int LuaEditorGameBase::immovable_exists(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}

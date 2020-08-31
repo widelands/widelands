@@ -39,7 +39,7 @@ end
 
 function starting_infos()
    -- So that the player cannot build anything here
-   map:place_immovable("debris00", second_quarry_field, "world")
+   map:place_immovable("debris00", second_quarry_field)
    reveal_concentric(plr, sf, 13, true, 80)
    sleep(1000)
 
