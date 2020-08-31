@@ -74,6 +74,46 @@
 --        *Mandatory*. A table containing all animations for this critter. Every critter
 --        needs to have an ``idle`` and a directional ``walk`` animation. Herbivores and carnivores additionally need an ``eating`` animation.
 --        See :doc:`animations` for a detailed description of the animation format.
+--
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("world")
+--
+--    wl.World():new_critter_type{
+--       name = "badger",
+--       descname = _ "Badger",
+--       animation_directory = path.dirname(__file__),
+--       programs = {
+--          remove = { "remove" },
+--       },
+--       size = 4,
+--       reproduction_rate = 70,
+--       appetite = 50,
+--       carnivore = true,
+--
+--       animations = {
+--          idle = {
+--             hotspot = { 9, 12 },
+--             fps = 20,
+--          },
+--          eating = {
+--             basename = "idle",
+--             hotspot = { 9, 12 },
+--             fps = 20,
+--          },
+--          walk = {
+--             hotspot = { 13, 15 },
+--             fps = 20,
+--             directional = true
+--          }
+--       }
+--    }
+--
+--    pop_textdomain()
 
 push_textdomain("world")
 

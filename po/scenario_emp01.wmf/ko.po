@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-17 08:40+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-25 12:28+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr "우리 제국은 어떻게 될것인가? 나는 정말 궁금할 뿐이다. 어째서 왕은 그 괴물 같은 야만족 놈들과 싸우려는것을 막는건가? 또 평화로운 친구로서 행동한자는 누구고, 칠흙같은 밤 나의 군대를 공격한것은 누구란말인가?"
+msgstr "우리 제국은 어떻게 될것인가? 나는 정말 궁금할 뿐이다. 어째서 왕은 그 괴물 같은 야만인 부족과 싸우려는것을 막는건가? 또 평화로운 친구로서 행동한자는 누구고, 칠흙같은 밤 나의 군대를 공격한것은 누구란말인가?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:81
@@ -118,7 +118,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr "150명의 군대와 함께, 나는 위대하고, 아름답고,  고대의 숲에있는 갈딘 산 근처에있는 북쪽 국경지대를 순찰하도록 임명되었었다. 일찍이, 처음엔 친근한 야만족을 만났었다. 심지어 내 부하들의 일부는 우리의 깨끗하고 깔끔한 제복과 무기에 감탄하여 우리에게 온 그들과 그들의 아이들과 거래를 했었다."
+msgstr "150명의 군대와 함께, 나는 위대하고, 아름답고, 고대의 숲에있는 갈딘 산 근처에있는 북쪽 국경지대를 순찰하도록 임명되었었다. 일찍이, 처음엔 친근한 야만인 부족을 만났었다. 심지어 내 부하들의 일부는 우리의 깨끗하고 깔끔한 제복과 무기에 감탄하여 우리에게 온 그들과 그들의 아이들과 거래를 했었다."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:84
@@ -138,7 +138,7 @@ msgid ""
 "furious at the Barbarians, yet forbade any attack on these tribes. He "
 "believed that our army was too weak to survive in a war against the "
 "Barbarians."
-msgstr "3주 후, 나는 프레밀로 돌아와 왕과 이사건에 대해 보고를 했다. 왕은 야만족들에게 분노했지만이 종족에 대한 공격은 하지말라고 했다. 그는 우리 군대가 너무 약해서 야만족과의 전쟁에서 생존 할 수 없다고 믿고 있었다."
+msgstr "3주 후, 나는 프레밀로 돌아와 왕과 이사건에 대해 보고를 했다. 왕은 야만인들에게 분노했지만, 이 부족에 대한 공격은 하지말라고 했다. 그는 우리 군대가 너무 약해서 야만인들과의 전쟁에서 생존 할 수 없다고 믿고 있었다."
 
 #. TRANSLATORS: Lutius - Diary. Gulf of Perl is a place name.
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:90
@@ -147,7 +147,7 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr "여전히, 나는 이 야만족들과 싸우지 않고서는 내 수치심을 지울 수 없다는 것을 알았다.그래서 나는 남쪽 어딘가에 새로운 세계와 나 자신을 위한 새로운 삶을 찾기위해 배를 타고 프레밀을 떠났다. 지금 나는 가족과 몇몇 동료와 최고의 전사들과 함께 페를만을 항해 하고있다. [번역확인: 펄 페를]"
+msgstr "여전히, 나는 이 야만인들과 싸우지 않고서는 내 수치심을 지울 수 없다는 것을 알았다.그래서 나는 남쪽 어딘가에 새로운 세계와 나 자신을 위한 새로운 삶을 찾기위해 배를 타고 프레밀을 떠났다. 지금 나는 가족과 몇몇 동료와 최고의 전사들과 함께 페를만을 항해 하고있다. [번역확인: 펄 페를]"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:96
 msgid "The Rough Sea"
