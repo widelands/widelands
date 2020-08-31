@@ -191,8 +191,7 @@ void Graphic::set_window_size(int w, int h) {
 
 	int debug_w, debug_h;
 	uint32_t debug_flags = SDL_GetWindowFlags(sdl_window_);
-	log_dbg("++ set_window_size(): %sresizable\n",
-	        debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
+	log_dbg("++ set_window_size(): %sresizable\n", debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
 
 	if (maximized()) {
 		SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
@@ -219,8 +218,7 @@ void Graphic::set_window_size(int w, int h) {
 	SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
 
 	debug_flags = SDL_GetWindowFlags(sdl_window_);
-	log_dbg("++ set_window_size(): %sresizable\n",
-	        debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
+	log_dbg("++ set_window_size(): %sresizable\n", debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
 	maximized();
 }
 
