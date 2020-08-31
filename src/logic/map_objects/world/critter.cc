@@ -496,7 +496,7 @@ Load / Save implementation
 
 // We need to bump this packet version every time we rename a critter, so that the world legacy
 // lookup table will work.
-constexpr uint8_t kCurrentPacketVersion = 3;
+constexpr uint8_t kCurrentPacketVersion = 4;
 
 Critter::Loader::Loader() {
 }
@@ -528,8 +528,9 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 		uint8_t const packet_version = fr.unsigned_8();
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
-			// NOCOM bump packet version
-			fr.c_string(); // Consume obsolete critter_owner
+			if (packet_version < 4) {
+				fr.c_string(); // Consume obsolete owner type (world/tribes)
+			}
 			std::string critter_name = fr.c_string();
 			const CritterDescr* descr = nullptr;
 
@@ -560,10 +561,6 @@ void Critter::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderCritter);
 	fw.unsigned_8(kCurrentPacketVersion);
 
-	const std::string save_owner = descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ?
-	                                  "" :  // Tribes don't have critters
-	                                  "world";
-	fw.c_string(save_owner);
 	fw.c_string(descr().name());
 	fw.unsigned_32(creation_time_);
 

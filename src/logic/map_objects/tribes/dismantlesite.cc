@@ -96,8 +96,7 @@ void DismantleSite::cleanup(EditorGameBase& egbase) {
 	if (was_immovable_ && work_completed_ >= work_steps_) {
 		// Put the old immovable in place again
 		for (const auto& pair : old_buildings_) {
-			if (!pair.second.empty()) {
-				// NOCOM update create_immovable not to care about OwnerType
+			if (pair.second == MapObjectType::IMMOVABLE) {
 				egbase.create_immovable(position_, pair.first, get_owner());
 				break;
 			}
@@ -151,7 +150,7 @@ const Buildcost DismantleSite::count_returned_wares(Building* building) {
 	Buildcost result;
 	DescriptionIndex first_idx = INVALID_INDEX;
 	for (const auto& pair : building->get_former_buildings()) {
-		if (pair.second.empty()) {
+		if (pair.second == MapObjectType::BUILDING) {
 			first_idx = pair.first;
 			break;
 		}

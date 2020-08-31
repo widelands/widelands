@@ -186,20 +186,12 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
                                 bool const construct,
                                 bool loading,
                                 FormerBuildings const former_buildings) const {
-	std::pair<DescriptionIndex, std::string> immovable = std::make_pair(INVALID_INDEX, "");
+	DescriptionIndex immovable = INVALID_INDEX;
 	if (built_over_immovable_ != INVALID_INDEX) {
 		bool immovable_previously_found = false;
 		for (const auto& pair : former_buildings) {
-			if (!pair.second.empty()) {
-				// NOCOM
-				const MapObjectDescr* d;
-				if (pair.second == "world") {
-					d = egbase.descriptions().get_immovable_descr(pair.first);
-				} else if (pair.second == "tribe") {
-					d = egbase.descriptions().get_immovable_descr(pair.first);
-				} else {
-					throw wexception("Invalid FormerBuildings type: %s", pair.second.c_str());
-				}
+			if (pair.second == MapObjectType::IMMOVABLE) {
+				const MapObjectDescr* d = egbase.descriptions().get_immovable_descr(pair.first);
 				if (d->has_attribute(built_over_immovable_)) {
 					immovable_previously_found = true;
 					break;
@@ -213,11 +205,8 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 			    f.field->get_immovable()->has_attribute(built_over_immovable_)) {
 				upcast(const ImmovableDescr, imm, &f.field->get_immovable()->descr());
 				assert(imm);
-				// NOCOM
 				immovable =
-				   imm->owner_type() == MapObjectDescr::OwnerType::kWorld ?
-				      std::make_pair(egbase.descriptions().immovable_index(imm->name()), "world") :
-				      std::make_pair(egbase.descriptions().safe_immovable_index(imm->name()), "tribe");
+				     egbase.descriptions().immovable_index(imm->name());
 			} else {
 				throw wexception(
 				   "Attempting to build %s at %dx%d – no immovable with required attribute %i found",
@@ -229,9 +218,8 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 	Building& b = construct ? create_constructionsite() : create_object();
 	b.position_ = pos;
 	b.set_owner(owner);
-	if (immovable.first != INVALID_INDEX) {
-		assert(!immovable.second.empty());
-		b.old_buildings_.push_back(immovable);
+	if (immovable != INVALID_INDEX) {
+		b.old_buildings_.push_back(std::make_pair(immovable, MapObjectType::IMMOVABLE));
 	}
 	for (const auto& pair : former_buildings) {
 		b.old_buildings_.push_back(pair);
@@ -442,16 +430,9 @@ bool Building::init(EditorGameBase& egbase) {
 	}
 
 	for (const auto& pair : old_buildings_) {
-		if (!pair.second.empty()) {
+		if (pair.second == MapObjectType::IMMOVABLE) {
 			assert(!was_immovable_);
-			// NOCOM
-			if (pair.second == "world") {
-				was_immovable_ = egbase.descriptions().get_immovable_descr(pair.first);
-			} else if (pair.second == "tribe") {
-				was_immovable_ = egbase.descriptions().get_immovable_descr(pair.first);
-			} else {
-				throw wexception("Invalid FormerBuildings type: %s", pair.second.c_str());
-			}
+			was_immovable_ = egbase.descriptions().get_immovable_descr(pair.first);
 			assert(was_immovable_);
 			break;
 		}

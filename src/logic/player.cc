@@ -106,7 +106,7 @@ void find_former_buildings(const Descriptions& descriptions,
                            const Widelands::DescriptionIndex bi,
                            Widelands::FormerBuildings* former_buildings) {
 	assert(former_buildings && former_buildings->empty());
-	former_buildings->push_back(std::make_pair(bi, ""));
+	former_buildings->push_back(std::make_pair(bi, MapObjectType::BUILDING));
 
 	for (;;) {
 		Widelands::DescriptionIndex oldest_idx = former_buildings->front().first;
@@ -117,7 +117,7 @@ void find_former_buildings(const Descriptions& descriptions,
 		for (DescriptionIndex i = 0; i < descriptions.nrbuildings(); ++i) {
 			const BuildingDescr* building_descr = descriptions.get_building_descr(i);
 			if (building_descr->enhancement() == oldest_idx) {
-				former_buildings->insert(former_buildings->begin(), std::make_pair(i, ""));
+				former_buildings->insert(former_buildings->begin(), std::make_pair(i, MapObjectType::BUILDING));
 				break;
 			}
 		}

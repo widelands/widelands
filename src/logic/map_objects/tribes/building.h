@@ -42,13 +42,9 @@ constexpr int32_t kPriorityHigh = 8;
 
 constexpr float kBuildingSilhouetteOpacity = 0.3f;
 
-/* The value "" means that the DescriptionIndex is a normal building, as happens e.g. when enhancing
- * a building. The value "tribe"/"world" means that the DescriptionIndex refers to an immovable of
- * OwnerType kTribe/kWorld, as happens e.g. with amazon treetop sentry. This immovable
- * should therefore always be painted below the building image.
+/* The value MapObjectType::BUILDING means that the DescriptionIndex is a normal building, as happens e.g. when enhancing a building. The value MapObjectType::IMMOVABLE means that the DescriptionIndex refers to an immovable, as happens e.g. with amazon treetop sentry. This immovable should therefore always be painted below the building image.
  */
-// NOCOM replace string with MapObjectType
-using FormerBuildings = std::vector<std::pair<DescriptionIndex, std::string>>;
+using FormerBuildings = std::vector<std::pair<DescriptionIndex, MapObjectType>>;
 
 /*
  * Common to all buildings!

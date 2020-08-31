@@ -229,7 +229,7 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 		// Enhancement and/or built over immovable
 		for (auto it = old_buildings_.end(); it != old_buildings_.begin();) {
 			--it;
-			if (it->second.empty()) {
+			if (it->second == MapObjectType::BUILDING) {
 				const BuildingDescr* was_descr = owner().tribe().get_building_descr(it->first);
 				info_.was = was_descr;
 				buildcost = &building_->enhancement_cost();
@@ -308,7 +308,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		// Put the real building in place
 		Game& game = dynamic_cast<Game&>(egbase);
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
-		old_buildings_.push_back(std::make_pair(becomes_idx, ""));
+		old_buildings_.push_back(std::make_pair(becomes_idx, MapObjectType::BUILDING));
 		Building& b = building_->create(egbase, get_owner(), position_, false, false, old_buildings_);
 		if (Worker* const builder = builder_.get(egbase)) {
 			builder->reset_tasks(game);
@@ -391,7 +391,7 @@ void ConstructionSite::enhance(Game& game) {
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
 	info_.intermediates.push_back(building_);
-	old_buildings_.push_back(std::make_pair(owner().tribe().building_index(building_->name()), ""));
+	old_buildings_.push_back(std::make_pair(owner().tribe().building_index(building_->name()), MapObjectType::BUILDING));
 	building_ = owner().tribe().get_building_descr(building_->enhancement());
 	assert(building_);
 	info_.becomes = building_;

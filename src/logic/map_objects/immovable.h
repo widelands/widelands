@@ -125,12 +125,7 @@ class ImmovableDescr : public MapObjectDescr {
 public:
 	using Programs = std::map<std::string, ImmovableProgram*>;
 
-	/// NOCOM only 1 constructor, get rid of type. Common constructor functions for tribes and world.
-	ImmovableDescr(const std::string& init_descname,
-	               const LuaTable&,
-	               MapObjectDescr::OwnerType type,
-	               const std::vector<std::string>& attribs);
-	/// Tribes immovable
+	/// Common constructor for tribes and world.
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
 	               const std::vector<std::string>& attribs,
@@ -145,10 +140,6 @@ public:
 	Immovable& create(EditorGameBase&,
 	                  const Coords&,
 	                  const Widelands::BuildingDescr* former_building_descr) const;
-
-	MapObjectDescr::OwnerType owner_type() const {
-		return owner_type_;
-	}
 
 	const Buildcost& buildcost() const {
 		return buildcost_;
@@ -175,10 +166,6 @@ public:
 protected:
 	int32_t size_;
 	Programs programs_;
-
-	/// Whether this ImmovableDescr belongs to a tribe or the world
-	/// NOCOM get rid
-	const MapObjectDescr::OwnerType owner_type_;
 
 	/// Buildcost for externally constructible immovables (for ship construction)
 	/// \see ActConstruct

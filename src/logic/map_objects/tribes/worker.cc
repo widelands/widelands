@@ -110,11 +110,9 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
-	// NOCOM exception should happen during parsing, fail without crashing here.
 	DescriptionIndex const res = game.descriptions().resource_index(action.sparam1);
 	if (res == Widelands::INVALID_INDEX) {
-		throw GameDataError(_("should mine resource %s, which does not exist in world; tribe "
-		                      "is not compatible with world"),
+		throw GameDataError("should mine resource %s, which does not exist",
 		                    action.sparam1.c_str());
 	}
 
@@ -216,11 +214,9 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
-	// NOCOM exception should happen during parsing, fail without crashing here.
 	DescriptionIndex const res = game.descriptions().resource_index(action.sparam1);
 	if (res == Widelands::INVALID_INDEX) {
-		throw GameDataError(_("should breed resource type %s, which does not exist in world; "
-		                      "tribe is not compatible with world"),
+		throw GameDataError("should breed resource type %s, which does not exist",
 		                    action.sparam1.c_str());
 	}
 
@@ -821,15 +817,14 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// affinity). We will pick one of them at random later. The container is
 	// picked to be a stable sorting one, so that no deyncs happen in
 	// multiplayer.
-	std::set<std::tuple<int, DescriptionIndex, MapObjectDescr::OwnerType>>
+	std::set<std::pair<int, DescriptionIndex>>
 	   best_suited_immovables_index;
 
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
 	// it to be 1 (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
 	                                 const uint32_t attribute_id, const DescriptionIndex index,
-	                                 const ImmovableDescr& immovable_description,
-	                                 MapObjectDescr::OwnerType owner_type) {
+	                                 const ImmovableDescr& immovable_description) {
 		if (!immovable_description.has_attribute(attribute_id)) {
 			return;
 		}
@@ -838,7 +833,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 			p = probability_to_grow(
 			   immovable_description.terrain_affinity(), fpos, map, game.descriptions().terrains());
 		}
-		best_suited_immovables_index.insert(std::make_tuple(p, index, owner_type));
+		best_suited_immovables_index.insert(std::make_pair(p, index));
 		if (best_suited_immovables_index.size() > 6) {
 			best_suited_immovables_index.erase(best_suited_immovables_index.begin());
 		}
@@ -856,18 +851,10 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		}
 		const uint32_t attribute_id = ImmovableDescr::get_attribute_id(attrib);
 
-		// NOCOM
-		// Add world immovables
+		// Add immovables
 		const DescriptionMaintainer<ImmovableDescr>& world_immovables = game.descriptions().immovables();
 		for (uint32_t i = 0; i < world_immovables.size(); ++i) {
-			test_suitability(
-			   attribute_id, i, world_immovables.get(i), MapObjectDescr::OwnerType::kWorld);
-		}
-
-		// Add tribe immovables
-		for (const DescriptionIndex i : owner().tribe().immovables()) {
-			test_suitability(attribute_id, i, *owner().tribe().get_immovable_descr(i),
-			                 MapObjectDescr::OwnerType::kTribe);
+			test_suitability(attribute_id, i, world_immovables.get(i));
 		}
 	}
 
@@ -883,26 +870,23 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Each candidate is weighted by its probability to grow.
 	int total_weight = 0;
 	for (const auto& bsii : best_suited_immovables_index) {
-		const int weight = std::get<0>(bsii);
+		const int weight = bsii.first;
 		total_weight += weight;
 	}
 
 	// Avoid division by 0
 	int choice = game.logic_rand() % std::max(1, total_weight);
 	for (const auto& bsii : best_suited_immovables_index) {
-		const int weight = std::get<0>(bsii);
-		state.ivar2 = std::get<1>(bsii);
-		state.ivar3 = static_cast<int>(std::get<2>(bsii));
+		const int weight = bsii.first;
+		state.ivar2 = bsii.second;
 		choice -= weight;
 		if (0 > choice) {
 			break;
 		}
 	}
 
-	// Get rid of ivar3 contents, that was the immovable type world/tribe
-	Immovable& newimm = game.create_immovable(pos, state.ivar2, get_owner());
-
 	if (action.iparam1 == Action::plantUnlessObject) {
+		Immovable& newimm = game.create_immovable(pos, state.ivar2, get_owner());
 		state.objvar1 = &newimm;
 	}
 

@@ -152,13 +152,13 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							DescriptionIndex oldidx =
 							   building.owner().tribe().safe_building_index(fr.c_string());
 							const std::string type(fr.c_string());
-							building.old_buildings_.push_back(std::make_pair(oldidx, type));
+							building.old_buildings_.push_back(std::make_pair(oldidx, type.empty() || type == "building" ? MapObjectType::BUILDING : MapObjectType::IMMOVABLE));
 						}
 					} else {
 						while (fr.unsigned_8()) {
 							DescriptionIndex oldidx =
 							   building.owner().tribe().safe_building_index(fr.c_string());
-							building.old_buildings_.push_back(std::make_pair(oldidx, ""));
+							building.old_buildings_.push_back(std::make_pair(oldidx, MapObjectType::BUILDING));
 						}
 					}
 					// Only construction sites may have an empty list
@@ -966,7 +966,7 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 					const BuildingDescr* b_descr = td.get_building_descr(pair.first);
 					fw.unsigned_8(1);
 					fw.string(b_descr->name());
-					fw.string(pair.second);
+					fw.string(pair.second == MapObjectType::BUILDING ? "building" : "immovable");
 				}
 				fw.unsigned_8(0);
 			}

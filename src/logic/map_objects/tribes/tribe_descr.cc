@@ -821,8 +821,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		}
 	}
 
-	// NOCOM get rid of world/tribe immovable distinction
-	const DescriptionMaintainer<ImmovableDescr>& world_immovables = descriptions.immovables();
+	const DescriptionMaintainer<ImmovableDescr>& all_immovables = descriptions.immovables();
 
 	// Find all attributes that we need to collect from map
 	std::set<MapObjectDescr::AttributeIndex> needed_attributes;
@@ -835,14 +834,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 			// Add collected entities
 			switch (mapobjecttype) {
 			case MapObjectType::IMMOVABLE: {
-				for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
-					const ImmovableDescr& immovable_descr = world_immovables.get(i);
-					if (immovable_descr.has_attribute(attribute_id)) {
-						prod->add_collected_immovable(immovable_descr.name());
-					}
-				}
-				for (const DescriptionIndex i : immovables()) {
-					const ImmovableDescr& immovable_descr = *get_immovable_descr(i);
+				for (DescriptionIndex i = 0; i < all_immovables.size(); ++i) {
+					const ImmovableDescr& immovable_descr = all_immovables.get(i);
 					if (immovable_descr.has_attribute(attribute_id)) {
 						prod->add_collected_immovable(immovable_descr.name());
 					}
@@ -911,7 +904,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				continue;
 			}
 
-			for (const DescriptionIndex i : immovables()) {
+			for (DescriptionIndex i = 0; i < all_immovables.size(); ++i) {
 				const ImmovableDescr& immovable_descr = *get_immovable_descr(i);
 				if (immovable_descr.has_attribute(attribute_id)) {
 					walk_immovables(i, descriptions, &walked_immovables, needed_attributes,

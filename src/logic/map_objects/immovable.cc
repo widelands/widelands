@@ -137,16 +137,19 @@ ImmovableDescr IMPLEMENTATION
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               MapObjectDescr::OwnerType input_type,
-                               const std::vector<std::string>& attribs)
+                               const std::vector<std::string>& attribs,
+							   Descriptions& descriptions)
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
-     size_(BaseImmovable::NONE),
-     owner_type_(input_type) {
+     size_(BaseImmovable::NONE) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", table.get_string("name").c_str());
 	}
 	if (table.has_key("size")) {
 		size_ = BaseImmovable::string_to_size(table.get_string("size"));
+	}
+
+	if (table.has_key("buildcost")) {
+		buildcost_ = Buildcost(table.get_table("buildcost"), descriptions);
 	}
 
 	if (table.has_key("terrain_affinity")) {
@@ -214,22 +217,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	}
 
 	make_sure_default_program_is_there();
-}
-
-/**
- * Parse a tribes immovable from its init file.
- *
- * The contents of 'table' are documented in
- * /data/tribes/immovables/ashes/init.lua
- */
-ImmovableDescr::ImmovableDescr(const std::string& init_descname,
-                               const LuaTable& table,
-                               const std::vector<std::string>& attribs,
-                               Descriptions& descriptions)
-   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe, attribs) {
-	if (table.has_key("buildcost")) {
-		buildcost_ = Buildcost(table.get_table("buildcost"), descriptions);
-	}
 }
 
 bool ImmovableDescr::has_terrain_affinity() const {
@@ -503,7 +490,7 @@ Load/save support
 // kCurrentPacketVersionImmovableNoFormerBuildings during saving if we have an immovable with
 // a former building assigned to it.
 constexpr uint8_t kCurrentPacketVersionImmovableNoFormerBuildings = 8;
-constexpr uint8_t kCurrentPacketVersionImmovable = 9;
+constexpr uint8_t kCurrentPacketVersionImmovable = 10;
 
 // Supporting older versions for map loading
 void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
@@ -630,18 +617,6 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	                                  kCurrentPacketVersionImmovableNoFormerBuildings :
 	                                  kCurrentPacketVersionImmovable;
 	fw.unsigned_8(packet_version);
-
-	// NOCOM
-	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
-		if (get_owner() == nullptr) {
-			log_warn_time(
-			   egbase.get_gametime(), "Tribe immovable '%s' has no owner!", descr().name().c_str());
-		}
-		fw.c_string("tribes");
-	} else {
-		fw.c_string("world");
-	}
-
 	fw.string(descr().name());
 
 	// The main loading data follows
@@ -692,8 +667,9 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersionImmovable) {
 
-			// NOCOM bump packet version
-			fr.c_string(); // COnsume old owner type
+			if (packet_version < 10) {
+				fr.c_string(); // Consume obsolete owner type (world/tribes)
+			}
 			Immovable* imm = nullptr;
 
 			const std::string name = tribes_lookup_table.lookup_immovable(world_lookup_table.lookup_immovable(fr.c_string()));
@@ -855,10 +831,6 @@ void PlayerImmovable::remove_worker(Worker& w) {
 }
 
 void Immovable::set_former_building(const BuildingDescr& building) {
-	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe && get_owner() == nullptr) {
-		throw wexception("Set '%s' as former building for Tribe immovable '%s', but it has no owner.",
-		                 building.name().c_str(), descr().name().c_str());
-	}
 	former_building_descr_ = &building;
 }
 
