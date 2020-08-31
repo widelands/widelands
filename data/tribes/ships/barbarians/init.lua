@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_ship_type {
-   msgctxt = "barbarians_ship",
    name = "barbarians_ship",
    -- TRANSLATORS: This is the Barbarians' ship's name used in lists of units
    descname = pgettext("barbarians_ship", "Ship"),
@@ -22,3 +23,5 @@ tribes:new_ship_type {
       }
    }
 }
+
+pop_textdomain()
