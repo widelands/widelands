@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_fishbreeders_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Fish Breeder’s House"),
@@ -57,3 +58,5 @@ tribes:new_productionsite_type {
    -- Translators: Productivity tooltip for Atlantean fish breeders when all water fields are already full of fish
    resource_not_needed_message = _"The fishing grounds are full";
 }
+
+pop_textdomain()

@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_carrier_type {
-   msgctxt = "empire_worker",
    name = "empire_donkey",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Donkey"),
@@ -10,14 +11,7 @@ tribes:new_carrier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   default_target_quantity = 10,
    ware_hotspot =  { -2, 8 },
-
-   aihints = {
-      preciousness = {
-         empire = 2
-      },
-   },
 
    animations = {
       idle = {
@@ -37,5 +31,6 @@ tribes:new_carrier_type {
          directional = true
       }
    }
-
 }
+
+pop_textdomain()

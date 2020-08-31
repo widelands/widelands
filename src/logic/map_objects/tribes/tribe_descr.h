@@ -145,11 +145,6 @@ public:
 		return ship_names_;
 	}
 
-	/// Registers a building with the tribe
-	void add_building(const std::string& buildingname, Tribes& tribes);
-	/// Registers a worker with the tribe and adds it to the bottom of the last worker column
-	void add_worker(const std::string& workername, Tribes& tribes);
-
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
 
@@ -162,10 +157,8 @@ private:
 	void load_workers(const LuaTable& table, Tribes& tribes);
 	void load_buildings(const LuaTable& table, Tribes& tribes);
 
-	/// Registers a worker with the tribe and adds it to the bottom of the given worker column
-	void add_worker(const std::string& workername,
-	                std::vector<DescriptionIndex>& workers_order_column,
-	                Tribes& tribes);
+	/// Registers a building with the tribe
+	void add_building(const std::string& buildingname, Tribes& tribes);
 
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername, Tribes& tribes);

@@ -24,7 +24,6 @@
 #include "base/wexception.h"
 #include "chat/chat.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/rt_errors.h"
@@ -137,10 +136,10 @@ void ChatOverlay::Impl::recompute() {
 			oldest_ = log_messages_[log_idx].time;
 			// Do some richtext formatting here
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = (boost::format("<p>%s</p>") % g_gr->styles()
-				                                            .font_style(UI::FontStyle::kChatServer)
-				                                            .as_font_tag(log_messages_[log_idx].msg))
-				              .str();
+				richtext =
+				   (boost::format("<p>%s</p>") % g_style_manager->font_style(UI::FontStyle::kChatServer)
+				                                    .as_font_tag(log_messages_[log_idx].msg))
+				      .str();
 			}
 			log_idx--;
 		} else if (log_idx < 0 || (chat_idx >= 0 && chat_->get_messages()[chat_idx].time >=

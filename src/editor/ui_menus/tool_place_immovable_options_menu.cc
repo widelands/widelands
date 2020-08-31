@@ -47,7 +47,7 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>(
-	      this, world.editor_immovable_categories(), world.immovables(),
+	      this, parent.editor_categories(Widelands::MapObjectType::IMMOVABLE), world.immovables(),
 	      [](UI::Panel* cb_parent, const Widelands::ImmovableDescr& immovable_descr) {
 		      return create_immovable_checkbox(cb_parent, immovable_descr);
 	      },

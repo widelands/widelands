@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_goldmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Deep Gold Mine"),
@@ -35,7 +36,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "gold"
+      mines = "resource_gold"
    },
 
    working_positions = {
@@ -65,7 +66,7 @@ tribes:new_productionsite_type {
          descname = _"mining gold",
          actions = {
             "animate=working duration:13s",
-            "mine=gold radius:2 yield:100% when_empty:5% experience_on_fail:2%",
+            "mine=resource_gold radius:2 yield:100% when_empty:5% experience_on_fail:2%",
             "produce=gold_ore",
          }
       },
@@ -86,3 +87,5 @@ tribes:new_productionsite_type {
          pgettext("empire_building", "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

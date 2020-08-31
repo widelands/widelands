@@ -38,11 +38,9 @@ constexpr const char* const kTemplateDir = "templates/default/";
 
 class StyleManager {
 public:
-	StyleManager() = default;
+	// Only create after ImageCache has been initialized.
+	StyleManager();
 	~StyleManager() = default;
-
-	// Late initialization, because Graphics needs to load the image files first.
-	void init();
 
 	const UI::BuildingStatisticsStyleInfo& building_statistics_style() const;
 	const UI::ButtonStyleInfo& button_style(UI::ButtonStyle) const;
@@ -65,6 +63,12 @@ public:
 	}
 	const RGBAColor& window_border_unfocused() const {
 		return window_border_unfocused_;
+	}
+	const RGBAColor& focused_color() const {
+		return focused_color_;
+	}
+	const RGBAColor& semi_focused_color() const {
+		return semi_focused_color_;
 	}
 	static std::string color_tag(const std::string& text, const RGBColor& color);
 
@@ -91,8 +95,7 @@ private:
 
 	int minimum_font_size_;
 	RGBColor minimap_icon_frame_;
-	RGBAColor window_border_focused_;
-	RGBAColor window_border_unfocused_;
+	RGBAColor window_border_focused_, window_border_unfocused_, focused_color_, semi_focused_color_;
 	std::map<UI::FontStyle, std::unique_ptr<const UI::FontStyleInfo>> fontstyles_;
 	std::unique_ptr<const UI::BuildingStatisticsStyleInfo> building_statistics_style_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::ProgressbarStyleInfo>> progressbar_styles_;
@@ -102,5 +105,7 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(StyleManager);
 };
+
+extern StyleManager* g_style_manager;
 
 #endif  // end of include guard: WL_GRAPHIC_STYLE_MANAGER_H

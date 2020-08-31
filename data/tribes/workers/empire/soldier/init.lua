@@ -1,3 +1,5 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 animations = {
@@ -75,7 +77,6 @@ all_levels_emp = {
 }
 
 tribes:new_soldier_type {
-   msgctxt = "empire_worker",
    name = "empire_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Soldier"),
@@ -85,8 +86,6 @@ tribes:new_soldier_type {
    vision_range = 2,
 
    animations = animations,
-
-   default_target_quantity = 10,
 
    -- Battle attributes - initial values and per level increase
    health = {
@@ -113,12 +112,6 @@ tribes:new_soldier_type {
       base = 30,
       increase_per_level = 16,
       pictures = path.list_files(dirname .. "evade_level?.png"),
-   },
-
-   aihints = {
-      preciousness = {
-         empire = 5
-      },
    },
 
    -- Random animations for battle
@@ -167,3 +160,5 @@ tribes:new_soldier_type {
       },
    },
 }
+
+pop_textdomain()

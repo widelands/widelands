@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_worker_type {
-   msgctxt = "atlanteans_worker",
    name = "atlanteans_fishbreeder",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Fish Breeder"),
@@ -20,7 +21,7 @@ tribes:new_worker_type {
          "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
          "animate=freeing duration:13s500ms", -- Play a freeing animation
-         "breed=fish radius:1",
+         "breed=resource_fish radius:1",
          "return"
       }
    },
@@ -40,3 +41,5 @@ tribes:new_worker_type {
       }
    }
 }
+
+pop_textdomain()

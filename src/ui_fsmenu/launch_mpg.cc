@@ -22,8 +22,8 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/warning.h"
-#include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
@@ -116,7 +116,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   buth_,
                   buth_,
                   UI::ButtonStyle::kFsMenuSecondary,
-                  g_gr->images().get("images/ui_basic/menu_help.png"),
+                  g_image_cache->get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
 
      // Text labels
@@ -128,7 +128,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
               get_h() / 10,
               _("Clients"),
               UI::Align::kCenter,
-              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+              g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      players_(this,
               get_w() / 4,
               get_h() / 10,
@@ -136,7 +136,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
               get_h() / 10,
               _("Players"),
               UI::Align::kCenter,
-              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+              g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      map_(this,
           right_column_x_,
           get_h() / 10,
@@ -144,7 +144,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
           get_h() / 10,
           _("Map"),
           UI::Align::kCenter,
-          g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+          g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      wincondition_type_(this,
                         right_column_x_ + (butw_ / 2),
                         get_h() * 15 / 20 - 9 * label_height_,
@@ -152,7 +152,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                         0,
                         _("Type of game"),
                         UI::Align::kCenter,
-                        g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+                        g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      map_info_(this,
                right_column_x_,
                get_h() * 2 / 10,
@@ -167,6 +167,9 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	   Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_));
 	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ +
 	                                               win_condition_dropdown_.get_h() + padding_));
+	custom_starting_positions_.set_pos(Vector2i(
+	   right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ + win_condition_dropdown_.get_h() +
+	                       peaceful_.get_h() + 2 * padding_));
 	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240 - buth_ - padding_));
 	ok_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 
@@ -393,12 +396,12 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	if (settings.mapfilename != filename_proof_) {
 		if (!g_fs->file_exists(settings.mapfilename)) {
-			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
+			map_info_.set_style(g_style_manager->font_style(UI::FontStyle::kWarning));
 			map_info_.set_text(_("The selected file can not be found. If it is not automatically "
 			                     "transferred to you, please write to the host about this problem."));
 		} else {
 			// Reset font color
-			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
+			map_info_.set_style(g_style_manager->font_style(UI::FontStyle::kLabel));
 
 			// Update local nr of players - needed for the client UI
 			nr_players_ = settings.players.size();
@@ -429,6 +432,8 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	update_peaceful_mode();
 	peaceful_.set_state(settings_->is_peaceful_mode());
+	update_custom_starting_positions();
+	custom_starting_positions_.set_state(settings_->get_custom_starting_positions());
 
 	if (!settings_->can_change_map() && !init_win_condition_label()) {
 		try {
@@ -448,8 +453,8 @@ void FullscreenMenuLaunchMPG::refresh() {
 			      .str());
 
 		} catch (LuaTableKeyError& e) {
-			log("LaunchMPG: Error loading win condition: %s %s\n",
-			    settings_->get_win_condition_script().c_str(), e.what());
+			log_err("LaunchMPG: Error loading win condition: %s %s\n",
+			        settings_->get_win_condition_script().c_str(), e.what());
 		}
 		win_condition_dropdown_.set_enabled(false);
 	}
@@ -545,8 +550,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 		// get translated tribename
 		for (const Widelands::TribeBasicInfo& tribeinfo : settings_->settings().tribes) {
 			if (tribeinfo.name == player_save_tribe[i - 1]) {
-				i18n::Textdomain td("tribes");  // for translated initialisation
-				player_save_tribe[i - 1] = _(tribeinfo.descname);
+				player_save_tribe[i - 1] = tribeinfo.descname;
 				break;
 			}
 		}

@@ -28,7 +28,7 @@
 FullscreenMenuMain::FullscreenMenuMain()
    : FullscreenMenuMainMenu(),
 
-     logo_icon_(this, g_gr->images().get("images/ui_fsmenu/main_title.png")),
+     logo_icon_(this, g_image_cache->get("images/ui_fsmenu/main_title.png")),
 
      // Buttons
      playtutorial(&vbox_,
@@ -140,33 +140,27 @@ FullscreenMenuMain::FullscreenMenuMain()
 		filename_for_continue_ = newest_singleplayer->filename;
 		continue_lastsave.set_tooltip(
 		   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
-		    g_gr->styles()
-		       .font_style(UI::FontStyle::kTooltipHeader)
+		    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 		       .as_font_tag(
 		          /* strip leading "save/" and trailing ".wgf" */
 		          filename_for_continue_.substr(
 		             kSaveDir.length() + 1, filename_for_continue_.length() - kSaveDir.length() -
 		                                       kSavegameExtension.length() - 1)) %
-		    (boost::format(_("Map: %s")) % g_gr->styles()
-		                                      .font_style(UI::FontStyle::kTooltip)
+		    (boost::format(_("Map: %s")) % g_style_manager->font_style(UI::FontStyle::kTooltip)
 		                                      .as_font_tag(newest_singleplayer->mapname))
 		       .str() %
 		    (boost::format(_("Win Condition: %s")) %
-		     g_gr->styles()
-		        .font_style(UI::FontStyle::kTooltip)
+		     g_style_manager->font_style(UI::FontStyle::kTooltip)
 		        .as_font_tag(newest_singleplayer->wincondition))
 		       .str() %
-		    (boost::format(_("Players: %s")) % g_gr->styles()
-		                                          .font_style(UI::FontStyle::kTooltip)
+		    (boost::format(_("Players: %s")) % g_style_manager->font_style(UI::FontStyle::kTooltip)
 		                                          .as_font_tag(newest_singleplayer->nrplayers))
 		       .str() %
-		    (boost::format(_("Gametime: %s")) % g_gr->styles()
-		                                           .font_style(UI::FontStyle::kTooltip)
+		    (boost::format(_("Gametime: %s")) % g_style_manager->font_style(UI::FontStyle::kTooltip)
 		                                           .as_font_tag(newest_singleplayer->gametime))
 		       .str() %
 		    /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
-		    (boost::format(_("Saved: %s")) % g_gr->styles()
-		                                        .font_style(UI::FontStyle::kTooltip)
+		    (boost::format(_("Saved: %s")) % g_style_manager->font_style(UI::FontStyle::kTooltip)
 		                                        .as_font_tag(newest_singleplayer->savedatestring))
 		       .str())
 		      .str());

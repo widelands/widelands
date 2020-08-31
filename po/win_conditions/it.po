@@ -10,13 +10,14 @@
 # Guybrush88 <erpizzo@alice.it>, 2015-2017
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
+# Samuele Battarra <battarsa@email.it>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-07-23 07:48+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-23 22:14+0000\n"
+"Last-Translator: Samuele Battarra <battarsa@email.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,29 +55,29 @@ msgstr ""
 #. "New artifact"
 #: ../../data/scripting/win_conditions/artifacts.lua:80
 msgid "Artifact Found"
-msgstr "Trovato un artefatto"
+msgstr "Trovato un manufatto"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:81
 msgid "Your team found a new artifact."
-msgstr "La tua squadra ha trovato un nuovo artefatto,"
+msgstr "La tua squadra ha trovato un nuovo manufatto,"
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:85
 msgid "Artifact Lost"
-msgstr "Artefatto perso"
+msgstr "Manufatto perso"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:86
 msgid "One of your team’s artifacts was stolen by an enemy."
-msgstr "Uno degli artefatti della tua squadra è stato rubato da un nemico."
+msgstr "Uno dei manufatti della tua squadra è stato rubato da un nemico."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:90
 msgid "Artifact Conquered"
-msgstr "Artefatto conquistato"
+msgstr "Manufatto conquistato"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "Your team stole an artifact from an enemy."
-msgstr "La tua squadra ha rubato un artefatto a un nemico."
+msgstr "La tua squadra ha rubato un manufatto a un nemico."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:174
 msgid "Overview:"
@@ -88,7 +89,7 @@ msgstr "Panoramica:"
 msgid "%i artifact"
 msgid_plural "%i artifacts"
 msgstr[0] "%i artefatti"
-msgstr[1] "%i artefatti"
+msgstr[1] "%i manufatti"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../data/scripting/win_conditions/artifacts.lua:179

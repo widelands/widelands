@@ -203,7 +203,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      UI::DropdownType::kPictorialMenu,
                      UI::PanelStyle::kWui,
                      UI::ButtonStyle::kWuiPrimary),
-     grid_marker_pic_(g_gr->images().get("images/wui/overlays/grid_marker.png")) {
+     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")) {
 	add_main_menu();
 
 	set_display_flag(InteractiveBase::dfShowWorkareaOverlap, true);  // enable by default
@@ -262,7 +262,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 }
 
 void InteractivePlayer::add_statistics_menu() {
-	statisticsmenu_.set_image(g_gr->images().get("images/wui/menus/statistics.png"));
+	statisticsmenu_.set_image(g_image_cache->get("images/wui/menus/statistics.png"));
 	toolbar()->add(&statisticsmenu_);
 
 	menu_windows_.stats_seafaring.open_window = [this] {
@@ -301,31 +301,31 @@ void InteractivePlayer::rebuild_statistics_menu() {
 	if (egbase().map().allows_seafaring()) {
 		/** TRANSLATORS: An entry in the game's statistics menu */
 		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring,
-		                    g_gr->images().get("images/wui/menus/statistics_seafaring.png"), false,
+		                    g_image_cache->get("images/wui/menus/statistics_seafaring.png"), false,
 		                    "", "E");
 	}
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Soldiers"), StatisticsMenuEntry::kSoldiers,
-	                    g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
+	                    g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
 	                    "X");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
-	                    g_gr->images().get("images/wui/menus/statistics_stock.png"), false, "", "I");
+	                    g_image_cache->get("images/wui/menus/statistics_stock.png"), false, "", "I");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
-	                    g_gr->images().get("images/wui/menus/statistics_buildings.png"), false, "",
+	                    g_image_cache->get("images/wui/menus/statistics_buildings.png"), false, "",
 	                    "B");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare,
-	                    g_gr->images().get("images/wui/menus/statistics_wares.png"), false, "", "P");
+	                    g_image_cache->get("images/wui/menus/statistics_wares.png"), false, "", "P");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral,
-	                    g_gr->images().get("images/wui/menus/statistics_general.png"), false, "",
+	                    g_image_cache->get("images/wui/menus/statistics_general.png"), false, "",
 	                    "G");
 }
 
@@ -367,7 +367,7 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	       * are highlighted */
 	      _("Show Workarea Overlaps"),
 	   ShowHideEntry::kWorkareaOverlap,
-	   g_gr->images().get("images/wui/menus/show_workarea_overlap.png"), false,
+	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"), false,
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), "W");
 }
 
@@ -382,6 +382,11 @@ bool InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coord
 
 void InteractivePlayer::think() {
 	InteractiveBase::think();
+
+	if (player().is_picking_custom_starting_position()) {
+		set_sel_picture(
+		   playercolor_image(player_number() - 1, "images/players/player_position_menu.png"));
+	}
 
 	if (flag_to_connect_) {
 		Widelands::Field& field = egbase().map()[flag_to_connect_];
@@ -416,7 +421,7 @@ void InteractivePlayer::think() {
 			    nr_new_messages)
 			      .str();
 		}
-		toggle_message_menu_->set_pic(g_gr->images().get(msg_icon));
+		toggle_message_menu_->set_pic(g_image_cache->get(msg_icon));
 		toggle_message_menu_->set_tooltip(msg_tooltip);
 	}
 
@@ -454,6 +459,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	Workareas workareas = get_workarea_overlays(map);
 	FieldsToDraw* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
 	const auto& road_building_s = road_building_steepness_overlays();
+	const bool picking_starting_pos = plr.is_picking_custom_starting_position();
 
 	const float scale = 1.f / given_map_view->view().zoom;
 
@@ -505,6 +511,22 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			}
 		}
 
+		// Draw the player starting position overlays.
+		const bool suited_as_starting_pos =
+		   picking_starting_pos && plr.get_starting_position_suitability(f->fcoords);
+		if (suited_as_starting_pos) {
+			for (unsigned p = map.get_nrplayers(); p; --p) {
+				if (map.get_starting_pos(p) == f->fcoords) {
+					const Image* player_image =
+					   playercolor_image(p - 1, "images/players/player_position.png");
+					static constexpr int kStartingPosHotspotY = 55;
+					blit_field_overlay(dst, *f, player_image,
+					                   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
+					break;
+				}
+			}
+		}
+
 		// Draw work area markers.
 		if (has_workarea_preview(f->fcoords, &map)) {
 			blit_field_overlay(dst, *f, grid_marker_pic_,
@@ -514,10 +536,16 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			// Draw build help.
-			bool show_port_space = has_expedition_port_space(f->fcoords);
-			if (show_port_space || buildhelp()) {
-				if (const auto* overlay = get_buildhelp_overlay(
-				       show_port_space ? f->fcoords.field->maxcaps() : plr.get_buildcaps(f->fcoords))) {
+			const bool show_port_space = has_expedition_port_space(f->fcoords);
+			if (show_port_space || suited_as_starting_pos || buildhelp()) {
+				if (const auto* overlay =
+				       (!show_port_space && picking_starting_pos && !suited_as_starting_pos &&
+				        !buildhelp()) ?
+				          nullptr :
+				          get_buildhelp_overlay(show_port_space ? f->fcoords.field->maxcaps() :
+				                                                  picking_starting_pos ?
+				                                                  f->fcoords.field->nodecaps() :
+				                                                  plr.get_buildcaps(f->fcoords))) {
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale,
 					                   f->seeing == Widelands::SeeUnseeNode::kVisible ? 1.f : 0.3f);
 				}
@@ -560,6 +588,13 @@ Widelands::PlayerNumber InteractivePlayer::player_number() const {
 
 /// Player has clicked on the given node; bring up the context menu.
 void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
+	if (player().is_picking_custom_starting_position()) {
+		if (get_player()->pick_custom_starting_position(node_and_triangle.node)) {
+			unset_sel_picture();
+		}
+		return;
+	}
+
 	const Map& map = egbase().map();
 	if (player().is_seeing(Map::get_index(node_and_triangle.node, map.get_width()))) {
 		// Special case for buildings

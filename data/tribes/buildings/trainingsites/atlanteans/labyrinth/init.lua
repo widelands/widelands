@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_trainingsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_labyrinth",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Labyrinth"),
@@ -65,7 +66,6 @@ tribes:new_trainingsite_type {
    ["soldier health"] = {
       food = {
          {"smoked_fish", "smoked_meat"},
-         {"atlanteans_bread"}
       },
       weapons = {
          "tabard_golden"
@@ -73,7 +73,8 @@ tribes:new_trainingsite_type {
    },
    ["soldier evade"] = {
       food = {
-         {"smoked_fish", "smoked_meat"}
+         {"smoked_fish", "smoked_meat"},
+         {"atlanteans_bread"}
       }
    },
 
@@ -158,3 +159,5 @@ tribes:new_trainingsite_type {
    soldier_capacity = 8,
    trainer_patience = 20
 }
+
+pop_textdomain()

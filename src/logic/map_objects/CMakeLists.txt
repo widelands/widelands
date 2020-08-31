@@ -28,6 +28,7 @@ wl_library(logic_tribe_basic_info
     tribes/tribe_basic_info.h
   DEPENDS
     base_i18n
+    io_filesystem
     logic_exceptions
     scripting_lua_table
     scripting_lua_interface
@@ -123,8 +124,6 @@ wl_library(logic_map_objects
     world/critter.cc
     world/critter.h
     world/critter_program.h
-    world/editor_category.cc
-    world/editor_category.h
     world/map_gen.cc
     world/map_gen.h
     world/resource_description.cc
@@ -134,6 +133,7 @@ wl_library(logic_map_objects
     world/world.cc
     world/world.h
   USES_BOOST_REGEX
+  USES_SDL2
   DEPENDS
     ai_hints
     base_exceptions
@@ -148,6 +148,7 @@ wl_library(logic_map_objects
     graphic_animation
     graphic_color
     graphic_fonthandler
+    graphic_image_cache
     graphic_image_io
     graphic_surface
     graphic_text_layout

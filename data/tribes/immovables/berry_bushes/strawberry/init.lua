@@ -1,3 +1,5 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 terrain_affinity = {
@@ -8,7 +10,6 @@ terrain_affinity = {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_strawberry_tiny",
    descname = _ "Strawberries (tiny)",
    size = "small",
@@ -34,7 +35,6 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_strawberry_small",
    descname = _ "Strawberries (small)",
    size = "small",
@@ -60,7 +60,6 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_strawberry_medium",
    descname = _ "Strawberries (medium)",
    size = "small",
@@ -86,7 +85,6 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_strawberry_ripe",
    descname = _ "Strawberries (ripe)",
    size = "small",
@@ -113,3 +111,5 @@ tribes:new_immovable_type {
       }
    }
 }
+
+pop_textdomain()

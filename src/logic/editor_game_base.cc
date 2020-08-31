@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
 #include "base/time_string.h"
@@ -45,6 +46,7 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
+#include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
@@ -68,15 +70,14 @@ initialization
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
    : gametime_(0),
-     lua_(lua_interface),
+     // TODO(SirVer): this is sooo ugly, I can't say
+     lua_(lua_interface ? lua_interface : new LuaEditorInterface(this)),
      player_manager_(new PlayersManager(*this)),
+     description_manager_(new Widelands::DescriptionManager(lua_.get())),
      ibase_(nullptr),
      loader_ui_(nullptr),
      game_tips_(nullptr),
      tmp_fs_(nullptr) {
-	if (!lua_) {  // TODO(SirVer): this is sooo ugly, I can't say
-		lua_.reset(new LuaEditorInterface(this));
-	}
 
 	loading_message_subscriber_ = Notifications::subscribe<UI::NoteLoadingMessage>(
 	   [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); });
@@ -109,7 +110,9 @@ void EditorGameBase::delete_tempfile() {
 	} catch (const std::exception& e) {
 		// if file deletion fails then we have an abandoned file lying around, but otherwise that's
 		// unproblematic
-		log("EditorGameBase::delete_tempfile: deleting temporary file/dir failed: %s\n", e.what());
+		log_warn_time(get_gametime(),
+		              "EditorGameBase::delete_tempfile: deleting temporary file/dir failed: %s\n",
+		              e.what());
 	}
 }
 
@@ -173,7 +176,8 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 		// destructs).
 		tmp_fs_->file_exists("binary");
 	} catch (const WException& e) {
-		log("EditorGameBase: saving map to temporary file failed: %s", e.what());
+		log_err_time(
+		   get_gametime(), "EditorGameBase: saving map to temporary file failed: %s", e.what());
 		throw;
 	}
 }
@@ -194,18 +198,9 @@ World* EditorGameBase::mutable_world() {
 		// Lazy initialization of World. We need to create the pointer to the
 		// world immediately though, because the lua scripts need to have access
 		// to world through this method already.
-		ScopedTimer timer("Loading the world took %ums");
+		ScopedTimer timer("Registering the world took %ums");
 		Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
-		world_.reset(new World());
-
-		try {
-			lua_->run_script("world/init.lua");
-		} catch (const WException& e) {
-			log("Could not read world information: %s", e.what());
-			throw;
-		}
-
-		world_->load_graphics();
+		world_.reset(new World(description_manager_.get()));
 	}
 	return world_.get();
 }
@@ -227,7 +222,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 		// to tribes through this method already.
 		ScopedTimer timer("Registering the tribes took %ums");
 		Notifications::publish(UI::NoteLoadingMessage(_("Loading tribes…")));
-		tribes_.reset(new Tribes(lua_.get()));
+		tribes_.reset(new Tribes(description_manager_.get(), lua_.get()));
 	}
 	return tribes_.get();
 }
@@ -288,8 +283,8 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 // Loads map object descriptions for all tribes
 void EditorGameBase::load_all_tribes() {
 	// Load all tribes
-	for (const std::string& tribe_name : Widelands::get_all_tribenames()) {
-		mutable_tribes()->load_tribe(tribe_name);
+	for (const auto& tribe_info : Widelands::get_all_tribeinfos()) {
+		mutable_tribes()->load_tribe(tribe_info.name);
 	}
 }
 
@@ -311,7 +306,6 @@ void EditorGameBase::postload() {
 	// Tribes don't have a postload at this point.
 	Notifications::publish(UI::NoteLoadingMessage(_("Postloading world and tribes…")));
 	assert(world_);
-	world_->postload();
 }
 
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,

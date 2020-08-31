@@ -403,7 +403,7 @@ enum {
 
 	/**
 	 * During game setup, this is sent by the client to indicate that the
-	 * client wants to change a player's initialisation.
+	 * client wants to change a player's initialization.
 	 *
 	 * \li unsigned_8: number of the player
 	 * \li unsigned_8: index of the initialization
@@ -435,6 +435,14 @@ enum {
 	 * \li uint8_t: 1 if peaceful mode is enabled, 0 otherwise
 	 */
 	NETCMD_PEACEFUL_MODE = 33,
+
+	/**
+	 * Sent by the host to toggle custom_starting_positions mode.
+	 *
+	 * Attached data is:
+	 * \li uint8_t: 1 if custom_starting_positions mode is enabled, 0 otherwise
+	 */
+	NETCMD_CUSTOM_STARTING_POSITIONS = 34,
 
 	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability

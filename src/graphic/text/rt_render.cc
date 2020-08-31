@@ -195,7 +195,8 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 	try {
 		font.reset(load_font(ns->font_face, font_size));
 	} catch (FileNotFoundError& e) {
-		log("Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
+		log_warn(
+		   "Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
 		font.reset(load_font(ns->fontset->sans(), font_size));
 	}
 	assert(font != nullptr);
@@ -289,7 +290,7 @@ protected:
 			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % check_w % check_h %
 			    maximum_size)
 			      .str();
-			log("%s\n", error_message.c_str());
+			log_err("%s\n", error_message.c_str());
 			throw TextureTooBig(error_message);
 		}
 	}
@@ -1025,7 +1026,7 @@ public:
 	              bool use_playercolor)
 	   : RenderNode(ns),
 	     image_(use_playercolor ? playercolor_image(color, image_filename) :
-	                              g_gr->images().get(image_filename)),
+	                              g_image_cache->get(image_filename)),
 	     filename_(image_filename),
 	     scale_(scale),
 	     color_(color),
@@ -1070,7 +1071,7 @@ std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_ca
 	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 
 	if (scale_ == 1.0 || filename_.empty()) {
-		// Image can be used as is, and has already been cached in g_gr->images()
+		// Image can be used as is, and has already been cached in g_image_cache
 		assert(image_ != nullptr);
 		rendered_text->rects.push_back(
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(image_)));
@@ -1358,7 +1359,7 @@ public:
 			use_playercolor = true;
 		}
 		if (a.has("object")) {
-			const Image* representative_image = g_gr->animations().get_representative_image(
+			const Image* representative_image = g_animation_manager->get_representative_image(
 			   a["object"].get_string(), use_playercolor ? &color : nullptr);
 			render_node_.reset(new ImgRenderNode(nodestyle_, representative_image));
 		} else {
@@ -1367,10 +1368,10 @@ public:
 			if (a.has("width")) {
 				int width = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (width > renderer_style_.overall_width) {
-					log("WARNING: Font renderer: Specified image width of %d exceeds the overall "
-					    "available "
-					    "width of %d. Setting width to %d.\n",
-					    width, renderer_style_.overall_width, renderer_style_.overall_width);
+					log_warn("Font renderer: Specified image width of %d exceeds the overall "
+					         "available "
+					         "width of %d. Setting width to %d.\n",
+					         width, renderer_style_.overall_width, renderer_style_.overall_width);
 					width = renderer_style_.overall_width;
 				}
 				const int image_width = image_cache_->get(image_filename)->width();
@@ -1671,16 +1672,16 @@ public:
 				width_string = width_string.substr(0, width_string.length() - 1);
 				uint8_t width_percent = strtol(width_string.c_str(), nullptr, 10);
 				if (width_percent > 100) {
-					log("WARNING: Font renderer: Do not use width > 100%%\n");
+					log_warn("Font renderer: Do not use width > 100%%\n");
 					width_percent = 100;
 				}
 				render_node_->set_desired_width(DesiredWidth(width_percent, WidthUnit::kPercent));
 			} else {
 				w_ = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (w_ > renderer_style_.overall_width) {
-					log("WARNING: Font renderer: Specified width of %d exceeds the overall available "
-					    "width of %d. Setting width to %d.\n",
-					    w_, renderer_style_.overall_width, renderer_style_.overall_width);
+					log_warn("Font renderer: Specified width of %d exceeds the overall available "
+					         "width of %d. Setting width to %d.\n",
+					         w_, renderer_style_.overall_width, renderer_style_.overall_width);
 					w_ = renderer_style_.overall_width;
 				}
 				render_node_->set_desired_width(DesiredWidth(w_, WidthUnit::kAbsolute));
