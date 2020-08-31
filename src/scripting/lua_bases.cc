@@ -168,7 +168,6 @@ int LuaEditorGameBase::get_sdl_time(lua_State* L) {
 	return 1;
 }
 
-
 /*
  ==========================================================
  LUA METHODS
