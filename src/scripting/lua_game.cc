@@ -762,7 +762,7 @@ int LuaPlayer::get_buildings(lua_State* L) {
 // UNTESTED
 int LuaPlayer::get_suitability(lua_State* L) {
 	Game& game = get_game(L);
-	const Tribes& tribes = game.tribes();
+	const Descriptions& tribes = game.tribes();
 
 	const char* name = luaL_checkstring(L, 2);
 	DescriptionIndex i = tribes.building_index(name);
@@ -918,7 +918,7 @@ void LuaPlayer::parse_building_list(lua_State* L,
                                     const TribeDescr& tribe,
                                     std::vector<DescriptionIndex>& rv) {
 	EditorGameBase& egbase = get_egbase(L);
-	const Tribes& tribes = egbase.tribes();
+	const Descriptions& tribes = egbase.tribes();
 	if (lua_isstring(L, -1)) {
 		std::string opt = luaL_checkstring(L, -1);
 		if (opt != "all") {

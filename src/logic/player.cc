@@ -102,7 +102,7 @@ Player::Field::PartiallyFinishedBuildingDetails::PartiallyFinishedBuildingDetail
  * building descr. The FormerBuildings given in reference must be empty and will be
  * filled with the BuildingDescr.
  */
-void find_former_buildings(const Tribes& tribes,
+void find_former_buildings(const Descriptions& tribes,
                            const Widelands::DescriptionIndex bi,
                            Widelands::FormerBuildings* former_buildings) {
 	assert(former_buildings && former_buildings->empty());
@@ -710,7 +710,7 @@ Building& Player::force_csite(Coords const location,
                               const FormerBuildings& former_buildings) {
 	EditorGameBase& eg = egbase();
 	const Map& map = eg.map();
-	const Tribes& tribes = eg.tribes();
+	const Descriptions& tribes = eg.tribes();
 	const PlayerNumber pn = player_number();
 
 	if (!former_buildings.empty()) {
@@ -1937,7 +1937,7 @@ void Player::write_statistics(FileWrite& fw) const {
 		fw.c_string(oss.str());
 	};
 
-	const Tribes& tribes = egbase().tribes();
+	const Descriptions& tribes = egbase().tribes();
 	const std::set<DescriptionIndex>& tribe_wares = tribe().wares();
 	const size_t nr_wares = tribe_wares.size();
 

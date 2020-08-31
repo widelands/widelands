@@ -35,7 +35,7 @@ class TrainingSiteDescr : public ProductionSiteDescr {
 public:
 	TrainingSiteDescr(const std::string& init_descname,
 	                  const LuaTable& table,
-	                  Tribes& tribes,
+	                  Descriptions& tribes,
 	                  World& world);
 	~TrainingSiteDescr() override {
 	}

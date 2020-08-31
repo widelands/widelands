@@ -658,7 +658,7 @@ void EconomyOptionsWindow::close_save_profile_window() {
 void EconomyOptionsWindow::do_create_target(const std::string& name) {
 	assert(!name.empty());
 	assert(name != kDefaultEconomyProfile);
-	const Widelands::Tribes& tribes = player_->egbase().tribes();
+	const Widelands::Descriptions& tribes = player_->egbase().tribes();
 	const Widelands::TribeDescr& tribe = player_->tribe();
 	Widelands::Economy* ware_economy = player_->get_economy(ware_serial_);
 	Widelands::Economy* worker_economy = player_->get_economy(worker_serial_);
@@ -680,7 +680,7 @@ void EconomyOptionsWindow::do_create_target(const std::string& name) {
 }
 
 void EconomyOptionsWindow::save_targets() {
-	const Widelands::Tribes& tribes = player_->egbase().tribes();
+	const Widelands::Descriptions& tribes = player_->egbase().tribes();
 	Profile profile;
 
 	std::map<std::string, uint32_t> serials;
@@ -726,7 +726,7 @@ void EconomyOptionsWindow::save_targets() {
 
 void EconomyOptionsWindow::read_targets() {
 	predefined_targets_.clear();
-	const Widelands::Tribes& tribes = player_->egbase().tribes();
+	const Widelands::Descriptions& tribes = player_->egbase().tribes();
 	const Widelands::TribeDescr& tribe = player_->tribe();
 
 	{

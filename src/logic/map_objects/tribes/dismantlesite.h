@@ -43,7 +43,7 @@ class DismantleSite;
 
 class DismantleSiteDescr : public BuildingDescr {
 public:
-	DismantleSiteDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
+	DismantleSiteDescr(const std::string& init_descname, const LuaTable& t, Descriptions& tribes);
 	~DismantleSiteDescr() override {
 	}
 

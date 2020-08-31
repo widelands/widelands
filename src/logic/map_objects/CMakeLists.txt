@@ -45,6 +45,8 @@ wl_library(logic_map_objects
     buildcost.h
     checkstep.cc
     checkstep.h
+    descriptions.cc
+    descriptions.h
     findbob.cc
     findbob.h
     findimmovable.cc
@@ -103,8 +105,6 @@ wl_library(logic_map_objects
     tribes/trainingsite.h
     tribes/tribe_descr.cc
     tribes/tribe_descr.h
-    tribes/tribes.cc
-    tribes/tribes.h
     tribes/ware_descr.cc
     tribes/ware_descr.h
     tribes/warehouse.cc

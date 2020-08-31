@@ -45,7 +45,7 @@ namespace Widelands {
 class PlayersManager;
 struct ObjectManager;
 class Player;
-class Tribes;
+class Descriptions;
 struct BuildingSettings;
 
 struct NoteFieldPossession {
@@ -213,10 +213,10 @@ public:
 	World* mutable_world();
 
 	// Returns the tribes.
-	const Tribes& tribes() const;
+	const Descriptions& tribes() const;
 
 	// Returns the mutable tribes. Prefer tribes() whenever possible.
-	Tribes* mutable_tribes();
+	Descriptions* mutable_tribes();
 
 	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
@@ -274,7 +274,7 @@ private:
 
 	std::unique_ptr<DescriptionManager> description_manager_;
 	std::unique_ptr<World> world_;
-	std::unique_ptr<Tribes> tribes_;
+	std::unique_ptr<Descriptions> tribes_;
 	std::unique_ptr<InteractiveBase> ibase_;
 	Map map_;
 

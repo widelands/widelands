@@ -36,11 +36,11 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
@@ -54,7 +54,7 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
-                             Tribes& tribes)
+                             Descriptions& tribes)
    : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
      tribes_(tribes),
      buildable_(table.has_key("buildcost")),

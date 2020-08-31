@@ -40,7 +40,7 @@ namespace Widelands {
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
-                                       Tribes& tribes)
+                                       Descriptions& tribes)
    : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, tribes),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {

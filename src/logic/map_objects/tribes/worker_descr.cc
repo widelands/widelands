@@ -36,7 +36,7 @@ namespace Widelands {
 WorkerDescr::WorkerDescr(const std::string& init_descname,
                          MapObjectType init_type,
                          const LuaTable& table,
-                         Tribes& tribes)
+                         Descriptions& tribes)
    : BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
      ware_hotspot_(table.has_key("ware_hotspot") ?
                       table.get_vector<std::string, int>("ware_hotspot") :
@@ -120,7 +120,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	}
 }
 
-WorkerDescr::WorkerDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes)
+WorkerDescr::WorkerDescr(const std::string& init_descname, const LuaTable& table, Descriptions& tribes)
    : WorkerDescr(init_descname, MapObjectType::WORKER, table, tribes) {
 }
 

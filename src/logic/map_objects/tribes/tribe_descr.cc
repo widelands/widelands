@@ -138,7 +138,7 @@ namespace Widelands {
  * /data/tribes/atlanteans.lua
  */
 TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
-                       Tribes& tribes,
+                       Descriptions& tribes,
                        const World& world,
                        const LuaTable& table,
                        const LuaTable* scenario_table)
@@ -310,7 +310,7 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 	}
 }
 
-void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
+void TribeDescr::load_ships(const LuaTable& table, Descriptions& tribes) {
 	const std::string shipname(table.get_string("ship"));
 	try {
 		ship_ = tribes.load_ship(shipname);
@@ -320,7 +320,7 @@ void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
 	ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
 }
 
-void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
+void TribeDescr::load_wares(const LuaTable& table, Descriptions& tribes) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("wares_order");
 
 	for (const int column_key : items_table->keys<int>()) {
@@ -356,7 +356,7 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
 	}
 }
 
-void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const World& world) {
+void TribeDescr::load_immovables(const LuaTable& table, Descriptions& tribes, const World& world) {
 	for (const std::string& immovablename :
 	     table.get_table("immovables")->array_entries<std::string>()) {
 		try {
@@ -398,7 +398,7 @@ void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const Wo
 	get_resource_indicator(nullptr, 0);
 }
 
-void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
+void TribeDescr::load_workers(const LuaTable& table, Descriptions& tribes) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("workers_order");
 
 	for (const int column_key : items_table->keys<int>()) {
@@ -464,7 +464,7 @@ void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
 	}
 }
 
-void TribeDescr::load_buildings(const LuaTable& table, Tribes& tribes) {
+void TribeDescr::load_buildings(const LuaTable& table, Descriptions& tribes) {
 	for (const std::string& buildingname :
 	     table.get_table("buildings")->array_entries<std::string>()) {
 		add_building(buildingname, tribes);
@@ -672,7 +672,7 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	return list->second.find(lowest)->second;
 }
 
-void TribeDescr::add_building(const std::string& buildingname, Tribes& tribes) {
+void TribeDescr::add_building(const std::string& buildingname, Descriptions& tribes) {
 	try {
 		DescriptionIndex index = tribes.load_building(buildingname);
 		if (has_building(index)) {
@@ -717,7 +717,7 @@ ToolbarImageset* TribeDescr::toolbar_image_set() const {
  * Helper functions
  */
 
-DescriptionIndex TribeDescr::add_special_worker(const std::string& workername, Tribes& tribes) {
+DescriptionIndex TribeDescr::add_special_worker(const std::string& workername, Descriptions& tribes) {
 	try {
 		DescriptionIndex worker = tribes.load_worker(workername);
 		if (!has_worker(worker)) {
@@ -729,7 +729,7 @@ DescriptionIndex TribeDescr::add_special_worker(const std::string& workername, T
 	}
 }
 
-DescriptionIndex TribeDescr::add_special_building(const std::string& buildingname, Tribes& tribes) {
+DescriptionIndex TribeDescr::add_special_building(const std::string& buildingname, Descriptions& tribes) {
 	try {
 		DescriptionIndex building = tribes.load_building(buildingname);
 		if (!has_building(building)) {
@@ -742,7 +742,7 @@ DescriptionIndex TribeDescr::add_special_building(const std::string& buildingnam
 	}
 }
 
-void TribeDescr::finalize_loading(Tribes& tribes, const World& world) {
+void TribeDescr::finalize_loading(Descriptions& tribes, const World& world) {
 	// Validate special units
 	if (builder_ == Widelands::INVALID_INDEX) {
 		throw GameDataError("special worker 'builder' not defined");
@@ -774,7 +774,7 @@ void TribeDescr::finalize_loading(Tribes& tribes, const World& world) {
 }
 
 // Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
-void TribeDescr::calculate_trainingsites_proportions(Tribes& tribes) {
+void TribeDescr::calculate_trainingsites_proportions(Descriptions& tribes) {
 	unsigned int trainingsites_without_percent = 0;
 	int used_percent = 0;
 	std::vector<BuildingDescr*> traingsites_with_percent;
@@ -829,7 +829,7 @@ void TribeDescr::calculate_trainingsites_proportions(Tribes& tribes) {
 }
 
 // Calculate building properties that have circular dependencies
-void TribeDescr::process_productionsites(Tribes& tribes, const World& world) {
+void TribeDescr::process_productionsites(Descriptions& tribes, const World& world) {
 	// Get a list of productionsites - we will need to iterate them more than once
 	// The temporary use of pointers here is fine, because it doesn't affect the game state.
 	std::set<ProductionSiteDescr*> productionsites;

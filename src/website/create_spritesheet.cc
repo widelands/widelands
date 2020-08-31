@@ -33,7 +33,7 @@
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/widelands.h"
@@ -171,7 +171,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
                                   const std::string& map_object_name,
                                   const std::string& animation_name,
                                   FileSystem* out_filesystem) {
-	const Widelands::Tribes& tribes = egbase.tribes();
+	const Widelands::Descriptions& tribes = egbase.tribes();
 	const Widelands::World& world = egbase.world();
 	log_info("==========================================\n");
 

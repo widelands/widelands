@@ -107,7 +107,7 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 WorkerProgram::WorkerProgram(const std::string& init_name,
                              const LuaTable& actions_table,
                              const WorkerDescr& worker,
-                             Tribes& tribes)
+                             Descriptions& tribes)
    : MapObjectProgram(init_name), worker_(worker), tribes_(tribes) {
 
 	for (const std::string& line : actions_table.array_entries<std::string>()) {

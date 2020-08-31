@@ -29,10 +29,10 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/world.h"
 #include "website/json/json.h"
 #include "website/website_common.h"
@@ -275,7 +275,7 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 	JSON::Array* json_tribes_array = json->add_array("tribes");
 
 	/// Tribes
-	const Tribes& tribes = egbase.tribes();
+	const Descriptions& tribes = egbase.tribes();
 
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {

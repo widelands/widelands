@@ -35,6 +35,7 @@
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/battle.h"
@@ -42,7 +43,6 @@
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
@@ -205,13 +205,13 @@ World* EditorGameBase::mutable_world() {
 	return world_.get();
 }
 
-const Tribes& EditorGameBase::tribes() const {
+const Descriptions& EditorGameBase::tribes() const {
 	// Const casts are evil, but this is essentially lazy evaluation and the
 	// caller should really not modify this.
 	return *const_cast<EditorGameBase*>(this)->mutable_tribes();
 }
 
-Tribes* EditorGameBase::mutable_tribes() {
+Descriptions* EditorGameBase::mutable_tribes() {
 	if (!tribes_) {
 		// We need to make sure that the world is loaded first for some attribute checks in the worker
 		// programs.
@@ -222,7 +222,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 		// to tribes through this method already.
 		ScopedTimer timer("Registering the tribes took %ums");
 		Notifications::publish(UI::NoteLoadingMessage(_("Loading tribes…")));
-		tribes_.reset(new Tribes(description_manager_.get(), lua_.get()));
+		tribes_.reset(new Descriptions(description_manager_.get(), lua_.get()));
 	}
 	return tribes_.get();
 }

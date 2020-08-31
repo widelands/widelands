@@ -29,8 +29,8 @@
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
@@ -184,7 +184,7 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 		return to_lua<LuaMaps::LuaImmovableDescription>(
 		   L, new LuaMaps::LuaImmovableDescription(descr));
 	}
-	const Tribes& tribes = egbase.tribes();
+	const Descriptions& tribes = egbase.tribes();
 	idx = tribes.immovable_index(immovable_name);
 	if (!tribes.immovable_exists(idx)) {
 		report_error(L, "Immovable %s does not exist", immovable_name.c_str());
@@ -224,7 +224,7 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Descriptions& tribes = get_egbase(L).tribes();
 	const std::string building_name = luaL_checkstring(L, 2);
 	const DescriptionIndex building_index = tribes.building_index(building_name);
 	if (!tribes.building_exists(building_index)) {
@@ -248,7 +248,7 @@ int LuaEditorGameBase::get_ship_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Descriptions& tribes = get_egbase(L).tribes();
 	const std::string ship_name = luaL_checkstring(L, 2);
 	const DescriptionIndex ship_index = tribes.ship_index(ship_name);
 	if (!tribes.ship_exists(ship_index)) {
@@ -273,7 +273,7 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Descriptions& tribes = get_egbase(L).tribes();
 	const std::string tribe_name = luaL_checkstring(L, 2);
 	if (!tribes.tribe_exists(tribe_name)) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
@@ -297,7 +297,7 @@ int LuaEditorGameBase::get_ware_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Descriptions& tribes = get_egbase(L).tribes();
 	const std::string ware_name = luaL_checkstring(L, 2);
 	DescriptionIndex ware_index = tribes.ware_index(ware_name);
 	if (!tribes.ware_exists(ware_index)) {
@@ -320,7 +320,7 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Descriptions& tribes = get_egbase(L).tribes();
 	const std::string worker_name = luaL_checkstring(L, 2);
 	const DescriptionIndex worker_index = tribes.worker_index(worker_name);
 	if (!tribes.worker_exists(worker_index)) {
@@ -877,7 +877,7 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	}
 
 	EditorGameBase& egbase = get_egbase(L);
-	const Tribes& tribes = egbase.tribes();
+	const Descriptions& tribes = egbase.tribes();
 	Player& player = get(L, egbase);
 
 	try {

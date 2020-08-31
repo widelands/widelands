@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBES_H
-#define WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBES_H
+#ifndef WL_LOGIC_MAP_OBJECTS_DESCRIPTIONS_H
+#define WL_LOGIC_MAP_OBJECTS_DESCRIPTIONS_H
 
 #include <list>
 #include <memory>
@@ -37,10 +37,10 @@
 
 namespace Widelands {
 
-class Tribes {
+class Descriptions {
 public:
-	Tribes(DescriptionManager* description_manager, LuaInterface* lua);
-	~Tribes() = default;
+	Descriptions(DescriptionManager* description_manager, LuaInterface* lua);
+	~Descriptions() = default;
 
 	size_t nrbuildings() const;
 	size_t nrtribes() const;
@@ -130,9 +130,9 @@ private:
 
 	LuaInterface* lua_;                        // Not owned
 	DescriptionManager* description_manager_;  // Not owned
-	DISALLOW_COPY_AND_ASSIGN(Tribes);
+	DISALLOW_COPY_AND_ASSIGN(Descriptions);
 };
 
 }  // namespace Widelands
 
-#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBES_H
+#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_DESCRIPTIONS_H

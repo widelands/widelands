@@ -31,12 +31,12 @@
 namespace Widelands {
 
 class TribeDescr;
-class Tribes;
+class Descriptions;
 
 struct Buildcost : std::map<DescriptionIndex, uint8_t> {
 
 	Buildcost();
-	Buildcost(std::unique_ptr<LuaTable> table, Widelands::Tribes& tribes);
+	Buildcost(std::unique_ptr<LuaTable> table, Widelands::Descriptions& tribes);
 
 	Quantity total() const;
 

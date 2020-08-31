@@ -24,15 +24,15 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/tribes.h"
 
 namespace Widelands {
 
 Buildcost::Buildcost() : std::map<DescriptionIndex, uint8_t>() {
 }
 
-Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Tribes& tribes)
+Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Descriptions& tribes)
    : std::map<DescriptionIndex, uint8_t>() {
 	for (const std::string& warename : table->keys<std::string>()) {
 		int32_t value = INVALID_INDEX;

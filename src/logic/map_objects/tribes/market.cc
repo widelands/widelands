@@ -22,13 +22,13 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/productionsite.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
 
 namespace Widelands {
 
-MarketDescr::MarketDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes)
+MarketDescr::MarketDescr(const std::string& init_descname, const LuaTable& table, Descriptions& tribes)
    : BuildingDescr(init_descname, MapObjectType::MARKET, table, tribes) {
 
 	DescriptionIndex const woi = tribes.worker_index(table.get_string("carrier"));

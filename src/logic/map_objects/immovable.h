@@ -135,7 +135,7 @@ public:
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
 	               const std::vector<std::string>& attribs,
-	               Tribes& tribes);
+	               Descriptions& tribes);
 	~ImmovableDescr() override;
 
 	int32_t get_size() const {

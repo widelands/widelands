@@ -50,7 +50,7 @@ namespace {
 // Parses the descriptions of the working positions from 'items_table' and
 // fills in 'working_positions'. Throws an error if the table contains invalid
 // values.
-void parse_working_positions(Tribes& tribes,
+void parse_working_positions(Descriptions& tribes,
                              LuaTable* items_table,
                              BillOfMaterials* working_positions) {
 	for (const std::string& worker_name : items_table->keys<std::string>()) {
@@ -91,7 +91,7 @@ ProductionSite BUILDING
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          MapObjectType init_type,
                                          const LuaTable& table,
-                                         Tribes& tribes,
+                                         Descriptions& tribes,
                                          World& world)
    : BuildingDescr(init_descname, init_type, table, tribes),
      ware_demand_checks_(new std::set<DescriptionIndex>()),
@@ -221,7 +221,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const LuaTable& table,
-                                         Tribes& tribes,
+                                         Descriptions& tribes,
                                          World& world)
    : ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
 }

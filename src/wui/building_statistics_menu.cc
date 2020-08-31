@@ -22,9 +22,9 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
 
 constexpr int kBuildGridCellHeight = 50;

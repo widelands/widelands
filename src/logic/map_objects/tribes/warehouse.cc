@@ -329,7 +329,7 @@ Warehouse Building
  */
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               Tribes& tribes)
+                               Descriptions& tribes)
    : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, tribes),
      conquers_(0),
      heal_per_second_(0) {

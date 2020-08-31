@@ -23,6 +23,7 @@
 #include "base/wexception.h"
 #include "economy/input_queue.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/terrain_affinity.h"
@@ -31,7 +32,6 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
@@ -289,7 +289,7 @@ InputMap parse_set_input_arguments(lua_State* L, const TribeDescr& tribe) {
 	return rv;
 }
 
-WaresWorkersMap count_wares_on_flag_(Flag& f, const Tribes& tribes) {
+WaresWorkersMap count_wares_on_flag_(Flag& f, const Descriptions& tribes) {
 	WaresWorkersMap rv;
 
 	for (const WareInstance* ware : f.get_wares()) {
@@ -702,7 +702,7 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const TribeDescr&
 }
 
 const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tribename) {
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Descriptions& tribes = get_egbase(L).tribes();
 	if (!tribes.tribe_exists(tribename)) {
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}
@@ -2129,7 +2129,7 @@ void LuaImmovableDescription::__unpersist(lua_State* L) {
 	if (idx != INVALID_INDEX) {
 		set_description_pointer(world.get_immovable_descr(idx));
 	} else {
-		const Tribes& tribes = get_egbase(L).tribes();
+		const Descriptions& tribes = get_egbase(L).tribes();
 		idx = tribes.safe_immovable_index(name);
 		set_description_pointer(tribes.get_immovable_descr(idx));
 	}
@@ -2339,7 +2339,7 @@ void LuaBuildingDescription::__persist(lua_State* L) {
 void LuaBuildingDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Descriptions& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_building_index(name.c_str());
 	set_description_pointer(tribes.get_building_descr(idx));
 }
@@ -3200,7 +3200,7 @@ void LuaShipDescription::__persist(lua_State* L) {
 void LuaShipDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Descriptions& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_ship_index(name.c_str());
 	set_description_pointer(tribes.get_ship_descr(idx));
 }
@@ -3242,7 +3242,7 @@ void LuaWareDescription::__persist(lua_State* L) {
 void LuaWareDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Descriptions& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_ware_index(name.c_str());
 	set_description_pointer(tribes.get_ware_descr(idx));
 }
@@ -3294,7 +3294,7 @@ int LuaWareDescription::consumers(lua_State* L) {
 */
 int LuaWareDescription::is_construction_material(lua_State* L) {
 	std::string tribename = luaL_checkstring(L, -1);
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Descriptions& tribes = get_egbase(L).tribes();
 	if (tribes.tribe_exists(tribename)) {
 		const DescriptionIndex& ware_index = tribes.safe_ware_index(get()->name());
 		int tribeindex = tribes.tribe_index(tribename);
@@ -3366,7 +3366,7 @@ void LuaWorkerDescription::__persist(lua_State* L) {
 void LuaWorkerDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Descriptions& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_worker_index(name.c_str());
 	set_description_pointer(tribes.get_worker_descr(idx));
 }
@@ -4502,7 +4502,7 @@ int LuaFlag::get_building(lua_State* L) {
 int LuaFlag::set_wares(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	Flag* f = get(L, egbase);
-	const Tribes& tribes = egbase.tribes();
+	const Descriptions& tribes = egbase.tribes();
 
 	InputMap setpoints;
 	parse_wares_workers_counted(L, f->owner().tribe(), &setpoints, true);
@@ -4575,7 +4575,7 @@ int LuaFlag::set_wares(lua_State* L) {
 // Documented in parent Class
 int LuaFlag::get_wares(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	const Tribes& tribes = egbase.tribes();
+	const Descriptions& tribes = egbase.tribes();
 	Flag* flag = get(L, egbase);
 	const TribeDescr& tribe = flag->owner().tribe();
 

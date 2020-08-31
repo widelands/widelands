@@ -229,7 +229,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
                                const std::vector<std::string>& attribs,
-                               Tribes& tribes)
+                               Descriptions& tribes)
    : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe, attribs) {
 	if (table.has_key("buildcost")) {
 		buildcost_ = Buildcost(table.get_table("buildcost"), tribes);
