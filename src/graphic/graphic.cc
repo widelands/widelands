@@ -215,7 +215,7 @@ void Graphic::set_window_size(int w, int h) {
 	log_dbg("++ set_window_size(): resized to %dx%d\n", debug_w, debug_h);
 	maximized();
 
-	SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
+	// SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
 
 	debug_flags = SDL_GetWindowFlags(sdl_window_);
 	log_dbg("++ set_window_size(): %sresizable\n", debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
@@ -271,11 +271,17 @@ void Graphic::set_maximized(const bool to_maximize) {
 	if (fullscreen() || maximized() == to_maximize) {
 		return;
 	}
+	uint32_t debug_flags = SDL_GetWindowFlags(sdl_window_);
+	log_dbg("++ set_maximized(): %sresizable\n", debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
 	if (to_maximize) {
+		SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
 		SDL_MaximizeWindow(sdl_window_);
 	} else {
+		SDL_SetWindowResizable(sdl_window_, SDL_FALSE);
 		SDL_RestoreWindow(sdl_window_);
 	}
+	debug_flags = SDL_GetWindowFlags(sdl_window_);
+	log_dbg("++ set_maximized(): %sresizable\n", debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
 	maximized();
 }
 
@@ -290,6 +296,12 @@ void Graphic::set_fullscreen(const bool value) {
 	}
 
 	log_dbg("++ set_fullscreen(): %s\n", value ? "true" : "false");
+	uint32_t debug_flags = SDL_GetWindowFlags(sdl_window_);
+	log_dbg("++ set_fullscreen(): %sresizable\n", debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
+	SDL_SetWindowResizable(sdl_window_, SDL_FALSE);
+	debug_flags = SDL_GetWindowFlags(sdl_window_);
+	log_dbg("++ set_fullscreen(): %sresizable\n", debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
+
 	// Widelands is not resolution agnostic, so when we set fullscreen, we want
 	// it at the full resolution of the desktop and we want to know about the
 	// true resolution (SDL supports hiding the true resolution from the
@@ -298,9 +310,9 @@ void Graphic::set_fullscreen(const bool value) {
 	if (value) {
 		window_mode_maximized_ = maximized();
 
-		SDL_DisplayMode display_mode;
-		SDL_GetDesktopDisplayMode(SDL_GetWindowDisplayIndex(sdl_window_), &display_mode);
-		set_window_size(display_mode.w, display_mode.h);
+		// SDL_DisplayMode display_mode;
+		// SDL_GetDesktopDisplayMode(SDL_GetWindowDisplayIndex(sdl_window_), &display_mode);
+		// set_window_size(display_mode.w, display_mode.h);
 
 		SDL_SetWindowFullscreen(sdl_window_, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	} else {
@@ -308,9 +320,9 @@ void Graphic::set_fullscreen(const bool value) {
 
 		// Next line does not work. See comment in refresh().
 		// Note(Niektory): For me it works. I'm keeping the fail-safe just in case.
-		set_window_size(window_mode_width_, window_mode_height_);
+		// set_window_size(window_mode_width_, window_mode_height_);
 
-		set_maximized(window_mode_maximized_);
+		// set_maximized(window_mode_maximized_);
 	}
 	resolution_changed();
 }
@@ -345,6 +357,7 @@ void Graphic::refresh() {
 			set_maximized(window_mode_maximized_);
 			resolution_changed();
 		}
+		SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
 	}
 
 	// The backbuffer now contains the current frame. If we want a screenshot,
