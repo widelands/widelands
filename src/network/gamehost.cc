@@ -216,6 +216,13 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		return host_->settings().peaceful;
 	}
 
+	void set_custom_starting_positions(bool c) override {
+		host_->set_custom_starting_positions(c);
+	}
+	bool get_custom_starting_positions() override {
+		return host_->settings().custom_starting_positions;
+	}
+
 private:
 	GameHost* host_;
 	std::vector<std::string> wincondition_scripts_;
@@ -1406,6 +1413,16 @@ void GameHost::set_peaceful_mode(bool peace) {
 	broadcast(packet);
 }
 
+void GameHost::set_custom_starting_positions(bool c) {
+	d->settings.custom_starting_positions = c;
+
+	// Broadcast changes
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_CUSTOM_STARTING_POSITIONS);
+	packet.unsigned_8(c ? 1 : 0);
+	broadcast(packet);
+}
+
 void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 	if (number < d->settings.players.size() &&
 	    (d->settings.players.at(number).state != PlayerSettings::State::kOpen &&
@@ -1741,6 +1758,11 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	packet.reset();
 	packet.unsigned_8(NETCMD_PEACEFUL_MODE);
 	packet.unsigned_8(d->settings.peaceful ? 1 : 0);
+	d->net->send(client.sock_id, packet);
+
+	packet.reset();
+	packet.unsigned_8(NETCMD_CUSTOM_STARTING_POSITIONS);
+	packet.unsigned_8(d->settings.custom_starting_positions ? 1 : 0);
 	d->net->send(client.sock_id, packet);
 
 	// Broadcast new information about the player to everybody
@@ -2327,6 +2349,7 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	case NETCMD_SETTING_PLAYER:
 	case NETCMD_WIN_CONDITION:
 	case NETCMD_PEACEFUL_MODE:
+	case NETCMD_CUSTOM_STARTING_POSITIONS:
 	case NETCMD_LAUNCH:
 		if (!d->game) {  // not expected while game is in progress -> something is wrong here
 			log_err("[Host]: Unexpected command %u while in game\n", cmd);

@@ -14,10 +14,7 @@
 -- Fetching the helptext for a ware depends on the current tribe. So, best copy
 -- the function out of ``data/tribes/wares/bread_paddle/helptexts.lua``
 -- and use it as a base for creating your ware's helptexts.
-
-dirname = path.dirname(__file__)
-
--- RST
+--
 -- .. function:: new_ware_type(table)
 --
 --    This function adds the definition of a ware to the engine.
@@ -25,13 +22,9 @@ dirname = path.dirname(__file__)
 --    :arg table: This table contains all the data that the game engine will add
 --                to this ware. It contains the following entries:
 --
---    **msgctxt**: The context that Gettext will use to disambiguate the
---    translations for strings in this table.
---
 --    **name**: A string containing the internal name of this ware.
 --
---    **descname**: The translatable display name. Use ``pgettext`` with the
---    ``msgctxt`` above to fetch the string.
+--    **descname**: The translatable display name. Use ``pgettext`` to fetch the string.
 --
 --    **helptext_script**: The full path to the ``helptexts.lua`` script for this ware.
 --    **NOTE: Deprecated. Ware helptexts have been shifted to tribes initialization in the current
@@ -57,8 +50,36 @@ dirname = path.dirname(__file__)
 --    **animations**: A table containing all animations for this ware.
 --    Wares have an "idle" animation.
 --
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("tribes")
+--
+--    dirname = path.dirname(__file__)
+--
+--    tribes:new_ware_type {
+--       name = "armor",
+--       descname = pgettext("ware", "Armor"),
+--       animation_directory = dirname,
+--       icon = dirname .. "menu.png",
+--
+--       animations = {
+--          idle = {
+--             hotspot = { 3, 11 },
+--          },
+--       }
+--    }
+--
+--    pop_textdomain()
+
+push_textdomain("tribes")
+
+dirname = path.dirname(__file__)
+
 tribes:new_ware_type {
-   msgctxt = "ware",
    name = "armor",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Armor"),
@@ -71,6 +92,8 @@ tribes:new_ware_type {
       },
    }
 }
+
+pop_textdomain()
 
 -- RST
 --

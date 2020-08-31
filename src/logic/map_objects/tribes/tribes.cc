@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
@@ -238,11 +239,14 @@ void Tribes::register_scenario_tribes(FileSystem* filesystem) {
 }
 
 void Tribes::add_tribe_object_type(const LuaTable& table, World& world, MapObjectType type) {
-	i18n::Textdomain td("tribes");
 	const std::string& type_name = table.get_string("name");
-	const std::string& msgctxt = table.get_string("msgctxt");
-	const std::string& type_descname =
-	   pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str());
+	const std::string& type_descname = table.get_string("descname").c_str();
+
+	// TODO(GunChleoc): Compatibility, remove after v1.0
+	if (table.has_key<std::string>("msgctxt")) {
+		log_warn(
+		   "The 'msgctxt' entry is no longer needed in '%s', please remove it", type_name.c_str());
+	}
 
 	description_manager_->mark_loading_in_progress(type_name);
 
@@ -271,7 +275,7 @@ void Tribes::add_tribe_object_type(const LuaTable& table, World& world, MapObjec
 		buildings_->add(new MilitarySiteDescr(type_descname, table, *this));
 		break;
 	case MapObjectType::PRODUCTIONSITE:
-		buildings_->add(new ProductionSiteDescr(type_descname, msgctxt, table, *this, world));
+		buildings_->add(new ProductionSiteDescr(type_descname, table, *this, world));
 		break;
 	case MapObjectType::SHIP:
 		ships_->add(new ShipDescr(type_descname, table));
@@ -280,7 +284,7 @@ void Tribes::add_tribe_object_type(const LuaTable& table, World& world, MapObjec
 		workers_->add(new SoldierDescr(type_descname, table, *this));
 		break;
 	case MapObjectType::TRAININGSITE:
-		buildings_->add(new TrainingSiteDescr(type_descname, msgctxt, table, *this, world));
+		buildings_->add(new TrainingSiteDescr(type_descname, table, *this, world));
 		break;
 	case MapObjectType::WARE:
 		wares_->add(new WareDescr(type_descname, table));

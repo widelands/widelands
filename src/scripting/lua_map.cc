@@ -1425,7 +1425,7 @@ int LuaMap::find_ocean_fields(lua_State* L) {
 	std::vector<LuaMaps::LuaField*> result;
 	for (uint32_t i = luaL_checkuint32(L, 2); i;) {
 		const uint32_t x = game->logic_rand() % map.get_width();
-		const uint32_t y = game->logic_rand() % map.get_width();
+		const uint32_t y = game->logic_rand() % map.get_height();
 		Widelands::Coords field(x, y);
 		bool success = false;
 		if (map[field].maxcaps() & Widelands::MOVECAPS_SWIM) {
