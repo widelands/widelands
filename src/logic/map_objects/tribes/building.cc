@@ -79,8 +79,6 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		throw GameDataError("Building %s needs a menu icon", name().c_str());
 	}
 
-	i18n::Textdomain td("tribes");
-
 	// Partially finished buildings get their sizes from their associated building
 	if (type() != MapObjectType::CONSTRUCTIONSITE && type() != MapObjectType::DISMANTLESITE) {
 		try {
