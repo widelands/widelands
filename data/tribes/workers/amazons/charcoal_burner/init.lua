@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_worker_type {
-   msgctxt = "amazons_worker",
    name = "amazons_charcoal_burner",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("amazons_worker", "Charcoal Burner"),
@@ -42,3 +43,6 @@ tribes:new_worker_type {
       },
    },
 }
+
+pop_textdomain()
+

@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "amazons_building",
    name = "amazons_cocoa_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("amazons_building", "Cocoa Farm"),
@@ -74,3 +75,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 20
    },
 }
+
+pop_textdomain()

@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_militarysite_type {
-   msgctxt = "amazons_building",
    name = "amazons_fortification",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("amazons_building", "Fortification"),
@@ -51,3 +52,5 @@ tribes:new_militarysite_type {
       defeated_you = _"Your soldiers defeated the enemy at the fortification."
    },
 }
+
+pop_textdomain()

@@ -1,8 +1,9 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "deadtree7",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Dead Tree",
@@ -19,3 +20,5 @@ tribes:new_immovable_type{
    animation_directory = dirname,
    animations = { idle = { hotspot = {2, 72}}}
 }
+
+pop_textdomain()

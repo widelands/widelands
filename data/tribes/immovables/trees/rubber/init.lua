@@ -1,3 +1,5 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -73,7 +75,6 @@ spritesheet_old = {
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_amazons_sapling",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Sapling)",
@@ -93,7 +94,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_amazons_pole",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Pole)",
@@ -113,7 +113,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_amazons_mature",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Mature)",
@@ -133,7 +132,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_amazons_old",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Old)",
@@ -159,7 +157,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_black_amazons_sapling",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Sapling)",
@@ -179,7 +176,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_black_amazons_pole",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Pole)",
@@ -199,7 +195,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_black_amazons_mature",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Mature)",
@@ -219,7 +214,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_black_amazons_old",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Old)",
@@ -245,7 +239,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_desert_amazons_sapling",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Sapling)",
@@ -265,7 +258,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_desert_amazons_pole",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Pole)",
@@ -285,7 +277,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_desert_amazons_mature",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Mature)",
@@ -305,7 +296,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_desert_amazons_old",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Old)",
@@ -331,7 +321,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_winter_amazons_sapling",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Sapling)",
@@ -351,7 +340,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_winter_amazons_pole",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Pole)",
@@ -371,7 +359,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_winter_amazons_mature",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Mature)",
@@ -391,7 +378,6 @@ tribes:new_immovable_type{
 }
 
 tribes:new_immovable_type{
-   msgctxt = "immovable",
    name = "rubber_winter_amazons_old",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Rubber Tree (Old)",
@@ -415,3 +401,5 @@ tribes:new_immovable_type{
    animation_directory = dirname,
    spritesheets = spritesheet_old
 }
+
+pop_textdomain()

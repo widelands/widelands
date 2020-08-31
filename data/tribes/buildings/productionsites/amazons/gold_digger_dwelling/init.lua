@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "amazons_building",
    name = "amazons_gold_digger_dwelling",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("amazons_building", "Gold Digger Dwelling"),
@@ -34,7 +35,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "gold",
+      mines = "resource_gold",
       mines_percent = 100,
       prohibited_till = 1100
    },
@@ -70,3 +71,5 @@ tribes:new_productionsite_type {
          pgettext("amazons_building", "This gold digger dwelling's main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()
