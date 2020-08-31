@@ -19,7 +19,6 @@
 
 #include "wui/constructionsitewindow.h"
 
-#include "graphic/graphic.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "wui/actionconfirm.h"
 #include "wui/inputqueuedisplay.h"
@@ -87,13 +86,13 @@ void ConstructionSiteWindow::FakeWaresDisplay::draw_ware(RenderTarget& dst,
 	const Image* pic = nullptr;
 	switch (it->second) {
 	case Widelands::StockPolicy::kPrefer:
-		pic = g_gr->images().get(pic_stock_policy_prefer);
+		pic = g_image_cache->get(pic_stock_policy_prefer);
 		break;
 	case Widelands::StockPolicy::kDontStock:
-		pic = g_gr->images().get(pic_stock_policy_dontstock);
+		pic = g_image_cache->get(pic_stock_policy_dontstock);
 		break;
 	case Widelands::StockPolicy::kRemove:
-		pic = g_gr->images().get(pic_stock_policy_remove);
+		pic = g_image_cache->get(pic_stock_policy_remove);
 		break;
 	case Widelands::StockPolicy::kNormal:
 		// No icon for the normal policy
@@ -148,7 +147,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_consume_waresqueue(i)));
 	}
 
-	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
+	get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), &box, _("Building materials"));
 
 	if (construction_site->get_settings()) {
 		const bool can_act = igbase()->can_act(construction_site->owner().player_number());
@@ -183,11 +182,11 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 				cs_soldier_capacity_decrease_ = new UI::Button(
 				   &soldier_capacity_box, "decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
-				   g_gr->images().get(pic_decrease_capacity),
+				   g_image_cache->get(pic_decrease_capacity),
 				   _("Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"));
 				cs_soldier_capacity_increase_ = new UI::Button(
 				   &soldier_capacity_box, "increase", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
-				   g_gr->images().get(pic_increase_capacity),
+				   g_image_cache->get(pic_increase_capacity),
 				   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
 				cs_soldier_capacity_display_ =
 				   new UI::Textarea(&soldier_capacity_box, "", UI::Align::kCenter);
@@ -230,11 +229,11 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			cs_soldier_capacity_decrease_ = new UI::Button(
 			   &soldier_capacity_box, "decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
-			   g_gr->images().get(pic_decrease_capacity),
+			   g_image_cache->get(pic_decrease_capacity),
 			   _("Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"));
 			cs_soldier_capacity_increase_ = new UI::Button(
 			   &soldier_capacity_box, "increase", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
-			   g_gr->images().get(pic_increase_capacity),
+			   g_image_cache->get(pic_increase_capacity),
 			   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
 			cs_soldier_capacity_display_ =
 			   new UI::Textarea(&soldier_capacity_box, "", UI::Align::kCenter);
@@ -267,10 +266,10 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
 			cs_prefer_heroes_rookies_->add_button(
 			   &soldier_preference_panel, Vector2i::zero(),
-			   g_gr->images().get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
+			   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
 			cs_prefer_heroes_rookies_->add_button(
 			   &soldier_preference_panel, Vector2i(32, 0),
-			   g_gr->images().get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
+			   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
 			cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
 			if (can_act) {
 				cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
@@ -294,18 +293,18 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				mainbox.add_space(15);
 				UI::Button& sp_normal = *new UI::Button(
 				   &buttonsbox, "stock_policy_normal", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				   g_gr->images().get(pic_stock_policy_button_normal), _("Normal policy"));
+				   g_image_cache->get(pic_stock_policy_button_normal), _("Normal policy"));
 				UI::Button& sp_prefer = *new UI::Button(
 				   &buttonsbox, "stock_policy_prefer", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				   g_gr->images().get(pic_stock_policy_button_prefer),
+				   g_image_cache->get(pic_stock_policy_button_prefer),
 				   _("Preferably store selected wares here"));
 				UI::Button& sp_dont = *new UI::Button(
 				   &buttonsbox, "stock_policy_dontstock", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				   g_gr->images().get(pic_stock_policy_button_dontstock),
+				   g_image_cache->get(pic_stock_policy_button_dontstock),
 				   _("Do not store selected wares here"));
 				UI::Button& sp_remove = *new UI::Button(
 				   &buttonsbox, "stock_policy_remove", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				   g_gr->images().get(pic_stock_policy_button_remove),
+				   g_image_cache->get(pic_stock_policy_button_remove),
 				   _("Remove selected wares from here"));
 				sp_remove.sigclicked.connect(
 				   [this, ww]() { change_policy(ww, Widelands::StockPolicy::kRemove); });
@@ -324,10 +323,10 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				buttonsbox.add(&sp_dont);
 				buttonsbox.add(&sp_remove);
 				if (ww == Widelands::wwWARE) {
-					get_tabs()->add("warehouse_wares", g_gr->images().get(pic_tab_settings_wares),
+					get_tabs()->add("warehouse_wares", g_image_cache->get(pic_tab_settings_wares),
 					                &mainbox, _("Ware settings to apply after construction"));
 				} else {
-					get_tabs()->add("warehouse_workers", g_gr->images().get(pic_tab_settings_workers),
+					get_tabs()->add("warehouse_workers", g_image_cache->get(pic_tab_settings_workers),
 					                &mainbox, _("Worker settings to apply after construction"));
 				}
 			};
@@ -355,7 +354,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		}
 
 		if (!nothing_added) {
-			get_tabs()->add("settings", g_gr->images().get(pic_tab_settings), &settings_box,
+			get_tabs()->add("settings", g_image_cache->get(pic_tab_settings), &settings_box,
 			                _("Settings to apply after construction"));
 		}
 	}

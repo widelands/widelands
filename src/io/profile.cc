@@ -531,7 +531,7 @@ void Profile::error(char const* const fmt, ...) const {
 	va_end(va);
 
 	if (error_level_ == err_log) {
-		log("[%s] %s\n", filename_.c_str(), buffer);
+		log_err("[%s] %s\n", filename_.c_str(), buffer);
 	} else {
 		throw wexception("[%s] %s", filename_.c_str(), buffer);
 	}
@@ -780,7 +780,7 @@ void Profile::read(char const* const filename, char const* const global_section,
 	} catch (const FileNotFoundError&) {
 		// It's no problem if the config file does not exist. (It'll get
 		// written on exit anyway)
-		log("There's no configuration file, using default values.\n");
+		log_warn("There's no configuration file, using default values.\n");
 	} catch (const std::exception& e) {
 		error("%s:%u: %s", filename, linenr, e.what());
 	}

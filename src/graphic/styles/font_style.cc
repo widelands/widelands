@@ -21,7 +21,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/log.h"
 #include "base/wexception.h"
 
 namespace UI {

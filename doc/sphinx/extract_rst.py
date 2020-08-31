@@ -72,11 +72,11 @@ lua_dirs = (
      ('data/world', '', 'lua_world_defining'),
      ('data/world/critters/badger',
      'critters', 'lua_world_units'),
-     ('data/world/immovables/bush1',
+     ('data/world/immovables/artifacts/artifact00',
      'immovables', 'lua_world_units'),
      ('data/world/resources',
      'resources', 'lua_world_units'),
-     ('data/world/terrains',
+     ('data/world/terrains/desert/beach',
      'terrains', 'lua_world_units'),
 )
 

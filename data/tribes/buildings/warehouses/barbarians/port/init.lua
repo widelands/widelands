@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_warehouse_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_port",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Port"),
@@ -47,3 +48,5 @@ tribes:new_warehouse_type {
    conquers = 5,
    heal_per_second = 170,
 }
+
+pop_textdomain()

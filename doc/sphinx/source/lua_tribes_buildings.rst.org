@@ -20,21 +20,13 @@ Common Building Properties
 
 Buildings are defined with Lua functions called ``new_<building_type>_type{table}``. The contents of ``table`` depend on the type of building that you are defining. The common properties shared by all buildings are:
 
-
-**msgctxt**
-    *Mandatory*. The context that Gettext will use to disambiguate the translations for
-    strings in this table, e.g.::
-
-        msgctxt = "atlanteans_building",
-
 **name**
     *Mandatory*. A string containing the internal name of this building, e.g.::
 
         name = "atlanteans_fortress",
 
 **descname**
-    *Mandatory*. The translatable display name. Use ``pgettext`` with the ``msgctxt``
-    above to fetch the string, e.g.::
+    *Mandatory*. The translatable display name. Use ``pgettext`` to fetch the string, e.g.::
 
         descname = pgettext("atlanteans_building", "Fortress"),
 
@@ -103,6 +95,44 @@ Buildings are defined with Lua functions called ``new_<building_type>_type{table
 
 **aihints**
     *Mandatory*. A list of name - value pairs with hints for the AI. Can be empty.
+
+For making the UI texts translateable, we also need to push/pop the correct textdomain.
+
+Example:
+
+.. code-block:: lua
+
+    push_textdomain("tribes")
+
+    dirname = path.dirname (__file__)
+
+    tribes:new_warehouse_type {
+       name = "frisians_headquarters",
+       -- TRANSLATORS: This is a building name used in lists of buildings
+       descname = pgettext("frisians_building", "Headquarters"),
+       icon = dirname .. "menu.png",
+       size = "big",
+       destructible = false,
+
+       spritesheets = {
+          idle = {
+             directory = dirname,
+             basename = "idle",
+             hotspot = {92, 102},
+             frames = 10,
+             columns = 5,
+             rows = 2,
+             fps = 10
+          }
+       },
+
+       aihints = {},
+
+       heal_per_second = 220,
+       conquers = 9,
+    }
+
+    pop_textdomain()
 
 
 .. toctree::

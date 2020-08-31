@@ -10,7 +10,6 @@ terrain_affinity = {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_blueberry_tiny",
    descname = _ "Blueberry Bush (tiny)",
    size = "small",
@@ -35,7 +34,6 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_blueberry_small",
    descname = _ "Blueberry Bush (small)",
    size = "small",
@@ -60,7 +58,6 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_blueberry_medium",
    descname = _ "Blueberry Bush (medium)",
    size = "small",
@@ -85,7 +82,6 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_blueberry_ripe",
    descname = _ "Blueberry Bush (ripe)",
    size = "small",

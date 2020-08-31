@@ -24,7 +24,7 @@
 
 #include <memory>
 
-#include "graphic/graphic.h"
+#include "graphic/note_graphic_resolution_changed.h"
 
 namespace UI {
 /**
@@ -118,6 +118,10 @@ protected:
 	void update_desired_size() override;
 
 	virtual void clicked_button_close();
+
+	bool is_focus_toplevel() const override {
+		return true;
+	}
 
 private:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note);

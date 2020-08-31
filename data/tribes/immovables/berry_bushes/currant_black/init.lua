@@ -1,3 +1,5 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 terrain_affinity = {
@@ -8,7 +10,6 @@ terrain_affinity = {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_currant_black_tiny",
    descname = _ "Black Currant (tiny)",
    size = "small",
@@ -33,7 +34,6 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_currant_black_small",
    descname = _ "Black Currant (small)",
    size = "small",
@@ -58,7 +58,6 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_currant_black_medium",
    descname = _ "Black Currant (medium)",
    size = "small",
@@ -83,7 +82,6 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_currant_black_ripe",
    descname = _ "Black Currant (ripe)",
    size = "small",
@@ -109,3 +107,5 @@ tribes:new_immovable_type {
       }
    }
 }
+
+pop_textdomain()

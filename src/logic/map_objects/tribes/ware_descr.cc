@@ -40,7 +40,6 @@ WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table)
 	if (icon_filename().empty()) {
 		throw GameDataError("Ware %s has no menu icon", name().c_str());
 	}
-	i18n::Textdomain td("tribes");
 }
 
 Quantity WareDescr::default_target_quantity(const std::string& tribename) const {

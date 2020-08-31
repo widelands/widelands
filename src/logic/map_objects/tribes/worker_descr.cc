@@ -54,7 +54,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	if (icon_filename().empty()) {
 		throw GameDataError("Worker %s has no menu icon", name().c_str());
 	}
-	i18n::Textdomain td("tribes");
+
 	std::unique_ptr<LuaTable> items_table;
 
 	if (table.has_key("buildcost")) {

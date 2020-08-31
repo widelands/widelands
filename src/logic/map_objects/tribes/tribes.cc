@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
@@ -38,7 +39,7 @@
 #include "logic/map_objects/tribes/warehouse.h"
 
 namespace Widelands {
-Tribes::Tribes(LuaInterface* lua)
+Tribes::Tribes(DescriptionManager* description_manager, LuaInterface* lua)
    : buildings_(new DescriptionMaintainer<BuildingDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      ships_(new DescriptionMaintainer<ShipDescr>()),
@@ -49,7 +50,7 @@ Tribes::Tribes(LuaInterface* lua)
      largest_workarea_(0),
      scenario_tribes_(nullptr),
      lua_(lua),
-     description_manager_(new Widelands::DescriptionManager(lua_)) {
+     description_manager_(description_manager) {
 
 	// Register tribe names. Tribes have no attributes.
 	std::vector<std::string> attributes;
@@ -237,12 +238,15 @@ void Tribes::register_scenario_tribes(FileSystem* filesystem) {
 	}
 }
 
-void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, MapObjectType type) {
-	i18n::Textdomain td("tribes");
+void Tribes::add_tribe_object_type(const LuaTable& table, World& world, MapObjectType type) {
 	const std::string& type_name = table.get_string("name");
-	const std::string& msgctxt = table.get_string("msgctxt");
-	const std::string& type_descname =
-	   pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str());
+	const std::string& type_descname = table.get_string("descname").c_str();
+
+	// TODO(GunChleoc): Compatibility, remove after v1.0
+	if (table.has_key<std::string>("msgctxt")) {
+		log_warn(
+		   "The 'msgctxt' entry is no longer needed in '%s', please remove it", type_name.c_str());
+	}
 
 	description_manager_->mark_loading_in_progress(type_name);
 
@@ -271,7 +275,7 @@ void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, Ma
 		buildings_->add(new MilitarySiteDescr(type_descname, table, *this));
 		break;
 	case MapObjectType::PRODUCTIONSITE:
-		buildings_->add(new ProductionSiteDescr(type_descname, msgctxt, table, *this, world));
+		buildings_->add(new ProductionSiteDescr(type_descname, table, *this, world));
 		break;
 	case MapObjectType::SHIP:
 		ships_->add(new ShipDescr(type_descname, table));
@@ -280,7 +284,7 @@ void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, Ma
 		workers_->add(new SoldierDescr(type_descname, table, *this));
 		break;
 	case MapObjectType::TRAININGSITE:
-		buildings_->add(new TrainingSiteDescr(type_descname, msgctxt, table, *this, world));
+		buildings_->add(new TrainingSiteDescr(type_descname, table, *this, world));
 		break;
 	case MapObjectType::WARE:
 		wares_->add(new WareDescr(type_descname, table));

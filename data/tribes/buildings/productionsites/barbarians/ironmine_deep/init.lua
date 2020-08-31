@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_ironmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Deep Iron Mine"),
@@ -38,7 +39,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "iron",
+      mines = "resource_iron",
       mines_percent = 60
    },
 
@@ -69,7 +70,7 @@ tribes:new_productionsite_type {
          descname = _"mining iron",
          actions = {
             "animate=working duration:9s500ms",
-            "mine=iron radius:2 yield:66.66% when_empty:5% experience_on_fail:17%",
+            "mine=resource_iron radius:2 yield:66.66% when_empty:5% experience_on_fail:17%",
             "produce=iron_ore",
          }
       },
@@ -90,3 +91,5 @@ tribes:new_productionsite_type {
          pgettext("barbarians_building", "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

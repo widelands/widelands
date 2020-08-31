@@ -3,7 +3,6 @@ dirname = "tribes/buildings/productionsites/empire/farm/"
 push_textdomain("scenario_emp04.wmf")
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_farm1",
    descname = "Farm",
    icon = dirname .. "menu.png",

@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -30,6 +31,7 @@
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
 #include "economy/workers_queue.h"
+#include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -87,31 +89,22 @@ ProductionSite BUILDING
  * /data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua
  */
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
-                                         const std::string& msgctxt,
                                          MapObjectType init_type,
                                          const LuaTable& table,
                                          Tribes& tribes,
-                                         const World& world)
+                                         World& world)
    : BuildingDescr(init_descname, init_type, table, tribes),
      ware_demand_checks_(new std::set<DescriptionIndex>()),
      worker_demand_checks_(new std::set<DescriptionIndex>()),
      out_of_resource_productivity_threshold_(100) {
-	if (msgctxt.empty()) {
-		throw Widelands::GameDataError(
-		   "Productionsite '%s' has empty Gettext msgctxt", name().c_str());
-	}
-	// Let's convert this only once, it's cheaper
-	const char* msgctxt_char = msgctxt.c_str();
 
-	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
 
 	if (table.has_key("out_of_resource_notification")) {
 		items_table = table.get_table("out_of_resource_notification");
-		out_of_resource_title_ = _(items_table->get_string("title"));
-		out_of_resource_heading_ = _(items_table->get_string("heading"));
-		out_of_resource_message_ =
-		   pgettext_expr(msgctxt_char, items_table->get_string("message").c_str());
+		out_of_resource_title_ = items_table->get_string("title");
+		out_of_resource_heading_ = items_table->get_string("heading");
+		out_of_resource_message_ = items_table->get_string("message").c_str();
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
 		}
@@ -121,8 +114,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("outputs")) {
-		log("WARNING: The \"outputs\" table is no longer needed; you can remove it from %s\n",
-		    name().c_str());
+		log_warn(
+		   "The \"outputs\" table is no longer needed; you can remove it from %s\n", name().c_str());
 	}
 
 	if (table.has_key("inputs")) {
@@ -177,24 +170,16 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		try {
 			std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
 
-			// Allow use of both gettext and pgettext. This way, we can have a lower workload on
-			// translators and disambiguate at the same time.
-			const std::string program_descname_unlocalized = program_table->get_string("descname");
-			std::string program_descname = _(program_descname_unlocalized);
-			if (program_descname == program_descname_unlocalized) {
-				program_descname = pgettext_expr(msgctxt_char, program_descname_unlocalized.c_str());
-			}
 			if (program_name == "work") {
-				log("WARNING: The main program for the building %s should be renamed from 'work' to "
-				    "'main'\n",
-				    name().c_str());
-				programs_[MapObjectProgram::kMainProgram] = std::unique_ptr<ProductionProgram>(
-				   new ProductionProgram(MapObjectProgram::kMainProgram, program_descname,
-				                         program_table->get_table("actions"), tribes, world, this));
+				log_warn("The main program for the building %s should be renamed from 'work' to "
+				         "'main'",
+				         name().c_str());
+				programs_[MapObjectProgram::kMainProgram] =
+				   std::unique_ptr<ProductionProgram>(new ProductionProgram(
+				      MapObjectProgram::kMainProgram, *program_table, tribes, world, this));
 			} else {
 				programs_[program_name] = std::unique_ptr<ProductionProgram>(
-				   new ProductionProgram(program_name, program_descname,
-				                         program_table->get_table("actions"), tribes, world, this));
+				   new ProductionProgram(program_name, *program_table, tribes, world, this));
 			}
 		} catch (const std::exception& e) {
 			throw GameDataError("%s: Error in productionsite program %s: %s", name().c_str(),
@@ -214,9 +199,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("indicate_workarea_overlaps")) {
-		log("WARNING: The \"indicate_workarea_overlaps\" table in %s has been deprecated and can be "
-		    "removed.\n",
-		    name().c_str());
+		log_warn("The \"indicate_workarea_overlaps\" table in %s has been deprecated and can be "
+		         "removed.\n",
+		         name().c_str());
 	}
 
 	// Verify that any map resource collected is valid
@@ -235,12 +220,10 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 }
 
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
-                                         const std::string& msgctxt,
                                          const LuaTable& table,
                                          Tribes& tribes,
-                                         const World& world)
-   : ProductionSiteDescr(
-        init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
+                                         World& world)
+   : ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
 }
 
 void ProductionSiteDescr::clear_attributes() {
@@ -367,32 +350,32 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	}
 
 	if (nr_requests > 0) {
-		*s = g_gr->styles().color_tag(
+		*s = g_style_manager->color_tag(
 		   (nr_requests == 1 ?
 		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
 		       _("Worker missing") :
 		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
 		          missing. If you need plural forms here, please let us know. */
 		       _("Workers missing")),
-		   g_gr->styles().building_statistics_style().low_color());
+		   g_style_manager->building_statistics_style().low_color());
 		return;
 	}
 
 	if (nr_coming > 0) {
-		*s = g_gr->styles().color_tag(
+		*s = g_style_manager->color_tag(
 		   (nr_coming == 1 ?
 		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
 		       _("Worker is coming") :
 		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
 		          missing. If you need plural forms here, please let us know. */
 		       _("Workers are coming")),
-		   g_gr->styles().building_statistics_style().low_color());
+		   g_style_manager->building_statistics_style().low_color());
 		return;
 	}
 
 	if (is_stopped_) {
-		*s = g_gr->styles().color_tag(
-		   _("(stopped)"), g_gr->styles().building_statistics_style().neutral_color());
+		*s = g_style_manager->color_tag(
+		   _("(stopped)"), g_style_manager->building_statistics_style().neutral_color());
 		return;
 	}
 	*s = statistics_string_on_changed_statistics_;
@@ -475,32 +458,33 @@ void ProductionSite::format_statistics_string() {
 
 	// boost::format would treat uint8_t as char
 	const unsigned int percent = std::min(get_actual_statistics() * 100 / 98, 100);
-	const std::string perc_str = g_gr->styles().color_tag(
+	const std::string perc_str = g_style_manager->color_tag(
 	   (boost::format(_("%i%%")) % percent).str(),
-	   (percent < 33) ? g_gr->styles().building_statistics_style().low_color() :
-	                    (percent < 66) ? g_gr->styles().building_statistics_style().medium_color() :
-	                                     g_gr->styles().building_statistics_style().high_color());
+	   (percent < 33) ?
+	      g_style_manager->building_statistics_style().low_color() :
+	      (percent < 66) ? g_style_manager->building_statistics_style().medium_color() :
+	                       g_style_manager->building_statistics_style().high_color());
 
 	if (0 < percent && percent < 100) {
-		RGBColor color = g_gr->styles().building_statistics_style().high_color();
+		RGBColor color = g_style_manager->building_statistics_style().high_color();
 		std::string trend;
 		if (last_stat_percent_ < actual_percent_) {
 			trend_ = Trend::kRising;
-			color = g_gr->styles().building_statistics_style().high_color();
+			color = g_style_manager->building_statistics_style().high_color();
 			trend = "+";
 		} else if (last_stat_percent_ > actual_percent_) {
 			trend_ = Trend::kFalling;
-			color = g_gr->styles().building_statistics_style().low_color();
+			color = g_style_manager->building_statistics_style().low_color();
 			trend = "-";
 		} else {
 			trend_ = Trend::kUnchanged;
-			color = g_gr->styles().building_statistics_style().neutral_color();
+			color = g_style_manager->building_statistics_style().neutral_color();
 			trend = "=";
 		}
 
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
 		statistics_string_on_changed_statistics_ =
-		   (boost::format("%s\u2009%s") % perc_str % g_gr->styles().color_tag(trend, color)).str();
+		   (boost::format("%s\u2009%s") % perc_str % g_style_manager->color_tag(trend, color)).str();
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
@@ -650,7 +634,7 @@ bool ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes
  * Intercept remove_worker() calls to unassign our worker, if necessary.
  */
 void ProductionSite::remove_worker(Worker& w) {
-	molog("%s leaving\n", w.descr().name().c_str());
+	molog(owner().egbase().get_gametime(), "%s leaving\n", w.descr().name().c_str());
 	WorkingPosition* wp = working_positions_;
 	int32_t wp_index = 0;
 
@@ -849,8 +833,8 @@ bool ProductionSite::fetch_from_flag(Game& game) {
 void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
-	molog("is_stopped: %u\n", is_stopped_);
-	molog("main_worker: %i\n", main_worker_);
+	molog(egbase.get_gametime(), "is_stopped: %u\n", is_stopped_);
+	molog(egbase.get_gametime(), "main_worker: %i\n", main_worker_);
 }
 
 void ProductionSite::set_stopped(bool const stopped) {
