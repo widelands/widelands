@@ -33,8 +33,7 @@ Box::Box(Panel* const parent,
          uint32_t const orientation,
          int32_t const max_x,
          int32_t const max_y,
-         uint32_t const inner_spacing,
-         bool const ignore_invisible_items)
+         uint32_t const inner_spacing)
    : Panel(parent, x, y, 0, 0),
 
      max_x_(max_x ? max_x : g_gr->get_xres()),
@@ -46,8 +45,7 @@ Box::Box(Panel* const parent,
      scrollbar_style_(UI::PanelStyle::kFsMenu),
      orientation_(orientation),
      mindesiredbreadth_(0),
-     inner_spacing_(inner_spacing),
-     ignore_invisible_items_(ignore_invisible_items) {
+     inner_spacing_(inner_spacing) {
 }
 
 /**
@@ -363,7 +361,7 @@ void Box::get_item_desired_size(uint32_t const idx, int* depth, int* breadth) {
 
 	switch (it.type) {
 	case Item::ItemPanel:
-		if (ignore_invisible_items_ && !it.u.panel.panel->is_visible()) {
+		if (!it.u.panel.panel->is_visible()) {
 			*depth = 0;
 			*breadth = 0;
 			return;
