@@ -199,15 +199,19 @@ void Graphic::set_window_size(int w, int h) {
 
 	SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
 	log_dbg("++ set_window_size(): attempting resize %dx%d to %dx%d\n", debug_w, debug_h, w, h);
+	maximized();
 	SDL_SetWindowResizable(sdl_window_, SDL_FALSE);
 	flags = SDL_GetWindowFlags(sdl_window_);
 	log_dbg("++ set_window_size(): %sresizable\n", flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
+	maximized();
 	SDL_SetWindowSize(sdl_window_, w, h);
 	SDL_GetWindowSize(sdl_window_, &debug_w, &debug_h);
 	log_dbg("++ set_window_size(): resized to %dx%d\n", debug_w, debug_h);
+	maximized();
 	SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
 	flags = SDL_GetWindowFlags(sdl_window_);
 	log_dbg("++ set_window_size(): %sresizable\n", flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
+	maximized();
 }
 
 void Graphic::resolution_changed() {
@@ -218,6 +222,7 @@ void Graphic::resolution_changed() {
 	SDL_GetWindowSize(sdl_window_, &new_w, &new_h);
 
 	log_dbg("++ resolution_changed(): %dx%d to %dx%d\n", old_w, old_h, new_w, new_h);
+	maximized();
 	if (old_w == new_w && old_h == new_h) {
 		return;
 	}
@@ -257,11 +262,13 @@ void Graphic::set_maximized(const bool to_maximize) {
 		return;
 	}
 	log_dbg("++ set_maximized(%s)\n", to_maximize ? "true" : "false");
+	maximized();
 	if (to_maximize) {
 		SDL_MaximizeWindow(sdl_window_);
 	} else {
 		SDL_RestoreWindow(sdl_window_);
 	}
+	maximized();
 }
 
 bool Graphic::fullscreen() const {
@@ -319,6 +326,7 @@ void Graphic::refresh() {
 			uint32_t debug_flags = SDL_GetWindowFlags(sdl_window_);
 			log_dbg("++ refresh(): window size %dx%d %sresizable\n", true_width, true_height,
 			        debug_flags & SDL_WINDOW_RESIZABLE ? "" : "not ");
+			maximized();
 		}
 		debug_width = true_width;
 		debug_height = true_height;
