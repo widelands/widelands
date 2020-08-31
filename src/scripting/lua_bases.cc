@@ -19,6 +19,7 @@
 
 #include "scripting/lua_bases.h"
 
+#include <SDL_timer.h>
 #include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
@@ -100,6 +101,7 @@ const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
 const PropertyType<LuaEditorGameBase> LuaEditorGameBase::Properties[] = {
    PROP_RO(LuaEditorGameBase, map),
    PROP_RO(LuaEditorGameBase, players),
+   PROP_RO(LuaEditorGameBase, sdl_time),
    {nullptr, nullptr, nullptr},
 };
 
@@ -155,6 +157,17 @@ int LuaEditorGameBase::get_players(lua_State* L) {
 	}
 	return 1;
 }
+
+/* RST
+   .. attribute:: sdl_time
+
+      (RO) The milliseconds of realtime returned by `SDL_GetTicks()`
+*/
+int LuaEditorGameBase::get_sdl_time(lua_State* L) {
+	lua_pushuint32(L, SDL_GetTicks());
+	return 1;
+}
+
 
 /*
  ==========================================================

@@ -57,6 +57,7 @@ public:
 	 */
 	int get_map(lua_State*);
 	int get_players(lua_State*);
+	int get_sdl_time(lua_State*);
 
 	/*
 	 * Lua methods

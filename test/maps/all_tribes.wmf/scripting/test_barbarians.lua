@@ -421,12 +421,7 @@ run(function()
    verify_buildings(playernumber, expected_number_of_buildings)
 
    -- Sleep a bit so the tribe units can run some programs
-   game.desired_speed = 200
-   for i=1,100 do
-      sleep(3000)
-      print("Dear testsuite, we are NOT time-out-ing")
-      game.desired_speed = 1200
-   end
+   sleep_with_fps(300)
 
    -- Test saveloading and verify the buildings again
    stable_save(game, "barbarian_tribe", 1000)

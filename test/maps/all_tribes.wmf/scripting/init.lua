@@ -167,19 +167,26 @@ function place_player_ship(playernumber)
    player:place_ship(map:get_field((starting_field.x + 12) % 512, (starting_field.y + 6) % 512))
 end
 
--- Sleep and adjust game speed each second for reasonable average FPS
+-- Sleep and adjust game speed each second for reasonable average FPS.
+-- Sleep at most 8 minutes realtime to avoid travis timeouts.
 function sleep_with_fps(seconds)
    local counter = 0
+   game.desired_speed = 100
+   local starttime = game.sdl_time
    repeat
+      if game.sdl_time - starttime > 8 * 60 * 1000 then
+         print("Returning early after " .. counter .. " seconds gametime to avoid timeout.")
+         return
+      end
       counter = counter + 1
       sleep(1000)
       local average_fps = mapview.average_fps
-      if average_fps < 15 then
-         local new_desired_speed = game.desired_speed - 1000 * (20 - math.floor(average_fps))
-         if new_desired_speed < 5000 then new_desired_speed = 5000 end
+      if average_fps < 1 then
+         local new_desired_speed = game.desired_speed - 1000
+         if new_desired_speed < 1000 then new_desired_speed = 1000 end
          game.desired_speed = new_desired_speed
-      elseif average_fps > 20 then
-         game.desired_speed = game.desired_speed + 1000
+      elseif average_fps > 10 then
+         game.desired_speed = game.desired_speed + 500
       end
    until counter == seconds
 end
