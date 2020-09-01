@@ -20,6 +20,9 @@
 #ifndef WL_WUI_MAPDETAILS_H
 #define WL_WUI_MAPDETAILS_H
 
+#include <memory>
+
+#include "logic/editor_game_base.h"
 #include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/panel.h"
@@ -45,10 +48,17 @@ private:
 	const int padding_;
 
 	UI::Box main_box_;
+	UI::Box descr_box_;
 	std::string name_;
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
+	UI::Icon minimap_icon_;
 	UI::SuggestedTeamsBox* suggested_teams_box_;
+
+	// Used to render map preview
+	std::unique_ptr<Texture> minimap_image_;
+	std::unique_ptr<Widelands::MapLoader> map_loader_;
+	Widelands::EditorGameBase egbase_;
 };
 
 #endif  // end of include guard: WL_WUI_MAPDETAILS_H

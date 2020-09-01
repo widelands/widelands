@@ -107,6 +107,36 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 	return 0;
 }
 
+int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase) {
+	preload_map(false);
+
+	std::string timer_message = "WidelandsMapLoader::load_map_for_render() for '";
+	timer_message += map_.get_name();
+	timer_message += "' took %ums";
+	ScopedTimer timer(timer_message);
+
+	map_.set_size(map_.width_, map_.height_);
+	mol_.reset(new MapObjectLoader());
+
+	log_info("Reading Heights Data ... ");
+	{
+		MapHeightsPacket p;
+		p.read(*fs_, egbase, true, *mol_);
+	}
+	log_info(" → took %ums\n ", timer.ms_since_last_query());
+
+	std::unique_ptr<WorldLegacyLookupTable> world_lookup_table(
+	   create_world_legacy_lookup_table(old_world_name_));
+	log_info("Reading Terrain Data ... ");
+	{
+		MapTerrainPacket p;
+		p.read(*fs_, egbase, *world_lookup_table);
+	}
+	log_info(" → took %ums\n ", timer.ms_since_last_query());
+
+	return 0;
+}
+
 /*
  * Load the complete map and make sure that it runs without problems
  */
