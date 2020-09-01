@@ -1,3 +1,5 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 animations = {
@@ -75,7 +77,6 @@ all_levels_emp = {
 }
 
 tribes:new_soldier_type {
-   msgctxt = "empire_worker",
    name = "empire_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Soldier"),
@@ -159,3 +160,5 @@ tribes:new_soldier_type {
       },
    },
 }
+
+pop_textdomain()

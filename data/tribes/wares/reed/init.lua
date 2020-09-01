@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_ware_type {
-   msgctxt = "ware",
    name = "reed",
    -- TRANSLATORS: This is a ware name used in lists of wares. Used for thatching roofs and as a fiber for weaving cloth, fishing nets etc.
    descname = pgettext("ware", "Reed"),
@@ -15,3 +16,5 @@ tribes:new_ware_type {
       },
    }
 }
+
+pop_textdomain()

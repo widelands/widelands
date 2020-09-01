@@ -12,11 +12,7 @@
 -- ``data/tribes/buildings/productionsites/<tribe_name>/<building_name>/init.lua``.
 -- The building will also need its help texts, which are defined in
 -- ``data/tribes/buildings/productionsites/<tribe_name>/<building_name>/helptexts.lua``
-
-
-dirname = path.dirname(__file__)
-
--- RST
+--
 -- .. function:: new_productionsite_type{table}
 --
 --    This function adds the definition of a production site building to the engine.
@@ -99,8 +95,77 @@ dirname = path.dirname(__file__)
 --        to the player if all resources have been replenished by its worker in full.
 --        Look at the Atlantean Fish Breeder's House for an example.
 --
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("tribes")
+--
+--    dirname = path.dirname(__file__)
+--
+--    tribes:new_productionsite_type {
+--       name = "atlanteans_well",
+--       descname = pgettext("atlanteans_building", "Well"),
+--       animation_directory = dirname,
+--       icon = dirname .. "menu.png",
+--       size = "small",
+--
+--       buildcost = {
+--          log = 2,
+--          granite = 1,
+--          planks = 1
+--       },
+--       return_on_dismantle = {
+--          log = 1,
+--          granite = 1
+--       },
+--
+--       animations = {
+--          idle = {
+--             hotspot = { 31, 32 },
+--          },
+--          working = {
+--             hotspot = { 31, 32 },
+--          },
+--       },
+--
+--       aihints = {
+--          basic_amount = 1,
+--          collects_ware_from_map = "water"
+--       },
+--
+--       working_positions = {
+--          atlanteans_carrier = 1
+--       },
+--
+--       programs = {
+--          main = {
+--             descname = _"working",
+--             actions = {
+--                "sleep=duration:20s",
+--                "animate=working duration:20s",
+--                "mine=resource_water radius:1 yield:100% when_empty:65%",
+--                "produce=water"
+--             }
+--          },
+--       },
+--       out_of_resource_notification = {
+--          title = _"No Water",
+--          heading = _"Out of Water",
+--          message = pgettext("atlanteans_building", "The carrier working at this well can’t find any water in his well."),
+--          productivity_threshold = 33
+--       },
+--    }
+--
+--    pop_textdomain()
+
+push_textdomain("tribes")
+
+dirname = path.dirname(__file__)
+
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_armorsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Armor Smithy"),
@@ -180,3 +245,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()
