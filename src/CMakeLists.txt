@@ -145,4 +145,5 @@ endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD
 
 if (WIN32)
   target_link_libraries(widelands_ball_of_mud wsock32)
+#  set_target_properties(widelands PROPERTIES LINK_FLAGS_RELEASE -s)
 endif (WIN32)

@@ -26,7 +26,6 @@
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
-#include "base/log.h"
 #include "economy/economy.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/ship.h"

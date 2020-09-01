@@ -20,6 +20,8 @@
 #ifndef WL_UI_BASIC_PANEL_H
 #define WL_UI_BASIC_PANEL_H
 
+#include <deque>
+
 #include <SDL_keyboard.h>
 #include <boost/signals2/signal.hpp>
 #include <boost/signals2/trackable.hpp>
@@ -326,6 +328,10 @@ protected:
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
+	virtual bool is_focus_toplevel() const;
+
+	virtual Recti focus_overlay_rect();
+
 private:
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;
@@ -361,6 +367,9 @@ private:
 	bool do_key(bool down, SDL_Keysym code);
 	bool do_textinput(const std::string& text);
 	bool do_tooltip();
+
+	bool handle_tab_pressed(bool reverse);
+	std::deque<Panel*> gather_focusable_children();
 
 	static Panel* ui_trackmouse(int32_t& x, int32_t& y);
 	static bool ui_mousepress(const uint8_t button, int32_t x, int32_t y);

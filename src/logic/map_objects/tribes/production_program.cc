@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"
@@ -71,7 +72,9 @@ Productionsite Programs
 Productionsites have :ref:`programs <map_object_programs>` that will be executed by the game
 engine. Each productionsite must have a program named ``main``, which will be started automatically
 when the productionsite is created in the game, and then repeated until the productionsite is
-destroyed. (Note: the main program used to be called ``work``, which has been deprecated.)
+destroyed.
+
+.. note:: The main program used to be called ``work``, which has been deprecated.
 
 Programs are defined as Lua tables. Each program must be declared as a subtable in the
 productionsite's Lua table called ``programs`` and have a unique table key. The entries in a
@@ -188,6 +191,8 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(const std::str
 	}
 }
 
+// TODO(GunChleoc): Incorporate this into TrainingParameters constructor when we drop compatibility
+// after v1.0
 TrainingAttribute parse_training_attribute(const std::string& argument) {
 	if (argument == "health") {
 		return TrainingAttribute::kHealth;
@@ -291,55 +296,128 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(
 	return result;
 }
 
+ProductionProgram::Action::TrainingParameters
+ProductionProgram::Action::TrainingParameters::parse(const std::vector<std::string>& arguments,
+                                                     const std::string& action_name) {
+	ProductionProgram::Action::TrainingParameters result;
+	for (const std::string& argument : arguments) {
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+		if (item.first == "soldier") {
+			result.attribute = parse_training_attribute(item.second);
+		} else if (item.first == "level") {
+			result.level = read_int(item.second, 0);
+		} else {
+			throw GameDataError(
+			   "Unknown argument '%s'. Usage: %s=soldier:attack|defense|evade|health level:<number>",
+			   item.first.c_str(), action_name.c_str());
+		}
+	}
+	return result;
+}
+
 /* RST
+.. _productionsite_programs_act_return:
+
 return
 ------
-Returns from the program.
 
-Parameter syntax::
+.. function:: return=completed|failed|skipped \[\<\condition\>\]
 
-    parameters        ::= return_value [condition_part]
-    return_value      ::= Failed | Completed | Skipped
-    Failed            ::= failed
-    Completed         ::= completed
-    Skipped           ::= skipped
-    condition_part    ::= when_condition | unless_condition
-    when_condition    ::= when condition {and condition}
-    unless_condition  ::= unless condition {or condition}
-    condition         ::= negation | economy_condition | workers_condition
-    negation          ::= not condition
-    economy_condition ::= economy economy_needs
-    workers_condition ::= workers need_experience
-    economy_needs     ::= needs ware_type
-    need_experience   ::= need experience
+The ``return`` action determines how the program's result will update the productivity statistics
+when any of its steps can't be completed:
 
-Parameter semantics:
-
-``return_value``
-    If return_value is Failed or Completed, the productionsite's
-    statistics is updated accordingly. If return_value is Skipped, the
-    statistics are not affected.
-``condition``
-    A boolean condition that can be evaluated to true or false.
-``condition_part``
-    If omitted, the return is unconditional.
-``when_condition``
-    This will cause the program to return when all conditions are true.
-``unless_condition``
-    This will cause the program to return unless some condition is true.
-``ware_type``
-    The name of a ware type (defined in the tribe). A ware type may only
-    appear once in the command.
-``economy_needs``
-    The result of this condition depends on whether the economy that this
-    productionsite belongs to needs a ware of the specified type. How
-    this is determined is defined by the economy.
-
-Aborts the execution of the program and sets a return value. Updates the productionsite's statistics
-depending on the return value.
+* **completed**: Counts as a success for the productivity statistics.
+* **failed**: Counts as a failure for the productivity statistics.
+* **skipped**: Will be ignored by the productivity statistics.
 
 .. note:: If the execution reaches the end of the program, the return value is implicitly set to
-    Completed.
+   ``completed``.
+
+If ``condition`` is specified, this will cause an immediate termination of the program if the
+condition can't be satisfied. There are two types of conditions, using Boolean arithmetic:
+
+   :when \<statement1\> \[and \<statement2\> ...\]: If any of these statements is false, the program
+      will terminate immediately.
+   :unless \<statement1\> \[or \<statement2\> ...\]: If none of these statements is true, the
+      program will terminate immediately.
+
+The individual statements can also be negated:
+
+   :when not <statement1> and <statement2>: If ``<statement1>`` is true or ``<statement2>`` is
+      false, the program will terminate immediately.
+   :unless not <statement>: If ``<statement>`` is false, the program will terminate immediately.
+
+The following statements are available:
+
+   :site has <ware_types>|<worker_types>: Checks whether the building's input queues are filled
+      with a certain amount of wares/workers. A ware or worker type may only appear once in the
+      command. You can specify more than one ware. For example, ``site has fish,meat:2`` is true if
+      the building has at least 1 fish or if the building has at least 2 meat.
+   :workers need experience: This is true if a worker working at the building can currently gain
+      some experience.
+   :economy needs <ware_type>|<worker_type>: The result of this condition depends on
+      whether the economy that this productionsite belongs to needs a ware or worker of the
+      specified type. How this is determined is defined by the economy. A ware or worker type may
+      only appear once in the command.
+
+Examples for ``return=failed``:
+
+.. code-block:: lua
+
+   -- If the building has no 'ax_sharp' in its input queues, the program will fail immediately.
+   return=failed unless site has ax_sharp
+
+   -- If the building has less than 2 items of 'barbarians_bread' in its input queues, the program
+   -- will fail immediately.
+   return=failed unless site has barbarians_bread:2
+
+   -- The building needs 1 item of 'bread_frisians', 'beer', 'smoked_fish' or 'smoked_meat' in its
+   -- input queues. Otherwise, the program will fail immediately.
+   return=failed unless site has bread_frisians,beer,smoked_fish,smoked_meat
+
+   -- The building needs 1 item of 'fish' or 2 items of 'meat' in its input queues. Otherwise, the
+   -- program will fail immediately.
+   return=failed unless site has fish,meat:2
+
+Examples for ``return=skipped``:
+
+.. code-block:: lua
+
+   -- If any subsequent step fails, don't cause a hit on the statistics.
+   return=skipped
+
+   -- Only run this program if the economy needs an 'ax_sharp'.
+   return=skipped unless economy needs ax_sharp
+
+   -- Only run this program if the economy needs a 'beer' or if any of the workers working at the
+   -- building can gain more experience.
+   return=skipped unless economy needs beer or workers need experience
+
+   -- Only run this program if the economy needs at least one of the listed wares: 'clay', 'fish' or
+   -- 'coal'.
+   return=skipped unless economy needs clay or economy needs fish or economy needs coal
+
+   -- Only run this program if the economy needs at least one of the listed wares: 'iron' or 'gold'.
+   -- If the economy has sufficient 'coal', run anyway even if none of these two wares are needed.
+   return=skipped unless economy needs iron or economy needs gold or not economy needs coal
+
+   -- If the building has no 'fur_garment_old' in its input queues, skip running this progam.
+   return=skipped unless site has fur_garment_old
+
+   -- If the building has 'wheat' in its input queue and if the economy needs the ware
+   -- 'flour' but does not need the ware 'cornmeal', skip running this program so we can run another
+   -- program for producing 'flour' rather than 'cornmeal'.
+   return=skipped when site has wheat and economy needs flour and not economy needs cornmeal
+
+   -- If the building has at least 2 items of 'fish' in its input queues and if the economy needs
+   -- any 'smoked_fish', skip running this program because we will want to produce some
+   -- 'smoked_fish' instead of whatever this program produces.
+   return=skipped when site has fish:2 and economy needs smoked_fish
+
+   -- If the building has at least one item of 'fruit' or 'bread_frisians' and at least one item of
+   -- 'smoked_fish' or 'smoked_meat', skip running this program. We want to do something more useful
+   -- with these wares with another program.
+   return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat
 */
 ProductionProgram::ActReturn::Condition::~Condition() {
 }
@@ -672,31 +750,52 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 /* RST
 call
 ----
-Calls a program of the productionsite.
+.. function:: call=\<program_name\> \[on failure|completion|skip fail|complete|skip|repeat\]
 
-Parameter syntax::
+   :arg string program_name: The name of a :ref:`program <productionsite_programs>`
+      defined in this productionsite.
 
-  parameters                 ::= program [failure_handling_directive]
-  failure_handling_directive ::= on failure failure_handling_method
-  failure_handling_method    ::= Fail | Repeat | Skip
-  Fail                       ::= fail
-  Repeat                     ::= repeat
-  Skip                       ::= skip
+   :arg string on: Defines what to do if the program fails, completes or skips.
 
-Parameter semantics:
+      * ``complete``: The failure is ignored, and the program returns as successful.
+      * ``fail``: The command fails, with the same effect as executing the :ref:`return program
+        <productionsite_programs_act_return>` with ``return=failed``.
+      * ``repeat``: The command is repeated.
+      * ``skip``: The failure is ignored, and the program is continued. This is the default setting
+        if ``on`` is ommitted.
 
-``program``
-    The name of a program defined in the productionsite.
-``failure_handling_method``
-    Specifies how to handle a failure of the called program.
+Calls another program of the same productionsite. Example:
 
-    - If ``failure_handling_method`` is ``fail``, the command fails (with the same effect as
-executing ``return=failed``).
-    - If ``failure_handling_method`` is ``repeat``, the command is repeated.
-    - If ``failure_handling_method`` is ``skip``, the failure is ignored (the program is continued).
+.. code-block:: lua
 
-``failure_handling_directive``
-    If omitted, the value ``Skip`` is used for ``failure_handling_method``.
+      -- Productionsite program that will mine marble 1 out of 3 times
+      programs = {
+         main = {
+            -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+            descname = _"working",
+            actions = {
+               "call=mine_granite on failure fail",
+               "call=mine_granite on failure fail",
+               "call=mine_marble on failure fail",
+            }
+         },
+         mine_granite = {
+            -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
+            descname = _"quarrying granite",
+            actions = {
+               "callworker=cut_granite",
+               "sleep=duration:17s500ms"
+            }
+         },
+         mine_marble = {
+            -- TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
+            descname = _"quarrying marble",
+            actions = {
+               "callworker=cut_marble",
+               "sleep=duration:17s500ms"
+            }
+         },
+      },
 */
 ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments) {
 	if (arguments.size() < 1 || arguments.size() > 4) {
@@ -789,23 +888,41 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 /* RST
 callworker
 ----------
-Calls a program of the productionsite's main worker.
+.. function:: callworker=\<worker_program_name\>
 
-Parameter syntax::
+   :arg string worker_program_name: The name of a :ref:`worker program <tribes_worker_programs>`
+      defined in the productionsite's main :ref:`worker <lua_tribes_basic_workers>`.
 
-    parameters ::= program
+Calls a program of the productionsite's main worker. Example:
 
-Parameter semantics:
+.. code-block:: lua
 
-``program``
-    The name of a program defined in the productionsite's main worker.
+      -- Productionsite program actions
+      actions = {
+         -- Send the farmer out to harvest wheat from a wheat field
+         "callworker=harvest",
+         "animate=working duration:3s",
+         "sleep=duration:1s"
+      }
+
+      -- Corresponding worker program for harvesting wheat from a wheat field
+      harvest = {
+         "findobject=attrib:ripe_wheat radius:2",
+         "walk=object",
+         "playsound=sound/farm/scythe priority:70% allow_multiple",
+         "animate=harvest duration:10s",
+         "callobject=harvest",
+         "animate=gather duration:4s",
+         "createware=wheat",
+         "return"
+      }
 */
 ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& arguments,
                                                 const std::string& production_program_name,
                                                 ProductionSiteDescr* descr,
                                                 const Tribes& tribes) {
 	if (arguments.size() != 1) {
-		throw GameDataError("Usage: callworker=<worker program name>");
+		throw GameDataError("Usage: callworker=<worker_program_name>");
 	}
 
 	program_ = arguments.front();
@@ -885,19 +1002,22 @@ void ProductionProgram::ActCallWorker::building_work_failed(Game& game,
 /* RST
 sleep
 -----
-Does nothing.
+.. function:: sleep=duration:\<duration\>
 
-Parameter syntax::
+   :arg duration duration: The time :ref:`map_object_programs_datatypes_duration` for which the
+      program will wait before continuing on to the next action. If ``0``, the result from the most
+      recent command that returned a value is used.
 
-  parameters ::= duration:<duration>
+Blocks the execution of the program for the specified duration. Example:
 
-Parameter semantics:
+.. code-block:: lua
 
-``duration``
-    A natural integer. If 0, the result from the most recent command that
-    returned a value is used.
-
-Blocks the execution of the program for the specified duration.
+      actions = {
+         "consume=ration",
+         -- Do nothing for 30 seconds
+         "sleep=duration:30s",
+         "callworker=scout"
+      }
 */
 ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
                                       const ProductionSiteDescr& psite) {
@@ -910,9 +1030,9 @@ ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
 	} else if (item.second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove after v1.0
 		duration_ = read_duration(item.first, psite);
-		log("WARNING: 'sleep' program without parameter name is deprecated, please use "
-		    "'sleep=duration:<duration>' in %s\n",
-		    psite.name().c_str());
+		log_warn("'sleep' program without parameter name is deprecated, please use "
+		         "'sleep=duration:<duration>' in %s\n",
+		         psite.name().c_str());
 	} else {
 		throw GameDataError(
 		   "Unknown argument '%s'. Usage: duration:<duration>", arguments.front().c_str());
@@ -942,22 +1062,16 @@ void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) cons
 /* RST
 consume
 -------
-Consumes wares from the input storages.
+.. function:: consume=ware_name\{,ware_name\}\[:count\] \[ware_name\{,ware_name\}\[:amount\]\]...\]
 
-Parameter syntax::
+   :arg string ware_name: a list of :ref:`ware types <lua_tribes_wares>` to choose from for
+      consumption. A ware type may only appear once in the command.
 
-  parameters ::= group {group}
-  group      ::= ware_type{,ware_type}[:count]
+   :arg int amount: The amount of wares of the chosen type to consume. A positive integer. If
+      omitted, the value ``1`` is used.
 
-Parameter semantics:
-
-``ware_type``
-    The name of a ware type (defined in the tribe).
-``count``
-    A positive integer. If omitted, the value 1 is used.
-
-For each group, the number of wares specified in count is consumed. The consumed wares may be of any
-type in the group.
+Consumes wares from the input storages. For each ware group, the number of wares specified in
+``amount`` is consumed. The consumed wares may be of any type in the group.
 
 If there are not enough wares in the input storages, the command fails (with the same effect as
 executing ``return=failed``). Then no wares will be consumed.
@@ -980,6 +1094,30 @@ succeeds.
 
 .. note:: It is not possible to reorder ware types within a group. ``a,b`` is equivalent to ``b,a``
     because in the internal representation the ware types of a group are sorted.
+
+Examples:
+
+.. code-block:: lua
+
+      actions = {
+         "return=skipped unless economy needs shield_advanced",
+         -- Try to consume 2x iron, then 2x coal, then 1x gold
+         "consume=iron:2 coal:2 gold",
+         "sleep=duration:32s",
+         "animate=working duration:45s",
+         "produce=shield_advanced"
+      },
+
+      actions = {
+         "checksoldier=soldier:evade level:0",
+         "return=failed unless site has empire_bread",
+         "return=failed unless site has fish,meat",
+         "sleep=duration:30s",
+         "checksoldier=soldier:evade level:0",
+         -- Try to consume 1x empire_bread, then 1x fish or 1x meat
+         "consume=empire_bread fish,meat",
+         "train=soldier:evade level:1"
+      }
 */
 ProductionProgram::ActConsume::ActConsume(const std::vector<std::string>& arguments,
                                           const ProductionSiteDescr& descr,
@@ -1114,23 +1252,29 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 /* RST
 produce
 -------
-Produces wares.
+.. function:: produce=\<ware_name\>\[:\<amount\>\] \[\<ware_name\>\[:\<amount\>\]...\]
 
-Parameter syntax::
+   :arg string ware_name: The name of a :ref:`ware type <lua_tribes_wares>`. A ware
+      type may only appear once in the command.
 
-  parameters ::= group {group}
-  group      ::= ware_type[:count]
+   :arg int amount: The amount of wares of this type to produce. A positive integer. If omitted,
+      the value ``1`` is used.
 
-Parameter semantics:
+Produces wares. For each group, the number of wares specified in ``amount`` is produced and then
+placed on the building's flag to be carried where they are needed. The produced wares are of the
+type specified by
+``ware_name`` in the group. Example:
 
-``ware_type``
-    The name of a ware type (defined in the tribe). A ware type may only
-    appear once in the command.
-``count``
-    A positive integer. If omitted, the value 1 is used.
+.. code-block:: lua
 
-For each group, the number of wares specified in count is produced. The produced wares are of the
-type specified in the group. How the produced wares are handled is defined by the productionsite.
+      actions = {
+         "return=skipped unless economy needs fur",
+         "consume=barley water",
+         "sleep=duration:15s",
+         "animate=working duration:20s",
+         -- Produce 2x fur and 1x meat
+         "produce=fur:2 meat"
+      }
 */
 ProductionProgram::ActProduce::ActProduce(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
@@ -1192,30 +1336,35 @@ bool ProductionProgram::ActProduce::get_building_work(Game& game,
 /* RST
 recruit
 -------
-Recruits workers.
+.. function:: recruit=\<worker_name\>\[:\<amount\>\] \[\<worker_name\>\[:\<amount\>\]...\]
 
-Parameter syntax::
+   :arg string worker_name: The name of a :ref:`worker type <lua_tribes_basic_workers>`. A worker
+      type may only appear once in the command.
 
-  parameters ::= group {group}
-  group      ::= worker_type[:count]
+   :arg int amount: The amount of workers of this type to create. A positive integer. If omitted,
+      the value ``1`` is used.
 
-Parameter semantics:
+Produces workers. For each group, the number of workers specified in ``amount`` is produced, which
+then leave the site looking for employment. The produced workers are of the type specified by
+``worker_name`` in the group. Example:
 
-``worker_type``
-    The name of a worker type (defined in the tribe). A worker type may only
-    appear once in the command.
-``count``
-    A positive integer. If omitted, the value 1 is used.
+.. code-block:: lua
 
-For each group, the number of workers specified in count is produced. The produced workers are of
-the type specified in the group. How the produced workers are handled is defined by the
-productionsite.
+      actions = {
+         "return=skipped unless economy needs atlanteans_horse",
+         "consume=corn water",
+         "sleep=duration:15s",
+         "playsound=sound/farm/horse priority:50% allow_multiple",
+         "animate=working duration:15s",
+         -- Create 2 horses
+         "recruit=atlanteans_horse:2"
+      }
 */
 ProductionProgram::ActRecruit::ActRecruit(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
                                           Tribes& tribes) {
 	if (arguments.empty()) {
-		throw GameDataError("Usage: recruit=<worker name>[:<amount>] [<worker name>[:<amount>]...]");
+		throw GameDataError("Usage: recruit=<worker_name>[:<amount>] [<worker_name>[:<amount>]...]");
 	}
 	recruited_workers_ = parse_bill_of_materials(arguments, WareWorker::wwWORKER, tribes);
 
@@ -1295,7 +1444,7 @@ mine
           -- Search radius of 2 for iron. Will always find iron until 33.33% of it has been dug up.
           -- After that, there's still a chance of 5% for finding iron.
           -- If this fails, the workers still have a chance of 17% of gaining experience.
-         "mine=iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
+         "mine=resource_iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
          "produce=iron_ore"
      }
 
@@ -1304,12 +1453,12 @@ mine
          "animate=working duration:20s",
           -- Search radius of 1 for water. Will always find water until 100% of it has been drawn.
           -- After that, there's still a chance of 65% for finding water.
-         "mine=water radius:1 yield:100% when_empty:65%",
+         "mine=resource_water radius:1 yield:100% when_empty:65%",
          "produce=water"
      }
 */
 ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
-                                    const World& world,
+                                    World& world,
                                     const std::string& production_program_name,
                                     ProductionSiteDescr* descr) {
 	if (arguments.size() != 5 && arguments.size() != 4) {
@@ -1320,10 +1469,10 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 
 	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
 		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log("WARNING: Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
-		    "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
-		    descr->name().c_str());
-		resource_ = world.safe_resource_index(arguments.front().c_str());
+		log_warn("Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
+		         "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
+		         descr->name().c_str());
+		resource_ = world.load_resource(arguments.front());
 		workarea_ = read_positive(arguments.at(1));
 		max_resources_ = read_positive(arguments.at(2)) * 100U;
 		depleted_chance_ = read_positive(arguments.at(3)) * 100U;
@@ -1334,7 +1483,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 		for (const std::string& argument : arguments) {
 			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 			if (item.second.empty()) {
-				resource_ = world.safe_resource_index(item.first.c_str());
+				resource_ = world.load_resource(item.first);
 			} else if (item.first == "radius") {
 				workarea_ = read_positive(item.second);
 			} else if (item.first == "yield") {
@@ -1479,22 +1628,72 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 /* RST
 checksoldier
 ------------
-Returns failure unless there are a specified amount of soldiers with specified level of specified
-properties. This command type is subject to change.
+.. function:: checksoldier=soldier:attack|defense|evade|health level:\<number\>
+
+   :arg string soldier: The soldier training attribute to check for.
+
+   :arg int level: The level that the soldier should have for the given training attribute.
+
+.. note:: This action is only available to :ref:`training sites
+   <lua_tribes_buildings_trainingsites>`.
+
+Returns failure unless there is a soldier present with the given training attribute at the given
+level.
+
+.. note:: The program's name must match the attribute to be trained and the level checked for, in
+   the form ``upgrade_soldier_<attribute>_<level>``.
+
+Example:
+
+.. code-block:: lua
+
+      upgrade_soldier_attack_3 = {
+         -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+         descname = _"upgrading soldier attack from level 3 to level 4",
+         actions = {
+            -- Fails when there aren't any soldiers with attack level 3
+            "checksoldier=soldier:attack level:3",
+            "return=failed unless site has sword_long",
+            "return=failed unless site has honey_bread,mead",
+            "return=failed unless site has smoked_fish,smoked_meat",
+            "sleep=duration:10s800ms",
+            "animate=working duration:12s",
+            -- Check again because the soldier could have been expelled by the player
+            "checksoldier=soldier:attack level:3",
+            "consume=sword_long honey_bread,mead smoked_fish,smoked_meat",
+            "train=soldier:attack level:4"
+         }
+      },
 */
-ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::string>& arguments) {
-	if (arguments.size() != 3) {
-		throw GameDataError("Usage: checksoldier=soldier <training attribute> <level>");
+ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::string>& arguments,
+                                                    const ProductionSiteDescr& descr) {
+	if (descr.type() != MapObjectType::TRAININGSITE) {
+		throw GameDataError("Illegal 'checksoldier' action in productionsite '%s'. This action is "
+		                    "only available to trainingsites.",
+		                    descr.name().c_str());
+	}
+	if (arguments.size() != 2 && arguments.size() != 3) {
+		throw GameDataError("Usage: checksoldier=soldier:attack|defense|evade|health level:<number>");
 	}
 
-	if (arguments.front() != "soldier") {
-		throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
+	if (arguments.size() == 3) {
+		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
+		log_warn("Using old syntax in %s. Please use "
+		         "'checksoldier=soldier:attack|defense|evade|health level:<number>'\n",
+		         descr.name().c_str());
+
+		if (arguments.front() != "soldier") {
+			throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
+		}
+		training_.attribute = parse_training_attribute(arguments.at(1));
+		training_.level = read_int(arguments.at(2), 0);
+	} else {
+		training_ = TrainingParameters::parse(arguments, "checksoldier");
 	}
-	attribute_ = parse_training_attribute(arguments.at(1));
-	level_ = read_int(arguments.at(2), 0);
 }
 
 void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps) const {
+	assert(ps.descr().type() == MapObjectType::TRAININGSITE);
 	const SoldierControl* ctrl = ps.soldier_control();
 	assert(ctrl != nullptr);
 	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
@@ -1502,8 +1701,8 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 		ps.set_production_result(_("No soldier to train!"));
 		return ps.program_end(game, ProgramResult::kSkipped);
 	}
-	ps.molog("  Checking soldier (%u) level %d)\n", static_cast<unsigned int>(attribute_),
-	         static_cast<unsigned int>(level_));
+	ps.molog(game.get_gametime(), "  Checking soldier (%u) level %d)\n",
+	         static_cast<unsigned int>(training_.attribute), training_.level);
 
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier*>::const_iterator it = soldiers.begin();; ++it) {
@@ -1512,30 +1711,30 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 			return ps.program_end(game, ProgramResult::kSkipped);
 		}
 
-		if (attribute_ == TrainingAttribute::kHealth) {
-			if ((*it)->get_health_level() == level_) {
+		if (training_.attribute == TrainingAttribute::kHealth) {
+			if ((*it)->get_health_level() == training_.level) {
 				break;
 			}
-		} else if (attribute_ == TrainingAttribute::kAttack) {
-			if ((*it)->get_attack_level() == level_) {
+		} else if (training_.attribute == TrainingAttribute::kAttack) {
+			if ((*it)->get_attack_level() == training_.level) {
 				break;
 			}
-		} else if (attribute_ == TrainingAttribute::kDefense) {
-			if ((*it)->get_defense_level() == level_) {
+		} else if (training_.attribute == TrainingAttribute::kDefense) {
+			if ((*it)->get_defense_level() == training_.level) {
 				break;
 			}
-		} else if (attribute_ == TrainingAttribute::kEvade) {
-			if ((*it)->get_evade_level() == level_) {
+		} else if (training_.attribute == TrainingAttribute::kEvade) {
+			if ((*it)->get_evade_level() == training_.level) {
 				break;
 			}
 		}
 	}
-	ps.molog("    okay\n");  // okay, do nothing
+	ps.molog(game.get_gametime(), "    okay\n");  // okay, do nothing
 
 	upcast(TrainingSite, ts, &ps);
-	ts->training_attempted(attribute_, level_);
+	ts->training_attempted(training_.attribute, training_.level);
 
-	ps.molog("  Check done!\n");
+	ps.molog(game.get_gametime(), "  Check done!\n");
 
 	return ps.program_step(game);
 }
@@ -1543,30 +1742,77 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 /* RST
 train
 -----
-Increases the level of a specified property of a soldier. No further documentation available.
+.. function:: train=soldier:attack|defense|evade|health level:\<number\>
+
+   :arg string soldier: The soldier training attribute to be trained.
+
+   :arg int level: The level that the soldier will receive for the given training attribute.
+
+.. note:: This action is only available to :ref:`training sites
+   <lua_tribes_buildings_trainingsites>`.
+
+Increases a soldier's training attribute to the given level. It is mandatory to call 'checksoldier'
+before calling this action to ensure that an appropriate soldier will be present at the site.
+Example:
+
+.. code-block:: lua
+
+      actions = {
+         "checksoldier=soldier:attack level:1",
+         "return=failed unless site has ax_broad",
+         "return=failed unless site has fish,meat",
+         "return=failed unless site has barbarians_bread",
+         "sleep=duration:30s",
+         -- This is called first to ensure that we have a matching soldier
+         "checksoldier=soldier:attack level:1",
+         "consume=ax_broad fish,meat barbarians_bread",
+         -- Now train the soldier's attack to level 2
+         "train=soldier:attack level:2"
+      }
 */
-ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments) {
-	if (arguments.size() != 4) {
-		throw GameDataError(
-		   "Usage: checksoldier=soldier <training attribute> <level before> <level after>");
+ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments,
+                                      const ProductionSiteDescr& descr) {
+	if (descr.type() != MapObjectType::TRAININGSITE) {
+		throw GameDataError("Illegal 'train' action in productionsite '%s'. This action is "
+		                    "only available to trainingsites.",
+		                    descr.name().c_str());
 	}
 
-	if (arguments.front() != "soldier") {
-		throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
+	if (arguments.size() != 2 && arguments.size() != 4) {
+		throw GameDataError("Usage: train=soldier:attack|defense|evade|health level:<number>");
 	}
 
-	attribute_ = parse_training_attribute(arguments.at(1));
-	level_ = read_int(arguments.at(2), 0);
-	target_level_ = read_positive(arguments.at(3));
+	if (arguments.size() == 4) {
+		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
+		log_warn("Using old syntax in %s. Please use train=soldier:attack|defense|evade|health "
+		         "level:<number>\n",
+		         descr.name().c_str());
+
+		if (arguments.front() != "soldier") {
+			throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
+		}
+
+		training_.attribute = parse_training_attribute(arguments.at(1));
+		training_.level = read_positive(arguments.at(3));
+	} else {
+		training_ = TrainingParameters::parse(arguments, "train");
+	}
 }
 
 void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const {
+	assert(ps.descr().type() == MapObjectType::TRAININGSITE);
+	TrainingSite& ts = dynamic_cast<TrainingSite&>(ps);
 	const SoldierControl* ctrl = ps.soldier_control();
 	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 
-	ps.molog("  Training soldier's %u (%d to %d)", static_cast<unsigned int>(attribute_),
-	         static_cast<unsigned int>(level_), static_cast<unsigned int>(target_level_));
+	const unsigned current_level = ts.checked_soldier_training().level;
+	assert(current_level != INVALID_INDEX);
+	assert(current_level < training_.level);
+	assert(ts.checked_soldier_training().attribute == training_.attribute);
+
+	ps.molog(game.get_gametime(), "  Training soldier's %u (%d to %d)",
+	         static_cast<unsigned int>(training_.attribute), current_level, training_.level);
 
 	bool training_done = false;
 	for (auto it = soldiers.begin(); !training_done; ++it) {
@@ -1575,48 +1821,46 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 			return ps.program_end(game, ProgramResult::kSkipped);
 		}
 		try {
-			switch (attribute_) {
+			switch (training_.attribute) {
 			case TrainingAttribute::kHealth:
-				if ((*it)->get_health_level() == level_) {
-					(*it)->set_health_level(target_level_);
+				if ((*it)->get_health_level() == current_level) {
+					(*it)->set_health_level(training_.level);
 					training_done = true;
 				}
 				break;
 			case TrainingAttribute::kAttack:
-				if ((*it)->get_attack_level() == level_) {
-					(*it)->set_attack_level(target_level_);
+				if ((*it)->get_attack_level() == current_level) {
+					(*it)->set_attack_level(training_.level);
 					training_done = true;
 				}
 				break;
 			case TrainingAttribute::kDefense:
-				if ((*it)->get_defense_level() == level_) {
-					(*it)->set_defense_level(target_level_);
+				if ((*it)->get_defense_level() == current_level) {
+					(*it)->set_defense_level(training_.level);
 					training_done = true;
 				}
 				break;
 			case TrainingAttribute::kEvade:
-				if ((*it)->get_evade_level() == level_) {
-					(*it)->set_evade_level(target_level_);
+				if ((*it)->get_evade_level() == current_level) {
+					(*it)->set_evade_level(training_.level);
 					training_done = true;
 				}
 				break;
-			default:
-				throw wexception(
-				   "Unknown training attribute index %d", static_cast<unsigned int>(attribute_));
+			case TrainingAttribute::kTotal:
+				throw wexception("'total' training attribute can't be trained");
 			}
 		} catch (...) {
 			throw wexception("Fail training soldier!!");
 		}
 	}
 
-	ps.molog("  Training done!\n");
+	ps.molog(game.get_gametime(), "  Training done!\n");
 	ps.set_production_result(
 	   /** TRANSLATORS: Success message of a trainingsite '%s' stands for the description of the
 	    * training program, e.g. Completed upgrading soldier evade from level 0 to level 1 */
 	   (boost::format(_("Completed %s")) % ps.top_state().program->descname()).str());
 
-	upcast(TrainingSite, ts, &ps);
-	ts->training_successful(attribute_, level_);
+	ts.training_successful(training_.attribute, current_level);
 
 	return ps.program_step(game);
 }
@@ -1684,9 +1928,9 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 
 	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
-		log("WARNING: 'construct' program without parameter names is deprecated, please use "
-		    "'construct=<immovable_name> worker:<program_name> radius:<number>' in %s\n",
-		    descr->name().c_str());
+		log_warn("'construct' program without parameter names is deprecated, please use "
+		         "'construct=<immovable_name> worker:<program_name> radius:<number>' in %s\n",
+		         descr->name().c_str());
 		objectname = arguments.at(0);
 		workerprogram = arguments.at(1);
 		radius = read_positive(arguments.at(2));
@@ -1798,7 +2042,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 		return;
 	}
 
-	psite.molog("construct: no object or buildable field\n");
+	psite.molog(game.get_gametime(), "construct: no object or buildable field\n");
 	psite.program_end(game, ProgramResult::kFailed);
 }
 
@@ -1818,7 +2062,8 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	Immovable* construction = dynamic_cast<Immovable*>(state.objvar.get(game));
 	if (construction) {
 		if (!construction->construct_remaining_buildcost(game, &remaining)) {
-			psite.molog("construct: immovable %u not under construction", construction->serial());
+			psite.molog(game.get_gametime(), "construct: immovable %u not under construction",
+			            construction->serial());
 			psite.program_end(game, ProgramResult::kFailed);
 			return false;
 		}
@@ -1863,12 +2108,13 @@ void ProductionProgram::ActConstruct::building_work_failed(Game& game,
 }
 
 ProductionProgram::ProductionProgram(const std::string& init_name,
-                                     const std::string& init_descname,
-                                     std::unique_ptr<LuaTable> actions_table,
+                                     const LuaTable& program_table,
                                      Tribes& tribes,
-                                     const World& world,
+                                     World& world,
                                      ProductionSiteDescr* building)
-   : MapObjectProgram(init_name), descname_(init_descname) {
+   : MapObjectProgram(init_name), descname_(program_table.get_string("descname")) {
+
+	std::unique_ptr<LuaTable> actions_table = program_table.get_table("actions");
 
 	for (const std::string& line : actions_table->array_entries<std::string>()) {
 		if (line.empty()) {
@@ -1906,10 +2152,10 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   new ActMine(parseinput.arguments, world, name(), building)));
 			} else if (parseinput.name == "checksoldier") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActCheckSoldier(parseinput.arguments)));
+				   new ActCheckSoldier(parseinput.arguments, *building)));
 			} else if (parseinput.name == "train") {
-				actions_.push_back(
-				   std::unique_ptr<ProductionProgram::Action>(new ActTrain(parseinput.arguments)));
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActTrain(parseinput.arguments, *building)));
 			} else if (parseinput.name == "playsound") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActPlaySound(parseinput.arguments, *building)));

@@ -19,9 +19,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-#ifdef _WIN32
-#include "base/log.h"
-#endif
 #include "ai/ai_help_structs.h"
 #include "base/macros.h"
 

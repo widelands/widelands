@@ -1,30 +1,31 @@
-dirname = path.dirname(__file__)
+push_textdomain("world")
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle.png"),
-      hotspot = { 4, 9 },
-   },
-   eating = {
-      directory = dirname,
-      basename = "idle", -- TODO(Nordfriese): Make animation
-      hotspot = { 4, 9 },
-   }
-}
-
-add_directional_animation(animations, "walk", dirname, "walk", {5, 9}, 4)
-
-world:new_critter_type{
+wl.World():new_critter_type{
    name = "bunny",
    descname = _ "Bunny",
-   editor_category = "critters_herbivores",
-   attributes = { "eatable" },
+   animation_directory = path.dirname(__file__),
    programs = {
       remove = { "remove" },
    },
-   animations = animations,
    size = 1,
    reproduction_rate = 100,
    appetite = 100,
    herbivore = {"field"},
+
+   animations = {
+      idle = {
+         hotspot = { 4, 9 },
+      },
+      eating = {
+         basename = "idle", -- TODO(Nordfriese): Make animation
+         hotspot = { 4, 9 },
+      },
+      walk = {
+         hotspot = { 5, 9 },
+         fps = 4,
+         directional = true
+      }
+   }
 }
+
+pop_textdomain()

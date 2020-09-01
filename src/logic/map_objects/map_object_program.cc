@@ -21,6 +21,7 @@
 
 #include <regex>
 
+#include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
@@ -222,7 +223,7 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 		// TODO(GunChleoc): Compatibility, remove unitless option after v1.0
 		std::regex without_unit("^(\\d+)$");
 		if (std::regex_match(input, without_unit)) {
-			log("WARNING: Duration '%s' without unit in %s's program is deprecated\n", input.c_str(),
+			log_warn("Duration '%s' without unit in %s's program is deprecated", input.c_str(),
 			    descr.name().c_str());
 			return read_positive(input, endless());
 		}
@@ -372,9 +373,9 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 		} else if (item.second.empty()) {
 			// TODO(GunChleoc): Compatibility, remove this option after v1.0
 			result.duration = read_duration(item.first, descr);
-			log("WARNING: 'animate' program without parameter name is deprecated, please use "
-			    "'animate=<animation_name> duration:<duration>' in %s\n",
-			    descr.name().c_str());
+			log_warn("'animate' program without parameter name is deprecated, please use "
+			         "'animate=<animation_name> duration:<duration>' in %s\n",
+			         descr.name().c_str());
 		} else {
 			throw GameDataError("Unknown argument '%s'. Usage: <animation_name> [duration:<duration>]",
 			                    arguments.at(1).c_str());
@@ -463,10 +464,10 @@ MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments
 		} else {
 			// TODO(GunChleoc): Compatibility, remove this option after v1.0
 			result.priority = (read_positive(arguments.at(1)) * kMaxProbability * 2U) / 256;
-			log("WARNING: Deprecated usage in %s. Please convert playsound's 'priority' option to "
-			    "percentage, like this: "
-			    "playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]\n",
-			    descr.name().c_str());
+			log_warn("Deprecated usage in %s. Please convert playsound's 'priority' option to "
+			         "percentage, like this: "
+			         "playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]\n",
+			         descr.name().c_str());
 		}
 	} else {
 		throw GameDataError("Unknown argument '%s'. Usage: playsound=<sound_dir/sound_name> "

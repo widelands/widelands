@@ -3,7 +3,6 @@ dirname = "tribes/buildings/productionsites/empire/well/"
 push_textdomain("scenario_emp04.wmf")
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_well1",
    descname = pgettext("empire_building", "Well"),
    helptext_script = dirname .. "helptexts.lua",
@@ -43,9 +42,9 @@ tribes:new_productionsite_type {
       main = {
          descname = "working",
          actions = {
-            "sleep=30000",
+            "sleep=duration:30s",
             "animate=working duration:30s",
-            "mine=water 5 100 5 2",
+            "mine=water radius:5 yield:100% when_empty:5%",
             "produce=water"
          }
       },

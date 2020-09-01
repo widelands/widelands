@@ -21,12 +21,15 @@ They can then have further animations, depending on what their specific capabili
 File Animations
 ---------------
 
-We recommend that you use the :ref:`animations_convenience_functions` below for
-the Lua coding, but let's look at an example first to understand which options
-are available, and what your image files need to look like:
+First, let's look at an example to understand which options are available,
+and what your image files need to look like:
 
 .. code-block:: lua
 
+   -- Tell the engine where the png files are located
+   animation_directory = path.dirname(__file__),
+
+   -- Define the animations
    animations = {
       idle = {
          hotspot = { 5, 7 },
@@ -96,6 +99,7 @@ We also support mipmaps here -- name the files ``walk_ne_0.5_00.png``,
 ``walk_ne_0.5_01.png`` etc. for scale `0.5`, ``walk_ne_1_00.png``,
 ``walk_ne_1_01.png`` etc. for scale `1` and so on.
 
+In the Lua code, the option ``directional = true`` will signal to the engine that it needs to treat it as a directional animation.
 
 .. _animations_spritesheets:
 
@@ -158,57 +162,6 @@ Here's the example from above as spritesheets:
       ...
    }
 
-
-.. _animations_convenience_functions:
-
-Convenience Functions
----------------------
-
-In order to cut down on the manual coding needed, we provide the convenience functions
-:any:`add_animation` for static animations and :any:`add_directional_animation` for walking
-animations, both of which will also detect mipmaps automatically.
-The corresponding ``.lua`` script file is included centrally when the tribe or world
-loading is started, so you won't need to include it again. Example:
-
-.. code-block:: lua
-
-   dirname = path.dirname(__file__)
-
-   -- This table will contain the animations
-   animations = {}
-
-   -- Add an idle animation with hotspot = {16, 30} and fps = 5
-   add_animation(animations, "idle", dirname, "idle", {16, 30}, 5)
-
-   -- Add animations for the 6 directions with hotspot = {16, 30} and fps = 10
-   add_directional_animation(animations, "walk", dirname, "walk", {16, 30}, 10)
-
-   -- Add a "walkload" animation. The animation hasn't been created yet in this example, so we reuse the files for the "walk" animation.
-   add_directional_animation(animations, "walkload", dirname, "walk", {16, 30}, 10)
-
-
-   tribes:new_worker_type {
-      msgctxt = "fancytribe_worker",
-      name = "fancytribe_diligentworker",
-      ...
-
-      animations = animations, -- Include the animations table in your map object
-      ...
-   }
-
-The convenience functions don't support sound effects directly, so you'll have to
-add them manually, like this:
-
-.. code-block:: lua
-
-   animations = {}
-   add_animation(animations, "work", dirname, "work", {11, 26}, 10)
-   animations["work"]["sound_effect"] = {
-      name = "bar",
-      directory = "sound/foo"
-   }
-
-
 .. _animations_converting_formats:
 
 Converting Animation Formats
@@ -269,13 +222,21 @@ For example, the animations for a mine could look like this:
 
 .. code-block:: lua
 
-   dirname = path.dirname(__file__)
-
-   animations = {}
-   add_animation(animations, "idle", dirname, "idle", {21, 36})
-   add_animation(animations, "build", dirname, "build", {21, 36})
-   add_animation(animations, "working", dirname, "working", {21, 36})
-   add_animation(animations, "empty", dirname, "empty", {21, 36})
+   animation_directory = path.dirname(__file__),
+   animations = {
+      idle = {
+         hotspot = { 21, 36 },
+      },
+      build = {
+         hotspot = { 21, 36 },
+      },
+      working = {
+         hotspot = { 21, 36 },
+      },
+      empty = {
+         hotspot = { 21, 36 },
+      },
+   }
 
 
 Immovables
@@ -304,13 +265,32 @@ For example, a fisher's animations could look like this:
 
 .. code-block:: lua
 
-   dirname = path.dirname(__file__)
-
-   animations = {}
-   add_animation(animations, "idle", dirname, "idle", {9, 39})
-   add_animation(animations, "fishing", dirname, "fishing", {9, 39}, 10)
-   add_walking_animations(animations, "walk", dirname, "walk", {10, 38}, 10)
-   add_walking_animations(animations, "walkload", dirname, "walk", {10, 38}, 10)
+   animation_directory = path.dirname(__file__),
+   -- A file animation for the idle. Ideally, we'll only have those if the animation only has 1 frame.
+   animations = {
+      idle = {
+         hotspot = { 7, 33 },
+      },
+   },
+   spritesheets = {
+      -- A directional animation as a spritesheet
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 32 }
+      },
+      -- A stationary animation as a spritesheet
+      fish = {
+         fps = 10,
+         frames = 30,
+         rows = 6,
+         columns = 5,
+         hotspot = { 7, 33 }
+      }
+   }
 
 Soldiers
 ^^^^^^^^
@@ -321,26 +301,50 @@ For example, attacking towards the west can be defined like this:
 
 .. code-block:: lua
 
-   dirname = path.dirname(__file__)
-
-   animations = {}
-   add_animation(animations, "idle", dirname, "idle", {16, 31}, 5)
-   add_walking_animations(animations, "walk", dirname, "walk", {16, 31}, 10)
-   ...
-
-   add_animation(animations, "atk_ok_w1", dirname, "atk_ok_w1", {36, 40}, 20) -- First attack animation
-   add_animation(animations, "atk_ok_w2", dirname, "atk_ok_w2", {36, 40}, 20) -- Second attack animation
-   ...
+   level_rookie = {
+      min_health = 0,
+      min_attack = 0,
+      min_defense = 0,
+      min_evade = 0,
+      max_health = 0,
+      max_attack = 3,
+      max_defense = 2,
+      max_evade = 0,
+   }
 
    tribes:new_soldier_type {
-      msgctxt = "fancytribe_worker",
       name = "fancytribe_soldier",
       ...
 
+      animation_directory = path.dirname(__file__),
+
+      animations = {
+         idle = {
+            hotspot = { 16, 31 },
+            fps = 5
+         },
+         -- First attack animation
+         atk_ok_w1 = {
+            hotspot = { 30, 36 },
+            fps = 10
+         },
+         -- Second attack animation
+         atk_ok_w2 = {
+            hotspot = { 30, 36 },
+            fps = 10
+         },
+         ...
+         walk = {
+            hotspot = { 16, 31 },
+            fps = 10,
+            directional = true
+         },
+      },
+
       -- Reference the attack animations in your map object
       attack_success_w = {
-         atk_ok_w1 = levels,
-         atk_ok_w2 = levels,
+         atk_ok_w1 = level_rookie,
+         atk_ok_w2 = level_rookie,
       },
       ...
    }

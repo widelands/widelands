@@ -3,7 +3,6 @@ dirname = "tribes/buildings/productionsites/empire/farm/"
 push_textdomain("scenario_emp04.wmf")
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_farm1",
    descname = "Farm",
    helptext_script = dirname .. "helptexts.lua",
@@ -36,14 +35,14 @@ tribes:new_productionsite_type {
       plant = {
          descname = "planting wheat",
          actions = {
-            "sleep=14000",
+            "sleep=duration:14s",
             "callworker=harvest"
          }
       },
       harvest = {
          descname = "harvesting wheat",
          actions = {
-            "sleep=4000",
+            "sleep=duration:4s",
             "callworker=harvest"
          }
       },

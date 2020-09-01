@@ -26,6 +26,8 @@
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
 
+ImageCache* g_image_cache;
+
 ImageCache::ImageCache() {
 }
 

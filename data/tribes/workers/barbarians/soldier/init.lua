@@ -1,3 +1,5 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 animations = {
@@ -56,8 +58,12 @@ animations = {
       hotspot = { 16, 31 },
       fps = 20
    },
+   walk = {
+      hotspot = { 16, 31 },
+      fps = 10,
+      directional = true
+   },
 }
-add_directional_animation(animations, "walk", dirname, "walk", {16, 31}, 10)
 
 all_levels_bar = {
    min_health = 0,
@@ -71,7 +77,6 @@ all_levels_bar = {
 }
 
 tribes:new_soldier_type {
-   msgctxt = "barbarians_worker",
    name = "barbarians_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Soldier"),
@@ -79,9 +84,8 @@ tribes:new_soldier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   animation_directory = dirname,
    animations = animations,
-
-   default_target_quantity = 10,
 
    -- Battle attributes - initial values and per level increase
    health = {
@@ -108,12 +112,6 @@ tribes:new_soldier_type {
       base = 25,
       increase_per_level = 16,
       pictures = path.list_files(dirname .. "evade_level?.png"),
-   },
-
-   aihints = {
-      preciousness = {
-         barbarians = 5
-      },
    },
 
    -- Random animations for battle
@@ -162,3 +160,5 @@ tribes:new_soldier_type {
       },
    },
 }
+
+pop_textdomain()

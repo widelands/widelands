@@ -157,6 +157,9 @@ struct ResizeHistory {
 	std::vector<Coords> starting_positions;
 };
 
+// Minimum distance between two starting positions
+constexpr uint16_t kMinSpaceAroundPlayers = 24;
+
 /** class Map
  *
  * This really identifies a map like it is in the game
@@ -607,7 +610,7 @@ private:
 	                   bool* ismine = nullptr,
 	                   bool consider_mobs = true,
 	                   NodeCaps initcaps = CAPS_NONE) const;
-	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const;
+	bool is_cycle_connected(const FCoords& start, const std::vector<WalkingDir>&) const;
 	template <typename functorT>
 	void
 	find_reachable(const EditorGameBase&, const Area<FCoords>&, const CheckStep&, functorT&) const;

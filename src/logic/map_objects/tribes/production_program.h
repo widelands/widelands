@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/map_object_program.h"
@@ -50,6 +49,16 @@ struct ProductionProgram : public MapObjectProgram {
 
 	/// Can be executed on a ProductionSite.
 	struct Action {
+		struct TrainingParameters {
+			TrainingParameters() : attribute(TrainingAttribute::kTotal), level(INVALID_INDEX) {
+			}
+			static TrainingParameters parse(const std::vector<std::string>& arguments,
+			                                const std::string& action_name);
+
+			TrainingAttribute attribute;
+			unsigned level;
+		};
+
 		Action() = default;
 		virtual ~Action();
 		virtual void execute(Game&, ProductionSite&) const = 0;
@@ -444,7 +453,7 @@ struct ProductionProgram : public MapObjectProgram {
 
 	struct ActMine : public Action {
 		ActMine(const std::vector<std::string>& arguments,
-		        const World&,
+		        World&,
 		        const std::string& production_program_name,
 		        ProductionSiteDescr*);
 		void execute(Game&, ProductionSite&) const override;
@@ -458,22 +467,29 @@ struct ProductionProgram : public MapObjectProgram {
 	};
 
 	struct ActCheckSoldier : public Action {
-		explicit ActCheckSoldier(const std::vector<std::string>& arguments);
-		void execute(Game&, ProductionSite&) const override;
+		explicit ActCheckSoldier(const std::vector<std::string>& arguments,
+		                         const ProductionSiteDescr& descr);
+		void execute(Game&, ProductionSite& ps) const override;
+
+		TrainingParameters training() const {
+			return training_;
+		}
 
 	private:
-		TrainingAttribute attribute_;
-		uint8_t level_;
+		TrainingParameters training_;
 	};
 
 	struct ActTrain : public Action {
-		explicit ActTrain(const std::vector<std::string>& arguments);
-		void execute(Game&, ProductionSite&) const override;
+		explicit ActTrain(const std::vector<std::string>& arguments,
+		                  const ProductionSiteDescr& descr);
+		void execute(Game&, ProductionSite& ps) const override;
+
+		TrainingParameters training() const {
+			return training_;
+		}
 
 	private:
-		TrainingAttribute attribute_;
-		uint8_t level_;
-		uint8_t target_level_;
+		TrainingParameters training_;
 	};
 
 	/// Plays a sound effect.
@@ -529,10 +545,9 @@ struct ProductionProgram : public MapObjectProgram {
 	};
 
 	ProductionProgram(const std::string& init_name,
-	                  const std::string& init_descname,
-	                  std::unique_ptr<LuaTable> actions_table,
+	                  const LuaTable& program_table,
 	                  Tribes& tribes,
-	                  const World& world,
+	                  World& world,
 	                  ProductionSiteDescr* building);
 
 	const std::string& descname() const;

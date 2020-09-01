@@ -3,7 +3,6 @@ dirname = "tribes/buildings/productionsites/empire/farm/"
 push_textdomain("scenario_emp04.wmf")
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_farm2",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Farm"),
@@ -50,7 +49,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
          descname = _"planting wheat",
          actions = {
-            "sleep=14000",
+            "sleep=duration:14s",
             "callworker=plant"
          }
       },
@@ -58,7 +57,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
          descname = _"harvesting wheat",
          actions = {
-            "sleep=4000",
+            "sleep=duration:4s",
             "callworker=harvest"
          }
       },

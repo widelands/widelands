@@ -3,7 +3,6 @@ dirname = "tribes/buildings/productionsites/empire/lumberjacks_house/"
 push_textdomain("scenario_emp04.wmf")
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_lumberjacks_house1",
    descname = "Lumberjack’s House",
    helptext_script = dirname .. "helptexts.lua",
@@ -39,7 +38,7 @@ tribes:new_productionsite_type {
       main = {
          descname = "felling trees",
          actions = {
-            "sleep=400000", -- Barbarian lumberjack sleeps 25000
+            "sleep=duration:6m40s",
             "callworker=harvest"
          }
       },

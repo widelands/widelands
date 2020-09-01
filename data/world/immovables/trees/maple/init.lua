@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -7,12 +9,10 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "maple_winter_sapling",
    descname = _ "Maple (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -34,12 +34,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "maple_winter_pole",
    descname = _ "Maple (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -61,12 +59,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "maple_winter_mature",
    descname = _ "Maple (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -88,14 +84,12 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "maple_winter_old",
    descname = _ "Maple (Old)",
    species = _ "Maple",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -123,3 +117,5 @@ world:new_immovable_type{
       },
    },
 }
+
+pop_textdomain()
