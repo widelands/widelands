@@ -115,6 +115,8 @@
 --
 --    pop_textdomain()
 
+push_textdomain("world")
+
 wl.World():new_critter_type{
    name = "badger",
    descname = _ "Badger",
@@ -145,3 +147,5 @@ wl.World():new_critter_type{
    }
 
 }
+
+pop_textdomain()
