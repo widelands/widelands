@@ -170,23 +170,23 @@ end
 -- Sleep and adjust game speed each second for reasonable average FPS.
 -- Sleep at most 8 minutes realtime to avoid travis timeouts.
 function sleep_with_fps(seconds)
-   local counter = 0
+   local counter = 10 * seconds
    game.desired_speed = 100
    local starttime = game.sdl_time
    repeat
       if game.sdl_time - starttime > 8 * 60 * 1000 then
-         print("Returning early after " .. counter .. " seconds gametime to avoid timeout.")
+         print("Returning early with " .. (counter / 10) .. " seconds gametime left to avoid timeout.")
          return
       end
-      counter = counter + 1
-      sleep(1000)
+      counter = counter - 1
+      sleep(100)
       local average_fps = mapview.average_fps
-      if average_fps < 1 then
-         local new_desired_speed = game.desired_speed - 1000
+      if average_fps < 2 then
+         local new_desired_speed = game.desired_speed - 200
          if new_desired_speed < 1000 then new_desired_speed = 1000 end
          game.desired_speed = new_desired_speed
-      elseif average_fps > 10 then
-         game.desired_speed = game.desired_speed + 500
+      elseif average_fps > 6 then
+         game.desired_speed = game.desired_speed + 100
       end
-   until counter == seconds
+   until counter == 0
 end

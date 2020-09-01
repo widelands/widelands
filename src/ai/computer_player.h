@@ -43,8 +43,6 @@ struct ComputerPlayer {
 	ComputerPlayer(Widelands::Game&, const Widelands::PlayerNumber);
 	virtual ~ComputerPlayer();
 
-	virtual void think() = 0;
-
 	Widelands::Game& game() const {
 		return game_;
 	}
@@ -91,7 +89,11 @@ struct ComputerPlayer {
 	 */
 	static const Implementation* get_implementation(const std::string& name);
 
-	void runthread();
+	virtual void runthread();
+
+protected:
+	// Should be called only from runthread()
+	virtual void think() = 0;
 
 private:
 	Widelands::Game& game_;

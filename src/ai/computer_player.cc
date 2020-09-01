@@ -37,6 +37,9 @@ struct EmptyAI : ComputerPlayer {
 
 	void think() override {
 	}
+	void runthread() override {
+		// Do nothing
+	}
 
 	struct EmptyAIImpl : Implementation {
 		EmptyAIImpl()
