@@ -365,7 +365,6 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 		   new SuggestedTeamsEntry(this, &inner_teams_box_, eia().egbase().map(),
 		                           max_w_ - UI::Scrollbar::kSize, Widelands::SuggestedTeamLineup());
 		inner_teams_box_.add(ste);
-		//		inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
 		suggested_teams_entries_.push_back(ste);
 	});
 
