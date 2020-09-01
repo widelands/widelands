@@ -14,10 +14,7 @@
 --
 -- Which resource can be placed where on the map is defined in each terrain's
 -- ``valid_resources`` table.
-
-pics_dir = path.dirname(__file__) .. "pics/"
-
--- RST
+--
 -- .. function:: new_resource_type{table}
 --
 --    This function adds the definition of a resource to the engine.
@@ -76,6 +73,38 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --               [1000] = pics_dir .. "coal4.png", -- Use this image for amount > 15;
 --            }
 --
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("world")
+--
+--    pics_dir = path.dirname(__file__) .. "pics/"
+--
+--    wl.World():new_resource_type{
+--       name = "resource_coal",
+--       descname = _ "Coal",
+--       max_amount = 20,
+--       detectable = true,
+--       timeout_ms = 300000,
+--       timeout_radius = 8,
+--       representative_image = pics_dir .. "coal4.png",
+--       editor_pictures = {
+--          [5] = pics_dir .. "coal1.png",
+--          [10] = pics_dir .. "coal2.png",
+--          [15] = pics_dir .. "coal3.png",
+--          [1000] = pics_dir .. "coal4.png",
+--       }
+--    }
+--
+--    pop_textdomain()
+
+push_textdomain("world")
+
+pics_dir = path.dirname(__file__) .. "pics/"
+
 wl.World():new_resource_type{
    name = "resource_coal",
    descname = _ "Coal",
@@ -171,3 +200,5 @@ wl.World():new_resource_type{
       [1000] = pics_dir .. "fish4.png",
    }
 }
+
+pop_textdomain()

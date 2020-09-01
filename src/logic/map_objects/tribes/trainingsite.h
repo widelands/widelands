@@ -34,7 +34,6 @@ class World;
 class TrainingSiteDescr : public ProductionSiteDescr {
 public:
 	TrainingSiteDescr(const std::string& init_descname,
-	                  const std::string& msgctxt,
 	                  const LuaTable& table,
 	                  Tribes& tribes,
 	                  World& world);
@@ -186,10 +185,7 @@ public:
 	void set_build_heroes(bool b_heroes) {
 		build_heroes_ = b_heroes;
 	}
-	void switch_heroes() {
-		build_heroes_ = !build_heroes_;
-		molog("BUILD_HEROES: %s", build_heroes_ ? "TRUE" : "FALSE");
-	}
+	void switch_heroes();
 
 	void set_economy(Economy* e, WareWorker type) override;
 

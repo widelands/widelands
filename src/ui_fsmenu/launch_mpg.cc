@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/warning.h"
 #include "graphic/playercolor.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -166,6 +167,9 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	   Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_));
 	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ +
 	                                               win_condition_dropdown_.get_h() + padding_));
+	custom_starting_positions_.set_pos(Vector2i(
+	   right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ + win_condition_dropdown_.get_h() +
+	                       peaceful_.get_h() + 2 * padding_));
 	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240 - buth_ - padding_));
 	ok_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 
@@ -428,6 +432,8 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	update_peaceful_mode();
 	peaceful_.set_state(settings_->is_peaceful_mode());
+	update_custom_starting_positions();
+	custom_starting_positions_.set_state(settings_->get_custom_starting_positions());
 
 	if (!settings_->can_change_map() && !init_win_condition_label()) {
 		try {
@@ -447,8 +453,8 @@ void FullscreenMenuLaunchMPG::refresh() {
 			      .str());
 
 		} catch (LuaTableKeyError& e) {
-			log("LaunchMPG: Error loading win condition: %s %s\n",
-			    settings_->get_win_condition_script().c_str(), e.what());
+			log_err("LaunchMPG: Error loading win condition: %s %s\n",
+			        settings_->get_win_condition_script().c_str(), e.what());
 		}
 		win_condition_dropdown_.set_enabled(false);
 	}
@@ -544,8 +550,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 		// get translated tribename
 		for (const Widelands::TribeBasicInfo& tribeinfo : settings_->settings().tribes) {
 			if (tribeinfo.name == player_save_tribe[i - 1]) {
-				i18n::Textdomain td("tribes");  // for translated initialization
-				player_save_tribe[i - 1] = _(tribeinfo.descname);
+				player_save_tribe[i - 1] = tribeinfo.descname;
 				break;
 			}
 		}

@@ -22,7 +22,6 @@
 
 #include <SDL_surface.h>
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"

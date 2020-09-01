@@ -89,11 +89,12 @@ void MilitarySite::SoldierControl::drop_soldier(Soldier& soldier) {
 	if (!military_site_->is_present(soldier)) {
 		// This can happen when the "drop soldier" player command is delayed
 		// by network delay or a client has bugs.
-		military_site_->molog("MilitarySite::drop_soldier(%u): not present\n", soldier.serial());
+		military_site_->molog(
+		   game.get_gametime(), "MilitarySite::drop_soldier(%u): not present\n", soldier.serial());
 		return;
 	}
 	if (present_soldiers().size() <= min_soldier_capacity()) {
-		military_site_->molog("cannot drop last soldier(s)\n");
+		military_site_->molog(game.get_gametime(), "cannot drop last soldier(s)\n");
 		return;
 	}
 
@@ -300,7 +301,6 @@ MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
      conquer_radius_(0),
      num_soldiers_(0),
      heal_per_second_(0) {
-	i18n::Textdomain td("tribes");
 
 	conquer_radius_ = table.get_int("conquers");
 	num_soldiers_ = table.get_int("max_soldiers");
@@ -312,11 +312,11 @@ MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
 	prefers_heroes_at_start_ = table.get_bool("prefer_heroes");
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("messages");
-	occupied_str_ = _(items_table->get_string("occupied"));
-	aggressor_str_ = _(items_table->get_string("aggressor"));
-	attack_str_ = _(items_table->get_string("attack"));
-	defeated_enemy_str_ = _(items_table->get_string("defeated_enemy"));
-	defeated_you_str_ = _(items_table->get_string("defeated_you"));
+	occupied_str_ = items_table->get_string("occupied");
+	aggressor_str_ = items_table->get_string("aggressor");
+	attack_str_ = items_table->get_string("attack");
+	defeated_enemy_str_ = items_table->get_string("defeated_enemy");
+	defeated_you_str_ = items_table->get_string("defeated_you");
 }
 
 /**
@@ -917,9 +917,11 @@ void MilitarySite::send_attacker(Soldier& soldier, Building& target) {
 		// The soldier may not be present anymore due to having been kicked out. Most of the time
 		// the function calling us will notice this, but there are cornercase where it might not,
 		// e.g. when a soldier was ordered to leave but did not physically quit the building yet.
-		log("MilitarySite(%3dx%3d)::send_attacker: Not sending soldier %u because he left the "
-		    "building\n",
-		    get_position().x, get_position().y, soldier.serial());
+		log_warn_time(
+		   owner().egbase().get_gametime(),
+		   "MilitarySite(%3dx%3d)::send_attacker: Not sending soldier %u because he left the "
+		   "building\n",
+		   get_position().x, get_position().y, soldier.serial());
 		return;
 	}
 

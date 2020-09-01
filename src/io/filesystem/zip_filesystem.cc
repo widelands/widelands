@@ -21,7 +21,9 @@
 
 #include <cassert>
 #include <cerrno>
+#include <chrono>
 #include <cstring>
+#include <ctime>
 #include <memory>
 
 #include <boost/format.hpp>
@@ -358,8 +360,7 @@ void ZipFilesystem::ensure_directory_exists(const std::string& dirname) {
 void ZipFilesystem::make_directory(const std::string& dirname) {
 	zip_fileinfo zi;
 
-	zi.tmz_date.tm_sec = zi.tmz_date.tm_min = zi.tmz_date.tm_hour = zi.tmz_date.tm_mday =
-	   zi.tmz_date.tm_mon = zi.tmz_date.tm_year = 0;
+	set_time_info(zi.tmz_date);
 	zi.dosDate = 0;
 	zi.internal_fa = 0;
 	zi.external_fa = 0;
@@ -384,6 +385,18 @@ void ZipFilesystem::make_directory(const std::string& dirname) {
 		throw FileError("ZipFilesystem::make_directory", complete_filename);
 	}
 	zipCloseFileInZip(zip_file_->write_handle());
+}
+
+void ZipFilesystem::set_time_info(tm_zip& time) {
+	std::time_t timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	std::tm* now = std::localtime(&timestamp);
+
+	time.tm_sec = now->tm_sec;
+	time.tm_min = now->tm_min;
+	time.tm_hour = now->tm_hour;
+	time.tm_mday = now->tm_mday;
+	time.tm_mon = now->tm_mon;
+	time.tm_year = now->tm_year;
 }
 
 /**
@@ -438,8 +451,8 @@ void ZipFilesystem::write(const std::string& fname, void const* const data, int3
 	std::replace(filename.begin(), filename.end(), '\\', '/');
 
 	zip_fileinfo zi;
-	zi.tmz_date.tm_sec = zi.tmz_date.tm_min = zi.tmz_date.tm_hour = zi.tmz_date.tm_mday =
-	   zi.tmz_date.tm_mon = zi.tmz_date.tm_year = 0;
+	set_time_info(zi.tmz_date);
+
 	zi.dosDate = 0;
 	zi.internal_fa = 0;
 	zi.external_fa = 0;
@@ -492,8 +505,8 @@ StreamRead* ZipFilesystem::open_stream_read(const std::string& fname) {
 StreamWrite* ZipFilesystem::open_stream_write(const std::string& fname) {
 	zip_fileinfo zi;
 
-	zi.tmz_date.tm_sec = zi.tmz_date.tm_min = zi.tmz_date.tm_hour = zi.tmz_date.tm_mday =
-	   zi.tmz_date.tm_mon = zi.tmz_date.tm_year = 0;
+	set_time_info(zi.tmz_date);
+
 	zi.dosDate = 0;
 	zi.internal_fa = 0;
 	zi.external_fa = 0;

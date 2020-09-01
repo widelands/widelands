@@ -341,9 +341,9 @@ void FullscreenMenuMapSelect::fill_table() {
 				if (!mapdata.tags.count("balanced") && !mapdata.tags.count("unbalanced")) {
 					unspecified_balancing_found = true;
 				} else if (mapdata.tags.count("balanced") && mapdata.tags.count("unbalanced")) {
-					log("WARNING: Map '%s' is both balanced and unbalanced - please fix the 'elemental' "
-					    "packet\n",
-					    mapfilename.c_str());
+					log_warn("Map '%s' is both balanced and unbalanced - please fix the 'elemental' "
+					         "packet\n",
+					         mapfilename.c_str());
 				}
 
 				for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end();
@@ -356,11 +356,12 @@ void FullscreenMenuMapSelect::fill_table() {
 				}
 				maps_data_.push_back(mapdata);
 			} catch (const std::exception& e) {
-				log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
+				log_warn(
+				   "Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
 			} catch (...) {
-				log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
+				log_warn("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
 			}
-		} else if (g_fs->is_directory(mapfilename)) {
+		} else if (g_fs->is_directory(mapfilename) && g_fs->list_directory(mapfilename).size() > 0) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
 			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {

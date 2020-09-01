@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "graphic/animation/animation_manager.h"
@@ -153,7 +154,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      ship_(Widelands::INVALID_INDEX),
      ferry_(Widelands::INVALID_INDEX),
      port_(Widelands::INVALID_INDEX) {
-	log("┏━ Loading %s:\n", name_.c_str());
+	log_info("┏━ Loading %s:\n", name_.c_str());
 	ScopedTimer timer("┗━ took: %ums");
 
 	initializations_ = info.initializations;
@@ -165,52 +166,52 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 	};
 
 	try {
-		log("┃    Ships: ");
+		log_info("┃    Ships: ");
 		set_progress_message(_("Ships"), 1);
 		load_ships(table, tribes);
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-		log("┃    Immovables: ");
+		log_info("┃    Immovables: ");
 		set_progress_message(_("Immovables"), 2);
 		load_immovables(table, tribes, world);
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-		log("┃    Wares: ");
+		log_info("┃    Wares: ");
 		set_progress_message(_("Wares"), 3);
 		load_wares(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
 			load_wares(*scenario_table, tribes);
 		}
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-		log("┃    Workers: ");
+		log_info("┃    Workers: ");
 		set_progress_message(_("Workers"), 4);
 		load_workers(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("workers_order")) {
 			load_workers(*scenario_table, tribes);
 		}
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-		log("┃    Buildings: ");
+		log_info("┃    Buildings: ");
 		set_progress_message(_("Buildings"), 5);
 		load_buildings(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("buildings")) {
 			load_buildings(*scenario_table, tribes);
 		}
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		set_progress_message(_("Finishing"), 6);
 
-		log("┃    Frontiers, flags and roads: ");
+		log_info("┃    Frontiers, flags and roads: ");
 		load_frontiers_flags_roads(table);
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
-		log("┃    Finalizing: ");
+		log_info("┃    Finalizing: ");
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
 		}
 		finalize_loading(tribes, world);
-		log("%ums\n", timer.ms_since_last_query());
+		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
