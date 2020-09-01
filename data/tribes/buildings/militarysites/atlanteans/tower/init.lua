@@ -13,12 +13,12 @@ tribes:new_militarysite_type {
 
    enhancement = {
       name = "atlanteans_tower_high",
-      buildcost = {
+      enhancement_cost = {
          log = 1,
          planks = 1,
          granite = 2
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          granite = 1
       }
    },

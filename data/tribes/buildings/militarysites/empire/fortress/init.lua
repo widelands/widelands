@@ -12,13 +12,13 @@ tribes:new_militarysite_type {
 
    enhancement = {
       name = "empire_castle",
-      buildcost = {
+      enhancement_cost = {
          planks = 5,
          marble_column = 4,
          marble = 4,
          granite = 2
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          planks = 2,
          marble_column = 2,
          marble = 3,

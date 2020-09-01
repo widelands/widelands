@@ -12,13 +12,13 @@ tribes:new_productionsite_type {
 
    enhancement = {
       name = "frisians_honey_bread_bakery",
-      buildcost = {
+      enhancement_cost = {
          brick = 3,
          log = 3,
          granite = 1,
          reed = 1
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          brick = 2,
          granite = 1,
          log = 1,

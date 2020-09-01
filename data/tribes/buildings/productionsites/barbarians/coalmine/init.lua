@@ -12,11 +12,11 @@ tribes:new_productionsite_type {
 
    enhancement = {
       name = "barbarians_coalmine_deep",
-      buildcost = {
+      enhancement_cost = {
          log = 4,
          granite = 2
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          log = 2,
          granite = 1
       }

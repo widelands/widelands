@@ -12,13 +12,13 @@ tribes:new_productionsite_type {
 
    enhancement = {
       name = "frisians_coalmine_deep",
-      buildcost = {
+      enhancement_cost = {
          brick = 2,
          granite = 1,
          log = 1,
          reed = 2
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          brick = 1,
          log = 1,
          reed = 1

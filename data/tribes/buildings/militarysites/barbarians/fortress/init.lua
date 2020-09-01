@@ -12,13 +12,13 @@ tribes:new_militarysite_type {
 
    enhancement = {
       name = "barbarians_citadel",
-      buildcost = {
+      enhancement_cost = {
          blackwood = 9,
          log = 5,
          granite = 4,
          grout = 2
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          blackwood = 4,
          log = 2,
          granite = 3,

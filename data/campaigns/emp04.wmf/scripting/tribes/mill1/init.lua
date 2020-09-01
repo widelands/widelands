@@ -11,13 +11,12 @@ tribes:new_productionsite_type {
 
    enhancement = {
       name = "empire_mill",
-      buildcost = {
+      enhancement_cost = {
          log = 1,
          granite = 1,
          marble = 1
       },
-      return_on_dismantle = {
-      }
+      enhancement_return_on_dismantle = {}
    },
 
    buildcost = {

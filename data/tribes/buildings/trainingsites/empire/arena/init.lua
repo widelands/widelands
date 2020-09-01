@@ -12,7 +12,7 @@ tribes:new_trainingsite_type {
 
    enhancement = {
       name = "empire_colosseum",
-      buildcost = {
+      enhancement_cost = {
          planks = 2,
          granite = 4,
          marble = 4,
@@ -20,7 +20,7 @@ tribes:new_trainingsite_type {
          gold = 4,
          marble_column = 4
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          planks = 1,
          granite = 2,
          marble = 2,

@@ -12,12 +12,12 @@ tribes:new_productionsite_type {
 
    enhancement = {
       name = "empire_inn",
-      buildcost = {
+      enhancement_cost = {
          planks = 2,
          marble = 2,
          marble_column = 1
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          planks = 1,
          marble = 2
       }

@@ -12,11 +12,11 @@ tribes:new_productionsite_type {
 
    enhancement = {
       name = "empire_goldmine_deep",
-      buildcost = {
+      enhancement_cost = {
          log = 4,
          planks = 2
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          log = 2,
          planks = 1
       }

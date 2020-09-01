@@ -12,12 +12,12 @@ tribes:new_productionsite_type {
 
    enhancement = {
       name = "barbarians_big_inn",
-      buildcost = {
+      enhancement_cost = {
          log = 1,
          grout = 3,
          reed = 2
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          grout = 2
       }
    },

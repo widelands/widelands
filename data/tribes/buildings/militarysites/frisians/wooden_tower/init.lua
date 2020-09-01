@@ -13,11 +13,11 @@ tribes:new_militarysite_type {
 
    enhancement = {
       name = "frisians_wooden_tower_high",
-      buildcost = {
+      enhancement_cost = {
          log = 2,
          reed = 1
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          log = 1,
       }
    },

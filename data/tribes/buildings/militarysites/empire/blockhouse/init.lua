@@ -12,11 +12,11 @@ tribes:new_militarysite_type {
 
    enhancement = {
       name = "empire_sentry",
-      buildcost = {
+      enhancement_cost = {
          planks = 1,
          granite = 1
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          granite = 1
       }
    },

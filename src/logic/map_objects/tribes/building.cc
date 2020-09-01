@@ -114,7 +114,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		try {
 			// TODO(GunChleoc): Compatibility code, remove try section after v1.0
 			const std::string enh = table.get_string("enhancement");
-			log("WARNING: Deprecated enhancement code found in building '%s'\n", name().c_str());
+			log_warn("Deprecated enhancement code found in building '%s'", name().c_str());
 
 			if (enh == name()) {
 				throw wexception("enhancement to same type");
@@ -148,8 +148,8 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 				enhancement_ = enhancement_idx;
 				BuildingDescr* enhanced_building = tribes_.get_mutable_building_descr(enhancement_idx);
 				enhanced_building->set_enhancement_cost(
-				   Buildcost(enhancement_table->get_table("buildcost"), tribes),
-				   Buildcost(enhancement_table->get_table("return_on_dismantle"), tribes));
+				   Buildcost(enhancement_table->get_table("enhancement_cost"), tribes),
+				   Buildcost(enhancement_table->get_table("enhancement_return_on_dismantle"), tribes));
 
 				//  Merge the enhancements workarea info into this building's
 				//  workarea info.
@@ -183,7 +183,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 
 	if (table.has_key("enhancement_cost")) {
 		// TODO(GunChleoc): Compatibility code, remove after v1.0
-		log("WARNING: Deprecated enhancement_cost code found in building '%s'\n", name().c_str());
+		log_warn("Deprecated enhancement_cost code found in building '%s'", name().c_str());
 		if (!table.has_key("return_on_dismantle_on_enhanced")) {
 			throw GameDataError("The enhanced building '%s' has an \"enhancement_cost\" but no "
 			                    "\"return_on_dismantle_on_enhanced\"",

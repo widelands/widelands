@@ -88,7 +88,6 @@
 --       icon = dirname .. "menu.png",
 --       animation_directory = dirname,
 --       size = "big",
---       enhancement = "empire_colosseum",
 --
 --       buildcost = {
 --          log = 2,
@@ -103,6 +102,25 @@
 --          marble = 3,
 --          planks = 2,
 --          marble_column = 1
+--       },
+--
+--       enhancement = {
+--          name = "empire_colosseum",
+--          enhancement_cost = {
+--             planks = 2,
+--             granite = 4,
+--             marble = 4,
+--             cloth = 2,
+--             gold = 4,
+--             marble_column = 4
+--          },
+--          enhancement_return_on_dismantle = {
+--             planks = 1,
+--             granite = 2,
+--             marble = 2,
+--             gold = 2,
+--             marble_column = 2
+--          }
 --       },
 --
 --       animations = {

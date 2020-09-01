@@ -12,13 +12,13 @@ tribes:new_militarysite_type {
 
    enhancement = {
       name = "empire_barrier",
-      buildcost = {
+      enhancement_cost = {
          log = 1,
          planks = 2,
          granite = 1,
          marble = 1
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          planks = 1,
          granite = 1
       }

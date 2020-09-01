@@ -12,13 +12,13 @@ tribes:new_productionsite_type {
 
    enhancement = {
       name = "frisians_tailors_shop",
-      buildcost = {
+      enhancement_cost = {
          brick = 1,
          granite = 2,
          log = 2,
          reed = 1
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          granite = 1,
          log = 1
       }

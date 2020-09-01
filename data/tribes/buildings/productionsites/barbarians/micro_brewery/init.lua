@@ -12,12 +12,12 @@ tribes:new_productionsite_type {
 
    enhancement = {
       name = "barbarians_brewery",
-      buildcost = {
+      enhancement_cost = {
          log = 3,
          granite = 1,
          reed = 1
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          log = 1,
          granite = 1
       }

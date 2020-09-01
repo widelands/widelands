@@ -12,13 +12,13 @@ tribes:new_productionsite_type {
 
    enhancement = {
       name = "frisians_mead_brewery",
-      buildcost = {
+      enhancement_cost = {
          brick = 3,
          granite = 2,
          log = 1,
          reed = 1
       },
-      return_on_dismantle = {
+      enhancement_return_on_dismantle = {
          brick = 2,
          granite = 1
       }
