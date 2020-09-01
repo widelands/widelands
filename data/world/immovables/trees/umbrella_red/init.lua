@@ -1,4 +1,6 @@
-sedirname = path.dirname(__file__)
+push_textdomain("world")
+
+dirname = path.dirname(__file__)
 
 terrain_affinity = {
    preferred_temperature = 90,
@@ -119,3 +121,5 @@ wl.World():new_immovable_type{
       }
    },
 }
+
+pop_textdomain()
