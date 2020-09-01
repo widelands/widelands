@@ -24,7 +24,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_starting_pos_tool.h"
-#include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
@@ -171,15 +170,14 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		   row, (boost::format("dropdown_tribe%d") % static_cast<unsigned int>(p)).str(), 0, 0, 50,
 		   16, plr_name->get_h(), _("Tribe"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
 		   UI::ButtonStyle::kWuiSecondary);
-		{
-			i18n::Textdomain td("tribes");
-			for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-				plr_tribe->add(_(tribeinfo.descname), tribeinfo.name,
-				               g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
-			}
+
+		for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
+			plr_tribe->add(_(tribeinfo.descname), tribeinfo.name, g_image_cache->get(tribeinfo.icon),
+			               false, tribeinfo.tooltip);
 		}
+
 		plr_tribe->add(pgettext("tribe", "Random"), "",
-		               g_gr->images().get("images/ui_fsmenu/random.png"), false,
+		               g_image_cache->get("images/ui_fsmenu/random.png"), false,
 		               _("The tribe will be selected at random"));
 
 		plr_tribe->select((p <= map.get_nrplayers() &&

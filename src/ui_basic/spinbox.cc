@@ -24,7 +24,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/text/font_set.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
@@ -121,12 +121,12 @@ SpinBox::SpinBox(Panel* const parent,
 
 	sbi_->button_minus =
 	   new Button(box_, "-", 0, 0, button_height_, button_height_, sbi_->button_style,
-	              g_gr->images().get(is_big ? "images/ui_basic/scrollbar_left.png" :
+	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_left.png" :
 	                                          "images/ui_basic/scrollbar_down.png"),
 	              _("Decrease the value"));
 	sbi_->button_plus =
 	   new Button(box_, "+", 0, 0, button_height_, button_height_, sbi_->button_style,
-	              g_gr->images().get(is_big ? "images/ui_basic/scrollbar_right.png" :
+	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_right.png" :
 	                                          "images/ui_basic/scrollbar_up.png"),
 	              _("Increase the value"));
 	sbi_->button_minus->set_can_focus(false);
@@ -135,11 +135,11 @@ SpinBox::SpinBox(Panel* const parent,
 	if (is_big) {
 		sbi_->button_ten_minus =
 		   new Button(box_, "--", 0, 0, 2 * button_height_, button_height_, sbi_->button_style,
-		              g_gr->images().get("images/ui_basic/scrollbar_left_fast.png"),
+		              g_image_cache->get("images/ui_basic/scrollbar_left_fast.png"),
 		              _("Decrease the value by 10"));
 		sbi_->button_ten_plus =
 		   new Button(box_, "++", 0, 0, 2 * button_height_, button_height_, sbi_->button_style,
-		              g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"),
+		              g_image_cache->get("images/ui_basic/scrollbar_right_fast.png"),
 		              _("Increase the value by 10"));
 		sbi_->button_ten_minus->set_can_focus(false);
 		sbi_->button_ten_plus->set_can_focus(false);
@@ -260,11 +260,11 @@ void SpinBox::layout() {
 	}
 
 	if (unit_width_ < (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_)) {
-		log("Not enough space to draw spinbox \"%s\".\n"
-		    "Width %d is smaller than required width %d."
-		    "Please report as a bug.\n",
-		    sbi_->label->get_text().c_str(), unit_width_,
-		    (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_));
+		log_warn("Not enough space to draw spinbox \"%s\".\n"
+		         "Width %d is smaller than required width %d."
+		         "Please report as a bug.\n",
+		         sbi_->label->get_text().c_str(), unit_width_,
+		         (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_));
 	}
 
 	// 10 is arbitrary, the actual height will be set by the Multilinetextarea itself

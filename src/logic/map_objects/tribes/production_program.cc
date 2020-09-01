@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"
@@ -1029,9 +1030,9 @@ ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
 	} else if (item.second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove after v1.0
 		duration_ = read_duration(item.first, psite);
-		log("WARNING: 'sleep' program without parameter name is deprecated, please use "
-		    "'sleep=duration:<duration>' in %s\n",
-		    psite.name().c_str());
+		log_warn("'sleep' program without parameter name is deprecated, please use "
+		         "'sleep=duration:<duration>' in %s\n",
+		         psite.name().c_str());
 	} else {
 		throw GameDataError(
 		   "Unknown argument '%s'. Usage: duration:<duration>", arguments.front().c_str());
@@ -1468,9 +1469,9 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 
 	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
 		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log("WARNING: Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
-		    "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
-		    descr->name().c_str());
+		log_warn("Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
+		         "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
+		         descr->name().c_str());
 		resource_ = world.load_resource(arguments.front());
 		workarea_ = read_positive(arguments.at(1));
 		max_resources_ = read_positive(arguments.at(2)) * 100U;
@@ -1677,9 +1678,9 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::strin
 
 	if (arguments.size() == 3) {
 		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log("WARNING: Using old syntax in %s. Please use "
-		    "'checksoldier=soldier:attack|defense|evade|health level:<number>'\n",
-		    descr.name().c_str());
+		log_warn("Using old syntax in %s. Please use "
+		         "'checksoldier=soldier:attack|defense|evade|health level:<number>'\n",
+		         descr.name().c_str());
 
 		if (arguments.front() != "soldier") {
 			throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
@@ -1700,8 +1701,8 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 		ps.set_production_result(_("No soldier to train!"));
 		return ps.program_end(game, ProgramResult::kSkipped);
 	}
-	ps.molog("  Checking soldier (%u) level %d)\n", static_cast<unsigned int>(training_.attribute),
-	         training_.level);
+	ps.molog(game.get_gametime(), "  Checking soldier (%u) level %d)\n",
+	         static_cast<unsigned int>(training_.attribute), training_.level);
 
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier*>::const_iterator it = soldiers.begin();; ++it) {
@@ -1728,12 +1729,12 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 			}
 		}
 	}
-	ps.molog("    okay\n");  // okay, do nothing
+	ps.molog(game.get_gametime(), "    okay\n");  // okay, do nothing
 
 	upcast(TrainingSite, ts, &ps);
 	ts->training_attempted(training_.attribute, training_.level);
 
-	ps.molog("  Check done!\n");
+	ps.molog(game.get_gametime(), "  Check done!\n");
 
 	return ps.program_step(game);
 }
@@ -1783,9 +1784,9 @@ ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments,
 
 	if (arguments.size() == 4) {
 		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log("WARNING: Using old syntax in %s. Please use train=soldier:attack|defense|evade|health "
-		    "level:<number>\n",
-		    descr.name().c_str());
+		log_warn("Using old syntax in %s. Please use train=soldier:attack|defense|evade|health "
+		         "level:<number>\n",
+		         descr.name().c_str());
 
 		if (arguments.front() != "soldier") {
 			throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
@@ -1810,8 +1811,8 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	assert(current_level < training_.level);
 	assert(ts.checked_soldier_training().attribute == training_.attribute);
 
-	ps.molog("  Training soldier's %u (%d to %d)", static_cast<unsigned int>(training_.attribute),
-	         current_level, training_.level);
+	ps.molog(game.get_gametime(), "  Training soldier's %u (%d to %d)",
+	         static_cast<unsigned int>(training_.attribute), current_level, training_.level);
 
 	bool training_done = false;
 	for (auto it = soldiers.begin(); !training_done; ++it) {
@@ -1853,7 +1854,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 		}
 	}
 
-	ps.molog("  Training done!\n");
+	ps.molog(game.get_gametime(), "  Training done!\n");
 	ps.set_production_result(
 	   /** TRANSLATORS: Success message of a trainingsite '%s' stands for the description of the
 	    * training program, e.g. Completed upgrading soldier evade from level 0 to level 1 */
@@ -1927,9 +1928,9 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 
 	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
 		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
-		log("WARNING: 'construct' program without parameter names is deprecated, please use "
-		    "'construct=<immovable_name> worker:<program_name> radius:<number>' in %s\n",
-		    descr->name().c_str());
+		log_warn("'construct' program without parameter names is deprecated, please use "
+		         "'construct=<immovable_name> worker:<program_name> radius:<number>' in %s\n",
+		         descr->name().c_str());
 		objectname = arguments.at(0);
 		workerprogram = arguments.at(1);
 		radius = read_positive(arguments.at(2));
@@ -2041,7 +2042,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 		return;
 	}
 
-	psite.molog("construct: no object or buildable field\n");
+	psite.molog(game.get_gametime(), "construct: no object or buildable field\n");
 	psite.program_end(game, ProgramResult::kFailed);
 }
 
@@ -2061,7 +2062,8 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	Immovable* construction = dynamic_cast<Immovable*>(state.objvar.get(game));
 	if (construction) {
 		if (!construction->construct_remaining_buildcost(game, &remaining)) {
-			psite.molog("construct: immovable %u not under construction", construction->serial());
+			psite.molog(game.get_gametime(), "construct: immovable %u not under construction",
+			            construction->serial());
 			psite.program_end(game, ProgramResult::kFailed);
 			return false;
 		}
@@ -2106,12 +2108,13 @@ void ProductionProgram::ActConstruct::building_work_failed(Game& game,
 }
 
 ProductionProgram::ProductionProgram(const std::string& init_name,
-                                     const std::string& init_descname,
-                                     std::unique_ptr<LuaTable> actions_table,
+                                     const LuaTable& program_table,
                                      Tribes& tribes,
                                      World& world,
                                      ProductionSiteDescr* building)
-   : MapObjectProgram(init_name), descname_(init_descname) {
+   : MapObjectProgram(init_name), descname_(program_table.get_string("descname")) {
+
+	std::unique_ptr<LuaTable> actions_table = program_table.get_table("actions");
 
 	for (const std::string& line : actions_table->array_entries<std::string>()) {
 		if (line.empty()) {

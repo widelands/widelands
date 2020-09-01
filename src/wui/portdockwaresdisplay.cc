@@ -93,7 +93,7 @@ public:
 			      box, (boost::format("additional_%u") % c).str(), 0, 0, kWareMenuPicWidth, 8,
 			      kWareMenuPicHeight, _("Additional item"), UI::DropdownType::kPictorial,
 			      UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
-			d.add(_("(Empty)"), kEmptySlot, g_gr->images().get(kNoWare), true, _("(Empty)"));
+			d.add(_("(Empty)"), kEmptySlot, g_image_cache->get(kNoWare), true, _("(Empty)"));
 			std::set<std::tuple<std::string, Widelands::WareWorker, Widelands::DescriptionIndex,
 			                    const Image*>>
 			   sorted;
@@ -114,7 +114,7 @@ public:
 			d.set_enabled(can_act);
 			d.selected.connect([this, c]() { select(c); });
 
-			UI::Icon* icon = new UI::Icon(box, g_gr->images().get(kNoWare));
+			UI::Icon* icon = new UI::Icon(box, g_image_cache->get(kNoWare));
 			icon->set_handle_mouse(true);
 			boxes_.push_back(box);
 			icons_.push_back(icon);
@@ -136,7 +136,7 @@ public:
 		for (uint32_t c = 0; c < capacity_; ++c) {
 			const InputQueue* iq = portdock_.expedition_bootstrap()->inputqueue(c);
 			assert(!iq || (iq->get_max_size() == 1 && iq->get_max_fill() == 1));
-			icons_[c]->set_icon(g_gr->images().get(
+			icons_[c]->set_icon(g_image_cache->get(
 			   iq ? iq->get_filled() ? kPicWarePresent :
 			                           iq->get_missing() ? kPicWareMissing : kPicWareComing :
 			        kNoWare));

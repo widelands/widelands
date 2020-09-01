@@ -22,10 +22,8 @@
 #include <SDL_mouse.h>
 #include <SDL_timer.h>
 
-#include "base/log.h"
 #include "graphic/align.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
@@ -81,9 +79,9 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     table_style_(g_gr->styles().table_style(style)),
+     table_style_(g_style_manager->table_style(style)),
      background_style_(selection_mode == ListselectLayout::kDropdown ?
-                          g_gr->styles().dropdown_style(style) :
+                          g_style_manager->dropdown_style(style) :
                           nullptr),
      lineheight_(text_height(table_style_.enabled()) + kMargin),
      notify_on_delete_(nullptr) {
@@ -92,7 +90,7 @@ BaseListselect::BaseListselect(Panel* const parent,
 	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
-		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");
+		check_pic_ = g_image_cache->get("images/ui_basic/list_selected.png");
 		max_pic_width_ = check_pic_->width();
 		int pic_h = check_pic_->height();
 		if (pic_h > lineheight_) {

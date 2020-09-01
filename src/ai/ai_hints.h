@@ -23,7 +23,6 @@
 #include <memory>
 #include <unordered_map>
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"

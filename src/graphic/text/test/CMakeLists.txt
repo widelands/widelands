@@ -10,7 +10,6 @@ wl_binary(wl_render_richtext
     render_richtext.cc
   USES_SDL2_TTF
   DEPENDS
-    base_log
     graphic
     graphic_image_io
     graphic_surface

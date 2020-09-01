@@ -19,7 +19,6 @@
 
 #include "graphic/gl/blit_program.h"
 
-#include "base/log.h"
 #include "graphic/blit_mode.h"
 #include "graphic/gl/blit_data.h"
 #include "graphic/gl/coordinate_conversion.h"

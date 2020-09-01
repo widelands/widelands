@@ -98,6 +98,31 @@
 --        Every immovable needs to have at least an ``idle`` animation.
 --        See :doc:`animations` for a detailed description of the animation format.
 --
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("world")
+--
+--    dirname = path.dirname(__file__)
+--
+--    wl.World():new_immovable_type{
+--       name = "artifact00",
+--       descname = _ "Artifact",
+--       animation_directory = dirname
+--       size = "small",
+--       programs = {},
+--       animations = {
+--          idle = {
+--             hotspot = { 14, 20 },
+--          },
+--       }
+--    }
+--
+--    pop_textdomain()
+--
 -- Artifacts
 -- ^^^^^^^^^
 -- Artifacts are immovables that players can hunt for when using the "Artifacts" win condition.
@@ -139,6 +164,7 @@
 --   commands in their program. They also need to specify a ``fall`` program,
 --   which will be triggered when a lumberjack fells them.
 
+push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
@@ -154,3 +180,5 @@ wl.World():new_immovable_type{
       },
    }
 }
+
+pop_textdomain()

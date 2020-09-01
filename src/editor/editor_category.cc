@@ -19,7 +19,7 @@
 
 #include "editor/editor_category.h"
 
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_table.h"
@@ -66,7 +66,7 @@ const std::string& EditorCategory::descname() const {
 }
 
 const Image* EditorCategory::picture() const {
-	const Image* image = g_gr->images().get(image_file_);
+	const Image* image = g_image_cache->get(image_file_);
 	assert(image);
 	return image;
 }

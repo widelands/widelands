@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -29,6 +30,7 @@
 #include "economy/ship_fleet.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -109,8 +111,6 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
    : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table) {
 
-	i18n::Textdomain td("tribes");
-
 	// Read the sailing animations
 	assign_directional_animation(&sail_anims_, "sail");
 
@@ -158,7 +158,7 @@ bool Ship::init(EditorGameBase& egbase) {
 
 	// Assigning a ship name
 	shipname_ = get_owner()->pick_shipname();
-	molog("New ship: %s\n", shipname_.c_str());
+	molog(egbase.get_gametime(), "New ship: %s\n", shipname_.c_str());
 	Notifications::publish(NoteShip(this, NoteShip::Action::kGained));
 	return true;
 }
@@ -285,7 +285,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			start_task_idle(game, descr().get_animation("sinking", this), 3000);
 			return;
 		}
-		log("Oh no... this ship has no sinking animation :(!\n");
+		log_warn_time(game.get_gametime(), "Oh no... this ship has no sinking animation :(!\n");
 		FALLS_THROUGH;
 	case ShipStates::kSinkAnimation:
 		// The sink animation has been played, so finally remove the ship from the map
@@ -310,7 +310,7 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	FCoords position = map.get_fcoords(get_position());
 	if (position.field->get_immovable() == destination_) {
 		if (lastdock_ != destination_) {
-			molog("ship_update: Arrived at dock %u\n", destination_->serial());
+			molog(game.get_gametime(), "ship_update: Arrived at dock %u\n", destination_->serial());
 			lastdock_ = destination_;
 		}
 		while (withdraw_item(game, *destination_)) {
@@ -326,11 +326,11 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 		return true;
 	}
 
-	molog("ship_update: Go to dock %u\n", destination_->serial());
+	molog(game.get_gametime(), "ship_update: Go to dock %u\n", destination_->serial());
 
 	PortDock* lastdock = lastdock_.get(game);
 	if (lastdock && lastdock != destination_) {
-		molog("ship_update: Have lastdock %u\n", lastdock->serial());
+		molog(game.get_gametime(), "ship_update: Have lastdock %u\n", lastdock->serial());
 
 		Path path;
 		if (fleet_->get_path(*lastdock, *destination_, path)) {
@@ -343,7 +343,8 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 				uint32_t dist = map.calc_distance(get_position(), cur);
 
 				if (dist == 0) {
-					molog("Follow pre-computed path from (%i,%i)  [idx = %u]\n", cur.x, cur.y, idx);
+					molog(game.get_gametime(), "Follow pre-computed path from (%i,%i)  [idx = %u]\n",
+					      cur.x, cur.y, idx);
 
 					Path subpath(cur);
 					while (idx < path.get_nsteps()) {
@@ -370,12 +371,13 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 			}
 
 			if (closest_target) {
-				molog("Closest target en route is (%i,%i)\n", closest_target.x, closest_target.y);
+				molog(game.get_gametime(), "Closest target en route is (%i,%i)\n", closest_target.x,
+				      closest_target.y);
 				if (start_task_movepath(game, closest_target, 0, descr().get_sail_anims())) {
 					return true;
 				}
 
-				molog("  Failed to find path!!! Retry full search\n");
+				molog(game.get_gametime(), "  Failed to find path!!! Retry full search\n");
 			}
 		}
 
@@ -600,8 +602,9 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					}
 				}
 				// if we are here, it seems something really strange happend.
-				log("WARNING: ship %s was not able to start exploration. Entering WAIT mode.",
-				    shipname_.c_str());
+				log_warn_time(game.get_gametime(),
+				              "ship %s was not able to start exploration. Entering WAIT mode.",
+				              shipname_.c_str());
 				set_ship_state_and_notify(
 				   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 				start_task_idle(game, descr().main_animation(), kShipInterval);
@@ -797,7 +800,7 @@ uint32_t Ship::calculate_sea_route(EditorGameBase& egbase, PortDock& pd, Path* f
 		}
 	}
 
-	molog("   calculate_sea_distance: Failed to find path!\n");
+	molog(egbase.get_gametime(), "   calculate_sea_distance: Failed to find path!\n");
 	return std::numeric_limits<uint32_t>::max();
 }
 
@@ -814,9 +817,11 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 		start_task_movepath(game, path, descr().get_sail_anims());
 		return;
 	} else {
-		log("start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
-		    get_position().x, get_position().y, pd.get_positions(game)[0].x,
-		    pd.get_positions(game)[0].y);
+		log_warn_time(
+		   game.get_gametime(),
+		   "start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
+		   get_position().x, get_position().y, pd.get_positions(game)[0].x,
+		   pd.get_positions(game)[0].y);
 		// This should not happen, but in theory there could be some inconstinency
 		// I (tiborb) failed to invoke this situation when testing so
 		// I am not sure if following line behaves allright
@@ -1048,8 +1053,8 @@ void Ship::draw(const EditorGameBase& egbase,
 		case (ShipStates::kSinkAnimation):
 			break;
 		}
-		statistics_string = g_gr->styles().color_tag(
-		   statistics_string, g_gr->styles().building_statistics_style().medium_color());
+		statistics_string = g_style_manager->color_tag(
+		   statistics_string, g_style_manager->building_statistics_style().medium_color());
 	}
 
 	do_draw_info(info_to_draw, shipname_, statistics_string,
@@ -1059,7 +1064,8 @@ void Ship::draw(const EditorGameBase& egbase,
 void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
-	molog("Ship belongs to fleet %u\nlastdock: %s\n", fleet_ ? fleet_->serial() : 0,
+	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\n",
+	      fleet_ ? fleet_->serial() : 0,
 	      (lastdock_.is_set()) ? (boost::format("%u (%d x %d)") % lastdock_.serial() %
 	                              lastdock_.get(egbase)->get_positions(egbase)[0].x %
 	                              lastdock_.get(egbase)->get_positions(egbase)[0].y)
@@ -1067,23 +1073,24 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	                                .c_str() :
 	                             "-");
 	if (destination_) {
-		molog("Has destination %u (%3dx%3d)\n", destination_->serial(),
+		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d)\n", destination_->serial(),
 		      destination_->get_positions(egbase)[0].x, destination_->get_positions(egbase)[0].y);
 	} else {
-		molog("No destination\n");
+		molog(egbase.get_gametime(), "No destination\n");
 	}
 
-	molog("In state: %u (%s)\n", static_cast<unsigned int>(ship_state_),
+	molog(egbase.get_gametime(), "In state: %u (%s)\n", static_cast<unsigned int>(ship_state_),
 	      (expedition_) ? "expedition" : "transportation");
 
 	if (destination_ && get_position().field->get_immovable() == destination_) {
-		molog("Currently in destination portdock\n");
+		molog(egbase.get_gametime(), "Currently in destination portdock\n");
 	}
 
-	molog("Carrying %" PRIuS " items%s\n", items_.size(), (items_.empty()) ? "." : ":");
+	molog(egbase.get_gametime(), "Carrying %" PRIuS " items%s\n", items_.size(),
+	      (items_.empty()) ? "." : ":");
 
 	for (const ShippingItem& shipping_item : items_) {
-		molog("  * %u (%s), destination: %s\n", shipping_item.object_.serial(),
+		molog(egbase.get_gametime(), "  * %u (%s), destination: %s\n", shipping_item.object_.serial(),
 		      shipping_item.object_.get(egbase)->descr().name().c_str(),
 		      (shipping_item.destination_dock_.is_set()) ?
 		         (boost::format("%u (%d x %d)") % shipping_item.destination_dock_.serial() %
@@ -1113,7 +1120,7 @@ void Ship::send_message(Game& game,
                         const std::string& description,
                         const std::string& picture) {
 	const std::string rt_description =
-	   as_mapobject_message(picture, g_gr->images().get(picture)->width(), description);
+	   as_mapobject_message(picture, g_image_cache->get(picture)->width(), description);
 
 	get_owner()->add_message(game, std::unique_ptr<Message>(new Message(
 	                                  Message::Type::kSeafaring, game.get_gametime(), title, picture,

@@ -19,7 +19,6 @@
 
 #include "wui/trainingsitewindow.h"
 
-#include "graphic/graphic.h"
 #include "wui/soldiercapacitycontrol.h"
 #include "wui/soldierlist.h"
 
@@ -42,7 +41,7 @@ void TrainingSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted
 	Widelands::ProductionSite* training_site = training_site_.get(igbase()->egbase());
 	assert(training_site != nullptr);
 	ProductionSiteWindow::init(avoid_fastclick, workarea_preview_wanted);
-	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
+	get_tabs()->add("soldiers", g_image_cache->get(pic_tab_military),
 	                create_soldier_list(*get_tabs(), *igbase(), *training_site),
 	                _("Soldiers in training"));
 	think();

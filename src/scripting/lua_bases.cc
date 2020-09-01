@@ -21,6 +21,7 @@
 
 #include <boost/algorithm/string.hpp>
 
+#include "base/log.h"
 #include "economy/economy.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
@@ -343,15 +344,13 @@ int LuaEditorGameBase::get_resource_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string resource_name = luaL_checkstring(L, 2);
-	const World& world = get_egbase(L).world();
-	const DescriptionIndex idx = world.resource_index(resource_name);
-
-	if (idx == INVALID_INDEX) {
+	World* world = get_egbase(L).mutable_world();
+	try {
+		const ResourceDescription* descr = world->get_resource(world->load_resource(resource_name));
+		return to_lua<LuaMaps::LuaResourceDescription>(L, new LuaMaps::LuaResourceDescription(descr));
+	} catch (const Widelands::GameDataError&) {
 		report_error(L, "Resource %s does not exist", resource_name.c_str());
 	}
-
-	const ResourceDescription* descr = world.get_resource(idx);
-	return to_lua<LuaMaps::LuaResourceDescription>(L, new LuaMaps::LuaResourceDescription(descr));
 }
 
 /* RST
@@ -544,8 +543,8 @@ static void push_table_recursively(lua_State* L,
 			                       type_section, size_section);
 		} else {
 			// this code should not be reached unless the user manually edited the .wcd file
-			log("Illegal data type %s in campaign data file, setting key %s to nil\n", type.c_str(),
-			    luaL_checkstring(L, -1));
+			log_warn("Illegal data type %s in campaign data file, setting key %s to nil\n",
+			         type.c_str(), luaL_checkstring(L, -1));
 			lua_pushnil(L);
 		}
 		lua_settable(L, -3);
@@ -580,7 +579,7 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 	Section* size_section = profile.get_section("size");
 	if (data_section == nullptr || keys_section == nullptr || type_section == nullptr ||
 	    size_section == nullptr) {
-		log("Unable to read campaign data file, returning nil\n");
+		log_warn("Unable to read campaign data file, returning nil\n");
 		lua_pushnil(L);
 	} else {
 		push_table_recursively(L, "", data_section, keys_section, type_section, size_section);

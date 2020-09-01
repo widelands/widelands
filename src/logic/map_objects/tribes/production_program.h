@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/map_object_program.h"
@@ -546,8 +545,7 @@ struct ProductionProgram : public MapObjectProgram {
 	};
 
 	ProductionProgram(const std::string& init_name,
-	                  const std::string& init_descname,
-	                  std::unique_ptr<LuaTable> actions_table,
+	                  const LuaTable& program_table,
 	                  Tribes& tribes,
 	                  World& world,
 	                  ProductionSiteDescr* building);
