@@ -61,7 +61,7 @@ void SavegameLoader::load_savegame_from_file(const std::string& gamefilename,
                                              std::vector<SavegameData>& loaded_games) const {
 	std::string savename = get_savename(gamefilename);
 
-	if (!g_fs->file_exists(savename.c_str())) {
+	if (!g_fs->file_exists(savename.c_str()) || !boost::ends_with(savename, kSavegameExtension)) {
 		return;
 	}
 

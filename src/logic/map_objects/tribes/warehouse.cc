@@ -1395,11 +1395,17 @@ StockPolicy Warehouse::get_stock_policy(WareWorker waretype, DescriptionIndex wa
 void Warehouse::set_ware_policy(DescriptionIndex ware, StockPolicy policy) {
 	assert(ware < static_cast<DescriptionIndex>(ware_policy_.size()));
 	ware_policy_[ware] = policy;
+	if (Economy* eco = get_economy(wwWARE)) {
+		eco->rebalance_supply();
+	}
 }
 
 void Warehouse::set_worker_policy(DescriptionIndex ware, StockPolicy policy) {
 	assert(ware < static_cast<DescriptionIndex>(worker_policy_.size()));
 	worker_policy_[ware] = policy;
+	if (Economy* eco = get_economy(wwWORKER)) {
+		eco->rebalance_supply();
+	}
 }
 
 /**

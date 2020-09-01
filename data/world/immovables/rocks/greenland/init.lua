@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 wl.World():new_immovable_type{
@@ -113,3 +115,5 @@ wl.World():new_immovable_type{
       },
    }
 }
+
+pop_textdomain()

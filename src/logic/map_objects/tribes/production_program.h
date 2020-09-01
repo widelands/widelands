@@ -545,8 +545,7 @@ struct ProductionProgram : public MapObjectProgram {
 	};
 
 	ProductionProgram(const std::string& init_name,
-	                  const std::string& init_descname,
-	                  std::unique_ptr<LuaTable> actions_table,
+	                  const LuaTable& program_table,
 	                  Tribes& tribes,
 	                  World& world,
 	                  ProductionSiteDescr* building);

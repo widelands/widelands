@@ -344,15 +344,13 @@ int LuaEditorGameBase::get_resource_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string resource_name = luaL_checkstring(L, 2);
-	const World& world = get_egbase(L).world();
-	const DescriptionIndex idx = world.resource_index(resource_name);
-
-	if (idx == INVALID_INDEX) {
+	World* world = get_egbase(L).mutable_world();
+	try {
+		const ResourceDescription* descr = world->get_resource(world->load_resource(resource_name));
+		return to_lua<LuaMaps::LuaResourceDescription>(L, new LuaMaps::LuaResourceDescription(descr));
+	} catch (const Widelands::GameDataError&) {
 		report_error(L, "Resource %s does not exist", resource_name.c_str());
 	}
-
-	const ResourceDescription* descr = world.get_resource(idx);
-	return to_lua<LuaMaps::LuaResourceDescription>(L, new LuaMaps::LuaResourceDescription(descr));
 }
 
 /* RST
