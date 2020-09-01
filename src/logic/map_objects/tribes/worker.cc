@@ -852,9 +852,9 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		const uint32_t attribute_id = ImmovableDescr::get_attribute_id(attrib);
 
 		// Add immovables
-		const DescriptionMaintainer<ImmovableDescr>& world_immovables = game.descriptions().immovables();
-		for (uint32_t i = 0; i < world_immovables.size(); ++i) {
-			test_suitability(attribute_id, i, world_immovables.get(i));
+		const DescriptionMaintainer<ImmovableDescr>& immovables = game.descriptions().immovables();
+		for (uint32_t i = 0; i < immovables.size(); ++i) {
+			test_suitability(attribute_id, i, immovables.get(i));
 		}
 	}
 
@@ -885,8 +885,9 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		}
 	}
 
+	Immovable& newimm = game.create_immovable(pos, state.ivar2, get_owner());
+
 	if (action.iparam1 == Action::plantUnlessObject) {
-		Immovable& newimm = game.create_immovable(pos, state.ivar2, get_owner());
 		state.objvar1 = &newimm;
 	}
 
