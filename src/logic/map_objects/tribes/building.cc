@@ -171,7 +171,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	// However, we support "return_on_dismantle" without "buildable", because this is used by custom
 	// scenario buildings.
 	if (table.has_key("return_on_dismantle")) {
-		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), tribes);
+		returns_on_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), tribes);
 	}
 	if (table.has_key("buildcost")) {
 		if (!table.has_key("return_on_dismantle")) {
@@ -345,8 +345,8 @@ void BuildingDescr::set_enhancement_cost(const Buildcost& enhance_cost,
 	if (!return_enhanced.empty()) {
 		can_be_dismantled_ = true;
 	}
-	enhance_cost_ = enhance_cost;
-	return_enhanced_ = return_enhanced;
+	enhancement_cost_ = enhance_cost;
+	enhancement_returns_on_dismantle_ = return_enhanced;
 }
 
 /*

@@ -84,22 +84,22 @@ public:
 	/**
 	 * Returned wares for dismantling
 	 */
-	const Buildcost& returned_wares() const {
-		return return_dismantle_;
+	const Buildcost& returns_on_dismantle() const {
+		return returns_on_dismantle_;
 	}
 
 	/**
 	 * The build cost for enhancing a previous building
 	 */
 	const Buildcost& enhancement_cost() const {
-		return enhance_cost_;
+		return enhancement_cost_;
 	}
 
 	/**
 	 * The returned wares for a enhaced building
 	 */
-	const Buildcost& returned_wares_enhanced() const {
-		return return_enhanced_;
+	const Buildcost& enhancement_returns_on_dismantle() const {
+		return enhancement_returns_on_dismantle_;
 	}
 
 	int32_t get_size() const {
@@ -181,9 +181,9 @@ private:
 	bool can_be_dismantled_;   // the player can dismantle this building
 	const bool destructible_;  // the player can destruct this himself
 	Buildcost buildcost_;
-	Buildcost return_dismantle_;  // Returned wares on dismantle
-	Buildcost enhance_cost_;      // cost for enhancing
-	Buildcost return_enhanced_;   // Returned ware for dismantling an enhanced building
+	Buildcost returns_on_dismantle_;  // Returned wares on dismantle
+	Buildcost enhancement_cost_;      // cost for enhancing
+	Buildcost enhancement_returns_on_dismantle_;   // Returned ware for dismantling an enhanced building
 	int32_t size_;                // size of the building
 	bool mine_;
 	bool port_;
