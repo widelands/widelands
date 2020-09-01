@@ -264,7 +264,7 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 	if (table.has_key("helptext_script")) {
 		// TODO(GunChleoc): Compatibility - remove after v1.0
 		log_warn("Helptexts script for %s is obsolete - please move strings to "
-		         "tribes/initializations/<tribename>/helptexts.lua",
+		         "tribes/initializations/<tribename>/units.lua",
 		         name().c_str());
 	}
 

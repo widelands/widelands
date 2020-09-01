@@ -383,7 +383,7 @@ tribes:new_tribe {
          },
       },
       {
-         -- [[ Food ]]
+         -- Food
          {
             name = "fish",
             preciousness = 4,
