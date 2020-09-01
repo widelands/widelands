@@ -111,8 +111,6 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
    : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table) {
 
-	i18n::Textdomain td("tribes");
-
 	// Read the sailing animations
 	assign_directional_animation(&sail_anims_, "sail");
 

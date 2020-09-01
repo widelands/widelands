@@ -50,13 +50,8 @@ void MapBobPacket::read_bob(FileRead& fr,
 
 	const std::string name = lookup_table.lookup_critter(read_name, packet_version);
 	try {
-		const World& world = egbase.world();
-		DescriptionIndex const idx = world.critter_index(name);
-		if (idx == INVALID_INDEX) {
-			throw GameDataError("world does not define bob type \"%s\"", name.c_str());
-		}
-
-		const CritterDescr& descr = *world.get_critter_descr(idx);
+		World* world = egbase.mutable_world();
+		const CritterDescr& descr = *world->get_critter_descr(world->load_critter(name));
 		descr.create(egbase, nullptr, coords);
 		// We do not register this object as needing loading. This packet is only
 		// in fresh maps, that are just started. As soon as the game saves

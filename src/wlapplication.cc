@@ -265,6 +265,12 @@ void WLApplication::setup_homedir() {
 #endif
 		// Homedir is ready, so we can log normally from now on
 		log_info("Set home directory: %s\n", homedir_.c_str());
+
+		// Create directory structure
+		g_fs->ensure_directory_exists("save");
+		g_fs->ensure_directory_exists("replays");
+		g_fs->ensure_directory_exists("maps/My_Maps");
+		g_fs->ensure_directory_exists("maps/Downloaded");
 	}
 
 #ifdef USE_XDG

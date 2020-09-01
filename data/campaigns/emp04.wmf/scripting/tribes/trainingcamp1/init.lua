@@ -3,7 +3,6 @@ dirname = "tribes/buildings/trainingsites/empire/trainingcamp/"
 push_textdomain("scenario_emp04.wmf")
 
 tribes:new_trainingsite_type {
-   msgctxt = "empire_building",
    name = "empire_trainingcamp1",
    descname = "Training Camp",
    helptext_script = dirname .. "helptexts.lua",

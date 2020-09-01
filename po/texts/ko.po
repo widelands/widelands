@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-17 08:49+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-25 12:26+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -84,7 +84,7 @@ msgstr "윈도우즈에서는 설치 폴더에 COPYING.txt라는 파일을 찾�
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr "맥오에스에서는 웹 사이트에서 다운로드 한 압축파일에서 COPYING이라는 파일을 찾을 수 있습니다."
+msgstr "맥오에스에서는 누리집에서 다운로드한 압축파일에서 COPYING이라는 파일을 찾을 수 있습니다."
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
@@ -95,7 +95,7 @@ msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr "더 자세한 정보와 지원을 원하시면 %1% (웹 사이트, 위키, 질문, 일반적인 지원용 게시판), %2% (버그추적기), %3% (번역)에서 찾으실 수 있습니다."
+msgstr "더 자세한 정보와 지원을 원하시면 %1% (누리집, 위키, 질문, 일반적인 지원용 게시판), %2% (버그추적기), %3% (번역)에서 찾으실 수 있습니다."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -113,7 +113,7 @@ msgstr "Widelands 프로젝트 홈페이지를 확인하십시오:"
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr "Widelands는 GNU 일반 공중 사용 허가서 (GPL) 라이센스가 부여됩니다. 자세한 정보는 'COPYING' 파일을 참조하십시오."
+msgstr "와이드랜드는 GNU 일반 공중 사용 허가서 (GPL) 라이센스가 부여됩니다. 자세한 정보는 'COPYING' 파일을 참조하십시오."
 
 #: ../../data/txts/README.lua:13
 msgid "Status"
@@ -210,7 +210,7 @@ msgstr "아틀란티스인"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarians"
-msgstr "야만족"
+msgstr "야만인들"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
@@ -258,7 +258,7 @@ msgstr "프리BSD"
 
 #: ../../data/txts/developers.lua:3
 msgid "Frisians"
-msgstr "프리지아인"
+msgstr "프리지아인들"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -270,11 +270,11 @@ msgstr "그래픽"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage"
-msgstr "홈페이지"
+msgstr "누리집"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage Coders"
-msgstr "홈페이지 코더"
+msgstr "누리집 코더"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mac OS X"
@@ -428,7 +428,7 @@ msgstr "전체화면 켜기/끄기 (운영체제가 지원하는 경우)"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
-msgstr "약도 켜기/끄기"
+msgstr "작은 지도 켜기/끄기"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -532,7 +532,7 @@ msgstr "항상 통나무가 고갈되지 않도록 숲꾼과 나무꾼의 집을
 msgid ""
 "Atlanteans need spidercloth for many buildings. Build the needed "
 "infrastructure early before you run out."
-msgstr "아틀란티스족은 많은 건물에 거미줄이 필요합니다. 예산이 소진되기 전에 필요한 기반 시설을 초반에 구축하십시오."
+msgstr "아틀란티인들은 많은 건물에 거미줄이 필요합니다. 예산이 소진되기 전에 필요한 기반 시설을 초반에 구축하십시오."
 
 #: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
@@ -652,7 +652,7 @@ msgstr "건설 과정은 건설 현장까지 땅길이 건설된 후 시작됩�
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
-msgstr "우물이나 광산을 짓기 전에 지질학자를 보내 사이트를 조사하십시오."
+msgstr "우물이나 광산을 짓기 전에 반드시 지질학자를 조사 장소로 보내십시오."
 
 #: ../../data/txts/tips/general_game.lua:14
 msgid ""
@@ -721,7 +721,7 @@ msgstr "컨트롤 키를 누른 상태에서 길을 제거하면 첫 번째 교�
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
-msgstr "새로운 군인들이 병영에 모집되었습니다. 그들의 능력은 훈련소에서 향상 될 수 있습니다."
+msgstr "신병들이 병영에 모집되었습니다. 그들의 능력은 훈련소에서 향상 될 수 있습니다."
 
 #: ../../data/txts/tips/general_game.lua:55
 msgid ""
@@ -844,4 +844,4 @@ msgstr "만약 게임이 중단되어도, 걱정하지 마십시오! 게임은 �
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "우리 컴퓨터 플레이어가 너무 지루합니까? 저희 웹 사이트 %s 에 방문하여 다른 사람들과 만나 온라인 게임을 즐기십시오."
+msgstr "우리 컴퓨터 플레이어가 너무 지루합니까? 저희 누리집 %s 에 방문하여 다른 사람들과 만나 온라인 게임을 즐기십시오."

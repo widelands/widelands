@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 wl.World():new_critter_type{
    name = "wisent",
    descname = _ "Wisent",
@@ -27,3 +29,5 @@ wl.World():new_critter_type{
       }
    }
 }
+
+pop_textdomain()

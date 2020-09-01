@@ -313,7 +313,6 @@ For example, attacking towards the west can be defined like this:
    }
 
    tribes:new_soldier_type {
-      msgctxt = "fancytribe_worker",
       name = "fancytribe_soldier",
       ...
 

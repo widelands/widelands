@@ -162,6 +162,9 @@ MapData MapData::create_directory(const std::string& directory) {
 	} else if (boost::equals(directory, "maps/My_Maps")) {
 		/** TRANSLATORS: Directory name for user maps in map selection */
 		localized_name = _("My Maps");
+	} else if (boost::equals(directory, "maps/Downloaded")) {
+		/** TRANSLATORS: Directory name for downloaded maps in map selection */
+		localized_name = _("Downloaded Maps");
 	} else {
 		localized_name = FileSystem::fs_filename(directory.c_str());
 	}

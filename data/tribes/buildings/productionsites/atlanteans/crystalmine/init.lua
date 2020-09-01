@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_crystalmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Crystal Mine"),
@@ -35,7 +36,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "stones",
+      mines = "resource_stones",
       prohibited_till = 600
    },
 
@@ -158,3 +159,5 @@ tribes:new_productionsite_type {
          pgettext("atlanteans_building", "This crystal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()
