@@ -515,11 +515,17 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	imm.set_position(egbase(), imm.position_);
 
 	if (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings) {
-		Player* owner = imm.get_owner();
-		if (owner) {
-			DescriptionIndex idx = owner->tribe().building_index(fr.string());
-			if (owner->tribe().has_building(idx)) {
-				imm.set_former_building(*owner->tribe().get_building_descr(idx));
+		bool has_former_building = true;
+		if (packet_version > 9) {
+			has_former_building = fr.unsigned_8() == 1;
+		}
+		if (has_former_building) {
+			Player* owner = imm.get_owner();
+			if (owner) {
+				DescriptionIndex idx = owner->tribe().building_index(fr.string());
+				if (owner->tribe().has_building(idx)) {
+					imm.set_former_building(*owner->tribe().get_building_descr(idx));
+				}
 			}
 		}
 	}
@@ -613,10 +619,7 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	// This is in front because it is required to obtain the description
 	// necessary to create the Immovable
 	fw.unsigned_8(HeaderImmovable);
-	const uint8_t packet_version = former_building_descr_ == nullptr ?
-	                                  kCurrentPacketVersionImmovableNoFormerBuildings :
-	                                  kCurrentPacketVersionImmovable;
-	fw.unsigned_8(packet_version);
+	fw.unsigned_8(kCurrentPacketVersionImmovable);
 	fw.string(descr().name());
 
 	// The main loading data follows
@@ -624,11 +627,12 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 
 	fw.unsigned_8(get_owner() ? get_owner()->player_number() : 0);
 	write_coords_32(&fw, position_);
-	if (get_owner() && former_building_descr_) {
-		assert(packet_version > kCurrentPacketVersionImmovableNoFormerBuildings);
+
+	// Former building
+	const bool has_former_building = get_owner() && former_building_descr_;
+	fw.unsigned_8(has_former_building ? 1 : 0);
+	if (has_former_building) {
 		fw.string(former_building_descr_->name());
-	} else {
-		assert(packet_version == kCurrentPacketVersionImmovableNoFormerBuildings);
 	}
 
 	// Animations
@@ -666,7 +670,6 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 		uint8_t const packet_version = fr.unsigned_8();
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersionImmovable) {
-
 			if (packet_version < 10) {
 				fr.c_string(); // Consume obsolete owner type (world/tribes)
 			}
