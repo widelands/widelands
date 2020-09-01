@@ -103,8 +103,9 @@ void ShippingItem::end_shipping(Game& game) {
 		ware->update(game);
 		ware->schedule_act(game, 10);
 	}
-	if (worker)
+	if (worker) {
 		worker->end_shipping(game);
+	}
 }
 
 const PortDock* ShippingItem::get_destination(Game& game) const {
@@ -118,8 +119,9 @@ void ShippingItem::update_destination(Game& game, PortDock& pd) {
 
 	PlayerImmovable* next = nullptr;
 
-	if (ware)
+	if (ware) {
 		next = ware->get_next_move_step(game);
+	}
 	if (worker) {
 		Transfer* transfer = worker->get_transfer();
 		if (transfer) {
@@ -146,16 +148,9 @@ constexpr uint16_t kCurrentPacketVersion = 2;
 void ShippingItem::Loader::load(FileRead& fr) {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			serial_ = fr.unsigned_32();
-			if (packet_version >= 2) {
-				destination_serial_ = fr.unsigned_32();
-			} else {
-				// TODO(Nordfriese): Remove when we break savegame compatibility
-				log("WARNING: Loading shippingitem with possible nullptr destination, which may result "
-				    "in bugs later\n");
-				destination_serial_ = 0;
-			}
+			destination_serial_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("ShippingItem", packet_version, kCurrentPacketVersion);
 		}

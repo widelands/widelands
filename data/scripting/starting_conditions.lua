@@ -14,21 +14,22 @@ include "scripting/ui.lua"
 -- =======================================================================
 
 -- RST
--- .. function:: sleep_then_goto(sleeptime, field)
+-- .. function:: sleep_then_goto(player, sleeptime, field)
 --
 --    Wait for the given number of milliseconds, then center the
 --    interactive player's map view on the given Field.
 --
 --    This function returns immediately after calling.
 --
+--    :arg player: The player to move the view for
 --    :arg sleeptime: The number of milliseconds to wait
 --    :arg field: The `wl.map.Field` to center the view on
 --
 --    :returns: :const:`nil`
-function sleep_then_goto(sleeptime, field)
+function sleep_then_goto(player, sleeptime, field)
    run(function()
       sleep(sleeptime)
-      scroll_to_field(field)
+      if player.number == wl.Game().interactive_player then scroll_to_field(field) end
    end)
 end
 
@@ -64,5 +65,5 @@ function launch_expeditions(player, items)
       ship:make_expedition(items[i])
    end
 
-   if player.number == wl.Game().interactive_player then sleep_then_goto(1000, fields[1]) end
+   sleep_then_goto(player, 1000, fields[1])
 end

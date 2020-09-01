@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_worker_type {
-   msgctxt = "frisians_worker",
    name = "frisians_shipwright",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("frisians_worker", "Shipwright"),
@@ -18,9 +19,9 @@ tribes:new_worker_type {
       buildship = {
          "walk=object-or-coords",
          "plant=attrib:shipconstruction unless object",
-         "animate=work 500",
+         "animate=work duration:500ms",
          "construct",
-         "animate=work 5000",
+         "animate=work duration:5s",
          "return"
       },
       buildferry_1 = {
@@ -29,8 +30,8 @@ tribes:new_worker_type {
       buildferry_2 = {
          "findspace=size:swim radius:5",
          "walk=coords",
-         "animate=work 10000",
-         "buildferry",
+         "animate=work duration:10s",
+         "createbob=frisians_ferry",
          "return"
       },
    },
@@ -67,7 +68,7 @@ tribes:new_worker_type {
          rows = 15,
          sound_effect = {
             path = "sound/hammering/hammering",
-            priority = 64
+            priority = 50
          },
          hotspot = {9, 24},
       },
@@ -80,3 +81,5 @@ tribes:new_worker_type {
       },
    },
 }
+
+pop_textdomain()

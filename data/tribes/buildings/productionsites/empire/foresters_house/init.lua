@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_foresters_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Forester’s House"),
@@ -37,21 +38,16 @@ tribes:new_productionsite_type {
       empire_forester = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_farm = false,
-      empire_vineyard = false,
-      empire_lumberjacks_house = true,
-      empire_foresters_house = false,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
          descname = _"planting trees",
          actions = {
             "callworker=plant",
-            "sleep=10000"
+            "sleep=duration:10s"
          }
       },
    },
 }
+
+pop_textdomain()

@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_trainingsite_type {
-   msgctxt = "empire_building",
    name = "empire_trainingcamp",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Training Camp"),
@@ -56,13 +57,8 @@ tribes:new_trainingsite_type {
       { name = "armor_chain", amount = 2 },
       { name = "armor_gilded", amount = 2 },
    },
-   outputs = {
-      "empire_soldier",
-   },
 
    ["soldier attack"] = {
-      min_level = 0,
-      max_level = 3,
       food = {
          {"fish", "meat"},
          {"empire_bread"}
@@ -75,8 +71,6 @@ tribes:new_trainingsite_type {
       }
    },
    ["soldier health"] = {
-      min_level = 0,
-      max_level = 3,
       food = {
          {"fish", "meat"},
          {"empire_bread"}
@@ -94,7 +88,7 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped",
          }
       },
@@ -102,111 +96,111 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
-            "checksoldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
+            "checksoldier=soldier:attack level:0", -- Fails when aren't any soldier of level 0 attack
             "return=failed unless site has spear",
             "return=failed unless site has empire_bread",
             "return=failed unless site has fish,meat",
-            "sleep=30000",
-            "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
+            "sleep=duration:30s",
+            "checksoldier=soldier:attack level:0", -- Because the soldier can be expelled by the player
             "consume=spear empire_bread fish,meat",
-            "train=soldier attack 0 1"
+            "train=soldier:attack level:1"
          }
       },
       upgrade_soldier_attack_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier attack 1",
+            "checksoldier=soldier:attack level:1",
             "return=failed unless site has spear_advanced",
             "return=failed unless site has empire_bread",
             "return=failed unless site has fish,meat",
-            "sleep=30000",
-            "checksoldier=soldier attack 1",
+            "sleep=duration:30s",
+            "checksoldier=soldier:attack level:1",
             "consume=spear_advanced empire_bread fish,meat",
-            "train=soldier attack 1 2"
+            "train=soldier:attack level:2"
          }
       },
       upgrade_soldier_attack_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
-            "checksoldier=soldier attack 2",
+            "checksoldier=soldier:attack level:2",
             "return=failed unless site has spear_heavy",
             "return=failed unless site has empire_bread",
             "return=failed unless site has fish,meat:2",
-            "sleep=30000",
-            "checksoldier=soldier attack 2",
+            "sleep=duration:30s",
+            "checksoldier=soldier:attack level:2",
             "consume=spear_heavy empire_bread fish,meat:2",
-            "train=soldier attack 2 3"
+            "train=soldier:attack level:3"
          }
       },
       upgrade_soldier_attack_3 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
-            "checksoldier=soldier attack 3",
+            "checksoldier=soldier:attack level:3",
             "return=failed unless site has spear_war",
             "return=failed unless site has empire_bread:2",
             "return=failed unless site has fish,meat",
-            "sleep=30000",
-            "checksoldier=soldier attack 3",
+            "sleep=duration:30s",
+            "checksoldier=soldier:attack level:3",
             "consume=spear_war empire_bread:2 fish,meat",
-            "train=soldier attack 3 4"
+            "train=soldier:attack level:4"
          }
       },
       upgrade_soldier_health_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
-            "checksoldier=soldier health 0",
+            "checksoldier=soldier:health level:0",
             "return=failed unless site has armor_helmet",
             "return=failed unless site has empire_bread,fish,meat",
-            "sleep=30000",
-            "checksoldier=soldier health 0",
+            "sleep=duration:30s",
+            "checksoldier=soldier:health level:0",
             "consume=armor_helmet empire_bread,fish,meat",
-            "train=soldier health 0 1"
+            "train=soldier:health level:1"
          }
       },
       upgrade_soldier_health_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier health from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier health 1",
+            "checksoldier=soldier:health level:1",
             "return=failed unless site has armor",
             "return=failed unless site has empire_bread",
             "return=failed unless site has fish,meat",
-            "sleep=30000",
-            "checksoldier=soldier health 1",
+            "sleep=duration:30s",
+            "checksoldier=soldier:health level:1",
             "consume=armor empire_bread fish,meat",
-            "train=soldier health 1 2"
+            "train=soldier:health level:2"
          }
       },
       upgrade_soldier_health_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier health from level 2 to level 3"),
          actions = {
-            "checksoldier=soldier health 2",
+            "checksoldier=soldier:health level:2",
             "return=failed unless site has armor_chain",
             "return=failed unless site has empire_bread:2",
             "return=failed unless site has fish,meat:2",
-            "sleep=30000",
-            "checksoldier=soldier health 2",
+            "sleep=duration:30s",
+            "checksoldier=soldier:health level:2",
             "consume=armor_chain empire_bread:2 fish,meat:2",
-            "train=soldier health 2 3"
+            "train=soldier:health level:3"
          }
       },
       upgrade_soldier_health_3 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier health from level 3 to level 4"),
          actions = {
-            "checksoldier=soldier health 3",
+            "checksoldier=soldier:health level:3",
             "return=failed unless site has armor_gilded",
             "return=failed unless site has empire_bread:2",
             "return=failed unless site has fish,meat:2",
-            "sleep=30000",
-            "checksoldier=soldier health 3",
+            "sleep=duration:30s",
+            "checksoldier=soldier:health level:3",
             "consume=armor_gilded empire_bread:2 fish,meat:2",
-            "train=soldier health 3 4"
+            "train=soldier:health level:4"
          }
       },
    },
@@ -214,3 +208,5 @@ tribes:new_trainingsite_type {
    soldier_capacity = 12,
    trainer_patience = 12
 }
+
+pop_textdomain()

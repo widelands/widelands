@@ -61,7 +61,7 @@ private:
 };
 
 struct String : Value {
-	explicit String(std::string value);
+	explicit String(const std::string& value);
 	std::string as_string() const override;
 
 private:

@@ -22,7 +22,7 @@
 #include <SDL_mouse.h>
 #include <SDL_timer.h>
 
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "ui_basic/mouse_constants.h"
@@ -58,11 +58,11 @@ Scrollbar::Scrollbar(Panel* const parent,
      pressed_(Area::None),
      time_nextact_(0),
      knob_grabdelta_(0),
-     pic_minus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_left.png" :
+     pic_minus_(g_image_cache->get(horiz ? "images/ui_basic/scrollbar_left.png" :
                                            "images/ui_basic/scrollbar_up.png")),
-     pic_plus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_right.png" :
+     pic_plus_(g_image_cache->get(horiz ? "images/ui_basic/scrollbar_right.png" :
                                           "images/ui_basic/scrollbar_down.png")),
-     button_style_(g_gr->styles().scrollbar_style(style)) {
+     button_style_(g_style_manager->scrollbar_style(style)) {
 	set_thinks(true);
 	layout();
 }
@@ -373,8 +373,9 @@ void Scrollbar::draw(RenderTarget& dst) {
 		draw_area(dst, Area::MinusPage,
 		          Recti(0, buttonsize_, get_w(), knobpos - buttonsize_ - knobsize / 2));
 		assert(knobpos + knobsize / 2 + buttonsize_ <= static_cast<uint32_t>(get_h()));
-		draw_area(dst, Area::PlusPage, Recti(0, knobpos + knobsize / 2, get_w(),
-		                                     get_h() - knobpos - knobsize / 2 - buttonsize_));
+		draw_area(
+		   dst, Area::PlusPage,
+		   Recti(0, knobpos + knobsize / 2, get_w(), get_h() - knobpos - knobsize / 2 - buttonsize_));
 	}
 }
 

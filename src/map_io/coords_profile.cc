@@ -29,8 +29,8 @@ namespace {
 
 Coords parse_coords(const std::string& name, const char* const coords, const Extent& extent) {
 	char* endp = const_cast<char*>(coords);
-	const long int x = strtol(endp, &endp, 0);
-	const long int y = strtol(endp, &endp, 0);
+	const int64_t x = strtol(endp, &endp, 0);
+	const int64_t y = strtol(endp, &endp, 0);
 
 	//  Check of consistence should NOT be at x, y < 0 as (-1, -1) == Coords::null() is used for
 	//  not set starting positions in the editor. So check whether x, y < -1 so

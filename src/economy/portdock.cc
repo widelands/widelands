@@ -233,8 +233,9 @@ void PortDock::cleanup(EditorGameBase& egbase) {
  * Add the flags of all ports that can be reached via this dock.
  */
 void PortDock::add_neighbours(std::vector<RoutingNodeNeighbour>& neighbours) {
-	if (fleet_ && fleet_->active())
+	if (fleet_ && fleet_->active()) {
 		fleet_->add_neighbours(*this, neighbours);
+	}
 }
 
 /**
@@ -453,17 +454,19 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
 	if (warehouse_) {
 		Coords pos(warehouse_->get_position());
 		molog(
+		   egbase.get_gametime(),
 		   "PortDock for warehouse %u (at %i,%i) in fleet %u, expedition_ready: %s, waiting: %" PRIuS
 		   "\n",
 		   warehouse_->serial(), pos.x, pos.y, fleet_ ? fleet_->serial() : 0,
 		   expedition_ready_ ? "true" : "false", waiting_.size());
 	} else {
-		molog("PortDock without a warehouse in fleet %u, expedition_ready: %s, waiting: %" PRIuS "\n",
+		molog(egbase.get_gametime(),
+		      "PortDock without a warehouse in fleet %u, expedition_ready: %s, waiting: %" PRIuS "\n",
 		      fleet_ ? fleet_->serial() : 0, expedition_ready_ ? "true" : "false", waiting_.size());
 	}
 
 	for (const ShippingItem& shipping_item : waiting_) {
-		molog("  IT %u, destination %u\n", shipping_item.object_.serial(),
+		molog(egbase.get_gametime(), "  IT %u, destination %u\n", shipping_item.object_.serial(),
 		      shipping_item.destination_dock_.serial());
 	}
 }
@@ -475,7 +478,7 @@ constexpr uint8_t kCurrentPacketVersion = 6;
 PortDock::Loader::Loader() : warehouse_(0) {
 }
 
-void PortDock::Loader::load(FileRead& fr, uint8_t packet_version) {
+void PortDock::Loader::load(FileRead& fr, uint8_t /* packet_version */) {
 	PlayerImmovable::Loader::load(fr);
 
 	PortDock& pd = get<PortDock>();
@@ -487,16 +490,6 @@ void PortDock::Loader::load(FileRead& fr, uint8_t packet_version) {
 	for (uint16_t i = 0; i < nrdockpoints; ++i) {
 		pd.dockpoints_[i] = read_coords_32(&fr, egbase().map().extent());
 		pd.set_position(egbase(), pd.dockpoints_[i]);
-	}
-
-	// TODO(GunChleoc&Nordfriese): Savegame compatibility Build 20
-	// (remove when we break savegame compatibility)
-	if (packet_version == 5) {
-		for (uint32_t i = fr.unsigned_32(); i; --i) {
-			fr.unsigned_32();
-		}
-	} else if (packet_version < 5) {
-		fr.unsigned_8();
 	}
 
 	waiting_.resize(fr.unsigned_32());
@@ -531,14 +524,16 @@ void PortDock::Loader::load_finish() {
 	PortDock& pd = get<PortDock>();
 
 	if (pd.warehouse_->get_portdock() != &pd) {
-		log("Inconsistent PortDock <> Warehouse link\n");
-		if (upcast(Game, game, &egbase()))
+		log_warn("Inconsistent PortDock <> Warehouse link\n");
+		if (upcast(Game, game, &egbase())) {
 			pd.schedule_destroy(*game);
+		}
 	}
 
 	// This shouldn't be necessary, but let's check just in case
-	if (!pd.fleet_)
+	if (!pd.fleet_) {
 		pd.init_fleet(egbase());
+	}
 }
 
 MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
@@ -547,9 +542,8 @@ MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, 
 	try {
 		// The header has been peeled away by the caller
 
-		// TODO(GunChleoc): Savegame compatibility Build 20
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr, packet_version);
 		} else {

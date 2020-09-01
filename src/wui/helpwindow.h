@@ -28,10 +28,6 @@
 
 class LuaInterface;
 
-namespace Widelands {
-class BuildingDescr;
-}
-
 namespace UI {
 
 /*

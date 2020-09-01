@@ -21,8 +21,6 @@
 
 #include <cassert>
 
-#include "base/log.h"
-
 // static
 DrawLineProgram& DrawLineProgram::instance() {
 	static DrawLineProgram draw_line_program;
@@ -41,7 +39,8 @@ void DrawLineProgram::draw(std::vector<Arguments> arguments) {
 
 	auto& gl_state = Gl::State::instance();
 	gl_state.enable_vertex_attrib_array({
-	   attr_position_, attr_color_,
+	   attr_position_,
+	   attr_color_,
 	});
 
 	gl_array_buffer_.bind();

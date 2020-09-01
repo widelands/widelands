@@ -320,7 +320,6 @@ protected:
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<ShippingItem::Loader> items_;
-		uint8_t packet_version_ = 0;
 	};
 
 public:

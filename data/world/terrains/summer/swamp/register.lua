@@ -1,0 +1,3 @@
+return {
+   summer_swamp = {}
+}

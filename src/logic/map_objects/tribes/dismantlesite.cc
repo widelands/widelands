@@ -23,6 +23,7 @@
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -39,11 +40,10 @@ namespace Widelands {
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
-                                       const Tribes& tribes)
+                                       Tribes& tribes)
    : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, tribes),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
-	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE);  // Yep, this is correct.
 }
 
 Building& DismantleSiteDescr::create_object() const {
@@ -114,8 +114,9 @@ Print completion percentage.
 */
 void DismantleSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = g_gr->styles().color_tag((boost::format(_("%u%% dismantled")) % percent).str(),
-	                              g_gr->styles().building_statistics_style().construction_color());
+	*s =
+	   g_style_manager->color_tag((boost::format(_("%u%% dismantled")) % percent).str(),
+	                              g_style_manager->building_statistics_style().construction_color());
 }
 
 /*
@@ -125,7 +126,7 @@ Initialize the construction site by starting orders
 */
 bool DismantleSite::init(EditorGameBase& egbase) {
 	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
+	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxMaximumPriority, true));
 
 	PartiallyFinishedBuilding::init(egbase);
 
@@ -180,9 +181,9 @@ Construction sites only burn if some of the work has been completed.
 ===============
 */
 bool DismantleSite::burn_on_destroy() {
-	if (work_completed_ >= work_steps_)
+	if (work_completed_ >= work_steps_) {
 		return false;  // completed, so don't burn
-
+	}
 	return true;
 }
 
@@ -283,17 +284,33 @@ void DismantleSite::draw(uint32_t gametime,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	if (was_immovable_) {
-		dst->blit_animation(
-		   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(
+			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
+		} else {
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), tanim,
+			                    nullptr, kBuildingSilhouetteOpacity);
+		}
 	} else {
 		// Draw the construction site marker
-		dst->blit_animation(
-		   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(
+			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
+		} else {
+			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr,
+			                    kBuildingSilhouetteOpacity);
+		}
 	}
 
 	// Blit bottom part of the animation according to dismantle progress
-	dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
-	                    &player_color, 100 - ((get_built_per64k() * 100) >> 16));
+	if (info_to_draw & InfoToDraw::kShowBuildings) {
+		dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
+		                    &player_color, 1.f, 100 - ((get_built_per64k() * 100) >> 16));
+	} else {
+		dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
+		                    nullptr, kBuildingSilhouetteOpacity,
+		                    100 - ((get_built_per64k() * 100) >> 16));
+	}
 
 	// Draw help strings
 	draw_info(info_to_draw, point_on_dst, scale, dst);

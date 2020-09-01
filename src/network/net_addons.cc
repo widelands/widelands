@@ -196,7 +196,7 @@ void NetAddons::download_addon_file(const std::string& name, const std::string& 
 	}
 	const std::string result = check_downloaded_file(output);
 	if (!result.empty()) {
-		log("ERROR: %s -> fail\n", result.c_str());
+		log_err("%s -> fail\n", result.c_str());
 		throw wexception("%s", result.c_str());
 	}
 }
@@ -224,7 +224,7 @@ std::string NetAddons::download_i18n(const std::string& name, const std::string&
 	fclose(out_file);
 
 	if (res != CURLE_OK) {
-		log("ERROR: Downloading add-on translation %s for %s to %s: cURL returned error code %d\n",
+		log_err("Downloading add-on translation %s for %s to %s: cURL returned error code %d\n",
 				locale.c_str(), name.c_str(), canonical_output.c_str(), res);
 		return "";
 	}
@@ -233,7 +233,7 @@ std::string NetAddons::download_i18n(const std::string& name, const std::string&
 	if (result.empty()) {
 		return canonical_output;
 	} else {
-		log("WARNING: %s -> skip\n", result.c_str());
+		log_warn("%s -> skip\n", result.c_str());
 		return "";
 	}
 }

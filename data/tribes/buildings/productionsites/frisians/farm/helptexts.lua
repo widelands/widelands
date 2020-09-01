@@ -3,7 +3,7 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "No frost, no heat; no rain, no draught; no rats, no locusts; naught can destroy my harvest.")
+   return pgettext ("frisians_building", "No frost, no heat; no rain, no drought; no rats, no locusts; naught can destroy my harvest.")
 end
 
 function building_helptext_lore_author ()

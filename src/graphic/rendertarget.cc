@@ -22,7 +22,6 @@
 #include "graphic/align.h"
 #include "graphic/animation/animation.h"
 #include "graphic/animation/animation_manager.h"
-#include "graphic/graphic.h"
 #include "graphic/surface.h"
 
 /**
@@ -304,15 +303,16 @@ void RenderTarget::blit_animation(const Vector2f& dst,
                                   uint32_t animation_id,
                                   uint32_t time,
                                   const RGBColor* player_color,
+                                  const float opacity,
                                   const int percent_from_bottom) {
-	const Animation& animation = g_gr->animations().get_animation(animation_id);
+	const Animation& animation = g_animation_manager->get_animation(animation_id);
 	assert(percent_from_bottom <= 100);
 	if (percent_from_bottom > 0) {
 		// Scaling for zoom and animation image size, then fit screen edges.
 		Rectf srcrc = animation.source_rectangle(percent_from_bottom, scale);
 		Rectf dstrc = animation.destination_rectangle(dst, srcrc, scale);
 		if (to_surface_geometry(&dstrc, &srcrc)) {
-			animation.blit(time, coords, srcrc, dstrc, player_color, surface_, scale);
+			animation.blit(time, coords, srcrc, dstrc, player_color, surface_, scale, opacity);
 		}
 	}
 }

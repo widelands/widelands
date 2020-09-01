@@ -51,14 +51,14 @@ echo "Working tree is clean, continuing"
 set -x
 
 # Pull translations from Transifex
-tx pull -a
+# tx pull -a
+# Force-pull translations because some would get skipped accidentally
+tx pull -fa
 
 # Update authors file
 utils/update_authors.py
-if [ $? -eq 0 ]
-then
+if [ $? -eq 0 ] ; then
   echo "Updated authors";
-
 else
   echo "Failed updating authors";
   exit 1;
@@ -66,8 +66,7 @@ fi
 
 # Update appdata
 utils/update_appdata.py
-if [ $? -eq 0 ]
-then
+if [ $? -eq 0 ] ; then
   echo "Updated appdata";
 else
   echo "Failed updating appdata";
@@ -79,8 +78,7 @@ utils/buildcat.py
 
 # Update statistics
 utils/update_translation_stats.py
-if [ $? -eq 0 ]
-then
+if [ $? -eq 0 ] ; then
   echo "Updated translation stats";
 else
   echo "Failed to update translation stats";
@@ -90,6 +88,19 @@ fi
 # Fix formatting for Lua
 python utils/fix_formatting.py --lua --dir data/i18n
 python utils/fix_formatting.py --lua --dir data/txts
+
+# Undo one-liner diffs in po directory - these are pure timestamps with no other content
+set +x
+for line in $(git diff --numstat po); do
+  row=($(echo $line | tr "\t" "\n"))
+  if [ ${#row[@]} -eq 3 ] ; then
+    if [ ${row[0]} -eq 1 -a ${row[1]} -eq 1 ] ; then
+      echo "Skipping changes to ${row[2]}"
+      git checkout ${row[2]}
+    fi
+  fi
+done
+set -x
 
 # Stage changes
 # - Translations

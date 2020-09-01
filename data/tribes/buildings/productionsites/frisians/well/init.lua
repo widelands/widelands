@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_well",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Well"),
@@ -47,22 +48,14 @@ tribes:new_productionsite_type {
       frisians_carrier = 1
    },
 
-   outputs = {
-      "water"
-   },
-
-   indicate_workarea_overlaps = {
-      frisians_well = false,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "sleep=20000",
-            "animate=working 20000",
-            "mine=water 1 100 65 2",
+            "sleep=duration:20s",
+            "animate=working duration:20s",
+            "mine=resource_water radius:1 yield:100% when_empty:65%",
             "produce=water",
          }
       },
@@ -76,3 +69,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 33
    },
 }
+
+pop_textdomain()

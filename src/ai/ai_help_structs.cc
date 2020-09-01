@@ -21,6 +21,7 @@
 
 #include <algorithm>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "logic/ai_dna_handler.h"
@@ -571,7 +572,7 @@ int8_t ManagementData::shift_weight_value(const int8_t old_value, const bool agg
 
 	const int16_t upper_limit = std::min<int16_t>(old_value + halfVArRange, kNeuronWeightLimit);
 	const int16_t bottom_limit = std::max<int16_t>(old_value - halfVArRange, -kNeuronWeightLimit);
-	int16_t new_value = bottom_limit + std::rand() % (upper_limit - bottom_limit + 1);
+	int16_t new_value = bottom_limit + std::rand() % (upper_limit - bottom_limit + 1);  // NOLINT
 
 	if (!aggressive && ((old_value > 0 && new_value < 0) || (old_value < 0 && new_value > 0))) {
 		new_value = 0;
@@ -609,15 +610,17 @@ void ManagementData::review(const uint32_t gametime,
 	score = territory_bonus + iron_mine_bonus + attack_bonus + training_bonus + land_score +
 	        strength_score + ps_sites_score + attack_score;
 
-	log(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s A:%s Tr:%s, "
-	    "Scores:Land:%5d Str:%4d PS:%4d, Att:%4d\n",
-	    pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
-	    (territory_bonus) ? "Y" : "N", (iron_mine_bonus) ? "Y" : "N", (attack_bonus) ? "Y" : "N",
-	    (training_bonus) ? "Y" : "N", land_score, strength_score, ps_sites_score, attack_score);
+	log_dbg_time(
+	   gametime,
+	   " %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s A:%s Tr:%s, "
+	   "Scores:Land:%5d Str:%4d PS:%4d, Att:%4d\n",
+	   pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
+	   (territory_bonus) ? "Y" : "N", (iron_mine_bonus) ? "Y" : "N", (attack_bonus) ? "Y" : "N",
+	   (training_bonus) ? "Y" : "N", land_score, strength_score, ps_sites_score, attack_score);
 
 	if (score < -10000 || score > 30000) {
-		log("%2d %s: reviewing AI mngm. data, score too extreme: %4d\n", pn,
-		    gamestring_with_leading_zeros(gametime), score);
+		log_dbg_time(gametime, "%2d %s: reviewing AI mngm. data, score too extreme: %4d\n", pn,
+		             gamestring_with_leading_zeros(gametime), score);
 	}
 	assert(score > -10000 && score < 100000);
 }
@@ -628,10 +631,10 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 
 	ai_type = type;
 
-	log("%2d: DNA initialization... \n", pn);
+	log_dbg("%2d: DNA initialization... \n", pn);
 
-	primary_parent = std::rand() % 4;
-	const uint8_t parent2 = std::rand() % 4;
+	primary_parent = std::rand() % 4;         // NOLINT
+	const uint8_t parent2 = std::rand() % 4;  // NOLINT
 
 	std::vector<int16_t> AI_military_numbers_P1(
 	   Widelands::Player::AiPersistentState::kMagicNumbersSize);
@@ -649,13 +652,14 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	ai_dna_handler.fetch_dna(
 	   AI_military_numbers_P2, input_weights_P2, input_func_P2, f_neurons_P2, parent2 + 1);
 
-	log("    ... Primary parent: %d, secondary parent: %d\n", primary_parent, parent2);
+	log_dbg("    ... Primary parent: %d, secondary parent: %d\n", primary_parent, parent2);
 
 	// First setting of military numbers, they go directly to persistent data
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 		// Child inherits DNA with probability 1/kSecondParentProbability from main parent
-		DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ? DnaParent::kPrimary :
-		                                                                       DnaParent::kSecondary;
+		DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?  // NOLINT
+		                         DnaParent::kPrimary :
+		                         DnaParent::kSecondary;
 		if (i == kMutationRatePosition) {  // Overwriting
 			dna_donor = DnaParent::kPrimary;
 		}
@@ -675,7 +679,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	persistent_data->f_neurons.clear();
 
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
-		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?
+		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?  // NOLINT
 		                               DnaParent::kPrimary :
 		                               DnaParent::kSecondary;
 
@@ -692,7 +696,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	}
 
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
-		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?
+		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?  // NOLINT
 		                               DnaParent::kPrimary :
 		                               DnaParent::kSecondary;
 		switch (dna_donor) {
@@ -714,7 +718,7 @@ MutatingIntensity ManagementData::do_mutate(const uint8_t is_preferred,
 	if (is_preferred > 0) {
 		return MutatingIntensity::kAgressive;
 	}
-	if (std::rand() % mutation_probability == 0) {
+	if (std::rand() % mutation_probability == 0) {  // NOLINT
 		return MutatingIntensity::kNormal;
 	}
 	return MutatingIntensity::kNo;
@@ -758,7 +762,8 @@ void ManagementData::mutate(const uint8_t pn) {
 	}
 
 	// Wildcard for ai trainingmode
-	if (ai_training_mode_ && std::rand() % 8 == 0 && ai_type == Widelands::AiType::kNormal) {
+	if (ai_training_mode_ && std::rand() % 8 == 0 &&  // NOLINT
+	    ai_type == Widelands::AiType::kNormal) {
 		probability /= 3;
 		preferred_numbers_count = 5;
 		wild_card = true;
@@ -766,8 +771,8 @@ void ManagementData::mutate(const uint8_t pn) {
 
 	assert(probability > 0 && probability <= 201);
 
-	log("%2d: mutating DNA with probability 1 / %3d, preffered numbers target %d%s:\n", pn,
-	    probability, preferred_numbers_count, (wild_card) ? ", wild card" : "");
+	log_dbg("%2d: mutating DNA with probability 1 / %3d, preffered numbers target %d%s:\n", pn,
+	        probability, preferred_numbers_count, (wild_card) ? ", wild card" : "");
 
 	if (probability < 201) {
 
@@ -777,7 +782,7 @@ void ManagementData::mutate(const uint8_t pn) {
 			// [-kWeightRange, kWeightRange]
 			std::set<int32_t> preferred_numbers;
 			for (int i = 0; i < preferred_numbers_count; i++) {
-				preferred_numbers.insert(std::rand() % pref_number_probability);
+				preferred_numbers.insert(std::rand() % pref_number_probability);  // NOLINT
 			}
 
 			for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
@@ -793,9 +798,9 @@ void ManagementData::mutate(const uint8_t pn) {
 					const int16_t new_value = shift_weight_value(
 					   get_military_number_at(i), mutating_intensity == MutatingIntensity::kAgressive);
 					set_military_number_at(i, new_value);
-					log("      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
-					    new_value,
-					    (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
+					log_dbg("      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
+					        new_value,
+					        (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
 				}
 			}
 		}
@@ -805,7 +810,7 @@ void ManagementData::mutate(const uint8_t pn) {
 			// Neurons to be mutated more agressively
 			std::set<int32_t> preferred_neurons;
 			for (int i = 0; i < preferred_numbers_count; i++) {
-				preferred_neurons.insert(std::rand() % pref_number_probability);
+				preferred_neurons.insert(std::rand() % pref_number_probability);  // NOLINT
 			}
 			for (auto& item : neuron_pool) {
 
@@ -814,9 +819,9 @@ void ManagementData::mutate(const uint8_t pn) {
 
 				if (mutating_intensity != MutatingIntensity::kNo) {
 					const int16_t old_value = item.get_weight();
-					if (std::rand() % 4 == 0) {
+					if (std::rand() % 4 == 0) {  // NOLINT
 						assert(!neuron_curves.empty());
-						item.set_type(std::rand() % neuron_curves.size());
+						item.set_type(std::rand() % neuron_curves.size());  // NOLINT
 						persistent_data->neuron_functs[item.get_id()] = item.get_type();
 					} else {
 						int16_t new_value = shift_weight_value(
@@ -824,9 +829,9 @@ void ManagementData::mutate(const uint8_t pn) {
 						item.set_weight(new_value);
 						persistent_data->neuron_weights[item.get_id()] = item.get_weight();
 					}
-					log("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
-					    old_value, item.get_weight(), item.get_type(),
-					    (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
+					log_dbg("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
+					        old_value, item.get_weight(), item.get_type(),
+					        (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
 
 					item.recalculate();
 				}
@@ -840,7 +845,7 @@ void ManagementData::mutate(const uint8_t pn) {
 			// preferred_numbers_count is multiplied by 3 because FNeuron store more than
 			// one value
 			for (int i = 0; i < 3 * preferred_numbers_count; i++) {
-				preferred_f_neurons.insert(std::rand() % pref_number_probability);
+				preferred_f_neurons.insert(std::rand() % pref_number_probability);  // NOLINT
 			}
 
 			for (auto& item : f_neuron_pool) {
@@ -848,14 +853,14 @@ void ManagementData::mutate(const uint8_t pn) {
 				// is this a preferred neuron
 				if (preferred_f_neurons.count(item.get_id()) > 0) {
 					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
-						if (std::rand() % 5 == 0) {
+						if (std::rand() % 5 == 0) {  // NOLINT
 							item.flip_bit(i);
 							++changed_bits;
 						}
 					}
 				} else {  // normal mutation
 					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
-						if (std::rand() % (probability * 3) == 0) {
+						if (std::rand() % (probability * 3) == 0) {  // NOLINT
 							item.flip_bit(i);
 							++changed_bits;
 						}
@@ -864,9 +869,9 @@ void ManagementData::mutate(const uint8_t pn) {
 
 				if (changed_bits) {
 					persistent_data->f_neurons[item.get_id()] = item.get_int();
-					log("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n", item.get_id(),
-					    item.get_int(), changed_bits,
-					    (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
+					log_dbg("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
+					        item.get_id(), item.get_int(), changed_bits,
+					        (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
 				}
 			}
 		}
@@ -899,7 +904,7 @@ void ManagementData::copy_persistent_to_local() {
 	       Widelands::Player::AiPersistentState::kMagicNumbersSize);
 
 	test_consistency();
-	log("    ... DNA initialized\n");
+	log_dbg("    ... DNA initialized\n");
 }
 
 void ManagementData::test_consistency(bool itemized) {
@@ -970,7 +975,7 @@ bool SchedulerTask::operator<(const SchedulerTask& other) const {
 void BlockedFields::add(Widelands::Coords coords, uint32_t till) {
 	const uint32_t hash = coords.hash();
 	if (blocked_fields_.count(hash) == 0) {
-		blocked_fields_.insert(std::pair<uint32_t, uint32_t>(hash, till));
+		blocked_fields_.insert(std::make_pair(hash, till));
 	} else if (blocked_fields_[hash] < till) {
 		blocked_fields_[hash] = till;
 	}
@@ -1056,12 +1061,12 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 		all_stats[opn].old60_players_land = oland;
 		assert(this_player_number == pn);
 		if (this_player_team != mytn) {
-			log("%2d: Team changed %d -> %d\n", pn, this_player_team, mytn);
+			log_dbg("%2d: Team changed %d -> %d\n", pn, this_player_team, mytn);
 			this_player_team = mytn;
 		}
 		if (all_stats[opn].team_number != pltn) {
-			log("%2d: Team changed for player %d: %d -> %d\n", pn, opn, all_stats[opn].team_number,
-			    pltn);
+			log_dbg("%2d: Team changed for player %d: %d -> %d\n", pn, opn, all_stats[opn].team_number,
+			        pltn);
 			all_stats[opn].team_number = pltn;
 		}
 	}
@@ -1071,7 +1076,7 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 // does not exist anymore
 void PlayersStrengths::remove_stat(const Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) > 0) {
-		log("%d: AI: Erasing statistics for player %d\n", this_player_number, pn);
+		log_dbg("%d: AI: Erasing statistics for player %d\n", this_player_number, pn);
 		all_stats.erase(pn);
 	}
 }
@@ -1130,8 +1135,8 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number)
 	}
 	if (all_stats.count(other_player_number) == 0) {
 		// Should happen only rarely so we print a warning here
-		log("%d: WARNING: player has no statistics yet for player %d\n", this_player_number,
-		    other_player_number);
+		log_warn("AI %d: player has no statistics yet for player %d\n", this_player_number,
+		         other_player_number);
 		return false;
 	}
 	// finally we compare my team number of the other player team number
@@ -1142,7 +1147,7 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number)
 bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const uint32_t gametime) {
 	if (all_stats.count(pn) == 0) {
 		// Should happen only rarely so we print a warning here
-		log("%d: WARNING: player has no statistics yet\n", this_player_number);
+		log_warn("AI %d: player has no statistics yet\n", this_player_number);
 		return false;
 	}
 	if (all_stats[pn].last_time_seen == kNever) {
@@ -1248,7 +1253,7 @@ uint32_t PlayersStrengths::get_old60_player_power(Widelands::PlayerNumber pn) {
 
 uint32_t PlayersStrengths::get_old_player_land(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
-		log(" %d: Players statistics are still empty\n", pn);
+		log_dbg(" AI %d: Players statistics are still empty\n", pn);
 		return 0;
 	}
 	return all_stats[pn].old_players_land;
@@ -1256,7 +1261,7 @@ uint32_t PlayersStrengths::get_old_player_land(Widelands::PlayerNumber pn) {
 
 uint32_t PlayersStrengths::get_old60_player_land(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
-		log(" %d: Players statistics are still empty\n", pn);
+		log_dbg(" AI %d: Players statistics are still empty\n", pn);
 		return 0;
 	}
 	return all_stats[pn].old60_players_land;
@@ -1496,7 +1501,7 @@ void FlagCandidates::sort_by_air_distance() {
 	std::sort(flags_.begin(), flags_.end(),
 	          [](const FlagCandidates::Candidate& lf, const FlagCandidates::Candidate& rf) {
 		          return lf.air_distance < rf.air_distance;
-		       });
+	          });
 }
 
 void FlagCandidates::add_flag(const uint32_t coords,

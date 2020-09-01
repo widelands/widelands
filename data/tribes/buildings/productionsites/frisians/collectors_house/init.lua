@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_collectors_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Fruit Collector’s House"),
@@ -38,11 +39,6 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      frisians_berry_farm = true,
-      frisians_collectors_house = false,
-   },
-
    aihints = {
       collects_ware_from_map = "fruit",
       prohibited_till = 470,
@@ -53,16 +49,12 @@ tribes:new_productionsite_type {
       frisians_fruit_collector = 1
    },
 
-   outputs = {
-      "fruit"
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
          descname = _"gathering berries",
          actions = {
-            "sleep=21000",
+            "sleep=duration:21s",
             "callworker=harvest",
          }
       },
@@ -76,3 +68,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 8
    },
 }
+
+pop_textdomain()

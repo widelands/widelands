@@ -41,8 +41,9 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::NodeAndTriang
 		      world.get_resource(args->current_resource)->max_amount() :
 		      0;
 
-		if (amount > max_amount)
+		if (amount > max_amount) {
 			amount = max_amount;
+		}
 
 		if (map->is_resource_valid(world, mr.location(), args->current_resource)) {
 

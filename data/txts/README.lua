@@ -1,10 +1,9 @@
 include "txts/help/common_helptexts.lua"
 
-set_textdomain("texts")
+push_textdomain("texts")
 
-return {
-   title = _"Readme",
-   text = rt(
+local r = {
+   rt(
       p_font("align=center", "size=38 face=Widelands/Widelands.ttf color=2F9131", img("images/logos/wl-ico-32.png") .. "Widelands") ..
       p_font("align=center", "size=14 italic=1 color=D1D1D1", _"an open source strategy game") ..
       help_introduction() ..
@@ -35,3 +34,5 @@ return {
       help_replays()
    )
 }
+pop_textdomain()
+return r

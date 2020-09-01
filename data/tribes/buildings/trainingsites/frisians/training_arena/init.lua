@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_trainingsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_training_arena",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Training Arena"),
@@ -74,16 +75,8 @@ tribes:new_trainingsite_type {
       { name = "helmet_golden", amount = 2 },
       { name = "fur_garment_golden", amount = 2 },
    },
-   outputs = {
-      "frisians_soldier",
-      "scrap_iron",
-      "scrap_metal_mixed",
-      "fur_garment_old",
-   },
 
    ["soldier attack"] = {
-      min_level = 3,
-      max_level = 5,
       food = {
          {"smoked_fish", "smoked_meat"},
          {"mead"},
@@ -96,8 +89,6 @@ tribes:new_trainingsite_type {
       }
    },
    ["soldier health"] = {
-      min_level = 1,
-      max_level = 1,
       food = {
          {"smoked_fish", "smoked_meat"},
          {"honey_bread", "mead"}
@@ -107,8 +98,6 @@ tribes:new_trainingsite_type {
       }
    },
    ["soldier defense"] = {
-      min_level = 1,
-      max_level = 1,
       food = {
          {"smoked_fish", "smoked_meat"},
          {"honey_bread", "mead"}
@@ -123,7 +112,7 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped",
          }
       },
@@ -131,30 +120,30 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
-            "checksoldier=soldier attack 3",
+            "checksoldier=soldier:attack level:3",
             "return=failed unless site has sword_long",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=10800",
-            "animate=working 12000",
-            "checksoldier=soldier attack 3", -- Because the soldier can be expelled by the player
+            "sleep=duration:10s800ms",
+            "animate=working duration:12s",
+            "checksoldier=soldier:attack level:3", -- Because the soldier can be expelled by the player
             "consume=sword_long honey_bread,mead smoked_fish,smoked_meat",
-            "train=soldier attack 3 4"
+            "train=soldier:attack level:4"
          }
       },
       upgrade_soldier_attack_4 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 4 to level 5"),
          actions = {
-            "checksoldier=soldier attack 4",
+            "checksoldier=soldier:attack level:4",
             "return=failed unless site has sword_broad",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat:2",
-            "sleep=5600",
-            "animate=working 10000",
-            "checksoldier=soldier attack 4", -- Because the soldier can be expelled by the player
+            "sleep=duration:5s600ms",
+            "animate=working duration:10s",
+            "checksoldier=soldier:attack level:4", -- Because the soldier can be expelled by the player
             "consume=sword_broad honey_bread,mead smoked_fish,smoked_meat:2",
-            "train=soldier attack 4 5",
+            "train=soldier:attack level:5",
             "produce=scrap_iron:2"
          }
       },
@@ -162,16 +151,16 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 5 to level 6"),
          actions = {
-            "checksoldier=soldier attack 5",
+            "checksoldier=soldier:attack level:5",
             "return=failed unless site has sword_double",
             "return=failed unless site has honey_bread",
             "return=failed unless site has mead",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=5600",
-            "animate=working 10000",
-            "checksoldier=soldier attack 5", -- Because the soldier can be expelled by the player
+            "sleep=duration:5s600ms",
+            "animate=working duration:10s",
+            "checksoldier=soldier:attack level:5", -- Because the soldier can be expelled by the player
             "consume=sword_double honey_bread mead smoked_fish,smoked_meat",
-            "train=soldier attack 5 6",
+            "train=soldier:attack level:6",
             "produce=scrap_iron scrap_metal_mixed"
          }
       },
@@ -179,15 +168,15 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier defense from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier defense 1",
+            "checksoldier=soldier:defense level:1",
             "return=failed unless site has fur_garment_golden",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=10800",
-            "animate=working 12000",
-            "checksoldier=soldier defense 1", -- Because the soldier can be expelled by the player
+            "sleep=duration:10s800ms",
+            "animate=working duration:12s",
+            "checksoldier=soldier:defense level:1", -- Because the soldier can be expelled by the player
             "consume=fur_garment_golden honey_bread,mead smoked_fish,smoked_meat",
-            "train=soldier defense 1 2",
+            "train=soldier:defense level:2",
             "produce=scrap_iron fur_garment_old"
          }
       },
@@ -195,15 +184,15 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier health from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier health 1",
+            "checksoldier=soldier:health level:1",
             "return=failed unless site has helmet_golden",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=10800",
-            "animate=working 12000",
-            "checksoldier=soldier health 1", -- Because the soldier can be expelled by the player
+            "sleep=duration:10s800ms",
+            "animate=working duration:12s",
+            "checksoldier=soldier:health level:1", -- Because the soldier can be expelled by the player
             "consume=helmet_golden honey_bread,mead smoked_fish,smoked_meat",
-            "train=soldier health 1 2",
+            "train=soldier:health level:2",
             "produce=scrap_iron"
          }
       },
@@ -212,3 +201,5 @@ tribes:new_trainingsite_type {
    soldier_capacity = 6,
    trainer_patience = 3
 }
+
+pop_textdomain()

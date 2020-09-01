@@ -4,7 +4,7 @@
 --
 -- This file contains common code for the "Territorial Lord" and "Territorial Time" win conditions.
 
-set_textdomain("win_conditions")
+push_textdomain("win_conditions")
 
 include "scripting/richtext.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
@@ -205,7 +205,7 @@ end
 --    :returns: a richtext-formatted string with header information for a winning player
 --
 function winning_status_header()
-   set_textdomain("win_conditions")
+   push_textdomain("win_conditions")
    local remaining_minutes = math.max(0, math.floor(territory_points.remaining_time / 60))
 
    local message = p(_"You own more than half of the map’s area.")
@@ -213,6 +213,7 @@ function winning_status_header()
              "Keep it for %i more minutes to win the game.",
              remaining_minutes))
          :format(remaining_minutes)
+   pop_textdomain()
    return message
 end
 
@@ -226,7 +227,7 @@ end
 --    :returns: a richtext-formatted string with header information for a losing player
 --
 function losing_status_header(players)
-   set_textdomain("win_conditions")
+   push_textdomain("win_conditions")
    local winner_name = "Error"
    if territory_points.last_winning_team >= 0 then
       winner_name = team_str:format(territory_points.last_winning_team)
@@ -240,6 +241,7 @@ function losing_status_header(players)
              "You’ve still got %i minutes to prevent a victory.",
              remaining_minutes))
          :format(remaining_minutes)
+   pop_textdomain()
    return message
 end
 
@@ -270,3 +272,5 @@ function territory_game_over(fields, players, wc_descname, wc_version)
       end
    end
 end
+
+pop_textdomain()

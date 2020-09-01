@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "economy/ship_fleet.h"
-#include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "logic/game.h"
 #include "logic/player.h"
@@ -95,7 +94,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                kButtonSize,
                kButtonSize,
                UI::ButtonStyle::kWuiPrimary,
-               g_gr->images().get("images/wui/menus/watch_follow.png"),
+               g_image_cache->get("images/wui/menus/watch_follow.png"),
                /** TRANSLATORS: Tooltip in the seafaring statistics window */
                as_tooltip_text_with_hotkey(_("Watch the selected ship"), "w")),
      openwindowbtn_(&navigation_box_,
@@ -105,7 +104,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     kButtonSize,
                     kButtonSize,
                     UI::ButtonStyle::kWuiPrimary,
-                    g_gr->images().get("images/ui_basic/fsel.png"),
+                    g_image_cache->get("images/ui_basic/fsel.png"),
                     (boost::format("%s<br>%s") %
                      as_tooltip_text_with_hotkey(
                         /** TRANSLATORS: Tooltip in the seafaring statistics window */
@@ -123,7 +122,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     kButtonSize,
                     kButtonSize,
                     UI::ButtonStyle::kWuiPrimary,
-                    g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
+                    g_image_cache->get("images/wui/ship/menu_ship_goto.png"),
                     as_tooltip_text_with_hotkey(
                        /** TRANSLATORS: Tooltip in the seafaring statistics window */
                        _("Center the map on the selected ship"),
@@ -197,14 +196,14 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 				   NEVER_HERE();
 			   }
 		   }
-		});
+	   });
 }
 
 const std::string
 SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterStatus status) const {
 	switch (status) {
 	case SeafaringStatisticsMenu::ShipFilterStatus::kIdle:
-		return pgettext("ship_state", "Idle");
+		return pgettext("ship_state", "Empty");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kShipping:
 		return pgettext("ship_state", "Shipping");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionWaiting:
@@ -246,7 +245,7 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 		filename = "images/wui/ship/ship_scout_ne.png";
 		break;
 	}
-	return g_gr->images().get(filename);
+	return g_image_cache->get(filename);
 }
 
 std::unique_ptr<const SeafaringStatisticsMenu::ShipInfo>
@@ -255,7 +254,7 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	ShipFilterStatus status = ShipFilterStatus::kAll;
 	switch (state) {
 	case Widelands::Ship::ShipStates::kTransport:
-		if (ship.get_destination()) {
+		if (ship.get_destination() && ship.get_fleet()->get_schedule().is_busy(ship)) {
 			status = ShipFilterStatus::kShipping;
 		} else {
 			status = ShipFilterStatus::kIdle;
@@ -442,8 +441,9 @@ bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 
 		case SDL_SCANCODE_KP_PERIOD:
 		case SDLK_KP_PERIOD:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
+			}
 			FALLS_THROUGH;
 		default:
 			break;  // not handled
@@ -536,7 +536,7 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 
 	idle_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
-	   _("Show idle ships"), pgettext("hotkey", "Alt+1")));
+	   _("Show empty ships"), pgettext("hotkey", "Alt+1")));
 	shipping_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
 	   _("Show ships shipping wares and workers"), pgettext("hotkey", "Alt+2")));

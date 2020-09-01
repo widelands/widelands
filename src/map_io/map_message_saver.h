@@ -42,7 +42,7 @@ struct MapMessageSaver {
 	}
 	void add(const MessageId& id) {
 		assert(messages_.find(id) == messages_.end());
-		messages_.insert(std::pair<MessageId, MessageId>(id, ++counter_));
+		messages_.insert(std::make_pair(id, ++counter_));
 	}
 	MessageId operator[](const MessageId& id) const {
 		return messages_.find(id) != messages_.end() ? messages_.find(id)->second : MessageId::null();

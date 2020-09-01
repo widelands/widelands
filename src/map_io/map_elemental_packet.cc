@@ -21,6 +21,7 @@
 
 #include <boost/algorithm/string.hpp>
 
+#include "base/log.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
@@ -69,7 +70,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 				const std::string substring = addons.substr(0, commapos);
 				const size_t colonpos = addons.find(':');
 				if (colonpos == std::string::npos) {
-					log("WARNING: Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
+					log_warn("Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
 				} else {
 					const std::string version = substring.substr(colonpos + 1);
 					map->required_addons_.push_back(std::make_pair(substring.substr(0, colonpos),
@@ -102,7 +103,8 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 					boost::split(players_string, team_string, boost::is_any_of(","));
 
 					for (const std::string& player : players_string) {
-						PlayerNumber player_number = static_cast<PlayerNumber>(atoi(player.c_str()));
+						PlayerNumber player_number =
+						   static_cast<PlayerNumber>(boost::lexical_cast<unsigned int>(player.c_str()));
 						assert(player_number < kMaxPlayers);
 						team.push_back(player_number);
 					}

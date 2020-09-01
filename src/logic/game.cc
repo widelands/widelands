@@ -75,13 +75,15 @@ namespace Widelands {
 
 Game::SyncWrapper::~SyncWrapper() {
 	if (dump_ != nullptr) {
-		if (!syncstreamsave_)
+		if (!syncstreamsave_) {
 			try {
 				g_fs->fs_unlink(dumpfname_);
 			} catch (const FileError& e) {
 				// not really a problem if deletion fails, but we'll log it
-				log("Deleting synchstream file %s failed: %s\n", dumpfname_.c_str(), e.what());
+				log_warn_time(game_.get_gametime(), "Deleting synchstream file %s failed: %s\n",
+				              dumpfname_.c_str(), e.what());
 			}
+		}
 	}
 }
 
@@ -95,17 +97,19 @@ void Game::SyncWrapper::start_dump(const std::string& fname) {
 void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
 	uint32_t time = game_.get_gametime();
-	log("[sync:%08u t=%6u]", counter_, time);
-	for (size_t i = 0; i < size; ++i)
-		log(" %02x", (static_cast<uint8_t const*>(sync_data))[i]);
-	log("\n");
+	log_dbg_time(game_.get_gametime(), "[sync:%08u t=%6u]", counter_, time);
+	for (size_t i = 0; i < size; ++i) {
+		log_dbg_time(game_.get_gametime(), " %02x", (static_cast<uint8_t const*>(sync_data))[i]);
+	}
+	log_dbg_time(game_.get_gametime(), "\n");
 #endif
 
 	if (dump_ != nullptr && static_cast<int32_t>(counter_ - next_diskspacecheck_) >= 0) {
 		next_diskspacecheck_ = counter_ + 16 * 1024 * 1024;
 
 		if (g_fs->disk_space() < kMinimumDiskSpace) {
-			log("Stop writing to syncstream file: disk is getting full.\n");
+			log_warn_time(
+			   game_.get_gametime(), "Stop writing to syncstream file: disk is getting full.\n");
 			dump_.reset();
 		}
 	}
@@ -114,7 +118,9 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 		try {
 			dump_->data(sync_data, size);
 		} catch (const WException&) {
-			log("Writing to syncstream file %s failed. Stop synctream dump.\n", dumpfname_.c_str());
+			log_warn_time(game_.get_gametime(),
+			              "Writing to syncstream file %s failed. Stop synctream dump.\n",
+			              dumpfname_.c_str());
 			dump_.reset();
 		}
 		assert(current_excerpt_id_ < kExcerptSize);
@@ -150,7 +156,7 @@ void Game::sync_reset() {
 	syncwrapper_.counter_ = 0;
 
 	synchash_.reset();
-	log("[sync] Reset\n");
+	log_dbg_time(get_gametime(), "[sync] Reset\n");
 }
 
 /**
@@ -214,30 +220,25 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 
 	create_loader_ui({"general_game"}, false);
 
-	step_loader_ui(_("Preloading map…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 	maploader->preload_map(true, &enabled_addons());
 	change_loader_ui_background(map().get_background());
 
-	step_loader_ui(_("Loading world…"));
 	world();
-	step_loader_ui(_("Loading tribes…"));
 	tribes();
 
-	// If the scenario has custrom tribe entites, load them.
-	const std::string custom_tribe_script = mapname + "/scripting/tribes/init.lua";
-	if (g_fs->file_exists(custom_tribe_script)) {
-		lua().run_script(custom_tribe_script);
-	}
+	// If the map is a scenario with custom tribe entites, load them too.
+	mutable_tribes()->register_scenario_tribes(map().filesystem());
 
 	// We have to create the players here.
-	step_loader_ui(_("Creating players…"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		// If tribe name is empty, pick a random tribe
 		std::string tribe = map().get_scenario_player_tribe(p);
 		if (tribe.empty()) {
-			log("Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
-			const DescriptionIndex random = std::rand() % tribes().nrtribes();
+			log_info_time(
+			   get_gametime(), "Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
+			const DescriptionIndex random = std::rand() % tribes().nrtribes();  // NOLINT
 			tribe = tribes().get_tribe_descr(random)->name();
 		}
 		add_player(p, 0, tribe, map().get_scenario_player_name(p));
@@ -247,13 +248,13 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 
 	set_ibase(new InteractivePlayer(*this, get_config_section(), 1, false));
 
-	step_loader_ui(_("Loading map…"));
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
-		bool const result = run(NewSPScenario, script_to_run, false, "single_player");
+		bool const result =
+		   run(StartGameType::kSinglePlayerScenario, script_to_run, false, "single_player");
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
@@ -270,20 +271,15 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 void Game::init_newgame(const GameSettings& settings) {
 	assert(has_loader_ui());
 
-	step_loader_ui(_("Preloading map…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
 	assert(maploader != nullptr);
 	maploader->preload_map(settings.scenario, &enabled_addons());
 	change_loader_ui_background(map().get_background());
 
-	step_loader_ui(_("Loading world…"));
 	world();
-
-	step_loader_ui(_("Loading tribes…"));
 	tribes();
-
-	step_loader_ui(_("Creating players…"));
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
@@ -291,9 +287,9 @@ void Game::init_newgame(const GameSettings& settings) {
 		const PlayerSettings& playersettings = settings.players[i];
 
 		if (playersettings.state == PlayerSettings::State::kClosed ||
-		    playersettings.state == PlayerSettings::State::kOpen)
+		    playersettings.state == PlayerSettings::State::kOpen) {
 			continue;
-		else if (playersettings.state == PlayerSettings::State::kShared) {
+		} else if (playersettings.state == PlayerSettings::State::kShared) {
 			shared.push_back(playersettings);
 			shared_num.push_back(i + 1);
 			continue;
@@ -311,14 +307,13 @@ void Game::init_newgame(const GameSettings& settings) {
 		   ->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
 
-	step_loader_ui(_("Loading map…"));
 	maploader->load_map_complete(*this, settings.scenario ?
 	                                       Widelands::MapLoader::LoadType::kScenario :
 	                                       Widelands::MapLoader::LoadType::kGame);
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		step_loader_ui(_("Initializing game…"));
+		Notifications::publish(UI::NoteLoadingMessage(_("Initializing game…")));
 		if (settings.peaceful) {
 			for (uint32_t i = 1; i < settings.players.size(); ++i) {
 				if (Player* p1 = get_player(i)) {
@@ -329,6 +324,11 @@ void Game::init_newgame(const GameSettings& settings) {
 						}
 					}
 				}
+			}
+		}
+		if (settings.custom_starting_positions) {
+			iterate_players_existing(p, map().get_nrplayers(), *this, pl) {
+				pl->start_picking_custom_starting_position();
 			}
 		}
 
@@ -355,7 +355,7 @@ void Game::init_newgame(const GameSettings& settings) {
 void Game::init_savegame(const GameSettings& settings) {
 	assert(has_loader_ui());
 
-	step_loader_ui(_("Preloading map…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 	try {
 		GameLoader gl(settings.mapfilename, *this);
@@ -369,7 +369,6 @@ void Game::init_savegame(const GameSettings& settings) {
 			set_write_replay(false);
 		}
 
-		step_loader_ui(_("Loading…"));
 		gl.load_game(settings.multiplayer);
 		// Players might have selected a different AI type
 		for (uint8_t i = 0; i < settings.players.size(); ++i) {
@@ -387,7 +386,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	create_loader_ui({"general_game", "singleplayer"}, false);
 	int8_t player_nr;
 
-	step_loader_ui(_("Preloading map…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 	{
 		GameLoader gl(filename, *this);
@@ -405,7 +404,6 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		player_nr = gpdp.get_player_nr();
 		set_ibase(new InteractivePlayer(*this, get_config_section(), player_nr, false));
 
-		step_loader_ui(_("Loading…"));
 		gl.load_game();
 	}
 
@@ -414,7 +412,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
-		bool const result = run(Loaded, script_to_run, false, "single_player");
+		bool const result = run(StartGameType::kSaveGame, script_to_run, false, "single_player");
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
@@ -463,10 +461,11 @@ bool Game::run(StartGameType const start_game_type,
 	replay_ = replay;
 	postload();
 
-	if (start_game_type != Loaded) {
+	if (start_game_type != StartGameType::kSaveGame) {
 		PlayerNumber const nr_players = map().get_nrplayers();
-		if (start_game_type == NewNonScenario) {
-			step_loader_ui(_("Creating player infrastructure…"));
+		if (start_game_type == StartGameType::kMap) {
+			/** TRANSLATORS: All players (plural) */
+			Notifications::publish(UI::NoteLoadingMessage(_("Creating player infrastructure…")));
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
@@ -475,13 +474,14 @@ bool Game::run(StartGameType const start_game_type,
 			// Replays can't handle scenarios
 			set_write_replay(false);
 			iterate_players_existing_novar(p, nr_players, *this) {
-				if (!map().get_starting_pos(p))
+				if (!map().get_starting_pos(p)) {
 					throw WLWarning(_("Missing starting position"),
 					                _("Widelands could not start the game, because player %u has "
 					                  "no starting position.\n"
 					                  "You can manually add a starting position with the Widelands "
 					                  "Editor to fix this problem."),
 					                static_cast<unsigned int>(p));
+				}
 			}
 		}
 
@@ -511,10 +511,11 @@ bool Game::run(StartGameType const start_game_type,
 		}
 
 		// Run the init script, if the map provides one.
-		if (start_game_type == NewSPScenario)
+		if (start_game_type == StartGameType::kSinglePlayerScenario) {
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/init.lua"));
-		else if (start_game_type == NewMPScenario)
+		} else if (start_game_type == StartGameType::kMultiPlayerScenario) {
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
+		}
 
 		// Run all selected add-on scripts
 		for (const AddOnInfo& addon : enabled_addons()) {
@@ -528,7 +529,8 @@ bool Game::run(StartGameType const start_game_type,
 		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
 	}
 
-	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
+	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
+	                               start_game_type == StartGameType::kSaveGame)) {
 		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
 	}
 
@@ -537,21 +539,20 @@ bool Game::run(StartGameType const start_game_type,
 		const std::string fname = kReplayDir + g_fs->file_separator() + std::string(timestring()) +
 		                          std::string("_") + prefix_for_replays + kReplayExtension;
 		if (writereplay_) {
-			log("Starting replay writer\n");
+			log_info_time(get_gametime(), "Starting replay writer\n");
 
 			assert(!replaywriter_);
 			replaywriter_.reset(new ReplayWriter(*this, fname));
 
-			log("Replay writer has started\n");
+			log_info_time(get_gametime(), "Replay writer has started\n");
 		}
 
-		if (writesyncstream_)
+		if (writesyncstream_) {
 			syncwrapper_.start_dump(fname);
+		}
 	}
 
 	sync_reset();
-
-	load_graphics();
 
 #ifdef _WIN32
 	//  Clear the event queue before starting game because we don't want
@@ -651,7 +652,8 @@ void Game::report_sync_request() {
  */
 void Game::report_desync(int32_t playernumber) {
 	if (syncwrapper_.dumpfname_.empty()) {
-		log("Error: A desync occurred but no filename for the syncstream has been set.");
+		log_err_time(get_gametime(),
+		             "Error: A desync occurred but no filename for the syncstream has been set.");
 		return;
 	}
 	// Replace .wss extension of syncstream file with .wse extension for syncstream extract
@@ -830,9 +832,12 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
                                        const std::vector<Serial>& soldiers) {
-	if (1 < player(who_attacks)
-	           .vision(Map::get_index(flag.get_building()->get_position(), map().get_width())))
-		send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
+	for (Widelands::Coords& coords : flag.get_building()->get_positions(*this)) {
+		if (player(who_attacks).is_seeing(Map::get_index(coords, map().get_width()))) {
+			send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
+			break;
+		}
+	}
 }
 
 void Game::send_player_ship_scouting_direction(Ship& ship, WalkingDir direction) {
@@ -883,6 +888,11 @@ void Game::send_player_set_stock_policy(Building& imm,
 	   get_gametime(), imm.get_owner()->player_number(), imm, ww == wwWORKER, di, sp));
 }
 
+void Game::send_player_toggle_mute(const Building& b, bool all) {
+	send_player_command(
+	   new CmdToggleMuteMessages(get_gametime(), b.owner().player_number(), b, all));
+}
+
 int Game::propose_trade(const Trade& trade) {
 	// TODO(sirver,trading): Check if a trade is possible (i.e. if there is a
 	// path between the two markets);
@@ -914,7 +924,8 @@ int Game::propose_trade(const Trade& trade) {
 void Game::accept_trade(const int trade_id) {
 	auto it = trade_agreements_.find(trade_id);
 	if (it == trade_agreements_.end()) {
-		log("Game::accept_trade: Trade %d has vanished. Ignoring.\n", trade_id);
+		log_warn_time(
+		   get_gametime(), "Game::accept_trade: Trade %d has vanished. Ignoring.\n", trade_id);
 		return;
 	}
 	const Trade& trade = it->second.trade;
@@ -956,7 +967,7 @@ void Game::cancel_trade(int trade_id) {
 }
 
 LuaGameInterface& Game::lua() {
-	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
+	return dynamic_cast<LuaGameInterface&>(EditorGameBase::lua());
 }
 
 const std::string& Game::get_win_condition_displayname() const {
@@ -1005,11 +1016,12 @@ void Game::sample_statistics() {
 	const Map& themap = map();
 	Extent const extent = themap.extent();
 	iterate_Map_FCoords(themap, extent, fc) {
-		if (PlayerNumber const owner = fc.field->get_owned_by())
+		if (PlayerNumber const owner = fc.field->get_owned_by()) {
 			++land_size[owner - 1];
+		}
 
 		// Get the immovable
-		if (upcast(Building, building, fc.field->get_immovable()))
+		if (upcast(Building, building, fc.field->get_immovable())) {
 			if (building->get_position() == fc) {  // only count main location
 				uint8_t const player_index = building->owner().player_number() - 1;
 				++nr_buildings[player_index];
@@ -1020,12 +1032,15 @@ void Game::sample_statistics() {
 					productivity[player_index] += productionsite->get_statistics_percent();
 				}
 			}
+		}
 
 		// Now, walk the bobs
-		for (Bob const* b = fc.field->get_first_bob(); b; b = b->get_next_bob())
-			if (upcast(Soldier const, s, b))
+		for (Bob const* b = fc.field->get_first_bob(); b; b = b->get_next_bob()) {
+			if (upcast(Soldier const, s, b)) {
 				miltary_strength[s->owner().player_number() - 1] +=
 				   s->get_level(TrainingAttribute::kTotal) + 1;  //  So that level 0 also counts.
+			}
+		}
 	}
 
 	//  Number of workers / wares / casualties / kills.
@@ -1063,8 +1078,9 @@ void Game::sample_statistics() {
 
 	// Now, divide the statistics
 	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
-		if (productivity[i])
+		if (productivity[i]) {
 			productivity[i] /= nr_production_sites[i];
+		}
 	}
 
 	// If there is a hook function defined to sample special statistics in this

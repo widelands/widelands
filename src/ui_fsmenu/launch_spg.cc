@@ -28,7 +28,6 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "scripting/lua_interface.h"
@@ -235,6 +234,7 @@ void FullscreenMenuLaunchSPG::update(bool map_was_changed) {
 		select_map_.set_enabled(settings_->can_change_map());
 
 		peaceful_.set_state(settings_->is_peaceful_mode());
+		custom_starting_positions_.set_state(settings_->get_custom_starting_positions());
 
 		set_player_names_and_tribes();
 	}
@@ -284,6 +284,7 @@ bool FullscreenMenuLaunchSPG::select_map() {
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
 	update_win_conditions();
 	update_peaceful_mode();
+	update_custom_starting_positions();
 	update(true);
 	return true;
 }
@@ -305,7 +306,7 @@ void FullscreenMenuLaunchSPG::set_player_names_and_tribes() {
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
 		settings_->set_player_name(i, map.get_scenario_player_name(i + 1));
-		const std::string playertribe = map.get_scenario_player_tribe(i + 1);
+		const std::string& playertribe = map.get_scenario_player_tribe(i + 1);
 		if (playertribe.empty()) {
 			// Set tribe selection to random
 			settings_->set_player_tribe(i, "", true);

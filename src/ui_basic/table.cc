@@ -25,8 +25,8 @@
 #include <SDL_timer.h>
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
@@ -51,7 +51,7 @@ Table<void*>::Table(Panel* const parent,
                     TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
-     lineheight_(text_height(g_gr->styles().table_style(style).enabled())),
+     lineheight_(text_height(g_style_manager->table_style(style).enabled())),
      headerheight_(lineheight_ + 4),
      style_(style),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
@@ -126,7 +126,7 @@ void Table<void*>::add_column(uint32_t const width,
 		c.width = width;
 		c.alignment = alignment;
 		c.compare = [this, col_index](
-		   uint32_t a, uint32_t b) { return default_compare_string(col_index, a, b); };
+		               uint32_t a, uint32_t b) { return default_compare_string(col_index, a, b); };
 		columns_.push_back(c);
 		if (column_type == TableColumnType::kFlexible) {
 			assert(flexible_column_ == std::numeric_limits<size_t>::max());
@@ -311,10 +311,11 @@ void Table<void*>::draw(RenderTarget& dst) {
 				continue;
 			}
 
-			const UI::FontStyleInfo& font_style =
-			   er.font_style() != nullptr ? *er.font_style() : er.is_disabled() ?
-			                                g_gr->styles().table_style(style_).disabled() :
-			                                g_gr->styles().table_style(style_).enabled();
+			const UI::FontStyleInfo& font_style = er.font_style() != nullptr ?
+			                                         *er.font_style() :
+			                                         er.is_disabled() ?
+			                                         g_style_manager->table_style(style_).disabled() :
+			                                         g_style_manager->table_style(style_).enabled();
 			std::shared_ptr<const UI::RenderedText> rendered_text =
 			   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 
@@ -626,7 +627,7 @@ bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 }
 
 void Table<void*>::layout() {
-	if (columns_.empty() || get_w() == 0) {
+	if (columns_.empty() || get_h() == 0 || get_w() == 0) {
 		return;
 	}
 

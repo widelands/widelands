@@ -1,27 +1,13 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 9, 21 },
-      fps = 10
-   },
-   hacking = {
-      pictures = path.list_files(dirname .. "hacking_??.png"),
-      hotspot = { 11, 18 },
-      fps = 10
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {9, 21}, 10)
-add_directional_animation(animations, "walkload", dirname, "walk", {9, 21}, 10)
-
-
 tribes:new_worker_type {
-   msgctxt = "empire_worker",
    name = "empire_geologist",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Geologist"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -35,17 +21,39 @@ tribes:new_worker_type {
       -- The specialized geologist command walks the geologist around his starting
       -- location, executing the search program from time to time.
       expedition = {
-         "repeatsearch=15 5 search"
+         "repeatsearch=search repetitions:15 radius:5"
       },
       -- Search program, executed when we have found a place to hack on
       search = {
-         "animate=hacking 5000",
-         "animate=idle 2000",
-         "playsound=sound/hammering/geologist_hammer 192",
-         "animate=hacking 3000",
+         "animate=hacking duration:5s",
+         "animate=idle duration:2s",
+         "playsound=sound/hammering/geologist_hammer priority:50% allow_multiple",
+         "animate=hacking duration:3s",
          "findresources"
       }
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 9, 21 },
+         fps = 10
+      },
+      hacking = {
+         hotspot = { 11, 18 },
+         fps = 10
+      },
+      walk = {
+         hotspot = { 9, 21 },
+         fps = 10,
+         directional = true
+      },
+      walkload = {
+         basename = "walk",
+         hotspot = { 9, 21 },
+         fps = 10,
+         directional = true
+      }
+   }
 }
+
+pop_textdomain()

@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_stonemasons_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Stonemason’s House"),
@@ -44,22 +45,21 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "marble", amount = 6 }
    },
-   outputs = {
-      "marble_column"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column because ...
          descname = _"sculpting a marble column",
          actions = {
             "return=skipped unless economy needs marble_column",
             "consume=marble:2",
-            "sleep=50000",
-            "playsound=sound/stonecutting/stonemason 192",
-            "animate=working 32000",
+            "sleep=duration:50s",
+            "playsound=sound/stonecutting/stonemason priority:50% allow_multiple",
+            "animate=working duration:32s",
             "produce=marble_column"
          }
       },
    },
 }
+
+pop_textdomain()

@@ -30,14 +30,14 @@
 
 namespace Widelands {
 
-TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
+TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
+   : name(table->get_string("name")),
+     icon(table->get_string("icon")),
+     script(table->get_string("script")) {
 	try {
-		i18n::Textdomain td("tribes");
-		name = table->get_string("name");
-		author = _(table->get_string("author"));
-		descname = _(table->get_string("descname"));
-		tooltip = _(table->get_string("tooltip"));
-		icon = table->get_string("icon");
+		author = table->get_string("author");
+		descname = table->get_string("descname");
+		tooltip = table->get_string("tooltip");
 		std::unique_ptr<LuaTable> starting_conditions = table->get_table("starting_conditions");
 		LuaInterface lua;
 
@@ -79,59 +79,35 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 	}
 }
 
-static std::vector<std::string> get_preload_scripts() {
-	std::vector<std::string> v = {"tribes/preload.lua"};
-	for (const auto& pair : g_addons) {
-		if (pair.first.category == AddOnCategory::kTribes && pair.second) {
-			const std::string script_path = kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "preload.lua";
-			if (g_fs->file_exists(script_path)) {
-				v.push_back(script_path);
-			}
-		}
-	}
-	return v;
-}
-
-std::vector<std::string> get_all_tribenames() {
-	std::vector<std::string> tribenames;
-	LuaInterface lua;
-	for (std::string script : get_preload_scripts()) {
-		std::unique_ptr<LuaTable> table(lua.run_script(script));
-		for (const int key : table->keys<int>()) {
-			std::unique_ptr<LuaTable> info = table->get_table(key);
-			info->do_not_warn_about_unaccessed_keys();
-			tribenames.push_back(info->get_string("name"));
-		}
-	}
-	return tribenames;
-}
-
 std::vector<TribeBasicInfo> get_all_tribeinfos() {
 	std::vector<TribeBasicInfo> tribeinfos;
 	LuaInterface lua;
-	for (std::string script : get_preload_scripts()) {
-		std::unique_ptr<LuaTable> table(lua.run_script(script));
-		for (const int key : table->keys<int>()) {
-			tribeinfos.push_back(TribeBasicInfo(table->get_table(key)));
+	FilenameSet dirs = g_fs->list_directory("tribes/initialization");
+	for (const std::string& dir : dirs) {
+		for (const std::string& file : g_fs->list_directory(dir)) {
+			if (strcmp(g_fs->fs_filename(file.c_str()), "init.lua") == 0) {
+				tribeinfos.push_back(Widelands::TribeBasicInfo(lua.run_script(file)));
+			}
 		}
+	}
+	if (tribeinfos.empty()) {
+		throw GameDataError("No tribe infos found at 'tribes/initialization/<tribename>/init.lua'");
 	}
 	return tribeinfos;
 }
 
 TribeBasicInfo get_tribeinfo(const std::string& tribename) {
-	if (Widelands::tribe_exists(tribename)) {
-		for (const TribeBasicInfo& info : Widelands::get_all_tribeinfos()) {
-			if (info.name == tribename) {
-				return info;
-			}
+	for (const TribeBasicInfo& info : Widelands::get_all_tribeinfos()) {
+		if (info.name == tribename) {
+			return info;
 		}
 	}
 	throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
 }
 
 bool tribe_exists(const std::string& tribename) {
-	for (const std::string& name : get_all_tribenames()) {
-		if (name == tribename) {
+	for (const auto& tribeinfo : get_all_tribeinfos()) {
+		if (tribeinfo.name == tribename) {
 			return true;
 		}
 	}

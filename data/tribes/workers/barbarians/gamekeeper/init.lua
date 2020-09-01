@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
    name = "barbarians_gamekeeper",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Gamekeeper"),
@@ -18,9 +19,9 @@ tribes:new_worker_type {
       release = {
          "findspace=size:any radius:3",
          "walk=coords",
-         "animate=releasein 2000",
-         "createbob=bunny chamois deer elk reindeer sheep stag wildboar wisent",
-         "animate=releaseout 2000",
+         "animate=releasein duration:2s",
+         "createbob=bunny chamois deer moose reindeer sheep stag wildboar wisent",
+         "animate=releaseout duration:2s",
          "return"
       }
    },
@@ -55,3 +56,5 @@ tribes:new_worker_type {
       }
    }
 }
+
+pop_textdomain()

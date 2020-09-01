@@ -248,7 +248,7 @@ public:
 	 */
 	int get_species(lua_State*);
 	int get_buildcost(lua_State*);
-	int get_editor_category(lua_State*);
+	int get_becomes(lua_State*);
 	int get_terrain_affinity(lua_State*);
 	int get_owner_type(lua_State*);
 	int get_size(lua_State*);
@@ -662,6 +662,40 @@ private:
 	CASTED_GET_DESCRIPTION(SoldierDescr)
 };
 
+class LuaShipDescription : public LuaMapObjectDescription {
+public:
+	LUNA_CLASS_HEAD(LuaShipDescription);
+
+	~LuaShipDescription() override {
+	}
+
+	LuaShipDescription() {
+	}
+	explicit LuaShipDescription(const Widelands::ShipDescr* const shipdescr)
+	   : LuaMapObjectDescription(shipdescr) {
+	}
+	explicit LuaShipDescription(lua_State* L) : LuaMapObjectDescription(L) {
+	}
+
+	void __persist(lua_State* L) override;
+	void __unpersist(lua_State* L) override;
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(ShipDescr)
+};
+
 #undef CASTED_GET_DESCRIPTION
 
 class LuaResourceDescription : public LuaMapModuleClass {
@@ -741,7 +775,6 @@ public:
 	int get_descname(lua_State*);
 	int get_default_resource(lua_State*);
 	int get_default_resource_amount(lua_State*);
-	int get_editor_category(lua_State*);
 	int get_fertility(lua_State*);
 	int get_humidity(lua_State*);
 	int get_representative_image(lua_State*);
@@ -859,7 +892,8 @@ public:
 	/*
 	 * C Methods
 	 */
-	Widelands::MapObject* get(lua_State*, Widelands::EditorGameBase&, std::string = "MapObject");
+	Widelands::MapObject*
+	get(lua_State*, Widelands::EditorGameBase&, const std::string& = "MapObject");
 	Widelands::MapObject* get_or_zero(Widelands::EditorGameBase&);
 };
 
@@ -1040,9 +1074,10 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(RoadBase)
-	static int create_new_worker(Widelands::PlayerImmovable&,
-	                             Widelands::EditorGameBase&,
-	                             const Widelands::WorkerDescr*);
+	static bool create_new_worker(lua_State* L,
+	                              Widelands::RoadBase& r,
+	                              Widelands::EditorGameBase&,
+	                              const Widelands::WorkerDescr*);
 };
 
 class LuaConstructionSite : public LuaBuilding {
@@ -1173,9 +1208,10 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(ProductionSite)
-	static int create_new_worker(Widelands::PlayerImmovable&,
-	                             Widelands::EditorGameBase&,
-	                             const Widelands::WorkerDescr*);
+	static bool create_new_worker(lua_State* L,
+	                              Widelands::ProductionSite& ps,
+	                              Widelands::EditorGameBase&,
+	                              const Widelands::WorkerDescr*);
 };
 
 class LuaMilitarySite : public LuaBuilding {

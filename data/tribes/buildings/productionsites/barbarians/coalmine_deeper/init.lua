@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_coalmine_deeper",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Deeper Coal Mine"),
@@ -38,7 +39,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "coal"
+      mines = "resource_coal"
    },
 
    working_positions = {
@@ -47,27 +48,18 @@ tribes:new_productionsite_type {
       barbarians_miner_master = 1,
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_coalmine = false,
-      barbarians_coalmine_deep = false,
-      barbarians_coalmine_deeper = false,
-   },
-
    inputs = {
       { name = "meal", amount = 6 }
    },
-   outputs = {
-      "coal"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
             "return=skipped unless economy needs coal",
             "consume=meal",
-            "sleep=37000",
+            "sleep=duration:37s",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
@@ -78,8 +70,8 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining coal",
          actions = {
-            "animate=working 7000",
-            "mine=coal 2 100 10 2",
+            "animate=working duration:7s",
+            "mine=resource_coal radius:2 yield:100% when_empty:10% experience_on_fail:2%",
             "produce=coal",
          }
       },
@@ -100,3 +92,5 @@ tribes:new_productionsite_type {
          pgettext("barbarians_building", "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

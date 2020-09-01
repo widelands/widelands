@@ -73,15 +73,15 @@ public:
 	void ship_added(Game&, Ship&);
 	void port_added(Game&, PortDock&);
 	/**
-	  * Forget the plans for this ship. Items which this ship was supposed to
-	  * pick up later will be taken care of again by the next update().
-	  */
+	 * Forget the plans for this ship. Items which this ship was supposed to
+	 * pick up later will be taken care of again by the next update().
+	 */
 	void ship_removed(const Game&, Ship*);
 	/**
-	  * This one is more critical. Most of the consequences will be handled by update(),
-	  * but we also have to take some action (rerouting ships, updating
-	  * shippingitems, …) immediately or we risk segfaults.
-	  */
+	 * This one is more critical. Most of the consequences will be handled by update(),
+	 * but we also have to take some action (rerouting ships, updating
+	 * shippingitems, …) immediately or we risk segfaults.
+	 */
 	void port_removed(Game&, PortDock*);
 
 	// Load wares and workers onto the ship and set the destination.
@@ -95,13 +95,13 @@ public:
 	 */
 	bool empty() const;
 
+	bool is_busy(const Ship&) const;
+
 	void log_general_info(const EditorGameBase&) const;
 
 	void save(const EditorGameBase&, MapObjectSaver&, FileWrite&) const;
 	void load(FileRead&);
 	void load_pointers(MapObjectLoader&);
-	// TODO(Nordfriese): For b20 savegame compatibility ONLY
-	void load_finish(EditorGameBase&);
 
 private:
 	ShipFleet& fleet_;

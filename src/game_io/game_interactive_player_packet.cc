@@ -104,8 +104,10 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 						uint32_t serial = fr.unsigned_32();
 						int16_t x = fr.signed_16();
 						int16_t y = fr.signed_16();
-						ibase->get_expedition_port_spaces().emplace(
-						   &mol->get<Widelands::Ship>(serial), Widelands::Coords(x, y));
+						if (InteractivePlayer* const ipl = game.get_ipl()) {
+							ipl->get_expedition_port_spaces().emplace(
+							   &mol->get<Widelands::Ship>(serial), Widelands::Coords(x, y));
+						}
 					}
 				}
 			}
@@ -155,11 +157,15 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 			fw.float_32(landmarks[i].view.zoom);
 		}
 
-		fw.unsigned_32(ibase->get_expedition_port_spaces().size());
-		for (const auto& pair : ibase->get_expedition_port_spaces()) {
-			fw.unsigned_32(mos->get_object_file_index(*pair.first));
-			fw.signed_16(pair.second.x);
-			fw.signed_16(pair.second.y);
+		if (iplayer) {
+			fw.unsigned_32(iplayer->get_expedition_port_spaces().size());
+			for (const auto& pair : iplayer->get_expedition_port_spaces()) {
+				fw.unsigned_32(mos->get_object_file_index(*pair.first));
+				fw.signed_16(pair.second.x);
+				fw.signed_16(pair.second.y);
+			}
+		} else {
+			fw.unsigned_32(0);
 		}
 	}
 

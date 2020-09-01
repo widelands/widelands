@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_helmsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Helm Smithy"),
@@ -56,14 +57,9 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
    },
-   outputs = {
-      "helmet",
-      "helmet_mask",
-      "helmet_warhelm"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -79,9 +75,9 @@ tribes:new_productionsite_type {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs helmet",
             "consume=coal iron",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=helmet"
          }
       },
@@ -92,9 +88,9 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs helmet_mask",
             "consume=coal iron:2",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 45000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:45s",
             "produce=helmet_mask"
          }
       },
@@ -105,11 +101,13 @@ tribes:new_productionsite_type {
             -- time total: 87 + 3.6
             "return=skipped unless economy needs helmet_warhelm",
             "consume=coal gold iron:2",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 55000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:55s",
             "produce=helmet_warhelm"
          }
       },
    },
 }
+
+pop_textdomain()

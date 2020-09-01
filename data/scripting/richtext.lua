@@ -553,24 +553,23 @@ end
 
 
 -- RST
--- .. function:: localize_list(items, listtype, former_textdomain)
+-- .. function:: localize_list(items, listtype)
 --
 --    Turns an array of string items into a localized string list with
 --    appropriate concatenation.
 --
---    e.g. localize_list({"foo", "bar", "baz"}, "or", "widelands") will return
+--    e.g. localize_list({"foo", "bar", "baz"}, "or") will return
 --    _"foo, bar or baz"
 --
 --    :arg items:              An array of strings
 --    :arg listtype:           The type of concatenation to use.
 --                             Legal values are "&", "and", "or", and ","
---    :arg former_textdomain:  The textdomain to restore after running this function.
 --    :returns: The concatenated list string, using localized concatenation operators.
 --
 -- Same algorithm as in src/base/i18n
 
-function localize_list(items, listtype, former_textdomain)
-   set_textdomain("widelands")
+function localize_list(items, listtype)
+   push_textdomain("widelands")
    local result = ""
    for i, item in pairs(items) do
       if (i == 1) then
@@ -589,7 +588,7 @@ function localize_list(items, listtype, former_textdomain)
          result = _"%1$s, %2$s":bformat(result, item)
       end
    end
-   set_textdomain(former_textdomain)
+   pop_textdomain()
    return result
 end
 

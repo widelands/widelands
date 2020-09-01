@@ -35,8 +35,11 @@ const std::string& Attr::name() const {
 	return name_;
 }
 
-long Attr::get_int() const {
-	long rv = strtol(value_.c_str(), nullptr, 10);
+int64_t Attr::get_int(int64_t max_value) const {
+	int64_t rv = strtol(value_.c_str(), nullptr, 10);
+	if (rv > max_value) {
+		throw NumberOutOfRange(value_);
+	}
 	return rv;
 }
 

@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -7,18 +9,16 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "mushroom_dark_wasteland_sapling",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Dark Mushroom Tree (Sapling)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 72500",
-         "remove=80",
+      main = {
+         "animate=idle duration:1m12s500ms",
+         "remove=chance:31.25%",
          "grow=mushroom_dark_wasteland_pole",
       },
    },
@@ -35,18 +35,16 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "mushroom_dark_wasteland_pole",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Dark Mushroom Tree (Pole)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 72500",
-         "remove=70",
+      main = {
+         "animate=idle duration:1m12s500ms",
+         "remove=chance:27.34%",
          "grow=mushroom_dark_wasteland_mature",
       },
    },
@@ -63,18 +61,16 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "mushroom_dark_wasteland_mature",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Dark Mushroom Tree (Mature)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 75000",
-         "remove=40",
+      main = {
+         "animate=idle duration:1m15s",
+         "remove=chance:15.62%",
          "grow=mushroom_dark_wasteland_old",
       },
    },
@@ -91,22 +87,20 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "mushroom_dark_wasteland_old",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Dark Mushroom Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Dark Mushroom Tree",
    icon = dirname .. "menu.png",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 1050000",
-         "transform=deadtree2 25",
-         "seed=mushroom_dark_wasteland_sapling 200",
+      main = {
+         "animate=idle duration:17m30s",
+         "transform=deadtree2 chance:9.76%",
+         "seed=mushroom_dark_wasteland_sapling proximity:78.12%",
       },
       fall = {
          "remove=",
@@ -124,3 +118,5 @@ world:new_immovable_type{
       }
    },
 }
+
+pop_textdomain()

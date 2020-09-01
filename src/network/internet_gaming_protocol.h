@@ -55,7 +55,7 @@ constexpr unsigned int kInternetGamingProtocolVersion = 6;
 constexpr time_t kInternetGamingTimeout = 10;  // 10 seconds
 
 /// Metaserver connection details
-static const std::string INTERNET_GAMING_METASERVER = "widelands.org";
+constexpr const char* const INTERNET_GAMING_METASERVER = "widelands.org";
 // Default port for connecting to the metaserver
 constexpr uint16_t kInternetGamingPort = 7395;
 // Default port for connecting to the relay
@@ -70,19 +70,20 @@ constexpr uint16_t kInternetRelayPort = 7397;
  * CLIENT RIGHTS                                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /// Client rights
-static const std::string INTERNET_CLIENT_UNREGISTERED = "UNREGISTERED";
-static const std::string INTERNET_CLIENT_REGISTERED = "REGISTERED";
-static const std::string INTERNET_CLIENT_SUPERUSER = "SUPERUSER";
-static const std::string INTERNET_CLIENT_IRC = "IRC";
+constexpr const char* const INTERNET_CLIENT_UNREGISTERED = "UNREGISTERED";
+constexpr const char* const INTERNET_CLIENT_REGISTERED = "REGISTERED";
+constexpr const char* const INTERNET_CLIENT_SUPERUSER = "SUPERUSER";
+constexpr const char* const INTERNET_CLIENT_IRC = "IRC";
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * GAME STATUS                                                             *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /// States an online game can be in.
 /// Other values might appear but should be considered as "CLOSED"
-static const std::string INTERNET_GAME_CLOSED = "CLOSED";  // Not yet connectable or not over relay
-static const std::string INTERNET_GAME_SETUP = "SETUP";    // Map selection and so
-static const std::string INTERNET_GAME_RUNNING = "RUNNING";  // Playing
+constexpr const char* const INTERNET_GAME_CLOSED =
+   "CLOSED";                                                // Not yet connectable or not over relay
+constexpr const char* const INTERNET_GAME_SETUP = "SETUP";  // Map selection and so
+constexpr const char* const INTERNET_GAME_RUNNING = "RUNNING";  // Playing
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * COMMUNICATION PROTOCOL BETWEEN CLIENT AND METASERVER                    *
@@ -144,7 +145,7 @@ static const std::string INTERNET_GAME_RUNNING = "RUNNING";  // Playing
  *       the protocol versions differ.
  *
  */
-static const std::string IGPCMD_DISCONNECT = "DISCONNECT";
+constexpr const char* const IGPCMD_DISCONNECT = "DISCONNECT";
 
 /**
  * Initiate a connection.
@@ -180,7 +181,7 @@ static const std::string IGPCMD_DISCONNECT = "DISCONNECT";
  *
  * For the case, that the metaserver does not accept the login, take a look at \ref IGPCMD_ERROR
  */
-static const std::string IGPCMD_LOGIN = "LOGIN";
+constexpr const char* const IGPCMD_LOGIN = "LOGIN";
 
 /**
  * The client tries to check the password of the user without doing a full login.
@@ -201,8 +202,8 @@ static const std::string IGPCMD_LOGIN = "LOGIN";
  *
  * If the password is wrong or some other error occurred, \ref IGPCMD_ERROR is returned.
  */
-static const std::string IGPCMD_CHECK_PWD = "CHECK_PWD";
-static const std::string IGPCMD_PWD_OK = "PWD_OK";
+constexpr const char* const IGPCMD_CHECK_PWD = "CHECK_PWD";
+constexpr const char* const IGPCMD_PWD_OK = "PWD_OK";
 
 /**
  * This is sent by the metaserver after a IGPCMD_LOGIN or IGPCMD_CHECK_PWD by a registered client.
@@ -220,7 +221,7 @@ static const std::string IGPCMD_PWD_OK = "PWD_OK";
  * value is wrong (e.g., wrong password) the connection is terminated by the servers
  * IGPCMD_DISCONNECT.
  */
-static const std::string IGPCMD_PWD_CHALLENGE = "PWD_CHALLENGE";
+constexpr const char* const IGPCMD_PWD_CHALLENGE = "PWD_CHALLENGE";
 
 /**
  * This command is sent by the metaserver if something went wrong.
@@ -234,13 +235,13 @@ static const std::string IGPCMD_PWD_CHALLENGE = "PWD_CHALLENGE";
  * there.
  * \note example for not connectable game: "ERROR" "GAME_OPEN"
  */
-static const std::string IGPCMD_ERROR = "ERROR";
+constexpr const char* const IGPCMD_ERROR = "ERROR";
 
 /**
  * This is sent by the metaserver to inform the client, about the metaserver time = time(0). Payload
  * \li string:    the server time
  */
-static const std::string IGPCMD_TIME = "TIME";
+constexpr const char* const IGPCMD_TIME = "TIME";
 
 /**
  * This is sent by a superuser client to change the motd. The server has to check the permissions
@@ -252,7 +253,7 @@ static const std::string IGPCMD_TIME = "TIME";
  * message. It should further log that try to access superuser functionality.
  * \li string:    new motd
  */
-static const std::string IGPCMD_MOTD = "MOTD";
+constexpr const char* const IGPCMD_MOTD = "MOTD";
 
 /**
  * This is sent by a superuser client as announcement. The server has to check the permissions and
@@ -263,7 +264,7 @@ static const std::string IGPCMD_MOTD = "MOTD";
  * message. It should further log that try to access superuser functionality.
  * \li string:    announcement message
  */
-static const std::string IGPCMD_ANNOUNCEMENT = "ANNOUNCEMENT";
+constexpr const char* const IGPCMD_ANNOUNCEMENT = "ANNOUNCEMENT";
 
 // in future here should the other superuser commands be
 
@@ -272,12 +273,12 @@ static const std::string IGPCMD_ANNOUNCEMENT = "ANNOUNCEMENT";
  * If the client does not answer on a PING within \ref INTERNET_GAMING_CLIENT_TIMEOUT s it gets
  * disconnected.
  */
-static const std::string IGPCMD_PING = "PING";
+constexpr const char* const IGPCMD_PING = "PING";
 
 /**
  * Reply to a \ref IGPCMD_PING command, without payload.
  */
-static const std::string IGPCMD_PONG = "PONG";
+constexpr const char* const IGPCMD_PONG = "PONG";
 
 /**
  * Sent by both metaserver and client to exchange chat messages, though with different payloads.
@@ -296,7 +297,7 @@ static const std::string IGPCMD_PONG = "PONG";
  * \note system messages are the motd (Sent by the metaserver to the client, after login
  * (but not relogin) and after the motd got changed) and announcements by superusers.
  */
-static const std::string IGPCMD_CHAT = "CHAT";
+constexpr const char* const IGPCMD_CHAT = "CHAT";
 
 /**
  * Sent by the client to issue a superuser command.
@@ -305,7 +306,7 @@ static const std::string IGPCMD_CHAT = "CHAT";
  * \li string:    the command
  * \li string:    arbitrary parameters.
  */
-static const std::string IGPCMD_CMD = "CMD";
+constexpr const char* const IGPCMD_CMD = "CMD";
 
 /**
  * Sent by the metaserver to inform the client, that the list of games was changed. No payload is
@@ -315,7 +316,7 @@ static const std::string IGPCMD_CMD = "CMD";
  *
  * To get the new list of games, the client must send \ref IGPCMD_GAMES
  */
-static const std::string IGPCMD_GAMES_UPDATE = "GAMES_UPDATE";
+constexpr const char* const IGPCMD_GAMES_UPDATE = "GAMES_UPDATE";
 
 /**
  * Sent by the client without payload to ask for the current list of games.
@@ -328,7 +329,7 @@ static const std::string IGPCMD_GAMES_UPDATE = "GAMES_UPDATE";
  *                this does not mean that gaming will work when the versions differ
  * }
  */
-static const std::string IGPCMD_GAMES = "GAMES";
+constexpr const char* const IGPCMD_GAMES = "GAMES";
 
 /**
  * Sent by the metaserver to inform the client, that the list of clients was changed. No payload is
@@ -337,7 +338,7 @@ static const std::string IGPCMD_GAMES = "GAMES";
  *
  * To get the new list of clients, the client must send \ref IGPCMD_CLIENT
  */
-static const std::string IGPCMD_CLIENTS_UPDATE = "CLIENTS_UPDATE";
+constexpr const char* const IGPCMD_CLIENTS_UPDATE = "CLIENTS_UPDATE";
 
 /**
  * Sent by the client without payload to ask for the current list of clients.
@@ -350,7 +351,7 @@ static const std::string IGPCMD_CLIENTS_UPDATE = "CLIENTS_UPDATE";
  * \li string:    Clients rights (see client rights section above)
  * }
  */
-static const std::string IGPCMD_CLIENTS = "CLIENTS";
+constexpr const char* const IGPCMD_CLIENTS = "CLIENTS";
 
 /**
  * Sent by the client to announce the startup of a game with following payload:
@@ -367,7 +368,7 @@ static const std::string IGPCMD_CLIENTS = "CLIENTS";
  * When the client connects to the relay within kInternetGamingTimeout milliseconds,
  * the metaserver lists the game as connectable, else it removes the game from the list of games.
  */
-static const std::string IGPCMD_GAME_OPEN = "GAME_OPEN";
+constexpr const char* const IGPCMD_GAME_OPEN = "GAME_OPEN";
 
 /**
  * Sent by the client to initialize the connection to a game with following payload:
@@ -383,7 +384,7 @@ static const std::string IGPCMD_GAME_OPEN = "GAME_OPEN";
  * \note as soon as this message is sent, the metaserver will list the client as connected to the
  * game.
  */
-static const std::string IGPCMD_GAME_CONNECT = "GAME_CONNECT";
+constexpr const char* const IGPCMD_GAME_CONNECT = "GAME_CONNECT";
 
 /**
  * Sent by the client to close the connection to a game without payload, as the client can
@@ -398,7 +399,7 @@ static const std::string IGPCMD_GAME_CONNECT = "GAME_CONNECT";
  *       removed from list as well. However other clients connected to that game should send the
  *       \ref IGPCMD_GAME_DISCONNECT themselves.
  */
-static const std::string IGPCMD_GAME_DISCONNECT = "GAME_DISCONNECT";
+constexpr const char* const IGPCMD_GAME_DISCONNECT = "GAME_DISCONNECT";
 
 /**
  * Sent by the game hosting client to announce the start of the game. No payload.
@@ -410,6 +411,6 @@ static const std::string IGPCMD_GAME_DISCONNECT = "GAME_DISCONNECT";
  *
  * Sent by the metaserver to acknowledge the start without payload.
  */
-static const std::string IGPCMD_GAME_START = "GAME_START";
+constexpr const char* const IGPCMD_GAME_START = "GAME_START";
 
 #endif  // end of include guard: WL_NETWORK_INTERNET_GAMING_PROTOCOL_H

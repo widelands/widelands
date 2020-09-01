@@ -9,7 +9,7 @@ include "scripting/richtext.lua"
 
 return {
    func = function(terrain_name)
-      set_textdomain("widelands_editor")
+      push_textdomain("widelands_editor")
       local world = wl.World();
       local terrain = wl.Editor():get_terrain_description(terrain_name)
 
@@ -77,6 +77,7 @@ return {
          result = result .. p(_"No trees will grow here.")
       end
 
+      pop_textdomain()
       return {
          title = terrain.descname,
          text = div("width=100%", result)

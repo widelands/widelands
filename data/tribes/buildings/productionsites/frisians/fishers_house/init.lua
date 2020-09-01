@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_fishers_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Fisher’s House"),
@@ -44,25 +45,17 @@ tribes:new_productionsite_type {
       prohibited_till = 490
    },
 
-   indicate_workarea_overlaps = {
-      frisians_fishers_house = false,
-   },
-
    working_positions = {
       frisians_fisher = 1
    },
 
-   outputs = {
-      "fish"
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _"fishing",
          actions = {
             "callworker=fish",
-            "sleep=16000" -- TODO(stonerl): reduce to 3000 and move 13000 to the worker
+            "sleep=duration:16s" -- TODO(stonerl): reduce to 3s and move 13s to the worker
          }
       },
    },
@@ -73,3 +66,5 @@ tribes:new_productionsite_type {
       message = pgettext ("frisians_building", "The fisher working out of this fisher’s house can’t find any fish in his work area."),
    },
 }
+
+pop_textdomain()

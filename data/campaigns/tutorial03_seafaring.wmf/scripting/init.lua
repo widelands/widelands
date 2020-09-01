@@ -5,7 +5,7 @@
 plr = wl.Game().players[1]
 map = wl.Game().map
 
-set_textdomain("scenario_tutorial03_seafaring.wmf")
+push_textdomain("scenario_tutorial03_seafaring.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/field_animations.lua"

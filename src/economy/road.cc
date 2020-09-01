@@ -19,6 +19,7 @@
 
 #include "economy/road.h"
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -178,7 +179,8 @@ void Road::request_carrier_callback(
 	 * Oops! We got a request_callback but don't have the request.
 	 * Try to send him home.
 	 */
-	log("Road(%u): got a request_callback but do not have the request\n", road.serial());
+	log_warn_time(game.get_gametime(),
+	              "Road(%u): got a request_callback but do not have the request\n", road.serial());
 	delete &rq;
 	w->start_task_gowarehouse(game);
 }
@@ -217,8 +219,9 @@ void Road::assign_carrier(Carrier& c, uint8_t slot) {
 
 	delete s.carrier_request;
 	s.carrier_request = nullptr;
-	if (Carrier* const current_carrier = s.carrier.get(owner().egbase()))
+	if (Carrier* const current_carrier = s.carrier.get(owner().egbase())) {
 		current_carrier->set_location(nullptr);
+	}
 
 	carrier_slots_[slot].carrier = &c;
 	carrier_slots_[slot].carrier_request = nullptr;
@@ -250,13 +253,13 @@ void Road::postsplit(Game& game, Flag& flag) {
 	path.truncate(index);
 	secondpath.trim_start(index);
 
-	molog("splitting road: first part:\n");
+	molog(game.get_gametime(), "splitting road: first part:\n");
 	for (const Coords& coords : path.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
-	molog("                second part:\n");
+	molog(game.get_gametime(), "                second part:\n");
 	for (const Coords& coords : secondpath.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
 
 	// change road size and reattach
@@ -296,8 +299,9 @@ void Road::postsplit(Game& game, Flag& flag) {
 			if (dynamic_cast<Building const*>(map.get_immovable(w->get_position()))) {
 				Coords pos;
 				map.get_brn(w->get_position(), &pos);
-				if (pos == path.get_start())
+				if (pos == path.get_start()) {
 					idx = 0;
+				}
 			}
 		}
 
@@ -507,6 +511,6 @@ void Road::pay_for_building() {
 
 void Road::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
-	molog("wallet: %i\n", wallet_);
+	molog(egbase.get_gametime(), "wallet: %i\n", wallet_);
 }
 }  // namespace Widelands

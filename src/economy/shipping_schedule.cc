@@ -22,6 +22,7 @@
 #include <memory>
 #include <set>
 
+#include "base/log.h"
 #include "economy/expedition_bootstrap.h"
 #include "economy/portdock.h"
 #include "economy/ship_fleet.h"
@@ -73,7 +74,7 @@ constexpr int16_t kNearbyDockMaxDistanceFactor = 8 * 1800;
 
 #define sslog(...)                                                                                 \
 	if (g_verbose)                                                                                  \
-	log(__VA_ARGS__)
+	log_dbg_time(game.get_gametime(), __VA_ARGS__)
 
 ShippingSchedule::ShippingSchedule(ShipFleet& f) : fleet_(f), last_updated_(0), loader_(nullptr) {
 	assert(!fleet_.active());
@@ -86,6 +87,18 @@ bool ShippingSchedule::empty() const {
 		}
 	}
 	return true;
+}
+
+bool ShippingSchedule::is_busy(const Ship& ship) const {
+	if (ship.get_nritems()) {
+		return true;
+	}
+	for (const SchedulingState& ss : plans_.at(const_cast<Ship*>(&ship))) {
+		if (ss.expedition || !ss.load_there.empty()) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void ShippingSchedule::start_expedition(Game& game, Ship& ship, PortDock& port) {
@@ -204,17 +217,17 @@ bool ShippingSchedule::do_remove_port_from_plan(Game& game,
 				}
 			}
 			if (closest) {
-				log("Ship %s is carrying %u items, rerouting to NEW destination %u\n",
-				    ship.get_shipname().c_str(), ship.get_nritems(), closest->serial());
+				sslog("Ship %s is carrying %u items, rerouting to NEW destination %u\n",
+				      ship.get_shipname().c_str(), ship.get_nritems(), closest->serial());
 				ship_plan.push_back(SchedulingState(closest, false, dist));
 				ship.set_destination(game, closest);
 			} else {
 				// PANIC! There are no ports at all left!!
 				// But we might still have cargo!!! What should we do????
 				// Stay calm. Just do nothing. Nothing at all.
-				log("Ship %s is carrying %u items and there are no ports left, setting NO "
-				    "destination\n",
-				    ship.get_shipname().c_str(), ship.get_nritems());
+				sslog("Ship %s is carrying %u items and there are no ports left, setting NO "
+				      "destination\n",
+				      ship.get_shipname().c_str(), ship.get_nritems());
 				ship.set_destination(game, nullptr);
 			}
 		} else {  // the ships has more destinations in its plan, just reroute to the next one
@@ -346,7 +359,8 @@ void ShippingSchedule::ship_added(Game& game, Ship& s) {
 	}
 	plans_[&s].push_back(SchedulingState(closest, false, dist));
 	s.set_destination(game, closest);
-	sslog("Sent to %u\n\n", closest->serial());
+	// Check for closest to make clang-tidy happy
+	sslog("Sent to %u\n\n", closest ? closest->serial() : 0);
 }
 
 void ShippingSchedule::port_added(Game& game, PortDock& dock) {
@@ -381,10 +395,11 @@ struct ScoredShip {
 
 	static inline uint64_t calc_score(uint64_t capacity, uint64_t eta, uint64_t detour) {
 		// This needs to use uint64_t because the intermediate results will overflow uint32_t
-		return eta > kHorriblyLongDuration ? 0 : capacity * kMinScoreForImmediateAcceptFactor *
-		                                            kHorriblyLongDuration * kHorriblyLongDuration /
-		                                            (std::max(eta, kWonderfullyShortDuration) *
-		                                             std::max(detour, kWonderfullyShortDuration));
+		return eta > kHorriblyLongDuration ? 0 :
+		                                     capacity * kMinScoreForImmediateAcceptFactor *
+		                                        kHorriblyLongDuration * kHorriblyLongDuration /
+		                                        (std::max(eta, kWonderfullyShortDuration) *
+		                                         std::max(detour, kWonderfullyShortDuration));
 	}
 
 	ScoredShip(Ship* s, uint32_t c, Duration e, Duration d)
@@ -1557,7 +1572,9 @@ Duration ShippingSchedule::update(Game& game) {
 		}
 		assert(closest);
 		if (dist < kNearbyDockMaxDistanceFactor) {
-			sslog("%s is already near %u\n", ship->get_shipname().c_str(), closest->serial());
+			// Check for closest to make clang-tidy happy
+			sslog("%s is already near %u\n", ship->get_shipname().c_str(),
+			      closest ? closest->serial() : 0);
 		} else {
 			plans_[ship].push_back(SchedulingState(closest, false, dist));
 			ship->set_destination(game, closest);
@@ -1580,9 +1597,11 @@ Duration ShippingSchedule::update(Game& game) {
 }
 
 void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
+	const int64_t t = e.get_gametime();
 	for (const auto& plan : plans_) {
-		log("· %s: carrying %u items (capacity %u)\n", plan.first.get(e)->get_shipname().c_str(),
-		    plan.first.get(e)->get_nritems(), plan.first.get(e)->get_capacity());
+		log_dbg_time(t, "· %s: carrying %u items (capacity %u)\n",
+		             plan.first.get(e)->get_shipname().c_str(), plan.first.get(e)->get_nritems(),
+		             plan.first.get(e)->get_capacity());
 		std::map<Serial, uint32_t> dests;
 		for (uint32_t i = plan.first.get(e)->get_nritems(); i; --i) {
 			const Serial si = plan.first.get(e)->get_item(i - 1).destination_dock_.serial();
@@ -1594,19 +1613,20 @@ void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
 			}
 		}
 		for (const auto& pair : dests) {
-			log("  – %u items to %u\n", pair.second, pair.first);
+			log_dbg_time(t, "  – %u items to %u\n", pair.second, pair.first);
 		}
-		log("  SCHEDULE: %" PRIuS " stations\n", plan.second.size());
+		log_dbg_time(t, "  SCHEDULE: %" PRIuS " stations\n", plan.second.size());
 		for (const SchedulingState& ss : plan.second) {
-			log("          · in %u ms at %u\n", ss.duration_from_previous_location, ss.dock.serial());
-			log("            load there: ");
+			log_dbg_time(t, "          · in %u ms at %u\n", ss.duration_from_previous_location,
+			             ss.dock.serial());
+			log_dbg_time(t, "            load there: ");
 			if (ss.expedition) {
-				log("expedition\n");
+				log_dbg_time(t, "expedition\n");
 				assert(ss.load_there.empty());
 			} else {
-				log("cargo for %" PRIuS " destinations\n", ss.load_there.size());
+				log_dbg_time(t, "cargo for %" PRIuS " destinations\n", ss.load_there.size());
 				for (const auto& pair : ss.load_there) {
-					log("            – %u items to %u\n", pair.second, pair.first.serial());
+					log_dbg_time(t, "            – %u items to %u\n", pair.second, pair.first.serial());
 				}
 			}
 		}
@@ -1625,10 +1645,7 @@ void ShippingSchedule::save(const EditorGameBase& egbase,
 	for (const auto& pair : plans_) {
 		fw.unsigned_32(mos.get_object_file_index(*pair.first.get(egbase)));
 
-		// TODO(Nordfriese): Replace with at() when we break savegame compatibility
-		// (can only be not-present in compatibility cases)
-		auto it = last_actual_duration_recalculation_.find(pair.first);
-		fw.unsigned_32(it == last_actual_duration_recalculation_.end() ? 0 : it->second);
+		fw.unsigned_32(last_actual_duration_recalculation_.at(pair.first));
 
 		fw.unsigned_32(pair.second.size());
 		for (const SchedulingState& ss : pair.second) {
@@ -1698,39 +1715,4 @@ void ShippingSchedule::load_pointers(MapObjectLoader& mol) {
 	loader_.reset(nullptr);
 }
 
-// TODO(Nordfriese): DELETE this function when we break savegame compatibility
-void ShippingSchedule::load_finish(EditorGameBase& egbase) {
-	log("Initializing ShippingSchedule from legacy game state. Pray to Lutas that your ships will "
-	    "sail more or less where you want them to go to.\n");
-	assert(!loader_);
-	assert(empty());
-	for (Ship* ship : fleet_.get_ships()) {
-		last_actual_duration_recalculation_[ship] = egbase.get_gametime();
-		ShipPlan& sp = plans_[ship];
-		assert(sp.empty());
-		std::set<Serial> pushed;
-		if (PortDock* pd = ship->get_destination()) {
-			Path path;
-			int32_t d = -1;
-			ship->calculate_sea_route(egbase, *pd, &path);
-			egbase.map().calc_cost(path, &d, nullptr);
-			assert(d >= 0);
-			sp.push_back(SchedulingState(pd, false, d));
-			pushed.insert(pd->serial());
-		}
-		for (const ShippingItem& si : ship->items_) {
-			if (!pushed.count(si.destination_dock_.serial())) {
-				if (PortDock* pd = si.destination_dock_.get(egbase)) {
-					Path path;
-					int32_t d = -1;
-					fleet_.get_path(*sp.back().dock.get(egbase), *pd, path);
-					egbase.map().calc_cost(path, &d, nullptr);
-					assert(d >= 0);
-					sp.push_back(SchedulingState(pd, false, d));
-					pushed.insert(pd->serial());
-				}
-			}
-		}
-	}
-}
-}
+}  // namespace Widelands

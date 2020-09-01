@@ -33,7 +33,7 @@ namespace Widelands {
  */
 WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table)
    : MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table),
-     ai_hints_(new WareHints(table.get_string("name"), *table.get_table("preciousness"))) {
+     ai_hints_(new WareWorkerHints()) {
 	if (helptext_script().empty()) {
 		throw GameDataError("Ware %s has no helptext script", name().c_str());
 	}
@@ -43,19 +43,25 @@ WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table)
 	if (icon_filename().empty()) {
 		throw GameDataError("Ware %s has no menu icon", name().c_str());
 	}
-	i18n::Textdomain td("tribes");
-
-	std::unique_ptr<LuaTable> items_table = table.get_table("default_target_quantity");
-	for (const std::string& key : items_table->keys<std::string>()) {
-		default_target_quantities_.emplace(key, items_table->get_int(key));
-	}
 }
 
-DescriptionIndex WareDescr::default_target_quantity(const std::string& tribename) const {
+Quantity WareDescr::default_target_quantity(const std::string& tribename) const {
 	if (default_target_quantities_.count(tribename) > 0) {
 		return default_target_quantities_.at(tribename);
 	}
 	return kInvalidWare;
+}
+
+void WareDescr::set_default_target_quantity(const std::string& tribename, int quantity) {
+	if (quantity < 0) {
+		throw GameDataError("default_target_quantity %d for tribe '%s', ware '%s' must be >=0",
+		                    quantity, tribename.c_str(), name().c_str());
+	}
+	default_target_quantities_[tribename] = quantity;
+}
+
+void WareDescr::set_preciousness(const std::string& tribename, int preciousness) {
+	ai_hints_->set_preciousness(name(), tribename, preciousness);
 }
 
 bool WareDescr::has_demand_check(const std::string& tribename) const {

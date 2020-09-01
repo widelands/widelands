@@ -22,7 +22,6 @@
 
 #include <boost/signals2/signal.hpp>
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
 #include "graphic/animation/diranimations.h"
@@ -30,6 +29,7 @@
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/info_to_draw.h"
+#include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
@@ -41,52 +41,14 @@ namespace Widelands {
 class MapObject;
 class Player;
 
-// This enum lists the available classes of Map Objects.
-enum class MapObjectType : uint8_t {
-	MAPOBJECT = 0,  // Root superclass
-
-	WARE,  //  class WareInstance
-	BATTLE,
-	SHIP_FLEET,
-	FERRY_FLEET,
-
-	BOB = 10,  // Bob
-	CRITTER,   // Bob -- Critter
-	SHIP,      // Bob -- Ship
-	WORKER,    // Bob -- Worker
-	CARRIER,   // Bob -- Worker -- Carrier
-	SOLDIER,   // Bob -- Worker -- Soldier
-	FERRY,     // Bob -- Worker -- Ferry
-
-	// everything below is at least a BaseImmovable
-	IMMOVABLE = 30,
-
-	// everything below is at least a PlayerImmovable
-	FLAG = 40,  // Flag
-	PORTDOCK,   // Portdock
-	ROADBASE,   // Roadbase
-	ROAD,       // Roadbase -- Road
-	WATERWAY,   // Roadbase -- Waterway
-
-	// everything below is at least a Building
-	BUILDING = 100,    // Building
-	CONSTRUCTIONSITE,  // Building -- Constructionsite
-	DISMANTLESITE,     // Building -- Dismantlesite
-	WAREHOUSE,         // Building -- Warehouse
-	MARKET,            // Building -- Market
-	PRODUCTIONSITE,    // Building -- Productionsite
-	MILITARYSITE,      // Building -- Productionsite -- Militarysite
-	TRAININGSITE       // Building -- Productionsite -- Trainingsite
-};
-
-// Returns a string representation for 'type'.
-std::string to_string(MapObjectType type);
-
 /**
  * Base class for descriptions of worker, files and so on. This must just
  * link them together
  */
-struct MapObjectDescr {
+class MapObjectDescr {
+public:
+	using AttributeIndex = uint32_t;
+	using Attributes = std::vector<AttributeIndex>;
 
 	enum class OwnerType { kWorld, kTribe };
 
@@ -135,15 +97,14 @@ struct MapObjectDescr {
 	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
 	const std::string& icon_filename() const;
 
-	bool has_attribute(uint32_t) const;
-	static uint32_t get_attribute_id(const std::string& name, bool add_if_not_exists = false);
+	bool has_attribute(AttributeIndex) const;
+	const MapObjectDescr::Attributes& attributes() const;
+	static AttributeIndex get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 protected:
-	// Add all the special attributes to the attribute list. Only the 'allowed_special'
-	// attributes are allowed to appear - i.e. resi are fine for immovables.
-	void add_attributes(const std::vector<std::string>& attributes,
-	                    const std::set<uint32_t>& allowed_special);
-	void add_attribute(uint32_t attr);
+	// Add attributes to the attribute list
+	void add_attributes(const std::vector<std::string>& attribs);
+	void add_attribute(AttributeIndex attr);
 
 	/// Sets the directional animations in 'anims' with the animations
 	/// '&lt;basename&gt;_(ne|e|se|sw|w|nw)'.
@@ -158,8 +119,9 @@ private:
 	void check_representative_image();
 
 	using Anims = std::map<std::string, uint32_t>;
-	using AttribMap = std::map<std::string, uint32_t>;
-	using Attributes = std::vector<uint32_t>;
+
+	static std::map<std::string, AttributeIndex> attribute_names_;
+	Attributes attribute_ids_;
 
 	const MapObjectType type_;    /// Subclasses pick from the enum above
 	std::string const name_;      /// The name for internal reference
@@ -167,10 +129,7 @@ private:
 	/// The path and filename to the helptext script. Can be empty, but some subtypes like buildings,
 	/// wares and workers require it.
 	const std::string helptext_script_;
-	Attributes attributes_;
 	Anims anims_;
-	static uint32_t dyn_attribhigh_;  ///< highest attribute ID used
-	static AttribMap dyn_attribs_;
 	std::string icon_filename_;  // Filename for the menu icon
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
@@ -221,18 +180,6 @@ class MapObject {
 	MO_DESCR(MapObjectDescr)
 
 public:
-	/// Some default, globally valid, attributes.
-	/// Other attributes (such as "harvestable corn") could be
-	/// allocated dynamically (?)
-	enum Attribute {
-		CONSTRUCTIONSITE = 1,  ///< assume BUILDING
-		WORKER,                ///< assume BOB
-		SOLDIER,               ///<  assume WORKER
-		RESI,                  ///<  resource indicator, assume IMMOVABLE
-
-		HIGHEST_FIXED_ATTRIBUTE
-	};
-
 	struct LogSink {
 		virtual void log(const std::string& str) = 0;
 		virtual ~LogSink() {
@@ -300,10 +247,7 @@ public:
 		return owner_;
 	}
 
-	const Player& owner() const {
-		assert(get_owner());
-		return *owner_;
-	}
+	const Player& owner() const;
 
 	// Header bytes to distinguish between data packages for the different
 	// MapObject classes. Be careful in changing those, since they are written
@@ -407,11 +351,7 @@ protected:
 	                  const float scale,
 	                  RenderTarget* dst) const;
 
-#ifdef _WIN32
-	void molog(char const* fmt, ...) const __attribute__((format(gnu_printf, 2, 3)));
-#else
-	void molog(char const* fmt, ...) const __attribute__((format(__printf__, 2, 3)));
-#endif
+	void molog(uint32_t gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
 
 	const MapObjectDescr* descr_;
 	Serial serial_;
@@ -441,8 +381,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
 struct ObjectManager {
 	using MapObjectMap = std::unordered_map<Serial, MapObject*>;
 
-	ObjectManager() {
-		lastserial_ = 0;
+	ObjectManager() : lastserial_(0), is_cleaning_up_(false) {
 	}
 	~ObjectManager();
 
@@ -474,9 +413,15 @@ struct ObjectManager {
 	 */
 	std::vector<Serial> all_object_serials_ordered() const;
 
+	bool is_cleaning_up() const {
+		return is_cleaning_up_;
+	}
+
 private:
 	Serial lastserial_;
 	MapObjectMap objects_;
+
+	bool is_cleaning_up_;
 
 	DISALLOW_COPY_AND_ASSIGN(ObjectManager);
 };

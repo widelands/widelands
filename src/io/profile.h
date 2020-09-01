@@ -56,12 +56,12 @@ public:
 	struct Value {
 		Value(const std::string& name, const char* const value);
 		Value(const Value&);
-		Value(Value&& other);
+		Value(Value&& other) noexcept;
 
 		// destructor would be empty
 
-		Value& operator=(Value);
-		Value& operator=(Value&& other);
+		Value& operator=(Value) noexcept;
+		Value& operator=(Value&& other) noexcept;
 
 		char const* get_name() const {
 			return name_.c_str();

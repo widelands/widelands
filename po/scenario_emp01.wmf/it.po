@@ -10,13 +10,14 @@
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
+# Samuele Battarra <battarsa@email.it>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-08 12:28+0000\n"
+"Last-Translator: Samuele Battarra <battarsa@email.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,17 +27,17 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:25
 msgid "Build a blockhouse"
-msgstr "Costruisci una caserma"
+msgstr "Costruisci un posto di guardia"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:27
 msgid "Blockhouse"
-msgstr "Caserma"
+msgstr "Posto di guardia"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:28
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr "Costruisci una caserma nel simbolo della casa rossa ad est delle foreste, alla destra del tuo quartier generale provvisorio"
+msgstr "Costruisci un posto di guardia nel simbolo della casa rossa ad est delle foreste, alla destra del tuo quartier generale provvisorio."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Build a lumberjack’s house"
@@ -229,7 +230,7 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr "Dovremmo davvero costruire una caserma nella parte orientale della foresta. In tal modo uno dei miei uomini potrebbe vigilare nell'oscurità e mantenerci al sicuro da queste creature."
+msgstr "Dovremmo davvero costruire un posto di guardia nella parte orientale della foresta. In tal modo uno dei miei uomini potrebbe vigilare nell'oscurità e mantenerci al sicuro da queste creature."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:139
 msgid "Safe For Now"
@@ -244,7 +245,7 @@ msgstr "Saledus parla con un sospiro di sollievo..."
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr "Sire, ho visto che la costruzione della caserma è stata completata, così ho assegnato a uno dei miei migliori soldati di vegliare sul deserto."
+msgstr "Sire, ho visto che la costruzione del posto di guardia è stata completata, così ho assegnato a uno dei miei migliori soldati di vegliare sul deserto."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:145
@@ -273,7 +274,7 @@ msgstr "Saluti, Lutius! Ho appena incontrato Saledus qua fuori."
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr "Mi ha parlato del fortino. Ecco, non penso che avremo bisogno di altri fortini. Dovremmo invece concentrarci su altre cose."
+msgstr "Mi ha parlato del posto di guardia. Ecco, non penso che avremo bisogno di altri fortini – dovremmo invece concentrarci su altre cose."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:159
@@ -303,7 +304,7 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr "Ma, purtroppo, i tronchi sono inutili per riparare la nostra nave - abbiamo bisogno di trasformarli in tavole, che sono necessarie per ogni nave ed anche i più grandi edifici ne hanno bisogno. Quindi dovremmo costruire una segheria - non appena sarà disponibile abbastanza spazio per costruirla."
+msgstr "Ma, purtroppo, i tronchi sono inutili per riparare la nostra nave - abbiamo bisogno di trasformarli in tavole, che sono necessarie per ogni nave ed anche i più grandi edifici ne hanno bisogno. Quindi dovremmo costruire una segheria – non appena sarà disponibile abbastanza spazio per costruirla."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:178
 msgid "Amalea comes in…"
@@ -432,8 +433,3 @@ msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
 msgstr "Mio Signore, hai reso questa penisola un posto molto sicuro. È il momento di muoversi!"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

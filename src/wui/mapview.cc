@@ -24,6 +24,7 @@
 #include "base/macros.h"
 #include "base/math.h"
 #include "graphic/game_renderer.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/map_objects/world/world.h"
 #include "wlapplication.h"
@@ -295,6 +296,23 @@ bool MapView::ViewArea::contains_map_pixel(const Vector2f& map_pixel) const {
 	return std::abs(dist.x) <= (rect_.w / 2.f) && std::abs(dist.y) <= (rect_.h / 2.f);
 }
 
+bool MapView::View::zoom_near(float other_zoom) const {
+	constexpr float epsilon = 1e-5;
+	return std::abs(zoom - other_zoom) < epsilon;
+}
+
+bool MapView::View::view_near(const View& other) const {
+	constexpr float epsilon = 1e-5;
+	return zoom_near(other.zoom) && std::abs(viewpoint.x - other.viewpoint.x) < epsilon &&
+	       std::abs(viewpoint.y - other.viewpoint.y) < epsilon;
+}
+
+bool MapView::View::view_roughly_near(const View& other) const {
+	return zoom_near(other.zoom) &&
+	       std::abs(viewpoint.x - other.viewpoint.x) < g_gr->get_xres() / 2 &&
+	       std::abs(viewpoint.y - other.viewpoint.y) < g_gr->get_yres() / 2;
+}
+
 MapView::MapView(
    UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
    : UI::Panel(parent, x, y, w, h),
@@ -345,7 +363,8 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 }
 
 FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
-                                    Workareas workarea,
+                                    const Widelands::Player* player,
+                                    const Workareas& workarea,
                                     bool grid,
                                     RenderTarget* dst) {
 	uint32_t now = SDL_GetTicks();
@@ -389,10 +408,16 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 		break;
 	}
 
-	fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
+	// If zoom is 1x align to whole pixels to get pixel-perfect sprite rendering.
+	if (view_.zoom_near(1)) {
+		fields_to_draw_.reset(
+		   egbase, Vector2f(round(view_.viewpoint.x), round(view_.viewpoint.y)), view_.zoom, dst);
+	} else {
+		fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
+	}
 	const float scale = 1.f / view_.zoom;
 	::draw_terrain(
-	   egbase.get_gametime(), egbase.world(), fields_to_draw_, scale, workarea, grid, dst);
+	   egbase.get_gametime(), egbase.world(), fields_to_draw_, scale, workarea, grid, player, dst);
 	return &fields_to_draw_;
 }
 
@@ -521,8 +546,7 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 		return true;
 	}
 	constexpr float kPercentPerMouseWheelTick = 0.02f;
-	float zoom = view_.zoom * static_cast<float>(std::pow(
-	                             1.f - math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
+	float zoom = view_.zoom * static_cast<float>(std::pow(1.f - kPercentPerMouseWheelTick, y));
 	zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
 	return true;
 }
@@ -598,6 +622,7 @@ Widelands::NodeAndTriangle<> MapView::track_sel(const Vector2i& p) {
 }
 
 bool MapView::scroll_map() {
+	const bool numpad_diagonalscrolling = get_config_bool("numpad_diagonalscrolling", false);
 	// arrow keys
 	const bool kUP = get_key_state(SDL_SCANCODE_UP);
 	const bool kDOWN = get_key_state(SDL_SCANCODE_DOWN);
@@ -619,16 +644,16 @@ bool MapView::scroll_map() {
 	int32_t distance_to_scroll_y = 0;
 
 	// check the directions
-	if (kUP || kNP7 || kNP8 || kNP9) {
+	if (kUP || kNP8 || (numpad_diagonalscrolling && (kNP7 || kNP9))) {
 		distance_to_scroll_y -= scroll_distance_y;
 	}
-	if (kDOWN || kNP1 || kNP2 || kNP3) {
+	if (kDOWN || kNP2 || (numpad_diagonalscrolling && (kNP1 || kNP3))) {
 		distance_to_scroll_y += scroll_distance_y;
 	}
-	if (kLEFT || kNP1 || kNP4 || kNP7) {
+	if (kLEFT || kNP4 || (numpad_diagonalscrolling && (kNP1 || kNP7))) {
 		distance_to_scroll_x -= scroll_distance_x;
 	}
-	if (kRIGHT || kNP3 || kNP6 || kNP9) {
+	if (kRIGHT || kNP6 || (numpad_diagonalscrolling && (kNP3 || kNP9))) {
 		distance_to_scroll_x += scroll_distance_x;
 	}
 

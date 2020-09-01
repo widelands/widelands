@@ -21,8 +21,8 @@
 
 #include "economy/input_queue.h"
 #include "economy/request.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/player.h"
 #include "wui/interactive_gamebase.h"
@@ -50,7 +50,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      decrease_max_fill_(nullptr),
      index_(queue.get_index()),
      type_(queue.get_type()),
-     max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)),
+     max_fill_indicator_(g_image_cache->get(pic_max_fill_indicator)),
      cache_size_(queue.get_max_size()),
      cache_max_fill_(queue.get_max_fill()),
      total_height_(0),
@@ -99,7 +99,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      decrease_max_fill_(nullptr),
      index_(di),
      type_(ww),
-     max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)),
+     max_fill_indicator_(g_image_cache->get(pic_max_fill_indicator)),
      total_height_(0),
      no_capacity_buttons_(no_capacity_buttons),
      no_priority_buttons_(no_priority_buttons) {
@@ -186,8 +186,9 @@ void InputQueueDisplay::max_size_changed() {
  * Compare the current InputQueue state with the cached state; update if necessary.
  */
 void InputQueueDisplay::think() {
-	if (static_cast<uint32_t>(check_max_size()) != cache_size_)
+	if (static_cast<uint32_t>(check_max_size()) != cache_size_) {
 		max_size_changed();
+	}
 
 	// TODO(sirver): It seems cache_max_fill_ is not really useful for anything.
 	if (static_cast<uint32_t>(check_max_fill()) != cache_max_fill_) {
@@ -200,8 +201,9 @@ void InputQueueDisplay::think() {
  * Render the current InputQueue state.
  */
 void InputQueueDisplay::draw(RenderTarget& dst) {
-	if (!cache_size_)
+	if (!cache_size_) {
 		return;
+	}
 
 	cache_max_fill_ = check_max_fill();
 
@@ -249,8 +251,9 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
  */
 void InputQueueDisplay::update_priority_buttons() {
 
-	if (type_ != Widelands::wwWARE)
+	if (type_ != Widelands::wwWARE) {
 		return;
+	}
 
 	if (cache_size_ <= 0 || no_priority_buttons_) {
 		delete priority_radiogroup_;
@@ -272,13 +275,13 @@ void InputQueueDisplay::update_priority_buttons() {
 		priority_radiogroup_ = new UI::Radiogroup();
 
 		priority_radiogroup_->add_button(
-		   this, pos, g_gr->images().get(pic_priority_high), _("Highest priority"));
+		   this, pos, g_image_cache->get(pic_priority_high), _("Highest priority"));
 		pos.y += PriorityButtonSize;
 		priority_radiogroup_->add_button(
-		   this, pos, g_gr->images().get(pic_priority_normal), _("Normal priority"));
+		   this, pos, g_image_cache->get(pic_priority_normal), _("Normal priority"));
 		pos.y += PriorityButtonSize;
 		priority_radiogroup_->add_button(
-		   this, pos, g_gr->images().get(pic_priority_low), _("Lowest priority"));
+		   this, pos, g_image_cache->get(pic_priority_low), _("Lowest priority"));
 	}
 
 	int32_t priority = -1;
@@ -310,8 +313,9 @@ void InputQueueDisplay::update_priority_buttons() {
 	priority_radiogroup_->clicked.connect([this]() { radiogroup_clicked(); });
 
 	bool const can_act = igb_.can_act(building_.owner().player_number());
-	if (!can_act)
+	if (!can_act) {
 		priority_radiogroup_->set_enabled(false);
+	}
 }
 
 /**
@@ -323,8 +327,9 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	increase_max_fill_ = nullptr;
 	decrease_max_fill_ = nullptr;
 
-	if (cache_size_ <= 0 || no_capacity_buttons_)
+	if (cache_size_ <= 0 || no_capacity_buttons_) {
 		return;
+	}
 
 	uint32_t x = Border;
 	uint32_t y = Border + (total_height_ - 2 * Border - kWareMenuPicWidth) / 2;
@@ -333,10 +338,9 @@ void InputQueueDisplay::update_max_fill_buttons() {
 
 	decrease_max_fill_ = new UI::Button(
 	   this, "decrease_max_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
-	   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_left.png"),
+	   UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/ui_basic/scrollbar_left.png"),
 	   (tooltip_format %
-	    g_gr->styles()
-	       .font_style(UI::FontStyle::kTooltipHeader)
+	    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 	       .as_font_tag(
 	          /** TRANSLATORS: Button tooltip in in a building's wares input queue */
 	          _("Decrease the number of wares you want to be stored here"))
@@ -358,15 +362,13 @@ void InputQueueDisplay::update_max_fill_buttons() {
 
 	increase_max_fill_ = new UI::Button(
 	   this, "increase_max_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
-	   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_right.png"),
+	   UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/ui_basic/scrollbar_right.png"),
 	   (tooltip_format
 
-	    %
-	    g_gr->styles()
-	       .font_style(UI::FontStyle::kTooltipHeader)
-	       .as_font_tag(
-	          /** TRANSLATORS: Button tooltip in a building's wares input queue */
-	          _("Increase the number of wares you want to be stored here"))
+	    % g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+	         .as_font_tag(
+	            /** TRANSLATORS: Button tooltip in a building's wares input queue */
+	            _("Increase the number of wares you want to be stored here"))
 
 	    %
 	    as_listitem(
@@ -533,9 +535,11 @@ void InputQueueDisplay::compute_max_fill_buttons_enabled_state() {
 	// Disable those buttons for replay watchers
 	bool const can_act = igb_.can_act(building_.owner().player_number());
 	if (!can_act) {
-		if (increase_max_fill_)
+		if (increase_max_fill_) {
 			increase_max_fill_->set_enabled(false);
-		if (decrease_max_fill_)
+		}
+		if (decrease_max_fill_) {
 			decrease_max_fill_->set_enabled(false);
+		}
 	}
 }

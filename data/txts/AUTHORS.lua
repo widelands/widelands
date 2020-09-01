@@ -1,7 +1,7 @@
 include "txts/format_authors.lua"
 include "txts/developers.lua"
 
-set_textdomain("texts")
+push_textdomain("texts")
 
 -- Uses structured data to format authors
 function list_authors()
@@ -23,10 +23,11 @@ function list_authors()
 end
 
 -- Main script
-return {
-   title = _"Developers",
-   text = rt(
+local r = {
+   rt(
       p_font("align=center", "size=28 color=2F9131", _"Widelands Development Team") ..
       list_authors()
    )
 }
+pop_textdomain()
+return r

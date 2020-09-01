@@ -304,7 +304,7 @@ void LayeredFileSystem::fs_rename(const std::string& old_name, const std::string
 // or the first directory on the stack we can find.
 // This heuristic is justified by the fact that ths is
 // where we will create new files.
-unsigned long long LayeredFileSystem::disk_space() {
+unsigned long long LayeredFileSystem::disk_space() {  // NOLINT
 	if (home_) {
 		return home_->disk_space();
 	}

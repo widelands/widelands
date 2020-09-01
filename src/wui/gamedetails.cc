@@ -26,8 +26,8 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "graphic/graphic.h"
 #include "graphic/image_io.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -68,7 +68,7 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
 	add(button_box_, UI::Box::Resizing::kFullSize);
 
 	minimap_icon_.set_visible(false);
-	minimap_icon_.set_frame(g_gr->styles().minimap_icon_frame());
+	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
 }
 
 void GameDetails::clear() {
@@ -81,9 +81,9 @@ void GameDetails::clear() {
 }
 
 void GameDetails::display(const std::vector<SavegameData>& gamedata) {
-	if (gamedata.empty())
+	if (gamedata.empty()) {
 		return;
-	else if (gamedata.size() > 1) {
+	} else if (gamedata.size() > 1) {
 		show(gamedata);
 	} else {
 		show(gamedata[0]);
@@ -106,12 +106,12 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 
 	const std::string header_second_part(
 	   /** TRANSLATORS: This is the second part of "Selected %1% directory/directories and %2%" */
-	   (boost::format(ngettext("%d file:", "%d files:", number_of_files)) % number_of_files).str());
+	   (boost::format(ngettext("%d file", "%d files", number_of_files)) % number_of_files).str());
 
 	std::string combined_header = as_richtext(as_heading_with_content(
 	   /** TRANSLATORS: %1% = number of selected directories, %2% = number of selected files*/
-	   (boost::format(ngettext("Selected %1% directory and %2%", "Selected %1% directories and %2%",
-	                           number_of_directories)) %
+	   (boost::format(ngettext("Selected %1% directory and %2%:",
+	                           "Selected %1% directories and %2%:", number_of_directories)) %
 	    number_of_directories % header_second_part)
 	      .str(),
 	   "", style_, true));
@@ -202,7 +202,7 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 			minimap_icon_.set_visible(true);
 			minimap_icon_.set_icon(minimap_image_.get());
 		} catch (const std::exception& e) {
-			log("Failed to load the minimap image : %s\n", e.what());
+			log_err("Failed to load the minimap image : %s\n", e.what());
 		}
 	}
 }

@@ -19,7 +19,7 @@ include "scripting/richtext.lua"
 --    :returns: a richtext-formatted list of terrain images, terrain names and probabilities.
 --
 function terrain_affinity_help(immovable_description)
-   set_textdomain("widelands")
+   push_textdomain("widelands")
    local world = wl.World();
    local result = ""
    terrain_list = {}
@@ -43,11 +43,12 @@ function terrain_affinity_help(immovable_description)
       if (k <= 10 or v.probability > 0.25) then
          result = result .. li_image(v.terrain.representative_image,
                -- TRANSLATORS: Terrain name (Climate)
-               (_"%1% (%2%)"):bformat(v.terrain.descname, v.terrain.editor_category.descname) .. "<br>" ..
+               v.terrain.descname .. "<br>" ..
                -- TRANSLATORS: Help text - Probability to grow for an immovable
                (_("%2.1f%%")):bformat(100 * v.probability)
             ) .. vspace(6)
       end
    end
+   pop_textdomain()
    return result
 end

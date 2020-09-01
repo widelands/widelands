@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_coalmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Coal Mine"),
@@ -60,7 +61,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "coal",
+      mines = "resource_coal",
       mines_percent = 50,
    },
 
@@ -68,26 +69,18 @@ tribes:new_productionsite_type {
       frisians_miner = 1
    },
 
-   indicate_workarea_overlaps = {
-      frisians_coalmine = false,
-      frisians_coalmine_deep = false,
-   },
-
    inputs = {
       { name = "ration", amount = 8 }
    },
-   outputs = {
-      "coal"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
             "return=skipped unless economy needs coal",
             "consume=ration",
-            "sleep=45000",
+            "sleep=duration:45s",
             "call=mine_produce",
             "call=mine_produce",
          }
@@ -95,8 +88,8 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining coal",
          actions = {
-            "animate=working 15000",
-            "mine=coal 3 50 5 20",
+            "animate=working duration:15s",
+            "mine=resource_coal radius:3 yield:50% when_empty:5% experience_on_fail:20%",
             "produce=coal",
          }
       },
@@ -117,3 +110,5 @@ tribes:new_productionsite_type {
          pgettext("frisians_building", "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

@@ -49,8 +49,8 @@ end
 -- Main function
 return {
    func = function(tribename, game_type)
-      set_textdomain("tribes_encyclopedia")
-      return {
+      push_textdomain("tribes_encyclopedia")
+      local r = {
          title = _"Tribal Encyclopedia",
          tabs = {
             {
@@ -109,5 +109,7 @@ return {
             },
          }
       }
+      pop_textdomain()
+      return r
    end
 }

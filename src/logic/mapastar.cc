@@ -39,8 +39,9 @@ void MapAStarBase::pathto(Coords dest, Path& path) const {
 
 		assert(pf.cycle == pathfields->cycle);
 
-		if (pf.backlink == IDLE)
+		if (pf.backlink == IDLE) {
 			break;
+		}
 
 		path.path_.push_back(pf.backlink);
 

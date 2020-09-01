@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_tailors_shop",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Tailor’s Shop"),
@@ -62,13 +63,9 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 4 },
    },
-   outputs = {
-      "fur_garment_studded",
-      "fur_garment_golden"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -83,8 +80,8 @@ tribes:new_productionsite_type {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs fur_garment_studded",
             "consume=fur_garment iron",
-            "sleep=25000",
-            "animate=working 25000",
+            "sleep=duration:25s",
+            "animate=working duration:25s",
             "produce=fur_garment_studded"
          },
       },
@@ -95,10 +92,12 @@ tribes:new_productionsite_type {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs fur_garment_golden",
             "consume=fur_garment iron gold",
-            "sleep=25000",
-            "animate=working 25000",
+            "sleep=duration:25s",
+            "animate=working duration:25s",
             "produce=fur_garment_golden"
          },
       },
    },
 }
+
+pop_textdomain()

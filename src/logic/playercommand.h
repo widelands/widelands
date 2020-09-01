@@ -644,30 +644,6 @@ private:
 	uint32_t permanent_;
 };
 
-// TODO(Nordfriese): CmdResetWareTargetQuantity can be removed when we next break savegame
-// compatibility
-struct CmdResetWareTargetQuantity : public CmdChangeTargetQuantity {
-	CmdResetWareTargetQuantity() : CmdChangeTargetQuantity() {
-	}
-	CmdResetWareTargetQuantity(uint32_t duetime,
-	                           PlayerNumber sender,
-	                           uint32_t economy,
-	                           DescriptionIndex index);
-
-	//  Write/Read these commands to/from a file (for savegames).
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kResetWareTargetQuantity;
-	}
-
-	explicit CmdResetWareTargetQuantity(StreamRead&);
-
-	void execute(Game&) override;
-	void serialize(StreamWrite&) override;
-};
-
 struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 	CmdSetWorkerTargetQuantity() : CmdChangeTargetQuantity(), permanent_(0) {
 	}
@@ -692,30 +668,6 @@ struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 
 private:
 	uint32_t permanent_;
-};
-
-// TODO(Nordfriese): CmdResetWorkerTargetQuantity can be removed when we next break savegame
-// compatibility
-struct CmdResetWorkerTargetQuantity : public CmdChangeTargetQuantity {
-	CmdResetWorkerTargetQuantity() : CmdChangeTargetQuantity() {
-	}
-	CmdResetWorkerTargetQuantity(uint32_t duetime,
-	                             PlayerNumber sender,
-	                             uint32_t economy,
-	                             DescriptionIndex index);
-
-	//  Write/Read these commands to/from a file (for savegames).
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kResetWorkerTargetQuantity;
-	}
-
-	explicit CmdResetWorkerTargetQuantity(StreamRead&);
-
-	void execute(Game&) override;
-	void serialize(StreamWrite&) override;
 };
 
 struct CmdChangeTrainingOptions : public PlayerCommand {
@@ -934,6 +886,53 @@ struct CmdProposeTrade : PlayerCommand {
 
 private:
 	Trade trade_;
+};
+
+struct CmdToggleMuteMessages : PlayerCommand {
+	CmdToggleMuteMessages(uint32_t t, PlayerNumber p, const Building& b, bool a)
+	   : PlayerCommand(t, p), building_(b.serial()), all_(a) {
+	}
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kToggleMuteMessages;
+	}
+
+	void execute(Game& game) override;
+
+	explicit CmdToggleMuteMessages(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	CmdToggleMuteMessages() : PlayerCommand() {
+	}
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial building_;
+	bool all_;
+};
+
+struct CmdPickCustomStartingPosition : PlayerCommand {
+	CmdPickCustomStartingPosition(uint32_t t, PlayerNumber p, const Coords& c)
+	   : PlayerCommand(t, p), coords_(c) {
+	}
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kPickCustomStartingPosition;
+	}
+
+	void execute(Game& game) override;
+
+	explicit CmdPickCustomStartingPosition(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	CmdPickCustomStartingPosition() : PlayerCommand() {
+	}
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Coords coords_;
 };
 
 }  // namespace Widelands

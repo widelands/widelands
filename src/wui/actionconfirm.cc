@@ -22,7 +22,6 @@
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
@@ -143,12 +142,12 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	   UI::MultilineTextarea::ScrollMode::kNoScrolling);
 
 	UI::Button* okbtn = new UI::Button(button_box, "ok", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
-	                                   g_gr->images().get("images/wui/menu_okay.png"));
+	                                   g_image_cache->get("images/wui/menu_okay.png"));
 	okbtn->sigclicked.connect([this]() { ok(); });
 
 	UI::Button* cancelbtn =
 	   new UI::Button(button_box, "abort", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
-	                  g_gr->images().get("images/wui/menu_abort.png"));
+	                  g_image_cache->get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect([this]() { die(); });
 
 	button_box->add(
@@ -201,8 +200,9 @@ void BulldozeConfirm::think() {
 	upcast(Widelands::PlayerImmovable, todestroy, todestroy_.get(egbase));
 
 	if (!todestroy || !building || !iaplayer().can_act(building->owner().player_number()) ||
-	    !(building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
+	    !(building->get_playercaps() & Widelands::Building::PCap_Bulldoze)) {
 		die();
+	}
 }
 
 /**
@@ -339,7 +339,7 @@ void EnhanceConfirm::ok() {
 		upcast(Widelands::ConstructionSite, cs, object_.get(game));
 		if (cs && iaplayer().can_act(cs->owner().player_number())) {
 			game.send_player_enhance_building(
-			   *cs, Widelands::INVALID_INDEX, checkbox_ && checkbox_->get_state());
+			   *cs, cs->building().enhancement(), checkbox_ && checkbox_->get_state());
 		}
 	} else {
 		upcast(Widelands::Building, building, object_.get(game));
@@ -371,8 +371,9 @@ void ShipSinkConfirm::think() {
 	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Ship, ship, object_.get(egbase));
 
-	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number()))
+	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number())) {
 		die();
+	}
 }
 
 /**

@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_coalmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Coal Mine"),
@@ -35,7 +36,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "coal",
+      mines = "resource_coal",
       prohibited_till = 910
    },
 
@@ -43,28 +44,21 @@ tribes:new_productionsite_type {
       atlanteans_miner = 3
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_coalmine = false,
-   },
-
    inputs = {
       { name = "smoked_fish", amount = 10 },
       { name = "smoked_meat", amount = 6 },
       { name = "atlanteans_bread", amount = 10 }
    },
-   outputs = {
-      "coal"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
             -- time total: 105 + 7 x 3.6
             "return=skipped unless economy needs coal",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=35000",
+            "sleep=duration:35s",
             -- after having the food the miners are working 7 times
             -- each cycle lasts 10 seconds for mining and producing coal
             -- and 3.6 seconds to deliver the coal to the flag
@@ -83,8 +77,8 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining coal",
          actions = {
-            "animate=working 10000",
-            "mine=coal 4 100 5 2",
+            "animate=working duration:10s",
+            "mine=resource_coal radius:4 yield:100% when_empty:5%",
             "produce=coal",
          }
       },
@@ -106,3 +100,5 @@ tribes:new_productionsite_type {
          pgettext("atlanteans_building", "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

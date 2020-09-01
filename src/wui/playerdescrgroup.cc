@@ -137,9 +137,9 @@ void PlayerDescriptionGroup::update() {
 			std::string title;
 
 			if (player.state == PlayerSettings::State::kComputer) {
-				if (player.ai.empty())
+				if (player.ai.empty()) {
 					title = _("Computer");
-				else {
+				} else {
 					if (player.random_ai) {
 						title += _("Random AI");
 					} else {
@@ -153,7 +153,7 @@ void PlayerDescriptionGroup::update() {
 			}
 			d->btnPlayerType->set_title(title);
 
-			Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(player.tribe);
+			Widelands::TribeBasicInfo info = settings.get_tribeinfo(player.tribe);
 			if (!tribenames_[player.tribe].size()) {
 				// Tribe's localized name
 				tribenames_[player.tribe] = info.descname;
@@ -162,8 +162,7 @@ void PlayerDescriptionGroup::update() {
 				d->btnPlayerTribe->set_title(pgettext("tribe", "Random"));
 				d->btnPlayerTribe->set_tooltip(_("The tribe will be set at random."));
 			} else {
-				i18n::Textdomain td("tribes");
-				d->btnPlayerTribe->set_title(_(tribenames_[player.tribe]));
+				d->btnPlayerTribe->set_title(tribenames_[player.tribe]);
 				d->btnPlayerTribe->set_tooltip(info.tooltip);
 			}
 
@@ -192,8 +191,9 @@ void PlayerDescriptionGroup::update() {
 void PlayerDescriptionGroup::enable_player(bool on) {
 	const GameSettings& settings = d->settings->settings();
 
-	if (d->plnum >= settings.players.size())
+	if (d->plnum >= settings.players.size()) {
 		return;
+	}
 
 	if (on) {
 		if (settings.players[d->plnum].state == PlayerSettings::State::kClosed) {
@@ -218,8 +218,9 @@ void PlayerDescriptionGroup::toggle_playertype() {
 void PlayerDescriptionGroup::toggle_playertribe() {
 	const GameSettings& settings = d->settings->settings();
 
-	if (d->plnum >= settings.players.size())
+	if (d->plnum >= settings.players.size()) {
 		return;
+	}
 
 	const PlayerSettings& player = settings.players.at(d->plnum);
 	const std::string& currenttribe = player.tribe;
@@ -255,17 +256,19 @@ void PlayerDescriptionGroup::toggle_playertribe() {
 void PlayerDescriptionGroup::toggle_playerteam() {
 	const GameSettings& settings = d->settings->settings();
 
-	if (d->plnum >= settings.players.size())
+	if (d->plnum >= settings.players.size()) {
 		return;
+	}
 
 	Widelands::TeamNumber currentteam = settings.players[d->plnum].team;
 	Widelands::TeamNumber maxteam = settings.players.size() / 2;
 	Widelands::TeamNumber newteam;
 
-	if (currentteam >= maxteam)
+	if (currentteam >= maxteam) {
 		newteam = 0;
-	else
+	} else {
 		newteam = currentteam + 1;
+	}
 
 	d->settings->set_player_team(d->plnum, newteam);
 	update();
@@ -278,8 +281,9 @@ void PlayerDescriptionGroup::update_playerinit() {
 
 	const GameSettings& settings = d->settings->settings();
 
-	if (d->plnum >= settings.players.size())
+	if (d->plnum >= settings.players.size()) {
 		return;
+	}
 
 	if (settings.scenario) {
 		d->btnPlayerInit->add(
@@ -298,7 +302,6 @@ void PlayerDescriptionGroup::update_playerinit() {
 		}
 	}
 
-	i18n::Textdomain td("tribes");  // for translated initialisation
 	for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 		if (tribeinfo.name == player.tribe) {
 			const size_t nr_inits = tribeinfo.initializations.size();

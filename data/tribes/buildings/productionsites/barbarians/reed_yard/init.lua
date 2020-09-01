@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_reed_yard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Reed Yard"),
@@ -34,18 +35,8 @@ tribes:new_productionsite_type {
       barbarians_gardener = 1
    },
 
-   outputs = {
-      "reed"
-   },
-
-   indicate_workarea_overlaps = {
-      barbarians_rangers_hut = false,
-      barbarians_reed_yard = false,
-      barbarians_farm = false,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -58,7 +49,7 @@ tribes:new_productionsite_type {
          descname = _"planting reed",
          actions = {
             "callworker=plant",
-            "sleep=8000" -- orig sleep=20000 but gardener animation was increased by 2sec
+            "sleep=duration:8s" -- orig sleep=duration:20s but gardener animation was increased by 2sec
          }
       },
       harvest = {
@@ -66,7 +57,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting reed",
          actions = {
             "callworker=harvest",
-            "sleep=3000"
+            "sleep=duration:3s"
          }
       },
    },
@@ -78,3 +69,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 20
    },
 }
+
+pop_textdomain()

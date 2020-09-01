@@ -111,7 +111,8 @@ obj_make_ships = {
 }
 
 function shipyard_production(shipname)
-   return {
+   push_textdomain("scenario_tutorial03_seafaring.wmf")
+   local r = {
       position = "topright",
       title = _"Shipyard production",
       body = (
@@ -122,6 +123,8 @@ function shipyard_production(shipname)
       ),
       h = 250
    }
+   pop_textdomain()
+   return r
 end
 
 expedition1 = {
@@ -228,7 +231,7 @@ ferry_1 = {
       h1(_"Another gold mountain") ..
       p(_[[It will take some time for your shipyard to build some ships. While we’re waiting for them, there is another way of water-based transport I would like to teach you.]]) ..
       p(_[[Ships have the advantage that they can carry large quantities of wares and workers at a time, but unfortunately their destinations are limited to a handful of spaces suited for a port.]]) ..
-      p(_[[Look at this valley here in the far south. We have found a mountain with gold down here and would like to mine ores from it as well. But the streams seperating it from our main colony are too wide to build bridges and too narrow for ships to pass them. Our roads would have to take long curves, which slows down ware transport a lot.]])
+      p(_[[Look at this valley here in the far south. We have found a mountain with gold down here and would like to mine ores from it as well. But the streams separating it from our main colony are too wide to build bridges and too narrow for ships to pass them. Our roads would have to take long curves, which slows down ware transport a lot.]])
    ),
    h = 350
 }
@@ -297,7 +300,7 @@ obj_waterways = {
    body = objective_text(_"Build a gold mine and waterways",
       p(_[[Build a gold mine on the mountain in the south, and connect it to the mainland by building waterways over the streams.]]) ..
       li_arrow(_[[A waterway is built just like a road: You click on a flag near the shore, choose ‘Build a waterway’, and select the path for the waterway just as you would do for a road.]]) ..
-      li_arrow(_[[The only rule for waterway placement is that the two triangles directly adjacent to each segment of the waterway have to be water, and the entire path needs to be within your territory.]])
+      li_arrow(_[[However, each segment of the waterway needs two water triangles next to it.]])
    )
 }
 

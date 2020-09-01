@@ -115,147 +115,147 @@ enum class RelayCommand : uint8_t {
 	// Value 0 should not be used
 
 	/**
-    * Commands send by/to all participants.
-    */
+	 * Commands send by/to all participants.
+	 */
 	/// \{
 	/**
-    * Sent by the NetHostProxy or NetClientProxy on connect to the relay.
-    * Has the following payload:
-    * \li unsigned_8: Protocol version.
-    * \li string:     Game name.
-    * \li string:     For the host: Password that was set on start of the relay. Is the "solution"
-    *                 for the challenge send by the metaserver on IGPCMD_GAME_OPEN
-    *                 For clients/observers: String "client".
-    *
-    * Is answered by kWelcome or kDisconnect (if a parameter is wrong/unknown).
-    */
+	 * Sent by the NetHostProxy or NetClientProxy on connect to the relay.
+	 * Has the following payload:
+	 * \li unsigned_8: Protocol version.
+	 * \li string:     Game name.
+	 * \li string:     For the host: Password that was set on start of the relay. Is the "solution"
+	 *                 for the challenge send by the metaserver on IGPCMD_GAME_OPEN
+	 *                 For clients/observers: String "client".
+	 *
+	 * Is answered by kWelcome or kDisconnect (if a parameter is wrong/unknown).
+	 */
 	kHello = 1,
 
 	/**
-    * Send by the relay to answer a kHello command.
-    * Confirms the successful connection with the relay. In the case of a connecting NetClientProxy,
-    * this does not mean that it can participate on the game. This decision is up to the GameHost as
-    * soon as it learns about the new client.
-    * Payload:
-    * \li unsigned_8: The protocol version. Should be the same as the one send in the kHello.
-    * \li string:     The name of the hosted game as shown in the internet lobby.
-    *                 The client might want to check this.
-    *
-    * This command and its parameters are not really necessary. But it might be nice to have at
-    * least some
-    * confirmation that we have a connection to a (and the right) relay and not to some other
-    * server.
-    */
+	 * Send by the relay to answer a kHello command.
+	 * Confirms the successful connection with the relay. In the case of a connecting NetClientProxy,
+	 * this does not mean that it can participate on the game. This decision is up to the GameHost as
+	 * soon as it learns about the new client.
+	 * Payload:
+	 * \li unsigned_8: The protocol version. Should be the same as the one send in the kHello.
+	 * \li string:     The name of the hosted game as shown in the internet lobby.
+	 *                 The client might want to check this.
+	 *
+	 * This command and its parameters are not really necessary. But it might be nice to have at
+	 * least some
+	 * confirmation that we have a connection to a (and the right) relay and not to some other
+	 * server.
+	 */
 	kWelcome = 2,
 
 	/**
-    * Can be sent by any participant.
-    * Might be the result of a protocol violation, an invalid password on connect of the
-    * NetHostProxy
-    * or a regular disconnect (e.g. the game is over).
-    * After sending or receiving this command, the TCP connection should be closed.
-    * \note When the game host sends its kDisconnect message, the relay will shut down.
-    * Payload:
-    * \li string: An error code describing the reason of the disconnect. Valid values:
-    *             NORMAL: Regular disconnect (game has ended, host leaves, client leaves, ...);
-    *             PROTOCOL_VIOLATION: Some protocol error (unknown command, invalid parameters,
-    * ...);
-    *             WRONG_VERSION: The version in the kHello packet is not supported;
-    *             GAME_UNKNOWN: Game name provided in kHello packet is unknown;
-    *             NO_HOST: No host is connected to the relay yet;
-    *             INVALID_CLIENT: Host tried to send a message to a non-existing client
-    */
+	 * Can be sent by any participant.
+	 * Might be the result of a protocol violation, an invalid password on connect of the
+	 * NetHostProxy
+	 * or a regular disconnect (e.g. the game is over).
+	 * After sending or receiving this command, the TCP connection should be closed.
+	 * \note When the game host sends its kDisconnect message, the relay will shut down.
+	 * Payload:
+	 * \li string: An error code describing the reason of the disconnect. Valid values:
+	 *             NORMAL: Regular disconnect (game has ended, host leaves, client leaves, ...);
+	 *             PROTOCOL_VIOLATION: Some protocol error (unknown command, invalid parameters,
+	 * ...);
+	 *             WRONG_VERSION: The version in the kHello packet is not supported;
+	 *             GAME_UNKNOWN: Game name provided in kHello packet is unknown;
+	 *             NO_HOST: No host is connected to the relay yet;
+	 *             INVALID_CLIENT: Host tried to send a message to a non-existing client
+	 */
 	kDisconnect = 3,
 
 	/**
-    * The relay sends this message to check for presence and to measure the round-trip-time.
-    * Has to be answered by kPong immediately.
-    * Payload:
-    * \li unsigned_8: A sequence number for this ping request.
-    */
+	 * The relay sends this message to check for presence and to measure the round-trip-time.
+	 * Has to be answered by kPong immediately.
+	 * Payload:
+	 * \li unsigned_8: A sequence number for this ping request.
+	 */
 	kPing = 4,
 
 	/**
-    * Send to the relay to answer a kPing message.
-    * Payload:
-    * \li unsigned_8: Should be the sequence number found in the ping request.
-    */
+	 * Send to the relay to answer a kPing message.
+	 * Payload:
+	 * \li unsigned_8: Should be the sequence number found in the ping request.
+	 */
 	kPong = 5,
 
 	/**
-    * Send to the relay to request the newest ping results.
-    * No payload.
-    */
+	 * Send to the relay to request the newest ping results.
+	 * No payload.
+	 */
 	kRoundTripTimeRequest = 6,
 
 	/**
-    * Send by the relay as an answer to the kRoundTripTimeRequest with the following payload:
-    * \li unsigned_8: Length of the list.
-    * A list of
-    * \li unsigned_8: Id of the client.
-    * \li unsigned_8: The RTT in milliseconds. Capped to max. 255ms.
-    * \li unsigned_8: Seconds since the last kPong has been received by the relay. Capped to max.
-    * 255ms.
-    */
+	 * Send by the relay as an answer to the kRoundTripTimeRequest with the following payload:
+	 * \li unsigned_8: Length of the list.
+	 * A list of
+	 * \li unsigned_8: Id of the client.
+	 * \li unsigned_8: The RTT in milliseconds. Capped to max. 255ms.
+	 * \li unsigned_8: Seconds since the last kPong has been received by the relay. Capped to max.
+	 * 255ms.
+	 */
 	kRoundTripTimeResponse = 7,
 	/// \}
 
 	/**
-    * Communication between relay and NetHostProxy.
-    */
+	 * Communication between relay and NetHostProxy.
+	 */
 	/// \{
 
 	/**
-    * Send by the relay to the NetHostProxy to inform that a client established a connection to the
-    * relay.
-    * Payload:
-    * \li unsigned_8: An id to represent the new client.
-    */
+	 * Send by the relay to the NetHostProxy to inform that a client established a connection to the
+	 * relay.
+	 * Payload:
+	 * \li unsigned_8: An id to represent the new client.
+	 */
 	kConnectClient = 11,
 
 	/**
-    * If send by the NetHostProxy, tells the relay to close the connection to a client.
-    * If send by the relay, informs the NetHostProxy that the connection to a client has been lost.
-    * Payload:
-    * \li unsigned_8: The id of the client.
-    */
+	 * If send by the NetHostProxy, tells the relay to close the connection to a client.
+	 * If send by the relay, informs the NetHostProxy that the connection to a client has been lost.
+	 * Payload:
+	 * \li unsigned_8: The id of the client.
+	 */
 	kDisconnectClient = 12,
 
 	/**
-    * The NetHostProxy sends a message to a connected client over the relay.
-    * Payload:
-    * \li NULL terminated list of unsigned_8: The ids of the clients.
-    * \li packet: The SendPacket to relay.
-    */
+	 * The NetHostProxy sends a message to a connected client over the relay.
+	 * Payload:
+	 * \li NULL terminated list of unsigned_8: The ids of the clients.
+	 * \li packet: The SendPacket to relay.
+	 */
 	kToClients = 13,
 
 	/**
-    * The relay transmits a packet from a client to the NetHostProxy.
-    * Payload:
-    * \li unsigned_8: The id of the client.
-    * \li packet: The SendPacket to relay.
-    */
+	 * The relay transmits a packet from a client to the NetHostProxy.
+	 * Payload:
+	 * \li unsigned_8: The id of the client.
+	 * \li packet: The SendPacket to relay.
+	 */
 	kFromClient = 14,
 	/// \}
 
 	/**
-    * Communication between relay and NetClientProxy.
-    */
+	 * Communication between relay and NetClientProxy.
+	 */
 	/// \{
 
 	/**
-    * The NetClientProxy sends a message to the NetHostProxy over the relay.
-    * Direct communication between clients is not supported.
-    * Payload:
-    * \li packet: The SendPacket to relay.
-    */
+	 * The NetClientProxy sends a message to the NetHostProxy over the relay.
+	 * Direct communication between clients is not supported.
+	 * Payload:
+	 * \li packet: The SendPacket to relay.
+	 */
 	kToHost = 21,
 
 	/**
-    * The relay transmits a packet from a NetHostProxy to the NetClientProxy.
-    * Payload:
-    * \li packet: The SendPacket to relay.
-    */
+	 * The relay transmits a packet from a NetHostProxy to the NetClientProxy.
+	 * Payload:
+	 * \li packet: The SendPacket to relay.
+	 */
 	kFromHost = 22
 	/// \}
 };

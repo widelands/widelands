@@ -23,7 +23,6 @@
 #include "editor/editorinteractive.h"
 #include "logic/filesystem_constants.h"
 #include "ui_basic/button.h"
-#include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/mapdetails.h"
@@ -38,6 +37,7 @@ struct MainMenuLoadOrSaveMap : public UI::UniqueWindow {
 	                      const std::string& name,
 	                      const std::string& title,
 	                      bool addons,
+	                      bool show_empty_dirs = false,
 	                      const std::string& basedir = kMapsDir);
 
 protected:
@@ -57,15 +57,14 @@ private:
 	// Common padding between panels
 	int32_t const padding_;
 
+	// Whether to list empty directories
+	bool const show_empty_dirs_;
+
 	// Main vertical container for the UI elements
 	UI::Box main_box_;
 
-	// Top row with button for toggling map names/filenames
-	UI::Box show_mapnames_box_;
-	UI::Button show_mapnames_;
-
 	// Big flexible panel in the middle for the table and map details
-	UI::Box table_and_details_box_;
+	UI::Box table_and_details_box_, table_box_;
 
 protected:
 	// Table of maps and its data
@@ -75,6 +74,8 @@ protected:
 	// Side panel with details about the currently selected map
 	UI::Box map_details_box_;
 	MapDetails map_details_;
+
+	UI::Dropdown<MapData::DisplayType> display_mode_;
 
 	// UI row below the table that can be filled by subclasses
 	UI::Box table_footer_box_;
@@ -89,10 +90,6 @@ protected:
 	// Settings data
 	const std::string basedir_;
 	std::string curdir_;
-
-	bool has_translated_mapname_;
-	UI::Checkbox* cb_dont_localize_mapnames_;
-	bool showing_mapnames_;
 	bool include_addon_maps_;
 };
 

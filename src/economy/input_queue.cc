@@ -83,8 +83,9 @@ void InputQueue::request_callback(Game& game,
 
 	iq.entered(index, worker);
 
-	if (iq.callback_fn_)
+	if (iq.callback_fn_) {
 		(*iq.callback_fn_)(game, &iq, index, worker, iq.callback_data_);
+	}
 }
 
 void InputQueue::set_callback(CallbackFn* const fn, void* const data) {
@@ -140,10 +141,7 @@ void InputQueue::read(FileRead& fr,
 
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
-		// A bit messy since InputQueue started with packet version 1 but has to support the build19
-		// WaresQueue packets with version 2 and has now be changed to version 3 while fixing
-		// Unfortunately, this will probably crash when loading old pre-build19 save games
-		if (packet_version == 1 || packet_version == kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			if (fr.unsigned_8() == 0) {
 				assert(type_ == wwWARE);
 				index_ = owner().tribe().ware_index(tribes_lookup_table.lookup_ware(fr.c_string()));
@@ -162,22 +160,6 @@ void InputQueue::read(FileRead& fr,
 			}
 
 			read_child(fr, game, mol);
-		} else if (packet_version == 2) {
-			// TODO(GunChleoc): Savegame compatibility, get rid after Build 21
-			assert(type_ == wwWARE);
-			index_ = owner().tribe().ware_index(tribes_lookup_table.lookup_ware(fr.c_string()));
-			max_size_ = fr.unsigned_32();
-			max_fill_ = fr.signed_32();
-			// No read_child() call here, doing it manually since there is no child-version number
-			uint32_t filled = fr.unsigned_32();
-			consume_interval_ = fr.unsigned_32();
-			if (fr.unsigned_8()) {
-				request_.reset(new Request(owner_, 0, InputQueue::request_callback, type_));
-				request_->read(fr, game, mol, tribes_lookup_table);
-			} else {
-				request_.reset();
-			}
-			set_filled(filled);
 		} else {
 			throw UnhandledVersionError("InputQueue", packet_version, kCurrentPacketVersion);
 		}

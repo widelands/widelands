@@ -451,14 +451,17 @@ const std::set<UI::FontSets::Selector> kRTLScripts = {
 const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kRTLCodeBlocks = {
    {UI::FontSets::Selector::kArabic,
     {
-       UBlockCode::UBLOCK_ARABIC, UBlockCode::UBLOCK_ARABIC_SUPPLEMENT,
-       UBlockCode::UBLOCK_ARABIC_EXTENDED_A, UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_A,
+       UBlockCode::UBLOCK_ARABIC,
+       UBlockCode::UBLOCK_ARABIC_SUPPLEMENT,
+       UBlockCode::UBLOCK_ARABIC_EXTENDED_A,
+       UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_A,
        UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_B,
        UBlockCode::UBLOCK_ARABIC_MATHEMATICAL_ALPHABETIC_SYMBOLS,
     }},
    {UI::FontSets::Selector::kDevanagari,
     {
-       UBlockCode::UBLOCK_DEVANAGARI, UBlockCode::UBLOCK_DEVANAGARI_EXTENDED,
+       UBlockCode::UBLOCK_DEVANAGARI,
+       UBlockCode::UBLOCK_DEVANAGARI_EXTENDED,
        UBlockCode::UBLOCK_VEDIC_EXTENSIONS,
     }},
    {UI::FontSets::Selector::kHebrew,
@@ -609,7 +612,7 @@ std::string make_ligatures(const char* input) {
 					--i;
 				}
 			} catch (const std::out_of_range& e) {
-				log("Error trying to fetch Arabic diacritic form: %s\n", e.what());
+				log_err("Error trying to fetch Arabic diacritic form: %s\n", e.what());
 				NEVER_HERE();
 			}
 		} else if (kArabicFinalChars.count(c) == 1) {  // All Arabic characters have a final form
@@ -635,7 +638,7 @@ std::string make_ligatures(const char* input) {
 				}
 				c = find_arabic_letter_form(c, previous, next);
 			} catch (const std::out_of_range& e) {
-				log("Error trying to fetch Arabic character form: %s\n", e.what());
+				log_err("Error trying to fetch Arabic character form: %s\n", e.what());
 				NEVER_HERE();
 			}
 		}

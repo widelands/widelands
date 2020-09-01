@@ -29,7 +29,6 @@
 #include "logic/map.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
-#include "ui_basic/progresswindow.h"
 #include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 
@@ -96,7 +95,7 @@ void MainMenuNewMap::clicked_create_map() {
 	Widelands::EditorGameBase& egbase = parent.egbase();
 	Widelands::Map* map = egbase.mutable_map();
 	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
-	egbase.step_loader_ui(_("Creating empty map…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Creating empty map…")));
 
 	parent.cleanup_for_load();
 	egbase.init_addons(true);
@@ -109,7 +108,6 @@ void MainMenuNewMap::clicked_create_map() {
 	                      get_config_string("realname", pgettext("author_name", "Unknown")));
 
 	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
-	egbase.load_graphics();
 
 	map->recalc_whole_map(egbase);
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);

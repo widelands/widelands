@@ -21,12 +21,12 @@
 #define WL_LOGIC_MAP_OBJECTS_WORLD_CRITTER_H
 
 #include <memory>
+#include <set>
 
 #include "base/macros.h"
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/world/critter_program.h"
-#include "logic/map_objects/world/editor_category.h"
 
 class WorldLegacyLookupTable;
 
@@ -37,8 +37,11 @@ class World;
 //
 // Description
 //
-struct CritterDescr : BobDescr {
-	CritterDescr(const std::string& init_descname, const LuaTable&, const Widelands::World& world);
+class CritterDescr : public BobDescr {
+public:
+	CritterDescr(const std::string& init_descname,
+	             const LuaTable&,
+	             const std::vector<std::string>& attribs);
 	~CritterDescr() override;
 
 	Bob& create_object() const override;
@@ -49,15 +52,36 @@ struct CritterDescr : BobDescr {
 		return walk_anims_;
 	}
 
-	CritterProgram const* get_program(const std::string& program_name) const;
+	bool is_herbivore() const {
+		return !food_plants_.empty();
+	}
+	bool is_carnivore() const {
+		return carnivore_;
+	}
+	uint8_t get_size() const {
+		return size_;
+	}
+	const std::set<uint32_t>& food_plants() const {
+		return food_plants_;
+	}
+	uint8_t get_appetite() const {
+		return appetite_;
+	}
+	uint8_t get_reproduction_rate() const {
+		return reproduction_rate_;
+	}
 
-	const EditorCategory* editor_category() const;
+	CritterProgram const* get_program(const std::string&) const;
 
 private:
 	DirAnimations walk_anims_;
 	using Programs = std::map<std::string, std::unique_ptr<const CritterProgram>>;
 	Programs programs_;
-	EditorCategory* editor_category_;  // not owned.
+	const uint8_t size_;
+	const bool carnivore_;
+	std::set<uint32_t> food_plants_;  // set of immovable attributes
+	uint8_t appetite_;  // chance that we feel hungry when we encounter one food item, in %
+	const uint8_t reproduction_rate_;  // reproduction adjustment factor, in %
 	DISALLOW_COPY_AND_ASSIGN(CritterDescr);
 };
 
@@ -69,6 +93,7 @@ class Critter : public Bob {
 
 public:
 	explicit Critter(const CritterDescr&);
+	bool init(EditorGameBase&) override;
 
 	void init_auto_task(Game&) override;
 
@@ -95,6 +120,8 @@ private:
 
 	static Task const taskRoam;
 	static Task const taskProgram;
+
+	uint32_t creation_time_;
 };
 }  // namespace Widelands
 

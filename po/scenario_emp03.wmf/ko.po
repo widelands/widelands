@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: ks k, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -46,15 +46,15 @@ msgstr "채석장"
 msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
-msgstr "풍부한 바위 근처에 채석장을 짓고 건물 부지를 없애고 귀중한 자원을 얻을 수 있습니다."
+msgstr "풍부한 바위 근처에 채석장을 짓고 건물 터를 마련하고 귀중한 자원을 얻을 수 있습니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
-msgstr "나무꾼의 집과 제재소, 석공 집을 지으십시오"
+msgstr "벌목꾼의 집과 제재소, 석공 집을 지으십시오"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr "나무꾼과 목수, 석수"
+msgstr "벌목꾼과 목수, 석수"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid ""
@@ -62,21 +62,21 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
-"충분한 공간이 확보되면 즉시 나무꾼의 집과 제재소, 석공 집을 지으십시오. 이렇게 하면 기본적인 건축 자재 공급망이 완성됩니다."
+"충분한 공간이 확보되면 즉시 벌목꾼의 집과 제재소, 석공 집을 지으십시오. 이렇게 하면 기본적인 건축 자재 공급망이 완성됩니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:72
 msgid "Lower the demand for marble columns to 4"
-msgstr "대리석 기둥에 대한 수요를 4로 낮추십시오"
+msgstr "대리석 기둥에 대한 수요를 4로 줄이십시오"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower Demand for Marble Columns"
-msgstr "대리석 기둥에 대한 수요가 낮습니다"
+msgstr "대리석 기둥에 대한 수요를 줄이십시오"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:75
 msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
-msgstr "경제 설정에서 대리석 기둥에 대한 수요를 4 개로 줄입니다. 이것은 건물의 대리석을 절약하는 데 도움이 될 것입니다."
+msgstr "경제 설정에서 대리석 기둥에 대한 수요를 4 개로 줄이십시오. 이것은 건물의 대리석을 절약하는 데 도움이 될 것입니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid ""
@@ -136,7 +136,7 @@ msgstr "천 생산"
 msgid ""
 "Now turn all the wheat into at least 50 bales of wool and then use the wool "
 "to weave cloth in order to build a ship."
-msgstr "이제 모든 밀을 적어도 50 개의  양털로 만든 다음 양털을 사용하여 천을 짜서 배를 만드십시오."
+msgstr "이제 모든 밀을 적어도 50 개의  양털로 만든 다음 배를 만들기 위해 천을 짜는데 사용하십시오."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -152,15 +152,13 @@ msgstr "두 개의 탐험 항구를 짓습니다"
 msgid ""
 "Explore the island in the south. Use an expedition to build a port there. "
 "Afterwards, try to find some mining resources."
-msgstr ""
-"남쪽에 있는 섬을 탐험하십시오. 탐험대를 이용해 그곳에 항구를 지으십시오. 그런 다음, 몇 가지 광산 자원을 찾아보세요.\n"
-"남쪽의 섬을 탐험하십시오. 원정대를 사용하여 그곳에 항구를 건설하십시오. 그 후, 채굴 자원을 찾으십시오."
+msgstr "남쪽에 있는 섬을 탐험하십시오. 탐험대를 이용해 그곳에 항구를 지으십시오. 그다음에, 몇 가지 광산 자원을 찾으십시오."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
-msgstr "북쪽으로 배를 보내서 야만족에 대한 정보를 모아야 합니다. 섬에 항구를 세우고 전초기지를 찾으십시오."
+msgstr "북쪽으로 배를 보내서 야만인들에 대한 정보를 모아야 합니다. 섬에 항구를 세우고 전초기지를 찾으십시오."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:129
 msgid "Produce gold to send out expeditions"
@@ -177,7 +175,7 @@ msgstr "주변 지역을 식민지로 만들 수 있도록 최소한 6 개의 �
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:138
 msgid "Defeat the Barbarians"
-msgstr "야만족을 물리치기"
+msgstr "야만인들을 물리치기"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Enemy"
@@ -185,7 +183,7 @@ msgstr "적을 물리치기"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr "이 지역에서 야만족의 존재를 끝내십시오."
+msgstr "이 지역에서 야만인들의 존재를 끝내십시오."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:147
 msgid "Explore further and build ports"
@@ -212,7 +210,7 @@ msgstr "신성한 성지를 찾기"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:162
 msgid ""
 "We need to find and secure all six pieces of the holy shrine of Neptune."
-msgstr "우리는 해왕성의 성지 6개 조각을 모두 찾아서 확보해야 합니다."
+msgstr "우리는 바다용왕의 성지 6개 조각을 모두 찾아서 확보해야 합니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:170
 msgid "Build a training infrastructure"
@@ -226,7 +224,7 @@ msgstr "훈련 기반 시설"
 msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train your"
 " soldiers."
-msgstr "군인들을 훈련시키기 위해 훈련 캠프, 일부 막사 및 경기장 또는 콜로세움을 지으십시오."
+msgstr "군인들을 훈련시키기 위해 훈련소, 몇 곳의 병영, 경기장이나 콜로세움을 지으십시오."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:182
 msgid "The Journey Home"
@@ -257,7 +255,7 @@ msgstr "하지만 신들께선 우리가 고향에 빨리 닿기를 원치 않�
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:194
 msgid "The Wrath of Neptune"
-msgstr "넵튠의 분노"
+msgstr "바다용왕의 분노"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:197
@@ -266,8 +264,8 @@ msgid ""
 "But this time it felt even worse than last time. The waves were twice the "
 "height of our brave ship and the winds drove us into unsafe waters."
 msgstr ""
-"넵튠께서는 우리에 맞서 어둡고 거친 폭풍우로 다시 몰아넣으셨다. 하지만 이번에는 지난번보다 더 안좋아보인다. 파도는 용감한 우리 배보다 "
-"두 배나 높이 치솟았고 바람은 우리를 안전치 않은 물 속으로 밀어넣었다."
+"바다용왕께서는 우리에 맞서 어둡고 거친 폭풍우로 다시 몰아넣으셨다. 하지만 이번에는 지난번보다 더 안좋아보인다. 파도는 용감한 우리 "
+"배보다 두 배나 높이 치솟았고 바람은 우리를 안전치 않은 물 속으로 밀어넣었다."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:200
@@ -297,8 +295,8 @@ msgid ""
 "sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
 "다시 한 번, 우리는 알 수 없는 해안에 조난됐고, 태양이 하늘 높이 떠올라서 생긴 야자수 그림자 밑에서 자고 있었다. 우리가 낮에 "
-"일어났을 때, 우리가 볼 수 있었던 것은 모래뿐이었던 것에 아무도 놀라지 않았던 것 같다... 비록 우리의 야영지 근처에 있는 상당한 "
-"양의 바위들이 놀라웠지만 말이다."
+"일어났을 때, 우리가 볼 수 있었던 것은 모래뿐이었던 것에 아무도 놀라지 않았던 것 같다… 비록 우리의 야영지 근처에 있는 상당한 양의 "
+"바위들이 놀라웠지만 말이다."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:215
@@ -331,7 +329,7 @@ msgstr "시야 없음"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:228
 msgid "Saledus looks around nervously…"
-msgstr "살레두스는 신경질적으로 주위를 둘러본다..."
+msgstr "살레두스는 신경질적으로 주위를 둘러본다…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:230
@@ -340,16 +338,16 @@ msgid ""
 "safe either. It would probably be reasonable to build a tower to explore the"
 " island and add some military strength."
 msgstr ""
-"전하, 우리는 섬에 대해 아무것도 모릅니다. 그리고 저는 우리가 안전하다고 믿지도 않습니다. 섬 주변을 탐사할 탑을 짓고 군사력을 더 "
+"폐하, 우리는 섬에 대해 아무것도 모릅니다. 그리고 저는 우리가 안전하다고 믿지도 않습니다. 섬 주변을 탐사할 탑을 짓고 군사력을 더 "
 "확보하는 것이 의미있을 것 같습니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:236
 msgid "Amalea Interrupts"
-msgstr "아말레아가 끼어든다"
+msgstr "아말리아가 끼어들었다"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:237
 msgid "Amalea raises her hand…"
-msgstr "아말레아가 그녀의 손을 든다..."
+msgstr "아말리아가 손을 들었다…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:239
@@ -368,7 +366,7 @@ msgstr "자원 절약"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:247
 msgid "Saledus is nodding in agreement…"
-msgstr "살레두스는 동의하며 고개를 끄덕인다..."
+msgstr "살레두스는 동의하며 고개를 끄덕인다…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:249
@@ -377,7 +375,7 @@ msgid ""
 "should only build an outpost as this is the most effective military "
 "building."
 msgstr ""
-"전하, 아말레아가 자원에 대해 말한 것이 옳습니다. 그래서 저도 마찬가지입니다. 우리는 오직 가장 효과적인 군사 건물인 감시 초소만을 "
+"폐하, 아말리아가 자원에 대해 말한 것이 옳습니다. 그래서 저도 마찬가지입니다. 우리는 오직 가장 효과적인 군사 건물인 감시 초소만을 "
 "지어야 합니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:257
@@ -386,14 +384,14 @@ msgstr "바위, 바위만 있다"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:258
 msgid "Saledus speaks with a sigh of relief…"
-msgstr "살레두스는 안도의 한숨을 쉬며 말한다..."
+msgstr "살레두스는 안도의 한숨을 쉬며 말한다…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:260
 msgid ""
 "Sire, I saw that the construction of the outpost was completed, so I have "
 "assigned some of my best soldiers to it to keep the watch."
-msgstr "전하, 감시 초소가 다 지어졌습니다. 가장 유능한 병사 몇 명을 배치해 감시하게 하겠습니다."
+msgstr "폐하, 감시 초소가 다 지어졌습니다. 가장 유능한 군인 몇 명을 배치해 감시하게 하겠습니다."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:263
@@ -403,16 +401,16 @@ msgid ""
 "new ship or even have some basic infrastructure to make our lives more "
 "comfortable?"
 msgstr ""
-"하지만 비록 이 것이 우리가 앞으로 나아간 한 걸음이기는 하지만, 건설할 수 있는 더 넓은 공간이 없다. 섬 전체가 바위로 차 있다. "
-"어떻게 우리가 배를 새로 건조하거나 우리 삶을 편하게 할 기초적인 기반시설을 지을 수 있을까?"
+"하지만 비록 이 것이 우리가 앞으로 나아간 한 걸음이기는 하지만, 건설할 수 있는 더 넓은 공간이 없습니다. 섬 전체가 바위로 차 "
+"있습니다. 어떻게 우리가 배를 새로 건조하거나 우리 삶을 편하게 할 기초적인 기반시설을 지을 수 있을까요?"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
-msgstr "아말레아의 계획"
+msgstr "아말리아의 계획"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:270
 msgid "Amalea smiles…"
-msgstr "아말레아가 미소짓는다..."
+msgstr "아말리아가 미소지었다…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:272
@@ -442,12 +440,12 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:286
 msgid "Amalea’s New Instructions"
-msgstr "아말레아의 새로운 지도"
+msgstr "아말리아의 새로운 지도"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:287
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:361
 msgid "Amalea recommends…"
-msgstr "아말레아가 추천한다..."
+msgstr "아말리아가 추천한다…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:289
@@ -461,16 +459,16 @@ msgstr "사람들에게 온 좋은 소식이에요, 루티우스. 지금부터 �
 msgid ""
 "Perhaps it would be a good idea to wait until it has cleared some space and "
 "then build up a basic construction material industry."
-msgstr "아마 어느 정도의 공간을 비워내고 기초적인 건설 자재 산업을 갖출 때까지 기다리는 것이 좋을 거에요."
+msgstr "아마 어느 정도의 공간을 비워내고 기본 건설 자재 산업을 갖출 때까지 기다리는 것이 좋을 거에요."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:300
 msgid "Amalea’s Recommendations"
-msgstr "아말레아의 추천"
+msgstr "아말리아의 추천"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:301
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:318
 msgid "Amalea comes in…"
-msgstr "아말레아가 둘어온다..."
+msgstr "아말리아가 둘어왔다…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:303
@@ -497,7 +495,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:317
 msgid "Amalea Looks Happy"
-msgstr "아말레아가 행복해 보인다"
+msgstr "아말리아가 행복해 보인다"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:320
@@ -524,14 +522,14 @@ msgstr "항구가 필요하다"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:333
 msgid "Saledus is thoughtful…"
-msgstr "살레두스는 생각에 잠겨있다..."
+msgstr "살레두스는 생각에 잠겨있다…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:335
 msgid ""
 "Sire, I just pondered our way home. It is of utmost importance to build a "
 "port for loading our ships and starting an expedition."
-msgstr "전하, 고향으로 갈 길에 대해 심사숙고했습니다. 배에 물자를 실을 항구를 건설하고 항해를 시작하는 것이 제일 중요합니다."
+msgstr "폐하, 고향으로 갈 길에 대해 심사숙고했습니다. 배에 물자를 실을 항구를 건설하고 항해를 시작하는 것이 제일 중요합니다."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:338
@@ -550,7 +548,7 @@ msgstr "고향에 다다르는 더 가까운 걸음"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:347
 msgid "Saledus looks excited…"
-msgstr "살레두스가 흥분한 것 같다..."
+msgstr "살레두스가 흥분한 것 같았다…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:349
@@ -559,7 +557,7 @@ msgid ""
 "military has spotted a space to build a port on. We should start to build a "
 "port quickly."
 msgstr ""
-"전하, 오늘 우리는 마침내 고향으로 돌아가는데 더 많이 근접했습니다. 군사들이 항구를 지을 공간을 발견했다고 합니다. 빨리 항구를 짓기 "
+"폐하, 오늘 우리는 마침내 고향으로 돌아가는데 더 많이 근접했습니다. 군사들이 항구를 지을 공간을 발견했다고 합니다. 빨리 항구를 짓기 "
 "시작해야 합니다."
 
 #. TRANSLATORS: Saledus
@@ -571,7 +569,7 @@ msgstr "이제 우리는 몇 척의 배를 건조할 기대를 가질 수 있습
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:360
 msgid "Amalea’s Wisdom"
-msgstr "아말레아의 영감"
+msgstr "아말리아의 영감"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:363
@@ -587,7 +585,7 @@ msgid ""
 "have only five bales of cloth left, which we will need to build the port and"
 " the shipyard."
 msgstr ""
-"원정 선박을 보내려면, 먼저 배가 필요합니다. 불행하게도, 우리는 항구와 조선소를 건설하는데 사용할 만큼의 딱 다섯 뭉치의 옷감밖에 "
+"원정 선박을 보내려면, 먼저 배가 필요합니다. 불행하게도, 우리는 항구와 조선소를 건설하는데 사용할 만큼의 딱 5 뭉치의 옷감밖에 "
 "없습니다."
 
 #. TRANSLATORS: Amalea
@@ -640,11 +638,11 @@ msgstr "신께 감사드립니다. 우리는 선박 산업을 마침내 일으�
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:395
 msgid "Amalea is Proud"
-msgstr "아말레아는 자랑스러워한다"
+msgstr "아말리아는 자랑스러워한다"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:396
 msgid "Amalea cheers…"
-msgstr "아말레아가 환호한다..."
+msgstr "아말리아가 환호한다…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:398
@@ -678,7 +676,7 @@ msgstr "섬들을 탐사해야 한다"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:413
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:456
 msgid "Saledus is excited…"
-msgstr "살레두스가 흥분했다..."
+msgstr "살레두스는 흥분되었다…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:415
@@ -714,11 +712,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:432
 msgid "Amalea Advises"
-msgstr "아말레아가 충고한다"
+msgstr "아말리아가 충고했다"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:433
 msgid "Amalea looks thoughtful…"
-msgstr "아말레아가 생각에 잠겨 있는 것 같다..."
+msgstr "아말리아가 생각에 잠겨 있는 것 같다…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:435
@@ -752,8 +750,8 @@ msgid ""
 " gold. I think we need a vineyard, a winery, a tavern, a fisher’s house or a"
 " hunter’s house and a smelting works. And the mines themselves of course."
 msgstr ""
-"금을 채굴하고 제련할 생산 계통을 구축하는 것을 추천들요. 우리는 포도원, 포도주 양조장, 선술집, 어부의 집이나 사냥꾼의 집, 그리고 "
-"제련소가 필요해요. 물론 광산들도 필요하죠."
+"금을 채굴하고 제련할 생산 계통을 구축하는 것을 추천들요. 우리는 포도원, 포도주 양조장, 선술집, 어부의 집이나 사냥꾼의 집과 제련소가"
+" 필요해요. 물론 광산들도 필요하죠."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:447
@@ -764,7 +762,7 @@ msgid ""
 "dismantle some military buildings to obtain more space for our economy."
 msgstr ""
 "필요한 모든 건물들을 짓는데 어려움이 있다면, 우리가 배웠던 것들을 다시 떠올려 봐요. 바위들을 깎아낼 수 있지요. 건설 공간을 확보하기"
-" 위해 도로를 최적화할 수도 있고, 경제를 구축할 공간을 확보하기 위해 군사 건물을 해체할 수도 있죠."
+" 위해 땅길을 최적화할 수도 있고, 경제를 구축할 공간을 확보하기 위해 군사 건물을 해체할 수도 있죠."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:455
 msgid "We Should Conquer All the Islands"
@@ -783,11 +781,11 @@ msgstr "야만인들을 끝장내고 제국의 황제에게 훌륭한 식민지�
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:468
 msgid "Amalea’s Luck"
-msgstr "아말레아의 행운"
+msgstr "아말리아의 행운"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:469
 msgid "Amalea is really proud of the achievements…"
-msgstr "아말레아는 업적에 매우 자랑스러워한다..."
+msgstr "아말리아는 업적에 매우 자랑스러워한다…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:471
@@ -808,11 +806,11 @@ msgstr "농담이에요. 물론 우리는 군인들을 훈련시킬 경기장과
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:480
 msgid "Amalea is Pleased"
-msgstr "아말레아는 기쁘다"
+msgstr "아말리아는 기쁘다"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:481
 msgid "Amalea is content that we will manage all our challenges"
-msgstr "아말레아는 우리에게 닥친 모든 도전을 해결한 것에 기뻐보인다"
+msgstr "아말리아는 우리에게 닥친 모든 도전을 해결한 것에 기뻐보인다"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:483
@@ -835,11 +833,11 @@ msgstr "예를 들어, 충분한 양의 재화를 생산하고 나면 다른 건
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:492
 msgid "Amalea’s Reminder"
-msgstr "아말레아의 상기"
+msgstr "아말리아의 상기"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:493
 msgid "Amalea is shaking her head…"
-msgstr "아말레아는 머리를 흔들고 있다..."
+msgstr "아말리아는 머리를 흔들고 있다…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:495
@@ -869,11 +867,11 @@ msgstr "하지만 큰 건설 장소들을 낭비하지 마세요."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:507
 msgid "Amalea’s Excited"
-msgstr "아말레아는 흥분한다"
+msgstr "아말리아는 흥분했다"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:508
 msgid "Amalea is looking forward to the exploration…"
-msgstr "아말레아는 탐사를 기대하고 있다..."
+msgstr "아말리아는 탐사를 기대하고 있었다…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:510
@@ -898,12 +896,12 @@ msgstr "특히 더 많은 대리석을 찾거나, 바위로 채워진 벌판, �
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:524
 msgid "Amalea is Very Content"
-msgstr "아말레아는 매우 만족한다"
+msgstr "아말리아는 매우 만족한다"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:525
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:534
 msgid "Amalea is clapping her hands…"
-msgstr "아말레아가 손뼉을 치고 있다..."
+msgstr "아말리아가 손뼉을 치고 있다…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:527
@@ -917,7 +915,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:533
 msgid "Amalea’s Counsel"
-msgstr "아말레아의 조언"
+msgstr "아말리아의 조언"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:536
@@ -955,14 +953,14 @@ msgstr "승리는 우리 것"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:547
 msgid "Saledus is cheering…"
-msgstr "살레두스가 환호하고 있다..."
+msgstr "살레두스는 환호하고 있었다…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:549
 msgid ""
 "Sire, finally we have defeated the Barbarians in this region. And "
 "furthermore, we have built a nice colony for our empire."
-msgstr "전하, 마침내 우리가 이 지역에서 야만인들을 패배시켰습니다. 그리고 더 나아가, 제국을 위한 좋은 식민지를 건설했습니다."
+msgstr "폐하, 마침내 우리가 이 지역에서 야만인들을 패배시켰습니다. 그리고 더 나아가, 제국을 위한 좋은 식민지를 건설했습니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:551
 msgid "The king will be very pleased with our victory."
@@ -970,25 +968,25 @@ msgstr "왕께서 우리의 승리에 매우 만족하실 것입니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:557
 msgid "Pleasing Neptune"
-msgstr "넵튠에게 감사드리기"
+msgstr "바다용왕에게 감사드리기"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:558
 msgid "Saledus is Very Sad and Anxious…"
-msgstr "살레두스는 매우 슬프고 불안해보인다..."
+msgstr "살레두스는 매우 슬프고 불안해보인다…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
 msgid ""
 "Sire, we are making good progress towards getting home eventually. But there"
 " is one thing I need to talk about:"
-msgstr "전하, 결국 고향으로 향하는 일정이 잘 진행되고 있습니다. 하지만 제가 말씀드리고 싶은 것이 하나 있습니다:"
+msgstr "폐하, 결국 고향으로 향하는 일정이 잘 진행되고 있습니다. 하지만 제가 말씀드리고 싶은 것이 하나 있습니다:"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:562
 msgid ""
 "As we have seen on our journeys, it is of great importance to put the gods "
 "and especially Neptune in a good mood to safeguard our journey."
 msgstr ""
-"우리의 여정에서 보듯이, 신들께서, 특히 넵튠께서 우리의 여정을 보호할 수 있도록 좋은 마음을 갖도록 하는 것이 매우 중요합니다."
+"우리의 여정에서 보듯이, 신들께서, 특히 바다용왕께서 우리의 여정을 보호할 수 있도록 좋은 마음을 갖도록 하는 것이 매우 중요합니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:564
 msgid ""
@@ -996,8 +994,8 @@ msgid ""
 "can’t worship him well. I think we should search the whole region to see if "
 "we can recover all six pieces of the shrine."
 msgstr ""
-"불행하게도, 거대한 폭풍 속에서 신성한 넵튠의 성소를 상실했서, 그를 잘 숭배하기가 힘듭니다. 전체 지역을 탐사해 성소를 이루는 여섯 "
-"조각을 모두 다시 되찾아야 합니다."
+"불행하게도, 거대한 폭풍 속에서 신성한 바다용왕의 성소를 상실했서, 그를 잘 숭배하기가 힘듭니다. 전체 지역을 탐사해 성소를 이루는 여섯"
+" 조각을 모두 다시 되찾아야 합니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:566
 msgid ""
@@ -1013,14 +1011,14 @@ msgstr "찬양하고, 찬양하고, 찬양하라"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:575
 msgid "Saledus is happily worshipping…"
-msgstr "살레두스는 행복하게 찬양하고 있다..."
+msgstr "살레두스는 행복하게 찬양하고 있다…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:577
 msgid ""
 "Sire, we recovered the holy shrine of Neptune. Now we can seek his "
 "protection for our journey."
-msgstr "전하, 넵튠의 신성한 성소를 되찾았습니다. 이제 우리의 여정에 그분의 보호를 기도할 수 있습니다."
+msgstr "폐하, 바다용왕의 신성한 성소를 되찾았습니다. 이제 우리의 여정에 그분의 보호를 기도할 수 있습니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:579
 msgid ""
@@ -1028,8 +1026,8 @@ msgid ""
 "friendly to our course! Oh great Neptune, save us from the creatures of the "
 "sea! Oh great Neptune, …"
 msgstr ""
-"오 위대한 넵튠이시여, 우리의 여정을 보호하소서! 오 위대한 넵튠이시여, 바람이 우리 여정에 친절하게 하소서! 오 위대한 넵튠이시여, "
-"우리를 바다의 생물들로부터 보호하소서! 오 위대한 넵튠이시여, ..."
+"오 위대한 바다용왕이시여, 우리의 여정을 보호하소서! 오 위대한 바다용왕이시여, 바람이 우리 여정에 친절하게 하소서! 오 위대한 "
+"바다용왕이시여, 우리를 바다의 생물들로부터 보호하소서! 오 위대한 바다용왕이시여, …"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:585
 msgid "Unpleasant Discoveries"
@@ -1037,7 +1035,7 @@ msgstr "불유쾌한 발견들"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:586
 msgid "Saledus looks very worried…"
-msgstr "살레두스는 매우 걱정스러워 보인다..."
+msgstr "살레두스는 매우 걱정스러워 보인다…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:588
@@ -1046,7 +1044,7 @@ msgid ""
 "somewhat worried that we will have to fight against them before we are ready"
 " to do so."
 msgstr ""
-"전하, 예전에 야만인 요새와 마을이었던 흔적을 찾았습니다. 우리가 충분히 준비되기 전에 그들에 맞서 싸워야 한다는 것이 걱정됩니다."
+"폐하, 예전에 야만인 요새와 마을이었던 흔적을 찾았습니다. 우리가 충분히 준비되기 전에 그들에 맞서 싸워야 한다는 것이 걱정됩니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:594
 msgid "Train Faster, Train Harder"
@@ -1063,7 +1061,7 @@ msgid ""
 "should increase our efforts to train them to the highest level and to train "
 "more of them."
 msgstr ""
-"전하, 군인들을 훈련할 모든 건물이 확보되었습니다만, 그들을 최고의 수준으로, 또 더 많은 수를 훈련하도록 노력할 필요가 있습니다."
+"폐하, 군인들을 훈련할 모든 건물이 확보되었습니다만, 그들을 최고의 수준으로, 또 더 많은 수를 훈련하도록 노력할 필요가 있습니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:599
 msgid ""
@@ -1077,7 +1075,7 @@ msgstr "훈련 기반시설이 필요합니다"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:606
 msgid "Saledus has security concerns"
-msgstr "살레두스는 보안에 신경썼습니다"
+msgstr "살레두스는 보안에 신경썼다"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:608
@@ -1086,7 +1084,7 @@ msgid ""
 " important to increase the number of our soldiers as fast as we can. And we "
 "should train them well to improve their fighting abilities."
 msgstr ""
-"전하, 당신의 위대한 군대에 사람들이 종사하도록 훈련해야 합니다. 할 수 있는 한 빨리 군인들의 수를 늘리는 것이 중요합니다. 또 우리는"
+"폐하, 당신의 위대한 군대에 사람들이 종사하도록 훈련해야 합니다. 할 수 있는 한 빨리 군인들의 수를 늘리는 것이 중요합니다. 또 우리는"
 " 그들의 전투능력을 향상시킬 수 있도록 잘 훈련시켜야 합니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:610
@@ -1095,8 +1093,8 @@ msgid ""
 "limited space available. We need some barracks, a training camp and an arena"
 " or a colosseum."
 msgstr ""
-"그러므로, 우리는 제한된 공간에도 불구하고 충분한 훈련 기반시설을 지어야 합니다. 병영 몇 개와, 훈련소, 그리고 경기장 또는 콜로세움이"
-" 필요합니다."
+"그러므로, 우리는 제한된 공간에도 불구하고 충분한 훈련 기반시설을 지어야 합니다. 몇 곳의 병영, 훈련소, 경기장이나 콜로세움이 "
+"필요합니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:618
 msgid "Time to get Home Again"
@@ -1120,17 +1118,17 @@ msgstr "승리"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr "이 미션을 완료하셨습니다. 원하신다면 더 플레이하시거나, 다음 미션으로 이동할 수 있습니다."
+msgstr "이 임무를 완수했습니다. 원한다면 계속 할 수 있고, 그렇지 않으면 다음 임무로 이동하십시오."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:633
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
-msgstr "마침내, 우리는 성소의 한 조각을 발견했다. 넵튠을 찬양하라!"
+msgstr "마침내, 우리는 성소의 한 조각을 발견했다. 바다용왕을 찬양하라!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
-msgstr "우리는 성소의 또 다른 조각을 발견했다. 넵튠을 찬양하라!"
+msgstr "우리는 성소의 또 다른 조각을 발견했다. 바다용왕을 찬양하라!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:641
@@ -1145,13 +1143,8 @@ msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
 msgstr ""
-"마침내, 우리는 성소의 마지막 조각을 발견했다. 이제 우리는 우리의 신을 모시기 위해 재조립할 수 있을 것이다. 넵튠을 찬양하라!"
+"마침내, 우리는 성소의 마지막 조각을 발견했다. 이제 우리는 우리의 신을 모시기 위해 재조립할 수 있을 것이다. 바다용왕을 찬양하라!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:647
 msgid "Artifact Found"
 msgstr "유물 발견"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

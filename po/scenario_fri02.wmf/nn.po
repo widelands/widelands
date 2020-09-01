@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Language-Team: Norwegian Nynorsk (https://www.transifex.com/widelands/teams/35159/nn/)\n"
 "MIME-Version: 1.0\n"
@@ -846,7 +846,8 @@ msgstr ""
 msgid "Congratulations"
 msgstr ""
 
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:415
+msgid ""
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
 msgstr ""

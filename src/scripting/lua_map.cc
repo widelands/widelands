@@ -19,7 +19,6 @@
 
 #include "scripting/lua_map.h"
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/input_queue.h"
@@ -34,7 +33,6 @@
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warelist.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
@@ -399,8 +397,8 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WaresWorkersMa
 }
 
 // Does most of the work of set_workers for player immovables (buildings and roads mainly).
-template <typename T>
-int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& valid_workers) {
+template <typename TLua, typename TMapObject>
+int do_set_workers(lua_State* L, TMapObject* pi, const WaresWorkersMap& valid_workers) {
 	EditorGameBase& egbase = get_egbase(L);
 	const TribeDescr& tribe = pi->owner().tribe();
 
@@ -431,7 +429,8 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 		const Widelands::DescriptionIndex& index = sp.first.first;
 		const WorkerDescr* wdes = tribe.get_worker_descr(index);
 		if (sp.second != 0 && !valid_workers.count(index)) {
-			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
+			report_error(
+			   L, "<%s> can't be employed at '%s'!", wdes->name().c_str(), pi->descr().name().c_str());
 		}
 
 		Widelands::Quantity cur = 0;
@@ -453,8 +452,9 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 			}
 		} else if (d > 0) {
 			for (; d; --d) {
-				if (T::create_new_worker(*pi, egbase, wdes)) {
-					report_error(L, "No space left for this worker");
+				if (!TLua::create_new_worker(L, *pi, egbase, wdes)) {
+					report_error(L, "No space left for worker '%s' at '%s'", wdes->name().c_str(),
+					             pi->descr().name().c_str());
 				}
 			}
 		}
@@ -702,11 +702,12 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const TribeDescr&
 }
 
 const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tribename) {
-	if (!Widelands::tribe_exists(tribename)) {
+	const Tribes& tribes = get_egbase(L).tribes();
+	if (!tribes.tribe_exists(tribename)) {
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
-	return *tribes.get_tribe_descr(tribes.tribe_index(tribename));
+	return *get_egbase(L).tribes().get_tribe_descr(
+	   get_egbase(L).mutable_tribes()->load_tribe(tribename));
 }
 
 }  // namespace
@@ -717,7 +718,7 @@ const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tr
  * object available.
  */
 #define CAST_TO_LUA(klass, lua_klass)                                                              \
-	to_lua<lua_klass>(L, new lua_klass(static_cast<const klass*>(descr)))
+	to_lua<lua_klass>(L, new lua_klass(dynamic_cast<const klass*>(descr)))
 int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const descr) {
 	assert(descr != nullptr);
 
@@ -766,7 +767,7 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const d
  * Lua. We use this so that scripters always work with the highest class
  * object available.
  */
-#define CAST_TO_LUA(k) to_lua<Lua##k>(L, new Lua##k(*static_cast<k*>(mo)))
+#define CAST_TO_LUA(k) to_lua<Lua##k>(L, new Lua##k(*dynamic_cast<k*>(mo)))
 int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	if (!mo) {
 		return 0;
@@ -822,6 +823,8 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case MapObjectType::TRAININGSITE:
 		return CAST_TO_LUA(TrainingSite);
 	case MapObjectType::MAPOBJECT:
+	case MapObjectType::RESOURCE:
+	case MapObjectType::TERRAIN:
 	case MapObjectType::BATTLE:
 	case MapObjectType::BOB:
 	case MapObjectType::SHIP_FLEET:
@@ -1422,12 +1425,12 @@ int LuaMap::find_ocean_fields(lua_State* L) {
 	std::vector<LuaMaps::LuaField*> result;
 	for (uint32_t i = luaL_checkuint32(L, 2); i;) {
 		const uint32_t x = game->logic_rand() % map.get_width();
-		const uint32_t y = game->logic_rand() % map.get_width();
+		const uint32_t y = game->logic_rand() % map.get_height();
 		Widelands::Coords field(x, y);
 		bool success = false;
 		if (map[field].maxcaps() & Widelands::MOVECAPS_SWIM) {
 			for (Widelands::Coords port : map.get_port_spaces()) {
-				for (const Widelands::Coords& c : map.find_portdock(port)) {
+				for (const Widelands::Coords& c : map.find_portdock(port, false)) {
 					Widelands::Path p;
 					if (map.findpath(field, c, 0, p, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
 						success = true;
@@ -1488,8 +1491,15 @@ int LuaMap::place_immovable(lua_State* const L) {
 		}
 	}
 
-	EditorGameBase& egbase = get_egbase(L);
+	// The immovable type might not have been loaded yet
+	try {
+		Notifications::publish(
+		   NoteMapObjectDescription(objname, NoteMapObjectDescription::LoadType::kObject));
+	} catch (const Widelands::GameDataError&) {
+		report_error(L, "Unknown immovable <%s>", objname.c_str());
+	}
 
+	EditorGameBase& egbase = get_egbase(L);
 	BaseImmovable* m = nullptr;
 	if (from_where == "world") {
 		DescriptionIndex const imm_idx = egbase.world().get_immovable_index(objname);
@@ -1604,7 +1614,7 @@ int LuaMap::sea_route_exists(lua_State* L) {
 	const Widelands::Map& map = get_egbase(L).map();
 	const Widelands::FCoords f_start = (*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L);
 	const Widelands::FCoords f_port = (*get_user_class<LuaMaps::LuaField>(L, 3))->fcoords(L);
-	for (const Widelands::Coords& c : map.find_portdock(f_port)) {
+	for (const Widelands::Coords& c : map.find_portdock(f_port, false)) {
 		Widelands::Path p;
 		if (map.findpath(f_start, c, 0, p, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
 			lua_pushboolean(L, true);
@@ -1640,6 +1650,7 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, buildings),
    PROP_RO(LuaTribeDescription, carrier),
    PROP_RO(LuaTribeDescription, carrier2),
+   PROP_RO(LuaTribeDescription, ferry),
    PROP_RO(LuaTribeDescription, descname),
    PROP_RO(LuaTribeDescription, geologist),
    PROP_RO(LuaTribeDescription, immovables),
@@ -1661,9 +1672,11 @@ void LuaTribeDescription::__persist(lua_State* L) {
 void LuaTribeDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Tribes& tribes = get_egbase(L).tribes();
-	DescriptionIndex idx = tribes.safe_tribe_index(name);
-	set_description_pointer(tribes.get_tribe_descr(idx));
+	if (!Widelands::tribe_exists(name)) {
+		report_error(L, "Tribe '%s' does not exist", name.c_str());
+	}
+	set_description_pointer(
+	   get_egbase(L).tribes().get_tribe_descr(get_egbase(L).mutable_tribes()->load_tribe(name)));
 }
 
 /*
@@ -1710,6 +1723,18 @@ int LuaTribeDescription::get_carrier(lua_State* L) {
 
 int LuaTribeDescription::get_carrier2(lua_State* L) {
 	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->carrier2())->name());
+	return 1;
+}
+
+/* RST
+   .. attribute:: ferry
+
+         (RO) the :class:`string` internal name of the ferry type that this tribe uses.
+              e.g. 'atlanteans_ferry'
+*/
+
+int LuaTribeDescription::get_ferry(lua_State* L) {
+	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->ferry())->name());
 	return 1;
 }
 
@@ -1763,8 +1788,7 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
 int LuaTribeDescription::get_resource_indicators(lua_State* L) {
 	const TribeDescr& tribe = *get();
 	lua_newtable(L);
-	const ResourceIndicatorSet resis = tribe.resource_indicators();
-	for (const auto& resilist : resis) {
+	for (const auto& resilist : tribe.resource_indicators()) {
 		lua_pushstring(L, resilist.first);
 		lua_newtable(L);
 		for (const auto& resi : resilist.second) {
@@ -2085,7 +2109,7 @@ const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
 const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[] = {
    PROP_RO(LuaImmovableDescription, species),
    PROP_RO(LuaImmovableDescription, buildcost),
-   PROP_RO(LuaImmovableDescription, editor_category),
+   PROP_RO(LuaImmovableDescription, becomes),
    PROP_RO(LuaImmovableDescription, terrain_affinity),
    PROP_RO(LuaImmovableDescription, owner_type),
    PROP_RO(LuaImmovableDescription, size),
@@ -2134,25 +2158,18 @@ int LuaImmovableDescription::get_buildcost(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: editor_category
+   .. attribute:: becomes
 
-         the name and descname of the editor category of this immovable
-
-         (RO) a table with "name" and "descname" entries for the editor category, or nil if it has
-         none.
+         (RO) a table of map object names that this immovable can turn into, e.g.
+         ``{"atlanteans_ship"}`` or ``{"deadtree2", "fallentree"}``.
 */
-int LuaImmovableDescription::get_editor_category(lua_State* L) {
-	const EditorCategory* editor_category = get()->editor_category();
-	if (editor_category != nullptr) {
-		lua_newtable(L);
-		lua_pushstring(L, "name");
-		lua_pushstring(L, editor_category->name());
+int LuaImmovableDescription::get_becomes(lua_State* L) {
+	lua_newtable(L);
+	int counter = 0;
+	for (const auto& target : get()->becomes()) {
+		lua_pushuint32(L, ++counter);
+		lua_pushstring(L, target.second);
 		lua_settable(L, -3);
-		lua_pushstring(L, "descname");
-		lua_pushstring(L, editor_category->descname());
-		lua_settable(L, -3);
-	} else {
-		lua_pushnil(L);
 	}
 	return 1;
 }
@@ -3104,7 +3121,8 @@ const MethodType<LuaWarehouseDescription> LuaWarehouseDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWarehouseDescription> LuaWarehouseDescription::Properties[] = {
-   PROP_RO(LuaWarehouseDescription, heal_per_second), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWarehouseDescription, heal_per_second),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -3147,6 +3165,45 @@ const MethodType<LuaMarketDescription> LuaMarketDescription::Methods[] = {
 const PropertyType<LuaMarketDescription> LuaMarketDescription::Properties[] = {
    {nullptr, nullptr, nullptr},
 };
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/* RST
+ShipDescription
+-----------------
+
+.. class:: ShipDescription
+
+   Child of: :class:`MapObjectDescription`
+
+   A static description of a tribe's ship, so it can be used in help files
+   without having to access an actual instance of the ship on the map.
+   See also :class:`MapObjectDescription` for more properties.
+*/
+const char LuaShipDescription::className[] = "ShipDescription";
+const MethodType<LuaShipDescription> LuaShipDescription::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaShipDescription> LuaShipDescription::Properties[] = {
+   {nullptr, nullptr, nullptr},
+};
+
+void LuaShipDescription::__persist(lua_State* L) {
+	const ShipDescr* descr = get();
+	PERS_STRING("name", descr->name());
+}
+
+void LuaShipDescription::__unpersist(lua_State* L) {
+	std::string name;
+	UNPERS_STRING("name", name)
+	const Tribes& tribes = get_egbase(L).tribes();
+	DescriptionIndex idx = tribes.safe_ship_index(name.c_str());
+	set_description_pointer(tribes.get_ship_descr(idx));
+}
 
 /*
  ==========================================================
@@ -3199,6 +3256,9 @@ void LuaWareDescription::__unpersist(lua_State* L) {
 /* RST
    .. method:: consumers(tribename)
 
+      Returns a list of buildings for the 'tribe' that consume this ware.
+      Loads the tribe if it hasn't been loaded yet.
+
       :arg tribename: the name of the tribe that this ware gets checked for
       :type tribename: :class:`string`
 
@@ -3235,7 +3295,7 @@ int LuaWareDescription::consumers(lua_State* L) {
 int LuaWareDescription::is_construction_material(lua_State* L) {
 	std::string tribename = luaL_checkstring(L, -1);
 	const Tribes& tribes = get_egbase(L).tribes();
-	if (Widelands::tribe_exists(tribename)) {
+	if (tribes.tribe_exists(tribename)) {
 		const DescriptionIndex& ware_index = tribes.safe_ware_index(get()->name());
 		int tribeindex = tribes.tribe_index(tribename);
 		lua_pushboolean(L, tribes.get_tribe_descr(tribeindex)->is_construction_material(ware_index));
@@ -3247,6 +3307,9 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 
 /* RST
    .. method:: producers(tribename)
+
+      Returns a list of buildings for the 'tribe' that produce this ware.
+      Loads the tribe if it hasn't been loaded yet.
 
       :arg tribename: the name of the tribe that this ware gets checked for
       :type tribename: :class:`string`
@@ -3564,7 +3627,8 @@ ResourceDescription
 */
 const char LuaResourceDescription::className[] = "ResourceDescription";
 const MethodType<LuaResourceDescription> LuaResourceDescription::Methods[] = {
-   METHOD(LuaResourceDescription, editor_image), {nullptr, nullptr},
+   METHOD(LuaResourceDescription, editor_image),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaResourceDescription> LuaResourceDescription::Properties[] = {
    PROP_RO(LuaResourceDescription, name),
@@ -3584,7 +3648,7 @@ void LuaResourceDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
 	const World& world = get_egbase(L).world();
-	const ResourceDescription* descr = world.get_resource(world.safe_resource_index(name.c_str()));
+	const ResourceDescription* descr = world.get_resource(world.safe_resource_index(name));
 	set_description_pointer(descr);
 }
 
@@ -3687,7 +3751,6 @@ const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = 
    PROP_RO(LuaTerrainDescription, descname),
    PROP_RO(LuaTerrainDescription, default_resource),
    PROP_RO(LuaTerrainDescription, default_resource_amount),
-   PROP_RO(LuaTerrainDescription, editor_category),
    PROP_RO(LuaTerrainDescription, fertility),
    PROP_RO(LuaTerrainDescription, humidity),
    PROP_RO(LuaTerrainDescription, representative_image),
@@ -3762,28 +3825,6 @@ int LuaTerrainDescription::get_default_resource(lua_State* L) {
 
 int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
 	lua_pushinteger(L, get()->get_default_resource_amount());
-	return 1;
-}
-
-/* RST
-   .. attribute:: the name and descname of the editor category of this terrain
-
-      (RO) a table with "name" and "descname" entries for the editor category, or nil if it has
-      none.
-*/
-int LuaTerrainDescription::get_editor_category(lua_State* L) {
-	const EditorCategory* editor_category = get()->editor_category();
-	if (editor_category != nullptr) {
-		lua_newtable(L);
-		lua_pushstring(L, "name");
-		lua_pushstring(L, editor_category->name());
-		lua_settable(L, -3);
-		lua_pushstring(L, "descname");
-		lua_pushstring(L, editor_category->descname());
-		lua_settable(L, -3);
-	} else {
-		lua_pushnil(L);
-	}
 	return 1;
 }
 
@@ -3868,7 +3909,9 @@ Economy
 */
 const char LuaEconomy::className[] = "Economy";
 const MethodType<LuaEconomy> LuaEconomy::Methods[] = {
-   METHOD(LuaEconomy, target_quantity), METHOD(LuaEconomy, set_target_quantity), {nullptr, nullptr},
+   METHOD(LuaEconomy, target_quantity),
+   METHOD(LuaEconomy, set_target_quantity),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaEconomy> LuaEconomy::Properties[] = {
    {nullptr, nullptr, nullptr},
@@ -3958,7 +4001,7 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 			if (quantity < 0) {
 				report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
 			}
-			get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+			get()->set_target_quantity(get()->type(), index, quantity, get_egbase(L).get_gametime());
 		} else {
 			report_error(L, "There is no ware '%s'.", wname.c_str());
 		}
@@ -3971,7 +4014,7 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 			if (quantity < 0) {
 				report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
 			}
-			get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+			get()->set_target_quantity(get()->type(), index, quantity, get_egbase(L).get_gametime());
 		} else {
 			report_error(L, "There is no worker '%s'.", wname.c_str());
 		}
@@ -4059,7 +4102,7 @@ int LuaMapObject::get_serial(lua_State* L) {
 
 // use the dynamic type of BuildingDescription
 #define CAST_TO_LUA(klass, lua_klass)                                                              \
-	to_lua<lua_klass>(L, new lua_klass(static_cast<const klass*>(desc)))
+	to_lua<lua_klass>(L, new lua_klass(dynamic_cast<const klass*>(desc)))
 
 /* RST
    .. attribute:: descr
@@ -4094,13 +4137,18 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case MapObjectType::FERRY:
 	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
+	case MapObjectType::SHIP:
+		return CAST_TO_LUA(ShipDescr, LuaShipDescription);
+	case MapObjectType::RESOURCE:
+		return CAST_TO_LUA(ResourceDescription, LuaResourceDescription);
+	case MapObjectType::TERRAIN:
+		return CAST_TO_LUA(TerrainDescription, LuaTerrainDescription);
 	case MapObjectType::MAPOBJECT:
 	case MapObjectType::BATTLE:
 	case MapObjectType::BOB:
 	case MapObjectType::CRITTER:
 	case MapObjectType::FERRY_FLEET:
 	case MapObjectType::SHIP_FLEET:
-	case MapObjectType::SHIP:
 	case MapObjectType::FLAG:
 	case MapObjectType::ROAD:
 	case MapObjectType::WATERWAY:
@@ -4202,8 +4250,9 @@ int LuaMapObject::has_attribute(lua_State* L) {
  C METHODS
  ==========================================================
  */
-MapObject* LuaMapObject::get(lua_State* L, EditorGameBase& egbase, std::string name) {
-	MapObject* o = get_or_zero(egbase);
+Widelands::MapObject*
+LuaMapObject::get(lua_State* L, Widelands::EditorGameBase& egbase, const std::string& name) {
+	Widelands::MapObject* o = get_or_zero(egbase);
 	if (!o) {
 		report_error(L, "%s no longer exists!", name.c_str());
 	}
@@ -4231,7 +4280,8 @@ const MethodType<LuaBaseImmovable> LuaBaseImmovable::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaBaseImmovable> LuaBaseImmovable::Properties[] = {
-   PROP_RO(LuaBaseImmovable, fields), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaBaseImmovable, fields),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -4351,7 +4401,9 @@ Flag
 */
 const char LuaFlag::className[] = "Flag";
 const MethodType<LuaFlag> LuaFlag::Methods[] = {
-   METHOD(LuaFlag, set_wares), METHOD(LuaFlag, get_wares), {nullptr, nullptr},
+   METHOD(LuaFlag, set_wares),
+   METHOD(LuaFlag, get_wares),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
    PROP_RO(LuaFlag, ware_economy), PROP_RO(LuaFlag, worker_economy), PROP_RO(LuaFlag, roads),
@@ -4456,60 +4508,67 @@ int LuaFlag::set_wares(lua_State* L) {
 	parse_wares_workers_counted(L, f->owner().tribe(), &setpoints, true);
 	WaresWorkersMap c_wares = count_wares_on_flag_(*f, tribes);
 
-	Widelands::Quantity nwares = 0;
-
 	for (const auto& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
 		if (!setpoints.count(std::make_pair(ware.first, Widelands::WareWorker::wwWARE))) {
 			setpoints.insert(
 			   std::make_pair(std::make_pair(ware.first, Widelands::WareWorker::wwWARE), 0));
 		}
-		nwares += ware.second;
 	}
+
+	// When the wares on the flag increase, we do it at the end to avoid exceeding the capacity
+	std::map<Widelands::DescriptionIndex, int> wares_to_add;
 
 	// The idea is to change as little as possible on this flag
 	for (const auto& sp : setpoints) {
-		uint32_t cur = 0;
+		int diff = sp.second;
+
 		const Widelands::DescriptionIndex& index = sp.first.first;
 		WaresWorkersMap::iterator i = c_wares.find(index);
 		if (i != c_wares.end()) {
-			cur = i->second;
+			diff -= i->second;
 		}
 
-		int d = sp.second - cur;
-		nwares += d;
-
-		if (f->total_capacity() < nwares) {
-			report_error(L, "Flag has no capacity left!");
-		}
-
-		if (d < 0) {
-			while (d) {
+		if (diff > 0) {
+			// add wares later
+			wares_to_add.insert(std::make_pair(index, diff));
+		} else {
+			while (diff < 0) {
 				for (const WareInstance* ware : f->get_wares()) {
 					if (tribes.ware_index(ware->descr().name()) == index) {
 						const_cast<WareInstance*>(ware)->remove(egbase);
-						++d;
+						++diff;
 						break;
 					}
 				}
 			}
-		} else if (d > 0) {
-			// add wares
-			const WareDescr& wd = *tribes.get_ware_descr(index);
-			for (int32_t j = 0; j < d; j++) {
-				WareInstance& ware = *new WareInstance(index, &wd);
-				ware.init(egbase);
-				f->add_ware(egbase, ware);
-			}
 		}
-#ifndef NDEBUG
-		if (sp.second > 0) {
-			c_wares = count_wares_on_flag_(*f, tribes);
-			assert(c_wares.count(index) == 1);
-			assert(c_wares.at(index) == sp.second);
-		}
-#endif
 	}
+
+	// Now that wares to be removed have gone, we add the remaining wares
+	for (const auto& ware_to_add : wares_to_add) {
+		if (f->total_capacity() < f->current_wares() + ware_to_add.second) {
+			report_error(L, "Flag has no capacity left!");
+		}
+
+		const WareDescr& wd = *tribes.get_ware_descr(ware_to_add.first);
+		for (int i = 0; i < ware_to_add.second; i++) {
+			WareInstance& ware = *new WareInstance(ware_to_add.first, &wd);
+			ware.init(egbase);
+			f->add_ware(egbase, ware);
+		}
+	}
+
+#ifndef NDEBUG
+	WaresWorkersMap wares_on_flag = count_wares_on_flag_(*f, tribes);
+	for (const auto& sp : setpoints) {
+		if (sp.second > 0) {
+			assert(wares_on_flag.count(sp.first.first) == 1);
+			assert(wares_on_flag.at(sp.first.first) == sp.second);
+		}
+	}
+#endif
+
 	return 0;
 }
 
@@ -4581,7 +4640,9 @@ Road
 */
 const char LuaRoad::className[] = "Road";
 const MethodType<LuaRoad> LuaRoad::Methods[] = {
-   METHOD(LuaRoad, get_workers), METHOD(LuaRoad, set_workers), {nullptr, nullptr},
+   METHOD(LuaRoad, get_workers),
+   METHOD(LuaRoad, set_workers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaRoad> LuaRoad::Properties[] = {
    PROP_RO(LuaRoad, length),        PROP_RO(LuaRoad, start_flag), PROP_RO(LuaRoad, end_flag),
@@ -4671,33 +4732,48 @@ int LuaRoad::set_workers(lua_State* L) {
  ==========================================================
  */
 
-int LuaRoad::create_new_worker(PlayerImmovable& pi,
-                               EditorGameBase& egbase,
-                               const WorkerDescr* wdes) {
-	RoadBase& r = static_cast<RoadBase&>(pi);
-
-	if (r.get_workers().size()) {
-		return -1;  // No space
+bool LuaRoad::create_new_worker(lua_State* L,
+                                RoadBase& rb,
+                                EditorGameBase& egbase,
+                                const WorkerDescr* wdes) {
+	Road* r = dynamic_cast<Road*>(&rb);
+	const bool is_busy = r && r->is_busy();
+	if (is_busy) {
+		// Busy roads have space for 2 carriers
+		if (rb.get_workers().size() == 2) {
+			return false;  // No space
+		}
+	} else if (!rb.get_workers().empty()) {
+		// Normal roads and waterways have space for 1 carrier
+		return false;  // No space
 	}
 
 	// Determine Idle position.
-	Flag& start = r.get_flag(RoadBase::FlagStart);
+	Flag& start = rb.get_flag(RoadBase::FlagStart);
 	Coords idle_position = start.get_position();
-	const Path& path = r.get_path();
-	Path::StepVector::size_type idle_index = r.get_idle_index();
+	const Path& path = rb.get_path();
+	Path::StepVector::size_type idle_index = rb.get_idle_index();
 	for (Path::StepVector::size_type i = 0; i < idle_index; ++i) {
 		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
 	}
 
+	// Ensure the position is free - e.g. we want carrier + carrier2 for busy road, not 2x carrier!
+	for (Worker* existing : rb.get_workers()) {
+		if (existing->descr().name() == wdes->name()) {
+			report_error(L, "Road already has worker <%s> assigned at (%d, %d)", wdes->name().c_str(),
+			             idle_position.x, idle_position.y);
+		}
+	}
+
 	Carrier& carrier =
-	   dynamic_cast<Carrier&>(wdes->create(egbase, r.get_owner(), &r, idle_position));
+	   dynamic_cast<Carrier&>(wdes->create(egbase, rb.get_owner(), &rb, idle_position));
 
 	if (upcast(Game, game, &egbase)) {
 		carrier.start_task_road(*game);
 	}
 
-	r.assign_carrier(carrier, 0);
-	return 0;
+	rb.assign_carrier(carrier, 0);
+	return true;
 }
 
 /* RST
@@ -4760,7 +4836,8 @@ const MethodType<LuaBuilding> LuaBuilding::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaBuilding> LuaBuilding::Properties[] = {
-   PROP_RO(LuaBuilding, flag), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaBuilding, flag),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -4811,7 +4888,8 @@ const MethodType<LuaConstructionSite> LuaConstructionSite::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaConstructionSite> LuaConstructionSite::Properties[] = {
-   PROP_RO(LuaConstructionSite, building), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaConstructionSite, building),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5497,10 +5575,10 @@ int LuaProductionSite::toggle_start_stop(lua_State* L) {
  ==========================================================
  */
 
-int LuaProductionSite::create_new_worker(PlayerImmovable& pi,
-                                         EditorGameBase& egbase,
-                                         const WorkerDescr* wdes) {
-	ProductionSite& ps = static_cast<ProductionSite&>(pi);
+bool LuaProductionSite::create_new_worker(lua_State* /* L */,
+                                          ProductionSite& ps,
+                                          EditorGameBase& egbase,
+                                          const WorkerDescr* wdes) {
 	return ps.warp_worker(egbase, *wdes);
 }
 
@@ -5594,10 +5672,13 @@ MilitarySite
 */
 const char LuaMilitarySite::className[] = "MilitarySite";
 const MethodType<LuaMilitarySite> LuaMilitarySite::Methods[] = {
-   METHOD(LuaMilitarySite, get_soldiers), METHOD(LuaMilitarySite, set_soldiers), {nullptr, nullptr},
+   METHOD(LuaMilitarySite, get_soldiers),
+   METHOD(LuaMilitarySite, set_soldiers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaMilitarySite> LuaMilitarySite::Properties[] = {
-   PROP_RO(LuaMilitarySite, max_soldiers), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMilitarySite, max_soldiers),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5651,10 +5732,13 @@ TrainingSite
 */
 const char LuaTrainingSite::className[] = "TrainingSite";
 const MethodType<LuaTrainingSite> LuaTrainingSite::Methods[] = {
-   METHOD(LuaTrainingSite, get_soldiers), METHOD(LuaTrainingSite, set_soldiers), {nullptr, nullptr},
+   METHOD(LuaTrainingSite, get_soldiers),
+   METHOD(LuaTrainingSite, set_soldiers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaTrainingSite> LuaTrainingSite::Properties[] = {
-   PROP_RO(LuaTrainingSite, max_soldiers), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaTrainingSite, max_soldiers),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5708,10 +5792,12 @@ Bob
 */
 const char LuaBob::className[] = "Bob";
 const MethodType<LuaBob> LuaBob::Methods[] = {
-   METHOD(LuaBob, has_caps), {nullptr, nullptr},
+   METHOD(LuaBob, has_caps),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaBob> LuaBob::Properties[] = {
-   PROP_RO(LuaBob, field), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaBob, field),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -6006,9 +6092,11 @@ int LuaShip::get_shipname(lua_State* L) {
 /* RST
    .. attribute:: capacity
 
-   The ship's current capacity. Defaults to the capacity defined in the tribe's singleton ship description.
+   The ship's current capacity. Defaults to the capacity defined in the tribe's singleton ship
+   description.
 
-   Do not change this value if the ship is currently shipping more items than the new capacity allows.
+   Do not change this value if the ship is currently shipping more items than the new capacity
+   allows.
 
       (RW) returns the current capacity of this ship
 
@@ -6137,6 +6225,8 @@ int LuaShip::make_expedition(lua_State* L) {
 	ship->add_item(*game, Widelands::ShippingItem(
 	                         tribe.get_worker_descr(tribe.builder())
 	                            ->create(*game, ship->get_owner(), nullptr, ship->get_position())));
+	std::map<Widelands::DescriptionIndex, uint32_t>
+	   workers_to_create;  // Lua table sorting order is not deterministic and may cause desyncs
 	if (lua_gettop(L) > 1) {
 		luaL_checktype(L, 2, LUA_TTABLE);
 		lua_pushnil(L);
@@ -6156,18 +6246,22 @@ int LuaShip::make_expedition(lua_State* L) {
 			} else {
 				index = tribe.worker_index(what);
 				if (tribe.has_worker(index)) {
-					while (amount > 0) {
-						ship->add_item(
-						   *game, Widelands::ShippingItem(tribe.get_worker_descr(index)->create(
-						             *game, ship->get_owner(), nullptr, ship->get_position())));
-						--amount;
-					}
+					workers_to_create[index] = amount;
 				} else {
 					report_error(L, "Invalid ware or worker: %s", what.c_str());
 				}
 			}
 		}
 	}
+
+	for (auto& pair : workers_to_create) {
+		for (; pair.second; --pair.second) {
+			ship->add_item(*game, Widelands::ShippingItem(tribe.get_worker_descr(pair.first)
+			                                                 ->create(*game, ship->get_owner(),
+			                                                          nullptr, ship->get_position())));
+		}
+	}
+
 	ship->set_destination(*game, nullptr);
 	ship->start_task_expedition(*game);
 
@@ -6199,7 +6293,9 @@ const MethodType<LuaWorker> LuaWorker::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWorker> LuaWorker::Properties[] = {
-   PROP_RO(LuaWorker, owner), PROP_RO(LuaWorker, location), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWorker, owner),
+   PROP_RO(LuaWorker, location),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -6233,7 +6329,7 @@ int LuaWorker::get_owner(lua_State* L) {
 int LuaWorker::get_location(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	return upcasted_map_object_to_lua(
-	   L, static_cast<BaseImmovable*>(get(L, egbase)->get_location(egbase)));
+	   L, dynamic_cast<BaseImmovable*>(get(L, egbase)->get_location(egbase)));
 }
 
 /*
@@ -6634,12 +6730,13 @@ int LuaField::get_terr(lua_State* L) {
 int LuaField::set_terr(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
-	const DescriptionIndex td = egbase.world().terrains().get_index(name);
-	if (td == static_cast<DescriptionIndex>(Widelands::INVALID_INDEX)) {
-		report_error(L, "Unknown terrain '%s'", name);
+	try {
+		const DescriptionIndex td = egbase.mutable_world()->load_terrain(name);
+		egbase.mutable_map()->change_terrain(
+		   egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
+	} catch (const Widelands::GameDataError& e) {
+		report_error(L, "set_terr: %s", e.what());
 	}
-
-	egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
 
 	lua_pushstring(L, name);
 	return 1;
@@ -6653,12 +6750,13 @@ int LuaField::get_terd(lua_State* L) {
 int LuaField::set_terd(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
-	const DescriptionIndex td = egbase.world().terrains().get_index(name);
-	if (td == static_cast<DescriptionIndex>(INVALID_INDEX)) {
-		report_error(L, "Unknown terrain '%s'", name);
+	try {
+		const DescriptionIndex td = egbase.mutable_world()->load_terrain(name);
+		egbase.mutable_map()->change_terrain(
+		   egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
+	} catch (const Widelands::GameDataError& e) {
+		report_error(L, "set_terd: %s", e.what());
 	}
-
-	egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
 
 	lua_pushstring(L, name);
 	return 1;
@@ -7055,6 +7153,10 @@ void luaopen_wlmap(lua_State* L) {
 	register_class<LuaMarketDescription>(L, "map", true);
 	add_parent<LuaMarketDescription, LuaBuildingDescription>(L);
 	add_parent<LuaMarketDescription, LuaMapObjectDescription>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaShipDescription>(L, "map", true);
+	add_parent<LuaShipDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaWareDescription>(L, "map", true);

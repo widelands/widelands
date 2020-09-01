@@ -32,8 +32,9 @@ namespace Widelands {
  */
 WareList::~WareList() {
 	for (uint32_t id = 0; id < wares_.size(); ++id) {
-		if (wares_[id])
-			log("WareList: %i items of %i left.\n", wares_[id], id);
+		if (wares_[id]) {
+			log_warn("WareList: %i items of %i left.\n", wares_[id], id);
+		}
 	}
 }
 
@@ -41,30 +42,36 @@ WareList::~WareList() {
  * Add the given number of items (default = 1) to the storage.
  */
 void WareList::add(DescriptionIndex const i, const Quantity count) {
-	if (!count)
+	if (!count) {
 		return;
+	}
 
-	if (wares_.size() <= i)
+	if (wares_.size() <= i) {
 		wares_.resize(i + 1, 0);
+	}
 	wares_[i] += count;
 	assert(wares_[i] >= count);
 }
 
 void WareList::add(const WareList& wl) {
 	DescriptionIndex const nr_wares = wl.get_nrwareids();
-	if (wares_.size() < nr_wares)
+	if (wares_.size() < nr_wares) {
 		wares_.reserve(nr_wares);
-	for (DescriptionIndex i = 0; i < nr_wares; ++i)
-		if (wl.wares_[i])
+	}
+	for (DescriptionIndex i = 0; i < nr_wares; ++i) {
+		if (wl.wares_[i]) {
 			add(i, wl.wares_[i]);
+		}
+	}
 }
 
 /**
  * Remove the given number of items (default = 1) from the storage.
  */
 void WareList::remove(DescriptionIndex const i, const Quantity count) {
-	if (!count)
+	if (!count) {
 		return;
+	}
 
 	assert(i < wares_.size());
 	assert(wares_[i] >= count);
@@ -73,9 +80,11 @@ void WareList::remove(DescriptionIndex const i, const Quantity count) {
 
 void WareList::remove(const WareList& wl) {
 	DescriptionIndex const nr_wares = wl.get_nrwareids();
-	for (DescriptionIndex i = 0; i < nr_wares; ++i)
-		if (wl.wares_[i])
+	for (DescriptionIndex i = 0; i < nr_wares; ++i) {
+		if (wl.wares_[i]) {
 			remove(i, wl.wares_[i]);
+		}
+	}
 }
 
 /**
@@ -95,18 +104,21 @@ bool WareList::operator==(const WareList& wl) const {
 	while (i < wl.wares_.size()) {
 		const Quantity count = wl.wares_[i];
 		if (i < wares_.size()) {
-			if (count != wares_[i])
+			if (count != wares_[i]) {
 				return false;
+			}
 		} else {
-			if (count)  // wl2 has 0 stock per definition
+			if (count) {  // wl2 has 0 stock per definition
 				return false;
+			}
 		}
 		++i;
 	}
 
 	while (i < wares_.size()) {
-		if (wares_[i])  // wl1 has 0 stock per definition
+		if (wares_[i]) {  // wl1 has 0 stock per definition
 			return false;
+		}
 		++i;
 	}
 

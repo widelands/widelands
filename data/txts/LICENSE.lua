@@ -1,10 +1,9 @@
 include "scripting/richtext.lua"
 
-set_textdomain("texts")
+push_textdomain("texts")
 
-return {
-   title = _"License",
-   text = rt(
+local r = {
+   rt(
       p_font("align=center", "size=28 color=2F9131", _"Licensing information for Widelands") ..
       -- TRANSLATORS: Placeholder is copyright end year
       p_font("align=center", "size=14 italic=1 color=D1D1D1", _"Copyright 2002 - %1% by the Widelands Development Team."):bformat(2020) ..
@@ -28,3 +27,5 @@ return {
             a("widelands.org/wiki/TranslatingWidelands"))
    )
 }
+pop_textdomain()
+return r

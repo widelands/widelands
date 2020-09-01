@@ -13,7 +13,6 @@ Contents:
 
    development
    geometry
-   productionsite_program
    lua_index
 
 

@@ -2,7 +2,7 @@
 --                         Empire Campaign Mission 4
 -- =======================================================================
 
-set_textdomain("scenario_emp04.wmf")
+push_textdomain("scenario_emp04.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/field_animations.lua"

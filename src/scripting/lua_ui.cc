@@ -21,6 +21,7 @@
 
 #include <SDL_mouse.h>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
@@ -80,7 +81,8 @@ const PropertyType<LuaPanel> LuaPanel::Properties[] = {
    PROP_RW(LuaPanel, width),   PROP_RW(LuaPanel, height),     {nullptr, nullptr, nullptr},
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
-   METHOD(LuaPanel, get_descendant_position), {nullptr, nullptr},
+   METHOD(LuaPanel, get_descendant_position),
+   {nullptr, nullptr},
 };
 
 // Look for all descendant panels of class P and add the corresponding Lua version to the currently
@@ -298,10 +300,13 @@ Button
 */
 const char LuaButton::className[] = "Button";
 const MethodType<LuaButton> LuaButton::Methods[] = {
-   METHOD(LuaButton, press), METHOD(LuaButton, click), {nullptr, nullptr},
+   METHOD(LuaButton, press),
+   METHOD(LuaButton, click),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaButton> LuaButton::Properties[] = {
-   PROP_RO(LuaButton, name), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaButton, name),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -324,7 +329,7 @@ int LuaButton::get_name(lua_State* L) {
       event in tutorials
 */
 int LuaButton::press(lua_State* /* L */) {
-	log("Pressing button '%s'\n", get()->get_name().c_str());
+	log_info("Pressing button '%s'\n", get()->get_name().c_str());
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	return 0;
@@ -336,7 +341,7 @@ int LuaButton::press(lua_State* /* L */) {
       it.
 */
 int LuaButton::click(lua_State* /* L */) {
-	log("Clicking button '%s'\n", get()->get_name().c_str());
+	log_info("Clicking button '%s'\n", get()->get_name().c_str());
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);
@@ -365,7 +370,9 @@ const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
-   PROP_RO(LuaDropdown, name), PROP_RO(LuaDropdown, no_of_items), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaDropdown, name),
+   PROP_RO(LuaDropdown, no_of_items),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -397,7 +404,7 @@ int LuaDropdown::get_no_of_items(lua_State* L) {
       Open this dropdown menu.
 */
 int LuaDropdown::open(lua_State* /* L */) {
-	log("Opening dropdown '%s'\n", get()->get_name().c_str());
+	log_info("Opening dropdown '%s'\n", get()->get_name().c_str());
 	get()->set_list_visibility(true);
 	return 0;
 }
@@ -413,22 +420,27 @@ int LuaDropdown::open(lua_State* /* L */) {
 int LuaDropdown::highlight_item(lua_State* L) {
 	unsigned int desired_item = luaL_checkuint32(L, -1);
 	if (desired_item < 1 || desired_item > get()->size()) {
-		report_error(L, "Attempted to highlight item %d on dropdown '%s'. Avaliable range for this "
-		                "dropdown is 1-%d.",
+		report_error(L,
+		             "Attempted to highlight item %d on dropdown '%s'. Avaliable range for this "
+		             "dropdown is 1-%d.",
 		             desired_item, get()->get_name().c_str(), get()->size());
 	}
-	log("Highlighting item %d in dropdown '%s'\n", desired_item, get()->get_name().c_str());
+	log_info("Highlighting item %d in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 	// Open the dropdown
 	get()->set_list_visibility(true);
 
 	SDL_Keysym code;
 	// Ensure that we're at the top
 	code.sym = SDLK_UP;
+	code.scancode = SDL_SCANCODE_UP;
+	code.mod = KMOD_NONE;
+	code.unused = 0;
 	for (size_t i = 1; i < get()->size(); ++i) {
 		get()->handle_key(true, code);
 	}
 	// Press arrow down until the desired item is highlighted
 	code.sym = SDLK_DOWN;
+	code.scancode = SDL_SCANCODE_DOWN;
 	for (size_t i = 1; i < desired_item; ++i) {
 		get()->handle_key(true, code);
 	}
@@ -441,9 +453,12 @@ int LuaDropdown::highlight_item(lua_State* L) {
       Selects the currently highlighted item in this dropdown.
 */
 int LuaDropdown::select(lua_State* /* L */) {
-	log("Selecting current item in dropdown '%s'\n", get()->get_name().c_str());
+	log_info("Selecting current item in dropdown '%s'\n", get()->get_name().c_str());
 	SDL_Keysym code;
 	code.sym = SDLK_RETURN;
+	code.scancode = SDL_SCANCODE_RETURN;
+	code.mod = KMOD_NONE;
+	code.unused = 0;
 	get()->handle_key(true, code);
 	return 0;
 }
@@ -464,10 +479,13 @@ Tab
 */
 const char LuaTab::className[] = "Tab";
 const MethodType<LuaTab> LuaTab::Methods[] = {
-   METHOD(LuaTab, click), {nullptr, nullptr},
+   METHOD(LuaTab, click),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaTab> LuaTab::Properties[] = {
-   PROP_RO(LuaTab, name), PROP_RO(LuaTab, active), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaTab, name),
+   PROP_RO(LuaTab, active),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -499,7 +517,7 @@ int LuaTab::get_active(lua_State* L) {
       Click this tab making it the active one.
 */
 int LuaTab::click(lua_State* /* L */) {
-	log("Clicking tab '%s'\n", get()->get_name().c_str());
+	log_info("Clicking tab '%s'\n", get()->get_name().c_str());
 	get()->activate();
 	return 0;
 }
@@ -520,10 +538,12 @@ Window
 */
 const char LuaWindow::className[] = "Window";
 const MethodType<LuaWindow> LuaWindow::Methods[] = {
-   METHOD(LuaWindow, close), {nullptr, nullptr},
+   METHOD(LuaWindow, close),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaWindow> LuaWindow::Properties[] = {
-   PROP_RO(LuaWindow, name), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWindow, name),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -547,7 +567,7 @@ int LuaWindow::get_name(lua_State* L) {
       not use it any longer.
 */
 int LuaWindow::close(lua_State* /* L */) {
-	log("Closing window '%s'\n", get()->get_name().c_str());
+	log_info("Closing window '%s'\n", get()->get_name().c_str());
 	delete panel_;
 	panel_ = nullptr;
 	return 0;

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-05-22 17:26+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-07-23 09:10+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -265,7 +265,7 @@ msgstr "Ieskolle Begrötens"
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr "Reebaud un sien Volk sünd in de Noord ankomen. Aver hör Ankuft tüsken de fröstigen Meden un de schneeibedeckten Bargen is nich ganz willkomen …"
+msgstr "Reebaud un sien Volk sünd in de Noord ankomen. Aver hör Ankunft tüsken de fröstigen Meden un de schneeibedeckten Bargen is nich ganz willkomen …"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -335,8 +335,8 @@ msgid "Astoria 2.R"
 msgstr "Astoria 2.R"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:10
-msgid "Long, economic play in beautyfull land, try every player!!"
-msgstr "Langes Wirtschaft-Speel in ewigsmojer Kuntrei, probeer elkeen Speler ut!!"
+msgid "Long, economic play in beautiful land. Try every player!"
+msgstr "Langes Wirtschaft-Speel in ewigsmojer Kuntrei. Probeer elkeen Speler ut!"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
@@ -416,6 +416,10 @@ msgstr "Över de Kimm"
 msgid "Man your ship and sail to the horizon."
 msgstr "Rüst dien Schipp ut un seil tum Kimm."
 
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+msgid "This map is not winnable with the ‘Autocrat’ win condition."
+msgstr "Deese Kaart kann mit de Upgaav tum Winnen »Dwingelant« nich wunnen worden."
+
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
 msgstr "Wüüsten-Weddstried"
@@ -442,13 +446,12 @@ msgstr "De Dolomiten, de Kroon vun de Alpen, sünd för hör unbannig Mooigheid 
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
-"- there is lot of flat ground on the mountains. Unfortunately, most of it is"
-" vertical. Use wisely the little building space you have. - A fortress at "
-"the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
-" army. Use the terrain to your advantage - chop all trees and expand "
-"wherever you can; it's the only way to find all the precious farm spaces - "
-"suggested teams: red+orange+blue+violet"
-msgstr "- 't gifft vööl flackes Land up deesen Bargen, aver dat meeste daarvun gaht leider stuuv na boven. Bruuk dat bietje Rüümte tum Bauen, wat du hest, klook. - Eene Schanz in eenem knappen Bargpass is een bannig godes Hinner för feindelke Soldateree. Bruuk de Landskupp to dienem Vördeel. - Kapp all Bomen of un vergroter dien Gewest waar du kannst, blot so kannst du de düren Steden för Buurdereen finnen - Vörslagen Klottjes: Rood+Geelrood+Blau+Lila"
+"There is lot of flat ground on the mountains. Unfortunately, most of it is "
+"vertical – use the little building space you have wisely. A fortress at the "
+"mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"army – use the terrain to your advantage. Chop all trees and expand wherever"
+" you can – it's the only way to find all the precious farm spaces."
+msgstr "Dat gifft vööl flackes Land up deesen Bargen, aver dat meeste daarvun gaht leider stuuv na boven – bruuk dat bietje Rüümte tum Bauen, wat du hest, klook. Eene Schanz in eenem knappen Bargpass is een bannig godes Hinner för feindelke Soldateree – bruuk de Landskupp to dienem Vördeel. Kapp all Bomen of un vergroter dien Gewest waar du kannst – blot so kannst du de düren Steden för Buurdereen finnen."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -474,7 +477,7 @@ msgstr "v0.2"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:10
 msgid ""
-"A huge europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
+"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
 msgstr "Eene bannig grote Europa-Kaart. Blau = Sweden, Rood = Italien, Geel = Spaanjen, Gröön = Türkeei, Swart = Russland, Geelrood = Engelland, Lila = Frankriek, Witt = Polen"
 
@@ -715,10 +718,10 @@ msgstr "Rutfödderung sünner Metallen v2"
 #: ../../data/maps/No challenge metal v2.wmf/elemental:10
 msgid ""
 "This map is intended as a solo challenge for those very skilled players that"
-" find 1v6 against the AI too easy.  Blue player has no metal (except a bit "
-"of iron to kickstart your economy), so you have to rely on the 5% production"
-" of an empty mine. And you're still 1v6 (though of course you can remove "
-"some AI players to make it a bit easier). Good luck"
+" find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
+" of iron to kickstart your economy), so you have to rely on the 5% "
+"production of an empty mine. And you're still 1 vs 6 (though of course you "
+"can remove some AI players to make it a bit easier). Good luck!"
 msgstr "Deese Kaart is as Enkelt-Speler-Rutfödderung dacht för so bannig gode Spelers, dat alleen tegen 6 künstelk Spelers to licht is. De blaue Speler hett keen Metall (as een bietje Iesen, um de Wirtschaft in Gang to kriegen) un mutt sük up de 5%-Kans verlaten, waar een leges Bargwark mit wat finnt. Un du spöölst 1 tegen 6 (du kannst aver ok een paar künstelk Spelers weglaten, um dat lichter to maken). Vööl Glück"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8

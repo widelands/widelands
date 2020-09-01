@@ -69,7 +69,7 @@ MapObjectSaver::MapObjectRec& MapObjectSaver::get_object_record(const MapObject&
 	rec.fileserial = ++lastserial_;
 	rec.registered = false;
 	rec.saved = false;
-	return objects_.insert(std::pair<MapObject const*, MapObjectRec>(&obj, rec)).first->second;
+	return objects_.insert(std::make_pair(&obj, rec)).first->second;
 }
 
 /**

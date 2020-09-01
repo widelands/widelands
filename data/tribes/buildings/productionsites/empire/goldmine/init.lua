@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_goldmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Gold Mine"),
@@ -36,7 +37,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "gold",
+      mines = "resource_gold",
       mines_percent = 50,
       prohibited_till = 1200
    },
@@ -45,27 +46,19 @@ tribes:new_productionsite_type {
       empire_miner = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_goldmine = false,
-      empire_goldmine_deep = false,
-   },
-
    inputs = {
       { name = "ration", amount = 6 },
       { name = "wine", amount = 6 }
    },
-   outputs = {
-      "gold_ore"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
             "return=skipped unless economy needs gold_ore",
             "consume=ration wine",
-            "sleep=43000",
+            "sleep=duration:43s",
             "call=mine_produce",
             "call=mine_produce",
          }
@@ -73,8 +66,8 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining gold",
          actions = {
-            "animate=working 21000",
-            "mine=gold 2 50 5 17",
+            "animate=working duration:21s",
+            "mine=resource_gold radius:2 yield:50% when_empty:5% experience_on_fail:17%",
             "produce=gold_ore",
          }
       },
@@ -95,3 +88,5 @@ tribes:new_productionsite_type {
          pgettext("empire_building", "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

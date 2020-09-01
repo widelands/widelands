@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_goldmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("frisians_building", "Gold Mine"),
@@ -59,13 +60,8 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      frisians_goldmine = false,
-      frisians_goldmine_deep = false,
-   },
-
    aihints = {
-      mines = "gold",
+      mines = "resource_gold",
       mines_percent = 50,
       prohibited_till = 1100
    },
@@ -77,20 +73,17 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "ration", amount = 8 }
    },
-   outputs = {
-      "gold_ore"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
             "return=skipped unless economy needs gold_ore",
             "consume=ration",
-            "sleep=45000",
-            "animate=working 20000",
-            "mine=gold 3 50 5 20", --name radius % chance_empty gain_exp_on_empty
+            "sleep=duration:45s",
+            "animate=working duration:20s",
+            "mine=resource_gold radius:3 yield:50% when_empty:5% experience_on_fail:20%",
             "produce=gold_ore"
          }
       },
@@ -103,3 +96,5 @@ tribes:new_productionsite_type {
          pgettext("frisians_building", "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

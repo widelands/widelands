@@ -4,16 +4,17 @@
 # Translators:
 # GunChleoc, 2018
 # GunChleoc, 2018
-# ks k, 2018
 # ks k, 2018,2020
+# ks k, 2018,2020
+# TaeMin An, 2017
 # TaeMin An, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-04-12 17:33+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-25 12:24+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +41,7 @@ msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr "당신의 경제를 건설하고 잘 작동하면서 성장하게 하는 것은 Widelands의 주된 부분입니다. 하지만 당신은 직접적으로 일꾼을 제어할 수 없습니다 - 그들은 당신이 설정한 일반적인 조건들을 따릅니다."
+msgstr "당신의 경제를 건설하고 잘 작동하면서 성장하게 하는 것은 와이드랜드의 주된 부분입니다. 하지만 당신은 직접적으로 일꾼들을 제어할 수 없습니다 – 그들은 당신이 설정한 일반적인 조건들을 따릅니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:15
 msgid ""
@@ -125,7 +126,7 @@ msgstr "당신의 선술집들을 확인하십시오"
 msgid ""
 "At first, we should find out how many taverns we currently have. Widelands "
 "offers you a window where you can easily check this."
-msgstr "먼저, 우리는 우리가 현재 보유한 선술집이 얼마나 많은지 알아야 합니다. Widelands는 당신에게 그것을 쉽게 확인할 수 있는 창을 제공합니다."
+msgstr "먼저, 우리는 우리가 현재 보유한 선술집이 얼마나 많은지 알아야 합니다. 와이드랜드는 당신에게 그것을 쉽게 확인할 수 있는 창을 제공합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:67
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:69
@@ -268,14 +269,14 @@ msgstr "재고"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:134
 msgid "Check for rations"
-msgstr "배급을 확인하십시오"
+msgstr "야전식량을 확인하십시오"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:136
 msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr "됐습니다. 목록에서, 당신은 어떤 선술집이나 여관도 보유하지 않은 것을 확인했습니다. 이는 당신이 어떤 배급도 생산치 않는다는 것을 의미합니다. 하지만 우리가 재고를 아직 갖고 있는지 봅시다."
+msgstr "됐습니다. 목록에서, 당신은 어떤 선술집이나 여관도 보유하지 않은 것을 확인했습니다. 이는 당신이 어떤 야전식량도 생산치 않는다는 것을 의미합니다. 하지만 우리가 재고를 아직 갖고 있는지 봅시다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
@@ -286,49 +287,49 @@ msgstr "재고 창에서 처음 두 개의 탭을 검사하십시오"
 msgid ""
 "Have a look at the first two tabs in the stock window. They show all the "
 "wares and workers you have."
-msgstr ""
+msgstr "재고 창에서 처음 두 개의 탭을 살펴보십시오. 그것들은 당신이 가진 모든 물품과 일꾼들을 보여줍니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:147
 msgid ""
 "When you have seen enough, switch back to the third tab (‘Wares in "
 "warehouses’)."
-msgstr ""
+msgstr "충분히 확인했으면 세 번째 탭(‘창고에 있는 물품’)으로 다시 전환하십시오."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
 "The stock window has four tabs. The first one shows you all your current "
 "wares, including those on roads, at flags and inside buildings waiting for "
 "processing."
-msgstr ""
+msgstr "재고 창에는 4 개의 탭이 있습니다. 첫 번째 제품은 땅길, 깃발, 처리 대기 중인 건물을 포함하여 현재 사용 중인 모든 물품을 보여줍니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr "배급을 보자면, 지금은 합쳐서 오직 다섯 개밖에 없고, 아마 어딘가로 향하는 중인 것 같습니다. 다섯 개의 배급은 이런 큰 경제에는 많은 것이 아닙니다."
+msgstr "야전식량을 보자면, 지금은 합쳐서 오직 5 개 밖에 없고, 아마 어딘가로 향하는 중인 것 같습니다. 5 개의 야전식량은 이런 큰 경제에는 많은 것이 아닙니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:158
 msgid ""
 "The second tab shows you all your workers, again those on roads and in "
 "buildings summed up."
-msgstr "두번째 탭은 도로에 있거나 건물에 있는 것을 합친, 모든 당신의 일꾼들을 보여줍니다."
+msgstr "2번째 탭은 땅길에 있거나 건물에 있는 것을 합친, 모든 당신의 일꾼들을 보여줍니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:168
 msgid ""
 "The third tab shows you the wares that are stored in your headquarters, your"
 " warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
-msgstr "세번째 탭은 당신이 본부, 창고와 항구에 저장하고 있는 용품들을 보여줍니다. 그것들은 어디서든 필요하지 않고 그러므로 당신의 예비품입니다."
+msgstr "3번째 탭은 당신이 본부, 창고와 항구에 저장하고 있는 물품들을 보여줍니다. 그것들은 어디서든 필요하지 않고 그러므로 당신의 예비품입니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:169
 msgid "The fourth tab shows the same thing for workers."
-msgstr "네번째 탭은 일꾼에 대해서 같은 것을 보여줍니다."
+msgstr "4번째 탭은 일꾼들에 대해서 같은 것을 보여줍니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:170
 msgid ""
 "The third tab tells you that there are no rations left in your headquarters "
 "– that’s not good!"
-msgstr "세번째 탭은 당신에게 본부에 아무런 급식도 없다는 것을 알려줍니다 - 좋지 않습니다!"
+msgstr "3번째 탭은 당신에게 본부에 아무런 야전식량도 없다는 것을 알려줍니다 - 좋지 않습니다!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:177
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:200
@@ -339,7 +340,7 @@ msgstr "재고 창을 닫으셨습니다!"
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the first tab?"
-msgstr ""
+msgstr "재고 창을 닫았지만, 아직 설명을 끝내지 못했습니다. 다시 열어서 첫 번째 탭을 선택하시겠습니까?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:189
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:191
@@ -354,18 +355,18 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr ""
+msgstr "내가 당신에게 이것에 대해 모든 것을 말하기 전에 재고 창을 닫았습니다. 이미 모든 것을 알고 있다면 언제든지 이 자습서를 빠져나가십시오."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid "Otherwise, please reopen it and have a look at all its tabs."
-msgstr ""
+msgstr "그렇지 않으면 해당 탭을 다시 열고 모든 탭을 살펴보시기 바랍니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:203
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "재고 창을 닫았지만, 아직 설명을 끝내지 못했습니다. 다시 열어서 세 번째 탭을 선택하시겠습니까?"
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
@@ -387,7 +388,7 @@ msgstr "적어도 선술집 두 개를 건설하십시오."
 msgid ""
 "As long as we don’t produce rations, our miners won’t dig for ore. And "
 "without iron, we cannot forge a single helm."
-msgstr ""
+msgstr "우리가 야전식량을 주지 않는 한 광부들은 광석을 파지 않을 것입니다. 쇠가 없으면 하나의 투구도 만들 수 없습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:232
 msgid "New taverns"
@@ -401,7 +402,7 @@ msgstr "우리는 새 선술집이 필요합니다"
 msgid ""
 "Now that you have an overview, you should act. I think we should build more "
 "than one tavern – two or three are better."
-msgstr ""
+msgstr "이제 개요를 보았으니 행동해야 합니다. 저는 우리가 두 개 이상의 선술집을 지어야한다고 생각합니다. 두 세 개가 더 낫습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
@@ -435,7 +436,7 @@ msgstr "도움말 참고 방법"
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr "물론, 나의 모든 말과 충고를 기억하는 것은 어려울 것입니다. 예를 들어, 당신은 스스로에게 이렇게 물을 수도 있을것입니다. ‘군인을 구하기 위해서 왜 비상 식량이 필요거야?’"
+msgstr "물론, 나의 모든 말과 충고를 기억하는 것은 어려울 것입니다. 예를 들어, 당신은 스스로에게 이렇게 물을 수도 있을것입니다. ‘군인을 구하기 위해서 왜 야전식량이 필요거야?’"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:258
 msgid ""
@@ -443,12 +444,12 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr "당신이 많이 해봤으면, 이 모든 것이 익숙해지셨을 것입니다. 그러나 그때까지 또는 부족의 필요와 능력, 건물과 노동자가 어떻게 운영되는지 잘 모른다면, 게임내 부족별 도움말과 백과사전에서 쉽게 찾을 수 있습니다."
+msgstr "당신이 많이 해봤으면, 이 모든 것이 익숙해지셨을 것입니다. 그러나 그때까지 또는 부족의 필요와 능력, 건물과 일꾼들이 어떻게 운영되는지 잘 모른다면, 게임내 부족별 도움말과 백과사전에서 쉽게 찾을 수 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:268
 msgid "Look up which wares are needed to recruit soldiers"
-msgstr "병사를 모집하는데 필요한 물품을 찾기"
+msgstr "군인을 모집하는데 필요한 물품을 찾기"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:269
 msgid ""
@@ -456,15 +457,15 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr "군인은 나무창과 투구가 필요합니다. 병사가 채용된 병영에 필요한 물품과 건물을 찾기 위해 뒤쪽으로 찾아갈 수 있습니다. 검색이 끝나면 백과사전 창을 닫으십시오."
+msgstr "군인은 나무창과 투구가 필요합니다. 군인이 채용된 병영에 필요한 물품과 건물을 찾기 위해 뒤쪽으로 찾아갈 수 있습니다. 검색이 끝나면 백과사전 창을 닫으십시오."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "백과사전을 사용하여 신병을 만드는 방법을 알아봅시다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
-msgstr "백과사전 창에서 ‘용품’ 탭을 선택하십시오."
+msgstr "백과사전 창에서 ‘물품’ 탭을 선택하십시오."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
@@ -512,7 +513,7 @@ msgstr "‘물자’ 탭은 짧은 도움말 글자, 각 물자들을 생산하�
 msgid ""
 "The ‘Workers’ tab shows information about your tribe’s workers in a similar "
 "manner to the wares in the second tab."
-msgstr "‘일꾼’ 탭에는 두 번째 탭에 있는 도구와 비슷한 방식으로 부족의 일꾼에 대한 정보가 표시됩니다."
+msgstr "‘일꾼들’ 탭에는 두 번째 탭에 있는 도구와 비슷한 방식으로 부족의 일꾼들에 대한 정보가 표시됩니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:286
 msgid ""
@@ -524,7 +525,7 @@ msgstr "‘건물’ 탭에는 부족 건물에 대한 필요한 모든 정보�
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr "마지막으로, ‘부동산’ 탭은 지도상에서 부족의 일꾼들이 지을수 있는 특정 부동산에 관한 정보를 표시합니다."
+msgstr "마지막으로, ‘부동산’ 탭은 지도상에서 부족의 일꾼들이 지을 수 있는 특정 부동산에 관한 정보를 표시합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:294
 msgid "You closed the encyclopedia!"
@@ -535,7 +536,7 @@ msgid ""
 "You have closed the encyclopedia window, but I didn’t notice that you were "
 "trying to find out which wares are needed to recruit a soldier. Would you "
 "please reopen it and do so?"
-msgstr "당신은 백과 사전창을 닫아버렸습니다. 그러나 병사를 모집하기위해서 어떤 물건이 필요한지 몰랐습니다. 다시한번 창을 열어주시겠습니까?"
+msgstr "당신은 백과 사전창을 닫아버렸습니다. 그러나 군인을 모집하기 위해서 어떤 물건이 필요한지 몰랐습니다. 다시한번 창을 열어주시겠습니까?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:306
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
@@ -560,19 +561,19 @@ msgstr "우선권 설정"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:318
 msgid "Send the wares where they’re needed"
-msgstr "용품들을 필요로 하는 곳에 보내십시오"
+msgstr "물품들을 필요로 하는 곳에 보내십시오"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:319
 msgid ""
 "Great. Our taverns have now been built up and are supplying us with rations."
-msgstr "훌륭합니다. 선술집들이 건설되었고 배급을 공급하고 있습니다."
+msgstr "훌륭합니다. 선술집들이 지어졌고 야전식량을 공급하고 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:320
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see ‘traffic lights’."
-msgstr "지금 이 순간, 모든 광산들이 배급을 공급받고 있습니다. 특별한 광산에 우선권을 주고 싶다면, 그냥 창을 여십시오. 용품 탭에서, 모든 용품 뒤에, ‘신호등’을 볼 수 있습니다."
+msgstr "지금 이 순간, 모든 광산들이 야전식량을 공급받고 있습니다. 특별한 광산에 우선권을 주고 싶다면, 그냥 창을 여십시오. 물품 탭에서, 모든 물품 뒤에, ‘신호등’을 볼 수 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
@@ -580,27 +581,27 @@ msgid ""
 "delivered less frequently. Green means that as many wares as possible should"
 " be delivered to this building, maybe because it produces something "
 "important."
-msgstr "빨간 점 (낮은 우선권) 을 클릭할 때, 해당하는 용품은 덜 자주 배달됩니다. 초록은 가능한 한 많은 용품을, 아마도 무언가 중요한 것을 생산하는 건물로 배달해야 하는 것을 의미합니다."
+msgstr "빨간 점 (낮은 우선권) 을 클릭할 때, 해당하는 물품은 덜 자주 배달됩니다. 초록은 가능한 한 많은 물품을, 아마도 무언가 중요한 것을 생산하는 건물로 배달해야 하는 것을 의미합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""
 "The actual supply state is indicated by varying colors of the ware icons "
 "themselves:"
-msgstr ""
+msgstr "실제 공급 상태는 다양한 색상의 물품 아이콘으로 표시됩니다:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:323
 msgid "Wares stored in the building are shown in full color."
-msgstr ""
+msgstr "건물에 저장된 물품은 원래색으로 표시됩니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:324
 msgid "Missing wares are greyed out."
-msgstr ""
+msgstr "없는 물품은 회색으로 표시됩니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:325
 msgid ""
 "Wares not present in the building yet but already being transported there "
 "are shown in a darker grey."
-msgstr ""
+msgstr "건물에는 아직 없지만 이미 그곳으로 운반되고 있는 물품들은 더 짙은 회색으로 표시됩니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:326
 msgid ""
@@ -613,59 +614,59 @@ msgstr "지금 상황에서, 제과점들은 선술집에 공급하고 있기 �
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
 msgid "Open the ware statistics window"
-msgstr "용품 통계 창을 열기"
+msgstr "물품 통계 창을 열기"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:337
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
-msgstr ""
+msgstr "‘통계’ 차림표에서 ‘물품’ 항목을 선택하십시오."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:341
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:359
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:380
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:401
 msgid "Ware Statistics"
-msgstr "용품 통계"
+msgstr "물품 통계"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
-msgstr ""
+msgstr "우리 물품 생산이 어떻게 진행되고 있는지 살펴 보겠습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
 msgid "Examine your ware production and consumption"
-msgstr ""
+msgstr "제품 생산 및 소비를 살펴보기"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:353
 msgid ""
 "The first two tabs show you the production and consumption of any ware. You "
 "can toggle them by simply clicking on them."
-msgstr "첫 두 탭은 어떤 용품이든 생산과 소비를 보여줍니다. 그것들을 그냥 클릭하는 것으로 켜고 끌 수 있습니다."
+msgstr "첫 두 탭은 어떤 물품이든 생산과 소비를 보여줍니다. 그것들을 그냥 클릭하는 것으로 켜고 끌 수 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:354
 msgid "When you have seen enough, switch to the third tab (‘Economy health’)."
-msgstr ""
+msgstr "충분히 보았으면 세 번째 탭 (‘경제 상태’) 으로 전환합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
 msgid ""
 "In this window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr ""
+msgstr "이 창에서 제품을 선택하여 시간이 지남에 따라 물품의 생산 또는 소비가 어떻게 변했는지 확인할 수 있습니다. 몇 가지 물품을 가지고 시험해 보십시오."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:362
 msgid ""
 "I’ll continue as soon as you click on the third tab (‘Economy health’)."
-msgstr ""
+msgstr "세 번째 탭 (‘경제 상태’) 을 누르자마자 계속하겠습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
 msgid "Examine your economy’s health"
-msgstr ""
+msgstr "경제의 상태를 살펴보기"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid ""
 "The third tab shows you the economy health of the ware. When the value is "
 "positive, this means your stock is growing."
-msgstr "세번째 탭은 용품의 경제 활력을 보여줍니다. 값이 양수라면, 당신의 재고가 증가하고 있음을 의미합니다."
+msgstr "세번째 탭은 물품의 경제 활력을 보여줍니다. 값이 양수라면, 당신의 재고가 증가하고 있음을 의미합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:374
 msgid "Now try this out. You can also compare it with the two previous tabs."
@@ -673,7 +674,7 @@ msgstr "이제 해보십시오. 당신은 또한 이전 두 탭과 비교할 수
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:375
 msgid "When you have seen enough, switch to the fourth tab (‘Stock’)."
-msgstr ""
+msgstr "충분히 확인했으면 네 번째 탭 (‘재고’)으로 전환하십시오."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:383
 msgid ""
@@ -681,22 +682,22 @@ msgid ""
 "called ‘economy health’. You can see at one glance which one of those two is"
 " higher for the selected ware, that means whether the amount increases or "
 "decreases."
-msgstr "이 탭에서, 당신은 ‘경제 활력’ 으로 불리는 생산과 소비 간의 차이를 확인할 수 있습니다. 당신은 선택한 용품의 생산과 소비 중 하나가 더 높이 나오는 것을 바탕으로, 그 양이 증가했거나 감소했다는 의미를 한 번에 확인할 수 있습니다."
+msgstr "이 탭에서, 당신은 ‘경제 활력’ 으로 불리는 생산과 소비 간의 차이를 확인할 수 있습니다. 당신은 선택한 물품의 생산과 소비 중 하나가 더 높이 나오는 것을 바탕으로, 그 양이 증가했거나 감소했다는 의미를 한 번에 확인할 수 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
 msgid "Examine your stock"
-msgstr ""
+msgstr "재고를 살펴보기"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:394
 msgid ""
 "The stock tab shows you how many wares you have. Compare the information "
 "from the four tabs to understand the correlation."
-msgstr "재고 탭은 얼마나 많은 용품을 보유하고 있는지 보여줍니다. 각각의 관계성을 이해하려면 네 탭의 정보를 비교하십시오."
+msgstr "재고 탭은 얼마나 많은 물품을 보유하고 있는지 보여줍니다. 각각의 관계성을 이해하려면 네 탭의 정보를 비교하십시오."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
 msgid "When you have finished, close the ware statistics window."
-msgstr "다 끝나셨으면, 용품 통계 창을 닫으십시오."
+msgstr "다 끝나셨으면, 물품 통계 창을 닫으십시오."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:404
 msgid ""
@@ -714,18 +715,18 @@ msgstr "마지막 두 탭은 물자 부족이 오고 있는지 확인하는 좋�
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:411
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
 msgid "You closed the ware statistics window!"
-msgstr "용품 통계 창을 닫으셨습니다!"
+msgstr "물품 통계 창을 닫으셨습니다!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "물품 통계 창을 닫았지만 아직 설명을 마치지 않았습니다. 다시 열어 세 번째 탭을 선택하시겠습니까?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:423
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
 msgid "Open the ware statistics window again"
-msgstr "용품 통계 창을 다시 열기"
+msgstr "물품 통계 창을 다시 열기"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:427
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:450
@@ -733,13 +734,13 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr ""
+msgstr "내가 당신에게 이것에 대해 모든 것을 말하기 전에 당신은 물품 통계 창을 닫았습니다. 이미 모든 것을 알고 있다면 언제든지 이 자습서를 남겨두십시오."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the fourth tab?"
-msgstr ""
+msgstr "제 설명이 아직 안 끝났는데, 물품 통계 창을 닫으셨습니다. 다시 열어서 네번째 탭을 선택하시겠습니까?"
 
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:452
@@ -769,14 +770,14 @@ msgstr "경제 옵션"
 msgid ""
 "I’ve shown you our stock window, where you could see which wares are at the "
 "warehouses. You remember?"
-msgstr ""
+msgstr "창고에 어떤 상품이 있는지 볼 수있는 재고 창을 보여 드렸습니다. 기억나세요?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:471
 msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr ""
+msgstr "이제 원하는 물품 수를 확인하는 방법을 알려 드리겠습니다. 이 목적을 위한 창은 아무 깃발이나 이용해서  접근 할 수 있으며 ‘경제 구성’ 이라고합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid "This is the icon."
@@ -792,7 +793,7 @@ msgstr "이 창은 재고 창과 비슷해 보이지만, 바닥에 추가적인 
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
-msgstr "일단 하나 또는 더 많은 용품들을 선택합니다 (좌클릭하고 끌 수도 있습니다). 그리고 나서 선택한 용품을 원하시는 목표 양만큼 설정할 수 있습니다."
+msgstr "일단 하나 또는 더 많은 물품들을 선택합니다 (왼쪽 단추를 누르고 끌 수도 있습니다). 그리고 나서 선택한 물품을 원하시는 목표 양만큼 설정할 수 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
@@ -807,7 +808,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr "예를 들어: 낫의 기본 값은 1입니다. 만일 농장을 지으시면, 짐꾼은 낫을 들고 농부가 될 겁니다. 그러면 아무런 낫도 남지 않게 되고, 목표 양은 1이기에, 도구 장인이 다른 하나를 생산하기 시작할 것입니다."
+msgstr "예를 들어: 낫의 기본 값은 1입니다. 만일 농장을 지으시면, 짐꾼은 낫을 들고 농부가 될 겁니다. 그러면 아무런 낫도 남지 않게 되고, 목표 양은 1이기에, 도구 제작소가 다른 하나를 생산하기 시작할 것입니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
@@ -838,13 +839,13 @@ msgstr "석공은 필요없는 대리석 기둥을 생산하지 않을 것입니
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
-msgstr ""
+msgstr "그럴려면, 아무 깃발이나 누르고 ‘경제 구성’ 을 선택하십시오. 이 창에서, 당신은 각 유형의 물품을 얼마나 많이 재고로 남길 지 결정할 수 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:501
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
-msgstr "때때로, 같은 시간에 많은 용품이 급하게 필요할 겁니다 - 생산되는 것보다 더 빨리 말입니다. 이런 경우에는, 예비품을 충분히 갖는 것이 좋습니다."
+msgstr "때때로, 같은 시간에 많은 물품이 급하게 필요할 겁니다 - 생산되는 것보다 더 빨리 말입니다. 이런 경우에는, 예비품을 충분히 갖는 것이 좋습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
@@ -852,13 +853,13 @@ msgid ""
 "your resources (in this case: iron) should be turned into or whether you "
 "would like to save your iron and wait until you know what you will need it "
 "for."
-msgstr "목표 양을 바꿈으로써, 어떤 용품/도구로 당신 자원들을 (이 경우에는: 철) 바꿀지 아니면 철을 아끼고 그것이 쓰일 무언가에 대해 알도록 기다릴지 결정할 수 있습니다."
+msgstr "목표 양을 바꿈으로써, 어떤 물품/도구로 당신 자원들을 (이 경우에는: 철) 바꿀지 아니면 철을 아끼고 그것이 쓰일 무언가에 대해 알도록 기다릴지 결정할 수 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:510
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr "오직 용품을 소모하는 건물만이 이 설정에 좌우됩니다. 공짜로 용품을 생산하는 건물들은 (예로 농장이나 우물) 언제나 계속 일을 할 겁니다."
+msgstr "오직 물품을 소모하는 건물만이 이 설정에 좌우됩니다. 공짜로 물품을 생산하는 건물들은 (예로 농장이나 우물) 언제나 계속 일을 할 겁니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:512
 msgid ""
@@ -909,7 +910,7 @@ msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
-msgstr "일반적으로, 생산한 용품은 어딘가에서 필요로 하지 않으면 가장 가까운 창고로 갑니다. 이 경우에는, 본부를 의미합니다. 하지만 우리는 요새들 근처의 창고에 저장하고 싶습니다."
+msgstr "일반적으로, 생산한 물품은 어딘가에서 필요로 하지 않으면 가장 가까운 창고로 갑니다. 이 경우에는, 본부를 의미합니다. 하지만 우리는 요새들 근처의 창고에 저장하고 싶습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:538
 msgid ""
@@ -950,8 +951,3 @@ msgid ""
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
 msgstr "당신을 위해 준비한 마지막 자습서였습니다. 제가 아는 모든 것을 다 가르쳐 드렸습니다. 아직 이 세계에는 저도 모르는 비밀들이 숨겨져 있습니다. 전 이제 인생의 말년을 보낼 조용한 곳을 찾을 겁니다. 아직 질문거리가 있다면, Widelands 커뮤니티가 도와줄 것입니다. 그 주소는:"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr ""

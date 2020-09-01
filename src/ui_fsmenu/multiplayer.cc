@@ -21,7 +21,6 @@
 
 #include "base/i18n.h"
 #include "base/random.h"
-#include "graphic/graphic.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
 #include "ui_basic/messagebox.h"
@@ -39,7 +38,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
            0,
            _("Choose game type"),
            UI::Align::kCenter,
-           g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+           g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
      metaserver(
@@ -108,7 +107,7 @@ void FullscreenMenuMultiPlayer::internet_login() {
 	}
 
 	// Try to connect to the metaserver
-	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER);
 	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
 	const std::string& auth = register_ ? password_ : get_config_string("uuid", "");
 	assert(!auth.empty() || !register_);

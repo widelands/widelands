@@ -27,7 +27,6 @@
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/wareworker.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
@@ -40,11 +39,15 @@ namespace Widelands {
 class Building;
 class BuildingDescr;
 class Economy;
+class Immovable;
 class Map;
 class TerrainAffinity;
 class Worker;
 class World;
 struct Flag;
+struct ImmovableAction;
+struct ImmovableActionData;
+struct ImmovableProgram;
 struct PlayerImmovable;
 
 struct NoteImmovable {
@@ -114,22 +117,25 @@ protected:
 	void unset_position(EditorGameBase&, const Coords&);
 };
 
-class Immovable;
-struct ImmovableProgram;
-struct ImmovableAction;
-struct ImmovableActionData;
-
 /**
  * Immovable represents a standard immovable such as trees or rocks.
  */
 class ImmovableDescr : public MapObjectDescr {
+	friend struct ImmovableProgram;
+
 public:
 	using Programs = std::map<std::string, ImmovableProgram*>;
 
-	/// World immovable
-	ImmovableDescr(const std::string& init_descname, const LuaTable&, const World& world);
+	/// Common constructor functions for tribes and world.
+	ImmovableDescr(const std::string& init_descname,
+	               const LuaTable&,
+	               MapObjectDescr::OwnerType type,
+	               const std::vector<std::string>& attribs);
 	/// Tribes immovable
-	ImmovableDescr(const std::string& init_descname, const LuaTable&, const Tribes& tribes);
+	ImmovableDescr(const std::string& init_descname,
+	               const LuaTable&,
+	               const std::vector<std::string>& attribs,
+	               Tribes& tribes);
 	~ImmovableDescr() override;
 
 	int32_t get_size() const {
@@ -149,10 +155,6 @@ public:
 		return buildcost_;
 	}
 
-	// Returns the editor category, or nullptr if the immovable has no editor category
-	// (e.g. Tribe immovables never have one).
-	const EditorCategory* editor_category() const;
-
 	// A basic localized name for the immovable, used by trees
 	const std::string& species() const {
 		return species_;
@@ -166,6 +168,11 @@ public:
 	// an undefined value.
 	const TerrainAffinity& terrain_affinity() const;
 
+	// Map object names that the immovable can transform/grow into
+	const std::set<std::pair<MapObjectType, std::string>>& becomes() const {
+		return becomes_;
+	}
+
 protected:
 	int32_t size_;
 	Programs programs_;
@@ -178,17 +185,12 @@ protected:
 	Buildcost buildcost_;
 
 	std::string species_;
+	std::set<std::pair<MapObjectType, std::string>> becomes_;
 
 private:
-	// Common constructor functions for tribes and world.
-	ImmovableDescr(const std::string& init_descname,
-	               const LuaTable&,
-	               MapObjectDescr::OwnerType type);
-
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
 
-	EditorCategory* editor_category_;  // not owned.
 	std::unique_ptr<TerrainAffinity> terrain_affinity_;
 	DISALLOW_COPY_AND_ASSIGN(ImmovableDescr);
 };
@@ -246,6 +248,11 @@ public:
 		return nullptr;
 	}
 
+	void delay_growth(uint32_t ms) {
+		growth_delay_ += ms;
+	}
+	bool apply_growth_delay(Game&);
+
 protected:
 	// The building type that created this immovable, if any.
 	const BuildingDescr* former_building_descr_;
@@ -284,6 +291,9 @@ protected:
 	 * \warning Use get_action_data to access this.
 	 */
 	std::unique_ptr<ImmovableActionData> action_data_;
+
+private:
+	uint32_t growth_delay_;
 
 	// Load/save support
 protected:

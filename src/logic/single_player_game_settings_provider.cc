@@ -75,6 +75,14 @@ void SinglePlayerGameSettingsProvider::set_peaceful_mode(bool peace) {
 	s.peaceful = peace;
 }
 
+bool SinglePlayerGameSettingsProvider::get_custom_starting_positions() {
+	return s.custom_starting_positions;
+}
+
+void SinglePlayerGameSettingsProvider::set_custom_starting_positions(bool c) {
+	s.custom_starting_positions = c;
+}
+
 void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
                                                const std::string& mapfilename,
                                                uint32_t const maxplayers,
@@ -103,8 +111,9 @@ void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
 				player.random_ai = false;
 			}
 			// If AI player then set tribe to random
-			if (!s.scenario)
+			if (!s.scenario) {
 				set_player_tribe(oldplayers, "", true);
+			}
 		}
 		++oldplayers;
 	}
@@ -112,11 +121,13 @@ void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
 
 void SinglePlayerGameSettingsProvider::set_player_state(uint8_t const number,
                                                         PlayerSettings::State state) {
-	if (number == s.playernum || number >= s.players.size())
+	if (number == s.playernum || number >= s.players.size()) {
 		return;
+	}
 
-	if (state == PlayerSettings::State::kOpen)
+	if (state == PlayerSettings::State::kOpen) {
 		state = PlayerSettings::State::kComputer;
+	}
 
 	s.players[number].state = state;
 }
@@ -131,16 +142,18 @@ void SinglePlayerGameSettingsProvider::set_player_ai(uint8_t const number,
 }
 
 void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
-	if (number == s.playernum || number >= s.players.size())
+	if (number == s.playernum || number >= s.players.size()) {
 		return;
+	}
 
 	const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
 	if (impls.size() > 1) {
 		ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
 		do {
 			++it;
-			if ((*(it - 1))->name == s.players[number].ai)
+			if ((*(it - 1))->name == s.players[number].ai) {
 				break;
+			}
 		} while (it != impls.end());
 		if (s.players[number].random_ai) {
 			s.players[number].random_ai = false;
@@ -148,7 +161,8 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 		} else if (it == impls.end()) {
 			s.players[number].random_ai = true;
 			do {
-				uint8_t random = (std::rand() % impls.size());  // Choose a random AI
+				// Choose a random AI
+				uint8_t random = (std::rand() % impls.size());  // NOLINT
 				it = impls.begin() + random;
 			} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
 		}
@@ -161,8 +175,9 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number,
                                                         const std::string& tribe,
                                                         bool random_tribe) {
-	if (number >= s.players.size())
+	if (number >= s.players.size()) {
 		return;
+	}
 
 	std::string actual_tribe = tribe;
 	PlayerSettings& player = s.players[number];
@@ -170,7 +185,7 @@ void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number,
 
 	if (random_tribe) {
 		uint8_t num_tribes = s.tribes.size();
-		uint8_t random = (std::rand() % num_tribes);
+		uint8_t random = (std::rand() % num_tribes);  // NOLINT
 		actual_tribe = s.tribes.at(random).name;
 	}
 
@@ -185,13 +200,15 @@ void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number,
 }
 
 void SinglePlayerGameSettingsProvider::set_player_init(uint8_t const number, uint8_t const index) {
-	if (number >= s.players.size())
+	if (number >= s.players.size()) {
 		return;
+	}
 
 	for (const Widelands::TribeBasicInfo& tmp_tribe : s.tribes) {
 		if (tmp_tribe.name == s.players[number].tribe) {
-			if (index < tmp_tribe.initializations.size())
+			if (index < tmp_tribe.initializations.size()) {
 				s.players[number].initialization_index = index;
+			}
 			return;
 		}
 	}
@@ -199,8 +216,9 @@ void SinglePlayerGameSettingsProvider::set_player_init(uint8_t const number, uin
 }
 
 void SinglePlayerGameSettingsProvider::set_player_team(uint8_t number, Widelands::TeamNumber team) {
-	if (number < s.players.size())
+	if (number < s.players.size()) {
 		s.players[number].team = team;
+	}
 }
 
 void SinglePlayerGameSettingsProvider::set_player_closeable(uint8_t, bool) {
@@ -213,18 +231,21 @@ void SinglePlayerGameSettingsProvider::set_player_shared(PlayerSlot, Widelands::
 
 void SinglePlayerGameSettingsProvider::set_player_name(uint8_t const number,
                                                        const std::string& name) {
-	if (number < s.players.size())
+	if (number < s.players.size()) {
 		s.players[number].name = name;
+	}
 }
 
 void SinglePlayerGameSettingsProvider::set_player(uint8_t const number, const PlayerSettings& ps) {
-	if (number < s.players.size())
+	if (number < s.players.size()) {
 		s.players[number] = ps;
+	}
 }
 
 void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
-	if (number >= s.players.size())
+	if (number >= s.players.size()) {
 		return;
+	}
 	PlayerSettings const position = settings().players.at(number);
 	PlayerSettings const player = settings().players.at(settings().playernum);
 	if (number < settings().players.size() && (position.state == PlayerSettings::State::kOpen ||

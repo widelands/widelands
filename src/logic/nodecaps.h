@@ -25,7 +25,7 @@ namespace Widelands {
 enum NodeCaps {
 	CAPS_NONE = 0,
 	/** can we build normal buildings? (use BUILDCAPS_SIZEMASK for binary
-    * masking)*/
+	 * masking)*/
 	BUILDCAPS_SMALL = 1,
 	BUILDCAPS_MEDIUM = 2,
 	BUILDCAPS_BIG = 3,
@@ -35,13 +35,13 @@ enum NodeCaps {
 	BUILDCAPS_FLAG = 4,
 
 	/** can we build a mine on this field (completely independent from build
-    * size!)*/
+	 * size!)*/
 	BUILDCAPS_MINE = 8,
 
 	/** (only if BUILDCAPS_BIG): can we build a port on this field? This gets set
-    * for BUILDCAPS_BIG fields that have a Map::is_port_space() as well as a
-    * swimmable second-order neighbour
-    */
+	 * for BUILDCAPS_BIG fields that have a Map::is_port_space() as well as a
+	 * swimmable second-order neighbour
+	 */
 	BUILDCAPS_PORT = 16,
 
 	/** can we build any building on this field?*/

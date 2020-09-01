@@ -76,6 +76,8 @@ public:
 
 	void set_enabled(bool enabled);
 
+	bool handle_key(bool, SDL_Keysym) override;
+
 protected:
 	void layout() override;
 	void calculate_cursor_position();
@@ -225,7 +227,7 @@ struct DiscreteSlider : public Panel {
 	               const uint32_t cursor_size = 20,
 	               const bool enabled = true);
 
-	void set_labels(std::vector<std::string>);
+	void set_labels(const std::vector<std::string>&);
 
 	boost::signals2::signal<void()> changed;
 	boost::signals2::signal<void(int32_t)> changedto;

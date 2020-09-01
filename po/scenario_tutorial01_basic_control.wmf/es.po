@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-28 17:08+0000\n"
-"Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -326,7 +326,7 @@ msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr "Si haces clic en la obra, una ventana va abrirse. Puedes ver las mercancías que aún faltan en gris. También puedes ver el progreso de esta obra."
+msgstr "Si haces clic en el sitio de construcción se abrirá una ventana. Las mercancías que aún faltan están marcadas en gris. También puedes ver el progreso de este sitio de construcción."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:222
 msgid ""
@@ -648,7 +648,7 @@ msgstr "Para construir una carretera completamente nueva simplemente haz clic en
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr "Si mantienes Ctrl o Shift+Ctrl cuando terminas la carretera las banderas se colocan automáticamente."
+msgstr "Si presionas Ctrl o Shift+Ctrl mientras terminas la carretera las banderas se colocan automáticamente."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:428
 msgid ""
@@ -789,7 +789,7 @@ msgstr "Ahora, ¿no sería bonito revisar el progreso de nuestras canteras sin t
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:504
 msgid ""
-"In addition to the buildings’ census, you can also activate statictics "
+"In addition to the buildings’ census, you can also activate statistics "
 "labels on them. This will display information about the productivity of "
 "buildings or the progress of construction sites."
 msgstr "Además del censo del edificio, también puedes activar etiquetas de estadísticas para ellos. Estas mostrarán información acerca de la productividad de los edificios o el avance de sitios de construcción."
@@ -826,7 +826,7 @@ msgstr "Una vez que hayas archivado un mensaje, otro mensaje se seleccionará au
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press Ctrl + A to select them all."
-msgstr "También puedes mantener la tecla Ctrl o Shift para seleccionar varios mensajes, o pulsar Ctrl + A para seleccionarlos todos."
+msgstr "También puedes mantener presionada la tecla Ctrl o Shift para seleccionar varios mensajes, o presionar Ctrl + A para seleccionarlos todos."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:534
 msgid ""
@@ -909,7 +909,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr "¡Bien hecho! Vamos a ver cómo funcionan los mensajes en un partido real, ¿de acuerdo? Para verlo voy a quitarles todas las rocas a los pobres trabajadores de las canteras. Ellos mandarán entonces un mensaje cada uno indicando que no pueden encontrar más rocas en su zona de trabajo la próxima vez que intenten salir a trabajar."
+msgstr "¡Bien hecho! Veamos cómo funcionan los mensajes en una partida real, ¿de acuerdo? Para esto voy a quitarles todas las rocas a los pobres mamposteros en las canteras. La próxima vez que intenten salir a trabajar, ellos enviarán entonces un mensaje cada uno indicando que no pueden encontrar más rocas en su área de trabajo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:583
 msgid "Destroy the two quarries"
@@ -1082,8 +1082,3 @@ msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
 msgstr "Gracias por jugar este tutorial. Disfruta Widelands y recuerda visitarnos en"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

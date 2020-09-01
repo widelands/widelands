@@ -34,10 +34,9 @@
 #include "logic/map_objects/world/critter.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
+#include "map_io/map_packet_versions.h"
 
 namespace Widelands {
-
-constexpr uint8_t kCurrentPacketVersion = 2;
 
 MapObjectPacket::~MapObjectPacket() {
 	while (loaders.size()) {
@@ -55,62 +54,57 @@ void MapObjectPacket::read(FileSystem& fs,
 		FileRead fr;
 		fr.open(fs, "binary/mapobjects");
 
+		// Packet version is checked by individual loaders as necessary
 		const uint8_t packet_version = fr.unsigned_8();
 
-		// Some maps contain ware/worker info, so we need compatibility here.
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+		// Initial loading stage
+		for (;;) {
+			switch (uint8_t const header = fr.unsigned_8()) {
+			case 0:
+				return;
+			case MapObject::HeaderImmovable:
+				loaders.insert(
+				   Immovable::load(egbase, mol, fr, world_lookup_table, tribes_lookup_table));
+				break;
 
-			// Initial loading stage
-			for (;;) {
-				switch (uint8_t const header = fr.unsigned_8()) {
-				case 0:
-					return;
-				case MapObject::HeaderImmovable:
-					loaders.insert(
-					   Immovable::load(egbase, mol, fr, world_lookup_table, tribes_lookup_table));
-					break;
+			case MapObject::HeaderBattle:
+				loaders.insert(Battle::load(egbase, mol, fr));
+				break;
 
-				case MapObject::HeaderBattle:
-					loaders.insert(Battle::load(egbase, mol, fr));
-					break;
+			case MapObject::HeaderCritter:
+				loaders.insert(Critter::load(egbase, mol, fr, world_lookup_table));
+				break;
 
-				case MapObject::HeaderCritter:
-					loaders.insert(Critter::load(egbase, mol, fr, world_lookup_table));
-					break;
+			case MapObject::HeaderWorker:
+				// We can't use the worker's savegame version, because some stuff is loaded before
+				// that
+				// packet version, and we removed the tribe name.
+				loaders.insert(Worker::load(egbase, mol, fr, tribes_lookup_table, packet_version));
+				break;
 
-				case MapObject::HeaderWorker:
-					// We can't use the worker's savegame version, because some stuff is loaded before
-					// that
-					// packet version, and we removed the tribe name.
-					loaders.insert(Worker::load(egbase, mol, fr, tribes_lookup_table, packet_version));
-					break;
+			case MapObject::HeaderWareInstance:
+				loaders.insert(WareInstance::load(egbase, mol, fr, tribes_lookup_table));
+				break;
 
-				case MapObject::HeaderWareInstance:
-					loaders.insert(WareInstance::load(egbase, mol, fr, tribes_lookup_table));
-					break;
+			case MapObject::HeaderShip:
+				loaders.insert(Ship::load(egbase, mol, fr));
+				break;
 
-				case MapObject::HeaderShip:
-					loaders.insert(Ship::load(egbase, mol, fr));
-					break;
+			case MapObject::HeaderPortDock:
+				loaders.insert(PortDock::load(egbase, mol, fr));
+				break;
 
-				case MapObject::HeaderPortDock:
-					loaders.insert(PortDock::load(egbase, mol, fr));
-					break;
+			case MapObject::HeaderShipFleet:
+				loaders.insert(ShipFleet::load(egbase, mol, fr));
+				break;
 
-				case MapObject::HeaderShipFleet:
-					loaders.insert(ShipFleet::load(egbase, mol, fr));
-					break;
+			case MapObject::HeaderFerryFleet:
+				loaders.insert(FerryFleet::load(egbase, mol, fr));
+				break;
 
-				case MapObject::HeaderFerryFleet:
-					loaders.insert(FerryFleet::load(egbase, mol, fr));
-					break;
-
-				default:
-					throw GameDataError("unknown object header %u", header);
-				}
+			default:
+				throw GameDataError("unknown object header %u", header);
 			}
-		} else {
-			throw UnhandledVersionError("MapObjectPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception& e) {
 		throw GameDataError("map objects: %s", e.what());
@@ -143,7 +137,7 @@ void MapObjectPacket::load_finish() {
 void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& mos) {
 	FileWrite fw;
 
-	fw.unsigned_8(kCurrentPacketVersion);
+	fw.unsigned_8(kCurrentPacketVersionMapObject);
 
 	std::vector<Serial> obj_serials = egbase.objects().all_object_serials_ordered();
 	for (std::vector<Serial>::iterator cit = obj_serials.begin(); cit != obj_serials.end(); ++cit) {

@@ -68,8 +68,9 @@ struct Console : public ChatProvider, public Handler {
 			pos = end;
 		}
 
-		if (arg.empty())
+		if (arg.empty()) {
 			return;
+		}
 
 		CommandMap::const_iterator it = commands.find(arg[0]);
 		if (it == commands.end()) {
@@ -88,11 +89,12 @@ struct Console : public ChatProvider, public Handler {
 		ChatMessage cm(msg);
 		messages.push_back(cm);
 
-		log("*** %s\n", msg.c_str());
+		log_dbg("*** %s\n", msg.c_str());
 
 		// Arbitrary choice of backlog size
-		if (messages.size() > 1000)
+		if (messages.size() > 1000) {
 			messages.erase(messages.begin(), messages.begin() + 100);
+		}
 
 		Notifications::publish(cm);  // Notify listeners, i.e. the UI
 	}

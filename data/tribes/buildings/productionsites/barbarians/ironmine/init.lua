@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_ironmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Iron Mine"),
@@ -39,7 +40,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "iron",
+      mines = "resource_iron",
       prohibited_till = 1000,
       mines_percent = 30
    },
@@ -51,26 +52,17 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "ration", amount = 6 }
    },
-   outputs = {
-      "iron_ore"
-   },
-
-   indicate_workarea_overlaps = {
-      barbarians_ironmine = false,
-      barbarians_ironmine_deep = false,
-      barbarians_ironmine_deeper = false,
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
             "return=skipped unless economy needs iron_ore",
             "consume=ration",
-            "sleep=45000",
-            "animate=working 20000",
-            "mine=iron 2 33 5 17",
+            "sleep=duration:45s",
+            "animate=working duration:20s",
+            "mine=resource_iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
             "produce=iron_ore"
          }
       },
@@ -83,3 +75,5 @@ tribes:new_productionsite_type {
          pgettext("barbarians_building", "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

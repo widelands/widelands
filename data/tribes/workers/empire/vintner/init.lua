@@ -1,22 +1,13 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
--- TODO(GunChleoc): Needs a walkload animation.
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 12, 24 }
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {12, 24}, 10)
-add_directional_animation(animations, "walkload", dirname, "walk", {12, 24}, 10)
-
-
 tribes:new_worker_type {
-   msgctxt = "empire_worker",
    name = "empire_vintner",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Vintner"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -24,5 +15,23 @@ tribes:new_worker_type {
       empire_carrier = 1
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 12, 24 }
+      },
+      walk = {
+         hotspot = { 12, 24 },
+         fps = 10,
+         directional = true
+      },
+      walkload = {
+         -- TODO(GunChleoc): Needs a walkload animation
+         basename = "walk",
+         hotspot = { 12, 24 },
+         fps = 10,
+         directional = true
+      }
+   }
 }
+
+pop_textdomain()

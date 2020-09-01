@@ -292,7 +292,7 @@ std::string FileSystem::get_homedir() {
 	TRY_USE_AS_HOMEDIR("HOME")
 	TRY_USE_AS_HOMEDIR("APPDATA")
 
-	log("None of the directories was useable - falling back to \".\"\n");
+	log_warn("None of the directories was useable - falling back to \".\"\n");
 #else
 #ifdef HAS_GETENV
 	if (char const* const h = getenv("HOME")) {
@@ -302,12 +302,12 @@ std::string FileSystem::get_homedir() {
 #endif
 
 	if (homedir.empty()) {
-		log("\nWARNING: either we can not detect your home directory "
-		    "or you do not have one! Please contact the developers.\n\n");
+		log_warn("\neither we can not detect your home directory "
+		         "or you do not have one! Please contact the developers.\n\n");
 
 		// TODO(unknown): is it really a good idea to set homedir to "." then ??
 
-		log("Instead of your home directory, '.' will be used.\n\n");
+		log_warn("Instead of your home directory, '.' will be used.\n\n");
 		homedir = ".";
 	}
 
@@ -487,26 +487,29 @@ static void fs_tokenize(const std::string& path, char const filesep, Inserter co
  * Transform any valid, unique pathname into a well-formed absolute path
  */
 // TODO(unknown): Enable non-Unix paths
-std::string FileSystem::canonicalize_name(std::string path) const {
+std::string FileSystem::canonicalize_name(const std::string& path) const {
 	std::list<std::string> components;
 	std::list<std::string>::iterator i;
 
 #ifdef _WIN32
+	std::string temp_path = path;
 	// replace all slashes with backslashes so following can work.
-	for (uint32_t j = 0; j < path.size(); ++j) {
-		if (path[j] == '/') {
-			path[j] = '\\';
+	for (uint32_t j = 0; j < temp_path.size(); ++j) {
+		if (temp_path[j] == '/') {
+			temp_path[j] = '\\';
 		}
 	}
+#else
+	const std::string& temp_path = path;
 #endif
 
-	fs_tokenize(path, file_separator(), std::inserter(components, components.begin()));
+	fs_tokenize(temp_path, file_separator(), std::inserter(components, components.begin()));
 
 	// Tilde expansion
 	if (!components.empty() && *components.begin() == "~") {
 		components.erase(components.begin());
 		fs_tokenize(get_homedir(), file_separator(), std::inserter(components, components.begin()));
-	} else if (!is_path_absolute(path)) {
+	} else if (!is_path_absolute(temp_path)) {
 		//  make relative paths absolute (so that "../../foo" can work)
 		fs_tokenize(root_.empty() ? get_working_directory() : root_, file_separator(),
 		            std::inserter(components, components.begin()));
@@ -545,7 +548,7 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 	}
 
 	std::string canonpath;
-	canonpath.reserve(path.length());
+	canonpath.reserve(temp_path.length());
 #ifndef _WIN32
 	for (i = components.begin(); i != components.end(); ++i) {
 		canonpath.push_back('/');
@@ -655,7 +658,7 @@ bool FileSystem::check_writeable_for_data(char const* const path) {
 		fs.fs_unlink(".widelands");
 		return true;
 	} catch (const FileError& e) {
-		log("Directory %s is not writeable - next try: %s\n", path, e.what());
+		log_warn("Directory %s is not writeable - next try: %s\n", path, e.what());
 	}
 
 	return false;

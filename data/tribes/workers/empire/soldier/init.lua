@@ -1,3 +1,5 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 animations = {
@@ -55,9 +57,13 @@ animations = {
       pictures = path.list_files(dirname .. "die_??.png"),
       hotspot = { 10, 36 },
       fps = 10
+   },
+   walk = {
+      hotspot = { 10, 36 },
+      fps = 10,
+      directional = true
    }
 }
-add_directional_animation(animations, "walk", dirname, "walk", {10, 36}, 10)
 
 all_levels_emp = {
    min_health = 0,
@@ -71,17 +77,15 @@ all_levels_emp = {
 }
 
 tribes:new_soldier_type {
-   msgctxt = "empire_worker",
    name = "empire_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Soldier"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
    animations = animations,
-
-   default_target_quantity = 10,
 
    -- Battle attributes - initial values and per level increase
    health = {
@@ -108,12 +112,6 @@ tribes:new_soldier_type {
       base = 30,
       increase_per_level = 16,
       pictures = path.list_files(dirname .. "evade_level?.png"),
-   },
-
-   aihints = {
-      preciousness = {
-         empire = 5
-      },
    },
 
    -- Random animations for battle
@@ -162,3 +160,5 @@ tribes:new_soldier_type {
       },
    },
 }
+
+pop_textdomain()

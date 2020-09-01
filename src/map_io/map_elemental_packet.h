@@ -23,7 +23,6 @@
 #include <string>
 #include <vector>
 
-#include "logic/addons.h"
 #include "map_io/map_data_packet.h"
 
 namespace Widelands {

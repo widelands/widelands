@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2019
+# GunChleoc, 2015-2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-27 09:06+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-16 21:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -106,23 +106,23 @@ msgstr "Feuch e."
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:63
 msgid "Show building spaces"
-msgstr "Nochd na h-ionadan togail"
+msgstr "Seall na h-ionadan togail"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:64
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr "Feumaidh sinn àite ghoireasach a lorg airson bothan a’ choillteir. Nochdamaid na h-ionadan togail gus seo a dhèanamh nas fhasa. Tha dà dhòigh ann gus an gleus seo a chur air:"
+msgstr "Feumaidh sinn àite ghoireasach a lorg airson bothan a’ choillteir. Seallamaid na h-ionadan togail gus seo a dhèanamh nas fhasa. Tha dà dhòigh ann gus an gleus seo a chur air:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
 "Press the Space bar to toggle them, or select ‘Show Building Spaces’ in the "
 "‘Show / Hide’ menu."
-msgstr "Brùth air an iuchair Space gus an cur air is dheth air neo tagh “Nochd na h-ionadan togail” sa chlàr-taice “Seall / Falaich”."
+msgstr "Brùth air an iuchair Space gus an cur air is dheth air neo tagh “Seall na h-ionadan togail” sa chlàr-taice “Seall / Falaich”."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid "Show the building spaces now."
-msgstr "Nochd na h-ionadan togail a-nis."
+msgstr "Seall na h-ionadan togail a-nis."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:71
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:86
@@ -158,7 +158,7 @@ msgstr "Tòisichidh tu air geama le aon phrìomh-àras mar as trice. Seo an toga
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’."
-msgstr "Feumaidh sinn àite ghoireasach a lorg airson bothan a’ choillteir. Nochdamaid na h-ionadan togail gus seo a dhèanamh nas fhasa."
+msgstr "Feumaidh sinn àite ghoireasach a lorg airson bothan a’ choillteir. Seallamaid na h-ionadan togail gus seo a dhèanamh nas fhasa."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
@@ -176,7 +176,7 @@ msgstr "Thoir an aire nach urrainn dhut an uinneag seo a dhùnadh le briogadh de
 msgid ""
 "Now that I have shown you how to show and hide the building spaces, please "
 "switch them on again so that we can place our first building."
-msgstr "Nise on a sheall mi dhut mar a nochdas is mar a dh’fhalaicheas tu na h-ionadan togail, nochd iad a-rithist ach an urrainn dhuinn a’ chiad togalach againn a chur ann."
+msgstr "Nise on a sheall mi dhut mar a sheallas is mar a dh’fhalaicheas tu na h-ionadan togail, seall iad a-rithist ach an urrainn dhuinn a’ chiad togalach againn a chur ann."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:100
 msgid "Lumberjack’s Spot"
@@ -325,7 +325,7 @@ msgid ""
 "This button toggles showing the building’s work area. When the lumberjack "
 "leaves the building to look for trees to fell, he will only look for them "
 "within this area. Let me show you how perfect this spot is."
-msgstr "Nochdaidh is falaichidh am putan seo raon obrach an togalaich. Nuair a dh’fhàgas an coilltear am bothan an toir air craobh a leaghadh e, cha lorg e gin ach am broinn an raoin seo. Seallaidh mi dhut dè cho foirfe ’s a tha am bad seo."
+msgstr "Seallaidh is falaichidh am putan seo raon obrach an togalaich. Nuair a dh’fhàgas an coilltear am bothan an toir air craobh a leaghadh e, cha lorg e gin ach am broinn an raoin seo. Seallaidh mi dhut dè cho foirfe ’s a tha am bad seo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:223
 msgid "Close the construction site window when you have seen enough."
@@ -506,7 +506,7 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press Space for that)."
-msgstr "’S e togalach beag a tha sa chuaraidh mar a tha am bothan coillteir. Mar sin, ’s urrainn dhut fear a thogail air raon sam bith a sheallas taigh dearg, buidhe no uaine nuair a bhios na h-ionadan togail ’gan nochdadh (brùth air Space gus an nochdadh)."
+msgstr "’S e togalach beag a tha sa chuaraidh mar a tha am bothan coillteir. Mar sin, ’s urrainn dhut fear a thogail air raon sam bith a sheallas taigh dearg, buidhe no uaine nuair a bhios na h-ionadan togail ’gan sealltainn (brùth air Space gus an sealltainn)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:356
 msgid ""
@@ -529,7 +529,7 @@ msgid ""
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr "Dèan cinnteach gun do nochd thu na h-ionadan togail is an uairsin briog air an àite far a bheil thu airson an togalach a chur ann agus tagh on uinneag a nochdas e ach an dèid a chur ann. Saoilidh mi gum bu chòir dhomh na samhlaidhean ionad togail a ghnìomhaich sinn roimhe a mhìneachadh dhut a-nis."
+msgstr "Dèan cinnteach gu bheil na h-ionadan togail ’gan sealltainn is an uairsin briog air an àite far a bheil thu airson an togalach a chur ann agus tagh on uinneag a nochdas e ach an dèid a chur ann. Saoilidh mi gum bu chòir dhomh na samhlaidhean ionad togail a ghnìomhaich sinn roimhe a mhìneachadh dhut a-nis."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:367
 msgid ""
@@ -742,14 +742,14 @@ msgid ""
 "construction sites look the same, and some buildings look alike. It is "
 "sometimes hard to tell them apart. Widelands offers a feature to show label "
 "texts over the buildings. They are called the ‘census’."
-msgstr "Fhad ’s a tha sinn a’ feitheamh, seallaidh mi gleus feumail eile dhut. Tha an aon choltas aig gach làrach togail is tha cuid a thogalaichean uabhasach coltach ri chèile. Tha e doirbh aig amannan aithneachadh dè seòrsa togalaich a chì thu. Tairgidh Widelands gleus dhut a nochdas ainm os cionn gach togalaich. Chuir sinn “cunntas-sluaigh” air.."
+msgstr "Fhad ’s a tha sinn a’ feitheamh, seallaidh mi gleus feumail eile dhut. Tha an aon choltas aig gach làrach togail is tha cuid a thogalaichean uabhasach coltach ri chèile. Tha e doirbh aig amannan aithneachadh dè seòrsa togalaich a chì thu. Tairgidh Widelands gleus dhut a sheallas ainm os cionn gach togalaich. Chuir sinn “cunntas-sluaigh” air.."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
 msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘c’ key on the keyboard."
-msgstr "Airson leubailean cunntas-sluaigh nan togalaichean a nochdadh no fhalach, tagh “Seall an cunntas-sluaigh”/“Falaich an cunntas-sluaigh” sa chlàr-taice “Seall / Falaich” aig a’ bhonn no brùth air an iuchair “c” air a’ mheur-chlàr."
+msgstr "Airson leubailean cunntas-sluaigh nan togalaichean a shealltainn no fhalach, tagh “Seall an cunntas-sluaigh”/“Falaich an cunntas-sluaigh” sa chlàr-taice “Seall / Falaich” aig a’ bhonn no brùth air an iuchair “c” air a’ mheur-chlàr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "Let me enable the census for you."
@@ -771,7 +771,7 @@ msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
 "the ‘s’ key on the keyboard."
-msgstr "Airson leubailean stadastaireachd nan togalaichean a nochdadh no fhalach, tagh “Seall an stadastaireachd ”/“Falaich an stadastaireachd ” sa chlàr-taice “Seall / Falaich” aig a’ bhonn no brùth air an iuchair “s” air a’ mheur-chlàr."
+msgstr "Airson leubailean stadastaireachd nan togalaichean a shealltainn no fhalach, tagh “Seall an stadastaireachd ”/“Falaich an stadastaireachd ” sa chlàr-taice “Seall / Falaich” aig a’ bhonn no brùth air an iuchair “s” air a’ mheur-chlàr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:503
 msgid ""
@@ -781,7 +781,7 @@ msgstr "Nise, nach biodh e taghta nam b’ urrainn dhuinn adhartas nan cuaraidhe
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:504
 msgid ""
-"In addition to the buildings’ census, you can also activate statictics "
+"In addition to the buildings’ census, you can also activate statistics "
 "labels on them. This will display information about the productivity of "
 "buildings or the progress of construction sites."
 msgstr "A bharrachd air cunntas-sluaigh nan togalaichean, ’s urrainn dhut leubailean stadastaireachd a ghnìomhachadh orra cuideachd. Seallaidh seo fiosrachadh mu chinneasachadh nan togalach is adhartas nan làraichean togail."
@@ -1074,8 +1074,3 @@ msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
 msgstr "Mòran taing airson an t-oideachadh seo a chluiche. Gabh tlachd à Widelands is tadhail oirnn air"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Mill"),
@@ -45,13 +46,9 @@ tribes:new_productionsite_type {
       { name = "corn", amount = 6 },
       { name = "blackroot", amount = 6 }
    },
-   outputs = {
-      "cornmeal",
-      "blackroot_flour"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -65,10 +62,10 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped when site has blackroot and economy needs blackroot_flour and not economy needs cornmeal",
             "return=skipped unless economy needs cornmeal",
-            "sleep=3500",
+            "sleep=duration:3s500ms",
             "consume=corn",
-            "playsound=sound/mill/mill_turning 240",
-            "animate=working 15000",
+            "playsound=sound/mill/mill_turning priority:85% allow_multiple",
+            "animate=working duration:15s",
             "produce=cornmeal"
          }
       },
@@ -79,11 +76,13 @@ tribes:new_productionsite_type {
             -- No check whether we need blackroot_flour because blackroots cannot be used for anything else.
             "return=skipped when site has corn and economy needs cornmeal and not economy needs blackroot_flour",
             "consume=blackroot",
-            "sleep=3500",
-            "playsound=sound/mill/mill_turning 240",
-            "animate=working 15000",
+            "sleep=duration:3s500ms",
+            "playsound=sound/mill/mill_turning priority:85% allow_multiple",
+            "animate=working duration:15s",
             "produce=blackroot_flour"
          }
       },
    },
 }
+
+pop_textdomain()

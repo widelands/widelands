@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_ironmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Iron Mine"),
@@ -17,10 +18,6 @@ tribes:new_productionsite_type {
    return_on_dismantle = {
       log = 2,
       planks = 2
-   },
-
-   indicate_workarea_overlaps = {
-      atlanteans_ironmine = false,
    },
 
    animations = {
@@ -39,7 +36,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "iron",
+      mines = "resource_iron",
       prohibited_till = 1000
    },
 
@@ -52,19 +49,16 @@ tribes:new_productionsite_type {
       { name = "smoked_meat", amount = 6 },
       { name = "atlanteans_bread", amount = 10 }
    },
-   outputs = {
-      "iron_ore"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
             -- time total: 105 + 5 x 3.6
             "return=skipped unless economy needs iron_ore",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=35000",
+            "sleep=duration:35s",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
@@ -75,8 +69,8 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining iron",
          actions = {
-            "animate=working 14000",
-            "mine=iron 4 100 5 2",
+            "animate=working duration:14s",
+            "mine=resource_iron radius:4 yield:100% when_empty:5%",
             "produce=iron_ore",
          }
       },
@@ -98,3 +92,5 @@ tribes:new_productionsite_type {
          pgettext("atlanteans_building", "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

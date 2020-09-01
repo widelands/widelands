@@ -93,21 +93,28 @@ public:
 			      box, (boost::format("additional_%u") % c).str(), 0, 0, kWareMenuPicWidth, 8,
 			      kWareMenuPicHeight, _("Additional item"), UI::DropdownType::kPictorial,
 			      UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
-			d.add(_("(Empty)"), kEmptySlot, g_gr->images().get(kNoWare), true, _("(Empty)"));
+			d.add(_("(Empty)"), kEmptySlot, g_image_cache->get(kNoWare), true, _("(Empty)"));
+			std::set<std::tuple<std::string, Widelands::WareWorker, Widelands::DescriptionIndex,
+			                    const Image*>>
+			   sorted;
 			for (Widelands::DescriptionIndex i : pd.owner().tribe().wares()) {
 				const Widelands::WareDescr& w = *pd.owner().tribe().get_ware_descr(i);
-				d.add(
-				   w.descname(), std::make_pair(Widelands::wwWARE, i), w.icon(), false, w.descname());
+				sorted.insert(std::make_tuple(w.descname(), Widelands::wwWARE, i, w.icon()));
 			}
 			for (Widelands::DescriptionIndex i : pd.owner().tribe().workers()) {
-				const Widelands::WorkerDescr& w = *pd.owner().tribe().get_worker_descr(i);
-				d.add(
-				   w.descname(), std::make_pair(Widelands::wwWORKER, i), w.icon(), false, w.descname());
+				if (i != pd.owner().tribe().ferry()) {
+					const Widelands::WorkerDescr& w = *pd.owner().tribe().get_worker_descr(i);
+					sorted.insert(std::make_tuple(w.descname(), Widelands::wwWORKER, i, w.icon()));
+				}
+			}
+			for (const auto& t : sorted) {
+				d.add(std::get<0>(t), std::make_pair(std::get<1>(t), std::get<2>(t)), std::get<3>(t),
+				      false, std::get<0>(t));
 			}
 			d.set_enabled(can_act);
 			d.selected.connect([this, c]() { select(c); });
 
-			UI::Icon* icon = new UI::Icon(box, g_gr->images().get(kNoWare));
+			UI::Icon* icon = new UI::Icon(box, g_image_cache->get(kNoWare));
 			icon->set_handle_mouse(true);
 			boxes_.push_back(box);
 			icons_.push_back(icon);
@@ -129,24 +136,22 @@ public:
 		for (uint32_t c = 0; c < capacity_; ++c) {
 			const InputQueue* iq = portdock_.expedition_bootstrap()->inputqueue(c);
 			assert(!iq || (iq->get_max_size() == 1 && iq->get_max_fill() == 1));
-			icons_[c]->set_icon(g_gr->images().get(
-			   iq ?
-			      iq->get_filled() ? kPicWarePresent : iq->get_missing() ? kPicWareMissing :
-			                                                               kPicWareComing :
-			      kNoWare));
+			icons_[c]->set_icon(g_image_cache->get(
+			   iq ? iq->get_filled() ? kPicWarePresent :
+			                           iq->get_missing() ? kPicWareMissing : kPicWareComing :
+			        kNoWare));
 			icons_[c]->set_tooltip(
-			   iq ?
-			      iq->get_filled() ?
-			      /** TRANSLATORS: Tooltip for a ware that is present in the building */
-			         _("Present") :
-			         iq->get_missing() ?
-			         /** TRANSLATORS: Tooltip for a ware that is neither present in the
-			            building nor being transported there */
-			            _("Missing") :
-			            /** TRANSLATORS: Tooltip for a ware that is not present in the
-			               building, but already being transported there */
-			            _("Coming") :
-			      "");
+			   iq ? iq->get_filled() ?
+			        /** TRANSLATORS: Tooltip for a ware that is present in the building */
+			           _("Present") :
+			           iq->get_missing() ?
+			           /** TRANSLATORS: Tooltip for a ware that is neither present in the
+			              building nor being transported there */
+			              _("Missing") :
+			              /** TRANSLATORS: Tooltip for a ware that is not present in the
+			                 building, but already being transported there */
+			              _("Coming") :
+			        "");
 		}
 	}
 

@@ -6,14 +6,15 @@
 # Madkat Here, 2017
 # Facundo Gomez <facundogomez15@gmail.com>, 2019
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
+# Walter Benkel <tromaster@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -691,11 +692,10 @@ msgid ""
 "same spot to use our wool for weaving cloth. But for the moment being, let’s"
 " start by producing a reasonable amount of wheat."
 msgstr ""
-"Después de la producción de suficiente trigo, podemos desarmar la granja y "
-"construir una granja de ovejas para producir lana. Más tarde, podríamos "
-"construir un molino de tejer en el mismo lugar para usar nuestra lana para "
-"tejido. Pero por el momento, comencemos produciendo una cantidad razonable "
-"de trigo."
+"Después producir suficiente trigo, podemos desarmar la granja y construir "
+"una granja de ovejas para producir lana. Más tarde, podríamos construir un "
+"telar en el mismo lugar para tejer telas con nuestra lana. Pero por el "
+"momento comencemos produciendo una cantidad razonable de trigo."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -857,8 +857,8 @@ msgid ""
 msgstr ""
 "Si hay dificultades para construir todos los edificios necesarios, debemos "
 "pensar en todo lo que hemos aprendido hasta ahora. Podemos cortar todas las "
-"rocas. Tal vez deberíamos optimizar nuestros caminos para liberar algunas "
-"obras de construcción, o incluso desarmar algunos edificios militares para "
+"rocas. Tal vez deberíamos optimizar nuestros caminos para liberar algunos "
+"sitios de construcción, o incluso desarmar algunos edificios militares para "
 "obtener más espacio para nuestra economía."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:455
@@ -936,8 +936,8 @@ msgid ""
 "building."
 msgstr ""
 "Por ejemplo, podría ser una buena idea producir una cantidad razonable de "
-"una mercancía y luego desarmar el edificio para ganar espacio para otro "
-"edificio."
+"una mercancía y luego desarmar el edificio para recuperar el espacio para "
+"otro edificio."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:492
 msgid "Amalea’s Reminder"
@@ -966,10 +966,10 @@ msgid ""
 "want to be cautious, you can keep some sentries or blockhouses near the "
 "coastline."
 msgstr ""
-"Recomiendo encarecidamente el desarmamiento de la mayoría de ellos para "
-"poder construir edificios industriales. No creo que haya mucho peligro en "
-"esta isla, pero si quieres ser cauteloso, puedes mantener algunos centinelas"
-" cerca de la costa."
+"Recomiendo encarecidamente desarmar la mayoría de ellos para poder construir"
+" edificios industriales. No creo que haya mucho peligro en esta isla, pero "
+"si quieres ser cauto, puedes mantener algunos centinelas o fortines cerca de"
+" la costa."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:501
@@ -1304,8 +1304,3 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:647
 msgid "Artifact Found"
 msgstr "Artefacto Encontrado"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

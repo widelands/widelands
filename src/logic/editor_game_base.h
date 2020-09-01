@@ -26,10 +26,12 @@
 #include "logic/addons.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/description_manager.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
+#include "ui_basic/note_loading_message.h"
 #include "wui/game_tips.h"
 
 namespace UI {
@@ -102,9 +104,9 @@ public:
 	virtual Player* get_safe_player(PlayerNumber);
 
 	// loading stuff
+	void load_all_tribes();
 	void allocate_player_maps();
 	virtual void postload();
-	void load_graphics();
 	virtual void cleanup_for_load();
 	void delete_world_and_tribes();
 
@@ -148,13 +150,13 @@ public:
 	                                bool loading = false,
 	                                FormerBuildings former_buildings = FormerBuildings(),
 	                                const BuildingSettings* settings = nullptr,
-	                                std::map<DescriptionIndex, Quantity> preserved_wares =
+	                                const std::map<DescriptionIndex, Quantity>& preserved_wares =
 	                                   std::map<DescriptionIndex, Quantity>());
 	Building& warp_dismantlesite(const Coords&,
 	                             PlayerNumber,
 	                             bool loading = false,
 	                             FormerBuildings former_buildings = FormerBuildings(),
-	                             std::map<DescriptionIndex, Quantity> preserved_wares =
+	                             const std::map<DescriptionIndex, Quantity>& preserved_wares =
 	                                std::map<DescriptionIndex, Quantity>());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
@@ -167,7 +169,7 @@ public:
 	                                      const BuildingDescr* former_building);
 	Bob& create_ship(const Coords&, const DescriptionIndex ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
-	Bob& create_ferry(const Coords&, Player* owner);
+	Bob& create_worker(const Coords&, DescriptionIndex worker, Player* owner);
 
 	uint32_t get_gametime() const {
 		return gametime_;
@@ -281,6 +283,7 @@ private:
 	std::unique_ptr<LuaInterface> lua_;
 	std::unique_ptr<PlayersManager> player_manager_;
 
+	std::unique_ptr<DescriptionManager> description_manager_;
 	std::unique_ptr<World> world_;
 	std::unique_ptr<Tribes> tribes_;
 	std::unique_ptr<InteractiveBase> ibase_;
@@ -290,6 +293,7 @@ private:
 	std::unique_ptr<UI::ProgressWindow> loader_ui_;
 	std::unique_ptr<GameTips> game_tips_;
 	std::vector<std::string> registered_game_tips_;
+	std::unique_ptr<Notifications::Subscriber<UI::NoteLoadingMessage>> loading_message_subscriber_;
 
 	/// Even after a map is fully loaded, some static data (images, scripts)
 	/// will still be read from a filesystem whenever a map/game is saved.

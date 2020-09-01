@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
    name = "barbarians_farmer",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Farmer"),
@@ -19,18 +20,18 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:2 space",
          "walk=coords",
-         "animate=plant 6000",
+         "animate=plant duration:6s",
          "plant=attrib:seed_wheat",
-         "animate=plant 6000",
+         "animate=plant duration:6s",
          "return"
       },
       harvest = {
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
-         "playsound=sound/farm/scythe 220",
-         "animate=harvest 10000",
+         "playsound=sound/farm/scythe priority:70% allow_multiple",
+         "animate=harvest duration:10s",
          "callobject=harvest",
-         "animate=gather 4000",
+         "animate=gather duration:4s",
          "createware=wheat",
          "return"
       }
@@ -81,3 +82,5 @@ tribes:new_worker_type {
       }
    }
 }
+
+pop_textdomain()

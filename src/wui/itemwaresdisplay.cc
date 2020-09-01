@@ -125,8 +125,9 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 			                   &player().get_playercolor());
 		} else {
 			y += IWD_WareBaseLine;
-			if (tribe.get_ware_descr(it.index)->icon())
+			if (tribe.get_ware_descr(it.index)->icon()) {
 				dst.blit(Vector2i(x, y), tribe.get_ware_descr(it.index)->icon());
+			}
 		}
 	}
 }

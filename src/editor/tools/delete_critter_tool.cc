@@ -36,14 +36,14 @@ int32_t EditorDeleteCritterTool::handle_click_impl(
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
 
-	do
+	do {
 		if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
 			args->old_bob_type.push_back(&bob->descr());
 			bob->remove(eia.egbase());
 		} else {
 			args->old_bob_type.push_back(nullptr);
 		}
-	while (mr.advance(*map));
+	} while (mr.advance(*map));
 	return radius + 2;
 }
 

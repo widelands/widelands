@@ -44,8 +44,8 @@ function get_trees()
 end
 
 -- Main function
-set_textdomain("widelands_editor")
-return {
+push_textdomain("widelands_editor")
+local r = {
    title = _"Editor Help",
    tabs = {
       {
@@ -91,3 +91,5 @@ return {
       }
    }
 }
+pop_textdomain()
+return r

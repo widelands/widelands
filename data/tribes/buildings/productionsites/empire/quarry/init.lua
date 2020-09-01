@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_quarry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Quarry"),
@@ -32,17 +33,8 @@ tribes:new_productionsite_type {
       empire_stonemason = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_quarry = false,
-   },
-
-   outputs = {
-      "granite",
-      "marble"
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -60,7 +52,7 @@ tribes:new_productionsite_type {
          descname = _"quarrying granite",
          actions = {
             "callworker=cut_granite",
-            "sleep=17500"
+            "sleep=duration:17s500ms"
          }
       },
       mine_marble = {
@@ -68,7 +60,7 @@ tribes:new_productionsite_type {
          descname = _"quarrying marble",
          actions = {
             "callworker=cut_marble",
-            "sleep=17500"
+            "sleep=duration:17s500ms"
          }
       },
    },
@@ -80,3 +72,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 75
    },
 }
+
+pop_textdomain()

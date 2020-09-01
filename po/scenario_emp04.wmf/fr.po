@@ -6,19 +6,19 @@
 # David D, 2018
 # GunChleoc, 2018
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018
 # zecas <jjorge@free.fr>, 2018
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
 # Kura Go <kurago@ml1.net>, 2019
 # Renaud Bouchard, 2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Renaud Bouchard, 2020\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -655,8 +655,8 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:347
 msgid ""
 "First of all, we need more construction materials. So, we should build at "
-"least three lumberjacks’ houses and two quarries. Be sure to have "
-"dismanteled all of the unproductive buildings though."
+"least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
+" all of the unproductive buildings though."
 msgstr ""
 "En premier lieu, nous avons besoin de plus de matériaux de construction. "
 "Nous devrions donc bâtir trois maisons de bucherons et deux clairières. "
@@ -829,14 +829,12 @@ msgid ""
 "The only solution is to build two new forester’s houses near our "
 "lumberjacks. Be sure to first build a new forester’s house and then "
 "eventually destroy the old one or at least expel the forester to change "
-"houses. Dismantling them is also possible but will not return any wares "
-"because they are so torn."
+"houses."
 msgstr ""
 "La seule solution est de construire deux nouvelles maisons pour eux près de "
 "nos bucherons. Assurez-vous de construire au moins une nouvelle maison avant"
 " de raser l'ancienne ou au moins expulsez le garde-forestier pour qu'il "
-"change de maison. Vous pouvez aussi les démanteler mais cela ne nous "
-"apportera aucune matière première tellement elles sont dégradées."
+"change de maison."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
 msgid "Amalea Laughs Sarcastically"
@@ -1634,8 +1632,3 @@ msgstr ""
 "Maudit soit Lutius pour avoir tué les paisibles serviteurs de la déesse "
 "Vesta ! Que votre vie et votre terre soient maudites et que la colère de la "
 "déesse éradique votre famille de la surface de la terre !"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

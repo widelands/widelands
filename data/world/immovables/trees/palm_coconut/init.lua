@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -7,17 +9,15 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_coconut_desert_sapling",
    descname = _ "Coconut Palm (Sapling)",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 55000",
-         "remove=42",
+      main = {
+         "animate=idle duration:55s",
+         "remove=chance:16.41%",
          "grow=palm_coconut_desert_pole",
       },
    },
@@ -34,17 +34,15 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_coconut_desert_pole",
    descname = _ "Coconut Palm (Pole)",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 55000",
-         "remove=33",
+      main = {
+         "animate=idle duration:55s",
+         "remove=chance:12.89%",
          "grow=palm_coconut_desert_mature",
       },
    },
@@ -61,17 +59,15 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_coconut_desert_mature",
    descname = _ "Coconut Palm (Mature)",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 60000",
-         "remove=23",
+      main = {
+         "animate=idle duration:1m",
+         "remove=chance:8.98%",
          "grow=palm_coconut_desert_old",
       },
    },
@@ -88,20 +84,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_coconut_desert_old",
    descname = _ "Coconut Palm (Old)",
    species = _ "Coconut Palm",
    icon = dirname .. "menu.png",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 1550000",
-         "transform=deadtree6 36",
-         "seed=palm_coconut_desert_sapling 100",
+      main = {
+         "animate=idle duration:25m50s",
+         "transform=deadtree6 chance:14.06%",
+         "seed=palm_coconut_desert_sapling proximity:39%",
       },
       fall = {
          "remove=",
@@ -118,7 +112,10 @@ world:new_immovable_type{
          hotspot = { 25, 60 },
          sound_effect = {
             path = "sound/animals/bird3",
+            priority = 10
          },
       }
    },
 }
+
+pop_textdomain()

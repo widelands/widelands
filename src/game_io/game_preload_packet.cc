@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "build_info.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
@@ -75,7 +76,7 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 				const std::string substring = addons.substr(0, commapos);
 				const size_t colonpos = addons.find(':');
 				if (colonpos == std::string::npos) {
-					log("WARNING: Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
+					log_warn("Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
 				} else {
 					const std::string version = substring.substr(colonpos + 1);
 					required_addons_.push_back(std::make_pair(substring.substr(0, colonpos),

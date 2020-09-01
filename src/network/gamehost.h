@@ -85,6 +85,7 @@ struct GameHost : public GameController {
 	void switch_to_player(uint32_t user, uint8_t number);
 	void set_win_condition_script(const std::string& wc);
 	void set_peaceful_mode(bool peace);
+	void set_custom_starting_positions(bool);
 	void replace_client_with_ai(uint8_t playernumber, const std::string& ai);
 
 	// just visible stuff for the select mapmenu
@@ -170,7 +171,7 @@ private:
 	void write_setting_user(SendPacket& packet, uint32_t number);
 	void broadcast_setting_user(uint32_t number);
 	void write_setting_all_users(SendPacket&);
-	bool write_map_transfer_info(SendPacket&, std::string);
+	bool write_map_transfer_info(SendPacket&, const std::string&);
 
 	void disconnect_player_controller(uint8_t number, const std::string& name);
 	void disconnect_client(uint32_t number,

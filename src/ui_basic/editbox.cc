@@ -85,9 +85,9 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
            x,
            y,
            w,
-           text_height(g_gr->styles().editbox_style(style).font()) +
-              2 * g_gr->styles().editbox_style(style).background().margin()),
-     m_(new EditBoxImpl(g_gr->styles().editbox_style(style))),
+           text_height(g_style_manager->editbox_style(style).font()) +
+              2 * g_style_manager->editbox_style(style).background().margin()),
+     m_(new EditBoxImpl(g_style_manager->editbox_style(style))),
      history_active_(false),
      history_position_(-1),
      password_(false),
@@ -186,6 +186,7 @@ void EditBox::set_font_style_and_margin(const UI::FontStyleInfo& style, int marg
 bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
+		clicked();
 		return true;
 	}
 
@@ -438,7 +439,7 @@ void EditBox::draw(RenderTarget& dst) {
 
 		const uint16_t fontheight = text_height(*m_->font_style, m_->font_scale);
 
-		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
+		const Image* caret_image = g_image_cache->get("images/ui_basic/caret.png");
 		Vector2i caretpt = Vector2i::zero();
 		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;

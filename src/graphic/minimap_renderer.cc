@@ -29,8 +29,6 @@
 #include "logic/map_objects/world/world.h"
 #include "wui/mapviewpixelfunctions.h"
 
-using namespace Widelands;
-
 namespace {
 
 const RGBColor kWhite(255, 255, 255);
@@ -68,12 +66,12 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		// if ownership layer is displayed, it creates enough contrast to
 		// visualize objects using white color.
 
-		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
-			if ((layers & MiniMapLayer::Road) && dynamic_cast<RoadBase const*>(immovable)) {
+		if (upcast(Widelands::PlayerImmovable const, immovable, f.field->get_immovable())) {
+			if ((layers & MiniMapLayer::Road) && dynamic_cast<Widelands::RoadBase const*>(immovable)) {
 				color = blend_color(color, kWhite);
 			}
 
-			if (((layers & MiniMapLayer::Flag) && dynamic_cast<Flag const*>(immovable)) ||
+			if (((layers & MiniMapLayer::Flag) && dynamic_cast<Widelands::Flag const*>(immovable)) ||
 			    ((layers & MiniMapLayer::Building) &&
 			     dynamic_cast<Widelands::Building const*>(immovable))) {
 				color = kWhite;
@@ -84,7 +82,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 	return color;
 }
 
-void draw_view_window(const Map& map,
+void draw_view_window(const Widelands::Map& map,
                       const Rectf& view_area,
                       const MiniMapType minimap_type,
                       const bool zoom,
@@ -168,11 +166,11 @@ void do_draw_minimap(Texture* texture,
 			Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 			move_r(mapwidth, f, i);
 
-			uint16_t vision = 0;  // See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
+			Widelands::SeeUnseeNode vision = Widelands::SeeUnseeNode::kUnexplored;
 			Widelands::PlayerNumber owner = 0;
 			if (player == nullptr || player->see_all()) {
 				// This player has omnivision - show the field like it is in reality.
-				vision = 2;  // Seen right now.
+				vision = Widelands::SeeUnseeNode::kVisible;  // Seen right now.
 				owner = f.field->get_owned_by();
 			} else if (player != nullptr) {
 				// This player might be affected by fog of war - instead of the
@@ -182,12 +180,14 @@ void do_draw_minimap(Texture* texture,
 				// vision on the field.
 				// If she never had vision, field.vision will be 0.
 				const auto& field = player->fields()[i];
-				vision = field.vision;
+				vision = field.seeing;
 				owner = field.owner;
 			}
 
-			if (vision > 0) {
-				texture->set_pixel(x, y, calc_minimap_color(egbase, f, layers, owner, vision > 1));
+			if (vision != Widelands::SeeUnseeNode::kUnexplored) {
+				texture->set_pixel(x, y,
+				                   calc_minimap_color(egbase, f, layers, owner,
+				                                      vision == Widelands::SeeUnseeNode::kVisible));
 			}
 		}
 	}
@@ -220,15 +220,15 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 	return map_pixel;
 }
 
-std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
-                                      const Player* player,
+std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
+                                      const Widelands::Player* player,
                                       const Rectf& view_area,
                                       const MiniMapType& minimap_type,
                                       MiniMapLayer layers) {
 	// TODO(sirver): Currently the minimap is redrawn every frame. That is not really
 	//       necessary. The created texture could be cached and only redrawn two
 	//       or three times per second
-	const Map& map = egbase.map();
+	const Widelands::Map& map = egbase.map();
 	const int16_t map_w = map.get_width() * scale_map(map, layers & MiniMapLayer::Zoom2);
 	const int16_t map_h = map.get_height() * scale_map(map, layers & MiniMapLayer::Zoom2);
 
@@ -241,7 +241,7 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	const bool zoom = layers & MiniMapLayer::Zoom2;
 	Vector2f top_left =
 	   minimap_pixel_to_mappixel(map, Vector2i::zero(), view_area, minimap_type, zoom);
-	const Coords node =
+	const Widelands::Coords node =
 	   MapviewPixelFunctions::calc_node_and_triangle(map, top_left.x, top_left.y).node;
 
 	texture->lock();

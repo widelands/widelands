@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
 #include "base/time_string.h"
@@ -45,6 +46,7 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
+#include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
@@ -68,18 +70,18 @@ initialization
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
    : gametime_(0),
-     lua_(lua_interface),
+     // TODO(SirVer): this is sooo ugly, I can't say
+     lua_(lua_interface ? lua_interface : new LuaEditorInterface(this)),
      player_manager_(new PlayersManager(*this)),
+     description_manager_(new Widelands::DescriptionManager(lua_.get())),
      ibase_(nullptr),
      loader_ui_(nullptr),
      game_tips_(nullptr),
      tmp_fs_(nullptr) {
 
-	if (!lua_) {  // TODO(SirVer): this is sooo ugly, I can't say
-		lua_.reset(new LuaEditorInterface(this));
-	}
-
 	init_addons(false);
+	loading_message_subscriber_ = Notifications::subscribe<UI::NoteLoadingMessage>(
+	   [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); });
 }
 
 EditorGameBase::~EditorGameBase() {
@@ -112,15 +114,18 @@ void EditorGameBase::delete_tempfile() {
 
 	std::string fs_filename = tmp_fs_->get_basename();
 	std::string mapfs_filename = map_.filesystem()->get_basename();
-	if (mapfs_filename == fs_filename)
+	if (mapfs_filename == fs_filename) {
 		map_.reset_filesystem();
+	}
 	tmp_fs_.reset();
 	try {
 		g_fs->fs_unlink(fs_filename);
 	} catch (const std::exception& e) {
 		// if file deletion fails then we have an abandoned file lying around, but otherwise that's
 		// unproblematic
-		log("EditorGameBase::delete_tempfile: deleting temporary file/dir failed: %s\n", e.what());
+		log_warn_time(get_gametime(),
+		              "EditorGameBase::delete_tempfile: deleting temporary file/dir failed: %s\n",
+		              e.what());
 	}
 }
 
@@ -145,9 +150,11 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 		if (g_fs->file_exists(complete_filename)) {
 			int suffix;
 			for (suffix = 0; suffix <= 9; suffix++) {
-				complete_filename = filename + "-" + std::to_string(suffix) + kTempFileExtension;
-				if (!g_fs->file_exists(complete_filename))
+				complete_filename =
+				   filename.append("-").append(std::to_string(suffix)).append(kTempFileExtension);
+				if (!g_fs->file_exists(complete_filename)) {
 					break;
+				}
 			}
 			if (suffix > 9) {
 				throw wexception(
@@ -182,7 +189,8 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 		// destructs).
 		tmp_fs_->file_exists("binary");
 	} catch (const WException& e) {
-		log("EditorGameBase: saving map to temporary file failed: %s", e.what());
+		log_err_time(
+		   get_gametime(), "EditorGameBase: saving map to temporary file failed: %s", e.what());
 		throw;
 	}
 }
@@ -208,28 +216,9 @@ World* EditorGameBase::mutable_world() {
 		// Lazy initialization of World. We need to create the pointer to the
 		// world immediately though, because the lua scripts need to have access
 		// to world through this method already.
-		ScopedTimer timer("Loading the world took %ums");
-		world_.reset(new World());
-
-		try {
-			lua_->run_script("world/init.lua");
-		} catch (const WException& e) {
-			log("Could not read world information: %s", e.what());
-			throw;
-		}
-
-		for (const AddOnInfo& addon : enabled_addons_) {
-			if (addon.category == AddOnCategory::kWorld) {
-				try {
-					lua().run_script(kAddOnDir + g_fs->file_separator() + addon.internal_name + g_fs->file_separator() + "init.lua");
-				} catch (const WException& e) {
-					log("ERROR: Could not read world add-on '%s': %s\n", addon.internal_name.c_str(), e.what());
-					throw;
-				}
-			}
-		}
-
-		world_->load_graphics();
+		ScopedTimer timer("Registering the world took %ums");
+		Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
+		world_.reset(new World(description_manager_.get()));
 	}
 	return world_.get();
 }
@@ -249,26 +238,9 @@ Tribes* EditorGameBase::mutable_tribes() {
 		// Lazy initialization of Tribes. We need to create the pointer to the
 		// tribe immediately though, because the lua scripts need to have access
 		// to tribes through this method already.
-		ScopedTimer timer("Loading the tribes took %ums");
-		tribes_.reset(new Tribes());
-
-		try {
-			lua_->run_script("tribes/init.lua");
-		} catch (const WException& e) {
-			log("Could not read tribes information: %s", e.what());
-			throw;
-		}
-
-		for (const AddOnInfo& addon : enabled_addons_) {
-			if (addon.category == AddOnCategory::kTribes) {
-				try {
-					lua().run_script(kAddOnDir + g_fs->file_separator() + addon.internal_name + g_fs->file_separator() + "init.lua");
-				} catch (const WException& e) {
-					log("ERROR: Could not read tribes add-on '%s': %s\n", addon.internal_name.c_str(), e.what());
-					throw;
-				}
-			}
-		}
+		ScopedTimer timer("Registering the tribes took %ums");
+		Notifications::publish(UI::NoteLoadingMessage(_("Loading tribes…")));
+		tribes_.reset(new Tribes(description_manager_.get(), lua_.get()));
 	}
 	return tribes_.get();
 }
@@ -292,6 +264,8 @@ Player* EditorGameBase::add_player(PlayerNumber const player_number,
                                    const std::string& tribe,
                                    const std::string& name,
                                    TeamNumber team) {
+	Notifications::publish(UI::NoteLoadingMessage(
+	   (boost::format(_("Creating player %d…")) % static_cast<unsigned int>(player_number)).str()));
 	return player_manager_->add_player(player_number, initialization_index, tribe, name, team);
 }
 
@@ -307,20 +281,29 @@ void EditorGameBase::inform_players_about_ownership(MapIndex const i,
                                                     PlayerNumber const new_owner) {
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& player_field = p->fields_[i];
-		if (1 < player_field.vision) {
+		if (SeeUnseeNode::kVisible == player_field.seeing) {
 			player_field.owner = new_owner;
 		}
 	}
 }
 void EditorGameBase::inform_players_about_immovable(MapIndex const i,
                                                     MapObjectDescr const* const descr) {
-	if (!Road::is_road_descr(descr) && !Waterway::is_waterway_descr(descr))
+	if (!Road::is_road_descr(descr) && !Waterway::is_waterway_descr(descr)) {
 		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
-			if (1 < player_field.vision) {
+			if (SeeUnseeNode::kVisible == player_field.seeing) {
 				player_field.map_object_descr = descr;
 			}
 		}
+	}
+}
+
+// Loads map object descriptions for all tribes
+void EditorGameBase::load_all_tribes() {
+	// Load all tribes
+	for (const auto& tribe_info : Widelands::get_all_tribeinfos()) {
+		mutable_tribes()->load_tribe(tribe_info.name);
+	}
 }
 
 void EditorGameBase::allocate_player_maps() {
@@ -336,44 +319,9 @@ void EditorGameBase::allocate_player_maps() {
  */
 void EditorGameBase::postload() {
 	// Postload tribes and world
-	step_loader_ui(_("Postloading world and tribes…"));
-
-	assert(tribes_);
+	// Tribes don't have a postload at this point.
+	Notifications::publish(UI::NoteLoadingMessage(_("Postloading world and tribes…")));
 	assert(world_);
-
-	create_tempfile_and_save_mapdata(FileSystem::ZIP);
-
-	tribes_->postload();
-	world_->postload();
-
-	for (DescriptionIndex i = 0; i < tribes_->nrtribes(); i++) {
-		const TribeDescr* tribe = tribes_->get_tribe_descr(i);
-		for (DescriptionIndex j = 0; j < world_->get_nr_resources(); j++) {
-			const ResourceDescription* res = world_->get_resource(j);
-			if (res->detectable()) {
-				// This function will throw an exception if this tribe doesn't
-				// have a high enough resource indicator for this resource
-				tribe->get_resource_indicator(res, res->max_amount());
-			}
-		}
-		// For the "none" indicator
-		tribe->get_resource_indicator(nullptr, 0);
-	}
-
-	// TODO(unknown): postload players? (maybe)
-}
-
-/**
- * Load all graphics.
- * This function needs to be called once at startup when the graphics system is ready.
- * If the graphics system is to be replaced at runtime, the function must be called after that has
- * happened.
- */
-void EditorGameBase::load_graphics() {
-	assert(tribes_);
-	assert(has_loader_ui());
-	step_loader_ui(_("Loading graphics"));
-	tribes_->load_graphics();
 }
 
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
@@ -387,7 +335,7 @@ UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::stri
 		                    nullptr :
 		                    new GameTips(*loader_ui_, registered_game_tips_));
 	}
-	return *loader_ui_.get();
+	return *loader_ui_;
 }
 void EditorGameBase::change_loader_ui_background(const std::string& background) {
 	assert(has_loader_ui());
@@ -424,7 +372,8 @@ Building& EditorGameBase::warp_building(const Coords& c,
                                         FormerBuildings former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	return tribe.get_building_descr(idx)->create(*this, plr, c, false, true, former_buildings);
+	return tribe.get_building_descr(idx)->create(
+	   *this, plr, c, false, true, std::move(former_buildings));
 }
 
 /**
@@ -441,11 +390,11 @@ EditorGameBase::warp_constructionsite(const Coords& c,
                                       bool loading,
                                       FormerBuildings former_buildings,
                                       const BuildingSettings* settings,
-                                      std::map<DescriptionIndex, Quantity> preserved_wares) {
+                                      const std::map<DescriptionIndex, Quantity>& preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	ConstructionSite& b = dynamic_cast<ConstructionSite&>(
-	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings));
+	ConstructionSite& b = dynamic_cast<ConstructionSite&>(tribe.get_building_descr(idx)->create(
+	   *this, plr, c, true, loading, std::move(former_buildings)));
 	if (settings) {
 		b.apply_settings(*settings);
 	}
@@ -458,11 +407,12 @@ EditorGameBase::warp_constructionsite(const Coords& c,
  * \li former_buildings : the former buildings list. This should not be empty,
  * except during loading.
  */
-Building& EditorGameBase::warp_dismantlesite(const Coords& c,
-                                             PlayerNumber const owner,
-                                             bool loading,
-                                             FormerBuildings former_buildings,
-                                             std::map<DescriptionIndex, Quantity> preserved_wares) {
+Building&
+EditorGameBase::warp_dismantlesite(const Coords& c,
+                                   PlayerNumber const owner,
+                                   bool loading,
+                                   FormerBuildings former_buildings,
+                                   const std::map<DescriptionIndex, Quantity>& preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 
@@ -495,9 +445,10 @@ Bob& EditorGameBase::create_critter(const Coords& c,
 
 Bob& EditorGameBase::create_critter(const Coords& c, const std::string& name, Player* owner) {
 	const BobDescr* descr = dynamic_cast<const BobDescr*>(world().get_critter_descr(name));
-	if (descr == nullptr)
+	if (descr == nullptr) {
 		throw GameDataError("create_critter(%i,%i,%s,%s): critter not found", c.x, c.y, name.c_str(),
 		                    owner->get_name().c_str());
+	}
 	return create_bob(c, *descr, owner);
 }
 
@@ -550,7 +501,6 @@ Immovable& EditorGameBase::do_create_immovable(const Coords& c,
 	const ImmovableDescr& descr =
 	   *(type == MapObjectDescr::OwnerType::kTribe ? tribes().get_immovable_descr(idx) :
 	                                                 world().get_immovable_descr(idx));
-	assert(&descr);
 	inform_players_about_immovable(Map::get_index(c, map().get_width()), &descr);
 	Immovable& immovable = descr.create(*this, c, former_building_descr);
 	if (owner != nullptr) {
@@ -581,9 +531,12 @@ Bob& EditorGameBase::create_ship(const Coords& c, const std::string& name, Playe
 	}
 }
 
-Bob& EditorGameBase::create_ferry(const Coords& c, Player* owner) {
-	const BobDescr* descr =
-	   dynamic_cast<const BobDescr*>(tribes().get_worker_descr(owner->tribe().ferry()));
+Bob& EditorGameBase::create_worker(const Coords& c, DescriptionIndex worker, Player* owner) {
+	if (!owner->tribe().has_worker(worker)) {
+		throw GameDataError(
+		   "Tribe %s does not have worker with index %d", owner->tribe().name().c_str(), worker);
+	}
+	const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_worker_descr(worker));
 	return create_bob(c, *descr, owner);
 }
 
@@ -606,13 +559,13 @@ Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
  * make this object ready to load new data
  */
 void EditorGameBase::cleanup_for_load() {
-	step_loader_ui(_("Cleaning up for loading: Map objects (1/3)"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Cleaning up for loading: Map objects (1/3)")));
 	cleanup_objects();  /// Clean all the stuff up, so we can load.
 
-	step_loader_ui(_("Cleaning up for loading: Players (2/3)"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Cleaning up for loading: Players (2/3)")));
 	player_manager_->cleanup();
 
-	step_loader_ui(_("Cleaning up for loading: Map (3/3)"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Cleaning up for loading: Map (3/3)")));
 	map_.cleanup();
 
 	delete_tempfile();
@@ -655,7 +608,8 @@ void EditorGameBase::set_road(const FCoords& f,
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& first_player_field = *p->fields_.get();
 		Player::Field& player_field = (&first_player_field)[i];
-		if (1 < player_field.vision || 1 < (&first_player_field)[neighbour_i].vision) {
+		if (SeeUnseeNode::kVisible == player_field.seeing ||
+		    SeeUnseeNode::kVisible == (&first_player_field)[neighbour_i].seeing) {
 			switch (direction) {
 			case WALK_SE:
 				player_field.r_se = roadtype;
@@ -792,8 +746,9 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 			//  adds the influence
 			MilitaryInfluence new_influence_modified = conquering_player->military_influence(index) +=
 			   influence;
-			if (owner && !conquer_guarded_location_by_superior_influence)
+			if (owner && !conquer_guarded_location_by_superior_influence) {
 				new_influence_modified = 1;
+			}
 			if (!owner || player(owner).military_influence(index) < new_influence_modified) {
 				change_field_owner(mr.location(), player_area.player_number);
 			}
@@ -803,9 +758,9 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 			//  owned. Now we must see if some other player has influence and if
 			//  so, transfer the ownership to that player.
 			PlayerNumber best_player;
-			if (preferred_player && player(preferred_player).military_influence(index))
+			if (preferred_player && player(preferred_player).military_influence(index)) {
 				best_player = preferred_player;
-			else {
+			} else {
 				best_player = neutral_when_no_influence ? 0 : player_area.player_number;
 				MilitaryInfluence highest_military_influence = 0;
 				PlayerNumber const nr_players = map().get_nrplayers();
@@ -863,15 +818,18 @@ void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> con
 	//  fix all immovables
 	upcast(Game, game, this);
 	for (PlayerImmovable* temp_imm : burnlist) {
-		if (upcast(Building, building, temp_imm))
+		if (upcast(Building, building, temp_imm)) {
 			building->set_defeating_player(area.player_number);
-		else if (upcast(Flag, flag, temp_imm))
-			if (Building* const flag_building = flag->get_building())
+		} else if (upcast(Flag, flag, temp_imm)) {
+			if (Building* const flag_building = flag->get_building()) {
 				flag_building->set_defeating_player(area.player_number);
-		if (game)
+			}
+		}
+		if (game) {
 			temp_imm->schedule_destroy(*game);
-		else
+		} else {
 			temp_imm->remove(*this);
+		}
 	}
 }
 }  // namespace Widelands

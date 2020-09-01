@@ -22,7 +22,6 @@
 
 #include <SDL_surface.h>
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
@@ -150,7 +149,10 @@ Texture::Texture(const GLuint texture, const Recti& subrect, int parent_w, int p
 	}
 
 	blit_data_ = BlitData{
-	   texture, parent_w, parent_h, subrect.cast<float>(),
+	   texture,
+	   parent_w,
+	   parent_h,
+	   subrect.cast<float>(),
 	};
 }
 
@@ -171,7 +173,9 @@ int Texture::height() const {
 void Texture::init(uint16_t w, uint16_t h) {
 	blit_data_ = {
 	   0,  // initialized below
-	   w, h, Rectf(0.f, 0.f, w, h),
+	   w,
+	   h,
+	   Rectf(0.f, 0.f, w, h),
 	};
 	if (w * h == 0) {
 		return;
@@ -186,6 +190,8 @@ void Texture::init(uint16_t w, uint16_t h) {
 	// makes no difference.
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(GL_LINEAR));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLint>(GL_CLAMP_TO_EDGE));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, static_cast<GLint>(GL_CLAMP_TO_EDGE));
 }
 
 void Texture::lock() {

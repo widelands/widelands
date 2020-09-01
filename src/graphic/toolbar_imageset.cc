@@ -19,20 +19,20 @@
 
 #include "graphic/toolbar_imageset.h"
 
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 
 ToolbarImageset::ToolbarImageset()
-   : left_corner(g_gr->images().get("images/wui/toolbar/left_corner.png")),
-     left(g_gr->images().get("images/wui/toolbar/left.png")),
-     center(g_gr->images().get("images/wui/toolbar/center.png")),
-     right(g_gr->images().get("images/wui/toolbar/right.png")),
-     right_corner(g_gr->images().get("images/wui/toolbar/right_corner.png")) {
+   : left_corner(g_image_cache->get("images/wui/toolbar/left_corner.png")),
+     left(g_image_cache->get("images/wui/toolbar/left.png")),
+     center(g_image_cache->get("images/wui/toolbar/center.png")),
+     right(g_image_cache->get("images/wui/toolbar/right.png")),
+     right_corner(g_image_cache->get("images/wui/toolbar/right_corner.png")) {
 }
 
 ToolbarImageset::ToolbarImageset(const LuaTable& table)
-   : left_corner(g_gr->images().get(table.get_string("left_corner"))),
-     left(g_gr->images().get(table.get_string("left"))),
-     center(g_gr->images().get(table.get_string("center"))),
-     right(g_gr->images().get(table.get_string("right"))),
-     right_corner(g_gr->images().get(table.get_string("right_corner"))) {
+   : left_corner(g_image_cache->get(table.get_string("left_corner"))),
+     left(g_image_cache->get(table.get_string("left"))),
+     center(g_image_cache->get(table.get_string("center"))),
+     right(g_image_cache->get(table.get_string("right"))),
+     right_corner(g_image_cache->get(table.get_string("right_corner"))) {
 }

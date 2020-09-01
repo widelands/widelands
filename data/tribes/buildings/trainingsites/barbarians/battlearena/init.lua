@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_trainingsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_battlearena",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Battle Arena"),
@@ -62,13 +63,8 @@ tribes:new_trainingsite_type {
       { name = "barbarians_bread", amount = 8 },
       { name = "beer_strong", amount = 8 }
    },
-   outputs = {
-      "barbarians_soldier",
-   },
 
    ["soldier evade"] = {
-      min_level = 0,
-      max_level = 1,
       food = {
          {"fish", "meat"},
          {"beer_strong"},
@@ -81,7 +77,7 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped",
          }
       },
@@ -89,30 +85,30 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("barbarians_building", "upgrading soldier evade from level 0 to level 1"),
          actions = {
-            "checksoldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
+            "checksoldier=soldier:evade level:0", -- Fails when aren't any soldier of level 0 evade
             "return=failed unless site has barbarians_bread",
             "return=failed unless site has fish,meat",
             "return=failed unless site has beer_strong",
-            "sleep=15000",
-            "animate=working 15000",
-            "checksoldier=soldier evade 0", -- Because the soldier can be expelled by the player
+            "sleep=duration:15s",
+            "animate=working duration:15s",
+            "checksoldier=soldier:evade level:0", -- Because the soldier can be expelled by the player
             "consume=barbarians_bread fish,meat beer_strong",
-            "train=soldier evade 0 1"
+            "train=soldier:evade level:1"
          }
       },
       upgrade_soldier_evade_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("barbarians_building", "upgrading soldier evade from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
+            "checksoldier=soldier:evade level:1", -- Fails when aren't any soldier of level 1 evade
             "return=failed unless site has barbarians_bread",
             "return=failed unless site has fish,meat",
             "return=failed unless site has beer_strong",
-            "sleep=15000",
-            "animate=working 15000",
-            "checksoldier=soldier evade 1", -- Because the soldier can be expulsed by the player
+            "sleep=duration:15s",
+            "animate=working duration:15s",
+            "checksoldier=soldier:evade level:1", -- Because the soldier can be expulsed by the player
             "consume=barbarians_bread fish,meat beer_strong",
-            "train=soldier evade 1 2"
+            "train=soldier:evade level:2"
          }
       },
    },
@@ -120,3 +116,5 @@ tribes:new_trainingsite_type {
    soldier_capacity = 8,
    trainer_patience = 3
 }
+
+pop_textdomain()

@@ -23,7 +23,7 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "map_io/widelands_map_loader.h"
@@ -52,7 +52,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
             0,
             is_tutorial_ ? _("Choose a tutorial") : _("Choose a scenario"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      subtitle_(&header_box_,
                0,
                0,
@@ -63,14 +63,15 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
                UI::Align::kCenter,
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
      scenario_details_(this),
-     scenario_difficulty_header_(this,
-                                 0,
-                                 0,
-                                 0,
-                                 0,
-                                 is_tutorial_ ? "" : _("Difficulty"),
-                                 UI::Align::kLeft,
-                                 g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
+     scenario_difficulty_header_(
+        this,
+        0,
+        0,
+        0,
+        0,
+        is_tutorial_ ? "" : _("Difficulty"),
+        UI::Align::kLeft,
+        g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
      scenario_difficulty_(this,
                           "scenario_difficulty",
                           0,
@@ -239,7 +240,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 			if (scenario_data->visible) {
 				scenario_data->is_tutorial = false;
 				scenario_data->playable = scenario_data->path != "dummy.wmf";
-				scenarios_data_.push_back(*scenario_data.get());
+				scenarios_data_.push_back(*scenario_data);
 			} else {
 				break;
 			}
@@ -271,7 +272,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 		UI::Table<uintptr_t>::EntryRecord& te = table_.add(i);
 		te.set_string(0, (boost::format("%d") % (i + 1)).str());
 		te.set_picture(
-		   1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data->descname);
+		   1, g_image_cache->get("images/ui_basic/ls_wlmap.png"), scenario_data->descname);
 		te.set_disabled(!scenario_data->playable);
 	}
 

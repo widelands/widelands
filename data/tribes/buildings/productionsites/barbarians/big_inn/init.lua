@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_big_inn",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Big Inn"),
@@ -48,14 +49,9 @@ tribes:new_productionsite_type {
       { name = "beer", amount = 4 },
       { name = "beer_strong", amount = 4 }
    },
-   outputs = {
-      "ration",
-      "snack",
-      "meal"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -71,9 +67,9 @@ tribes:new_productionsite_type {
             -- time total: 33
             "return=skipped unless economy needs ration",
             "consume=barbarians_bread,fish,meat",
-            "playsound=sound/barbarians/taverns/tavern 100",
-            "animate=working 23000",
-            "sleep=10000",
+            "playsound=sound/barbarians/taverns/tavern priority:80%",
+            "animate=working duration:23s",
+            "sleep=duration:10s",
             "produce=ration"
          }
       },
@@ -84,9 +80,9 @@ tribes:new_productionsite_type {
             -- time total: 37
             "return=skipped unless economy needs snack",
             "consume=barbarians_bread fish,meat beer",
-            "playsound=sound/barbarians/taverns/biginn 100",
-            "animate=working 27000",
-            "sleep=10000",
+            "playsound=sound/barbarians/taverns/biginn priority:80%",
+            "animate=working duration:27s",
+            "sleep=duration:10s",
             "produce=snack"
          }
       },
@@ -97,11 +93,13 @@ tribes:new_productionsite_type {
             -- time total: 40
             "return=skipped unless economy needs meal",
             "consume=barbarians_bread fish,meat beer_strong",
-            "playsound=sound/barbarians/taverns/biginn 100",
-            "animate=working 30000",
-            "sleep=10000",
+            "playsound=sound/barbarians/taverns/biginn priority:80%",
+            "animate=working duration:30s",
+            "sleep=duration:10s",
             "produce=meal"
          }
       },
    },
 }
+
+pop_textdomain()

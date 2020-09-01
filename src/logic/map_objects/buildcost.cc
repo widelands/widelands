@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -31,27 +32,23 @@ namespace Widelands {
 Buildcost::Buildcost() : std::map<DescriptionIndex, uint8_t>() {
 }
 
-Buildcost::Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes)
+Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Tribes& tribes)
    : std::map<DescriptionIndex, uint8_t>() {
 	for (const std::string& warename : table->keys<std::string>()) {
-		// Check ware name
-		if (!tribes.ware_exists(warename)) {
-			throw GameDataError("Buildcost: Unknown ware: %s", warename.c_str());
-		}
+		int32_t value = INVALID_INDEX;
+		DescriptionIndex const idx = tribes.load_ware(warename);
 
 		// Read value
-		const int32_t value = table->get_int(warename);
+		value = table->get_int(warename);
 		if (value < 1) {
-			throw GameDataError("Buildcost: Ware count needs to be > 0 in \"%s=%d\".\nEmpty buildcost "
-			                    "tables are allowed if you wish to have an amount of 0.",
-			                    warename.c_str(), value);
+			throw GameDataError("Ware count needs to be > 0.\nEmpty buildcost "
+			                    "tables are allowed if you wish to have an amount of 0.");
 		} else if (value > 255) {
-			throw GameDataError(
-			   "Buildcost: Ware count needs to be <= 255 in \"%s=%d\".", warename.c_str(), value);
+			throw GameDataError("Ware count needs to be <= 255.");
 		}
 
 		// Add
-		insert(std::pair<DescriptionIndex, uint8_t>(tribes.safe_ware_index(warename), value));
+		insert(std::pair<DescriptionIndex, uint8_t>(idx, value));
 	}
 }
 
@@ -85,7 +82,8 @@ void Buildcost::load(FileRead& fr, const Widelands::TribeDescr& tribe) {
 
 		DescriptionIndex index = tribe.ware_index(name);
 		if (!tribe.has_ware(index)) {
-			log("buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
+			log_warn(
+			   "buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
 			fr.unsigned_8();
 		} else {
 			(*this)[index] = fr.unsigned_8();

@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -82,7 +83,9 @@ Game
 */
 const char LuaGame::className[] = "Game";
 const MethodType<LuaGame> LuaGame::Methods[] = {
-   METHOD(LuaGame, launch_coroutine), METHOD(LuaGame, save), {nullptr, nullptr},
+   METHOD(LuaGame, launch_coroutine),
+   METHOD(LuaGame, save),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RO(LuaGame, real_speed),         PROP_RO(LuaGame, time),
@@ -217,6 +220,7 @@ int LuaGame::get_type(lua_State* L) {
 
 /* RST
    .. attribute:: scenario_difficulty
+
       (RO) The difficulty level of the current scenario. Values range from 1 to the number
       of levels specified in the campaign's configuration in campaigns.lua. By convention
       higher values mean more difficult. Throws an error if used outside of a scenario.
@@ -289,7 +293,7 @@ int LuaGame::save(lua_State* L) {
 
 	// DO NOT REMOVE THIS OUTPUT. It is used by the regression test suite to
 	// figure out which files to load after a save was requested in a test.
-	log("Script requests save to: %s\n", filename.c_str());
+	log_info_time(get_game(L).get_gametime(), "Script requests save to: %s\n", filename.c_str());
 
 	return 0;
 }
@@ -361,9 +365,6 @@ World
 const char LuaWorld::className[] = "World";
 const MethodType<LuaWorld> LuaWorld::Methods[] = {
    METHOD(LuaWorld, new_critter_type),
-   METHOD(LuaWorld, new_editor_critter_category),
-   METHOD(LuaWorld, new_editor_immovable_category),
-   METHOD(LuaWorld, new_editor_terrain_category),
    METHOD(LuaWorld, new_immovable_type),
    METHOD(LuaWorld, new_resource_type),
    METHOD(LuaWorld, new_terrain_type),
@@ -371,7 +372,9 @@ const MethodType<LuaWorld> LuaWorld::Methods[] = {
    {0, 0},
 };
 const PropertyType<LuaWorld> LuaWorld::Properties[] = {
-   PROP_RO(LuaWorld, immovable_descriptions), PROP_RO(LuaWorld, terrain_descriptions), {0, 0, 0},
+   PROP_RO(LuaWorld, immovable_descriptions),
+   PROP_RO(LuaWorld, terrain_descriptions),
+   {0, 0, 0},
 };
 
 LuaWorld::LuaWorld(lua_State* /* L */) {
@@ -446,7 +449,7 @@ int LuaWorld::new_resource_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_world()->add_resource_type(table);
+		get_egbase(L).mutable_world()->add_world_object_type(table, MapObjectType::RESOURCE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -462,7 +465,7 @@ int LuaWorld::new_terrain_type(lua_State* L) {
 	}
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_world()->add_terrain_type(table);
+		get_egbase(L).mutable_world()->add_world_object_type(table, MapObjectType::TERRAIN);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -478,7 +481,7 @@ int LuaWorld::new_critter_type(lua_State* L) {
 	}
 	try {
 		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_critter_type(table);
+		get_egbase(L).mutable_world()->add_world_object_type(table, MapObjectType::CRITTER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -491,54 +494,10 @@ int LuaWorld::new_immovable_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	try {
-		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_immovable_type(table);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
 
-// Documented in data/world/init.lua.
-// See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_editor_terrain_category(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
 	try {
-		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_editor_terrain_category(table);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
-
-// Documented in data/world/init.lua.
-// See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_editor_critter_category(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-	try {
-		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_editor_critter_category(table);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
-
-// Documented in data/world/init.lua.
-// See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_editor_immovable_category(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-	try {
-		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_editor_immovable_category(table);
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_world()->add_world_object_type(table, MapObjectType::IMMOVABLE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -608,8 +567,6 @@ const MethodType<LuaTribes> LuaTribes::Methods[] = {
    METHOD(LuaTribes, new_ware_type),
    METHOD(LuaTribes, new_warehouse_type),
    METHOD(LuaTribes, new_worker_type),
-   METHOD(LuaTribes, add_custom_building),
-   METHOD(LuaTribes, add_custom_worker),
    METHOD(LuaTribes, modify_unit),
    {0, 0},
 };
@@ -675,7 +632,9 @@ int LuaTribes::new_constructionsite_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_constructionsite_type(table);
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::CONSTRUCTIONSITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -698,7 +657,9 @@ int LuaTribes::new_dismantlesite_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_dismantlesite_type(table);
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::DISMANTLESITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -721,7 +682,9 @@ int LuaTribes::new_militarysite_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_militarysite_type(table);
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::MILITARYSITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -745,7 +708,8 @@ int LuaTribes::new_productionsite_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_productionsite_type(table, egbase.world());
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::PRODUCTIONSITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -769,7 +733,8 @@ int LuaTribes::new_trainingsite_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_trainingsite_type(table, egbase.world());
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::TRAININGSITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -792,7 +757,9 @@ int LuaTribes::new_warehouse_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_warehouse_type(table);
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::WAREHOUSE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -816,7 +783,9 @@ int LuaTribes::new_market_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_market_type(table);
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::MARKET);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -839,7 +808,9 @@ int LuaTribes::new_immovable_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_immovable_type(table);
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::IMMOVABLE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -862,7 +833,9 @@ int LuaTribes::new_ship_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_ship_type(table);
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::SHIP);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -885,7 +858,9 @@ int LuaTribes::new_ware_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_ware_type(table);
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::WARE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -907,7 +882,9 @@ int LuaTribes::new_carrier_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_carrier_type(table);
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::CARRIER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -930,7 +907,8 @@ int LuaTribes::new_ferry_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_ferry_type(table);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::FERRY);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -952,7 +930,9 @@ int LuaTribes::new_soldier_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_soldier_type(table);
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::SOLDIER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -974,7 +954,9 @@ int LuaTribes::new_worker_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_worker_type(table);
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, *egbase.mutable_world(), MapObjectType::WORKER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -985,7 +967,7 @@ int LuaTribes::new_worker_type(lua_State* L) {
    .. method:: new_tribe{table}
 
       Adds a new tribe. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_<tribename>.lua` for detailed
+      the descriptions. See :ref:`lua_tribes_tribes_units` for detailed
       documentation.
 
       :returns: :const:`0`
@@ -997,75 +979,8 @@ int LuaTribes::new_tribe(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_tribe(table);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
-
-/* RST
-   .. method:: add_custom_building{table}
-
-      Adds a custom building to a tribe, e.g. for use in a scenario.
-      The building must already be known to the tribes and should be defined in
-      the ``map:scripting/tribes/`` directory.
-
-      **Note:** This function *has* to be called from ``map:scripting/tribes/init.lua``.
-
-      The table has the following entries:
-
-      **tribename**
-         *Mandatory*. The name of the tribe that this building will be added to.
-
-      **buildingname**
-         *Mandatory*. The name of the building to be added to the tribe.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::add_custom_building(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_custom_building(table);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
-
-/* RST
-   .. method:: add_custom_worker{table}
-
-      Adds a worker building to a tribe, e.g. for use in a scenario.
-      The worker must already be known to the tribes and should be defined in
-      the ``map:scripting/tribes/`` directory.
-
-      **Note:** This function *has* to be called from ``map:scripting/tribes/init.lua``.
-
-      The table has the following entries:
-
-      **tribename**
-         *Mandatory*. The name of the tribe that this worker will be added to.
-
-      **workername**
-         *Mandatory*. The name of the worker to be added to the tribe.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::add_custom_worker(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_custom_worker(table);
+		egbase.mutable_tribes()->add_tribe(table, egbase.world());
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -1185,8 +1100,9 @@ int LuaTribes::modify_unit(lua_State* L) {
 			const std::string prog_name = luaL_checkstring(L, 6);
 			if (cmd == "set") {
 				const std::string descname = luaL_checkstring(L, 7);
+				std::unique_ptr<LuaTable> tbl(new LuaTable(L));
 				descr.mutable_programs()[prog_name] = std::unique_ptr<ProductionProgram>(new ProductionProgram(
-						prog_name, descname, std::unique_ptr<LuaTable>(new LuaTable(L)), tribes, egbase.world(), &descr));
+						prog_name, *tbl, tribes, *egbase.mutable_world(), &descr));
 			} else {
 				report_error(L, "modify_unit - productionsite - programs: invalid command '%s'", cmd.c_str());
 			}

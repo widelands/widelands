@@ -64,10 +64,10 @@ public:
 
 	/// RenderedRect will contain a normal image that is managed by a transient cache.
 	/// Use this if the image is managed by an instance of TextureCache.
-	explicit RenderedRect(std::shared_ptr<const Image> init_image);
+	explicit RenderedRect(const std::shared_ptr<const Image>& init_image);
 
 	/// RenderedRect will contain a normal image that is managed by a permanent cache.
-	/// Use this if the image is managed by g_gr->images().
+	/// Use this if the image is managed by g_image_cache.
 	explicit RenderedRect(const Image* init_image);
 	~RenderedRect() {
 	}

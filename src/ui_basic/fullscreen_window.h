@@ -23,7 +23,7 @@
 #include <memory>
 
 #include "graphic/align.h"
-#include "graphic/graphic.h"
+#include "graphic/note_graphic_resolution_changed.h"
 #include "ui_basic/panel.h"
 
 namespace UI {

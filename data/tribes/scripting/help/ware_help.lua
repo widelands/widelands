@@ -204,15 +204,17 @@ end
 
 return {
    func = function(tribename, warename)
-      set_textdomain("tribes_encyclopedia")
+      push_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
       local ware_description = wl.Game():get_ware_description(warename)
       include(ware_description.helptext_script)
-      return {
+      local r = {
          title = ware_description.descname,
          text = ware_help_general_string(tribe, ware_description)
             .. ware_help_producers_string(tribe, ware_description)
             .. ware_help_consumers_string(tribe, ware_description)
       }
+      pop_textdomain()
+      return r
    end
 }

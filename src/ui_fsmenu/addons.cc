@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "graphic/image_cache.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "scripting/lua_interface.h"
@@ -107,7 +108,7 @@ static std::set<std::string> get_all_locales() {
 }
 
 AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
-		title_(this, 0, 0, get_w(), get_h() / 12, _("Add-Ons"), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+		title_(this, 0, 0, get_w(), get_h() / 12, _("Add-Ons"), UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 		warn_requirements_(this, 0, 0, get_w(), get_h() / 12, UI::PanelStyle::kFsMenu, "", UI::Align::kCenter),
 		tabs_(this, UI::TabPanelStyle::kFsMenu),
 		installed_addons_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
@@ -454,10 +455,10 @@ void AddOnsCtrl::update_dependency_errors() {
 			list += msg;
 		}
 		warn_requirements_.set_text((boost::format("<rt><p>%s</p><p>%s</p></rt>")
-				% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(
+				% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(
 						(boost::format(ngettext(_("%u Dependency Error"), _("%u Dependency Errors"),
 								nr_warnings)) % nr_warnings).str())
-				% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(list)).str());
+				% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(list)).str());
 		warn_requirements_.set_tooltip(_("Add-Ons with dependency errors may work incorrectly or prevent games and maps from loading."));
 	}
 	layout();
@@ -800,22 +801,22 @@ void AddOnsCtrl::autofix_dependencies() {
 
 InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo& info, bool enabled, bool is_first, bool is_last)
 	: UI::Panel(parent, 0, 0, 3 * kRowButtonSize, 3 * kRowButtonSize),
-	move_up_(this, "up", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/ui_basic/scrollbar_up.png"), _("Move up")),
-	move_down_(this, "down", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/ui_basic/scrollbar_down.png"), _("Move down")),
-	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/wui/menus/exit.png"), _("Uninstall")),
+	move_up_(this, "up", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Move up")),
+	move_down_(this, "down", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/scrollbar_down.png"), _("Move down")),
+	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/wui/menus/exit.png"), _("Uninstall")),
 	toggle_enabled_(kAddOnCategories.at(info.category).can_disable_addons ? new UI::Button(this, "on-off", 0, 0, 24, 24,
-			UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get(
+			UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get(
 					enabled ? "images/ui_basic/checkbox_checked.png" : "images/ui_basic/checkbox_empty.png"),
 					enabled ? _("Disable") : _("Enable"), UI::Button::VisualState::kFlat) : nullptr),
-	category_(this, g_gr->images().get(kAddOnCategories.at(info.category).icon)),
+	category_(this, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
 	version_(this, 0, 0, 0, 0,
 		/** TRANSLATORS: (MajorVersion).(MinorVersion) */
 		(boost::format(_("%1$u.%2$u")) % info.version % info.i18n_version).str(),
-		UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
+		UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
-		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
-		% g_gr->styles().font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author).str())
-		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description())).str()) {
+		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
+		% g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author).str())
+		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description())).str()) {
 
 	uninstall_.sigclicked.connect([ctrl, info]() {
 		uninstall(ctrl, info);
@@ -843,7 +844,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 			for (auto& pair : g_addons) {
 				if (pair.first.internal_name == info.internal_name) {
 					pair.second = !pair.second;
-					toggle_enabled_->set_pic(g_gr->images().get(
+					toggle_enabled_->set_pic(g_image_cache->get(
 							pair.second ? "images/ui_basic/checkbox_checked.png" : "images/ui_basic/checkbox_empty.png"));
 					toggle_enabled_->set_tooltip(pair.second ? _("Disable") : _("Enable"));
 					return ctrl->update_dependency_errors();
@@ -887,19 +888,19 @@ void InstalledAddOnRow::layout() {
 RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo& info, uint32_t installed_version, uint32_t installed_i18n_version)
 	: UI::Panel(parent, 0, 0, 3 * kRowButtonSize, 3 * kRowButtonSize),
 	info_(info),
-	install_(this, "install", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/ui_basic/continue.png"), _("Install")),
-	upgrade_(this, "upgrade", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/wui/buildings/menu_up_train.png"), _("Upgrade")),
-	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/wui/menus/exit.png"), _("Uninstall")),
-	category_(this, g_gr->images().get(kAddOnCategories.at(info.category).icon)),
-	verified_(this, g_gr->images().get(info.verified ? "images/ui_basic/list_selected.png" : "images/ui_basic/stop.png")),
+	install_(this, "install", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/continue.png"), _("Install")),
+	upgrade_(this, "upgrade", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/wui/buildings/menu_up_train.png"), _("Upgrade")),
+	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/wui/menus/exit.png"), _("Uninstall")),
+	category_(this, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
+	verified_(this, g_image_cache->get(info.verified ? "images/ui_basic/list_selected.png" : "images/ui_basic/stop.png")),
 	version_(this, 0, 0, 0, 0,
 		/** TRANSLATORS: (MajorVersion).(MinorVersion) */
 		(boost::format(_("%1$u.%2$u")) % info.version % info.i18n_version).str(),
-		UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
+		UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
-		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
-		% g_gr->styles().font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author).str())
-		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description())).str()),
+		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
+		% g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author).str())
+		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description())).str()),
 	full_upgrade_possible_(installed_version < info.version) {
 
 	assert(installed_version <= info.version);

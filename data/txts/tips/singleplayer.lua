@@ -1,6 +1,6 @@
 include "scripting/richtext.lua"
 
-set_textdomain("texts")
+push_textdomain("texts")
 tips = {
    {
       -- TRANSLATORS: %s = URL to the Widelands website
@@ -8,4 +8,5 @@ tips = {
       seconds = 6
    },
 }
+pop_textdomain()
 return tips

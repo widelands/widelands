@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: zecas <jjorge@free.fr>, 2020\n"
 "Language-Team: Portuguese (https://www.transifex.com/widelands/teams/35159/pt/)\n"
@@ -638,12 +638,9 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:347
 msgid ""
 "First of all, we need more construction materials. So, we should build at "
-"least three lumberjacks’ houses and two quarries. Be sure to have "
-"dismanteled all of the unproductive buildings though."
+"least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
+" all of the unproductive buildings though."
 msgstr ""
-"Primeiro, precisamos de mais materiais de construção. Portanto deveríamos "
-"construir pelo menos três cabanas para os lenhadores e duas pedreiras. "
-"Assegura-te que desmontaste todos os edifícios improdutivos primeiro."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:350
@@ -805,13 +802,8 @@ msgid ""
 "The only solution is to build two new forester’s houses near our "
 "lumberjacks. Be sure to first build a new forester’s house and then "
 "eventually destroy the old one or at least expel the forester to change "
-"houses. Dismantling them is also possible but will not return any wares "
-"because they are so torn."
+"houses."
 msgstr ""
-"A única solução é de construir duas novas casas de silvicultores e então "
-"talvez destruir as velhas ou pelo menos expulsar o silvicultor para que mude"
-" de casa. Também podem ser desmontadas mas não vão dar mercadorias no estado"
-" em que estão."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
 msgid "Amalea Laughs Sarcastically"
@@ -1580,8 +1572,3 @@ msgstr ""
 "Sejas amaldiçoado Lutius por ter matado as servidoras da nossa deusa Vesta! "
 "Que a tua vida e esta terra sejam malditas e que a cólera da deusa apague a "
 "tua família da superfície da terra!"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

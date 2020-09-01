@@ -19,7 +19,9 @@
 
 #include "scripting/lua_globals.h"
 
+#include <map>
 #include <memory>
+#include <vector>
 
 #include <SDL_timer.h>
 
@@ -115,43 +117,50 @@ static int L_string_bformat(lua_State* L) {
 		report_error(L, "Error in bformat: %s", err.what());
 	}
 }
+
+using TextdomainInfo = std::pair<std::string, bool /* addon */>;
+static std::map<const lua_State*, std::vector<TextdomainInfo>> textdomains;
+/* RST
+   .. function:: push_textdomain(domain[, addon = false])
+
+      Sets the textdomain for all further calls to :func:`_` until it is reset
+      to the previous value using :func:`pop_textdomain`.
+
+      If your script is part of an add-on, the second parameter needs to be `true`.
+
+      :arg domain: The textdomain
+      :type domain: :class:`string`
+      :returns: :const:`nil`
+*/
+static int L_push_textdomain(lua_State* L) {
+	textdomains[L].push_back(std::make_pair(luaL_checkstring(L, 1), lua_gettop(L) > 1 && luaL_checkboolean(L, 2)));
+	return 0;
+}
+/* RST
+   .. function:: pop_textdomain()
+
+      Resets the textdomain for calls to :func:`_` to the value it had
+      before the last call to :func:`push_textdomain`.
+
+      :returns: :const:`nil`
+*/
+static int L_pop_textdomain(lua_State* L) {
+	textdomains.at(L).pop_back();
+	return 0;
+}
 /* RST
    .. function:: set_textdomain(domain)
 
-      Sets the textdomain for all further calls to :func:`_`.
-
-      NOTE: If your script is part of an add-on, use :func:`set_addon_textdomain()` instead.
-
-      :arg domain: The textdomain
-      :type domain: :class:`string`
-      :returns: :const:`nil`
+      DEPRECATED. Use `push_textdomain(domain)` instead.
 */
+// TODO(Nordfriese): Delete after v1.0
 static int L_set_textdomain(lua_State* L) {
-	luaL_checkstring(L, -1);
-	lua_setglobal(L, "__TEXTDOMAIN");
-	lua_pushboolean(L, true);
-	lua_setglobal(L, "__TEXTDOMAIN_OFFICIAL");
-	return 0;
+	return L_push_textdomain(L);
 }
 
-/* RST
-   .. function:: set_addon_textdomain(domain)
-
-      Sets the textdomain for all further calls to :func:`_`.
-
-      NOTE: This function must be used only by add-ons. Use :func:`set_textdomain()`
-      instead if this is not the case.
-
-      :arg domain: The textdomain
-      :type domain: :class:`string`
-      :returns: :const:`nil`
-*/
-static int L_set_addon_textdomain(lua_State* L) {
-	luaL_checkstring(L, -1);
-	lua_setglobal(L, "__TEXTDOMAIN");
-	lua_pushboolean(L, false);
-	lua_setglobal(L, "__TEXTDOMAIN_OFFICIAL");
-	return 0;
+static TextdomainInfo current_textdomain(const lua_State* L) {
+	const auto it = textdomains.find(L);
+	return it == textdomains.end() || it->second.empty() ? TextdomainInfo("", false) : it->second.back();
 }
 
 /* RST
@@ -172,16 +181,14 @@ static int L_set_addon_textdomain(lua_State* L) {
       :returns: The translated string.
 */
 static int L__(lua_State* L) {
-	lua_getglobal(L, "__TEXTDOMAIN_OFFICIAL");
-	const bool td_official = lua_isnil(L, -1) || luaL_checkboolean(L, -1);
-	lua_getglobal(L, "__TEXTDOMAIN");
+	const TextdomainInfo td = current_textdomain(L);
 
-	if (!lua_isnil(L, -1)) {
-		if (td_official) {
-			i18n::Textdomain dom(luaL_checkstring(L, -1));
+	if (!td.first.empty()) {
+		if (td.second) {
+			i18n::AddOnTextdomain dom(td.first);
 			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 		} else {
-			i18n::AddOnTextdomain dom(luaL_checkstring(L, -1));
+			i18n::Textdomain dom(td.first);
 			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 		}
 	} else {
@@ -214,9 +221,9 @@ static int L_ngettext(lua_State* L) {
 		report_error(L, "Call to ngettext with negative number %d", n);
 	}
 
-	lua_getglobal(L, "__TEXTDOMAIN");
-	if (!lua_isnil(L, -1)) {
-		lua_pushstring(L, dngettext(luaL_checkstring(L, -1), msgid, msgid_plural, n));
+	const TextdomainInfo td = current_textdomain(L);
+	if (!td.first.empty()) {
+		lua_pushstring(L, dngettext(td.first.c_str(), msgid, msgid_plural, n));
 	} else {
 		lua_pushstring(L, ngettext(msgid, msgid_plural, n));
 	}
@@ -242,9 +249,9 @@ static int L_pgettext(lua_State* L) {
 	const char* msgctxt = luaL_checkstring(L, 1);
 	const char* msgid = luaL_checkstring(L, 2);
 
-	lua_getglobal(L, "__TEXTDOMAIN");
-	if (!lua_isnil(L, -1)) {
-		lua_pushstring(L, dpgettext_expr(luaL_checkstring(L, -1), msgctxt, msgid));
+	const TextdomainInfo td = current_textdomain(L);
+	if (!td.first.empty()) {
+		lua_pushstring(L, dpgettext_expr(td.first.c_str(), msgctxt, msgid));
 	} else {
 		lua_pushstring(L, pgettext_expr(msgctxt, msgid));
 	}
@@ -306,7 +313,8 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"set_textdomain", &L_set_textdomain},
-                                          {"set_addon_textdomain", &L_set_addon_textdomain},
+                                          {"push_textdomain", &L_push_textdomain},
+                                          {"pop_textdomain", &L_pop_textdomain},
                                           {"ticks", &L_ticks},
                                           {nullptr, nullptr}};
 

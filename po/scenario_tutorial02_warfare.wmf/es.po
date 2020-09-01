@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-28 16:58+0000\n"
-"Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -150,7 +150,7 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr "Una de estas zonas de entrenamiento es la arena de batalla. Es un edificio grande y caro, y entrena a los soldados en la evasión. Como los soldados acaban con mucha hambre tras el entrenamiento, este edificio necesita un montón de comida y cerveza negra. En un partido real deberías tener una buena infraestructura de generación de comida antes de construirlo."
+msgstr "Una de estos sitios de entrenamiento es la arena de batalla. Es un edificio grande y costoso, y entrena a los soldados en la evasión. Dado que los soldados acaban muy hambrientos después del entrenamiento, este edificio necesita un montón de alimento y cerveza fuerte. En una partida real deberías tener una buena infraestructura de producción de alimento antes de construirlo."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
 msgid "To see evade training in action, build a battle arena."
@@ -343,9 +343,9 @@ msgstr "¡Listo para salir!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
 msgid ""
-"Well done, your scout’s hut has been built. While our scout is moving in, "
+"Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr "Bien hecho, tu cabaña de explorador ha sido construida. Mientras llega tu explorador conozcamos algo más acerca de él."
+msgstr "¡Bien hecho! Tu cabaña de explorador ha sido construida. Mientras llega tu explorador conozcamos algo más acerca de él."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
@@ -495,7 +495,7 @@ msgid ""
 "building will never come out (unless this building is attacked). If you want"
 " to have your soldier elsewhere, you will have to dismantle or burn down the"
 " building."
-msgstr "Solo puedes reducir el número de soldados hasta uno. El último soldado de un edificio nunca saldrá de él (a no ser que el edificio esté siendo atacado). Si quieres tener a este soldado en otra parte tendrás que desarmar el edificio o incendiarlo."
+msgstr "Sólo puedes reducir el número de soldados hasta uno. El último soldado de un edificio nunca saldrá de él (a menos que el edificio sea atacado). Si quieres tener a este soldado en otra parte tendrás que desarmar o incendiar el edificio."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
 msgid ""
@@ -676,8 +676,3 @@ msgid ""
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
 msgstr "Ya estás listo para jugar las campañas. Te enseñarán acerca de las diferentes economías de las tribus. También puedes jugar los tutoriales restantes, pero no son cruciales para tener éxito en las campañas."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

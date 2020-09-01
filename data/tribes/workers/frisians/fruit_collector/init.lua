@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_worker_type {
-   msgctxt = "frisians_worker",
    name = "frisians_fruit_collector",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("frisians_worker", "Fruit Collector"),
@@ -18,9 +19,9 @@ tribes:new_worker_type {
       harvest = {
          "findobject=attrib:ripe_bush radius:6",
          "walk=object",
-         "animate=gather 8000",
+         "animate=gather duration:8s",
          "callobject=harvest",
-         "animate=idle 1000",
+         "animate=idle duration:1s",
          "createware=fruit",
          "return"
       }
@@ -69,3 +70,5 @@ tribes:new_worker_type {
       },
    },
 }
+
+pop_textdomain()

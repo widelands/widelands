@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_granitemine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Granite Mine"),
@@ -38,7 +39,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "stones",
+      mines = "resource_stones",
       prohibited_till = 600
    },
 
@@ -46,25 +47,18 @@ tribes:new_productionsite_type {
       barbarians_miner = 1
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_granitemine = false,
-   },
-
    inputs = {
       { name = "ration", amount = 8 }
    },
-   outputs = {
-      "granite"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
             "return=skipped unless economy needs granite",
             "consume=ration",
-            "sleep=20000",
+            "sleep=duration:20s",
             "call=mine_produce",
             "call=mine_produce",
          }
@@ -72,8 +66,8 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining granite",
          actions = {
-            "animate=working 10000",
-            "mine=stones 2 100 5 2",
+            "animate=working duration:10s",
+            "mine=resource_stones radius:2 yield:100% when_empty:5% experience_on_fail:2%",
             "produce=granite",
          }
       },
@@ -94,3 +88,5 @@ tribes:new_productionsite_type {
          pgettext("barbarians_building", "This granite mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

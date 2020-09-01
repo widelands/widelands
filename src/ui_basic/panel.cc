@@ -23,11 +23,11 @@
 
 #include <SDL_timer.h>
 
-#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "sound/sound_handler.h"
@@ -261,10 +261,7 @@ void Panel::set_size(const int nw, const int nh) {
 		return;
 	}
 
-	assert(nw >= 0);
-	assert(nh >= 0);
-
-	// Make sure that we never get negative width/height in release builds.
+	// Make sure that we never get negative width/height.
 	w_ = std::max(0, nw);
 	h_ = std::max(0, nh);
 
@@ -308,15 +305,7 @@ void Panel::set_desired_size(int w, int h) {
 		return;
 	}
 
-	// TODO(Nordfriese): I commented these asserts out because the Boxes used in the
-	// add-ons selection screen can get very large. Might there be a safer way?
-	// assert(w < 3000);
-	// assert(h < 3000);
-
-	assert(w >= 0);
-	assert(h >= 0);
-
-	// Make sure that we never get negative width/height in release builds.
+	// Make sure that we never get negative width/height.
 	desired_w_ = std::max(0, w);
 	desired_h_ = std::max(0, h);
 	if (!get_layout_toplevel() && parent_) {
@@ -454,6 +443,8 @@ void Panel::set_visible(bool const on) {
 	flags_ &= ~pf_visible;
 	if (on) {
 		flags_ |= pf_visible;
+	} else if (parent_ && parent_->focus_ == this) {
+		parent_->focus_ = nullptr;
 	}
 }
 
@@ -470,11 +461,28 @@ void Panel::draw(RenderTarget&) {
 void Panel::draw_border(RenderTarget&) {
 }
 
+Recti Panel::focus_overlay_rect() {
+	return Recti(0, 0, get_w(), get_h());
+}
+
 /**
  * Draw overlays that appear over all child panels.
  * This can be used e.g. for debug information.
  */
-void Panel::draw_overlay(RenderTarget&) {
+void Panel::draw_overlay(RenderTarget& dst) {
+	if (has_focus()) {
+		bool has_toplevel_focus = (focus_ == nullptr);
+		for (Panel* p = this; p->parent_; p = p->parent_) {
+			if (p->parent_->focus_ != p) {
+				has_toplevel_focus = false;
+				break;
+			}
+		}
+		dst.fill_rect(focus_overlay_rect(),
+		              has_toplevel_focus ? g_style_manager->focused_color() :
+		                                   g_style_manager->semi_focused_color(),
+		              BlendMode::Default);
+	}
 }
 
 /**
@@ -596,31 +604,17 @@ bool Panel::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) 
 
 bool Panel::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
-		if (focus_) {
-			Panel* p = focus_->next_;
-			if (focus_ == last_child_) {
-				p = first_child_;
-			}
-
-			switch (code.sym) {
-
-			case SDLK_TAB:
-				while (p != focus_) {
-					if (p->get_can_focus()) {
-						p->focus();
-						break;
-					}
-					if (p == last_child_) {
-						p = first_child_;
-					} else {
-						p = p->next_;
-					}
-				}
+		switch (code.sym) {
+		case SDLK_TAB:
+			return handle_tab_pressed(SDL_GetModState() & KMOD_SHIFT);
+		case SDLK_ESCAPE:
+			if (parent_ && parent_->focus_ == this && get_can_focus()) {
+				parent_->focus_ = nullptr;
 				return true;
-
-			default:
-				return false;
 			}
+			break;
+		default:
+			break;
 		}
 	}
 	return false;
@@ -637,6 +631,65 @@ bool Panel::handle_textinput(const std::string& /* text */) {
  */
 bool Panel::handle_tooltip() {
 	return draw_tooltip(tooltip());
+}
+
+// Whether TAB events should be handled by this panel's parent (`false`) or by `this` (`true`)
+bool Panel::is_focus_toplevel() const {
+	return !parent_ || this == modal_;
+}
+
+// Let the toplevel panel transfer the focus to the next/prev focusable child
+bool Panel::handle_tab_pressed(const bool reverse) {
+	if (!is_focus_toplevel()) {
+		return parent_->handle_tab_pressed(reverse);
+	}
+
+	std::deque<Panel*> list = gather_focusable_children();
+	if (list.empty()) {
+		// nothing to do
+		return false;
+	}
+	const size_t list_size = list.size();
+
+	if (focus_ == nullptr || !focus_->is_visible() || list_size <= 1) {
+		// no focus yet – select the first item
+		list[reverse ? 0 : list_size - 1]->focus();
+		return true;
+	}
+
+	Panel* currently_focused = focus_;
+	while (currently_focused->focus_ && currently_focused->focus_->is_visible()) {
+		currently_focused = currently_focused->focus_;
+	}
+	// tell the next/prev panel to focus
+	for (size_t i = 0; i < list_size; ++i) {
+		if (list[i] == currently_focused) {
+			list[(i + (reverse ? 1 : list_size - 1)) % list_size]->focus();
+			return true;
+		}
+	}
+
+	list[reverse ? 0 : list_size - 1]->focus();
+	return true;
+}
+
+// Recursively create a sorted list of all children that can get the focus
+std::deque<Panel*> Panel::gather_focusable_children() {
+	if (get_can_focus() && !has_focus()) {
+		return {this};
+	}
+	std::deque<Panel*> list;
+	for (Panel* child = first_child_; child; child = child->next_) {
+		if (child->is_visible()) {
+			for (Panel* p : child->gather_focusable_children()) {
+				list.push_back(p);
+			}
+		}
+	}
+	if (get_can_focus()) {
+		list.push_back(this);
+	}
+	return list;
 }
 
 /**
@@ -702,6 +755,7 @@ void Panel::focus(const bool topcaller) {
 				SDL_StopTextInput();
 			}
 		}
+		focus_ = nullptr;
 	}
 
 	if (!parent_ || this == modal_) {
@@ -807,6 +861,10 @@ void Panel::do_draw_inner(RenderTarget& dst) {
  * \param dst RenderTarget for the parent Panel
  */
 void Panel::do_draw(RenderTarget& dst) {
+	// Make sure the panel's size is sane. If it's bigger than 10000 it's likely a bug.
+	assert(desired_w_ <= std::max(10000, g_gr->get_xres()));
+	assert(desired_h_ <= std::max(10000, g_gr->get_yres()));
+
 	if (!is_visible()) {
 		return;
 	}
@@ -909,9 +967,9 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mou
 			continue;
 		}
 		// Found a child at the position
-		if (child->do_mousewheel(
-		       which, x, y, rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
-		                                             child->get_y() + child->get_tborder()))) {
+		if (child->do_mousewheel(which, x, y,
+		                         rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
+		                                                  child->get_y() + child->get_tborder()))) {
 			return true;
 		}
 	}
@@ -960,11 +1018,40 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 		return false;
 	}
 
-	// If we handle text, it does not matter if we handled this key
-	// or not, it should not propagate.
-	if (handle_key(down, code) || handles_textinput()) {
+	if (handle_key(down, code)) {
 		return true;
 	}
+
+	// If we handle text, we want to block propagation of keypresses used for
+	// text input. We don't know which ones they are, so we block all except
+	// those we are reasonably sure that they aren't. This list may be expanded.
+	if (handles_textinput()) {
+		switch (code.sym) {
+		case SDLK_ESCAPE:
+		case SDLK_PAUSE:
+		case SDLK_PRINTSCREEN:
+		case SDLK_PAGEDOWN:
+		case SDLK_PAGEUP:
+		case SDLK_HOME:
+		case SDLK_END:
+		case SDLK_DELETE:
+		case SDLK_INSERT:
+		case SDLK_BACKSPACE:
+		case SDLK_LEFT:
+		case SDLK_RIGHT:
+		case SDLK_UP:
+		case SDLK_DOWN:
+		case SDLK_LCTRL:
+		case SDLK_RCTRL:
+		case SDLK_LALT:
+			return false;
+		}
+		if (code.mod & KMOD_CTRL || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12)) {
+			return false;
+		}
+		return true;
+	}
+
 	return false;
 }
 

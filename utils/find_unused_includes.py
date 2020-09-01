@@ -33,9 +33,6 @@ MACRO_CLASS_DEFINITION_REGEX = re.compile(r'^[A-Z_0-9]+\((\w+)\)$')
 FUNCTION_REGEX = re.compile(
     r'(^|.*\s+)([a-zA-Z_0-9][a-zA-Z_0-9]{2,})\(.*(\)|,).*')
 
-# Special regex for base/log.h
-HEADER_LOG_REGEX = re.compile(r'(void|bool)\s+(\w+)\(.*\);')
-
 # Header files with contents that are too hard to detect by regex
 FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
                  'third_party/eris/lua.hpp', 'scripting/eris.h'}
@@ -104,11 +101,6 @@ def find_classes(file_to_check, include_functions, special_regex, special_regex_
                     if not match.groups()[1] in FUNCTION_EXCLUDES:
                         classes.add(match.groups()[1])
 
-            if special_regex:
-                match = HEADER_LOG_REGEX.match(line)
-                if match and len(match.groups()) > special_regex_group:
-                    classes.add(match.groups()[special_regex_group])
-
     return classes
 
 
@@ -151,10 +143,6 @@ def check_file(file_to_check, include_functions):
             elif header_file in DIFFICULT_FILES:
                 # Search with function regex switched on
                 header_classes = find_classes(header_file, True, None, 0)
-            elif header_file == 'base/log.h':
-                # Search with special regex switched on
-                header_classes = find_classes(
-                    header_file, False, HEADER_LOG_REGEX, 1)
             else:
                 # Search with function regex switched on/off according to include_functions
                 header_classes = find_classes(

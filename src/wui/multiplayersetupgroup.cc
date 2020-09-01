@@ -25,7 +25,6 @@
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"
-#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
@@ -97,7 +96,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			   case NoteGameSettings::Action::kPlayer:
 				   break;
 			   }
-			});
+		   });
 	}
 
 	/// Update dropdown sizes
@@ -142,7 +141,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			}
 		}
 		slot_dropdown_.add(_("Spectator"), UserSettings::none(),
-		                   g_gr->images().get("images/wui/fieldaction/menu_tab_watch.png"),
+		                   g_image_cache->get("images/wui/fieldaction/menu_tab_watch.png"),
 		                   user_setting.position == UserSettings::none());
 		slot_dropdown_.set_visible(true);
 		slot_dropdown_.set_enabled(id_ == settings.usernum);
@@ -288,7 +287,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					   update();
 				   }
 			   }
-			});
+		   });
 
 		// Init dropdowns
 		update();
@@ -351,34 +350,34 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		for (const auto* impl : ComputerPlayer::get_implementations()) {
 			type_dropdown_.add(_(impl->descname),
 			                   (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
-			                   g_gr->images().get(impl->icon_filename), false, _(impl->descname));
+			                   g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 		}
 		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 		type_dropdown_.add(_("Random AI"), AI_NAME_PREFIX "random",
-		                   g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
+		                   g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
 
 		// Slot state. Only add shared_in if there are viable slots
 		if (settings.is_shared_usable(id_, settings.find_shared(id_))) {
 			type_dropdown_.add(_("Shared in"), "shared_in",
-			                   g_gr->images().get("images/ui_fsmenu/shared_in.png"), false,
+			                   g_image_cache->get("images/ui_fsmenu/shared_in.png"), false,
 			                   _("Shared in"));
 		}
 
 		// Do not close a player in savegames or scenarios
 		if (!settings.uncloseable(id_)) {
-			type_dropdown_.add(_("Closed"), "closed", g_gr->images().get("images/ui_basic/stop.png"),
+			type_dropdown_.add(_("Closed"), "closed", g_image_cache->get("images/ui_basic/stop.png"),
 			                   false, _("Closed"));
 		}
 
 		type_dropdown_.add(
-		   _("Open"), "open", g_gr->images().get("images/ui_basic/continue.png"), false, _("Open"));
+		   _("Open"), "open", g_image_cache->get("images/ui_basic/continue.png"), false, _("Open"));
 
 		type_dropdown_.set_enabled(settings_->can_change_player_state(id_));
 
 		// Now select the entry according to server settings
 		const PlayerSettings& player_setting = settings.players[id_];
 		if (player_setting.state == PlayerSettings::State::kHuman) {
-			type_dropdown_.set_image(g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
+			type_dropdown_.set_image(g_image_cache->get("images/wui/stats/genstats_nrworkers.png"));
 			type_dropdown_.set_tooltip((boost::format(_("%1%: %2%")) % _("Type") % _("Human")).str());
 		} else if (player_setting.state == PlayerSettings::State::kClosed) {
 			type_dropdown_.select("closed");
@@ -464,15 +463,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 			tribes_dropdown_.set_enabled(tribes_dropdown_.size() > 1);
 		} else {
-			{
-				i18n::Textdomain td("tribes");
-				for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-					tribes_dropdown_.add(_(tribeinfo.descname), tribeinfo.name,
-					                     g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
-				}
+			for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
+				tribes_dropdown_.add(tribeinfo.descname, tribeinfo.name,
+				                     g_image_cache->get(tribeinfo.icon), false, tribeinfo.tooltip);
 			}
+
 			tribes_dropdown_.add(pgettext("tribe", "Random"), "random",
-			                     g_gr->images().get("images/ui_fsmenu/random.png"), false,
+			                     g_image_cache->get("images/ui_fsmenu/random.png"), false,
 			                     _("The tribe will be selected at random"));
 			if (player_setting.random_tribe) {
 				tribes_dropdown_.select("random");
@@ -523,8 +520,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init_dropdown_.set_label(_("Saved Game"));
 		} else {
 			init_dropdown_.set_label("");
-			i18n::Textdomain td("tribes");  // for translated initialisation
-			const Widelands::TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
+			const Widelands::TribeBasicInfo tribeinfo = settings.get_tribeinfo(player_setting.tribe);
 			std::set<std::string> tags;
 			if (!settings.mapfilename.empty()) {
 				Widelands::Map map;
@@ -577,7 +573,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 
 		team_dropdown_.clear();
-		team_dropdown_.add(_("No Team"), 0, g_gr->images().get("images/players/no_team.png"));
+		team_dropdown_.add(_("No Team"), 0, g_image_cache->get("images/players/no_team.png"));
 #ifndef NDEBUG
 		const size_t no_of_team_colors = sizeof(kTeamColors) / sizeof(kTeamColors[0]);
 #endif

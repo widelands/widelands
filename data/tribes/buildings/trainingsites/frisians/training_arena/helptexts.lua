@@ -3,7 +3,7 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Now that you have two swords, there’s more of a risk you’ll accidently stab yourself, but if you got this far, you’ll likely master this challenge as well.")
+   return pgettext ("frisians_building", "Now that you have two swords, there’s more of a risk you’ll accidentally stab yourself, but if you got this far, you’ll likely master this challenge as well.")
 end
 
 function building_helptext_lore_author ()

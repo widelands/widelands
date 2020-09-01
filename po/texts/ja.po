@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-03-29 19:01+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-07-23 07:47+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -338,11 +338,11 @@ msgid ""
 " wiki there."
 msgstr "WidelandsやWidelandsエディタに関するさらなる情報が必要ならば、我々のホームページ %s を見てください。そこにある我々のwikiにオンラインヘルプがあります。"
 
-#: ../../data/txts/help/common_helptexts.lua:17
+#: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
 msgstr "はじめに"
 
-#: ../../data/txts/help/common_helptexts.lua:18
+#: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer "
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -350,7 +350,7 @@ msgid ""
 "started through playable tutorials."
 msgstr "Widelandsはフリーでオープンソースのリアルタイムストラテジーゲームで、一人プレイ用のキャンペーンと多人数でのマルチプレイモードで遊ぶことができます。このゲームは元々はSettlers IIに着想を得ていますが、現在ではそれよりもだいぶ深みの増したゲームに進化しました。一方で、チュートリアルシナリオを通じて、容易にゲームに入っていけるようにも設計されています。"
 
-#: ../../data/txts/help/common_helptexts.lua:19
+#: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
 "In this game, you start out on a small piece of land with just a few "
 "resources. Using these, you’ll create an empire with many thousands of "
@@ -359,11 +359,11 @@ msgid ""
 "tribes."
 msgstr "ゲームは、狭い土地と限られた物資だけを持った状態で始まります。これらの土地や物資を使い、何千人もの住人を抱える大帝国を作り上げるのです。それを成し遂げるためには、経済インフラを整備し、周囲を探索して領土を増やし、そしてライバルとなる部族を打ち破らねばなりません。"
 
-#: ../../data/txts/help/common_helptexts.lua:25
+#: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
 msgstr "リプレイ"
 
-#: ../../data/txts/help/common_helptexts.lua:26
+#: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
 "Widelands records every game you play in two files. One of these files has a"
 " .wrpl.wgf extension and contains an initial savegame. The other file has a "
@@ -372,7 +372,7 @@ msgid ""
 "will tell you the time you started the game."
 msgstr "Widelandsはあなたのプレイする全てのゲームを二つのファイルに記録します。一つは .wrpl.wgf の拡張子を持つファイルで、こちらにはゲームの初期状態のセーブデータを含んでいます。もう一方は .wrpl という拡張子を持つファイルで、全てのプレイヤーの実行した全ての行動が記録されています。例えば、建物や道路の建設、敵への攻撃といったもの、こういったものが全て記録されます。ファイル名のその他の部分はあなたがゲームを開始した時間を示しています。"
 
-#: ../../data/txts/help/common_helptexts.lua:27
+#: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -382,7 +382,7 @@ msgid ""
 "players has a different version of the game."
 msgstr "メインニューから「リプレイ」を選択すれば、再構築された過去にプレイしたゲームを見ることができます。しかし注意すべきこととして、ゲームデータやWidelands実行ファイルに変更があった場合、途中で整合性がとれなくなってゲームを見ることができなくなる可能性があります。同様の問題はマルチプレイ時にバージョンの異なるWidelandsを使っているプレイヤーがいる場合にも発生します。"
 
-#: ../../data/txts/help/common_helptexts.lua:28
+#: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
@@ -392,7 +392,7 @@ msgid ""
 msgstr "リプレイはゲームの動作バグを発見する上で有用なツールです。バグ報告時に添付すると、状況説明がシンプルになるかもしれません。リプレイファイルは、LinuxやMac OS Xでは %s に、WindowsではWidelandsのインストールディレクトリの下にある replays ディレクトリに保存されます。"
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../data/txts/help/common_helptexts.lua:35
+#: ../../data/txts/help/common_helptexts.lua:41
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
@@ -400,27 +400,27 @@ msgstr "%s: "
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgctxt "hotkey"
 msgid "Space"
 msgstr "スペース"
 
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
 msgstr "建物用地の表示/非表示の切り替え"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgctxt "hotkey"
 msgid "Ctrl + F"
 msgstr ""
 
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "フルスクリーンモード切替 (OSが対応している場合)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:56
+#: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "ミニマップ表示/非表示の切替"
 
@@ -698,8 +698,8 @@ msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
-msgid "Ctrl+(1-9)"
-msgstr "Ctrl+(1-9)"
+msgid "Ctrl + (1-9)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:43
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -741,13 +741,13 @@ msgstr "農場のような一部の建物は非常に狭い作業エリアしか
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+(+/-)"
-msgstr "Ctrl+(+/-)"
+msgid "Ctrl + (+/-)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+0"
-msgstr "Ctrl+0"
+msgid "Ctrl + 0"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
@@ -761,7 +761,7 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Ctrl+(Page Up/Page Down)"
+msgid "Ctrl + (Page Up/Page Down)"
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
@@ -771,7 +771,7 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Shift+(Page Up/Page Down)"
+msgid "Shift + (Page Up/Page Down)"
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
@@ -787,7 +787,7 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
+msgid "Ctrl + Arrow keys"
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:83
@@ -797,7 +797,7 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Shift+Arrow keys"
+msgid "Shift + Arrow keys"
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:87

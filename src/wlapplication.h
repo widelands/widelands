@@ -132,8 +132,6 @@ struct WLApplication {
 	static WLApplication* get(int const argc = 0, char const** argv = nullptr);
 	~WLApplication();
 
-	enum GameType { NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK };
-
 	void run();
 
 	/// \warning true if an external entity wants us to quit
@@ -183,7 +181,7 @@ struct WLApplication {
 	void mainmenu_editor();
 
 	bool new_game();
-	bool load_game();
+	bool load_game(std::string filename = "");
 	bool campaign_game();
 	void replay();
 	static void emergency_save(Widelands::Game&);
@@ -207,7 +205,7 @@ private:
 	void cleanup_replays();
 	void cleanup_ai_files();
 	void cleanup_temp_files();
-	void cleanup_temp_backups(std::string dir);
+	void cleanup_temp_backups(const std::string& dir);
 	void cleanup_temp_backups();
 
 	bool redirect_output(std::string path = "");
@@ -227,6 +225,7 @@ private:
 	/// --scenario or --loadgame.
 	std::string script_to_run_;
 
+	enum class GameType { kNone, kEditor, kReplay, kScenario, kLoadGame };
 	GameType game_type_;
 
 	/// True if left and right mouse button should be swapped
@@ -261,6 +260,9 @@ private:
 	/// Absolute path to the data directory.
 	std::string datadir_;
 	std::string datadir_for_testing_;
+
+	/// Absolute path to the locale directory.
+	std::string localedir_;
 
 	/// Prevent toggling fullscreen on and off from flickering
 	uint32_t last_resolution_change_;

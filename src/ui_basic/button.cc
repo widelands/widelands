@@ -25,7 +25,6 @@
 #include <SDL_timer.h>
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -62,10 +61,9 @@ Button::Button  //  Common constructor
      time_nextact_(0),
      title_(title_text),
      title_image_(title_image),
-     style_(&g_gr->styles().button_style(init_style)) {
+     style_(&g_style_manager->button_style(init_style)) {
 	set_thinks(false);
-	// Don't allow focus
-	assert(!get_can_focus());
+	set_can_focus(enabled_);
 }
 
 /// For textual buttons. If h = 0, h will resize according to the font's height. If both h = 0 and w
@@ -96,8 +94,8 @@ Button::Button(Panel* const parent,
 		// Automatically resize for font height and give it a margin.
 		int new_width = get_w();
 		const int new_height =
-		   std::max(text_height(g_gr->styles().button_style(init_style).enabled().font()),
-		            text_height(g_gr->styles().button_style(init_style).disabled().font())) +
+		   std::max(text_height(g_style_manager->button_style(init_style).enabled().font()),
+		            text_height(g_style_manager->button_style(init_style).disabled().font())) +
 		   4 * kButtonImageMargin;
 		if (w == 0) {
 			// Automatically resize for text width too.
@@ -174,6 +172,7 @@ void Button::set_enabled(bool const on) {
 		enabled_ = false;
 		highlighted_ = false;
 	}
+	set_can_focus(enabled_);
 }
 
 /**
@@ -312,6 +311,15 @@ void Button::think() {
 	}
 }
 
+bool Button::handle_key(bool down, SDL_Keysym code) {
+	if (down && (code.sym == SDLK_SPACE || code.sym == SDLK_RETURN || code.sym == SDLK_KP_ENTER)) {
+		play_click();
+		sigclicked();
+		return true;
+	}
+	return NamedPanel::handle_key(down, code);
+}
+
 /**
  * Update highlighted status
  */
@@ -389,7 +397,7 @@ void Button::set_perm_pressed(bool pressed) {
 }
 
 void Button::set_style(UI::ButtonStyle bstyle) {
-	style_ = &g_gr->styles().button_style(bstyle);
+	style_ = &g_style_manager->button_style(bstyle);
 }
 
 void Button::toggle() {

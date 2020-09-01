@@ -117,7 +117,7 @@ void Surface::brighten_rect(const Rectf& rc, const int32_t factor) {
 	do_fill_rect(rect, color, blend_mode);
 }
 
-void Surface::draw_line_strip(std::vector<Vector2f> points,
+void Surface::draw_line_strip(const std::vector<Vector2f>& points,
                               const RGBColor& color,
                               float line_width) {
 	if (points.size() < 2) {

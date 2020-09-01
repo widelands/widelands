@@ -45,17 +45,19 @@ AttackBox::AttackBox(UI::Panel* parent,
 std::vector<Widelands::Soldier*> AttackBox::get_max_attackers() {
 	assert(player_);
 	if (upcast(Building, building, map_.get_immovable(*node_coordinates_))) {
-		if (player_->vision(map_.get_index(building->get_position(), map_.get_width())) > 1) {
-			std::vector<Widelands::Soldier*> v;
-			// TODO(Nordfriese): This method decides by itself which soldier remains in the building.
-			// This soldier will not show up in the result vector. Perhaps we should show all
-			// available soldiers, grouped by building, so the player can choose between all soldiers
-			// knowing that at least one of each group will have to stay at home. However, this
-			// could clutter up the screen a lot. Especially if you have many small buildings.
-			player_->find_attack_soldiers(building->base_flag(), &v);
-			return v;
+		for (Widelands::Coords& coords : building->get_positions(player_->egbase())) {
+			if (player_->is_seeing(map_.get_index(coords, map_.get_width()))) {
+				std::vector<Widelands::Soldier*> v;
+				// TODO(Nordfriese): This method decides by itself which soldier remains in the
+				// building. This soldier will not show up in the result vector. Perhaps we should show
+				// all available soldiers, grouped by building, so the player can choose between all
+				// soldiers knowing that at least one of each group will have to stay at home. However,
+				// this could clutter up the screen a lot. Especially if you have many small buildings.
+				player_->find_attack_soldiers(building->base_flag(), &v);
+				return v;
+			}
 		}
-		// Player can't see the buildings door, so it can't be attacked
+		// Player can't see any part of the building, so it can't be attacked
 		// This is the same check as done later on in send_player_enemyflagaction()
 	}
 	return std::vector<Widelands::Soldier*>();
@@ -75,11 +77,11 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
 }
 
 UI::Textarea& AttackBox::add_text(UI::Box& parent,
-                                  std::string str,
+                                  const std::string& str,
                                   UI::Align alignment,
                                   const UI::FontStyle style) {
 	UI::Textarea& result =
-	   *new UI::Textarea(&parent, str.c_str(), UI::Align::kLeft, g_gr->styles().font_style(style));
+	   *new UI::Textarea(&parent, str.c_str(), UI::Align::kLeft, g_style_manager->font_style(style));
 	parent.add(&result, UI::Box::Resizing::kAlign, alignment);
 	return result;
 }
@@ -209,7 +211,7 @@ void AttackBox::init() {
 
 	attack_button_.reset(new UI::Button(
 	   &linebox, "attack", 8, 8, 34, 34, UI::ButtonStyle::kWuiPrimary,
-	   g_gr->images().get("images/wui/buildings/menu_attack.png"), _("Start attack")));
+	   g_image_cache->get("images/wui/buildings/menu_attack.png"), _("Start attack")));
 	linebox.add(attack_button_.get());
 
 	attacking_soldiers_.reset(new ListOfSoldiers(&mainbox, this, 0, 0, 30, 30));
@@ -228,8 +230,7 @@ void AttackBox::init() {
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(
 		   (tooltip_format %
-		    g_gr->styles()
-		       .font_style(UI::FontStyle::kTooltipHeader)
+		    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 		       .as_font_tag(_("Click on a soldier to remove him from the list of attackers")) %
 		    as_listitem(
 		       _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kTooltip) %
@@ -245,8 +246,7 @@ void AttackBox::init() {
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(
 		   (tooltip_format %
-		    g_gr->styles()
-		       .font_style(UI::FontStyle::kTooltipHeader)
+		    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 		       .as_font_tag(_("Click on a soldier to add him to the list of attackers")) %
 		    as_listitem(
 		       _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kTooltip) %

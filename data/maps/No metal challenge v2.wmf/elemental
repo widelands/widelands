@@ -7,6 +7,6 @@ map_h="304"
 nr_players="7"
 name=_"No metal challenge v2"
 author="King of nowhere"
-descr=_"This map is intended as a solo challenge for those very skilled players that find 1v6 against the AI too easy.  Blue player has no metal (except a bit of iron to kickstart your economy), so you have to rely on the 5% production of an empty mine. And you're still 1v6 (though of course you can remove some AI players to make it a bit easier). Good luck"
+descr=_"This map is intended as a solo challenge for those very skilled players that find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit of iron to kickstart your economy), so you have to rely on the 5% production of an empty mine. And you're still 1 vs 6 (though of course you can remove some AI players to make it a bit easier). Good luck!"
 hint=
 tags="official,unbalanced"

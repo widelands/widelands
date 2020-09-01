@@ -24,6 +24,7 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -44,8 +45,9 @@ GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::st
 	// Loading the "texts" locale for translating the tips
 	i18n::Textdomain textdomain("texts");
 
-	for (uint8_t i = 0; i < names.size(); ++i)
+	for (uint8_t i = 0; i < names.size(); ++i) {
 		load_tips(names[i]);
+	}
 
 	if (!tips_.empty()) {
 		// add visualization only if any tips are loaded
@@ -73,7 +75,7 @@ void GameTips::load_tips(const std::string& name) {
 			tips_.push_back(tip);
 		}
 	} catch (LuaError& err) {
-		log("Error loading tips script for %s:\n%s\n", name.c_str(), err.what());
+		log_err("Error loading tips script for %s:\n%s\n", name.c_str(), err.what());
 		// No further handling necessary - tips do not impact game
 	}
 }
@@ -81,11 +83,12 @@ void GameTips::load_tips(const std::string& name) {
 void GameTips::update(bool repaint) {
 	uint32_t ticks = SDL_GetTicks();
 	if (ticks >= (lastUpdated_ + updateAfter_)) {
-		const uint32_t next = rand() % tips_.size();
-		if (next == lastTip_)
+		const uint32_t next = std::rand() % tips_.size();  // NOLINT
+		if (next == lastTip_) {
 			lastTip_ = (next + 1) % tips_.size();
-		else
+		} else {
 			lastTip_ = next;
+		}
 		show_tip(next);
 		lastUpdated_ = SDL_GetTicks();
 		updateAfter_ = tips_[next].interval * 1000;
@@ -104,7 +107,7 @@ void GameTips::stop() {
 void GameTips::show_tip(int32_t index) {
 	RenderTarget& rt = *g_gr->get_render_target();
 
-	const Image* pic_background = g_gr->images().get(BG_IMAGE);
+	const Image* pic_background = g_image_cache->get(BG_IMAGE);
 	const int w = pic_background->width();
 	const int h = pic_background->height();
 	Vector2i pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);

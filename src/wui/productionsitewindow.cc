@@ -62,7 +62,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 				   break;
 			   }
 		   }
-		});
+	   });
 	init(avoid_fastclick, workarea_preview_wanted);
 }
 
@@ -83,7 +83,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), *production_site, *inputqueues[i]));
 		}
 
-		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));
+		get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), prod_box, _("Wares"));
 	}
 
 	// Add workers tab if applicable
@@ -115,7 +115,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 			worker_caps_->add_inf_space();
 			UI::Button* evict_button =
 			   new UI::Button(worker_caps_, "evict", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_gr->images().get("images/wui/buildings/menu_drop_soldier.png"),
+			                  g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
 			                  _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect([this]() { evict_worker(); });
 			worker_caps_->add(evict_button);
@@ -124,7 +124,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		worker_box->add(worker_table_, UI::Box::Resizing::kFullSize);
 		worker_box->add_space(4);
 		worker_box->add(worker_caps_, UI::Box::Resizing::kFullSize);
-		get_tabs()->add("workers", g_gr->images().get(pic_tab_workers), worker_box, workers_heading);
+		get_tabs()->add("workers", g_image_cache->get(pic_tab_workers), worker_box, workers_heading);
 		update_worker_table(production_site);
 	}
 	think();

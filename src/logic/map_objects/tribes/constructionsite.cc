@@ -22,13 +22,14 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/animation/animation.h"
 #include "graphic/animation/animation_manager.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -47,19 +48,21 @@ namespace Widelands {
 void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
                                        const Widelands::Coords& coords,
                                        float scale,
+                                       const bool visible,
                                        const RGBColor& player_color,
                                        RenderTarget* dst) const {
 	// Draw the construction site marker
 	std::vector<std::pair<uint32_t, uint32_t>> animations;
 	uint32_t total_frames = 0;
-	auto push_animation = [](
-	   const BuildingDescr* d, std::vector<std::pair<uint32_t, uint32_t>>* anims, uint32_t* tf) {
+	auto push_animation = [](const BuildingDescr* d,
+	                         std::vector<std::pair<uint32_t, uint32_t>>* anims, uint32_t* tf) {
 		const bool known = d->is_animation_known("build");
 		const uint32_t anim_idx =
 		   known ? d->get_animation("build", nullptr) : d->get_unoccupied_animation();
 		// If there is no build animation, we use only the first frame or we
 		// would get many build steps with almost the same image...
-		const uint32_t nrframes = known ? g_gr->animations().get_animation(anim_idx).nr_frames() : 1;
+		const uint32_t nrframes =
+		   known ? g_animation_manager->get_animation(anim_idx).nr_frames() : 1;
 		assert(nrframes);
 		*tf += nrframes;
 		anims->push_back(std::make_pair(anim_idx, nrframes));
@@ -81,22 +84,43 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 
 	if (frame_index > 0) {
 		// Not the first pic within this animation – draw the previous one
-		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-		                    animations[animation_index].first, anim_time - kFrameLength,
-		                    &player_color);
+		if (visible) {
+			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
+			                    animations[animation_index].first, anim_time - kFrameLength,
+			                    &player_color);
+		} else {
+			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
+			                    animations[animation_index].first, anim_time - kFrameLength, nullptr,
+			                    kBuildingSilhouetteOpacity);
+		}
 	} else if (animation_index > 0) {
 		// The first pic, but not the first series of animations – draw the last pic of the previous
 		// series
-		dst->blit_animation(
-		   point_on_dst, Widelands::Coords::null(), scale, animations[animation_index - 1].first,
-		   kFrameLength * (animations[animation_index - 1].second - 1), &player_color);
+		if (visible) {
+			dst->blit_animation(
+			   point_on_dst, Widelands::Coords::null(), scale, animations[animation_index - 1].first,
+			   kFrameLength * (animations[animation_index - 1].second - 1), &player_color);
+		} else {
+			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
+			                    animations[animation_index - 1].first,
+			                    kFrameLength * (animations[animation_index - 1].second - 1), nullptr,
+			                    kBuildingSilhouetteOpacity);
+		}
 	} else if (was) {
 		//  First pic in first series, but there was another building here before –
 		//  get its most fitting picture and draw it instead
 		const uint32_t unocc = was->get_unoccupied_animation();
-		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, unocc,
-		                    kFrameLength * (g_gr->animations().get_animation(unocc).nr_frames() - 1),
-		                    &player_color);
+		if (visible) {
+			dst->blit_animation(
+			   point_on_dst, Widelands::Coords::null(), scale, unocc,
+			   kFrameLength * (g_animation_manager->get_animation(unocc).nr_frames() - 1),
+			   &player_color);
+		} else {
+			dst->blit_animation(
+			   point_on_dst, Widelands::Coords::null(), scale, unocc,
+			   kFrameLength * (g_animation_manager->get_animation(unocc).nr_frames() - 1), nullptr,
+			   kBuildingSilhouetteOpacity);
+		}
 	}
 	// Now blit a segment of the current construction phase from the bottom.
 	int percent = 100 * completedtime * total_frames;
@@ -107,8 +131,13 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	for (uint32_t i = 0; i < animation_index; ++i) {
 		percent -= 100 * animations[i].second;
 	}
-	dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
-	                    &player_color, percent);
+	if (visible) {
+		dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
+		                    &player_color, 1.f, percent);
+	} else {
+		dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
+		                    nullptr, kBuildingSilhouetteOpacity, percent);
+	}
 }
 
 /**
@@ -117,11 +146,10 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
-                                             const Tribes& tribes)
+                                             Tribes& tribes)
    : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, tribes),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
-	add_attribute(MapObject::CONSTRUCTIONSITE);
 }
 
 Building& ConstructionSiteDescr::create_object() const {
@@ -149,8 +177,9 @@ ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
 
 void ConstructionSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = g_gr->styles().color_tag((boost::format(_("%i%% built")) % percent).str(),
-	                              g_gr->styles().building_statistics_style().construction_color());
+	*s =
+	   g_style_manager->color_tag((boost::format(_("%i%% built")) % percent).str(),
+	                              g_style_manager->building_statistics_style().construction_color());
 }
 
 /*
@@ -192,7 +221,7 @@ Initialize the construction site by starting orders
 */
 bool ConstructionSite::init(EditorGameBase& egbase) {
 	Notifications::publish(
-	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
+	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxMaximumPriority, true));
 	PartiallyFinishedBuilding::init(egbase);
 
 	const std::map<DescriptionIndex, uint8_t>* buildcost = nullptr;
@@ -248,8 +277,8 @@ void ConstructionSite::init_settings() {
 		settings_.reset(new MilitarysiteSettings(*md, tribe));
 	} else {
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log("WARNING: Created constructionsite for a %s, which is not of any known building type\n",
-		    building_->name().c_str());
+		log_warn("Created constructionsite for a %s, which is not of any known building type\n",
+		         building_->name().c_str());
 	}
 }
 
@@ -357,7 +386,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 Start building the next enhancement even before the base building is completed.
 ===============
 */
-void ConstructionSite::enhance(Game&) {
+void ConstructionSite::enhance(Game& game) {
 	assert(building_->enhancement() != INVALID_INDEX);
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
@@ -406,8 +435,9 @@ void ConstructionSite::enhance(Game&) {
 		work_steps_ += pair.second;
 	}
 
-	auto new_desired_capacity = [](
-	   uint32_t old_max, uint32_t old_des, uint32_t new_max) { return old_des * new_max / old_max; };
+	auto new_desired_capacity = [](uint32_t old_max, uint32_t old_des, uint32_t new_max) {
+		return old_des * new_max / old_max;
+	};
 
 	std::unique_ptr<BuildingSettings> old_settings(settings_.release());
 	switch (building_->type()) {
@@ -496,8 +526,9 @@ void ConstructionSite::enhance(Game&) {
 	} break;
 	default:
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log("WARNING: Enhanced constructionsite to a %s, which is not of any known building type\n",
-		    building_->name().c_str());
+		log_warn_time(game.get_gametime(),
+		              "Enhanced constructionsite to a %s, which is not of any known building type\n",
+		              building_->name().c_str());
 	}
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
@@ -509,10 +540,10 @@ Construction sites only burn if some of the work has been completed.
 ===============
 */
 bool ConstructionSite::burn_on_destroy() {
-	if (work_completed_ >= work_steps_)
+	if (work_completed_ >= work_steps_) {
 		return false;  // completed, so don't burn
-
-	return work_completed_ || !old_buildings_.empty();
+	}
+	return work_completed_ || info_.intermediates.size() < old_buildings_.size();
 }
 
 void ConstructionSite::add_additional_ware(DescriptionIndex di) {
@@ -537,8 +568,9 @@ Remember the ware on the flag. The worker will be sent from get_building_work().
 bool ConstructionSite::fetch_from_flag(Game& game) {
 	++fetchfromflag_;
 
-	if (Worker* const builder = builder_.get(game))
+	if (Worker* const builder = builder_.get(game)) {
 		builder->update_task_buildingwork(game);
+	}
 
 	return true;
 }
@@ -557,8 +589,9 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 		return true;
 	}
 
-	if (!work_steps_)           //  Happens for building without buildcost.
+	if (!work_steps_) {         //  Happens for building without buildcost.
 		schedule_destroy(game);  //  Complete the building immediately.
+	}
 
 	// Check if one step has completed
 	if (working_) {
@@ -572,8 +605,9 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 			// perhaps dependent on kind of construction?
 
 			++work_completed_;
-			if (work_completed_ >= work_steps_)
+			if (work_completed_ >= work_steps_) {
 				schedule_destroy(game);
+			}
 
 			working_ = false;
 		}
@@ -615,8 +649,9 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 		for (uint32_t i = 0; i < consume_wares_.size(); ++i) {
 			WaresQueue& wq = *consume_wares_[i];
 
-			if (!wq.get_filled())
+			if (!wq.get_filled()) {
 				continue;
+			}
 
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);
@@ -651,9 +686,11 @@ void ConstructionSite::wares_queue_callback(
    Game& game, InputQueue*, DescriptionIndex, Worker*, void* const data) {
 	ConstructionSite& cs = *static_cast<ConstructionSite*>(data);
 
-	if (!cs.working_)
-		if (Worker* const builder = cs.builder_.get(game))
+	if (!cs.working_) {
+		if (Worker* const builder = cs.builder_.get(game)) {
 			builder->update_task_buildingwork(game);
+		}
+	}
 }
 
 /*
@@ -681,12 +718,22 @@ void ConstructionSite::draw(uint32_t gametime,
 	uint32_t tanim = gametime - animstart_;
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (was_immovable_) {
-		dst->blit_animation(
-		   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(
+			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
+		} else {
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), tanim,
+			                    nullptr, kBuildingSilhouetteOpacity);
+		}
 	} else {
 		// Draw the construction site marker
-		dst->blit_animation(
-		   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(
+			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
+		} else {
+			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr,
+			                    kBuildingSilhouetteOpacity);
+		}
 	}
 
 	// Draw the partially finished building
@@ -701,7 +748,8 @@ void ConstructionSite::draw(uint32_t gametime,
 		info_.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - work_steptime_;
 	}
 
-	info_.draw(point_on_dst, coords, scale, player_color, dst);
+	info_.draw(
+	   point_on_dst, coords, scale, (info_to_draw & InfoToDraw::kShowBuildings), player_color, dst);
 
 	// Draw help strings
 	draw_info(info_to_draw, point_on_dst, scale, dst);

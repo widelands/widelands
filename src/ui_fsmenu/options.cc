@@ -82,7 +82,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
             0,
             _("Options"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
@@ -223,6 +223,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
      ctrl_zoom_(&box_game_, Vector2i::zero(), _("Zoom only when Ctrl is pressed")),
      game_clock_(&box_game_, Vector2i::zero(), _("Display game time in the top left corner")),
+     numpad_diagonalscrolling_(
+        &box_game_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
      os_(opt) {
 
 	// Buttons
@@ -276,9 +278,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_game_.add(&single_watchwin_);
 	box_game_.add(&ctrl_zoom_);
 	box_game_.add(&game_clock_);
+	box_game_.add(&numpad_diagonalscrolling_);
 
 	// Bind actions
-	language_dropdown_.selected.connect([this]() { update_language_stats(false); });
+	language_dropdown_.selected.connect([this]() { update_language_stats(); });
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
@@ -291,7 +294,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	for (int modes = 0; modes < SDL_GetNumDisplayModes(0); ++modes) {
 		SDL_DisplayMode mode;
 		SDL_GetDisplayMode(0, modes, &mode);
-		if (800 <= mode.w && 600 <= mode.h &&
+		if (kMinimumResolutionW <= mode.w && kMinimumResolutionH <= mode.h &&
 		    (SDL_BITSPERPIXEL(mode.format) == 32 || SDL_BITSPERPIXEL(mode.format) == 24)) {
 			ScreenResolution this_res = {
 			   mode.w, mode.h, static_cast<int32_t>(SDL_BITSPERPIXEL(mode.format))};
@@ -342,10 +345,11 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	single_watchwin_.set_state(opt.single_watchwin);
 	ctrl_zoom_.set_state(opt.ctrl_zoom);
 	game_clock_.set_state(opt.game_clock);
+	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
 
 	// Language options
 	add_languages_to_list(opt.language);
-	update_language_stats(true);
+	update_language_stats();
 	layout();
 }
 
@@ -417,6 +421,7 @@ void FullscreenMenuOptions::layout() {
 	single_watchwin_.set_desired_size(tab_panel_width, single_watchwin_.get_h());
 	ctrl_zoom_.set_desired_size(tab_panel_width, ctrl_zoom_.get_h());
 	game_clock_.set_desired_size(tab_panel_width, game_clock_.get_h());
+	numpad_diagonalscrolling_.set_desired_size(tab_panel_width, numpad_diagonalscrolling_.get_h());
 }
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
@@ -468,12 +473,12 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 				}
 
 			} catch (const WException&) {
-				log("Could not read locale for: %s\n", localename.c_str());
+				log_err("Could not read locale for: %s\n", localename.c_str());
 				entries.insert(std::make_pair(localename, LanguageEntry(localename, localename)));
 			}  // End read locale from table
 		}     // End scan locales directory
 	} catch (const LuaError& err) {
-		log("Could not read locales information from file: %s\n", err.what());
+		log_err("Could not read locales information from file: %s\n", err.what());
 		return;  // Nothing more can be done now.
 	}           // End read locales table
 
@@ -490,13 +495,13 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
  * @param include_system_lang We only want to include the system lang if it matches the Widelands
  * locale.
  */
-void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
+void FullscreenMenuOptions::update_language_stats() {
 	int percent = 100;
 	std::string message = "";
 	if (language_dropdown_.has_selection()) {
 		std::string locale = language_dropdown_.get_selected();
 		// Empty locale means try system locale
-		if (locale.empty() && include_system_lang) {
+		if (locale.empty()) {
 			std::vector<std::string> parts;
 			boost::split(parts, i18n::get_locale(), boost::is_any_of("."));
 			if (language_entries_.count(parts[0]) == 1) {
@@ -596,6 +601,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.single_watchwin = single_watchwin_.get_state();
 	os_.ctrl_zoom = ctrl_zoom_.get_state();
 	os_.game_clock = game_clock_.get_state();
+	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
 
 	// Last tab for reloading the options menu
 	os_.active_tab = tabs_.active();
@@ -619,7 +625,7 @@ void OptionsCtrl::handle_menu() {
 	}
 	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
-		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres);
+		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
 		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
 		opt_dialog_.reset(new FullscreenMenuOptions(options_struct(active_tab)));
 		handle_menu();  // Restart general options menu
@@ -629,8 +635,8 @@ void OptionsCtrl::handle_menu() {
 OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	OptionsStruct opt;
 	// Interface options
-	opt.xres = opt_section_.get_int("xres", DEFAULT_RESOLUTION_W);
-	opt.yres = opt_section_.get_int("yres", DEFAULT_RESOLUTION_H);
+	opt.xres = opt_section_.get_int("xres", kDefaultResolutionW);
+	opt.yres = opt_section_.get_int("yres", kDefaultResolutionH);
 	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
 	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
 	opt.maxfps = opt_section_.get_int("maxfps", 25);
@@ -655,6 +661,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.single_watchwin = opt_section_.get_bool("single_watchwin", false);
 	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
+	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
 
 	// Language options
 	opt.language = opt_section_.get_string("language", "");
@@ -694,6 +701,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("single_watchwin", opt.single_watchwin);
 	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 	opt_section_.set_bool("game_clock", opt.game_clock);
+	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
 
 	// Language options
 	opt_section_.set_string("language", opt.language);

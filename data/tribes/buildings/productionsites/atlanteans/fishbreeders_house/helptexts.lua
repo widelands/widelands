@@ -11,7 +11,7 @@ end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("atlanteans_building", "Prophecy of the fishbreeders")
+   return pgettext("atlanteans_building", "Prophecy of the fish breeders")
 end
 
 function building_helptext_purpose()

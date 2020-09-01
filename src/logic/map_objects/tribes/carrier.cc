@@ -71,7 +71,7 @@ void Carrier::road_update(Game& game, State& state) {
 		return schedule_act(game, 250);
 	} else if (signal.size()) {
 		// Something else happened (probably a location signal)
-		molog("[road]: Terminated by signal '%s'\n", signal.c_str());
+		molog(game.get_gametime(), "[road]: Terminated by signal '%s'\n", signal.c_str());
 		return pop_task(game);
 	}
 
@@ -97,8 +97,9 @@ void Carrier::road_update(Game& game, State& state) {
 
 	// Move into idle position if necessary
 	if (start_task_movepath(game, road.get_path(), road.get_idle_index(),
-	                        descr().get_right_walk_anims(does_carry_ware(), this)))
+	                        descr().get_right_walk_anims(does_carry_ware(), this))) {
 		return;
+	}
 
 	// Be bored. There's nothing good on TV, either.
 	// TODO(unknown): idle animations
@@ -158,7 +159,7 @@ void Carrier::transport_update(Game& game, State& state) {
 		set_animation(game, descr().get_animation("idle", this));
 		return schedule_act(game, 250);
 	} else if (signal.size()) {
-		molog("[transport]: Interrupted by signal '%s'\n", signal.c_str());
+		molog(game.get_gametime(), "[transport]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
 	}
 
@@ -224,11 +225,11 @@ void Carrier::deliver_to_building(Game& game, State& state) {
 				fetch_carried_ware(game);
 				ware->enter_building(game, *building);
 			} else {
-				molog("[Carrier]: Building switch from under us, return to road.\n");
+				molog(
+				   game.get_gametime(), "[Carrier]: Building switch from under us, return to road.\n");
 
-				state.ivar1 = &building->base_flag() ==
-				              &dynamic_cast<RoadBase&>(*get_location(game))
-				                  .get_flag(static_cast<RoadBase::FlagId>(0));
+				state.ivar1 = &building->base_flag() == &dynamic_cast<RoadBase&>(*get_location(game))
+				                                            .get_flag(static_cast<RoadBase::FlagId>(0));
 				break;
 			}
 		}
@@ -238,7 +239,7 @@ void Carrier::deliver_to_building(Game& game, State& state) {
 		   game, WALK_SE, descr().get_right_walk_anims(does_carry_ware(), this), true);
 	} else {
 		//  tough luck, the building has disappeared
-		molog("[Carrier]: Building disappeared while in building.\n");
+		molog(game.get_gametime(), "[Carrier]: Building disappeared while in building.\n");
 		set_location(nullptr);
 	}
 }
@@ -270,7 +271,7 @@ void Carrier::pickup_from_flag(Game& game, State& state) {
 			set_animation(game, descr().get_animation("idle", this));
 			return schedule_act(game, 20);
 		} else {
-			molog("[Carrier]: Nothing suitable on flag.\n");
+			molog(game.get_gametime(), "[Carrier]: Nothing suitable on flag.\n");
 			return pop_task(game);
 		}
 	}
@@ -294,8 +295,8 @@ void Carrier::drop_ware(Game& game, State& state) {
 		other = flag.fetch_pending_ware(game, otherflag);
 
 		if (!other && !flag.has_capacity()) {
-			molog("[Carrier]: strange: acked ware from busy flag no longer "
-			      "present.\n");
+			molog(game.get_gametime(), "[Carrier]: strange: acked ware from busy flag no longer "
+			                           "present.\n");
 
 			promised_pickup_to_ = NOONE;
 			set_animation(game, descr().get_animation("idle", this));
@@ -405,9 +406,11 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
 	//
 	// (Maybe the need for this lengthy explanation is proof that the
 	// ack system needs to be reworked.)
-	if (State const* const transport = get_state(taskTransport))
-		if ((transport->ivar1 == -1 && find_closest_flag(game) != flag) || flag == transport->ivar1)
+	if (State const* const transport = get_state(taskTransport)) {
+		if ((transport->ivar1 == -1 && find_closest_flag(game) != flag) || flag == transport->ivar1) {
 			return false;
+		}
+	}
 
 	// Ack it if we haven't
 	promised_pickup_to_ = flag;
@@ -477,14 +480,15 @@ int32_t Carrier::find_closest_flag(Game& game) {
 
 		map.get_brn(pos, &pos);
 
-		if (pos == startpath.get_start())
+		if (pos == startpath.get_start()) {
 			curidx = 0;
-		else if (pos == startpath.get_end())
+		} else if (pos == startpath.get_end()) {
 			curidx = startpath.get_nsteps();
-		else
+		} else {
 			throw wexception("MO(%u): Carrier::find_closest_flag: not on road, not on "
 			                 "building",
 			                 serial());
+		}
 	}
 
 	// Calculate the paths and their associated costs
@@ -513,12 +517,14 @@ bool Carrier::start_task_walktoflag(Game& game, int32_t const flag, bool const o
 
 	if (!flag) {
 		idx = 0;
-		if (offset)
+		if (offset) {
 			++idx;
+		}
 	} else {
 		idx = path.get_nsteps();
-		if (offset)
+		if (offset) {
 			--idx;
+		}
 	}
 
 	return start_task_movepath(
@@ -526,11 +532,11 @@ bool Carrier::start_task_walktoflag(Game& game, int32_t const flag, bool const o
 }
 
 void Carrier::log_general_info(const Widelands::EditorGameBase& egbase) const {
-	molog("Carrier at %i,%i\n", get_position().x, get_position().y);
+	molog(egbase.get_gametime(), "Carrier at %i,%i\n", get_position().x, get_position().y);
 
 	Worker::log_general_info(egbase);
 
-	molog("promised_pickup_to = %i\n", promised_pickup_to_);
+	molog(egbase.get_gametime(), "promised_pickup_to = %i\n", promised_pickup_to_);
 }
 
 /*
@@ -550,11 +556,9 @@ void Carrier::Loader::load(FileRead& fr) {
 
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
-		// TODO(GunChleoc): Remove savegame compatibility after Build 21.
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 1) {
+		if (packet_version == kCurrentPacketVersion) {
 			Carrier& carrier = get<Carrier>();
-			// TODO(GunChleoc): std::max is for savegame compatibility. Remove after Build 21.
-			carrier.promised_pickup_to_ = std::max(-1, fr.signed_32());
+			carrier.promised_pickup_to_ = fr.signed_32();
 		} else {
 			throw UnhandledVersionError("Carrier", packet_version, kCurrentPacketVersion);
 		}
@@ -564,10 +568,12 @@ void Carrier::Loader::load(FileRead& fr) {
 }
 
 const Bob::Task* Carrier::Loader::get_task(const std::string& name) {
-	if (name == "road")
+	if (name == "road") {
 		return &taskRoad;
-	if (name == "transport")
+	}
+	if (name == "transport") {
 		return &taskTransport;
+	}
 	return Worker::Loader::get_task(name);
 }
 
@@ -584,7 +590,7 @@ void Carrier::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 
 CarrierDescr::CarrierDescr(const std::string& init_descname,
                            const LuaTable& table,
-                           const Tribes& tribes,
+                           Tribes& tribes,
                            MapObjectType t)
    : WorkerDescr(init_descname, t, table, tribes) {
 }
