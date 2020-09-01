@@ -52,8 +52,8 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 	RGBColor color;
 	if (layers & MiniMapLayer::Terrain) {
 		color = egbase.descriptions()
-		           .terrain_descr(f.field->terrain_d())
-		           .get_minimap_color(f.field->get_brightness());
+		           .get_terrain_descr(f.field->terrain_d())
+		           ->get_minimap_color(f.field->get_brightness());
 	}
 
 	if (layers & MiniMapLayer::Owner) {

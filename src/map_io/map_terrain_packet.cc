@@ -91,7 +91,7 @@ void MapTerrainPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 
 	std::map<const char* const, DescriptionIndex> smap;
 	for (DescriptionIndex i = 0; i < nr_terrains; ++i) {
-		const char* const name = descriptions.terrain_descr(i).name().c_str();
+		const char* const name = descriptions.get_terrain_descr(i)->name().c_str();
 		smap[name] = i;
 		fw.unsigned_16(i);
 		fw.c_string(name);
@@ -100,8 +100,8 @@ void MapTerrainPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i) {
 		Field& f = map[i];
-		fw.unsigned_8(smap[descriptions.terrain_descr(f.terrain_r()).name().c_str()]);
-		fw.unsigned_8(smap[descriptions.terrain_descr(f.terrain_d()).name().c_str()]);
+		fw.unsigned_8(smap[descriptions.get_terrain_descr(f.terrain_r())->name().c_str()]);
+		fw.unsigned_8(smap[descriptions.get_terrain_descr(f.terrain_d())->name().c_str()]);
 	}
 
 	fw.write(fs, "binary/terrain");

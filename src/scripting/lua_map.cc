@@ -3718,7 +3718,7 @@ void LuaTerrainDescription::__persist(lua_State* L) {
 void LuaTerrainDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	set_description_pointer(get_egbase(L).descriptions().terrain_descr(name));
+	set_description_pointer(get_egbase(L).descriptions().get_terrain_descr(name));
 }
 
 /*
@@ -6674,8 +6674,8 @@ int LuaField::get_bobs(lua_State* L) {
       you're done changing terrains.
 */
 int LuaField::get_terr(lua_State* L) {
-	TerrainDescription& td = get_egbase(L).descriptions().terrain_descr(fcoords(L).field->terrain_r());
-	lua_pushstring(L, td.name().c_str());
+	const TerrainDescription* td = get_egbase(L).descriptions().get_terrain_descr(fcoords(L).field->terrain_r());
+	lua_pushstring(L, td->name().c_str());
 	return 1;
 }
 int LuaField::set_terr(lua_State* L) {
@@ -6694,8 +6694,8 @@ int LuaField::set_terr(lua_State* L) {
 }
 
 int LuaField::get_terd(lua_State* L) {
-	TerrainDescription& td = get_egbase(L).descriptions().terrain_descr(fcoords(L).field->terrain_d());
-	lua_pushstring(L, td.name().c_str());
+	const TerrainDescription* td = get_egbase(L).descriptions().get_terrain_descr(fcoords(L).field->terrain_d());
+	lua_pushstring(L, td->name().c_str());
 	return 1;
 }
 int LuaField::set_terd(lua_State* L) {

@@ -218,14 +218,14 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 
 			//  this node
 			{
-				const TerrainDescription& terr = descriptions.terrain_descr(f.field->terrain_r());
-				++m[terr.get_default_resource()];
-				amount += terr.get_default_resource_amount();
+				const TerrainDescription* terr = descriptions.get_terrain_descr(f.field->terrain_r());
+				++m[terr->get_default_resource()];
+				amount += terr->get_default_resource_amount();
 			}
 			{
-				const TerrainDescription& terd = descriptions.terrain_descr(f.field->terrain_d());
-				++m[terd.get_default_resource()];
-				amount += terd.get_default_resource_amount();
+				const TerrainDescription* terd = descriptions.get_terrain_descr(f.field->terrain_d());
+				++m[terd->get_default_resource()];
+				amount += terd->get_default_resource_amount();
 			}
 
 			//  If one of the neighbours is unwalkable, count its resource
@@ -233,10 +233,10 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 			//  top left neigbour
 			get_neighbour(f, WALK_NW, &f1);
 			{
-				const TerrainDescription& terr = descriptions.terrain_descr(f1.field->terrain_r());
-				const DescriptionIndex resr = terr.get_default_resource();
-				const ResourceAmount default_amount = terr.get_default_resource_amount();
-				if ((terr.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
+				const TerrainDescription* terr = descriptions.get_terrain_descr(f1.field->terrain_r());
+				const DescriptionIndex resr = terr->get_default_resource();
+				const ResourceAmount default_amount = terr->get_default_resource_amount();
+				if ((terr->get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
 					m[resr] += 3;
 				} else {
 					++m[resr];
@@ -244,10 +244,10 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 				amount += default_amount;
 			}
 			{
-				const TerrainDescription& terd = descriptions.terrain_descr(f1.field->terrain_d());
-				const DescriptionIndex resd = terd.get_default_resource();
-				const ResourceAmount default_amount = terd.get_default_resource_amount();
-				if ((terd.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
+				const TerrainDescription* terd = descriptions.get_terrain_descr(f1.field->terrain_d());
+				const DescriptionIndex resd = terd->get_default_resource();
+				const ResourceAmount default_amount = terd->get_default_resource_amount();
+				if ((terd->get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
 					m[resd] += 3;
 				} else {
 					++m[resd];
@@ -258,10 +258,10 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 			//  top right neigbour
 			get_neighbour(f, WALK_NE, &f1);
 			{
-				const TerrainDescription& terd = descriptions.terrain_descr(f1.field->terrain_d());
-				const DescriptionIndex resd = terd.get_default_resource();
-				const ResourceAmount default_amount = terd.get_default_resource_amount();
-				if ((terd.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
+				const TerrainDescription* terd = descriptions.get_terrain_descr(f1.field->terrain_d());
+				const DescriptionIndex resd = terd->get_default_resource();
+				const ResourceAmount default_amount = terd->get_default_resource_amount();
+				if ((terd->get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
 					m[resd] += 3;
 				} else {
 					++m[resd];
@@ -272,10 +272,10 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 			//  left neighbour
 			get_neighbour(f, WALK_W, &f1);
 			{
-				const TerrainDescription& terr = descriptions.terrain_descr(f1.field->terrain_r());
-				const DescriptionIndex resr = terr.get_default_resource();
-				const ResourceAmount default_amount = terr.get_default_resource_amount();
-				if ((terr.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
+				const TerrainDescription* terr = descriptions.get_terrain_descr(f1.field->terrain_r());
+				const DescriptionIndex resr = terr->get_default_resource();
+				const ResourceAmount default_amount = terr->get_default_resource_amount();
+				if ((terr->get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
 					m[resr] += 3;
 				} else {
 					++m[resr];
@@ -1399,14 +1399,14 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	const FCoords l = l_n(f);
 
 	const TerrainDescription::Is tr_d_terrain_is =
-	   descriptions.terrain_descr(tr.field->terrain_d()).get_is();
+	   descriptions.get_terrain_descr(tr.field->terrain_d())->get_is();
 	const TerrainDescription::Is tl_r_terrain_is =
-	   descriptions.terrain_descr(tl.field->terrain_r()).get_is();
+	   descriptions.get_terrain_descr(tl.field->terrain_r())->get_is();
 	const TerrainDescription::Is tl_d_terrain_is =
-	   descriptions.terrain_descr(tl.field->terrain_d()).get_is();
-	const TerrainDescription::Is l_r_terrain_is = descriptions.terrain_descr(l.field->terrain_r()).get_is();
-	const TerrainDescription::Is f_d_terrain_is = descriptions.terrain_descr(f.field->terrain_d()).get_is();
-	const TerrainDescription::Is f_r_terrain_is = descriptions.terrain_descr(f.field->terrain_r()).get_is();
+	   descriptions.get_terrain_descr(tl.field->terrain_d())->get_is();
+	const TerrainDescription::Is l_r_terrain_is = descriptions.get_terrain_descr(l.field->terrain_r())->get_is();
+	const TerrainDescription::Is f_d_terrain_is = descriptions.get_terrain_descr(f.field->terrain_d())->get_is();
+	const TerrainDescription::Is f_r_terrain_is = descriptions.get_terrain_descr(f.field->terrain_r())->get_is();
 
 	//  1b) Collect some information about the neighbours
 	uint8_t cnt_unwalkable = 0;
@@ -1675,12 +1675,12 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 	const FCoords l = l_n(f);
 
 	const Descriptions& descriptions = egbase.descriptions();
-	const TerrainDescription::Is terrains[6] = {descriptions.terrain_descr(tr.field->terrain_d()).get_is(),
-	                                            descriptions.terrain_descr(tl.field->terrain_r()).get_is(),
-	                                            descriptions.terrain_descr(tl.field->terrain_d()).get_is(),
-	                                            descriptions.terrain_descr(l.field->terrain_r()).get_is(),
-	                                            descriptions.terrain_descr(f.field->terrain_d()).get_is(),
-	                                            descriptions.terrain_descr(f.field->terrain_r()).get_is()};
+	const TerrainDescription::Is terrains[6] = {descriptions.get_terrain_descr(tr.field->terrain_d())->get_is(),
+	                                            descriptions.get_terrain_descr(tl.field->terrain_r())->get_is(),
+	                                            descriptions.get_terrain_descr(tl.field->terrain_d())->get_is(),
+	                                            descriptions.get_terrain_descr(l.field->terrain_r())->get_is(),
+	                                            descriptions.get_terrain_descr(f.field->terrain_d())->get_is(),
+	                                            descriptions.get_terrain_descr(f.field->terrain_r())->get_is()};
 
 	uint32_t cnt_mineable = 0;
 	uint32_t cnt_walkable = 0;
@@ -2337,22 +2337,22 @@ bool Map::is_resource_valid(const Widelands::Descriptions& descriptions,
 	int32_t count = 0;
 
 	//  this field
-	count += descriptions.terrain_descr(c.field->terrain_r()).is_resource_valid(curres);
-	count += descriptions.terrain_descr(c.field->terrain_d()).is_resource_valid(curres);
+	count += descriptions.get_terrain_descr(c.field->terrain_r())->is_resource_valid(curres);
+	count += descriptions.get_terrain_descr(c.field->terrain_d())->is_resource_valid(curres);
 
 	//  If one of the neighbours is impassable, count its resource stronger.
 	//  top left neigbour
 	get_neighbour(c, Widelands::WALK_NW, &f1);
-	count += descriptions.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
-	count += descriptions.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
+	count += descriptions.get_terrain_descr(f1.field->terrain_r())->is_resource_valid(curres);
+	count += descriptions.get_terrain_descr(f1.field->terrain_d())->is_resource_valid(curres);
 
 	//  top right neigbour
 	get_neighbour(c, Widelands::WALK_NE, &f1);
-	count += descriptions.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
+	count += descriptions.get_terrain_descr(f1.field->terrain_d())->is_resource_valid(curres);
 
 	//  left neighbour
 	get_neighbour(c, Widelands::WALK_W, &f1);
-	count += descriptions.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
+	count += descriptions.get_terrain_descr(f1.field->terrain_r())->is_resource_valid(curres);
 
 	return count > 1;
 }

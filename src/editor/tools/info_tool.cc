@@ -112,14 +112,14 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 	buf += as_heading(_("Terrain"), UI::PanelStyle::kWui);
 
 	const Widelands::Field& tf = (*map)[center.triangle.node];
-	const Widelands::TerrainDescription& ter = parent.egbase().descriptions().terrain_descr(
+	const Widelands::TerrainDescription* ter = parent.egbase().descriptions().get_terrain_descr(
 	   center.triangle.t == Widelands::TriangleIndex::D ? tf.terrain_d() : tf.terrain_r());
 
 	buf += as_listitem(
-	   (boost::format(pgettext("terrain_name", "Name: %s")) % ter.descname()).str(), font_style);
+	   (boost::format(pgettext("terrain_name", "Name: %s")) % ter->descname()).str(), font_style);
 
 	std::vector<std::string> terrain_is_strings;
-	for (const Widelands::TerrainDescription::Type& terrain_type : ter.get_types()) {
+	for (const Widelands::TerrainDescription::Type& terrain_type : ter->get_types()) {
 		terrain_is_strings.push_back(terrain_type.descname);
 	}
 

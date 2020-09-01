@@ -119,12 +119,12 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 
 	const Descriptions& descriptions = egbase_.descriptions();
 	DescriptionIndex const tix = fc.field->get_terrains().d;
-	const TerrainDescription& terrain_description = descriptions.terrain_descr(tix);
+	const TerrainDescription* terrain_description = descriptions.get_terrain_descr(tix);
 
-	const auto set_resource_helper = [this, &descriptions, &terrain_description, &fc](
+	const auto set_resource_helper = [this, &descriptions, terrain_description, &fc](
 	                                    const uint32_t random_value,
 	                                    const int valid_resource_index) {
-		const DescriptionIndex res_idx = terrain_description.get_valid_resource(valid_resource_index);
+		const DescriptionIndex res_idx = terrain_description->get_valid_resource(valid_resource_index);
 		const ResourceAmount max_amount = descriptions.get_resource_descr(res_idx)->max_amount();
 		ResourceAmount res_val =
 		   static_cast<ResourceAmount>(random_value / (kMaxElevation / max_amount));
@@ -135,7 +135,7 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 		}
 	};
 
-	switch (terrain_description.get_num_valid_resources()) {
+	switch (terrain_description->get_num_valid_resources()) {
 	case 1: {
 		uint32_t const rnd1 = random1[fc.x + map_info_.w * fc.y];
 		set_resource_helper(rnd1, 0);

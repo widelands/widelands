@@ -428,9 +428,9 @@ bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t
 	default:
 		NEVER_HERE();
 	}
-	return (egbase.descriptions().terrain_descr(fd.field->terrain_d()).get_is() &
+	return (egbase.descriptions().get_terrain_descr(fd.field->terrain_d())->get_is() &
 	        TerrainDescription::Is::kUnwalkable) &&
-	       (egbase.descriptions().terrain_descr(fr.field->terrain_r()).get_is() &
+	       (egbase.descriptions().get_terrain_descr(fr.field->terrain_r())->get_is() &
 	        TerrainDescription::Is::kUnwalkable);
 }
 

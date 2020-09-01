@@ -936,27 +936,27 @@ bool Worker::run_terraform(Game& game, State& state, const Action&) {
 	game.map().get_ln(f, &ln);
 
 	DescriptionIndex di =
-	   descriptions.terrain_index(descriptions.terrain_descr(f.field->terrain_r()).enhancement());
+	   descriptions.terrain_index(descriptions.get_terrain_descr(f.field->terrain_r())->enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::R), di));
 	}
-	di = descriptions.terrain_index(descriptions.terrain_descr(f.field->terrain_d()).enhancement());
+	di = descriptions.terrain_index(descriptions.get_terrain_descr(f.field->terrain_d())->enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::D), di));
 	}
-	di = descriptions.terrain_index(descriptions.terrain_descr(tln.field->terrain_r()).enhancement());
+	di = descriptions.terrain_index(descriptions.get_terrain_descr(tln.field->terrain_r())->enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::R), di));
 	}
-	di = descriptions.terrain_index(descriptions.terrain_descr(tln.field->terrain_d()).enhancement());
+	di = descriptions.terrain_index(descriptions.get_terrain_descr(tln.field->terrain_d())->enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::D), di));
 	}
-	di = descriptions.terrain_index(descriptions.terrain_descr(ln.field->terrain_r()).enhancement());
+	di = descriptions.terrain_index(descriptions.get_terrain_descr(ln.field->terrain_r())->enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(ln, TriangleIndex::R), di));
 	}
-	di = descriptions.terrain_index(descriptions.terrain_descr(trn.field->terrain_d()).enhancement());
+	di = descriptions.terrain_index(descriptions.get_terrain_descr(trn.field->terrain_d())->enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(trn, TriangleIndex::D), di));
 	}
@@ -2747,9 +2747,9 @@ void Worker::geologist_update(Game& game, State& state) {
 			FCoords target;
 
 			// is center a mountain piece?
-			bool is_center_mountain = (descriptions.terrain_descr(owner_area.field->terrain_d()).get_is() &
+			bool is_center_mountain = (descriptions.get_terrain_descr(owner_area.field->terrain_d())->get_is() &
 			                           TerrainDescription::Is::kMineable) |
-			                          (descriptions.terrain_descr(owner_area.field->terrain_r()).get_is() &
+			                          (descriptions.get_terrain_descr(owner_area.field->terrain_r())->get_is() &
 			                           TerrainDescription::Is::kMineable);
 			// Only run towards fields that are on a mountain (or not)
 			// depending on position of center
@@ -2759,9 +2759,9 @@ void Worker::geologist_update(Game& game, State& state) {
 			uint32_t i = game.logic_rand() % n;
 			do {
 				target = map.get_fcoords(list[game.logic_rand() % list.size()]);
-				is_target_mountain = (descriptions.terrain_descr(target.field->terrain_d()).get_is() &
+				is_target_mountain = (descriptions.get_terrain_descr(target.field->terrain_d())->get_is() &
 				                      TerrainDescription::Is::kMineable) |
-				                     (descriptions.terrain_descr(target.field->terrain_r()).get_is() &
+				                     (descriptions.get_terrain_descr(target.field->terrain_r())->get_is() &
 				                      TerrainDescription::Is::kMineable);
 				if (i == 0) {
 					i = list.size();

@@ -429,7 +429,7 @@ int LuaWorld::get_terrain_descriptions(lua_State* L) {
 	for (DescriptionIndex i = 0; i < descriptions.terrains().size(); ++i) {
 		lua_pushint32(L, index++);
 		to_lua<LuaMaps::LuaTerrainDescription>(
-		   L, new LuaMaps::LuaTerrainDescription(&descriptions.terrain_descr(i)));
+		   L, new LuaMaps::LuaTerrainDescription(descriptions.get_terrain_descr(i)));
 		lua_settable(L, -3);
 	}
 	return 1;

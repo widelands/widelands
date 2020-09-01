@@ -358,7 +358,7 @@ int LuaEditorGameBase::get_terrain_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string terrain_name = luaL_checkstring(L, 2);
-	const TerrainDescription* descr = get_egbase(L).descriptions().terrain_descr(terrain_name);
+	const TerrainDescription* descr = get_egbase(L).descriptions().get_terrain_descr(terrain_name);
 	if (!descr) {
 		report_error(L, "Terrain %s does not exist", terrain_name.c_str());
 	}
