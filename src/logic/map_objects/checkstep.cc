@@ -121,7 +121,12 @@ CheckStepFerry
 */
 bool CheckStepFerry::allowed(
    const Map& map, const FCoords& from, const FCoords& to, int32_t dir, CheckStep::StepId) const {
+	if (!(to.field->nodecaps() & MOVECAPS_WALK) && !(to.field->nodecaps() & MOVECAPS_SWIM)) {
+		// can't swim on lava
+		return false;
+	}
 	if (MOVECAPS_SWIM & (from.field->nodecaps() | to.field->nodecaps())) {
+		// open water
 		return true;
 	}
 	FCoords fd, fr;
@@ -155,6 +160,12 @@ bool CheckStepFerry::allowed(
 }
 
 bool CheckStepFerry::reachable_dest(const Map& map, const FCoords& dest) const {
+	if (dest.field->nodecaps() & MOVECAPS_SWIM) {
+		return true;
+	}
+	if (!(dest.field->nodecaps() & MOVECAPS_WALK)) {
+		return false;
+	}
 	for (int i = 1; i <= 6; ++i) {
 		if (allowed(map, dest, map.get_neighbour(dest, i), i, CheckStep::StepId::stepNormal)) {
 			return true;

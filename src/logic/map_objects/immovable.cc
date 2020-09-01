@@ -142,7 +142,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
      size_(BaseImmovable::NONE) {
 	if (!is_animation_known("idle")) {
-		throw GameDataError("Immovable %s has no idle animation", table.get_string("name").c_str());
+		throw GameDataError("Immovable %s has no idle animation", name().c_str());
 	}
 	if (table.has_key("size")) {
 		size_ = BaseImmovable::string_to_size(table.get_string("size"));
