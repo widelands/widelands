@@ -260,6 +260,13 @@ public:
 	void set_valign(UI::Align gvalign) {
 		valign_ = gvalign;
 	}
+
+	// True for nodes that need to stay aligned to the text baseline.
+	// False for the rest.
+	virtual bool align_to_baseline() const {
+		return false;
+	}
+
 	void set_x(int32_t nx) {
 		x_ = nx;
 	}
@@ -511,7 +518,9 @@ uint16_t Layout::fit_line(const uint16_t w_max,  // Maximum width of line
 		if (node->get_floating() != RenderNode::Floating::kNone) {
 			continue;
 		}
-		cur_line_hotspot = std::max(cur_line_hotspot, node->hotspot_y());
+		if (node->align_to_baseline()) {
+			cur_line_hotspot = std::max(cur_line_hotspot, node->hotspot_y());
+		}
 	}
 	return cur_line_hotspot;
 }
@@ -537,34 +546,54 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 		uint16_t biggest_hotspot = fit_line(w, p, &nodes_in_line, trim_spaces);
 
 		int line_height = 0;
+		int biggest_descent = 0;
 		int line_start = INFINITE_WIDTH;
+
 		// Compute real line height and width, taking into account alignment
 		for (const auto& n : nodes_in_line) {
 			if (n->get_floating() == RenderNode::Floating::kNone) {
-				line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
-				n->set_y(h_ + biggest_hotspot - n->hotspot_y());
+				if (n->align_to_baseline()) {
+					biggest_descent = std::max(biggest_descent, n->height() - n->hotspot_y());
+					line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
+				} else {
+					line_height = std::max(line_height, static_cast<int>(n->height()));
+				}
 			}
+
 			if (line_start >= INFINITE_WIDTH || n->x() < line_start) {
 				line_start = n->x() - p.left;
 			}
 			max_line_width = std::max<int>(max_line_width, n->x() + n->width() + p.right - line_start);
 		}
 
-		// Go over again and adjust position for VALIGN
+		// Go over again and set vertical positions of nodes depending on VALIGN
 		for (const auto& n : nodes_in_line) {
-			int space = line_height - n->height();
-			if (!space || n->valign() == UI::Align::kBottom) {
+			if (n->get_floating() != RenderNode::Floating::kNone) {
 				continue;
 			}
-			if (n->valign() == UI::Align::kCenter) {
+
+			// Empty space: how much the node can be moved within line boundaries
+			int space;
+			int baseline_correction;
+			if (n->align_to_baseline()) {
+				// Text nodes: Treat them as a group. Calculate the space using the same values
+				// for all nodes and correct for hotspot differences to align them to one common
+				// baseline.
+				space = line_height - biggest_hotspot - biggest_descent;
+				baseline_correction = biggest_hotspot - n->hotspot_y();
+			} else {
+				// Non-text nodes: Align each node independently to the top/bottom/center of
+				// the line.
+				space = line_height - n->height();
+				baseline_correction = 0;
+			}
+
+			if (n->valign() == UI::Align::kTop) {
+				space = 0;
+			} else if (n->valign() == UI::Align::kCenter) {
 				space /= 2;
 			}
-			// Space can become negative, for example when we have mixed fontsets on the same line
-			// (e.g. "default" and "arabic"), due to differing font heights and hotspots.
-			// So, we fix the sign.
-			if (n->get_floating() == RenderNode::Floating::kNone) {
-				n->set_y(std::abs(n->y() - space));
-			}
+			n->set_y(h_ + space + baseline_correction);
 		}
 		rv->insert(rv->end(), nodes_in_line.begin(), nodes_in_line.end());
 
@@ -604,6 +633,9 @@ public:
 	uint16_t height() const override {
 		return h_ + nodestyle_.spacing;
 	}
+	bool align_to_baseline() const override {
+		return true;
+	}
 	uint16_t hotspot_y() const override;
 	const std::vector<Reference> get_references() override {
 		std::vector<Reference> rv;
@@ -634,7 +666,26 @@ TextNode::TextNode(FontCache& font, NodeStyle& ns, const std::string& txt)
 	check_size();
 }
 uint16_t TextNode::hotspot_y() const {
-	return font_.ascent(nodestyle_.font_style);
+	// Getting the real ascent of a string from SDL_ttf is tricky.
+	// It's equal to TTF_FontAscent() or the maximum 'maxy' value of any glyph in the string,
+	// whichever is bigger.
+	const icu::UnicodeString unicode_txt(txt_.c_str(), "UTF-8");
+	int ascent = TTF_FontAscent(font_.get_ttf_font());
+	int shadow_offset = font_.ascent(nodestyle_.font_style) - ascent;
+
+	for (int i = 0; i < unicode_txt.length(); ++i) {
+		// TODO(Niektory): Use the 32-bit functions when we can use SDL_ttf 2.0.16
+		// (UChar32, char32At, TTF_GlyphIsProvided32, TTF_GlyphMetrics32)
+		UChar codepoint = unicode_txt.charAt(i);
+		int maxy;
+		if (TTF_GlyphIsProvided(font_.get_ttf_font(), codepoint) &&
+		    TTF_GlyphMetrics(
+		       font_.get_ttf_font(), codepoint, nullptr, nullptr, nullptr, &maxy, nullptr) == 0) {
+			ascent = std::max(ascent, maxy);
+		}
+	}
+
+	return ascent + shadow_offset;
 }
 
 std::shared_ptr<UI::RenderedText> TextNode::render(TextureCache* texture_cache) {
