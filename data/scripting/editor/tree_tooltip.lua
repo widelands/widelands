@@ -18,11 +18,13 @@ return {
       local terrain_list = terrain_affinity_list(tree)
 
       for k,v in ipairs(terrain_list) do
-         result = result .. img(v.terrain.representative_image) ..
-             (_("%2.1f%%")):bformat(100 * v.probability) .. space(8)
-         -- We have space for 3 terrains per row in tooltips
-         if k % 3 == 0 then
-            result = result .. "<br>"
+         if v.probability > 0.19 then
+            result = result .. img(v.terrain.representative_image) ..space(2) ..
+                (_("%2.1f%%")):bformat(100 * v.probability) .. space(12)
+            -- We have space for 3 terrains per row in tooltips
+            if k % 3 == 0 then
+               result = result .. "<br>"
+            end
          end
       end
 

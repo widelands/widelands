@@ -21,11 +21,13 @@ return {
 
       local tree_string = ""
       for k,v in ipairs(tree_list) do
-         tree_string = tree_string .. img_object(v.tree.name) ..
-             (_("%2.1f%%")):bformat(100 * v.probability) .. space(8)
-         -- We have space for 3 trees per row in tooltips
-         if k % 3 == 0 then
-            tree_string = tree_string .. "<br>"
+         if v.probability > 0.19 then
+            tree_string = tree_string .. img_object(v.tree.name) ..
+                (_("%2.1f%%")):bformat(100 * v.probability) .. space(8)
+            -- We have space for 3 trees per row in tooltips
+            if k % 3 == 0 then
+               tree_string = tree_string .. "<br>"
+            end
          end
       end
 
