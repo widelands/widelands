@@ -2493,7 +2493,8 @@ int LuaBuildingDescription::get_returns_on_dismantle(lua_State* L) {
          (RO) a list of wares returned upon dismantling an enhanced building.
 */
 int LuaBuildingDescription::get_enhancement_returns_on_dismantle(lua_State* L) {
-	return wares_or_workers_map_to_lua(L, get()->enhancement_returns_on_dismantle(), MapObjectType::WARE);
+	return wares_or_workers_map_to_lua(
+	   L, get()->enhancement_returns_on_dismantle(), MapObjectType::WARE);
 }
 
 /* RST
