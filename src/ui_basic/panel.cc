@@ -461,8 +461,19 @@ void Panel::draw(RenderTarget&) {
 void Panel::draw_border(RenderTarget&) {
 }
 
-Recti Panel::focus_overlay_rect() {
-	return Recti(0, 0, get_w(), get_h());
+constexpr int16_t kFocusRectStrength = 6;
+std::vector<Recti> Panel::focus_overlay_rects() {
+	const int16_t w = get_w();
+	const int16_t h = get_h();
+	if (w < 2 * kFocusRectStrength || h < 2 * kFocusRectStrength) {
+		return { Recti(0, 0, w, h) };
+	}
+	return {
+		Recti(0, 0, w, kFocusRectStrength),
+		Recti(0, h - kFocusRectStrength, w, kFocusRectStrength),
+		Recti(0, kFocusRectStrength, kFocusRectStrength, h - 2 * kFocusRectStrength),
+		Recti(w - kFocusRectStrength, kFocusRectStrength, kFocusRectStrength, h - 2 * kFocusRectStrength)
+	};
 }
 
 /**
@@ -478,10 +489,12 @@ void Panel::draw_overlay(RenderTarget& dst) {
 				break;
 			}
 		}
-		dst.fill_rect(focus_overlay_rect(),
-		              has_toplevel_focus ? g_style_manager->focused_color() :
-		                                   g_style_manager->semi_focused_color(),
-		              BlendMode::Default);
+		for (const Recti& r : focus_overlay_rects()) {
+			dst.fill_rect(r,
+				          has_toplevel_focus ? g_style_manager->focused_color() :
+				                               g_style_manager->semi_focused_color(),
+				          BlendMode::Default);
+		}
 	}
 }
 

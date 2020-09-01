@@ -102,12 +102,12 @@ TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
 	set_can_focus(true);
 }
 
-Recti TabPanel::focus_overlay_rect() {
+std::vector<Recti> TabPanel::focus_overlay_rects() {
 	if (active_ < tabs_.size()) {
 		const Tab& tab = *tabs_[active_];
-		return Recti(tab.get_x(), tab.get_y(), tab.get_w(), tab.get_h());
+		return { Recti(tab.get_x(), tab.get_y(), tab.get_w(), tab.get_h()) };
 	}
-	return Recti(0, 0, get_w(), kTabPanelButtonHeight);
+	return { Recti(0, 0, get_w(), kTabPanelButtonHeight) };
 }
 
 bool TabPanel::handle_key(bool down, SDL_Keysym code) {
