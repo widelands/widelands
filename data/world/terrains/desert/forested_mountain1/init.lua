@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 wl.World():new_terrain_type{
    name = "desert_forested_mountain1",
    descname = _ "Forested Mountain 1",
@@ -11,3 +13,5 @@ wl.World():new_terrain_type{
    humidity = 500,
    fertility = 500,
 }
+
+pop_textdomain()
