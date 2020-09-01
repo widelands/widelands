@@ -26,92 +26,87 @@
 #include "base/macros.h"
 #include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/description_manager.h"
-#include "logic/map_objects/immovable.h"
 #include "logic/map_objects/map_object_type.h"
-#include "logic/map_objects/tribes/building.h"
-#include "logic/map_objects/tribes/ship.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/ware_descr.h"
-#include "logic/map_objects/tribes/worker_descr.h"
+#include "logic/map_objects/tribes/wareworker.h"
+#include "map_io/tribes_legacy_lookup_table.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
 
+class BuildingDescr;
 class CritterDescr;
 class ImmovableDescr;
 class ResourceDescription;
+class ShipDescr;
 class TerrainDescription;
+class TribeDescr;
+class WareDescr;
+class WorkerDescr;
 
 class Descriptions {
 public:
 	Descriptions(DescriptionManager* description_manager, LuaInterface* lua);
 	~Descriptions() = default;
 
-	// NOCOM sort these
-	const DescriptionMaintainer<TerrainDescription>& terrains() const;
-	TerrainDescription& terrain_descr(DescriptionIndex i) const;
-	const TerrainDescription* terrain_descr(const std::string& name) const;
-	DescriptionIndex get_terrain_index(const std::string& name) const;
-	DescriptionIndex safe_terrain_index(const std::string& name) const;
-	DescriptionIndex get_nr_terrains() const;
-
 	const DescriptionMaintainer<CritterDescr>& critters() const;
-	DescriptionIndex critter_index(const std::string& name) const;
-	DescriptionIndex safe_critter_index(const std::string& name) const;
-	CritterDescr const* get_critter_descr(DescriptionIndex index) const;
-	CritterDescr const* get_critter_descr(const std::string& name) const;
-	DescriptionIndex get_nr_critters() const;
-
-
+	const DescriptionMaintainer<TerrainDescription>& terrains() const;
 	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
-	DescriptionIndex get_nr_immovables() const;
 
-	DescriptionIndex resource_index(const std::string& name) const;
-	DescriptionIndex safe_resource_index(const std::string& warename) const;
-	ResourceDescription const* get_resource(DescriptionIndex res) const;
-	DescriptionIndex get_nr_resources() const;
+	size_t nr_buildings() const;
+	size_t nr_critters() const;
+	size_t nr_immovables() const;
+	size_t nr_terrains() const;
+	size_t nr_tribes() const;
+	size_t nr_resources() const;
+	size_t nr_wares() const;
+	size_t nr_workers() const;
 
-
-
-	size_t nrbuildings() const;
-	size_t nrtribes() const;
-	size_t nrwares() const;
-	size_t nrworkers() const;
-
-	bool ware_exists(const std::string& warename) const;
-	bool ware_exists(DescriptionIndex index) const;
-	bool worker_exists(const std::string& workername) const;
-	bool worker_exists(DescriptionIndex index) const;
 	bool building_exists(const std::string& buildingname) const;
 	bool building_exists(DescriptionIndex index) const;
 	bool immovable_exists(DescriptionIndex index) const;
 	bool ship_exists(DescriptionIndex index) const;
 	bool tribe_exists(const std::string& tribename) const;
 	bool tribe_exists(DescriptionIndex index) const;
+	bool ware_exists(const std::string& warename) const;
+	bool ware_exists(DescriptionIndex index) const;
+	bool worker_exists(const std::string& workername) const;
+	bool worker_exists(DescriptionIndex index) const;
 
 	DescriptionIndex safe_building_index(const std::string& buildingname) const;
+	DescriptionIndex safe_critter_index(const std::string& critername) const;
 	DescriptionIndex safe_immovable_index(const std::string& immovablename) const;
+	DescriptionIndex safe_resource_index(const std::string& warename) const;
 	DescriptionIndex safe_ship_index(const std::string& shipname) const;
+	DescriptionIndex safe_terrain_index(const std::string& terrainname) const;
 	DescriptionIndex safe_tribe_index(const std::string& tribename) const;
 	DescriptionIndex safe_ware_index(const std::string& warename) const;
 	DescriptionIndex safe_worker_index(const std::string& workername) const;
 
 	DescriptionIndex building_index(const std::string& buildingname) const;
+	DescriptionIndex critter_index(const std::string& crittername) const;
 	DescriptionIndex immovable_index(const std::string& immovablename) const;
+	DescriptionIndex resource_index(const std::string& resourcename) const;
 	DescriptionIndex ship_index(const std::string& shipname) const;
+	DescriptionIndex terrain_index(const std::string& terrainname) const;
 	DescriptionIndex tribe_index(const std::string& tribename) const;
 	DescriptionIndex ware_index(const std::string& warename) const;
 	DescriptionIndex worker_index(const std::string& workername) const;
 
-	const BuildingDescr* get_building_descr(DescriptionIndex building_index) const;
-	BuildingDescr* get_mutable_building_descr(DescriptionIndex building_index) const;
-	const ImmovableDescr* get_immovable_descr(DescriptionIndex immovable_index) const;
-	const ShipDescr* get_ship_descr(DescriptionIndex ship_index) const;
-	const WareDescr* get_ware_descr(DescriptionIndex ware_index) const;
-	WareDescr* get_mutable_ware_descr(DescriptionIndex ware_index) const;
-	const WorkerDescr* get_worker_descr(DescriptionIndex worker_index) const;
-	WorkerDescr* get_mutable_worker_descr(DescriptionIndex worker_index) const;
-	const TribeDescr* get_tribe_descr(DescriptionIndex tribe_index) const;
+	const BuildingDescr* get_building_descr(DescriptionIndex index) const;
+	BuildingDescr* get_mutable_building_descr(DescriptionIndex index) const;
+	const CritterDescr* get_critter_descr(DescriptionIndex index) const;
+	const CritterDescr* get_critter_descr(const std::string& name) const;
+	const ImmovableDescr* get_immovable_descr(DescriptionIndex index) const;
+	const ResourceDescription* get_resource_descr(DescriptionIndex index) const;
+	const ShipDescr* get_ship_descr(DescriptionIndex index) const;
+	// NOCOM odd man out
+	TerrainDescription& terrain_descr(DescriptionIndex index) const;
+	const TerrainDescription* terrain_descr(const std::string& name) const;
+	const WareDescr* get_ware_descr(DescriptionIndex index) const;
+	WareDescr* get_mutable_ware_descr(DescriptionIndex index) const;
+	const WorkerDescr* get_worker_descr(DescriptionIndex index) const;
+	WorkerDescr* get_mutable_worker_descr(DescriptionIndex index) const;
+	const TribeDescr* get_tribe_descr(DescriptionIndex index) const;
 
 	// ************************ Loading *************************
 
@@ -125,22 +120,20 @@ public:
 	/// Adds a specific tribe's configuration.
 	void add_tribe(const LuaTable& table);
 
-
-	/// Load a critter that has been registered previously with 'register_description'
-	DescriptionIndex load_critter(const std::string& crittername);
-	/// Load a resource that has been registered previously with 'register_description'
-	DescriptionIndex load_resource(const std::string& resourcename);
-	/// Load a terrain that has been registered previously with 'register_description'
-	DescriptionIndex load_terrain(const std::string& terrainname);
-
-	/// Load a tribe that has been registered previously with 'register_description'
-	DescriptionIndex load_tribe(const std::string& tribename);
 	/// Load a building that has been registered previously with 'register_description'
 	DescriptionIndex load_building(const std::string& buildingname);
+	/// Load a critter that has been registered previously with 'register_description'
+	DescriptionIndex load_critter(const std::string& crittername);
 	/// Load an immovable that has been registered previously with 'register_description'
 	DescriptionIndex load_immovable(const std::string& immovablename);
+	/// Load a resource that has been registered previously with 'register_description'
+	DescriptionIndex load_resource(const std::string& resourcename);
 	/// Load a ship that has been registered previously with 'register_description'
 	DescriptionIndex load_ship(const std::string& shipname);
+	/// Load a terrain that has been registered previously with 'register_description'
+	DescriptionIndex load_terrain(const std::string& terrainname);
+	/// Load a tribe that has been registered previously with 'register_description'
+	DescriptionIndex load_tribe(const std::string& tribename);
 	/// Load a ware that has been registered previously with 'register_description'
 	DescriptionIndex load_ware(const std::string& warename);
 	/// Load a worker that has been registered previously with 'register_description'

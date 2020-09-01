@@ -113,7 +113,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      was_minimized_(false),
      low_production_(33),
      has_selection_(false),
-     nr_building_types_(parent.egbase().descriptions().nrbuildings()) {
+     nr_building_types_(parent.egbase().descriptions().nr_buildings()) {
 
 	building_buttons_ = std::vector<UI::Button*>(nr_building_types_);
 	owned_labels_ = std::vector<UI::Textarea*>(nr_building_types_);

@@ -87,8 +87,8 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	// Add resource buttons
 	resources_box_.add_inf_space();
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
-	for (Widelands::DescriptionIndex i = 0; i < descriptions.get_nr_resources(); ++i) {
-		const Widelands::ResourceDescription& resource = *descriptions.get_resource(i);
+	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_resources(); ++i) {
+		const Widelands::ResourceDescription& resource = *descriptions.get_resource_descr(i);
 		radiogroup_.add_button(&resources_box_, Vector2i::zero(),
 		                       g_image_cache->get(resource.representative_image()),
 		                       resource.descname());
@@ -151,6 +151,6 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
 void EditorToolChangeResourcesOptionsMenu::update() {
 	cur_selection_.set_text(
 	   (boost::format(_("Current: %s")) %
-	    eia().egbase().descriptions().get_resource(increase_tool_.set_tool().get_cur_res())->descname())
+	    eia().egbase().descriptions().get_resource_descr(increase_tool_.set_tool().get_cur_res())->descname())
 	      .str());
 }

@@ -39,7 +39,7 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndT
 		Widelands::ResourceAmount amount = mr.location().field->get_resources_amount();
 		Widelands::ResourceAmount max_amount =
 		   args->current_resource != Widelands::kNoResource ?
-		      descriptions.get_resource(args->current_resource)->max_amount() :
+		      descriptions.get_resource_descr(args->current_resource)->max_amount() :
 		      0;
 
 		amount += args->change_by;

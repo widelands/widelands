@@ -601,8 +601,8 @@ bool Warehouse::init(EditorGameBase& egbase) {
 }
 
 void Warehouse::init_containers(const Player& player) {
-	DescriptionIndex const nr_wares = player.egbase().descriptions().nrwares();
-	DescriptionIndex const nr_workers = player.egbase().descriptions().nrworkers();
+	DescriptionIndex const nr_wares = player.egbase().descriptions().nr_wares();
+	DescriptionIndex const nr_workers = player.egbase().descriptions().nr_workers();
 	supply_->set_nrwares(nr_wares);
 	supply_->set_nrworkers(nr_workers);
 

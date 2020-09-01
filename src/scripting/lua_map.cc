@@ -3599,7 +3599,7 @@ void LuaResourceDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
 	const Descriptions& descriptions = get_egbase(L).descriptions();
-	const ResourceDescription* descr = descriptions.get_resource(descriptions.safe_resource_index(name));
+	const ResourceDescription* descr = descriptions.get_resource_descr(descriptions.safe_resource_index(name));
 	set_description_pointer(descr);
 }
 
@@ -3759,9 +3759,9 @@ int LuaTerrainDescription::get_descname(lua_State* L) {
 int LuaTerrainDescription::get_default_resource(lua_State* L) {
 	DescriptionIndex res_index = get()->get_default_resource();
 	const Descriptions& descriptions = get_egbase(L).descriptions();
-	if (res_index != Widelands::kNoResource && res_index < descriptions.get_nr_resources()) {
+	if (res_index != Widelands::kNoResource && res_index < descriptions.nr_resources()) {
 		to_lua<LuaMaps::LuaResourceDescription>(
-		   L, new LuaMaps::LuaResourceDescription(descriptions.get_resource(res_index)));
+		   L, new LuaMaps::LuaResourceDescription(descriptions.get_resource_descr(res_index)));
 	} else {
 		lua_pushnil(L);
 	}
@@ -3834,10 +3834,10 @@ int LuaTerrainDescription::get_valid_resources(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
 	for (DescriptionIndex res_index : get()->valid_resources()) {
-		if (res_index != Widelands::kNoResource && res_index < descriptions.get_nr_resources()) {
+		if (res_index != Widelands::kNoResource && res_index < descriptions.nr_resources()) {
 			lua_pushint32(L, index++);
 			to_lua<LuaMaps::LuaResourceDescription>(
-			   L, new LuaMaps::LuaResourceDescription(descriptions.get_resource(res_index)));
+			   L, new LuaMaps::LuaResourceDescription(descriptions.get_resource_descr(res_index)));
 			lua_settable(L, -3);
 		}
 	}
@@ -6557,7 +6557,7 @@ int LuaField::get_viewpoint_y(lua_State* L) {
 int LuaField::get_resource(lua_State* L) {
 
 	const ResourceDescription* rDesc =
-	   get_egbase(L).descriptions().get_resource(fcoords(L).field->get_resources());
+	   get_egbase(L).descriptions().get_resource_descr(fcoords(L).field->get_resources());
 
 	lua_pushstring(L, rDesc ? rDesc->name().c_str() : "none");
 
@@ -6595,7 +6595,7 @@ int LuaField::set_resource_amount(lua_State* L) {
 	auto c = fcoords(L);
 	DescriptionIndex res = c.field->get_resources();
 	auto amount = luaL_checkint32(L, -1);
-	const ResourceDescription* resDesc = egbase.descriptions().get_resource(res);
+	const ResourceDescription* resDesc = egbase.descriptions().get_resource_descr(res);
 	ResourceAmount max_amount = resDesc ? resDesc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount) {

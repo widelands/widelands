@@ -59,7 +59,7 @@ Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
 	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
 	const TribeDescr& tribe = player.tribe();
 	DescriptionIndex const nr_wares_or_workers =
-	   wwtype == wwWARE ? player.egbase().descriptions().nrwares() : player.egbase().descriptions().nrworkers();
+	   wwtype == wwWARE ? player.egbase().descriptions().nr_wares() : player.egbase().descriptions().nr_workers();
 	wares_or_workers_.set_nrwares(nr_wares_or_workers);
 
 	target_quantities_ = new TargetQuantity[nr_wares_or_workers];

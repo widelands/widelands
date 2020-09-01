@@ -70,7 +70,7 @@ public:
 	size_t get_nrwares() const;
 	size_t get_nrworkers() const;
 
-	const std::vector<DescriptionIndex>& buildings() const;
+	const std::set<DescriptionIndex>& buildings() const;
 	const std::set<DescriptionIndex>& wares() const;
 	const std::set<DescriptionIndex>& workers() const;
 	const std::set<DescriptionIndex>& immovables() const;
@@ -189,7 +189,7 @@ private:
 	// (normal|busy) road or a waterway. The images are guaranteed to exist.
 	RoadTextures road_textures_;
 
-	std::vector<DescriptionIndex> buildings_;
+	std::set<DescriptionIndex> buildings_;
 	std::set<DescriptionIndex> immovables_;  // The player immovables
 	std::vector<std::string> ship_names_;
 	std::set<DescriptionIndex> workers_;

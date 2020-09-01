@@ -337,7 +337,7 @@ int LuaEditorGameBase::get_resource_description(lua_State* L) {
 	const std::string resource_name = luaL_checkstring(L, 2);
 	Descriptions* descriptions = get_egbase(L).mutable_descriptions();
 	try {
-		const ResourceDescription* descr = descriptions->get_resource(descriptions->load_resource(resource_name));
+		const ResourceDescription* descr = descriptions->get_resource_descr(descriptions->load_resource(resource_name));
 		return to_lua<LuaMaps::LuaResourceDescription>(L, new LuaMaps::LuaResourceDescription(descr));
 	} catch (const Widelands::GameDataError&) {
 		report_error(L, "Resource %s does not exist", resource_name.c_str());

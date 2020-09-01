@@ -1501,7 +1501,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	}
 
 	const std::string description = descr->name() + " " + production_program_name + " mine " +
-	                                descriptions.get_resource(resource_)->name();
+	                                descriptions.get_resource_descr(resource_)->name();
 	descr->workarea_info_[workarea_].insert(description);
 
 	descr->add_collected_resource(arguments.front());

@@ -726,7 +726,7 @@ void ProductionSite::request_worker_callback(
 		}
 		if (!worker_placed) {
 			// Find the next smaller version of this worker
-			DescriptionIndex nuwo = game.descriptions().nrworkers();
+			DescriptionIndex nuwo = game.descriptions().nr_workers();
 			DescriptionIndex current = 0;
 			for (; current < nuwo; ++current) {
 				WorkerDescr const* worker = game.descriptions().get_worker_descr(current);

@@ -125,7 +125,7 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 	                                    const uint32_t random_value,
 	                                    const int valid_resource_index) {
 		const DescriptionIndex res_idx = terrain_description.get_valid_resource(valid_resource_index);
-		const ResourceAmount max_amount = descriptions.get_resource(res_idx)->max_amount();
+		const ResourceAmount max_amount = descriptions.get_resource_descr(res_idx)->max_amount();
 		ResourceAmount res_val =
 		   static_cast<ResourceAmount>(random_value / (kMaxElevation / max_amount));
 		res_val *= static_cast<ResourceAmount>(map_info_.resource_amount) + 1;

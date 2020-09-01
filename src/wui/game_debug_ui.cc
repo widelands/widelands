@@ -330,7 +330,7 @@ void FieldDebugWindow::think() {
 			const Widelands::ResourceAmount initial_amount = coords_.field->get_initial_res_amount();
 
 			str += (boost::format("Resource: %s\n") %
-			        ibase().egbase().descriptions().get_resource(ridx)->name().c_str())
+			        ibase().egbase().descriptions().get_resource_descr(ridx)->name().c_str())
 			          .str();
 
 			str += (boost::format("  Amount: %i/%i\n") % static_cast<unsigned int>(ramount) %

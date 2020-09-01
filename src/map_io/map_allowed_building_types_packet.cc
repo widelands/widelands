@@ -64,7 +64,7 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 				//  All building types default to false in the game (not in the
 				//  editor).
 				if (game) {
-					for (DescriptionIndex i = 0; i < game->descriptions().nrbuildings(); ++i) {
+					for (DescriptionIndex i = 0; i < game->descriptions().nr_buildings(); ++i) {
 						player->allow_building_type(i, false);
 					}
 				}

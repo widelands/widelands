@@ -406,7 +406,7 @@ int LuaWorld::get_immovable_descriptions(lua_State* L) {
 	const Descriptions& descriptions = get_egbase(L).descriptions();
 	lua_newtable(L);
 	int index = 1;
-	for (DescriptionIndex i = 0; i < descriptions.get_nr_immovables(); ++i) {
+	for (DescriptionIndex i = 0; i < descriptions.nr_immovables(); ++i) {
 		lua_pushint32(L, index++);
 		to_lua<LuaMaps::LuaImmovableDescription>(
 		   L, new LuaMaps::LuaImmovableDescription(descriptions.get_immovable_descr(i)));

@@ -587,7 +587,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		uint8_t const amount = field.fcoords.field->get_resources_amount();
 		if (draw_resources_ && amount > 0) {
 			const std::string& immname =
-			   descriptions.get_resource(field.fcoords.field->get_resources())->editor_image(amount);
+			   descriptions.get_resource_descr(field.fcoords.field->get_resources())->editor_image(amount);
 			if (!immname.empty()) {
 				const auto* pic = g_image_cache->get(immname);
 				blit_field_overlay(

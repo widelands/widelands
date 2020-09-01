@@ -936,27 +936,27 @@ bool Worker::run_terraform(Game& game, State& state, const Action&) {
 	game.map().get_ln(f, &ln);
 
 	DescriptionIndex di =
-	   descriptions.get_terrain_index(descriptions.terrain_descr(f.field->terrain_r()).enhancement());
+	   descriptions.terrain_index(descriptions.terrain_descr(f.field->terrain_r()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::R), di));
 	}
-	di = descriptions.get_terrain_index(descriptions.terrain_descr(f.field->terrain_d()).enhancement());
+	di = descriptions.terrain_index(descriptions.terrain_descr(f.field->terrain_d()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::D), di));
 	}
-	di = descriptions.get_terrain_index(descriptions.terrain_descr(tln.field->terrain_r()).enhancement());
+	di = descriptions.terrain_index(descriptions.terrain_descr(tln.field->terrain_r()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::R), di));
 	}
-	di = descriptions.get_terrain_index(descriptions.terrain_descr(tln.field->terrain_d()).enhancement());
+	di = descriptions.terrain_index(descriptions.terrain_descr(tln.field->terrain_d()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::D), di));
 	}
-	di = descriptions.get_terrain_index(descriptions.terrain_descr(ln.field->terrain_r()).enhancement());
+	di = descriptions.terrain_index(descriptions.terrain_descr(ln.field->terrain_r()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(ln, TriangleIndex::R), di));
 	}
-	di = descriptions.get_terrain_index(descriptions.terrain_descr(trn.field->terrain_d()).enhancement());
+	di = descriptions.terrain_index(descriptions.terrain_descr(trn.field->terrain_d()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(trn, TriangleIndex::D), di));
 	}
@@ -1036,7 +1036,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 
 	if (!(imm && imm->get_size() > BaseImmovable::NONE)) {
 
-		const ResourceDescription* const rdescr = descriptions.get_resource(position.field->get_resources());
+		const ResourceDescription* const rdescr = descriptions.get_resource_descr(position.field->get_resources());
 		const TribeDescr& t = owner().tribe();
 		const Immovable& ri = game.create_immovable(
 		   position,

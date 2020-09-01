@@ -94,12 +94,12 @@ void MapResourcesPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 	// Write the number of resources
 	const Map& map = egbase.map();
 	const Descriptions& descriptions = egbase.descriptions();
-	uint8_t const nr_res = descriptions.get_nr_resources();
+	uint8_t const nr_res = descriptions.nr_resources();
 	fw.unsigned_16(nr_res);
 
 	//  write all resources names and their id's
 	for (int32_t i = 0; i < nr_res; ++i) {
-		const ResourceDescription& res = *descriptions.get_resource(i);
+		const ResourceDescription& res = *descriptions.get_resource_descr(i);
 		fw.unsigned_16(i);
 		fw.c_string(res.name().c_str());
 	}

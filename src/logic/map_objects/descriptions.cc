@@ -26,6 +26,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/ferry.h"
@@ -36,10 +37,14 @@
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/immovable.h"
 
 namespace Widelands {
 Descriptions::Descriptions(DescriptionManager* description_manager, LuaInterface* lua)
@@ -76,19 +81,38 @@ Descriptions::Descriptions(DescriptionManager* description_manager, LuaInterface
 	description_manager_->register_directory("tribes", g_fs, false);
 }
 
-size_t Descriptions::nrbuildings() const {
+const DescriptionMaintainer<CritterDescr>& Descriptions::critters() const {
+	return *critters_;
+}
+const DescriptionMaintainer<ImmovableDescr>& Descriptions::immovables() const {
+	return *immovables_;
+}
+const DescriptionMaintainer<TerrainDescription>& Descriptions::terrains() const {
+	return *terrains_;
+}
+
+size_t Descriptions::nr_buildings() const {
 	return buildings_->size();
 }
-
-size_t Descriptions::nrtribes() const {
+size_t Descriptions::nr_critters() const {
+	return critters_->size();
+}
+size_t Descriptions::nr_immovables() const {
+	return immovables_->size();
+}
+size_t Descriptions::nr_resources() const {
+	return resources_->size();
+}
+size_t Descriptions::nr_terrains() const {
+	return terrains_->size();
+}
+size_t Descriptions::nr_tribes() const {
 	return tribes_->size();
 }
-
-size_t Descriptions::nrwares() const {
+size_t Descriptions::nr_wares() const {
 	return wares_->size();
 }
-
-size_t Descriptions::nrworkers() const {
+size_t Descriptions::nr_workers() const {
 	return workers_->size();
 }
 
@@ -127,48 +151,67 @@ DescriptionIndex Descriptions::safe_building_index(const std::string& buildingna
 	const DescriptionIndex result =
 	   building_index(legacy_lookup_table_->lookup_building(buildingname));
 	if (!building_exists(result)) {
-		throw GameDataError("Unknown building type \"%s\"", buildingname.c_str());
+		throw GameDataError("Unknown building '%s'", buildingname.c_str());
 	}
 	return result;
 }
+DescriptionIndex Descriptions::safe_critter_index(const std::string& critername) const {
+	DescriptionIndex const result = critter_index(critername);
 
+	if (result == INVALID_INDEX) {
+		throw GameDataError("Unknown critter '%s'", critername.c_str());
+	}
+	return result;
+}
 DescriptionIndex Descriptions::safe_immovable_index(const std::string& immovablename) const {
 	const DescriptionIndex result =
 	   immovable_index(legacy_lookup_table_->lookup_immovable(immovablename));
 	if (!immovable_exists(result)) {
-		throw GameDataError("Unknown immovable type \"%s\"", immovablename.c_str());
+		throw GameDataError("Unknown immovable '%s'", immovablename.c_str());
 	}
 	return result;
 }
+DescriptionIndex Descriptions::safe_resource_index(const std::string& resourcename) const {
+	DescriptionIndex const result = resource_index(resourcename);
 
+	if (result == INVALID_INDEX) {
+		throw GameDataError("Unknown resource '%s'", resourcename.c_str());
+	}
+	return result;
+}
 DescriptionIndex Descriptions::safe_ship_index(const std::string& shipname) const {
 	const DescriptionIndex result = ship_index(legacy_lookup_table_->lookup_ship(shipname));
 	if (!ship_exists(result)) {
-		throw GameDataError("Unknown ship type \"%s\"", shipname.c_str());
+		throw GameDataError("Unknown ship '%s'", shipname.c_str());
 	}
 	return result;
 }
+DescriptionIndex Descriptions::safe_terrain_index(const std::string& terrainname) const {
+	DescriptionIndex const result = terrain_index(terrainname);
 
+	if (result == INVALID_INDEX) {
+		throw GameDataError("Unknown terrain '%s'", terrainname.c_str());
+	}
+	return result;
+}
 DescriptionIndex Descriptions::safe_tribe_index(const std::string& tribename) const {
 	const DescriptionIndex result = tribe_index(tribename);
 	if (!tribe_exists(result)) {
-		throw GameDataError("Unknown tribe \"%s\"", tribename.c_str());
+		throw GameDataError("Unknown tribe '%s'", tribename.c_str());
 	}
 	return result;
 }
-
 DescriptionIndex Descriptions::safe_ware_index(const std::string& warename) const {
 	const DescriptionIndex result = ware_index(legacy_lookup_table_->lookup_ware(warename));
 	if (!ware_exists(result)) {
-		throw GameDataError("Unknown ware type \"%s\"", warename.c_str());
+		throw GameDataError("Unknown ware '%s'", warename.c_str());
 	}
 	return result;
 }
-
 DescriptionIndex Descriptions::safe_worker_index(const std::string& workername) const {
 	const DescriptionIndex result = worker_index(legacy_lookup_table_->lookup_worker(workername));
 	if (!worker_exists(result)) {
-		throw GameDataError("Unknown worker type \"%s\"", workername.c_str());
+		throw GameDataError("Unknown worker '%s'", workername.c_str());
 	}
 	return result;
 }
@@ -176,15 +219,21 @@ DescriptionIndex Descriptions::safe_worker_index(const std::string& workername) 
 DescriptionIndex Descriptions::building_index(const std::string& buildingname) const {
 	return buildings_->get_index(buildingname);
 }
-
+DescriptionIndex Descriptions::critter_index(const std::string& crittername) const {
+	return critters_->get_index(crittername);
+}
 DescriptionIndex Descriptions::immovable_index(const std::string& immovablename) const {
 	return immovables_->get_index(immovablename);
 }
-
+DescriptionIndex Descriptions::resource_index(const std::string& resourcename) const {
+	return resourcename != "none" ? resources_->get_index(resourcename) : Widelands::kNoResource;
+}
 DescriptionIndex Descriptions::ship_index(const std::string& shipname) const {
 	return ships_->get_index(shipname);
 }
-
+DescriptionIndex Descriptions::terrain_index(const std::string& terrainname) const {
+	return terrains_->get_index(terrainname);
+}
 DescriptionIndex Descriptions::tribe_index(const std::string& tribename) const {
 	return tribes_->get_index(tribename);
 }
@@ -197,38 +246,59 @@ DescriptionIndex Descriptions::worker_index(const std::string& workername) const
 	return workers_->get_index(workername);
 }
 
-const BuildingDescr* Descriptions::get_building_descr(DescriptionIndex buildingindex) const {
-	return buildings_->get_mutable(buildingindex);
+const BuildingDescr* Descriptions::get_building_descr(DescriptionIndex index) const {
+	return buildings_->get_mutable(index);
 }
 
-BuildingDescr* Descriptions::get_mutable_building_descr(DescriptionIndex buildingindex) const {
-	return buildings_->get_mutable(buildingindex);
+BuildingDescr* Descriptions::get_mutable_building_descr(DescriptionIndex index) const {
+	return buildings_->get_mutable(index);
 }
 
-const ImmovableDescr* Descriptions::get_immovable_descr(DescriptionIndex immovableindex) const {
-	return immovables_->get_mutable(immovableindex);
+const CritterDescr* Descriptions::get_critter_descr(DescriptionIndex index) const {
+	return critters_->get_mutable(index);
+}
+const CritterDescr* Descriptions::get_critter_descr(const std::string& name) const {
+	return critters_->exists(name.c_str());
 }
 
-const ShipDescr* Descriptions::get_ship_descr(DescriptionIndex shipindex) const {
-	return ships_->get_mutable(shipindex);
+const ImmovableDescr* Descriptions::get_immovable_descr(DescriptionIndex index) const {
+	return immovables_->get_mutable(index);
 }
 
-const WareDescr* Descriptions::get_ware_descr(DescriptionIndex wareindex) const {
-	return wares_->get_mutable(wareindex);
-}
-WareDescr* Descriptions::get_mutable_ware_descr(DescriptionIndex wareindex) const {
-	return wares_->get_mutable(wareindex);
+const ResourceDescription* Descriptions::get_resource_descr(DescriptionIndex const index) const {
+	assert(index < resources_->size() || index == Widelands::kNoResource);
+	return resources_->get_mutable(index);
 }
 
-const WorkerDescr* Descriptions::get_worker_descr(DescriptionIndex workerindex) const {
-	return workers_->get_mutable(workerindex);
-}
-WorkerDescr* Descriptions::get_mutable_worker_descr(DescriptionIndex workerindex) const {
-	return workers_->get_mutable(workerindex);
+const ShipDescr* Descriptions::get_ship_descr(DescriptionIndex index) const {
+	return ships_->get_mutable(index);
 }
 
-const TribeDescr* Descriptions::get_tribe_descr(DescriptionIndex tribeindex) const {
-	return tribes_->get_mutable(tribeindex);
+TerrainDescription& Descriptions::terrain_descr(DescriptionIndex const i) const {
+	return *terrains_->get_mutable(i);
+}
+
+const TerrainDescription* Descriptions::terrain_descr(const std::string& name) const {
+	DescriptionIndex const i = terrains_->get_index(name);
+	return i != INVALID_INDEX ? terrains_->get_mutable(i) : nullptr;
+}
+
+const WareDescr* Descriptions::get_ware_descr(DescriptionIndex index) const {
+	return wares_->get_mutable(index);
+}
+WareDescr* Descriptions::get_mutable_ware_descr(DescriptionIndex index) const {
+	return wares_->get_mutable(index);
+}
+
+const WorkerDescr* Descriptions::get_worker_descr(DescriptionIndex index) const {
+	return workers_->get_mutable(index);
+}
+WorkerDescr* Descriptions::get_mutable_worker_descr(DescriptionIndex index) const {
+	return workers_->get_mutable(index);
+}
+
+const TribeDescr* Descriptions::get_tribe_descr(DescriptionIndex index) const {
+	return tribes_->get_mutable(index);
 }
 
 // ************************ Loading *************************
@@ -418,16 +488,6 @@ void Descriptions::increase_largest_workarea(uint32_t workarea) {
 	largest_workarea_ = std::max(largest_workarea_, workarea);
 }
 
-// NOCOM sort
-
-const DescriptionMaintainer<TerrainDescription>& Descriptions::terrains() const {
-	return *terrains_;
-}
-
-const DescriptionMaintainer<ImmovableDescr>& Descriptions::immovables() const {
-	return *immovables_;
-}
-
 DescriptionIndex Descriptions::load_critter(const std::string& crittername) {
 	try {
 		description_manager_->load_description(crittername);
@@ -455,87 +515,6 @@ DescriptionIndex Descriptions::load_terrain(const std::string& terrainname) {
 		   "Error while loading terrain type '%s': %s", terrainname.c_str(), e.what());
 	}
 	return safe_terrain_index(terrainname);
-}
-
-TerrainDescription& Descriptions::terrain_descr(DescriptionIndex const i) const {
-	return *terrains_->get_mutable(i);
-}
-
-const TerrainDescription* Descriptions::terrain_descr(const std::string& name) const {
-	DescriptionIndex const i = terrains_->get_index(name);
-	return i != INVALID_INDEX ? terrains_->get_mutable(i) : nullptr;
-}
-
-DescriptionIndex Descriptions::get_terrain_index(const std::string& name) const {
-	return terrains_->get_index(name);
-}
-DescriptionIndex Descriptions::safe_terrain_index(const std::string& name) const {
-	DescriptionIndex const result = get_terrain_index(name);
-
-	if (result == INVALID_INDEX) {
-		throw GameDataError("'%s' has not been registered as a terrain type", name.c_str());
-	}
-	return result;
-}
-
-DescriptionIndex Descriptions::get_nr_terrains() const {
-	return terrains_->size();
-}
-
-DescriptionIndex Descriptions::get_nr_critters() const {
-	return critters_->size();
-}
-
-DescriptionIndex Descriptions::critter_index(const std::string& name) const {
-	return critters_->get_index(name);
-}
-DescriptionIndex Descriptions::safe_critter_index(const std::string& name) const {
-	DescriptionIndex const result = critter_index(name);
-
-	if (result == INVALID_INDEX) {
-		throw GameDataError("'%s' has not been registered as a critter type", name.c_str());
-	}
-	return result;
-}
-
-const DescriptionMaintainer<CritterDescr>& Descriptions::critters() const {
-	return *critters_;
-}
-
-CritterDescr const* Descriptions::get_critter_descr(DescriptionIndex index) const {
-	return critters_->get_mutable(index);
-}
-
-CritterDescr const* Descriptions::get_critter_descr(const std::string& name) const {
-	return critters_->exists(name.c_str());
-}
-
-DescriptionIndex Descriptions::get_nr_immovables() const {
-	return immovables_->size();
-}
-
-DescriptionIndex Descriptions::resource_index(const std::string& name) const {
-	return name != "none" ? resources_->get_index(name) : Widelands::kNoResource;
-}
-DescriptionIndex Descriptions::safe_resource_index(const std::string& resourcename) const {
-	DescriptionIndex const result = resource_index(resourcename);
-
-	if (result == INVALID_INDEX) {
-		throw GameDataError("'%s' has not been registered as a resource type", resourcename.c_str());
-	}
-	return result;
-}
-
-/***
- * @return The ResourceDescription for the given index. Returns Nullptr for kNoResource.
- */
-ResourceDescription const* Descriptions::get_resource(DescriptionIndex const res) const {
-	assert(res < resources_->size() || res == Widelands::kNoResource);
-	return resources_->get_mutable(res);
-}
-
-DescriptionIndex Descriptions::get_nr_resources() const {
-	return resources_->size();
 }
 
 }  // namespace Widelands

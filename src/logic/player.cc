@@ -114,7 +114,7 @@ void find_former_buildings(const Descriptions& descriptions,
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		for (DescriptionIndex i = 0; i < descriptions.nrbuildings(); ++i) {
+		for (DescriptionIndex i = 0; i < descriptions.nr_buildings(); ++i) {
 			const BuildingDescr* building_descr = descriptions.get_building_descr(i);
 			if (building_descr->enhancement() == oldest_idx) {
 				former_buildings->insert(former_buildings->begin(), std::make_pair(i, MapObjectType::BUILDING));
@@ -1615,7 +1615,7 @@ Player::get_building_statistics(const DescriptionIndex& i) const {
 }
 
 Player::BuildingStatsVector* Player::get_mutable_building_statistics(const DescriptionIndex& i) {
-	DescriptionIndex const nr_buildings = egbase().descriptions().nrbuildings();
+	DescriptionIndex const nr_buildings = egbase().descriptions().nr_buildings();
 	if (building_stats_.size() < nr_buildings) {
 		building_stats_.resize(nr_buildings);
 	}
@@ -1631,7 +1631,7 @@ void Player::update_building_statistics(Building& building, NoteImmovable::Owner
 	const std::string& building_name =
 	   constructionsite ? constructionsite->building().name() : building.descr().name();
 
-	const size_t nr_buildings = egbase().descriptions().nrbuildings();
+	const size_t nr_buildings = egbase().descriptions().nr_buildings();
 
 	// Get the valid vector for this
 	if (building_stats_.size() < nr_buildings) {

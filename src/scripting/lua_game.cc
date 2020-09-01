@@ -141,7 +141,7 @@ int LuaPlayer::get_allowed_buildings(lua_State* L) {
 	Player& player = get(L, egbase);
 
 	lua_newtable(L);
-	for (DescriptionIndex i = 0; i < egbase.descriptions().nrbuildings(); ++i) {
+	for (DescriptionIndex i = 0; i < egbase.descriptions().nr_buildings(); ++i) {
 		const BuildingDescr* building_descr = egbase.descriptions().get_building_descr(i);
 		lua_pushstring(L, building_descr->name().c_str());
 		lua_pushboolean(L, player.is_building_type_allowed(i));
@@ -926,7 +926,7 @@ void LuaPlayer::parse_building_list(lua_State* L,
 		}
 		// Only act on buildings that the tribe has or could conquer
 		const TribeDescr& tribe_descr = get(L, egbase).tribe();
-		for (size_t i = 0; i < descriptions.nrbuildings(); ++i) {
+		for (size_t i = 0; i < descriptions.nr_buildings(); ++i) {
 			const DescriptionIndex& building_index = static_cast<DescriptionIndex>(i);
 			const BuildingDescr& descr = *tribe_descr.get_building_descr(building_index);
 			if (tribe_descr.has_building(building_index) ||

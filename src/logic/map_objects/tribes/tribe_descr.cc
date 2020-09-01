@@ -341,9 +341,9 @@ void TribeDescr::load_immovables(const LuaTable& table, Descriptions& descriptio
 	};
 
 	// Verify the resource indicators
-	for (DescriptionIndex resource_index = 0; resource_index < descriptions.get_nr_resources();
+	for (DescriptionIndex resource_index = 0; resource_index < descriptions.nr_resources();
 	     resource_index++) {
-		const ResourceDescription* res = descriptions.get_resource(resource_index);
+		const ResourceDescription* res = descriptions.get_resource_descr(resource_index);
 		if (res->detectable()) {
 			// This function will throw an exception if this tribe doesn't have a high enough resource
 			// indicator for this resource
@@ -449,7 +449,7 @@ size_t TribeDescr::get_nrworkers() const {
 	return workers_.size();
 }
 
-const std::vector<DescriptionIndex>& TribeDescr::buildings() const {
+const std::set<DescriptionIndex>& TribeDescr::buildings() const {
 	return buildings_;
 }
 const std::set<DescriptionIndex>& TribeDescr::wares() const {
@@ -634,7 +634,7 @@ void TribeDescr::add_building(const std::string& buildingname, Descriptions& des
 		if (has_building(index)) {
 			throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
 		}
-		buildings_.push_back(index);
+		buildings_.insert(index);
 
 		const BuildingDescr* building_descr = get_building_descr(index);
 
@@ -843,7 +843,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 			} break;
 			case MapObjectType::BOB: {
 				// We only support critters here, because no other bobs are collected so far
-				for (DescriptionIndex i = 0; i < descriptions.get_nr_critters(); ++i) {
+				for (DescriptionIndex i = 0; i < descriptions.nr_critters(); ++i) {
 					const CritterDescr* critter = descriptions.get_critter_descr(i);
 					if (critter->has_attribute(attribute_id)) {
 						prod->add_collected_bob(critter->name());

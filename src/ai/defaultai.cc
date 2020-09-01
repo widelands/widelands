@@ -531,13 +531,13 @@ void DefaultAI::late_initialization() {
 		log_info_time(gametime, "    ... member of team %d\n", player_->team_number());
 	}
 
-	wares.resize(game().descriptions().nrwares());
-	for (DescriptionIndex i = 0; i < static_cast<DescriptionIndex>(game().descriptions().nrwares()); ++i) {
+	wares.resize(game().descriptions().nr_wares());
+	for (DescriptionIndex i = 0; i < static_cast<DescriptionIndex>(game().descriptions().nr_wares()); ++i) {
 		wares.at(i).preciousness =
 		   game().descriptions().get_ware_descr(i)->ai_hints().preciousness(tribe_->name());
 	}
 
-	const DescriptionIndex& nr_buildings = game().descriptions().nrbuildings();
+	const DescriptionIndex& nr_buildings = game().descriptions().nr_buildings();
 
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
@@ -6768,7 +6768,7 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 			continue;
 		}
 
-		DescriptionIndex nritems = player_->egbase().descriptions().nrwares();
+		DescriptionIndex nritems = player_->egbase().descriptions().nr_wares();
 		for (Widelands::DescriptionIndex id = 0; id < nritems; ++id) {
 
 			// Just skip wares that are not used by a tribe
@@ -6878,7 +6878,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 
 	PlayerNumber const pn = player_number();
 
-	const DescriptionIndex& nr_buildings = game().descriptions().nrbuildings();
+	const DescriptionIndex& nr_buildings = game().descriptions().nr_buildings();
 	std::set<DescriptionIndex> materials;
 
 	// Collect information about the different buildings that our tribe can have
