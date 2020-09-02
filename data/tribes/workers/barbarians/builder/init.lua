@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
    name = "barbarians_builder",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Builder"),
@@ -39,8 +40,10 @@ tribes:new_worker_type {
          hotspot = { 9, 22 },
          sound_effect = {
             path = "sound/hammering/hammering",
-            priority = 64
+            priority = 50
          }
       }
    }
 }
+
+pop_textdomain()

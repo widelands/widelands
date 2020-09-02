@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-05-20 11:32+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-26 12:03+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -306,7 +306,7 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr "Wenn Straten lange starken Verkehr hebben, is een Lastendrager mennigtied nich genoog, um Waren fix to transporteren. Da gahn Staus na. Sülke Straten kriegen daarum eenen tweeden Lastendrager: een Oss helpt, Waren to dragen. Dat verdübbelt de Kansen tum Transport."
+msgstr "Wenn Straten lange starken Verkehr hebben, is een Lastendrager mennigtied nich genoog, um Waren fix to transporteren. Daar gahn Staus na. Sülke Straten kriegen daarum eenen tweeden Lastendrager: een Oss helpt, Waren to dragen. Dat verdübbelt de Kansen tum Transport."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 msgid "Oxen are bred in cattle farms out of wheat and water."
@@ -1027,8 +1027,3 @@ msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr "Aver se sünd bang, dat de Krieg um Alltunraan deeses Leven ennt. Daarum wullen se sik uns ansluten; se hopen, dat wi eenanner helpen könen."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "»%s«"

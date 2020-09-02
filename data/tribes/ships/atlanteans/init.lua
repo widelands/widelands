@@ -9,25 +9,7 @@
 --
 -- Ships are defined in
 -- ``data/tribes/ships/<tribe_name>/init.lua``.
-
-dirname = path.dirname(__file__)
-
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 89, 86 },
-      fps = 10
-   },
-   sinking = {
-      pictures = path.list_files(dirname .. "sinking_??.png"),
-      hotspot = { 89, 86 },
-      fps = 7
-   }
-}
-add_directional_animation(animations, "sail", dirname, "sail", {89, 86}, 10)
-
-
--- RST
+--
 -- .. function:: new_ship_type(table)
 --
 --    This function adds the definition of a ship to the engine.
@@ -35,13 +17,9 @@ add_directional_animation(animations, "sail", dirname, "sail", {89, 86}, 10)
 --    :arg table: This table contains all the data that the game engine will
 --                add to this ship. It contains the following entries:
 --
---    **msgctxt**: The context that Gettext will use to disambiguate the
---    translations for strings in this table.
---
 --    **name**: A string containing the internal name of this ship.
 --
---    **descname**: The translatable display name. Use ``pgettext`` with the
---    ``msgctxt`` above to fetch the string.
+--    **descname**: The translatable display name. Use ``pgettext`` to fetch the string.
 --
 --    **icon**: Path to the menu icon file.
 --
@@ -51,12 +29,72 @@ add_directional_animation(animations, "sail", dirname, "sail", {89, 86}, 10)
 --
 --    **animations**: A table containing all animations for this ship.
 --    Ships have an "idle", a "sinking" and a directional "sail" animation.
+--
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("tribes")
+--
+--    dirname = path.dirname(__file__)
+--
+--    tribes:new_ship_type {
+--       name = "atlanteans_ship",
+--       descname = pgettext("atlanteans_ship", "Ship"),
+--       animation_directory = dirname,
+--       icon = dirname .. "menu.png",
+--       capacity = 30,
+--       vision_range = 4,
+--
+--       animations = {
+--          idle = {
+--             hotspot = { 89, 86 },
+--             fps = 10
+--          },
+--          sinking = {
+--             hotspot = { 89, 86 },
+--             fps = 7
+--          },
+--          sail = {
+--             hotspot = { 89, 86 },
+--             fps = 10,
+--             directional = true
+--          }
+--       }
+--    }
+--
+--    pop_textdomain()
+
+push_textdomain("tribes")
+
+dirname = path.dirname(__file__)
+
 tribes:new_ship_type {
    name = "atlanteans_ship",
-   -- TRANSLATORS: This is the ship's name used in lists of units
-   descname = _"Ship",
+   -- TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
+   descname = pgettext("atlanteans_ship", "Ship"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    capacity = 30,
    vision_range = 4,
-   animations = animations,
+
+   animations = {
+      idle = {
+         hotspot = { 89, 86 },
+         fps = 10
+      },
+      sinking = {
+         hotspot = { 89, 86 },
+         fps = 7
+      },
+      sail = {
+         hotspot = { 89, 86 },
+         fps = 10,
+         directional = true
+      }
+   }
 }
+
+pop_textdomain()

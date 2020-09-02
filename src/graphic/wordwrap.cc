@@ -28,10 +28,8 @@
 #include <ui_basic/mouse_constants.h>
 #include <unicode/unistr.h>
 
-#include "base/log.h"
 #include "graphic/color.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_io.h"
@@ -373,7 +371,7 @@ void WordWrap::draw(RenderTarget& dst,
 			// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 			int caret_x = text_width(line_to_caret, fontsize_);
 
-			const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
+			const Image* caret_image = g_image_cache->get("images/ui_basic/caret.png");
 			Vector2i caretpt = Vector2i::zero();
 			caretpt.x = point.x + caret_x - caret_image->width() + kLineMargin;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;

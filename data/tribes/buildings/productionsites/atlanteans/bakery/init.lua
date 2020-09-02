@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_bakery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Bakery"),
@@ -47,7 +48,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = pgettext("atlanteans_building", "baking bread"),
          actions = {
@@ -60,3 +61,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

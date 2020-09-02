@@ -21,7 +21,9 @@
 
 #include <cassert>
 #include <cerrno>
+#include <chrono>
 #include <cstring>
+#include <ctime>
 #include <memory>
 
 #include <boost/format.hpp>
@@ -181,9 +183,14 @@ FilenameSet ZipFilesystem::list_directory(const std::string& path_in) const {
 		                      sizeof(filename_inzip), nullptr, 0, nullptr, 0);
 
 		std::string complete_filename = zip_file_->strip_basename(filename_inzip);
-		std::string filename = fs_filename(complete_filename.c_str());
-		std::string filepath =
-		   complete_filename.substr(0, complete_filename.size() - filename.size());
+
+		// Ensure that subdirectories will be listed - fs_filename can't handle trailing slashes.
+		if (complete_filename.size() > 1 && strcmp(&complete_filename.back(), "/") == 0) {
+			complete_filename.pop_back();
+		}
+		const std::string filename(fs_filename(complete_filename.c_str()));
+		const std::string filepath(
+		   complete_filename.substr(0, complete_filename.size() - filename.size()));
 
 		//  TODO(unknown): Something strange is going on with regard to the leading slash!
 		//  This is just an ugly workaround and does not solve the real
@@ -353,8 +360,7 @@ void ZipFilesystem::ensure_directory_exists(const std::string& dirname) {
 void ZipFilesystem::make_directory(const std::string& dirname) {
 	zip_fileinfo zi;
 
-	zi.tmz_date.tm_sec = zi.tmz_date.tm_min = zi.tmz_date.tm_hour = zi.tmz_date.tm_mday =
-	   zi.tmz_date.tm_mon = zi.tmz_date.tm_year = 0;
+	set_time_info(zi.tmz_date);
 	zi.dosDate = 0;
 	zi.internal_fa = 0;
 	zi.external_fa = 0;
@@ -379,6 +385,18 @@ void ZipFilesystem::make_directory(const std::string& dirname) {
 		throw FileError("ZipFilesystem::make_directory", complete_filename);
 	}
 	zipCloseFileInZip(zip_file_->write_handle());
+}
+
+void ZipFilesystem::set_time_info(tm_zip& time) {
+	std::time_t timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	std::tm* now = std::localtime(&timestamp);
+
+	time.tm_sec = now->tm_sec;
+	time.tm_min = now->tm_min;
+	time.tm_hour = now->tm_hour;
+	time.tm_mday = now->tm_mday;
+	time.tm_mon = now->tm_mon;
+	time.tm_year = now->tm_year;
 }
 
 /**
@@ -433,8 +451,8 @@ void ZipFilesystem::write(const std::string& fname, void const* const data, int3
 	std::replace(filename.begin(), filename.end(), '\\', '/');
 
 	zip_fileinfo zi;
-	zi.tmz_date.tm_sec = zi.tmz_date.tm_min = zi.tmz_date.tm_hour = zi.tmz_date.tm_mday =
-	   zi.tmz_date.tm_mon = zi.tmz_date.tm_year = 0;
+	set_time_info(zi.tmz_date);
+
 	zi.dosDate = 0;
 	zi.internal_fa = 0;
 	zi.external_fa = 0;
@@ -487,8 +505,8 @@ StreamRead* ZipFilesystem::open_stream_read(const std::string& fname) {
 StreamWrite* ZipFilesystem::open_stream_write(const std::string& fname) {
 	zip_fileinfo zi;
 
-	zi.tmz_date.tm_sec = zi.tmz_date.tm_min = zi.tmz_date.tm_hour = zi.tmz_date.tm_mday =
-	   zi.tmz_date.tm_mon = zi.tmz_date.tm_year = 0;
+	set_time_info(zi.tmz_date);
+
 	zi.dosDate = 0;
 	zi.internal_fa = 0;
 	zi.external_fa = 0;

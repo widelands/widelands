@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Jukka Pakarinen, 2019\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
@@ -649,12 +649,9 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:347
 msgid ""
 "First of all, we need more construction materials. So, we should build at "
-"least three lumberjacks’ houses and two quarries. Be sure to have "
-"dismanteled all of the unproductive buildings though."
+"least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
+" all of the unproductive buildings though."
 msgstr ""
-"Ensinnäkin, me tarvitsemme enemmän rakennusmateriaaleja. Joten meidän "
-"pitäisi rakentaa ainakin kolme puunhakkaajan mökkiä ja kaksi kivilouhosta. "
-"Varmistathan, että kaikki tuottamattomat rakennukset on purettu."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:350
@@ -818,14 +815,8 @@ msgid ""
 "The only solution is to build two new forester’s houses near our "
 "lumberjacks. Be sure to first build a new forester’s house and then "
 "eventually destroy the old one or at least expel the forester to change "
-"houses. Dismantling them is also possible but will not return any wares "
-"because they are so torn."
+"houses."
 msgstr ""
-"Ainoa ratkaisu on rakentaa kaksi uutta metsänhoitajan mökkiä lähelle "
-"puunhakkaajan mökkejä ja sitten lopulta tuhota vanha mökki tai vähintäänkin "
-"käskeä metsänhoitajan siirtymään toiseen mökkiin. Purkaminen on myös yksi "
-"vaihtoehto, mutta se ei palauta yhtää tuotetta, koska ne ovat niin "
-"huonokuntoisia."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
 msgid "Amalea Laughs Sarcastically"
@@ -1620,8 +1611,3 @@ msgstr ""
 "Kirottu Lutius, kun tappoi rauhantahtoiset jumalatar Vestan palvelijat! "
 "Olkoon elämäsi ja maasi kirottuja sekä jumalattarien vihan rankaisevan "
 "perhettäsi hävityksellä!"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

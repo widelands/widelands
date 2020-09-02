@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2020-07-14 23:06+0000\n"
 "Last-Translator: T K <allspig@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/widelands/widelands/language/zh_TW/)\n"
@@ -17,67 +17,67 @@ msgstr ""
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../data/world/critters/badger/init.lua:64
+#: ../../data/world/critters/badger/init.lua:76
 msgid "Badger"
 msgstr "獾"
 
-#: ../../data/world/critters/brownbear/init.lua:15
+#: ../../data/world/critters/brownbear/init.lua:3
 msgid "Brown bear"
 msgstr "棕熊"
 
-#: ../../data/world/critters/bunny/init.lua:14
+#: ../../data/world/critters/bunny/init.lua:3
 msgid "Bunny"
 msgstr "兔子"
 
-#: ../../data/world/critters/chamois/init.lua:15
+#: ../../data/world/critters/chamois/init.lua:3
 msgid "Chamois"
 msgstr "岩羚羊"
 
-#: ../../data/world/critters/deer/init.lua:15
+#: ../../data/world/critters/deer/init.lua:3
 msgid "Deer"
 msgstr "鹿"
 
-#: ../../data/world/critters/duck/init.lua:18
+#: ../../data/world/critters/duck/init.lua:5
 msgid "Duck"
 msgstr "鴨"
 
-#: ../../data/world/critters/fox/init.lua:19
+#: ../../data/world/critters/fox/init.lua:3
 msgid "Fox"
 msgstr "狐狸"
 
-#: ../../data/world/critters/lynx/init.lua:16
+#: ../../data/world/critters/lynx/init.lua:3
 msgid "Lynx"
 msgstr "山貓"
 
-#: ../../data/world/critters/marten/init.lua:15
+#: ../../data/world/critters/marten/init.lua:3
 msgid "Marten"
 msgstr "貂"
 
-#: ../../data/world/critters/moose/init.lua:19
+#: ../../data/world/critters/moose/init.lua:3
 msgid "Moose"
 msgstr "麋鹿"
 
-#: ../../data/world/critters/reindeer/init.lua:16
+#: ../../data/world/critters/reindeer/init.lua:3
 msgid "Reindeer"
 msgstr "馴鹿"
 
-#: ../../data/world/critters/sheep/init.lua:18
+#: ../../data/world/critters/sheep/init.lua:3
 msgid "Sheep"
 msgstr "綿羊"
 
-#: ../../data/world/critters/stag/init.lua:19
+#: ../../data/world/critters/stag/init.lua:3
 msgid "Stag"
 msgstr "雄鹿"
 
-#: ../../data/world/critters/wildboar/init.lua:18
+#: ../../data/world/critters/wildboar/init.lua:3
 msgid "Wild boar"
 msgstr "野豬"
 
-#: ../../data/world/critters/wisent/init.lua:15
+#: ../../data/world/critters/wisent/init.lua:3
 msgid "Wisent"
 msgstr "歐洲野牛"
 
-#: ../../data/world/critters/wolf/init.lua:19
+#: ../../data/world/critters/wolf/init.lua:3
 msgid "Wolf"
 msgstr "狼"
 

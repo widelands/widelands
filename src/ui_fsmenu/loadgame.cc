@@ -41,7 +41,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
             0,
             is_replay ? _("Choose a replay") : _("Choose a saved game"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      load_or_save_(&info_box_,
                    g,

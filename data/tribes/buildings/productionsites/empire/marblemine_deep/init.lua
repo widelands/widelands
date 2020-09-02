@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_marblemine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Deep Marble Mine"),
@@ -35,7 +36,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "stones"
+      mines = "resource_stones"
    },
 
    working_positions = {
@@ -49,7 +50,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
          descname = _"mining marble",
          actions = {
@@ -67,7 +68,7 @@ tribes:new_productionsite_type {
          descname = _"mining marble",
          actions = {
             "animate=working duration:7s800ms",
-            "mine=stones 2 100 5 2",
+            "mine=resource_stones radius:2 yield:100% when_empty:5% experience_on_fail:2%",
             "produce=granite",
          }
       },
@@ -75,7 +76,7 @@ tribes:new_productionsite_type {
          descname = _"mining marble",
          actions = {
             "animate=working duration:7s800ms",
-            "mine=stones 2 100 5 2",
+            "mine=resource_stones radius:2 yield:100% when_empty:5% experience_on_fail:2%",
             "produce=marble",
          }
       },
@@ -96,3 +97,5 @@ tribes:new_productionsite_type {
          pgettext("empire_building", "This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

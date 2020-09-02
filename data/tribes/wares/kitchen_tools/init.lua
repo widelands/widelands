@@ -1,22 +1,13 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_ware_type {
-   msgctxt = "ware",
    name = "kitchen_tools",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Kitchen Tools"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      barbarians = 1,
-      frisians = 1,
-      empire = 1
-   },
-   preciousness = {
-      barbarians = 0,
-      frisians = 0,
-      empire = 0
-   },
 
    animations = {
       idle = {
@@ -25,3 +16,5 @@ tribes:new_ware_type {
       },
    }
 }
+
+pop_textdomain()

@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_smelting_works",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Smelting Works"),
@@ -52,7 +53,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -69,9 +70,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs iron",
             "consume=iron_ore coal",
             "sleep=duration:25s",
-            "playsound=sound/metal/fizzle 150",
+            "playsound=sound/metal/fizzle priority:20% allow_multiple",
             "animate=working duration:35s",
-            "playsound=sound/metal/ironping 80",
+            "playsound=sound/metal/ironping priority:60%",
             "produce=iron"
          }
       },
@@ -82,9 +83,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs iron",
             "consume=iron_ore coal",
             "sleep=duration:25s",
-            "playsound=sound/metal/fizzle 150",
+            "playsound=sound/metal/fizzle priority:20% allow_multiple",
             "animate=working duration:35s",
-            "playsound=sound/metal/ironping 80",
+            "playsound=sound/metal/ironping priority:60%",
             "produce=iron"
          }
       },
@@ -95,11 +96,13 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs gold",
             "consume=gold_ore coal",
             "sleep=duration:25s",
-            "playsound=sound/metal/fizzle 150",
+            "playsound=sound/metal/fizzle priority:20% allow_multiple",
             "animate=working duration:35s",
-            "playsound=sound/metal/goldping 80",
+            "playsound=sound/metal/goldping priority:60%",
             "produce=gold"
          }
       },
    },
 }
+
+pop_textdomain()

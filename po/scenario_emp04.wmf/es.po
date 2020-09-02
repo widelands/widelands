@@ -3,16 +3,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Walter Benkel <tromaster@gmail.com>, 2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Walter Benkel <tromaster@gmail.com>, 2020\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -651,8 +651,8 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:347
 msgid ""
 "First of all, we need more construction materials. So, we should build at "
-"least three lumberjacks’ houses and two quarries. Be sure to have "
-"dismanteled all of the unproductive buildings though."
+"least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
+" all of the unproductive buildings though."
 msgstr ""
 "Antes que nada necesitamos más materiales de construcción, por lo que "
 "deberíamos construir al menos tres casas de leñadores y dos canteras. Sin "
@@ -823,15 +823,12 @@ msgid ""
 "The only solution is to build two new forester’s houses near our "
 "lumberjacks. Be sure to first build a new forester’s house and then "
 "eventually destroy the old one or at least expel the forester to change "
-"houses. Dismantling them is also possible but will not return any wares "
-"because they are so torn."
+"houses."
 msgstr ""
 "La única solución es contruir dos nuevas casas para silvicultores, cerca de "
 "nuestros leñadores. Asegúrate de construir primero la nueva casa del "
 "silvicultor y después eventualmente destruir la antigua, o al menos expulsar"
-" al silvicultor para que se mude a la nueva casa. También es posible "
-"desarmarlas, pero no recuperarás ninguna mercancía porque están muy "
-"desgastadas."
+" al silvicultor para que se mude a la nueva casa."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
 msgid "Amalea Laughs Sarcastically"
@@ -1622,8 +1619,3 @@ msgstr ""
 "¡Maldito seas, Lutius, por matar a pacíficos sirvientes de la diosa Vesta! "
 "¡Que tu vida y tu tierra sean malditos y que la ira de la diosa borre a tu "
 "familia de la faz de la tierra!"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

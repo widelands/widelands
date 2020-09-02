@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Mill"),
@@ -45,17 +46,19 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
          descname = _"grinding wheat",
          actions = {
             "return=skipped unless economy needs flour",
             "consume=wheat",
             "sleep=duration:5s",
-            "playsound=sound/mill/mill_turning 240",
+            "playsound=sound/mill/mill_turning priority:90% allow_multiple",
             "animate=working duration:10s",
             "produce=flour"
          }
       },
    },
 }
+
+pop_textdomain()

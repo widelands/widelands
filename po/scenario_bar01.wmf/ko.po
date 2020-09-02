@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# ks k, 2018
 # ks k, 2018,2020
+# ks k, 2018,2020
+# TaeMin An, 2019
 # TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-07-21 02:56+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-17 08:38+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +27,7 @@ msgstr "숲 지킴이의 오두막 2곳 짓기"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr "나무꾼의 오두막 옆에 각각 숲 지킴이의 오두막을 지으십시오."
+msgstr "벌목꾼의 오두막 옆에 각각 숲 지킴이의 오두막을 지으십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid ""
@@ -126,7 +127,7 @@ msgstr "광부들에게 식량을 제공하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr "사냥꾼의 오두막, 짐승 키우미의 오두막 및 선술집을 건설하십시오."
+msgstr "사냥꾼의 오두막, 사냥터지기의 오두막 및 선술집을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
@@ -137,7 +138,7 @@ msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "사냥꾼은 동물을 사냥 할 수 있지만 게임 사수는 동물이 사멸하는 것을 막습니다. 그 고기는 선술집에서 광부를위한 점심으로 가공됩니다."
+msgstr "사냥꾼은 동물을 사냥 할 수 있지만 사냥터지기는 동물이 멸종하는 것을 막습니다. 그 고기는 선술집에서 광부를위한 점심으로 가공됩니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
@@ -164,11 +165,11 @@ msgstr "식품 생산을 하기위한 다른 방법은 – 다른 종류의 음�
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
-msgstr "광산 자원을 정제하십시오."
+msgstr "광산 자원을 정제하십시오"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
-msgstr "제련 공장을 건설하십시오."
+msgstr "제련소를 건설하십시오"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""
@@ -208,7 +209,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr "노동자는 성공적인 일을 통해 경험을 쌓습니다. 충분한 경험을 통해 고급 건물을 운영하는데 필요한 고급 직원이 됩니다. 고급 건물을 운영 할 수 있는 고급 인력이 충분하기 전에 건물을 향상시키지 마십시오!"
+msgstr "일꾼들은 성공적인 일을 통해 경험을 쌓습니다. 충분한 경험을 통해 고급 건물을 운영하는데 필요한 고급 일꾼들이 됩니다. 고급 건물을 운영 할 수 있는 고급 일꾼들이 충분하기 전에 건물을 향상시키지 마십시오!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
@@ -216,14 +217,14 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "그런 건물은 보통 그 건물의 기본적인 종류보다 더 큰 요구가 있습니다. 이를테면, 깊은 광산은 식량 대신 간식이 필요합니다. 피타 빵과 두 번째 종류의 음식 (고기 또는 생선) 과 맥주에서 간식을 생산하기 위해서는 선술집을 여관으로 향상시켜야합니다."
+msgstr "그런 건물은 보통 그 건물의 기본적인 종류보다 더 큰 요구가 있습니다. 이를테면, 깊은 광산은 야전식량 대신 간식이 필요합니다. 피타 빵과 두 번째 종류의 음식 (고기 또는 생선) 과 맥주에서 간식을 생산하기 위해서는 선술집을 여관으로 향상시켜야합니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr "더 큰 광산은 조금 더 빨리 작동하고, 더 작은 광산은 더 싼 음식을 필요로합니다. 어느 전략을 선호하는지는 당신에게 달려 있습니다."
+msgstr "물론 일꾼들이 있으면 더 빨리 모든 광산을 깊은 광산으로 향상할 수 있습니다 – 더 큰 광산은 조금 더 빨리 작동하고, 작은 광산은 더 싼 음식이 필요합니다. 어떤 전략을 선호하는지는 당신에게 달려 있습니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99
@@ -238,7 +239,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "모든 군대를 포함하여 더 크고 우수한 건물은 더 나은 건축 자재를 필요로 합니다. 그것들은 단순한 통나무만으로는 만들 수 없습니다 통나무는 목재 경화제에 의해 먼저 검은 나무로 정제되어야합니다. 검은나무가 바닥 나기 전에 목재 경화제를 만드는 것을 잊지 마십시오. 그렇지 않으면 영토확장을 할 수 없습니다."
+msgstr "모든 군대를 포함하여 더 크고 우수한 건물은 더 나은 건축 자재들을 필요로 합니다. 그것들은 단순한 통나무만으로는 만들 수 없습니다 통나무는 목재 경화제에 의해 먼저 검은 나무로 정제되어야합니다. 검은나무가 바닥 나기 전에 목재 경화제를 만드는 것을 잊지 마십시오. 그렇지 않으면 영토확장을 할 수 없습니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
@@ -287,7 +288,7 @@ msgstr "석회 가마와 우물을 건설하고, 석탄 공급을 위해 숯 가
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:122
 msgid "Build a reed yard"
-msgstr "갈대 농장 짓기"
+msgstr "갈대 농장을 짓기"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
@@ -308,7 +309,7 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr "도로에서 오랫동안 무거운 짐을 싣고 있을 때, 한 운송노동자는 화물을 신속하게 운송할 수 없습니다. 그 결과로 교통 정체가 발생합니다. 따라서 이러한 도로는 제 2의 운송자를 고용해야합니다. 물품을 운반하는 것을 돕는 황소입니다. 이로인해 수송 능력은 두배로 늘어납니다."
+msgstr "땅길에서 오랫동안 무거운 짐을 싣고 있을 때, 한 운송 일꾼은 화물을 신속하게 운송할 수 없습니다. 그 결과로 교통 정체가 발생합니다. 따라서 이러한 땅길은 제 2의 짐꾼을 고용해야 합니다. 물품을 운반하는 것을 돕는 황소입니다. 이로인해 수송 능력은 두배로 늘어납니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 msgid "Oxen are bred in cattle farms out of wheat and water."
@@ -434,7 +435,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "볼드레쓰는 나날이 초췌해져가고있다. 추운 계절이 다가오면서 동료들의 기세가 꺾이고, 우리는 여전히 오두막과 막사에서 살고있다. 이렇게 오랫동안 황무지에서 머물 생각은 없었다. – 그러나 나는 오랫동안 형제들이이 무의미한 전투에 이렇게 오랫동안이나 참전할것이라고는 생각하지 못했다."
+msgstr "볼드레쓰는 나날이 초췌해져가고있다. 추운 계절이 다가오면서 동료들의 기세가 꺾이고, 우리는 여전히 오두막과 병영에서 살고있다. 이렇게 오랫동안 황무지에서 머물 생각은 없었다. – 그러나 나는 오랫동안 형제들이이 무의미한 전투에 이렇게 오랫동안이나 참전할것이라고는 생각하지 못했다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
@@ -490,7 +491,7 @@ msgstr "칸트루크는 말했다…"
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr "이미 채석장 한곳과 나무꾼의 오두막 2곳을 지어졌소. 우리가 여기에서 더 오랫동안 머물려 한다면 이는 좋은 선택이오."
+msgstr "이미 채석장 1 곳과 벌목꾼의 오두막 2 곳을 지어졌소. 우리가 여기에서 더 오랫동안 머물려 한다면 이는 좋은 선택이오."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:240
@@ -505,7 +506,7 @@ msgstr "그러나 절때 잊지 마시오. 이 숲은 우리의 조상들이 우
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr "그래서 우리가 벤 나무를 대체하기 위해, 숲 지킴이 근처에 가급적이면 나무꾼의 오두막을 지어야 하오."
+msgstr "그래서 우리가 벤 나무를 대체하기 위해, 숲 지킴이 근처에 가급적이면 벌목꾼의 오두막을 지어야 하오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "In the Night"
@@ -618,7 +619,7 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr "쓰론, 그래서 우리가 이 숲에서 더 길게 머물도록 준비하길 바라는것이오? 흠... 나도 그렇게 하는것이 현명할것이라고 생각하오만, 내 마음은 알'쑨란으로 영광스러운 복귀를 열망하고 있소. 우리 형제들이 전쟁터에서 싸우는 동안 우리는 너무 오랫동안 기다려왔고, 우리의 도끼와 칼은 시간이 지나면서 녹이 슬고 있소."
+msgstr "쓰론, 그래서 우리가 이 숲에서 더 길게 머물도록 준비하길 바라는것이오? 흠, 나도 그렇게 하는것이 현명할것이라고 생각하오만, 내 마음은 알'쑨란으로 영광스러운 복귀를 열망하고 있소. 우리 형제들이 전쟁터에서 싸우는 동안 우리는 너무 오랫동안 기다려왔고, 우리의 도끼와 칼은 시간이 지나면서 녹이 슬고 있소."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:308
 msgid "Khantrukh joins in…"
@@ -630,7 +631,7 @@ msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
-msgstr "용서를 바라오, 족장.그러나 나는 당신과 의논해야할 심각한 관심사가 있소. 우리 진영 인근의 암석들은 다양한 용도로 사용되어 자원의 양이 빠르게 줄어들고 있소. 그것들이 모두 사라지기전까지는 시간이 얼마 남지 않았소."
+msgstr "용서해주시오, 족장. 그러나 나는 당신과 의논해야할 심각한 걱정이 있소. 우리 진영 근처의 바위들은 우리 일꾼들의 도구 아래 빠르게 줄어들고 있고, 그것들이 모두 사라지기전까지는 시간이 얼마 남지 않았소."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:316
 msgid "Boldreth jumps up…"
@@ -709,7 +710,7 @@ msgid ""
 " at hand. The miners will definitely demand greater rations for working high"
 " up on the mountain in this bitter cold, and providing these supplies may "
 "not be easy."
-msgstr "이것이 사실이지만, 그것을 나중에 고려해야 하오. 현재 다른 장애물들이 가까이에 있기 때문이오. 광부들은 이 추운 날씨에 산에 올라 가기 위해 더 큰 식량을 요구할 것이고, 이러한 공급품을 제공하는 것은 쉽지 않을 것입니다."
+msgstr "이것이 사실이지만, 그것을 나중에 고려해야 하오. 현재 다른 장애물들이 가까이에 있기 때문이오. 광부들은 이 추운 날씨에 산에 올라 가기 위해 더 큰 야전식량을 요구할 것이고, 이러한 공급품을 제공하는 것은 쉽지 않을 것입니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:368
 msgid "Boldreth nods…"
@@ -743,7 +744,7 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr "위대한 산의 북쪽은 드넓은 평야요. 자연이 우리에게 준 공간을 사용하고 농장을 만들면 어떻겠소? 이따금 나는 갓 구운 피타 빵을 맛있게 먹을것이오..."
+msgstr "위대한 산의 북쪽은 드넓은 평야요. 자연이 우리에게 준 공간을 사용하고 농장을 만들면 어떻겠소? 이따금 나는 갓 구운 피타 빵을 맛있게 먹을것이오…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:390
 msgid "Boldreth cheers up…"
@@ -827,7 +828,7 @@ msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
-msgstr "물론, 그렇게 깊은곳에 들어가면 어둡고 춥습니다. 자발적으로 그런곳에 들어갈 사람은 거의 없습니다. 그러니 우리는 이 용감한 사람들에게 더 많은 식량으로 보답해야합니다. 그리고 한 두잔의 맥주를 함께 준다면 의욕이 불타오를겁니다."
+msgstr "물론, 그렇게 깊은곳에 들어가면 어둡고 춥습니다. 자발적으로 그런곳에 들어갈 사람은 거의 없습니다. 그러니 우리는 이 용감한 사람들에게 더 많은 야전식량으로 보답해야합니다. 그리고 한 두잔의 맥주를 함께 준다면 의욕이 불타오를겁니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:436
 msgid "Boldreth seems concerned…"
@@ -906,7 +907,7 @@ msgid ""
 "overwhelming. Our poor carriers are no longer able to transport the goods as"
 " fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
-msgstr "우리의 영역은 점점 커지고있고 도로의 수송량은 압도적으로 증가하고 있소. 우리의 불쌍한 운송인들은 더 이상 우리의 수요를 맞출 만큼 물건을 빨리 운송하지 못하오. 그래서 나는 우리가 황소를 사육함으로서 그들에게 약간의 지원을 제공할것을 제안하오."
+msgstr "우리의 영역은 점점 커지고 있고 땅길의 수송량은 압도적으로 증가하고 있소. 우리의 불쌍한 짐꾼들은 더 이상 우리의 수요를 맞출 만큼 물건을 빨리 운송하지 못하오. 그래서 나는 우리가 황소를 사육함으로서 그들에게 약간의 지원을 제공할것을 제안하오."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:481
@@ -1029,8 +1030,3 @@ msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr "그러나 그들은 알'쑨란 주변의 전쟁때문에 지금 이 삶이 끝날까봐 두려워합니다. 따라서 우리는 서로를 도울 수 있기를 바라면서 그들은 우리와 함께하기로 결정했습니다."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

@@ -25,7 +25,6 @@
 #include "logic/cmd_incorporate.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/playercommand.h"
 
 namespace Widelands {
@@ -108,6 +107,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdCallEconomyBalance();
 	case QueueCommandTypes::kToggleMuteMessages:
 		return *new CmdToggleMuteMessages();
+	case QueueCommandTypes::kPickCustomStartingPosition:
+		return *new CmdPickCustomStartingPosition();
 	case QueueCommandTypes::kDeleteMessage:  // Not a logic command
 	case QueueCommandTypes::kNetCheckSync:
 	case QueueCommandTypes::kReplaySyncWrite:

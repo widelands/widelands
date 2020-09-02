@@ -29,7 +29,6 @@
 #include "io/filewrite.h"
 #include "io/streamwrite.h"
 #include "logic/game.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -152,6 +151,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdShipCancelExpedition(des);
 	case QueueCommandTypes::kExpeditionConfig:
 		return new CmdExpeditionConfig(des);
+	case QueueCommandTypes::kPickCustomStartingPosition:
+		return new CmdPickCustomStartingPosition(des);
 
 	default:
 		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
@@ -897,11 +898,13 @@ void CmdShipScoutDirection::execute(Game& game) {
 		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
 		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
 		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
-			log(" %1d:ship on %3dx%3d received scout command but not in "
-			    "kExpeditionWaiting or kExpeditionPortspaceFound or kExpeditionScouting status "
-			    "(expedition: %s), ignoring...\n",
-			    ship->get_owner()->player_number(), ship->get_position().x, ship->get_position().y,
-			    (ship->state_is_expedition()) ? "Y" : "N");
+			log_warn_time(
+			   game.get_gametime(),
+			   " %1d:ship on %3dx%3d received scout command but not in "
+			   "kExpeditionWaiting or kExpeditionPortspaceFound or kExpeditionScouting status "
+			   "(expedition: %s), ignoring...\n",
+			   ship->get_owner()->player_number(), ship->get_position().x, ship->get_position().y,
+			   (ship->state_is_expedition()) ? "Y" : "N");
 			return;
 		}
 		ship->exp_scouting_direction(game, dir);
@@ -955,10 +958,11 @@ void CmdShipConstructPort::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
 		if (ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			log(" %1d:ship on %3dx%3d received build port command but "
-			    "not in kExpeditionPortspaceFound status (expedition: %s), ignoring...\n",
-			    ship->get_owner()->player_number(), ship->get_position().x, ship->get_position().y,
-			    (ship->state_is_expedition()) ? "Y" : "N");
+			log_warn_time(game.get_gametime(),
+			              " %1d:ship on %3dx%3d received build port command but "
+			              "not in kExpeditionPortspaceFound status (expedition: %s), ignoring...\n",
+			              ship->get_owner()->player_number(), ship->get_position().x,
+			              ship->get_position().y, (ship->state_is_expedition()) ? "Y" : "N");
 			return;
 		}
 		ship->exp_construct_port(game, coords);
@@ -1014,11 +1018,13 @@ void CmdShipExploreIsland::execute(Game& game) {
 		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
 		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
 		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
-			log(" %1d:ship on %3dx%3d received explore island command "
-			    "but not in kExpeditionWaiting or kExpeditionPortspaceFound or kExpeditionScouting "
-			    "status (expedition: %s), ignoring...\n",
-			    ship->get_owner()->player_number(), ship->get_position().x, ship->get_position().y,
-			    (ship->state_is_expedition()) ? "Y" : "N");
+			log_warn_time(
+			   game.get_gametime(),
+			   " %1d:ship on %3dx%3d received explore island command "
+			   "but not in kExpeditionWaiting or kExpeditionPortspaceFound or kExpeditionScouting "
+			   "status (expedition: %s), ignoring...\n",
+			   ship->get_owner()->player_number(), ship->get_position().x, ship->get_position().y,
+			   (ship->state_is_expedition()) ? "Y" : "N");
 			return;
 		}
 		ship->exp_explore_island(game, island_explore_direction);
@@ -1681,24 +1687,29 @@ void CmdEnemyFlagAction::execute(Game& game) {
 	Player* player = game.get_player(sender());
 
 	if (upcast(Flag, flag, game.objects().get_object(serial))) {
-		log("Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
-		    "number=%" PRIuS "\n",
-		    player->player_number(), flag->owner().player_number(), soldiers.size());
+		log_info_time(game.get_gametime(),
+		              "Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
+		              "number=%" PRIuS "\n",
+		              player->player_number(), flag->owner().player_number(), soldiers.size());
 
 		if (const Building* const building = flag->get_building()) {
-			if (player->is_hostile(flag->owner()) &&
-			    player->is_seeing(Map::get_index(building->get_position(), game.map().get_width()))) {
-				std::vector<Soldier*> result;
-				for (Serial s : soldiers) {
-					if (Soldier* soldier = dynamic_cast<Soldier*>(game.objects().get_object(s))) {
-						result.push_back(soldier);
+			if (player->is_hostile(flag->owner())) {
+				for (Widelands::Coords& coords : building->get_positions(game)) {
+					if (player->is_seeing(Map::get_index(coords, game.map().get_width()))) {
+						std::vector<Soldier*> result;
+						for (Serial s : soldiers) {
+							if (Soldier* soldier = dynamic_cast<Soldier*>(game.objects().get_object(s))) {
+								result.push_back(soldier);
+							}
+						}
+						player->enemyflagaction(*flag, sender(), result);
+						return;
 					}
 				}
-				player->enemyflagaction(*flag, sender(), result);
-			} else {
-				log("Cmd_EnemyFlagAction::execute: ERROR: wrong player target not "
-				    "seen or not hostile.\n");
 			}
+			log_err_time(game.get_gametime(),
+			             "Cmd_EnemyFlagAction::execute: ERROR: wrong player target not "
+			             "seen or not hostile.\n");
 		}
 	}
 }
@@ -1858,20 +1869,25 @@ void CmdSetStockPolicy::execute(Game& game) {
 			}
 		} else if (upcast(Warehouse, warehouse, mo)) {
 			if (warehouse->get_owner() != plr) {
-				log("Cmd_SetStockPolicy: sender %u, but warehouse owner %u\n", sender(),
-				    warehouse->owner().player_number());
+				log_warn_time(game.get_gametime(),
+				              "Cmd_SetStockPolicy: sender %u, but warehouse owner %u\n", sender(),
+				              warehouse->owner().player_number());
 				return;
 			}
 
 			if (isworker_) {
 				if (!(game.tribes().worker_exists(ware_))) {
-					log("Cmd_SetStockPolicy: sender %u, worker %u does not exist\n", sender(), ware_);
+					log_warn_time(game.get_gametime(),
+					              "Cmd_SetStockPolicy: sender %u, worker %u does not exist\n", sender(),
+					              ware_);
 					return;
 				}
 				warehouse->set_worker_policy(ware_, policy_);
 			} else {
 				if (!(game.tribes().ware_exists(ware_))) {
-					log("Cmd_SetStockPolicy: sender %u, ware %u does not exist\n", sender(), ware_);
+					log_warn_time(game.get_gametime(),
+					              "Cmd_SetStockPolicy: sender %u, ware %u does not exist\n", sender(),
+					              ware_);
 					return;
 				}
 				warehouse->set_ware_policy(ware_, policy_);
@@ -1939,21 +1955,24 @@ void CmdProposeTrade::execute(Game& game) {
 
 	Market* initiator = dynamic_cast<Market*>(game.objects().get_object(trade_.initiator));
 	if (initiator == nullptr) {
-		log("CmdProposeTrade: initiator vanished or is not a market.\n");
+		log_warn_time(
+		   game.get_gametime(), "CmdProposeTrade: initiator vanished or is not a market.\n");
 		return;
 	}
 	if (&initiator->owner() != plr) {
-		log("CmdProposeTrade: sender %u, but market owner %u\n", sender(),
-		    initiator->owner().player_number());
+		log_warn_time(game.get_gametime(), "CmdProposeTrade: sender %u, but market owner %u\n",
+		              sender(), initiator->owner().player_number());
 		return;
 	}
 	Market* receiver = dynamic_cast<Market*>(game.objects().get_object(trade_.receiver));
 	if (receiver == nullptr) {
-		log("CmdProposeTrade: receiver vanished or is not a market.\n");
+		log_warn_time(
+		   game.get_gametime(), "CmdProposeTrade: receiver vanished or is not a market.\n");
 		return;
 	}
 	if (initiator->get_owner() == receiver->get_owner()) {
-		log("CmdProposeTrade: Sending and receiving player are the same.\n");
+		log_warn_time(
+		   game.get_gametime(), "CmdProposeTrade: Sending and receiving player are the same.\n");
 		return;
 	}
 
@@ -2039,6 +2058,52 @@ void CmdToggleMuteMessages::write(FileWrite& fw, EditorGameBase& egbase, MapObje
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(building_)));
 	fw.unsigned_8(all_);
+}
+
+// CmdPickCustomStartingPosition
+void CmdPickCustomStartingPosition::execute(Game& game) {
+	game.get_player(sender())->do_pick_custom_starting_position(coords_);
+}
+
+CmdPickCustomStartingPosition::CmdPickCustomStartingPosition(StreamRead& des)
+   : PlayerCommand(0, des.unsigned_8()) {
+	coords_.x = des.unsigned_16();
+	coords_.y = des.unsigned_16();
+}
+
+void CmdPickCustomStartingPosition::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_16(coords_.x);
+	ser.unsigned_16(coords_.y);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdPickCustomStartingPosition = 1;
+
+void CmdPickCustomStartingPosition::read(FileRead& fr,
+                                         EditorGameBase& egbase,
+                                         MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdPickCustomStartingPosition) {
+			PlayerCommand::read(fr, egbase, mol);
+			coords_.x = fr.unsigned_16();
+			coords_.y = fr.unsigned_16();
+		} else {
+			throw UnhandledVersionError("CmdPickCustomStartingPosition", packet_version,
+			                            kCurrentPacketVersionCmdPickCustomStartingPosition);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("Cmd_PickCustomStartingPosition: %s", e.what());
+	}
+}
+
+void CmdPickCustomStartingPosition::write(FileWrite& fw,
+                                          EditorGameBase& egbase,
+                                          MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdPickCustomStartingPosition);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_16(coords_.x);
+	fw.unsigned_16(coords_.y);
 }
 
 }  // namespace Widelands

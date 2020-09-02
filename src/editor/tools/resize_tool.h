@@ -44,7 +44,7 @@ struct EditorResizeTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor/fsel_editor_resize.png");
+		return g_image_cache->get("images/wui/editor/fsel_editor_resize.png");
 	}
 
 	bool has_size_one() const override {

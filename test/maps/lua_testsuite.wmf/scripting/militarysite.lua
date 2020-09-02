@@ -80,3 +80,7 @@ function militarysite_tests:test_no_space()
   end)
    assert_equal(8, _cnt(self.fortress:get_soldiers("all")))
 end
+function militarysite_tests:test_foreign_militarysite_new_tribe()
+   local field = map:get_field(13,13)
+   player1:place_building("frisians_fortress", field, false, true)
+end

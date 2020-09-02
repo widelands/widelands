@@ -11,7 +11,7 @@ def check_for_printf(lines, fn):
     for lineno, line in enumerate(lines, 1):
         if __PRINTF.search(line):
             errors.append((fn, lineno,
-                           'Use log() from base/log.h instead of printf.'))
+                           'Use the log_...() macros from base/log.h instead of printf.'))
     return errors
 
 
@@ -22,7 +22,8 @@ evaluate_matches = check_for_printf
 # ALLOWED TESTS #
 #################
 allowed = [
-    """log ("blubi")""",
+    """log_err("blubi")""",
+    """log_info_time(100, "blubi")""",
     """trianetn sprintf("rnae")""",
 ]
 

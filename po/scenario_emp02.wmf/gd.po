@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-06-27 06:10+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -457,7 +457,7 @@ msgid ""
 msgstr "’S math sin. Tha a’ chiad togalach mòr an airm deiseil agus tha bun-structar na mèinnearachd air a dhol am feabhas. Bu chòir dhuinn beachdachadh air ar n-ullachadh airson a’ chogaidh a-nis."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:268
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid "Victory"
 msgstr "Buaidh"
 
@@ -477,9 +477,9 @@ msgstr "Tha cuid de na Tùsanaich nam falach san eilean againn fhathast, ach tha
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
 msgid ""
-"You have established a working economy, trained new soldiers and driven the "
-"Barbarians from the island."
-msgstr "Tha thu air eaconamaidh a dh’obraicheas a stèidheachadh, air saighdearan ùra oideachadh agus air na Tùsanaich a thoirt far an eilein."
+"We have established a working economy, trained new soldiers and driven the "
+"Barbarians from the island. Now we can think about our next steps."
+msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"
@@ -514,8 +514,3 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Tha thu air am misean seo a choileanadh. Faodaidh tu leantainn air adhart a’ cluiche ma thogras tu no gluasad air adhart dhan ath-mhisean."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

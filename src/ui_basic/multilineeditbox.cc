@@ -101,7 +101,7 @@ private:
  */
 MultilineEditbox::MultilineEditbox(
    Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
-   : Panel(parent, x, y, w, h), d_(new Data(*this, g_gr->styles().editbox_style(style))) {
+   : Panel(parent, x, y, w, h), d_(new Data(*this, g_style_manager->editbox_style(style))) {
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);

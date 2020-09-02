@@ -63,6 +63,10 @@ public:
 		return dropout_wares_[idx];
 	}
 
+	const BuildingDescr* get_building() const {
+		return building_;
+	}
+
 	uint32_t get_built_per64k() const;
 	Request* get_builder_request() {
 		return builder_request_;

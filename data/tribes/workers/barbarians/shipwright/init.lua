@@ -1,7 +1,8 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
    name = "barbarians_shipwright",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Shipwright"),
@@ -19,7 +20,7 @@ tribes:new_worker_type {
       buildship = {
          "walk=object-or-coords",
          "plant=attrib:shipconstruction unless object",
-         "playsound=sound/sawmill/sawmill 230",
+         "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
          "animate=work duration:500ms",
          "construct",
          "animate=work duration:5s",
@@ -67,8 +68,10 @@ tribes:new_worker_type {
          hotspot = { 12, 22 },
          sound_effect = {
             path = "sound/hammering/hammering",
-            priority = 64
+            priority = 50
          }
       },
    }
 }
+
+pop_textdomain()
