@@ -47,17 +47,16 @@ jobs:
   include:
     - stage: compiler
 
-      # Let's see if this workd before changing the matrix
-      name: "DEBUG: Ubuntu 18.04 with clang 6"
+      # Let's see if this works before changing the matrix
+      name: "DEBUG: clang 6"
       os: linux
-      dist: focal
       compiler: clang
       cache: false
       addons:
         apt:
           sources:
-            - sourceline: 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-6 main'
-            - sourceline: 'deb-src http://apt.llvm.org/focal/ llvm-toolchain-focal-6 main'
+            - sourceline: 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main'
+            - sourceline: 'deb-src http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main'
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
             - clang-6.0
@@ -73,11 +72,11 @@ jobs:
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
             - zlib1g-dev
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=clang-6 CXX=clang++-6
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=clang-6.0 CXX=clang++-6.0
       services: xvfb
       before_script:
-        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-6'
-        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-6'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-6.0'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-6.0'
 
 language: cpp
 
