@@ -115,7 +115,7 @@ public:
 
 	uint32_t get_eff_w() const;
 
-	std::vector<Recti> focus_overlay_rects() override;
+	std::vector<Recti> focus_overlay_rects();
 
 	// Drawing and event handling
 	void draw(RenderTarget&);
