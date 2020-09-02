@@ -478,17 +478,16 @@ std::vector<Recti> Panel::focus_overlay_rects() {
  */
 void Panel::draw_overlay(RenderTarget& dst) {
 	if (has_focus()) {
-		bool has_toplevel_focus = (focus_ == nullptr);
 		for (Panel* p = this; p->parent_; p = p->parent_) {
 			if (p->parent_->focus_ != p) {
-				has_toplevel_focus = false;
-				break;
+				// doesn't have toplevel focus
+				return;
 			}
 		}
 		for (const Recti& r : focus_overlay_rects()) {
 			dst.fill_rect(r,
-			              has_toplevel_focus ? g_style_manager->focused_color() :
-			                                   g_style_manager->semi_focused_color(),
+			              focus_ ? g_style_manager->semi_focused_color() :
+			                                   g_style_manager->focused_color(),
 			              BlendMode::Default);
 		}
 	}
