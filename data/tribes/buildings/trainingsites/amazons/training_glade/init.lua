@@ -27,22 +27,18 @@ tribes:new_trainingsite_type {
       gold = 1
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {114, 124},
-         fps = 10,
-      },
-      working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {114, 124},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {114, 98},
-      },
+      idle = {hotspot = {92, 92}},
+      unoccupied = {hotspot = {92, 92}}
    },
+   spritesheets = { working = {
+      hotspot = {92, 92},
+      fps = 15,
+      frames = 30,
+      columns = 6,
+      rows = 5
+   }},
 
    aihints = {
       trainingsites_max_percent = 75,
