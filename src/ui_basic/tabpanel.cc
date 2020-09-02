@@ -103,12 +103,29 @@ TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
 }
 
 std::vector<Recti> TabPanel::focus_overlay_rects() {
+	const int f = g_style_manager->focus_border_thickness();
+	const Tab* tab = active_ < tabs_.size() ? tabs_[active_] : nullptr;
+	const int16_t w = tab ? tab->get_w() : get_w();
+	const int16_t h = tab ? tab->get_h() : kTabPanelButtonHeight;
+	if (w < 2 * f || h < 2 * f) {
+		return {Recti(0, 0, get_w(), kTabPanelButtonHeight)};
+	}
+
+	const int16_t x = tab ? tab->get_x() : 0;
+	const int16_t y = tab ? tab->get_y() : 0;
+	return {Recti(x, y, w, f),
+	        Recti(x, y + h - f, w, f),
+	        Recti(x, y + f, f, h - 2 * f),
+	        Recti(x + w - f, f, f, y + h - 2 * f)};
+}
+
+/* std::vector<Recti> TabPanel::focus_overlay_rects() {
 	if (active_ < tabs_.size()) {
 		const Tab& tab = *tabs_[active_];
 		return {Recti(tab.get_x(), tab.get_y(), tab.get_w(), tab.get_h())};
 	}
 	return {Recti(0, 0, get_w(), kTabPanelButtonHeight)};
-}
+} */
 
 bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 	if (down && tabs_.size() > 1) {

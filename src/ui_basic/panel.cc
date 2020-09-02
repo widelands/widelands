@@ -461,18 +461,17 @@ void Panel::draw(RenderTarget&) {
 void Panel::draw_border(RenderTarget&) {
 }
 
-constexpr int16_t kFocusRectStrength = 6;
 std::vector<Recti> Panel::focus_overlay_rects() {
+	const int f = g_style_manager->focus_border_thickness();
 	const int16_t w = get_w();
 	const int16_t h = get_h();
-	if (w < 2 * kFocusRectStrength || h < 2 * kFocusRectStrength) {
+	if (w < 2 * f || h < 2 * f) {
 		return {Recti(0, 0, w, h)};
 	}
-	return {Recti(0, 0, w, kFocusRectStrength),
-	        Recti(0, h - kFocusRectStrength, w, kFocusRectStrength),
-	        Recti(0, kFocusRectStrength, kFocusRectStrength, h - 2 * kFocusRectStrength),
-	        Recti(w - kFocusRectStrength, kFocusRectStrength, kFocusRectStrength,
-	              h - 2 * kFocusRectStrength)};
+	return {Recti(0, 0, w, f),
+	        Recti(0, h - f, w, f),
+	        Recti(0, f, f, h - 2 * f),
+	        Recti(w - f, f, f, h - 2 * f)};
 }
 
 /**
