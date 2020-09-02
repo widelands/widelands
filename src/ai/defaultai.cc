@@ -1564,7 +1564,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		fish_fields_list.clear();
 		map.find_reachable_fields(game(), Area<FCoords>(field.coords, kProductionArea),
 		                          &fish_fields_list, fisher_cstep,
-		                          FindNodeResource(world.resource_index("fish")));
+		                          FindNodeResource(world.resource_index("resource_fish")));
 
 		// This is "list" of unique fields in fish_fields_list we got above
 		static std::set<Coords> counted_fields;

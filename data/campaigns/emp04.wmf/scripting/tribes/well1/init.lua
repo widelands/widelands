@@ -5,7 +5,6 @@ push_textdomain("scenario_emp04.wmf")
 tribes:new_productionsite_type {
    name = "empire_well1",
    descname = pgettext("empire_building", "Well"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -44,7 +43,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=duration:30s",
             "animate=working duration:30s",
-            "mine=water radius:5 yield:100% when_empty:5%",
+            "mine=resource_water radius:5 yield:100% when_empty:5%",
             "produce=water"
          }
       },
