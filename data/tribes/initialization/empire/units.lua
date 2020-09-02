@@ -5,11 +5,10 @@ image_dirname = path.dirname(__file__) .. "images/"
 push_textdomain("tribes_encyclopedia")
 
 -- For formatting time strings
-include "tribes/scripting/help/global_helptexts.lua"
+include "tribes/scripting/help/time_strings.lua"
 
 tribes:new_tribe {
    name = "empire",
-   helptext_script = path.dirname(__file__) .. "helptexts.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {1, 19} },
@@ -1351,7 +1350,7 @@ tribes:new_tribe {
                pgettext("empire_building", "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
             },
             -- TRANSLATORS: Note helptext for an empire training site: Colosseum
-            pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
          }
       },
       {

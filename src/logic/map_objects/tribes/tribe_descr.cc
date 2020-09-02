@@ -182,7 +182,7 @@ namespace Widelands {
  * The contents of 'table' are documented in
  * /data/tribes/atlanteans.lua
  */
-TribeDescr::TribeDescr(LuaInterface* lua, const Widelands::TribeBasicInfo& info,
+TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
                        Tribes& tribes,
                        const World& world,
                        const LuaTable& table,
@@ -217,30 +217,30 @@ TribeDescr::TribeDescr(LuaInterface* lua, const Widelands::TribeBasicInfo& info,
 
 		log_info("┃    Immovables: ");
 		set_progress_message(_("Immovables"), 2);
-		load_immovables(table, tribes, world, helptexts->get_table("immovables").get());
+		load_immovables(table, tribes, world);
 		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		log_info("┃    Wares: ");
 		set_progress_message(_("Wares"), 3);
-		load_wares(table, tribes, helptexts->get_table("wares").get());
+		load_wares(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
-			load_wares(*scenario_table, tribes, scenario_helptexts && scenario_helptexts->has_key("wares") ? scenario_helptexts->get_table("wares").get() : nullptr);
+			load_wares(*scenario_table, tribes);
 		}
 		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		log_info("┃    Workers: ");
 		set_progress_message(_("Workers"), 4);
-		load_workers(table, tribes,  helptexts->get_table("workers").get());
+		load_workers(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("workers_order")) {
-			load_workers(*scenario_table, tribes, scenario_helptexts && scenario_helptexts->has_key("workers") ? scenario_helptexts->get_table("workers").get() : nullptr);
+			load_workers(*scenario_table, tribes);
 		}
 		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
 		log_info("┃    Buildings: ");
 		set_progress_message(_("Buildings"), 5);
-		load_buildings(table, tribes, helptexts->get_table("buildings").get());
+		load_buildings(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("buildings")) {
-			load_buildings(*scenario_table, tribes, scenario_helptexts && scenario_helptexts->has_key("buildings") ? scenario_helptexts->get_table("buildings").get() : nullptr);
+			load_buildings(*scenario_table, tribes);
 		}
 		log_info("┃    → took %ums\n", timer.ms_since_last_query());
 
@@ -363,7 +363,7 @@ void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
 	}
 }
 
-void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, LuaTable* helptexts) {
+void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("wares_order");
 
 	for (const int column_key : items_table->keys<int>()) {
@@ -448,7 +448,7 @@ void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const Wo
 	get_resource_indicator(nullptr, 0);
 }
 
-void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes, LuaTable* helptexts) {
+void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("workers_order");
 
 	for (const int column_key : items_table->keys<int>()) {

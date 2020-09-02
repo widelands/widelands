@@ -1,17 +1,14 @@
 tribes = wl.Tribes()
 
--- NOCOM ware and worker translations are broken.
-
 image_dirname = path.dirname(__file__) .. "images/"
 
 push_textdomain("tribes_encyclopedia")
 
 -- For formatting time strings
-include "tribes/scripting/help/global_helptexts.lua"
+include "tribes/scripting/help/time_strings.lua"
 
 tribes:new_tribe {
    name = "barbarians",
-   helptext_script = path.dirname(__file__) .. "helptexts.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {1, 19} },
