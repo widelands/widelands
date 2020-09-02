@@ -244,12 +244,8 @@ std::vector<Recti> Table<void*>::focus_overlay_rects() {
 			return Panel::focus_overlay_rects();
 		}
 	}
-	return {
-		Recti(0, y, w, f),
-		Recti(0, y + h - f, w, f),
-		Recti(0, y + f, f, h - 2 * f),
-		Recti(w - f, y + f, f, h - 2 * f)
-	};
+	return {Recti(0, y, w, f), Recti(0, y + h - f, w, f), Recti(0, y + f, f, h - 2 * f),
+	        Recti(w - f, y + f, f, h - 2 * f)};
 }
 
 /**
