@@ -464,8 +464,9 @@ void EditBox::delete_selected_text() {
 	calculate_selection_boundaries(start, end);
 	uint32_t nbytes = end - start;
 	m_->text.erase(start, nbytes);
-	changed();
+	m_->caret = start;
 	reset_selection();
+	changed();
 }
 
 void EditBox::draw(RenderTarget& dst) {
