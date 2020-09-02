@@ -654,6 +654,8 @@ void WLApplication::handle_input(InputCallback const* cb) {
 		case SDL_WINDOWEVENT:
 			switch (ev.window.event) {
 			case SDL_WINDOWEVENT_RESIZED:
+				// Do not save the new size to config at this point to avoid saving sizes that
+				// result from maximization etc. Save at shutdown instead.
 				if (!g_gr->fullscreen()) {
 					g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
 				}
