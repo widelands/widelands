@@ -115,6 +115,8 @@ public:
 
 	uint32_t get_eff_w() const;
 
+	std::vector<Recti> focus_overlay_rects() override;
+
 	// Drawing and event handling
 	void draw(RenderTarget&);
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
@@ -283,6 +285,8 @@ public:
 	void scroll_to_top();
 
 	void layout() override;
+
+	std::vector<Recti> focus_overlay_rects() override;
 
 	// Drawing and event handling
 	void draw(RenderTarget&) override;

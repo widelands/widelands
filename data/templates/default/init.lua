@@ -69,8 +69,8 @@ return {
    -- red, green, blue, alpha
    window_border_focused = {220, 220, 250, 40},
    window_border_unfocused = {50, 0, 0, 40},
-   background_focused = {200, 200, 50, 250},
-   background_semi_focused = {50, 50, 200, 80},
+   background_focused = {200, 200, 200, 200},
+   background_semi_focused = {120, 120, 120, 200},
    focus_border_thickness = 2,
 
    -- Buttons
