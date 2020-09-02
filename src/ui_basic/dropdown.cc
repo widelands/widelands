@@ -394,6 +394,9 @@ void BaseDropdown::toggle() {
 }
 
 void BaseDropdown::set_list_visibility(bool open) {
+	if (!open) {
+		list_->select(current_selection_);
+	}
 	if (!is_enabled_) {
 		list_->set_visible(false);
 		return;
