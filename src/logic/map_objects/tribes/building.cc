@@ -108,8 +108,9 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 
 	// Parse build options
 	if (table.has_key("enhancement")) {
-		try {
-			// TODO(GunChleoc): Compatibility code, remove try section after v1.0
+		// TODO(GunChleoc): Compatibility code, remove "if" section after v1.0.
+		// The "else" branch with get_table is the current code.
+		if (table.get_datatype("enhancement") == LuaTable::DataType::kString) {
 			const std::string enh = table.get_string("enhancement");
 			log_warn("Deprecated enhancement code found in building '%s'", name().c_str());
 
@@ -134,7 +135,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 				   "\"%s\" has not been defined as a building type (wrong declaration order?)",
 				   enh.c_str());
 			}
-		} catch (const std::exception&) {
+		} else {
 			std::unique_ptr<LuaTable> enhancement_table = table.get_table("enhancement");
 			const std::string enhancement_name(enhancement_table->get_string("name"));
 			if (enhancement_name == name()) {
