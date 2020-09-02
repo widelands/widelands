@@ -543,7 +543,6 @@ MapObject::MapObject(const MapObjectDescr* const the_descr)
 }
 
 MapObject::~MapObject() {
-	Notifications::publish(NoteDelayedCheckCancel(this));
 }
 
 /**
@@ -593,6 +592,7 @@ bool MapObject::init(EditorGameBase& egbase) {
  * \warning Make sure you call this from derived classes!
  */
 void MapObject::cleanup(EditorGameBase& egbase) {
+	Notifications::publish(NoteDelayedCheckCancel(this));
 	egbase.objects().remove(*this);
 }
 

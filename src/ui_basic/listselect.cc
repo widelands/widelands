@@ -39,19 +39,29 @@ namespace UI {
 BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
                                          uint32_t init_entry,
                                          const Image* init_pic,
-                                         const std::string& tooltip_text,
-                                         const std::string& hotkey_text,
-                                         const TableStyleInfo& style)
+                                         const std::string& tt,
+                                         const std::string& ht,
+                                         const TableStyleInfo& s)
    : name(init_name),
      entry_(init_entry),
      pic(init_pic),
-     tooltip(tooltip_text),
+     tooltip(tt),
      name_alignment(i18n::has_rtl_character(init_name.c_str(), 20) ? Align::kRight : Align::kLeft),
-     hotkey_alignment(i18n::has_rtl_character(hotkey_text.c_str(), 20) ? Align::kRight :
-                                                                         Align::kLeft) {
-	rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
-	rendered_hotkey =
-	   UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
+     hotkey_alignment(i18n::has_rtl_character(ht.c_str(), 20) ? Align::kRight : Align::kLeft),
+     style(s),
+     hotkey_text(ht) {
+}
+
+void BaseListselect::EntryRecord::init_render_info() {
+	if (!rendered_name) {
+		rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
+		assert(rendered_name);
+	}
+	if (!rendered_hotkey) {
+		rendered_hotkey =
+		   UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
+		assert(rendered_hotkey);
+	}
 }
 
 /**
@@ -287,7 +297,8 @@ int BaseListselect::calculate_desired_width() {
 	// Find the widest entries
 	widest_text_ = 0;
 	widest_hotkey_ = 0;
-	for (const EntryRecord* er : entry_records_) {
+	for (EntryRecord* er : entry_records_) {
+		er->init_render_info();
 		const int current_text_width = er->rendered_name->width();
 		if (current_text_width > widest_text_) {
 			widest_text_ = current_text_width;
@@ -362,7 +373,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 	while (idx < entry_records_.size()) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
-		const EntryRecord& er = *entry_records_[idx];
+		EntryRecord& er = *entry_records_[idx];
+		er.init_render_info();
 		const int text_height = std::max(er.rendered_name->height(), er.rendered_hotkey->height());
 
 		int lineheight = std::max(get_lineheight(), text_height);

@@ -23,6 +23,7 @@
 #include <SDL_surface.h>
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
 #include "graphic/gl/draw_line_program.h"
@@ -171,6 +172,10 @@ int Texture::height() const {
 }
 
 void Texture::init(uint16_t w, uint16_t h) {
+	if (!is_initializer_thread(true)) {
+		throw wexception("Texture::init must be called only by the initializer thread");
+	}
+
 	blit_data_ = {
 	   0,  // initialized below
 	   w,

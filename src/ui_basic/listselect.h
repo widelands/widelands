@@ -142,8 +142,15 @@ private:
 		const std::string tooltip;
 		const Align name_alignment;
 		const Align hotkey_alignment;
+
 		std::shared_ptr<const UI::RenderedText> rendered_name;
 		std::shared_ptr<const UI::RenderedText> rendered_hotkey;
+
+		const UI::TableStyleInfo& style;
+		const std::string hotkey_text;
+
+		// initialize `rendered_name` and `rendered_hotkey` if they aren't initialized yet
+		void init_render_info();
 	};
 
 	int max_pic_width_;

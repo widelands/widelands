@@ -127,6 +127,7 @@ wl_library(graphic_surface
     base_exceptions
     base_geometry
     base_macros
+    base_multithreading
     graphic_color
     graphic_draw_programs
     graphic_gl_utils
