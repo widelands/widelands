@@ -283,9 +283,9 @@ void Graphic::set_fullscreen(const bool value) {
 void Graphic::refresh() {
 	RenderQueue::instance().draw(screen_->width(), screen_->height());
 
-	// Set the window to our preferred size if it goes out of sync.
-	// Not sure if this is still needed, leaving it just in case.
 	if (!fullscreen()) {
+		// Set the window to our preferred size if it goes out of sync.
+		// Not sure if this is still needed, leaving it just in case.
 		int true_width, true_height;
 		SDL_GetWindowSize(sdl_window_, &true_width, &true_height);
 
