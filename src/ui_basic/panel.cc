@@ -468,9 +468,7 @@ std::vector<Recti> Panel::focus_overlay_rects() {
 	if (w < 2 * f || h < 2 * f) {
 		return {Recti(0, 0, w, h)};
 	}
-	return {Recti(0, 0, w, f),
-	        Recti(0, h - f, w, f),
-	        Recti(0, f, f, h - 2 * f),
+	return {Recti(0, 0, w, f), Recti(0, h - f, w, f), Recti(0, f, f, h - 2 * f),
 	        Recti(w - f, f, f, h - 2 * f)};
 }
 

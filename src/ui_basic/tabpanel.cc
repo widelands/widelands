@@ -113,9 +113,7 @@ std::vector<Recti> TabPanel::focus_overlay_rects() {
 
 	const int16_t x = tab ? tab->get_x() : 0;
 	const int16_t y = tab ? tab->get_y() : 0;
-	return {Recti(x, y, w, f),
-	        Recti(x, y + h - f, w, f),
-	        Recti(x, y + f, f, h - 2 * f),
+	return {Recti(x, y, w, f), Recti(x, y + h - f, w, f), Recti(x, y + f, f, h - 2 * f),
 	        Recti(x + w - f, f, f, y + h - 2 * f)};
 }
 
