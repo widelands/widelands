@@ -485,10 +485,9 @@ void Panel::draw_overlay(RenderTarget& dst) {
 			}
 		}
 		for (const Recti& r : focus_overlay_rects()) {
-			dst.fill_rect(r,
-			              focus_ ? g_style_manager->semi_focused_color() :
-			                                   g_style_manager->focused_color(),
-			              BlendMode::Default);
+			dst.fill_rect(
+			   r, focus_ ? g_style_manager->semi_focused_color() : g_style_manager->focused_color(),
+			   BlendMode::Default);
 		}
 	}
 }
