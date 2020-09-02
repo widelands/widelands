@@ -22,6 +22,7 @@
 #include <SDL_surface.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/animation/animation.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
@@ -107,7 +108,8 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
      humidity_(table.get_int("humidity")) {
 
 	if (table.has_key("tooltips")) {
-		custom_tooltips_ = table.get_table("tooltips")->array_entries<std::string>();
+		// TODO(GunChleoc): Compatibility, remove after v1.0
+		log_warn("Terrain '%s' contains obsolete 'tooltips' table", name().c_str());
 	}
 
 	if (table.has_key("enhancement")) {

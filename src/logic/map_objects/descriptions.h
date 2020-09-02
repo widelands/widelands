@@ -97,6 +97,7 @@ public:
 	const CritterDescr* get_critter_descr(DescriptionIndex index) const;
 	const CritterDescr* get_critter_descr(const std::string& name) const;
 	const ImmovableDescr* get_immovable_descr(DescriptionIndex index) const;
+	ImmovableDescr* get_mutable_immovable_descr(DescriptionIndex index) const;
 	const ResourceDescription* get_resource_descr(DescriptionIndex index) const;
 	const ShipDescr* get_ship_descr(DescriptionIndex index) const;
 	const TerrainDescription* get_terrain_descr(DescriptionIndex index) const;

@@ -116,16 +116,10 @@ public:
 	// The terrain which certain workers can transform this terrain into.
 	const std::string& enhancement() const;
 
-	/// Additional tooptip entries for the editor
-	const std::vector<std::string>& custom_tooltips() const {
-		return custom_tooltips_;
-	}
-
 private:
 	const std::string name_;
 	const std::string descname_;
 	Is is_;
-	std::vector<std::string> custom_tooltips_;
 	std::vector<DescriptionIndex> valid_resources_;
 	DescriptionIndex default_resource_index_;
 	int default_resource_amount_;

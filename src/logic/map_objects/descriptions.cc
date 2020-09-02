@@ -264,6 +264,9 @@ const CritterDescr* Descriptions::get_critter_descr(const std::string& name) con
 const ImmovableDescr* Descriptions::get_immovable_descr(DescriptionIndex index) const {
 	return immovables_->get_mutable(index);
 }
+ImmovableDescr* Descriptions::get_mutable_immovable_descr(DescriptionIndex index) const {
+	return immovables_->get_mutable(index);
+}
 
 const ResourceDescription* Descriptions::get_resource_descr(DescriptionIndex const index) const {
 	assert(index < resources_->size() || index == Widelands::kNoResource);

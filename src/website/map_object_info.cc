@@ -32,7 +32,9 @@
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "website/json/json.h"
 #include "website/website_common.h"
 
@@ -40,14 +42,25 @@ using namespace Widelands;
 
 namespace {
 
+std::string get_helptext(const MapObjectDescr& mo, const TribeDescr& tribe) {
+	if (!mo.has_helptext(tribe.name())) {
+		return "";
+	}
+	const std::map<std::string, std::string>& helptexts = mo.get_helptexts(tribe.name());
+	if (helptexts.count("purpose")) {
+		return helptexts.at("purpose");
+	}
+	return "";
+}
+
 /*
  ==========================================================
  BUILDINGS
  ==========================================================
  */
 
-void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* out_filesystem) {
-	log_info("\n==================\nWriting buildings:\n==================\n");
+void write_buildings(const TribeDescr& tribe, FileSystem* out_filesystem) {
+	log_info("\n==================\nWriting buildings:\n==================");
 
 	// We don't want any partially finished buildings
 	std::vector<const BuildingDescr*> buildings;
@@ -152,17 +165,7 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 		}
 
 		// Helptext
-		try {
-			std::unique_ptr<LuaTable> table(
-			   egbase.lua().run_script("tribes/scripting/mapobject_info/building_helptext.lua"));
-			std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-			cr->push_arg(building.helptext_script());
-			cr->resume();
-			const std::string help_text = cr->pop_string();
-			json_building->add_string("helptext", help_text);
-		} catch (LuaError& err) {
-			json_building->add_string("helptext", err.what());
-		}
+		json_building->add_string("helptext", get_helptext(building, tribe));
 	}
 
 	json->write_to_file(
@@ -176,8 +179,8 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
  ==========================================================
  */
 
-void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* out_filesystem) {
-	log_info("\n===============\nWriting wares:\n===============\n");
+void write_wares(const TribeDescr& tribe, FileSystem* out_filesystem) {
+	log_info("\n===============\nWriting wares:\n===============");
 
 	std::unique_ptr<JSON::Element> json(new JSON::Element());
 	JSON::Array* json_wares_array = json->add_array("wares");
@@ -188,21 +191,7 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* ou
 		json_ware->add_string("name", ware.name());
 		json_ware->add_string("descname", ware.descname());
 		json_ware->add_string("icon", ware.icon_filename());
-
-		// Helptext
-		try {
-			std::unique_ptr<LuaTable> table(
-			   egbase.lua().run_script("tribes/scripting/mapobject_info/ware_helptext.lua"));
-			std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-			cr->push_arg(tribe.name());
-			cr->push_arg(ware.helptext_script());
-			cr->resume();
-			std::string help_text = cr->pop_string();
-			boost::algorithm::trim(help_text);
-			json_ware->add_string("helptext", help_text);
-		} catch (LuaError& err) {
-			json_ware->add_string("helptext", err.what());
-		}
+		json_ware->add_string("helptext", get_helptext(ware, tribe));
 	}
 
 	json->write_to_file(
@@ -216,8 +205,8 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* ou
  ==========================================================
  */
 
-void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* out_filesystem) {
-	log_info("\n================\nWriting workers:\n================\n");
+void write_workers(const TribeDescr& tribe, FileSystem* out_filesystem) {
+	log_info("\n================\nWriting workers:\n================");
 
 	std::unique_ptr<JSON::Element> json(new JSON::Element());
 	JSON::Array* json_workers_array = json->add_array("workers");
@@ -228,19 +217,7 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* 
 		json_worker->add_string("name", worker.name());
 		json_worker->add_string("descname", worker.descname());
 		json_worker->add_string("icon", worker.icon_filename());
-
-		// Helptext
-		try {
-			std::unique_ptr<LuaTable> table(
-			   egbase.lua().run_script("tribes/scripting/mapobject_info/worker_helptext.lua"));
-			std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-			cr->push_arg(worker.helptext_script());
-			cr->resume();
-			const std::string help_text = cr->pop_string();
-			json_worker->add_string("helptext", help_text);
-		} catch (LuaError& err) {
-			json_worker->add_string("helptext", err.what());
-		}
+		json_worker->add_string("helptext", get_helptext(worker, tribe));
 
 		if (worker.becomes() != INVALID_INDEX) {
 			const WorkerDescr& becomes = *tribe.get_worker_descr(worker.becomes());
@@ -293,9 +270,9 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 		   *out_filesystem, (boost::format("tribe_%s.json") % tribe_info.name).str().c_str());
 
 		const TribeDescr& tribe = *descriptions.get_tribe_descr(descriptions.tribe_index(tribe_info.name));
-		write_buildings(tribe, egbase, out_filesystem);
-		write_wares(tribe, egbase, out_filesystem);
-		write_workers(tribe, egbase, out_filesystem);
+		write_buildings(tribe, out_filesystem);
+		write_wares(tribe, out_filesystem);
+		write_workers(tribe, out_filesystem);
 	}
 
 	json->write_to_file(*out_filesystem, "tribes.json");
