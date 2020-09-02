@@ -1941,13 +1941,15 @@ MapObjectDescription
 */
 const char LuaMapObjectDescription::className[] = "MapObjectDescription";
 const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
-    METHOD(LuaImmovableDescription, helptexts),
+   METHOD(LuaImmovableDescription, helptexts),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[] = {
    PROP_RO(LuaMapObjectDescription, descname),
-   PROP_RO(LuaMapObjectDescription, icon_name), PROP_RO(LuaMapObjectDescription, name),
-   PROP_RO(LuaMapObjectDescription, type_name), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapObjectDescription, icon_name),
+   PROP_RO(LuaMapObjectDescription, name),
+   PROP_RO(LuaMapObjectDescription, type_name),
+   {nullptr, nullptr, nullptr},
 };
 
 // Only base classes can be persisted.
@@ -2080,7 +2082,7 @@ int LuaMapObjectDescription::get_type_name(lua_State* L) {
 }
 
 /* RST
-   .. method:: helptext
+   .. method:: helptext(tribename)
 
       Returns the tribe-specific helptexts for this object.
 
@@ -2088,15 +2090,16 @@ int LuaMapObjectDescription::get_type_name(lua_State* L) {
       :type tribename: :class:`string`
 
          (RO) a table of helptexts if it exists for the given tribe, an empty table otherwise.
-         Keys are ``lore``, ``lore_author``, ``purpose``, ``note``, ``performance``, all of them optional.
+         Keys are ``lore``, ``lore_author``, ``purpose``, ``note``, ``performance``, all of them
+         optional.
 */
 int LuaMapObjectDescription::helptexts(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-    std::string tribename = luaL_checkstring(L, 2);
+	std::string tribename = luaL_checkstring(L, 2);
 	lua_newtable(L);
-    if (get()->has_helptext(tribename)) {
+	if (get()->has_helptext(tribename)) {
 		for (const auto& item : get()->get_helptexts(tribename)) {
 			if (!item.second.empty()) {
 				lua_pushstring(L, item.first);
@@ -2104,7 +2107,7 @@ int LuaMapObjectDescription::helptexts(lua_State* L) {
 				lua_settable(L, -3);
 			}
 		}
-    }
+	}
 	return 1;
 }
 

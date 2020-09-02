@@ -12,17 +12,34 @@
 -- ``scripting/tribes`` in your map.
 -- In that subdirectory, place a file called ``init.lua``.
 -- This file needs to return a table listing all the objects that the tribes do
--- not have by default. For example:
+-- not have by default. You can also add helptexts. For example:
 --
 -- .. code-block:: lua
 --
 --    return {
 --       empire = {
 --          buildings = {
---             "empire_brewery1",
---             "empire_brewery2",
---             "empire_well1",
---             "empire_temple_of_vesta"
+--             {
+--                name = "empire_brewery1",
+--                helptexts = {
+--                   purpose = pgettext("empire_building", "Produces beer to keep the miners strong and happy.")
+--                }
+--             },
+--             name = "empire_trainingcamp1",
+--                helptexts = {
+--                   purpose = {
+--                      pgettext("empire_building", "Trains soldiers in ‘Attack’ and in ‘Health’."),
+--                      pgettext("empire_building", "Equips the soldiers with all necessary weapons and armor parts.")
+--                   },
+--                   note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+--                }
+--             },
+--             {
+--                name = "empire_temple_of_vesta",
+--                helptexts = {
+--                   purpose = pgettext("empire_building", "In the temple of Vesta, the wares to worship are stored. It is the home of the priestesses and the guards of the goddess.")
+--                }
+--             }
 --          }
 --          workers_order = {
 --             {
@@ -77,110 +94,87 @@
 -- See :ref:`defining_tribe_units` for further details on these files, and :ref:`lua_tribes_tribes_helptexts` on the helptext format.
 
 -- For formatting time strings
-include "tribes/scripting/help/time_strings.lua"
-
-local buildingctxt = "empire_building"
+include "tribes/scripting/help/global_helptexts.lua"
 
 push_textdomain("scenario_emp04.wmf")
-
-local brewery_helptexts = {
-   purpose = {
-      -- TRANSLATORS: Purpose helptext for an empire production site: Brewery
-      pgettext(buildingctxt, "Produces beer to keep the miners strong and happy.")
-   },
-   performance = {
-      -- TRANSLATORS: Performance helptext for an empire production site: Brewery
-      pgettext(buildingctxt, "The brewer needs %1% on average to brew a vat of beer."):bformat(format_minutes_seconds(1, 5))
-   }
-}
-local farm_helptexts = {
-   purpose = {
-      -- TRANSLATORS: Purpose helptext for an empire production site: Farm
-      pgettext(buildingctxt, "Sows and harvests wheat.")
-   },
-   performance = {
-      -- TRANSLATORS: Performance helptext for an empire production site: Farm
-      pgettext(buildingctxt, "The farmer needs %1% on average to sow and harvest a sheaf of wheat."):bformat(format_minutes_seconds(1, 20))
-   }
-}
-local mill_helptexts = {
-   purpose = {
-      -- TRANSLATORS: Purpose helptext for an empire production site: Mill
-      pgettext(buildingctxt, "Grinds wheat to produce flour.")
-   },
-   performance = {
-      -- TRANSLATORS: Performance helptext for an empire production site: Mill
-      pgettext(buildingctxt, "The miller needs %1% on average to grind wheat into a sack of flour."):bformat(format_seconds(19))
-   }
-}
 
 local result = {
    empire = {
       buildings = {
-         "empire_brewery1",
-         "empire_brewery2",
-         "empire_farm1",
-         "empire_farm2",
-         "empire_foresters_house1",
-         "empire_lumberjacks_house1",
-         "empire_mill1",
-         "empire_mill2",
-         "empire_trainingcamp1",
-         "empire_well1",
-         "empire_temple_of_vesta"
-      },
-      helptexts = {
-         buildings = {
-            empire_temple_of_vesta = {
-               purpose = {
-                  -- TRANSLATORS: Purpose helptext for an empire warehouse: Temple of Vesta
-                  pgettext(buildingctxt, "In the temple of Vesta, the wares to worship are stored. It is the home of the priestesses and the guards of the goddess.")
-               }
-            },
-            empire_brewery1 = brewery_helptexts,
-            empire_brewery2 = brewery_helptexts,
-            empire_farm1 = farm_helptexts,
-            empire_farm2 = farm_helptexts,
-            empire_foresters_house1 = {
-               purpose = {
-                  -- TRANSLATORS: Purpose helptext for an empire production site: Forester's House
-                  pgettext(buildingctxt, "Plants trees in the surrounding area.")
-               },
-               note = {
-                  -- TRANSLATORS: Note helptext for an empire production site: Forester's House
-                  pgettext(buildingctxt, "The forester’s house needs free space within the work area to plant the trees.")
-               }
-            },
-            empire_lumberjacks_house1 = {
-               purpose = {
-                  -- TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's House
-                  pgettext(buildingctxt, "Fells trees in the surrounding area and processes them into logs.")
-               },
-               note = {
-                  -- TRANSLATORS: Note helptext for an empire production site: Lumberjack's House
-                  pgettext(buildingctxt, "The lumberjack's house needs trees to fell within the work area.")
-               }
-            },
-            empire_mill1 = mill_helptexts,
-            empire_mill2 = mill_helptexts,
-            empire_trainingcamp1 = {
+         {
+            name = "empire_brewery1",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for an empire production site: Brewery
+               purpose = pgettext("empire_building", "Produces beer to keep the miners strong and happy.")
+            }
+         },
+         {
+            name = "empire_brewery2",
+         },
+         {
+            name = "empire_farm1",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for an empire production site: Farm
+               purpose = pgettext("empire_building", "Sows and harvests wheat.")
+            }
+         },
+         {
+            name = "empire_farm2",
+         },
+         {
+            name = "empire_foresters_house1",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for an empire production site: Forester's House
+               purpose = pgettext("empire_building", "Plants trees in the surrounding area."),
+               -- TRANSLATORS: Note helptext for an empire production site: Forester's House
+               note = pgettext("empire_building", "The forester’s house needs free space within the work area to plant the trees.")
+            }
+         },
+         {
+            name = "empire_lumberjacks_house1",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's House
+               purpose = pgettext("empire_building", "Fells trees in the surrounding area and processes them into logs."),
+               -- TRANSLATORS: Note helptext for an empire production site: Lumberjack's House
+               note = pgettext("empire_building", "The lumberjack's house needs trees to fell within the work area.")
+            }
+         },
+         {
+            name = "empire_mill1",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for an empire production site: Mill
+               purpose = pgettext("empire_building", "Grinds wheat to produce flour."),
+            }
+         },
+         {
+            name = "empire_mill2",
+         },
+         {
+            name = "empire_trainingcamp1",
+            helptexts = {
                purpose = {
                   -- TRANSLATORS: Purpose helptext for an empire training site: Training Camp, part 1
-                  pgettext(buildingctxt, "Trains soldiers in ‘Attack’ and in ‘Health’."),
+                  pgettext("empire_building", "Trains soldiers in ‘Attack’ and in ‘Health’."),
                   -- TRANSLATORS: Purpose helptext for an empire training site: Training Camp, part 2
-                  pgettext(buildingctxt, "Equips the soldiers with all necessary weapons and armor parts.")
+                  pgettext("empire_building", "Equips the soldiers with all necessary weapons and armor parts.")
                },
-               note = {
-                  -- TRANSLATORS: Note helptext for an empire training site: Training Camp
-                  pgettext(buildingctxt, "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
-               }
-            },
-            empire_well1 = {
-               purpose = {
-                  -- TRANSLATORS: Purpose helptext for an empire production site: Well
-                  pgettext(buildingctxt, "Draws water out of the deep.")
-               }
-            },
+               -- TRANSLATORS: Note helptext for an empire training site: Training Camp
+               note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+            }
+         },
+         {
+            name = "empire_well1",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for an empire production site: Well
+               purpose = pgettext("empire_building", "Draws water out of the deep.")
+            }
+         },
+         {
+            name = "empire_temple_of_vesta",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for an empire warehouse: Temple of Vesta
+               purpose = pgettext("empire_building", "In the temple of Vesta, the wares to worship are stored. It is the home of the priestesses and the guards of the goddess.")
+            }
          }
       }
    }

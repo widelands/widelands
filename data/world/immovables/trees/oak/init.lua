@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -126,3 +128,5 @@ wl.World():new_immovable_type{
       }
    },
 }
+
+pop_textdomain()

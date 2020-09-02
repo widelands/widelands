@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 wl.World():new_terrain_type{
    name = "desert4",
    descname = _ "Desert 4",
@@ -13,3 +15,5 @@ wl.World():new_terrain_type{
 
    enhancement = "drysoil"
 }
+
+pop_textdomain()

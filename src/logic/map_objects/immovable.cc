@@ -143,7 +143,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
      size_(BaseImmovable::NONE),
      owner_type_(input_type) {
 	if (!is_animation_known("idle")) {
-		throw GameDataError("Immovable %s has no idle animation", table.get_string("name").c_str());
+		throw GameDataError("Immovable %s has no idle animation", name().c_str());
 	}
 
 	if (table.has_key("size")) {

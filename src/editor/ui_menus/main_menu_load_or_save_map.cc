@@ -33,11 +33,14 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                                              Registry& registry,
                                              const std::string& name,
                                              const std::string& title,
+                                             bool show_empty_dirs,
                                              const std::string& basedir)
    : UI::UniqueWindow(&parent, name, &registry, parent.get_w(), parent.get_h(), title),
 
      // Values for alignment and size
      padding_(4),
+
+     show_empty_dirs_(show_empty_dirs),
 
      main_box_(this, padding_, padding_, UI::Box::Vertical, 0, 0, padding_),
 
@@ -184,7 +187,8 @@ void MainMenuLoadOrSaveMap::fill_table() {
 				maps_data_.push_back(MapData(map, mapfilename, maptype, display_type));
 			} catch (const WException&) {
 			}  //  we simply skip illegal entries
-		} else if (g_fs->is_directory(mapfilename)) {
+		} else if (g_fs->is_directory(mapfilename) &&
+		           (show_empty_dirs_ || g_fs->list_directory(mapfilename).size() > 0)) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
 			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {

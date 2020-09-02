@@ -33,7 +33,6 @@
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
-#include "logic/map_objects/world/world.h"
 #include "website/json/json.h"
 #include "website/website_common.h"
 
@@ -59,7 +58,7 @@ std::string get_helptext(const MapObjectDescr& mo, const TribeDescr& tribe) {
  */
 
 void write_buildings(const TribeDescr& tribe, FileSystem* out_filesystem) {
-	log_info("\n==================\nWriting buildings:\n==================\n");
+	log_info("\n==================\nWriting buildings:\n==================");
 
 	// We don't want any partially finished buildings
 	std::vector<const BuildingDescr*> buildings;
@@ -179,7 +178,7 @@ void write_buildings(const TribeDescr& tribe, FileSystem* out_filesystem) {
  */
 
 void write_wares(const TribeDescr& tribe, FileSystem* out_filesystem) {
-	log_info("\n===============\nWriting wares:\n===============\n");
+	log_info("\n===============\nWriting wares:\n===============");
 
 	std::unique_ptr<JSON::Element> json(new JSON::Element());
 	JSON::Array* json_wares_array = json->add_array("wares");
@@ -205,7 +204,7 @@ void write_wares(const TribeDescr& tribe, FileSystem* out_filesystem) {
  */
 
 void write_workers(const TribeDescr& tribe, FileSystem* out_filesystem) {
-	log_info("\n================\nWriting workers:\n================\n");
+	log_info("\n================\nWriting workers:\n================");
 
 	std::unique_ptr<JSON::Element> json(new JSON::Element());
 	JSON::Array* json_workers_array = json->add_array("workers");
