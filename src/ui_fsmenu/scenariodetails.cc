@@ -73,7 +73,8 @@ void ScenarioDetails::layout() {
 		minimap_icon_.set_desired_size(0, 0);
 	} else {
 		// Fit minimap to width
-		const int width = std::min<int>(main_box_.get_w() - UI::Scrollbar::kSize - 2 * padding_, minimap_image_->width());
+		const int width = std::min<int>(
+		   main_box_.get_w() - UI::Scrollbar::kSize - 2 * padding_, minimap_image_->width());
 		const float scale = static_cast<float>(width) / minimap_image_->width();
 		const int height = scale * minimap_image_->height();
 
@@ -121,8 +122,8 @@ void ScenarioDetails::update(const ScenarioData& scenariodata) {
 		filename << kCampaignsDir << "/" << scenariodata.path;
 		map_loader_ = egbase_.mutable_map()->get_correct_loader(filename.str());
 		if (map_loader_ && !map_loader_->load_map_for_render(egbase_)) {
-			minimap_image_ =
-			   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain);
+			minimap_image_ = draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
+			                              MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
 			minimap_icon_.set_icon(minimap_image_.get());
 			minimap_icon_.set_visible(true);
 		}

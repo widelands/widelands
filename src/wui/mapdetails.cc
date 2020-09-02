@@ -193,8 +193,9 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		egbase_.cleanup_for_load();
 		map_loader_ = egbase_.mutable_map()->get_correct_loader(mapdata.filename);
 		if (map_loader_ && !map_loader_->load_map_for_render(egbase_)) {
-			minimap_image_ =
-			   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain);
+			minimap_image_ = draw_minimap(
+			   egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
+			   MiniMapLayer::Terrain | MiniMapLayer::StartingPositions | MiniMapLayer::Owner);
 			minimap_icon_.set_icon(minimap_image_.get());
 			minimap_icon_.set_visible(true);
 		}
