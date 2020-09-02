@@ -82,7 +82,7 @@ public:
 	void screenshot(const std::string& fname);
 
 private:
-	// Unmaximize the window and set its size.
+	// Set the window size. Use this instead of calling SDL_SetWindowSize directly.
 	void set_window_size(int w, int h);
 
 	// Called when the resolution (might) have changed.
