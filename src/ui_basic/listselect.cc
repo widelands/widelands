@@ -54,7 +54,8 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
 
 void BaseListselect::EntryRecord::init_render_info() {
 	if (!rendered_name) {
-		rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
+		rendered_name =
+		   UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
 		assert(rendered_name);
 	}
 	if (!rendered_hotkey) {
