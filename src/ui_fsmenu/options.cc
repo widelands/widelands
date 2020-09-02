@@ -312,7 +312,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	int cur_win_res_x = g_gr->get_window_mode_xres();
 	int cur_win_res_y = g_gr->get_window_mode_yres();
 
+	/** TRANSLATORS: Entry in the window size dropdown*/
 	resolution_dropdown_.add(_("Fullscreen"), kDropdownFullscreen, nullptr, opt.fullscreen);
+	/** TRANSLATORS: Entry in the window size dropdown*/
 	resolution_dropdown_.add(_("Maximized"), kDropdownMaximized, nullptr,
 	                         !resolution_dropdown_.has_selection() && opt.maximized);
 
@@ -332,6 +334,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 		resolutions_[entry].xres = cur_win_res_x;
 		resolutions_[entry].yres = cur_win_res_y;
 		resolution_dropdown_.add(
+		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
 		   (boost::format(_("%1% x %2%")) % cur_win_res_x % cur_win_res_y).str(), entry, nullptr,
 		   true);
 	}
