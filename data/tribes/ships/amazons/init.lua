@@ -35,6 +35,23 @@ tribes:new_ship_type {
          rows = 5
       },
    },
+
+   names = {
+      -- TRANSLATORS: This Amazonian ship is named after a river
+      pgettext("shipname", "Orinoco"),
+      -- TRANSLATORS: This Amazonian ship is named after a river
+      pgettext("shipname", "Amazonas"),
+      -- TRANSLATORS: This Amazonian ship is named after a river
+      pgettext("shipname", "Abacaxis"),
+      -- TRANSLATORS: This Amazonian ship is named after a river
+      pgettext("shipname", "Anchicaya"),
+      -- TRANSLATORS: This Amazonian ship is named after a river
+      pgettext("shipname", "Guaitara"),
+      -- TRANSLATORS: This Amazonian ship is named after a river
+      pgettext("shipname", "Iscuande"),
+      -- TRANSLATORS: This Amazonian ship is named after a river
+      pgettext("shipname", "Putumayo"),
+   },
 }
 
 pop_textdomain()
