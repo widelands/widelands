@@ -18,7 +18,7 @@ tribes:new_worker_type {
 
    programs = {
       breed = {
-         "findspace=size:any radius:7 breed resource:fish",
+         "findspace=size:any radius:7 breed resource:resource_fish",
          "walk=coords",
          "animate=freeing duration:13s500ms", -- Play a freeing animation
          "breed=resource_fish radius:1",

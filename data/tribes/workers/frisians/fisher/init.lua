@@ -17,7 +17,7 @@ tribes:new_worker_type {
 
    programs = {
       fish = {
-         "findspace=size:any radius:8 resource:fish",
+         "findspace=size:any radius:8 resource:resource_fish",
          "walk=coords",
          "mine=resource_fish radius:1",
          "animate=fishing duration:3s",
