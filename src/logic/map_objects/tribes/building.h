@@ -183,8 +183,9 @@ private:
 	Buildcost buildcost_;
 	Buildcost returns_on_dismantle_;  // Returned wares on dismantle
 	Buildcost enhancement_cost_;      // cost for enhancing
-	Buildcost enhancement_returns_on_dismantle_;   // Returned ware for dismantling an enhanced building
-	int32_t size_;                // size of the building
+	Buildcost
+	   enhancement_returns_on_dismantle_;  // Returned ware for dismantling an enhanced building
+	int32_t size_;                         // size of the building
 	bool mine_;
 	bool port_;
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
