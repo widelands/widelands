@@ -3,11 +3,9 @@ dirname = "tribes/buildings/productionsites/empire/farm/"
 push_textdomain("scenario_emp04.wmf")
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_farm2",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Farm"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 

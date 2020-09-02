@@ -8,7 +8,6 @@
 dirname = "test/maps/market_trading.wmf/" .. path.dirname(__file__)
 
 tribes:new_market_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_market",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Market"),

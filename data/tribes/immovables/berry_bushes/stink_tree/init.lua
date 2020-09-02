@@ -1,3 +1,5 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 terrain_affinity = {
@@ -8,7 +10,6 @@ terrain_affinity = {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_stink_tree_tiny",
    descname = _ "Stink Shepherd’s Tree (tiny)",
    size = "small",
@@ -34,7 +35,6 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_stink_tree_small",
    descname = _ "Stink Shepherd’s Tree (small)",
    size = "small",
@@ -60,7 +60,6 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_stink_tree_medium",
    descname = _ "Stink Shepherd’s Tree (medium)",
    size = "small",
@@ -86,7 +85,6 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_stink_tree_ripe",
    descname = _ "Stink Shepherd’s Tree (ripe)",
    size = "small",
@@ -113,3 +111,5 @@ tribes:new_immovable_type {
       }
    }
 }
+
+pop_textdomain()
