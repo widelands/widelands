@@ -68,9 +68,6 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
      enhanced_building_(false),
      hints_(table.get_table("aihints")),
      vision_range_(0) {
-	if (helptext_script().empty()) {
-		throw GameDataError("Building %s has no helptext script", name().c_str());
-	}
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Building %s has no idle animation", name().c_str());
 	}

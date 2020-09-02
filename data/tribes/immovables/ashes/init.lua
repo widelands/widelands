@@ -22,6 +22,8 @@
 --    **descname**: The translatable display name. Use ``pgettext`` to fetch the string.
 --
 --    **helptext_script**:  The full path to the ``helptexts.lua`` script for this immovable.
+--    **NOTE: Deprecated. Immovable helptexts have been shifted to tribes initialization in the current
+--    development version.**
 --
 --    **programs**: A table with the programs that this immovable will perform,
 --    e.g. ``{ "animate=idle duration:2m30s500ms",  "remove=" }`` (see :ref:`immovable_programs`)
@@ -68,7 +70,6 @@ tribes:new_immovable_type {
    name = "ashes",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Ashes"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
    programs = {

@@ -6,7 +6,6 @@ tribes:new_militarysite_type {
    name = "atlanteans_tower_high",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "High Tower"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    vision_range = 21,

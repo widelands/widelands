@@ -5,7 +5,6 @@ push_textdomain("scenario_emp04.wmf")
 tribes:new_productionsite_type {
    name = "empire_well1",
    descname = pgettext("empire_building", "Well"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
