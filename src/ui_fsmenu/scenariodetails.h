@@ -20,22 +20,39 @@
 #ifndef WL_UI_FSMENU_SCENARIODETAILS_H
 #define WL_UI_FSMENU_SCENARIODETAILS_H
 
+#include <memory>
+
+#include "logic/editor_game_base.h"
+#include "map_io/map_loader.h"
 #include "ui_basic/box.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/panel.h"
 #include "ui_fsmenu/campaigns.h"
 
 /**
  * Show a Box with information about a campaign or tutorial scenario.
  */
-class ScenarioDetails : public UI::Box {
+class ScenarioDetails : public UI::Panel {
 public:
 	explicit ScenarioDetails(Panel* parent);
 
 	void update(const ScenarioData& scenariodata);
 
 private:
+	void layout() override;
+	const int padding_;
+
+	UI::Box main_box_;
+	UI::Box descr_box_;
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
+	UI::Icon minimap_icon_;
+
+	// Used to render map preview
+	std::unique_ptr<Texture> minimap_image_;
+	std::unique_ptr<Widelands::MapLoader> map_loader_;
+	Widelands::EditorGameBase egbase_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_SCENARIODETAILS_H

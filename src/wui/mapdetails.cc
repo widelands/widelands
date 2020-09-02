@@ -66,11 +66,11 @@ MapDetails::MapDetails(
 	descr_.set_handle_mouse(false);
 	descr_box_.set_force_scrolling(true);
 
-	descr_box_.add(&descr_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	descr_box_.add(&descr_);
 	descr_box_.add_space(padding_);
 	descr_box_.add(&minimap_icon_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	main_box_.add(&name_label_);
+	main_box_.add(&name_label_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(padding_);
 	main_box_.add(&descr_box_);
 
@@ -88,11 +88,6 @@ void MapDetails::clear() {
 }
 
 void MapDetails::layout() {
-	name_label_.set_size(get_w() - padding_, text_height(style_ == UI::PanelStyle::kFsMenu ?
-	                                                        UI::FontStyle::kFsMenuInfoPanelHeading :
-	                                                        UI::FontStyle::kWuiInfoPanelHeading) +
-	                                            2);
-
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {
 		suggested_teams_box_->set_pos(Vector2i(0, get_h() - suggested_teams_box_->get_h()));
@@ -106,7 +101,7 @@ void MapDetails::layout() {
 	} else {
 		// Fit minimap to width
 		const int width = std::min<int>(
-		   main_box_.get_w() - 2 * (UI::Scrollbar::kSize + padding_), minimap_image_->width());
+		   main_box_.get_w() - UI::Scrollbar::kSize - 2 * padding_, minimap_image_->width());
 		const float scale = static_cast<float>(width) / minimap_image_->width();
 		const int height = scale * minimap_image_->height();
 

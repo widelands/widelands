@@ -127,10 +127,13 @@ wl_library(wui_common_mapdetails
     base_exceptions
     base_i18n
     graphic_image_cache
+    graphic_minimap_renderer
     graphic_text_layout
     io_filesystem
+    logic
     logic_game_settings
     logic_map
+    map_io_map_loader
     ui_basic
     wui_common_suggested_teams
 )

@@ -21,12 +21,18 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "graphic/minimap_renderer.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
+#include "logic/filesystem_constants.h"
 #include "ui_basic/scrollbar.h"
 
 ScenarioDetails::ScenarioDetails(Panel* parent)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
-     name_label_(this,
+   : UI::Panel(parent, 0, 0, 0, 0),
+     padding_(4),
+     main_box_(this, 0, 0, UI::Box::Vertical),
+     descr_box_(&main_box_, 0, 0, UI::Box::Vertical, 0, 0, 0),
+     name_label_(&main_box_,
                  0,
                  0,
                  UI::Scrollbar::kSize,
@@ -35,12 +41,48 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(this, 0, 0, UI::Scrollbar::kSize, 0, UI::PanelStyle::kFsMenu) {
+     descr_(&descr_box_,
+            0,
+            0,
+            UI::Scrollbar::kSize,
+            0,
+            UI::PanelStyle::kFsMenu,
+            "",
+            UI::Align::kLeft,
+            UI::MultilineTextarea::ScrollMode::kNoScrolling),
+     minimap_icon_(&descr_box_, 0, 0, 0, 0, nullptr),
+     egbase_(nullptr) {
 
-	constexpr int kPadding = 4;
-	add(&name_label_, UI::Box::Resizing::kFullSize);
-	add_space(kPadding);
-	add(&descr_, UI::Box::Resizing::kExpandBoth);
+	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
+	descr_.set_handle_mouse(false);
+	descr_box_.set_force_scrolling(true);
+
+	descr_box_.add(&descr_);
+	descr_box_.add_space(padding_);
+	descr_box_.add(&minimap_icon_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+	main_box_.add(&name_label_, UI::Box::Resizing::kFullSize);
+	main_box_.add_space(padding_);
+	main_box_.add(&descr_box_);
+}
+
+void ScenarioDetails::layout() {
+	main_box_.set_size(get_w(), get_h());
+
+	if (minimap_icon_.icon() == nullptr) {
+		minimap_icon_.set_desired_size(0, 0);
+	} else {
+		// Fit minimap to width
+		const int width = std::min<int>(main_box_.get_w() - UI::Scrollbar::kSize - 2 * padding_, minimap_image_->width());
+		const float scale = static_cast<float>(width) / minimap_image_->width();
+		const int height = scale * minimap_image_->height();
+
+		minimap_icon_.set_desired_size(width, height);
+	}
+
+	const int descr_box_height = main_box_.get_h() - name_label_.get_h() - padding_;
+	descr_.set_desired_size(main_box_.get_w() - UI::Scrollbar::kSize, descr_box_height);
+	descr_box_.set_size(main_box_.get_w(), descr_box_height);
 }
 
 void ScenarioDetails::update(const ScenarioData& scenariodata) {
@@ -72,6 +114,18 @@ void ScenarioDetails::update(const ScenarioData& scenariodata) {
 
 		description = (boost::format("<rt>%s</rt>") % description).str();
 		descr_.set_text(description);
+
+		// Render minimap
+		egbase_.cleanup_for_load();
+		std::stringstream filename;
+		filename << kCampaignsDir << "/" << scenariodata.path;
+		map_loader_ = egbase_.mutable_map()->get_correct_loader(filename.str());
+		if (map_loader_ && !map_loader_->load_map_for_render(egbase_)) {
+			minimap_image_ =
+			   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain);
+			minimap_icon_.set_icon(minimap_image_.get());
+			minimap_icon_.set_visible(true);
+		}
 	} else {
 		descr_.set_text("");
 	}
