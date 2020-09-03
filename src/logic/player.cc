@@ -44,6 +44,7 @@
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -92,6 +93,10 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 
 namespace Widelands {
 
+Player::Field::PartiallyFinishedBuildingDetails::PartiallyFinishedBuildingDetails() {
+	memset(this, 0, sizeof(Player::Field::PartiallyFinishedBuildingDetails));
+}
+
 /**
  * Find the longest possible enhancement chain leading to the given
  * building descr. The FormerBuildings given in reference must be empty and will be
@@ -138,33 +143,22 @@ Player::Player(EditorGameBase& the_egbase,
      civil_blds_defeated_(0),
      ship_name_counter_(0),
      fields_(nullptr),
-     allowed_worker_types_(the_egbase.tribes().nrworkers(), true),
-     allowed_building_types_(the_egbase.tribes().nrbuildings(), true),
-     current_produced_statistics_(the_egbase.tribes().nrwares()),
-     current_consumed_statistics_(the_egbase.tribes().nrwares()),
-     ware_productions_(the_egbase.tribes().nrwares()),
-     ware_consumptions_(the_egbase.tribes().nrwares()),
-     ware_stocks_(the_egbase.tribes().nrwares()),
+     is_picking_custom_starting_position_(false),
      message_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/message")),
      attack_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack")),
      occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")) {
 	set_name(name);
 
-	// Disallow workers that the player's tribe doesn't have.
-	for (size_t worker_index = 0; worker_index < allowed_worker_types_.size(); ++worker_index) {
-		if (!tribe().has_worker(static_cast<DescriptionIndex>(worker_index))) {
-			allowed_worker_types_[worker_index] = false;
-		}
+	init_statistics();
+
+	// Allow workers that the player's tribe has.
+	for (DescriptionIndex worker_index : tribe().workers()) {
+		allow_worker_type(worker_index, true);
 	}
 
-	// Disallow buildings that the player's tribe doesn't have and
-	// that aren't militarysites that the tribe could conquer.
-	for (size_t i = 0; i < allowed_building_types_.size(); ++i) {
-		const DescriptionIndex& building_index = static_cast<DescriptionIndex>(i);
-		const BuildingDescr& descr = *tribe().get_building_descr(building_index);
-		if (!tribe().has_building(building_index) && descr.type() != MapObjectType::MILITARYSITE) {
-			allowed_building_types_[i] = false;
-		}
+	// Allow buildings that the player's tribe has
+	for (DescriptionIndex building_index : tribe().buildings()) {
+		allow_building_type(building_index, true);
 	}
 
 	// Subscribe to NoteImmovables.
@@ -186,7 +180,8 @@ Player::Player(EditorGameBase& the_egbase,
 	   });
 
 	// Populating remaining_shipnames vector
-	for (const auto& shipname : tribe_descr.get_ship_names()) {
+	for (const std::string& shipname :
+	     egbase_.tribes().get_ship_descr(tribe().ship())->get_ship_names()) {
 		remaining_shipnames_.push_back(shipname);
 	}
 
@@ -197,6 +192,9 @@ Player::~Player() {
 }
 
 void Player::create_default_infrastructure() {
+	if (is_picking_custom_starting_position_) {
+		return;
+	}
 	const Map& map = egbase().map();
 	if (map.get_starting_pos(player_number_)) {
 		const Widelands::TribeBasicInfo::Initialization& initialization =
@@ -242,6 +240,73 @@ void Player::allocate_map() {
 	assert(map.get_width());
 	assert(map.get_height());
 	fields_.reset(new Field[map.max_index()]);
+}
+
+bool Player::pick_custom_starting_position(const Coords& c) {
+	assert(is_picking_custom_starting_position_);
+	if (!get_starting_position_suitability(c)) {
+		return false;
+	}
+	dynamic_cast<Game&>(egbase()).send_player_command(
+	   new CmdPickCustomStartingPosition(egbase().get_gametime(), player_number(), c));
+	return true;
+}
+
+void Player::do_pick_custom_starting_position(const Coords& c) {
+	if (!is_picking_custom_starting_position_) {
+		return;
+	}
+	is_picking_custom_starting_position_ = false;
+	egbase().mutable_map()->set_starting_pos(player_number(), c);
+	create_default_infrastructure();
+}
+
+bool Player::get_starting_position_suitability(const Coords& c) const {
+	const Map& map = egbase().map();
+	const FCoords f = map.get_fcoords(c);
+
+	if (f.field->get_owned_by() != 0 || (f.field->nodecaps() & BUILDCAPS_BIG) != BUILDCAPS_BIG) {
+		return false;
+	}
+
+	const Widelands::Field& neighbour = map[map.br_n(c)];
+	if (neighbour.get_owned_by() != 0 || !(neighbour.nodecaps() & BUILDCAPS_FLAG)) {
+		return false;
+	}
+
+	bool is_starting_position = false;
+	for (unsigned p = map.get_nrplayers(); p; --p) {
+		if (map.get_starting_pos(p) == c) {
+			is_starting_position = true;
+			break;
+		}
+	}
+	if (!is_starting_position) {
+		// Check that it is not surrounded by rocks etc.
+		// We assume that the default starting positions are fine.
+		unsigned obstacles_nearby = 0;
+		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(f, 4));
+		do {
+			if (mr.location().field->get_owned_by()) {
+				return false;
+			}
+			if (!(mr.location().field->nodecaps() & BUILDCAPS_FLAG)) {
+				++obstacles_nearby;
+				if (obstacles_nearby > 3) {
+					return false;
+				}
+			}
+		} while (mr.advance(map));
+	}
+
+	// Check for enemy players nearby
+	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(f, kMinSpaceAroundPlayers));
+	do {
+		if (mr.location().field->get_owned_by()) {
+			return false;
+		}
+	} while (mr.advance(map));
+	return true;
 }
 
 /**
@@ -355,7 +420,7 @@ void Player::play_message_sound(const Message* message) {
 			fx = message_fx_;
 		}
 		Notifications::publish(
-		   NoteSound(SoundType::kMessage, fx, message->position(), kFxPriorityAlwaysPlay));
+		   NoteSound(SoundType::kMessage, fx, message->position(), kFxMaximumPriority, true));
 	}
 }
 
@@ -468,7 +533,7 @@ Flag* Player::build_flag(const Coords& c) {
 }
 
 Flag& Player::force_flag(const FCoords& c) {
-	log("Forcing flag at (%i, %i)\n", c.x, c.y);
+	log_info_time(egbase().get_gametime(), "Forcing flag at (%i, %i)\n", c.x, c.y);
 	const Map& map = egbase().map();
 	if (BaseImmovable* const immovable = c.field->get_immovable()) {
 		if (upcast(Flag, existing_flag, immovable)) {
@@ -518,16 +583,19 @@ Road* Player::build_road(const Path& path) {
 					}
 				}
 				if (!(get_buildcaps(fc) & MOVECAPS_WALK)) {
-					log("%i: building road, unwalkable\n", player_number());
+					log_warn_time(
+					   egbase().get_gametime(), "%i: building road, unwalkable\n", player_number());
 					return nullptr;
 				}
 			}
 			return &Road::create(egbase(), *start, *end, path);
 		} else {
-			log("%i: building road, missed end flag\n", player_number());
+			log_warn_time(
+			   egbase().get_gametime(), "%i: building road, missed end flag\n", player_number());
 		}
 	} else {
-		log("%i: building road, missed start flag\n", player_number());
+		log_warn_time(
+		   egbase().get_gametime(), "%i: building road, missed start flag\n", player_number());
 	}
 
 	return nullptr;
@@ -542,7 +610,7 @@ Road& Player::force_road(const Path& path) {
 	Path::StepVector::size_type const laststep = path.get_nsteps() - 1;
 	for (Path::StepVector::size_type i = 0; i < laststep; ++i) {
 		c = map.get_neighbour(c, path[i]);
-		log("Clearing for road at (%i, %i)\n", c.x, c.y);
+		log_info_time(egbase().get_gametime(), "Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
 		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
@@ -561,10 +629,12 @@ Waterway* Player::build_waterway(const Path& path) {
 	const Map& map = egbase().map();
 
 	if (path.get_nsteps() > map.get_waterway_max_length()) {
-		log("%d: Refused to build a waterway because it is too long. Permitted length %d, actual "
-		    "length %" PRIuS ".",
-		    static_cast<unsigned int>(player_number()), map.get_waterway_max_length(),
-		    path.get_nsteps());
+		log_warn_time(
+		   egbase().get_gametime(),
+		   "%d: Refused to build a waterway because it is too long. Permitted length %d, actual "
+		   "length %" PRIuS ".",
+		   static_cast<unsigned int>(player_number()), map.get_waterway_max_length(),
+		   path.get_nsteps());
 		return nullptr;
 	}
 
@@ -582,19 +652,20 @@ Waterway* Player::build_waterway(const Path& path) {
 					}
 				}
 				if (!CheckStepFerry(egbase()).reachable_dest(map, fc)) {
-					log("%i: building waterway aborted, unreachable for ferries\n",
-					    static_cast<unsigned int>(player_number()));
+					log_warn_time(egbase().get_gametime(),
+					              "%i: building waterway aborted, unreachable for ferries\n",
+					              static_cast<unsigned int>(player_number()));
 					return nullptr;
 				}
 			}
 			return &Waterway::create(egbase(), *start, *end, path);
 		} else {
-			log("%i: building waterway aborted, missing end flag\n",
-			    static_cast<unsigned int>(player_number()));
+			log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing end flag\n",
+			              static_cast<unsigned int>(player_number()));
 		}
 	} else {
-		log("%i: building waterway aborted, missing start flag\n",
-		    static_cast<unsigned int>(player_number()));
+		log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing start flag\n",
+		              static_cast<unsigned int>(player_number()));
 	}
 	return nullptr;
 }
@@ -608,7 +679,7 @@ Waterway& Player::force_waterway(const Path& path) {
 	Path::StepVector::size_type const laststep = path.get_nsteps() - 1;
 	for (Path::StepVector::size_type i = 0; i < laststep; ++i) {
 		c = map.get_neighbour(c, path[i]);
-		log("Clearing for waterway at (%i, %i)\n", c.x, c.y);
+		log_info_time(egbase().get_gametime(), "Clearing for waterway at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
 		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
@@ -764,9 +835,10 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 		} else if (upcast(Flag, flag, immovable)) {
 			if (Building* const flagbuilding = flag->get_building()) {
 				if (!(flagbuilding->get_playercaps() & Building::PCap_Bulldoze)) {
-					log("Player trying to rip flag (%u) with undestroyable "
-					    "building (%u)\n",
-					    flag->serial(), flagbuilding->serial());
+					log_warn_time(egbase().get_gametime(),
+					              "Player trying to rip flag (%u) with undestroyable "
+					              "building (%u)\n",
+					              flag->serial(), flagbuilding->serial());
 					return;
 				}
 			}
@@ -785,8 +857,9 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 						                         primary_road->get_flag(RoadBase::FlagEnd) :
 						                         primary_start;
 						primary_road->destroy(egbase());
-						log("destroying road/waterway from (%i, %i) going in dir %u\n",
-						    flag->get_position().x, flag->get_position().y, primary_road_id);
+						log_info_time(egbase().get_gametime(),
+						              "destroying road/waterway from (%i, %i) going in dir %u\n",
+						              flag->get_position().x, flag->get_position().y, primary_road_id);
 						//  The primary road is gone. Now see if the flag at the other
 						//  end of it is a dead-end.
 						if (primary_other.is_dead_end()) {
@@ -988,10 +1061,23 @@ void Player::flagaction(Flag& flag) {
 	}
 }
 
+bool Player::is_worker_type_allowed(const DescriptionIndex& i) const {
+	return allowed_worker_types_.count(i) == 1;
+}
+
 void Player::allow_worker_type(DescriptionIndex const i, bool const allow) {
-	assert(i < static_cast<int>(allowed_worker_types_.size()));
-	assert(!allow || tribe().get_worker_descr(i)->is_buildable());
-	allowed_worker_types_[i] = allow;
+	if (allow) {
+		allowed_worker_types_.insert(i);
+	} else {
+		auto denyme = allowed_worker_types_.find(i);
+		if (denyme != allowed_worker_types_.end()) {
+			allowed_worker_types_.erase(denyme);
+		}
+	}
+}
+
+bool Player::is_building_type_allowed(const DescriptionIndex& i) const {
+	return allowed_building_types_.count(i) == 1;
 }
 
 /*
@@ -1000,8 +1086,14 @@ void Player::allow_worker_type(DescriptionIndex const i, bool const allow) {
  * Disable or enable a building for a player
  */
 void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
-	assert(i < allowed_building_types_.size());
-	allowed_building_types_[i] = allow;
+	if (allow) {
+		allowed_building_types_.insert(i);
+	} else {
+		auto denyme = allowed_building_types_.find(i);
+		if (denyme != allowed_building_types_.end()) {
+			allowed_building_types_.erase(denyme);
+		}
+	}
 }
 
 /*
@@ -1147,9 +1239,10 @@ void Player::enemyflagaction(Flag& flag,
                              PlayerNumber const attacker,
                              const std::vector<Widelands::Soldier*>& soldiers) {
 	if (attacker != player_number()) {
-		log("Player (%d) is not the sender of an attack (%d)\n", attacker, player_number());
+		log_warn_time(egbase().get_gametime(), "Player (%d) is not the sender of an attack (%d)\n",
+		              attacker, player_number());
 	} else if (soldiers.empty()) {
-		log("enemyflagaction: no soldiers given\n");
+		log_warn_time(egbase().get_gametime(), "enemyflagaction: no soldiers given\n");
 	} else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
 			if (const AttackTarget* attack_target = building->attack_target()) {
@@ -1163,9 +1256,11 @@ void Player::enemyflagaction(Flag& flag,
 						} else {
 							// The soldier may not be in a militarysite anymore if he was kicked out
 							// in the short delay between sending and executing a playercommand
-							log("Player(%u)::enemyflagaction: Not sending soldier %u because he left the "
-							    "building\n",
-							    player_number(), temp_attacker->serial());
+							log_warn_time(
+							   egbase().get_gametime(),
+							   "Player(%u)::enemyflagaction: Not sending soldier %u because he left the "
+							   "building\n",
+							   player_number(), temp_attacker->serial());
 						}
 					}
 				}
@@ -1221,8 +1316,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		field.border_bl = field.border && bl_vision != SeeUnseeNode::kUnexplored &&
 		                  fields_[bl_index].border && fields_[bl_index].owner == field.owner;
 		{
-			const MapObjectDescr* map_object_descr;
-			field.constructionsite.becomes = nullptr;
+			const MapObjectDescr* map_object_descr = nullptr;
 			if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
 
@@ -1231,16 +1325,27 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 					map_object_descr = nullptr;
 				} else if (upcast(Building const, building, base_immovable)) {
 					if (building->get_position() != f) {
-						// This is not the building's main position so we can not see it.
+						// This is not the building's main position. We don't store the building's
+						// description here but in its main position instead.
 						map_object_descr = nullptr;
+						FCoords main_coords = map.get_fcoords(building->get_position());
+						Field& field_main = fields_[main_coords.field - &first_map_field];
+						if (field_main.seeing != SeeUnseeNode::kVisible) {
+							rediscover_node(map, main_coords);
+							field_main.time_node_last_unseen = egbase().get_gametime();
+							field_main.seeing = SeeUnseeNode::kPreviouslySeen;
+						}
 					} else {
 						if (upcast(ConstructionSite const, cs, building)) {
-							field.constructionsite = const_cast<ConstructionSite*>(cs)->get_info();
+							field.partially_finished_building.constructionsite =
+							   const_cast<ConstructionSite*>(cs)->get_info();
+						} else if (upcast(DismantleSite const, ds, building)) {
+							field.partially_finished_building.dismantlesite.progress =
+							   ds->get_built_per64k();
+							field.partially_finished_building.dismantlesite.building = ds->get_building();
 						}
 					}
 				}
-			} else {
-				map_object_descr = nullptr;
 			}
 			field.map_object_descr = map_object_descr;
 		}
@@ -1414,33 +1519,38 @@ void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
  * Called by Game::think to sample statistics data in regular intervals.
  */
 void Player::sample_statistics() {
-	assert(ware_productions_.size() == egbase().tribes().nrwares());
-	assert(ware_consumptions_.size() == egbase().tribes().nrwares());
-	assert(ware_stocks_.size() == egbase().tribes().nrwares());
+	assert(current_consumed_statistics_.size() == tribe().wares().size());
+	assert(current_produced_statistics_.size() == tribe().wares().size());
+	assert(ware_productions_.size() == tribe().wares().size());
+	assert(ware_consumptions_.size() == tribe().wares().size());
+	assert(ware_stocks_.size() == tribe().wares().size());
 
 	// Calculate stocks
-	std::vector<uint32_t> stocks(egbase().tribes().nrwares());
+	std::map<DescriptionIndex, Quantity> stocks;
+	for (DescriptionIndex idx : tribe().wares()) {
+		stocks.insert(std::make_pair(idx, 0U));
+	}
 
 	for (const auto& economy : economies()) {
 		if (economy.second->type() == wwWARE) {
 			for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
 				const Widelands::WareList& wares = warehouse->get_wares();
-				for (size_t id = 0; id < stocks.size(); ++id) {
-					stocks[id] += wares.stock(DescriptionIndex(id));
+				for (DescriptionIndex idx : tribe().wares()) {
+					stocks.at(idx) += wares.stock(idx);
 				}
 			}
 		}
 	}
 
 	// Update statistics
-	for (uint32_t i = 0; i < ware_productions_.size(); ++i) {
-		ware_productions_[i].push_back(current_produced_statistics_[i]);
-		current_produced_statistics_[i] = 0;
+	for (DescriptionIndex idx : tribe().wares()) {
+		ware_productions_.at(idx).push_back(current_produced_statistics_.at(idx));
+		current_produced_statistics_.at(idx) = 0;
 
-		ware_consumptions_[i].push_back(current_consumed_statistics_[i]);
-		current_consumed_statistics_[i] = 0;
+		ware_consumptions_.at(idx).push_back(current_consumed_statistics_.at(idx));
+		current_consumed_statistics_.at(idx) = 0;
 
-		ware_stocks_[i].push_back(stocks[i]);
+		ware_stocks_.at(idx).push_back(stocks.at(idx));
 	}
 }
 
@@ -1448,19 +1558,17 @@ void Player::sample_statistics() {
  * A ware was produced. Update the corresponding statistics.
  */
 void Player::ware_produced(DescriptionIndex const wareid) {
-	assert(ware_productions_.size() == egbase().tribes().nrwares());
+	assert(tribe().has_ware(wareid));
 	assert(egbase().tribes().ware_exists(wareid));
-	++current_produced_statistics_[wareid];
+	++current_produced_statistics_.at(wareid);
 }
 
 /**
  * Return count of produced wares for ware index
  */
 uint32_t Player::get_current_produced_statistics(uint8_t const wareid) {
-	assert(wareid < egbase().tribes().nrwares());
-	assert(wareid < ware_productions_.size());
-	assert(wareid < current_produced_statistics_.size());
-	uint32_t sum = current_produced_statistics_[wareid];
+	assert(tribe().has_ware(wareid));
+	uint32_t sum = current_produced_statistics_.at(wareid);
 	for (const auto stat : *get_ware_production_statistics(wareid)) {
 		sum += stat;
 	}
@@ -1475,10 +1583,8 @@ uint32_t Player::get_current_produced_statistics(uint8_t const wareid) {
  * \param count the number of consumed wares
  */
 void Player::ware_consumed(DescriptionIndex const wareid, uint8_t const count) {
-	assert(ware_consumptions_.size() == egbase().tribes().nrwares());
-	assert(egbase().tribes().ware_exists(wareid));
-
-	current_consumed_statistics_[wareid] += count;
+	assert(tribe().has_ware(wareid));
+	current_consumed_statistics_.at(wareid) += count;
 }
 
 /**
@@ -1486,8 +1592,8 @@ void Player::ware_consumed(DescriptionIndex const wareid, uint8_t const count) {
  */
 const std::vector<uint32_t>*
 Player::get_ware_production_statistics(DescriptionIndex const ware) const {
-	assert(ware < static_cast<int>(ware_productions_.size()));
-	return &ware_productions_[ware];
+	assert(tribe().has_ware(ware));
+	return &ware_productions_.at(ware);
 }
 
 /**
@@ -1495,16 +1601,13 @@ Player::get_ware_production_statistics(DescriptionIndex const ware) const {
  */
 const std::vector<uint32_t>*
 Player::get_ware_consumption_statistics(DescriptionIndex const ware) const {
-
-	assert(ware < static_cast<int>(ware_consumptions_.size()));
-
-	return &ware_consumptions_[ware];
+	assert(tribe().has_ware(ware));
+	return &ware_consumptions_.at(ware);
 }
 
 const std::vector<uint32_t>* Player::get_ware_stock_statistics(DescriptionIndex const ware) const {
-	assert(ware < static_cast<int>(ware_stocks_.size()));
-
-	return &ware_stocks_[ware];
+	assert(tribe().has_ware(ware));
+	return &ware_stocks_.at(ware);
 }
 
 const Player::BuildingStatsVector&
@@ -1688,6 +1791,22 @@ void Player::read_remaining_shipnames(FileRead& fr) {
 	ship_name_counter_ = fr.unsigned_32();
 }
 
+void Player::init_statistics() {
+	current_produced_statistics_.clear();
+	current_consumed_statistics_.clear();
+	ware_consumptions_.clear();
+	ware_productions_.clear();
+	ware_stocks_.clear();
+
+	for (DescriptionIndex ware_index : tribe().wares()) {
+		current_produced_statistics_.insert(std::make_pair(ware_index, 0U));
+		current_consumed_statistics_.insert(std::make_pair(ware_index, 0U));
+		ware_consumptions_.insert(std::make_pair(ware_index, std::vector<Quantity>()));
+		ware_productions_.insert(std::make_pair(ware_index, std::vector<Quantity>()));
+		ware_stocks_.insert(std::make_pair(ware_index, std::vector<Quantity>()));
+	}
+}
+
 /**
  * Read statistics data from a file.
  *
@@ -1698,37 +1817,40 @@ void Player::read_statistics(FileRead& fr,
                              const TribesLegacyLookupTable& lookup_table) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
+	assert(tribe().wares().size() >= nr_wares);
 
 	// Stats are saved as a single string to reduce number of hard disk write operations
-	const auto parse_stats =
-	   [nr_entries](std::vector<std::vector<uint32_t>>* stats, const DescriptionIndex ware_index,
-	                const std::string& stats_string, const std::string& description) {
-		   if (!stats_string.empty()) {
-			   std::vector<std::string> stats_vector;
-			   boost::split(stats_vector, stats_string, boost::is_any_of("|"));
-			   if (stats_vector.size() != nr_entries) {
-				   throw GameDataError("wrong number of %s statistics - expected %" PRIuS
-				                       " but got %" PRIuS,
-				                       description.c_str(), nr_entries, stats_vector.size());
-			   }
-			   for (size_t j = 0; j < nr_entries; ++j) {
-				   stats->at(ware_index)[j] = boost::lexical_cast<unsigned int>(stats_vector.at(j));
-			   }
-		   } else if (nr_entries > 0) {
-			   throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",
-			                       description.c_str(), nr_entries);
-		   }
-	   };
+	const auto parse_stats = [nr_entries](StatisticsMap* stats, const DescriptionIndex ware_index,
+	                                      const std::string& stats_string,
+	                                      const std::string& description) {
+		if (!stats_string.empty()) {
+			std::vector<std::string> stats_vector;
+			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
+			if (stats_vector.size() != nr_entries) {
+				throw GameDataError("wrong number of %s statistics - expected %" PRIuS
+				                    " but got %" PRIuS,
+				                    description.c_str(), nr_entries, stats_vector.size());
+			}
+			for (size_t j = 0; j < nr_entries; ++j) {
+				stats->at(ware_index)[j] =
+				   boost::lexical_cast<unsigned int>(stats_vector.at(j).c_str());
+			}
+		} else if (nr_entries > 0) {
+			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",
+			                    description.c_str(), nr_entries);
+		}
+	};
 
-	for (uint32_t i = 0; i < current_produced_statistics_.size(); ++i) {
-		ware_productions_[i].resize(nr_entries);
+	for (DescriptionIndex idx : tribe().wares()) {
+		ware_productions_[idx].resize(nr_entries);
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
-			log("Player %u statistics: unknown ware name %s", player_number(), name.c_str());
+			log_warn_time(egbase().get_gametime(), "Player %u statistics: unknown ware name %s",
+			              player_number(), name.c_str());
 			continue;
 		}
 
@@ -1739,17 +1861,19 @@ void Player::read_statistics(FileRead& fr,
 	// Read consumption statistics
 	nr_wares = fr.unsigned_16();
 	nr_entries = fr.unsigned_16();
+	assert(tribe().wares().size() >= nr_wares);
 
-	for (uint32_t i = 0; i < current_consumed_statistics_.size(); ++i) {
-		ware_consumptions_[i].resize(nr_entries);
+	for (DescriptionIndex idx : tribe().wares()) {
+		ware_consumptions_[idx].resize(nr_entries);
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
-			log("Player %u consumption statistics: unknown ware name %s", player_number(),
-			    name.c_str());
+			log_warn_time(egbase().get_gametime(),
+			              "Player %u consumption statistics: unknown ware name %s", player_number(),
+			              name.c_str());
 			continue;
 		}
 
@@ -1760,16 +1884,18 @@ void Player::read_statistics(FileRead& fr,
 	// Read stock statistics
 	nr_wares = fr.unsigned_16();
 	nr_entries = fr.unsigned_16();
+	assert(tribe().wares().size() >= nr_wares);
 
-	for (uint32_t i = 0; i < ware_stocks_.size(); ++i) {
-		ware_stocks_[i].resize(nr_entries);
+	for (DescriptionIndex idx : tribe().wares()) {
+		ware_stocks_[idx].resize(nr_entries);
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
-			log("Player %u stock statistics: unknown ware name %s", player_number(), name.c_str());
+			log_warn_time(egbase().get_gametime(), "Player %u stock statistics: unknown ware name %s",
+			              player_number(), name.c_str());
 			continue;
 		}
 
@@ -1778,10 +1904,10 @@ void Player::read_statistics(FileRead& fr,
 
 	// All statistics should have the same size
 	assert(ware_productions_.size() == ware_consumptions_.size());
-	assert(ware_productions_[0].size() == ware_consumptions_[0].size());
+	assert(ware_productions_.begin()->second.size() == ware_consumptions_.begin()->second.size());
 
 	assert(ware_productions_.size() == ware_stocks_.size());
-	assert(ware_productions_[0].size() == ware_stocks_[0].size());
+	assert(ware_productions_.begin()->second.size() == ware_stocks_.begin()->second.size());
 }
 
 /**
@@ -1800,15 +1926,14 @@ void Player::write_remaining_shipnames(FileWrite& fw) const {
  */
 void Player::write_statistics(FileWrite& fw) const {
 	// Save stats as a single string to reduce number of hard disk write operations
-	const auto write_stats = [&fw](const std::vector<std::vector<uint32_t>>& stats,
-	                               const DescriptionIndex ware_index) {
+	const auto write_stats = [&fw](const StatisticsMap& stats, const DescriptionIndex ware_index) {
 		std::ostringstream oss("");
-		const int sizem = stats[ware_index].size() - 1;
+		const int sizem = stats.at(ware_index).size() - 1;
 		if (sizem >= 0) {
 			for (int i = 0; i < sizem; ++i) {
-				oss << stats[ware_index][i] << "|";
+				oss << stats.at(ware_index).at(i) << "|";
 			}
-			oss << stats[ware_index][sizem];
+			oss << stats.at(ware_index).at(sizem);
 		}
 		fw.c_string(oss.str());
 	};
@@ -1819,27 +1944,27 @@ void Player::write_statistics(FileWrite& fw) const {
 
 	// Write produce statistics
 	fw.unsigned_16(nr_wares);
-	fw.unsigned_16(ware_productions_[0].size());
+	fw.unsigned_16(ware_productions_.begin()->second.size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(tribes.get_ware_descr(ware_index)->name());
-		fw.unsigned_32(current_produced_statistics_[ware_index]);
+		fw.unsigned_32(current_produced_statistics_.at(ware_index));
 		write_stats(ware_productions_, ware_index);
 	}
 
 	// Write consume statistics
 	fw.unsigned_16(nr_wares);
-	fw.unsigned_16(ware_consumptions_[0].size());
+	fw.unsigned_16(ware_consumptions_.begin()->second.size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(tribes.get_ware_descr(ware_index)->name());
-		fw.unsigned_32(current_consumed_statistics_[ware_index]);
+		fw.unsigned_32(current_consumed_statistics_.at(ware_index));
 		write_stats(ware_consumptions_, ware_index);
 	}
 
 	// Write stock statistics
 	fw.unsigned_16(nr_wares);
-	fw.unsigned_16(ware_stocks_[0].size());
+	fw.unsigned_16(ware_stocks_.begin()->second.size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(tribes.get_ware_descr(ware_index)->name());

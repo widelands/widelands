@@ -22,7 +22,6 @@
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/map_object.h"
 
 namespace Widelands {
 class Economy;

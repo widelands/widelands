@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_gold_spinning_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Gold Spinning Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -43,17 +43,19 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
          descname = _"spinning gold",
          actions = {
             "return=skipped unless economy needs gold_thread",
             "consume=gold",
             "sleep=duration:15s",
-            "playsound=sound/atlanteans/goldspin 192",
+            "playsound=sound/atlanteans/goldspin priority:50% allow_multiple",
             "animate=working duration:25s",
             "produce=gold_thread"
          }
       },
    },
 }
+
+pop_textdomain()

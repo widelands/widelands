@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Niektóry <niektory@gmail.com>, 2020\n"
 "Language-Team: Polish (https://www.transifex.com/widelands/teams/35159/pl/)\n"
@@ -1112,8 +1112,3 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:647
 msgid "Artifact Found"
 msgstr "Znaleziono artefakt"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "„%s”"

@@ -75,6 +75,14 @@ void SinglePlayerGameSettingsProvider::set_peaceful_mode(bool peace) {
 	s.peaceful = peace;
 }
 
+bool SinglePlayerGameSettingsProvider::get_custom_starting_positions() {
+	return s.custom_starting_positions;
+}
+
+void SinglePlayerGameSettingsProvider::set_custom_starting_positions(bool c) {
+	s.custom_starting_positions = c;
+}
+
 void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
                                                const std::string& mapfilename,
                                                uint32_t const maxplayers,

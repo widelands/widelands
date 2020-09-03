@@ -1,3 +1,5 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 terrain_affinity = {
@@ -8,16 +10,13 @@ terrain_affinity = {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_currant_red_tiny",
    descname = _ "Red Currant (tiny)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "tiny/menu.png",
-   attributes = { "seed_berrybush" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:24s",
          "grow=berry_bush_currant_red_small",
       },
@@ -35,16 +34,13 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_currant_red_small",
    descname = _ "Red Currant (small)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "small/menu.png",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:28s",
          "grow=berry_bush_currant_red_medium",
       },
@@ -62,16 +58,13 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_currant_red_medium",
    descname = _ "Red Currant (medium)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "medium/menu.png",
-   attributes = { "flowering" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:26s",
          "grow=berry_bush_currant_red_ripe",
       },
@@ -89,16 +82,13 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_currant_red_ripe",
    descname = _ "Red Currant (ripe)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "ripe/menu.png",
-   attributes = { "ripe_bush" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:4m10s",
          "remove=",
       },
@@ -117,3 +107,5 @@ tribes:new_immovable_type {
       }
    }
 }
+
+pop_textdomain()

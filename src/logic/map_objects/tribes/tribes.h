@@ -20,11 +20,15 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBES_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBES_H
 
+#include <list>
 #include <memory>
 
 #include "base/macros.h"
 #include "logic/map_objects/description_maintainer.h"
+#include "logic/map_objects/description_manager.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/map_object_type.h"
+#include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/ware_descr.h"
@@ -35,59 +39,8 @@ namespace Widelands {
 
 class Tribes {
 public:
-	Tribes();
-	~Tribes() {
-	}
-
-	/// Adds this building type to the tribe description.
-	void add_constructionsite_type(const LuaTable& table);
-
-	/// Adds this building type to the tribe description.
-	void add_dismantlesite_type(const LuaTable& table);
-
-	/// Adds this building type to the tribe description.
-	void add_militarysite_type(const LuaTable& table);
-
-	/// Adds this building type to the tribe description.
-	void add_productionsite_type(const LuaTable& table, const World& world);
-
-	/// Adds this building type to the tribe description.
-	void add_trainingsite_type(const LuaTable& table, const World& world);
-
-	/// Adds this building type to the tribe description.
-	void add_warehouse_type(const LuaTable& table);
-
-	/// Adds this building type to the tribe description.
-	void add_market_type(const LuaTable& table);
-
-	/// Adds this immovable type to the tribe description.
-	void add_immovable_type(const LuaTable& table);
-
-	/// Adds this ship type to the tribe description.
-	void add_ship_type(const LuaTable& table);
-
-	/// Adds this ware type to the tribe description.
-	void add_ware_type(const LuaTable& table);
-
-	/// Adds this worker type to the tribe description.
-	void add_carrier_type(const LuaTable& table);
-
-	/// Adds this worker type to the tribe description.
-	void add_soldier_type(const LuaTable& table);
-
-	/// Adds this worker type to the tribe description.
-	void add_ferry_type(const LuaTable& table);
-
-	/// Adds this worker type to the tribe description.
-	void add_worker_type(const LuaTable& table);
-
-	/// Adds a specific tribe's configuration.
-	void add_tribe(const LuaTable& table, const World& world);
-
-	/// Registers a custom scenario building with the tribes
-	void add_custom_building(const LuaTable& table);
-	/// Registers a custom scenario worker with the tribes
-	void add_custom_worker(const LuaTable& table);
+	Tribes(DescriptionManager* description_manager, LuaInterface* lua);
+	~Tribes() = default;
 
 	size_t nrbuildings() const;
 	size_t nrtribes() const;
@@ -95,13 +48,14 @@ public:
 	size_t nrworkers() const;
 
 	bool ware_exists(const std::string& warename) const;
-	bool ware_exists(const DescriptionIndex& index) const;
+	bool ware_exists(DescriptionIndex index) const;
 	bool worker_exists(const std::string& workername) const;
-	bool worker_exists(const DescriptionIndex& index) const;
+	bool worker_exists(DescriptionIndex index) const;
 	bool building_exists(const std::string& buildingname) const;
-	bool building_exists(const DescriptionIndex& index) const;
+	bool building_exists(DescriptionIndex index) const;
 	bool immovable_exists(DescriptionIndex index) const;
 	bool ship_exists(DescriptionIndex index) const;
+	bool tribe_exists(const std::string& tribename) const;
 	bool tribe_exists(DescriptionIndex index) const;
 
 	DescriptionIndex safe_building_index(const std::string& buildingname) const;
@@ -121,24 +75,47 @@ public:
 	const BuildingDescr* get_building_descr(DescriptionIndex building_index) const;
 	BuildingDescr* get_mutable_building_descr(DescriptionIndex building_index) const;
 	const ImmovableDescr* get_immovable_descr(DescriptionIndex immovable_index) const;
+	ImmovableDescr* get_mutable_immovable_descr(DescriptionIndex immovable_index) const;
 	const ShipDescr* get_ship_descr(DescriptionIndex ship_index) const;
 	const WareDescr* get_ware_descr(DescriptionIndex ware_index) const;
+	WareDescr* get_mutable_ware_descr(DescriptionIndex ware_index) const;
 	const WorkerDescr* get_worker_descr(DescriptionIndex worker_index) const;
+	WorkerDescr* get_mutable_worker_descr(DescriptionIndex worker_index) const;
 	const TribeDescr* get_tribe_descr(DescriptionIndex tribe_index) const;
 
-	/// Load tribes' graphics
-	void load_graphics();
+	// ************************ Loading *************************
 
-	/// Complete the Description objects' information with data from other Description objects.
-	void postload();
+	/// Define a scenario tribe directory, search it for 'register.lua' files and register their
+	/// 'init.lua' scripts
+	void register_scenario_tribes(FileSystem* filesystem);
+
+	/// Add a tribe object type to the tribes.
+	void add_tribe_object_type(const LuaTable& table, World& world, MapObjectType type);
+
+	/// Adds a specific tribe's configuration.
+	void add_tribe(const LuaTable& table, const World& world);
+
+	/// Load a tribe that has been registered previously with 'register_description'
+	DescriptionIndex load_tribe(const std::string& tribename);
+	/// Load a building that has been registered previously with 'register_description'
+	DescriptionIndex load_building(const std::string& buildingname);
+	/// Load an immovable that has been registered previously with 'register_description'
+	DescriptionIndex load_immovable(const std::string& immovablename);
+	/// Load a ship that has been registered previously with 'register_description'
+	DescriptionIndex load_ship(const std::string& shipname);
+	/// Load a ware that has been registered previously with 'register_description'
+	DescriptionIndex load_ware(const std::string& warename);
+	/// Load a worker that has been registered previously with 'register_description'
+	DescriptionIndex load_worker(const std::string& workername);
+	/// Try to load a ware/worker that has been registered previously with 'register_description'
+	/// when we don't know whether it's a ware or worker
+	/// Throws GameDataError if object hasn't been registered
+	WareWorker try_load_ware_or_worker(const std::string& objectname) const;
 
 	uint32_t get_largest_workarea() const;
+	void increase_largest_workarea(uint32_t workarea);
 
 private:
-	void postload_calculate_trainingsites_proportions();
-	void postload_register_economy_demand_checks(BuildingDescr& building_descr,
-	                                             const TribeDescr& tribe_descr);
-
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<ShipDescr>> ships_;
@@ -149,6 +126,11 @@ private:
 
 	uint32_t largest_workarea_;
 
+	/// Custom scenario tribes
+	std::unique_ptr<LuaTable> scenario_tribes_;
+
+	LuaInterface* lua_;                        // Not owned
+	DescriptionManager* description_manager_;  // Not owned
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };
 

@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <iterator>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -33,7 +34,6 @@
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -68,21 +68,21 @@ Flag::Flag()
  */
 Flag::~Flag() {
 	if (ware_filled_) {
-		log("Flag: ouch! wares left\n");
+		log_warn("Flag: ouch! wares left\n");
 	}
 	delete[] wares_;
 
 	if (building_) {
-		log("Flag: ouch! building left\n");
+		log_warn("Flag: ouch! building left\n");
 	}
 
 	if (flag_jobs_.size()) {
-		log("Flag: ouch! flagjobs left\n");
+		log_warn("Flag: ouch! flagjobs left\n");
 	}
 
 	for (const RoadBase* const road : roads_) {
 		if (road) {
-			log("Flag: ouch! road left\n");
+			log_warn("Flag: ouch! road left\n");
 		}
 	}
 }
@@ -92,16 +92,16 @@ void Flag::load_finish(EditorGameBase& egbase) {
 		Worker& worker = *r.get(egbase);
 		Bob::State const* const state = worker.get_state(Worker::taskWaitforcapacity);
 		if (state == nullptr) {
-			log("WARNING: worker %u is in the capacity wait queue of flag %u but "
-			    "does not have a waitforcapacity task! Removing from queue.\n",
-			    worker.serial(), serial());
+			log_warn("worker %u is in the capacity wait queue of flag %u but "
+			         "does not have a waitforcapacity task! Removing from queue.\n",
+			         worker.serial(), serial());
 			return true;
 		}
 		if (state->objvar1 != this) {
-			log("WARNING: worker %u is in the capacity wait queue of flag %u but "
-			    "its waitforcapacity task is for map object %u! Removing from "
-			    "queue.\n",
-			    worker.serial(), serial(), state->objvar1.serial());  // NOLINT
+			log_warn("worker %u is in the capacity wait queue of flag %u but "
+			         "its waitforcapacity task is for map object %u! Removing from "
+			         "queue.\n",
+			         worker.serial(), serial(), state->objvar1.serial());  // NOLINT
 			return true;
 		}
 		return false;
@@ -747,7 +747,8 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 
 		// Deal with the building case
 		if (nextstep == get_building()) {
-			molog("Flag::call_carrier(%u): Tell building to fetch this ware\n", ware.serial());
+			molog(game.get_gametime(), "Flag::call_carrier(%u): Tell building to fetch this ware\n",
+			      ware.serial());
 
 			if (!get_building()->fetch_from_flag(game)) {
 				pi->ware->cancel_moving();
@@ -946,24 +947,24 @@ void Flag::flag_job_request_callback(
 		}
 	}
 
-	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
+	flag.molog(game.get_gametime(), "BUG: flag_job_request_callback: worker not found in list\n");
 }
 
 void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
-	molog("Flag at %i,%i\n", position_.x, position_.y);
+	molog(egbase.get_gametime(), "Flag at %i,%i\n", position_.x, position_.y);
 
 	Widelands::PlayerImmovable::log_general_info(egbase);
 
 	if (ware_filled_) {
-		molog("Wares at flag:\n");
+		molog(egbase.get_gametime(), "Wares at flag:\n");
 		for (int i = 0; i < ware_filled_; ++i) {
 			PendingWare& pi = wares_[i];
-			molog(" %i/%i: %s(%i), nextstep %i, %s\n", i + 1, ware_capacity_,
+			molog(egbase.get_gametime(), " %i/%i: %s(%i), nextstep %i, %s\n", i + 1, ware_capacity_,
 			      pi.ware->descr().name().c_str(), pi.ware->serial(), pi.nextstep.serial(),
 			      pi.pending ? "pending" : "acked by carrier");
 		}
 	} else {
-		molog("No wares at flag.\n");
+		molog(egbase.get_gametime(), "No wares at flag.\n");
 	}
 }
 }  // namespace Widelands

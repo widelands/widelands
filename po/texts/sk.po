@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-04-24 17:22+0000\n"
-"Last-Translator: Karl Vest\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-07-23 07:47+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -339,11 +339,11 @@ msgid ""
 " wiki there."
 msgstr "Ak potrebujete ďalšiu dokumentáciu alebo pomoc s hrou Widelands alebo jej editorom, navštívte našu domovskú stránku %s. Nájdete tam pomoc na našej wiki."
 
-#: ../../data/txts/help/common_helptexts.lua:17
+#: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
 msgstr "Úvod"
 
-#: ../../data/txts/help/common_helptexts.lua:18
+#: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer "
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -351,7 +351,7 @@ msgid ""
 "started through playable tutorials."
 msgstr "Widelands je slobodná, open-source strategická hra v reálnom čase, ktorá ponúka kampaň pre jedného hráča a režim pre viacerých hráčov. Bola inšpirovaná hrou Settlers II, avšak je omnoho zložitejšia a rozmanitejšia. Napriek tomu je ľahké osvojiť si základy prostredníctvom hrateľných tutoriálov."
 
-#: ../../data/txts/help/common_helptexts.lua:19
+#: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
 "In this game, you start out on a small piece of land with just a few "
 "resources. Using these, you’ll create an empire with many thousands of "
@@ -360,11 +360,11 @@ msgid ""
 "tribes."
 msgstr "V tejto hre začínate na malom území s trochou surovín. Pomocou nich môžete vybudovať ríšu s tisíckami obyvateľov. Na ceste k tomuto cieľu budete musieť vytvoriť ekonomickú infraštruktúru, preskúmať okolité územie a čeliť nepriateľským kmeňom."
 
-#: ../../data/txts/help/common_helptexts.lua:25
+#: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
 msgstr "Záznamy"
 
-#: ../../data/txts/help/common_helptexts.lua:26
+#: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
 "Widelands records every game you play in two files. One of these files has a"
 " .wrpl.wgf extension and contains an initial savegame. The other file has a "
@@ -373,7 +373,7 @@ msgid ""
 "will tell you the time you started the game."
 msgstr "Widelands zaznamenáva každú hru, ktorú hráte, v dvoch súboroch. Jeden z týchto súborov má príponu .wrpl.wgf a obsahuje začiatočný stav hry. Druhý súbor má príponu .wrpl a obsahuje všetky povely, ktoré vydali hráči, ako napríklad stavba cesty alebo útok na nepriateľa. Zvyšok z názvu týchto súborov vám prezradí čas, kedy ste začali hru."
 
-#: ../../data/txts/help/common_helptexts.lua:27
+#: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -383,7 +383,7 @@ msgid ""
 "players has a different version of the game."
 msgstr "Možnosť „Sledovať záznam“ v hlavnej ponuke vám umožňuje prehrať predošlú hru v presne rovnakej podobe, ako bola hraná. Všimnite si však, že aj malé zmeny v herných dátových súboroch alebo spúšťači Widelands môžu spôsobiť stratu kompatibility alebo synchronizácie záznamu. Je to, ako keď v sieťovej hre nastanú synchronizačné problémy pre odlišnú verziu hry jedného z hráčov."
 
-#: ../../data/txts/help/common_helptexts.lua:28
+#: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
@@ -393,7 +393,7 @@ msgid ""
 msgstr "Záznamy sú veľmi užitočným nástrojom na hľadanie chýb v hernej logike, niekedy je preto vhodné priložiť ich k nahláseným chybám. Záznamové súbory sú v systémoch Linux a Mac OS X uložené v adresári %s. V systéme Windows sa nachádzajú v podadresári „replays“ adresára, kde ste nainštalovali Widelands."
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../data/txts/help/common_helptexts.lua:35
+#: ../../data/txts/help/common_helptexts.lua:41
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
@@ -401,27 +401,27 @@ msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Medzerník"
 
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
 msgstr "Prepnutie stavebných miest"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgctxt "hotkey"
 msgid "Ctrl + F"
 msgstr "Ctrl + F"
 
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Prepnutie režimu celej obrazovky (ak to podporuje OS)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:56
+#: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "Prepnutie minimapy"
 
@@ -699,8 +699,8 @@ msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
-msgid "Ctrl+(1-9)"
-msgstr "Ctrl+(1-9)"
+msgid "Ctrl + (1-9)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:43
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -742,13 +742,13 @@ msgstr "Niektoré budovy, ako napríklad farma, majú veľmi malú pracovnú obl
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+(+/-)"
-msgstr "Ctrl+(+/-)"
+msgid "Ctrl + (+/-)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+0"
-msgstr "Ctrl+0"
+msgid "Ctrl + 0"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
@@ -762,8 +762,8 @@ msgstr "Použite klávesy ',' (čiarku) a '.' (bodku) pre rýchle prepínanie sa
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Ctrl+(Page Up/Page Down)"
-msgstr "Ctrl+(Page Up/Page Down)"
+msgid "Ctrl + (Page Up/Page Down)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
@@ -772,8 +772,8 @@ msgstr "Page Up/Page Down"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Shift+(Page Up/Page Down)"
-msgstr "Shift+(Page Up/Page Down)"
+msgid "Shift + (Page Up/Page Down)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
 msgid ""
@@ -788,8 +788,8 @@ msgstr "Klávesy šípiek"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
-msgstr "Ctrl+klávesa šípky"
+msgid "Ctrl + Arrow keys"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
@@ -798,8 +798,8 @@ msgstr "Posuňte mapu použitím %1%. %2% posun zrýchli, %3% posun spomalí."
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Shift+Arrow keys"
-msgstr "Shift+Šípky"
+msgid "Shift + Arrow keys"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:87
 msgid ""

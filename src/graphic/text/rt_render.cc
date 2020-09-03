@@ -195,7 +195,8 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 	try {
 		font.reset(load_font(ns->font_face, font_size));
 	} catch (FileNotFoundError& e) {
-		log("Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
+		log_warn(
+		   "Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
 		font.reset(load_font(ns->fontset->sans(), font_size));
 	}
 	assert(font != nullptr);
@@ -259,6 +260,13 @@ public:
 	void set_valign(UI::Align gvalign) {
 		valign_ = gvalign;
 	}
+
+	// True for nodes that need to stay aligned to the text baseline.
+	// False for the rest.
+	virtual bool align_to_baseline() const {
+		return false;
+	}
+
 	void set_x(int32_t nx) {
 		x_ = nx;
 	}
@@ -282,7 +290,7 @@ protected:
 			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % check_w % check_h %
 			    maximum_size)
 			      .str();
-			log("%s\n", error_message.c_str());
+			log_err("%s\n", error_message.c_str());
 			throw TextureTooBig(error_message);
 		}
 	}
@@ -510,7 +518,9 @@ uint16_t Layout::fit_line(const uint16_t w_max,  // Maximum width of line
 		if (node->get_floating() != RenderNode::Floating::kNone) {
 			continue;
 		}
-		cur_line_hotspot = std::max(cur_line_hotspot, node->hotspot_y());
+		if (node->align_to_baseline()) {
+			cur_line_hotspot = std::max(cur_line_hotspot, node->hotspot_y());
+		}
 	}
 	return cur_line_hotspot;
 }
@@ -536,34 +546,54 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 		uint16_t biggest_hotspot = fit_line(w, p, &nodes_in_line, trim_spaces);
 
 		int line_height = 0;
+		int biggest_descent = 0;
 		int line_start = INFINITE_WIDTH;
+
 		// Compute real line height and width, taking into account alignment
 		for (const auto& n : nodes_in_line) {
 			if (n->get_floating() == RenderNode::Floating::kNone) {
-				line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
-				n->set_y(h_ + biggest_hotspot - n->hotspot_y());
+				if (n->align_to_baseline()) {
+					biggest_descent = std::max(biggest_descent, n->height() - n->hotspot_y());
+					line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
+				} else {
+					line_height = std::max(line_height, static_cast<int>(n->height()));
+				}
 			}
+
 			if (line_start >= INFINITE_WIDTH || n->x() < line_start) {
 				line_start = n->x() - p.left;
 			}
 			max_line_width = std::max<int>(max_line_width, n->x() + n->width() + p.right - line_start);
 		}
 
-		// Go over again and adjust position for VALIGN
+		// Go over again and set vertical positions of nodes depending on VALIGN
 		for (const auto& n : nodes_in_line) {
-			int space = line_height - n->height();
-			if (!space || n->valign() == UI::Align::kBottom) {
+			if (n->get_floating() != RenderNode::Floating::kNone) {
 				continue;
 			}
-			if (n->valign() == UI::Align::kCenter) {
+
+			// Empty space: how much the node can be moved within line boundaries
+			int space;
+			int baseline_correction;
+			if (n->align_to_baseline()) {
+				// Text nodes: Treat them as a group. Calculate the space using the same values
+				// for all nodes and correct for hotspot differences to align them to one common
+				// baseline.
+				space = line_height - biggest_hotspot - biggest_descent;
+				baseline_correction = biggest_hotspot - n->hotspot_y();
+			} else {
+				// Non-text nodes: Align each node independently to the top/bottom/center of
+				// the line.
+				space = line_height - n->height();
+				baseline_correction = 0;
+			}
+
+			if (n->valign() == UI::Align::kTop) {
+				space = 0;
+			} else if (n->valign() == UI::Align::kCenter) {
 				space /= 2;
 			}
-			// Space can become negative, for example when we have mixed fontsets on the same line
-			// (e.g. "default" and "arabic"), due to differing font heights and hotspots.
-			// So, we fix the sign.
-			if (n->get_floating() == RenderNode::Floating::kNone) {
-				n->set_y(std::abs(n->y() - space));
-			}
+			n->set_y(h_ + space + baseline_correction);
 		}
 		rv->insert(rv->end(), nodes_in_line.begin(), nodes_in_line.end());
 
@@ -603,6 +633,9 @@ public:
 	uint16_t height() const override {
 		return h_ + nodestyle_.spacing;
 	}
+	bool align_to_baseline() const override {
+		return true;
+	}
 	uint16_t hotspot_y() const override;
 	const std::vector<Reference> get_references() override {
 		std::vector<Reference> rv;
@@ -633,7 +666,26 @@ TextNode::TextNode(FontCache& font, NodeStyle& ns, const std::string& txt)
 	check_size();
 }
 uint16_t TextNode::hotspot_y() const {
-	return font_.ascent(nodestyle_.font_style);
+	// Getting the real ascent of a string from SDL_ttf is tricky.
+	// It's equal to TTF_FontAscent() or the maximum 'maxy' value of any glyph in the string,
+	// whichever is bigger.
+	const icu::UnicodeString unicode_txt(txt_.c_str(), "UTF-8");
+	int ascent = TTF_FontAscent(font_.get_ttf_font());
+	int shadow_offset = font_.ascent(nodestyle_.font_style) - ascent;
+
+	for (int i = 0; i < unicode_txt.length(); ++i) {
+		// TODO(Niektory): Use the 32-bit functions when we can use SDL_ttf 2.0.16
+		// (UChar32, char32At, TTF_GlyphIsProvided32, TTF_GlyphMetrics32)
+		UChar codepoint = unicode_txt.charAt(i);
+		int maxy;
+		if (TTF_GlyphIsProvided(font_.get_ttf_font(), codepoint) &&
+		    TTF_GlyphMetrics(
+		       font_.get_ttf_font(), codepoint, nullptr, nullptr, nullptr, &maxy, nullptr) == 0) {
+			ascent = std::max(ascent, maxy);
+		}
+	}
+
+	return ascent + shadow_offset;
 }
 
 std::shared_ptr<UI::RenderedText> TextNode::render(TextureCache* texture_cache) {
@@ -974,7 +1026,7 @@ public:
 	              bool use_playercolor)
 	   : RenderNode(ns),
 	     image_(use_playercolor ? playercolor_image(color, image_filename) :
-	                              g_gr->images().get(image_filename)),
+	                              g_image_cache->get(image_filename)),
 	     filename_(image_filename),
 	     scale_(scale),
 	     color_(color),
@@ -1019,7 +1071,7 @@ std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_ca
 	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 
 	if (scale_ == 1.0 || filename_.empty()) {
-		// Image can be used as is, and has already been cached in g_gr->images()
+		// Image can be used as is, and has already been cached in g_image_cache
 		assert(image_ != nullptr);
 		rendered_text->rects.push_back(
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(image_)));
@@ -1205,7 +1257,7 @@ public:
 			nodestyle_.font_color = a["color"].get_color();
 		}
 		if (a.has("size")) {
-			nodestyle_.font_size = a["size"].get_int();
+			nodestyle_.font_size = a["size"].get_int(std::numeric_limits<uint16_t>::max());
 		}
 		if (a.has("face")) {
 			nodestyle_.font_face = a["face"].get_string();
@@ -1242,7 +1294,7 @@ public:
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
 		if (a.has("indent")) {
-			indent_ = a["indent"].get_int();
+			indent_ = a["indent"].get_int(std::numeric_limits<uint16_t>::max());
 		}
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
@@ -1266,7 +1318,7 @@ public:
 			}
 		}
 		if (a.has("spacing")) {
-			nodestyle_.spacing = a["spacing"].get_int();
+			nodestyle_.spacing = a["spacing"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 	}
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
@@ -1307,19 +1359,19 @@ public:
 			use_playercolor = true;
 		}
 		if (a.has("object")) {
-			const Image* representative_image = g_gr->animations().get_representative_image(
+			const Image* representative_image = g_animation_manager->get_representative_image(
 			   a["object"].get_string(), use_playercolor ? &color : nullptr);
 			render_node_.reset(new ImgRenderNode(nodestyle_, representative_image));
 		} else {
 			const std::string image_filename = a["src"].get_string();
 
 			if (a.has("width")) {
-				int width = a["width"].get_int();
+				int width = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (width > renderer_style_.overall_width) {
-					log("WARNING: Font renderer: Specified image width of %d exceeds the overall "
-					    "available "
-					    "width of %d. Setting width to %d.\n",
-					    width, renderer_style_.overall_width, renderer_style_.overall_width);
+					log_warn("Font renderer: Specified image width of %d exceeds the overall "
+					         "available "
+					         "width of %d. Setting width to %d.\n",
+					         width, renderer_style_.overall_width, renderer_style_.overall_width);
 					width = renderer_style_.overall_width;
 				}
 				const int image_width = image_cache_->get(image_filename)->width();
@@ -1353,7 +1405,7 @@ public:
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
 
-		space_ = a["gap"].get_int();
+		space_ = a["gap"].get_int(std::numeric_limits<uint16_t>::max());
 	}
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		nodes.push_back(std::shared_ptr<RenderNode>(new SpaceNode(nodestyle_, 0, space_)));
@@ -1381,7 +1433,7 @@ public:
 		const AttrMap& a = tag_.attrs();
 
 		if (a.has("gap")) {
-			space_ = a["gap"].get_int();
+			space_ = a["gap"].get_int(std::numeric_limits<uint16_t>::max());
 		} else {
 			space_ = INFINITE_WIDTH;
 		}
@@ -1482,26 +1534,26 @@ public:
 			}
 		}
 		if (a.has("padding")) {
-			uint8_t p = a["padding"].get_int();
+			uint8_t p = a["padding"].get_int(std::numeric_limits<uint8_t>::max());
 			padding.left = padding.top = padding.right = padding.bottom = p;
 		}
 		// TODO(GunChleoc): padding_l and padding_r don't seem to produce balanced results.
 		// We ran into that with the game tips,
 		// using "<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>" there.
 		if (a.has("padding_r")) {
-			padding.right = a["padding_r"].get_int();
+			padding.right = a["padding_r"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 		if (a.has("padding_b")) {
-			padding.bottom = a["padding_b"].get_int();
+			padding.bottom = a["padding_b"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 		if (a.has("padding_l")) {
-			padding.left = a["padding_l"].get_int();
+			padding.left = a["padding_l"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 		if (a.has("padding_t")) {
-			padding.top = a["padding_t"].get_int();
+			padding.top = a["padding_t"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 		if (a.has("margin")) {
-			uint8_t p = a["margin"].get_int();
+			uint8_t p = a["margin"].get_int(std::numeric_limits<uint8_t>::max());
 			margin.left = margin.top = margin.right = margin.bottom = p;
 		}
 
@@ -1620,16 +1672,16 @@ public:
 				width_string = width_string.substr(0, width_string.length() - 1);
 				uint8_t width_percent = strtol(width_string.c_str(), nullptr, 10);
 				if (width_percent > 100) {
-					log("WARNING: Font renderer: Do not use width > 100%%\n");
+					log_warn("Font renderer: Do not use width > 100%%\n");
 					width_percent = 100;
 				}
 				render_node_->set_desired_width(DesiredWidth(width_percent, WidthUnit::kPercent));
 			} else {
-				w_ = a["width"].get_int();
+				w_ = a["width"].get_int(std::numeric_limits<uint16_t>::max());
 				if (w_ > renderer_style_.overall_width) {
-					log("WARNING: Font renderer: Specified width of %d exceeds the overall available "
-					    "width of %d. Setting width to %d.\n",
-					    w_, renderer_style_.overall_width, renderer_style_.overall_width);
+					log_warn("Font renderer: Specified width of %d exceeds the overall available "
+					         "width of %d. Setting width to %d.\n",
+					         w_, renderer_style_.overall_width, renderer_style_.overall_width);
 					w_ = renderer_style_.overall_width;
 				}
 				render_node_->set_desired_width(DesiredWidth(w_, WidthUnit::kAbsolute));

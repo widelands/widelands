@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -15,15 +17,13 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "alder_summer_sapling",
    descname = _ "Alder (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:57s500ms",
          "remove=chance:8.2%",
          "grow=alder_summer_pole",
@@ -42,15 +42,13 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "alder_summer_pole",
    descname = _ "Alder (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:52s500ms",
          "remove=chance:7.42%",
          "grow=alder_summer_mature",
@@ -69,15 +67,13 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "alder_summer_mature",
    descname = _ "Alder (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:50s",
          "remove=chance:7%",
          "grow=alder_summer_old",
@@ -96,20 +92,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "alder_summer_old",
    descname = _ "Alder (Old)",
    species = _ "Alder",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
+      main = {
          "animate=idle duration:25m50s",
          "transform=deadtree4 chance:1.95%",
-         "seed=alder_summer_sapling 180",
+         "seed=alder_summer_sapling proximity:70.31%",
       },
       fall = {
          "remove=",
@@ -126,7 +120,10 @@ world:new_immovable_type{
          hotspot = { 24, 60 },
          sound_effect = {
             path = "sound/animals/bird4",
+            priority = 10
          }
       }
    },
 }
+
+pop_textdomain()

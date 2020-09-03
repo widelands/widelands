@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_ironmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Deep Iron Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
 
@@ -35,7 +35,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "iron"
+      mines = "resource_iron"
    },
 
    working_positions = {
@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
          descname = _"mining iron",
          actions = {
             "animate=working duration:10s",
-            "mine=iron 2 100 5 2",
+            "mine=resource_iron radius:2 yield:100% when_empty:5% experience_on_fail:2%",
             "produce=iron_ore",
          }
       },
@@ -87,3 +87,5 @@ tribes:new_productionsite_type {
          pgettext("empire_building", "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

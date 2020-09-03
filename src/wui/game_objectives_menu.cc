@@ -23,8 +23,6 @@
 #include "logic/player.h"
 #include "wui/interactive_player.h"
 
-using namespace Widelands;
-
 #define BUTTON_HEIGHT 20
 #define OBJECTIVE_LIST 120
 #define FULL_OBJECTIVE_TEXT 240
@@ -59,7 +57,7 @@ GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Regi
 void GameObjectivesMenu::think() {
 	//  Adjust the list according to the game state.
 	for (const auto& pair : iplayer().game().map().objectives()) {
-		const Objective& obj = *(pair.second);
+		const Widelands::Objective& obj = *(pair.second);
 		bool should_show = obj.visible() && !obj.done();
 		uint32_t const list_size = list.size();
 		for (uint32_t j = 0;; ++j) {

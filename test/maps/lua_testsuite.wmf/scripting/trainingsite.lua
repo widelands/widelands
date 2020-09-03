@@ -233,3 +233,9 @@ function trainingsite_tests:test_no_space()
   end)
    assert_equal(12, _cnt(self.camp:get_soldiers("all")))
 end
+function trainingsite_tests:test_foreign_trainingsite_new_tribe_fails()
+   local field = map:get_field(13,13)
+   assert_error("Should not be able to place a training site that the tribe can't use", function()
+      player1:place_building("frisians_training_camp", field, false, true)
+   end)
+end

@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_sawmill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Sawmill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -45,17 +45,19 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
          descname = _"sawing logs",
          actions = {
             "return=skipped unless economy needs planks",
             "consume=log:2",
             "sleep=duration:16s500ms", -- Much faster than barbarians' wood hardener
-            "playsound=sound/sawmill/sawmill 180",
+            "playsound=sound/sawmill/sawmill priority:40% allow_multiple",
             "animate=working duration:20s", -- Much faster than barbarians' wood hardener
             "produce=planks"
          }
       },
    },
 }
+
+pop_textdomain()

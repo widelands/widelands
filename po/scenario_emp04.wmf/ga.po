@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Language-Team: Irish (https://www.transifex.com/widelands/teams/35159/ga/)\n"
 "MIME-Version: 1.0\n"
@@ -550,8 +550,8 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:347
 msgid ""
 "First of all, we need more construction materials. So, we should build at "
-"least three lumberjacks’ houses and two quarries. Be sure to have "
-"dismanteled all of the unproductive buildings though."
+"least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
+" all of the unproductive buildings though."
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -688,8 +688,7 @@ msgid ""
 "The only solution is to build two new forester’s houses near our "
 "lumberjacks. Be sure to first build a new forester’s house and then "
 "eventually destroy the old one or at least expel the forester to change "
-"houses. Dismantling them is also possible but will not return any wares "
-"because they are so torn."
+"houses."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
@@ -1327,9 +1326,4 @@ msgid ""
 "Damn you Lutius for killing peaceful servants of the goddess Vesta! May your"
 " life and your land be cursed and may the wrath of the goddess scourge your "
 "family from the face of the earth!"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
 msgstr ""

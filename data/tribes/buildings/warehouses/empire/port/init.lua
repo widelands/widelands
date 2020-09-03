@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_warehouse_type {
-   msgctxt = "empire_building",
    name = "empire_port",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Port"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "port",
    map_check = {"seafaring"},
@@ -47,3 +47,5 @@ tribes:new_warehouse_type {
    conquers = 5,
    heal_per_second = 170,
 }
+
+pop_textdomain()

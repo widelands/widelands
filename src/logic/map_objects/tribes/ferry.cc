@@ -29,9 +29,7 @@
 
 namespace Widelands {
 
-FerryDescr::FerryDescr(const std::string& init_descname,
-                       const LuaTable& table,
-                       const Tribes& tribes)
+FerryDescr::FerryDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes)
    : CarrierDescr(init_descname, table, tribes, MapObjectType::FERRY) {
 }
 
@@ -71,7 +69,8 @@ constexpr uint32_t kUnemployedLifetime = 1000 * 60 * 10;  // 10 minutes
 
 void Ferry::unemployed_update(Game& game, State&) {
 	if (get_signal().size()) {
-		molog("[unemployed]: interrupted by signal '%s'\n", get_signal().c_str());
+		molog(
+		   game.get_gametime(), "[unemployed]: interrupted by signal '%s'\n", get_signal().c_str());
 		if (get_signal() == "row") {
 			assert(destination_);
 			signal_handled();
@@ -102,16 +101,16 @@ void Ferry::unemployed_update(Game& game, State&) {
 		if (upcast(Flag, flag, pos.field->get_immovable())) {
 			// We are on a flag
 			if (flag->has_capacity()) {
-				molog("[unemployed]: dropping ware here\n");
+				molog(game.get_gametime(), "[unemployed]: dropping ware here\n");
 				flag->add_ware(game, *fetch_carried_ware(game));
 				return start_task_idle(game, descr().get_animation("idle", this), 50);
 			}
 		}
-		molog("[unemployed]: trying to find a flag\n");
+		molog(game.get_gametime(), "[unemployed]: trying to find a flag\n");
 		std::vector<ImmovableFound> flags;
 		if (!map.find_reachable_immovables(game, Area<FCoords>(pos, 4), &flags, CheckStepFerry(game),
 		                                   FindImmovableType(MapObjectType::FLAG))) {
-			molog("[unemployed]: no flag found at all\n");
+			molog(game.get_gametime(), "[unemployed]: no flag found at all\n");
 			// Fall through to the selection of a random nearby location
 		} else {
 			for (ImmovableFound& imm : flags) {
@@ -120,17 +119,17 @@ void Ferry::unemployed_update(Game& game, State&) {
 						if (flag->has_capacity()) {
 							Path path(pos);
 							if (map.findpath(pos, flag->get_position(), 0, path, CheckStepFerry(game))) {
-								molog("[unemployed]: moving to nearby flag\n");
+								molog(game.get_gametime(), "[unemployed]: moving to nearby flag\n");
 								return start_task_movepath(
 								   game, path, descr().get_right_walk_anims(true, this));
 							}
-							molog("[unemployed]: unable to row to reachable flag!\n");
+							molog(game.get_gametime(), "[unemployed]: unable to row to reachable flag!\n");
 							return start_task_idle(game, descr().get_animation("idle", this), 50);
 						}
 					}
 				}
 			}
-			molog("[unemployed]: no nearby flag has capacity\n");
+			molog(game.get_gametime(), "[unemployed]: no nearby flag has capacity\n");
 			// If no flag with capacity is nearby, fall through to the selection of a random nearby
 			// location
 		}
@@ -138,11 +137,11 @@ void Ferry::unemployed_update(Game& game, State&) {
 
 	bool move = true;
 	if (!(pos.field->nodecaps() & MOVECAPS_SWIM)) {
-		molog("[unemployed]: we are on shore\n");
+		molog(game.get_gametime(), "[unemployed]: we are on shore\n");
 	} else if (pos.field->get_immovable()) {
-		molog("[unemployed]: we are on location\n");
+		molog(game.get_gametime(), "[unemployed]: we are on location\n");
 	} else if (pos.field->get_first_bob()->get_next_bob()) {
-		molog("[unemployed]: we are on another bob\n");
+		molog(game.get_gametime(), "[unemployed]: we are on another bob\n");
 	} else {
 		move = false;
 	}
@@ -157,7 +156,7 @@ void Ferry::unemployed_update(Game& game, State&) {
 				   game, path, descr().get_right_walk_anims(does_carry_ware(), this));
 			}
 		}
-		molog("[unemployed]: no suitable locations to row to found\n");
+		molog(game.get_gametime(), "[unemployed]: no suitable locations to row to found\n");
 		return start_task_idle(game, descr().get_animation("idle", this), 50);
 	}
 
@@ -188,14 +187,14 @@ void Ferry::row_update(Game& game, State&) {
 	const std::string& signal = get_signal();
 	if (signal.size()) {
 		if (signal == "road" || signal == "fail" || signal == "row" || signal == "wakeup") {
-			molog("[row]: Got signal '%s' -> recalculate\n", signal.c_str());
+			molog(game.get_gametime(), "[row]: Got signal '%s' -> recalculate\n", signal.c_str());
 			signal_handled();
 		} else if (signal == "blocked") {
-			molog("[row]: Blocked by a battle\n");
+			molog(game.get_gametime(), "[row]: Blocked by a battle\n");
 			signal_handled();
 			return start_task_idle(game, descr().get_animation("idle", this), 900);
 		} else {
-			molog("[row]: Cancel due to signal '%s'\n", signal.c_str());
+			molog(game.get_gametime(), "[row]: Cancel due to signal '%s'\n", signal.c_str());
 			return pop_task(game);
 		}
 	}
@@ -212,7 +211,8 @@ void Ferry::row_update(Game& game, State&) {
 			return start_task_road(game);
 		}
 		// If we get here, the waterway was destroyed and we didn't notice
-		molog("[row]: Reached the destination (%3dx%3d) but it is no longer there\n",
+		molog(game.get_gametime(),
+		      "[row]: Reached the destination (%3dx%3d) but it is no longer there\n",
 		      get_position().x, get_position().y);
 		destination_.reset(nullptr);
 		return pop_task(game);
@@ -220,7 +220,8 @@ void Ferry::row_update(Game& game, State&) {
 
 	Path path(pos);
 	if (!map.findpath(pos, *destination_, 0, path, CheckStepFerry(game))) {
-		molog("[row]: Can't find a path to the waterway! Ferry at %3dx%3d, Waterway at %3dx%3d\n",
+		molog(game.get_gametime(),
+		      "[row]: Can't find a path to the waterway! Ferry at %3dx%3d, Waterway at %3dx%3d\n",
 		      get_position().x, get_position().y, destination_->x, destination_->y);
 		// try again later
 		return schedule_act(game, 50);
@@ -230,7 +231,7 @@ void Ferry::row_update(Game& game, State&) {
 
 void Ferry::init_auto_task(Game& game) {
 	set_location(nullptr);
-	molog("init_auto_task: wait for employment\n");
+	molog(game.get_gametime(), "init_auto_task: wait for employment\n");
 	return start_task_unemployed(game);
 }
 

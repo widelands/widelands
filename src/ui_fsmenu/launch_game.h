@@ -56,6 +56,8 @@ protected:
 
 	/// Enables or disables the peaceful mode checkbox.
 	void update_peaceful_mode();
+	/// Enables or disables the custom_starting_positions checkbox.
+	void update_custom_starting_positions();
 
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
@@ -73,12 +75,13 @@ protected:
 	                                                 const std::set<std::string>& tags) const;
 
 	void toggle_peaceful();
+	void toggle_custom_starting_positions();
 
 	uint32_t butw_;
 	uint32_t buth_;
 
 	UI::Dropdown<std::string> win_condition_dropdown_;
-	UI::Checkbox peaceful_;
+	UI::Checkbox peaceful_, custom_starting_positions_;
 	std::string last_win_condition_;
 	UI::Button ok_, back_;
 	UI::Textarea title_;

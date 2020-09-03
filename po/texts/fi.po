@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-05-17 05:43+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-07-23 07:47+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -342,11 +342,11 @@ msgid ""
 " wiki there."
 msgstr "Jos tarvitset lisäohjeita Widelandsin tai editorin kanssa, kotisivumme %s auttaa.\nWikisivuilta löytyy myös yksityiskohtaista tietoja eri heimoista."
 
-#: ../../data/txts/help/common_helptexts.lua:17
+#: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
 msgstr "Esittely"
 
-#: ../../data/txts/help/common_helptexts.lua:18
+#: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer "
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -354,7 +354,7 @@ msgid ""
 "started through playable tutorials."
 msgstr "Widelands on ilmainen, vapaan koodin reaaliaikastrategiapeli, jossa on yksinpelikampanjoita sekä mahdollisuus moninpeliin verkossa. Peli ammensi alunperin inspiraatiota Settlers II -pelistä, mutta on sitemmin kehittynyt esikuvaansa monipuolisemmaksi."
 
-#: ../../data/txts/help/common_helptexts.lua:19
+#: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
 "In this game, you start out on a small piece of land with just a few "
 "resources. Using these, you’ll create an empire with many thousands of "
@@ -363,11 +363,11 @@ msgid ""
 "tribes."
 msgstr "Pelin alussa sinulla on pieni maa-alue sekä jonkin verran eri tarvikkeita. Niiden avulla voit laajentaa valtakuntaasi useiden tuhansien työntekijöiden kokoiseksi. Sinun pitää tehdä valtakuntaasi toimiva talous, ja selviytyä kohtaamisista kilpailevienheimojen kanssa."
 
-#: ../../data/txts/help/common_helptexts.lua:25
+#: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
 msgstr "Pelien toistot"
 
-#: ../../data/txts/help/common_helptexts.lua:26
+#: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
 "Widelands records every game you play in two files. One of these files has a"
 " .wrpl.wgf extension and contains an initial savegame. The other file has a "
@@ -376,7 +376,7 @@ msgid ""
 "will tell you the time you started the game."
 msgstr "Widelands tallentaa pelien kulun kahteen tiedostoon. Toinen näistä on nimeltään.wrpl.wgf, ja sisältää alkutilanteen. Toisen tiedostonnimen pääte on .wrpl, ja se sisltääkaikki pelin aikana annetut komennot, kuten rakennus- ja hyökkäyskomennot. Tiedostonnimen alkuosana on pelin aloittamisaika."
 
-#: ../../data/txts/help/common_helptexts.lua:27
+#: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -386,7 +386,7 @@ msgid ""
 "players has a different version of the game."
 msgstr "Voit katsoa pelin toiston päävalikon \"replay\" -toiminnolla.Huomaathan, että pienetkin muutokset peliohjelmassa voivat johtaa siihen, ettätallenteen seuraaminen keskeytyy synkroinointiongelmaan. Samoin verkkopelit voivat epäonnistua, jos pelaajilla käytössään eri versiot pelistä."
 
-#: ../../data/txts/help/common_helptexts.lua:28
+#: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
@@ -396,7 +396,7 @@ msgid ""
 msgstr "Pelitallenteet ovat hyödyllisiä virheiden etsimisessä, joten ne kannattaa usein liittää bugiraportteihin. Tallenteet löytyvät \"%s\" -hakemistosta Linuxissa ja Mac OSX:ssa. Windowsissa ne ovat asennushakemiston \"replays\"-nimisessä alikansiossa."
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../data/txts/help/common_helptexts.lua:35
+#: ../../data/txts/help/common_helptexts.lua:41
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
@@ -404,27 +404,27 @@ msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Välilyönti"
 
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
 msgstr "Rakennuspaikat päälle/pois"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgctxt "hotkey"
 msgid "Ctrl + F"
 msgstr "Ctrl + F"
 
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Kokoruutumoodi päälle/pois, jos käyttöjärjestelmä tukee toimintoa"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:56
+#: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "Pienkartta päälle/pois"
 
@@ -702,8 +702,8 @@ msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
-msgid "Ctrl+(1-9)"
-msgstr "Ctrl+(1-9)"
+msgid "Ctrl + (1-9)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:43
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -745,13 +745,13 @@ msgstr "Jotkin rakennukset, kuten maatila, toimivat vain pienellä lähialueella
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+(+/-)"
-msgstr "Ctrl+(+/-)"
+msgid "Ctrl + (+/-)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+0"
-msgstr "Ctrl+0"
+msgid "Ctrl + 0"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
@@ -765,8 +765,8 @@ msgstr "Pilkku ',' ja piste '.' -näppäimillä hypit vikkelästi viimeisten koh
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Ctrl+(Page Up/Page Down)"
-msgstr "Ctrl+(Page Up/Page Down)"
+msgid "Ctrl + (Page Up/Page Down)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
@@ -775,8 +775,8 @@ msgstr "Page Up/Page Down"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Shift+(Page Up/Page Down)"
-msgstr "Shift+(Page Up/Page Down)"
+msgid "Shift + (Page Up/Page Down)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:79
 msgid ""
@@ -791,8 +791,8 @@ msgstr "Nuolinäppäimet"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
-msgstr "Ctrl+Nuolinäppäimet"
+msgid "Ctrl + Arrow keys"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
@@ -801,8 +801,8 @@ msgstr "%1%siirtää karttanäkymää. %2%nopeuttaa siirtoa, %3% hidastaa sitä.
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Shift+Arrow keys"
-msgstr "Shift+Nuolinäppäimet"
+msgid "Shift + Arrow keys"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:87
 msgid ""

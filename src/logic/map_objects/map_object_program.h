@@ -35,6 +35,8 @@ class MapObjectDescr;
 /// diverse parsing convenience functions. The creation and execution of program actions is left to
 /// the sub-classes.
 struct MapObjectProgram {
+	static constexpr const char* const kMainProgram = "main";
+
 	const std::string& name() const;
 
 	explicit MapObjectProgram(const std::string& init_name);
@@ -118,11 +120,13 @@ protected:
 		/// Sound effect ID
 		FxId fx;
 		/// Sound effect priority
-		uint8_t priority = 0;
+		uint16_t priority = 0;
+		/// Whether the sound can be played by different map objects at the same time
+		bool allow_multiple;
 	};
 	/// Parses the arguments for a play_sound action, e.g. { "sound/smiths/sharpening", "120" }
 	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments,
-	                                                uint8_t default_priority);
+	                                                const MapObjectDescr& descr);
 
 private:
 	const std::string name_;

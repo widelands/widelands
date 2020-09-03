@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-05-09 21:06+0000\n"
-"Last-Translator: Juanjo\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -337,7 +337,7 @@ msgstr "Preparat per arrencar!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
 msgid ""
-"Well done, your scout’s hut has been built. While our scout is moving in, "
+"Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
 msgstr "Ben fet. La cabana ja s'ha construït i l'explorador ja s'hi està mudant. Mentrestant, n'aprendrem algunes coses."
 
@@ -670,8 +670,3 @@ msgid ""
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
 msgstr "Ja esteu preparats per jugar les campanyes. T'ensenyaran les economies de cada cultura. També podeu jugar els altres tutorials, però no són fonamentals per realitzar les campanyes."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "«%s»"

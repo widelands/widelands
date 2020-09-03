@@ -20,7 +20,6 @@
 #include "ui_basic/textarea.h"
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text_layout.h"
@@ -79,7 +78,7 @@ void Textarea::update() {
 	}
 
 	FontStyleInfo scaled_style(*style_);
-	scaled_style.set_size(std::max(g_gr->styles().minimum_font_size(),
+	scaled_style.set_size(std::max(g_style_manager->minimum_font_size(),
 	                               static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
 	rendered_text_ = autofit_text(richtext_escape(text_), scaled_style, fixed_width_);
 
@@ -187,7 +186,7 @@ void Textarea::update_desired_size() {
 	uint32_t w = 0;
 	uint16_t h = 0;
 
-	if (rendered_text_.get()) {
+	if (rendered_text_) {
 		w = fixed_width_ > 0 ? fixed_width_ : rendered_text_->width();
 		h = rendered_text_->height();
 		// We want empty textareas to have height

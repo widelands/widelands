@@ -27,7 +27,6 @@
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/world/critter_program.h"
-#include "logic/map_objects/world/editor_category.h"
 
 class WorldLegacyLookupTable;
 
@@ -40,7 +39,9 @@ class World;
 //
 class CritterDescr : public BobDescr {
 public:
-	CritterDescr(const std::string& init_descname, const LuaTable&, const Widelands::World& world);
+	CritterDescr(const std::string& init_descname,
+	             const LuaTable&,
+	             const std::vector<std::string>& attribs);
 	~CritterDescr() override;
 
 	Bob& create_object() const override;
@@ -72,13 +73,10 @@ public:
 
 	CritterProgram const* get_program(const std::string&) const;
 
-	const EditorCategory* editor_category() const;
-
 private:
 	DirAnimations walk_anims_;
 	using Programs = std::map<std::string, std::unique_ptr<const CritterProgram>>;
 	Programs programs_;
-	EditorCategory* editor_category_;  // not owned.
 	const uint8_t size_;
 	const bool carnivore_;
 	std::set<uint32_t> food_plants_;  // set of immovable attributes

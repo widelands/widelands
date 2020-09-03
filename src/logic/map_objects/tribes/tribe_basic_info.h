@@ -50,21 +50,20 @@ struct TribeBasicInfo {
 	explicit TribeBasicInfo(std::unique_ptr<LuaTable> table);
 
 	/// Internal name to reference this tribe
-	std::string name;
+	const std::string name;
+	/// Filepath of the tribe's icon
+	const std::string icon;
+	/// Filepath of the tribe's loading script
+	const std::string script;
 	/// Who designed this tribe
 	std::string author;
 	/// Name to present to the user
 	std::string descname;
 	/// Basic information about this tribe
 	std::string tooltip;
-	/// Filepath of the tribe's icon
-	std::string icon;
 
 	std::vector<Initialization> initializations;
 };
-
-/// Returns a string vector with the names of all tribes.
-std::vector<std::string> get_all_tribenames();
 
 /// Returns a vector with the basic info for all tribes.
 std::vector<TribeBasicInfo> get_all_tribeinfos();
@@ -72,7 +71,7 @@ std::vector<TribeBasicInfo> get_all_tribeinfos();
 /// Returns the basic preload info for a tribe.
 TribeBasicInfo get_tribeinfo(const std::string& tribename);
 
-/// Returns whether this tribe is listed in tribes/preload.lua.
+/// Returns whether this tribe is listed in tribes/initialization/<tribe>/init.lua.
 bool tribe_exists(const std::string& tribename);
 
 }  // namespace Widelands

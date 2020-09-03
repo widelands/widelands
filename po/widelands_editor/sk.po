@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2020-03-22 15:41+0000\n"
 "Last-Translator: Karl Vest\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
@@ -153,7 +153,7 @@ msgid "General"
 msgstr "Všeobecné"
 
 #: ../../data/scripting/editor/editor_help.lua:59
-#: ../../data/scripting/editor/editor_introduction.lua:11
+#: ../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
 msgstr "Úvod"
 
@@ -170,23 +170,23 @@ msgstr "Terény"
 msgid "Trees"
 msgstr "Stromy"
 
-#: ../../data/scripting/editor/editor_introduction.lua:9
+#: ../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
 msgstr "Editor hry Widelands"
 
-#: ../../data/scripting/editor/editor_introduction.lua:13
+#: ../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
 msgstr "Editor je určený pre hráčov, ktorí si chcú navrhnúť vlastnú mapu do hry."
 
-#: ../../data/scripting/editor/editor_introduction.lua:14
+#: ../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
 msgstr "Ako si môžete všimnúť, na editore sa stále vo veľkom pracuje a s jeho zdokonaľovaním sa tento text bude predlžovať a dopĺňať."
 
-#: ../../data/scripting/editor/editor_introduction.lua:17
+#: ../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
 msgstr "Na našej wiki je obsiahnutý krátky návod na tvorbu máp."
 

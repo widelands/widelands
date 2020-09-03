@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-07-14 14:24+0000\n"
-"Last-Translator: stdh\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -460,7 +460,7 @@ msgid ""
 msgstr "Dat is mooi. Het eerste grote militaire gebouw is af en de mijneninfrastructuur wordt beter en beter. Nu moeten we ons richten op het voorbereiden op de strijd."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:268
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid "Victory"
 msgstr "Overwinning"
 
@@ -480,9 +480,9 @@ msgstr "Er verbergen zich nog enkele Barbaren op ons eiland, maar ik weet zeker 
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
 msgid ""
-"You have established a working economy, trained new soldiers and driven the "
-"Barbarians from the island."
-msgstr "Je hebt een werkende economie opgezet en nieuwe soldaten getraind, en je hebt de Barbaren van het eiland verdreven."
+"We have established a working economy, trained new soldiers and driven the "
+"Barbarians from the island. Now we can think about our next steps."
+msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"
@@ -517,8 +517,3 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Je hebt deze missie voltooid. Je mag verder spelen als je dat wilt, ga anders verder met de volgende missie."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
@@ -962,8 +962,3 @@ msgid ""
 " help us build a new home, far from the false God’s vengeful reach…"
 msgstr ""
 "このシナリオを完遂しました。次のシナリオに進み、復讐心に駆られた偽りの神の手が届かぬ地、そこに彼らが新たな住処を作るのを助けてもらえないでしょうか……？"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr ""

@@ -27,7 +27,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/checkbox.h"
@@ -35,10 +34,9 @@
 
 namespace {
 
-using namespace Widelands;
-
 UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
-                                      const TerrainDescription& terrain_descr,
+                                      LuaInterface* lua,
+                                      const Widelands::TerrainDescription& terrain_descr,
                                       std::vector<std::unique_ptr<const Image>>* offscreen_images) {
 
 	constexpr int kSmallPicSize = 20;
@@ -54,9 +52,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	Vector2i pt(1, terrain_texture.height() - kSmallPicSize - 1);
 
 	// Collect tooltips and blit small icons representing "is" values
-	for (const TerrainDescription::Type& terrain_type : terrain_descr.get_types()) {
-		tooltips.insert(tooltips.end(), terrain_descr.custom_tooltips().begin(),
-		                terrain_descr.custom_tooltips().end());
+	for (const Widelands::TerrainDescription::Type& terrain_type : terrain_descr.get_types()) {
 		tooltips.push_back(terrain_type.descname);
 
 		texture->blit(Rectf(pt.x, pt.y, terrain_type.icon->width(), terrain_type.icon->height()),
@@ -65,13 +61,22 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		              BlendMode::UseAlpha);
 		pt.x += kSmallPicSize + 1;
 	}
+
+	// Get information about preferred trees
+	std::unique_ptr<LuaTable> table(lua->run_script("scripting/editor/terrain_tooltip.lua"));
+	std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+	cr->push_arg(terrain_descr.name());
+	cr->resume();
+	const std::string& treeinfo = cr->pop_table()->get_string("text");
+
 	// Make sure we delete this later on.
 	offscreen_images->emplace_back(texture);
 
 	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
 	const std::string tooltip = ((boost::format(_("%1%: %2%"))) % terrain_descr.descname() %
 	                             i18n::localize_list(tooltips, i18n::ConcatenateWith::AND))
-	                               .str();
+	                               .str()
+	                               .append(treeinfo);
 
 	std::unique_ptr<const Image>& image = offscreen_images->back();
 	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i::zero(), image.get(), tooltip);
@@ -85,11 +90,12 @@ EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
    EditorInteractive& parent, EditorSetTerrainTool& tool, UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Terrain"), tool) {
 	const Widelands::World& world = parent.egbase().world();
+	LuaInterface* lua = &parent.egbase().lua();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>(
-	      this, world.editor_terrain_categories(), world.terrains(),
-	      [this](UI::Panel* cb_parent, const TerrainDescription& terrain_descr) {
-		      return create_terrain_checkbox(cb_parent, terrain_descr, &offscreen_images_);
+	      this, parent.editor_categories(Widelands::MapObjectType::TERRAIN), world.terrains(),
+	      [this, lua](UI::Panel* cb_parent, const Widelands::TerrainDescription& terrain_descr) {
+		      return create_terrain_checkbox(cb_parent, lua, terrain_descr, &offscreen_images_);
 	      },
 	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());

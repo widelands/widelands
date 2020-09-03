@@ -4,16 +4,16 @@
 # 
 # Translators:
 # Foppe Benedictus <foppe.benedictus@gmail.com>, 2018
-# stdh, 2019
 # FvZ, 2020
+# stdh, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: FvZ, 2020\n"
+"Last-Translator: stdh, 2020\n"
 "Language-Team: Dutch (https://www.transifex.com/widelands/teams/35159/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -656,12 +656,12 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:347
 msgid ""
 "First of all, we need more construction materials. So, we should build at "
-"least three lumberjacks’ houses and two quarries. Be sure to have "
-"dismanteled all of the unproductive buildings though."
+"least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
+" all of the unproductive buildings though."
 msgstr ""
 "Allereerst hebben we meer bouwmateriaal nodig. We zouden dus minstens drie "
-"houthakkershuizen en twee steengroeves moeten bouwen. Let er wel op dat je "
-"alle onproductieve gebouwen hebt ontmanteld."
+"houthakkershuizen en twee steengroeves moeten bouwen. Zorg er wel voor dat "
+"je alle onproductieve gebouwen hebt ontmanteld."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:350
@@ -761,7 +761,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:387
 msgid "After we have managed this, we can start making rations in our tavern."
 msgstr ""
-"Als we daarin geslaagd zijn kunnen rantsoenen beginnen maken in onze "
+"Als we daarin geslaagd zijn kunnen we rantsoenen beginnen maken in onze "
 "tavernes."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:394
@@ -832,15 +832,12 @@ msgid ""
 "The only solution is to build two new forester’s houses near our "
 "lumberjacks. Be sure to first build a new forester’s house and then "
 "eventually destroy the old one or at least expel the forester to change "
-"houses. Dismantling them is also possible but will not return any wares "
-"because they are so torn."
+"houses."
 msgstr ""
 "De enige oplossing is om twee nieuwe boswachtershuizen te bouwen in de buurt"
 " van onze houthakkers. Let erop om eerst een nieuw boswachtershuis te bouwen"
 " en dan het oude te vernietigen, of op zijn minst de boswachter eruit te "
-"zetten, zodat die van huis kan wisselen. Je kan de oude huizen ook "
-"ontmantelen, maar ze zijn zodanig versleten dat je geen materialen zal "
-"kunnen recupereren."
+"zetten, zodat die van huis kan wisselen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
 msgid "Amalea Laughs Sarcastically"
@@ -1640,8 +1637,3 @@ msgstr ""
 "Verdoemd ben jij, Lutius, voor het doden van de vreedzame dienaren van de "
 "godin Vesta! Moge je leven en je land vervloekt wezen, en de gramschap van "
 "de godin als een gesel je familie van het aardoppervlak jagen!"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

@@ -153,7 +153,7 @@ void PlayerDescriptionGroup::update() {
 			}
 			d->btnPlayerType->set_title(title);
 
-			Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(player.tribe);
+			Widelands::TribeBasicInfo info = settings.get_tribeinfo(player.tribe);
 			if (!tribenames_[player.tribe].size()) {
 				// Tribe's localized name
 				tribenames_[player.tribe] = info.descname;
@@ -162,8 +162,7 @@ void PlayerDescriptionGroup::update() {
 				d->btnPlayerTribe->set_title(pgettext("tribe", "Random"));
 				d->btnPlayerTribe->set_tooltip(_("The tribe will be set at random."));
 			} else {
-				i18n::Textdomain td("tribes");
-				d->btnPlayerTribe->set_title(_(tribenames_[player.tribe]));
+				d->btnPlayerTribe->set_title(tribenames_[player.tribe]);
 				d->btnPlayerTribe->set_tooltip(info.tooltip);
 			}
 
@@ -303,7 +302,6 @@ void PlayerDescriptionGroup::update_playerinit() {
 		}
 	}
 
-	i18n::Textdomain td("tribes");  // for translated initialisation
 	for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 		if (tribeinfo.name == player.tribe) {
 			const size_t nr_inits = tribeinfo.initializations.size();

@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_coalmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Coal Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
    enhancement = "frisians_coalmine_deep",
@@ -60,7 +60,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "coal",
+      mines = "resource_coal",
       mines_percent = 50,
    },
 
@@ -73,7 +73,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
@@ -88,7 +88,7 @@ tribes:new_productionsite_type {
          descname = _"mining coal",
          actions = {
             "animate=working duration:15s",
-            "mine=coal 3 50 5 20",
+            "mine=resource_coal radius:3 yield:50% when_empty:5% experience_on_fail:20%",
             "produce=coal",
          }
       },
@@ -109,3 +109,5 @@ tribes:new_productionsite_type {
          pgettext("frisians_building", "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

@@ -54,7 +54,7 @@ public:
 	void fs_unlink(const std::string& fs_filename) override;
 	void fs_rename(const std::string&, const std::string&) override;
 
-	unsigned long long disk_space() override;
+	unsigned long long disk_space() override;  // NOLINT
 
 	static FileSystem* create_from_directory(const std::string& directory);
 
@@ -139,6 +139,9 @@ private:
 	// Used for creating sub filesystems.
 	ZipFilesystem(const std::shared_ptr<ZipFile>& shared_data,
 	              const std::string& basedir_in_zip_file);
+
+	// Place current time in tm_zip struct
+	void set_time_info(tm_zip& time);
 
 	// The data shared between all zip filesystems with the same
 	// underlying zip file.

@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_weaving_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Weaving Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -48,7 +48,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs spidercloth",
             "consume=spider_silk",
             "sleep=duration:20s",
-            "playsound=sound/mill/weaving 120",
+            "playsound=sound/mill/weaving priority:90%",
             "animate=working duration:20s",
             "produce=spidercloth"
          }
@@ -78,7 +78,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs tabard",
             "consume=spider_silk",
             "sleep=duration:20s",
-            "playsound=sound/mill/weaving 120",
+            "playsound=sound/mill/weaving priority:90%",
             "animate=working duration:20s",
             "produce=tabard"
          }
@@ -91,10 +91,12 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs tabard_golden",
             "consume=spider_silk gold_thread",
             "sleep=duration:20s",
-            "playsound=sound/mill/weaving 120",
+            "playsound=sound/mill/weaving priority:90%",
             "animate=working duration:20s",
             "produce=tabard_golden"
          }
       },
    },
 }
+
+pop_textdomain()

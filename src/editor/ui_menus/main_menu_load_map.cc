@@ -38,6 +38,9 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Re
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	cancel_.sigclicked.connect([this]() { die(); });
+
+	fill_table();
+	layout();
 }
 
 void MainMenuLoadMap::clicked_ok() {
@@ -68,6 +71,8 @@ void MainMenuLoadMap::set_current_directory(const std::string& filename) {
 		boost::replace_first(display_dir, "My_Maps", _("My Maps"));
 	} else if (boost::starts_with(display_dir, "MP_Scenarios")) {
 		boost::replace_first(display_dir, "MP_Scenarios", _("Multiplayer Scenarios"));
+	} else if (boost::starts_with(display_dir, "Downloaded")) {
+		boost::replace_first(display_dir, "Downloaded", _("Downloaded Maps"));
 	}
 	/** TRANSLATORS: The folder that a file will be saved to. */
 	directory_info_.set_text((boost::format(_("Current directory: %s")) % display_dir).str());
@@ -82,7 +87,7 @@ void MainMenuLoadMap::entry_selected() {
 	if (!has_selection) {
 		map_details_.clear();
 	} else {
-		map_details_.update(
-		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
+		map_details_.update(maps_data_[table_.get_selected()],
+		                    display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized);
 	}
 }

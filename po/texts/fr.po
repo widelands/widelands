@@ -9,6 +9,7 @@
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net.TLD>, 2008
 # Renaud Bouchard, 2015-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # syl_, 2016-2017
 # Tubuntu <tubuntu@testimonium.be>, 2015
 # zecas <jjorge@free.fr>, 2016,2018
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-04-06 15:40+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-07-23 08:19+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -346,11 +347,11 @@ msgid ""
 " wiki there."
 msgstr "Si vous avez besoin de plus de documentation ou d'aide pour Widelands ou pour l'éditeur de Widelands, visitez notre page officielle: %s. Vous pouvez  y trouver une aide en ligne au sein de notre Wiki."
 
-#: ../../data/txts/help/common_helptexts.lua:17
+#: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
 msgstr "Introduction"
 
-#: ../../data/txts/help/common_helptexts.lua:18
+#: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer "
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -358,7 +359,7 @@ msgid ""
 "started through playable tutorials."
 msgstr "Widelands est un jeu de stratégie en temps réel gratuit et open source avec des campagnes solo et un mode multijoueur. Le jeu a été inspiré par Settlers II mais a significativement plus de variété et de profondeur. Pourtant, il est facile de se lancer à travers des tutoriels jouables."
 
-#: ../../data/txts/help/common_helptexts.lua:19
+#: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
 "In this game, you start out on a small piece of land with just a few "
 "resources. Using these, you’ll create an empire with many thousands of "
@@ -367,11 +368,11 @@ msgid ""
 "tribes."
 msgstr "Dans ce jeu, vous commencez sur un petit morceau de terre avec juste quelques ressources. En les utilisant, vous créerez un empire de plusieurs milliers d'habitants. Dans ce but, vous devrez établir une infrastructure économique, explorer les terres qui vous entourent et affronter des tribus rivales."
 
-#: ../../data/txts/help/common_helptexts.lua:25
+#: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
 msgstr "Replays"
 
-#: ../../data/txts/help/common_helptexts.lua:26
+#: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
 "Widelands records every game you play in two files. One of these files has a"
 " .wrpl.wgf extension and contains an initial savegame. The other file has a "
@@ -380,7 +381,7 @@ msgid ""
 "will tell you the time you started the game."
 msgstr "Widelands enregistre chaque partie que vous jouez dans deux fichiers. Un de ces fichiers a une extension .wrpl.wgf et contient la sauvegarde du jeu initial. L'autre fichier possède une extension .wrpl et contient toutes les commandes qui ont été émises par l'ensemble des acteurs, tels que la construction d'une route ou l'attaque d'un ennemi. Le reste des noms des fichiers vous donnera l'heure à laquelle vous avez commencé la partie."
 
-#: ../../data/txts/help/common_helptexts.lua:27
+#: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -390,7 +391,7 @@ msgid ""
 "players has a different version of the game."
 msgstr "Utilisez le bouton Voir Replay du menu principal, un jeu précédent sera précisément reconstruit pour que vous puissiez le visionner. Notez, cependant, que même de petits changements dans les fichiers de données ou sur l'exécutable de Widelands peuvent rendre les replays incompatibles et 'perdre leur synchronisation'. Cela est similaire aux réseaux qui souffrent de problèmes de désynchronisation si un des joueurs à une version différente du jeu."
 
-#: ../../data/txts/help/common_helptexts.lua:28
+#: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
@@ -400,7 +401,7 @@ msgid ""
 msgstr "Les replays sont des outils très utiles pour trouver les bugs dans la logique du jeu, ils peuvent alors êtres très utile de les joindre aux rapports de bugs. Les fichiers replays sont sauvés dans le répertoire %s sur linux et mac OS X. Sur Windows, ils sont dans le sous-répertoire 'replays\" de votre installation de Widelands."
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../data/txts/help/common_helptexts.lua:35
+#: ../../data/txts/help/common_helptexts.lua:41
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
@@ -408,27 +409,27 @@ msgstr "%s :"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Espace"
 
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
 msgstr "Dés/Activer les espaces constructibles"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgctxt "hotkey"
 msgid "Ctrl + F"
 msgstr "Ctrl + F"
 
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Dés/Activer le plein-écran (si supporté par l'OS)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:56
+#: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "Dés/Activer la mini-carte"
 
@@ -706,7 +707,7 @@ msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
-msgid "Ctrl+(1-9)"
+msgid "Ctrl + (1-9)"
 msgstr "Ctrl + (1-9)"
 
 #: ../../data/txts/tips/general_game.lua:43
@@ -749,12 +750,12 @@ msgstr "Quelques constructions comme les fermes on une zone de travail très ré
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+(+/-)"
+msgid "Ctrl + (+/-)"
 msgstr "Ctrl + (+/-)"
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+0"
+msgid "Ctrl + 0"
 msgstr "Ctrl + 0"
 
 #: ../../data/txts/tips/general_game.lua:71
@@ -769,8 +770,8 @@ msgstr "Utilisez les touches ',' (virgule) et '.' (point) pour sauter  rapidemen
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Ctrl+(Page Up/Page Down)"
-msgstr "Ctrl+(Page Haut/Page Bas)"
+msgid "Ctrl + (Page Up/Page Down)"
+msgstr "Ctrl + (Page Haut/Page Bas)"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
@@ -779,8 +780,8 @@ msgstr "Page Haut/Page Bas"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Shift+(Page Up/Page Down)"
-msgstr "Shift+(Page Haut/Page Bas)"
+msgid "Shift + (Page Up/Page Down)"
+msgstr "Shift + (Page Haut/Page Bas)"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgid ""
@@ -795,8 +796,8 @@ msgstr "Touches fléchées"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
-msgstr "Ctrl+Touches fléchées"
+msgid "Ctrl + Arrow keys"
+msgstr "Ctrl + Touches fléchées"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
@@ -805,8 +806,8 @@ msgstr "Bouges la vue de la carte en utilisant %1%. %2% bougera la vue plus vite
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Shift+Arrow keys"
-msgstr "Shift+Touches fléchées"
+msgid "Shift + Arrow keys"
+msgstr "Shift + Touches fléchées"
 
 #: ../../data/txts/tips/general_game.lua:87
 msgid ""

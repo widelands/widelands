@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_lime_kiln",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Lime Kiln"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -47,19 +47,21 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
          descname = _"mixing grout",
          actions = {
             "return=skipped unless economy needs grout",
             "consume=coal granite:2 water:2",
             "sleep=duration:50s",
-            "playsound=sound/barbarians/stonegrind 100",
+            "playsound=sound/barbarians/stonegrind priority:80%",
             "animate=working duration:29s",
-            "playsound=sound/barbarians/mortar 80",
+            "playsound=sound/barbarians/mortar priority:60%",
             "sleep=duration:3s",
             "produce=grout:2"
          }
       },
    },
 }
+
+pop_textdomain()

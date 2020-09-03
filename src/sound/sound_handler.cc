@@ -75,22 +75,24 @@ SoundHandler::SoundHandler()
 
 	SDL_version sdl_version;
 	SDL_GetVersion(&sdl_version);
-	log("**** SOUND REPORT ****\n");
-	log("SDL version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
-	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
+	log_dbg("**** SOUND REPORT ****\n");
+	log_dbg("SDL version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	        static_cast<unsigned int>(sdl_version.minor),
+	        static_cast<unsigned int>(sdl_version.patch));
 
 	// SDL 2.0.6 will crash due to an upstream bug:
 	// https://bugs.launchpad.net/ubuntu/+source/libsdl2/+bug/1722060
 	if (sdl_version.major == 2 && sdl_version.minor == 0 && sdl_version.patch == 6) {
-		log("Disabled sound due to a bug in SDL 2.0.6\n");
+		log_warn("Disabled sound due to a bug in SDL 2.0.6\n");
 		SoundHandler::disable_backend();
 	}
 
 	SDL_MIXER_VERSION(&sdl_version)
-	log("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
-	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
+	log_dbg("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	        static_cast<unsigned int>(sdl_version.minor),
+	        static_cast<unsigned int>(sdl_version.patch));
 
-	log("**** END SOUND REPORT ****\n");
+	log_dbg("**** END SOUND REPORT ****\n");
 
 	if (SoundHandler::is_backend_disabled()) {
 		return;
@@ -146,8 +148,8 @@ SoundHandler::~SoundHandler() {
 	int numtimesopened, frequency, channels;
 	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
-	log("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
-	    numtimesopened == 1 ? "" : "s", frequency, format, channels, channels == 1 ? "" : "s");
+	log_dbg("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
+	        numtimesopened == 1 ? "" : "s", frequency, format, channels, channels == 1 ? "" : "s");
 
 	if (numtimesopened == 0) {
 		return;
@@ -156,13 +158,13 @@ SoundHandler::~SoundHandler() {
 	Mix_HaltChannel(-1);
 
 	if (SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) {
-		log("SoundHandler: Audio error %s\n", SDL_GetError());
+		log_err("SoundHandler: Audio error %s\n", SDL_GetError());
 	}
 
-	log("SoundHandler: SDL_AUDIODRIVER %s\n", SDL_GetCurrentAudioDriver());
+	log_dbg("SoundHandler: SDL_AUDIODRIVER %s\n", SDL_GetCurrentAudioDriver());
 
 	if (numtimesopened != 1) {
-		log("SoundHandler: PROBLEM: sound device opened multiple times, trying to close");
+		log_warn("SoundHandler: PROBLEM: sound device opened multiple times, trying to close");
 	}
 	for (int i = 0; i < numtimesopened; ++i) {
 		Mix_CloseAudio();
@@ -179,7 +181,7 @@ SoundHandler::~SoundHandler() {
 
 /// Prints an error and disables and shuts down the sound system.
 void SoundHandler::initialization_error(const char* const msg, bool quit_sdl) {
-	log("WARNING: Failed to initialize sound system: %s\n", msg);
+	log_warn("Failed to initialize sound system: %s\n", msg);
 	SoundHandler::disable_backend();
 	if (quit_sdl) {
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
@@ -285,7 +287,10 @@ FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
  * (to avoid "sonic overload"). Based on priority and on when it was last played.
  * System sounds and sounds with priority "kFxPriorityAlwaysPlay" always return 'true'.
  */
-bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const priority) {
+bool SoundHandler::play_or_not(SoundType type,
+                               const FxId fx_id,
+                               uint16_t const priority,
+                               bool allow_multiple) {
 	assert(!SoundHandler::is_backend_disabled() && is_sound_enabled(type));
 	assert(priority >= kFxPriorityLowest);
 
@@ -299,27 +304,25 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const p
 	}
 
 	// We always play important sounds
-	if (priority == kFxPriorityAlwaysPlay) {
+	if (priority == kFxMaximumPriority && allow_multiple) {
 		return true;
 	}
 
 	// Do not run multiple instances of the same sound effect if the priority is too low
-	bool too_many_playing = false;
-	if (priority < kFxPriorityAllowMultiple) {
-		lock_fx();
+	if (!allow_multiple) {
 		// Find out if an fx called 'fx_name' is already running
+		lock_fx();
 		for (const auto& fx_pair : active_fx_) {
 			if (fx_pair.second == fx_id) {
-				too_many_playing = true;
-				break;
+				release_fx_lock();
+				return false;
 			}
 		}
-	}
-
-	release_fx_lock();
-
-	if (too_many_playing) {
-		return false;
+		release_fx_lock();
+		// We always play sounds with 100% chance at least once
+		if (priority == kFxMaximumPriority) {
+			return true;
+		}
 	}
 
 	// TODO(unknown): long time since any play increases weighted_priority
@@ -330,8 +333,7 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const p
 
 	// Weighted total probability that this fx gets played; initially set according to priority
 	//  float division! not integer
-	float probability =
-	   (priority % kFxPriorityAllowMultiple) / static_cast<float>(kFxPriorityAllowMultiple);
+	float probability = static_cast<float>(priority) / kFxMaximumPriority;
 
 	// How many milliseconds in the past to consider
 	constexpr uint32_t kSlidingWindowSize = 20000;
@@ -348,7 +350,7 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const p
 
 	// finally: the decision
 	// float division! not integer
-	return (rng_.rand() % kFxPriorityAlwaysPlay) / static_cast<float>(kFxPriorityAlwaysPlay) <=
+	return (rng_.rand() % kFxMaximumPriority) / static_cast<float>(kFxMaximumPriority) <=
 	       probability;
 }
 
@@ -362,7 +364,8 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const p
  */
 void SoundHandler::play_fx(SoundType type,
                            const FxId fx_id,
-                           uint8_t const priority,
+                           uint16_t const priority,
+                           bool allow_multiple,
                            int32_t const stereo_pos,
                            int distance) {
 	if (SoundHandler::is_backend_disabled() || !is_sound_enabled(type)) {
@@ -378,12 +381,12 @@ void SoundHandler::play_fx(SoundType type,
 	}
 
 	if (fxs_[type].count(fx_id) == 0) {
-		log("SoundHandler: Sound effect %d does not exist!\n", fx_id);
+		log_err("SoundHandler: Sound effect %d does not exist!\n", fx_id);
 		return;
 	}
 
 	// See if the FX should be played
-	if (!play_or_not(type, fx_id, priority)) {
+	if (!play_or_not(type, fx_id, priority, allow_multiple)) {
 		return;
 	}
 
@@ -391,7 +394,7 @@ void SoundHandler::play_fx(SoundType type,
 	if (Mix_Chunk* const m = fxs_[type][fx_id]->get_fx(rng_.rand())) {
 		const int32_t chan = Mix_PlayChannel(-1, m, 0);
 		if (chan == -1) {
-			log("SoundHandler: Mix_PlayChannel failed: %s\n", Mix_GetError());
+			log_err("SoundHandler: Mix_PlayChannel failed: %s\n", Mix_GetError());
 		} else {
 			Mix_SetPanning(chan, kStereoRight - stereo_pos, stereo_pos);
 			Mix_SetDistance(chan, distance);
@@ -402,7 +405,7 @@ void SoundHandler::play_fx(SoundType type,
 			release_fx_lock();
 		}
 	} else {
-		log("SoundHandler: Sound effect %d exists but contains no files!\n", fx_id);
+		log_err("SoundHandler: Sound effect %d exists but contains no files!\n", fx_id);
 	}
 }
 
@@ -452,13 +455,14 @@ void SoundHandler::start_music(const std::string& songset_name) {
 	}
 
 	if (songs_.count(songset_name) == 0) {
-		log("SoundHandler: songset \"%s\" does not exist!\n", songset_name.c_str());
+		log_err("SoundHandler: songset \"%s\" does not exist!\n", songset_name.c_str());
 	} else {
 		if (Mix_Music* const m = songs_[songset_name]->get_song(rng_.rand())) {
 			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
 		} else {
-			log("SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
+			log_err(
+			   "SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
 		}
 	}
 }

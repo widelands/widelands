@@ -23,8 +23,10 @@
 
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "scripting/lua_interface.h"
+
+StyleManager* g_style_manager;
 
 namespace {
 // Read RGB(A) color from LuaTable
@@ -67,7 +69,7 @@ UI::PanelStyleInfo* read_panel_style(const LuaTable& table) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
 	}
 	return new UI::PanelStyleInfo(
-	   image.empty() ? nullptr : g_gr->images().get(image),
+	   image.empty() ? nullptr : g_image_cache->get(image),
 	   RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0),
 	   table.has_key<std::string>("margin") ? table.get_int("margin") : 0);
 }
@@ -88,8 +90,7 @@ void check_completeness(const std::string& name, size_t map_size, size_t last_en
 }
 }  // namespace
 
-void StyleManager::init() {
-
+StyleManager::StyleManager() {
 	ScopedTimer timer("Style Manager: Reading style templates took %ums");
 
 	buttonstyles_.clear();
@@ -130,10 +131,10 @@ void StyleManager::init() {
 	// Tabpanels
 	element_table = table->get_table("tabpanels");
 	style_table = element_table->get_table("fsmenu");
-	add_tabpanel_style(UI::TabPanelStyle::kFsMenu, *style_table->get_table("menu").get());
+	add_tabpanel_style(UI::TabPanelStyle::kFsMenu, *style_table->get_table("menu"));
 	style_table = element_table->get_table("wui");
-	add_tabpanel_style(UI::TabPanelStyle::kWuiLight, *style_table->get_table("light").get());
-	add_tabpanel_style(UI::TabPanelStyle::kWuiDark, *style_table->get_table("dark").get());
+	add_tabpanel_style(UI::TabPanelStyle::kWuiLight, *style_table->get_table("light"));
+	add_tabpanel_style(UI::TabPanelStyle::kWuiDark, *style_table->get_table("dark"));
 	check_completeness(
 	   "tabpanels", tabpanelstyles_.size(), static_cast<size_t>(UI::TabPanelStyle::kWuiDark));
 
@@ -147,18 +148,18 @@ void StyleManager::init() {
 	// Dropdowns
 	element_table = table->get_table("dropdowns");
 	style_table = element_table->get_table("fsmenu");
-	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &dropdownstyles_);
+	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu"), &dropdownstyles_);
 	style_table = element_table->get_table("wui");
-	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &dropdownstyles_);
+	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu"), &dropdownstyles_);
 	check_completeness(
 	   "dropdowns", dropdownstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Scrollbars
 	element_table = table->get_table("scrollbars");
 	style_table = element_table->get_table("fsmenu");
-	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &scrollbarstyles_);
+	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu"), &scrollbarstyles_);
 	style_table = element_table->get_table("wui");
-	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &scrollbarstyles_);
+	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu"), &scrollbarstyles_);
 	check_completeness(
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
@@ -196,6 +197,8 @@ void StyleManager::init() {
 	minimap_icon_frame_ = read_rgb_color(*table->get_table("minimap_icon_frame"));
 	window_border_focused_ = read_rgba_color(*table->get_table("window_border_focused"));
 	window_border_unfocused_ = read_rgba_color(*table->get_table("window_border_unfocused"));
+	focused_color_ = read_rgba_color(*table->get_table("background_focused"));
+	semi_focused_color_ = read_rgba_color(*table->get_table("background_semi_focused"));
 
 	// Fonts
 	element_table = table->get_table("fonts");
@@ -383,7 +386,7 @@ void StyleManager::add_ware_info_style(UI::WareInfoStyle style, const LuaTable& 
 	ware_info_styles_.insert(std::make_pair(
 	   style, std::unique_ptr<const UI::WareInfoStyleInfo>(new UI::WareInfoStyleInfo(
 	             read_font_style(*fonts_table, "header"), read_font_style(*fonts_table, "info"),
-	             g_gr->images().get(table.get_string("icon_background_image")),
+	             g_image_cache->get(table.get_string("icon_background_image")),
 	             read_rgb_color(*colors_table->get_table("icon_frame")),
 	             read_rgb_color(*colors_table->get_table("icon_background")),
 	             read_rgb_color(*colors_table->get_table("info_background"))))));

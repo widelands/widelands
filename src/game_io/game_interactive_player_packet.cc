@@ -157,11 +157,15 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 			fw.float_32(landmarks[i].view.zoom);
 		}
 
-		fw.unsigned_32(iplayer ? iplayer->get_expedition_port_spaces().size() : 0);
-		for (const auto& pair : iplayer->get_expedition_port_spaces()) {
-			fw.unsigned_32(mos->get_object_file_index(*pair.first));
-			fw.signed_16(pair.second.x);
-			fw.signed_16(pair.second.y);
+		if (iplayer) {
+			fw.unsigned_32(iplayer->get_expedition_port_spaces().size());
+			for (const auto& pair : iplayer->get_expedition_port_spaces()) {
+				fw.unsigned_32(mos->get_object_file_index(*pair.first));
+				fw.signed_16(pair.second.x);
+				fw.signed_16(pair.second.y);
+			}
+		} else {
+			fw.unsigned_32(0);
 		}
 	}
 

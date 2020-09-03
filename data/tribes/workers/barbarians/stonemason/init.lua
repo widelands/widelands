@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
    name = "barbarians_stonemason",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Stonemason"),
-   helptext_script = dirname .. "helptexts.lua",
    animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
@@ -19,7 +19,7 @@ tribes:new_worker_type {
       cut_granite = {
          "findobject=attrib:rocks radius:6",
          "walk=object",
-         "playsound=sound/stonecutting/stonecutter 192",
+         "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
          "animate=hack duration:17s500ms",
          "callobject=shrink",
          "createware=granite",
@@ -58,3 +58,5 @@ tribes:new_worker_type {
       }
    }
 }
+
+pop_textdomain()

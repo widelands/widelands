@@ -22,12 +22,12 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
-#include "logic/map_objects/map_object.h"
 #include "map_io/map_loader.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -54,6 +54,9 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
      peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
+     custom_starting_positions_(this,
+                                Vector2i(get_w() * 7 / 10, get_h() * 21 / 40 + buth_),
+                                _("Custom starting positions")),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
@@ -64,7 +67,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
             0,
             "",
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),
@@ -72,6 +75,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      nr_players_(0) {
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
+	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
 	back_.sigclicked.connect([this]() { clicked_back(); });
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
@@ -99,6 +103,22 @@ void FullscreenMenuLaunchGame::update_peaceful_mode() {
 		peaceful_.set_tooltip(_("The selected win condition does not allow peaceful matches"));
 	} else {
 		peaceful_.set_tooltip(_("Forbid fighting between players"));
+	}
+}
+
+void FullscreenMenuLaunchGame::update_custom_starting_positions() {
+	const bool forbidden = settings_->settings().scenario || settings_->settings().savegame;
+	custom_starting_positions_.set_enabled(!forbidden && settings_->can_change_map());
+	if (forbidden) {
+		custom_starting_positions_.set_state(false);
+	}
+	if (settings_->settings().scenario) {
+		custom_starting_positions_.set_tooltip(_("The starting positions are set by the scenario"));
+	} else if (settings_->settings().savegame) {
+		custom_starting_positions_.set_tooltip(_("The starting positions are set by the saved game"));
+	} else {
+		custom_starting_positions_.set_tooltip(_(
+		   "Allow the players to choose their own starting positions at the beginning of the game"));
 	}
 }
 
@@ -171,8 +191,8 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 					                            t->get_string("description"));
 				}
 			} catch (LuaTableKeyError& e) {
-				log("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
-				    e.what());
+				log_err("Launch Game: Error loading win condition: %s %s\n",
+				        win_condition_script.c_str(), e.what());
 			}
 		}
 	} catch (const std::exception& e) {
@@ -182,7 +202,7 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 		    settings_->settings().mapfilename)
 		      .str();
 		win_condition_dropdown_.set_errored(error_message);
-		log("Launch Game: Exception: %s %s\n", error_message.c_str(), e.what());
+		log_err("Launch Game: Exception: %s %s\n", error_message.c_str(), e.what());
 	}
 }
 
@@ -205,8 +225,8 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 			}
 		}
 	} catch (LuaTableKeyError& e) {
-		log("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
-		    e.what());
+		log_err("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
+		        e.what());
 	}
 	if (!is_usable) {
 		t.reset(nullptr);
@@ -216,6 +236,10 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 
 void FullscreenMenuLaunchGame::toggle_peaceful() {
 	settings_->set_peaceful_mode(peaceful_.get_state());
+}
+
+void FullscreenMenuLaunchGame::toggle_custom_starting_positions() {
+	settings_->set_custom_starting_positions(custom_starting_positions_.get_state());
 }
 
 // Implemented by subclasses

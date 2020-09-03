@@ -22,7 +22,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "logic/note_map_options.h"
@@ -242,8 +241,13 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
      main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     inner_teams_box_(
-        &teams_box_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h() / 2),
+     inner_teams_box_(&teams_box_,
+                      padding_,
+                      padding_,
+                      UI::Box::Vertical,
+                      max_w_,
+                      get_inner_h() / 2,
+                      kSuggestedTeamsUnitSize),
 
      name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
@@ -321,7 +325,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
 	UI::Box* ww_box = new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_);
-	waterway_length_warning_ = new UI::Icon(ww_box, g_gr->images().get("images/ui_basic/stop.png"));
+	waterway_length_warning_ = new UI::Icon(ww_box, g_image_cache->get("images/ui_basic/stop.png"));
 	waterway_length_warning_->set_handle_mouse(true);
 	waterway_length_box_ =
 	   new UI::SpinBox(ww_box, 0, 0, max_w_ - waterway_length_warning_->get_w(), max_w_ * 2 / 3, 1,
@@ -350,16 +354,17 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	teams_box_.add(new UI::Textarea(
 	   &teams_box_, 0, 0, max_w_, labelh_,
 	   (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str()));
-	teams_box_.add_space(4);
+	teams_box_.add_space(padding_);
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")));
+	teams_box_.add_space(padding_);
 	teams_box_.add(&inner_teams_box_, UI::Box::Resizing::kFullSize);
+	teams_box_.add_space(padding_);
 	teams_box_.add(&new_suggested_team_, UI::Box::Resizing::kFullSize);
 	new_suggested_team_.sigclicked.connect([this]() {
 		SuggestedTeamsEntry* ste =
 		   new SuggestedTeamsEntry(this, &inner_teams_box_, eia().egbase().map(),
 		                           max_w_ - UI::Scrollbar::kSize, Widelands::SuggestedTeamLineup());
 		inner_teams_box_.add(ste);
-		inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
 		suggested_teams_entries_.push_back(ste);
 	});
 
@@ -369,11 +374,11 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tab_box_.add(&tabs_, UI::Box::Resizing::kFullSize);
 	tab_box_.add_space(4);
 	tab_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
-	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/toggle_minimap.png"),
+	tabs_.add("main_map_options", g_image_cache->get("images/wui/menus/toggle_minimap.png"),
 	          &main_box_, _("Main Options"));
-	tabs_.add("map_tags", g_gr->images().get("images/ui_basic/checkbox_checked.png"), &tags_box_,
+	tabs_.add("map_tags", g_image_cache->get("images/ui_basic/checkbox_checked.png"), &tags_box_,
 	          _("Tags"));
-	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/tools/players.png"), &teams_box_,
+	tabs_.add("map_teams", g_image_cache->get("images/wui/editor/tools/players.png"), &teams_box_,
 	          _("Teams"));
 
 	set_center_panel(&tab_box_);
@@ -403,7 +408,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 void MainMenuMapOptions::update_waterway_length_warning() {
 	const uint32_t len = waterway_length_box_->get_value();
 	if (len > kMaxRecommendedWaterwayLengthLimit) {
-		waterway_length_warning_->set_icon(g_gr->images().get("images/ui_basic/stop.png"));
+		waterway_length_warning_->set_icon(g_image_cache->get("images/ui_basic/stop.png"));
 		waterway_length_warning_->set_tooltip(
 		   (boost::format(_("It is not recommended to permit waterway lengths greater than %u")) %
 		    kMaxRecommendedWaterwayLengthLimit)
@@ -491,22 +496,11 @@ void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
 
 void MainMenuMapOptions::delete_suggested_team(SuggestedTeamsEntry* ste) {
 	inner_teams_box_.set_force_scrolling(false);
-	inner_teams_box_.clear();
-	const size_t nr = suggested_teams_entries_.size();
-	for (size_t i = 0; i < nr; ++i) {
-		if (suggested_teams_entries_[i] == ste) {
-			for (size_t j = i + 1; j < nr; ++j) {
-				inner_teams_box_.add(suggested_teams_entries_[j]);
-				inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
-				suggested_teams_entries_[j - 1] = suggested_teams_entries_[j];
-			}
-			suggested_teams_entries_.resize(nr - 1);
-			inner_teams_box_.set_force_scrolling(true);
-			return ste->die();
-		} else {
-			inner_teams_box_.add(suggested_teams_entries_[i]);
-			inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
-		}
-	}
-	NEVER_HERE();
+
+	auto is_deleted_panel = [ste](SuggestedTeamsEntry* i) { return ste == i; };
+	suggested_teams_entries_.erase(std::remove_if(suggested_teams_entries_.begin(),
+	                                              suggested_teams_entries_.end(), is_deleted_panel),
+	                               suggested_teams_entries_.end());
+	ste->die();
+	inner_teams_box_.set_force_scrolling(true);
 }
