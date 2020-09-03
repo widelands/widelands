@@ -19,6 +19,7 @@
 
 #include "wui/building_statistics_menu.h"
 
+#include <SDL_timer.h>
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
@@ -186,6 +187,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 }
 
 BuildingStatisticsMenu::~BuildingStatisticsMenu() {
+	Notifications::publish(NoteDelayedCheckCancel(this));
 	building_buttons_.clear();
 	owned_labels_.clear();
 	productivity_labels_.clear();
@@ -592,6 +594,7 @@ int32_t BuildingStatisticsMenu::validate_pointer(int32_t* const id, int32_t cons
  * Update Buttons
  */
 void BuildingStatisticsMenu::update() {
+	NoteDelayedCheck::instantiate(this, [this]() {
 	const Widelands::Player& player = iplayer().player();
 	const Widelands::TribeDescr& tribe = player.tribe();
 
@@ -760,6 +763,7 @@ void BuildingStatisticsMenu::update() {
 		}
 		building_buttons_[id]->set_tooltip(building.descname());
 	}
+	});
 }
 
 void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea,

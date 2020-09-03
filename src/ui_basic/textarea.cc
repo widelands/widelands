@@ -19,6 +19,8 @@
 
 #include "ui_basic/textarea.h"
 
+#include <SDL_timer.h>
+
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
@@ -77,7 +79,8 @@ void Textarea::update() {
 		collapse();  // collapse() implicitly updates the size and position
 	}
 
-	NoteDelayedCheck::instantiate(this, [this]() {
+	bool done = false;
+	NoteDelayedCheck::instantiate(this, [this, &done]() {
 		FontStyleInfo scaled_style(*style_);
 		scaled_style.set_size(
 		   std::max(g_style_manager->minimum_font_size(),
@@ -89,7 +92,11 @@ void Textarea::update() {
 		} else if (layoutmode_ == LayoutMode::Layouted) {
 			update_desired_size();
 		}
+		done = true;
 	});
+	while (!done) {
+		SDL_Delay(10);
+	}
 }
 
 Textarea::~Textarea() {
