@@ -93,14 +93,17 @@ void ComputerPlayer::runthread() {
 	while (game().is_loaded()) {
 		const uint32_t time = SDL_GetTicks();
 		if (time >= next_time) {
+			uint8_t patience = 10;
 			for (;;) {
 				if (!game().is_loaded()) {
 					return;
 				}
-				MutexLock m(true);
+				MutexLock m(--patience > 0);
 				if (m.is_valid()) {
 					think();
 					break;
+				} else {
+					SDL_Delay(10);
 				}
 			}
 		}
