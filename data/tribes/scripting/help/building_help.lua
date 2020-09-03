@@ -1,5 +1,4 @@
 include "tribes/scripting/help/format_help.lua"
-include "tribes/scripting/help/global_helptexts.lua"
 
 -- RST
 -- building_help.lua
@@ -178,27 +177,21 @@ end
 --    :returns: rt of the formatted text
 --
 function building_help_general_string(tribe, building_description)
+   local helptexts = building_description:helptexts(tribe.name)
+   -- TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
+   local lore_text = _"Text needed"
+   if helptexts["lore"] ~= nil then
+      lore_text = helptexts["lore"]
+   end
    -- TRANSLATORS: Heading for a flavour text in the building help.
-   local result = h2(_"Lore")
-   local lore_text = building_helptext_lore()
-   if type(lore_text) == "table" then
-      result = result .. li_object(building_description.name, lore_text[1])
-      for k,v in ipairs({table.unpack(lore_text, 2)}) do
-         result = result .. p(v)
-      end
-   else
-    result = result ..
+   local result = h2(_"Lore") ..
       li_object(building_description.name, lore_text)
-   end
 
-   local lore_author = building_helptext_lore_author()
-
-   if type(lore_author) ~= "table" then
-      lore_author = { building_helptext_lore_author() }
+   local lore_author = ""
+   if helptexts["lore_author"] ~= nil then
+      lore_author = helptexts["lore_author"]
    end
-   for i, item in ipairs(lore_author) do
-      result = result .. div("width=100%", p_font("align=right", "size=10 italic=1", item .. vspace(3)))
-   end
+   result = result .. div("width=100%", p_font("align=right", "size=10 italic=1", lore_author .. vspace(3)))
 
    result = result .. h2(_"General")
    result = result .. h3(_"Purpose:")
@@ -222,14 +215,19 @@ function building_help_general_string(tribe, building_description)
       representative_resource = wl.Game():get_ware_description("log")
    end
 
-   if(representative_resource) then
-      result = result .. li_image(representative_resource.icon_name, building_helptext_purpose())
+   -- TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
+   local purpose = _"Text needed"
+   if helptexts["purpose"] ~= nil then
+      purpose = helptexts["purpose"]
+   end
+   if representative_resource then
+      result = result .. li_image(representative_resource.icon_name, purpose)
    else
-      result = result .. p(building_helptext_purpose())
+      result = result .. p(purpose)
    end
 
-   if (building_helptext_note() ~= "") then
-      result = result .. h3(_"Note:") .. p(building_helptext_note())
+   if helptexts["note"] ~= nil then
+      result = result .. h3(_"Note:") .. p(helptexts["note"])
    end
 
    if(building_description.type_name == "productionsite") then
@@ -302,12 +300,15 @@ function building_help_dependencies_production(tribe, building_description)
 
          -- Need to hack this, because resource != produced ware.
          local resi_name = ware_description.name
-         if(resi_name == "iron_ore") then resi_name = "iron"
-         elseif(resi_name == "granite") then resi_name = "stones"
-         elseif(resi_name == "diamond") then resi_name = "stones"
-         elseif(resi_name == "quartz") then resi_name = "stones"
-         elseif(resi_name == "marble") then resi_name = "stones"
-         elseif(resi_name == "gold_ore") then resi_name = "gold" end
+         if(resi_name == "coal") then resi_name = "resource_coal"
+         elseif(resi_name == "iron_ore") then resi_name = "resource_iron"
+         elseif(resi_name == "granite") then resi_name = "resource_stones"
+         elseif(resi_name == "diamond") then resi_name = "resource_stones"
+         elseif(resi_name == "quartz") then resi_name = "resource_stones"
+         elseif(resi_name == "marble") then resi_name = "resource_stones"
+         elseif(resi_name == "gold_ore") then resi_name = "resource_gold"
+         elseif(resi_name == "water") then resi_name = "water" end
+
          result = result .. dependencies_resi(tribe.name,
             resi_name,
             {building_description, ware_description},
@@ -360,7 +361,6 @@ function building_help_dependencies_production(tribe, building_description)
       end
    end
    if (outgoing ~= "") then result = result .. h3(_"Outgoing:") .. outgoing end
-
    if (result == "") then result = p(_"None") end
    return h2(_"Dependencies") .. result
 end
@@ -685,19 +685,25 @@ end
 
 
 -- RST
--- .. function:: building_help_production_section()
+-- .. function:: building_help_production_section(tribe, building_description)
 --
 --    Displays the production/performance section with a headline
 --
+--    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--                               that we are displaying this help for.
+--
 --    :returns: rt for the production section
 --
-function building_help_production_section()
-   if (building_helptext_performance() ~= "") then
-      return h2(_"Production") ..
-        inline_header(_"Performance:", building_helptext_performance())
-   else
-      return ""
+function building_help_production_section(tribe, building_description)
+   local helptexts = building_description:helptexts(tribe.name)
+   -- TRANSLATORS: Performance helptext for a building - it hasn't been written yet.
+   local performance = _"Calculation needed"
+   if (helptexts["performance"] ~= nil) then
+      performance = helptexts["performance"]
    end
+   return h2(_"Production") ..
+     inline_header(_"Performance:", performance)
 end
 
 
@@ -712,14 +718,12 @@ end
 --    :returns: rt of the formatted text
 --
 function building_help(tribe, building_description)
-   include(building_description.helptext_script)
-
    if (building_description.type_name == "productionsite") then
       return building_help_general_string(tribe, building_description) ..
          building_help_dependencies_production(tribe, building_description) ..
          building_help_crew_string(tribe, building_description) ..
          building_help_building_section(building_description) ..
-         building_help_production_section()
+         building_help_production_section(tribe, building_description)
    elseif (building_description.type_name == "militarysite") then
       return building_help_general_string(tribe, building_description) ..
          building_help_building_section(building_description)
@@ -727,8 +731,7 @@ function building_help(tribe, building_description)
       if (building_description.is_port) then
          return building_help_general_string(tribe, building_description) ..
             -- TODO(GunChleoc) expedition costs here?
-            building_help_building_section(building_description) ..
-            building_help_production_section()
+            building_help_building_section(building_description)
       else
          return building_help_general_string(tribe, building_description) ..
             building_help_building_section(building_description)
@@ -737,7 +740,7 @@ function building_help(tribe, building_description)
       return building_help_general_string(tribe, building_description) ..
          building_help_dependencies_training(tribe, building_description) ..
          building_help_crew_string(tribe, building_description) ..
-         building_help_building_section(building_description) ..building_help_production_section()
+         building_help_building_section(building_description) ..building_help_production_section(tribe, building_description)
    elseif (building_description.type_name == "constructionsite" or
             building_description.type_name == "dismantlesite") then
             -- TODO(GunChleoc) Get them a crew string for the builder

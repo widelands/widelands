@@ -145,9 +145,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", name().c_str());
 	}
-	if (input_type == MapObjectDescr::OwnerType::kTribe && helptext_script().empty()) {
-		throw GameDataError("Tribe immovable %s has no helptext script", name().c_str());
-	}
 
 	if (table.has_key("size")) {
 		size_ = BaseImmovable::string_to_size(table.get_string("size"));
