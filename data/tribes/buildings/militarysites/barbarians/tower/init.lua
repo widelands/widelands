@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_militarysite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_tower",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Tower"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    vision_range = 17,
@@ -56,3 +56,5 @@ tribes:new_militarysite_type {
       defeated_you = _"Your soldiers defeated the enemy at the tower."
    },
 }
+
+pop_textdomain()

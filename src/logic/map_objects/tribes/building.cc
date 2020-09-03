@@ -69,17 +69,12 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
      enhanced_building_(false),
      hints_(table.get_table("aihints")),
      vision_range_(0) {
-	if (helptext_script().empty()) {
-		throw GameDataError("Building %s has no helptext script", name().c_str());
-	}
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Building %s has no idle animation", name().c_str());
 	}
 	if (icon_filename().empty()) {
 		throw GameDataError("Building %s needs a menu icon", name().c_str());
 	}
-
-	i18n::Textdomain td("tribes");
 
 	// Partially finished buildings get their sizes from their associated building
 	if (type() != MapObjectType::CONSTRUCTIONSITE && type() != MapObjectType::DISMANTLESITE) {
