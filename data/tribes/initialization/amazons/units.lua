@@ -256,7 +256,10 @@
 tribes = wl.Tribes()
 image_dirname = path.dirname(__file__) .. "images/"
 
-push_textdomain("tribes")
+push_textdomain("tribes_encyclopedia")
+
+-- For formatting time strings
+include "tribes/scripting/help/global_helptexts.lua"
 
 tribes:new_tribe {
    name = "amazons",
@@ -943,11 +946,11 @@ tribes:new_tribe {
             preciousness = 2,
             helptexts = {
                -- TRANSLATORS: Helptext for an atlantean worker: Horse
-               purpose = pgettext("amazons_worker", "tapirs help to carry items along busy roads. They are reared in a horse farm.")
+               purpose = pgettext("amazons_worker", "Tapirs help to carry items along busy roads. They are reared in a tapir farm.")
             }
          },
          {
-            name = "amazons_tapirbreeder",
+            name = "amazons_tapir_breeder",
             helptexts = {
                -- TRANSLATORS: Helptext for an atlantean worker: Horse Breeder
                purpose = pgettext("amazons_worker", "Breeds the tapirs for adding them to the transportation system.")
@@ -1829,9 +1832,6 @@ tribes:new_tribe {
             performance = pgettext("amazons_building", "The blackroot farmer needs %1% on average to sow and harvest a bundle of blackroot."):bformat(format_minutes_seconds(1, 20))
          }
       },
-      "",
-      "",
-      "",
 
       -- Mines
       {
