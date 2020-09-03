@@ -5,7 +5,6 @@ push_textdomain("scenario_emp04.wmf")
 tribes:new_trainingsite_type {
    name = "empire_trainingcamp1",
    descname = "Training Camp",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
