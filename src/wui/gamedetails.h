@@ -23,7 +23,10 @@
 #include <memory>
 
 #include "graphic/image.h"
+#include "graphic/texture.h"
+#include "logic/editor_game_base.h"
 #include "logic/game_controller.h"
+#include "map_io/map_loader.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
@@ -65,8 +68,12 @@ private:
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
 	UI::Icon minimap_icon_;
-	std::unique_ptr<const Image> minimap_image_;
+	std::unique_ptr<const Texture> minimap_image_;
 	UI::Box* button_box_;
+
+	// Used to render map preview
+	std::unique_ptr<Widelands::MapLoader> map_loader_;
+	Widelands::EditorGameBase egbase_;
 };
 
 #endif  // end of include guard: WL_WUI_GAMEDETAILS_H

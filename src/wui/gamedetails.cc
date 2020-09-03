@@ -27,10 +27,12 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/image_io.h"
+#include "graphic/minimap_renderer.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 
 GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
@@ -56,7 +58,8 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(this, 0, 0, 0, 0, nullptr),
-     button_box_(new UI::Box(this, 0, 0, UI::Box::Vertical)) {
+     button_box_(new UI::Box(this, 0, 0, UI::Box::Vertical)),
+     egbase_(nullptr) {
 
 	add(&name_label_, UI::Box::Resizing::kFullSize);
 	add_space(padding_);
@@ -198,6 +201,18 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 			minimap_icon_.set_icon(minimap_image_.get());
 		} catch (const std::exception& e) {
 			log_err("Failed to load the minimap image : %s\n", e.what());
+		}
+	} else if (mode_ == Mode::kReplay) {
+		// Render minimap
+		egbase_.cleanup_for_load();
+		std::string filename(gamedata.filename);
+		filename.append(kSavegameExtension);
+		map_loader_ = egbase_.mutable_map()->get_correct_loader(filename);
+		if (map_loader_ && !map_loader_->load_map_for_render(egbase_)) {
+			minimap_image_ = draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
+			                              MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
+			minimap_icon_.set_icon(minimap_image_.get());
+			minimap_icon_.set_visible(true);
 		}
 	}
 }
