@@ -352,6 +352,18 @@ void Immovable::increment_program_pointer() {
 	action_data_.reset(nullptr);
 }
 
+bool Immovable::is_marked_for_removal(PlayerNumber p) const {
+	return marked_for_removal_.count(p) > 0;
+}
+
+void Immovable::set_marked_for_removal(PlayerNumber p, bool mark) {
+	if (mark) {
+		marked_for_removal_.insert(p);
+	} else {
+		marked_for_removal_.erase(p);
+	}
+}
+
 /**
  * Actually initialize the immovable.
  */
@@ -499,12 +511,13 @@ Load/save support
 ==============================
 */
 
-// We neeed 2 packet versions for map loading: Packet version 7 will load in older versions of
+// We need 2 packet versions for map loading: Packet version 7 will load in older versions of
 // Widelands, so we have a dynamic version number - it is only set higher than
 // kCurrentPacketVersionImmovableNoFormerBuildings during saving if we have an immovable with
 // a former building assigned to it.
-constexpr uint8_t kCurrentPacketVersionImmovableNoFormerBuildings = 8;
-constexpr uint8_t kCurrentPacketVersionImmovable = 9;
+// TODO(Nordfriese): This is an awful design that should be refactored on occasion.
+constexpr uint8_t kCurrentPacketVersionImmovableNoFormerBuildings = 9;
+constexpr uint8_t kCurrentPacketVersionImmovable = 10;
 
 // Supporting older versions for map loading
 void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
@@ -605,6 +618,11 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 			imm.set_action_data(ImmovableActionData::load(fr, imm, dataname));
 		}
 	}
+	if (packet_version >= (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings ? 10 : 9)) {
+		for (uint8_t i = fr.unsigned_8(); i; --i) {
+			imm.marked_for_removal_.insert(fr.unsigned_8());
+		}
+	}
 }
 
 void Immovable::Loader::load_pointers() {
@@ -676,6 +694,11 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 		action_data_->save(fw, *this);
 	} else {
 		fw.c_string("");
+	}
+
+	fw.unsigned_8(marked_for_removal_.size());
+	for (const PlayerNumber& p : marked_for_removal_) {
+		fw.unsigned_8(p);
 	}
 }
 

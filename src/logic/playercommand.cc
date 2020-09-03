@@ -2062,7 +2062,7 @@ void CmdToggleMuteMessages::write(FileWrite& fw, EditorGameBase& egbase, MapObje
 
 // CmdMarkMapObjectForRemoval
 void CmdMarkMapObjectForRemoval::execute(Game& game) {
-	if (MapObject* mo = game.objects().get_object(object_)) {
+	if (upcast(Immovable, mo, game.objects().get_object(object_))) {
 		mo->set_marked_for_removal(sender(), mark_);
 	}
 }

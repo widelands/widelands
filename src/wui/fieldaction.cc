@@ -349,29 +349,27 @@ static void gather_attributes(const Widelands::EditorGameBase& egbase,
 	}
 }
 static bool suited_for_targeting(const Widelands::EditorGameBase& egbase,
-                                 const Widelands::MapObject& mo) {
-	if (upcast(const Widelands::Immovable, i, &mo)) {
-		const Widelands::Map& map = egbase.map();
-		// Check if any productionsite nearby collects this immovable, or any of its future types
-		std::set<std::string> set;
-		gather_attributes(egbase, i->descr(), set);
-		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-		   map, Widelands::Area<Widelands::FCoords>(
-		           map.get_fcoords(i->get_position()), egbase.tribes().get_largest_workarea()));
-		do {
-			if (upcast(const Widelands::ProductionSite, ps, mr.location().field->get_immovable())) {
-				if (!ps->descr().workarea_info().empty() &&
-				    map.calc_distance(ps->get_position(), i->get_position()) <=
-				       ps->descr().workarea_info().rend()->first) {
-					for (const std::string& immo_name : set) {
-						if (ps->descr().collected_immovables().count(immo_name)) {
-							return true;
-						}
+                                 const Widelands::Immovable& mo) {
+	const Widelands::Map& map = egbase.map();
+	// Check if any productionsite nearby collects this immovable, or any of its future types
+	std::set<std::string> set;
+	gather_attributes(egbase, mo.descr(), set);
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+	   map, Widelands::Area<Widelands::FCoords>(
+	           map.get_fcoords(mo.get_position()), egbase.tribes().get_largest_workarea()));
+	do {
+		if (upcast(const Widelands::ProductionSite, ps, mr.location().field->get_immovable())) {
+			if (!ps->descr().workarea_info().empty() &&
+			    map.calc_distance(ps->get_position(), mo.get_position()) <=
+			       ps->descr().workarea_info().rend()->first) {
+				for (const std::string& immo_name : set) {
+					if (ps->descr().collected_immovables().count(immo_name)) {
+						return true;
 					}
 				}
 			}
-		} while (mr.advance(map));
-	}
+		}
+	} while (mr.advance(map));
 	return false;
 }
 
@@ -388,7 +386,7 @@ void FieldActionWindow::add_buttons_auto() {
 
 	if (igbase) {
 		// Target immovables for removal by workers
-		if (const Widelands::MapObject* mo = map_.get_immovable(node_)) {
+		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
 			if (suited_for_targeting(igbase->egbase(), *mo)) {
 				UI::Box& box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
 				if (mo->is_marked_for_removal(igbase->player_number())) {

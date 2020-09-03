@@ -253,6 +253,12 @@ public:
 	}
 	bool apply_growth_delay(Game&);
 
+	bool is_marked_for_removal(PlayerNumber) const;
+	void set_marked_for_removal(PlayerNumber, bool mark);
+	const std::set<PlayerNumber>& get_marked_for_removal() const {
+		return marked_for_removal_;
+	}
+
 protected:
 	// The building type that created this immovable, if any.
 	const BuildingDescr* former_building_descr_;
@@ -264,6 +270,10 @@ protected:
 
 	const ImmovableProgram* program_;
 	uint32_t program_ptr_;  ///< index of next instruction to execute
+
+	// Whether a worker was told to remove this object ASAP.
+	// A set of all players who want this object gone.
+	std::set<PlayerNumber> marked_for_removal_;
 
 /* GCC 4.0 has problems with friend declarations: It doesn't allow
  * substructures of friend classes private access but we rely on this behaviour

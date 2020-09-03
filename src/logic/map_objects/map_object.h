@@ -282,12 +282,6 @@ public:
 	 */
 	void set_reserved_by_worker(bool reserve);
 
-	bool is_marked_for_removal(PlayerNumber) const;
-	void set_marked_for_removal(PlayerNumber, bool mark);
-	const std::set<PlayerNumber>& get_marked_for_removal() const {
-		return marked_for_removal_;
-	}
-
 	/**
 	 * Static load functions of derived classes will return a pointer to
 	 * a Loader class. The caller needs to call the virtual functions
@@ -376,10 +370,6 @@ protected:
 	 * the same animal.
 	 */
 	bool reserved_by_worker_;
-
-	// Whether a worker was told to remove this object ASAP.
-	// A set of all players who want this object gone.
-	std::set<PlayerNumber> marked_for_removal_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(MapObject);

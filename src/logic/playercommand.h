@@ -913,7 +913,7 @@ private:
 };
 
 struct CmdMarkMapObjectForRemoval : PlayerCommand {
-	CmdMarkMapObjectForRemoval(uint32_t t, PlayerNumber p, const MapObject& mo, bool m)
+	CmdMarkMapObjectForRemoval(uint32_t t, PlayerNumber p, const Immovable& mo, bool m)
 	   : PlayerCommand(t, p), object_(mo.serial()), mark_(m) {
 	}
 

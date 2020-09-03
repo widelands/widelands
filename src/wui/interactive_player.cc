@@ -90,27 +90,6 @@ InfoToDraw filter_info_to_draw(InfoToDraw info_to_draw,
 	return result;
 }
 
-void draw_immovables_for_visible_field(const Widelands::EditorGameBase& egbase,
-                                       const FieldsToDraw::Field& field,
-                                       const float scale,
-                                       const InfoToDraw info_to_draw,
-                                       const Widelands::Player& player,
-                                       RenderTarget* dst,
-                                       std::set<Widelands::Coords>& deferred_coords) {
-	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
-	if (imm == nullptr) {
-		return;
-	}
-	if (imm->get_positions(egbase).front() == field.fcoords) {
-		imm->draw(egbase.get_gametime(), filter_info_to_draw(info_to_draw, imm, player),
-		          field.rendertarget_pixel, field.fcoords, scale, dst);
-	} else {
-		// This is not the building's main position so we can't draw it now.
-		// We remember it so we can draw it later.
-		deferred_coords.insert(imm->get_positions(egbase).front());
-	}
-}
-
 void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
                                  const FieldsToDraw::Field& field,
                                  const float scale,
@@ -378,6 +357,34 @@ bool InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coord
 		}
 	}
 	return false;
+}
+
+void InteractivePlayer::draw_immovables_for_visible_field(const Widelands::EditorGameBase& egbase,
+                                       const FieldsToDraw::Field& field,
+                                       const float scale,
+                                       const InfoToDraw info_to_draw,
+                                       const Widelands::Player& player,
+                                       RenderTarget* dst,
+                                       std::set<Widelands::Coords>& deferred_coords) {
+	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
+	if (imm == nullptr) {
+		return;
+	}
+	if (imm->get_positions(egbase).front() == field.fcoords) {
+		imm->draw(egbase.get_gametime(), filter_info_to_draw(info_to_draw, imm, player),
+		          field.rendertarget_pixel, field.fcoords, scale, dst);
+		if (upcast(const Widelands::Immovable, i, imm)) {
+			if (i->is_marked_for_removal(player_number())) {
+				const Image* img = g_image_cache->get("images/wui/overlays/targeted.png");
+				blit_field_overlay(dst, field, img,
+				                   Vector2i(img->width() / 2, img->height()), scale);
+			}
+		}
+	} else {
+		// This is not the building's main position so we can't draw it now.
+		// We remember it so we can draw it later.
+		deferred_coords.insert(imm->get_positions(egbase).front());
+	}
 }
 
 void InteractivePlayer::think() {
