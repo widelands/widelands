@@ -6,7 +6,6 @@ tribes:new_worker_type {
    name = "atlanteans_fishbreeder",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Fish Breeder"),
-   helptext_script = dirname .. "helptexts.lua",
    animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
@@ -18,7 +17,7 @@ tribes:new_worker_type {
 
    programs = {
       breed = {
-         "findspace=size:any radius:7 breed resource:fish",
+         "findspace=size:any radius:7 breed resource:resource_fish",
          "walk=coords",
          "animate=freeing duration:13s500ms", -- Play a freeing animation
          "breed=resource_fish radius:1",

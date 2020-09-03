@@ -59,7 +59,6 @@ tribes:new_constructionsite_type {
    name = "constructionsite",
    -- TRANSLATORS: This is a name used in lists of buildings for buildings under construction
    descname = pgettext("building", "Construction Site"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 

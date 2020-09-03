@@ -5,12 +5,12 @@
 return {
    barbarians = {
       buildings = {
-         "barbarians_market",
-         "barbarians_custom_building"
+         { name = "barbarians_market" },
+         { name = "barbarians_custom_building" }
       },
       workers_order = {
          {
-            {name = "barbarians_custom_worker" }
+            { name = "barbarians_custom_worker" }
          },
       },
       wares_order = {
