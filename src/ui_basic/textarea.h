@@ -68,6 +68,8 @@ public:
 	   Align align = UI::Align::kLeft,
 	   const UI::FontStyleInfo& style = g_style_manager->font_style(FontStyle::kLabel));
 
+	~Textarea() override;
+
 	/**
 	 * If fixed_width > 0, the Textarea will not change its width.
 	 * Use this if you need a Textarea that keeps changing its contents, but you don't want the
