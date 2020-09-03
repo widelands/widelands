@@ -1,5 +1,4 @@
 include "tribes/scripting/help/format_help.lua"
-include "tribes/scripting/help/global_helptexts.lua"
 
 -- RST
 -- building_help.lua

@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    name = "frisians_honey_bread_bakery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Honey Bread Bakery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
