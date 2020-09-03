@@ -19,7 +19,6 @@
 
 #include "ui_basic/box.h"
 
-#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "ui_basic/scrollbar.h"
@@ -47,30 +46,6 @@ Box::Box(Panel* const parent,
      orientation_(orientation),
      mindesiredbreadth_(0),
      inner_spacing_(inner_spacing) {
-
-	//	panel_subscriber_ =
-	//	   Notifications::subscribe<NotePanel>([this](const NotePanel& p) { update_items(p); });
-	//
-	//	panel_subscriber_ = Notifications::subscribe<NotePanel>([this](const NotePanel& np) {
-	//		if (np.action == NotePanel::Action::kLifecycle) {
-	//			log_dbg("panel was deleted\n");
-	//			size_t pos = items_.size();
-	//			for (std::size_t i = 0; i < items_.size(); ++i) {
-	//				if (items_.at(i).u.panel.panel == np.panel) {
-	//					pos = i;
-	//				}
-	//			}
-	//			if (pos < items_.size()) {
-	//				log_dbg("panel was in my box at pos %" PRIuS "\n", pos);
-	//				items_.erase(items_.cbegin() + pos);
-	//			}
-	//			//			items_.erase(std::remove_if(items_.begin(), items_.end(),
-	//			//			                            [NotePanel](Box::Item i) { return i.u.panel ==
-	//			// np.panel;
-	//			//}));
-	//		}
-	//		update_desired_size();
-	//	});
 }
 
 /**
@@ -134,27 +109,6 @@ void Box::set_max_size(int w, int h) {
 	max_x_ = w;
 	max_y_ = h;
 	set_desired_size(w, h);
-}
-
-void Box::update_items(const NotePanel& p) {
-
-	auto is_deleted_panel = [p](Box::Item i) { return p.panel == i.u.panel.panel; };
-	items_.erase(std::remove_if(items_.begin(), items_.end(), is_deleted_panel));
-
-	update_desired_size();
-}
-
-void Box::on_death(Panel* p) {
-	log_dbg("panel was deleted");
-	auto is_deleted_panel = [p](Box::Item i) { return p == i.u.panel.panel; };
-	items_.erase(std::remove_if(items_.begin(), items_.end(), is_deleted_panel));
-
-	update_desired_size();
-}
-
-void Box::on_visibility_changed() {
-	log_dbg("updating box layout because of visible");
-	update_desired_size();
 }
 
 /**
@@ -501,8 +455,13 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 		break;  //  no need to do anything
 	}
 }
+void Box::on_death(Panel* p) {
+	auto is_deleted_panel = [p](Box::Item i) { return p == i.u.panel.panel; };
+	items_.erase(std::remove_if(items_.begin(), items_.end(), is_deleted_panel), items_.end());
 
-size_t Box::number_of_children() const {
-	return items_.size();
+	update_desired_size();
+}
+void Box::on_visibility_changed() {
+	update_desired_size();
 }
 }  // namespace UI

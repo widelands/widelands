@@ -194,7 +194,7 @@ mine
    Example::
 
       fish = {
-         "findspace=size:any radius:7 resource:fish",
+         "findspace=size:any radius:7 resource:resource_fish",
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net 192",
          "mine=resource_fish radius:1", -- Remove a fish in an area of 1
@@ -254,7 +254,7 @@ breed
    resources increase. Example::
 
       breed = {
-         "findspace=size:any radius:7 breed resource:fish",
+         "findspace=size:any radius:7 breed resource:resource_fish",
          "walk=coords",
          "animate=freeing duration:3s",
          "breed=resource_fish radius:1", -- Add a fish in an area of 1
@@ -412,7 +412,7 @@ findspace
 
       breed = {
          -- Find any field that can have fish in it for adding a fish to it below
-         "findspace=size:any radius:7 breed resource:fish",
+         "findspace=size:any radius:7 breed resource:resource_fish",
          "walk=coords",
          "animate=freeing duration:3s",
          "breed=resource_fish 1",

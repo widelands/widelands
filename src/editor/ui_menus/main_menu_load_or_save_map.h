@@ -36,6 +36,7 @@ struct MainMenuLoadOrSaveMap : public UI::UniqueWindow {
 	                      UI::UniqueWindow::Registry& registry,
 	                      const std::string& name,
 	                      const std::string& title,
+	                      bool show_empty_dirs = false,
 	                      const std::string& basedir = kMapsDir);
 
 protected:
@@ -54,6 +55,9 @@ protected:
 private:
 	// Common padding between panels
 	int32_t const padding_;
+
+	// Whether to list empty directories
+	bool const show_empty_dirs_;
 
 	// Main vertical container for the UI elements
 	UI::Box main_box_;

@@ -443,13 +443,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 			tribes_dropdown_.set_enabled(tribes_dropdown_.size() > 1);
 		} else {
-			{
-				i18n::Textdomain td("tribes");
-				for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
-					tribes_dropdown_.add(_(tribeinfo.descname), tribeinfo.name,
-					                     g_image_cache->get(tribeinfo.icon), false, tribeinfo.tooltip);
-				}
+			for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
+				tribes_dropdown_.add(tribeinfo.descname, tribeinfo.name,
+				                     g_image_cache->get(tribeinfo.icon), false, tribeinfo.tooltip);
 			}
+
 			tribes_dropdown_.add(pgettext("tribe", "Random"), "random",
 			                     g_image_cache->get("images/ui_fsmenu/random.png"), false,
 			                     _("The tribe will be selected at random"));
@@ -502,7 +500,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init_dropdown_.set_label(_("Saved Game"));
 		} else {
 			init_dropdown_.set_label("");
-			i18n::Textdomain td("tribes");  // for translated initialization
 			const Widelands::TribeBasicInfo tribeinfo = settings.get_tribeinfo(player_setting.tribe);
 			std::set<std::string> tags;
 			if (!settings.mapfilename.empty()) {
@@ -727,7 +724,7 @@ void MultiPlayerSetupGroup::update() {
 		log_dbg("let a mppg die");
 		p->die();
 	}
-
+	multi_player_player_groups.clear();
 	multi_player_player_groups.resize(number_of_players);
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
 		multi_player_player_groups.at(i) =

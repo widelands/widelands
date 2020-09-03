@@ -3,10 +3,8 @@ dirname = "tribes/buildings/productionsites/empire/brewery/"
 push_textdomain("scenario_emp04.wmf")
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_brewery1",
    descname = pgettext("empire_building", "Brewery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    enhancement = "empire_brewery2",

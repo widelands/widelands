@@ -38,7 +38,7 @@ struct RoutingNodeNeighbour;
 class ShipFleetDescr : public MapObjectDescr {
 public:
 	ShipFleetDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::SHIP_FLEET, init_name, init_descname, "") {
+	   : MapObjectDescr(MapObjectType::SHIP_FLEET, init_name, init_descname) {
 	}
 	~ShipFleetDescr() override {
 	}

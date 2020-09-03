@@ -23,7 +23,6 @@
 
 #include <SDL_timer.h>
 
-#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
@@ -450,11 +449,12 @@ void Panel::set_visible(bool const on) {
 	if (parent_) {
 		parent_->on_visibility_changed();
 	}
-	//	Notifications::publish(
-	//	   NotePanel(this, NotePanel::Action::kVisibility,
-	//	             on ? NotePanel::Visibility::kVisible : NotePanel::Visibility::kInvisible));
 }
 
+/**
+ * Called on a child's parent when visibility of child changed
+ * Overridden in UI::Box
+ */
 void Panel::on_visibility_changed() {
 }
 
@@ -490,7 +490,7 @@ void Panel::draw_overlay(RenderTarget& dst) {
 		}
 		dst.fill_rect(focus_overlay_rect(),
 		              has_toplevel_focus ? g_style_manager->focused_color() :
-                                         g_style_manager->semi_focused_color(),
+		                                   g_style_manager->semi_focused_color(),
 		              BlendMode::Default);
 	}
 }
@@ -798,15 +798,18 @@ void Panel::set_thinks(bool const yes) {
  */
 void Panel::die() {
 	flags_ |= pf_die;
+
 	for (Panel* p = parent_; p; p = p->parent_) {
 		p->flags_ |= pf_child_die;
-
 		if (p == modal_) {
 			break;
 		}
 	}
 }
-
+/**
+ * Called on a child's parent just before child is deleted.
+ * Overridden in UI::Box
+ */
 void Panel::on_death(Panel*) {
 }
 
@@ -839,7 +842,6 @@ void Panel::check_child_death() {
 
 		if (p->flags_ & pf_die) {
 			p->parent_->on_death(p);
-			//			Notifications::publish(NotePanel(p, NotePanel::Action::kLifecycle));
 			delete p;
 			p = nullptr;
 		} else if (p->flags_ & pf_child_die) {

@@ -84,6 +84,8 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 	update_win_conditions();
 	update_peaceful_mode();
 
+	update_custom_starting_positions();
+
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
 	// force layout so all boxes and textareas are forced to update

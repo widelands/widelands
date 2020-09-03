@@ -40,7 +40,7 @@ struct Utf8 {
 	 */
 	static uint16_t utf8_to_unicode(const std::string& in, std::string::size_type& pos) {
 		assert(pos < in.size());
-		if (in[pos] & 0xc0) {
+		if (in[pos] & 0x80) {
 			if (is_utf8_extended(in[pos])) {
 				pos++;
 				return 0;

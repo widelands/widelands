@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 wl.World():new_terrain_type{
    name = "taiga",
    descname = _ "Taiga",
@@ -13,3 +15,5 @@ wl.World():new_terrain_type{
 
    enhancement = "tundra_taiga"
 }
+
+pop_textdomain()

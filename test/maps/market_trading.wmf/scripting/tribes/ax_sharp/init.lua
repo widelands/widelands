@@ -3,7 +3,6 @@ dirname = "test/maps/market_trading.wmf/" .. path.dirname(__file__)
 -- Test that replacing a ware works
 
 tribes:new_ware_type {
-   msgctxt = "ware",
    name = "ax_sharp",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Replaced Ware"),
