@@ -572,7 +572,8 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 				break;
 			case SDLK_KP_9:
 			case SDLK_PAGEUP:
-				selected_idx = has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
+				selected_idx =
+				   has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
 				break;
 			default:
 				handle = false;
