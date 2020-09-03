@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    name = "barbarians_goldmine_deeper",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Deeper Gold Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
 
@@ -39,7 +38,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "gold",
+      mines = "resource_gold",
    },
 
    working_positions = {

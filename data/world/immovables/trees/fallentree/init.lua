@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 wl.World():new_immovable_type{
    name = "fallentree",
    descname = _ "Fallen Tree",
@@ -15,3 +17,5 @@ wl.World():new_immovable_type{
       },
    }
 }
+
+pop_textdomain()

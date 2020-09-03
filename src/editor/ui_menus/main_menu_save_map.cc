@@ -48,7 +48,7 @@ inline EditorInteractive& MainMenuSaveMap::eia() {
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                                  UI::UniqueWindow::Registry& registry,
                                  Registry& map_options_registry)
-   : MainMenuLoadOrSaveMap(parent, registry, "save_map_menu", _("Save Map"), "maps/My_Maps"),
+   : MainMenuLoadOrSaveMap(parent, registry, "save_map_menu", _("Save Map"), true, "maps/My_Maps"),
      map_options_registry_(map_options_registry),
      edit_options_(&map_details_box_,
                    "edit_options",
