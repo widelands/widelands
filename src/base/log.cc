@@ -193,7 +193,7 @@ void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt,
 			gametime -= minutes * 1000 * 60;
 			const uint32_t seconds = gametime / 1000;
 			gametime -= seconds * 1000;
-			snprintf(buffer_prefix, sizeof(buffer_prefix), "⏳ %u:%02u:%02u.%03u %s: ",
+			snprintf(buffer_prefix, sizeof(buffer_prefix), "⏳ %02u:%02u:%02u.%03u %s: ",
 					hours, minutes, seconds, gametime, to_string(type));
 		} */
 		const bool is_real_time = gametime == kNoTimestamp;
@@ -206,7 +206,7 @@ void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt,
 		gametime -= minutes * 1000 * 60;
 		const uint32_t seconds = gametime / 1000;
 		gametime -= seconds * 1000;
-		snprintf(buffer_prefix, sizeof(buffer_prefix), "%s %u:%02u:%02u.%03u %s: ",
+		snprintf(buffer_prefix, sizeof(buffer_prefix), "%s %02u:%02u:%02u.%03u %s: ",
 				is_real_time ? "⌚" : "⏳", (is_real_time ? hours % 24 : hours), minutes, seconds, gametime, to_string(type));
 	}
 
