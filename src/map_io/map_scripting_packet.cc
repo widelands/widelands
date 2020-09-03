@@ -19,6 +19,8 @@
 
 #include "map_io/map_scripting_packet.h"
 
+#include <csignal>
+
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "base/log.h"
@@ -77,6 +79,13 @@ void write_tribes_dir(FileSystem& target_fs, FileSystem* map_fs, const std::stri
 	}
 }
 }  // namespace
+
+[[noreturn]] static void abort_handler(int) {
+	throw wexception(_("The engine received a SIGABRT signal which was most likely triggered by a "
+	                   "corrupted savegame. No solution for this bug has been implemented yet. We "
+	                   "are sorry, but this savegame seems to be broken beyond repair."));
+}
+
 /*
  * ========================================================================
  *            PUBLIC IMPLEMENTATION
@@ -93,7 +102,9 @@ void MapScriptingPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapO
 			const uint32_t packet_version = fr.unsigned_32();
 			if (packet_version == kCurrentPacketVersion) {
 				upcast(LuaGameInterface, lgi, &g->lua());
+				signal(SIGABRT, &abort_handler);
 				lgi->read_global_env(fr, mol, fr.unsigned_32());
+				signal(SIGABRT, SIG_DFL);
 			} else {
 				throw UnhandledVersionError(
 				   "MapScriptingPacket", packet_version, kCurrentPacketVersion);
