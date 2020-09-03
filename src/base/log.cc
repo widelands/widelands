@@ -191,8 +191,8 @@ void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt,
 		gametime -= minutes * 1000 * 60;
 		const uint32_t seconds = gametime / 1000;
 		gametime -= seconds * 1000;
-		snprintf(buffer_prefix, sizeof(buffer_prefix), "[%02u:%02u:%02u.%03u %s] %s: ",
-				hours, minutes, seconds, gametime, is_real_time ? "real" : "game", to_string(type));
+		snprintf(buffer_prefix, sizeof(buffer_prefix), "[%02u:%02u:%02u.%03u %s] %s: ", hours,
+		         minutes, seconds, gametime, is_real_time ? "real" : "game", to_string(type));
 	}
 
 	// actual log output

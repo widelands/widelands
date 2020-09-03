@@ -153,7 +153,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 		MapPortSpacesPacket p;
 		p.read(*fs_, egbase, is_game, *mol_);
-
 	}
 
 	log_info("Reading Heights Data ... ");
