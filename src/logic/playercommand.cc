@@ -2067,7 +2067,8 @@ void CmdMarkMapObjectForRemoval::execute(Game& game) {
 	}
 }
 
-CmdMarkMapObjectForRemoval::CmdMarkMapObjectForRemoval(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdMarkMapObjectForRemoval::CmdMarkMapObjectForRemoval(StreamRead& des)
+   : PlayerCommand(0, des.unsigned_8()) {
 	object_ = des.unsigned_32();
 	mark_ = des.unsigned_8();
 }
@@ -2088,9 +2089,8 @@ void CmdMarkMapObjectForRemoval::read(FileRead& fr, EditorGameBase& egbase, MapO
 			object_ = fr.unsigned_32();
 			mark_ = fr.unsigned_8() ? 1 : 0;
 		} else {
-			throw UnhandledVersionError(
-			   "CmdMarkMapObjectForRemoval", packet_version,
-			   kCurrentPacketVersionCmdMarkMapObjectForRemoval);
+			throw UnhandledVersionError("CmdMarkMapObjectForRemoval", packet_version,
+			                            kCurrentPacketVersionCmdMarkMapObjectForRemoval);
 		}
 	} catch (const std::exception& e) {
 		throw GameDataError("Cmd_MarkMapObjectForRemoval: %s", e.what());

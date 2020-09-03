@@ -339,7 +339,8 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 			   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
 		}
 		for (auto it = list.begin(); it != list.end();) {
-			if (it->object->is_reserved_by_worker() || !it->object->is_marked_for_removal(owner().player_number())) {
+			if (it->object->is_reserved_by_worker() ||
+			    !it->object->is_marked_for_removal(owner().player_number())) {
 				it = list.erase(it);
 			} else {
 				++it;

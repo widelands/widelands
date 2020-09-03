@@ -886,8 +886,7 @@ void Game::send_player_toggle_mute(const Building& b, bool all) {
 }
 
 void Game::send_player_mark_object_for_removal(PlayerNumber p, MapObject& mo, bool mark) {
-	send_player_command(
-	   new CmdMarkMapObjectForRemoval(get_gametime(), p, mo, mark));
+	send_player_command(new CmdMarkMapObjectForRemoval(get_gametime(), p, mo, mark));
 }
 
 int Game::propose_trade(const Trade& trade) {

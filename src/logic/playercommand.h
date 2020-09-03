@@ -927,7 +927,6 @@ struct CmdMarkMapObjectForRemoval : PlayerCommand {
 	void serialize(StreamWrite& ser) override;
 
 	CmdMarkMapObjectForRemoval() : PlayerCommand() {
-
 	}
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;

@@ -329,7 +329,9 @@ void FieldActionWindow::init() {
 	warp_mouse_to_fastclick_panel();
 }
 
-static void gather_attributes(const Widelands::EditorGameBase& egbase, const Widelands::ImmovableDescr& descr, std::set<std::string>& set) {
+static void gather_attributes(const Widelands::EditorGameBase& egbase,
+                              const Widelands::ImmovableDescr& descr,
+                              std::set<std::string>& set) {
 	if (set.count(descr.name())) {
 		return;
 	}
@@ -337,24 +339,30 @@ static void gather_attributes(const Widelands::EditorGameBase& egbase, const Wid
 	for (const auto& pair : descr.becomes()) {
 		if (pair.first == Widelands::MapObjectType::IMMOVABLE) {
 			Widelands::DescriptionIndex di = egbase.world().get_immovable_index(pair.second);
-			gather_attributes(egbase, di != Widelands::INVALID_INDEX ?
-					*egbase.world().get_immovable_descr(di) :
-					*egbase.tribes().get_immovable_descr(egbase.tribes().safe_immovable_index(pair.second)),
-				set);
+			gather_attributes(egbase,
+			                  di != Widelands::INVALID_INDEX ?
+			                     *egbase.world().get_immovable_descr(di) :
+			                     *egbase.tribes().get_immovable_descr(
+			                        egbase.tribes().safe_immovable_index(pair.second)),
+			                  set);
 		}
 	}
 }
-static bool suited_for_targeting(const Widelands::EditorGameBase& egbase, const Widelands::MapObject& mo) {
+static bool suited_for_targeting(const Widelands::EditorGameBase& egbase,
+                                 const Widelands::MapObject& mo) {
 	if (upcast(const Widelands::Immovable, i, &mo)) {
 		const Widelands::Map& map = egbase.map();
 		// Check if any productionsite nearby collects this immovable, or any of its future types
 		std::set<std::string> set;
 		gather_attributes(egbase, i->descr(), set);
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-		   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(i->get_position()), egbase.tribes().get_largest_workarea()));
+		   map, Widelands::Area<Widelands::FCoords>(
+		           map.get_fcoords(i->get_position()), egbase.tribes().get_largest_workarea()));
 		do {
 			if (upcast(const Widelands::ProductionSite, ps, mr.location().field->get_immovable())) {
-				if (!ps->descr().workarea_info().empty() && map.calc_distance(ps->get_position(), i->get_position()) <= ps->descr().workarea_info().rend()->first) {
+				if (!ps->descr().workarea_info().empty() &&
+				    map.calc_distance(ps->get_position(), i->get_position()) <=
+				       ps->descr().workarea_info().rend()->first) {
 					for (const std::string& immo_name : set) {
 						if (ps->descr().collected_immovables().count(immo_name)) {
 							return true;
@@ -384,11 +392,13 @@ void FieldActionWindow::add_buttons_auto() {
 			if (suited_for_targeting(igbase->egbase(), *mo)) {
 				UI::Box& box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
 				if (mo->is_marked_for_removal(igbase->player_number())) {
-					add_button(&box, "unmark_for_removal", pic_unmark_removal, &FieldActionWindow::act_unmark_removal,
-							   _("Marked for removal by a worker – click to unmark"));
+					add_button(&box, "unmark_for_removal", pic_unmark_removal,
+					           &FieldActionWindow::act_unmark_removal,
+					           _("Marked for removal by a worker – click to unmark"));
 				} else {
-					add_button(&box, "mark_for_removal", pic_mark_removal, &FieldActionWindow::act_mark_removal,
-							   _("Mark this immovable for timely removal by a suited worker"));
+					add_button(&box, "mark_for_removal", pic_mark_removal,
+					           &FieldActionWindow::act_mark_removal,
+					           _("Mark this immovable for timely removal by a suited worker"));
 				}
 				add_tab("target", pic_tab_target, &box, _("Immovable Actions"));
 			}
@@ -1050,14 +1060,16 @@ void FieldActionWindow::act_geologist() {
 void FieldActionWindow::act_mark_removal() {
 	upcast(Game, game, &ibase().egbase());
 	if (upcast(Widelands::Immovable, i, game->map().get_immovable(node_))) {
-		game->send_player_mark_object_for_removal(dynamic_cast<InteractiveGameBase&>(ibase()).player_number(), *i, true);
+		game->send_player_mark_object_for_removal(
+		   dynamic_cast<InteractiveGameBase&>(ibase()).player_number(), *i, true);
 	}
 	reset_mouse_and_die();
 }
 void FieldActionWindow::act_unmark_removal() {
 	upcast(Game, game, &ibase().egbase());
 	if (upcast(Widelands::Immovable, i, game->map().get_immovable(node_))) {
-		game->send_player_mark_object_for_removal(dynamic_cast<InteractiveGameBase&>(ibase()).player_number(), *i, false);
+		game->send_player_mark_object_for_removal(
+		   dynamic_cast<InteractiveGameBase&>(ibase()).player_number(), *i, false);
 	}
 	reset_mouse_and_die();
 }
