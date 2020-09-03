@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    name = "atlanteans_woodcutters_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Woodcutter’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 

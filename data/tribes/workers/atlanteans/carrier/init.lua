@@ -66,7 +66,6 @@ tribes:new_carrier_type {
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Carrier"),
    animation_directory = dirname,
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 
