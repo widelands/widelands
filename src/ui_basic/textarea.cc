@@ -79,8 +79,9 @@ void Textarea::update() {
 
 	NoteDelayedCheck::instantiate(this, [this]() {
 		FontStyleInfo scaled_style(*style_);
-		scaled_style.set_size(std::max(g_style_manager->minimum_font_size(),
-			                           static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
+		scaled_style.set_size(
+		   std::max(g_style_manager->minimum_font_size(),
+		            static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
 		rendered_text_ = autofit_text(richtext_escape(text_), scaled_style, fixed_width_);
 
 		if (layoutmode_ == LayoutMode::AutoMove) {
