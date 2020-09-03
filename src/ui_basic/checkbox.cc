@@ -87,9 +87,9 @@ void Statebox::layout() {
 		NoteDelayedCheck::instantiate(this, [this, pic_width, &done]() {
 			rendered_text_ =
 			   label_text_.empty() ?
-				  nullptr :
-				  UI::g_fh->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel),
-				                   text_width(get_w(), pic_width));
+			      nullptr :
+			      UI::g_fh->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel),
+			                       text_width(get_w(), pic_width));
 			done = true;
 		});
 		while (!done) {

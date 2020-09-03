@@ -99,7 +99,7 @@ Button::Button(Panel* const parent,
 		NoteDelayedCheck::instantiate(this, [this, init_style, &new_height, &done]() {
 			new_height =
 			   std::max(text_height(g_style_manager->button_style(init_style).enabled().font()),
-				        text_height(g_style_manager->button_style(init_style).disabled().font())) +
+			            text_height(g_style_manager->button_style(init_style).disabled().font())) +
 			   4 * kButtonImageMargin;
 			done = true;
 		});

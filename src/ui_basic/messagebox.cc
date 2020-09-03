@@ -56,7 +56,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	int width, height = 0;
 
 	bool done = false;
-	NoteDelayedCheck::instantiate(this, [this, text, font_style, &width, &height, maxwidth, &done]() {
+	NoteDelayedCheck::instantiate(this, [this, text, font_style, &width, &height, maxwidth,
+	                                     &done]() {
 		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
 		   g_fh->render(as_richtext_paragraph(text, font_style), maxwidth);
 		width = temp_rendered_text->width();
