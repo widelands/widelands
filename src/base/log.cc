@@ -20,9 +20,7 @@
 #include "base/log.h"
 
 #include <cassert>
-#include <chrono>
 #include <cstdarg>
-#include <ctime>
 #ifdef _WIN32
 #include <fstream>
 #endif
@@ -31,6 +29,7 @@
 #include <vector>
 
 #include <SDL_log.h>
+#include <SDL_timer.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -182,7 +181,7 @@ void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt,
 	// message type and timestamp
 	char buffer_prefix[32];
 	{
-		if (gametime == kNoTimestamp) {
+		/* if (gametime == kNoTimestamp) {
 			const auto now = std::chrono::high_resolution_clock::to_time_t(std::chrono::high_resolution_clock::now());
 			std::tm* time = std::localtime(&now);
 			snprintf(buffer_prefix, sizeof(buffer_prefix), "⌚ %u:%02u:%02u %s: ",
@@ -196,7 +195,19 @@ void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt,
 			gametime -= seconds * 1000;
 			snprintf(buffer_prefix, sizeof(buffer_prefix), "⏳ %u:%02u:%02u.%03u %s: ",
 					hours, minutes, seconds, gametime, to_string(type));
+		} */
+		const bool is_real_time = gametime == kNoTimestamp;
+		if (gametime == kNoTimestamp) {
+			gametime = SDL_GetTicks();
 		}
+		const uint32_t hours = gametime / (1000 * 60 * 60);
+		gametime -= hours * 1000 * 60 * 60;
+		const uint32_t minutes = gametime / (1000 * 60);
+		gametime -= minutes * 1000 * 60;
+		const uint32_t seconds = gametime / 1000;
+		gametime -= seconds * 1000;
+		snprintf(buffer_prefix, sizeof(buffer_prefix), "%s %u:%02u:%02u.%03u %s: ",
+				is_real_time ? "⌚" : "⏳", (is_real_time ? hours % 24 : hours), minutes, seconds, gametime, to_string(type));
 	}
 
 	// actual log output
