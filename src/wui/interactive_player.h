@@ -110,12 +110,12 @@ private:
 	const Image* grid_marker_pic_;
 
 	void draw_immovables_for_visible_field(const Widelands::EditorGameBase&,
-                                       const FieldsToDraw::Field&,
-                                       float scale,
-                                       InfoToDraw,
-                                       const Widelands::Player&,
-                                       RenderTarget*,
-                                       std::set<Widelands::Coords>&);
+	                                       const FieldsToDraw::Field&,
+	                                       float scale,
+	                                       InfoToDraw,
+	                                       const Widelands::Player&,
+	                                       RenderTarget*,
+	                                       std::set<Widelands::Coords>&);
 
 	std::map<Widelands::Ship*, Widelands::Coords> expedition_port_spaces_;
 

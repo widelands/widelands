@@ -359,13 +359,14 @@ bool InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coord
 	return false;
 }
 
-void InteractivePlayer::draw_immovables_for_visible_field(const Widelands::EditorGameBase& egbase,
-                                       const FieldsToDraw::Field& field,
-                                       const float scale,
-                                       const InfoToDraw info_to_draw,
-                                       const Widelands::Player& player,
-                                       RenderTarget* dst,
-                                       std::set<Widelands::Coords>& deferred_coords) {
+void InteractivePlayer::draw_immovables_for_visible_field(
+   const Widelands::EditorGameBase& egbase,
+   const FieldsToDraw::Field& field,
+   const float scale,
+   const InfoToDraw info_to_draw,
+   const Widelands::Player& player,
+   RenderTarget* dst,
+   std::set<Widelands::Coords>& deferred_coords) {
 	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 	if (imm == nullptr) {
 		return;
@@ -376,8 +377,7 @@ void InteractivePlayer::draw_immovables_for_visible_field(const Widelands::Edito
 		if (upcast(const Widelands::Immovable, i, imm)) {
 			if (i->is_marked_for_removal(player_number())) {
 				const Image* img = g_image_cache->get("images/wui/overlays/targeted.png");
-				blit_field_overlay(dst, field, img,
-				                   Vector2i(img->width() / 2, img->height()), scale);
+				blit_field_overlay(dst, field, img, Vector2i(img->width() / 2, img->height()), scale);
 			}
 		}
 	} else {

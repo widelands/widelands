@@ -102,8 +102,8 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 			if (upcast(const Widelands::Immovable, i, imm)) {
 				if (!i->get_marked_for_removal().empty()) {
 					const Image* img = g_image_cache->get("images/wui/overlays/targeted.png");
-					blit_field_overlay(dst, field, img,
-					                   Vector2i(img->width() / 2, img->height()), scale);
+					blit_field_overlay(
+					   dst, field, img, Vector2i(img->width() / 2, img->height()), scale);
 				}
 			}
 		}

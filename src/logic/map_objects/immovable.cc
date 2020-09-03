@@ -618,7 +618,8 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 			imm.set_action_data(ImmovableActionData::load(fr, imm, dataname));
 		}
 	}
-	if (packet_version >= (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings ? 10 : 9)) {
+	if (packet_version >=
+	    (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings ? 10 : 9)) {
 		for (uint8_t i = fr.unsigned_8(); i; --i) {
 			imm.marked_for_removal_.insert(fr.unsigned_8());
 		}
