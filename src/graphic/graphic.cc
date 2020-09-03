@@ -22,6 +22,7 @@
 #include <memory>
 
 #include <SDL_messagebox.h>
+#include <SDL_video.h>
 
 #include "base/i18n.h"
 #include "base/log.h"
