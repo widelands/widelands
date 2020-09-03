@@ -145,15 +145,12 @@ wl_library(ui_fsmenu_maploading
     base_exceptions
     base_i18n
     base_log
-    graphic
     graphic_image_cache
     graphic_fonthandler
-    graphic_minimap_renderer
     graphic_surface
     graphic_text_layout
     io_filesystem
     io_profile
-    logic
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
