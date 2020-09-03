@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Любомир Василев, 2019\n"
 "Language-Team: Bulgarian (https://www.transifex.com/widelands/teams/35159/bg/)\n"
@@ -634,8 +634,8 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:347
 msgid ""
 "First of all, we need more construction materials. So, we should build at "
-"least three lumberjacks’ houses and two quarries. Be sure to have "
-"dismanteled all of the unproductive buildings though."
+"least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
+" all of the unproductive buildings though."
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -798,13 +798,8 @@ msgid ""
 "The only solution is to build two new forester’s houses near our "
 "lumberjacks. Be sure to first build a new forester’s house and then "
 "eventually destroy the old one or at least expel the forester to change "
-"houses. Dismantling them is also possible but will not return any wares "
-"because they are so torn."
+"houses."
 msgstr ""
-"Единственото решение е да построим две нови лесничейски къщи близо до "
-"дърварите. Първо построй нова лесничейска къща, преди евентуално да разрушиш"
-" старата, или да накараш лесничея да смени къщата си. Може и да ги "
-"демонтираме, но от това няма да спечелим нищо, тъй като те са много стари."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
 msgid "Amalea Laughs Sarcastically"
@@ -1587,8 +1582,3 @@ msgstr ""
 "Бъди проклет, Луций, за убийството на мирните слуги на богинята Веста! Нека "
 "животът и земите ти бъдат прокълнати и нека гневът на богинята да преследва "
 "семейството ти!"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr ""

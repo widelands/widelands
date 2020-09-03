@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
@@ -564,8 +564,8 @@ msgstr "ルティウス、なんとかなりそうよ。いくらか建築資材
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:347
 msgid ""
 "First of all, we need more construction materials. So, we should build at "
-"least three lumberjacks’ houses and two quarries. Be sure to have "
-"dismanteled all of the unproductive buildings though."
+"least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
+" all of the unproductive buildings though."
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -706,10 +706,8 @@ msgid ""
 "The only solution is to build two new forester’s houses near our "
 "lumberjacks. Be sure to first build a new forester’s house and then "
 "eventually destroy the old one or at least expel the forester to change "
-"houses. Dismantling them is also possible but will not return any wares "
-"because they are so torn."
+"houses."
 msgstr ""
-"もう新しい植樹番小屋を２つ、木こり達の近くに建てるしかないわ。まず新しい植樹番小屋を建てるようにしてね。それから古いのを壊すか、植樹番を古いのから追い出して小屋を変えてもらうようにするといいと思うわ。古い小屋は解体してもいいけど、あれだけくたびれていると何の資源も回収できないと思うわ。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
 msgid "Amalea Laughs Sarcastically"
@@ -1376,8 +1374,3 @@ msgid ""
 "family from the face of the earth!"
 msgstr ""
 "ルティウス、平和を求める女神ヴェスタの使徒を殺すとは何事か！貴様、そしてこの地に災いあれ！女神様、大地よりその怒りを顕し、ルティウスとその一味に苦しみを与えたまえ！"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr ""

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Thomas Ho <tomohnetom@web.de>, 2020\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -1186,8 +1186,3 @@ msgstr ""
 "Du hast diese Mission abgeschlossen. Du kannst uns nun im nächsten Szenario "
 "helfen, eine neue Heimat aufzubauen, weit weg von der rächenden Hand dieses "
 "falschen Gottes …"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "„%s“"

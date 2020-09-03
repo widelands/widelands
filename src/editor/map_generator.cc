@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
@@ -103,10 +104,8 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 	}
 
 	if (set_moveable && (num = bobCategory->num_critters())) {
-		egbase_.create_critter(
-		   fc, egbase_.world().get_critter(
-		          bobCategory->get_critter(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
-		             .c_str()));
+		egbase_.create_critter(fc, egbase_.world().critter_index(bobCategory->get_critter(
+		                              static_cast<size_t>(rng.rand() / (kMaxElevation / num)))));
 	}
 }
 
@@ -805,7 +804,7 @@ void MapGenerator::create_random_map() {
 
 		if (coords.empty()) {
 			// TODO(unknown): inform players via popup
-			log("WARNING: Could not find a suitable place for player %u\n", n);
+			log_warn("Could not find a suitable place for player %u\n", n);
 			// Let's hope that one is at least on dry ground.
 			coords2 = playerstart;
 		}
@@ -820,8 +819,8 @@ void MapGenerator::create_random_map() {
 			// map_.get_fcoords(coords2).field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK
 			// != Widelands::BUILDCAPS_BIG)
 
-			log("WARNING: Player %u has no starting position - illegal coordinates (%d, %d).\n", n,
-			    coords2.x, coords2.y);
+			log_warn("Player %u has no starting position - illegal coordinates (%d, %d).\n", n,
+			         coords2.x, coords2.y);
 			coords2 = Coords::null();
 		}
 

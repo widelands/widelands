@@ -3,13 +3,15 @@
 # 
 # Translators:
 # ks k, 2020
+# ks k, 2020
+# TaeMin An, 2019
 # TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-07-21 03:02+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-17 08:38+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -25,11 +27,11 @@ msgstr "기본적인 경제를 만드십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr "기본적인 건축 자재를 수집하고 진영 주변의 경계를 강화하십시오."
+msgstr "기본적인 건축 자재들을 수집하고 진영 주변의 경계를 강화하십시오."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:22
 msgid "Build a lumberjack’s hut"
-msgstr "나무꾼의 오두막을 지으십시오"
+msgstr "벌목꾼의 오두막을 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut"
@@ -49,7 +51,7 @@ msgstr "동쪽 끝 경계에 초소를 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr "결국엔 갈대밭과 석회 가마를 지어야합니다."
+msgstr "결국엔 갈대 농장과 석회 가마를 지어야합니다."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:32
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:34
@@ -159,19 +161,19 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr "무기를 생산하기 위해서 금속 제작소를 도끼 제작소로 향상 시키십시오. 그리고 두번째 금속제작소를 건설하여 도구의 제작도 끊어지지 않도록 합니다. 대장장이의 경험치가 다음 수준에 도달 할 정도면(숙련된 대장장이), 도끼 제작소를 추가 무기를 생산할수있는 전쟁 공장으로 향상 시킬수도 있습니다. "
+msgstr "무기를 생산하기 위해서 금속 제작소를 도끼 제작소로 향상 시키십시오. 그리고 두번째 금속 제작소를 건설하여 도구의 제작도 끊어지지 않도록 합니다. 대장장이의 경험치가 다음 수준에 도달 할 정도면(달인 대장장이), 도끼 제작소를 추가 무기를 생산할수있는 전쟁 공장으로 향상 시킬수도 있습니다."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:130
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr "병사들에게 좋은 장비를 제공하기위해 투구 제작소를 산의 서쪽에 지으십시오."
+msgstr "군인들에게 좋은 장비를 제공하기위해 투구 제작소를 산의 서쪽에 지으십시오."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a warehouse"
-msgstr "창고를 지으십시오."
+msgstr "창고를 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:102
 msgid "Build a warehouse to the west of the mountains."
@@ -211,17 +213,17 @@ msgstr "그 속성은 체력, 공격력, 방어력, 회피력입니다."
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:121
 msgid "Build weapons production"
-msgstr "무기 생산 체제를 지으십시오."
+msgstr "무기 생산 체제를 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:129
 msgid "Build a helm smithy"
-msgstr "투구 제작소를 지으십시오."
+msgstr "투구 제작소를 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:137
 msgid "Destroy Kalitath’s army"
-msgstr "카리타쓰의 군대 괴멸시키십시오."
+msgstr "카리타쓰의 군대 괴멸시키십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:138
 msgid "Destroy Kalitath’s army and expand your territory to the east."
@@ -642,9 +644,4 @@ msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr "족장, 불쌍한 운송일꾼들을 기억하시오. 우리의 길이 점점 더 길어지면 그들의 어깨에 놓일 부담은 결코 가벼워지지 않을것이오. 우리는 더 많은 황소를 키워야하오. 그들의 일을 더 가볍고 우리의 운송을 더 효율적으로 하기위해서요."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
+msgstr "족장, 불쌍한 짐꾼들을 기억하시오. 우리의 길이 점점 더 길어지면 그들의 어깨에 놓일 부담은 결코 가벼워지지 않을것이오. 우리는 더 많은 황소를 키워야하오. 그들의 일을 더 가볍고 우리의 운송을 더 효율적으로 하기위해서요."

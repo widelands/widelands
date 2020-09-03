@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-06-01 04:37+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-07 21:24+0000\n"
 "Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -340,8 +340,8 @@ msgid "Astoria 2.R"
 msgstr "Astoria 2.R"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:10
-msgid "Long, economic play in beautyfull land, try every player!!"
-msgstr "Długa, ekonomiczna gra w pięknej krainie, wypróbuj każdego gracza!!"
+msgid "Long, economic play in beautiful land. Try every player!"
+msgstr "Długa, ekonomiczna gra w pięknej krainie. Wypróbuj każdego gracza!"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
@@ -421,6 +421,10 @@ msgstr "W stronę horyzontu"
 msgid "Man your ship and sail to the horizon."
 msgstr "Wejdź na pokład swojego statku i odpłyń w stronę horyzontu."
 
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+msgid "This map is not winnable with the ‘Autocrat’ win condition."
+msgstr "Na tej mapie nie da się wygrać używając warunku zwycięstwa ‘Samowładca’."
+
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
 msgstr "Pustynny turniej"
@@ -447,13 +451,12 @@ msgstr "Łańcuch Dolomitów to klejnot Alp, wpisany na listę światowego dzied
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
-"- there is lot of flat ground on the mountains. Unfortunately, most of it is"
-" vertical. Use wisely the little building space you have. - A fortress at "
-"the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
-" army. Use the terrain to your advantage - chop all trees and expand "
-"wherever you can; it's the only way to find all the precious farm spaces - "
-"suggested teams: red+orange+blue+violet"
-msgstr "W tych górach znajdziesz sporo równego terenu - na twoje nieszczęście większość jest pionowa. Z reszty korzystaj z dużą rozwagą. Forteca u wyjścia z wąskiej przełęczy może być poważną przeszkodą dla wrogiej armii. Wykorzystuj teren na swoją korzyść - rąb wszystkie drzewa i rozbudowuj się, gdzie możesz; to jedyny sposób na znalezienie wszystkich cennych miejsc na farmie - sugerowane drużyny: czerwony+pomarańczowy+niebieski+fioletowy"
+"There is lot of flat ground on the mountains. Unfortunately, most of it is "
+"vertical – use the little building space you have wisely. A fortress at the "
+"mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"army – use the terrain to your advantage. Chop all trees and expand wherever"
+" you can – it's the only way to find all the precious farm spaces."
+msgstr "W tych górach znajdziesz sporo równego terenu – na twoje nieszczęście większość jest pionowa. Z reszty korzystaj z dużą rozwagą. Forteca u wyjścia z wąskiej przełęczy może być poważną przeszkodą dla wrogiej armii. Wykorzystuj teren na swoją korzyść – rąb wszystkie drzewa i rozbudowuj się, gdzie możesz; to jedyny sposób na znalezienie wszystkich cennych miejsc na farmy."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -479,7 +482,7 @@ msgstr "v0.2"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:10
 msgid ""
-"A huge europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
+"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
 msgstr "Ogromna mapa Europy. Niebieski = Szwecja, Czerwony = Włochy, Żółty = Hiszpania, Zielony = Turcja, Czarny = Rosja, Pomarańczowy = Anglia, Fioletowy = Francja, Biały = Polska"
 
@@ -720,11 +723,11 @@ msgstr "Wyzwanie bez metalu v2"
 #: ../../data/maps/No challenge metal v2.wmf/elemental:10
 msgid ""
 "This map is intended as a solo challenge for those very skilled players that"
-" find 1v6 against the AI too easy.  Blue player has no metal (except a bit "
-"of iron to kickstart your economy), so you have to rely on the 5% production"
-" of an empty mine. And you're still 1v6 (though of course you can remove "
-"some AI players to make it a bit easier). Good luck"
-msgstr "Ta mapa jest przeznaczona jako wyzwanie dla tych bardzo zaawansowanych graczy, dla których walka 1 na 6 przeciwko SI jest zbyt łatwa. Niebieski gracz nie ma metalu (oprócz odrobiny żelaza, aby uruchomić gospodarkę), więc musisz polegać na 5% produkcji pustej kopalni. Nadal jesteś w trybie 1 na 6 (choć oczywiście możesz usunąć niektórych graczy SI, aby było to trochę łatwiejsze). Powodzenia"
+" find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
+" of iron to kickstart your economy), so you have to rely on the 5% "
+"production of an empty mine. And you're still 1 vs 6 (though of course you "
+"can remove some AI players to make it a bit easier). Good luck!"
+msgstr "Ta mapa jest przeznaczona jako wyzwanie dla tych bardzo zaawansowanych graczy, dla których walka 1 na 6 przeciwko SI jest zbyt łatwa. Niebieski gracz nie ma metalu (oprócz odrobiny żelaza, aby uruchomić gospodarkę), więc musisz polegać na 5% produkcji pustej kopalni. Nadal jesteś 1 przeciwko 6 (choć oczywiście możesz usunąć niektórych graczy SI, aby było to trochę łatwiejsze). Powodzenia!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"

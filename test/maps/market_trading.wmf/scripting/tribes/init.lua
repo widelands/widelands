@@ -1,14 +1,26 @@
-tribes = wl.Tribes()
-include "scripting/mapobjects.lua"
-
 -- ===================================
 --    Campaign Specific Data
 -- ===================================
-print_loading_message("Loading market unit", function()
-   include "map:scripting/tribes/market/init.lua"
-end)
 
-tribes:add_custom_building {
-   tribename = "barbarians",
-   buildingname = "barbarians_market",
+return {
+   barbarians = {
+      buildings = {
+         { name = "barbarians_market" },
+         { name = "barbarians_custom_building" }
+      },
+      workers_order = {
+         {
+            { name = "barbarians_custom_worker" }
+         },
+      },
+      wares_order = {
+         {
+            {
+               name= "custom_ware",
+               default_target_quantity = 500,
+               preciousness = 14
+            }
+         },
+      }
+   }
 }

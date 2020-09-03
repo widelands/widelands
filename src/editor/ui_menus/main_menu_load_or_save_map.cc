@@ -33,29 +33,36 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                                              Registry& registry,
                                              const std::string& name,
                                              const std::string& title,
+                                             bool show_empty_dirs,
                                              const std::string& basedir)
    : UI::UniqueWindow(&parent, name, &registry, parent.get_w(), parent.get_h(), title),
 
      // Values for alignment and size
      padding_(4),
 
+     show_empty_dirs_(show_empty_dirs),
+
      main_box_(this, padding_, padding_, UI::Box::Vertical, 0, 0, padding_),
 
-     show_mapnames_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-     show_mapnames_(&show_mapnames_box_,
-                    "show_mapnames",
-                    0,
-                    0,
-                    0,
-                    0,
-                    UI::ButtonStyle::kWuiSecondary,
-                    _("Show Map Names")),
-
      table_and_details_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
+     table_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 
-     table_(&table_and_details_box_, 0, 0, 200, 200, UI::PanelStyle::kWui),
+     table_(&table_box_, 0, 0, 200, 200, UI::PanelStyle::kWui),
      map_details_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui),
+
+     display_mode_(&table_box_,
+                   "display_mode",
+                   0,
+                   0,
+                   100,
+                   4,
+                   24,
+                   /** TRANSLATORS: "Display: Original/Localized map/file names" */
+                   _("Display"),
+                   UI::DropdownType::kTextual,
+                   UI::PanelStyle::kWui,
+                   UI::ButtonStyle::kWuiSecondary),
 
      table_footer_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
 
@@ -67,14 +74,11 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
 
      // Options
-     basedir_(basedir),
-     has_translated_mapname_(false),
-     showing_mapnames_(false) {
+     basedir_(basedir) {
 
 	g_fs->ensure_directory_exists(basedir_);
 	curdir_ = basedir_;
 
-	main_box_.add(&show_mapnames_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&table_and_details_box_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(padding_);
 	main_box_.add(&table_footer_box_, UI::Box::Resizing::kFullSize);
@@ -82,26 +86,27 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	main_box_.add_space(padding_);
 	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 
-	show_mapnames_box_.add(&show_mapnames_);
-	cb_dont_localize_mapnames_ =
-	   /** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
-	   new UI::Checkbox(&show_mapnames_box_, Vector2i::zero(), _("Show original map names"));
-	cb_dont_localize_mapnames_->set_state(false);
-	show_mapnames_box_.add_space(2 * padding_);
-	show_mapnames_box_.add(cb_dont_localize_mapnames_, UI::Box::Resizing::kFullSize);
-	show_mapnames_box_.add_inf_space();
-
 	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b); });
 	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });
 	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
 
-	table_and_details_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
+	table_box_.add(&display_mode_, UI::Box::Resizing::kFullSize);
+	table_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
+	table_and_details_box_.add(&table_box_, UI::Box::Resizing::kExpandBoth);
 	table_and_details_box_.add_space(0);
 	table_and_details_box_.add(&map_details_box_, UI::Box::Resizing::kFullSize);
 	map_details_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 
+	const bool locale_is_en = i18n::get_locale() == "en" || i18n::get_locale().find("en_") == 0;
+	display_mode_.add(_("File names"), MapData::DisplayType::kFilenames);
+	display_mode_.add(locale_is_en ? _("Map names") : _("Original map names"),
+	                  MapData::DisplayType::kMapnames, nullptr, locale_is_en);
+	if (!locale_is_en) {
+		display_mode_.add(
+		   _("Translated map names"), MapData::DisplayType::kMapnamesLocalized, nullptr, true);
+	}
+
 	table_.focus();
-	fill_table();
 
 	button_box_.add_inf_space();
 	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_, UI::Box::Resizing::kExpandBoth);
@@ -109,14 +114,9 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_, UI::Box::Resizing::kExpandBoth);
 	button_box_.add_inf_space();
 
-	// We don't need the unlocalizing option if there is nothing to unlocalize.
-	// We know this after the list is filled.
-	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
-	cb_dont_localize_mapnames_->changedto.connect([this](bool) { fill_table(); });
-	show_mapnames_.sigclicked.connect([this]() { toggle_mapnames(); });
+	display_mode_.selected.connect([this]() { fill_table(); });
 
 	move_to_top();
-	layout();
 }
 
 bool MainMenuLoadOrSaveMap::compare_players(uint32_t rowa, uint32_t rowb) {
@@ -129,16 +129,6 @@ bool MainMenuLoadOrSaveMap::compare_mapnames(uint32_t rowa, uint32_t rowb) {
 
 bool MainMenuLoadOrSaveMap::compare_size(uint32_t rowa, uint32_t rowb) {
 	return maps_data_[table_[rowa]].compare_size(maps_data_[table_[rowb]]);
-}
-
-void MainMenuLoadOrSaveMap::toggle_mapnames() {
-	if (showing_mapnames_) {
-		show_mapnames_.set_title(_("Show Map Names"));
-	} else {
-		show_mapnames_.set_title(_("Show Filenames"));
-	}
-	showing_mapnames_ = !showing_mapnames_;
-	fill_table();
 }
 
 void MainMenuLoadOrSaveMap::layout() {
@@ -156,7 +146,6 @@ void MainMenuLoadOrSaveMap::layout() {
 void MainMenuLoadOrSaveMap::fill_table() {
 	table_.clear();
 	maps_data_.clear();
-	has_translated_mapname_ = false;
 
 	//  Fill it with all files we find.
 	FilenameSet files = g_fs->list_directory(curdir_);
@@ -169,14 +158,7 @@ void MainMenuLoadOrSaveMap::fill_table() {
 		maps_data_.push_back(MapData::create_empty_dir(curdir_));
 	}
 
-	MapData::DisplayType display_type;
-	if (!showing_mapnames_) {
-		display_type = MapData::DisplayType::kFilenames;
-	} else if (cb_dont_localize_mapnames_->get_state()) {
-		display_type = MapData::DisplayType::kMapnames;
-	} else {
-		display_type = MapData::DisplayType::kMapnamesLocalized;
-	}
+	const MapData::DisplayType display_type = display_mode_.get_selected();
 
 	Widelands::Map map;
 
@@ -202,16 +184,11 @@ void MainMenuLoadOrSaveMap::fill_table() {
 					maptype = MapData::MapType::kSettlers2;
 				}
 
-				MapData mapdata(map, mapfilename, maptype, display_type);
-
-				has_translated_mapname_ =
-				   has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
-
-				maps_data_.push_back(mapdata);
-
+				maps_data_.push_back(MapData(map, mapfilename, maptype, display_type));
 			} catch (const WException&) {
 			}  //  we simply skip illegal entries
-		} else if (g_fs->is_directory(mapfilename)) {
+		} else if (g_fs->is_directory(mapfilename) &&
+		           (show_empty_dirs_ || g_fs->list_directory(mapfilename).size() > 0)) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
 			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {

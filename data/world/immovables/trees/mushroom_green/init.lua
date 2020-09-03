@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -7,13 +9,11 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "mushroom_green_wasteland_sapling",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Green Mushroom Tree (Sapling)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -35,13 +35,11 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "mushroom_green_wasteland_pole",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Green Mushroom Tree (Pole)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -63,13 +61,11 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "mushroom_green_wasteland_mature",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Green Mushroom Tree (Mature)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -91,22 +87,20 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "mushroom_green_wasteland_old",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Green Mushroom Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Green Mushroom Tree",
    icon = dirname .. "menu.png",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
          "animate=idle duration:25m35s",
          "transform=deadtree2 chance:12.89%",
-         "seed=mushroom_green_wasteland_sapling 220",
+         "seed=mushroom_green_wasteland_sapling proximity:27.8%",
       },
       fall = {
          "remove=",
@@ -124,3 +118,5 @@ world:new_immovable_type{
       }
    },
 }
+
+pop_textdomain()

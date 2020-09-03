@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_armor_smithy_large",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Large Armor Smithy"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -64,7 +64,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -83,9 +83,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs sword_broad",
             "consume=coal iron:2 gold",
             "sleep=duration:24s",
-            "playsound=sound/smiths/smith 192",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:24s",
-            "playsound=sound/smiths/sharpening 120",
+            "playsound=sound/smiths/sharpening priority:90%",
             "sleep=duration:9s",
             "produce=sword_broad"
          },
@@ -98,9 +98,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs sword_double",
             "consume=coal:2 iron:2 gold",
             "sleep=duration:24s",
-            "playsound=sound/smiths/smith 192",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:24s",
-            "playsound=sound/smiths/sharpening 120",
+            "playsound=sound/smiths/sharpening priority:90%",
             "sleep=duration:9s",
             "produce=sword_double"
          },
@@ -119,3 +119,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

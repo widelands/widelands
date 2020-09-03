@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_inn",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Inn"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    enhancement = "barbarians_big_inn",
@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -64,7 +64,7 @@ tribes:new_productionsite_type {
             -- time total: 33
             "return=skipped unless economy needs ration",
             "consume=barbarians_bread,fish,meat",
-            "playsound=sound/barbarians/taverns/inn 100",
+            "playsound=sound/barbarians/taverns/inn priority:80%",
             "animate=working duration:23s",
             "sleep=duration:10s",
             "produce=ration"
@@ -77,7 +77,7 @@ tribes:new_productionsite_type {
             -- time total: 37
             "return=skipped unless economy needs snack",
             "consume=barbarians_bread fish,meat beer",
-            "playsound=sound/barbarians/taverns/inn 100",
+            "playsound=sound/barbarians/taverns/inn priority:80%",
             "animate=working duration:27s",
             "sleep=duration:10s",
             "produce=snack"
@@ -85,3 +85,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

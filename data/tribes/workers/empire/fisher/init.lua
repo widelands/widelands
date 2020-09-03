@@ -1,26 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 7, 38 },
-   },
-   fishing = {
-      pictures = path.list_files(dirname .. "fishing_??.png"),
-      hotspot = { 9, 39 },
-      fps = 10,
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {10, 38}, 20)
-add_directional_animation(animations, "walkload", dirname, "walk", {10, 38}, 20)
-
-
 tribes:new_worker_type {
-   msgctxt = "empire_worker",
    name = "empire_fisher",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Fisher"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -31,16 +17,37 @@ tribes:new_worker_type {
 
    programs = {
       fish = {
-         "findspace=size:any radius:7 resource:fish",
+         "findspace=size:any radius:7 resource:resource_fish",
          "walk=coords",
-         "playsound=sound/fisher/fisher_throw_net 192",
-         "mine=fish 1",
+         "playsound=sound/fisher/fisher_throw_net priority:50% allow_multiple",
+         "mine=resource_fish radius:1",
          "animate=fishing duration:10s", -- Play a fishing animation
-         "playsound=sound/fisher/fisher_pull_net 192",
+         "playsound=sound/fisher/fisher_pull_net priority:50% allow_multiple",
          "createware=fish",
          "return"
       }
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 7, 38 },
+      },
+      fishing = {
+         hotspot = { 9, 39 },
+         fps = 10,
+      },
+      walk = {
+         hotspot = { 10, 38 },
+         fps = 20,
+         directional = true
+      },
+      walkload = {
+         basename = "walk",
+         hotspot = { 10, 38 },
+         fps = 20,
+         directional = true
+      }
+   }
 }
+
+pop_textdomain()

@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_weaving_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Weaving Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -52,14 +52,14 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
          descname = _"weaving",
          actions = {
             "return=skipped unless economy needs cloth",
             "consume=wool",
             "sleep=duration:20s",
-            "playsound=sound/mill/weaving 120",
+            "playsound=sound/mill/weaving priority:90%",
             "animate=working duration:15s", -- Unsure of balancing CW
             "sleep=duration:5s",
             "produce=cloth"
@@ -67,3 +67,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

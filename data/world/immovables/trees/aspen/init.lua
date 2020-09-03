@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -7,12 +9,10 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "aspen_summer_sapling",
    descname = _ "Aspen (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -34,12 +34,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "aspen_summer_pole",
    descname = _ "Aspen (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -61,18 +59,16 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "aspen_summer_mature",
    descname = _ "Aspen (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
          "animate=idle duration:20s",
          "remove=chance:11.72%",
-         "seed=aspen_summer_sapling 60",
+         "seed=aspen_summer_sapling proximity:23.44%",
          "animate=idle duration:20s",
          "remove=chance:7.81%",
          "grow=aspen_summer_old",
@@ -91,20 +87,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "aspen_summer_old",
    descname = _ "Aspen (Old)",
    species = _ "Aspen",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
          "animate=idle duration:17m30s",
          "transform=deadtree2 chance:5.86%",
-         "seed=aspen_summer_sapling 100",
+         "seed=aspen_summer_sapling proximity:39%",
       },
       fall = {
          "animate=falling duration:1s400ms",
@@ -133,3 +127,5 @@ world:new_immovable_type{
       }
    },
 }
+
+pop_textdomain()

@@ -1,11 +1,11 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "deadtree3",
    descname = _ "Dead Tree",
-   editor_category = "trees_dead",
    size = "none",
-   attributes = {},
    programs = {
       main = {
          "animate=idle duration:20s",
@@ -19,3 +19,5 @@ world:new_immovable_type{
       },
    }
 }
+
+pop_textdomain()

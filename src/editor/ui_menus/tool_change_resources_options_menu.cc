@@ -24,7 +24,6 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_resources_tool.h"
-#include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
@@ -91,7 +90,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	for (Widelands::DescriptionIndex i = 0; i < world.get_nr_resources(); ++i) {
 		const Widelands::ResourceDescription& resource = *world.get_resource(i);
 		radiogroup_.add_button(&resources_box_, Vector2i::zero(),
-		                       g_gr->images().get(resource.representative_image()),
+		                       g_image_cache->get(resource.representative_image()),
 		                       resource.descname());
 		resources_box_.add(radiogroup_.get_first_button(), UI::Box::Resizing::kFillSpace);
 	}

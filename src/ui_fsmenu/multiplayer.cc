@@ -21,7 +21,6 @@
 
 #include "base/i18n.h"
 #include "base/random.h"
-#include "graphic/graphic.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
 #include "ui_basic/messagebox.h"
@@ -39,7 +38,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
            0,
            _("Choose game type"),
            UI::Align::kCenter,
-           g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+           g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
      metaserver(

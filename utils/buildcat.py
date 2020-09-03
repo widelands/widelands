@@ -69,8 +69,7 @@ MAINPOTS = [
         '../../data/world/*/*/*/*/*/*.lua',
     ]),
     ('tribes/tribes', [
-        '../../data/tribes/scripting/starting_conditions/*/*.lua',
-        '../../data/tribes/*.lua',
+        '../../data/tribes/initialization/*/starting_conditions/*.lua',
         '../../data/tribes/economy_profiles/*',
         '../../data/tribes/*/init.lua',
         '../../data/tribes/*/*/init.lua',
@@ -79,13 +78,8 @@ MAINPOTS = [
         '../../data/tribes/*/*/*/*/*/init.lua',
     ]),
     ('tribes_encyclopedia/tribes_encyclopedia', [
+        '../../data/tribes/initialization/*/units.lua',
         '../../data/tribes/scripting/help/*.lua',
-        '../../data/tribes/*/helptexts.lua',
-        '../../data/tribes/*/*/helptexts.lua',
-        '../../data/tribes/*/*/*/helptexts.lua',
-        '../../data/tribes/*/*/*/*/helptexts.lua',
-        '../../data/tribes/*/*/*/*/*/helptexts.lua',
-        '../../data/tribes/*/resi/helptexts/*.lua',
     ]),
     ('widelands_editor/widelands_editor', [
         '../../data/scripting/editor/*.lua',

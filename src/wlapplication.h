@@ -260,6 +260,9 @@ private:
 	std::string datadir_;
 	std::string datadir_for_testing_;
 
+	/// Absolute path to the locale directory.
+	std::string localedir_;
+
 	/// Prevent toggling fullscreen on and off from flickering
 	uint32_t last_resolution_change_;
 

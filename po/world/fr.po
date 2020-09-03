@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2020-03-16 10:22+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -23,67 +23,67 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../../data/world/critters/badger/init.lua:64
+#: ../../data/world/critters/badger/init.lua:76
 msgid "Badger"
 msgstr "Blaireau"
 
-#: ../../data/world/critters/brownbear/init.lua:15
+#: ../../data/world/critters/brownbear/init.lua:3
 msgid "Brown bear"
 msgstr "Ours brun"
 
-#: ../../data/world/critters/bunny/init.lua:14
+#: ../../data/world/critters/bunny/init.lua:3
 msgid "Bunny"
 msgstr "Lapin"
 
-#: ../../data/world/critters/chamois/init.lua:15
+#: ../../data/world/critters/chamois/init.lua:3
 msgid "Chamois"
 msgstr "Chamois"
 
-#: ../../data/world/critters/deer/init.lua:15
+#: ../../data/world/critters/deer/init.lua:3
 msgid "Deer"
 msgstr "Cerf"
 
-#: ../../data/world/critters/duck/init.lua:18
+#: ../../data/world/critters/duck/init.lua:5
 msgid "Duck"
 msgstr "Canard"
 
-#: ../../data/world/critters/fox/init.lua:19
+#: ../../data/world/critters/fox/init.lua:3
 msgid "Fox"
 msgstr "Renard"
 
-#: ../../data/world/critters/lynx/init.lua:16
+#: ../../data/world/critters/lynx/init.lua:3
 msgid "Lynx"
 msgstr "Lynx"
 
-#: ../../data/world/critters/marten/init.lua:15
+#: ../../data/world/critters/marten/init.lua:3
 msgid "Marten"
 msgstr "Martre"
 
-#: ../../data/world/critters/moose/init.lua:19
+#: ../../data/world/critters/moose/init.lua:3
 msgid "Moose"
 msgstr "Élan"
 
-#: ../../data/world/critters/reindeer/init.lua:16
+#: ../../data/world/critters/reindeer/init.lua:3
 msgid "Reindeer"
 msgstr "Renne"
 
-#: ../../data/world/critters/sheep/init.lua:18
+#: ../../data/world/critters/sheep/init.lua:3
 msgid "Sheep"
 msgstr "Mouton"
 
-#: ../../data/world/critters/stag/init.lua:19
+#: ../../data/world/critters/stag/init.lua:3
 msgid "Stag"
 msgstr "Cerf"
 
-#: ../../data/world/critters/wildboar/init.lua:18
+#: ../../data/world/critters/wildboar/init.lua:3
 msgid "Wild boar"
 msgstr "Sanglier"
 
-#: ../../data/world/critters/wisent/init.lua:15
+#: ../../data/world/critters/wisent/init.lua:3
 msgid "Wisent"
 msgstr "Bison"
 
-#: ../../data/world/critters/wolf/init.lua:19
+#: ../../data/world/critters/wolf/init.lua:3
 msgid "Wolf"
 msgstr "Loup"
 

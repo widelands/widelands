@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -7,12 +9,10 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "beech_summer_sapling",
    descname = _ "Beech (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -34,12 +34,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "beech_summer_pole",
    descname = _ "Beech (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -61,12 +59,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "beech_summer_mature",
    descname = _ "Beech (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -88,20 +84,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "beech_summer_old",
    descname = _ "Beech (Old)",
    species = _ "Beech",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
          "animate=idle duration:25m25s",
          "transform=deadtree2 chance:7.81%",
-         "seed=beech_summer_sapling 250",
+         "seed=beech_summer_sapling proximity:97.66%",
       },
       fall = {
          "remove=",
@@ -118,7 +112,10 @@ world:new_immovable_type{
          hotspot = { 25, 61 },
          sound_effect = {
             path = "sound/animals/bird6",
+            priority = 10
          },
       }
    },
 }
+
+pop_textdomain()

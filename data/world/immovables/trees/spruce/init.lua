@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -7,12 +9,10 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "spruce_summer_sapling",
    descname = _ "Spruce (Sapling)",
-   editor_category = "trees_coniferous",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -34,12 +34,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "spruce_summer_pole",
    descname = _ "Spruce (Pole)",
-   editor_category = "trees_coniferous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -61,12 +59,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "spruce_summer_mature",
    descname = _ "Spruce (Mature)",
-   editor_category = "trees_coniferous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -88,20 +84,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "spruce_summer_old",
    descname = _ "Spruce (Old)",
    species = _ "Spruce",
    icon = dirname .. "menu.png",
-   editor_category = "trees_coniferous",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
          "animate=idle duration:25m50s",
          "transform=deadtree3 chance:9.37%",
-         "seed=spruce_summer_sapling 200",
+         "seed=spruce_summer_sapling proximity:78.12%",
       },
       fall = {
          "remove=",
@@ -118,7 +112,10 @@ world:new_immovable_type{
          hotspot = { 16, 60 },
          sound_effect = {
             path = "sound/animals/bird3",
+            priority = 10
          },
       }
    },
 }
+
+pop_textdomain()

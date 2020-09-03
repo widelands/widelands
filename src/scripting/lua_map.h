@@ -195,13 +195,13 @@ public:
 	 */
 	int get_descname(lua_State*);
 	int get_icon_name(lua_State*);
-	int get_helptext_script(lua_State*);
 	int get_name(lua_State*);
 	int get_type_name(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
+	int helptexts(lua_State*);
 
 	/*
 	 * C methods
@@ -249,7 +249,6 @@ public:
 	int get_species(lua_State*);
 	int get_buildcost(lua_State*);
 	int get_becomes(lua_State*);
-	int get_editor_category(lua_State*);
 	int get_terrain_affinity(lua_State*);
 	int get_owner_type(lua_State*);
 	int get_size(lua_State*);
@@ -776,7 +775,6 @@ public:
 	int get_descname(lua_State*);
 	int get_default_resource(lua_State*);
 	int get_default_resource_amount(lua_State*);
-	int get_editor_category(lua_State*);
 	int get_fertility(lua_State*);
 	int get_humidity(lua_State*);
 	int get_representative_image(lua_State*);
@@ -1076,9 +1074,10 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(RoadBase)
-	static int create_new_worker(Widelands::RoadBase& r,
-	                             Widelands::EditorGameBase&,
-	                             const Widelands::WorkerDescr*);
+	static bool create_new_worker(lua_State* L,
+	                              Widelands::RoadBase& r,
+	                              Widelands::EditorGameBase&,
+	                              const Widelands::WorkerDescr*);
 };
 
 class LuaConstructionSite : public LuaBuilding {
@@ -1209,9 +1208,10 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(ProductionSite)
-	static int create_new_worker(Widelands::ProductionSite& ps,
-	                             Widelands::EditorGameBase&,
-	                             const Widelands::WorkerDescr*);
+	static bool create_new_worker(lua_State* L,
+	                              Widelands::ProductionSite& ps,
+	                              Widelands::EditorGameBase&,
+	                              const Widelands::WorkerDescr*);
 };
 
 class LuaMilitarySite : public LuaBuilding {

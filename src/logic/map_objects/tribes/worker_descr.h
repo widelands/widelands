@@ -46,8 +46,8 @@ public:
 	WorkerDescr(const std::string& init_descname,
 	            MapObjectType type,
 	            const LuaTable& table,
-	            const Tribes& tribes);
-	WorkerDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
+	            Tribes& tribes);
+	WorkerDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
 	~WorkerDescr() override;
 
 	Bob& create_object() const override;
@@ -71,17 +71,23 @@ public:
 	Quantity default_target_quantity() const {
 		return default_target_quantity_;
 	}
+	/// Sets the default target quantity. Overwrites if it already exists.
+	void set_default_target_quantity(int quantity);
+
+	/// This is an AI hint
+	void set_preciousness(const std::string& tribename, int preciousness);
 
 	bool has_demand_check() const {
-		return default_target_quantity() != std::numeric_limits<uint32_t>::max();
+		return default_target_quantity() != kInvalidWare;
 	}
 
 	/// Called when a demand check for this ware type is encountered during
 	/// parsing. If there was no default target quantity set in the ware type's
 	/// configuration, set the default value 1.
 	void set_has_demand_check() {
-		if (default_target_quantity_ == std::numeric_limits<uint32_t>::max())
+		if (default_target_quantity_ == kInvalidWare) {
 			default_target_quantity_ = 1;
+		}
 	}
 
 	virtual const DirAnimations& get_right_walk_anims(bool const carries_ware, Worker*) const {
@@ -115,7 +121,7 @@ public:
 	}
 
 	/// AI hints for this worker type. Can be nullptr.
-	const WorkerHints* ai_hints() const {
+	const WareWorkerHints* ai_hints() const {
 		return ai_hints_.get();
 	}
 
@@ -149,7 +155,7 @@ private:
 
 private:
 	// Hints for the AI
-	std::unique_ptr<WorkerHints> ai_hints_;
+	std::unique_ptr<WareWorkerHints> ai_hints_;
 
 	const Tribes& tribes_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);

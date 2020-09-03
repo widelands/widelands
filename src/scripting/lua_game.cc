@@ -601,7 +601,7 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 }
 
 /* RST
-   .. method:: hide_fields(fields)
+   .. method:: hide_fields(fields[, unexplore = false])
 
       Make these fields hidden for the current player if they are not
       seen by a military building. See also :ref:`field_animations` for

@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -7,12 +9,10 @@ terrain_affinity = {
    pickiness = 90,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_roystonea_desert_sapling",
    descname = _ "Roystonea regia Palm (Sapling)",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -34,12 +34,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_roystonea_desert_pole",
    descname = _ "Roystonea regia Palm (Pole)",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -61,12 +59,10 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_roystonea_desert_mature",
    descname = _ "Roystonea regia Palm (Mature)",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -88,20 +84,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_roystonea_desert_old",
    descname = _ "Roystonea regia Palm (Old)",
    species = _ "Roystonea regia Palm",
    icon = dirname .. "menu.png",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
          "animate=idle duration:25m50s",
          "transform=deadtree4 chance:15.23%",
-         "seed=palm_roystonea_desert_sapling 30",
+         "seed=palm_roystonea_desert_sapling proximity:11.72%",
       },
       fall = {
          "remove=",
@@ -118,7 +112,10 @@ world:new_immovable_type{
          hotspot = { 25, 61 },
          sound_effect = {
             path = "sound/animals/crickets2",
+            priority = 10
          },
       }
    },
 }
+
+pop_textdomain()

@@ -1,0 +1,3 @@
+return {
+   beer_strong = {},
+}
