@@ -298,13 +298,19 @@ int BaseListselect::calculate_desired_width() {
 	// Find the widest entries
 	widest_text_ = 0;
 	widest_hotkey_ = 0;
-	for (const EntryRecord* er : entry_records_) {
-		if (er->rendered_name) {
-			widest_text_ = std::max(widest_text_, er->rendered_name->width());
+	for (EntryRecord* er : entry_records_) {
+		if (!er->rendered_name) {
+			bool done = false;
+			NoteDelayedCheck::instantiate(this, [this, er, &done]() {
+				er->init_render_info();
+				done = true;
+			});
+			while (!done) {
+				SDL_Delay(20);
+			}
 		}
-		if (er->rendered_hotkey) {
-			widest_hotkey_ = std::max(widest_hotkey_, er->rendered_hotkey->width());
-		}
+		widest_text_ = std::max(widest_text_, er->rendered_name->width());
+		widest_hotkey_ = std::max(widest_hotkey_, er->rendered_hotkey->width());
 	}
 
 	// Add up the width

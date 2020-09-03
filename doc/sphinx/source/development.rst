@@ -41,8 +41,8 @@ The game is multithreaded – logic progression, AI decisions and game rendering
 are performed in parallel.
 
 Some pieces of the code assume that the game state does not change while they
-are executing. For this, use the `struct MutexLock` (see documentation in
-`base/multithreading.h`). Take care to lock a mutex only for as long as
+are executing. For this, use the ``struct MutexLock`` (see documentation in
+``base/multithreading.h``). Take care to lock a mutex only for as long as
 really necessary, otherwise you defeat the whole point of multithreading.
 When in doubt, first write your code without obtaining a lock, and if it
 crashes, create a lock and extend its scope one line at a time until you
@@ -56,7 +56,23 @@ concurrently are a no-go.
 
 Some of our external libraries are not thread-safe. Therefore, images must
 not be loaded or rendered by any thread other than the one that performed
-the initialization of the image-related libaries.
+the initialization of the image-related libaries. This also goes for pre-
+rendering text, which is also a kind of graphics I/O.
+
+If you need to perform a calculation instantly but you may be in the wrong
+thread, you can use a ``NoteDelayedCheck``, like this:
+
+      .. code-block:: c++
+
+         int result = 0;
+         bool done = false;
+         NoteDelayedCheck::instantiate(this, [this, &result, &done]() {
+            result = non_thread_safe_function();
+            done = true;
+         });
+         while (!done) {
+            SDL_Delay(20);
+         }
 
 
 Why std::set<SomePointer*> is a bad idea
