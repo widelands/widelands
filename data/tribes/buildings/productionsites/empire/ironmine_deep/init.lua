@@ -36,7 +36,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "iron"
+      mines = "resource_iron"
    },
 
    working_positions = {

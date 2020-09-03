@@ -73,7 +73,7 @@
 --        *for more information.*
 --
 --    **tooltips**
---        *Optional*. Additional custom tooltip entries, e.g.::
+--        *Deprecated*. Additional custom tooltip entries, e.g.::
 --
 --            tooltips = {
 --               _"likes trees",
@@ -170,6 +170,8 @@
 --
 --    pop_textdomain()
 
+push_textdomain("world")
+
 wl.World():new_terrain_type{
    name = "desert_beach",
    descname = _ "Beach",
@@ -183,3 +185,5 @@ wl.World():new_terrain_type{
    humidity = 500,
    fertility = 100,
 }
+
+pop_textdomain()

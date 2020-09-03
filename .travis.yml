@@ -107,7 +107,7 @@ jobs:
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
             - zlib1g-dev
-      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=clang-6.0 CXX=clang++-6.0
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=clang-6.0 CXX=clang++-6.0
       services: xvfb
       before_script:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-6.0'
@@ -160,7 +160,7 @@ jobs:
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
             - zlib1g-dev
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON CC=clang-6.0 CXX=clang++-6.0
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=clang-6.0 CXX=clang++-6.0
       services: xvfb
       before_script:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-6.0'
