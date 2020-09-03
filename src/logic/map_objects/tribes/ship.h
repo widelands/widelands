@@ -69,9 +69,15 @@ public:
 		return default_capacity_;
 	}
 
+	const std::vector<std::string>& get_ship_names() const {
+		return ship_names_;
+	}
+
 private:
 	DirAnimations sail_anims_;
 	Quantity default_capacity_;
+	std::vector<std::string> ship_names_;
+
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 

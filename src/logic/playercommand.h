@@ -927,6 +927,7 @@ struct CmdMarkMapObjectForRemoval : PlayerCommand {
 	void serialize(StreamWrite& ser) override;
 
 	CmdMarkMapObjectForRemoval() : PlayerCommand() {
+
 	}
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -934,6 +935,29 @@ struct CmdMarkMapObjectForRemoval : PlayerCommand {
 private:
 	Serial object_;
 	bool mark_;
+};
+
+struct CmdPickCustomStartingPosition : PlayerCommand {
+	CmdPickCustomStartingPosition(uint32_t t, PlayerNumber p, const Coords& c)
+	   : PlayerCommand(t, p), coords_(c) {
+	}
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kPickCustomStartingPosition;
+	}
+
+	void execute(Game& game) override;
+
+	explicit CmdPickCustomStartingPosition(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	CmdPickCustomStartingPosition() : PlayerCommand() {
+	}
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Coords coords_;
 };
 
 }  // namespace Widelands

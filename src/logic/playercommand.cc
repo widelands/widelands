@@ -151,6 +151,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdShipCancelExpedition(des);
 	case QueueCommandTypes::kExpeditionConfig:
 		return new CmdExpeditionConfig(des);
+	case QueueCommandTypes::kPickCustomStartingPosition:
+		return new CmdPickCustomStartingPosition(des);
 
 	default:
 		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
@@ -2100,6 +2102,52 @@ void CmdMarkMapObjectForRemoval::write(FileWrite& fw, EditorGameBase& egbase, Ma
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(object_)));
 	fw.unsigned_8(mark_);
+}
+
+// CmdPickCustomStartingPosition
+void CmdPickCustomStartingPosition::execute(Game& game) {
+	game.get_player(sender())->do_pick_custom_starting_position(coords_);
+}
+
+CmdPickCustomStartingPosition::CmdPickCustomStartingPosition(StreamRead& des)
+   : PlayerCommand(0, des.unsigned_8()) {
+	coords_.x = des.unsigned_16();
+	coords_.y = des.unsigned_16();
+}
+
+void CmdPickCustomStartingPosition::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_16(coords_.x);
+	ser.unsigned_16(coords_.y);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdPickCustomStartingPosition = 1;
+
+void CmdPickCustomStartingPosition::read(FileRead& fr,
+                                         EditorGameBase& egbase,
+                                         MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdPickCustomStartingPosition) {
+			PlayerCommand::read(fr, egbase, mol);
+			coords_.x = fr.unsigned_16();
+			coords_.y = fr.unsigned_16();
+		} else {
+			throw UnhandledVersionError("CmdPickCustomStartingPosition", packet_version,
+			                            kCurrentPacketVersionCmdPickCustomStartingPosition);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("Cmd_PickCustomStartingPosition: %s", e.what());
+	}
+}
+
+void CmdPickCustomStartingPosition::write(FileWrite& fw,
+                                          EditorGameBase& egbase,
+                                          MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdPickCustomStartingPosition);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_16(coords_.x);
+	fw.unsigned_16(coords_.y);
 }
 
 }  // namespace Widelands

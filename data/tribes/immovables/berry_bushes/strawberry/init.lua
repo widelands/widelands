@@ -1,3 +1,5 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 terrain_affinity = {
@@ -8,11 +10,9 @@ terrain_affinity = {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_strawberry_tiny",
    descname = _ "Strawberries (tiny)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "tiny/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -34,11 +34,9 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_strawberry_small",
    descname = _ "Strawberries (small)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "small/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -60,11 +58,9 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_strawberry_medium",
    descname = _ "Strawberries (medium)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "medium/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -86,11 +82,9 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_strawberry_ripe",
    descname = _ "Strawberries (ripe)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "ripe/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -113,3 +107,5 @@ tribes:new_immovable_type {
       }
    }
 }
+
+pop_textdomain()

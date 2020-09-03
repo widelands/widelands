@@ -12,10 +12,7 @@
 -- ``data/tribes/buildings/trainingsites/<tribe_name>/<building_name>/init.lua``.
 -- The building will also need its help texts, which are defined in
 -- ``data/tribes/buildings/trainingsites/<tribe_name>/<building_name>/helptexts.lua``
-
-dirname = path.dirname(__file__)
-
--- RST
+--
 -- .. function:: new_trainingsite_type{table}
 --
 --    This function adds the definition of a training site building to the engine.
@@ -75,12 +72,108 @@ dirname = path.dirname(__file__)
 --    **soldier evade**
 --            *Optional*. Just like ``soldier attack``, but for evade training.
 --
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("tribes")
+--
+--    dirname = path.dirname(__file__)
+--
+--    tribes:new_trainingsite_type {
+--       name = "empire_arena",
+--       descname = pgettext("empire_building", "Arena"),
+--       icon = dirname .. "menu.png",
+--       animation_directory = dirname,
+--       size = "big",
+--       enhancement = "empire_colosseum",
+--
+--       buildcost = {
+--          log = 2,
+--          granite = 4,
+--          marble = 5,
+--          planks = 5,
+--          marble_column = 2
+--       },
+--       return_on_dismantle = {
+--          log = 1,
+--          granite = 3,
+--          marble = 3,
+--          planks = 2,
+--          marble_column = 1
+--       },
+--
+--       animations = {
+--          idle = {
+--             hotspot = { 81, 82 }
+--          },
+--          build = {
+--             hotspot = { 82, 83 },
+--          }
+--       },
+--
+--       aihints = {
+--          trainingsites_max_percent = 10,
+--          prohibited_till = 900,
+--          very_weak_ai_limit = 1,
+--          weak_ai_limit = 2
+--       },
+--
+--       working_positions = {
+--          empire_trainer = 1
+--       },
+--
+--       inputs = {
+--          { name = "fish", amount = 6 },
+--          { name = "meat", amount = 6 },
+--          { name = "empire_bread", amount = 10 }
+--       },
+--
+--       ["soldier evade"] = {
+--          food = {
+--             {"fish", "meat"},
+--             {"empire_bread"}
+--          }
+--       },
+--
+--       programs = {
+--          sleep = {
+--             descname = _"sleeping",
+--             actions = {
+--                "sleep=duration:5s",
+--                "return=skipped",
+--             }
+--          },
+--          upgrade_soldier_evade_0 = {
+--             descname = pgettext("empire_building", "upgrading soldier evade from level 0 to level 1"),
+--             actions = {
+--                "checksoldier=soldier:evade level:0", -- Fails when aren't any soldier of level 0 evade
+--                "return=failed unless site has empire_bread",
+--                "return=failed unless site has fish,meat",
+--                "sleep=duration:30s",
+--                "checksoldier=soldier:evade level:0", -- Because the soldier can be expelled by the player
+--                "consume=empire_bread fish,meat",
+--                "train=soldier:evade level:1"
+--             }
+--          },
+--       },
+--
+--       soldier_capacity = 8,
+--       trainer_patience = 8
+--    }
+--
+--    pop_textdomain()
+
+push_textdomain("tribes")
+
+dirname = path.dirname(__file__)
+
 tribes:new_trainingsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_dungeon",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Dungeon"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -213,3 +306,5 @@ tribes:new_trainingsite_type {
    soldier_capacity = 8,
    trainer_patience = 16
 }
+
+pop_textdomain()

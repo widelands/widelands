@@ -157,10 +157,14 @@ end
 --    :returns: Help string for the worker
 --
 function worker_help_string(tribe, worker_description)
-   include(worker_description.helptext_script)
-
-   local result = h2(_"Purpose") ..
-      li_image(worker_description.icon_name, worker_helptext())
+   local helptexts = worker_description:helptexts(tribe.name)
+   local result = ""
+   if helptexts["purpose"] ~= nil then
+      result = h2(_"Purpose") ..
+         li_image(worker_description.icon_name, helptexts["purpose"])
+   else
+      result = img(worker_description.icon_name)
+   end
 
    if (worker_description.buildable) then
       -- Get the tools for the workers.

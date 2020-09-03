@@ -1,3 +1,5 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 terrain_affinity = {
@@ -8,11 +10,9 @@ terrain_affinity = {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_currant_red_tiny",
    descname = _ "Red Currant (tiny)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "tiny/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -34,11 +34,9 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_currant_red_small",
    descname = _ "Red Currant (small)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "small/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -60,11 +58,9 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_currant_red_medium",
    descname = _ "Red Currant (medium)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "medium/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -86,11 +82,9 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_currant_red_ripe",
    descname = _ "Red Currant (ripe)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "ripe/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -113,3 +107,5 @@ tribes:new_immovable_type {
       }
    }
 }
+
+pop_textdomain()

@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
    name = "barbarians_recruit",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Recruit"),
-   helptext_script = dirname .. "helptexts.lua",
    animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
@@ -28,3 +28,5 @@ tribes:new_worker_type {
       }
    }
 }
+
+pop_textdomain()

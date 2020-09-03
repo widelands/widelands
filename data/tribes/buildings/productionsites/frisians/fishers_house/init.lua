@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_fishers_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Fisher’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -65,3 +65,5 @@ tribes:new_productionsite_type {
       message = pgettext ("frisians_building", "The fisher working out of this fisher’s house can’t find any fish in his work area."),
    },
 }
+
+pop_textdomain()

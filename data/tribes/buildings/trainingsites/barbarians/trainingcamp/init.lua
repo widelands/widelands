@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_trainingsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_trainingcamp",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Training Camp"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -213,3 +213,5 @@ tribes:new_trainingsite_type {
    soldier_capacity = 12,
    trainer_patience = 5
 }
+
+pop_textdomain()
