@@ -12,7 +12,7 @@ return {
          },
       },
       buildings = {
-         "barbarians_spritesheet_animation",
+         { name = "barbarians_spritesheet_animation" }
       }
    }
 }
