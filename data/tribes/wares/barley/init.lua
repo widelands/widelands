@@ -6,7 +6,6 @@ tribes:new_ware_type {
    name = "barley",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Barley"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
 
    animations = {

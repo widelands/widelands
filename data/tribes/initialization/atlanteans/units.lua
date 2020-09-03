@@ -260,7 +260,7 @@ image_dirname = path.dirname(__file__) .. "images/"
 push_textdomain("tribes_encyclopedia")
 
 -- For formatting time strings
-include "tribes/scripting/help/global_helptexts.lua"
+include "tribes/scripting/help/time_strings.lua"
 
 tribes:new_tribe {
    name = "atlanteans",

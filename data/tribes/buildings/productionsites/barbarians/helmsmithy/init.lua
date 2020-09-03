@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    name = "barbarians_helmsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Helm Smithy"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
