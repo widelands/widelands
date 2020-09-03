@@ -595,174 +595,174 @@ int32_t BuildingStatisticsMenu::validate_pointer(int32_t* const id, int32_t cons
  */
 void BuildingStatisticsMenu::update() {
 	NoteDelayedCheck::instantiate(this, [this]() {
-	const Widelands::Player& player = iplayer().player();
-	const Widelands::TribeDescr& tribe = player.tribe();
+		const Widelands::Player& player = iplayer().player();
+		const Widelands::TribeDescr& tribe = player.tribe();
 
-	owned_label_.set_visible(false);
-	no_owned_label_.set_visible(false);
-	navigation_buttons_[NavigationButton::NextOwned]->set_visible(false);
-	navigation_buttons_[NavigationButton::PrevOwned]->set_visible(false);
-	construction_label_.set_visible(false);
-	no_construction_label_.set_visible(false);
-	navigation_buttons_[NavigationButton::NextConstruction]->set_visible(false);
-	navigation_buttons_[NavigationButton::PrevConstruction]->set_visible(false);
-	unproductive_box_.set_visible(false);
-	unproductive_label_.set_visible(false);
-	unproductive_percent_.set_visible(false);
-	unproductive_label2_.set_visible(false);
-	no_unproductive_label_.set_visible(false);
-	navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(false);
-	navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(false);
+		owned_label_.set_visible(false);
+		no_owned_label_.set_visible(false);
+		navigation_buttons_[NavigationButton::NextOwned]->set_visible(false);
+		navigation_buttons_[NavigationButton::PrevOwned]->set_visible(false);
+		construction_label_.set_visible(false);
+		no_construction_label_.set_visible(false);
+		navigation_buttons_[NavigationButton::NextConstruction]->set_visible(false);
+		navigation_buttons_[NavigationButton::PrevConstruction]->set_visible(false);
+		unproductive_box_.set_visible(false);
+		unproductive_label_.set_visible(false);
+		unproductive_percent_.set_visible(false);
+		unproductive_label2_.set_visible(false);
+		no_unproductive_label_.set_visible(false);
+		navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(false);
+		navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(false);
 
-	for (Widelands::DescriptionIndex id = 0; id < nr_building_types_; ++id) {
-		const Widelands::BuildingDescr& building = *tribe.get_building_descr(id);
-		if (building_buttons_[id] == nullptr) {
-			continue;
-		}
-		assert(productivity_labels_[id] != nullptr);
-		assert(owned_labels_[id] != nullptr);
+		for (Widelands::DescriptionIndex id = 0; id < nr_building_types_; ++id) {
+			const Widelands::BuildingDescr& building = *tribe.get_building_descr(id);
+			if (building_buttons_[id] == nullptr) {
+				continue;
+			}
+			assert(productivity_labels_[id] != nullptr);
+			assert(owned_labels_[id] != nullptr);
 
-		const std::vector<Widelands::Player::BuildingStats>& stats_vector =
-		   player.get_building_statistics(id);
+			const std::vector<Widelands::Player::BuildingStats>& stats_vector =
+			   player.get_building_statistics(id);
 
-		uint32_t nr_owned = 0;
-		uint32_t nr_build = 0;
-		uint32_t total_prod = 0;
-		uint32_t total_soldier_capacity = 0;
-		uint32_t total_stationed_soldiers = 0;
-		uint32_t nr_unproductive = 0;
+			uint32_t nr_owned = 0;
+			uint32_t nr_build = 0;
+			uint32_t total_prod = 0;
+			uint32_t total_soldier_capacity = 0;
+			uint32_t total_stationed_soldiers = 0;
+			uint32_t nr_unproductive = 0;
 
-		for (uint32_t l = 0; l < stats_vector.size(); ++l) {
-			if (stats_vector[l].is_constructionsite) {
-				++nr_build;
-			} else {
-				++nr_owned;
-				Widelands::BaseImmovable& immovable =
-				   *iplayer().game().map()[stats_vector[l].pos].get_immovable();
-				if (building.type() == Widelands::MapObjectType::PRODUCTIONSITE ||
-				    building.type() == Widelands::MapObjectType::TRAININGSITE) {
-					Widelands::ProductionSite& productionsite =
-					   dynamic_cast<Widelands::ProductionSite&>(immovable);
-					int percent = productionsite.get_statistics_percent();
-					total_prod += percent;
+			for (uint32_t l = 0; l < stats_vector.size(); ++l) {
+				if (stats_vector[l].is_constructionsite) {
+					++nr_build;
+				} else {
+					++nr_owned;
+					Widelands::BaseImmovable& immovable =
+					   *iplayer().game().map()[stats_vector[l].pos].get_immovable();
+					if (building.type() == Widelands::MapObjectType::PRODUCTIONSITE ||
+					    building.type() == Widelands::MapObjectType::TRAININGSITE) {
+						Widelands::ProductionSite& productionsite =
+						   dynamic_cast<Widelands::ProductionSite&>(immovable);
+						int percent = productionsite.get_statistics_percent();
+						total_prod += percent;
 
-					if (percent < low_production_ || productionsite.is_stopped()) {
-						++nr_unproductive;
-					}
-				} else if (building.type() == Widelands::MapObjectType::MILITARYSITE) {
-					const Widelands::SoldierControl* soldier_control =
-					   dynamic_cast<Widelands::Building&>(immovable).soldier_control();
-					assert(soldier_control != nullptr);
-					total_soldier_capacity += soldier_control->soldier_capacity();
-					total_stationed_soldiers += soldier_control->stationed_soldiers().size();
-					if (total_stationed_soldiers < total_soldier_capacity) {
-						++nr_unproductive;
+						if (percent < low_production_ || productionsite.is_stopped()) {
+							++nr_unproductive;
+						}
+					} else if (building.type() == Widelands::MapObjectType::MILITARYSITE) {
+						const Widelands::SoldierControl* soldier_control =
+						   dynamic_cast<Widelands::Building&>(immovable).soldier_control();
+						assert(soldier_control != nullptr);
+						total_soldier_capacity += soldier_control->soldier_capacity();
+						total_stationed_soldiers += soldier_control->stationed_soldiers().size();
+						if (total_stationed_soldiers < total_soldier_capacity) {
+							++nr_unproductive;
+						}
 					}
 				}
 			}
-		}
 
-		productivity_labels_[id]->set_visible(false);
+			productivity_labels_[id]->set_visible(false);
 
-		if (building.type() == Widelands::MapObjectType::PRODUCTIONSITE ||
-		    building.type() == Widelands::MapObjectType::TRAININGSITE) {
-			if (nr_owned) {
-				int const percent =
-				   static_cast<int>(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
+			if (building.type() == Widelands::MapObjectType::PRODUCTIONSITE ||
+			    building.type() == Widelands::MapObjectType::TRAININGSITE) {
+				if (nr_owned) {
+					int const percent =
+					   static_cast<int>(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 
-				const RGBColor& color =
-				   (percent < low_production_) ?
-				      style_.low_color() :
-				      (percent < ((low_production_ < 50) ?
-				                     2 * low_production_ :
-				                     low_production_ + ((100 - low_production_) / 2))) ?
-				      style_.medium_color() :
-				      style_.high_color();
+					const RGBColor& color =
+					   (percent < low_production_) ?
+					      style_.low_color() :
+					      (percent < ((low_production_ < 50) ?
+					                     2 * low_production_ :
+					                     low_production_ + ((100 - low_production_) / 2))) ?
+					      style_.medium_color() :
+					      style_.high_color();
 
-				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
-				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
-				const std::string perc_str = (boost::format(_("%i%%")) % percent).str();
-				set_labeltext(productivity_labels_[id], perc_str, color);
+					/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
+					/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
+					const std::string perc_str = (boost::format(_("%i%%")) % percent).str();
+					set_labeltext(productivity_labels_[id], perc_str, color);
+				}
+				if (has_selection_ && id == current_building_type_) {
+					no_unproductive_label_.set_text(
+					   nr_unproductive > 0 ? std::to_string(nr_unproductive) : "");
+					navigation_buttons_[NavigationButton::NextUnproductive]->set_enabled(
+					   nr_unproductive > 0);
+					navigation_buttons_[NavigationButton::PrevUnproductive]->set_enabled(
+					   nr_unproductive > 0);
+					navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
+					navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
+					unproductive_label_.set_text(_("Low Productivity"));
+					unproductive_box_.set_visible(true);
+					unproductive_label_.set_visible(true);
+					unproductive_percent_.set_visible(true);
+					unproductive_label2_.set_visible(true);
+					no_unproductive_label_.set_visible(true);
+				}
+			} else if (building.type() == Widelands::MapObjectType::MILITARYSITE) {
+				if (nr_owned) {
+					const RGBColor& color = (total_stationed_soldiers < total_soldier_capacity / 2) ?
+					                           style_.low_color() :
+					                           (total_stationed_soldiers < total_soldier_capacity) ?
+					                           style_.medium_color() :
+					                           style_.high_color();
+					const std::string perc_str =
+					   (boost::format(_("%1%/%2%")) % total_stationed_soldiers % total_soldier_capacity)
+					      .str();
+					set_labeltext(productivity_labels_[id], perc_str, color);
+				}
+				if (has_selection_ && id == current_building_type_) {
+					no_unproductive_label_.set_text(
+					   nr_unproductive > 0 ? std::to_string(nr_unproductive) : "");
+					navigation_buttons_[NavigationButton::NextUnproductive]->set_enabled(
+					   total_soldier_capacity > total_stationed_soldiers);
+					navigation_buttons_[NavigationButton::PrevUnproductive]->set_enabled(
+					   total_soldier_capacity > total_stationed_soldiers);
+					navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
+					navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
+					/** TRANSLATORS: Label for number of buildings that are waiting for soldiers */
+					unproductive_label_.set_text(_("Lacking Soldiers:"));
+					unproductive_box_.set_visible(true);
+					unproductive_label_.set_visible(true);
+					no_unproductive_label_.set_visible(true);
+				}
 			}
-			if (has_selection_ && id == current_building_type_) {
-				no_unproductive_label_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
-				                                                      "");
-				navigation_buttons_[NavigationButton::NextUnproductive]->set_enabled(nr_unproductive >
-				                                                                     0);
-				navigation_buttons_[NavigationButton::PrevUnproductive]->set_enabled(nr_unproductive >
-				                                                                     0);
-				navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
-				navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
-				unproductive_label_.set_text(_("Low Productivity"));
-				unproductive_box_.set_visible(true);
-				unproductive_label_.set_visible(true);
-				unproductive_percent_.set_visible(true);
-				unproductive_label2_.set_visible(true);
-				no_unproductive_label_.set_visible(true);
-			}
-		} else if (building.type() == Widelands::MapObjectType::MILITARYSITE) {
-			if (nr_owned) {
-				const RGBColor& color = (total_stationed_soldiers < total_soldier_capacity / 2) ?
-				                           style_.low_color() :
-				                           (total_stationed_soldiers < total_soldier_capacity) ?
-				                           style_.medium_color() :
-				                           style_.high_color();
-				const std::string perc_str =
-				   (boost::format(_("%1%/%2%")) % total_stationed_soldiers % total_soldier_capacity)
-				      .str();
-				set_labeltext(productivity_labels_[id], perc_str, color);
-			}
-			if (has_selection_ && id == current_building_type_) {
-				no_unproductive_label_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
-				                                                      "");
-				navigation_buttons_[NavigationButton::NextUnproductive]->set_enabled(
-				   total_soldier_capacity > total_stationed_soldiers);
-				navigation_buttons_[NavigationButton::PrevUnproductive]->set_enabled(
-				   total_soldier_capacity > total_stationed_soldiers);
-				navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
-				navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
-				/** TRANSLATORS: Label for number of buildings that are waiting for soldiers */
-				unproductive_label_.set_text(_("Lacking Soldiers:"));
-				unproductive_box_.set_visible(true);
-				unproductive_label_.set_visible(true);
-				no_unproductive_label_.set_visible(true);
-			}
-		}
 
-		std::string owned_text;
-		const bool can_construct_this_building =
-		   player.tribe().has_building(id) && (building.is_buildable() || building.is_enhanced());
-		if (can_construct_this_building) {
-			/** TRANSLATORS: Buildings: owned / under construction */
-			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % nr_build).str();
-		} else {
-			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % "–").str();
-		}
-		set_labeltext(
-		   owned_labels_[id], owned_text, style_.building_statistics_details_font().color());
-		owned_labels_[id]->set_visible((nr_owned + nr_build) > 0);
-
-		building_buttons_[id]->set_enabled((nr_owned + nr_build) > 0);
-		if (has_selection_ && id == current_building_type_) {
-			no_owned_label_.set_text(nr_owned > 0 ? std::to_string(nr_owned) : "");
-			navigation_buttons_[NavigationButton::NextOwned]->set_enabled(nr_owned > 0);
-			navigation_buttons_[NavigationButton::PrevOwned]->set_enabled(nr_owned > 0);
-			owned_label_.set_visible(true);
-			no_owned_label_.set_visible(true);
-			navigation_buttons_[NavigationButton::NextOwned]->set_visible(true);
-			navigation_buttons_[NavigationButton::PrevOwned]->set_visible(true);
+			std::string owned_text;
+			const bool can_construct_this_building =
+			   player.tribe().has_building(id) && (building.is_buildable() || building.is_enhanced());
 			if (can_construct_this_building) {
-				no_construction_label_.set_text(nr_build > 0 ? std::to_string(nr_build) : "");
-				navigation_buttons_[NavigationButton::NextConstruction]->set_enabled(nr_build > 0);
-				navigation_buttons_[NavigationButton::PrevConstruction]->set_enabled(nr_build > 0);
-				construction_label_.set_visible(true);
-				no_construction_label_.set_visible(true);
-				navigation_buttons_[NavigationButton::NextConstruction]->set_visible(true);
-				navigation_buttons_[NavigationButton::PrevConstruction]->set_visible(true);
+				/** TRANSLATORS: Buildings: owned / under construction */
+				owned_text = (boost::format(_("%1%/%2%")) % nr_owned % nr_build).str();
+			} else {
+				owned_text = (boost::format(_("%1%/%2%")) % nr_owned % "–").str();
 			}
+			set_labeltext(
+			   owned_labels_[id], owned_text, style_.building_statistics_details_font().color());
+			owned_labels_[id]->set_visible((nr_owned + nr_build) > 0);
+
+			building_buttons_[id]->set_enabled((nr_owned + nr_build) > 0);
+			if (has_selection_ && id == current_building_type_) {
+				no_owned_label_.set_text(nr_owned > 0 ? std::to_string(nr_owned) : "");
+				navigation_buttons_[NavigationButton::NextOwned]->set_enabled(nr_owned > 0);
+				navigation_buttons_[NavigationButton::PrevOwned]->set_enabled(nr_owned > 0);
+				owned_label_.set_visible(true);
+				no_owned_label_.set_visible(true);
+				navigation_buttons_[NavigationButton::NextOwned]->set_visible(true);
+				navigation_buttons_[NavigationButton::PrevOwned]->set_visible(true);
+				if (can_construct_this_building) {
+					no_construction_label_.set_text(nr_build > 0 ? std::to_string(nr_build) : "");
+					navigation_buttons_[NavigationButton::NextConstruction]->set_enabled(nr_build > 0);
+					navigation_buttons_[NavigationButton::PrevConstruction]->set_enabled(nr_build > 0);
+					construction_label_.set_visible(true);
+					no_construction_label_.set_visible(true);
+					navigation_buttons_[NavigationButton::NextConstruction]->set_visible(true);
+					navigation_buttons_[NavigationButton::PrevConstruction]->set_visible(true);
+				}
+			}
+			building_buttons_[id]->set_tooltip(building.descname());
 		}
-		building_buttons_[id]->set_tooltip(building.descname());
-	}
 	});
 }
 
