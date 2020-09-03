@@ -80,11 +80,10 @@ jobs:
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
 
     ### Separate stage to speed things up in case the regression test suite fails
-    ### Building on the oldest and newest gcc
+    ### Building on an oldest and newest compiler version
     - stage: testsuite
     ### RELEASE BUILDS
       name: "RELEASE: clang 6"
-      os: linux
       compiler: clang
       cache: false
       addons:
@@ -137,7 +136,6 @@ jobs:
       services: xvfb
     ### DEBUG BUILDS
     - name: "DEBUG: clang 6"
-      os: linux
       compiler: clang
       cache: false
       addons:
