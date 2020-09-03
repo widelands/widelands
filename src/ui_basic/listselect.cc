@@ -544,13 +544,17 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			switch (code.sym) {
 			case SDLK_KP_2:
 			case SDLK_DOWN:
-				if (selected_idx < max) {
+				if (!has_selection()) {
+					selected_idx = 0;
+				} else if (selected_idx < max) {
 					++selected_idx;
 				}
 				break;
 			case SDLK_KP_8:
 			case SDLK_UP:
-				if (selected_idx > 0) {
+				if (!has_selection()) {
+					selected_idx = max;
+				} else if (selected_idx > 0) {
 					--selected_idx;
 				}
 				break;
@@ -564,18 +568,18 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 				break;
 			case SDLK_KP_3:
 			case SDLK_PAGEDOWN:
-				selected_idx = std::min(max, selected_idx + pagesize);
+				selected_idx = has_selection() ? std::min(max, selected_idx + pagesize) : 0;
 				break;
 			case SDLK_KP_9:
 			case SDLK_PAGEUP:
-				selected_idx = selected_idx > pagesize ? selected_idx - pagesize : 0;
+				selected_idx = has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
 				break;
 			default:
 				handle = false;
 				break;  // not handled
 			}
 		}
-		assert(selected_idx <= max);
+		assert(selected_idx <= max ^ selected_idx == no_selection_index());
 		if (handle) {
 			select(selected_idx);
 			if (selection_index() * get_lineheight() < scrollpos_) {
