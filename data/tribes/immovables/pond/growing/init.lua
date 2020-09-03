@@ -8,7 +8,6 @@ tribes:new_immovable_type {
    descname = pgettext ("immovable", "Pond With Fish Spawn"),
    icon = dirname .. "menu.png",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    programs = {
       main = {
          "animate=idle duration:2m20s",
