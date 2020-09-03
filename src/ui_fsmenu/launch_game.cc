@@ -54,6 +54,9 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
      peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
+     custom_starting_positions_(this,
+                                Vector2i(get_w() * 7 / 10, get_h() * 21 / 40 + buth_),
+                                _("Custom starting positions")),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
@@ -72,6 +75,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      nr_players_(0) {
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
+	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
 	back_.sigclicked.connect([this]() { clicked_back(); });
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
@@ -99,6 +103,22 @@ void FullscreenMenuLaunchGame::update_peaceful_mode() {
 		peaceful_.set_tooltip(_("The selected win condition does not allow peaceful matches"));
 	} else {
 		peaceful_.set_tooltip(_("Forbid fighting between players"));
+	}
+}
+
+void FullscreenMenuLaunchGame::update_custom_starting_positions() {
+	const bool forbidden = settings_->settings().scenario || settings_->settings().savegame;
+	custom_starting_positions_.set_enabled(!forbidden && settings_->can_change_map());
+	if (forbidden) {
+		custom_starting_positions_.set_state(false);
+	}
+	if (settings_->settings().scenario) {
+		custom_starting_positions_.set_tooltip(_("The starting positions are set by the scenario"));
+	} else if (settings_->settings().savegame) {
+		custom_starting_positions_.set_tooltip(_("The starting positions are set by the saved game"));
+	} else {
+		custom_starting_positions_.set_tooltip(_(
+		   "Allow the players to choose their own starting positions at the beginning of the game"));
 	}
 }
 
@@ -216,6 +236,10 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 
 void FullscreenMenuLaunchGame::toggle_peaceful() {
 	settings_->set_peaceful_mode(peaceful_.get_state());
+}
+
+void FullscreenMenuLaunchGame::toggle_custom_starting_positions() {
+	settings_->set_custom_starting_positions(custom_starting_positions_.get_state());
 }
 
 // Implemented by subclasses

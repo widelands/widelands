@@ -28,11 +28,14 @@ include "tribes/scripting/help/format_help.lua"
 --    :returns: Help string for the immovable
 --
 function immovable_help_string(tribe, immovable_description)
-   include(immovable_description.helptext_script)
-
-   -- TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably want to lose the blank space here.
-   local purpose_text = pgettext("sentence_separator", "%s %s"):bformat(immovable_helptext(), immovable_helptext(tribe.name))
-   local result = li_object(immovable_description.name, purpose_text)
+   local helptexts = immovable_description:helptexts(tribe.name)
+   local result = ""
+   if helptexts["purpose"] ~= nil then
+      result = h2(_"Purpose") ..
+         li_object(immovable_description.name, helptexts["purpose"])
+   else
+      result = img(immovable_description.icon_name)
+   end
 
    -- Build cost
    local buildcost = ""

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -1072,9 +1072,3 @@ msgid ""
 msgstr ""
 "Du hast diese Mission vollendet. Du kannst, falls du möchtest, "
 "weiterspielen, ansonsten fahre mit der nächsten Mission fort."
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/fri02.wmf/scripting/tribes/warehouse_empire.lua:9
-msgctxt "frisians_building"
-msgid "Empire Warehouse"
-msgstr "Lagerhaus des Imperiums"

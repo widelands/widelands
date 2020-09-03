@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: ks k, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -178,15 +178,15 @@ msgstr "경제 설정에서 생산량을 제어할 수 있는것을 기억하십
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:144
 msgid "Recruit new soldiers"
-msgstr "새로운 군인을 모집하십시오"
+msgstr "신병을 모집하십시오"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid "New Soldier Recruiting"
-msgstr "새로운 군인을 수집하기"
+msgstr "신병을 수집하기"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:147
 msgid "Recruit at least ten new soldiers in your barracks."
-msgstr "당신의 병영에 적어도 10명의 새로운 군인를 모집하십시오."
+msgstr "당신의 병영에 적어도 10명의 신병를 모집하십시오."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:148
 msgid "Don’t forget to forge weapons and armor for them."
@@ -194,7 +194,7 @@ msgstr "그들을 위해 무기와 갑옷을 만드는 것을 잊지 마십시�
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:154
 msgid "Defeat the Barbarians"
-msgstr "야만족을 물리치십시오"
+msgstr "야만인들을 물리치십시오"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:156
 msgid "Defeat the Enemy"
@@ -202,7 +202,7 @@ msgstr "적을 물리치십시오"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:157
 msgid "End the Barbarian intrusion into your very own part of the world."
-msgstr "야만족의 침입을 세상의 일부로 막으십시오."
+msgstr "야만인의 침입을 세상의 일부로 막으십시오."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:163
 msgid "Build 2 charcoal kiln"
@@ -311,7 +311,7 @@ msgid ""
 "our victory is only temporary, as this is still just the beginning of the "
 "war. Let’s see what the future still holds for us."
 msgstr ""
-"신들을 찬양하라, 우리는 성공했다. 우리는 우리에게 부과된 모든 도전들을 관리했다. 우리는 심지어 야만족을 우리 나라에서 추방했다. "
+"신들을 찬양하라, 우리는 성공했다. 우리는 우리에게 부과된 모든 도전들을 관리했다. 우리는 심지어 야만인들을 우리 나라에서 추방했다. "
 "그러나, 우리의 승리는 일시적인 것일 뿐, 이것은 여전히 전쟁의 시작에 불과하기 때문이다. 앞으로 우리에게 어떤 미래가 펼쳐질지 "
 "지켜볼것이다."
 
@@ -379,7 +379,7 @@ msgstr ""
 msgid ""
 "I am really afraid, because we are completely unprepared should the "
 "Barbarians decide to attack us."
-msgstr "저는 야만족들이 우리를 공격하기로 결심하면 우리는 완전히 준비가 되어있지 않기 때문에 두렵습니다."
+msgstr "저는 야만인들이 우리를 공격하기로 결심하면 우리는 완전히 준비가 되어있지 않기 때문에 두렵습니다."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:267
 msgid "Welcome Back"
@@ -422,7 +422,7 @@ msgid ""
 "delegated the authority of running the city to his former secretary and "
 "instated him as his surrogate around here."
 msgstr ""
-"폐하, 처음부터 시작하겠습니다. 왕은 야만족들과 싸우기 위해 오랫동안 프레밀을 떠나 있었습니다. 이 임무가 그의 전적인 헌신을 요구하고 "
+"폐하, 처음부터 시작하겠습니다. 왕은 야만인들과 싸우기 위해 오랫동안 프레밀을 떠나 있었습니다. 이 임무가 그의 전적인 헌신을 요구하고 "
 "있었기 때문에, 왕은 도시를 운영할 권한을 그의 전 비서에게 위임했고,  그를 왕의 대리인으로서 이 근처에 임명했습니다."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:282
@@ -851,7 +851,7 @@ msgid ""
 "and her priestesses could have helped us against the Barbarians."
 msgstr ""
 "번역확인:마지막문장-> 그게 옳은 일이었는지 잘 모르겠어요. 맞아요, 우리는 그 계획들을 얻었습니다. 하지만 지금은 개선된 기술로 "
-"방앗간과 양조장을 짓고 판올림할 수 있지만, 베스타와 그녀의 여사제들이 야만족들을 상대로 우리를 도울 수 있는지 여부와 방법을 우리는 "
+"방앗간과 양조장을 짓고 판올림할 수 있지만, 베스타와 그녀의 여사제들이 야만인들을 상대로 우리를 도울 수 있는지 여부와 방법을 우리는 "
 "결코 알 수 없을 것입니다."
 
 #. TRANSLATORS: Amalea
@@ -1100,7 +1100,7 @@ msgid ""
 "Oh no Lutius, I don't know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
-"오, 이런 루티우스, 어떻게 이런 일이 일어났는지는 모르겠지만, 야만족들이 우리 본부를 약탈했습니다. 그래서, 우리는 이 전투를 지고 "
+"오, 이런 루티우스, 어떻게 이런 일이 일어났는지는 모르겠지만, 야만인들이 우리 본부를 약탈했습니다. 그래서, 우리는 이 전투를 지고 "
 "제국을 잃었어요!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:583
@@ -1114,7 +1114,7 @@ msgid ""
 "have destroyed our headquarters. So, we can't deliver the wares to Julia "
 "anymore."
 msgstr ""
-"오, 이런 루티우스, 어떻게 이런 일이 일어났는지는 모르겠지만 야만족들이 우리 본부를 파괴했습니다. 그래서 우리는 더 이상 줄리아에게 "
+"오, 이런 루티우스, 어떻게 이런 일이 일어났는지는 모르겠지만, 야만인들이 우리 본부를 파괴했습니다. 그래서 우리는 더 이상 줄리아에게 "
 "물품을 전달할 수 없습니다."
 
 #. TRANSLATORS: Amalea
@@ -1131,7 +1131,7 @@ msgid ""
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
 msgstr ""
-"오, 이런 루티우스, 어떻게 이런 일이 일어날 수 있었는지 모르겠지만, 야만족들이 우리의 마지막 창고를 파괴했습니다. 그래서, 우리는 이"
+"오, 이런 루티우스, 어떻게 이런 일이 일어날 수 있었는지 모르겠지만, 야만인들이 우리의 마지막 창고를 파괴했습니다. 그래서, 우리는 이"
 " 전투에서 지고 제국을 잃었습니다!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:604
@@ -1204,7 +1204,7 @@ msgid ""
 "deals with the Barbarians, so, we better keep our soldiers in a good mood "
 "and train them adequately."
 msgstr ""
-"폐하, 저는 우리가 훨씬 더 일찍 계획을 세울 수 있었음에도 불구하고 이것은 매우 좋은 거래로 입증되었습니다. 어쨌든 우리는 야만족들과 "
+"폐하, 저는 우리가 훨씬 더 일찍 계획을 세울 수 있었음에도 불구하고 이것은 매우 좋은 거래로 입증되었습니다. 어쨌든 우리는 야만인들과 "
 "어떠한 거래도 할 수 없으므로, 우리 군인들을 좋은 기분으로 유지하고 적절하게 훈련시키는 것이 좋겠습니다."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:640
@@ -1220,7 +1220,7 @@ msgid ""
 "in good mood and train them adequately."
 msgstr ""
 "폐하, 우리가 아마도 신들의 원한을 사칭한 것은 인정합니다만, 전시에는 때때로 목적이 수단을 정당화시킬 것입니다. 그리고 우리 역시 "
-"야만족들과 어떤 거래도 할 수 없을 것이기 때문에 우리 군인들을 기분 좋게 하고 적절하게 훈련시키는 것이 좋겠습니다."
+"야만인들과 어떤 거래도 할 수 없을 것이기 때문에 우리 군인들을 기분 좋게 하고 적절하게 훈련시키는 것이 좋겠습니다."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:650
 msgid "Saledus asks for a stronger army…"
@@ -1266,7 +1266,7 @@ msgid ""
 "train them well. It is important to increase the strength of our soldiers as"
 " fast as we can."
 msgstr ""
-"장군, 비록 우리는 새로운 군인을 모집하기 시작했지만 여전히 잘 훈련시켜야 합니다. 가능한 빨리 군인의 힘을 높이는 것이 중요합니다."
+"장군, 비록 우리는 신병을 모집하기 시작했지만 여전히 잘 훈련시켜야 합니다. 가능한 빨리 군인의 힘을 높이는 것이 중요합니다."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:670
 msgid ""
@@ -1325,7 +1325,7 @@ msgid ""
 "powerful than the Barbarians’. So, we need to spend our resources wisely to "
 "get some heroes as soon as we can."
 msgstr ""
-"우리 군인들이 야만족들보다 훨씬 더 강력하다면 전투에서 우리에게 큰 이점을 줄 것입니다. 따라서, 우리는 가능한 한 빨리 영웅들을 "
+"우리 군인들이 야만인들것보다 훨씬 더 강력하다면 전투에서 우리에게 큰 이점을 줄 것입니다. 따라서, 우리는 가능한 한 빨리 영웅들을 "
 "확보하기 위해 자원을 현명하게 써야 합니다."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:696
@@ -1350,7 +1350,7 @@ msgstr "살레두스는 흥분되었다…"
 msgid ""
 "Now that we have some fully trained soldiers, it is time to expel the "
 "Barbarians from our homeland."
-msgstr "이제 완전히 훈련된 군인들이 생겼으니 이제 우리 조국에서 야만족들을 추방할 때입니다."
+msgstr "이제 완전히 훈련된 군인들이 생겼으니 이제 우리 조국에서 야만인들을 추방할 때입니다."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:708
 msgid ""
@@ -1372,7 +1372,7 @@ msgid ""
 "Sire, finally we have defeated the Barbarians. We have expelled even the "
 "last of them. May they never come back!"
 msgstr ""
-"폐하, 드디어 야만족들을 물리쳤습니다. 우리는 심지어 그들 중 마지막까지도 추방했습니다. 그들이 다시는 돌아오지 않기를 바랍니다!"
+"폐하, 드디어 야만인들을 물리쳤습니다. 우리는 심지어 그들 중 마지막까지도 추방했습니다. 그들이 다시는 돌아오지 않기를 바랍니다!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:720
 msgid ""
@@ -1439,7 +1439,7 @@ msgid ""
 "your party to safeguard our land from the Barbarians."
 msgstr ""
 "고맙습니다 루티우스, 당신은 우리의 여신을 잘 섬겼습니다. 당신은 기술의 향상뿐만 아니라 당신이 절실하게 필요로 하는 몇몇 물품들도 얻게"
-" 될 것입니다. 또한 우리는 당신을 위해 기도하고 당신의 일행과 함께 야만족들로부터 우리 땅을 지키겠습니다."
+" 될 것입니다. 또한 우리는 당신을 위해 기도하고 당신의 일행과 함께 야만인들로부터 우리 땅을 지키겠습니다."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:757
 msgid "Damned"
@@ -1458,85 +1458,3 @@ msgid ""
 msgstr ""
 "젠장, 베스타 여신의 평화로운 종들을 죽인 루티우스! 너의 삶과 땅이 저주를 받고 여신의 분노가 이 세상에서 당신의 일족들을 괴롭혀 "
 "줄것이다."
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1.lua:8
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery2.lua:9
-msgctxt "empire_building"
-msgid "Brewery"
-msgstr "양조장"
-
-#. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery2.lua:50
-msgid "brewing beer"
-msgstr "보리 술 만들고 있음"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:9
-msgctxt "empire_building"
-msgid "Farm"
-msgstr "농장"
-
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:43
-msgid "working"
-msgstr "일하고 있음"
-
-#. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:51
-msgid "planting wheat"
-msgstr "밀을 심고 있음"
-
-#. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:59
-msgid "harvesting wheat"
-msgstr "밀을 베고 있음"
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:68
-msgid "No Fields"
-msgstr "밭이 없음"
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:69
-msgid "Out of Fields"
-msgstr "밭이 부족함"
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:70
-msgctxt "empire_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "이 농장에서 일하는 열음지기들이 씨앗을 뿌릴 충분한 땅이 없습니다."
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:9
-msgid "Loading campaign-specific tribe units"
-msgstr "캠페인 별 부족 유닛들을 불러오고 있음"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1.lua:8
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill2.lua:9
-msgctxt "empire_building"
-msgid "Mill"
-msgstr "방앗간"
-
-#. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill2.lua:48
-msgid "grinding wheat"
-msgstr "밀을 빻고 있음"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta.lua:9
-msgctxt "empire_building"
-msgid "Temple of Vesta"
-msgstr "베스타 신전"
-
-#. TRANSLATORS: Purpose helptext for a building
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/vesta_helptexts.lua:17
-msgctxt "building"
-msgid ""
-"In the temple of Vesta, the wares to worship are stored. It is the home of "
-"the priestesses and the guards of the goddess."
-msgstr "베스타 신전에는 예배를 드릴 물품들이 보관되어 있습니다. 그것은 여사제들과 여신의 경호원들의 집입니다."
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1.lua:8
-msgctxt "empire_building"
-msgid "Well"
-msgstr "우물"

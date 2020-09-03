@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-17 08:52+0000\n"
+"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"PO-Revision-Date: 2020-08-25 12:24+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr "이 창을 닫기"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:36
 msgid "Welcome to the Widelands Tutorial!"
-msgstr "Widelands 튜토리얼에 오신 것을 환영합니다!"
+msgstr "와이드랜드 자습서에 오신 것을 환영합니다!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:38
 msgid "Welcome to Widelands!"
@@ -56,7 +56,7 @@ msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
-msgstr "Widelands는 파괴보다는 건설에 중점을 두는 느린 속도의 건설 전략 게임입니다. 이 튜토리얼은 당신이 게임의 기초를 익히도록 도울 예정입니다."
+msgstr "와이드랜드는 파괴보다는 건설에 중점을 두는 느린 속도의 건설 전략 게임입니다. 이 자습서는 당신이 게임의 기초를 익히도록 도울 예정입니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "You will be guided through this tutorial by objectives"
@@ -141,7 +141,7 @@ msgid ""
 "the Atlanteans and the Frisians. All tribes have a different economy, "
 "strength and weaknesses, but the general gameplay is the same for all. We "
 "will play the Barbarians for now."
-msgstr "와이드랜드에는 야만족, 제국, 아틀란티스, 프리지아의 4가지 부족이 있습니다. 모든 부족은 경제, 강점, 약점이 다르지만 일반적인 놀이 방법은 모두 동일합니다. 우리는 일단 야만족을 진행 할 것입니다."
+msgstr "와이드랜드에는 야만인들, 제국, 아틀란티스인들, 프리지아인들의 4가지 부족이 있습니다. 모든 부족은 경제, 강점, 약점이 다르지만 일반적인 놀이 방법은 모두 동일합니다. 우리는 일단 야만인들을 진행 할 것입니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:78
 msgid ""
@@ -190,7 +190,7 @@ msgid ""
 "road. There is a sweet spot for a lumberjack right next to those trees. I’ll"
 " describe the steps I will take and then ask you to click on the ‘OK’ button"
 " for me to demonstrate."
-msgstr "됐습니다. 지금 바로 이 모든 기호들에 대해 설명하겠습니다. 첫째로, 어떻게 벌목꾼의 오두막을 만들고 어떻게 이를 땅길로 연결할지 보여주겠습니다. 저 나무들 바로 옆에 벌목꾼을 위한 좋은 자리가 있습니다. 계속해서 이 단계들을 설명할 수 있도록 '확인' 버튼을 클릭해 주십시오."
+msgstr "됐습니다. 지금 바로 이 모든 기호들에 대해 설명하겠습니다. 첫째로, 어떻게 벌목꾼의 오두막을 만들고 어떻게 이를 땅길로 연결할지 보여주겠습니다. 저 나무들 바로 옆에 벌목꾼을 위한 좋은 자리가 있습니다. 계속해서 이 단계들을 설명할 수 있도록 '확인' 단추를 누르십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:112
 msgid "Building the Lumberjack"
@@ -386,12 +386,12 @@ msgstr "두번째는 더 일반적이고 빠른 방법입니다: 지도 아무�
 msgid ""
 "The third one is to use the minimap. It is especially useful for traveling "
 "big distances."
-msgstr "세번째는 약도를 사용하는 것입니다. 이는 먼 거리를 이동하는데 특히 쓸모있습니다."
+msgstr "세번째는 작은 지도를 사용하는 것입니다. 이는 먼 거리를 이동하는데 특히 쓸모있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:267
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
 msgid "Move your view with the cursor keys"
-msgstr "커서 키로 시야를 이동하세요"
+msgstr "커서 키로 시야를 이동하십시오"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:270
 msgid ""
@@ -418,7 +418,7 @@ msgstr "화강암은 화강암광에서 채굴할 수 있지만, 더 쉬운 길�
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:287
 msgid "Move your view with the mouse"
-msgstr "마우스로 시야를 이동하세요"
+msgstr "마우스로 시야를 이동하십시오"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:288
 msgid ""
@@ -437,15 +437,15 @@ msgstr "좋습니다. 이제 마우스를 대신 사용하여 더 빠르게 이�
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:303
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
 msgid "Learn to use the minimap"
-msgstr "약도 사용을 배웁니다"
+msgstr "작은 지도 사용을 배우기"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Try moving around by clicking on the minimap"
-msgstr "작은 지도를 눌러서 이동해보십시오"
+msgstr "작은 지도를 눌러서 이동해 보십시오"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:307
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
-msgstr "각각의 오버레이 (땅길, 깃발, 기타 등) 을 활성화해봅니다."
+msgstr "각각의 오버레이 (땅길, 깃발, 기타 등) 를 활성화해 보십시오"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:308
 msgid ""
@@ -471,14 +471,14 @@ msgstr "화면 하단의 ‘지도보기’ 차림표에서 ‘작은 지도 표
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid "I will open it for you."
-msgstr "제가 열어 줄게요."
+msgstr "제가 열어 드리겠습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:331
 msgid ""
 "The minimap shows the complete map in miniature. You can directly jump to "
 "any field by left-clicking on it. You can also toggle buildings, roads, "
 "flags and player indicators on and off inside the minimap."
-msgstr "약도는 지도 전체를 축소해서 보여줍니다. 어떤 지역이든 왼쪽 클릭을 해서 바로 넘어갈 수 있습니다. 또한 약도 안에서 건물, 땅길, 깃발, 그리고 플레이어 지시자를 켜고 끌 수 있습니다."
+msgstr "작은 지도는 지도 전체를 축소해서 보여줍니다. 어떤 지역이든 왼쪽 클릭을 해서 바로 넘어갈 수 있습니다. 또한 작은 지도 안에서 건물, 땅길, 깃발, 그리고 플레이어 지시자를 켜고 끌 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:339
 msgid "Onward to the Quarry"
@@ -494,35 +494,35 @@ msgstr "바위들 옆에 채석장을 짓습니다"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
 msgid "Build a Quarry"
-msgstr "채석장을 건설합니다"
+msgstr "채석장을 지으십시오"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:354
 msgid ""
 "There are some rocks to the west of your headquarters. Build a quarry right "
 "next to them."
-msgstr "본부 서쪽에 몇 개의 바위들이 있습니다. 그 바로 옆에 채석장을 건설하십시오."
+msgstr "본부 서쪽에 몇 개의 바위들이 있습니다. 그 바로 옆에 채석장을 지으십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:355
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press Space for that)."
-msgstr "채석장은 벌목꾼의 오두막과 같은 소형 건물입니다. 그러므로 건설 공간 기호가 활성화될 때 (스페이스 키를 누르면 됩니다) 붉은색, 노란색 또는 초록색 집이 나타나는 어떤 땅에서든 지을 수 있습니다."
+msgstr "채석장은 벌목꾼의 오두막과 같은 작은 건물입니다. 그러므로 건설 공간 기호가 활성화될 때 (스페이스 키를 누르면 됩니다) 붉은색, 노란색 또는 초록색 집이 나타나는 어떤 땅에서든 지을 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:356
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr "바위 옆의 어떤 건물 기호든지 클릭하고, 열리는 창에서 소형 건물 탭을 선택하고, 채석장 기호를 클릭하십시오."
+msgstr "바위 옆의 어떤 건물 기호든지 누르고, 열리는 창에서 작은 건물 탭을 선택하고, 채석장 기호를 누르십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:362
 msgid "How to Build a Quarry"
-msgstr "어떻게 채석장을 건설하는가"
+msgstr "채석장 짓는 방법"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr "여기 바위들 옆에 채석장을 건설합니다. 전에 했던 것을 기억하십니까?"
+msgstr "여기 바위들 옆에 채석장을 지으십시오. 전에 했던 것을 기억하십니까?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:366
 msgid ""
@@ -537,7 +537,7 @@ msgid ""
 "You can build four things on fields in Widelands: flags, small houses, "
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
-msgstr "Widelands 에서는 땅에 네 가지 것들을 건설할 수 있습니다: 깃발, 소형 건물, 중형 건물과 대형 건물입니다. 하지만 모든 땅이 모든 것들을 잡아 둘 수는 없습니다. 건설 공간 기호를 쉽게 인식하자면:"
+msgstr "와이드랜드에는 땅에 네 가지 것들을 건설할 수 있습니다: 깃발, 소형 건물, 중형 건물과 대형 건물입니다. 하지만 모든 땅이 모든 것들을 잡아 둘 수는 없습니다. 건설 공간 기호를 쉽게 인식하자면:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:368
 msgid "Everything can be built on the green house symbol."
@@ -608,7 +608,7 @@ msgid ""
 "Now, about this road. I’ll enter the road building mode and then make it "
 "longer by one field at a time by left-clicking multiple times on neighboring"
 " fields for perfect control over the route the road takes, like so:"
-msgstr "이제, 땅길을 살펴 봅시다. 땅길 건설 모드에 들어갈 거고 더 나아가서 땅길 노선을 완벽히 제어하기 위해 한 번에 땅 하나씩 주변 땅에 여러 번 좌클릭을 할 겁니다, 이렇게:"
+msgstr "이제, 땅길을 살펴 봅시다. 땅길 건설 모드에 들어갈 거고 더 나아가서 땅길 노선을 완벽히 제어하기 위해 한 번에 땅 하나씩 주변 땅에 여러번 왼쪽 단추를 누를 겁니다, 이렇게:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:409
 msgid ""
@@ -658,13 +658,13 @@ msgstr "이 지형은 평평합니다. 짐꾼들은 이 지형에서 매우 신�
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
-msgstr "이 땅에 도착하려면 작은 경사를 올라야 합니다. 일꾼들이 언덕 아래로 내려가는 것이 올라가는 것보다 빠를 겁니다."
+msgstr "이 들판에 도달하려면 작은 경사를 올라야 합니다. 일꾼들이 언덕 아래로 내려가는 것이 올라가는 것보다 빠를 겁니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:431
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
-msgstr "이 땅들을 연결하는 길은 매우 경사가 급합니다. 한쪽 방향은 속도가 엄청 빠를거고 다른 쪽은 매우 느릴 겁니다."
+msgstr "이 들판 사이를 연결은 매우 가파릅니다. 한쪽 방향은 속도가 엄청 빠를거고 다른 쪽은 매우 느릴 겁니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:432
 msgid ""
@@ -729,13 +729,13 @@ msgstr "두번째 채석장을 건설하십시오"
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
 "will make the granite production faster."
-msgstr "많은 바위들이 있다면, 또다른 채석장 건설을 고려해도 좋습니다. 화강암 생산이 더 빨라질 겁니다."
+msgstr "바위들이 많이 있다면, 또다른 채석장을 짓는것을 생각해보십시오. 화강암이 더 빨리 생산될 것입니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:479
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:500
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Census and Statistics"
-msgstr "총 조사와 통계"
+msgstr "실태 조사와 통계"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 msgid ""
@@ -743,7 +743,7 @@ msgid ""
 "construction sites look the same, and some buildings look alike. It is "
 "sometimes hard to tell them apart. Widelands offers a feature to show label "
 "texts over the buildings. They are called the ‘census’."
-msgstr "기다리는 동안 다른 유용한 기능을 빠르게 보여드리겠습니다. 모든 건설 현장은 똑같이 생겼고, 어떤 건물들은 비슷하게 생겼어요. 그것들을 구분하는 것은 어떨때는 어렵습니다. 와이드랜드는 건물에 딱지 글자를 표시하는 기능을 제공합니다. 그것들은 ‘실태 조사’ 라고 불립니다."
+msgstr "기다리는 동안 다른 유용한 기능을 빠르게 보여드리겠습니다. 모든 건설 현장은 똑같이 생겼고, 어떤 건물들은 비슷하게 생겼습니다. 그것들을 구분하는 것은 어떨때는 어렵습니다. 와이드랜드는 건물에 딱지 글자를 표시하는 기능을 제공합니다. 그것들은 ‘실태 조사’ 라고 불립니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
 msgid ""
@@ -754,7 +754,7 @@ msgstr "건물 실태 조사 딱지를 표시하거나 숨기려면 아래쪽에
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "Let me enable the census for you."
-msgstr "제가 실태 조사를 할 수 있게 해줄게요."
+msgstr "제가 실태 조사를 할 수 있게 하겠습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:492
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:494
@@ -807,7 +807,7 @@ msgstr "지금 수신함에 있는 모든 메시지를 보관하십시오."
 msgid ""
 "Keep clicking the ‘Archive selected message’ button until all messages have "
 "been archived and the list is empty."
-msgstr "모든 알릴말이 보관되고 목록이 비워 질 때까지 '선택한 알릴말 보관' 단추를 계속 누릅니다."
+msgstr "모든 메시지이 보관되고 목록이 비워 질 때까지 '선택한 메시지 보관' 단추를 계속 누릅니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:532
 msgid ""
@@ -819,14 +819,14 @@ msgstr "메시지 하나를 보관하면, 다른 메시지가 목록에서 자�
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press Ctrl + A to select them all."
-msgstr "또한 Ctrl 이나 Shift 키를 이용해서 여러 메시지를 선택하거나, Ctrl + A 를 눌러 모두 선택할 수 있습니다."
+msgstr "또한 Ctrl 키나 Shift 키를 이용해서 여러 메시지를 선택하거나, Ctrl + A 키를 눌러 모두 선택할 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:534
 msgid ""
 "You can toggle the message window by pressing ‘n’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr "'n'을 누르거나 화면 맨 아래 오른쪽에서 두 번째 단추를 눌러서 알릴말 창을 전환 할 수 있습니다. 최신 알릴말이 자동으로 표시됩니다."
+msgstr "'n' 키를 누르거나 화면 맨 아래 오른쪽에서 두 번째 단추를 눌러서 메시지 창을 전환 할 수 있습니다. 최신 메시지가 자동으로 표시됩니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:535
 msgid ""
@@ -856,14 +856,14 @@ msgid ""
 " bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "메시지 창은 화면 아래 오른쪽에서 두번째 버튼으로 켜고 끌 수 있습니다. 이 버튼은 새로운 메시지를 열람할 수 있을 때마다 존재감을 드러낼 것이고, 또한 새로운 메시지를 받을 때마다 종 소리가 재생될 겁니다."
+msgstr "메시지 창은 화면 아래 오른쪽에서 두번째 버튼으로 켜고 끌 수 있습니다. 이 단추는 새로운 메시지를 열람할 수 있을 때마다 존재감을 드러낼 것이고, 또한 새로운 메시지를 받을 때마다 종 소리가 재생될 겁니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:545
 msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages:"
-msgstr "현재 두 개의 알릴말이 있습니다. 현재 읽고 있는 이 책과 새로운 본부가 여러분의 경제에 추가되었음을 알려주는 내용입니다. 알릴말을 보관하는 방법에 대해 알아봅니다."
+msgstr "현재 두 개의 메시지가 있습니다. 현재 읽고 있는 이 책과 새로운 본부가 여러분의 경제에 추가되었음을 알려주는 내용입니다. 메시지를 보관하는 방법에 대해 알아봅니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:552
 msgid "Close the messages window"
@@ -945,7 +945,7 @@ msgstr "메시지가 도착했습니다!"
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
-msgstr "몇 가지 알릴말을 받았습니다. 화면 하단에 있는 단추 모양이 어떻게 바뀌었는지 보이나요?"
+msgstr "몇 가지 메시지를 받았습니다. 화면 하단에 있는 단추 모양이 어떻게 바뀌었는지 보이나요?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:608
 msgid "Expand your territory"
@@ -953,7 +953,7 @@ msgstr "영토를 확장하십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:610
 msgid "Make your Territory Grow"
-msgstr "영역 확장"
+msgstr "영토 확장"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:611
 msgid "Build a military building on your border."
@@ -964,7 +964,7 @@ msgid ""
 "In Widelands, it is necessary to build many buildings, which take up a lot "
 "of space. To expand your territory, you have to build military buildings "
 "next to your border. Every tribe has several military buildings."
-msgstr "Widelands에서는, 공간을 많이 차지하는 건물들을 많이 건설할 필요가 있습니다. 영토를 확장하려면, 국경 옆에 군사 건물들을 건설해야 합니다. 모든 부족들은 여러 종류의 군사 건물들을 가집니다."
+msgstr "와이드랜드에서는, 공간을 많이 차지하는 건물들을 많이 건설할 필요가 있습니다. 영토를 확장하려면, 국경 옆에 군사 건물들을 건설해야 합니다. 모든 부족들은 여러 종류의 군사 건물들을 가집니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:613
 msgid ""
@@ -978,7 +978,7 @@ msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build another "
 "military building."
-msgstr "초소는 작은 건설 터에 적합한 유일한 군사 시설입니다. 벌목꾼이 충분한 공간을 비워냈다면, 또다른 군사 건물을 건설할 수 있을 겁니다."
+msgstr "초소는 작은 건물 터에 적합한 유일한 군사 시설입니다. 벌목꾼이 충분한 공간을 비워냈다면, 또다른 군사 건물을 건설할 수 있을 겁니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:615
 msgid ""
@@ -986,7 +986,7 @@ msgid ""
 "medium (yellow) building plots, but buildings can be built on a building "
 "plot that provides more space than they need. You should always keep that in"
 " mind when you search for a suitable place."
-msgstr "큰 건물들 (초록 아이콘) 은 소형 (붉은색) 또는 중형 (노란색) 건설 터에 건설할 수 없지만, 건설 터에 지어질 건물들은 필요로 하는 공간보다 더 많은 공간들을 제공한다는 점을 명심하십시오. 적당한 위치를 찾을 때마다 항상 기억하셔야 합니다."
+msgstr "대형 건물들 (초록 아이콘) 은 소형 (붉은색) 또는 중형 (노란색) 건물 터에 건설할 수 없지만, 건물 터에 지어질 건물들은 필요로 하는 공간보다 더 많은 공간들을 제공한다는 점을 명심하십시오. 적당한 위치를 찾을 때마다 항상 기억해야 합니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:619
 msgid "Expanding Your Territory!"
@@ -1048,13 +1048,13 @@ msgid ""
 "This concludes the first tutorial. In order to learn more about the game, I "
 "suggest to play one of the other tutorials. Each of them covers a different "
 "topic."
-msgstr "첫 튜토리얼을 마무리하겠습니다. 게임에 대해 더 많이 알고 싶으면, 다른 튜토리얼 중 하나를 플레이할 것을 권합니다. 각 튜토리얼은 다른 주제를 다룹니다."
+msgstr "첫 자습서를 마무리하겠습니다. 게임에 대해 더 많이 알고 싶으면, 다른 자습서 중 하나를 해볼 것을 권합니다. 각 자습서는 다른 주제를 다룹니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:650
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
-msgstr "하지만, Widelands를 제어하는 방법에 대해 알고 싶다면, 게임을 한 번 시작하시고 (아니면 이걸 계속 하거나) 스스로 더 많이 알아갈 수 있습니다."
+msgstr "하지만, 와이드랜드를 제어하는 방법에 대해 알고 싶다면, 게임을 한 번 시작하시고 (아니면 이걸 계속 하거나) 스스로 더 많이 알아갈 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:651
 msgid "To leave this game and return to the main menu:"
@@ -1074,4 +1074,4 @@ msgstr "그런 다음 ‘놀이 끝내기’ 항목을 누르십시오."
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
-msgstr "튜토리얼을 플레이해주셔서 감사합니다. Widelands를 즐기시고 한 번 방문해 주세요."
+msgstr "자습서를 실행 해주셔서 감사합니다. 와이드랜드를 즐기시고 한 번 방문해 주세요."
