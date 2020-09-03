@@ -241,8 +241,13 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
      main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     inner_teams_box_(
-        &teams_box_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h() / 2),
+     inner_teams_box_(&teams_box_,
+                      padding_,
+                      padding_,
+                      UI::Box::Vertical,
+                      max_w_,
+                      get_inner_h() / 2,
+                      kSuggestedTeamsUnitSize),
 
      name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
@@ -349,16 +354,17 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	teams_box_.add(new UI::Textarea(
 	   &teams_box_, 0, 0, max_w_, labelh_,
 	   (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str()));
-	teams_box_.add_space(4);
+	teams_box_.add_space(padding_);
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")));
+	teams_box_.add_space(padding_);
 	teams_box_.add(&inner_teams_box_, UI::Box::Resizing::kFullSize);
+	teams_box_.add_space(padding_);
 	teams_box_.add(&new_suggested_team_, UI::Box::Resizing::kFullSize);
 	new_suggested_team_.sigclicked.connect([this]() {
 		SuggestedTeamsEntry* ste =
 		   new SuggestedTeamsEntry(this, &inner_teams_box_, eia().egbase().map(),
 		                           max_w_ - UI::Scrollbar::kSize, Widelands::SuggestedTeamLineup());
 		inner_teams_box_.add(ste);
-		inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
 		suggested_teams_entries_.push_back(ste);
 	});
 
@@ -490,22 +496,11 @@ void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
 
 void MainMenuMapOptions::delete_suggested_team(SuggestedTeamsEntry* ste) {
 	inner_teams_box_.set_force_scrolling(false);
-	inner_teams_box_.clear();
-	const size_t nr = suggested_teams_entries_.size();
-	for (size_t i = 0; i < nr; ++i) {
-		if (suggested_teams_entries_[i] == ste) {
-			for (size_t j = i + 1; j < nr; ++j) {
-				inner_teams_box_.add(suggested_teams_entries_[j]);
-				inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
-				suggested_teams_entries_[j - 1] = suggested_teams_entries_[j];
-			}
-			suggested_teams_entries_.resize(nr - 1);
-			inner_teams_box_.set_force_scrolling(true);
-			return ste->die();
-		} else {
-			inner_teams_box_.add(suggested_teams_entries_[i]);
-			inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
-		}
-	}
-	NEVER_HERE();
+
+	auto is_deleted_panel = [ste](SuggestedTeamsEntry* i) { return ste == i; };
+	suggested_teams_entries_.erase(std::remove_if(suggested_teams_entries_.begin(),
+	                                              suggested_teams_entries_.end(), is_deleted_panel),
+	                               suggested_teams_entries_.end());
+	ste->die();
+	inner_teams_box_.set_force_scrolling(true);
 }
