@@ -25,8 +25,9 @@
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/ferry.h"
@@ -38,13 +39,12 @@
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/immovable.h"
 
 namespace Widelands {
 Descriptions::Descriptions(DescriptionManager* description_manager, LuaInterface* lua)
