@@ -2347,8 +2347,8 @@ const PropertyType<LuaBuildingDescription> LuaBuildingDescription::Properties[] 
    PROP_RO(LuaBuildingDescription, is_mine),
    PROP_RO(LuaBuildingDescription, is_port),
    PROP_RO(LuaBuildingDescription, size),
-   PROP_RO(LuaBuildingDescription, returned_wares),
-   PROP_RO(LuaBuildingDescription, returned_wares_enhanced),
+   PROP_RO(LuaBuildingDescription, returns_on_dismantle),
+   PROP_RO(LuaBuildingDescription, enhancement_returns_on_dismantle),
    PROP_RO(LuaBuildingDescription, vision_range),
    PROP_RO(LuaBuildingDescription, workarea_radius),
    {nullptr, nullptr, nullptr},
@@ -2502,21 +2502,22 @@ int LuaBuildingDescription::get_size(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: returned_wares
+   .. attribute:: returns_on_dismantle
 
          (RO) a list of wares returned upon dismantling.
 */
-int LuaBuildingDescription::get_returned_wares(lua_State* L) {
-	return wares_or_workers_map_to_lua(L, get()->returned_wares(), MapObjectType::WARE);
+int LuaBuildingDescription::get_returns_on_dismantle(lua_State* L) {
+	return wares_or_workers_map_to_lua(L, get()->returns_on_dismantle(), MapObjectType::WARE);
 }
 
 /* RST
-   .. attribute:: returned_wares_enhanced
+   .. attribute:: enhancement_returns_on_dismantle
 
          (RO) a list of wares returned upon dismantling an enhanced building.
 */
-int LuaBuildingDescription::get_returned_wares_enhanced(lua_State* L) {
-	return wares_or_workers_map_to_lua(L, get()->returned_wares_enhanced(), MapObjectType::WARE);
+int LuaBuildingDescription::get_enhancement_returns_on_dismantle(lua_State* L) {
+	return wares_or_workers_map_to_lua(
+	   L, get()->enhancement_returns_on_dismantle(), MapObjectType::WARE);
 }
 
 /* RST

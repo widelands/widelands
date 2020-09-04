@@ -21,6 +21,7 @@
 #define WL_UI_BASIC_PANEL_H
 
 #include <deque>
+#include <vector>
 
 #include <SDL_keyboard.h>
 #include <boost/signals2/signal.hpp>
@@ -330,7 +331,7 @@ protected:
 
 	virtual bool is_focus_toplevel() const;
 
-	virtual Recti focus_overlay_rect();
+	virtual std::vector<Recti> focus_overlay_rects();
 
 private:
 	bool handles_mouse() const {
@@ -352,6 +353,8 @@ private:
 	}
 
 	void check_child_death();
+	virtual void on_death(Panel* p);
+	virtual void on_visibility_changed();
 
 	friend class Window;
 	void do_draw(RenderTarget&);

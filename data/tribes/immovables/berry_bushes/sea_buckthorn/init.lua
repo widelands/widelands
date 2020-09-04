@@ -13,7 +13,6 @@ tribes:new_immovable_type {
    name = "berry_bush_sea_buckthorn_tiny",
    descname = _ "Sea Buckthorn (tiny)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "tiny/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -38,7 +37,6 @@ tribes:new_immovable_type {
    name = "berry_bush_sea_buckthorn_small",
    descname = _ "Sea Buckthorn (small)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "small/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -63,7 +61,6 @@ tribes:new_immovable_type {
    name = "berry_bush_sea_buckthorn_medium",
    descname = _ "Sea Buckthorn (medium)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "medium/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -88,7 +85,6 @@ tribes:new_immovable_type {
    name = "berry_bush_sea_buckthorn_ripe",
    descname = _ "Sea Buckthorn (ripe)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "ripe/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {

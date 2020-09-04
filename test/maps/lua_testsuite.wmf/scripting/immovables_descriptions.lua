@@ -245,7 +245,7 @@ function test_descr:test_isport()
    assert_equal(true, egbase:get_building_description("barbarians_port").is_port)
 end
 
-function test_descr:test_returned_wares()
+function test_descr:test_returns_on_dismantle()
    local total_cost = function(t)
       local cost = 0
       for name, count in pairs(t) do
@@ -253,12 +253,12 @@ function test_descr:test_returned_wares()
       end
       return cost
    end
-   assert_equal(1, total_cost(egbase:get_building_description("barbarians_sentry").returned_wares))
-   assert_equal(9, total_cost(egbase:get_building_description("barbarians_fortress").returned_wares))
-   assert_equal(0, total_cost(egbase:get_building_description("barbarians_citadel").returned_wares))
+   assert_equal(1, total_cost(egbase:get_building_description("barbarians_sentry").returns_on_dismantle))
+   assert_equal(9, total_cost(egbase:get_building_description("barbarians_fortress").returns_on_dismantle))
+   assert_equal(0, total_cost(egbase:get_building_description("barbarians_citadel").returns_on_dismantle))
 end
 
-function test_descr:test_returned_wares_enhanced()
+function test_descr:test_enhancement_returns_on_dismantle()
    local total_cost = function(t)
       local cost = 0
       for name, count in pairs(t) do
@@ -266,9 +266,9 @@ function test_descr:test_returned_wares_enhanced()
       end
       return cost
    end
-   assert_equal(0, total_cost(egbase:get_building_description("barbarians_sentry").returned_wares_enhanced))
-   assert_equal(0, total_cost(egbase:get_building_description("barbarians_fortress").returned_wares_enhanced))
-   assert_equal(10, total_cost(egbase:get_building_description("barbarians_citadel").returned_wares_enhanced))
+   assert_equal(0, total_cost(egbase:get_building_description("barbarians_sentry").enhancement_returns_on_dismantle))
+   assert_equal(0, total_cost(egbase:get_building_description("barbarians_fortress").enhancement_returns_on_dismantle))
+   assert_equal(10, total_cost(egbase:get_building_description("barbarians_citadel").enhancement_returns_on_dismantle))
 end
 
 function test_descr:test_size()
