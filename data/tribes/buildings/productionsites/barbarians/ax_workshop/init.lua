@@ -8,19 +8,21 @@ tribes:new_productionsite_type {
    descname = pgettext("barbarians_building", "Ax Workshop"),
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "barbarians_warmill",
 
-   enhancement_cost = {
-      log = 1,
-      blackwood = 1,
-      granite = 2,
-      grout = 1,
-      reed = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      blackwood = 1,
-      granite = 1,
-      grout = 1
+   enhancement = {
+      name = "barbarians_warmill",
+      enhancement_cost = {
+         log = 1,
+         blackwood = 1,
+         granite = 2,
+         grout = 1,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         blackwood = 1,
+         granite = 1,
+         grout = 1
+      }
    },
 
    animations = {
