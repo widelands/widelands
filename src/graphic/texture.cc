@@ -159,7 +159,11 @@ Texture::Texture(const GLuint texture, const Recti& subrect, int parent_w, int p
 
 Texture::~Texture() {
 	if (owns_texture_) {
-		Gl::State::instance().delete_texture(blit_data_.texture_id);
+		const uint32_t id = blit_data_.texture_id;
+		// must not capture `this` as we are in the destructor…
+		NoteDelayedCheck::instantiate(nullptr, [id]() {
+			Gl::State::instance().delete_texture(id);
+		});
 	}
 }
 
