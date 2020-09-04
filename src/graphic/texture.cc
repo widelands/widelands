@@ -161,9 +161,7 @@ Texture::~Texture() {
 	if (owns_texture_) {
 		const uint32_t id = blit_data_.texture_id;
 		// must not capture `this` as we are in the destructor…
-		NoteDelayedCheck::instantiate(nullptr, [id]() {
-			Gl::State::instance().delete_texture(id);
-		});
+		NoteDelayedCheck::instantiate(nullptr, [id]() { Gl::State::instance().delete_texture(id); });
 	}
 }
 
