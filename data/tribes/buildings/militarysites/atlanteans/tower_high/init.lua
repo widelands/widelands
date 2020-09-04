@@ -10,15 +10,6 @@ tribes:new_militarysite_type {
    size = "medium",
    vision_range = 21,
 
-   enhancement_cost = {
-      log = 1,
-      planks = 1,
-      granite = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      granite = 1
-   },
-
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),

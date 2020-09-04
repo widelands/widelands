@@ -468,8 +468,11 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 				if (code.sym != SDLK_SPACE) {
 					set_list_visibility(false);
 				}
-			} else {
+			} else if (code.sym == SDLK_SPACE) {
 				set_list_visibility(true);
+			} else {
+				// Handle Enter only if the list is open
+				return false;
 			}
 			return true;
 		case SDLK_ESCAPE:

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-23 15:23+0000\n"
-"PO-Revision-Date: 2020-07-23 07:47+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
+"PO-Revision-Date: 2020-08-29 17:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -413,6 +413,10 @@ msgstr "Спустя много лет после падения метеори�
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Пересекая горизонт"
+
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
+msgid "Kristin – edited by 3plus4i"
+msgstr ""
 
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
