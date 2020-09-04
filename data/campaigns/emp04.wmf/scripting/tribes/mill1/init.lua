@@ -7,7 +7,16 @@ tribes:new_productionsite_type {
    descname = pgettext("empire_building", "Mill"),
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "empire_mill2",
+
+   enhancement = {
+      name = "empire_mill",
+      enhancement_cost = {
+         log = 1,
+         granite = 1,
+         marble = 1
+      },
+      enhancement_return_on_dismantle = {}
+   },
 
    buildcost = {
       log = 3,

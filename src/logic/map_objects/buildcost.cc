@@ -29,10 +29,7 @@
 
 namespace Widelands {
 
-Buildcost::Buildcost() : std::map<DescriptionIndex, uint8_t>() {
-}
-
-Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Descriptions& descriptions)
+Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Widelands::Descriptions& descriptions)
    : std::map<DescriptionIndex, uint8_t>() {
 	for (const std::string& warename : table->keys<std::string>()) {
 		int32_t value = INVALID_INDEX;

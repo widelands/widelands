@@ -35,7 +35,7 @@ class Descriptions;
 
 struct Buildcost : std::map<DescriptionIndex, uint8_t> {
 
-	Buildcost();
+	Buildcost() = default;
 	Buildcost(std::unique_ptr<LuaTable> table, Widelands::Descriptions& descriptions);
 
 	Quantity total() const;

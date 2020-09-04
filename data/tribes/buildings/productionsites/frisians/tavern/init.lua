@@ -8,7 +8,21 @@ tribes:new_productionsite_type {
    descname = pgettext ("frisians_building", "Tavern"),
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_drinking_hall",
+
+   enhancement = {
+      name = "frisians_drinking_hall",
+      enhancement_cost = {
+         brick = 1,
+         granite = 2,
+         log = 1,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         brick = 1,
+         granite = 1,
+         reed = 1
+      }
+   },
 
    buildcost = {
       brick = 3,
