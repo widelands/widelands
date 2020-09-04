@@ -8,7 +8,20 @@ tribes:new_productionsite_type {
    descname = pgettext("frisians_building", "Small Armor Smithy"),
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_armor_smithy_large",
+
+   enhancement = {
+      name = "frisians_armor_smithy_large",
+      enhancement_cost = {
+         brick = 2,
+         granite = 1,
+         log = 1,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         brick = 2,
+         granite = 1
+      }
+   },
 
    buildcost = {
       brick = 3,

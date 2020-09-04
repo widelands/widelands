@@ -8,7 +8,20 @@ tribes:new_militarysite_type {
    descname = pgettext("empire_building", "Outpost"),
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "empire_barrier",
+
+   enhancement = {
+      name = "empire_barrier",
+      enhancement_cost = {
+         log = 1,
+         planks = 2,
+         granite = 1,
+         marble = 1
+      },
+      enhancement_return_on_dismantle = {
+         planks = 1,
+         granite = 1
+      }
+   },
 
    buildcost = {
       log = 1,

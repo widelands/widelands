@@ -300,8 +300,8 @@ public:
 	int get_is_port(lua_State*);
 	int get_size(lua_State*);
 	int get_isproductionsite(lua_State*);
-	int get_returned_wares(lua_State*);
-	int get_returned_wares_enhanced(lua_State*);
+	int get_returns_on_dismantle(lua_State*);
+	int get_enhancement_returns_on_dismantle(lua_State*);
 	int get_vision_range(lua_State*);
 	int get_workarea_radius(lua_State*);
 
