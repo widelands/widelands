@@ -224,7 +224,7 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 		std::regex without_unit("^(\\d+)$");
 		if (std::regex_match(input, without_unit)) {
 			log_warn("Duration '%s' without unit in %s's program is deprecated", input.c_str(),
-			    descr.name().c_str());
+			         descr.name().c_str());
 			return read_positive(input, endless());
 		}
 	} catch (const WException& e) {
