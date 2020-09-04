@@ -129,7 +129,7 @@ protected:
 
 	UI::TabPanelStyle style_;
 
-	Recti focus_overlay_rect() override;
+	std::vector<Recti> focus_overlay_rects() override;
 
 private:
 	// Common adding function for textual and pictorial tabs
