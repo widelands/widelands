@@ -27,7 +27,7 @@
 #include "scripting/lua_interface.h"
 
 namespace Widelands {
-
+// NOCOM seleting AIs makes dropdowns disappear in Multiplayer setup
 TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
    : name(table->get_string("name")),
      icon(table->get_string("icon")),
