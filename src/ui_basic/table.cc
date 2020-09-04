@@ -222,6 +222,32 @@ void Table<void*>::fit_height(uint32_t entries) {
 	set_desired_size(tablewidth, tableheight);
 }
 
+std::vector<Recti> Table<void*>::focus_overlay_rects() {
+	if (!has_selection()) {
+		return Panel::focus_overlay_rects();
+	}
+	const int f = g_style_manager->focus_border_thickness();
+	const int32_t w = get_eff_w();
+	const int32_t lineheight = get_lineheight();
+	int32_t y = headerheight_ + lineheight * selection_index() - scrollpos_;
+	int32_t h = lineheight;
+	if (y < static_cast<int>(headerheight_)) {
+		h -= (headerheight_ - y);
+		y = headerheight_;
+		if (h < f) {
+			return Panel::focus_overlay_rects();
+		}
+	}
+	if (y + h > get_h()) {
+		h -= (y + h - get_h());
+		if (h < f) {
+			return Panel::focus_overlay_rects();
+		}
+	}
+	return {Recti(0, y, w, f), Recti(0, y + h - f, w, f), Recti(0, y + f, f, h - 2 * f),
+	        Recti(w - f, y + f, f, h - 2 * f)};
+}
+
 /**
  * Redraw the table
  */

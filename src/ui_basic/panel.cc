@@ -536,8 +536,15 @@ void Panel::draw(RenderTarget&) {
 void Panel::draw_border(RenderTarget&) {
 }
 
-Recti Panel::focus_overlay_rect() {
-	return Recti(0, 0, get_w(), get_h());
+std::vector<Recti> Panel::focus_overlay_rects() {
+	const int f = g_style_manager->focus_border_thickness();
+	const int16_t w = get_w();
+	const int16_t h = get_h();
+	if (w < 2 * f || h < 2 * f) {
+		return {Recti(0, 0, w, h)};
+	}
+	return {Recti(0, 0, w, f), Recti(0, h - f, w, f), Recti(0, f, f, h - 2 * f),
+	        Recti(w - f, f, f, h - 2 * f)};
 }
 
 /**
@@ -546,17 +553,17 @@ Recti Panel::focus_overlay_rect() {
  */
 void Panel::draw_overlay(RenderTarget& dst) {
 	if (has_focus()) {
-		bool has_toplevel_focus = (focus_ == nullptr);
 		for (Panel* p = this; p->parent_; p = p->parent_) {
 			if (p->parent_->focus_ != p) {
-				has_toplevel_focus = false;
-				break;
+				// doesn't have toplevel focus
+				return;
 			}
 		}
-		dst.fill_rect(focus_overlay_rect(),
-		              has_toplevel_focus ? g_style_manager->focused_color() :
-		                                   g_style_manager->semi_focused_color(),
-		              BlendMode::Default);
+		for (const Recti& r : focus_overlay_rects()) {
+			dst.fill_rect(
+			   r, focus_ ? g_style_manager->semi_focused_color() : g_style_manager->focused_color(),
+			   BlendMode::Default);
+		}
 	}
 }
 

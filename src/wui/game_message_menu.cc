@@ -146,8 +146,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	list->set_sort_column(ColTimeSent);
 	list->layout();
 
-	set_can_focus(true);
-	focus();
+	list->focus();
 }
 
 /**
