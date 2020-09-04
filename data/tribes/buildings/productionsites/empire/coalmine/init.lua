@@ -8,7 +8,18 @@ tribes:new_productionsite_type {
    descname = pgettext("empire_building", "Coal Mine"),
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "empire_coalmine_deep",
+
+   enhancement = {
+      name = "empire_coalmine_deep",
+      enhancement_cost = {
+         log = 4,
+         planks = 2
+      },
+      enhancement_return_on_dismantle = {
+         log = 2,
+         planks = 1
+      }
+   },
 
    buildcost = {
       log = 4,
