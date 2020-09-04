@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-04-20 15:37+0000\n"
-"Last-Translator: Teppo Mäenpää <teppo@runbox.com>\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
+"PO-Revision-Date: 2020-08-29 17:32+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,188 +21,193 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/world/critters/badger/init.lua:95
+#: ../../data/world/critters/badger/init.lua:80
 msgid "Badger"
 msgstr "Mäyrä"
 
-#: ../../data/world/critters/brownbear/init.lua:21
+#: ../../data/world/critters/brownbear/init.lua:3
 msgid "Brown bear"
 msgstr "Karhu"
 
-#: ../../data/world/critters/bunny/init.lua:19
+#: ../../data/world/critters/bunny/init.lua:3
 msgid "Bunny"
 msgstr "Jänis"
 
-#: ../../data/world/critters/chamois/init.lua:21
+#: ../../data/world/critters/chamois/init.lua:3
 msgid "Chamois"
 msgstr "Vuorikauris"
 
-#: ../../data/world/critters/deer/init.lua:21
+#: ../../data/world/critters/deer/init.lua:3
 msgid "Deer"
 msgstr "Peura"
 
-#: ../../data/world/critters/duck/init.lua:19
+#: ../../data/world/critters/duck/init.lua:5
 msgid "Duck"
 msgstr "Ankka"
 
-#: ../../data/world/critters/fox/init.lua:25
+#: ../../data/world/critters/fox/init.lua:3
 msgid "Fox"
 msgstr "Kettu"
 
-#: ../../data/world/critters/lynx/init.lua:22
+#: ../../data/world/critters/lynx/init.lua:3
 msgid "Lynx"
 msgstr "Ilves"
 
-#: ../../data/world/critters/marten/init.lua:21
+#: ../../data/world/critters/marten/init.lua:3
 msgid "Marten"
 msgstr "Näätä"
 
-#: ../../data/world/critters/moose/init.lua:25
+#: ../../data/world/critters/moose/init.lua:3
 msgid "Moose"
 msgstr "Hirvi"
 
-#: ../../data/world/critters/reindeer/init.lua:22
+#: ../../data/world/critters/reindeer/init.lua:3
 msgid "Reindeer"
 msgstr "Poro"
 
-#: ../../data/world/critters/sheep/init.lua:25
+#: ../../data/world/critters/sheep/init.lua:3
 msgid "Sheep"
 msgstr "Lammas"
 
-#: ../../data/world/critters/stag/init.lua:25
+#: ../../data/world/critters/stag/init.lua:3
 msgid "Stag"
 msgstr "Uroshirvi"
 
-#: ../../data/world/critters/wildboar/init.lua:25
+#: ../../data/world/critters/wildboar/init.lua:3
 msgid "Wild boar"
 msgstr "Villisika"
 
-#: ../../data/world/critters/wisent/init.lua:21
+#: ../../data/world/critters/wisent/init.lua:3
 msgid "Wisent"
 msgstr "Visentti"
 
-#: ../../data/world/critters/wolf/init.lua:26
+#: ../../data/world/critters/wolf/init.lua:3
 msgid "Wolf"
 msgstr "Susi"
 
-#: ../../data/world/immovables/bush1/init.lua:105
-#: ../../data/world/immovables/bush2/init.lua:5
-#: ../../data/world/immovables/bush3/init.lua:5
-#: ../../data/world/immovables/bush4/init.lua:5
-#: ../../data/world/immovables/bush5/init.lua:5
-msgid "Bush"
-msgstr "Pensas"
-
-#: ../../data/world/immovables/cactus1/init.lua:5
-#: ../../data/world/immovables/cactus2/init.lua:5
-#: ../../data/world/immovables/cactus3/init.lua:5
-#: ../../data/world/immovables/cactus4/init.lua:5
-msgid "Cactus"
-msgstr "Kaktus"
-
-#: ../../data/world/immovables/grass1/init.lua:5
-#: ../../data/world/immovables/grass2/init.lua:5
-#: ../../data/world/immovables/grass3/init.lua:5
-msgid "Grass"
-msgstr "Ruohoa"
-
-#: ../../data/world/immovables/manmade/artifacts/artifact00/init.lua:5
-#: ../../data/world/immovables/manmade/artifacts/artifact01/init.lua:5
-#: ../../data/world/immovables/manmade/artifacts/artifact02/init.lua:5
-#: ../../data/world/immovables/manmade/artifacts/artifact03/init.lua:5
+#: ../../data/world/immovables/artifacts/artifact00/init.lua:147
+#: ../../data/world/immovables/artifacts/artifact01/init.lua:5
+#: ../../data/world/immovables/artifacts/artifact02/init.lua:5
+#: ../../data/world/immovables/artifacts/artifact03/init.lua:5
 msgid "Artifact"
 msgstr "Maamerkki"
 
-#: ../../data/world/immovables/manmade/bar-ruin00/init.lua:5
-#: ../../data/world/immovables/manmade/bar-ruin01/init.lua:5
-#: ../../data/world/immovables/manmade/bar-ruin02/init.lua:5
-#: ../../data/world/immovables/manmade/bar-ruin03/init.lua:5
-#: ../../data/world/immovables/ruin1/init.lua:5
-#: ../../data/world/immovables/ruin2/init.lua:5
+#: ../../data/world/immovables/miscellaneous/bar-ruin00/init.lua:5
+#: ../../data/world/immovables/miscellaneous/bar-ruin01/init.lua:5
+#: ../../data/world/immovables/miscellaneous/bar-ruin02/init.lua:5
+#: ../../data/world/immovables/miscellaneous/bar-ruin03/init.lua:5
+#: ../../data/world/immovables/miscellaneous/ruin1/init.lua:5
+#: ../../data/world/immovables/miscellaneous/ruin2/init.lua:5
 msgid "Ruin"
 msgstr "Raunio"
 
-#: ../../data/world/immovables/manmade/debris00/init.lua:5
-#: ../../data/world/immovables/manmade/debris01/init.lua:5
-#: ../../data/world/immovables/manmade/debris02/init.lua:5
+#: ../../data/world/immovables/miscellaneous/debris00/init.lua:5
+#: ../../data/world/immovables/miscellaneous/debris01/init.lua:5
+#: ../../data/world/immovables/miscellaneous/debris02/init.lua:5
 msgid "Debris"
 msgstr "Roskaa"
 
-#: ../../data/world/immovables/manmade/snowman/init.lua:5
-msgid "Snowman"
-msgstr "Lumiukko"
-
-#: ../../data/world/immovables/mushroom1/init.lua:5
-#: ../../data/world/immovables/mushroom2/init.lua:5
+#: ../../data/world/immovables/miscellaneous/mushroom1/init.lua:5
+#: ../../data/world/immovables/miscellaneous/mushroom2/init.lua:5
 msgid "Mushroom"
 msgstr "Sieni"
 
-#: ../../data/world/immovables/pebble1/init.lua:5
-#: ../../data/world/immovables/pebble2/init.lua:5
-#: ../../data/world/immovables/pebble3/init.lua:5
-#: ../../data/world/immovables/pebble4/init.lua:5
-#: ../../data/world/immovables/pebble5/init.lua:5
-#: ../../data/world/immovables/pebble6/init.lua:5
+#: ../../data/world/immovables/miscellaneous/pebble1/init.lua:5
+#: ../../data/world/immovables/miscellaneous/pebble2/init.lua:5
+#: ../../data/world/immovables/miscellaneous/pebble3/init.lua:5
+#: ../../data/world/immovables/miscellaneous/pebble4/init.lua:5
+#: ../../data/world/immovables/miscellaneous/pebble5/init.lua:5
+#: ../../data/world/immovables/miscellaneous/pebble6/init.lua:5
 msgid "Pebble"
 msgstr "Sora"
 
-#: ../../data/world/immovables/rocks/blackland_rocks1/init.lua:12
-#: ../../data/world/immovables/rocks/desert_rocks1/init.lua:12
-#: ../../data/world/immovables/rocks/greenland_rocks1/init.lua:12
-#: ../../data/world/immovables/rocks/winterland_rocks1/init.lua:12
-msgid "Rocks 1"
-msgstr "Kivikko 1"
-
-#: ../../data/world/immovables/rocks/blackland_rocks2/init.lua:12
-#: ../../data/world/immovables/rocks/desert_rocks2/init.lua:12
-#: ../../data/world/immovables/rocks/greenland_rocks2/init.lua:12
-#: ../../data/world/immovables/rocks/winterland_rocks2/init.lua:12
-msgid "Rocks 2"
-msgstr "Kivikko 2"
-
-#: ../../data/world/immovables/rocks/blackland_rocks3/init.lua:12
-#: ../../data/world/immovables/rocks/desert_rocks3/init.lua:12
-#: ../../data/world/immovables/rocks/greenland_rocks3/init.lua:12
-#: ../../data/world/immovables/rocks/winterland_rocks3/init.lua:12
-msgid "Rocks 3"
-msgstr "Kivikko 3"
-
-#: ../../data/world/immovables/rocks/blackland_rocks4/init.lua:12
-#: ../../data/world/immovables/rocks/desert_rocks4/init.lua:12
-#: ../../data/world/immovables/rocks/greenland_rocks4/init.lua:12
-#: ../../data/world/immovables/rocks/winterland_rocks4/init.lua:12
-msgid "Rocks 4"
-msgstr "Kivikko 4"
-
-#: ../../data/world/immovables/rocks/blackland_rocks5/init.lua:12
-#: ../../data/world/immovables/rocks/desert_rocks5/init.lua:12
-#: ../../data/world/immovables/rocks/greenland_rocks5/init.lua:12
-#: ../../data/world/immovables/rocks/winterland_rocks5/init.lua:12
-msgid "Rocks 5"
-msgstr "Kivikko 5"
-
-#: ../../data/world/immovables/rocks/blackland_rocks6/init.lua:12
-#: ../../data/world/immovables/rocks/desert_rocks6/init.lua:12
-#: ../../data/world/immovables/rocks/greenland_rocks6/init.lua:12
-#: ../../data/world/immovables/rocks/winterland_rocks6/init.lua:12
-msgid "Rocks 6"
-msgstr "Kivikko 6"
-
-#: ../../data/world/immovables/ruin3/init.lua:5
-#: ../../data/world/immovables/ruin4/init.lua:5
-#: ../../data/world/immovables/ruin5/init.lua:5
+#: ../../data/world/immovables/miscellaneous/ruin3/init.lua:5
+#: ../../data/world/immovables/miscellaneous/ruin4/init.lua:5
+#: ../../data/world/immovables/miscellaneous/ruin5/init.lua:5
 msgid "Tombstone"
 msgstr "Hautakivi"
 
-#: ../../data/world/immovables/skeleton1/init.lua:5
-#: ../../data/world/immovables/skeleton3/init.lua:5
+#: ../../data/world/immovables/miscellaneous/skeleton1/init.lua:5
+#: ../../data/world/immovables/miscellaneous/skeleton3/init.lua:5
 msgid "Skeleton"
 msgstr "Luuranko"
 
-#: ../../data/world/immovables/skeleton2/init.lua:5
-#: ../../data/world/immovables/skeleton4/init.lua:5
+#: ../../data/world/immovables/miscellaneous/skeleton2/init.lua:5
+#: ../../data/world/immovables/miscellaneous/skeleton4/init.lua:5
 msgid "Seashell"
 msgstr "Simpukankuori"
+
+#: ../../data/world/immovables/miscellaneous/snowman/init.lua:5
+msgid "Snowman"
+msgstr "Lumiukko"
+
+#. TRANSLATORS: This track is made of footprints in the snow
+#: ../../data/world/immovables/miscellaneous/track_winter/init.lua:6
+msgid "Track"
+msgstr "Jälki"
+
+#: ../../data/world/immovables/plants/bush1/init.lua:5
+#: ../../data/world/immovables/plants/bush2/init.lua:5
+#: ../../data/world/immovables/plants/bush3/init.lua:5
+#: ../../data/world/immovables/plants/bush4/init.lua:5
+#: ../../data/world/immovables/plants/bush5/init.lua:5
+msgid "Bush"
+msgstr "Pensas"
+
+#: ../../data/world/immovables/plants/cactus1/init.lua:5
+#: ../../data/world/immovables/plants/cactus2/init.lua:5
+#: ../../data/world/immovables/plants/cactus3/init.lua:5
+#: ../../data/world/immovables/plants/cactus4/init.lua:5
+msgid "Cactus"
+msgstr "Kaktus"
+
+#: ../../data/world/immovables/plants/grass1/init.lua:5
+#: ../../data/world/immovables/plants/grass2/init.lua:5
+#: ../../data/world/immovables/plants/grass3/init.lua:5
+msgid "Grass"
+msgstr "Ruohoa"
+
+#: ../../data/world/immovables/rocks/blackland/init.lua:5
+#: ../../data/world/immovables/rocks/desert/init.lua:5
+#: ../../data/world/immovables/rocks/greenland/init.lua:5
+#: ../../data/world/immovables/rocks/winterland/init.lua:5
+msgid "Rocks 1"
+msgstr "Kivikko 1"
+
+#: ../../data/world/immovables/rocks/blackland/init.lua:23
+#: ../../data/world/immovables/rocks/desert/init.lua:23
+#: ../../data/world/immovables/rocks/greenland/init.lua:23
+#: ../../data/world/immovables/rocks/winterland/init.lua:23
+msgid "Rocks 2"
+msgstr "Kivikko 2"
+
+#: ../../data/world/immovables/rocks/blackland/init.lua:41
+#: ../../data/world/immovables/rocks/desert/init.lua:41
+#: ../../data/world/immovables/rocks/greenland/init.lua:41
+#: ../../data/world/immovables/rocks/winterland/init.lua:41
+msgid "Rocks 3"
+msgstr "Kivikko 3"
+
+#: ../../data/world/immovables/rocks/blackland/init.lua:59
+#: ../../data/world/immovables/rocks/desert/init.lua:59
+#: ../../data/world/immovables/rocks/greenland/init.lua:59
+#: ../../data/world/immovables/rocks/winterland/init.lua:59
+msgid "Rocks 4"
+msgstr "Kivikko 4"
+
+#: ../../data/world/immovables/rocks/blackland/init.lua:77
+#: ../../data/world/immovables/rocks/desert/init.lua:77
+#: ../../data/world/immovables/rocks/greenland/init.lua:77
+#: ../../data/world/immovables/rocks/winterland/init.lua:77
+msgid "Rocks 5"
+msgstr "Kivikko 5"
+
+#: ../../data/world/immovables/rocks/blackland/init.lua:95
+#: ../../data/world/immovables/rocks/desert/init.lua:95
+#: ../../data/world/immovables/rocks/greenland/init.lua:95
+#: ../../data/world/immovables/rocks/winterland/init.lua:95
+msgid "Rocks 6"
+msgstr "Kivikko 6"
 
 #: ../../data/world/immovables/standing_stones/standing_stone1_desert/init.lua:5
 #: ../../data/world/immovables/standing_stones/standing_stone1_summer/init.lua:5
@@ -229,28 +234,23 @@ msgstr "Simpukankuori"
 msgid "Standing Stone"
 msgstr "Pystykivi"
 
-#. TRANSLATORS: This track is made of footprints in the snow
-#: ../../data/world/immovables/track_winter/init.lua:6
-msgid "Track"
-msgstr "Jälki"
-
 #: ../../data/world/immovables/trees/alder/init.lua:20
 msgid "Alder (Sapling)"
 msgstr "Leppä (Taimi)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:47
+#: ../../data/world/immovables/trees/alder/init.lua:45
 msgid "Alder (Pole)"
 msgstr "Leppä (Nuori)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:74
+#: ../../data/world/immovables/trees/alder/init.lua:70
 msgid "Alder (Mature)"
 msgstr "Leppä (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:101
+#: ../../data/world/immovables/trees/alder/init.lua:95
 msgid "Alder (Old)"
 msgstr "Leppä (Vanha)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:102
+#: ../../data/world/immovables/trees/alder/init.lua:96
 msgid "Alder"
 msgstr "Leppä"
 
@@ -258,19 +258,19 @@ msgstr "Leppä"
 msgid "Aspen (Sapling)"
 msgstr "Haapa (Taimi)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:39
+#: ../../data/world/immovables/trees/aspen/init.lua:37
 msgid "Aspen (Pole)"
 msgstr "Haapa (Nuori)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:66
+#: ../../data/world/immovables/trees/aspen/init.lua:62
 msgid "Aspen (Mature)"
 msgstr "Haapa (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:96
+#: ../../data/world/immovables/trees/aspen/init.lua:90
 msgid "Aspen (Old)"
 msgstr "Haapa (Vanha)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:97
+#: ../../data/world/immovables/trees/aspen/init.lua:91
 msgid "Aspen"
 msgstr "Haapa"
 
@@ -278,19 +278,19 @@ msgstr "Haapa"
 msgid "Beech (Sapling)"
 msgstr "Pyökki (Taimi)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:39
+#: ../../data/world/immovables/trees/beech/init.lua:37
 msgid "Beech (Pole)"
 msgstr "Pyökki (Nuori)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:66
+#: ../../data/world/immovables/trees/beech/init.lua:62
 msgid "Beech (Mature)"
 msgstr "Pyökki (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:93
+#: ../../data/world/immovables/trees/beech/init.lua:87
 msgid "Beech (Old)"
 msgstr "Pyökki (Vanha)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:94
+#: ../../data/world/immovables/trees/beech/init.lua:88
 msgid "Beech"
 msgstr "Pyökki"
 
@@ -298,19 +298,19 @@ msgstr "Pyökki"
 msgid "Birch (Sapling)"
 msgstr "Koivu (Taimi)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:39
+#: ../../data/world/immovables/trees/birch/init.lua:37
 msgid "Birch (Pole)"
 msgstr "Koivu (Nuori)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:66
+#: ../../data/world/immovables/trees/birch/init.lua:62
 msgid "Birch (Mature)"
 msgstr "Koivu (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:96
+#: ../../data/world/immovables/trees/birch/init.lua:90
 msgid "Birch (Old)"
 msgstr "Koivu (Vanha)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:97
+#: ../../data/world/immovables/trees/birch/init.lua:91
 msgid "Birch"
 msgstr "Koivu"
 
@@ -320,22 +320,22 @@ msgid "Cirrus Tree (Sapling)"
 msgstr "Kuitupuu (Taimi)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:41
+#: ../../data/world/immovables/trees/cirrus/init.lua:39
 msgid "Cirrus Tree (Pole)"
 msgstr "Kuitupuu (Nuori)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:69
+#: ../../data/world/immovables/trees/cirrus/init.lua:65
 msgid "Cirrus Tree (Mature)"
 msgstr "Kuitupuu (Täysikasvuinen)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:97
+#: ../../data/world/immovables/trees/cirrus/init.lua:91
 msgid "Cirrus Tree (Old)"
 msgstr "Kuitupuu (Vanha)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:99
+#: ../../data/world/immovables/trees/cirrus/init.lua:93
 msgid "Cirrus Tree"
 msgstr "Kuitupuu"
 
@@ -348,7 +348,7 @@ msgstr "Kuitupuu"
 msgid "Dead Tree"
 msgstr "Kuollut puu"
 
-#: ../../data/world/immovables/trees/fallentree/init.lua:12
+#: ../../data/world/immovables/trees/fallentree/init.lua:3
 msgid "Fallen Tree"
 msgstr "Kaatunut puu"
 
@@ -356,19 +356,19 @@ msgstr "Kaatunut puu"
 msgid "Larch (Sapling)"
 msgstr "Lehtikuusi (Taimi)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:39
+#: ../../data/world/immovables/trees/larch/init.lua:37
 msgid "Larch (Pole)"
 msgstr "Lehtikuusi (Nuori)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:66
+#: ../../data/world/immovables/trees/larch/init.lua:62
 msgid "Larch (Mature)"
 msgstr "Lehtikuusi (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:93
+#: ../../data/world/immovables/trees/larch/init.lua:87
 msgid "Larch (Old)"
 msgstr "Lehtikuusi (Vanha)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:94
+#: ../../data/world/immovables/trees/larch/init.lua:88
 msgid "Larch"
 msgstr "Lehtikuusi"
 
@@ -378,22 +378,22 @@ msgid "Liana Tree (Sapling)"
 msgstr "Liaani Puu (Taimi)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:41
+#: ../../data/world/immovables/trees/liana/init.lua:39
 msgid "Liana Tree (Pole)"
 msgstr "Liaani Puu (Nuori)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:69
+#: ../../data/world/immovables/trees/liana/init.lua:65
 msgid "Liana Tree (Mature)"
 msgstr "Liaani Puu (Täysikasvuinen)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:100
+#: ../../data/world/immovables/trees/liana/init.lua:94
 msgid "Liana Tree (Old)"
 msgstr "Liaani Puu (Vanha)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:102
+#: ../../data/world/immovables/trees/liana/init.lua:96
 msgid "Liana Tree"
 msgstr "Liaani Puu"
 
@@ -401,19 +401,19 @@ msgstr "Liaani Puu"
 msgid "Maple (Sapling)"
 msgstr "Vaahtera (Taimi)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:39
+#: ../../data/world/immovables/trees/maple/init.lua:37
 msgid "Maple (Pole)"
 msgstr "Vaahtera (Nuori)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:66
+#: ../../data/world/immovables/trees/maple/init.lua:62
 msgid "Maple (Mature)"
 msgstr "Vaahtera (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:93
+#: ../../data/world/immovables/trees/maple/init.lua:87
 msgid "Maple (Old)"
 msgstr "Vaahtera (Vanha)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:94
+#: ../../data/world/immovables/trees/maple/init.lua:88
 msgid "Maple"
 msgstr "Vaahtera"
 
@@ -423,22 +423,22 @@ msgid "Dark Mushroom Tree (Sapling)"
 msgstr "Tumma Sienimäinen Puu (Taimi)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:41
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:39
 msgid "Dark Mushroom Tree (Pole)"
 msgstr "Tumma Sienimäinen Puu (Nuori)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:69
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:65
 msgid "Dark Mushroom Tree (Mature)"
 msgstr "Tumma Sienimäinen Puu (Täysikasvuinen)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:97
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:91
 msgid "Dark Mushroom Tree (Old)"
 msgstr "Tumma Sienimäinen Puu (Vanha)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:99
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:93
 msgid "Dark Mushroom Tree"
 msgstr "Tumma Sienimäinen Puu"
 
@@ -448,22 +448,22 @@ msgid "Green Mushroom Tree (Sapling)"
 msgstr "Vihreä Sienimäinen Puu (Taimi)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:41
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:39
 msgid "Green Mushroom Tree (Pole)"
 msgstr "Vihreä Sienimäinen Puu (Nuori)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:69
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:65
 msgid "Green Mushroom Tree (Mature)"
 msgstr "Vihreä Sienimäinen Puu (Täysikasvuinen)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:97
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:91
 msgid "Green Mushroom Tree (Old)"
 msgstr "Vihreä Sienimäinen Puu (Vanha)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:99
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:93
 msgid "Green Mushroom Tree"
 msgstr "Vihreä Sienimäinen Puu"
 
@@ -473,22 +473,22 @@ msgid "Red Mushroom Tree (Sapling)"
 msgstr "Punainen Sienimäinen Puu (Taimi)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:41
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:39
 msgid "Red Mushroom Tree (Pole)"
 msgstr "Punainen Sienimäinen Puu (Nuori)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:69
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:65
 msgid "Red Mushroom Tree (Mature)"
 msgstr "Punainen Sienimäinen Puu (Täysikasvuinen)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:100
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:94
 msgid "Red Mushroom Tree (Old)"
 msgstr "Punainen Sienimäinen Puu (Vanha)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:102
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:96
 msgid "Red Mushroom Tree"
 msgstr "Punainen Sienimäinen Puu"
 
@@ -496,19 +496,19 @@ msgstr "Punainen Sienimäinen Puu"
 msgid "Oak (Sapling)"
 msgstr "Tammi (Taimi)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:39
+#: ../../data/world/immovables/trees/oak/init.lua:37
 msgid "Oak (Pole)"
 msgstr "Tammi (Nuori)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:66
+#: ../../data/world/immovables/trees/oak/init.lua:62
 msgid "Oak (Mature)"
 msgstr "Tammi (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:93
+#: ../../data/world/immovables/trees/oak/init.lua:87
 msgid "Oak (Old)"
 msgstr "Tammi (Vanha)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:94
+#: ../../data/world/immovables/trees/oak/init.lua:88
 msgid "Oak"
 msgstr "Tammi"
 
@@ -516,19 +516,19 @@ msgstr "Tammi"
 msgid "Borassus Palm (Sapling)"
 msgstr "Palmyrapalmu (Taimi)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:39
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:37
 msgid "Borassus Palm (Pole)"
 msgstr "Palmyrapalmu (Nuori)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:66
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:62
 msgid "Borassus Palm (Mature)"
 msgstr "Palmyrapalmu (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:93
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:87
 msgid "Borassus Palm (Old)"
 msgstr "Palmyrapalmu (Vanha)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:94
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:88
 msgid "Borassus Palm"
 msgstr "Palmyrapalmu"
 
@@ -536,19 +536,19 @@ msgstr "Palmyrapalmu"
 msgid "Coconut Palm (Sapling)"
 msgstr "Kookospalmu (Taimi)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:39
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:37
 msgid "Coconut Palm (Pole)"
 msgstr "Kookospalmu (Nuori)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:66
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:62
 msgid "Coconut Palm (Mature)"
 msgstr "Kookospalmu (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:93
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:87
 msgid "Coconut Palm (Old)"
 msgstr "Kookospalmu (Vanha)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:94
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:88
 msgid "Coconut Palm"
 msgstr "Kookospalmu"
 
@@ -556,19 +556,19 @@ msgstr "Kookospalmu"
 msgid "Date Palm (Sapling)"
 msgstr "Taatelipalmu (Taimi)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:39
+#: ../../data/world/immovables/trees/palm_date/init.lua:37
 msgid "Date Palm (Pole)"
 msgstr "Taatelipalmu (Nuori)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:66
+#: ../../data/world/immovables/trees/palm_date/init.lua:62
 msgid "Date Palm (Mature)"
 msgstr "Taatelipalmu (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:96
+#: ../../data/world/immovables/trees/palm_date/init.lua:90
 msgid "Date Palm (Old)"
 msgstr "Taatelipalmu (Vanha)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:97
+#: ../../data/world/immovables/trees/palm_date/init.lua:91
 msgid "Date Palm"
 msgstr "Taatelipalmu"
 
@@ -576,19 +576,19 @@ msgstr "Taatelipalmu"
 msgid "Oil Palm (Sapling)"
 msgstr "Öljypalmu (Taimi)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:39
+#: ../../data/world/immovables/trees/palm_oil/init.lua:37
 msgid "Oil Palm (Pole)"
 msgstr "Öljypalmu (Nuori)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:66
+#: ../../data/world/immovables/trees/palm_oil/init.lua:62
 msgid "Oil Palm (Mature)"
 msgstr "Öljypalmu (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:97
+#: ../../data/world/immovables/trees/palm_oil/init.lua:91
 msgid "Oil Palm (Old)"
 msgstr "Öljypalmu (Vanha)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:98
+#: ../../data/world/immovables/trees/palm_oil/init.lua:92
 msgid "Oil Palm"
 msgstr "Öljypalmu"
 
@@ -596,19 +596,19 @@ msgstr "Öljypalmu"
 msgid "Roystonea regia Palm (Sapling)"
 msgstr "Kuningaspalmu (Taimi)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:39
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:37
 msgid "Roystonea regia Palm (Pole)"
 msgstr "Kuningaspalmu (Nuori)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:66
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:62
 msgid "Roystonea regia Palm (Mature)"
 msgstr "Kuningaspalmu (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:93
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:87
 msgid "Roystonea regia Palm (Old)"
 msgstr "Kuningaspalmu (Vanha)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:94
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:88
 msgid "Roystonea regia Palm"
 msgstr "Kuningaspalmu"
 
@@ -616,19 +616,19 @@ msgstr "Kuningaspalmu"
 msgid "Rowan (Sapling)"
 msgstr "Pihlaja (Taimi)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:39
+#: ../../data/world/immovables/trees/rowan/init.lua:37
 msgid "Rowan (Pole)"
 msgstr "Pihlaja (Nuori)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:66
+#: ../../data/world/immovables/trees/rowan/init.lua:62
 msgid "Rowan (Mature)"
 msgstr "Pihlaja (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:96
+#: ../../data/world/immovables/trees/rowan/init.lua:90
 msgid "Rowan (Old)"
 msgstr "Pihlaja (Vanha)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:97
+#: ../../data/world/immovables/trees/rowan/init.lua:91
 msgid "Rowan"
 msgstr "Pihlaja"
 
@@ -636,19 +636,19 @@ msgstr "Pihlaja"
 msgid "Spruce (Sapling)"
 msgstr "Kuusi (Taimi)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:39
+#: ../../data/world/immovables/trees/spruce/init.lua:37
 msgid "Spruce (Pole)"
 msgstr "Kuusi (Nuori)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:66
+#: ../../data/world/immovables/trees/spruce/init.lua:62
 msgid "Spruce (Mature)"
 msgstr "Kuusi (Täysikasvuinen)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:93
+#: ../../data/world/immovables/trees/spruce/init.lua:87
 msgid "Spruce (Old)"
 msgstr "Kuusi (Vanha)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:94
+#: ../../data/world/immovables/trees/spruce/init.lua:88
 msgid "Spruce"
 msgstr "Kuusi"
 
@@ -658,22 +658,22 @@ msgid "Twine Tree (Sapling)"
 msgstr "Kiertepuu (Taimi)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:41
+#: ../../data/world/immovables/trees/twine/init.lua:39
 msgid "Twine Tree (Pole)"
 msgstr "Kiertepuu (Nuori)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:69
+#: ../../data/world/immovables/trees/twine/init.lua:65
 msgid "Twine Tree (Mature)"
 msgstr "Kiertepuu (Täysikasvuinen)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:97
+#: ../../data/world/immovables/trees/twine/init.lua:91
 msgid "Twine Tree (Old)"
 msgstr "Kiertepuu (Vanha)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:99
+#: ../../data/world/immovables/trees/twine/init.lua:93
 msgid "Twine Tree"
 msgstr "Kiertepuu"
 
@@ -683,22 +683,22 @@ msgid "Green Umbrella Tree (Sapling)"
 msgstr "Vihreä Sateenvarjomainen Puu (Taimi)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:41
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:39
 msgid "Green Umbrella Tree (Pole)"
 msgstr "Vihreä Sateenvarjomainen Puu (Nuori)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:69
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:65
 msgid "Green Umbrella Tree (Mature)"
 msgstr "Vihreä Sateenvarjomainen Puu (Täysikasvuinen)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:97
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:91
 msgid "Green Umbrella Tree (Old)"
 msgstr "Vihreä Sateenvarjomainen Puu (Vanha)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:99
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:93
 msgid "Green Umbrella Tree"
 msgstr "Vihreä Sateenvarjomainen Puu"
 
@@ -708,119 +708,139 @@ msgid "Red Umbrella Tree (Sapling)"
 msgstr "Punainen Sateenvarjomainen Puu (Taimi)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:41
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:39
 msgid "Red Umbrella Tree (Pole)"
 msgstr "Punainen Sateenvarjomainen Puu (Nuori)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:69
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:65
 msgid "Red Umbrella Tree (Mature)"
 msgstr "Punainen Sateenvarjomainen Puu (Täysikasvuinen)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:100
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:94
 msgid "Red Umbrella Tree (Old)"
 msgstr "Punainen Sateenvarjomainen Puu (Vanha)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:102
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:96
 msgid "Red Umbrella Tree"
 msgstr "Punainen Sateenvarjomainen Puu"
 
-#: ../../data/world/init.lua:17
-msgid "Loading world: %1$s (%2$d/%3$d)"
-msgstr "Lataan maailmaa: %1$s(%2$d/%3$d)"
-
-#: ../../data/world/init.lua:27
-msgid "Resources"
-msgstr "Resurssit"
-
-#: ../../data/world/init.lua:32
-msgid "Terrains"
-msgstr "Maastotyypit"
-
-#: ../../data/world/init.lua:42
-msgid "Summer"
-msgstr "Kesä"
-
-#: ../../data/world/init.lua:48
-msgid "Wasteland"
-msgstr "Erämaa"
-
-#: ../../data/world/init.lua:54
-msgid "Winter"
-msgstr "Talvi"
-
-#: ../../data/world/init.lua:60
-msgid "Desert"
-msgstr "Aavikko"
-
-#: ../../data/world/init.lua:69
-msgid "Immovables"
-msgstr "Kohteet"
-
-#: ../../data/world/init.lua:78
-msgid "Miscellaneous"
-msgstr "Muuta"
-
-#: ../../data/world/init.lua:113
-msgid "Artifacts"
-msgstr "Maamerkit"
-
-#: ../../data/world/init.lua:113
-msgid "These immovables are used by the win condition “Artifacts”."
-msgstr "Näitä järkäleitä käytetään voittotilanteissa \"Maamerkkeinä\"."
-
-#: ../../data/world/init.lua:126
-msgid "Plants"
-msgstr "Istutukset"
-
-#: ../../data/world/init.lua:147
-msgid "Standing Stones"
-msgstr "Pystykiviä"
-
-#: ../../data/world/init.lua:178
-msgid "Rocks"
-msgstr "Kivikot"
-
-#: ../../data/world/init.lua:211
-msgid "Dead Trees"
-msgstr "Kuolleet Puut"
-
-#: ../../data/world/init.lua:218
-msgid "Coniferous Trees"
-msgstr "Havupuut"
-
-#: ../../data/world/init.lua:225
-msgid "Deciduous Trees"
-msgstr "Lehtipuut"
-
-#: ../../data/world/init.lua:232
-msgid "Palm Trees"
-msgstr "Palmupuut"
-
-#: ../../data/world/init.lua:239
-msgid "Wasteland Trees"
-msgstr "Joutomaa"
-
-#: ../../data/world/init.lua:276
-msgid "Animals"
-msgstr "Eläimet"
-
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:287
+#. descname = _"Herbivores",
+#. picture = "world/critters/sheep/idle_00.png",
+#. items_per_row = 10,
+#. items = {
+#. "bunny",
+#. "sheep",
+#. }
+#. },
+#. {
+#. name = "critters_carnivores",
+#. TRANSLATORS: A category in the editor for placing animals on the map.
+#. descname = _"Carnivores",
+#. picture = "world/critters/fox/idle_00.png",
+#. items_per_row = 10,
+#. items = {
+#. "marten",
+#. "badger",
+#. "lynx",
+#. "fox",
+#. "wolf",
+#. "brownbear",
+#. }
+#. },
+#. },
+#. Items shown in the place critter tool. Each subtable is a tab in the tool.
+#. TRANSLATORS: A category in the editor for placing animals on the map.
+#: ../../data/world/init.lua:86
 msgid "Herbivores"
 msgstr "Kasvissyöjät"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:306
+#: ../../data/world/init.lua:104
 msgid "Carnivores"
 msgstr "Lihansyöjät"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:322
+#: ../../data/world/init.lua:119
 msgid "Aquatic"
 msgstr "Vesieläimet"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:133
+msgid "Miscellaneous"
+msgstr "Muuta"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:172
+msgid "Artifacts"
+msgstr "Maamerkit"
+
+#: ../../data/world/init.lua:172
+msgid "These immovables are used by the win condition “Artifacts”."
+msgstr "Näitä järkäleitä käytetään voittotilanteissa \"Maamerkkeinä\"."
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:185
+msgid "Plants"
+msgstr "Istutukset"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:207
+msgid "Standing Stones"
+msgstr "Pystykiviä"
+
+#: ../../data/world/init.lua:242
+msgid "Rocks"
+msgstr "Kivikot"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:279
+msgid "Dead Trees"
+msgstr "Kuolleet Puut"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:295
+msgid "Coniferous Trees"
+msgstr "Havupuut"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:313
+msgid "Deciduous Trees"
+msgstr "Lehtipuut"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:356
+msgid "Palm Trees"
+msgstr "Palmupuut"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:389
+msgid "Wasteland Trees"
+msgstr "Joutomaa"
+
+#. TRANSLATORS: A category in the editor for placing terrains on the map.
+#: ../../data/world/init.lua:451
+msgid "Summer"
+msgstr "Kesä"
+
+#. TRANSLATORS: A category in the editor for placing terrains on the map.
+#: ../../data/world/init.lua:480
+msgid "Wasteland"
+msgstr "Erämaa"
+
+#. TRANSLATORS: A category in the editor for placing terrains on the map.
+#: ../../data/world/init.lua:508
+msgid "Winter"
+msgstr "Talvi"
+
+#. TRANSLATORS: A category in the editor for placing terrains on the map.
+#: ../../data/world/init.lua:536
+msgid "Desert"
+msgstr "Aavikko"
 
 #: ../../data/world/resources/init.lua:81
 msgid "Coal"
@@ -839,10 +859,10 @@ msgid "Stones"
 msgstr "Kiviä"
 
 #: ../../data/world/resources/init.lua:145
-#: ../../data/world/terrains/init.lua:469
-#: ../../data/world/terrains/init.lua:792
-#: ../../data/world/terrains/init.lua:1102
-#: ../../data/world/terrains/init.lua:1413
+#: ../../data/world/terrains/desert/water/init.lua:3
+#: ../../data/world/terrains/summer/water/init.lua:3
+#: ../../data/world/terrains/wasteland/water/init.lua:3
+#: ../../data/world/terrains/winter/water/init.lua:3
 msgid "Water"
 msgstr "Vesi"
 
@@ -850,220 +870,220 @@ msgstr "Vesi"
 msgid "Fish"
 msgstr "Kala"
 
-#: ../../data/world/terrains/init.lua:158
-msgid "Meadow 1"
-msgstr "Heinämaa 1"
-
-#. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
-#. possible.
-#: ../../data/world/terrains/init.lua:163
-#: ../../data/world/terrains/init.lua:187
-#: ../../data/world/terrains/init.lua:207
-#: ../../data/world/terrains/init.lua:227
-#: ../../data/world/terrains/init.lua:301
-#: ../../data/world/terrains/init.lua:321
-#: ../../data/world/terrains/init.lua:495
-#: ../../data/world/terrains/init.lua:517
-#: ../../data/world/terrains/init.lua:539
-#: ../../data/world/terrains/init.lua:559
-#: ../../data/world/terrains/init.lua:579
-#: ../../data/world/terrains/init.lua:599
-#: ../../data/world/terrains/init.lua:637
-#: ../../data/world/terrains/init.lua:656
-#: ../../data/world/terrains/init.lua:819
-#: ../../data/world/terrains/init.lua:839
-#: ../../data/world/terrains/init.lua:859
-#: ../../data/world/terrains/init.lua:933
-#: ../../data/world/terrains/init.lua:952
-#: ../../data/world/terrains/init.lua:1161
-#: ../../data/world/terrains/init.lua:1181
-#: ../../data/world/terrains/init.lua:1201
-#: ../../data/world/terrains/init.lua:1223
-#: ../../data/world/terrains/init.lua:1245
-#: ../../data/world/terrains/init.lua:1264
-msgid "likes trees"
-msgstr "sopiva puille"
-
-#: ../../data/world/terrains/init.lua:182
-msgid "Meadow 2"
-msgstr "Heinämaa 2"
-
-#: ../../data/world/terrains/init.lua:202
-msgid "Meadow 3"
-msgstr "Heinämaa 3"
-
-#: ../../data/world/terrains/init.lua:222
-msgid "Meadow 4"
-msgstr "Heinämaa 4"
-
-#: ../../data/world/terrains/init.lua:242
-#: ../../data/world/terrains/init.lua:1156
-msgid "Steppe"
-msgstr "Aro"
-
-#: ../../data/world/terrains/init.lua:260
-msgid "Barren Steppe"
-msgstr "Karu Aro"
-
-#: ../../data/world/terrains/init.lua:278
-#: ../../data/world/terrains/init.lua:1196
-msgid "Mountain Meadow"
-msgstr "Vuoristoniitty"
-
-#: ../../data/world/terrains/init.lua:295
-#: ../../data/world/terrains/init.lua:632
-#: ../../data/world/terrains/init.lua:928
-#: ../../data/world/terrains/init.lua:1240
-msgid "Forested Mountain 1"
-msgstr "Metsittynyt vuori 1"
-
-#: ../../data/world/terrains/init.lua:315
-#: ../../data/world/terrains/init.lua:651
-#: ../../data/world/terrains/init.lua:947
-#: ../../data/world/terrains/init.lua:1259
-msgid "Forested Mountain 2"
-msgstr "Metsittynyt vuori 2"
-
-#: ../../data/world/terrains/init.lua:335
-#: ../../data/world/terrains/init.lua:670
-#: ../../data/world/terrains/init.lua:966
-#: ../../data/world/terrains/init.lua:1279
-msgid "Mountain 1"
-msgstr "Vuori 1"
-
-#: ../../data/world/terrains/init.lua:353
-#: ../../data/world/terrains/init.lua:688
-#: ../../data/world/terrains/init.lua:984
-#: ../../data/world/terrains/init.lua:1297
-msgid "Mountain 2"
-msgstr "Vuori 2"
-
-#: ../../data/world/terrains/init.lua:371
-#: ../../data/world/terrains/init.lua:706
-#: ../../data/world/terrains/init.lua:1002
-#: ../../data/world/terrains/init.lua:1315
-msgid "Mountain 3"
-msgstr "Vuori 3"
-
-#: ../../data/world/terrains/init.lua:389
-#: ../../data/world/terrains/init.lua:724
-#: ../../data/world/terrains/init.lua:1020
-#: ../../data/world/terrains/init.lua:1333
-msgid "Mountain 4"
-msgstr "Vuori 4"
-
-#: ../../data/world/terrains/init.lua:406
-#: ../../data/world/terrains/init.lua:742
-#: ../../data/world/terrains/init.lua:1052
-#: ../../data/world/terrains/init.lua:1397
+#: ../../data/world/terrains/desert/beach/init.lua:151
+#: ../../data/world/terrains/summer/beach/init.lua:3
+#: ../../data/world/terrains/wasteland/beach/init.lua:3
+#: ../../data/world/terrains/winter/beach/init.lua:3
 msgid "Beach"
 msgstr "Ranta"
 
-#: ../../data/world/terrains/init.lua:421
-msgid "Swamp"
-msgstr "Suo"
-
-#: ../../data/world/terrains/init.lua:436
-#: ../../data/world/terrains/init.lua:910
-msgid "Snow"
-msgstr "Lumi"
-
-#: ../../data/world/terrains/init.lua:452
-msgid "Lava"
-msgstr "Laava"
-
-#: ../../data/world/terrains/init.lua:490
-msgid "Ashes 1"
-msgstr "Tuhkaa 1"
-
-#: ../../data/world/terrains/init.lua:512
-msgid "Ashes 2"
-msgstr "Tuhkaa 2"
-
-#: ../../data/world/terrains/init.lua:534
-msgid "Hard Ground 1"
-msgstr "Kovaa maata 1"
-
-#: ../../data/world/terrains/init.lua:554
-msgid "Hard Ground 2"
-msgstr "Kovaa maata 2"
-
-#: ../../data/world/terrains/init.lua:574
-msgid "Hard Ground 3"
-msgstr "Kovaa maata 3"
-
-#: ../../data/world/terrains/init.lua:594
-msgid "Hard Ground 4"
-msgstr "Kovaa maata 4"
-
-#: ../../data/world/terrains/init.lua:614
-msgid "Igneous Rocks"
-msgstr "Magmakiviä"
-
-#: ../../data/world/terrains/init.lua:758
-msgid "Lava Rocks 1"
-msgstr "Laavakiviä 1"
-
-#: ../../data/world/terrains/init.lua:775
-msgid "Lava Rocks 2"
-msgstr "Laavakiviä 2"
-
-#: ../../data/world/terrains/init.lua:814
-msgid "Tundra 1"
-msgstr "Tundra 1"
-
-#: ../../data/world/terrains/init.lua:834
-msgid "Tundra 2"
-msgstr "Tundra 2"
-
-#: ../../data/world/terrains/init.lua:854
-msgid "Tundra 3"
-msgstr "Tundra 3"
-
-#: ../../data/world/terrains/init.lua:874
-msgid "Tundra Taiga"
-msgstr "Metsätundra"
-
-#: ../../data/world/terrains/init.lua:892
-msgid "Taiga"
-msgstr "Pohjoinen havumetsä"
-
-#: ../../data/world/terrains/init.lua:1036
-msgid "Ice"
-msgstr "Jää"
-
-#: ../../data/world/terrains/init.lua:1068
-msgid "Ice Floes 1"
-msgstr "Jäälauttoja 1"
-
-#: ../../data/world/terrains/init.lua:1085
-msgid "Ice Floes 2"
-msgstr "Jäälauttoja 2"
-
-#: ../../data/world/terrains/init.lua:1123
-msgid "Desert 4"
-msgstr "Aavikko 4"
-
-#: ../../data/world/terrains/init.lua:1140
-msgid "Dry Soil"
-msgstr "Kuiva maaperä"
-
-#: ../../data/world/terrains/init.lua:1176
-msgid "Meadow"
-msgstr "Heinämaa"
-
-#: ../../data/world/terrains/init.lua:1218
-msgid "High Mountain Meadow"
-msgstr "Korkean Vuoren Heinämaa"
-
-#: ../../data/world/terrains/init.lua:1349
+#: ../../data/world/terrains/desert/desert1/init.lua:3
 msgid "Desert 1"
 msgstr "Aavikko 1"
 
-#: ../../data/world/terrains/init.lua:1365
+#: ../../data/world/terrains/desert/desert2/init.lua:3
 msgid "Desert 2"
 msgstr "Aavikko 2"
 
-#: ../../data/world/terrains/init.lua:1381
+#: ../../data/world/terrains/desert/desert3/init.lua:3
 msgid "Desert 3"
 msgstr "Aavikko 3"
+
+#: ../../data/world/terrains/desert/desert4/init.lua:3
+msgid "Desert 4"
+msgstr "Aavikko 4"
+
+#: ../../data/world/terrains/desert/drysoil/init.lua:3
+msgid "Dry Soil"
+msgstr "Kuiva maaperä"
+
+#: ../../data/world/terrains/desert/forested_mountain1/init.lua:3
+#: ../../data/world/terrains/summer/forested_mountain1/init.lua:3
+#: ../../data/world/terrains/wasteland/forested_mountain1/init.lua:3
+#: ../../data/world/terrains/winter/forested_mountain1/init.lua:3
+msgid "Forested Mountain 1"
+msgstr "Metsittynyt vuori 1"
+
+#. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
+#. possible.
+#: ../../data/world/terrains/desert/forested_mountain1/init.lua:7
+#: ../../data/world/terrains/desert/forested_mountain2/init.lua:7
+#: ../../data/world/terrains/desert/highmountainmeadow/init.lua:7
+#: ../../data/world/terrains/desert/meadow/init.lua:7
+#: ../../data/world/terrains/desert/mountainmeadow/init.lua:7
+#: ../../data/world/terrains/desert/steppe/init.lua:7
+#: ../../data/world/terrains/summer/forested_mountain1/init.lua:8
+#: ../../data/world/terrains/summer/forested_mountain2/init.lua:8
+#: ../../data/world/terrains/summer/meadow1/init.lua:7
+#: ../../data/world/terrains/summer/meadow2/init.lua:7
+#: ../../data/world/terrains/summer/meadow3/init.lua:7
+#: ../../data/world/terrains/summer/meadow4/init.lua:7
+#: ../../data/world/terrains/wasteland/ashes1/init.lua:7
+#: ../../data/world/terrains/wasteland/ashes2/init.lua:7
+#: ../../data/world/terrains/wasteland/forested_mountain1/init.lua:7
+#: ../../data/world/terrains/wasteland/forested_mountain2/init.lua:7
+#: ../../data/world/terrains/wasteland/hardground1/init.lua:7
+#: ../../data/world/terrains/wasteland/hardground2/init.lua:7
+#: ../../data/world/terrains/wasteland/hardground3/init.lua:7
+#: ../../data/world/terrains/wasteland/hardground4/init.lua:7
+#: ../../data/world/terrains/winter/forested_mountain1/init.lua:7
+#: ../../data/world/terrains/winter/forested_mountain2/init.lua:7
+#: ../../data/world/terrains/winter/tundra/init.lua:7
+#: ../../data/world/terrains/winter/tundra2/init.lua:7
+#: ../../data/world/terrains/winter/tundra3/init.lua:7
+msgid "likes trees"
+msgstr "sopiva puille"
+
+#: ../../data/world/terrains/desert/forested_mountain2/init.lua:3
+#: ../../data/world/terrains/summer/forested_mountain2/init.lua:3
+#: ../../data/world/terrains/wasteland/forested_mountain2/init.lua:3
+#: ../../data/world/terrains/winter/forested_mountain2/init.lua:3
+msgid "Forested Mountain 2"
+msgstr "Metsittynyt vuori 2"
+
+#: ../../data/world/terrains/desert/highmountainmeadow/init.lua:3
+msgid "High Mountain Meadow"
+msgstr "Korkean Vuoren Heinämaa"
+
+#: ../../data/world/terrains/desert/meadow/init.lua:3
+msgid "Meadow"
+msgstr "Heinämaa"
+
+#: ../../data/world/terrains/desert/mountain1/init.lua:3
+#: ../../data/world/terrains/summer/mountain1/init.lua:3
+#: ../../data/world/terrains/wasteland/mountain1/init.lua:3
+#: ../../data/world/terrains/winter/mountain1/init.lua:3
+msgid "Mountain 1"
+msgstr "Vuori 1"
+
+#: ../../data/world/terrains/desert/mountain2/init.lua:3
+#: ../../data/world/terrains/summer/mountain2/init.lua:3
+#: ../../data/world/terrains/wasteland/mountain2/init.lua:3
+#: ../../data/world/terrains/winter/mountain2/init.lua:3
+msgid "Mountain 2"
+msgstr "Vuori 2"
+
+#: ../../data/world/terrains/desert/mountain3/init.lua:3
+#: ../../data/world/terrains/summer/mountain3/init.lua:3
+#: ../../data/world/terrains/wasteland/mountain3/init.lua:3
+#: ../../data/world/terrains/winter/mountain3/init.lua:3
+msgid "Mountain 3"
+msgstr "Vuori 3"
+
+#: ../../data/world/terrains/desert/mountain4/init.lua:3
+#: ../../data/world/terrains/summer/mountain4/init.lua:3
+#: ../../data/world/terrains/wasteland/mountain4/init.lua:3
+#: ../../data/world/terrains/winter/mountain4/init.lua:3
+msgid "Mountain 4"
+msgstr "Vuori 4"
+
+#: ../../data/world/terrains/desert/mountainmeadow/init.lua:3
+#: ../../data/world/terrains/summer/mountain_meadow/init.lua:3
+msgid "Mountain Meadow"
+msgstr "Vuoristoniitty"
+
+#: ../../data/world/terrains/desert/steppe/init.lua:3
+#: ../../data/world/terrains/summer/steppe/init.lua:3
+msgid "Steppe"
+msgstr "Aro"
+
+#: ../../data/world/terrains/summer/lava/init.lua:3
+msgid "Lava"
+msgstr "Laava"
+
+#: ../../data/world/terrains/summer/meadow1/init.lua:3
+msgid "Meadow 1"
+msgstr "Heinämaa 1"
+
+#: ../../data/world/terrains/summer/meadow2/init.lua:3
+msgid "Meadow 2"
+msgstr "Heinämaa 2"
+
+#: ../../data/world/terrains/summer/meadow3/init.lua:3
+msgid "Meadow 3"
+msgstr "Heinämaa 3"
+
+#: ../../data/world/terrains/summer/meadow4/init.lua:3
+msgid "Meadow 4"
+msgstr "Heinämaa 4"
+
+#: ../../data/world/terrains/summer/snow/init.lua:3
+#: ../../data/world/terrains/winter/snow/init.lua:3
+msgid "Snow"
+msgstr "Lumi"
+
+#: ../../data/world/terrains/summer/steppe_barren/init.lua:3
+msgid "Barren Steppe"
+msgstr "Karu Aro"
+
+#: ../../data/world/terrains/summer/swamp/init.lua:3
+msgid "Swamp"
+msgstr "Suo"
+
+#: ../../data/world/terrains/wasteland/ashes1/init.lua:3
+msgid "Ashes 1"
+msgstr "Tuhkaa 1"
+
+#: ../../data/world/terrains/wasteland/ashes2/init.lua:3
+msgid "Ashes 2"
+msgstr "Tuhkaa 2"
+
+#: ../../data/world/terrains/wasteland/hardground1/init.lua:3
+msgid "Hard Ground 1"
+msgstr "Kovaa maata 1"
+
+#: ../../data/world/terrains/wasteland/hardground2/init.lua:3
+msgid "Hard Ground 2"
+msgstr "Kovaa maata 2"
+
+#: ../../data/world/terrains/wasteland/hardground3/init.lua:3
+msgid "Hard Ground 3"
+msgstr "Kovaa maata 3"
+
+#: ../../data/world/terrains/wasteland/hardground4/init.lua:3
+msgid "Hard Ground 4"
+msgstr "Kovaa maata 4"
+
+#: ../../data/world/terrains/wasteland/hardlava/init.lua:3
+msgid "Igneous Rocks"
+msgstr "Magmakiviä"
+
+#: ../../data/world/terrains/wasteland/lava_stone1/init.lua:3
+msgid "Lava Rocks 1"
+msgstr "Laavakiviä 1"
+
+#: ../../data/world/terrains/wasteland/lava_stone2/init.lua:3
+msgid "Lava Rocks 2"
+msgstr "Laavakiviä 2"
+
+#: ../../data/world/terrains/winter/ice/init.lua:3
+msgid "Ice"
+msgstr "Jää"
+
+#: ../../data/world/terrains/winter/ice_floes/init.lua:3
+msgid "Ice Floes 1"
+msgstr "Jäälauttoja 1"
+
+#: ../../data/world/terrains/winter/ice_floes2/init.lua:3
+msgid "Ice Floes 2"
+msgstr "Jäälauttoja 2"
+
+#: ../../data/world/terrains/winter/taiga/init.lua:3
+msgid "Taiga"
+msgstr "Pohjoinen havumetsä"
+
+#: ../../data/world/terrains/winter/tundra/init.lua:3
+msgid "Tundra 1"
+msgstr "Tundra 1"
+
+#: ../../data/world/terrains/winter/tundra2/init.lua:3
+msgid "Tundra 2"
+msgstr "Tundra 2"
+
+#: ../../data/world/terrains/winter/tundra3/init.lua:3
+msgid "Tundra 3"
+msgstr "Tundra 3"
+
+#: ../../data/world/terrains/winter/tundra_taiga/init.lua:3
+msgid "Tundra Taiga"
+msgstr "Metsätundra"

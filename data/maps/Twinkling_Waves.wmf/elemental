@@ -8,5 +8,5 @@ nr_players="6"
 name=_"Twinkling Waves"
 author="Nasenbaer"
 descr=_"Many beautiful, green islands await the ones brave enough to pass the thousand waves, twinkling in the sun."
-hint=
+hint=_"Take care not to build your ships in the lagoons. They cannot pass through the reefs to the main ocean, where your ports are located."
 tags="artifacts,ferries,official,seafaring,unbalanced"

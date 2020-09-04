@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
 "PO-Revision-Date: 2020-08-08 12:24+0000\n"
 "Last-Translator: Samuele Battarra <battarsa@email.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -27,102 +27,106 @@ msgstr ""
 "Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/txts/AUTHORS.lua:27
-msgid "Developers"
-msgstr "Sviluppatori"
+#: ../../data/txts/ABOUT.lua:7
+msgid "Readme"
+msgstr "Leggimi"
 
-#: ../../data/txts/AUTHORS.lua:29
-msgid "Widelands Development Team"
-msgstr "Team di sviluppo di Widelands"
-
-#: ../../data/txts/LICENSE.lua:6
+#: ../../data/txts/ABOUT.lua:11
 msgid "License"
 msgstr "Licenza"
 
-#: ../../data/txts/LICENSE.lua:8
+#: ../../data/txts/ABOUT.lua:15
+msgid "Developers"
+msgstr "Sviluppatori"
+
+#: ../../data/txts/ABOUT.lua:19
+msgid "Translators"
+msgstr "Traduttori"
+
+#: ../../data/txts/AUTHORS.lua:28
+msgid "Widelands Development Team"
+msgstr "Team di sviluppo di Widelands"
+
+#: ../../data/txts/LICENSE.lua:7
 msgid "Licensing information for Widelands"
 msgstr "Informazioni sulla licenza di Widelands"
 
 #. TRANSLATORS: Placeholder is copyright end year
-#: ../../data/txts/LICENSE.lua:10
+#: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr "Copyright 2002 - %1% del team di sviluppo di Widelands."
 
-#: ../../data/txts/LICENSE.lua:12
+#: ../../data/txts/LICENSE.lua:11
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Questo gioco è Free and Open Source (FOSS), rilasciato sotto licenza GNU General Public License (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:13
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Puoi trovare maggiori informazioni sulla FOSS e sulla GPL visitando la seguente pagina web: %s"
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Lì puoi trovare il testo completo della licenza ed ulteriori informazioni circa la sua filosofia e le implicazioni legali."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Abbiamo distribuito la GPL come documento di testo insieme a Widelands stesso."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Su Linux, puoi trovare il file chiamato COPYING nella cartella principale dei sorgenti o del pacchetto binario, o nella cartella di installazione (esempio: '%1%')."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Su Windows, puoi trovare il file chiamato COPYING nella cartella di installazione, e nello Star menu Widelands c'è un link che punta a questo file."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "Su MacOS, puoi trovare il file chiamato COPYING nell'archivio che hai scaricato dal sito."
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:22
 msgid "This game comes as-is and without any warranty."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:24
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
 msgstr ""
 
-#: ../../data/txts/README.lua:6
-msgid "Readme"
-msgstr "Leggimi"
-
-#: ../../data/txts/README.lua:9
+#: ../../data/txts/README.lua:8
 msgid "an open source strategy game"
 msgstr "un gioco di strategia open source"
 
-#: ../../data/txts/README.lua:11
+#: ../../data/txts/README.lua:10
 msgid "Check out the Widelands project homepage:"
 msgstr "Visita la pagina iniziale del progetto Widelands:"
 
-#: ../../data/txts/README.lua:12
+#: ../../data/txts/README.lua:11
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
 msgstr "Widelands è rilasciato sotto la licenza GNU Licenza Generale per il Pubblico (LGP). Per maggiori informazioni, consulta il file 'COPIATURA'."
 
-#: ../../data/txts/README.lua:13
+#: ../../data/txts/README.lua:12
 msgid "Status"
 msgstr "Stato"
 
-#: ../../data/txts/README.lua:14
+#: ../../data/txts/README.lua:13
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even "
 "more in multiplayer with others. Still, there is always more work to be done"
@@ -131,79 +135,75 @@ msgid ""
 " language or creating new maps – get in touch on our homepage."
 msgstr "Widelands è quasi completo in tutte le sue funzioni e, se è divertentissimo da giocare da solo, lo è ancora di più da giocare in multigiocatore insieme ad altre persone. Tuttavia, c'è sempre più lavoro da fare in tutti i settori. Se sei interessato a contribuire - sia aiutando a creare la grafica, o a correggere i bug o aggiungendo nuove funzioni, sia traducendo il gioco nella tua lingua madre o aiutando a creare nuove mappe - puoi metterti in contatto con noi attraverso la nostra pagina web."
 
-#: ../../data/txts/README.lua:16
+#: ../../data/txts/README.lua:15
 msgid "Widelands Help"
 msgstr "Aiuto per Widelands"
 
 #. TRANSLATORS: %1% is a key on the keyboard
-#: ../../data/txts/README.lua:18
+#: ../../data/txts/README.lua:17
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
 msgstr "Puoi trovare dei consigli e degli aiuti riguardanti il gameplay o l'editor usando il pulsante d'aiuto al fondo del menù, oppure digitando %1%."
 
 #. TRANSLATORS: This is a key on the keyboard
-#: ../../data/txts/README.lua:20
+#: ../../data/txts/README.lua:19
 msgid "F1"
 msgstr "F1"
 
-#: ../../data/txts/README.lua:23
+#: ../../data/txts/README.lua:22
 msgid "Reporting Bugs"
 msgstr "Segnalazione Bug"
 
-#: ../../data/txts/README.lua:24
+#: ../../data/txts/README.lua:23
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Se trovi un bug, per favore segnalalo sul nostro bugtracker:"
 
-#: ../../data/txts/README.lua:26
+#: ../../data/txts/README.lua:25
 msgid "Please provide enough background information. Tell us:"
 msgstr "Si prega di fornire sufficienti informazioni. Diteci:"
 
-#: ../../data/txts/README.lua:28
+#: ../../data/txts/README.lua:27
 msgid "Detailed steps on how to trigger the bug, if possible."
 msgstr "Descrivi dei passaggi più dettagliati possibile su come riprodurre il bug, se possibile"
 
-#: ../../data/txts/README.lua:29
+#: ../../data/txts/README.lua:28
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "Cosa ti aspettavi che accadesse quando hai eseguito i passaggi e cosa invece è effettivamente accaduto"
 
-#: ../../data/txts/README.lua:30
+#: ../../data/txts/README.lua:29
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr "Quale versione di Widelands stai usando (per esempio il numero della release (build) oppure il numero della revisione se stai usando una versione per sviluppatori o una release giornaliera.)"
 
-#: ../../data/txts/README.lua:31
+#: ../../data/txts/README.lua:30
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
 msgstr "Per favore includi nella segnalazione quale sistema operativo stai usando per giocare a Widelands e la sua versione, in quanto alcuni bug possono dipendere dalla e essere specifici della piattaforma che si sta usando."
 
-#: ../../data/txts/README.lua:32
+#: ../../data/txts/README.lua:31
 msgid "Which map you were playing when the bug occurred."
 msgstr "Indica in quale mappa stavi giocando quando si è verificato il bug."
 
-#: ../../data/txts/README.lua:33
+#: ../../data/txts/README.lua:32
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
 msgstr "Se il bug riguarda qualcosa che non viene visualizzato correttamente o se può aiutare a dimostrare il problema, per favore includi una o più immagini dello schermo."
 
-#: ../../data/txts/README.lua:34
+#: ../../data/txts/README.lua:33
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
 msgstr "Se possiedi un salvataggio o un replay che è in grado di mostrare il problema, (per esempio per dei crash per i quali non è facile capire cosa sia a causarli), per favore includi anche questi. Per avere più informazioni, consulta la sezione sui Replay che puoi trovare qua sotto."
 
-#: ../../data/txts/TRANSLATORS.lua:24
-msgid "Translators"
-msgstr "Traduttori"
-
-#: ../../data/txts/TRANSLATORS.lua:26
+#: ../../data/txts/TRANSLATORS.lua:25
 msgid "Widelands Translators"
 msgstr "Traduttori di Widelands"
 

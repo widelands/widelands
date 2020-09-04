@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-17 08:52+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
+"PO-Revision-Date: 2020-08-25 12:24+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr "이번 시나리오에서는, 군인들과, 군인들의 훈련 그리고 군인들의 임무인 전투에 대해 알려드리겠습니다. 비록 Widelands는 파괴보다는 건설이 주력이지만, 때때로 패배시켜야 할 적이 있습니다. 그렇지만 전투는 주로 군사적인 전략이 아니라, 경제학에 중점을 두고, 그 역학은 설명을 필요로 합니다."
+msgstr "이번 시나리오에서는, 군인들과, 군인들의 훈련 그리고 군인들의 임무인 전투에 대해 알려드리겠습니다. 비록 와이드랜드는 파괴보다는 건설이 주력이지만, 때때로 패배시켜야 할 적이 있습니다. 그렇지만 전투는 주로 군사적인 전략이 아니라, 경제학에 중점을 두고, 그 역학은 설명을 필요로 합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:30
 msgid ""
@@ -56,7 +56,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr "새로운 군인들은 일반적인 일꾼들과는 다르게 생성됩니다: 신병들은 창고 (혹은 본부) 에서 기초 훈련을 받을 병영으로 이동해서 군인이 됩니다. 야만인들의 기본 군사들은 갑옷을 사용하지 않고, 오직 도끼만 필요합니다."
+msgstr "신병들은 일반적인 일꾼들과는 다르게 생성됩니다: 신병들은 창고 (혹은 본부) 에서 기초 훈련을 받을 병영으로 이동해서 군인이 됩니다. 야만인들의 기본 군사들은 갑옷을 사용하지 않고, 오직 도끼만 필요합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
 msgid ""
@@ -65,7 +65,7 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr "군사 건물들로 향하는 군인들을 보십시오. 일반적인 일꾼들과는 다르게 보일 겁니다: 그들의 머리 위에 남은 체력을 표시하는 체력 막대가 있고, 네 가지 다른 카테고리에 대한 개개인 군인들의 현재 수준을 형상화하는 네 개의 기호가 있습니다: 체력, 공격, 방어, 회피."
+msgstr "군사 건물들로 향하는 군인들을 보십시오. 일반적인 일꾼들과는 다르게 보일 겁니다: 그들의 머리 위에 남은 체력을 표시하는 체력 막대가 있고, 네 가지 다른 카테고리에 대한 개개인 군인들의 현재 수준을 형상화하는 네 개의 기호가 있습니다: 체력, 공격력, 방어력, 회피력."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
@@ -73,7 +73,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr "야만인 군인이 완벽하게 훈련받으면, 그는 %1% 레벨의 체력과, %2% 레벨의 공격, %3% 레벨의 방어와 %4% 레벨의 회피를 갖습니다. 정말 두려운 군인이 아닙니까! 각각의 능력은 다음 의미를 지닙니다:"
+msgstr "야만인 군인이 완벽하게 훈련받으면, 그는 %1% 수준의 체력과, %2% 수준의 공격력, %3% 수준의 방어력과 %4% 수준의 회피력을 갖습니다. 정말 두려운 군인이 아닙니까! 각각의 능력은 다음 의미를 지닙니다:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
 msgid "Health:"
@@ -84,11 +84,11 @@ msgstr "체력:"
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
-msgstr "군인의 총 체력입니다. 야만인 군인은 %1% 체력으로 시작해서, 각 체력 레벨마다 %2% 체력을 얻습니다."
+msgstr "군인의 총 체력입니다. 야만인 군인은 %1% 체력으로 시작해서, 각 체력 수준마다 %2% 체력을 얻습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
 msgid "Attack:"
-msgstr "공격:"
+msgstr "공격력:"
 
 #. TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:48
@@ -97,11 +97,11 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr "공격이 성공했을 때 적에게 입히는 피해의 양입니다. 야만인 군인은 공격 레벨 0일 때 적을 치는데 성공하면 %1% 포인트 만큼의 체력 피해를 입힙니다. 각 공격 레벨에서, %2% 피해 포인트를 얻습니다."
+msgstr "공격이 성공했을 때 적에게 입히는 피해의 양입니다. 야만인 군인은 공격력 수준이 0일 때 적을 치는데 성공하면 %1% 포인트 만큼의 체력 피해를 입힙니다. 각 공격력 수준에서, %2% 피해 포인트를 얻습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid "Defense:"
-msgstr "방어:"
+msgstr "방어력:"
 
 #. TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -112,11 +112,11 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500·%2%%% = %3% health."
-msgstr "방어는 공격값에서 빠지는 비율입니다. 야만인들은 이 능력을 훈련할 수 없기에 언제나 방어 레벨 0이고, 이는 데미지가 언제나 %1%%% 만큼 감소하는 것을 의미합니다. 공격자가 3500 포인트의 공격 값으로 야만인 군인을 친다면, 야만인은 3500 - %2%%% = %3% 체력을 잃습니다."
+msgstr "방어력은 공격값에서 빠지는 비율입니다. 야만인들은 이 능력을 훈련할 수 없기에 언제나 방어력 수준이 0이고, 이는 데미지가 언제나 %1%%% 만큼 감소하는 것을 의미합니다. 공격자가 3500 포인트의 공격 값으로 야만인 군인을 친다면, 야만인은 3500 - %2%%% = %3% 체력을 잃습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:54
 msgid "Evade:"
-msgstr "회피:"
+msgstr "회피력:"
 
 #. TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -125,7 +125,7 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr "회피는 군인이 공격을 회피할 수 있는 확률을 말합니다. 레벨 0의 야만인은 %1%%% 만큼 공격을 회피할 수 있고, 각 레벨마다 %2%%% 만큼 증가합니다."
+msgstr "회피력은 군인이 공격을 회피할 수 있는 확률을 말합니다. 0 수준의 야만인은 %1%%% 만큼 공격을 회피할 수 있고, 각 수준마다 %2%%% 만큼 증가합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
@@ -134,7 +134,7 @@ msgstr "전투 경기장"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:64
 msgid "Now I have talked about training and levels. Let me elaborate on that."
-msgstr "이제 훈련과 레벨에 대해서 얘기할 겁니다. 자세히 알아보도록 하겠습니다."
+msgstr "이제 훈련과 수준에 대해서 얘기할 겁니다. 자세히 알아보도록 하겠습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:65
 msgid ""
@@ -211,19 +211,19 @@ msgstr "얼마나 당신의 군인들의 훈련이 진행됐는지 알려면, �
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
-msgstr "빨간 점이 없다면 군인이 훈련받지 않아서, 레벨 0이라는 걸 의미합니다 모든 새로운 신병들이 그렇습니다."
+msgstr "빨간 점이 없다면 군인이 훈련받지 않아서, 0 수준이라는 걸 의미합니다 모든 새로운 신병들이 그렇습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr "매번 훈련이 성공할 때마다, 군인은 점점 더 강해집니다. 이는 빨간 점으로 표시됩니다. 이 군인은 회피 훈련에서 레벨 1에 올랐습니다."
+msgstr "매번 훈련이 성공할 때마다, 군인은 점점 더 강해집니다. 이는 빨간 점으로 표시됩니다. 이 군인은 회피 훈련에서 1 수준으로 올랐습니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:94
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
-msgstr "군인이 가능한 최고 레벨에 다다랐을 때 (이 경우에 레벨 2), 하얀 배경색으로 표시됩니다."
+msgstr "군인이 가능한 최고 수준에 다다랐을 때 (이 경우에 2 수준), 하얀 배경색으로 표시됩니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:100
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
@@ -262,7 +262,7 @@ msgstr "전투 경기장은 군인들에게 오직 회피만을 훈련시킵니�
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
-msgstr "훌륭하게, 우리의 훈련소도 완성되었습니다. 더 이상 아무도 여태껏 볼 수 없었던 최강의 군인들을 육성하는 것을 방해하지 못합니다."
+msgstr "훌륭합니다, 우리의 훈련소도 다 지어졌습니다. 이제 더 이상 여태껏 아무도 볼 수 없었던 최강의 군인들을 육성하는 것에 방해하지 못합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:123
 msgid ""
@@ -285,7 +285,7 @@ msgid ""
 " ability levels cannot be compared: an Imperial soldier has a base attack of"
 " %1% at level 0, while a Barbarian soldier at the same level only has a base"
 " attack of %2%."
-msgstr "당신은 또한 Widelands 의 세 부족들이 각자만의 훈련 방식이 있고, 그래서 건물과 물품이 다르다는 것을 명심해야 합니다. 또한 능력 레벨도 비교할 수 없습니다: 야만인 군인들이 레벨 0에서 %2%의 기초 공격을 가하는 동안, 제국 군인은 같은 레벨에서 %1% 의 기초 공격을 가합니다."
+msgstr "당신은 또한 와이드랜드의 3 부족들이 각자만의 훈련 방식이 있고, 그래서 건물과 물품이 다르다는 것을 명심해야 합니다. 또한 능력 수준도 비교할 수 없습니다: 야만인 군인들이 0 수준에서 %2%의 기초 공격을 가하는 동안, 제국 군인은 같은 수준에서 %1% 의 기초 공격을 가합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
@@ -371,7 +371,7 @@ msgstr "정찰대가 보이지 않는 지역을 탐색할 때까지 기다립니
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid "Observe your scout."
-msgstr "정찰대을 관찰하십시오."
+msgstr "정찰대를 관찰하십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid "Scout made progress"
@@ -379,7 +379,7 @@ msgstr "스카우트가 전진했습니다"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
 msgid "New horizons?"
-msgstr "새로운 지평?"
+msgstr "새로운 지평선?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
 msgid ""
@@ -444,7 +444,7 @@ msgid ""
 " buttons to decrease or increase the desired number of soldiers. Every "
 "building has a maximum capacity. In case of the barrier, it is five, for "
 "example."
-msgstr "군사 건물의 힘을 제어하는 또다른 방법이 있습니다: 주둔하는 군인들의 수를 이용해서. 원하는 군인의 수를 감소시키거나 증가시키려면 화살표 버튼을 클릭하십시오. 모든 건물들은 최대 주둔 수를 갖습니다. 예를 들어, 장벽의 경우에는, 다섯입니다."
+msgstr "군사 건물의 힘을 제어하는 또다른 방법이 있습니다: 주둔하는 군인들의 수를 이용해서. 원하는 군인의 수를 감소시키거나 증가시키려면 화살표 버튼을 클릭하십시오. 모든 건물들은 최대 주둔 수를 갖습니다. 예를 들어, 장벽의 경우에는, 5 명 입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid ""
@@ -470,14 +470,14 @@ msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
-msgstr "두번째 숫자는 얼마나 많은 추가적인 군인들이 지금은 밖에 있지만, 건물에 배치될 지를 알려줍니다. 다섯 명의 군인들이 적에게 공격받고 있습니다. 일이 잘 풀리면 다시 돌아올 것입니다."
+msgstr "두번째 숫자는 얼마나 많은 추가적인 군인들이 지금은 밖에 있지만, 건물에 배치될 지를 알려줍니다. 5 명의 군인들이 적에게 공격받고 있습니다. 일이 잘 풀리면 다시 돌아올 것입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr "세번째 숫자는 사라진 군인들을 표시합니다. 여덟 명의 군인들을 (1 + 5 +2) 주둔시키려 했었다면, 둘은 아마 죽었을 겁니다. 창고에서 새로운 군인들로, 가능하다면 대체될 겁니다."
+msgstr "세번째 숫자는 사라진 군인들을 표시합니다. 8 명의 군인들을 (1 + 5 +2) 주둔시키려 했었다면, 2 명은 아마 죽었을 겁니다. 창고에서 신병들로, 가능하다면 대체될 겁니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid "Dismantle your sentry"
@@ -521,7 +521,7 @@ msgstr "해체하십시오."
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr "또한 다른 선택지들과 친숙해지는 기회이기도 합니다: 영웅/신병 선호도와 주둔 수."
+msgstr "또한 다른 선택지들과 친숙해지는 기회이기도 합니다: 영웅/신병 선호도 및 주둔 수."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
 msgid "Soldiers, dismissed!"
@@ -577,7 +577,7 @@ msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
-msgstr "당신의 군인들은 건설이 이루어지는 동안 요새를 떠날 것입니다. 이는 위에서 말했듯이, 당신의 요새가 군사적 영향력을 상실할 것을 의미합니다."
+msgstr "당신의 군인들은 건설이 이루어지는 동안 요새를 떠나 있을 것입니다. 이는 위에서 말했듯이, 당신의 요새가 군사적 영향력을 상실할 것을 의미합니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:242
 msgid "Enhance your fortress to a citadel now."

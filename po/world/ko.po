@@ -9,13 +9,14 @@
 # ks k, 2017,2019-2020
 # Moon Yeonki <backnii@gmail.com>, 2017
 # TaeMin An, 2017,2019
+# TaeMin An, 2017,2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-03-01 16:14+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
+"PO-Revision-Date: 2020-08-29 17:32+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,188 +24,193 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../data/world/critters/badger/init.lua:95
+#: ../../data/world/critters/badger/init.lua:80
 msgid "Badger"
 msgstr "오소리"
 
-#: ../../data/world/critters/brownbear/init.lua:21
+#: ../../data/world/critters/brownbear/init.lua:3
 msgid "Brown bear"
 msgstr "붉은 곰"
 
-#: ../../data/world/critters/bunny/init.lua:19
+#: ../../data/world/critters/bunny/init.lua:3
 msgid "Bunny"
 msgstr "토끼"
 
-#: ../../data/world/critters/chamois/init.lua:21
+#: ../../data/world/critters/chamois/init.lua:3
 msgid "Chamois"
 msgstr "산양"
 
-#: ../../data/world/critters/deer/init.lua:21
+#: ../../data/world/critters/deer/init.lua:3
 msgid "Deer"
 msgstr "사슴"
 
-#: ../../data/world/critters/duck/init.lua:19
+#: ../../data/world/critters/duck/init.lua:5
 msgid "Duck"
 msgstr "오리"
 
-#: ../../data/world/critters/fox/init.lua:25
+#: ../../data/world/critters/fox/init.lua:3
 msgid "Fox"
 msgstr "여우"
 
-#: ../../data/world/critters/lynx/init.lua:22
+#: ../../data/world/critters/lynx/init.lua:3
 msgid "Lynx"
 msgstr "스라소니"
 
-#: ../../data/world/critters/marten/init.lua:21
+#: ../../data/world/critters/marten/init.lua:3
 msgid "Marten"
 msgstr "담비"
 
-#: ../../data/world/critters/moose/init.lua:25
+#: ../../data/world/critters/moose/init.lua:3
 msgid "Moose"
 msgstr "엘크"
 
-#: ../../data/world/critters/reindeer/init.lua:22
+#: ../../data/world/critters/reindeer/init.lua:3
 msgid "Reindeer"
 msgstr "순록"
 
-#: ../../data/world/critters/sheep/init.lua:25
+#: ../../data/world/critters/sheep/init.lua:3
 msgid "Sheep"
 msgstr "양"
 
-#: ../../data/world/critters/stag/init.lua:25
+#: ../../data/world/critters/stag/init.lua:3
 msgid "Stag"
 msgstr "수사슴"
 
-#: ../../data/world/critters/wildboar/init.lua:25
+#: ../../data/world/critters/wildboar/init.lua:3
 msgid "Wild boar"
 msgstr "멧돼지"
 
-#: ../../data/world/critters/wisent/init.lua:21
+#: ../../data/world/critters/wisent/init.lua:3
 msgid "Wisent"
 msgstr "들소"
 
-#: ../../data/world/critters/wolf/init.lua:26
+#: ../../data/world/critters/wolf/init.lua:3
 msgid "Wolf"
 msgstr "늑대"
 
-#: ../../data/world/immovables/bush1/init.lua:105
-#: ../../data/world/immovables/bush2/init.lua:5
-#: ../../data/world/immovables/bush3/init.lua:5
-#: ../../data/world/immovables/bush4/init.lua:5
-#: ../../data/world/immovables/bush5/init.lua:5
-msgid "Bush"
-msgstr "덤불"
-
-#: ../../data/world/immovables/cactus1/init.lua:5
-#: ../../data/world/immovables/cactus2/init.lua:5
-#: ../../data/world/immovables/cactus3/init.lua:5
-#: ../../data/world/immovables/cactus4/init.lua:5
-msgid "Cactus"
-msgstr "선인장"
-
-#: ../../data/world/immovables/grass1/init.lua:5
-#: ../../data/world/immovables/grass2/init.lua:5
-#: ../../data/world/immovables/grass3/init.lua:5
-msgid "Grass"
-msgstr "잔디"
-
-#: ../../data/world/immovables/manmade/artifacts/artifact00/init.lua:5
-#: ../../data/world/immovables/manmade/artifacts/artifact01/init.lua:5
-#: ../../data/world/immovables/manmade/artifacts/artifact02/init.lua:5
-#: ../../data/world/immovables/manmade/artifacts/artifact03/init.lua:5
+#: ../../data/world/immovables/artifacts/artifact00/init.lua:147
+#: ../../data/world/immovables/artifacts/artifact01/init.lua:5
+#: ../../data/world/immovables/artifacts/artifact02/init.lua:5
+#: ../../data/world/immovables/artifacts/artifact03/init.lua:5
 msgid "Artifact"
 msgstr "유물"
 
-#: ../../data/world/immovables/manmade/bar-ruin00/init.lua:5
-#: ../../data/world/immovables/manmade/bar-ruin01/init.lua:5
-#: ../../data/world/immovables/manmade/bar-ruin02/init.lua:5
-#: ../../data/world/immovables/manmade/bar-ruin03/init.lua:5
-#: ../../data/world/immovables/ruin1/init.lua:5
-#: ../../data/world/immovables/ruin2/init.lua:5
+#: ../../data/world/immovables/miscellaneous/bar-ruin00/init.lua:5
+#: ../../data/world/immovables/miscellaneous/bar-ruin01/init.lua:5
+#: ../../data/world/immovables/miscellaneous/bar-ruin02/init.lua:5
+#: ../../data/world/immovables/miscellaneous/bar-ruin03/init.lua:5
+#: ../../data/world/immovables/miscellaneous/ruin1/init.lua:5
+#: ../../data/world/immovables/miscellaneous/ruin2/init.lua:5
 msgid "Ruin"
 msgstr "폐허"
 
-#: ../../data/world/immovables/manmade/debris00/init.lua:5
-#: ../../data/world/immovables/manmade/debris01/init.lua:5
-#: ../../data/world/immovables/manmade/debris02/init.lua:5
+#: ../../data/world/immovables/miscellaneous/debris00/init.lua:5
+#: ../../data/world/immovables/miscellaneous/debris01/init.lua:5
+#: ../../data/world/immovables/miscellaneous/debris02/init.lua:5
 msgid "Debris"
 msgstr "파편"
 
-#: ../../data/world/immovables/manmade/snowman/init.lua:5
-msgid "Snowman"
-msgstr "눈사람"
-
-#: ../../data/world/immovables/mushroom1/init.lua:5
-#: ../../data/world/immovables/mushroom2/init.lua:5
+#: ../../data/world/immovables/miscellaneous/mushroom1/init.lua:5
+#: ../../data/world/immovables/miscellaneous/mushroom2/init.lua:5
 msgid "Mushroom"
 msgstr "버섯"
 
-#: ../../data/world/immovables/pebble1/init.lua:5
-#: ../../data/world/immovables/pebble2/init.lua:5
-#: ../../data/world/immovables/pebble3/init.lua:5
-#: ../../data/world/immovables/pebble4/init.lua:5
-#: ../../data/world/immovables/pebble5/init.lua:5
-#: ../../data/world/immovables/pebble6/init.lua:5
+#: ../../data/world/immovables/miscellaneous/pebble1/init.lua:5
+#: ../../data/world/immovables/miscellaneous/pebble2/init.lua:5
+#: ../../data/world/immovables/miscellaneous/pebble3/init.lua:5
+#: ../../data/world/immovables/miscellaneous/pebble4/init.lua:5
+#: ../../data/world/immovables/miscellaneous/pebble5/init.lua:5
+#: ../../data/world/immovables/miscellaneous/pebble6/init.lua:5
 msgid "Pebble"
 msgstr "자갈"
 
-#: ../../data/world/immovables/rocks/blackland_rocks1/init.lua:12
-#: ../../data/world/immovables/rocks/desert_rocks1/init.lua:12
-#: ../../data/world/immovables/rocks/greenland_rocks1/init.lua:12
-#: ../../data/world/immovables/rocks/winterland_rocks1/init.lua:12
-msgid "Rocks 1"
-msgstr "바위 1"
-
-#: ../../data/world/immovables/rocks/blackland_rocks2/init.lua:12
-#: ../../data/world/immovables/rocks/desert_rocks2/init.lua:12
-#: ../../data/world/immovables/rocks/greenland_rocks2/init.lua:12
-#: ../../data/world/immovables/rocks/winterland_rocks2/init.lua:12
-msgid "Rocks 2"
-msgstr "바위 2"
-
-#: ../../data/world/immovables/rocks/blackland_rocks3/init.lua:12
-#: ../../data/world/immovables/rocks/desert_rocks3/init.lua:12
-#: ../../data/world/immovables/rocks/greenland_rocks3/init.lua:12
-#: ../../data/world/immovables/rocks/winterland_rocks3/init.lua:12
-msgid "Rocks 3"
-msgstr "바위 3"
-
-#: ../../data/world/immovables/rocks/blackland_rocks4/init.lua:12
-#: ../../data/world/immovables/rocks/desert_rocks4/init.lua:12
-#: ../../data/world/immovables/rocks/greenland_rocks4/init.lua:12
-#: ../../data/world/immovables/rocks/winterland_rocks4/init.lua:12
-msgid "Rocks 4"
-msgstr "바위 4"
-
-#: ../../data/world/immovables/rocks/blackland_rocks5/init.lua:12
-#: ../../data/world/immovables/rocks/desert_rocks5/init.lua:12
-#: ../../data/world/immovables/rocks/greenland_rocks5/init.lua:12
-#: ../../data/world/immovables/rocks/winterland_rocks5/init.lua:12
-msgid "Rocks 5"
-msgstr "바위 5"
-
-#: ../../data/world/immovables/rocks/blackland_rocks6/init.lua:12
-#: ../../data/world/immovables/rocks/desert_rocks6/init.lua:12
-#: ../../data/world/immovables/rocks/greenland_rocks6/init.lua:12
-#: ../../data/world/immovables/rocks/winterland_rocks6/init.lua:12
-msgid "Rocks 6"
-msgstr "바위 6"
-
-#: ../../data/world/immovables/ruin3/init.lua:5
-#: ../../data/world/immovables/ruin4/init.lua:5
-#: ../../data/world/immovables/ruin5/init.lua:5
+#: ../../data/world/immovables/miscellaneous/ruin3/init.lua:5
+#: ../../data/world/immovables/miscellaneous/ruin4/init.lua:5
+#: ../../data/world/immovables/miscellaneous/ruin5/init.lua:5
 msgid "Tombstone"
 msgstr "묘비"
 
-#: ../../data/world/immovables/skeleton1/init.lua:5
-#: ../../data/world/immovables/skeleton3/init.lua:5
+#: ../../data/world/immovables/miscellaneous/skeleton1/init.lua:5
+#: ../../data/world/immovables/miscellaneous/skeleton3/init.lua:5
 msgid "Skeleton"
 msgstr "해골"
 
-#: ../../data/world/immovables/skeleton2/init.lua:5
-#: ../../data/world/immovables/skeleton4/init.lua:5
+#: ../../data/world/immovables/miscellaneous/skeleton2/init.lua:5
+#: ../../data/world/immovables/miscellaneous/skeleton4/init.lua:5
 msgid "Seashell"
 msgstr "조개껍질"
+
+#: ../../data/world/immovables/miscellaneous/snowman/init.lua:5
+msgid "Snowman"
+msgstr "눈사람"
+
+#. TRANSLATORS: This track is made of footprints in the snow
+#: ../../data/world/immovables/miscellaneous/track_winter/init.lua:6
+msgid "Track"
+msgstr "길"
+
+#: ../../data/world/immovables/plants/bush1/init.lua:5
+#: ../../data/world/immovables/plants/bush2/init.lua:5
+#: ../../data/world/immovables/plants/bush3/init.lua:5
+#: ../../data/world/immovables/plants/bush4/init.lua:5
+#: ../../data/world/immovables/plants/bush5/init.lua:5
+msgid "Bush"
+msgstr "덤불"
+
+#: ../../data/world/immovables/plants/cactus1/init.lua:5
+#: ../../data/world/immovables/plants/cactus2/init.lua:5
+#: ../../data/world/immovables/plants/cactus3/init.lua:5
+#: ../../data/world/immovables/plants/cactus4/init.lua:5
+msgid "Cactus"
+msgstr "선인장"
+
+#: ../../data/world/immovables/plants/grass1/init.lua:5
+#: ../../data/world/immovables/plants/grass2/init.lua:5
+#: ../../data/world/immovables/plants/grass3/init.lua:5
+msgid "Grass"
+msgstr "잔디"
+
+#: ../../data/world/immovables/rocks/blackland/init.lua:5
+#: ../../data/world/immovables/rocks/desert/init.lua:5
+#: ../../data/world/immovables/rocks/greenland/init.lua:5
+#: ../../data/world/immovables/rocks/winterland/init.lua:5
+msgid "Rocks 1"
+msgstr "바위 1"
+
+#: ../../data/world/immovables/rocks/blackland/init.lua:23
+#: ../../data/world/immovables/rocks/desert/init.lua:23
+#: ../../data/world/immovables/rocks/greenland/init.lua:23
+#: ../../data/world/immovables/rocks/winterland/init.lua:23
+msgid "Rocks 2"
+msgstr "바위 2"
+
+#: ../../data/world/immovables/rocks/blackland/init.lua:41
+#: ../../data/world/immovables/rocks/desert/init.lua:41
+#: ../../data/world/immovables/rocks/greenland/init.lua:41
+#: ../../data/world/immovables/rocks/winterland/init.lua:41
+msgid "Rocks 3"
+msgstr "바위 3"
+
+#: ../../data/world/immovables/rocks/blackland/init.lua:59
+#: ../../data/world/immovables/rocks/desert/init.lua:59
+#: ../../data/world/immovables/rocks/greenland/init.lua:59
+#: ../../data/world/immovables/rocks/winterland/init.lua:59
+msgid "Rocks 4"
+msgstr "바위 4"
+
+#: ../../data/world/immovables/rocks/blackland/init.lua:77
+#: ../../data/world/immovables/rocks/desert/init.lua:77
+#: ../../data/world/immovables/rocks/greenland/init.lua:77
+#: ../../data/world/immovables/rocks/winterland/init.lua:77
+msgid "Rocks 5"
+msgstr "바위 5"
+
+#: ../../data/world/immovables/rocks/blackland/init.lua:95
+#: ../../data/world/immovables/rocks/desert/init.lua:95
+#: ../../data/world/immovables/rocks/greenland/init.lua:95
+#: ../../data/world/immovables/rocks/winterland/init.lua:95
+msgid "Rocks 6"
+msgstr "바위 6"
 
 #: ../../data/world/immovables/standing_stones/standing_stone1_desert/init.lua:5
 #: ../../data/world/immovables/standing_stones/standing_stone1_summer/init.lua:5
@@ -231,28 +237,23 @@ msgstr "조개껍질"
 msgid "Standing Stone"
 msgstr "서있는 돌"
 
-#. TRANSLATORS: This track is made of footprints in the snow
-#: ../../data/world/immovables/track_winter/init.lua:6
-msgid "Track"
-msgstr "길"
-
 #: ../../data/world/immovables/trees/alder/init.lua:20
 msgid "Alder (Sapling)"
 msgstr "오리나무 (유목)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:47
+#: ../../data/world/immovables/trees/alder/init.lua:45
 msgid "Alder (Pole)"
 msgstr "오리나무 (성목)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:74
+#: ../../data/world/immovables/trees/alder/init.lua:70
 msgid "Alder (Mature)"
 msgstr "오리나무 (성숙목)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:101
+#: ../../data/world/immovables/trees/alder/init.lua:95
 msgid "Alder (Old)"
 msgstr "오리나무 (노숙목)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:102
+#: ../../data/world/immovables/trees/alder/init.lua:96
 msgid "Alder"
 msgstr "오리나무"
 
@@ -260,19 +261,19 @@ msgstr "오리나무"
 msgid "Aspen (Sapling)"
 msgstr "사시나무 (유목)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:39
+#: ../../data/world/immovables/trees/aspen/init.lua:37
 msgid "Aspen (Pole)"
 msgstr "사시나무 (성목)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:66
+#: ../../data/world/immovables/trees/aspen/init.lua:62
 msgid "Aspen (Mature)"
 msgstr "사시나무 (성숙목)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:96
+#: ../../data/world/immovables/trees/aspen/init.lua:90
 msgid "Aspen (Old)"
 msgstr "사시나무 (고목)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:97
+#: ../../data/world/immovables/trees/aspen/init.lua:91
 msgid "Aspen"
 msgstr "사시나무"
 
@@ -280,19 +281,19 @@ msgstr "사시나무"
 msgid "Beech (Sapling)"
 msgstr "너도밤나무 (유목)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:39
+#: ../../data/world/immovables/trees/beech/init.lua:37
 msgid "Beech (Pole)"
 msgstr "너도밤나무 (성목)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:66
+#: ../../data/world/immovables/trees/beech/init.lua:62
 msgid "Beech (Mature)"
 msgstr "너도밤나무 (성숙목)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:93
+#: ../../data/world/immovables/trees/beech/init.lua:87
 msgid "Beech (Old)"
 msgstr "너도밤나무 (고목)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:94
+#: ../../data/world/immovables/trees/beech/init.lua:88
 msgid "Beech"
 msgstr "너도밤나무"
 
@@ -300,19 +301,19 @@ msgstr "너도밤나무"
 msgid "Birch (Sapling)"
 msgstr "자작나무 (유목)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:39
+#: ../../data/world/immovables/trees/birch/init.lua:37
 msgid "Birch (Pole)"
 msgstr "자작나무 (성목)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:66
+#: ../../data/world/immovables/trees/birch/init.lua:62
 msgid "Birch (Mature)"
 msgstr "자작나무 (성숙목)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:96
+#: ../../data/world/immovables/trees/birch/init.lua:90
 msgid "Birch (Old)"
 msgstr "자작나무 (고목)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:97
+#: ../../data/world/immovables/trees/birch/init.lua:91
 msgid "Birch"
 msgstr "자작나무"
 
@@ -322,22 +323,22 @@ msgid "Cirrus Tree (Sapling)"
 msgstr "덩굴 나무 (유목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:41
+#: ../../data/world/immovables/trees/cirrus/init.lua:39
 msgid "Cirrus Tree (Pole)"
 msgstr "덩굴 나무 (성목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:69
+#: ../../data/world/immovables/trees/cirrus/init.lua:65
 msgid "Cirrus Tree (Mature)"
 msgstr "덩굴 나무 (성숙목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:97
+#: ../../data/world/immovables/trees/cirrus/init.lua:91
 msgid "Cirrus Tree (Old)"
 msgstr "덩굴 나무 (고목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:99
+#: ../../data/world/immovables/trees/cirrus/init.lua:93
 msgid "Cirrus Tree"
 msgstr "덩굴 나무"
 
@@ -350,7 +351,7 @@ msgstr "덩굴 나무"
 msgid "Dead Tree"
 msgstr "죽은 나무"
 
-#: ../../data/world/immovables/trees/fallentree/init.lua:12
+#: ../../data/world/immovables/trees/fallentree/init.lua:3
 msgid "Fallen Tree"
 msgstr "떨어진 나무"
 
@@ -358,19 +359,19 @@ msgstr "떨어진 나무"
 msgid "Larch (Sapling)"
 msgstr "낙엽송 (유목)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:39
+#: ../../data/world/immovables/trees/larch/init.lua:37
 msgid "Larch (Pole)"
 msgstr "낙엽송 (성목)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:66
+#: ../../data/world/immovables/trees/larch/init.lua:62
 msgid "Larch (Mature)"
 msgstr "낙엽송 (성숙목)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:93
+#: ../../data/world/immovables/trees/larch/init.lua:87
 msgid "Larch (Old)"
 msgstr "낙엽송 (성숙목)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:94
+#: ../../data/world/immovables/trees/larch/init.lua:88
 msgid "Larch"
 msgstr "낙엽송"
 
@@ -380,22 +381,22 @@ msgid "Liana Tree (Sapling)"
 msgstr "칡 나무 (유목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:41
+#: ../../data/world/immovables/trees/liana/init.lua:39
 msgid "Liana Tree (Pole)"
 msgstr "칡 나무 (성목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:69
+#: ../../data/world/immovables/trees/liana/init.lua:65
 msgid "Liana Tree (Mature)"
 msgstr "칡 나무 (성숙목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:100
+#: ../../data/world/immovables/trees/liana/init.lua:94
 msgid "Liana Tree (Old)"
 msgstr "칡 나무 (고목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:102
+#: ../../data/world/immovables/trees/liana/init.lua:96
 msgid "Liana Tree"
 msgstr "칡 나무"
 
@@ -403,19 +404,19 @@ msgstr "칡 나무"
 msgid "Maple (Sapling)"
 msgstr "단풍나무 (유목)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:39
+#: ../../data/world/immovables/trees/maple/init.lua:37
 msgid "Maple (Pole)"
 msgstr "단풍나무 (성목)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:66
+#: ../../data/world/immovables/trees/maple/init.lua:62
 msgid "Maple (Mature)"
 msgstr "단풍나무 (성숙목)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:93
+#: ../../data/world/immovables/trees/maple/init.lua:87
 msgid "Maple (Old)"
 msgstr "단풍나무 (고목)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:94
+#: ../../data/world/immovables/trees/maple/init.lua:88
 msgid "Maple"
 msgstr "단풍나무"
 
@@ -425,22 +426,22 @@ msgid "Dark Mushroom Tree (Sapling)"
 msgstr "어두운 버섯 나무 (유목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:41
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:39
 msgid "Dark Mushroom Tree (Pole)"
 msgstr "어두운 버섯 나무 (성목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:69
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:65
 msgid "Dark Mushroom Tree (Mature)"
 msgstr "어두운 버섯 나무 (성숙목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:97
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:91
 msgid "Dark Mushroom Tree (Old)"
 msgstr "어두운 버섯 나무 (고목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:99
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:93
 msgid "Dark Mushroom Tree"
 msgstr "어두운 버섯 나무"
 
@@ -450,22 +451,22 @@ msgid "Green Mushroom Tree (Sapling)"
 msgstr "초록 버섯 나무 (유목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:41
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:39
 msgid "Green Mushroom Tree (Pole)"
 msgstr "초록 버섯 나무 (성목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:69
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:65
 msgid "Green Mushroom Tree (Mature)"
 msgstr "초록 버섯 나무 (성숙목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:97
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:91
 msgid "Green Mushroom Tree (Old)"
 msgstr "초록 버섯 나무 (고목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:99
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:93
 msgid "Green Mushroom Tree"
 msgstr "초록 버섯 나무"
 
@@ -475,22 +476,22 @@ msgid "Red Mushroom Tree (Sapling)"
 msgstr "빨간 버섯 나무 (유목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:41
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:39
 msgid "Red Mushroom Tree (Pole)"
 msgstr "빨간 버섯 나무 (성목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:69
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:65
 msgid "Red Mushroom Tree (Mature)"
 msgstr "빨간 버섯 나무 (성숙목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:100
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:94
 msgid "Red Mushroom Tree (Old)"
 msgstr "빨간 버섯 나무 (고목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:102
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:96
 msgid "Red Mushroom Tree"
 msgstr "빨간 버섯 나무"
 
@@ -498,19 +499,19 @@ msgstr "빨간 버섯 나무"
 msgid "Oak (Sapling)"
 msgstr "참나무 (유목)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:39
+#: ../../data/world/immovables/trees/oak/init.lua:37
 msgid "Oak (Pole)"
 msgstr "참나무 (성목)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:66
+#: ../../data/world/immovables/trees/oak/init.lua:62
 msgid "Oak (Mature)"
 msgstr "참나무 (성숙목)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:93
+#: ../../data/world/immovables/trees/oak/init.lua:87
 msgid "Oak (Old)"
 msgstr "참나무 (고목)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:94
+#: ../../data/world/immovables/trees/oak/init.lua:88
 msgid "Oak"
 msgstr "참나무"
 
@@ -518,19 +519,19 @@ msgstr "참나무"
 msgid "Borassus Palm (Sapling)"
 msgstr "보라수스 야자 나무 (유목)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:39
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:37
 msgid "Borassus Palm (Pole)"
 msgstr "보라수스 야자 나무 (성목)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:66
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:62
 msgid "Borassus Palm (Mature)"
 msgstr "보라수스 야자 나무 (성숙목)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:93
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:87
 msgid "Borassus Palm (Old)"
 msgstr "보라수스 야자 나무 (고목)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:94
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:88
 msgid "Borassus Palm"
 msgstr "보라수스 야자 나무"
 
@@ -538,19 +539,19 @@ msgstr "보라수스 야자 나무"
 msgid "Coconut Palm (Sapling)"
 msgstr "코코넛 야자 나무 (유목)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:39
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:37
 msgid "Coconut Palm (Pole)"
 msgstr "코코넛 야자 나무 (성목)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:66
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:62
 msgid "Coconut Palm (Mature)"
 msgstr "코코넛 야자 나무 (성숙목)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:93
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:87
 msgid "Coconut Palm (Old)"
 msgstr "코코넛 야자 나무 (고목)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:94
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:88
 msgid "Coconut Palm"
 msgstr "코코넛 야자 나무"
 
@@ -558,19 +559,19 @@ msgstr "코코넛 야자 나무"
 msgid "Date Palm (Sapling)"
 msgstr "대추 야자 나무 (유목)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:39
+#: ../../data/world/immovables/trees/palm_date/init.lua:37
 msgid "Date Palm (Pole)"
 msgstr "대추 야자 나무 (성목)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:66
+#: ../../data/world/immovables/trees/palm_date/init.lua:62
 msgid "Date Palm (Mature)"
 msgstr "대추 야자 나무 (성숙목)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:96
+#: ../../data/world/immovables/trees/palm_date/init.lua:90
 msgid "Date Palm (Old)"
 msgstr "대추 야자 나무 (고목)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:97
+#: ../../data/world/immovables/trees/palm_date/init.lua:91
 msgid "Date Palm"
 msgstr "대추 야자 나무"
 
@@ -578,19 +579,19 @@ msgstr "대추 야자 나무"
 msgid "Oil Palm (Sapling)"
 msgstr "기름야자 나무 (유목)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:39
+#: ../../data/world/immovables/trees/palm_oil/init.lua:37
 msgid "Oil Palm (Pole)"
 msgstr "기름야자 나무 (성목)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:66
+#: ../../data/world/immovables/trees/palm_oil/init.lua:62
 msgid "Oil Palm (Mature)"
 msgstr "기름야자 나무 (성숙목)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:97
+#: ../../data/world/immovables/trees/palm_oil/init.lua:91
 msgid "Oil Palm (Old)"
 msgstr "기름야자 나무 (고목)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:98
+#: ../../data/world/immovables/trees/palm_oil/init.lua:92
 msgid "Oil Palm"
 msgstr "기름야자 나무"
 
@@ -598,19 +599,19 @@ msgstr "기름야자 나무"
 msgid "Roystonea regia Palm (Sapling)"
 msgstr "대왕야자 나무 (유목)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:39
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:37
 msgid "Roystonea regia Palm (Pole)"
 msgstr "대왕야자 나무 (성목)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:66
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:62
 msgid "Roystonea regia Palm (Mature)"
 msgstr "대왕야자 나무 (성숙목)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:93
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:87
 msgid "Roystonea regia Palm (Old)"
 msgstr "대왕야자 나무 (고목)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:94
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:88
 msgid "Roystonea regia Palm"
 msgstr "대왕야자 나무"
 
@@ -618,19 +619,19 @@ msgstr "대왕야자 나무"
 msgid "Rowan (Sapling)"
 msgstr "마가목 (유목)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:39
+#: ../../data/world/immovables/trees/rowan/init.lua:37
 msgid "Rowan (Pole)"
 msgstr "마가목 (성목)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:66
+#: ../../data/world/immovables/trees/rowan/init.lua:62
 msgid "Rowan (Mature)"
 msgstr "마가목 (성숙목)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:96
+#: ../../data/world/immovables/trees/rowan/init.lua:90
 msgid "Rowan (Old)"
 msgstr "마가목 (고목)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:97
+#: ../../data/world/immovables/trees/rowan/init.lua:91
 msgid "Rowan"
 msgstr "마가목"
 
@@ -638,19 +639,19 @@ msgstr "마가목"
 msgid "Spruce (Sapling)"
 msgstr "가문비 나무 (유목)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:39
+#: ../../data/world/immovables/trees/spruce/init.lua:37
 msgid "Spruce (Pole)"
 msgstr "가문비 나무 (성목)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:66
+#: ../../data/world/immovables/trees/spruce/init.lua:62
 msgid "Spruce (Mature)"
 msgstr "가문비 나무 (성숙목)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:93
+#: ../../data/world/immovables/trees/spruce/init.lua:87
 msgid "Spruce (Old)"
 msgstr "가문비 나무 (고목)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:94
+#: ../../data/world/immovables/trees/spruce/init.lua:88
 msgid "Spruce"
 msgstr "가문비 나무"
 
@@ -660,22 +661,22 @@ msgid "Twine Tree (Sapling)"
 msgstr "엉킴 나무 (유목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:41
+#: ../../data/world/immovables/trees/twine/init.lua:39
 msgid "Twine Tree (Pole)"
 msgstr "엉킴 나무 (성목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:69
+#: ../../data/world/immovables/trees/twine/init.lua:65
 msgid "Twine Tree (Mature)"
 msgstr "엉킴 나무 (성숙목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:97
+#: ../../data/world/immovables/trees/twine/init.lua:91
 msgid "Twine Tree (Old)"
 msgstr "엉킴 나무 (고목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:99
+#: ../../data/world/immovables/trees/twine/init.lua:93
 msgid "Twine Tree"
 msgstr "엉킴 나무"
 
@@ -685,22 +686,22 @@ msgid "Green Umbrella Tree (Sapling)"
 msgstr "초록 우산 나무 (유목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:41
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:39
 msgid "Green Umbrella Tree (Pole)"
 msgstr "초록 우산 나무 (성목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:69
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:65
 msgid "Green Umbrella Tree (Mature)"
 msgstr "초록 우산 나무 (성숙목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:97
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:91
 msgid "Green Umbrella Tree (Old)"
 msgstr "초록 우산 나무 (고목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:99
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:93
 msgid "Green Umbrella Tree"
 msgstr "초록 우산 나무"
 
@@ -710,119 +711,139 @@ msgid "Red Umbrella Tree (Sapling)"
 msgstr "빨간 우산 나무 (유목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:41
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:39
 msgid "Red Umbrella Tree (Pole)"
 msgstr "빨간 우산 나무 (성목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:69
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:65
 msgid "Red Umbrella Tree (Mature)"
 msgstr "빨간 우산 나무 (성숙목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:100
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:94
 msgid "Red Umbrella Tree (Old)"
 msgstr "빨간 우산 나무 (고목)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:102
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:96
 msgid "Red Umbrella Tree"
 msgstr "빨간 우산 나무"
 
-#: ../../data/world/init.lua:17
-msgid "Loading world: %1$s (%2$d/%3$d)"
-msgstr "세계를 불러오고 있음: %1$s (%2$d/%3$d)"
-
-#: ../../data/world/init.lua:27
-msgid "Resources"
-msgstr "자원"
-
-#: ../../data/world/init.lua:32
-msgid "Terrains"
-msgstr "지형"
-
-#: ../../data/world/init.lua:42
-msgid "Summer"
-msgstr "여름"
-
-#: ../../data/world/init.lua:48
-msgid "Wasteland"
-msgstr "황무지"
-
-#: ../../data/world/init.lua:54
-msgid "Winter"
-msgstr "겨울"
-
-#: ../../data/world/init.lua:60
-msgid "Desert"
-msgstr "사막"
-
-#: ../../data/world/init.lua:69
-msgid "Immovables"
-msgstr "고정물"
-
-#: ../../data/world/init.lua:78
-msgid "Miscellaneous"
-msgstr "여러가지"
-
-#: ../../data/world/init.lua:113
-msgid "Artifacts"
-msgstr "유물"
-
-#: ../../data/world/init.lua:113
-msgid "These immovables are used by the win condition “Artifacts”."
-msgstr "이러한 움직일 수 없는 물건은 승리 조건 “유물” 로 사용됩니다."
-
-#: ../../data/world/init.lua:126
-msgid "Plants"
-msgstr "초목"
-
-#: ../../data/world/init.lua:147
-msgid "Standing Stones"
-msgstr "선돌"
-
-#: ../../data/world/init.lua:178
-msgid "Rocks"
-msgstr "바위"
-
-#: ../../data/world/init.lua:211
-msgid "Dead Trees"
-msgstr "죽은나무"
-
-#: ../../data/world/init.lua:218
-msgid "Coniferous Trees"
-msgstr "침엽수"
-
-#: ../../data/world/init.lua:225
-msgid "Deciduous Trees"
-msgstr "낙엽수"
-
-#: ../../data/world/init.lua:232
-msgid "Palm Trees"
-msgstr "야자수"
-
-#: ../../data/world/init.lua:239
-msgid "Wasteland Trees"
-msgstr "황무지 나무"
-
-#: ../../data/world/init.lua:276
-msgid "Animals"
-msgstr "동물"
-
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:287
+#. descname = _"Herbivores",
+#. picture = "world/critters/sheep/idle_00.png",
+#. items_per_row = 10,
+#. items = {
+#. "bunny",
+#. "sheep",
+#. }
+#. },
+#. {
+#. name = "critters_carnivores",
+#. TRANSLATORS: A category in the editor for placing animals on the map.
+#. descname = _"Carnivores",
+#. picture = "world/critters/fox/idle_00.png",
+#. items_per_row = 10,
+#. items = {
+#. "marten",
+#. "badger",
+#. "lynx",
+#. "fox",
+#. "wolf",
+#. "brownbear",
+#. }
+#. },
+#. },
+#. Items shown in the place critter tool. Each subtable is a tab in the tool.
+#. TRANSLATORS: A category in the editor for placing animals on the map.
+#: ../../data/world/init.lua:86
 msgid "Herbivores"
 msgstr "초식동물"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:306
+#: ../../data/world/init.lua:104
 msgid "Carnivores"
 msgstr "육식동물"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:322
+#: ../../data/world/init.lua:119
 msgid "Aquatic"
 msgstr "수생 생물"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:133
+msgid "Miscellaneous"
+msgstr "여러가지"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:172
+msgid "Artifacts"
+msgstr "유물"
+
+#: ../../data/world/init.lua:172
+msgid "These immovables are used by the win condition “Artifacts”."
+msgstr "이러한 움직일 수 없는 물건은 승리 조건 “유물” 로 사용됩니다."
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:185
+msgid "Plants"
+msgstr "초목"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:207
+msgid "Standing Stones"
+msgstr "선돌"
+
+#: ../../data/world/init.lua:242
+msgid "Rocks"
+msgstr "바위"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:279
+msgid "Dead Trees"
+msgstr "죽은나무"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:295
+msgid "Coniferous Trees"
+msgstr "침엽수"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:313
+msgid "Deciduous Trees"
+msgstr "낙엽수"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:356
+msgid "Palm Trees"
+msgstr "야자수"
+
+#. TRANSLATORS: A category in the editor for placing immovables on the map.
+#: ../../data/world/init.lua:389
+msgid "Wasteland Trees"
+msgstr "황무지 나무"
+
+#. TRANSLATORS: A category in the editor for placing terrains on the map.
+#: ../../data/world/init.lua:451
+msgid "Summer"
+msgstr "여름"
+
+#. TRANSLATORS: A category in the editor for placing terrains on the map.
+#: ../../data/world/init.lua:480
+msgid "Wasteland"
+msgstr "황무지"
+
+#. TRANSLATORS: A category in the editor for placing terrains on the map.
+#: ../../data/world/init.lua:508
+msgid "Winter"
+msgstr "겨울"
+
+#. TRANSLATORS: A category in the editor for placing terrains on the map.
+#: ../../data/world/init.lua:536
+msgid "Desert"
+msgstr "사막"
 
 #: ../../data/world/resources/init.lua:81
 msgid "Coal"
@@ -841,10 +862,10 @@ msgid "Stones"
 msgstr "석광"
 
 #: ../../data/world/resources/init.lua:145
-#: ../../data/world/terrains/init.lua:469
-#: ../../data/world/terrains/init.lua:792
-#: ../../data/world/terrains/init.lua:1102
-#: ../../data/world/terrains/init.lua:1413
+#: ../../data/world/terrains/desert/water/init.lua:3
+#: ../../data/world/terrains/summer/water/init.lua:3
+#: ../../data/world/terrains/wasteland/water/init.lua:3
+#: ../../data/world/terrains/winter/water/init.lua:3
 msgid "Water"
 msgstr "식수"
 
@@ -852,220 +873,220 @@ msgstr "식수"
 msgid "Fish"
 msgstr "물고기"
 
-#: ../../data/world/terrains/init.lua:158
-msgid "Meadow 1"
-msgstr "목초지 1"
-
-#. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
-#. possible.
-#: ../../data/world/terrains/init.lua:163
-#: ../../data/world/terrains/init.lua:187
-#: ../../data/world/terrains/init.lua:207
-#: ../../data/world/terrains/init.lua:227
-#: ../../data/world/terrains/init.lua:301
-#: ../../data/world/terrains/init.lua:321
-#: ../../data/world/terrains/init.lua:495
-#: ../../data/world/terrains/init.lua:517
-#: ../../data/world/terrains/init.lua:539
-#: ../../data/world/terrains/init.lua:559
-#: ../../data/world/terrains/init.lua:579
-#: ../../data/world/terrains/init.lua:599
-#: ../../data/world/terrains/init.lua:637
-#: ../../data/world/terrains/init.lua:656
-#: ../../data/world/terrains/init.lua:819
-#: ../../data/world/terrains/init.lua:839
-#: ../../data/world/terrains/init.lua:859
-#: ../../data/world/terrains/init.lua:933
-#: ../../data/world/terrains/init.lua:952
-#: ../../data/world/terrains/init.lua:1161
-#: ../../data/world/terrains/init.lua:1181
-#: ../../data/world/terrains/init.lua:1201
-#: ../../data/world/terrains/init.lua:1223
-#: ../../data/world/terrains/init.lua:1245
-#: ../../data/world/terrains/init.lua:1264
-msgid "likes trees"
-msgstr "나무같음??"
-
-#: ../../data/world/terrains/init.lua:182
-msgid "Meadow 2"
-msgstr "목초지 2"
-
-#: ../../data/world/terrains/init.lua:202
-msgid "Meadow 3"
-msgstr "목초지 3"
-
-#: ../../data/world/terrains/init.lua:222
-msgid "Meadow 4"
-msgstr "목초지 4"
-
-#: ../../data/world/terrains/init.lua:242
-#: ../../data/world/terrains/init.lua:1156
-msgid "Steppe"
-msgstr "대초원"
-
-#: ../../data/world/terrains/init.lua:260
-msgid "Barren Steppe"
-msgstr "불모 대초원"
-
-#: ../../data/world/terrains/init.lua:278
-#: ../../data/world/terrains/init.lua:1196
-msgid "Mountain Meadow"
-msgstr "산악 목초지"
-
-#: ../../data/world/terrains/init.lua:295
-#: ../../data/world/terrains/init.lua:632
-#: ../../data/world/terrains/init.lua:928
-#: ../../data/world/terrains/init.lua:1240
-msgid "Forested Mountain 1"
-msgstr "숲이 우거진 산 1"
-
-#: ../../data/world/terrains/init.lua:315
-#: ../../data/world/terrains/init.lua:651
-#: ../../data/world/terrains/init.lua:947
-#: ../../data/world/terrains/init.lua:1259
-msgid "Forested Mountain 2"
-msgstr "숲이 우거진 산 2"
-
-#: ../../data/world/terrains/init.lua:335
-#: ../../data/world/terrains/init.lua:670
-#: ../../data/world/terrains/init.lua:966
-#: ../../data/world/terrains/init.lua:1279
-msgid "Mountain 1"
-msgstr "산 1"
-
-#: ../../data/world/terrains/init.lua:353
-#: ../../data/world/terrains/init.lua:688
-#: ../../data/world/terrains/init.lua:984
-#: ../../data/world/terrains/init.lua:1297
-msgid "Mountain 2"
-msgstr "산 2"
-
-#: ../../data/world/terrains/init.lua:371
-#: ../../data/world/terrains/init.lua:706
-#: ../../data/world/terrains/init.lua:1002
-#: ../../data/world/terrains/init.lua:1315
-msgid "Mountain 3"
-msgstr "산 3"
-
-#: ../../data/world/terrains/init.lua:389
-#: ../../data/world/terrains/init.lua:724
-#: ../../data/world/terrains/init.lua:1020
-#: ../../data/world/terrains/init.lua:1333
-msgid "Mountain 4"
-msgstr "산 4"
-
-#: ../../data/world/terrains/init.lua:406
-#: ../../data/world/terrains/init.lua:742
-#: ../../data/world/terrains/init.lua:1052
-#: ../../data/world/terrains/init.lua:1397
+#: ../../data/world/terrains/desert/beach/init.lua:151
+#: ../../data/world/terrains/summer/beach/init.lua:3
+#: ../../data/world/terrains/wasteland/beach/init.lua:3
+#: ../../data/world/terrains/winter/beach/init.lua:3
 msgid "Beach"
 msgstr "해변"
 
-#: ../../data/world/terrains/init.lua:421
-msgid "Swamp"
-msgstr "늪지대"
-
-#: ../../data/world/terrains/init.lua:436
-#: ../../data/world/terrains/init.lua:910
-msgid "Snow"
-msgstr "눈"
-
-#: ../../data/world/terrains/init.lua:452
-msgid "Lava"
-msgstr "용암"
-
-#: ../../data/world/terrains/init.lua:490
-msgid "Ashes 1"
-msgstr "잿더미 1"
-
-#: ../../data/world/terrains/init.lua:512
-msgid "Ashes 2"
-msgstr "잿더미 2"
-
-#: ../../data/world/terrains/init.lua:534
-msgid "Hard Ground 1"
-msgstr "굳은 지반 1"
-
-#: ../../data/world/terrains/init.lua:554
-msgid "Hard Ground 2"
-msgstr "굳은 지반 2"
-
-#: ../../data/world/terrains/init.lua:574
-msgid "Hard Ground 3"
-msgstr "굳은 지반 3"
-
-#: ../../data/world/terrains/init.lua:594
-msgid "Hard Ground 4"
-msgstr "굳은 지반 4"
-
-#: ../../data/world/terrains/init.lua:614
-msgid "Igneous Rocks"
-msgstr "화성암"
-
-#: ../../data/world/terrains/init.lua:758
-msgid "Lava Rocks 1"
-msgstr "화산암 1"
-
-#: ../../data/world/terrains/init.lua:775
-msgid "Lava Rocks 2"
-msgstr "화산암 2"
-
-#: ../../data/world/terrains/init.lua:814
-msgid "Tundra 1"
-msgstr "동토대 1"
-
-#: ../../data/world/terrains/init.lua:834
-msgid "Tundra 2"
-msgstr "동토대 2"
-
-#: ../../data/world/terrains/init.lua:854
-msgid "Tundra 3"
-msgstr "동토대 3"
-
-#: ../../data/world/terrains/init.lua:874
-msgid "Tundra Taiga"
-msgstr "동토대 북방침엽수림"
-
-#: ../../data/world/terrains/init.lua:892
-msgid "Taiga"
-msgstr "북방침엽수림"
-
-#: ../../data/world/terrains/init.lua:1036
-msgid "Ice"
-msgstr "얼음"
-
-#: ../../data/world/terrains/init.lua:1068
-msgid "Ice Floes 1"
-msgstr "떠 있는 얼음덩이 1"
-
-#: ../../data/world/terrains/init.lua:1085
-msgid "Ice Floes 2"
-msgstr "떠 있는 얼음덩이 2"
-
-#: ../../data/world/terrains/init.lua:1123
-msgid "Desert 4"
-msgstr "사막 4"
-
-#: ../../data/world/terrains/init.lua:1140
-msgid "Dry Soil"
-msgstr "건조한 흙"
-
-#: ../../data/world/terrains/init.lua:1176
-msgid "Meadow"
-msgstr "목초지"
-
-#: ../../data/world/terrains/init.lua:1218
-msgid "High Mountain Meadow"
-msgstr "고산 목초지"
-
-#: ../../data/world/terrains/init.lua:1349
+#: ../../data/world/terrains/desert/desert1/init.lua:3
 msgid "Desert 1"
 msgstr "사막 1"
 
-#: ../../data/world/terrains/init.lua:1365
+#: ../../data/world/terrains/desert/desert2/init.lua:3
 msgid "Desert 2"
 msgstr "사막 2"
 
-#: ../../data/world/terrains/init.lua:1381
+#: ../../data/world/terrains/desert/desert3/init.lua:3
 msgid "Desert 3"
 msgstr "사막 3"
+
+#: ../../data/world/terrains/desert/desert4/init.lua:3
+msgid "Desert 4"
+msgstr "사막 4"
+
+#: ../../data/world/terrains/desert/drysoil/init.lua:3
+msgid "Dry Soil"
+msgstr "건조한 흙"
+
+#: ../../data/world/terrains/desert/forested_mountain1/init.lua:3
+#: ../../data/world/terrains/summer/forested_mountain1/init.lua:3
+#: ../../data/world/terrains/wasteland/forested_mountain1/init.lua:3
+#: ../../data/world/terrains/winter/forested_mountain1/init.lua:3
+msgid "Forested Mountain 1"
+msgstr "숲이 우거진 산 1"
+
+#. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
+#. possible.
+#: ../../data/world/terrains/desert/forested_mountain1/init.lua:7
+#: ../../data/world/terrains/desert/forested_mountain2/init.lua:7
+#: ../../data/world/terrains/desert/highmountainmeadow/init.lua:7
+#: ../../data/world/terrains/desert/meadow/init.lua:7
+#: ../../data/world/terrains/desert/mountainmeadow/init.lua:7
+#: ../../data/world/terrains/desert/steppe/init.lua:7
+#: ../../data/world/terrains/summer/forested_mountain1/init.lua:8
+#: ../../data/world/terrains/summer/forested_mountain2/init.lua:8
+#: ../../data/world/terrains/summer/meadow1/init.lua:7
+#: ../../data/world/terrains/summer/meadow2/init.lua:7
+#: ../../data/world/terrains/summer/meadow3/init.lua:7
+#: ../../data/world/terrains/summer/meadow4/init.lua:7
+#: ../../data/world/terrains/wasteland/ashes1/init.lua:7
+#: ../../data/world/terrains/wasteland/ashes2/init.lua:7
+#: ../../data/world/terrains/wasteland/forested_mountain1/init.lua:7
+#: ../../data/world/terrains/wasteland/forested_mountain2/init.lua:7
+#: ../../data/world/terrains/wasteland/hardground1/init.lua:7
+#: ../../data/world/terrains/wasteland/hardground2/init.lua:7
+#: ../../data/world/terrains/wasteland/hardground3/init.lua:7
+#: ../../data/world/terrains/wasteland/hardground4/init.lua:7
+#: ../../data/world/terrains/winter/forested_mountain1/init.lua:7
+#: ../../data/world/terrains/winter/forested_mountain2/init.lua:7
+#: ../../data/world/terrains/winter/tundra/init.lua:7
+#: ../../data/world/terrains/winter/tundra2/init.lua:7
+#: ../../data/world/terrains/winter/tundra3/init.lua:7
+msgid "likes trees"
+msgstr "나무같음??"
+
+#: ../../data/world/terrains/desert/forested_mountain2/init.lua:3
+#: ../../data/world/terrains/summer/forested_mountain2/init.lua:3
+#: ../../data/world/terrains/wasteland/forested_mountain2/init.lua:3
+#: ../../data/world/terrains/winter/forested_mountain2/init.lua:3
+msgid "Forested Mountain 2"
+msgstr "숲이 우거진 산 2"
+
+#: ../../data/world/terrains/desert/highmountainmeadow/init.lua:3
+msgid "High Mountain Meadow"
+msgstr "고산 목초지"
+
+#: ../../data/world/terrains/desert/meadow/init.lua:3
+msgid "Meadow"
+msgstr "목초지"
+
+#: ../../data/world/terrains/desert/mountain1/init.lua:3
+#: ../../data/world/terrains/summer/mountain1/init.lua:3
+#: ../../data/world/terrains/wasteland/mountain1/init.lua:3
+#: ../../data/world/terrains/winter/mountain1/init.lua:3
+msgid "Mountain 1"
+msgstr "산 1"
+
+#: ../../data/world/terrains/desert/mountain2/init.lua:3
+#: ../../data/world/terrains/summer/mountain2/init.lua:3
+#: ../../data/world/terrains/wasteland/mountain2/init.lua:3
+#: ../../data/world/terrains/winter/mountain2/init.lua:3
+msgid "Mountain 2"
+msgstr "산 2"
+
+#: ../../data/world/terrains/desert/mountain3/init.lua:3
+#: ../../data/world/terrains/summer/mountain3/init.lua:3
+#: ../../data/world/terrains/wasteland/mountain3/init.lua:3
+#: ../../data/world/terrains/winter/mountain3/init.lua:3
+msgid "Mountain 3"
+msgstr "산 3"
+
+#: ../../data/world/terrains/desert/mountain4/init.lua:3
+#: ../../data/world/terrains/summer/mountain4/init.lua:3
+#: ../../data/world/terrains/wasteland/mountain4/init.lua:3
+#: ../../data/world/terrains/winter/mountain4/init.lua:3
+msgid "Mountain 4"
+msgstr "산 4"
+
+#: ../../data/world/terrains/desert/mountainmeadow/init.lua:3
+#: ../../data/world/terrains/summer/mountain_meadow/init.lua:3
+msgid "Mountain Meadow"
+msgstr "산악 목초지"
+
+#: ../../data/world/terrains/desert/steppe/init.lua:3
+#: ../../data/world/terrains/summer/steppe/init.lua:3
+msgid "Steppe"
+msgstr "대초원"
+
+#: ../../data/world/terrains/summer/lava/init.lua:3
+msgid "Lava"
+msgstr "용암"
+
+#: ../../data/world/terrains/summer/meadow1/init.lua:3
+msgid "Meadow 1"
+msgstr "목초지 1"
+
+#: ../../data/world/terrains/summer/meadow2/init.lua:3
+msgid "Meadow 2"
+msgstr "목초지 2"
+
+#: ../../data/world/terrains/summer/meadow3/init.lua:3
+msgid "Meadow 3"
+msgstr "목초지 3"
+
+#: ../../data/world/terrains/summer/meadow4/init.lua:3
+msgid "Meadow 4"
+msgstr "목초지 4"
+
+#: ../../data/world/terrains/summer/snow/init.lua:3
+#: ../../data/world/terrains/winter/snow/init.lua:3
+msgid "Snow"
+msgstr "눈"
+
+#: ../../data/world/terrains/summer/steppe_barren/init.lua:3
+msgid "Barren Steppe"
+msgstr "불모 대초원"
+
+#: ../../data/world/terrains/summer/swamp/init.lua:3
+msgid "Swamp"
+msgstr "늪지대"
+
+#: ../../data/world/terrains/wasteland/ashes1/init.lua:3
+msgid "Ashes 1"
+msgstr "잿더미 1"
+
+#: ../../data/world/terrains/wasteland/ashes2/init.lua:3
+msgid "Ashes 2"
+msgstr "잿더미 2"
+
+#: ../../data/world/terrains/wasteland/hardground1/init.lua:3
+msgid "Hard Ground 1"
+msgstr "굳은 지반 1"
+
+#: ../../data/world/terrains/wasteland/hardground2/init.lua:3
+msgid "Hard Ground 2"
+msgstr "굳은 지반 2"
+
+#: ../../data/world/terrains/wasteland/hardground3/init.lua:3
+msgid "Hard Ground 3"
+msgstr "굳은 지반 3"
+
+#: ../../data/world/terrains/wasteland/hardground4/init.lua:3
+msgid "Hard Ground 4"
+msgstr "굳은 지반 4"
+
+#: ../../data/world/terrains/wasteland/hardlava/init.lua:3
+msgid "Igneous Rocks"
+msgstr "화성암"
+
+#: ../../data/world/terrains/wasteland/lava_stone1/init.lua:3
+msgid "Lava Rocks 1"
+msgstr "화산암 1"
+
+#: ../../data/world/terrains/wasteland/lava_stone2/init.lua:3
+msgid "Lava Rocks 2"
+msgstr "화산암 2"
+
+#: ../../data/world/terrains/winter/ice/init.lua:3
+msgid "Ice"
+msgstr "얼음"
+
+#: ../../data/world/terrains/winter/ice_floes/init.lua:3
+msgid "Ice Floes 1"
+msgstr "떠 있는 얼음덩이 1"
+
+#: ../../data/world/terrains/winter/ice_floes2/init.lua:3
+msgid "Ice Floes 2"
+msgstr "떠 있는 얼음덩이 2"
+
+#: ../../data/world/terrains/winter/taiga/init.lua:3
+msgid "Taiga"
+msgstr "북방침엽수림"
+
+#: ../../data/world/terrains/winter/tundra/init.lua:3
+msgid "Tundra 1"
+msgstr "동토대 1"
+
+#: ../../data/world/terrains/winter/tundra2/init.lua:3
+msgid "Tundra 2"
+msgstr "동토대 2"
+
+#: ../../data/world/terrains/winter/tundra3/init.lua:3
+msgid "Tundra 3"
+msgstr "동토대 3"
+
+#: ../../data/world/terrains/winter/tundra_taiga/init.lua:3
+msgid "Tundra Taiga"
+msgstr "동토대 북방침엽수림"

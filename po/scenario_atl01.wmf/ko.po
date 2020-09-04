@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-17 12:38+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
+"PO-Revision-Date: 2020-08-25 12:29+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -23,11 +23,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:29
 msgid "Ensure the supply of building wares"
-msgstr "건물 용품 공급 체제를 정비하십시오."
+msgstr "건물 물품 공급 체제를 정비하십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:31
 msgid "Supply Building Wares"
-msgstr "건물 용품을 공급하십시오"
+msgstr "건물 물품을 공급하십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Supply basic building material for your economy:"
@@ -205,7 +205,7 @@ msgstr "병영을 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 msgid "Recruiting new soldiers"
-msgstr "새로운 군인을 모집하고 있음"
+msgstr "신병들을 모집하고 있음"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 msgid ""
@@ -213,7 +213,7 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr "이제 무기가 주조되고 있으니, 새로운 군인들을 모집할 수 있다. 이를 위해서는 가벼운 삼지창과 타마드를 병영에 전달해야 한다. 수령자는 창고에서 도착하여 각각 한 명씩, 그리고 군인이 되기 위한 몇 가지 기본적인 훈련을 받게 될 것이다."
+msgstr "이제 무기가 주조되고 있으니, 신병들을 모집할 수 있다. 이를 위해서는 가벼운 삼지창과 타마드를 병영에 전달해야 한다. 수령자는 창고에서 도착하여 각각 한 명씩, 그리고 군인이 되기 위한 몇 가지 기본적인 훈련을 받게 될 것이다."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:106
 msgid "Build training sites for soldiers"
@@ -602,7 +602,7 @@ msgid ""
 "We offer to also produce the tabards for young soldiers and the golden "
 "tabards for officers for you in exchange. You will need them for sure as "
 "soon as you want to recruit new soldiers."
-msgstr "우리는 또한 젊은 군인들을 위한 휘장과 장교를 위한 황금 휘장도 대신 생산해 드리겠습니다. 새로운 군인을 모집하는 즉시 반드시 필요하게 될 것입니다."
+msgstr "우리는 또한 젊은 군인들을 위한 휘장과 장교를 위한 황금 휘장도 대신 생산해 드리겠습니다. 신병을 모집하는 즉시 반드시 필요하게 될 것입니다."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:275

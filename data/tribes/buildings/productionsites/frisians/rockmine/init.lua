@@ -1,14 +1,28 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_rockmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("frisians_building", "Rock Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "frisians_rockmine_deep",
+
+   enhancement = {
+      name = "frisians_rockmine_deep",
+      enhancement_cost = {
+         brick = 2,
+         granite = 1,
+         log = 1,
+         reed = 2
+      },
+      enhancement_return_on_dismantle = {
+         brick = 1,
+         log = 1,
+         reed = 1
+      }
+   },
 
    buildcost = {
       brick = 1,
@@ -60,7 +74,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "stones",
+      mines = "resource_stones",
       mines_percent = 50,
       prohibited_till = 630
    },
@@ -111,3 +125,5 @@ tribes:new_productionsite_type {
          pgettext("frisians_building", "This rock mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

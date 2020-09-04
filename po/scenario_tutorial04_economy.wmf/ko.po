@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-17 08:53+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
+"PO-Revision-Date: 2020-08-25 12:24+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -126,7 +126,7 @@ msgstr "당신의 선술집들을 확인하십시오"
 msgid ""
 "At first, we should find out how many taverns we currently have. Widelands "
 "offers you a window where you can easily check this."
-msgstr "먼저, 우리는 우리가 현재 보유한 선술집이 얼마나 많은지 알아야 합니다. Widelands는 당신에게 그것을 쉽게 확인할 수 있는 창을 제공합니다."
+msgstr "먼저, 우리는 우리가 현재 보유한 선술집이 얼마나 많은지 알아야 합니다. 와이드랜드는 당신에게 그것을 쉽게 확인할 수 있는 창을 제공합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:67
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:69
@@ -306,30 +306,30 @@ msgstr "재고 창에는 4 개의 탭이 있습니다. 첫 번째 제품은 땅�
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr "야전식량을 보자면, 지금은 합쳐서 오직 다섯 개밖에 없고, 아마 어딘가로 향하는 중인 것 같습니다. 다섯 개의 야전식량은 이런 큰 경제에는 많은 것이 아닙니다."
+msgstr "야전식량을 보자면, 지금은 합쳐서 오직 5 개 밖에 없고, 아마 어딘가로 향하는 중인 것 같습니다. 5 개의 야전식량은 이런 큰 경제에는 많은 것이 아닙니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:158
 msgid ""
 "The second tab shows you all your workers, again those on roads and in "
 "buildings summed up."
-msgstr "두번째 탭은 땅길에 있거나 건물에 있는 것을 합친, 모든 당신의 일꾼들을 보여줍니다."
+msgstr "2번째 탭은 땅길에 있거나 건물에 있는 것을 합친, 모든 당신의 일꾼들을 보여줍니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:168
 msgid ""
 "The third tab shows you the wares that are stored in your headquarters, your"
 " warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
-msgstr "세번째 탭은 당신이 본부, 창고와 항구에 저장하고 있는 물품들을 보여줍니다. 그것들은 어디서든 필요하지 않고 그러므로 당신의 예비품입니다."
+msgstr "3번째 탭은 당신이 본부, 창고와 항구에 저장하고 있는 물품들을 보여줍니다. 그것들은 어디서든 필요하지 않고 그러므로 당신의 예비품입니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:169
 msgid "The fourth tab shows the same thing for workers."
-msgstr "네번째 탭은 일꾼들에 대해서 같은 것을 보여줍니다."
+msgstr "4번째 탭은 일꾼들에 대해서 같은 것을 보여줍니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:170
 msgid ""
 "The third tab tells you that there are no rations left in your headquarters "
 "– that’s not good!"
-msgstr "세번째 탭은 당신에게 본부에 아무런 야전식량도 없다는 것을 알려줍니다 - 좋지 않습니다!"
+msgstr "3번째 탭은 당신에게 본부에 아무런 야전식량도 없다는 것을 알려줍니다 - 좋지 않습니다!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:177
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:200
@@ -461,7 +461,7 @@ msgstr "군인은 나무창과 투구가 필요합니다. 군인이 채용된 �
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."
-msgstr "백과사전을 사용하여 새로운 군인을 만드는 방법을 알아봅시다."
+msgstr "백과사전을 사용하여 신병을 만드는 방법을 알아봅시다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
@@ -793,7 +793,7 @@ msgstr "이 창은 재고 창과 비슷해 보이지만, 바닥에 추가적인 
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
-msgstr "일단 하나 또는 더 많은 물품들을 선택합니다 (좌클릭하고 끌 수도 있습니다). 그리고 나서 선택한 물품을 원하시는 목표 양만큼 설정할 수 있습니다."
+msgstr "일단 하나 또는 더 많은 물품들을 선택합니다 (왼쪽 단추를 누르고 끌 수도 있습니다). 그리고 나서 선택한 물품을 원하시는 목표 양만큼 설정할 수 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""

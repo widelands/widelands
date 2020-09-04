@@ -1,7 +1,6 @@
 dirname = "test/maps/market_trading.wmf/" .. path.dirname(__file__)
 
 tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
    name = "barbarians_custom_worker",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Custom Worker"),

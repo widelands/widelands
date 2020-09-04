@@ -51,7 +51,9 @@ protected:
 
 private:
 	void scrollpos_changed(int32_t);
-
+	void delete_selected_text() const;
+	void copy_selected_text() const;
+	void select_until(uint32_t end) const;
 	struct Data;
 	std::unique_ptr<Data> d_;
 };

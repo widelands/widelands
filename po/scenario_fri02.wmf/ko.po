@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: ks k, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -104,7 +104,7 @@ msgstr "선물로 물품을 모으거나 제국의 창고를 파괴하십시오.
 msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
-msgstr "무릴리우스와 함께 야만족들을 상대로 협력할 것인지 결정하세요. 만약 그렇다면, 그의 창고에 다음의 물품들을 채우십시오:"
+msgstr "무릴리우스와 함께 야만인들을 상대로 협력할 것인지 결정하세요. 만약 그렇다면, 그의 창고에 다음의 물품들을 채우십시오:"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "30 × Log"
@@ -213,11 +213,11 @@ msgstr "누가 이 근처에서 주문하고 있나!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:99
 msgid "Defeat the Barbarians!"
-msgstr "야만족들을 물리치십시오!"
+msgstr "야만인들을 물리치십시오!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians"
-msgstr "야만족들을 물리치십시오"
+msgstr "야만인들을 물리치십시오"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:102
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
@@ -244,17 +244,17 @@ msgstr "여전히 무릴리우스에게 속한 모든 밭을 정복해야 합니
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:116
 msgid "Defeat Murilius and the Barbarians!"
-msgstr "무릴리우스와 야만족을 물리치십시오!"
+msgstr "무릴리우스와 야만인들을 물리치십시오!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat the Barbarians and the Empire Colony"
-msgstr "야만족들과 제국의 식민지를 물리치십시오"
+msgstr "야만인들과 제국의 식민지를 물리치십시오"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:119
 msgid ""
 "The Barbarians and the Empire are too dangerous to allow them to live near "
 "us. We must defeat them both."
-msgstr "야만족들과 제국은 너무 위험해서 우리 근처에 살기에 너무 위험합니다. 우리는 그들 모두를 물리쳐야만 합니다."
+msgstr "야만인들과 제국은 너무 위험해서 우리 근처에 살기에 너무 위험합니다. 우리는 그들 모두를 물리쳐야만 합니다."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:128
 msgid "Warning"
@@ -646,7 +646,7 @@ msgid ""
 "inhospitable, hostile tribe of barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
-"리바우드, 이 경우, 나는 그대에게 제국의 바로 이 전초기지 근처에 불친절하고 적대적인 야만족 부족이 있다는 사실을 알려드려야겠소."
+"리바우드, 이 경우, 나는 그대에게 제국의 바로 이 전초기지 근처에 불친절하고 적대적인 야만인들의 부족이 있다는 사실을 알려드려야겠소."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:285
@@ -711,7 +711,7 @@ msgid ""
 "some consideration."
 msgstr ""
 "이 지역에 살려면이 야만인들과 싸워야합니다. 분명히 그대는 제국과 함께 싸우는 것이 혼자보다 쉽다는 것을 알 수 있지않겠소? 그리고 "
-"그대는 정말로 제국을 적으로 하길 원하지 않소. 그대가 야만족들이라 할지라도, 나는 그대가 약간의 고민해 본 후에 내 말의 진실을 깨닫게"
+"그대는 정말로 제국을 적으로 하길 원하지 않소. 그대가 야만인들이라 할지라도, 나는 그대가 약간의 고민해 본 후에 내 말의 진실을 깨닫게"
 " 될 것이라고 믿소."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
@@ -788,7 +788,7 @@ msgstr "라틴어: 제국은 적입니다!"
 msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "destroying the beautiful building we presented you with!"
-msgstr "야만족들아! 너희는 우리가 너희에게 선물한 아름다운 건물을 파괴함으로써 나의 우정에 대한 제안을 가장 무례하게 거절했다!"
+msgstr "야만인들아! 너희는 우리가 너희에게 선물한 아름다운 건물을 파괴함으로써 나의 우정에 대한 제안을 가장 무례하게 거절했다!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:357
@@ -802,7 +802,7 @@ msgstr "너희는 제국의 적이며, 내가 너희를 그렇게 대할것이�
 msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "basely wasting your precious resources on expansion!"
-msgstr "야만족들아! 너희는 나의 우정 제의를 가장 무례하게 거절했다. 너의 귀중한 자원을 근본적으로 확장하는데 낭비함으로써 말이다!"
+msgstr "야만인들아! 너희는 나의 우정 제의를 가장 무례하게 거절했다. 너의 귀중한 자원을 근본적으로 확장하는데 낭비함으로써 말이다!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:369
 msgid "Two Enemies"
@@ -829,7 +829,7 @@ msgid ""
 " saw in our old home. We must defeat the barbarians as well."
 msgstr ""
 "그가 언급한 야만인 부족도 위협입니다. 우리가 옛 집에서 보았던 것처럼 나눔은 갈등과 싸움으로 이어질 뿐이기 때문에 이 땅을 다른 "
-"누구와도 나누고 싶지 않습니다. 우리는 야만족들 또한 물리쳐야 합니다."
+"누구와도 나누고 싶지 않습니다. 우리는 야만인들 또한 물리쳐야 합니다."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:379
 msgid "The Empire is Grateful"
@@ -861,7 +861,7 @@ msgid ""
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
 "이제 북서쪽에 숨겨져있는 계곡에 사는 야만인들을 정복 할 수 있도록 돕기를 허락하겠습니다. 내가 너희에게 명하노니, 이 전초기지를 에워싼"
-" 산들의 북쪽 끝을 따라 확장하여라. 너희는 거기에서 야만족들을 발견할 것이다 – 그들을 공격하여라! 우리는 적의 공격을 막아낼 것이오."
+" 산들의 북쪽 끝을 따라 확장하여라. 너희는 거기에서 야만인들을 발견할 것이다 – 그들을 공격하여라! 우리는 적의 공격을 막아낼 것이오."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:390
 msgid "The Reward For Your Service"
@@ -948,9 +948,3 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "이 임무를 완수했습니다. 원한다면 계속 할 수 있고, 그렇지 않으면 다음 임무로 이동하십시오."
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/fri02.wmf/scripting/tribes/warehouse_empire.lua:9
-msgctxt "frisians_building"
-msgid "Empire Warehouse"
-msgstr "제국의 창고"

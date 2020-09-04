@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: ks k, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -46,7 +46,7 @@ msgstr "채석장"
 msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
-msgstr "풍부한 바위 근처에 채석장을 짓고 건물 부지를 마련하고 귀중한 자원을 얻을 수 있습니다."
+msgstr "풍부한 바위 근처에 채석장을 짓고 건물 터를 마련하고 귀중한 자원을 얻을 수 있습니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -158,7 +158,7 @@ msgstr "남쪽에 있는 섬을 탐험하십시오. 탐험대를 이용해 그�
 msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
-msgstr "북쪽으로 배를 보내서 야만족에 대한 정보를 모아야 합니다. 섬에 항구를 세우고 전초기지를 찾으십시오."
+msgstr "북쪽으로 배를 보내서 야만인들에 대한 정보를 모아야 합니다. 섬에 항구를 세우고 전초기지를 찾으십시오."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:129
 msgid "Produce gold to send out expeditions"
@@ -175,7 +175,7 @@ msgstr "주변 지역을 식민지로 만들 수 있도록 최소한 6 개의 �
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:138
 msgid "Defeat the Barbarians"
-msgstr "야만족을 물리치기"
+msgstr "야만인들을 물리치기"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Enemy"
@@ -183,7 +183,7 @@ msgstr "적을 물리치기"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr "이 지역에서 야만족의 존재를 끝내십시오."
+msgstr "이 지역에서 야만인들의 존재를 끝내십시오."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:147
 msgid "Explore further and build ports"
@@ -585,7 +585,7 @@ msgid ""
 "have only five bales of cloth left, which we will need to build the port and"
 " the shipyard."
 msgstr ""
-"원정 선박을 보내려면, 먼저 배가 필요합니다. 불행하게도, 우리는 항구와 조선소를 건설하는데 사용할 만큼의 딱 다섯 뭉치의 옷감밖에 "
+"원정 선박을 보내려면, 먼저 배가 필요합니다. 불행하게도, 우리는 항구와 조선소를 건설하는데 사용할 만큼의 딱 5 뭉치의 옷감밖에 "
 "없습니다."
 
 #. TRANSLATORS: Amalea

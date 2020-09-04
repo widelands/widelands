@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-17 11:41+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
+"PO-Revision-Date: 2020-08-25 12:24+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,7 @@ msgid ""
 "‘The Citadel of Adlen surely is the finest masterpiece of Barbarian "
 "craftsmanship. Nothing as strong and big and beautiful has ever been built "
 "in such a short time.’"
-msgstr "‘아들렌 성채는 분명 야만족 공예의 가장 훌륭한 걸작입니다. 그렇게 짧은 시간 동안 튼튼하고 크고 아름다운 것은 없습니다.’"
+msgstr "‘아들렌 성채는 분명 야만인의 공예의 가장 훌륭한 걸작입니다. 그렇게 짧은 시간 동안 튼튼하고 크고 아름다운 것은 없습니다.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:9
@@ -214,7 +214,7 @@ msgstr "정찰병과 광부들을 먹이고 군인들을 훈련시킬 빵을 구
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr "신병들을 무장시키고 군인으로 훈련시키십시오."
+msgstr "신병들을 무장시키고 군사 훈련을 시키십시오."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
@@ -546,13 +546,13 @@ msgctxt "barbarians_building"
 msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
 "sometimes."
-msgstr "오래된 야만족의 속담 <br> 은 때로 몇 가지 위험을 감수해야 함을 의미한다."
+msgstr "오래된 야만인들의 속담<br> 은 때로 몇 가지 위험을 감수해야 함을 의미한다."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Produces axes, sharp axes and broad axes."
-msgstr "도끼, 날카로운 도끼, 그리고 넓은 도끼를 만드십시오."
+msgstr "도끼, 날카로운 도끼, 넓은 도끼를 만드십시오."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:18
@@ -561,7 +561,7 @@ msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
 " three buildings. It is enhanced from the metal workshop but doesn’t require"
 " additional qualification for the worker."
-msgstr "야만족의 도끼 제작소는 3곳의 연속된 건물들 중 중간 단계의 생산 기지입니다. 이는 금속 제작소에서 향상되지만 추가적인 일꾼을 필요로 하지는 않습니다."
+msgstr "야만인들의 도끼 제작소는 3곳의 연속된 건물들 중 중간 단계의 생산 기지입니다. 이는 금속 제작소에서 향상되지만 추가적인 일꾼을 필요로 하지는 않습니다."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:23
@@ -648,7 +648,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship "
 "and Trade’"
-msgstr "칸타르크, ‘현대 야만족 경제’,<br>3번째 소 가죽 ‘기술과 무역’"
+msgstr "칸타르크, ‘현대 야만인의 경제’,<br>3번째 소 가죽 ‘기술과 무역’"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:13
@@ -677,7 +677,7 @@ msgstr "‘당신 부족이 당신을 위해 무엇을 할 수 있는지 묻지 
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Famous barbarian recruitment poster"
-msgstr "유명한 야만족 채용 공고"
+msgstr "유명한 야만인 채용 공고"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:16
@@ -697,7 +697,7 @@ msgstr "‘계절 생선과 사냥한 특선 요리는 피타 빵과 함께 제�
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Menu of ‘The Laughing Barbarian’"
-msgstr "'웃는 야만족'의 차림표"
+msgstr "'웃는 야만인'의 차림표"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:17
@@ -714,13 +714,13 @@ msgid ""
 "‘When the Barbarian was created,<br>this was the first thing that he "
 "stated:<br>“You want me fighting without fear?<br>Then you should create "
 "some beer!”’"
-msgstr "‘야만족이 만들어 졌을 때<br>이것이 그가 처음 언급 한 것입니다:<br>“내가 두려움없이 싸우길 원하는가?<br>그럼 맥주를 좀 만들어놔야 할것이오!”’"
+msgstr "‘야만인이 만들어 졌을 때<br>이것이 그가 처음 언급 한 것입니다:<br>“내가 두려움없이 싸우길 원하는가?<br>그럼 맥주를 좀 만들어놔야 할것이오!”’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:14
 msgctxt "barbarians_building"
 msgid "First verse of the drinking song ‘Way of the Barbarian’"
-msgstr "술자리 노래 ‘야만족의 길’의 1절"
+msgstr "술자리 노래 ‘야만인의 길’의 1절"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:19
@@ -742,7 +742,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and "
 "Logistics’"
-msgstr "칸타라크, ‘현대 야만족 경제’,<br>5번째 소가죽 ‘교통과 물류’"
+msgstr "칸타라크, ‘현대 야만인의 경제’,<br>5번째 소가죽 ‘교통과 물류’"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:13
@@ -784,7 +784,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black "
 "material that feeds their furnaces."
-msgstr "옛날 옛적에, 야만족들은 용광로에 땔 검은 물질을 찾기 위해 산비탈 캐는것을 익혔습니다."
+msgstr "옛날 옛적에, 야만인들은 용광로에 땔 검은 물질을 찾기 위해 산비탈 캐는것을 익혔습니다."
 
 #. TRANSLATORS: Lore helptext for a coal mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:6
@@ -880,7 +880,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Frequent response of a barbarian fisherman,<br>often followed by an "
 "enjoyable brawl"
-msgstr "야만족 어부의 빈번한 대응으로,<br>종종 즐거운 싸움이 뒤따른다"
+msgstr "야만인 어부의 빈번한 대응으로,<br>종종 즐거운 싸움이 뒤따른다"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
@@ -913,7 +913,7 @@ msgstr "‘그는 동물을 사랑하고 사육하는것을 좋아한다,<br>\n 
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Barbarian nursery rhyme"
-msgstr "야만족 전래 동요"
+msgstr "야만인 전래 동요"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:14
@@ -944,7 +944,7 @@ msgstr "‘부드럽고 탄력이 있지.<br> 그리고 세월과 날씨에도 �
 msgctxt "barbarians_building"
 msgid ""
 "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
-msgstr "야만족 전통 노래,<br> ‘우리의 땅속 보물들’ 로부터 인용."
+msgstr "야만인의 전통 노래,<br> ‘우리의 땅속 보물들’ 로부터 인용."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:18
@@ -1266,7 +1266,7 @@ msgid ""
 "The Barbarian metal workshop is the basic production site in a series of "
 "three buildings and creates all the tools that Barbarians need. The others "
 "are for weapons."
-msgstr "야만족 금속 제작소는 세 단계의 건물 중 기초 단계의 생산 기지이고 야만족들이 필요로 하는 모든 도구를 제작합니다. 다른 건물들은 무기를 위한 곳입니다."
+msgstr "야만인의 금속 제작소는 세 단계의 건물 중 기초 단계의 생산 기지이고 야만인들이 필요로 하는 모든 도구를 제작합니다. 다른 건물들은 무기를 위한 곳입니다."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:23
@@ -1386,7 +1386,7 @@ msgstr "정원사 연합의 구호"
 msgctxt "barbarians_building"
 msgid ""
 "Cultivates reed that serves two different purposes for the Barbarian tribe."
-msgstr "야만족 부족의 두 가지 다른 목적을 위해 갈대를 수확하십시오."
+msgstr "야만인 부족의 두 가지 다른 목적을 위해 갈대를 수확하십시오."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:18
@@ -1470,7 +1470,7 @@ msgstr "정찰병과 광부들을 먹일 야전식량을 준비하십시오."
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Produces all the axes that the Barbarians use for warfare."
-msgstr "야만족들이 전투에 사용할 모든 도끼들을 제작하십시오."
+msgstr "야만인들이 전투에 사용할 모든 도끼들을 제작하십시오."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:18
@@ -1478,7 +1478,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
 "As such you will need to enhance an ax workshop in order to get one."
-msgstr "야만족 전쟁 공장은 가장 발전된 무기 생산지입니다. 따라서 그것을 얻기 위해서는 도끼 작업장을 향상시켜야합니다."
+msgstr "야만인 전쟁 공장은 가장 발전된 무기 생산지입니다. 따라서 그것을 얻기 위해서는 도끼 작업장을 향상시켜야합니다."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:26
 msgctxt "barbarians_building"
@@ -1501,7 +1501,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and "
 "Conquest’"
-msgstr "칸타라크, ‘현대 야만족 경제’,<br>9번째 소가죽 ‘해변과 정복’"
+msgstr "칸타라크, ‘현대 야만인 경제’,<br>9번째 소가죽 ‘해변과 정복’"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:17
@@ -2031,7 +2031,7 @@ msgstr "우리처럼 숯 굽는 기술을 습득 한 다른 부족은 없습니�
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "The inventor of the Frisian charcoal kiln"
-msgstr "프리지아족은 숯 가마를 처음 발명한 사람들입니다."
+msgstr "프리지아인은 숯 가마를 처음 발명한 사람들입니다."
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/helptexts.lua:18
 msgctxt "building"
@@ -2474,7 +2474,7 @@ msgstr "익명의 갈대 키우는 이"
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:16
 msgctxt "frisians_building"
 msgid "Cultivates reed that serves three different purposes for the Frisians."
-msgstr "프리지아족은 세 가지 서로 다른 목적을 제공하는 갈대를 기릅니다."
+msgstr "프리지아인들은 세 가지 서로 다른 목적을 제공하는 갈대를 기릅니다."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:21
@@ -2815,7 +2815,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
 "initial level."
-msgstr "야만족 군인들은 ‘방어력’ 을 훈련할 수 없고 초기 단계에 머물러 있습니다."
+msgstr "야만인 군인들은 ‘방어력’ 을 훈련할 수 없고 초기 단계에 머물러 있습니다."
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
@@ -2867,7 +2867,7 @@ msgid ""
 "If all needed wares are delivered in time, a training camp can train one new"
 " soldier in attack and health to the final level in %1$s and %2$s on "
 "average."
-msgstr "모든 물품들이 제 시간 내에 도착한다면, 훈련소는 새로운 군인 한 명의 공격력과 체력을 최고 수준까지 평균적으로 %1$s %2$s 내에 훈련시킬수 있습니다."
+msgstr "모든 물품들이 제 시간 내에 도착한다면, 훈련소는 신병 한 명의 공격력과 체력을 최고 수준까지 평균적으로 %1$s %2$s 내에 훈련시킬수 있습니다."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/empire/arena/helptexts.lua:17
@@ -2959,7 +2959,7 @@ msgctxt "frisians_building"
 msgid ""
 "Frisian soldiers cannot train in Evade and will remain at their initial "
 "level."
-msgstr "프리지아 군인은 회피력을 훈련시킬수 없으므로 초기 수준으로 유지됩니다."
+msgstr "프리지아인 군인은 회피력을 훈련시킬수 없으므로 초기 수준으로 유지됩니다."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/helptexts.lua:16
@@ -3575,7 +3575,7 @@ msgstr "우클릭"
 #: ../../data/tribes/scripting/help/controls.lua:18
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
-msgstr "휠 클릭 또는 Ctrl + 좌클릭"
+msgstr "휠 클릭 또는 Ctrl + 왼쪽 단추 누름"
 
 #: ../../data/tribes/scripting/help/controls.lua:18
 msgid "Minimize/Maximize window"
@@ -3586,7 +3586,7 @@ msgstr "창 축소/확대"
 #: ../../data/tribes/scripting/help/controls.lua:20
 msgctxt "hotkey"
 msgid "Ctrl + Left-click on Button"
-msgstr "버튼에 Ctrl + 좌클릭"
+msgstr "버튼에 Ctrl + 왼쪽 단추 누름"
 
 #: ../../data/tribes/scripting/help/controls.lua:20
 msgid "Skip confirmation dialog"
@@ -3742,7 +3742,7 @@ msgstr "게임 일시 중지"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'c'
 #: ../../data/tribes/scripting/help/controls.lua:56
 msgid "Toggle census"
-msgstr "건물명 켜기/끄기"
+msgstr "실태 조사 켜기/끄기"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 's'
 #: ../../data/tribes/scripting/help/controls.lua:58
@@ -4203,11 +4203,11 @@ msgstr "와이드랜드에 대하여"
 
 #: ../../data/tribes/scripting/help/tips.lua:53
 msgid "Atlanteans"
-msgstr "아틀란티스인"
+msgstr "아틀란티스인들"
 
 #: ../../data/tribes/scripting/help/tips.lua:56
 msgid "Barbarians"
-msgstr "야만족"
+msgstr "야만인들"
 
 #: ../../data/tribes/scripting/help/tips.lua:59
 msgid "Empire"
@@ -4215,7 +4215,7 @@ msgstr "제국"
 
 #: ../../data/tribes/scripting/help/tips.lua:62
 msgid "Frisians"
-msgstr "프리지아인"
+msgstr "프리지아인들"
 
 #: ../../data/tribes/scripting/help/tips.lua:67
 msgid "Single Player"
@@ -4411,7 +4411,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "The ax is the basic weapon of the Barbarians. All young soldiers are "
 "equipped with it."
-msgstr "도끼는 야만족들을 위한 기본적인 무기입니다. 모든 젊은 군인들은 이 것으로 무장합니다."
+msgstr "도끼는 야만인들의 기본적인 무기입니다. 모든 젊은 군인들은 이 것으로 무장합니다."
 
 #. TRANSLATORS: Helptext for a ware: Battle Ax
 #: ../../data/tribes/wares/ax_battle/helptexts.lua:4
@@ -4421,7 +4421,7 @@ msgid ""
 "produced in the war mill. Only trained soldiers are able to wield such a "
 "weapon. It is used – together with food – in the training camp to train "
 "soldiers from attack level 3 to 4."
-msgstr "야만족들이 만들 수 있는 위험한 무기입니다. 전쟁 공장에서 생산됩니다. 오직 훈련된 군인들만이 이 무기를 장비할 수 있습니다. 훈련소에서 군인들의 공격력 수준을 3 → 4로 훈련하는데 - 음식과 함께 - 사용됩니다."
+msgstr "야만인들이 만들 수 있는 위험한 무기입니다. 전쟁 공장에서 생산됩니다. 오직 훈련된 군인들만이 이 무기를 장비할 수 있습니다. 훈련소에서 군인들의 공격력 수준을 3 → 4로 훈련하는데 - 음식과 함께 - 사용됩니다."
 
 #. TRANSLATORS: Helptext for a ware: Broad Ax
 #: ../../data/tribes/wares/ax_broad/helptexts.lua:4
@@ -4460,7 +4460,7 @@ msgid ""
 "soldiers ever were able to handle this huge and powerful ax. It is produced "
 "in a war mill and used – together with food – in a training camp to train "
 "soldiers from attack level 4 to level 5."
-msgstr "전사의 도끼는 모든 야만족 무기들 중에 가장 위험합니다. 오직 소수의 군인들만이 이 거대하고 강력한 도끼를 다룰 수 있을 겁니다. 전쟁 공장에서 생산되며 훈련소에서 군인들의 공격력 수준을 4 → 5로 훈련하는데 - 음식과 함께 - 사용됩니다."
+msgstr "전사의 도끼는 모든 야만인의 무기들 중에 가장 위험합니다. 오직 소수의 군인들만이 이 거대하고 강력한 도끼를 다룰 수 있을 겁니다. 전쟁 공장에서 생산되며 훈련소에서 군인들의 공격력 수준을 4 → 5로 훈련하는데 - 음식과 함께 - 사용됩니다."
 
 #. TRANSLATORS: Helptext for a ware: Barley
 #: ../../data/tribes/wares/barley/helptexts.lua:4
@@ -4561,7 +4561,7 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals."
 " It is also consumed at training sites (training camp and battle arena)."
-msgstr "야만족 제빵사들은 이 평평하고 맛있는 피타 빵을 만드는데 최고입니다. 비밀 제조법을 통해 밀과 물을 이용해 만들어집니다. 피타 빵은 선술집, 여관 그리고 큰 여관에서 야전식량, 간식, 식사를 준비하는데 사용됩니다. 또한 훈련장 (훈련소와 전투 경기장) 에서 소비됩니다."
+msgstr "야만인의 제빵사들은 이 평평하고 맛있는 피타 빵을 만드는데 최고입니다. 비밀 제조법을 통해 밀과 물을 이용해 만들어집니다. 피타 빵은 선술집, 여관 그리고 큰 여관에서 야전식량, 간식, 식사를 준비하는데 사용됩니다. 또한 훈련장 (훈련소와 전투 경기장) 에서 소비됩니다."
 
 #. TRANSLATORS: Helptext for a ware: Bread
 #: ../../data/tribes/wares/bread_empire/helptexts.lua:4
@@ -4639,7 +4639,7 @@ msgstr "찰흙은 물과 진흙으로 만들어져서 벽돌로 만들어지고,
 #: ../../data/tribes/wares/cloth/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid "Cloth is needed for Barbarian ships. It is produced out of reed."
-msgstr "야만족의 배에는 천이 필요합니다. 그것은 갈대로 만들어집니다."
+msgstr "야만인의 배에는 천이 필요합니다. 그것은 갈대로 만들어집니다."
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:6
@@ -4678,7 +4678,7 @@ msgid ""
 "The fires of the Barbarians are usually fed with coal. Consumers are several"
 " buildings: lime kiln, smelting works, ax workshop, war mill, and helm "
 "smithy."
-msgstr "야만족들의 불에는 보통 석탄이 공급됩니다. 소비 주체들은 여러 건물들입니다: 석회 가마, 제련소, 도끼 제작소, 전쟁 공장, 갑옷 제작소."
+msgstr "야만인들의 불에는 보통 석탄이 공급됩니다. 소비 주체들은 여러 건물들입니다: 석회 가마, 제련소, 도끼 제작소, 전쟁 공장, 갑옷 제작소."
 
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../data/tribes/wares/coal/helptexts.lua:10
@@ -4798,7 +4798,7 @@ msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the Barbarians. "
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
-msgstr "피타 빵과 고기뿐만 아니라, 물고기도 또한 야만족들의 먹을거리입니다. 선술집, 여관과 큰 여관 그리고 훈련장 (훈련소와 전투 경기장) 에서 사용됩니다."
+msgstr "피타 빵과 고기뿐만 아니라, 물고기도 또한 야만인들의 먹을거리입니다. 선술집, 여관과 큰 여관 그리고 훈련장 (훈련소와 전투 경기장) 에서 사용됩니다."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:8
@@ -4814,7 +4814,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is a very important food resource for the Frisians. It is fished from "
 "the shore or reared in aqua farms."
-msgstr "물고기는 프리지아족들에게 매우 중요한 식량 자원입니다. 해안에서 낚시를하거나 양어장에서 기릅니다."
+msgstr "물고기는 프리지아인들에게 매우 중요한 식량 자원입니다. 해안에서 낚시를하거나 양어장에서 기릅니다."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Net
 #: ../../data/tribes/wares/fishing_net/helptexts.lua:4
@@ -4879,7 +4879,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fur can be sewn into garments. They are used as basic armor. All new "
 "soldiers are clothed in a fur garment."
-msgstr "털가죽은 의복에 꿰매 어질 수 있습니다. 그것들은 기본 갑옷으로 사용됩니다. 모든 새로운 군인들은 털가죽 옷을 입습니다."
+msgstr "털가죽은 의복에 꿰매 어질 수 있습니다. 그것들은 기본 갑옷으로 사용됩니다. 모든 신병들은 털가죽 옷을 입습니다."
 
 #. TRANSLATORS: Helptext for a ware: Golden Fur Garment
 #: ../../data/tribes/wares/fur_garment_golden/helptexts.lua:4
@@ -5007,7 +5007,7 @@ msgstr "아틀란티스인들은 채석장과 광물광에서 화강암 블럭�
 #: ../../data/tribes/wares/granite/helptexts.lua:8
 msgctxt "barbarians_ware"
 msgid "The Barbarians produce granite blocks in quarries and granite mines."
-msgstr "야만족들은 채석장과 화강암광에서 화강암을 네모 덩어리로 캐냅니다."
+msgstr "야만인들은 채석장과 화강암광에서 화강암을 네모 덩어리로 캐냅니다."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:10
@@ -5111,7 +5111,7 @@ msgid ""
 "A mask is an enhanced armor for Barbarian soldiers. It is produced in the "
 "helm smithy and used in the training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr "가면은 야만족 군인들을 위한 강화된 갑옷입니다. 그것은 투구 제작소에서 생산되며 훈련소에서 – 식량과 함께 – 군인들의 체력 수준을 1 → 2로 훈련시키는 데 사용됩니다."
+msgstr "가면은 야만인 군인들을 위한 강화된 갑옷입니다. 그것은 투구 제작소에서 생산되며 훈련소에서 – 식량과 함께 – 군인들의 체력 수준을 1 → 2로 훈련시키는 데 사용됩니다."
 
 #. TRANSLATORS: Helptext for a ware: Warhelm
 #: ../../data/tribes/wares/helmet_warhelm/helptexts.lua:4
@@ -5120,7 +5120,7 @@ msgid ""
 "This is the most enhanced Barbarian armor. It is produced in a helm smithy "
 "and used in a training camp – together with food – to train soldiers from "
 "health level 2 to level 3."
-msgstr "이것은 가장 향상된 야만족 갑옷입니다. 투구 제작소에서 생산하며 훈련소에서 군인들의 체력 수준을 2 → 3 으로 훈련하는데 – 음식과 함께 – 사용합니다."
+msgstr "이것은 가장 향상된 야만인의 갑옷입니다. 투구 제작소에서 생산하며 훈련소에서 군인들의 체력 수준을 2 → 3 으로 훈련하는데 – 음식과 함께 – 사용합니다."
 
 #. TRANSLATORS: Helptext for a ware: Honey
 #: ../../data/tribes/wares/honey/helptexts.lua:4
@@ -5299,7 +5299,7 @@ msgid ""
 "trees. Logs are also used in the metal workshop to build basic tools, and in"
 " the charcoal kiln for the production of coal. The wood hardener refines "
 "logs into blackwood by hardening them with fire."
-msgstr "야만족 벌목꾼들은 나무를 벱니다; 숲 지킴이들은 나무 공급을 관리합니다. 통나무는 또한 금속 제작소에서 기본 도구를 만드는데 사용되고, 숯 가마에서 석탄의 생산에 사용됩니다. 목재 강화소는 불로 그것들을 강화해서 흑목으로 개선합니다."
+msgstr "야만인 벌목꾼들은 나무를 벱니다; 숲 지킴이들은 나무 공급을 관리합니다. 통나무는 또한 금속 제작소에서 기본 도구를 만드는데 사용되고, 숯 가마에서 석탄의 생산에 사용됩니다. 목재 강화소는 불로 그것들을 강화해서 흑목으로 개선합니다."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:10
@@ -5788,7 +5788,7 @@ msgid ""
 "This is the basic weapon of the Frisian soldiers. Together with a fur "
 "garment, it makes up the equipment of young soldiers. Short swords are "
 "produced by the small armor smithy."
-msgstr "이것은 프리지아 군인들의 기본 무기입니다. 털가죽 의류와 함께 젊은 군인의 장비를 구성합니다. 짧은 칼은 작은 갑옷 제작소에서 만들어집니다."
+msgstr "이것은 프리지아인 군인들의 기본 무기입니다. 털가죽 의류와 함께 젊은 군인의 장비를 구성합니다. 짧은 칼은 작은 갑옷 제작소에서 만들어집니다."
 
 #. TRANSLATORS: Helptext for a ware: Tabard
 #: ../../data/tribes/wares/tabard/helptexts.lua:4

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-08-17 14:56+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
+"PO-Revision-Date: 2020-08-25 12:25+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -18,531 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:338
-msgctxt "shipname"
-msgid "Abaco"
-msgstr "아바코(주판)"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:340
-msgctxt "shipname"
-msgid "Agate"
-msgstr "아가테(마노)"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:342
-msgctxt "shipname"
-msgid "Alexandrite"
-msgstr "알렉산드라이트(금록옥)"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:344
-msgctxt "shipname"
-msgid "Amber"
-msgstr "호박[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:346
-msgctxt "shipname"
-msgid "Amethyst"
-msgstr "자수정[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:348
-msgctxt "shipname"
-msgid "Anguilla"
-msgstr "앵귈라[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:350
-msgctxt "shipname"
-msgid "Antigua"
-msgstr "안티구아[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:352
-msgctxt "shipname"
-msgid "Aquamarine"
-msgstr "아쿠아마린[광물]"
-
-#: ../../data/tribes/atlanteans.lua:353
-msgctxt "shipname"
-msgid "Atlantean’s Stronghold"
-msgstr "아틀란티스 요새"
-
-#: ../../data/tribes/atlanteans.lua:354
-msgctxt "shipname"
-msgid "Atlantis"
-msgstr "아틀란티스"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:356
-msgctxt "shipname"
-msgid "Bahama"
-msgstr "바하마"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:358
-msgctxt "shipname"
-msgid "Barbados"
-msgstr "바바도스"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:360
-msgctxt "shipname"
-msgid "Barbuda"
-msgstr "바부다"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:362
-msgctxt "shipname"
-msgid "Beryl"
-msgstr "녹주석[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:364
-msgctxt "shipname"
-msgid "Blanquilla"
-msgstr "브랑키야[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:366
-msgctxt "shipname"
-msgid "Caicos"
-msgstr "카이코스[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:368
-msgctxt "shipname"
-msgid "Cassiterite"
-msgstr "석석[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:370
-msgctxt "shipname"
-msgid "Cat’s Eye"
-msgstr "묘안석[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:372
-msgctxt "shipname"
-msgid "Citrine"
-msgstr "황수정[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:374
-msgctxt "shipname"
-msgid "Colionder"
-msgstr "콜리온더"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:376
-msgctxt "shipname"
-msgid "Dominica"
-msgstr "도미니카[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:378
-msgctxt "shipname"
-msgid "Eleuthera"
-msgstr "엘류테라[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:380
-msgctxt "shipname"
-msgid "Emerald"
-msgstr "취옥[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:382
-msgctxt "shipname"
-msgid "Grenada"
-msgstr "그레나다[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:384
-msgctxt "shipname"
-msgid "Guadeloupe"
-msgstr "과들루프[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:386
-msgctxt "shipname"
-msgid "Inagua"
-msgstr "이나과[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:388
-msgctxt "shipname"
-msgid "Jundlina"
-msgstr "준들리나"
-
-#: ../../data/tribes/atlanteans.lua:389
-msgctxt "shipname"
-msgid "Juventud"
-msgstr "주벤투드"
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:391
-msgctxt "shipname"
-msgid "King Ajanthul"
-msgstr "아잔툴 왕"
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:393
-msgctxt "shipname"
-msgid "King Askandor"
-msgstr "아스칸도르 왕"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:395
-msgctxt "shipname"
-msgid "Kitts"
-msgstr "키츠"
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:397
-msgctxt "shipname"
-msgid "Loftomor"
-msgstr "로프트모르"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:399
-msgctxt "shipname"
-msgid "Malachite"
-msgstr "공작석[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:401
-msgctxt "shipname"
-msgid "Martinique"
-msgstr "마르티니크[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:403
-msgctxt "shipname"
-msgid "Montserrat"
-msgstr "몬트서래트[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:405
-msgctxt "shipname"
-msgid "Moonstone"
-msgstr "월장석[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:407
-msgctxt "shipname"
-msgid "Mystic Quartz"
-msgstr "미스틱 수정[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:409
-msgctxt "shipname"
-msgid "Nassau"
-msgstr "나사우[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:411
-msgctxt "shipname"
-msgid "Nevis"
-msgstr "네비스[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:413
-msgctxt "shipname"
-msgid "Obsidian"
-msgstr "흑요석[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:415
-msgctxt "shipname"
-msgid "Onyx"
-msgstr "호마노[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:417
-msgctxt "shipname"
-msgid "Opol"
-msgstr "오폴[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:419
-msgctxt "shipname"
-msgid "Orchila"
-msgstr "오르칠라[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:421
-msgctxt "shipname"
-msgid "Ostur"
-msgstr "오스투르"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:423
-msgctxt "shipname"
-msgid "Pearl"
-msgstr "진주[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:425
-msgctxt "shipname"
-msgid "Sapphire"
-msgstr "청옥[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:427
-msgctxt "shipname"
-msgid "Satul"
-msgstr "사툴"
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:429
-msgctxt "shipname"
-msgid "Sidolus"
-msgstr "시도루스"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:431
-msgctxt "shipname"
-msgid "Sphalerite"
-msgstr "섬아연석[광석]"
-
-#: ../../data/tribes/atlanteans.lua:432
-msgctxt "shipname"
-msgid "Spider"
-msgstr "거미"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:434
-msgctxt "shipname"
-msgid "Spinel"
-msgstr "첨정석[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:436
-msgctxt "shipname"
-msgid "Sunstone"
-msgstr "일장석[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:438
-msgctxt "shipname"
-msgid "Tiger Eye"
-msgstr "호안석[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:440
-msgctxt "shipname"
-msgid "Tobago"
-msgstr "토바고[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:442
-msgctxt "shipname"
-msgid "Topaz"
-msgstr "황옥[광석]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:444
-msgctxt "shipname"
-msgid "Tortuga"
-msgstr "토르투가[지역]"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:446
-msgctxt "shipname"
-msgid "Tourmaline"
-msgstr "전기석[광물]"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:448
-msgctxt "shipname"
-msgid "Trinidad"
-msgstr "트리니다드[지역]"
-
-#: ../../data/tribes/barbarians.lua:283
-msgctxt "shipname"
-msgid "Agilaz"
-msgstr "아기라츠"
-
-#: ../../data/tribes/barbarians.lua:284
-msgctxt "shipname"
-msgid "Aslaug"
-msgstr "아슬라우그"
-
-#: ../../data/tribes/barbarians.lua:285
-msgctxt "shipname"
-msgid "Baldr"
-msgstr "발드르"
-
-#: ../../data/tribes/barbarians.lua:286
-msgctxt "shipname"
-msgid "Bear"
-msgstr "곰"
-
-#: ../../data/tribes/barbarians.lua:287
-msgctxt "shipname"
-msgid "Beowulf"
-msgstr "베오울프"
-
-#. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/barbarians.lua:289
-msgctxt "shipname"
-msgid "Boldreth"
-msgstr "볼드레쓰"
-
-#. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/barbarians.lua:291
-msgctxt "shipname"
-msgid "Chat’Karuth"
-msgstr "찻카루쓰"
-
-#: ../../data/tribes/barbarians.lua:292
-msgctxt "shipname"
-msgid "Dellingr"
-msgstr "데링그르"
-
-#: ../../data/tribes/barbarians.lua:293
-msgctxt "shipname"
-msgid "Fulla"
-msgstr "풀라[아스가르드의 가정부]"
-
-#: ../../data/tribes/barbarians.lua:294
-msgctxt "shipname"
-msgid "Gersemi"
-msgstr "게르세미[다산의 여신]"
-
-#: ../../data/tribes/barbarians.lua:295
-msgctxt "shipname"
-msgid "Hagbard"
-msgstr "하그바르드"
-
-#: ../../data/tribes/barbarians.lua:296
-msgctxt "shipname"
-msgid "Heidrek"
-msgstr "헤이드레크"
-
-#: ../../data/tribes/barbarians.lua:297
-msgctxt "shipname"
-msgid "Heimdallr"
-msgstr "헤임달르"
-
-#: ../../data/tribes/barbarians.lua:298
-msgctxt "shipname"
-msgid "Hnoss"
-msgstr "흐노스"
-
-#: ../../data/tribes/barbarians.lua:299
-msgctxt "shipname"
-msgid "Hrothgar"
-msgstr "흐로드가르"
-
-#: ../../data/tribes/barbarians.lua:300
-msgctxt "shipname"
-msgid "Ingeld"
-msgstr "인겔드"
-
-#: ../../data/tribes/barbarians.lua:301
-msgctxt "shipname"
-msgid "Karl Hundason"
-msgstr "칼 훈다슨"
-
-#. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/barbarians.lua:303
-msgctxt "shipname"
-msgid "Khantrukh"
-msgstr "칸투르크"
-
-#: ../../data/tribes/barbarians.lua:304
-msgctxt "shipname"
-msgid "Lynx"
-msgstr "스라소니"
-
-#: ../../data/tribes/barbarians.lua:305
-msgctxt "shipname"
-msgid "Mani"
-msgstr "마니"
-
-#: ../../data/tribes/barbarians.lua:306
-msgctxt "shipname"
-msgid "Odin"
-msgstr "오딘"
-
-#: ../../data/tribes/barbarians.lua:307
-msgctxt "shipname"
-msgid "Red Fox"
-msgstr "붉은 여우"
-
-#. TRANSLATORS: This Barbarian ship is mentioned in some lore texts
-#: ../../data/tribes/barbarians.lua:309
-msgctxt "shipname"
-msgid "Saxnot"
-msgstr "삭놋"
-
-#: ../../data/tribes/barbarians.lua:310
-msgctxt "shipname"
-msgid "Sigmund"
-msgstr "지그문드"
-
-#. TRANSLATORS: This Barbarian ship is named after a barbarian bard
-#: ../../data/tribes/barbarians.lua:312
-msgctxt "shipname"
-msgid "Sigurd"
-msgstr "시구르드"
-
-#: ../../data/tribes/barbarians.lua:313
-msgctxt "shipname"
-msgid "Snotra"
-msgstr "스노트라"
-
-#: ../../data/tribes/barbarians.lua:314
-msgctxt "shipname"
-msgid "Thor"
-msgstr "토르"
-
-#. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/barbarians.lua:316
-msgctxt "shipname"
-msgid "Thron"
-msgstr "번역확인->왕좌"
-
-#: ../../data/tribes/barbarians.lua:317
-msgctxt "shipname"
-msgid "Ullr"
-msgstr "울르"
-
-#: ../../data/tribes/barbarians.lua:318
-msgctxt "shipname"
-msgid "Valdar"
-msgstr "발다르"
-
-#: ../../data/tribes/barbarians.lua:319
-msgctxt "shipname"
-msgid "Vili"
-msgstr "빌리"
-
-#: ../../data/tribes/barbarians.lua:320
-msgctxt "shipname"
-msgid "Volf"
-msgstr "볼프"
-
-#: ../../data/tribes/barbarians.lua:321
-msgctxt "shipname"
-msgid "Wild Boar"
-msgstr "멧돼지"
-
-#: ../../data/tribes/barbarians.lua:322
-msgctxt "shipname"
-msgid "Wolverine"
-msgstr "울버린"
-
-#: ../../data/tribes/barbarians.lua:323
-msgctxt "shipname"
-msgid "Yrsa"
-msgstr "이르사"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53
@@ -1078,8 +553,8 @@ msgstr "갑옷 제작소"
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:54
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:65
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:40
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:52
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:67
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:75
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:63
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:46
@@ -1182,7 +657,7 @@ msgstr "검은뿌리 수확하고 있음"
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:101
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:81
 msgid "No Fields"
-msgstr "밭이 아님"
+msgstr "밭이 없음"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:70
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
@@ -1399,7 +874,7 @@ msgstr "어부의 집"
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:79
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:54
 msgid "fishing"
-msgstr "물고기 잡는 중"
+msgstr "물고기 잡고 있음"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:55
 msgctxt "atlanteans_building"
@@ -1456,7 +931,7 @@ msgstr "금 광산"
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:77
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:90
 msgid "mining gold"
-msgstr "금 캐고있음"
+msgstr "금 캐고 있음"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:84
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:71
@@ -1511,7 +986,7 @@ msgstr "사냥꾼의 집"
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:40
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:53
 msgid "hunting"
-msgstr "사냥하고있음"
+msgstr "사냥하고 있음"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:60
@@ -1558,7 +1033,7 @@ msgstr "철 광산"
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:77
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:92
 msgid "mining iron"
-msgstr "철 캐는 중"
+msgstr "철 캐고 있음"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:88
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:71
@@ -1675,7 +1150,7 @@ msgstr "조선소"
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:72
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:68
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:71
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:72
 msgid "constructing a ship"
@@ -1952,13 +1427,13 @@ msgstr "도끼 제작소"
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:75
 msgid "forging an ax"
-msgstr "도끼 단조"
+msgstr "도끼 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:86
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:90
 msgid "forging a sharp ax"
-msgstr "날카로운 도끼 단조"
+msgstr "날카로운 도끼 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:101
@@ -2395,7 +1870,7 @@ msgid "Scout’s Hut"
 msgstr "정찰대의 오두막"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:13
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:7
 msgctxt "barbarians_building"
 msgid "Shipyard"
 msgstr "조선소"
@@ -2468,7 +1943,7 @@ msgstr "목재 강화소"
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:72
 msgid "hardening wood"
-msgstr "목재 강화를"
+msgstr "목재 강화하고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:7
@@ -2480,31 +1955,31 @@ msgstr "갑옷 제작소"
 #. because ...
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:85
 msgid "forging a suit of armor"
-msgstr "갑옷 한 벌 제작을"
+msgstr "갑옷 한 벌 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:97
 msgid "forging a suit of chain armor"
-msgstr "사슬갑옷 한 벌 제작을"
+msgstr "사슬갑옷 한 벌 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:109
 msgid "forging a suit of gilded armor"
-msgstr "찰갑 한 벌 제작을"
+msgstr "찰갑 한 벌 만들고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:7
 msgctxt "empire_building"
 msgid "Bakery"
-msgstr "제과점"
+msgstr "빵집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:57
 msgctxt "empire_building"
 msgid "baking bread"
-msgstr "빵 제과를"
+msgstr "빵을 굽고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:7
@@ -2567,7 +2042,7 @@ msgstr "당나귀 농장"
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:49
 msgctxt "empire_building"
 msgid "rearing donkeys"
-msgstr "당나귀 사육을"
+msgstr "당나귀 사육하고 있음"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:7
@@ -3561,44 +3036,44 @@ msgid ""
 msgstr "나무꾼의 집에서 일하는 나무꾼은 작업 영역 내에 어떤 나무도 찾을 수 없습니다. 건물을 해체 또는 파괴하거나 숲꾼의 집을 건설하는 것을 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:84
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:82
 msgctxt "atlanteans_building"
 msgid "Dungeon"
 msgstr "지하감옥"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:153
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:89
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:79
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:98
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:69
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:64
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:92
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:118
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:117
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:149
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:83
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:77
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:94
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:67
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:62
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:88
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:112
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:111
 msgid "sleeping"
 msgstr "잠자는 중"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:161
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:157
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "군인 공격력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:175
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:171
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "군인 공격력 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:189
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:185
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "군인 공격력 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:203
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:199
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "군인 공격력 훈련하고 있음: 0→1"
@@ -3610,31 +3085,31 @@ msgid "Labyrinth"
 msgstr "미궁"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:97
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:91
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "군인 방어력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:105
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "군인 방어력 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:125
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:119
 msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "군인 체력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:138
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:132
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "군인 회피력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:151
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:145
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "군인 회피력 훈련하고 있음: 1→2"
@@ -3646,13 +3121,13 @@ msgid "Battle Arena"
 msgstr "전투 경기장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:87
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:85
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "군인 회피력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:102
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:100
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "군인 회피력 훈련하고 있음: 1→2"
@@ -3664,49 +3139,49 @@ msgid "Training Camp"
 msgstr "훈련소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:106
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "군인 공격력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:120
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:116
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "군인 공격력 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:134
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:130
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "군인 공격력 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:148
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:144
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "군인 공격력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:162
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:158
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "군인 공격력 훈련하고 있음: 4→5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:176
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:172
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "군인 체력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:189
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:185
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "군인 체력 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:203
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:199
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "군인 체력 훈련하고 있음: 2→3"
@@ -3718,8 +3193,8 @@ msgid "Arena"
 msgstr "경기장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:77
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:72
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:75
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:70
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "군인 회피력 훈련하고 있음: 0→1"
@@ -3731,7 +3206,7 @@ msgid "Colosseum"
 msgstr "원형경기장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:85
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:83
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "군인 회피력 훈련하고 있음: 1→2"
@@ -3743,49 +3218,49 @@ msgid "Training Camp"
 msgstr "훈련소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:100
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:96
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "군인 공격력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:114
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:110
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "군인 공격력 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:128
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:124
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "군인 공격력 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:142
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:138
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "군인 공격력 훈련하고 있음: 3→4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:156
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:152
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "군인 체력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:169
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:165
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "군인 체력 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:183
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:179
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "군인 체력 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:197
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:193
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr "군인 체력 훈련하고 있음: 3→4"
@@ -3794,34 +3269,34 @@ msgstr "군인 체력 훈련하고 있음: 3→4"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:7
 msgctxt "frisians_building"
 msgid "Training Arena"
-msgstr "모의 전투중"
+msgstr "모의 전투 하고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:126
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:120
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "군인 공격력 훈련하고 있음: 3→4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:141
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:135
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "군인 공격력 훈련하고 있음: 4→5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:157
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:151
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr "군인 공격력 훈련하고 있음: 5→6"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:174
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:168
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "군인 방어력 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:190
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:184
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "군인 체력 훈련하고 있음: 1→2"
@@ -3833,31 +3308,31 @@ msgid "Training Camp"
 msgstr "훈련소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:125
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:119
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "군인 공격력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:140
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:134
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "군인 공격력 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:156
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:150
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "군인 공격력 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:172
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:166
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "군인 체력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:187
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:181
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "군인 방어력 훈련하고 있음: 0→1"
@@ -3894,7 +3369,7 @@ msgid "Port"
 msgstr "항구"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/init.lua:11
+#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/init.lua:7
 msgctxt "barbarians_building"
 msgid "Warehouse"
 msgstr "창고"
@@ -3955,480 +3430,6 @@ msgstr "효율"
 msgid "Stockpile"
 msgstr "비축"
 
-#: ../../data/tribes/empire.lua:283
-msgctxt "shipname"
-msgid "Adriatic Sea"
-msgstr "아드리아 바다"
-
-#: ../../data/tribes/empire.lua:284
-msgctxt "shipname"
-msgid "Alexandria"
-msgstr "알렉산드리아[도시]"
-
-#. TRANSLATORS: This Empire ship is named after an in-game character
-#: ../../data/tribes/empire.lua:286
-msgctxt "shipname"
-msgid "Amalea"
-msgstr "아말리아"
-
-#: ../../data/tribes/empire.lua:287
-msgctxt "shipname"
-msgid "Amolius"
-msgstr "아모리우스(두더지)"
-
-#. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/empire.lua:289
-msgctxt "shipname"
-msgid "Apollo"
-msgstr "아폴로"
-
-#: ../../data/tribes/empire.lua:290
-msgctxt "shipname"
-msgid "Augustus"
-msgstr "아우구스투스[황제]"
-
-#: ../../data/tribes/empire.lua:291
-msgctxt "shipname"
-msgid "Azurea Sea"
-msgstr "아주레아 바다"
-
-#: ../../data/tribes/empire.lua:292
-msgctxt "shipname"
-msgid "Baltic Sea"
-msgstr "발틱 바다"
-
-#: ../../data/tribes/empire.lua:293
-msgctxt "shipname"
-msgid "Bellona"
-msgstr "벨로나[여신]"
-
-#: ../../data/tribes/empire.lua:294
-msgctxt "shipname"
-msgid "Ben Hur"
-msgstr "벤 허"
-
-#: ../../data/tribes/empire.lua:295
-msgctxt "shipname"
-msgid "Bounty"
-msgstr "바운티(하사품)"
-
-#: ../../data/tribes/empire.lua:296
-msgctxt "shipname"
-msgid "Brutus"
-msgstr "부루투스[정치인]"
-
-#: ../../data/tribes/empire.lua:297
-msgctxt "shipname"
-msgid "Caligula"
-msgstr "칼리굴라[황제]"
-
-#: ../../data/tribes/empire.lua:298
-msgctxt "shipname"
-msgid "Camilla"
-msgstr "카밀라"
-
-#: ../../data/tribes/empire.lua:299
-msgctxt "shipname"
-msgid "Carrara"
-msgstr "카라라(흰돌)"
-
-#: ../../data/tribes/empire.lua:300
-msgctxt "shipname"
-msgid "Caesar"
-msgstr "카이사르[정치인]"
-
-#: ../../data/tribes/empire.lua:301
-msgctxt "shipname"
-msgid "Cicero"
-msgstr "키케로[정치인]"
-
-#: ../../data/tribes/empire.lua:302
-msgctxt "shipname"
-msgid "Claudius"
-msgstr "클라우디우스[황제]"
-
-#: ../../data/tribes/empire.lua:303
-msgctxt "shipname"
-msgid "Diana"
-msgstr "다이아나"
-
-#: ../../data/tribes/empire.lua:304
-msgctxt "shipname"
-msgid "Domitianus"
-msgstr "도미티아누스[황제]"
-
-#: ../../data/tribes/empire.lua:305
-msgctxt "shipname"
-msgid "Empire Glory"
-msgstr "제국의 영광"
-
-#: ../../data/tribes/empire.lua:306
-msgctxt "shipname"
-msgid "Faustulus"
-msgstr "파우스톨루스[양치기]"
-
-#: ../../data/tribes/empire.lua:307
-msgctxt "shipname"
-msgid "Galba"
-msgstr "갈바[황제]"
-
-#: ../../data/tribes/empire.lua:308
-msgctxt "shipname"
-msgid "Gallus"
-msgstr "갈루스"
-
-#: ../../data/tribes/empire.lua:309
-msgctxt "shipname"
-msgid "Ianus"
-msgstr "야누스[시작과 변화의 신]"
-
-#: ../../data/tribes/empire.lua:310
-msgctxt "shipname"
-msgid "Iulius Caesar"
-msgstr "율리우스 카이사르[정치인]"
-
-#. TRANSLATORS: This Empire ship is named after a Roman goddess
-#: ../../data/tribes/empire.lua:312
-msgctxt "shipname"
-msgid "Iuno"
-msgstr "유노[출산의 신]"
-
-#. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/empire.lua:314
-msgctxt "shipname"
-msgid "Iupiter"
-msgstr "유피테르[천둥의 신]"
-
-#: ../../data/tribes/empire.lua:315
-msgctxt "shipname"
-msgid "Latium"
-msgstr "라티움[지역]"
-
-#: ../../data/tribes/empire.lua:316
-msgctxt "shipname"
-msgid "Latonia"
-msgstr "라토니아[지역]"
-
-#: ../../data/tribes/empire.lua:317
-msgctxt "shipname"
-msgid "Leonardo"
-msgstr "레오나르도"
-
-#: ../../data/tribes/empire.lua:318
-msgctxt "shipname"
-msgid "Liguria"
-msgstr "리구리아[지역]"
-
-#. TRANSLATORS: This Empire ship is named after an in-game character
-#: ../../data/tribes/empire.lua:320
-msgctxt "shipname"
-msgid "Lutius"
-msgstr "루티우스"
-
-#: ../../data/tribes/empire.lua:321
-msgctxt "shipname"
-msgid "Marble"
-msgstr "대리석"
-
-#. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/empire.lua:323
-msgctxt "shipname"
-msgid "Mars"
-msgstr "마르스[전쟁의 신]"
-
-#. TRANSLATORS: This Empire ship is named after a Roman goddess
-#: ../../data/tribes/empire.lua:325
-msgctxt "shipname"
-msgid "Minerva"
-msgstr "미네르바[지혜의 신]"
-
-#. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/empire.lua:327
-msgctxt "shipname"
-msgid "Neptune"
-msgstr "넵튠[바다의 신]"
-
-#: ../../data/tribes/empire.lua:328
-msgctxt "shipname"
-msgid "Nero"
-msgstr "네로[황제]"
-
-#: ../../data/tribes/empire.lua:329
-msgctxt "shipname"
-msgid "Nerva"
-msgstr "네르바[황제]"
-
-#: ../../data/tribes/empire.lua:330
-msgctxt "shipname"
-msgid "Octavianus"
-msgstr "옥타비아누스"
-
-#: ../../data/tribes/empire.lua:331
-msgctxt "shipname"
-msgid "Otho"
-msgstr "오토[황제]"
-
-#. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/empire.lua:333
-msgctxt "shipname"
-msgid "Pluto"
-msgstr "플루토[명계의 신]"
-
-#: ../../data/tribes/empire.lua:334
-msgctxt "shipname"
-msgid "Portus Bellus"
-msgstr "포루투스 벨루스"
-
-#: ../../data/tribes/empire.lua:335
-msgctxt "shipname"
-msgid "Quirinus"
-msgstr "퀴리누스[신]"
-
-#: ../../data/tribes/empire.lua:336
-msgctxt "shipname"
-msgid "Remus"
-msgstr "레무스"
-
-#: ../../data/tribes/empire.lua:337
-msgctxt "shipname"
-msgid "Romulus"
-msgstr "로물루스"
-
-#. TRANSLATORS: This Empire ship is named after an in-game character
-#: ../../data/tribes/empire.lua:339
-msgctxt "shipname"
-msgid "Saledus"
-msgstr "살레두스"
-
-#. TRANSLATORS: This Empire ship is named after a Roman deity
-#: ../../data/tribes/empire.lua:341
-msgctxt "shipname"
-msgid "Saturn"
-msgstr "사투르느[신]"
-
-#: ../../data/tribes/empire.lua:342
-msgctxt "shipname"
-msgid "Siena"
-msgstr "시에나[지역]"
-
-#: ../../data/tribes/empire.lua:343
-msgctxt "shipname"
-msgid "Sparta"
-msgstr "스파르타[지역]"
-
-#: ../../data/tribes/empire.lua:344
-msgctxt "shipname"
-msgid "Thyrrenia"
-msgstr "티레니아"
-
-#: ../../data/tribes/empire.lua:345
-msgctxt "shipname"
-msgid "Tiberius"
-msgstr "티베리우스[황제]"
-
-#: ../../data/tribes/empire.lua:346
-msgctxt "shipname"
-msgid "Titus"
-msgstr "티투스[황제]"
-
-#: ../../data/tribes/empire.lua:347
-msgctxt "shipname"
-msgid "Traianus"
-msgstr "트라야누스[황제]"
-
-#: ../../data/tribes/empire.lua:348
-msgctxt "shipname"
-msgid "Venus"
-msgstr "베누스 [미와 사랑의 신]"
-
-#: ../../data/tribes/empire.lua:349
-msgctxt "shipname"
-msgid "Vespasianus"
-msgstr "베스파시아누스[황제]"
-
-#. TRANSLATORS: This Empire ship is named after a Roman goddess
-#: ../../data/tribes/empire.lua:351
-msgctxt "shipname"
-msgid "Vesta"
-msgstr "베스타[난로, 가정, 가족의 여신]"
-
-#: ../../data/tribes/empire.lua:352
-msgctxt "shipname"
-msgid "Vinea"
-msgstr "비네아"
-
-#: ../../data/tribes/empire.lua:353
-msgctxt "shipname"
-msgid "Vitellius"
-msgstr "비텔리우스[황제]"
-
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/frisians.lua:347
-msgctxt "shipname"
-msgid "Amrum"
-msgstr "암룸"
-
-#. TRANSLATORS: This frisian ship is named after a no longer existing island
-#. in Northern Frisia
-#: ../../data/tribes/frisians.lua:349
-msgctxt "shipname"
-msgid "Alt-Nordstrand"
-msgstr "알트-노르드스트란트"
-
-#. TRANSLATORS: This frisian ship is named after a peninsula in Northern
-#. Frisia
-#: ../../data/tribes/frisians.lua:351
-msgctxt "shipname"
-msgid "Eiderstedt"
-msgstr "에이데르스테드트프"
-
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/frisians.lua:353
-msgctxt "shipname"
-msgid "Föhr"
-msgstr "퓌르"
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:355
-msgctxt "shipname"
-msgid "Gröde"
-msgstr "그뢰데"
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:357
-msgctxt "shipname"
-msgid "Habel"
-msgstr "하벨"
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:359
-msgctxt "shipname"
-msgid "Hamburger Hallig"
-msgstr "함부르게르 할리그"
-
-#. TRANSLATORS: This frisian ship is named after an island in the North Sea
-#: ../../data/tribes/frisians.lua:361
-msgctxt "shipname"
-msgid "Helgoland"
-msgstr "헬골란트[지역]"
-
-#. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
-#: ../../data/tribes/frisians.lua:363
-msgctxt "shipname"
-msgid "Hever"
-msgstr "헤버[지역]"
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:365
-msgctxt "shipname"
-msgid "Hooge"
-msgstr "후게[지역]"
-
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/frisians.lua:367
-msgctxt "shipname"
-msgid "Japsand"
-msgstr "자프산드[지역]"
-
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/frisians.lua:369
-msgctxt "shipname"
-msgid "Kormoransand"
-msgstr "코르모란산드[지역]"
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:371
-msgctxt "shipname"
-msgid "Langeneß"
-msgstr "랑게노[지역]"
-
-#. TRANSLATORS: This frisian ship is named after a water body in Northern
-#. Frisia
-#: ../../data/tribes/frisians.lua:373
-msgctxt "shipname"
-msgid "Norderaue"
-msgstr "노르데라우에"
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:375
-msgctxt "shipname"
-msgid "Norderoog"
-msgstr "노르데루그"
-
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/frisians.lua:377
-msgctxt "shipname"
-msgid "Norderoogsand"
-msgstr "노르데루그산드[지역]"
-
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/frisians.lua:379
-msgctxt "shipname"
-msgid "Nordstrand"
-msgstr "노르드스트란드"
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:381
-msgctxt "shipname"
-msgid "Nordstrandischmoor"
-msgstr "노르드스트란디스크무르"
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:383
-msgctxt "shipname"
-msgid "Oland"
-msgstr "오란드"
-
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/frisians.lua:385
-msgctxt "shipname"
-msgid "Pellworm"
-msgstr "펠웜"
-
-#. TRANSLATORS: This frisian ship is named after a no longer existing island
-#. in Northern Frisia
-#: ../../data/tribes/frisians.lua:387
-msgctxt "shipname"
-msgid "Strand"
-msgstr "스트란드"
-
-#. TRANSLATORS: This frisian ship is named after a water body in Northern
-#. Frisia
-#: ../../data/tribes/frisians.lua:389
-msgctxt "shipname"
-msgid "Süderaue"
-msgstr "수데라우에"
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:391
-msgctxt "shipname"
-msgid "Süderoog"
-msgstr "수데루그"
-
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/frisians.lua:393
-msgctxt "shipname"
-msgid "Süderoogsand"
-msgstr "수데루그산드"
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:395
-msgctxt "shipname"
-msgid "Südfall"
-msgstr "수드팔"
-
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/frisians.lua:397
-msgctxt "shipname"
-msgid "Sylt"
-msgstr "질트"
-
-#. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
-#: ../../data/tribes/frisians.lua:399
-msgctxt "shipname"
-msgid "Uthlande"
-msgstr "우틀란데"
-
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:42
 msgctxt "immovable"
@@ -4469,15 +3470,15 @@ msgstr "보리 밭 (새싹)"
 msgid "Blueberry Bush (tiny)"
 msgstr "파란 딸기 덤불 (새싹)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:42
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:41
 msgid "Blueberry Bush (small)"
 msgstr "파란 딸기 덤불 (작음)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:69
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:67
 msgid "Blueberry Bush (medium)"
 msgstr "파란 딸기 덤불 (중간)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:96
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:93
 msgid "Blueberry Bush (ripe)"
 msgstr "파란 딸기 덤불"
 
@@ -4485,15 +3486,15 @@ msgstr "파란 딸기 덤불"
 msgid "Black Currant (tiny)"
 msgstr "까막 까치밥나무 (유목)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:40
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:39
 msgid "Black Currant (small)"
 msgstr "까막 까치밥나무 (작음)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:67
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:65
 msgid "Black Currant (medium)"
 msgstr "까막 까치밥나무 (중간)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:94
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:91
 msgid "Black Currant (ripe)"
 msgstr "까막 까치밥나무 (성숙목)"
 
@@ -4501,15 +3502,15 @@ msgstr "까막 까치밥나무 (성숙목)"
 msgid "Red Currant (tiny)"
 msgstr "빨간 까치밥나무 (유목)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:40
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:39
 msgid "Red Currant (small)"
 msgstr "빨간 까치밥나무 (작음)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:67
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:65
 msgid "Red Currant (medium)"
 msgstr "빨간 까치밥나무 (중간)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:94
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:91
 msgid "Red Currant (ripe)"
 msgstr "빨간 까치밥나무 (성숙목)"
 
@@ -4517,15 +3518,15 @@ msgstr "빨간 까치밥나무 (성숙목)"
 msgid "Desert Hackberry (tiny)"
 msgstr "사막 팽나무(유목)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:40
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:39
 msgid "Desert Hackberry (small)"
 msgstr "사막 팽나무(작음)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:67
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:65
 msgid "Desert Hackberry (medium)"
 msgstr "사막 팽나무(중간)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:94
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:91
 msgid "Desert Hackberry (ripe)"
 msgstr "사막 팽나무(성숙목)"
 
@@ -4533,15 +3534,15 @@ msgstr "사막 팽나무(성숙목)"
 msgid "Juniper (tiny)"
 msgstr "노간주 나무(유목)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:40
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:39
 msgid "Juniper (small)"
 msgstr "노간주 나무 (작음)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:67
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:65
 msgid "Juniper (medium)"
 msgstr "노간주 나무 (중간)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:94
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:91
 msgid "Juniper (ripe)"
 msgstr "노간주 나무 (익음)"
 
@@ -4549,15 +3550,15 @@ msgstr "노간주 나무 (익음)"
 msgid "Raspberry Bush (tiny)"
 msgstr "산딸기 덤불 (유목)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:40
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:39
 msgid "Raspberry Bush (small)"
 msgstr "산딸기 덤불 (작음)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:67
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:65
 msgid "Raspberry Bush (medium)"
 msgstr "산딸기 덤불 (중간)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:94
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:91
 msgid "Raspberry Bush (ripe)"
 msgstr "산딸기 덤불 (익음)"
 
@@ -4565,15 +3566,15 @@ msgstr "산딸기 덤불 (익음)"
 msgid "Sea Buckthorn (tiny)"
 msgstr "산자나무 (유목)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:40
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:39
 msgid "Sea Buckthorn (small)"
 msgstr "산자 나무 (작음)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:67
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:65
 msgid "Sea Buckthorn (medium)"
 msgstr "산자 나무 (중간)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:94
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:91
 msgid "Sea Buckthorn (ripe)"
 msgstr "산자 나무 (익음)"
 
@@ -4581,15 +3582,15 @@ msgstr "산자 나무 (익음)"
 msgid "Stink Shepherd’s Tree (tiny)"
 msgstr "냄새나는 목자나무 (새싹)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:40
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:39
 msgid "Stink Shepherd’s Tree (small)"
 msgstr "냄새나는 목자나무 (어림)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:67
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:65
 msgid "Stink Shepherd’s Tree (medium)"
 msgstr "냄새나는 목자나무 (가운데)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:94
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:91
 msgid "Stink Shepherd’s Tree (ripe)"
 msgstr "냄새나는 목자나무 (익음)"
 
@@ -4597,15 +3598,15 @@ msgstr "냄새나는 목자나무 (익음)"
 msgid "Strawberries (tiny)"
 msgstr "딸기 (유목)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:40
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:39
 msgid "Strawberries (small)"
 msgstr "딸기 (작음)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:67
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:65
 msgid "Strawberries (medium)"
 msgstr "딸기 (중간)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:94
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:91
 msgid "Strawberries (ripe)"
 msgstr "딸기 (익음)"
 
@@ -4763,102 +3764,102 @@ msgid "No Resources"
 msgstr "자원 없음"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:33
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:30
-#: ../../data/tribes/immovables/resi/empire/init.lua:30
-#: ../../data/tribes/immovables/resi/frisians/init.lua:33
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:32
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:29
+#: ../../data/tribes/immovables/resi/empire/init.lua:29
+#: ../../data/tribes/immovables/resi/frisians/init.lua:32
 msgctxt "resource_indicator"
 msgid "Water"
 msgstr "물"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:59
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:53
-#: ../../data/tribes/immovables/resi/empire/init.lua:53
-#: ../../data/tribes/immovables/resi/frisians/init.lua:59
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:57
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:51
+#: ../../data/tribes/immovables/resi/empire/init.lua:51
+#: ../../data/tribes/immovables/resi/frisians/init.lua:57
 msgctxt "resource_indicator"
 msgid "Some Coal"
 msgstr "약간의 석탄"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:85
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:76
-#: ../../data/tribes/immovables/resi/empire/init.lua:76
-#: ../../data/tribes/immovables/resi/frisians/init.lua:85
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:82
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:73
+#: ../../data/tribes/immovables/resi/empire/init.lua:73
+#: ../../data/tribes/immovables/resi/frisians/init.lua:82
 msgctxt "resource_indicator"
 msgid "Some Gold"
 msgstr "약간의 금"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:111
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:99
-#: ../../data/tribes/immovables/resi/empire/init.lua:99
-#: ../../data/tribes/immovables/resi/frisians/init.lua:111
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:107
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:95
+#: ../../data/tribes/immovables/resi/empire/init.lua:95
+#: ../../data/tribes/immovables/resi/frisians/init.lua:107
 msgctxt "resource_indicator"
 msgid "Some Iron"
 msgstr "약간의 철"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:132
 msgctxt "resource_indicator"
 msgid "Some Crystals"
 msgstr "약간의 수정"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:163
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:145
-#: ../../data/tribes/immovables/resi/empire/init.lua:145
-#: ../../data/tribes/immovables/resi/frisians/init.lua:163
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:157
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:139
+#: ../../data/tribes/immovables/resi/empire/init.lua:139
+#: ../../data/tribes/immovables/resi/frisians/init.lua:157
 msgctxt "resource_indicator"
 msgid "A Lot of Coal"
 msgstr "많은 석탄"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:189
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:168
-#: ../../data/tribes/immovables/resi/empire/init.lua:168
-#: ../../data/tribes/immovables/resi/frisians/init.lua:189
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:182
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:161
+#: ../../data/tribes/immovables/resi/empire/init.lua:161
+#: ../../data/tribes/immovables/resi/frisians/init.lua:182
 msgctxt "resource_indicator"
 msgid "A Lot of Gold"
 msgstr "많은 금"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:215
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:191
-#: ../../data/tribes/immovables/resi/empire/init.lua:191
-#: ../../data/tribes/immovables/resi/frisians/init.lua:215
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:207
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:183
+#: ../../data/tribes/immovables/resi/empire/init.lua:183
+#: ../../data/tribes/immovables/resi/frisians/init.lua:207
 msgctxt "resource_indicator"
 msgid "A Lot of Iron"
 msgstr "많은 철"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:232
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
 msgstr "믾은 철"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:122
-#: ../../data/tribes/immovables/resi/frisians/init.lua:137
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:117
+#: ../../data/tribes/immovables/resi/frisians/init.lua:132
 msgctxt "resource_indicator"
 msgid "Some Granite"
 msgstr "약간의 화강암"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:214
-#: ../../data/tribes/immovables/resi/frisians/init.lua:241
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:205
+#: ../../data/tribes/immovables/resi/frisians/init.lua:232
 msgctxt "resource_indicator"
 msgid "A Lot of Granite"
 msgstr "많은 화강암"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/empire/init.lua:122
+#: ../../data/tribes/immovables/resi/empire/init.lua:117
 msgctxt "resource_indicator"
 msgid "Some Marble"
 msgstr "약간의 대리석"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/empire/init.lua:214
+#: ../../data/tribes/immovables/resi/empire/init.lua:205
 msgctxt "resource_indicator"
 msgid "A Lot of Marble"
 msgstr "많은 대리석"
@@ -4902,113 +3903,1203 @@ msgctxt "immovable"
 msgid "Wheat Field (tiny)"
 msgstr "밀 밭 (새싹)"
 
-#: ../../data/tribes/init.lua:21
-msgid "Loading tribes: %1$s (%2$d/%3$d)"
-msgstr "부족들을 불러오고 있음: %1$s (%2$d/%3$d)"
-
-#: ../../data/tribes/init.lua:35
-msgid "Ships"
-msgstr "배들"
-
-#: ../../data/tribes/init.lua:47 ../../data/tribes/scripting/help/init.lua:85
-msgid "Wares"
-msgstr "물품"
-
-#: ../../data/tribes/init.lua:163
-#: ../../data/tribes/scripting/help/init.lua:106
-msgid "Immovables"
-msgstr "고정물"
-
-#: ../../data/tribes/init.lua:223
-msgid "Atlantean workers"
-msgstr "아틀란티스족 일꾼들"
-
-#: ../../data/tribes/init.lua:256
-msgid "Barbarian workers"
-msgstr "야만족 일꾼들"
-
-#: ../../data/tribes/init.lua:291
-msgid "Empire workers"
-msgstr "제국 일꾼들"
-
-#: ../../data/tribes/init.lua:327
-msgid "Frisian workers"
-msgstr "프리지아족 일꾼들"
-
-#: ../../data/tribes/init.lua:371
-msgid "Warehouses"
-msgstr "창고들"
-
-#: ../../data/tribes/init.lua:393
-msgid "Atlantean productionsites"
-msgstr "아틀란티스족 생산지"
-
-#: ../../data/tribes/init.lua:431
-msgid "Barbarian productionsites"
-msgstr "야만족 생산지"
-
-#: ../../data/tribes/init.lua:476
-msgid "Empire productionsites"
-msgstr "제국 생산지"
-
-#: ../../data/tribes/init.lua:520
-msgid "Frisian productionsites"
-msgstr "프리지아족 생산지"
-
-#: ../../data/tribes/init.lua:575
-msgid "Trainingsites"
-msgstr "훈련시설"
-
-#: ../../data/tribes/init.lua:592
-msgid "Militarysites"
-msgstr "군사시설"
-
-#: ../../data/tribes/init.lua:626
-msgid "Finishing"
-msgstr "마무리"
-
-#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:36
-#: ../../data/tribes/preload.lua:57 ../../data/tribes/preload.lua:78
+#: ../../data/tribes/initialization/atlanteans/init.lua:11
+#: ../../data/tribes/initialization/barbarians/init.lua:10
+#: ../../data/tribes/initialization/empire/init.lua:10
+#: ../../data/tribes/initialization/frisians/init.lua:10
 msgid "The Widelands Development Team"
 msgstr "와이드랜드 개발 팀"
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:17
-msgid "Barbarians"
-msgstr "야만족"
-
-#: ../../data/tribes/preload.lua:18
-msgid "The mighty tribes of the east-lands."
-msgstr "동부 지대의 강력한 부족들."
-
-#. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:38
-msgid "Empire"
-msgstr "제국"
-
-#: ../../data/tribes/preload.lua:39
-msgid "This is the culture of the Roman Empire."
-msgstr "로마 제국의 문화."
-
-#. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:59
+#: ../../data/tribes/initialization/atlanteans/init.lua:13
 msgid "Atlanteans"
 msgstr "아틀란티스인"
 
-#: ../../data/tribes/preload.lua:60
+#: ../../data/tribes/initialization/atlanteans/init.lua:14
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "오래된 이야기로 전해진 부족. 아틀란티스의 아들딸들."
 
-#. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:80
-msgid "Frisians"
-msgstr "프리지아인"
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:11
+msgid "Discovery"
+msgstr "발견"
 
-#: ../../data/tribes/preload.lua:81
+#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
+msgid ""
+"Start the game with three ships on the ocean and only a handful of supplies"
+msgstr "바다 위의 3 척의 배와 소수의 보급품으로 게임을 시작하십시오"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/fortified_village.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/fortified_village.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:11
+msgid "Fortified Village"
+msgstr "요새화된 마을"
+
+#. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
+#. condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/fortified_village.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/fortified_village.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:13
+msgid "Start the game with a fortified military installation"
+msgstr "요새화된 군사 기지를 가지고 게임 시작"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/headquarters.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/headquarters.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:11
+msgid "Headquarters"
+msgstr "본부"
+
+#. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/headquarters.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/headquarters.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:13
+msgid "Start the game with your headquarters only"
+msgstr "오직 본부만 가지고 게임 시작"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/new_world.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/new_world.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:11
+msgid "New World"
+msgstr "새로운 세계"
+
+#. TRANSLATORS: This is the tooltip for the "New World" starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/new_world.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/new_world.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:13
+msgid "Start the game with seven ships full of wares on the ocean"
+msgstr "7척의 배에 상품을 가득 싣고 바다 위에서 게임을 시작하십시오"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:11
+msgid "Poor Hamlet"
+msgstr "불쌍한 햄릿"
+
+#. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
+#. condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:13
+msgid ""
+"Start the game with just a warehouse and the bare minimum for bootstrapping "
+"an economy. Warning: the AI can't successfully start from this"
+msgstr "경제 성장을 위한 최소한의 창고와 최소 비용으로 게임을 시작할 수 있습니다. 경고: 여기는 인공지능이 원활하게 시작되지 않습니다"
+
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:43
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:44
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:45
+msgid "Be careful"
+msgstr "조심하십시오"
+
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:43
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:44
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:45
+msgid ""
+"You have only one iron for each tool you will need to start your economy. "
+"Make sure no unneeded tool is created."
+msgstr "경제를 시작하기 위해 필요한 도구마다 하나의 철 만 있습니다. 불필요한 도구가 생성되지 않았는지 확인하십시오."
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/struggling_outpost.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/struggling_outpost.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/struggling_outpost.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:11
+msgid "Struggling Outpost"
+msgstr "고군분투 전초기지"
+
+#. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/struggling_outpost.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/struggling_outpost.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/struggling_outpost.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:13
+msgid ""
+"Start the game with just your headquarters and very few wares for "
+"bootstrapping an economy. Warning: the AI can't successfully start from this"
+msgstr "본부와 경제 성장을 위한 몇 가지 제품만으로 게임을 시작하십시오. 경고 : 인공지능은 여기서부터 성공적으로 시작할 수 없습니다"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/trading_outpost.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/trading_outpost.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/trading_outpost.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/trading_outpost.lua:11
+msgid "Trading Outpost"
+msgstr "교역 기지"
+
+#. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
+#. condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/trading_outpost.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/trading_outpost.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/trading_outpost.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/trading_outpost.lua:13
+msgid ""
+"If this player runs low on important wares, they will be replenished for "
+"free"
+msgstr "플레이어에게 중요한 물품이 부족하다면, 공짜로 재충전될 것입니다."
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/village.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/village.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/village.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/village.lua:11
+msgid "Village"
+msgstr "마을"
+
+#. TRANSLATORS: This is the tooltip for the "Village" starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/village.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/village.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/village.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/village.lua:13
+msgid "Start the game with a peaceful village"
+msgstr "평화로운 마을에서 게임 시작"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:613
+msgctxt "shipname"
+msgid "Abaco"
+msgstr "아바코(주판)"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:615
+msgctxt "shipname"
+msgid "Agate"
+msgstr "아가테(마노)"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:617
+msgctxt "shipname"
+msgid "Alexandrite"
+msgstr "알렉산드라이트(금록옥)"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:619
+msgctxt "shipname"
+msgid "Amber"
+msgstr "호박[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:621
+msgctxt "shipname"
+msgid "Amethyst"
+msgstr "자수정[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:623
+msgctxt "shipname"
+msgid "Anguilla"
+msgstr "앵귈라[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:625
+msgctxt "shipname"
+msgid "Antigua"
+msgstr "안티구아[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:627
+msgctxt "shipname"
+msgid "Aquamarine"
+msgstr "아쿠아마린[광물]"
+
+#: ../../data/tribes/initialization/atlanteans/units.lua:628
+msgctxt "shipname"
+msgid "Atlantean’s Stronghold"
+msgstr "아틀란티스 요새"
+
+#: ../../data/tribes/initialization/atlanteans/units.lua:629
+msgctxt "shipname"
+msgid "Atlantis"
+msgstr "아틀란티스"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:631
+msgctxt "shipname"
+msgid "Bahama"
+msgstr "바하마"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:633
+msgctxt "shipname"
+msgid "Barbados"
+msgstr "바바도스"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:635
+msgctxt "shipname"
+msgid "Barbuda"
+msgstr "바부다"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:637
+msgctxt "shipname"
+msgid "Beryl"
+msgstr "녹주석[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:639
+msgctxt "shipname"
+msgid "Blanquilla"
+msgstr "브랑키야[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:641
+msgctxt "shipname"
+msgid "Caicos"
+msgstr "카이코스[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:643
+msgctxt "shipname"
+msgid "Cassiterite"
+msgstr "석석[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:645
+msgctxt "shipname"
+msgid "Cat’s Eye"
+msgstr "묘안석[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:647
+msgctxt "shipname"
+msgid "Citrine"
+msgstr "황수정[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:649
+msgctxt "shipname"
+msgid "Colionder"
+msgstr "콜리온더"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:651
+msgctxt "shipname"
+msgid "Dominica"
+msgstr "도미니카[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:653
+msgctxt "shipname"
+msgid "Eleuthera"
+msgstr "엘류테라[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:655
+msgctxt "shipname"
+msgid "Emerald"
+msgstr "취옥[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:657
+msgctxt "shipname"
+msgid "Grenada"
+msgstr "그레나다[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:659
+msgctxt "shipname"
+msgid "Guadeloupe"
+msgstr "과들루프[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:661
+msgctxt "shipname"
+msgid "Inagua"
+msgstr "이나과[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:663
+msgctxt "shipname"
+msgid "Jundlina"
+msgstr "준들리나"
+
+#: ../../data/tribes/initialization/atlanteans/units.lua:664
+msgctxt "shipname"
+msgid "Juventud"
+msgstr "주벤투드"
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:666
+msgctxt "shipname"
+msgid "King Ajanthul"
+msgstr "아잔툴 왕"
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:668
+msgctxt "shipname"
+msgid "King Askandor"
+msgstr "아스칸도르 왕"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:670
+msgctxt "shipname"
+msgid "Kitts"
+msgstr "키츠"
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:672
+msgctxt "shipname"
+msgid "Loftomor"
+msgstr "로프트모르"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:674
+msgctxt "shipname"
+msgid "Malachite"
+msgstr "공작석[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:676
+msgctxt "shipname"
+msgid "Martinique"
+msgstr "마르티니크[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:678
+msgctxt "shipname"
+msgid "Montserrat"
+msgstr "몬트서래트[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:680
+msgctxt "shipname"
+msgid "Moonstone"
+msgstr "월장석[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:682
+msgctxt "shipname"
+msgid "Mystic Quartz"
+msgstr "미스틱 수정[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:684
+msgctxt "shipname"
+msgid "Nassau"
+msgstr "나사우[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:686
+msgctxt "shipname"
+msgid "Nevis"
+msgstr "네비스[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:688
+msgctxt "shipname"
+msgid "Obsidian"
+msgstr "흑요석[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:690
+msgctxt "shipname"
+msgid "Onyx"
+msgstr "호마노[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:692
+msgctxt "shipname"
+msgid "Opol"
+msgstr "오폴[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:694
+msgctxt "shipname"
+msgid "Orchila"
+msgstr "오르칠라[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:696
+msgctxt "shipname"
+msgid "Ostur"
+msgstr "오스투르"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:698
+msgctxt "shipname"
+msgid "Pearl"
+msgstr "진주[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:700
+msgctxt "shipname"
+msgid "Sapphire"
+msgstr "청옥[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:702
+msgctxt "shipname"
+msgid "Satul"
+msgstr "사툴"
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:704
+msgctxt "shipname"
+msgid "Sidolus"
+msgstr "시도루스"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:706
+msgctxt "shipname"
+msgid "Sphalerite"
+msgstr "섬아연석[광석]"
+
+#: ../../data/tribes/initialization/atlanteans/units.lua:707
+msgctxt "shipname"
+msgid "Spider"
+msgstr "거미"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:709
+msgctxt "shipname"
+msgid "Spinel"
+msgstr "첨정석[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:711
+msgctxt "shipname"
+msgid "Sunstone"
+msgstr "일장석[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:713
+msgctxt "shipname"
+msgid "Tiger Eye"
+msgstr "호안석[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:715
+msgctxt "shipname"
+msgid "Tobago"
+msgstr "토바고[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:717
+msgctxt "shipname"
+msgid "Topaz"
+msgstr "황옥[광석]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:719
+msgctxt "shipname"
+msgid "Tortuga"
+msgstr "토르투가[지역]"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:721
+msgctxt "shipname"
+msgid "Tourmaline"
+msgstr "전기석[광물]"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:723
+msgctxt "shipname"
+msgid "Trinidad"
+msgstr "트리니다드[지역]"
+
+#. TRANSLATORS: This is a tribe name
+#: ../../data/tribes/initialization/barbarians/init.lua:12
+msgid "Barbarians"
+msgstr "야만인들"
+
+#: ../../data/tribes/initialization/barbarians/init.lua:13
+msgid "The mighty tribes of the east-lands."
+msgstr "동부 지대의 강력한 부족들."
+
+#: ../../data/tribes/initialization/barbarians/units.lua:449
+msgctxt "shipname"
+msgid "Agilaz"
+msgstr "아기라츠"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:450
+msgctxt "shipname"
+msgid "Aslaug"
+msgstr "아슬라우그"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:451
+msgctxt "shipname"
+msgid "Baldr"
+msgstr "발드르"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:452
+msgctxt "shipname"
+msgid "Bear"
+msgstr "곰"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:453
+msgctxt "shipname"
+msgid "Beowulf"
+msgstr "베오울프"
+
+#. TRANSLATORS: This Barbarian ship is named after an in-game character
+#: ../../data/tribes/initialization/barbarians/units.lua:455
+msgctxt "shipname"
+msgid "Boldreth"
+msgstr "볼드레쓰"
+
+#. TRANSLATORS: This Barbarian ship is named after an in-game character
+#: ../../data/tribes/initialization/barbarians/units.lua:457
+msgctxt "shipname"
+msgid "Chat’Karuth"
+msgstr "찻카루쓰"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:458
+msgctxt "shipname"
+msgid "Dellingr"
+msgstr "데링그르"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:459
+msgctxt "shipname"
+msgid "Fulla"
+msgstr "풀라[아스가르드의 가정부]"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:460
+msgctxt "shipname"
+msgid "Gersemi"
+msgstr "게르세미[다산의 여신]"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:461
+msgctxt "shipname"
+msgid "Hagbard"
+msgstr "하그바르드"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:462
+msgctxt "shipname"
+msgid "Heidrek"
+msgstr "헤이드레크"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:463
+msgctxt "shipname"
+msgid "Heimdallr"
+msgstr "헤임달르"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:464
+msgctxt "shipname"
+msgid "Hnoss"
+msgstr "흐노스"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:465
+msgctxt "shipname"
+msgid "Hrothgar"
+msgstr "흐로드가르"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:466
+msgctxt "shipname"
+msgid "Ingeld"
+msgstr "인겔드"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:467
+msgctxt "shipname"
+msgid "Karl Hundason"
+msgstr "칼 훈다슨"
+
+#. TRANSLATORS: This Barbarian ship is named after an in-game character
+#: ../../data/tribes/initialization/barbarians/units.lua:469
+msgctxt "shipname"
+msgid "Khantrukh"
+msgstr "칸투르크"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:470
+msgctxt "shipname"
+msgid "Lynx"
+msgstr "스라소니"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:471
+msgctxt "shipname"
+msgid "Mani"
+msgstr "마니"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:472
+msgctxt "shipname"
+msgid "Odin"
+msgstr "오딘"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:473
+msgctxt "shipname"
+msgid "Red Fox"
+msgstr "붉은 여우"
+
+#. TRANSLATORS: This Barbarian ship is mentioned in some lore texts
+#: ../../data/tribes/initialization/barbarians/units.lua:475
+msgctxt "shipname"
+msgid "Saxnot"
+msgstr "삭놋"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:476
+msgctxt "shipname"
+msgid "Sigmund"
+msgstr "지그문드"
+
+#. TRANSLATORS: This Barbarian ship is named after a barbarian bard
+#: ../../data/tribes/initialization/barbarians/units.lua:478
+msgctxt "shipname"
+msgid "Sigurd"
+msgstr "시구르드"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:479
+msgctxt "shipname"
+msgid "Snotra"
+msgstr "스노트라"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:480
+msgctxt "shipname"
+msgid "Thor"
+msgstr "토르"
+
+#. TRANSLATORS: This Barbarian ship is named after an in-game character
+#: ../../data/tribes/initialization/barbarians/units.lua:482
+msgctxt "shipname"
+msgid "Thron"
+msgstr "번역확인->왕좌"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:483
+msgctxt "shipname"
+msgid "Ullr"
+msgstr "울르"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:484
+msgctxt "shipname"
+msgid "Valdar"
+msgstr "발다르"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:485
+msgctxt "shipname"
+msgid "Vili"
+msgstr "빌리"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:486
+msgctxt "shipname"
+msgid "Volf"
+msgstr "볼프"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:487
+msgctxt "shipname"
+msgid "Wild Boar"
+msgstr "멧돼지"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:488
+msgctxt "shipname"
+msgid "Wolverine"
+msgstr "울버린"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:489
+msgctxt "shipname"
+msgid "Yrsa"
+msgstr "이르사"
+
+#. TRANSLATORS: This is a tribe name
+#: ../../data/tribes/initialization/empire/init.lua:12
+msgid "Empire"
+msgstr "제국"
+
+#: ../../data/tribes/initialization/empire/init.lua:13
+msgid "This is the culture of the Roman Empire."
+msgstr "로마 제국의 문화."
+
+#: ../../data/tribes/initialization/empire/units.lua:464
+msgctxt "shipname"
+msgid "Adriatic Sea"
+msgstr "아드리아 바다"
+
+#: ../../data/tribes/initialization/empire/units.lua:465
+msgctxt "shipname"
+msgid "Alexandria"
+msgstr "알렉산드리아[도시]"
+
+#. TRANSLATORS: This Empire ship is named after an in-game character
+#: ../../data/tribes/initialization/empire/units.lua:467
+msgctxt "shipname"
+msgid "Amalea"
+msgstr "아말리아"
+
+#: ../../data/tribes/initialization/empire/units.lua:468
+msgctxt "shipname"
+msgid "Amolius"
+msgstr "아모리우스(두더지)"
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/initialization/empire/units.lua:470
+msgctxt "shipname"
+msgid "Apollo"
+msgstr "아폴로"
+
+#: ../../data/tribes/initialization/empire/units.lua:471
+msgctxt "shipname"
+msgid "Augustus"
+msgstr "아우구스투스[황제]"
+
+#: ../../data/tribes/initialization/empire/units.lua:472
+msgctxt "shipname"
+msgid "Azurea Sea"
+msgstr "아주레아 바다"
+
+#: ../../data/tribes/initialization/empire/units.lua:473
+msgctxt "shipname"
+msgid "Baltic Sea"
+msgstr "발틱 바다"
+
+#: ../../data/tribes/initialization/empire/units.lua:474
+msgctxt "shipname"
+msgid "Bellona"
+msgstr "벨로나[여신]"
+
+#: ../../data/tribes/initialization/empire/units.lua:475
+msgctxt "shipname"
+msgid "Ben Hur"
+msgstr "벤 허"
+
+#: ../../data/tribes/initialization/empire/units.lua:476
+msgctxt "shipname"
+msgid "Bounty"
+msgstr "바운티(하사품)"
+
+#: ../../data/tribes/initialization/empire/units.lua:477
+msgctxt "shipname"
+msgid "Brutus"
+msgstr "부루투스[정치인]"
+
+#: ../../data/tribes/initialization/empire/units.lua:478
+msgctxt "shipname"
+msgid "Caligula"
+msgstr "칼리굴라[황제]"
+
+#: ../../data/tribes/initialization/empire/units.lua:479
+msgctxt "shipname"
+msgid "Camilla"
+msgstr "카밀라"
+
+#: ../../data/tribes/initialization/empire/units.lua:480
+msgctxt "shipname"
+msgid "Carrara"
+msgstr "카라라(흰돌)"
+
+#: ../../data/tribes/initialization/empire/units.lua:481
+msgctxt "shipname"
+msgid "Caesar"
+msgstr "카이사르[정치인]"
+
+#: ../../data/tribes/initialization/empire/units.lua:482
+msgctxt "shipname"
+msgid "Cicero"
+msgstr "키케로[정치인]"
+
+#: ../../data/tribes/initialization/empire/units.lua:483
+msgctxt "shipname"
+msgid "Claudius"
+msgstr "클라우디우스[황제]"
+
+#: ../../data/tribes/initialization/empire/units.lua:484
+msgctxt "shipname"
+msgid "Diana"
+msgstr "다이아나"
+
+#: ../../data/tribes/initialization/empire/units.lua:485
+msgctxt "shipname"
+msgid "Domitianus"
+msgstr "도미티아누스[황제]"
+
+#: ../../data/tribes/initialization/empire/units.lua:486
+msgctxt "shipname"
+msgid "Empire Glory"
+msgstr "제국의 영광"
+
+#: ../../data/tribes/initialization/empire/units.lua:487
+msgctxt "shipname"
+msgid "Faustulus"
+msgstr "파우스톨루스[양치기]"
+
+#: ../../data/tribes/initialization/empire/units.lua:488
+msgctxt "shipname"
+msgid "Galba"
+msgstr "갈바[황제]"
+
+#: ../../data/tribes/initialization/empire/units.lua:489
+msgctxt "shipname"
+msgid "Gallus"
+msgstr "갈루스"
+
+#: ../../data/tribes/initialization/empire/units.lua:490
+msgctxt "shipname"
+msgid "Ianus"
+msgstr "야누스[시작과 변화의 신]"
+
+#: ../../data/tribes/initialization/empire/units.lua:491
+msgctxt "shipname"
+msgid "Iulius Caesar"
+msgstr "율리우스 카이사르[정치인]"
+
+#. TRANSLATORS: This Empire ship is named after a Roman goddess
+#: ../../data/tribes/initialization/empire/units.lua:493
+msgctxt "shipname"
+msgid "Iuno"
+msgstr "유노[출산의 신]"
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/initialization/empire/units.lua:495
+msgctxt "shipname"
+msgid "Iupiter"
+msgstr "유피테르[천둥의 신]"
+
+#: ../../data/tribes/initialization/empire/units.lua:496
+msgctxt "shipname"
+msgid "Latium"
+msgstr "라티움[지역]"
+
+#: ../../data/tribes/initialization/empire/units.lua:497
+msgctxt "shipname"
+msgid "Latonia"
+msgstr "라토니아[지역]"
+
+#: ../../data/tribes/initialization/empire/units.lua:498
+msgctxt "shipname"
+msgid "Leonardo"
+msgstr "레오나르도"
+
+#: ../../data/tribes/initialization/empire/units.lua:499
+msgctxt "shipname"
+msgid "Liguria"
+msgstr "리구리아[지역]"
+
+#. TRANSLATORS: This Empire ship is named after an in-game character
+#: ../../data/tribes/initialization/empire/units.lua:501
+msgctxt "shipname"
+msgid "Lutius"
+msgstr "루티우스"
+
+#: ../../data/tribes/initialization/empire/units.lua:502
+msgctxt "shipname"
+msgid "Marble"
+msgstr "대리석"
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/initialization/empire/units.lua:504
+msgctxt "shipname"
+msgid "Mars"
+msgstr "마르스[전쟁의 신]"
+
+#. TRANSLATORS: This Empire ship is named after a Roman goddess
+#: ../../data/tribes/initialization/empire/units.lua:506
+msgctxt "shipname"
+msgid "Minerva"
+msgstr "미네르바[지혜의 신]"
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/initialization/empire/units.lua:508
+msgctxt "shipname"
+msgid "Neptune"
+msgstr "넵튠[바다의 신]"
+
+#: ../../data/tribes/initialization/empire/units.lua:509
+msgctxt "shipname"
+msgid "Nero"
+msgstr "네로[황제]"
+
+#: ../../data/tribes/initialization/empire/units.lua:510
+msgctxt "shipname"
+msgid "Nerva"
+msgstr "네르바[황제]"
+
+#: ../../data/tribes/initialization/empire/units.lua:511
+msgctxt "shipname"
+msgid "Octavianus"
+msgstr "옥타비아누스"
+
+#: ../../data/tribes/initialization/empire/units.lua:512
+msgctxt "shipname"
+msgid "Otho"
+msgstr "오토[황제]"
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/initialization/empire/units.lua:514
+msgctxt "shipname"
+msgid "Pluto"
+msgstr "플루토[명계의 신]"
+
+#: ../../data/tribes/initialization/empire/units.lua:515
+msgctxt "shipname"
+msgid "Portus Bellus"
+msgstr "포루투스 벨루스"
+
+#: ../../data/tribes/initialization/empire/units.lua:516
+msgctxt "shipname"
+msgid "Quirinus"
+msgstr "퀴리누스[신]"
+
+#: ../../data/tribes/initialization/empire/units.lua:517
+msgctxt "shipname"
+msgid "Remus"
+msgstr "레무스"
+
+#: ../../data/tribes/initialization/empire/units.lua:518
+msgctxt "shipname"
+msgid "Romulus"
+msgstr "로물루스"
+
+#. TRANSLATORS: This Empire ship is named after an in-game character
+#: ../../data/tribes/initialization/empire/units.lua:520
+msgctxt "shipname"
+msgid "Saledus"
+msgstr "살레두스"
+
+#. TRANSLATORS: This Empire ship is named after a Roman deity
+#: ../../data/tribes/initialization/empire/units.lua:522
+msgctxt "shipname"
+msgid "Saturn"
+msgstr "사투르느[신]"
+
+#: ../../data/tribes/initialization/empire/units.lua:523
+msgctxt "shipname"
+msgid "Siena"
+msgstr "시에나[지역]"
+
+#: ../../data/tribes/initialization/empire/units.lua:524
+msgctxt "shipname"
+msgid "Sparta"
+msgstr "스파르타[지역]"
+
+#: ../../data/tribes/initialization/empire/units.lua:525
+msgctxt "shipname"
+msgid "Thyrrenia"
+msgstr "티레니아"
+
+#: ../../data/tribes/initialization/empire/units.lua:526
+msgctxt "shipname"
+msgid "Tiberius"
+msgstr "티베리우스[황제]"
+
+#: ../../data/tribes/initialization/empire/units.lua:527
+msgctxt "shipname"
+msgid "Titus"
+msgstr "티투스[황제]"
+
+#: ../../data/tribes/initialization/empire/units.lua:528
+msgctxt "shipname"
+msgid "Traianus"
+msgstr "트라야누스[황제]"
+
+#: ../../data/tribes/initialization/empire/units.lua:529
+msgctxt "shipname"
+msgid "Venus"
+msgstr "베누스 [미와 사랑의 신]"
+
+#: ../../data/tribes/initialization/empire/units.lua:530
+msgctxt "shipname"
+msgid "Vespasianus"
+msgstr "베스파시아누스[황제]"
+
+#. TRANSLATORS: This Empire ship is named after a Roman goddess
+#: ../../data/tribes/initialization/empire/units.lua:532
+msgctxt "shipname"
+msgid "Vesta"
+msgstr "베스타[난로, 가정, 가족의 여신]"
+
+#: ../../data/tribes/initialization/empire/units.lua:533
+msgctxt "shipname"
+msgid "Vinea"
+msgstr "비네아"
+
+#: ../../data/tribes/initialization/empire/units.lua:534
+msgctxt "shipname"
+msgid "Vitellius"
+msgstr "비텔리우스[황제]"
+
+#. TRANSLATORS: This is a tribe name
+#: ../../data/tribes/initialization/frisians/init.lua:12
+msgid "Frisians"
+msgstr "프리지아인들"
+
+#: ../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
 msgstr "거친 북해 연안의 주민들입니다."
+
+#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:549
+msgctxt "shipname"
+msgid "Amrum"
+msgstr "암룸"
+
+#. TRANSLATORS: This frisian ship is named after a no longer existing island
+#. in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:551
+msgctxt "shipname"
+msgid "Alt-Nordstrand"
+msgstr "알트-노르드스트란트"
+
+#. TRANSLATORS: This frisian ship is named after a peninsula in Northern
+#. Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:553
+msgctxt "shipname"
+msgid "Eiderstedt"
+msgstr "에이데르스테드트프"
+
+#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:555
+msgctxt "shipname"
+msgid "Föhr"
+msgstr "퓌르"
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:557
+msgctxt "shipname"
+msgid "Gröde"
+msgstr "그뢰데"
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:559
+msgctxt "shipname"
+msgid "Habel"
+msgstr "하벨"
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:561
+msgctxt "shipname"
+msgid "Hamburger Hallig"
+msgstr "함부르게르 할리그"
+
+#. TRANSLATORS: This frisian ship is named after an island in the North Sea
+#: ../../data/tribes/initialization/frisians/units.lua:563
+msgctxt "shipname"
+msgid "Helgoland"
+msgstr "헬골란트[지역]"
+
+#. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:565
+msgctxt "shipname"
+msgid "Hever"
+msgstr "헤버[지역]"
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:567
+msgctxt "shipname"
+msgid "Hooge"
+msgstr "후게[지역]"
+
+#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:569
+msgctxt "shipname"
+msgid "Japsand"
+msgstr "자프산드[지역]"
+
+#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:571
+msgctxt "shipname"
+msgid "Kormoransand"
+msgstr "코르모란산드[지역]"
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:573
+msgctxt "shipname"
+msgid "Langeneß"
+msgstr "랑게노[지역]"
+
+#. TRANSLATORS: This frisian ship is named after a water body in Northern
+#. Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:575
+msgctxt "shipname"
+msgid "Norderaue"
+msgstr "노르데라우에"
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:577
+msgctxt "shipname"
+msgid "Norderoog"
+msgstr "노르데루그"
+
+#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:579
+msgctxt "shipname"
+msgid "Norderoogsand"
+msgstr "노르데루그산드[지역]"
+
+#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:581
+msgctxt "shipname"
+msgid "Nordstrand"
+msgstr "노르드스트란드"
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:583
+msgctxt "shipname"
+msgid "Nordstrandischmoor"
+msgstr "노르드스트란디스크무르"
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:585
+msgctxt "shipname"
+msgid "Oland"
+msgstr "오란드"
+
+#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:587
+msgctxt "shipname"
+msgid "Pellworm"
+msgstr "펠웜"
+
+#. TRANSLATORS: This frisian ship is named after a no longer existing island
+#. in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:589
+msgctxt "shipname"
+msgid "Strand"
+msgstr "스트란드"
+
+#. TRANSLATORS: This frisian ship is named after a water body in Northern
+#. Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:591
+msgctxt "shipname"
+msgid "Süderaue"
+msgstr "수데라우에"
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:593
+msgctxt "shipname"
+msgid "Süderoog"
+msgstr "수데루그"
+
+#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:595
+msgctxt "shipname"
+msgid "Süderoogsand"
+msgstr "수데루그산드"
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:597
+msgctxt "shipname"
+msgid "Südfall"
+msgstr "수드팔"
+
+#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:599
+msgctxt "shipname"
+msgid "Sylt"
+msgstr "질트"
+
+#. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:601
+msgctxt "shipname"
+msgid "Uthlande"
+msgstr "우틀란데"
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
@@ -5030,6 +5121,10 @@ msgstr "조작"
 msgid "Tips"
 msgstr "팁"
 
+#: ../../data/tribes/scripting/help/init.lua:85
+msgid "Wares"
+msgstr "물품"
+
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "일꾼들"
@@ -5038,170 +5133,36 @@ msgstr "일꾼들"
 msgid "Buildings"
 msgstr "건물"
 
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:11
-msgid "Discovery"
-msgstr "발견"
+#: ../../data/tribes/scripting/help/init.lua:106
+msgid "Immovables"
+msgstr "고정물"
 
-#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:13
-msgid ""
-"Start the game with three ships on the ocean and only a handful of supplies"
-msgstr "바다 위의 3 척의 배와 소수의 보급품으로 게임을 시작하십시오"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/fortified_village.lua:11
-msgid "Fortified Village"
-msgstr "요새화된 마을"
-
-#. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
-#. condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/fortified_village.lua:13
-msgid "Start the game with a fortified military installation"
-msgstr "요새화된 군사 기지를 가지고 게임 시작"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/headquarters.lua:11
-msgid "Headquarters"
-msgstr "본부"
-
-#. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/headquarters.lua:13
-msgid "Start the game with your headquarters only"
-msgstr "오직 본부만 가지고 게임 시작"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:11
-msgid "New World"
-msgstr "새로운 세계"
-
-#. TRANSLATORS: This is the tooltip for the "New World" starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:13
-msgid "Start the game with seven ships full of wares on the ocean"
-msgstr "7척의 배에 상품을 가득 싣고 바다 위에서 게임을 시작하십시오"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:11
-msgid "Poor Hamlet"
-msgstr "불쌍한 햄릿"
-
-#. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
-#. condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:13
-msgid ""
-"Start the game with just a warehouse and the bare minimum for bootstrapping "
-"an economy. Warning: the AI can't successfully start from this"
-msgstr "경제 성장을 위한 최소한의 창고와 최소 비용으로 게임을 시작할 수 있습니다. 경고: 여기는 인공지능이 원활하게 시작되지 않습니다"
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
-#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
-#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
-#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
-msgid "Be careful"
-msgstr "조심하십시오"
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
-#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
-#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
-#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
-msgid ""
-"You have only one iron for each tool you will need to start your economy. "
-"Make sure no unneeded tool is created."
-msgstr "경제를 시작하기 위해 필요한 도구마다 하나의 철 만 있습니다. 불필요한 도구가 생성되지 않았는지 확인하십시오."
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:11
-msgid "Struggling Outpost"
-msgstr "고군분투 전초기지"
-
-#. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:13
-msgid ""
-"Start the game with just your headquarters and very few wares for "
-"bootstrapping an economy. Warning: the AI can't successfully start from this"
-msgstr "본부와 경제 성장을 위한 몇 가지 제품만으로 게임을 시작하십시오. 경고 : 인공지능은 여기서부터 성공적으로 시작할 수 없습니다"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/trading_outpost.lua:11
-msgid "Trading Outpost"
-msgstr "교역 기지"
-
-#. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
-#. condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/trading_outpost.lua:13
-msgid ""
-"If this player runs low on important wares, they will be replenished for "
-"free"
-msgstr "플레이어에게 중요한 물품이 부족하다면, 공짜로 재충전될 것입니다."
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/village.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/village.lua:11
-msgid "Village"
-msgstr "마을"
-
-#. TRANSLATORS: This is the tooltip for the "Village" starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/village.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/village.lua:13
-msgid "Start the game with a peaceful village"
-msgstr "평화로운 마을에서 게임 시작"
-
-#. TRANSLATORS: This is the ship's name used in lists of units
-#: ../../data/tribes/ships/atlanteans/init.lua:57
-#: ../../data/tribes/ships/barbarians/init.lua:16
-#: ../../data/tribes/ships/empire/init.lua:16
-#: ../../data/tribes/ships/frisians/init.lua:6
+#. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
+#: ../../data/tribes/ships/atlanteans/init.lua:43
+msgctxt "atlanteans_ship"
 msgid "Ship"
-msgstr "선박"
+msgstr "배"
+
+#. TRANSLATORS: This is the Barbarians' ship's name used in lists of units
+#: ../../data/tribes/ships/barbarians/init.lua:7
+msgctxt "barbarians_ship"
+msgid "Ship"
+msgstr "배"
+
+#. TRANSLATORS: This is the Empire's ship's name used in lists of units
+#: ../../data/tribes/ships/empire/init.lua:7
+msgctxt "empire_ship"
+msgid "Ship"
+msgstr "배"
+
+#. TRANSLATORS: This is the Frisians' ship's name used in lists of units
+#: ../../data/tribes/ships/frisians/init.lua:7
+msgctxt "frisians_ship"
+msgid "Ship"
+msgstr "배"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:58
+#: ../../data/tribes/wares/armor/init.lua:62
 msgctxt "ware"
 msgid "Armor"
 msgstr "갑옷"
@@ -5417,7 +5378,7 @@ msgid "Flour"
 msgstr "밀가루"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/fruit/init.lua:10
+#: ../../data/tribes/wares/fruit/init.lua:7
 msgctxt "ware"
 msgid "Fruit"
 msgstr "열매"
@@ -5429,25 +5390,25 @@ msgid "Fur"
 msgstr "털가죽"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/fur_garment/init.lua:10
+#: ../../data/tribes/wares/fur_garment/init.lua:7
 msgctxt "ware"
 msgid "Fur Garment"
 msgstr "털가죽 옷"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/fur_garment_golden/init.lua:10
+#: ../../data/tribes/wares/fur_garment_golden/init.lua:7
 msgctxt "ware"
 msgid "Golden Fur Garment"
 msgstr "황금 털가죽 옷"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/fur_garment_old/init.lua:10
+#: ../../data/tribes/wares/fur_garment_old/init.lua:7
 msgctxt "ware"
 msgid "Old Fur Garment"
 msgstr "오래된 털가죽 옷"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/fur_garment_studded/init.lua:10
+#: ../../data/tribes/wares/fur_garment_studded/init.lua:7
 msgctxt "ware"
 msgid "Studded Fur Garment"
 msgstr "징박힌 털가죽 옷"
@@ -5748,25 +5709,25 @@ msgid "Spidercloth"
 msgstr "거미천"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/sword_broad/init.lua:10
+#: ../../data/tribes/wares/sword_broad/init.lua:7
 msgctxt "ware"
 msgid "Broadsword"
 msgstr "날이 넓은 칼"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/sword_double/init.lua:10
+#: ../../data/tribes/wares/sword_double/init.lua:7
 msgctxt "ware"
 msgid "Double-edged Sword"
 msgstr "양날 칼"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/sword_long/init.lua:10
+#: ../../data/tribes/wares/sword_long/init.lua:7
 msgctxt "ware"
 msgid "Long Sword"
 msgstr "긴 칼"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/sword_short/init.lua:10
+#: ../../data/tribes/wares/sword_short/init.lua:7
 msgctxt "ware"
 msgid "Short Sword"
 msgstr "짧은 칼"
@@ -5838,43 +5799,43 @@ msgid "Wool"
 msgstr "양털"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:39
+#: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:31
 msgctxt "atlanteans_worker"
 msgid "Armorsmith"
 msgstr "갑옷 대장장이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/baker/init.lua:17
+#: ../../data/tribes/workers/atlanteans/baker/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Baker"
 msgstr "제빵사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/blackroot_farmer/init.lua:32
+#: ../../data/tribes/workers/atlanteans/blackroot_farmer/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Blackroot Farmer"
 msgstr "검은뿌리 열음지기"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/builder/init.lua:27
+#: ../../data/tribes/workers/atlanteans/builder/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Builder"
 msgstr "건축업자"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/carrier/init.lua:36
+#: ../../data/tribes/workers/atlanteans/carrier/init.lua:31
 msgctxt "atlanteans_worker"
 msgid "Carrier"
 msgstr "짐꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/charcoal_burner/init.lua:17
+#: ../../data/tribes/workers/atlanteans/charcoal_burner/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Charcoal Burner"
 msgstr "목탄 굽는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/farmer/init.lua:32
+#: ../../data/tribes/workers/atlanteans/farmer/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Farmer"
 msgstr "열음지기"
@@ -5886,139 +5847,139 @@ msgid "Ferry"
 msgstr "연락선"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/fishbreeder/init.lua:20
+#: ../../data/tribes/workers/atlanteans/fishbreeder/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Fish Breeder"
 msgstr "양식업자"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/fisher/init.lua:22
+#: ../../data/tribes/workers/atlanteans/fisher/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Fisher"
 msgstr "어부"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/forester/init.lua:32
+#: ../../data/tribes/workers/atlanteans/forester/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Forester"
 msgstr "숲꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/geologist/init.lua:23
+#: ../../data/tribes/workers/atlanteans/geologist/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Geologist"
 msgstr "지질학자"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/horse/init.lua:18
+#: ../../data/tribes/workers/atlanteans/horse/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Horse"
 msgstr "말"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/horsebreeder/init.lua:15
+#: ../../data/tribes/workers/atlanteans/horsebreeder/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Horse Breeder"
 msgstr "말 사육사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/hunter/init.lua:18
+#: ../../data/tribes/workers/atlanteans/hunter/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Hunter"
 msgstr "사냥꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/miller/init.lua:17
+#: ../../data/tribes/workers/atlanteans/miller/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Miller"
 msgstr "방앗간지기"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/miner/init.lua:17
+#: ../../data/tribes/workers/atlanteans/miner/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Miner"
 msgstr "쇳돌 캐는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/recruit/init.lua:16
+#: ../../data/tribes/workers/atlanteans/recruit/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Recruit"
 msgstr "신병"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/sawyer/init.lua:17
+#: ../../data/tribes/workers/atlanteans/sawyer/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Sawyer"
 msgstr "제재공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/scout/init.lua:15
+#: ../../data/tribes/workers/atlanteans/scout/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Scout"
 msgstr "정찰병"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/shipwright/init.lua:21
+#: ../../data/tribes/workers/atlanteans/shipwright/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Shipwright"
 msgstr "조선공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/smelter/init.lua:17
+#: ../../data/tribes/workers/atlanteans/smelter/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Smelter"
 msgstr "제련공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/smoker/init.lua:16
+#: ../../data/tribes/workers/atlanteans/smoker/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Smoker"
 msgstr "훈제공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/soldier/init.lua:251
+#: ../../data/tribes/workers/atlanteans/soldier/init.lua:255
 msgctxt "atlanteans_worker"
 msgid "Soldier"
 msgstr "군인"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/spiderbreeder/init.lua:17
+#: ../../data/tribes/workers/atlanteans/spiderbreeder/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Spider Breeder"
 msgstr "거미 사육사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/stonecutter/init.lua:22
+#: ../../data/tribes/workers/atlanteans/stonecutter/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Stonecutter"
 msgstr "석공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/toolsmith/init.lua:17
+#: ../../data/tribes/workers/atlanteans/toolsmith/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Toolsmith"
 msgstr "도구 대장장이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/trainer/init.lua:17
+#: ../../data/tribes/workers/atlanteans/trainer/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Trainer"
 msgstr "훈련사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/weaponsmith/init.lua:17
+#: ../../data/tribes/workers/atlanteans/weaponsmith/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Weaponsmith"
 msgstr "무기 대장장이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/weaver/init.lua:17
+#: ../../data/tribes/workers/atlanteans/weaver/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Weaver"
 msgstr "직조공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/woodcutter/init.lua:22
+#: ../../data/tribes/workers/atlanteans/woodcutter/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Woodcutter"
 msgstr "나무꾼"
@@ -6066,7 +6027,7 @@ msgid "Carrier"
 msgstr "짐꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/cattlebreeder/init.lua:17
+#: ../../data/tribes/workers/barbarians/cattlebreeder/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Cattle Breeder"
 msgstr "소 사육사"
@@ -6162,7 +6123,7 @@ msgid "Master Miner"
 msgstr "달인 쇳돌 캐는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/ox/init.lua:19
+#: ../../data/tribes/workers/barbarians/ox/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Ox"
 msgstr "황소"
@@ -6198,7 +6159,7 @@ msgid "Smelter"
 msgstr "제련공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/soldier/init.lua:77
+#: ../../data/tribes/workers/barbarians/soldier/init.lua:81
 msgctxt "barbarians_worker"
 msgid "Soldier"
 msgstr "군인"
@@ -6222,61 +6183,61 @@ msgid "Weaver"
 msgstr "직조공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/armorsmith/init.lua:17
+#: ../../data/tribes/workers/empire/armorsmith/init.lua:7
 msgctxt "empire_worker"
 msgid "Armorsmith"
 msgstr "갑옷 대장장이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/baker/init.lua:17
+#: ../../data/tribes/workers/empire/baker/init.lua:7
 msgctxt "empire_worker"
 msgid "Baker"
 msgstr "제빵사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/brewer/init.lua:17
+#: ../../data/tribes/workers/empire/brewer/init.lua:7
 msgctxt "empire_worker"
 msgid "Brewer"
 msgstr "양조사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/builder/init.lua:27
+#: ../../data/tribes/workers/empire/builder/init.lua:7
 msgctxt "empire_worker"
 msgid "Builder"
 msgstr "건축업자"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/carpenter/init.lua:17
+#: ../../data/tribes/workers/empire/carpenter/init.lua:7
 msgctxt "empire_worker"
 msgid "Carpenter"
 msgstr "목수"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/carrier/init.lua:13
+#: ../../data/tribes/workers/empire/carrier/init.lua:7
 msgctxt "empire_worker"
 msgid "Carrier"
 msgstr "짐꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/charcoal_burner/init.lua:17
+#: ../../data/tribes/workers/empire/charcoal_burner/init.lua:7
 msgctxt "empire_worker"
 msgid "Charcoal Burner"
 msgstr "숯 굽는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/donkey/init.lua:18
+#: ../../data/tribes/workers/empire/donkey/init.lua:7
 msgctxt "empire_worker"
 msgid "Donkey"
 msgstr "당나귀"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/donkeybreeder/init.lua:17
+#: ../../data/tribes/workers/empire/donkeybreeder/init.lua:7
 msgctxt "empire_worker"
 msgid "Donkey Breeder"
 msgstr "당나귀 사육사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/farmer/init.lua:32
+#: ../../data/tribes/workers/empire/farmer/init.lua:7
 msgctxt "empire_worker"
 msgid "Farmer"
 msgstr "열음지기"
@@ -6288,139 +6249,139 @@ msgid "Ferry"
 msgstr "연락선"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/fisher/init.lua:22
+#: ../../data/tribes/workers/empire/fisher/init.lua:7
 msgctxt "empire_worker"
 msgid "Fisher"
 msgstr "어부"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/forester/init.lua:32
+#: ../../data/tribes/workers/empire/forester/init.lua:7
 msgctxt "empire_worker"
 msgid "Forester"
 msgstr "숲꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/geologist/init.lua:23
+#: ../../data/tribes/workers/empire/geologist/init.lua:7
 msgctxt "empire_worker"
 msgid "Geologist"
 msgstr "지질학자"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/hunter/init.lua:18
+#: ../../data/tribes/workers/empire/hunter/init.lua:7
 msgctxt "empire_worker"
 msgid "Hunter"
 msgstr "사냥꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/innkeeper/init.lua:17
+#: ../../data/tribes/workers/empire/innkeeper/init.lua:7
 msgctxt "empire_worker"
 msgid "Innkeeper"
 msgstr "여관 주인"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/lumberjack/init.lua:23
+#: ../../data/tribes/workers/empire/lumberjack/init.lua:7
 msgctxt "empire_worker"
 msgid "Lumberjack"
 msgstr "벌목꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/miller/init.lua:17
+#: ../../data/tribes/workers/empire/miller/init.lua:7
 msgctxt "empire_worker"
 msgid "Miller"
 msgstr "방앗간지기"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/miner/init.lua:17
+#: ../../data/tribes/workers/empire/miner/init.lua:7
 msgctxt "empire_worker"
 msgid "Miner"
 msgstr "쇳돌 캐는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/miner_master/init.lua:17
+#: ../../data/tribes/workers/empire/miner_master/init.lua:7
 msgctxt "empire_worker"
 msgid "Master Miner"
 msgstr "달인 쇳돌 캐는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/pigbreeder/init.lua:17
+#: ../../data/tribes/workers/empire/pigbreeder/init.lua:7
 msgctxt "empire_worker"
 msgid "Pig Breeder"
 msgstr "돼지 키우는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/recruit/init.lua:17
+#: ../../data/tribes/workers/empire/recruit/init.lua:7
 msgctxt "empire_worker"
 msgid "Recruit"
 msgstr "신병"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/scout/init.lua:17
+#: ../../data/tribes/workers/empire/scout/init.lua:7
 msgctxt "empire_worker"
 msgid "Scout"
 msgstr "정찰병"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/shepherd/init.lua:17
+#: ../../data/tribes/workers/empire/shepherd/init.lua:7
 msgctxt "empire_worker"
 msgid "Shepherd"
 msgstr "양치기"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/shipwright/init.lua:26
+#: ../../data/tribes/workers/empire/shipwright/init.lua:7
 msgctxt "empire_worker"
 msgid "Shipwright"
 msgstr "조선공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/smelter/init.lua:17
+#: ../../data/tribes/workers/empire/smelter/init.lua:7
 msgctxt "empire_worker"
 msgid "Smelter"
 msgstr "쇠 녹이는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/soldier/init.lua:77
+#: ../../data/tribes/workers/empire/soldier/init.lua:81
 msgctxt "empire_worker"
 msgid "Soldier"
 msgstr "군인"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/stonemason/init.lua:23
+#: ../../data/tribes/workers/empire/stonemason/init.lua:7
 msgctxt "empire_worker"
 msgid "Stonemason"
 msgstr "석공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/toolsmith/init.lua:17
+#: ../../data/tribes/workers/empire/toolsmith/init.lua:7
 msgctxt "empire_worker"
 msgid "Toolsmith"
 msgstr "도구 대장장이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/trainer/init.lua:17
+#: ../../data/tribes/workers/empire/trainer/init.lua:7
 msgctxt "empire_worker"
 msgid "Trainer"
 msgstr "훈련 교관"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/vinefarmer/init.lua:32
+#: ../../data/tribes/workers/empire/vinefarmer/init.lua:7
 msgctxt "empire_worker"
 msgid "Vine Farmer"
 msgstr "포도 열음지기"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/vintner/init.lua:18
+#: ../../data/tribes/workers/empire/vintner/init.lua:7
 msgctxt "empire_worker"
 msgid "Vintner"
 msgstr "포도 술 만드는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/weaponsmith/init.lua:17
+#: ../../data/tribes/workers/empire/weaponsmith/init.lua:7
 msgctxt "empire_worker"
 msgid "Weaponsmith"
 msgstr "무기 대장장이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/weaver/init.lua:17
+#: ../../data/tribes/workers/empire/weaver/init.lua:7
 msgctxt "empire_worker"
 msgid "Weaver"
 msgstr "직조공"

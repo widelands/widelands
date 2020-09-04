@@ -70,6 +70,9 @@ public:
 	const RGBAColor& semi_focused_color() const {
 		return semi_focused_color_;
 	}
+	int focus_border_thickness() const {
+		return focus_border_thickness_;
+	}
 	static std::string color_tag(const std::string& text, const RGBColor& color);
 
 private:
@@ -93,7 +96,7 @@ private:
 	PanelStyleMap dropdownstyles_;
 	PanelStyleMap scrollbarstyles_;
 
-	int minimum_font_size_;
+	int minimum_font_size_, focus_border_thickness_;
 	RGBColor minimap_icon_frame_;
 	RGBAColor window_border_focused_, window_border_unfocused_, focused_color_, semi_focused_color_;
 	std::map<UI::FontStyle, std::unique_ptr<const UI::FontStyleInfo>> fontstyles_;

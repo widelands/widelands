@@ -1,26 +1,13 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_militarysite_type {
-   msgctxt = "empire_building",
    name = "empire_castle",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Castle"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-
-   enhancement_cost = {
-      planks = 5,
-      marble_column = 4,
-      marble = 4,
-      granite = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      planks = 2,
-      marble_column = 2,
-      marble = 3,
-      granite = 1
-   },
 
    animations = {
       idle = {
@@ -44,3 +31,5 @@ tribes:new_militarysite_type {
       defeated_you = _"Your soldiers defeated the enemy at the castle."
    },
 }
+
+pop_textdomain()

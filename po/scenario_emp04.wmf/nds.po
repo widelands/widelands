@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2020\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -997,7 +997,7 @@ msgid ""
 "wrong with our mines as well. It’s probably a good idea to send a geologist "
 "to check whether there are enough resources in the vicinity of our mines."
 msgstr ""
-"Da de lesten Erfahrungen gloov ick, dat ok de Bargwarken eerst maal nich "
+"Na de lesten Erfahrungen gloov ick, dat ok de Bargwarken eerst maal nich "
 "recht warken worden. Laat uns eenen Schattsöker schicken, um natokieken, of "
 "dat um uns' Bargwarken genoog Mineraale gifft."
 
@@ -1589,89 +1589,3 @@ msgstr ""
 "Wees verdoomt, Lutjus, för dat Doodmaken vun freedsamen Deenern vun de "
 "Gottin Vesta! Dien Leven un dien Land sallen verflöökt wesen un de Wut vun "
 "de Gottin sall diene Famielje vun de Gesicht vun de Eer utraderen!"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1.lua:8
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery2.lua:9
-msgctxt "empire_building"
-msgid "Brewery"
-msgstr "Broeree"
-
-#. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery2.lua:50
-msgid "brewing beer"
-msgstr "Beer to broen"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:9
-msgctxt "empire_building"
-msgid "Farm"
-msgstr "Buurderee"
-
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:43
-msgid "working"
-msgstr "to Warken"
-
-#. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:51
-msgid "planting wheat"
-msgstr "Weit to planten"
-
-#. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:59
-msgid "harvesting wheat"
-msgstr "Weit to arnten"
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:68
-msgid "No Fields"
-msgstr "Keene Meedjes"
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:69
-msgid "Out of Fields"
-msgstr "Hebb keene Medjes mehr"
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm2.lua:70
-msgctxt "empire_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
-"De Buur dat warkt bi deese Buurderee hett keen Meedland wo he wat anplanten "
-"kann."
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:9
-msgid "Loading campaign-specific tribe units"
-msgstr "Lade Rutfödderungs-Volk-Dingen"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1.lua:8
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill2.lua:9
-msgctxt "empire_building"
-msgid "Mill"
-msgstr "Möhlen"
-
-#. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill2.lua:48
-msgid "grinding wheat"
-msgstr "Weit to mahlen"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta.lua:9
-msgctxt "empire_building"
-msgid "Temple of Vesta"
-msgstr "Vestas Tempel"
-
-#. TRANSLATORS: Purpose helptext for a building
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/vesta_helptexts.lua:17
-msgctxt "building"
-msgid ""
-"In the temple of Vesta, the wares to worship are stored. It is the home of "
-"the priestesses and the guards of the goddess."
-msgstr ""
-"In Vestas Tempel worden de Waren lagert, wat man tum Anbeden bruukt. Daar "
-"wohnen ok de Preesterinnen un de Wahrders vun de Gottin."
-
-#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1.lua:8
-msgctxt "empire_building"
-msgid "Well"
-msgstr "Well"

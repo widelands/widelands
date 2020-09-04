@@ -140,6 +140,9 @@ private:
 	ZipFilesystem(const std::shared_ptr<ZipFile>& shared_data,
 	              const std::string& basedir_in_zip_file);
 
+	// Place current time in tm_zip struct
+	void set_time_info(tm_zip& time);
+
 	// The data shared between all zip filesystems with the same
 	// underlying zip file.
 	std::shared_ptr<ZipFile> zip_file_;

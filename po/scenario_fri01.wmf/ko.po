@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: ks k, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -296,7 +296,7 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
-"모든 프리지아족들처럼 우리는 주로 벽돌로 집을 짓습니다. 우리는 약간의 통나무와 화강암을 추가하여 그것들을 향상시킵니다. 지붕은 "
+"모든 프리지아인들처럼 우리는 주로 벽돌로 집을 짓습니다. 우리는 약간의 통나무와 화강암을 추가하여 그것들을 향상시킵니다. 지붕은 "
 "자연스럽게 갈대로 깔려 있습니다.  비를 막는 데 이보다 더 적합한 것은 없습니다."
 
 #. TRANSLATORS: Hauke – Introduction 3
@@ -618,8 +618,8 @@ msgid ""
 "equipped in a barracks with a short sword and a fur garment, the uniform of "
 "all honorable warriors."
 msgstr ""
-"우리는 이 무기를 사용하여 새로운 군인들을 양성 할 수 있었습니다. 여기서 적을 찾지 않기를 바라지만 항상 대비하는 것이 좋습니다. "
-"새로운 군인들은  짧은 칼과 모든 명예로운 전사들의 제복인 털가죽 의복이 병영에 장비되어 있습니다."
+"우리는 이 무기를 사용하여 신병들을 양성 할 수 있었습니다. 여기서 적을 찾지 않기를 바라지만 항상 대비하는 것이 좋습니다. 신병들은 "
+"짧은 칼과 모든 명예로운 전사들의 제복인 털가죽 의복이 병영에 장비되어 있습니다."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
@@ -665,7 +665,7 @@ msgstr "확장하고 있음"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:279
 msgid ""
 "Our barracks has started working, and we are recruiting new soldiers now."
-msgstr "우리 병영은 일을 시작했고 지금은 새로운 군인을 모집하고 있습니다."
+msgstr "우리 병영은 일을 시작했고 지금 신병을 모집하고 있습니다."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:282
@@ -741,7 +741,7 @@ msgstr "군인들은 훈련소에서 기본적인 공격, 체력, 방어 훈련�
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
-msgstr "프리지아의 싸움"
+msgstr "프리지아인이 싸우고 있음"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:321

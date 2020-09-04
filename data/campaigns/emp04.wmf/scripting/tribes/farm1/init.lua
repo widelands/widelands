@@ -3,13 +3,25 @@ dirname = "tribes/buildings/productionsites/empire/farm/"
 push_textdomain("scenario_emp04.wmf")
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_farm1",
    descname = "Farm",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-   enhancement = "empire_farm2",
+
+   enhancement = {
+      name = "empire_farm",
+      enhancement_cost = {
+         planks = 1,
+         marble = 1,
+         marble_column = 2
+      },
+      enhancement_return_on_dismantle = {
+         planks = 1,
+         granite = 1,
+         marble = 1,
+         marble_column = 1
+      }
+   },
 
    animations = {
       idle = {

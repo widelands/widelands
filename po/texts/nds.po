@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
-"PO-Revision-Date: 2020-07-24 18:42+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
+"PO-Revision-Date: 2020-08-26 12:03+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -19,102 +19,106 @@ msgstr ""
 "Language: nds\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/txts/AUTHORS.lua:27
-msgid "Developers"
-msgstr "Entwicklers"
+#: ../../data/txts/ABOUT.lua:7
+msgid "Readme"
+msgstr "Leesmi"
 
-#: ../../data/txts/AUTHORS.lua:29
-msgid "Widelands Development Team"
-msgstr "De Widelands Entwickeln-Klottje"
-
-#: ../../data/txts/LICENSE.lua:6
+#: ../../data/txts/ABOUT.lua:11
 msgid "License"
 msgstr "Lizenz"
 
-#: ../../data/txts/LICENSE.lua:8
+#: ../../data/txts/ABOUT.lua:15
+msgid "Developers"
+msgstr "Entwicklers"
+
+#: ../../data/txts/ABOUT.lua:19
+msgid "Translators"
+msgstr "Översetters"
+
+#: ../../data/txts/AUTHORS.lua:28
+msgid "Widelands Development Team"
+msgstr "De Widelands Entwickeln-Klottje"
+
+#: ../../data/txts/LICENSE.lua:7
 msgid "Licensing information for Widelands"
 msgstr "Lizenz-Informatioon för Widelands"
 
 #. TRANSLATORS: Placeholder is copyright end year
-#: ../../data/txts/LICENSE.lua:10
+#: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr "Copyright 2002 - %1% vun de Widelands Entwickeln-Klottje."
 
-#: ../../data/txts/LICENSE.lua:12
+#: ../../data/txts/LICENSE.lua:11
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Deeses Speel un siene Quell sünd freei (FOSS); vergünnt unner de GNU General Public License (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:13
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Du finnst mehr Informationen över FOSS un de GPL up deese Internett-Sied: %s"
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr "Da finnst du de kumpleten Text vun de Lizenz un anner Informatioonen över hör Philosophie un rechtliches Utwirken."
+msgstr "Daar finnst du de kumpleten Text vun de Lizenz un anner Informatioonen över hör Philosophie un rechtliches Utwirken."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "De GPL word ok as eene Text-Datei mit Widelands sülvst levert."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Up Linux finnst du de Datei mit de Naam »COPYING« in de Ruut vun de Quell of Binärpaket of im Verteeknis, waar Widelands installeert is (to 'n Bispööl »%1%«)."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Up Windows finnst du de Datei mit de Naam »COPYING.txt« in de List, waar Widelands sekert is, un de Startmenü hett een Verwies up de Datei."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "Up MacOS finnst du de Datei mit de Naam »COPYING« in de Paket, dat du vun de Internett-Sied runnerladen hest."
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:22
 msgid "This game comes as-is and without any warranty."
 msgstr "Deeses Speel is wat 't is un hett överhoopt keene Garantie."
 
-#: ../../data/txts/LICENSE.lua:24
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
 msgstr "För mehr Informationen un Hülp finnst du uns up %1% (Internett-Sied, Wiki, Forum för Fragen un allgemeene Hülp), %2% (Fehlers mellen) un %3% (Översettens)."
 
-#: ../../data/txts/README.lua:6
-msgid "Readme"
-msgstr "Leesmi"
-
-#: ../../data/txts/README.lua:9
+#: ../../data/txts/README.lua:8
 msgid "an open source strategy game"
 msgstr "een quellopens Taktisk Speel"
 
-#: ../../data/txts/README.lua:11
+#: ../../data/txts/README.lua:10
 msgid "Check out the Widelands project homepage:"
 msgstr "Kiek de Internett-Sied vun de Widelands-Projekt an:"
 
-#: ../../data/txts/README.lua:12
+#: ../../data/txts/README.lua:11
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
 msgstr "Widelands is unner de GNU General Public License (GPL) vergünnt. För mehr Informationen, kiek de Datei »COPYING« an."
 
-#: ../../data/txts/README.lua:13
+#: ../../data/txts/README.lua:12
 msgid "Status"
 msgstr "Tostand"
 
-#: ../../data/txts/README.lua:14
+#: ../../data/txts/README.lua:13
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even "
 "more in multiplayer with others. Still, there is always more work to be done"
@@ -123,79 +127,75 @@ msgid ""
 " language or creating new maps – get in touch on our homepage."
 msgstr "Widelands is in Grundlagen haast kumpleet un 't maakt mennig Spaaß, 't alleen of mit mennig Spelers to spölen. Aver up all Felden gifft 't immer wat to doon. Wenn du Interesse hest, mittomaken – of dat is, Biller to malen, Fehler to behelpen, neje Dingen to schrieven, dat Speel in diene Spraak to översetten of neje Kaarten to maken – mell di up uns' Internett-Sied."
 
-#: ../../data/txts/README.lua:16
+#: ../../data/txts/README.lua:15
 msgid "Widelands Help"
 msgstr "Hülp för Widelands"
 
 #. TRANSLATORS: %1% is a key on the keyboard
-#: ../../data/txts/README.lua:18
+#: ../../data/txts/README.lua:17
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
 msgstr "Du kannst Hülp för dat Speel un de Bewarker finnen, indeem du de Hülp-Knoop im unnern Menü of %1% drückst."
 
 #. TRANSLATORS: This is a key on the keyboard
-#: ../../data/txts/README.lua:20
+#: ../../data/txts/README.lua:19
 msgid "F1"
 msgstr "F1"
 
-#: ../../data/txts/README.lua:23
+#: ../../data/txts/README.lua:22
 msgid "Reporting Bugs"
 msgstr "Fehler kunddoon"
 
-#: ../../data/txts/README.lua:24
+#: ../../data/txts/README.lua:23
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Wenn du eenen Fehler finnst, mell dat bidde mit uns' Fehlermeller:"
 
-#: ../../data/txts/README.lua:26
+#: ../../data/txts/README.lua:25
 msgid "Please provide enough background information. Tell us:"
 msgstr "Bidde giff genoog Achtergrund-Informationen. Segg uns:"
 
-#: ../../data/txts/README.lua:28
+#: ../../data/txts/README.lua:27
 msgid "Detailed steps on how to trigger the bug, if possible."
 msgstr "Akkerate Instruksjes, wo dat gaht, de Fehler uttolösen, wenn mögelk."
 
-#: ../../data/txts/README.lua:29
+#: ../../data/txts/README.lua:28
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "Wat daarbi passeren sull un wat aver passeer is."
 
-#: ../../data/txts/README.lua:30
+#: ../../data/txts/README.lua:29
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr "De Widelands-Versioon dat du bruukst (of de Versioon of de Kenntahl vun de Dagelke of Entwickeln-Versioon)."
 
-#: ../../data/txts/README.lua:31
+#: ../../data/txts/README.lua:30
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
 msgstr "Bidde segg ok, welkes Bedriev-Systeem du bruukst. Eenige Fehler passeren nämlich blot up bestimmte Systemen."
 
-#: ../../data/txts/README.lua:32
+#: ../../data/txts/README.lua:31
 msgid "Which map you were playing when the bug occurred."
 msgstr "Up welker Kaart du spööldest as de Fehler passeerde."
 
-#: ../../data/txts/README.lua:33
+#: ../../data/txts/README.lua:32
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
 msgstr "Wenn sük de Fehler up de Anzeige betreckt of dat dat Probleem verklaart, giff bidde eenen of een paar Billschirmfotos."
 
-#: ../../data/txts/README.lua:34
+#: ../../data/txts/README.lua:33
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
 msgstr "Wenn du een sekertes Speel of Upteken hest, wat de Probleem verklaart (to 'n Bispööl Störten waar man nich sücht, wat de Oorsaak is), kliev dat bidde ok an. Mehr Informationen finnst du unnern in de Deel över Uptekens."
 
-#: ../../data/txts/TRANSLATORS.lua:24
-msgid "Translators"
-msgstr "Översetters"
-
-#: ../../data/txts/TRANSLATORS.lua:26
+#: ../../data/txts/TRANSLATORS.lua:25
 msgid "Widelands Translators"
 msgstr "Widelands-Översetters"
 

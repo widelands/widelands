@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-16 16:55+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
 "PO-Revision-Date: 2020-07-23 07:47+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
@@ -21,102 +21,106 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
-#: ../../data/txts/AUTHORS.lua:27
-msgid "Developers"
-msgstr "Vývojáři"
+#: ../../data/txts/ABOUT.lua:7
+msgid "Readme"
+msgstr "Čti mě"
 
-#: ../../data/txts/AUTHORS.lua:29
-msgid "Widelands Development Team"
-msgstr "Vývojový tým Widelands"
-
-#: ../../data/txts/LICENSE.lua:6
+#: ../../data/txts/ABOUT.lua:11
 msgid "License"
 msgstr "Licence"
 
-#: ../../data/txts/LICENSE.lua:8
+#: ../../data/txts/ABOUT.lua:15
+msgid "Developers"
+msgstr "Vývojáři"
+
+#: ../../data/txts/ABOUT.lua:19
+msgid "Translators"
+msgstr "Překladatelé"
+
+#: ../../data/txts/AUTHORS.lua:28
+msgid "Widelands Development Team"
+msgstr "Vývojový tým Widelands"
+
+#: ../../data/txts/LICENSE.lua:7
 msgid "Licensing information for Widelands"
 msgstr "Licenční informace pro Widelands"
 
 #. TRANSLATORS: Placeholder is copyright end year
-#: ../../data/txts/LICENSE.lua:10
+#: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:12
+#: ../../data/txts/LICENSE.lua:11
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Tato hra je Svobodný a otevřený software (FOSS), licencována pod GNU General Public License (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:13
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Více informací o FOSS a GPL je k dispozici na následujících stránkách: %s"
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Najdeš tam úplný text licence i další informace o filozofii a právních záležitostech."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Dále připojujeme GPL jako textový dokument i k Widelands."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "V Linuxu lze soubor COPYING najít v hlavním adresáři zdrojového kódu nebo samostatného binárního balíčku, nebo v instalačním adresáři (např. ‘%1%’)."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Ve Windows lze soubor COPYING.txt najít v instalačním adresáři a v položce Widelands v nabídce Start je odkaz na tento soubor."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "V Mac OS X lze najít soubor COPYING v archívu, který si stáhl ze stránky."
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:22
 msgid "This game comes as-is and without any warranty."
 msgstr "Hra je vydávána jak-je a bez jakékoliv záruky."
 
-#: ../../data/txts/LICENSE.lua:24
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
 msgstr "Pro více informací a podporu navštivte stránky %1% (Stránky, Wiki, Fórum na dotazy nebo obecnou podporu), %2% (Hlášení chyb), a %3% (Překlady)."
 
-#: ../../data/txts/README.lua:6
-msgid "Readme"
-msgstr "Čti mě"
-
-#: ../../data/txts/README.lua:9
+#: ../../data/txts/README.lua:8
 msgid "an open source strategy game"
 msgstr "strategická hra s otevřenými zdrojovými kódy"
 
-#: ../../data/txts/README.lua:11
+#: ../../data/txts/README.lua:10
 msgid "Check out the Widelands project homepage:"
 msgstr "Navštiv domovskou stránku projektu Widelands:"
 
-#: ../../data/txts/README.lua:12
+#: ../../data/txts/README.lua:11
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
 msgstr "Widelands je licencováno pod GNU General Public License (GPL). Pro více informací se podívejte do souboru \"COPYING\"."
 
-#: ../../data/txts/README.lua:13
+#: ../../data/txts/README.lua:12
 msgid "Status"
 msgstr "Stav"
 
-#: ../../data/txts/README.lua:14
+#: ../../data/txts/README.lua:13
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even "
 "more in multiplayer with others. Still, there is always more work to be done"
@@ -125,79 +129,75 @@ msgid ""
 " language or creating new maps – get in touch on our homepage."
 msgstr "Widelands je po stránce vlastností skoro hotový a hrát ho je zábava, ve více hráčích je to ještě lepší. I tak ale zbývá spousta práce v mnoha směrech. Pokud by si měl zájem se zapojit do jeho tvorby - ať už tvorbou grafiky, opravou chyb, přidáváním vlastností, překládáním nebo vytvářením nových map - spoj se s námi na naší domovské stránce."
 
-#: ../../data/txts/README.lua:16
+#: ../../data/txts/README.lua:15
 msgid "Widelands Help"
 msgstr "Widelands pomoc"
 
 #. TRANSLATORS: %1% is a key on the keyboard
-#: ../../data/txts/README.lua:18
+#: ../../data/txts/README.lua:17
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
 msgstr "Nápovědu ke hře i editoru najdeš pod tlačítkem nápověda dole v nabídce nebo stiskem %1%."
 
 #. TRANSLATORS: This is a key on the keyboard
-#: ../../data/txts/README.lua:20
+#: ../../data/txts/README.lua:19
 msgid "F1"
 msgstr "F1"
 
-#: ../../data/txts/README.lua:23
+#: ../../data/txts/README.lua:22
 msgid "Reporting Bugs"
 msgstr "Hlášení chyb"
 
-#: ../../data/txts/README.lua:24
+#: ../../data/txts/README.lua:23
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Pokud narazíš na chybu, nahlaš ji prosím do našeho bugtrackeru:"
 
-#: ../../data/txts/README.lua:26
+#: ../../data/txts/README.lua:25
 msgid "Please provide enough background information. Tell us:"
 msgstr "Prosím specifikuj dostatek souvisejících informací. Zejména:"
 
-#: ../../data/txts/README.lua:28
+#: ../../data/txts/README.lua:27
 msgid "Detailed steps on how to trigger the bug, if possible."
 msgstr "Podrobný postup jak chybu vyvolat, je-li to možné."
 
-#: ../../data/txts/README.lua:29
+#: ../../data/txts/README.lua:28
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "Co jste očekávali, že se stane, když jste učinili tyto kroky a co se doopravdy stalo."
 
-#: ../../data/txts/README.lua:30
+#: ../../data/txts/README.lua:29
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr "Kterou verzi Widelands používáš (tj. buď číslo sestavení nebo\nčíslo revize, pokud používáš vývojovou verzi nebo denní build.)"
 
-#: ../../data/txts/README.lua:31
+#: ../../data/txts/README.lua:30
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
 msgstr "Prosím, přijdete informaci o tom, na jakém operační systému Widelands hrajete, protože některé chyby mohou být specifické pro danou platformu."
 
-#: ../../data/txts/README.lua:32
+#: ../../data/txts/README.lua:31
 msgid "Which map you were playing when the bug occurred."
 msgstr "Kterou mapu jsi hrál, když jsi na chybu narazi."
 
-#: ../../data/txts/README.lua:33
+#: ../../data/txts/README.lua:32
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
 msgstr "Pokud chyba souvisí s tím, že je něco zobrazeno nesprávně nebo lze chybu lépe vysvětlit graficky, přiložte jeden a více screenshotů."
 
-#: ../../data/txts/README.lua:34
+#: ../../data/txts/README.lua:33
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
 msgstr "Pokud máš k dispozici uloženou hru nebo záznam, na kterém je problém vidět (například pád, u kterého je těžké poznat, co ho působí), prosím přilož ho také. Více informací je také v sekci Záznamy, níže."
 
-#: ../../data/txts/TRANSLATORS.lua:24
-msgid "Translators"
-msgstr "Překladatelé"
-
-#: ../../data/txts/TRANSLATORS.lua:26
+#: ../../data/txts/TRANSLATORS.lua:25
 msgid "Widelands Translators"
 msgstr "Widelands překladatelé"
 

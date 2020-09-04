@@ -199,6 +199,10 @@ StyleManager::StyleManager() {
 	window_border_unfocused_ = read_rgba_color(*table->get_table("window_border_unfocused"));
 	focused_color_ = read_rgba_color(*table->get_table("background_focused"));
 	semi_focused_color_ = read_rgba_color(*table->get_table("background_semi_focused"));
+	focus_border_thickness_ = table->get_int("focus_border_thickness");
+	if (focus_border_thickness_ < 1) {
+		throw wexception("focus_border_thickness must be at least 1");
+	}
 
 	// Fonts
 	element_table = table->get_table("fonts");

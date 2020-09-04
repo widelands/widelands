@@ -1,14 +1,13 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_goldmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Gold Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "barbarians_goldmine_deep",
 
    buildcost = {
       log = 4,
@@ -17,6 +16,18 @@ tribes:new_productionsite_type {
    return_on_dismantle = {
       log = 2,
       granite = 1
+   },
+
+   enhancement = {
+      name = "barbarians_goldmine_deep",
+      enhancement_cost = {
+         log = 4,
+         granite = 2
+      },
+      enhancement_return_on_dismantle = {
+         log = 2,
+         granite = 1
+      }
    },
 
    animations = {
@@ -39,7 +50,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "gold",
+      mines = "resource_gold",
       mines_percent = 30,
       prohibited_till = 1200
    },
@@ -74,3 +85,5 @@ tribes:new_productionsite_type {
          pgettext("barbarians_building", "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()
