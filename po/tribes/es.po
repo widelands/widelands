@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-23 15:23+0000\n"
+"POT-Creation-Date: 2020-08-29 17:05+0000\n"
 "PO-Revision-Date: 2020-08-23 15:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
@@ -31,531 +31,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:340
-msgctxt "shipname"
-msgid "Abaco"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:342
-msgctxt "shipname"
-msgid "Agate"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:344
-msgctxt "shipname"
-msgid "Alexandrite"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:346
-msgctxt "shipname"
-msgid "Amber"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:348
-msgctxt "shipname"
-msgid "Amethyst"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:350
-msgctxt "shipname"
-msgid "Anguilla"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:352
-msgctxt "shipname"
-msgid "Antigua"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:354
-msgctxt "shipname"
-msgid "Aquamarine"
-msgstr ""
-
-#: ../../data/tribes/atlanteans.lua:355
-msgctxt "shipname"
-msgid "Atlantean’s Stronghold"
-msgstr ""
-
-#: ../../data/tribes/atlanteans.lua:356
-msgctxt "shipname"
-msgid "Atlantis"
-msgstr "Atlantis"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:358
-msgctxt "shipname"
-msgid "Bahama"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:360
-msgctxt "shipname"
-msgid "Barbados"
-msgstr "Barbados"
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:362
-msgctxt "shipname"
-msgid "Barbuda"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:364
-msgctxt "shipname"
-msgid "Beryl"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:366
-msgctxt "shipname"
-msgid "Blanquilla"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:368
-msgctxt "shipname"
-msgid "Caicos"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:370
-msgctxt "shipname"
-msgid "Cassiterite"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:372
-msgctxt "shipname"
-msgid "Cat’s Eye"
-msgstr "Cat's Eye"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:374
-msgctxt "shipname"
-msgid "Citrine"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:376
-msgctxt "shipname"
-msgid "Colionder"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:378
-msgctxt "shipname"
-msgid "Dominica"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:380
-msgctxt "shipname"
-msgid "Eleuthera"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:382
-msgctxt "shipname"
-msgid "Emerald"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:384
-msgctxt "shipname"
-msgid "Grenada"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:386
-msgctxt "shipname"
-msgid "Guadeloupe"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:388
-msgctxt "shipname"
-msgid "Inagua"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:390
-msgctxt "shipname"
-msgid "Jundlina"
-msgstr ""
-
-#: ../../data/tribes/atlanteans.lua:391
-msgctxt "shipname"
-msgid "Juventud"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:393
-msgctxt "shipname"
-msgid "King Ajanthul"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:395
-msgctxt "shipname"
-msgid "King Askandor"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:397
-msgctxt "shipname"
-msgid "Kitts"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:399
-msgctxt "shipname"
-msgid "Loftomor"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:401
-msgctxt "shipname"
-msgid "Malachite"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:403
-msgctxt "shipname"
-msgid "Martinique"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:405
-msgctxt "shipname"
-msgid "Montserrat"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:407
-msgctxt "shipname"
-msgid "Moonstone"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:409
-msgctxt "shipname"
-msgid "Mystic Quartz"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:411
-msgctxt "shipname"
-msgid "Nassau"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:413
-msgctxt "shipname"
-msgid "Nevis"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:415
-msgctxt "shipname"
-msgid "Obsidian"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:417
-msgctxt "shipname"
-msgid "Onyx"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:419
-msgctxt "shipname"
-msgid "Opol"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:421
-msgctxt "shipname"
-msgid "Orchila"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:423
-msgctxt "shipname"
-msgid "Ostur"
-msgstr "Ostur"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:425
-msgctxt "shipname"
-msgid "Pearl"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:427
-msgctxt "shipname"
-msgid "Sapphire"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:429
-msgctxt "shipname"
-msgid "Satul"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/atlanteans.lua:431
-msgctxt "shipname"
-msgid "Sidolus"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:433
-msgctxt "shipname"
-msgid "Sphalerite"
-msgstr ""
-
-#: ../../data/tribes/atlanteans.lua:434
-msgctxt "shipname"
-msgid "Spider"
-msgstr "Spider"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:436
-msgctxt "shipname"
-msgid "Spinel"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:438
-msgctxt "shipname"
-msgid "Sunstone"
-msgstr "Sunstone"
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:440
-msgctxt "shipname"
-msgid "Tiger Eye"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:442
-msgctxt "shipname"
-msgid "Tobago"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:444
-msgctxt "shipname"
-msgid "Topaz"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:446
-msgctxt "shipname"
-msgid "Tortuga"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/atlanteans.lua:448
-msgctxt "shipname"
-msgid "Tourmaline"
-msgstr ""
-
-#. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/atlanteans.lua:450
-msgctxt "shipname"
-msgid "Trinidad"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:285
-msgctxt "shipname"
-msgid "Agilaz"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:286
-msgctxt "shipname"
-msgid "Aslaug"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:287
-msgctxt "shipname"
-msgid "Baldr"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:288
-msgctxt "shipname"
-msgid "Bear"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:289
-msgctxt "shipname"
-msgid "Beowulf"
-msgstr "Beowulf"
-
-#. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/barbarians.lua:291
-msgctxt "shipname"
-msgid "Boldreth"
-msgstr ""
-
-#. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/barbarians.lua:293
-msgctxt "shipname"
-msgid "Chat’Karuth"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:294
-msgctxt "shipname"
-msgid "Dellingr"
-msgstr "Dellingr"
-
-#: ../../data/tribes/barbarians.lua:295
-msgctxt "shipname"
-msgid "Fulla"
-msgstr "Fulla"
-
-#: ../../data/tribes/barbarians.lua:296
-msgctxt "shipname"
-msgid "Gersemi"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:297
-msgctxt "shipname"
-msgid "Hagbard"
-msgstr "Hagbard"
-
-#: ../../data/tribes/barbarians.lua:298
-msgctxt "shipname"
-msgid "Heidrek"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:299
-msgctxt "shipname"
-msgid "Heimdallr"
-msgstr "Heimdallr"
-
-#: ../../data/tribes/barbarians.lua:300
-msgctxt "shipname"
-msgid "Hnoss"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:301
-msgctxt "shipname"
-msgid "Hrothgar"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:302
-msgctxt "shipname"
-msgid "Ingeld"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:303
-msgctxt "shipname"
-msgid "Karl Hundason"
-msgstr ""
-
-#. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/barbarians.lua:305
-msgctxt "shipname"
-msgid "Khantrukh"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:306
-msgctxt "shipname"
-msgid "Lynx"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:307
-msgctxt "shipname"
-msgid "Mani"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:308
-msgctxt "shipname"
-msgid "Odin"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:309
-msgctxt "shipname"
-msgid "Red Fox"
-msgstr ""
-
-#. TRANSLATORS: This Barbarian ship is mentioned in some lore texts
-#: ../../data/tribes/barbarians.lua:311
-msgctxt "shipname"
-msgid "Saxnot"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:312
-msgctxt "shipname"
-msgid "Sigmund"
-msgstr ""
-
-#. TRANSLATORS: This Barbarian ship is named after a barbarian bard
-#: ../../data/tribes/barbarians.lua:314
-msgctxt "shipname"
-msgid "Sigurd"
-msgstr "Sigurd"
-
-#: ../../data/tribes/barbarians.lua:315
-msgctxt "shipname"
-msgid "Snotra"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:316
-msgctxt "shipname"
-msgid "Thor"
-msgstr ""
-
-#. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/barbarians.lua:318
-msgctxt "shipname"
-msgid "Thron"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:319
-msgctxt "shipname"
-msgid "Ullr"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:320
-msgctxt "shipname"
-msgid "Valdar"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:321
-msgctxt "shipname"
-msgid "Vili"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:322
-msgctxt "shipname"
-msgid "Volf"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:323
-msgctxt "shipname"
-msgid "Wild Boar"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:324
-msgctxt "shipname"
-msgid "Wolverine"
-msgstr ""
-
-#: ../../data/tribes/barbarians.lua:325
-msgctxt "shipname"
-msgid "Yrsa"
-msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53
@@ -3968,480 +3443,6 @@ msgstr "Eficiencia"
 msgid "Stockpile"
 msgstr "Almacenaje"
 
-#: ../../data/tribes/empire.lua:285
-msgctxt "shipname"
-msgid "Adriatic Sea"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:286
-msgctxt "shipname"
-msgid "Alexandria"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after an in-game character
-#: ../../data/tribes/empire.lua:288
-msgctxt "shipname"
-msgid "Amalea"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:289
-msgctxt "shipname"
-msgid "Amolius"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/empire.lua:291
-msgctxt "shipname"
-msgid "Apollo"
-msgstr "Apollo"
-
-#: ../../data/tribes/empire.lua:292
-msgctxt "shipname"
-msgid "Augustus"
-msgstr "Augustus"
-
-#: ../../data/tribes/empire.lua:293
-msgctxt "shipname"
-msgid "Azurea Sea"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:294
-msgctxt "shipname"
-msgid "Baltic Sea"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:295
-msgctxt "shipname"
-msgid "Bellona"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:296
-msgctxt "shipname"
-msgid "Ben Hur"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:297
-msgctxt "shipname"
-msgid "Bounty"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:298
-msgctxt "shipname"
-msgid "Brutus"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:299
-msgctxt "shipname"
-msgid "Caligula"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:300
-msgctxt "shipname"
-msgid "Camilla"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:301
-msgctxt "shipname"
-msgid "Carrara"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:302
-msgctxt "shipname"
-msgid "Caesar"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:303
-msgctxt "shipname"
-msgid "Cicero"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:304
-msgctxt "shipname"
-msgid "Claudius"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:305
-msgctxt "shipname"
-msgid "Diana"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:306
-msgctxt "shipname"
-msgid "Domitianus"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:307
-msgctxt "shipname"
-msgid "Empire Glory"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:308
-msgctxt "shipname"
-msgid "Faustulus"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:309
-msgctxt "shipname"
-msgid "Galba"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:310
-msgctxt "shipname"
-msgid "Gallus"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:311
-msgctxt "shipname"
-msgid "Ianus"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:312
-msgctxt "shipname"
-msgid "Iulius Caesar"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after a Roman goddess
-#: ../../data/tribes/empire.lua:314
-msgctxt "shipname"
-msgid "Iuno"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/empire.lua:316
-msgctxt "shipname"
-msgid "Iupiter"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:317
-msgctxt "shipname"
-msgid "Latium"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:318
-msgctxt "shipname"
-msgid "Latonia"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:319
-msgctxt "shipname"
-msgid "Leonardo"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:320
-msgctxt "shipname"
-msgid "Liguria"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after an in-game character
-#: ../../data/tribes/empire.lua:322
-msgctxt "shipname"
-msgid "Lutius"
-msgstr "Lutius"
-
-#: ../../data/tribes/empire.lua:323
-msgctxt "shipname"
-msgid "Marble"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/empire.lua:325
-msgctxt "shipname"
-msgid "Mars"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after a Roman goddess
-#: ../../data/tribes/empire.lua:327
-msgctxt "shipname"
-msgid "Minerva"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/empire.lua:329
-msgctxt "shipname"
-msgid "Neptune"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:330
-msgctxt "shipname"
-msgid "Nero"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:331
-msgctxt "shipname"
-msgid "Nerva"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:332
-msgctxt "shipname"
-msgid "Octavianus"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:333
-msgctxt "shipname"
-msgid "Otho"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/empire.lua:335
-msgctxt "shipname"
-msgid "Pluto"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:336
-msgctxt "shipname"
-msgid "Portus Bellus"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:337
-msgctxt "shipname"
-msgid "Quirinus"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:338
-msgctxt "shipname"
-msgid "Remus"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:339
-msgctxt "shipname"
-msgid "Romulus"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after an in-game character
-#: ../../data/tribes/empire.lua:341
-msgctxt "shipname"
-msgid "Saledus"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after a Roman deity
-#: ../../data/tribes/empire.lua:343
-msgctxt "shipname"
-msgid "Saturn"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:344
-msgctxt "shipname"
-msgid "Siena"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:345
-msgctxt "shipname"
-msgid "Sparta"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:346
-msgctxt "shipname"
-msgid "Thyrrenia"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:347
-msgctxt "shipname"
-msgid "Tiberius"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:348
-msgctxt "shipname"
-msgid "Titus"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:349
-msgctxt "shipname"
-msgid "Traianus"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:350
-msgctxt "shipname"
-msgid "Venus"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:351
-msgctxt "shipname"
-msgid "Vespasianus"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after a Roman goddess
-#: ../../data/tribes/empire.lua:353
-msgctxt "shipname"
-msgid "Vesta"
-msgstr "Vesta"
-
-#: ../../data/tribes/empire.lua:354
-msgctxt "shipname"
-msgid "Vinea"
-msgstr ""
-
-#: ../../data/tribes/empire.lua:355
-msgctxt "shipname"
-msgid "Vitellius"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/frisians.lua:349
-msgctxt "shipname"
-msgid "Amrum"
-msgstr "Amrum"
-
-#. TRANSLATORS: This frisian ship is named after a no longer existing island
-#. in Northern Frisia
-#: ../../data/tribes/frisians.lua:351
-msgctxt "shipname"
-msgid "Alt-Nordstrand"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a peninsula in Northern
-#. Frisia
-#: ../../data/tribes/frisians.lua:353
-msgctxt "shipname"
-msgid "Eiderstedt"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/frisians.lua:355
-msgctxt "shipname"
-msgid "Föhr"
-msgstr "Föhr"
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:357
-msgctxt "shipname"
-msgid "Gröde"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:359
-msgctxt "shipname"
-msgid "Habel"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:361
-msgctxt "shipname"
-msgid "Hamburger Hallig"
-msgstr "Hamburger Hallig"
-
-#. TRANSLATORS: This frisian ship is named after an island in the North Sea
-#: ../../data/tribes/frisians.lua:363
-msgctxt "shipname"
-msgid "Helgoland"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
-#: ../../data/tribes/frisians.lua:365
-msgctxt "shipname"
-msgid "Hever"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:367
-msgctxt "shipname"
-msgid "Hooge"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/frisians.lua:369
-msgctxt "shipname"
-msgid "Japsand"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/frisians.lua:371
-msgctxt "shipname"
-msgid "Kormoransand"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:373
-msgctxt "shipname"
-msgid "Langeneß"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a water body in Northern
-#. Frisia
-#: ../../data/tribes/frisians.lua:375
-msgctxt "shipname"
-msgid "Norderaue"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:377
-msgctxt "shipname"
-msgid "Norderoog"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/frisians.lua:379
-msgctxt "shipname"
-msgid "Norderoogsand"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/frisians.lua:381
-msgctxt "shipname"
-msgid "Nordstrand"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:383
-msgctxt "shipname"
-msgid "Nordstrandischmoor"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:385
-msgctxt "shipname"
-msgid "Oland"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/frisians.lua:387
-msgctxt "shipname"
-msgid "Pellworm"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a no longer existing island
-#. in Northern Frisia
-#: ../../data/tribes/frisians.lua:389
-msgctxt "shipname"
-msgid "Strand"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a water body in Northern
-#. Frisia
-#: ../../data/tribes/frisians.lua:391
-msgctxt "shipname"
-msgid "Süderaue"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:393
-msgctxt "shipname"
-msgid "Süderoog"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/frisians.lua:395
-msgctxt "shipname"
-msgid "Süderoogsand"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/frisians.lua:397
-msgctxt "shipname"
-msgid "Südfall"
-msgstr ""
-
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/frisians.lua:399
-msgctxt "shipname"
-msgid "Sylt"
-msgstr "Sylt"
-
-#. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
-#: ../../data/tribes/frisians.lua:401
-msgctxt "shipname"
-msgid "Uthlande"
-msgstr ""
-
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:42
 msgctxt "immovable"
@@ -4915,48 +3916,1203 @@ msgctxt "immovable"
 msgid "Wheat Field (tiny)"
 msgstr "Campo de Trigo (minúsculo)"
 
-#: ../../data/tribes/init.lua:11 ../../data/tribes/init.lua:33
-#: ../../data/tribes/init.lua:55 ../../data/tribes/init.lua:77
+#: ../../data/tribes/initialization/atlanteans/init.lua:11
+#: ../../data/tribes/initialization/barbarians/init.lua:10
+#: ../../data/tribes/initialization/empire/init.lua:10
+#: ../../data/tribes/initialization/frisians/init.lua:10
 msgid "The Widelands Development Team"
 msgstr "El Equipo de Desarrollo de Widelands"
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/init.lua:13
-msgid "Barbarians"
-msgstr "Bárbaros"
-
-#: ../../data/tribes/init.lua:14
-msgid "The mighty tribes of the east-lands."
-msgstr "¡Las proderosas tribus de las tierras orientales!"
-
-#. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/init.lua:35
-msgid "Empire"
-msgstr "Imperio"
-
-#: ../../data/tribes/init.lua:36
-msgid "This is the culture of the Roman Empire."
-msgstr "Esta es la cultura del Imperio Romano."
-
-#. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/init.lua:57
+#: ../../data/tribes/initialization/atlanteans/init.lua:13
 msgid "Atlanteans"
 msgstr "Atlantes"
 
-#: ../../data/tribes/init.lua:58
+#: ../../data/tribes/initialization/atlanteans/init.lua:14
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Esta tribu es conocida desde los cuentos más antiguos. Los hijos e hijas de la Atlántida."
 
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:11
+msgid "Discovery"
+msgstr "Descubrimiento"
+
+#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
+msgid ""
+"Start the game with three ships on the ocean and only a handful of supplies"
+msgstr "Empieza el partido con tres barcos en el océan y solo un poquito de mercancías"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/fortified_village.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/fortified_village.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:11
+msgid "Fortified Village"
+msgstr "Pueblo Fortificado"
+
+#. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
+#. condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/fortified_village.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/fortified_village.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:13
+msgid "Start the game with a fortified military installation"
+msgstr "Iniciar el juego con una instalación militar fortificada"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/headquarters.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/headquarters.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:11
+msgid "Headquarters"
+msgstr "Cuartel General"
+
+#. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/headquarters.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/headquarters.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:13
+msgid "Start the game with your headquarters only"
+msgstr "Inicia el juego con tu cuartel general únicamente"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/new_world.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/new_world.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:11
+msgid "New World"
+msgstr "Mundo Nuevo"
+
+#. TRANSLATORS: This is the tooltip for the "New World" starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/new_world.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/new_world.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:13
+msgid "Start the game with seven ships full of wares on the ocean"
+msgstr "Empieza el partido con siete barcos agobiados de mercancías en el océan"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:11
+msgid "Poor Hamlet"
+msgstr "Aldea Pobra"
+
+#. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
+#. condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:13
+msgid ""
+"Start the game with just a warehouse and the bare minimum for bootstrapping "
+"an economy. Warning: the AI can't successfully start from this"
+msgstr "Empieza el partido con solo un almacén y el mínimo pelado para montar una economía. Aviso: la IA no puede empezar afortunada de esta condición"
+
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:43
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:44
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:45
+msgid "Be careful"
+msgstr "Ten cuidado"
+
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:43
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:44
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:45
+msgid ""
+"You have only one iron for each tool you will need to start your economy. "
+"Make sure no unneeded tool is created."
+msgstr "Tienes solo un hierro para cada herramienta que necesitas para empezar tu economía. Asegura que no herramienta innecesaria sea generado."
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/struggling_outpost.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/struggling_outpost.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/struggling_outpost.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:11
+msgid "Struggling Outpost"
+msgstr "Puesto Bregado"
+
+#. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/struggling_outpost.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/struggling_outpost.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/struggling_outpost.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:13
+msgid ""
+"Start the game with just your headquarters and very few wares for "
+"bootstrapping an economy. Warning: the AI can't successfully start from this"
+msgstr "Empieza el partido con solo tu cuartel general y un poquito de mercancías para montar una economía. Aviso: la IA no puede empezar afortunada de esta condición"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/trading_outpost.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/trading_outpost.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/trading_outpost.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/trading_outpost.lua:11
+msgid "Trading Outpost"
+msgstr "Puesto Comercial"
+
+#. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
+#. condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/trading_outpost.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/trading_outpost.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/trading_outpost.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/trading_outpost.lua:13
+msgid ""
+"If this player runs low on important wares, they will be replenished for "
+"free"
+msgstr "Si este jugador se queda sin mercancías importantes, estas serán reemplazadas de forma gratuita"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/village.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/village.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/village.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/village.lua:11
+msgid "Village"
+msgstr "Pueblo"
+
+#. TRANSLATORS: This is the tooltip for the "Village" starting condition
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/village.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/village.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/village.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/village.lua:13
+msgid "Start the game with a peaceful village"
+msgstr "Inicia el juego con un pueblo pacífico"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:613
+msgctxt "shipname"
+msgid "Abaco"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:615
+msgctxt "shipname"
+msgid "Agate"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:617
+msgctxt "shipname"
+msgid "Alexandrite"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:619
+msgctxt "shipname"
+msgid "Amber"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:621
+msgctxt "shipname"
+msgid "Amethyst"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:623
+msgctxt "shipname"
+msgid "Anguilla"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:625
+msgctxt "shipname"
+msgid "Antigua"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:627
+msgctxt "shipname"
+msgid "Aquamarine"
+msgstr ""
+
+#: ../../data/tribes/initialization/atlanteans/units.lua:628
+msgctxt "shipname"
+msgid "Atlantean’s Stronghold"
+msgstr ""
+
+#: ../../data/tribes/initialization/atlanteans/units.lua:629
+msgctxt "shipname"
+msgid "Atlantis"
+msgstr "Atlantis"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:631
+msgctxt "shipname"
+msgid "Bahama"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:633
+msgctxt "shipname"
+msgid "Barbados"
+msgstr "Barbados"
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:635
+msgctxt "shipname"
+msgid "Barbuda"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:637
+msgctxt "shipname"
+msgid "Beryl"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:639
+msgctxt "shipname"
+msgid "Blanquilla"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:641
+msgctxt "shipname"
+msgid "Caicos"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:643
+msgctxt "shipname"
+msgid "Cassiterite"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:645
+msgctxt "shipname"
+msgid "Cat’s Eye"
+msgstr "Cat's Eye"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:647
+msgctxt "shipname"
+msgid "Citrine"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:649
+msgctxt "shipname"
+msgid "Colionder"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:651
+msgctxt "shipname"
+msgid "Dominica"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:653
+msgctxt "shipname"
+msgid "Eleuthera"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:655
+msgctxt "shipname"
+msgid "Emerald"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:657
+msgctxt "shipname"
+msgid "Grenada"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:659
+msgctxt "shipname"
+msgid "Guadeloupe"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:661
+msgctxt "shipname"
+msgid "Inagua"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:663
+msgctxt "shipname"
+msgid "Jundlina"
+msgstr ""
+
+#: ../../data/tribes/initialization/atlanteans/units.lua:664
+msgctxt "shipname"
+msgid "Juventud"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:666
+msgctxt "shipname"
+msgid "King Ajanthul"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:668
+msgctxt "shipname"
+msgid "King Askandor"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:670
+msgctxt "shipname"
+msgid "Kitts"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:672
+msgctxt "shipname"
+msgid "Loftomor"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:674
+msgctxt "shipname"
+msgid "Malachite"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:676
+msgctxt "shipname"
+msgid "Martinique"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:678
+msgctxt "shipname"
+msgid "Montserrat"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:680
+msgctxt "shipname"
+msgid "Moonstone"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:682
+msgctxt "shipname"
+msgid "Mystic Quartz"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:684
+msgctxt "shipname"
+msgid "Nassau"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:686
+msgctxt "shipname"
+msgid "Nevis"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:688
+msgctxt "shipname"
+msgid "Obsidian"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:690
+msgctxt "shipname"
+msgid "Onyx"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:692
+msgctxt "shipname"
+msgid "Opol"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:694
+msgctxt "shipname"
+msgid "Orchila"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:696
+msgctxt "shipname"
+msgid "Ostur"
+msgstr "Ostur"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:698
+msgctxt "shipname"
+msgid "Pearl"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:700
+msgctxt "shipname"
+msgid "Sapphire"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:702
+msgctxt "shipname"
+msgid "Satul"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an in-game character
+#: ../../data/tribes/initialization/atlanteans/units.lua:704
+msgctxt "shipname"
+msgid "Sidolus"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:706
+msgctxt "shipname"
+msgid "Sphalerite"
+msgstr ""
+
+#: ../../data/tribes/initialization/atlanteans/units.lua:707
+msgctxt "shipname"
+msgid "Spider"
+msgstr "Spider"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:709
+msgctxt "shipname"
+msgid "Spinel"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:711
+msgctxt "shipname"
+msgid "Sunstone"
+msgstr "Sunstone"
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:713
+msgctxt "shipname"
+msgid "Tiger Eye"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:715
+msgctxt "shipname"
+msgid "Tobago"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:717
+msgctxt "shipname"
+msgid "Topaz"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:719
+msgctxt "shipname"
+msgid "Tortuga"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after a mineral
+#: ../../data/tribes/initialization/atlanteans/units.lua:721
+msgctxt "shipname"
+msgid "Tourmaline"
+msgstr ""
+
+#. TRANSLATORS: This Atlantean ship is named after an island
+#: ../../data/tribes/initialization/atlanteans/units.lua:723
+msgctxt "shipname"
+msgid "Trinidad"
+msgstr ""
+
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/init.lua:79
+#: ../../data/tribes/initialization/barbarians/init.lua:12
+msgid "Barbarians"
+msgstr "Bárbaros"
+
+#: ../../data/tribes/initialization/barbarians/init.lua:13
+msgid "The mighty tribes of the east-lands."
+msgstr "¡Las proderosas tribus de las tierras orientales!"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:449
+msgctxt "shipname"
+msgid "Agilaz"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:450
+msgctxt "shipname"
+msgid "Aslaug"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:451
+msgctxt "shipname"
+msgid "Baldr"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:452
+msgctxt "shipname"
+msgid "Bear"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:453
+msgctxt "shipname"
+msgid "Beowulf"
+msgstr "Beowulf"
+
+#. TRANSLATORS: This Barbarian ship is named after an in-game character
+#: ../../data/tribes/initialization/barbarians/units.lua:455
+msgctxt "shipname"
+msgid "Boldreth"
+msgstr ""
+
+#. TRANSLATORS: This Barbarian ship is named after an in-game character
+#: ../../data/tribes/initialization/barbarians/units.lua:457
+msgctxt "shipname"
+msgid "Chat’Karuth"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:458
+msgctxt "shipname"
+msgid "Dellingr"
+msgstr "Dellingr"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:459
+msgctxt "shipname"
+msgid "Fulla"
+msgstr "Fulla"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:460
+msgctxt "shipname"
+msgid "Gersemi"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:461
+msgctxt "shipname"
+msgid "Hagbard"
+msgstr "Hagbard"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:462
+msgctxt "shipname"
+msgid "Heidrek"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:463
+msgctxt "shipname"
+msgid "Heimdallr"
+msgstr "Heimdallr"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:464
+msgctxt "shipname"
+msgid "Hnoss"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:465
+msgctxt "shipname"
+msgid "Hrothgar"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:466
+msgctxt "shipname"
+msgid "Ingeld"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:467
+msgctxt "shipname"
+msgid "Karl Hundason"
+msgstr ""
+
+#. TRANSLATORS: This Barbarian ship is named after an in-game character
+#: ../../data/tribes/initialization/barbarians/units.lua:469
+msgctxt "shipname"
+msgid "Khantrukh"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:470
+msgctxt "shipname"
+msgid "Lynx"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:471
+msgctxt "shipname"
+msgid "Mani"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:472
+msgctxt "shipname"
+msgid "Odin"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:473
+msgctxt "shipname"
+msgid "Red Fox"
+msgstr ""
+
+#. TRANSLATORS: This Barbarian ship is mentioned in some lore texts
+#: ../../data/tribes/initialization/barbarians/units.lua:475
+msgctxt "shipname"
+msgid "Saxnot"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:476
+msgctxt "shipname"
+msgid "Sigmund"
+msgstr ""
+
+#. TRANSLATORS: This Barbarian ship is named after a barbarian bard
+#: ../../data/tribes/initialization/barbarians/units.lua:478
+msgctxt "shipname"
+msgid "Sigurd"
+msgstr "Sigurd"
+
+#: ../../data/tribes/initialization/barbarians/units.lua:479
+msgctxt "shipname"
+msgid "Snotra"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:480
+msgctxt "shipname"
+msgid "Thor"
+msgstr ""
+
+#. TRANSLATORS: This Barbarian ship is named after an in-game character
+#: ../../data/tribes/initialization/barbarians/units.lua:482
+msgctxt "shipname"
+msgid "Thron"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:483
+msgctxt "shipname"
+msgid "Ullr"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:484
+msgctxt "shipname"
+msgid "Valdar"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:485
+msgctxt "shipname"
+msgid "Vili"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:486
+msgctxt "shipname"
+msgid "Volf"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:487
+msgctxt "shipname"
+msgid "Wild Boar"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:488
+msgctxt "shipname"
+msgid "Wolverine"
+msgstr ""
+
+#: ../../data/tribes/initialization/barbarians/units.lua:489
+msgctxt "shipname"
+msgid "Yrsa"
+msgstr ""
+
+#. TRANSLATORS: This is a tribe name
+#: ../../data/tribes/initialization/empire/init.lua:12
+msgid "Empire"
+msgstr "Imperio"
+
+#: ../../data/tribes/initialization/empire/init.lua:13
+msgid "This is the culture of the Roman Empire."
+msgstr "Esta es la cultura del Imperio Romano."
+
+#: ../../data/tribes/initialization/empire/units.lua:464
+msgctxt "shipname"
+msgid "Adriatic Sea"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:465
+msgctxt "shipname"
+msgid "Alexandria"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after an in-game character
+#: ../../data/tribes/initialization/empire/units.lua:467
+msgctxt "shipname"
+msgid "Amalea"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:468
+msgctxt "shipname"
+msgid "Amolius"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/initialization/empire/units.lua:470
+msgctxt "shipname"
+msgid "Apollo"
+msgstr "Apollo"
+
+#: ../../data/tribes/initialization/empire/units.lua:471
+msgctxt "shipname"
+msgid "Augustus"
+msgstr "Augustus"
+
+#: ../../data/tribes/initialization/empire/units.lua:472
+msgctxt "shipname"
+msgid "Azurea Sea"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:473
+msgctxt "shipname"
+msgid "Baltic Sea"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:474
+msgctxt "shipname"
+msgid "Bellona"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:475
+msgctxt "shipname"
+msgid "Ben Hur"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:476
+msgctxt "shipname"
+msgid "Bounty"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:477
+msgctxt "shipname"
+msgid "Brutus"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:478
+msgctxt "shipname"
+msgid "Caligula"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:479
+msgctxt "shipname"
+msgid "Camilla"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:480
+msgctxt "shipname"
+msgid "Carrara"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:481
+msgctxt "shipname"
+msgid "Caesar"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:482
+msgctxt "shipname"
+msgid "Cicero"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:483
+msgctxt "shipname"
+msgid "Claudius"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:484
+msgctxt "shipname"
+msgid "Diana"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:485
+msgctxt "shipname"
+msgid "Domitianus"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:486
+msgctxt "shipname"
+msgid "Empire Glory"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:487
+msgctxt "shipname"
+msgid "Faustulus"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:488
+msgctxt "shipname"
+msgid "Galba"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:489
+msgctxt "shipname"
+msgid "Gallus"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:490
+msgctxt "shipname"
+msgid "Ianus"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:491
+msgctxt "shipname"
+msgid "Iulius Caesar"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after a Roman goddess
+#: ../../data/tribes/initialization/empire/units.lua:493
+msgctxt "shipname"
+msgid "Iuno"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/initialization/empire/units.lua:495
+msgctxt "shipname"
+msgid "Iupiter"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:496
+msgctxt "shipname"
+msgid "Latium"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:497
+msgctxt "shipname"
+msgid "Latonia"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:498
+msgctxt "shipname"
+msgid "Leonardo"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:499
+msgctxt "shipname"
+msgid "Liguria"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after an in-game character
+#: ../../data/tribes/initialization/empire/units.lua:501
+msgctxt "shipname"
+msgid "Lutius"
+msgstr "Lutius"
+
+#: ../../data/tribes/initialization/empire/units.lua:502
+msgctxt "shipname"
+msgid "Marble"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/initialization/empire/units.lua:504
+msgctxt "shipname"
+msgid "Mars"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after a Roman goddess
+#: ../../data/tribes/initialization/empire/units.lua:506
+msgctxt "shipname"
+msgid "Minerva"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/initialization/empire/units.lua:508
+msgctxt "shipname"
+msgid "Neptune"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:509
+msgctxt "shipname"
+msgid "Nero"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:510
+msgctxt "shipname"
+msgid "Nerva"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:511
+msgctxt "shipname"
+msgid "Octavianus"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:512
+msgctxt "shipname"
+msgid "Otho"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/initialization/empire/units.lua:514
+msgctxt "shipname"
+msgid "Pluto"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:515
+msgctxt "shipname"
+msgid "Portus Bellus"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:516
+msgctxt "shipname"
+msgid "Quirinus"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:517
+msgctxt "shipname"
+msgid "Remus"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:518
+msgctxt "shipname"
+msgid "Romulus"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after an in-game character
+#: ../../data/tribes/initialization/empire/units.lua:520
+msgctxt "shipname"
+msgid "Saledus"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after a Roman deity
+#: ../../data/tribes/initialization/empire/units.lua:522
+msgctxt "shipname"
+msgid "Saturn"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:523
+msgctxt "shipname"
+msgid "Siena"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:524
+msgctxt "shipname"
+msgid "Sparta"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:525
+msgctxt "shipname"
+msgid "Thyrrenia"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:526
+msgctxt "shipname"
+msgid "Tiberius"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:527
+msgctxt "shipname"
+msgid "Titus"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:528
+msgctxt "shipname"
+msgid "Traianus"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:529
+msgctxt "shipname"
+msgid "Venus"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:530
+msgctxt "shipname"
+msgid "Vespasianus"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after a Roman goddess
+#: ../../data/tribes/initialization/empire/units.lua:532
+msgctxt "shipname"
+msgid "Vesta"
+msgstr "Vesta"
+
+#: ../../data/tribes/initialization/empire/units.lua:533
+msgctxt "shipname"
+msgid "Vinea"
+msgstr ""
+
+#: ../../data/tribes/initialization/empire/units.lua:534
+msgctxt "shipname"
+msgid "Vitellius"
+msgstr ""
+
+#. TRANSLATORS: This is a tribe name
+#: ../../data/tribes/initialization/frisians/init.lua:12
 msgid "Frisians"
 msgstr "Frisones"
 
-#: ../../data/tribes/init.lua:80
+#: ../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
 msgstr "Los pobladores de la dura costa del Mar del Norte."
+
+#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:549
+msgctxt "shipname"
+msgid "Amrum"
+msgstr "Amrum"
+
+#. TRANSLATORS: This frisian ship is named after a no longer existing island
+#. in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:551
+msgctxt "shipname"
+msgid "Alt-Nordstrand"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a peninsula in Northern
+#. Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:553
+msgctxt "shipname"
+msgid "Eiderstedt"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:555
+msgctxt "shipname"
+msgid "Föhr"
+msgstr "Föhr"
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:557
+msgctxt "shipname"
+msgid "Gröde"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:559
+msgctxt "shipname"
+msgid "Habel"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:561
+msgctxt "shipname"
+msgid "Hamburger Hallig"
+msgstr "Hamburger Hallig"
+
+#. TRANSLATORS: This frisian ship is named after an island in the North Sea
+#: ../../data/tribes/initialization/frisians/units.lua:563
+msgctxt "shipname"
+msgid "Helgoland"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:565
+msgctxt "shipname"
+msgid "Hever"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:567
+msgctxt "shipname"
+msgid "Hooge"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:569
+msgctxt "shipname"
+msgid "Japsand"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:571
+msgctxt "shipname"
+msgid "Kormoransand"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:573
+msgctxt "shipname"
+msgid "Langeneß"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a water body in Northern
+#. Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:575
+msgctxt "shipname"
+msgid "Norderaue"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:577
+msgctxt "shipname"
+msgid "Norderoog"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:579
+msgctxt "shipname"
+msgid "Norderoogsand"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:581
+msgctxt "shipname"
+msgid "Nordstrand"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:583
+msgctxt "shipname"
+msgid "Nordstrandischmoor"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:585
+msgctxt "shipname"
+msgid "Oland"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:587
+msgctxt "shipname"
+msgid "Pellworm"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a no longer existing island
+#. in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:589
+msgctxt "shipname"
+msgid "Strand"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a water body in Northern
+#. Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:591
+msgctxt "shipname"
+msgid "Süderaue"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:593
+msgctxt "shipname"
+msgid "Süderoog"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:595
+msgctxt "shipname"
+msgid "Süderoogsand"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:597
+msgctxt "shipname"
+msgid "Südfall"
+msgstr ""
+
+#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:599
+msgctxt "shipname"
+msgid "Sylt"
+msgstr "Sylt"
+
+#. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
+#: ../../data/tribes/initialization/frisians/units.lua:601
+msgctxt "shipname"
+msgid "Uthlande"
+msgstr ""
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
@@ -4994,160 +5150,6 @@ msgstr "Construcciones"
 msgid "Immovables"
 msgstr "Inmóvil"
 
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:11
-msgid "Discovery"
-msgstr "Descubrimiento"
-
-#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:13
-msgid ""
-"Start the game with three ships on the ocean and only a handful of supplies"
-msgstr "Empieza el partido con tres barcos en el océan y solo un poquito de mercancías"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/fortified_village.lua:11
-msgid "Fortified Village"
-msgstr "Pueblo Fortificado"
-
-#. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
-#. condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/fortified_village.lua:13
-msgid "Start the game with a fortified military installation"
-msgstr "Iniciar el juego con una instalación militar fortificada"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/headquarters.lua:11
-msgid "Headquarters"
-msgstr "Cuartel General"
-
-#. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/headquarters.lua:13
-msgid "Start the game with your headquarters only"
-msgstr "Inicia el juego con tu cuartel general únicamente"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:11
-msgid "New World"
-msgstr "Mundo Nuevo"
-
-#. TRANSLATORS: This is the tooltip for the "New World" starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:13
-msgid "Start the game with seven ships full of wares on the ocean"
-msgstr "Empieza el partido con siete barcos agobiados de mercancías en el océan"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:11
-msgid "Poor Hamlet"
-msgstr "Aldea Pobra"
-
-#. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
-#. condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:13
-msgid ""
-"Start the game with just a warehouse and the bare minimum for bootstrapping "
-"an economy. Warning: the AI can't successfully start from this"
-msgstr "Empieza el partido con solo un almacén y el mínimo pelado para montar una economía. Aviso: la IA no puede empezar afortunada de esta condición"
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
-#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
-#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
-#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
-msgid "Be careful"
-msgstr "Ten cuidado"
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
-#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
-#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
-#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
-msgid ""
-"You have only one iron for each tool you will need to start your economy. "
-"Make sure no unneeded tool is created."
-msgstr "Tienes solo un hierro para cada herramienta que necesitas para empezar tu economía. Asegura que no herramienta innecesaria sea generado."
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:11
-msgid "Struggling Outpost"
-msgstr "Puesto Bregado"
-
-#. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:13
-msgid ""
-"Start the game with just your headquarters and very few wares for "
-"bootstrapping an economy. Warning: the AI can't successfully start from this"
-msgstr "Empieza el partido con solo tu cuartel general y un poquito de mercancías para montar una economía. Aviso: la IA no puede empezar afortunada de esta condición"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/trading_outpost.lua:11
-msgid "Trading Outpost"
-msgstr "Puesto Comercial"
-
-#. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
-#. condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/trading_outpost.lua:13
-msgid ""
-"If this player runs low on important wares, they will be replenished for "
-"free"
-msgstr "Si este jugador se queda sin mercancías importantes, estas serán reemplazadas de forma gratuita"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:11
-#: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:11
-#: ../../data/tribes/scripting/starting_conditions/empire/village.lua:11
-#: ../../data/tribes/scripting/starting_conditions/frisians/village.lua:11
-msgid "Village"
-msgstr "Pueblo"
-
-#. TRANSLATORS: This is the tooltip for the "Village" starting condition
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:13
-#: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:13
-#: ../../data/tribes/scripting/starting_conditions/empire/village.lua:13
-#: ../../data/tribes/scripting/starting_conditions/frisians/village.lua:13
-msgid "Start the game with a peaceful village"
-msgstr "Inicia el juego con un pueblo pacífico"
-
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:43
 msgctxt "atlanteans_ship"
@@ -5173,7 +5175,7 @@ msgid "Ship"
 msgstr ""
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:58
+#: ../../data/tribes/wares/armor/init.lua:62
 msgctxt "ware"
 msgid "Armor"
 msgstr "Armadura"
