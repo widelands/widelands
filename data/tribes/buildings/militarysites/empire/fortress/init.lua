@@ -6,10 +6,24 @@ tribes:new_militarysite_type {
    name = "empire_fortress",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Fortress"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-   enhancement = "empire_castle",
+
+   enhancement = {
+      name = "empire_castle",
+      enhancement_cost = {
+         planks = 5,
+         marble_column = 4,
+         marble = 4,
+         granite = 2
+      },
+      enhancement_return_on_dismantle = {
+         planks = 2,
+         marble_column = 2,
+         marble = 3,
+         granite = 1
+      }
+   },
 
    buildcost = {
       planks = 5,

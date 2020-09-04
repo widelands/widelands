@@ -28,7 +28,14 @@
 #include "graphic/wordwrap.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
-
+namespace {
+bool inline copy_paste_modifier() {
+#ifdef __APPLE__
+	return SDL_GetModState() & KMOD_GUI;
+#endif
+	return SDL_GetModState() & KMOD_CTRL;
+}
+}  // namespace
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
 
 namespace UI {
@@ -52,6 +59,14 @@ struct MultilineEditbox::Data {
 	/// Maximum length of the text string, in bytes
 	const uint32_t maxbytes;
 
+	enum class Mode { kNormal, kSelection };
+
+	Mode mode;
+
+	uint32_t selection_start;
+
+	uint32_t selection_end;
+
 	/// Cached wrapping info; see @ref refresh_ww and @ref update
 	/*@{*/
 	bool ww_valid;
@@ -72,6 +87,10 @@ struct MultilineEditbox::Data {
 
 	void erase_bytes(uint32_t start, uint32_t end);
 	void insert(uint32_t where, const std::string& s);
+	void reset_selection();
+	void draw(RenderTarget& dst, bool with_caret);
+
+	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
 
 private:
 	MultilineEditbox& owner;
@@ -99,6 +118,9 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& 
                           g_gr->max_texture_size_for_font_rendering() /
                           (text_height(style.font()) * text_height(style.font())),
                        std::numeric_limits<int32_t>::max())),
+     mode(Mode::kNormal),
+     selection_start(0),
+     selection_end(0),
      ww_valid(false),
      ww(style.font().size(), style.font().color(), o.get_w()),
      owner(o) {
@@ -114,6 +136,25 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& 
  */
 void MultilineEditbox::Data::update() {
 	ww_valid = false;
+}
+
+void MultilineEditbox::Data::reset_selection() {
+	mode = Mode::kNormal;
+	selection_start = cursor_pos;
+	selection_end = cursor_pos;
+}
+void MultilineEditbox::Data::calculate_selection_boundaries(uint32_t& start, uint32_t& end) {
+	start = snap_to_char(std::min(selection_start, selection_end));
+	end = std::max(selection_start, selection_end);
+	end = Utf8::is_utf8_extended(text[end]) ? next_char(end) : snap_to_char(end);
+}
+
+void MultilineEditbox::Data::draw(RenderTarget& dst, bool with_caret) {
+	uint32_t start, end;
+	calculate_selection_boundaries(start, end);
+	ww.draw(dst, Vector2i(0, -int32_t(scrollbar.get_scrollpos())), UI::Align::kLeft,
+	        with_caret ? cursor_pos : std::numeric_limits<uint32_t>::max(),
+	        mode == Data::Mode::kSelection, start, end, scrollbar.get_scrollpos());
 }
 
 /**
@@ -223,6 +264,36 @@ bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
+		case SDLK_v:
+			if (copy_paste_modifier() && SDL_HasClipboardText()) {
+				if (d_->mode == Data::Mode::kSelection) {
+					delete_selected_text();
+				}
+				handle_textinput(SDL_GetClipboardText());
+				return true;
+			}
+			return false;
+		case SDLK_c:
+			if (copy_paste_modifier() && d_->mode == Data::Mode::kSelection) {
+				copy_selected_text();
+				return true;
+			}
+			return false;
+		case SDLK_a:
+			if (copy_paste_modifier()) {
+				d_->selection_start = 0;
+				d_->selection_end = d_->text.size();
+				d_->mode = Data::Mode::kSelection;
+				return true;
+			}
+			return false;
+		case SDLK_x:
+			if (copy_paste_modifier() && d_->mode == Data::Mode::kSelection) {
+				copy_selected_text();
+				delete_selected_text();
+				return true;
+			}
+			return false;
 		case SDLK_TAB:
 			// Let the panel handle the tab key
 			return get_parent()->handle_key(true, code);
@@ -232,51 +303,79 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			FALLS_THROUGH;
 		case SDLK_DELETE:
-			if (d_->cursor_pos < d_->text.size()) {
+			if (d_->mode == Data::Mode::kSelection) {
+				delete_selected_text();
+			} else if (d_->cursor_pos < d_->text.size()) {
 				d_->erase_bytes(d_->cursor_pos, d_->next_char(d_->cursor_pos));
 				changed();
 			}
 			break;
 
 		case SDLK_BACKSPACE:
-			if (d_->cursor_pos > 0) {
+			if (d_->mode == Data::Mode::kSelection) {
+				delete_selected_text();
+			} else if (d_->cursor_pos > 0) {
 				d_->erase_bytes(d_->prev_char(d_->cursor_pos), d_->cursor_pos);
 				changed();
 			}
 			break;
 
 		case SDLK_LEFT: {
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				uint32_t newpos = d_->prev_char(d_->cursor_pos);
-				while (newpos > 0 && isspace(d_->text[newpos])) {
-					newpos = d_->prev_char(newpos);
-				}
-				while (newpos > 0) {
-					uint32_t prev = d_->prev_char(newpos);
-					if (isspace(d_->text[prev])) {
-						break;
+			if (d_->cursor_pos > 0) {
+				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+					uint32_t newpos = d_->prev_char(d_->cursor_pos);
+					while (newpos > 0 && isspace(d_->text[newpos])) {
+						newpos = d_->prev_char(newpos);
 					}
-					newpos = prev;
+					while (newpos > 0) {
+						uint32_t prev = d_->prev_char(newpos);
+						if (isspace(d_->text[prev])) {
+							break;
+						}
+						newpos = prev;
+					}
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(newpos);
+					} else {
+						d_->reset_selection();
+					}
+					d_->set_cursor_pos(newpos);
+				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(d_->prev_char(d_->cursor_pos));
+					} else {
+						d_->reset_selection();
+					}
+					d_->set_cursor_pos(d_->prev_char(d_->cursor_pos));
 				}
-				d_->set_cursor_pos(newpos);
-			} else {
-				d_->set_cursor_pos(d_->prev_char(d_->cursor_pos));
 			}
 			break;
 		}
 
 		case SDLK_RIGHT:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				uint32_t newpos = d_->next_char(d_->cursor_pos);
-				while (newpos < d_->text.size() && isspace(d_->text[newpos])) {
-					newpos = d_->next_char(newpos);
+			if (d_->cursor_pos < d_->text.size()) {
+				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+					uint32_t newpos = d_->next_char(d_->cursor_pos);
+					while (newpos < d_->text.size() && isspace(d_->text[newpos])) {
+						newpos = d_->next_char(newpos);
+					}
+					while (newpos < d_->text.size() && !isspace(d_->text[newpos])) {
+						newpos = d_->next_char(newpos);
+					}
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(newpos);
+					} else {
+						d_->reset_selection();
+					}
+					d_->set_cursor_pos(newpos);
+				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(d_->next_char(d_->cursor_pos));
+					} else {
+						d_->reset_selection();
+					}
+					d_->set_cursor_pos(d_->next_char(d_->cursor_pos));
 				}
-				while (newpos < d_->text.size() && !isspace(d_->text[newpos])) {
-					newpos = d_->next_char(newpos);
-				}
-				d_->set_cursor_pos(newpos);
-			} else {
-				d_->set_cursor_pos(d_->next_char(d_->cursor_pos));
 			}
 			break;
 
@@ -299,8 +398,18 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 					} else {
 						newpos = d_->snap_to_char(newpos);
 					}
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(newpos);
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(newpos);
 				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(d_->text.size());
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(d_->text.size());
 				}
 			}
@@ -322,8 +431,18 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 					} else {
 						newpos = d_->snap_to_char(newpos);
 					}
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(newpos);
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(newpos);
 				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(0);
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(0);
 				}
 			}
@@ -331,19 +450,33 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_HOME:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					select_until(0);
+				} else {
+					d_->reset_selection();
+				}
 				d_->set_cursor_pos(0);
 			} else {
 				d_->refresh_ww();
-
 				uint32_t cursorline, cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					select_until(d_->ww.line_offset(cursorline));
+				} else {
+					d_->reset_selection();
+				}
 				d_->set_cursor_pos(d_->ww.line_offset(cursorline));
 			}
 			break;
 
 		case SDLK_END:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					select_until(d_->text.size());
+				} else {
+					d_->reset_selection();
+				}
 				d_->set_cursor_pos(d_->text.size());
 			} else {
 				d_->refresh_ww();
@@ -352,8 +485,18 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (cursorline + 1 < d_->ww.nrlines()) {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(d_->prev_char(d_->ww.line_offset(cursorline + 1)));
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(d_->prev_char(d_->ww.line_offset(cursorline + 1)));
 				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(d_->text.size());
+					} else {
+						d_->reset_selection();
+					}
 					d_->set_cursor_pos(d_->text.size());
 				}
 			}
@@ -363,6 +506,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RETURN:
 			d_->insert(d_->cursor_pos, "\n");
 			d_->update();
+			d_->reset_selection();
 			changed();
 			break;
 
@@ -375,9 +519,37 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 	return Panel::handle_key(down, code);
 }
 
+void MultilineEditbox::copy_selected_text() const {
+	uint32_t start, end;
+	d_->calculate_selection_boundaries(start, end);
+
+	auto nr_characters = end - start;
+	std::string selected_text = d_->text.substr(start, nr_characters);
+
+	SDL_SetClipboardText(selected_text.c_str());
+}
+/**
+ * Selects text from @p cursor until @p end
+ */
+void MultilineEditbox::select_until(uint32_t end) const {
+	if (d_->mode == Data::Mode::kNormal) {
+		d_->selection_start = d_->cursor_pos;
+		d_->mode = Data::Mode::kSelection;
+	}
+	d_->selection_end = end;
+}
+void MultilineEditbox::delete_selected_text() const {
+	uint32_t start, end;
+	d_->calculate_selection_boundaries(start, end);
+	d_->erase_bytes(start, end);
+	changed();
+	d_->reset_selection();
+}
+
 bool MultilineEditbox::handle_textinput(const std::string& input_text) {
 	if (d_->text.size() + input_text.size() <= d_->maxbytes) {
 		d_->insert(d_->cursor_pos, input_text);
+		d_->reset_selection();
 		changed();
 		d_->update();
 	}
@@ -420,8 +592,7 @@ void MultilineEditbox::draw(RenderTarget& dst) {
 	d_->refresh_ww();
 
 	d_->ww.set_draw_caret(has_focus());
-	d_->ww.draw(dst, Vector2i(0, -int32_t(d_->scrollbar.get_scrollpos())), UI::Align::kLeft,
-	            has_focus() ? d_->cursor_pos : std::numeric_limits<uint32_t>::max());
+	d_->draw(dst, has_focus());
 }
 
 /**
@@ -464,7 +635,6 @@ void MultilineEditbox::Data::scroll_cursor_into_view() {
 	ww.calc_wrapped_pos(cursor_pos, cursorline, cursorpos);
 
 	int32_t top = cursorline * lineheight;
-
 	if (top < int32_t(scrollbar.get_scrollpos())) {
 		scrollbar.set_scrollpos(top - lineheight);
 	} else if (top + lineheight > int32_t(scrollbar.get_scrollpos()) + owner.get_h()) {

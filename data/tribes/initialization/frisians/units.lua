@@ -5,7 +5,7 @@ image_dirname = path.dirname(__file__) .. "images/"
 push_textdomain("tribes_encyclopedia")
 
 -- For formatting time strings
-include "tribes/scripting/help/global_helptexts.lua"
+include "tribes/scripting/help/time_strings.lua"
 
 tribes:new_tribe {
    name = "frisians",
@@ -1409,7 +1409,7 @@ tribes:new_tribe {
          name = "frisians_headquarters",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian warehouse: Headquarters
-            pgettext("frisians_building", "Accommodation for your people. Also stores your wares and tools."),
+            purpose = pgettext("frisians_building", "Accommodation for your people. Also stores your wares and tools."),
             -- TRANSLATORS: Note helptext for a frisian warehouse: Headquarters
             note = pgettext("frisians_building", "The headquarters is your main building.")
          }

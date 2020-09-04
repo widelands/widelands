@@ -6,10 +6,27 @@ tribes:new_trainingsite_type {
    name = "empire_arena",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Arena"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-   enhancement = "empire_colosseum",
+
+   enhancement = {
+      name = "empire_colosseum",
+      enhancement_cost = {
+         planks = 2,
+         granite = 4,
+         marble = 4,
+         cloth = 2,
+         gold = 4,
+         marble_column = 4
+      },
+      enhancement_return_on_dismantle = {
+         planks = 1,
+         granite = 2,
+         marble = 2,
+         gold = 2,
+         marble_column = 2
+      }
+   },
 
    buildcost = {
       log = 2,

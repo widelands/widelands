@@ -6,11 +6,20 @@ tribes:new_militarysite_type {
    name = "frisians_wooden_tower",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Wooden Tower"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
    vision_range = 14,
-   enhancement = "frisians_wooden_tower_high",
+
+   enhancement = {
+      name = "frisians_wooden_tower_high",
+      enhancement_cost = {
+         log = 2,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         log = 1,
+      }
+   },
 
    buildcost = {
       log = 3,

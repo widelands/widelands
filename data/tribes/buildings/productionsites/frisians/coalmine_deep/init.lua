@@ -6,21 +6,8 @@ tribes:new_productionsite_type {
    name = "frisians_coalmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("frisians_building", "Deep Coal Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-
-   enhancement_cost = {
-      brick = 2,
-      granite = 1,
-      log = 1,
-      reed = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      brick = 1,
-      log = 1,
-      reed = 1
-   },
 
    spritesheets = {
       idle = {
