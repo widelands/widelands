@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 wl.World():new_critter_type{
@@ -25,3 +27,5 @@ wl.World():new_critter_type{
       }
    }
 }
+
+pop_textdomain()

@@ -241,6 +241,19 @@ void DefaultAI::think() {
 	// AI now thinks twice in a seccond, if the game engine allows this
 	// if too busy, the period can be many seconds.
 	next_ai_think_ = gametime + 500;
+
+	if (player_->is_picking_custom_starting_position()) {
+		// TODO(Nordfriese): In picking_custom_starting_position mode, try to find
+		// a nice spot somewhere instead of just picking the default position.
+		// This here will not work if another player has already chosen a spot
+		// close to our default location…
+		if (!player_->pick_custom_starting_position(game().map().get_starting_pos(player_number()))) {
+			log_warn_time(gametime, "AI %u: default starting position already taken!\n",
+			              static_cast<unsigned>(player_number()));
+		}
+		return;
+	}
+
 	SchedulerTaskId due_task = SchedulerTaskId::kUnset;
 
 	sort_task_pool();
@@ -1551,7 +1564,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		fish_fields_list.clear();
 		map.find_reachable_fields(game(), Area<FCoords>(field.coords, kProductionArea),
 		                          &fish_fields_list, fisher_cstep,
-		                          FindNodeResource(world.resource_index("fish")));
+		                          FindNodeResource(world.resource_index("resource_fish")));
 
 		// This is "list" of unique fields in fish_fields_list we got above
 		static std::set<Coords> counted_fields;

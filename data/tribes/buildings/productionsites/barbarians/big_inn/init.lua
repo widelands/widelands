@@ -1,22 +1,13 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_big_inn",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Big Inn"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-
-   enhancement_cost = {
-      log = 1,
-      grout = 3,
-      reed = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      grout = 2
-   },
 
    animations = {
       idle = {
@@ -100,3 +91,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

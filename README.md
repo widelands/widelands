@@ -18,7 +18,7 @@ On how to download Widelands, see https://www.widelands.org/wiki/Download/
 
 ## Compiling
 
-We support compiling Widelands for Linux, Windows under MSys2, and MacOs with GCC >= 4.8 or Clang/LLVM >= 3.4, though it might work with other compilers too. We have more detailed documentation available at: https://www.widelands.org/wiki/BuildingWidelands/
+We support compiling Widelands for Linux, Windows under MSys2, and MacOs with GCC >= 5 or Clang/LLVM >= 6, though it might work with other compilers too. We have more detailed documentation available at: https://www.widelands.org/wiki/BuildingWidelands/
 
 
 ### Dependencies

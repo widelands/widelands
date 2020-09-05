@@ -1,25 +1,13 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_ironmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("frisians_building", "Deep Iron Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-
-   enhancement_cost = {
-      brick = 2,
-      granite = 1,
-      log = 1,
-      reed = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      brick = 1,
-      log = 1,
-      reed = 1
-   },
 
    spritesheets = {
       idle = {
@@ -59,7 +47,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "iron",
+      mines = "resource_iron",
    },
 
    working_positions = {
@@ -113,3 +101,5 @@ tribes:new_productionsite_type {
          pgettext("frisians_building", "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_ferry_type {
-   msgctxt = "empire_worker",
    name = "empire_ferry",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("empire_worker", "Ferry"),
-   helptext_script = dirname .. "helptexts.lua",
    animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
@@ -39,3 +39,5 @@ tribes:new_ferry_type {
       }
    }
 }
+
+pop_textdomain()
