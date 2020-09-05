@@ -58,7 +58,7 @@ class EvalMatches(object):
             if len(blocks[0]) != 1 or not blocks[0][0][2][:-2].endswith(base_file):
                 if os.path.exists(os.path.abspath(fn)[:-3] + '.h'):
                     errors.append(
-                        (fn, blocks[0][0][0], 'In a .cc file, include the corresponding header first in a line of its own it exists.'))
+                        (fn, blocks[0][0][0], 'In a .cc file, include the corresponding header first in a line of its own if it exists.'))
                 return errors
             else:
                 blocks.pop(0)
