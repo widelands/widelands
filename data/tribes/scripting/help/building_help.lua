@@ -542,7 +542,7 @@ function building_help_building_section(building_description)
          -- Dismantle yields
          if (building_description.buildable) then
             result = result .. h3(_"If built directly, dismantle yields:")
-            for ware, amount in pairs(building_description.returned_wares) do
+            for ware, amount in pairs(building_description.returns_on_dismantle) do
                local ware_description = wl.Game():get_ware_description(ware)
                result = result .. help_ware_amount_line(ware_description, amount)
             end
@@ -552,7 +552,7 @@ function building_help_building_section(building_description)
             result = result .. h3(_"Dismantle yields:")
          end
          local warescost = {}
-         for ware, amount in pairs(building_description.returned_wares_enhanced) do
+         for ware, amount in pairs(building_description.enhancement_returns_on_dismantle) do
             if (warescost[ware]) then
                warescost[ware] = warescost[ware] + amount
             else
@@ -562,7 +562,7 @@ function building_help_building_section(building_description)
          for index, former in pairs(former_buildings) do
             former_building = wl.Game():get_building_description(former.name)
             if (former_building.buildable) then
-               for ware, amount in pairs(former_building.returned_wares) do
+               for ware, amount in pairs(former_building.returns_on_dismantle) do
                   if (warescost[ware]) then
                      warescost[ware] = warescost[ware] + amount
                   else
@@ -570,7 +570,7 @@ function building_help_building_section(building_description)
                   end
                end
             elseif (former_building.enhanced) then
-               for ware, amount in pairs(former_building.returned_wares_enhanced) do
+               for ware, amount in pairs(former_building.enhancement_returns_on_dismantle) do
                   if (warescost[ware]) then
                      warescost[ware] = warescost[ware] + amount
                   else
@@ -591,7 +591,7 @@ function building_help_building_section(building_description)
       else
          -- Dismantle yields
          result = result .. h3(_"Dismantle yields:")
-         for ware, amount in pairs(building_description.returned_wares) do
+         for ware, amount in pairs(building_description.returns_on_dismantle) do
             local ware_description = wl.Game():get_ware_description(ware)
             result = result .. help_ware_amount_line(ware_description, amount)
          end
