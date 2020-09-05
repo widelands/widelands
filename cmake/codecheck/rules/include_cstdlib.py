@@ -7,7 +7,7 @@ import re
 
 FUNCTION_REGEX = re.compile(r"""(\s|std::)(abs|ato[fil]|atoll|strto[dfl]|strtol[ld]|strtoul[l]{0,1}|std::[s]{0,1}rand|malloc|getenv)\(""")
 
-def does_include_memory(lines, fn):
+def does_include_cstdlib(lines, fn):
     includes_cstdlib = False
     for lineno, line in enumerate(lines, 1):
         if 'include <cstdlib>' in line:
@@ -23,7 +23,7 @@ def does_include_memory(lines, fn):
     return []
 
 
-evaluate_matches = does_include_memory
+evaluate_matches = does_include_cstdlib
 
 
 #################
