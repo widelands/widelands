@@ -249,9 +249,7 @@ int Panel::do_run() {
 			end_modal<Returncodes>(Returncodes::kBack);
 		}
 
-		if (flags_ & pf_child_die) {
-			check_child_death();
-		}
+		check_child_death();
 
 		if (start_time >= next_draw_time) {
 			for (;;) {

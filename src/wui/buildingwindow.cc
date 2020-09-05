@@ -146,7 +146,7 @@ Draw a picture of the building in the background.
 void BuildingWindow::draw(RenderTarget& dst) {
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (building == nullptr) {
-		return;
+		return die();
 	}
 
 	UI::Window::draw(dst);

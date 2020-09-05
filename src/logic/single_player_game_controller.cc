@@ -43,6 +43,10 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
 }
 
 SinglePlayerGameController::~SinglePlayerGameController() {
+	stop_ais();
+}
+
+void SinglePlayerGameController::stop_ais() {
 	for (auto& cp : computerplayers_) {
 		if (cp) {
 			cp->thread.join();

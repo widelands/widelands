@@ -48,6 +48,10 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	void run();
 
+	void stop_ais() override {
+		// Clients don't have AIs
+	}
+
 	// GameController interface
 	void think() override;
 	void send_player_command(Widelands::PlayerCommand*) override;

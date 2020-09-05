@@ -563,6 +563,7 @@ bool Game::run(StartGameType const start_game_type,
 	get_ibase()->run<UI::Panel::Returncodes>();
 
 	state_ = gs_ending;
+	ctrl_->stop_ais();
 
 	g_sh->change_music("menu", 1000);
 

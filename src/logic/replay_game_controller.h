@@ -35,6 +35,10 @@ public:
 
 	void think() override;
 
+	void stop_ais() override {
+		// Replays don't have AIs
+	}
+
 	void send_player_command(Widelands::PlayerCommand*) override;
 	int32_t get_frametime() override;
 	GameController::GameType get_game_type() override;

@@ -553,7 +553,7 @@ GameHost::GameHost(const std::string& playername, bool internet)
 }
 
 GameHost::~GameHost() {
-	clear_computer_players();
+	stop_ais();
 
 	while (!d->clients.empty()) {
 		disconnect_client(0, "SERVER_LEFT");
@@ -574,7 +574,7 @@ int16_t GameHost::get_local_playerposition() {
 	return d->settings.users.at(0).position;
 }
 
-void GameHost::clear_computer_players() {
+void GameHost::stop_ais() {
 	if (threads_) {
 		for (unsigned i = 0; i < nr_ais_; ++i) {
 			if (threads_[i]) {
@@ -731,10 +731,10 @@ void GameHost::run() {
 		if (internet_) {
 			InternetGaming::ref().set_game_done();
 		}
-		clear_computer_players();
+		stop_ais();
 	} catch (...) {
 		WLApplication::emergency_save(game);
-		clear_computer_players();
+		stop_ais();
 		d->game = nullptr;
 
 		while (!d->clients.empty()) {
