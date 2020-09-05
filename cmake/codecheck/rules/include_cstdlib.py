@@ -1,11 +1,16 @@
 #!/usr/bin/python -tt
 
-"""Checks that cstdlib is included for some of its functions that we use commonly. Older Macs need this.
+"""Checks that cstdlib is included for some of its functions that we use
+commonly.
+
+Older Macs need this.
 """
 
 import re
 
-FUNCTION_REGEX = re.compile(r"""(\s|std::)(abs|ato[fil]|atoll|strto[dfl]|strtol[ld]|strtoul[l]{0,1}|std::[s]{0,1}rand|malloc|getenv)\(""")
+FUNCTION_REGEX = re.compile(
+    r"""(\s|std::)(abs|ato[fil]|atoll|strto[dfl]|strtol[ld]|strtoul[l]{0,1}|std::[s]{0,1}rand|malloc|getenv)\(""")
+
 
 def does_include_cstdlib(lines, fn):
     includes_cstdlib = False
@@ -30,7 +35,7 @@ evaluate_matches = does_include_cstdlib
 # ALLOWED TESTS #
 #################
 allowed = [
-"""#include <cstdlib>
+    """#include <cstdlib>
 
     std::abs(-5);
 """,
@@ -38,10 +43,10 @@ allowed = [
 
     std::strtoull;
 """,
-"""
+    """
     uint32_t const hit = game.logic_rand() % 100;
 """,
-"""
+    """
     uint32_t rand();
 """
 ]
