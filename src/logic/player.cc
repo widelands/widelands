@@ -20,6 +20,7 @@
 #include "logic/player.h"
 
 #include <cassert>
+#include <cstdlib>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>

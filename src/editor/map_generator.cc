@@ -89,23 +89,23 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 	immovDens = immovDens >= kMaxElevationHalf ? kMaxElevation : immovDens * 2;
 	movDens = movDens >= kMaxElevationHalf ? kMaxElevation : movDens * 2;
 
-	uint32_t val = rng.rand();
+	uint32_t val = rng.rng_rand();
 	bool set_immovable = (val <= immovDens);
-	val = rng.rand();
+	val = rng.rng_rand();
 	bool set_moveable = (val <= movDens);
 
 	// Set bob according to bob area
 
 	if (set_immovable && (num = bobCategory->num_immovables())) {
 		egbase_.create_immovable_with_name(
-		   fc, bobCategory->get_immovable(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
+		   fc, bobCategory->get_immovable(static_cast<size_t>(rng.rng_rand() / (kMaxElevation / num))),
 		   MapObjectDescr::OwnerType::kWorld, nullptr /* owner */, nullptr /* former_building_descr */
 		);
 	}
 
 	if (set_moveable && (num = bobCategory->num_critters())) {
 		egbase_.create_critter(fc, egbase_.world().critter_index(bobCategory->get_critter(
-		                              static_cast<size_t>(rng.rand() / (kMaxElevation / num)))));
+		                              static_cast<size_t>(rng.rng_rand() / (kMaxElevation / num)))));
 	}
 }
 
@@ -267,7 +267,7 @@ uint32_t* MapGenerator::generate_random_value_map(uint32_t const w, uint32_t con
 
 		for (uint32_t x = 0; x < w; x += 16) {
 			for (uint32_t y = 0; y < h; y += 16) {
-				values[x + y * w] = rng.rand();
+				values[x + y * w] = rng.rng_rand();
 				if (x % 32 || y % 32) {
 					values[x + y * w] += kAverageElevation;
 					values[x + y * w] /= 2;
@@ -309,15 +309,15 @@ uint32_t* MapGenerator::generate_random_value_map(uint32_t const w, uint32_t con
 
 					uint32_t x_new =
 					   x_0_y_0 / 2 + x_1_y_0 / 2 +
-					   static_cast<uint32_t>(ele_fac * rng.rand() - ele_fac * kAverageElevation);
+					   static_cast<uint32_t>(ele_fac * rng.rng_rand() - ele_fac * kAverageElevation);
 
 					uint32_t y_new =
 					   x_0_y_0 / 2 + x_0_y_1 / 2 +
-					   static_cast<uint32_t>(ele_fac * rng.rand() - ele_fac * kAverageElevation);
+					   static_cast<uint32_t>(ele_fac * rng.rng_rand() - ele_fac * kAverageElevation);
 
 					uint32_t xy_new =
 					   x_0_y_0 / 4 + x_1_y_1 / 4 + x_1_y_0 / 4 + x_0_y_1 / 4 +
-					   static_cast<uint32_t>(ele_fac * rng.rand() - ele_fac * kAverageElevation);
+					   static_cast<uint32_t>(ele_fac * rng.rng_rand() - ele_fac * kAverageElevation);
 
 					values[x + step_x / 2 + w * (y)] = x_new;
 					values[x + step_x / 2 + w * (y + step_y / 2)] = xy_new;
@@ -586,7 +586,7 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
 	//  Figure out which terrain to use at this point in the map...
 	return map_gen_info_->get_area(atp, usedLandIndex)
 	   .get_terrain(
-	      ttp, rng.rand() % map_gen_info_->get_area(atp, usedLandIndex).get_num_terrains(ttp));
+	      ttp, rng.rng_rand() % map_gen_info_->get_area(atp, usedLandIndex).get_num_terrains(ttp));
 }
 
 void MapGenerator::create_random_map() {
@@ -731,7 +731,7 @@ void MapGenerator::create_random_map() {
 		// This is a kinda dump algorithm -> we generate a random number and increase it until it
 		// fits.
 		// However it's working and simple ;) - if you've got a better idea, feel free to fix it.
-		PlayerNumber x = rng.rand() % map_info_.numPlayers;
+		PlayerNumber x = rng.rng_rand() % map_info_.numPlayers;
 		while (!okay) {
 			okay = true;
 			++x;  // PlayerNumber begins at 1 not at 0

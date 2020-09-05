@@ -19,6 +19,7 @@
 
 #include "wui/game_tips.h"
 
+#include <cstdlib>
 #include <memory>
 
 #include <SDL_timer.h>

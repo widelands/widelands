@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/map_object_program.h"
 
+#include <cstdlib>
+
 #include <boost/regex.hpp>
 
 #include "base/log.h"

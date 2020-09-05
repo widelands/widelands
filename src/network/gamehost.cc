@@ -20,6 +20,7 @@
 #include "network/gamehost.h"
 
 #include <algorithm>
+#include <cstdlib>
 #include <memory>
 
 #include <SDL_timer.h>

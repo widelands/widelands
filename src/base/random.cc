@@ -37,7 +37,7 @@ void RNG::seed(uint32_t s) {
 	state1 = SIMPLE_RAND(state1) + s;
 }
 
-uint32_t RNG::rand() {
+uint32_t RNG::rng_rand() {
 	//  apply a bijective mixing operation
 	state0 = SIMPLE_RAND(state0);
 	state1 = SIMPLE_RAND(state1);

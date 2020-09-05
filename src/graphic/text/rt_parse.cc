@@ -19,6 +19,7 @@
 
 #include "graphic/text/rt_parse.h"
 
+#include <cstdlib>
 #include <memory>
 
 #include <boost/algorithm/string/replace.hpp>

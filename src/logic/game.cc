@@ -19,6 +19,7 @@
 
 #include "logic/game.h"
 
+#include <cstdlib>
 #include <memory>
 #include <string>
 
@@ -696,7 +697,7 @@ Md5Checksum Game::get_sync_hash() const {
  * \note Do NOT use for random events in the UI or other display code.
  */
 uint32_t Game::logic_rand() {
-	uint32_t const result = rng().rand();
+	uint32_t const result = rng().rng_rand();
 	syncstream().unsigned_8(SyncEntry::kRandom);
 	syncstream().unsigned_32(result);
 	return result;
