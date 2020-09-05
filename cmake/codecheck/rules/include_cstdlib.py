@@ -5,7 +5,7 @@
 
 import re
 
-FUNCTION_REGEX = re.compile(r"""(\s|std::)(abs|ato[fil]|atoll|strto[dfl]|strtol[ld]|strtoul[l]{0,1}|[s]{0,1}rand|malloc|getenv)\(""")
+FUNCTION_REGEX = re.compile(r"""(\s|std::)(abs|ato[fil]|atoll|strto[dfl]|strtol[ld]|strtoul[l]{0,1}|std::[s]{0,1}rand|malloc|getenv)\(""")
 
 def does_include_memory(lines, fn):
     includes_cstdlib = False
@@ -38,7 +38,11 @@ allowed = [
 
     std::strtoull;
 """,
-"""uint32_t const hit = game.logic_rand() % 100;
+"""
+    uint32_t const hit = game.logic_rand() % 100;
+""",
+"""
+    uint32_t rand();
 """
 ]
 

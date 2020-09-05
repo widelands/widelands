@@ -275,7 +275,7 @@ FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
 		const FxId new_id = fxs_[type].size();
 		fx_ids_[type].insert(std::make_pair(fx_path, new_id));
 		fxs_[type].insert(
-		   std::make_pair(new_id, std::unique_ptr<FXset>(new FXset(fx_path, rng_.rng_rand()))));
+		   std::make_pair(new_id, std::unique_ptr<FXset>(new FXset(fx_path, rng_.rand()))));
 		return new_id;
 	} else {
 		return fx_ids_[type].at(fx_path);
@@ -350,7 +350,7 @@ bool SoundHandler::play_or_not(SoundType type,
 
 	// finally: the decision
 	// float division! not integer
-	return (rng_.rng_rand() % kFxMaximumPriority) / static_cast<float>(kFxMaximumPriority) <=
+	return (rng_.rand() % kFxMaximumPriority) / static_cast<float>(kFxMaximumPriority) <=
 	       probability;
 }
 
@@ -391,7 +391,7 @@ void SoundHandler::play_fx(SoundType type,
 	}
 
 	//  retrieve the fx and play it if it's valid
-	if (Mix_Chunk* const m = fxs_[type][fx_id]->get_fx(rng_.rng_rand())) {
+	if (Mix_Chunk* const m = fxs_[type][fx_id]->get_fx(rng_.rand())) {
 		const int32_t chan = Mix_PlayChannel(-1, m, 0);
 		if (chan == -1) {
 			log_err("SoundHandler: Mix_PlayChannel failed: %s\n", Mix_GetError());
@@ -457,7 +457,7 @@ void SoundHandler::start_music(const std::string& songset_name) {
 	if (songs_.count(songset_name) == 0) {
 		log_err("SoundHandler: songset \"%s\" does not exist!\n", songset_name.c_str());
 	} else {
-		if (Mix_Music* const m = songs_[songset_name]->get_song(rng_.rng_rand())) {
+		if (Mix_Music* const m = songs_[songset_name]->get_song(rng_.rand())) {
 			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
 		} else {

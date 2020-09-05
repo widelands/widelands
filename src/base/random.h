@@ -32,7 +32,7 @@ struct RNG {
 
 	void seed(uint32_t);
 
-	uint32_t rng_rand();
+	uint32_t rand();
 
 	void read_state(StreamRead&);
 	void write_state(StreamWrite&);

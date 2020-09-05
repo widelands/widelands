@@ -297,8 +297,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	map_number_edit_.changed.connect([this]() { nr_edit_box_changed(); });
 	RNG rng;
 	rng.seed(clock());
-	rng.rng_rand();
-	map_number_ = rng.rng_rand();
+	rng.rand();
+	map_number_ = rng.rand();
 	map_number_edit_.set_text(std::to_string(static_cast<unsigned int>(map_number_)));
 	map_number_box_.add(&map_number_edit_);
 	box_.add(&map_number_box_);
