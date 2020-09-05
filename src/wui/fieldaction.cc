@@ -19,6 +19,8 @@
 
 #include "wui/fieldaction.h"
 
+#include <SDL_timer.h>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/economy.h"
@@ -1016,6 +1018,8 @@ Bring up a field action window or continue road building.
 void show_field_action(InteractiveBase* const ibase,
                        Widelands::Player* const player,
                        UI::UniqueWindow::Registry* const registry) {
+	bool done = false;
+	NoteDelayedCheck::instantiate(nullptr, [ibase, player, registry, &done]() {
 	if (ibase->in_road_building_mode()) {
 		// we're building a road or waterway right now
 		const Widelands::Map& map = player->egbase().map();
@@ -1032,7 +1036,7 @@ void show_field_action(InteractiveBase* const ibase,
 				                       (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
 			}
 			w.init();
-			return;
+		goto _return;
 		}
 
 		// append or take away from the road
@@ -1046,7 +1050,7 @@ void show_field_action(InteractiveBase* const ibase,
 				w.add_buttons_waterway(false);
 			}
 			w.init();
-			return;
+		goto _return;
 		}
 
 		// did he click on a flag or a road where a flag can be built?
@@ -1065,7 +1069,7 @@ void show_field_action(InteractiveBase* const ibase,
 				ibase->finish_build_road();
 				// We are done, so we close the window.
 				registry->destroy();
-				return;
+		goto _return;
 			} else {
 				FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 				if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
@@ -1074,12 +1078,21 @@ void show_field_action(InteractiveBase* const ibase,
 					w.add_buttons_waterway(false);
 				}
 				w.init();
-				return;
+		goto _return;
 			}
 		}
 	} else {
 		FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 		w.add_buttons_auto();
-		return w.init();
+		w.init();
+		goto _return;
+	}
+
+		_return:
+		done = true;
+	});
+	while (!done) {
+		// The testsuite needs us to wait until the window is actually open
+		SDL_Delay(10);
 	}
 }
