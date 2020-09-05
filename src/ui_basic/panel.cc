@@ -208,20 +208,16 @@ int Panel::do_run() {
 	std::unique_ptr<std::thread> thread(new std::thread(&Panel::runthread, this));
 
 	MutexLockHandler& mutex_handler = MutexLockHandler::push();
+	MutexLockHandler local_handler;
+
+	// Caution! If we are the toplevel modal panel, this is the main thread.
+	// But if there was another modal panel (prevmodal != nullptr),
+	// this may NOT be the main thread. In that case, we must take care
+	// not to intercept notifications meant for the main thread, and we
+	// need to leave the drawing code to the main thread as well.
 
 	std::list<NoteDelayedCheck> checks;
 	std::set<const void*> cancelled_checks;
-	MutexLockHandler local_handler;
-	auto subscriber1 = Notifications::subscribe<NoteDelayedCheckCancel>(
-	   [&cancelled_checks, &local_handler](const NoteDelayedCheckCancel& note) {
-		   MutexLock m(&local_handler, false);
-		   cancelled_checks.insert(note.caller);
-	   });
-	auto subscriber2 = Notifications::subscribe<NoteDelayedCheck>(
-	   [&checks, &local_handler](const NoteDelayedCheck& note) {
-		   MutexLock m(&local_handler, false);
-		   checks.push_back(note);
-	   });
 	auto handle_checks = [&checks, &local_handler, &cancelled_checks]() {
 		MutexLock m(&local_handler, false);
 		while (!checks.empty()) {
@@ -232,11 +228,26 @@ int Panel::do_run() {
 		}
 		cancelled_checks.clear();
 	};
+	std::unique_ptr<Notifications::Subscriber<NoteDelayedCheckCancel>> subscriber1;
+	std::unique_ptr<Notifications::Subscriber<NoteDelayedCheck>> subscriber2;
+	if (!prevmodal) {
+		subscriber1 = Notifications::subscribe<NoteDelayedCheckCancel>(
+		   [&cancelled_checks, &local_handler](const NoteDelayedCheckCancel& note) {
+			   MutexLock m(&local_handler, false);
+			   cancelled_checks.insert(note.caller);
+		   });
+		subscriber2 = Notifications::subscribe<NoteDelayedCheck>(
+		   [&checks, &local_handler](const NoteDelayedCheck& note) {
+			   MutexLock m(&local_handler, false);
+			   checks.push_back(note);
+		   });
+	}
 
 	while (running_) {
 		const uint32_t start_time = SDL_GetTicks();
 
-		for (;;) {
+		for (; modal_ == this;) {
+			// Input handling needs to be done only by the currently modal panel
 			handle_checks();
 			MutexLock m(true);
 			if (m.is_valid()) {
@@ -245,13 +256,16 @@ int Panel::do_run() {
 			}
 		}
 
-		if (app->should_die()) {
+		if (app->should_die() && modal_ == this) {
+			// Only the currently modal panel may do this. If there are
+			// other modal panels, they will run this code in the next frame.
 			end_modal<Returncodes>(Returncodes::kBack);
 		}
 
 		check_child_death();
 
-		if (start_time >= next_draw_time) {
+		if (start_time >= next_draw_time && !prevmodal) {
+			// Rendering may be done only by the main thread
 			for (;;) {
 				handle_checks();
 				MutexLock m(true);
@@ -275,7 +289,7 @@ int Panel::do_run() {
 			}
 		}
 
-		const int32_t delay = next_draw_time - SDL_GetTicks();
+		const int32_t delay = prevmodal ? 20 : next_draw_time - SDL_GetTicks();
 		if (delay > 0) {
 			SDL_Delay(delay);
 		}
