@@ -19,6 +19,8 @@
 
 #include "graphic/surface.h"
 
+#include <cstdlib>
+
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/gl/coordinate_conversion.h"
