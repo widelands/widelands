@@ -119,9 +119,9 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	void set_map(const std::string& mapname,
-	                     const std::string& mapfilename,
-	                     uint32_t const maxplayers,
-	                     bool const savegame = false) override {
+	             const std::string& mapfilename,
+	             uint32_t const maxplayers,
+	             bool const savegame = false) override {
 		host_->set_map(mapname, mapfilename, maxplayers, savegame);
 	}
 	void set_player_state(uint8_t number, PlayerSettings::State const state) override {
