@@ -378,7 +378,8 @@ void FullscreenMenuLaunchMPG::think() {
 	if (ctrl_) {
 		ctrl_->think();
 	}
-	refresh();
+
+	NoteDelayedCheck::instantiate(this, [this]() { refresh(); }, true);
 
 	// unfocus chat window when other UI element has focus
 	if (!chat_->has_focus()) {

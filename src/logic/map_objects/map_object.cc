@@ -23,8 +23,6 @@
 #include <cstdarg>
 #include <memory>
 
-#include <SDL_timer.h>
-
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/animation/animation_manager.h"
@@ -435,17 +433,14 @@ void MapObjectDescr::check_representative_image() {
 			   "The %s %s has no representative image. Does it have an \"idle\" animation?",
 			   to_string(type()).c_str(), name().c_str());
 		}
-	});
+	}, false);
 }
 
 const Image* MapObjectDescr::icon() const {
 	if (!icon_filename_.empty()) {
 		const Image* result = nullptr;
 		NoteDelayedCheck::instantiate(
-		   this, [this, &result]() { result = g_image_cache->get(icon_filename_); });
-		while (!result) {
-			SDL_Delay(20);
-		}
+		   this, [this, &result]() { result = g_image_cache->get(icon_filename_); }, true);
 		return result;
 	}
 	return nullptr;

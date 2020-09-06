@@ -300,14 +300,9 @@ int BaseListselect::calculate_desired_width() {
 	widest_hotkey_ = 0;
 	for (EntryRecord* er : entry_records_) {
 		if (!er->rendered_name) {
-			bool done = false;
-			NoteDelayedCheck::instantiate(this, [this, er, &done]() {
+			NoteDelayedCheck::instantiate(this, [this, er]() {
 				er->init_render_info();
-				done = true;
-			});
-			while (!done) {
-				SDL_Delay(20);
-			}
+			}, true);
 		}
 		widest_text_ = std::max(widest_text_, er->rendered_name->width());
 		widest_hotkey_ = std::max(widest_hotkey_, er->rendered_hotkey->width());

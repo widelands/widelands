@@ -95,17 +95,12 @@ Button::Button(Panel* const parent,
 		int new_width = get_w();
 
 		int new_height = -1;
-		bool done = false;
-		NoteDelayedCheck::instantiate(this, [this, init_style, &new_height, &done]() {
+		NoteDelayedCheck::instantiate(this, [this, init_style, &new_height]() {
 			new_height =
 			   std::max(text_height(g_style_manager->button_style(init_style).enabled().font()),
 			            text_height(g_style_manager->button_style(init_style).disabled().font())) +
 			   4 * kButtonImageMargin;
-			done = true;
-		});
-		while (!done) {
-			SDL_Delay(20);
-		}
+		}, true);
 
 		if (w == 0) {
 			// Automatically resize for text width too.

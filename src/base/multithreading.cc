@@ -21,6 +21,9 @@
 
 #include <list>
 #include <memory>
+#include <set>
+
+#include <SDL_timer.h>
 
 #include "base/wexception.h"
 
@@ -48,7 +51,24 @@ bool is_initializer_thread(const bool set_if_not_set_yet) {
 	return *initializer_thread == std::this_thread::get_id();
 }
 
-void NoteDelayedCheck::instantiate(const void* caller, const std::function<void()>& fn) {
+static std::set<std::thread::id> interrupt_;
+void NoteDelayedCheck::set_interrupt(const std::thread::id& id, const bool i) {
+	assert(id != std::thread::id());
+	if (i) {
+		if (interrupt_.count(id)) {
+			throw wexception("NoteDelayedCheck::set_interrupt: already interrupting");
+		}
+		interrupt_.insert(id);
+	} else {
+		auto it = interrupt_.find(id);
+		if (it == interrupt_.end()) {
+			throw wexception("NoteDelayedCheck::set_interrupt: not found");
+		}
+		interrupt_.erase(it);
+	}
+}
+
+void NoteDelayedCheck::instantiate(const void* caller, const std::function<void()>& fn, const bool wait_until_completion) {
 	if (!is_initializer_thread_set()) {
 		throw wexception("NoteDelayedCheck::instantiate: initializer thread was not set yet");
 	} else if (is_initializer_thread(false)) {
@@ -57,7 +77,22 @@ void NoteDelayedCheck::instantiate(const void* caller, const std::function<void(
 		fn();
 	} else {
 		// All other threads must ask it politely to do this for them.
-		Notifications::publish(NoteDelayedCheck(caller, fn));
+		if (wait_until_completion) {
+			bool done = false;
+			Notifications::publish(NoteDelayedCheck(caller, [fn, &done]() {
+				fn();
+				done = true;
+			}));
+			while (!done) {
+				if (interrupt_.count(std::this_thread::get_id())) {
+					// The main thread asked us to stop whatever we were doing right now
+					return;
+				}
+				SDL_Delay(10);
+			}
+		} else {
+			Notifications::publish(NoteDelayedCheck(caller, fn));
+		}
 	}
 }
 

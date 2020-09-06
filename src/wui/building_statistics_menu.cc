@@ -19,7 +19,6 @@
 
 #include "wui/building_statistics_menu.h"
 
-#include <SDL_timer.h>
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
@@ -763,7 +762,7 @@ void BuildingStatisticsMenu::update() {
 			}
 			building_buttons_[id]->set_tooltip(building.descname());
 		}
-	});
+	}, false);
 }
 
 void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea,

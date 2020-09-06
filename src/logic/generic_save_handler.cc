@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include <SDL_timer.h>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -139,7 +138,7 @@ void GenericSaveHandler::save_file() {
 
 GenericSaveHandler::Error GenericSaveHandler::save() {
 	// This needs to be done by the main thread so we can generate the minimap
-	std::unique_ptr<GenericSaveHandler::Error> result;
+	GenericSaveHandler::Error result;
 	NoteDelayedCheck::instantiate(this, [this, &result]() {
 		try {  // everything additionally in one big try block
 			    // to catch any unexpected errors
@@ -157,7 +156,7 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 				    dir_.c_str() % e.what())
 				      .str();
 				log_err("%s", error_msg_[index].c_str());
-				result.reset(new GenericSaveHandler::Error(error_));
+				result = error_;
 				return;
 			}
 
@@ -166,7 +165,7 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 				make_backup();
 			}
 			if (error_ != Error::kNone) {
-				result.reset(new GenericSaveHandler::Error(error_));
+				result = error_;
 				return;
 			}
 
@@ -226,12 +225,9 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 			log_err("%s", error_msg_[index].c_str());
 		}
 
-		result.reset(new GenericSaveHandler::Error(error_));
-	});
-	while (!result.get()) {
-		SDL_Delay(20);
-	}
-	return *result;
+		result = error_;
+	}, true);
+	return result;
 }
 
 std::string GenericSaveHandler::error_message(GenericSaveHandler::Error error_mask) {

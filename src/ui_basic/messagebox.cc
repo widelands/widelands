@@ -22,7 +22,6 @@
 #include <memory>
 
 #include <SDL_mouse.h>
-#include <SDL_timer.h>
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
@@ -55,9 +54,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	const int margin = 5;
 	int width, height = 0;
 
-	bool done = false;
-	NoteDelayedCheck::instantiate(this, [this, text, font_style, &width, &height, maxwidth,
-	                                     &done]() {
+	NoteDelayedCheck::instantiate(this, [this, text, font_style, &width, &height, maxwidth]() {
 		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
 		   g_fh->render(as_richtext_paragraph(text, font_style), maxwidth);
 		width = temp_rendered_text->width();
@@ -69,11 +66,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 			width = temp_rendered_text->width();
 			height = temp_rendered_text->height();
 		}
-		done = true;
-	});
-	while (!done) {
-		SDL_Delay(20);
-	}
+	}, true);
 
 	// Make sure that the buttons really fit
 	width = std::max(std::min(width, maxwidth), minwidth);

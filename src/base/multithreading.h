@@ -100,7 +100,9 @@ private:
  */
 struct NoteDelayedCheck {
 	CAN_BE_SENT_AS_NOTE(NoteId::DelayedCheck)
-	static void instantiate(const void*, const std::function<void()>&);
+	static void instantiate(const void*, const std::function<void()>&, bool wait_until_completion);
+
+	static void set_interrupt(const std::thread::id&, bool);
 
 	const void* caller;
 	const std::function<void()> run;

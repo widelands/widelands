@@ -83,18 +83,13 @@ void Statebox::layout() {
 			pic_width = pic_graphics_->width();
 		}
 
-		bool done = false;
-		NoteDelayedCheck::instantiate(this, [this, pic_width, &done]() {
+		NoteDelayedCheck::instantiate(this, [this, pic_width]() {
 			rendered_text_ =
 			   label_text_.empty() ?
 			      nullptr :
 			      UI::g_fh->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel),
 			                       text_width(get_w(), pic_width));
-			done = true;
-		});
-		while (!done) {
-			SDL_Delay(20);
-		}
+		}, true);
 
 		if (rendered_text_) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);

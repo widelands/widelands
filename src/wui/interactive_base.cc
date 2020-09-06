@@ -450,7 +450,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 
 		if (bind_default_toggle) {
 			button->sigclicked.connect([this, window]() {
-				NoteDelayedCheck::instantiate(this, [window]() { window->toggle(); });
+				NoteDelayedCheck::instantiate(this, [window]() { window->toggle(); }, false);
 			});
 		}
 	}

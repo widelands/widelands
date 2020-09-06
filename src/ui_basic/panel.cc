@@ -152,6 +152,12 @@ void Panel::runthread() {
 	uint32_t next_think_time = initial_ticks + kGameLogicDelay;
 
 	while (running_) {
+		if (modal_ != this) {
+			// Another panel is currently modal. Freeze until it has completed.
+			SDL_Delay(20);
+			continue;
+		}
+
 		const uint32_t start_time = SDL_GetTicks();
 
 		if (start_time >= next_think_time) {
@@ -243,11 +249,35 @@ int Panel::do_run() {
 		   });
 	}
 
+	auto update_graphics = [this, handle_checks, app, draw_delay, forefather, &next_draw_time]() {
+		for (;;) {
+			handle_checks();
+			MutexLock m(true);
+			if (m.is_valid()) {
+				RenderTarget& rt = *g_gr->get_render_target();
+				forefather->do_draw(rt);
+				if (g_mouse_cursor->is_visible()) {
+					g_mouse_cursor->change_cursor(app->is_mouse_pressed());
+					g_mouse_cursor->draw(rt, app->get_mouse_position());
+					if (is_modal()) {
+						do_tooltip();
+					} else {
+						forefather->do_tooltip();
+					}
+				}
+
+				g_gr->refresh();
+				next_draw_time = SDL_GetTicks() + draw_delay;
+				return;
+			}
+		}
+	};
+
 	while (running_) {
 		const uint32_t start_time = SDL_GetTicks();
 
 		for (; modal_ == this;) {
-			// Input handling needs to be done only by the currently modal panel
+			// Input handling should be done only by the currently modal panel
 			handle_checks();
 			MutexLock m(true);
 			if (m.is_valid()) {
@@ -264,29 +294,9 @@ int Panel::do_run() {
 
 		check_child_death();
 
-		if (start_time >= next_draw_time && !prevmodal) {
+		if (start_time >= next_draw_time) {
 			// Rendering may be done only by the main thread
-			for (;;) {
-				handle_checks();
-				MutexLock m(true);
-				if (m.is_valid()) {
-					RenderTarget& rt = *g_gr->get_render_target();
-					forefather->do_draw(rt);
-					if (g_mouse_cursor->is_visible()) {
-						g_mouse_cursor->change_cursor(app->is_mouse_pressed());
-						g_mouse_cursor->draw(rt, app->get_mouse_position());
-						if (is_modal()) {
-							do_tooltip();
-						} else {
-							forefather->do_tooltip();
-						}
-					}
-
-					g_gr->refresh();
-					next_draw_time = start_time + draw_delay;
-					break;
-				}
-			}
+			NoteDelayedCheck::instantiate(this, [update_graphics]() { update_graphics(); }, true);
 		}
 
 		const int32_t delay = prevmodal ? 20 : next_draw_time - SDL_GetTicks();
@@ -294,8 +304,12 @@ int Panel::do_run() {
 			SDL_Delay(delay);
 		}
 	}
+
+	const std::thread::id id = thread->get_id();
+	NoteDelayedCheck::set_interrupt(id, true);
 	thread->join();
 	thread.reset();
+	NoteDelayedCheck::set_interrupt(id, false);
 	subscriber1.reset();
 	subscriber2.reset();
 	MutexLockHandler::pop(mutex_handler);

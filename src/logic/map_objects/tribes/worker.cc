@@ -1077,7 +1077,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 				                  rdescr->representative_image(), ri.descr().descname(), rt_description,
 				                  position, serial_, rdescr->name())),
 				   rdescr->timeout_ms(), rdescr->timeout_radius());
-			});
+			}, false);
 		}
 	}
 

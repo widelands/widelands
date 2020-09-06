@@ -97,4 +97,5 @@ wl_library(base_multithreading
   DEPENDS
     base_exceptions
     notifications
+  USES_SDL2
 )

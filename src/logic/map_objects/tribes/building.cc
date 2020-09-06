@@ -948,6 +948,6 @@ void Building::send_message(Game& game,
 		} else {
 			get_owner()->add_message(game, std::move(msg));
 		}
-	});
+	}, false);
 }
 }  // namespace Widelands
