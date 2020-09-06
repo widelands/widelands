@@ -296,7 +296,8 @@ int Panel::do_run() {
 
 		if (start_time >= next_draw_time) {
 			// Rendering may be done only by the main thread
-			NoteDelayedCheck::instantiate(this, [update_graphics]() { update_graphics(); }, true);
+			NoteDelayedCheck::instantiate(
+			   this, [update_graphics]() { update_graphics(); }, true);
 		}
 
 		const int32_t delay = prevmodal ? 20 : next_draw_time - SDL_GetTicks();

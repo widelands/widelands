@@ -68,7 +68,9 @@ void NoteDelayedCheck::set_interrupt(const std::thread::id& id, const bool i) {
 	}
 }
 
-void NoteDelayedCheck::instantiate(const void* caller, const std::function<void()>& fn, const bool wait_until_completion) {
+void NoteDelayedCheck::instantiate(const void* caller,
+                                   const std::function<void()>& fn,
+                                   const bool wait_until_completion) {
 	if (!is_initializer_thread_set()) {
 		throw wexception("NoteDelayedCheck::instantiate: initializer thread was not set yet");
 	} else if (is_initializer_thread(false)) {

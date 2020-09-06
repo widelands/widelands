@@ -427,13 +427,16 @@ const Image* MapObjectDescr::representative_image(const RGBColor* player_color) 
 }
 
 void MapObjectDescr::check_representative_image() {
-	NoteDelayedCheck::instantiate(this, [this]() {
-		if (representative_image() == nullptr) {
-			throw Widelands::GameDataError(
-			   "The %s %s has no representative image. Does it have an \"idle\" animation?",
-			   to_string(type()).c_str(), name().c_str());
-		}
-	}, false);
+	NoteDelayedCheck::instantiate(
+	   this,
+	   [this]() {
+		   if (representative_image() == nullptr) {
+			   throw Widelands::GameDataError(
+			      "The %s %s has no representative image. Does it have an \"idle\" animation?",
+			      to_string(type()).c_str(), name().c_str());
+		   }
+	   },
+	   false);
 }
 
 const Image* MapObjectDescr::icon() const {
