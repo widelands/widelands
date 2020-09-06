@@ -385,11 +385,12 @@ int LuaPlayer::send_message(lua_State* L) {
 		}
 	}
 
-	Widelands::MessageId const message = plr.add_message(
-	   game,
-	   std::unique_ptr<Widelands::Message>(new Widelands::Message(Widelands::Message::Type::kScenario, game.get_gametime(), title,
-	                                        icon, heading, body, c, 0, sub_type, st)),
-	   popup);
+	Widelands::MessageId const message =
+	   plr.add_message(game,
+	                   std::unique_ptr<Widelands::Message>(new Widelands::Message(
+	                      Widelands::Message::Type::kScenario, game.get_gametime(), title, icon,
+	                      heading, body, c, 0, sub_type, st)),
+	                   popup);
 
 	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));
 }
@@ -593,7 +594,8 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.hide_or_reveal_field((*get_user_class<LuaMaps::LuaField>(L, -1))->coords(), Widelands::SeeUnseeNode::kVisible);
+		p.hide_or_reveal_field(
+		   (*get_user_class<LuaMaps::LuaField>(L, -1))->coords(), Widelands::SeeUnseeNode::kVisible);
 		lua_pop(L, 1);
 	}
 
@@ -621,8 +623,8 @@ int LuaPlayer::hide_fields(lua_State* L) {
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 	const Widelands::SeeUnseeNode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
-	                             Widelands::SeeUnseeNode::kUnexplored :
-	                             Widelands::SeeUnseeNode::kPreviouslySeen;
+	                                        Widelands::SeeUnseeNode::kUnexplored :
+	                                        Widelands::SeeUnseeNode::kPreviouslySeen;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
@@ -924,7 +926,8 @@ void LuaPlayer::parse_building_list(lua_State* L,
 		// Only act on buildings that the tribe has or could conquer
 		const Widelands::TribeDescr& tribe_descr = get(L, egbase).tribe();
 		for (size_t i = 0; i < tribes.nrbuildings(); ++i) {
-			const Widelands::DescriptionIndex& building_index = static_cast<Widelands::DescriptionIndex>(i);
+			const Widelands::DescriptionIndex& building_index =
+			   static_cast<Widelands::DescriptionIndex>(i);
 			const Widelands::BuildingDescr& descr = *tribe_descr.get_building_descr(building_index);
 			if (tribe_descr.has_building(building_index) ||
 			    descr.type() == Widelands::MapObjectType::MILITARYSITE) {
@@ -1239,7 +1242,7 @@ int LuaMessage::set_status(lua_State* L) {
 	Widelands::Message::Status status = Widelands::Message::Status::kNew;
 	std::string s = luaL_checkstring(L, -1);
 	if (s == "new") {
-		status =Widelands:: Message::Status::kNew;
+		status = Widelands::Message::Status::kNew;
 	} else if (s == "read") {
 		status = Widelands::Message::Status::kRead;
 	} else if (s == "archived") {

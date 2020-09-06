@@ -443,7 +443,8 @@ int LuaWorld::new_resource_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_world()->add_world_object_type(table, Widelands::MapObjectType::RESOURCE);
+		get_egbase(L).mutable_world()->add_world_object_type(
+		   table, Widelands::MapObjectType::RESOURCE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -459,7 +460,8 @@ int LuaWorld::new_terrain_type(lua_State* L) {
 	}
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_world()->add_world_object_type(table, Widelands::MapObjectType::TERRAIN);
+		get_egbase(L).mutable_world()->add_world_object_type(
+		   table, Widelands::MapObjectType::TERRAIN);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -475,7 +477,8 @@ int LuaWorld::new_critter_type(lua_State* L) {
 	}
 	try {
 		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_world_object_type(table, Widelands::MapObjectType::CRITTER);
+		get_egbase(L).mutable_world()->add_world_object_type(
+		   table, Widelands::MapObjectType::CRITTER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -491,7 +494,8 @@ int LuaWorld::new_immovable_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_world()->add_world_object_type(table, Widelands::MapObjectType::IMMOVABLE);
+		get_egbase(L).mutable_world()->add_world_object_type(
+		   table, Widelands::MapObjectType::IMMOVABLE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
