@@ -182,6 +182,8 @@ struct ImmovableProgram : public MapObjectProgram {
 		return *actions_[idx];
 	}
 
+	static void postload_immovable_relations(const Tribes&, const World&);
+
 private:
 	std::vector<std::unique_ptr<Action>> actions_;
 };

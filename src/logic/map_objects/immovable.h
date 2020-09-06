@@ -173,6 +173,16 @@ public:
 		return becomes_;
 	}
 
+	// A set of all productionsites that gather this immovable or any of its future types
+	const std::set<std::string> collected_by() const {
+		return collected_by_;
+	}
+	void add_collected_by(const World&, const Tribes&, const std::string& prodsite);
+
+	void add_became_from(const std::string& s) {
+		became_from_.insert(s);
+	}
+
 protected:
 	int32_t size_;
 	Programs programs_;
@@ -186,6 +196,8 @@ protected:
 
 	std::string species_;
 	std::set<std::pair<MapObjectType, std::string>> becomes_;
+	std::set<std::string> became_from_;  // immovables that turn into this one
+	std::set<std::string> collected_by_;
 
 private:
 	// Adds a default program if none was defined.

@@ -173,6 +173,19 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 	immovable.program_step(game);
 }
 
+static std::vector<std::pair<std::string /* immo */, std::string /* becomes */>> immovable_relations_;
+void ImmovableProgram::postload_immovable_relations(const Tribes& tribes, const World& world) {
+	for (const auto& pair : immovable_relations_) {
+		DescriptionIndex di = world.get_immovable_index(pair.second);
+		if (di != Widelands::INVALID_INDEX) {
+			const_cast<ImmovableDescr&>(*world.get_immovable_descr(di)).add_became_from(pair.first);
+		} else {
+			tribes.get_mutable_immovable_descr(tribes.safe_immovable_index(pair.second))->add_became_from(pair.first);
+		}
+	}
+	immovable_relations_.clear();
+}
+
 /* RST
 
 transform
@@ -251,6 +264,9 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		// Register target at ImmovableDescr
 		descr.becomes_.insert(
 		   std::make_pair(bob_ ? MapObjectType::BOB : MapObjectType::IMMOVABLE, type_name_));
+		if (!bob_) {
+			immovable_relations_.push_back(std::make_pair(descr.name(), type_name_));
+		}
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
 	}
@@ -323,6 +339,7 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, Immovabl
 
 	// Register target at ImmovableDescr
 	descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name_));
+	immovable_relations_.push_back(std::make_pair(descr.name(), type_name_));
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {

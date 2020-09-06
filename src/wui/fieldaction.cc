@@ -329,43 +329,23 @@ void FieldActionWindow::init() {
 	warp_mouse_to_fastclick_panel();
 }
 
-static void gather_attributes(const Widelands::EditorGameBase& egbase,
-                              const Widelands::ImmovableDescr& descr,
-                              std::set<std::string>& set) {
-	if (set.count(descr.name())) {
-		return;
-	}
-	set.insert(descr.name());
-	for (const auto& pair : descr.becomes()) {
-		if (pair.first == Widelands::MapObjectType::IMMOVABLE) {
-			Widelands::DescriptionIndex di = egbase.world().get_immovable_index(pair.second);
-			gather_attributes(egbase,
-			                  di != Widelands::INVALID_INDEX ?
-			                     *egbase.world().get_immovable_descr(di) :
-			                     *egbase.tribes().get_immovable_descr(
-			                        egbase.tribes().safe_immovable_index(pair.second)),
-			                  set);
-		}
-	}
-}
 static bool suited_for_targeting(const Widelands::EditorGameBase& egbase,
-                                 const Widelands::Immovable& mo) {
+                                 const Widelands::Immovable& i) {
+	if (i.descr().collected_by().empty()) {
+		return false;
+	}
 	const Widelands::Map& map = egbase.map();
-	// Check if any productionsite nearby collects this immovable, or any of its future types
-	std::set<std::string> set;
-	gather_attributes(egbase, mo.descr(), set);
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   map, Widelands::Area<Widelands::FCoords>(
-	           map.get_fcoords(mo.get_position()), egbase.tribes().get_largest_workarea()));
+	           map.get_fcoords(i.get_position()), egbase.tribes().get_largest_workarea()));
 	do {
-		if (upcast(const Widelands::ProductionSite, ps, mr.location().field->get_immovable())) {
-			if (!ps->descr().workarea_info().empty() &&
-			    map.calc_distance(ps->get_position(), mo.get_position()) <=
-			       ps->descr().workarea_info().rend()->first) {
-				for (const std::string& immo_name : set) {
-					if (ps->descr().collected_immovables().count(immo_name)) {
-						return true;
-					}
+		if (const Widelands::MapObject* mo = mr.location().field->get_immovable()) {
+			if (i.descr().collected_by().count(mo->descr().name())) {
+				upcast(const Widelands::ProductionSite, ps, mo);
+				assert(ps);
+				assert(!ps->descr().workarea_info().empty());
+				if (map.calc_distance(ps->get_position(), i.get_position()) <= ps->descr().workarea_info().rbegin()->first) {
+					return true;
 				}
 			}
 		}
