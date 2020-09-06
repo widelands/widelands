@@ -25,7 +25,7 @@ We support compiling Widelands for Linux, Windows under MSys2, and MacOs with GC
 
 You will need to install the following dependencies:
 
-*  [libSDL](http://www.libsdl.org/) >=2.0
+*  [libSDL](http://www.libsdl.org/) >=2.0.5
 *  [libSDL_image](http://www.libsdl.org/projects/SDL_image)
 *  [libSDL_mixer](http://www.libsdl.org/projects/SDL_mixer) >= 2.0
 *  [libSDL_ttf](http://www.libsdl.org/projects/SDL_ttf) >= 2.0
