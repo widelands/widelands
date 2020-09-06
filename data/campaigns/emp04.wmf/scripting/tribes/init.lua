@@ -99,17 +99,11 @@ local result = {
             }
          },
          {
-            name = "empire_brewery2",
-         },
-         {
             name = "empire_farm1",
             helptexts = {
                -- TRANSLATORS: Purpose helptext for an empire production site: Farm
                purpose = pgettext("empire_building", "Sows and harvests wheat.")
             }
-         },
-         {
-            name = "empire_farm2",
          },
          {
             name = "empire_foresters_house1",
@@ -135,9 +129,6 @@ local result = {
                -- TRANSLATORS: Purpose helptext for an empire production site: Mill
                purpose = pgettext("empire_building", "Grinds wheat to produce flour."),
             }
-         },
-         {
-            name = "empire_mill2",
          },
          {
             name = "empire_trainingcamp1",

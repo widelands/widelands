@@ -8,7 +8,19 @@ tribes:new_productionsite_type {
    descname = pgettext("barbarians_building", "Micro Brewery"),
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "barbarians_brewery",
+
+   enhancement = {
+      name = "barbarians_brewery",
+      enhancement_cost = {
+         log = 3,
+         granite = 1,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         log = 1,
+         granite = 1
+      }
+   },
 
    buildcost = {
       log = 3,

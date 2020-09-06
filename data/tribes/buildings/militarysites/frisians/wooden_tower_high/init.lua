@@ -10,14 +10,6 @@ tribes:new_militarysite_type {
    size = "small",
    vision_range = 17,
 
-   enhancement_cost = {
-      log = 2,
-      reed = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      log = 1,
-   },
-
    spritesheets = {
       idle = {
          directory = dirname,

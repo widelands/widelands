@@ -110,8 +110,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 
 	// Window
 	center_to_parent();
-	set_can_focus(true);
-	focus();
+	players_table_->focus();
 	fill_data();
 
 	set_thinks(false);
