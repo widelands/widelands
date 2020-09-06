@@ -58,8 +58,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
    : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
      tribes_(tribes),
      buildable_(table.has_key("buildcost")),
-     can_be_dismantled_(table.has_key("return_on_dismantle") ||
-                        table.has_key("return_on_dismantle_on_enhanced")),
+     can_be_dismantled_(table.has_key("return_on_dismantle")),
      destructible_(table.has_key("destructible") ? table.get_bool("destructible") : true),
      size_(BaseImmovable::SMALL),
      mine_(false),
@@ -109,28 +108,59 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 
 	// Parse build options
 	if (table.has_key("enhancement")) {
-		const std::string enh = table.get_string("enhancement");
+		// TODO(GunChleoc): Compatibility code, remove "if" section after v1.0.
+		// The "else" branch with get_table is the current code.
+		if (table.get_datatype("enhancement") == LuaTable::DataType::kString) {
+			const std::string enh = table.get_string("enhancement");
+			log_warn("Deprecated enhancement code found in building '%s'", name().c_str());
 
-		if (enh == name()) {
-			throw wexception("enhancement to same type");
-		}
-		DescriptionIndex const en_i = tribes.load_building(enh);
-		if (tribes_.building_exists(en_i)) {
-			enhancement_ = en_i;
+			if (enh == name()) {
+				throw wexception("enhancement to same type");
+			}
+			DescriptionIndex const en_i = tribes.load_building(enh);
+			if (tribes_.building_exists(en_i)) {
+				enhancement_ = en_i;
 
-			//  Merge the enhancements workarea info into this building's
-			//  workarea info.
-			const BuildingDescr* tmp_enhancement = tribes_.get_building_descr(en_i);
-			for (auto area : tmp_enhancement->workarea_info_) {
-				std::set<std::string>& strs = workarea_info_[area.first];
-				for (const std::string& str : area.second) {
-					strs.insert(str);
+				//  Merge the enhancements workarea info into this building's
+				//  workarea info.
+				const BuildingDescr* tmp_enhancement = tribes_.get_building_descr(en_i);
+				for (auto area : tmp_enhancement->workarea_info_) {
+					std::set<std::string>& strs = workarea_info_[area.first];
+					for (const std::string& str : area.second) {
+						strs.insert(str);
+					}
 				}
+			} else {
+				throw GameDataError(
+				   "\"%s\" has not been defined as a building type (wrong declaration order?)",
+				   enh.c_str());
 			}
 		} else {
-			throw wexception(
-			   "\"%s\" has not been defined as a building type (wrong declaration order?)",
-			   enh.c_str());
+			std::unique_ptr<LuaTable> enhancement_table = table.get_table("enhancement");
+			const std::string enhancement_name(enhancement_table->get_string("name"));
+			if (enhancement_name == name()) {
+				throw GameDataError("Building '%s' has enhancement to same type", name().c_str());
+			}
+			DescriptionIndex const enhancement_idx = tribes.load_building(enhancement_name);
+			if (tribes_.building_exists(enhancement_idx)) {
+				enhancement_ = enhancement_idx;
+				BuildingDescr* enhanced_building = tribes_.get_mutable_building_descr(enhancement_idx);
+				enhanced_building->set_enhancement_cost(
+				   Buildcost(enhancement_table->get_table("enhancement_cost"), tribes),
+				   Buildcost(enhancement_table->get_table("enhancement_return_on_dismantle"), tribes));
+
+				//  Merge the enhancements workarea info into this building's
+				//  workarea info.
+				for (auto area : enhanced_building->workarea_info_) {
+					std::set<std::string>& strs = workarea_info_[area.first];
+					for (const std::string& str : area.second) {
+						strs.insert(str);
+					}
+				}
+			} else {
+				throw GameDataError("'%s' has enhancement to unknown building '%s'", name().c_str(),
+				                    enhancement_name.c_str());
+			}
 		}
 	}
 
@@ -139,7 +169,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	// However, we support "return_on_dismantle" without "buildable", because this is used by custom
 	// scenario buildings.
 	if (table.has_key("return_on_dismantle")) {
-		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), tribes);
+		returns_on_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), tribes);
 	}
 	if (table.has_key("buildcost")) {
 		if (!table.has_key("return_on_dismantle")) {
@@ -150,14 +180,15 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("enhancement_cost")) {
-		enhanced_building_ = true;
+		// TODO(GunChleoc): Compatibility code, remove after v1.0
+		log_warn("Deprecated enhancement_cost code found in building '%s'", name().c_str());
 		if (!table.has_key("return_on_dismantle_on_enhanced")) {
-			throw wexception("The enhanced building '%s' has an \"enhancement_cost\" but no "
-			                 "\"return_on_dismantle_on_enhanced\"",
-			                 name().c_str());
+			throw GameDataError("The enhanced building '%s' has an \"enhancement_cost\" but no "
+			                    "\"return_on_dismantle_on_enhanced\"",
+			                    name().c_str());
 		}
-		enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), tribes);
-		return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes);
+		set_enhancement_cost(Buildcost(table.get_table("enhancement_cost"), tribes),
+		                     Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes));
 	}
 
 	needs_seafaring_ = false;
@@ -304,6 +335,16 @@ Building& BuildingDescr::create_constructionsite() const {
 	csite.set_building(*this);
 
 	return csite;
+}
+
+void BuildingDescr::set_enhancement_cost(const Buildcost& enhance_cost,
+                                         const Buildcost& return_enhanced) {
+	enhanced_building_ = true;
+	if (!return_enhanced.empty()) {
+		can_be_dismantled_ = true;
+	}
+	enhancement_cost_ = enhance_cost;
+	enhancement_returns_on_dismantle_ = return_enhanced;
 }
 
 /*

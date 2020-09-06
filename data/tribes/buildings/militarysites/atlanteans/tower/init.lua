@@ -9,7 +9,18 @@ tribes:new_militarysite_type {
    icon = dirname .. "menu.png",
    size = "medium",
    vision_range = 17,
-   enhancement = "atlanteans_tower_high",
+
+   enhancement = {
+      name = "atlanteans_tower_high",
+      enhancement_cost = {
+         log = 1,
+         planks = 1,
+         granite = 2
+      },
+      enhancement_return_on_dismantle = {
+         granite = 1
+      }
+   },
 
    buildcost = {
       log = 2,
