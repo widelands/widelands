@@ -200,8 +200,8 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      ferry_(Widelands::INVALID_INDEX),
      port_(Widelands::INVALID_INDEX),
      initializations_(info.initializations) {
-	log_info("┏━ Loading %s:", name_.c_str());
-	ScopedTimer timer("┗━ took: %ums");
+	log_info("┏━ Loading %s", name_.c_str());
+	ScopedTimer timer("┗━ took %ums");
 
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
@@ -210,29 +210,29 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 	};
 
 	try {
-		log_info("┃    Ships: ");
+		log_info("┃    Ships");
 		set_progress_message(_("Ships"), 1);
 		load_ships(table, tribes);
 
-		log_info("┃    Immovables: ");
+		log_info("┃    Immovables");
 		set_progress_message(_("Immovables"), 2);
 		load_immovables(table, tribes, world);
 
-		log_info("┃    Wares: ");
+		log_info("┃    Wares");
 		set_progress_message(_("Wares"), 3);
 		load_wares(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
 			load_wares(*scenario_table, tribes);
 		}
 
-		log_info("┃    Workers: ");
+		log_info("┃    Workers");
 		set_progress_message(_("Workers"), 4);
 		load_workers(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("workers_order")) {
 			load_workers(*scenario_table, tribes);
 		}
 
-		log_info("┃    Buildings: ");
+		log_info("┃    Buildings");
 		set_progress_message(_("Buildings"), 5);
 		load_buildings(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("buildings")) {
@@ -241,10 +241,10 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 
 		set_progress_message(_("Finishing"), 6);
 
-		log_info("┃    Frontiers, flags and roads: ");
+		log_info("┃    Frontiers, flags and roads");
 		load_frontiers_flags_roads(table);
 
-		log_info("┃    Finalizing: ");
+		log_info("┃    Finalizing");
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
 		}
