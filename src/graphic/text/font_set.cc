@@ -170,6 +170,7 @@ FontSets::FontSets() {
 	   {"default", FontSets::Selector::kDefault},
 	   {"arabic", FontSets::Selector::kArabic},
 	   {"cjk", FontSets::Selector::kCJK},
+	   {"japanese", FontSets::Selector::kJapanese},
 	   {"devanagari", FontSets::Selector::kDevanagari},
 	   {"hebrew", FontSets::Selector::kHebrew}};
 

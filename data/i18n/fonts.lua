@@ -48,6 +48,14 @@ return {
       representative_character = "简",
    },
 
+   japanese = {
+      sans = "Takao/TakaoExGothic.ttf",
+      serif = "Takao/TakaoMincho.ttf",
+      condensed = "Takao/TakaoPGothic.ttf",
+      representative_character = "あ",
+      size_offset = 4
+   },
+
    devanagari = {
       sans = "Nakula/nakula.ttf",
       representative_character = "ह",
