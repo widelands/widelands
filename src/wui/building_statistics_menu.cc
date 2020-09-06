@@ -680,9 +680,10 @@ void BuildingStatisticsMenu::update() {
 					         style_.medium_color() :
 					         style_.high_color();
 
-					   /** TRANSLATORS: Percent in building statistics window, e.g. 85% */
-					   /** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
-					   const std::string perc_str = (boost::format(_("%i%%")) % percent).str();
+					   const std::string perc_str =
+						   /** TRANSLATORS: Percent in building statistics window, e.g. 85% */
+						   /** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
+						   (boost::format(_("%i%%")) % percent).str();
 					   set_labeltext(productivity_labels_[id], perc_str, color);
 				   }
 				   if (has_selection_ && id == current_building_type_) {
@@ -708,7 +709,8 @@ void BuildingStatisticsMenu::update() {
 					                              (total_stationed_soldiers < total_soldier_capacity) ?
 					                              style_.medium_color() :
 					                              style_.high_color();
-					   const std::string perc_str = (boost::format(_("%1%/%2%")) %
+					   const std::string perc_str =  // comment to fix codecheck false positive
+					   		(boost::format(_("%1%/%2%")) %
 					                                 total_stationed_soldiers % total_soldier_capacity)
 					                                   .str();
 					   set_labeltext(productivity_labels_[id], perc_str, color);
