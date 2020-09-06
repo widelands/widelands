@@ -19,6 +19,7 @@
 #include "wui/mapdetails.h"
 
 #include <algorithm>
+#include <memory>
 
 #include "base/i18n.h"
 #include "base/wexception.h"
@@ -191,8 +192,9 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 
 		// Render minimap
 		egbase_.cleanup_for_load();
-		map_loader_ = egbase_.mutable_map()->get_correct_loader(mapdata.filename);
-		if (map_loader_ && !map_loader_->load_map_for_render(egbase_)) {
+		std::unique_ptr<Widelands::MapLoader> ml(
+		   egbase_.mutable_map()->get_correct_loader(mapdata.filename));
+		if (ml.get() && 0 == ml->load_map_for_render(egbase_)) {
 			minimap_image_ = draw_minimap(
 			   egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
 			   MiniMapLayer::Terrain | MiniMapLayer::StartingPositions | MiniMapLayer::Owner);

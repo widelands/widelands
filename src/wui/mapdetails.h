@@ -57,7 +57,6 @@ private:
 
 	// Used to render map preview
 	std::unique_ptr<Texture> minimap_image_;
-	std::unique_ptr<Widelands::MapLoader> map_loader_;
 	Widelands::EditorGameBase egbase_;
 };
 

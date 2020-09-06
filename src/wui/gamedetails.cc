@@ -207,8 +207,8 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 		egbase_.cleanup_for_load();
 		std::string filename(gamedata.filename);
 		filename.append(kSavegameExtension);
-		map_loader_ = egbase_.mutable_map()->get_correct_loader(filename);
-		if (map_loader_ && !map_loader_->load_map_for_render(egbase_)) {
+		std::unique_ptr<Widelands::MapLoader> ml(egbase_.mutable_map()->get_correct_loader(filename));
+		if (ml.get() && 0 == ml->load_map_for_render(egbase_)) {
 			minimap_image_ = draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
 			                              MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
 			minimap_icon_.set_icon(minimap_image_.get());

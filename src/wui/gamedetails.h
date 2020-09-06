@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "graphic/image.h"
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_controller.h"
@@ -72,7 +71,6 @@ private:
 	UI::Box* button_box_;
 
 	// Used to render map preview
-	std::unique_ptr<Widelands::MapLoader> map_loader_;
 	Widelands::EditorGameBase egbase_;
 };
 
