@@ -193,9 +193,9 @@ bool FindNodeShore::accept(const EditorGameBase& egbase, const FCoords& coords) 
 	std::vector<FCoords> nodes_to_process = {coords};
 	// Set of nodes that that are swimmable & and achievable by swimming
 	// We use hashes here
-	std::set<uint32_t> accepted_nodes = {};
+	std::set<uint32_t> accepted_nodes;
 	// just not to check the same node twice
-	std::set<uint32_t> rejected_nodes = {};
+	std::set<uint32_t> rejected_nodes;
 
 	// Continue untill all nodes to process are processed, or we found sufficient number of nodes
 	while (!nodes_to_process.empty() && accepted_nodes.size() < min_fields) {

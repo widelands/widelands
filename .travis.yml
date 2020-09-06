@@ -80,17 +80,36 @@ jobs:
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
 
     ### Separate stage to speed things up in case the regression test suite fails
-    ### Building on the oldest and newest gcc
+    ### Building on an oldest and newest compiler version
     - stage: testsuite
     ### RELEASE BUILDS
-      name: "RELEASE: clang 5"
-      dist: trusty
+      name: "RELEASE: clang 6"
       compiler: clang
-      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
+      addons:
+        apt:
+          sources:
+            - sourceline: 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main'
+            - sourceline: 'deb-src http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - clang-6.0
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - zlib1g-dev
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=clang-6.0 CXX=clang++-6.0
+      services: xvfb
       before_script:
-        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
-        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
-        - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-6.0'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-6.0'
 
     - name: "RELEASE: gcc 10"
       dist: focal
@@ -115,14 +134,33 @@ jobs:
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=gcc-10 CXX=g++-10
       services: xvfb
     ### DEBUG BUILDS
-    - name: "DEBUG: clang 5"
-      dist: trusty
+    - name: "DEBUG: clang 6"
       compiler: clang
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=OFF BUILD_WEBSITE_TOOLS=ON
+      addons:
+        apt:
+          sources:
+            - sourceline: 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main'
+            - sourceline: 'deb-src http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - clang-6.0
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - zlib1g-dev
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON CC=clang-6.0 CXX=clang++-6.0
+      services: xvfb
       before_script:
-        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
-        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++'
-        - 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-6.0'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-6.0'
 
     - name: "DEBUG: gcc 10"
       dist: focal
