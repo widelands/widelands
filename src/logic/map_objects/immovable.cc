@@ -251,7 +251,9 @@ void ImmovableDescr::make_sure_default_program_is_there() {
 	}
 }
 
-void ImmovableDescr::add_collected_by(const World& world, const Tribes& tribes, const std::string& prodsite) {
+void ImmovableDescr::add_collected_by(const World& world,
+                                      const Tribes& tribes,
+                                      const std::string& prodsite) {
 	if (collected_by_.count(prodsite)) {
 		return;  // recursion break
 	}
@@ -259,9 +261,11 @@ void ImmovableDescr::add_collected_by(const World& world, const Tribes& tribes, 
 	for (const std::string& immo : became_from_) {
 		DescriptionIndex di = world.get_immovable_index(immo);
 		if (di != Widelands::INVALID_INDEX) {
-			const_cast<ImmovableDescr&>(*world.get_immovable_descr(di)).add_collected_by(world, tribes, prodsite);
+			const_cast<ImmovableDescr&>(*world.get_immovable_descr(di))
+			   .add_collected_by(world, tribes, prodsite);
 		} else {
-			tribes.get_mutable_immovable_descr(tribes.safe_immovable_index(immo))->add_collected_by(world, tribes, prodsite);
+			tribes.get_mutable_immovable_descr(tribes.safe_immovable_index(immo))
+			   ->add_collected_by(world, tribes, prodsite);
 		}
 	}
 }

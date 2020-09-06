@@ -344,7 +344,8 @@ static bool suited_for_targeting(const Widelands::EditorGameBase& egbase,
 				upcast(const Widelands::ProductionSite, ps, mo);
 				assert(ps);
 				assert(!ps->descr().workarea_info().empty());
-				if (map.calc_distance(ps->get_position(), i.get_position()) <= ps->descr().workarea_info().rbegin()->first) {
+				if (map.calc_distance(ps->get_position(), i.get_position()) <=
+				    ps->descr().workarea_info().rbegin()->first) {
 					return true;
 				}
 			}

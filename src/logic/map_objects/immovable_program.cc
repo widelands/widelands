@@ -173,14 +173,16 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 	immovable.program_step(game);
 }
 
-static std::vector<std::pair<std::string /* immo */, std::string /* becomes */>> immovable_relations_;
+static std::vector<std::pair<std::string /* immo */, std::string /* becomes */>>
+   immovable_relations_;
 void ImmovableProgram::postload_immovable_relations(const Tribes& tribes, const World& world) {
 	for (const auto& pair : immovable_relations_) {
 		DescriptionIndex di = world.get_immovable_index(pair.second);
 		if (di != Widelands::INVALID_INDEX) {
 			const_cast<ImmovableDescr&>(*world.get_immovable_descr(di)).add_became_from(pair.first);
 		} else {
-			tribes.get_mutable_immovable_descr(tribes.safe_immovable_index(pair.second))->add_became_from(pair.first);
+			tribes.get_mutable_immovable_descr(tribes.safe_immovable_index(pair.second))
+			   ->add_became_from(pair.first);
 		}
 	}
 	immovable_relations_.clear();
