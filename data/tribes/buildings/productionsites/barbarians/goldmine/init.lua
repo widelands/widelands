@@ -8,7 +8,6 @@ tribes:new_productionsite_type {
    descname = pgettext("barbarians_building", "Gold Mine"),
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "barbarians_goldmine_deep",
 
    buildcost = {
       log = 4,
@@ -17,6 +16,18 @@ tribes:new_productionsite_type {
    return_on_dismantle = {
       log = 2,
       granite = 1
+   },
+
+   enhancement = {
+      name = "barbarians_goldmine_deep",
+      enhancement_cost = {
+         log = 4,
+         granite = 2
+      },
+      enhancement_return_on_dismantle = {
+         log = 2,
+         granite = 1
+      }
    },
 
    animations = {

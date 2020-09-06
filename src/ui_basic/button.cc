@@ -312,7 +312,7 @@ void Button::think() {
 }
 
 bool Button::handle_key(bool down, SDL_Keysym code) {
-	if (down && (code.sym == SDLK_SPACE || code.sym == SDLK_RETURN || code.sym == SDLK_KP_ENTER)) {
+	if (down && code.sym == SDLK_SPACE) {
 		play_click();
 		sigclicked();
 		return true;

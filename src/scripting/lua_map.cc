@@ -33,6 +33,7 @@
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warelist.h"
+#include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
@@ -2345,8 +2346,8 @@ const PropertyType<LuaBuildingDescription> LuaBuildingDescription::Properties[] 
    PROP_RO(LuaBuildingDescription, is_mine),
    PROP_RO(LuaBuildingDescription, is_port),
    PROP_RO(LuaBuildingDescription, size),
-   PROP_RO(LuaBuildingDescription, returned_wares),
-   PROP_RO(LuaBuildingDescription, returned_wares_enhanced),
+   PROP_RO(LuaBuildingDescription, returns_on_dismantle),
+   PROP_RO(LuaBuildingDescription, enhancement_returns_on_dismantle),
    PROP_RO(LuaBuildingDescription, vision_range),
    PROP_RO(LuaBuildingDescription, workarea_radius),
    {nullptr, nullptr, nullptr},
@@ -2500,21 +2501,22 @@ int LuaBuildingDescription::get_size(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: returned_wares
+   .. attribute:: returns_on_dismantle
 
          (RO) a list of wares returned upon dismantling.
 */
-int LuaBuildingDescription::get_returned_wares(lua_State* L) {
-	return wares_or_workers_map_to_lua(L, get()->returned_wares(), Widelands::MapObjectType::WARE);
+int LuaBuildingDescription::get_returns_on_dismantle(lua_State* L) {
+	return wares_or_workers_map_to_lua(L, get()->returns_on_dismantle(), Widelands::MapObjectType::WARE);
 }
 
 /* RST
-   .. attribute:: returned_wares_enhanced
+   .. attribute:: enhancement_returns_on_dismantle
 
          (RO) a list of wares returned upon dismantling an enhanced building.
 */
-int LuaBuildingDescription::get_returned_wares_enhanced(lua_State* L) {
-	return wares_or_workers_map_to_lua(L, get()->returned_wares_enhanced(), Widelands::MapObjectType::WARE);
+int LuaBuildingDescription::get_enhancement_returns_on_dismantle(lua_State* L) {
+	return wares_or_workers_map_to_lua(
+	   L, get()->enhancement_returns_on_dismantle(), Widelands::MapObjectType::WARE);
 }
 
 /* RST
@@ -2609,9 +2611,17 @@ const MethodType<LuaProductionSiteDescription> LuaProductionSiteDescription::Met
 };
 const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::Properties[] = {
    PROP_RO(LuaProductionSiteDescription, inputs),
+   PROP_RO(LuaProductionSiteDescription, collected_bobs),
+   PROP_RO(LuaProductionSiteDescription, collected_immovables),
+   PROP_RO(LuaProductionSiteDescription, collected_resources),
+   PROP_RO(LuaProductionSiteDescription, created_bobs),
+   PROP_RO(LuaProductionSiteDescription, created_immovables),
+   PROP_RO(LuaProductionSiteDescription, created_resources),
    PROP_RO(LuaProductionSiteDescription, output_ware_types),
    PROP_RO(LuaProductionSiteDescription, output_worker_types),
    PROP_RO(LuaProductionSiteDescription, production_programs),
+   PROP_RO(LuaProductionSiteDescription, supported_productionsites),
+   PROP_RO(LuaProductionSiteDescription, supported_by_productionsites),
    PROP_RO(LuaProductionSiteDescription, working_positions),
    {nullptr, nullptr, nullptr},
 };
@@ -2625,7 +2635,7 @@ const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::P
 /* RST
    .. attribute:: inputs
 
-      (RO) An array with :class:`LuaWareDescription` containing the wares that
+      (RO) An array with :class:`WareDescription` containing the wares that
       the productionsite needs for its production.
 */
 int LuaProductionSiteDescription::get_inputs(lua_State* L) {
@@ -2636,6 +2646,165 @@ int LuaProductionSiteDescription::get_inputs(lua_State* L) {
 		const Widelands::WareDescr* descr = get_egbase(L).tribes().get_ware_descr(input_ware.first);
 		to_lua<LuaWareDescription>(L, new LuaWareDescription(descr));
 		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: collected_bobs
+
+      (RO) An array with :class:`MapObjectDescription` containing the bobs that
+      this building will collect from the map.
+      For example, a Hunters's Hut will hunt some critters for meat.
+
+      **Note:** At the moment, only critters are supported here, because we don't
+      have any other use case.
+*/
+int LuaProductionSiteDescription::get_collected_bobs(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (const std::string& critter_name : get()->collected_bobs()) {
+		lua_pushint32(L, index++);
+		const Widelands::CritterDescr* critter = egbase.world().get_critter_descr(critter_name);
+		assert(critter != nullptr);
+		to_lua<LuaMapObjectDescription>(L, new LuaMapObjectDescription(critter));
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: collected_immovables
+
+      (RO) An array with :class:`ImmovableDescription` containing the immovables that
+      this building will collect from the map.
+      For example, a Woodcutters's House will cut down trees to obtain logs, and the
+      Fruit Collector's House will harvest fruit from berry bushes.
+*/
+int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (const std::string& immovable_name : get()->collected_immovables()) {
+		lua_pushint32(L, index++);
+		const Widelands::ImmovableDescr* immovable =
+		   egbase.world().get_immovable_descr(egbase.world().get_immovable_index(immovable_name));
+		if (immovable == nullptr) {
+			immovable =
+			   egbase.tribes().get_immovable_descr(egbase.tribes().immovable_index(immovable_name));
+		}
+		assert(immovable != nullptr);
+		to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(immovable));
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: collected_resources
+
+      (RO) An array with :class:`ResourceDescription` containing the resources that
+      this building will collect from the map.
+      For example, a Fishers's House will collect the "fish" resource.
+*/
+int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (const std::string& resource_name : get()->collected_resources()) {
+		lua_pushint32(L, index++);
+		const Widelands::ResourceDescription* resource =
+		   egbase.world().get_resource(egbase.world().resource_index(resource_name.c_str()));
+		assert(resource != nullptr);
+		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: created_immovables
+
+      (RO) An array with :class:`ImmovableDescription` containing the immovables that
+      this building will place on the map.
+      For example, a Foresters's House will create trees, and the Berry Farm some berry bushes.
+*/
+int LuaProductionSiteDescription::get_created_immovables(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (const std::string& immovable_name : get()->created_immovables()) {
+		lua_pushint32(L, index++);
+		const Widelands::ImmovableDescr* immovable =
+		   egbase.world().get_immovable_descr(egbase.world().get_immovable_index(immovable_name));
+		if (immovable == nullptr) {
+			immovable =
+			   egbase.tribes().get_immovable_descr(egbase.tribes().immovable_index(immovable_name));
+		}
+		assert(immovable != nullptr);
+		to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(immovable));
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: created_bobs
+
+      (RO) An array with :class:`MapObjectDescription` containing the bobs that
+      this building will place on the map.
+      For example, a Gamekeepers's Hut will create some critters, and the Shipyard a Ship.
+*/
+int LuaProductionSiteDescription::get_created_bobs(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (const std::string& bobname : get()->created_bobs()) {
+		lua_pushint32(L, index++);
+		const Widelands::CritterDescr* critter = egbase.world().get_critter_descr(bobname);
+		if (critter != nullptr) {
+			to_lua<LuaMapObjectDescription>(
+			   L, new LuaMapObjectDescription(dynamic_cast<const Widelands::MapObjectDescr*>(critter)));
+		} else {
+			const Widelands::ShipDescr* ship =
+			   egbase.tribes().get_ship_descr(egbase.tribes().ship_index(bobname));
+			if (ship != nullptr) {
+				to_lua<LuaMapObjectDescription>(
+				   L, new LuaMapObjectDescription(dynamic_cast<const Widelands::MapObjectDescr*>(ship)));
+			} else {
+				const Widelands::WorkerDescr* worker =
+				   egbase.tribes().get_worker_descr(egbase.tribes().worker_index(bobname));
+				if (worker != nullptr) {
+					to_lua<LuaWorkerDescription>(L, new LuaWorkerDescription(worker));
+				} else {
+					report_error(L, "Unknown bob type %s", bobname.c_str());
+				}
+			}
+		}
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: created_resources
+
+      (RO) An array with :class:`ResourceDescription` containing the resources that
+      this building will place on the map.
+      For example, a Fishbreeder's House will create the "fish" resource.
+*/
+int LuaProductionSiteDescription::get_created_resources(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (const std::string& resource_name : get()->created_resources()) {
+		lua_pushint32(L, index++);
+		const Widelands::ResourceDescription* resource =
+		   egbase.world().get_resource(egbase.world().resource_index(resource_name.c_str()));
+		assert(resource != nullptr);
+		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
+		lua_rawset(L, -3);
 	}
 	return 1;
 }
@@ -2689,6 +2858,50 @@ int LuaProductionSiteDescription::get_production_programs(lua_State* L) {
 	for (const auto& program : get()->programs()) {
 		lua_pushint32(L, index++);
 		lua_pushstring(L, program.first);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: supported_productionsites
+
+      (RO) An array with :class:`ProductionSiteDescription` containing the buildings that
+      will collect the bobs, immovables or resources from the map that this building will place on
+      it. For example, a Forester's House will support a Woodcutter's House, because it places trees
+      on the map.
+*/
+int LuaProductionSiteDescription::get_supported_productionsites(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	const Widelands::Tribes& tribes = get_egbase(L).tribes();
+	for (const auto& site : get()->supported_productionsites()) {
+		lua_pushint32(L, index++);
+		const Widelands::ProductionSiteDescr* descr = dynamic_cast<const Widelands::ProductionSiteDescr*>(
+		   tribes.get_building_descr(tribes.safe_building_index(site)));
+		to_lua<LuaProductionSiteDescription>(L, new LuaProductionSiteDescription(descr));
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: supported_by_productionsites
+
+      (RO) An array with :class:`ProductionSiteDescription` containing the buildings that
+      place bobs, immovables or resources on the map that this building will collect.
+      For example, a Woodcutter's House is supported by a Forester's House, because it needs trees
+      to fell.
+*/
+int LuaProductionSiteDescription::get_supported_by_productionsites(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	const Widelands::Tribes& tribes = get_egbase(L).tribes();
+	for (const auto& site : get()->supported_by_productionsites()) {
+		lua_pushint32(L, index++);
+		const Widelands::ProductionSiteDescr* descr = dynamic_cast<const Widelands::ProductionSiteDescr*>(
+		   tribes.get_building_descr(tribes.safe_building_index(site)));
+		to_lua<LuaProductionSiteDescription>(L, new LuaProductionSiteDescription(descr));
 		lua_settable(L, -3);
 	}
 	return 1;
