@@ -225,7 +225,7 @@ SDL_GLContext initialize(
 	};
 
 	// glGetString returned an error for the shading language
-	if (glGetString(GL_SHADING_LANGUAGE_VERSION) == 0) {
+	if (glGetString(GL_SHADING_LANGUAGE_VERSION) == nullptr) {
 		handle_unreadable_opengl_shading_language();
 	}
 

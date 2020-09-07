@@ -34,10 +34,11 @@ enum class LogType {
 	kError     // fatal errors
 };
 
-constexpr uint32_t kNoTimestamp = std::numeric_limits<uint32_t>::max();
+constexpr uint32_t kNoTimestamp = 0;
 
 // Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
-// If `gametime` is not `kNoTimestamp`, a timestamp will be prepended to the output.
+// If `gametime` is not 0, a timestamp for the gametime will be prepended to the output;
+// otherwise, the real time will be used for the timestamp.
 void log_to_stdout(LogType, uint32_t gametime, const char*, ...) PRINTF_FORMAT(3, 4);
 #define log_info_time(time, ...) log_to_stdout(LogType::kInfo, time, __VA_ARGS__)
 #define log_dbg_time(time, ...) log_to_stdout(LogType::kDebug, time, __VA_ARGS__)
