@@ -3,7 +3,7 @@
 """Checks that cstdlib is included for some of its functions that we use
 commonly.
 
-Older Macs need this.
+Older Macs that build with libc++ instead of libstc++ need this.
 """
 
 import re
