@@ -116,8 +116,8 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
      expedition_ship_(kNoShip) {
 
 	// Subscribe to NoteFieldPossession.
-	field_possession_subscriber_ =
-	   Notifications::subscribe<Widelands::NoteFieldPossession>([this](const Widelands::NoteFieldPossession& note) {
+	field_possession_subscriber_ = Notifications::subscribe<Widelands::NoteFieldPossession>(
+	   [this](const Widelands::NoteFieldPossession& note) {
 		   if (note.player != player_) {
 			   return;
 		   }
@@ -127,8 +127,8 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
 	   });
 
 	// Subscribe to NoteImmovables.
-	immovable_subscriber_ =
-	   Notifications::subscribe<Widelands::NoteImmovable>([this](const Widelands::NoteImmovable& note) {
+	immovable_subscriber_ = Notifications::subscribe<Widelands::NoteImmovable>(
+	   [this](const Widelands::NoteImmovable& note) {
 		   if (player_ == nullptr) {
 			   return;
 		   }
@@ -143,14 +143,15 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
 	   });
 
 	// Subscribe to ProductionSiteOutOfResources.
-	outofresource_subscriber_ = Notifications::subscribe<Widelands::NoteProductionSiteOutOfResources>(
-	   [this](const Widelands::NoteProductionSiteOutOfResources& note) {
-		   if (note.ps->owner().player_number() != player_->player_number()) {
-			   return;
-		   }
+	outofresource_subscriber_ =
+	   Notifications::subscribe<Widelands::NoteProductionSiteOutOfResources>(
+	      [this](const Widelands::NoteProductionSiteOutOfResources& note) {
+		      if (note.ps->owner().player_number() != player_->player_number()) {
+			      return;
+		      }
 
-		   out_of_resources_site(*note.ps);
-	   });
+		      out_of_resources_site(*note.ps);
+	      });
 
 	// Subscribe to TrainingSiteSoldierTrained.
 	soldiertrained_subscriber_ = Notifications::subscribe<Widelands::NoteTrainingSiteSoldierTrained>(
@@ -163,45 +164,48 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
 	   });
 
 	// Subscribe to ShipNotes.
-	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
-		// in a short time between start and late_initialization the player
-		// can get notes that can not be processed.
-		// It seems that this causes no problem, at least no substantial
-		if (player_ == nullptr) {
-			return;
-		}
-		if (note.ship->get_owner()->player_number() != player_->player_number()) {
-			return;
-		}
+	shipnotes_subscriber_ =
+	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
+		   // in a short time between start and late_initialization the player
+		   // can get notes that can not be processed.
+		   // It seems that this causes no problem, at least no substantial
+		   if (player_ == nullptr) {
+			   return;
+		   }
+		   if (note.ship->get_owner()->player_number() != player_->player_number()) {
+			   return;
+		   }
 
-		switch (note.action) {
+		   switch (note.action) {
 
-		case Widelands::NoteShip::Action::kGained:
-			gain_ship(*note.ship, NewShip::kBuilt);
-			break;
+		   case Widelands::NoteShip::Action::kGained:
+			   gain_ship(*note.ship, NewShip::kBuilt);
+			   break;
 
-		case Widelands::NoteShip::Action::kLost:
-			for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
-				if (i->ship == note.ship) {
-					allships.erase(i);
-					break;
-				}
-			}
-			break;
+		   case Widelands::NoteShip::Action::kLost:
+			   for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end();
+			        ++i) {
+				   if (i->ship == note.ship) {
+					   allships.erase(i);
+					   break;
+				   }
+			   }
+			   break;
 
-		case Widelands::NoteShip::Action::kWaitingForCommand:
-			for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
-				if (i->ship == note.ship) {
-					i->waiting_for_command_ = true;
-					break;
-				}
-			}
-			break;
-		default:
-			// Do nothing
-			break;
-		}
-	});
+		   case Widelands::NoteShip::Action::kWaitingForCommand:
+			   for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end();
+			        ++i) {
+				   if (i->ship == note.ship) {
+					   i->waiting_for_command_ = true;
+					   break;
+				   }
+			   }
+			   break;
+		   default:
+			   // Do nothing
+			   break;
+		   }
+	   });
 }
 
 DefaultAI::~DefaultAI() {
@@ -533,7 +537,8 @@ void DefaultAI::late_initialization() {
 	}
 
 	wares.resize(game().tribes().nrwares());
-	for (Widelands::DescriptionIndex i = 0; i < static_cast<Widelands::DescriptionIndex>(game().tribes().nrwares()); ++i) {
+	for (Widelands::DescriptionIndex i = 0;
+	     i < static_cast<Widelands::DescriptionIndex>(game().tribes().nrwares()); ++i) {
 		wares.at(i).preciousness =
 		   game().tribes().get_ware_descr(i)->ai_hints().preciousness(tribe_->name());
 	}
@@ -605,9 +610,11 @@ void DefaultAI::late_initialization() {
 		persistent_data->remaining_basic_buildings.clear();
 	}
 
-	for (Widelands::DescriptionIndex building_index = 0; building_index < nr_buildings; ++building_index) {
+	for (Widelands::DescriptionIndex building_index = 0; building_index < nr_buildings;
+	     ++building_index) {
 		const Widelands::BuildingDescr& bld = *tribe_->get_building_descr(building_index);
-		if (!tribe_->has_building(building_index) && bld.type() != Widelands::MapObjectType::MILITARYSITE) {
+		if (!tribe_->has_building(building_index) &&
+		    bld.type() != Widelands::MapObjectType::MILITARYSITE) {
 			continue;
 		}
 
@@ -689,7 +696,8 @@ void DefaultAI::late_initialization() {
 
 		// Read all interesting data from ware producing buildings
 		if (bld.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
-			const Widelands::ProductionSiteDescr& prod = dynamic_cast<const Widelands::ProductionSiteDescr&>(bld);
+			const Widelands::ProductionSiteDescr& prod =
+			   dynamic_cast<const Widelands::ProductionSiteDescr&>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::Type::kMine :
 			                             BuildingObserver::Type::kProductionsite;
 			for (const auto& temp_input : prod.input_wares()) {
@@ -765,10 +773,12 @@ void DefaultAI::late_initialization() {
 			// now we find out if the upgrade of the building is a full substitution
 			// (produces all wares as current one)
 			const Widelands::DescriptionIndex enhancement = bld.enhancement();
-			if (enhancement != Widelands::INVALID_INDEX && bo.type == BuildingObserver::Type::kProductionsite) {
+			if (enhancement != Widelands::INVALID_INDEX &&
+			    bo.type == BuildingObserver::Type::kProductionsite) {
 				std::unordered_set<Widelands::DescriptionIndex> enh_outputs;
 				const Widelands::ProductionSiteDescr& enh_prod =
-				   dynamic_cast<const Widelands::ProductionSiteDescr&>(*tribe_->get_building_descr(enhancement));
+				   dynamic_cast<const Widelands::ProductionSiteDescr&>(
+				      *tribe_->get_building_descr(enhancement));
 
 				// collecting wares that are produced in enhanced building
 				for (const Widelands::DescriptionIndex& ware : enh_prod.output_ware_types()) {
@@ -849,7 +859,8 @@ void DefaultAI::late_initialization() {
 		// with critical construction wares
 		if (bld.type() == Widelands::MapObjectType::MILITARYSITE) {
 			bo.type = BuildingObserver::Type::kMilitarysite;
-			const Widelands::MilitarySiteDescr& milit = dynamic_cast<const Widelands::MilitarySiteDescr&>(bld);
+			const Widelands::MilitarySiteDescr& milit =
+			   dynamic_cast<const Widelands::MilitarySiteDescr&>(bld);
 			for (const auto& temp_buildcosts : milit.buildcost()) {
 				// Below are non-critical wares (wares produced without inputs)
 				if (wares.at(temp_buildcosts.first).refined_build_material) {
@@ -868,7 +879,8 @@ void DefaultAI::late_initialization() {
 			bo.type = BuildingObserver::Type::kTrainingsite;
 			bo.max_trainingsites_proportion = bh.trainingsites_max_percent();
 			assert(bo.max_trainingsites_proportion <= 100);
-			const Widelands::TrainingSiteDescr& train = dynamic_cast<const Widelands::TrainingSiteDescr&>(bld);
+			const Widelands::TrainingSiteDescr& train =
+			   dynamic_cast<const Widelands::TrainingSiteDescr&>(bld);
 			for (const auto& temp_input : train.input_wares()) {
 				bo.inputs.push_back(temp_input.first);
 
@@ -1013,7 +1025,8 @@ void DefaultAI::late_initialization() {
 			// there are too many bobs on the map so we investigate
 			// only bobs on water
 			if (f.field->nodecaps() & Widelands::MOVECAPS_SWIM) {
-				for (Widelands::Bob* bob = f.field->get_first_bob(); bob; bob = bob->get_next_on_field()) {
+				for (Widelands::Bob* bob = f.field->get_first_bob(); bob;
+				     bob = bob->get_next_on_field()) {
 					if (upcast(Widelands::Ship, ship, bob)) {
 						if (ship->get_owner() == player_ && !found_ships.count(ship)) {
 							found_ships.insert(ship);
@@ -1052,7 +1065,8 @@ void DefaultAI::late_initialization() {
 		if (ps_obs.bo->is(BuildingAttribute::kSpaceConsumer) &&
 		    !ps_obs.bo->is(BuildingAttribute::kRanger)) {
 			Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-			   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(ps_obs.site->get_position()), 4));
+			   map,
+			   Widelands::Area<Widelands::FCoords>(map.get_fcoords(ps_obs.site->get_position()), 4));
 			do {
 				blocked_fields.add(mr.location(), game().get_gametime() + 20 * 60 * 1000);
 			} while (mr.advance(map));
@@ -1064,7 +1078,8 @@ void DefaultAI::late_initialization() {
 	// refreshed from
 	// time to time
 	for (const Widelands::Coords& c : map.get_port_spaces()) {
-		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(c), 3));
+		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+		   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(c), 3));
 		do {
 			const uint32_t hash = mr.location().hash();
 			if (!ports_vicinity.count(hash)) {
@@ -1108,8 +1123,8 @@ void DefaultAI::late_initialization() {
 
 	// Sometimes there can be a ship in expedition, but expedition start time is not given
 	// e.g. human player played this player before
-	if (expedition_ship_ != kNoShip &&
-	    persistent_data->expedition_start_time == Widelands::Player::AiPersistentState::kNoExpedition) {
+	if (expedition_ship_ != kNoShip && persistent_data->expedition_start_time ==
+	                                      Widelands::Player::AiPersistentState::kNoExpedition) {
 		// Current gametime is better then 'Player::AiPersistentState::kNoExpedition'
 		persistent_data->expedition_start_time = gametime;
 	}
@@ -1173,7 +1188,8 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 
 			update_buildable_field(bf);
 			if (non_small_needed > 0) {
-				int32_t const maxsize = player_->get_buildcaps(bf.coords) & Widelands::BUILDCAPS_SIZEMASK;
+				int32_t const maxsize =
+				   player_->get_buildcaps(bf.coords) & Widelands::BUILDCAPS_SIZEMASK;
 				if (maxsize > 1) {
 					--non_small_needed;
 				}
@@ -1383,11 +1399,12 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	}
 
 	field.unowned_land_nearby = map.find_fields(
-	   game(), Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area), nullptr, find_unowned_walkable);
+	   game(), Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area), nullptr,
+	   find_unowned_walkable);
 
-	field.enemy_owned_land_nearby =
-	   map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area), nullptr,
-	                   find_enemy_owned_walkable);
+	field.enemy_owned_land_nearby = map.find_fields(
+	   game(), Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area), nullptr,
+	   find_enemy_owned_walkable);
 
 	field.nearest_buildable_spot_nearby = std::numeric_limits<uint16_t>::max();
 	field.unowned_buildable_spots_nearby = 0;
@@ -1399,12 +1416,12 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		std::vector<Widelands::Coords> found_buildable_fields;
 
 		// first looking for unowned buildable spots
-		field.unowned_buildable_spots_nearby =
-		   map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, kBuildableSpotsCheckArea),
-		                   &found_buildable_fields, find_unowned_buildable);
-		field.unowned_buildable_spots_nearby +=
-		   map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, kBuildableSpotsCheckArea),
-		                   &found_buildable_fields, find_enemy_owned_walkable);
+		field.unowned_buildable_spots_nearby = map.find_fields(
+		   game(), Widelands::Area<Widelands::FCoords>(field.coords, kBuildableSpotsCheckArea),
+		   &found_buildable_fields, find_unowned_buildable);
+		field.unowned_buildable_spots_nearby += map.find_fields(
+		   game(), Widelands::Area<Widelands::FCoords>(field.coords, kBuildableSpotsCheckArea),
+		   &found_buildable_fields, find_enemy_owned_walkable);
 		// Now iterate over fields to collect statistics
 		for (auto& coords : found_buildable_fields) {
 			// We are not interested in blocked fields
@@ -1419,7 +1436,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		}
 
 		// now looking for unowned_portspace_vicinity_nearby
-		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(map, Widelands::Area<Widelands::FCoords>(field.coords, kBuildableSpotsCheckArea));
+		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+		   map, Widelands::Area<Widelands::FCoords>(field.coords, kBuildableSpotsCheckArea));
 		do {
 
 			if (mr.location().field->get_owned_by() == 0 &&
@@ -1430,8 +1448,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	}
 
 	// Is this near the border? Get rid of fields owned by ally
-	if (map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, 3), nullptr, find_ally) ||
-	    map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, 3), nullptr, find_unowned_walkable)) {
+	if (map.find_fields(
+	       game(), Widelands::Area<Widelands::FCoords>(field.coords, 3), nullptr, find_ally) ||
+	    map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, 3), nullptr,
+	                    find_unowned_walkable)) {
 		field.near_border = true;
 	} else {
 		field.near_border = false;
@@ -1449,11 +1469,12 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// testing mines
 	if (resource_count_now) {
-		uint32_t close_mines = map.find_fields(
-		   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea), nullptr, find_unowned_mines_pots);
-		uint32_t distant_mines =
-		   map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, kDistantResourcesArea), nullptr,
-		                   find_unowned_mines_pots);
+		uint32_t close_mines =
+		   map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
+		                   nullptr, find_unowned_mines_pots);
+		uint32_t distant_mines = map.find_fields(
+		   game(), Widelands::Area<Widelands::FCoords>(field.coords, kDistantResourcesArea), nullptr,
+		   find_unowned_mines_pots);
 		distant_mines = distant_mines - close_mines;
 		field.unowned_mines_spots_nearby = 4 * close_mines + distant_mines / 2;
 		if (distant_mines > 0) {
@@ -1464,9 +1485,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		    // mines now...
 		    mines_per_type[iron_resource_id].total_count() <= 1) {
 			// counting iron mines, if we have less than two iron mines
-			field.unowned_iron_mines_nearby =
-			   map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, kDistantResourcesArea), nullptr,
-			                   find_unowned_iron_mines);
+			field.unowned_iron_mines_nearby = map.find_fields(
+			   game(), Widelands::Area<Widelands::FCoords>(field.coords, kDistantResourcesArea),
+			   nullptr, find_unowned_iron_mines);
 		} else {
 			field.unowned_iron_mines_nearby = 0;
 		}
@@ -1507,15 +1528,18 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// This is to calculate capacity that will be lost if something is
 	// built here
 	field.max_buildcap_nearby = 0;
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(map, Widelands::Area<Widelands::FCoords>(field.coords, 1));
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+	   map, Widelands::Area<Widelands::FCoords>(field.coords, 1));
 	do {
 		if ((player_->get_buildcaps(mr.location()) & Widelands::BUILDCAPS_SIZEMASK) >
 		    field.max_buildcap_nearby) {
-			field.max_buildcap_nearby = player_->get_buildcaps(mr.location()) & Widelands::BUILDCAPS_SIZEMASK;
+			field.max_buildcap_nearby =
+			   player_->get_buildcaps(mr.location()) & Widelands::BUILDCAPS_SIZEMASK;
 		}
 	} while (mr.advance(map));
 
-	assert((player_->get_buildcaps(field.coords) & Widelands::BUILDCAPS_SIZEMASK) <= field.max_buildcap_nearby);
+	assert((player_->get_buildcaps(field.coords) & Widelands::BUILDCAPS_SIZEMASK) <=
+	       field.max_buildcap_nearby);
 
 	// Testing surface water (once only)
 	// TODO(GunChleoc): We can change the terrain by scripting, so we should work with notifications
@@ -1528,18 +1552,21 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 		FindNodeWater find_water(game().world());
 		field.water_nearby =
-		   map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea), nullptr, find_water);
+		   map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
+		                   nullptr, find_water);
 
 		if (field.water_nearby > 0) {
 			FindNodeOpenWater find_open_water(game().world());
 			field.open_water_nearby = map.find_fields(
-			   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea), nullptr, find_open_water);
+			   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea), nullptr,
+			   find_open_water);
 		}
 
 		if (resource_necessity_water_needed_) {  // for atlanteans
 			field.distant_water =
 			   map.find_fields(
-			      game(), Widelands::Area<Widelands::FCoords>(field.coords, kDistantResourcesArea), nullptr, find_water) -
+			      game(), Widelands::Area<Widelands::FCoords>(field.coords, kDistantResourcesArea),
+			      nullptr, find_water) -
 			   field.water_nearby;
 			assert(field.open_water_nearby <= field.water_nearby);
 		}
@@ -1550,7 +1577,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.preferred = false;
 	if (Widelands::BaseImmovable const* const imm = fse.field->get_immovable()) {
 		if (dynamic_cast<Widelands::Flag const*>(imm) ||
-		    (dynamic_cast<Widelands::Road const*>(imm) && (fse.field->nodecaps() & Widelands::BUILDCAPS_FLAG))) {
+		    (dynamic_cast<Widelands::Road const*>(imm) &&
+		     (fse.field->nodecaps() & Widelands::BUILDCAPS_FLAG))) {
 			field.preferred = true;
 		}
 	}
@@ -1561,7 +1589,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		Widelands::CheckStepWalkOn fisher_cstep(Widelands::MOVECAPS_WALK, true);
 		static std::vector<Widelands::Coords> fish_fields_list;  // pity this contains duplicates
 		fish_fields_list.clear();
-		map.find_reachable_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
+		map.find_reachable_fields(game(),
+		                          Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
 		                          &fish_fields_list, fisher_cstep,
 		                          Widelands::FindNodeResource(world.resource_index("resource_fish")));
 
@@ -1579,14 +1608,18 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// Counting resources that do not change fast
 	if (resource_count_now) {
 		// Counting fields with critters (game)
-		field.critters_nearby = map.find_bobs(
-		   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea), nullptr, Widelands::FindBobCritter());
+		field.critters_nearby =
+		   map.find_bobs(game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
+		                 nullptr, Widelands::FindBobCritter());
 
 		// Rocks are not renewable, we will count them only if previous state is nonzero
 		if (field.rocks_nearby > 0) {
 			field.rocks_nearby = map.find_immovables(
-			   game(), Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
-			   Widelands::FindImmovableAttribute(Widelands::MapObjectDescr::get_attribute_id("rocks")));
+			   game(),
+			   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
+			   nullptr,
+			   Widelands::FindImmovableAttribute(
+			      Widelands::MapObjectDescr::get_attribute_id("rocks")));
 
 			// adding 5 if rocks found
 			field.rocks_nearby = (field.rocks_nearby > 0) ? field.rocks_nearby + 2 : 0;
@@ -1600,16 +1633,18 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 		// Counting trees nearby
 		int32_t const tree_attr = Widelands::MapObjectDescr::get_attribute_id("tree");
-		field.trees_nearby =
-		   map.find_immovables(game(), Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
-		                       nullptr, Widelands::FindImmovableAttribute(tree_attr));
+		field.trees_nearby = map.find_immovables(
+		   game(),
+		   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
+		   nullptr, Widelands::FindImmovableAttribute(tree_attr));
 
 		// Counting bushes nearby. Only the Frisians have this, so we need to create the attribute if
 		// it doesn't exist.
 		int32_t const bush_attr = Widelands::MapObjectDescr::get_attribute_id("ripe_bush", true);
-		field.bushes_nearby =
-		   map.find_immovables(game(), Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
-		                       nullptr, Widelands::FindImmovableAttribute(bush_attr));
+		field.bushes_nearby = map.find_immovables(
+		   game(),
+		   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
+		   nullptr, Widelands::FindImmovableAttribute(bush_attr));
 	}
 
 	// resetting some values
@@ -1650,7 +1685,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	immovables.reserve(50);
 	immovables.clear();
 	// Search in a radius of range
-	map.find_immovables(game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2), &immovables);
+	map.find_immovables(
+	   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2), &immovables);
 
 	// function seems to return duplicates, so we will use serial numbers to filter them out
 	static std::set<uint32_t> unique_serials;
@@ -1684,7 +1720,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// Now testing military aspects
 	immovables.clear();
-	map.find_immovables(game(), Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area), &immovables);
+	map.find_immovables(game(),
+	                    Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area),
+	                    &immovables);
 
 	// We are interested in unconnected immovables, but we must be also close to connected ones
 	static bool any_connected_imm = false;
@@ -2052,7 +2090,8 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 
 	if (Widelands::BaseImmovable const* const imm = fse.field->get_immovable()) {
 		if (dynamic_cast<Widelands::Flag const*>(imm) ||
-		    (dynamic_cast<Widelands::Road const*>(imm) && (fse.field->nodecaps() & Widelands::BUILDCAPS_FLAG))) {
+		    (dynamic_cast<Widelands::Road const*>(imm) &&
+		     (fse.field->nodecaps() & Widelands::BUILDCAPS_FLAG))) {
 			field.preferred = true;
 		}
 	}
@@ -2082,7 +2121,8 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 	if (field.same_mine_fields_nearby == 0) {
 		FindNodeMineable find_mines_spots_nearby(game(), field.coords.field->get_resources());
 		field.same_mine_fields_nearby =
-		   map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, 4), nullptr, find_mines_spots_nearby);
+		   map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, 4), nullptr,
+		                   find_mines_spots_nearby);
 	}
 }
 
@@ -3283,8 +3323,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			prio += bf->preferred ? 5 : 0;
 
 			// don't waste good land for small huts
-			const bool space_stress =
-			   (spots_avail.at(Widelands::BUILDCAPS_MEDIUM) < 5 || spots_avail.at(Widelands::BUILDCAPS_BIG) < 5);
+			const bool space_stress = (spots_avail.at(Widelands::BUILDCAPS_MEDIUM) < 5 ||
+			                           spots_avail.at(Widelands::BUILDCAPS_BIG) < 5);
 
 			if (space_stress && bo.type == BuildingObserver::Type::kMilitarysite) {
 				prio -= (bf->max_buildcap_nearby - bo.desc->get_size()) * 10;
@@ -3363,7 +3403,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 					int32_t prio = 0;
-					Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(map, Widelands::Area<Widelands::FCoords>(mf->coords, 2));
+					Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+					   map, Widelands::Area<Widelands::FCoords>(mf->coords, 2));
 					do {
 						if (bo.mines == mr.location().field->get_resources()) {
 							prio += mr.location().field->get_resources_amount();
@@ -3458,7 +3499,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			block_area = 6;
 		}
 
-		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(proposed_coords), block_area));
+		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+		   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(proposed_coords), block_area));
 		do {
 			blocked_fields.add(mr.location(), game().get_gametime() + block_time);
 		} while (mr.advance(map));
@@ -3511,7 +3553,8 @@ void DefaultAI::check_flag_distances(const uint32_t gametime) {
 			// has to be checked Now going over roads leading from this flag
 			const uint16_t current_flag_distance = flag_warehouse_distance.get_distance(
 			   remaining_flags.front()->get_position().hash(), gametime, &tmp_wh);
-			for (uint8_t i = Widelands::WalkingDir::FIRST_DIRECTION; i <= Widelands::WalkingDir::LAST_DIRECTION; ++i) {
+			for (uint8_t i = Widelands::WalkingDir::FIRST_DIRECTION;
+			     i <= Widelands::WalkingDir::LAST_DIRECTION; ++i) {
 				Widelands::Road* const road = remaining_flags.front()->get_road(i);
 
 				if (!road) {
@@ -3727,7 +3770,8 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		while (new_road_found && full_road.back()->nr_of_roads() <= 2 &&
 		       full_road.back()->get_building() == nullptr) {
 			new_road_found = false;
-			for (uint8_t i = Widelands::WalkingDir::FIRST_DIRECTION; i <= Widelands::WalkingDir::LAST_DIRECTION; ++i) {
+			for (uint8_t i = Widelands::WalkingDir::FIRST_DIRECTION;
+			     i <= Widelands::WalkingDir::LAST_DIRECTION; ++i) {
 				Widelands::Road* const near_road = full_road.back()->get_road(i);
 
 				if (!near_road) {
@@ -3822,7 +3866,8 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		NearFlag& nf = reachableflags.back();
 
 		// Now go over roads going from this flag
-		for (uint8_t i = Widelands::WalkingDir::FIRST_DIRECTION; i <= Widelands::WalkingDir::LAST_DIRECTION; ++i) {
+		for (uint8_t i = Widelands::WalkingDir::FIRST_DIRECTION;
+		     i <= Widelands::WalkingDir::LAST_DIRECTION; ++i) {
 			Widelands::Road* const near_road = nf.flag->get_road(i);
 
 			if (!near_road) {
@@ -3874,7 +3919,9 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 // - the candidate flag does not belong to the same economy, so no road connection exists
 // - they are from same economy, but are connected beyond range of checkradius, so actual length of
 // connection is not known
-bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag, uint16_t checkradius, uint32_t gametime) {
+bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
+                                     uint16_t checkradius,
+                                     uint32_t gametime) {
 
 	// Increasing the failed_connection_tries counter
 	// At the same time it indicates a time an economy is without a warehouse
@@ -3887,7 +3934,8 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag, uint16_t check
 
 	// this should not happen, but if the economy has a warehouse and a dismantle
 	// grace time set, we must 'zero' the dismantle grace time
-	if (!flag.get_economy(Widelands::wwWORKER)->warehouses().empty() && eco->dismantle_grace_time != kNever) {
+	if (!flag.get_economy(Widelands::wwWORKER)->warehouses().empty() &&
+	    eco->dismantle_grace_time != kNever) {
 		eco->dismantle_grace_time = kNever;
 	}
 
@@ -3974,9 +4022,10 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag, uint16_t check
 
 	// get all flags within radius
 	std::vector<Widelands::Coords> reachable;
-	map.find_reachable_fields(game(),
-	                          Widelands::Area<Widelands::FCoords>(map.get_fcoords(flag.get_position()), checkradius),
-	                          &reachable, check, functor);
+	map.find_reachable_fields(
+	   game(),
+	   Widelands::Area<Widelands::FCoords>(map.get_fcoords(flag.get_position()), checkradius),
+	   &reachable, check, functor);
 
 	for (const Widelands::Coords& reachable_coords : reachable) {
 
@@ -4010,8 +4059,8 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag, uint16_t check
 			}
 
 			// This is a candidate, sending all necessary info to RoadCandidates
-			const bool is_different_economy =
-			   (player_immovable->get_economy(Widelands::wwWORKER) != flag.get_economy(Widelands::wwWORKER));
+			const bool is_different_economy = (player_immovable->get_economy(Widelands::wwWORKER) !=
+			                                   flag.get_economy(Widelands::wwWORKER));
 			const uint16_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
 
 			if (!flag_candidates.has_candidate(reachable_coords_hash) &&
@@ -4129,9 +4178,10 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag, uint16_t check
 
 			// get all flags within radius
 			std::vector<Widelands::Coords> reachable_to_block;
-			map.find_reachable_fields(game(),
-			                          Widelands::Area<Widelands::FCoords>(map.get_fcoords(flag.get_position()), checkradius),
-			                          &reachable_to_block, check_own, buildable_functor);
+			map.find_reachable_fields(
+			   game(),
+			   Widelands::Area<Widelands::FCoords>(map.get_fcoords(flag.get_position()), checkradius),
+			   &reachable_to_block, check_own, buildable_functor);
 
 			for (auto coords : reachable_to_block) {
 				blocked_fields.add(coords, game().get_gametime() + block_time);
@@ -4179,7 +4229,8 @@ void DefaultAI::collect_nearflags(std::map<uint32_t, NearFlag>& nearflags,
 		nearflags[start_field].to_be_checked = false;
 
 		// Now going over roads leading from this flag
-		for (uint8_t i = Widelands::WalkingDir::FIRST_DIRECTION; i <= Widelands::WalkingDir::LAST_DIRECTION; ++i) {
+		for (uint8_t i = Widelands::WalkingDir::FIRST_DIRECTION;
+		     i <= Widelands::WalkingDir::LAST_DIRECTION; ++i) {
 			Widelands::Road* const road = nearflags[start_field].flag->get_road(i);
 
 			if (!road) {
@@ -4564,7 +4615,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		}
 
 		const uint32_t remaining_trees = map.find_immovables(
-		   game(), Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), radius), nullptr,
+		   game(),
+		   Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), radius),
+		   nullptr,
 		   Widelands::FindImmovableAttribute(Widelands::MapObjectDescr::get_attribute_id("tree")));
 
 		if (site.site->get_statistics_percent() >
@@ -4631,9 +4684,12 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (site.bo->is(BuildingAttribute::kNeedsRocks)) {
 
 		if (map.find_immovables(
-		       game(), Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), 6), nullptr,
+		       game(),
+		       Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), 6),
+		       nullptr,
 
-		       Widelands::FindImmovableAttribute(Widelands::MapObjectDescr::get_attribute_id("rocks"))) == 0) {
+		       Widelands::FindImmovableAttribute(
+		          Widelands::MapObjectDescr::get_attribute_id("rocks"))) == 0) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
@@ -4706,7 +4762,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		// Blocking the vicinity if too low performance and ware is still needed
 		if (site.site->get_statistics_percent() <= 50 || get_stocklevel(*site.bo, gametime) < 5) {
 			Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-			   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->base_flag().get_position()), 5));
+			   map, Widelands::Area<Widelands::FCoords>(
+			           map.get_fcoords(site.site->base_flag().get_position()), 5));
 			do {
 				blocked_fields.add(mr.location(), gametime + 5 * 60 * 100);
 			} while (mr.advance(map));
@@ -4786,7 +4843,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		}
 
 		const uint32_t trees_in_vicinity = map.find_immovables(
-		   game(), Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), 5), nullptr,
+		   game(), Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), 5),
+		   nullptr,
 		   Widelands::FindImmovableAttribute(Widelands::MapObjectDescr::get_attribute_id("tree")));
 
 		// stop ranger if enough trees around regardless of policy
@@ -6420,7 +6478,8 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 		// add neighbours to a queue (duplicates are no problem)
 		// to relieve AI/CPU we skip every second field in each direction
 		// obstacles are usually wider then one field
-		for (Widelands::Direction dir = Widelands::FIRST_DIRECTION; dir <= Widelands::LAST_DIRECTION; ++dir) {
+		for (Widelands::Direction dir = Widelands::FIRST_DIRECTION; dir <= Widelands::LAST_DIRECTION;
+		     ++dir) {
 			Widelands::Coords neigh_coords1;
 			map.get_neighbour(tmp_coords, dir, &neigh_coords1);
 			Widelands::Coords neigh_coords2;
@@ -6438,8 +6497,8 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::Type::kConstructionsite) {
-		BuildingObserver& target_bo =
-		   get_building_observer(dynamic_cast<const Widelands::ConstructionSite&>(b).building().name().c_str());
+		BuildingObserver& target_bo = get_building_observer(
+		   dynamic_cast<const Widelands::ConstructionSite&>(b).building().name().c_str());
 		++target_bo.cnt_under_construction;
 		if (target_bo.type == BuildingObserver::Type::kProductionsite) {
 			++numof_psites_in_constr;
@@ -6557,8 +6616,8 @@ void DefaultAI::lose_building(const Widelands::Building& b) {
 	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::Type::kConstructionsite) {
-		BuildingObserver& target_bo =
-		   get_building_observer(dynamic_cast<const Widelands::ConstructionSite&>(b).building().name().c_str());
+		BuildingObserver& target_bo = get_building_observer(
+		   dynamic_cast<const Widelands::ConstructionSite&>(b).building().name().c_str());
 		--target_bo.cnt_under_construction;
 		if (target_bo.type == BuildingObserver::Type::kProductionsite) {
 			--numof_psites_in_constr;
@@ -6795,8 +6854,7 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 }
 
 // Sets due_time based on job ID
-void DefaultAI::set_taskpool_task_time(const uint32_t gametime,
-                                       const SchedulerTaskId task) {
+void DefaultAI::set_taskpool_task_time(const uint32_t gametime, const SchedulerTaskId task) {
 
 	for (auto& item : taskPool) {
 		if (item.id == task) {
@@ -6882,13 +6940,15 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	std::set<Widelands::DescriptionIndex> materials;
 
 	// Collect information about the different buildings that our tribe can have
-	for (Widelands::DescriptionIndex building_index = 0; building_index < nr_buildings; ++building_index) {
+	for (Widelands::DescriptionIndex building_index = 0; building_index < nr_buildings;
+	     ++building_index) {
 		const Widelands::BuildingDescr& bld = *tribe_->get_building_descr(building_index);
 		if (!tribe_->has_building(building_index)) {
 			continue;
 		}
 		if (bld.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
-			const Widelands::ProductionSiteDescr& prod = dynamic_cast<const Widelands::ProductionSiteDescr&>(bld);
+			const Widelands::ProductionSiteDescr& prod =
+			   dynamic_cast<const Widelands::ProductionSiteDescr&>(bld);
 			for (const auto& temp_input : prod.input_wares()) {
 				if (materials.count(temp_input.first) == 0) {
 					materials.insert(temp_input.first);
@@ -6902,7 +6962,8 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		}
 
 		if (bld.type() == Widelands::MapObjectType::TRAININGSITE) {
-			const Widelands::ProductionSiteDescr& train = dynamic_cast<const Widelands::TrainingSiteDescr&>(bld);
+			const Widelands::ProductionSiteDescr& train =
+			   dynamic_cast<const Widelands::TrainingSiteDescr&>(bld);
 			for (const auto& temp_cost : train.buildcost()) {
 				if (materials.count(temp_cost.first) == 0) {
 					materials.insert(temp_cost.first);
@@ -7103,4 +7164,4 @@ Widelands::PlayerNumber DefaultAI::get_land_owner(const Widelands::Map& map,
 	Widelands::FCoords f = map.get_fcoords(Widelands::Coords::unhash(coords));
 	return f.field->get_owned_by();
 }
-} // namespace AI
+}  // namespace AI

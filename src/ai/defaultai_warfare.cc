@@ -66,8 +66,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		static std::vector<Widelands::ImmovableFound> immovables;
 		immovables.clear();
 		immovables.reserve(40);
-		map.find_immovables(game(), Widelands::Area<Widelands::FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3),
-		                    &immovables, Widelands::FindImmovableAttackTarget());
+		map.find_immovables(
+		   game(), Widelands::Area<Widelands::FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3),
+		   &immovables, Widelands::FindImmovableAttackTarget());
 
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 			if (upcast(Widelands::MilitarySite const, bld, immovables.at(j).object)) {
@@ -165,8 +166,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		bool is_warehouse = false;
 		bool is_attackable = false;
 		// we cannot attack unvisible site and there is no other way to find out
-		const bool is_visible =
-		   player_->is_seeing(Widelands::Map::get_index(Widelands::Coords::unhash(site->first), map.get_width()));
+		const bool is_visible = player_->is_seeing(
+		   Widelands::Map::get_index(Widelands::Coords::unhash(site->first), map.get_width()));
 		uint16_t owner_number = 100;
 
 		// testing if we can attack the building - result is a flag
@@ -221,8 +222,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			// updating info on mines nearby if needed
 			if (site->second.mines_nearby == ExtendedBool::kUnset) {
 				FindNodeMineable find_mines_spots_nearby(game(), f.field->get_resources());
-				const int32_t minescount =
-				   map.find_fields(game(), Widelands::Area<Widelands::FCoords>(f, 6), nullptr, find_mines_spots_nearby);
+				const int32_t minescount = map.find_fields(
+				   game(), Widelands::Area<Widelands::FCoords>(f, 6), nullptr, find_mines_spots_nearby);
 				if (minescount > 0) {
 					site->second.mines_nearby = ExtendedBool::kTrue;
 				} else {
@@ -277,7 +278,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				unique_serials.clear();
 				// find militarysites near our target (radius 10) to check enemies power in region
 				map.find_immovables(game(),
-				                    Widelands::Area<Widelands::FCoords>(map.get_fcoords(Widelands::Coords::unhash(site->first)), 10),
+				                    Widelands::Area<Widelands::FCoords>(
+				                       map.get_fcoords(Widelands::Coords::unhash(site->first)), 10),
 				                    &immovables);
 				for (uint32_t k = 0; k < immovables.size(); ++k) {
 					const Widelands::BaseImmovable& base_immovable = *immovables.at(k).object;
@@ -1000,7 +1002,8 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			changed = true;
 		}
 		if (ms->get_soldier_preference() == Widelands::SoldierPreference::kRookies) {
-			game().send_player_militarysite_set_soldier_preference(*ms, Widelands::SoldierPreference::kHeroes);
+			game().send_player_militarysite_set_soldier_preference(
+			   *ms, Widelands::SoldierPreference::kHeroes);
 			changed = true;
 		}
 	} else if (should_be_dismantled && can_be_dismantled) {
@@ -1018,7 +1021,8 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			changed = true;
 		}
 		if (ms->get_soldier_preference() == Widelands::SoldierPreference::kHeroes) {
-			game().send_player_militarysite_set_soldier_preference(*ms, Widelands::SoldierPreference::kRookies);
+			game().send_player_militarysite_set_soldier_preference(
+			   *ms, Widelands::SoldierPreference::kRookies);
 			changed = true;
 		}
 	}
@@ -1426,4 +1430,4 @@ void DefaultAI::soldier_trained(const Widelands::TrainingSite& site) {
 
 	log_err_time(gametime, " %d: Computer player error - trainingsite not found\n", player_number());
 }
-} // namespace AI
+}  // namespace AI

@@ -193,9 +193,9 @@ private:
 	                        // enabled
 	DescriptionIndex enhancement_;
 	DescriptionIndex
-	   enhanced_from_;        // The building this building was enhanced from, or INVALID_INDEX
-	bool enhanced_building_;  // if it is one, it is bulldozable
-	AI::BuildingHints hints_;     // hints (knowledge) for computer players
+	   enhanced_from_;         // The building this building was enhanced from, or INVALID_INDEX
+	bool enhanced_building_;   // if it is one, it is bulldozable
+	AI::BuildingHints hints_;  // hints (knowledge) for computer players
 	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
 	                                         // this attribute stands
 

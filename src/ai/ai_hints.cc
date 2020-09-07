@@ -310,4 +310,4 @@ void WareWorkerHints::set_preciousness(const std::string& ware_worker,
 	}
 	preciousnesses_.insert(std::make_pair(tribename, p));
 }
-} // namespace AI
+}  // namespace AI

@@ -181,8 +181,7 @@ private:
 	// for production sites
 	BuildingNecessity
 	check_building_necessity(BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
-	BuildingNecessity check_warehouse_necessity(BuildingObserver&,
-	                                                       uint32_t gametime);
+	BuildingNecessity check_warehouse_necessity(BuildingObserver&, uint32_t gametime);
 	void sort_task_pool();
 	void sort_by_priority();
 	void set_taskpool_task_time(uint32_t, SchedulerTaskId);
@@ -199,9 +198,7 @@ private:
 	// trying to identify roads that might be removed
 	bool dispensable_road_test(const Widelands::Road&);
 	bool dismantle_dead_ends();
-	void collect_nearflags(std::map<uint32_t, NearFlag>&,
-	                       const Widelands::Flag&,
-	                       const uint16_t);
+	void collect_nearflags(std::map<uint32_t, NearFlag>&, const Widelands::Flag&, const uint16_t);
 	// calculating distances from local warehouse to flags
 	void check_flag_distances(uint32_t);
 	FlagWarehouseDistances flag_warehouse_distance;
@@ -212,8 +209,7 @@ private:
 
 	void print_stats(uint32_t);
 
-	uint32_t
-	get_stocklevel(BuildingObserver&, uint32_t, WareWorker = WareWorker::kWare) const;
+	uint32_t get_stocklevel(BuildingObserver&, uint32_t, WareWorker = WareWorker::kWare) const;
 	uint32_t
 	   calculate_stocklevel(Widelands::DescriptionIndex,
 	                        WareWorker = WareWorker::kWare) const;  // count all direct outputs_
@@ -233,9 +229,8 @@ private:
 
 	int32_t recalc_with_border_range(const BuildableField&, int32_t);
 
-	void consider_productionsite_influence(BuildableField&,
-	                                       Widelands::Coords,
-	                                       const BuildingObserver&);
+	void
+	consider_productionsite_influence(BuildableField&, Widelands::Coords, const BuildingObserver&);
 
 	EconomyObserver* get_economy_observer(Widelands::Economy&);
 	uint8_t count_buildings_with_attribute(BuildingAttribute);
@@ -418,5 +413,5 @@ private:
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 };
 
-} // namespace AI
+}  // namespace AI
 #endif  // end of include guard: WL_AI_DEFAULTAI_H

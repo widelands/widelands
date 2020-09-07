@@ -143,5 +143,5 @@ private:
 	std::unordered_map<std::string, int> preciousnesses_;
 };
 
-} // namespace AI
+}  // namespace AI
 #endif  // end of include guard: WL_AI_AI_HINTS_H

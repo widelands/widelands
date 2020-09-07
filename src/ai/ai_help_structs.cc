@@ -39,8 +39,11 @@ CheckStepRoadAI::CheckStepRoadAI(Widelands::Player* const pl, uint8_t const mc, 
    : player(pl), movecaps(mc), open_end(oe) {
 }
 
-bool CheckStepRoadAI::allowed(
-   const Widelands::Map& map, Widelands::FCoords start, Widelands::FCoords end, int32_t, Widelands::CheckStep::StepId const id) const {
+bool CheckStepRoadAI::allowed(const Widelands::Map& map,
+                              Widelands::FCoords start,
+                              Widelands::FCoords end,
+                              int32_t,
+                              Widelands::CheckStep::StepId const id) const {
 	const uint8_t endcaps = player->get_buildcaps(end);
 
 	// we should not cross fields with road or flags (or any other immovable)
@@ -70,7 +73,8 @@ bool CheckStepRoadAI::allowed(
 	return true;
 }
 
-bool CheckStepRoadAI::reachable_dest(const Widelands::Map& map, const Widelands::FCoords& dest) const {
+bool CheckStepRoadAI::reachable_dest(const Widelands::Map& map,
+                                     const Widelands::FCoords& dest) const {
 	Widelands::NodeCaps const caps = dest.field->nodecaps();
 
 	if (!(caps & movecaps)) {
@@ -86,7 +90,9 @@ bool CheckStepRoadAI::reachable_dest(const Widelands::Map& map, const Widelands:
 }
 
 // CheckStepOwnTerritory
-CheckStepOwnTerritory::CheckStepOwnTerritory(Widelands::Player* const pl, uint8_t const mc, bool const oe)
+CheckStepOwnTerritory::CheckStepOwnTerritory(Widelands::Player* const pl,
+                                             uint8_t const mc,
+                                             bool const oe)
    : player(pl), movecaps(mc), open_end(oe) {
 }
 
@@ -95,8 +101,11 @@ CheckStepOwnTerritory::CheckStepOwnTerritory(Widelands::Player* const pl, uint8_
 // And endfield either:
 // 2a. is walkable
 // 2b. has our PlayerImmovable (building or flag)
-bool CheckStepOwnTerritory::allowed(
-   const Widelands::Map& map, Widelands::FCoords start, Widelands::FCoords end, int32_t, Widelands::CheckStep::StepId const id) const {
+bool CheckStepOwnTerritory::allowed(const Widelands::Map& map,
+                                    Widelands::FCoords start,
+                                    Widelands::FCoords end,
+                                    int32_t,
+                                    Widelands::CheckStep::StepId const id) const {
 	const uint8_t endcaps = player->get_buildcaps(end);
 	const uint8_t startcaps = player->get_buildcaps(start);
 
@@ -120,7 +129,8 @@ bool CheckStepOwnTerritory::allowed(
 }
 
 // We accept either walkable territory or field with own immovable
-bool CheckStepOwnTerritory::reachable_dest(const Widelands::Map& map, const Widelands::FCoords& dest) const {
+bool CheckStepOwnTerritory::reachable_dest(const Widelands::Map& map,
+                                           const Widelands::FCoords& dest) const {
 	const uint8_t endcaps = player->get_buildcaps(dest);
 	if (Widelands::BaseImmovable const* const imm = map.get_immovable(dest)) {
 		if (imm->descr().type() >= Widelands::MapObjectType::FLAG) {
@@ -148,10 +158,12 @@ bool FindNodeEnemy::accept(const Widelands::EditorGameBase&, const Widelands::FC
 // We are looking for buildings owned by hostile player
 // (sometimes there is a enemy's teritorry without buildings, and
 // this confuses the AI)
-FindNodeEnemiesBuilding::FindNodeEnemiesBuilding(Widelands::Player* p, Widelands::Game& g) : player(p), game(g) {
+FindNodeEnemiesBuilding::FindNodeEnemiesBuilding(Widelands::Player* p, Widelands::Game& g)
+   : player(p), game(g) {
 }
 
-bool FindNodeEnemiesBuilding::accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const {
+bool FindNodeEnemiesBuilding::accept(const Widelands::EditorGameBase&,
+                                     const Widelands::FCoords& fc) const {
 	return (fc.field->get_immovable()) && fc.field->get_owned_by() != 0 &&
 	       player->is_hostile(*game.get_player(fc.field->get_owned_by()));
 }
@@ -159,20 +171,25 @@ bool FindNodeEnemiesBuilding::accept(const Widelands::EditorGameBase&, const Wid
 // When looking for unowned terrain to acquire, we are actually
 // only interested in fields we can walk on.
 // Fields should either be completely unowned or owned by an opposing player
-FindEnemyNodeWalkable::FindEnemyNodeWalkable(Widelands::Player* p, Widelands::Game& g) : player(p), game(g) {
+FindEnemyNodeWalkable::FindEnemyNodeWalkable(Widelands::Player* p, Widelands::Game& g)
+   : player(p), game(g) {
 }
 
-bool FindEnemyNodeWalkable::accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const {
+bool FindEnemyNodeWalkable::accept(const Widelands::EditorGameBase&,
+                                   const Widelands::FCoords& fc) const {
 	return ((fc.field->nodecaps() & Widelands::MOVECAPS_WALK) && (fc.field->get_owned_by() > 0) &&
 	        player->is_hostile(*game.get_player(fc.field->get_owned_by())));
 }
 
 // Sometimes we need to know how many nodes our allies owns
-FindNodeAllyOwned::FindNodeAllyOwned(Widelands::Player* p, Widelands::Game& g, Widelands::PlayerNumber n)
+FindNodeAllyOwned::FindNodeAllyOwned(Widelands::Player* p,
+                                     Widelands::Game& g,
+                                     Widelands::PlayerNumber n)
    : player(p), game(g), player_number(n) {
 }
 
-bool FindNodeAllyOwned::accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const {
+bool FindNodeAllyOwned::accept(const Widelands::EditorGameBase&,
+                               const Widelands::FCoords& fc) const {
 	return (fc.field->nodecaps() & Widelands::MOVECAPS_WALK) && (fc.field->get_owned_by() != 0) &&
 	       (fc.field->get_owned_by() != player_number) &&
 	       !player->is_hostile(*game.get_player(fc.field->get_owned_by()));
@@ -181,41 +198,53 @@ bool FindNodeAllyOwned::accept(const Widelands::EditorGameBase&, const Widelands
 // When looking for unowned terrain to acquire, we must
 // pay speciall attention to fields where mines can be built.
 // Fields should be completely unowned
-FindNodeUnownedMineable::FindNodeUnownedMineable(Widelands::Player* p, Widelands::Game& g, int32_t t)
+FindNodeUnownedMineable::FindNodeUnownedMineable(Widelands::Player* p,
+                                                 Widelands::Game& g,
+                                                 int32_t t)
    : player(p), game(g), ore_type(t) {
 }
 
-bool FindNodeUnownedMineable::accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const {
+bool FindNodeUnownedMineable::accept(const Widelands::EditorGameBase&,
+                                     const Widelands::FCoords& fc) const {
 	if (ore_type == Widelands::INVALID_INDEX) {
-		return (fc.field->nodecaps() & Widelands::BUILDCAPS_MINE) && (fc.field->get_owned_by() == Widelands::neutral());
+		return (fc.field->nodecaps() & Widelands::BUILDCAPS_MINE) &&
+		       (fc.field->get_owned_by() == Widelands::neutral());
 	}
-	return (fc.field->nodecaps() & Widelands::BUILDCAPS_MINE) && (fc.field->get_owned_by() == Widelands::neutral()) &&
+	return (fc.field->nodecaps() & Widelands::BUILDCAPS_MINE) &&
+	       (fc.field->get_owned_by() == Widelands::neutral()) &&
 	       fc.field->get_resources() == ore_type;
 }
 
-FindNodeUnownedBuildable::FindNodeUnownedBuildable(Widelands::Player* p, Widelands::Game& g) : player(p), game(g) {
+FindNodeUnownedBuildable::FindNodeUnownedBuildable(Widelands::Player* p, Widelands::Game& g)
+   : player(p), game(g) {
 }
 
-bool FindNodeUnownedBuildable::accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const {
+bool FindNodeUnownedBuildable::accept(const Widelands::EditorGameBase&,
+                                      const Widelands::FCoords& fc) const {
 	return ((fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK) ||
 	        (fc.field->nodecaps() & Widelands::BUILDCAPS_MINE)) &&
 	       (fc.field->get_owned_by() == Widelands::neutral());
 }
 
 // Unowned but walkable fields nearby
-FindNodeUnownedWalkable::FindNodeUnownedWalkable(Widelands::Player* p, Widelands::Game& g) : player(p), game(g) {
+FindNodeUnownedWalkable::FindNodeUnownedWalkable(Widelands::Player* p, Widelands::Game& g)
+   : player(p), game(g) {
 }
 
-bool FindNodeUnownedWalkable::accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const {
-	return (fc.field->nodecaps() & Widelands::MOVECAPS_WALK) && (fc.field->get_owned_by() == Widelands::neutral());
+bool FindNodeUnownedWalkable::accept(const Widelands::EditorGameBase&,
+                                     const Widelands::FCoords& fc) const {
+	return (fc.field->nodecaps() & Widelands::MOVECAPS_WALK) &&
+	       (fc.field->get_owned_by() == Widelands::neutral());
 }
 
 // Looking only for mines-capable fields nearby
 // of specific type
-FindNodeMineable::FindNodeMineable(Widelands::Game& g, Widelands::DescriptionIndex r) : game(g), res(r) {
+FindNodeMineable::FindNodeMineable(Widelands::Game& g, Widelands::DescriptionIndex r)
+   : game(g), res(r) {
 }
 
-bool FindNodeMineable::accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const {
+bool FindNodeMineable::accept(const Widelands::EditorGameBase&,
+                              const Widelands::FCoords& fc) const {
 
 	return (fc.field->nodecaps() & Widelands::BUILDCAPS_MINE) && (fc.field->get_resources() == res);
 }
@@ -224,26 +253,34 @@ bool FindNodeMineable::accept(const Widelands::EditorGameBase&, const Widelands:
 FindNodeWater::FindNodeWater(const Widelands::World& world) : world_(world) {
 }
 
-bool FindNodeWater::accept(const Widelands::EditorGameBase& egbase, const Widelands::FCoords& coord) const {
+bool FindNodeWater::accept(const Widelands::EditorGameBase& egbase,
+                           const Widelands::FCoords& coord) const {
 	return (world_.terrain_descr(coord.field->terrain_d()).get_is() &
 	        Widelands::TerrainDescription::Is::kWater) ||
-	       (world_.terrain_descr(egbase.map().get_neighbour(coord, Widelands::WALK_W).field->terrain_r())
+	       (world_
+	           .terrain_descr(
+	              egbase.map().get_neighbour(coord, Widelands::WALK_W).field->terrain_r())
 	           .get_is() &
 	        Widelands::TerrainDescription::Is::kWater) ||
-	       (world_.terrain_descr(egbase.map().get_neighbour(coord, Widelands::WALK_NW).field->terrain_r())
+	       (world_
+	           .terrain_descr(
+	              egbase.map().get_neighbour(coord, Widelands::WALK_NW).field->terrain_r())
 	           .get_is() &
 	        Widelands::TerrainDescription::Is::kWater);
 }
 
-bool FindNodeOpenWater::accept(const Widelands::EditorGameBase&, const Widelands::FCoords& coord) const {
-	return !(coord.field->nodecaps() & Widelands::MOVECAPS_WALK) && (coord.field->nodecaps() & Widelands::MOVECAPS_SWIM);
+bool FindNodeOpenWater::accept(const Widelands::EditorGameBase&,
+                               const Widelands::FCoords& coord) const {
+	return !(coord.field->nodecaps() & Widelands::MOVECAPS_WALK) &&
+	       (coord.field->nodecaps() & Widelands::MOVECAPS_SWIM);
 }
 
 // FindNodeWithFlagOrRoad
 bool FindNodeWithFlagOrRoad::accept(const Widelands::EditorGameBase&, Widelands::FCoords fc) const {
 	if (upcast(Widelands::PlayerImmovable const, pimm, fc.field->get_immovable())) {
 		return (dynamic_cast<Widelands::Flag const*>(pimm) ||
-		        (dynamic_cast<Widelands::Road const*>(pimm) && (fc.field->nodecaps() & Widelands::BUILDCAPS_FLAG)));
+		        (dynamic_cast<Widelands::Road const*>(pimm) &&
+		         (fc.field->nodecaps() & Widelands::BUILDCAPS_FLAG)));
 	}
 	return false;
 }

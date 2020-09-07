@@ -80,4 +80,4 @@ const ComputerPlayer::Implementation* ComputerPlayer::get_implementation(const s
 	}
 	return vec[0];
 }
-} // namespace AI
+}  // namespace AI

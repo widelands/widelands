@@ -35,7 +35,8 @@ void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id,
 		return;
 	}
 	if (random_ai) {
-		const AI::ComputerPlayer::ImplementationVector& impls = AI::ComputerPlayer::get_implementations();
+		const AI::ComputerPlayer::ImplementationVector& impls =
+		   AI::ComputerPlayer::get_implementations();
 		AI::ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
 		if (impls.size() > 1) {
 			do {

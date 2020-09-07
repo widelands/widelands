@@ -38,7 +38,7 @@
 namespace Widelands {
 class MilitarySite;
 class ProductionSite;
-} // namespace Widelands
+}  // namespace Widelands
 
 namespace AI {
 
@@ -140,7 +140,11 @@ constexpr uint16_t kFarButReachable = 1000;
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Widelands::Player* const pl, uint8_t const mc, bool const oe);
 
-	bool allowed(const Widelands::Map&, Widelands::FCoords start, Widelands::FCoords end, int32_t dir, Widelands::CheckStep::StepId) const;
+	bool allowed(const Widelands::Map&,
+	             Widelands::FCoords start,
+	             Widelands::FCoords end,
+	             int32_t dir,
+	             Widelands::CheckStep::StepId) const;
 	bool reachable_dest(const Widelands::Map&, const Widelands::FCoords& dest) const;
 
 	Widelands::Player* player;
@@ -154,7 +158,11 @@ struct CheckStepRoadAI {
 struct CheckStepOwnTerritory {
 	CheckStepOwnTerritory(Widelands::Player* const pl, uint8_t const mc, bool const oe);
 
-	bool allowed(const Widelands::Map&, Widelands::FCoords start, Widelands::FCoords end, int32_t dir, Widelands::CheckStep::StepId) const;
+	bool allowed(const Widelands::Map&,
+	             Widelands::FCoords start,
+	             Widelands::FCoords end,
+	             int32_t dir,
+	             Widelands::CheckStep::StepId) const;
 	bool reachable_dest(const Widelands::Map&, const Widelands::FCoords& dest) const;
 
 	Widelands::Player* player;
@@ -211,7 +219,9 @@ struct FindNodeAllyOwned {
 // pay speciall attention to fields where mines can be built.
 // Fields should be completely unowned
 struct FindNodeUnownedMineable {
-	FindNodeUnownedMineable(Widelands::Player* p, Widelands::Game& g, int32_t t = Widelands::INVALID_INDEX);
+	FindNodeUnownedMineable(Widelands::Player* p,
+	                        Widelands::Game& g,
+	                        int32_t t = Widelands::INVALID_INDEX);
 
 	bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
@@ -450,7 +460,8 @@ struct BuildingObserver {
 
 	// Building collects a ware from the map
 	bool has_collected_map_resource() const;
-	void set_collected_map_resource(const Widelands::TribeDescr& tribe, const std::string& ware_name);
+	void set_collected_map_resource(const Widelands::TribeDescr& tribe,
+	                                const std::string& ware_name);
 	Widelands::DescriptionIndex get_collected_map_resource() const;
 
 	char const* name;
@@ -473,7 +484,7 @@ struct BuildingObserver {
 	uint16_t unconnected_count;  // to any warehouse (count of such buildings)
 
 	Widelands::DescriptionIndex mines;  // type of resource it mines_
-	uint16_t mines_percent;  // % of res it can mine
+	uint16_t mines_percent;             // % of res it can mine
 	uint32_t current_stats;
 
 	uint32_t basic_amount;  // basic amount for basic economy as defined in init.lua
@@ -759,10 +770,7 @@ struct MilitarySiteSizeObserver {
 
 // this represents a scheduler task
 struct SchedulerTask {
-	SchedulerTask(const uint32_t time,
-	              const SchedulerTaskId t,
-	              const uint8_t p,
-	              const char* d);
+	SchedulerTask(const uint32_t time, const SchedulerTaskId t, const uint8_t p, const char* d);
 
 	bool operator<(const SchedulerTask& other) const;
 

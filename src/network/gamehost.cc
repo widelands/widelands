@@ -582,8 +582,9 @@ void GameHost::clear_computer_players() {
 }
 
 void GameHost::init_computer_player(Widelands::PlayerNumber p) {
-	d->computerplayers.push_back(AI::ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
-	                                ->instantiate(*d->game, p));
+	d->computerplayers.push_back(
+	   AI::ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
+	      ->instantiate(*d->game, p));
 }
 
 void GameHost::replace_client_with_ai(uint8_t playernumber, const std::string& ai) {

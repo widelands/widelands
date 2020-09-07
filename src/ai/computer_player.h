@@ -99,5 +99,5 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(ComputerPlayer);
 };
-} // namespace AI
+}  // namespace AI
 #endif  // end of include guard: WL_AI_COMPUTER_PLAYER_H

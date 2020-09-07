@@ -40,8 +40,9 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	             candidate_spot.x, candidate_spot.y, persistent_data->colony_scan_area);
 
 	// abort if any player - including self - is too near to the spot (radius 10)
-	if (other_player_accessible(Widelands::Player::AiPersistentState::kColonyScanMinArea, &tested_fields,
-	                            &mineable_fields_count, candidate_spot, WalkSearch::kAnyPlayer)) {
+	if (other_player_accessible(Widelands::Player::AiPersistentState::kColonyScanMinArea,
+	                            &tested_fields, &mineable_fields_count, candidate_spot,
+	                            WalkSearch::kAnyPlayer)) {
 		return 0;
 	}
 
@@ -77,7 +78,9 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	immovables.clear();
 	immovables.reserve(50);
 	// Search in a radius of range
-	map.find_immovables(game(), Widelands::Area<Widelands::FCoords>(map.get_fcoords(candidate_spot), 10), &immovables);
+	map.find_immovables(game(),
+	                    Widelands::Area<Widelands::FCoords>(map.get_fcoords(candidate_spot), 10),
+	                    &immovables);
 
 	int32_t const rocks_attr = Widelands::MapObjectDescr::get_attribute_id("rocks");
 	uint16_t rocks = 0;
@@ -283,7 +286,8 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 				// so resetting start time
 			} else if (expedition_ship_ == so.ship->serial()) {
 				// Obviously expedition just ended
-				persistent_data->expedition_start_time = Widelands::Player::AiPersistentState::kNoExpedition;
+				persistent_data->expedition_start_time =
+				   Widelands::Player::AiPersistentState::kNoExpedition;
 				expedition_ship_ = kNoShip;
 			}
 
@@ -353,8 +357,9 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			     site != productionsites.end(); ++site) {
 				if (site->bo->is(BuildingAttribute::kShipyard)) {
 					for (uint32_t k = 0; k < site->bo->inputs.size(); ++k) {
-						game().send_player_set_ware_priority(
-						   *site->site, Widelands::wwWARE, site->bo->inputs.at(k), Widelands::kPriorityHigh);
+						game().send_player_set_ware_priority(*site->site, Widelands::wwWARE,
+						                                     site->bo->inputs.at(k),
+						                                     Widelands::kPriorityHigh);
 					}
 				}
 			}
@@ -395,9 +400,11 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 
 	// Obviously a new expedition
 	if (expedition_ship_ == kNoShip) {
-		assert(persistent_data->expedition_start_time == Widelands::Player::AiPersistentState::kNoExpedition);
+		assert(persistent_data->expedition_start_time ==
+		       Widelands::Player::AiPersistentState::kNoExpedition);
 		persistent_data->expedition_start_time = gametime;
-		persistent_data->colony_scan_area = Widelands::Player::AiPersistentState::kColonyScanStartArea;
+		persistent_data->colony_scan_area =
+		   Widelands::Player::AiPersistentState::kColonyScanStartArea;
 		expedition_ship_ = so.ship->serial();
 
 		// Expedition is overdue: cancel expedition, set no_more_expeditions = true
@@ -424,7 +431,8 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 		// For known and running expedition
 	} else {
 		// set persistent_data->colony_scan_area based on elapsed expedition time
-		assert(persistent_data->expedition_start_time > Widelands::Player::AiPersistentState::kNoExpedition);
+		assert(persistent_data->expedition_start_time >
+		       Widelands::Player::AiPersistentState::kNoExpedition);
 		assert(expedition_time < expedition_max_duration);
 
 		// calculate percentage of remaining expedition time (range 0-100)
@@ -433,10 +441,11 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 		assert(remaining_time <= 100);
 
 		// calculate a new persistent_data->colony_scan_area
-		const uint32_t expected_colony_scan = Widelands::Player::AiPersistentState::kColonyScanMinArea +
-		                                      (Widelands::Player::AiPersistentState::kColonyScanStartArea -
-		                                       Widelands::Player::AiPersistentState::kColonyScanMinArea) *
-		                                         remaining_time / 100;
+		const uint32_t expected_colony_scan =
+		   Widelands::Player::AiPersistentState::kColonyScanMinArea +
+		   (Widelands::Player::AiPersistentState::kColonyScanStartArea -
+		    Widelands::Player::AiPersistentState::kColonyScanMinArea) *
+		      remaining_time / 100;
 		assert(expected_colony_scan >= Widelands::Player::AiPersistentState::kColonyScanMinArea &&
 		       expected_colony_scan <= Widelands::Player::AiPersistentState::kColonyScanStartArea);
 		persistent_data->colony_scan_area = expected_colony_scan;
@@ -565,7 +574,8 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	static std::vector<Widelands::Direction> possible_directions;
 	possible_directions.clear();
 	possible_directions.reserve(6);
-	for (Widelands::Direction dir = Widelands::FIRST_DIRECTION; dir <= Widelands::LAST_DIRECTION; ++dir) {
+	for (Widelands::Direction dir = Widelands::FIRST_DIRECTION; dir <= Widelands::LAST_DIRECTION;
+	     ++dir) {
 		// testing distance of 30 fields (or as long as the sea goes, and until
 		// unknown territory is reached)
 		Widelands::Coords tmp_coords = so.ship->get_position();
@@ -607,7 +617,8 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 		   !new_teritory_directions.empty() ?
 		      new_teritory_directions.at(std::rand() % new_teritory_directions.size()) :  // NOLINT
 		      possible_directions.at(std::rand() % possible_directions.size());           // NOLINT
-		game().send_player_ship_scouting_direction(*so.ship, static_cast<Widelands::WalkingDir>(direction));
+		game().send_player_ship_scouting_direction(
+		   *so.ship, static_cast<Widelands::WalkingDir>(direction));
 
 		log_dbg_time(game().get_gametime(), "%d: %s: exploration - breaking for %s sea, dir=%u\n", pn,
 		             so.ship->get_shipname().c_str(),
@@ -617,4 +628,4 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	}
 	return false;
 }
-} // namespace AI
+}  // namespace AI
