@@ -19,7 +19,7 @@
 
 #include "logic/map_objects/map_object_program.h"
 
-#include <boost/regex.hpp>
+#include <regex>
 
 #include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -198,13 +198,13 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 	};
 
 	try {
-		boost::smatch match;
-		boost::regex one_unit("^(\\d+)(s|m|ms)$");
-		if (boost::regex_search(input, match, one_unit)) {
+		std::smatch match;
+		std::regex one_unit("^(\\d+)(s|m|ms)$");
+		if (std::regex_search(input, match, one_unit)) {
 			return as_ms(read_positive(match[1], endless()), match[2]);
 		}
-		boost::regex two_units("^(\\d+)(m|s)(\\d+)(s|ms)$");
-		if (boost::regex_search(input, match, two_units)) {
+		std::regex two_units("^(\\d+)(m|s)(\\d+)(s|ms)$");
+		if (std::regex_search(input, match, two_units)) {
 			if (match[2] == match[4]) {
 				std::string unit(match[2]);
 				throw GameDataError("has duplicate unit '%s'", unit.c_str());
@@ -213,17 +213,17 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 			const Duration part2 = as_ms(read_positive(match[3], endless()), match[4]);
 			return part1 + part2;
 		}
-		boost::regex three_units("^(\\d+)(m)(\\d+)(s)(\\d+)(ms)$");
-		if (boost::regex_search(input, match, three_units)) {
+		std::regex three_units("^(\\d+)(m)(\\d+)(s)(\\d+)(ms)$");
+		if (std::regex_search(input, match, three_units)) {
 			const Duration part1 = as_ms(read_positive(match[1], endless()), match[2]);
 			const Duration part2 = as_ms(read_positive(match[3], endless()), match[4]);
 			const Duration part3 = as_ms(read_positive(match[5], endless()), match[6]);
 			return part1 + part2 + part3;
 		}
 		// TODO(GunChleoc): Compatibility, remove unitless option after v1.0
-		boost::regex without_unit("^(\\d+)$");
-		if (boost::regex_match(input, without_unit)) {
-			log_warn("Duration '%s' without unit in %s's program is deprecated\n", input.c_str(),
+		std::regex without_unit("^(\\d+)$");
+		if (std::regex_match(input, without_unit)) {
+			log_warn("Duration '%s' without unit in %s's program is deprecated", input.c_str(),
 			         descr.name().c_str());
 			return read_positive(input, endless());
 		}
@@ -256,9 +256,9 @@ Maximum value is ``100%``. Examples:
 
 */
 unsigned MapObjectProgram::read_percent_to_int(const std::string& input) {
-	boost::smatch match;
-	boost::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
-	if (boost::regex_search(input, match, re)) {
+	std::smatch match;
+	std::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
+	if (std::regex_search(input, match, re)) {
 		// Convert to range
 		uint64_t result =
 		   100U * std::stoul(match[1]) +
