@@ -123,7 +123,8 @@ BOOST_AUTO_TEST_CASE(flag_distance_old_removal)
 	AI::FlagWarehouseDistances fw;
 	fw.set_distance(1, 2, 0, 3);
 	BOOST_CHECK_EQUAL(fw.count(), 1);
-	BOOST_CHECK_EQUAL(fw.remove_old_flag(AI::kOldFlagRemoveTime + AI::kFlagDistanceExpirationPeriod), false);
+	BOOST_CHECK_EQUAL(
+	   fw.remove_old_flag(AI::kOldFlagRemoveTime + AI::kFlagDistanceExpirationPeriod), false);
 	BOOST_CHECK_EQUAL(fw.count(), 1);
 	BOOST_CHECK_EQUAL(
 	   fw.remove_old_flag(AI::kOldFlagRemoveTime + AI::kFlagDistanceExpirationPeriod + 2), true);
