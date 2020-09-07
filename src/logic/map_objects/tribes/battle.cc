@@ -34,7 +34,7 @@ namespace Widelands {
 
 namespace {
 BattleDescr g_battle_descr("battle", "Battle");
-} // namespace
+}  // namespace
 
 const BattleDescr& Battle::descr() const {
 	return g_battle_descr;
