@@ -33,6 +33,7 @@
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
+#include "map_io/map_loader.h"
 
 GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
