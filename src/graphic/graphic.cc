@@ -91,9 +91,9 @@ void Graphic::initialize(const TraceGl& trace_gl,
 #ifdef RESIZABLE_WINDOW
 	window_flags |= SDL_WINDOW_RESIZABLE;
 #endif
-	sdl_window_ = SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED,
-	                               SDL_WINDOWPOS_UNDEFINED, window_mode_width_, window_mode_height_,
-	                               window_flags);
+	sdl_window_ =
+	   SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+	                    window_mode_width_, window_mode_height_, window_flags);
 	SDL_SetWindowMinimumSize(sdl_window_, kMinimumResolutionW, kMinimumResolutionH);
 
 	GLint max;
