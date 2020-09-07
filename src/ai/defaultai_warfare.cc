@@ -620,7 +620,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers);
 	assert(
-	   player_->is_seeing(Map::get_index(flag->get_building()->get_position(), map.get_width())));
+	   player_->is_seeing(Widelands::Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
 	enemy_sites[best_target].last_time_attacked = gametime;
 	++enemy_sites[best_target].attack_counter;
