@@ -314,9 +314,11 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	/** TRANSLATORS: Entry in the window size dropdown*/
 	resolution_dropdown_.add(_("Fullscreen"), kDropdownFullscreen, nullptr, opt.fullscreen);
+#ifdef RESIZABLE_WINDOW
 	/** TRANSLATORS: Entry in the window size dropdown*/
 	resolution_dropdown_.add(_("Maximized"), kDropdownMaximized, nullptr,
 	                         !resolution_dropdown_.has_selection() && opt.maximized);
+#endif
 
 	for (uint32_t i = 0; i < resolutions_.size(); ++i) {
 		const bool selected = !resolution_dropdown_.has_selection() &&

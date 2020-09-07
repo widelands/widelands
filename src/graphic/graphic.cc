@@ -46,6 +46,10 @@
 #include "io/streamwrite.h"
 #include "notifications/notifications.h"
 
+#ifndef RESIZABLE_WINDOW
+#define SDL_SetWindowResizable(window, resizable)
+#endif
+
 Graphic* g_gr;
 
 namespace {
@@ -83,9 +87,13 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	}
 
 	log_dbg("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
+	uint32_t window_flags = SDL_WINDOW_OPENGL;
+#ifdef RESIZABLE_WINDOW
+	window_flags |= SDL_WINDOW_RESIZABLE;
+#endif
 	sdl_window_ = SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED,
 	                               SDL_WINDOWPOS_UNDEFINED, window_mode_width_, window_mode_height_,
-	                               SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+	                               window_flags);
 	SDL_SetWindowMinimumSize(sdl_window_, kMinimumResolutionW, kMinimumResolutionH);
 
 	GLint max;
