@@ -203,23 +203,28 @@ private:
 UI::Box*
 create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, InteractiveGameBase& igb) {
 	UI::Box& box = *new UI::Box(parent, 0, 0, UI::Box::Vertical);
-	NoteDelayedCheck::instantiate(nullptr, [parent, &wh, &igb, &box]() {
-		// Add the input queues.
-		int32_t capacity =
-		   igb.egbase().tribes().get_ship_descr(wh.get_owner()->tribe().ship())->get_default_capacity();
-		for (const InputQueue* wq : wh.get_portdock()->expedition_bootstrap()->queues(false)) {
-			InputQueueDisplay* iqd = new InputQueueDisplay(&box, 0, 0, igb, wh, *wq, true);
-			box.add(iqd);
-			capacity -= wq->get_max_size();
-		}
-		assert(capacity >= 0);
+	NoteDelayedCheck::instantiate(
+	   nullptr,
+	   [parent, &wh, &igb, &box]() {
+		   // Add the input queues.
+		   int32_t capacity = igb.egbase()
+		                         .tribes()
+		                         .get_ship_descr(wh.get_owner()->tribe().ship())
+		                         ->get_default_capacity();
+		   for (const InputQueue* wq : wh.get_portdock()->expedition_bootstrap()->queues(false)) {
+			   InputQueueDisplay* iqd = new InputQueueDisplay(&box, 0, 0, igb, wh, *wq, true);
+			   box.add(iqd);
+			   capacity -= wq->get_max_size();
+		   }
+		   assert(capacity >= 0);
 
-		if (capacity > 0) {
-			const bool can_act = igb.can_act(wh.get_owner()->player_number());
-			box.add(new PortDockAdditionalItemsDisplay(
-					   igb.game(), &box, can_act, *wh.get_portdock(), capacity),
-					UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		}
-	}, true);
+		   if (capacity > 0) {
+			   const bool can_act = igb.can_act(wh.get_owner()->player_number());
+			   box.add(new PortDockAdditionalItemsDisplay(
+			              igb.game(), &box, can_act, *wh.get_portdock(), capacity),
+			           UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		   }
+	   },
+	   true);
 	return &box;
 }
