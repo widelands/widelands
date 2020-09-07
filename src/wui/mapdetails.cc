@@ -67,13 +67,13 @@ MapDetails::MapDetails(
 	descr_.set_handle_mouse(false);
 	descr_box_.set_force_scrolling(true);
 
-	descr_box_.add(&descr_);
+	descr_box_.add(&descr_, UI::Box::Resizing::kFullSize);
 	descr_box_.add_space(padding_);
 	descr_box_.add(&minimap_icon_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	main_box_.add(&name_label_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(padding_);
-	main_box_.add(&descr_box_);
+	main_box_.add(&descr_box_, UI::Box::Resizing::kExpandBoth);
 
 	layout();
 }
@@ -109,9 +109,7 @@ void MapDetails::layout() {
 		minimap_icon_.set_desired_size(width, height);
 	}
 
-	const int descr_box_height = main_box_.get_h() - name_label_.get_h() - padding_;
-	descr_.set_desired_size(main_box_.get_w() - UI::Scrollbar::kSize, descr_box_height);
-	descr_box_.set_size(main_box_.get_w(), descr_box_height);
+	descr_box_.set_size(main_box_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
 }
 
 void MapDetails::update(const MapData& mapdata, bool localize_mapname) {

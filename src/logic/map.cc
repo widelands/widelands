@@ -2092,9 +2092,8 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
 		if (boost::algorithm::ends_with(lower_filename, kWidelandsMapExtension)) {
 			result.reset(new WidelandsMapLoader(g_fs->make_sub_file_system(filename), this));
 		} else if (boost::algorithm::ends_with(lower_filename, kSavegameExtension)) {
-			FileSystem* sub_fs = g_fs->make_sub_file_system(filename);
+			std::unique_ptr<FileSystem> sub_fs(g_fs->make_sub_file_system(filename));
 			result.reset(new WidelandsMapLoader(sub_fs->make_sub_file_system("map"), this));
-			delete sub_fs;
 		} else if (boost::algorithm::ends_with(lower_filename, kS2MapExtension1) ||
 		           boost::algorithm::ends_with(lower_filename, kS2MapExtension2)) {
 			result.reset(new S2MapLoader(filename, *this));
