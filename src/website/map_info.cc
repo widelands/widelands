@@ -34,8 +34,6 @@
 #include "website/json/json.h"
 #include "website/website_common.h"
 
-using namespace Widelands;
-
 int main(int argc, char** argv) {
 	if (!(2 <= argc && argc <= 3)) {
 		log_err("Usage: %s <map file>\n", argv[0]);
@@ -55,7 +53,7 @@ int main(int argc, char** argv) {
 		FileSystem* in_out_filesystem = &FileSystem::create(map_dir);
 		g_fs->add_file_system(in_out_filesystem);
 
-		EditorGameBase egbase(nullptr);
+		Widelands::EditorGameBase egbase(nullptr);
 		auto* map = egbase.mutable_map();
 		std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(map_file));
 
