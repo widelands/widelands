@@ -365,12 +365,12 @@ const MethodType<LuaWorld> LuaWorld::Methods[] = {
    METHOD(LuaWorld, new_immovable_type),
    METHOD(LuaWorld, new_resource_type),
    METHOD(LuaWorld, new_terrain_type),
-   {0, 0},
+   {nullptr, nullptr},
 };
 const PropertyType<LuaWorld> LuaWorld::Properties[] = {
    PROP_RO(LuaWorld, immovable_descriptions),
    PROP_RO(LuaWorld, terrain_descriptions),
-   {0, 0, 0},
+   {nullptr, nullptr, nullptr},
 };
 
 LuaWorld::LuaWorld(lua_State* /* L */) {
@@ -533,10 +533,10 @@ const MethodType<LuaTribes> LuaTribes::Methods[] = {
    METHOD(LuaTribes, new_ware_type),
    METHOD(LuaTribes, new_warehouse_type),
    METHOD(LuaTribes, new_worker_type),
-   {0, 0},
+   {nullptr, nullptr},
 };
 const PropertyType<LuaTribes> LuaTribes::Properties[] = {
-   {0, 0, 0},
+   {nullptr, nullptr, nullptr},
 };
 
 LuaTribes::LuaTribes(lua_State* /* L */) {
