@@ -29,6 +29,7 @@
 #include <vector>
 
 #include <SDL_log.h>
+#include <SDL_timer.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -177,20 +178,21 @@ std::vector<std::string> split(const std::string& s) {
 void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt, ...) {
 	assert(logger != nullptr);
 
-	// message type
-	char buffer_prefix[8];
-	snprintf(buffer_prefix, sizeof(buffer_prefix), "%s", to_string(type));
-	char buffer_timestamp[32] = "\0";
-	if (gametime != kNoTimestamp && gametime > 0) {  // timestamp
+	// message type and timestamp
+	char buffer_prefix[32];
+	{
+		const bool is_real_time = gametime == kNoTimestamp;
+		if (gametime == kNoTimestamp) {
+			gametime = SDL_GetTicks();
+		}
 		const uint32_t hours = gametime / (1000 * 60 * 60);
 		gametime -= hours * 1000 * 60 * 60;
 		const uint32_t minutes = gametime / (1000 * 60);
 		gametime -= minutes * 1000 * 60;
 		const uint32_t seconds = gametime / 1000;
 		gametime -= seconds * 1000;
-
-		snprintf(buffer_timestamp, sizeof(buffer_timestamp), "%u:%02u:%02u.%03u ", hours, minutes,
-		         seconds, gametime);
+		snprintf(buffer_prefix, sizeof(buffer_prefix), "[%02u:%02u:%02u.%03u %s] %s: ", hours,
+		         minutes, seconds, gametime, is_real_time ? "real" : "game", to_string(type));
 	}
 
 	// actual log output
@@ -205,11 +207,7 @@ void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt,
 		if (str.find_first_not_of(' ') == std::string::npos) {
 			continue;
 		}
-		if (buffer_timestamp[0]) {
-			logger->log_cstring(buffer_timestamp);
-		}
 		logger->log_cstring(buffer_prefix);
-		str.insert(0, ": ");
 		str.push_back('\n');
 		logger->log_cstring(str.c_str());
 	}
