@@ -26,10 +26,10 @@
 #include <cstdlib>
 #include <iostream>
 #include <memory>
+#include <regex>
 
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include <boost/regex.hpp>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
 #include <unistd.h>
@@ -141,8 +141,8 @@ std::string get_executable_directory() {
 }
 
 bool is_absolute_path(const std::string& path) {
-	boost::regex re("^/|\\w:");
-	return boost::regex_search(path.c_str(), re);
+	std::regex re("^/|\\w:");
+	return std::regex_search(path.c_str(), re);
 }
 
 // Returns the absolute path of 'path' which might be relative.

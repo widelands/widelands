@@ -20,10 +20,10 @@
 #include "graphic/gl/initialize.h"
 
 #include <csignal>
+#include <regex>
 
 #include <SDL_messagebox.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/regex.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -225,7 +225,7 @@ SDL_GLContext initialize(
 	};
 
 	// glGetString returned an error for the shading language
-	if (glGetString(GL_SHADING_LANGUAGE_VERSION) == 0) {
+	if (glGetString(GL_SHADING_LANGUAGE_VERSION) == nullptr) {
 		handle_unreadable_opengl_shading_language();
 	}
 
@@ -256,8 +256,8 @@ SDL_GLContext initialize(
 	} else {
 		// We don't have a minor version. Ensure that the string to compare is a valid integer before
 		// conversion
-		boost::regex re("\\d+");
-		if (boost::regex_match(shading_language_version_string, re)) {
+		std::regex re("\\d+");
+		if (std::regex_match(shading_language_version_string, re)) {
 			const int major_shading_language_version =
 			   boost::lexical_cast<int>(shading_language_version_string);
 			if (major_shading_language_version < 2) {
