@@ -25,7 +25,6 @@
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_controller.h"
-#include "map_io/map_loader.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"

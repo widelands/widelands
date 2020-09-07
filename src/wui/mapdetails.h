@@ -56,7 +56,7 @@ private:
 	UI::SuggestedTeamsBox* suggested_teams_box_;
 
 	// Used to render map preview
-	std::unique_ptr<Texture> minimap_image_;
+	std::unique_ptr<const Texture> minimap_image_;
 	Widelands::EditorGameBase egbase_;
 };
 
