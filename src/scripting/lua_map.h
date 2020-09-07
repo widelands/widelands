@@ -376,9 +376,17 @@ public:
 	 * Properties
 	 */
 	int get_inputs(lua_State*);
+	int get_collected_bobs(lua_State*);
+	int get_collected_immovables(lua_State*);
+	int get_collected_resources(lua_State*);
+	int get_created_bobs(lua_State*);
+	int get_created_immovables(lua_State*);
+	int get_created_resources(lua_State*);
 	int get_output_ware_types(lua_State*);
 	int get_output_worker_types(lua_State*);
 	int get_production_programs(lua_State*);
+	int get_supported_productionsites(lua_State*);
+	int get_supported_by_productionsites(lua_State*);
 	int get_working_positions(lua_State*);
 
 	/*

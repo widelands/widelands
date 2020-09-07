@@ -119,7 +119,6 @@ set (Boost_DETAILED_FAILURE_MSG ON)
 find_package(Boost 1.48
   COMPONENTS
     unit_test_framework
-    regex
   REQUIRED
     system)
 

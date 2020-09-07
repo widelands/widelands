@@ -98,7 +98,6 @@ wl_library(graphic_gl_utils
     gl/system_headers.h
     gl/utils.cc
     gl/utils.h
-  USES_BOOST_REGEX
   USES_SDL2
   USES_OPENGL
   DEPENDS

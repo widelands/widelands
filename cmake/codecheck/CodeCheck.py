@@ -5,9 +5,9 @@
 """Yet another code checker for the widelands project.
 
 This one's intention is to get rid of the ADA whitespace checker (while
-keeping it's functionality or improving on it) and supersede the old
-detect_spurious_indentation.py script (while also keeping it's cases
-around). En plus, we also replace the spurious code checking done with
+keeping its functionality or improving on it) and supersede the old
+detect_spurious_indentation.py script (while also keeping its cases
+around). Additionally, we replace the spurious code checking done with
 grep which is currently also around.
 """
 
@@ -245,9 +245,9 @@ class CodeChecker(object):
         self._color = color
 
         # We keep a cache of file names/error strings
-        # so that (e.g.) a header is requested twice in one
+        # so that (e.g.) if a header is requested twice in one
         # run of the program, we just return the cached errors.
-        # They will not have changed while the program was running
+        # They will not have changed while the program was running.
         self._cache = {}
 
     @property

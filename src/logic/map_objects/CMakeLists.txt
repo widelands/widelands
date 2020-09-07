@@ -130,7 +130,6 @@ wl_library(logic_map_objects
     world/resource_description.h
     world/terrain_description.cc
     world/terrain_description.h
-  USES_BOOST_REGEX
   USES_SDL2
   DEPENDS
     ai_hints
