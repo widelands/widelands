@@ -38,9 +38,6 @@
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
 
-using namespace Widelands;
-using namespace LuaMaps;
-
 namespace LuaGame {
 
 /* RST
@@ -122,8 +119,8 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
          (RO) The name of this Player.
 */
 int LuaPlayer::get_name(lua_State* L) {
-	Game& game = get_game(L);
-	Player& p = get(L, game);
+	Widelands::Game& game = get_game(L);
+	Widelands::Player& p = get(L, game);
 	lua_pushstring(L, p.get_name());
 	return 1;
 }
@@ -137,12 +134,12 @@ int LuaPlayer::get_name(lua_State* L) {
       :meth:`allow_buildings` or :meth:`forbid_buildings` for that.
 */
 int LuaPlayer::get_allowed_buildings(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	Player& player = get(L, egbase);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Player& player = get(L, egbase);
 
 	lua_newtable(L);
-	for (DescriptionIndex i = 0; i < egbase.tribes().nrbuildings(); ++i) {
-		const BuildingDescr* building_descr = egbase.tribes().get_building_descr(i);
+	for (Widelands::DescriptionIndex i = 0; i < egbase.tribes().nrbuildings(); ++i) {
+		const Widelands::BuildingDescr* building_descr = egbase.tribes().get_building_descr(i);
 		lua_pushstring(L, building_descr->name().c_str());
 		lua_pushboolean(L, player.is_building_type_allowed(i));
 		lua_settable(L, -3);
@@ -184,7 +181,7 @@ int LuaPlayer::get_defeated(lua_State* L) {
       can't add messages to this array, use :meth:`send_message` for that.
 */
 int LuaPlayer::get_messages(lua_State* L) {
-	Player& p = get(L, get_egbase(L));
+	Widelands::Player& p = get(L, get_egbase(L));
 
 	lua_newtable(L);
 	uint32_t cidx = 1;
@@ -204,12 +201,12 @@ int LuaPlayer::get_messages(lua_State* L) {
       can't add messages to this array, use :meth:`send_message` for that.
 */
 int LuaPlayer::get_inbox(lua_State* L) {
-	Player& p = get(L, get_egbase(L));
+	Widelands::Player& p = get(L, get_egbase(L));
 
 	lua_newtable(L);
 	uint32_t cidx = 1;
 	for (const auto& temp_message : p.messages()) {
-		if (temp_message.second->status() == Message::Status::kArchived) {
+		if (temp_message.second->status() == Widelands::Message::Status::kArchived) {
 			continue;
 		}
 
@@ -227,7 +224,7 @@ int LuaPlayer::get_inbox(lua_State* L) {
       (RO) The playercolor assigned to this player, in hex notation.
 */
 int LuaPlayer::get_color(lua_State* L) {
-	const PlayerNumber pnumber = get(L, get_egbase(L)).player_number();
+	const Widelands::PlayerNumber pnumber = get(L, get_egbase(L)).player_number();
 	lua_pushstring(L, kPlayerColors[pnumber - 1].hex_value());
 	return 1;
 }
@@ -328,19 +325,19 @@ int LuaPlayer::send_message(lua_State* L) {
 	std::string heading = title;
 	const std::string body = luaL_checkstring(L, 3);
 	std::string icon = "images/wui/messages/menu_toggle_objectives_menu.png";
-	Coords c = Coords::null();
-	Message::Status st = Message::Status::kNew;
+	Widelands::Coords c = Widelands::Coords::null();
+	Widelands::Message::Status st = Widelands::Message::Status::kNew;
 	bool popup = false;
 	std::string sub_type = "";
 
-	Game& game = get_game(L);
-	Player& plr = get(L, game);
+	Widelands::Game& game = get_game(L);
+	Widelands::Player& plr = get(L, game);
 
 	if (n == 4) {
 		// Optional arguments
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
-			c = (*get_user_class<LuaField>(L, -1))->coords();
+			c = (*get_user_class<LuaMaps::LuaField>(L, -1))->coords();
 		}
 		lua_pop(L, 1);
 
@@ -348,11 +345,11 @@ int LuaPlayer::send_message(lua_State* L) {
 		if (!lua_isnil(L, -1)) {
 			const std::string s = luaL_checkstring(L, -1);
 			if (s == "new") {
-				st = Message::Status::kNew;
+				st = Widelands::Message::Status::kNew;
 			} else if (s == "read") {
-				st = Message::Status::kRead;
+				st = Widelands::Message::Status::kRead;
 			} else if (s == "archived") {
-				st = Message::Status::kArchived;
+				st = Widelands::Message::Status::kArchived;
 			} else {
 				report_error(L, "Unknown message status: %s", s.c_str());
 			}
@@ -388,11 +385,12 @@ int LuaPlayer::send_message(lua_State* L) {
 		}
 	}
 
-	MessageId const message = plr.add_message(
-	   game,
-	   std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(), title,
-	                                        icon, heading, body, c, 0, sub_type, st)),
-	   popup);
+	Widelands::MessageId const message =
+	   plr.add_message(game,
+	                   std::unique_ptr<Widelands::Message>(new Widelands::Message(
+	                      Widelands::Message::Type::kScenario, game.get_gametime(), title, icon,
+	                      heading, body, c, 0, sub_type, st)),
+	                   popup);
 
 	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));
 }
@@ -431,7 +429,7 @@ int LuaPlayer::send_message(lua_State* L) {
 */
 // UNTESTED
 int LuaPlayer::message_box(lua_State* L) {
-	Game& game = get_game(L);
+	Widelands::Game& game = get_game(L);
 	// don't show message boxes in replays, cause they crash the game
 	if (game.game_controller()->get_game_type() == GameController::GameType::kReplay) {
 		return 1;
@@ -441,7 +439,7 @@ int LuaPlayer::message_box(lua_State* L) {
 	uint32_t h = 300;
 	int32_t posx = -1;
 	int32_t posy = -1;
-	Coords coords = Coords::null();
+	Widelands::Coords coords = Widelands::Coords::null();
 
 #define CHECK_UINT(var)                                                                            \
 	lua_getfield(L, -1, #var);                                                                      \
@@ -458,7 +456,7 @@ int LuaPlayer::message_box(lua_State* L) {
 		// If a field has been defined, read the coordinates to jump to.
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
-			coords = (*get_user_class<LuaField>(L, -1))->coords();
+			coords = (*get_user_class<LuaMaps::LuaField>(L, -1))->coords();
 		}
 		lua_pop(L, 1);
 	}
@@ -480,10 +478,10 @@ int LuaPlayer::message_box(lua_State* L) {
       :rtype: :class:`bool`
 */
 int LuaPlayer::sees_field(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
 
 	Widelands::MapIndex const i =
-	   (*get_user_class<LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
+	   (*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
 	lua_pushboolean(L, get(L, egbase).is_seeing(i));
 	return 1;
@@ -499,10 +497,10 @@ int LuaPlayer::sees_field(lua_State* L) {
       :rtype: :class:`bool`
 */
 int LuaPlayer::seen_field(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
 
 	Widelands::MapIndex const i =
-	   (*get_user_class<LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
+	   (*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
 	lua_pushboolean(L, get(L, egbase).get_vision(i) != Widelands::SeeUnseeNode::kUnexplored);
 	return 1;
@@ -557,22 +555,22 @@ int LuaPlayer::forbid_buildings(lua_State* L) {
       :rtype: :class:`wl.game.Objective`
 */
 int LuaPlayer::add_objective(lua_State* L) {
-	Game& game = get_game(L);
+	Widelands::Game& game = get_game(L);
 
-	Map::Objectives* objectives = game.mutable_map()->mutable_objectives();
+	Widelands::Map::Objectives* objectives = game.mutable_map()->mutable_objectives();
 
 	const std::string name = luaL_checkstring(L, 2);
 	if (objectives->count(name)) {
 		report_error(L, "An objective with the name '%s' already exists!", name.c_str());
 	}
 
-	Objective* o = new Objective(name);
+	Widelands::Objective* o = new Widelands::Objective(name);
 	o->set_done(false);
 	o->set_descname(luaL_checkstring(L, 3));
 	o->set_descr(luaL_checkstring(L, 4));
 	o->set_visible(true);
 
-	objectives->insert(std::make_pair(name, std::unique_ptr<Objective>(o)));
+	objectives->insert(std::make_pair(name, std::unique_ptr<Widelands::Objective>(o)));
 	return to_lua<LuaObjective>(L, new LuaObjective(*o));
 }
 
@@ -589,14 +587,15 @@ int LuaPlayer::add_objective(lua_State* L) {
       :returns: :const:`nil`
 */
 int LuaPlayer::reveal_fields(lua_State* L) {
-	Game& game = get_game(L);
-	Player& p = get(L, game);
+	Widelands::Game& game = get_game(L);
+	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.hide_or_reveal_field((*get_user_class<LuaField>(L, -1))->coords(), SeeUnseeNode::kVisible);
+		p.hide_or_reveal_field(
+		   (*get_user_class<LuaMaps::LuaField>(L, -1))->coords(), Widelands::SeeUnseeNode::kVisible);
 		lua_pop(L, 1);
 	}
 
@@ -619,17 +618,17 @@ int LuaPlayer::reveal_fields(lua_State* L) {
       :returns: :const:`nil`
 */
 int LuaPlayer::hide_fields(lua_State* L) {
-	Game& game = get_game(L);
-	Player& p = get(L, game);
+	Widelands::Game& game = get_game(L);
+	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const SeeUnseeNode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
-	                             SeeUnseeNode::kUnexplored :
-	                             SeeUnseeNode::kPreviouslySeen;
+	const Widelands::SeeUnseeNode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	                                        Widelands::SeeUnseeNode::kUnexplored :
+	                                        Widelands::SeeUnseeNode::kPreviouslySeen;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.hide_or_reveal_field((*get_user_class<LuaField>(L, -1))->coords(), mode);
+		p.hide_or_reveal_field((*get_user_class<LuaMaps::LuaField>(L, -1))->coords(), mode);
 		lua_pop(L, 1);
 	}
 
@@ -667,8 +666,8 @@ int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
       :rtype: :class:`array` or :class:`table`
 */
 int LuaPlayer::get_ships(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	PlayerNumber p = (get(L, egbase)).player_number();
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::PlayerNumber p = (get(L, egbase)).player_number();
 	lua_newtable(L);
 	uint32_t cidx = 1;
 	for (const auto& serial : egbase.player(p).ships()) {
@@ -696,8 +695,8 @@ int LuaPlayer::get_ships(lua_State* L) {
       :rtype: :class:`array` or :class:`table`
 */
 int LuaPlayer::get_buildings(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	Player& p = get(L, egbase);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Player& p = get(L, egbase);
 
 	// if only one string, convert to array so that we can use
 	// parse_building_list
@@ -712,13 +711,13 @@ int LuaPlayer::get_buildings(lua_State* L) {
 		return_array = false;
 	}
 
-	std::vector<DescriptionIndex> houses;
+	std::vector<Widelands::DescriptionIndex> houses;
 	parse_building_list(L, p.tribe(), houses);
 
 	lua_newtable(L);
 
 	uint32_t cidx = 1;
-	for (const DescriptionIndex& house : houses) {
+	for (const Widelands::DescriptionIndex& house : houses) {
 		const std::vector<Widelands::Player::BuildingStats>& vec = p.get_building_statistics(house);
 
 		if (return_array) {
@@ -733,7 +732,7 @@ int LuaPlayer::get_buildings(lua_State* L) {
 			}
 
 			lua_pushuint32(L, cidx++);
-			upcasted_map_object_to_lua(L, egbase.map()[stats.pos].get_immovable());
+			LuaMaps::upcasted_map_object_to_lua(L, egbase.map()[stats.pos].get_immovable());
 			lua_rawset(L, -3);
 		}
 
@@ -761,17 +760,17 @@ int LuaPlayer::get_buildings(lua_State* L) {
 */
 // UNTESTED
 int LuaPlayer::get_suitability(lua_State* L) {
-	Game& game = get_game(L);
-	const Tribes& tribes = game.tribes();
+	Widelands::Game& game = get_game(L);
+	const Widelands::Tribes& tribes = game.tribes();
 
 	const char* name = luaL_checkstring(L, 2);
-	DescriptionIndex i = tribes.building_index(name);
+	Widelands::DescriptionIndex i = tribes.building_index(name);
 	if (!tribes.building_exists(i)) {
 		report_error(L, "Unknown building type: <%s>", name);
 	}
 
 	lua_pushboolean(L, tribes.get_building_descr(i)->suitability(
-	                      game.map(), (*get_user_class<LuaField>(L, 3))->fcoords(L)));
+	                      game.map(), (*get_user_class<LuaMaps::LuaField>(L, 3))->fcoords(L)));
 	return 1;
 }
 
@@ -789,15 +788,15 @@ int LuaPlayer::allow_workers(lua_State* L) {
 		report_error(L, "Argument must be <all>!");
 	}
 
-	Game& game = get_game(L);
-	const TribeDescr& tribe = get(L, game).tribe();
-	Player& player = get(L, game);
+	Widelands::Game& game = get_game(L);
+	const Widelands::TribeDescr& tribe = get(L, game).tribe();
+	Widelands::Player& player = get(L, game);
 
-	const std::vector<DescriptionIndex>& worker_types_without_cost =
+	const std::vector<Widelands::DescriptionIndex>& worker_types_without_cost =
 	   tribe.worker_types_without_cost();
 
-	for (const DescriptionIndex& worker_index : tribe.workers()) {
-		const WorkerDescr* worker_descr = game.tribes().get_worker_descr(worker_index);
+	for (const Widelands::DescriptionIndex& worker_index : tribe.workers()) {
+		const Widelands::WorkerDescr* worker_descr = game.tribes().get_worker_descr(worker_index);
 		if (!worker_descr->is_buildable()) {
 			continue;
 		}
@@ -813,7 +812,7 @@ int LuaPlayer::allow_workers(lua_State* L) {
 				}
 			}
 			for (const auto& economy : player.economies()) {
-				for (Warehouse* warehouse : economy.second->warehouses()) {
+				for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
 					warehouse->enable_spawn(game, worker_types_without_cost_index);
 				}
 			}
@@ -829,7 +828,7 @@ int LuaPlayer::allow_workers(lua_State* L) {
       switch to the player with playernumber
 */
 int LuaPlayer::switchplayer(lua_State* L) {
-	Game& game = get_game(L);
+	Widelands::Game& game = get_game(L);
 
 	uint8_t newplayer = luaL_checkinteger(L, -1);
 	InteractivePlayer* ipl = game.get_ipl();
@@ -848,25 +847,25 @@ int LuaPlayer::switchplayer(lua_State* L) {
       ware name is given, integer is returned, otherwise the table is returned.
 */
 int LuaPlayer::get_produced_wares_count(lua_State* L) {
-	Player& p = get(L, get_egbase(L));
-	const TribeDescr& tribe = p.tribe();
+	Widelands::Player& p = get(L, get_egbase(L));
+	const Widelands::TribeDescr& tribe = p.tribe();
 	int32_t nargs = lua_gettop(L);
 	if (nargs != 2) {
 		report_error(L, "One argument is required for produced_wares_count()");
 	}
-	std::vector<DescriptionIndex> requested_wares;
-	DescriptionIndex single_ware = INVALID_INDEX;
+	std::vector<Widelands::DescriptionIndex> requested_wares;
+	Widelands::DescriptionIndex single_ware = Widelands::INVALID_INDEX;
 
 	LuaMaps::parse_wares_workers_list(L, tribe, &single_ware, &requested_wares, true);
 
-	if (single_ware != INVALID_INDEX) {
+	if (single_ware != Widelands::INVALID_INDEX) {
 		// We return single number
 		lua_pushuint32(L, p.get_current_produced_statistics(single_ware));
 	} else {
 		// We return array of ware:quantity
 		assert(!requested_wares.empty());
 		lua_newtable(L);
-		for (const DescriptionIndex& idx : requested_wares) {
+		for (const Widelands::DescriptionIndex& idx : requested_wares) {
 			lua_pushstring(L, tribe.get_ware_descr(idx)->name());
 			lua_pushuint32(L, p.get_current_produced_statistics(idx));
 			lua_settable(L, -3);
@@ -915,22 +914,23 @@ int LuaPlayer::set_attack_forbidden(lua_State* L) {
  ==========================================================
  */
 void LuaPlayer::parse_building_list(lua_State* L,
-                                    const TribeDescr& tribe,
-                                    std::vector<DescriptionIndex>& rv) {
-	EditorGameBase& egbase = get_egbase(L);
-	const Tribes& tribes = egbase.tribes();
+                                    const Widelands::TribeDescr& tribe,
+                                    std::vector<Widelands::DescriptionIndex>& rv) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	const Widelands::Tribes& tribes = egbase.tribes();
 	if (lua_isstring(L, -1)) {
 		std::string opt = luaL_checkstring(L, -1);
 		if (opt != "all") {
 			report_error(L, "'%s' was not understood as argument!", opt.c_str());
 		}
 		// Only act on buildings that the tribe has or could conquer
-		const TribeDescr& tribe_descr = get(L, egbase).tribe();
+		const Widelands::TribeDescr& tribe_descr = get(L, egbase).tribe();
 		for (size_t i = 0; i < tribes.nrbuildings(); ++i) {
-			const DescriptionIndex& building_index = static_cast<DescriptionIndex>(i);
-			const BuildingDescr& descr = *tribe_descr.get_building_descr(building_index);
+			const Widelands::DescriptionIndex& building_index =
+			   static_cast<Widelands::DescriptionIndex>(i);
+			const Widelands::BuildingDescr& descr = *tribe_descr.get_building_descr(building_index);
 			if (tribe_descr.has_building(building_index) ||
-			    descr.type() == MapObjectType::MILITARYSITE) {
+			    descr.type() == Widelands::MapObjectType::MILITARYSITE) {
 				rv.push_back(building_index);
 			}
 		}
@@ -941,7 +941,7 @@ void LuaPlayer::parse_building_list(lua_State* L,
 		lua_pushnil(L);
 		while (lua_next(L, -2) != 0) {
 			const char* name = luaL_checkstring(L, -1);
-			DescriptionIndex i = tribe.building_index(name);
+			Widelands::DescriptionIndex i = tribe.building_index(name);
 			if (!tribes.building_exists(i)) {
 				report_error(L, "Unknown building type: '%s'", name);
 			}
@@ -954,12 +954,12 @@ void LuaPlayer::parse_building_list(lua_State* L,
 }
 
 int LuaPlayer::allow_forbid_buildings(lua_State* L, bool allow) {
-	Player& p = get(L, get_egbase(L));
+	Widelands::Player& p = get(L, get_egbase(L));
 
-	std::vector<DescriptionIndex> houses;
+	std::vector<Widelands::DescriptionIndex> houses;
 	parse_building_list(L, p.tribe(), houses);
 
-	for (const DescriptionIndex& house : houses) {
+	for (const Widelands::DescriptionIndex& house : houses) {
 		p.allow_building_type(house, allow);
 	}
 	return 0;
@@ -1009,7 +1009,7 @@ void LuaObjective::__unpersist(lua_State* L) {
       :attr:`wl.game.Player.objectives` with :attr:`name` as key.
 */
 int LuaObjective::get_name(lua_State* L) {
-	Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	lua_pushstring(L, o.name().c_str());
 	return 1;
 }
@@ -1019,12 +1019,12 @@ int LuaObjective::get_name(lua_State* L) {
       (RW) The line that is shown in the objectives menu
 */
 int LuaObjective::get_title(lua_State* L) {
-	Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	lua_pushstring(L, o.descname().c_str());
 	return 1;
 }
 int LuaObjective::set_title(lua_State* L) {
-	Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	o.set_descname(luaL_checkstring(L, -1));
 	return 0;
 }
@@ -1034,12 +1034,12 @@ int LuaObjective::set_title(lua_State* L) {
       (RW) The complete text of this objective. Can be Widelands Richtext.
 */
 int LuaObjective::get_body(lua_State* L) {
-	Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	lua_pushstring(L, o.descr().c_str());
 	return 1;
 }
 int LuaObjective::set_body(lua_State* L) {
-	Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	o.set_descr(luaL_checkstring(L, -1));
 	return 0;
 }
@@ -1049,12 +1049,12 @@ int LuaObjective::set_body(lua_State* L) {
       (RW) is this objective shown in the objectives menu
 */
 int LuaObjective::get_visible(lua_State* L) {
-	Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	lua_pushboolean(L, o.visible());
 	return 1;
 }
 int LuaObjective::set_visible(lua_State* L) {
-	Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	o.set_visible(luaL_checkboolean(L, -1));
 	return 0;
 }
@@ -1068,12 +1068,12 @@ int LuaObjective::set_visible(lua_State* L) {
 
 */
 int LuaObjective::get_done(lua_State* L) {
-	Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	lua_pushboolean(L, o.done());
 	return 1;
 }
 int LuaObjective::set_done(lua_State* L) {
-	Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	o.set_done(luaL_checkboolean(L, -1));
 
 	const int32_t autosave = get_config_int("autosave", 0);
@@ -1099,7 +1099,7 @@ int LuaObjective::set_done(lua_State* L) {
  ==========================================================
  */
 int LuaObjective::remove(lua_State* L) {
-	Game& g = get_game(L);
+	Widelands::Game& g = get_game(L);
 	// The next call checks if the Objective still exists
 	get(L, g);
 	g.mutable_map()->mutable_objectives()->erase(name_);
@@ -1107,10 +1107,10 @@ int LuaObjective::remove(lua_State* L) {
 }
 
 int LuaObjective::__eq(lua_State* L) {
-	const Map::Objectives& objectives = get_game(L).map().objectives();
+	const Widelands::Map::Objectives& objectives = get_game(L).map().objectives();
 
-	const Map::Objectives::const_iterator me = objectives.find(name_);
-	const Map::Objectives::const_iterator other =
+	const Widelands::Map::Objectives::const_iterator me = objectives.find(name_);
+	const Widelands::Map::Objectives::const_iterator other =
 	   objectives.find((*get_user_class<LuaObjective>(L, 2))->name_);
 
 	lua_pushboolean(L, (me != objectives.end() && other != objectives.end()) &&
@@ -1123,9 +1123,9 @@ int LuaObjective::__eq(lua_State* L) {
  C METHODS
  ==========================================================
  */
-Objective& LuaObjective::get(lua_State* L, Widelands::Game& g) {
-	Map::Objectives* objectives = g.mutable_map()->mutable_objectives();
-	Map::Objectives::iterator i = objectives->find(name_);
+Widelands::Objective& LuaObjective::get(lua_State* L, Widelands::Game& g) {
+	Widelands::Map::Objectives* objectives = g.mutable_map()->mutable_objectives();
+	Widelands::Map::Objectives::iterator i = objectives->find(name_);
 	if (i == objectives->end()) {
 		report_error(L, "Objective with name '%s' doesn't exist!", name_.c_str());
 	}
@@ -1151,7 +1151,7 @@ const PropertyType<LuaMessage> LuaMessage::Properties[] = {
    PROP_RO(LuaMessage, icon_name), {nullptr, nullptr, nullptr},
 };
 
-LuaMessage::LuaMessage(uint8_t plr, MessageId id) {
+LuaMessage::LuaMessage(uint8_t plr, Widelands::MessageId id) {
 	player_number_ = plr;
 	message_id_ = id;
 }
@@ -1164,7 +1164,7 @@ void LuaMessage::__unpersist(lua_State* L) {
 	UNPERS_UINT32("player", player_number_)
 	uint32_t midx = 0;
 	UNPERS_UINT32("msg_idx", midx)
-	message_id_ = MessageId(midx);
+	message_id_ = Widelands::MessageId(midx);
 }
 
 /*
@@ -1208,11 +1208,11 @@ int LuaMessage::get_sent(lua_State* L) {
       (RO) The field that corresponds to this Message.
 */
 int LuaMessage::get_field(lua_State* L) {
-	Coords c = get(L, get_game(L)).position();
-	if (c == Coords::null()) {
+	Widelands::Coords c = get(L, get_game(L)).position();
+	if (c == Widelands::Coords::null()) {
 		return 0;
 	}
-	return to_lua<LuaField>(L, new LuaField(c));
+	return to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(c));
 }
 
 /* RST
@@ -1226,27 +1226,27 @@ int LuaMessage::get_field(lua_State* L) {
 */
 int LuaMessage::get_status(lua_State* L) {
 	switch (get(L, get_game(L)).status()) {
-	case Message::Status::kNew:
+	case Widelands::Message::Status::kNew:
 		lua_pushstring(L, "new");
 		break;
-	case Message::Status::kRead:
+	case Widelands::Message::Status::kRead:
 		lua_pushstring(L, "read");
 		break;
-	case Message::Status::kArchived:
+	case Widelands::Message::Status::kArchived:
 		lua_pushstring(L, "archived");
 		break;
 	}
 	return 1;
 }
 int LuaMessage::set_status(lua_State* L) {
-	Message::Status status = Message::Status::kNew;
+	Widelands::Message::Status status = Widelands::Message::Status::kNew;
 	std::string s = luaL_checkstring(L, -1);
 	if (s == "new") {
-		status = Message::Status::kNew;
+		status = Widelands::Message::Status::kNew;
 	} else if (s == "read") {
-		status = Message::Status::kRead;
+		status = Widelands::Message::Status::kRead;
 	} else if (s == "archived") {
-		status = Message::Status::kArchived;
+		status = Widelands::Message::Status::kArchived;
 	} else {
 		report_error(L, "Invalid message status <%s>!", s.c_str());
 	}
@@ -1291,18 +1291,18 @@ int LuaMessage::__eq(lua_State* L) {
  C METHODS
  ==========================================================
  */
-Player& LuaMessage::get_plr(lua_State* L, Widelands::Game& game) {
+Widelands::Player& LuaMessage::get_plr(lua_State* L, Widelands::Game& game) {
 	if (player_number_ > kMaxPlayers) {
 		report_error(L, "Illegal player number %i", player_number_);
 	}
-	Player* rv = game.get_player(player_number_);
+	Widelands::Player* rv = game.get_player(player_number_);
 	if (!rv) {
 		report_error(L, "Player with the number %i does not exist", player_number_);
 	}
 	return *rv;
 }
-const Message& LuaMessage::get(lua_State* L, Widelands::Game& game) {
-	const Message* rv = get_plr(L, game).messages()[message_id_];
+const Widelands::Message& LuaMessage::get(lua_State* L, Widelands::Game& game) {
+	const Widelands::Message* rv = get_plr(L, game).messages()[message_id_];
 	if (!rv) {
 		report_error(L, "This message has been deleted!");
 	}

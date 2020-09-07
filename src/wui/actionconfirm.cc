@@ -43,7 +43,7 @@ struct ActionConfirm : public UI::Window {
 		return dynamic_cast<InteractivePlayer&>(*get_parent());
 	}
 
-	virtual void think() = 0;
+	void think() override = 0;
 	virtual void ok() = 0;
 
 protected:
