@@ -85,9 +85,12 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		// The building's state has changed
 		case Widelands::NoteBuilding::Action::kChanged:
 			if (!is_dying_) {
-				const std::string active_tab = tabs_->tabs()[tabs_->active()]->get_name();
-				init(true, showing_workarea_);
-				tabs_->activate(active_tab);
+				NoteDelayedCheck::instantiate(this, [this]() {
+					MutexLock m;
+					const std::string active_tab = tabs_->tabs()[tabs_->active()]->get_name();
+					init(true, showing_workarea_);
+					tabs_->activate(active_tab);
+				}, true);
 			}
 			break;
 		// The building is no more. Next think() will call die().
