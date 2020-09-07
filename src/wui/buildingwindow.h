@@ -141,6 +141,9 @@ private:
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>
 	   expedition_canceled_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
+
+	bool think_without_locking_;
+
 	DISALLOW_COPY_AND_ASSIGN(BuildingWindow);
 };
 

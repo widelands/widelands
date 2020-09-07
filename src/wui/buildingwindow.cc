@@ -62,7 +62,8 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      avoid_fastclick_(avoid_fastclick),
      expeditionbtn_(nullptr),
      mute_this_(nullptr),
-     mute_all_(nullptr) {
+     mute_all_(nullptr),
+     think_without_locking_(false) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) { on_building_note(note); });
 }
@@ -88,11 +89,16 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 				NoteDelayedCheck::instantiate(
 				   this,
 				   [this]() {
-					   MutexLock m;
+					   assert(!think_without_locking_);
+					   think_without_locking_ = true;
+
 					   const std::string active_tab =  // comment to fix codecheck false positive
 					      tabs_->tabs()[tabs_->active()]->get_name();
 					   init(true, showing_workarea_);
 					   tabs_->activate(active_tab);
+
+					   assert(think_without_locking_);
+					   think_without_locking_ = false;
 				   },
 				   true);
 			}
@@ -173,7 +179,7 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 ===============
 */
 void BuildingWindow::think() {
-	MutexLock lock;
+	MutexLock lock(think_without_locking_);
 
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (building == nullptr || !igbase()->can_see(building->owner().player_number())) {
