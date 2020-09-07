@@ -786,6 +786,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
+			MutexLock m;
 			rendered_text = UI::g_fh->render(
 			   as_richtext_paragraph((boost::format("DISPLAY: %5.1f fps (avg: %5.1f fps)") %
 			                          (1000.0 / frametime_) % average_fps())
