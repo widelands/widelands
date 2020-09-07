@@ -78,11 +78,13 @@ private:
 	Widelands::Coords position_;
 	Widelands::Flag flag_;
 };
-void TestingRoutingNode::get_neighbours(Widelands::WareWorker type, Widelands::RoutingNodeNeighbours& n) {
+void TestingRoutingNode::get_neighbours(Widelands::WareWorker type,
+                                        Widelands::RoutingNodeNeighbours& n) {
 	for (TestingRoutingNode* nb : neighbours_) {
 		// second parameter is walktime in ms from this flag to the neighbour.
 		// only depends on slope
-		n.push_back(Widelands::RoutingNodeNeighbour(nb, 1000 * ((type == Widelands::wwWARE) ? 1 + waitcost_ : 1)));
+		n.push_back(Widelands::RoutingNodeNeighbour(
+		   nb, 1000 * ((type == Widelands::wwWARE) ? 1 + waitcost_ : 1)));
 	}
 }
 bool TestingRoutingNode::all_members_zeroed() {
@@ -94,7 +96,8 @@ bool TestingRoutingNode::all_members_zeroed() {
 }
 
 class TestingTransportCostCalculator : public Widelands::ITransportCostCalculator {
-	int32_t calc_cost_estimate(const Widelands::Coords& c1, const Widelands::Coords& c2) const override {
+	int32_t calc_cost_estimate(const Widelands::Coords& c1,
+	                           const Widelands::Coords& c2) const override {
 		// We use an euclidian metric here. It is much easier for
 		// test cases
 		double xd = (c1.x - c2.x);

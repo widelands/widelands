@@ -157,7 +157,8 @@ void write_buildings(const Widelands::TribeDescr& tribe, FileSystem* out_filesys
 		} else if (building.get_isport()) {
 			json_building->add_string("size", "port");
 		} else {
-			json_building->add_string("size", Widelands::BaseImmovable::size_to_string(building.get_size()));
+			json_building->add_string(
+			   "size", Widelands::BaseImmovable::size_to_string(building.get_size()));
 		}
 
 		// Helptext
@@ -265,7 +266,8 @@ void write_tribes(Widelands::EditorGameBase& egbase, FileSystem* out_filesystem)
 		json_tribe_for_file->write_to_file(
 		   *out_filesystem, (boost::format("tribe_%s.json") % tribe_info.name).str().c_str());
 
-		const Widelands::TribeDescr& tribe = *tribes.get_tribe_descr(tribes.tribe_index(tribe_info.name));
+		const Widelands::TribeDescr& tribe =
+		   *tribes.get_tribe_descr(tribes.tribe_index(tribe_info.name));
 		write_buildings(tribe, out_filesystem);
 		write_wares(tribe, out_filesystem);
 		write_workers(tribe, out_filesystem);
