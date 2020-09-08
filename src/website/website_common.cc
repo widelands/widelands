@@ -22,6 +22,7 @@
 #include <SDL.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
@@ -32,7 +33,10 @@ void initialize() {
 	i18n::set_locale("en");
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		throw wexception("Unable to initialize SDL: %s", SDL_GetError());
+		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
+		// too frequent failures
+		log_err("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
+		exit(2);
 	}
 
 	g_fs = new LayeredFileSystem();
