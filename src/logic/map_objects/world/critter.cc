@@ -529,18 +529,17 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 			if (packet_version < 4) {
-				fr.c_string(); // Consume obsolete owner type (world/tribes)
+				fr.c_string();  // Consume obsolete owner type (world/tribes)
 			}
 			std::string critter_name = fr.c_string();
 			const CritterDescr* descr = nullptr;
 
 			critter_name = lookup_table.lookup_critter(critter_name, packet_version);
-			descr =
-			   egbase.descriptions().get_critter_descr(egbase.mutable_descriptions()->load_critter(critter_name));
+			descr = egbase.descriptions().get_critter_descr(
+			   egbase.mutable_descriptions()->load_critter(critter_name));
 
 			if (!descr) {
-				throw GameDataError(
-				   "undefined critter '%s'", critter_name.c_str());
+				throw GameDataError("undefined critter '%s'", critter_name.c_str());
 			}
 
 			Critter& critter = dynamic_cast<Critter&>(descr->create_object());

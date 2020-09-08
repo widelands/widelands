@@ -63,7 +63,8 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	LuaInterface* lua = &parent.egbase().lua();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>(
-	      this, parent.editor_categories(Widelands::MapObjectType::IMMOVABLE), descriptions.immovables(),
+	      this, parent.editor_categories(Widelands::MapObjectType::IMMOVABLE),
+	      descriptions.immovables(),
 	      [lua](UI::Panel* cb_parent, const Widelands::ImmovableDescr& immovable_descr) {
 		      return create_immovable_checkbox(cb_parent, lua, immovable_descr);
 	      },

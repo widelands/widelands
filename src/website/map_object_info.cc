@@ -269,7 +269,8 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 		json_tribe_for_file->write_to_file(
 		   *out_filesystem, (boost::format("tribe_%s.json") % tribe_info.name).str().c_str());
 
-		const TribeDescr& tribe = *descriptions.get_tribe_descr(descriptions.tribe_index(tribe_info.name));
+		const TribeDescr& tribe =
+		   *descriptions.get_tribe_descr(descriptions.tribe_index(tribe_info.name));
 		write_buildings(tribe, out_filesystem);
 		write_wares(tribe, out_filesystem);
 		write_workers(tribe, out_filesystem);

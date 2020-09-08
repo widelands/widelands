@@ -156,7 +156,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
-	parse_working_positions(descriptions, table.get_table("working_positions").get(), &working_positions_);
+	parse_working_positions(
+	   descriptions, table.get_table("working_positions").get(), &working_positions_);
 
 	// Get programs
 	items_table = table.get_table("programs");
@@ -209,7 +210,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			throw GameDataError("ai_hints for building %s collects nonexistent ware %s from map",
 			                    name().c_str(), hints().collects_ware_from_map().c_str());
 		}
-		const DescriptionIndex collects_index = descriptions.load_ware(hints().collects_ware_from_map());
+		const DescriptionIndex collects_index =
+		   descriptions.load_ware(hints().collects_ware_from_map());
 		if (!is_output_ware_type(collects_index)) {
 			throw GameDataError("ai_hints for building %s collects ware %s from map, but it's not "
 			                    "listed in the building's output",

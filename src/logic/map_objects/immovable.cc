@@ -138,7 +138,7 @@ ImmovableDescr IMPLEMENTATION
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
                                const std::vector<std::string>& attribs,
-							   Descriptions& descriptions)
+                               Descriptions& descriptions)
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
      size_(BaseImmovable::NONE) {
 	if (!is_animation_known("idle")) {
@@ -704,13 +704,14 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersionImmovable) {
 			if (packet_version < 11) {
-				fr.c_string(); // Consume obsolete owner type (world/tribes)
+				fr.c_string();  // Consume obsolete owner type (world/tribes)
 			}
 			Immovable* imm = nullptr;
 
-			const std::string name = tribes_lookup_table.lookup_immovable(world_lookup_table.lookup_immovable(fr.c_string()));
-			imm = new Immovable(
-			   *egbase.descriptions().get_immovable_descr(egbase.mutable_descriptions()->load_immovable(name)));
+			const std::string name = tribes_lookup_table.lookup_immovable(
+			   world_lookup_table.lookup_immovable(fr.c_string()));
+			imm = new Immovable(*egbase.descriptions().get_immovable_descr(
+			   egbase.mutable_descriptions()->load_immovable(name)));
 
 			loader->init(egbase, mol, *imm);
 			loader->load(fr, packet_version);

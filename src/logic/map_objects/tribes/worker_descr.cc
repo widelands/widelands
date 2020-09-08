@@ -117,7 +117,9 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	}
 }
 
-WorkerDescr::WorkerDescr(const std::string& init_descname, const LuaTable& table, Descriptions& descriptions)
+WorkerDescr::WorkerDescr(const std::string& init_descname,
+                         const LuaTable& table,
+                         Descriptions& descriptions)
    : WorkerDescr(init_descname, MapObjectType::WORKER, table, descriptions) {
 }
 

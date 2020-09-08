@@ -51,7 +51,8 @@ void MapBobPacket::read_bob(FileRead& fr,
 	const std::string name = lookup_table.lookup_critter(read_name, packet_version);
 	try {
 		Descriptions* descriptions = egbase.mutable_descriptions();
-		const CritterDescr& descr = *descriptions->get_critter_descr(descriptions->load_critter(name));
+		const CritterDescr& descr =
+		   *descriptions->get_critter_descr(descriptions->load_critter(name));
 		descr.create(egbase, nullptr, coords);
 		// We do not register this object as needing loading. This packet is only
 		// in fresh maps, that are just started. As soon as the game saves

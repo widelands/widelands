@@ -700,7 +700,8 @@ void EconomyOptionsWindow::save_targets() {
 		}
 		Section& section = profile.create_section(std::to_string(serials.at(pair.first)).c_str());
 		for (const auto& setting : pair.second.wares) {
-			section.set_natural(descriptions.get_ware_descr(setting.first)->name().c_str(), setting.second);
+			section.set_natural(
+			   descriptions.get_ware_descr(setting.first)->name().c_str(), setting.second);
 		}
 		for (const auto& setting : pair.second.workers) {
 			section.set_natural(

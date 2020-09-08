@@ -117,7 +117,8 @@ void find_former_buildings(const Descriptions& descriptions,
 		for (DescriptionIndex i = 0; i < descriptions.nr_buildings(); ++i) {
 			const BuildingDescr* building_descr = descriptions.get_building_descr(i);
 			if (building_descr->enhancement() == oldest_idx) {
-				former_buildings->insert(former_buildings->begin(), std::make_pair(i, MapObjectType::BUILDING));
+				former_buildings->insert(
+				   former_buildings->begin(), std::make_pair(i, MapObjectType::BUILDING));
 				break;
 			}
 		}
@@ -1639,8 +1640,8 @@ void Player::update_building_statistics(Building& building, NoteImmovable::Owner
 		building_stats_.resize(nr_buildings);
 	}
 
-	std::vector<BuildingStats>& stat =
-	   *get_mutable_building_statistics(egbase().descriptions().building_index(building_name.c_str()));
+	std::vector<BuildingStats>& stat = *get_mutable_building_statistics(
+	   egbase().descriptions().building_index(building_name.c_str()));
 
 	if (ownership == NoteImmovable::Ownership::GAINED) {
 		BuildingStats new_building;

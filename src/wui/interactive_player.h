@@ -23,9 +23,9 @@
 #include <memory>
 
 #include "io/profile.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/message_id.h"
 #include "logic/note_map_options.h"
-#include "logic/map_objects/tribes/ship.h"
 #include "ui_basic/button.h"
 #include "wui/interactive_gamebase.h"
 

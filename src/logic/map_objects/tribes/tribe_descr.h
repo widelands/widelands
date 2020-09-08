@@ -155,7 +155,8 @@ private:
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername, Descriptions& descriptions);
 	// Helper function for adding a special building type (port etc.)
-	DescriptionIndex add_special_building(const std::string& buildingname, Descriptions& descriptions);
+	DescriptionIndex add_special_building(const std::string& buildingname,
+	                                      Descriptions& descriptions);
 	// Make sure that everything is there and that dependencies are calculated
 	void finalize_loading(Descriptions& descriptions);
 	// Helper function to calculate trainingsites proportions for the AI

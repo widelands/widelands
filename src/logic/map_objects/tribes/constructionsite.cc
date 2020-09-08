@@ -391,7 +391,8 @@ void ConstructionSite::enhance(Game& game) {
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
 	info_.intermediates.push_back(building_);
-	old_buildings_.push_back(std::make_pair(owner().tribe().building_index(building_->name()), MapObjectType::BUILDING));
+	old_buildings_.push_back(
+	   std::make_pair(owner().tribe().building_index(building_->name()), MapObjectType::BUILDING));
 	building_ = owner().tribe().get_building_descr(building_->enhancement());
 	assert(building_);
 	info_.becomes = building_;

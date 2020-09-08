@@ -49,10 +49,10 @@
 namespace Widelands {
 Descriptions::Descriptions(DescriptionManager* description_manager, LuaInterface* lua)
    : critters_(new DescriptionMaintainer<CritterDescr>()),
-	 immovables_(new DescriptionMaintainer<ImmovableDescr>()),
+     immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
      resources_(new DescriptionMaintainer<ResourceDescription>()),
-	 buildings_(new DescriptionMaintainer<BuildingDescr>()),
+     buildings_(new DescriptionMaintainer<BuildingDescr>()),
      ships_(new DescriptionMaintainer<ShipDescr>()),
      wares_(new DescriptionMaintainer<WareDescr>()),
      workers_(new DescriptionMaintainer<WorkerDescr>()),
@@ -332,8 +332,8 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 	// Add
 	switch (type) {
 	case MapObjectType::CRITTER:
-		critters_->add(new CritterDescr(
-		   type_descname, table, description_manager_->get_attributes(type_name)));
+		critters_->add(
+		   new CritterDescr(type_descname, table, description_manager_->get_attributes(type_name)));
 		break;
 	case MapObjectType::RESOURCE:
 		resources_->add(new ResourceDescription(table));
@@ -400,8 +400,8 @@ void Descriptions::add_tribe(const LuaTable& table) {
 	if (Widelands::tribe_exists(name)) {
 		if (scenario_tribes_ != nullptr && scenario_tribes_->has_key(name)) {
 			// If we're loading a scenario with custom tribe entites, load them here.
-			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, table,
-			                            scenario_tribes_->get_table(name).get()));
+			tribes_->add(new TribeDescr(
+			   Widelands::get_tribeinfo(name), *this, table, scenario_tribes_->get_table(name).get()));
 		} else {
 			// Normal tribes loading without scenario entities
 			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, table));

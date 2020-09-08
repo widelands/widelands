@@ -156,8 +156,7 @@ public:
 	                                std::map<DescriptionIndex, Quantity>());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
-	Immovable&
-	create_immovable(const Coords&, DescriptionIndex idx, Player* owner);
+	Immovable& create_immovable(const Coords&, DescriptionIndex idx, Player* owner);
 	Immovable& create_immovable_with_name(const Coords&,
 	                                      const std::string& name,
 	                                      Player* owner,

@@ -155,8 +155,10 @@ bool CheckStepFerry::allowed(
 		break;
 	}
 	const Descriptions& descriptions = egbase_.descriptions();
-	return (descriptions.get_terrain_descr(fd.field->terrain_d())->get_is() & TerrainDescription::Is::kWater) &&
-	       (descriptions.get_terrain_descr(fr.field->terrain_r())->get_is() & TerrainDescription::Is::kWater);
+	return (descriptions.get_terrain_descr(fd.field->terrain_d())->get_is() &
+	        TerrainDescription::Is::kWater) &&
+	       (descriptions.get_terrain_descr(fr.field->terrain_r())->get_is() &
+	        TerrainDescription::Is::kWater);
 }
 
 bool CheckStepFerry::reachable_dest(const Map& map, const FCoords& dest) const {

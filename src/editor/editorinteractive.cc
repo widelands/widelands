@@ -587,7 +587,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		uint8_t const amount = field.fcoords.field->get_resources_amount();
 		if (draw_resources_ && amount > 0) {
 			const std::string& immname =
-			   descriptions.get_resource_descr(field.fcoords.field->get_resources())->editor_image(amount);
+			   descriptions.get_resource_descr(field.fcoords.field->get_resources())
+			      ->editor_image(amount);
 			if (!immname.empty()) {
 				const auto* pic = g_image_cache->get(immname);
 				blit_field_overlay(
@@ -994,11 +995,11 @@ void EditorInteractive::load_world_units() {
 	std::unique_ptr<LuaTable> table(egbase().lua().run_script("world/init.lua"));
 
 	auto load_category = [this, descriptions](const LuaTable& t, const std::string& key,
-	                                   Widelands::MapObjectType type) {
+	                                          Widelands::MapObjectType type) {
 		for (const auto& category_table :
 		     t.get_table(key)->array_entries<std::unique_ptr<LuaTable>>()) {
-			editor_categories_[type].push_back(
-			   std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, type, *descriptions)));
+			editor_categories_[type].push_back(std::unique_ptr<EditorCategory>(
+			   new EditorCategory(*category_table, type, *descriptions)));
 		}
 	};
 

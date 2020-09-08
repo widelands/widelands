@@ -80,7 +80,9 @@ MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& map_ge
 	do_assign("wasteland_outer_bobs", &wasteland_outer_bob_category_);
 }
 
-MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table, const Descriptions& descriptions, Area const area_type) {
+MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
+                               const Descriptions& descriptions,
+                               Area const area_type) {
 	weight_ = get_positive_int(table, "weight");
 
 	const auto read_terrains = [&table, &descriptions](
@@ -277,8 +279,8 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const Descriptions& descriptions) 
 		std::unique_ptr<LuaTable> areas(table.get_table("areas"));
 
 		const auto read_area = [&descriptions, &areas](const std::string& area_name,
-		                                        const MapGenAreaInfo::Area area_type,
-		                                        std::vector<MapGenAreaInfo>* area_vector) {
+		                                               const MapGenAreaInfo::Area area_type,
+		                                               std::vector<MapGenAreaInfo>* area_vector) {
 			std::unique_ptr<LuaTable> area(areas->get_table(area_name));
 			std::vector<std::unique_ptr<LuaTable>> entries =
 			   area->array_entries<std::unique_ptr<LuaTable>>();

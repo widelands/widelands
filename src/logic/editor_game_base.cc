@@ -397,7 +397,8 @@ Bob& EditorGameBase::create_bob(Coords c, const BobDescr& descr, Player* owner) 
 Bob& EditorGameBase::create_critter(const Coords& c,
                                     DescriptionIndex const bob_type_idx,
                                     Player* owner) {
-	const BobDescr* descr = dynamic_cast<const BobDescr*>(descriptions().get_critter_descr(bob_type_idx));
+	const BobDescr* descr =
+	   dynamic_cast<const BobDescr*>(descriptions().get_critter_descr(bob_type_idx));
 	return create_bob(c, *descr, owner);
 }
 
@@ -420,9 +421,8 @@ If this immovable was created by a building, 'former_building' can be set in ord
 information about it.
 ===============
 */
-Immovable& EditorGameBase::create_immovable(const Coords& c,
-                                            DescriptionIndex const idx,
-                                            Player* owner) {
+Immovable&
+EditorGameBase::create_immovable(const Coords& c, DescriptionIndex const idx, Player* owner) {
 	return do_create_immovable(c, idx, owner, nullptr);
 }
 
@@ -432,9 +432,8 @@ Immovable& EditorGameBase::create_immovable_with_name(const Coords& c,
                                                       const BuildingDescr* former_building_descr) {
 	const DescriptionIndex idx = descriptions().immovable_index(name.c_str());
 	if (!descriptions().immovable_exists(idx)) {
-		throw wexception(
-		   "EditorGameBase::create_immovable_with_name(%i, %i): %s is not defined",
-		   c.x, c.y, name.c_str());
+		throw wexception("EditorGameBase::create_immovable_with_name(%i, %i): %s is not defined", c.x,
+		                 c.y, name.c_str());
 	}
 	return do_create_immovable(c, idx, owner, former_building_descr);
 }
@@ -461,7 +460,8 @@ Immovable& EditorGameBase::do_create_immovable(const Coords& c,
 Bob& EditorGameBase::create_ship(const Coords& c,
                                  DescriptionIndex const ship_type_idx,
                                  Player* owner) {
-	const BobDescr* descr = dynamic_cast<const BobDescr*>(descriptions().get_ship_descr(ship_type_idx));
+	const BobDescr* descr =
+	   dynamic_cast<const BobDescr*>(descriptions().get_ship_descr(ship_type_idx));
 	return create_bob(c, *descr, owner);
 }
 

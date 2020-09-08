@@ -47,13 +47,12 @@
 namespace {
 
 // Recursively get attributes for immovable growth cycle
-void walk_immovables(
-   Widelands::DescriptionIndex index,
-   const Widelands::Descriptions& descriptions,
-   std::set<Widelands::DescriptionIndex>* walked_immovables,
-   const std::set<Widelands::MapObjectDescr::AttributeIndex>& needed_attributes,
-   std::set<std::string>* deduced_immovables,
-   std::set<std::string>* deduced_bobs) {
+void walk_immovables(Widelands::DescriptionIndex index,
+                     const Widelands::Descriptions& descriptions,
+                     std::set<Widelands::DescriptionIndex>* walked_immovables,
+                     const std::set<Widelands::MapObjectDescr::AttributeIndex>& needed_attributes,
+                     std::set<std::string>* deduced_immovables,
+                     std::set<std::string>* deduced_bobs) {
 	// Protect against endless recursion
 	if (walked_immovables->count(index) == 1) {
 		return;
@@ -80,7 +79,7 @@ void walk_immovables(
 			   descriptions.immovable_index(imm_becomes.second);
 			assert(becomes_index != Widelands::INVALID_INDEX);
 			walk_immovables(becomes_index, descriptions, walked_immovables, needed_attributes,
-			                      deduced_immovables, deduced_bobs);
+			                deduced_immovables, deduced_bobs);
 		} break;
 		default:
 			NEVER_HERE();
@@ -720,7 +719,8 @@ ToolbarImageset* TribeDescr::toolbar_image_set() const {
  * Helper functions
  */
 
-DescriptionIndex TribeDescr::add_special_worker(const std::string& workername, Descriptions& descriptions) {
+DescriptionIndex TribeDescr::add_special_worker(const std::string& workername,
+                                                Descriptions& descriptions) {
 	try {
 		DescriptionIndex worker = descriptions.load_worker(workername);
 		if (!has_worker(worker)) {
@@ -732,7 +732,8 @@ DescriptionIndex TribeDescr::add_special_worker(const std::string& workername, D
 	}
 }
 
-DescriptionIndex TribeDescr::add_special_building(const std::string& buildingname, Descriptions& descriptions) {
+DescriptionIndex TribeDescr::add_special_building(const std::string& buildingname,
+                                                  Descriptions& descriptions) {
 	try {
 		DescriptionIndex building = descriptions.load_building(buildingname);
 		if (!has_building(building)) {
@@ -959,7 +960,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				const ImmovableDescr& immovable_descr = *get_immovable_descr(i);
 				if (immovable_descr.has_attribute(attribute_id)) {
 					walk_immovables(i, descriptions, &walked_immovables, needed_attributes,
-					                      &deduced_immovables, &deduced_bobs);
+					                &deduced_immovables, &deduced_bobs);
 					if (needed_attributes.count(attribute_id) == 1) {
 						prod->add_created_immovable(immovable_descr.name());
 						add_creator(immovable_descr.name(), prod);

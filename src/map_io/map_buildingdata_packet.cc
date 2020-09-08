@@ -152,13 +152,16 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							DescriptionIndex oldidx =
 							   building.owner().tribe().safe_building_index(fr.c_string());
 							const std::string type(fr.c_string());
-							building.old_buildings_.push_back(std::make_pair(oldidx, type.empty() || type == "building" ? MapObjectType::BUILDING : MapObjectType::IMMOVABLE));
+							building.old_buildings_.push_back(std::make_pair(
+							   oldidx, type.empty() || type == "building" ? MapObjectType::BUILDING :
+							                                                MapObjectType::IMMOVABLE));
 						}
 					} else {
 						while (fr.unsigned_8()) {
 							DescriptionIndex oldidx =
 							   building.owner().tribe().safe_building_index(fr.c_string());
-							building.old_buildings_.push_back(std::make_pair(oldidx, MapObjectType::BUILDING));
+							building.old_buildings_.push_back(
+							   std::make_pair(oldidx, MapObjectType::BUILDING));
 						}
 					}
 					// Only construction sites may have an empty list
@@ -313,7 +316,8 @@ void MapBuildingdataPacket::read_constructionsite(
 				const uint32_t intermediates = fr.unsigned_32();
 				for (uint32_t i = 0; i < intermediates; ++i) {
 					constructionsite.info_.intermediates.push_back(
-					   game.descriptions().get_building_descr(game.descriptions().building_index(fr.c_string())));
+					   game.descriptions().get_building_descr(
+					      game.descriptions().building_index(fr.c_string())));
 				}
 				constructionsite.settings_.reset(BuildingSettings::load(
 				   game, constructionsite.owner().tribe(), fr, tribes_lookup_table));

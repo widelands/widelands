@@ -143,10 +143,12 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			DescriptionIndex const enhancement_idx = descriptions.load_building(enhancement_name);
 			if (descriptions.building_exists(enhancement_idx)) {
 				enhancement_ = enhancement_idx;
-				BuildingDescr* enhanced_building = descriptions.get_mutable_building_descr(enhancement_idx);
+				BuildingDescr* enhanced_building =
+				   descriptions.get_mutable_building_descr(enhancement_idx);
 				enhanced_building->set_enhancement_cost(
 				   Buildcost(enhancement_table->get_table("enhancement_cost"), descriptions),
-				   Buildcost(enhancement_table->get_table("enhancement_return_on_dismantle"), descriptions));
+				   Buildcost(
+				      enhancement_table->get_table("enhancement_return_on_dismantle"), descriptions));
 
 				//  Merge the enhancements workarea info into this building's
 				//  workarea info.
@@ -186,8 +188,9 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			                    "\"return_on_dismantle_on_enhanced\"",
 			                    name().c_str());
 		}
-		set_enhancement_cost(Buildcost(table.get_table("enhancement_cost"), descriptions),
-		                     Buildcost(table.get_table("return_on_dismantle_on_enhanced"), descriptions));
+		set_enhancement_cost(
+		   Buildcost(table.get_table("enhancement_cost"), descriptions),
+		   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), descriptions));
 	}
 
 	needs_seafaring_ = false;
@@ -236,8 +239,7 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 			    f.field->get_immovable()->has_attribute(built_over_immovable_)) {
 				upcast(const ImmovableDescr, imm, &f.field->get_immovable()->descr());
 				assert(imm);
-				immovable =
-				     egbase.descriptions().immovable_index(imm->name());
+				immovable = egbase.descriptions().immovable_index(imm->name());
 			} else {
 				throw wexception(
 				   "Attempting to build %s at %dx%d – no immovable with required attribute %i found",
@@ -904,7 +906,8 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
-	if (mute_messages() || owner().is_muted(game.descriptions().safe_building_index(descr().name()))) {
+	if (mute_messages() ||
+	    owner().is_muted(game.descriptions().safe_building_index(descr().name()))) {
 		return;
 	}
 

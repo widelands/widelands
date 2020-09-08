@@ -50,10 +50,10 @@ void MapResourcesPacket::read(FileSystem& fs,
 			for (uint8_t i = 0; i < nr_res; ++i) {
 				uint8_t const id = fr.unsigned_16();
 				const std::string resource_name(lookup_table.lookup_resource(fr.c_string()));
-				const DescriptionIndex res = egbase.mutable_descriptions()->load_resource(resource_name);
+				const DescriptionIndex res =
+				   egbase.mutable_descriptions()->load_resource(resource_name);
 				if (res == Widelands::INVALID_INDEX) {
-					throw GameDataError(
-					   "Unknown resource '%s' in map", resource_name.c_str());
+					throw GameDataError("Unknown resource '%s' in map", resource_name.c_str());
 				}
 				smap[id] = res;
 			}

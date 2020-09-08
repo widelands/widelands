@@ -242,13 +242,14 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} else if (descr == "portdock") {
 							field->map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di =
-							   egbase.descriptions().building_index(tribes_lookup_table.lookup_building(descr));
+							DescriptionIndex di = egbase.descriptions().building_index(
+							   tribes_lookup_table.lookup_building(descr));
 							if (di != INVALID_INDEX) {
 								field->map_object_descr = egbase.descriptions().get_building_descr(di);
 							} else {
 								di = egbase.descriptions().immovable_index(
-								   tribes_lookup_table.lookup_immovable(world_lookup_table.lookup_immovable(descr)));
+								   tribes_lookup_table.lookup_immovable(
+								      world_lookup_table.lookup_immovable(descr)));
 								if (di != INVALID_INDEX) {
 									field->map_object_descr = egbase.descriptions().get_immovable_descr(di);
 								} else {
@@ -259,24 +260,27 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 						if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 							field->partially_finished_building.dismantlesite.building =
-							   egbase.descriptions().get_building_descr(egbase.descriptions().safe_building_index(
-							      tribes_lookup_table.lookup_building(fr.string())));
+							   egbase.descriptions().get_building_descr(
+							      egbase.descriptions().safe_building_index(
+							         tribes_lookup_table.lookup_building(fr.string())));
 							field->partially_finished_building.dismantlesite.progress = fr.unsigned_32();
 						} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 							field->partially_finished_building.constructionsite.becomes =
-							   egbase.descriptions().get_building_descr(egbase.descriptions().safe_building_index(
-							      tribes_lookup_table.lookup_building(fr.string())));
+							   egbase.descriptions().get_building_descr(
+							      egbase.descriptions().safe_building_index(
+							         tribes_lookup_table.lookup_building(fr.string())));
 							descr = fr.string();
 							field->partially_finished_building.constructionsite.was =
-							   descr.empty() ?
-							      nullptr :
-							      egbase.descriptions().get_building_descr(egbase.descriptions().safe_building_index(
-							         tribes_lookup_table.lookup_building(descr)));
+							   descr.empty() ? nullptr :
+							                   egbase.descriptions().get_building_descr(
+							                      egbase.descriptions().safe_building_index(
+							                         tribes_lookup_table.lookup_building(descr)));
 
 							for (uint32_t j = fr.unsigned_32(); j; --j) {
 								field->partially_finished_building.constructionsite.intermediates.push_back(
-								   egbase.descriptions().get_building_descr(egbase.descriptions().safe_building_index(
-								      tribes_lookup_table.lookup_building(fr.string()))));
+								   egbase.descriptions().get_building_descr(
+								      egbase.descriptions().safe_building_index(
+								         tribes_lookup_table.lookup_building(fr.string()))));
 							}
 
 							field->partially_finished_building.constructionsite.totaltime =

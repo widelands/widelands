@@ -1404,9 +1404,12 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	   descriptions.get_terrain_descr(tl.field->terrain_r())->get_is();
 	const TerrainDescription::Is tl_d_terrain_is =
 	   descriptions.get_terrain_descr(tl.field->terrain_d())->get_is();
-	const TerrainDescription::Is l_r_terrain_is = descriptions.get_terrain_descr(l.field->terrain_r())->get_is();
-	const TerrainDescription::Is f_d_terrain_is = descriptions.get_terrain_descr(f.field->terrain_d())->get_is();
-	const TerrainDescription::Is f_r_terrain_is = descriptions.get_terrain_descr(f.field->terrain_r())->get_is();
+	const TerrainDescription::Is l_r_terrain_is =
+	   descriptions.get_terrain_descr(l.field->terrain_r())->get_is();
+	const TerrainDescription::Is f_d_terrain_is =
+	   descriptions.get_terrain_descr(f.field->terrain_d())->get_is();
+	const TerrainDescription::Is f_r_terrain_is =
+	   descriptions.get_terrain_descr(f.field->terrain_r())->get_is();
 
 	//  1b) Collect some information about the neighbours
 	uint8_t cnt_unwalkable = 0;
@@ -1675,12 +1678,13 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 	const FCoords l = l_n(f);
 
 	const Descriptions& descriptions = egbase.descriptions();
-	const TerrainDescription::Is terrains[6] = {descriptions.get_terrain_descr(tr.field->terrain_d())->get_is(),
-	                                            descriptions.get_terrain_descr(tl.field->terrain_r())->get_is(),
-	                                            descriptions.get_terrain_descr(tl.field->terrain_d())->get_is(),
-	                                            descriptions.get_terrain_descr(l.field->terrain_r())->get_is(),
-	                                            descriptions.get_terrain_descr(f.field->terrain_d())->get_is(),
-	                                            descriptions.get_terrain_descr(f.field->terrain_r())->get_is()};
+	const TerrainDescription::Is terrains[6] = {
+	   descriptions.get_terrain_descr(tr.field->terrain_d())->get_is(),
+	   descriptions.get_terrain_descr(tl.field->terrain_r())->get_is(),
+	   descriptions.get_terrain_descr(tl.field->terrain_d())->get_is(),
+	   descriptions.get_terrain_descr(l.field->terrain_r())->get_is(),
+	   descriptions.get_terrain_descr(f.field->terrain_d())->get_is(),
+	   descriptions.get_terrain_descr(f.field->terrain_r())->get_is()};
 
 	uint32_t cnt_mineable = 0;
 	uint32_t cnt_walkable = 0;

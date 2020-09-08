@@ -28,7 +28,9 @@
 
 namespace Widelands {
 
-MarketDescr::MarketDescr(const std::string& init_descname, const LuaTable& table, Descriptions& descriptions)
+MarketDescr::MarketDescr(const std::string& init_descname,
+                         const LuaTable& table,
+                         Descriptions& descriptions)
    : BuildingDescr(init_descname, MapObjectType::MARKET, table, descriptions) {
 
 	DescriptionIndex const woi = descriptions.worker_index(table.get_string("carrier"));
@@ -232,15 +234,16 @@ void Market::traded_ware_arrived(const int trade_id,
                                  Game* game) {
 	auto& trade_order = trade_orders_.at(trade_id);
 
-	WareInstance* ware = new WareInstance(ware_index, game->descriptions().get_ware_descr(ware_index));
+	WareInstance* ware =
+	   new WareInstance(ware_index, game->descriptions().get_ware_descr(ware_index));
 	ware->init(*game);
 
 	// TODO(sirver,trading): This is a hack. We should have a worker that
 	// carriers stuff out. At the moment this assumes this market is barbarians
 	// (which is always correct right now), creates a carrier for each received
 	// ware to drop it off. The carrier then leaves the building and goes home.
-	const WorkerDescr& w_desc =
-	   *game->descriptions().get_worker_descr(game->descriptions().worker_index("barbarians_carrier"));
+	const WorkerDescr& w_desc = *game->descriptions().get_worker_descr(
+	   game->descriptions().worker_index("barbarians_carrier"));
 	auto& worker = w_desc.create(*game, get_owner(), this, position_);
 	worker.start_task_dropoff(*game, *ware);
 	++trade_order.received_traded_wares_in_this_batch;

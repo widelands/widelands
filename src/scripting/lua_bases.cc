@@ -883,7 +883,8 @@ int LuaPlayerBase::place_building(lua_State* L) {
 
 	try {
 		// If the building belongs to a tribe that no player is playing, we need to load it now
-		const Widelands::DescriptionIndex building_index = egbase.mutable_descriptions()->load_building(name);
+		const Widelands::DescriptionIndex building_index =
+		   egbase.mutable_descriptions()->load_building(name);
 
 		if (!player.tribe().has_building(building_index) &&
 		    descriptions.get_building_descr(building_index)->type() !=

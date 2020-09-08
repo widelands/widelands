@@ -796,7 +796,8 @@ int LuaPlayer::allow_workers(lua_State* L) {
 	   tribe.worker_types_without_cost();
 
 	for (const Widelands::DescriptionIndex& worker_index : tribe.workers()) {
-		const Widelands::WorkerDescr* worker_descr = game.descriptions().get_worker_descr(worker_index);
+		const Widelands::WorkerDescr* worker_descr =
+		   game.descriptions().get_worker_descr(worker_index);
 		if (!worker_descr->is_buildable()) {
 			continue;
 		}
@@ -926,7 +927,8 @@ void LuaPlayer::parse_building_list(lua_State* L,
 		// Only act on buildings that the tribe has or could conquer
 		const Widelands::TribeDescr& tribe_descr = get(L, egbase).tribe();
 		for (size_t i = 0; i < descriptions.nr_buildings(); ++i) {
-			const Widelands::DescriptionIndex& building_index = static_cast<Widelands::DescriptionIndex>(i);
+			const Widelands::DescriptionIndex& building_index =
+			   static_cast<Widelands::DescriptionIndex>(i);
 			const Widelands::BuildingDescr& descr = *tribe_descr.get_building_descr(building_index);
 			if (tribe_descr.has_building(building_index) ||
 			    descr.type() == Widelands::MapObjectType::MILITARYSITE) {

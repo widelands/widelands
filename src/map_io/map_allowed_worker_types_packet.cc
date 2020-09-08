@@ -63,7 +63,8 @@ void MapAllowedWorkerTypesPacket::read(FileSystem& fs,
 					// Only allow workers that the player's tribe has.
 					for (size_t i = 0; i < egbase.descriptions().nr_workers(); ++i) {
 						const DescriptionIndex& worker_index = static_cast<DescriptionIndex>(i);
-						const WorkerDescr& worker_descr = *egbase.descriptions().get_worker_descr(worker_index);
+						const WorkerDescr& worker_descr =
+						   *egbase.descriptions().get_worker_descr(worker_index);
 						if (worker_descr.is_buildable() && player->tribe().has_worker(worker_index)) {
 							player->allow_worker_type(
 							   worker_index, s->get_bool(worker_descr.name().c_str(), true));

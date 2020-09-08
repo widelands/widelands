@@ -532,7 +532,8 @@ void DefaultAI::late_initialization() {
 	}
 
 	wares.resize(game().descriptions().nr_wares());
-	for (DescriptionIndex i = 0; i < static_cast<DescriptionIndex>(game().descriptions().nr_wares()); ++i) {
+	for (DescriptionIndex i = 0; i < static_cast<DescriptionIndex>(game().descriptions().nr_wares());
+	     ++i) {
 		wares.at(i).preciousness =
 		   game().descriptions().get_ware_descr(i)->ai_hints().preciousness(tribe_->name());
 	}
@@ -732,7 +733,8 @@ void DefaultAI::late_initialization() {
 
 			iron_resource_id = game().descriptions().resource_index("resource_iron");
 			if (iron_resource_id == INVALID_INDEX) {
-				throw wexception("The AI needs the descriptions to define the resource 'resource_iron'");
+				throw wexception(
+				   "The AI needs the descriptions to define the resource 'resource_iron'");
 			}
 
 			if (bo.type == BuildingObserver::Type::kMine) {

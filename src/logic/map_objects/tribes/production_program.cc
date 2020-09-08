@@ -172,9 +172,8 @@ Available actions are:
 - `train`_
 */
 
-ProductionProgram::ActReturn::Condition* create_economy_condition(const std::string& item,
-                                                                  const ProductionSiteDescr& descr,
-                                                                  const Descriptions& descriptions) {
+ProductionProgram::ActReturn::Condition* create_economy_condition(
+   const std::string& item, const ProductionSiteDescr& descr, const Descriptions& descriptions) {
 	try {
 		const WareWorker wareworker = descriptions.try_load_ware_or_worker(item);
 		if (wareworker == WareWorker::wwWARE) {
@@ -282,13 +281,15 @@ ProductionProgram::parse_ware_type_groups(std::vector<std::string>::const_iterat
 	return result;
 }
 
-BillOfMaterials ProductionProgram::parse_bill_of_materials(const std::vector<std::string>& arguments, WareWorker ww, Descriptions& descriptions) {
+BillOfMaterials ProductionProgram::parse_bill_of_materials(
+   const std::vector<std::string>& arguments, WareWorker ww, Descriptions& descriptions) {
 	BillOfMaterials result;
 	for (const std::string& argument : arguments) {
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
 
-		const DescriptionIndex index = ww == WareWorker::wwWARE ? descriptions.load_ware(produceme.first) :
-		                                                          descriptions.load_worker(produceme.first);
+		const DescriptionIndex index = ww == WareWorker::wwWARE ?
+		                                  descriptions.load_ware(produceme.first) :
+		                                  descriptions.load_worker(produceme.first);
 
 		result.push_back(std::make_pair(index, read_positive(produceme.second)));
 	}
@@ -442,15 +443,16 @@ std::string ProductionProgram::ActReturn::Negation::description(const Descriptio
 }
 
 // Just a dummy to satisfy the superclass interface. Returns an empty string.
-std::string ProductionProgram::ActReturn::Negation::description_negation(const Descriptions& t) const {
+std::string
+ProductionProgram::ActReturn::Negation::description_negation(const Descriptions& t) const {
 	return operand->description(t);
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSite& ps) const {
 	return ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type);
 }
-std::string
-ProductionProgram::ActReturn::EconomyNeedsWare::description(const Descriptions& descriptions) const {
+std::string ProductionProgram::ActReturn::EconomyNeedsWare::description(
+   const Descriptions& descriptions) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware
 	 * '%s' */
 	std::string result = (boost::format(_("the economy needs the ware ‘%s’")) %
@@ -458,8 +460,8 @@ ProductionProgram::ActReturn::EconomyNeedsWare::description(const Descriptions& 
 	                        .str();
 	return result;
 }
-std::string
-ProductionProgram::ActReturn::EconomyNeedsWare::description_negation(const Descriptions& descriptions) const {
+std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation(
+   const Descriptions& descriptions) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn't need the
 	 * ware '%s' */
 	std::string result = (boost::format(_("the economy doesn’t need the ware ‘%s’")) %
@@ -471,8 +473,8 @@ ProductionProgram::ActReturn::EconomyNeedsWare::description_negation(const Descr
 bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate(const ProductionSite& ps) const {
 	return ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type);
 }
-std::string
-ProductionProgram::ActReturn::EconomyNeedsWorker::description(const Descriptions& descriptions) const {
+std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description(
+   const Descriptions& descriptions) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker
 	 * '%s' */
 	std::string result = (boost::format(_("the economy needs the worker ‘%s’")) %
@@ -481,8 +483,8 @@ ProductionProgram::ActReturn::EconomyNeedsWorker::description(const Descriptions
 	return result;
 }
 
-std::string
-ProductionProgram::ActReturn::EconomyNeedsWorker::description_negation(const Descriptions& descriptions) const {
+std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description_negation(
+   const Descriptions& descriptions) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... */
 	/** TRANSLATORS:      ... because the economy doesn’t need the worker '%s' */
 	std::string result = (boost::format(_("the economy doesn’t need the worker ‘%s’")) %
@@ -521,7 +523,8 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 	return false;
 }
 
-std::string ProductionProgram::ActReturn::SiteHas::description(const Descriptions& descriptions) const {
+std::string
+ProductionProgram::ActReturn::SiteHas::description(const Descriptions& descriptions) const {
 	std::vector<std::string> condition_list;
 	for (const auto& entry : group.first) {
 		condition_list.push_back(entry.second == wwWARE ?
@@ -544,8 +547,8 @@ std::string ProductionProgram::ActReturn::SiteHas::description(const Description
 	return result;
 }
 
-std::string
-ProductionProgram::ActReturn::SiteHas::description_negation(const Descriptions& descriptions) const {
+std::string ProductionProgram::ActReturn::SiteHas::description_negation(
+   const Descriptions& descriptions) const {
 	std::vector<std::string> condition_list;
 	for (const auto& entry : group.first) {
 		condition_list.push_back(entry.second == wwWARE ?
@@ -577,13 +580,14 @@ bool ProductionProgram::ActReturn::WorkersNeedExperience::evaluate(const Product
 	}
 	return false;
 }
-std::string ProductionProgram::ActReturn::WorkersNeedExperience::description(const Descriptions&) const {
+std::string
+ProductionProgram::ActReturn::WorkersNeedExperience::description(const Descriptions&) const {
 	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'. */
 	return _("a worker needs experience");
 }
 
-std::string
-ProductionProgram::ActReturn::WorkersNeedExperience::description_negation(const Descriptions&) const {
+std::string ProductionProgram::ActReturn::WorkersNeedExperience::description_negation(
+   const Descriptions&) const {
 	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'. */
 	return _("the workers need no experience");
 }
@@ -652,9 +656,10 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 
 	// Parse all arguments starting from the given iterator into our 'conditions_', splitting
 	// individual conditions by the given 'separator'
-	auto parse_conditions = [this, &descr, &descriptions](const std::vector<std::string>& args,
-	                                                std::vector<std::string>::const_iterator it,
-	                                                const std::string& separator) {
+	auto parse_conditions = [this, &descr, &descriptions](
+	                           const std::vector<std::string>& args,
+	                           std::vector<std::string>::const_iterator it,
+	                           const std::string& separator) {
 		while (it != args.end()) {
 			auto end = it + 1;
 			while (end != args.end() && *end != separator) {
@@ -1965,7 +1970,8 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 
 const ImmovableDescr&
 ProductionProgram::ActConstruct::get_construction_descr(const Descriptions& descriptions) const {
-	const ImmovableDescr* descr = descriptions.get_immovable_descr(descriptions.immovable_index(objectname));
+	const ImmovableDescr* descr =
+	   descriptions.get_immovable_descr(descriptions.immovable_index(objectname));
 	if (!descr) {
 		throw wexception("ActConstruct: immovable '%s' does not exist", objectname.c_str());
 	}

@@ -253,7 +253,8 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 /// terrain.
 class TerrainConverter {
 public:
-	TerrainConverter(const Widelands::Descriptions& descriptions, const WorldLegacyLookupTable& lookup_table);
+	TerrainConverter(const Widelands::Descriptions& descriptions,
+	                 const WorldLegacyLookupTable& lookup_table);
 	Widelands::DescriptionIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
@@ -772,10 +773,12 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  conversion. We will then convert them using the
 	//  OneWorldLegacyLookupTable.
 	// Puts an immovable with the 'old_immovable_name' onto the field 'locations'.
-	auto place_immovable = [&egbase, &lookup_table, &descriptions](const Widelands::Coords& location,
-	                                                        const std::string& old_immovable_name) {
+	auto place_immovable = [&egbase, &lookup_table, &descriptions](
+	                          const Widelands::Coords& location,
+	                          const std::string& old_immovable_name) {
 		const std::string new_immovable_name = lookup_table->lookup_immovable(old_immovable_name);
-		Widelands::DescriptionIndex const idx = descriptions.immovable_index(new_immovable_name.c_str());
+		Widelands::DescriptionIndex const idx =
+		   descriptions.immovable_index(new_immovable_name.c_str());
 		if (idx == Widelands::INVALID_INDEX) {
 			throw wexception("Missing immovable type %s", new_immovable_name.c_str());
 		}
