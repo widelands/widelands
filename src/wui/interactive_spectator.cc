@@ -99,6 +99,13 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 		if (imm != nullptr && imm->get_positions(the_game).front() == field.fcoords) {
 			imm->draw(gametime, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
+			if (upcast(const Widelands::Immovable, i, imm)) {
+				if (!i->get_marked_for_removal().empty()) {
+					const Image* img = g_image_cache->get("images/wui/overlays/targeted.png");
+					blit_field_overlay(
+					   dst, field, img, Vector2i(img->width() / 2, img->height()), scale);
+				}
+			}
 		}
 
 		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
