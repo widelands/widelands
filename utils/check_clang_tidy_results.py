@@ -55,6 +55,8 @@ SUPPRESSED_CHECKS = {
     '[misc-string-integer-assignment]',
     '[misc-suspicious-enum-usage]',
     '[misc-suspicious-string-compare]',
+    '[misc-uniqueptr-reset-release]',
+    '[misc-unused-using-decls]',
     '[modernize-make-shared]',
     '[modernize-make-unique]',
     '[modernize-pass-by-value]',
