@@ -45,7 +45,7 @@ constexpr int kPadding = 4;
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup(UI::Panel* const parent,
 	                       int32_t const /*w*/,
-	                       int32_t const /*h*/,
+	                       int32_t const h,
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
@@ -55,7 +55,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                    0,
 	                    0,
 	                    16,
-	                    0,
+	                    h,
 	                    _("Role"),
 	                    UI::DropdownType::kPictorial,
 	                    UI::PanelStyle::kFsMenu,
@@ -145,8 +145,9 @@ struct MultiPlayerClientGroup : public UI::Box {
 	void update() {
 		const GameSettings& settings = settings_->settings();
 		const UserSettings& user_setting = settings.users.at(id_);
-
+		log_dbg("updating client: %d", id_);
 		if (user_setting.position == UserSettings::not_connected()) {
+			log_dbg("invisible client: %d", id_);
 			set_visible(false);
 			return;
 		}
@@ -385,8 +386,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Whether the client who is running the UI is allowed to change the tribe for this player slot.
 	bool has_tribe_access() {
 		return settings_->settings().players[id_].state == PlayerSettings::State::kShared ?
-		          settings_->can_change_player_init(id_) :
-		          settings_->can_change_player_tribe(id_);
+                settings_->can_change_player_init(id_) :
+                settings_->can_change_player_tribe(id_);
 	}
 
 	/// This will update the game settings for the tribe or shared_in with the value
@@ -398,8 +399,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_settings = settings_->settings().players[id_];
 		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-		                                      UI::ButtonDisableStyle::kPermpressed :
-		                                      UI::ButtonDisableStyle::kFlat);
+                                            UI::ButtonDisableStyle::kPermpressed :
+                                            UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
 				n->set_player_shared(
@@ -679,22 +680,11 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	scrollable_playerbox.set_scrolling(true);
 	// playerbox.add_space(padding);
 
-	//	multi_player_player_groups.resize(kMaxPlayers);
-	//	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
-	//		multi_player_player_groups.at(i) =
-	//		   new MultiPlayerPlayerGroup(&scrollable_playerbox, playerbox.get_w() -
-	// UI::Scrollbar::kSize, 		                              buth_, i, settings, npsb.get());
-	//		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
-	//	}
-
 	// scrollable_playerbox.set_force_scrolling(true);
 	playerbox.add(&scrollable_playerbox, Resizing::kExpandBoth);
 
-	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
-		if (s.action == NoteGameSettings::Action::kMap) {
-			update();
-		}
-	});
+	subscriber_ =
+	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
 	update();
 }
 
@@ -705,46 +695,38 @@ MultiPlayerSetupGroup::~MultiPlayerSetupGroup() {
 void MultiPlayerSetupGroup::update() {
 	const GameSettings& settings = settings_->settings();
 
-	const size_t number_of_users = settings.users.size();
-	// Update / initialize client groups
-	if (multi_player_client_groups.size() < number_of_users) {
-		multi_player_client_groups.resize(number_of_users);
-	}
-	for (uint32_t i = 0; i < number_of_users; ++i) {
-		if (!multi_player_client_groups.at(i)) {
-			multi_player_client_groups.at(i) =
-			   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, settings_);
-			clientbox.add(multi_player_client_groups.at(i), UI::Box::Resizing::kFullSize);
-		}
-		multi_player_client_groups.at(i)->set_visible(true);
-	}
+	update_clients(settings);
 
-	const int number_of_players = settings.players.size();
+	update_players(settings);
+}
+void MultiPlayerSetupGroup::update_players(const GameSettings& settings) {
+	const size_t number_of_players = settings.players.size();
 	for (auto& p : multi_player_player_groups) {
-		log_dbg("let a mppg die");
 		p->die();
 	}
 	multi_player_player_groups.clear();
 	multi_player_player_groups.resize(number_of_players);
+
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
 		multi_player_player_groups.at(i) =
 		   new MultiPlayerPlayerGroup(&scrollable_playerbox, playerbox.get_w() - UI::Scrollbar::kSize,
 		                              buth_, i, settings_, npsb.get());
 		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
 	}
+}
+void MultiPlayerSetupGroup::update_clients(const GameSettings& settings) {
+	const size_t number_of_users = settings.users.size();
+	for (auto& c : multi_player_client_groups) {
+		c->die();
+	}
+	multi_player_client_groups.clear();
+	multi_player_client_groups.resize(number_of_users);
 
-	//	// Keep track of which player slots are visible
-	//		for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
-	//			const bool should_be_visible = i < number_of_players;
-	//			//		if (should_be_visible != multi_player_player_groups.at(i)->is_visible()) {
-	//			//			multi_player_player_groups.at(i)->set_visible(should_be_visible);
-	//			//		}
-	//			if (should_be_visible) {
-	//				multi_player_player_groups.at(i)->set_visible(true);
-	//			} else {
-	//				multi_player_player_groups.at(i)->die();
-	//			}
-	//}
+	for (uint32_t i = 0; i < number_of_users; ++i) {
+		multi_player_client_groups.at(i) =
+		   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, settings_);
+		clientbox.add(multi_player_client_groups.at(i), Resizing::kFullSize);
+	}
 }
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
@@ -778,8 +760,10 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
 	players_.set_font_scale(scale);
 	clients_.set_font_scale(scale);
 	clientbox.set_min_desired_breadth(max_width / 3);
+	clientbox.set_max_size(max_width / 3, max_height);
 	playerbox.set_max_size(max_width / 2, max_height);
 	scrollable_playerbox.set_max_size(max_width / 2, max_height);
+
 	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
 		multiPlayerClientGroup->force_new_dimensions(scale, standard_element_height);
 	}
