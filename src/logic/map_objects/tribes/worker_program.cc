@@ -716,7 +716,7 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 		throw GameDataError(
 		   "Usage: plant=attrib:<attribute> [attrib:<attribute> ...] [unless object]");
 	}
-// NOCOM planting immovables is broken
+
 	act->function = &Worker::run_plant;
 	act->iparam1 = Worker::Action::plantAlways;
 	for (uint32_t i = 0; i < cmd.size(); ++i) {

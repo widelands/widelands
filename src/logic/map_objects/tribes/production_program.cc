@@ -1880,7 +1880,6 @@ void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) co
 	return ps.program_step(game);
 }
 
-// NOCOM lua_tribes_immovables
 /* RST
 construct
 ---------
