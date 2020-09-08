@@ -37,7 +37,7 @@ namespace Widelands {
 // dummy instance because MapObject needs a description
 namespace {
 const WaterwayDescr g_waterway_descr("waterway", "Waterway");
-}
+}  // namespace
 
 bool Waterway::is_waterway_descr(MapObjectDescr const* const descr) {
 	return descr == &g_waterway_descr;
