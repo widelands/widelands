@@ -282,6 +282,8 @@ int Panel::do_run() {
 			MutexLock m(true);
 			if (m.is_valid()) {
 				app->handle_input(&input_callback);
+
+				check_child_death();
 				break;
 			}
 		}
@@ -291,8 +293,6 @@ int Panel::do_run() {
 			// other modal panels, they will run this code in the next frame.
 			end_modal<Returncodes>(Returncodes::kBack);
 		}
-
-		check_child_death();
 
 		if (start_time >= next_draw_time) {
 			// Rendering may be done only by the main thread
