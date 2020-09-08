@@ -182,6 +182,8 @@ public:
 	void building_icon_mouse_out(Widelands::DescriptionIndex);
 	void building_icon_mouse_in(Widelands::DescriptionIndex);
 	void act_geologist();
+	void act_mark_removal();
+	void act_unmark_removal();
 	void act_attack();  /// Launch the attack
 
 	/// Total number of attackers available for a specific enemy flag
@@ -244,7 +246,10 @@ static const char* const pic_watchfield = "images/wui/fieldaction/menu_watch_fie
 static const char* const pic_debug = "images/wui/fieldaction/menu_debug.png";
 static const char* const pic_abort = "images/wui/menu_abort.png";
 static const char* const pic_geologist = "images/wui/fieldaction/menu_geologist.png";
+static const char* const pic_mark_removal = "images/wui/fieldaction/menu_mark_removal.png";
+static const char* const pic_unmark_removal = "images/wui/fieldaction/menu_unmark_removal.png";
 
+static const char* const pic_tab_target = "images/wui/fieldaction/menu_tab_target.png";
 static const char* const pic_tab_attack = "images/wui/fieldaction/menu_tab_attack.png";
 
 /*
@@ -326,6 +331,31 @@ void FieldActionWindow::init() {
 	warp_mouse_to_fastclick_panel();
 }
 
+static bool suited_for_targeting(const Widelands::EditorGameBase& egbase,
+                                 const Widelands::Immovable& i) {
+	if (i.descr().collected_by().empty()) {
+		return false;
+	}
+	const Widelands::Map& map = egbase.map();
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+	   map, Widelands::Area<Widelands::FCoords>(
+	           map.get_fcoords(i.get_position()), egbase.tribes().get_largest_workarea()));
+	do {
+		if (const Widelands::MapObject* mo = mr.location().field->get_immovable()) {
+			if (i.descr().collected_by().count(mo->descr().name())) {
+				upcast(const Widelands::ProductionSite, ps, mo);
+				assert(ps);
+				assert(!ps->descr().workarea_info().empty());
+				if (map.calc_distance(ps->get_position(), i.get_position()) <=
+				    ps->descr().workarea_info().rbegin()->first) {
+					return true;
+				}
+			}
+		}
+	} while (mr.advance(map));
+	return false;
+}
+
 /*
 ===============
 Add the buttons you normally get when clicking on a field.
@@ -335,8 +365,28 @@ void FieldActionWindow::add_buttons_auto() {
 	UI::Box* buildbox = nullptr;
 	UI::Box& watchbox = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
 
-	// Add road-building actions
 	upcast(InteractiveGameBase, igbase, &ibase());
+
+	if (igbase) {
+		// Target immovables for removal by workers
+		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
+			if (suited_for_targeting(igbase->egbase(), *mo)) {
+				UI::Box& box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
+				if (mo->is_marked_for_removal(igbase->player_number())) {
+					add_button(&box, "unmark_for_removal", pic_unmark_removal,
+					           &FieldActionWindow::act_unmark_removal,
+					           _("Marked for removal by a worker – click to unmark"));
+				} else {
+					add_button(&box, "mark_for_removal", pic_mark_removal,
+					           &FieldActionWindow::act_mark_removal,
+					           _("Mark this immovable for timely removal by a suited worker"));
+				}
+				add_tab("target", pic_tab_target, &box, _("Immovable Actions"));
+			}
+		}
+	}
+
+	// Add road-building actions
 
 	const Widelands::PlayerNumber owner = node_.field->get_owned_by();
 
@@ -984,6 +1034,23 @@ void FieldActionWindow::act_geologist() {
 	upcast(Game, game, &ibase().egbase());
 	if (upcast(Widelands::Flag, flag, game->map().get_immovable(node_))) {
 		game->send_player_flagaction(*flag);
+	}
+	reset_mouse_and_die();
+}
+
+void FieldActionWindow::act_mark_removal() {
+	upcast(Game, game, &ibase().egbase());
+	if (upcast(Widelands::Immovable, i, game->map().get_immovable(node_))) {
+		game->send_player_mark_object_for_removal(
+		   dynamic_cast<InteractiveGameBase&>(ibase()).player_number(), *i, true);
+	}
+	reset_mouse_and_die();
+}
+void FieldActionWindow::act_unmark_removal() {
+	upcast(Game, game, &ibase().egbase());
+	if (upcast(Widelands::Immovable, i, game->map().get_immovable(node_))) {
+		game->send_player_mark_object_for_removal(
+		   dynamic_cast<InteractiveGameBase&>(ibase()).player_number(), *i, false);
 	}
 	reset_mouse_and_die();
 }
