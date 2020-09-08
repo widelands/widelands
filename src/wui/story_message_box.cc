@@ -29,7 +29,7 @@
 
 namespace {
 constexpr int kPadding = 4;
-}
+}  // namespace
 
 StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                                  const Widelands::Coords coords,

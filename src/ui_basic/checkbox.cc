@@ -107,6 +107,7 @@ void Statebox::set_enabled(bool const enabled) {
 	}
 
 	set_flags(Is_Enabled, enabled);
+	set_can_focus(enabled);
 
 	if (!(flags_ & Has_Custom_Picture)) {
 		pic_graphics_ = g_image_cache->get(enabled ? "images/ui_basic/checkbox_light.png" :
@@ -193,7 +194,7 @@ bool Statebox::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_
 }
 
 bool Statebox::handle_key(bool down, SDL_Keysym code) {
-	if (down && (code.sym == SDLK_SPACE || code.sym == SDLK_RETURN || code.sym == SDLK_KP_ENTER)) {
+	if (down && code.sym == SDLK_SPACE) {
 		button_clicked();
 		return true;
 	}
