@@ -190,7 +190,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 			break;
 
 		case Widelands::NoteShip::Action::kWaitingForCommand:
-			for (auto& observer :allships) {
+			for (auto& observer : allships) {
 				if (observer.ship == note.ship) {
 					observer.waiting_for_command_ = true;
 					break;

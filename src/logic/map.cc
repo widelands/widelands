@@ -1686,8 +1686,7 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 	uint32_t cnt_mineable = 0;
 	uint32_t cnt_walkable = 0;
 	for (const auto& is : terrains) {
-		if (is & TerrainDescription::Is::kWater ||
-		    is & TerrainDescription::Is::kUnwalkable) {
+		if (is & TerrainDescription::Is::kWater || is & TerrainDescription::Is::kUnwalkable) {
 			return BaseImmovable::NONE;
 		}
 		if (is & TerrainDescription::Is::kMineable) {

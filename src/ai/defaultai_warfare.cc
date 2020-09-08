@@ -149,7 +149,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 		++count;
 		// we test max 12 sites and prefer ones tested more then 1 min ago
-		if (((observer.second.last_tested + (enemysites_check_delay_ * 1000)) > gametime && count > 4) ||
+		if (((observer.second.last_tested + (enemysites_check_delay_ * 1000)) > gametime &&
+		     count > 4) ||
 		    count > 12) {
 			continue;
 		}
@@ -162,8 +163,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		bool is_warehouse = false;
 		bool is_attackable = false;
 		// we cannot attack unvisible site and there is no other way to find out
-		const bool is_visible =
-		   player_->is_seeing(Widelands::Map::get_index(Widelands::Coords::unhash(observer.first), map.get_width()));
+		const bool is_visible = player_->is_seeing(
+		   Widelands::Map::get_index(Widelands::Coords::unhash(observer.first), map.get_width()));
 		uint16_t owner_number = 100;
 
 		// testing if we can attack the building - result is a flag
@@ -274,7 +275,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				unique_serials.clear();
 				// find militarysites near our target (radius 10) to check enemies power in region
 				map.find_immovables(game(),
-				                    Widelands::Area<Widelands::FCoords>(map.get_fcoords(Widelands::Coords::unhash(observer.first)), 10),
+				                    Widelands::Area<Widelands::FCoords>(
+				                       map.get_fcoords(Widelands::Coords::unhash(observer.first)), 10),
 				                    &immovables);
 				for (const auto& im_found : immovables) {
 					const Widelands::BaseImmovable& base_immovable = *im_found.object;
@@ -314,22 +316,24 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				for (int16_t& input : inputs) {
 					input = 0;
 				}
-				inputs[0] = (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
-				            std::abs(management_data.get_military_number_at(114)) / 10;
-				inputs[1] = (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
-				            std::abs(management_data.get_military_number_at(115)) / 10;
+				inputs[0] =
+				   (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
+				   std::abs(management_data.get_military_number_at(114)) / 10;
+				inputs[1] =
+				   (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
+				   std::abs(management_data.get_military_number_at(115)) / 10;
 				inputs[2] = (is_warehouse) ? 4 : 0;
 				inputs[3] = (is_warehouse) ? 2 : 0;
 				inputs[4] = (observer.second.attack_soldiers_competency > 15) ? 2 : 0;
 				inputs[5] = (observer.second.attack_soldiers_competency > 25) ? 4 : 0;
-				inputs[6] =
-				   (2 * observer.second.defenders_strength > 3 * observer.second.attack_soldiers_strength) ?
-				      -6 :
-				      0;
-				inputs[7] =
-				   (3 * observer.second.defenders_strength > 2 * observer.second.attack_soldiers_strength) ?
-				      -3 :
-				      0;
+				inputs[6] = (2 * observer.second.defenders_strength >
+				             3 * observer.second.attack_soldiers_strength) ?
+				               -6 :
+				               0;
+				inputs[7] = (3 * observer.second.defenders_strength >
+				             2 * observer.second.attack_soldiers_strength) ?
+				               -3 :
+				               0;
 				inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage ||
 				             soldier_status_ == SoldiersStatus::kShortage) ?
 				               -2 :
@@ -498,7 +502,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					if (management_data.f_neuron_pool[0].get_position(j)) {
 						observer.second.score += inputs[j + kFNeuronBitSize];
 						if (inputs[j + kFNeuronBitSize] < -10 || inputs[j + kFNeuronBitSize] > 10) {
-							log_dbg_time(gametime, " pos: %d - value %d\n", j + kFNeuronBitSize, inputs[j + Widelands::kFNeuronBitSize]);
+							log_dbg_time(gametime, " pos: %d - value %d\n", j + kFNeuronBitSize,
+							             inputs[j + Widelands::kFNeuronBitSize]);
 						}
 					}
 					if (management_data.f_neuron_pool[16].get_position(j)) {
@@ -506,7 +511,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 						if (inputs[j + 2 * kFNeuronBitSize] < -10 ||
 						    inputs[j + 2 * kFNeuronBitSize] > 10) {
 							log_dbg_time(gametime, " pos: %d - value %d\n", j + 2 * kFNeuronBitSize,
-							    inputs[j + 2 * kFNeuronBitSize]);
+							             inputs[j + 2 * kFNeuronBitSize]);
 						}
 					}
 					if (management_data.f_neuron_pool[18].get_position(j)) {
@@ -514,13 +519,13 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 						if (inputs[j + 3 * kFNeuronBitSize] < -10 ||
 						    inputs[j + 3 * kFNeuronBitSize] > 10) {
 							log_dbg_time(gametime, " pos: %d - value %d\n", j + 3 * kFNeuronBitSize,
-							    inputs[j + 3 * kFNeuronBitSize]);
+							             inputs[j + 3 * kFNeuronBitSize]);
 						}
 					}
 				}
 				observer.second.score += (management_data.get_military_number_at(138) +
-				                       management_data.get_military_number_at(159)) /
-				                      8;
+				                          management_data.get_military_number_at(159)) /
+				                         8;
 			}
 
 			if (observer.second.score > 0) {

@@ -79,8 +79,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		   get_tabs(), 0, 0, UI::Box::Vertical, g_gr->get_xres() - 80, g_gr->get_yres() - 80);
 
 		for (const auto& queue : inputqueues) {
-			prod_box->add(
-			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), *production_site, *queue));
+			prod_box->add(new InputQueueDisplay(prod_box, 0, 0, *igbase(), *production_site, *queue));
 		}
 
 		get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), prod_box, _("Wares"));

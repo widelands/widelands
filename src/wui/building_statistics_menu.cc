@@ -628,7 +628,7 @@ void BuildingStatisticsMenu::update() {
 		uint32_t total_stationed_soldiers = 0;
 		uint32_t nr_unproductive = 0;
 
-		for (const auto& stats: stats_vector) {
+		for (const auto& stats : stats_vector) {
 			if (stats.is_constructionsite) {
 				++nr_build;
 			} else {

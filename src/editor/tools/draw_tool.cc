@@ -36,7 +36,7 @@ EditorDrawTool::handle_click_impl(const Widelands::NodeAndTriangle<Widelands::Co
 
 	for (EditorToolAction* action : args->draw_actions) {
 		action->tool.handle_click(static_cast<EditorTool::ToolIndex>(action->i), action->center,
-		                        action->parent, action->args, &action->map);
+		                          action->parent, action->args, &action->map);
 	}
 	return args->draw_actions.size();
 }
