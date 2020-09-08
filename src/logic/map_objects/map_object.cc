@@ -742,8 +742,9 @@ void MapObject::Loader::load(FileRead& fr) {
 			throw wexception("%u: %s", serial, e.what());
 		}
 
-		if (packet_version == kCurrentPacketVersionMapObject) {
-			get_object()->reserved_by_worker_ = fr.unsigned_8();
+		MapObject& obj = *get_object();
+		if (packet_version >= 2) {
+			obj.reserved_by_worker_ = fr.unsigned_8();
 		}
 	} catch (const WException& e) {
 		throw wexception("map object: %s", e.what());

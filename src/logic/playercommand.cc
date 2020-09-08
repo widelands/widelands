@@ -2060,6 +2060,50 @@ void CmdToggleMuteMessages::write(FileWrite& fw, EditorGameBase& egbase, MapObje
 	fw.unsigned_8(all_);
 }
 
+// CmdMarkMapObjectForRemoval
+void CmdMarkMapObjectForRemoval::execute(Game& game) {
+	if (upcast(Immovable, mo, game.objects().get_object(object_))) {
+		mo->set_marked_for_removal(sender(), mark_);
+	}
+}
+
+CmdMarkMapObjectForRemoval::CmdMarkMapObjectForRemoval(StreamRead& des)
+   : PlayerCommand(0, des.unsigned_8()) {
+	object_ = des.unsigned_32();
+	mark_ = des.unsigned_8();
+}
+
+void CmdMarkMapObjectForRemoval::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(object_);
+	ser.unsigned_8(mark_ ? 1 : 0);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdMarkMapObjectForRemoval = 1;
+
+void CmdMarkMapObjectForRemoval::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdMarkMapObjectForRemoval) {
+			PlayerCommand::read(fr, egbase, mol);
+			object_ = fr.unsigned_32();
+			mark_ = fr.unsigned_8() ? 1 : 0;
+		} else {
+			throw UnhandledVersionError("CmdMarkMapObjectForRemoval", packet_version,
+			                            kCurrentPacketVersionCmdMarkMapObjectForRemoval);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("Cmd_MarkMapObjectForRemoval: %s", e.what());
+	}
+}
+
+void CmdMarkMapObjectForRemoval::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdMarkMapObjectForRemoval);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(object_)));
+	fw.unsigned_8(mark_);
+}
+
 // CmdPickCustomStartingPosition
 void CmdPickCustomStartingPosition::execute(Game& game) {
 	game.get_player(sender())->do_pick_custom_starting_position(coords_);

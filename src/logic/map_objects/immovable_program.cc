@@ -173,6 +173,17 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 	immovable.program_step(game);
 }
 
+static std::vector<std::pair<std::string /* immo */, std::string /* becomes */>>
+   immovable_relations_;
+
+void ImmovableProgram::postload_immovable_relations(const Descriptions& descriptions) {
+	for (const auto& pair : immovable_relations_) {
+		descriptions.get_mutable_immovable_descr(descriptions.safe_immovable_index(pair.second))
+		   ->add_became_from(pair.first);
+	}
+	immovable_relations_.clear();
+}
+
 /* RST
 
 transform
@@ -251,6 +262,9 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		// Register target at ImmovableDescr
 		descr.becomes_.insert(
 		   std::make_pair(bob_ ? MapObjectType::BOB : MapObjectType::IMMOVABLE, type_name_));
+		if (!bob_) {
+			immovable_relations_.push_back(std::make_pair(descr.name(), type_name_));
+		}
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
 	}
@@ -263,12 +277,17 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 	if (probability_ == 0 || game.logic_rand() % kMaxProbability < probability_) {
 		Player* player = immovable.get_owner();
 		Coords const c = immovable.get_position();
+		std::set<PlayerNumber> mfr = immovable.get_marked_for_removal();
+
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 
 		if (bob_) {
 			game.create_ship(c, type_name_, player);
 		} else {
-			game.create_immovable_with_name(c, type_name_, player, nullptr /* former_building_descr */);
+			Immovable& i = game.create_immovable_with_name(c, type_name_, player, nullptr /* former_building_descr */);
+			for (const PlayerNumber& p : mfr) {
+				i.set_marked_for_removal(p, true);
+			}
 		}
 	} else {
 		immovable.program_step(game);
@@ -316,6 +335,7 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, Immovabl
 
 	// Register target at ImmovableDescr
 	descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name_));
+	immovable_relations_.push_back(std::make_pair(descr.name(), type_name_));
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
@@ -330,8 +350,13 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 	if ((game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.descriptions().terrains())) {
 		Player* owner = immovable.get_owner();
+		std::set<PlayerNumber> mfr = immovable.get_marked_for_removal();
+
 		immovable.remove(game);  //  Now immovable is a dangling reference!
-		game.create_immovable_with_name(f, type_name_, owner, nullptr /* former_building_descr */);
+		Immovable& i = game.create_immovable_with_name(f, type_name_, owner, nullptr /* former_building_descr */);
+		for (const PlayerNumber& p : mfr) {
+			i.set_marked_for_removal(p, true);
+		}
 	} else {
 		immovable.program_step(game);
 	}

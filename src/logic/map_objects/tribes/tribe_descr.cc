@@ -29,6 +29,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/immovable_program.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
@@ -869,6 +870,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 
 	const DescriptionMaintainer<ImmovableDescr>& all_immovables = descriptions.immovables();
 
+	ImmovableProgram::postload_immovable_relations(descriptions);
+
 	// Find all attributes that we need to collect from map
 	std::set<MapObjectDescr::AttributeIndex> needed_attributes;
 	for (ProductionSiteDescr* prod : productionsites) {
@@ -884,6 +887,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 					const ImmovableDescr& immovable_descr = all_immovables.get(i);
 					if (immovable_descr.has_attribute(attribute_id)) {
 						prod->add_collected_immovable(immovable_descr.name());
+						const_cast<ImmovableDescr&>(immovable_descr)
+						   .add_collected_by(descriptions, prod->name());
 					}
 				}
 			} break;
