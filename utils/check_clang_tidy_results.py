@@ -49,7 +49,6 @@ SUPPRESSED_CHECKS = {
     '[hicpp-use-emplace]',
     '[hicpp-use-equals-default]',
     '[hicpp-vararg]',
-    '[llvm-namespace-comment]',
     '[misc-macro-parentheses]',
     '[misc-misplaced-widening-cast]',
     '[misc-redundant-expression]',

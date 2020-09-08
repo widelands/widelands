@@ -49,7 +49,7 @@
 
 namespace Widelands {
 class BuildingDescr;
-}
+}  // namespace Widelands
 using Widelands::Building;
 using Widelands::EditorGameBase;
 using Widelands::Game;
