@@ -169,9 +169,6 @@ struct WLApplication {
 	void set_mouse_lock(bool locked);
 	// @}
 
-	// Refresh the graphics settings with the latest options.
-	void refresh_graphics();
-
 	// Pump SDL events and dispatch them.
 	void handle_input(InputCallback const*);
 

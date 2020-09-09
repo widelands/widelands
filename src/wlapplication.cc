@@ -25,10 +25,10 @@
 #endif
 #include <iostream>
 #include <memory>
+#include <regex>
 
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include <boost/regex.hpp>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
 #include <unistd.h>
@@ -137,8 +137,8 @@ std::string get_executable_directory() {
 }
 
 bool is_absolute_path(const std::string& path) {
-	boost::regex re("^/|\\w:");
-	return boost::regex_search(path.c_str(), re);
+	std::regex re("^/|\\w:");
+	return std::regex_search(path.c_str(), re);
 }
 
 // Returns the absolute path of 'path' which might be relative.
@@ -391,7 +391,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
 	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
-	   get_config_bool("fullscreen", false));
+	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
 
 	g_mouse_cursor = new MouseCursor();
 	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
@@ -407,8 +407,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// register it once.
 	UI::Panel::register_click();
 
-	// This might grab the input.
-	refresh_graphics();
+	set_input_grab(get_config_bool("inputgrab", false));
 
 	// seed random number generator used for random tribe selection
 	std::srand(time(nullptr));
@@ -423,6 +422,12 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 // TODO(unknown): Handle errors that happen here!
 WLApplication::~WLApplication() {
 	// Do use the opposite order of WLApplication::init()
+
+	if (!g_gr->fullscreen() && !g_gr->maximized()) {
+		set_config_int("xres", g_gr->get_xres());
+		set_config_int("yres", g_gr->get_yres());
+	}
+	set_config_bool("maximized", g_gr->maximized());
 
 	shutdown_hardware();
 	shutdown_settings();
@@ -455,9 +460,6 @@ WLApplication::~WLApplication() {
 // In the future: push the first event on the event queue, then keep
 // dispatching events until it is time to quit.
 void WLApplication::run() {
-	// This also grabs the mouse cursor if so desired.
-	refresh_graphics();
-
 	if (game_type_ == GameType::kEditor) {
 		g_sh->change_music("ingame");
 		EditorInteractive::run_editor(filename_, script_to_run_);
@@ -648,10 +650,20 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			}
 			break;
 		case SDL_WINDOWEVENT:
-			if (ev.window.event == SDL_WINDOWEVENT_RESIZED) {
-				g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
-				set_config_int("xres", ev.window.data1);
-				set_config_int("yres", ev.window.data2);
+			switch (ev.window.event) {
+			case SDL_WINDOWEVENT_RESIZED:
+				// Do not save the new size to config at this point to avoid saving sizes that
+				// result from maximization etc. Save at shutdown instead.
+				if (!g_gr->fullscreen()) {
+					g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
+				}
+				break;
+			case SDL_WINDOWEVENT_MAXIMIZED:
+				set_config_bool("maximized", true);
+				break;
+			case SDL_WINDOWEVENT_RESTORED:
+				set_config_bool("maximized", g_gr->maximized());
+				break;
 			}
 			break;
 		case SDL_QUIT:
@@ -776,15 +788,6 @@ void WLApplication::set_mouse_lock(const bool locked) {
 	}
 }
 
-void WLApplication::refresh_graphics() {
-	g_gr->change_resolution(get_config_int("xres", kDefaultResolutionW),
-	                        get_config_int("yres", kDefaultResolutionH), true);
-	g_gr->set_fullscreen(get_config_bool("fullscreen", false));
-
-	// does only work with a window
-	set_input_grab(get_config_bool("inputgrab", false));
-}
-
 /**
  * Read the config file, parse the commandline and give all other internal
  * parameters sensible default values
@@ -810,6 +813,7 @@ bool WLApplication::init_settings() {
 	get_config_bool("auto_speed", false);
 	get_config_bool("dock_windows_to_edges", false);
 	get_config_bool("fullscreen", false);
+	get_config_bool("maximized", false);
 	get_config_bool("sdl_cursor", true);
 	get_config_bool("snap_windows_only_when_overlapping", false);
 	get_config_bool("animate_map_panning", false);
@@ -1157,9 +1161,6 @@ void WLApplication::mainmenu() {
 	std::unique_ptr<FullscreenMenuMain> mm(new FullscreenMenuMain(true));
 
 	for (;;) {
-		// Refresh graphics system in case we just changed resolution.
-		refresh_graphics();
-
 		if (message.size()) {
 			log_err("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
 

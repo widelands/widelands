@@ -912,6 +912,30 @@ private:
 	bool all_;
 };
 
+struct CmdMarkMapObjectForRemoval : PlayerCommand {
+	CmdMarkMapObjectForRemoval(uint32_t t, PlayerNumber p, const Immovable& mo, bool m)
+	   : PlayerCommand(t, p), object_(mo.serial()), mark_(m) {
+	}
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kMarkMapObjectForRemoval;
+	}
+
+	void execute(Game& game) override;
+
+	explicit CmdMarkMapObjectForRemoval(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	CmdMarkMapObjectForRemoval() : PlayerCommand() {
+	}
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial object_;
+	bool mark_;
+};
+
 struct CmdPickCustomStartingPosition : PlayerCommand {
 	CmdPickCustomStartingPosition(uint32_t t, PlayerNumber p, const Coords& c)
 	   : PlayerCommand(t, p), coords_(c) {

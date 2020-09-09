@@ -885,6 +885,10 @@ void Game::send_player_toggle_mute(const Building& b, bool all) {
 	   new CmdToggleMuteMessages(get_gametime(), b.owner().player_number(), b, all));
 }
 
+void Game::send_player_mark_object_for_removal(PlayerNumber p, Immovable& mo, bool mark) {
+	send_player_command(new CmdMarkMapObjectForRemoval(get_gametime(), p, mo, mark));
+}
+
 int Game::propose_trade(const Trade& trade) {
 	// TODO(sirver,trading): Check if a trade is possible (i.e. if there is a
 	// path between the two markets);

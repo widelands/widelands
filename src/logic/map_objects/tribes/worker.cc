@@ -327,6 +327,34 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 	CheckStepWalkOn cstep(descr().movecaps(), false);
 
 	const Map& map = game.map();
+
+	// First try to look for immovables that were marked for removal by our player
+	if (action.sparam1 == "immovable") {
+		std::vector<ImmovableFound> list;
+		Area<FCoords> area(map.get_fcoords(get_position()), action.iparam1);
+		if (action.iparam2 < 0) {
+			map.find_reachable_immovables(game, area, &list, cstep);
+		} else {
+			map.find_reachable_immovables(
+			   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+		}
+		for (auto it = list.begin(); it != list.end();) {
+			if (it->object->is_reserved_by_worker() ||
+			    !dynamic_cast<Immovable&>(*it->object)
+			        .is_marked_for_removal(owner().player_number())) {
+				it = list.erase(it);
+			} else {
+				++it;
+			}
+		}
+		if (!list.empty()) {
+			set_program_objvar(game, state, list[game.logic_rand() % list.size()].object);
+			++state.ivar1;
+			schedule_act(game, 10);
+			return true;
+		}
+	}
+
 	Area<FCoords> area(map.get_fcoords(get_position()), 0);
 	bool found_reserved = false;
 
