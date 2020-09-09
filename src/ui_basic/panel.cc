@@ -622,11 +622,18 @@ void Panel::think() {
  * (grand-)children for which set_thinks(false) has not been called.
  */
 void Panel::do_think() {
-	if (thinks() && !(flags_ & pf_die)) {
+	if (flags_ & pf_die) {
+		return;
+	}
+
+	if (thinks()) {
 		think();
 	}
 
 	for (Panel* child = first_child_; child; child = child->next_) {
+		if (flags_ & pf_die) {
+			return;
+		}
 		child->do_think();
 	}
 }
