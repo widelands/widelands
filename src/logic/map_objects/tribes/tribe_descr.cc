@@ -29,6 +29,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/immovable_program.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
@@ -913,6 +914,8 @@ void TribeDescr::process_productionsites(Tribes& tribes, const World& world) {
 
 	const DescriptionMaintainer<ImmovableDescr>& world_immovables = world.immovables();
 
+	ImmovableProgram::postload_immovable_relations(tribes, world);
+
 	// Find all attributes that we need to collect from map
 	std::set<MapObjectDescr::AttributeIndex> needed_attributes;
 	for (ProductionSiteDescr* prod : productionsites) {
@@ -928,12 +931,16 @@ void TribeDescr::process_productionsites(Tribes& tribes, const World& world) {
 					const ImmovableDescr& immovable_descr = world_immovables.get(i);
 					if (immovable_descr.has_attribute(attribute_id)) {
 						prod->add_collected_immovable(immovable_descr.name());
+						const_cast<ImmovableDescr&>(immovable_descr)
+						   .add_collected_by(world, tribes, prod->name());
 					}
 				}
 				for (const DescriptionIndex i : immovables()) {
 					const ImmovableDescr& immovable_descr = *get_immovable_descr(i);
 					if (immovable_descr.has_attribute(attribute_id)) {
 						prod->add_collected_immovable(immovable_descr.name());
+						const_cast<ImmovableDescr&>(immovable_descr)
+						   .add_collected_by(world, tribes, prod->name());
 					}
 				}
 			} break;

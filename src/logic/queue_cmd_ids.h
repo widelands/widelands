@@ -103,7 +103,8 @@ enum class QueueCommandTypes : uint8_t {
 	kCallEconomyBalance = 200,
 
 	kDeleteMessage,
-	kToggleMuteMessages,  // 202
+	kToggleMuteMessages,
+	kMarkMapObjectForRemoval,  // 203
 
 	kNetCheckSync = 250,
 	kReplaySyncWrite,

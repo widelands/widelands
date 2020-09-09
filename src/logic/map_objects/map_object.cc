@@ -210,6 +210,13 @@ void ObjectManager::remove(MapObject& obj) {
 	objects_.erase(obj.serial_);
 }
 
+bool ObjectManager::object_still_available(const MapObject* const obj) const {
+	if (!obj) {
+		return false;
+	}
+	return objects_.count(obj->serial()) > 0;
+}
+
 /*
  * Return the list of all serials currently in use
  */
@@ -742,8 +749,9 @@ void MapObject::Loader::load(FileRead& fr) {
 			throw wexception("%u: %s", serial, e.what());
 		}
 
-		if (packet_version == kCurrentPacketVersionMapObject) {
-			get_object()->reserved_by_worker_ = fr.unsigned_8();
+		MapObject& obj = *get_object();
+		if (packet_version >= 2) {
+			obj.reserved_by_worker_ = fr.unsigned_8();
 		}
 	} catch (const WException& e) {
 		throw wexception("map object: %s", e.what());
