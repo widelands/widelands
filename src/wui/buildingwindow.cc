@@ -147,7 +147,6 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 void BuildingWindow::die() {
 	is_dying_ = true;
 	set_thinks(false);
-	vbox_.reset(nullptr);
 	UniqueWindow::die();
 }
 

@@ -23,7 +23,6 @@
 
 #include <SDL_timer.h>
 
-#include "base/multithreading.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
@@ -213,19 +212,17 @@ int Panel::do_run() {
 	// by the same thread that took care of the OpenGL initialization!!!
 	std::unique_ptr<std::thread> thread(new std::thread(&Panel::runthread, this));
 
-	MutexLockHandler& mutex_handler = MutexLockHandler::push();
-	MutexLockHandler local_handler;
-
 	// Caution! If we are the toplevel modal panel, this is the main thread.
 	// But if there was another modal panel (prevmodal != nullptr),
 	// this may NOT be the main thread. In that case, we must take care
 	// not to intercept notifications meant for the main thread, and we
 	// need to leave the drawing code to the main thread as well.
 
+	MutexLockHandler check_lock;
 	std::list<NoteDelayedCheck> checks;
 	std::set<const void*> cancelled_checks;
-	auto handle_checks = [&checks, &local_handler, &cancelled_checks]() {
-		MutexLock m(&local_handler, false);
+	auto handle_checks = [&checks, &check_lock, &cancelled_checks]() {
+		MutexLock m(&check_lock, false);
 		while (!checks.empty()) {
 			if (!cancelled_checks.count(checks.front().caller)) {
 				checks.front().run();
@@ -238,13 +235,13 @@ int Panel::do_run() {
 	std::unique_ptr<Notifications::Subscriber<NoteDelayedCheck>> subscriber2;
 	if (!prevmodal) {
 		subscriber1 = Notifications::subscribe<NoteDelayedCheckCancel>(
-		   [&cancelled_checks, &local_handler](const NoteDelayedCheckCancel& note) {
-			   MutexLock m(&local_handler, false);
+		   [&cancelled_checks, &check_lock](const NoteDelayedCheckCancel& note) {
+			   MutexLock m(&check_lock, false);
 			   cancelled_checks.insert(note.caller);
 		   });
 		subscriber2 = Notifications::subscribe<NoteDelayedCheck>(
-		   [&checks, &local_handler](const NoteDelayedCheck& note) {
-			   MutexLock m(&local_handler, false);
+		   [&checks, &check_lock](const NoteDelayedCheck& note) {
+			   MutexLock m(&check_lock, false);
 			   checks.push_back(note);
 		   });
 	}
@@ -282,7 +279,14 @@ int Panel::do_run() {
 			MutexLock m(true);
 			if (m.is_valid()) {
 				app->handle_input(&input_callback);
+				break;
+			}
+		}
 
+		for (;;) {
+			handle_checks();
+			MutexLock m(&local_mutex_lock_handler_, true);
+			if (m.is_valid()) {
 				check_child_death();
 				break;
 			}
@@ -313,7 +317,6 @@ int Panel::do_run() {
 	NoteDelayedCheck::set_interrupt(id, false);
 	subscriber1.reset();
 	subscriber2.reset();
-	MutexLockHandler::pop(mutex_handler);
 
 	end();
 
@@ -625,6 +628,8 @@ void Panel::do_think() {
 	if (flags_ & pf_die) {
 		return;
 	}
+
+	MutexLock m(&local_mutex_lock_handler_, false);
 
 	if (thinks()) {
 		think();

@@ -98,7 +98,9 @@ void NoteDelayedCheck::instantiate(const void* caller,
 	}
 }
 
-MutexLock::MutexLock(const bool optional) : MutexLock(MutexLockHandler::get(), optional) {
+MutexLockHandler MutexLockHandler::g_mutex;
+
+MutexLock::MutexLock(const bool optional) : MutexLock(&MutexLockHandler::g_mutex, optional) {
 }
 MutexLock::MutexLock(MutexLockHandler* m, const bool optional) : mutex_(nullptr) {
 	if (m && m->mutex()) {
@@ -116,27 +118,6 @@ MutexLock::~MutexLock() {
 	if (mutex_ && mutex_->mutex()) {
 		mutex_->mutex()->unlock();
 	}
-}
-
-static std::list<MutexLockHandler> handlers;
-
-MutexLockHandler* MutexLockHandler::get() {
-	return handlers.empty() ? nullptr : &handlers.back();
-}
-
-MutexLockHandler& MutexLockHandler::push() {
-	handlers.push_back(MutexLockHandler());
-	return handlers.back();
-}
-
-void MutexLockHandler::pop(MutexLockHandler& h) {
-	if (handlers.empty()) {
-		throw wexception("MutexLockHandler::pop(): Stack is empty");
-	}
-	if (handlers.back().mutex() != h.mutex()) {
-		throw wexception("MutexLockHandler::pop(): Mismatch");
-	}
-	handlers.pop_back();
 }
 
 MutexLockHandler::MutexLockHandler() : mutex_(new std::recursive_mutex()) {

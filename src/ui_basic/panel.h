@@ -29,6 +29,7 @@
 #include <boost/signals2/trackable.hpp>
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/styles/panel_styles.h"
@@ -409,6 +410,8 @@ private:
 
 	bool running_;
 	int return_code_;
+
+	MutexLockHandler local_mutex_lock_handler_;
 
 	std::string tooltip_;
 	static Panel* modal_;

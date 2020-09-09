@@ -46,15 +46,11 @@ struct MutexLockHandler {
 		return mutex_.get();
 	}
 
-	// get the global mutex, if any
-	static MutexLockHandler* get();
-
-	// these two functions are intended to be used ONLY by UI::Panel::do_run
-	static MutexLockHandler& push();
-	static void pop(MutexLockHandler&);
+	// The global mutex
+	static MutexLockHandler g_mutex;
 
 private:
-	std::shared_ptr<std::recursive_mutex> mutex_;
+	std::unique_ptr<std::recursive_mutex> mutex_;
 };
 
 /*
