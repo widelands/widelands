@@ -399,17 +399,7 @@ struct ObjectManager {
 	void insert(MapObject*);
 	void remove(MapObject&);
 
-	bool object_still_available(const MapObject* const t) const {
-		if (!t)
-			return false;
-		MapObjectMap::const_iterator it = objects_.begin();
-		while (it != objects_.end()) {
-			if (it->second == t)
-				return true;
-			++it;
-		}
-		return false;
-	}
+	bool object_still_available(const MapObject* const) const;
 
 	/**
 	 * When saving the map object, ordere matters. Return a vector of all ids
