@@ -2013,7 +2013,7 @@ tribes:new_tribe {
    toolbar = {
       left_corner = image_dirname .. "toolbar_left.png",
       left = image_dirname .. "toolbar_main.png",
-      center = image_dirname .. "icon.png",
+      center = image_dirname .. "toolbar_center.png",
       right = image_dirname .. "toolbar_main.png",
       right_corner = image_dirname .. "toolbar_right.png"
    }
