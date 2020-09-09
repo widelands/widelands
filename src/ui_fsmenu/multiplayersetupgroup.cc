@@ -145,9 +145,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	void update() {
 		const GameSettings& settings = settings_->settings();
 		const UserSettings& user_setting = settings.users.at(id_);
-		log_dbg("updating client: %d", id_);
 		if (user_setting.position == UserSettings::not_connected()) {
-			log_dbg("invisible client: %d", id_);
 			set_visible(false);
 			return;
 		}
@@ -642,8 +640,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
                                              int32_t const,
                                              int32_t const h,
                                              GameSettingsProvider* const settings,
-                                             uint32_t buth,
-                                             uint32_t padding)
+                                             uint32_t buth)
    : UI::Box(parent, x, y, UI::Box::Horizontal, 0, h),
      settings_(settings),
      npsb(new NetworkPlayerSettingsBackend(settings_)),
@@ -668,19 +665,16 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
               g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      buth_(buth) {
 	clientbox.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
-	clientbox.add_space(3 * padding);
+	clientbox.add_space(3 * kPadding);
 	clientbox.set_scrolling(true);
 
 	add(&clientbox);
-	add_space(8 * padding);
-	// add_inf_space();
+	add_space(8 * kPadding);
 	add(&playerbox, Resizing::kFillSpace);
-	// add_inf_space();
 	playerbox.add(&players_, Resizing::kAlign, UI::Align::kCenter);
 	scrollable_playerbox.set_scrolling(true);
-	// playerbox.add_space(padding);
+	playerbox.add_space(kPadding);
 
-	// scrollable_playerbox.set_force_scrolling(true);
 	playerbox.add(&scrollable_playerbox, Resizing::kExpandBoth);
 
 	subscriber_ =
@@ -730,7 +724,7 @@ void MultiPlayerSetupGroup::update_clients(const GameSettings& settings) {
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 	const int32_t total_box_height = scrollable_playerbox.get_y() + scrollable_playerbox.get_h();
-	// log("scrollable now: %d\n", scrollable_playerbox.get_w());
+
 	for (MultiPlayerPlayerGroup* current_player : multi_player_player_groups) {
 		if (current_player->get_y() < 0 && current_player->get_y() > -current_player->get_h()) {
 			dst.brighten_rect(
@@ -758,7 +752,7 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
 	clientbox.set_min_desired_breadth(max_width / 3);
 	clientbox.set_max_size(max_width / 3, max_height);
 	playerbox.set_max_size(max_width / 2, max_height);
-	scrollable_playerbox.set_max_size(max_width / 2, max_height - players_.get_h());
+	scrollable_playerbox.set_max_size(max_width / 2, max_height - players_.get_h() - 4 * kPadding);
 
 	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
 		multiPlayerClientGroup->force_new_dimensions(scale, standard_element_height);
@@ -767,12 +761,4 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
 	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
 		multiPlayerPlayerGroup->force_new_dimensions(scale, standard_element_height);
 	}
-	log_dbg("max_w: %d, max_h: %d\n", max_width, max_height);
-	log_dbg("total: %dx%d, client: %dx%d,  player: %dx%d, scrollable: %dx%d,\n", get_w(), get_h(),
-	        clientbox.get_w(), clientbox.get_h(), playerbox.get_w(), playerbox.get_h(),
-	        scrollable_playerbox.get_w(), scrollable_playerbox.get_h());
-	//	log_dbg("box max_y: %d\n", scrollable_playerbox.g)
-	log_dbg("#elements * height = %" PRIuS "  * %d = %" PRIuS "\n",
-	        multi_player_player_groups.size(), standard_element_height,
-	        multi_player_player_groups.size() * standard_element_height);
 }

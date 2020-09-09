@@ -45,8 +45,7 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	                      int32_t w,
 	                      int32_t h,
 	                      GameSettingsProvider* settings,
-	                      uint32_t buth,
-	                      uint32_t padding);
+	                      uint32_t buth);
 	~MultiPlayerSetupGroup() override;
 
 	void force_new_dimensions(float scale,

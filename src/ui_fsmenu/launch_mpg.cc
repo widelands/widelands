@@ -102,7 +102,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   _("Show the help window")),
      help_(nullptr),
 
-     mpsg_(&individual_content_box, 0, 0, 0, 0, settings, standard_element_height_, padding_),
+     mpsg_(&individual_content_box, 0, 0, 0, 0, settings, standard_element_height_),
      chat_(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu) {
 
 	title_.set_text(_("Multiplayer Game Setup"));
@@ -130,8 +130,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	}
 }
 
-FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
-}
+FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() = default;
 
 void FullscreenMenuLaunchMPG::layout() {
 	FullscreenMenuLaunchGame::layout();
@@ -141,16 +140,9 @@ void FullscreenMenuLaunchMPG::layout() {
 	   Vector2i(get_w() - 10 * padding_ - standard_element_height_, 10 * padding_));
 
 	mpsg_.set_max_size(0, get_h() / 2);
-	log_dbg("window height/2: %d\n", get_h() / 2);
-	// log("individual box width: %d\n", individual_content_box.get_w());
-
-	// mpsg_.force_new_dimensions(
-	//    scale_factor(), get_w() * 1 / 2, get_h() / 2, standard_element_height_);
 
 	mpsg_.force_new_dimensions(
 	   scale_factor(), individual_content_box.get_w(), get_h() / 2, standard_element_height_);
-
-	// chat_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, get_h() / 4);
 
 	// set focus to chat input
 	chat_.focus_edit();
