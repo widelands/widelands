@@ -102,6 +102,7 @@ wl_library(wui_common_gamedetails
     graphic
     graphic_image_cache
     graphic_image_io
+    graphic_minimap_renderer
     graphic_surface
     graphic_text_layout
     io_filesystem
@@ -109,6 +110,7 @@ wl_library(wui_common_gamedetails
     logic_constants
     logic_filesystem_constants
     logic_game_controller
+    map_io_map_loader
     ui_basic
 )
 
@@ -126,10 +128,13 @@ wl_library(wui_common_mapdetails
   DEPENDS
     base_exceptions
     base_i18n
+    graphic_minimap_renderer
     graphic_text_layout
     io_filesystem
+    logic
     logic_game_settings
     logic_map
+    map_io_map_loader
     ui_basic
     wui_common_suggested_teams
 )

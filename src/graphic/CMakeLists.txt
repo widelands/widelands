@@ -203,6 +203,7 @@ wl_library(graphic_minimap_renderer
     base_macros
     base_multithreading
     economy
+    graphic_playercolor
     graphic_surface
     logic
     logic_map
