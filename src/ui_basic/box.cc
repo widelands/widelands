@@ -431,6 +431,9 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 			breadth = it.u.panel.panel->get_inner_w();
 			maxbreadth = get_inner_w();
 		}
+		if (scrollbar_ && scrollbar_->is_enabled()) {
+			maxbreadth -= Scrollbar::kSize;
+		}
 		switch (it.u.panel.align) {
 		case UI::Align::kCenter:
 			breadth = (maxbreadth - breadth) / 2;

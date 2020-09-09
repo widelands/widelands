@@ -62,8 +62,8 @@ void Icon::draw(RenderTarget& dst) {
 		   std::min(1.f, std::min(static_cast<float>(available_width) / pic_->width(),
 		                          static_cast<float>(available_height) / pic_->height()));
 		// We need to be pixel perfect, so we use ints.
-		const int width = scale * available_width;
-		const int height = scale * available_height;
+		const int width = scale * pic_->width();
+		const int height = scale * pic_->height();
 		const int x = (available_width - width) / 2;
 		const int y = (available_height - height) / 2;
 		if (grey_out_) {

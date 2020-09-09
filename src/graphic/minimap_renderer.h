@@ -38,6 +38,7 @@ enum class MiniMapLayer {
 	Building = 16,
 	Zoom2 = 32,
 	ViewWindow = 64,
+	StartingPositions = 128,
 };
 
 // A bunch of operators that turn MiniMapLayer into a bitwise combinable flag class.
