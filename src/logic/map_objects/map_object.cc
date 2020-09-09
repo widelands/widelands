@@ -211,8 +211,9 @@ void ObjectManager::remove(MapObject& obj) {
 }
 
 bool ObjectManager::object_still_available(const MapObject* const obj) const {
-	if (!obj)
+	if (!obj) {
 		return false;
+	}
 	return objects_.count(obj->serial()) > 0;
 }
 
