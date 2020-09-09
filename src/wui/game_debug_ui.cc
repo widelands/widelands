@@ -37,19 +37,6 @@
 #include "ui_basic/window.h"
 #include "wui/interactive_base.h"
 
-struct MapObjectDebugPanel : public UI::Panel, public Widelands::MapObject::LogSink {
-	MapObjectDebugPanel(UI::Panel& parent, const Widelands::EditorGameBase&, Widelands::MapObject&);
-	~MapObjectDebugPanel() override;
-
-	void log(const std::string& str) override;
-
-private:
-	const Widelands::EditorGameBase& egbase_;
-	Widelands::ObjectPointer object_;
-
-	UI::MultilineTextarea log_;
-};
-
 MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel& parent,
                                          const Widelands::EditorGameBase& egbase,
                                          Widelands::MapObject& obj)
@@ -92,30 +79,6 @@ MapObjectDebugWindow
 
 ==============================================================================
 */
-
-/*
-MapObjectDebugWindow
---------------------
-The map object debug window is basically just a simple container for tabs
-that are provided by the map object itself via the virtual function
-collect_debug_tabs().
-*/
-struct MapObjectDebugWindow : public UI::Window {
-	MapObjectDebugWindow(InteractiveBase& parent, Widelands::MapObject&);
-
-	InteractiveBase& ibase() {
-		return dynamic_cast<InteractiveBase&>(*get_parent());
-	}
-
-	void think() override;
-
-private:
-	bool log_general_info_;
-	Widelands::ObjectPointer object_;
-	uint32_t serial_;
-	UI::TabPanel tabs_;
-};
-
 MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::MapObject& obj)
    : UI::Window(&parent, "map_object_debug", 0, 0, 100, 100, ""),
      log_general_info_(true),
@@ -136,7 +99,7 @@ Remove self when the object disappears.
 ===============
 */
 void MapObjectDebugWindow::think() {
-	Widelands::EditorGameBase& egbase = ibase().egbase();
+	const Widelands::EditorGameBase& egbase = ibase().egbase();
 	if (Widelands::MapObject* const obj = object_.get(egbase)) {
 		if (log_general_info_) {
 			obj->log_general_info(egbase);
@@ -166,31 +129,10 @@ FieldDebugWindow
 
 ==============================================================================
 */
-
-struct FieldDebugWindow : public UI::Window {
-	FieldDebugWindow(InteractiveBase& parent, Widelands::Coords);
-
-	InteractiveBase& ibase() {
-		return dynamic_cast<InteractiveBase&>(*get_parent());
-	}
-
-	void think() override;
-
-	void open_immovable();
-	void open_bob(uint32_t);
-
-private:
-	const Widelands::Map& map_;
-	Widelands::FCoords const coords_;
-
-	UI::MultilineTextarea ui_field_;
-	UI::Button ui_immovable_;
-	UI::Listselect<intptr_t> ui_bobs_;
-};
-
 FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords const coords)
    : /** TRANSLATORS: Title for a window that shows debug information for a field on the map */
      UI::Window(&parent, "field_debug", 0, 60, 300, 400, _("Debug Field")),
+     text_(""),
      map_(parent.egbase().map()),
      coords_(map_.get_fcoords(coords)),
 
@@ -208,7 +150,7 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
 	assert(coords_.y < map_.get_height());
 	assert(&map_[0] <= coords_.field);
 	assert(coords_.field < &map_[0] + map_.max_index());
-	ui_bobs_.selected.connect([this](uint32_t a) { open_bob(a); });
+	ui_bobs_.double_clicked.connect([this](uint32_t a) { open_bob(a); });
 }
 
 /*
@@ -339,7 +281,10 @@ void FieldDebugWindow::think() {
 		}
 	}
 
-	ui_field_.set_text(str.c_str());
+	if (str.compare(text_) != 0) {
+		ui_field_.set_text(str.c_str());
+		text_ = std::move(str);
+	}
 
 	// Immovable information
 	if (Widelands::BaseImmovable* const imm = coords_.field->get_immovable()) {
