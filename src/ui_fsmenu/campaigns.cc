@@ -31,7 +31,7 @@
 
 namespace {
 constexpr const char* const kCampVisFileLegacy = "save/campvis";
-}
+}  // namespace
 
 Campaigns::Campaigns() {
 	// Load solved scenarios
