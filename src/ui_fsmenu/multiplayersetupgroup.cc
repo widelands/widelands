@@ -25,7 +25,6 @@
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"
-#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
@@ -44,7 +43,7 @@ constexpr int kPadding = 4;
 /// Holds the info and dropdown menu for a connected client
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup(UI::Panel* const parent,
-	                       int32_t const /*w*/,
+	                       int32_t const,
 	                       int32_t const h,
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings)
@@ -384,8 +383,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Whether the client who is running the UI is allowed to change the tribe for this player slot.
 	bool has_tribe_access() const {
 		return settings_->settings().players[id_].state == PlayerSettings::State::kShared ?
-		          settings_->can_change_player_init(id_) :
-		          settings_->can_change_player_tribe(id_);
+                settings_->can_change_player_init(id_) :
+                settings_->can_change_player_tribe(id_);
 	}
 
 	/// This will update the game settings for the tribe or shared_in with the value
@@ -397,8 +396,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_settings = settings_->settings().players[id_];
 		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-		                                      UI::ButtonDisableStyle::kPermpressed :
-		                                      UI::ButtonDisableStyle::kFlat);
+                                            UI::ButtonDisableStyle::kPermpressed :
+                                            UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
 				n->set_player_shared(
