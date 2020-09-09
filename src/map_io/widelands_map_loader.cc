@@ -107,6 +107,32 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 	return 0;
 }
 
+int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase) {
+	preload_map(false);
+
+	std::string timer_message = "WidelandsMapLoader::load_map_for_render() for '";
+	timer_message += map_.get_name();
+	timer_message += "' took %ums";
+	ScopedTimer timer(timer_message);
+
+	map_.set_size(map_.width_, map_.height_);
+	mol_.reset(new MapObjectLoader());
+
+	std::unique_ptr<WorldLegacyLookupTable> world_lookup_table(
+	   create_world_legacy_lookup_table(old_world_name_));
+	{
+		MapTerrainPacket p;
+		p.read(*fs_, egbase, *world_lookup_table);
+	}
+
+	{
+		MapPlayerPositionPacket p;
+		p.read(*fs_, egbase, false, *mol_);
+	}
+
+	return 0;
+}
+
 /*
  * Load the complete map and make sure that it runs without problems
  */
@@ -137,7 +163,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	log_info("Reading Elemental Data ... ");
 	MapElementalPacket elemental_data_packet;
 	elemental_data_packet.read(*fs_, egbase, is_game, *mol_);
-	log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 	egbase.allocate_player_maps();  //  Can do this now that map size is known.
 
@@ -147,7 +172,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		MapPlayerNamesAndTribesPacket p;
 		p.read(*fs_, egbase, is_game, *mol_);
 	}
-	log_info(" → took %ums\n ", timer.ms_since_last_query());
 	// PRELOAD DATA END
 
 	if (fs_->file_exists("port_spaces")) {
@@ -155,8 +179,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 		MapPortSpacesPacket p;
 		p.read(*fs_, egbase, is_game, *mol_);
-
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log_info("Reading Heights Data ... ");
@@ -165,7 +187,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		MapHeightsPacket p;
 		p.read(*fs_, egbase, is_game, *mol_);
 	}
-	log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 	std::unique_ptr<WorldLegacyLookupTable> world_lookup_table(
 	   create_world_legacy_lookup_table(old_world_name_));
@@ -176,14 +197,12 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		MapTerrainPacket p;
 		p.read(*fs_, egbase, *world_lookup_table);
 	}
-	log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 	MapObjectPacket mapobjects;
 
 	log_info("Reading Map Objects ... ");
 	set_progress_message(_("Map objects"), 4);
 	mapobjects.read(*fs_, egbase, *mol_, *world_lookup_table, *tribes_lookup_table);
-	log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 	log_info("Reading Player Start Position Data ... ");
 	set_progress_message(_("Starting positions"), 5);
@@ -191,7 +210,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		MapPlayerPositionPacket p;
 		p.read(*fs_, egbase, is_game, *mol_);
 	}
-	log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 	// This call must stay around forever since this was the way critters have
 	// been saved into the map before 2010. Most of the maps we ship are still
@@ -202,7 +220,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapBobPacket p;
 			p.read(*fs_, egbase, *mol_, *world_lookup_table);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log_info("Reading Resources Data ... ");
@@ -211,7 +228,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		MapResourcesPacket p;
 		p.read(*fs_, egbase, *world_lookup_table);
 	}
-	log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	// Do not load unneeded packages in the editor
@@ -222,7 +238,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapVersionPacket p;
 			p.read(*fs_, egbase, is_game, old_world_name_.empty());
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		set_progress_message(_("Building restrictions"), 8);
 		log_info("Reading Allowed Worker Types Data ... ");
@@ -230,14 +245,12 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapAllowedWorkerTypesPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		log_info("Reading Allowed Building Types Data ... ");
 		{
 			MapAllowedBuildingTypesPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		set_progress_message(_("Territories"), 9);
 		log_info("Reading Node Ownership Data ... ");
@@ -245,7 +258,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapNodeOwnershipPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		//  !!!!!!!!!! NOTE
 		//  This packet must be before any building or road packet. So do not change
@@ -257,7 +269,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapFlagPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		log_info("Reading Road Data ... ");
 		set_progress_message(_("Roads and waterways"), 11);
@@ -265,14 +276,12 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapRoadPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		log_info("Reading Waterway Data ... ");
 		{
 			MapWaterwayPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		log_info("Reading Building Data ... ");
 		set_progress_message(_("Buildings"), 12);
@@ -280,7 +289,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapBuildingPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		//  DATA PACKETS
 		log_info("Reading Flagdata Data ... ");
@@ -289,7 +297,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapFlagdataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		log_info("Reading Roaddata Data ... ");
 		set_progress_message(_("Initializing roads and waterways"), 14);
@@ -297,14 +304,12 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapRoaddataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		log_info("Reading Waterwaydata Data ... ");
 		{
 			MapWaterwaydataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		log_info("Reading Buildingdata Data ... ");
 		set_progress_message(_("Initializing buildings"), 15);
@@ -312,7 +317,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapBuildingdataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		log_info("Second and third phase loading Map Objects ... ");
 		set_progress_message(_("Initializing map objects"), 16);
@@ -330,7 +334,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 				}
 			}
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		//  This should be at least after loading Soldiers (Bobs).
 		//  NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
@@ -341,7 +344,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapPlayersViewPacket p;
 			p.read(*fs_, egbase, *world_lookup_table, *tribes_lookup_table);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		//  This must come before anything that references messages, such as:
 		//    * command queue (PlayerMessageCommand, inherited by
@@ -352,7 +354,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapPlayersMessagesPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		// Map data used by win conditions.
 		log_info("Reading Wincondition Data ... ");
@@ -361,7 +362,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapWinconditionPacket p;
 			p.read(*fs_, *egbase.mutable_map());
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 		// Objectives. They are not needed in the Editor, since they are fully
 		// defined through Lua scripting. They are also not required for a game,
@@ -371,7 +371,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		if (!is_game) {
 			read_objective_data(*fs_, egbase);
 		}
-		log_info(" → took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log_info("Reading Scripting Data ... ");
@@ -380,12 +379,10 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		MapScriptingPacket p;
 		p.read(*fs_, egbase, is_game, *mol_);
 	}
-	log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 	log_info("Reading map images ... ");
 	set_progress_message(_("Images"), is_editor ? 8 : 22);
 	load_map_images(*fs_);
-	log_info(" → took %ums\n ", timer.ms_since_last_query());
 
 	set_progress_message(_("Checking map"), is_editor ? 9 : 23);
 	if (!is_editor) {

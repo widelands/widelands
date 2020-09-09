@@ -580,7 +580,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 				break;  // not handled
 			}
 		}
-		assert(selected_idx <= max ^ selected_idx == no_selection_index());
+		assert((selected_idx <= max) ^ (selected_idx == no_selection_index()));
 		if (handle) {
 			select(selected_idx);
 			if (selection_index() * get_lineheight() < scrollpos_) {

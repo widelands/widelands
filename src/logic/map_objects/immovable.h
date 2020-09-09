@@ -173,6 +173,16 @@ public:
 		return becomes_;
 	}
 
+	// A set of all productionsites that gather this immovable or any of its future types
+	const std::set<std::string> collected_by() const {
+		return collected_by_;
+	}
+	void add_collected_by(const World&, const Tribes&, const std::string& prodsite);
+
+	void add_became_from(const std::string& s) {
+		became_from_.insert(s);
+	}
+
 protected:
 	int32_t size_;
 	Programs programs_;
@@ -186,6 +196,8 @@ protected:
 
 	std::string species_;
 	std::set<std::pair<MapObjectType, std::string>> becomes_;
+	std::set<std::string> became_from_;  // immovables that turn into this one
+	std::set<std::string> collected_by_;
 
 private:
 	// Adds a default program if none was defined.
@@ -253,6 +265,12 @@ public:
 	}
 	bool apply_growth_delay(Game&);
 
+	bool is_marked_for_removal(PlayerNumber) const;
+	void set_marked_for_removal(PlayerNumber, bool mark);
+	const std::set<PlayerNumber>& get_marked_for_removal() const {
+		return marked_for_removal_;
+	}
+
 protected:
 	// The building type that created this immovable, if any.
 	const BuildingDescr* former_building_descr_;
@@ -264,6 +282,10 @@ protected:
 
 	const ImmovableProgram* program_;
 	uint32_t program_ptr_;  ///< index of next instruction to execute
+
+	// Whether a worker was told to remove this object ASAP.
+	// A set of all players who want this object gone.
+	std::set<PlayerNumber> marked_for_removal_;
 
 /* GCC 4.0 has problems with friend declarations: It doesn't allow
  * substructures of friend classes private access but we rely on this behaviour

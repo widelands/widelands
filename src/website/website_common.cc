@@ -41,7 +41,7 @@ void initialize() {
 	// We don't really need graphics here, but we will get error messages
 	// when they aren't initialized
 	g_gr = new Graphic();
-	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
+	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false, false);
 }
 
 // Cleanup before program end
