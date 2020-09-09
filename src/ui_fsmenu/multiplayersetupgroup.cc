@@ -384,7 +384,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	}
 
 	/// Whether the client who is running the UI is allowed to change the tribe for this player slot.
-	bool has_tribe_access() {
+	bool has_tribe_access() const {
 		return settings_->settings().players[id_].state == PlayerSettings::State::kShared ?
                 settings_->can_change_player_init(id_) :
                 settings_->can_change_player_tribe(id_);
@@ -688,8 +688,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	update();
 }
 
-MultiPlayerSetupGroup::~MultiPlayerSetupGroup() {
-}
+MultiPlayerSetupGroup::~MultiPlayerSetupGroup() = default;
 
 /// Update which slots are available based on current settings.
 void MultiPlayerSetupGroup::update() {
@@ -730,29 +729,26 @@ void MultiPlayerSetupGroup::update_clients(const GameSettings& settings) {
 }
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
-	//	const int32_t total_box_height = scrollable_playerbox.get_y() + scrollable_playerbox.get_h();
-	//	// log("scrollable now: %d\n", scrollable_playerbox.get_w());
-	//	for (MultiPlayerPlayerGroup* current_player : multi_player_player_groups) {
-	//		if (current_player->is_visible()) {
-	//			if (current_player->get_y() < 0 && current_player->get_y() > -current_player->get_h()) {
-	//				dst.brighten_rect(
-	//				   Recti(playerbox.get_x(), scrollable_playerbox.get_y(),
-	// scrollable_playerbox.get_w(), 				         current_player->get_h() +
-	// current_player->get_y()), 				   -MOUSE_OVER_BRIGHT_FACTOR); 			} else if
-	// (current_player->get_y() >= 0)
-	//{ 				auto rect_height = 				   std::min(total_box_height -
-	//(scrollable_playerbox.get_y()
-	//+
-	// current_player->get_y()), 				            current_player->get_h());
-	// dst.brighten_rect( 				   Recti(playerbox.get_x(), scrollable_playerbox.get_y() +
-	// current_player->get_y(), 				         scrollable_playerbox.get_w(), rect_height < 0 ? 0
-	// : rect_height), 				   -MOUSE_OVER_BRIGHT_FACTOR);
-	//			}
-	//		}
-	//	}
+	const int32_t total_box_height = scrollable_playerbox.get_y() + scrollable_playerbox.get_h();
+	// log("scrollable now: %d\n", scrollable_playerbox.get_w());
+	for (MultiPlayerPlayerGroup* current_player : multi_player_player_groups) {
+		if (current_player->get_y() < 0 && current_player->get_y() > -current_player->get_h()) {
+			dst.brighten_rect(
+			   Recti(playerbox.get_x(), scrollable_playerbox.get_y(), scrollable_playerbox.get_w(),
+			         current_player->get_h() + current_player->get_y()),
+			   -MOUSE_OVER_BRIGHT_FACTOR);
+		} else if (current_player->get_y() >= 0) {
+			auto rect_height =
+			   std::min(total_box_height - (scrollable_playerbox.get_y() + current_player->get_y()),
+			            current_player->get_h());
+			dst.brighten_rect(
+			   Recti(playerbox.get_x(), scrollable_playerbox.get_y() + current_player->get_y(),
+			         scrollable_playerbox.get_w(), rect_height < 0 ? 0 : rect_height),
+			   -MOUSE_OVER_BRIGHT_FACTOR);
+		}
+	}
 }
 
-// NOCOM When branch is ready, delete max_height if it's still unused
 void MultiPlayerSetupGroup::force_new_dimensions(float scale,
                                                  uint32_t max_width,
                                                  uint32_t max_height,
@@ -762,23 +758,14 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
 	clientbox.set_min_desired_breadth(max_width / 3);
 	clientbox.set_max_size(max_width / 3, max_height);
 	playerbox.set_max_size(max_width / 2, max_height);
-	scrollable_playerbox.set_max_size(max_width / 2, max_height);
+	scrollable_playerbox.set_max_size(max_width / 2, max_height - players_.get_h());
 
 	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
 		multiPlayerClientGroup->force_new_dimensions(scale, standard_element_height);
 	}
-	// playerbox.set_max_size(max_width - clientbox.get_w(), max_height);
-
-	// log("ind. contentbox - clientbox: %d\n", max_width - clientbox.get_w());
-	// log("total: %d, client: %d,  player before: %d, scrollable before: %d,\n", get_w(),
-	//     clientbox.get_w(), playerbox.get_w(), scrollable_playerbox.get_w());
-	// playerbox.set_max_size(0, max_height);
 
 	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
 		multiPlayerPlayerGroup->force_new_dimensions(scale, standard_element_height);
-		// multiPlayerPlayerGroup->set_desired_size(
-		//    get_w() - 32 - clientbox.get_w() - UI::Scrollbar::kSize,
-		// multiPlayerPlayerGroup->get_h());
 	}
 	log_dbg("max_w: %d, max_h: %d\n", max_width, max_height);
 	log_dbg("total: %dx%d, client: %dx%d,  player: %dx%d, scrollable: %dx%d,\n", get_w(), get_h(),
