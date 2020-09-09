@@ -22,7 +22,6 @@
 #include <cassert>
 #include <memory>
 
-#include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_table.h"

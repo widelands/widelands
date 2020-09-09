@@ -37,10 +37,8 @@
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/map_objects/world/critter.h"
-#include "logic/widelands.h"
 #include "website/lua/lua_tree.h"
 #include "website/website_common.h"
 

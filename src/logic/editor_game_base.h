@@ -45,7 +45,6 @@ namespace Widelands {
 class PlayersManager;
 struct ObjectManager;
 class Player;
-class Descriptions;
 struct BuildingSettings;
 
 struct NoteFieldPossession {

@@ -31,7 +31,6 @@
 #include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
-#include "logic/map_objects/descriptions.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
 
