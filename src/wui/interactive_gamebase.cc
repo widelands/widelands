@@ -120,18 +120,21 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 				   if (wanted_building_windows_.count(coords.hash()) == 1) {
 					   const WantedBuildingWindow& wanted_building_window =
 					      *wanted_building_windows_.at(coords.hash());
-					   NoteDelayedCheck::instantiate(this, [this, coords, wanted_building_window]() {
-						   is_warping_building_window_ = true;
-						   UI::UniqueWindow* building_window =
-							  show_building_window(coords, true, wanted_building_window.show_workarea);
-						   is_warping_building_window_ = false;
+					   NoteDelayedCheck::instantiate(
+					      this,
+					      [this, coords, wanted_building_window]() {
+						      is_warping_building_window_ = true;
+						      UI::UniqueWindow* building_window =
+						         show_building_window(coords, true, wanted_building_window.show_workarea);
+						      is_warping_building_window_ = false;
 
-						   building_window->set_pos(wanted_building_window.window_position);
-						   if (wanted_building_window.minimize) {
-							   building_window->minimize();
-						   }
-						   building_window->set_pinned(wanted_building_window.pin);
-					   }, false);
+						      building_window->set_pos(wanted_building_window.window_position);
+						      if (wanted_building_window.minimize) {
+							      building_window->minimize();
+						      }
+						      building_window->set_pinned(wanted_building_window.pin);
+					      },
+					      false);
 					   wanted_building_windows_.erase(coords.hash());
 				   }
 			   }
