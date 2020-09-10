@@ -527,8 +527,6 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
  * during single/multiplayer/scenario).
  */
 void InteractiveGameBase::postload() {
-	show_buildhelp(false);
-
 	// Recalc whole map for changed owner stuff
 	egbase().mutable_map()->recalc_whole_map(egbase());
 

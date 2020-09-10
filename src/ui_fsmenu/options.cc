@@ -41,6 +41,7 @@
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
+#include "wui/interactive_base.h"
 
 namespace {
 
@@ -227,6 +228,14 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      game_clock_(&box_game_, Vector2i::zero(), _("Display game time in the top left corner")),
      numpad_diagonalscrolling_(
         &box_game_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
+     showhide_info_(
+        &box_game_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu, _("Show / Hide default values")),
+     show_buildhelp_(&box_game_, Vector2i::zero(), _("Show Building Spaces")),
+     show_census_(&box_game_, Vector2i::zero(), _("Show Census")),
+     show_statistics_(&box_game_, Vector2i::zero(), _("Show Statistics")),
+     show_soldier_levels_(&box_game_, Vector2i::zero(), _("Show Soldier Levels")),
+     show_buildings_(&box_game_, Vector2i::zero(), _("Show Buildings")),
+     show_workarea_overlap_(&box_game_, Vector2i::zero(), _("Show Workarea Overlaps")),
      os_(opt) {
 
 	// Buttons
@@ -280,6 +289,15 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_game_.add(&ctrl_zoom_);
 	box_game_.add(&game_clock_);
 	box_game_.add(&numpad_diagonalscrolling_);
+	box_game_.add(&showhide_info_);
+	box_game_.add(&show_buildhelp_);
+	box_game_.add(&show_census_);
+	box_game_.add(&show_statistics_);
+	box_game_.add(&show_soldier_levels_);
+	box_game_.add(&show_buildings_);
+	box_game_.add(&show_workarea_overlap_);
+	// 800x600 needs a scrollbar
+	box_game_.set_force_scrolling(true);
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
@@ -361,6 +379,13 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	game_clock_.set_state(opt.game_clock);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
 
+	show_buildhelp_.set_state(opt.display_flags & InteractiveBase::dfShowBuildhelp);
+	show_census_.set_state(opt.display_flags & InteractiveBase::dfShowCensus);
+	show_statistics_.set_state(opt.display_flags & InteractiveBase::dfShowStatistics);
+	show_soldier_levels_.set_state(opt.display_flags & InteractiveBase::dfShowSoldierLevels);
+	show_buildings_.set_state(opt.display_flags & InteractiveBase::dfShowBuildings);
+	show_workarea_overlap_.set_state(opt.display_flags & InteractiveBase::dfShowWorkareaOverlap);
+
 	// Language options
 	add_languages_to_list(opt.language);
 	update_language_stats();
@@ -435,6 +460,14 @@ void FullscreenMenuOptions::layout() {
 	ctrl_zoom_.set_desired_size(tab_panel_width, ctrl_zoom_.get_h());
 	game_clock_.set_desired_size(tab_panel_width, game_clock_.get_h());
 	numpad_diagonalscrolling_.set_desired_size(tab_panel_width, numpad_diagonalscrolling_.get_h());
+
+	showhide_info_.set_desired_size(tab_panel_width, show_buildhelp_.get_h());
+	show_buildhelp_.set_desired_size(tab_panel_width, show_buildhelp_.get_h());
+	show_census_.set_desired_size(tab_panel_width, show_census_.get_h());
+	show_statistics_.set_desired_size(tab_panel_width, show_statistics_.get_h());
+	show_soldier_levels_.set_desired_size(tab_panel_width, show_soldier_levels_.get_h());
+	show_buildings_.set_desired_size(tab_panel_width, show_buildings_.get_h());
+	show_workarea_overlap_.set_desired_size(tab_panel_width, show_workarea_overlap_.get_h());
 }
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
@@ -619,6 +652,14 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.game_clock = game_clock_.get_state();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
 
+	int32_t flags = show_buildhelp_.get_state() ? InteractiveBase::dfShowBuildhelp : 0;
+	flags |= show_census_.get_state() ? InteractiveBase::dfShowCensus : 0;
+	flags |= show_statistics_.get_state() ? InteractiveBase::dfShowStatistics : 0;
+	flags |= show_soldier_levels_.get_state() ? InteractiveBase::dfShowSoldierLevels : 0;
+	flags |= show_buildings_.get_state() ? InteractiveBase::dfShowBuildings : 0;
+	flags |= show_workarea_overlap_.get_state() ? InteractiveBase::dfShowWorkareaOverlap : 0;
+	os_.display_flags = flags;
+
 	// Last tab for reloading the options menu
 	os_.active_tab = tabs_.active();
 	return os_;
@@ -684,6 +725,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
+	opt.display_flags = opt_section_.get_int("display_flags", InteractiveBase::kDefaultDisplayFlags);
 
 	// Language options
 	opt.language = opt_section_.get_string("language", "");
@@ -725,6 +767,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 	opt_section_.set_bool("game_clock", opt.game_clock);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
+	opt_section_.set_int("display_flags", opt.display_flags);
 
 	// Language options
 	opt_section_.set_string("language", opt.language);

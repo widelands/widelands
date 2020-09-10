@@ -158,7 +158,6 @@ void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
-     buildhelp_(false),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
@@ -179,9 +178,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      workareas_cache_(nullptr),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
-     display_flags_(dfDebug | dfShowSoldierLevels | dfShowBuildings),
+     display_flags_(dfDebug | get_config_int("display_flags")),
 #else
-     display_flags_(dfShowSoldierLevels | dfShowBuildings),
+     display_flags_(get_config_int("display_flags")),
 #endif
      lastframe_(SDL_GetTicks()),
      frametime_(0),
@@ -416,15 +415,11 @@ void InteractiveBase::unset_sel_picture() {
 }
 
 bool InteractiveBase::buildhelp() const {
-	return buildhelp_;
+	return get_display_flag(dfShowBuildhelp);
 }
 
 void InteractiveBase::show_buildhelp(bool t) {
-	const bool old_value = buildhelp_;
-	buildhelp_ = t;
-	if (old_value != t) {
-		rebuild_showhide_menu();
-	}
+	set_display_flag(dfShowBuildhelp, t);
 }
 
 void InteractiveBase::toggle_buildhelp() {
@@ -875,7 +870,11 @@ Change the display flags that modify the view of the map.
 ===============
 */
 void InteractiveBase::set_display_flags(uint32_t flags) {
+	const uint32_t old_value = display_flags_;
 	display_flags_ = flags;
+	if (old_value != display_flags_) {
+		rebuild_showhide_menu();
+	}
 }
 
 /*
@@ -883,7 +882,7 @@ void InteractiveBase::set_display_flags(uint32_t flags) {
 Get and set one individual flag of the display flags.
 ===============
 */
-bool InteractiveBase::get_display_flag(uint32_t const flag) {
+bool InteractiveBase::get_display_flag(uint32_t const flag) const {
 	return display_flags_ & flag;
 }
 

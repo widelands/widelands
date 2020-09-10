@@ -69,6 +69,7 @@ public:
 		bool ctrl_zoom;
 		bool game_clock;
 		bool numpad_diagonalscrolling;
+		int32_t display_flags;
 
 		// Language options
 		std::string language;
@@ -158,6 +159,14 @@ private:
 	UI::Checkbox ctrl_zoom_;
 	UI::Checkbox game_clock_;
 	UI::Checkbox numpad_diagonalscrolling_;
+
+	UI::MultilineTextarea showhide_info_;
+	UI::Checkbox show_buildhelp_;
+	UI::Checkbox show_census_;
+	UI::Checkbox show_statistics_;
+	UI::Checkbox show_soldier_levels_;
+	UI::Checkbox show_buildings_;
+	UI::Checkbox show_workarea_overlap_;
 
 	OptionsCtrl::OptionsStruct os_;
 

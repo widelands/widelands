@@ -74,11 +74,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 			if (InteractiveBase* const ibase = game.get_ibase()) {
 				ibase->map_view()->scroll_to_map_pixel(center_map_pixel, MapView::Transition::Jump);
 
-				uint32_t const loaded_df =
-				   InteractiveBase::dfShowCensus | InteractiveBase::dfShowStatistics;
-				uint32_t const olddf = ibase->get_display_flags();
-				uint32_t const realdf = (olddf & ~loaded_df) | (display_flags & loaded_df);
-				ibase->set_display_flags(realdf);
+				ibase->set_display_flags(display_flags);
 			}
 			if (InteractivePlayer* const ipl = game.get_ipl()) {
 				ipl->set_player_number(player_number);
