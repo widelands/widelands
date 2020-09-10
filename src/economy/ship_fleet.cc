@@ -277,11 +277,7 @@ void ShipFleet::cleanup(EditorGameBase& egbase) {
 
 	while (!ships_.empty()) {
 		Ship* ship = ships_.back();
-		// Check if the ship still exists to avoid heap-use-after-free when ship has already been
-		// deleted while processing EditorGameBase::cleanup_objects()
-		if (egbase.objects().object_still_available(ship)) {
-			ship->set_fleet(nullptr);
-		}
+		ship->set_fleet(nullptr);
 		ships_.pop_back();
 	}
 
@@ -388,7 +384,10 @@ void ShipFleet::add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& 
 
 void ShipFleet::add_ship(EditorGameBase& egbase, Ship* ship) {
 	ships_.push_back(ship);
+	assert(std::count(ships_.begin(), ships_.end(), ship) == 1);
+
 	ship->set_fleet(this);
+
 	if (upcast(Game, game, &get_owner()->egbase())) {
 		if (ports_.empty()) {
 			ship->set_economy(*game, nullptr, wwWARE);
@@ -408,11 +407,19 @@ void ShipFleet::add_ship(EditorGameBase& egbase, Ship* ship) {
 
 void ShipFleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 	std::vector<Ship*>::iterator it = std::find(ships_.begin(), ships_.end(), ship);
-	if (it != ships_.end()) {
+	while (it != ships_.end()) {
 		*it = ships_.back();
 		ships_.pop_back();
+		it = std::find(ships_.begin(), ships_.end(), ship);
+		if (it != ships_.end()) {
+			log_err_time(egbase.get_gametime(),
+			             "Multiple instances of the same ship were in the ship fleet\n");
+		}
 	}
+	assert(std::count(ships_.begin(), ships_.end(), ship) == 0);
+
 	ship->set_fleet(nullptr);
+
 	if (upcast(Game, game, &egbase)) {
 		ship->set_economy(*game, nullptr, wwWARE);
 		ship->set_economy(*game, nullptr, wwWORKER);
