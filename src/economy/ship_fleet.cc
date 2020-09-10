@@ -412,8 +412,8 @@ void ShipFleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 		ships_.pop_back();
 		it = std::find(ships_.begin(), ships_.end(), ship);
 		if (it != ships_.end()) {
-			log_err_time(egbase.get_gametime(),
-			             "Multiple instances of the same ship were in the ship fleet\n");
+			log_err_time(
+			   egbase.get_gametime(), "Multiple instances of the same ship were in the ship fleet\n");
 		}
 	}
 	assert(std::count(ships_.begin(), ships_.end(), ship) == 0);
