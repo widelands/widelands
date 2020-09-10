@@ -178,7 +178,7 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 ===============
 */
 void BuildingWindow::think() {
-	MutexLock lock(think_without_locking_);
+	MutexLock lock(think_without_locking_ || igbase()->is_warping_building_window());
 
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (building == nullptr || !igbase()->can_see(building->owner().player_number())) {

@@ -157,6 +157,11 @@ void Panel::runthread() {
 			continue;
 		}
 
+		{
+			MutexLock m(&local_mutex_lock_handler_, false);
+			check_child_death();
+		}
+
 		const uint32_t start_time = SDL_GetTicks();
 
 		if (start_time >= next_think_time) {
@@ -279,15 +284,6 @@ int Panel::do_run() {
 			MutexLock m(true);
 			if (m.is_valid()) {
 				app->handle_input(&input_callback);
-				break;
-			}
-		}
-
-		for (;;) {
-			handle_checks();
-			MutexLock m(&local_mutex_lock_handler_, true);
-			if (m.is_valid()) {
-				check_child_death();
 				break;
 			}
 		}

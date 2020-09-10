@@ -70,7 +70,7 @@ public:
 
 private:
 	InteractiveGameBase& igb_;
-	Widelands::Building& building_;
+	Widelands::OPtr<Widelands::Building> building_;
 	const Widelands::InputQueue* queue_;
 	const Widelands::ProductionsiteSettings* settings_;
 	UI::Radiogroup* priority_radiogroup_;

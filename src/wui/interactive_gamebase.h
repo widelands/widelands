@@ -37,8 +37,7 @@ public:
 	                    Section& global_s,
 	                    bool multiplayer,
 	                    ChatProvider* chat_provider);
-	~InteractiveGameBase() override {
-	}
+	~InteractiveGameBase() override;
 	Widelands::Game* get_game() const;
 	Widelands::Game& game() const;
 
@@ -75,6 +74,10 @@ public:
 	void postload() override;
 	void start() override;
 	void toggle_mainmenu();
+
+	bool is_warping_building_window() const {
+		return is_warping_building_window_;
+	}
 
 protected:
 	// For referencing the items in showhidemenu_
@@ -180,6 +183,8 @@ private:
 	UI::Dropdown<MainMenuEntry> mainmenu_;
 	// Game speed menu on the toolbar
 	UI::Dropdown<GameSpeedEntry> gamespeedmenu_;
+
+	bool is_warping_building_window_;
 
 	// Building coordinates, window position, whether the window was minimized
 	std::map<uint32_t, std::unique_ptr<const WantedBuildingWindow>> wanted_building_windows_;
