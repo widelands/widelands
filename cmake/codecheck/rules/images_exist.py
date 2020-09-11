@@ -59,7 +59,7 @@ def evaluate_matches(lines, fn):
         found = False
         no_matches = 0
         found_on_line = 1
-        FIND_VARIABLES = re.compile(r"\b" + variable + r"""\s*=\s*"(.+?)";""")
+        FIND_VARIABLES = re.compile(r'\b' + variable + r"""\s*=\s*"(.+?)";""")
         for lineno, line in enumerate(lines, 1):
             matches = FIND_VARIABLES.findall(line)
             if len(matches) > 0:
