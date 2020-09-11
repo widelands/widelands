@@ -449,6 +449,7 @@ void BuildingWindow::act_bulldoze() {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building->get_playercaps() & Widelands::Building::PCap_Bulldoze) {
 			igbase()->game().send_player_bulldoze(*building);
+			return die();
 		}
 	} else {
 		show_bulldoze_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
@@ -466,6 +467,7 @@ void BuildingWindow::act_dismantle() {
 		if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
 			igbase()->game().send_player_dismantle(*building, false);
 			hide_workarea(true);
+			return die();
 		}
 	} else {
 		show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
@@ -537,6 +539,7 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building->get_playercaps() & Widelands::Building::PCap_Enhancable) {
 			igbase()->game().send_player_enhance_building(*building, id, false);
+			return die();
 		}
 	} else {
 		show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building, id);

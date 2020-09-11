@@ -904,6 +904,7 @@ void Panel::set_thinks(bool const yes) {
  * Do NOT use this to delete a hierarchy of panels that have been modal.
  */
 void Panel::die() {
+	flags_ &= ~pf_visible;
 	flags_ |= pf_die;
 
 	for (Panel* p = parent_; p; p = p->parent_) {
