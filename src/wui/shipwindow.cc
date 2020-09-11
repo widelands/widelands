@@ -19,6 +19,7 @@
 
 #include "wui/shipwindow.h"
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
@@ -181,7 +182,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Wi
 	// Init button visibility
 	navigation_box_height_ = navigation_box_.get_h();
 	navigation_box_.set_visible(false);
-	navigation_box_.set_desired_size(navigation_box_.get_w(), 0);
+	//	navigation_box_.set_desired_size(navigation_box_.get_w(), 0);
 	btn_cancel_expedition_->set_enabled(false);
 	think();
 }
@@ -191,10 +192,14 @@ void ShipWindow::set_button_visibility() {
 	if (ship == nullptr) {
 		return;
 	}
+
+	log_dbg("nav box visible: %d, size (%dx%d)", navigation_box_.is_visible(),
+	        navigation_box_.get_w(), navigation_box_.get_h());
 	if (navigation_box_.is_visible() != ship->state_is_expedition()) {
 		navigation_box_.set_visible(ship->state_is_expedition());
-		navigation_box_.set_desired_size(
-		   navigation_box_.get_w(), ship->state_is_expedition() ? navigation_box_height_ : 0);
+		//			navigation_box_.set_desired_size(
+		//			   navigation_box_.get_w(), ship->state_is_expedition() ? navigation_box_height_ :
+		// 0);
 		layout();
 	}
 	if (btn_cancel_expedition_->is_visible() != btn_cancel_expedition_->enabled()) {
