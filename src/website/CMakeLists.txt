@@ -8,6 +8,7 @@ wl_library(website_common
   DEPENDS
     base_exceptions
     base_i18n
+    base_log
     graphic
     io_filesystem
 )
