@@ -339,20 +339,27 @@ function warehouse_tests:test_set_soldiers()
    print("NOCOM DONE test_set_soldiers")
 end
 function warehouse_tests:test_reduce_soldiers_number()
-   print("NOCOM test_reduce_soldiers_number")
+   print("NOCOM test_reduce_soldiers_number AAA")
    self.w:set_soldiers{
       [{0,0,0,0}] = 10,
       [{1,1,0,1}] = 20,
    }
+   print("NOCOM test_reduce_soldiers_number BBB")
    assert_equal(10, self.w:get_soldiers({0,0,0,0}))
+   print("NOCOM test_reduce_soldiers_number CCC")
    assert_equal(20, self.w:get_soldiers({1,1,0,1}))
+   print("NOCOM test_reduce_soldiers_number DDD")
    assert_equal(30, _cnt(self.w:get_soldiers("all")))
+   print("NOCOM test_reduce_soldiers_number EEE")
    self.w:set_soldiers{
       [{0,0,0,0}] = 1,
       [{1,1,0,1}] = 2,
    }
+   print("NOCOM test_reduce_soldiers_number FFF")
    assert_equal(1, self.w:get_soldiers({0,0,0,0}))
+   print("NOCOM test_reduce_soldiers_number GGG")
    assert_equal(2, self.w:get_soldiers({1,1,0,1}))
+   print("NOCOM test_reduce_soldiers_number HHH")
    assert_equal(3, _cnt(self.w:get_soldiers("all")))
    print("NOCOM DONE test_reduce_soldiers_number")
 end
