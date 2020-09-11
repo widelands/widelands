@@ -74,6 +74,7 @@ public:
 	     fontset_(fontsets_.get_fontset(locale)),
 	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),
 	     image_cache_(image_cache) {
+		assert(image_cache);
 	}
 	~FontHandler() override {
 	}
