@@ -64,7 +64,8 @@ void ProgressWindow::draw(RenderTarget& rt) {
 		const Image& bg = *g_image_cache->get(background_);
 		const float w = bg.width();
 		const float h = bg.height();
-		rt.blitrect_scale(fit_image(w, h, get_w(), get_h()), &bg, Recti(0, 0, w, h), 1.f, BlendMode::UseAlpha);
+		rt.blitrect_scale(
+		   fit_image(w, h, get_w(), get_h()), &bg, Recti(0, 0, w, h), 1.f, BlendMode::UseAlpha);
 	}
 
 	// No float division to avoid Texture subsampling.

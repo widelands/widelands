@@ -260,8 +260,7 @@ void FullscreenMenuMain::set_labels() {
 	about_.set_tooltip(
 	   as_tooltip_text_with_hotkey(_("Readme, License, and Credits"), pgettext("hotkey", "F1")));
 	exit_.set_title(_("Exit Widelands"));
-	exit_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Quit the game"), pgettext("hotkey", "Esc")));
+	exit_.set_tooltip(as_tooltip_text_with_hotkey(_("Quit the game"), pgettext("hotkey", "Esc")));
 
 	version_.set_text(
 	   /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
