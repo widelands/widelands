@@ -69,6 +69,8 @@ void set_icon(SDL_Window* sdl_window) {
 }  // namespace
 
 Graphic::Graphic() {
+	g_image_cache = new ImageCache();
+	g_animation_manager = new AnimationManager();
 }
 
 /**
@@ -136,11 +138,9 @@ void Graphic::initialize(const TraceGl& trace_gl,
 
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
-	g_image_cache = new ImageCache();
 	g_image_cache->fill_with_texture_atlases(
 	   std::move(texture_atlases), std::move(textures_in_atlas));
 	g_style_manager = new StyleManager();
-	g_animation_manager = new AnimationManager();
 }
 
 Graphic::~Graphic() {
