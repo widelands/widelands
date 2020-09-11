@@ -51,7 +51,7 @@ struct ProgressWindow : public UI::FullscreenWindow {
 	void remove_visualization(IProgressVisualization* instance);
 
 	/// Set a picture to render in the background
-	void set_background(std::string file_name);
+	void set_background(const std::string& file_name);
 
 	/// Display a progress step description.
 	void step(const std::string& description);

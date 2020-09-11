@@ -182,6 +182,16 @@ void BaseDropdown::set_height(int height) {
 	layout();
 }
 
+/*
+ * This function is part of an ugly hack to handle dropdowns in modal
+ * windows correctly. The problem is that our ListSelect's parent is the
+ * topmost parent panel there is. If the currently modal panel is not
+ * the topmost one, this would mean that input events are not passed to
+ * our list. This is fixed by using this function in the `panel.cc` code
+ * to pass events to an open dropdown list (if any) even if it is not a
+ * child of the currently modal panel (provided that we ourselves are a
+ * descendant of the modal panel).
+ */
 UI::Panel* BaseDropdown::get_open_dropdown() {
 	return list_ && list_->is_visible() ? list_ : nullptr;
 }

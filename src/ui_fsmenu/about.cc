@@ -26,6 +26,8 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
+constexpr int16_t kPadding = 4;
+
 FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
    : UI::Window(&fsmm,
                 "about",
@@ -35,8 +37,9 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
                 calc_desired_window_height(fsmm),
                 _("About Widelands")),
      parent_(fsmm),
-     close_(this, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
-     tabs_(this, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
+     box_(this, 0, 0, UI::Box::Vertical),
+     close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
+     tabs_(&box_, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
 	try {
 		LuaInterface lua;
 		std::unique_ptr<LuaTable> t(lua.run_script("txts/ABOUT.lua"));
@@ -60,6 +63,13 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 	});
 
+	box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
+	box_.add_space(kPadding);
+	box_.add(&close_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	box_.add_space(kPadding);
+
+	set_center_panel(&box_);
+
 	layout();
 	tabs_.load_tab_contents();
 }
@@ -79,16 +89,9 @@ bool FullscreenMenuAbout::handle_key(bool down, SDL_Keysym code) {
 	return UI::Window::handle_key(down, code);
 }
 
-constexpr int16_t kPadding = 4;
 void FullscreenMenuAbout::layout() {
 	if (!is_minimal()) {
 		set_size(calc_desired_window_width(parent_), calc_desired_window_height(parent_));
-
-		close_.set_size(get_inner_w() / 2, get_h() / 16);
-		close_.set_pos(Vector2i(get_inner_w() / 4, get_inner_h() - kPadding - close_.get_h()));
-
-		tabs_.set_size(get_inner_w(), get_inner_h() - close_.get_h() - 2 * kPadding);
 	}
-
 	UI::Window::layout();
 }

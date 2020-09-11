@@ -65,4 +65,15 @@ Align mirror_alignment(Align alignment, bool is_rtl) {
 	return alignment;
 }
 
+Rectf fit_image(const float img_w, const float img_h, const float available_w, const float available_h) {
+	if (img_w < available_w || img_h < available_h) {
+		return Rectf((available_w - img_w) / 2.f, (available_h - img_h) / 2.f, img_w, img_h);
+	}
+	const float new_h = img_h * available_w / img_w;
+	if (new_h < available_h) {
+		const float new_w = img_w * available_h / img_h;
+		return Rectf((available_w - new_w) / 2.f, 0, new_w, available_h);
+	}
+	return Rectf(0, (available_h - new_h) / 2.f, available_w, new_h);
+}
 }  // namespace UI

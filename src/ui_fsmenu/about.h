@@ -42,6 +42,7 @@ private:
 
 	FullscreenMenuMain& parent_;
 
+	UI::Box box_;
 	UI::Button close_;
 	UI::FileViewPanel tabs_;
 

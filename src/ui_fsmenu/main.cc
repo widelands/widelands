@@ -252,8 +252,8 @@ void FullscreenMenuMain::set_labels() {
 	editor_.set_title(_("Editor"));
 	editor_.set_tooltip(as_tooltip_text_with_hotkey(_("Launch the map editor"), "E"));
 	addons_.set_title(_("Add-Ons"));
-	addons_.set_tooltip(
-	   as_tooltip_text_with_hotkey(_("This feature is still under development"), "A"));
+	addons_.set_tooltip(  // TODO(Nordfriese): Replace with purpose text or add _() markup
+	   as_tooltip_text_with_hotkey("This feature is still under development", "A"));
 	options_.set_title(_("Options"));
 	options_.set_tooltip(as_tooltip_text_with_hotkey(_("Technical and game-related settings"), "O"));
 	about_.set_title(_("About Widelands"));
@@ -261,7 +261,7 @@ void FullscreenMenuMain::set_labels() {
 	   as_tooltip_text_with_hotkey(_("Readme, License, and Credits"), pgettext("hotkey", "F1")));
 	exit_.set_title(_("Exit Widelands"));
 	exit_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("You do not want to press this button"), pgettext("hotkey", "Esc")));
+	   _("Quit the game"), pgettext("hotkey", "Esc")));
 
 	version_.set_text(
 	   /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
@@ -364,19 +364,8 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-// Position the image at the screen center, as large as possible without upscaling
-Rectf FullscreenMenuMain::image_pos(const Image& i) {
-	const float w = i.width();
-	const float h = i.height();
-	if (w < get_w() || h < get_h()) {
-		return Rectf((get_w() - w) / 2.f, (get_h() - h) / 2.f, w, h);
-	}
-	const float new_h = h * get_w() / w;
-	if (new_h < get_h()) {
-		const float new_w = w * get_h() / h;
-		return Rectf((get_w() - new_w) / 2.f, 0, new_w, get_h());
-	}
-	return Rectf(0, (get_h() - new_h) / 2.f, get_w(), new_h);
+inline Rectf FullscreenMenuMain::image_pos(const Image& i) {
+	return UI::fit_image(i.width(), i.height(), get_w(), get_h());
 }
 
 static inline void
