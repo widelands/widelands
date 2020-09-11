@@ -281,7 +281,8 @@ void FieldDebugWindow::think() {
 		}
 	}
 
-	if (str.compare(text_) != 0) {
+	if (str != text_) {
+		// Field properties changed -> update text_
 		ui_field_.set_text(str.c_str());
 		text_ = std::move(str);
 	}
