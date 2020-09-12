@@ -223,8 +223,6 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	maploader->preload_map(true);
 	change_loader_ui_background(map().get_background());
 
-	descriptions();
-
 	// If the map is a scenario with custom tribe entites, load them too.
 	mutable_descriptions()->register_scenario_tribes(map().filesystem());
 
@@ -276,8 +274,6 @@ void Game::init_newgame(const GameSettings& settings) {
 	assert(maploader != nullptr);
 	maploader->preload_map(settings.scenario);
 	change_loader_ui_background(map().get_background());
-
-	descriptions();
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;

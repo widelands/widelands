@@ -63,6 +63,9 @@ MapDetails::MapDetails(
      suggested_teams_box_(new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0)),
      egbase_(nullptr) {
 
+	// Trigger world registering. Better have the delay when the screen loads than having it when the first map loads.
+	egbase_.descriptions();
+
 	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
 	descr_.set_handle_mouse(false);
 	descr_box_.set_force_scrolling(true);

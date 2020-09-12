@@ -60,6 +60,7 @@ Descriptions::Descriptions(LuaInterface* lua)
      legacy_lookup_table_(new TribesLegacyLookupTable()),
      largest_workarea_(0),
      scenario_tribes_(nullptr),
+     tribes_have_been_registered_(false),
      lua_(lua),
      description_manager_(new DescriptionManager(lua)) {
 
@@ -77,8 +78,7 @@ Descriptions::Descriptions(LuaInterface* lua)
 	// Walk world directory and register objects
 	description_manager_->register_directory("world", g_fs, false);
 
-	// Walk tribes directory and register objects
-	description_manager_->register_directory("tribes", g_fs, false);
+	// We register tribes on demand in load_tribe for performance reasons
 }
 
 const DescriptionMaintainer<CritterDescr>& Descriptions::critters() const {
@@ -416,6 +416,11 @@ void Descriptions::add_tribe(const LuaTable& table) {
 
 DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 	try {
+		// Register tribes on demand for better performance during mapselect, for the editor and for the website tools
+		if (!tribes_have_been_registered_) {
+			description_manager_->register_directory("tribes", g_fs, false);
+			tribes_have_been_registered_ = true;
+		}
 		description_manager_->load_description(tribename);
 	} catch (WException& e) {
 		throw GameDataError("Error while loading tribe '%s': %s", tribename.c_str(), e.what());

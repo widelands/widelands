@@ -387,11 +387,10 @@ int main(int argc, char** argv) {
 		initialize();
 		std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
 		Widelands::EditorGameBase egbase(nullptr);
-		// Load tribe info
-		egbase.descriptions();
-		// Load a tribe to create the global 'tribes' Lua variable
-		Notifications::publish(Widelands::NoteMapObjectDescription(
-		   "barbarians", Widelands::NoteMapObjectDescription::LoadType::kObject));
+
+		// Load a tribe to trigger registering the tribes
+		egbase.mutable_descriptions()->load_tribe("barbarians");
+
 		// Load the object for the animation
 		Notifications::publish(Widelands::NoteMapObjectDescription(
 		   map_object_name, Widelands::NoteMapObjectDescription::LoadType::kObject));

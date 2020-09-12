@@ -951,7 +951,6 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	{
 		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 		eia.load_world_units();
-		egbase.descriptions();
 
 		{
 			if (filename.empty()) {

@@ -163,6 +163,7 @@ private:
 
 	/// Custom scenario tribes
 	std::unique_ptr<LuaTable> scenario_tribes_;
+	bool tribes_have_been_registered_;
 
 	LuaInterface* lua_;                        // Not owned
 	std::unique_ptr<DescriptionManager> description_manager_;
