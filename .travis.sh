@@ -1,4 +1,17 @@
-set -ex
+set -x
+trap 'err_handler' ERR
+
+# Called if a command returns a non-zero value
+err_handler() {
+   result=$?
+   if [ $result -eq 2 ] ; then
+      # Catch instabilities with SDL in CI environment
+      echo "SDL initialization failed. TEST SKIPPED.";
+   else
+      # Exit with this error
+      exit $result
+   fi
+}
 
 # Create build folder.
 mkdir build

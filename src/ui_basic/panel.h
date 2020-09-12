@@ -329,6 +329,8 @@ protected:
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
+	virtual Panel* get_open_dropdown();
+
 	virtual bool is_focus_toplevel() const;
 
 	virtual std::vector<Recti> focus_overlay_rects();

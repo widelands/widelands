@@ -98,6 +98,10 @@ void FullscreenWindow::draw(RenderTarget& dst) {
 		blit_image(dst, overlay->image, overlay->align);
 	}
 
+	draw_edge_decoration(dst);
+}
+
+void FullscreenWindow::draw_edge_decoration(RenderTarget& dst) {
 	// Frame edges
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeLeftTile),
 	           Alignment(UI::Align::kLeft, UI::Align::kTop), Tiling::kVertical);

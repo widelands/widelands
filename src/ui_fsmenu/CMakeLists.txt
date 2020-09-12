@@ -16,7 +16,7 @@ wl_library(ui_fsmenu_options
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    ui_fsmenu_base
+    ui_fsmenu_main
     sound
     widelands_ball_of_mud
     widelands_options
@@ -52,41 +52,30 @@ wl_library(ui_fsmenu_main
     main.h
   DEPENDS
     base_i18n
+    base_random
     build_info
+    graphic
+    graphic_text_layout
     logic
     logic_filesystem_constants
-    ui_basic
-    ui_fsmenu_main_menu
-    wui_common_gamedetails
-)
-
-wl_library(ui_fsmenu_main_menu
-  SRCS
-    main_menu.cc
-    main_menu.h
-  DEPENDS
+    network
     ui_basic
     ui_fsmenu_base
+    widelands_options
+    wui
+    wui_common_gamedetails
+  USES_SDL2
 )
 
 wl_library(ui_fsmenu_loading_common
   SRCS
     load_map_or_game.cc
     load_map_or_game.h
-    multiplayer.cc
-    multiplayer.h
-    singleplayer.cc
-    singleplayer.h
   DEPENDS
     base_i18n
-    base_random
     io_filesystem
-    network
     ui_basic
     ui_fsmenu_base
-    ui_fsmenu_main_menu
-    widelands_options
-    wui
 )
 
 wl_library(ui_fsmenu_gameloading
@@ -198,13 +187,11 @@ wl_library(ui_fsmenu_misc
   SRCS
     about.cc
     about.h
-    intro.cc
-    intro.h
   DEPENDS
     base_i18n
     base_log
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    ui_fsmenu_base
+    ui_fsmenu_main
 )

@@ -182,6 +182,20 @@ void BaseDropdown::set_height(int height) {
 	layout();
 }
 
+/*
+ * This function is part of an ugly hack to handle dropdowns in modal
+ * windows correctly. The problem is that our ListSelect's parent is the
+ * topmost parent panel there is. If the currently modal panel is not
+ * the topmost one, this would mean that input events are not passed to
+ * our list. This is fixed by using this function in the `panel.cc` code
+ * to pass events to an open dropdown list (if any) even if it is not a
+ * child of the currently modal panel (provided that we ourselves are a
+ * descendant of the modal panel).
+ */
+UI::Panel* BaseDropdown::get_open_dropdown() {
+	return list_ && list_->is_visible() ? list_ : nullptr;
+}
+
 void BaseDropdown::layout() {
 	int list_width = list_->calculate_desired_width();
 
@@ -361,7 +375,7 @@ uint32_t BaseDropdown::size() const {
 }
 
 void BaseDropdown::update() {
-	if (type_ == DropdownType::kPictorialMenu) {
+	if (type_ == DropdownType::kPictorialMenu || type_ == DropdownType::kTextualMenu) {
 		// Menus never change their main image and text
 		return;
 	}
@@ -412,7 +426,8 @@ void BaseDropdown::set_list_visibility(bool open) {
 		focus();
 		set_mouse_pos(Vector2i(display_button_.get_x() + (display_button_.get_w() * 3 / 5),
 		                       display_button_.get_y() + (display_button_.get_h() * 2 / 5)));
-		if (type_ == DropdownType::kPictorialMenu && !has_selection() && !list_->empty()) {
+		if ((type_ == DropdownType::kPictorialMenu || type_ == DropdownType::kTextualMenu) &&
+		    !has_selection() && !list_->empty()) {
 			select(0);
 		}
 	}
@@ -488,7 +503,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 	if (list_->is_visible()) {
 		return list_->handle_key(down, code);
 	}
-	return false;
+	return NamedPanel::handle_key(down, code);
 }
 
 }  // namespace UI
