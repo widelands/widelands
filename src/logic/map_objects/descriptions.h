@@ -164,7 +164,7 @@ private:
 	/// Custom scenario tribes
 	std::unique_ptr<LuaTable> scenario_tribes_;
 
-	LuaInterface* lua_;                        // Not owned
+	LuaInterface* lua_;  // Not owned
 	std::unique_ptr<DescriptionManager> description_manager_;
 	DISALLOW_COPY_AND_ASSIGN(Descriptions);
 };
