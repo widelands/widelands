@@ -26,18 +26,20 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
-FullscreenMenuAbout::FullscreenMenuAbout()
-   : FullscreenMenuBase(),
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("About Widelands"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
-     close_(this, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
-     tabs_(this, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
+constexpr int16_t kPadding = 4;
+
+FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
+   : UI::Window(&fsmm,
+                "about",
+                (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
+                (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,
+                calc_desired_window_width(fsmm),
+                calc_desired_window_height(fsmm),
+                _("About Widelands")),
+     parent_(fsmm),
+     box_(this, 0, 0, UI::Box::Vertical),
+     close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
+     tabs_(&box_, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
 	try {
 		LuaInterface lua;
 		std::unique_ptr<LuaTable> t(lua.run_script("txts/ABOUT.lua"));
@@ -54,23 +56,42 @@ FullscreenMenuAbout::FullscreenMenuAbout()
 		log_err("%s", err.what());
 	}
 
-	close_.sigclicked.connect([this]() { clicked_back(); });
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged&) { layout(); });
+
+	close_.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	});
+
+	box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
+	box_.add_space(kPadding);
+	box_.add(&close_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	box_.add_space(kPadding);
+
+	set_center_panel(&box_);
+
 	layout();
 	tabs_.load_tab_contents();
 }
 
-void FullscreenMenuAbout::layout() {
-	// Values for alignment and size
-	butw_ = get_w() / 5;
-	buth_ = get_h() * 9 / 200;
-	hmargin_ = get_w() * 19 / 200;
-	tab_panel_width_ = get_inner_w() - 2 * hmargin_;
-	tab_panel_y_ = get_h() * 14 / 100;
+bool FullscreenMenuAbout::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+		case SDLK_ESCAPE:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+			return true;
+		default:
+			break;
+		}
+	}
+	return UI::Window::handle_key(down, code);
+}
 
-	title_.set_size(get_w(), title_.get_h());
-	title_.set_pos(Vector2i(0, buth_));
-	close_.set_size(butw_, buth_);
-	close_.set_pos(Vector2i(get_w() * 2 / 4 - butw_ / 2, get_inner_h() - hmargin_));
-	tabs_.set_pos(Vector2i(hmargin_, tab_panel_y_));
-	tabs_.set_size(tab_panel_width_, get_inner_h() - tab_panel_y_ - buth_ - hmargin_);
+void FullscreenMenuAbout::layout() {
+	if (!is_minimal()) {
+		set_size(calc_desired_window_width(parent_), calc_desired_window_height(parent_));
+	}
+	UI::Window::layout();
 }

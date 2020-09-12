@@ -60,7 +60,14 @@ ProgressWindow::~ProgressWindow() {
 }
 
 void ProgressWindow::draw(RenderTarget& rt) {
-	FullscreenWindow::draw(rt);
+	{  // Center and downscale background image
+		const Image& bg = *g_image_cache->get(background_);
+		const float w = bg.width();
+		const float h = bg.height();
+		rt.blitrect_scale(
+		   fit_image(w, h, get_w(), get_h()), &bg, Recti(0, 0, w, h), 1.f, BlendMode::UseAlpha);
+	}
+
 	// No float division to avoid Texture subsampling.
 	label_center_.x = get_w() / 2;
 	label_center_.y = get_h() * PROGRESS_LABEL_POSITION_Y / 100;
@@ -86,13 +93,14 @@ void ProgressWindow::draw(RenderTarget& rt) {
 
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string& file_name) {
-	clear_overlays();
-	if (!file_name.empty() && g_fs->file_exists(file_name)) {
-		add_overlay_image(
-		   file_name, FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
+	if (file_name.empty() || !g_fs->file_exists(file_name)) {
+		const std::set<std::string> images =
+		   g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/gameloading");
+		auto it = images.begin();
+		std::advance(it, std::rand() % images.size());  // NOLINT
+		background_ = *it;
 	} else {
-		add_overlay_image("images/loadscreens/progress.png",
-		                  FullscreenWindow::Alignment(UI::Align::kLeft, UI::Align::kBottom));
+		background_ = file_name;
 	}
 	draw(*g_gr->get_render_target());
 }
