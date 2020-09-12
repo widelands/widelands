@@ -949,7 +949,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
-		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
+		egbase.create_loader_ui({"editor"}, true, kEditorSplashImage);
 		eia.load_world_units();
 
 		{
