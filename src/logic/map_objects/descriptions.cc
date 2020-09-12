@@ -416,7 +416,8 @@ void Descriptions::add_tribe(const LuaTable& table) {
 
 DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 	try {
-		// Register tribes on demand for better performance during mapselect, for the editor and for the website tools
+		// Register tribes on demand for better performance during mapselect, for the editor and for
+		// the website tools
 		if (!tribes_have_been_registered_) {
 			description_manager_->register_directory("tribes", g_fs, false);
 			tribes_have_been_registered_ = true;
