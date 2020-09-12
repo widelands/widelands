@@ -1622,14 +1622,6 @@ tribes:new_tribe {
    ship = "atlanteans_ship",
    ferry = "atlanteans_ferry",
    port = "atlanteans_port",
-
-   toolbar = {
-      left_corner = image_dirname .. "toolbar_left_corner.png",
-      left = image_dirname .. "toolbar_left.png",
-      center = image_dirname .. "toolbar_center.png",
-      right = image_dirname .. "toolbar_right.png",
-      right_corner = image_dirname .. "toolbar_right_corner.png"
-   }
 }
 
 pop_textdomain()
