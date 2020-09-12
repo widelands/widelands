@@ -44,6 +44,9 @@
 
 namespace {
 
+constexpr int kDropdownFullscreen = -2;
+constexpr int kDropdownMaximized = -1;
+
 // Locale identifiers can look like this: ca_ES@valencia.UTF-8
 // The contents of 'selected_locale' will be changed to match the 'current_locale'
 void find_selected_locale(std::string* selected_locale, const std::string& current_locale) {
@@ -68,37 +71,32 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 
 }  // namespace
 
-FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
-   : FullscreenMenuBase(),
-
-     // Values for alignment and size
-     padding_(10),
-
-     // Title
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("Options"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
+constexpr int16_t kPadding = 4;
+FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
+                                             OptionsCtrl::OptionsStruct opt)
+   : UI::Window(&fsmm,
+                "options",
+                (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
+                (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,
+                calc_desired_window_width(fsmm),
+                calc_desired_window_height(fsmm),
+                _("Options")),
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
-     cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
-     apply_(&button_box_, "apply", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Apply")),
-     ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
+     cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
+     apply_(&button_box_, "apply", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Apply")),
+     ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 
      // Tabs
-     tabs_(this, UI::TabPanelStyle::kFsMenu),
+     tabs_(this, UI::TabPanelStyle::kWuiLight),
 
-     box_interface_(&tabs_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
-     box_interface_left_(&box_interface_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-     box_windows_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-     box_sound_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-     box_saving_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-     box_game_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     box_interface_(&tabs_, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+     box_interface_left_(&box_interface_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_windows_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_sound_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_saving_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_game_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
 
      // Interface options
      language_dropdown_(&box_interface_left_,
@@ -110,8 +108,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         24,
                         _("Language"),
                         UI::DropdownType::kTextual,
-                        UI::PanelStyle::kFsMenu,
-                        UI::ButtonStyle::kFsMenuMenu),
+                        UI::PanelStyle::kWui,
+                        UI::ButtonStyle::kWuiMenu),
      resolution_dropdown_(&box_interface_left_,
                           "dropdown_resolution",
                           0,
@@ -121,10 +119,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           24,
                           _("Window Size"),
                           UI::DropdownType::kTextual,
-                          UI::PanelStyle::kFsMenu,
-                          UI::ButtonStyle::kFsMenuMenu),
+                          UI::PanelStyle::kWui,
+                          UI::ButtonStyle::kWuiMenu),
 
-     fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
      sdl_cursor_(&box_interface_left_, Vector2i::zero(), _("Use system mouse cursor"), "", 0),
      sb_maxfps_(&box_interface_left_,
@@ -135,9 +132,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                 opt.maxfps,
                 0,
                 99,
-                UI::PanelStyle::kFsMenu,
+                UI::PanelStyle::kWui,
                 _("Maximum FPS:")),
-     translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
+     translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kWui),
 
      // Windows options
      snap_win_overlap_only_(
@@ -154,7 +151,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                    opt.panel_snap_distance,
                    0,
                    99,
-                   UI::PanelStyle::kFsMenu,
+                   UI::PanelStyle::kWui,
                    _("Distance for windows to snap to other panels:"),
                    UI::SpinBox::Units::kPixels),
 
@@ -166,12 +163,12 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     opt.border_snap_distance,
                     0,
                     99,
-                    UI::PanelStyle::kFsMenu,
+                    UI::PanelStyle::kWui,
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
 
      // Sound options
-     sound_options_(box_sound_, UI::SliderStyle::kFsMenu),
+     sound_options_(box_sound_, UI::SliderStyle::kWuiLight),
 
      // Saving options
      sb_autosave_(&box_saving_,
@@ -182,7 +179,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                   opt.autosave / 60,
                   0,
                   100,
-                  UI::PanelStyle::kFsMenu,
+                  UI::PanelStyle::kWui,
                   _("Save game automatically every:"),
                   UI::SpinBox::Units::kMinutes,
                   UI::SpinBox::Type::kBig),
@@ -195,7 +192,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           opt.rolling_autosave,
                           1,
                           20,
-                          UI::PanelStyle::kFsMenu,
+                          UI::PanelStyle::kWui,
                           _("Maximum number of autosave files:"),
                           UI::SpinBox::Units::kNone,
                           UI::SpinBox::Type::kBig),
@@ -228,11 +225,13 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      os_(opt) {
 
 	// Buttons
+	button_box_.add_inf_space();
 	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_);
 	button_box_.add_inf_space();
 	button_box_.add(&apply_);
 	button_box_.add_inf_space();
 	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_);
+	button_box_.add_inf_space();
 
 	// Tabs
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
@@ -251,7 +250,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_interface_.add(&translation_info_, UI::Box::Resizing::kExpandBoth);
 	box_interface_left_.add(&language_dropdown_);
 	box_interface_left_.add(&resolution_dropdown_);
-	box_interface_left_.add(&fullscreen_);
 	box_interface_left_.add(&inputgrab_);
 	box_interface_left_.add(&sdl_cursor_);
 	box_interface_left_.add(&sb_maxfps_);
@@ -284,7 +282,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
-	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	ok_.sigclicked.connect(
+	   [this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk); });
 
 	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));
@@ -308,25 +307,38 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 		}
 	}
 
-	bool did_select_a_res = false;
+	int cur_win_res_x = g_gr->get_window_mode_xres();
+	int cur_win_res_y = g_gr->get_window_mode_yres();
+
+	/** TRANSLATORS: Entry in the window size dropdown*/
+	resolution_dropdown_.add(_("Fullscreen"), kDropdownFullscreen, nullptr, opt.fullscreen);
+#ifdef RESIZABLE_WINDOW
+	/** TRANSLATORS: Entry in the window size dropdown*/
+	resolution_dropdown_.add(_("Maximized"), kDropdownMaximized, nullptr,
+	                         !resolution_dropdown_.has_selection() && opt.maximized);
+#endif
+
 	for (uint32_t i = 0; i < resolutions_.size(); ++i) {
-		const bool selected = resolutions_[i].xres == opt.xres && resolutions_[i].yres == opt.yres;
-		did_select_a_res |= selected;
+		const bool selected = !resolution_dropdown_.has_selection() &&
+		                      resolutions_[i].xres == cur_win_res_x &&
+		                      resolutions_[i].yres == cur_win_res_y;
 		resolution_dropdown_.add(
 		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
 		   (boost::format(_("%1% x %2%")) % resolutions_[i].xres % resolutions_[i].yres).str(), i,
 		   nullptr, selected);
 	}
-	if (!did_select_a_res) {
-		uint32_t entry = resolutions_.size();
+
+	if (!resolution_dropdown_.has_selection()) {
+		int entry = resolutions_.size();
 		resolutions_.resize(entry + 1);
-		resolutions_[entry].xres = opt.xres;
-		resolutions_[entry].yres = opt.yres;
+		resolutions_[entry].xres = cur_win_res_x;
+		resolutions_[entry].yres = cur_win_res_y;
 		resolution_dropdown_.add(
-		   (boost::format(_("%1% x %2%")) % opt.xres % opt.yres).str(), entry, nullptr, true);
+		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
+		   (boost::format(_("%1% x %2%")) % cur_win_res_x % cur_win_res_y).str(), entry, nullptr,
+		   true);
 	}
 
-	fullscreen_.set_state(opt.fullscreen);
 	inputgrab_.set_state(opt.inputgrab);
 	sdl_cursor_.set_state(opt.sdl_cursor);
 
@@ -354,74 +366,68 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 }
 
 void FullscreenMenuOptions::layout() {
+	if (!is_minimal()) {
+		const int16_t butw = get_w() / 5;
+		const int16_t buth = get_h() / 16;
 
-	// Values for alignment and size
-	butw_ = get_w() / 5;
-	buth_ = get_h() * 9 / 200;
-	hmargin_ = get_w() * 19 / 200;
-	int tab_panel_width = get_inner_w() - 2 * hmargin_;
-	tab_panel_y_ = get_h() * 14 / 100;
+		// Buttons
+		cancel_.set_desired_size(butw, buth);
+		apply_.set_desired_size(butw, buth);
+		ok_.set_desired_size(butw, buth);
+		button_box_.set_size(get_inner_w(), buth);
+		button_box_.set_pos(Vector2i(0, get_inner_h() - kPadding - button_box_.get_h()));
 
-	// Title
-	title_.set_size(get_w(), title_.get_h());
-	title_.set_pos(Vector2i(0, buth_));
+		// Tabs
+		tabs_.set_size(get_inner_w(), get_inner_h() - buth - 2 * kPadding);
 
-	// Buttons
-	cancel_.set_desired_size(butw_, buth_);
-	apply_.set_desired_size(butw_, buth_);
-	ok_.set_desired_size(butw_, buth_);
-	button_box_.set_pos(Vector2i(hmargin_ + butw_ / 3, get_inner_h() - hmargin_));
-	button_box_.set_size(tab_panel_width - 2 * butw_ / 3, buth_);
+		const int tab_panel_width = get_inner_w() - 2 * kPadding;
+		const int column_width = tab_panel_width / 2;
 
-	// Tabs
-	tabs_.set_pos(Vector2i(hmargin_, tab_panel_y_));
-	tabs_.set_size(tab_panel_width, get_inner_h() - tab_panel_y_ - buth_ - hmargin_);
+		// Interface
+		box_interface_left_.set_desired_size(column_width + kPadding, tabs_.get_inner_h());
+		box_interface_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
+		language_dropdown_.set_desired_size(column_width, language_dropdown_.get_h());
+		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
+		                              3 * kPadding);
+		resolution_dropdown_.set_desired_size(column_width, resolution_dropdown_.get_h());
+		resolution_dropdown_.set_height(tabs_.get_h() - resolution_dropdown_.get_y() - buth -
+		                                3 * kPadding);
 
-	tab_panel_width -= padding_;
-	const int column_width = tab_panel_width / 2;
+		inputgrab_.set_desired_size(column_width, inputgrab_.get_h());
+		sdl_cursor_.set_desired_size(column_width, sdl_cursor_.get_h());
+		sb_maxfps_.set_unit_width(column_width / 2);
+		sb_maxfps_.set_desired_size(column_width, sb_maxfps_.get_h());
 
-	// Interface
-	box_interface_left_.set_desired_size(column_width + padding_, tabs_.get_inner_h());
-	box_interface_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
-	language_dropdown_.set_desired_size(column_width, language_dropdown_.get_h());
-	language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth_ - 3 * padding_);
-	resolution_dropdown_.set_desired_size(column_width, resolution_dropdown_.get_h());
-	resolution_dropdown_.set_height(tabs_.get_h() - resolution_dropdown_.get_y() - buth_ -
-	                                3 * padding_);
+		// Windows options
+		snap_win_overlap_only_.set_desired_size(tab_panel_width, snap_win_overlap_only_.get_h());
+		dock_windows_to_edges_.set_desired_size(tab_panel_width, dock_windows_to_edges_.get_h());
+		animate_map_panning_.set_desired_size(tab_panel_width, animate_map_panning_.get_h());
+		sb_dis_panel_.set_unit_width(200);
+		sb_dis_panel_.set_desired_size(tab_panel_width, sb_dis_panel_.get_h());
+		sb_dis_border_.set_unit_width(200);
+		sb_dis_border_.set_desired_size(tab_panel_width, sb_dis_border_.get_h());
 
-	fullscreen_.set_desired_size(column_width, fullscreen_.get_h());
-	inputgrab_.set_desired_size(column_width, inputgrab_.get_h());
-	sdl_cursor_.set_desired_size(column_width, sdl_cursor_.get_h());
-	sb_maxfps_.set_unit_width(column_width / 2);
-	sb_maxfps_.set_desired_size(column_width, sb_maxfps_.get_h());
+		// Sound options
+		sound_options_.set_desired_size(tab_panel_width, tabs_.get_inner_h());
 
-	// Windows options
-	snap_win_overlap_only_.set_desired_size(tab_panel_width, snap_win_overlap_only_.get_h());
-	dock_windows_to_edges_.set_desired_size(tab_panel_width, dock_windows_to_edges_.get_h());
-	animate_map_panning_.set_desired_size(tab_panel_width, animate_map_panning_.get_h());
-	sb_dis_panel_.set_unit_width(200);
-	sb_dis_panel_.set_desired_size(tab_panel_width, sb_dis_panel_.get_h());
-	sb_dis_border_.set_unit_width(200);
-	sb_dis_border_.set_desired_size(tab_panel_width, sb_dis_border_.get_h());
+		// Saving options
+		sb_autosave_.set_unit_width(250);
+		sb_autosave_.set_desired_size(tab_panel_width, sb_autosave_.get_h());
+		sb_rolling_autosave_.set_unit_width(250);
+		sb_rolling_autosave_.set_desired_size(tab_panel_width, sb_rolling_autosave_.get_h());
+		zip_.set_desired_size(tab_panel_width, zip_.get_h());
+		write_syncstreams_.set_desired_size(tab_panel_width, write_syncstreams_.get_h());
 
-	// Sound options
-	sound_options_.set_desired_size(tab_panel_width, tabs_.get_inner_h());
-
-	// Saving options
-	sb_autosave_.set_unit_width(250);
-	sb_autosave_.set_desired_size(tab_panel_width, sb_autosave_.get_h());
-	sb_rolling_autosave_.set_unit_width(250);
-	sb_rolling_autosave_.set_desired_size(tab_panel_width, sb_rolling_autosave_.get_h());
-	zip_.set_desired_size(tab_panel_width, zip_.get_h());
-	write_syncstreams_.set_desired_size(tab_panel_width, write_syncstreams_.get_h());
-
-	// Game options
-	auto_roadbuild_mode_.set_desired_size(tab_panel_width, auto_roadbuild_mode_.get_h());
-	transparent_chat_.set_desired_size(tab_panel_width, transparent_chat_.get_h());
-	single_watchwin_.set_desired_size(tab_panel_width, single_watchwin_.get_h());
-	ctrl_zoom_.set_desired_size(tab_panel_width, ctrl_zoom_.get_h());
-	game_clock_.set_desired_size(tab_panel_width, game_clock_.get_h());
-	numpad_diagonalscrolling_.set_desired_size(tab_panel_width, numpad_diagonalscrolling_.get_h());
+		// Game options
+		auto_roadbuild_mode_.set_desired_size(tab_panel_width, auto_roadbuild_mode_.get_h());
+		transparent_chat_.set_desired_size(tab_panel_width, transparent_chat_.get_h());
+		single_watchwin_.set_desired_size(tab_panel_width, single_watchwin_.get_h());
+		ctrl_zoom_.set_desired_size(tab_panel_width, ctrl_zoom_.get_h());
+		game_clock_.set_desired_size(tab_panel_width, game_clock_.get_h());
+		numpad_diagonalscrolling_.set_desired_size(
+		   tab_panel_width, numpad_diagonalscrolling_.get_h());
+	}
+	UI::Window::layout();
 }
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
@@ -563,7 +569,24 @@ void FullscreenMenuOptions::clicked_apply() {
 
 void FullscreenMenuOptions::clicked_cancel() {
 	g_sh->load_config();
-	clicked_back();
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+}
+
+bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+			return true;
+		case SDLK_ESCAPE:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+			return true;
+		default:
+			break;
+		}
+	}
+	return UI::Window::handle_key(down, code);
 }
 
 OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
@@ -573,11 +596,14 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 		os_.language = language_dropdown_.get_selected();
 	}
 	if (resolution_dropdown_.has_selection()) {
-		const uint32_t res_index = resolution_dropdown_.get_selected();
-		os_.xres = resolutions_[res_index].xres;
-		os_.yres = resolutions_[res_index].yres;
+		const int res_index = resolution_dropdown_.get_selected();
+		os_.fullscreen = res_index == kDropdownFullscreen;
+		os_.maximized = res_index == kDropdownMaximized;
+		if (res_index != kDropdownFullscreen && res_index != kDropdownMaximized) {
+			os_.xres = resolutions_[res_index].xres;
+			os_.yres = resolutions_[res_index].yres;
+		}
 	}
-	os_.fullscreen = fullscreen_.get_state();
 	os_.inputgrab = inputgrab_.get_state();
 	os_.sdl_cursor = sdl_cursor_.get_state();
 	os_.maxfps = sb_maxfps_.get_value();
@@ -611,10 +637,11 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 /**
  * Handles communication between window class and options
  */
-OptionsCtrl::OptionsCtrl(Section& s)
+OptionsCtrl::OptionsCtrl(FullscreenMenuMain& mm, Section& s)
    : opt_section_(s),
+     parent_(mm),
      opt_dialog_(
-        std::unique_ptr<FullscreenMenuOptions>(new FullscreenMenuOptions(options_struct(0)))) {
+        std::unique_ptr<FullscreenMenuOptions>(new FullscreenMenuOptions(mm, options_struct(0)))) {
 	handle_menu();
 }
 
@@ -622,12 +649,17 @@ void OptionsCtrl::handle_menu() {
 	FullscreenMenuBase::MenuTarget i = opt_dialog_->run<FullscreenMenuBase::MenuTarget>();
 	if (i != FullscreenMenuBase::MenuTarget::kBack) {
 		save_options();
+		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
+		if (opt_dialog_->get_values().maximized) {
+			g_gr->set_maximized(true);
+		} else if (!opt_dialog_->get_values().fullscreen && !opt_dialog_->get_values().maximized) {
+			g_gr->change_resolution(
+			   opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
+		}
 	}
 	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
-		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
-		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
-		opt_dialog_.reset(new FullscreenMenuOptions(options_struct(active_tab)));
+		opt_dialog_.reset(new FullscreenMenuOptions(parent_, options_struct(active_tab)));
 		handle_menu();  // Restart general options menu
 	}
 }
@@ -637,6 +669,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	// Interface options
 	opt.xres = opt_section_.get_int("xres", kDefaultResolutionW);
 	opt.yres = opt_section_.get_int("yres", kDefaultResolutionH);
+	opt.maximized = opt_section_.get_bool("maximized", false);
 	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
 	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
 	opt.maxfps = opt_section_.get_int("maxfps", 25);
@@ -677,6 +710,7 @@ void OptionsCtrl::save_options() {
 	// Interface options
 	opt_section_.set_int("xres", opt.xres);
 	opt_section_.set_int("yres", opt.yres);
+	opt_section_.set_bool("maximized", opt.maximized);
 	opt_section_.set_bool("fullscreen", opt.fullscreen);
 	opt_section_.set_bool("inputgrab", opt.inputgrab);
 	opt_section_.set_int("maxfps", opt.maxfps);

@@ -45,7 +45,7 @@ struct NoteDropdown {
 
 /// The narrow textual dropdown omits the extra push button.
 /// Use kPictorialMenu if you want to trigger an action without changing the menu button.
-enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu };
+enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu, kTextualMenu };
 
 /// Implementation for a dropdown menu that lets the user select a value.
 class BaseDropdown : public NamedPanel {
@@ -176,6 +176,8 @@ protected:
 	/// Automatically collapses the list if the mouse gets too far away from the dropdown, or if it
 	/// loses focus.
 	void think() override;
+
+	UI::Panel* get_open_dropdown() override;
 
 private:
 	static void layout_if_alive(int);

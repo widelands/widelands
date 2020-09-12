@@ -210,6 +210,13 @@ void ObjectManager::remove(MapObject& obj) {
 	objects_.erase(obj.serial_);
 }
 
+bool ObjectManager::object_still_available(const MapObject* const obj) const {
+	if (!obj) {
+		return false;
+	}
+	return objects_.count(obj->serial()) > 0;
+}
+
 /*
  * Return the list of all serials currently in use
  */
