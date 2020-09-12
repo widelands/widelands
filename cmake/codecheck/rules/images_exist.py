@@ -13,7 +13,7 @@ import re
 FIND_LITERALS = re.compile(r"""g_image_cache->get\("(.*?)"\)""")
 # We skip pointers and function calls here
 FIND_VARIABLE_NAMES = re.compile(
-    r"""g_image_cache->get\(([0-9a-zA-Z_-]*?)\)""")
+    r"""g_image_cache->get\(([0-9a-zA-Z_]+?)\)""")
 
 # Find the data path
 base_path = os.getcwd()
