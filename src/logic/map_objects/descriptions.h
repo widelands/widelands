@@ -24,6 +24,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "io/filesystem/filesystem.h"
 #include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/description_manager.h"
 #include "logic/map_objects/map_object_type.h"
@@ -45,7 +46,7 @@ class WorkerDescr;
 
 class Descriptions {
 public:
-	Descriptions(DescriptionManager* description_manager, LuaInterface* lua);
+	Descriptions(LuaInterface* lua);
 	~Descriptions() = default;
 
 	const DescriptionMaintainer<CritterDescr>& critters() const;
@@ -164,7 +165,7 @@ private:
 	std::unique_ptr<LuaTable> scenario_tribes_;
 
 	LuaInterface* lua_;                        // Not owned
-	DescriptionManager* description_manager_;  // Not owned
+	std::unique_ptr<DescriptionManager> description_manager_;
 	DISALLOW_COPY_AND_ASSIGN(Descriptions);
 };
 

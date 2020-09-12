@@ -47,7 +47,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 
 namespace Widelands {
-Descriptions::Descriptions(DescriptionManager* description_manager, LuaInterface* lua)
+Descriptions::Descriptions(LuaInterface* lua)
    : critters_(new DescriptionMaintainer<CritterDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
@@ -61,7 +61,7 @@ Descriptions::Descriptions(DescriptionManager* description_manager, LuaInterface
      largest_workarea_(0),
      scenario_tribes_(nullptr),
      lua_(lua),
-     description_manager_(description_manager) {
+     description_manager_(new DescriptionManager(lua)) {
 
 	// Register tribe names. Tribes have no attributes.
 	std::vector<std::string> attributes;

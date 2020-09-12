@@ -73,7 +73,6 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      // TODO(SirVer): this is sooo ugly, I can't say
      lua_(lua_interface ? lua_interface : new LuaEditorInterface(this)),
      player_manager_(new PlayersManager(*this)),
-     description_manager_(new Widelands::DescriptionManager(lua_.get())),
      ibase_(nullptr),
      loader_ui_(nullptr),
      game_tips_(nullptr),
@@ -200,7 +199,7 @@ Descriptions* EditorGameBase::mutable_descriptions() {
 		// to descriptions through this method already.
 		ScopedTimer timer("Registering the descriptions took %ums");
 		Notifications::publish(UI::NoteLoadingMessage(_("Loading world and tribes…")));
-		descriptions_.reset(new Descriptions(description_manager_.get(), lua_.get()));
+		descriptions_.reset(new Descriptions(lua_.get()));
 	}
 	return descriptions_.get();
 }
