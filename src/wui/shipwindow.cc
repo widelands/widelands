@@ -56,8 +56,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Wi
      igbase_(igb),
      ship_(ship),
      vbox_(this, 0, 0, UI::Box::Vertical),
-     navigation_box_(&vbox_, 0, 0, UI::Box::Vertical),
-     navigation_box_height_(0) {
+     navigation_box_(&vbox_, 0, 0, UI::Box::Vertical) {
 	vbox_.set_inner_spacing(kPadding);
 	assert(ship->get_owner());
 
@@ -180,9 +179,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Wi
 	   });
 
 	// Init button visibility
-	navigation_box_height_ = navigation_box_.get_h();
 	navigation_box_.set_visible(false);
-	//	navigation_box_.set_desired_size(navigation_box_.get_w(), 0);
 	btn_cancel_expedition_->set_enabled(false);
 	think();
 }
@@ -193,13 +190,8 @@ void ShipWindow::set_button_visibility() {
 		return;
 	}
 
-	log_dbg("nav box visible: %d, size (%dx%d)", navigation_box_.is_visible(),
-	        navigation_box_.get_w(), navigation_box_.get_h());
 	if (navigation_box_.is_visible() != ship->state_is_expedition()) {
 		navigation_box_.set_visible(ship->state_is_expedition());
-		//			navigation_box_.set_desired_size(
-		//			   navigation_box_.get_w(), ship->state_is_expedition() ? navigation_box_height_ :
-		// 0);
 		layout();
 	}
 	if (btn_cancel_expedition_->is_visible() != btn_cancel_expedition_->enabled()) {
