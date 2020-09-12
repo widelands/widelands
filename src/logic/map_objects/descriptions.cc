@@ -353,10 +353,10 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 	case MapObjectType::FERRY:
 		workers_->add(new FerryDescr(type_descname, table, *this));
 		break;
-	case MapObjectType::IMMOVABLE: {
+	case MapObjectType::IMMOVABLE:
 		immovables_->add(new ImmovableDescr(
 		   type_descname, table, description_manager_->get_attributes(type_name), *this));
-	} break;
+		break;
 	case MapObjectType::MARKET:
 		buildings_->add(new MarketDescr(type_descname, table, *this));
 		break;
@@ -407,7 +407,7 @@ void Descriptions::add_tribe(const LuaTable& table) {
 			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, table));
 		}
 	} else {
-		throw GameDataError("The tribe '%s' is not listed in data/tribes/init.lua.", name.c_str());
+		throw GameDataError("The tribe '%s' is not present in data/tribes/initialization", name.c_str());
 	}
 
 	// Mark as done
@@ -439,6 +439,16 @@ DescriptionIndex Descriptions::load_building(const std::string& buildingname) {
 	return safe_building_index(buildingname);
 }
 
+DescriptionIndex Descriptions::load_critter(const std::string& crittername) {
+	try {
+		description_manager_->load_description(crittername);
+	} catch (WException& e) {
+		throw GameDataError(
+		   "Error while loading critter type '%s': %s", crittername.c_str(), e.what());
+	}
+	return safe_critter_index(crittername);
+}
+
 DescriptionIndex Descriptions::load_immovable(const std::string& immovablename) {
 	try {
 		description_manager_->load_description(immovablename);
@@ -449,6 +459,16 @@ DescriptionIndex Descriptions::load_immovable(const std::string& immovablename) 
 	return safe_immovable_index(immovablename);
 }
 
+DescriptionIndex Descriptions::load_resource(const std::string& resourcename) {
+	try {
+		description_manager_->load_description(resourcename);
+	} catch (WException& e) {
+		throw GameDataError(
+		   "Error while loading resource type '%s': %s", resourcename.c_str(), e.what());
+	}
+	return safe_resource_index(resourcename);
+}
+
 DescriptionIndex Descriptions::load_ship(const std::string& shipname) {
 	try {
 		description_manager_->load_description(shipname);
@@ -456,6 +476,16 @@ DescriptionIndex Descriptions::load_ship(const std::string& shipname) {
 		throw GameDataError("Error while loading ship type '%s': %s", shipname.c_str(), e.what());
 	}
 	return safe_ship_index(shipname);
+}
+
+DescriptionIndex Descriptions::load_terrain(const std::string& terrainname) {
+	try {
+		description_manager_->load_description(terrainname);
+	} catch (WException& e) {
+		throw GameDataError(
+		   "Error while loading terrain type '%s': %s", terrainname.c_str(), e.what());
+	}
+	return safe_terrain_index(terrainname);
 }
 
 DescriptionIndex Descriptions::load_ware(const std::string& warename) {
@@ -494,35 +524,6 @@ uint32_t Descriptions::get_largest_workarea() const {
 
 void Descriptions::increase_largest_workarea(uint32_t workarea) {
 	largest_workarea_ = std::max(largest_workarea_, workarea);
-}
-
-DescriptionIndex Descriptions::load_critter(const std::string& crittername) {
-	try {
-		description_manager_->load_description(crittername);
-	} catch (WException& e) {
-		throw GameDataError(
-		   "Error while loading critter type '%s': %s", crittername.c_str(), e.what());
-	}
-	return safe_critter_index(crittername);
-}
-
-DescriptionIndex Descriptions::load_resource(const std::string& resourcename) {
-	try {
-		description_manager_->load_description(resourcename);
-	} catch (WException& e) {
-		throw GameDataError(
-		   "Error while loading resource type '%s': %s", resourcename.c_str(), e.what());
-	}
-	return safe_resource_index(resourcename);
-}
-DescriptionIndex Descriptions::load_terrain(const std::string& terrainname) {
-	try {
-		description_manager_->load_description(terrainname);
-	} catch (WException& e) {
-		throw GameDataError(
-		   "Error while loading terrain type '%s': %s", terrainname.c_str(), e.what());
-	}
-	return safe_terrain_index(terrainname);
 }
 
 }  // namespace Widelands
