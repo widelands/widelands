@@ -15,7 +15,7 @@ FUNCTION_REGEX = re.compile(
 def does_include_cstdlib(lines, fn):
     includes_cstdlib = False
     for lineno, line in enumerate(lines, 1):
-        if 'include <cstdlib>' in line:
+        if line.startswith('#include <cstdlib>'):
             includes_cstdlib = True
 
         matches = []
