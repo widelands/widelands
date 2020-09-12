@@ -19,7 +19,6 @@
 
 #include "wui/shipwindow.h"
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
