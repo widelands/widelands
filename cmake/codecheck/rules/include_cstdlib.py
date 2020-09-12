@@ -9,7 +9,7 @@ Older Macs that build with libc++ instead of libstc++ need this.
 import re
 
 FUNCTION_REGEX = re.compile(
-    r"""(\s|std::)(abs|ato[fil]|atoll|strto[dfl]|strtol[ld]|strtoul[l]{0,1}|std::[s]{0,1}rand|malloc|getenv)\(""")
+    r"""((\s|std::|\(|\[)(abs|ato[fil]|atoll|strto[dfl]|strtol[ld]|strtoul[l]{0,1}|malloc|getenv)|(\bstd::[s]{0,1}rand))\(""")
 
 
 def does_include_cstdlib(lines, fn):
