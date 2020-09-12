@@ -555,7 +555,7 @@ walk
       buildship = {
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
          -- 2. This will create an object for us if we don't have one yet
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:atlanteans_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
          "animate=work duration:500ms",
          "construct", -- 1. This will find a space for us if no object has been planted yet
@@ -699,7 +699,7 @@ plant
       buildship = {
          "walk=object-or-coords",
          -- Only create a shipconstruction if we don't already have one
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:barbarians_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
          "animate=work duration:500ms",
          "construct",
@@ -1004,7 +1004,7 @@ construct
       buildship = {
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
          -- 2. This will create an object for us if we don't have one yet
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:atlanteans_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
          "animate=work duration:5s",
          -- 1. Add the current ware to the shipconstruction. This will find a space for us if no
