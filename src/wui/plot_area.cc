@@ -19,6 +19,7 @@
 
 #include "wui/plot_area.h"
 
+#include <cstdlib>
 #include <memory>
 
 #include "base/i18n.h"

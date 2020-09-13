@@ -20,6 +20,7 @@
 #include "io/profile.h"
 
 #include <cstdarg>
+#include <cstdlib>
 #include <cstring>
 
 #include <boost/algorithm/string.hpp>
