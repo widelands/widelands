@@ -41,7 +41,7 @@ struct MultiPlayerSetupGroup;
  */
 class FullscreenMenuLaunchMPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchMPG(GameSettingsProvider*, GameController*);
+	FullscreenMenuLaunchMPG(FullscreenMenuMain&, GameSettingsProvider*, GameController*);
 	~FullscreenMenuLaunchMPG() override;
 
 	void set_chat_provider(ChatProvider&);

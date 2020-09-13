@@ -31,7 +31,7 @@
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
  */
-class FullscreenMenuMain : public FullscreenMenuBase {
+class FullscreenMenuMain : public UI::Panel {
 public:
 	explicit FullscreenMenuMain(bool first_ever_init);
 
@@ -60,10 +60,6 @@ public:
 	// Set the labels for all buttons etc. This needs to be called after language switching.
 	void set_labels();
 
-protected:
-	void clicked_ok() override {
-	}
-
 private:
 	void layout() override;
 
@@ -73,8 +69,8 @@ private:
 
 	UI::Box vbox1_, vbox2_;
 
-	UI::Dropdown<FullscreenMenuBase::MenuTarget> singleplayer_;
-	UI::Dropdown<FullscreenMenuBase::MenuTarget> multiplayer_;
+	UI::Dropdown<MenuTarget> singleplayer_;
+	UI::Dropdown<MenuTarget> multiplayer_;
 	UI::Button replay_;
 	UI::Button editor_;
 	UI::Button addons_;

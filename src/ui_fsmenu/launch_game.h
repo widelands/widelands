@@ -27,26 +27,26 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
+#include "ui_basic/window.h"
+#include "ui_fsmenu/main.h"
 
 class GameController;
 struct GameSettingsProvider;
 class LuaInterface;
 
 /**
- * Fullscreen menu for setting map and mapsettings for single and multi player
- * games.
- *
+ * Menu for setting map and mapsettings for single- and multiplayer games.
  */
-class FullscreenMenuLaunchGame : public FullscreenMenuBase {
+class FullscreenMenuLaunchGame : public UI::Window {
 public:
-	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*);
+	FullscreenMenuLaunchGame(FullscreenMenuMain&, GameSettingsProvider*, GameController*);
 	~FullscreenMenuLaunchGame() override;
 
 protected:
-	void clicked_ok() override;
-	void clicked_back() override;
+	virtual void clicked_ok();
+	virtual void clicked_back();
 
+	FullscreenMenuMain& fsmm_;
 	LuaInterface* lua_;
 
 	/// Initializes the label and tooltip for the win condition dropdown and returns 'true' if this

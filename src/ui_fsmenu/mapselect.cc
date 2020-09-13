@@ -36,9 +36,9 @@
 
 using Widelands::WidelandsMapLoader;
 
-FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const settings,
+FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm, GameSettingsProvider* const settings,
                                                  GameController* const ctrl)
-   : FullscreenMenuLoadMapOrGame(),
+   : FullscreenMenuLoadMapOrGame(fsmm, _("Choose Map")),
      checkbox_space_(20),
      // Less padding for big fonts; space is tight.
      checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
@@ -217,9 +217,9 @@ void FullscreenMenuMapSelect::clicked_ok() {
 		fill_table();
 	} else {
 		if (maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario) {
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
+			end_modal<MenuTarget>(MenuTarget::kScenarioGame);
 		} else {
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
+			end_modal<MenuTarget>(MenuTarget::kNormalGame);
 		}
 	}
 }

@@ -284,7 +284,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
 	ok_.sigclicked.connect(
-	   [this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk); });
+	   [this]() { end_modal<MenuTarget>(MenuTarget::kOk); });
 
 	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));
@@ -565,12 +565,12 @@ void FullscreenMenuOptions::update_language_stats() {
 }
 
 void FullscreenMenuOptions::clicked_apply() {
-	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kApplyOptions);
+	end_modal<MenuTarget>(MenuTarget::kApplyOptions);
 }
 
 void FullscreenMenuOptions::clicked_cancel() {
 	g_sh->load_config();
-	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	end_modal<MenuTarget>(MenuTarget::kBack);
 }
 
 bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code) {
@@ -578,10 +578,10 @@ bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+			end_modal<MenuTarget>(MenuTarget::kOk);
 			return true;
 		case SDLK_ESCAPE:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+			end_modal<MenuTarget>(MenuTarget::kBack);
 			return true;
 		default:
 			break;
@@ -647,8 +647,8 @@ OptionsCtrl::OptionsCtrl(FullscreenMenuMain& mm, Section& s)
 }
 
 void OptionsCtrl::handle_menu() {
-	FullscreenMenuBase::MenuTarget i = opt_dialog_->run<FullscreenMenuBase::MenuTarget>();
-	if (i != FullscreenMenuBase::MenuTarget::kBack) {
+	MenuTarget i = opt_dialog_->run<MenuTarget>();
+	if (i != MenuTarget::kBack) {
 		save_options();
 		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
 		if (opt_dialog_->get_values().maximized) {
@@ -658,7 +658,7 @@ void OptionsCtrl::handle_menu() {
 			   opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
 		}
 	}
-	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
+	if (i == MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
 		opt_dialog_.reset(new FullscreenMenuOptions(parent_, options_struct(active_tab)));
 		handle_menu();  // Restart general options menu

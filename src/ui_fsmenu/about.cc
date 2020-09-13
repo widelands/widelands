@@ -61,7 +61,7 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
 	   [this](const GraphicResolutionChanged&) { layout(); });
 
 	close_.sigclicked.connect([this]() {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+		end_modal<MenuTarget>(MenuTarget::kBack);
 	});
 
 	box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
@@ -81,7 +81,7 @@ bool FullscreenMenuAbout::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 		case SDLK_ESCAPE:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+			end_modal<MenuTarget>(MenuTarget::kBack);
 			return true;
 		default:
 			break;

@@ -36,9 +36,9 @@
 #include "ui_fsmenu/mapselect.h"
 #include "wui/playerdescrgroup.h"
 
-FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const settings,
+FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm, GameSettingsProvider* const settings,
                                                  GameController* const ctrl)
-   : FullscreenMenuLaunchGame(settings, ctrl),
+   : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
      // Buttons
      select_map_(this,
                  "select_map",
@@ -115,14 +115,6 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 	title_.set_text(_("Launch Game"));
 	select_map_.sigclicked.connect([this]() { select_map(); });
 
-	// We want to redesign this screen, so we won't bother defining a font size in the style manager.
-	const int small_scale_factor = scale_factor() * 4 / 5;
-	name_.set_font_scale(small_scale_factor);
-	type_.set_font_scale(small_scale_factor);
-	team_.set_font_scale(small_scale_factor);
-	tribe_.set_font_scale(small_scale_factor);
-	init_.set_font_scale(small_scale_factor);
-
 	uint32_t y = get_h() * 3 / 10 - buth_;
 	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
 		const Image* player_image = playercolor_image(i, "images/players/player_position_menu.png");
@@ -154,7 +146,7 @@ void FullscreenMenuLaunchSPG::layout() {
  */
 void FullscreenMenuLaunchSPG::start() {
 	if (!select_map()) {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+		end_modal<MenuTarget>(MenuTarget::kBack);
 	}
 }
 
@@ -168,7 +160,7 @@ void FullscreenMenuLaunchSPG::clicked_back() {
 	//  from user point of view, so we reopen the mapselect-menu.
 	if (!select_map()) {
 		// No map has been selected: Go back to main menu
-		return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+		return end_modal<MenuTarget>(MenuTarget::kBack);
 	}
 	update(true);
 }
@@ -201,12 +193,12 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 	}
 	if (settings_->can_launch()) {
 		if (is_scenario_) {
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
+			end_modal<MenuTarget>(MenuTarget::kScenarioGame);
 		} else {
 			if (win_condition_dropdown_.has_selection()) {
 				settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 			}
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
+			end_modal<MenuTarget>(MenuTarget::kNormalGame);
 		}
 	}
 }
@@ -265,16 +257,16 @@ bool FullscreenMenuLaunchSPG::select_map() {
 		return false;
 	}
 
-	FullscreenMenuMapSelect msm(settings_, nullptr);
-	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
+	FullscreenMenuMapSelect msm(fsmm_, settings_, nullptr);
+	MenuTarget code = msm.run<MenuTarget>();
 
-	if (code == FullscreenMenuBase::MenuTarget::kBack) {
+	if (code == MenuTarget::kBack) {
 		// Set scenario = false, else the menu might crash when back is pressed.
 		settings_->set_scenario(false);
 		return false;  // back was pressed
 	}
 
-	is_scenario_ = code == FullscreenMenuBase::MenuTarget::kScenarioGame;
+	is_scenario_ = code == MenuTarget::kScenarioGame;
 	settings_->set_scenario(is_scenario_);
 
 	const MapData& mapdata = *msm.get_map();

@@ -34,7 +34,7 @@
 class FullscreenMenuScenarioSelect : public FullscreenMenuLoadMapOrGame {
 public:
 	// If camp is not set, we'll be loading the tutorials
-	explicit FullscreenMenuScenarioSelect(CampaignData* camp = nullptr);
+	explicit FullscreenMenuScenarioSelect(FullscreenMenuMain&, CampaignData* camp = nullptr);
 
 	std::string get_map();
 	uint32_t get_difficulty() const;

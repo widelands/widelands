@@ -27,8 +27,8 @@
  * CampaignSelect UI
  * Loads a list of all visible campaigns
  */
-FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
-   : FullscreenMenuLoadMapOrGame(),
+FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& fsmm, Campaigns* campvis)
+   : FullscreenMenuLoadMapOrGame(fsmm, _("Choose Campaign")),
      table_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Main Title
@@ -90,7 +90,7 @@ void FullscreenMenuCampaignSelect::clicked_ok() {
 	if (!campaign_data.visible) {
 		return;
 	}
-	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+	end_modal<MenuTarget>(MenuTarget::kOk);
 }
 
 size_t FullscreenMenuCampaignSelect::get_campaign_index() const {

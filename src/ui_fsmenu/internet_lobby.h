@@ -32,7 +32,7 @@
 
 class FullscreenMenuInternetLobby : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuInternetLobby(std::string&, std::string&, bool);
+	FullscreenMenuInternetLobby(FullscreenMenuMain&, std::string&, std::string&, bool);
 
 	void think() override;
 
@@ -58,6 +58,8 @@ private:
 
 	uint8_t convert_clienttype(const std::string&);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
+
+	FullscreenMenuMain& fsmm_;
 
 	UI::Textarea title_;
 

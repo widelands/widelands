@@ -26,8 +26,15 @@
 /// Select a Map, Saved Game or Replay in Fullscreen Mode.
 /// This class defines common coordinates for these UI screens.
 /// It also defines common buttons.
-FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
-   : FullscreenMenuBase(),
+FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(FullscreenMenuMain& fsmm, const std::string& title)
+   : UI::Window(&fsmm,
+                UI::WindowStyle::kFsMenu,
+                "load_map_or_game",
+                (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
+                (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,
+                calc_desired_window_width(fsmm),
+                calc_desired_window_height(fsmm),
+                title),
      // Main buttons
      back_(this, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {

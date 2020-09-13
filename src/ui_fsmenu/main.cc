@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/main.h"
 
+#include <cstdlib>
+
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
@@ -51,7 +53,7 @@ int16_t calc_desired_window_height(const FullscreenMenuMain& parent) {
 }
 
 FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
-   : FullscreenMenuBase(),
+   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      box_rect_(0, 0, 0, 0),
      butw_(get_w() * 7 / 20),
      buth_(get_h() * 9 / 200),
@@ -111,28 +113,28 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
      visible_(true),
      auto_log_(false) {
 	singleplayer_.selected.connect(
-	   [this]() { end_modal<FullscreenMenuBase::MenuTarget>(singleplayer_.get_selected()); });
+	   [this]() { end_modal<MenuTarget>(singleplayer_.get_selected()); });
 	multiplayer_.selected.connect([this]() {
 		internet_login();
-		end_modal<FullscreenMenuBase::MenuTarget>(multiplayer_.get_selected());
+		end_modal<MenuTarget>(multiplayer_.get_selected());
 	});
 	replay_.sigclicked.connect([this]() {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kReplay);
+		end_modal<MenuTarget>(MenuTarget::kReplay);
 	});
 	editor_.sigclicked.connect([this]() {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditor);
+		end_modal<MenuTarget>(MenuTarget::kEditor);
 	});
 	/* addons_.sigclicked.connect([this]() {  // Not yet implemented
-	   end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAddOns);
+	   end_modal<MenuTarget>(MenuTarget::kAddOns);
 	}); */
 	options_.sigclicked.connect([this]() {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOptions);
+		end_modal<MenuTarget>(MenuTarget::kOptions);
 	});
 	about_.sigclicked.connect([this]() {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAbout);
+		end_modal<MenuTarget>(MenuTarget::kAbout);
 	});
 	exit_.sigclicked.connect([this]() {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kExit);
+		end_modal<MenuTarget>(MenuTarget::kExit);
 	});
 
 	vbox1_.add(&singleplayer_, UI::Box::Resizing::kFullSize);
@@ -174,13 +176,13 @@ void FullscreenMenuMain::set_labels() {
 	singleplayer_.clear();
 	multiplayer_.clear();
 
-	singleplayer_.add(_("New Game"), FullscreenMenuBase::MenuTarget::kNewGame, nullptr, false,
+	singleplayer_.add(_("New Game"), MenuTarget::kNewGame, nullptr, false,
 	                  _("Begin a new game"), "N");
-	singleplayer_.add(_("Campaigns"), FullscreenMenuBase::MenuTarget::kCampaign, nullptr, false,
+	singleplayer_.add(_("Campaigns"), MenuTarget::kCampaign, nullptr, false,
 	                  _("Play a campaign"), "H");
-	singleplayer_.add(_("Tutorials"), FullscreenMenuBase::MenuTarget::kTutorial, nullptr, false,
+	singleplayer_.add(_("Tutorials"), MenuTarget::kTutorial, nullptr, false,
 	                  _("Play one of our beginners’ tutorials"), "T");
-	singleplayer_.add(_("Load Game"), FullscreenMenuBase::MenuTarget::kLoadGame, nullptr, false,
+	singleplayer_.add(_("Load Game"), MenuTarget::kLoadGame, nullptr, false,
 	                  _("Continue a saved game"), "L");
 
 	// Refresh the Continue tooltip. The SavegameData must be reloaded after
@@ -200,7 +202,7 @@ void FullscreenMenuMain::set_labels() {
 		if (newest_singleplayer) {
 			filename_for_continue_ = newest_singleplayer->filename;
 			singleplayer_.add(
-			   _("Continue Playing"), FullscreenMenuBase::MenuTarget::kContinueLastsave, nullptr,
+			   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr,
 			   false,
 			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>") %
 			    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
@@ -232,11 +234,11 @@ void FullscreenMenuMain::set_labels() {
 		}
 	}
 
-	multiplayer_.add(_("Online Game"), FullscreenMenuBase::MenuTarget::kMetaserver, nullptr, false,
+	multiplayer_.add(_("Online Game"), MenuTarget::kMetaserver, nullptr, false,
 	                 _("Join the Widelands lobby"), "J");
-	multiplayer_.add(_("Online Game Settings"), FullscreenMenuBase::MenuTarget::kOnlineGameSettings,
+	multiplayer_.add(_("Online Game Settings"), MenuTarget::kOnlineGameSettings,
 	                 nullptr, false, _("Log in as a registered user"), "U");
-	multiplayer_.add(_("LAN / Direct IP"), FullscreenMenuBase::MenuTarget::kLan, nullptr, false,
+	multiplayer_.add(_("LAN / Direct IP"), MenuTarget::kLan, nullptr, false,
 	                 _("Play a private online game"), "P");
 
 	singleplayer_.set_label(_("Single Player…"));
@@ -302,53 +304,53 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 		switch (code.sym) {
 		case SDLK_ESCAPE:
 			if (!fell_through) {
-				end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+				end_modal<MenuTarget>(MenuTarget::kBack);
 				return true;
 			}
 			break;
 		case SDLK_t:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kTutorial);
+			end_modal<MenuTarget>(MenuTarget::kTutorial);
 			return true;
 		case SDLK_c:
 			if (!filename_for_continue_.empty()) {
-				end_modal<FullscreenMenuBase::MenuTarget>(
-				   FullscreenMenuBase::MenuTarget::kContinueLastsave);
+				end_modal<MenuTarget>(
+				   MenuTarget::kContinueLastsave);
 				return true;
 			}
 			break;
 		case SDLK_n:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNewGame);
+			end_modal<MenuTarget>(MenuTarget::kNewGame);
 			return true;
 		case SDLK_h:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kCampaign);
+			end_modal<MenuTarget>(MenuTarget::kCampaign);
 			return true;
 		case SDLK_l:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kLoadGame);
+			end_modal<MenuTarget>(MenuTarget::kLoadGame);
 			return true;
 		case SDLK_j:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMetaserver);
+			end_modal<MenuTarget>(MenuTarget::kMetaserver);
 			return true;
 		case SDLK_u:
-			end_modal<FullscreenMenuBase::MenuTarget>(
-			   FullscreenMenuBase::MenuTarget::kOnlineGameSettings);
+			end_modal<MenuTarget>(
+			   MenuTarget::kOnlineGameSettings);
 			return true;
 		case SDLK_p:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kLan);
+			end_modal<MenuTarget>(MenuTarget::kLan);
 			return true;
 		case SDLK_e:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditor);
+			end_modal<MenuTarget>(MenuTarget::kEditor);
 			return true;
 		/* case SDLK_a:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAddOns);
+			end_modal<MenuTarget>(MenuTarget::kAddOns);
 			return true; */
 		case SDLK_o:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOptions);
+			end_modal<MenuTarget>(MenuTarget::kOptions);
 			return true;
 		case SDLK_r:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kReplay);
+			end_modal<MenuTarget>(MenuTarget::kReplay);
 			return true;
 		case SDLK_F1:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAbout);
+			end_modal<MenuTarget>(MenuTarget::kAbout);
 			return true;
 		case SDLK_s:
 			singleplayer_.toggle();
@@ -390,7 +392,7 @@ inline float FullscreenMenuMain::calc_opacity(const uint32_t time) {
  */
 
 void FullscreenMenuMain::draw(RenderTarget& r) {
-	FullscreenMenuBase::draw(r);
+	UI::Panel::draw(r);
 	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 
 	const uint32_t time = SDL_GetTicks();
@@ -554,7 +556,7 @@ void FullscreenMenuMain::internet_login() {
 
 	// Check whether metaserver send some data
 	if (InternetGaming::ref().logged_in()) {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMetaserver);
+		end_modal<MenuTarget>(MenuTarget::kMetaserver);
 	} else {
 		// something went wrong -> show the error message
 		ChatMessage msg = InternetGaming::ref().get_messages().back();

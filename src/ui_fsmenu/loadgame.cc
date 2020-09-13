@@ -25,10 +25,11 @@
 #include "wlapplication_options.h"
 #include "wui/gamedetails.h"
 
-FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
+FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
+                                               Widelands::Game& g,
                                                GameSettingsProvider* gsp,
                                                bool is_replay)
-   : FullscreenMenuLoadMapOrGame(),
+   : FullscreenMenuLoadMapOrGame(fsmm, is_replay ? _("Choose Replay") : _("Choose Game")),
 
      main_box_(this, 0, 0, UI::Box::Vertical),
      info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
@@ -113,7 +114,6 @@ void FullscreenMenuLoadGame::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 	main_box_.set_size(get_w() - 2 * tablex_, tabley_ + tableh_ + padding_);
 	main_box_.set_pos(Vector2i(tablex_, 0));
-	title_.set_font_scale(scale_factor());
 	load_or_save_.delete_button()->set_desired_size(butw_, buth_);
 	button_spacer_->set_desired_size(butw_, buth_ + 2 * padding_);
 	load_or_save_.table().set_desired_size(tablew_, tableh_);
@@ -149,7 +149,7 @@ void FullscreenMenuLoadGame::clicked_ok() {
 	} else {
 		if (gamedata && gamedata->errormessage.empty()) {
 			filename_ = gamedata->filename;
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+			end_modal<MenuTarget>(MenuTarget::kOk);
 		}
 	}
 }

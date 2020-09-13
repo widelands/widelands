@@ -20,61 +20,40 @@
 #ifndef WL_UI_FSMENU_BASE_H
 #define WL_UI_FSMENU_BASE_H
 
-#include "ui_basic/fullscreen_window.h"
 #include "ui_basic/panel.h"
 
-/**
- * This class is the base class for a fullscreen menu.
- * A fullscreen menu is a menu which takes the full screen
- * and it is a modal UI Element
- */
-// TODO(Nordfriese): Delete this class when the fsmenu conversion is complete
-class FullscreenMenuBase : public UI::FullscreenWindow {
-public:
-	enum class MenuTarget {
-		kBack = static_cast<int>(UI::Panel::Returncodes::kBack),
-		kOk = static_cast<int>(UI::Panel::Returncodes::kOk),
+enum class MenuTarget {
+	kBack = static_cast<int>(UI::Panel::Returncodes::kBack),
+	kOk = static_cast<int>(UI::Panel::Returncodes::kOk),
 
-		// Options
-		kApplyOptions,
+	// Options
+	kApplyOptions,
 
-		// Main menu
-		kTutorial,
-		kContinueLastsave,
-		kReplay,
-		kEditor,
-		kOptions,
-		kAbout,
-		kExit,
+	// Main menu
+	kTutorial,
+	kContinueLastsave,
+	kReplay,
+	kEditor,
+	kOptions,
+	kAbout,
+	kExit,
 
-		// Single player
-		kNewGame,
-		kCampaign,
-		kLoadGame,
+	// Single player
+	kNewGame,
+	kCampaign,
+	kLoadGame,
 
-		// Multiplayer
-		kMetaserver,
-		kOnlineGameSettings,
-		kLan,
+	// Multiplayer
+	kMetaserver,
+	kOnlineGameSettings,
+	kLan,
 
-		// Launch game
-		kNormalGame,
-		kScenarioGame,
-		kMultiPlayerSavegame,
-		kHostgame,
-		kJoingame
-	};
-
-	/// A full screen main menu outside of the game/editor itself.
-	FullscreenMenuBase();
-	~FullscreenMenuBase() override;
-
-	/// Handle keypresses
-	bool handle_key(bool down, SDL_Keysym code) override;
-
-protected:
-	virtual void clicked_back();
-	virtual void clicked_ok();
+	// Launch game
+	kNormalGame,
+	kScenarioGame,
+	kMultiPlayerSavegame,
+	kHostgame,
+	kJoingame
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_BASE_H

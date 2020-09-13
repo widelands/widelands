@@ -42,7 +42,7 @@ struct PlayerDescriptionGroup;
  */
 class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchSPG(GameSettingsProvider*, GameController* = nullptr);
+	FullscreenMenuLaunchSPG(FullscreenMenuMain&, GameSettingsProvider*, GameController* = nullptr);
 	~FullscreenMenuLaunchSPG() override;
 
 	void start() override;

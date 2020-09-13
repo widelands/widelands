@@ -38,8 +38,8 @@
  * Loads a list of all visible maps of selected campaign or all tutorials and
  * lets the user choose one.
  */
-FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
-   : FullscreenMenuLoadMapOrGame(),
+FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& fsmm, CampaignData* camp)
+   : FullscreenMenuLoadMapOrGame(fsmm, camp ? _("Choose Scenario") : _("Choose Tutorial")),
      is_tutorial_(camp == nullptr),
      table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      header_box_(this, 0, 0, UI::Box::Vertical),
@@ -193,7 +193,7 @@ void FullscreenMenuScenarioSelect::clicked_ok() {
 	if (!scenario_data.playable) {
 		return;
 	}
-	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+	end_modal<MenuTarget>(MenuTarget::kOk);
 }
 
 void FullscreenMenuScenarioSelect::entry_selected() {

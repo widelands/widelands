@@ -42,10 +42,11 @@ const uint8_t kClientUnregistered = 2;
 const uint8_t kClientIRC = 4;
 }  // namespace
 
-FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
+FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsmm, std::string& nick,
                                                          std::string& pwd,
                                                          bool registered)
-   : FullscreenMenuLoadMapOrGame(),
+   : FullscreenMenuLoadMapOrGame(fsmm, _("Metaserver Lobby")),
+     fsmm_(fsmm),
      // Main title
      title_(this,
             0,
@@ -176,13 +177,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 void FullscreenMenuInternetLobby::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 
-	title_.set_font_scale(scale_factor());
-	label_opengames_.set_font_scale(scale_factor());
-	label_clients_online_.set_font_scale(scale_factor());
-	servername_label_.set_font_scale(scale_factor());
-
 	uint32_t butw = get_w() - right_column_x_ - right_column_margin_;
-	uint32_t buth = (text_height(UI::FontStyle::kLabel) + 8) * scale_factor();
+	uint32_t buth = text_height(UI::FontStyle::kLabel) + 8;
 
 	tabley_ = tabley_ / 2;
 	tableh_ += tabley_;
@@ -210,7 +206,7 @@ void FullscreenMenuInternetLobby::layout() {
 
 /// think function of the UI (main loop)
 void FullscreenMenuInternetLobby::think() {
-	FullscreenMenuBase::think();
+	FullscreenMenuLoadMapOrGame::think();
 
 	if (!InternetGaming::ref().error()) {
 
@@ -452,7 +448,7 @@ void FullscreenMenuInternetLobby::clicked_joingame() {
 		}
 		const std::pair<NetAddress, NetAddress>& ips = InternetGaming::ref().ips();
 
-		GameClient netgame(ips, InternetGaming::ref().get_local_clientname(), true,
+		GameClient netgame(fsmm_, ips, InternetGaming::ref().get_local_clientname(), true,
 		                   opengames_list_.get_selected().name);
 		netgame.run();
 	} else {
@@ -504,7 +500,7 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 		}
 
 		// Start our relay host
-		GameHost netgame(InternetGaming::ref().get_local_clientname(), true);
+		GameHost netgame(fsmm_, InternetGaming::ref().get_local_clientname(), true);
 		netgame.run();
 	} catch (...) {
 		// Log out before going back to the main menu

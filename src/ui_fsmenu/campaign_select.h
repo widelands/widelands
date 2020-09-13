@@ -31,7 +31,7 @@
  */
 class FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuCampaignSelect(Campaigns* campvis);
+	FullscreenMenuCampaignSelect(FullscreenMenuMain&, Campaigns* campvis);
 
 	size_t get_campaign_index() const;
 

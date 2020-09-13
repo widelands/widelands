@@ -30,7 +30,7 @@
 
 class FullscreenMenuNetSetupLAN : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuNetSetupLAN();
+	explicit FullscreenMenuNetSetupLAN(FullscreenMenuMain&);
 
 	void think() override;
 

@@ -34,9 +34,17 @@
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 
-FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const settings,
+FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm, GameSettingsProvider* const settings,
                                                    GameController* const ctrl)
-   : FullscreenMenuBase(),
+   : UI::Window(&fsmm,
+                UI::WindowStyle::kFsMenu,
+                "launch_game",
+                (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
+                (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,
+                calc_desired_window_width(fsmm),
+                calc_desired_window_height(fsmm),
+                _("Launch Game")),
+                fsmm_(fsmm),
 
      // Values for alignment and size
      butw_(get_w() / 4),
@@ -80,8 +88,6 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
 	lua_ = new LuaInterface();
-
-	title_.set_font_scale(scale_factor());
 }
 
 FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {

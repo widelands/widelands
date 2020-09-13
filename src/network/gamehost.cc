@@ -504,8 +504,8 @@ struct GameHostImpl {
 	}
 };
 
-GameHost::GameHost(const std::string& playername, bool internet)
-   : d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
+GameHost::GameHost(FullscreenMenuMain& f, const std::string& playername, bool internet)
+   : fsmm_(f), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
 	log_info("[Host]: starting up.\n");
 
 	d->localplayername = playername;
@@ -628,10 +628,10 @@ void GameHost::init_computer_players() {
 void GameHost::run() {
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	FullscreenMenuLaunchMPG lm(&d->hp, this);
+	FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this);
 	lm.set_chat_provider(d->chat);
-	const FullscreenMenuBase::MenuTarget code = lm.run<FullscreenMenuBase::MenuTarget>();
-	if (code == FullscreenMenuBase::MenuTarget::kBack) {
+	const MenuTarget code = lm.run<MenuTarget>();
+	if (code == MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
 		if (internet_) {
 			InternetGaming::ref().set_game_done();
