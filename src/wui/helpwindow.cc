@@ -36,7 +36,7 @@ BuildingHelpWindow::BuildingHelpWindow(Panel* const parent,
                                        LuaInterface* const lua,
                                        uint32_t width,
                                        uint32_t height)
-   : UI::UniqueWindow(parent,
+   : UI::UniqueWindow(parent, UI::WindowStyle::kWui,
                       "help_window",
                       &reg,
                       width,

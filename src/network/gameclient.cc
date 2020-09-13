@@ -1117,7 +1117,7 @@ void GameClient::disconnect(const std::string& reason,
 		}
 
 		UI::WLMessageBox mmb(
-		   d->modal, _("Disconnected from Host"), msg, UI::WLMessageBox::MBoxType::kOk);
+		   d->modal, UI::WindowStyle::kWui, _("Disconnected from Host"), msg, UI::WLMessageBox::MBoxType::kOk);
 		mmb.run<UI::Panel::Returncodes>();
 	}
 

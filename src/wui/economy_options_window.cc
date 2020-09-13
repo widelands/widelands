@@ -38,7 +38,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
                                            Widelands::Economy* ware_economy,
                                            Widelands::Economy* worker_economy,
                                            bool can_act)
-   : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
+   : UI::Window(parent, UI::WindowStyle::kWui, "economy_options", 0, 0, 0, 0, _("Economy options")),
      main_box_(this, 0, 0, UI::Box::Vertical),
      ware_serial_(ware_economy->serial()),
      worker_serial_(worker_economy->serial()),
@@ -558,7 +558,7 @@ void EconomyOptionsWindow::SaveProfileWindow::save() {
 	for (const auto& pair : economy_options_->get_predefined_targets()) {
 		if (pair.first == name) {
 			UI::WLMessageBox m(
-			   this, _("Overwrite?"),
+			   this, UI::WindowStyle::kWui, _("Overwrite?"),
 			   _("A profile with this name already exists. Do you wish to replace it?"),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
@@ -602,7 +602,7 @@ void EconomyOptionsWindow::SaveProfileWindow::think() {
 
 EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
                                                            EconomyOptionsWindow* eco)
-   : UI::Window(parent, "save_economy_options_profile", 0, 0, 0, 0, _("Save Profile")),
+   : UI::Window(parent, UI::WindowStyle::kWui, "save_economy_options_profile", 0, 0, 0, 0, _("Save Profile")),
      economy_options_(eco),
      main_box_(this, 0, 0, UI::Box::Vertical),
      table_box_(&main_box_, 0, 0, UI::Box::Vertical),

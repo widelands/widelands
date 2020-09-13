@@ -44,7 +44,7 @@ public:
 	explicit EditorPlayerMenuWarningBox(UI::Panel* parent)
 	   /** TRANSLATORS: Window title in the editor when a player has selected more than the
 	      recommended number of players */
-	   : Window(parent, "editor_player_menu_warning_box", 0, 0, 500, 220, _("Too Many Players")),
+	   : Window(parent, UI::WindowStyle::kWui, "editor_player_menu_warning_box", 0, 0, 500, 220, _("Too Many Players")),
 	     box_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * kMargin),
 	     warning_label_(
 	        &box_,

@@ -26,7 +26,7 @@
 
 SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
                                              UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent, "soldier_statistics", &registry, 100, 100, _("Soldier Statistics")),
+   : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "soldier_statistics", &registry, 100, 100, _("Soldier Statistics")),
      player_(parent.player()) {
 	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiDark);
 

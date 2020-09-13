@@ -39,7 +39,7 @@
 
 GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
                                              GeneralStatisticsMenu::Registry& registry)
-   : UI::UniqueWindow(&parent, "statistics_menu", &registry, 440, 400, _("General Statistics")),
+   : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "statistics_menu", &registry, 440, 400, _("General Statistics")),
      my_registry_(&registry),
      box_(this, 0, 0, UI::Box::Vertical, 0, 0, 5),
      plot_(&box_,

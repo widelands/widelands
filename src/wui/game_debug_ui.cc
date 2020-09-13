@@ -80,7 +80,7 @@ MapObjectDebugWindow
 ==============================================================================
 */
 MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::MapObject& obj)
-   : UI::Window(&parent, "map_object_debug", 0, 0, 100, 100, ""),
+   : UI::Window(&parent, UI::WindowStyle::kWui, "map_object_debug", 0, 0, 100, 100, ""),
      log_general_info_(true),
      object_(&obj),
      tabs_(this, UI::TabPanelStyle::kWuiLight) {
@@ -131,7 +131,7 @@ FieldDebugWindow
 */
 FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords const coords)
    : /** TRANSLATORS: Title for a window that shows debug information for a field on the map */
-     UI::Window(&parent, "field_debug", 0, 60, 300, 400, _("Debug Field")),
+     UI::Window(&parent, UI::WindowStyle::kWui, "field_debug", 0, 60, 300, 400, _("Debug Field")),
      text_(""),
      map_(parent.egbase().map()),
      coords_(map_.get_fcoords(coords)),

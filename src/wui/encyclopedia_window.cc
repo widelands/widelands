@@ -46,7 +46,7 @@ namespace UI {
 EncyclopediaWindow::EncyclopediaWindow(InteractiveBase& parent,
                                        UI::UniqueWindow::Registry& registry,
                                        LuaInterface* const lua)
-   : UI::UniqueWindow(&parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
+   : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
      lua_(lua),
      tabs_(this, UI::TabPanelStyle::kWuiLight) {
 }
@@ -137,7 +137,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 		log_err_time(parent.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
 		             err.what());
 		UI::WLMessageBox wmb(
-		   &parent, _("Error!"),
+		   &parent, UI::WindowStyle::kWui, _("Error!"),
 		   (boost::format("Error loading script for encyclopedia:\n%s") % err.what()).str(),
 		   UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();

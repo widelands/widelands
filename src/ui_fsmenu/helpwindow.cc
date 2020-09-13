@@ -38,8 +38,8 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
                                            uint32_t width,
                                            uint32_t height)
    : Window(
-        parent, "help_window", 0, 0, width, height, (boost::format(_("Help: %s")) % caption).str()),
-     textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kWui)) {
+        parent, UI::WindowStyle::kFsMenu, "help_window", 0, 0, width, height, (boost::format(_("Help: %s")) % caption).str()),
+     textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kFsMenu)) {
 	int margin = 5;
 
 	// Calculate sizes
@@ -47,7 +47,7 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
 	height = (height == 0) ? g_gr->get_yres() * 4 / 5 : height;
 
 	Button* btn =
-	   new Button(this, "ok", width / 3, 0, width / 3, 0, UI::ButtonStyle::kWuiPrimary, _("OK"));
+	   new Button(this, "ok", width / 3, 0, width / 3, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK"));
 
 	btn->sigclicked.connect([this]() { clicked_ok(); });
 	btn->set_pos(Vector2i(btn->get_x(), height - margin - btn->get_h()));

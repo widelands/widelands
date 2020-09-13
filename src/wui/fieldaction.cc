@@ -258,7 +258,7 @@ Initialize a field action window, creating the appropriate buttons.
 FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
                                      Widelands::Player* const plr,
                                      UI::UniqueWindow::Registry* const registry)
-   : UI::UniqueWindow(ib, "field_action", registry, 68, 34, _("Action")),
+   : UI::UniqueWindow(ib, UI::WindowStyle::kWui, "field_action", registry, 68, 34, _("Action")),
      player_(plr),
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),

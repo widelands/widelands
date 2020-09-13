@@ -179,6 +179,13 @@ StyleManager::StyleManager() {
 	add_table_style(UI::PanelStyle::kWui, *element_table->get_table("wui"));
 	check_completeness("tables", table_styles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
+	// Windows
+	element_table = table->get_table("windows");
+	add_window_style(UI::WindowStyle::kFsMenu, *element_table->get_table("fsmenu"));
+	add_window_style(UI::WindowStyle::kWui, *element_table->get_table("wui"));
+	check_completeness(
+	   "windows", window_styles_.size(), static_cast<size_t>(UI::WindowStyle::kWui));
+
 	// Statistics plot
 	set_statistics_plot_style(*table->get_table("statistics_plot"));
 
@@ -195,8 +202,6 @@ StyleManager::StyleManager() {
 		throw wexception("Font size too small for minimum_font_size, must be at least 1!");
 	}
 	minimap_icon_frame_ = read_rgb_color(*table->get_table("minimap_icon_frame"));
-	window_border_focused_ = read_rgba_color(*table->get_table("window_border_focused"));
-	window_border_unfocused_ = read_rgba_color(*table->get_table("window_border_unfocused"));
 	focused_color_ = read_rgba_color(*table->get_table("background_focused"));
 	semi_focused_color_ = read_rgba_color(*table->get_table("background_semi_focused"));
 	focus_border_thickness_ = table->get_int("focus_border_thickness");
@@ -300,6 +305,11 @@ const UI::WareInfoStyleInfo& StyleManager::ware_info_style(UI::WareInfoStyle sty
 	return *ware_info_styles_.at(style);
 }
 
+const UI::WindowStyleInfo& StyleManager::window_style(UI::WindowStyle style) const {
+	assert(window_styles_.count(style) == 1);
+	return *window_styles_.at(style);
+}
+
 const UI::FontStyleInfo& StyleManager::font_style(UI::FontStyle style) const {
 	assert(fontstyles_.count(style) == 1);
 	return *fontstyles_.at(style);
@@ -394,6 +404,23 @@ void StyleManager::add_ware_info_style(UI::WareInfoStyle style, const LuaTable& 
 	             read_rgb_color(*colors_table->get_table("icon_frame")),
 	             read_rgb_color(*colors_table->get_table("icon_background")),
 	             read_rgb_color(*colors_table->get_table("info_background"))))));
+}
+
+void StyleManager::add_window_style(UI::WindowStyle style, const LuaTable& table) {
+	window_styles_.insert(std::make_pair(style, std::unique_ptr<const UI::WindowStyleInfo>(new UI::WindowStyleInfo(
+	        read_rgba_color(*table.get_table("window_border_focused")),
+	        read_rgba_color(*table.get_table("window_border_unfocused")),
+			g_image_cache->get(table.get_string("border_top")),
+			g_image_cache->get(table.get_string("border_bottom")),
+			g_image_cache->get(table.get_string("border_right")),
+			g_image_cache->get(table.get_string("border_left")),
+			g_image_cache->get(table.get_string("background")),
+			table.get_string("button_pin"),
+			table.get_string("button_unpin"),
+			table.get_string("button_minimize"),
+			table.get_string("button_unminimize"),
+			table.get_string("button_close")
+		))));
 }
 
 void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map) {

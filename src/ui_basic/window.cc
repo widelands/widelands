@@ -29,12 +29,6 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 
-namespace {
-std::string window_image_path(const std::string& image) {
-	return kTemplateDir + image;
-}
-}  // namespace
-
 namespace UI {
 
 /// Width the horizontal border graphics must have.
@@ -68,19 +62,6 @@ constexpr int16_t kVerticalBorderThingyHeight = 20;
 constexpr int16_t kVerticalBorderMiddleLength =
    (kVerticalBorderTotalLength - 2 * kVerticalBorderThingyHeight);
 
-// Decorations
-constexpr const char* const kWindowImageLeft = "wui/left.png";
-constexpr const char* const kWindowImageRight = "wui/right.png";
-constexpr const char* const kWindowImageTop = "wui/top.png";
-constexpr const char* const kWindowImageBottom = "wui/bottom.png";
-constexpr const char* const kWindowImageBackground = "wui/background.png";
-// Buttons
-constexpr const char* const kWindowImageClose = "wui/window_close.png";
-constexpr const char* const kWindowImagePinned = "wui/window_unpin.png";
-constexpr const char* const kWindowImageUnpinned = "wui/window_pin.png";
-constexpr const char* const kWindowImageMinimize = "wui/window_minimize.png";
-constexpr const char* const kWindowImageMaximize = "wui/window_maximize.png";
-
 /**
  * Initialize a framed window.
  *
@@ -94,6 +75,7 @@ constexpr const char* const kWindowImageMaximize = "wui/window_maximize.png";
  * \param title string to display in the window title
  */
 Window::Window(Panel* const parent,
+               WindowStyle s,
                const std::string& name,
                int32_t const x,
                int32_t const y,
@@ -106,6 +88,7 @@ Window::Window(Panel* const parent,
                 y,
                 w + kVerticalBorderThickness * 2,
                 kTopBorderThickness + h + kBottomBorderThickness),
+     style_(g_style_manager->window_style(s)),
      is_minimal_(false),
      oldh_(kTopBorderThickness + h + kBottomBorderThickness),
      dragging_(false),
@@ -117,11 +100,6 @@ Window::Window(Panel* const parent,
      drag_start_mouse_x_(0),
      drag_start_mouse_y_(0),
      pinned_(false),
-     pic_lborder_(g_image_cache->get(window_image_path(kWindowImageLeft))),
-     pic_rborder_(g_image_cache->get(window_image_path(kWindowImageRight))),
-     pic_top_(g_image_cache->get(window_image_path(kWindowImageTop))),
-     pic_bottom_(g_image_cache->get(window_image_path(kWindowImageBottom))),
-     pic_background_(g_image_cache->get(window_image_path(kWindowImageBackground))),
      center_panel_(nullptr),
      fastclick_panel_(nullptr),
      button_close_(new Button(this,
@@ -132,7 +110,7 @@ Window::Window(Panel* const parent,
                               kWindowTitlebarButtonsSize,
                               kWindowTitlebarButtonsSize,
                               ButtonStyle::kWuiSecondary,
-                              g_image_cache->get(window_image_path(kWindowImageClose)),
+                              style_.button_close(),
                               _("Close"))),
      button_pin_(new Button(this,
                             "b_pin",
@@ -141,7 +119,7 @@ Window::Window(Panel* const parent,
                             kWindowTitlebarButtonsSize,
                             kWindowTitlebarButtonsSize,
                             ButtonStyle::kWuiSecondary,
-                            g_image_cache->get(window_image_path(kWindowImageUnpinned)),
+                            style_.button_pin(),
                             "")),
      button_minimize_(new Button(this,
                                  "b_minimize",
@@ -150,7 +128,7 @@ Window::Window(Panel* const parent,
                                  kWindowTitlebarButtonsSize,
                                  kWindowTitlebarButtonsSize,
                                  ButtonStyle::kWuiSecondary,
-                                 g_image_cache->get(window_image_path(kWindowImageMinimize)),
+                                 style_.button_minimize(),
                                  "")) {
 	set_title(title);
 
@@ -185,13 +163,13 @@ Window::Window(Panel* const parent,
 
 void Window::update_toolbar_buttons() {
 	button_minimize_->set_pic(g_image_cache->get(is_minimal_ ?
-	                                                window_image_path(kWindowImageMaximize) :
-	                                                window_image_path(kWindowImageMinimize)));
+	                                                style_.button_unminimize() :
+	                                                style_.button_minimize()));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
 	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed :
 	                                                 Button::VisualState::kRaised);
-	button_pin_->set_pic(g_image_cache->get(pinned_ ? window_image_path(kWindowImagePinned) :
-	                                                  window_image_path(kWindowImageUnpinned)));
+	button_pin_->set_pic(g_image_cache->get(pinned_ ? style_.button_unpin() :
+	                                                  style_.button_pin()));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
 	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed :
 	                                        Button::VisualState::kRaised);
@@ -351,7 +329,7 @@ void Window::center_to_parent() {
 void Window::draw(RenderTarget& dst) {
 	if (!is_minimal()) {
 		dst.tile(
-		   Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), pic_background_, Vector2i::zero());
+		   Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), style_.background(), Vector2i::zero());
 	}
 }
 
@@ -367,20 +345,20 @@ void Window::draw_border(RenderTarget& dst) {
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - kHorizontalBorderMiddleLength;
 
 	const RGBAColor& focus_color = get_parent() && get_parent()->focused_child() == this ?
-	                                  g_style_manager->window_border_focused() :
-	                                  g_style_manager->window_border_unfocused();
+	                                  style_.window_border_focused() :
+	                                  style_.window_border_unfocused();
 
 	{  //  Top border.
 		int32_t pos = kCornerWidth;
 
 		dst.blitrect  //  top left corner
-		   (Vector2i::zero(), pic_top_, Recti(Vector2i::zero(), pos, kTopBorderThickness));
+		   (Vector2i::zero(), style_.border_top(), Recti(Vector2i::zero(), pos, kTopBorderThickness));
 
 		//  top bar
 		static_assert(0 <= kCornerWidth, "assert(0 <= kCornerWidth) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += kHorizontalBorderMiddleLength) {
 			dst.blitrect(
-			   Vector2i(pos, 0), pic_top_,
+			   Vector2i(pos, 0), style_.border_top(),
 			   Recti(Vector2i(kCornerWidth, 0), kHorizontalBorderMiddleLength, kTopBorderThickness));
 		}
 
@@ -388,7 +366,7 @@ void Window::draw_border(RenderTarget& dst) {
 		const int32_t width = hz_bar_end - pos + kCornerWidth;
 		assert(0 <= kHorizonalBorderTotalLength - width);
 		dst.blitrect(
-		   Vector2i(pos, 0), pic_top_,
+		   Vector2i(pos, 0), style_.border_top(),
 		   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kTopBorderThickness));
 
 		// Focus overlay
@@ -418,7 +396,7 @@ void Window::draw_border(RenderTarget& dst) {
 			static_assert(
 			   0 <= kVerticalBorderThickness, "assert(0 <= kVerticalBorderThickness) failed.");
 			dst.blitrect  // left top thingy
-			   (Vector2i(0, kTopBorderThickness), pic_lborder_,
+			   (Vector2i(0, kTopBorderThickness), style_.border_left(),
 			    Recti(Vector2i::zero(), kVerticalBorderThickness, kVerticalBorderThingyHeight));
 
 			int32_t pos = kTopBorderThickness + kVerticalBorderThingyHeight;
@@ -427,7 +405,7 @@ void Window::draw_border(RenderTarget& dst) {
 			static_assert(
 			   0 <= kVerticalBorderThingyHeight, "assert(0 <= kVerticalBorderThingyHeight) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += kVerticalBorderMiddleLength) {
-				dst.blitrect(Vector2i(0, pos), pic_lborder_,
+				dst.blitrect(Vector2i(0, pos), style_.border_left(),
 				             Recti(Vector2i(0, kVerticalBorderThingyHeight), kVerticalBorderThickness,
 				                   kVerticalBorderMiddleLength));
 			}
@@ -435,7 +413,7 @@ void Window::draw_border(RenderTarget& dst) {
 			//  odd pixels of left bar and left bottom thingy
 			const int32_t height = vt_bar_end - pos + kVerticalBorderThingyHeight;
 			assert(0 <= kVerticalBorderTotalLength - height);
-			dst.blitrect(Vector2i(0, pos), pic_lborder_,
+			dst.blitrect(Vector2i(0, pos), style_.border_left(),
 			             Recti(Vector2i(0, kVerticalBorderTotalLength - height),
 			                   kVerticalBorderThickness, height));
 		}
@@ -444,7 +422,7 @@ void Window::draw_border(RenderTarget& dst) {
 			const int32_t right_border_x = get_w() - kVerticalBorderThickness;
 
 			dst.blitrect  // right top thingy
-			   (Vector2i(right_border_x, kTopBorderThickness), pic_rborder_,
+			   (Vector2i(right_border_x, kTopBorderThickness), style_.border_right(),
 			    Recti(Vector2i::zero(), kVerticalBorderThickness, kVerticalBorderThingyHeight));
 
 			int32_t pos = kTopBorderThickness + kVerticalBorderThingyHeight;
@@ -453,14 +431,14 @@ void Window::draw_border(RenderTarget& dst) {
 			static_assert(
 			   0 <= kVerticalBorderThingyHeight, "assert(0 <= kVerticalBorderThingyHeight) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += kVerticalBorderMiddleLength) {
-				dst.blitrect(Vector2i(right_border_x, pos), pic_rborder_,
+				dst.blitrect(Vector2i(right_border_x, pos), style_.border_right(),
 				             Recti(Vector2i(0, kVerticalBorderThingyHeight), kVerticalBorderThickness,
 				                   kVerticalBorderMiddleLength));
 			}
 
 			// odd pixels of right bar and right bottom thingy
 			const int32_t height = vt_bar_end - pos + kVerticalBorderThingyHeight;
-			dst.blitrect(Vector2i(right_border_x, pos), pic_rborder_,
+			dst.blitrect(Vector2i(right_border_x, pos), style_.border_right(),
 			             Recti(Vector2i(0, kVerticalBorderTotalLength - height),
 			                   kVerticalBorderThickness, height));
 		}
@@ -469,12 +447,12 @@ void Window::draw_border(RenderTarget& dst) {
 			int32_t pos = kCornerWidth;
 
 			dst.blitrect  //  bottom left corner
-			   (Vector2i(0, get_h() - kBottomBorderThickness), pic_bottom_,
+			   (Vector2i(0, get_h() - kBottomBorderThickness), style_.border_bottom(),
 			    Recti(Vector2i::zero(), pos, kBottomBorderThickness));
 
 			//  bottom bar
 			for (; pos < hz_bar_end_minus_middle; pos += kHorizontalBorderMiddleLength) {
-				dst.blitrect(Vector2i(pos, get_h() - kBottomBorderThickness), pic_bottom_,
+				dst.blitrect(Vector2i(pos, get_h() - kBottomBorderThickness), style_.border_bottom(),
 				             Recti(Vector2i(kCornerWidth, 0), kHorizontalBorderMiddleLength,
 				                   kBottomBorderThickness));
 			}
@@ -482,7 +460,7 @@ void Window::draw_border(RenderTarget& dst) {
 			// odd pixels of bottom bar and bottom right corner
 			const int32_t width = hz_bar_end - pos + kCornerWidth;
 			dst.blitrect(
-			   Vector2i(pos, get_h() - kBottomBorderThickness), pic_bottom_,
+			   Vector2i(pos, get_h() - kBottomBorderThickness), style_.border_bottom(),
 			   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kBottomBorderThickness));
 		}
 

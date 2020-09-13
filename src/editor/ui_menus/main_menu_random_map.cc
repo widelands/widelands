@@ -42,7 +42,7 @@ constexpr uint8_t kMaxMapgenPlayers = 8;
 
 MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
                                            UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent, "random_map_menu", &registry, 400, 500, _("New Random Map")),
+   : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "random_map_menu", &registry, 400, 500, _("New Random Map")),
      // UI elements
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
@@ -504,7 +504,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	map->recalc_whole_map(egbase);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
 	UI::WLMessageBox mbox(
-	   &eia,
+	   &eia, UI::WindowStyle::kWui,
 	   /** TRANSLATORS: Window title. This is shown after a random map has been created in the
 	      editor.*/
 	   _("Random Map"),

@@ -433,7 +433,7 @@ bool FullscreenMenuInternetLobby::wait_for_ip() {
 			   _("Widelands was unable to get the IP address of the server in time. "
 			     "There seems to be a network problem, either on your side or on the side "
 			     "of the server.\n"));
-			UI::WLMessageBox mmb(this, _("Connection Timed Out"), warning,
+			UI::WLMessageBox mmb(this, UI::WindowStyle::kFsMenu, _("Connection Timed Out"), warning,
 			                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
 		}

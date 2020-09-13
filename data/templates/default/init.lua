@@ -66,12 +66,42 @@ return {
    minimum_font_size = 10,
    minimap_icon_frame = fs_font_color,
 
-   -- red, green, blue, alpha
-   window_border_focused = {220, 220, 250, 40},
-   window_border_unfocused = {50, 0, 0, 40},
    background_focused = {240, 240, 240, 200},
    background_semi_focused = {180, 180, 180, 200},
    focus_border_thickness = 2,
+
+   -- Windows
+   windows = {
+      fsmenu = {
+         -- red, green, blue, alpha
+         window_border_focused = {220, 220, 250, 40},
+         window_border_unfocused = {50, 0, 0, 40},
+         background        = dirname .. "fsmenu/windows/background.png",
+         border_top        = dirname .. "fsmenu/windows/top.png",
+         border_bottom     = dirname .. "fsmenu/windows/bottom.png",
+         border_right      = dirname .. "fsmenu/windows/right.png",
+         border_left       = dirname .. "fsmenu/windows/left.png",
+         button_close      = dirname .. "fsmenu/windows/close.png",
+         button_pin        = dirname .. "fsmenu/windows/pin.png",
+         button_unpin      = dirname .. "fsmenu/windows/unpin.png",
+         button_minimize   = dirname .. "fsmenu/windows/minimize.png",
+         button_unminimize = dirname .. "fsmenu/windows/maximize.png",
+      },
+      wui = {
+         window_border_focused = {220, 220, 250, 40},
+         window_border_unfocused = {50, 0, 0, 40},
+         background        = dirname .. "wui/windows/background.png",
+         border_top        = dirname .. "wui/windows/top.png",
+         border_bottom     = dirname .. "wui/windows/bottom.png",
+         border_right      = dirname .. "wui/windows/right.png",
+         border_left       = dirname .. "wui/windows/left.png",
+         button_close      = dirname .. "wui/windows/close.png",
+         button_pin        = dirname .. "wui/windows/pin.png",
+         button_unpin      = dirname .. "wui/windows/unpin.png",
+         button_minimize   = dirname .. "wui/windows/minimize.png",
+         button_unminimize = dirname .. "wui/windows/maximize.png",
+      },
+   },
 
    -- Buttons
    buttons = {

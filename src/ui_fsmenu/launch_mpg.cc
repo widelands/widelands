@@ -47,7 +47,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 	MapOrSaveSelectionWindow(UI::Panel* parent, GameController* gc, uint32_t w, uint32_t h)
 	   : /** TRANSLATORS: Dialog box title for selecting between map or saved game for new
 	        multiplayer game */
-	     Window(parent, "selection_window", 0, 0, w, h, _("Please select")),
+	     Window(parent, UI::WindowStyle::kFsMenu, "selection_window", 0, 0, w, h, _("Please select")),
 	     ctrl_(gc) {
 		center_to_parent();
 
@@ -337,7 +337,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		if (g_fs->is_directory(filename)) {
 			// Send a warning
 			UI::WLMessageBox warning(
-			   this, _("Saved Game is Directory"),
+			   this, UI::WindowStyle::kFsMenu, _("Saved Game is Directory"),
 			   _("WARNING:\n"
 			     "The saved game you selected is a directory."
 			     " This happens if you set the option ‘nozip’ to "

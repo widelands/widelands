@@ -9,7 +9,7 @@
 #include "logic/filesystem_constants.h"
 #include "ui_basic/messagebox.h"
 
-SavegameDeleter::SavegameDeleter(UI::Panel* parent) : parent_(parent) {
+SavegameDeleter::SavegameDeleter(UI::Panel* parent, UI::WindowStyle s) : parent_(parent), style_(s) {
 }
 
 bool SavegameDeleter::delete_savegames(const std::vector<SavegameData>& to_be_deleted) const {
@@ -30,7 +30,7 @@ bool SavegameDeleter::show_confirmation_window(const std::vector<SavegameData>& 
 	   (boost::format("%s\n%s") % confirmation_window_header % as_filename_list(selections)).str();
 
 	UI::WLMessageBox confirmationBox(
-	   parent_->get_parent()->get_parent(),
+	   parent_->get_parent()->get_parent(), style_,
 	   no_selections == 1 ? _("Confirm Deleting File") : _("Confirm Deleting Files"), message,
 	   UI::WLMessageBox::MBoxType::kOkCancel);
 	return confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
@@ -81,7 +81,7 @@ void SavegameDeleter::notify_deletion_failed(const std::vector<SavegameData>& to
 	std::string message = (boost::format("%s\n%s") % header % as_filename_list(to_be_deleted)).str();
 
 	UI::WLMessageBox msgBox(
-	   parent_->get_parent()->get_parent(), caption, message, UI::WLMessageBox::MBoxType::kOk);
+	   parent_->get_parent()->get_parent(), style_, caption, message, UI::WLMessageBox::MBoxType::kOk);
 	msgBox.run<UI::Panel::Returncodes>();
 }
 
@@ -99,7 +99,7 @@ std::string SavegameDeleter::create_header_for_deletion_failed_window(size_t no_
 	}
 }
 
-ReplayDeleter::ReplayDeleter(UI::Panel* parent) : SavegameDeleter(parent) {
+ReplayDeleter::ReplayDeleter(UI::Panel* parent, UI::WindowStyle s) : SavegameDeleter(parent, s) {
 }
 
 const std::string

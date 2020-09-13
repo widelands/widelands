@@ -30,6 +30,7 @@ constexpr int16_t kPadding = 4;
 
 FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
    : UI::Window(&fsmm,
+                UI::WindowStyle::kFsMenu,
                 "about",
                 (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
                 (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,

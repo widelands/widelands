@@ -44,7 +44,7 @@ constexpr int kMessageBodyY = kButtonSize + 3 * kPadding + kTableHeight;
 
 GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(
-        &plr, "messages", &registry, kWindowWidth, kWindowHeight, _("Messages: Inbox")),
+        &plr, UI::WindowStyle::kWui, "messages", &registry, kWindowWidth, kWindowHeight, _("Messages: Inbox")),
      message_body(this,
                   kPadding,
                   kMessageBodyY,

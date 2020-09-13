@@ -25,6 +25,7 @@
 #include <memory>
 
 #include "graphic/note_graphic_resolution_changed.h"
+#include "graphic/styles/window_style.h"
 
 namespace UI {
 /**
@@ -59,6 +60,7 @@ public:
 	/// Do not use richtext for 'title'.
 	/// Text conventions: Title Case for the 'title'
 	Window(Panel* parent,
+	       WindowStyle style,
 	       const std::string& name,
 	       int32_t x,
 	       int32_t y,
@@ -126,6 +128,8 @@ protected:
 private:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note);
 
+	const WindowStyleInfo& style_;
+
 	bool is_minimal_;
 	uint32_t oldh_;  // if it is minimized, this is the old height
 	bool dragging_, docked_left_, docked_right_, docked_bottom_;
@@ -134,12 +138,6 @@ private:
 	bool pinned_;
 
 	std::string title_;
-
-	const Image* pic_lborder_;
-	const Image* pic_rborder_;
-	const Image* pic_top_;
-	const Image* pic_bottom_;
-	const Image* pic_background_;
 
 	Panel* center_panel_;
 	Panel* fastclick_panel_;

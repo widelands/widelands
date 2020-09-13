@@ -495,7 +495,7 @@ void EditorInteractive::exit() {
 		if (SDL_GetModState() & KMOD_CTRL) {
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
-			UI::WLMessageBox mmb(this, _("Unsaved Map"),
+			UI::WLMessageBox mmb(this, UI::WindowStyle::kWui, _("Unsaved Map"),
 			                     _("The map has not been saved, do you really want to quit?"),
 			                     UI::WLMessageBox::MBoxType::kOkCancel);
 			if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {

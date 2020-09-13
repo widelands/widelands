@@ -32,7 +32,7 @@ inline EditorInteractive& EditorToolsizeMenu::eia() {
  */
 EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                                        UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
+   : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
      textarea_(this, 5, 10, 240, 10, std::string(), UI::Align::kCenter),
      increase_(this,
                "incr",

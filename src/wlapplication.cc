@@ -1164,7 +1164,7 @@ void WLApplication::mainmenu() {
 		if (message.size()) {
 			log_err("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
 
-			UI::WLMessageBox mmb(mm.get(), messagetitle, richtext_escape(message),
+			UI::WLMessageBox mmb(mm.get(), UI::WindowStyle::kFsMenu, messagetitle, richtext_escape(message),
 			                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
 
@@ -1334,7 +1334,7 @@ void WLApplication::mainmenu_multiplayer(const FullscreenMenuMain& mp, const boo
 			NetAddress addr;
 			if (!ns.get_host_address(&addr)) {
 				UI::WLMessageBox mmb(
-				   &ns, _("Invalid Address"),
+				   &ns, UI::WindowStyle::kFsMenu, _("Invalid Address"),
 				   _("The entered hostname or address is invalid and can’t be connected to."),
 				   UI::WLMessageBox::MBoxType::kOk);
 				mmb.run<UI::Panel::Returncodes>();
