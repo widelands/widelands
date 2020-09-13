@@ -43,8 +43,8 @@ private:
 	FullscreenMenuMain& parent_;
 
 	UI::Box box_;
-	UI::Button close_;
 	UI::FileViewPanel tabs_;
+	UI::Button close_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;

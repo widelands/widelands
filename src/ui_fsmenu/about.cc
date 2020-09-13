@@ -39,8 +39,8 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
                 _("About Widelands")),
      parent_(fsmm),
      box_(this, 0, 0, UI::Box::Vertical),
-     close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
-     tabs_(&box_, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
+     tabs_(&box_, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu),
+     close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")) {
 	try {
 		LuaInterface lua;
 		std::unique_ptr<LuaTable> t(lua.run_script("txts/ABOUT.lua"));
