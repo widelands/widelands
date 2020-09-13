@@ -19,6 +19,7 @@
 
 #include "ui_basic/progresswindow.h"
 
+#include <cstdlib>
 #include <memory>
 #ifndef _MSC_VER
 #include <sys/time.h>
@@ -35,20 +36,23 @@
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
 
-namespace {
-#define PROGRESS_STATUS_RECT_PADDING 2
-#define PROGRESS_STATUS_BORDER_X 2
-#define PROGRESS_STATUS_BORDER_Y 2
-#define PROGRESS_LABEL_POSITION_Y 90 /* in percents, from top */
-
-}  // namespace
+constexpr int16_t kProgressStatusRectPadding = 2;
+constexpr int16_t kProgressStatusBorderX = 2;
+constexpr int16_t kProgressStatusBorderY = 2;
+constexpr int16_t kProgressStatusPositionY = 90; /* in percents, from top */
 
 namespace UI {
 
 ProgressWindow::ProgressWindow(const std::string& background)
-   : UI::FullscreenWindow(),
+   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      label_center_(Vector2i::zero()),
      style_(g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu)) {
+
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged& message) {
+		   set_size(message.new_width, message.new_height);
+	   });
+
 	set_background(background);
 	step(_("Loading…"));
 }
@@ -70,20 +74,20 @@ void ProgressWindow::draw(RenderTarget& rt) {
 
 	// No float division to avoid Texture subsampling.
 	label_center_.x = get_w() / 2;
-	label_center_.y = get_h() * PROGRESS_LABEL_POSITION_Y / 100;
+	label_center_.y = get_h() * kProgressStatusPositionY / 100;
 
 	const uint32_t h = text_height(style_.font());
 
 	label_rectangle_.x = get_w() / 6;
 	label_rectangle_.w = get_w() * 2 / 3;
-	label_rectangle_.y = label_center_.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
-	label_rectangle_.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
+	label_rectangle_.y = label_center_.y - h / 2 - kProgressStatusRectPadding;
+	label_rectangle_.h = h + 2 * kProgressStatusRectPadding;
 
 	Recti border_rect = label_rectangle_;
-	border_rect.x -= PROGRESS_STATUS_BORDER_X;
-	border_rect.y -= PROGRESS_STATUS_BORDER_Y;
-	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;
-	border_rect.h += 2 * PROGRESS_STATUS_BORDER_Y;
+	border_rect.x -= kProgressStatusBorderX;
+	border_rect.y -= kProgressStatusBorderY;
+	border_rect.w += 2 * kProgressStatusBorderX;
+	border_rect.h += 2 * kProgressStatusBorderY;
 
 	rt.draw_rect(border_rect, style_.font().color());
 	// TODO(GunChleoc): this should depend on actual progress. Add a total steps variable and reuse

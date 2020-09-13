@@ -33,6 +33,7 @@ namespace UI {
  * A fullscreen window takes up the full screen; it has the size
  * g_gr->get_xres(), g_gr->get_yres()
  */
+// TODO(Nordfriese): Delete this class when the fsmenu conversion is complete
 class FullscreenWindow : public UI::Panel {
 public:
 	/// Access keys for frame overlay images

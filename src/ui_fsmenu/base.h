@@ -28,6 +28,7 @@
  * A fullscreen menu is a menu which takes the full screen
  * and it is a modal UI Element
  */
+// TODO(Nordfriese): Delete this class when the fsmenu conversion is complete
 class FullscreenMenuBase : public UI::FullscreenWindow {
 public:
 	enum class MenuTarget {

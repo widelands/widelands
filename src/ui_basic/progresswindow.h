@@ -20,11 +20,12 @@
 #ifndef WL_UI_BASIC_PROGRESSWINDOW_H
 #define WL_UI_BASIC_PROGRESSWINDOW_H
 
-#include "base/rect.h"
-#include "graphic/styles/progress_bar_style.h"
-#include "ui_basic/fullscreen_window.h"
+#include <memory>
 
-class RenderTarget;
+#include "base/rect.h"
+#include "graphic/note_graphic_resolution_changed.h"
+#include "graphic/styles/progress_bar_style.h"
+#include "ui_basic/panel.h"
 
 namespace UI {
 
@@ -42,7 +43,7 @@ struct IProgressVisualization {
 };
 
 /// Manages a progress window on the screen.
-struct ProgressWindow : public UI::FullscreenWindow {
+struct ProgressWindow : public UI::Panel {
 	explicit ProgressWindow(const std::string& background = std::string());
 	~ProgressWindow() override;
 
@@ -67,6 +68,9 @@ private:
 
 	void draw(RenderTarget&) override;
 	void update(bool repaint);
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 }  // namespace UI
 
