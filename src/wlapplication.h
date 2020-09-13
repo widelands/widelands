@@ -38,6 +38,8 @@
 
 #include "base/vector.h"
 
+class FullscreenMenuMain;
+
 namespace Widelands {
 class Game;
 }
@@ -173,7 +175,7 @@ struct WLApplication {
 	void mainmenu();
 	void mainmenu_tutorial();
 	void mainmenu_singleplayer();
-	void mainmenu_multiplayer();
+	void mainmenu_multiplayer(const FullscreenMenuMain&, bool internet);
 	void mainmenu_editor();
 
 	bool new_game();

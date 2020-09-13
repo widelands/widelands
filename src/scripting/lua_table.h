@@ -20,6 +20,7 @@
 #ifndef WL_SCRIPTING_LUA_TABLE_H
 #define WL_SCRIPTING_LUA_TABLE_H
 
+#include <cstdlib>
 #include <memory>
 #include <set>
 

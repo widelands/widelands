@@ -25,6 +25,7 @@
 #include <cstdio>
 #endif
 #endif
+#include <cstdlib>
 #include <cstring>
 
 #include <sys/stat.h>

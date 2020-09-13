@@ -19,6 +19,7 @@
 
 #include "ui_basic/window.h"
 
+#include <cstdlib>
 #include <memory>
 
 #include <SDL_mouse.h>

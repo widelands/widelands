@@ -19,6 +19,7 @@
 
 #include "logic/game.h"
 
+#include <cstdlib>
 #include <memory>
 #include <string>
 

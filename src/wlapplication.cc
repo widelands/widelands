@@ -23,6 +23,7 @@
 #ifndef _WIN32
 #include <csignal>
 #endif
+#include <cstdlib>
 #include <iostream>
 #include <memory>
 #include <regex>
@@ -75,16 +76,13 @@
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/campaigns.h"
 #include "ui_fsmenu/internet_lobby.h"
-#include "ui_fsmenu/intro.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
-#include "ui_fsmenu/multiplayer.h"
 #include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/scenario_select.h"
-#include "ui_fsmenu/singleplayer.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -493,11 +491,6 @@ void WLApplication::run() {
 		}
 	} else {
 		g_sh->change_music("intro");
-
-		{
-			FullscreenMenuIntro intro;
-			intro.run<FullscreenMenuBase::MenuTarget>();
-		}
 
 		g_sh->change_music("menu", 1000);
 		mainmenu();
@@ -1166,13 +1159,13 @@ void WLApplication::mainmenu() {
 	std::string messagetitle;
 	std::string message;
 
-	for (;;) {
-		FullscreenMenuMain mm;
+	std::unique_ptr<FullscreenMenuMain> mm(new FullscreenMenuMain(true));
 
+	for (;;) {
 		if (message.size()) {
 			log_err("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
 
-			UI::WLMessageBox mmb(&mm, messagetitle, richtext_escape(message),
+			UI::WLMessageBox mmb(mm.get(), messagetitle, richtext_escape(message),
 			                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
 
@@ -1180,35 +1173,61 @@ void WLApplication::mainmenu() {
 			messagetitle.clear();
 		}
 
+		bool need_to_reset = false;
+
 		try {
-			switch (mm.run<FullscreenMenuBase::MenuTarget>()) {
+			switch (mm->run<FullscreenMenuBase::MenuTarget>()) {
 			case FullscreenMenuBase::MenuTarget::kTutorial:
+				need_to_reset = true;
 				mainmenu_tutorial();
 				break;
-			case FullscreenMenuBase::MenuTarget::kSinglePlayer:
-				mainmenu_singleplayer();
+			case FullscreenMenuBase::MenuTarget::kNewGame:
+				need_to_reset = true;
+				new_game();
 				break;
-			case FullscreenMenuBase::MenuTarget::kMultiplayer:
-				mainmenu_multiplayer();
+			case FullscreenMenuBase::MenuTarget::kLoadGame:
+				need_to_reset = true;
+				load_game();
+				break;
+			case FullscreenMenuBase::MenuTarget::kCampaign:
+				need_to_reset = true;
+				campaign_game();
+				break;
+			case FullscreenMenuBase::MenuTarget::kMetaserver:
+				need_to_reset = true;
+				mainmenu_multiplayer(*mm, true);
+				break;
+			case FullscreenMenuBase::MenuTarget::kLan:
+				need_to_reset = true;
+				mainmenu_multiplayer(*mm, false);
+				break;
+			case FullscreenMenuBase::MenuTarget::kOnlineGameSettings:
+				mm->show_internet_login();
 				break;
 			case FullscreenMenuBase::MenuTarget::kReplay:
+				need_to_reset = true;
 				replay();
 				break;
 			case FullscreenMenuBase::MenuTarget::kOptions: {
-				Section& s = get_config_section();
-				OptionsCtrl om(s);
+				OptionsCtrl om(*mm, get_config_section());
+				mm->set_labels();  // update buttons for new language
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kAbout: {
-				FullscreenMenuAbout ff;
+				FullscreenMenuAbout ff(*mm);
 				ff.run<FullscreenMenuBase::MenuTarget>();
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kContinueLastsave: {
-				load_game(mm.get_filename_for_continue());
+				const std::string& file = mm->get_filename_for_continue();
+				if (!file.empty()) {
+					need_to_reset = true;
+					load_game(file);
+				}
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kEditor:
+				need_to_reset = true;
 				EditorInteractive::run_editor(filename_, script_to_run_);
 				break;
 			case FullscreenMenuBase::MenuTarget::kExit:
@@ -1241,6 +1260,9 @@ void WLApplication::mainmenu() {
 			             .str();
 		}
 #endif
+		if (need_to_reset) {
+			mm.reset(new FullscreenMenuMain(false));
+		}
 	}
 }
 
@@ -1270,119 +1292,66 @@ void WLApplication::mainmenu_tutorial() {
 }
 
 /**
- * Run the singleplayer menu
- */
-void WLApplication::mainmenu_singleplayer() {
-	//  This is the code returned by UI::Panel::run<Returncode>() when the panel is dying.
-	//  Make sure that the program exits when the window manager says so.
-	static_assert(static_cast<int>(FullscreenMenuBase::MenuTarget::kBack) ==
-	                 static_cast<int>(UI::Panel::Returncodes::kBack),
-	              "Panel should be dying.");
-
-	for (;;) {
-		FullscreenMenuSinglePlayer single_player_menu;
-		switch (single_player_menu.run<FullscreenMenuBase::MenuTarget>()) {
-		case FullscreenMenuBase::MenuTarget::kBack:
-			return;
-		case FullscreenMenuBase::MenuTarget::kNewGame:
-			if (new_game()) {
-				return;
-			}
-			break;
-		case FullscreenMenuBase::MenuTarget::kLoadGame:
-			if (load_game()) {
-				return;
-			}
-			break;
-		case FullscreenMenuBase::MenuTarget::kCampaign:
-			if (campaign_game()) {
-				return;
-			}
-			break;
-		default:
-			NEVER_HERE();
-		}
-	}
-}
-
-/**
  * Run the multiplayer menu
  */
-void WLApplication::mainmenu_multiplayer() {
-	FullscreenMenuBase::MenuTarget menu_result =
-	   FullscreenMenuBase::MenuTarget::kJoingame;  // dummy init;
-	for (;;) {                                     // stay in menu until player clicks "back" button
-		bool internet = false;
-		FullscreenMenuMultiPlayer mp;
-		switch (mp.run<FullscreenMenuBase::MenuTarget>()) {
-		case FullscreenMenuBase::MenuTarget::kBack:
-			return;
-		case FullscreenMenuBase::MenuTarget::kMetaserver:
-			internet = true;
-			break;
-		case FullscreenMenuBase::MenuTarget::kLan:
-			break;
-		default:
-			NEVER_HERE();
+void WLApplication::mainmenu_multiplayer(const FullscreenMenuMain& mp, const bool internet) {
+	g_sh->change_music("ingame", 1000);
+
+	if (internet) {
+		std::string playername = mp.get_nickname();
+		std::string password(mp.get_password());
+		bool registered = mp.registered();
+
+		get_config_string("nickname", playername);
+		// Only change the password if we use a registered account
+		if (registered) {
+			get_config_string("password_sha1", password);
 		}
 
-		g_sh->change_music("ingame", 1000);
+		// reinitalise in every run, else graphics look strange
+		FullscreenMenuInternetLobby ns(playername, password, registered);
+		ns.run<FullscreenMenuBase::MenuTarget>();
 
-		if (internet) {
-			std::string playername = mp.get_nickname();
-			std::string password(mp.get_password());
-			bool registered = mp.registered();
-
-			get_config_string("nickname", playername);
-			// Only change the password if we use a registered account
-			if (registered) {
-				get_config_string("password_sha1", password);
-			}
-
-			// reinitalise in every run, else graphics look strange
-			FullscreenMenuInternetLobby ns(playername, password, registered);
-			ns.run<FullscreenMenuBase::MenuTarget>();
-
-			if (InternetGaming::ref().logged_in()) {
-				// logout of the metaserver
-				InternetGaming::ref().logout();
-			} else {
-				// Reset InternetGaming for clean login
-				InternetGaming::ref().reset();
-			}
+		if (InternetGaming::ref().logged_in()) {
+			// logout of the metaserver
+			InternetGaming::ref().logout();
 		} else {
-			// reinitalise in every run, else graphics look strange
-			FullscreenMenuNetSetupLAN ns;
-			menu_result = ns.run<FullscreenMenuBase::MenuTarget>();
-			std::string playername = ns.get_playername();
-
-			switch (menu_result) {
-			case FullscreenMenuBase::MenuTarget::kHostgame: {
-				GameHost netgame(playername);
-				netgame.run();
-				break;
-			}
-			case FullscreenMenuBase::MenuTarget::kJoingame: {
-				NetAddress addr;
-				if (!ns.get_host_address(&addr)) {
-					UI::WLMessageBox mmb(
-					   &ns, _("Invalid Address"),
-					   _("The entered hostname or address is invalid and can’t be connected to."),
-					   UI::WLMessageBox::MBoxType::kOk);
-					mmb.run<UI::Panel::Returncodes>();
-					break;
-				}
-
-				GameClient netgame(std::make_pair(addr, NetAddress()), playername);
-				netgame.run();
-				break;
-			}
-			default:
-				break;
-			}
+			// Reset InternetGaming for clean login
+			InternetGaming::ref().reset();
 		}
-		g_sh->change_music("menu", 1000);
+	} else {
+		// reinitalise in every run, else graphics look strange
+		FullscreenMenuNetSetupLAN ns;
+		const FullscreenMenuBase::MenuTarget menu_result = ns.run<FullscreenMenuBase::MenuTarget>();
+		std::string playername = ns.get_playername();
+
+		switch (menu_result) {
+		case FullscreenMenuBase::MenuTarget::kHostgame: {
+			GameHost netgame(playername);
+			netgame.run();
+			break;
+		}
+		case FullscreenMenuBase::MenuTarget::kJoingame: {
+			NetAddress addr;
+			if (!ns.get_host_address(&addr)) {
+				UI::WLMessageBox mmb(
+				   &ns, _("Invalid Address"),
+				   _("The entered hostname or address is invalid and can’t be connected to."),
+				   UI::WLMessageBox::MBoxType::kOk);
+				mmb.run<UI::Panel::Returncodes>();
+				break;
+			}
+
+			GameClient netgame(std::make_pair(addr, NetAddress()), playername);
+			netgame.run();
+			break;
+		}
+		default:
+			break;
+		}
 	}
+
+	g_sh->change_music("menu", 1000);
 }
 
 /**
@@ -1455,9 +1424,9 @@ bool WLApplication::load_game(std::string filename) {
 
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
 	SinglePlayerGameSettingsProvider sp;
-	FullscreenMenuLoadGame ssg(game, &sp);
 
 	if (filename.empty()) {
+		FullscreenMenuLoadGame ssg(game, &sp);
 		if (ssg.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
 			filename = ssg.filename();
 		} else {

@@ -87,8 +87,7 @@ void FileViewPanel::layout() {
 	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
 
 	// If there is a border, we have less space for the contents
-	contents_width_ = std::max(
-	   0, panel_style_ == UI::PanelStyle::kFsMenu ? get_w() - padding_ : get_w() - 2 * padding_);
+	contents_width_ = std::max(0, get_w() - 2 * padding_);
 
 	contents_height_ = std::max(0, panel_style_ == UI::PanelStyle::kFsMenu ?
 	                                  get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :

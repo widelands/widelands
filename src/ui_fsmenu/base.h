@@ -39,9 +39,7 @@ public:
 
 		// Main menu
 		kTutorial,
-		kSinglePlayer,
 		kContinueLastsave,
-		kMultiplayer,
 		kReplay,
 		kEditor,
 		kOptions,
@@ -55,6 +53,7 @@ public:
 
 		// Multiplayer
 		kMetaserver,
+		kOnlineGameSettings,
 		kLan,
 
 		// Launch game
