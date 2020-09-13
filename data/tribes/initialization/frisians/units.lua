@@ -2101,6 +2101,14 @@ tribes:new_tribe {
    ship = "frisians_ship",
    ferry = "frisians_ferry",
    port = "frisians_port",
+
+   toolbar = {
+      left_corner = image_dirname .. "toolbar_left.png",
+      left = image_dirname .. "toolbar_main.png",
+      center = image_dirname .. "toolbar_center.png",
+      right = image_dirname .. "toolbar_main.png",
+      right_corner = image_dirname .. "toolbar_right.png"
+   }
 }
 
 pop_textdomain()
