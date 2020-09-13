@@ -20,7 +20,7 @@ def does_include_cstdlib(lines, fn):
 
         matches = []
         for match in FUNCTION_REGEX.findall(line):
-            matches.append(match[1])
+            matches.append(match[0])
 
         if matches and not includes_cstdlib:
             return [(fn, lineno,
