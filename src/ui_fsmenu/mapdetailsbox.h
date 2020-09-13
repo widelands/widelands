@@ -7,6 +7,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "wui/suggested_teams_box.h"
 
 class MapDetailsBox : public UI::Box {
 public:
@@ -32,9 +33,11 @@ public:
 private:
 	UI::Textarea title_;
 	UI::Box title_box_;
+	UI::Box content_box_;
 	UI::Textarea map_name_;
 	UI::Button select_map_;
 	UI::MultilineTextarea map_description_;
+	UI::SuggestedTeamsBox suggested_teams_box_;
 
 	void show_map_description(Widelands::Map& map, GameSettingsProvider* settings);
 	void show_map_description_savegame(const GameSettings& game_settings);

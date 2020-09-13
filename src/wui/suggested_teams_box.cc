@@ -128,7 +128,8 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 		}  // All lineups
 
 		// Adjust size to content
-		set_size(get_w(), teamlist_offset + lineup_counter * (label_height_));
+		//		set_size(get_w(), teamlist_offset + lineup_counter * (label_height_));
+		set_desired_size(get_w(), teamlist_offset + lineup_counter * (label_height_));
 	}
 }
 }  // namespace UI

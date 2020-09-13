@@ -484,7 +484,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	map_details.update(settings_, map);
 	filename_proof_ = settings_->settings().mapfilename;
 
-	suggested_teams_box_.show(map.get_suggested_teams());
+	//	suggested_teams_box_.show(map.get_suggested_teams());
 }
 
 /// Show help

@@ -95,7 +95,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
             "",
             UI::Align::kCenter,
             g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
-     suggested_teams_box_(&map_box_, 0, 0, UI::Box::Vertical, padding_, 0, 0, 0),
+     //     suggested_teams_box_(&map_box_, 0, 0, UI::Box::Vertical, padding_, 0, 0, 0),
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),
@@ -141,8 +141,8 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	map_box_.add_space(2 * padding_);
 	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	map_box_.add_space(5 * padding_);
-	map_box_.add(&suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
+	//	map_box_.add_space(5 * padding_);
+	//	map_box_.add(&suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
 	map_box_.add_inf_space();
 	map_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 	map_box_.add_space(2 * padding_);

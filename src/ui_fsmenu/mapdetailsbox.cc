@@ -1,4 +1,5 @@
 #include "ui_fsmenu/mapdetailsbox.h"
+#include <base/log.h>
 
 #include "graphic/image_cache.h"
 #include "map_io/map_loader.h"
@@ -15,6 +16,7 @@ MapDetailsBox::MapDetailsBox(
             UI::Align::kCenter,
             g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      title_box_(this, 0, 0, UI::Box::Horizontal),
+     content_box_(this, 0, 0, UI::Box::Vertical),
      map_name_(&title_box_,
                0,
                0,
@@ -32,21 +34,28 @@ MapDetailsBox::MapDetailsBox(
                  UI::ButtonStyle::kFsMenuSecondary,
                  g_image_cache->get("images/wui/menus/toggle_minimap.png"),
                  _("Change map or saved game")),
-     map_description_(this,
+     map_description_(&content_box_,
                       0,
                       0,
                       UI::Scrollbar::kSize,  // min width must be set to avoid assertion failure...
                       0,
                       UI::PanelStyle::kFsMenu,
-                      "") {
+                      "",
+                      UI::Align::kLeft,
+                      UI::MultilineTextarea::ScrollMode::kNoScrolling),
+     suggested_teams_box_(&content_box_, 0, 0, UI::Box::Vertical, 4, 0, 0, 0) {
+	content_box_.set_scrolling(true);
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
 	title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	title_box_.add_inf_space();
 	title_box_.add(&select_map_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	add(&title_box_, UI::Box::Resizing::kFullSize);
+	add(&content_box_, UI::Box::Resizing::kExpandBoth);
 	add_space(3 * padding);
-	add(&map_description_, UI::Box::Resizing::kExpandBoth);
+	content_box_.add(&map_description_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	//	content_box_.add_space(3 * padding);
+	content_box_.add(&suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
 }
 MapDetailsBox::~MapDetailsBox() {
 }
@@ -113,6 +122,9 @@ void MapDetailsBox::update(GameSettingsProvider* settings, Widelands::Map& map) 
 
 	show_map_name(game_settings);
 	show_map_description(map, settings);
+	suggested_teams_box_.show(map.get_suggested_teams());
+	log_dbg("showing teams: %d (%d, %d)", map.get_suggested_teams().size(),
+	        suggested_teams_box_.get_w(), suggested_teams_box_.get_h());
 }
 void MapDetailsBox::show_map_name(const GameSettings& game_settings) {
 	// Translate the map's name
@@ -153,7 +165,8 @@ void MapDetailsBox::force_new_dimensions(float scale,
 	map_name_.set_font_scale(scale);
 	map_name_.set_fixed_width(standard_element_width - standard_element_height);
 	select_map_.set_desired_size(standard_element_height, standard_element_height);
-	map_description_.set_desired_size(0, 4 * standard_element_height);
+	content_box_.set_max_size(standard_element_width, 6 * standard_element_height);
+	//	map_description_.set_desired_size(0, 4 * standard_element_height);
 	UI::Box::layout();
 }
 void MapDetailsBox::set_map_description_text(const std::string& text) {
