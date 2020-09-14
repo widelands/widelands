@@ -1472,7 +1472,7 @@ void Player::remove_seer(const MapObject& m, const Area<FCoords>& a) {
 }
 
 // Checks if any of our buildings or bobs, or one of one of our team mates, is seeing this node
-bool Player::should_see(const FCoords& f) const {
+bool Player::should_see(const FCoords& f, std::list<const MapObject*>& nearby_objects) const {
 	start_vision_benchmark(egbase_);
 	for (const PlayerNumber& p : team_player_) {
 		const Player& player = *egbase().get_player(p);
@@ -1480,23 +1480,23 @@ bool Player::should_see(const FCoords& f) const {
 			end_vision_benchmark(egbase_);
 			return true;
 		}
-		for (const MapObject* mo : player.seers_) {
-			if (mo->descr().type() >= MapObjectType::BUILDING) {
-				upcast(const Building, b, mo);
-				assert(b);
-				if (b->is_seeing() &&
-				    egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
-					end_vision_benchmark(egbase_);
-					return true;
-				}
-			} else {
-				// currently only buildings and bobs can see fields
-				upcast(const Bob, b, mo);
-				assert(b);
-				if (egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
-					end_vision_benchmark(egbase_);
-					return true;
-				}
+	}
+	for (const MapObject* mo : nearby_objects) {
+		if (mo->descr().type() >= MapObjectType::BUILDING) {
+			upcast(const Building, b, mo);
+			assert(b);
+			if (b->is_seeing() &&
+				egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
+				end_vision_benchmark(egbase_);
+				return true;
+			}
+		} else {
+			// currently only buildings and bobs can see fields
+			upcast(const Bob, b, mo);
+			assert(b);
+			if (egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
+				end_vision_benchmark(egbase_);
+				return true;
 			}
 		}
 	}
@@ -1506,12 +1506,18 @@ bool Player::should_see(const FCoords& f) const {
 
 void Player::update_vision(const FCoords& f, bool force_visible) {
 	start_vision_benchmark(egbase_);
+	update_vision(f, force_visible, seers_);
+	end_vision_benchmark(egbase_);
+}
+
+void Player::update_vision(const FCoords& f, bool force_visible, std::list<const MapObject*>& nearby_objects) {
+	start_vision_benchmark(egbase_);
 	if (!fields_ || egbase().objects().is_cleaning_up()) {
 		end_vision_benchmark(egbase_);
 		return;
 	}
 	Player::Field& field = fields_[egbase().map().get_index(f)];
-	if (force_visible || should_see(f)) {
+	if (force_visible || should_see(f, nearby_objects)) {
 		if (field.seeing != SeeUnseeNode::kVisible) {
 			field.seeing = SeeUnseeNode::kVisible;
 			rediscover_node(egbase().map(), f);
@@ -1546,15 +1552,50 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 		end_vision_benchmark(egbase_);
 		return;
 	}
+
+	std::list<std::pair<int, const MapObject*>> nearby_objects;
+	for (const PlayerNumber& p : team_player_) {
+		Player& player = *egbase().get_player(p);
+		for (const MapObject* seer : player.seers_) {
+			if (seer->descr().type() >= MapObjectType::BUILDING) {
+				upcast(const Building, b, seer);
+				assert(b);
+				if (b->is_seeing()) {
+					int dist = egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
+					if (dist <= area.radius) { // could be off-by-one -> verify
+						nearby_objects.push_back(std::make_pair(dist, b));
+					}
+				}
+			} else {
+				// currently only buildings and bobs can see fields
+				upcast(const Bob, b, seer);
+				assert(b);
+				int dist = egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
+				if (dist <= area.radius) { // could be off-by-one -> verify
+					nearby_objects.push_back(std::make_pair(dist, b));
+				}
+			}
+		}
+	}
+	// std::sort(nearby_objects.begin(), nearby_objects.end(),
+	//			[](std::pair<int, const MapObject*>& a, std::pair<int, const MapObject*>& b) { return a.first < b.first; });
+	nearby_objects.sort([](std::pair<int, const MapObject*>& a, std::pair<int, const MapObject*>& b) { return a.first < b.first; });
+	std::list<const MapObject*> nearby_objects_2;
+	std::transform(nearby_objects.begin(),
+	               nearby_objects.end(),
+	               std::back_inserter(nearby_objects_2),
+	               [](std::pair<int, const MapObject*>& pair) { return pair.second; });
+
 	for (const PlayerNumber& p : team_player_) {
 		Player& player = *egbase().get_player(p);
 		if (!player.fields_) {
+			log_err("++ !player.fields_\n");
 			end_vision_benchmark(egbase_);
 			return;
 		}
 		MapRegion<Area<FCoords>> mr(egbase().map(), area);
 		do {
-			player.update_vision(mr.location(), force_visible);
+			player.update_vision(mr.location(), force_visible, nearby_objects_2);
 		} while (mr.advance(egbase().map()));
 	}
 	end_vision_benchmark(egbase_);

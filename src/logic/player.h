@@ -639,11 +639,12 @@ private:
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */
 
-	bool should_see(const FCoords&) const;
+	bool should_see(const FCoords&, std::list<const MapObject*>& nearby_objects) const;
 	// Own bobs and buildings that are seeing fields in their vicinity
 	std::list<const MapObject*> seers_;
 
 	void update_vision(const FCoords&, bool force_visible);
+	void update_vision(const FCoords& f, bool force_visible, std::list<const MapObject*>& nearby_objects);
 	void update_vision_whole_map();
 	std::set<MapIndex> revealed_fields_;
 
