@@ -69,8 +69,8 @@ private:
 
 	std::map<std::string, const Image*> tribepics_;
 	std::map<std::string, std::string> tribenames_;
-	void update_clients(const GameSettings& settings);
-	void update_players(const GameSettings& settings);
+	void update_clients(/*const GameSettings& settings*/);
+	void update_players(/*const GameSettings& settings*/);
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MULTIPLAYERSETUPGROUP_H

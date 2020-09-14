@@ -676,8 +676,15 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 
 	playerbox.add(&scrollable_playerbox, Resizing::kExpandBoth);
 
-	subscriber_ =
-	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
+	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
+		if (n.action == NoteGameSettings::Action::kPlayer) {
+			update_players();
+		} else if (n.action == NoteGameSettings::Action::kUser) {
+			update_clients();
+		} else {
+			update();
+		}
+	});
 	update();
 }
 
@@ -685,13 +692,13 @@ MultiPlayerSetupGroup::~MultiPlayerSetupGroup() = default;
 
 /// Update which slots are available based on current settings.
 void MultiPlayerSetupGroup::update() {
-	const GameSettings& settings = settings_->settings();
 
-	update_clients(settings);
+	update_clients();
 
-	update_players(settings);
+	update_players();
 }
-void MultiPlayerSetupGroup::update_players(const GameSettings& settings) {
+void MultiPlayerSetupGroup::update_players() {
+	const GameSettings& settings = settings_->settings();
 	const size_t number_of_players = settings.players.size();
 	for (auto& p : multi_player_player_groups) {
 		p->die();
@@ -706,7 +713,8 @@ void MultiPlayerSetupGroup::update_players(const GameSettings& settings) {
 		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
 	}
 }
-void MultiPlayerSetupGroup::update_clients(const GameSettings& settings) {
+void MultiPlayerSetupGroup::update_clients() {
+	const GameSettings& settings = settings_->settings();
 	const size_t number_of_users = settings.users.size();
 	for (auto& c : multi_player_client_groups) {
 		c->die();
