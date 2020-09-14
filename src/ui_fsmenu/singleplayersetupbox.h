@@ -30,6 +30,7 @@
 #include "ui_basic/dropdown.h"
 #include "ui_fsmenu/singleplayerdropdown.h"
 
+// horizontal group
 class SinglePlayerActivePlayerGroup : public UI::Box {
 public:
 	SinglePlayerActivePlayerGroup(UI::Panel* const parent,
@@ -51,6 +52,7 @@ private:
 	SinglePlayerTeamDropdown teams_;
 };
 
+// vertical
 class SinglePlayerActivePlayerSetupBox : public UI::Box {
 
 public:

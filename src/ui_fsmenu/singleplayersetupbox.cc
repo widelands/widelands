@@ -45,20 +45,23 @@ SinglePlayerActivePlayerSetupBox::SinglePlayerActivePlayerSetupBox(
      settings_(settings) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
-	active_player_groups.resize(kMaxPlayers);
-	for (PlayerSlot i = 0; i < active_player_groups.size(); ++i) {
-		active_player_groups.at(i) =
-		   new SinglePlayerActivePlayerGroup(this, 0, standard_element_height, i, settings);
-		add(active_player_groups.at(i));
-	}
 
 	subscriber_ =
 	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
 }
 void SinglePlayerActivePlayerSetupBox::update() {
 
-	for (auto& active_player_group : active_player_groups) {
-		active_player_group->update();
+	const GameSettings& settings = settings_->settings();
+	const size_t number_of_players = settings.players.size();
+	for (auto& p : active_player_groups) {
+		p->die();
+	}
+	active_player_groups.clear();
+	active_player_groups.resize(number_of_players);
+
+	for (PlayerSlot i = 0; i < active_player_groups.size(); ++i) {
+		active_player_groups.at(i) = new SinglePlayerActivePlayerGroup(this, 0, 0, i, settings_);
+		add(active_player_groups.at(i));
 	}
 }
 
@@ -129,6 +132,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 
 	player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 	player_.set_enabled(false);
+	update();
 }
 void SinglePlayerActivePlayerGroup::force_new_dimensions(float, uint32_t standard_element_height) {
 	player_.set_desired_size(standard_element_height, standard_element_height);
@@ -140,13 +144,8 @@ void SinglePlayerActivePlayerGroup::force_new_dimensions(float, uint32_t standar
 
 void SinglePlayerActivePlayerGroup::update() {
 	const GameSettings& settings = settings_->settings();
-	if (id_ >= settings.players.size()) {
-		set_visible(false);
-		return;
-	}
 
 	player_type_.rebuild();
-	set_visible(true);
 
 	const PlayerSettings& player_setting = settings.players[id_];
 	player_.set_tooltip(player_setting.name.empty() ? "" : player_setting.name);
