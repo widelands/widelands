@@ -42,8 +42,9 @@ MapDetailsBox::MapDetailsBox(
                       UI::PanelStyle::kFsMenu,
                       "",
                       UI::Align::kLeft,
-                      UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     suggested_teams_box_(&content_box_, 0, 0, UI::Box::Vertical, 4, 0, 0, 0) {
+                      UI::MultilineTextarea::ScrollMode::kNoScrolling)
+//     suggested_teams_box_(&content_box_, 0, 0, UI::Box::Vertical, 4, 0, 0, 0)
+{
 	content_box_.set_scrolling(true);
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
@@ -51,11 +52,11 @@ MapDetailsBox::MapDetailsBox(
 	title_box_.add_inf_space();
 	title_box_.add(&select_map_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	add(&title_box_, UI::Box::Resizing::kFullSize);
-	add(&content_box_, UI::Box::Resizing::kExpandBoth);
 	add_space(3 * padding);
-	content_box_.add(&map_description_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	//	content_box_.add_space(3 * padding);
-	content_box_.add(&suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
+	add(&content_box_, UI::Box::Resizing::kExpandBoth);
+	content_box_.add(&map_description_, UI::Box::Resizing::kExpandBoth);
+	content_box_.add_space(3 * padding);
+	//	content_box_.add(&suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
 }
 MapDetailsBox::~MapDetailsBox() {
 }
@@ -122,9 +123,21 @@ void MapDetailsBox::update(GameSettingsProvider* settings, Widelands::Map& map) 
 
 	show_map_name(game_settings);
 	show_map_description(map, settings);
-	suggested_teams_box_.show(map.get_suggested_teams());
-	log_dbg("showing teams: %d (%d, %d)", map.get_suggested_teams().size(),
-	        suggested_teams_box_.get_w(), suggested_teams_box_.get_h());
+	if (!map.get_suggested_teams().empty()) {
+		suggested_teams_box_ =
+		   new UI::SuggestedTeamsBox(&content_box_, 0, 0, UI::Box::Vertical, 4, 0, 0, 0);
+		content_box_.add(suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
+		suggested_teams_box_->show(map.get_suggested_teams());
+	} else {
+		if (suggested_teams_box_) {
+			suggested_teams_box_->die();
+		}
+		suggested_teams_box_ = nullptr;
+	}
+
+	//	suggested_teams_box_.show(map.get_suggested_teams());
+	//	log_dbg("showing teams: %d (%d, %d)", map.get_suggested_teams().size(),
+	//	        suggested_teams_box_.get_w(), suggested_teams_box_.get_h());
 }
 void MapDetailsBox::show_map_name(const GameSettings& game_settings) {
 	// Translate the map's name
@@ -166,8 +179,14 @@ void MapDetailsBox::force_new_dimensions(float scale,
 	map_name_.set_fixed_width(standard_element_width - standard_element_height);
 	select_map_.set_desired_size(standard_element_height, standard_element_height);
 	content_box_.set_max_size(standard_element_width, 6 * standard_element_height);
-	//	map_description_.set_desired_size(0, 4 * standard_element_height);
-	UI::Box::layout();
+	//	content_box_.set_desired_size(standard_element_width, 6 * standard_element_height);
+	//	map_description_.set_desired_size(standard_element_width, 0);
+	//	map_description_.set_desired_size(standard_element_width - UI::Scrollbar::kSize, 0);
+	//	suggested_teams_box_.set_desired_size(standard_element_width - UI::Scrollbar::kSize, 0);
+	log_dbg("standard width/height: %d/%d", standard_element_width, standard_element_height);
+	//	log_dbg("content box: %dx%d, suggested: %dx%d, description: %dx%d", content_box_.get_w(),
+	//	        content_box_.get_h(), suggested_teams_box_.get_w(), suggested_teams_box_.get_h(),
+	//	        map_description_.get_w(), map_description_.get_h());
 }
 void MapDetailsBox::set_map_description_text(const std::string& text) {
 	map_description_.set_text(text);

@@ -171,6 +171,8 @@ void FullscreenMenuLaunchGame::layout() {
 	   scale_factor(), standard_element_width_, standard_element_height_);
 	map_box_.set_desired_size(standard_element_width_, 0);
 	win_condition_type.set_font_scale(scale_factor());
+	log_dbg("mapdetails %dx%d, map %dx%d", map_details.get_w(), map_details.get_h(),
+	        map_box_.get_w(), map_box_.get_h());
 }
 
 void FullscreenMenuLaunchGame::update_peaceful_mode() {
