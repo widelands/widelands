@@ -9,6 +9,21 @@ tribes:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "small",
 
+   enhancement = {
+      name = "atlanteans_trading_post",
+      enhancement_cost = {
+         planks = 4,
+         granite = 2,
+         diamond = 1,
+         spidercloth = 1,
+      },
+      enhancement_return_on_dismantle = {
+         planks = 2,
+         granite = 1,
+         spidercloth = 1
+      }
+   },
+
    buildcost = {
       log = 2,
       granite = 1
