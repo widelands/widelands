@@ -224,7 +224,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      numpad_diagonalscrolling_(
         &box_game_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
      showhide_info_(
-        &box_game_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu, _("Show / Hide default values")),
+        &box_game_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu, _("Show / Hide options for new games")),
      show_buildhelp_(&box_game_, Vector2i::zero(), _("Show Building Spaces")),
      show_census_(&box_game_, Vector2i::zero(), _("Show Census")),
      show_statistics_(&box_game_, Vector2i::zero(), _("Show Statistics")),
@@ -257,42 +257,42 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	// Interface
 	box_interface_.add(&box_interface_left_);
 	box_interface_.add(&translation_info_, UI::Box::Resizing::kExpandBoth);
-	box_interface_left_.add(&language_dropdown_);
-	box_interface_left_.add(&resolution_dropdown_);
-	box_interface_left_.add(&inputgrab_);
-	box_interface_left_.add(&sdl_cursor_);
+	box_interface_left_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
+	box_interface_left_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
+	box_interface_left_.add(&inputgrab_, UI::Box::Resizing::kFullSize);
+	box_interface_left_.add(&sdl_cursor_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&sb_maxfps_);
 
 	// Windows
-	box_windows_.add(&snap_win_overlap_only_);
-	box_windows_.add(&dock_windows_to_edges_);
-	box_windows_.add(&animate_map_panning_);
-	box_windows_.add(&sb_dis_panel_);
-	box_windows_.add(&sb_dis_border_);
+	box_windows_.add(&snap_win_overlap_only_, UI::Box::Resizing::kFullSize);
+	box_windows_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
+	box_windows_.add(&animate_map_panning_, UI::Box::Resizing::kFullSize);
+	box_windows_.add(&sb_dis_panel_, UI::Box::Resizing::kFullSize);
+	box_windows_.add(&sb_dis_border_, UI::Box::Resizing::kFullSize);
 
 	// Sound
-	box_sound_.add(&sound_options_);
+	box_sound_.add(&sound_options_, UI::Box::Resizing::kFullSize);
 
 	// Saving
 	box_saving_.add(&sb_autosave_);
 	box_saving_.add(&sb_rolling_autosave_);
-	box_saving_.add(&zip_);
-	box_saving_.add(&write_syncstreams_);
+	box_saving_.add(&zip_, UI::Box::Resizing::kFullSize);
+	box_saving_.add(&write_syncstreams_, UI::Box::Resizing::kFullSize);
 
 	// Game
-	box_game_.add(&auto_roadbuild_mode_);
-	box_game_.add(&transparent_chat_);
-	box_game_.add(&single_watchwin_);
-	box_game_.add(&ctrl_zoom_);
-	box_game_.add(&game_clock_);
-	box_game_.add(&numpad_diagonalscrolling_);
+	box_game_.add(&auto_roadbuild_mode_, UI::Box::Resizing::kFullSize);
+	box_game_.add(&transparent_chat_, UI::Box::Resizing::kFullSize);
+	box_game_.add(&single_watchwin_, UI::Box::Resizing::kFullSize);
+	box_game_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
+	box_game_.add(&game_clock_, UI::Box::Resizing::kFullSize);
+	box_game_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
 	box_game_.add(&showhide_info_);
-	box_game_.add(&show_buildhelp_);
-	box_game_.add(&show_census_);
-	box_game_.add(&show_statistics_);
-	box_game_.add(&show_soldier_levels_);
-	box_game_.add(&show_buildings_);
-	box_game_.add(&show_workarea_overlap_);
+	box_game_.add(&show_buildhelp_, UI::Box::Resizing::kFullSize);
+	box_game_.add(&show_census_, UI::Box::Resizing::kFullSize);
+	box_game_.add(&show_statistics_, UI::Box::Resizing::kFullSize);
+	box_game_.add(&show_soldier_levels_, UI::Box::Resizing::kFullSize);
+	box_game_.add(&show_buildings_, UI::Box::Resizing::kFullSize);
+	box_game_.add(&show_workarea_overlap_, UI::Box::Resizing::kFullSize);
 	// 800x600 needs a scrollbar
 	box_game_.set_force_scrolling(true);
 	showhide_info_.set_handle_mouse(false);
@@ -411,55 +411,25 @@ void FullscreenMenuOptions::layout() {
 
 		// Interface
 		box_interface_left_.set_desired_size(column_width + kPadding, tabs_.get_inner_h());
-		box_interface_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
-		language_dropdown_.set_desired_size(column_width, language_dropdown_.get_h());
 		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
 		                              3 * kPadding);
-		resolution_dropdown_.set_desired_size(column_width, resolution_dropdown_.get_h());
-		resolution_dropdown_.set_height(tabs_.get_h() - resolution_dropdown_.get_y() - buth -
-		                                3 * kPadding);
-
-		inputgrab_.set_desired_size(column_width, inputgrab_.get_h());
-		sdl_cursor_.set_desired_size(column_width, sdl_cursor_.get_h());
 		sb_maxfps_.set_unit_width(column_width / 2);
 		sb_maxfps_.set_desired_size(column_width, sb_maxfps_.get_h());
 
 		// Windows options
-		snap_win_overlap_only_.set_desired_size(tab_panel_width, snap_win_overlap_only_.get_h());
-		dock_windows_to_edges_.set_desired_size(tab_panel_width, dock_windows_to_edges_.get_h());
-		animate_map_panning_.set_desired_size(tab_panel_width, animate_map_panning_.get_h());
 		sb_dis_panel_.set_unit_width(200);
 		sb_dis_panel_.set_desired_size(tab_panel_width, sb_dis_panel_.get_h());
 		sb_dis_border_.set_unit_width(200);
 		sb_dis_border_.set_desired_size(tab_panel_width, sb_dis_border_.get_h());
-
-		// Sound options
-		sound_options_.set_desired_size(tab_panel_width, tabs_.get_inner_h());
 
 		// Saving options
 		sb_autosave_.set_unit_width(250);
 		sb_autosave_.set_desired_size(tab_panel_width, sb_autosave_.get_h());
 		sb_rolling_autosave_.set_unit_width(250);
 		sb_rolling_autosave_.set_desired_size(tab_panel_width, sb_rolling_autosave_.get_h());
-		zip_.set_desired_size(tab_panel_width, zip_.get_h());
-		write_syncstreams_.set_desired_size(tab_panel_width, write_syncstreams_.get_h());
 
 		// Game options
-		auto_roadbuild_mode_.set_desired_size(tab_panel_width, auto_roadbuild_mode_.get_h());
-		transparent_chat_.set_desired_size(tab_panel_width, transparent_chat_.get_h());
-		single_watchwin_.set_desired_size(tab_panel_width, single_watchwin_.get_h());
-		ctrl_zoom_.set_desired_size(tab_panel_width, ctrl_zoom_.get_h());
-		game_clock_.set_desired_size(tab_panel_width, game_clock_.get_h());
-		numpad_diagonalscrolling_.set_desired_size(
-		   tab_panel_width, numpad_diagonalscrolling_.get_h());
-
 		showhide_info_.set_desired_size(tab_panel_width, show_buildhelp_.get_h());
-		show_buildhelp_.set_desired_size(tab_panel_width, show_buildhelp_.get_h());
-		show_census_.set_desired_size(tab_panel_width, show_census_.get_h());
-		show_statistics_.set_desired_size(tab_panel_width, show_statistics_.get_h());
-		show_soldier_levels_.set_desired_size(tab_panel_width, show_soldier_levels_.get_h());
-		show_buildings_.set_desired_size(tab_panel_width, show_buildings_.get_h());
-		show_workarea_overlap_.set_desired_size(tab_panel_width, show_workarea_overlap_.get_h());
 	}
 	UI::Window::layout();
 }
