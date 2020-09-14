@@ -1483,8 +1483,8 @@ bool Player::should_see(const FCoords& f, std::list<const MapObject*>& nearby_ob
 	}
 	for (const MapObject* mo : nearby_objects) {
 		if (mo->descr().type() >= MapObjectType::BUILDING) {
-			upcast(const Building, b, mo);
-			assert(b);
+			assert(is_a(Building, mo));
+			const Building* b = static_cast<const Building*>(mo);
 			if (b->is_seeing() &&
 				egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
 				end_vision_benchmark(egbase_);
@@ -1492,8 +1492,8 @@ bool Player::should_see(const FCoords& f, std::list<const MapObject*>& nearby_ob
 			}
 		} else {
 			// currently only buildings and bobs can see fields
-			upcast(const Bob, b, mo);
-			assert(b);
+			assert(is_a(Bob, mo));
+			const Bob* b = static_cast<const Bob*>(mo);
 			if (egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
 				end_vision_benchmark(egbase_);
 				return true;
@@ -1558,8 +1558,8 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 		Player& player = *egbase().get_player(p);
 		for (const MapObject* seer : player.seers_) {
 			if (seer->descr().type() >= MapObjectType::BUILDING) {
-				upcast(const Building, b, seer);
-				assert(b);
+				assert(is_a(Building, seer));
+				const Building* b = static_cast<const Building*>(seer);
 				if (b->is_seeing()) {
 					int dist = egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
 					if (dist <= area.radius) { // could be off-by-one -> verify
@@ -1568,8 +1568,8 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 				}
 			} else {
 				// currently only buildings and bobs can see fields
-				upcast(const Bob, b, seer);
-				assert(b);
+				assert(is_a(Bob, seer));
+				const Bob* b = static_cast<const Bob*>(seer);
 				int dist = egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
 				if (dist <= area.radius) { // could be off-by-one -> verify
 					nearby_objects.push_back(std::make_pair(dist, b));
