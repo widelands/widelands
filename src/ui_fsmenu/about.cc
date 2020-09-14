@@ -32,12 +32,11 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
    : UI::Window(&fsmm,
                 UI::WindowStyle::kFsMenu,
                 "about",
-                (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
-                (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,
-                calc_desired_window_width(fsmm),
-                calc_desired_window_height(fsmm),
+                (fsmm.get_w() - fsmm.calc_desired_window_width("about")) / 2,
+                (fsmm.get_h() - fsmm.calc_desired_window_height("about")) / 2,
+                fsmm.calc_desired_window_width("about"),
+                fsmm.calc_desired_window_height("about"),
                 _("About Widelands")),
-     parent_(fsmm),
      box_(this, 0, 0, UI::Box::Vertical),
      tabs_(&box_, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu),
      close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")) {
@@ -57,9 +56,6 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
 		log_err("%s", err.what());
 	}
 
-	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged&) { layout(); });
-
 	close_.sigclicked.connect([this]() {
 		end_modal<MenuTarget>(MenuTarget::kBack);
 	});
@@ -68,8 +64,6 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
 	box_.add_space(kPadding);
 	box_.add(&close_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	box_.add_space(kPadding);
-
-	set_center_panel(&box_);
 
 	layout();
 	tabs_.load_tab_contents();
@@ -91,8 +85,8 @@ bool FullscreenMenuAbout::handle_key(bool down, SDL_Keysym code) {
 }
 
 void FullscreenMenuAbout::layout() {
-	if (!is_minimal()) {
-		set_size(calc_desired_window_width(parent_), calc_desired_window_height(parent_));
-	}
 	UI::Window::layout();
+	if (!is_minimal()) {
+		box_.set_size(get_inner_w(), get_inner_h());
+	}
 }

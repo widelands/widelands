@@ -69,8 +69,6 @@ private:
 	void clicked_hostgame();
 	void clicked_lasthost();
 
-	UI::Textarea title_;
-
 	UI::Box left_column_, right_column_;
 
 	// Left Column

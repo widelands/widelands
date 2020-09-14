@@ -26,7 +26,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 #include "ui_fsmenu/main.h"
 
@@ -84,7 +83,6 @@ protected:
 	UI::Checkbox peaceful_, custom_starting_positions_;
 	std::string last_win_condition_;
 	UI::Button ok_, back_;
-	UI::Textarea title_;
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;
 

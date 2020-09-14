@@ -21,7 +21,6 @@
 #define WL_UI_FSMENU_CAMPAIGN_SELECT_H
 
 #include "ui_basic/table.h"
-#include "ui_basic/textarea.h"
 #include "ui_fsmenu/campaigndetails.h"
 #include "ui_fsmenu/campaigns.h"
 #include "ui_fsmenu/load_map_or_game.h"
@@ -50,7 +49,6 @@ private:
 
 	UI::Table<uintptr_t const> table_;
 
-	UI::Textarea title_;
 	CampaignDetails campaign_details_;
 
 	Campaigns* campaigns_;

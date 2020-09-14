@@ -34,16 +34,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
      main_box_(this, 0, 0, UI::Box::Vertical),
      info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
 
-     // Main title
-     title_(&main_box_,
-            0,
-            0,
-            0,
-            0,
-            is_replay ? _("Choose a replay") : _("Choose a saved game"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
-
      load_or_save_(&info_box_,
                    g,
                    is_replay ?
@@ -60,8 +50,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 	main_box_.set_size(get_w(), get_w());
 
 	main_box_.add_space(padding_);
-	main_box_.add_inf_space();
-	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	main_box_.add_inf_space();
 	if (is_replay_) {
 		show_filenames_ = new UI::Checkbox(&main_box_, Vector2i::zero(), _("Show Filenames"));

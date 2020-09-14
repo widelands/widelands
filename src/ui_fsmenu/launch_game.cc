@@ -23,7 +23,6 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/warning.h"
 #include "base/wexception.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -39,10 +38,10 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm, Gam
    : UI::Window(&fsmm,
                 UI::WindowStyle::kFsMenu,
                 "launch_game",
-                (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
-                (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,
-                calc_desired_window_width(fsmm),
-                calc_desired_window_height(fsmm),
+                (fsmm.get_w() - fsmm.calc_desired_window_width("launch_game")) / 2,
+                (fsmm.get_h() - fsmm.calc_desired_window_height("launch_game")) / 2,
+                fsmm.calc_desired_window_width("launch_game"),
+                fsmm.calc_desired_window_height("launch_game"),
                 _("Launch Game")),
                 fsmm_(fsmm),
 
@@ -67,15 +66,6 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm, Gam
                                 _("Custom starting positions")),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
-     // Text labels
-     title_(this,
-            get_w() / 2,
-            get_h() / 25,
-            0,
-            0,
-            "",
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),

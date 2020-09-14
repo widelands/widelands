@@ -37,17 +37,13 @@ public:
 
 	bool handle_key(bool, SDL_Keysym) override;
 
-private:
+protected:
 	void layout() override;
 
-	FullscreenMenuMain& parent_;
-
+private:
 	UI::Box box_;
 	UI::FileViewPanel tabs_;
 	UI::Button close_;
-
-	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
-	   graphic_resolution_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_ABOUT_H

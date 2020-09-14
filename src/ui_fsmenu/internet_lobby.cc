@@ -47,16 +47,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsm
                                                          bool registered)
    : FullscreenMenuLoadMapOrGame(fsmm, _("Metaserver Lobby")),
      fsmm_(fsmm),
-     // Main title
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("Metaserver Lobby"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
-
      // Boxes
      left_column_(this, 0, 0, UI::Box::Vertical),
      right_column_(this, 0, 0, UI::Box::Vertical),
@@ -182,9 +172,6 @@ void FullscreenMenuInternetLobby::layout() {
 
 	tabley_ = tabley_ / 2;
 	tableh_ += tabley_;
-
-	title_.set_size(get_w(), title_.get_h());
-	title_.set_pos(Vector2i(0, tabley_ / 3));
 
 	left_column_.set_size(tablew_, tableh_);
 	left_column_.set_pos(Vector2i(tablex_, tabley_));

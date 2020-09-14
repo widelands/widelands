@@ -60,6 +60,9 @@ public:
 	// Set the labels for all buttons etc. This needs to be called after language switching.
 	void set_labels();
 
+	int16_t calc_desired_window_width(const std::string& window_name);
+	int16_t calc_desired_window_height(const std::string& window_name);
+
 private:
 	void layout() override;
 
@@ -102,9 +105,9 @@ private:
 	std::string password_;
 	bool auto_log_;
 	bool register_;
-};
 
-int16_t calc_desired_window_width(const FullscreenMenuMain& parent);
-int16_t calc_desired_window_height(const FullscreenMenuMain& parent);
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
+};
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H

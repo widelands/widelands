@@ -44,15 +44,6 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
      table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      header_box_(this, 0, 0, UI::Box::Vertical),
 
-     // Main title
-     title_(&header_box_,
-            0,
-            0,
-            0,
-            0,
-            is_tutorial_ ? _("Choose a tutorial") : _("Choose a scenario"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      subtitle_(&header_box_,
                0,
                0,
@@ -98,8 +89,6 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 
 	header_box_.add_inf_space();
 	header_box_.add_inf_space();
-	header_box_.add_inf_space();
-	header_box_.add(&title_, UI::Box::Resizing::kFullSize);
 	header_box_.add_inf_space();
 	header_box_.add(&subtitle_, UI::Box::Resizing::kFullSize);
 	header_box_.add_inf_space();

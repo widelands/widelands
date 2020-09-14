@@ -42,16 +42,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm, GameS
      checkbox_space_(20),
      // Less padding for big fonts; space is tight.
      checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
-
-     // Main title
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("Choose a map"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
      table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      map_details_(this,
@@ -169,10 +159,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm, GameS
 }
 
 void FullscreenMenuMapSelect::layout() {
-	title_.set_size(get_w(), title_.get_h());
 	FullscreenMenuLoadMapOrGame::layout();
 	checkboxes_y_ = tabley_ - 3 * (team_tags_dropdown_->get_h() + checkbox_padding_) - 2 * padding_;
-	title_.set_pos(Vector2i(0, checkboxes_y_ / 3));
 	checkboxes_.set_pos(Vector2i(tablex_, checkboxes_y_));
 	checkboxes_.set_size(get_w() - 2 * tablex_, tabley_ - checkboxes_y_);
 	table_.set_size(tablew_, tableh_);

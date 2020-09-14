@@ -112,7 +112,6 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm, GameS
 	win_condition_dropdown_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 4 / 10 + buth_));
 	win_condition_dropdown_.set_size(select_map_.get_w(), win_condition_dropdown_.get_h());
 
-	title_.set_text(_("Launch Game"));
 	select_map_.sigclicked.connect([this]() { select_map(); });
 
 	uint32_t y = get_h() * 3 / 10 - buth_;
@@ -137,6 +136,8 @@ FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
 }
 
 void FullscreenMenuLaunchSPG::layout() {
+	FullscreenMenuLaunchGame::layout();
+
 	// TODO(GunChleoc): Implement when we have redesigned this
 }
 

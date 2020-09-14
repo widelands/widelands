@@ -44,12 +44,12 @@ constexpr uint32_t kImageExchangeDuration = 2500;
 
 constexpr uint32_t kNoSplash = std::numeric_limits<uint32_t>::max();
 
-int16_t calc_desired_window_width(const FullscreenMenuMain& parent) {
-	return std::max(600, parent.get_w() / 2);
+int16_t FullscreenMenuMain::calc_desired_window_width(const std::string& window_name) {
+	return (window_name == "options" || window_name == "about") ? std::max(600, get_w() / 2) : std::max(700, get_w() * 7 / 8);
 }
 
-int16_t calc_desired_window_height(const FullscreenMenuMain& parent) {
-	return std::max(400, parent.get_h() / 2);
+int16_t FullscreenMenuMain::calc_desired_window_height(const std::string& window_name) {
+	return (window_name == "options" || window_name == "about") ? std::max(400, get_h() / 2) : std::max(500, get_h() * 4 / 5);
 }
 
 FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
@@ -112,6 +112,12 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
      last_image_(0),
      visible_(true),
      auto_log_(false) {
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged& message) {
+		   set_size(message.new_width, message.new_height);
+		   layout();
+	   });
+
 	singleplayer_.selected.connect(
 	   [this]() { end_modal<MenuTarget>(singleplayer_.get_selected()); });
 	multiplayer_.selected.connect([this]() {
@@ -512,6 +518,27 @@ void FullscreenMenuMain::layout() {
 	vbox2_.set_pos(Vector2i(box_rect_.x + (box_rect_.w + padding_) / 2, box_rect_.y));
 	vbox1_.set_size((box_rect_.w - padding_) / 2, box_rect_.h);
 	vbox2_.set_size((box_rect_.w - padding_) / 2, box_rect_.h);
+
+	// Tell child windows to update their size if necessary
+	for (UI::Panel* p = get_first_child(); p; p = p->get_next_sibling()) {
+		if (upcast(UI::Window, w, p)) {
+			const bool minimal = w->is_minimal();
+			if (minimal) {
+				// make sure the new size is set even if the window is minimal…
+				w->restore();
+			}
+
+			const int16_t desired_w = calc_desired_window_width(w->get_name());
+			const int16_t desired_h = calc_desired_window_height(w->get_name());
+			w->set_size(desired_w, desired_h);
+			w->set_pos(Vector2i(std::min(get_w() - desired_w, w->get_x()), std::min(get_h() - desired_h, w->get_y())));
+
+			if (minimal) {
+				// …and then make it minimal again if it was minimal before
+				w->minimize();
+			}
+		}
+	}
 }
 
 /// called if the user is not registered

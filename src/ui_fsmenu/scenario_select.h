@@ -55,7 +55,6 @@ private:
 
 	UI::Box header_box_;
 
-	UI::Textarea title_;
 	UI::MultilineTextarea subtitle_;
 	ScenarioDetails scenario_details_;
 	UI::Textarea scenario_difficulty_header_;

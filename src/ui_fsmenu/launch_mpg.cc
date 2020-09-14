@@ -173,7 +173,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm, GameS
 	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240 - buth_ - padding_));
 	ok_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 
-	title_.set_text(_("Multiplayer Game Setup"));
 	change_map_or_save_.sigclicked.connect([this]() { change_map_or_save(); });
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
 
@@ -209,6 +208,8 @@ FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
 }
 
 void FullscreenMenuLaunchMPG::layout() {
+	FullscreenMenuLaunchGame::layout();
+
 	// TODO(GunChleoc): Implement when we have redesigned this
 }
 

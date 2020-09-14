@@ -28,16 +28,6 @@
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
    : FullscreenMenuLoadMapOrGame(fsmm, _("Begin LAN Game")),
-     // Main title
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("Begin Network Game"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
-
      // Boxes
      left_column_(this, 0, 0, UI::Box::Vertical),
      right_column_(this, 0, 0, UI::Box::Vertical),
@@ -130,9 +120,6 @@ void FullscreenMenuNetSetupLAN::layout() {
 
 	butw_ = get_w() - right_column_x_ - right_column_margin_;
 	const int colum_header_h = label_opengames_.get_h() + padding_;
-
-	title_.set_size(get_w(), title_.get_h());
-	title_.set_pos(Vector2i(0, (tabley_ - colum_header_h) / 3));
 
 	left_column_.set_size(tablew_, tableh_ + colum_header_h);
 	left_column_.set_pos(Vector2i(tablex_, tabley_ - colum_header_h));

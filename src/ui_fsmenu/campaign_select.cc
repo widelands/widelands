@@ -31,16 +31,6 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& f
    : FullscreenMenuLoadMapOrGame(fsmm, _("Choose Campaign")),
      table_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
-     // Main Title
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("Choose a campaign"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
-
      // Campaign description
      campaign_details_(this),
      campaigns_(campvis) {
@@ -69,8 +59,6 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& f
 
 void FullscreenMenuCampaignSelect::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
-	title_.set_pos(Vector2i(0, tabley_ / 3));
-	title_.set_size(get_w(), title_.get_h());
 	table_.set_size(tablew_, tableh_);
 	table_.set_pos(Vector2i(tablex_, tabley_));
 	campaign_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);

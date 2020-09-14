@@ -61,8 +61,6 @@ private:
 
 	FullscreenMenuMain& fsmm_;
 
-	UI::Textarea title_;
-
 	UI::Box left_column_, right_column_;
 
 	// Left Column
