@@ -45,6 +45,7 @@
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
+#include "sound/sound_handler.h"
 
 namespace Widelands {
 Descriptions::Descriptions(LuaInterface* lua)
@@ -79,6 +80,12 @@ Descriptions::Descriptions(LuaInterface* lua)
 	description_manager_->register_directory("world", g_fs, false);
 
 	// We register tribes on demand in load_tribe for performance reasons
+}
+
+Descriptions::~Descriptions() {
+	if (g_sh != nullptr) {
+		g_sh->remove_fx_set(SoundType::kAmbient);
+	}
 }
 
 const DescriptionMaintainer<CritterDescr>& Descriptions::critters() const {

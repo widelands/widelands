@@ -47,7 +47,7 @@ class WorkerDescr;
 class Descriptions {
 public:
 	Descriptions(LuaInterface* lua);
-	~Descriptions() = default;
+	~Descriptions();
 
 	const DescriptionMaintainer<CritterDescr>& critters() const;
 	const DescriptionMaintainer<TerrainDescription>& terrains() const;
