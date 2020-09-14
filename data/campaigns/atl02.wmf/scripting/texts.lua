@@ -34,7 +34,7 @@ end
 obj_find_port = {
    name = "obj_find_port",
    title = _ "Find a place to build a port",
-   number = 4,
+   number = 1,
    body = objective_text(_"Find a portspace",
    p(_[[To set foot on this island we first must find a building space where a port can be built. Explore the nearby coast line to find such a building plot.]]))
 }
@@ -58,7 +58,7 @@ obj_tools = {
 obj_mining = {
    name = "obj_mining",
    title = _ "Explore the mountains for ressources",
-   number = 1,
+   number = 3,
    body = objective_text(_"Build Mines",
       p(_[[As we are able to make tools again, our supply of mining ressources needs to be replenished soon. Explore the mountains and build at least one mine of each type to mine coal, iron and gold.]]))
 }
@@ -73,7 +73,7 @@ obj_explore = {
 obj_spidercloth = {
    name = "obj_spidercloth_production",
    title = _"Build a spider farm and a weaving mill",
-   number = 3,
+   number = 2,
    body = objective_text(_"Spidercloth Production",
       p(_[[We need some spidercloth urgently as we are running out of it. So it is essential to spare every piece we still have. Reduce the input of all buildings that consume spidercloth. Don't forget the constructionsites.]]) ..
       p(_[[After that we need to have a farm under all circumstances as it needs spidercloth to be build. Additionally we need a spiderfarm and a weaving mill. Later on a gold spinning mill would be helpful as well.]]))
@@ -155,7 +155,7 @@ spidercloth_1 = {
        body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
          _([[May Satul warm you too, Opol. I wanted to delay production of spidercloth, but I understand the urgency. We need to build a complete spidercloth production instantly.]]))
-         ..  new_objectives(obj_spidercloth_production)
+         .. new_objectives(obj_spidercloth_production)
    }
 }
 

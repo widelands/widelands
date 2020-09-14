@@ -31,13 +31,14 @@ function mining()
 end
 
 function spidercloth()
+   sleep(180000)
    while count_in_warehouses("spidercloth") > 2 do sleep(2323) end
+   local cloth = add_campaign_objective(obj_spidercloth)
    msg_boxes(spidercloth_1)
 
    if #p1:get_buildings("atlanteans_farm") < 1 then
       msg_boxes(spidercloth_2)
    end
-   local cloth = add_campaign_objective(obj_spidercloth)
 
    while not check_for_buildings(p1, {
       atlanteans_farm = 1,
