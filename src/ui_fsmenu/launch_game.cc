@@ -46,13 +46,14 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm, Gam
                 fsmm_(fsmm),
 
      // Values for alignment and size
-     butw_(get_w() / 4),
-     buth_(get_h() * 9 / 200),
+     butw_(get_inner_w() / 4),
+     buth_(get_inner_h() * 9 / 200),
 
+     // TODO(Nordfriese): *Insert remark about the ugliness of magic numbers and the benefits of box layout here*
      win_condition_dropdown_(this,
                              "dropdown_wincondition",
-                             get_w() * 7 / 10,
-                             get_h() * 4 / 10 + buth_,
+                             get_inner_w() * 7 / 10,
+                             get_inner_h() * 4 / 10 + buth_,
                              butw_,
                              10,  // max number of items
                              buth_,
@@ -60,9 +61,9 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm, Gam
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
-     peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
+     peaceful_(this, Vector2i(get_inner_w() * 7 / 10, get_inner_h() * 19 / 40 + buth_), _("Peaceful mode")),
      custom_starting_positions_(this,
-                                Vector2i(get_w() * 7 / 10, get_h() * 21 / 40 + buth_),
+                                Vector2i(get_inner_w() * 7 / 10, get_inner_h() * 21 / 40 + buth_),
                                 _("Custom starting positions")),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
@@ -82,6 +83,23 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm, Gam
 
 FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 	delete lua_;
+}
+
+bool FullscreenMenuLaunchGame::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			clicked_ok();
+			return true;
+		case SDLK_ESCAPE:
+			clicked_back();
+			return true;
+		default:
+			break;
+		}
+	}
+	return UI::Window::handle_key(down, code);
 }
 
 void FullscreenMenuLaunchGame::update_peaceful_mode() {

@@ -41,6 +41,8 @@ public:
 	FullscreenMenuLaunchGame(FullscreenMenuMain&, GameSettingsProvider*, GameController*);
 	~FullscreenMenuLaunchGame() override;
 
+	bool handle_key(bool, SDL_Keysym) override;
+
 protected:
 	virtual void clicked_ok();
 	virtual void clicked_back();

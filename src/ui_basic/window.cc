@@ -345,7 +345,7 @@ void Window::draw_border(RenderTarget& dst) {
 	const int32_t hz_bar_end = get_w() - kCornerWidth;
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - kHorizontalBorderMiddleLength;
 
-	const RGBAColor& focus_color = get_parent() && get_parent()->focused_child() == this ?
+	const RGBAColor& focus_color = (get_parent() && get_parent()->focused_child() == this) || is_modal() ?
 	                                  style_.window_border_focused() :
 	                                  style_.window_border_unfocused();
 

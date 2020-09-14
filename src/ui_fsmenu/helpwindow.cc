@@ -75,13 +75,13 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
  *
  * Clicking the right mouse button inside the window acts like pressing Ok.
  */
-bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		clicked_ok();
 		return true;
 	}
-	return false;
+	return UI::Window::handle_mousepress(btn, x, y);
 }
 
 bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code) {
@@ -92,10 +92,10 @@ bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code) {
 			clicked_ok();
 			return true;
 		default:
-			return true;  // handled
+			break;
 		}
 	}
-	return true;
+	return UI::Window::handle_key(down, code);
 }
 
 void FullscreenHelpWindow::clicked_ok() {

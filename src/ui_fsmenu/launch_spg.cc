@@ -39,11 +39,12 @@
 FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm, GameSettingsProvider* const settings,
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
+     // TODO(Nordfriese): Magic numbers everywhere. Box layout please…
      // Buttons
      select_map_(this,
                  "select_map",
-                 get_w() * 7 / 10,
-                 get_h() * 3 / 10,
+                 get_inner_w() * 7 / 10,
+                 get_inner_h() * 3 / 10,
                  butw_,
                  buth_,
                  UI::ButtonStyle::kFsMenuSecondary,
@@ -51,41 +52,41 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm, GameS
 
      // Text labels
      mapname_(this,
-              get_w() * 7 / 10 + butw_ / 2,
-              get_h() * 53 / 200 - 15,
+              get_inner_w() * 7 / 10 + butw_ / 2,
+              get_inner_h() * 53 / 200 - 15,
               0,
               0,
               std::string(),
               UI::Align::kCenter),
-     name_(this, get_w() * 1 / 25, get_h() * 53 / 200 - 15, 0, 0, _("Player’s name")),
+     name_(this, get_inner_w() * 1 / 25, get_inner_h() * 53 / 200 - 15, 0, 0, _("Player’s name")),
      type_(this,
            // (Element x) + (PlayerDescriptionGroup x)  + border
-           ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2,
-           get_h() * 53 / 200 - 15,
+           ((get_inner_w() * 16 / 25) * 35 / 125) + (get_inner_w() / 25) + 2,
+           get_inner_h() * 53 / 200 - 15,
            0,
            0,
            _("Player’s type")),
      team_(this,
-           ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2,
-           get_h() * 53 / 200,
+           ((get_inner_w() * 16 / 25) * 35 / 125) + (get_inner_w() / 25) + 2,
+           get_inner_h() * 53 / 200,
            0,
            0,
            _("Team")),
      tribe_(this,
-            ((get_w() * 16 / 25) * 80 / 125) + (get_w() / 25) + 2,
-            get_h() * 53 / 200 - 15,
+            ((get_inner_w() * 16 / 25) * 80 / 125) + (get_inner_w() / 25) + 2,
+            get_inner_h() * 53 / 200 - 15,
             0,
             0,
             _("Player’s tribe")),
      init_(this,
-           ((get_w() * 16 / 25) * 55 / 125) + (get_w() / 25) + 2,
-           get_h() * 53 / 200,
+           ((get_inner_w() * 16 / 25) * 55 / 125) + (get_inner_w() / 25) + 2,
+           get_inner_h() * 53 / 200,
            0,
            0,
            _("Start type")),
      wincondition_type_(this,
-                        get_w() * 7 / 10 + (butw_ / 2),
-                        get_h() * 7 / 20 + buth_,
+                        get_inner_w() * 7 / 10 + (butw_ / 2),
+                        get_inner_h() * 7 / 20 + buth_,
                         0,
                         0,
                         _("Type of game"),
@@ -107,25 +108,25 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm, GameS
 		}
 	});
 
-	ok_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 9 / 10));
-	back_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 17 / 20));
-	win_condition_dropdown_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 4 / 10 + buth_));
+	ok_.set_pos(Vector2i(get_inner_w() * 7 / 10, get_inner_h() * 9 / 10));
+	back_.set_pos(Vector2i(get_inner_w() * 7 / 10, get_inner_h() * 17 / 20));
+	win_condition_dropdown_.set_pos(Vector2i(get_inner_w() * 7 / 10, get_inner_h() * 4 / 10 + buth_));
 	win_condition_dropdown_.set_size(select_map_.get_w(), win_condition_dropdown_.get_h());
 
 	select_map_.sigclicked.connect([this]() { select_map(); });
 
-	uint32_t y = get_h() * 3 / 10 - buth_;
+	uint32_t y = get_inner_h() * 3 / 10 - buth_;
 	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
 		const Image* player_image = playercolor_image(i, "images/players/player_position_menu.png");
 		assert(player_image);
 
 		pos_[i] =
-		   new UI::Button(this, "switch_to_position", get_w() / 100, y += buth_, get_h() * 17 / 500,
-		                  get_h() * 17 / 500, UI::ButtonStyle::kFsMenuSecondary, player_image,
+		   new UI::Button(this, "switch_to_position", get_inner_w() / 100, y += buth_, get_inner_h() * 17 / 500,
+		                  get_inner_h() * 17 / 500, UI::ButtonStyle::kFsMenuSecondary, player_image,
 		                  _("Switch to position"));
 		pos_[i]->sigclicked.connect([this, i]() { switch_to_position(i); });
 		players_[i] = new PlayerDescriptionGroup(
-		   this, get_w() / 25, y, get_w() * 16 / 25, get_h() * 17 / 500 * 2, settings, i);
+		   this, get_inner_w() / 25, y, get_inner_w() * 16 / 25, get_inner_h() * 17 / 500 * 2, settings, i);
 		y += buth_ / 1.17;
 	}
 

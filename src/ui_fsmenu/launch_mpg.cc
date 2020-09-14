@@ -37,6 +37,7 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
+#include "ui_fsmenu/helpwindow.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 #include "wui/game_chat_panel.h"
@@ -94,16 +95,17 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm, GameS
      // Values for alignment and size
      // TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
      // so we can have the SuggestedTeamsBox
+     // TODO(Nordfriese): Help! Box layout! Please?
      padding_(4),
      indent_(10),
      label_height_(20),
-     right_column_x_(get_w() * 57 / 80),
+     right_column_x_(get_inner_w() * 57 / 80),
 
      // Buttons
      change_map_or_save_(this,
                          "change_map_or_save",
                          right_column_x_,
-                         get_h() * 3 / 20,
+                         get_inner_h() * 3 / 20,
                          butw_,
                          buth_,
                          UI::ButtonStyle::kFsMenuSecondary,
@@ -112,7 +114,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm, GameS
      help_button_(this,
                   "help",
                   right_column_x_ + butw_ - buth_,
-                  get_h() / 100,
+                  get_inner_h() / 100,
                   buth_,
                   buth_,
                   UI::ButtonStyle::kFsMenuSecondary,
@@ -121,33 +123,33 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm, GameS
 
      // Text labels
      clients_(this,
-              // the width of the MultiPlayerSetupGroup is (get_w() * 53 / 80)
-              get_w() * 3 / 80,
-              get_h() / 10,
-              get_w() * 19 / 80,
-              get_h() / 10,
+              // the width of the MultiPlayerSetupGroup is (get_inner_w() * 53 / 80)
+              get_inner_w() * 3 / 80,
+              get_inner_h() / 10,
+              get_inner_w() * 19 / 80,
+              get_inner_h() / 10,
               _("Clients"),
               UI::Align::kCenter,
               g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      players_(this,
-              get_w() / 4,
-              get_h() / 10,
-              get_w() * 9 / 20,
-              get_h() / 10,
+              get_inner_w() / 4,
+              get_inner_h() / 10,
+              get_inner_w() * 9 / 20,
+              get_inner_h() / 10,
               _("Players"),
               UI::Align::kCenter,
               g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      map_(this,
           right_column_x_,
-          get_h() / 10,
+          get_inner_h() / 10,
           butw_,
-          get_h() / 10,
+          get_inner_h() / 10,
           _("Map"),
           UI::Align::kCenter,
           g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      wincondition_type_(this,
                         right_column_x_ + (butw_ / 2),
-                        get_h() * 15 / 20 - 9 * label_height_,
+                        get_inner_h() * 15 / 20 - 9 * label_height_,
                         0,
                         0,
                         _("Type of game"),
@@ -155,23 +157,22 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm, GameS
                         g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      map_info_(this,
                right_column_x_,
-               get_h() * 2 / 10,
+               get_inner_h() * 2 / 10,
                butw_,
-               get_h() * 15 / 20 - 9.25 * label_height_ - get_h() * 2 / 10,
+               get_inner_h() * 15 / 20 - 9.25 * label_height_ - get_inner_h() * 2 / 10,
                UI::PanelStyle::kFsMenu),
-     help_(nullptr),
 
      // Variables and objects used in the menu
      chat_(nullptr) {
 	win_condition_dropdown_.set_pos(
-	   Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_));
-	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ +
+	   Vector2i(right_column_x_, get_inner_h() * 4 / 5 - 9.5 * label_height_));
+	peaceful_.set_pos(Vector2i(right_column_x_, get_inner_h() * 4 / 5 - 9.5 * label_height_ +
 	                                               win_condition_dropdown_.get_h() + padding_));
 	custom_starting_positions_.set_pos(Vector2i(
-	   right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ + win_condition_dropdown_.get_h() +
+	   right_column_x_, get_inner_h() * 4 / 5 - 9.5 * label_height_ + win_condition_dropdown_.get_h() +
 	                       peaceful_.get_h() + 2 * padding_));
-	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240 - buth_ - padding_));
-	ok_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
+	back_.set_pos(Vector2i(right_column_x_, get_inner_h() * 218 / 240 - buth_ - padding_));
+	ok_.set_pos(Vector2i(right_column_x_, get_inner_h() * 218 / 240));
 
 	change_map_or_save_.sigclicked.connect([this]() { change_map_or_save(); });
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
@@ -184,8 +185,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm, GameS
 	}
 
 	mpsg_ = new MultiPlayerSetupGroup(
-	   this, get_w() * 3 / 80, change_map_or_save_.get_y(), get_w() * 53 / 80,
-	   get_h() * 17 / 30 - change_map_or_save_.get_y(), settings, buth_);
+	   this, get_inner_w() * 3 / 80, change_map_or_save_.get_y(), get_inner_w() * 53 / 80,
+	   get_inner_h() * 17 / 30 - change_map_or_save_.get_y(), settings, buth_);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
@@ -199,7 +200,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm, GameS
 	// Y coordinate will be set later, when we know how high this box will get.
 	suggested_teams_box_ =
 	   new UI::SuggestedTeamsBox(this, right_column_x_, 0, UI::Box::Vertical, padding_, indent_,
-	                             get_w() - right_column_x_, 4 * label_height_);
+	                             get_inner_w() - right_column_x_, 4 * label_height_);
 }
 
 FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
@@ -221,7 +222,7 @@ void FullscreenMenuLaunchMPG::layout() {
 void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
 	chat_ = new GameChatPanel(
-	   this, get_w() * 3 / 80, mpsg_->get_y() + mpsg_->get_h() + padding_, get_w() * 53 / 80,
+	   this, get_inner_w() * 3 / 80, mpsg_->get_y() + mpsg_->get_h() + padding_, get_inner_w() * 53 / 80,
 	   ok_.get_y() + ok_.get_h() - mpsg_->get_y() - mpsg_->get_h() - padding_ - 1, chat,
 	   UI::PanelStyle::kFsMenu);
 	// set focus to chat input
@@ -249,7 +250,7 @@ void FullscreenMenuLaunchMPG::win_condition_selected() {
 
 /// Opens a popup window to select a map or saved game
 void FullscreenMenuLaunchMPG::change_map_or_save() {
-	MapOrSaveSelectionWindow selection_window(this, ctrl_, get_w() / 3, get_h() / 4);
+	MapOrSaveSelectionWindow selection_window(this, ctrl_, get_inner_w() / 3, get_inner_h() / 4);
 	auto result = selection_window.run<MenuTarget>();
 	assert(result == MenuTarget::kNormalGame ||
 	       result == MenuTarget::kScenarioGame ||
@@ -623,12 +624,8 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 
 /// Show help
 void FullscreenMenuLaunchMPG::help_clicked() {
-	if (help_) {
-		help_->set_visible(true);
-	} else {
-		help_.reset(
-		   new UI::FullscreenHelpWindow(this, lua_, "txts/help/multiplayer_help.lua",
-		                                /** TRANSLATORS: This is a heading for a help window */
-		                                _("Multiplayer Game Setup")));
-	}
+	UI::FullscreenHelpWindow help(get_parent(), lua_, "txts/help/multiplayer_help.lua",
+		                          /** TRANSLATORS: This is a heading for a help window */
+		                          _("Multiplayer Game Setup"));
+	help.run<UI::Panel::Returncodes>();
 }

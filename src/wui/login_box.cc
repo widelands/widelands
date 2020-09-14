@@ -34,6 +34,7 @@ LoginBox::LoginBox(Panel& parent)
 
 	int32_t margin = 10;
 
+     // TODO(Nordfriese): Magic numbers. Use box layout.
 	ta_nickname = new UI::Textarea(this, margin, margin, 0, 0, _("Nickname:"));
 	ta_password = new UI::Textarea(this, margin, 70, 0, 0, _("Password:"));
 	eb_nickname = new UI::EditBox(this, 150, margin, 330, UI::PanelStyle::kFsMenu);

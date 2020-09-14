@@ -26,7 +26,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/helpwindow.h"
 #include "ui_fsmenu/launch_game.h"
 #include "wui/suggested_teams_box.h"
 
@@ -76,7 +75,6 @@ private:
 	UI::Button help_button_;
 	UI::Textarea clients_, players_, map_, wincondition_type_;
 	UI::MultilineTextarea map_info_;
-	std::unique_ptr<UI::FullscreenHelpWindow> help_;
 	GameChatPanel* chat_;
 	MultiPlayerSetupGroup* mpsg_;
 	std::string filename_proof_;  // local variable to check state
