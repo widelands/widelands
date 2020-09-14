@@ -179,12 +179,8 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 }
 
 void FullscreenMenuLaunchSPG::layout() {
-	standard_element_width_ = get_w() / 4;
-	standard_element_height_ = get_h() * 9 / 200;
-	player_setup.force_new_dimensions(scale_factor(), standard_element_height_);
-
 	FullscreenMenuLaunchGame::layout();
+	player_setup.force_new_dimensions(scale_factor(), standard_element_height_);
 }
 
-FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
-}
+FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() = default;
