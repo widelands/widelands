@@ -19,6 +19,8 @@
 
 #include "wui/mapview.h"
 
+#include <cstdlib>
+
 #include <SDL_timer.h>
 
 #include "base/macros.h"
