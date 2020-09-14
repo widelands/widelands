@@ -484,7 +484,12 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 
 		y = (y + scrollpos_) / get_lineheight();
 		if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
-			return false;
+			if (selection_mode_ == ListselectLayout::kDropdown) {
+				set_visible(false);
+				return true;
+			} else {
+				return false;
+			}
 		}
 		play_click();
 		select(y);
