@@ -6,7 +6,6 @@ tribes:new_ware_type {
    name = "liana",
    -- TRANSLATORS: This is a ware name used in lists of wares. Used to make ropes.
    descname = pgettext("ware", "Liana"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
 
    animations = {

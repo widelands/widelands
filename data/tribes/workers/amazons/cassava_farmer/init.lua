@@ -6,7 +6,6 @@ tribes:new_worker_type {
    name = "amazons_cassava_farmer",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("amazons_worker", "Cassava Farmer"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 

@@ -6,7 +6,6 @@ tribes:new_ware_type {
    name = "boots_swift",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Swift Boots"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
 
    animations = {

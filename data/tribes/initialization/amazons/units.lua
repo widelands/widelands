@@ -259,7 +259,7 @@ image_dirname = path.dirname(__file__) .. "images/"
 push_textdomain("tribes_encyclopedia")
 
 -- For formatting time strings
-include "tribes/scripting/help/global_helptexts.lua"
+include "tribes/scripting/help/time_strings.lua"
 
 tribes:new_tribe {
    name = "amazons",
@@ -459,7 +459,7 @@ tribes:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Chocolate
-                  pgettext("amazons_ware", "Chocolate is produced by chocolate breweries and used to train soldiers."),
+                  pgettext("amazons_ware", "Chocolate is produced by chocolate breweries and used to train soldiers.")
                }
             }
          },
@@ -523,7 +523,7 @@ tribes:new_tribe {
                   -- TRANSLATORS: Helptext for an amazon ware: Gold, part 1
                   pgettext("ware", "Gold is the most valuable of all metals,"),
                   -- TRANSLATORS: Helptext for an amazon ware: Gold, part 2
-                  pgettext("amazons_ware", "and it is smelted out of gold dust. It is produced by the furnace and used by the dressmaker and for special buildings."),
+                  pgettext("amazons_ware", "and it is smelted out of gold dust. It is produced by the furnace and used by the dressmaker and for special buildings.")
                }
             }
          },
@@ -624,18 +624,18 @@ tribes:new_tribe {
                   -- TRANSLATORS: Helptext for an amazon ware: Chisel, part 1
                   pgettext("ware", "The chisel is an essential tool."),
                   -- TRANSLATORS: Helptext for an amazon ware: Chisel, part 2
-                  pgettext("amazons_ware", "Stonecarvers need a chisel. Make sure you’ve always got some in reserve! They are produced by the stonecarver itself."),
+                  pgettext("amazons_ware", "Stonecarvers need a chisel. Make sure you’ve always got some in reserve! They are produced by the stonecarver itself.")
                }
             }
          },
          {
             name = "kitchen_tools",
             default_target_quantity = 1,
-            preciousness = 0,
+            preciousness = 1,
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Kitchen Tools
-                  amazons = pgettext("amazons_ware", "Kitchen tools are needed for preparing rations, baking cassava bread and brewing chocolate. Be sure to have a stonecarver to produce this basic tool.")
+                  pgettext("amazons_ware", "Kitchen tools are needed for preparing rations, baking cassava bread and brewing chocolate. Be sure to have a stonecarver to produce this basic tool.")
                }
             }
          },
@@ -646,7 +646,7 @@ tribes:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Needles
-                  pgettext("amazons_ware", "Needles are used by dressmakers to make dresses, boots and armor for the soldiers."),
+                  pgettext("amazons_ware", "Needles are used by dressmakers to make dresses, boots and armor for the soldiers.")
                }
             }
          },

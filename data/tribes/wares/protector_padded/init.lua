@@ -6,7 +6,6 @@ tribes:new_ware_type {
    name = "protector_padded",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Padded Protector"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
 
    animations = {

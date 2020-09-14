@@ -6,7 +6,6 @@ tribes:new_carrier_type {
    name = "amazons_carrier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("amazons_worker", "Carrier"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 

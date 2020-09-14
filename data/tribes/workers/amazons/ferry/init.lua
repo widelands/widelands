@@ -6,7 +6,6 @@ tribes:new_ferry_type {
    name = "amazons_ferry",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("amazons_worker", "Ferry"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 
