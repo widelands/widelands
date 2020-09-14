@@ -118,7 +118,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
 void FullscreenMenuNetSetupLAN::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 
-	butw_ = get_w() - right_column_x_ - right_column_margin_;
+	butw_ = get_inner_w() - right_column_x_ - right_column_margin_;
 	const int colum_header_h = label_opengames_.get_h() + padding_;
 
 	left_column_.set_size(tablew_, tableh_ + colum_header_h);

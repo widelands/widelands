@@ -167,7 +167,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsm
 void FullscreenMenuInternetLobby::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 
-	uint32_t butw = get_w() - right_column_x_ - right_column_margin_;
+	uint32_t butw = get_inner_w() - right_column_x_ - right_column_margin_;
 	uint32_t buth = text_height(UI::FontStyle::kLabel) + 8;
 
 	tabley_ = tabley_ / 2;

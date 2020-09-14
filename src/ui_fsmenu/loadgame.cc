@@ -100,13 +100,13 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 
 void FullscreenMenuLoadGame::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
-	main_box_.set_size(get_w() - 2 * tablex_, tabley_ + tableh_ + padding_);
+	main_box_.set_size(get_inner_w() - 2 * tablex_, tabley_ + tableh_ + padding_);
 	main_box_.set_pos(Vector2i(tablex_, 0));
 	load_or_save_.delete_button()->set_desired_size(butw_, buth_);
 	button_spacer_->set_desired_size(butw_, buth_ + 2 * padding_);
 	load_or_save_.table().set_desired_size(tablew_, tableh_);
 	load_or_save_.game_details()->set_max_size(
-	   main_box_.get_w() - tablew_ - right_column_margin_, tableh_);
+	   main_box_.get_inner_w() - tablew_ - right_column_margin_, tableh_);
 }
 
 void FullscreenMenuLoadGame::toggle_filenames() {

@@ -1178,35 +1178,32 @@ void WLApplication::mainmenu() {
 		try {
 			switch (mm->run<MenuTarget>()) {
 			case MenuTarget::kTutorial:
-				need_to_reset = true;
-				mainmenu_tutorial(*mm);
+				need_to_reset = mainmenu_tutorial(*mm);
 				break;
 			case MenuTarget::kNewGame:
-				need_to_reset = true;
-				new_game(*mm);
+				need_to_reset = new_game(*mm);
 				break;
 			case MenuTarget::kLoadGame:
-				need_to_reset = true;
-				load_game(*mm);
+				need_to_reset = load_game(*mm);
 				break;
 			case MenuTarget::kCampaign:
-				need_to_reset = true;
-				campaign_game(*mm);
+				need_to_reset = campaign_game(*mm);
 				break;
 			case MenuTarget::kMetaserver:
-				need_to_reset = true;
 				mainmenu_multiplayer(*mm, true);
+				// TODO(Nordfriese): Currently there's no way to tell whether
+				// a game was actually started from mainmenu_multiplayer()
+				need_to_reset = true;
 				break;
 			case MenuTarget::kLan:
-				need_to_reset = true;
 				mainmenu_multiplayer(*mm, false);
+				need_to_reset = true;
 				break;
 			case MenuTarget::kOnlineGameSettings:
 				mm->show_internet_login();
 				break;
 			case MenuTarget::kReplay:
-				need_to_reset = true;
-				replay(mm.get());
+				need_to_reset = replay(mm.get());
 				break;
 			case MenuTarget::kOptions: {
 				OptionsCtrl om(*mm, get_config_section());
@@ -1221,8 +1218,7 @@ void WLApplication::mainmenu() {
 			case MenuTarget::kContinueLastsave: {
 				const std::string& file = mm->get_filename_for_continue();
 				if (!file.empty()) {
-					need_to_reset = true;
-					load_game(*mm, file);
+					need_to_reset = load_game(*mm, file);
 				}
 				break;
 			}
@@ -1235,14 +1231,17 @@ void WLApplication::mainmenu() {
 				return;
 			}
 		} catch (const WLWarning& e) {
+			need_to_reset = true;
 			messagetitle = (boost::format("Warning: %s") % e.title()).str();
 			message = e.what();
 		} catch (const Widelands::GameDataError& e) {
+			need_to_reset = true;
 			messagetitle = _("Game data error");
 			message = e.what();
 		}
 #ifdef NDEBUG
 		catch (const std::exception& e) {
+			need_to_reset = true;
 			messagetitle = "Unexpected error during the game";
 			message = e.what();
 			message += "\n\n";
@@ -1270,30 +1269,28 @@ void WLApplication::mainmenu() {
  * Handle the "Play Tutorial" menu option:
  * Show tutorial UI, let player select tutorial and run it.
  */
-void WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
+bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
 	Widelands::Game game;
-	std::string filename;
 	//  Start UI for the tutorials.
 	FullscreenMenuScenarioSelect select_campaignmap(fsmm);
-	if (select_campaignmap.run<MenuTarget>() ==
-	    MenuTarget::kOk) {
-		filename = select_campaignmap.get_map();
+	if (select_campaignmap.run<MenuTarget>() != MenuTarget::kOk) {
+	    return false;
 	}
 	try {
 		// Load selected tutorial-map-file
-		if (filename.size()) {
-			game.run_splayer_scenario_direct(filename.c_str(), "");
-		}
+		game.run_splayer_scenario_direct(select_campaignmap.get_map().c_str(), "");
 	} catch (const std::exception& e) {
 		log_err("Fatal exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
 	}
+	return true;
 }
 
 /**
  * Run the multiplayer menu
  */
+// TODO(Nordfriese): This should return a `bool` to indicate whether a game was started
 void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool internet) {
 	g_sh->change_music("ingame", 1000);
 
@@ -1481,6 +1478,10 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
 			game.set_scenario_difficulty(select_campaignmap.get_difficulty());
 			break;
 		}
+		// TODO(Nordfriese): There is no way to distinguish whether the user pressed
+		// Back or clicked the Close button. In both cases, `MenuTarget::kBack` is
+		// returned. We want to restart the FullscreenMenuCampaignSelect if the user
+		// pressed Back but not if he used the close button.
 	}
 	try {
 		// Load selected campaign-map-file
@@ -1498,14 +1499,14 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
 /**
  * Show the replay menu and play a replay.
  */
-void WLApplication::replay(FullscreenMenuMain* fsmm) {
+bool WLApplication::replay(FullscreenMenuMain* fsmm) {
 	Widelands::Game game;
 	if (filename_.empty()) {
 		assert(fsmm);
 		SinglePlayerGameSettingsProvider sp;
 		FullscreenMenuLoadGame rm(*fsmm, game, &sp, true);
 		if (rm.run<MenuTarget>() == MenuTarget::kBack) {
-			return;
+			return false;
 		}
 
 		filename_ = rm.filename();
@@ -1528,6 +1529,7 @@ void WLApplication::replay(FullscreenMenuMain* fsmm) {
 		throw;
 	}
 	filename_.clear();
+	return true;
 }
 
 /**

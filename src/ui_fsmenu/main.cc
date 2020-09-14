@@ -490,18 +490,18 @@ inline Rectf FullscreenMenuMain::title_pos() {
 }
 
 void FullscreenMenuMain::layout() {
-	butw_ = get_w() / 5;
-	buth_ = get_h() / 25;
+	butw_ = get_inner_w() / 5;
+	buth_ = get_inner_h() / 25;
 	padding_ = buth_ / 3;
 
 	copyright_.set_pos(
-	   Vector2i((get_w() - copyright_.get_w()) / 2, get_h() - copyright_.get_h() - padding_ / 2));
+	   Vector2i((get_inner_w() - copyright_.get_w()) / 2, get_inner_h() - copyright_.get_h() - padding_ / 2));
 	version_.set_pos(Vector2i(
-	   (get_w() - version_.get_w()) / 2, copyright_.get_y() - version_.get_h() - padding_ / 2));
+	   (get_inner_w() - version_.get_w()) / 2, copyright_.get_y() - version_.get_h() - padding_ / 2));
 
 	box_rect_ =
-	   Recti((get_w() - padding_) / 2 - butw_, version_.get_y() - padding_ * 5 / 2 - get_h() / 4,
-	         2 * butw_ + padding_, get_h() / 4);
+	   Recti((get_inner_w() - padding_) / 2 - butw_, version_.get_y() - padding_ * 5 / 2 - get_inner_h() / 4,
+	         2 * butw_ + padding_, get_inner_h() / 4);
 
 	singleplayer_.set_desired_size(butw_, buth_);
 	multiplayer_.set_desired_size(butw_, buth_);
@@ -531,7 +531,7 @@ void FullscreenMenuMain::layout() {
 			const int16_t desired_w = calc_desired_window_width(w->get_name());
 			const int16_t desired_h = calc_desired_window_height(w->get_name());
 			w->set_size(desired_w, desired_h);
-			w->set_pos(Vector2i(std::min(get_w() - desired_w, w->get_x()), std::min(get_h() - desired_h, w->get_y())));
+			w->set_pos(Vector2i(std::min(get_inner_w() - desired_w, w->get_x()), std::min(get_inner_h() - desired_h, w->get_y())));
 
 			if (minimal) {
 				// …and then make it minimal again if it was minimal before

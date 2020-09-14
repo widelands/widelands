@@ -141,7 +141,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 
 void FullscreenMenuScenarioSelect::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
-	header_box_.set_size(get_w(), tabley_);
+	header_box_.set_size(get_inner_w(), tabley_);
 	table_.set_size(tablew_, tableh_);
 	table_.set_pos(Vector2i(tablex_, tabley_));
 	scenario_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);

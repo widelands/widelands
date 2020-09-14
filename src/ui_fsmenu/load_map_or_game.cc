@@ -45,6 +45,7 @@ void FullscreenMenuLoadMapOrGame::layout() {
 	UI::Window::layout();
 
 	// UI coordinates and spacers
+	// TODO(Nordfriese): We really need box layout here...
 	tablex_ = get_inner_w() * 47 / 2500;
 	tabley_ = get_inner_h() * 17 / 50;
 	tablew_ = get_inner_w() * 711 / 1250;
@@ -67,5 +68,5 @@ int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(UI::Panel& preceding_p
 }
 
 int32_t FullscreenMenuLoadMapOrGame::get_right_column_w(int32_t x) {
-	return get_w() - right_column_margin_ - x;
+	return get_inner_w() - right_column_margin_ - x;
 }

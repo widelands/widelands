@@ -368,8 +368,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 
 void FullscreenMenuOptions::layout() {
 	if (!is_minimal()) {
-		const int16_t butw = get_w() / 5;
-		const int16_t buth = get_h() / 16;
+		const int16_t butw = get_inner_w() / 5;
+		const int16_t buth = get_inner_h() / 16;
 
 		// Buttons
 		cancel_.set_desired_size(butw, buth);

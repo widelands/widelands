@@ -162,7 +162,7 @@ void FullscreenMenuMapSelect::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 	checkboxes_y_ = tabley_ - 3 * (team_tags_dropdown_->get_h() + checkbox_padding_) - 2 * padding_;
 	checkboxes_.set_pos(Vector2i(tablex_, checkboxes_y_));
-	checkboxes_.set_size(get_w() - 2 * tablex_, tabley_ - checkboxes_y_);
+	checkboxes_.set_size(get_inner_w() - 2 * tablex_, tabley_ - checkboxes_y_);
 	table_.set_size(tablew_, tableh_);
 	table_.set_pos(Vector2i(tablex_, tabley_));
 	map_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
