@@ -104,7 +104,6 @@ void FullscreenMenuLaunchSPG::update() {
 	}
 
 	map_details.update(settings_, map);
-	//	suggested_teams_box_.show(map.get_suggested_teams());
 	ok_.set_enabled(settings_->can_launch());
 
 	peaceful_.set_state(settings_->is_peaceful_mode());

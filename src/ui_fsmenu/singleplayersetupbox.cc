@@ -34,18 +34,9 @@ SinglePlayerActivePlayerSetupBox::SinglePlayerActivePlayerSetupBox(
    uint32_t standard_element_height,
    uint32_t padding)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("Players"),
-            UI::Align::kRight,
-            g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     settings_(settings) {
-	add(&title_, Resizing::kAlign, UI::Align::kCenter);
-	add_space(3 * padding);
 
+     settings_(settings) {
+	set_scrolling(true);
 	subscriber_ =
 	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
 }
@@ -60,14 +51,14 @@ void SinglePlayerActivePlayerSetupBox::update() {
 	active_player_groups.resize(number_of_players);
 
 	for (PlayerSlot i = 0; i < active_player_groups.size(); ++i) {
-		active_player_groups.at(i) = new SinglePlayerActivePlayerGroup(this, 0, 0, i, settings_);
+		active_player_groups.at(i) = new SinglePlayerActivePlayerGroup(this, 20, 20, i, settings_);
 		add(active_player_groups.at(i));
 	}
 }
 
 void SinglePlayerActivePlayerSetupBox::force_new_dimensions(float scale,
                                                             uint32_t standard_element_height) {
-	title_.set_font_scale(scale);
+
 	for (auto& active_player_group : active_player_groups) {
 		active_player_group->force_new_dimensions(scale, standard_element_height);
 	}
@@ -171,11 +162,22 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
                                            GameSettingsProvider* const settings,
                                            uint32_t standard_element_height,
                                            uint32_t padding)
-   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
+   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+     title_(this,
+            0,
+            0,
+            0,
+            0,
+            _("Players"),
+            UI::Align::kRight,
+            g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      active_players_setup(this, settings, standard_element_height, padding) {
+	add(&title_, Resizing::kAlign, UI::Align::kCenter);
+	add_space(3 * padding);
 	add(&active_players_setup);
 }
 
 void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
 	active_players_setup.force_new_dimensions(scale, standard_element_height);
+	title_.set_font_scale(scale);
 }
