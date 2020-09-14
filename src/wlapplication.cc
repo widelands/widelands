@@ -1294,13 +1294,15 @@ void WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
 /**
  * Run the multiplayer menu
  */
-void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& mp, const bool internet) {
+void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool internet) {
 	g_sh->change_music("ingame", 1000);
 
 	if (internet) {
-		std::string playername = mp.get_nickname();
-		std::string password(mp.get_password());
-		bool registered = mp.registered();
+		fsmm.internet_login();
+
+		std::string playername = fsmm.get_nickname();
+		std::string password(fsmm.get_password());
+		bool registered = fsmm.registered();
 
 		get_config_string("nickname", playername);
 		// Only change the password if we use a registered account
@@ -1309,7 +1311,7 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& mp, const bool inte
 		}
 
 		// reinitalise in every run, else graphics look strange
-		FullscreenMenuInternetLobby ns(mp, playername, password, registered);
+		FullscreenMenuInternetLobby ns(fsmm, playername, password, registered);
 		ns.run<MenuTarget>();
 
 		if (InternetGaming::ref().logged_in()) {
@@ -1321,13 +1323,13 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& mp, const bool inte
 		}
 	} else {
 		// reinitalise in every run, else graphics look strange
-		FullscreenMenuNetSetupLAN ns(mp);
+		FullscreenMenuNetSetupLAN ns(fsmm);
 		const MenuTarget menu_result = ns.run<MenuTarget>();
 		std::string playername = ns.get_playername();
 
 		switch (menu_result) {
 		case MenuTarget::kHostgame: {
-			GameHost netgame(mp, playername);
+			GameHost netgame(fsmm, playername);
 			netgame.run();
 			break;
 		}
@@ -1342,7 +1344,7 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& mp, const bool inte
 				break;
 			}
 
-			GameClient netgame(mp, std::make_pair(addr, NetAddress()), playername);
+			GameClient netgame(fsmm, std::make_pair(addr, NetAddress()), playername);
 			netgame.run();
 			break;
 		}
