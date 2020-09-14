@@ -36,7 +36,8 @@ obj_find_port = {
    title = _ "Find a place to build a port",
    number = 1,
    body = objective_text(_"Find a portspace",
-   p(_[[To set foot on this island we first must find a building space where a port can be built. Explore the nearby coast line to find such a building plot.]]))
+   p(_[[To set foot on this island we first must find a building space where a port can be built. Explore the nearby coast line to find such a building plot.]]) ..
+   p(_[[We should choose the ship to found the port with carefully to not waste time for unloading first. after the port is build we should cancel the remaining ships expedition, to unload its wares as well.]]))
 }
 
 obj_basic_infrastructure = {
@@ -114,8 +115,8 @@ initial_messages = {
       body = jundlina(_"Jundlina continues",
       -- TRANSLATORS: Jundlina - Diary
       _([[At least the east side of the island is inhabited, so much is clear. We do not know if the people there are friends or foes. We do not even know what tribe they might be from. ]]) ..
-      _([[The only thing that is sure that they can't be Atlantians for no ship of us has sailed as far as us in the last hundreds years. I can only hope they are friendly. ]]) ..
-      _([[We have not much water left, our food is running low, we lost all our tools and most of our building materials with the third ship. We can't afford sail any further an need to try to settle our selvs on this island.]]))
+      _([[The only thing that is sure that they can't be Atlanteans for no ship of us has sailed as far as us in the last hundreds years. I can only hope they are friendly. ]]) ..
+      _([[We have not much water left, our food is running low, we lost all our tools and most of our building materials with the third ship. We can't afford sail any further an need to try to settle ourselves on this island.]]))
       .. new_objectives(obj_find_port),
       h=500,
    },

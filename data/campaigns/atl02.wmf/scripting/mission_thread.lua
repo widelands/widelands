@@ -31,7 +31,7 @@ function mining()
 end
 
 function spidercloth()
-   sleep(180000)
+   sleep(300000) -- sleep until the second ship is unloaded
    while count_in_warehouses("spidercloth") > 2 do sleep(2323) end
    local cloth = add_campaign_objective(obj_spidercloth)
    msg_boxes(spidercloth_1)
@@ -130,7 +130,7 @@ end
 function intro()
    sleep(500)
 
-   p1.see_all = true -- TODO: remove this
+   --p1.see_all = true -- TODO: remove this
    msg_boxes(initial_messages)
    include "map:scripting/starting_conditions.lua"
    local port = add_campaign_objective(obj_find_port)
