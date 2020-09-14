@@ -333,12 +333,10 @@ tribes:new_tribe {
             preciousness = 24,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Log, part 1
+                  pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
+                  -- TRANSLATORS: Helptext for an amazon ware: Log, part 2
+                  pgettext("amazons_ware", "Amazon woodcutters fell trees and jungle preservers are planting them. They are used by the stonecarver. The charcoal kiln also needs logs to produce charcoal.")
                }
             }
          },
@@ -348,12 +346,10 @@ tribes:new_tribe {
             preciousness = 7,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Granite, part 1
+                  pgettext("ware", "Granite is a basic building material."),
+                  -- TRANSLATORS: Helptext for an amazon ware: Granite, part 2
+                  pgettext("amazons_ware", "The Amazons use granite for making tools and weapons as well. It is produced by the stonecutters and in stone mines."),
                }
             }
          },
@@ -363,12 +359,8 @@ tribes:new_tribe {
             preciousness = 20,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: balsa
+                  pgettext("amazons_ware", "Balsa wood is an important building material.It is also used to make light armor. Balsa trees are cut by an experienced woodcutter.")
                }
             }
          },
@@ -378,12 +370,8 @@ tribes:new_tribe {
             preciousness = 50,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Ironwood
+                  pgettext("amazons_ware", "This very hard wood is as hard as iron and it is used for several buildings, tools and weapons. It is cut by a very experienced woodcutter.")
                }
             }
          },
@@ -393,12 +381,8 @@ tribes:new_tribe {
             preciousness = 40,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Rubber
+                  pgettext("amazons_ware", "Rubber is important for making warriors armor and shoes. Rubber trees are collected from experienced woodcutters.")
                }
             }
          },
@@ -407,12 +391,8 @@ tribes:new_tribe {
             preciousness = 8,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Liana
+                  pgettext("amazons_ware", "Lianas grow in the trees. Very durable ropes are made out of it.")
                }
             }
          },
@@ -421,12 +401,8 @@ tribes:new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Rope
+                  pgettext("amazons_ware", "This rope is made out of liana. It is used for armor dresses and to construct buildings and ships.")
                }
             }
          },
@@ -438,12 +414,10 @@ tribes:new_tribe {
             preciousness = 15,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Water, part 1
+                  pgettext("ware", "Water is the essence of life!"),
+                  -- TRANSLATORS: Helptext for an amazon ware: Water, part 2
+                  pgettext("amazons_ware", "Water is used by the cassava root cookery, the chocolate brewery, the gold digger and the tapir farms.")
                }
             }
          },
@@ -452,12 +426,8 @@ tribes:new_tribe {
             preciousness = 10,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Cassavaroot
+                  pgettext("amazons_ware", "Cassavaroots are a special kind of root produced at cassava farms. The Amazons like their strong taste for making bread and they feed also tapirs with it.")
                }
             }
          },
@@ -466,12 +436,8 @@ tribes:new_tribe {
             preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Cocoa Beans
+                  pgettext("amazons_ware", "Cocoa beans are gathered from cocoa bushes by a cocoa farmer. They are used for producing chocolate.")
                }
             }
          },
@@ -481,12 +447,8 @@ tribes:new_tribe {
             preciousness = 5,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Bread
+                  pgettext("amazons_ware", "This tasty bread is made in cookeries out of cassava root and water. It is the basic ingredient of a ration that is made by a food preserver. Soldiers like it too.")
                }
             }
          },
@@ -496,12 +458,8 @@ tribes:new_tribe {
             preciousness = 5,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Chocolate
+                  pgettext("amazons_ware", "Chocolate is produced by chocolate breweries and used to train soldiers."),
                }
             }
          },
@@ -510,12 +468,8 @@ tribes:new_tribe {
             preciousness = 4,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Fish
+                  pgettext("amazons_ware", "Fish is one of the two major food resources of the Amazons. It is used by the food preserver to prepare rations for the miners. It is also consumed at the training sites (training glade and warriors gathering).")
                }
             }
          },
@@ -524,12 +478,10 @@ tribes:new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Meat, part 1
+                  pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunters."),
+                  -- TRANSLATORS: Helptext for an amazon ware: Meat, part 2
+                  pgettext("amazons_ware", "Meat is used by the food preserver to prepare rations for the miners. It is also consumed at the training sites (training glade and warriors gathering).")
                }
             }
          },
@@ -539,12 +491,10 @@ tribes:new_tribe {
             preciousness = 5,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Ration, part 1
+                  pgettext("ware", "A small bite to keep miners strong and working. The scout also consumes rations on his scouting trips."),
+                  -- TRANSLATORS: Helptext for an amazon ware: Ration, part 2
+                  pgettext("amazons_ware", "Rations are produced by the food preserver out of fish or meat and bread. They are dried by charcoal.")
                }
             }
          },
@@ -557,12 +507,10 @@ tribes:new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Gold Dust, part 1
+                  pgettext("ware", "Gold dust is washed in a gold digger dwelling."),
+                  -- TRANSLATORS: Helptext for an amazon ware: Gold Dust, part 2
+                  pgettext("amazons_ware", "Smelted in a furnace, it turns into gold which is used as a precious building material and to produce armor.")
                }
             }
          },
@@ -572,12 +520,10 @@ tribes:new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Gold, part 1
+                  pgettext("ware", "Gold is the most valuable of all metals,"),
+                  -- TRANSLATORS: Helptext for an amazon ware: Gold, part 2
+                  pgettext("amazons_ware", "and it is smelted out of gold dust. It is produced by the furnace and used by the dressmaker and for special buildings."),
                }
             }
          },
@@ -587,12 +533,8 @@ tribes:new_tribe {
             preciousness = 10,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Charcoal, part 1
+                  pgettext("amazons_ware", "Charcoal produced out of logs by a charcoal burner. The Amazons use charcoal for drying their food and smelting gold.")
                }
             }
          },
@@ -605,12 +547,8 @@ tribes:new_tribe {
             preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Pick
+                  pgettext("amazons_ware", "Picks are used by stonecutters to cut granite from rocks or in mines.")
                }
             }
          },
@@ -620,12 +558,10 @@ tribes:new_tribe {
             preciousness = 3,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
+                  pgettext("ware", "The felling ax is the tool to chop down trees."),
+                  -- TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 2
+                  pgettext("amazons_ware", "They are used by the woodcutters and produced by the stonecarver.")
                }
             }
          },
@@ -635,12 +571,10 @@ tribes:new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
+                  pgettext("ware", "Shovels are needed for the proper handling of plants."),
+                  -- TRANSLATORS: Helptext for an amazon ware: Shovel, part 2
+                  pgettext("amazons_ware", "Therefore the jungle preservers and the cassava and cocoa farmers use them. They are produced by the stonecarver.")
                }
             }
          },
@@ -650,12 +584,10 @@ tribes:new_tribe {
             preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
+                  pgettext("ware", "The hammer is an essential tool."),
+                  -- TRANSLATORS: Helptext for an amazon ware: Hammer, part 2
+                  pgettext("amazons_ware", "Geologists, builders, shipwrights and stonecarvers all need a hammer. Make sure you’ve always got some in reserve! They are produced by the stonecarver.")
                }
             }
          },
@@ -665,12 +597,8 @@ tribes:new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Machete
+                  pgettext("ware", "The machete is the tool of the liana cutters."),
                }
             }
          },
@@ -680,12 +608,10 @@ tribes:new_tribe {
             preciousness = 3,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 1
+                  pgettext("amazons_ware", "This spear is the basic weapon in the Amazon military system. It is produced by the stonecarver. In combination with a tunic, it is the equipment to fit out young soldiers."),
+                  -- TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 2
+                  pgettext("amazons_ware", "It is used by the amazon hunters as well.")
                }
             }
          },
@@ -695,12 +621,10 @@ tribes:new_tribe {
             preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Chisel, part 1
+                  pgettext("ware", "The chisel is an essential tool."),
+                  -- TRANSLATORS: Helptext for an amazon ware: Chisel, part 2
+                  pgettext("amazons_ware", "Stonecarvers need a chisel. Make sure you’ve always got some in reserve! They are produced by the stonecarver itself."),
                }
             }
          },
@@ -710,12 +634,8 @@ tribes:new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Kitchen Tools
+                  amazons = pgettext("amazons_ware", "Kitchen tools are needed for preparing rations, baking cassava bread and brewing chocolate. Be sure to have a stonecarver to produce this basic tool.")
                }
             }
          },
@@ -725,12 +645,8 @@ tribes:new_tribe {
             preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Needles
+                  pgettext("amazons_ware", "Needles are used by dressmakers to make dresses, boots and armor for the soldiers."),
                }
             }
          },
@@ -740,12 +656,8 @@ tribes:new_tribe {
             preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Stone Bowl
+                  pgettext("amazons_ware", "Stonebowls are used to wash gold and to smelt the gold dust.")
                }
             }
          },
@@ -758,12 +670,8 @@ tribes:new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Stone tipped Spear
+                  pgettext("amazons_ware", "This spear has a stone spike. It is produced in a stone carvery and used in a warriors gathering – together with food – to train soldiers from attack level 0 to attack level 1.")
                }
             }
          },
@@ -773,12 +681,8 @@ tribes:new_tribe {
             preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Hardened Spear
+                  pgettext("amazons_ware", "This is an hardened spear with a stone tip. It is produced in a stone carvery and used in a warriors gathering – together with food – to train soldiers from attack level 1 to level 2.")
                }
             }
          },
@@ -788,12 +692,8 @@ tribes:new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Wooden Armor
+                  pgettext("amazons_ware", "The light wooden armor is a basic armor for amazons soldiers. It is produced by a dressmaker and used in a training glade – together with food – to train soldiers from health level 0 to level 1.")
                }
             }
          },
@@ -803,12 +703,8 @@ tribes:new_tribe {
             preciousness = 3,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Wodden Helmet
+                  pgettext ("amazons_ware", "A wooden helmet is a basic equipment to protect soldiers. It is produced by the dressmaker and used to train soldiers from health level 1 to level 2."),
                }
             }
          },
@@ -818,12 +714,8 @@ tribes:new_tribe {
             preciousness = 3,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Warriors Coat
+                  pgettext("amazons_ware", "Ordinary tunics can be decorated and reinforced with gold and wood chunks. Such clothes are the best armor.")
                }
             }
          },
@@ -833,12 +725,8 @@ tribes:new_tribe {
             preciousness = 3,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Tunic
+                  pgettext("amazons_ware", "Rubber can be bound into a tunic. They are used as basic armor. All new soldiers are clothed in a tunic.")
                }
             }
          },
@@ -848,12 +736,8 @@ tribes:new_tribe {
             preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Padded Vest
+                  pgettext("amazons_ware", "A padded vest is a light but durable armor. it is produced by the dressmaker and used to train soldiers defence from level 0 to level 1.")
                }
             }
          },
@@ -863,12 +747,8 @@ tribes:new_tribe {
             preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Padded Protector
+                  pgettext("amazons_ware", "A padded protector is a strong and durable armor. It is produced by the dressmaker and used to train soldiers defence from level 1 to level 2.")
                }
             }
          },
@@ -878,12 +758,8 @@ tribes:new_tribe {
             preciousness = 5,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Sturdy Boots
+                  pgettext("amazons_ware", "Sturdy boots are an excellent footwear for soldiers to be quicker on the feet. They are produced by the dressmaker and used to train soldiers evade from level 0 to level 1.")
                }
             }
          },
@@ -893,12 +769,8 @@ tribes:new_tribe {
             preciousness = 5,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Swift Boots
+                  pgettext("amazons_ware", "Swift boots are a light and durable footwear for soldiers to be quicker on the feet. They are produced by the dressmaker and used to train soldiers evade from level 1 to level 2.")
                }
             }
          },
@@ -908,12 +780,8 @@ tribes:new_tribe {
             preciousness = 5,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
-                  pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
-                  pgettext("amazons_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
-                  pgettext("amazons_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
+                  -- TRANSLATORS: Helptext for an amazon ware: Hero Boots
+                  pgettext("amazons_ware", "Hero boots! The only suitable footwear for a real hero. They are produced by the dressmaker and used to train soldiers evade from level 2 to level 3.")
                }
             }
          },
@@ -929,14 +797,14 @@ tribes:new_tribe {
          {
             name = "amazons_carrier",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Carrier
+               -- TRANSLATORS: Helptext for an amazon worker: Carrier
                purpose = pgettext("amazons_worker", "Carries items along your roads.")
             }
          },
          {
             name = "amazons_ferry",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Ferry
+               -- TRANSLATORS: Helptext for an amazon worker: Ferry
                purpose = pgettext("amazons_worker", "Ships wares across narrow rivers.")
             }
          },
@@ -945,14 +813,14 @@ tribes:new_tribe {
             default_target_quantity = 10,
             preciousness = 2,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Horse
+               -- TRANSLATORS: Helptext for an amazon worker: Tapir
                purpose = pgettext("amazons_worker", "Tapirs help to carry items along busy roads. They are reared in a tapir farm.")
             }
          },
          {
             name = "amazons_tapir_breeder",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Horse Breeder
+               -- TRANSLATORS: Helptext for an amazon worker: Tapir Breeder
                purpose = pgettext("amazons_worker", "Breeds the tapirs for adding them to the transportation system.")
             }
          }
@@ -962,57 +830,57 @@ tribes:new_tribe {
          {
             name = "amazons_stonecutter",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
+               -- TRANSLATORS: Helptext for an amazon worker: Stonecutter
                purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
             }
          },
          {
             name = "amazons_woodcutter",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Woodcutter
+               purpose = pgettext("amazons_worker", "Fells trees.")
             }
          },
          {
             name = "amazons_woodcutter_master",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Master Woodcutter
+               purpose = pgettext("amazons_worker", "Harvests special trees: ironwood, rubber and balsa.")
             }
          },
          {
             name = "amazons_jungle_preserver",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Jungle Preserver
+               purpose = pgettext("amazons_worker", "Plants trees.")
             }
          },
          {
             name = "amazons_jungle_master",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Jungle Master
+               purpose = pgettext("amazons_worker", "Plants special trees: ironwood, rubber and balsa.")
             }
          },
          {
             name = "amazons_liana_cutter",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Liana Cutter
+               purpose = pgettext("amazons_worker", "Cuts lianas from trees.")
             }
          },
          {
             name = "amazons_builder",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Builder
+               purpose = pgettext("amazons_worker", "Works at construction sites to raise new buildings.")
             }
          },
          {
             name = "amazons_shipwright",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Shipwright
+               purpose = pgettext("amazons_worker", "Works at the shipyard and constructs new ships.")
             }
          },
       },
@@ -1021,36 +889,36 @@ tribes:new_tribe {
          {
             name = "amazons_hunter_gatherer",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Hunter Gatherer
+               purpose = pgettext("amazons_worker", "The hunter gatherer brings fresh fish and raw meat for the tribe.")
             }
          },
          {
             name = "amazons_cassava_farmer",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Cassava Farmer
+               purpose = pgettext("amazons_worker", "Grews cassava roots.")
             }
          },
          {
             name = "amazons_cocoa_farmer",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Cocoa Farmer
+               purpose = pgettext("amazons_worker", "Grews cocoa.")
             }
          },
          {
             name = "amazons_cook",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Cook
+               purpose = pgettext("amazons_worker", "Prepares rations, bakes cassava bread and brews chocolate.")
             }
          },
          {
             name = "amazons_wilderness_keeper",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Wilderness Keeper
+               purpose = pgettext("amazons_worker", "Breeds game or fish.")
             }
          },
       },
@@ -1059,29 +927,29 @@ tribes:new_tribe {
          {
             name = "amazons_geologist",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Geologist
+               purpose = pgettext("amazons_worker", "Discovers resources for mining.")
             }
          },
          {
             name = "amazons_gold_digger",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Gold Digger
+               purpose = pgettext("amazons_worker", "Works hard in the gold dwellings in mountains to obtain gold by washing it from gravel.")
             }
          },
          {
             name = "amazons_charcoal_burner",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Charcoal Burner
+               purpose = pgettext("amazons_worker", "Burns logs to produce charcoal.")
             }
          },
          {
             name = "amazons_gold_smelter",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Gold Smelter
+               purpose = pgettext("amazons_worker", "Smelts gold at furnaces.")
             }
          },
       },
@@ -1090,8 +958,8 @@ tribes:new_tribe {
          {
             name = "amazons_stonecarver",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Stonecarver
+               purpose = pgettext("amazons_worker", "Produces spears for soldiers and tools for workers.")
             }
          }
       },
@@ -1102,29 +970,29 @@ tribes:new_tribe {
             default_target_quantity = 10,
             preciousness = 5,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Soldier
+               purpose = pgettext("amazons_worker", "Defend and Conquer!")
             }
          },
          {
             name = "amazons_trainer",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Trainer
+               purpose = pgettext("amazons_worker", "Trains the soldiers.")
             }
          },
          {
             name = "amazons_dressmaker",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Dressmaker
+               purpose = pgettext("amazons_worker", "Produces all kinds of dresses, boots and armor.")
             }
          },
          {
             name = "amazons_scout",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an amazon worker: Scout
+               purpose = pgettext("amazons_worker", "Explores unknown territory.")
             }
          }
       }
@@ -1491,42 +1359,42 @@ tribes:new_tribe {
       {
          name = "cassavarootfield_tiny",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Cassavaroot Field
             purpose = _("This field has just been planted.")
          }
       },
       {
          name = "cassavarootfield_small",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Cassavaroot Field
             purpose = _("This field is growing.")
          }
       },
       {
          name = "cassavarootfield_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Cassavaroot Field
             purpose = _("This field is growing.")
          }
       },
       {
          name = "cassavarootfield_ripe",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Casavaroot Field
             purpose = _("This field is ready for harvesting.")
          }
       },
       {
          name = "cassavarootfield_harvested",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Cassavaroot Field
             purpose = _("This field has been harvested.")
          }
       },
       {
          name = "cocoa_tree_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Cocoa Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
@@ -1554,24 +1422,24 @@ tribes:new_tribe {
       {
          name = "amazons_resi_none",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean resource indicator: No resources
+            -- TRANSLATORS: Helptext for an amazon resource indicator: No resources
             purpose = _("There are no resources in the ground here.")
          }
       },
       {
          name = "amazons_resi_water",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean resource indicator: Water
-            purpose = _("There is water in the ground here that can be pulled up by a well.")
+            -- TRANSLATORS: Helptext for an amazon resource indicator: Water
+            purpose = _("There is water in the ground here.")
          }
       },
       {
          name = "amazons_resi_gold_1",
          helptexts = {
             purpose = {
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
-               _("Gold veins contain gold ore that can be dug up by gold mines."),
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
+               -- TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 1
+               _("Gold veins contain gold ore that can be dug up by gold digger dwellings."),
+               -- TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
                _("There is only a little bit of gold here.")
             }
          }
@@ -1580,10 +1448,10 @@ tribes:new_tribe {
          name = "amazons_resi_stones_1",
          helptexts = {
             purpose = {
-               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 1
-               _("Precious stones are used in the construction of big buildings. They can be dug up by a crystal mine. You will also get granite from the mine."),
-               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 2
-               _("There are only a few precious stones here.")
+               -- TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 1
+               _("Granite is a basic building material and can be dug up by a stone mine."),
+               -- TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
+               _("There is only a little bit of granite here."),
             }
          }
       },
@@ -1591,9 +1459,9 @@ tribes:new_tribe {
          name = "amazons_resi_gold_2",
          helptexts = {
             purpose = {
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
-               _("Gold veins contain gold ore that can be dug up by gold mines."),
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
+               -- TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 1
+               _("Gold veins contain gold ore that can be dug up by gold digger dwellings."),
+               -- TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
                _("There is a lot of gold here.")
             }
          }
@@ -1602,10 +1470,10 @@ tribes:new_tribe {
          name = "amazons_resi_stones_2",
          helptexts = {
             purpose = {
-               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 1
-               _("Precious stones are used in the construction of big buildings. They can be dug up by a crystal mine. You will also get granite from the mine."),
-               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 2
-               _("There are many precious stones here.")
+               -- TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 1
+               _("Granite is a basic building material and can be dug up by a stone mine."),
+               -- TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
+               _("There is a lot of granite here.")
             }
          }
       },
@@ -1624,23 +1492,23 @@ tribes:new_tribe {
       {
          name = "amazons_headquarters",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Headquarters
+            -- TRANSLATORS: Purpose helptext for an amazon warehouse: Headquarters
             purpose = pgettext("amazons_building", "Accommodation for your people. Also stores your wares and tools."),
-            -- TRANSLATORS: Note helptext for an atlantean warehouse: Headquarters
+            -- TRANSLATORS: Note helptext for an amazon warehouse: Headquarters
             note = pgettext("amazons_building", "The headquarters is your main building.")
          }
       },
       {
          name = "amazons_warehouse",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Warehouse
+            -- TRANSLATORS: Purpose helptext for an amazon warehouse: Warehouse
             purpose = pgettext("building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
          }
       },
       {
          name = "amazons_port",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Port
+            -- TRANSLATORS: Purpose helptext for an amazon warehouse: Port
             purpose = pgettext("amazons_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
          }
       },
