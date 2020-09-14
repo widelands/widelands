@@ -43,10 +43,10 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      standard_element_height_(get_h() * 9 / 200),
      padding_(4),
 
-     main_box_(this, 0, 0, UI::Box::Vertical, get_w(), get_h()),
+     main_box_(this, 0, 0, UI::Box::Vertical),
      content_box_(&main_box_, 0, 0, UI::Box::Horizontal),
      individual_content_box(&content_box_, 0, 0, UI::Box::Vertical),
-     map_box_(&content_box_, 0, 0, UI::Box::Vertical, standard_element_width_),
+     map_box_(&content_box_, 0, 0, UI::Box::Vertical),
      map_details(&map_box_, standard_element_width_, standard_element_height_, padding_),
 
      win_condition_type(&map_box_,
