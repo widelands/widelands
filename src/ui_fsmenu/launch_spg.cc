@@ -31,13 +31,10 @@
 FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const settings,
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(settings, ctrl),
-
      player_setup(&individual_content_box, settings, standard_element_height_, padding_) {
 
-	individual_content_box.add(&player_setup, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-
+	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 	title_.set_text(_("Launch game"));
-
 	ok_.set_enabled(settings_->can_launch());
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {

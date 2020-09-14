@@ -52,24 +52,6 @@ private:
 	SinglePlayerTeamDropdown teams_;
 };
 
-// vertical
-class SinglePlayerActivePlayerSetupBox : public UI::Box {
-
-public:
-	SinglePlayerActivePlayerSetupBox(UI::Panel* const parent,
-	                                 GameSettingsProvider* const settings,
-	                                 uint32_t standard_element_height,
-	                                 uint32_t padding);
-
-	void force_new_dimensions(float scale, uint32_t standard_element_height);
-
-private:
-	GameSettingsProvider* const settings_;
-	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups;  // not owned
-	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
-	void update();
-};
-
 class SinglePlayerSetupBox : public UI::Box {
 
 public:
@@ -81,7 +63,12 @@ public:
 	void force_new_dimensions(float scale, uint32_t standard_element_height);
 
 private:
+	GameSettingsProvider* const settings_;
+	uint32_t standard_height;
+	UI::Box scrollableBox_;
 	UI::Textarea title_;
-	SinglePlayerActivePlayerSetupBox active_players_setup;
+	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups;  // not owned
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
+	void update();
 };
 #endif  // WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H

@@ -28,42 +28,6 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 
-SinglePlayerActivePlayerSetupBox::SinglePlayerActivePlayerSetupBox(
-   UI::Panel* const parent,
-   GameSettingsProvider* const settings,
-   uint32_t standard_element_height,
-   uint32_t padding)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
-
-     settings_(settings) {
-	set_scrolling(true);
-	subscriber_ =
-	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
-}
-void SinglePlayerActivePlayerSetupBox::update() {
-
-	const GameSettings& settings = settings_->settings();
-	const size_t number_of_players = settings.players.size();
-	for (auto& p : active_player_groups) {
-		p->die();
-	}
-	active_player_groups.clear();
-	active_player_groups.resize(number_of_players);
-
-	for (PlayerSlot i = 0; i < active_player_groups.size(); ++i) {
-		active_player_groups.at(i) = new SinglePlayerActivePlayerGroup(this, 20, 20, i, settings_);
-		add(active_player_groups.at(i));
-	}
-}
-
-void SinglePlayerActivePlayerSetupBox::force_new_dimensions(float scale,
-                                                            uint32_t standard_element_height) {
-
-	for (auto& active_player_group : active_player_groups) {
-		active_player_group->force_new_dimensions(scale, standard_element_height);
-	}
-}
-
 SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const parent,
                                                              int32_t const,
                                                              int32_t const h,
@@ -163,6 +127,9 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
                                            uint32_t standard_element_height,
                                            uint32_t padding)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
+     settings_(settings),
+     standard_height(standard_element_height),
+     scrollableBox_(this, 0, 0, UI::Box::Vertical),
      title_(this,
             0,
             0,
@@ -170,14 +137,36 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
             0,
             _("Players"),
             UI::Align::kRight,
-            g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     active_players_setup(this, settings, standard_element_height, padding) {
+            g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
-	add(&active_players_setup);
+	add(&scrollableBox_, Resizing::kAlign, UI::Align::kCenter);
+	scrollableBox_.set_scrolling(true);
+	subscriber_ =
+	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
+}
+
+void SinglePlayerSetupBox::update() {
+
+	const GameSettings& settings = settings_->settings();
+	const size_t number_of_players = settings.players.size();
+	for (auto& p : active_player_groups) {
+		p->die();
+	}
+	active_player_groups.clear();
+	active_player_groups.resize(number_of_players);
+
+	for (PlayerSlot i = 0; i < active_player_groups.size(); ++i) {
+		active_player_groups.at(i) =
+		   new SinglePlayerActivePlayerGroup(this, 0, standard_height, i, settings_);
+		add(active_player_groups.at(i), Resizing::kAlign, UI::Align::kCenter);
+	}
 }
 
 void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
-	active_players_setup.force_new_dimensions(scale, standard_element_height);
+	standard_height = standard_element_height;
 	title_.set_font_scale(scale);
+	for (auto& active_player_group : active_player_groups) {
+		active_player_group->force_new_dimensions(scale, standard_element_height);
+	}
 }
