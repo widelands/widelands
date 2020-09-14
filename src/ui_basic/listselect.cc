@@ -542,6 +542,11 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		} else {
 			// Up, Down, PageUp, PageDown, Home, End
 			switch (code.sym) {
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+			case SDLK_SPACE:
+				clicked();
+				return true;
 			case SDLK_KP_2:
 			case SDLK_DOWN:
 				if (!has_selection()) {
