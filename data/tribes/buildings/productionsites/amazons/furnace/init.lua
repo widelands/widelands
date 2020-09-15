@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    name = "amazons_furnace",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("amazons_building", "Furnace"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -59,6 +58,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
          descname = _"smelting gold",
          actions = {
+            -- time total: 72
             "return=skipped unless economy needs gold",
             "consume=charcoal gold_dust",
             "sleep=duration:30s",

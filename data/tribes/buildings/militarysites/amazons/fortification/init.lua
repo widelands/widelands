@@ -6,7 +6,6 @@ tribes:new_militarysite_type {
    name = "amazons_fortification",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("amazons_building", "Fortification"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
    vision_range = 16,

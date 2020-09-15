@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    name = "amazons_woodcutters_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("amazons_building", "Woodcutter’s Hut"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
    enhancement = "amazons_rare_trees_woodcutters_hut",

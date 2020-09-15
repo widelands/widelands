@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    name = "amazons_hunter_gatherers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("amazons_building", "Hunter-Gatherer’s Hut"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -50,7 +49,7 @@ tribes:new_productionsite_type {
          descname = _"gathering meat",
          actions = {
             "callworker=hunt",
-            "sleep=duration:30s",
+            "sleep=duration:34s",
          }
       },
       fish = {
@@ -58,7 +57,7 @@ tribes:new_productionsite_type {
          descname = _"gathering fish",
          actions = {
             "callworker=fish",
-            "sleep=duration:38s500ms",
+            "sleep=duration:34s",
          }
       },
    },

@@ -6,7 +6,6 @@ tribes:new_militarysite_type {
    name = "amazons_patrol_post",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("amazons_building", "Patrol Post"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 

@@ -561,7 +561,7 @@ tribes:new_tribe {
                   -- TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
                   pgettext("ware", "The felling ax is the tool to chop down trees."),
                   -- TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 2
-                  pgettext("amazons_ware", "They are used by the woodcutters and produced by the stonecarver.")
+                  pgettext("amazons_ware", "It is used by a woodcutter and produced by the stonecarver.")
                }
             }
          },
@@ -574,7 +574,7 @@ tribes:new_tribe {
                   -- TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
                   pgettext("ware", "Shovels are needed for the proper handling of plants."),
                   -- TRANSLATORS: Helptext for an amazon ware: Shovel, part 2
-                  pgettext("amazons_ware", "Therefore the jungle preservers and the cassava and cocoa farmers use them. They are produced by the stonecarver.")
+                  pgettext("amazons_ware", "Therefore the jungle preservers, the cassava farmers and the cocoa farmers use them. They are produced by the stonecarver.")
                }
             }
          },
@@ -1002,420 +1002,420 @@ tribes:new_tribe {
       {
          name = "ashes",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Ashes
+            -- TRANSLATORS: Helptext for an amazon immovable: Ashes
             purpose = _("The remains of a destroyed building.")
          }
       },
       {
          name = "destroyed_building",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
+            -- TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
             purpose = _("The remains of a destroyed building.")
          }
       },
       {
          name = "deadtree7",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Ashes
+            -- TRANSLATORS: Helptext for an amazon immovable: Ashes
             purpose = _("The remains of an old tree.")
          }
       },
       {
          name = "balsa_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_black_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_black_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_black_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_desert_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_desert_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_desert_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_winter_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_winter_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_winter_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_black_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_black_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_black_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_desert_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_desert_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_desert_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_winter_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_winter_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_winter_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_black_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_black_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_black_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_desert_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_desert_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_desert_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_winter_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_winter_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_winter_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "cassavarootfield_tiny",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Cassavaroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Cassavaroot Field
             purpose = _("This field has just been planted.")
          }
       },
       {
          name = "cassavarootfield_small",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Cassavaroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Cassavaroot Field
             purpose = _("This field is growing.")
          }
       },
       {
          name = "cassavarootfield_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Cassavaroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Cassavaroot Field
             purpose = _("This field is growing.")
          }
       },
       {
          name = "cassavarootfield_ripe",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Casavaroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Casavaroot Field
             purpose = _("This field is ready for harvesting.")
          }
       },
       {
          name = "cassavarootfield_harvested",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Cassavaroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Cassavaroot Field
             purpose = _("This field has been harvested.")
          }
       },
       {
          name = "cocoa_tree_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Cocoa Tree
+            -- TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "cocoa_tree_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "cocoa_tree_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "cocoa_tree_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
@@ -1438,7 +1438,7 @@ tribes:new_tribe {
          helptexts = {
             purpose = {
                -- TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 1
-               _("Gold veins contain gold ore that can be dug up by gold digger dwellings."),
+               _("Gold veins contain gold ore that can be washed from the gravel at digger dwellings."),
                -- TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
                _("There is only a little bit of gold here.")
             }
@@ -1460,7 +1460,7 @@ tribes:new_tribe {
          helptexts = {
             purpose = {
                -- TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 1
-               _("Gold veins contain gold ore that can be dug up by gold digger dwellings."),
+               _("Gold veins contain gold ore that can be washed from the gravel at gold digger dwellings."),
                -- TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
                _("There is a lot of gold here.")
             }
@@ -1480,7 +1480,7 @@ tribes:new_tribe {
       {
          name = "amazons_shipconstruction",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
+            -- TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
             purpose = _("A ship is being constructed at this site.")
          }
       },
@@ -1518,78 +1518,81 @@ tribes:new_tribe {
       {
          name = "amazons_stonecutters_hut",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Quarry
-            purpose = pgettext("amazons_building", "Cuts blocks of granite out of rocks in the vicinity."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Quarry
-            note = pgettext("amazons_building", "The quarry needs rocks to cut within the work area.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Stonecutter's Hut
+            purpose = pgettext("amazons_building", "Cuts raw pieces of granite out of rocks in the vicinity."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Stonecutter's Hut
+            note = pgettext("amazons_building", "The stonecutter’s hut needs rocks to cut within the work area.")
          }
       },
       {
          name = "amazons_woodcutters_hut",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Woodcutter's House
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Woodcutter's Hut
             purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Woodcutter's House
-            note = pgettext("amazons_building", "The woodcutter’s house needs trees to fell within the work area.")
+            -- TRANSLATORS: Note helptext for an amazon production site: Woodcutter's Hut
+            note = pgettext("amazons_building", "The woodcutter’s hut needs trees to fell within the work area.")
          }
       },
       {
          name = "amazons_junglepreservers_hut",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Forester's House
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Junglepreserver's Hut
             purpose = pgettext("building", "Plants trees in the surrounding area."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Forester's House
-            note = pgettext("amazons_building", "The forester’s house needs free space within the work area to plant the trees.")
+            -- TRANSLATORS: Note helptext for an amazon production site: Junglepreserver's Hut
+            note = pgettext("amazons_building", "The junglepreserver’s hut needs free space within the work area to plant the trees.")
          }
       },
       {
          name = "amazons_hunter_gatherers_hut",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Fisher's House
-            purpose = pgettext("amazons_building", "Fishes on the coast near the fisher’s house."),
-            note = {
-               -- TRANSLATORS: Note helptext for an atlantean production site: Fisher's House, part 1
-               pgettext("amazons_building", "The fisher’s house needs water full of fish within the work area."),
-               -- TRANSLATORS: Note helptext for an atlantean production site: Fisher's House, part 2
-               pgettext("amazons_building", "Build a fish breeder’s house close to the fisher’s house to make sure that you don’t run out of fish.")
-            }
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Hunter Gatherer's Hut
+            purpose = pgettext("building", "Hunts animals to produce meat. Catches fish in the waters."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Hunter Gatherer's Hut
+            note = pgettext("amazons_building", "The hunter-gatherer’s house needs animals or fish to hunt or catch within the work area."),
+            -- TRANSLATORS: Performance helptext for an amazon production site: Fisher's House, part 2
+            performance = pgettext("amazons_building", "The hunter-gatherer pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 34):bformat(34))
+
          }
       },
       {
          name = "amazons_liana_cutters_hut",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Fish Breeder's House
-            purpose = pgettext("building", "Breeds fish.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Liana Cutter's Hut
+            purpose = pgettext("building", "Home of the liana cutter who cuts lianas for making ropes.")
          }
       },
       {
          name = "amazons_water_gatherers_hut",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's House
-            purpose = pgettext("building", "Hunts animals to produce meat."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Hunter's House
-            note = pgettext("amazons_building", "The hunter’s house needs animals to hunt within the work area.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Water Gatherer's Hut
+            purpose = pgettext("building", "Draws water out of the rivers and lakes."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Water Gatherer's Hut
+            note = pgettext("amazons_building", "The water gatherer’s hut needs open water within the work area. It cannot dig up water from the ground!")
          }
       },
       {
          name = "amazons_rare_trees_woodcutters_hut",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Well
-            purpose = pgettext("building", "Draws water out of the deep.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Rare Trees Woodcutter's Hut
+            purpose = pgettext("building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber.")
          }
       },
       {
          name = "amazons_wilderness_keepers_tent",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Gold Spinning Mill
-            purpose = pgettext("amazons_building", "Spins gold thread out of gold.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Wilderness Keeper's Tent
+            purpose = pgettext("building", "Breeds fish and grews game to renew food ressources."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Wilderness Keeper's Tent
+            note = pgettext("building", "The wilderness keeper will only release a new game at a nearby tree.")
          }
       },
       {
          name = "amazons_scouts_hut",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Scout's House
-            purpose = pgettext("building", "Explores unknown territory.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Scout's Hut
+            purpose = pgettext("building", "Explores unknown territory."),
+            -- TRANSLATORS: Performance helptext for an amazon production site: Scout's Hut
+            performance = pgettext("amazons_building", "The scout pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
          }
       },
 
@@ -1597,80 +1600,88 @@ tribes:new_tribe {
       {
          name = "amazons_rope_weaver_booth",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Sawmill
-            purpose = pgettext("building", "Saws logs to produce planks.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Rope Weaver Booth
+            purpose = pgettext("building", "Makes ropes from lianas.")
          }
       },
       {
          name = "amazons_furnace",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Smokery
-            purpose = pgettext("amazons_building", "Smokes meat and fish to feed the scouts and miners and to train soldiers in the dungeon.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Furnace
+            purpose = pgettext("building", "Smelts gold dust into gold ingots using charcoal."),
+            -- TRANSLATORS: Performance helptext for an amazon production site: Furnace
+            performance = pgettext("amazons_building", "The furnace can produce one gold ingot in %s on average if the supply is steady."):bformat(ngettext("%d second", "%d seconds", 72):bformat(72))
          }
       },
       {
          name = "amazons_rare_tree_plantation",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Mill
-            purpose = pgettext("amazons_building", "Grinds blackroots and corn to produce blackroot flour and cornmeal, respectively."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Mill
-            note = pgettext("amazons_building", "When no cornmeal is required, the mill will try to produce blackroot flour even when there is no demand for it.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Rare Tree Plantation
+            purpose = pgettext("building", "Plants rare trees which are needed by the amazons. Such like balsa, rubber and ironwood.")
          }
       },
       {
          name = "amazons_stonecarvery",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Bakery
-            purpose = pgettext("amazons_building", "Bakes bread to feed the scouts and miners and to train soldiers.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Stonecarvery
+            purpose = pgettext("building", "Makes tools and spears for our soldiers.")
          }
       },
       {
          name = "amazons_dressmakery",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal Kiln
-            purpose = pgettext("building", "Burns logs into charcoal.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Dressmakery
+            purpose = pgettext("building", "Sews all dresses, boots and armors for our soldiers.")
          }
       },
       {
          name = "amazons_charcoal_kiln",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Smelting Works
-            purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Charcoal Kiln
+            purpose = pgettext("building", "Burns logs into charcoal."),
+            -- TRANSLATORS: Performance helptext for an amazon production site: Charcoal Kiln
+            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one coal."):bformat(ngettext("%d second", "%d seconds", 121):bformat(121))
          }
       },
       {
          name = "amazons_cassava_root_cooker",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Cassava Root Cooker
+            purpose = pgettext("amazons_building", "Bakes bread from cassava root.")
          }
       },
       {
          name = "amazons_chocolate_brewery",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Weapon Smithy
-            purpose = pgettext("amazons_building", "Forges tridents to equip the soldiers and to train their attack in the dungeon.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Chocolate Brewery
+            purpose = pgettext("building", "Brews chocolate for soldier training."),
+            -- TRANSLATORS: Performance helptext for an amazon production site: Chocolate Brewery
+            performance = pgettext("amazons_building", "The chocolate brewery needs %s on average to brew one mug of chocolate."):bformat(ngettext("%d second", "%d seconds", 60):bformat(60))
          }
       },
       {
          name = "amazons_food_preserver",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Armor Smithy
-            purpose = pgettext("amazons_building", "Forges shields that are used for training soldiers’ defense in the labyrinth.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Food Preserver
+            purpose = pgettext("building", "Prepares rations to feed the scouts and miners."),
+            -- TRANSLATORS: Performance helptext for an amazon production site: Food Preserver
+            performance = pgettext("amazons_building", "The food preserver can produce one ration in %s on average if the supply is steady."):bformat(ngettext("%d second", "%d seconds", 17):bformat(17))
          }
       },
       {
          name = "amazons_youth_gathering",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Barracks
-            purpose = pgettext("amazons_building", "Equips recruits and trains them as soldiers.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Youth Gathering
+            purpose = pgettext("amazons_building", "Equips recruits and trains them as soldiers."),
+            -- TRANSLATORS: Performance helptext for an amazon production site: Youth Gathering
+            performance = pgettext("amazons_building", "The youth gathering needs %s on average to recruit one soldier."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
          }
       },
       {
          name = "amazons_gardening_center",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Barracks
-            purpose = pgettext("amazons_building", "Equips recruits and trains them as soldiers.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Gardening Center
+            purpose = pgettext("building", "Enhances the fertiity for trees of the landscape.")
          }
       },
 
@@ -1678,26 +1689,28 @@ tribes:new_tribe {
       {
          name = "amazons_tapir_farm",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Horse Farm
-            purpose = pgettext("amazons_building", "Breeds the strong Atlantean horses for adding them to the transportation system.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Tapir Farm
+            purpose = pgettext("amazons_building", "Breeds tapir for adding them to the transportation system."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Tapir Farm
+            note = pgettext ("amazons_building", "Tapirs help to prevent trafic jams on highly used roads.")
          }
       },
       {
          name = "amazons_cassava_root_plantation",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Farm
-            purpose = pgettext("amazons_building", "Sows and harvests corn."),
-            -- TRANSLATORS: Performance helptext for an atlantean production site: Farm
-            performance = pgettext("amazons_building", "The farmer needs %1% on average to sow and harvest a sheaf of corn."):bformat(format_minutes_seconds(1, 20))
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Cassava Root Plantation
+            purpose = pgettext("amazons_building", "Sows and harvests cassava root."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Cassava Root Plantation
+            note = pgettext ("amazons_building", "The cassava root plantation needs free space within the work area to plant seeds.")
          }
       },
       {
          name = "amazons_cocoa_farm",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Blackroot Farm
-            purpose = pgettext("amazons_building", "Sows and harvests blackroot."),
-            -- TRANSLATORS: Performance helptext for an atlantean production site: Blackroot Farm
-            performance = pgettext("amazons_building", "The blackroot farmer needs %1% on average to sow and harvest a bundle of blackroot."):bformat(format_minutes_seconds(1, 20))
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Cocoa Farm
+            purpose = pgettext("amazons_building", "Cultivates cocoa that is needed to brew chocolate drinks."),
+            -- TRANSLATORS: Note helptext for an amazon production site: Cocoa Farm
+            note = pgettext("amazons_building", "Chocolate is essential in training amazon soldiers.")
          }
       },
 
@@ -1705,15 +1718,17 @@ tribes:new_tribe {
       {
          name = "amazons_stonemine",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Crystal Mine
-            purpose = pgettext("amazons_building", "Carves precious stones out of the rock in mountain terrain.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Stone Mine
+            purpose = pgettext("building", "Digs granite out of the ground in mountain terrain."),
+            -- TRANSLATORS: Performance helptext for an amazon production site: Stone Mine
+            performance = pgettext("amazons_building", "The stone mine can produce one piece of granite in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(ngettext("%d second", "%d seconds", 32):bformat(32))
          }
       },
       {
          name = "amazons_gold_digger_dwelling",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
-            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Gold Digger Dwelling
+            purpose = pgettext("building", "Washes gold dust out of the ground in mountain terrain.")
          }
       },
 
@@ -1721,23 +1736,19 @@ tribes:new_tribe {
       {
          name = "amazons_warriors_gathering",
          helptexts = {
-            purpose = {
-               -- TRANSLATORS: Purpose helptext for an atlantean training site: Dungeon, part 1
-               pgettext("amazons_building", "Trains soldiers in ‘Attack’."),
-               -- TRANSLATORS: Purpose helptext for an atlantean training site: Dungeon, part 2
-               pgettext("amazons_building", "Equips the soldiers with all necessary weapons and armor parts.")
-            }
+            -- TRANSLATORS: Purpose helptext for an amazon training site: Warriors Gathering
+            purpose = pgettext("amazons_building", "Trains soldiers in Attack up to level 2. Equips the soldiers with all necessary weapons."),
+            -- TRANSLATORS: Note helptext for an amazon training site: Warriors Gathering
+            note = pgettext("amazons_building", "Amazon soldiers need chocolate to train properly.")
          }
       },
       {
          name = "amazons_training_glade",
          helptexts = {
-            purpose = {
-               -- TRANSLATORS: Purpose helptext for an atlantean training site: Labyrinth, part 1
-               pgettext("amazons_building", "Trains soldiers in ‘Defense’, ‘Evade’, and ‘Health’."),
-               -- TRANSLATORS: Purpose helptext for an atlantean training site: Labyrinth, part 2
-               pgettext("amazons_building", "Equips the soldiers with all necessary weapons and armor parts.")
-            }
+            -- TRANSLATORS: Purpose helptext for an amazon training site: Warriors Gathering
+            purpose = pgettext("amazons_building", "Trains soldiers in Evade, Defense and Health. Equips the soldiers with all necessary equipment and armor parts."),
+            -- TRANSLATORS: Note helptext for an amazon training site: Warriors Gathering
+            note = pgettext("amazons_building", "Amazon soldiers need chocolate to train their soldiers properly.")
          }
       },
 
@@ -1810,16 +1821,16 @@ tribes:new_tribe {
       {
          name = "amazons_ferry_yard",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Ferry Yard
             purpose = pgettext("building", "Builds ferries."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Ferry Yard
+            -- TRANSLATORS: Note helptext for an amazon production site: Ferry Yard
             note = pgettext("building", "Needs water nearby.")
          }
       },
       {
          name = "amazons_shipyard",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Shipyard
             purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports.")
          }
       },

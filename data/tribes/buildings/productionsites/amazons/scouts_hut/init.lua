@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    name = "amazons_scouts_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("amazons_building", "Scout’s Hut"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -42,8 +41,8 @@ tribes:new_productionsite_type {
          descname = _"scouting",
          actions = {
             "consume=ration",
-            "sleep=duration:30s",
-            "callworker=scout"
+            "callworker=scout",
+            "sleep=duration:30s"
          }
       },
    },

@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    name = "amazons_gold_digger_dwelling",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("amazons_building", "Gold Digger Dwelling"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
 

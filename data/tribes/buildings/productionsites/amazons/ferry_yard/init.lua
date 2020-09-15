@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    name = "amazons_ferry_yard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("amazons_building", "Ferry Yard"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    map_check = {"waterways"},

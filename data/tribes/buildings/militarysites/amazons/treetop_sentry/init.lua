@@ -6,7 +6,6 @@ tribes:new_militarysite_type {
    name = "amazons_treetop_sentry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("amazons_building", "Treetop Sentry"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
    built_over_immovable = "tree",

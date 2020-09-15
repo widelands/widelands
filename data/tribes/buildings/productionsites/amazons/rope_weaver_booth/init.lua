@@ -6,7 +6,6 @@ tribes:new_productionsite_type {
    name = "amazons_rope_weaver_booth",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("amazons_building", "Rope Weaver Booth"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
