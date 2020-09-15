@@ -1429,7 +1429,7 @@ bool Player::should_see(const FCoords& f, std::list<const MapObject*>& nearby_ob
 			assert(is_a(Building, mo));
 			const Building* b = static_cast<const Building*>(mo);
 			if (b->is_seeing() &&
-				egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
+			    egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
 				return true;
 			}
 		} else {
@@ -1448,7 +1448,9 @@ void Player::update_vision(const FCoords& f, bool force_visible) {
 	update_vision(f, force_visible, seers_);
 }
 
-void Player::update_vision(const FCoords& f, bool force_visible, std::list<const MapObject*>& nearby_objects) {
+void Player::update_vision(const FCoords& f,
+                           bool force_visible,
+                           std::list<const MapObject*>& nearby_objects) {
 	if (!fields_ || egbase().objects().is_cleaning_up()) {
 		return;
 	}
@@ -1494,7 +1496,8 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 				assert(is_a(Building, seer));
 				const Building* b = static_cast<const Building*>(seer);
 				if (b->is_seeing()) {
-					int dist = egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
+					int dist =
+					   egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
 					if (dist <= area.radius) {
 						nearby_objects.push_back(std::make_pair(dist, b));
 					}
@@ -1503,7 +1506,8 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 				// currently only buildings and bobs can see fields
 				assert(is_a(Bob, seer));
 				const Bob* b = static_cast<const Bob*>(seer);
-				int dist = egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
+				int dist =
+				   egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
 				if (dist <= area.radius) {
 					nearby_objects.push_back(std::make_pair(dist, b));
 				}
@@ -1511,10 +1515,10 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 		}
 	}
 	// Sort the list, so the objects that are more likely to be a hit are evaluated first.
-	nearby_objects.sort([](std::pair<int, const MapObject*>& a, std::pair<int, const MapObject*>& b) { return a.first < b.first; });
+	nearby_objects.sort([](std::pair<int, const MapObject*>& a,
+	                       std::pair<int, const MapObject*>& b) { return a.first < b.first; });
 	std::list<const MapObject*> nearby_objects_2;
-	std::transform(nearby_objects.begin(),
-	               nearby_objects.end(),
+	std::transform(nearby_objects.begin(), nearby_objects.end(),
 	               std::back_inserter(nearby_objects_2),
 	               [](std::pair<int, const MapObject*>& pair) { return pair.second; });
 
