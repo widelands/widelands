@@ -14,8 +14,8 @@ function iron()
    tools.done = true
    msg_boxes(tools_available)
    run(mining)
-
-
+   Kalitath:set_attack_forbidden(2, false)
+   Maletus:set_attack_forbidden(3, false)
 end
 
 function mining()
@@ -109,6 +109,10 @@ function allies()
    Kalitath:set_attack_forbidden(1, true)
    sleep(300000)
    msg_boxes(tribute)
+   while not check_for_buildings(p1, {
+      atlanteans_trading_post = 1,
+   }) do sleep(3731) end
+   
 end
 
 function maletus_defeated()
@@ -124,10 +128,11 @@ function infrastructure()
    }) do sleep(3731) end
    basic_infrastructure.done = true
    msg_boxes(infrastructure_1)
-
 end
 
 function intro()
+   Kalitath:set_attack_forbidden(2, true)
+   Maletus:set_attack_forbidden(3, true)
    sleep(500)
 
    --p1.see_all = true -- TODO: remove this

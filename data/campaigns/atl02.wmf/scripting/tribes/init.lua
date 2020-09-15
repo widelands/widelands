@@ -9,14 +9,25 @@ local result = {
             name = "atlanteans_trading_post",
             helptexts = {
                -- TRANSLATORS: Purpose helptext for an atlantean market site: Trading post
-               purpose = pgettext("building", "Enables the share of goods with other players.")
+               purpose = pgettext("atlanteans_building", "Enables the share of goods with other players.")
             }
          },
          {
             name = "atlanteans_scouts_house1",
             helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Scout's House
-            purpose = pgettext("building", "Explores unknown territory.")
+               -- TRANSLATORS: Purpose helptext for an atlantean production site: Scout's House
+               purpose = pgettext("atlanteans_building", "Explores unknown territory.")
+            }
+         },
+      }
+   },
+   barbarians = {
+      buildings = {
+         {
+            name = "barbarians_trading_post",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for an barbarian market site: Trading post
+               purpose = pgettext("barbarians_building", "Enables the share of goods with other players.")
             }
          },
       }

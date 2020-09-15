@@ -1,11 +1,9 @@
 dirname = "campaigns/atl02.wmf/scripting/tribes/scouts_house1/"
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_scouts_house1",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Scout’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 

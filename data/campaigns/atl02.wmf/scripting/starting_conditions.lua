@@ -8,6 +8,7 @@
 
 -- Initializing p1 (the scenario player)
    p1:allow_buildings("all")
+   p1:forbid_buildings{"atlanteans_scouts_house"}
    p1:allow_workers("all")
 
    local sf = map.player_slots[1].starting_field

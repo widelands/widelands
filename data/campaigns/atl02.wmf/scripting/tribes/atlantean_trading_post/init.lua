@@ -1,13 +1,11 @@
-dirname = "campaigns/atl02.wmf/scripting/tribes/trading_post/"
+dirname = "campaigns/atl02.wmf/scripting/tribes/atlantean_trading_post/"
 
 push_textdomain("scenario_atl02.wmf")
 
 tribes:new_market_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_trading_post",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Trading Post"),
-   helptext_script = dirname .. "helptexts.lua",
    animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
@@ -15,10 +13,10 @@ tribes:new_market_type {
 
    animations = {
       idle = {
-         hotspot = { 67, 80 },
+         hotspot = { 50, 56 },
       },
    },
    aihints = {},
-   
+
    carrier = "atlanteans_horse",
 }
