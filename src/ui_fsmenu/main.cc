@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/main.h"
 
+#include <cstdlib>
+
 #include <SDL_timer.h>
 
 #include "base/i18n.h"

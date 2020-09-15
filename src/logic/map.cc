@@ -19,6 +19,7 @@
 
 #include "logic/map.h"
 
+#include <cstdlib>
 #include <memory>
 #include <queue>
 

@@ -22,6 +22,7 @@
 #include <cassert>
 #include <cerrno>
 #include <chrono>
+#include <cstdlib>
 #include <cstring>
 #include <ctime>
 #include <memory>
