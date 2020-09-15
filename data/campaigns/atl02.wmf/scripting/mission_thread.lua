@@ -64,13 +64,13 @@ function enemy()
    end
    msg_boxes(enemy_1)
    while not check_for_buildings(p1, {
-      atlanteans_scouts_house = 1,
+      atlanteans_scouts_house1 = 1,
    }) do sleep(3731) end
    local scout = nil
    local contact = nil
    while not scout do
       -- let's see if a scout is going around
-      for i,house in pairs(p1:get_buildings("atlanteans_scouts_house")) do
+      for i,house in pairs(p1:get_buildings("atlanteans_scouts_house1")) do
          for j,field in pairs(house.fields[1]:region(17)) do -- the scout has a radius of 15
             for k,bob in pairs(field.bobs) do
                if bob.descr.name == "atlanteans_scout" then
@@ -93,7 +93,7 @@ function enemy()
          contact = true
       end
    end
-   while not (scout.field.immovable and scout.field.immovable.descr.name == "atlanteans_scouts_house") do
+   while not (scout.field.immovable and scout.field.immovable.descr.name == "atlanteans_scouts_house1") do
       sleep (2000)
    end
 
