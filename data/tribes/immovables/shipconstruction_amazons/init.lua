@@ -8,7 +8,6 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Ship Under Construction"),
    icon = dirname .. "menu.png",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    programs = {
       main = {
          "construct=idle duration:5s decay_after:3m30s",

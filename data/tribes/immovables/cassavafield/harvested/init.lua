@@ -6,7 +6,6 @@ tribes:new_immovable_type {
    name = "cassavarootfield_harvested",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Cassavaroot Field (harvested)"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    programs = {
       main = {

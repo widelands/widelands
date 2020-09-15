@@ -78,7 +78,6 @@ tribes:new_immovable_type{
    name = "balsa_amazons_sapling",
    -- TRANSLATORS: This is a amazon rare tree.
    descname = _ "Balsa Tree (Sapling)",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -97,7 +96,6 @@ tribes:new_immovable_type{
    name = "balsa_amazons_pole",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Pole)",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -116,7 +114,6 @@ tribes:new_immovable_type{
    name = "balsa_amazons_mature",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Mature)",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -137,7 +134,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Old)",
    -- TRANSLATORS:  This is a amazon rare tree.
    species = _ "Balsa Tree",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -160,7 +156,6 @@ tribes:new_immovable_type{
    name = "balsa_black_amazons_sapling",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Sapling)",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity_black,
    programs = {
@@ -179,7 +174,6 @@ tribes:new_immovable_type{
    name = "balsa_black_amazons_pole",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Pole)",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity_black,
    programs = {
@@ -198,7 +192,6 @@ tribes:new_immovable_type{
    name = "balsa_black_amazons_mature",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Mature)",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity_black,
    programs = {
@@ -219,7 +212,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Old)",
    -- TRANSLATORS:  This is a amazon rare tree.
    species = _ "Balsa Tree",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity_black,
    programs = {
@@ -242,7 +234,6 @@ tribes:new_immovable_type{
    name = "balsa_desert_amazons_sapling",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Sapling)",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity_desert,
    programs = {
@@ -261,7 +252,6 @@ tribes:new_immovable_type{
    name = "balsa_desert_amazons_pole",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Pole)",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity_desert,
    programs = {
@@ -280,7 +270,6 @@ tribes:new_immovable_type{
    name = "balsa_desert_amazons_mature",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Mature)",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity_desert,
    programs = {
@@ -301,7 +290,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Old)",
    -- TRANSLATORS:  This is a amazon rare tree.
    species = _ "Balsa Tree",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity_desert,
    programs = {
@@ -324,7 +312,6 @@ tribes:new_immovable_type{
    name = "balsa_winter_amazons_sapling",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Sapling)",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity_winter,
    programs = {
@@ -343,7 +330,6 @@ tribes:new_immovable_type{
    name = "balsa_winter_amazons_pole",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Pole)",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity_winter,
    programs = {
@@ -362,7 +348,6 @@ tribes:new_immovable_type{
    name = "balsa_winter_amazons_mature",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Mature)",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity_winter,
    programs = {
@@ -383,7 +368,6 @@ tribes:new_immovable_type{
    descname = _ "Balsa Tree (Old)",
    -- TRANSLATORS:  This is a amazon rare tree.
    species = _ "Balsa Tree",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity_winter,
    programs = {

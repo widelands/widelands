@@ -6,7 +6,6 @@ tribes:new_immovable_type {
    name = "cocoa_tree_sapling",
    descname = _ "Cocoa Tree (sapling)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu_sapling.png",
    programs = {
       main = {
@@ -30,7 +29,6 @@ tribes:new_immovable_type {
    name = "cocoa_tree_pole",
    descname = _ "Cocoa Tree (pole)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu_pole.png",
    programs = {
       main = {
@@ -54,7 +52,6 @@ tribes:new_immovable_type {
    name = "cocoa_tree_mature",
    descname = _ "Cocoa Tree (mature)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu_mature.png",
    programs = {
       main = {
@@ -78,7 +75,6 @@ tribes:new_immovable_type {
    name = "cocoa_tree_old",
    descname = _ "Cocoa Tree (old)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu_old.png",
    programs = {
       main = {

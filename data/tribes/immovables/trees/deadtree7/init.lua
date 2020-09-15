@@ -7,7 +7,6 @@ tribes:new_immovable_type{
    name = "deadtree7",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Dead Tree",
-   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

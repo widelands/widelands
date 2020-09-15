@@ -1023,337 +1023,337 @@ tribes:new_tribe {
       {
          name = "balsa_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Sapling
+            purpose = _("This balsa tree has just been planted.")
          }
       },
       {
          name = "balsa_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Pole
+            purpose = _("This balsa tree is growing.")
          }
       },
       {
          name = "balsa_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Mature
+            purpose = _("This balsa tree has grown up. Lianas can be gathered from him.")
          }
       },
       {
          name = "balsa_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Old
+            purpose = _("This balsa tree is ready for harvesting balsa wood by a master woodcutter. Other tribes can harvest him for normal log.")
          }
       },
       {
          name = "balsa_black_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Sapling
+            purpose = _("This balsa tree has just been planted.")
          }
       },
       {
          name = "balsa_black_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Pole
+            purpose = _("This balsa tree is growing.")
          }
       },
       {
          name = "balsa_black_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Mature
+            purpose = _("This balsa tree has grown up. Lianas can be gathered from him.")
          }
       },
       {
          name = "balsa_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Old
+            purpose = _("This balsa tree is ready for harvesting balsa wood by a master woodcutter. Other tribes can harvest him for normal log.")
          }
       },
       {
          name = "balsa_desert_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Sapling
+            purpose = _("This balsa tree has just been planted.")
          }
       },
       {
          name = "balsa_desert_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Pole
+            purpose = _("This balsa tree is growing.")
          }
       },
       {
          name = "balsa_desert_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Mature
+            purpose = _("This balsa tree has grown up. Lianas can be gathered from him.")
          }
       },
       {
          name = "balsa_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Old
+            purpose = _("This balsa tree is ready for harvesting balsa wood by a master woodcutter. Other tribes can harvest him for normal log.")
          }
       },
       {
          name = "balsa_winter_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Sapling
+            purpose = _("This balsa tree has just been planted.")
          }
       },
       {
          name = "balsa_winter_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Pole
+            purpose = _("This balsa tree is growing.")
          }
       },
       {
          name = "balsa_winter_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Mature
+            purpose = _("This balsa tree has grown up. Lianas can be gathered from him.")
          }
       },
       {
          name = "balsa_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Old
+            purpose = _("This balsa tree is ready for harvesting balsa wood by a master woodcutter. Other tribes can harvest him for normal log.")
          }
       },
       {
          name = "ironwood_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Sapling
+            purpose = _("This ironwood tree has just been planted.")
          }
       },
       {
          name = "ironwood_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Pole
+            purpose = _("This ironwood tree is growing.")
          }
       },
       {
          name = "ironwood_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Mature
+            purpose = _("This ironwood tree has grown up. Lianas can be gathered from him.")
          }
       },
       {
          name = "ironwood_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Old
+            purpose = _("This ironwood tree is ready for harvesting ironwood by a master woodcutter. Other tribes can harvest him for normal log.")
          }
       },
       {
          name = "ironwood_black_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Sapling
+            purpose = _("This ironwood tree has just been planted.")
          }
       },
       {
          name = "ironwood_black_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Pole
+            purpose = _("This ironwood tree is growing.")
          }
       },
       {
          name = "ironwood_black_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Mature
+            purpose = _("This ironwood tree has grown up. Lianas can be gathered from him.")
          }
       },
       {
          name = "ironwood_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Old
+            purpose = _("This ironwood tree is ready for harvesting ironwood by a master woodcutter. Other tribes can harvest him for normal log.")
          }
       },
       {
          name = "ironwood_desert_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Sapling
+            purpose = _("This ironwood tree has just been planted.")
          }
       },
       {
          name = "ironwood_desert_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Pole
+            purpose = _("This ironwood tree is growing.")
          }
       },
       {
          name = "ironwood_desert_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Mature
+            purpose = _("This ironwood tree has grown up. Lianas can be gathered from him.")
          }
       },
       {
          name = "ironwood_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Old
+            purpose = _("This ironwood tree is ready for harvesting ironwood by a master woodcutter. Other tribes can harvest him for normal log.")
          }
       },
       {
          name = "ironwood_winter_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Sapling
+            purpose = _("This ironwood tree has just been planted.")
          }
       },
       {
          name = "ironwood_winter_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Pole
+            purpose = _("This ironwood tree is growing.")
          }
       },
       {
          name = "ironwood_winter_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Mature
+            purpose = _("This ironwood tree has grown up. Lianas can be gathered from him.")
          }
       },
       {
          name = "ironwood_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Old
+            purpose = _("This ironwood tree is ready for harvesting ironwood by a master woodcutter. Other tribes can harvest him for normal log.")
          }
       },
       {
          name = "rubber_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Sapling
+            purpose = _("This rubber tree has just been planted.")
          }
       },
       {
          name = "rubber_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Pole
+            purpose = _("This rubber tree is growing.")
          }
       },
       {
          name = "rubber_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Mature
+            purpose = _("This rubber tree has grown up. Lianas can be gathered from him.")
          }
       },
       {
          name = "rubber_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Old
+            purpose = _("This rubber tree is ready for harvesting rubber by a master woodcutter. Other tribes can harvest him for normal log.")
          }
       },
       {
          name = "rubber_black_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Sapling
+            purpose = _("This rubber tree has just been planted.")
          }
       },
       {
          name = "rubber_black_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Pole
+            purpose = _("This rubber tree is growing.")
          }
       },
       {
          name = "rubber_black_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Mature
+            purpose = _("This rubber tree has grown up. Lianas can be gathered from him.")
          }
       },
       {
          name = "rubber_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Old
+            purpose = _("This rubber tree is ready for harvesting rubber by a master woodcutter. Other tribes can harvest him for normal log.")
          }
       },
       {
          name = "rubber_desert_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Sapling
+            purpose = _("This rubber tree has just been planted.")
          }
       },
       {
          name = "rubber_desert_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Pole
+            purpose = _("This rubber tree is growing.")
          }
       },
       {
          name = "rubber_desert_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Mature
+            purpose = _("This rubber tree has grown up. Lianas can be gathered from him.")
          }
       },
       {
          name = "rubber_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Old
+            purpose = _("This rubber tree is ready for harvesting rubber by a master woodcutter. Other tribes can harvest him for normal log.")
          }
       },
       {
          name = "rubber_winter_amazons_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Sapling
+            purpose = _("This rubber tree has just been planted.")
          }
       },
       {
          name = "rubber_winter_amazons_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Pole
+            purpose = _("This rubber tree is growing.")
          }
       },
       {
          name = "rubber_winter_amazons_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Mature
+            purpose = _("This rubber tree has grown up. Lianas can be gathered from him.")
          }
       },
       {
          name = "rubber_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Corn Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Old
+            purpose = _("This rubber tree is ready for harvesting rubber by a master woodcutter. Other tribes can harvest him for normal log.")
          }
       },
       {
@@ -1394,29 +1394,29 @@ tribes:new_tribe {
       {
          name = "cocoa_tree_sapling",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Sapling
+            purpose = _("This cocoa tree has just been planted.")
          }
       },
       {
          name = "cocoa_tree_pole",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Pole
+            purpose = _("This cocoa tree is growing.")
          }
       },
       {
          name = "cocoa_tree_mature",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Mature
+            purpose = _("This cocoa tree has grown up.")
          }
       },
       {
          name = "cocoa_tree_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Old
+            purpose = _("The beans on this cocoa tree are ready for harvesting.")
          }
       },
       {
