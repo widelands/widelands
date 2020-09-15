@@ -1553,6 +1553,9 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 		return;
 	}
 
+	// Build a list of nearby objects.
+	// This way we only evaluate all objects (which is very expensive) once.
+	// When updating individual fields, only the objects from this list are evaluated.
 	std::list<std::pair<int, const MapObject*>> nearby_objects;
 	for (const PlayerNumber& p : team_player_) {
 		Player& player = *egbase().get_player(p);
@@ -1562,7 +1565,7 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 				const Building* b = static_cast<const Building*>(seer);
 				if (b->is_seeing()) {
 					int dist = egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
-					if (dist <= area.radius) { // could be off-by-one -> verify
+					if (dist <= area.radius) {
 						nearby_objects.push_back(std::make_pair(dist, b));
 					}
 				}
@@ -1571,14 +1574,13 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 				assert(is_a(Bob, seer));
 				const Bob* b = static_cast<const Bob*>(seer);
 				int dist = egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
-				if (dist <= area.radius) { // could be off-by-one -> verify
+				if (dist <= area.radius) {
 					nearby_objects.push_back(std::make_pair(dist, b));
 				}
 			}
 		}
 	}
-	// std::sort(nearby_objects.begin(), nearby_objects.end(),
-	//			[](std::pair<int, const MapObject*>& a, std::pair<int, const MapObject*>& b) { return a.first < b.first; });
+	// Sort the list, so the objects that are more likely to be a hit are evaluated first.
 	nearby_objects.sort([](std::pair<int, const MapObject*>& a, std::pair<int, const MapObject*>& b) { return a.first < b.first; });
 	std::list<const MapObject*> nearby_objects_2;
 	std::transform(nearby_objects.begin(),
@@ -1589,7 +1591,6 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 	for (const PlayerNumber& p : team_player_) {
 		Player& player = *egbase().get_player(p);
 		if (!player.fields_) {
-			log_err("++ !player.fields_\n");
 			end_vision_benchmark(egbase_);
 			return;
 		}
