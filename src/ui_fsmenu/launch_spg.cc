@@ -76,7 +76,6 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 
 	const MapData& mapdata = *msm.get_map();
 
-	// ensure_valid_host_position(nr_players_);
 	settings_->set_map(mapdata.name, mapdata.filename, mapdata.nrplayers);
 	update_win_conditions();
 	update_peaceful_mode();

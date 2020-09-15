@@ -115,7 +115,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	}
 	ok_.set_enabled(settings_->can_launch());
 
-	individual_content_box.add(&mpsg_, UI::Box::Resizing::kFullSize);
+	individual_content_box.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
 	individual_content_box.add(&chat_, UI::Box::Resizing::kExpandBoth);
 	layout();
 	// If we are the host, open the map or save selection menu at startup
@@ -181,9 +181,12 @@ bool FullscreenMenuLaunchMPG::clicked_select_map() {
 	       result == FullscreenMenuBase::MenuTarget::kBack);
 	if (result == FullscreenMenuBase::MenuTarget::kNormalGame) {
 		select_map();
+		map_changed();
 	} else if (result == FullscreenMenuBase::MenuTarget::kScenarioGame) {
 		select_saved_game();
+		map_changed();
 	}
+
 	update_win_conditions();
 	// force layout so all boxes and textareas are forced to update
 	layout();
@@ -348,6 +351,7 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	update_peaceful_mode();
 	update_custom_starting_positions();
+	custom_starting_positions_.set_state(settings_->get_custom_starting_positions());
 	peaceful_.set_state(settings_->is_peaceful_mode());
 
 	if (!settings_->can_change_map() && !init_win_condition_label()) {
