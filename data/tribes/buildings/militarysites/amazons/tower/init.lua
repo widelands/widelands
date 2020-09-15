@@ -9,7 +9,19 @@ tribes:new_militarysite_type {
    icon = dirname .. "menu.png",
    size = "medium",
    vision_range = 16,
-   enhancement = "amazons_observation_tower",
+
+   enhancement = {
+      name = "amazons_observation_tower",
+      enhancement_cost = {
+         ironwood = 1,
+         rope = 1,
+         balsa = 2
+      },
+      enhancement_return_on_dismantle = {
+         ironwood = 1,
+         balsa = 1
+      }
+   },
 
    buildcost = {
       rope = 2,

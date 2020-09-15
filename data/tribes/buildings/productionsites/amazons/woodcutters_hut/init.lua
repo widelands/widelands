@@ -8,7 +8,19 @@ tribes:new_productionsite_type {
    descname = pgettext ("amazons_building", "Woodcutter’s Hut"),
    icon = dirname .. "menu.png",
    size = "small",
-   enhancement = "amazons_rare_trees_woodcutters_hut",
+
+   enhancement = {
+      name = "amazons_rare_trees_woodcutters_hut",
+      enhancement_cost = {
+         log = 1,
+         granite = 1,
+         rope = 1
+      },
+      enhancement_return_on_dismantle = {
+         log = 1,
+         rope = 1
+      }
+   },
 
    buildcost = {
       log = 4,

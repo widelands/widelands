@@ -9,7 +9,19 @@ tribes:new_militarysite_type {
    icon = dirname .. "menu.png",
    size = "big",
    vision_range = 15,
-   enhancement = "amazons_fortification",
+
+   enhancement = {
+      name = "amazons_fortification",
+      enhancement_cost = {
+         ironwood = 4,
+         granite = 4,
+         rope = 2
+      },
+      enhancement_return_on_dismantle = {
+         ironwood = 2,
+         granite = 2,
+      }
+   },
 
    buildcost = {
       ironwood = 6,

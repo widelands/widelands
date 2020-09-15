@@ -10,16 +10,6 @@ tribes:new_militarysite_type {
    size = "medium",
    vision_range = 19,
 
-   enhancement_cost = {
-      ironwood = 1,
-      rope = 1,
-      balsa = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      ironwood = 1,
-      balsa = 1
-   },
-
    animation_directory = dirname,
    animations = {
       idle = {hotspot = {50, 94}},

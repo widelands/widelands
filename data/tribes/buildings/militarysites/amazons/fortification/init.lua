@@ -10,16 +10,6 @@ tribes:new_militarysite_type {
    size = "big",
    vision_range = 16,
 
-   enhancement_cost = {
-      ironwood = 4,
-      granite = 4,
-      rope = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      ironwood = 2,
-      granite = 2,
-   },
-
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_?.png"),

@@ -9,16 +9,6 @@ tribes:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "small",
 
-   enhancement_cost = {
-      log = 1,
-      granite = 1,
-      rope = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      log = 1,
-      rope = 1
-   },
-
    animation_directory = dirname,
    animations = {
       idle = {hotspot = {40, 66}},
