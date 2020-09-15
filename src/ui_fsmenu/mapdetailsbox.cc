@@ -111,7 +111,7 @@ void MapDetailsBox::show_map_description_savegame(const GameSettings& game_setti
 			}
 		}
 	}
-	map_description_.set_text(infotext);
+	set_map_description_text(infotext);
 }
 
 void MapDetailsBox::update(GameSettingsProvider* settings, Widelands::Map& map) {
@@ -152,7 +152,7 @@ void MapDetailsBox::show_map_description(Widelands::Map& map, GameSettingsProvid
 	infotext += "\n";
 	infotext += map.get_hint();
 
-	map_description_.set_text(infotext);
+	set_map_description_text(infotext);
 }
 
 void MapDetailsBox::set_select_map_action(const std::function<void()>& action) {
@@ -170,5 +170,10 @@ void MapDetailsBox::force_new_dimensions(float scale,
 }
 
 void MapDetailsBox::set_map_description_text(const std::string& text) {
+	map_description_.set_style(g_style_manager->font_style(UI::FontStyle::kLabel));
+	map_description_.set_text(text);
+}
+void MapDetailsBox::show_warning(const std::string& text) {
+	map_description_.set_style(g_style_manager->font_style(UI::FontStyle::kWarning));
 	map_description_.set_text(text);
 }

@@ -95,12 +95,10 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
             "",
             UI::Align::kCenter,
             g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
-     //     suggested_teams_box_(&map_box_, 0, 0, UI::Box::Vertical, padding_, 0, 0, 0),
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),
-     peaceful_mode_forbidden_(false),
-     nr_players_(0) {
+     peaceful_mode_forbidden_(false) {
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
@@ -173,6 +171,8 @@ void FullscreenMenuLaunchGame::layout() {
 	win_condition_type.set_font_scale(scale_factor());
 	log_dbg("mapdetails %dx%d, map %dx%d", map_details.get_w(), map_details.get_h(),
 	        map_box_.get_w(), map_box_.get_h());
+	log_dbg("ok (%d,%d) %dx%d, back (%d,%d) %dx%d", ok_.get_x(), ok_.get_y(), ok_.get_w(),
+	        ok_.get_h(), back_.get_x(), back_.get_y(), back_.get_w(), back_.get_h());
 }
 
 void FullscreenMenuLaunchGame::update_peaceful_mode() {

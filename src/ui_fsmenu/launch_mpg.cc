@@ -115,9 +115,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	}
 	ok_.set_enabled(settings_->can_launch());
 
-	individual_content_box.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
-	// individual_content_box.add_inf_space();
-	// individual_content_box.add_space(10 * padding_);
+	individual_content_box.add(&mpsg_, UI::Box::Resizing::kFullSize);
 	individual_content_box.add(&chat_, UI::Box::Resizing::kExpandBoth);
 	layout();
 	// If we are the host, open the map or save selection menu at startup
@@ -128,6 +126,13 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 			settings_->set_player_number(0);
 		}
 	}
+	layout();
+	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
+		log_dbg("settings changed in multiplayer");
+		if (s.action == NoteGameSettings::Action::kMap) {
+			map_changed();
+		}
+	});
 }
 
 FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() = default;
@@ -139,10 +144,10 @@ void FullscreenMenuLaunchMPG::layout() {
 	help_button_.set_pos(
 	   Vector2i(get_w() - 10 * padding_ - standard_element_height_, 10 * padding_));
 
-	mpsg_.set_max_size(0, get_h() / 2);
+	mpsg_.set_max_size(0, individual_content_box.get_h() / 2);
 
-	mpsg_.force_new_dimensions(
-	   scale_factor(), individual_content_box.get_w(), get_h() / 2, standard_element_height_);
+	mpsg_.force_new_dimensions(scale_factor(), individual_content_box.get_w(),
+	                           individual_content_box.get_h() / 2, standard_element_height_);
 
 	// set focus to chat input
 	chat_.focus_edit();
@@ -205,17 +210,16 @@ void FullscreenMenuLaunchMPG::select_map() {
 	settings_->set_scenario(code == FullscreenMenuBase::MenuTarget::kScenarioGame);
 
 	const MapData& mapdata = *msm.get_map();
-	nr_players_ = mapdata.nrplayers;
 
 	// If the same map was selected again, maybe the state of the "scenario" check box was changed
 	// So we should recheck all map predefined values,
 	// which is done in refresh(), if filename_proof_ is different to settings.mapfilename -> dummy
 	// rename
-	if (mapdata.filename == filename_proof_) {
-		filename_proof_ = filename_proof_ + "new";
-	}
+	//	if (mapdata.filename == filename_proof_) {
+	//		filename_proof_ = filename_proof_ + "new";
+	//	}
 
-	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
+	settings_->set_map(mapdata.name, mapdata.filename, mapdata.nrplayers);
 }
 
 /**
@@ -248,7 +252,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		Section& s = prof.get_safe_section("global");
 
 		std::string mapname = s.get_safe_string("name");
-		nr_players_ = s.get_safe_int("nr_players");
+		auto nr_players_ = s.get_safe_int("nr_players");
 
 		settings_->set_map(mapname, filename, nr_players_, true);
 
@@ -304,6 +308,33 @@ void FullscreenMenuLaunchMPG::think() {
 	}
 }
 
+void FullscreenMenuLaunchMPG::map_changed() {
+	const GameSettings& settings = settings_->settings();
+	if (!g_fs->file_exists(settings.mapfilename)) {
+		map_details.show_warning(
+		   _("The selected file can not be found. If it is not automatically transferred to you, "
+		     "please write to the host about this problem."));
+	} else {
+		// Care about the newly selected file. This has to be done here and not
+		// after selection of a new map / saved game, as the clients user
+		// interface can only notice the change after the host broadcasted it.
+		if (settings.savegame) {
+			load_previous_playerdata();
+		} else {
+			load_map_info();
+			if (settings.scenario) {
+				set_scenario_values();
+			}
+		}
+		// Try to translate the map name.
+		// This will work on every official map as expected
+		// and 'fail silently' (not find a translation) for already translated campaign map names.
+		// It will also translate 'false-positively' on any user-made map which shares a name with
+		// the official maps, but this should not be a problem to worry about.
+		i18n::Textdomain td("maps");
+	}
+}
+
 /**
  * update the user interface and take care about the visibility of
  * buttons and text.
@@ -313,42 +344,10 @@ void FullscreenMenuLaunchMPG::refresh() {
 	// refresh() and thus think().
 	const GameSettings& settings = settings_->settings();
 
-	if (settings.mapfilename != filename_proof_) {
-		if (!g_fs->file_exists(settings.mapfilename)) {
-			// map_info_.set_style( g_style_manager->font_style(UI::FontStyle::kWarning));
-			// map_info_.set_text(_("The selected file can not be found. If it is not
-			// automatically transferred to you, please write to the host about this
-			// problem."));
-		} else {
-			// Reset font color
-			// map_info_.set_style(g_style_manager->font_style(UI::FontStyle::kLabel));
-
-			// Update local nr of players - needed for the client UI
-			nr_players_ = settings.players.size();
-
-			// Care about the newly selected file. This has to be done here and not
-			// after selection of a new map / saved game, as the clients user
-			// interface can only notice the change after the host broadcasted it.
-			if (settings.savegame) {
-				load_previous_playerdata();
-			} else {
-				load_map_info();
-				if (settings.scenario) {
-					set_scenario_values();
-				}
-			}
-			// Try to translate the map name.
-			// This will work on every official map as expected
-			// and 'fail silently' (not find a translation) for already translated campaign map names.
-			// It will also translate 'false-positively' on any user-made map which shares a name with
-			// the official maps, but this should not be a problem to worry about.
-			i18n::Textdomain td("maps");
-		}
-	}
-
 	ok_.set_enabled(settings_->can_launch());
 
 	update_peaceful_mode();
+	update_custom_starting_positions();
 	peaceful_.set_state(settings_->is_peaceful_mode());
 
 	if (!settings_->can_change_map() && !init_win_condition_label()) {
@@ -460,7 +459,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 	}
 
 	map_details.update_from_savegame(settings_);
-	filename_proof_ = settings_->settings().mapfilename;
+	//	filename_proof_ = settings_->settings().mapfilename;
 }
 
 /**
@@ -482,7 +481,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	}
 
 	map_details.update(settings_, map);
-	filename_proof_ = settings_->settings().mapfilename;
+	//	filename_proof_ = settings_->settings().mapfilename;
 
 	//	suggested_teams_box_.show(map.get_suggested_teams());
 }

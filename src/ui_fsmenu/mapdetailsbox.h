@@ -29,6 +29,7 @@ public:
 
 	// TODO(jmoerschbach): only used by multiplayer screen...
 	void set_map_description_text(const std::string& text);
+	void show_warning(const std::string& text);
 
 private:
 	UI::Textarea title_;

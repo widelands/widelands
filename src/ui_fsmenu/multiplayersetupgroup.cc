@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include <base/log.h>
 #include <boost/algorithm/string.hpp>
 
 #include "ai/computer_player.h"
@@ -72,26 +73,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 		slot_dropdown_.selected.connect([this]() { set_slot(); });
 
 		update();
-
-		subscriber_ =
-		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
-			   switch (note.action) {
-			   case NoteGameSettings::Action::kMap:
-				   /// In case the client gets kicked off its slot due to number of player slots in the
-				   /// map
-				   update();
-				   break;
-			   case NoteGameSettings::Action::kUser:
-				   /// Player slot might have been closed, bumping the client to observer status. Also,
-				   /// take note if another player changed their position.
-				   if (id_ == note.usernum || note.usernum == UserSettings::none()) {
-					   update();
-				   }
-				   break;
-			   case NoteGameSettings::Action::kPlayer:
-				   break;
-			   }
-		   });
 	}
 
 	void force_new_dimensions(float, uint32_t standard_element_height) {
@@ -158,7 +139,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 	GameSettingsProvider* const settings_;
 	uint8_t const id_;            /// User number
 	bool slot_selection_locked_;  // Ensure that dropdowns will close on selection.
-	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
 
 /// Holds the dropdown menus for a player slot
@@ -169,7 +149,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings,
 	                       NetworkPlayerSettingsBackend* const npsb)
-	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, 0, 0),
+	   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
 	     settings_(settings),
 	     n(npsb),
 	     id_(id),
@@ -251,32 +231,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		add(&tribes_dropdown_);
 		add(&init_dropdown_, UI::Box::Resizing::kExpandBoth);
 		add(&team_dropdown_);
-
-		subscriber_ =
-		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
-			   if (settings_->settings().players.empty()) {
-				   // No map/savegame yet
-				   return;
-			   }
-
-			   switch (note.action) {
-			   case NoteGameSettings::Action::kMap:
-				   // We don't care about map updates, since we receive enough notifications for the
-				   // slots.
-				   break;
-			   case NoteGameSettings::Action::kUser:
-				   // We might have moved away from a slot, so we need to update the previous slot too.
-				   // Since we can't track the slots here, we just update everything.
-				   update();
-				   break;
-			   default:
-				   if (id_ == note.position || (id_ < settings_->settings().players.size() &&
-				                                settings_->settings().players.at(id_).state ==
-				                                   PlayerSettings::State::kShared)) {
-					   update();
-				   }
-			   }
-		   });
 
 		// Init dropdowns
 		update();
@@ -640,12 +594,12 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
                                              int32_t const h,
                                              GameSettingsProvider* const settings,
                                              uint32_t buth)
-   : UI::Box(parent, x, y, UI::Box::Horizontal, 0, h),
+   : UI::Box(parent, x, y, UI::Box::Horizontal),
      settings_(settings),
      npsb(new NetworkPlayerSettingsBackend(settings_)),
      clientbox(this, 0, 0, UI::Box::Vertical),
-     playerbox(this, 0, 0, UI::Box::Vertical, 0, h, kPadding),
-     scrollable_playerbox(&playerbox, 0, 0, UI::Box::Vertical, 0, h),
+     playerbox(this, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     scrollable_playerbox(&playerbox, 0, 0, UI::Box::Vertical),
      clients_(&clientbox,
               0,
               0,
@@ -669,7 +623,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 
 	add(&clientbox);
 	add_space(8 * kPadding);
-	add(&playerbox, Resizing::kFillSpace);
+	add(&playerbox, Resizing::kExpandBoth);
 	playerbox.add(&players_, Resizing::kAlign, UI::Align::kCenter);
 	scrollable_playerbox.set_scrolling(true);
 	playerbox.add_space(kPadding);
@@ -677,11 +631,15 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	playerbox.add(&scrollable_playerbox, Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
+		log_dbg("updating sth");
 		if (n.action == NoteGameSettings::Action::kPlayer) {
+			log_dbg("updating players");
 			update_players();
 		} else if (n.action == NoteGameSettings::Action::kUser) {
+			log_dbg("updating users");
 			update_clients();
 		} else {
+			log_dbg("updating map");
 			update();
 		}
 	});
@@ -696,6 +654,7 @@ void MultiPlayerSetupGroup::update() {
 	update_clients();
 
 	update_players();
+	//	layout();
 }
 void MultiPlayerSetupGroup::update_players() {
 	const GameSettings& settings = settings_->settings();
@@ -712,6 +671,7 @@ void MultiPlayerSetupGroup::update_players() {
 		                              buth_, i, settings_, npsb.get());
 		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
 	}
+	//	layout();
 }
 void MultiPlayerSetupGroup::update_clients() {
 	const GameSettings& settings = settings_->settings();
@@ -727,6 +687,7 @@ void MultiPlayerSetupGroup::update_clients() {
 		   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, settings_);
 		clientbox.add(multi_player_client_groups.at(i), Resizing::kFullSize);
 	}
+	//	layout();
 }
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
@@ -754,6 +715,7 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
                                                  uint32_t max_width,
                                                  uint32_t max_height,
                                                  uint32_t standard_element_height) {
+	buth_ = standard_element_height;
 	players_.set_font_scale(scale);
 	clients_.set_font_scale(scale);
 	clientbox.set_min_desired_breadth(max_width / 3);

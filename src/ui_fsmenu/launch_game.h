@@ -97,13 +97,10 @@ protected:
 	std::string last_win_condition_;
 	UI::Button ok_, back_;
 	UI::Textarea title_;
-	//	UI::SuggestedTeamsBox suggested_teams_box_;
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;
 
 	bool peaceful_mode_forbidden_;
-
-	Widelands::PlayerNumber nr_players_;
 
 private:
 	void add_all_widgets();

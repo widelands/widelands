@@ -59,13 +59,16 @@ private:
 	void load_previous_playerdata();
 	void load_map_info();
 	void help_clicked();
+	void map_changed();
 
 	UI::Button help_button_;
 
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;
 	MultiPlayerSetupGroup mpsg_;
 	GameChatPanel chat_;
-	std::string filename_proof_;  // local variable to check state
+	//	std::string filename_proof_;  // local variable to check state
+
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_MPG_H
