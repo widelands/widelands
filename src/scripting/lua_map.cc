@@ -606,6 +606,7 @@ int do_set_soldiers(lua_State* L,
                     Widelands::SoldierControl* sc,
                     Widelands::Player* owner) {
 	log_dbg("do_set_soldiers started");
+	MutexLock m;
 	assert(sc != nullptr);
 	assert(owner != nullptr);
 

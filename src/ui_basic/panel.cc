@@ -252,7 +252,7 @@ int Panel::do_run() {
 	}
 
 	auto update_graphics = [this, handle_checks, app, draw_delay, forefather, &next_draw_time]() {
-		for (;;) {
+		for (; running_;) {
 			handle_checks();
 			MutexLock m(true);
 			if (m.is_valid()) {
@@ -278,7 +278,7 @@ int Panel::do_run() {
 	while (running_) {
 		const uint32_t start_time = SDL_GetTicks();
 
-		for (; modal_ == this;) {
+		for (; running_ && (modal_ == this);) {
 			// Input handling should be done only by the currently modal panel
 			handle_checks();
 			MutexLock m(true);
@@ -288,7 +288,7 @@ int Panel::do_run() {
 			}
 		}
 
-		if (app->should_die() && modal_ == this) {
+		if (app->should_die() && (modal_ == this) && running_) {
 			// Only the currently modal panel may do this. If there are
 			// other modal panels, they will run this code in the next frame.
 			end_modal<Returncodes>(Returncodes::kBack);
@@ -300,7 +300,7 @@ int Panel::do_run() {
 			   this, [update_graphics]() { update_graphics(); }, true);
 		}
 
-		const int32_t delay = prevmodal ? 20 : next_draw_time - SDL_GetTicks();
+		const int32_t delay = running_ ? prevmodal ? 20 : next_draw_time - SDL_GetTicks() : 0;
 		if (delay > 0) {
 			SDL_Delay(delay);
 		}
