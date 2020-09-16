@@ -126,7 +126,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 			settings_->set_player_number(0);
 		}
 	}
-	layout();
+	//	layout();
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
 		log_dbg("settings changed in multiplayer");
 		if (s.action == NoteGameSettings::Action::kMap) {
@@ -151,6 +151,7 @@ void FullscreenMenuLaunchMPG::layout() {
 
 	// set focus to chat input
 	chat_.focus_edit();
+	log_dbg("---------------------------------");
 }
 
 /**

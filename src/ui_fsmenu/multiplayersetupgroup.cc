@@ -616,6 +616,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
               _("Players"),
               UI::Align::kCenter,
               g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
+     //     helper_button(&playerbox, "helper", 0, 0, 0, 0, UI::ButtonStyle::kWuiMenu, "helper"),
      buth_(buth) {
 	clientbox.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
 	clientbox.add_space(3 * kPadding);
@@ -625,6 +626,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	add_space(8 * kPadding);
 	add(&playerbox, Resizing::kExpandBoth);
 	playerbox.add(&players_, Resizing::kAlign, UI::Align::kCenter);
+	//	playerbox.add(&helper_button, Resizing::kFillSpace);
 	scrollable_playerbox.set_scrolling(true);
 	playerbox.add_space(kPadding);
 

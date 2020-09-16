@@ -21,6 +21,7 @@
 #define WL_UI_FSMENU_MULTIPLAYERSETUPGROUP_H
 
 #include <memory>
+#include <ui_basic/button.h>
 
 #include "network/network_player_settings_backend.h"
 #include "ui_basic/box.h"
@@ -65,6 +66,7 @@ private:
 
 	UI::Box clientbox, playerbox, scrollable_playerbox;
 	UI::Textarea clients_, players_;
+	//	UI::Button helper_button;
 	int32_t buth_;
 
 	std::map<std::string, const Image*> tribepics_;

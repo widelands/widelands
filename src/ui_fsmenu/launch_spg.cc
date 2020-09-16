@@ -82,7 +82,8 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 
 	update_custom_starting_positions();
 
-	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
+	//	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
+	update();
 
 	// force layout so all boxes and textareas are forced to update
 	layout();
