@@ -54,6 +54,7 @@ public:
 		Widelands::RoadSegment road_sw;
 		Widelands::RoadSegment road_se;
 		bool is_border;
+		Widelands::Vision vision;
 		Widelands::SeeUnseeNode seeing;
 		Widelands::Player* owner;  // can be nullptr.
 

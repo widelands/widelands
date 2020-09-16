@@ -357,7 +357,8 @@ bool Player::get_starting_position_suitability(const Coords& c) const {
  */
 void Player::set_team_number(TeamNumber team) {
 	team_number_ = team;
-	update_team_players();
+	team_player_uptodate_ = false;
+	// update_team_players();
 }
 
 /**
@@ -416,6 +417,32 @@ void Player::AiPersistentState::initialize() {
  * Updates the vector containing allied players
  */
 void Player::update_team_players() {
+	start_vision_benchmark(egbase_);
+	team_players_.clear();
+	team_player_uptodate_ = true;
+
+	if (!team_number_) {
+		end_vision_benchmark(egbase_);
+		return;
+	}
+
+	for (PlayerNumber i = 1; i <= kMaxPlayers; ++i) {
+		Player* other = egbase().get_player(i);
+		if (!other) {
+			continue;
+		}
+		if (other == this) {
+			continue;
+		}
+		if (team_number_ == other->team_number_) {
+			team_players_.push_back(other);
+		}
+	}
+	end_vision_benchmark(egbase_);
+}
+
+/*
+void Player::update_team_players() {
 	// Tell all our old allies to forget us…
 	for (const PlayerNumber& p : team_player_) {
 		if (p != player_number()) {
@@ -444,7 +471,7 @@ void Player::update_team_players() {
 
 	update_vision_whole_map();
 }
-
+*/
 /*
  * Plays the corresponding sound when a message is received and if sound is
  * enabled.
@@ -1314,6 +1341,117 @@ void Player::enemyflagaction(Flag& flag,
 
 void Player::rediscover_node(const Map& map, const FCoords& f) {
 	start_vision_benchmark(egbase_);
+
+	assert(0 <= f.x);
+	assert(f.x < map.get_width());
+	assert(0 <= f.y);
+	assert(f.y < map.get_height());
+	const Widelands::Field& first_map_field = map[0];
+	assert(&first_map_field <= f.field);
+	assert(f.field < &first_map_field + map.max_index());
+
+	Field& field = fields_[f.field - &first_map_field];
+
+	assert(fields_.get() <= &field);
+	assert(&field < fields_.get() + map.max_index());
+
+	{  // discover everything (above the ground) in this field
+		field.terrains = f.field->get_terrains();
+		field.r_e = f.field->get_road(WALK_E);
+		field.r_se = f.field->get_road(WALK_SE);
+		field.r_sw = f.field->get_road(WALK_SW);
+		field.owner = f.field->get_owned_by();
+
+		// Check if this node is part of a border
+		int32_t const mapwidth = map.get_width();
+		// right neighbour
+		FCoords r = map.r_n(f);
+		PlayerNumber r_owner_number = r.field->get_owned_by();
+		MapIndex r_index = map.get_index(r, mapwidth);
+		Vision r_vision = vision(r_index);
+		// top right neighbour
+		FCoords tr = map.tr_n(f);
+		PlayerNumber tr_owner_number = tr.field->get_owned_by();
+		// bottom right neighbour
+		FCoords br = map.br_n(f);
+		PlayerNumber br_owner_number = br.field->get_owned_by();
+		MapIndex br_index = map.get_index(br, mapwidth);
+		Vision br_vision = vision(br_index);
+		// bottom left neighbour
+		FCoords bl = map.bl_n(f);
+		PlayerNumber bl_owner_number = bl.field->get_owned_by();
+		MapIndex bl_index = map.get_index(bl, mapwidth);
+		Vision bl_vision = vision(bl_index);
+		// left neighbour
+		FCoords l = map.l_n(f);
+		PlayerNumber l_owner_number = l.field->get_owned_by();
+
+		field.border = f.field->is_border();
+		field.border_r = ((1 | r_vision) && (r_owner_number == field.owner) &&
+		                  ((tr_owner_number == field.owner) ^ (br_owner_number == field.owner)));
+		field.border_br = ((1 | bl_vision) && (bl_owner_number == field.owner) &&
+		                   ((l_owner_number == field.owner) ^ (br_owner_number == field.owner)));
+		field.border_bl = ((1 | br_vision) && (br_owner_number == field.owner) &&
+		                   ((r_owner_number == field.owner) ^ (bl_owner_number == field.owner)));
+
+		{
+			const MapObjectDescr* map_object_descr;
+			// field.constructionsite.becomes = nullptr;
+			if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
+				map_object_descr = &base_immovable->descr();
+
+				if (Road::is_road_descr(map_object_descr) ||
+				    Waterway::is_waterway_descr(map_object_descr)) {
+					map_object_descr = nullptr;
+				} else if (upcast(Building const, building, base_immovable)) {
+					if (building->get_position() != f) {
+						// This is not the building's main position so we can not see it.
+						map_object_descr = nullptr;
+					} else {
+						if (upcast(ConstructionSite const, cs, building)) {
+							// field.constructionsite = const_cast<ConstructionSite*>(cs)->get_info();
+						}
+					}
+				}
+			} else {
+				map_object_descr = nullptr;
+			}
+			field.map_object_descr = map_object_descr;
+		}
+	}
+	{  //  discover the D triangle and the SW edge of the top right neighbour
+		FCoords tr = map.tr_n(f);
+		Field& tr_field = fields_[tr.field - &first_map_field];
+		if (tr_field.vision <= 1) {
+			tr_field.terrains.d = tr.field->terrain_d();
+			tr_field.r_sw = tr.field->get_road(WALK_SW);
+			tr_field.owner = tr.field->get_owned_by();
+		}
+	}
+	{  //  discover both triangles and the SE edge of the top left  neighbour
+		FCoords tl = map.tl_n(f);
+		Field& tl_field = fields_[tl.field - &first_map_field];
+		if (tl_field.vision <= 1) {
+			tl_field.terrains = tl.field->get_terrains();
+			tl_field.r_se = tl.field->get_road(WALK_SE);
+			tl_field.owner = tl.field->get_owned_by();
+		}
+	}
+	{  //  discover the R triangle and the  E edge of the     left  neighbour
+		FCoords l = map.l_n(f);
+		Field& l_field = fields_[l.field - &first_map_field];
+		if (l_field.vision <= 1) {
+			l_field.terrains.r = l.field->terrain_r();
+			l_field.r_e = l.field->get_road(WALK_E);
+			l_field.owner = l.field->get_owned_by();
+		}
+	}
+	end_vision_benchmark(egbase_);
+}
+
+/*
+void Player::rediscover_node(const Map& map, const FCoords& f) {
+	start_vision_benchmark(egbase_);
 	assert(0 <= f.x);
 	assert(f.x < map.get_width());
 	assert(0 <= f.y);
@@ -1422,7 +1560,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	}
 	end_vision_benchmark(egbase_);
 }
-
+*/
 /**
  * Update this player's information about this node and the surrounding
  * triangles and edges.
@@ -1583,12 +1721,17 @@ void Player::remove_seer(const MapObject& m, const Area<FCoords>& a) {
 			return;
 		}
 	}
-	NEVER_HERE();
+	end_vision_benchmark(egbase_);
+	// NEVER_HERE();
 }
 
 // Checks if any of our buildings or bobs, or one of one of our team mates, is seeing this node
 bool Player::should_see(const FCoords& f, std::list<const MapObject*>& nearby_objects) const {
 	start_vision_benchmark(egbase_);
+	if (vision(egbase().map().get_index(f, egbase().map().get_width())) > 1) {
+		end_vision_benchmark(egbase_);
+		return true;
+	}
 	for (const PlayerNumber& p : team_player_) {
 		const Player& player = *egbase().get_player(p);
 		if (player.revealed_fields_.count(f)) {

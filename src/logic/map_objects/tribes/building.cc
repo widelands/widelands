@@ -890,10 +890,23 @@ void Building::set_soldier_control(SoldierControl* new_soldier_control) {
  * \note Warehouses always see their surroundings; this is handled separately.
  */
 void Building::set_seeing(bool see) {
+	if (see == seeing_) {
+		return;
+	}
+
+	Player* player = get_owner();
+	const Map& map = player->egbase().map();
+
+	if (see) {
+		player->see_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	} else {
+		player->unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	}
+
 	seeing_ = see;
-	get_owner()->update_vision(
-	   Area<FCoords>(owner().egbase().map().get_fcoords(get_position()), descr().vision_range()),
-	   see);
+//	get_owner()->update_vision(
+//	   Area<FCoords>(owner().egbase().map().get_fcoords(get_position()), descr().vision_range()),
+//	   see);
 }
 
 /**
