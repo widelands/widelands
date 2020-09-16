@@ -445,9 +445,7 @@ public:
 	void unsee_area(const Area<FCoords>&);
 
 	SeeUnseeNode get_vision(MapIndex) const;
-	bool is_seeing(MapIndex i) const {
-		return get_vision(i) == SeeUnseeNode::kVisible;
-	}
+	bool is_seeing(MapIndex) const;
 
 	// Cause this player and all his team mates to recalculate the visibility
 	// state of the given area of fields. If `force_visible` is true, we

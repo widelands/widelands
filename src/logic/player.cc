@@ -1677,6 +1677,11 @@ SeeUnseeNode Player::get_vision(MapIndex const i) const {
 	return see_all_ ? SeeUnseeNode::kVisible : fields_[i].seeing;
 }
 
+bool Player::is_seeing(MapIndex i) const {
+	return vision(i) > 1;
+	// return get_vision(i) == SeeUnseeNode::kVisible;
+}
+
 void Player::add_seer(const MapObject& m, const Area<FCoords>& a) {
 	start_vision_benchmark(egbase_);
 	add_seer(m);

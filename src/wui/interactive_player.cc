@@ -60,14 +60,16 @@ namespace {
 float adjusted_field_brightness(const Widelands::FCoords& fcoords,
                                 const uint32_t gametime,
                                 const Widelands::Player::Field& pf) {
-	if (pf.seeing == Widelands::SeeUnseeNode::kUnexplored) {
+	if (pf.vision == 0) {
+	// if (pf.seeing == Widelands::SeeUnseeNode::kUnexplored) {
 		return 0.;
 	}
 
 	uint32_t brightness = 144 + fcoords.field->get_brightness();
 	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
 
-	if (pf.seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
+	if (pf.vision == 1) {
+	// if (pf.seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
 		static const uint32_t kDecayTimeInMs = 20000;
 		const Widelands::Duration time_ago = gametime - pf.time_node_last_unseen;
 		if (time_ago < kDecayTimeInMs) {
@@ -486,24 +488,29 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			f->road_e = player_field.r_e;
 			f->road_se = player_field.r_se;
 			f->road_sw = player_field.r_sw;
+			f->vision = player_field.vision;
 			f->seeing = player_field.seeing;
-			if (player_field.seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
+			if (player_field.vision == 1) {
+			// if (player_field.seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
 				f->owner = player_field.owner != 0 ? gbase.get_player(player_field.owner) : nullptr;
 				f->is_border = player_field.border;
 			}
 		}
 
 		// Add road building overlays if applicable.
-		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
+		if (f->vision > 0) {
+		// if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			draw_road_building(*f);
 
-			draw_bridges(dst, f, f->seeing == Widelands::SeeUnseeNode::kVisible ? gametime : 0, scale);
+			draw_bridges(dst, f, f->vision > 1 ? gametime : 0, scale);
+			// draw_bridges(dst, f, f->seeing == Widelands::SeeUnseeNode::kVisible ? gametime : 0, scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 
 			// Draw immovables and bobs.
 			const InfoToDraw info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 
-			if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
+			if (f->vision > 1) {
+			// if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
 				draw_immovables_for_visible_field(
 				   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
 				draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
@@ -541,7 +548,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			                   scale);
 		}
 
-		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
+		if (f->vision > 0) {
+		// if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			// Draw build help.
 			const bool show_port_space = has_expedition_port_space(f->fcoords);
 			if (show_port_space || suited_as_starting_pos || buildhelp()) {
@@ -554,7 +562,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				                                                  f->fcoords.field->nodecaps() :
 				                                                  plr.get_buildcaps(f->fcoords))) {
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale,
-					                   f->seeing == Widelands::SeeUnseeNode::kVisible ? 1.f : 0.3f);
+					                   f->vision > 1 ? 1.f : 0.3f);
+					                   // f->seeing == Widelands::SeeUnseeNode::kVisible ? 1.f : 0.3f);
 				}
 			}
 
@@ -740,7 +749,8 @@ bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) cons
 	const Widelands::Map& map = egbase().map();
 	const Widelands::Player::Field& player_field =
 	   plr.fields()[map.get_index(coords, map.get_width())];
-	return player_field.seeing == Widelands::SeeUnseeNode::kVisible;
+	return (player_field.vision > 1);
+	// return player_field.seeing == Widelands::SeeUnseeNode::kVisible;
 }
 
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
