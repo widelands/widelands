@@ -175,6 +175,7 @@ Player::Player(EditorGameBase& the_egbase,
      initialization_index_(initialization_index),
      team_number_(0),
      see_all_(false),
+     team_player_uptodate_(false),
      player_number_(plnum),
      tribe_(tribe_descr),
      casualties_(0),
@@ -1442,9 +1443,9 @@ Vision Player::see_node(const Map& map, const FCoords& f, Time const gametime, b
 	if (!team_player_uptodate_) {
 		update_team_players();
 	}
-	if (!forward && !team_player_.empty()) {
-		for (uint8_t j = 0; j < team_player_.size(); ++j) {
-			team_player_[j]->see_node(map, f, gametime, true);
+	if (!forward && !team_players_.empty()) {
+		for (uint8_t j = 0; j < team_players_.size(); ++j) {
+			team_players_[j]->see_node(map, f, gametime, true);
 		}
 	}
 
@@ -1484,9 +1485,9 @@ Vision Player::unsee_node(MapIndex const i,
 	if (!team_player_uptodate_) {
 		update_team_players();
 	}
-	if (!forward && !team_player_.empty()) {
-		for (uint8_t j = 0; j < team_player_.size(); ++j) {
-			team_player_[j]->unsee_node(i, gametime, mode, true);
+	if (!forward && !team_players_.empty()) {
+		for (uint8_t j = 0; j < team_players_.size(); ++j) {
+			team_players_[j]->unsee_node(i, gametime, mode, true);
 		}
 	}
 
@@ -1504,7 +1505,7 @@ Vision Player::unsee_node(MapIndex const i,
 }
 
 // See area
-Vision vision(MapIndex const i) const {
+Vision Player::vision(MapIndex const i) const {
 	// Node visible if > 1
 	return (see_all_ ? 2 : 0) + fields_[i].vision;
 }
@@ -1544,6 +1545,7 @@ void Player::add_seer(const MapObject& m, const Area<FCoords>& a) {
 	for (const PlayerNumber& p : team_player_) {
 		egbase().get_player(p)->update_vision(a, true);
 	}
+	see_area(a);
 	end_vision_benchmark(egbase_);
 }
 
@@ -1572,6 +1574,7 @@ void Player::remove_seer(const MapObject& m, const Area<FCoords>& a) {
 					egbase().get_player(p)->update_vision(a, false);
 				}
 			}
+			unsee_area(a);
 			time_end = std::chrono::steady_clock::now();
 			std::cout << "++ remove_seer() at " << a.x << "," << a.y << " took "
 				<< std::chrono::duration_cast<std::chrono::microseconds>(time_end - time_begin).count()
@@ -1739,6 +1742,39 @@ void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
 
 	update_vision(fcoords, mode == SeeUnseeNode::kVisible);
 	end_vision_benchmark(egbase_);
+}
+
+void Player::hide_or_reveal_field(const uint32_t gametime,
+                                  const Coords& coords,
+                                  SeeUnseeNode mode) {
+	const Map& map = egbase().map();
+	FCoords fcoords = map.get_fcoords(coords);
+	const Widelands::MapIndex index = fcoords.field - &map[0];
+
+	switch (mode) {
+	// Reveal field
+	case SeeUnseeNode::kReveal: {
+		Widelands::Vision new_vision = see_node(map, fcoords, gametime);
+		// If the field was manually hidden, restore the original vision
+		if (hidden_fields_.count(index) == 1) {
+			auto iter = hidden_fields_.find(index);
+			Vision original_vision = iter->second;
+			while (new_vision < original_vision) {
+				new_vision = see_node(map, fcoords, gametime);
+			}
+			hidden_fields_.erase(iter);
+		}
+	} break;
+	// Hide field
+	case SeeUnseeNode::kUnsee:
+	case SeeUnseeNode::kUnexplore: {
+		const Widelands::Vision new_vision = unsee_node(index, gametime, mode);
+		// Remember the original vision so that we can unhide the fields again
+		if (hidden_fields_.count(index) != 1) {
+			hidden_fields_.insert(std::make_pair(index, new_vision));
+		}
+	} break;
+	}
 }
 
 /**

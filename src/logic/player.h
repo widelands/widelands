@@ -463,6 +463,13 @@ public:
 	// the effects of revealing the field with kVisible.
 	void hide_or_reveal_field(const Coords&, SeeUnseeNode);
 
+	/// Explicitly hide or reveal the field at 'c'. The modes are as follows:
+	/// - kUnsee:     Decrement the field's vision
+	/// - kUnexplore: Set the field's vision to 0
+	/// - kReveal:    If the field was hidden previously, restore the vision to the value it had
+	///               at the time of hiding. Otherwise, increment the vision.
+	void hide_or_reveal_field(const uint32_t gametime, const Coords& c, SeeUnseeNode mode);
+
 	MilitaryInfluence military_influence(MapIndex const i) const {
 		return fields_[i].military_influence;
 	}
@@ -640,7 +647,9 @@ private:
 	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
 	TeamNumber team_number_;
+	std::vector<Player*> team_players_;
 	std::set<PlayerNumber> team_player_;
+	bool team_player_uptodate_;
 	bool see_all_;
 	const PlayerNumber player_number_;
 	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
@@ -668,6 +677,9 @@ private:
 	void update_vision(const FCoords&, bool force_visible, std::list<const MapObject*>& nearby_objects);
 	void update_vision_whole_map();
 	std::set<MapIndex> revealed_fields_;
+
+	// Fields that were explicitly hidden, with their vision at the time of hiding
+	std::map<MapIndex, Widelands::Vision> hidden_fields_;
 
 	/**
 	 * Wares produced (by ware id) since the last call to @ref sample_statistics

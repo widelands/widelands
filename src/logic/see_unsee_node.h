@@ -25,7 +25,8 @@ namespace Widelands {
 enum class SeeUnseeNode {
 	kUnexplored = 0,      // Never seen yet
 	kPreviouslySeen = 1,  // Previously seen
-	kVisible = 2          // Currently visible
+	kVisible = 2,         // Currently visible
+	kUnsee, kUnexplore, kReveal
 };
 }  // namespace Widelands
 #endif  // end of include guard: WL_LOGIC_SEE_UNSEE_NODE_H
