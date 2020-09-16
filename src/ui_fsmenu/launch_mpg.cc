@@ -151,6 +151,10 @@ void FullscreenMenuLaunchMPG::layout() {
 
 	// set focus to chat input
 	chat_.focus_edit();
+	log_dbg("mapdetails %dx%d, map %dx%d", map_details.get_w(), map_details.get_h(),
+	        map_box_.get_w(), map_box_.get_h());
+	log_dbg("ok (%d,%d) %dx%d, back (%d,%d) %dx%d", ok_.get_x(), ok_.get_y(), ok_.get_w(),
+	        ok_.get_h(), back_.get_x(), back_.get_y(), back_.get_w(), back_.get_h());
 	log_dbg("---------------------------------");
 }
 
