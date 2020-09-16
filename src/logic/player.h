@@ -216,6 +216,7 @@ public:
 		Field()
 		   : military_influence(0),
 		     seeing(SeeUnseeNode::kUnexplored),
+		     vision(0),
 		     r_e(RoadSegment::kNone),
 		     r_se(RoadSegment::kNone),
 		     r_sw(RoadSegment::kNone),
@@ -283,6 +284,7 @@ public:
 		///
 		/// \note Never change this directly. Use update_vision() to recalculate.
 		SeeUnseeNode seeing;
+		Vision vision;
 
 		//  Below follows information about the field, as far as this player
 		//  knows.
@@ -422,6 +424,25 @@ public:
 	const Field* fields() const {
 		return fields_.get();
 	}
+
+	// See area
+	Vision vision(MapIndex const) const;
+
+	/**
+	 * Update this player's information about this node and the surrounding
+	 * triangles and edges.
+	 */
+	Vision see_node(const Map&, const FCoords&, const Time, const bool forward = false);
+
+	/// Decrement this player's vision for a node.
+	Vision
+	unsee_node(MapIndex, Time, SeeUnseeNode mode = SeeUnseeNode::kUnsee, bool forward = false);
+
+	/// Call see_node for each node in the area.
+	void see_area(const Area<FCoords>&);
+
+	/// Decrement this player's vision for each node in an area.
+	void unsee_area(const Area<FCoords>&);
 
 	SeeUnseeNode get_vision(MapIndex) const;
 	bool is_seeing(MapIndex i) const {

@@ -1422,6 +1422,118 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	end_vision_benchmark(egbase_);
 }
 
+/**
+ * Update this player's information about this node and the surrounding
+ * triangles and edges.
+ */
+/// Returns the resulting vision.
+Vision Player::see_node(const Map& map, const FCoords& f, Time const gametime, bool const forward) {
+	start_vision_benchmark(egbase_);
+	assert(0 <= f.x);
+	assert(f.x < map.get_width());
+	assert(0 <= f.y);
+	assert(f.y < map.get_height());
+	const Widelands::Field& first_map_field = map[0];
+	assert(&first_map_field <= f.field);
+	assert(f.field < &first_map_field + map.max_index());
+
+	//  If this is not already a forwarded call, we should inform allied players
+	//  as well of this change.
+	if (!team_player_uptodate_) {
+		update_team_players();
+	}
+	if (!forward && !team_player_.empty()) {
+		for (uint8_t j = 0; j < team_player_.size(); ++j) {
+			team_player_[j]->see_node(map, f, gametime, true);
+		}
+	}
+
+	Field& field = fields_[f.field - &first_map_field];
+	assert(fields_.get() <= &field);
+	assert(&field < fields_.get() + map.max_index());
+
+	if (field.vision == 0) {
+		field.vision = 1;
+	}
+	if (field.vision == 1) {
+		rediscover_node(map, f);
+	}
+	end_vision_benchmark(egbase_);
+	return ++field.vision;
+}
+
+/// Decrement this player's vision for a node.
+/// If 'mode' = UnseeMode::kUnexplore, fields will be marked as unexplored. Else, player no longer
+/// sees what's currently going on. Returns the vision that this node had before it was hidden.
+Vision Player::unsee_node(MapIndex const i,
+                          Time const gametime,
+                          const SeeUnseeNode mode,
+                          bool const forward) {
+	start_vision_benchmark(egbase_);
+	Field& field = fields_[i];
+	if ((mode == SeeUnseeNode::kUnsee && field.vision <= 1) ||
+	    field.vision < 1) {  //  Already does not see this
+		end_vision_benchmark(egbase_);
+		return field.vision;
+	}
+
+	const Vision original_vision = field.vision;
+
+	//  If this is not already a forwarded call, we should inform allied players
+	//  as well of this change.
+	if (!team_player_uptodate_) {
+		update_team_players();
+	}
+	if (!forward && !team_player_.empty()) {
+		for (uint8_t j = 0; j < team_player_.size(); ++j) {
+			team_player_[j]->unsee_node(i, gametime, mode, true);
+		}
+	}
+
+	if (mode == SeeUnseeNode::kUnexplore) {
+		field.vision = 0;
+	} else {
+		--field.vision;
+		assert(1 <= field.vision);
+	}
+	if (field.vision < 2) {
+		field.time_node_last_unseen = gametime;
+	}
+	end_vision_benchmark(egbase_);
+	return original_vision;
+}
+
+// See area
+Vision vision(MapIndex const i) const {
+	// Node visible if > 1
+	return (see_all_ ? 2 : 0) + fields_[i].vision;
+}
+
+/// Call see_node for each node in the area.
+void Player::see_area(const Area<FCoords>& area) {
+	start_vision_benchmark(egbase_);
+	const Time gametime = egbase().get_gametime();
+	const Map& map = egbase().map();
+	MapRegion<Area<FCoords>> mr(map, area);
+	do {
+		see_node(map, mr.location(), gametime);
+	} while (mr.advance(map));
+	end_vision_benchmark(egbase_);
+}
+
+/// Decrement this player's vision for each node in an area.
+void Player::unsee_area(const Area<FCoords>& area) {
+	start_vision_benchmark(egbase_);
+	const Time gametime = egbase().get_gametime();
+	const Map& map = egbase().map();
+	const Widelands::Field& first_map_field = map[0];
+	MapRegion<Area<FCoords>> mr(map, area);
+	do
+		unsee_node(mr.location().field - &first_map_field, gametime);
+	while (mr.advance(map));
+	end_vision_benchmark(egbase_);
+}
+
 SeeUnseeNode Player::get_vision(MapIndex const i) const {
 	return see_all_ ? SeeUnseeNode::kVisible : fields_[i].seeing;
 }
