@@ -399,8 +399,7 @@ void Window::draw_border(RenderTarget& dst) {
 	}
 
 	if (!is_minimal_) {
-		const int32_t vt_bar_end =
-		   get_h() - kBottomBorderThickness - kVerticalBorderThingyHeight;
+		const int32_t vt_bar_end = get_h() - kBottomBorderThickness - kVerticalBorderThingyHeight;
 		const int32_t vt_bar_end_minus_middle = vt_bar_end - kVerticalBorderMiddleLength;
 
 		{  // Left border
