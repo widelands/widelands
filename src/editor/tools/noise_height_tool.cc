@@ -19,6 +19,8 @@
 
 #include "editor/tools/noise_height_tool.h"
 
+#include <cstdlib>
+
 #include "editor/editorinteractive.h"
 #include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/increase_height_tool.h"

@@ -19,6 +19,7 @@
 
 #include "graphic/text/rt_render.h"
 
+#include <cstdlib>
 #include <memory>
 #include <queue>
 
@@ -1790,6 +1791,7 @@ Renderer::Renderer(ImageCache* image_cache,
      texture_cache_(texture_cache),
      fontsets_(fontsets),
      renderer_style_("sans", 16, INFINITE_WIDTH, INFINITE_WIDTH) {
+	assert(image_cache);
 	TextureCache* render(const std::string&, uint16_t, const TagSet&);
 }
 
