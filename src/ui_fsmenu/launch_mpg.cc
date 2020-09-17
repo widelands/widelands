@@ -95,7 +95,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm, GameS
      // Values for alignment and size
      // TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
      // so we can have the SuggestedTeamsBox
-     // TODO(Nordfriese): Help! Box layout! Please?
+     // TODO(Nordfriese): Magic numbers everywhere. Box layout please…
      padding_(4),
      indent_(10),
      label_height_(20),

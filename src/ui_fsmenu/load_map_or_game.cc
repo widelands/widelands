@@ -45,7 +45,7 @@ void FullscreenMenuLoadMapOrGame::layout() {
 	UI::Window::layout();
 
 	// UI coordinates and spacers
-	// TODO(Nordfriese): We really need box layout here...
+	// TODO(Nordfriese): Magic numbers everywhere. Box layout please…
 	tablex_ = get_inner_w() * 47 / 2500;
 	tabley_ = get_inner_h() * 17 / 50;
 	tablew_ = get_inner_w() * 711 / 1250;

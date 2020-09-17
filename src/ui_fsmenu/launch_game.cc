@@ -49,7 +49,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm, Gam
      butw_(get_inner_w() / 4),
      buth_(get_inner_h() * 9 / 200),
 
-     // TODO(Nordfriese): *Insert remark about the ugliness of magic numbers and the benefits of box layout here*
+     // TODO(Nordfriese): Magic numbers everywhere. Box layout please…
      win_condition_dropdown_(this,
                              "dropdown_wincondition",
                              get_inner_w() * 7 / 10,
