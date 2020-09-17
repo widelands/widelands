@@ -112,7 +112,7 @@ function allies()
    while not check_for_buildings(p1, {
       atlanteans_trading_post = 1,
    }) do sleep(3731) end
-   
+
 end
 
 function maletus_defeated()
