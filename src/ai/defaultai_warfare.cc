@@ -17,6 +17,8 @@
  *
  */
 
+#include <cstdlib>
+
 #include "ai/defaultai.h"
 #include "base/log.h"
 #include "economy/wares_queue.h"

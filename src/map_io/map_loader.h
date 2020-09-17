@@ -42,6 +42,10 @@ public:
 
 	virtual int32_t preload_map(bool as_scenario) = 0;
 	virtual int32_t load_map_complete(EditorGameBase&, MapLoader::LoadType) = 0;
+	virtual int32_t load_map_for_render(EditorGameBase&) {
+		// cannot load map for rendering only -> no map preview
+		return 1;
+	}
 
 	Map& map() {
 		return map_;

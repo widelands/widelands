@@ -210,6 +210,28 @@ void ObjectManager::remove(MapObject& obj) {
 	objects_.erase(obj.serial_);
 }
 
+bool ObjectManager::object_still_available(const MapObject* const obj) const {
+	// TODO(Niektory): This function is used to check whether an object pointer is still valid
+	// by comparing it to known valid pointers. Not only it is slow, the C++ standard says:
+	// "Any other use of an invalid pointer value has implementation-defined behavior.
+	// Some implementations might define that copying an invalid pointer value causes
+	// a system-generated runtime fault."
+	// Instead of using this function after potential deletion we should ensure at the moment
+	// of an object's deletion that no pointers to it remain.
+
+	if (!obj) {
+		return false;
+	}
+	MapObjectMap::const_iterator it = objects_.begin();
+	while (it != objects_.end()) {
+		if (it->second == obj) {
+			return true;
+		}
+		++it;
+	}
+	return false;
+}
+
 /*
  * Return the list of all serials currently in use
  */

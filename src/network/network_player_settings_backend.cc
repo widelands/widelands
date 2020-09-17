@@ -19,6 +19,8 @@
 
 #include "network/network_player_settings_backend.h"
 
+#include <cstdlib>
+
 #include "ai/computer_player.h"
 
 void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSettings::State state) {

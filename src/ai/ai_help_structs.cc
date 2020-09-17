@@ -20,6 +20,7 @@
 #include "ai/ai_help_structs.h"
 
 #include <algorithm>
+#include <cstdlib>
 
 #include "base/log.h"
 #include "base/macros.h"

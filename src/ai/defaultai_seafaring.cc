@@ -19,6 +19,8 @@
 
 #include "ai/defaultai.h"
 
+#include <cstdlib>
+
 #include "base/log.h"
 #include "economy/ship_fleet.h"
 #include "economy/wares_queue.h"

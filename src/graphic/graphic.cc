@@ -22,6 +22,7 @@
 #include <memory>
 
 #include <SDL_messagebox.h>
+#include <SDL_video.h>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -45,6 +46,10 @@
 #include "io/streamwrite.h"
 #include "notifications/notifications.h"
 
+#ifndef RESIZABLE_WINDOW
+#define SDL_SetWindowResizable(window, resizable)
+#endif
+
 Graphic* g_gr;
 
 namespace {
@@ -64,6 +69,8 @@ void set_icon(SDL_Window* sdl_window) {
 }  // namespace
 
 Graphic::Graphic() {
+	g_image_cache = new ImageCache();
+	g_animation_manager = new AnimationManager();
 }
 
 /**
@@ -72,7 +79,8 @@ Graphic::Graphic() {
 void Graphic::initialize(const TraceGl& trace_gl,
                          int window_mode_w,
                          int window_mode_h,
-                         bool init_fullscreen) {
+                         bool init_fullscreen,
+                         bool init_maximized) {
 	window_mode_width_ = window_mode_w;
 	window_mode_height_ = window_mode_h;
 
@@ -81,9 +89,13 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	}
 
 	log_dbg("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
-	sdl_window_ = SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED,
-	                               SDL_WINDOWPOS_UNDEFINED, window_mode_width_, window_mode_height_,
-	                               SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+	uint32_t window_flags = SDL_WINDOW_OPENGL;
+#ifdef RESIZABLE_WINDOW
+	window_flags |= SDL_WINDOW_RESIZABLE;
+#endif
+	sdl_window_ =
+	   SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+	                    window_mode_width_, window_mode_height_, window_flags);
 	SDL_SetWindowMinimumSize(sdl_window_, kMinimumResolutionW, kMinimumResolutionH);
 
 	GLint max;
@@ -94,8 +106,11 @@ void Graphic::initialize(const TraceGl& trace_gl,
 
 	max_texture_size_ = static_cast<int>(max);
 
-	resolution_changed();
 	set_fullscreen(init_fullscreen);
+	if (init_maximized) {
+		set_maximized(true);
+	}
+	resolution_changed();
 
 	SDL_SetWindowTitle(sdl_window_, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 	set_icon(sdl_window_);
@@ -123,11 +138,9 @@ void Graphic::initialize(const TraceGl& trace_gl,
 
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
-	g_image_cache = new ImageCache();
 	g_image_cache->fill_with_texture_atlases(
 	   std::move(texture_atlases), std::move(textures_in_atlas));
 	g_style_manager = new StyleManager();
-	g_animation_manager = new AnimationManager();
 }
 
 Graphic::~Graphic() {
@@ -150,15 +163,23 @@ Graphic::~Graphic() {
 /**
  * Return the screen x resolution
  */
-int Graphic::get_xres() {
+int Graphic::get_xres() const {
 	return screen_->width();
 }
 
 /**
  * Return the screen x resolution
  */
-int Graphic::get_yres() {
+int Graphic::get_yres() const {
 	return screen_->height();
+}
+
+int Graphic::get_window_mode_xres() const {
+	return window_mode_width_;
+}
+
+int Graphic::get_window_mode_yres() const {
+	return window_mode_height_;
 }
 
 void Graphic::change_resolution(int w, int h, bool resize_window) {
@@ -173,10 +194,13 @@ void Graphic::change_resolution(int w, int h, bool resize_window) {
 }
 
 void Graphic::set_window_size(int w, int h) {
-	// SDL can get badly confused when trying to resize a maximized window
-	// so we restore it first.
-	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
-	if (flags & SDL_WINDOW_MAXIMIZED) {
+	// Calling SDL_SetWindowSize() when the window is resizable or maximized can sometimes cause
+	// SDL (and consequently us) to lose track of the real window size, causing nasty glitches.
+	// To work around this we temporarily set the window as not resizable. It's set back to
+	// resizable later in refresh().
+	SDL_SetWindowResizable(sdl_window_, SDL_FALSE);
+
+	if (maximized()) {
 		SDL_RestoreWindow(sdl_window_);
 	};
 
@@ -217,7 +241,28 @@ int Graphic::max_texture_size_for_font_rendering() const {
 #endif
 }
 
-bool Graphic::fullscreen() {
+bool Graphic::maximized() const {
+	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
+	return flags & SDL_WINDOW_MAXIMIZED;
+}
+
+void Graphic::set_maximized(const bool to_maximize) {
+	window_mode_maximized_ = to_maximize;
+	if (fullscreen() || maximized() == to_maximize) {
+		return;
+	}
+	if (to_maximize) {
+		// Maximizing only works if the window is resizable.
+		SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
+		SDL_MaximizeWindow(sdl_window_);
+	} else {
+		// Avoid glitches. See the comment in set_window_size().
+		SDL_SetWindowResizable(sdl_window_, SDL_FALSE);
+		SDL_RestoreWindow(sdl_window_);
+	}
+}
+
+bool Graphic::fullscreen() const {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
 	return (flags & SDL_WINDOW_FULLSCREEN) || (flags & SDL_WINDOW_FULLSCREEN_DESKTOP);
 }
@@ -227,22 +272,16 @@ void Graphic::set_fullscreen(const bool value) {
 		return;
 	}
 
-	// Widelands is not resolution agnostic, so when we set fullscreen, we want
-	// it at the full resolution of the desktop and we want to know about the
-	// true resolution (SDL supports hiding the true resolution from the
-	// application). Since SDL ignores requests to change the size of the window
-	// whet fullscreen, we do it when in windowed mode.
-	if (value) {
-		SDL_DisplayMode display_mode;
-		SDL_GetDesktopDisplayMode(SDL_GetWindowDisplayIndex(sdl_window_), &display_mode);
-		set_window_size(display_mode.w, display_mode.h);
+	// Avoid glitches. See the comment in set_window_size().
+	SDL_SetWindowResizable(sdl_window_, SDL_FALSE);
 
+	// Use the desktop resolution in fullscreen mode.
+	// SDL will resize the window for us.
+	if (value) {
+		window_mode_maximized_ = maximized();
 		SDL_SetWindowFullscreen(sdl_window_, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	} else {
 		SDL_SetWindowFullscreen(sdl_window_, 0);
-
-		// Next line does not work. See comment in refresh().
-		set_window_size(window_mode_width_, window_mode_height_);
 	}
 	resolution_changed();
 }
@@ -253,16 +292,19 @@ void Graphic::set_fullscreen(const bool value) {
 void Graphic::refresh() {
 	RenderQueue::instance().draw(screen_->width(), screen_->height());
 
-	// Setting the window size immediately after going out of fullscreen does
-	// not work properly. We work around this issue by resizing the window in
-	// refresh() when in window mode.
 	if (!fullscreen()) {
+		// Set the window to our preferred size if it goes out of sync.
+		// Not sure if this is still needed, leaving it just in case.
 		int true_width, true_height;
 		SDL_GetWindowSize(sdl_window_, &true_width, &true_height);
 
 		if (true_width != window_mode_width_ || true_height != window_mode_height_) {
 			set_window_size(window_mode_width_, window_mode_height_);
+			set_maximized(window_mode_maximized_);
+			resolution_changed();
 		}
+		// See the comment in set_window_size().
+		SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
 	}
 
 	// The backbuffer now contains the current frame. If we want a screenshot,
