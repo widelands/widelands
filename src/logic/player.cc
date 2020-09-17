@@ -1488,6 +1488,29 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 	// Build a list of nearby objects.
 	// This way we only evaluate all objects (which is very expensive) once.
 	// When updating individual fields, only the objects from this list are evaluated.
+	std::list<const MapObject*> nearby_objects;
+	if (!force_visible) {
+		nearby_objects = std::move(seers_for(area));
+	}
+
+	for (const PlayerNumber& p : team_player_) {
+		Player& player = *egbase().get_player(p);
+		if (!player.fields_) {
+			return;
+		}
+		MapRegion<Area<FCoords>> mr(egbase().map(), area);
+		do {
+			player.update_vision(mr.location(), force_visible, nearby_objects);
+		} while (mr.advance(egbase().map()));
+	}
+}
+
+/**
+ * Return a list of seers that can see at least one field from the given area.
+ * The list is approximately sorted by decreasing overlap of the given area and the seer's.
+ */
+std::list<const MapObject*> Player::seers_for(const Area<FCoords>& area) {
+	// Pick the seers and save them paired with the values for sorting.
 	std::list<std::pair<int, const MapObject*>> nearby_objects;
 	for (const PlayerNumber& p : team_player_) {
 		Player& player = *egbase().get_player(p);
@@ -1514,7 +1537,8 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 			}
 		}
 	}
-	// Sort the list, so the objects that are more likely to be a hit are evaluated first.
+
+	// Sort the seers.
 	nearby_objects.sort([](std::pair<int, const MapObject*>& a,
 	                       std::pair<int, const MapObject*>& b) { return a.first < b.first; });
 	std::list<const MapObject*> nearby_objects_2;
@@ -1522,16 +1546,7 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 	               std::back_inserter(nearby_objects_2),
 	               [](std::pair<int, const MapObject*>& pair) { return pair.second; });
 
-	for (const PlayerNumber& p : team_player_) {
-		Player& player = *egbase().get_player(p);
-		if (!player.fields_) {
-			return;
-		}
-		MapRegion<Area<FCoords>> mr(egbase().map(), area);
-		do {
-			player.update_vision(mr.location(), force_visible, nearby_objects_2);
-		} while (mr.advance(egbase().map()));
-	}
+	return nearby_objects_2;
 }
 
 void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {

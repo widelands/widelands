@@ -647,6 +647,8 @@ private:
 	void
 	update_vision(const FCoords&, bool force_visible, std::list<const MapObject*>& nearby_objects);
 	void update_vision_whole_map();
+	std::list<const MapObject*> seers_for(const Area<FCoords>&);
+
 	std::set<MapIndex> revealed_fields_;
 
 	/**
