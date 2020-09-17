@@ -53,7 +53,7 @@ obj_tools = {
    title = _ "Build tools quickly",
    number = 1,
    body = objective_text(_"Make new tools",
-      p(_[[Most of our tools have been lost in the ship tragedy. Our people will not be able to fulfill their duties without proper tools. Luckily we still have some iron ore and plenty of coal. Build a production of tools, it is a prerequisite for success on island. Don't forget to build a smelter as well.]]))
+      p(_[[Most of our tools have been lost in the ship tragedy. Our people will not be able to fulfill their duties without proper tools. Luckily we still have some iron ore and plenty of coal. Build a production of tools, it is a prerequisite for success on island. Don’t forget to build a smelter as well.]]))
 }
 
 obj_mining = {
@@ -71,13 +71,35 @@ obj_explore = {
    body = objective_text(_"Explore your surroundings",
    p(_[[We are pretty sure that we are not alone on the island. We do not know if the others on this island are friends or foes so we need to treat carefully. Expand and explore the island by building at least one habitat for a scout and military buildings. Build at least one tower for his bigger view range.]]))
 }
+
 obj_spidercloth = {
    name = "obj_spidercloth_production",
    title = _"Build a spider farm and a weaving mill",
    number = 2,
    body = objective_text(_"Spidercloth Production",
-      p(_[[We need some spidercloth urgently as we are running out of it. So it is essential to spare every piece we still have. Reduce the input of all buildings that consume spidercloth. Don't forget the constructionsites.]]) ..
+      p(_[[We need some spidercloth urgently as we are running out of it. So it is essential to spare every piece we still have. Reduce the input of all buildings that consume spidercloth. Don’t forget the constructionsites.]]) ..
       p(_[[After that we need to have a farm under all circumstances as it needs spidercloth to be build. Additionally we need a spiderfarm and a weaving mill. Later on a gold spinning mill would be helpful as well.]]))
+}
+
+obj_trading_post = {
+   name = "obj_trading_post",
+   title = _"Build a trading post",
+   number = 1,
+   body = objective_text(_"Upgrade our scout’s house to a trading post",
+   p(_[[To be able to pay the tributes to Kalitath, and keep contact with Jundlina. We need to enhance our scout’s house to a trading post.]]))
+}
+
+obj_trade = {
+   name = "obj_trade",
+   title = _"Pay all tributes to Kalitath",
+   number = 1,
+   body = objective_text(_"Send our trader to Kalitath to deliver the demanded goods",
+   p(_[[We need to send the wares to Kalitath with our trader. He will pick them up as soon as a batch is ready in his trading post.]]) ..
+   p(_[[The following batches need to be delivered:]]) ..
+   li(_[[Five batches with five logs.]]) ..
+   li(_[[Four batches with four coal.]]) ..
+   li(_[[Three batches with three iron.]]) ..
+   li(_[[Two batches with two gold.]]))
 }
 
 -- =======================================================================
@@ -89,7 +111,7 @@ defeated = {
       title =_"Defeated!",
       body = sidolus(_"Sidolus has bad news…",
          -- TRANSLATORS: Sidolus
-         _([[Aaaargh, Jundlina. I don't know how this could have happened, but Satul couldn't protect us from the enemy. They have destroyed our last warehouse. So, we have lost this battle and our people is doomed!]])),
+         _([[Aaaargh, Jundlina. I don’t know how this could have happened, but Satul couldn’t protect us from the enemy. They have destroyed our last warehouse. So, we have lost this battle and our people is doomed!]])),
       posy=1,
    }
 }
@@ -97,7 +119,7 @@ defeated = {
 -- This is an array or message descriptions
 initial_messages = {
    {
-      title = _"The princess' memoir",
+      title = _"The princess’ memoir",
       body = jundlina(_"Jundlina writes her diary",
       -- TRANSLATORS: Jundlina - Diary
       _([[Our escape from the cursed island was a close one: we managed to load three ships and make our escape, but the currents of the sinking island tested our new ships and their design. ]]) ..
@@ -115,8 +137,8 @@ initial_messages = {
       body = jundlina(_"Jundlina continues",
       -- TRANSLATORS: Jundlina - Diary
       _([[At least the east side of the island is inhabited, so much is clear. We do not know if the people there are friends or foes. We do not even know what tribe they might be from. ]]) ..
-      _([[The only thing that is sure that they can't be Atlanteans for no ship of us has sailed as far as us in the last hundreds years. I can only hope they are friendly. ]]) ..
-      _([[We have not much water left, our food is running low, we lost all our tools and most of our building materials with the third ship. We can't afford sail any further an need to try to settle ourselves on this island.]]))
+      _([[The only thing that is sure that they can’t be Atlanteans for no ship of us has sailed as far as us in the last hundreds years. I can only hope they are friendly. ]]) ..
+      _([[We have not much water left, our food is running low, we lost all our tools and most of our building materials with the third ship. We can’t afford sail any further an need to try to settle ourselves on this island.]]))
       .. new_objectives(obj_find_port),
       h=500,
    },
@@ -131,7 +153,7 @@ initial_messages1= {
       _([[The island is full of trees, we might not even need foresters. But we need stone, that is for sure!]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Jundlina - Diary
-      _([[Let's also explore this island. But we need to be careful. We should build at least one tower so that we can see potential enemies before they see us. ]]) ..
+      _([[Let’s also explore this island. But we need to be careful. We should build at least one tower so that we can see potential enemies before they see us. ]]) ..
       _([[But we need to be careful with the stones and other precious material though. When we no longer need a building, we will dismantle it instead of burning it down. ]]) ..
       _([[This will take more time, but we can reuse some of its materials. Also, I want a scout out and exploring at all times.]]))
       .. new_objectives(obj_tools)
@@ -165,7 +187,7 @@ spidercloth_2 = {
       title = _"Opol makes a point",
       body = opol(
          -- TRANSLATORS: Opol
-         _([[Jundlina! It seems there is another problem even more urgent. I fear we haven't build a farm to feed our spiders yet. As this is one of the buildings needing spidercloth for completion we are potentially running into a deadlock here.]]))
+         _([[Jundlina! It seems there is another problem even more urgent. I fear we haven’t build a farm to feed our spiders yet. As this is one of the buildings needing spidercloth for completion we are potentially running into a deadlock here.]]))
    },
    {
       title = _"Jundlina Acknowledges",
@@ -186,7 +208,7 @@ spidercloth_3 = {
       title = _"Jundlina Cheers",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[This is good news indeed, Opol. You may go back to your work now, and may Satul warm you and the weavers' guild!]]))
+         _([[This is good news indeed, Opol. You may go back to your work now, and may Satul warm you and the weavers’ guild!]]))
    }
 }
 
@@ -195,7 +217,7 @@ enemy_1 = {
       title = _"Sidolus Reports foreign inhabitants",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! I have some disturbing news. We have seen some foreign reigned land, But we don't know what to expect from the foreigners.]]))
+         _([[May Satul warm you, Jundlina! I have some disturbing news. We have seen some foreign reigned land, But we don’t know what to expect from the foreigners.]]))
    },
    {
       title = _"Jundlina Cheers",
@@ -216,7 +238,7 @@ allies = {
       title = _"Jundlina Cheers",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, as we could need any ally we can get we should help them. Let's see what we can do for them. However we should improve our own military strength to become independent of others.]]))
+         _([[Sidolus, as we could need any ally we can get we should help them. Let’s see what we can do for them. However we should improve our own military strength to become independent of others.]]))
    }
 }
 
@@ -291,7 +313,6 @@ tribute = {
          .. paragraphdivider() ..
          _([[Oh I almost forgot this one. We demand to have your princess in our headquarters as well to coordinate our warplannings.]]))
    },
-
    {
       title = _"Pitfall!",
       body = sidolus(
@@ -302,6 +323,24 @@ tribute = {
       title = _"Jundlina Concedes",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, I agree with you. However I think we have no choice so we need to obey to this demand. It is your obligation now to run our small people until I get back.]]))
+         _([[Sidolus, I agree with you. However I think we have no choice so we need to obey to this demand. It is your obligation now to run our small people until I get back.]])
+         .. paragraphdivider() ..
+         _([[First you need to upgrade our scout’s house to a trading post. Then you need to send the demanded tributes of 4 gold, 9 iron, 16 coal and 25 log.]]))
+         .. new_objectives(obj_trading_post)
+   }
+}
+
+trading = {
+   {
+      title = _"Trading post built",
+      body = loftomor(
+         -- TRANSLATORS: loftomor
+         _([[Sidolus, may Satul warm you! We have finished the new trading post. Hopefully this will get us back Jundlina soon]]))
+   },
+   {
+      title = _"Sidolus Agrees",
+      body = sidolus(
+         -- TRANSLATORS: sidolus
+         _([[Well done, Loftomor, well done. May Satul warm our princess and our whole people. Now we need to begin sending goods to this barbarian. I think we should start with the wood deliveries as we could afford them the easiest. But we need to find more metals.]]))
    }
 }

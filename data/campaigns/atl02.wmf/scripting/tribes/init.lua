@@ -24,6 +24,26 @@ local result = {
          {
             { name = "atlanteans_trader" }
          }
+      },
+      wares_order = {
+         {
+            {
+               name= "coin_wood",
+               preciousness = 1
+            },
+            {
+               name= "coin_copper",
+               preciousness = 1
+            },
+            {
+               name= "coin_silver",
+               preciousness = 1
+            },
+            {
+               name= "coin_gold",
+               preciousness = 1
+            }
+         },
       }
    },
    barbarians = {

@@ -14,8 +14,8 @@ function iron()
    tools.done = true
    msg_boxes(tools_available)
    run(mining)
-   Kalitath:set_attack_forbidden(2, false)
-   Maletus:set_attack_forbidden(3, false)
+   --Kalitath:set_attack_forbidden(2, false)
+   --Maletus:set_attack_forbidden(3, false)
 end
 
 function mining()
@@ -62,6 +62,10 @@ function enemy()
          end
       end
    end
+
+   Kalitath:set_attack_forbidden(2, false)
+   Maletus:set_attack_forbidden(3, false)
+
    msg_boxes(enemy_1)
    while not check_for_buildings(p1, {
       atlanteans_scouts_house1 = 1,
@@ -99,19 +103,23 @@ function enemy()
 
    set_objective_done(explore)
    msg_boxes(allies)
-   run(allies)
+   run(uncertain_allies)
    run(maletus_defeated)
    run(check_defeat)
 end
 
-function allies()
+function uncertain_allies()
    p1:set_attack_forbidden(3, true)
    Kalitath:set_attack_forbidden(1, true)
-   sleep(300000)
+   sleep(60000)
    msg_boxes(tribute)
+   trading_post = add_campaign_objective(obj_trading_post)
    while not check_for_buildings(p1, {
       atlanteans_trading_post = 1,
    }) do sleep(3731) end
+   trading_post.done = true
+   trade = add_campaign_objective(obj_tribute)
+   msg_boxes(trading)
 
 end
 

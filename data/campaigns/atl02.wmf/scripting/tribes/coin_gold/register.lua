@@ -1,0 +1,3 @@
+return {
+   coin_gold = {},
+}
