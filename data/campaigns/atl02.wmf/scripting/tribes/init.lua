@@ -19,16 +19,18 @@ local result = {
                purpose = pgettext("atlanteans_building", "Explores unknown territory.")
             }
          },
+      },
+      workers_order = {
+         {
+            { name = "atlanteans_trader" }
+         }
       }
    },
    barbarians = {
-      buildings = {
+      immovables = {
          {
-            name = "barbarians_trading_post",
-            helptexts = {
-               -- TRANSLATORS: Purpose helptext for an barbarian market site: Trading post
-               purpose = pgettext("barbarians_building", "Enables the share of goods with other players.")
-            }
+            name = "barbarians_trade_pole",
+            helptexts = {}
          },
       }
    }

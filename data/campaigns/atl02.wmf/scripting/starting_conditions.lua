@@ -16,7 +16,8 @@
    ship.capacity = 110
    ship:make_expedition({
       atlanteans_fishbreeder = 1,
-      atlanteans_geologist = 2,
+      atlanteans_geologist = 1,
+      atlanteans_horse = 1,
       atlanteans_miner = 3,
       atlanteans_sawyer = 2,
       atlanteans_smelter = 1,
@@ -25,24 +26,24 @@
       atlanteans_woodcutter = 5,
       atlanteans_soldier = 8,
       atlanteans_forester =1,
-      diamond = 1,
       coal = 9,
-      quartz = 2,
-      granite = 4,
       spider_silk = 4,
       smoked_fish = 10,
       smoked_meat = 10,
       atlanteans_bread = 20,
-      log = 4,
+      iron_ore = 11,
       atlanteans_builder = 3,
       })
 
    ship = p1:place_ship(map:get_field(44,0))
    ship.capacity = 110
    ship:make_expedition({
-      iron_ore = 40,
+      iron_ore = 29,
       spidercloth = 2,
-      log = 29,
+      granite = 4,
+      log = 33,
+      quartz = 2,
+      diamond = 1,
       planks = 20,
       atlanteans_builder = 1,
       })
@@ -60,3 +61,4 @@
    sf = map.player_slots[3].starting_field
    Kalitath:place_flag(sf.brn,true)
    create_economy_for_plr_3()
+   map:place_immovable("barbarians_trade_pole", map:get_field(112,150), "tribes")
