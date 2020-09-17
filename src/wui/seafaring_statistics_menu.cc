@@ -40,7 +40,13 @@ constexpr int kButtonSize = 34;
 
 SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                                                  UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&plr, UI::WindowStyle::kWui, "seafaring_statistics", &registry, 375, 375, _("Seafaring Statistics")),
+   : UI::UniqueWindow(&plr,
+                      UI::WindowStyle::kWui,
+                      "seafaring_statistics",
+                      &registry,
+                      375,
+                      375,
+                      _("Seafaring Statistics")),
      main_box_(this, kPadding, kPadding, UI::Box::Vertical, get_inner_w(), get_inner_h(), kPadding),
      filter_box_(
         &main_box_, 0, 0, UI::Box::Horizontal, get_inner_w() - 2 * kPadding, kButtonSize, kPadding),

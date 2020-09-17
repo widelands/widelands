@@ -42,7 +42,8 @@ const uint8_t kClientUnregistered = 2;
 const uint8_t kClientIRC = 4;
 }  // namespace
 
-FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsmm, std::string& nick,
+FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsmm,
+                                                         std::string& nick,
                                                          std::string& pwd,
                                                          bool registered)
    : FullscreenMenuLoadMapOrGame(fsmm, _("Metaserver Lobby")),

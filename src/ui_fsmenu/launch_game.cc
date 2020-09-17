@@ -33,7 +33,8 @@
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 
-FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm, GameSettingsProvider* const settings,
+FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
+                                                   GameSettingsProvider* const settings,
                                                    GameController* const ctrl)
    : UI::Window(&fsmm,
                 UI::WindowStyle::kFsMenu,
@@ -43,7 +44,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm, Gam
                 fsmm.calc_desired_window_width("launch_game"),
                 fsmm.calc_desired_window_height("launch_game"),
                 _("Launch Game")),
-                fsmm_(fsmm),
+     fsmm_(fsmm),
 
      // Values for alignment and size
      butw_(get_inner_w() / 4),
@@ -61,7 +62,9 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm, Gam
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
-     peaceful_(this, Vector2i(get_inner_w() * 7 / 10, get_inner_h() * 19 / 40 + buth_), _("Peaceful mode")),
+     peaceful_(this,
+               Vector2i(get_inner_w() * 7 / 10, get_inner_h() * 19 / 40 + buth_),
+               _("Peaceful mode")),
      custom_starting_positions_(this,
                                 Vector2i(get_inner_w() * 7 / 10, get_inner_h() * 21 / 40 + buth_),
                                 _("Custom starting positions")),

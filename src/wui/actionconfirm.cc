@@ -130,7 +130,8 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
                              const std::string& message,
                              Widelands::MapObject& map_object,
                              const std::string& checkbox)
-   : UI::Window(&parent, UI::WindowStyle::kWui, "building_action_confirm", 0, 0, 200, 120, windowtitle),
+   : UI::Window(
+        &parent, UI::WindowStyle::kWui, "building_action_confirm", 0, 0, 200, 120, windowtitle),
      object_(&map_object),
      checkbox_(nullptr) {
 	const int padding = 6;

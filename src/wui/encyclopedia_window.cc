@@ -46,7 +46,8 @@ namespace UI {
 EncyclopediaWindow::EncyclopediaWindow(InteractiveBase& parent,
                                        UI::UniqueWindow::Registry& registry,
                                        LuaInterface* const lua)
-   : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
      lua_(lua),
      tabs_(this, UI::TabPanelStyle::kWuiLight) {
 }

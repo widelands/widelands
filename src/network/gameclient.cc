@@ -194,7 +194,8 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	game = nullptr;
 }
 
-GameClient::GameClient(FullscreenMenuMain& fsmm, const std::pair<NetAddress, NetAddress>& host,
+GameClient::GameClient(FullscreenMenuMain& fsmm,
+                       const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
                        bool internet,
                        const std::string& gamename)
@@ -1116,8 +1117,8 @@ void GameClient::disconnect(const std::string& reason,
 			msg = (boost::format(_("%s An automatic savegame will be created.")) % msg).str();
 		}
 
-		UI::WLMessageBox mmb(
-		   d->modal, UI::WindowStyle::kWui, _("Disconnected from Host"), msg, UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox mmb(d->modal, UI::WindowStyle::kWui, _("Disconnected from Host"), msg,
+		                     UI::WLMessageBox::MBoxType::kOk);
 		mmb.run<UI::Panel::Returncodes>();
 	}
 

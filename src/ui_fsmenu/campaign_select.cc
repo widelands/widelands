@@ -27,7 +27,8 @@
  * CampaignSelect UI
  * Loads a list of all visible campaigns
  */
-FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& fsmm, Campaigns* campvis)
+FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& fsmm,
+                                                           Campaigns* campvis)
    : FullscreenMenuLoadMapOrGame(fsmm, _("Choose Campaign")),
      table_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 

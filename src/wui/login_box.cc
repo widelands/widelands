@@ -29,12 +29,13 @@
 #include "wlapplication_options.h"
 
 LoginBox::LoginBox(Panel& parent)
-   : Window(&parent, UI::WindowStyle::kFsMenu, "login_box", 0, 0, 500, 280, _("Online Game Settings")) {
+   : Window(
+        &parent, UI::WindowStyle::kFsMenu, "login_box", 0, 0, 500, 280, _("Online Game Settings")) {
 	center_to_parent();
 
 	int32_t margin = 10;
 
-    // TODO(Nordfriese): Magic numbers everywhere. Box layout please…
+	// TODO(Nordfriese): Magic numbers everywhere. Box layout please…
 	ta_nickname = new UI::Textarea(this, margin, margin, 0, 0, _("Nickname:"));
 	ta_password = new UI::Textarea(this, margin, 70, 0, 0, _("Password:"));
 	eb_nickname = new UI::EditBox(this, 150, margin, 330, UI::PanelStyle::kFsMenu);
@@ -194,7 +195,8 @@ bool LoginBox::check_password() {
 		// something went wrong -> show the error message
 		// idealy it is about the wrong password
 		ChatMessage msg = InternetGaming::ref().get_messages().back();
-		UI::WLMessageBox wmb(this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox wmb(
+		   this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 		eb_password->set_text("");
 		eb_password->focus();

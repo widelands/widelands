@@ -23,7 +23,8 @@
 
 // TODO(GunChleoc): Arabic: Buttons need more height for Arabic
 GameExitConfirmBox::GameExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb)
-   : UI::WLMessageBox(&parent, UI::WindowStyle::kWui,
+   : UI::WLMessageBox(&parent,
+                      UI::WindowStyle::kWui,
                       /** TRANSLATORS: Window label when "Exit game" has been pressed */
                       _("Exit Game Confirmation"),
                       _("Are you sure you wish to exit this game?"),

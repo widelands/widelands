@@ -602,7 +602,14 @@ void EconomyOptionsWindow::SaveProfileWindow::think() {
 
 EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
                                                            EconomyOptionsWindow* eco)
-   : UI::Window(parent, UI::WindowStyle::kWui, "save_economy_options_profile", 0, 0, 0, 0, _("Save Profile")),
+   : UI::Window(parent,
+                UI::WindowStyle::kWui,
+                "save_economy_options_profile",
+                0,
+                0,
+                0,
+                0,
+                _("Save Profile")),
      economy_options_(eco),
      main_box_(this, 0, 0, UI::Box::Vertical),
      table_box_(&main_box_, 0, 0, UI::Box::Vertical),

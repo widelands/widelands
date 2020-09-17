@@ -210,8 +210,13 @@ constexpr uint16_t kMaxRecommendedWaterwayLengthLimit = 20;
  * Create all the buttons etc...
  */
 MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& registry)
-   : UI::UniqueWindow(
-        &parent, UI::WindowStyle::kWui, "map_options", &registry, 350, parent.get_inner_h() - 80, _("Map Options")),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      "map_options",
+                      &registry,
+                      350,
+                      parent.get_inner_h() - 80,
+                      _("Map Options")),
      padding_(4),
      indent_(10),
      labelh_(text_height(UI::FontStyle::kLabel) + 4),

@@ -25,7 +25,8 @@ EditorToolOptionsMenu::EditorToolOptionsMenu(EditorInteractive& parent,
                                              uint32_t const height,
                                              const std::string& title,
                                              EditorTool& tool)
-   : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "tool_options_menu", &registry, width, height, title),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "tool_options_menu", &registry, width, height, title),
      parent_(parent),
      current_tool_(tool) {
 	select_correct_tool();

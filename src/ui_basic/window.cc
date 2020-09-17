@@ -163,14 +163,12 @@ Window::Window(Panel* const parent,
 }
 
 void Window::update_toolbar_buttons() {
-	button_minimize_->set_pic(g_image_cache->get(is_minimal_ ?
-	                                                style_.button_unminimize() :
-	                                                style_.button_minimize()));
+	button_minimize_->set_pic(
+	   g_image_cache->get(is_minimal_ ? style_.button_unminimize() : style_.button_minimize()));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
 	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed :
 	                                                 Button::VisualState::kRaised);
-	button_pin_->set_pic(g_image_cache->get(pinned_ ? style_.button_unpin() :
-	                                                  style_.button_pin()));
+	button_pin_->set_pic(g_image_cache->get(pinned_ ? style_.button_unpin() : style_.button_pin()));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
 	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed :
 	                                        Button::VisualState::kRaised);
@@ -329,8 +327,8 @@ void Window::center_to_parent() {
  */
 void Window::draw(RenderTarget& dst) {
 	if (!is_minimal()) {
-		dst.tile(
-		   Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), style_.background(), Vector2i::zero());
+		dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), style_.background(),
+		         Vector2i::zero());
 	}
 }
 
@@ -345,9 +343,10 @@ void Window::draw_border(RenderTarget& dst) {
 	const int32_t hz_bar_end = get_w() - kCornerWidth;
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - kHorizontalBorderMiddleLength;
 
-	const RGBAColor& focus_color = (get_parent() && get_parent()->focused_child() == this) || is_modal() ?
-	                                  style_.window_border_focused() :
-	                                  style_.window_border_unfocused();
+	const RGBAColor& focus_color =
+	   (get_parent() && get_parent()->focused_child() == this) || is_modal() ?
+	      style_.window_border_focused() :
+	      style_.window_border_unfocused();
 
 	{  //  Top border.
 		int32_t pos = kCornerWidth;

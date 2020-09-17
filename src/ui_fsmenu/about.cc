@@ -56,9 +56,7 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
 		log_err("%s", err.what());
 	}
 
-	close_.sigclicked.connect([this]() {
-		end_modal<MenuTarget>(MenuTarget::kBack);
-	});
+	close_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kBack); });
 
 	box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(kPadding);

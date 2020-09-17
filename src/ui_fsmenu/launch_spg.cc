@@ -36,7 +36,8 @@
 #include "ui_fsmenu/mapselect.h"
 #include "wui/playerdescrgroup.h"
 
-FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm, GameSettingsProvider* const settings,
+FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
+                                                 GameSettingsProvider* const settings,
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
      // TODO(Nordfriese): Magic numbers everywhere. Box layout please…
@@ -110,7 +111,8 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm, GameS
 
 	ok_.set_pos(Vector2i(get_inner_w() * 7 / 10, get_inner_h() * 9 / 10));
 	back_.set_pos(Vector2i(get_inner_w() * 7 / 10, get_inner_h() * 17 / 20));
-	win_condition_dropdown_.set_pos(Vector2i(get_inner_w() * 7 / 10, get_inner_h() * 4 / 10 + buth_));
+	win_condition_dropdown_.set_pos(
+	   Vector2i(get_inner_w() * 7 / 10, get_inner_h() * 4 / 10 + buth_));
 	win_condition_dropdown_.set_size(select_map_.get_w(), win_condition_dropdown_.get_h());
 
 	select_map_.sigclicked.connect([this]() { select_map(); });
@@ -121,12 +123,12 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm, GameS
 		assert(player_image);
 
 		pos_[i] =
-		   new UI::Button(this, "switch_to_position", get_inner_w() / 100, y += buth_, get_inner_h() * 17 / 500,
-		                  get_inner_h() * 17 / 500, UI::ButtonStyle::kFsMenuSecondary, player_image,
-		                  _("Switch to position"));
+		   new UI::Button(this, "switch_to_position", get_inner_w() / 100, y += buth_,
+		                  get_inner_h() * 17 / 500, get_inner_h() * 17 / 500,
+		                  UI::ButtonStyle::kFsMenuSecondary, player_image, _("Switch to position"));
 		pos_[i]->sigclicked.connect([this, i]() { switch_to_position(i); });
-		players_[i] = new PlayerDescriptionGroup(
-		   this, get_inner_w() / 25, y, get_inner_w() * 16 / 25, get_inner_h() * 17 / 500 * 2, settings, i);
+		players_[i] = new PlayerDescriptionGroup(this, get_inner_w() / 25, y, get_inner_w() * 16 / 25,
+		                                         get_inner_h() * 17 / 500 * 2, settings, i);
 		y += buth_ / 1.17;
 	}
 

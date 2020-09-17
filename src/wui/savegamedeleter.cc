@@ -9,7 +9,8 @@
 #include "logic/filesystem_constants.h"
 #include "ui_basic/messagebox.h"
 
-SavegameDeleter::SavegameDeleter(UI::Panel* parent, UI::WindowStyle s) : parent_(parent), style_(s) {
+SavegameDeleter::SavegameDeleter(UI::Panel* parent, UI::WindowStyle s)
+   : parent_(parent), style_(s) {
 }
 
 bool SavegameDeleter::delete_savegames(const std::vector<SavegameData>& to_be_deleted) const {
@@ -80,8 +81,8 @@ void SavegameDeleter::notify_deletion_failed(const std::vector<SavegameData>& to
 	std::string header = create_header_for_deletion_failed_window(to_be_deleted.size(), no_failed);
 	std::string message = (boost::format("%s\n%s") % header % as_filename_list(to_be_deleted)).str();
 
-	UI::WLMessageBox msgBox(
-	   parent_->get_parent()->get_parent(), style_, caption, message, UI::WLMessageBox::MBoxType::kOk);
+	UI::WLMessageBox msgBox(parent_->get_parent()->get_parent(), style_, caption, message,
+	                        UI::WLMessageBox::MBoxType::kOk);
 	msgBox.run<UI::Panel::Returncodes>();
 }
 

@@ -169,8 +169,8 @@ void MainMenuSaveMap::clicked_make_directory() {
 			boost::trim(fullname);
 			if (g_fs->file_exists(fullname)) {
 				const std::string s = _("A file or directory with that name already exists.");
-				UI::WLMessageBox mbox(
-				   this, UI::WindowStyle::kWui, _("Error Creating Directory!"), s, UI::WLMessageBox::MBoxType::kOk);
+				UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Creating Directory!"), s,
+				                      UI::WLMessageBox::MBoxType::kOk);
 				mbox.run<UI::Panel::Returncodes>();
 				open_dialogue = true;
 			} else {
@@ -184,8 +184,8 @@ void MainMenuSaveMap::clicked_make_directory() {
 					        e.what());
 					const std::string s =
 					   (boost::format(_("Error while creating directory ‘%s’.")) % fullname).str();
-					UI::WLMessageBox mbox(
-					   this, UI::WindowStyle::kWui, _("Error Creating Directory!"), s, UI::WLMessageBox::MBoxType::kOk);
+					UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Creating Directory!"), s,
+					                      UI::WLMessageBox::MBoxType::kOk);
 					mbox.run<UI::Panel::Returncodes>();
 				}
 				fill_table();
@@ -308,7 +308,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
 		    FileSystem::fs_filename(filename.c_str()))
 		      .str();
-		UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
+		UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Saving Map!"), s,
+		                      UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 			return false;
 		}
@@ -361,7 +362,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	}
 
 	std::string msg = gsh.localized_formatted_result_message();
-	UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Saving Map!"), msg, UI::WLMessageBox::MBoxType::kOk);
+	UI::WLMessageBox mbox(
+	   this, UI::WindowStyle::kWui, _("Error Saving Map!"), msg, UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();
 
 	// If only the backup failed (likely just because of a file lock),

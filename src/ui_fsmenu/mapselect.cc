@@ -36,7 +36,8 @@
 
 using Widelands::WidelandsMapLoader;
 
-FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm, GameSettingsProvider* const settings,
+FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
+                                                 GameSettingsProvider* const settings,
                                                  GameController* const ctrl)
    : FullscreenMenuLoadMapOrGame(fsmm, _("Choose Map")),
      checkbox_space_(20),

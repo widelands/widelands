@@ -31,7 +31,10 @@
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 class FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuLoadGame(FullscreenMenuMain&, Widelands::Game&, GameSettingsProvider* gsp, bool is_replay = false);
+	FullscreenMenuLoadGame(FullscreenMenuMain&,
+	                       Widelands::Game&,
+	                       GameSettingsProvider* gsp,
+	                       bool is_replay = false);
 
 	/// The currently selected filename
 	const std::string& filename() const;

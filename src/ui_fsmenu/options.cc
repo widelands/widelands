@@ -283,8 +283,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
-	ok_.sigclicked.connect(
-	   [this]() { end_modal<MenuTarget>(MenuTarget::kOk); });
+	ok_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kOk); });
 
 	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));

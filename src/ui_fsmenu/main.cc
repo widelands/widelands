@@ -45,11 +45,13 @@ constexpr uint32_t kImageExchangeDuration = 2500;
 constexpr uint32_t kNoSplash = std::numeric_limits<uint32_t>::max();
 
 int16_t FullscreenMenuMain::calc_desired_window_width(const std::string& window_name) {
-	return (window_name == "options" || window_name == "about") ? std::max(600, get_w() / 2) : std::max(700, get_w() * 7 / 8);
+	return (window_name == "options" || window_name == "about") ? std::max(600, get_w() / 2) :
+	                                                              std::max(700, get_w() * 7 / 8);
 }
 
 int16_t FullscreenMenuMain::calc_desired_window_height(const std::string& window_name) {
-	return (window_name == "options" || window_name == "about") ? std::max(400, get_h() / 2) : std::max(500, get_h() * 4 / 5);
+	return (window_name == "options" || window_name == "about") ? std::max(400, get_h() / 2) :
+	                                                              std::max(500, get_h() * 4 / 5);
 }
 
 FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
@@ -120,27 +122,15 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 
 	singleplayer_.selected.connect(
 	   [this]() { end_modal<MenuTarget>(singleplayer_.get_selected()); });
-	multiplayer_.selected.connect([this]() {
-		end_modal<MenuTarget>(multiplayer_.get_selected());
-	});
-	replay_.sigclicked.connect([this]() {
-		end_modal<MenuTarget>(MenuTarget::kReplay);
-	});
-	editor_.sigclicked.connect([this]() {
-		end_modal<MenuTarget>(MenuTarget::kEditor);
-	});
+	multiplayer_.selected.connect([this]() { end_modal<MenuTarget>(multiplayer_.get_selected()); });
+	replay_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kReplay); });
+	editor_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kEditor); });
 	/* addons_.sigclicked.connect([this]() {  // Not yet implemented
 	   end_modal<MenuTarget>(MenuTarget::kAddOns);
 	}); */
-	options_.sigclicked.connect([this]() {
-		end_modal<MenuTarget>(MenuTarget::kOptions);
-	});
-	about_.sigclicked.connect([this]() {
-		end_modal<MenuTarget>(MenuTarget::kAbout);
-	});
-	exit_.sigclicked.connect([this]() {
-		end_modal<MenuTarget>(MenuTarget::kExit);
-	});
+	options_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kOptions); });
+	about_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kAbout); });
+	exit_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kExit); });
 
 	vbox1_.add(&singleplayer_, UI::Box::Resizing::kFullSize);
 	vbox1_.add_inf_space();
@@ -181,14 +171,14 @@ void FullscreenMenuMain::set_labels() {
 	singleplayer_.clear();
 	multiplayer_.clear();
 
-	singleplayer_.add(_("New Game"), MenuTarget::kNewGame, nullptr, false,
-	                  _("Begin a new game"), "N");
-	singleplayer_.add(_("Campaigns"), MenuTarget::kCampaign, nullptr, false,
-	                  _("Play a campaign"), "H");
+	singleplayer_.add(
+	   _("New Game"), MenuTarget::kNewGame, nullptr, false, _("Begin a new game"), "N");
+	singleplayer_.add(
+	   _("Campaigns"), MenuTarget::kCampaign, nullptr, false, _("Play a campaign"), "H");
 	singleplayer_.add(_("Tutorials"), MenuTarget::kTutorial, nullptr, false,
 	                  _("Play one of our beginners’ tutorials"), "T");
-	singleplayer_.add(_("Load Game"), MenuTarget::kLoadGame, nullptr, false,
-	                  _("Continue a saved game"), "L");
+	singleplayer_.add(
+	   _("Load Game"), MenuTarget::kLoadGame, nullptr, false, _("Continue a saved game"), "L");
 
 	// Refresh the Continue tooltip. The SavegameData must be reloaded after
 	// every language switch because it contains localized strings.
@@ -207,8 +197,7 @@ void FullscreenMenuMain::set_labels() {
 		if (newest_singleplayer) {
 			filename_for_continue_ = newest_singleplayer->filename;
 			singleplayer_.add(
-			   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr,
-			   false,
+			   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
 			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>") %
 			    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 			       .as_font_tag(
@@ -241,10 +230,10 @@ void FullscreenMenuMain::set_labels() {
 
 	multiplayer_.add(_("Online Game"), MenuTarget::kMetaserver, nullptr, false,
 	                 _("Join the Widelands lobby"), "J");
-	multiplayer_.add(_("Online Game Settings"), MenuTarget::kOnlineGameSettings,
-	                 nullptr, false, _("Log in as a registered user"), "U");
-	multiplayer_.add(_("LAN / Direct IP"), MenuTarget::kLan, nullptr, false,
-	                 _("Play a private online game"), "P");
+	multiplayer_.add(_("Online Game Settings"), MenuTarget::kOnlineGameSettings, nullptr, false,
+	                 _("Log in as a registered user"), "U");
+	multiplayer_.add(
+	   _("LAN / Direct IP"), MenuTarget::kLan, nullptr, false, _("Play a private online game"), "P");
 
 	singleplayer_.set_label(_("Single Player…"));
 	multiplayer_.set_label(_("Multiplayer…"));
@@ -318,8 +307,7 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			return true;
 		case SDLK_c:
 			if (!filename_for_continue_.empty()) {
-				end_modal<MenuTarget>(
-				   MenuTarget::kContinueLastsave);
+				end_modal<MenuTarget>(MenuTarget::kContinueLastsave);
 				return true;
 			}
 			break;
@@ -336,8 +324,7 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			end_modal<MenuTarget>(MenuTarget::kMetaserver);
 			return true;
 		case SDLK_u:
-			end_modal<MenuTarget>(
-			   MenuTarget::kOnlineGameSettings);
+			end_modal<MenuTarget>(MenuTarget::kOnlineGameSettings);
 			return true;
 		case SDLK_p:
 			end_modal<MenuTarget>(MenuTarget::kLan);
@@ -494,14 +481,14 @@ void FullscreenMenuMain::layout() {
 	buth_ = get_inner_h() / 25;
 	padding_ = buth_ / 3;
 
-	copyright_.set_pos(
-	   Vector2i((get_inner_w() - copyright_.get_w()) / 2, get_inner_h() - copyright_.get_h() - padding_ / 2));
-	version_.set_pos(Vector2i(
-	   (get_inner_w() - version_.get_w()) / 2, copyright_.get_y() - version_.get_h() - padding_ / 2));
+	copyright_.set_pos(Vector2i(
+	   (get_inner_w() - copyright_.get_w()) / 2, get_inner_h() - copyright_.get_h() - padding_ / 2));
+	version_.set_pos(Vector2i((get_inner_w() - version_.get_w()) / 2,
+	                          copyright_.get_y() - version_.get_h() - padding_ / 2));
 
-	box_rect_ =
-	   Recti((get_inner_w() - padding_) / 2 - butw_, version_.get_y() - padding_ * 5 / 2 - get_inner_h() / 4,
-	         2 * butw_ + padding_, get_inner_h() / 4);
+	box_rect_ = Recti((get_inner_w() - padding_) / 2 - butw_,
+	                  version_.get_y() - padding_ * 5 / 2 - get_inner_h() / 4, 2 * butw_ + padding_,
+	                  get_inner_h() / 4);
 
 	singleplayer_.set_desired_size(butw_, buth_);
 	multiplayer_.set_desired_size(butw_, buth_);
@@ -531,7 +518,8 @@ void FullscreenMenuMain::layout() {
 			const int16_t desired_w = calc_desired_window_width(w->get_name());
 			const int16_t desired_h = calc_desired_window_height(w->get_name());
 			w->set_size(desired_w, desired_h);
-			w->set_pos(Vector2i(std::min(get_inner_w() - desired_w, w->get_x()), std::min(get_inner_h() - desired_h, w->get_y())));
+			w->set_pos(Vector2i(std::min(get_inner_w() - desired_w, w->get_x()),
+			                    std::min(get_inner_h() - desired_h, w->get_y())));
 
 			if (minimal) {
 				// …and then make it minimal again if it was minimal before
@@ -586,7 +574,8 @@ void FullscreenMenuMain::internet_login() {
 	} else {
 		// something went wrong -> show the error message
 		ChatMessage msg = InternetGaming::ref().get_messages().back();
-		UI::WLMessageBox wmb(this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox wmb(
+		   this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 
 		// Reset InternetGaming and passwort and show internet login again

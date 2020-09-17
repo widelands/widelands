@@ -38,7 +38,8 @@ constexpr uint32_t vgap = 3;
 GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                                                UI::UniqueWindow::Registry& registry,
                                                GameHost* host)
-   : UI::UniqueWindow(gb, UI::WindowStyle::kWui,
+   : UI::UniqueWindow(gb,
+                      UI::WindowStyle::kWui,
                       "client_disconnected",
                       &registry,
                       2 * margin + width,

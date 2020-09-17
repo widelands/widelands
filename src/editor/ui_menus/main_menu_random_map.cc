@@ -42,7 +42,13 @@ constexpr uint8_t kMaxMapgenPlayers = 8;
 
 MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
                                            UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "random_map_menu", &registry, 400, 500, _("New Random Map")),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      "random_map_menu",
+                      &registry,
+                      400,
+                      500,
+                      _("New Random Map")),
      // UI elements
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),

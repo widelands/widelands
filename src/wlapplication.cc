@@ -1165,8 +1165,9 @@ void WLApplication::mainmenu() {
 		if (message.size()) {
 			log_err("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
 
-			UI::WLMessageBox mmb(mm.get(), UI::WindowStyle::kFsMenu, messagetitle, richtext_escape(message),
-			                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
+			UI::WLMessageBox mmb(mm.get(), UI::WindowStyle::kFsMenu, messagetitle,
+			                     richtext_escape(message), UI::WLMessageBox::MBoxType::kOk,
+			                     UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
 
 			message.clear();
@@ -1274,7 +1275,7 @@ bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
 	//  Start UI for the tutorials.
 	FullscreenMenuScenarioSelect select_campaignmap(fsmm);
 	if (select_campaignmap.run<MenuTarget>() != MenuTarget::kOk) {
-	    return false;
+		return false;
 	}
 	try {
 		// Load selected tutorial-map-file
@@ -1461,8 +1462,7 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
 		size_t campaign_index;
 		{  //  First start UI for selecting the campaign.
 			FullscreenMenuCampaignSelect select_campaign(fsmm, campaign_visibility.get());
-			if (select_campaign.run<MenuTarget>() ==
-			    MenuTarget::kOk) {
+			if (select_campaign.run<MenuTarget>() == MenuTarget::kOk) {
 				campaign_index = select_campaign.get_campaign_index();
 			} else {  //  back was pressed
 				filename = "";
@@ -1472,8 +1472,7 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
 		//  Then start UI for the selected campaign.
 		CampaignData* campaign_data = campaign_visibility->get_campaign(campaign_index);
 		FullscreenMenuScenarioSelect select_campaignmap(fsmm, campaign_data);
-		if (select_campaignmap.run<MenuTarget>() ==
-		    MenuTarget::kOk) {
+		if (select_campaignmap.run<MenuTarget>() == MenuTarget::kOk) {
 			filename = select_campaignmap.get_map();
 			game.set_scenario_difficulty(select_campaignmap.get_difficulty());
 			break;

@@ -183,8 +183,7 @@ StyleManager::StyleManager() {
 	element_table = table->get_table("windows");
 	add_window_style(UI::WindowStyle::kFsMenu, *element_table->get_table("fsmenu"));
 	add_window_style(UI::WindowStyle::kWui, *element_table->get_table("wui"));
-	check_completeness(
-	   "windows", window_styles_.size(), static_cast<size_t>(UI::WindowStyle::kWui));
+	check_completeness("windows", window_styles_.size(), static_cast<size_t>(UI::WindowStyle::kWui));
 
 	// Statistics plot
 	set_statistics_plot_style(*table->get_table("statistics_plot"));
@@ -407,20 +406,17 @@ void StyleManager::add_ware_info_style(UI::WareInfoStyle style, const LuaTable& 
 }
 
 void StyleManager::add_window_style(UI::WindowStyle style, const LuaTable& table) {
-	window_styles_.insert(std::make_pair(style, std::unique_ptr<const UI::WindowStyleInfo>(new UI::WindowStyleInfo(
-	        read_rgba_color(*table.get_table("window_border_focused")),
-	        read_rgba_color(*table.get_table("window_border_unfocused")),
-			g_image_cache->get(table.get_string("border_top")),
-			g_image_cache->get(table.get_string("border_bottom")),
-			g_image_cache->get(table.get_string("border_right")),
-			g_image_cache->get(table.get_string("border_left")),
-			g_image_cache->get(table.get_string("background")),
-			table.get_string("button_pin"),
-			table.get_string("button_unpin"),
-			table.get_string("button_minimize"),
-			table.get_string("button_unminimize"),
-			table.get_string("button_close")
-		))));
+	window_styles_.insert(std::make_pair(
+	   style, std::unique_ptr<const UI::WindowStyleInfo>(new UI::WindowStyleInfo(
+	             read_rgba_color(*table.get_table("window_border_focused")),
+	             read_rgba_color(*table.get_table("window_border_unfocused")),
+	             g_image_cache->get(table.get_string("border_top")),
+	             g_image_cache->get(table.get_string("border_bottom")),
+	             g_image_cache->get(table.get_string("border_right")),
+	             g_image_cache->get(table.get_string("border_left")),
+	             g_image_cache->get(table.get_string("background")), table.get_string("button_pin"),
+	             table.get_string("button_unpin"), table.get_string("button_minimize"),
+	             table.get_string("button_unminimize"), table.get_string("button_close")))));
 }
 
 void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map) {

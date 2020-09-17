@@ -28,31 +28,30 @@ namespace UI {
 enum class WindowStyle { kFsMenu, kWui };
 
 struct WindowStyleInfo {
-	WindowStyleInfo(
-			const RGBAColor& col_f,
-			const RGBAColor& col_uf,
-			const Image* img_t,
-			const Image* img_b,
-			const Image* img_r,
-			const Image* img_l,
-			const Image* img_bg,
-			const std::string& b_pin,
-			const std::string& b_unpin,
-			const std::string& b_minimize,
-			const std::string& b_unminimize,
-			const std::string& b_close) :
-		window_border_focused_(col_f),
-		window_border_unfocused_(col_uf),
-		border_top_(img_t),
-		border_bottom_(img_b),
-		border_left_(img_l),
-		border_right_(img_r),
-		background_(img_bg),
-		button_close_(b_close),
-		button_pin_(b_pin),
-		button_unpin_(b_unpin),
-		button_minimize_(b_minimize),
-		button_unminimize_(b_unminimize) {
+	WindowStyleInfo(const RGBAColor& col_f,
+	                const RGBAColor& col_uf,
+	                const Image* img_t,
+	                const Image* img_b,
+	                const Image* img_r,
+	                const Image* img_l,
+	                const Image* img_bg,
+	                const std::string& b_pin,
+	                const std::string& b_unpin,
+	                const std::string& b_minimize,
+	                const std::string& b_unminimize,
+	                const std::string& b_close)
+	   : window_border_focused_(col_f),
+	     window_border_unfocused_(col_uf),
+	     border_top_(img_t),
+	     border_bottom_(img_b),
+	     border_left_(img_l),
+	     border_right_(img_r),
+	     background_(img_bg),
+	     button_close_(b_close),
+	     button_pin_(b_pin),
+	     button_unpin_(b_unpin),
+	     button_minimize_(b_minimize),
+	     button_unminimize_(b_unminimize) {
 	}
 	WindowStyleInfo(const WindowStyleInfo&) = default;
 
