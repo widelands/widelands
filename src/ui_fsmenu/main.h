@@ -25,7 +25,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
+#include "ui_fsmenu/menu_target.h"
 
 /**
  * This runs the main menu. There, you can select

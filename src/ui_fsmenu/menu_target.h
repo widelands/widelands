@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_BASE_H
-#define WL_UI_FSMENU_BASE_H
+#ifndef WL_UI_FSMENU_MENU_TARGET_H
+#define WL_UI_FSMENU_MENU_TARGET_H
 
 #include "ui_basic/panel.h"
 
@@ -56,4 +56,4 @@ enum class MenuTarget {
 	kJoingame
 };
 
-#endif  // end of include guard: WL_UI_FSMENU_BASE_H
+#endif  // end of include guard: WL_UI_FSMENU_MENU_TARGET_H

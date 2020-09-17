@@ -42,8 +42,6 @@ constexpr Widelands::PlayerNumber kMaxRecommendedPlayers = 8;
 class EditorPlayerMenuWarningBox : public UI::Window {
 public:
 	explicit EditorPlayerMenuWarningBox(UI::Panel* parent)
-	   /** TRANSLATORS: Window title in the editor when a player has selected more than the
-	      recommended number of players */
 	   : Window(parent,
 	            UI::WindowStyle::kWui,
 	            "editor_player_menu_warning_box",
@@ -51,6 +49,8 @@ public:
 	            0,
 	            500,
 	            220,
+	            /** TRANSLATORS: Window title in the editor when a player has selected more than the
+	               recommended number of players */
 	            _("Too Many Players")),
 	     box_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * kMargin),
 	     warning_label_(

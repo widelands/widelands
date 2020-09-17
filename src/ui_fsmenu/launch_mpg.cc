@@ -46,10 +46,11 @@
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {
 	MapOrSaveSelectionWindow(UI::Panel* parent, GameController* gc, uint32_t w, uint32_t h)
-	   : /** TRANSLATORS: Dialog box title for selecting between map or saved game for new
-	        multiplayer game */
-	     Window(
-	        parent, UI::WindowStyle::kFsMenu, "selection_window", 0, 0, w, h, _("Please select")),
+	   : Window(
+	        parent, UI::WindowStyle::kFsMenu, "selection_window", 0, 0, w, h,
+	        /** TRANSLATORS: Dialog box title for selecting between map or saved game for new
+	           multiplayer game */
+	        _("Please select")),
 	     ctrl_(gc) {
 		center_to_parent();
 
