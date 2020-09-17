@@ -20,6 +20,7 @@
 #include "ai/defaultai.h"
 
 #include <algorithm>
+#include <cstdlib>
 #include <memory>
 
 #include "ai/ai_hints.h"

@@ -19,6 +19,7 @@
 
 #include "ui_basic/progresswindow.h"
 
+#include <cstdlib>
 #include <memory>
 #ifndef _MSC_VER
 #include <sys/time.h>

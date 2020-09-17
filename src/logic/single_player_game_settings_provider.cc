@@ -19,6 +19,8 @@
 
 #include "logic/single_player_game_settings_provider.h"
 
+#include <cstdlib>
+
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
