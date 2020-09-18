@@ -2,6 +2,7 @@
 --                      Atlanteans Tutorial Mission 02
 -- =======================================================================
 include "scripting/coroutine.lua"
+include "scripting/field_animations.lua"
 include "scripting/infrastructure.lua"
 include "scripting/messages.lua"
 include "scripting/objective_utils.lua"

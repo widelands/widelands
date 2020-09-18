@@ -17,35 +17,35 @@ tribes:new_worker_type {
 
    programs = {
       log_trade = {
-         "findobject=attrib:tradepole radius:100",
+         "findobject=attrib:tradepole radius:80",
          "createware=log",
          "walk=object",
          "createware=coin_wood",
          "return"
       },
       coal_trade = {
-         "findobject=attrib:tradepole radius:100",
+         "findobject=attrib:tradepole radius:80",
          "createware=coal",
          "walk=object",
          "createware=coin_copper",
          "return"
       },
       iron_trade = {
-         "findobject=attrib:tradepole radius:100",
+         "findobject=attrib:tradepole radius:80",
          "createware=iron",
          "walk=object",
          "createware=coin_silver",
          "return"
       },
       gold_trade = {
-         "findobject=attrib:tradepole radius:100",
+         "findobject=attrib:tradepole radius:80",
          "createware=gold",
          "walk=object",
          "createware=coin_gold",
          "return"
       },
       find_pole = {
-         "findobject=attrib:tradepole radius:100",
+         "findobject=attrib:tradepole radius:80",
       }
    },
 

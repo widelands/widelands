@@ -26,8 +26,11 @@ function mining()
       atlanteans_goldmine = 1
    }) do sleep(3731) end
    mining.done = true
-   msg_boxes(mining_established)
-
+   if explore.done == true then
+      msg_boxes(mining_established_2)
+   else
+      msg_boxes(mining_established_1)
+   end
 end
 
 function spidercloth()
@@ -73,6 +76,7 @@ function enemy()
    local scout = nil
    local contact = nil
    while not scout do
+      sleep(2000)
       -- let's see if a scout is going around
       for i,house in pairs(p1:get_buildings("atlanteans_scouts_house1")) do
          for j,field in pairs(house.fields[1]:region(17)) do -- the scout has a radius of 15
@@ -113,6 +117,7 @@ function uncertain_allies()
    Kalitath:set_attack_forbidden(1, true)
    sleep(60000)
    msg_boxes(tribute)
+   reveal_concentric(p1, map:get_field(112,150), 5, 500)
    trading_post = add_campaign_objective(obj_trading_post)
    while not check_for_buildings(p1, {
       atlanteans_trading_post = 1,

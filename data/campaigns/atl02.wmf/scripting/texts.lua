@@ -89,8 +89,8 @@ obj_trading_post = {
    p(_[[To be able to pay the tributes to Kalitath, and keep contact with Jundlina. We need to enhance our scout’s house to a trading post.]]))
 }
 
-obj_trade = {
-   name = "obj_trade",
+obj_tribute = {
+   name = "obj_tribute",
    title = _"Pay all tributes to Kalitath",
    number = 1,
    body = objective_text(_"Send our trader to Kalitath to deliver the demanded goods",
@@ -273,7 +273,7 @@ tools_available = {
    }
 }
 
-mining_established = {
+mining_established_1 = {
    {
       title = _"Mining Established",
       body = loftomor(
@@ -283,6 +283,21 @@ mining_established = {
    {
       title = _"Jundlina is Excited",
       body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[Well done, Loftomor, well done. May Satul warm our strong and brave miners. But now we need to ensure we can feed them. We need to built up bakeries and smokeries and all buildings to supply them.]]))
+   }
+}
+
+mining_established_2 = {
+   {
+      title = _"Mining Established",
+      body = loftomor(
+         -- TRANSLATORS: loftomor
+         _([[Sidolus, may Satul warm you! Another issue solved. We have found some ressources and build a mine of each type.]]))
+   },
+   {
+      title = _"Sidolus is Excited",
+      body = sidolus(
          -- TRANSLATORS: Jundlina
          _([[Well done, Loftomor, well done. May Satul warm our strong and brave miners. But now we need to ensure we can feed them. We need to built up bakeries and smokeries and all buildings to supply them.]]))
    }
