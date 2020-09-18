@@ -21,6 +21,8 @@
 
 #include "ai/defaultai.h"
 
+namespace AI {
+
 ComputerPlayer::ComputerPlayer(Widelands::Game& g, Widelands::PlayerNumber const pid)
    : game_(g), player_number_(pid) {
 }
@@ -78,3 +80,4 @@ const ComputerPlayer::Implementation* ComputerPlayer::get_implementation(const s
 	}
 	return vec[0];
 }
+}  // namespace AI
