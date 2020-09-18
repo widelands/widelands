@@ -348,7 +348,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 		type_dropdown_.clear();
 		// AIs
-		for (const auto* impl : ComputerPlayer::get_implementations()) {
+		for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
 			type_dropdown_.add(_(impl->descname),
 			                   (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
 			                   g_image_cache->get(impl->icon_filename), false, _(impl->descname));
@@ -394,8 +394,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					if (player_setting.random_ai) {
 						type_dropdown_.select(AI_NAME_PREFIX "random");
 					} else {
-						const ComputerPlayer::Implementation* impl =
-						   ComputerPlayer::get_implementation(player_setting.ai);
+						const AI::ComputerPlayer::Implementation* impl =
+						   AI::ComputerPlayer::get_implementation(player_setting.ai);
 						type_dropdown_.select((boost::format(AI_NAME_PREFIX "%s") % impl->name).str());
 					}
 				}

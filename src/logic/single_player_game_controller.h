@@ -57,9 +57,9 @@ private:
 	Widelands::PlayerNumber local_;
 
 	struct AIData {
-		explicit AIData(ComputerPlayer*);
+		explicit AIData(AI::ComputerPlayer*);
 
-		std::shared_ptr<ComputerPlayer> ai;
+		std::shared_ptr<AI::ComputerPlayer> ai;
 		std::thread thread;
 	};
 	std::vector<std::shared_ptr<AIData>> computerplayers_;

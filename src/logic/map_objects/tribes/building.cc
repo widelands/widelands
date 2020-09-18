@@ -283,7 +283,7 @@ bool BuildingDescr::suitability(const Map&, const FCoords& fc) const {
 	         fc.field->get_immovable()->has_attribute(built_over_immovable_)));
 }
 
-const BuildingHints& BuildingDescr::hints() const {
+const AI::BuildingHints& BuildingDescr::hints() const {
 	return hints_;
 }
 

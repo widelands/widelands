@@ -24,6 +24,8 @@
 #include "ai/defaultai.h"
 #include "base/multithreading.h"
 
+namespace AI {
+
 ComputerPlayer::ComputerPlayer(Widelands::Game& g, Widelands::PlayerNumber const pid)
    : game_(g), player_number_(pid) {
 }
@@ -113,3 +115,5 @@ void ComputerPlayer::runthread() {
 		}
 	}
 }
+
+}  // namespace AI
