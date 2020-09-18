@@ -1427,7 +1427,9 @@ bool Player::should_see(const FCoords& f, std::list<const MapObject*>& nearby_ob
 	for (const MapObject* mo : nearby_objects) {
 		if (mo->descr().type() >= MapObjectType::BUILDING) {
 			assert(is_a(Building, mo));
-			const Building* b = static_cast<const Building*>(mo);
+			// TODO(Niektory): Using static cast for performance.
+			// It would be better to avoid the need to cast in the first place.
+			const Building* b = static_cast<const Building*>(mo);  // NOLINT
 			if (b->is_seeing() &&
 			    egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
 				return true;
@@ -1435,7 +1437,7 @@ bool Player::should_see(const FCoords& f, std::list<const MapObject*>& nearby_ob
 		} else {
 			// currently only buildings and bobs can see fields
 			assert(is_a(Bob, mo));
-			const Bob* b = static_cast<const Bob*>(mo);
+			const Bob* b = static_cast<const Bob*>(mo);  // NOLINT
 			if (egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
 				return true;
 			}
@@ -1517,7 +1519,9 @@ std::list<const MapObject*> Player::seers_for(const Area<FCoords>& area) {
 		for (const MapObject* seer : player.seers_) {
 			if (seer->descr().type() >= MapObjectType::BUILDING) {
 				assert(is_a(Building, seer));
-				const Building* b = static_cast<const Building*>(seer);
+				// TODO(Niektory): Using static cast for performance.
+				// It would be better to avoid the need to cast in the first place.
+				const Building* b = static_cast<const Building*>(seer);  // NOLINT
 				if (b->is_seeing()) {
 					int dist =
 					   egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
@@ -1528,7 +1532,7 @@ std::list<const MapObject*> Player::seers_for(const Area<FCoords>& area) {
 			} else {
 				// currently only buildings and bobs can see fields
 				assert(is_a(Bob, seer));
-				const Bob* b = static_cast<const Bob*>(seer);
+				const Bob* b = static_cast<const Bob*>(seer);  // NOLINT
 				int dist =
 				   egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
 				if (dist <= area.radius) {
