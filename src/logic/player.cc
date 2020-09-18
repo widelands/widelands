@@ -1447,7 +1447,15 @@ bool Player::should_see(const FCoords& f, std::list<const MapObject*>& nearby_ob
 }
 
 void Player::update_vision(const FCoords& f, bool force_visible) {
-	update_vision(f, force_visible, seers_);
+	std::list<const MapObject*> all_team_seers;
+	if (!force_visible) {
+		for (const PlayerNumber& p : team_player_) {
+			Player& player = *egbase().get_player(p);
+			std::copy(player.seers_.begin(), player.seers_.end(),
+			          std::back_insert_iterator<std::list<const MapObject*>>(all_team_seers));
+		}
+	}
+	update_vision(f, force_visible, all_team_seers);
 }
 
 void Player::update_vision(const FCoords& f,
