@@ -25,13 +25,13 @@
 #include "economy/ship_fleet.h"
 #include "economy/wares_queue.h"
 
-using namespace Widelands;
+namespace AI {
 
 // this scores spot for potential colony
 uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 
-	const Map& map = game().map();
-	PlayerNumber const pn = player_->player_number();
+	const Widelands::Map& map = game().map();
+	Widelands::PlayerNumber const pn = player_->player_number();
 	uint8_t score = 0;
 	uint16_t mineable_fields_count = 0;
 	uint32_t tested_fields = 0;
@@ -42,8 +42,9 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	             candidate_spot.x, candidate_spot.y, persistent_data->colony_scan_area);
 
 	// abort if any player - including self - is too near to the spot (radius 10)
-	if (other_player_accessible(Player::AiPersistentState::kColonyScanMinArea, &tested_fields,
-	                            &mineable_fields_count, candidate_spot, WalkSearch::kAnyPlayer)) {
+	if (other_player_accessible(Widelands::Player::AiPersistentState::kColonyScanMinArea,
+	                            &tested_fields, &mineable_fields_count, candidate_spot,
+	                            WalkSearch::kAnyPlayer)) {
 		return 0;
 	}
 
@@ -75,15 +76,17 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	}
 
 	// here we check for surface rocks + trees
-	static std::vector<ImmovableFound> immovables;
+	static std::vector<Widelands::ImmovableFound> immovables;
 	immovables.clear();
 	immovables.reserve(50);
 	// Search in a radius of range
-	map.find_immovables(game(), Area<FCoords>(map.get_fcoords(candidate_spot), 10), &immovables);
+	map.find_immovables(game(),
+	                    Widelands::Area<Widelands::FCoords>(map.get_fcoords(candidate_spot), 10),
+	                    &immovables);
 
-	int32_t const rocks_attr = MapObjectDescr::get_attribute_id("rocks");
+	int32_t const rocks_attr = Widelands::MapObjectDescr::get_attribute_id("rocks");
 	uint16_t rocks = 0;
-	int32_t const tree_attr = MapObjectDescr::get_attribute_id("tree");
+	int32_t const tree_attr = Widelands::MapObjectDescr::get_attribute_id("tree");
 	uint16_t trees = 0;
 
 	for (uint32_t j = 0; j < immovables.size(); ++j) {
@@ -110,7 +113,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 // - start preparation for expedition
 bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
 	if (gametime > last_seafaring_check_ + 20000U) {
-		const Map& map = game().map();
+		const Widelands::Map& map = game().map();
 		map_allows_seafaring_ = map.allows_seafaring();
 		last_seafaring_check_ = gametime;
 	}
@@ -156,9 +159,9 @@ bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
 
 			// counting stocks
 			uint8_t stocked_wares = 0;
-			std::vector<InputQueue*> const inputqueues = ps_obs.site->inputqueues();
-			for (InputQueue* queue : inputqueues) {
-				if (queue->get_type() == wwWARE) {
+			std::vector<Widelands::InputQueue*> const inputqueues = ps_obs.site->inputqueues();
+			for (Widelands::InputQueue* queue : inputqueues) {
+				if (queue->get_type() == Widelands::wwWARE) {
 					stocked_wares += queue->get_filled();
 				}
 			}
@@ -219,9 +222,9 @@ bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
 				// make sure it is fully stocked
 				// counting stocks
 				uint8_t stocked_wares = 0;
-				std::vector<InputQueue*> const inputqueues = ps_obs.site->inputqueues();
-				for (InputQueue* queue : inputqueues) {
-					if (queue->get_type() == wwWARE) {
+				std::vector<Widelands::InputQueue*> const inputqueues = ps_obs.site->inputqueues();
+				for (Widelands::InputQueue* queue : inputqueues) {
+					if (queue->get_type() == Widelands::wwWARE) {
 						stocked_wares += queue->get_filled();
 					}
 				}
@@ -285,7 +288,8 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 				// so resetting start time
 			} else if (expedition_ship_ == so.ship->serial()) {
 				// Obviously expedition just ended
-				persistent_data->expedition_start_time = Player::AiPersistentState::kNoExpedition;
+				persistent_data->expedition_start_time =
+				   Widelands::Player::AiPersistentState::kNoExpedition;
 				expedition_ship_ = kNoShip;
 			}
 
@@ -355,8 +359,9 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			     site != productionsites.end(); ++site) {
 				if (site->bo->is(BuildingAttribute::kShipyard)) {
 					for (uint32_t k = 0; k < site->bo->inputs.size(); ++k) {
-						game().send_player_set_ware_priority(
-						   *site->site, wwWARE, site->bo->inputs.at(k), kPriorityHigh);
+						game().send_player_set_ware_priority(*site->site, Widelands::wwWARE,
+						                                     site->bo->inputs.at(k),
+						                                     Widelands::kPriorityHigh);
 					}
 				}
 			}
@@ -376,7 +381,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
  * This is part of check_ships() function separated for readability
  */
 void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gametime) {
-	PlayerNumber const pn = player_->player_number();
+	Widelands::PlayerNumber const pn = player_->player_number();
 
 	// There is theoretical possibility that we have more than one ship in expedition mode,
 	// and this one is not the one listed in expedition_ship_ variable, so we quit expedition of this
@@ -397,9 +402,11 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 
 	// Obviously a new expedition
 	if (expedition_ship_ == kNoShip) {
-		assert(persistent_data->expedition_start_time == Player::AiPersistentState::kNoExpedition);
+		assert(persistent_data->expedition_start_time ==
+		       Widelands::Player::AiPersistentState::kNoExpedition);
 		persistent_data->expedition_start_time = gametime;
-		persistent_data->colony_scan_area = Player::AiPersistentState::kColonyScanStartArea;
+		persistent_data->colony_scan_area =
+		   Widelands::Player::AiPersistentState::kColonyScanStartArea;
 		expedition_ship_ = so.ship->serial();
 
 		// Expedition is overdue: cancel expedition, set no_more_expeditions = true
@@ -407,7 +414,7 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 		// TODO(toptopple): - test expedition cancellation deeply (may need to be fixed)
 	} else if (expedition_time >= expedition_max_duration) {
 		assert(persistent_data->expedition_start_time > 0);
-		persistent_data->colony_scan_area = Player::AiPersistentState::kColonyScanMinArea;
+		persistent_data->colony_scan_area = Widelands::Player::AiPersistentState::kColonyScanMinArea;
 		persistent_data->no_more_expeditions = true;
 		game().send_player_cancel_expedition_ship(*so.ship);
 		log_dbg_time(gametime, "%d: %s at %3dx%3d: END OF EXPEDITION due to time-out\n", pn,
@@ -426,7 +433,8 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 		// For known and running expedition
 	} else {
 		// set persistent_data->colony_scan_area based on elapsed expedition time
-		assert(persistent_data->expedition_start_time > Player::AiPersistentState::kNoExpedition);
+		assert(persistent_data->expedition_start_time >
+		       Widelands::Player::AiPersistentState::kNoExpedition);
 		assert(expedition_time < expedition_max_duration);
 
 		// calculate percentage of remaining expedition time (range 0-100)
@@ -435,18 +443,19 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 		assert(remaining_time <= 100);
 
 		// calculate a new persistent_data->colony_scan_area
-		const uint32_t expected_colony_scan = Player::AiPersistentState::kColonyScanMinArea +
-		                                      (Player::AiPersistentState::kColonyScanStartArea -
-		                                       Player::AiPersistentState::kColonyScanMinArea) *
-		                                         remaining_time / 100;
-		assert(expected_colony_scan >= Player::AiPersistentState::kColonyScanMinArea &&
-		       expected_colony_scan <= Player::AiPersistentState::kColonyScanStartArea);
+		const uint32_t expected_colony_scan =
+		   Widelands::Player::AiPersistentState::kColonyScanMinArea +
+		   (Widelands::Player::AiPersistentState::kColonyScanStartArea -
+		    Widelands::Player::AiPersistentState::kColonyScanMinArea) *
+		      remaining_time / 100;
+		assert(expected_colony_scan >= Widelands::Player::AiPersistentState::kColonyScanMinArea &&
+		       expected_colony_scan <= Widelands::Player::AiPersistentState::kColonyScanStartArea);
 		persistent_data->colony_scan_area = expected_colony_scan;
 	}
 }
 
 // this is called whenever we gain ownership of a Ship
-void DefaultAI::gain_ship(Ship& ship, NewShip type) {
+void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 
 	allships.push_back(ShipObserver());
 	allships.back().ship = &ship;
@@ -480,7 +489,7 @@ Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
 void DefaultAI::expedition_management(ShipObserver& so) {
 
 	const int32_t gametime = game().get_gametime();
-	PlayerNumber const pn = player_->player_number();
+	Widelands::PlayerNumber const pn = player_->player_number();
 
 	// second we put current spot into expedition visited_spots
 	bool first_time_here = expedition_visited_spots.count(so.ship->get_position().hash()) == 0;
@@ -555,26 +564,27 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 // Here we investigate possibility to go for open sea, preferably to unexplored territories
 bool DefaultAI::attempt_escape(ShipObserver& so) {
 
-	const Map& map = game().map();
-	PlayerNumber const pn = player_->player_number();
+	const Widelands::Map& map = game().map();
+	Widelands::PlayerNumber const pn = player_->player_number();
 
 	// Determine swimmable directions first:
 	// This vector contains directions that lead to unexplored sea
-	static std::vector<Direction> new_teritory_directions;
+	static std::vector<Widelands::Direction> new_teritory_directions;
 	new_teritory_directions.clear();
 	new_teritory_directions.reserve(6);
 	// This one contains any directions with open sea (superset of above one)
-	static std::vector<Direction> possible_directions;
+	static std::vector<Widelands::Direction> possible_directions;
 	possible_directions.clear();
 	possible_directions.reserve(6);
-	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+	for (Widelands::Direction dir = Widelands::FIRST_DIRECTION; dir <= Widelands::LAST_DIRECTION;
+	     ++dir) {
 		// testing distance of 30 fields (or as long as the sea goes, and until
 		// unknown territory is reached)
-		Coords tmp_coords = so.ship->get_position();
+		Widelands::Coords tmp_coords = so.ship->get_position();
 
 		for (int8_t i = 0; i < 30; ++i) {
 			map.get_neighbour(tmp_coords, dir, &tmp_coords);
-			if (!(map.get_fcoords(tmp_coords).field->nodecaps() & MOVECAPS_SWIM)) {
+			if (!(map.get_fcoords(tmp_coords).field->nodecaps() & Widelands::MOVECAPS_SWIM)) {
 				break;
 			}
 			if (i <= 4) {  // Four fields from the ship is too close for "open sea"
@@ -588,7 +598,7 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 				possible_directions.push_back(dir);
 			}
 			if (player_->get_vision(map.get_index(tmp_coords, map.get_width())) ==
-			    SeeUnseeNode::kUnexplored) {
+			    Widelands::SeeUnseeNode::kUnexplored) {
 				// So this field was never seen before, the direction is inserted into
 				// new_teritory_directions, and searching in this direction quits here
 				new_teritory_directions.push_back(dir);
@@ -605,11 +615,12 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	}
 
 	if (!possible_directions.empty() || !new_teritory_directions.empty()) {
-		const Direction direction =
+		const Widelands::Direction direction =
 		   !new_teritory_directions.empty() ?
 		      new_teritory_directions.at(std::rand() % new_teritory_directions.size()) :  // NOLINT
 		      possible_directions.at(std::rand() % possible_directions.size());           // NOLINT
-		game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(direction));
+		game().send_player_ship_scouting_direction(
+		   *so.ship, static_cast<Widelands::WalkingDir>(direction));
 
 		log_dbg_time(game().get_gametime(), "%d: %s: exploration - breaking for %s sea, dir=%u\n", pn,
 		             so.ship->get_shipname().c_str(),
@@ -619,3 +630,4 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	}
 	return false;
 }
+}  // namespace AI
