@@ -33,7 +33,6 @@ SUPPRESSED_CHECKS = {
     '[cppcoreguidelines-special-member-functions]',
     '[fuchsia-default-arguments]',
     '[fuchsia-overloaded-operator]',
-    '[google-build-using-namespace]',
     '[google-default-arguments]',
     '[google-readability-function-size]',
     '[google-runtime-references]',

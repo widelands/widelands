@@ -1359,6 +1359,8 @@ u_proto(Info *info) {                                            /* ... proto */
 
   /* Read debug information if any is present. */
   if (!READ_VALUE(uint8_t)) {
+    /* Match stack behaviour of alternative branch. */
+    lua_pushvalue(info->L, -1);                            /* ... proto proto */
     return;
   }
 
