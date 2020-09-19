@@ -11,65 +11,48 @@ function warehouse_tests:teardown()
 end
 
 function warehouse_tests:test_name()
-   print("NOCOM test_name")
    assert_equal("barbarians_warehouse", self.w.descr.name)
-   print("NOCOM DONE test_name")
 end
 function warehouse_tests:test_type()
-   print("NOCOM test_type")
    assert_equal("warehouse", self.w.descr.type_name)
-   print("NOCOM DONE test_type")
 end
 
 function warehouse_tests:test_upcasting_from_immovable_to_building()
-   print("NOCOM test_upcasting_from_immovable_to_building")
    i = self.f.immovable
    assert_equal(i, self.w)
    assert_function(i.set_wares) -- set_wares is non nil
-   print("NOCOM DONE test_upcasting_from_immovable_to_building")
 end
 
 function warehouse_tests:test_set_ware_illegal_ware()
-   print("NOCOM test_set_ware_illegal_ware")
    function ill()
       self.w:set_wares("sdjsgfhg", 100)
    end
    assert_error("Illegal ware should throw an error!", ill)
-   print("NOCOM DONE test_set_ware_illegal_ware")
 end
 function warehouse_tests:test_set_ware_no_argument()
-   print("NOCOM test_set_ware_no_argument")
    assert_error("Need an argument!", function()
       self.w:set_wares()
    end)
-   print("NOCOM DONE test_set_ware_no_argument")
 end
 function warehouse_tests:test_set_ware_nil_as_argument()
-   print("NOCOM test_set_ware_nil_as_argument")
    assert_error("nil as first argument makes no sense!", function()
       self.w:set_wares(iron)
    end)
-   print("NOCOM DONE test_set_ware_nil_as_argument")
 end
 function warehouse_tests:test_set_get_wares_string_arg()
-   print("NOCOM test_set_get_wares_string_arg")
    assert_equal(0, self.w:get_wares("log"))
    self.w:set_wares("log", 190)
    assert_equal(190, self.w:get_wares("log"))
    assert_equal(0, self.w:get_wares("granite"))
-   print("NOCOM DONE test_set_get_wares_string_arg")
 end
 function warehouse_tests:test_set_get_wares_all()
-   print("NOCOM test_set_get_wares_all")
    self.w:set_wares{log=190, granite=170}
    local rv = self.w:get_wares("all")
    assert_equal(190, rv.log)
    assert_equal(170, rv.granite)
    assert_equal(0, rv.coal)
-   print("NOCOM DONE test_set_get_wares_all")
 end
 function warehouse_tests:test_set_get_wares_table_arg()
-   print("NOCOM test_set_get_wares_table_arg")
    k = self.w:get_wares{"log", "granite"}
    assert_equal(0, k.log)
    assert_equal(0, k.granite)
@@ -79,10 +62,8 @@ function warehouse_tests:test_set_get_wares_table_arg()
    assert_equal(190, k.log)
    assert_equal(170, k.granite)
    assert_equal(nil, k.coal)
-   print("NOCOM DONE test_set_get_wares_table_arg")
 end
 function warehouse_tests:test_set_get_wares_set_is_not_increase()
-   print("NOCOM test_set_get_wares_set_is_not_increase")
    k = self.w:get_wares{"log", "granite"}
    k.log = 20
    k.granite = 40
@@ -97,36 +78,28 @@ function warehouse_tests:test_set_get_wares_set_is_not_increase()
    k = self.w:get_wares{"log", "granite"}
    assert_equal(10, k.log)
    assert_equal(20, k.granite)
-   print("NOCOM DONE test_set_get_wares_set_is_not_increase")
 end
 function warehouse_tests:test_get_wares_non_existant_name()
-   print("NOCOM test_get_wares_non_existant_name")
    assert_error("non existent ware", function()
       self.w:get_wares("balloon")
    end)
    assert_error("non existent ware", function()
       self.w:get_wares{"meat", "balloon"}
    end)
-   print("NOCOM DONE test_get_wares_non_existant_name")
 end
 
 function warehouse_tests:test_set_worker_illegal_worker()
-   print("NOCOM test_set_worker_illegal_worker")
    function ill()
       self.w:set_workers("sdjsgfhg", 100)
    end
    assert_error("Illegal worker should throw an error!", ill)
-   print("NOCOM DONE test_set_worker_illegal_worker")
 end
 function warehouse_tests:test_set_get_workers_string_arg()
-   print("NOCOM test_set_get_workers_string_arg")
    assert_equal(0, self.w:get_workers("barbarians_builder"))
    self.w:set_workers("barbarians_builder", 190)
    assert_equal(190, self.w:get_workers("barbarians_builder"))
-   print("NOCOM DONE test_set_get_workers_string_arg")
 end
 function warehouse_tests:test_set_get_workers_table_arg()
-   print("NOCOM test_set_get_workers_table_arg")
    k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
    assert_equal(0, k.barbarians_builder)
    assert_equal(0, k.barbarians_lumberjack)
@@ -134,10 +107,8 @@ function warehouse_tests:test_set_get_workers_table_arg()
    k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
    assert_equal(190, k.barbarians_builder)
    assert_equal(170, k.barbarians_lumberjack)
-   print("NOCOM DONE test_set_get_workers_table_arg")
 end
 function warehouse_tests:test_set_get_workers_set_is_not_increase()
-   print("NOCOM test_set_get_workers_set_is_not_increase")
    k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
    k.barbarians_builder = 20
    k.barbarians_lumberjack = 40
@@ -152,14 +123,12 @@ function warehouse_tests:test_set_get_workers_set_is_not_increase()
    k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
    assert_equal(10, k.barbarians_builder)
    assert_equal(20, k.barbarians_lumberjack)
-   print("NOCOM DONE test_set_get_workers_set_is_not_increase")
 end
 
 -- ========
 -- Policies
 -- ========
 function warehouse_tests:test_get_ware_policy()
-   print("NOCOM test_get_ware_policy")
    assert_equal(self.w:get_warehouse_policies("log"), "normal")
    k = self.w:get_warehouse_policies{"log", "granite"}
    assert_equal("normal", k.log)
@@ -170,11 +139,9 @@ function warehouse_tests:test_get_ware_policy()
    assert_equal("normal", k.granite)
    assert_equal("normal", k.coal)
    assert_equal("normal", k.barbarians_lumberjack)
-   print("NOCOM DONE test_get_ware_policy")
 end
 
 function warehouse_tests:test_get_worker_policy()
-   print("NOCOM test_get_worker_policy")
    assert_equal(self.w:get_warehouse_policies("barbarians_builder"), "normal")
    k = self.w:get_warehouse_policies{"barbarians_builder", "barbarians_lumberjack"}
    assert_equal("normal", k.barbarians_builder)
@@ -184,22 +151,18 @@ function warehouse_tests:test_get_worker_policy()
    assert_equal("normal", k.barbarians_builder)
    assert_equal("normal", k.barbarians_lumberjack)
    assert_equal("normal", k.coal)
-   print("NOCOM DONE test_get_worker_policy")
 end
 
 function warehouse_tests:test_get_non_existing_policy()
-   print("NOCOM test_get_non_existing_policy")
    assert_error("ware policy for non existing ware", function()
       self.w:get_warehouse_policies("plastic")
    end)
    assert_error("worker policy for non existing worker", function()
       self.w:get_warehouse_policies("tree_climber")
    end)
-   print("NOCOM DONE test_get_non_existing_policy")
 end
 
 function warehouse_tests:test_set_ware_policy()
-   print("NOCOM test_set_ware_policy")
    -- Make sure it is the normal policy until now
    assert_equal(self.w:get_warehouse_policies("log"), "normal")
    assert_equal(self.w:get_warehouse_policies("granite"), "normal")
@@ -228,11 +191,9 @@ function warehouse_tests:test_set_ware_policy()
    assert_equal(self.w:get_warehouse_policies("granite"), "prefer")
    assert_equal(self.w:get_warehouse_policies("meat"), "prefer")
    assert_equal(self.w:get_warehouse_policies("coal"), "prefer")
-   print("NOCOM DONE test_set_ware_policy")
 end
 
 function warehouse_tests:test_set_worker_policy()
-   print("NOCOM test_set_worker_policy")
    -- Make sure it is the normal policy until now
    assert_equal(self.w:get_warehouse_policies("barbarians_builder"), "normal")
    assert_equal(self.w:get_warehouse_policies("barbarians_lumberjack"), "normal")
@@ -260,11 +221,9 @@ function warehouse_tests:test_set_worker_policy()
    assert_equal(self.w:get_warehouse_policies("barbarians_builder"), "prefer")
    assert_equal(self.w:get_warehouse_policies("barbarians_lumberjack"), "prefer")
    assert_equal(self.w:get_warehouse_policies("barbarians_gardener"), "prefer")
-   print("NOCOM DONE test_set_worker_policy")
 end
 
 function warehouse_tests:test_set_ware_and_worker_policy()
-   print("NOCOM test_set_ware_and_worker_policy")
    -- Make sure it is the normal policy until now
    local ret = self.w:get_warehouse_policies({"log", "barbarians_builder", "barbarians_lumberjack"})
    assert_equal("normal", ret.barbarians_builder)
@@ -297,12 +256,10 @@ function warehouse_tests:test_set_ware_and_worker_policy()
    assert_equal("normal", ret.barbarians_lumberjack)
    assert_equal("normal", ret.log)
    assert_equal("normal", ret.granite)
-   print("NOCOM DONE test_set_ware_and_worker_policy")
 end
 
 
 function warehouse_tests:test_set_non_existing_policy()
-   print("NOCOM test_set_non_existing_policy")
    assert_error("ware policy for non existing ware", function()
       self.w:set_warehouse_policies("plastic", "prefer")
    end)
@@ -315,7 +272,6 @@ function warehouse_tests:test_set_non_existing_policy()
    assert_error("invalid policy for worker", function()
       self.w:set_warehouse_policies("barbarians_builder", "burn")
    end)
-   print("NOCOM DONE test_set_non_existing_policy")
 end
 
 -- =========
@@ -328,43 +284,29 @@ function _cnt(a)
 end
 
 function warehouse_tests:test_get_soldiers_empty_at_start()
-   print("NOCOM test_get_soldiers_empty_at_start")
    assert_equal(0, _cnt(self.w:get_soldiers("all")))
-   print("NOCOM DONE test_get_soldiers_empty_at_start")
 end
 function warehouse_tests:test_set_soldiers()
-   print("NOCOM test_set_soldiers")
    self.w:set_soldiers({0,0,0,0}, 100)
    assert_equal(100, _cnt(self.w:get_soldiers("all")))
-   print("NOCOM DONE test_set_soldiers")
 end
 function warehouse_tests:test_reduce_soldiers_number()
-   print("NOCOM test_reduce_soldiers_number AAA")
    self.w:set_soldiers{
       [{0,0,0,0}] = 10,
       [{1,1,0,1}] = 20,
    }
-   print("NOCOM test_reduce_soldiers_number BBB")
    assert_equal(10, self.w:get_soldiers({0,0,0,0}))
-   print("NOCOM test_reduce_soldiers_number CCC")
    assert_equal(20, self.w:get_soldiers({1,1,0,1}))
-   print("NOCOM test_reduce_soldiers_number DDD")
    assert_equal(30, _cnt(self.w:get_soldiers("all")))
-   print("NOCOM test_reduce_soldiers_number EEE")
    self.w:set_soldiers{
       [{0,0,0,0}] = 1,
       [{1,1,0,1}] = 2,
    }
-   print("NOCOM test_reduce_soldiers_number FFF")
    assert_equal(1, self.w:get_soldiers({0,0,0,0}))
-   print("NOCOM test_reduce_soldiers_number GGG")
    assert_equal(2, self.w:get_soldiers({1,1,0,1}))
-   print("NOCOM test_reduce_soldiers_number HHH")
    assert_equal(3, _cnt(self.w:get_soldiers("all")))
-   print("NOCOM DONE test_reduce_soldiers_number")
 end
 function warehouse_tests:test_set_soldiers_by_list()
-   print("NOCOM test_set_soldiers_by_list")
    self.w:set_soldiers{
       [{0,0,0,0}] = 1,
       [{1,1,0,1}] = 2,
@@ -373,33 +315,24 @@ function warehouse_tests:test_set_soldiers_by_list()
    assert_equal(1, self.w:get_soldiers({0,0,0,0}))
    assert_equal(2, self.w:get_soldiers({1,1,0,1}))
    assert_equal(0, self.w:get_soldiers({2,1,0,1}))
-   print("NOCOM DONE test_set_soldiers_by_list")
 end
 function warehouse_tests:test_set_soldiers_health_too_high()
-   print("NOCOM test_set_soldiers_health_too_high")
    assert_error("health too high", function()
       self.w:set_soldiers({10,0,0,0}, 1)
    end)
-   print("NOCOM DONE test_set_soldiers_health_too_high")
 end
 function warehouse_tests:test_set_soldiers_attack_too_high()
-   print("NOCOM test_set_soldiers_attack_too_high")
    assert_error("attack too high", function()
       self.w:set_soldiers({0,10,0,0}, 1)
    end)
-   print("NOCOM DONE test_set_soldiers_attack_too_high")
 end
 function warehouse_tests:test_set_soldiers_defense_too_high()
-   print("NOCOM test_set_soldiers_defense_too_high")
    assert_error("defense too high", function()
       self.w:set_soldiers({0,0,10,0}, 1)
    end)
-   print("NOCOM DONE test_set_soldiers_defense_too_high")
 end
 function warehouse_tests:test_set_soldiers_evade_too_high()
-   print("NOCOM test_set_soldiers_evade_too_high")
    assert_error("evade too high", function()
       self.w:set_soldiers({0,0,0,10}, 1)
    end)
-   print("NOCOM DONE test_set_soldiers_evade_too_high")
 end
