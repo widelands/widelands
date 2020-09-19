@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-04 08:23+0000\n"
-"PO-Revision-Date: 2020-09-05 19:12+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2020-09-11 11:58+0000\n"
+"PO-Revision-Date: 2020-09-11 12:00+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6214,247 +6214,251 @@ msgctxt "frisians_building"
 msgid "The weaving mill needs %s on average to produce one piece of cloth."
 msgstr "직조 공장은 천 한 장을 생산하기 위해 평균 %s 초가 필요합니다."
 
-#: ../../data/tribes/scripting/help/building_help.lua:93
+#: ../../data/tribes/scripting/help/building_help.lua:240
 #: ../../data/tribes/scripting/help/format_help.lua:232
 #, lua-format
 msgid "%s and"
 msgstr "%s 그리고"
 
-#: ../../data/tribes/scripting/help/building_help.lua:107
+#: ../../data/tribes/scripting/help/building_help.lua:254
 msgid "Food:"
 msgstr "음식:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:158
+#: ../../data/tribes/scripting/help/building_help.lua:305
 msgid "Equipment:"
 msgstr "장비:"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
-#: ../../data/tribes/scripting/help/building_help.lua:182
-#: ../../data/tribes/scripting/help/building_help.lua:219
+#: ../../data/tribes/scripting/help/building_help.lua:329
+#: ../../data/tribes/scripting/help/building_help.lua:396
 msgid "Text needed"
 msgstr "문서 필요"
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
-#: ../../data/tribes/scripting/help/building_help.lua:187
+#: ../../data/tribes/scripting/help/building_help.lua:334
 msgid "Lore"
 msgstr "이야기"
 
-#: ../../data/tribes/scripting/help/building_help.lua:196
+#: ../../data/tribes/scripting/help/building_help.lua:343
 #: ../../data/tribes/scripting/help/init.lua:59
 #: ../../data/tribes/scripting/help/tips.lua:49
 msgid "General"
 msgstr "일반"
 
-#: ../../data/tribes/scripting/help/building_help.lua:197
+#: ../../data/tribes/scripting/help/building_help.lua:344
 msgid "Purpose:"
 msgstr "목적:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:230
-#: ../../data/tribes/scripting/help/building_help.lua:463
+#: ../../data/tribes/scripting/help/building_help.lua:400
+#: ../../data/tribes/scripting/help/building_help.lua:620
 msgid "Note:"
 msgstr "참고:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:235
+#: ../../data/tribes/scripting/help/building_help.lua:405
 msgid "Work area radius:"
 msgstr "작업 영역 범위:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:239
-#: ../../data/tribes/scripting/help/building_help.lua:244
+#: ../../data/tribes/scripting/help/building_help.lua:409
+#: ../../data/tribes/scripting/help/building_help.lua:414
 msgid "Healing:"
 msgstr "치료:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:240
-#: ../../data/tribes/scripting/help/building_help.lua:245
+#: ../../data/tribes/scripting/help/building_help.lua:410
+#: ../../data/tribes/scripting/help/building_help.lua:415
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] "주둔하는 군인들은 초당 %d 체력을 회복합니다."
 
-#: ../../data/tribes/scripting/help/building_help.lua:241
-#: ../../data/tribes/scripting/help/building_help.lua:247
+#: ../../data/tribes/scripting/help/building_help.lua:411
+#: ../../data/tribes/scripting/help/building_help.lua:417
 msgid "Conquer range:"
 msgstr "정복 범위:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:246
-#: ../../data/tribes/scripting/help/building_help.lua:250
+#: ../../data/tribes/scripting/help/building_help.lua:416
+#: ../../data/tribes/scripting/help/building_help.lua:420
 msgid "Capacity:"
 msgstr "주둔 수:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:252
+#: ../../data/tribes/scripting/help/building_help.lua:422
 msgid "Vision range:"
 msgstr "시야 범위:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:276
+#: ../../data/tribes/scripting/help/building_help.lua:447
 msgid "%1$s from: %2$s"
 msgstr "%1$s 로부터: %2$s"
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../data/tribes/scripting/help/building_help.lua:282
+#: ../../data/tribes/scripting/help/building_help.lua:453
 msgid "Incoming:"
 msgstr "투입:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:286
-msgid "Collects:"
-msgstr "수집:"
-
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../data/tribes/scripting/help/building_help.lua:298
+#: ../../data/tribes/scripting/help/building_help.lua:462
 msgid "Mines:"
 msgstr "??광산 채굴:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:321
+#: ../../data/tribes/scripting/help/building_help.lua:464
+msgid "Collects:"
+msgstr "수집:"
+
+#: ../../data/tribes/scripting/help/building_help.lua:473
+msgid "Creates:"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/building_help.lua:478
 msgid "Produces:"
 msgstr "생산:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:363
+#: ../../data/tribes/scripting/help/building_help.lua:520
 msgid "Outgoing:"
 msgstr "산출:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:364
+#: ../../data/tribes/scripting/help/building_help.lua:521
 msgid "None"
 msgstr "없음"
 
-#: ../../data/tribes/scripting/help/building_help.lua:365
+#: ../../data/tribes/scripting/help/building_help.lua:522
 msgid "Dependencies"
 msgstr "종속 관계"
 
-#: ../../data/tribes/scripting/help/building_help.lua:381
+#: ../../data/tribes/scripting/help/building_help.lua:538
 msgid "Health Training"
 msgstr "체력 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:382
+#: ../../data/tribes/scripting/help/building_help.lua:539
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr "‘체력’ 수준을 %1% → %2% 로 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:384
-#: ../../data/tribes/scripting/help/building_help.lua:398
-#: ../../data/tribes/scripting/help/building_help.lua:410
-#: ../../data/tribes/scripting/help/building_help.lua:423
+#: ../../data/tribes/scripting/help/building_help.lua:541
+#: ../../data/tribes/scripting/help/building_help.lua:555
+#: ../../data/tribes/scripting/help/building_help.lua:567
+#: ../../data/tribes/scripting/help/building_help.lua:580
 msgid "Soldiers:"
 msgstr "군인:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:394
+#: ../../data/tribes/scripting/help/building_help.lua:551
 msgid "Attack Training"
 msgstr "공격력 훈련"
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:396
+#: ../../data/tribes/scripting/help/building_help.lua:553
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr "‘공격력’ 을 %1% → %2% 로 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:407
+#: ../../data/tribes/scripting/help/building_help.lua:564
 msgid "Defense Training"
 msgstr "방어력 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:408
+#: ../../data/tribes/scripting/help/building_help.lua:565
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr "‘방어력’ 을 %1% → %2% 로 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:420
+#: ../../data/tribes/scripting/help/building_help.lua:577
 msgid "Evade Training"
 msgstr "회피력 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:421
+#: ../../data/tribes/scripting/help/building_help.lua:578
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr "‘회피력’ 을 %1% → %2% 로 훈련"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:448
+#: ../../data/tribes/scripting/help/building_help.lua:605
 msgid "Building"
 msgstr "건설"
 
-#: ../../data/tribes/scripting/help/building_help.lua:464
+#: ../../data/tribes/scripting/help/building_help.lua:621
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "이 건물은 직접적으로 건설거나 다른 건물을 향상시켜 얻을 수 있습니다."
 
-#: ../../data/tribes/scripting/help/building_help.lua:470
+#: ../../data/tribes/scripting/help/building_help.lua:627
 msgid "Direct build cost:"
 msgstr "직접 건설 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:472
+#: ../../data/tribes/scripting/help/building_help.lua:629
 #: ../../data/tribes/scripting/help/immovable_help.lua:53
 msgid "Build cost:"
 msgstr "건설 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:483
+#: ../../data/tribes/scripting/help/building_help.lua:640
 msgid "Or enhanced from:"
 msgstr "또는 향상 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:485
+#: ../../data/tribes/scripting/help/building_help.lua:642
 msgid "Enhanced from:"
 msgstr "향상 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:494
+#: ../../data/tribes/scripting/help/building_help.lua:651
 msgid "Cumulative cost:"
 msgstr "누적 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:539
-#: ../../data/tribes/scripting/help/building_help.lua:588
+#: ../../data/tribes/scripting/help/building_help.lua:696
+#: ../../data/tribes/scripting/help/building_help.lua:745
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../../data/tribes/scripting/help/building_help.lua:544
+#: ../../data/tribes/scripting/help/building_help.lua:701
 msgid "If built directly, dismantle yields:"
 msgstr "직접 건설시, 해체 수익:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:549
+#: ../../data/tribes/scripting/help/building_help.lua:706
 msgid "If enhanced, dismantle yields:"
 msgstr "향상시, 해체 수익:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:552
-#: ../../data/tribes/scripting/help/building_help.lua:593
+#: ../../data/tribes/scripting/help/building_help.lua:709
+#: ../../data/tribes/scripting/help/building_help.lua:750
 msgid "Dismantle yields:"
 msgstr "해체 수익:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:602
+#: ../../data/tribes/scripting/help/building_help.lua:759
 msgid "Can be enhanced to:"
 msgstr "향상 가능한 건물:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:632
+#: ../../data/tribes/scripting/help/building_help.lua:789
 msgid "Crew required:"
 msgstr "필요한 일꾼:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:632
+#: ../../data/tribes/scripting/help/building_help.lua:789
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "일꾼들"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:654
+#: ../../data/tribes/scripting/help/building_help.lua:811
 #, lua-format
 msgid "%s or better"
 msgstr "%s 또는 그 이상"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
-#: ../../data/tribes/scripting/help/building_help.lua:666
+#: ../../data/tribes/scripting/help/building_help.lua:823
 msgid "Worker uses:"
 msgstr "일꾼이 사용:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
 #. uses
-#: ../../data/tribes/scripting/help/building_help.lua:669
+#: ../../data/tribes/scripting/help/building_help.lua:826
 msgid "Workers use:"
 msgstr "일꾼들이 사용:"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
-#: ../../data/tribes/scripting/help/building_help.lua:701
+#: ../../data/tribes/scripting/help/building_help.lua:858
 msgid "Calculation needed"
 msgstr "계산 필요"
 
-#: ../../data/tribes/scripting/help/building_help.lua:705
+#: ../../data/tribes/scripting/help/building_help.lua:862
 msgid "Production"
 msgstr "생산"
 
-#: ../../data/tribes/scripting/help/building_help.lua:706
+#: ../../data/tribes/scripting/help/building_help.lua:863
 msgid "Performance:"
 msgstr "성능:"
 

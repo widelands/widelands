@@ -26,8 +26,6 @@
 #include "logic/widelands_geometry.h"
 #include "ui_basic/textarea.h"
 
-using Widelands::Field;
-
 EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
    EditorInteractive& parent,
    EditorNoiseHeightTool& noise_tool,

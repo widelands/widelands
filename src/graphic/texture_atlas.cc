@@ -84,16 +84,16 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(
 		std::unique_ptr<Node> new_root(new Node(Recti(0, 0, root->r.w + delta_w, root->r.h)));
 		new_root->used = true;
 		new_root->right.reset(new Node(Recti(root->r.w, 0, delta_w, root->r.h)));
-		new_root->down.reset(root.release());
-		root.reset(new_root.release());
+		new_root->down = std::move(root);
+		root = std::move(new_root);
 	};
 
 	const auto grow_down = [&root](int delta_h) {
 		std::unique_ptr<Node> new_root(new Node(Recti(0, 0, root->r.w, root->r.h + delta_h)));
 		new_root->used = true;
 		new_root->down.reset(new Node(Recti(0, root->r.h, root->r.w, delta_h)));
-		new_root->right.reset(root.release());
-		root.reset(new_root.release());
+		new_root->right = std::move(root);
+		root = std::move(new_root);
 	};
 
 	std::vector<Block> packed, not_packed;
