@@ -57,7 +57,7 @@ public:
 	WareInstance(DescriptionIndex, const WareDescr* const);
 	~WareInstance() override;
 
-	MapObject* get_location(EditorGameBase& egbase) {
+	MapObject* get_location(const EditorGameBase& egbase) {
 		return location_.get(egbase);
 	}
 	Economy* get_economy() const {

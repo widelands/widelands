@@ -70,7 +70,7 @@ public:
 	void get_neighbours(WareWorker type, RoutingNodeNeighbours&) override;
 
 	// test functionality
-	bool all_members_zeroed();
+	bool all_members_zeroed() const;
 
 private:
 	using Neigbours = std::vector<TestingRoutingNode*>;
@@ -87,7 +87,7 @@ void TestingRoutingNode::get_neighbours(WareWorker type, RoutingNodeNeighbours& 
 		n.push_back(RoutingNodeNeighbour(nb, 1000 * ((type == wwWARE) ? 1 + waitcost_ : 1)));
 	}
 }
-bool TestingRoutingNode::all_members_zeroed() {
+bool TestingRoutingNode::all_members_zeroed() const {
 	bool integers_zero = !mpf_cycle_ware && !mpf_realcost_ware && !mpf_estimate_ware &&
 	                     !mpf_cycle_worker && !mpf_realcost_worker && !mpf_estimate_worker;
 	bool pointers_zero = (mpf_backlink_ware == nullptr) && (mpf_backlink_worker == nullptr);
@@ -115,7 +115,7 @@ public:
 		nodes.insert(nodes.begin(), node);
 	}
 
-	int32_t get_length() {
+	int32_t get_length() const {
 		return nodes.size();
 	}
 
@@ -201,6 +201,11 @@ struct TestingNodeDefaultNodesFixture {
 			nodes.pop_back();
 		}
 	}
+
+	// Forbid copy operations to make cppcheck happy
+	TestingNodeDefaultNodesFixture(const TestingNodeDefaultNodesFixture& other) = delete;
+	TestingNodeDefaultNodesFixture& operator=(const TestingNodeDefaultNodesFixture& other) = delete;
+
 	std::vector<TestingRoutingNode*> nodes;
 	TestingRoutingNode* d0;
 	TestingRoutingNode* d1;
@@ -240,6 +245,11 @@ struct SimpleRouterFixture {
 		delete d0;
 		delete d1;
 	}
+
+	// Forbid copy operations to make cppcheck happy
+	SimpleRouterFixture(const SimpleRouterFixture& other) = delete;
+	SimpleRouterFixture& operator=(const SimpleRouterFixture& other) = delete;
+
 	/**
 	 * Callback for the incredibly rare case that the \ref Router pathfinding
 	 * cycle wraps around.
@@ -394,6 +404,10 @@ struct ComplexRouterFixture {
 			nodes.pop_back();
 		}
 	}
+
+	// Forbid copy operations to make cppcheck happy
+	ComplexRouterFixture(const ComplexRouterFixture& other) = delete;
+	ComplexRouterFixture& operator=(const ComplexRouterFixture& other) = delete;
 
 	/**
 	 * Convenience function

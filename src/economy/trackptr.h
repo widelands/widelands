@@ -79,6 +79,11 @@ public:
 	Trackable() {
 		tracker_ = new Tracker(this);
 	}
+
+	// Forbid copy operations to make cppcheck happy
+	Trackable(const Trackable& other) = delete;
+	Trackable& operator=(const Trackable& other) = delete;
+
 	virtual ~Trackable() {
 		tracker_->clear();
 	}

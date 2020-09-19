@@ -41,7 +41,8 @@ void SupplyList::remove_supply(Supply& supp) {
 
 		if (*item_iter == &supp) {
 			*item_iter = *(supplies_.end() - 1);
-			return supplies_.pop_back();
+			supplies_.pop_back();
+			return;
 		}
 	}
 	throw wexception("SupplyList::remove: not in list");
