@@ -1436,7 +1436,8 @@ bool Player::should_see(const FCoords& f) const {
 				// currently only buildings and bobs can see fields
 				upcast(const Bob, b, mo);
 				assert(b);
-				if (b->get_position().field && egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
+				if (b->get_position().field &&
+				    egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
 					return true;
 				}
 			}
