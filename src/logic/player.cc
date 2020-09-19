@@ -1447,15 +1447,11 @@ bool Player::should_see(const FCoords& f, std::list<const MapObject*>& nearby_ob
 }
 
 void Player::update_vision(const FCoords& f, bool force_visible) {
-	std::list<const MapObject*> all_team_seers;
+	std::list<const MapObject*> team_seers_list;
 	if (!force_visible) {
-		for (const PlayerNumber& p : team_player_) {
-			Player& player = *egbase().get_player(p);
-			std::copy(player.seers_.begin(), player.seers_.end(),
-			          std::back_insert_iterator<std::list<const MapObject*>>(all_team_seers));
-		}
+		team_seers_list = std::move(team_seers());
 	}
-	update_vision(f, force_visible, all_team_seers);
+	update_vision(f, force_visible, team_seers_list);
 }
 
 void Player::update_vision(const FCoords& f,
@@ -1485,8 +1481,9 @@ void Player::update_vision_whole_map() {
 	}
 	const MapIndex max = egbase().map().max_index();
 	Widelands::Field* f = &egbase().map()[0];
+	std::list<const MapObject*> team_seers_list = std::move(team_seers());
 	for (MapIndex i = 0; i < max; ++i, ++f) {
-		update_vision(egbase().map().get_fcoords(*f), false);
+		update_vision(egbase().map().get_fcoords(*f), false, team_seers_list);
 	}
 }
 
@@ -1513,6 +1510,16 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 			player.update_vision(mr.location(), force_visible, nearby_objects);
 		} while (mr.advance(egbase().map()));
 	}
+}
+
+std::list<const MapObject*> Player::team_seers() {
+	std::list<const MapObject*> team_seers_list;
+	for (const PlayerNumber& p : team_player_) {
+		Player& player = *egbase().get_player(p);
+		std::copy(player.seers_.begin(), player.seers_.end(),
+		          std::back_insert_iterator<std::list<const MapObject*>>(team_seers_list));
+	}
+	return team_seers_list;
 }
 
 /**
