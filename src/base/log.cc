@@ -167,10 +167,11 @@ static const char* to_string(const LogType& type) {
 
 std::vector<std::string> split(const std::string& s) {
 	std::vector<std::string> result;
-	for (std::string::size_type pos = 0, endpos;
-	     (pos = s.find_first_not_of('\n', pos)) != std::string::npos; pos = endpos) {
-		endpos = s.find('\n', pos);
+	for (std::string::size_type pos = 0;
+	     (pos = s.find_first_not_of('\n', pos)) != std::string::npos;) {
+		std::string::size_type endpos = s.find('\n', pos);
 		result.push_back(s.substr(pos, endpos - pos));
+		pos = endpos;
 	}
 	return result;
 }
