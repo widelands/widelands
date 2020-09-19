@@ -19,7 +19,6 @@
 
 #include "scripting/lua_map.h"
 
-#include "base/log.h"  // NOCOM
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/input_queue.h"
@@ -605,25 +604,19 @@ int do_set_soldiers(lua_State* L,
                     const Widelands::Coords& building_position,
                     Widelands::SoldierControl* sc,
                     Widelands::Player* owner) {
-	log_dbg("do_set_soldiers started");
 	MutexLock m;
 	assert(sc != nullptr);
 	assert(owner != nullptr);
 
 	const Widelands::TribeDescr& tribe = owner->tribe();
-	log_dbg("do_set_soldiers AAA");
 	const Widelands::SoldierDescr& soldier_descr =  //  soldiers
 	   dynamic_cast<const Widelands::SoldierDescr&>(*tribe.get_worker_descr(tribe.soldier()));
-	log_dbg("do_set_soldiers BBB");
 	SoldiersMap setpoints = parse_set_soldiers_arguments(L, soldier_descr);
-	log_dbg("do_set_soldiers CCC");
 
 	// Get information about current soldiers
 	const std::vector<Widelands::Soldier*> curs = sc->stationed_soldiers();
 	SoldiersMap hist;
-	log_dbg("do_set_soldiers DDD");
 	for (const Widelands::Soldier* s : curs) {
-		log_dbg("do_set_soldiers EEE %p", s);
 		SoldierMapDescr sd(s->get_health_level(), s->get_attack_level(), s->get_defense_level(),
 		                   s->get_evade_level());
 
@@ -637,57 +630,43 @@ int do_set_soldiers(lua_State* L,
 			setpoints[sd] = 0;
 		}
 	}
-	log_dbg("do_set_soldiers FFF");
 
 	// Now adjust them
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	log_dbg("do_set_soldiers GGG");
 	for (const SoldiersMap::value_type& sp : setpoints) {
-		log_dbg("do_set_soldiers HHH");
 		Widelands::Quantity cur = 0;
 		SoldiersMap::iterator i = hist.find(sp.first);
 		if (i != hist.end()) {
 			cur = i->second;
 		}
-		log_dbg("do_set_soldiers III");
 
 		int d = sp.second - cur;
 		if (d < 0) {
 			while (d) {
-				log_dbg("do_set_soldiers JJJ");
 				for (Widelands::Soldier* s : sc->stationed_soldiers()) {
-					log_dbg("do_set_soldiers KKK %p", s);
 					SoldierMapDescr is(s->get_health_level(), s->get_attack_level(),
 					                   s->get_defense_level(), s->get_evade_level());
 
 					if (is == sp.first) {
-						log_dbg("do_set_soldiers LLL");
 						sc->outcorporate_soldier(*s);
 						s->remove(egbase);
 						++d;
-						log_dbg("do_set_soldiers MMM");
 						break;
 					}
 				}
 			}
 		} else if (d > 0) {
 			for (; d; --d) {
-				log_dbg("do_set_soldiers NNN");
 				Widelands::Soldier& soldier = dynamic_cast<Widelands::Soldier&>(
 				   soldier_descr.create(egbase, owner, nullptr, building_position));
-				log_dbg("do_set_soldiers OOO %p", &soldier);
 				soldier.set_level(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
-				log_dbg("do_set_soldiers PPP");
 				if (sc->incorporate_soldier(egbase, soldier)) {
-					log_dbg("do_set_soldiers QQQ");
 					soldier.remove(egbase);
-					log_dbg("do_set_soldiers RRR ERROR");
 					report_error(L, "No space left for soldier!");
 				}
 			}
 		}
 	}
-	log_dbg("do_set_soldiers done");
 	return 0;
 }
 
@@ -5606,7 +5585,6 @@ int LuaWarehouse::get_soldiers(lua_State* L) {
 
 // documented in parent class
 int LuaWarehouse::set_soldiers(lua_State* L) {
-	log_dbg("NOCOM LuaWarehouse::set_soldiers");
 	Widelands::Warehouse* wh = get(L, get_egbase(L));
 	return do_set_soldiers(L, wh->get_position(), wh->mutable_soldier_control(), wh->get_owner());
 }
