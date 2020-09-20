@@ -78,9 +78,7 @@ struct SimpleRoadTestsFixture : public WlTestFixture {
 		// Map is deleted by EditorGameBase
 	}
 
-	// Forbid copy operations to make cppcheck happy
-	SimpleRoadTestsFixture(const SimpleRoadTestsFixture& other) = delete;
-	SimpleRoadTestsFixture& operator=(const SimpleRoadTestsFixture& other) = delete;
+	DISALLOW_COPY_AND_ASSIGN(SimpleRoadTestsFixture);
 
 	EditorGameBase g;
 	Road r;

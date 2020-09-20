@@ -202,9 +202,7 @@ struct TestingNodeDefaultNodesFixture {
 		}
 	}
 
-	// Forbid copy operations to make cppcheck happy
-	TestingNodeDefaultNodesFixture(const TestingNodeDefaultNodesFixture& other) = delete;
-	TestingNodeDefaultNodesFixture& operator=(const TestingNodeDefaultNodesFixture& other) = delete;
+	DISALLOW_COPY_AND_ASSIGN(TestingNodeDefaultNodesFixture);
 
 	std::vector<TestingRoutingNode*> nodes;
 	TestingRoutingNode* d0;
@@ -246,9 +244,7 @@ struct SimpleRouterFixture {
 		delete d1;
 	}
 
-	// Forbid copy operations to make cppcheck happy
-	SimpleRouterFixture(const SimpleRouterFixture& other) = delete;
-	SimpleRouterFixture& operator=(const SimpleRouterFixture& other) = delete;
+	DISALLOW_COPY_AND_ASSIGN(SimpleRouterFixture);
 
 	/**
 	 * Callback for the incredibly rare case that the \ref Router pathfinding
@@ -405,9 +401,7 @@ struct ComplexRouterFixture {
 		}
 	}
 
-	// Forbid copy operations to make cppcheck happy
-	ComplexRouterFixture(const ComplexRouterFixture& other) = delete;
-	ComplexRouterFixture& operator=(const ComplexRouterFixture& other) = delete;
+	DISALLOW_COPY_AND_ASSIGN(ComplexRouterFixture);
 
 	/**
 	 * Convenience function
