@@ -69,11 +69,15 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 			center_map_pixel.x = fr.float_32();
 			center_map_pixel.y = fr.float_32();
 
-			uint32_t const display_flags = fr.unsigned_32();
+			uint32_t display_flags = fr.unsigned_32();
 
 			if (InteractiveBase* const ibase = game.get_ibase()) {
 				ibase->map_view()->scroll_to_map_pixel(center_map_pixel, MapView::Transition::Jump);
-
+#ifndef NDEBUG
+				display_flags |= InteractiveBase::dfDebug;
+#else
+				display_flags &= ~InteractiveBase::dfDebug;
+#endif
 				ibase->set_display_flags(display_flags);
 			}
 			if (InteractivePlayer* const ipl = game.get_ipl()) {
