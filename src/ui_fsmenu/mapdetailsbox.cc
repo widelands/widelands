@@ -1,5 +1,4 @@
 #include "ui_fsmenu/mapdetailsbox.h"
-#include <base/log.h>
 
 #include "graphic/image_cache.h"
 #include "map_io/map_loader.h"

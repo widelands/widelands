@@ -117,7 +117,14 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 
 	individual_content_box.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
 	individual_content_box.add(&chat_, UI::Box::Resizing::kExpandBoth);
+
+	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
+		if (s.action == NoteGameSettings::Action::kMap) {
+			map_changed();
+		}
+	});
 	layout();
+
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
 		clicked_select_map();
@@ -126,13 +133,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 			settings_->set_player_number(0);
 		}
 	}
-	//	layout();
-	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
-		log_dbg("settings changed in multiplayer");
-		if (s.action == NoteGameSettings::Action::kMap) {
-			map_changed();
-		}
-	});
 }
 
 FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() = default;
@@ -193,8 +193,6 @@ bool FullscreenMenuLaunchMPG::clicked_select_map() {
 	}
 
 	update_win_conditions();
-	// force layout so all boxes and textareas are forced to update
-	layout();
 	return true;
 }
 
@@ -218,15 +216,6 @@ void FullscreenMenuLaunchMPG::select_map() {
 	settings_->set_scenario(code == FullscreenMenuBase::MenuTarget::kScenarioGame);
 
 	const MapData& mapdata = *msm.get_map();
-
-	// If the same map was selected again, maybe the state of the "scenario" check box was changed
-	// So we should recheck all map predefined values,
-	// which is done in refresh(), if filename_proof_ is different to settings.mapfilename -> dummy
-	// rename
-	//	if (mapdata.filename == filename_proof_) {
-	//		filename_proof_ = filename_proof_ + "new";
-	//	}
-
 	settings_->set_map(mapdata.name, mapdata.filename, mapdata.nrplayers);
 }
 
@@ -350,7 +339,6 @@ void FullscreenMenuLaunchMPG::map_changed() {
 void FullscreenMenuLaunchMPG::refresh() {
 	// TODO(GunChleoc): Investigate what we can handle with NoteGameSettings. Maybe we can get rid of
 	// refresh() and thus think().
-	const GameSettings& settings = settings_->settings();
 
 	ok_.set_enabled(settings_->can_launch());
 
@@ -468,7 +456,6 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 	}
 
 	map_details.update_from_savegame(settings_);
-	//	filename_proof_ = settings_->settings().mapfilename;
 }
 
 /**
@@ -490,9 +477,6 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	}
 
 	map_details.update(settings_, map);
-	//	filename_proof_ = settings_->settings().mapfilename;
-
-	//	suggested_teams_box_.show(map.get_suggested_teams());
 }
 
 /// Show help

@@ -131,30 +131,30 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 
 	content_box_.add_space(10 * padding_);
 	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
-	//	content_box_.add_space(10 * padding_);
+	// content_box_.add_space(10 * padding_);
 	content_box_.add(&map_box_, UI::Box::Resizing::kFullSize);
 	content_box_.add_space(10 * padding_);
 
-	//	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
+	// map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
 	map_box_.add(&map_details);
 	map_box_.add_space(5 * padding_);
 	map_box_.add(&peaceful_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	//	map_box_.add(&peaceful_, UI::Box::Resizing::kFullSize);
+	// map_box_.add(&peaceful_, UI::Box::Resizing::kFullSize);
 	map_box_.add_space(5 * padding_);
 	map_box_.add(&custom_starting_positions_);
-	//	map_box_.add(&custom_starting_positions_, UI::Box::Resizing::kFullSize);
+	// map_box_.add(&custom_starting_positions_, UI::Box::Resizing::kFullSize);
 	map_box_.add_space(5 * padding_);
 	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	//	map_box_.add(&win_condition_type, UI::Box::Resizing::kFullSize);
+	// map_box_.add(&win_condition_type, UI::Box::Resizing::kFullSize);
 	map_box_.add_space(2 * padding_);
 	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	//	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
+	// map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
 	map_box_.add_inf_space();
-	map_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	//	map_box_.add(&ok_, UI::Box::Resizing::kFullSize);
-	map_box_.add_space(2 * padding_);
-	map_box_.add(&back_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	//	map_box_.add(&back_, UI::Box::Resizing::kFullSize);
+	map_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+	// map_box_.add(&ok_, UI::Box::Resizing::kFullSize);
+	// map_box_.add_space(2 * padding_);
+	map_box_.add(&back_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+	// map_box_.add(&back_, UI::Box::Resizing::kFullSize);
 }
 
 void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
@@ -175,13 +175,13 @@ void FullscreenMenuLaunchGame::layout() {
 	win_condition_dropdown_.set_desired_size(standard_element_width_, standard_element_height_);
 	custom_starting_positions_.set_desired_size(standard_element_width_, standard_element_height_);
 
-	//	map_box_.set_size(standard_element_width_, 0 /*content_box_.get_h()*/);
-	//	map_box_.set_desired_size(standard_element_width_, 0 /*content_box_.get_h()*/);
+	// map_box_.set_size(standard_element_width_, 0 /*content_box_.get_h()*/);
+	// map_box_.set_desired_size(standard_element_width_, 0 /*content_box_.get_h()*/);
 
 	title_.set_font_scale(scale_factor());
 	map_details.force_new_dimensions(
 	   scale_factor(), standard_element_width_, standard_element_height_);
-	//	map_box_.set_desired_size(standard_element_width_, content_box_.get_h());
+	// map_box_.set_desired_size(standard_element_width_, content_box_.get_h());
 
 	printBox("main", main_box_);
 	printBox("content", content_box_);

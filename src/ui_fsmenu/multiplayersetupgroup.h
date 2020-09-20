@@ -55,7 +55,7 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	                          uint32_t standard_element_height);
 
 private:
-	void update();
+	void reset();
 	void draw(RenderTarget& dst) override;
 
 	GameSettingsProvider* const settings_;
@@ -66,7 +66,6 @@ private:
 
 	UI::Box clientbox, playerbox, scrollable_playerbox;
 	UI::Textarea clients_, players_;
-	//	UI::Button helper_button;
 	int32_t buth_;
 
 	std::map<std::string, const Image*> tribepics_;

@@ -125,10 +125,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	void update() {
 		const GameSettings& settings = settings_->settings();
 		const UserSettings& user_setting = settings.users.at(id_);
-		if (user_setting.position == UserSettings::not_connected()) {
-			set_visible(false);
-			return;
-		}
+		set_visible(user_setting.position != UserSettings::not_connected());
 
 		name.set_text(user_setting.name);
 		rebuild_slot_dropdown(settings);
@@ -591,7 +588,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
                                              int32_t const x,
                                              int32_t const y,
                                              int32_t const,
-                                             int32_t const h,
+                                             int32_t const,
                                              GameSettingsProvider* const settings,
                                              uint32_t buth)
    : UI::Box(parent, x, y, UI::Box::Horizontal),
@@ -616,7 +613,6 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
               _("Players"),
               UI::Align::kCenter,
               g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     //     helper_button(&playerbox, "helper", 0, 0, 0, 0, UI::ButtonStyle::kWuiMenu, "helper"),
      buth_(buth) {
 	clientbox.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
 	clientbox.add_space(3 * kPadding);
@@ -626,70 +622,63 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	add_space(8 * kPadding);
 	add(&playerbox, Resizing::kExpandBoth);
 	playerbox.add(&players_, Resizing::kAlign, UI::Align::kCenter);
-	//	playerbox.add(&helper_button, Resizing::kFillSpace);
 	scrollable_playerbox.set_scrolling(true);
 	playerbox.add_space(kPadding);
 
 	playerbox.add(&scrollable_playerbox, Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
-		log_dbg("updating sth");
-		if (n.action == NoteGameSettings::Action::kPlayer) {
-			log_dbg("updating players");
-			update_players();
-		} else if (n.action == NoteGameSettings::Action::kUser) {
-			log_dbg("updating users");
-			update_clients();
-		} else {
-			log_dbg("updating map");
-			update();
+		if (n.action == NoteGameSettings::Action::kMap) {
+			reset();
 		}
+		update_players();
+		update_clients();
 	});
-	update();
 }
 
 MultiPlayerSetupGroup::~MultiPlayerSetupGroup() = default;
 
 /// Update which slots are available based on current settings.
-void MultiPlayerSetupGroup::update() {
-
-	update_clients();
-
-	update_players();
-	//	layout();
-}
-void MultiPlayerSetupGroup::update_players() {
-	const GameSettings& settings = settings_->settings();
-	const size_t number_of_players = settings.players.size();
+void MultiPlayerSetupGroup::reset() {
 	for (auto& p : multi_player_player_groups) {
 		p->die();
 	}
 	multi_player_player_groups.clear();
-	multi_player_player_groups.resize(number_of_players);
-
-	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
-		multi_player_player_groups.at(i) =
-		   new MultiPlayerPlayerGroup(&scrollable_playerbox, playerbox.get_w() - UI::Scrollbar::kSize,
-		                              buth_, i, settings_, npsb.get());
-		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
-	}
-	//	layout();
-}
-void MultiPlayerSetupGroup::update_clients() {
-	const GameSettings& settings = settings_->settings();
-	const size_t number_of_users = settings.users.size();
 	for (auto& c : multi_player_client_groups) {
 		c->die();
 	}
 	multi_player_client_groups.clear();
-	multi_player_client_groups.resize(number_of_users);
+}
+void MultiPlayerSetupGroup::update_players() {
+	const GameSettings& settings = settings_->settings();
+	const size_t number_of_players = settings.players.size();
 
-	for (uint32_t i = 0; i < number_of_users; ++i) {
-		multi_player_client_groups.at(i) =
-		   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, settings_);
-		clientbox.add(multi_player_client_groups.at(i), Resizing::kFullSize);
+	if (number_of_players > multi_player_player_groups.size()) {
+		for (PlayerSlot i = multi_player_player_groups.size(); i < number_of_players; ++i) {
+			multi_player_player_groups.push_back(new MultiPlayerPlayerGroup(
+			   &scrollable_playerbox, playerbox.get_w() - UI::Scrollbar::kSize, buth_, i, settings_,
+			   npsb.get()));
+			scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
+		}
 	}
-	//	layout();
+	for (auto& p : multi_player_player_groups) {
+		p->update();
+	}
+}
+void MultiPlayerSetupGroup::update_clients() {
+	const GameSettings& settings = settings_->settings();
+	const size_t number_of_users = settings.users.size();
+
+	if (number_of_users > multi_player_client_groups.size()) {
+		for (uint32_t i = multi_player_client_groups.size(); i < number_of_users; ++i) {
+			multi_player_client_groups.push_back(
+			   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, settings_));
+			clientbox.add(multi_player_client_groups.at(i), Resizing::kFullSize);
+		}
+	}
+	for (auto& c : multi_player_client_groups) {
+		c->update();
+	}
 }
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {

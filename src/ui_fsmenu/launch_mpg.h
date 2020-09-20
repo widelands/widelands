@@ -66,7 +66,6 @@ private:
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;
 	MultiPlayerSetupGroup mpsg_;
 	GameChatPanel chat_;
-	//	std::string filename_proof_;  // local variable to check state
 
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };

@@ -33,15 +33,15 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
    : FullscreenMenuLaunchGame(settings, ctrl),
      player_setup(&individual_content_box, settings, standard_element_height_, padding_) {
 
-	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
+	individual_content_box.add(&player_setup, UI::Box::Resizing::kFullSize);
 	title_.set_text(_("Launch game"));
 	ok_.set_enabled(settings_->can_launch());
 
-	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
-		if (s.action == NoteGameSettings::Action::kMap) {
-			update();
-		}
-	});
+	// subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
+	// if (s.action == NoteGameSettings::Action::kMap) {
+	// update();
+	// }
+	// });
 }
 
 /**
@@ -82,7 +82,6 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 
 	update_custom_starting_positions();
 
-	//	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 	update();
 
 	// force layout so all boxes and textareas are forced to update

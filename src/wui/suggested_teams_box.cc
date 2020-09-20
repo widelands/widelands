@@ -66,7 +66,6 @@ void SuggestedTeamsBox::hide() {
 	}
 	vs_labels_.clear();
 
-	//	set_visible(false);
 	suggested_teams_box_label_->set_visible(false);
 	suggested_teams_box_label_->set_text("");
 }
