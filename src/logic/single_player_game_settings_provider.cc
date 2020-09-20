@@ -107,7 +107,8 @@ void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
 		player.team = 0;
 		// Set default computerplayer ai type
 		if (player.state == PlayerSettings::State::kComputer) {
-			const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
+			const AI::ComputerPlayer::ImplementationVector& impls =
+			   AI::ComputerPlayer::get_implementations();
 			if (impls.size() > 1) {
 				player.ai = impls.at(0)->name;
 				player.random_ai = false;
@@ -148,9 +149,10 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 		return;
 	}
 
-	const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
+	const AI::ComputerPlayer::ImplementationVector& impls =
+	   AI::ComputerPlayer::get_implementations();
 	if (impls.size() > 1) {
-		ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
+		AI::ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
 		do {
 			++it;
 			if ((*(it - 1))->name == s.players[number].ai) {
@@ -166,7 +168,7 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 				// Choose a random AI
 				uint8_t random = (std::rand() % impls.size());  // NOLINT
 				it = impls.begin() + random;
-			} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
+			} while ((*it)->type == AI::ComputerPlayer::Implementation::Type::kEmpty);
 		}
 		s.players[number].ai = (*it)->name;
 	}

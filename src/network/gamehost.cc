@@ -474,7 +474,7 @@ struct GameHostImpl {
 
 	/// All currently running computer players, *NOT* in one-one correspondence
 	/// with \ref Player objects
-	std::vector<ComputerPlayer*> computerplayers;
+	std::vector<AI::ComputerPlayer*> computerplayers;
 
 	/// \c true if a syncreport is currently in flight
 	bool syncreport_pending;
@@ -583,8 +583,9 @@ void GameHost::clear_computer_players() {
 }
 
 void GameHost::init_computer_player(Widelands::PlayerNumber p) {
-	d->computerplayers.push_back(ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
-	                                ->instantiate(*d->game, p));
+	d->computerplayers.push_back(
+	   AI::ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
+	      ->instantiate(*d->game, p));
 }
 
 void GameHost::replace_client_with_ai(uint8_t playernumber, const std::string& ai) {
@@ -594,7 +595,7 @@ void GameHost::replace_client_with_ai(uint8_t playernumber, const std::string& a
 	// Inform all players about the change
 	// Has to be done at first in this method since the calls later on overwrite players[].name
 	send_system_message_code("CLIENT_X_REPLACED_WITH", d->settings.players.at(playernumber).name,
-	                         ComputerPlayer::get_implementation(ai)->descname);
+	                         AI::ComputerPlayer::get_implementation(ai)->descname);
 	set_player_ai(playernumber, ai, false);
 	d->game->get_player(playernumber + 1)->set_ai(ai);
 	// Activate the ai
@@ -775,7 +776,7 @@ void GameHost::think() {
 			}
 		}
 
-		for (ComputerPlayer* cp : d->computerplayers) {
+		for (AI::ComputerPlayer* cp : d->computerplayers) {
 			cp->think();
 		}
 	}
@@ -2452,7 +2453,7 @@ void GameHost::disconnect_client(uint32_t const client_number,
 			}
 			// Client was active but is a winner of the game: Replace with normal AI
 		} else if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kWon) {
-			replace_client_with_ai(client.playernum, DefaultAI::normal_impl.name);
+			replace_client_with_ai(client.playernum, AI::DefaultAI::normal_impl.name);
 			// Client was active but has lost or gave up: Replace with empty AI
 		} else {
 			assert(d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kLost ||
