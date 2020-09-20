@@ -142,7 +142,7 @@ void* LayeredFileSystem::load(const std::string& fname, size_t& length) {
  */
 void LayeredFileSystem::write(const std::string& fname,
                               void const* const data,
-                              int32_t const length) {
+                              size_t const length) {
 	if (home_ && home_->is_writable()) {
 		return home_->write(fname, data, length);
 	}

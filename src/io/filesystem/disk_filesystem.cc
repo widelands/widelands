@@ -441,7 +441,7 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
  */
 void RealFSImpl::write(const std::string& fname,
                        void const* const data,
-                       int32_t const length,
+                       size_t const length,
                        bool append) {
 	std::string fullname;
 

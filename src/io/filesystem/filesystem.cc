@@ -24,6 +24,7 @@
 #include <cassert>
 #include <cstdlib>
 #include <list>
+#include <string>
 #ifdef _WIN32
 #include <cstdio>
 #endif
@@ -390,7 +391,7 @@ std::string FileSystem::get_userconfigdir() {
  */
 std::vector<std::string> FileSystem::get_xdgdatadirs() {
 	std::vector<std::string> xdgdatadirs;
-	const char* environment_char;
+	const char* environment_char = nullptr;
 #ifdef HAS_GETENV
 	environment_char = getenv("XDG_DATA_DIRS");
 #endif
@@ -459,7 +460,7 @@ static void fs_tokenize(const std::string& path, char const filesep, Inserter co
 	std::string::size_type pos2;  //  next filesep character
 
 	// Extract the first path component
-	if (path.find(filesep) == 0) {  // Is this an absolute path?
+	if (path.front() == filesep) {  // Is this an absolute path?
 		pos = 1;
 	} else {  // Relative path
 		pos = 0;
