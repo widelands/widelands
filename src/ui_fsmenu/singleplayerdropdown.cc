@@ -120,8 +120,8 @@ void SinglePlayerTribeDropdown::rebuild() {
 void SinglePlayerTribeDropdown::selection_action() {
 	const PlayerSettings& player_settings = settings_->settings().players[id_];
 	dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-	                               UI::ButtonDisableStyle::kPermpressed :
-	                               UI::ButtonDisableStyle::kFlat);
+                                  UI::ButtonDisableStyle::kPermpressed :
+                                  UI::ButtonDisableStyle::kFlat);
 	if (dropdown_.has_selection()) {
 		if (player_settings.state == PlayerSettings::State::kShared) {
 			settings_->set_player_shared(
@@ -169,7 +169,7 @@ void SinglePlayerPlayerTypeDropdown::fill() {
 	const GameSettings& settings = settings_->settings();
 	dropdown_.clear();
 	// AIs
-	for (const auto* impl : ComputerPlayer::get_implementations()) {
+	for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
 		dropdown_.add(_(impl->descname), (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
 		              g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 	}
@@ -203,8 +203,8 @@ void SinglePlayerPlayerTypeDropdown::select_entry() {
 			} else if (player_setting.ai.empty()) {
 				dropdown_.set_errored(_("No AI"));
 			} else {
-				const ComputerPlayer::Implementation* impl =
-				   ComputerPlayer::get_implementation(player_setting.ai);
+				const AI::ComputerPlayer::Implementation* impl =
+				   AI::ComputerPlayer::get_implementation(player_setting.ai);
 				dropdown_.select((boost::format(AI_NAME_PREFIX "%s") % impl->name).str());
 			}
 		}
