@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-04 08:23+0000\n"
+"POT-Creation-Date: 2020-09-11 11:58+0000\n"
 "PO-Revision-Date: 2020-09-04 08:26+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: English (United States) (http://www.transifex.com/widelands/widelands/language/en_US/)\n"
@@ -169,38 +169,38 @@ msgstr ""
 msgid "Rocks 1"
 msgstr ""
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:25
-#: ../../data/world/immovables/rocks/desert/init.lua:25
-#: ../../data/world/immovables/rocks/greenland/init.lua:25
-#: ../../data/world/immovables/rocks/winterland/init.lua:25
+#: ../../data/world/immovables/rocks/blackland/init.lua:26
+#: ../../data/world/immovables/rocks/desert/init.lua:26
+#: ../../data/world/immovables/rocks/greenland/init.lua:26
+#: ../../data/world/immovables/rocks/winterland/init.lua:26
 msgid "Rocks 2"
 msgstr ""
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:43
-#: ../../data/world/immovables/rocks/desert/init.lua:43
-#: ../../data/world/immovables/rocks/greenland/init.lua:43
-#: ../../data/world/immovables/rocks/winterland/init.lua:43
+#: ../../data/world/immovables/rocks/blackland/init.lua:45
+#: ../../data/world/immovables/rocks/desert/init.lua:45
+#: ../../data/world/immovables/rocks/greenland/init.lua:45
+#: ../../data/world/immovables/rocks/winterland/init.lua:45
 msgid "Rocks 3"
 msgstr ""
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:61
-#: ../../data/world/immovables/rocks/desert/init.lua:61
-#: ../../data/world/immovables/rocks/greenland/init.lua:61
-#: ../../data/world/immovables/rocks/winterland/init.lua:61
+#: ../../data/world/immovables/rocks/blackland/init.lua:64
+#: ../../data/world/immovables/rocks/desert/init.lua:64
+#: ../../data/world/immovables/rocks/greenland/init.lua:64
+#: ../../data/world/immovables/rocks/winterland/init.lua:64
 msgid "Rocks 4"
 msgstr ""
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:79
-#: ../../data/world/immovables/rocks/desert/init.lua:79
-#: ../../data/world/immovables/rocks/greenland/init.lua:79
-#: ../../data/world/immovables/rocks/winterland/init.lua:79
+#: ../../data/world/immovables/rocks/blackland/init.lua:83
+#: ../../data/world/immovables/rocks/desert/init.lua:83
+#: ../../data/world/immovables/rocks/greenland/init.lua:83
+#: ../../data/world/immovables/rocks/winterland/init.lua:83
 msgid "Rocks 5"
 msgstr ""
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:97
-#: ../../data/world/immovables/rocks/desert/init.lua:97
-#: ../../data/world/immovables/rocks/greenland/init.lua:97
-#: ../../data/world/immovables/rocks/winterland/init.lua:97
+#: ../../data/world/immovables/rocks/blackland/init.lua:102
+#: ../../data/world/immovables/rocks/desert/init.lua:102
+#: ../../data/world/immovables/rocks/greenland/init.lua:102
+#: ../../data/world/immovables/rocks/winterland/init.lua:102
 msgid "Rocks 6"
 msgstr ""
 

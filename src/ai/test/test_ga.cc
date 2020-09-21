@@ -28,13 +28,11 @@
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
-using namespace Widelands;
-
 BOOST_AUTO_TEST_SUITE(ai_ga)
 
-// Neuron presents a curve, of integers in range (0-20) (21 values)
+// AI::Neuron presents a curve, of integers in range (0-20) (21 values)
 BOOST_AUTO_TEST_CASE(neuron) {
-	Neuron n1 = Neuron(-50, 0, 0);
+	AI::Neuron n1 = AI::Neuron(-50, 0, 0);
 	BOOST_CHECK_EQUAL(n1.get_id(), 0);
 	BOOST_CHECK_EQUAL(n1.get_weight(), -50);
 	BOOST_CHECK_EQUAL(n1.get_result(10), -25);
@@ -43,7 +41,7 @@ BOOST_AUTO_TEST_CASE(neuron) {
 }
 
 BOOST_AUTO_TEST_CASE(neuron_updated_weight) {
-	Neuron n1 = Neuron(-50, 0, 0);
+	AI::Neuron n1 = AI::Neuron(-50, 0, 0);
 	n1.set_weight(50);
 	n1.recalculate();
 	BOOST_CHECK_EQUAL(n1.get_id(), 0);
@@ -52,9 +50,9 @@ BOOST_AUTO_TEST_CASE(neuron_updated_weight) {
 	BOOST_CHECK_EQUAL(n1.get_result_safe(100), 50);
 }
 
-// FNeuron is uint32_t that serves as 32 bools, that can be set and get independently
+// AI::FNeuron is uint32_t that serves as 32 bools, that can be set and get independently
 BOOST_AUTO_TEST_CASE(fneuron_position) {
-	FNeuron fn = FNeuron(0, 0);
+	AI::FNeuron fn = AI::FNeuron(0, 0);
 	BOOST_CHECK_EQUAL(fn.get_int(), 0);  // Initialized as 0, so must be still 0
 	const bool val0 = fn.get_position(0);
 	const bool val1 = fn.get_position(1);
