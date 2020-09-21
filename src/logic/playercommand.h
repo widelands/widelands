@@ -839,7 +839,7 @@ struct CmdMessageSetStatusArchived : public PlayerMessageCommand {
 struct CmdSetStockPolicy : PlayerCommand {
 	CmdSetStockPolicy(uint32_t time,
 	                  PlayerNumber p,
-	                  Building& wh,
+	                  const Building& wh,
 	                  bool isworker,
 	                  DescriptionIndex ware,
 	                  StockPolicy policy);

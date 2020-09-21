@@ -2563,8 +2563,8 @@ void Map::recalculate_allows_seafaring() {
 				FCoords neighbour;
 				get_neighbour(get_fcoords(current_position), i, &neighbour);
 				if ((neighbour.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM) {
-					if (reachable_from_current_port.count(neighbour) == 0) {
-						reachable_from_current_port.insert(neighbour);
+					auto insert = reachable_from_current_port.insert(neighbour);
+					if (insert.second) {
 						positions_to_check.push(neighbour);
 					}
 				}

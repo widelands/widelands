@@ -122,7 +122,7 @@ private:
  * bobs moving onto the shore).
  */
 struct CheckStepDefault {
-	CheckStepDefault(uint8_t const movecaps) : movecaps_(movecaps) {
+	explicit CheckStepDefault(uint8_t const movecaps) : movecaps_(movecaps) {
 	}
 
 	bool allowed(

@@ -103,7 +103,7 @@ public:
 	void set_location(PlayerImmovable*);
 	void set_economy(Economy*, WareWorker);
 
-	WareInstance* get_carried_ware(EditorGameBase& egbase) {
+	WareInstance* get_carried_ware(const EditorGameBase& egbase) {
 		return carried_ware_.get(egbase);
 	}
 	WareInstance const* get_carried_ware(const EditorGameBase& egbase) const {
@@ -267,7 +267,7 @@ private:
 	// List of places to visit (only if scout), plus a reminder to
 	// occasionally go just somewhere.
 	struct PlaceToScout {
-		PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
+		explicit PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
 		}
 		// The variable scoutme should not be accessed when randomwalk is true.
 		// Initializing the scoutme variable with an obviously-wrong value.

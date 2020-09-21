@@ -37,7 +37,7 @@ class Battle;
 
 struct SoldierLevelRange {
 	SoldierLevelRange();
-	SoldierLevelRange(const LuaTable&);
+	explicit SoldierLevelRange(const LuaTable&);
 	SoldierLevelRange(const SoldierLevelRange&) = default;
 	SoldierLevelRange& operator=(const SoldierLevelRange& other) = default;
 

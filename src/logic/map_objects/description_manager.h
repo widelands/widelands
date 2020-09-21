@@ -37,7 +37,7 @@ namespace Widelands {
 /// scenario-specific map object descriptions.
 class DescriptionManager {
 public:
-	DescriptionManager(LuaInterface* lua);
+	explicit DescriptionManager(LuaInterface* lua);
 	~DescriptionManager();
 
 	/// Search a directory for 'register.lua' files and register their 'init.lua' scripts

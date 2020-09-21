@@ -1840,7 +1840,7 @@ void CmdMessageSetStatusArchived::serialize(StreamWrite& ser) {
 /*** struct Cmd_SetStockPolicy ***/
 CmdSetStockPolicy::CmdSetStockPolicy(uint32_t time,
                                      PlayerNumber p,
-                                     Building& wh,
+                                     const Building& wh,
                                      bool isworker,
                                      DescriptionIndex ware,
                                      StockPolicy policy)

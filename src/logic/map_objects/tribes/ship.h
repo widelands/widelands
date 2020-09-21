@@ -320,7 +320,7 @@ protected:
 		uint32_t lastdock_ = 0U;
 		Serial ware_economy_serial_;
 		Serial worker_economy_serial_;
-		uint32_t destination_;
+		uint32_t destination_ = 0U;
 		uint32_t capacity_ = 0U;
 		ShipStates ship_state_ = ShipStates::kTransport;
 		std::string shipname_;

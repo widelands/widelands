@@ -269,11 +269,11 @@ public:
 	void send_player_enemyflagaction(const Flag&, PlayerNumber, const std::vector<Serial>&);
 	void send_player_mark_object_for_removal(PlayerNumber, Immovable&, bool);
 
-	void send_player_ship_scouting_direction(Ship&, WalkingDir);
-	void send_player_ship_construct_port(Ship&, Coords);
-	void send_player_ship_explore_island(Ship&, IslandExploreDirection);
-	void send_player_sink_ship(Ship&);
-	void send_player_cancel_expedition_ship(Ship&);
+	void send_player_ship_scouting_direction(const Ship&, WalkingDir);
+	void send_player_ship_construct_port(const Ship&, Coords);
+	void send_player_ship_explore_island(const Ship&, IslandExploreDirection);
+	void send_player_sink_ship(const Ship&);
+	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const Trade& trade);
 	void send_player_toggle_mute(const Building&, bool all);
 

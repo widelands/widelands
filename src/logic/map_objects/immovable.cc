@@ -895,7 +895,8 @@ void PlayerImmovable::remove_worker(Worker& w) {
 	     ++worker_iter) {
 		if (*worker_iter == &w) {
 			*worker_iter = *(workers_.end() - 1);
-			return workers_.pop_back();
+			workers_.pop_back();
+			return;
 		}
 	}
 
