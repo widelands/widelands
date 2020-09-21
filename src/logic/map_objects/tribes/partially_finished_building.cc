@@ -19,6 +19,7 @@
 
 #include "logic/map_objects/tribes/partially_finished_building.h"
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
@@ -210,6 +211,7 @@ void PartiallyFinishedBuilding::request_builder_callback(
 	b.builder_request_ = nullptr;
 
 	w->start_task_buildingwork(game);
+	log_dbg("++ PartiallyFinishedBuilding::request_builder_callback()\n");
 	b.set_seeing(true);
 }
 }  // namespace Widelands

@@ -78,9 +78,9 @@ void start_vision_benchmark(Widelands::EditorGameBase& egbase) {
 		log_err("++ start: game_time_recursion < 0 ++\n");
 	} else if (game_time_recursion == 0) {
 		if (game_time_start + 1000 <= egbase.get_gametime()) {
-			std::cout << "++ vision benchmark gametime " << game_time_start << "-" << egbase.get_gametime()
+			/*std::cout << "++ vision benchmark gametime " << game_time_start << "-" << egbase.get_gametime()
 				<< ": " << game_time_duration
-				<< " µs" << std::endl;
+				<< " µs" << std::endl;*/
 			game_time_duration = 0;
 			game_time_start = 0;
 		}
@@ -1610,6 +1610,9 @@ Vision Player::unsee_node(MapIndex const i,
                           bool const forward) {
 	start_vision_benchmark(egbase_);
 	Field& field = fields_[i];
+	if (mode == SeeUnseeNode::kUnsee && field.vision <= 1) {
+		log_err("++ Player::unsee_node() unseen too much?\n");
+	}
 	if ((mode == SeeUnseeNode::kUnsee && field.vision <= 1) ||
 	    field.vision < 1) {  //  Already does not see this
 		end_vision_benchmark(egbase_);
@@ -1688,7 +1691,7 @@ void Player::add_seer(const MapObject& m, const Area<FCoords>& a) {
 	for (const PlayerNumber& p : team_player_) {
 		egbase().get_player(p)->update_vision(a, true);
 	}
-	see_area(a);
+	// see_area(a);
 	end_vision_benchmark(egbase_);
 }
 
@@ -1717,11 +1720,11 @@ void Player::remove_seer(const MapObject& m, const Area<FCoords>& a) {
 					egbase().get_player(p)->update_vision(a, false);
 				}
 			}
-			unsee_area(a);
+			// unsee_area(a);
 			time_end = std::chrono::steady_clock::now();
-			std::cout << "++ remove_seer() at " << a.x << "," << a.y << " took "
+			/*std::cout << "++ remove_seer() at " << a.x << "," << a.y << " took "
 				<< std::chrono::duration_cast<std::chrono::microseconds>(time_end - time_begin).count()
-				<< " µs" << std::endl;
+				<< " µs" << std::endl;*/
 			end_vision_benchmark(egbase_);
 			return;
 		}
