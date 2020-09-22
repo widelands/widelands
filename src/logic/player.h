@@ -433,17 +433,16 @@ public:
 	}
 
 	// See area
-	Vision vision(MapIndex const) const;
+	Vision vision(MapIndex) const;
 
 	/**
 	 * Update this player's information about this node and the surrounding
 	 * triangles and edges.
 	 */
-	Vision see_node(const Map&, const FCoords&, const Time, const bool forward = false);
+	Vision see_node(MapIndex);
 
 	/// Decrement this player's vision for a node.
-	Vision
-	unsee_node(MapIndex, Time, SeeUnseeNode mode = SeeUnseeNode::kUnsee, bool forward = false);
+	Vision unsee_node(MapIndex);
 
 	/// Call see_node for each node in the area.
 	void see_area(const Area<FCoords>&);
@@ -469,7 +468,10 @@ public:
 	/// - kUnexplore: Set the field's vision to 0
 	/// - kReveal:    If the field was hidden previously, restore the vision to the value it had
 	///               at the time of hiding. Otherwise, increment the vision.
-	void hide_or_reveal_field(const uint32_t gametime, const Coords& c, SeeUnseeNode mode);
+
+	void force_update_team_vision(MapIndex, bool visible);
+	void update_team_vision(MapIndex);
+	void update_team_vision_whole_map();
 
 	MilitaryInfluence military_influence(MapIndex const i) const {
 		return fields_[i].military_influence;
@@ -644,9 +646,7 @@ private:
 	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
 	TeamNumber team_number_;
-	std::vector<Player*> team_players_;
-	std::set<PlayerNumber> team_player_;
-	bool team_player_uptodate_;
+	std::set<PlayerNumber> team_players_;
 	bool see_all_;
 	const PlayerNumber player_number_;
 	const TribeDescr& tribe_;  // buildings, wares, workers, sciences

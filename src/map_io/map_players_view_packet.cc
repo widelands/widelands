@@ -104,11 +104,22 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				for (MapIndex m = 0; m < no_of_fields; ++m) {
 					Player::Field& f = player->fields_[m];
-					f.vision = static_cast<Widelands::Vision>(stoi(field_vector[m]));
+					// log_dbg("++ vision before: %u\n", f.vision);
+					Vision saved_vision = static_cast<Widelands::Vision>(stoi(field_vector[m]));
+					assert(f.vision % 2 == 0);
+					if (saved_vision == 1) {
+						assert(f.vision == 0);
+						f.vision = 1;
+					} else if (saved_vision % 2 == 1) {
+						f.vision = std::max(f.vision, static_cast<Widelands::Vision>(2)) + 1;
+						assert(f.vision > 2);
+						assert(f.vision % 2 == 1);
+					}
+					// log_dbg("++ vision after:  %u\n", f.vision);
 					if (f.is_explored() && !f.is_visible()) {
 						seen_fields.insert(&f);
 					}
-					f.vision = 0;
+					// f.vision = 0;
 				}
 
 				const MapIndex no_of_seen_fields = fr.unsigned_32();

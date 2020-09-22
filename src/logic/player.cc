@@ -175,7 +175,6 @@ Player::Player(EditorGameBase& the_egbase,
      initialization_index_(initialization_index),
      team_number_(0),
      see_all_(false),
-     team_player_uptodate_(false),
      player_number_(plnum),
      tribe_(tribe_descr),
      casualties_(0),
@@ -357,8 +356,7 @@ bool Player::get_starting_position_suitability(const Coords& c) const {
  */
 void Player::set_team_number(TeamNumber team) {
 	team_number_ = team;
-	team_player_uptodate_ = false;
-	// update_team_players();
+	update_team_players();
 }
 
 /**
@@ -413,67 +411,18 @@ void Player::AiPersistentState::initialize() {
 	initialized = true;
 }
 
-/**
- * Updates the vector containing allied players
- */
-void Player::update_team_players() {
-	start_vision_benchmark(egbase_);
-	team_players_.clear();
-	team_player_uptodate_ = true;
-
-	if (team_number_) {
-		for (PlayerNumber i = 1; i <= kMaxPlayers; ++i) {
-			Player* other = egbase().get_player(i);
-			if (!other) {
-				continue;
-			}
-			if (other == this) {
-				continue;
-			}
-			if (team_number_ == other->team_number_) {
-				team_players_.push_back(other);
-			}
-		}
-	}
-
-	if (!fields_ || egbase().objects().is_cleaning_up()) {
-		end_vision_benchmark(egbase_);
-		return;
-	}
-	const MapIndex max = egbase().map().max_index();
-	Widelands::Field* f = &egbase().map()[0];
-	for (MapIndex i = 0; i < max; ++i, ++f) {
-		if (fields_[i].vision == 2) {
-			fields_[i].vision = 1;
-		}
-		if (fields_[i].vision < 2) {
-			if (!team_players_.empty()) {
-				for (uint8_t j = 0; j < team_players_.size(); ++j) {
-					if (team_players_[j]->vision(i) > 2) {
-						fields_[i].vision = 2;
-						break;
-					}
-				}
-			}
-		}
-		// update_vision(egbase().map().get_fcoords(*f), false);
-	}
-
-	end_vision_benchmark(egbase_);
-}
-
-/*
 void Player::update_team_players() {
 	// Tell all our old allies to forget us…
-	for (const PlayerNumber& p : team_player_) {
+	for (const PlayerNumber& p : team_players_) {
 		if (p != player_number()) {
 			Player& player = *egbase().get_player(p);
-			player.team_player_.erase(player_number());
-			player.update_vision_whole_map();
+			player.team_players_.erase(player_number());
+			player.update_team_vision_whole_map();
 		}
 	}
 
-	team_player_ = {player_number()};
+	// team_players_ = {player_number()};
+	team_players_ = {};
 
 	// …and tell our new allies to note us
 	if (team_number_) {
@@ -481,18 +430,18 @@ void Player::update_team_players() {
 			if (p != player_number()) {
 				if (Player* player = egbase().get_player(p)) {
 					if (player->team_number_ == team_number_) {
-						team_player_.insert(p);
-						player->team_player_.insert(player_number());
-						player->update_vision_whole_map();
+						team_players_.insert(p);
+						player->team_players_.insert(player_number());
+						player->update_team_vision_whole_map();
 					}
 				}
 			}
 		}
 	}
 
-	update_vision_whole_map();
+	update_team_vision_whole_map();
 }
-*/
+
 /*
  * Plays the corresponding sound when a message is received and if sound is
  * enabled.
@@ -1359,7 +1308,7 @@ void Player::enemyflagaction(Flag& flag,
 		}
 	}
 }
-
+/*
 void Player::rediscover_node(const Map& map, const FCoords& f) {
 	start_vision_benchmark(egbase_);
 
@@ -1469,8 +1418,8 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	}
 	end_vision_benchmark(egbase_);
 }
+*/
 
-/*
 void Player::rediscover_node(const Map& map, const FCoords& f) {
 	start_vision_benchmark(egbase_);
 	assert(0 <= f.x);
@@ -1499,23 +1448,23 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		// right neighbour
 		const FCoords r = map.r_n(f);
 		const MapIndex r_index = map.get_index(r, mapwidth);
-		const SeeUnseeNode r_vision = get_vision(r_index);
+		const Vision r_vision = vision(r_index);
 		// bottom right neighbour
 		const FCoords br = map.br_n(f);
 		const MapIndex br_index = map.get_index(br, mapwidth);
-		const SeeUnseeNode br_vision = get_vision(br_index);
+		const Vision br_vision = vision(br_index);
 		// bottom left neighbour
 		const FCoords bl = map.bl_n(f);
 		const MapIndex bl_index = map.get_index(bl, mapwidth);
-		const SeeUnseeNode bl_vision = get_vision(bl_index);
+		const Vision bl_vision = vision(bl_index);
 
 		field.border = f.field->is_border();
 		// draw a border if both nodes are borders belonging to the same player for all we know
-		field.border_r = field.border && r_vision != SeeUnseeNode::kUnexplored &&
+		field.border_r = field.border && r_vision != 0 &&
 		                 fields_[r_index].border && fields_[r_index].owner == field.owner;
-		field.border_br = field.border && br_vision != SeeUnseeNode::kUnexplored &&
+		field.border_br = field.border && br_vision != 0 &&
 		                  fields_[br_index].border && fields_[br_index].owner == field.owner;
-		field.border_bl = field.border && bl_vision != SeeUnseeNode::kUnexplored &&
+		field.border_bl = field.border && bl_vision != 0 &&
 		                  fields_[bl_index].border && fields_[bl_index].owner == field.owner;
 		{
 			const MapObjectDescr* map_object_descr = nullptr;
@@ -1532,10 +1481,10 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 						map_object_descr = nullptr;
 						FCoords main_coords = map.get_fcoords(building->get_position());
 						Field& field_main = fields_[main_coords.field - &first_map_field];
-						if (field_main.seeing != SeeUnseeNode::kVisible) {
+						if (field_main.vision < 2) {
 							rediscover_node(map, main_coords);
 							field_main.time_node_last_unseen = egbase().get_gametime();
-							field_main.seeing = SeeUnseeNode::kPreviouslySeen;
+							field_main.vision = 1;
 						}
 					} else {
 						if (upcast(ConstructionSite const, cs, building)) {
@@ -1555,7 +1504,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	{  //  discover the D triangle and the SW edge of the top right neighbour
 		FCoords tr = map.tr_n(f);
 		Field& tr_field = fields_[tr.field - &first_map_field];
-		if (tr_field.seeing != SeeUnseeNode::kVisible) {
+		if (tr_field.vision < 2) {
 			tr_field.terrains.d = tr.field->terrain_d();
 			tr_field.r_sw = tr.field->get_road(WALK_SW);
 			tr_field.owner = tr.field->get_owned_by();
@@ -1564,7 +1513,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	{  //  discover both triangles and the SE edge of the top left  neighbour
 		FCoords tl = map.tl_n(f);
 		Field& tl_field = fields_[tl.field - &first_map_field];
-		if (tl_field.seeing != SeeUnseeNode::kVisible) {
+		if (tl_field.vision < 2) {
 			tl_field.terrains = tl.field->get_terrains();
 			tl_field.r_se = tl.field->get_road(WALK_SE);
 			tl_field.owner = tl.field->get_owned_by();
@@ -1573,7 +1522,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	{  //  discover the R triangle and the  E edge of the     left  neighbour
 		FCoords l = map.l_n(f);
 		Field& l_field = fields_[l.field - &first_map_field];
-		if (l_field.seeing != SeeUnseeNode::kVisible) {
+		if (l_field.vision < 2) {
 			l_field.terrains.r = l.field->terrain_r();
 			l_field.r_e = l.field->get_road(WALK_E);
 			l_field.owner = l.field->get_owned_by();
@@ -1581,95 +1530,67 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	}
 	end_vision_benchmark(egbase_);
 }
-*/
+
 /**
  * Update this player's information about this node and the surrounding
  * triangles and edges.
  */
 /// Returns the resulting vision.
-Vision Player::see_node(const Map& map, const FCoords& f, Time const gametime, bool const forward) {
+Vision Player::see_node(const MapIndex i) {
 	start_vision_benchmark(egbase_);
-	assert(0 <= f.x);
-	assert(f.x < map.get_width());
-	assert(0 <= f.y);
-	assert(f.y < map.get_height());
-	const Widelands::Field& first_map_field = map[0];
-	assert(&first_map_field <= f.field);
-	assert(f.field < &first_map_field + map.max_index());
-
-	//  If this is not already a forwarded call, we should inform allied players
-	//  as well of this change.
-	if (!team_player_uptodate_) {
-		update_team_players();
-	}
-	if (!forward && !team_players_.empty()) {
-		for (uint8_t j = 0; j < team_players_.size(); ++j) {
-			team_players_[j]->see_node(map, f, gametime, true);
-		}
-	}
-
-	Field& field = fields_[f.field - &first_map_field];
+	const Map& map = egbase().map();
+	Field& field = fields_[i];
 	assert(fields_.get() <= &field);
 	assert(&field < fields_.get() + map.max_index());
 
 	if (field.vision < 2) {
 		field.vision = 2;
-		rediscover_node(map, f);
+		rediscover_node(map, map.get_fcoords(map[i]));
 	}
-	if (!forward) {
-		field.vision += 2;
+	field.vision += 2;
+	assert(field.vision >= 4);
+
+	for (PlayerNumber player_number : team_players_) {
+		if (Player* team_player = egbase().get_player(player_number)) {
+			team_player->force_update_team_vision(i, true);
+			assert(team_player->vision(i) >= 2);
+		}
 	}
+
 	end_vision_benchmark(egbase_);
 	return field.vision;
-	// return ++field.vision;
 }
 
 /// Decrement this player's vision for a node.
 /// If 'mode' = UnseeMode::kUnexplore, fields will be marked as unexplored. Else, player no longer
 /// sees what's currently going on. Returns the vision that this node had before it was hidden.
-Vision Player::unsee_node(MapIndex const i,
-                          Time const gametime,
-                          const SeeUnseeNode mode,
-                          bool const forward) {
+Vision Player::unsee_node(MapIndex const i) {
 	start_vision_benchmark(egbase_);
+	const Map& map = egbase().map();
 	Field& field = fields_[i];
-	if (field.vision < 2) {  //  Already does not see this
-		if (!forward) {
-			log_err("++ Player::unsee_node() unseen too much ???\n");
-		}
-		end_vision_benchmark(egbase_);
-		return field.vision;
-	}
+	assert(fields_.get() <= &field);
+	assert(&field < fields_.get() + map.max_index());
 
 	const Vision original_vision = field.vision;
 
-	if (!forward) {
-		field.vision -= 2;
-		assert(field.vision >= 2);
-	}
+	assert(field.vision >= 4);
+	field.vision -= 2;
+	assert(field.vision >= 2);
 	if (field.vision == 2) {
-		field.vision = 1;
-		if (!team_players_.empty()) {
-			for (uint8_t j = 0; j < team_players_.size(); ++j) {
-				if (team_players_[j]->vision(i) > 2) {
-					field.vision = 2;
-					break;
-				}
-			}
-		}
+		update_team_vision(i);
+		assert(field.vision >= 1);
+		assert(field.vision <= 2);
 	}
 	if (field.vision < 2) {
-		field.time_node_last_unseen = gametime;
-	}
+		assert(field.vision == 1);
+		field.time_node_last_unseen = egbase().get_gametime();
+		rediscover_node(map, map.get_fcoords(map[i]));
 
-	//  If this is not already a forwarded call, we should inform allied players
-	//  as well of this change.
-	if (!team_player_uptodate_) {
-		update_team_players();
-	}
-	if (!forward && !team_players_.empty()) {
-		for (uint8_t j = 0; j < team_players_.size(); ++j) {
-			team_players_[j]->unsee_node(i, gametime, mode, true);
+		for (PlayerNumber player_number : team_players_) {
+			if (Player* team_player = egbase().get_player(player_number)) {
+				team_player->force_update_team_vision(i, false);
+				assert(team_player->vision(i) == 1);
+			}
 		}
 	}
 
@@ -1686,11 +1607,11 @@ Vision Player::vision(MapIndex const i) const {
 /// Call see_node for each node in the area.
 void Player::see_area(const Area<FCoords>& area) {
 	start_vision_benchmark(egbase_);
-	const Time gametime = egbase().get_gametime();
 	const Map& map = egbase().map();
+	const Widelands::Field& first_map_field = map[0];
 	MapRegion<Area<FCoords>> mr(map, area);
 	do {
-		see_node(map, mr.location(), gametime);
+		see_node(mr.location().field - &first_map_field);
 	} while (mr.advance(map));
 	end_vision_benchmark(egbase_);
 }
@@ -1698,12 +1619,11 @@ void Player::see_area(const Area<FCoords>& area) {
 /// Decrement this player's vision for each node in an area.
 void Player::unsee_area(const Area<FCoords>& area) {
 	start_vision_benchmark(egbase_);
-	const Time gametime = egbase().get_gametime();
 	const Map& map = egbase().map();
 	const Widelands::Field& first_map_field = map[0];
 	MapRegion<Area<FCoords>> mr(map, area);
 	do {
-		unsee_node(mr.location().field - &first_map_field, gametime);
+		unsee_node(mr.location().field - &first_map_field);
 	} while (mr.advance(map));
 	end_vision_benchmark(egbase_);
 }
@@ -1722,63 +1642,140 @@ bool Player::is_explored(MapIndex i) const {
 }
 
 void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
-/*	start_vision_benchmark(egbase_);
+	start_vision_benchmark(egbase_);
 	const Map& map = egbase().map();
 	FCoords fcoords = map.get_fcoords(coords);
-	const Widelands::MapIndex index = fcoords.field - &map[0];
+	const Widelands::MapIndex i = fcoords.field - &map[0];
+	Field& field = fields_[i];
 
 	switch (mode) {
-	case SeeUnseeNode::kVisible:
-		// revealed_fields_.insert(index);
+	case SeeUnseeNode::kReveal:
+		if (field.vision > 2 && field.vision % 2 == 1) {
+			break;
+		}
+		if (field.vision < 2) {
+			field.vision = 2;
+			rediscover_node(map, map.get_fcoords(map[i]));
+		}
+		assert(field.vision >= 2);
+		assert(field.vision % 2 == 0);
+		++field.vision;
+		for (PlayerNumber player_number : team_players_) {
+			if (Player* team_player = egbase().get_player(player_number)) {
+				team_player->force_update_team_vision(i, true);
+				assert(team_player->vision(i) >= 2);
+			}
+		}
 		break;
-	case SeeUnseeNode::kUnexplored:
-		if (fields_) {
-			// fields_[index].seeing = SeeUnseeNode::kUnexplored;
+
+	case SeeUnseeNode::kUnsee:
+		if (field.vision < 3 || field.vision % 2 == 0) {
+			break;
 		}
-		FALLS_THROUGH;
-	case SeeUnseeNode::kPreviouslySeen:
-		auto it = revealed_fields_.find(index);
-		if (it != revealed_fields_.end()) {
-			revealed_fields_.erase(it);
+		assert(field.vision >= 3);
+		assert(field.vision % 2 == 1);
+		--field.vision;
+		assert(field.vision >= 2);
+		assert(field.vision % 2 == 0);
+		if (field.vision == 2) {
+			update_team_vision(i);
+			assert(field.vision >= 1);
+			assert(field.vision <= 2);
 		}
+		if (field.vision < 2) {
+			assert(field.vision == 1);
+			field.time_node_last_unseen = egbase().get_gametime();
+			rediscover_node(map, map.get_fcoords(map[i]));
+
+			for (PlayerNumber player_number : team_players_) {
+				if (Player* team_player = egbase().get_player(player_number)) {
+					team_player->force_update_team_vision(i, false);
+					assert(team_player->vision(i) == 1);
+				}
+			}
+		}
+		break;
+
+	case SeeUnseeNode::kForget:
+		hide_or_reveal_field(coords, SeeUnseeNode::kUnsee);
+		assert(field.vision == 1 || field.vision % 2 == 0);
+		if (field.vision == 1) {
+			field.vision = 0;
+		}
+		assert(field.vision % 2 == 0);
 		break;
 	}
-
-	// update_vision(fcoords, mode == SeeUnseeNode::kVisible);
-	end_vision_benchmark(egbase_);*/
+	end_vision_benchmark(egbase_);
 }
 
-void Player::hide_or_reveal_field(const uint32_t gametime,
-                                  const Coords& coords,
-                                  SeeUnseeNode mode) {
-/*	const Map& map = egbase().map();
-	FCoords fcoords = map.get_fcoords(coords);
-	const Widelands::MapIndex index = fcoords.field - &map[0];
+void Player::force_update_team_vision(MapIndex const i, bool visible) {
+	const Map& map = egbase().map();
+	Field& field = fields_[i];
 
-	switch (mode) {
-	// Reveal field
-	case SeeUnseeNode::kReveal: {
-		Widelands::Vision new_vision = see_node(map, fcoords, gametime);
-		// If the field was manually hidden, restore the original vision
-		if (hidden_fields_.count(index) == 1) {
-			auto iter = hidden_fields_.find(index);
-			Vision original_vision = iter->second;
-			while (new_vision < original_vision) {
-				new_vision = see_node(map, fcoords, gametime);
+	if (field.vision > 2) {
+		return;
+	}
+
+	if (visible) {
+		if (field.vision < 2) {
+			rediscover_node(map, map.get_fcoords(map[i]));
+			field.vision = 2;
+		}
+	} else {
+		if (field.vision == 2) {
+			field.time_node_last_unseen = egbase().get_gametime();
+			rediscover_node(map, map.get_fcoords(map[i]));
+			field.vision = 1;
+		}
+	}
+}
+
+void Player::update_team_vision(MapIndex const i) {
+	const Map& map = egbase().map();
+	Field& field = fields_[i];
+
+	if (field.vision > 2) {
+		return;
+	}
+
+	assert(field.vision >= 0);
+	assert(field.vision <= 2);
+	Vision old_vision = field.vision;
+
+	if (field.vision == 2) {
+		field.vision = 1;
+	}
+	for (PlayerNumber player_number : team_players_) {
+		if (Player* team_player = egbase().get_player(player_number)) {
+			if (team_player->vision(i) > 2) {
+				field.vision = 2;
+				break;
 			}
-			hidden_fields_.erase(iter);
 		}
-	} break;
-	// Hide field
-	case SeeUnseeNode::kUnsee:
-	case SeeUnseeNode::kUnexplore: {
-		const Widelands::Vision new_vision = unsee_node(index, gametime, mode);
-		// Remember the original vision so that we can unhide the fields again
-		if (hidden_fields_.count(index) != 1) {
-			hidden_fields_.insert(std::make_pair(index, new_vision));
+	}
+
+	if (field.vision < old_vision) {
+		assert(field.vision == 1);
+		field.time_node_last_unseen = egbase().get_gametime();
+	}
+	if (field.vision != old_vision) {
+		assert(field.vision >= 1);
+		rediscover_node(map, map.get_fcoords(map[i]));
+	}
+}
+
+void Player::update_team_vision_whole_map() {
+	if (!fields_ || egbase().objects().is_cleaning_up()) {
+		return;
+	}
+	const MapIndex max = egbase().map().max_index();
+	Widelands::Field* f = &egbase().map()[0];
+	for (MapIndex i = 0; i < max; ++i) {
+		if (fields_[i].vision > 2) {
+			continue;
 		}
-	} break;
-	}*/
+		update_team_vision(i);
+	}
 }
 
 /**
