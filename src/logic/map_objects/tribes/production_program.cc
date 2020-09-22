@@ -1049,8 +1049,8 @@ animate
 Runs an animation. See :ref:`map_object_programs_animate`.
 */
 ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments,
-                                          ProductionSiteDescr* descr) {
-	parameters = MapObjectProgram::parse_act_animate(arguments, *descr, false);
+                                          ProductionSiteDescr* descr)
+   : parameters(MapObjectProgram::parse_act_animate(arguments, *descr, false)) {
 }
 
 void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) const {
@@ -1871,8 +1871,8 @@ playsound
 Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
 ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments,
-                                              const ProductionSiteDescr& descr) {
-	parameters = MapObjectProgram::parse_act_play_sound(arguments, descr);
+                                              const ProductionSiteDescr& descr)
+   : parameters(MapObjectProgram::parse_act_play_sound(arguments, descr)) {
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {

@@ -297,8 +297,9 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 
 	const auto load_bridge_if_present = [this](const LuaTable& animations_table,
 	                                           const std::string& animation_directory,
-	                                           Animation::Type animation_type, std::string s_dir,
-	                                           std::string s_type, uint32_t* id) {
+	                                           Animation::Type animation_type,
+	                                           const std::string& s_dir, const std::string& s_type,
+	                                           uint32_t* id) {
 		const std::string directional_name("bridge_" + s_type + "_" + s_dir);
 		if (animations_table.has_key(directional_name)) {
 			std::unique_ptr<LuaTable> animation_table = animations_table.get_table(directional_name);
@@ -821,7 +822,7 @@ void TribeDescr::finalize_loading(Tribes& tribes, const World& world) {
 }
 
 // Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
-void TribeDescr::calculate_trainingsites_proportions(Tribes& tribes) {
+void TribeDescr::calculate_trainingsites_proportions(const Tribes& tribes) {
 	unsigned int trainingsites_without_percent = 0;
 	int used_percent = 0;
 	std::vector<BuildingDescr*> traingsites_with_percent;

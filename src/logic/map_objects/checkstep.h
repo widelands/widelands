@@ -139,7 +139,7 @@ private:
  * A ferry can travel on an edge if and only if both adjacent triangles are water.
  */
 struct CheckStepFerry {
-	CheckStepFerry(const EditorGameBase& egbase) : egbase_(egbase) {
+	explicit CheckStepFerry(const EditorGameBase& egbase) : egbase_(egbase) {
 	}
 
 	bool allowed(

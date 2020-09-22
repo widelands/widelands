@@ -32,11 +32,10 @@ namespace Widelands {
 Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Tribes& tribes)
    : std::map<DescriptionIndex, uint8_t>() {
 	for (const std::string& warename : table->keys<std::string>()) {
-		int32_t value = INVALID_INDEX;
 		DescriptionIndex const idx = tribes.load_ware(warename);
 
 		// Read value
-		value = table->get_int(warename);
+		int32_t value = table->get_int(warename);
 		if (value < 1) {
 			throw GameDataError("Ware count needs to be > 0.\nEmpty buildcost "
 			                    "tables are allowed if you wish to have an amount of 0.");

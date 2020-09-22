@@ -50,7 +50,7 @@ namespace {
 // Parses the descriptions of the working positions from 'items_table' and
 // fills in 'working_positions'. Throws an error if the table contains invalid
 // values.
-void parse_working_positions(Tribes& tribes,
+void parse_working_positions(const Tribes& tribes,
                              LuaTable* items_table,
                              BillOfMaterials* working_positions) {
 	for (const std::string& worker_name : items_table->keys<std::string>()) {

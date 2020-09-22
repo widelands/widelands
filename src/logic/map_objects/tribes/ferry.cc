@@ -41,7 +41,7 @@ uint32_t FerryDescr::movecaps() const {
 }
 
 Ferry::Ferry(const FerryDescr& ferry_descr)
-   : Carrier(ferry_descr), destination_(nullptr), unemployed_since_(0) {
+   : Carrier(ferry_descr), fleet_(nullptr), destination_(nullptr), unemployed_since_(0) {
 }
 
 bool Ferry::init(EditorGameBase& egbase) {
@@ -262,7 +262,7 @@ bool Ferry::init_fleet() {
 	return fleet->init(egbase);
 }
 
-Waterway* Ferry::get_destination(Game& game) const {
+Waterway* Ferry::get_destination(const Game& game) const {
 	if (!destination_) {
 		return nullptr;
 	}

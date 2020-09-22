@@ -204,7 +204,7 @@ public:
 	 * \return \c true if the game is completely loaded and running (or paused)
 	 * or \c false otherwise.
 	 */
-	bool is_loaded() {
+	bool is_loaded() const {
 		return state_ == gs_running;
 	}
 

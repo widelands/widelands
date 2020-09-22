@@ -162,7 +162,7 @@ public:
 
 	void start_task_gowarehouse(Game&);
 	void start_task_dropoff(Game&, WareInstance&);
-	void start_task_releaserecruit(Game&, Worker&);
+	void start_task_releaserecruit(Game&, const Worker&);
 	void start_task_fetchfromflag(Game&);
 
 	bool start_task_waitforcapacity(Game&, Flag&);
@@ -284,8 +284,8 @@ private:
 	void add_sites(Game& game,
 	               const Map& map,
 	               const Player& player,
-	               std::vector<ImmovableFound>& found_sites);
-	bool scout_random_walk(Game& game, const Map& map, State& state);
+	               const std::vector<ImmovableFound>& found_sites);
+	bool scout_random_walk(Game& game, const Map& map, const State& state);
 	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker

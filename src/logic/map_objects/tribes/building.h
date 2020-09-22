@@ -350,7 +350,7 @@ public:
 		mute_messages_ = m;
 	}
 
-	void start_animation(EditorGameBase&, uint32_t anim);
+	void start_animation(const EditorGameBase&, uint32_t anim);
 
 	bool is_seeing() const {
 		return seeing_;

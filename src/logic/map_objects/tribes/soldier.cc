@@ -1231,9 +1231,6 @@ void Soldier::defense_update(Game& game, State& state) {
 	if (soldiers.empty() || (get_current_health() < get_retreat_health())) {
 		if (get_retreat_health() > get_current_health()) {
 			assert(state.ivar1 & CF_RETREAT_WHEN_INJURED);
-		}
-
-		if (get_current_health() < get_retreat_health()) {
 			molog(game.get_gametime(), "[defense] I am heavily injured (%d)!\n", get_current_health());
 		} else {
 			molog(game.get_gametime(), "[defense] no enemy soldiers found, ending task\n");
@@ -1769,12 +1766,7 @@ void Soldier::Loader::load(FileRead& fr) {
 
 			Soldier& soldier = get<Soldier>();
 			soldier.current_health_ = fr.unsigned_32();
-			if (packet_version == kCurrentPacketVersion) {
-				soldier.retreat_health_ = fr.unsigned_32();
-			} else {
-				// not ideal but will be used only for regression tests
-				soldier.retreat_health_ = 0;
-			}
+			soldier.retreat_health_ = fr.unsigned_32();
 
 			soldier.health_level_ = std::min(fr.unsigned_32(), soldier.descr().get_max_health_level());
 			soldier.attack_level_ = std::min(fr.unsigned_32(), soldier.descr().get_max_attack_level());

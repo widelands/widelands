@@ -111,7 +111,7 @@ struct Ship : Bob {
 	Economy* get_economy(WareWorker type) const {
 		return type == wwWARE ? ware_economy_ : worker_economy_;
 	}
-	void set_economy(Game&, Economy* e, WareWorker);
+	void set_economy(const Game&, Economy* e, WareWorker);
 
 	void init_auto_task(Game&) override;
 
@@ -308,6 +308,15 @@ private:
 	// saving and loading
 protected:
 	struct Loader : Bob::Loader {
+		// Initialize everything to make cppcheck happy.
+		Loader()
+		   : lastdock_(0),
+		     ware_economy_serial_(kInvalidSerial),
+		     worker_economy_serial_(kInvalidSerial),
+		     destination_(0),
+		     capacity_(0),
+		     ship_state_(ShipStates::kTransport) {
+		}
 
 		const Task* get_task(const std::string& name) override;
 
@@ -316,13 +325,12 @@ protected:
 		void load_finish() override;
 
 	private:
-		// Initialize everything to make cppcheck happy.
-		uint32_t lastdock_ = 0U;
+		uint32_t lastdock_;
 		Serial ware_economy_serial_;
 		Serial worker_economy_serial_;
-		uint32_t destination_ = 0U;
-		uint32_t capacity_ = 0U;
-		ShipStates ship_state_ = ShipStates::kTransport;
+		uint32_t destination_;
+		uint32_t capacity_;
+		ShipStates ship_state_;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<ShippingItem::Loader> items_;

@@ -726,7 +726,7 @@ void Ship::set_ship_state_and_notify(ShipStates state, NoteShip::Action action) 
 	}
 }
 
-void Ship::set_economy(Game& game, Economy* e, WareWorker type) {
+void Ship::set_economy(const Game& game, Economy* e, WareWorker type) {
 	// Do not check here that the economy actually changed, because on loading
 	// we rely that wares really get reassigned our economy.
 
