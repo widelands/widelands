@@ -19,6 +19,7 @@
 
 #include "ui_fsmenu/launch_spg.h"
 
+#include <base/log.h>
 #include <memory>
 
 #include "base/warning.h"
@@ -36,12 +37,6 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 	individual_content_box.add(&player_setup, UI::Box::Resizing::kFullSize);
 	title_.set_text(_("Launch game"));
 	ok_.set_enabled(settings_->can_launch());
-
-	// subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
-	// if (s.action == NoteGameSettings::Action::kMap) {
-	// update();
-	// }
-	// });
 }
 
 /**
@@ -59,6 +54,7 @@ void FullscreenMenuLaunchSPG::start() {
  * Returns whether a map has been selected.
  */
 bool FullscreenMenuLaunchSPG::clicked_select_map() {
+	log_dbg("clicked select map executed");
 	if (!settings_->can_change_map()) {
 		return false;
 	}
@@ -135,10 +131,11 @@ void FullscreenMenuLaunchSPG::clicked_back() {
 	//  user it seems as if the launchgame-menu is a child of mapselect and
 	//  not the other way around - just end_modal(0); will be seen as bug
 	//  from user point of view, so we reopen the mapselect-menu.
-	if (!clicked_select_map()) {
-		// No map has been selected: Go back to main menu
-		return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
-	}
+	//	if (!clicked_select_map()) {
+	// No map has been selected: Go back to main menu
+	log_dbg("ending spg panel");
+	return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	//	}
 }
 
 void FullscreenMenuLaunchSPG::win_condition_selected() {
