@@ -26,8 +26,6 @@
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 
-using Widelands::TCoords;
-
 int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                        EditorInteractive& eia,
                                                        EditorActionArgs* args,
