@@ -27,7 +27,7 @@
  * Status window for \ref MilitarySite
  */
 struct MilitarySiteWindow : public BuildingWindow {
-	MilitarySiteWindow(InteractiveGameBase& parent,
+	MilitarySiteWindow(InteractiveBase& parent,
 	                   UI::UniqueWindow::Registry& reg,
 	                   Widelands::MilitarySite&,
 	                   bool avoid_fastclick,

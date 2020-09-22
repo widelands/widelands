@@ -25,7 +25,7 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/player.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_base.h"
 
 static char const* pic_priority_low = "images/wui/buildings/low_priority_button.png";
 static char const* pic_priority_normal = "images/wui/buildings/normal_priority_button.png";
@@ -35,13 +35,13 @@ static char const* pic_max_fill_indicator = "images/wui/buildings/max_fill_indic
 InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
                                      int32_t const x,
                                      int32_t const y,
-                                     InteractiveGameBase& igb,
+                                     InteractiveBase& ib,
                                      Widelands::Building& building,
                                      const Widelands::InputQueue& queue,
                                      bool no_capacity_buttons,
                                      bool no_priority_buttons)
    : UI::Panel(parent, x, y, 0, 28),
-     igb_(igb),
+     interactive_base_(ib),
      building_(building),
      queue_(&queue),
      settings_(nullptr),
@@ -83,14 +83,14 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
 InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
                                      int32_t const x,
                                      int32_t const y,
-                                     InteractiveGameBase& igb,
+                                     InteractiveBase& ib,
                                      Widelands::ConstructionSite& building,
                                      Widelands::WareWorker ww,
                                      Widelands::DescriptionIndex di,
                                      bool no_capacity_buttons,
                                      bool no_priority_buttons)
    : UI::Panel(parent, x, y, 0, 28),
-     igb_(igb),
+     interactive_base_(ib),
      building_(building),
      queue_(nullptr),
      settings_(dynamic_cast<const Widelands::ProductionsiteSettings*>(building.get_settings())),
@@ -312,7 +312,7 @@ void InputQueueDisplay::update_priority_buttons() {
 	priority_radiogroup_->changedto.connect([this](int32_t i) { radiogroup_changed(i); });
 	priority_radiogroup_->clicked.connect([this]() { radiogroup_clicked(); });
 
-	bool const can_act = igb_.can_act(building_.owner().player_number());
+	bool const can_act = interactive_base_.can_act(building_.owner().player_number());
 	if (!can_act) {
 		priority_radiogroup_->set_enabled(false);
 	}
@@ -393,7 +393,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
  */
 void InputQueueDisplay::radiogroup_changed(int32_t state) {
 	assert(type_ == Widelands::wwWARE);
-	if (!igb_.can_act(building_.owner().player_number())) {
+	if (!interactive_base_.can_act(building_.owner().player_number())) {
 		return;
 	}
 
@@ -415,8 +415,12 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		update_siblings_priority(state);
 	}
-	igb_.game().send_player_set_ware_priority(
-	   building_, type_, index_, priority, settings_ != nullptr);
+	if (Widelands::Game* game = interactive_base_.get_game()) {
+		game->send_player_set_ware_priority(
+		   building_, type_, index_, priority, settings_ != nullptr);
+	} else {
+		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+	}
 }
 
 void InputQueueDisplay::radiogroup_clicked() {
@@ -469,15 +473,19 @@ void InputQueueDisplay::update_siblings_priority(int32_t state) {
  * stored here has been clicked
  */
 void InputQueueDisplay::decrease_max_fill_clicked() {
-	if (!igb_.can_act(building_.owner().player_number())) {
+	if (!interactive_base_.can_act(building_.owner().player_number())) {
 		return;
 	}
 
 	// Update the value of this queue if required
 	if (cache_max_fill_ > 0) {
-		igb_.game().send_player_set_input_max_fill(
-		   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1),
-		   settings_ != nullptr);
+		if (Widelands::Game* game = interactive_base_.get_game()) {
+			game->send_player_set_input_max_fill(
+			   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1),
+			   settings_ != nullptr);
+		} else {
+			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+		}
 	}
 
 	// Update other queues of this building
@@ -489,15 +497,19 @@ void InputQueueDisplay::decrease_max_fill_clicked() {
 }
 
 void InputQueueDisplay::increase_max_fill_clicked() {
-	if (!igb_.can_act(building_.owner().player_number())) {
+	if (!interactive_base_.can_act(building_.owner().player_number())) {
 		return;
 	}
 
 	if (cache_max_fill_ < cache_size_) {
-		igb_.game().send_player_set_input_max_fill(
-		   building_, index_, type_,
-		   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1),
-		   settings_ != nullptr);
+		if (Widelands::Game* game = interactive_base_.get_game()) {
+			game->send_player_set_input_max_fill(
+			   building_, index_, type_,
+			   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1),
+			   settings_ != nullptr);
+		} else {
+			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+		}
 	}
 
 	if (SDL_GetModState() & KMOD_SHIFT) {
@@ -524,8 +536,12 @@ void InputQueueDisplay::update_siblings_fill(int32_t delta) {
 		   std::max(0, std::min<int32_t>(static_cast<int32_t>(display->cache_max_fill_) + delta,
 		                                 display->cache_size_));
 		if (new_fill != display->cache_max_fill_) {
-			igb_.game().send_player_set_input_max_fill(
-			   building_, display->index_, display->type_, new_fill, settings_ != nullptr);
+			if (Widelands::Game* game = interactive_base_.get_game()) {
+				game->send_player_set_input_max_fill(
+				   building_, display->index_, display->type_, new_fill, settings_ != nullptr);
+			} else {
+				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+			}
 		}
 	} while ((sibling = sibling->get_next_sibling()));
 }
@@ -533,7 +549,7 @@ void InputQueueDisplay::update_siblings_fill(int32_t delta) {
 void InputQueueDisplay::compute_max_fill_buttons_enabled_state() {
 
 	// Disable those buttons for replay watchers
-	bool const can_act = igb_.can_act(building_.owner().player_number());
+	bool const can_act = interactive_base_.can_act(building_.owner().player_number());
 	if (!can_act) {
 		if (increase_max_fill_) {
 			increase_max_fill_->set_enabled(false);

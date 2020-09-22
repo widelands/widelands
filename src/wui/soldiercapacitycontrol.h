@@ -20,7 +20,7 @@
 #ifndef WL_WUI_SOLDIERCAPACITYCONTROL_H
 #define WL_WUI_SOLDIERCAPACITYCONTROL_H
 
-class InteractiveGameBase;
+class InteractiveBase;
 
 namespace UI {
 class Panel;
@@ -31,7 +31,7 @@ class Building;
 }
 
 UI::Panel* create_soldier_capacity_control(UI::Panel& parent,
-                                           InteractiveGameBase& igb,
+                                           InteractiveBase&,
                                            Widelands::Building& building);
 
 #endif  // end of include guard: WL_WUI_SOLDIERCAPACITYCONTROL_H

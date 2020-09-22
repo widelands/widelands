@@ -24,7 +24,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/textarea.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_base.h"
 
 using Widelands::SoldierControl;
 
@@ -34,7 +34,7 @@ using Widelands::SoldierControl;
  */
 struct SoldierCapacityControl : UI::Box {
 	SoldierCapacityControl(UI::Panel* parent,
-	                       InteractiveGameBase& igb,
+	                       InteractiveBase& ib,
 	                       Widelands::Building& building);
 
 protected:
@@ -45,7 +45,7 @@ private:
 	void click_decrease();
 	void click_increase();
 
-	InteractiveGameBase& igbase_;
+	InteractiveBase& ibase_;
 	Widelands::Building& building_;
 
 	UI::Button decrease_;
@@ -54,10 +54,10 @@ private:
 };
 
 SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
-                                               InteractiveGameBase& igb,
+                                               InteractiveBase& ib,
                                                Widelands::Building& building)
    : Box(parent, 0, 0, Horizontal),
-     igbase_(igb),
+     ibase_(ib),
      building_(building),
      decrease_(this,
                "decrease",
@@ -98,13 +98,17 @@ void SoldierCapacityControl::think() {
 	uint32_t const capacity = soldiers->soldier_capacity();
 	value_.set_text(boost::lexical_cast<std::string>(capacity));
 
-	bool const can_act = igbase_.can_act(building_.owner().player_number());
+	bool const can_act = ibase_.can_act(building_.owner().player_number());
 	decrease_.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);
 	increase_.set_enabled(can_act && soldiers->max_soldier_capacity() > capacity);
 }
 
 void SoldierCapacityControl::change_soldier_capacity(int delta) {
-	igbase_.game().send_player_change_soldier_capacity(building_, delta);
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_change_soldier_capacity(building_, delta);
+	} else {
+		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+	}
 }
 
 void SoldierCapacityControl::click_decrease() {
@@ -124,7 +128,7 @@ void SoldierCapacityControl::click_increase() {
 }
 
 UI::Panel* create_soldier_capacity_control(UI::Panel& parent,
-                                           InteractiveGameBase& igb,
+                                           InteractiveBase& ib,
                                            Widelands::Building& building) {
-	return new SoldierCapacityControl(&parent, igb, building);
+	return new SoldierCapacityControl(&parent, ib, building);
 }
