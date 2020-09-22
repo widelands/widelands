@@ -499,7 +499,6 @@ bool Building::init(EditorGameBase& egbase) {
 	// Start the animation
 	start_animation(egbase, descr().get_unoccupied_animation());
 
-	owner_->add_seer(*this);
 	if (descr().type() == MapObjectType::WAREHOUSE) {
 		log_dbg("++ Building::init()\n");
 		set_seeing(true);
@@ -510,8 +509,6 @@ bool Building::init(EditorGameBase& egbase) {
 }
 
 void Building::cleanup(EditorGameBase& egbase) {
-	owner_->remove_seer(
-	   *this, Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().vision_range()));
 	set_seeing(false);
 
 	if (defeating_player_) {

@@ -597,8 +597,7 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 				// below
 				possible_directions.push_back(dir);
 			}
-			if (player_->get_vision(map.get_index(tmp_coords, map.get_width())) ==
-			    Widelands::SeeUnseeNode::kUnexplored) {
+			if (!player_->is_explored(map.get_index(tmp_coords, map.get_width()))) {
 				// So this field was never seen before, the direction is inserted into
 				// new_teritory_directions, and searching in this direction quits here
 				new_teritory_directions.push_back(dir);

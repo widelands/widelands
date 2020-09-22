@@ -215,7 +215,6 @@ public:
 	struct Field {
 		Field()
 		   : military_influence(0),
-		     seeing(SeeUnseeNode::kUnexplored),
 		     vision(0),
 		     r_e(RoadSegment::kNone),
 		     r_se(RoadSegment::kNone),
@@ -283,8 +282,16 @@ public:
 		/// worker objects that can see the node.
 		///
 		/// \note Never change this directly. Use update_vision() to recalculate.
-		SeeUnseeNode seeing;
+		// SeeUnseeNode seeing;
 		Vision vision;
+
+		bool is_visible() const {
+			return vision > 1;
+		}
+
+		bool is_explored() const {
+			return vision > 0;
+		}
 
 		//  Below follows information about the field, as far as this player
 		//  knows.
@@ -444,13 +451,9 @@ public:
 	/// Decrement this player's vision for each node in an area.
 	void unsee_area(const Area<FCoords>&);
 
-	SeeUnseeNode get_vision(MapIndex) const;
+	// SeeUnseeNode get_vision(MapIndex) const;
 	bool is_seeing(MapIndex) const;
-
-	// Cause this player and all his team mates to recalculate the visibility
-	// state of the given area of fields. If `force_visible` is true, we
-	// will assume without checking that we can see all fields of this area.
-	void update_vision(const Area<FCoords>&, bool force_visible);
+	bool is_explored(MapIndex) const;
 
 	/// Explicitly hide or reveal the given field. The modes are as follows:
 	/// - kPreviouslySeen: Decrement the field's vision
@@ -594,10 +597,6 @@ public:
 
 	const std::string pick_shipname();
 
-	void add_seer(const MapObject&, const Area<FCoords>&);
-	void add_seer(const MapObject&);
-	void remove_seer(const MapObject&, const Area<FCoords>&);
-
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	uint32_t count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const;
@@ -666,18 +665,6 @@ private:
 	std::set<Serial> ships_;
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */
-
-	bool should_see(const FCoords&, std::list<const MapObject*>& nearby_objects) const;
-	// Own bobs and buildings that are seeing fields in their vicinity
-	std::list<const MapObject*> seers_;
-
-	void update_vision(const FCoords&, bool force_visible);
-	void update_vision(const FCoords&, bool force_visible, std::list<const MapObject*>& nearby_objects);
-	void update_vision_whole_map();
-	std::set<MapIndex> revealed_fields_;
-
-	// Fields that were explicitly hidden, with their vision at the time of hiding
-	std::map<MapIndex, Widelands::Vision> hidden_fields_;
 
 	/**
 	 * Wares produced (by ware id) since the last call to @ref sample_statistics

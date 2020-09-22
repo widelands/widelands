@@ -62,7 +62,7 @@ namespace {
 float adjusted_field_brightness(const Widelands::FCoords& fcoords,
                                 const uint32_t gametime,
                                 const Widelands::Player::Field& pf) {
-	if (pf.vision == 0) {
+	if (!pf.is_explored()) {
 	// if (pf.seeing == Widelands::SeeUnseeNode::kUnexplored) {
 		return 0.;
 	}
@@ -70,7 +70,7 @@ float adjusted_field_brightness(const Widelands::FCoords& fcoords,
 	uint32_t brightness = 144 + fcoords.field->get_brightness();
 	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
 
-	if (pf.vision == 1) {
+	if (!pf.is_visible()) {
 	// if (pf.seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
 		static const uint32_t kDecayTimeInMs = 20000;
 		const Widelands::Duration time_ago = gametime - pf.time_node_last_unseen;
@@ -491,8 +491,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			f->road_se = player_field.r_se;
 			f->road_sw = player_field.r_sw;
 			f->vision = player_field.vision;
-			f->seeing = player_field.seeing;
-			if (player_field.vision == 1) {
+			if (player_field.is_explored() && !player_field.is_visible()) {
 			// if (player_field.seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
 				f->owner = player_field.owner != 0 ? gbase.get_player(player_field.owner) : nullptr;
 				f->is_border = player_field.border;
@@ -760,7 +759,7 @@ bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) cons
 	const Widelands::Map& map = egbase().map();
 	const Widelands::Player::Field& player_field =
 	   plr.fields()[map.get_index(coords, map.get_width())];
-	return (player_field.vision > 1);
+	return player_field.is_visible();
 	// return player_field.seeing == Widelands::SeeUnseeNode::kVisible;
 }
 

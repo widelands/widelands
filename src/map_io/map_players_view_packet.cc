@@ -76,13 +76,13 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				std::set<Player::Field*> seen_fields;
 
-				player->revealed_fields_.clear();
+				/*player->revealed_fields_.clear();
 				const unsigned no_revealed_fields = fr.unsigned_32();
 				for (unsigned i = 0; i < no_revealed_fields; ++i) {
 					const MapIndex revealed_index = fr.unsigned_32();
 					player->revealed_fields_.insert(revealed_index);
 					player->rediscover_node(map, map.get_fcoords(map[revealed_index]));
-				}
+				}*/
 
 				// Read numerical field infos as combined strings to reduce number of hard disk write
 				// operations
@@ -104,10 +104,11 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				for (MapIndex m = 0; m < no_of_fields; ++m) {
 					Player::Field& f = player->fields_[m];
-					f.seeing = static_cast<Widelands::SeeUnseeNode>(stoi(field_vector[m]));
-					if (f.seeing == SeeUnseeNode::kPreviouslySeen) {
+					f.vision = static_cast<Widelands::Vision>(stoi(field_vector[m]));
+					if (f.is_explored() && !f.is_visible()) {
 						seen_fields.insert(&f);
 					}
+					f.vision = 0;
 				}
 
 				const MapIndex no_of_seen_fields = fr.unsigned_32();
@@ -298,21 +299,23 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 			for (uint8_t i = fr.unsigned_8(); i; --i) {
 				Player& player = *egbase.get_player(fr.unsigned_8());
 
-				player.revealed_fields_.clear();
+				/*player.revealed_fields_.clear();
 				for (uint32_t j = fr.unsigned_32(); j; --j) {
 					player.revealed_fields_.insert(fr.unsigned_32());
-				}
+				}*/
 
 				for (MapIndex m = map.max_index(); m; --m) {
 					Player::Field& f = player.fields_[m - 1];
 
 					f.owner = fr.unsigned_8();
 
-					f.seeing = static_cast<SeeUnseeNode>(fr.unsigned_8());
+					f.vision = static_cast<Vision>(fr.unsigned_8());
 
-					if (f.seeing != SeeUnseeNode::kPreviouslySeen && packet_version > 1) {
+					if (f.is_explored() && !f.is_visible() && packet_version > 1) {
 						continue;
 					}
+
+					f.vision = 0;
 
 					f.time_node_last_unseen = fr.unsigned_32();
 					f.time_triangle_last_surveyed[0] = fr.unsigned_32();
@@ -441,10 +444,10 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 		fw.unsigned_8(p);
 		std::set<const Player::Field*> seen_fields;
 		// Explicitly revealed fields
-		fw.unsigned_32(player->revealed_fields_.size());
+		/*fw.unsigned_32(player->revealed_fields_.size());
 		for (const MapIndex& m : player->revealed_fields_) {
 			fw.unsigned_32(m);
-		}
+		}*/
 
 		// Write numerical field infos as combined strings to reduce number of hard disk write
 		// operations
@@ -454,14 +457,14 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			const MapIndex upper_bound = egbase.map().max_index() - 1;
 			for (MapIndex m = 0; m < upper_bound; ++m) {
 				const Player::Field& f = player->fields_[m];
-				oss << static_cast<unsigned>(f.seeing) << "|";
-				if (f.seeing == SeeUnseeNode::kPreviouslySeen) {
+				oss << static_cast<unsigned>(f.vision) << "|";
+				if (f.is_explored() && !f.is_visible()) {
 					seen_fields.insert(&f);
 				}
 			}
 			const Player::Field& f = player->fields_[upper_bound];
-			oss << static_cast<unsigned>(f.seeing);
-			if (f.seeing == SeeUnseeNode::kPreviouslySeen) {
+			oss << static_cast<unsigned>(f.vision);
+			if (f.is_explored() && !f.is_visible()) {
 				seen_fields.insert(&f);
 			}
 			fw.c_string(oss.str());

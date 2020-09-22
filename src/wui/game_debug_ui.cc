@@ -206,7 +206,7 @@ void FieldDebugWindow::think() {
 		const Widelands::Player::Field& player_field = player->fields()[i];
 		str += (boost::format("Player %u:\n") % static_cast<unsigned int>(plnum)).str();
 		str += (boost::format("  military influence: %u\n") % player_field.military_influence).str();
-
+/*
 		const Widelands::SeeUnseeNode vision = player_field.seeing;
 		str += (boost::format("  vision: %s\n") %
 		        (vision == Widelands::SeeUnseeNode::kVisible ?
@@ -260,7 +260,7 @@ void FieldDebugWindow::think() {
 		default:
 			str += "  visible\n";
 			break;
-		}
+		}*/
 	}
 	{
 		const Widelands::DescriptionIndex ridx = coords_.field->get_resources();
