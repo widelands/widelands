@@ -639,16 +639,18 @@ private:
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */
 
-	bool should_see(const FCoords&, std::list<const MapObject*>& nearby_objects) const;
+	using SeersList = std::list<const MapObject*>;
+
+	bool should_see(const FCoords&, SeersList& nearby_objects) const;
 	// Own bobs and buildings that are seeing fields in their vicinity
-	std::list<const MapObject*> seers_;
+	SeersList seers_;
 
 	void update_vision(const FCoords&, bool force_visible);
 	void
-	update_vision(const FCoords&, bool force_visible, std::list<const MapObject*>& nearby_objects);
+	update_vision(const FCoords&, bool force_visible, SeersList& nearby_objects);
 	void update_vision_whole_map();
-	std::list<const MapObject*> team_seers();
-	std::list<const MapObject*> seers_for(const Area<FCoords>&);
+	SeersList team_seers();
+	SeersList seers_for(const Area<FCoords>&);
 
 	std::set<MapIndex> revealed_fields_;
 

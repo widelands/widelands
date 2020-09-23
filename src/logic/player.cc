@@ -1417,7 +1417,7 @@ void Player::remove_seer(const MapObject& m, const Area<FCoords>& a) {
 }
 
 // Checks if any of our buildings or bobs, or one of one of our team mates, is seeing this node
-bool Player::should_see(const FCoords& f, std::list<const MapObject*>& nearby_objects) const {
+bool Player::should_see(const FCoords& f, SeersList& nearby_objects) const {
 	for (const PlayerNumber& p : team_player_) {
 		const Player& player = *egbase().get_player(p);
 		if (player.revealed_fields_.count(f)) {
@@ -1447,7 +1447,7 @@ bool Player::should_see(const FCoords& f, std::list<const MapObject*>& nearby_ob
 }
 
 void Player::update_vision(const FCoords& f, bool force_visible) {
-	std::list<const MapObject*> team_seers_list;
+	SeersList team_seers_list;
 	if (!force_visible) {
 		team_seers_list = std::move(team_seers());
 	}
@@ -1456,7 +1456,7 @@ void Player::update_vision(const FCoords& f, bool force_visible) {
 
 void Player::update_vision(const FCoords& f,
                            bool force_visible,
-                           std::list<const MapObject*>& nearby_objects) {
+                           SeersList& nearby_objects) {
 	if (!fields_ || egbase().objects().is_cleaning_up()) {
 		return;
 	}
@@ -1481,7 +1481,7 @@ void Player::update_vision_whole_map() {
 	}
 	const MapIndex max = egbase().map().max_index();
 	Widelands::Field* f = &egbase().map()[0];
-	std::list<const MapObject*> team_seers_list = std::move(team_seers());
+	SeersList team_seers_list = std::move(team_seers());
 	for (MapIndex i = 0; i < max; ++i, ++f) {
 		update_vision(egbase().map().get_fcoords(*f), false, team_seers_list);
 	}
@@ -1495,7 +1495,7 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 	// Build a list of nearby objects.
 	// This way we only evaluate all objects (which is very expensive) once.
 	// When updating individual fields, only the objects from this list are evaluated.
-	std::list<const MapObject*> nearby_objects;
+	SeersList nearby_objects;
 	if (!force_visible) {
 		nearby_objects = std::move(seers_for(area));
 	}
@@ -1512,12 +1512,12 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 	}
 }
 
-std::list<const MapObject*> Player::team_seers() {
-	std::list<const MapObject*> team_seers_list;
+SeersList Player::team_seers() {
+	SeersList team_seers_list;
 	for (const PlayerNumber& p : team_player_) {
 		Player& player = *egbase().get_player(p);
 		std::copy(player.seers_.begin(), player.seers_.end(),
-		          std::back_insert_iterator<std::list<const MapObject*>>(team_seers_list));
+		          std::back_insert_iterator<SeersList>(team_seers_list));
 	}
 	return team_seers_list;
 }
@@ -1526,7 +1526,7 @@ std::list<const MapObject*> Player::team_seers() {
  * Return a list of seers that can see at least one field from the given area.
  * The list is approximately sorted by decreasing overlap of the given area and the seer's.
  */
-std::list<const MapObject*> Player::seers_for(const Area<FCoords>& area) {
+SeersList Player::seers_for(const Area<FCoords>& area) {
 	// Pick the seers and save them paired with the values for sorting.
 	std::list<std::pair<int, const MapObject*>> nearby_objects;
 	for (const PlayerNumber& p : team_player_) {
@@ -1560,7 +1560,7 @@ std::list<const MapObject*> Player::seers_for(const Area<FCoords>& area) {
 	// Sort the seers.
 	nearby_objects.sort([](std::pair<int, const MapObject*>& a,
 	                       std::pair<int, const MapObject*>& b) { return a.first < b.first; });
-	std::list<const MapObject*> nearby_objects_2;
+	SeersList nearby_objects_2;
 	std::transform(nearby_objects.begin(), nearby_objects.end(),
 	               std::back_inserter(nearby_objects_2),
 	               [](std::pair<int, const MapObject*>& pair) { return pair.second; });
