@@ -3091,11 +3091,11 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 			Coords const coord = list[lidx];
 			list.erase(list.begin() + lidx);
 			MapIndex idx = map.get_index(coord, map.get_width());
-			Vision const visible = owner().vision(idx);
+			// Vision const visible = owner().vision(idx);
 //			const SeeUnseeNode visible = owner().get_vision(idx);
 
 			// If the field is not yet discovered, go there
-			if (!visible) {
+			if (!owner().is_seeing(idx)) {
 			// if (visible == SeeUnseeNode::kUnexplored) {
 				molog(game.get_gametime(), "[scout]: Go to interesting field (%i, %i)\n", coord.x,
 				      coord.y);
@@ -3112,7 +3112,7 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 			int dist = map.calc_distance(coord, get_position());
 			Time time = owner().fields()[idx].time_node_last_unseen;
 			// time is only valid if visible is 1
-			if (visible != 1) {
+			if (!owner().is_explored(idx) || owner().is_seeing(idx)) {
 			// if (visible != SeeUnseeNode::kPreviouslySeen) {
 				time = oldest_time;
 			}

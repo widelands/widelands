@@ -212,6 +212,6 @@ void PartiallyFinishedBuilding::request_builder_callback(
 
 	w->start_task_buildingwork(game);
 	log_dbg("++ PartiallyFinishedBuilding::request_builder_callback()\n");
-	b.set_seeing(true);
+	// b.set_seeing(true);
 }
 }  // namespace Widelands

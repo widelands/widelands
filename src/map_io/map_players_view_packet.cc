@@ -106,6 +106,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					Player::Field& f = player->fields_[m];
 					// log_dbg("++ vision before: %u\n", f.vision);
 					Vision saved_vision = static_cast<Widelands::Vision>(stoi(field_vector[m]));
+					log_dbg("++ p%u(%d,%d): saved_vision = %u; f.vision = %u\n",
+						    p, map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision, f.vision);
+					assert(f.vision != 1);
 					assert(f.vision % 2 == 0);
 					if (saved_vision == 1) {
 						assert(f.vision == 0);
@@ -115,7 +118,10 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						assert(f.vision > 2);
 						assert(f.vision % 2 == 1);
 					}
-					// log_dbg("++ vision after:  %u\n", f.vision);
+					if (saved_vision != f.vision) {
+						log_err("++ p%u(%d,%d): saved_vision %u != %u f.vision\n",
+						        p, map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision, f.vision);
+					}
 					if (f.is_explored() && !f.is_visible()) {
 						seen_fields.insert(&f);
 					}
@@ -320,13 +326,14 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 					f.owner = fr.unsigned_8();
 
-					f.vision = static_cast<Vision>(fr.unsigned_8());
+					Vision saved_vision = static_cast<Vision>(fr.unsigned_8());
+					// f.vision = static_cast<Vision>(fr.unsigned_8());
 
 					if (f.is_explored() && !f.is_visible() && packet_version > 1) {
 						continue;
 					}
 
-					f.vision = 0;
+					// f.vision = 0;
 
 					f.time_node_last_unseen = fr.unsigned_32();
 					f.time_triangle_last_surveyed[0] = fr.unsigned_32();
