@@ -375,6 +375,9 @@ void EditorInteractive::add_showhide_menu() {
 }
 
 void EditorInteractive::rebuild_showhide_menu() {
+	const ShowHideEntry last_selection =
+	   showhidemenu_.has_selection() ? showhidemenu_.get_selected() : ShowHideEntry::kBuildingSpaces;
+
 	showhidemenu_.clear();
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether building spaces are
@@ -383,6 +386,8 @@ void EditorInteractive::rebuild_showhide_menu() {
 	                  ShowHideEntry::kBuildingSpaces,
 	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
 	                  pgettext("hotkey", "Space"));
+
+	showhidemenu_.select(ShowHideEntry::kBuildingSpaces);
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
 	 */
@@ -403,6 +408,8 @@ void EditorInteractive::rebuild_showhide_menu() {
 	showhidemenu_.add(draw_resources_ ? _("Hide Resources") : _("Show Resources"),
 	                  ShowHideEntry::kResources,
 	                  g_image_cache->get("images/wui/menus/toggle_resources.png"));
+
+	showhidemenu_.select(last_selection);
 }
 
 void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {

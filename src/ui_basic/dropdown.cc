@@ -463,7 +463,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			if (list_->is_visible()) {
 				set_value();
 				if (code.sym != SDLK_SPACE) {
-					set_list_visibility(false);
+					toggle_list();
 				}
 			} else if (code.sym == SDLK_SPACE) {
 				set_list_visibility(true);
