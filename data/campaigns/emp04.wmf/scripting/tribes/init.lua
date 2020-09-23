@@ -84,7 +84,7 @@
 -- See :ref:`defining_tribe_units` for further details on these files, and :ref:`lua_tribes_tribes_helptexts` on the helptext format.
 
 -- For formatting time strings
-include "tribes/scripting/help/global_helptexts.lua"
+include "tribes/scripting/help/time_strings.lua"
 
 push_textdomain("scenario_emp04.wmf")
 
