@@ -123,19 +123,8 @@ void FullscreenMenuLaunchSPG::enforce_player_names_and_tribes(Widelands::Map& ma
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
 }
 
-/**
- * back-button has been pressed
- */
 void FullscreenMenuLaunchSPG::clicked_back() {
-	//  The following behaviour might look strange at first view, but for the
-	//  user it seems as if the launchgame-menu is a child of mapselect and
-	//  not the other way around - just end_modal(0); will be seen as bug
-	//  from user point of view, so we reopen the mapselect-menu.
-	//	if (!clicked_select_map()) {
-	// No map has been selected: Go back to main menu
-	log_dbg("ending spg panel");
 	return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
-	//	}
 }
 
 void FullscreenMenuLaunchSPG::win_condition_selected() {

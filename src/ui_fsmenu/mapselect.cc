@@ -206,7 +206,6 @@ MapData const* FullscreenMenuMapSelect::get_map() const {
 	return &maps_data_[table_.get_selected()];
 }
 void FullscreenMenuMapSelect::clicked_back() {
-	log_dbg("ending map select");
 	FullscreenMenuLoadMapOrGame::clicked_back();
 }
 void FullscreenMenuMapSelect::clicked_ok() {
