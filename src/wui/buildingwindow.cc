@@ -529,8 +529,8 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}
 		} else if (upcast(InteractivePlayer, ipl, ibase())) {
-			show_enhance_confirm(*ipl, *construction_site,
-			                     construction_site->get_info().becomes->enhancement(), true);
+			show_enhance_confirm(
+			   *ipl, *construction_site, construction_site->get_info().becomes->enhancement(), true);
 		}
 		return;
 	}

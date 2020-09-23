@@ -30,8 +30,7 @@ namespace Widelands {
 class Building;
 }
 
-UI::Panel* create_soldier_capacity_control(UI::Panel& parent,
-                                           InteractiveBase&,
-                                           Widelands::Building& building);
+UI::Panel*
+create_soldier_capacity_control(UI::Panel& parent, InteractiveBase&, Widelands::Building& building);
 
 #endif  // end of include guard: WL_WUI_SOLDIERCAPACITYCONTROL_H

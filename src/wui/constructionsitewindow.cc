@@ -224,8 +224,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_stopped_->clickedto.connect([this, ps](bool stop) {
 				if (stop != ps->stopped) {
 					if (Widelands::Game* game = ibase()->get_game()) {
-						game->send_player_start_stop_building(
-						   *construction_site_.get(ibase()->egbase()));
+						game->send_player_start_stop_building(*construction_site_.get(ibase()->egbase()));
 					} else {
 						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 					}
@@ -297,7 +296,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 						game->send_player_militarysite_set_soldier_preference(
 						   *construction_site_.get(ibase()->egbase()),
 						   state ? Widelands::SoldierPreference::kRookies :
-							       Widelands::SoldierPreference::kHeroes);
+						           Widelands::SoldierPreference::kHeroes);
 					} else {
 						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 					}

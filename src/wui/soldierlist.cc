@@ -495,7 +495,7 @@ void SoldierList::set_soldier_preference(int32_t changed_to) {
 	if (Widelands::Game* game = ibase_.get_game()) {
 		game->send_player_militarysite_set_soldier_preference(
 		   building_, changed_to == 0 ? Widelands::SoldierPreference::kRookies :
-			                            Widelands::SoldierPreference::kHeroes);
+		                                Widelands::SoldierPreference::kHeroes);
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}

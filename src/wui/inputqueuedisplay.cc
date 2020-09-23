@@ -416,8 +416,7 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 		update_siblings_priority(state);
 	}
 	if (Widelands::Game* game = interactive_base_.get_game()) {
-		game->send_player_set_ware_priority(
-		   building_, type_, index_, priority, settings_ != nullptr);
+		game->send_player_set_ware_priority(building_, type_, index_, priority, settings_ != nullptr);
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}

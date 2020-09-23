@@ -33,9 +33,7 @@ using Widelands::SoldierControl;
  * via \ref SoldierControl
  */
 struct SoldierCapacityControl : UI::Box {
-	SoldierCapacityControl(UI::Panel* parent,
-	                       InteractiveBase& ib,
-	                       Widelands::Building& building);
+	SoldierCapacityControl(UI::Panel* parent, InteractiveBase& ib, Widelands::Building& building);
 
 protected:
 	void think() override;
