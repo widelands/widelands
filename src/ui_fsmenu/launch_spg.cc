@@ -19,7 +19,6 @@
 
 #include "ui_fsmenu/launch_spg.h"
 
-#include <base/log.h>
 #include <memory>
 
 #include "base/warning.h"
@@ -54,7 +53,6 @@ void FullscreenMenuLaunchSPG::start() {
  * Returns whether a map has been selected.
  */
 bool FullscreenMenuLaunchSPG::clicked_select_map() {
-	log_dbg("clicked select map executed");
 	if (!settings_->can_change_map()) {
 		return false;
 	}
