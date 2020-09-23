@@ -7,7 +7,7 @@ wl_library(wui_sound_options
     graphic_styles
     sound
     ui_basic
-  )
+)
 
 wl_library(wui_chat_ui
   SRCS
@@ -19,7 +19,7 @@ wl_library(wui_chat_ui
     game_chat_panel.h
     chat_msg_layout.h
     chat_msg_layout.cc
-    USES_SDL2
+  USES_SDL2
   DEPENDS
     base_exceptions
     base_i18n
@@ -33,7 +33,7 @@ wl_library(wui_chat_ui
     ui_basic
     widelands_options
     wui
-  )
+)
 
 wl_library(wui_economy_options
   SRCS
@@ -49,13 +49,13 @@ wl_library(wui_economy_options
     io_profile
     ui_basic
     wui_waresdisplay
-  )
+)
 
 wl_library(wui_mapview_pixelconstants
   SRCS
     mapviewpixelconstants.h
     mapviewpixelconstants.cc
-  )
+)
 
 wl_library(wui_mapview_pixelfunctions
   SRCS
@@ -66,7 +66,7 @@ wl_library(wui_mapview_pixelfunctions
     logic_map
     logic_widelands_geometry
     wui_mapview_pixelconstants
-  )
+)
 
 wl_library(wui_common_suggested_teams
   SRCS
@@ -78,7 +78,7 @@ wl_library(wui_common_suggested_teams
     graphic_playercolor
     logic_constants
     ui_basic
-  )
+)
 
 wl_library(wui_common_gamedetails
   SRCS
@@ -112,7 +112,7 @@ wl_library(wui_common_gamedetails
     logic_game_controller
     map_io_map_loader
     ui_basic
-  )
+)
 
 wl_library(wui_common_mapdetails
   SRCS
@@ -138,7 +138,7 @@ wl_library(wui_common_mapdetails
     map_io_map_loader
     ui_basic
     wui_common_suggested_teams
-  )
+)
 
 wl_library(wui_quicknavigation
   SRCS
@@ -146,13 +146,13 @@ wl_library(wui_quicknavigation
     quicknavigation.h
   DEPENDS
     wui_mapview
-  )
+)
 
 wl_library(wui_mapview
   SRCS
     mapview.cc
     mapview.h
-    USES_SDL2
+  USES_SDL2
   DEPENDS
     base_geometry
     base_macros
@@ -167,13 +167,13 @@ wl_library(wui_mapview
     widelands_ball_of_mud
     widelands_options
     wui_mapview_pixelfunctions
-  )
+)
 
 wl_library(wui_waresdisplay
   SRCS
     waresdisplay.cc
     waresdisplay.h
-    USES_SDL2
+  USES_SDL2
   DEPENDS
     base_exceptions
     base_i18n
@@ -183,14 +183,14 @@ wl_library(wui_waresdisplay
     logic
     logic_map_objects
     ui_basic
-  )
+)
 
 
 wl_library(wui_game_tips
   SRCS
     game_tips.cc
     game_tips.h
-    USES_SDL2
+  USES_SDL2
   DEPENDS
     base_i18n
     base_log
@@ -200,7 +200,7 @@ wl_library(wui_game_tips
     scripting_lua_table
     scripting_lua_interface
     ui_basic
-  )
+)
 
 
 wl_library(wui
@@ -296,7 +296,7 @@ wl_library(wui
     warehousewindow.h
     watchwindow.cc
     watchwindow.h
-    USES_SDL2
+  USES_SDL2
   DEPENDS
     ai
     base_exceptions
@@ -351,4 +351,4 @@ wl_library(wui
     wui_quicknavigation
     wui_sound_options
     wui_waresdisplay
-  )
+)
