@@ -890,7 +890,7 @@ bool Bob::check_node_blocked(Game& game, const FCoords& field, bool) {
 void Bob::set_owner(Player* const player) {
 	// log_dbg("++ Bob::set_owner()\n");
 	if (owner_ && position_.field) {
-		log_dbg("++ Bob::set_owner(): unsee\n");
+//		log_dbg("++ Bob::set_owner(): unsee\n");
 		owner_->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
 	// if (owner_) {
 		// owner_->remove_seer(*this, Area<FCoords>(get_position(), descr().vision_range()));

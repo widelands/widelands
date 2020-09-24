@@ -538,7 +538,7 @@ bool Warehouse::init(EditorGameBase& egbase) {
 
 	init_containers(*player);
 
-	log_dbg("++ Warehouse::init()\n");
+//	log_dbg("++ Warehouse::init()\n");
 	set_seeing(true);
 
 	// Even though technically, a warehouse might be completely empty,

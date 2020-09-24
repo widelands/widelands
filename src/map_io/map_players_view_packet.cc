@@ -106,8 +106,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					Player::Field& f = player->fields_[m];
 					// log_dbg("++ vision before: %u\n", f.vision);
 					Vision saved_vision = static_cast<Widelands::Vision>(stoi(field_vector[m]));
-					log_dbg("++ p%u(%d,%d): saved_vision = %u; f.vision = %u\n",
-						    p, map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision, f.vision);
+//					log_dbg("++ p%u(%d,%d): saved_vision = %u; f.vision = %u\n",
+//						    p, map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision, f.vision);
 					// assert(f.vision != 1);
 					assert(f.vision == 1 || f.vision % 2 == 0);
 					if (saved_vision == 1) {

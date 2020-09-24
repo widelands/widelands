@@ -500,7 +500,7 @@ bool Building::init(EditorGameBase& egbase) {
 	start_animation(egbase, descr().get_unoccupied_animation());
 
 	if (descr().type() == MapObjectType::WAREHOUSE) {
-		log_dbg("++ Building::init()\n");
+//		log_dbg("++ Building::init()\n");
 		set_seeing(true);
 	}
 
@@ -855,11 +855,11 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 }
 
 void Building::add_worker(Worker& worker) {
-	log_dbg("++ Building::add_worker()\n");
+//	log_dbg("++ Building::add_worker()\n");
 	// if (get_workers().empty()) {
 		// log_dbg("++ Building::add_worker(): empty\n");
 		if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
-			log_dbg("++ Building::add_worker(): not builder\n");
+//			log_dbg("++ Building::add_worker(): not builder\n");
 			set_seeing(true);
 		}
 	// }
@@ -870,7 +870,7 @@ void Building::add_worker(Worker& worker) {
 void Building::remove_worker(Worker& worker) {
 	PlayerImmovable::remove_worker(worker);
 	if (get_workers().empty() && descr().type() != MapObjectType::WAREHOUSE) {
-		log_dbg("++ Building::remove_worker()\n");
+//		log_dbg("++ Building::remove_worker()\n");
 		set_seeing(false);
 	}
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
@@ -900,7 +900,7 @@ void Building::set_seeing(bool see) {
 	Player* player = get_owner();
 	const Map& map = player->egbase().map();
 
-	log_dbg("++ Building::set_seeing(%s)\n", see ? "true" : "false");
+//	log_dbg("++ Building::set_seeing(%s)\n", see ? "true" : "false");
 	if (see) {
 		player->see_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 	} else {

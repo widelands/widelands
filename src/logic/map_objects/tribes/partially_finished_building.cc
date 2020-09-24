@@ -211,12 +211,12 @@ void PartiallyFinishedBuilding::request_builder_callback(
 	b.builder_request_ = nullptr;
 
 	w->start_task_buildingwork(game);
-	log_dbg("++ PartiallyFinishedBuilding::request_builder_callback()\n");
+//	log_dbg("++ PartiallyFinishedBuilding::request_builder_callback()\n");
 	// b.set_seeing(true);
 }
 
 void PartiallyFinishedBuilding::add_worker(Worker& worker) {
-	log_dbg("++ PartiallyFinishedBuilding::add_worker()\n");
+//	log_dbg("++ PartiallyFinishedBuilding::add_worker()\n");
 	Building::add_worker(worker);
 	// if (get_workers().empty()) {
 		// log_dbg("++ PartiallyFinishedBuilding::add_worker(): empty\n");

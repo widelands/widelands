@@ -1512,9 +1512,9 @@ void Player::unsee_area(const Area<FCoords>& area) {
 	const Widelands::Field& first_map_field = map[0];
 	MapRegion<Area<FCoords>> mr(map, area);
 	do {
-		if (mr.location().x == 181 && mr.location().x == 20) {
+		/*if (mr.location().x == 181 && mr.location().x == 20) {
 			log_dbg("++ unsee_area(): area.x = %d; area.y = %d\n", area.x, area.y);
-		}
+		}*/
 		unsee_node(mr.location().field - &first_map_field);
 	} while (mr.advance(map));
 }
@@ -1598,7 +1598,7 @@ void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
 		assert(field.vision % 2 == 0);
 		break;
 	}
-	log_dbg("++ Player::hide_or_reveal_field(): %u\n", field.vision);
+//	log_dbg("++ Player::hide_or_reveal_field(): %u\n", field.vision);
 }
 
 void Player::force_update_team_vision(MapIndex const i, bool visible) {
