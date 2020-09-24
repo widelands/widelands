@@ -1512,7 +1512,7 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 	}
 }
 
-SeersList Player::team_seers() {
+Player::SeersList Player::team_seers() {
 	SeersList team_seers_list;
 	for (const PlayerNumber& p : team_player_) {
 		Player& player = *egbase().get_player(p);
@@ -1526,7 +1526,7 @@ SeersList Player::team_seers() {
  * Return a list of seers that can see at least one field from the given area.
  * The list is approximately sorted by decreasing overlap of the given area and the seer's.
  */
-SeersList Player::seers_for(const Area<FCoords>& area) {
+Player::SeersList Player::seers_for(const Area<FCoords>& area) {
 	// Pick the seers and save them paired with the values for sorting.
 	std::list<std::pair<int, const MapObject*>> nearby_objects;
 	for (const PlayerNumber& p : team_player_) {
