@@ -104,6 +104,28 @@ struct VisionBenchmark {
 	}
 };
 
+struct VisionBenchmarkFunction {
+	std::chrono::steady_clock::time_point time_begin_;
+	std::chrono::steady_clock::time_point time_end_;
+	std::string message_;
+
+	VisionBenchmarkFunction() {}
+	VisionBenchmarkFunction(std::string message) {
+		message_ = message;
+		time_begin_ = std::chrono::steady_clock::now();
+	}
+
+	~VisionBenchmarkFunction() {
+		if (message_.empty()) {
+			return;
+		}
+		time_end_ = std::chrono::steady_clock::now();
+		std::cout << "++ " << message_ << " took "
+		          << std::chrono::duration_cast<std::chrono::microseconds>(time_end_ - time_begin_).count()
+		          << " µs" << std::endl;
+	}
+};
+
 void terraform_for_building(Widelands::EditorGameBase& egbase,
                             const Widelands::PlayerNumber player_number,
                             const Widelands::Coords& location,
@@ -414,6 +436,7 @@ void Player::AiPersistentState::initialize() {
 }
 
 void Player::update_team_players() {
+	VisionBenchmarkFunction benchmark_function = VisionBenchmarkFunction("update_team_players()");
 	// Tell all our old allies to forget us…
 	for (const PlayerNumber& p : team_players_) {
 		if (p != player_number()) {
@@ -1508,6 +1531,11 @@ void Player::see_area(const Area<FCoords>& area) {
 /// Decrement this player's vision for each node in an area.
 void Player::unsee_area(const Area<FCoords>& area) {
 	VisionBenchmark benchmark = VisionBenchmark(egbase_);
+	VisionBenchmarkFunction benchmark_function;
+	if (area.radius > 10) {
+		benchmark_function = VisionBenchmarkFunction(
+			(boost::format{"unsee_area() at (%1%,%2%)"} % area.x % area.y).str());
+	}
 	const Map& map = egbase().map();
 	const Widelands::Field& first_map_field = map[0];
 	MapRegion<Area<FCoords>> mr(map, area);
