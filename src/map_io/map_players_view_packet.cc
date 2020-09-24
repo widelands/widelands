@@ -36,7 +36,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint16_t kCurrentPacketVersion = 4;
 
 inline bool from_unsigned(unsigned value) {
 	return value == 1;
