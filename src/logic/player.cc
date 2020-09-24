@@ -1490,7 +1490,8 @@ Vision Player::unsee_node(MapIndex const i) {
 // See area
 Vision Player::vision(MapIndex const i) const {
 	// Node visible if > 1
-	return (see_all_ ? 3 : 0) + fields_[i].vision;
+	// return (see_all_ ? 3 : 0) + fields_[i].vision;
+	return fields_[i].vision;
 }
 
 /// Call see_node for each node in the area.
@@ -1512,6 +1513,9 @@ void Player::unsee_area(const Area<FCoords>& area) {
 	const Widelands::Field& first_map_field = map[0];
 	MapRegion<Area<FCoords>> mr(map, area);
 	do {
+		if (mr.location().x == 181 && mr.location().x == 20) {
+			log_dbg("++ unsee_area(): area.x = %d; area.y = %d\n", area.x, area.y);
+		}
 		unsee_node(mr.location().field - &first_map_field);
 	} while (mr.advance(map));
 	end_vision_benchmark(egbase_);
@@ -1594,6 +1598,7 @@ void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
 		assert(field.vision % 2 == 0);
 		break;
 	}
+	log_dbg("++ Player::hide_or_reveal_field(): %u\n", field.vision);
 	end_vision_benchmark(egbase_);
 }
 

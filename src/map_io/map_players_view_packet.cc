@@ -108,10 +108,11 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					Vision saved_vision = static_cast<Widelands::Vision>(stoi(field_vector[m]));
 					log_dbg("++ p%u(%d,%d): saved_vision = %u; f.vision = %u\n",
 						    p, map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision, f.vision);
-					assert(f.vision != 1);
-					assert(f.vision % 2 == 0);
+					// assert(f.vision != 1);
+					assert(f.vision == 1 || f.vision % 2 == 0);
 					if (saved_vision == 1) {
-						assert(f.vision == 0);
+						// assert(f.vision == 0);
+						assert(f.vision <= 1);
 						f.vision = 1;
 					} else if (saved_vision % 2 == 1) {
 						f.vision = std::max(f.vision, static_cast<Widelands::Vision>(2)) + 1;
@@ -122,6 +123,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						log_err("++ p%u(%d,%d): saved_vision %u != %u f.vision\n",
 						        p, map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision, f.vision);
 					}
+					assert(saved_vision == f.vision);
 					if (f.is_explored() && !f.is_visible()) {
 						seen_fields.insert(&f);
 					}
