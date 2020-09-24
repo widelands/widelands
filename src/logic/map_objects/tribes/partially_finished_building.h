@@ -74,6 +74,8 @@ public:
 	static void
 	request_builder_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
+	void add_worker(Worker&) override;
+
 private:
 	void request_builder(Game&);
 

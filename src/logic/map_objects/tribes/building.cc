@@ -856,13 +856,13 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 
 void Building::add_worker(Worker& worker) {
 	log_dbg("++ Building::add_worker()\n");
-	if (get_workers().empty()) {
-		log_dbg("++ Building::add_worker(): empty\n");
-		/*if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
-			log_dbg("++ Building::add_worker(): not builder\n");*/
+	// if (get_workers().empty()) {
+		// log_dbg("++ Building::add_worker(): empty\n");
+		if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
+			log_dbg("++ Building::add_worker(): not builder\n");
 			set_seeing(true);
-		// }
-	}
+		}
+	// }
 	PlayerImmovable::add_worker(worker);
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }

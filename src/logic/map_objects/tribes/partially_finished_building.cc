@@ -214,4 +214,16 @@ void PartiallyFinishedBuilding::request_builder_callback(
 	log_dbg("++ PartiallyFinishedBuilding::request_builder_callback()\n");
 	// b.set_seeing(true);
 }
+
+void PartiallyFinishedBuilding::add_worker(Worker& worker) {
+	log_dbg("++ PartiallyFinishedBuilding::add_worker()\n");
+	Building::add_worker(worker);
+	// if (get_workers().empty()) {
+		// log_dbg("++ PartiallyFinishedBuilding::add_worker(): empty\n");
+		/*if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
+			log_dbg("++ Building::add_worker(): not builder\n");*/
+			set_seeing(true);
+		// }
+	// }
+}
 }  // namespace Widelands
