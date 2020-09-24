@@ -13,7 +13,6 @@ tribes:new_immovable_type {
    name = "berry_bush_desert_hackberry_tiny",
    descname = _ "Desert Hackberry (tiny)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "tiny/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -38,7 +37,6 @@ tribes:new_immovable_type {
    name = "berry_bush_desert_hackberry_small",
    descname = _ "Desert Hackberry (small)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "small/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -63,7 +61,6 @@ tribes:new_immovable_type {
    name = "berry_bush_desert_hackberry_medium",
    descname = _ "Desert Hackberry (medium)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "medium/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -88,7 +85,6 @@ tribes:new_immovable_type {
    name = "berry_bush_desert_hackberry_ripe",
    descname = _ "Desert Hackberry (ripe)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "ripe/menu.png",
    terrain_affinity = terrain_affinity,
    programs = {

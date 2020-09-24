@@ -89,7 +89,6 @@ wl_library(widelands_ball_of_mud
     wlapplication.h
     wlapplication_messages.cc
     wlapplication_messages.h
-  USES_BOOST_REGEX
   USES_SDL2
   USES_SDL2_TTF
   DEPENDS
@@ -120,7 +119,6 @@ wl_library(widelands_ball_of_mud
     sound
     ui_basic
     ui_fsmenu_gameloading
-    ui_fsmenu_loading_common
     ui_fsmenu_main
     ui_fsmenu_maploading
     ui_fsmenu_misc

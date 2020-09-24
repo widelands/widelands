@@ -26,7 +26,7 @@
 
 #include "logic/addons.h"
 
-// The add-on related networking functions defined here use the cURL lib.
+// The add-on related networking functions defined here use the CURL lib.
 // Pro: I created a functional dummy server with no knowledge of the metaserver backend ;)
 // Con: Additional dependency – this is the only place in our code where libcurl is used
 

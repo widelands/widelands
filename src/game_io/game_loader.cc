@@ -73,8 +73,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	log_info("Game: Reading Preload Data ... ");
 	GamePreloadPacket preload;
 	preload.read(fs_, game_);
-	log_info(" → took %ums\n", timer.ms_since_last_query());
-
 	// Now that the preload data was read, we apply the add-ons.
 	// Note: Only world- and tribes-type add-ons are saved in savegames because those are the
 	// only ones where it makes a difference whether they are enabled during loading or not.
@@ -108,12 +106,10 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		GameClassPacket p;
 		p.read(fs_, game_);
 	}
-	log_info(" → took %ums\n", timer.ms_since_last_query());
 
 	log_info("Game: Reading Map Data ... ");
 	GameMapPacket map_packet;
 	map_packet.read(fs_, game_);
-	log_info("Game: Reading Map Data took %ums\n", timer.ms_since_last_query());
 
 	// This has to be loaded after the map packet so that the map's filesystem will exist.
 	// The custom tribe scripts are saved when the map scripting packet is saved, but we need
@@ -122,7 +118,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	if (map_fs->file_exists("scripting/tribes")) {
 		log_info("Game: Reading Scenario Tribes ... ");
 		game_.mutable_tribes()->register_scenario_tribes(map_fs);
-		log_info("Game: Reading Scenario Tribes took %ums\n", timer.ms_since_last_query());
 	}
 
 	// This also triggers loading the world and tribes, so we need a newline at the end of the log
@@ -132,7 +127,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		GamePlayerInfoPacket p;
 		p.read(fs_, game_);
 	}
-	log_info("Game: Reading Player Info took %ums\n", timer.ms_since_last_query());
 
 	log_info("Game: Calling read_complete()\n");
 	map_packet.read_complete(game_);
@@ -146,7 +140,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		GamePlayerEconomiesPacket p;
 		p.read(fs_, game_, mol);
 	}
-	log_info(" → took %ums\n", timer.ms_since_last_query());
 
 	log_info("Game: Reading ai persistent data ... ");
 	set_progress_message(_("AI"), 3);
@@ -154,7 +147,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		GamePlayerAiPersistentPacket p;
 		p.read(fs_, game_, mol);
 	}
-	log_info(" → took %ums\n", timer.ms_since_last_query());
 
 	log_info("Game: Reading Command Queue Data ... ");
 	set_progress_message(_("Command queue"), 4);
@@ -162,7 +154,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		GameCmdQueuePacket p;
 		p.read(fs_, game_, mol);
 	}
-	log_info(" → took %ums\n", timer.ms_since_last_query());
 
 	//  This must be after the command queue has been read.
 	log_info("Game: Parsing messages ... ");
@@ -182,7 +173,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			}
 		}
 	}
-	log_info(" → took %ums\n", timer.ms_since_last_query());
 
 	set_progress_message(_("Finishing"), 6);
 	// For compatibility hacks only
@@ -197,7 +187,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			GameInteractivePlayerPacket p;
 			p.read(fs_, game_, mol);
 		}
-		log_info(" → took %ums\n", timer.ms_since_last_query());
 	}
 
 	return 0;

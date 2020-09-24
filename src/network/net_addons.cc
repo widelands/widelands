@@ -20,6 +20,7 @@
 #include "network/net_addons.h"
 
 #include <cassert>
+#include <cstdlib>
 #include <cstring>
 #include <memory>
 
@@ -35,7 +36,7 @@
 // silence warnings triggered by curl.h
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 
-// all cURL-related code is inspired by
+// all CURL-related code is inspired by
 // https://stackoverflow.com/questions/1636333/download-file-using-libcurl-in-c-c
 
 void NetAddons::init() {
@@ -45,7 +46,7 @@ void NetAddons::init() {
 	}
 	curl_ = curl_easy_init();
 	if (!curl_) {
-		throw wexception("Unable to initialize cURL");
+		throw wexception("Unable to initialize CURL");
 	}
 }
 
@@ -88,10 +89,10 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	const CURLcode res = curl_easy_perform(curl_);
 
 	if (res != CURLE_OK) {
-		throw wexception("cURL terminated with error code %d", res);
+		throw wexception("CURL terminated with error code %d", res);
 	}
 	if (output.empty()) {
-		throw wexception("cURL output is empty");
+		throw wexception("CURL output is empty");
 	}
 
 	// We now have a list of the stuff we are interested in.
@@ -192,7 +193,7 @@ void NetAddons::download_addon_file(const std::string& name, const std::string& 
 	fclose(out_file);
 
 	if (res != CURLE_OK) {
-		throw wexception("cURL terminated with error code %d", res);
+		throw wexception("CURL terminated with error code %d", res);
 	}
 	const std::string result = check_downloaded_file(output);
 	if (!result.empty()) {
@@ -224,7 +225,7 @@ std::string NetAddons::download_i18n(const std::string& name, const std::string&
 	fclose(out_file);
 
 	if (res != CURLE_OK) {
-		log_err("Downloading add-on translation %s for %s to %s: cURL returned error code %d\n",
+		log_err("Downloading add-on translation %s for %s to %s: CURL returned error code %d\n",
 				locale.c_str(), name.c_str(), canonical_output.c_str(), res);
 		return "";
 	}

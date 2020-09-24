@@ -75,6 +75,7 @@ public:
 	const BuildingDescr* get_building_descr(DescriptionIndex building_index) const;
 	BuildingDescr* get_mutable_building_descr(DescriptionIndex building_index) const;
 	const ImmovableDescr* get_immovable_descr(DescriptionIndex immovable_index) const;
+	ImmovableDescr* get_mutable_immovable_descr(DescriptionIndex immovable_index) const;
 	const ShipDescr* get_ship_descr(DescriptionIndex ship_index) const;
 	const WareDescr* get_ware_descr(DescriptionIndex ware_index) const;
 	WareDescr* get_mutable_ware_descr(DescriptionIndex ware_index) const;

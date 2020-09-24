@@ -98,7 +98,6 @@ wl_library(graphic_gl_utils
     gl/system_headers.h
     gl/utils.cc
     gl/utils.h
-  USES_BOOST_REGEX
   USES_SDL2
   USES_OPENGL
   DEPENDS
@@ -201,6 +200,7 @@ wl_library(graphic_minimap_renderer
     base_geometry
     base_macros
     economy
+    graphic_playercolor
     graphic_surface
     logic
     logic_map

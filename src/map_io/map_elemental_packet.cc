@@ -19,6 +19,8 @@
 
 #include "map_io/map_elemental_packet.h"
 
+#include <cstdlib>
+
 #include <boost/algorithm/string.hpp>
 
 #include "base/log.h"

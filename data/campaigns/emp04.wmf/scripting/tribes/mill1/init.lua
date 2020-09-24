@@ -5,10 +5,18 @@ push_textdomain("scenario_emp04.wmf")
 tribes:new_productionsite_type {
    name = "empire_mill1",
    descname = pgettext("empire_building", "Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "empire_mill2",
+
+   enhancement = {
+      name = "empire_mill",
+      enhancement_cost = {
+         log = 1,
+         granite = 1,
+         marble = 1
+      },
+      enhancement_return_on_dismantle = {}
+   },
 
    buildcost = {
       log = 3,

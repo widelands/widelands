@@ -6,7 +6,6 @@ tribes:new_militarysite_type {
    name = "empire_barrier",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Barrier"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -18,16 +17,6 @@ tribes:new_militarysite_type {
    },
    return_on_dismantle = {
       log = 1,
-      planks = 1,
-      granite = 1
-   },
-   enhancement_cost = {
-      log = 1,
-      planks = 2,
-      granite = 1,
-      marble = 1
-   },
-   return_on_dismantle_on_enhanced = {
       planks = 1,
       granite = 1
    },

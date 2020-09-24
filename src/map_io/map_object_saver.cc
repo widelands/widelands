@@ -63,7 +63,7 @@ MapObjectSaver::MapObjectRec& MapObjectSaver::get_object_record(const MapObject&
 #ifndef NDEBUG
 	rec.description = to_string(obj.descr().type());
 	rec.description += " (";
-	rec.description += obj.serial();
+	rec.description += std::to_string(obj.serial());
 	rec.description += ')';
 #endif
 	rec.fileserial = ++lastserial_;

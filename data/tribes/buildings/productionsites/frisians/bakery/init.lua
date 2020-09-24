@@ -6,10 +6,24 @@ tribes:new_productionsite_type {
    name = "frisians_bakery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Bakery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_honey_bread_bakery",
+
+   enhancement = {
+      name = "frisians_honey_bread_bakery",
+      enhancement_cost = {
+         brick = 3,
+         log = 3,
+         granite = 1,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         brick = 2,
+         granite = 1,
+         log = 1,
+         reed = 2
+      }
+   },
 
    buildcost = {
       brick = 3,

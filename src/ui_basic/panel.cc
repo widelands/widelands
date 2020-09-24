@@ -446,6 +446,16 @@ void Panel::set_visible(bool const on) {
 	} else if (parent_ && parent_->focus_ == this) {
 		parent_->focus_ = nullptr;
 	}
+	if (parent_) {
+		parent_->on_visibility_changed();
+	}
+}
+
+/**
+ * Called on a child's parent when visibility of child changed
+ * Overridden in UI::Box
+ */
+void Panel::on_visibility_changed() {
 }
 
 /**
@@ -461,8 +471,15 @@ void Panel::draw(RenderTarget&) {
 void Panel::draw_border(RenderTarget&) {
 }
 
-Recti Panel::focus_overlay_rect() {
-	return Recti(0, 0, get_w(), get_h());
+std::vector<Recti> Panel::focus_overlay_rects() {
+	const int f = g_style_manager->focus_border_thickness();
+	const int16_t w = get_w();
+	const int16_t h = get_h();
+	if (w < 2 * f || h < 2 * f) {
+		return {Recti(0, 0, w, h)};
+	}
+	return {Recti(0, 0, w, f), Recti(0, h - f, w, f), Recti(0, f, f, h - 2 * f),
+	        Recti(w - f, f, f, h - 2 * f)};
 }
 
 /**
@@ -471,17 +488,17 @@ Recti Panel::focus_overlay_rect() {
  */
 void Panel::draw_overlay(RenderTarget& dst) {
 	if (has_focus()) {
-		bool has_toplevel_focus = (focus_ == nullptr);
 		for (Panel* p = this; p->parent_; p = p->parent_) {
 			if (p->parent_->focus_ != p) {
-				has_toplevel_focus = false;
-				break;
+				// doesn't have toplevel focus
+				return;
 			}
 		}
-		dst.fill_rect(focus_overlay_rect(),
-		              has_toplevel_focus ? g_style_manager->focused_color() :
-		                                   g_style_manager->semi_focused_color(),
-		              BlendMode::Default);
+		for (const Recti& r : focus_overlay_rects()) {
+			dst.fill_rect(
+			   r, focus_ ? g_style_manager->semi_focused_color() : g_style_manager->focused_color(),
+			   BlendMode::Default);
+		}
 	}
 }
 
@@ -796,6 +813,12 @@ void Panel::die() {
 		}
 	}
 }
+/**
+ * Called on a child's parent just before child is deleted.
+ * Overridden in UI::Box
+ */
+void Panel::on_death(Panel*) {
+}
 
 /**
  * Wrapper around SoundHandler::play_fx() to prevent having to include
@@ -825,6 +848,7 @@ void Panel::check_child_death() {
 		next = p->next_;
 
 		if (p->flags_ & pf_die) {
+			p->parent_->on_death(p);
 			delete p;
 			p = nullptr;
 		} else if (p->flags_ & pf_child_die) {
@@ -1081,6 +1105,15 @@ bool Panel::get_key_state(const SDL_Scancode key) const {
 	return WLApplication::get()->get_key_state(key);
 }
 
+UI::Panel* Panel::get_open_dropdown() {
+	for (Panel* child = first_child_; child; child = child->next_) {
+		if (UI::Panel* dd = child->get_open_dropdown()) {
+			return dd;
+		}
+	}
+	return nullptr;
+}
+
 /**
  * Determine which panel is to receive a mouse event.
  *
@@ -1094,6 +1127,13 @@ Panel* Panel::ui_trackmouse(int32_t& x, int32_t& y) {
 		mousein = rcv = mousegrab_;
 	} else {
 		mousein = modal_;
+	}
+
+	// ugly hack to handle dropdowns in modal windows correctly
+	if (mousein->get_parent()) {
+		if (UI::Panel* dd = mousein->get_open_dropdown()) {
+			mousein = rcv = dd;
+		}
 	}
 
 	x -= mousein->x_;
@@ -1203,8 +1243,13 @@ bool Panel::ui_key(bool const down, SDL_Keysym const code) {
 	if (!allow_user_input_) {
 		return true;
 	}
-
-	return modal_->do_key(down, code);
+	Panel* p = modal_;
+	if (p->get_parent()) {
+		if (UI::Panel* dd = p->get_open_dropdown()) {
+			p = dd;
+		}
+	}
+	return p->do_key(down, code);
 }
 
 /**

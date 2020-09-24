@@ -30,7 +30,8 @@
 #include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
+#include "ui_basic/window.h"
+#include "ui_fsmenu/main.h"
 #include "wui/sound_options.h"
 
 class FullscreenMenuOptions;
@@ -43,6 +44,7 @@ public:
 		// Interface options
 		int32_t xres;
 		int32_t yres;
+		bool maximized;
 		bool fullscreen;
 		bool inputgrab;
 		uint32_t maxfps;
@@ -76,13 +78,14 @@ public:
 		uint32_t active_tab;
 	};
 
-	explicit OptionsCtrl(Section&);
+	explicit OptionsCtrl(FullscreenMenuMain&, Section&);
 	void handle_menu();
 	OptionsCtrl::OptionsStruct options_struct(uint32_t active_tab);
 	void save_options();
 
 private:
 	Section& opt_section_;
+	FullscreenMenuMain& parent_;
 	std::unique_ptr<FullscreenMenuOptions> opt_dialog_;
 };
 
@@ -90,10 +93,12 @@ private:
  * Fullscreen Optionsmenu. A modal optionsmenu
  */
 
-class FullscreenMenuOptions : public FullscreenMenuBase {
+class FullscreenMenuOptions : public UI::Window {
 public:
-	explicit FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt);
+	explicit FullscreenMenuOptions(FullscreenMenuMain&, OptionsCtrl::OptionsStruct opt);
 	OptionsCtrl::OptionsStruct get_values();
+
+	bool handle_key(bool, SDL_Keysym) override;
 
 private:
 	void layout() override;
@@ -107,13 +112,6 @@ private:
 	// Restores old options when canceled
 	void clicked_cancel();
 
-	const uint32_t padding_;
-	uint32_t butw_;
-	uint32_t buth_;
-	uint32_t hmargin_;
-	uint32_t tab_panel_y_;
-
-	UI::Textarea title_;
 	UI::Box button_box_;
 	UI::Button cancel_, apply_, ok_;
 
@@ -128,8 +126,7 @@ private:
 
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
-	UI::Dropdown<uintptr_t> resolution_dropdown_;
-	UI::Checkbox fullscreen_;
+	UI::Dropdown<int> resolution_dropdown_;
 	UI::Checkbox inputgrab_;
 	UI::Checkbox sdl_cursor_;
 	UI::SpinBox sb_maxfps_;

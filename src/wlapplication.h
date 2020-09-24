@@ -39,6 +39,8 @@
 
 #include "base/vector.h"
 
+class FullscreenMenuMain;
+
 namespace Widelands {
 class Game;
 }
@@ -168,16 +170,13 @@ struct WLApplication {
 	void set_mouse_lock(bool locked);
 	// @}
 
-	// Refresh the graphics settings with the latest options.
-	void refresh_graphics();
-
 	// Pump SDL events and dispatch them.
 	void handle_input(InputCallback const*);
 
 	void mainmenu();
 	void mainmenu_tutorial();
 	void mainmenu_singleplayer();
-	void mainmenu_multiplayer();
+	void mainmenu_multiplayer(const FullscreenMenuMain&, bool internet);
 	void mainmenu_editor();
 
 	bool new_game();

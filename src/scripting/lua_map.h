@@ -195,13 +195,13 @@ public:
 	 */
 	int get_descname(lua_State*);
 	int get_icon_name(lua_State*);
-	int get_helptext_script(lua_State*);
 	int get_name(lua_State*);
 	int get_type_name(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
+	int helptexts(lua_State*);
 
 	/*
 	 * C methods
@@ -300,8 +300,8 @@ public:
 	int get_is_port(lua_State*);
 	int get_size(lua_State*);
 	int get_isproductionsite(lua_State*);
-	int get_returned_wares(lua_State*);
-	int get_returned_wares_enhanced(lua_State*);
+	int get_returns_on_dismantle(lua_State*);
+	int get_enhancement_returns_on_dismantle(lua_State*);
 	int get_vision_range(lua_State*);
 	int get_workarea_radius(lua_State*);
 
@@ -377,9 +377,17 @@ public:
 	 * Properties
 	 */
 	int get_inputs(lua_State*);
+	int get_collected_bobs(lua_State*);
+	int get_collected_immovables(lua_State*);
+	int get_collected_resources(lua_State*);
+	int get_created_bobs(lua_State*);
+	int get_created_immovables(lua_State*);
+	int get_created_resources(lua_State*);
 	int get_output_ware_types(lua_State*);
 	int get_output_worker_types(lua_State*);
 	int get_production_programs(lua_State*);
+	int get_supported_productionsites(lua_State*);
+	int get_supported_by_productionsites(lua_State*);
 	int get_working_positions(lua_State*);
 
 	/*

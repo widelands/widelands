@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018,2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-23 15:23+0000\n"
-"PO-Revision-Date: 2018-11-26 08:46+0000\n"
+"POT-Creation-Date: 2020-09-11 11:58+0000\n"
+"PO-Revision-Date: 2020-09-06 14:34+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgid ""
 " finish a castle at the end of the first island, you are granted a second "
 "headquarters on a second island, which will contain all wares from your "
 "first headquarters."
-msgstr "Insel-Jumpen is een Speel im Atlantisken Bruuk. De Regels sünd eenfach: Du begünnst mit eenem Raadhuus up eener Insel. Wenn du am Enne vun de eersten Insel een Slött baust, kriggst du een nejes Raadhuus up eener tweeden Insel, un 't hett all Waren vum eersten Raadhuus."
+msgstr "Insel-Jumpen is een Speel im Atlantisken Bruuk. De Regels sünd eenfach: Du begünnst mit eenem Raadhuus up eener Insel. Wenn du am Enn vun de eersten Insel een Slött baust, kriggst du een nejes Raadhuus up eener tweeden Insel, un 't hett all Waren vum eersten Raadhuus."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
@@ -80,7 +80,7 @@ msgstr "Un pass up dienen Blinkerflint un Edelstenen up. Verklüngel se nich."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:29
 msgid "Finish Rewards"
-msgstr "Lohn am Enne"
+msgstr "Lohn am Enn"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:30
 msgid "First Island"

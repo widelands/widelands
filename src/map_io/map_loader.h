@@ -44,6 +44,10 @@ public:
 	// in that vector and enable the ones required by the map.
 	virtual int32_t preload_map(bool as_scenario, std::vector<AddOnInfo>* addons) = 0;
 	virtual int32_t load_map_complete(EditorGameBase&, MapLoader::LoadType) = 0;
+	virtual int32_t load_map_for_render(EditorGameBase&) {
+		// cannot load map for rendering only -> no map preview
+		return 1;
+	}
 
 	Map& map() {
 		return map_;

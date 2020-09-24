@@ -23,7 +23,12 @@
 #include <memory>
 #include <string>
 
+#include <SDL_version.h>
 #include <SDL_video.h>
+
+#if SDL_VERSION_ATLEAST(2, 0, 5)
+#define RESIZABLE_WINDOW
+#endif
 
 class RenderTarget;
 class Screen;
@@ -48,23 +53,31 @@ public:
 	// window that fills the screen. The 'trace_gl' parameter gets passed on to
 	// 'Gl::initialize'.
 	enum class TraceGl { kNo, kYes };
-	void
-	initialize(const TraceGl& trace_gl, int window_mode_w, int window_mode_height, bool fullscreen);
+	void initialize(const TraceGl& trace_gl,
+	                int window_mode_w,
+	                int window_mode_height,
+	                bool fullscreen,
+	                bool maximized);
 
 	// Gets and sets the resolution.
 	// Use 'resize_window = true' to resize the window to the new resolution.
 	// Use 'resize_window = false' if the window has already been resized.
 	void change_resolution(int w, int h, bool resize_window);
-	int get_xres();
-	int get_yres();
+	int get_xres() const;
+	int get_yres() const;
+	int get_window_mode_xres() const;
+	int get_window_mode_yres() const;
+
+	bool maximized() const;
+	void set_maximized(bool);
 
 	// Changes the window to be fullscreen or not.
-	bool fullscreen();
+	bool fullscreen() const;
 	void set_fullscreen(bool);
 
 	RenderTarget* get_render_target();
 	void refresh();
-	SDL_Window* get_sdlwindow() {
+	SDL_Window* get_sdlwindow() const {
 		return sdl_window_;
 	}
 
@@ -74,7 +87,7 @@ public:
 	void screenshot(const std::string& fname);
 
 private:
-	// Unmaximize the window and set its size.
+	// Set the window size. Use this instead of calling SDL_SetWindowSize directly.
 	void set_window_size(int w, int h);
 
 	// Called when the resolution (might) have changed.
@@ -83,6 +96,7 @@ private:
 	// The height & width of the window should we be in window mode.
 	int window_mode_width_ = 0;
 	int window_mode_height_ = 0;
+	bool window_mode_maximized_ = false;
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()

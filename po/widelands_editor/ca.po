@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-23 15:23+0000\n"
-"PO-Revision-Date: 2020-05-09 17:51+0000\n"
+"POT-Creation-Date: 2020-09-11 11:58+0000\n"
+"PO-Revision-Date: 2020-09-04 17:35+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -189,41 +189,50 @@ msgstr "Tal com podeu veure, l'editor està encara en procés de construcció. A
 msgid "The wiki also includes a short tutorial on how to build a map."
 msgstr "El wiki també inclou un petit tutorial sobre com crear un mapa."
 
-#: ../../data/scripting/editor/terrain_help.lua:21
+#: ../../data/scripting/editor/terrain_help.lua:22
 msgid "Resources"
 msgstr "Recursos"
 
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
-#: ../../data/scripting/editor/terrain_help.lua:25
+#: ../../data/scripting/editor/terrain_help.lua:26
 msgid "Valid Resource:"
 msgstr "Recurs vàlid:"
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
-#: ../../data/scripting/editor/terrain_help.lua:28
+#: ../../data/scripting/editor/terrain_help.lua:29
 msgid "Valid Resources:"
 msgstr "Recursos vàlids:"
 
-#: ../../data/scripting/editor/terrain_help.lua:39
+#: ../../data/scripting/editor/terrain_help.lua:40
 msgid "Default:"
 msgstr "Per defecte:"
 
 #. TRANSLATORS: e.g. "5x Water"
-#: ../../data/scripting/editor/terrain_help.lua:41
+#: ../../data/scripting/editor/terrain_help.lua:42
 msgid "%1%x %2%"
 msgstr "%1%x %2%"
 
 #. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:72
+#: ../../data/scripting/editor/terrain_help.lua:56
+#: ../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
 msgstr "Probabilitat de creixement d'arbres"
 
-#: ../../data/scripting/editor/terrain_help.lua:77
+#: ../../data/scripting/editor/terrain_help.lua:61
+#: ../../data/scripting/editor/terrain_tooltip.lua:38
 msgid "No trees will grow here."
 msgstr "Els arbres no creixeran en aquest terreny."
+
+#: ../../data/scripting/editor/terrain_tooltip.lua:26
+#: ../../data/scripting/editor/tree_tooltip.lua:23
+#, lua-format
+msgid "%2.1f%%"
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
 #: ../../data/scripting/editor/tree_help.lua:19
+#: ../../data/scripting/editor/tree_tooltip.lua:32
 msgid "Preferred terrains"
 msgstr "Terrenys preferits"

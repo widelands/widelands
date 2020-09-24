@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-23 15:23+0000\n"
-"PO-Revision-Date: 2020-07-23 09:10+0000\n"
+"POT-Creation-Date: 2020-09-11 11:58+0000\n"
+"PO-Revision-Date: 2020-09-11 16:44+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -412,6 +412,10 @@ msgstr "Lang nadeem een Steern in een paar Bargen fallen is, blöömt dat Leven 
 msgid "Crossing the Horizon"
 msgstr "Över de Kimm"
 
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
+msgid "Kristin – edited by 3plus4i"
+msgstr "Kristin – vun 3plus4i bewarkt"
+
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Rüst dien Schipp ut un seil tum Kimm."
@@ -446,9 +450,9 @@ msgstr "De Dolomiten, de Kroon vun de Alpen, sünd för hör unbannig Mooigheid 
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
-"There is lot of flat ground on the mountains. Unfortunately, most of it is "
-"vertical – use the little building space you have wisely. A fortress at the "
-"mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"The mountains have an abundance of flat ground. Unfortunately, most of it is"
+" vertical – use the little building space you have wisely. A fortress at the"
+" mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it's the only way to find all the precious farm spaces."
 msgstr "Dat gifft vööl flackes Land up deesen Bargen, aver dat meeste daarvun gaht leider stuuv na boven – bruuk dat bietje Rüümte tum Bauen, wat du hest, klook. Eene Schanz in eenem knappen Bargpass is een bannig godes Hinner för feindelke Soldateree – bruuk de Landskupp to dienem Vördeel. Kapp all Bomen of un vergroter dien Gewest waar du kannst – blot so kannst du de düren Steden för Buurdereen finnen."
@@ -973,6 +977,12 @@ msgid ""
 "Many beautiful, green islands await the ones brave enough to pass the "
 "thousand waves, twinkling in the sun."
 msgstr "Völe moje, gröne Insels wachten up Lüde, wat modig genoog sünd, över de dusend Wellen to seilen, wat in de Sunn blinken."
+
+#: ../../data/maps/Twinkling_Waves.wmf/elemental:11
+msgid ""
+"Take care not to build your ships in the lagoons. They cannot pass through "
+"the reefs to the main ocean, where your ports are located."
+msgstr "Pass up, diene Schippen nich in de Meren to bauen. Se könen nich dör de Riffen in de grote See komen, waar de Muden sünd."
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"

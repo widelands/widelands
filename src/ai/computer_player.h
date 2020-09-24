@@ -33,6 +33,8 @@ namespace Widelands {
 class Game;
 }  // namespace Widelands
 
+namespace AI {
+
 /**
  * The generic interface to AI instances, or "computer players".
  *
@@ -97,5 +99,5 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(ComputerPlayer);
 };
-
+}  // namespace AI
 #endif  // end of include guard: WL_AI_COMPUTER_PLAYER_H

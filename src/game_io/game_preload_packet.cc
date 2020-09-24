@@ -19,6 +19,7 @@
 
 #include "game_io/game_preload_packet.h"
 
+#include <cstdlib>
 #include <memory>
 
 #include "base/log.h"

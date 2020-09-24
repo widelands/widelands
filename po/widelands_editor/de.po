@@ -5,14 +5,14 @@
 # Elisabeth Jäger, 2016-2017
 # Jonas Jonas <jonas.burger@googlemail.com>, 2016
 # Klaus Halfmann <klaus.halfmann@arcor.de>, 2016
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
 # Elisabeth Jäger, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-23 15:23+0000\n"
-"PO-Revision-Date: 2019-12-05 13:32+0000\n"
+"POT-Creation-Date: 2020-09-11 11:58+0000\n"
+"PO-Revision-Date: 2020-09-04 09:40+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -193,41 +193,50 @@ msgstr "Wie du sehen kannst, wird am Editor noch hart gearbeitet. Und so wird mi
 msgid "The wiki also includes a short tutorial on how to build a map."
 msgstr "Das Wiki bietet außerdem eine kurze Einführung, wie man eine Karte erstellt."
 
-#: ../../data/scripting/editor/terrain_help.lua:21
+#: ../../data/scripting/editor/terrain_help.lua:22
 msgid "Resources"
 msgstr "Rohstoffe"
 
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
-#: ../../data/scripting/editor/terrain_help.lua:25
+#: ../../data/scripting/editor/terrain_help.lua:26
 msgid "Valid Resource:"
 msgstr "Möglicher Rohstoff:"
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
-#: ../../data/scripting/editor/terrain_help.lua:28
+#: ../../data/scripting/editor/terrain_help.lua:29
 msgid "Valid Resources:"
 msgstr "Mögliche Rohstoffe:"
 
-#: ../../data/scripting/editor/terrain_help.lua:39
+#: ../../data/scripting/editor/terrain_help.lua:40
 msgid "Default:"
 msgstr "Standard:"
 
 #. TRANSLATORS: e.g. "5x Water"
-#: ../../data/scripting/editor/terrain_help.lua:41
+#: ../../data/scripting/editor/terrain_help.lua:42
 msgid "%1%x %2%"
 msgstr "%1%x %2%"
 
 #. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:72
+#: ../../data/scripting/editor/terrain_help.lua:56
+#: ../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
 msgstr "Wahrscheinlichkeit von Baumwuchs"
 
-#: ../../data/scripting/editor/terrain_help.lua:77
+#: ../../data/scripting/editor/terrain_help.lua:61
+#: ../../data/scripting/editor/terrain_tooltip.lua:38
 msgid "No trees will grow here."
 msgstr "Hier wachsen keine Bäume."
+
+#: ../../data/scripting/editor/terrain_tooltip.lua:26
+#: ../../data/scripting/editor/tree_tooltip.lua:23
+#, lua-format
+msgid "%2.1f%%"
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
 #: ../../data/scripting/editor/tree_help.lua:19
+#: ../../data/scripting/editor/tree_tooltip.lua:32
 msgid "Preferred terrains"
 msgstr "Bevorzugte Gelände"

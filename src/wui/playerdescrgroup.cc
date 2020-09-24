@@ -143,8 +143,8 @@ void PlayerDescriptionGroup::update() {
 					if (player.random_ai) {
 						title += _("Random AI");
 					} else {
-						const ComputerPlayer::Implementation* impl =
-						   ComputerPlayer::get_implementation(player.ai);
+						const AI::ComputerPlayer::Implementation* impl =
+						   AI::ComputerPlayer::get_implementation(player.ai);
 						title = _(impl->descname);
 					}
 				}

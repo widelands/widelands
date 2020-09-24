@@ -6,20 +6,8 @@ tribes:new_productionsite_type {
    name = "frisians_mead_brewery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Mead Brewery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-
-   enhancement_cost = {
-      brick = 3,
-      granite = 2,
-      log = 1,
-      reed = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      brick = 2,
-      granite = 1
-   },
 
    spritesheets = {
       idle = {

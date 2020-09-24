@@ -6,19 +6,8 @@ tribes:new_productionsite_type {
    name = "empire_inn",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Inn"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-
-   enhancement_cost = {
-      planks = 2,
-      marble = 2,
-      marble_column = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      planks = 1,
-      marble = 2
-   },
 
    animations = {
       idle = {

@@ -210,6 +210,28 @@ void ObjectManager::remove(MapObject& obj) {
 	objects_.erase(obj.serial_);
 }
 
+bool ObjectManager::object_still_available(const MapObject* const obj) const {
+	// TODO(Niektory): This function is used to check whether an object pointer is still valid
+	// by comparing it to known valid pointers. Not only it is slow, the C++ standard says:
+	// "Any other use of an invalid pointer value has implementation-defined behavior.
+	// Some implementations might define that copying an invalid pointer value causes
+	// a system-generated runtime fault."
+	// Instead of using this function after potential deletion we should ensure at the moment
+	// of an object's deletion that no pointers to it remain.
+
+	if (!obj) {
+		return false;
+	}
+	MapObjectMap::const_iterator it = objects_.begin();
+	while (it != objects_.end()) {
+		if (it->second == obj) {
+			return true;
+		}
+		++it;
+	}
+	return false;
+}
+
 /*
  * Return the list of all serials currently in use
  */
@@ -253,21 +275,21 @@ MapObjectDescr IMPLEMENTATION
 */
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_name,
-                               const std::string& init_descname,
-                               const std::string& init_helptext_script)
-   : type_(init_type),
-     name_(init_name),
-     descname_(init_descname),
-     helptext_script_(init_helptext_script) {
+                               const std::string& init_descname)
+   : type_(init_type), name_(init_name), descname_(init_descname) {
 }
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_name,
                                const std::string& init_descname,
                                const LuaTable& table)
-   : MapObjectDescr(init_type,
-                    init_name,
-                    init_descname,
-                    table.has_key("helptext_script") ? table.get_string("helptext_script") : "") {
+   : MapObjectDescr(init_type, init_name, init_descname) {
+	if (table.has_key("helptext_script")) {
+		// TODO(GunChleoc): Compatibility - remove after v1.0
+		log_warn("Helptexts script for %s is obsolete - please move strings to "
+		         "tribes/initializations/<tribename>/units.lua",
+		         name().c_str());
+	}
+
 	bool has_animations = false;
 	// TODO(GunChleoc): When all animations have been converted, require that animation_directory is
 	// not empty if the map object has animations.
@@ -504,6 +526,20 @@ MapObjectDescr::AttributeIndex MapObjectDescr::get_attribute_id(const std::strin
 	}
 }
 
+void MapObjectDescr::set_helptexts(const std::string& tribename,
+                                   std::map<std::string, std::string> localized_helptext) {
+	// Create or overwrite
+	helptexts_[tribename] = std::move(localized_helptext);
+}
+
+const std::map<std::string, std::string>&
+MapObjectDescr::get_helptexts(const std::string& tribename) const {
+	assert(has_helptext(tribename));
+	return helptexts_.at(tribename);
+}
+bool MapObjectDescr::has_helptext(const std::string& tribename) const {
+	return helptexts_.count(tribename) == 1;
+}
 /*
 ==============================================================================
 
@@ -728,8 +764,9 @@ void MapObject::Loader::load(FileRead& fr) {
 			throw wexception("%u: %s", serial, e.what());
 		}
 
-		if (packet_version == kCurrentPacketVersionMapObject) {
-			get_object()->reserved_by_worker_ = fr.unsigned_8();
+		MapObject& obj = *get_object();
+		if (packet_version >= 2) {
+			obj.reserved_by_worker_ = fr.unsigned_8();
 		}
 	} catch (const WException& e) {
 		throw wexception("map object: %s", e.what());

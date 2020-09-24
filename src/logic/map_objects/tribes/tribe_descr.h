@@ -147,10 +147,6 @@ public:
 		return workers_order_;
 	}
 
-	const std::vector<std::string>& get_ship_names() const {
-		return ship_names_;
-	}
-
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
 
@@ -162,9 +158,6 @@ private:
 	void load_immovables(const LuaTable& table, Tribes& tribes, const World& world);
 	void load_workers(const LuaTable& table, Tribes& tribes);
 	void load_buildings(const LuaTable& table, Tribes& tribes);
-
-	/// Registers a building with the tribe
-	void add_building(const std::string& buildingname, Tribes& tribes);
 
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername, Tribes& tribes);
@@ -198,7 +191,6 @@ private:
 
 	std::vector<DescriptionIndex> buildings_;
 	std::set<DescriptionIndex> immovables_;  // The player immovables
-	std::vector<std::string> ship_names_;
 	std::set<DescriptionIndex> workers_;
 	std::set<DescriptionIndex> wares_;
 	ResourceIndicatorSet resource_indicators_;

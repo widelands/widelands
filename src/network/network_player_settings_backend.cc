@@ -19,6 +19,8 @@
 
 #include "network/network_player_settings_backend.h"
 
+#include <cstdlib>
+
 #include "ai/computer_player.h"
 
 void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSettings::State state) {
@@ -35,14 +37,15 @@ void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id,
 		return;
 	}
 	if (random_ai) {
-		const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
-		ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
+		const AI::ComputerPlayer::ImplementationVector& impls =
+		   AI::ComputerPlayer::get_implementations();
+		AI::ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
 		if (impls.size() > 1) {
 			do {
 				// Choose a random AI
 				const size_t random = (std::rand() % impls.size());  // NOLINT
 				it = impls.begin() + random;
-			} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
+			} while ((*it)->type == AI::ComputerPlayer::Implementation::Type::kEmpty);
 		}
 		s->set_player_ai(id, (*it)->name, random_ai);
 	} else {

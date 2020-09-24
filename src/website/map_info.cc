@@ -34,8 +34,6 @@
 #include "website/json/json.h"
 #include "website/website_common.h"
 
-using namespace Widelands;
-
 int main(int argc, char** argv) {
 	if (!(2 <= argc && argc <= 3)) {
 		log_err("Usage: %s <map file>\n", argv[0]);
@@ -55,7 +53,7 @@ int main(int argc, char** argv) {
 		FileSystem* in_out_filesystem = &FileSystem::create(map_dir);
 		g_fs->add_file_system(in_out_filesystem);
 
-		EditorGameBase egbase(nullptr);
+		Widelands::EditorGameBase egbase(nullptr);
 		auto* map = egbase.mutable_map();
 		std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(map_file));
 
@@ -69,8 +67,7 @@ int main(int argc, char** argv) {
 			log_err("This map depends on add-ons!\n");
 			return 1;
 		}
-
-		ml->load_map_complete(egbase, Widelands::MapLoader::LoadType::kScenario);
+		ml->load_map_for_render(egbase);
 
 		std::unique_ptr<Texture> minimap(
 		   draw_minimap(egbase, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));

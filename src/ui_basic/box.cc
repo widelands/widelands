@@ -426,6 +426,9 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 			breadth = it.u.panel.panel->get_inner_w();
 			maxbreadth = get_inner_w();
 		}
+		if (scrollbar_ && scrollbar_->is_enabled()) {
+			maxbreadth -= Scrollbar::kSize;
+		}
 		switch (it.u.panel.align) {
 		case UI::Align::kCenter:
 			breadth = (maxbreadth - breadth) / 2;
@@ -449,5 +452,14 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 	case Item::ItemSpace:
 		break;  //  no need to do anything
 	}
+}
+void Box::on_death(Panel* p) {
+	auto is_deleted_panel = [p](Box::Item i) { return p == i.u.panel.panel; };
+	items_.erase(std::remove_if(items_.begin(), items_.end(), is_deleted_panel), items_.end());
+
+	update_desired_size();
+}
+void Box::on_visibility_changed() {
+	update_desired_size();
 }
 }  // namespace UI

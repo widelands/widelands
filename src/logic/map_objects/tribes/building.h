@@ -84,22 +84,22 @@ public:
 	/**
 	 * Returned wares for dismantling
 	 */
-	const Buildcost& returned_wares() const {
-		return return_dismantle_;
+	const Buildcost& returns_on_dismantle() const {
+		return returns_on_dismantle_;
 	}
 
 	/**
 	 * The build cost for enhancing a previous building
 	 */
 	const Buildcost& enhancement_cost() const {
-		return enhance_cost_;
+		return enhancement_cost_;
 	}
 
 	/**
 	 * The returned wares for a enhaced building
 	 */
-	const Buildcost& returned_wares_enhanced() const {
-		return return_enhanced_;
+	const Buildcost& enhancement_returns_on_dismantle() const {
+		return enhancement_returns_on_dismantle_;
 	}
 
 	int32_t get_size() const {
@@ -160,7 +160,7 @@ public:
 	WorkareaInfo workarea_info_;
 
 	bool suitability(const Map&, const FCoords&) const;
-	const BuildingHints& hints() const;
+	const AI::BuildingHints& hints() const;
 	void set_hints_trainingsites_max_percent(int percent);
 
 	uint32_t get_unoccupied_animation() const;
@@ -174,15 +174,18 @@ protected:
 	Building& create_constructionsite() const;
 
 private:
+	void set_enhancement_cost(const Buildcost& enhance_cost, const Buildcost& return_enhanced);
+
 	const Tribes& tribes_;
-	const bool buildable_;          // the player can build this himself
-	const bool can_be_dismantled_;  // the player can dismantle this building
-	const bool destructible_;       // the player can destruct this himself
+	const bool buildable_;     // the player can build this himself
+	bool can_be_dismantled_;   // the player can dismantle this building
+	const bool destructible_;  // the player can destruct this himself
 	Buildcost buildcost_;
-	Buildcost return_dismantle_;  // Returned wares on dismantle
-	Buildcost enhance_cost_;      // cost for enhancing
-	Buildcost return_enhanced_;   // Returned ware for dismantling an enhanced building
-	int32_t size_;                // size of the building
+	Buildcost returns_on_dismantle_;  // Returned wares on dismantle
+	Buildcost enhancement_cost_;      // cost for enhancing
+	Buildcost
+	   enhancement_returns_on_dismantle_;  // Returned ware for dismantling an enhanced building
+	int32_t size_;                         // size of the building
 	bool mine_;
 	bool port_;
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
@@ -190,9 +193,9 @@ private:
 	                        // enabled
 	DescriptionIndex enhancement_;
 	DescriptionIndex
-	   enhanced_from_;        // The building this building was enhanced from, or INVALID_INDEX
-	bool enhanced_building_;  // if it is one, it is bulldozable
-	BuildingHints hints_;     // hints (knowledge) for computer players
+	   enhanced_from_;         // The building this building was enhanced from, or INVALID_INDEX
+	bool enhanced_building_;   // if it is one, it is bulldozable
+	AI::BuildingHints hints_;  // hints (knowledge) for computer players
 	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
 	                                         // this attribute stands
 

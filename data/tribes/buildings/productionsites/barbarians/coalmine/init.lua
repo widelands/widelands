@@ -6,10 +6,20 @@ tribes:new_productionsite_type {
    name = "barbarians_coalmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Coal Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "barbarians_coalmine_deep",
+
+   enhancement = {
+      name = "barbarians_coalmine_deep",
+      enhancement_cost = {
+         log = 4,
+         granite = 2
+      },
+      enhancement_return_on_dismantle = {
+         log = 2,
+         granite = 1
+      }
+   },
 
    buildcost = {
       log = 4,
