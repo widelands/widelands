@@ -34,10 +34,9 @@
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 
-void printBox(std::string name, UI::Box& b) {
-
-	log_dbg("%dx%d (%s)", b.get_w(), b.get_h(), name.c_str());
-}
+// void printBox(std::string name, UI::Box& b) {
+// log_dbg("%dx%d (%s)", b.get_w(), b.get_h(), name.c_str());
+// }
 
 FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const settings,
                                                    GameController* const ctrl)
@@ -183,10 +182,10 @@ void FullscreenMenuLaunchGame::layout() {
 	   scale_factor(), standard_element_width_, standard_element_height_);
 	// map_box_.set_desired_size(standard_element_width_, content_box_.get_h());
 
-	printBox("main", main_box_);
-	printBox("content", content_box_);
-	printBox("individual", individual_content_box);
-	printBox("map", map_box_);
+	// printBox("main", main_box_);
+	// printBox("content", content_box_);
+	// printBox("individual", individual_content_box);
+	// printBox("map", map_box_);
 
 	win_condition_type.set_font_scale(scale_factor());
 }

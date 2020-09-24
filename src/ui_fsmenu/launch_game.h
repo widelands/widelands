@@ -22,14 +22,12 @@
 
 #include <memory>
 
-#include "logic/widelands.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
 #include "ui_fsmenu/mapdetailsbox.h"
-#include "wui/suggested_teams_box.h"
 
 class GameController;
 class LuaInterface;
