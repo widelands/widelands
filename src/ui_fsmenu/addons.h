@@ -35,7 +35,8 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
+#include "ui_basic/window.h"
+#include "ui_fsmenu/main.h"
 
 class AddOnsCtrl;
 struct ProgressIndicatorWindow;
@@ -45,6 +46,7 @@ struct InstalledAddOnRow : public UI::Panel {
 	~InstalledAddOnRow() override {
 	}
 	void layout() override;
+	void draw(RenderTarget&) override;
 private:
 	UI::Button move_up_;
 	UI::Button move_down_;
@@ -59,25 +61,23 @@ struct RemoteAddOnRow : public UI::Panel {
 	~RemoteAddOnRow() override {
 	}
 	void layout() override;
+	void draw(RenderTarget&) override;
 	const AddOnInfo& info() const { return info_; }
 	bool upgradeable() const;
 	bool full_upgrade_possible() const { return full_upgrade_possible_; }
 private:
 	AddOnInfo info_;
-	UI::Button install_;
-	UI::Button upgrade_;
-	UI::Button uninstall_;
-	UI::Icon category_;
-	UI::Icon verified_;
-	UI::Textarea version_;
+	UI::Button install_, upgrade_, uninstall_, interact_;
+	UI::Icon category_, verified_;
+	UI::Textarea version_, bottom_row_left_, bottom_row_right_;
 	UI::MultilineTextarea txt_;
 
 	const bool full_upgrade_possible_;
 };
 
-class AddOnsCtrl : public FullscreenMenuBase {
+class AddOnsCtrl : public UI::Window {
 public:
-	AddOnsCtrl();
+	AddOnsCtrl(FullscreenMenuMain&);
 	~AddOnsCtrl() override;
 
 	void rebuild();
@@ -86,11 +86,15 @@ public:
 	void install(const AddOnInfo&);
 	void upgrade(const AddOnInfo&, bool full_upgrade);
 
+	bool handle_key(bool, SDL_Keysym) override;
+
 protected:
 	void layout() override;
 
 private:
-	UI::Textarea title_;
+	FullscreenMenuMain& fsmm_;
+
+	UI::Box main_box_;
 	UI::MultilineTextarea warn_requirements_;
 	UI::TabPanel tabs_;
 	UI::Box installed_addons_wrapper_, browse_addons_wrapper_, installed_addons_box_, browse_addons_box_,

@@ -19,6 +19,7 @@
 
 #include "ui_fsmenu/addons.h"
 
+#include <iomanip>
 #include <memory>
 
 #include "base/i18n.h"
@@ -28,6 +29,7 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
+#include "ui_basic/multilineeditbox.h"
 #include "ui_basic/progressbar.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
@@ -107,10 +109,17 @@ static std::set<std::string> get_all_locales() {
 	return all_locales_table->keys<std::string>();
 }
 
-AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
-		title_(this, 0, 0, get_w(), get_h() / 12, _("Add-Ons"), UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
-		warn_requirements_(this, 0, 0, get_w(), get_h() / 12, UI::PanelStyle::kFsMenu, "", UI::Align::kCenter),
-		tabs_(this, UI::TabPanelStyle::kFsMenu),
+AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
+                "addons",
+                (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
+                (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,
+                calc_desired_window_width(fsmm),
+                calc_desired_window_height(fsmm),
+                _("Add-On Manager")),
+		fsmm_(fsmm),
+		main_box_(this, 0, 0, UI::Box::Vertical),
+		warn_requirements_(&main_box_, 0, 0, get_w(), get_h() / 12, UI::PanelStyle::kFsMenu, "", UI::Align::kCenter),
+		tabs_(&main_box_, UI::TabPanelStyle::kFsMenu),
 		installed_addons_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
 		browse_addons_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
 		installed_addons_box_(&installed_addons_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
@@ -122,15 +131,15 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		filter_category_(&filter_settings_, "filter_cat", 0, 0, 100, 8, kRowButtonSize, _("Filter by category"),
 				UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 		filter_verified_(&filter_settings_, Vector2i(0, 0), _("Verified only"), _("Show only verified add-ons in the Browse tab")),
-		ok_(this, "ok", 0, 0, get_w() / 2, get_h() / 12, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
+		ok_(&main_box_, "ok", 0, 0, get_w() / 2, get_h() / 12, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
 		filter_apply_(&filter_buttons_box_, "f_apply", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuPrimary, _("Apply"), _("Apply filters to lists")),
 		filter_reset_(&filter_buttons_box_, "f_reset", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, _("Reset"), _("Reset the filters")),
 		upgrade_all_(&filter_buttons_box_, "upgrade_all", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, _("Upgrade all"),
 				_("Upgrade all installed add-ons for which a newer version is available")),
 		refresh_(&filter_buttons_box_, "refresh", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
 				_("Refresh"), _("Refresh the list of add-ons available from the server")),
-		autofix_dependencies_(this, "autofix", 0, 0, 2 * kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
-				_("Fix…"), _("Automatically fix the dependency errors")) {
+		autofix_dependencies_(&main_box_, "autofix", 0, 0, 2 * kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
+				_("Fix dependencies…"), _("Automatically fix the dependency errors")) {
 	installed_addons_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
 	tabs_.add("my", _("Installed"), &installed_addons_wrapper_);
@@ -180,9 +189,7 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		filter_reset_.set_enabled(true);
 	});
 
-	ok_.sigclicked.connect([this]() {
-		clicked_ok();
-	});
+	ok_.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack); });
 	refresh_.sigclicked.connect([this]() {
 		refresh_remotes();
 		tabs_.activate(1);
@@ -232,7 +239,7 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 			for (const auto& pair : upgrades) {
 				if (pair.second) {
 					text += (boost::format(_("\n· %1$s (%2$s) by %3$s"))
-							% pair.first.descname() % (pair.first.verified ? _("verified") : _("NOT VERIFIED")) % pair.first.author).str();
+							% pair.first.descname() % (pair.first.verified ? _("verified") : _("NOT VERIFIED")) % pair.first.author()).str();
 				}
 			}
 			UI::WLMessageBox w(this, _("Upgrade All"), text, UI::WLMessageBox::MBoxType::kOkCancel);
@@ -244,6 +251,14 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		rebuild();
 	});
 
+	main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add_space(kRowButtonSpacing);
+	main_box_.add(&warn_requirements_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&autofix_dependencies_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	main_box_.add_space(kRowButtonSpacing);
+	main_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	main_box_.add_space(kRowButtonSpacing);
+
 	// prevent assert failures
 	installed_addons_box_.set_size(100, 100);
 	browse_addons_box_.set_size(100, 100);
@@ -252,6 +267,8 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 
 	installed_addons_wrapper_.set_force_scrolling(true);
 	browse_addons_wrapper_.set_force_scrolling(true);
+
+	set_center_panel(&main_box_);
 
 	refresh_remotes();
 }
@@ -268,6 +285,21 @@ AddOnsCtrl::~AddOnsCtrl() {
 	write_config();
 }
 
+bool AddOnsCtrl::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+		case SDLK_ESCAPE:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+			return true;
+		default:
+			break;
+		}
+	}
+	return UI::Window::handle_key(down, code);
+}
+
 void AddOnsCtrl::refresh_remotes() {
 	try {
 		remotes_ = network_handler_.refresh_remotes();
@@ -279,8 +311,8 @@ void AddOnsCtrl::refresh_remotes() {
 			[error]() { return (boost::format(_("Unable to fetch the list of available add-ons from the server!<br>Error Message: %s"))
 				% error).str();},
 			/** TRANSLATORS: This will be inserted into the string "Server Connection Error \n by %s" */
-			_("a networking bug"),
-			0, 0, AddOnCategory::kNone, {}, false, {{}, {}}
+			[]() { return _("a networking bug"); },
+			0, 0, AddOnCategory::kNone, {}, false, {{}, {}}, 0, "", 0, 0, 0.f, {}
 		}};
 	}
 	rebuild();
@@ -304,7 +336,7 @@ bool AddOnsCtrl::matches_filter(const AddOnInfo& info, bool local) {
 		// no text filter given, so we accept it
 		return true;
 	}
-	for (const std::string& text : {info.descname(), info.author, info.internal_name, info.description()}) {
+	for (const std::string& text : {info.descname(), info.author(), info.internal_name, info.description()}) {
 		if (text.find(filter_name_.text()) != std::string::npos) {
 			// text filter found
 			return true;
@@ -465,25 +497,19 @@ void AddOnsCtrl::update_dependency_errors() {
 }
 
 void AddOnsCtrl::layout() {
-	FullscreenMenuBase::layout();
+	if (!is_minimal()) {
+		set_size(calc_desired_window_width(fsmm_), calc_desired_window_height(fsmm_));
 
-	title_.set_size(get_w(), get_h() / 16);
-	title_.set_pos(Vector2i(0, get_h() / 16));
+		const bool has_warnings = !warn_requirements_.get_text().empty();
+		warn_requirements_.set_desired_size(warn_requirements_.get_w(), has_warnings ? get_inner_h() / 8 : 0);
+		autofix_dependencies_.set_visible(has_warnings);
+		autofix_dependencies_.set_desired_size(ok_.get_w(), has_warnings ? ok_.get_h() : 0);
 
-	ok_.set_size(get_w() / 2, get_h() / 20);
-	ok_.set_pos(Vector2i(get_w() / 4, get_h() * 14 / 16));
+		installed_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize);
+		browse_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize);
+	}
 
-	const bool has_warnings = !warn_requirements_.get_text().empty();
-	warn_requirements_.set_size(get_w() * 2 / 3, has_warnings ? get_h() / 8 : 0);
-	warn_requirements_.set_pos(Vector2i(get_w() / 6, get_h() * 12 / 16));
-	tabs_.set_size(get_w() * 2 / 3, has_warnings ? get_h() * 9 / 16 : get_h() * 2 / 3);
-	tabs_.set_pos(Vector2i(get_w() / 6, get_h() / 6));
-	autofix_dependencies_.set_visible(has_warnings);
-	autofix_dependencies_.set_size(get_w() / 8, get_h() / 16);
-	autofix_dependencies_.set_pos(Vector2i(get_w() * 2 / 3, get_h() * 13 / 16));
-
-	installed_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize);
-	browse_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize);
+	UI::Window::layout();
 }
 
 static void install_translation(const std::string& temp_locale_path, const std::string& addon_name) {
@@ -699,7 +725,7 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOnInfo& info) {
 			"%5$s\n"
 			))
 			% info.descname()
-			% info.author
+			% info.author()
 			% info.version
 			% kAddOnCategories.at(info.category).descname()
 			% info.description()
@@ -809,13 +835,11 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 					enabled ? "images/ui_basic/checkbox_checked.png" : "images/ui_basic/checkbox_empty.png"),
 					enabled ? _("Disable") : _("Enable"), UI::Button::VisualState::kFlat) : nullptr),
 	category_(this, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
-	version_(this, 0, 0, 0, 0,
-		/** TRANSLATORS: (MajorVersion).(MinorVersion) */
-		(boost::format(_("%1$u.%2$u")) % info.version % info.i18n_version).str(),
-		UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
+	version_(this, 0, 0, 0, 0, std::to_string(info.version),
+		UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
 		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
-		% g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author).str())
+		% g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author()).str())
 		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description())).str()) {
 
 	uninstall_.sigclicked.connect([ctrl, info]() {
@@ -858,7 +882,9 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 	category_.set_handle_mouse(true);
 	category_.set_tooltip((boost::format(_("Category: %s")) % kAddOnCategories.at(info.category).descname()).str());
 	version_.set_handle_mouse(true);
-	version_.set_tooltip(_("Version"));
+	version_.set_tooltip(
+		/** TRANSLATORS: (MajorVersion).(MinorVersion) */
+		(boost::format(_("Version: %1$u.%2$u")) % info.version % info.i18n_version).str());
 	layout();
 }
 
@@ -885,27 +911,121 @@ void InstalledAddOnRow::layout() {
 	txt_.set_pos(Vector2i(0, 0));
 }
 
+void InstalledAddOnRow::draw(RenderTarget& r) {
+	UI::Panel::draw(r);
+	r.brighten_rect(Recti(0, 0, get_w(), get_h()), get_parent()->focused_child() == this ? -30 : -20);
+}
+void RemoteAddOnRow::draw(RenderTarget& r) {
+	UI::Panel::draw(r);
+	r.brighten_rect(Recti(0, 0, get_w(), get_h()), -20);
+}
+
+static std::string time_string(const std::time_t& time) {
+	std::ostringstream oss("");
+	oss << std::put_time(std::localtime(&time), "%c");
+	return oss.str();
+}
+
+struct RemoteInteractionWindow : public UI::Window {
+public:
+	RemoteInteractionWindow(AddOnsCtrl& parent, const AddOnInfo& info)
+	: UI::Window(parent.get_parent(), info.internal_name,
+			parent.get_x() + kRowButtonSize, parent.get_y() - kRowButtonSize,
+			parent.get_inner_w() - 2 * kRowButtonSize, parent.get_inner_h() + 2 * kRowButtonSize, info.descname()),
+	box_(this, 0, 0, UI::Box::Vertical),
+	txt_(&box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
+	comment_(new UI::MultilineEditbox(&box_, 0, 0, get_inner_w(), 80, UI::PanelStyle::kFsMenu)),
+	submit_(&box_, "submit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Submit comment")),
+	voting_(&box_, "voting", 0, 0, 0, 10, 0, _("You voted"), UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
+	ok_(&box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK"))
+	{
+		std::string text = "<rt><p>";
+		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag((info.votes ?
+				(boost::format(_("Average rating: %1$.3f (%2$u votes)")) % info.average_rating % info.votes).str() : _("No votes yet")));
+		text += "</p><vspace gap=32><p>";
+		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(
+				info.user_comments.empty() ? _("No comments yet.") :
+				(boost::format(ngettext("%u comment:", "%u comments:", info.user_comments.size())) % info.user_comments.size()).str());
+
+		for (const auto& comment : info.user_comments) {
+			text += "</p><vspace gap=32><p>";
+			text += g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag(time_string(comment.timestamp));
+			text += "<br>";
+			text += g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("‘%1$s’ commented on version %2$u:"))
+					% comment.username % comment.version).str());
+			text += "<br>";
+			text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(comment.message);
+		}
+
+		text += "</p></rt>";
+		txt_.set_text(text);
+
+		comment_->set_text("Writing comments and rating add-ons is not yet implemented.");
+		ok_.sigclicked.connect([this]() {
+			end_modal(UI::Panel::Returncodes::kBack);
+		});
+
+		voting_.add(_("Not voted"), 0, nullptr, true);
+		for (unsigned i = 1; i <= 10; ++i) {
+			voting_.add(std::to_string(i), i);
+		}
+
+		// not yet implemented
+		voting_.set_enabled(false);
+		submit_.set_enabled(false);
+
+		box_.add(&txt_, UI::Box::Resizing::kExpandBoth);
+		box_.add_space(kRowButtonSpacing);
+		box_.add(comment_, UI::Box::Resizing::kFullSize);
+		box_.add(&submit_, UI::Box::Resizing::kFullSize);
+		box_.add_space(kRowButtonSpacing);
+		box_.add(&voting_, UI::Box::Resizing::kFullSize);
+		box_.add_space(kRowButtonSpacing);
+		box_.add(&ok_, UI::Box::Resizing::kFullSize);
+		box_.add_space(kRowButtonSpacing);
+		box_.set_size(get_inner_w(), get_inner_h());
+	}
+
+private:
+	UI::Box box_;
+	UI::MultilineTextarea txt_;
+	UI::MultilineEditbox* comment_;
+	UI::Button submit_;
+	UI::Dropdown<uint8_t> voting_;
+	UI::Button ok_;
+};
+
 RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo& info, uint32_t installed_version, uint32_t installed_i18n_version)
-	: UI::Panel(parent, 0, 0, 3 * kRowButtonSize, 3 * kRowButtonSize),
+	: UI::Panel(parent, 0, 0, 3 * kRowButtonSize, 4 * kRowButtonSize),
 	info_(info),
 	install_(this, "install", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/continue.png"), _("Install")),
 	upgrade_(this, "upgrade", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/wui/buildings/menu_up_train.png"), _("Upgrade")),
 	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/wui/menus/exit.png"), _("Uninstall")),
+	interact_(this, "interact", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, "…", _("Comments and Votes")),
 	category_(this, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
 	verified_(this, g_image_cache->get(info.verified ? "images/ui_basic/list_selected.png" : "images/ui_basic/stop.png")),
-	version_(this, 0, 0, 0, 0,
-		/** TRANSLATORS: (MajorVersion).(MinorVersion) */
-		(boost::format(_("%1$u.%2$u")) % info.version % info.i18n_version).str(),
-		UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
+	version_(this, 0, 0, 0, 0, std::to_string(info.version),
+		UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
+	bottom_row_left_(this, 0, 0, 0, 0, time_string(info.upload_timestamp),
+			UI::Align::kLeft, g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
+	bottom_row_right_(this, 0, 0, 0, 0, (boost::format(_("⬇ %1$u   ★ %2$.2f   “” %3$u"))
+			% info.download_count % info.average_rating % info.user_comments.size()).str(),
+			UI::Align::kRight, g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
 		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
-		% g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author).str())
+		% g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag(info.author() == info.upload_username ?
+				(boost::format(_("by %s")) % info.author()).str() :
+				(boost::format(_("by %1$s (uploaded by %2$s)")) % info.author() % info.upload_username).str())
 		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description())).str()),
 	full_upgrade_possible_(installed_version < info.version) {
 
 	assert(installed_version <= info.version);
 	assert(installed_i18n_version <= info.i18n_version);
 
+	interact_.sigclicked.connect([ctrl, info]() {
+		RemoteInteractionWindow m(*ctrl, info);
+		m.run<UI::Panel::Returncodes>();
+	});
 	uninstall_.sigclicked.connect([ctrl, info]() {
 		uninstall(ctrl, info);
 	});
@@ -921,7 +1041,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 				"%6$s\n"
 				))
 				% info.descname()
-				% info.author
+				% info.author()
 				% (info.verified ? _("Verified") : _("NOT VERIFIED"))
 				% info.version
 				% kAddOnCategories.at(info.category).descname()
@@ -944,7 +1064,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 				"%7$s\n"
 				))
 				% info.descname()
-				% info.author
+				% info.author()
 				% (info.verified ? _("Verified") : _("NOT VERIFIED"))
 				% installed_version
 				% info.version
@@ -960,6 +1080,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 		install_.set_enabled(false);
 		upgrade_.set_enabled(false);
 		uninstall_.set_enabled(false);
+		interact_.set_enabled(false);
 	} else if (installed_version == kNotInstalled) {
 		uninstall_.set_enabled(false);
 		upgrade_.set_enabled(false);
@@ -967,13 +1088,23 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 		install_.set_enabled(false);
 		upgrade_.set_enabled(full_upgrade_possible_ || installed_i18n_version < info.i18n_version);
 	}
-	category_.set_handle_mouse(true);
+
+	for (UI::Panel* p : std::vector<UI::Panel*>{&category_, &version_, &verified_, &bottom_row_right_}) {
+		p->set_handle_mouse(true);
+	}
 	category_.set_tooltip((boost::format(_("Category: %s")) % kAddOnCategories.at(info.category).descname()).str());
-	version_.set_handle_mouse(true);
-	version_.set_tooltip(_("Version"));
-	verified_.set_handle_mouse(true);
+	version_.set_tooltip(
+		/** TRANSLATORS: (MajorVersion).(MinorVersion) */
+		(boost::format(_("Version: %1$u.%2$u")) % info.version % info.i18n_version).str());
 	verified_.set_tooltip(info.internal_name.empty() ? _("Error") : info.verified ? _("Verified by the Widelands Development Team") :
 		_("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee that it does not contain harmful or offensive content."));
+	bottom_row_right_.set_tooltip((boost::format("%s<br>%s<br>%s")
+		% (boost::format(ngettext("%u download", "%u downloads", info.download_count)) % info.download_count).str()
+		% (info.votes ? (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)", "Average rating: %1$.3f (%2$u votes)", info.votes))
+				% info.average_rating % info.votes).str() : "–")
+		% (boost::format(ngettext("%u comment", "%u comments", info.user_comments.size())) % info.user_comments.size()).str()
+	).str());
+
 	layout();
 }
 
@@ -983,18 +1114,23 @@ void RemoteAddOnRow::layout() {
 		// size not yet set
 		return;
 	}
-	set_desired_size(get_w(), 3 * kRowButtonSize);
-	for (UI::Panel* p : std::vector<UI::Panel*>{&install_, &uninstall_, &upgrade_, &category_, &version_, &verified_}) {
+	set_desired_size(get_w(), 4 * kRowButtonSize);
+	for (UI::Panel* p : std::vector<UI::Panel*>{&install_, &uninstall_, &interact_, &upgrade_, &category_, &version_, &verified_}) {
 		p->set_size(kRowButtonSize, kRowButtonSize);
 	}
 	install_.set_pos(Vector2i(get_w() - kRowButtonSize, 0));
 	upgrade_.set_pos(Vector2i(get_w() - kRowButtonSize, kRowButtonSize));
 	uninstall_.set_pos(Vector2i(get_w() - kRowButtonSize, 2 * kRowButtonSize));
+	interact_.set_pos(Vector2i(get_w() - kRowButtonSize, 3 * kRowButtonSize));
 	category_.set_pos(Vector2i(get_w() - kRowButtonSize * 2 - kRowButtonSpacing, 0));
 	version_.set_pos(Vector2i(get_w() - kRowButtonSize * 2 - kRowButtonSpacing, kRowButtonSize));
 	verified_.set_pos(Vector2i(get_w() - kRowButtonSize * 2 - kRowButtonSpacing, 2 * kRowButtonSize));
 	txt_.set_size(get_w() - 2 * kRowButtonSize - 2 * kRowButtonSpacing, 3 * kRowButtonSize);
 	txt_.set_pos(Vector2i(0, 0));
+	bottom_row_left_.set_size(get_w() / 2 - kRowButtonSize, kRowButtonSize - 2 * kRowButtonSpacing);
+	bottom_row_right_.set_size(get_w() / 2 - kRowButtonSpacing, bottom_row_left_.get_h());
+	bottom_row_left_.set_pos(Vector2i(0, 4 * kRowButtonSize - bottom_row_left_.get_h()));
+	bottom_row_right_.set_pos(Vector2i(bottom_row_left_.get_w(), 4 * kRowButtonSize - bottom_row_right_.get_h()));
 }
 
 bool RemoteAddOnRow::upgradeable() const {

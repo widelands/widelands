@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_ADDONS_H
 #define WL_LOGIC_ADDONS_H
 
+#include <ctime>
 #include <functional>
 #include <map>
 #include <string>
@@ -33,7 +34,8 @@ enum class AddOnCategory {
 	kMaps,
 	kCampaign,
 	kWinCondition,
-	kStartingCondition
+	kStartingCondition,
+	kTheme  // not yet implemented
 };
 
 // Note: Below you will see some lines like `std::function<std::string()> descname`.
@@ -59,21 +61,38 @@ struct AddOnFileList {
 	std::vector<std::string> directories, files;
 };
 
+struct AddOnComment {
+	std::string username, message;
+	uint32_t version;  // The version on which the user commented
+	std::time_t timestamp;
+};
+
 struct AddOnInfo {
-	std::string internal_name;                 // "cool_feature.wad"
+	std::string internal_name;  // "cool_feature.wad"
+
 	std::function<std::string()> descname;     // "Cool Feature"
 	std::function<std::string()> description;  // "This add-on is a really cool feature."
-	std::string author;                        // "The Widelands Bunnybot"
-	uint32_t version;                          // Add-on version
-	uint32_t i18n_version;                     // (see doc/sphinx/source/add-ons.rst)
+	std::function<std::string()> author;       // "The Widelands Bunnybot"
+
+	uint32_t version;       // Add-on version
+	uint32_t i18n_version;  // (see doc/sphinx/source/add-ons.rst)
+
 	AddOnCategory category;
+
 	std::vector<std::string> requirements;  // This add-on will only work correctly if these
 	                                        // add-ons are present in this order and active
-	bool verified;                          // Only valid for Remote add-ons
-	AddOnFileList file_list;                // Get rid of this ASAP
-	// TODO(Nordfriese): in the future, we might also want to include:
-	// uploader username, upload date&time, average rating, number of votes, user comments, …
-	// (but it would be pointless to implement that as long as we don't even have a real server)
+
+	bool verified;  // Only valid for Remote add-ons
+
+	AddOnFileList file_list;  // Get rid of this ASAP
+
+	// TODO(Nordfriese): These are not yet implemented on the server-side
+	std::time_t upload_timestamp;  // date and time when this version was uploaded
+	std::string upload_username;   // who uploaded (may be different from author)
+	uint32_t download_count;       // total times downloaded
+	uint32_t votes;                // total number of votes
+	float average_rating;          // average rating between 1.0 and 10.0 (0 if no votes)
+	std::vector<AddOnComment> user_comments;
 };
 
 // Sorted list of all add-ons mapped to whether they are currently enabled

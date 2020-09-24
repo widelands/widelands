@@ -25,6 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
@@ -46,7 +47,9 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
 	{AddOnCategory::kWinCondition, AddOnCategoryInfo {"win_condition",
 			[]() { return _("Win Condition"); }, "images/wui/menus/objectives.png", false}},
 	{AddOnCategory::kStartingCondition, AddOnCategoryInfo {"starting_condition",
-			[]() { return _("Starting Condition"); }, "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", false}}
+			[]() { return _("Starting Condition"); }, "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", false}},
+	{AddOnCategory::kWinCondition, AddOnCategoryInfo {"theme",
+			[]() { return _("Theme"); }, "images/wui/menus/main_menu.png", false}}
 };
 
 std::vector<std::pair<AddOnInfo, bool>> g_addons;
@@ -136,8 +139,13 @@ std::string check_requirements(const AddOnRequirements& required_addons) {
 }
 
 unsigned count_all_dependencies(const std::string& info, const std::map<std::string, AddOnState>& all) {
+	const auto it = all.find(info);
+	if (it == all.end()) {
+		log_warn("count_all_dependencies: '%s' not installed", info.c_str());
+		return 0;
+	}
 	unsigned deps = 0;
-	for (const std::string& req : all.at(info).first.requirements) {
+	for (const std::string& req : it->second.first.requirements) {
 		deps += count_all_dependencies(req, all);
 	}
 	return deps;
@@ -164,6 +172,7 @@ AddOnInfo preload_addon(const std::string& name) {
 
 	const std::string unlocalized_descname = s.get_safe_string("name");
 	const std::string unlocalized_description = s.get_safe_string("description");
+	const std::string unlocalized_author = s.get_safe_string("author");
 
 	AddOnInfo i = {
 		name,
@@ -175,11 +184,14 @@ AddOnInfo preload_addon(const std::string& name) {
 			i18n::AddOnTextdomain td(name);
 			return i18n::translate(unlocalized_description);
 		},
-		s.get_safe_string("author"),
+		[name, unlocalized_author]() {
+			i18n::AddOnTextdomain td(name);
+			return i18n::translate(unlocalized_author);
+		},
 		s.get_safe_positive("version"),
 		i18n_profile.get_safe_section("global").get_safe_positive(name.c_str()),
 		get_category(s.get_safe_string("category")),
-		{}, false, {{}, {}}
+		{}, false, {{}, {}}, 0, "", 0, 0, 0.f, {}
 	};
 
 	if (i.category == AddOnCategory::kNone) {

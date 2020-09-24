@@ -90,6 +90,7 @@ wl_library(logic_addons
   DEPENDS
     base_i18n
     base_exceptions
+    base_log
     io_filesystem
     io_profile
     logic_filesystem_constants

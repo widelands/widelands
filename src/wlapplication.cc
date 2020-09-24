@@ -1246,7 +1246,7 @@ void WLApplication::mainmenu() {
 				replay();
 				break;
 			case FullscreenMenuBase::MenuTarget::kAddOns: {
-				AddOnsCtrl a;
+				AddOnsCtrl a(*mm);
 				a.run<FullscreenMenuBase::MenuTarget>();
 			} break;
 			case FullscreenMenuBase::MenuTarget::kOptions: {

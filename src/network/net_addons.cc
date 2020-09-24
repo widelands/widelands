@@ -119,10 +119,10 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 		const std::string descname = next_word(output);
 		const std::string descr = next_word(output);
+		const std::string author = next_word(output);
 		info.descname = [descname]() { return descname; };
 		info.description = [descr]() { return descr; };
-
-		info.author = next_word(output);
+		info.author = [author]() { return author; };
 
 		info.version = next_number(output);
 		info.i18n_version = next_number(output);
@@ -141,6 +141,18 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		}
 
 		info.verified = next_word(output) == "verified";
+
+		// TODO(Nordfriese): These are not yet implemented on the server-side –
+		// initializing with some proof-of-concept dummy values
+		info.upload_timestamp = std::time(nullptr);
+		info.upload_username = "Nordfriese";
+		info.download_count = 12345;
+		info.votes = 45;
+		info.average_rating = 6.789f;
+		info.user_comments = {
+			{"Somebody", "This add-on is awesome!", 1, 100000000},
+			{"UnknownPerson", "I vote it twenty stars out of ten :)", 1, std::time(nullptr)}
+		};
 
 		result_vector.push_back(info);
 	}
