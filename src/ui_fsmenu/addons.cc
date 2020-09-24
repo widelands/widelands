@@ -120,9 +120,11 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 		main_box_(this, 0, 0, UI::Box::Vertical),
 		warn_requirements_(&main_box_, 0, 0, get_w(), get_h() / 12, UI::PanelStyle::kFsMenu, "", UI::Align::kCenter),
 		tabs_(&main_box_, UI::TabPanelStyle::kFsMenu),
-		installed_addons_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
+		installed_addons_outer_wrapper_(&tabs_, 0, 0, UI::Box::Horizontal),
+		installed_addons_inner_wrapper_(&installed_addons_outer_wrapper_, 0, 0, UI::Box::Vertical),
+		installed_addons_buttons_box_(&installed_addons_outer_wrapper_, 0, 0, UI::Box::Vertical),
 		browse_addons_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
-		installed_addons_box_(&installed_addons_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
+		installed_addons_box_(&installed_addons_inner_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
 		browse_addons_box_(&browse_addons_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
 		filter_settings_(&tabs_, 0, 0, UI::Box::Vertical),
 		filter_name_box_(&filter_settings_, 0, 0, UI::Box::Horizontal),
@@ -131,7 +133,7 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 		filter_category_(&filter_settings_, "filter_cat", 0, 0, 100, 8, kRowButtonSize, _("Filter by category"),
 				UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 		filter_verified_(&filter_settings_, Vector2i(0, 0), _("Verified only"), _("Show only verified add-ons in the Browse tab")),
-		ok_(&main_box_, "ok", 0, 0, get_w() / 2, get_h() / 12, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
+		ok_(&main_box_, "ok", 0, 0, get_w() / 2, kRowButtonSize - kRowButtonSpacing, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
 		filter_apply_(&filter_buttons_box_, "f_apply", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuPrimary, _("Apply"), _("Apply filters to lists")),
 		filter_reset_(&filter_buttons_box_, "f_reset", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, _("Reset"), _("Reset the filters")),
 		upgrade_all_(&filter_buttons_box_, "upgrade_all", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, _("Upgrade all"),
@@ -139,10 +141,29 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 		refresh_(&filter_buttons_box_, "refresh", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
 				_("Refresh"), _("Refresh the list of add-ons available from the server")),
 		autofix_dependencies_(&main_box_, "autofix", 0, 0, 2 * kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
-				_("Fix dependencies…"), _("Automatically fix the dependency errors")) {
-	installed_addons_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
+				_("Fix dependencies…"), _("Automatically fix the dependency errors")),
+		move_top_(&installed_addons_buttons_box_, "move_top", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
+				g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"), _("Move selected add-on to top")),
+		move_up_(&installed_addons_buttons_box_, "move_up", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
+				g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Move selected add-on one step up")),
+		move_down_(&installed_addons_buttons_box_, "move_down", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
+				g_image_cache->get("images/ui_basic/scrollbar_down.png"), _("Move selected add-on one step down")),
+		move_bottom_(&installed_addons_buttons_box_, "move_bottom", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
+				g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Move selected add-on to bottom")) {
+	installed_addons_buttons_box_.add(&move_top_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	installed_addons_buttons_box_.add_space(kRowButtonSpacing);
+	installed_addons_buttons_box_.add(&move_up_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	installed_addons_buttons_box_.add_space(kRowButtonSize + 2 * kRowButtonSpacing);
+	installed_addons_buttons_box_.add(&move_down_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	installed_addons_buttons_box_.add_space(kRowButtonSpacing);
+	installed_addons_buttons_box_.add(&move_bottom_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	installed_addons_outer_wrapper_.add(&installed_addons_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
+	installed_addons_outer_wrapper_.add_space(kRowButtonSpacing);
+	installed_addons_outer_wrapper_.add(&installed_addons_buttons_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+	installed_addons_inner_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
-	tabs_.add("my", _("Installed"), &installed_addons_wrapper_);
+	tabs_.add("my", _("Installed"), &installed_addons_outer_wrapper_);
 	tabs_.add("all", _("Browse"), &browse_addons_wrapper_);
 	tabs_.add("filter", _("Filter"), &filter_settings_);
 
@@ -251,6 +272,49 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 		rebuild();
 	});
 
+	move_up_.sigclicked.connect([this]() {
+		const AddOnInfo info = selected_installed_addon();
+		auto it = g_addons.begin();
+		for (; it->first.internal_name != info.internal_name; ++it);
+		const bool state = it->second;
+		it = g_addons.erase(it);
+		--it;
+		g_addons.insert(it, std::make_pair(info, state));
+		rebuild();
+		focus_installed_addon_row(info);
+	});
+	move_down_.sigclicked.connect([this]() {
+		const AddOnInfo info = selected_installed_addon();
+		auto it = g_addons.begin();
+		for (; it->first.internal_name != info.internal_name; ++it);
+		const bool state = it->second;
+		it = g_addons.erase(it);
+		++it;
+		g_addons.insert(it, std::make_pair(info, state));
+		rebuild();
+		focus_installed_addon_row(info);
+	});
+	move_top_.sigclicked.connect([this]() {
+		const AddOnInfo info = selected_installed_addon();
+		auto it = g_addons.begin();
+		for (; it->first.internal_name != info.internal_name; ++it);
+		const bool state = it->second;
+		it = g_addons.erase(it);
+		g_addons.insert(g_addons.begin(), std::make_pair(info, state));
+		rebuild();
+		focus_installed_addon_row(info);
+	});
+	move_bottom_.sigclicked.connect([this]() {
+		const AddOnInfo info = selected_installed_addon();
+		auto it = g_addons.begin();
+		for (; it->first.internal_name != info.internal_name; ++it);
+		const bool state = it->second;
+		it = g_addons.erase(it);
+		g_addons.push_back(std::make_pair(info, state));
+		rebuild();
+		focus_installed_addon_row(info);
+	});
+
 	main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(kRowButtonSpacing);
 	main_box_.add(&warn_requirements_, UI::Box::Resizing::kFullSize);
@@ -262,10 +326,10 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 	// prevent assert failures
 	installed_addons_box_.set_size(100, 100);
 	browse_addons_box_.set_size(100, 100);
-	installed_addons_wrapper_.set_size(100, 100);
+	installed_addons_inner_wrapper_.set_size(100, 100);
 	browse_addons_wrapper_.set_size(100, 100);
 
-	installed_addons_wrapper_.set_force_scrolling(true);
+	installed_addons_inner_wrapper_.set_force_scrolling(true);
 	browse_addons_wrapper_.set_force_scrolling(true);
 
 	set_center_panel(&main_box_);
@@ -283,6 +347,42 @@ AddOnsCtrl::~AddOnsCtrl() {
 	}
 	set_config_string("addons", text);
 	write_config();
+}
+
+inline const AddOnInfo& AddOnsCtrl::selected_installed_addon() const {
+	return dynamic_cast<InstalledAddOnRow&>(*installed_addons_box_.focused_child()).info();
+}
+void AddOnsCtrl::focus_installed_addon_row(const AddOnInfo& info) {
+	for (UI::Panel* p = installed_addons_box_.get_first_child(); p; p = p->get_next_sibling()) {
+		if (dynamic_cast<InstalledAddOnRow&>(*p).info().internal_name == info.internal_name) {
+			p->focus();
+			return;
+		}
+	}
+	NEVER_HERE();
+}
+
+void AddOnsCtrl::think() {
+	UI::Panel::think();
+	check_enable_move_buttons();
+}
+
+void AddOnsCtrl::check_enable_move_buttons() {
+	const bool enable_move_buttons = tabs_.active() == 0 && installed_addons_box_.focused_child() != nullptr;
+	for (UI::Button* b : {&move_top_, &move_up_, &move_down_, &move_bottom_}) {
+		b->set_enabled(enable_move_buttons);
+	}
+	if (enable_move_buttons) {
+		const AddOnInfo& sel = selected_installed_addon();
+		if (sel.internal_name == g_addons.begin()->first.internal_name) {
+			move_top_.set_enabled(false);
+			move_up_.set_enabled(false);
+		}
+		if (sel.internal_name == g_addons.back().first.internal_name) {
+			move_down_.set_enabled(false);
+			move_bottom_.set_enabled(false);
+		}
+	}
 }
 
 bool AddOnsCtrl::handle_key(bool down, SDL_Keysym code) {
@@ -305,14 +405,15 @@ void AddOnsCtrl::refresh_remotes() {
 		remotes_ = network_handler_.refresh_remotes();
 	} catch (const std::exception& e) {
 		std::string error = e.what();
+		/** TRANSLATORS: This will be inserted into the string "Server Connection Error \n by %s" */
+		const std::string bug = _("a networking bug");
 		remotes_ = { AddOnInfo {
 			"",
 			[]() { return _("Server Connection Error");},
 			[error]() { return (boost::format(_("Unable to fetch the list of available add-ons from the server!<br>Error Message: %s"))
 				% error).str();},
-			/** TRANSLATORS: This will be inserted into the string "Server Connection Error \n by %s" */
-			[]() { return _("a networking bug"); },
-			0, 0, AddOnCategory::kNone, {}, false, {{}, {}}, 0, "", 0, 0, 0.f, {}
+			[bug]() { return bug; },
+			0, 0, AddOnCategory::kNone, {}, false, {{}, {}}, 0, bug, 0, 0, 0.f, {}
 		}};
 	}
 	rebuild();
@@ -347,7 +448,7 @@ bool AddOnsCtrl::matches_filter(const AddOnInfo& info, bool local) {
 }
 
 void AddOnsCtrl::rebuild() {
-	const uint32_t scrollpos_i = installed_addons_wrapper_.get_scrollbar() ? installed_addons_wrapper_.get_scrollbar()->get_scrollpos() : 0;
+	const uint32_t scrollpos_i = installed_addons_inner_wrapper_.get_scrollbar() ? installed_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() : 0;
 	const uint32_t scrollpos_b = browse_addons_wrapper_.get_scrollbar() ? browse_addons_wrapper_.get_scrollbar()->get_scrollpos() : 0;
 	installed_addons_box_.free_children();
 	browse_addons_box_.free_children();
@@ -364,12 +465,11 @@ void AddOnsCtrl::rebuild() {
 			addons_to_show.push_back(pair);
 		}
 	}
-	size_t nr_installed = addons_to_show.size();
 	for (const auto& pair : addons_to_show) {
 		if (index > 0) {
 			installed_addons_box_.add_space(kRowButtonSize);
 		}
-		InstalledAddOnRow* i = new InstalledAddOnRow(&installed_addons_box_, this, pair.first, pair.second, index == 0, index + 1 == nr_installed);
+		InstalledAddOnRow* i = new InstalledAddOnRow(&installed_addons_box_, this, pair.first, pair.second);
 		installed_addons_box_.add(i, UI::Box::Resizing::kFullSize);
 		++index;
 	}
@@ -381,7 +481,6 @@ void AddOnsCtrl::rebuild() {
 			remotes_to_show.push_back(a);
 		}
 	}
-	nr_installed = remotes_to_show.size();
 	bool has_upgrades = false;
 	for (const AddOnInfo& a : remotes_to_show) {
 		if (0 < index++) {
@@ -402,13 +501,14 @@ void AddOnsCtrl::rebuild() {
 		browse_.push_back(r);
 	}
 
-	if (installed_addons_wrapper_.get_scrollbar() && scrollpos_i) {
-		installed_addons_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_i);
+	if (installed_addons_inner_wrapper_.get_scrollbar() && scrollpos_i) {
+		installed_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_i);
 	}
 	if (browse_addons_wrapper_.get_scrollbar() && scrollpos_b) {
 		browse_addons_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_b);
 	}
 
+	check_enable_move_buttons();
 	upgrade_all_.set_enabled(has_upgrades);
 	update_dependency_errors();
 }
@@ -505,7 +605,7 @@ void AddOnsCtrl::layout() {
 		autofix_dependencies_.set_visible(has_warnings);
 		autofix_dependencies_.set_desired_size(ok_.get_w(), has_warnings ? ok_.get_h() : 0);
 
-		installed_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize);
+		installed_addons_outer_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize);
 		browse_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize);
 	}
 
@@ -825,10 +925,9 @@ void AddOnsCtrl::autofix_dependencies() {
 	rebuild();
 }
 
-InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo& info, bool enabled, bool is_first, bool is_last)
-	: UI::Panel(parent, 0, 0, 3 * kRowButtonSize, 3 * kRowButtonSize),
-	move_up_(this, "up", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Move up")),
-	move_down_(this, "down", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/scrollbar_down.png"), _("Move down")),
+InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo& info, bool enabled)
+	: UI::Panel(parent, 0, 0, 3 * kRowButtonSize, 2 * kRowButtonSize),
+	info_(info),
 	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/wui/menus/exit.png"), _("Uninstall")),
 	toggle_enabled_(kAddOnCategories.at(info.category).can_disable_addons ? new UI::Button(this, "on-off", 0, 0, 24, 24,
 			UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get(
@@ -845,24 +944,6 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 	uninstall_.sigclicked.connect([ctrl, info]() {
 		uninstall(ctrl, info);
 	});
-	move_up_.sigclicked.connect([ctrl, info]() {
-		auto it = g_addons.begin();
-		for (; it->first.internal_name != info.internal_name; ++it);
-		const bool state = it->second;
-		it = g_addons.erase(it);
-		--it;
-		g_addons.insert(it, std::make_pair(info, state));
-		ctrl->rebuild();
-	});
-	move_down_.sigclicked.connect([ctrl, info]() {
-		auto it = g_addons.begin();
-		for (; it->first.internal_name != info.internal_name; ++it);
-		const bool state = it->second;
-		it = g_addons.erase(it);
-		++it;
-		g_addons.insert(it, std::make_pair(info, state));
-		ctrl->rebuild();
-	});
 	if (toggle_enabled_) {
 		toggle_enabled_->sigclicked.connect([this, ctrl, info]() {
 			for (auto& pair : g_addons) {
@@ -877,14 +958,13 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 			NEVER_HERE();
 		});
 	}
-	move_up_.set_enabled(!is_first);
-	move_down_.set_enabled(!is_last);
 	category_.set_handle_mouse(true);
 	category_.set_tooltip((boost::format(_("Category: %s")) % kAddOnCategories.at(info.category).descname()).str());
 	version_.set_handle_mouse(true);
 	version_.set_tooltip(
 		/** TRANSLATORS: (MajorVersion).(MinorVersion) */
 		(boost::format(_("Version: %1$u.%2$u")) % info.version % info.i18n_version).str());
+	set_can_focus(true);
 	layout();
 }
 
@@ -894,26 +974,24 @@ void InstalledAddOnRow::layout() {
 		// size not yet set
 		return;
 	}
-	set_desired_size(get_w(), 3 * kRowButtonSize);
-	for (UI::Panel* p : std::vector<UI::Panel*>{&move_up_, &move_down_, &uninstall_, &category_, &version_}) {
+	set_desired_size(get_w(), 2 * kRowButtonSize);
+	for (UI::Panel* p : std::vector<UI::Panel*>{&uninstall_, &category_, &version_}) {
 		p->set_size(kRowButtonSize, kRowButtonSize);
 	}
 	if (toggle_enabled_) {
 		toggle_enabled_->set_size(kRowButtonSize, kRowButtonSize);
-		toggle_enabled_->set_pos(Vector2i(get_w() - kRowButtonSize, kRowButtonSize));
+		toggle_enabled_->set_pos(Vector2i(get_w() - kRowButtonSize, 0));
 	}
-	move_up_.set_pos(Vector2i(get_w() - kRowButtonSize, 0));
-	move_down_.set_pos(Vector2i(get_w() - kRowButtonSize, 2 * kRowButtonSize));
 	category_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 0));
 	version_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, kRowButtonSize));
-	uninstall_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 2 * kRowButtonSize));
-	txt_.set_size(get_w() - 2 * kRowButtonSize - 2 * kRowButtonSpacing, 3 * kRowButtonSize);
+	uninstall_.set_pos(Vector2i(get_w() - kRowButtonSize, kRowButtonSize));
+	txt_.set_size(get_w() - 2 * kRowButtonSize - 2 * kRowButtonSpacing, 2 * kRowButtonSize);
 	txt_.set_pos(Vector2i(0, 0));
 }
 
 void InstalledAddOnRow::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
-	r.brighten_rect(Recti(0, 0, get_w(), get_h()), get_parent()->focused_child() == this ? -30 : -20);
+	r.brighten_rect(Recti(0, 0, get_w(), get_h()), has_focus() ? -30 : -20);
 }
 void RemoteAddOnRow::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
@@ -934,9 +1012,10 @@ public:
 			parent.get_inner_w() - 2 * kRowButtonSize, parent.get_inner_h() + 2 * kRowButtonSize, info.descname()),
 	box_(this, 0, 0, UI::Box::Vertical),
 	txt_(&box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
+	voting_(&box_, "voting", 0, 0, 0, 11, kRowButtonSize - kRowButtonSpacing, _("Your vote"),
+			UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 	comment_(new UI::MultilineEditbox(&box_, 0, 0, get_inner_w(), 80, UI::PanelStyle::kFsMenu)),
 	submit_(&box_, "submit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Submit comment")),
-	voting_(&box_, "voting", 0, 0, 0, 10, 0, _("You voted"), UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 	ok_(&box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK"))
 	{
 		std::string text = "<rt><p>";
@@ -976,10 +1055,10 @@ public:
 
 		box_.add(&txt_, UI::Box::Resizing::kExpandBoth);
 		box_.add_space(kRowButtonSpacing);
+		box_.add(&voting_, UI::Box::Resizing::kFullSize);
+		box_.add_space(kRowButtonSpacing);
 		box_.add(comment_, UI::Box::Resizing::kFullSize);
 		box_.add(&submit_, UI::Box::Resizing::kFullSize);
-		box_.add_space(kRowButtonSpacing);
-		box_.add(&voting_, UI::Box::Resizing::kFullSize);
 		box_.add_space(kRowButtonSpacing);
 		box_.add(&ok_, UI::Box::Resizing::kFullSize);
 		box_.add_space(kRowButtonSpacing);
@@ -989,10 +1068,9 @@ public:
 private:
 	UI::Box box_;
 	UI::MultilineTextarea txt_;
-	UI::MultilineEditbox* comment_;
-	UI::Button submit_;
 	UI::Dropdown<uint8_t> voting_;
-	UI::Button ok_;
+	UI::MultilineEditbox* comment_;
+	UI::Button submit_, ok_;
 };
 
 RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo& info, uint32_t installed_version, uint32_t installed_i18n_version)
@@ -1101,7 +1179,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 	bottom_row_right_.set_tooltip((boost::format("%s<br>%s<br>%s")
 		% (boost::format(ngettext("%u download", "%u downloads", info.download_count)) % info.download_count).str()
 		% (info.votes ? (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)", "Average rating: %1$.3f (%2$u votes)", info.votes))
-				% info.average_rating % info.votes).str() : "–")
+				% info.average_rating % info.votes).str() : _("No votes yet"))
 		% (boost::format(ngettext("%u comment", "%u comments", info.user_comments.size())) % info.user_comments.size()).str()
 	).str());
 

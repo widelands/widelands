@@ -144,13 +144,13 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 		// TODO(Nordfriese): These are not yet implemented on the server-side –
 		// initializing with some proof-of-concept dummy values
-		info.upload_timestamp = std::time(nullptr);
+		info.upload_timestamp = 1600000000;
 		info.upload_username = "Nordfriese";
 		info.download_count = 12345;
 		info.votes = 45;
 		info.average_rating = 6.789f;
 		info.user_comments = {
-			{"Somebody", "This add-on is awesome!", 1, 100000000},
+			{"Somebody", "This add-on is awesome!", 1, 1601000000},
 			{"UnknownPerson", "I vote it twenty stars out of ten :)", 1, std::time(nullptr)}
 		};
 

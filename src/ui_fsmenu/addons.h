@@ -42,14 +42,14 @@ class AddOnsCtrl;
 struct ProgressIndicatorWindow;
 
 struct InstalledAddOnRow : public UI::Panel {
-	InstalledAddOnRow(Panel*, AddOnsCtrl*, const AddOnInfo&, bool enabled, bool is_first, bool is_last);
+	InstalledAddOnRow(Panel*, AddOnsCtrl*, const AddOnInfo&, bool enabled);
 	~InstalledAddOnRow() override {
 	}
+	const AddOnInfo& info() const { return info_; }
 	void layout() override;
 	void draw(RenderTarget&) override;
 private:
-	UI::Button move_up_;
-	UI::Button move_down_;
+	AddOnInfo info_;
 	UI::Button uninstall_;
 	std::unique_ptr<UI::Button> toggle_enabled_;
 	UI::Icon category_;
@@ -90,6 +90,7 @@ public:
 
 protected:
 	void layout() override;
+	void think() override;
 
 private:
 	FullscreenMenuMain& fsmm_;
@@ -97,13 +98,19 @@ private:
 	UI::Box main_box_;
 	UI::MultilineTextarea warn_requirements_;
 	UI::TabPanel tabs_;
-	UI::Box installed_addons_wrapper_, browse_addons_wrapper_, installed_addons_box_, browse_addons_box_,
+	UI::Box installed_addons_outer_wrapper_, installed_addons_inner_wrapper_, installed_addons_buttons_box_,
+			browse_addons_wrapper_, installed_addons_box_, browse_addons_box_,
 			filter_settings_, filter_name_box_, filter_buttons_box_;
 	std::vector<RemoteAddOnRow*> browse_;
 	UI::EditBox filter_name_;
 	UI::Dropdown<std::string> filter_category_;
 	UI::Checkbox filter_verified_;
-	UI::Button ok_, filter_apply_, filter_reset_, upgrade_all_, refresh_, autofix_dependencies_;
+	UI::Button ok_, filter_apply_, filter_reset_, upgrade_all_, refresh_, autofix_dependencies_,
+			move_top_, move_up_, move_down_, move_bottom_;
+
+	void check_enable_move_buttons();
+	const AddOnInfo& selected_installed_addon() const;
+	void focus_installed_addon_row(const AddOnInfo&);
 
 	void autofix_dependencies();
 
