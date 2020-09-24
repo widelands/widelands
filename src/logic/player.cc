@@ -69,38 +69,40 @@ int game_time_start = 0;
 int game_time_recursion = 0;
 int game_time_duration = 0;
 
-void start_vision_benchmark(Widelands::EditorGameBase& egbase) {
-	if (game_time_start == 0) {
-		game_time_start = egbase.get_gametime();
-	}
-
-	if (game_time_recursion < 0) {
-		log_err("++ start: game_time_recursion < 0 ++\n");
-	} else if (game_time_recursion == 0) {
-		if (game_time_start + 1000 <= egbase.get_gametime()) {
-			/*std::cout << "++ vision benchmark gametime " << game_time_start << "-" << egbase.get_gametime()
-				<< ": " << game_time_duration
-				<< " µs" << std::endl;*/
-			game_time_duration = 0;
-			game_time_start = 0;
+struct VisionBenchmark {
+	VisionBenchmark(Widelands::EditorGameBase& egbase) {
+		if (game_time_start == 0) {
+			game_time_start = egbase.get_gametime();
 		}
 
-		game_time_begin = std::chrono::steady_clock::now();
+		if (game_time_recursion < 0) {
+			log_err("++ start: game_time_recursion < 0 ++\n");
+		} else if (game_time_recursion == 0) {
+			if (game_time_start + 1000 <= egbase.get_gametime()) {
+				std::cout << "++ vision benchmark gametime " << game_time_start << "-" << egbase.get_gametime()
+					<< ": " << game_time_duration
+					<< " µs" << std::endl;
+				game_time_duration = 0;
+				game_time_start = 0;
+			}
+
+			game_time_begin = std::chrono::steady_clock::now();
+		}
+
+		++game_time_recursion;
 	}
 
-	++game_time_recursion;
-}
+	~VisionBenchmark() {
+		--game_time_recursion;
 
-void end_vision_benchmark(Widelands::EditorGameBase& egbase) {
-	--game_time_recursion;
-
-	if (game_time_recursion < 0) {
-		log_err("++ end: game_time_recursion < 0 ++\n");
-	} else if (game_time_recursion == 0) {
-		game_time_end = std::chrono::steady_clock::now();
-		game_time_duration += std::chrono::duration_cast<std::chrono::microseconds>(game_time_end - game_time_begin).count();
+		if (game_time_recursion < 0) {
+			log_err("++ end: game_time_recursion < 0 ++\n");
+		} else if (game_time_recursion == 0) {
+			game_time_end = std::chrono::steady_clock::now();
+			game_time_duration += std::chrono::duration_cast<std::chrono::microseconds>(game_time_end - game_time_begin).count();
+		}
 	}
-}
+};
 
 void terraform_for_building(Widelands::EditorGameBase& egbase,
                             const Widelands::PlayerNumber player_number,
@@ -1310,7 +1312,7 @@ void Player::enemyflagaction(Flag& flag,
 }
 
 void Player::rediscover_node(const Map& map, const FCoords& f) {
-	start_vision_benchmark(egbase_);
+	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	assert(0 <= f.x);
 	assert(f.x < map.get_width());
 	assert(0 <= f.y);
@@ -1417,7 +1419,6 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 			l_field.owner = l.field->get_owned_by();
 		}
 	}
-	end_vision_benchmark(egbase_);
 }
 
 /**
@@ -1426,7 +1427,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
  */
 /// Returns the resulting vision.
 Vision Player::see_node(const MapIndex i) {
-	start_vision_benchmark(egbase_);
+	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 	assert(fields_.get() <= &field);
@@ -1446,7 +1447,6 @@ Vision Player::see_node(const MapIndex i) {
 		}
 	}
 
-	end_vision_benchmark(egbase_);
 	return field.vision;
 }
 
@@ -1454,7 +1454,7 @@ Vision Player::see_node(const MapIndex i) {
 /// If 'mode' = UnseeMode::kUnexplore, fields will be marked as unexplored. Else, player no longer
 /// sees what's currently going on. Returns the vision that this node had before it was hidden.
 Vision Player::unsee_node(MapIndex const i) {
-	start_vision_benchmark(egbase_);
+	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 	assert(fields_.get() <= &field);
@@ -1483,12 +1483,12 @@ Vision Player::unsee_node(MapIndex const i) {
 		}
 	}
 
-	end_vision_benchmark(egbase_);
 	return original_vision;
 }
 
 // See area
 Vision Player::vision(MapIndex const i) const {
+	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	// Node visible if > 1
 	// return (see_all_ ? 3 : 0) + fields_[i].vision;
 	return fields_[i].vision;
@@ -1496,19 +1496,18 @@ Vision Player::vision(MapIndex const i) const {
 
 /// Call see_node for each node in the area.
 void Player::see_area(const Area<FCoords>& area) {
-	start_vision_benchmark(egbase_);
+	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	const Widelands::Field& first_map_field = map[0];
 	MapRegion<Area<FCoords>> mr(map, area);
 	do {
 		see_node(mr.location().field - &first_map_field);
 	} while (mr.advance(map));
-	end_vision_benchmark(egbase_);
 }
 
 /// Decrement this player's vision for each node in an area.
 void Player::unsee_area(const Area<FCoords>& area) {
-	start_vision_benchmark(egbase_);
+	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	const Widelands::Field& first_map_field = map[0];
 	MapRegion<Area<FCoords>> mr(map, area);
@@ -1518,7 +1517,6 @@ void Player::unsee_area(const Area<FCoords>& area) {
 		}
 		unsee_node(mr.location().field - &first_map_field);
 	} while (mr.advance(map));
-	end_vision_benchmark(egbase_);
 }
 /*
 SeeUnseeNode Player::get_vision(MapIndex const i) const {
@@ -1526,16 +1524,18 @@ SeeUnseeNode Player::get_vision(MapIndex const i) const {
 }*/
 
 bool Player::is_seeing(MapIndex i) const {
+	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	return vision(i) > 1;
 	// return get_vision(i) == SeeUnseeNode::kVisible;
 }
 
 bool Player::is_explored(MapIndex i) const {
+	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	return vision(i) > 0;
 }
 
 void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
-	start_vision_benchmark(egbase_);
+	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	FCoords fcoords = map.get_fcoords(coords);
 	const Widelands::MapIndex i = fcoords.field - &map[0];
@@ -1599,10 +1599,10 @@ void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
 		break;
 	}
 	log_dbg("++ Player::hide_or_reveal_field(): %u\n", field.vision);
-	end_vision_benchmark(egbase_);
 }
 
 void Player::force_update_team_vision(MapIndex const i, bool visible) {
+	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 
@@ -1625,6 +1625,7 @@ void Player::force_update_team_vision(MapIndex const i, bool visible) {
 }
 
 void Player::update_team_vision(MapIndex const i) {
+	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 
@@ -1659,6 +1660,7 @@ void Player::update_team_vision(MapIndex const i) {
 }
 
 void Player::update_team_vision_whole_map() {
+	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	if (!fields_ || egbase().objects().is_cleaning_up()) {
 		return;
 	}
