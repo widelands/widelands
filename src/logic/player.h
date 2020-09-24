@@ -646,8 +646,7 @@ private:
 	SeersList seers_;
 
 	void update_vision(const FCoords&, bool force_visible);
-	void
-	update_vision(const FCoords&, bool force_visible, SeersList& nearby_objects);
+	void update_vision(const FCoords&, bool force_visible, SeersList& nearby_objects);
 	void update_vision_whole_map();
 	SeersList team_seers();
 	SeersList seers_for(const Area<FCoords>&);

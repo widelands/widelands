@@ -1454,9 +1454,7 @@ void Player::update_vision(const FCoords& f, bool force_visible) {
 	update_vision(f, force_visible, team_seers_list);
 }
 
-void Player::update_vision(const FCoords& f,
-                           bool force_visible,
-                           SeersList& nearby_objects) {
+void Player::update_vision(const FCoords& f, bool force_visible, SeersList& nearby_objects) {
 	if (!fields_ || egbase().objects().is_cleaning_up()) {
 		return;
 	}
