@@ -379,6 +379,9 @@ bool Player::get_starting_position_suitability(const Coords& c) const {
  * Assign the player the given team number.
  */
 void Player::set_team_number(TeamNumber team) {
+	if (team_number_ == team) {
+		return;
+	}
 	team_number_ = team;
 	update_team_players();
 }
