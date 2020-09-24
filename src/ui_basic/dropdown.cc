@@ -398,9 +398,9 @@ void BaseDropdown::update() {
 }
 
 void BaseDropdown::set_value() {
+	current_selection_ = list_->selection_index();
 	update();
 	selected();
-	current_selection_ = list_->selection_index();
 }
 
 void BaseDropdown::toggle() {
