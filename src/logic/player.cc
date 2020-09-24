@@ -1439,7 +1439,7 @@ bool Player::should_see(const FCoords& f, SeersList& nearby_objects) const {
 			assert(is_a(Bob, mo));
 			const Bob* b = static_cast<const Bob*>(mo);  // NOLINT
 			if (b->get_position().field &&
-          egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
+			    egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
 				return true;
 			}
 		}
