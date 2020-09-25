@@ -122,13 +122,15 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 		installed_addons_inner_wrapper_(&installed_addons_outer_wrapper_, 0, 0, UI::Box::Vertical),
 		installed_addons_buttons_box_(&installed_addons_outer_wrapper_, 0, 0, UI::Box::Vertical),
 		installed_addons_box_(&installed_addons_inner_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
-		browse_addons_outer_wrapper_(&tabs_, 0, 0, UI::Box::Horizontal),
+		browse_addons_outer_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
 		browse_addons_inner_wrapper_(&browse_addons_outer_wrapper_, 0, 0, UI::Box::Vertical),
-		browse_addons_buttons_box_(&browse_addons_outer_wrapper_, 0, 0, UI::Box::Vertical),
-		browse_addons_box_(&browse_addons_outer_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
-		filter_name_(&browse_addons_buttons_box_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-		filter_verified_(&browse_addons_buttons_box_, Vector2i(0, 0), _("Verified only"), _("Show only verified add-ons in the Browse tab")),
-		filter_reset_(&browse_addons_buttons_box_, "f_reset", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, _("Reset"), _("Reset the filters")),
+		browse_addons_buttons_box_(&browse_addons_outer_wrapper_, 0, 0, UI::Box::Horizontal),
+		browse_addons_buttons_inner_box_1_(&browse_addons_buttons_box_, 0, 0, UI::Box::Vertical),
+		browse_addons_buttons_inner_box_2_(&browse_addons_buttons_inner_box_1_, 0, 0, UI::Box::Horizontal),
+		browse_addons_box_(&browse_addons_inner_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
+		filter_name_(&browse_addons_buttons_inner_box_1_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+		filter_verified_(&browse_addons_buttons_inner_box_2_, Vector2i(0, 0), _("Verified only"), _("Show only verified add-ons in the Browse tab")),
+		filter_reset_(&browse_addons_buttons_inner_box_2_, "f_reset", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, _("Reset"), _("Reset the filters")),
 		upgrade_all_(&buttons_box_, "upgrade_all", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, ""),
 		refresh_(&buttons_box_, "refresh", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
 				_("Refresh"), _("Refresh the list of add-ons available from the server")),
@@ -154,9 +156,9 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 	installed_addons_outer_wrapper_.add_space(kRowButtonSpacing);
 	installed_addons_outer_wrapper_.add(&installed_addons_buttons_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	browse_addons_outer_wrapper_.add(&browse_addons_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_outer_wrapper_.add(&browse_addons_buttons_box_, UI::Box::Resizing::kFullSize);
 	browse_addons_outer_wrapper_.add_space(kRowButtonSpacing);
-	browse_addons_outer_wrapper_.add(&browse_addons_buttons_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	browse_addons_outer_wrapper_.add(&browse_addons_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
 
 	installed_addons_inner_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_inner_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
@@ -165,35 +167,29 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 
 	filter_verified_.set_state(true);
 	filter_name_.set_tooltip(_("Filter add-ons by name"));
-	browse_addons_buttons_box_.add(&filter_reset_, UI::Box::Resizing::kFullSize);
-	browse_addons_buttons_box_.add_space(kRowButtonSpacing);
-	browse_addons_buttons_box_.add(&filter_name_, UI::Box::Resizing::kFullSize);
-	browse_addons_buttons_box_.add_space(kRowButtonSpacing);
-	browse_addons_buttons_box_.add(&filter_verified_, UI::Box::Resizing::kFullSize);
-	browse_addons_buttons_box_.add_space(kRowButtonSpacing);
 	{
-		UI::Box* boxes[4];
-		for (uint8_t i = 0; i < 4; ++i) {
-			boxes[i] = new UI::Box(&browse_addons_buttons_box_, 0, 0, UI::Box::Horizontal);
-			browse_addons_buttons_box_.add(boxes[i], UI::Box::Resizing::kFullSize);
-		}
 		uint8_t index = 0;
 		for (const auto& pair : kAddOnCategories) {
 			if (pair.first == AddOnCategory::kNone) { continue; }
-			UI::Checkbox* c = new UI::Checkbox(boxes[index / 2], Vector2i(0, 0), g_image_cache->get(pair.second.icon), pair.second.descname());
+			UI::Checkbox* c = new UI::Checkbox(&browse_addons_buttons_box_, Vector2i(0, 0), g_image_cache->get(pair.second.icon),
+					(boost::format(_("Toggle category ‘%s’")) % pair.second.descname()).str());
 			filter_category_[pair.first] = c;
-			boxes[index / 2]->add(c, UI::Box::Resizing::kExpandBoth);
-			/* if (index % 2 == 0) {
-				boxes[index / 2]->add_inf_space();
-			} */
 			c->set_state(true);
-			c->changed.connect([this]() {
-				filter_reset_.set_enabled(true);
-				rebuild();
+			c->changed.connect([this, &pair]() {
+				category_filter_changed(pair.first);
 			});
+			c->set_desired_size(kRowButtonSize, kRowButtonSize);
+			browse_addons_buttons_box_.add(c, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			browse_addons_buttons_box_.add_space(kRowButtonSpacing);
 			++index;
 		}
 	}
+	browse_addons_buttons_inner_box_2_.add(&filter_verified_, UI::Box::Resizing::kFullSize);
+	browse_addons_buttons_inner_box_2_.add(&filter_reset_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_buttons_inner_box_1_.add(&browse_addons_buttons_inner_box_2_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_buttons_inner_box_1_.add_space(kRowButtonSpacing);
+	browse_addons_buttons_inner_box_1_.add(&filter_name_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_buttons_box_.add(&browse_addons_buttons_inner_box_1_, UI::Box::Resizing::kExpandBoth);
 
 	filter_reset_.set_enabled(false);
 	filter_name_.changed.connect([this]() {
@@ -356,6 +352,26 @@ void AddOnsCtrl::focus_installed_addon_row(const AddOnInfo& info) {
 void AddOnsCtrl::think() {
 	UI::Panel::think();
 	check_enable_move_buttons();
+}
+
+static bool category_filter_changing = false;
+void AddOnsCtrl::category_filter_changed(const AddOnCategory which) {
+	// protect against recursion
+	if (category_filter_changing) {
+		return;
+	}
+	category_filter_changing = true;
+
+	// CTRL enables the selected category and disables all others
+	if (SDL_GetModState() & KMOD_CTRL) {
+		for (auto& pair : filter_category_) {
+			pair.second->set_state(pair.first == which);
+		}
+	}
+
+	filter_reset_.set_enabled(true);
+	rebuild();
+	category_filter_changing = false;
 }
 
 void AddOnsCtrl::check_enable_move_buttons() {
@@ -609,7 +625,7 @@ void AddOnsCtrl::layout() {
 		autofix_dependencies_.set_desired_size(ok_.get_w(), has_warnings ? ok_.get_h() : 0);
 
 		installed_addons_outer_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize);
-		browse_addons_outer_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize);
+		browse_addons_inner_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize - browse_addons_buttons_box_.get_h());
 	}
 
 	UI::Window::layout();
