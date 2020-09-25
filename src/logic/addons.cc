@@ -48,7 +48,7 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
 			[]() { return _("Win Condition"); }, "images/wui/menus/objectives.png", false}},
 	{AddOnCategory::kStartingCondition, AddOnCategoryInfo {"starting_condition",
 			[]() { return _("Starting Condition"); }, "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", false}},
-	{AddOnCategory::kWinCondition, AddOnCategoryInfo {"theme",
+	{AddOnCategory::kTheme, AddOnCategoryInfo {"theme",
 			[]() { return _("Theme"); }, "images/wui/menus/main_menu.png", false}}
 };
 
@@ -191,7 +191,7 @@ AddOnInfo preload_addon(const std::string& name) {
 		s.get_safe_positive("version"),
 		i18n_profile.get_safe_section("global").get_safe_positive(name.c_str()),
 		get_category(s.get_safe_string("category")),
-		{}, false, {{}, {}}, 0, "", 0, 0, 0.f, {}
+		{}, false, {{}, {}, {}, {}}, 0, "", 0, 0, 0, 0.f, {}
 	};
 
 	if (i.category == AddOnCategory::kNone) {

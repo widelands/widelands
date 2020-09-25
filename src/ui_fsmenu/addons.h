@@ -29,7 +29,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
@@ -95,17 +94,16 @@ protected:
 private:
 	FullscreenMenuMain& fsmm_;
 
-	UI::Box main_box_;
+	UI::Box main_box_, buttons_box_;
 	UI::MultilineTextarea warn_requirements_;
 	UI::TabPanel tabs_;
-	UI::Box installed_addons_outer_wrapper_, installed_addons_inner_wrapper_, installed_addons_buttons_box_,
-			browse_addons_wrapper_, installed_addons_box_, browse_addons_box_,
-			filter_settings_, filter_name_box_, filter_buttons_box_;
+	UI::Box installed_addons_outer_wrapper_, installed_addons_inner_wrapper_, installed_addons_buttons_box_, installed_addons_box_,
+			browse_addons_outer_wrapper_, browse_addons_inner_wrapper_, browse_addons_buttons_box_, browse_addons_box_;
+	std::map<AddOnCategory, UI::Checkbox*> filter_category_;
 	std::vector<RemoteAddOnRow*> browse_;
 	UI::EditBox filter_name_;
-	UI::Dropdown<std::string> filter_category_;
 	UI::Checkbox filter_verified_;
-	UI::Button ok_, filter_apply_, filter_reset_, upgrade_all_, refresh_, autofix_dependencies_,
+	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, autofix_dependencies_,
 			move_top_, move_up_, move_down_, move_bottom_;
 
 	void check_enable_move_buttons();
@@ -119,12 +117,10 @@ private:
 	std::vector<AddOnInfo> remotes_;
 	void refresh_remotes();
 
-	bool matches_filter(const AddOnInfo&, bool local);
-
-	using Locales = std::set<std::string>;
+	bool matches_filter(const AddOnInfo&);
 
 	std::string download_addon(ProgressIndicatorWindow&, const AddOnInfo&);
-	std::set<std::string> download_i18n(ProgressIndicatorWindow&, const AddOnInfo&, const Locales&);
+	std::set<std::string> download_i18n(ProgressIndicatorWindow&, const AddOnInfo&);
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_H

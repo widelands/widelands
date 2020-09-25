@@ -27,10 +27,10 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/log.h"
+#include "base/md5.h"
 #include "base/wexception.h"
+#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "io/streamread.h"
 #include "logic/filesystem_constants.h"
 
 // silence warnings triggered by curl.h
@@ -64,6 +64,7 @@ static size_t refresh_remotes_callback(char* received_data, size_t, const size_t
 	return char_count;
 }
 
+constexpr uint16_t kCurrentListVersion = 1;
 std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	// TODO(Nordfriese): This connects to my personal dummy add-ons repo for demonstration.
 	// A GitHub repo is NOT SUITED as an add-ons server because the list of add-ons needs
@@ -111,6 +112,11 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		return std::strtol(word.c_str(), nullptr, 10);
 	};
 
+	const uint16_t list_version = next_number(output);
+	if (list_version != kCurrentListVersion) {
+		throw wexception("List version mismatch! Found version %u, supported version is %u", list_version, kCurrentListVersion);
+	}
+
 	const size_t nr_addons = next_number(output);
 	for (size_t i = 0; i < nr_addons; ++i) {
 		AddOnInfo info;
@@ -123,9 +129,11 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		info.descname = [descname]() { return descname; };
 		info.description = [descr]() { return descr; };
 		info.author = [author]() { return author; };
+		info.upload_username = next_word(output);
 
 		info.version = next_number(output);
 		info.i18n_version = next_number(output);
+		info.total_file_size = next_number(output);
 
 		info.category = get_category(next_word(output));
 
@@ -139,13 +147,22 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		for (size_t files = next_number(output); files; --files) {
 			info.file_list.files.push_back(next_word(output));
 		}
+		for (size_t locales = next_number(output); locales; --locales) {
+			info.file_list.locales.push_back(next_word(output));
+		}
+		for (size_t sums = next_number(output); sums; --sums) {
+			info.file_list.checksums.push_back(next_word(output));
+		}
+		if (info.file_list.checksums.size() != info.file_list.files.size() + info.file_list.locales.size()) {
+			throw wexception("Found %" PRIuS " files and %" PRIuS " locales, but %" PRIuS " checksums",
+					info.file_list.files.size(), info.file_list.locales.size(), info.file_list.checksums.size());
+		}
 
 		info.verified = next_word(output) == "verified";
 
 		// TODO(Nordfriese): These are not yet implemented on the server-side –
 		// initializing with some proof-of-concept dummy values
 		info.upload_timestamp = 1600000000;
-		info.upload_username = "Nordfriese";
 		info.download_count = 12345;
 		info.votes = 45;
 		info.average_rating = 6.789f;
@@ -160,39 +177,43 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	return result_vector;
 }
 
-// If a file does not exist or some other error occurs, we may get a valid file
-// containing the text "404: Not Found". So we open the file, read the first 14
-// characters, and check whether this is the case.
-// Another problem we can forget about when we have a real server…
-// Returns "" if the file is OK, otherwise an error message as a string.
-static std::string check_downloaded_file(const std::string& path) {
+static void check_downloaded_file(const std::string& path, const std::string& checksum) {
 	try {
-		std::unique_ptr<StreamRead> checker(g_fs->open_stream_read(path));
-		if (!checker) {
-			return (boost::format(_("Downloaded file ‘%s’: Unable to open output file")) % path).str();
-		} else {
-			char buffer[15];
-			checker->data(&buffer, 14);
-			buffer[14] = '\0';
-			if (std::strcmp(buffer, "404: Not Found") == 0) {
-				return (boost::format(_("Downloaded file ‘%s’: ‘404: Not Found’")) % path).str();
-			}
+		// Our md5 implementation is not well documented, so I am doing this
+		// as it is done in GameClient::handle_new_file and hope it works…
+		FileRead fr;
+		fr.open(*g_fs, path);
+		const size_t bytes = fr.get_size();
+		std::unique_ptr<char[]> complete(new char[bytes]);
+		fr.data_complete(complete.get(), bytes);
+		SimpleMD5Checksum md5sum;
+		md5sum.data(complete.get(), bytes);
+		md5sum.finish_checksum();
+		const std::string md5 = md5sum.get_checksum().str();
+		if (checksum != md5) {
+			throw wexception("Downloaded file '%s': Checksum mismatch, found %s, expected %s", path.c_str(), md5.c_str(), checksum.c_str());
 		}
 	} catch (const std::exception& e) {
-		return (boost::format(_("Downloaded file ‘%1$s’: Invalid output file: %2$s")) % path % e.what()).str();
+		throw wexception("Downloaded file '%s': Unable to check output file: %s", path.c_str(), e.what());
 	}
-	return "";
+}
+
+void NetAddons::set_url(std::string url) {
+	size_t pos = 0;
+	while ((pos = url.find(' ')) != std::string::npos) {
+		url.replace(pos, 1, "%20");
+	}
+	curl_easy_setopt(curl_, CURLOPT_URL, url.c_str());
 }
 
 // TODO(Nordfriese): Add-on downloading speed would benefit greatly from storing
 // the files as ZIPs on the server. Similar for translation bundles. Perhaps
 // someone would like to write code to uncompress a downloaded ZIP file some day…
 
-void NetAddons::download_addon_file(const std::string& name, const std::string& output) {
+void NetAddons::download_addon_file(const std::string& name, const std::string& checksum, const std::string& output) {
 	init();
 
-	const std::string url = "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/addons/" + name;
-	curl_easy_setopt(curl_, CURLOPT_URL, url.c_str());
+	set_url(std::string("https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/addons/") + name);
 
 	std::FILE* out_file = std::fopen(output.c_str(), "wb");
 	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
@@ -205,26 +226,21 @@ void NetAddons::download_addon_file(const std::string& name, const std::string& 
 	fclose(out_file);
 
 	if (res != CURLE_OK) {
-		throw wexception("CURL terminated with error code %d", res);
+		throw wexception("%s: CURL terminated with error code %d", name.c_str(), res);
 	}
-	const std::string result = check_downloaded_file(output);
-	if (!result.empty()) {
-		log_err("%s -> fail\n", result.c_str());
-		throw wexception("%s", result.c_str());
-	}
+	check_downloaded_file(output, checksum);
 }
 
-std::string NetAddons::download_i18n(const std::string& name, const std::string& locale) {
+std::string NetAddons::download_i18n(const std::string& name, const std::string& checksum, const std::string& locale) {
 	init();
 
 	const std::string temp_dirname = kTempFileDir + g_fs->file_separator() + name + ".mo" + kTempFileExtension;
 	g_fs->ensure_directory_exists(temp_dirname);
 
-	const std::string relative_output = temp_dirname + g_fs->file_separator() + locale + ".mo" + kTempFileExtension;
+	const std::string relative_output = temp_dirname + g_fs->file_separator() + locale + kTempFileExtension;
 	const std::string canonical_output = g_fs->canonicalize_name(g_fs->get_userdatadir() + "/" + relative_output);
 
-	const std::string url = "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/i18n/" + name + "/" + locale + ".mo";
-	curl_easy_setopt(curl_, CURLOPT_URL, url.c_str());
+	set_url(std::string("https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/i18n/") + name + "/" + locale);
 
 	std::FILE* out_file = std::fopen(canonical_output.c_str(), "wb");
 	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
@@ -237,18 +253,11 @@ std::string NetAddons::download_i18n(const std::string& name, const std::string&
 	fclose(out_file);
 
 	if (res != CURLE_OK) {
-		log_err("Downloading add-on translation %s for %s to %s: CURL returned error code %d\n",
-				locale.c_str(), name.c_str(), canonical_output.c_str(), res);
-		return "";
+		throw wexception("[%s / %s] CURL terminated with error code %d\n", name.c_str(), locale.c_str(), res);
 	}
 
-	const std::string result = check_downloaded_file(relative_output);
-	if (result.empty()) {
-		return canonical_output;
-	} else {
-		log_warn("%s -> skip\n", result.c_str());
-		return "";
-	}
+	check_downloaded_file(relative_output, checksum);
+	return canonical_output;
 }
 
 CLANG_DIAG_ON("-Wdisabled-macro-expansion")

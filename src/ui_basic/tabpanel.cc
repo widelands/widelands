@@ -62,10 +62,31 @@ Tab::Tab(TabPanel* const tab_parent,
      rendered_title(nullptr),
      tooltip(tooltip_text),
      panel(contents) {
-	if (!init_title.empty()) {
+	set_title(init_title);
+}
+
+void Tab::set_title(const std::string& init_title) {
+	if (init_title.empty()) {
+		rendered_title = nullptr;
+	} else {
 		rendered_title = UI::g_fh->render(as_richtext_paragraph(init_title, UI::FontStyle::kLabel));
+		const int16_t old_w = get_w();
 		set_size(std::max(kTabPanelButtonHeight, rendered_title->width() + 2 * kTabPanelTextMargin),
 		         kTabPanelButtonHeight);
+		const int16_t new_w = get_w();
+		if (old_w == new_w) {
+			return;
+		}
+		TabPanel& t = dynamic_cast<TabPanel&>(*get_parent());
+		bool found_self = false;
+		for (Tab* tab : t.tabs()) {
+			if (tab == this) {
+				assert(!found_self);
+				found_self = true;
+			} else if (found_self) {
+				tab->set_pos(Vector2i(tab->get_x() + new_w - old_w, tab->get_y()));
+			}
+		}
 	}
 }
 

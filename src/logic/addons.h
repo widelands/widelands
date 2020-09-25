@@ -58,7 +58,7 @@ using AddOnRequirements = std::vector<std::pair<std::string, uint32_t>>;
 
 // TODO(Nordfriese): Ugly hack required for the dummy server. Can go when we have a real server.
 struct AddOnFileList {
-	std::vector<std::string> directories, files;
+	std::vector<std::string> directories, files, locales, checksums;
 };
 
 struct AddOnComment {
@@ -86,9 +86,11 @@ struct AddOnInfo {
 
 	AddOnFileList file_list;  // Get rid of this ASAP
 
+	uint32_t total_file_size;      // total size of all files, in bytes
+	std::string upload_username;   // who uploaded (may be different from author)
+
 	// TODO(Nordfriese): These are not yet implemented on the server-side
 	std::time_t upload_timestamp;  // date and time when this version was uploaded
-	std::string upload_username;   // who uploaded (may be different from author)
 	uint32_t download_count;       // total times downloaded
 	uint32_t votes;                // total number of votes
 	float average_rating;          // average rating between 1.0 and 10.0 (0 if no votes)
