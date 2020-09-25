@@ -29,6 +29,7 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
@@ -94,16 +95,28 @@ protected:
 private:
 	FullscreenMenuMain& fsmm_;
 
+	enum class AddOnSortingCriteria {
+		kNameABC,
+		kNameCBA,
+		kMostDownloads,
+		kFewestDownloads,
+		kHighestRating,
+		kLowestRating,
+		kOldest,
+		kNewest
+	};
+
 	UI::Box main_box_, buttons_box_;
 	UI::MultilineTextarea warn_requirements_;
 	UI::TabPanel tabs_;
 	UI::Box installed_addons_outer_wrapper_, installed_addons_inner_wrapper_, installed_addons_buttons_box_, installed_addons_box_,
-			browse_addons_outer_wrapper_, browse_addons_inner_wrapper_,
-			browse_addons_buttons_box_, browse_addons_buttons_inner_box_1_, browse_addons_buttons_inner_box_2_, browse_addons_box_;
+			browse_addons_outer_wrapper_, browse_addons_inner_wrapper_, browse_addons_buttons_box_,
+			browse_addons_buttons_inner_box_1_, browse_addons_buttons_inner_box_2_, browse_addons_box_;
 	std::map<AddOnCategory, UI::Checkbox*> filter_category_;
 	std::vector<RemoteAddOnRow*> browse_;
 	UI::EditBox filter_name_;
 	UI::Checkbox filter_verified_;
+	UI::Dropdown<AddOnSortingCriteria> sort_order_;
 	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, autofix_dependencies_,
 			move_top_, move_up_, move_down_, move_bottom_;
 

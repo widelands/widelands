@@ -28,7 +28,6 @@
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "scripting/lua_table.h"
-#include "ui_basic/dropdown.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/progressbar.h"
@@ -130,6 +129,8 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 		browse_addons_box_(&browse_addons_inner_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
 		filter_name_(&browse_addons_buttons_inner_box_1_, 0, 0, 100, UI::PanelStyle::kFsMenu),
 		filter_verified_(&browse_addons_buttons_inner_box_2_, Vector2i(0, 0), _("Verified only"), _("Show only verified add-ons in the Browse tab")),
+		sort_order_(&browse_addons_buttons_inner_box_1_, "sort", 0, 0, 0, 10, filter_name_.get_h(),
+				_("Sort by"), UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 		filter_reset_(&browse_addons_buttons_inner_box_2_, "f_reset", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, _("Reset"), _("Reset the filters")),
 		upgrade_all_(&buttons_box_, "upgrade_all", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary, ""),
 		refresh_(&buttons_box_, "refresh", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
@@ -165,6 +166,23 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 	tabs_.add("my", "", &installed_addons_outer_wrapper_);
 	tabs_.add("all", "", &browse_addons_outer_wrapper_);
 
+	/** TRANSLATORS: Sort add-ons alphabetically by name */
+	sort_order_.add(_("Name"), AddOnSortingCriteria::kNameABC);
+	/** TRANSLATORS: Sort add-ons alphabetically by name (inverted) */
+	sort_order_.add(_("Name (descending)"), AddOnSortingCriteria::kNameCBA);
+	/** TRANSLATORS: Sort add-ons by average rating */
+	sort_order_.add(_("Best average rating"), AddOnSortingCriteria::kHighestRating, nullptr, true);
+	/** TRANSLATORS: Sort add-ons by average rating */
+	sort_order_.add(_("Worst average rating"), AddOnSortingCriteria::kLowestRating);
+	/** TRANSLATORS: Sort add-ons by how often they were downloaded */
+	sort_order_.add(_("Most often downloaded"), AddOnSortingCriteria::kMostDownloads);
+	/** TRANSLATORS: Sort add-ons by how often they were downloaded */
+	sort_order_.add(_("Least often downloaded"), AddOnSortingCriteria::kFewestDownloads);
+	/** TRANSLATORS: Sort add-ons by upload date/time */
+	sort_order_.add(_("Oldest"), AddOnSortingCriteria::kOldest);
+	/** TRANSLATORS: Sort add-ons by upload date/time */
+	sort_order_.add(_("Newest"), AddOnSortingCriteria::kNewest);
+
 	filter_verified_.set_state(true);
 	filter_name_.set_tooltip(_("Filter add-ons by name"));
 	{
@@ -187,9 +205,10 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 	browse_addons_buttons_inner_box_2_.add(&filter_verified_, UI::Box::Resizing::kFullSize);
 	browse_addons_buttons_inner_box_2_.add(&filter_reset_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_buttons_inner_box_1_.add(&browse_addons_buttons_inner_box_2_, UI::Box::Resizing::kExpandBoth);
-	browse_addons_buttons_inner_box_1_.add_space(kRowButtonSpacing);
 	browse_addons_buttons_inner_box_1_.add(&filter_name_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_buttons_inner_box_1_.add(&sort_order_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_buttons_box_.add(&browse_addons_buttons_inner_box_1_, UI::Box::Resizing::kExpandBoth);
+
 
 	filter_reset_.set_enabled(false);
 	filter_name_.changed.connect([this]() {
@@ -198,6 +217,9 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 	});
 	filter_verified_.changed.connect([this]() {
 		filter_reset_.set_enabled(true);
+		rebuild();
+	});
+	sort_order_.selected.connect([this]() {
 		rebuild();
 	});
 
@@ -479,11 +501,57 @@ void AddOnsCtrl::rebuild() {
 	tabs_.tabs()[0]->set_title((boost::format(_("Installed (%u)")) % index).str());
 
 	index = 0;
-	std::vector<AddOnInfo> remotes_to_show;
+	std::list<AddOnInfo> remotes_to_show;
 	for (const AddOnInfo& a : remotes_) {
 		if (matches_filter(a)) {
 			remotes_to_show.push_back(a);
 		}
+	}
+	{
+		const AddOnSortingCriteria sort_by = sort_order_.get_selected();
+		remotes_to_show.sort([sort_by](const AddOnInfo& a, const AddOnInfo& b) {
+			switch (sort_by) {
+			case AddOnSortingCriteria::kNameABC:
+				return a.descname().compare(b.descname()) < 0;
+			case AddOnSortingCriteria::kNameCBA:
+				return a.descname().compare(b.descname()) > 0;
+
+			case AddOnSortingCriteria::kFewestDownloads:
+				return a.download_count < b.download_count;
+			case AddOnSortingCriteria::kMostDownloads:
+				return a.download_count > b.download_count;
+
+			case AddOnSortingCriteria::kOldest:
+				return a.upload_timestamp < b.upload_timestamp;
+			case AddOnSortingCriteria::kNewest:
+				return a.upload_timestamp > b.upload_timestamp;
+
+			case AddOnSortingCriteria::kLowestRating:
+				if (a.votes == 0) {
+					// Add-ons without votes should always end up
+					// below any others when sorting by rating
+					return false;
+				} else if (b.votes == 0) {
+					return true;
+				} else if (a.average_rating == b.average_rating) {
+					// ambiguity – always choose the one with more votes
+					return a.votes > b.votes;
+				} else {
+					return a.average_rating < b.average_rating;
+				}
+			case AddOnSortingCriteria::kHighestRating:
+				if (a.votes == 0) {
+					return false;
+				} else if (b.votes == 0) {
+					return true;
+				} else if (a.average_rating == b.average_rating) {
+					return a.votes > b.votes;
+				} else {
+					return a.average_rating > b.average_rating;
+				}
+			}
+			NEVER_HERE();
+		});
 	}
 	std::vector<std::string> has_upgrades;
 	for (const AddOnInfo& a : remotes_to_show) {
@@ -1137,9 +1205,11 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 		UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 	bottom_row_left_(this, 0, 0, 0, 0, time_string(info.upload_timestamp),
 			UI::Align::kLeft, g_style_manager->font_style(UI::FontStyle::kTooltip)),
-	bottom_row_right_(this, 0, 0, 0, 0, (boost::format(_("%1$s   ⬇ %2$u   ★ %3$.2f   “” %4$u"))
-			% filesize_string(info.total_file_size) % info.download_count % info.average_rating % info.user_comments.size()).str(),
-			UI::Align::kRight, g_style_manager->font_style(UI::FontStyle::kTooltip)),
+	bottom_row_right_(this, 0, 0, 0, 0, (boost::format(_("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u"))
+			% filesize_string(info.total_file_size) % info.download_count
+			% (info.votes ? (boost::format("%.2f") % info.average_rating).str() : "–")
+			% info.user_comments.size()).str(),
+		UI::Align::kRight, g_style_manager->font_style(UI::FontStyle::kTooltip)),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
 		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
 		% g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag(info.author() == info.upload_username ?
