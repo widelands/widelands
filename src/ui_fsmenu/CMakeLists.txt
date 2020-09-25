@@ -107,7 +107,6 @@ wl_library(ui_fsmenu_gameloading
     io_filesystem
     io_profile
     logic
-    logic_constants
     logic_game_controller
     logic_game_settings
     logic_map
