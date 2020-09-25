@@ -35,7 +35,6 @@ void draw_border_markers(const FieldsToDraw::Field& field,
 
 	uint32_t const anim_idx = field.owner->tribe().frontier_animation();
 	if (field.vision) {
-	// if (field.seeing != Widelands::SeeUnseeNode::kUnexplored) {
 		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, anim_idx, 0,
 		                    &field.owner->get_playercolor());
 	}
@@ -43,9 +42,6 @@ void draw_border_markers(const FieldsToDraw::Field& field,
 	                       fields_to_draw.at(field.brn_index)}) {
 		if ((field.vision || nf.vision) && nf.is_border &&
 		    (field.owner == nf.owner || nf.owner == nullptr)) {
-//		if ((field.seeing != Widelands::SeeUnseeNode::kUnexplored ||
-//		     nf.seeing != Widelands::SeeUnseeNode::kUnexplored) &&
-//		    nf.is_border && (field.owner == nf.owner || nf.owner == nullptr)) {
 			dst->blit_animation(middle(field.rendertarget_pixel, nf.rendertarget_pixel),
 			                    Widelands::Coords::null(), scale, anim_idx, 0,
 			                    &field.owner->get_playercolor());

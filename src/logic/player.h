@@ -31,7 +31,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/message_queue.h"
-#include "logic/see_unsee_node.h"
+#include "logic/hide_or_reveal_field_mode.h"
 #include "logic/widelands.h"
 #include "sound/constants.h"
 
@@ -282,7 +282,6 @@ public:
 		/// worker objects that can see the node.
 		///
 		/// \note Never change this directly. Use update_vision() to recalculate.
-		// SeeUnseeNode seeing;
 		Vision vision;
 
 		bool is_visible() const {
@@ -450,7 +449,6 @@ public:
 	/// Decrement this player's vision for each node in an area.
 	void unsee_area(const Area<FCoords>&);
 
-	// SeeUnseeNode get_vision(MapIndex) const;
 	bool is_seeing(MapIndex) const;
 	bool is_explored(MapIndex) const;
 
@@ -461,7 +459,7 @@ public:
 	// Note that kPreviouslySeen and kVisible will work as expected only when
 	// no building or worker is seeing the field. But they will always undo
 	// the effects of revealing the field with kVisible.
-	void hide_or_reveal_field(const Coords&, SeeUnseeNode);
+	void hide_or_reveal_field(const Coords&, HideOrRevealFieldMode);
 
 	/// Explicitly hide or reveal the field at 'c'. The modes are as follows:
 	/// - kUnsee:     Decrement the field's vision

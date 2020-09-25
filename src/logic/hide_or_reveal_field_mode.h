@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef WL_LOGIC_SEE_UNSEE_NODE_H
-#define WL_LOGIC_SEE_UNSEE_NODE_H
+#ifndef WL_LOGIC_HIDE_OR_REVEAL_FIELD_MODE_H
+#define WL_LOGIC_HIDE_OR_REVEAL_FIELD_MODE_H
 
 namespace Widelands {
-enum class SeeUnseeNode {
-	kUnsee, kForget, kReveal
+enum class HideOrRevealFieldMode {
+	kHide, kHideAndForget, kReveal
 };
 }  // namespace Widelands
-#endif  // end of include guard: WL_LOGIC_SEE_UNSEE_NODE_H
+#endif  // end of include guard: WL_LOGIC_HIDE_OR_REVEAL_FIELD_MODE_H

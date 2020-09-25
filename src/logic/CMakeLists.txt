@@ -202,6 +202,7 @@ wl_library(logic
     editor_game_base.h
     game.cc
     game.h
+    hide_or_reveal_field_mode.h
     message.h
     message_id.h
     message_queue.h
@@ -214,7 +215,6 @@ wl_library(logic
     replay.h
     save_handler.cc
     save_handler.h
-    see_unsee_node.h
     trade_agreement.h
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2

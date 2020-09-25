@@ -24,7 +24,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/road_segments.h"
 #include "logic/editor_game_base.h"
-#include "logic/see_unsee_node.h"
 #include "logic/widelands_geometry.h"
 
 // Helper struct that contains the data needed for drawing all fields.

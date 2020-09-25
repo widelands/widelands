@@ -181,13 +181,11 @@ void do_draw_minimap(Texture* texture,
 			Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 			move_r(mapwidth, f, i);
 
-			uint16_t vision = 0;  // See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
-//			Widelands::SeeUnseeNode vision = Widelands::SeeUnseeNode::kUnexplored;
+			Widelands::Vision vision = 0;  // See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
 			Widelands::PlayerNumber owner = 0;
 			if (player == nullptr || player->see_all()) {
 				// This player has omnivision - show the field like it is in reality.
 				vision = 2;  // Seen right now.
-				// vision = Widelands::SeeUnseeNode::kVisible;  // Seen right now.
 				owner = f.field->get_owned_by();
 			} else if (player != nullptr) {
 				// This player might be affected by fog of war - instead of the
@@ -198,18 +196,12 @@ void do_draw_minimap(Texture* texture,
 				// If she never had vision, field.vision will be 0.
 				const auto& field = player->fields()[i];
 				vision = field.vision;
-//				vision = field.seeing;
 				owner = field.owner;
 			}
 
 			if (vision > 0) {
 				texture->set_pixel(x, y, calc_minimap_color(egbase, f, layers, owner, vision > 1));
 			}
-			/*if (vision != Widelands::SeeUnseeNode::kUnexplored) {
-				texture->set_pixel(x, y,
-				                   calc_minimap_color(egbase, f, layers, owner,
-				                                      vision == Widelands::SeeUnseeNode::kVisible));
-			}*/
 		}
 	}
 }

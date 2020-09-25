@@ -391,9 +391,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 					} else {
 						Coords const coord = imm->get_position();
 						MapIndex mapidx = map.get_index(coord, map.get_width());
-						Vision const visible = owner().vision(mapidx);
-						if (!visible) {
-						// if (owner().get_vision(mapidx) == SeeUnseeNode::kUnexplored) {
+						if (!owner().is_explored(mapidx)) {
 							list.erase(list.begin() + idx);
 						}
 					}
@@ -3091,12 +3089,9 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 			Coords const coord = list[lidx];
 			list.erase(list.begin() + lidx);
 			MapIndex idx = map.get_index(coord, map.get_width());
-			// Vision const visible = owner().vision(idx);
-//			const SeeUnseeNode visible = owner().get_vision(idx);
 
 			// If the field is not yet discovered, go there
-			if (!owner().is_seeing(idx)) {
-			// if (visible == SeeUnseeNode::kUnexplored) {
+			if (!owner().is_explored(idx)) {
 				molog(game.get_gametime(), "[scout]: Go to interesting field (%i, %i)\n", coord.x,
 				      coord.y);
 				if (!start_task_movepath(
@@ -3111,9 +3106,8 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 			// Else evaluate for second best target
 			int dist = map.calc_distance(coord, get_position());
 			Time time = owner().fields()[idx].time_node_last_unseen;
-			// time is only valid if visible is 1
+			// time is only valid if the field was previously seen but is not seen now
 			if (!owner().is_explored(idx) || owner().is_seeing(idx)) {
-			// if (visible != SeeUnseeNode::kPreviouslySeen) {
 				time = oldest_time;
 			}
 

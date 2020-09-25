@@ -1549,15 +1549,10 @@ void Player::unsee_area(const Area<FCoords>& area) {
 		unsee_node(mr.location().field - &first_map_field);
 	} while (mr.advance(map));
 }
-/*
-SeeUnseeNode Player::get_vision(MapIndex const i) const {
-	return see_all_ ? SeeUnseeNode::kVisible : fields_[i].seeing;
-}*/
 
 bool Player::is_seeing(MapIndex i) const {
 	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	return vision(i) > 1;
-	// return get_vision(i) == SeeUnseeNode::kVisible;
 }
 
 bool Player::is_explored(MapIndex i) const {
@@ -1565,7 +1560,7 @@ bool Player::is_explored(MapIndex i) const {
 	return vision(i) > 0;
 }
 
-void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
+void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mode) {
 	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	FCoords fcoords = map.get_fcoords(coords);
@@ -1573,7 +1568,7 @@ void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
 	Field& field = fields_[i];
 
 	switch (mode) {
-	case SeeUnseeNode::kReveal:
+	case HideOrRevealFieldMode::kReveal:
 		if (field.vision > 2 && field.vision % 2 == 1) {
 			break;
 		}
@@ -1592,7 +1587,7 @@ void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
 		}
 		break;
 
-	case SeeUnseeNode::kUnsee:
+	case HideOrRevealFieldMode::kHide:
 		if (field.vision < 3 || field.vision % 2 == 0) {
 			break;
 		}
@@ -1620,8 +1615,8 @@ void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
 		}
 		break;
 
-	case SeeUnseeNode::kForget:
-		hide_or_reveal_field(coords, SeeUnseeNode::kUnsee);
+	case HideOrRevealFieldMode::kHideAndForget:
+		hide_or_reveal_field(coords, HideOrRevealFieldMode::kHide);
 		assert(field.vision == 1 || field.vision % 2 == 0);
 		if (field.vision == 1) {
 			field.vision = 0;
