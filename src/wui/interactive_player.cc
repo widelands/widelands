@@ -578,13 +578,15 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 
 		// debug vision
-		UI::FontStyleInfo debug_font(g_style_manager->building_statistics_style().census_font());
-		debug_font.set_size(scale * debug_font.size());
-		debug_font.set_color({191,255,255});
-		std::shared_ptr<const UI::RenderedText> rendered_debug =
-		   UI::g_fh->render(as_richtext_paragraph(std::to_string(f->vision), debug_font, UI::Align::kCenter), 120 * scale);
-		Vector2i debug_position = f->rendertarget_pixel.cast<int>() - Vector2i(0, 12) * scale;
-		rendered_debug->draw(*dst, debug_position, UI::Align::kCenter);
+		if (get_info_to_draw(!given_map_view->is_animating()) & InfoToDraw::kStatistics) {
+			UI::FontStyleInfo debug_font(g_style_manager->building_statistics_style().census_font());
+			debug_font.set_size(scale * debug_font.size());
+			debug_font.set_color({191,255,255});
+			std::shared_ptr<const UI::RenderedText> rendered_debug =
+			   UI::g_fh->render(as_richtext_paragraph(std::to_string(f->vision), debug_font, UI::Align::kCenter), 120 * scale);
+			Vector2i debug_position = f->rendertarget_pixel.cast<int>() - Vector2i(0, 12) * scale;
+			rendered_debug->draw(*dst, debug_position, UI::Align::kCenter);
+		}
 	}
 }
 
