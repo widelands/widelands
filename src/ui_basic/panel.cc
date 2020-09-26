@@ -251,7 +251,8 @@ int Panel::do_run() {
 		   });
 	}
 
-	auto update_graphics = [this, handle_checks, app, draw_delay, forefather, prevmodal, &next_draw_time]() {
+	auto update_graphics = [this, handle_checks, app, draw_delay, forefather, prevmodal,
+	                        &next_draw_time]() {
 		for (; running_;) {
 			handle_checks();
 			MutexLock m(true);
