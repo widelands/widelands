@@ -47,10 +47,13 @@ bool is_image(const std::string& filename) {
 // we already added an image.
 void find_images(const std::string& directory,
                  std::unordered_set<std::string>* images,
-                 std::vector<std::string>* ordered_images) {
+                 std::vector<std::string>* ordered_images,
+                 std::set<std::string> exclude_dirs = {}) {
 	for (const std::string& filename : g_fs->list_directory(directory)) {
 		if (g_fs->is_directory(filename)) {
-			find_images(filename, images, ordered_images);
+			if (!exclude_dirs.count(g_fs->fs_filename(filename.c_str()))) {
+				find_images(filename, images, ordered_images, exclude_dirs);
+			}
 			continue;
 		}
 		if (is_image(filename) && !images->count(filename)) {
@@ -121,7 +124,7 @@ build_texture_atlas(const int max_size,
 	find_images("tribes/initialization", &all_images, &first_atlas_images);
 	// For UI elements mostly, but we get more than we need really.
 	find_images("images", &all_images, &first_atlas_images);
-	find_images("templates", &all_images, &first_atlas_images);
+	find_images("templates", &all_images, &first_atlas_images, {"loadscreens"});
 
 	auto first_texture_atlas = pack_images(first_atlas_images, max_size, textures_in_atlas);
 	if (first_texture_atlas.size() != 1) {
