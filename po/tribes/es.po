@@ -22,9 +22,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-04 08:23+0000\n"
-"PO-Revision-Date: 2020-08-23 15:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-09-11 11:58+0000\n"
+"PO-Revision-Date: 2020-09-17 19:38+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4155,7 +4155,7 @@ msgstr "Inmóvil"
 #: ../../data/tribes/ships/atlanteans/init.lua:83
 msgctxt "atlanteans_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Barco"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:107
@@ -4167,7 +4167,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:109
 msgctxt "shipname"
 msgid "Agate"
-msgstr ""
+msgstr "Ágata"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:111
@@ -4179,37 +4179,37 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:113
 msgctxt "shipname"
 msgid "Amber"
-msgstr ""
+msgstr "Ámbar"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:115
 msgctxt "shipname"
 msgid "Amethyst"
-msgstr ""
+msgstr "Amatista"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:117
 msgctxt "shipname"
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguilla"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:119
 msgctxt "shipname"
 msgid "Antigua"
-msgstr ""
+msgstr "Antigua"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:121
 msgctxt "shipname"
 msgid "Aquamarine"
-msgstr ""
+msgstr "Aquamarina"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:123
 msgctxt "shipname"
 msgid "Atlantean’s Stronghold"
-msgstr ""
+msgstr "Fortaleza Atlante"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:125
@@ -4221,7 +4221,7 @@ msgstr "Atlantis"
 #: ../../data/tribes/ships/atlanteans/init.lua:127
 msgctxt "shipname"
 msgid "Bahama"
-msgstr ""
+msgstr "Bahama"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:129
@@ -4233,13 +4233,13 @@ msgstr "Barbados"
 #: ../../data/tribes/ships/atlanteans/init.lua:131
 msgctxt "shipname"
 msgid "Barbuda"
-msgstr ""
+msgstr "Barbuda"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:133
 msgctxt "shipname"
 msgid "Beryl"
-msgstr ""
+msgstr "Berilo"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:135
@@ -4257,7 +4257,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:139
 msgctxt "shipname"
 msgid "Cassiterite"
-msgstr ""
+msgstr "Casiterita"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:141
@@ -4269,19 +4269,19 @@ msgstr "Cat's Eye"
 #: ../../data/tribes/ships/atlanteans/init.lua:143
 msgctxt "shipname"
 msgid "Citrine"
-msgstr ""
+msgstr "Citrina"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:145
 msgctxt "shipname"
 msgid "Colionder"
-msgstr ""
+msgstr "Colionder"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:147
 msgctxt "shipname"
 msgid "Dominica"
-msgstr ""
+msgstr "Dominica"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:149
@@ -4293,19 +4293,19 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:151
 msgctxt "shipname"
 msgid "Emerald"
-msgstr ""
+msgstr "Esmeralda"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:153
 msgctxt "shipname"
 msgid "Grenada"
-msgstr ""
+msgstr "Granada"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:155
 msgctxt "shipname"
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadalupe"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:157
@@ -4317,7 +4317,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:159
 msgctxt "shipname"
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:161
@@ -4329,13 +4329,13 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:163
 msgctxt "shipname"
 msgid "King Ajanthul"
-msgstr ""
+msgstr "Rey Ajanthul"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:165
 msgctxt "shipname"
 msgid "King Askandor"
-msgstr ""
+msgstr "Rey Askandor"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:167
@@ -4347,31 +4347,31 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:169
 msgctxt "shipname"
 msgid "Loftomor"
-msgstr ""
+msgstr "Loftomor"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:171
 msgctxt "shipname"
 msgid "Malachite"
-msgstr ""
+msgstr "Malaquita"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:173
 msgctxt "shipname"
 msgid "Martinique"
-msgstr ""
+msgstr "Martinica"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:175
 msgctxt "shipname"
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:177
 msgctxt "shipname"
 msgid "Moonstone"
-msgstr ""
+msgstr "Piedra de la luna"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:179
@@ -4395,19 +4395,19 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:185
 msgctxt "shipname"
 msgid "Obsidian"
-msgstr ""
+msgstr "Obsidiana"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:187
 msgctxt "shipname"
 msgid "Onyx"
-msgstr ""
+msgstr "Ónix"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:189
 msgctxt "shipname"
 msgid "Opol"
-msgstr ""
+msgstr "Opol"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:191
@@ -4425,25 +4425,25 @@ msgstr "Ostur"
 #: ../../data/tribes/ships/atlanteans/init.lua:195
 msgctxt "shipname"
 msgid "Pearl"
-msgstr ""
+msgstr "Perla"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:197
 msgctxt "shipname"
 msgid "Sapphire"
-msgstr ""
+msgstr "Zafiro"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:199
 msgctxt "shipname"
 msgid "Satul"
-msgstr ""
+msgstr "Satul"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:201
 msgctxt "shipname"
 msgid "Sidolus"
-msgstr ""
+msgstr "Sidolus"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:203
@@ -4461,7 +4461,7 @@ msgstr "Spider"
 #: ../../data/tribes/ships/atlanteans/init.lua:207
 msgctxt "shipname"
 msgid "Spinel"
-msgstr ""
+msgstr "Espinela"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:209
@@ -4479,13 +4479,13 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:213
 msgctxt "shipname"
 msgid "Tobago"
-msgstr ""
+msgstr "Tobago"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:215
 msgctxt "shipname"
 msgid "Topaz"
-msgstr ""
+msgstr "Topacio"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:217
@@ -4497,19 +4497,19 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:219
 msgctxt "shipname"
 msgid "Tourmaline"
-msgstr ""
+msgstr "Turmalina"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:221
 msgctxt "shipname"
 msgid "Trinidad"
-msgstr ""
+msgstr "Trinidad"
 
 #. TRANSLATORS: This is the Barbarians' ship's name used in lists of units
 #: ../../data/tribes/ships/barbarians/init.lua:8
 msgctxt "barbarians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Barco"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:28
@@ -4545,13 +4545,13 @@ msgstr "Beowulf"
 #: ../../data/tribes/ships/barbarians/init.lua:38
 msgctxt "shipname"
 msgid "Boldreth"
-msgstr ""
+msgstr "Boldreth"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:40
 msgctxt "shipname"
 msgid "Chat’Karuth"
-msgstr ""
+msgstr "Chat’Karuth"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:42
@@ -4617,7 +4617,7 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:62
 msgctxt "shipname"
 msgid "Khantrukh"
-msgstr ""
+msgstr "Khantrukh"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:64
@@ -4647,7 +4647,7 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:72
 msgctxt "shipname"
 msgid "Saxnot"
-msgstr ""
+msgstr "Saxnot"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:74
@@ -4677,7 +4677,7 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:82
 msgctxt "shipname"
 msgid "Thron"
-msgstr ""
+msgstr "Thron"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:84
@@ -4725,25 +4725,25 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:8
 msgctxt "empire_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Barco"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:28
 msgctxt "shipname"
 msgid "Adriatic Sea"
-msgstr ""
+msgstr "Mar Adriático"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:30
 msgctxt "shipname"
 msgid "Alexandria"
-msgstr ""
+msgstr "Alejandría"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:32
 msgctxt "shipname"
 msgid "Amalea"
-msgstr ""
+msgstr "Amalea"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:34
@@ -4773,7 +4773,7 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:42
 msgctxt "shipname"
 msgid "Baltic Sea"
-msgstr ""
+msgstr "Mar Báltico"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:44
@@ -4851,7 +4851,7 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:68
 msgctxt "shipname"
 msgid "Empire Glory"
-msgstr ""
+msgstr "Gloria del Imperio"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:70
@@ -5007,7 +5007,7 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:120
 msgctxt "shipname"
 msgid "Saledus"
-msgstr ""
+msgstr "Saledus"
 
 #. TRANSLATORS: This Empire ship is named after a Roman deity
 #: ../../data/tribes/ships/empire/init.lua:122
@@ -5085,7 +5085,7 @@ msgstr ""
 #: ../../data/tribes/ships/frisians/init.lua:8
 msgctxt "frisians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Barco"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:45

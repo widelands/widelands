@@ -56,7 +56,8 @@ struct Coords {
 		return std::forward_as_tuple(y, x) < std::forward_as_tuple(other.y, other.x);
 	}
 
-	operator bool() const;
+	// should be explicit to avoid accidental conversions to numbers
+	explicit operator bool() const;
 
 	// Move the coords to the 'new_origin'.
 	void reorigin(Coords new_origin, const Extent& extent);
