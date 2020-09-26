@@ -271,6 +271,8 @@ void Box::update_positions() {
 
 		if (items_[idx].type == Item::ItemPanel) {
 			set_item_size(idx, depth, items_[idx].u.panel.fullsize ? totalbreadth : breadth);
+			// Update depth, in case item did self-layouting
+			get_item_size(idx, &depth, &breadth);
 			set_item_pos(idx, totaldepth - scrollpos);
 		}
 
