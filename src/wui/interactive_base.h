@@ -360,6 +360,8 @@ private:
 	uint32_t frametime_, frametime_logic_;              //  in millseconds
 	uint32_t avg_usframetime_, avg_usframetime_logic_;  //  in microseconds!
 
+	mutable MutexLockHandler display_lock_;
+
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;

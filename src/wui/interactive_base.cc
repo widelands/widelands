@@ -334,6 +334,7 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 
 bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords,
                                            const Widelands::Map* map) const {
+	MutexLock m(&display_lock_, false);
 	if (!map) {
 		for (const auto& preview : workarea_previews_) {
 			if (preview->coords == coords) {
@@ -477,12 +478,14 @@ InteractiveBase::road_building_steepness_overlays() const {
 void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info,
                                     Widelands::Coords coords,
                                     std::map<Widelands::TCoords<>, uint32_t>& extra_data) {
+	MutexLock m(&display_lock_, false);
 	workarea_previews_.insert(
 	   std::unique_ptr<WorkareaPreview>(new WorkareaPreview{coords, &workarea_info, extra_data}));
 	workareas_cache_.reset(nullptr);
 }
 
 void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
+	MutexLock m(&display_lock_, false);
 	std::map<Widelands::TCoords<>, uint32_t> empty;
 	show_workarea(workarea_info, coords, empty);
 }
@@ -529,6 +532,7 @@ static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
 }
 
 Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) {
+	MutexLock m(&display_lock_, false);
 	if (!workareas_cache_) {
 		workareas_cache_.reset(new Workareas());
 		for (const auto& preview : workarea_previews_) {
@@ -649,6 +653,7 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 }
 
 void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_additional) {
+	MutexLock m(&display_lock_, false);
 	for (auto it = workarea_previews_.begin(); it != workarea_previews_.end(); ++it) {
 		if (it->get()->coords == coords && (is_additional ^ it->get()->data.empty())) {
 			workarea_previews_.erase(it);
@@ -786,7 +791,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
-			MutexLock m;
+			MutexLock m(&UI::RenderedText::text_renderer_mutex, false);
 			rendered_text = UI::g_fh->render(
 			   as_richtext_paragraph((boost::format("DISPLAY: %5.1f fps (avg: %5.1f fps)") %
 			                          (1000.0 / frametime_) % average_fps())

@@ -38,7 +38,6 @@ bool is_initializer_thread_set();
 // Wrapper for a mutex that can be locked and unlocked using a MutexLock
 struct MutexLockHandler {
 	explicit MutexLockHandler();
-	MutexLockHandler(const MutexLockHandler&) = default;
 	~MutexLockHandler() {
 	}
 
@@ -54,7 +53,7 @@ private:
 };
 
 /*
- * This struct handles the global mutex. The logic and drawing code are executed in
+ * This struct handles mutexes. The logic, drawing, and AI codes are executed in
  * parallel, but some functions assume that the game state doesn't change while they
  * are executing. Create a MutexLock when entering such a critical section. This will
  * suspend the current thread until the lock is available, then claim the lock for

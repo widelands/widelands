@@ -251,11 +251,13 @@ int Panel::do_run() {
 		   });
 	}
 
-	auto update_graphics = [this, handle_checks, app, draw_delay, forefather, &next_draw_time]() {
+	auto update_graphics = [this, handle_checks, app, draw_delay, forefather, prevmodal, &next_draw_time]() {
 		for (; running_;) {
 			handle_checks();
 			MutexLock m(true);
-			if (m.is_valid()) {
+			// If `prevmodal` is not null, then this was called by a modal message box.
+			// The game is paused in this case, no need to wait until we get a lock.
+			if (m.is_valid() || prevmodal != nullptr) {
 				RenderTarget& rt = *g_gr->get_render_target();
 				forefather->do_draw(rt);
 				if (g_mouse_cursor->is_visible()) {
@@ -297,7 +299,7 @@ int Panel::do_run() {
 		if (start_time >= next_draw_time) {
 			// Rendering may be done only by the main thread
 			NoteDelayedCheck::instantiate(
-			   this, [update_graphics]() { update_graphics(); }, true);
+			   this, [update_graphics]() { update_graphics(); }, false);
 		}
 
 		const int32_t delay = running_ ? prevmodal ? 20 : next_draw_time - SDL_GetTicks() : 0;
