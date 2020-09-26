@@ -123,7 +123,8 @@ private:
 	UI::Box box_windows_;
 	UI::Box box_sound_;
 	UI::Box box_saving_;
-	UI::Box box_game_;
+	UI::Box box_newgame_;
+	UI::Box box_ingame_;
 
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
@@ -149,21 +150,21 @@ private:
 	UI::Checkbox zip_;
 	UI::Checkbox write_syncstreams_;
 
-	// Game options
-	UI::Checkbox auto_roadbuild_mode_;
-	UI::Checkbox transparent_chat_;
-	UI::Checkbox single_watchwin_;
-	UI::Checkbox ctrl_zoom_;
-	UI::Checkbox game_clock_;
-	UI::Checkbox numpad_diagonalscrolling_;
-
-	UI::MultilineTextarea showhide_info_;
+	// New Game options
 	UI::Checkbox show_buildhelp_;
 	UI::Checkbox show_census_;
 	UI::Checkbox show_statistics_;
 	UI::Checkbox show_soldier_levels_;
 	UI::Checkbox show_buildings_;
 	UI::Checkbox show_workarea_overlap_;
+
+	// In-Game options
+	UI::Checkbox auto_roadbuild_mode_;
+	UI::Checkbox transparent_chat_;
+	UI::Checkbox single_watchwin_;
+	UI::Checkbox ctrl_zoom_;
+	UI::Checkbox game_clock_;
+	UI::Checkbox numpad_diagonalscrolling_;
 
 	OptionsCtrl::OptionsStruct os_;
 

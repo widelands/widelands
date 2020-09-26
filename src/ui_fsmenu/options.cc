@@ -97,7 +97,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      box_windows_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_sound_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_saving_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_game_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_newgame_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_ingame_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
 
      // Interface options
      language_dropdown_(&box_interface_left_,
@@ -208,29 +209,28 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                         _("Write syncstreams in network games to debug desyncs"),
                         "",
                         0),
+     // New Game options
+     show_buildhelp_(&box_newgame_, Vector2i::zero(), _("Show Building Spaces")),
+     show_census_(&box_newgame_, Vector2i::zero(), _("Show Census")),
+     show_statistics_(&box_newgame_, Vector2i::zero(), _("Show Statistics")),
+     show_soldier_levels_(&box_newgame_, Vector2i::zero(), _("Show Soldier Levels")),
+     show_buildings_(&box_newgame_, Vector2i::zero(), _("Show Buildings")),
+     show_workarea_overlap_(&box_newgame_, Vector2i::zero(), _("Show Workarea Overlaps")),
 
-     // Game options
+     // In-Game options
      auto_roadbuild_mode_(
-        &box_game_, Vector2i::zero(), _("Start building road after placing a flag")),
+        &box_ingame_, Vector2i::zero(), _("Start building road after placing a flag")),
      transparent_chat_(
-        &box_game_, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
+        &box_ingame_, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
 
      /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
      /** TRANSLATORS: and it also lets you jump to it on the map. */
-     single_watchwin_(&box_game_, Vector2i::zero(), _("Use single watchwindow mode")),
+     single_watchwin_(&box_ingame_, Vector2i::zero(), _("Use single watchwindow mode")),
      /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
-     ctrl_zoom_(&box_game_, Vector2i::zero(), _("Zoom only when Ctrl is pressed")),
-     game_clock_(&box_game_, Vector2i::zero(), _("Display game time in the top left corner")),
+     ctrl_zoom_(&box_ingame_, Vector2i::zero(), _("Zoom only when Ctrl is pressed")),
+     game_clock_(&box_ingame_, Vector2i::zero(), _("Display game time in the top left corner")),
      numpad_diagonalscrolling_(
-        &box_game_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
-     showhide_info_(
-        &box_game_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu, _("Show / Hide options for new games")),
-     show_buildhelp_(&box_game_, Vector2i::zero(), _("Show Building Spaces")),
-     show_census_(&box_game_, Vector2i::zero(), _("Show Census")),
-     show_statistics_(&box_game_, Vector2i::zero(), _("Show Statistics")),
-     show_soldier_levels_(&box_game_, Vector2i::zero(), _("Show Soldier Levels")),
-     show_buildings_(&box_game_, Vector2i::zero(), _("Show Buildings")),
-     show_workarea_overlap_(&box_game_, Vector2i::zero(), _("Show Workarea Overlaps")),
+        &box_ingame_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
      os_(opt) {
 
 	// Buttons
@@ -247,7 +247,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	tabs_.add("options_windows", _("Windows"), &box_windows_, "");
 	tabs_.add("options_sound", _("Sound"), &box_sound_, "");
 	tabs_.add("options_saving", _("Saving"), &box_saving_, "");
-	tabs_.add("options_game", _("Game"), &box_game_, "");
+	tabs_.add("options_newgame", _("New Games"), &box_newgame_, "");
+	tabs_.add("options_ingame", _("In-Game"), &box_ingame_, "");
 
 	// We want the last active tab when "Apply" was clicked.
 	if (os_.active_tab < tabs_.tabs().size()) {
@@ -267,8 +268,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_windows_.add(&snap_win_overlap_only_, UI::Box::Resizing::kFullSize);
 	box_windows_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
 	box_windows_.add(&animate_map_panning_, UI::Box::Resizing::kFullSize);
-	box_windows_.add(&sb_dis_panel_, UI::Box::Resizing::kFullSize);
-	box_windows_.add(&sb_dis_border_, UI::Box::Resizing::kFullSize);
+	box_windows_.add(&sb_dis_panel_);
+	box_windows_.add(&sb_dis_border_);
 
 	// Sound
 	box_sound_.add(&sound_options_, UI::Box::Resizing::kFullSize);
@@ -279,23 +280,21 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_saving_.add(&zip_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&write_syncstreams_, UI::Box::Resizing::kFullSize);
 
-	// Game
-	box_game_.add(&auto_roadbuild_mode_, UI::Box::Resizing::kFullSize);
-	box_game_.add(&transparent_chat_, UI::Box::Resizing::kFullSize);
-	box_game_.add(&single_watchwin_, UI::Box::Resizing::kFullSize);
-	box_game_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
-	box_game_.add(&game_clock_, UI::Box::Resizing::kFullSize);
-	box_game_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
-	box_game_.add(&showhide_info_);
-	box_game_.add(&show_buildhelp_, UI::Box::Resizing::kFullSize);
-	box_game_.add(&show_census_, UI::Box::Resizing::kFullSize);
-	box_game_.add(&show_statistics_, UI::Box::Resizing::kFullSize);
-	box_game_.add(&show_soldier_levels_, UI::Box::Resizing::kFullSize);
-	box_game_.add(&show_buildings_, UI::Box::Resizing::kFullSize);
-	box_game_.add(&show_workarea_overlap_, UI::Box::Resizing::kFullSize);
-	// 800x600 needs a scrollbar
-	box_game_.set_force_scrolling(true);
-	showhide_info_.set_handle_mouse(false);
+	// New Games
+	box_newgame_.add(&show_buildhelp_, UI::Box::Resizing::kFullSize);
+	box_newgame_.add(&show_census_, UI::Box::Resizing::kFullSize);
+	box_newgame_.add(&show_statistics_, UI::Box::Resizing::kFullSize);
+	box_newgame_.add(&show_soldier_levels_, UI::Box::Resizing::kFullSize);
+	box_newgame_.add(&show_buildings_, UI::Box::Resizing::kFullSize);
+	box_newgame_.add(&show_workarea_overlap_, UI::Box::Resizing::kFullSize);
+
+	// In-Game
+	box_ingame_.add(&auto_roadbuild_mode_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&transparent_chat_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&single_watchwin_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
@@ -378,6 +377,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	game_clock_.set_state(opt.game_clock);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
 
+	// New Game options
 	show_buildhelp_.set_state(opt.display_flags & InteractiveBase::dfShowBuildhelp);
 	show_census_.set_state(opt.display_flags & InteractiveBase::dfShowCensus);
 	show_statistics_.set_state(opt.display_flags & InteractiveBase::dfShowStatistics);
@@ -427,9 +427,6 @@ void FullscreenMenuOptions::layout() {
 		sb_autosave_.set_desired_size(tab_panel_width, sb_autosave_.get_h());
 		sb_rolling_autosave_.set_unit_width(250);
 		sb_rolling_autosave_.set_desired_size(tab_panel_width, sb_rolling_autosave_.get_h());
-
-		// Game options
-		showhide_info_.set_desired_size(tab_panel_width, show_buildhelp_.get_h());
 	}
 	UI::Window::layout();
 }
@@ -633,6 +630,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.game_clock = game_clock_.get_state();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
 
+	// New Game options
 	int32_t flags = show_buildhelp_.get_state() ? InteractiveBase::dfShowBuildhelp : 0;
 	flags |= show_census_.get_state() ? InteractiveBase::dfShowCensus : 0;
 	flags |= show_statistics_.get_state() ? InteractiveBase::dfShowStatistics : 0;
@@ -707,6 +705,8 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
+
+	// New Game options
 	opt.display_flags = opt_section_.get_int("display_flags", InteractiveBase::kDefaultDisplayFlags);
 
 	// Language options
@@ -749,6 +749,8 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 	opt_section_.set_bool("game_clock", opt.game_clock);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
+
+	// New Game options
 	opt_section_.set_int("display_flags", opt.display_flags);
 
 	// Language options

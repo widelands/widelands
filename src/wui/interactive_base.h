@@ -53,6 +53,8 @@ enum class RoadBuildingType { kRoad, kWaterway };
  */
 class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
 public:
+	// Available Display Flags
+	// a new flag also needs its corresponding checkbox in options
 	enum {
 		dfShowCensus = 1,         ///< show census report on buildings
 		dfShowStatistics = 2,     ///< show statistics report on buildings
@@ -61,7 +63,7 @@ public:
 		   8,          ///< highlight overlapping workareas when placing a constructionsite
 		dfDebug = 16,  ///< general debugging info
 		dfShowBuildings = 32,
-		dfShowBuildhelp = 64,
+		dfShowBuildhelp = 64,  ///< show size of building spaces
 	};
 	static constexpr int32_t kDefaultDisplayFlags =
 	   dfShowSoldierLevels | dfShowBuildings | dfShowWorkareaOverlap;
