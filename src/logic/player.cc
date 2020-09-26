@@ -1385,6 +1385,11 @@ SeeUnseeNode Player::get_vision(MapIndex const i) const {
 
 void Player::add_seer(const MapObject& m, const Area<FCoords>& a) {
 	add_seer(m);
+	if (upcast(const Building, b, &m)) {
+		if (!b->is_seeing()) {
+			return;
+		}
+	}
 	for (const PlayerNumber& p : team_player_) {
 		egbase().get_player(p)->update_vision(a, true);
 	}
@@ -1418,9 +1423,11 @@ void Player::remove_seer(const MapObject& m, const Area<FCoords>& a) {
 
 // Checks if any of our buildings or bobs, or one of one of our team mates, is seeing this node
 bool Player::should_see(const FCoords& f, SeersList& nearby_objects) const {
+	const Map& map = egbase().map();
+	const MapIndex map_index = f.field - &map[0];
 	for (const PlayerNumber& p : team_player_) {
 		const Player& player = *egbase().get_player(p);
-		if (player.revealed_fields_.count(f)) {
+		if (player.revealed_fields_.count(map_index)) {
 			return true;
 		}
 	}
@@ -1431,14 +1438,14 @@ bool Player::should_see(const FCoords& f, SeersList& nearby_objects) const {
 			// It would be better to avoid the need to cast in the first place.
 			const Building* b = static_cast<const Building*>(mo);  // NOLINT
 			if (b->is_seeing() &&
-			    egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
+			    map.calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
 				return true;
 			}
 		} else {
 			// currently only buildings and bobs can see fields
 			assert(is_a(Bob, mo));
 			const Bob* b = static_cast<const Bob*>(mo);  // NOLINT
-			if (egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
+			if (map.calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
 				return true;
 			}
 		}
