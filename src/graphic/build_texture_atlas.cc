@@ -48,7 +48,7 @@ bool is_image(const std::string& filename) {
 void find_images(const std::string& directory,
                  std::unordered_set<std::string>* images,
                  std::vector<std::string>* ordered_images,
-                 std::set<std::string> exclude_dirs = {}) {
+                 const std::set<std::string>& exclude_dirs = {}) {
 	for (const std::string& filename : g_fs->list_directory(directory)) {
 		if (g_fs->is_directory(filename)) {
 			if (!exclude_dirs.count(g_fs->fs_filename(filename.c_str()))) {
