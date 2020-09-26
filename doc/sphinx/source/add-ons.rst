@@ -6,7 +6,7 @@ The Widelands add-on system is still under development. In particular, Widelands
 Structure
 ---------
 
-An add-on is either a directory or a zip-compressed file with the extension ``*.wad``. Add-ons have to be placed in the ``addons`` subdirectory of the home directory to be found by the game.
+An add-on is a directory (never a zip-compressed file!) with the extension ``*.wad``. Add-ons have to be placed in the ``addons`` subdirectory of the home directory to be found by the game.
 
 The ``addons`` File
 -------------------
@@ -14,13 +14,17 @@ The ``addons`` File
 An add-on contains a plain-text ini-style file called ``addons`` with the following entries in the ``global`` section:
 
 * ``name``: The untranslated name of the add-on
-* ``i18n_name``: Identical to ``name`` but marked for translation with '_'
 * ``description``: The untranslated long description
-* ``i18n_description``: Identical to ``description`` but marked for translation with '_'
-* ``author``: The add-on’s author name
+* ``author``: The add-on’s author(s) untranslated name(s)
 * ``version``: The version number (1 for new add-ons)
-* ``category``: One of "tribes", "world", "script", "maps", "campaign", "win_condition", "starting_condition"
+* ``category``: One of "tribes", "world", "script", "maps", "campaign", "win_condition", "starting_condition", "theme"
 * ``requires``: A comma-separated list of the filenames of add-ons required by this add-on. Currently requirements are not yet implemented and this value is ignored.
+
+Optional additional entries that are required to make the name, description and/or author translatable:
+
+* ``i18n_name``: Identical to ``name`` but marked for translation with '_'
+* ``i18n_description``: Identical to ``description`` but marked for translation with '_'
+* ``i18n_author``: Identical to ``author`` but marked for translation with '_'
 
 Example:
 
@@ -49,6 +53,7 @@ Categories
 - `campaign`_
 - `win_condition`_
 - `starting_condition`_
+- `theme`_
 
 
 tribes
@@ -105,6 +110,11 @@ A starting condition script. May define the same starting conditions for any num
 The add-on needs to contain one or more scripts called ``<tribename>.lua`` which must follow the same conventions as the files in ``data/tribes/scripting/starting_conditions/*/*.lua``.
 
 
+theme
+~~~~~
+A UI theme. This type of add-on is not implemented yet.
+
+
 Restrictions
 ------------
 
@@ -138,12 +148,6 @@ Translating
 
 In order to not have to release a new version whenever translations change, translation files will be provided by the server independently from the add-ons. There will be a project "Widelands Add-Ons" on Transifex which will contain one resource for every add-on present on the server. The Transifex catalogue for each add-on will be updated automatically whenever a new version is uploaded to the server.
 
-The textdomain for an add-on is called ``internal-addon-name.wad``. The strings in the add-on config file, as well as map elemental data for Map Set add-ons, will be fetched from this textdomain. All Lua scripts shipped with the add-on will need to explicitly set the said textdomain. NOTE that you need to use the special function ``set_addon_textdomain("internal-addon-name.wad")`` to ensure that the textdomain will be looked for among the add-ons-specific translation files rather than in the locale directory shipped with the official game.
+The textdomain for an add-on is called ``internal-addon-name.wad``. The strings in the add-on config file, as well as map elemental data for Map Set add-ons, will be fetched from this textdomain. All Lua scripts shipped with the add-on will need to explicitly set the said textdomain. NOTE that you need to use ``push_textdomain("internal-addon-name.wad", true)`` to ensure that the textdomain will be looked for among the add-ons-specific translation files rather than in the locale directory shipped with the official game.
 
 The server will keep a repository of all add-on MO files which will be automatically compiled from the latest Transifex translations weekly. Downloading or upgrading an add-on will automatically download and install the latest translations files for this add-on for all languages. Each add-on has a translations version number in addition to the add-on version number; this allows the game to figure out whether the translations for an installed add-on can be upgraded.
-
-
-License
--------
-
-Unless a license is explictly specified, all add-ons are released under the same license as Widelands itself, that is, the GNU General Public License (GPL) v2. An add-on may specify a different license by including a file called LICENSE and mentioning the license in the description text.

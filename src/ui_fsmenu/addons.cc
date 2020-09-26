@@ -1139,7 +1139,8 @@ public:
 	{
 		std::string text = "<rt><p>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag((info.votes ?
-				(boost::format(_("Average rating: %1$.3f (%2$u votes)")) % info.average_rating % info.votes).str() : _("No votes yet")));
+				(boost::format(ngettext("Average rating: %1$.3f (%2$u vote)", "Average rating: %1$.3f (%2$u votes)", info.votes))
+						% info.average_rating % info.votes).str() : _("No votes yet")));
 		text += "</p><vspace gap=32><p>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(
 				info.user_comments.empty() ? _("No comments yet.") :

@@ -131,6 +131,41 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		info.author = [author]() { return author; };
 		info.upload_username = next_word(output);
 
+		info.upload_timestamp = next_number(output);
+		info.download_count = next_number(output);
+		info.votes = next_number(output);
+		{
+			std::string word = next_word(output);
+			info.average_rating = std::strtof(word.c_str(), nullptr);
+
+			// Some locales require the string to use a comma instead of a period as decimal point.
+			// C++11 doesn't seem to have an easy way around this, and I don't want to mess
+			// with the locale setting. So we use sprintf to check whether the string was
+			// converted correctly, and if it wasn't we replace the period with a comma.
+			const size_t len = word.length() + 1;
+			char buffer[16];
+			std::snprintf(buffer, len, "%f", info.average_rating);
+			if (word != buffer) {
+				const size_t pos = word.find('.');
+				if (pos == std::string::npos) {
+					throw wexception("Floating point conversion: Expected decimal point");
+				}
+				word.at(pos) = ',';
+				info.average_rating = std::strtof(word.c_str(), nullptr);
+				std::snprintf(buffer, len, "%f", info.average_rating);
+				if (word != buffer) {
+					throw wexception("Floating point conversion: Only period and comma as decimal points supported");
+				}
+			}
+		}
+		for (size_t comments = next_number(output); comments; --comments) {
+			const std::string name = next_word(output);
+			const std::string msg = next_word(output);
+			const uint32_t v = next_number(output);
+			const uint32_t t = next_number(output);
+			info.user_comments.push_back(AddOnComment {name, msg, v, t});
+		}
+
 		info.version = next_number(output);
 		info.i18n_version = next_number(output);
 		info.total_file_size = next_number(output);
@@ -159,17 +194,6 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		}
 
 		info.verified = next_word(output) == "verified";
-
-		// TODO(Nordfriese): These are not yet implemented on the server-side –
-		// initializing with some proof-of-concept dummy values
-		info.upload_timestamp = /* 1600000000 */ std::rand() % 2000000000;
-		info.download_count = /* 12345 */ (std::rand() % 70) * (std::rand() % 80) * (std::rand() % 90);
-		info.votes = /* 45 */ std::rand() % 10;
-		info.average_rating = /* 6.789f */ (std::rand() % 900) * 0.01f + 1.f;
-		info.user_comments = {
-			{"Somebody", "This add-on is awesome!", 1, 1601000000},
-			{"UnknownPerson", "I vote it twenty stars out of ten :)", 1, std::time(nullptr)}
-		};
 
 		result_vector.push_back(info);
 	}
