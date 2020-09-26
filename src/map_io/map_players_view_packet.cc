@@ -36,7 +36,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint16_t kCurrentPacketVersion = 4;
 
 inline bool from_unsigned(unsigned value) {
 	return value == 1;
@@ -57,7 +57,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		const Map& map = egbase.map();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
 			const PlayerNumber nr_players = fr.unsigned_8();
 			if (map.get_nrplayers() != nr_players) {
 				throw wexception("Wrong number of players. Expected %d but read %d from packet\n",
@@ -110,17 +110,34 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					}
 				}
 
-				const MapIndex no_of_seen_fields = fr.unsigned_32();
-				if (seen_fields.size() != no_of_seen_fields) {
-					throw wexception("Read %" PRIuS
-					                 " unseen fields but detected %d when the packet was written\n",
-					                 seen_fields.size(), static_cast<unsigned>(no_of_seen_fields));
-				}
+				size_t no_of_seen_fields = fr.unsigned_32();
 
 				// Skip data for fields that were never seen, e.g. this happens during saveloading a
 				// backup while starting a new game
 				if (no_of_seen_fields == 0) {
 					continue;
+				}
+
+				// TODO(Nordfriese): Savegame compatibility
+				if (packet_version >= 4) {
+					const size_t additionally_seen = fr.unsigned_32();
+					no_of_seen_fields += additionally_seen;
+					if (additionally_seen > 0) {
+						parseme = fr.c_string();
+						boost::split(field_vector, parseme, boost::is_any_of("|"));
+						assert(field_vector.size() == additionally_seen);
+						for (size_t i = 0; i < additionally_seen; ++i) {
+							Player::Field& f = player->fields_[stoi(field_vector[i])];
+							assert(f.seeing == SeeUnseeNode::kUnexplored);
+							seen_fields.insert(&f);
+						}
+					}
+				}
+
+				if (seen_fields.size() != no_of_seen_fields) {
+					throw wexception("Read %" PRIuS
+					                 " unseen fields but detected %d when the packet was written\n",
+					                 seen_fields.size(), static_cast<unsigned>(no_of_seen_fields));
 				}
 
 				// Owner: playernumber|playernumber|playernumber ...
@@ -436,12 +453,14 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	const PlayerNumber nr_players = egbase.map().get_nrplayers();
+	const Map& map = egbase.map();
+	const PlayerNumber nr_players = map.get_nrplayers();
 	fw.unsigned_8(nr_players);
 
 	iterate_players_existing(p, nr_players, egbase, player) {
 		fw.unsigned_8(p);
 		std::set<const Player::Field*> seen_fields;
+		std::set<const Player::Field*> additionally_seen_fields;
 		// Explicitly revealed fields
 		fw.unsigned_32(player->revealed_fields_.size());
 		for (const MapIndex& m : player->revealed_fields_) {
@@ -453,12 +472,22 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 		{
 			// Seeing
 			std::ostringstream oss("");
-			const MapIndex upper_bound = egbase.map().max_index() - 1;
+			const MapIndex upper_bound = map.max_index() - 1;
 			for (MapIndex m = 0; m < upper_bound; ++m) {
 				const Player::Field& f = player->fields_[m];
 				oss << static_cast<unsigned>(f.seeing) << "|";
 				if (f.seeing == SeeUnseeNode::kPreviouslySeen) {
 					seen_fields.insert(&f);
+					// The data for some of the terrains and edges between PreviouslySeen
+					// and Unexplored fields is stored in an Unexplored field. The data
+					// for this field therefore needs to be saveloaded as well.
+					const Coords coords(m % map.get_width(), m / map.get_width());
+					for (const Coords& c : {map.tr_n(coords), map.tl_n(coords), map.l_n(coords)}) {
+						const Player::Field& neighbour = player->fields_[map.get_index(c)];
+						if (neighbour.seeing == SeeUnseeNode::kUnexplored) {
+							additionally_seen_fields.insert(&neighbour);
+						}
+					}
 				}
 			}
 			const Player::Field& f = player->fields_[upper_bound];
@@ -474,7 +503,23 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 
 		// Skip data for fields that were never seen
 		if (seen_fields.empty()) {
+			assert(additionally_seen_fields.empty());
 			continue;
+		}
+
+		fw.unsigned_32(additionally_seen_fields.size());
+		if (!additionally_seen_fields.empty()) {
+			std::ostringstream oss("");
+			for (auto it = additionally_seen_fields.begin(); it != additionally_seen_fields.end();) {
+				seen_fields.insert(*it);
+				const MapIndex index = (*it) - &player->fields_[0];
+				oss << index;
+				++it;
+				if (it != additionally_seen_fields.end()) {
+					oss << "|";
+				}
+			}
+			fw.c_string(oss.str());
 		}
 
 		{

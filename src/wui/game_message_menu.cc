@@ -338,7 +338,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 				game.send_player_command(new Widelands::CmdMessageSetStatusRead(
 				   game.get_gametime(), player.player_number(), id));
 			}
-			centerviewbtn_->set_enabled(message->position());
+			centerviewbtn_->set_enabled(bool(message->position()));
 			message_body.set_text(as_message(message->heading(), message->body()));
 			update_archive_button_tooltip();
 			return;
