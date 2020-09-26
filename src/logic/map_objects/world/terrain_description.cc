@@ -115,7 +115,8 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Widelands::World& 
 	for (DescriptionIndex di = world.get_nr_terrains(); di; --di) {
 		const TerrainDescription& t = world.terrain_descr(di - 1);
 		if (t.dither_layer_ == dither_layer_) {
-			throw GameDataError("Terrain %s has the same dither layer %i as %s", name_.c_str(), dither_layer_, t.name_.c_str());
+			throw GameDataError("Terrain %s has the same dither layer %i as %s", name_.c_str(),
+			                    dither_layer_, t.name_.c_str());
 		}
 	}
 
