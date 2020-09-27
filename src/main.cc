@@ -36,45 +36,44 @@ int main(int argc, char* argv[]) {
 	          << std::endl;
 
 	WLApplication* g_app = nullptr;
-	// NOCOM try {
-	g_app = WLApplication::get(argc, const_cast<char const**>(argv));
-	// TODO(unknown): handle exceptions from the constructor
-	g_app->run();
+	try {
+		g_app = WLApplication::get(argc, const_cast<char const**>(argv));
+		// TODO(unknown): handle exceptions from the constructor
+		g_app->run();
 
-	delete g_app;
+		delete g_app;
 
-	return 0;
-	/*
-} catch (const ParameterError& e) {
-	//  handle wrong commandline parameters
-	std::cerr << std::endl << e.what() << std::endl << std::endl;
-	show_usage(build_id(), build_type());
-	delete g_app;
+		return 0;
 
-	return 0;
-}
+	} catch (const ParameterError& e) {
+		//  handle wrong commandline parameters
+		std::cerr << std::endl << e.what() << std::endl << std::endl;
+		show_usage(build_id(), build_type());
+		delete g_app;
+
+		return 0;
+	}
 #ifdef NDEBUG
-catch (const WException& e) {
-	std::cerr << "\nCaught exception (of type '" << typeid(e).name()
-	          << "') in outermost handler!\nThe exception said: " << e.what()
-	          << "\n\nThis should not happen. Please file a bug report on version " << build_id()
-	          << '(' << build_type() << ')' << ".\n"
-	          << "and remember to specify your operating system.\n\n"
-	          << std::flush;
-	delete g_app;
+	catch (const WException& e) {
+		std::cerr << "\nCaught exception (of type '" << typeid(e).name()
+		          << "') in outermost handler!\nThe exception said: " << e.what()
+		          << "\n\nThis should not happen. Please file a bug report on version " << build_id()
+		          << '(' << build_type() << ')' << ".\n"
+		          << "and remember to specify your operating system.\n\n"
+		          << std::flush;
+		delete g_app;
 
-	return 1;
-} catch (const std::exception& e) {
-	std::cerr << "\nCaught exception (of type '" << typeid(e).name()
-	          << "') in outermost handler!\nThe exception said: " << e.what()
-	          << "\n\nThis should not happen. Please file a bug report on version " << build_id()
-	          << '(' << build_type() << ')' << ".\n"
-	          << "and remember to specify your operating system.\n\n"
-	          << std::flush;
-	delete g_app;
+		return 1;
+	} catch (const std::exception& e) {
+		std::cerr << "\nCaught exception (of type '" << typeid(e).name()
+		          << "') in outermost handler!\nThe exception said: " << e.what()
+		          << "\n\nThis should not happen. Please file a bug report on version " << build_id()
+		          << '(' << build_type() << ')' << ".\n"
+		          << "and remember to specify your operating system.\n\n"
+		          << std::flush;
+		delete g_app;
 
-	return 1;
-}
+		return 1;
+	}
 #endif
-*/
 }
