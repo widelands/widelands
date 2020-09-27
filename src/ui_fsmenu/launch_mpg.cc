@@ -186,12 +186,10 @@ bool FullscreenMenuLaunchMPG::clicked_select_map() {
 	       result == FullscreenMenuBase::MenuTarget::kBack);
 	if (result == FullscreenMenuBase::MenuTarget::kNormalGame) {
 		select_map();
-		map_changed();
+
 	} else if (result == FullscreenMenuBase::MenuTarget::kScenarioGame) {
 		select_saved_game();
-		map_changed();
 	}
-
 	update_win_conditions();
 	return true;
 }
@@ -217,6 +215,7 @@ void FullscreenMenuLaunchMPG::select_map() {
 
 	const MapData& mapdata = *msm.get_map();
 	settings_->set_map(mapdata.name, mapdata.filename, mapdata.nrplayers);
+	map_changed();
 }
 
 /**
@@ -252,6 +251,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		auto nr_players_ = s.get_safe_int("nr_players");
 
 		settings_->set_map(mapname, filename, nr_players_, true);
+		map_changed();
 
 		// Check for sendability
 		if (g_fs->is_directory(filename)) {
