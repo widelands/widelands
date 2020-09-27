@@ -44,7 +44,6 @@ int main(int argc, char* argv[]) {
 		delete g_app;
 
 		return 0;
-
 	} catch (const ParameterError& e) {
 		//  handle wrong commandline parameters
 		std::cerr << std::endl << e.what() << std::endl << std::endl;
