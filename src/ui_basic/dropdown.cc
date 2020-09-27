@@ -398,16 +398,16 @@ void BaseDropdown::update() {
 }
 
 void BaseDropdown::set_value() {
+	current_selection_ = list_->selection_index();
 	update();
 	selected();
-	current_selection_ = list_->selection_index();
 }
 
 void BaseDropdown::toggle() {
 	set_list_visibility(!list_->is_visible());
 }
 
-void BaseDropdown::set_list_visibility(bool open) {
+void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 	if (!open) {
 		list_->select(current_selection_);
 	}
@@ -419,8 +419,12 @@ void BaseDropdown::set_list_visibility(bool open) {
 	if (list_->is_visible()) {
 		list_->move_to_top();
 		focus();
-		set_mouse_pos(Vector2i(display_button_.get_x() + (display_button_.get_w() * 3 / 5),
-		                       display_button_.get_y() + (display_button_.get_h() * 2 / 5)));
+		Notifications::publish(NoteDropdown(id_));
+		if (move_mouse) {
+			set_mouse_pos(Vector2i(display_button_.get_x() + (display_button_.get_w() * 3 / 5),
+			                       display_button_.get_y() + (display_button_.get_h() * 2 / 5)));
+		}
+
 		if ((type_ == DropdownType::kPictorialMenu || type_ == DropdownType::kTextualMenu) &&
 		    !has_selection() && !list_->empty()) {
 			select(0);
@@ -434,24 +438,7 @@ void BaseDropdown::set_list_visibility(bool open) {
 }
 
 void BaseDropdown::toggle_list() {
-	if (list_->is_visible()) {
-		list_->select(current_selection_);
-	}
-	if (!is_enabled_) {
-		list_->set_visible(false);
-		return;
-	}
-	list_->set_visible(!list_->is_visible());
-	if (type_ != DropdownType::kTextual) {
-		display_button_.set_perm_pressed(list_->is_visible());
-	}
-	if (list_->is_visible()) {
-		list_->move_to_top();
-		focus();
-		Notifications::publish(NoteDropdown(id_));
-	}
-	// Make sure that the list covers and deactivates the elements below it
-	set_layout_toplevel(list_->is_visible());
+	set_list_visibility(!list_->is_visible(), false);
 }
 
 void BaseDropdown::close() {
@@ -475,8 +462,10 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_SPACE:
 			if (list_->is_visible()) {
 				set_value();
-				if (code.sym != SDLK_SPACE) {
-					set_list_visibility(false);
+				// Check list visibility again, set_value() might has toggled it
+				if ((list_->is_visible() && code.sym != SDLK_SPACE) ||
+				    (!list_->is_visible() && code.sym == SDLK_SPACE)) {
+					toggle_list();
 				}
 			} else if (code.sym == SDLK_SPACE) {
 				set_list_visibility(true);

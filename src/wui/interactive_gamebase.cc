@@ -208,6 +208,8 @@ void InteractiveGameBase::add_showhide_menu() {
 }
 
 void InteractiveGameBase::rebuild_showhide_menu() {
+	const ShowHideEntry last_selection =
+	   showhidemenu_.has_selection() ? showhidemenu_.get_selected() : ShowHideEntry::kBuildingSpaces;
 	showhidemenu_.clear();
 
 	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
@@ -248,6 +250,8 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                  ShowHideEntry::kBuildings,
 	                  g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"), false, "",
 	                  "U");
+
+	showhidemenu_.select(last_selection);
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
@@ -283,6 +287,9 @@ void InteractiveGameBase::add_gamespeed_menu() {
 }
 
 void InteractiveGameBase::rebuild_gamespeed_menu() {
+	const GameSpeedEntry last_selection =
+	   gamespeedmenu_.has_selection() ? gamespeedmenu_.get_selected() : GameSpeedEntry::kIncrease;
+
 	gamespeedmenu_.clear();
 
 	gamespeedmenu_.add(_("Speed +"), GameSpeedEntry::kIncrease,
@@ -308,6 +315,8 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 			                   _("Pause the Game"), pgettext("hotkey", "Pause"));
 		}
 	}
+
+	gamespeedmenu_.select(last_selection);
 }
 
 void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
@@ -527,8 +536,6 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
  * during single/multiplayer/scenario).
  */
 void InteractiveGameBase::postload() {
-	show_buildhelp(false);
-
 	// Recalc whole map for changed owner stuff
 	egbase().mutable_map()->recalc_whole_map(egbase());
 

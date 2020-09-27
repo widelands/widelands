@@ -26,6 +26,7 @@ wl_library(ui_fsmenu_options
     sound
     widelands_ball_of_mud
     widelands_options
+    wui
     wui_sound_options
 )
 

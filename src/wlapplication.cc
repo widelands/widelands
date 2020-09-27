@@ -873,6 +873,7 @@ bool WLApplication::init_settings() {
 	get_config_bool("numpad_diagonalscrolling", false);
 	get_config_bool("inputgrab", false);
 	get_config_bool("transparent_chat", false);
+	get_config_int("display_flags", InteractiveBase::kDefaultDisplayFlags);
 	// Undocumented. Unique ID used to allow the metaserver to recognize players
 	get_config_string("uuid", "");
 	// Undocumented, appears in online login box
