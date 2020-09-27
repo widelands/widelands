@@ -59,6 +59,7 @@ public:
 		// Editor
 		kEditorNew,
 		kEditorRandom,
+		kEditorContinue,
 		kEditorLoad,
 
 		// Launch game

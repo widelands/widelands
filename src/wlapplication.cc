@@ -1229,7 +1229,7 @@ void WLApplication::mainmenu() {
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kContinueLastsave: {
-				const std::string& file = mm->get_filename_for_continue();
+				const std::string& file = mm->get_filename_for_continue_playing();
 				if (!file.empty()) {
 					need_to_reset = true;
 					load_game(file);
@@ -1248,6 +1248,14 @@ void WLApplication::mainmenu() {
 				need_to_reset = true;
 				EditorInteractive::run_editor(EditorInteractive::Init::kLoad);
 				break;
+			case FullscreenMenuBase::MenuTarget::kEditorContinue: {
+				const std::string& file = mm->get_filename_for_continue_editing();
+				if (!file.empty()) {
+					need_to_reset = true;
+					EditorInteractive::run_editor(EditorInteractive::Init::kLoadMapDirectly, file);
+				}
+				break;
+			}
 			case FullscreenMenuBase::MenuTarget::kRandomGame: {
 				Widelands::Game game;
 				SinglePlayerGameSettingsProvider sp;

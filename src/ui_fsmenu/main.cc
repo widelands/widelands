@@ -20,6 +20,7 @@
 #include "ui_fsmenu/main.h"
 
 #include <cstdlib>
+#include <memory>
 
 #include <SDL_timer.h>
 
@@ -30,11 +31,13 @@
 #include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
+#include "map_io/widelands_map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
 #include "wui/login_box.h"
+#include "wui/mapdata.h"
 #include "wui/savegameloader.h"
 
 constexpr uint32_t kInitialFadeoutDelay = 2500;
@@ -181,6 +184,27 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	layout();
 }
 
+using MapEntry = std::pair<MapData, Widelands::MapVersion>;
+static void find_maps(const std::string& directory, std::vector<MapEntry>& results) {
+	Widelands::Map map;
+	for (const std::string& file : g_fs->list_directory(directory)) {
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file);
+		if (ml) {
+			try {
+				map.set_filename(file);
+				ml->preload_map(true);
+				if (map.version().map_version_timestamp > 0) {
+					results.push_back(MapEntry(MapData(map, file, MapData::MapType::kNormal, MapData::DisplayType::kFilenames), map.version()));
+				}
+			} catch (...) {
+				// invalid file – silently ignore
+			}
+		} else if (g_fs->is_directory(file)) {
+			find_maps(file, results);
+		}
+	}
+}
+
 void FullscreenMenuMain::set_labels() {
 	singleplayer_.clear();
 	multiplayer_.clear();
@@ -200,7 +224,7 @@ void FullscreenMenuMain::set_labels() {
 	// Refresh the Continue tooltip. The SavegameData must be reloaded after
 	// every language switch because it contains localized strings.
 	{
-		filename_for_continue_ = "";
+		filename_for_continue_playing_ = "";
 		Widelands::Game game;
 		SinglePlayerLoader loader(game);
 		std::vector<SavegameData> games = loader.load_files(kSaveDir);
@@ -212,33 +236,33 @@ void FullscreenMenuMain::set_labels() {
 			}
 		}
 		if (newest_singleplayer) {
-			filename_for_continue_ = newest_singleplayer->filename;
+			filename_for_continue_playing_ = newest_singleplayer->filename;
 			singleplayer_.add(
 			   _("Continue Playing"), FullscreenMenuBase::MenuTarget::kContinueLastsave, nullptr,
 			   false,
-			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>") %
+			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
 			    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 			       .as_font_tag(
 			          /* strip leading "save/" and trailing ".wgf" */
-			          filename_for_continue_.substr(
-			             kSaveDir.length() + 1, filename_for_continue_.length() - kSaveDir.length() -
+			          filename_for_continue_playing_.substr(
+			             kSaveDir.length() + 1, filename_for_continue_playing_.length() - kSaveDir.length() -
 			                                       kSavegameExtension.length() - 1)) %
-			    (boost::format(_("Map: %s")) % g_style_manager->font_style(UI::FontStyle::kTooltip)
+			    (boost::format(_("Map: %s")) % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                                      .as_font_tag(newest_singleplayer->mapname))
 			       .str() %
 			    (boost::format(_("Win Condition: %s")) %
-			     g_style_manager->font_style(UI::FontStyle::kTooltip)
+			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			        .as_font_tag(newest_singleplayer->wincondition))
 			       .str() %
-			    (boost::format(_("Players: %s")) % g_style_manager->font_style(UI::FontStyle::kTooltip)
+			    (boost::format(_("Players: %s")) % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                                          .as_font_tag(newest_singleplayer->nrplayers))
 			       .str() %
 			    (boost::format(_("Gametime: %s")) %
-			     g_style_manager->font_style(UI::FontStyle::kTooltip)
+			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			        .as_font_tag(newest_singleplayer->gametime))
 			       .str() %
 			    /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
-			    (boost::format(_("Saved: %s")) % g_style_manager->font_style(UI::FontStyle::kTooltip)
+			    (boost::format(_("Saved: %s")) % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                                        .as_font_tag(newest_singleplayer->savedatestring))
 			       .str())
 			      .str(),
@@ -258,7 +282,43 @@ void FullscreenMenuMain::set_labels() {
 	editor_.add(_("Random Map"), FullscreenMenuBase::MenuTarget::kEditorRandom, nullptr, false,
 	            _("Create a new random map"), "Y");
 	editor_.add(_("Load Map"), FullscreenMenuBase::MenuTarget::kEditorLoad, nullptr, false,
-	            _("Edit an existing map"), "W");
+	            _("Edit an existing map"), "B");
+
+	{
+		filename_for_continue_editing_ = "";
+		std::vector<MapEntry> v;
+		find_maps("maps/My_Maps", v);
+		MapEntry* last_edited = nullptr;
+		for (MapEntry& m : v) {
+			if (last_edited == nullptr || m.second.map_version_timestamp > last_edited->second.map_version_timestamp) {
+				last_edited = &m;
+			}
+		}
+		if (last_edited) {
+			filename_for_continue_editing_ = last_edited->first.filename;
+			editor_.add(
+			   _("Continue Editing"), FullscreenMenuBase::MenuTarget::kEditorContinue, nullptr,
+			   false,
+			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
+			    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+			       .as_font_tag(
+			          /* strip leading "maps/My_Maps/" and trailing ".wgf" */
+			          filename_for_continue_editing_.substr(
+			             13, filename_for_continue_editing_.length() - 17)) %
+			    (boost::format(_("Name: %s")) % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(last_edited->first.localized_name)).str() %
+			    (boost::format(_("Size: %s")) %
+    				g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(
+	    				(boost::format(_("%1$u×%2$u")) % last_edited->first.width % last_edited->first.height).str()
+				)).str() %
+			    (boost::format(_("Players: %s")) %
+			    g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                                      .as_font_tag(std::to_string(last_edited->first.nrplayers))).str() %
+			    (boost::format(_("Description: %s")) % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                                      .as_font_tag(last_edited->first.description)).str()
+			      ).str(),
+			   "W");
+		}
+	}
 
 	singleplayer_.set_label(_("Single Player…"));
 	multiplayer_.set_label(_("Multiplayer…"));
@@ -331,9 +391,16 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kTutorial);
 			return true;
 		case SDLK_c:
-			if (!filename_for_continue_.empty()) {
+			if (!filename_for_continue_playing_.empty()) {
 				end_modal<FullscreenMenuBase::MenuTarget>(
 				   FullscreenMenuBase::MenuTarget::kContinueLastsave);
+				return true;
+			}
+			break;
+		case SDLK_w:
+			if (!filename_for_continue_editing_.empty()) {
+				end_modal<FullscreenMenuBase::MenuTarget>(
+				   FullscreenMenuBase::MenuTarget::kEditorContinue);
 				return true;
 			}
 			break;
@@ -377,7 +444,7 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 		case SDLK_y:
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditorRandom);
 			return true;
-		case SDLK_w:
+		case SDLK_b:
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditorLoad);
 			return true;
 		case SDLK_s:
