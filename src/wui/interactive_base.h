@@ -53,6 +53,8 @@ enum class RoadBuildingType { kRoad, kWaterway };
  */
 class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
 public:
+	// Available Display Flags
+	// a new flag also needs its corresponding checkbox in options
 	enum {
 		dfShowCensus = 1,         ///< show census report on buildings
 		dfShowStatistics = 2,     ///< show statistics report on buildings
@@ -61,7 +63,10 @@ public:
 		   8,          ///< highlight overlapping workareas when placing a constructionsite
 		dfDebug = 16,  ///< general debugging info
 		dfShowBuildings = 32,
+		dfShowBuildhelp = 64,  ///< show size of building spaces
 	};
+	static constexpr int32_t kDefaultDisplayFlags =
+	   dfShowSoldierLevels | dfShowBuildings | dfShowWorkareaOverlap;
 
 	/// A build help overlay, i.e. small, big, mine, port ...
 	struct BuildhelpOverlay {
@@ -127,7 +132,7 @@ public:
 	//  display flags
 	uint32_t get_display_flags() const;
 	void set_display_flags(uint32_t flags);
-	bool get_display_flag(uint32_t flag);
+	bool get_display_flag(uint32_t flag) const;
 	void set_display_flag(uint32_t flag, bool on);
 
 	//  road building
@@ -314,7 +319,6 @@ private:
 		const Image* pic;
 	} sel_;
 
-	bool buildhelp_;
 	MapView map_view_;
 	ChatOverlay* chat_overlay_;
 
