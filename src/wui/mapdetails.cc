@@ -154,11 +154,11 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		// Show map information
 		const std::string authors_heading =
 		   (mapdata.authors.get_number() == 1) ?
-            /** TRANSLATORS: Label in map details if there is 1 author */
-            _("Author") :
-            /** TRANSLATORS: Label in map details if there is more than 1 author. If you need plural
-               forms here, please let us know. */
-               _("Authors");
+		      /** TRANSLATORS: Label in map details if there is 1 author */
+		      _("Author") :
+		      /** TRANSLATORS: Label in map details if there is more than 1 author. If you need plural
+		         forms here, please let us know. */
+		      _("Authors");
 		std::string description = as_heading(authors_heading, style_);
 		description =
 		   (boost::format("%s%s") % description % as_content(mapdata.authors.get_names(), style_))
