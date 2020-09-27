@@ -70,6 +70,7 @@ public:
 		bool ctrl_zoom;
 		bool game_clock;
 		bool numpad_diagonalscrolling;
+		int32_t display_flags;
 
 		// Language options
 		std::string language;
@@ -122,7 +123,8 @@ private:
 	UI::Box box_windows_;
 	UI::Box box_sound_;
 	UI::Box box_saving_;
-	UI::Box box_game_;
+	UI::Box box_newgame_;
+	UI::Box box_ingame_;
 
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
@@ -148,7 +150,15 @@ private:
 	UI::Checkbox zip_;
 	UI::Checkbox write_syncstreams_;
 
-	// Game options
+	// New Game options
+	UI::Checkbox show_buildhelp_;
+	UI::Checkbox show_census_;
+	UI::Checkbox show_statistics_;
+	UI::Checkbox show_soldier_levels_;
+	UI::Checkbox show_buildings_;
+	UI::Checkbox show_workarea_overlap_;
+
+	// In-Game options
 	UI::Checkbox auto_roadbuild_mode_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;

@@ -185,8 +185,6 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
      grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")) {
 	add_main_menu();
 
-	set_display_flag(InteractiveBase::dfShowWorkareaOverlap, true);  // enable by default
-
 	toolbar()->add_space(15);
 
 	add_mapview_menu(MiniMapType::kStaticViewWindow);
