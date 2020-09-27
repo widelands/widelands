@@ -194,7 +194,9 @@ static void find_maps(const std::string& directory, std::vector<MapEntry>& resul
 				map.set_filename(file);
 				ml->preload_map(true);
 				if (map.version().map_version_timestamp > 0) {
-					results.push_back(MapEntry(MapData(map, file, MapData::MapType::kNormal, MapData::DisplayType::kFilenames), map.version()));
+					results.push_back(MapEntry(
+					   MapData(map, file, MapData::MapType::kNormal, MapData::DisplayType::kFilenames),
+					   map.version()));
 				}
 			} catch (...) {
 				// invalid file – silently ignore
@@ -245,25 +247,29 @@ void FullscreenMenuMain::set_labels() {
 			       .as_font_tag(
 			          /* strip leading "save/" and trailing ".wgf" */
 			          filename_for_continue_playing_.substr(
-			             kSaveDir.length() + 1, filename_for_continue_playing_.length() - kSaveDir.length() -
-			                                       kSavegameExtension.length() - 1)) %
-			    (boost::format(_("Map: %s")) % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                                      .as_font_tag(newest_singleplayer->mapname))
+			             kSaveDir.length() + 1, filename_for_continue_playing_.length() -
+			                                       kSaveDir.length() - kSavegameExtension.length() -
+			                                       1)) %
+			    (boost::format(_("Map: %s")) %
+			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			        .as_font_tag(newest_singleplayer->mapname))
 			       .str() %
 			    (boost::format(_("Win Condition: %s")) %
 			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			        .as_font_tag(newest_singleplayer->wincondition))
 			       .str() %
-			    (boost::format(_("Players: %s")) % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                                          .as_font_tag(newest_singleplayer->nrplayers))
+			    (boost::format(_("Players: %s")) %
+			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			        .as_font_tag(newest_singleplayer->nrplayers))
 			       .str() %
 			    (boost::format(_("Gametime: %s")) %
 			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			        .as_font_tag(newest_singleplayer->gametime))
 			       .str() %
 			    /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
-			    (boost::format(_("Saved: %s")) % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                                        .as_font_tag(newest_singleplayer->savedatestring))
+			    (boost::format(_("Saved: %s")) %
+			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			        .as_font_tag(newest_singleplayer->savedatestring))
 			       .str())
 			      .str(),
 			   "C");
@@ -290,33 +296,41 @@ void FullscreenMenuMain::set_labels() {
 		find_maps("maps/My_Maps", v);
 		MapEntry* last_edited = nullptr;
 		for (MapEntry& m : v) {
-			if (last_edited == nullptr || m.second.map_version_timestamp > last_edited->second.map_version_timestamp) {
+			if (last_edited == nullptr ||
+			    m.second.map_version_timestamp > last_edited->second.map_version_timestamp) {
 				last_edited = &m;
 			}
 		}
 		if (last_edited) {
 			filename_for_continue_editing_ = last_edited->first.filename;
-			editor_.add(
-			   _("Continue Editing"), FullscreenMenuBase::MenuTarget::kEditorContinue, nullptr,
-			   false,
-			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
-			    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
-			       .as_font_tag(
-			          /* strip leading "maps/My_Maps/" and trailing ".wgf" */
-			          filename_for_continue_editing_.substr(
-			             13, filename_for_continue_editing_.length() - 17)) %
-			    (boost::format(_("Name: %s")) % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(last_edited->first.localized_name)).str() %
-			    (boost::format(_("Size: %s")) %
-    				g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(
-	    				(boost::format(_("%1$u×%2$u")) % last_edited->first.width % last_edited->first.height).str()
-				)).str() %
-			    (boost::format(_("Players: %s")) %
-			    g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                                      .as_font_tag(std::to_string(last_edited->first.nrplayers))).str() %
-			    (boost::format(_("Description: %s")) % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                                      .as_font_tag(last_edited->first.description)).str()
-			      ).str(),
-			   "W");
+			editor_.add(_("Continue Editing"), FullscreenMenuBase::MenuTarget::kEditorContinue,
+			            nullptr, false,
+			            (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
+			             g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+			                .as_font_tag(
+			                   /* strip leading "maps/My_Maps/" and trailing ".wgf" */
+			                   filename_for_continue_editing_.substr(
+			                      13, filename_for_continue_editing_.length() - 17)) %
+			             (boost::format(_("Name: %s")) %
+			              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                 .as_font_tag(last_edited->first.localized_name))
+			                .str() %
+			             (boost::format(_("Size: %s")) %
+			              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                 .as_font_tag((boost::format(_("%1$u×%2$u")) % last_edited->first.width %
+			                               last_edited->first.height)
+			                                 .str()))
+			                .str() %
+			             (boost::format(_("Players: %s")) %
+			              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                 .as_font_tag(std::to_string(last_edited->first.nrplayers)))
+			                .str() %
+			             (boost::format(_("Description: %s")) %
+			              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                 .as_font_tag(last_edited->first.description))
+			                .str())
+			               .str(),
+			            "W");
 		}
 	}
 
