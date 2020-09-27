@@ -274,6 +274,9 @@ void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
 }
 
 void InteractiveBase::rebuild_mapview_menu() {
+	const MapviewMenuEntry last_selection =
+	   mapviewmenu_.has_selection() ? mapviewmenu_.get_selected() : MapviewMenuEntry::kMinimap;
+
 	mapviewmenu_.clear();
 
 	/** TRANSLATORS: An entry in the game's map view menu */
@@ -295,6 +298,8 @@ void InteractiveBase::rebuild_mapview_menu() {
 	mapviewmenu_.add(_("Zoom -"), MapviewMenuEntry::kDecreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
 	                 pgettext("hotkey", "Ctrl+-"));
+
+	mapviewmenu_.select(last_selection);
 }
 
 void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
@@ -1340,6 +1345,9 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		case SDLK_m:
 			toggle_minimap();
+			return true;
+		case SDLK_TAB:
+			toolbar()->focus();
 			return true;
 		default:
 			break;

@@ -312,6 +312,8 @@ void Box::add(Panel* const panel, Resizing resizing, UI::Align const align) {
 	it.fillspace = resizing == Resizing::kFillSpace || resizing == Resizing::kExpandBoth;
 	it.assigned_var_depth = 0;
 
+	// Ensure that tab focus order follows layout
+	panel->move_to_top();
 	items_.push_back(it);
 
 	update_desired_size();
