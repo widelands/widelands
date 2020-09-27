@@ -320,8 +320,10 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 	box_height += margin_;
 
 	// ---------- "Generate Map" button ----------
-	cancel_button_.sigclicked.connect([this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
-	ok_button_.sigclicked.connect([this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk); });
+	cancel_button_.sigclicked.connect(
+	   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
+	ok_button_.sigclicked.connect(
+	   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk); });
 	if (UI::g_fh->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_);
 		button_box_.add(&cancel_button_);
@@ -447,7 +449,9 @@ void MainMenuNewRandomMap::normalize_landmass(ButtonId clicked_button) {
 	mountains_.set_text((boost::format(_("%i %%")) % mountainsval_).str());
 }
 
-bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase, EditorInteractive* eia, SinglePlayerGameSettingsProvider* sp) {
+bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
+                                           EditorInteractive* eia,
+                                           SinglePlayerGameSettingsProvider* sp) {
 	ok_button_.set_enabled(false);
 	cancel_button_.set_enabled(false);
 
@@ -516,16 +520,17 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase, Ed
 		UI::WLMessageBox mbox(
 		   eia,
 		   /** TRANSLATORS: Window title. This is shown after a random map has been created in the
-			  editor.*/
+		     editor.*/
 		   _("Random Map"),
 		   /** TRANSLATORS: This is shown after a random map has been created in the editor. */
 		   /** TRANSLATORS: You don't need to be literal with your translation, */
 		   /** TRANSLATORS: as long as the user understands that he needs to check the player
-			  positions.*/
+		     positions.*/
 		   _("The map has been generated. "
-			 "Please double-check the player starting positions to make sure that your carriers won’t "
-			 "drown, "
-			 "or be stuck on an island or on top of a mountain."),
+		     "Please double-check the player starting positions to make sure that your carriers "
+		     "won’t "
+		     "drown, "
+		     "or be stuck on an island or on top of a mountain."),
 		   UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 	} else {
@@ -535,7 +540,8 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase, Ed
 
 			map->set_name(_("Random Map"));
 			map->set_author(_("The Widelands Random Map Generator"));
-			map->set_description(_("This map was generated automatically by the Widelands Random Map Generator."));
+			map->set_description(
+			   _("This map was generated automatically by the Widelands Random Map Generator."));
 			map->set_waterway_max_length(std::rand() % 20);  // NOLINT
 
 			sp->set_map("", "", nr_players, false);
@@ -546,7 +552,9 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase, Ed
 			sp->set_custom_starting_positions(false);
 
 			for (unsigned p = 0; p < nr_players; ++p) {
-				sp->set_player_name(p, p == plnum ? _("Player") : (boost::format(_("AI %u")) % (p > plnum ? p : p + 1)).str());
+				sp->set_player_name(p, p == plnum ?
+				                          _("Player") :
+				                          (boost::format(_("AI %u")) % (p > plnum ? p : p + 1)).str());
 				sp->set_player_team(p, p == plnum ? 0 : 1);
 				sp->set_player_tribe(p, "", true);
 				sp->set_player_init(p, 0);

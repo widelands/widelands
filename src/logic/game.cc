@@ -314,8 +314,8 @@ void Game::init_newgame(const GameSettings& settings) {
 
 	if (!settings.mapfilename.empty()) {
 		maploader->load_map_complete(*this, settings.scenario ?
-			                                   Widelands::MapLoader::LoadType::kScenario :
-			                                   Widelands::MapLoader::LoadType::kGame);
+		                                       Widelands::MapLoader::LoadType::kScenario :
+		                                       Widelands::MapLoader::LoadType::kGame);
 	} else {
 		// Normally the map loader takes care of this, but if the map was
 		// previously created for us we need to call this manually

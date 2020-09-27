@@ -100,7 +100,9 @@ public:
 		kRandom,           // show Random Map window
 		kLoad              // show Load Map window
 	};
-	static void run_editor(EditorInteractive::Init, const std::string& filename = "", const std::string& script_to_run = "");
+	static void run_editor(EditorInteractive::Init,
+	                       const std::string& filename = "",
+	                       const std::string& script_to_run = "");
 
 	void load(const std::string& filename);
 	void cleanup_for_load() override;

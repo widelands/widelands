@@ -188,8 +188,8 @@ void FullscreenMenuMain::set_labels() {
 
 	singleplayer_.add(_("New Game"), FullscreenMenuBase::MenuTarget::kNewGame, nullptr, false,
 	                  _("Begin a new game"), "N");
-	singleplayer_.add(_("New Random Game"), FullscreenMenuBase::MenuTarget::kRandomGame, nullptr, false,
-	                  _("Create a new random match"), "Z");
+	singleplayer_.add(_("New Random Game"), FullscreenMenuBase::MenuTarget::kRandomGame, nullptr,
+	                  false, _("Create a new random match"), "Z");
 	singleplayer_.add(_("Campaigns"), FullscreenMenuBase::MenuTarget::kCampaign, nullptr, false,
 	                  _("Play a campaign"), "H");
 	singleplayer_.add(_("Tutorials"), FullscreenMenuBase::MenuTarget::kTutorial, nullptr, false,
@@ -254,11 +254,11 @@ void FullscreenMenuMain::set_labels() {
 	                 _("Play a private online game"), "P");
 
 	editor_.add(_("New Map"), FullscreenMenuBase::MenuTarget::kEditorNew, nullptr, false,
-	                 _("Create a new empty map"), "K");
+	            _("Create a new empty map"), "K");
 	editor_.add(_("Random Map"), FullscreenMenuBase::MenuTarget::kEditorRandom, nullptr, false,
-	                 _("Create a new random map"), "Y");
+	            _("Create a new random map"), "Y");
 	editor_.add(_("Load Map"), FullscreenMenuBase::MenuTarget::kEditorLoad, nullptr, false,
-	                 _("Edit an existing map"), "W");
+	            _("Edit an existing map"), "W");
 
 	singleplayer_.set_label(_("Single Player…"));
 	multiplayer_.set_label(_("Multiplayer…"));

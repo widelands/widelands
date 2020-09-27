@@ -168,7 +168,8 @@ void EditorInteractive::add_main_menu() {
 	              g_image_cache->get("images/wui/editor/menus/new_map.png"));
 
 	menu_windows_.newrandommap.open_window = [this] {
-		MainMenuNewRandomMap m(*this, menu_windows_.newrandommap, egbase().map().get_width(), egbase().map().get_height());
+		MainMenuNewRandomMap m(*this, menu_windows_.newrandommap, egbase().map().get_width(),
+		                       egbase().map().get_height());
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			m.do_generate_map(egbase(), this, nullptr);
 		}
@@ -955,7 +956,9 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	set_sel_triangles(primary.operates_on_triangles());
 }
 
-void EditorInteractive::run_editor(const EditorInteractive::Init init, const std::string& filename, const std::string& script_to_run) {
+void EditorInteractive::run_editor(const EditorInteractive::Init init,
+                                   const std::string& filename,
+                                   const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
@@ -979,7 +982,8 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init, const std
 		}
 	} else {
 		if (!filename.empty()) {
-			throw wexception("EditorInteractive::run_editor: Map file name given when none was expected");
+			throw wexception(
+			   "EditorInteractive::run_editor: Map file name given when none was expected");
 		}
 		if (!script_to_run.empty()) {
 			throw wexception("EditorInteractive::run_editor: Script given when none was expected");
@@ -993,8 +997,8 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init, const std
 		   /** TRANSLATORS: Default name for new map */
 		   _("No Name"),
 		   get_config_string("realname",
-			                 /** TRANSLATORS: Map author name when it hasn't been set yet */
-			                 pgettext("author_name", "Unknown")));
+		                     /** TRANSLATORS: Map author name when it hasn't been set yet */
+		                     pgettext("author_name", "Unknown")));
 
 		switch (init) {
 		case EditorInteractive::Init::kNew:
@@ -1016,7 +1020,8 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init, const std
 	egbase.cleanup_objects();
 }
 
-void EditorInteractive::load_world_units(EditorInteractive* eia, Widelands::EditorGameBase& egbase) {
+void EditorInteractive::load_world_units(EditorInteractive* eia,
+                                         Widelands::EditorGameBase& egbase) {
 	Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
 	Widelands::World* world = egbase.mutable_world();
 

@@ -32,7 +32,7 @@
 namespace Widelands {
 class EditorGameBase;
 struct UniqueRandomMapInfo;
-}
+}  // namespace Widelands
 
 class EditorInteractive;
 struct SinglePlayerGameSettingsProvider;
@@ -46,9 +46,14 @@ template <typename T, typename ID> struct IDButton;
  * things like size, world ....
  */
 struct MainMenuNewRandomMap : public UI::UniqueWindow {
-	explicit MainMenuNewRandomMap(UI::Panel& parent, UI::UniqueWindow::Registry&, uint32_t w, uint32_t h);
+	explicit MainMenuNewRandomMap(UI::Panel& parent,
+	                              UI::UniqueWindow::Registry&,
+	                              uint32_t w,
+	                              uint32_t h);
 
-	bool do_generate_map(Widelands::EditorGameBase&, EditorInteractive*, SinglePlayerGameSettingsProvider*);
+	bool do_generate_map(Widelands::EditorGameBase&,
+	                     EditorInteractive*,
+	                     SinglePlayerGameSettingsProvider*);
 
 	enum class ButtonId : uint8_t {
 		kNone,

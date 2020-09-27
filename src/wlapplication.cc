@@ -1269,10 +1269,11 @@ void WLApplication::mainmenu() {
 						break;
 					} else {
 						// no starting positions found
-						UI::WLMessageBox mbox(mm.get(), _("Map Generation Error"),
-								_("The random map generator was unable to generate a suitable map. "
-								"This happens occasionally because the generator is still in beta stage. "
-								"Please try again with slightly different settings."),
+						UI::WLMessageBox mbox(
+						   mm.get(), _("Map Generation Error"),
+						   _("The random map generator was unable to generate a suitable map. "
+						     "This happens occasionally because the generator is still in beta stage. "
+						     "Please try again with slightly different settings."),
 						   UI::WLMessageBox::MBoxType::kOkCancel);
 						if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 							break;
@@ -1412,7 +1413,9 @@ void WLApplication::mainmenu_multiplayer(const FullscreenMenuMain& mp, const boo
  * \return @c true if a game was played, @c false if the player pressed Back
  * or aborted the game setup via some other means.
  */
-bool WLApplication::new_game(Widelands::Game& game, SinglePlayerGameSettingsProvider& sp, const bool preconfigured) {
+bool WLApplication::new_game(Widelands::Game& game,
+                             SinglePlayerGameSettingsProvider& sp,
+                             const bool preconfigured) {
 	FullscreenMenuBase::MenuTarget code = FullscreenMenuBase::MenuTarget::kNormalGame;
 	if (!preconfigured) {
 		FullscreenMenuLaunchSPG lgm(&sp);
