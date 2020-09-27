@@ -168,7 +168,10 @@ void EditorInteractive::add_main_menu() {
 	              g_image_cache->get("images/wui/editor/menus/new_map.png"));
 
 	menu_windows_.newrandommap.open_window = [this] {
-		new MainMenuNewRandomMap(*this, menu_windows_.newrandommap);
+		MainMenuNewRandomMap m(*this, menu_windows_.newrandommap, egbase().map().get_width(), egbase().map().get_height());
+		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+			m.do_generate_map(egbase(), this, nullptr);
+		}
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap,
@@ -478,6 +481,10 @@ void EditorInteractive::start() {
 		// do nothing.
 	}
 	map_changed(MapWas::kReplaced);
+	if (registry_to_open_) {
+		registry_to_open_->create();
+		registry_to_open_ = nullptr;
+	}
 }
 
 /**
@@ -948,62 +955,86 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	set_sel_triangles(primary.operates_on_triangles());
 }
 
-void EditorInteractive::run_editor(const std::string& filename, const std::string& script_to_run) {
+void EditorInteractive::run_editor(const EditorInteractive::Init init, const std::string& filename, const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
-	{
-		egbase.create_loader_ui({"editor"}, true, kEditorSplashImage);
-		eia.load_world_units();
-		egbase.tribes();
+	egbase.create_loader_ui({"editor"}, true, kEditorSplashImage);
+	eia.load_world_units(&eia, egbase);
+	egbase.tribes();
 
-		{
-			if (filename.empty()) {
-				Notifications::publish(UI::NoteLoadingMessage(_("Creating empty map…")));
-				egbase.mutable_map()->create_empty_map(
-				   egbase, 64, 64, 0,
-				   /** TRANSLATORS: Default name for new map */
-				   _("No Name"),
-				   get_config_string("realname",
-				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
-				                     pgettext("author_name", "Unknown")));
-			} else {
-				Notifications::publish(
-				   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
-				eia.load(filename);
-			}
+	if (init == EditorInteractive::Init::kLoadMapDirectly) {
+		if (filename.empty()) {
+			throw wexception("EditorInteractive::run_editor: Empty map file name");
 		}
 
+		Notifications::publish(
+		   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
+		eia.load(filename);
+
 		egbase.postload();
-
 		eia.start();
-
 		if (!script_to_run.empty()) {
 			eia.egbase().lua().run_script(script_to_run);
+		}
+	} else {
+		if (!filename.empty()) {
+			throw wexception("EditorInteractive::run_editor: Map file name given when none was expected");
+		}
+		if (!script_to_run.empty()) {
+			throw wexception("EditorInteractive::run_editor: Script given when none was expected");
+		}
+
+		Notifications::publish(UI::NoteLoadingMessage(_("Postloading editor…")));
+		egbase.postload();
+
+		egbase.mutable_map()->create_empty_map(
+		   egbase, 64, 64, 0,
+		   /** TRANSLATORS: Default name for new map */
+		   _("No Name"),
+		   get_config_string("realname",
+			                 /** TRANSLATORS: Map author name when it hasn't been set yet */
+			                 pgettext("author_name", "Unknown")));
+
+		switch (init) {
+		case EditorInteractive::Init::kNew:
+			eia.registry_to_open_ = &eia.menu_windows_.newmap;
+			break;
+		case EditorInteractive::Init::kRandom:
+			eia.registry_to_open_ = &eia.menu_windows_.newrandommap;
+			break;
+		case EditorInteractive::Init::kLoad:
+			eia.registry_to_open_ = &eia.menu_windows_.loadmap;
+			break;
+		default:
+			break;
 		}
 	}
 
 	egbase.remove_loader_ui();
 	eia.run<UI::Panel::Returncodes>();
-
 	egbase.cleanup_objects();
 }
 
-void EditorInteractive::load_world_units() {
+void EditorInteractive::load_world_units(EditorInteractive* eia, Widelands::EditorGameBase& egbase) {
 	Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
-	Widelands::World* world = egbase().mutable_world();
+	Widelands::World* world = egbase.mutable_world();
 
 	log_info("┏━ Loading world\n");
 	ScopedTimer timer("┗━ took %ums");
 
-	std::unique_ptr<LuaTable> table(egbase().lua().run_script("world/init.lua"));
+	std::unique_ptr<LuaTable> table(egbase.lua().run_script("world/init.lua"));
 
-	auto load_category = [this, world](const LuaTable& t, const std::string& key,
-	                                   Widelands::MapObjectType type) {
+	auto load_category = [eia, world](const LuaTable& t, const std::string& key,
+	                                  Widelands::MapObjectType type) {
 		for (const auto& category_table :
 		     t.get_table(key)->array_entries<std::unique_ptr<LuaTable>>()) {
-			editor_categories_[type].push_back(
-			   std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, type, *world)));
+			// Even if we do not have an EditorInteractive, we still need to create the
+			// Category because it will load all the map objects we are interested in
+			std::unique_ptr<EditorCategory> c(new EditorCategory(*category_table, type, *world));
+			if (eia) {
+				eia->editor_categories_[type].push_back(std::move(c));
+			}
 		}
 	};
 

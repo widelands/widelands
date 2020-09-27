@@ -19,6 +19,7 @@
 
 #include "editor/ui_menus/main_menu_random_map.h"
 
+#include <cstdlib>
 #include <sstream>
 
 #include "base/i18n.h"
@@ -32,6 +33,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/single_player_game_settings_provider.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
 
@@ -40,8 +42,10 @@ namespace {
 constexpr uint8_t kMaxMapgenPlayers = 8;
 }  // namespace
 
-MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
-                                           UI::UniqueWindow::Registry& registry)
+MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
+                                           UI::UniqueWindow::Registry& registry,
+                                           const uint32_t w,
+                                           const uint32_t h)
    : UI::UniqueWindow(&parent, "random_map_menu", &registry, 400, 500, _("New Random Map")),
      // UI elements
      margin_(4),
@@ -49,11 +53,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
      label_height_(text_height(UI::FontStyle::kLabel) + 2),
      box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
      // Size
-     map_size_box_(box_,
-                   "random_map_menu",
-                   4,
-                   parent.egbase().map().get_width(),
-                   parent.egbase().map().get_height()),
+     map_size_box_(box_, "random_map_menu", 4, w, h),
      max_players_(2),
      players_(&box_,
               0,
@@ -320,8 +320,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	box_height += margin_;
 
 	// ---------- "Generate Map" button ----------
-	cancel_button_.sigclicked.connect([this]() { clicked_cancel(); });
-	ok_button_.sigclicked.connect([this]() { clicked_create_map(); });
+	cancel_button_.sigclicked.connect([this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
+	ok_button_.sigclicked.connect([this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk); });
 	if (UI::g_fh->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_);
 		button_box_.add(&cancel_button_);
@@ -447,14 +447,21 @@ void MainMenuNewRandomMap::normalize_landmass(ButtonId clicked_button) {
 	mountains_.set_text((boost::format(_("%i %%")) % mountainsval_).str());
 }
 
-void MainMenuNewRandomMap::clicked_create_map() {
+bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase, EditorInteractive* eia, SinglePlayerGameSettingsProvider* sp) {
 	ok_button_.set_enabled(false);
 	cancel_button_.set_enabled(false);
-	EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
-	Widelands::EditorGameBase& egbase = eia.egbase();
+
+	assert((eia == nullptr) ^ (sp == nullptr));
+	assert((sp == nullptr) ^ is_a(Widelands::Game, &egbase));
+
 	Widelands::Map* map = egbase.mutable_map();
-	egbase.create_loader_ui({"editor"}, true, kEditorSplashImage);
-	eia.cleanup_for_load();
+
+	if (eia) {
+		egbase.create_loader_ui({"editor"}, true, kEditorSplashImage);
+		eia->cleanup_for_load();
+	} else {
+		egbase.cleanup_for_load();
+	}
 
 	Widelands::UniqueRandomMapInfo map_info;
 	set_map_info(map_info);
@@ -497,33 +504,60 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	}
 	log_info("\n");
 
-	gen.create_random_map();
+	const bool result = gen.create_random_map();
 
 	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
 
 	map->recalc_whole_map(egbase);
-	eia.map_changed(EditorInteractive::MapWas::kReplaced);
-	UI::WLMessageBox mbox(
-	   &eia,
-	   /** TRANSLATORS: Window title. This is shown after a random map has been created in the
-	      editor.*/
-	   _("Random Map"),
-	   /** TRANSLATORS: This is shown after a random map has been created in the editor. */
-	   /** TRANSLATORS: You don't need to be literal with your translation, */
-	   /** TRANSLATORS: as long as the user understands that he needs to check the player
-	      positions.*/
-	   _("The map has been generated. "
-	     "Please double-check the player starting positions to make sure that your carriers won’t "
-	     "drown, "
-	     "or be stuck on an island or on top of a mountain."),
-	   UI::WLMessageBox::MBoxType::kOk);
-	mbox.run<UI::Panel::Returncodes>();
-	egbase.remove_loader_ui();
-	die();
-}
+	if (eia) {
+		eia->map_changed(EditorInteractive::MapWas::kReplaced);
+		egbase.remove_loader_ui();
 
-void MainMenuNewRandomMap::clicked_cancel() {
-	die();
+		UI::WLMessageBox mbox(
+		   eia,
+		   /** TRANSLATORS: Window title. This is shown after a random map has been created in the
+			  editor.*/
+		   _("Random Map"),
+		   /** TRANSLATORS: This is shown after a random map has been created in the editor. */
+		   /** TRANSLATORS: You don't need to be literal with your translation, */
+		   /** TRANSLATORS: as long as the user understands that he needs to check the player
+			  positions.*/
+		   _("The map has been generated. "
+			 "Please double-check the player starting positions to make sure that your carriers won’t "
+			 "drown, "
+			 "or be stuck on an island or on top of a mountain."),
+		   UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+	} else {
+		if (result) {
+			const unsigned nr_players = map->get_nrplayers();
+			const unsigned plnum = std::rand() % nr_players;  // NOLINT
+
+			map->set_name(_("Random Map"));
+			map->set_author(_("The Widelands Random Map Generator"));
+			map->set_description(_("This map was generated automatically by the Widelands Random Map Generator."));
+			map->set_waterway_max_length(std::rand() % 20);  // NOLINT
+
+			sp->set_map("", "", nr_players, false);
+			sp->set_scenario(false);
+			sp->set_player_number(plnum);
+			sp->set_win_condition_script("scripting/win_conditions/defeat_all.lua");
+			sp->set_peaceful_mode(false);
+			sp->set_custom_starting_positions(false);
+
+			for (unsigned p = 0; p < nr_players; ++p) {
+				sp->set_player_name(p, p == plnum ? _("Player") : (boost::format(_("AI %u")) % (p > plnum ? p : p + 1)).str());
+				sp->set_player_team(p, p == plnum ? 0 : 1);
+				sp->set_player_tribe(p, "", true);
+				sp->set_player_init(p, 0);
+			}
+		} else {
+			ok_button_.set_enabled(true);
+			cancel_button_.set_enabled(true);
+		}
+	}
+
+	return result;
 }
 
 void MainMenuNewRandomMap::id_edit_box_changed() {

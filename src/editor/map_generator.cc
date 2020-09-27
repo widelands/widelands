@@ -589,7 +589,7 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
 	      ttp, rng.rand() % map_gen_info_->get_area(atp, usedLandIndex).get_num_terrains(ttp));
 }
 
-void MapGenerator::create_random_map() {
+bool MapGenerator::create_random_map() {
 	//  Init random number generator with map number
 
 	//  We will use our own random number generator here so we do not influence
@@ -723,6 +723,8 @@ void MapGenerator::create_random_map() {
 		}
 	}
 
+	bool result = true;
+
 	// Random placement of starting positions
 	assert(map_info_.numPlayers);
 	std::vector<PlayerNumber> pn(map_info_.numPlayers);
@@ -807,6 +809,7 @@ void MapGenerator::create_random_map() {
 			log_warn("Could not find a suitable place for player %u\n", n);
 			// Let's hope that one is at least on dry ground.
 			coords2 = playerstart;
+			result = false;
 		}
 
 		// Remove coordinates if they are an illegal starting position.
@@ -822,11 +825,14 @@ void MapGenerator::create_random_map() {
 			log_warn("Player %u has no starting position - illegal coordinates (%d, %d).\n", n,
 			         coords2.x, coords2.y);
 			coords2 = Coords::null();
+			result = false;
 		}
 
 		// Finally set the found starting position
 		map_.set_starting_pos(n, coords2);
 	}
+
+	return result;
 }
 
 /**

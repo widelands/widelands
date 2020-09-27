@@ -76,7 +76,7 @@ private:
 	UI::Dropdown<FullscreenMenuBase::MenuTarget> singleplayer_;
 	UI::Dropdown<FullscreenMenuBase::MenuTarget> multiplayer_;
 	UI::Button replay_;
-	UI::Button editor_;
+	UI::Dropdown<FullscreenMenuBase::MenuTarget> editor_;
 	UI::Button addons_;
 	UI::Button options_;
 	UI::Button about_;

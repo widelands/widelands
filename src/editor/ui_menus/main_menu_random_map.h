@@ -30,10 +30,12 @@
 #include "ui_basic/unique_window.h"
 
 namespace Widelands {
+class EditorGameBase;
 struct UniqueRandomMapInfo;
 }
 
 class EditorInteractive;
+struct SinglePlayerGameSettingsProvider;
 namespace UI {
 template <typename T, typename ID> struct IDButton;
 }
@@ -44,7 +46,9 @@ template <typename T, typename ID> struct IDButton;
  * things like size, world ....
  */
 struct MainMenuNewRandomMap : public UI::UniqueWindow {
-	explicit MainMenuNewRandomMap(EditorInteractive&, UI::UniqueWindow::Registry&);
+	explicit MainMenuNewRandomMap(UI::Panel& parent, UI::UniqueWindow::Registry&, uint32_t w, uint32_t h);
+
+	bool do_generate_map(Widelands::EditorGameBase&, EditorInteractive*, SinglePlayerGameSettingsProvider*);
 
 	enum class ButtonId : uint8_t {
 		kNone,
@@ -65,8 +69,6 @@ private:
 	};
 
 	void button_clicked(ButtonId);
-	void clicked_create_map();
-	void clicked_cancel();
 	void id_edit_box_changed();
 	void nr_edit_box_changed();
 

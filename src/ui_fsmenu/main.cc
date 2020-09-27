@@ -83,7 +83,17 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                   UI::PanelStyle::kFsMenu,
                   UI::ButtonStyle::kFsMenuMenu),
      replay_(&vbox1_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
-     editor_(&vbox1_, "editor", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
+     editor_(&vbox1_,
+             "editor",
+             0,
+             0,
+             butw_,
+             6,
+             buth_,
+             "",
+             UI::DropdownType::kTextualMenu,
+             UI::PanelStyle::kFsMenu,
+             UI::ButtonStyle::kFsMenuMenu),
      addons_(&vbox2_, "addons", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      options_(&vbox2_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      about_(&vbox2_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
@@ -118,11 +128,10 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 		internet_login();
 		end_modal<FullscreenMenuBase::MenuTarget>(multiplayer_.get_selected());
 	});
+	editor_.selected.connect(
+	   [this]() { end_modal<FullscreenMenuBase::MenuTarget>(editor_.get_selected()); });
 	replay_.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kReplay);
-	});
-	editor_.sigclicked.connect([this]() {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditor);
 	});
 	/* addons_.sigclicked.connect([this]() {  // Not yet implemented
 	   end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAddOns);
@@ -141,9 +150,9 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	vbox1_.add_inf_space();
 	vbox1_.add(&multiplayer_, UI::Box::Resizing::kFullSize);
 	vbox1_.add_inf_space();
-	vbox1_.add(&replay_, UI::Box::Resizing::kFullSize);
-	vbox1_.add_inf_space();
 	vbox1_.add(&editor_, UI::Box::Resizing::kFullSize);
+	vbox1_.add_inf_space();
+	vbox1_.add(&replay_, UI::Box::Resizing::kFullSize);
 
 	vbox2_.add(&options_, UI::Box::Resizing::kFullSize);
 	vbox2_.add_inf_space();
@@ -175,9 +184,12 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 void FullscreenMenuMain::set_labels() {
 	singleplayer_.clear();
 	multiplayer_.clear();
+	editor_.clear();
 
 	singleplayer_.add(_("New Game"), FullscreenMenuBase::MenuTarget::kNewGame, nullptr, false,
 	                  _("Begin a new game"), "N");
+	singleplayer_.add(_("New Random Game"), FullscreenMenuBase::MenuTarget::kRandomGame, nullptr, false,
+	                  _("Create a new random match"), "Z");
 	singleplayer_.add(_("Campaigns"), FullscreenMenuBase::MenuTarget::kCampaign, nullptr, false,
 	                  _("Play a campaign"), "H");
 	singleplayer_.add(_("Tutorials"), FullscreenMenuBase::MenuTarget::kTutorial, nullptr, false,
@@ -241,18 +253,25 @@ void FullscreenMenuMain::set_labels() {
 	multiplayer_.add(_("LAN / Direct IP"), FullscreenMenuBase::MenuTarget::kLan, nullptr, false,
 	                 _("Play a private online game"), "P");
 
+	editor_.add(_("New Map"), FullscreenMenuBase::MenuTarget::kEditorNew, nullptr, false,
+	                 _("Create a new empty map"), "K");
+	editor_.add(_("Random Map"), FullscreenMenuBase::MenuTarget::kEditorRandom, nullptr, false,
+	                 _("Create a new random map"), "Y");
+	editor_.add(_("Load Map"), FullscreenMenuBase::MenuTarget::kEditorLoad, nullptr, false,
+	                 _("Edit an existing map"), "W");
+
 	singleplayer_.set_label(_("Single Player…"));
 	multiplayer_.set_label(_("Multiplayer…"));
+	editor_.set_label(_("Editor…"));
 	singleplayer_.set_tooltip(
 	   as_tooltip_text_with_hotkey(_("Begin or load a single-player campaign or free game"), "S"));
 	multiplayer_.set_tooltip(
 	   as_tooltip_text_with_hotkey(_("Play with your friends over the internet"), "M"));
+	editor_.set_tooltip(as_tooltip_text_with_hotkey(_("Launch the map editor"), "E"));
 
 	replay_.set_title(_("Watch Replay"));
 	replay_.set_tooltip(as_tooltip_text_with_hotkey(_("Watch the replay of an old game"), "R"));
 
-	editor_.set_title(_("Editor"));
-	editor_.set_tooltip(as_tooltip_text_with_hotkey(_("Launch the map editor"), "E"));
 	addons_.set_title(_("Add-Ons"));
 	addons_.set_tooltip(  // TODO(Nordfriese): Replace with purpose text or add _() markup
 	   as_tooltip_text_with_hotkey("This feature is still under development", "A"));
@@ -321,6 +340,9 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 		case SDLK_n:
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNewGame);
 			return true;
+		case SDLK_z:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kRandomGame);
+			return true;
 		case SDLK_h:
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kCampaign);
 			return true;
@@ -337,9 +359,6 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 		case SDLK_p:
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kLan);
 			return true;
-		case SDLK_e:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditor);
-			return true;
 		/* case SDLK_a:
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAddOns);
 			return true; */
@@ -352,11 +371,23 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 		case SDLK_F1:
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAbout);
 			return true;
+		case SDLK_k:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditorNew);
+			return true;
+		case SDLK_y:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditorRandom);
+			return true;
+		case SDLK_w:
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditorLoad);
+			return true;
 		case SDLK_s:
 			singleplayer_.toggle();
 			return true;
 		case SDLK_m:
 			multiplayer_.toggle();
+			return true;
+		case SDLK_e:
+			editor_.toggle();
 			return true;
 		default:
 			break;
