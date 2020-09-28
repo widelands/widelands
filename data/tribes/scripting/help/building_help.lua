@@ -386,6 +386,8 @@ function building_help_general_string(tribe, building_description)
       else 
          representative_resource = wl.Game():get_worker_description(tribe.name .. "_carrier")
       end
+   elseif (building_description.type_name == "constructionsite") or (building_description.type_name == "dismantlesite") then
+      representative_resource = wl.Game():get_worker_description(tribe.name .. "_builder")
    end
 
    -- TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
