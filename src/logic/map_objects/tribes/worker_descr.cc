@@ -159,8 +159,8 @@ Worker& WorkerDescr::create(EditorGameBase& egbase,
                             PlayerImmovable* const location,
                             Coords const coords) const {
 	log_dbg("NOCOM WorkerDescr::create(%s, %p, %s, %dx%d)", name().c_str(),
-	        owner ? owner->player_number() : 0,
-	        location ? location->descr().name().c_str() : "nil", coords.x, coords.y);
+	        owner ? owner->player_number() : 0, location ? location->descr().name().c_str() : "nil",
+	        coords.x, coords.y);
 	Worker& worker = dynamic_cast<Worker&>(create_object());
 	log_dbg("NOCOM WorkerDescr::create AAA (%u)", worker.serial());
 	worker.set_owner(owner);
