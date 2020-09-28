@@ -48,8 +48,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      style_(&g_style_manager->font_style(FontStyle::kLabel)),
      font_scale_(1.0f),
      align_(align),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false),
-     needs_recompute_(true) {
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { scrollpos_changed(a); });
@@ -63,12 +62,12 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 
 void MultilineTextarea::set_style(const UI::FontStyleInfo& style) {
 	style_ = &style;
-	needs_recompute_ = true;
+	NoteDelayedCheck::instantiate(this, [this]() { recompute(); }, false);
 }
 void MultilineTextarea::set_font_scale(float scale) {
 	font_scale_ = scale;
 	scrollbar_.set_singlestepsize(text_height(*style_, font_scale_));
-	needs_recompute_ = true;
+	NoteDelayedCheck::instantiate(this, [this]() { recompute(); }, false);
 }
 
 /**
@@ -77,7 +76,7 @@ void MultilineTextarea::set_font_scale(float scale) {
  */
 void MultilineTextarea::set_text(const std::string& text) {
 	text_ = text;
-	needs_recompute_ = true;
+	NoteDelayedCheck::instantiate(this, [this]() { recompute(); }, false);
 }
 
 /**
@@ -85,7 +84,6 @@ void MultilineTextarea::set_text(const std::string& text) {
  * and adjust scrollbar settings accordingly.
  */
 void MultilineTextarea::recompute() {
-	assert(needs_recompute_);
 	// We wrap the text twice. We need to do this to account for the presence/absence of the
 	// scrollbar. We first try without the scrollbar (unless it's forced) so it's only enabled
 	// when necessary.
@@ -130,7 +128,6 @@ void MultilineTextarea::recompute() {
 			break;  // No need to wrap twice.
 		}
 	}
-	needs_recompute_ = false;
 	set_can_focus(scrollbar_.is_enabled());
 }
 
@@ -142,21 +139,23 @@ void MultilineTextarea::scrollpos_changed(int32_t const /* pixels */) {
 
 /// Take care of the scrollbar on resize
 void MultilineTextarea::layout() {
-	needs_recompute_ = true;
+	NoteDelayedCheck::instantiate(this, [this]() {
+		recompute();
+		// Take care of the scrollbar
+		scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
+		scrollbar_.set_size(Scrollbar::kSize, get_h());
+		scrollbar_.set_pagesize(get_h() - 2 * style_->size() * font_scale_);
+	}, false);
+}
 
-	// Take care of the scrollbar
-	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
-	scrollbar_.set_size(Scrollbar::kSize, get_h());
-	scrollbar_.set_pagesize(get_h() - 2 * style_->size() * font_scale_);
+MultilineTextarea::~MultilineTextarea () {
+	Notifications::publish(NoteDelayedCheckCancel(this));
 }
 
 /**
  * Redraw the textarea
  */
 void MultilineTextarea::draw(RenderTarget& dst) {
-	if (needs_recompute_) {
-		recompute();
-	}
 	if (text_.empty() || !rendered_text_.get()) {
 		return;
 	}

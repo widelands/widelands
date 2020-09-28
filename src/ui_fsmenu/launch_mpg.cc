@@ -210,6 +210,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 }
 
 FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
+	Notifications::publish(NoteDelayedCheckCancel(this));
 	delete mpsg_;
 	delete chat_;
 }
@@ -380,7 +381,7 @@ void FullscreenMenuLaunchMPG::think() {
 	}
 
 	NoteDelayedCheck::instantiate(
-	   this, [this]() { refresh(); }, true);
+	   this, [this]() { refresh(); }, false);
 
 	// unfocus chat window when other UI element has focus
 	if (!chat_->has_focus()) {

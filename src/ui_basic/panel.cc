@@ -275,6 +275,7 @@ int Panel::do_run() {
 				next_draw_time = SDL_GetTicks() + draw_delay;
 				return;
 			}
+			SDL_Delay(5);
 		}
 	};
 
@@ -289,6 +290,7 @@ int Panel::do_run() {
 				app->handle_input(&input_callback);
 				break;
 			}
+			SDL_Delay(5);
 		}
 
 		if (app->should_die() && (modal_ == this) && running_) {

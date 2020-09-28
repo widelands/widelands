@@ -55,6 +55,8 @@ struct MultilineTextarea : public Panel {
 	   const Align = UI::Align::kLeft,
 	   MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);
 
+	~MultilineTextarea() override;
+
 	const std::string& get_text() const {
 		return text_;
 	}
@@ -100,8 +102,6 @@ private:
 
 	Scrollbar scrollbar_;
 	ScrollMode scrollmode_;
-
-	bool needs_recompute_;
 };
 }  // namespace UI
 
