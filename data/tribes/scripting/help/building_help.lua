@@ -380,10 +380,12 @@ function building_help_general_string(tribe, building_description)
       representative_resource = wl.Game():get_worker_description(tribe.soldier)
    elseif (building_description.is_port) then
       representative_resource = wl.Game():get_ship_description(tribe.name .. "_ship")
-   elseif (building_description.descname == "Headquarters") then
-      representative_resource = wl.Game():get_worker_description(tribe.name .. "_carrier")
    elseif (building_description.type_name == "warehouse") then
-      representative_resource = wl.Game():get_ware_description("log")
+      if (building_description.conquers < 1) then
+         representative_resource = wl.Game():get_ware_description("log")
+      else 
+         representative_resource = wl.Game():get_worker_description(tribe.name .. "_carrier")
+      end
    end
 
    -- TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
