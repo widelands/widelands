@@ -62,12 +62,14 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 
 void MultilineTextarea::set_style(const UI::FontStyleInfo& style) {
 	style_ = &style;
-	NoteDelayedCheck::instantiate(this, [this]() { recompute(); }, false);
+	NoteDelayedCheck::instantiate(
+	   this, [this]() { recompute(); }, false);
 }
 void MultilineTextarea::set_font_scale(float scale) {
 	font_scale_ = scale;
 	scrollbar_.set_singlestepsize(text_height(*style_, font_scale_));
-	NoteDelayedCheck::instantiate(this, [this]() { recompute(); }, false);
+	NoteDelayedCheck::instantiate(
+	   this, [this]() { recompute(); }, false);
 }
 
 /**
@@ -76,7 +78,8 @@ void MultilineTextarea::set_font_scale(float scale) {
  */
 void MultilineTextarea::set_text(const std::string& text) {
 	text_ = text;
-	NoteDelayedCheck::instantiate(this, [this]() { recompute(); }, false);
+	NoteDelayedCheck::instantiate(
+	   this, [this]() { recompute(); }, false);
 }
 
 /**
@@ -139,16 +142,19 @@ void MultilineTextarea::scrollpos_changed(int32_t const /* pixels */) {
 
 /// Take care of the scrollbar on resize
 void MultilineTextarea::layout() {
-	NoteDelayedCheck::instantiate(this, [this]() {
-		recompute();
-		// Take care of the scrollbar
-		scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
-		scrollbar_.set_size(Scrollbar::kSize, get_h());
-		scrollbar_.set_pagesize(get_h() - 2 * style_->size() * font_scale_);
-	}, false);
+	NoteDelayedCheck::instantiate(
+	   this,
+	   [this]() {
+		   recompute();
+		   // Take care of the scrollbar
+		   scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
+		   scrollbar_.set_size(Scrollbar::kSize, get_h());
+		   scrollbar_.set_pagesize(get_h() - 2 * style_->size() * font_scale_);
+	   },
+	   false);
 }
 
-MultilineTextarea::~MultilineTextarea () {
+MultilineTextarea::~MultilineTextarea() {
 	Notifications::publish(NoteDelayedCheckCancel(this));
 }
 

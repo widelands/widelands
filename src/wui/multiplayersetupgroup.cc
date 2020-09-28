@@ -150,18 +150,21 @@ struct MultiPlayerClientGroup : public UI::Box {
 
 	/// Take care of visibility and current values
 	void update() {
-		NoteDelayedCheck::instantiate(this, [this]() {
-			const GameSettings& settings = settings_->settings();
-			const UserSettings& user_setting = settings.users.at(id_);
+		NoteDelayedCheck::instantiate(
+		   this,
+		   [this]() {
+			   const GameSettings& settings = settings_->settings();
+			   const UserSettings& user_setting = settings.users.at(id_);
 
-			if (user_setting.position == UserSettings::not_connected()) {
-				set_visible(false);
-				return;
-			}
+			   if (user_setting.position == UserSettings::not_connected()) {
+				   set_visible(false);
+				   return;
+			   }
 
-			name.set_text(user_setting.name);
-			rebuild_slot_dropdown(settings);
-		}, false);
+			   name.set_text(user_setting.name);
+			   rebuild_slot_dropdown(settings);
+		   },
+		   false);
 	}
 
 	~MultiPlayerClientGroup() override {
@@ -600,41 +603,44 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 	/// Refresh all user interfaces
 	void update() {
-		NoteDelayedCheck::instantiate(this, [this]() {
-			const GameSettings& settings = settings_->settings();
-			if (id_ >= settings.players.size()) {
-				set_visible(false);
-				return;
-			}
+		NoteDelayedCheck::instantiate(
+		   this,
+		   [this]() {
+			   const GameSettings& settings = settings_->settings();
+			   if (id_ >= settings.players.size()) {
+				   set_visible(false);
+				   return;
+			   }
 
-			const PlayerSettings& player_setting = settings.players[id_];
-			rebuild_type_dropdown(settings);
-			set_visible(true);
+			   const PlayerSettings& player_setting = settings.players[id_];
+			   rebuild_type_dropdown(settings);
+			   set_visible(true);
 
-			if (player_setting.state == PlayerSettings::State::kClosed ||
-				player_setting.state == PlayerSettings::State::kOpen) {
-				team_dropdown_.set_visible(false);
-				team_dropdown_.set_enabled(false);
-				tribes_dropdown_.set_visible(false);
-				tribes_dropdown_.set_enabled(false);
-				init_dropdown_.set_visible(false);
-				init_dropdown_.set_enabled(false);
-			} else {  // kHuman, kShared, kComputer
-				rebuild_tribes_dropdown(settings);
-				rebuild_init_dropdown(settings);
-				rebuild_team_dropdown(settings);
-			}
+			   if (player_setting.state == PlayerSettings::State::kClosed ||
+			       player_setting.state == PlayerSettings::State::kOpen) {
+				   team_dropdown_.set_visible(false);
+				   team_dropdown_.set_enabled(false);
+				   tribes_dropdown_.set_visible(false);
+				   tribes_dropdown_.set_enabled(false);
+				   init_dropdown_.set_visible(false);
+				   init_dropdown_.set_enabled(false);
+			   } else {  // kHuman, kShared, kComputer
+				   rebuild_tribes_dropdown(settings);
+				   rebuild_init_dropdown(settings);
+				   rebuild_team_dropdown(settings);
+			   }
 
-			// Trigger update for the other players for shared_in mode when slots open and close
-			if (last_state_ != player_setting.state) {
-				last_state_ = player_setting.state;
-				for (PlayerSlot slot = 0; slot < settings_->settings().players.size(); ++slot) {
-					if (slot != id_) {
-						n->set_player_state(slot, settings.players[slot].state);
-					}
-				}
-			}
-		}, false);
+			   // Trigger update for the other players for shared_in mode when slots open and close
+			   if (last_state_ != player_setting.state) {
+				   last_state_ = player_setting.state;
+				   for (PlayerSlot slot = 0; slot < settings_->settings().players.size(); ++slot) {
+					   if (slot != id_) {
+						   n->set_player_state(slot, settings.players[slot].state);
+					   }
+				   }
+			   }
+		   },
+		   false);
 	}
 
 	GameSettingsProvider* const settings_;
@@ -701,31 +707,34 @@ MultiPlayerSetupGroup::~MultiPlayerSetupGroup() {
 
 /// Update which slots are available based on current settings.
 void MultiPlayerSetupGroup::update() {
-	NoteDelayedCheck::instantiate(this, [this]() {
-		const GameSettings& settings = settings_->settings();
+	NoteDelayedCheck::instantiate(
+	   this,
+	   [this]() {
+		   const GameSettings& settings = settings_->settings();
 
-		// Update / initialize client groups
-		if (multi_player_client_groups.size() < settings.users.size()) {
-			multi_player_client_groups.resize(settings.users.size());
-		}
-		for (uint32_t i = 0; i < settings.users.size(); ++i) {
-			if (!multi_player_client_groups.at(i)) {
-				multi_player_client_groups.at(i) =
-				   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, settings_);
-				clientbox.add(multi_player_client_groups.at(i), UI::Box::Resizing::kFullSize);
-				multi_player_client_groups.at(i)->layout();
-			}
-			multi_player_client_groups.at(i)->set_visible(true);
-		}
+		   // Update / initialize client groups
+		   if (multi_player_client_groups.size() < settings.users.size()) {
+			   multi_player_client_groups.resize(settings.users.size());
+		   }
+		   for (uint32_t i = 0; i < settings.users.size(); ++i) {
+			   if (!multi_player_client_groups.at(i)) {
+				   multi_player_client_groups.at(i) =
+				      new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, settings_);
+				   clientbox.add(multi_player_client_groups.at(i), UI::Box::Resizing::kFullSize);
+				   multi_player_client_groups.at(i)->layout();
+			   }
+			   multi_player_client_groups.at(i)->set_visible(true);
+		   }
 
-		// Keep track of which player slots are visible
-		for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
-			const bool should_be_visible = i < settings.players.size();
-			if (should_be_visible != multi_player_player_groups.at(i)->is_visible()) {
-				multi_player_player_groups.at(i)->set_visible(should_be_visible);
-			}
-		}
-	}, false);
+		   // Keep track of which player slots are visible
+		   for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
+			   const bool should_be_visible = i < settings.players.size();
+			   if (should_be_visible != multi_player_player_groups.at(i)->is_visible()) {
+				   multi_player_player_groups.at(i)->set_visible(should_be_visible);
+			   }
+		   }
+	   },
+	   false);
 }
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {

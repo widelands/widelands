@@ -691,14 +691,17 @@ void InteractiveGameBase::show_game_summary() {
 
 bool InteractiveGameBase::show_game_client_disconnected() {
 	bool result = false;
-	NoteDelayedCheck::instantiate(this, [this, &result]() {
-		assert(is_a(GameHost, get_game()->game_controller()));
-		if (!client_disconnected_.window) {
-			if (upcast(GameHost, host, get_game()->game_controller())) {
-				new GameClientDisconnected(this, client_disconnected_, host);
-				result = true;
-			}
-		}
-	}, true);
+	NoteDelayedCheck::instantiate(
+	   this,
+	   [this, &result]() {
+		   assert(is_a(GameHost, get_game()->game_controller()));
+		   if (!client_disconnected_.window) {
+			   if (upcast(GameHost, host, get_game()->game_controller())) {
+				   new GameClientDisconnected(this, client_disconnected_, host);
+				   result = true;
+			   }
+		   }
+	   },
+	   true);
 	return result;
 }
