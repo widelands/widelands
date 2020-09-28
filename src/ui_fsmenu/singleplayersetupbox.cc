@@ -55,7 +55,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
                   settings,
                   id),
      tribe_(this,
-            (boost::format("dropdown_type%d") % static_cast<unsigned>(id)).str(),
+            (boost::format("dropdown_tribe%d") % static_cast<unsigned>(id)).str(),
             0,
             0,
             h,
