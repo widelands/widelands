@@ -1122,7 +1122,7 @@ void show_field_action(InteractiveBase* const ibase,
 			if (i->descr().type() == Widelands::MapObjectType::FLAG) {
 				finish = true;
 			} else if (i->descr().type() == Widelands::MapObjectType::ROAD ||
-			    i->descr().type() == Widelands::MapObjectType::WATERWAY) {
+			           i->descr().type() == Widelands::MapObjectType::WATERWAY) {
 				if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
 					upcast(Game, game, &player->egbase());
 					game->send_player_build_flag(player->player_number(), target);

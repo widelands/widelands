@@ -1578,7 +1578,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.preferred = false;
 	if (Widelands::BaseImmovable const* const imm = fse.field->get_immovable()) {
 		if ((imm->descr().type() == Widelands::MapObjectType::FLAG ||
-		    imm->descr().type() == Widelands::MapObjectType::ROAD) &&
+		     imm->descr().type() == Widelands::MapObjectType::ROAD) &&
 		    (fse.field->nodecaps() & Widelands::BUILDCAPS_FLAG)) {
 			field.preferred = true;
 		}
@@ -2091,7 +2091,7 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 
 	if (Widelands::BaseImmovable const* const imm = fse.field->get_immovable()) {
 		if ((imm->descr().type() == Widelands::MapObjectType::FLAG ||
-		    imm->descr().type() == Widelands::MapObjectType::ROAD) &&
+		     imm->descr().type() == Widelands::MapObjectType::ROAD) &&
 		    (fse.field->nodecaps() & Widelands::BUILDCAPS_FLAG)) {
 			field.preferred = true;
 		}

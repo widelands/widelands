@@ -256,8 +256,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		} else if (upcast(const Widelands::ProductionSite, productionsite, building)) {
 			const bool is_stopped = productionsite->is_stopped();
 			UI::Button* stopbtn = new UI::Button(
-			   capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
-			   UI::ButtonStyle::kWuiMenu,
+			   capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			   g_image_cache->get(
 			      (is_stopped ? "images/ui_basic/continue.png" : "images/ui_basic/stop.png")),
 			   is_stopped ?
