@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"  // NOCOM
 #include "base/vector.h"
 #include "base/wexception.h"
 #include "logic/game_data_error.h"
@@ -30,6 +31,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/tribes/worker_program.h"
+#include "logic/player.h"  // NOCOM
 
 namespace Widelands {
 
@@ -156,11 +158,19 @@ Worker& WorkerDescr::create(EditorGameBase& egbase,
                             Player* owner,
                             PlayerImmovable* const location,
                             Coords const coords) const {
+	log_dbg("NOCOM WorkerDescr::create(%s, %p, %s, %dx%d)", name().c_str(),
+	        owner ? owner->player_number() : 0,
+	        location ? location->descr().name().c_str() : "nil", coords.x, coords.y);
 	Worker& worker = dynamic_cast<Worker&>(create_object());
+	log_dbg("NOCOM WorkerDescr::create AAA (%u)", worker.serial());
 	worker.set_owner(owner);
+	log_dbg("NOCOM WorkerDescr::create BBB");
 	worker.set_location(location);
+	log_dbg("NOCOM WorkerDescr::create CCC");
 	worker.set_position(egbase, coords);
+	log_dbg("NOCOM WorkerDescr::create DDD");
 	worker.init(egbase);
+	log_dbg("NOCOM WorkerDescr::create done.");
 	return worker;
 }
 
