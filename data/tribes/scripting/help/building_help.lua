@@ -383,7 +383,7 @@ function building_help_general_string(tribe, building_description)
    elseif (building_description.type_name == "warehouse") then
       if (building_description.conquers < 1) then
          representative_resource = wl.Game():get_ware_description("log")
-      else 
+      else
          representative_resource = wl.Game():get_worker_description(tribe.name .. "_carrier")
       end
    elseif (building_description.type_name == "constructionsite") or (building_description.type_name == "dismantlesite") then
