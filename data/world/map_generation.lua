@@ -221,8 +221,8 @@ blackland = {
             name = "ashes",
             weight = 1,
             coast_terrains = { "ashes2" },
-            land_terrains = { "ashes" },
-            upper_terrains = { "ashes" },
+            land_terrains = { "ashes1" },
+            upper_terrains = { "ashes1" },
          },
       },
       wasteland = {
