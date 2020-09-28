@@ -151,11 +151,6 @@ void FullscreenMenuLaunchMPG::layout() {
 
 	// set focus to chat input
 	chat_.focus_edit();
-	log_dbg("mapdetails %dx%d, map %dx%d", map_details.get_w(), map_details.get_h(),
-	        map_box_.get_w(), map_box_.get_h());
-	log_dbg("ok (%d,%d) %dx%d, back (%d,%d) %dx%d", ok_.get_x(), ok_.get_y(), ok_.get_w(),
-	        ok_.get_h(), back_.get_x(), back_.get_y(), back_.get_w(), back_.get_h());
-	log_dbg("---------------------------------");
 }
 
 /**
@@ -248,9 +243,9 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		Section& s = prof.get_safe_section("global");
 
 		std::string mapname = s.get_safe_string("name");
-		auto nr_players_ = s.get_safe_int("nr_players");
+		const int nr_players = s.get_safe_int("nr_players");
 
-		settings_->set_map(mapname, filename, nr_players_, true);
+		settings_->set_map(mapname, filename, nr_players, true);
 		map_changed();
 
 		// Check for sendability
@@ -323,12 +318,6 @@ void FullscreenMenuLaunchMPG::map_changed() {
 				set_scenario_values();
 			}
 		}
-		// Try to translate the map name.
-		// This will work on every official map as expected
-		// and 'fail silently' (not find a translation) for already translated campaign map names.
-		// It will also translate 'false-positively' on any user-made map which shares a name with
-		// the official maps, but this should not be a problem to worry about.
-		i18n::Textdomain td("maps");
 	}
 }
 

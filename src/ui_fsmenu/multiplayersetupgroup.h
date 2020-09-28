@@ -21,10 +21,10 @@
 #define WL_UI_FSMENU_MULTIPLAYERSETUPGROUP_H
 
 #include <memory>
-#include <ui_basic/button.h>
 
 #include "network/network_player_settings_backend.h"
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
 

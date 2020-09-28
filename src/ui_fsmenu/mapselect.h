@@ -39,13 +39,11 @@ class FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
 public:
 	FullscreenMenuMapSelect(GameSettingsProvider*, GameController*);
 
-	bool is_scenario();
 	MapData const* get_map() const;
 	void think() override;
 
 protected:
 	void clicked_ok() override;
-	void clicked_back() override;
 	void entry_selected() override;
 	void fill_table() override;
 

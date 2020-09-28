@@ -323,17 +323,3 @@ void FullscreenMenuLaunchGame::toggle_peaceful() {
 void FullscreenMenuLaunchGame::toggle_custom_starting_positions() {
 	settings_->set_custom_starting_positions(custom_starting_positions_.get_state());
 }
-
-// Implemented by subclasses
-void FullscreenMenuLaunchGame::clicked_ok() {
-	NEVER_HERE();
-}
-
-// Implemented by subclasses
-void FullscreenMenuLaunchGame::clicked_back() {
-	NEVER_HERE();
-}
-
-bool FullscreenMenuLaunchGame::clicked_select_map() {
-	NEVER_HERE();
-}

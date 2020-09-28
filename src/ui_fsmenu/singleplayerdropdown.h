@@ -26,9 +26,9 @@
 #include "logic/game_settings.h"
 #include "ui_basic/dropdown.h"
 
-template <typename T> class SinglePlayerDropDown {
+template <typename T> class SinglePlayerDropdown {
 public:
-	SinglePlayerDropDown(UI::Panel* parent,
+	SinglePlayerDropdown(UI::Panel* parent,
 	                     const std::string& name,
 	                     int32_t x,
 	                     int32_t y,
@@ -58,7 +58,7 @@ public:
 		dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		dropdown_.selected.connect([this]() { on_selection_changed(); });
 	}
-	virtual ~SinglePlayerDropDown() {
+	virtual ~SinglePlayerDropdown() {
 	}
 
 	UI::Panel* get_dropdown() {
@@ -93,7 +93,7 @@ private:
 	}
 };
 
-class SinglePlayerTribeDropdown : public SinglePlayerDropDown<std::string> {
+class SinglePlayerTribeDropdown : public SinglePlayerDropdown<std::string> {
 public:
 	SinglePlayerTribeDropdown(UI::Panel* parent,
 	                          const std::string& name,
@@ -109,7 +109,7 @@ private:
 	void selection_action() override;
 };
 
-class SinglePlayerPlayerTypeDropdown : public SinglePlayerDropDown<std::string> {
+class SinglePlayerPlayerTypeDropdown : public SinglePlayerDropdown<std::string> {
 public:
 	SinglePlayerPlayerTypeDropdown(UI::Panel* parent,
 	                               const std::string& name,
@@ -127,7 +127,7 @@ private:
 	void selection_action() override;
 };
 
-class SinglePlayerStartTypeDropdown : public SinglePlayerDropDown<uintptr_t> {
+class SinglePlayerStartTypeDropdown : public SinglePlayerDropdown<uintptr_t> {
 public:
 	SinglePlayerStartTypeDropdown(UI::Panel* parent,
 	                              const std::string& name,
@@ -145,7 +145,7 @@ private:
 	void selection_action() override;
 };
 
-class SinglePlayerTeamDropdown : public SinglePlayerDropDown<uintptr_t> {
+class SinglePlayerTeamDropdown : public SinglePlayerDropdown<uintptr_t> {
 public:
 	SinglePlayerTeamDropdown(UI::Panel* parent,
 	                         const std::string& name,

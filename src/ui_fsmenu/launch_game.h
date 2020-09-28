@@ -43,9 +43,7 @@ public:
 	~FullscreenMenuLaunchGame() override;
 
 protected:
-	void clicked_ok() override;
-	void clicked_back() override;
-	virtual bool clicked_select_map();
+	virtual bool clicked_select_map() = 0;
 
 	LuaInterface* lua_;
 

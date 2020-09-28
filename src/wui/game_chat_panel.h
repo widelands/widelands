@@ -26,6 +26,7 @@
 #include "ui_basic/box.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
+
 /**
  * Provides a panel that contains chat message scrollbar and a chat message
  * entry field.
