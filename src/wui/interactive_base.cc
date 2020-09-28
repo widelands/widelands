@@ -178,9 +178,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      workareas_cache_(nullptr),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
-     display_flags_(dfDebug | get_config_int("display_flags")),
+     display_flags_(dfDebug | get_config_int("display_flags", kDefaultDisplayFlags)),
 #else
-     display_flags_(get_config_int("display_flags")),
+     display_flags_(get_config_int("display_flags", kDefaultDisplayFlags)),
 #endif
      lastframe_(SDL_GetTicks()),
      frametime_(0),
