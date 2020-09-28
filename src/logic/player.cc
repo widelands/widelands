@@ -1433,7 +1433,6 @@ bool Player::should_see(const FCoords& f, SeersList& nearby_objects) const {
 	}
 	for (const MapObject* mo : nearby_objects) {
 		if (mo->descr().type() >= MapObjectType::BUILDING) {
-			assert(is_a(Building, mo));
 			// TODO(Niektory): Using static cast for performance.
 			// It would be better to avoid the need to cast in the first place.
 			const Building* b = static_cast<const Building*>(mo);  // NOLINT
@@ -1443,7 +1442,8 @@ bool Player::should_see(const FCoords& f, SeersList& nearby_objects) const {
 			}
 		} else {
 			// currently only buildings and bobs can see fields
-			assert(is_a(Bob, mo));
+			assert(mo->descr().type() >= MapObjectType::BOB);
+			assert(mo->descr().type() < MapObjectType::IMMOVABLE);
 			const Bob* b = static_cast<const Bob*>(mo);  // NOLINT
 			if (map.calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
 				return true;
@@ -1538,7 +1538,6 @@ Player::SeersList Player::seers_for(const Area<FCoords>& area) {
 		Player& player = *egbase().get_player(p);
 		for (const MapObject* seer : player.seers_) {
 			if (seer->descr().type() >= MapObjectType::BUILDING) {
-				assert(is_a(Building, seer));
 				// TODO(Niektory): Using static cast for performance.
 				// It would be better to avoid the need to cast in the first place.
 				const Building* b = static_cast<const Building*>(seer);  // NOLINT
@@ -1551,7 +1550,8 @@ Player::SeersList Player::seers_for(const Area<FCoords>& area) {
 				}
 			} else {
 				// currently only buildings and bobs can see fields
-				assert(is_a(Bob, seer));
+				assert(seer->descr().type() >= MapObjectType::BOB);
+				assert(seer->descr().type() < MapObjectType::IMMOVABLE);
 				const Bob* b = static_cast<const Bob*>(seer);  // NOLINT
 				int dist =
 				   egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();

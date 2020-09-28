@@ -85,7 +85,7 @@ bool FindCarnivores::accept(Bob* b) const {
 	return false;
 }
 bool FindCritter::accept(Bob* b) const {
-	return is_a(Critter, b);
+	return b && b->descr().type() == MapObjectType::CRITTER;
 }
 bool FindBobByName::accept(Bob* b) const {
 	assert(b);
