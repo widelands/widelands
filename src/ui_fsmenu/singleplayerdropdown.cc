@@ -120,8 +120,8 @@ void SinglePlayerTribeDropdown::rebuild() {
 void SinglePlayerTribeDropdown::selection_action() {
 	const PlayerSettings& player_settings = settings_->settings().players[id_];
 	dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-                                  UI::ButtonDisableStyle::kPermpressed :
-                                  UI::ButtonDisableStyle::kFlat);
+	                               UI::ButtonDisableStyle::kPermpressed :
+	                               UI::ButtonDisableStyle::kFlat);
 	if (dropdown_.has_selection()) {
 		if (player_settings.state == PlayerSettings::State::kShared) {
 			settings_->set_player_shared(
