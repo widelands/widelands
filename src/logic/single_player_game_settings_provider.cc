@@ -95,15 +95,14 @@ void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
 	s.players.resize(maxplayers);
 
 	set_player_number(0);
-	uint32_t oldplayers = 0;  // s.players.size();
-	while (oldplayers < maxplayers) {
-		PlayerSettings& player = s.players[oldplayers];
+	for (uint32_t player_nr = 0; player_nr < maxplayers; ++player_nr) {
+		PlayerSettings& player = s.players[player_nr];
 		player.state =
-		   (oldplayers == 0) ? PlayerSettings::State::kHuman : PlayerSettings::State::kComputer;
+		   (player_nr == 0) ? PlayerSettings::State::kHuman : PlayerSettings::State::kComputer;
 		player.tribe = s.tribes.at(0).name;
 		player.random_tribe = false;
 		player.initialization_index = 0;
-		player.name = (boost::format(_("Player %u")) % (oldplayers + 1)).str();
+		player.name = (boost::format(_("Player %u")) % (player_nr + 1)).str();
 		player.team = 0;
 		// Set default computerplayer ai type
 		if (player.state == PlayerSettings::State::kComputer) {
@@ -115,10 +114,9 @@ void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
 			}
 			// If AI player then set tribe to random
 			if (!s.scenario) {
-				set_player_tribe(oldplayers, "", true);
+				set_player_tribe(player_nr, "", true);
 			}
 		}
-		++oldplayers;
 	}
 }
 
@@ -254,7 +252,7 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 	// Ensure that old player number isn't out of range when we switch to a map with less players
 	PlayerSettings const player = settings().players.at(
 	   settings().playernum < static_cast<int>(settings().players.size()) ? settings().playernum :
-	                                                                        0);
+                                                                           0);
 	if (number < settings().players.size() && (position.state == PlayerSettings::State::kOpen ||
 	                                           position.state == PlayerSettings::State::kClosed ||
 	                                           position.state == PlayerSettings::State::kComputer)) {

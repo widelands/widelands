@@ -166,4 +166,5 @@ void FullscreenMenuLaunchSPG::layout() {
 	player_setup.force_new_dimensions(scale_factor(), standard_element_height_);
 }
 
-FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() = default;
+FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
+}

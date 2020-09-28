@@ -1,10 +1,31 @@
+/*
+ * Copyright (C) 2002-2020 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
 #include "ui_fsmenu/mapdetailsbox.h"
 
 #include "graphic/image_cache.h"
 #include "map_io/map_loader.h"
 
-MapDetailsBox::MapDetailsBox(
-   Panel* parent, uint32_t, uint32_t standard_element_height, uint32_t padding, int32_t, int32_t)
+MapDetailsBox::MapDetailsBox(Panel* parent,
+                             uint32_t,
+                             uint32_t standard_element_height,
+                             uint32_t padding)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      title_(this,
             0,
@@ -74,7 +95,7 @@ void MapDetailsBox::show_map_description_savegame(const GameSettings& game_setti
 	for (uint8_t i = 0; i < game_settings.players.size(); ++i) {
 		const PlayerSettings& current_player = game_settings.players.at(i);
 		infotext += "\n* ";
-		infotext += (boost::format(_("Player %u")) % static_cast<unsigned int>(i)).str();
+		infotext += (boost::format(_("Player %u")) % static_cast<unsigned>(i + 1)).str();
 		if (current_player.state == PlayerSettings::State::kClosed) {
 			infotext += ":\n    ";
 			infotext += (boost::format("<%s>") % _("closed")).str();
