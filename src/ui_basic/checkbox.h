@@ -94,6 +94,7 @@ private:
 	const Image* pic_graphics_;
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
 	const std::string label_text_;
+	int32_t rendered_width_;
 };
 
 /**
