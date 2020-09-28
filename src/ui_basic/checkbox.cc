@@ -134,6 +134,17 @@ void Statebox::set_state(bool const on) {
 /**
  * Redraw the entire checkbox
  */
+void Statebox::draw_overlay(RenderTarget& dst) {
+	Panel::draw_overlay(dst);
+	if (flags_ & Has_Custom_Picture) {
+		// TODO(Nordfriese): Move colours to style manager
+		if (flags_ & Is_Checked) {
+			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(229, 116, 2));
+		} else if (flags_ & Is_Highlighted) {
+			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(100, 100, 80));
+		}
+	}
+}
 void Statebox::draw(RenderTarget& dst) {
 	if (flags_ & Has_Custom_Picture) {
 		// center picture
@@ -141,15 +152,8 @@ void Statebox::draw(RenderTarget& dst) {
 		const uint16_t h = pic_graphics_->height();
 
 		dst.blit(Vector2i((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), pic_graphics_);
-
-		if (flags_ & Is_Checked) {
-			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(229, 116, 2));
-		} else if (flags_ & Is_Highlighted) {
-			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(100, 100, 80));
-		}
 	} else {
-		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_WIDTH) failed.");
-		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_HEIGHT) failed.");
+		static_assert(0 <= kStateboxSize, "assert(0 <= kStateboxSize) failed.");
 		Vector2i image_anchor = Vector2i::zero();
 		Vector2i text_anchor(kStateboxSize + kPadding, 0);
 

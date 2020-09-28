@@ -67,6 +67,7 @@ struct Statebox : public Panel {
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
+	void draw_overlay(RenderTarget&) override;
 
 	void handle_mousein(bool inside) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
