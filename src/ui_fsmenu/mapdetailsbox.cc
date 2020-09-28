@@ -91,7 +91,7 @@ void MapDetailsBox::update_from_savegame(GameSettingsProvider* settings) {
 }
 void MapDetailsBox::show_map_description_savegame(const GameSettings& game_settings) {
 	std::string infotext = _("Saved players are:");
-
+	// TODO(jmoerschbach): use nested boost_format to not break rtl
 	for (uint8_t i = 0; i < game_settings.players.size(); ++i) {
 		const PlayerSettings& current_player = game_settings.players.at(i);
 		infotext += "\n* ";
