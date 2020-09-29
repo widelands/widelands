@@ -359,3 +359,45 @@ trading = {
          _([[Well done, Loftomor, well done. May Satul warm our princess and our whole people. Now we need to begin sending goods to this barbarian. I think we should start with the wood deliveries as we could afford them the easiest. But we need to find more metals.]]))
    }
 }
+
+tribute_not_started = {
+   {
+      title = _"Tribute Demand",
+      body = kalitath(
+         -- TRANSLATORS: Kalitath
+         _([[Strangers, we need to get some sign of your good intentions. So if you are really on our side you should send us some gold and a couple of other wares on a regular basis.]])..
+         _([[At most we are interested in any wares that can be used to forge weapons. I mean real weapons like our axes, and not the sort of toothpicks you use. So feel free to send us iron, coal, logs and gold.]])
+         .. paragraphdivider() ..
+         _([[Oh I almost forgot this one. We demand to have your princess in our headquarters as well to coordinate our warplannings.]]))
+   },
+   {
+      title = _"Pitfall!",
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm you, Jundlina! This behaviour is truely babaric! I fear this is a trap to keep you as a hostage. And the demand itself is really an insult. I strongly recommend to decline this unsubstantiated claim.]]))
+   },
+   {
+      title = _"Jundlina Concedes",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[Sidolus, I agree with you. However I think we have no choice so we need to obey to this demand. It is your obligation now to run our small people until I get back.]])
+         .. paragraphdivider() ..
+         _([[First you need to upgrade our scout’s house to a trading post. Then you need to send the demanded tributes of 4 gold, 9 iron, 16 coal and 25 log.]]))
+         .. new_objectives(obj_trading_post)
+   }
+}
+
+kalitath_dead = {
+   {
+      title = _"Empire Defeated",
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm you, Jundlina! We have defeated the troops of the Empire in the north. Now we should be able to establish a new home on this island.]]))
+   },
+   {
+      title = _"Jundlina Cheers",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[Sidolus, this is very good news. I will talk immediately to our Babarian ally how divide the land we gained.]]))
+   }
+}

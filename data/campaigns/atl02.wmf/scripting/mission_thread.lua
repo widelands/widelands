@@ -124,8 +124,25 @@ function uncertain_allies()
    }) do sleep(3731) end
    trading_post.done = true
    trade = add_campaign_objective(obj_tribute)
+   run(check_kalitath_defeated)
    msg_boxes(trading)
+   run(patience)
 
+end
+
+function patience()
+   local trade_started = false
+   local count = 0
+   while not (trade_started or p1.defeated or kalitath.defeated) do
+      if (p1:get_produced_wares_count("coin_wood") + p1:get_produced_wares_count("coin_copper") + p1:get_produced_wares_count("coin_silver") + p1:get_produced_wares_count("coin_gold")) > 0 then
+         trade_started = true
+      end
+      count = count + 1
+      if count == 2401 then
+         msg_boxes(tribute_not_started)
+      end
+      sleep(500)
+   end
 end
 
 function maletus_defeated()
@@ -172,6 +189,22 @@ function check_defeat()
    while not p1.defeated do sleep(6000) end
    msg_boxes(defeated)
    p1.see_all = true
+end
+
+function check_kalitath_defeated()
+   defeat = p1.defeated == true
+   while not defeat or trade.done ==true do
+      sleep(6000)
+      defeat = p1.defeated == true
+      if kalitath.defeated then
+         defeat = true
+         msg_boxes(kalitath_dead)
+      end
+   end
+   if defeat == true then
+      msg_boxes(defeated)
+      p1.see_all = true
+   end
 end
 
 run(intro)
