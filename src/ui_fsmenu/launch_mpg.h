@@ -24,8 +24,6 @@
 
 #include "logic/game_settings.h"
 #include "ui_basic/button.h"
-#include "ui_basic/multilinetextarea.h"
-#include "ui_basic/textarea.h"
 #include "ui_fsmenu/helpwindow.h"
 #include "ui_fsmenu/launch_game.h"
 #include "ui_fsmenu/multiplayersetupgroup.h"
