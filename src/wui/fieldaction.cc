@@ -346,16 +346,17 @@ static bool suited_for_targeting(const Widelands::PlayerNumber p,
 			}
 
 			const Widelands::BuildingDescr& descr =
-				mo->descr().type() == Widelands::MapObjectType::CONSTRUCTIONSITE ?
-					dynamic_cast<const Widelands::ConstructionSite&>(*mo).building():
-					dynamic_cast<const Widelands::Building&>(*mo).descr();
+			   mo->descr().type() == Widelands::MapObjectType::CONSTRUCTIONSITE ?
+			      dynamic_cast<const Widelands::ConstructionSite&>(*mo).building() :
+			      dynamic_cast<const Widelands::Building&>(*mo).descr();
 
 			if (i.descr().collected_by().count(descr.name())) {
 				upcast(const Widelands::Building, b, mo);
 				assert(b);
 				assert(descr.workarea_info().empty());
 				if (b->owner().player_number() == p &&
-				    map.calc_distance(b->get_position(), i.get_position()) <= descr.workarea_info().rbegin()->first) {
+				    map.calc_distance(b->get_position(), i.get_position()) <=
+				       descr.workarea_info().rbegin()->first) {
 					return true;
 				}
 			}
@@ -387,8 +388,8 @@ void FieldActionWindow::add_buttons_auto() {
 			} else if (suited_for_targeting(ipl->player_number(), ipl->egbase(), *mo)) {
 				UI::Box& box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
 				add_button(&box, "mark_for_removal", pic_mark_removal,
-					           &FieldActionWindow::act_mark_removal,
-					           _("Mark this immovable for timely removal by a suited worker"));
+				           &FieldActionWindow::act_mark_removal,
+				           _("Mark this immovable for timely removal by a suited worker"));
 				add_tab("target", pic_tab_target, &box, _("Immovable Actions"));
 			}
 		}
