@@ -134,7 +134,7 @@ public:
 	/// If 'open', show the list and position the mouse on the button so that the dropdown won't
 	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
 	/// keyboard navigation. If not 'open', close the list.
-	void set_list_visibility(bool open);
+	void set_list_visibility(bool open, bool move_mouse = true);
 
 	void set_size(int nw, int nh) override;
 	void set_desired_size(int w, int h) override;

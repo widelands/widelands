@@ -263,8 +263,6 @@ wl_library(wui
     militarysitewindow.h
     minimap.cc
     minimap.h
-    multiplayersetupgroup.cc
-    multiplayersetupgroup.h
     playerdescrgroup.cc
     playerdescrgroup.h
     plot_area.cc

@@ -49,7 +49,6 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
 	add(suggested_teams_box_label_);
 }
 SuggestedTeamsBox::~SuggestedTeamsBox() {
-	SuggestedTeamsBox::hide();
 }
 
 void SuggestedTeamsBox::hide() {
@@ -67,7 +66,6 @@ void SuggestedTeamsBox::hide() {
 	}
 	vs_labels_.clear();
 
-	set_visible(false);
 	suggested_teams_box_label_->set_visible(false);
 	suggested_teams_box_label_->set_text("");
 }
@@ -130,6 +128,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 
 		// Adjust size to content
 		set_size(get_w(), teamlist_offset + lineup_counter * (label_height_));
+		set_desired_size(get_w(), teamlist_offset + lineup_counter * (label_height_));
 	}
 }
 }  // namespace UI

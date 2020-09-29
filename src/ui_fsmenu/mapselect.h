@@ -38,7 +38,6 @@ class FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
 public:
 	FullscreenMenuMapSelect(FullscreenMenuMain&, GameSettingsProvider*, GameController*);
 
-	bool is_scenario();
 	MapData const* get_map() const;
 	void think() override;
 

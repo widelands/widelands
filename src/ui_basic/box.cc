@@ -271,6 +271,8 @@ void Box::update_positions() {
 
 		if (items_[idx].type == Item::ItemPanel) {
 			set_item_size(idx, depth, items_[idx].u.panel.fullsize ? totalbreadth : breadth);
+			// Update depth, in case item did self-layouting
+			get_item_size(idx, &depth, &breadth);
 			set_item_pos(idx, totaldepth - scrollpos);
 		}
 
@@ -312,6 +314,8 @@ void Box::add(Panel* const panel, Resizing resizing, UI::Align const align) {
 	it.fillspace = resizing == Resizing::kFillSpace || resizing == Resizing::kExpandBoth;
 	it.assigned_var_depth = 0;
 
+	// Ensure that tab focus order follows layout
+	panel->move_to_top();
 	items_.push_back(it);
 
 	update_desired_size();

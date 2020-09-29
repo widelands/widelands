@@ -629,8 +629,7 @@ void GameHost::init_computer_players() {
 void GameHost::run() {
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this);
-	lm.set_chat_provider(d->chat);
+	FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this, d->chat);
 	const MenuTarget code = lm.run<MenuTarget>();
 	if (code == MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
