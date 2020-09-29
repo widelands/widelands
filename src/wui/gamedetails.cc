@@ -84,7 +84,6 @@ void GameDetails::clear() {
 	minimap_icon_.set_icon(nullptr);
 	minimap_icon_.set_visible(false);
 	minimap_icon_.set_size(0, 0);
-	minimap_image_.reset();
 }
 
 void GameDetails::display(const std::vector<SavegameData>& gamedata) {
@@ -203,25 +202,33 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 	if (!minimap_path.empty()) {
 		try {
 			// Load the image
-			minimap_image_ = load_image(
+			minimap_cache_[gamedata.filename] = load_image(
 			   minimap_path,
 			   std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get());
 			minimap_icon_.set_visible(true);
-			minimap_icon_.set_icon(minimap_image_.get());
+			minimap_icon_.set_icon(minimap_cache_[gamedata.filename].get());
 		} catch (const std::exception& e) {
 			log_err("Failed to load the minimap image : %s\n", e.what());
 		}
 	} else if (mode_ == Mode::kReplay) {
 		// Render minimap
-		egbase_.cleanup_for_load();
-		std::string filename(gamedata.filename);
-		filename.append(kSavegameExtension);
-		std::unique_ptr<Widelands::MapLoader> ml(egbase_.mutable_map()->get_correct_loader(filename));
-		if (ml.get() && 0 == ml->load_map_for_render(egbase_)) {
-			minimap_image_ = draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
-			                              MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
-			minimap_icon_.set_icon(minimap_image_.get());
+		auto minimap = minimap_cache_.find(gamedata.filename);
+		if (minimap != minimap_cache_.end()) {
+			minimap_icon_.set_icon(minimap->second.get());
 			minimap_icon_.set_visible(true);
+		} else {
+			egbase_.cleanup_for_load();
+			std::string filename(gamedata.filename);
+			filename.append(kSavegameExtension);
+			std::unique_ptr<Widelands::MapLoader> ml(
+			   egbase_.mutable_map()->get_correct_loader(filename));
+			if (ml.get() && 0 == ml->load_map_for_render(egbase_)) {
+				minimap_cache_[gamedata.filename] =
+				   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
+				                MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
+				minimap_icon_.set_icon(minimap_cache_[gamedata.filename].get());
+				minimap_icon_.set_visible(true);
+			}
 		}
 	}
 }
@@ -243,11 +250,11 @@ void GameDetails::layout() {
 		   get_h() - name_label_.get_h() - descr_.get_h() - button_box_->get_h() - 4 * padding_;
 
 		const float scale =
-		   std::min(1.f, std::min<float>(available_width / minimap_image_->width(),
-		                                 available_height / minimap_image_->height()));
+		   std::min(1.f, std::min<float>(available_width / minimap_cache_[last_game_]->width(),
+		                                 available_height / minimap_cache_[last_game_]->height()));
 
-		const int w = scale * minimap_image_->width();
-		const int h = scale * minimap_image_->height();
+		const int w = scale * minimap_cache_[last_game_]->width();
+		const int h = scale * minimap_cache_[last_game_]->height();
 
 		// Center the minimap in the available space
 		const int xpos = (get_w() - w) / 2;
