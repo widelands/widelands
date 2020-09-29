@@ -68,6 +68,7 @@ private:
 	UI::Icon minimap_icon_;
 	std::unique_ptr<const Texture> minimap_image_;
 	UI::Box* button_box_;
+	std::string last_game_;
 
 	// Used to render map preview
 	Widelands::EditorGameBase egbase_;

@@ -54,6 +54,7 @@ private:
 	UI::MultilineTextarea descr_;
 	UI::Icon minimap_icon_;
 	UI::SuggestedTeamsBox* suggested_teams_box_;
+	const MapData* last_map_;
 
 	// Used to render map preview
 	std::unique_ptr<const Texture> minimap_image_;

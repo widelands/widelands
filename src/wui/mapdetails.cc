@@ -61,6 +61,7 @@ MapDetails::MapDetails(
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(&descr_box_, 0, 0, 0, 0, nullptr),
      suggested_teams_box_(new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0)),
+     last_map_(nullptr),
      egbase_(nullptr) {
 
 	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
@@ -74,6 +75,9 @@ MapDetails::MapDetails(
 	main_box_.add(&name_label_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(padding_);
 	main_box_.add(&descr_box_, UI::Box::Resizing::kExpandBoth);
+
+	// Fast initialize world now
+	egbase_.mutable_world(true);
 
 	layout();
 }
@@ -113,8 +117,13 @@ void MapDetails::layout() {
 }
 
 void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
+	if (last_map_ == &mapdata) {
+		return;
+	}
+
 	clear();
 	name_ = mapdata.name;
+	last_map_ = &mapdata;
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		name_label_.set_text(

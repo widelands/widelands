@@ -210,7 +210,8 @@ public:
 	const World& world() const;
 
 	// Returns the world that can be modified. Prefer world() whenever possible.
-	World* mutable_world();
+	// Use render_only to speed up registering during world initialization
+	World* mutable_world(bool render_only = false);
 
 	// Returns the tribes.
 	const Tribes& tribes() const;

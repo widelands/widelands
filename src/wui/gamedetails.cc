@@ -60,6 +60,7 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(this, 0, 0, 0, 0, nullptr),
      button_box_(new UI::Box(this, 0, 0, UI::Box::Vertical)),
+     last_game_(""),
      egbase_(nullptr) {
 
 	add(&name_label_, UI::Box::Resizing::kFullSize);
@@ -72,6 +73,9 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
 
 	minimap_icon_.set_visible(false);
 	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
+
+	// Fast initialize world now
+	egbase_.mutable_world(true);
 }
 
 void GameDetails::clear() {
@@ -129,8 +133,12 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 }
 
 void GameDetails::show(const SavegameData& gamedata) {
-	clear();
+	if (last_game_ == gamedata.filename) {
+		return;
+	}
 
+	clear();
+	last_game_ = gamedata.filename;
 	if (gamedata.is_directory()) {
 		name_label_.set_text(as_richtext(
 		   as_heading_with_content(_("Directory Name:"), gamedata.filename, style_, true)));

@@ -34,7 +34,7 @@
 
 namespace Widelands {
 
-World::World(DescriptionManager* description_manager)
+World::World(DescriptionManager* description_manager, bool render_only)
    : critters_(new DescriptionMaintainer<CritterDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
@@ -42,8 +42,14 @@ World::World(DescriptionManager* description_manager)
 
      description_manager_(description_manager) {
 
-	// Walk world directory and register objects
-	description_manager_->register_directory("world", g_fs, false);
+	if (render_only) {
+		// Only register objects required for rendering
+		description_manager_->register_directory("world/terrains", g_fs, false);
+		description_manager_->register_directory("world/resources", g_fs, false);
+	} else {
+		// Walk world directory and register objects
+		description_manager_->register_directory("world", g_fs, false);
+	}
 }
 
 void World::add_world_object_type(const LuaTable& table, MapObjectType type) {
