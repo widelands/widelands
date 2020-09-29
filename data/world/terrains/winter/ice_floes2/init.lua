@@ -8,7 +8,7 @@ wl.World():new_terrain_type{
    default_resource = "",
    default_resource_amount = 0,
    textures = path.list_files(path.dirname(__file__) .. "ice_floes2_??.png"),
-   dither_layer = 210,
+   dither_layer = 211,
    fps = 5,
    temperature = 50,
    humidity = 999,
