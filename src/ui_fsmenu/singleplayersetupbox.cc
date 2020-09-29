@@ -147,29 +147,32 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
 }
 
 void SinglePlayerSetupBox::update() {
-	NoteDelayedCheck::instantiate(this, [this]() {
-	const GameSettings& settings = settings_->settings();
-	const size_t number_of_players = settings.players.size();
+	NoteDelayedCheck::instantiate(
+	   this,
+	   [this]() {
+		   const GameSettings& settings = settings_->settings();
+		   const size_t number_of_players = settings.players.size();
 
-	const std::vector<SinglePlayerActivePlayerGroup*> need_to_die = active_player_groups;
-	active_player_groups.clear();
-	active_player_groups.resize(number_of_players);
+		   const std::vector<SinglePlayerActivePlayerGroup*> need_to_die = active_player_groups;
+		   active_player_groups.clear();
+		   active_player_groups.resize(number_of_players);
 
-	for (PlayerSlot i = 0; i < active_player_groups.size(); ++i) {
-		active_player_groups.at(i) =
-		   new SinglePlayerActivePlayerGroup(this, 0, standard_height, i, settings_);
-		add(active_player_groups.at(i), Resizing::kAlign, UI::Align::kCenter);
-	}
+		   for (PlayerSlot i = 0; i < active_player_groups.size(); ++i) {
+			   active_player_groups.at(i) =
+			      new SinglePlayerActivePlayerGroup(this, 0, standard_height, i, settings_);
+			   add(active_player_groups.at(i), Resizing::kAlign, UI::Align::kCenter);
+		   }
 
-	// This function may be called indirectly from one of the SinglePlayerActivePlayerGroup
-	// which we need to delete. If we tell them to die() too soon, the caller may therefore
-	// cause a heap-use-after-free.
-	// NoteDelayedCheck::instantiate(this, [need_to_die]() {
-		for (SinglePlayerActivePlayerGroup* p : need_to_die) {
-			p->die();
-		}
-	// }, false);
-	}, true);
+		   // This function may be called indirectly from one of the SinglePlayerActivePlayerGroup
+		   // which we need to delete. If we tell them to die() too soon, the caller may therefore
+		   // cause a heap-use-after-free.
+		   // NoteDelayedCheck::instantiate(this, [need_to_die]() {
+		   for (SinglePlayerActivePlayerGroup* p : need_to_die) {
+			   p->die();
+		   }
+		   // }, false);
+	   },
+	   true);
 }
 
 void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_element_height) {

@@ -127,13 +127,14 @@ struct MultiPlayerClientGroup : public UI::Box {
 		NoteDelayedCheck::instantiate(
 		   this,
 		   [this]() {
-		const GameSettings& settings = settings_->settings();
-		const UserSettings& user_setting = settings.users.at(id_);
-		set_visible(user_setting.position != UserSettings::not_connected());
+			   const GameSettings& settings = settings_->settings();
+			   const UserSettings& user_setting = settings.users.at(id_);
+			   set_visible(user_setting.position != UserSettings::not_connected());
 
-		name.set_text(user_setting.name);
-		rebuild_slot_dropdown(settings);
-		}, true);
+			   name.set_text(user_setting.name);
+			   rebuild_slot_dropdown(settings);
+		   },
+		   true);
 	}
 
 	~MultiPlayerClientGroup() override {
@@ -534,16 +535,16 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		NoteDelayedCheck::instantiate(
 		   this,
 		   [this]() {
-		   const GameSettings& settings = settings_->settings();
-		if (id_ >= settings.players.size()) {
-			set_visible(false);
-			return;
-		}
+			   const GameSettings& settings = settings_->settings();
+			   if (id_ >= settings.players.size()) {
+				   set_visible(false);
+				   return;
+			   }
 
-				const PlayerSettings& player_setting = settings.players[id_];
-				player.set_tooltip(player_setting.name.empty() ? "" : player_setting.name);
-				rebuild_type_dropdown(settings);
-				set_visible(true);
+			   const PlayerSettings& player_setting = settings.players[id_];
+			   player.set_tooltip(player_setting.name.empty() ? "" : player_setting.name);
+			   rebuild_type_dropdown(settings);
+			   set_visible(true);
 
 			   if (player_setting.state == PlayerSettings::State::kClosed ||
 			       player_setting.state == PlayerSettings::State::kOpen) {
