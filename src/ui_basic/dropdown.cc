@@ -102,6 +102,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                                                             UI::ButtonStyle::kWuiSecondary) :
                         button_style,
                      label),
+     list_(nullptr),
      label_(label),
      type_(type),
      is_enabled_(true),
@@ -170,6 +171,7 @@ BaseDropdown::~BaseDropdown() {
 	if (list_) {
 		list_->set_notify_on_delete(nullptr);
 		list_->die();
+		list_ = nullptr;
 	}
 
 	// Unsubscribe from layouting hooks
@@ -247,7 +249,12 @@ void BaseDropdown::set_size(int nw, int nh) {
 	layout();
 }
 void BaseDropdown::set_desired_size(int nw, int nh) {
-	button_box_.set_desired_size(nw, nh);
+	if (push_button_ == nullptr) {
+		display_button_.set_desired_size(nw, nh);
+	} else {
+		display_button_.set_desired_size(nw - nh, nh);
+		push_button_->set_desired_size(nh, nh);
+	}
 	Panel::set_desired_size(nw, nh);
 	layout();
 }
@@ -357,7 +364,7 @@ void BaseDropdown::clear() {
 }
 
 void BaseDropdown::think() {
-	if (list_->is_visible()) {
+	if (list_ && list_->is_visible()) {
 		// Autocollapse with a bit of tolerance for the mouse movement to make it less fiddly.
 		if (!(has_focus() || list_->has_focus()) || is_mouse_away()) {
 			toggle_list();
