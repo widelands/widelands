@@ -10,16 +10,10 @@ tribes:new_militarysite_type {
    size = "big",
    vision_range = 16,
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_?.png"),
-         hotspot = {50, 78},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {50, 78},
-      },
+      idle = {hotspot = {109, 91}},
+      unoccupied = {hotspot = {109, 91}},
    },
 
    aihints = {
