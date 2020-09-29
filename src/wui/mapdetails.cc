@@ -212,6 +212,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {
 			suggested_teams_box_->hide();
+			suggested_teams_box_->set_size(0, 0);
 		} else {
 			suggested_teams_box_->set_size(get_parent()->get_w(), 0);
 			suggested_teams_box_->show(mapdata.suggested_teams);
