@@ -413,7 +413,7 @@ private:
 	bool running_;
 	int return_code_;
 
-	MutexLockHandler local_mutex_lock_handler_;
+	MutexLockHandler local_mutex_lock_handler_1_, local_mutex_lock_handler_2_;
 
 	std::string tooltip_;
 	static Panel* modal_;

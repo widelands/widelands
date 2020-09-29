@@ -104,7 +104,7 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
  */
 void AttackBox::think() {
 	if ((player_->egbase().get_gametime() - lastupdate_) > kUpdateTimeInGametimeMs) {
-		MutexLock m();
+		MutexLock m;
 		update_attack(false);
 	}
 }

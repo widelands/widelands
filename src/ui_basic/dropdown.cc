@@ -199,6 +199,10 @@ UI::Panel* BaseDropdown::get_open_dropdown() {
 }
 
 void BaseDropdown::layout() {
+	if (!list_) {
+		return;
+	}
+
 	int list_width = list_->calculate_desired_width();
 
 	const int new_list_height = std::min(max_list_height_ / list_->get_lineheight(),

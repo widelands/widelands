@@ -95,7 +95,8 @@ void ComputerPlayer::runthread() {
 	while (game().is_loaded()) {
 		const uint32_t time = SDL_GetTicks();
 		if (time >= next_time) {
-			uint8_t patience = 10;
+			next_time = time + kThinkDelay;
+			uint8_t patience = 20;
 			for (;;) {
 				if (!game().is_loaded()) {
 					return;

@@ -158,7 +158,8 @@ void Panel::runthread() {
 		}
 
 		{
-			MutexLock m(&local_mutex_lock_handler_, false);
+			MutexLock m1(&local_mutex_lock_handler_1_, false);
+			MutexLock m2(&local_mutex_lock_handler_2_, false);
 			check_child_death();
 		}
 
@@ -217,11 +218,7 @@ int Panel::do_run() {
 	// by the same thread that took care of the OpenGL initialization!!!
 	std::unique_ptr<std::thread> thread(new std::thread(&Panel::runthread, this));
 
-	// Caution! If we are the toplevel modal panel, this is the main thread.
-	// But if there was another modal panel (prevmodal != nullptr),
-	// this may NOT be the main thread. In that case, we must take care
-	// not to intercept notifications meant for the main thread, and we
-	// need to leave the drawing code to the main thread as well.
+	const bool is_initializer = is_initializer_thread(false);
 
 	MutexLockHandler check_lock;
 	std::list<NoteDelayedCheck> checks;
@@ -238,7 +235,7 @@ int Panel::do_run() {
 	};
 	std::unique_ptr<Notifications::Subscriber<NoteDelayedCheckCancel>> subscriber1;
 	std::unique_ptr<Notifications::Subscriber<NoteDelayedCheck>> subscriber2;
-	if (!prevmodal) {
+	if (is_initializer) {
 		subscriber1 = Notifications::subscribe<NoteDelayedCheckCancel>(
 		   [&cancelled_checks, &check_lock](const NoteDelayedCheckCancel& note) {
 			   MutexLock m(&check_lock, false);
@@ -251,63 +248,58 @@ int Panel::do_run() {
 		   });
 	}
 
-	auto update_graphics = [this, handle_checks, app, draw_delay, forefather, prevmodal,
-	                        &next_draw_time]() {
-		for (; running_;) {
-			handle_checks();
-			MutexLock m(true);
-			// If `prevmodal` is not null, then this was called by a modal message box.
-			// The game is paused in this case, no need to wait until we get a lock.
-			if (m.is_valid() || prevmodal != nullptr) {
-				RenderTarget& rt = *g_gr->get_render_target();
-				forefather->do_draw(rt);
-				if (g_mouse_cursor->is_visible()) {
-					g_mouse_cursor->change_cursor(app->is_mouse_pressed());
-					g_mouse_cursor->draw(rt, app->get_mouse_position());
-					if (is_modal()) {
-						do_tooltip();
-					} else {
-						forefather->do_tooltip();
-					}
-				}
-
-				g_gr->refresh();
-				next_draw_time = SDL_GetTicks() + draw_delay;
-				return;
-			}
-			SDL_Delay(5);
-		}
-	};
-
 	while (running_) {
 		const uint32_t start_time = SDL_GetTicks();
 
-		for (; running_ && (modal_ == this);) {
-			// Input handling should be done only by the currently modal panel
+		uint8_t patience = 10;
+		for (; running_;) {
 			handle_checks();
-			MutexLock m(true);
-			if (m.is_valid()) {
-				app->handle_input(&input_callback);
-				break;
+
+			{
+				MutexLock m(--patience > 0);
+				if (!m.is_valid()) {
+					SDL_Delay(5);
+					continue;
+				}
+
+				if (modal_ == this && running_) {
+					MutexLock ml(&local_mutex_lock_handler_2_, false);
+
+					app->handle_input(&input_callback);
+
+					if (app->should_die()) {
+						// Only the currently modal panel may do this. If there are
+						// other modal panels, they will run this code in the next frame.
+						end_modal<Returncodes>(Returncodes::kBack);
+					}
+				}
+
+				if (start_time >= next_draw_time) {
+					if (is_initializer) {
+						RenderTarget& rt = *g_gr->get_render_target();
+						forefather->do_draw(rt);
+						if (g_mouse_cursor->is_visible()) {
+							g_mouse_cursor->change_cursor(app->is_mouse_pressed());
+							g_mouse_cursor->draw(rt, app->get_mouse_position());
+							if (is_modal()) {
+								do_tooltip();
+							} else {
+								forefather->do_tooltip();
+							}
+						}
+						g_gr->refresh();
+					}
+
+					next_draw_time = SDL_GetTicks() + draw_delay;
+				}
 			}
-			SDL_Delay(5);
-		}
 
-		if (app->should_die() && (modal_ == this) && running_) {
-			// Only the currently modal panel may do this. If there are
-			// other modal panels, they will run this code in the next frame.
-			end_modal<Returncodes>(Returncodes::kBack);
-		}
+			const int32_t delay = running_ ? next_draw_time - SDL_GetTicks() : 0;
+			if (delay > 0) {
+				SDL_Delay(delay);
+			}
 
-		if (start_time >= next_draw_time) {
-			// Rendering may be done only by the main thread
-			NoteDelayedCheck::instantiate(
-			   this, [update_graphics]() { update_graphics(); }, false);
-		}
-
-		const int32_t delay = running_ ? prevmodal ? 20 : next_draw_time - SDL_GetTicks() : 0;
-		if (delay > 0) {
-			SDL_Delay(delay);
+			break;
 		}
 	}
 
@@ -630,7 +622,7 @@ void Panel::do_think() {
 		return;
 	}
 
-	MutexLock m(&local_mutex_lock_handler_, false);
+	MutexLock m(&local_mutex_lock_handler_1_, false);
 
 	if (thinks()) {
 		think();

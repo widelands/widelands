@@ -339,7 +339,7 @@ Soldier::Soldier(const SoldierDescr& soldier_descr) : Worker(soldier_descr) {
 }
 
 bool Soldier::init(EditorGameBase& egbase) {
-	log_dbg("NOCOM Soldier::init AAA");
+	if (g_verbose) { log_dbg("NOCOM Soldier::init AAA"); }
 
 	health_level_ = 0;
 	attack_level_ = 0;
@@ -347,17 +347,17 @@ bool Soldier::init(EditorGameBase& egbase) {
 	evade_level_ = 0;
 	retreat_health_ = 0;
 
-	log_dbg("NOCOM Soldier::init BBB");
+	if (g_verbose) { log_dbg("NOCOM Soldier::init BBB"); }
 	current_health_ = get_max_health();
-	log_dbg("NOCOM Soldier::init CCC");
+	if (g_verbose) { log_dbg("NOCOM Soldier::init CCC"); }
 
 	combat_walking_ = CD_NONE;
 	combat_walkstart_ = 0;
 	combat_walkend_ = 0;
 
-	log_dbg("NOCOM Soldier::init DDD");
+	if (g_verbose) { log_dbg("NOCOM Soldier::init DDD"); }
 	get_owner()->add_soldier(health_level_, attack_level_, defense_level_, evade_level_);
-	log_dbg("NOCOM Soldier::init done");
+	if (g_verbose) { log_dbg("NOCOM Soldier::init done"); }
 
 	return Worker::init(egbase);
 }
