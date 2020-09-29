@@ -365,12 +365,12 @@ void FieldActionWindow::add_buttons_auto() {
 
 	upcast(InteractiveGameBase, igbase, &ibase());
 
-	if (igbase) {
+	if (upcast(InteractivePlayer, ipl, igbase)) {
 		// Target immovables for removal by workers
 		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
-			if (suited_for_targeting(igbase->egbase(), *mo)) {
+			if (suited_for_targeting(ipl->egbase(), *mo)) {
 				UI::Box& box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
-				if (mo->is_marked_for_removal(igbase->player_number())) {
+				if (mo->is_marked_for_removal(ipl->player_number())) {
 					add_button(&box, "unmark_for_removal", pic_unmark_removal,
 					           &FieldActionWindow::act_unmark_removal,
 					           _("Marked for removal by a worker – click to unmark"));
