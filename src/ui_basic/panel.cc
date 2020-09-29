@@ -848,7 +848,9 @@ void Panel::check_child_death() {
 		next = p->next_;
 
 		if (p->flags_ & pf_die) {
-			p->parent_->on_death(p);
+			if (p->parent_) {
+				p->parent_->on_death(p);
+			}
 			delete p;
 			p = nullptr;
 		} else if (p->flags_ & pf_child_die) {
@@ -1105,6 +1107,15 @@ bool Panel::get_key_state(const SDL_Scancode key) const {
 	return WLApplication::get()->get_key_state(key);
 }
 
+UI::Panel* Panel::get_open_dropdown() {
+	for (Panel* child = first_child_; child; child = child->next_) {
+		if (UI::Panel* dd = child->get_open_dropdown()) {
+			return dd;
+		}
+	}
+	return nullptr;
+}
+
 /**
  * Determine which panel is to receive a mouse event.
  *
@@ -1118,6 +1129,13 @@ Panel* Panel::ui_trackmouse(int32_t& x, int32_t& y) {
 		mousein = rcv = mousegrab_;
 	} else {
 		mousein = modal_;
+	}
+
+	// ugly hack to handle dropdowns in modal windows correctly
+	if (mousein->get_parent()) {
+		if (UI::Panel* dd = mousein->get_open_dropdown()) {
+			mousein = rcv = dd;
+		}
 	}
 
 	x -= mousein->x_;
@@ -1227,8 +1245,13 @@ bool Panel::ui_key(bool const down, SDL_Keysym const code) {
 	if (!allow_user_input_) {
 		return true;
 	}
-
-	return modal_->do_key(down, code);
+	Panel* p = modal_;
+	if (p->get_parent()) {
+		if (UI::Panel* dd = p->get_open_dropdown()) {
+			p = dd;
+		}
+	}
+	return p->do_key(down, code);
 }
 
 /**

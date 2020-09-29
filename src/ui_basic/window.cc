@@ -19,6 +19,7 @@
 
 #include "ui_basic/window.h"
 
+#include <cstdlib>
 #include <memory>
 
 #include <SDL_mouse.h>
@@ -109,9 +110,6 @@ Window::Window(Panel* const parent,
      is_minimal_(false),
      oldh_(kTopBorderThickness + h + kBottomBorderThickness),
      dragging_(false),
-     docked_left_(false),
-     docked_right_(false),
-     docked_bottom_(false),
      drag_start_win_x_(0),
      drag_start_win_y_(0),
      drag_start_mouse_x_(0),
@@ -300,19 +298,14 @@ void Window::move_inside_parent() {
 		if (parent->get_inner_w() >= get_w()) {
 			if (px < 0) {
 				px = 0;
-				if (parent->get_dock_windows_to_edges() && !docked_left_) {
-					docked_left_ = true;
+				if (parent->get_dock_windows_to_edges()) {
+					px -= kVerticalBorderThickness;
 				}
 			} else if (px + get_w() >= parent->get_inner_w()) {
 				px = parent->get_inner_w() - get_w();
-				if (parent->get_dock_windows_to_edges() && !docked_right_) {
-					docked_right_ = true;
+				if (parent->get_dock_windows_to_edges()) {
+					px += kVerticalBorderThickness;
 				}
-			}
-			if (docked_left_) {
-				px -= kVerticalBorderThickness;
-			} else if (docked_right_) {
-				px += kVerticalBorderThickness;
 			}
 		}
 		if (parent->get_inner_h() >= get_h()) {
@@ -320,12 +313,9 @@ void Window::move_inside_parent() {
 				py = 0;
 			} else if (py + get_h() > parent->get_inner_h()) {
 				py = parent->get_inner_h() - get_h();
-				if (!is_minimal_ && parent->get_dock_windows_to_edges() && !docked_bottom_) {
-					docked_bottom_ = true;
+				if (!is_minimal_ && parent->get_dock_windows_to_edges()) {
+					py += kBottomBorderThickness;
 				}
-			}
-			if (docked_bottom_) {
-				py += kBottomBorderThickness;
 			}
 		}
 		set_pos(Vector2i(px, py));
@@ -409,8 +399,7 @@ void Window::draw_border(RenderTarget& dst) {
 	}
 
 	if (!is_minimal_) {
-		const int32_t vt_bar_end =
-		   get_h() - (docked_bottom_ ? 0 : kBottomBorderThickness) - kVerticalBorderThingyHeight;
+		const int32_t vt_bar_end = get_h() - kBottomBorderThickness - kVerticalBorderThingyHeight;
 		const int32_t vt_bar_end_minus_middle = vt_bar_end - kVerticalBorderMiddleLength;
 
 		{  // Left border
@@ -608,10 +597,6 @@ void Window::restore() {
 void Window::minimize() {
 	assert(!is_minimal_);
 	int32_t y = get_y(), x = get_x();
-	if (docked_bottom_) {
-		y -= kBottomBorderThickness;  //  Minimal can not be bottom-docked.
-		docked_bottom_ = false;
-	}
 	if (y < 0) {
 		y = 0;  //  Move into the screen
 	}
@@ -749,22 +734,13 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 			if (parent->get_dock_windows_to_edges()) {
 				if (new_left <= 0 && new_left >= -kVerticalBorderThickness) {
 					new_left = -kVerticalBorderThickness;
-					docked_left_ = true;
-				} else if (docked_left_) {
-					docked_left_ = false;
 				}
 				if (new_left >= (max_x - w) && new_left <= (max_x - w) + kVerticalBorderThickness) {
 					new_left = (max_x - w) + kVerticalBorderThickness;
-					docked_right_ = true;
-				} else if (docked_right_) {
-					docked_right_ = false;
 				}
 				if (!is_minimal_) {  //  minimal windows can not be bottom-docked
 					if (new_top >= (max_y - h) && new_top <= (max_y - h) + kBottomBorderThickness) {
 						new_top = (max_y - h) + kBottomBorderThickness;
-						docked_bottom_ = true;
-					} else if (docked_bottom_) {
-						docked_bottom_ = false;
 					}
 				}
 			}

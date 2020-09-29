@@ -27,9 +27,8 @@
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
 
-namespace Widelands {
+namespace AI {
 enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
-}
 
 /// This struct is used to read out the data given in [aihints] section of a
 /// buildings conf file. It is used to tell the computer player about the
@@ -100,7 +99,7 @@ struct BuildingHints {
 		return mines_percent_;
 	}
 
-	int16_t get_ai_limit(Widelands::AiType) const;
+	int16_t get_ai_limit(AiType) const;
 
 	void set_trainingsites_max_percent(int percent);
 
@@ -144,4 +143,5 @@ private:
 	std::unordered_map<std::string, int> preciousnesses_;
 };
 
+}  // namespace AI
 #endif  // end of include guard: WL_AI_AI_HINTS_H

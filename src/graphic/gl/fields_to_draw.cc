@@ -19,6 +19,8 @@
 
 #include "graphic/gl/fields_to_draw.h"
 
+#include <cstdlib>
+
 #include "base/log.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "logic/map_objects/world/terrain_description.h"

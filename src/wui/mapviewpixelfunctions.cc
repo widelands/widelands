@@ -19,6 +19,8 @@
 
 #include "wui/mapviewpixelfunctions.h"
 
+#include <cstdlib>
+
 #include "base/vector.h"
 
 /**
