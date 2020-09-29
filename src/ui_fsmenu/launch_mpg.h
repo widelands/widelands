@@ -38,7 +38,10 @@ struct ChatProvider;
  */
 class FullscreenMenuLaunchMPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchMPG(FullscreenMenuMain&, GameSettingsProvider*, GameController*, ChatProvider&);
+	FullscreenMenuLaunchMPG(FullscreenMenuMain&,
+	                        GameSettingsProvider*,
+	                        GameController*,
+	                        ChatProvider&);
 	~FullscreenMenuLaunchMPG() override;
 
 	void think() override;

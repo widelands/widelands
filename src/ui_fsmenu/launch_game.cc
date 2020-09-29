@@ -179,9 +179,10 @@ void FullscreenMenuLaunchGame::layout() {
 	ok_.set_desired_size(standard_element_width_, standard_element_height_);
 	back_.set_desired_size(standard_element_width_, standard_element_height_);
 	win_condition_dropdown_.set_desired_size(standard_element_width_, standard_element_height_);
-	custom_starting_positions_.set_desired_size(standard_element_width_,
-			// text doesn't fit in one line with some translations
-			2 * standard_element_height_);
+	custom_starting_positions_.set_desired_size(
+	   standard_element_width_,
+	   // text doesn't fit in one line with some translations
+	   2 * standard_element_height_);
 
 	map_details.force_new_dimensions(1.f, standard_element_width_, standard_element_height_);
 }

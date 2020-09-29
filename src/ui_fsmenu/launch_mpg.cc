@@ -93,7 +93,7 @@ private:
 };
 
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
-GameSettingsProvider* const settings,
+                                                 GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
                                                  ChatProvider& chat)
    : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
@@ -147,8 +147,7 @@ void FullscreenMenuLaunchMPG::layout() {
 	FullscreenMenuLaunchGame::layout();
 	// hardcode help button because it does not fit in any box, align it to the map button...
 	help_button_.set_size(standard_element_height_, standard_element_height_);
-	help_button_.set_pos(
-	   Vector2i(get_inner_w() - standard_element_height_, 0));
+	help_button_.set_pos(Vector2i(get_inner_w() - standard_element_height_, 0));
 
 	mpsg_.set_max_size(0, individual_content_box.get_h() / 2);
 
@@ -182,8 +181,7 @@ void FullscreenMenuLaunchMPG::win_condition_selected() {
 bool FullscreenMenuLaunchMPG::clicked_select_map() {
 	MapOrSaveSelectionWindow selection_window(this, ctrl_, get_w() / 3, get_h() / 4);
 	auto result = selection_window.run<MenuTarget>();
-	assert(result == MenuTarget::kNormalGame ||
-	       result == MenuTarget::kScenarioGame ||
+	assert(result == MenuTarget::kNormalGame || result == MenuTarget::kScenarioGame ||
 	       result == MenuTarget::kBack);
 	if (result == MenuTarget::kNormalGame) {
 		select_map();
