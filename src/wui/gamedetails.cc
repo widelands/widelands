@@ -132,10 +132,6 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 }
 
 void GameDetails::show(const SavegameData& gamedata) {
-	if (last_game_ == gamedata.filename) {
-		return;
-	}
-
 	clear();
 	last_game_ = gamedata.filename;
 	if (gamedata.is_directory()) {

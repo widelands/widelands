@@ -116,10 +116,6 @@ void MapDetails::layout() {
 }
 
 void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
-	if (last_map_ == mapdata.filename) {
-		return;
-	}
-
 	clear();
 	name_ = mapdata.name;
 	last_map_ = mapdata.filename;
