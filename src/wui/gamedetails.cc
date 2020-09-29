@@ -202,7 +202,7 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 			   minimap_path,
 			   std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get());
 			minimap_icon_.set_visible(true);
-			minimap_icon_.set_icon(minimap_cache_[gamedata.filename].get());
+			minimap_icon_.set_icon(minimap_cache_.at(gamedata.filename).get());
 		} catch (const std::exception& e) {
 			log_err("Failed to load the minimap image : %s\n", e.what());
 		}
@@ -222,7 +222,7 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 				minimap_cache_[gamedata.filename] =
 				   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
 				                MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
-				minimap_icon_.set_icon(minimap_cache_[gamedata.filename].get());
+				minimap_icon_.set_icon(minimap_cache_.at(gamedata.filename).get());
 				minimap_icon_.set_visible(true);
 			}
 		}
@@ -246,11 +246,11 @@ void GameDetails::layout() {
 		   get_h() - name_label_.get_h() - descr_.get_h() - button_box_->get_h() - 4 * padding_;
 
 		const float scale =
-		   std::min(1.f, std::min<float>(available_width / minimap_cache_[last_game_]->width(),
-		                                 available_height / minimap_cache_[last_game_]->height()));
+		   std::min(1.f, std::min<float>(available_width / minimap_cache_.at(last_game_)->width(),
+		                                 available_height / minimap_cache_.at(last_game_)->height()));
 
-		const int w = scale * minimap_cache_[last_game_]->width();
-		const int h = scale * minimap_cache_[last_game_]->height();
+		const int w = scale * minimap_cache_.at(last_game_)->width();
+		const int h = scale * minimap_cache_.at(last_game_)->height();
 
 		// Center the minimap in the available space
 		const int xpos = (get_w() - w) / 2;

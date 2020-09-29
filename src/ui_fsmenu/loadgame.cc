@@ -110,6 +110,8 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 }
 
 void FullscreenMenuLoadGame::think() {
+	FullscreenMenuLoadMapOrGame::think();
+
 	if (update_game_details_) {
 		// Call performance heavy draw_minimap function only during think
 		update_game_details_ = false;

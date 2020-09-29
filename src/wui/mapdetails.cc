@@ -105,9 +105,9 @@ void MapDetails::layout() {
 	} else {
 		// Fit minimap to width
 		const int width = std::min<int>(main_box_.get_w() - UI::Scrollbar::kSize - 2 * padding_,
-		                                minimap_cache_[last_map_]->width());
-		const float scale = static_cast<float>(width) / minimap_cache_[last_map_]->width();
-		const int height = scale * minimap_cache_[last_map_]->height();
+		                                minimap_cache_.at(last_map_)->width());
+		const float scale = static_cast<float>(width) / minimap_cache_.at(last_map_)->width();
+		const int height = scale * minimap_cache_.at(last_map_)->height();
 
 		minimap_icon_.set_desired_size(width, height);
 	}
@@ -205,7 +205,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 				minimap_cache_[last_map_] = draw_minimap(
 				   egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
 				   MiniMapLayer::Terrain | MiniMapLayer::StartingPositions | MiniMapLayer::Owner);
-				minimap_icon_.set_icon(minimap_cache_[last_map_].get());
+				minimap_icon_.set_icon(minimap_cache_.at(last_map_).get());
 				minimap_icon_.set_visible(true);
 			}
 		}

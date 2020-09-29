@@ -183,6 +183,8 @@ void FullscreenMenuMapSelect::layout() {
 }
 
 void FullscreenMenuMapSelect::think() {
+	FullscreenMenuLoadMapOrGame::think();
+
 	if (ctrl_) {
 		ctrl_->think();
 	}
