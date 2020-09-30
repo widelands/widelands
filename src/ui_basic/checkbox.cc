@@ -99,13 +99,14 @@ void Statebox::layout() {
 		NoteDelayedCheck::instantiate(
 		   this,
 		   [this, pic_width, w, h]() {
-			   rendered_text_ = UI::g_fh->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel),
-			                          text_width(get_w(), pic_width));
+			   rendered_text_ =
+			      UI::g_fh->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel),
+			                       text_width(get_w(), pic_width));
 
-				rendered_width_ = std::max(rendered_text_->width() + kPadding + pic_width, w);
-				const int _h = std::max(rendered_text_->height(), h);
-				set_desired_size(rendered_width_, _h);
-				set_size(rendered_width_, _h);
+			   rendered_width_ = std::max(rendered_text_->width() + kPadding + pic_width, w);
+			   const int _h = std::max(rendered_text_->height(), h);
+			   set_desired_size(rendered_width_, _h);
+			   set_size(rendered_width_, _h);
 		   },
 		   false);
 	}
