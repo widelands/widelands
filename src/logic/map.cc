@@ -457,6 +457,7 @@ void Map::cleanup() {
 	tags_.clear();
 	hint_ = std::string();
 	background_ = std::string();
+	background_theme_ = std::string();
 
 	objectives_.clear();
 	port_spaces_.clear();
@@ -974,6 +975,10 @@ void Map::set_background(const std::string& image_path) {
 	} else {
 		background_ = image_path;
 	}
+}
+
+void Map::set_background_theme(const std::string& bt) {
+	background_theme_ = bt;
 }
 
 void Map::add_tag(const std::string& tag) {

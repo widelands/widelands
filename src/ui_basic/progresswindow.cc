@@ -46,9 +46,10 @@ namespace {
 
 namespace UI {
 
-ProgressWindow::ProgressWindow(const std::string& background)
+ProgressWindow::ProgressWindow(const std::string& theme, const std::string& background)
    : UI::FullscreenWindow(),
      label_center_(Vector2i::zero()),
+     theme_(theme),
      style_(g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu)) {
 	set_background(background);
 	step(_("Loading…"));
@@ -95,8 +96,19 @@ void ProgressWindow::draw(RenderTarget& rt) {
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string& file_name) {
 	if (file_name.empty() || !g_fs->file_exists(file_name)) {
-		const std::set<std::string> images =
-		   g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/gameloading");
+		std::string dir = std::string(kTemplateDir) + "loadscreens/gameloading/";
+		if (theme_.empty()) {
+			// choose random theme
+			const std::set<std::string> dirs = g_fs->list_directory(dir);
+			auto it = dirs.begin();
+			std::advance(it, std::rand() % dirs.size());  // NOLINT
+			dir = *it;
+		} else if (g_fs->is_directory(dir + theme_)) {
+			dir += theme_;
+		} else {
+			throw wexception("Invalid ProgressWindow theme '%s'", theme_.c_str());
+		}
+		const std::set<std::string> images = g_fs->list_directory(dir);
 		auto it = images.begin();
 		std::advance(it, std::rand() % images.size());  // NOLINT
 		background_ = *it;

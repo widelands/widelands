@@ -42,6 +42,11 @@ public:
 	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*);
 	~FullscreenMenuLaunchGame() override;
 
+	GameSettingsProvider& settings() const {
+		assert(settings_);
+		return *settings_;
+	}
+
 protected:
 	virtual bool clicked_select_map() = 0;
 

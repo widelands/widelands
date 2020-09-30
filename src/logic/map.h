@@ -269,6 +269,7 @@ public:
 	void set_description(const std::string& description);
 	void set_hint(const std::string& hint);
 	void set_background(const std::string& image_path);
+	void set_background_theme(const std::string&);
 	void add_tag(const std::string& tag);
 	void delete_tag(const std::string& tag);
 	void set_scenario_types(ScenarioTypes t) {
@@ -300,6 +301,9 @@ public:
 	}
 	const std::string& get_background() const {
 		return background_;
+	}
+	const std::string& get_background_theme() const {
+		return background_theme_;
 	}
 
 	using Tags = std::set<std::string>;
@@ -629,6 +633,7 @@ private:
 	std::string description_;
 	std::string hint_;
 	std::string background_;
+	std::string background_theme_;
 	Tags tags_;
 	std::vector<SuggestedTeamLineup> suggested_teams_;
 

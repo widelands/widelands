@@ -263,6 +263,17 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                          UI::DropdownType::kTextual,
                          UI::PanelStyle::kWui,
                          UI::ButtonStyle::kWuiSecondary),
+     theme_dropdown_(&tags_box_,
+                     "dropdown_theme",
+                     0,
+                     0,
+                     200,
+                     50,
+                     24,
+                     _("Theme"),
+                     UI::DropdownType::kTextual,
+                     UI::PanelStyle::kWui,
+                     UI::ButtonStyle::kWuiSecondary),
      new_suggested_team_(&teams_box_,
                          "new_suggested_team",
                          0,
@@ -316,10 +327,23 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	add_tag_checkbox(&tags_box_, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(&tags_box_, "4teams", localize_tag("4teams"));
 
-	balancing_dropdown_.set_autoexpand_display_button();
 	balancing_dropdown_.add(localize_tag("balanced"), "balanced");
 	balancing_dropdown_.add(localize_tag("unbalanced"), "unbalanced");
-	tags_box_.add(&balancing_dropdown_);
+	tags_box_.add(&balancing_dropdown_, UI::Box::Resizing::kFullSize);
+	tags_box_.add_space(padding_);
+
+	theme_dropdown_.add(_("(none)"), "");
+	for (const std::string& theme :
+	     g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/gameloading/")) {
+		const std::string name(g_fs->fs_filename(theme.c_str()));
+		// TODO(Nordfriese): There must be a better way to localize the theme names
+		std::string localized_name =
+		   name == "summer" ?
+		      _("Summer") :
+		      name == "winter" ? _("Winter") : name == "blackland" ? _("Blackland") : name;
+		theme_dropdown_.add(localized_name, name);
+	}
+	tags_box_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
 
 	tags_box_.add_space(labelh_);
 
@@ -393,6 +417,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	}
 
 	balancing_dropdown_.selected.connect([this] { changed(); });
+	theme_dropdown_.selected.connect([this] { changed(); });
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
@@ -439,6 +464,11 @@ void MainMenuMapOptions::update() {
 	}
 
 	balancing_dropdown_.select(tags.count("balanced") ? "balanced" : "unbalanced");
+
+	theme_dropdown_.select(map.get_background_theme());
+	if (!theme_dropdown_.has_selection()) {
+		theme_dropdown_.select("");
+	}
 }
 
 /**
@@ -471,6 +501,7 @@ void MainMenuMapOptions::clicked_ok() {
 		}
 	}
 	map.add_tag(balancing_dropdown_.get_selected());
+	map.set_background_theme(theme_dropdown_.get_selected());
 	Notifications::publish(NoteMapOptions());
 	registry_.destroy();
 }

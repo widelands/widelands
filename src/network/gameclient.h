@@ -78,6 +78,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	virtual void set_map(const std::string& mapname,
 	                     const std::string& mapfilename,
+	                     const std::string&,
+	                     const std::string&,
 	                     uint32_t maxplayers,
 	                     bool savegame = false) override;
 	void set_player_state(uint8_t number, PlayerSettings::State state) override;

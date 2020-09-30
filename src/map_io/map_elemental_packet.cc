@@ -48,6 +48,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			map->set_description(s.get_string("descr"));
 			map->set_hint(s.get_string("hint", ""));
 			map->set_background(s.get_string("background", ""));
+			map->set_background_theme(s.get_string("theme", ""));
 			old_world_name_ = s.get_string("world", "");
 
 			std::string t = s.get_string("tags", "");
@@ -139,6 +140,9 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	global_section.set_string("hint", map.get_hint());
 	if (!map.get_background().empty()) {
 		global_section.set_string("background", map.get_background());
+	}
+	if (!map.get_background_theme().empty()) {
+		global_section.set_string("theme", map.get_background_theme());
 	}
 	global_section.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
 
