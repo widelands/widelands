@@ -259,7 +259,7 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=duration:5s",
+            "sleep=duration:1s",
             "return=skipped",
          }
       },
@@ -271,7 +271,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has trident_long",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=duration:30s",
+            "sleep=duration:10s",
             "checksoldier=soldier:attack level:0",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_long",
             "train=soldier:attack level:1"
@@ -299,7 +299,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has trident_double",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=duration:30s",
+            "sleep=duration:80s",
             "checksoldier=soldier:attack level:2",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_double",
             "train=soldier:attack level:3"
@@ -313,7 +313,7 @@ tribes:new_trainingsite_type {
             "return=failed unless site has trident_heavy_double",
             "return=failed unless site has atlanteans_bread",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "sleep=duration:30s",
+            "sleep=duration:32s",
             "checksoldier=soldier:attack level:3",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_heavy_double",
             "train=soldier:attack level:4"
@@ -322,7 +322,7 @@ tribes:new_trainingsite_type {
    },
 
    soldier_capacity = 8,
-   trainer_patience = 16
+   trainer_patience = 1
 }
 
 pop_textdomain()
