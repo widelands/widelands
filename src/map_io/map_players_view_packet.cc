@@ -79,9 +79,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				/*player->revealed_fields_.clear();
 				const unsigned no_revealed_fields = fr.unsigned_32();
 				for (unsigned i = 0; i < no_revealed_fields; ++i) {
-					const MapIndex revealed_index = fr.unsigned_32();
-					player->revealed_fields_.insert(revealed_index);
-					player->rediscover_node(map, map.get_fcoords(map[revealed_index]));
+				   const MapIndex revealed_index = fr.unsigned_32();
+				   player->revealed_fields_.insert(revealed_index);
+				   player->rediscover_node(map, map.get_fcoords(map[revealed_index]));
 				}*/
 
 				// Read numerical field infos as combined strings to reduce number of hard disk write
@@ -106,8 +106,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					Player::Field& f = player->fields_[m];
 					// log_dbg("++ vision before: %u\n", f.vision);
 					Vision saved_vision = static_cast<Widelands::Vision>(stoi(field_vector[m]));
-//					log_dbg("++ p%u(%d,%d): saved_vision = %u; f.vision = %u\n",
-//						    p, map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision, f.vision);
+					//					log_dbg("++ p%u(%d,%d): saved_vision = %u; f.vision = %u\n",
+					//						    p, map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision,
+					//f.vision);
 					// assert(f.vision != 1);
 					assert(f.vision == 1 || f.vision % 2 == 0);
 					if (saved_vision == 1) {
@@ -120,8 +121,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						assert(f.vision % 2 == 1);
 					}
 					if (saved_vision != f.vision) {
-						log_err("++ p%u(%d,%d): saved_vision %u != %u f.vision\n",
-						        p, map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision, f.vision);
+						log_err("++ p%u(%d,%d): saved_vision %u != %u f.vision\n", p,
+						        map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision,
+						        f.vision);
 					}
 					assert(saved_vision == f.vision);
 					if (f.is_explored() && !f.is_visible()) {
@@ -320,7 +322,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				/*player.revealed_fields_.clear();
 				for (uint32_t j = fr.unsigned_32(); j; --j) {
-					player.revealed_fields_.insert(fr.unsigned_32());
+				   player.revealed_fields_.insert(fr.unsigned_32());
 				}*/
 
 				for (MapIndex m = map.max_index(); m; --m) {
@@ -466,7 +468,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 		// Explicitly revealed fields
 		/*fw.unsigned_32(player->revealed_fields_.size());
 		for (const MapIndex& m : player->revealed_fields_) {
-			fw.unsigned_32(m);
+		   fw.unsigned_32(m);
 		}*/
 
 		// Write numerical field infos as combined strings to reduce number of hard disk write

@@ -555,8 +555,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				                                                  picking_starting_pos ?
 				                                                  f->fcoords.field->nodecaps() :
 				                                                  plr.get_buildcaps(f->fcoords))) {
-					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale,
-					                   f->vision > 1 ? 1.f : 0.3f);
+					blit_field_overlay(
+					   dst, *f, overlay->pic, overlay->hotspot, scale, f->vision > 1 ? 1.f : 0.3f);
 				}
 			}
 
@@ -582,8 +582,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			UI::FontStyleInfo debug_font(g_style_manager->building_statistics_style().census_font());
 			debug_font.set_size(scale * debug_font.size());
 			debug_font.set_color({191, 255, 255});
-			std::shared_ptr<const UI::RenderedText> rendered_debug =
-			   UI::g_fh->render(as_richtext_paragraph(std::to_string(f->vision), debug_font, UI::Align::kCenter), 120 * scale);
+			std::shared_ptr<const UI::RenderedText> rendered_debug = UI::g_fh->render(
+			   as_richtext_paragraph(std::to_string(f->vision), debug_font, UI::Align::kCenter),
+			   120 * scale);
 			Vector2i debug_position = f->rendertarget_pixel.cast<int>() - Vector2i(0, 12) * scale;
 			rendered_debug->draw(*dst, debug_position, UI::Align::kCenter);
 		}

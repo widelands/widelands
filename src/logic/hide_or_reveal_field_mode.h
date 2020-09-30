@@ -21,8 +21,6 @@
 #define WL_LOGIC_HIDE_OR_REVEAL_FIELD_MODE_H
 
 namespace Widelands {
-enum class HideOrRevealFieldMode {
-	kHide, kHideAndForget, kReveal
-};
+enum class HideOrRevealFieldMode { kHide, kHideAndForget, kReveal };
 }  // namespace Widelands
 #endif  // end of include guard: WL_LOGIC_HIDE_OR_REVEAL_FIELD_MODE_H
