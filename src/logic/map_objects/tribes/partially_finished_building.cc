@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/tribes/partially_finished_building.h"
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
@@ -211,19 +210,16 @@ void PartiallyFinishedBuilding::request_builder_callback(
 	b.builder_request_ = nullptr;
 
 	w->start_task_buildingwork(game);
-//	log_dbg("++ PartiallyFinishedBuilding::request_builder_callback()\n");
-	// b.set_seeing(true);
 }
 
+/*
+===============
+Override: Builders normally don't make (finished) buildings see.
+PartiallyFinishedBuilding is an exception.
+===============
+*/
 void PartiallyFinishedBuilding::add_worker(Worker& worker) {
-//	log_dbg("++ PartiallyFinishedBuilding::add_worker()\n");
 	Building::add_worker(worker);
-	// if (get_workers().empty()) {
-		// log_dbg("++ PartiallyFinishedBuilding::add_worker(): empty\n");
-		/*if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
-			log_dbg("++ Building::add_worker(): not builder\n");*/
-			set_seeing(true);
-		// }
-	// }
+	set_seeing(true);
 }
 }  // namespace Widelands
