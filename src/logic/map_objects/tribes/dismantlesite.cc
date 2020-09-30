@@ -138,7 +138,7 @@ bool DismantleSite::init(EditorGameBase& egbase) {
 	for (const auto& ware : count_returned_wares(this)) {
 		WaresQueue* wq = new WaresQueue(*this, ware.first, ware.second);
 		wq->set_filled(ware.second);
-		consume_wares_.push_back(wq);
+		consume_wares_.insert(consume_wares_.begin(), wq);
 		work_steps_ += ware.second;
 	}
 	return true;
