@@ -329,7 +329,7 @@ void FieldActionWindow::init() {
 	warp_mouse_to_fastclick_panel();
 }
 
-static bool suited_for_targeting(const Widelands::PlayerNumber p,
+static bool suited_for_targeting(Widelands::PlayerNumber p,
                                  const Widelands::EditorGameBase& egbase,
                                  const Widelands::Immovable& i) {
 	if (i.descr().collected_by().empty()) {
