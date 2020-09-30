@@ -214,7 +214,7 @@ static int L_ngettext(lua_State* L) {
 	}
 
 	const std::string td = current_textdomain(L);
-	if (td.empty()) {
+	if (!td.empty()) {
 		lua_pushstring(L, dngettext(td.c_str(), msgid, msgid_plural, n));
 	} else {
 		lua_pushstring(L, ngettext(msgid, msgid_plural, n));
