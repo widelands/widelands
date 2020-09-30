@@ -72,6 +72,10 @@ Statebox::Statebox(Panel* const parent,
 	layout();
 }
 
+Statebox::~Statebox() {
+	Notifications::publish(NoteDelayedCheckCancel(this));
+}
+
 void Statebox::layout() {
 	// We only need to relayout if we have text and the available width changed
 	if ((flags_ & Has_Text) && (rendered_width_ != get_w())) {
@@ -84,24 +88,26 @@ void Statebox::layout() {
 			pic_width = pic_graphics_->width();
 		}
 
+		if (label_text_.empty()) {
+			rendered_text_ = nullptr;
+			rendered_width_ = w;
+			set_desired_size(rendered_width_, h);
+			set_size(rendered_width_, h);
+			return;
+		}
+
 		NoteDelayedCheck::instantiate(
 		   this,
-		   [this, pic_width]() {
-			   rendered_text_ =
-			      label_text_.empty() ?
-			         nullptr :
-			         UI::g_fh->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel),
+		   [this, pic_width, w, h]() {
+			   rendered_text_ = UI::g_fh->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel),
 			                          text_width(get_w(), pic_width));
-		   },
-		   true);
 
-		if (rendered_text_) {
-			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
-			h = std::max(rendered_text_->height(), h);
-		}
-		rendered_width_ = w;
-		set_desired_size(rendered_width_, h);
-		set_size(rendered_width_, h);
+				rendered_width_ = std::max(rendered_text_->width() + kPadding + pic_width, w);
+				const int _h = std::max(rendered_text_->height(), h);
+				set_desired_size(rendered_width_, _h);
+				set_size(rendered_width_, _h);
+		   },
+		   false);
 	}
 }
 
