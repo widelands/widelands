@@ -35,6 +35,7 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "wlapplication.h"
 
 namespace {
 #define PROGRESS_STATUS_RECT_PADDING 2
@@ -107,6 +108,10 @@ void ProgressWindow::set_background(const std::string& file_name) {
 }
 
 void ProgressWindow::step(const std::string& description) {
+	// Handle events to respond to window resizing
+	// and to prevent "not responding" on windows & "beach ball" on macOS
+	WLApplication::get()->handle_input(nullptr);
+
 	RenderTarget& rt = *g_gr->get_render_target();
 	// always repaint the background first
 	draw(rt);
@@ -116,8 +121,6 @@ void ProgressWindow::step(const std::string& description) {
 	UI::center_vertically(rendered_text->height(), &label_center_);
 	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 
-	// Pump events to prevent "not responding" on windows & "beach ball" on macOS
-	SDL_PumpEvents();
 	update(true);
 }
 
