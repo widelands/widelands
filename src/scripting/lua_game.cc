@@ -594,8 +594,8 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.hide_or_reveal_field(
-		   (*get_user_class<LuaMaps::LuaField>(L, -1))->coords(), Widelands::HideOrRevealFieldMode::kReveal);
+		p.hide_or_reveal_field((*get_user_class<LuaMaps::LuaField>(L, -1))->coords(),
+		                       Widelands::HideOrRevealFieldMode::kReveal);
 		lua_pop(L, 1);
 	}
 
@@ -622,9 +622,10 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const Widelands::HideOrRevealFieldMode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
-	                                        Widelands::HideOrRevealFieldMode::kHideAndForget :
-	                                        Widelands::HideOrRevealFieldMode::kHide;
+	const Widelands::HideOrRevealFieldMode mode =
+	   (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	      Widelands::HideOrRevealFieldMode::kHideAndForget :
+	      Widelands::HideOrRevealFieldMode::kHide;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {

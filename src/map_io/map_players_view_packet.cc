@@ -107,8 +107,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						assert(f.vision % 2 == 1);
 					}
 					if (saved_vision != f.vision) {
-						log_err("player%u(%d,%d): saved_vision %u != %u f.vision\n",
-						        p, map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision, f.vision);
+						log_err("player%u(%d,%d): saved_vision %u != %u f.vision\n", p,
+						        map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision,
+						        f.vision);
 					}
 					assert(saved_vision == f.vision);
 					if (f.is_explored() && !f.is_visible()) {
@@ -306,7 +307,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				/*player.revealed_fields_.clear();
 				for (uint32_t j = fr.unsigned_32(); j; --j) {
-					player.revealed_fields_.insert(fr.unsigned_32());
+				   player.revealed_fields_.insert(fr.unsigned_32());
 				}*/
 
 				for (MapIndex m = map.max_index(); m; --m) {

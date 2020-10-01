@@ -79,9 +79,8 @@ struct VisionBenchmark {
 			log_err("++ start: game_time_recursion < 0 ++\n");
 		} else if (game_time_recursion == 0) {
 			if (game_time_start + 1000 <= egbase.get_gametime()) {
-				std::cout << "++ vision benchmark gametime " << game_time_start << "-" << egbase.get_gametime()
-					<< ": " << game_time_duration
-					<< " µs" << std::endl;
+				std::cout << "++ vision benchmark gametime " << game_time_start << "-"
+				          << egbase.get_gametime() << ": " << game_time_duration << " µs" << std::endl;
 				game_time_duration = 0;
 				game_time_start = 0;
 			}
@@ -99,7 +98,9 @@ struct VisionBenchmark {
 			log_err("++ end: game_time_recursion < 0 ++\n");
 		} else if (game_time_recursion == 0) {
 			game_time_end = std::chrono::steady_clock::now();
-			game_time_duration += std::chrono::duration_cast<std::chrono::microseconds>(game_time_end - game_time_begin).count();
+			game_time_duration +=
+			   std::chrono::duration_cast<std::chrono::microseconds>(game_time_end - game_time_begin)
+			      .count();
 		}
 	}
 };
@@ -109,7 +110,8 @@ struct VisionBenchmarkFunction {
 	std::chrono::steady_clock::time_point time_end_;
 	std::string message_;
 
-	VisionBenchmarkFunction() {}
+	VisionBenchmarkFunction() {
+	}
 	VisionBenchmarkFunction(std::string message) {
 		message_ = message;
 		time_begin_ = std::chrono::steady_clock::now();
@@ -120,9 +122,10 @@ struct VisionBenchmarkFunction {
 			return;
 		}
 		time_end_ = std::chrono::steady_clock::now();
-		std::cout << "++ " << message_ << " took "
-		          << std::chrono::duration_cast<std::chrono::microseconds>(time_end_ - time_begin_).count()
-		          << " µs" << std::endl;
+		std::cout
+		   << "++ " << message_ << " took "
+		   << std::chrono::duration_cast<std::chrono::microseconds>(time_end_ - time_begin_).count()
+		   << " µs" << std::endl;
 	}
 };
 
@@ -1376,12 +1379,12 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 
 		field.border = f.field->is_border();
 		// draw a border if both nodes are borders belonging to the same player for all we know
-		field.border_r = field.border && r_vision != 0 &&
-		                 fields_[r_index].border && fields_[r_index].owner == field.owner;
-		field.border_br = field.border && br_vision != 0 &&
-		                  fields_[br_index].border && fields_[br_index].owner == field.owner;
-		field.border_bl = field.border && bl_vision != 0 &&
-		                  fields_[bl_index].border && fields_[bl_index].owner == field.owner;
+		field.border_r = field.border && r_vision != 0 && fields_[r_index].border &&
+		                 fields_[r_index].owner == field.owner;
+		field.border_br = field.border && br_vision != 0 && fields_[br_index].border &&
+		                  fields_[br_index].owner == field.owner;
+		field.border_bl = field.border && bl_vision != 0 && fields_[bl_index].border &&
+		                  fields_[bl_index].owner == field.owner;
 		{
 			const MapObjectDescr* map_object_descr = nullptr;
 			if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
@@ -1517,7 +1520,7 @@ void Player::unsee_area(const Area<FCoords>& area) {
 	VisionBenchmarkFunction benchmark_function;
 	if (area.radius > 10) {
 		benchmark_function = VisionBenchmarkFunction(
-			(boost::format{"unsee_area() at (%1%,%2%)"} % area.x % area.y).str());
+		   (boost::format{"unsee_area() at (%1%,%2%)"} % area.x % area.y).str());
 	}
 	const Map& map = egbase().map();
 	const Widelands::Field& first_map_field = map[0];
