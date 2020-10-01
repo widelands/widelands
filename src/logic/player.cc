@@ -449,7 +449,6 @@ void Player::update_team_players() {
 		}
 	}
 
-	// team_players_ = {player_number()};
 	team_players_ = {};
 
 	// …and tell our new allies to note us
@@ -1447,12 +1446,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	}
 }
 
-/**
- * Update this player's information about this node and the surrounding
- * triangles and edges.
- */
-/// Returns the resulting vision.
-Vision Player::see_node(const MapIndex i) {
+void Player::see_node(const MapIndex i) {
 	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
@@ -1472,21 +1466,14 @@ Vision Player::see_node(const MapIndex i) {
 			assert(team_player->vision(i) >= 2);
 		}
 	}
-
-	return field.vision;
 }
 
-/// Decrement this player's vision for a node.
-/// If 'mode' = UnseeMode::kUnexplore, fields will be marked as unexplored. Else, player no longer
-/// sees what's currently going on. Returns the vision that this node had before it was hidden.
-Vision Player::unsee_node(MapIndex const i) {
+void Player::unsee_node(MapIndex const i) {
 	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 	assert(fields_.get() <= &field);
 	assert(&field < fields_.get() + map.max_index());
-
-	const Vision original_vision = field.vision;
 
 	assert(field.vision >= 4);
 	field.vision -= 2;
@@ -1508,19 +1495,13 @@ Vision Player::unsee_node(MapIndex const i) {
 			}
 		}
 	}
-
-	return original_vision;
 }
 
-// See area
 Vision Player::vision(MapIndex const i) const {
 	VisionBenchmark benchmark = VisionBenchmark(egbase_);
-	// Node visible if > 1
-	// return (see_all_ ? 3 : 0) + fields_[i].vision;
 	return fields_[i].vision;
 }
 
-/// Call see_node for each node in the area.
 void Player::see_area(const Area<FCoords>& area) {
 	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
@@ -1531,7 +1512,6 @@ void Player::see_area(const Area<FCoords>& area) {
 	} while (mr.advance(map));
 }
 
-/// Decrement this player's vision for each node in an area.
 void Player::unsee_area(const Area<FCoords>& area) {
 	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	VisionBenchmarkFunction benchmark_function;
@@ -1543,9 +1523,6 @@ void Player::unsee_area(const Area<FCoords>& area) {
 	const Widelands::Field& first_map_field = map[0];
 	MapRegion<Area<FCoords>> mr(map, area);
 	do {
-		/*if (mr.location().x == 181 && mr.location().x == 20) {
-			log_dbg("++ unsee_area(): area.x = %d; area.y = %d\n", area.x, area.y);
-		}*/
 		unsee_node(mr.location().field - &first_map_field);
 	} while (mr.advance(map));
 }
@@ -1624,7 +1601,6 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 		assert(field.vision % 2 == 0);
 		break;
 	}
-//	log_dbg("++ Player::hide_or_reveal_field(): %u\n", field.vision);
 }
 
 void Player::force_update_team_vision(MapIndex const i, bool visible) {

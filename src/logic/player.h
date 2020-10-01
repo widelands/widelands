@@ -250,13 +250,19 @@ public:
 		MilitaryInfluence military_influence;
 
 		/// Indicates whether the player is currently seeing this node or has
-		/// has ever seen it.
+		/// ever seen it.
 		///
 		/// The value is
-		///  `kUnexplored`      if the player has never seen the node
-		///  `kPreviouslySeen`  if the player does not currently see
-		///                     the node, but has seen it previously
-		///  `kVisible`         if the player currently sees the node
+		///  0      if the player has never seen the node.
+		///  1      if the player does not currently see the node, but has seen
+		///         it previously.
+		///  2      if the player's buildings and workers do not currently see
+		///         the node, but it is visible to the player thanks to team
+		///         vision.
+		///  2+2*n  if the player's buildings and workers currently see the node,
+		///         where n is the number of objects that can see the node.
+		///  3+2*n  if the node is permanently revealed to the player;
+		///         the meaning of n is the same as above and can be zero.
 		///
 		/// Note a fundamental difference between seeing a node, and having
 		/// knownledge about resources. A node is considered continuously seen by
@@ -269,25 +275,23 @@ public:
 		/// by mining.
 		///
 		/// Buildings do not see on their own. Only people can see. But as soon
-		/// as a person enters a building, the person stops seeing. If it is the
-		/// only person in the building, the building itself starts to see (some
-		/// buildings, such as fortresses usually see much further than persons
-		/// standing on the ground). As soon as a person leaves a building, the
-		/// person begins to see on its own. If the building becomes empty of
+		/// as a person enters a building, the building itself starts to see
+		/// (some buildings, such as fortresses usually see much further than
+		/// persons standing on the ground). If the building becomes empty of
 		/// people, it stops seeing. Exception: Warehouses always see.
 		///
-		/// Only the Boolean representation of this value (whether the node has
-		/// ever been seen) is saved/loaded. The complete value is then obtained
-		/// by the calls to see_node or see_area peformed by all the building and
-		/// worker objects that can see the node.
-		///
-		/// \note Never change this directly. Use update_vision() to recalculate.
+		/// \note Do not change this directly. Instead, use see_area whenever
+		/// a worker or a building starts seeing an area, unsee_area when it
+		/// stops seeing that area, and hide_or_reveal_field to add or remove
+		/// permanent vision.
 		Vision vision;
 
+		/// Returns whether this player is seeing this node right now.
 		bool is_visible() const {
 			return vision > 1;
 		}
 
+		/// Returns whether this player has ever seen this node.
 		bool is_explored() const {
 			return vision > 0;
 		}
@@ -431,44 +435,47 @@ public:
 		return fields_.get();
 	}
 
-	// See area
 	Vision vision(MapIndex) const;
 
-	/**
-	 * Update this player's information about this node and the surrounding
-	 * triangles and edges.
-	 */
-	Vision see_node(MapIndex);
+	/// Increment this player's vision for this node.
+	void see_node(MapIndex);
 
-	/// Decrement this player's vision for a node.
-	Vision unsee_node(MapIndex);
+	/// Decrement this player's vision for this node.
+	void unsee_node(MapIndex);
 
-	/// Call see_node for each node in the area.
+	/// Increment this player's vision for each node in the area.
+	/// Called when a building or bob starts seeing this area.
 	void see_area(const Area<FCoords>&);
 
 	/// Decrement this player's vision for each node in an area.
+	/// Called when a building or bob stops seeing this area.
 	void unsee_area(const Area<FCoords>&);
 
+	/// Returns whether this player is seeing this node right now.
 	bool is_seeing(MapIndex) const;
+
+	/// Returns whether this player has ever seen this node.
 	bool is_explored(MapIndex) const;
 
 	/// Explicitly hide or reveal the given field. The modes are as follows:
-	/// - kPreviouslySeen: Decrement the field's vision
-	/// - kUnexplored:     Make the field completely black
-	/// - kVisible:        Give the player full vision of this field.
-	// Note that kPreviouslySeen and kVisible will work as expected only when
-	// no building or worker is seeing the field. But they will always undo
-	// the effects of revealing the field with kVisible.
+	/// - kReveal:        Give the player full permanent vision of this field,
+	///                   independent of buildings' and workers' vision.
+	/// - kHide:          Remove permanent vision of this field.
+	/// - kHideAndForget: Same as kHide, plus make the field completely black.
+	// Note that kHide and kHideAndForget will have a visible effect only when
+	// no building or worker is seeing the field. But they will always unset
+	// the permanent vision state given by revealing the field with kReveal.
 	void hide_or_reveal_field(const Coords&, HideOrRevealFieldMode);
 
-	/// Explicitly hide or reveal the field at 'c'. The modes are as follows:
-	/// - kUnsee:     Decrement the field's vision
-	/// - kUnexplore: Set the field's vision to 0
-	/// - kReveal:    If the field was hidden previously, restore the vision to the value it had
-	///               at the time of hiding. Otherwise, increment the vision.
-
+	/// Update the team vision state of this field according to 'visible'.
 	void force_update_team_vision(MapIndex, bool visible);
+
+	/// Check if any of this player's allies is seeing this field right now
+	/// and update the field's vision state accordingly.
 	void update_team_vision(MapIndex);
+
+	/// Update the team vision state of all fields on the map.
+	/// This is slow, so use sparingly.
 	void update_team_vision_whole_map();
 
 	MilitaryInfluence military_influence(MapIndex const i) const {
@@ -628,9 +635,8 @@ private:
 	void play_message_sound(const Message* message);
 	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 
-	// Called when a node becomes seen or has changed.  Discovers the node and
-	// those of the 6 surrounding edges/triangles that are not seen from another
-	// node.
+	/// Called when a node becomes seen, stops being seen or has changed. Discovers the node and
+	/// those of the 6 surrounding edges/triangles that are not seen from another node.
 	void rediscover_node(const Map&, const FCoords&);
 
 	std::unique_ptr<Notifications::Subscriber<NoteImmovable>> immovable_subscriber_;
@@ -644,7 +650,7 @@ private:
 	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
 	TeamNumber team_number_;
-	std::set<PlayerNumber> team_players_;
+	std::set<PlayerNumber> team_players_;  // this player's allies, not including this player
 	bool see_all_;
 	const PlayerNumber player_number_;
 	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
