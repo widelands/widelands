@@ -193,14 +193,14 @@ const World& EditorGameBase::world() const {
 	return *const_cast<EditorGameBase*>(this)->mutable_world();
 }
 
-World* EditorGameBase::mutable_world() {
+World* EditorGameBase::mutable_world(bool render_only) {
 	if (!world_) {
 		// Lazy initialization of World. We need to create the pointer to the
 		// world immediately though, because the lua scripts need to have access
 		// to world through this method already.
 		ScopedTimer timer("Registering the world took %ums");
 		Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
-		world_.reset(new World(description_manager_.get()));
+		world_.reset(new World(description_manager_.get(), render_only));
 	}
 	return world_.get();
 }
