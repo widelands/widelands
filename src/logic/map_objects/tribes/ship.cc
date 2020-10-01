@@ -662,7 +662,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);
 					if (cs->get_builder_request() &&
-						worker->descr().worker_index() == worker->get_owner()->tribe().builder()) {
+					    worker->descr().worker_index() == worker->get_owner()->tribe().builder()) {
 						PartiallyFinishedBuilding::request_builder_callback(
 						   game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
 					} else {
