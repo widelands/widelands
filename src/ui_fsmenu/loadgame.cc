@@ -45,6 +45,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
                    true),
 
      is_replay_(is_replay),
+     update_game_details_(false),
      showing_filenames_(false) {
 
 	// Make sure that we have some space to work with.
@@ -70,7 +71,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 	layout();
 
 	ok_.set_enabled(false);
-	set_thinks(false);
 
 	if (is_replay_) {
 		back_.set_tooltip(_("Return to the main menu"));
@@ -97,6 +97,16 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 	}
 
 	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
+}
+
+void FullscreenMenuLoadGame::think() {
+	FullscreenMenuLoadMapOrGame::think();
+
+	if (update_game_details_) {
+		// Call performance heavy draw_minimap function only during think
+		update_game_details_ = false;
+		load_or_save_.entry_selected();
+	}
 }
 
 void FullscreenMenuLoadGame::layout() {
@@ -145,9 +155,11 @@ void FullscreenMenuLoadGame::clicked_ok() {
 
 void FullscreenMenuLoadGame::entry_selected() {
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
-	load_or_save_.delete_button()->set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
-		load_or_save_.entry_selected();
+		// Update during think() instead of every keypress
+		update_game_details_ = true;
+	} else {
+		load_or_save_.delete_button()->set_enabled(false);
 	}
 }
 

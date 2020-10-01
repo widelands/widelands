@@ -94,6 +94,8 @@ private:
 	std::set<uint32_t> req_tags_;
 
 	std::vector<MapData> maps_data_;
+
+	bool update_map_details_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAPSELECT_H

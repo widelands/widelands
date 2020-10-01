@@ -57,7 +57,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false),
-     unspecified_balancing_found_(false) {
+     unspecified_balancing_found_(false),
+     update_map_details_(false) {
 	curdir_ = basedir_;
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
@@ -171,8 +172,17 @@ void FullscreenMenuMapSelect::layout() {
 }
 
 void FullscreenMenuMapSelect::think() {
+	FullscreenMenuLoadMapOrGame::think();
+
 	if (ctrl_) {
 		ctrl_->think();
+	}
+
+	if (update_map_details_) {
+		// Call performance heavy draw_minimap function only during think
+		update_map_details_ = false;
+		map_details_.update(
+		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
 	}
 }
 
@@ -225,8 +235,8 @@ bool FullscreenMenuMapSelect::set_has_selection() {
 
 void FullscreenMenuMapSelect::entry_selected() {
 	if (set_has_selection()) {
-		map_details_.update(
-		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
+		// Update during think() instead of every keypress
+		update_map_details_ = true;
 	}
 }
 
