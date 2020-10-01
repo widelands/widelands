@@ -1667,7 +1667,6 @@ void Player::update_team_vision_whole_map() {
 		return;
 	}
 	const MapIndex max = egbase().map().max_index();
-	Widelands::Field* f = &egbase().map()[0];
 	for (MapIndex i = 0; i < max; ++i) {
 		if (fields_[i].vision > 2) {
 			continue;
