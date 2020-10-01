@@ -84,7 +84,8 @@ static std::string assemble_infotext_for_savegame(const GameSettings& game_setti
 	return infotext.str();
 }
 
-static std::string assemble_infotext_for_map(const Widelands::Map& map, const GameSettings& game_settings) {
+static std::string assemble_infotext_for_map(const Widelands::Map& map,
+                                             const GameSettings& game_settings) {
 	std::string infotext_fmt = "<rt>%s<vspace gap=28><p>%s<br>%s<br>%s";
 	if (!map.get_hint().empty()) {
 		infotext_fmt += "<br>%s";
