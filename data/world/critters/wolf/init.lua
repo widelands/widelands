@@ -1,9 +1,12 @@
 push_textdomain("world")
 
+dirname = path.dirname(__file__)
+
 wl.World():new_critter_type{
    name = "wolf",
    descname = _ "Wolf",
-   animation_directory = path.dirname(__file__),
+   icon = dirname .. "menu.png",
+   animation_directory = dirname,
    programs = {
       remove = { "remove" },
    },
