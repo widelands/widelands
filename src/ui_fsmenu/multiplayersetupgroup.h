@@ -17,14 +17,15 @@
  *
  */
 
-#ifndef WL_WUI_MULTIPLAYERSETUPGROUP_H
-#define WL_WUI_MULTIPLAYERSETUPGROUP_H
+#ifndef WL_UI_FSMENU_MULTIPLAYERSETUPGROUP_H
+#define WL_UI_FSMENU_MULTIPLAYERSETUPGROUP_H
 
 #include <memory>
 
 #include "network/network_player_settings_backend.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
+#include "ui_basic/textarea.h"
 
 struct GameSettingsProvider;
 struct MultiPlayerClientGroup;
@@ -47,8 +48,13 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	                      uint32_t buth);
 	~MultiPlayerSetupGroup() override;
 
+	void force_new_dimensions(float scale,
+	                          uint32_t max_width,
+	                          uint32_t max_height,
+	                          uint32_t standard_element_height);
+
 private:
-	void update();
+	void reset();
 	void draw(RenderTarget& dst) override;
 
 	GameSettingsProvider* const settings_;
@@ -57,12 +63,14 @@ private:
 	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups;  // not owned
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
-	UI::Box clientbox, playerbox;
-
-	uint32_t buth_;
+	UI::Box clientbox, playerbox, scrollable_playerbox;
+	UI::Textarea clients_, players_;
+	int32_t buth_;
 
 	std::map<std::string, const Image*> tribepics_;
 	std::map<std::string, std::string> tribenames_;
+	void update_clients();
+	void update_players();
 };
 
-#endif  // end of include guard: WL_WUI_MULTIPLAYERSETUPGROUP_H
+#endif  // end of include guard: WL_UI_FSMENU_MULTIPLAYERSETUPGROUP_H
