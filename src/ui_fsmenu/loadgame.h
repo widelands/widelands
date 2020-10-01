@@ -38,6 +38,7 @@ public:
 	const std::string& filename() const;
 
 	bool handle_key(bool down, SDL_Keysym code) override;
+	void think() override;
 
 protected:
 	/// Sets the current selected filename and ends the modal screen with 'Ok' status.
@@ -64,6 +65,7 @@ private:
 	std::string filename_;
 
 	bool is_replay_;
+	bool update_game_details_;
 
 	UI::Checkbox* show_filenames_;
 	bool showing_filenames_;
