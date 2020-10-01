@@ -20,9 +20,7 @@
 #include "logic/player.h"
 
 #include <cassert>
-#include <chrono>
 #include <cstdlib>
-#include <iostream>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
@@ -62,72 +60,6 @@
 #include "wui/interactive_player.h"
 
 namespace {
-
-std::chrono::steady_clock::time_point game_time_begin;
-std::chrono::steady_clock::time_point game_time_end;
-int game_time_start = 0;
-int game_time_recursion = 0;
-int game_time_duration = 0;
-
-struct VisionBenchmark {
-	VisionBenchmark(Widelands::EditorGameBase& egbase) {
-		if (game_time_start == 0) {
-			game_time_start = egbase.get_gametime();
-		}
-
-		if (game_time_recursion < 0) {
-			log_err("++ start: game_time_recursion < 0 ++\n");
-		} else if (game_time_recursion == 0) {
-			if (game_time_start + 1000 <= egbase.get_gametime()) {
-				std::cout << "++ vision benchmark gametime " << game_time_start << "-"
-				          << egbase.get_gametime() << ": " << game_time_duration << " µs" << std::endl;
-				game_time_duration = 0;
-				game_time_start = 0;
-			}
-
-			game_time_begin = std::chrono::steady_clock::now();
-		}
-
-		++game_time_recursion;
-	}
-
-	~VisionBenchmark() {
-		--game_time_recursion;
-
-		if (game_time_recursion < 0) {
-			log_err("++ end: game_time_recursion < 0 ++\n");
-		} else if (game_time_recursion == 0) {
-			game_time_end = std::chrono::steady_clock::now();
-			game_time_duration +=
-			   std::chrono::duration_cast<std::chrono::microseconds>(game_time_end - game_time_begin)
-			      .count();
-		}
-	}
-};
-
-struct VisionBenchmarkFunction {
-	std::chrono::steady_clock::time_point time_begin_;
-	std::chrono::steady_clock::time_point time_end_;
-	std::string message_;
-
-	VisionBenchmarkFunction() {
-	}
-	VisionBenchmarkFunction(std::string message) {
-		message_ = message;
-		time_begin_ = std::chrono::steady_clock::now();
-	}
-
-	~VisionBenchmarkFunction() {
-		if (message_.empty()) {
-			return;
-		}
-		time_end_ = std::chrono::steady_clock::now();
-		std::cout
-		   << "++ " << message_ << " took "
-		   << std::chrono::duration_cast<std::chrono::microseconds>(time_end_ - time_begin_).count()
-		   << " µs" << std::endl;
-	}
-};
 
 void terraform_for_building(Widelands::EditorGameBase& egbase,
                             const Widelands::PlayerNumber player_number,
@@ -442,7 +374,6 @@ void Player::AiPersistentState::initialize() {
 }
 
 void Player::update_team_players() {
-	VisionBenchmarkFunction benchmark_function = VisionBenchmarkFunction("update_team_players()");
 	// Tell all our old allies to forget us…
 	for (const PlayerNumber& p : team_players_) {
 		if (p != player_number()) {
@@ -1340,7 +1271,6 @@ void Player::enemyflagaction(Flag& flag,
 }
 
 void Player::rediscover_node(const Map& map, const FCoords& f) {
-	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	assert(0 <= f.x);
 	assert(f.x < map.get_width());
 	assert(0 <= f.y);
@@ -1450,7 +1380,6 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 }
 
 void Player::see_node(const MapIndex i) {
-	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 	assert(fields_.get() <= &field);
@@ -1472,7 +1401,6 @@ void Player::see_node(const MapIndex i) {
 }
 
 void Player::unsee_node(MapIndex const i) {
-	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 	assert(fields_.get() <= &field);
@@ -1501,12 +1429,10 @@ void Player::unsee_node(MapIndex const i) {
 }
 
 Vision Player::vision(MapIndex const i) const {
-	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	return fields_[i].vision;
 }
 
 void Player::see_area(const Area<FCoords>& area) {
-	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	const Widelands::Field& first_map_field = map[0];
 	MapRegion<Area<FCoords>> mr(map, area);
@@ -1516,12 +1442,6 @@ void Player::see_area(const Area<FCoords>& area) {
 }
 
 void Player::unsee_area(const Area<FCoords>& area) {
-	VisionBenchmark benchmark = VisionBenchmark(egbase_);
-	VisionBenchmarkFunction benchmark_function;
-	if (area.radius > 10) {
-		benchmark_function = VisionBenchmarkFunction(
-		   (boost::format{"unsee_area() at (%1%,%2%)"} % area.x % area.y).str());
-	}
 	const Map& map = egbase().map();
 	const Widelands::Field& first_map_field = map[0];
 	MapRegion<Area<FCoords>> mr(map, area);
@@ -1531,17 +1451,14 @@ void Player::unsee_area(const Area<FCoords>& area) {
 }
 
 bool Player::is_seeing(MapIndex i) const {
-	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	return vision(i) > 1;
 }
 
 bool Player::is_explored(MapIndex i) const {
-	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	return vision(i) > 0;
 }
 
 void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mode) {
-	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	FCoords fcoords = map.get_fcoords(coords);
 	const Widelands::MapIndex i = fcoords.field - &map[0];
@@ -1607,7 +1524,6 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 }
 
 void Player::force_update_team_vision(MapIndex const i, bool visible) {
-	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 
@@ -1630,7 +1546,6 @@ void Player::force_update_team_vision(MapIndex const i, bool visible) {
 }
 
 void Player::update_team_vision(MapIndex const i) {
-	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 
@@ -1665,7 +1580,6 @@ void Player::update_team_vision(MapIndex const i) {
 }
 
 void Player::update_team_vision_whole_map() {
-	VisionBenchmark benchmark = VisionBenchmark(egbase_);
 	if (!fields_ || egbase().objects().is_cleaning_up()) {
 		return;
 	}
