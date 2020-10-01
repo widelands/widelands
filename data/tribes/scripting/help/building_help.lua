@@ -343,7 +343,6 @@ function building_help_general_string(tribe, building_description)
    result = result .. h2(_"General")
    result = result .. h3(_"Purpose:")
 
--- TODO(GunChleoc) "carrier" for headquarters, "ship" for ports, "scout" for scouts_hut,
    local representative_resource = nil
    if (building_description.type_name == "productionsite") then
       representative_resource = building_description.output_ware_types[1]
@@ -372,13 +371,23 @@ function building_help_general_string(tribe, building_description)
             break
          end
       end
+      if not representative_resource then
+         -- currently only scouts
+         representative_resource = building_description.working_positions[1]
+      end
    elseif (building_description.type_name == "militarysite" or
            building_description.type_name == "trainingsite") then
       representative_resource = wl.Game():get_worker_description(tribe.soldier)
-   elseif (building_description.is_port or building_description.name == "shipyard") then
-      representative_resource = nil
+   elseif (building_description.is_port) then
+      representative_resource = wl.Game():get_ship_description(tribe.name .. "_ship")
    elseif (building_description.type_name == "warehouse") then
-      representative_resource = wl.Game():get_ware_description("log")
+      if (building_description.conquers < 1) then
+         representative_resource = wl.Game():get_ware_description("log")
+      else
+         representative_resource = wl.Game():get_worker_description(tribe.name .. "_carrier")
+      end
+   elseif (building_description.type_name == "constructionsite") or (building_description.type_name == "dismantlesite") then
+      representative_resource = wl.Game():get_worker_description(tribe.name .. "_builder")
    end
 
    -- TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
