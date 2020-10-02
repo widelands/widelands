@@ -35,6 +35,16 @@ wl_library(base_i18n
     third_party_gettext
 )
 
+wl_library(base_multithreading
+  SRCS
+    multithreading.h
+    multithreading.cc
+  DEPENDS
+    base_exceptions
+    notifications
+  USES_SDL2
+)
+
 wl_library(base_utf8
   SRCS
     utf8.h

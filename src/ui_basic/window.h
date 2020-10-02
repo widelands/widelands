@@ -65,6 +65,7 @@ public:
 	       uint32_t w,
 	       uint32_t h,
 	       const std::string& title);
+	~Window() override;
 
 	/// This will set the window title. Do not use richtext for 'text'.
 	void set_title(const std::string& text);

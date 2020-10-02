@@ -23,6 +23,7 @@
 
 #include <SDL_timer.h>
 
+#include "base/multithreading.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
@@ -54,13 +55,14 @@ Panel::Panel(Panel* const nparent,
              const int ny,
              const int nw,
              const int nh,
-             const std::string& tooltip_text)
+             const std::string& tooltip_text,
+             const bool initially_invisible)
    : parent_(nparent),
      first_child_(nullptr),
      last_child_(nullptr),
      mousein_child_(nullptr),
      focus_(nullptr),
-     flags_(pf_handle_mouse | pf_thinks | pf_visible | pf_handle_keypresses),
+     flags_(pf_handle_mouse | pf_thinks | pf_handle_keypresses),
      x_(nx),
      y_(ny),
      w_(nw),
@@ -74,7 +76,8 @@ Panel::Panel(Panel* const nparent,
      desired_w_(nw),
      desired_h_(nh),
      running_(false),
-     tooltip_(tooltip_text) {
+     tooltip_(tooltip_text),
+     logic_thread_locked_(false) {
 	assert(nparent != this);
 	if (parent_) {
 		next_ = parent_->first_child_;
@@ -87,6 +90,10 @@ Panel::Panel(Panel* const nparent,
 		parent_->first_child_ = this;
 	} else {
 		prev_ = next_ = nullptr;
+	}
+
+	if (!initially_invisible) {
+		flags_ |= pf_visible;
 	}
 }
 
@@ -143,6 +150,29 @@ void Panel::free_children() {
 	first_child_ = nullptr;
 }
 
+constexpr uint32_t kGameLogicDelay = 1000 / 15;
+// static
+void Panel::logic_thread() {
+	WLApplication* const app = WLApplication::get();
+
+	uint32_t next_think_time = SDL_GetTicks();
+	while (!app->should_die()) {
+		uint32_t time = SDL_GetTicks();
+
+		if (modal_ && !modal_->logic_thread_locked_) {
+			modal_->logic_thread_locked_ = true;
+			modal_->game_logic_think();
+			modal_->logic_thread_locked_ = false;
+		}
+
+		next_think_time = time + kGameLogicDelay;
+		time = SDL_GetTicks();
+		if (next_think_time > time) {
+			SDL_Delay(next_think_time - time);
+		}
+	}
+}
+
 /**
  * Enters the event loop; all events will be handled by this panel.
  *
@@ -169,9 +199,6 @@ int Panel::do_run() {
 	// Panel-specific startup code. This might call end_modal()!
 	start();
 
-	// think() is called at most 15 times per second, that is roughly ever 66ms.
-	const uint32_t kGameLogicDelay = 1000 / 15;
-
 	// With the default of 30FPS, the game will be drawn every 33ms.
 	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
 
@@ -179,50 +206,91 @@ int Panel::do_run() {
 	                                       Panel::ui_mousemove,  Panel::ui_key,
 	                                       Panel::ui_textinput,  Panel::ui_mousewheel};
 
-	const uint32_t initial_ticks = SDL_GetTicks();
-	uint32_t next_think_time = initial_ticks + kGameLogicDelay;
-	uint32_t next_draw_time = initial_ticks + draw_delay;
+	const bool is_initializer = is_initializer_thread();
+	std::list<NoteThreadSafeFunction> notes;
+	std::set<uint32_t> handled_notes;
+	auto subscriber1 = is_initializer ? Notifications::subscribe<NoteThreadSafeFunction>(
+		[&notes](const NoteThreadSafeFunction& note) {
+			notes.push_back(note);
+		}) : nullptr;
+	auto subscriber2 = is_initializer ? Notifications::subscribe<NoteThreadSafeFunctionHandled>(
+		[&handled_notes](const NoteThreadSafeFunctionHandled& note) {
+			assert(!handled_notes.count(note.id));
+			handled_notes.insert(note.id);
+		}) : nullptr;
+
+	auto handle_notes = [&notes, &handled_notes]() {
+		while (!notes.empty()) {
+			if (handled_notes.count(notes.front().id) == 0) {
+				// If there are multiple modal panels, ensure each note is handled only once
+				Notifications::publish(NoteThreadSafeFunctionHandled(notes.front().id));
+
+				notes.front().run();
+			} else {
+				handled_notes.erase(notes.front().id);
+			}
+			notes.pop_front();
+		};
+	};
+
+	uint32_t next_time = SDL_GetTicks();
 	while (running_) {
 		const uint32_t start_time = SDL_GetTicks();
 
-		app->handle_input(&input_callback);
+		if (modal_ == this) {
+			handle_notes();
+		}
 
-		if (start_time >= next_think_time) {
+		if (is_initializer) {
+			app->handle_input(&input_callback);
+		}
+
+		if (start_time >= next_time) {
 			if (app->should_die()) {
+				while (logic_thread_locked_) {
+					handle_notes();
+					SDL_Delay(5);
+				}
+				logic_thread_locked_ = true;
 				end_modal<Returncodes>(Returncodes::kBack);
+				break;
 			}
 
 			do_think();
 
-			if (flags_ & pf_child_die) {
-				check_child_death();
-			}
+			check_child_death();
 
-			next_think_time = start_time + kGameLogicDelay;
-		}
-
-		if (start_time >= next_draw_time) {
-			RenderTarget& rt = *g_gr->get_render_target();
-			forefather->do_draw(rt);
-			if (g_mouse_cursor->is_visible()) {
-				g_mouse_cursor->change_cursor(app->is_mouse_pressed());
-				g_mouse_cursor->draw(rt, app->get_mouse_position());
-				if (is_modal()) {
-					do_tooltip();
-				} else {
-					forefather->do_tooltip();
+			if (is_initializer) {
+				RenderTarget& rt = *g_gr->get_render_target();
+				{
+					MutexLock m(MutexLock::ID::kObjects, handle_notes);
+					forefather->do_draw(rt);
 				}
+				if (g_mouse_cursor->is_visible()) {
+					g_mouse_cursor->change_cursor(app->is_mouse_pressed());
+					g_mouse_cursor->draw(rt, app->get_mouse_position());
+					if (is_modal()) {
+						do_tooltip();
+					} else {
+						forefather->do_tooltip();
+					}
+				}
+				g_gr->refresh();
 			}
 
-			g_gr->refresh();
-			next_draw_time = start_time + draw_delay;
+			next_time = start_time + draw_delay;
 		}
 
-		int32_t delay = std::min<int32_t>(next_draw_time, next_think_time) - SDL_GetTicks();
+		const int32_t delay = next_time - SDL_GetTicks();
 		if (delay > 0) {
 			SDL_Delay(delay);
 		}
 	}
+	subscriber2.reset();
+	subscriber1.reset();
+
+	handle_notes();  // eliminate outdated minimap rendering requests and other garbarge
+
 	end();
 
 	// Done
@@ -530,6 +598,10 @@ void Panel::think() {
  * (grand-)children for which set_thinks(false) has not been called.
  */
 void Panel::do_think() {
+	if (flags_ & pf_die) {
+		return;
+	}
+
 	if (thinks()) {
 		think();
 	}
@@ -804,6 +876,7 @@ void Panel::set_thinks(bool const yes) {
  * Do NOT use this to delete a hierarchy of panels that have been modal.
  */
 void Panel::die() {
+	flags_ &= ~pf_visible;
 	flags_ |= pf_die;
 
 	for (Panel* p = parent_; p; p = p->parent_) {

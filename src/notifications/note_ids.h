@@ -46,6 +46,8 @@ enum class NoteId : uint32_t {
 	MapOptions,
 	MapObjectDescription,
 	LoadingMessage,
+	ThreadSafeFunction,
+	ThreadSafeFunctionHandled,
 	Panel
 };
 

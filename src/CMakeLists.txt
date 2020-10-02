@@ -96,6 +96,7 @@ wl_library(widelands_ball_of_mud
     base_geometry
     base_i18n
     base_log
+    base_multithreading
     base_random
     base_time_string
     build_info

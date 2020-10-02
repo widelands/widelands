@@ -20,6 +20,7 @@
 #include "logic/cmd_queue.h"
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -91,6 +92,7 @@ void CmdQueue::enqueue(Command* const cmd) {
 		ci.serial = 0;
 	}
 
+	assert(cmd->duetime() >= game_.get_gametime());
 	cmds_[cmd->duetime() % kCommandQueueBucketSize].push(ci);
 	++ncmds_;
 }
@@ -99,6 +101,8 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 	uint32_t const final = game_time_var + interval;
 
 	while (game_time_var < final) {
+		MutexLock m(MutexLock::ID::kCommands);
+
 		std::priority_queue<CmdItem>& current_cmds = cmds_[game_time_var % kCommandQueueBucketSize];
 
 		while (!current_cmds.empty()) {

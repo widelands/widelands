@@ -33,6 +33,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
@@ -709,6 +710,20 @@ uint32_t Game::logic_rand() {
  * across the network.
  */
 void Game::send_player_command(PlayerCommand* pc) {
+	MutexLock m(MutexLock::ID::kCommands);
+
+	// At this point, the command has not yet been distributed to the other
+	// clients, nor written to the replay. If multithreading has caused the
+	// command's duetime to lie in the past, we can just safely increase it.
+	if (pc->duetime() <= get_gametime()) {
+		const uint32_t new_time = get_gametime() + 1;
+		if (g_verbose) {
+			log_info_time(get_gametime(), "Increasing a PlayerCommand's duetime from %u to %u (delta %u)",
+			              pc->duetime(), new_time, new_time - pc->duetime());
+		}
+		pc->set_duetime(new_time);
+	}
+
 	ctrl_->send_player_command(pc);
 }
 

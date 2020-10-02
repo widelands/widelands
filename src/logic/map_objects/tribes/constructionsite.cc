@@ -131,6 +131,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	for (uint32_t i = 0; i < animation_index; ++i) {
 		percent -= 100 * animations[i].second;
 	}
+	percent = std::min(percent, 100);  // fix a race condition in drawing code
 	if (visible) {
 		dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
 		                    &player_color, 1.f, percent);
@@ -744,7 +745,8 @@ void ConstructionSite::draw(uint32_t gametime,
 	info_.completedtime = CONSTRUCTIONSITE_STEP_TIME * work_completed_;
 
 	if (working_) {
-		assert(work_steptime_ <= info_.completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
+		// This assert causes a race condition with multithreaded logic/drawing code
+		// assert(work_steptime_ <= info_.completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
 		info_.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - work_steptime_;
 	}
 

@@ -39,6 +39,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/multithreading.h"
 #include "base/random.h"
 #include "base/time_string.h"
 #include "base/warning.h"
@@ -341,6 +342,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 #endif
      redirected_stdio_(false),
      last_resolution_change_(0) {
+	set_initializer_thread();
+
 	g_fs = new LayeredFileSystem();
 
 	parse_commandline(argc, argv);  // throws ParameterError, handled by main.cc
@@ -461,6 +464,8 @@ WLApplication::~WLApplication() {
 // In the future: push the first event on the event queue, then keep
 // dispatching events until it is time to quit.
 void WLApplication::run() {
+	std::thread game_logic_thread(&UI::Panel::logic_thread);
+
 	if (game_type_ == GameType::kEditor) {
 		g_sh->change_music("ingame");
 		EditorInteractive::run_editor(filename_, script_to_run_);
@@ -498,6 +503,8 @@ void WLApplication::run() {
 
 	g_sh->stop_music(500);
 
+	should_die_ = true;
+	game_logic_thread.join();
 	return;
 }
 

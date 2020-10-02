@@ -25,6 +25,7 @@ wl_library(game_io
     base_exceptions
     base_log
     base_macros
+    base_multithreading
     base_scoped_timer
     build_info
     economy

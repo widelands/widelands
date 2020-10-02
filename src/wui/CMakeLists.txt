@@ -306,6 +306,7 @@ wl_library(wui
     base_log
     base_macros
     base_math
+    base_multithreading
     base_time_string
     chat
     economy

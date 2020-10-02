@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "economy/flag.h"
 #include "economy/roadbase.h"
 #include "graphic/playercolor.h"
@@ -235,11 +236,11 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 	return map_pixel;
 }
 
-std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
-                                      const Widelands::Player* player,
-                                      const Rectf& view_area,
-                                      const MiniMapType& minimap_type,
-                                      MiniMapLayer layers) {
+static std::unique_ptr<Texture> do_draw_minimap(const Widelands::EditorGameBase& egbase,
+                                                const Widelands::Player* player,
+                                                const Rectf& view_area,
+                                                const MiniMapType& minimap_type,
+                                                MiniMapLayer layers) {
 	// TODO(sirver): Currently the minimap is redrawn every frame. That is not really
 	//       necessary. The created texture could be cached and only redrawn two
 	//       or three times per second
@@ -268,6 +269,19 @@ std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
 	texture->unlock(Texture::Unlock_Update);
 
 	return texture;
+}
+
+std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
+                                      const Widelands::Player* player,
+                                      const Rectf& view_area,
+                                      const MiniMapType& minimap_type,
+                                      const MiniMapLayer layers) {
+	std::unique_ptr<Texture> t;
+	NoteThreadSafeFunction::instantiate([&t, &egbase, player, view_area, minimap_type, layers]() {
+		t = do_draw_minimap(egbase, player, view_area, minimap_type, layers);
+	}, true);
+	assert(t);
+	return t;
 }
 
 int scale_map(const Widelands::Map& map, bool zoom) {

@@ -725,7 +725,8 @@ void GameHost::run() {
 			InternetGaming::ref().set_game_done();
 		}
 		clear_computer_players();
-	} catch (...) {
+	} catch (const std::exception& e) {
+		log_err("FATAL ERROR: %s", e.what());
 		WLApplication::emergency_save(game);
 		clear_computer_players();
 		d->game = nullptr;

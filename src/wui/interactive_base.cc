@@ -185,6 +185,10 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      lastframe_(SDL_GetTicks()),
      frametime_(0),
      avg_usframetime_(0),
+     last_frame_realtime_(0),
+     last_frame_gametime_(0),
+     previous_frame_realtime_(0),
+     previous_frame_gametime_(0),
      road_building_mode_(nullptr),
      unique_window_handler_(new UniqueWindowHandler()) {
 
@@ -688,15 +692,13 @@ void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
 	}
 }
 
-/*
-===============
-Called once per frame by the UI code
-===============
-*/
-void InteractiveBase::think() {
-	egbase().think();  // Call game logic here. The game advances.
+void InteractiveBase::game_logic_think() {
+	previous_frame_realtime_ = last_frame_realtime_;
+	previous_frame_gametime_ = last_frame_gametime_;
+	last_frame_realtime_ = SDL_GetTicks();
+	last_frame_gametime_ = egbase().get_gametime();
 
-	UI::Panel::think();
+	egbase().think();  // Call game logic here. The game advances.
 }
 
 double InteractiveBase::average_fps() const {
@@ -746,12 +748,12 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	std::string node_text("");
 	if (game == nullptr) {
 		// Always blit node information in the editor
-		static boost::format node_format("(%i, %i, %i)");
+		boost::format node_format("(%i, %i, %i)");
 		const int32_t height = egbase().map()[sel_.pos.node].get_height();
 		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y % height).str();
 	} else if (get_display_flag(dfDebug)) {
 		// Blit node information for games in debug mode - we're not interested in the height
-		static boost::format node_format("(%i, %i)");
+		boost::format node_format("(%i, %i)");
 		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y).str();
 	}
 	if (!node_text.empty()) {
@@ -771,11 +773,21 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
-			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-			rendered_text = UI::g_fh->render(
-			   as_richtext_paragraph((fps_format % (1000.0 / frametime_) % average_fps()).str(),
-			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
-			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
+			{
+				boost::format fps_format("DRAW: %5.1f fps (avg: %5.1f fps)");
+				rendered_text = UI::g_fh->render(
+				   as_richtext_paragraph((fps_format % (1000.0 / frametime_) % average_fps()).str(),
+					                     UI::FontStyle::kWuiGameSpeedAndCoordinates));
+				rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
+			}
+			{
+				boost::format fps_format("LOGIC: %5.1f fps (speed: %6.2f×)");
+				rendered_text = UI::g_fh->render(
+				   as_richtext_paragraph((fps_format % (1000.f / (last_frame_realtime_ - previous_frame_realtime_))
+				   % (static_cast<float>(last_frame_gametime_ - previous_frame_gametime_) / (last_frame_realtime_ - previous_frame_realtime_))).str(),
+					                     UI::FontStyle::kWuiGameSpeedAndCoordinates));
+				rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 25));
+			}
 		}
 	}
 }

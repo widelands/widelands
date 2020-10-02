@@ -78,6 +78,7 @@ wl_library(graphic_image_cache
     image_cache.h
   DEPENDS
     base_macros
+    base_multithreading
     graphic_image_io
     graphic_surface
 )
@@ -125,6 +126,7 @@ wl_library(graphic_surface
     base_exceptions
     base_geometry
     base_macros
+    base_multithreading
     graphic_color
     graphic_draw_programs
     graphic_gl_utils
@@ -199,6 +201,7 @@ wl_library(graphic_minimap_renderer
   DEPENDS
     base_geometry
     base_macros
+    base_multithreading
     economy
     graphic_playercolor
     graphic_surface
@@ -259,6 +262,7 @@ wl_library(graphic_fonthandler
     font_handler.h
   DEPENDS
     base_macros
+    base_multithreading
     graphic_image_cache
     graphic_text
 )

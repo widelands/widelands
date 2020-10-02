@@ -20,6 +20,7 @@
 #include "game_io/game_cmd_queue_packet.h"
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_queue.h"
@@ -76,6 +77,8 @@ void GameCmdQueuePacket::read(FileSystem& fs, Game& game, MapObjectLoader* const
 }
 
 void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const os) {
+	MutexLock m(MutexLock::ID::kCommands);
+
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);

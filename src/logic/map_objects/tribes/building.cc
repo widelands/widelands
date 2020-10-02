@@ -25,6 +25,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/input_queue.h"
@@ -450,6 +451,8 @@ derived class' init.
 ===============
 */
 bool Building::init(EditorGameBase& egbase) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	PlayerImmovable::init(egbase);
 
 	// Set the building onto the map

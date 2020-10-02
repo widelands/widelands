@@ -24,6 +24,7 @@
 #include <memory>
 
 #include "base/log.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/font_handler.h"
@@ -560,6 +561,8 @@ MapObject::MapObject(const MapObjectDescr* const the_descr)
  * any effects.
  */
 void MapObject::remove(EditorGameBase& egbase) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	removed(serial_);  // Signal call
 	cleanup(egbase);
 	delete this;

@@ -24,6 +24,7 @@
 #include <SDL_mouse.h>
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/soldier.h"
 
@@ -43,6 +44,8 @@ AttackBox::AttackBox(UI::Panel* parent,
 }
 
 std::vector<Widelands::Soldier*> AttackBox::get_max_attackers() {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	assert(player_);
 	if (upcast(Building, building, map_.get_immovable(*node_coordinates_))) {
 		for (Widelands::Coords& coords : building->get_positions(player_->egbase())) {
@@ -113,6 +116,8 @@ static inline std::string slider_heading(uint32_t num_attackers) {
 }
 
 void AttackBox::update_attack(bool action_on_panel) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	lastupdate_ = player_->egbase().get_gametime();
 
 	assert(soldiers_slider_.get());

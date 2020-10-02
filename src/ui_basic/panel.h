@@ -84,7 +84,8 @@ public:
 	      int32_t const ny,
 	      int const nw,
 	      int const nh,
-	      const std::string& tooltip_text = std::string());
+	      const std::string& tooltip_text = std::string(),
+	      bool initially_invisible = false);
 	virtual ~Panel();
 
 	boost::signals2::signal<void()> clicked;
@@ -229,6 +230,9 @@ public:
 
 	// Events
 	virtual void think();
+	virtual void game_logic_think() {
+		// Overridden only by InteractiveBase
+	}
 
 	Vector2i get_mouse_position() const;
 	void set_mouse_pos(Vector2i);
@@ -296,6 +300,8 @@ public:
 
 	virtual void die();
 	static void register_click();
+
+	static void logic_thread();
 
 protected:
 	// This panel will never receive keypresses (do_key), instead
@@ -417,6 +423,8 @@ private:
 
 	static FxId click_fx_;
 
+	bool logic_thread_locked_;
+
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };
 
@@ -441,8 +449,9 @@ struct NamedPanel : public Panel {
 	           int32_t const ny,
 	           int const nw,
 	           int const nh,
-	           const std::string& tooltip_text = std::string())
-	   : Panel(nparent, nx, ny, nw, nh, tooltip_text), name_(name) {
+	           const std::string& tooltip_text = std::string(),
+	           bool initially_invisible = false)
+	   : Panel(nparent, nx, ny, nw, nh, tooltip_text, initially_invisible), name_(name) {
 	}
 
 	const std::string& get_name() const {

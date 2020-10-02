@@ -22,6 +22,7 @@
 #include <cassert>
 #include <memory>
 
+#include "base/multithreading.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
@@ -54,14 +55,18 @@ void ImageCache::fill_with_texture_atlases(
 	}
 }
 
-/** Lazy accees to _images via hash.
+/** Lazy access to images_ via hash.
  *
  * In case hash is not not found it will we fetched via load_image().
  */
 const Image* ImageCache::get(const std::string& hash) {
 	auto it = images_.find(hash);
 	if (it == images_.end()) {
-		return images_.insert(std::make_pair(hash, load_image(hash))).first->second.get();
+		NoteThreadSafeFunction::instantiate([this, hash]() {
+			images_.insert(std::make_pair(hash, load_image(hash))).first->second.get();
+		}, true);
+		it = images_.find(hash);
+		assert(it != images_.end());
 	}
 	return it->second.get();
 }
