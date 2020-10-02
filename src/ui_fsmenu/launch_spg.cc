@@ -34,7 +34,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
    : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
      player_setup(&individual_content_box, settings, standard_element_height_, padding_) {
 
-	individual_content_box.add(&player_setup, UI::Box::Resizing::kFullSize);
+	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 	ok_.set_enabled(settings_->can_launch());
 }
 

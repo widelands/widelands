@@ -134,6 +134,7 @@ wl_library(wui_common_mapdetails
     graphic_text_layout
     io_filesystem
     logic
+    logic_exceptions
     logic_game_settings
     logic_map
     map_io_map_loader
