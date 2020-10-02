@@ -170,6 +170,10 @@ struct WLApplication {
 	void set_mouse_lock(bool locked);
 	// @}
 
+	// Handle the given pressed key. Returns true when key was
+	// handled.
+	bool handle_key(bool down, const SDL_Keycode& keycode, int modifiers);
+
 	// Pump SDL events and dispatch them.
 	void handle_input(InputCallback const*);
 
@@ -208,10 +212,6 @@ private:
 	void cleanup_temp_backups();
 
 	bool redirect_output(std::string path = "");
-
-	// Handle the given pressed key. Returns true when key was
-	// handled.
-	bool handle_key(bool down, const SDL_Keycode& keycode, int modifiers);
 
 	/**
 	 * The commandline, conveniently repackaged.
