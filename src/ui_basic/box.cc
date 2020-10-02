@@ -365,6 +365,11 @@ void Box::get_item_desired_size(uint32_t const idx, int* depth, int* breadth) {
 
 	switch (it.type) {
 	case Item::ItemPanel:
+		if (!it.u.panel.panel->is_visible()) {
+			*depth = 0;
+			*breadth = 0;
+			return;
+		}
 		if (orientation_ == Horizontal) {
 			it.u.panel.panel->get_desired_size(depth, breadth);
 		} else {
