@@ -155,7 +155,7 @@ constexpr uint32_t kGameLogicDelay = 1000 / 15;
 void Panel::logic_thread() {
 	WLApplication* const app = WLApplication::get();
 
-	uint32_t next_think_time = SDL_GetTicks();
+	uint32_t next_think_time;
 	while (!app->should_die()) {
 		uint32_t time = SDL_GetTicks();
 
