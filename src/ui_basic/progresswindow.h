@@ -20,7 +20,10 @@
 #ifndef WL_UI_BASIC_PROGRESSWINDOW_H
 #define WL_UI_BASIC_PROGRESSWINDOW_H
 
+
 #include <memory>
+
+#include <SDL_events.h>
 
 #include "base/rect.h"
 #include "graphic/note_graphic_resolution_changed.h"
@@ -65,6 +68,9 @@ private:
 	VisualizationArray visualizations_;
 	std::string background_;
 	const UI::ProgressbarStyleInfo& style_;
+
+	static std::vector<SDL_Event> event_buffer_;
+	static bool ui_key(bool down, SDL_Keysym code);
 
 	void draw(RenderTarget&) override;
 	void update(bool repaint);
