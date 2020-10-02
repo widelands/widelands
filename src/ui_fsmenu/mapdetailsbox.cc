@@ -22,6 +22,110 @@
 #include "graphic/image_cache.h"
 #include "map_io/map_loader.h"
 
+// Helper functions for localizable assembly of info strings
+
+static std::string tribe_of(const GameSettings& game_settings, const PlayerSettings& p) {
+	for (const Widelands::TribeBasicInfo& tribeinfo : game_settings.tribes) {
+		if (tribeinfo.name == p.tribe) {
+			i18n::Textdomain td("tribes");
+			return _(tribeinfo.descname);
+		}
+	}
+	return g_style_manager->font_style(UI::FontStyle::kDisabled)
+	   .as_font_tag((boost::format(_("invalid tribe ‘%s’")) % p.tribe).str());
+}
+
+static std::string assemble_infotext_for_savegame(const GameSettings& game_settings) {
+	std::string infotext_fmt = "<rt>%s<vspace gap=28><p>";
+	for (unsigned i = game_settings.players.size(); i; --i) {
+		infotext_fmt += "%s";
+		infotext_fmt += i > 1 ? "<br>" : "</p></rt>";
+	}
+	boost::format infotext(infotext_fmt + "</p></rt>");
+
+	infotext % g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
+	              .as_font_tag(_("Saved Players"));
+
+	for (unsigned i = 0; i < game_settings.players.size(); ++i) {
+		const PlayerSettings& current_player = game_settings.players.at(i);
+
+		if (current_player.state == PlayerSettings::State::kClosed) {
+			infotext % g_style_manager->font_style(UI::FontStyle::kDisabled)
+			              .as_font_tag((boost::format(_("Player %u: –")) % (i + 1)).str());
+			continue;
+		}
+
+		// Check if this is a list of names, or just one name:
+		std::string name;
+		if (current_player.name.compare(0, 1, " ")) {
+			name = current_player.name;
+		} else {
+			std::string temp = current_player.name;
+			std::vector<std::string> names;
+			while (temp.find(' ', 1) < temp.size()) {
+				const uint32_t x = temp.find(' ', 1);
+				names.push_back(temp.substr(1, x));
+				temp = temp.substr(x + 1, temp.size());
+			}
+			name = i18n::localize_list(names, i18n::ConcatenateWith::AMPERSAND);
+		}
+
+		infotext %
+		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+		      .as_font_tag((boost::format(
+		                       /** TRANSLATORS: "Player 1 (Barbarians): Playername" */
+		                       _("Player %1$u (%2$s): %3$s")) %
+		                    (i + 1) % tribe_of(game_settings, current_player) %
+		                    g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		                       .as_font_tag(name))
+		                      .str());
+	}
+
+	return infotext.str();
+}
+
+static std::string assemble_infotext_for_map(const Widelands::Map& map,
+                                             const GameSettings& game_settings) {
+	std::string infotext_fmt = "<rt>%s<vspace gap=28><p>%s<br>%s<br>%s";
+	if (!map.get_hint().empty()) {
+		infotext_fmt += "<br>%s";
+	}
+	boost::format infotext(infotext_fmt + "</p></rt>");
+
+	infotext % g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
+	              .as_font_tag(game_settings.scenario ? _("Scenario Details") : _("Map Details"));
+	infotext %
+	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+	      .as_font_tag(
+	         (boost::format(_("Size: %s")) %
+	          g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	             .as_font_tag(
+	                (boost::format(_("%1$u×%2$u")) % map.get_width() % map.get_height()).str()))
+	            .str());
+	infotext % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+	              .as_font_tag((boost::format(_("Players: %s")) %
+	                            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	                               .as_font_tag(std::to_string(game_settings.players.size())))
+	                              .str());
+	infotext % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+	              .as_font_tag((boost::format(_("Description: %s")) %
+	                            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	                               .as_font_tag(map.get_description()))
+	                              .str());
+	if (!map.get_hint().empty()) {
+		infotext %
+		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+		      .as_font_tag((boost::format(_("Hint: %s")) %
+		                    g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		                       .as_font_tag(map.get_hint()))
+		                      .str());
+	}
+
+	return infotext.str();
+}
+
+// MapDetailsBox implementation
+
 MapDetailsBox::MapDetailsBox(Panel* parent,
                              uint32_t,
                              uint32_t standard_element_height,
@@ -89,49 +193,9 @@ void MapDetailsBox::update_from_savegame(GameSettingsProvider* settings) {
 	show_map_description_savegame(game_settings);
 	show_map_name(game_settings);
 }
+
 void MapDetailsBox::show_map_description_savegame(const GameSettings& game_settings) {
-	std::string infotext = _("Saved players are:");
-	// TODO(jmoerschbach): use nested boost_format to not break rtl
-	for (uint8_t i = 0; i < game_settings.players.size(); ++i) {
-		const PlayerSettings& current_player = game_settings.players.at(i);
-		infotext += "\n* ";
-		infotext += (boost::format(_("Player %u")) % static_cast<unsigned>(i + 1)).str();
-		if (current_player.state == PlayerSettings::State::kClosed) {
-			infotext += ":\n    ";
-			infotext += (boost::format("<%s>") % _("closed")).str();
-			continue;
-		}
-
-		// get translated tribename
-		for (const Widelands::TribeBasicInfo& tribeinfo : game_settings.tribes) {
-			if (tribeinfo.name == current_player.tribe) {
-				i18n::Textdomain td("tribes");  // for translated initialization
-				infotext += " (";
-				infotext += _(tribeinfo.descname);
-				infotext += "):\n    ";
-				break;
-			}
-		}
-
-		// Check if this is a list of names, or just one name:
-		if (current_player.name.compare(0, 1, " ")) {
-			infotext += current_player.name;
-		} else {
-			std::string temp = current_player.name;
-			bool firstrun = true;
-			while (temp.find(' ', 1) < temp.size()) {
-				if (firstrun) {
-					firstrun = false;
-				} else {
-					infotext += "\n    ";
-				}
-				uint32_t x = temp.find(' ', 1);
-				infotext += temp.substr(1, x);
-				temp = temp.substr(x + 1, temp.size());
-			}
-		}
-	}
-	set_map_description_text(infotext);
+	set_map_description_text(assemble_infotext_for_savegame(game_settings));
 }
 
 void MapDetailsBox::update(GameSettingsProvider* settings, Widelands::Map& map) {
@@ -153,26 +217,7 @@ void MapDetailsBox::show_map_name(const GameSettings& game_settings) {
 }
 
 void MapDetailsBox::show_map_description(Widelands::Map& map, GameSettingsProvider* settings) {
-	const GameSettings& game_settings = settings->settings();
-	std::string infotext;
-	infotext += std::string(_("Map details:")) + "\n";
-	infotext += std::string("• ") +
-	            (boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str() +
-	            "\n";
-	infotext += std::string("• ") +
-	            (boost::format(ngettext("%u Player", "%u Players", game_settings.players.size())) %
-	             static_cast<unsigned int>(game_settings.players.size()))
-	               .str() +
-	            "\n";
-	if (game_settings.scenario) {
-		infotext += std::string("• ") + (boost::format(_("Scenario mode selected"))).str() + "\n";
-	}
-	infotext += "\n";
-	infotext += map.get_description();
-	infotext += "\n";
-	infotext += map.get_hint();
-
-	set_map_description_text(infotext);
+	set_map_description_text(assemble_infotext_for_map(map, settings->settings()));
 }
 
 void MapDetailsBox::set_select_map_action(const std::function<void()>& action) {
