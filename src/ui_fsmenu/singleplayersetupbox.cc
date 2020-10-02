@@ -82,7 +82,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 	add(&player_);
 	add(player_type_.get_dropdown());
 	add(tribe_.get_dropdown());
-	add(start_type.get_dropdown());
+	add(start_type.get_dropdown(), UI::Box::Resizing::kExpandBoth);
 	add(teams_.get_dropdown());
 
 	player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
@@ -159,7 +159,7 @@ void SinglePlayerSetupBox::update() {
 	for (PlayerSlot i = 0; i < active_player_groups.size(); ++i) {
 		active_player_groups.at(i) =
 		   new SinglePlayerActivePlayerGroup(this, 0, standard_height, i, settings_);
-		add(active_player_groups.at(i), Resizing::kAlign, UI::Align::kCenter);
+		add(active_player_groups.at(i), Resizing::kFullSize);
 	}
 }
 
