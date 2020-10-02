@@ -71,7 +71,7 @@ static std::map<MutexLock::ID, std::recursive_mutex> g_mutex;
 MutexLock::MutexLock(ID i) : id_(i) {
 	g_mutex[id_].lock();
 }
-MutexLock::MutexLock(ID i, std::function<void()> run_while_waiting) : id_(i) {
+MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_(i) {
 	while (!g_mutex[id_].try_lock()) {
 		run_while_waiting();
 		SDL_Delay(5);

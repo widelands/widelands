@@ -77,7 +77,7 @@ public:
 	enum class ID { kObjects, kCommands };
 
 	explicit MutexLock(ID);
-	explicit MutexLock(ID, std::function<void()> run_while_waiting);
+	explicit MutexLock(ID, const std::function<void()>& run_while_waiting);
 	~MutexLock();
 
 private:
