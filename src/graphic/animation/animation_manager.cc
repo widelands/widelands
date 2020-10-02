@@ -64,11 +64,13 @@ const Animation& AnimationManager::get_animation(uint32_t id) const {
 const Image* AnimationManager::get_representative_image(uint32_t id, const RGBColor* clr) {
 	const auto hash = std::make_pair(id, clr);
 	if (representative_images_.count(hash) != 1) {
-		NoteThreadSafeFunction::instantiate([this, id, hash, clr]() {
-			representative_images_.insert(std::make_pair(
-			   hash, std::unique_ptr<const Image>(
-				        g_animation_manager->get_animation(id).representative_image(clr))));
-		}, true);
+		NoteThreadSafeFunction::instantiate(
+		   [this, id, hash, clr]() {
+			   representative_images_.insert(std::make_pair(
+			      hash, std::unique_ptr<const Image>(
+			               g_animation_manager->get_animation(id).representative_image(clr))));
+		   },
+		   true);
 	}
 	return representative_images_.at(hash).get();
 }

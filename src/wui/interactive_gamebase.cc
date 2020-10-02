@@ -632,9 +632,7 @@ UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coo
 		             building->descr().name().c_str(), to_string(building->descr().type()).c_str());
 		NEVER_HERE();
 	}
-	NoteThreadSafeFunction::instantiate([&registry]() {
-		registry.create();
-	}, true);
+	NoteThreadSafeFunction::instantiate([&registry]() { registry.create(); }, true);
 	return registry.window;
 }
 

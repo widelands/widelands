@@ -777,15 +777,17 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 				boost::format fps_format("DRAW: %5.1f fps (avg: %5.1f fps)");
 				rendered_text = UI::g_fh->render(
 				   as_richtext_paragraph((fps_format % (1000.0 / frametime_) % average_fps()).str(),
-					                     UI::FontStyle::kWuiGameSpeedAndCoordinates));
+				                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
 				rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 			}
 			{
 				boost::format fps_format("LOGIC: %5.1f fps (speed: %6.2f×)");
-				rendered_text = UI::g_fh->render(
-				   as_richtext_paragraph((fps_format % (1000.f / (last_frame_realtime_ - previous_frame_realtime_))
-				   % (static_cast<float>(last_frame_gametime_ - previous_frame_gametime_) / (last_frame_realtime_ - previous_frame_realtime_))).str(),
-					                     UI::FontStyle::kWuiGameSpeedAndCoordinates));
+				rendered_text = UI::g_fh->render(as_richtext_paragraph(
+				   (fps_format % (1000.f / (last_frame_realtime_ - previous_frame_realtime_)) %
+				    (static_cast<float>(last_frame_gametime_ - previous_frame_gametime_) /
+				     (last_frame_realtime_ - previous_frame_realtime_)))
+				      .str(),
+				   UI::FontStyle::kWuiGameSpeedAndCoordinates));
 				rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 25));
 			}
 		}

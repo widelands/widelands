@@ -277,9 +277,11 @@ std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
                                       const MiniMapType& minimap_type,
                                       const MiniMapLayer layers) {
 	std::unique_ptr<Texture> t;
-	NoteThreadSafeFunction::instantiate([&t, &egbase, player, view_area, minimap_type, layers]() {
-		t = do_draw_minimap(egbase, player, view_area, minimap_type, layers);
-	}, true);
+	NoteThreadSafeFunction::instantiate(
+	   [&t, &egbase, player, view_area, minimap_type, layers]() {
+		   t = do_draw_minimap(egbase, player, view_area, minimap_type, layers);
+	   },
+	   true);
 	assert(t);
 	return t;
 }

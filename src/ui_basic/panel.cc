@@ -209,15 +209,17 @@ int Panel::do_run() {
 	const bool is_initializer = is_initializer_thread();
 	std::list<NoteThreadSafeFunction> notes;
 	std::set<uint32_t> handled_notes;
-	auto subscriber1 = is_initializer ? Notifications::subscribe<NoteThreadSafeFunction>(
-		[&notes](const NoteThreadSafeFunction& note) {
-			notes.push_back(note);
-		}) : nullptr;
-	auto subscriber2 = is_initializer ? Notifications::subscribe<NoteThreadSafeFunctionHandled>(
-		[&handled_notes](const NoteThreadSafeFunctionHandled& note) {
-			assert(!handled_notes.count(note.id));
-			handled_notes.insert(note.id);
-		}) : nullptr;
+	auto subscriber1 =
+	   is_initializer ? Notifications::subscribe<NoteThreadSafeFunction>(
+	                       [&notes](const NoteThreadSafeFunction& note) { notes.push_back(note); }) :
+	                    nullptr;
+	auto subscriber2 = is_initializer ?
+	                      Notifications::subscribe<NoteThreadSafeFunctionHandled>(
+	                         [&handled_notes](const NoteThreadSafeFunctionHandled& note) {
+		                         assert(!handled_notes.count(note.id));
+		                         handled_notes.insert(note.id);
+	                         }) :
+	                      nullptr;
 
 	auto handle_notes = [&notes, &handled_notes]() {
 		while (!notes.empty()) {

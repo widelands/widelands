@@ -62,9 +62,11 @@ void ImageCache::fill_with_texture_atlases(
 const Image* ImageCache::get(const std::string& hash) {
 	auto it = images_.find(hash);
 	if (it == images_.end()) {
-		NoteThreadSafeFunction::instantiate([this, hash]() {
-			images_.insert(std::make_pair(hash, load_image(hash))).first->second.get();
-		}, true);
+		NoteThreadSafeFunction::instantiate(
+		   [this, hash]() {
+			   images_.insert(std::make_pair(hash, load_image(hash))).first->second.get();
+		   },
+		   true);
 		it = images_.find(hash);
 		assert(it != images_.end());
 	}

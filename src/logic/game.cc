@@ -718,7 +718,8 @@ void Game::send_player_command(PlayerCommand* pc) {
 	if (pc->duetime() <= get_gametime()) {
 		const uint32_t new_time = get_gametime() + 1;
 		if (g_verbose) {
-			log_info_time(get_gametime(), "Increasing a PlayerCommand's duetime from %u to %u (delta %u)",
+			log_info_time(get_gametime(),
+			              "Increasing a PlayerCommand's duetime from %u to %u (delta %u)",
 			              pc->duetime(), new_time, new_time - pc->duetime());
 		}
 		pc->set_duetime(new_time);

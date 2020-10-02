@@ -101,9 +101,11 @@ public:
 				}
 			} else {
 				currently_rendering_.insert(hash);
-				NoteThreadSafeFunction::instantiate([this, text, hash, w]() {
-					render_cache_->insert(hash, rt_renderer_->render(text, w, fontset()->is_rtl()));
-				}, true);
+				NoteThreadSafeFunction::instantiate(
+				   [this, text, hash, w]() {
+					   render_cache_->insert(hash, rt_renderer_->render(text, w, fontset()->is_rtl()));
+				   },
+				   true);
 				currently_rendering_.erase(hash);
 			}
 			rendered_text = render_cache_->get(hash);
