@@ -23,6 +23,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
@@ -30,6 +31,7 @@
 
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {
+	set_initializer_thread();
 	i18n::set_locale("en");
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
