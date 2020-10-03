@@ -197,6 +197,9 @@ void Panel::logic_thread() {
 			SDL_Delay(next_think_time - time);
 		}
 	}
+	if (modal_) {
+		modal_->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
+	}
 }
 
 /**
@@ -277,7 +280,7 @@ int Panel::do_run() {
 
 			rt.tile(Recti(x_, y_, w_, h_), g_image_cache->get(std::string(kTemplateDir) + "loadscreens/ending.png"), Vector2i(0, 0));
 
-			draw_game_tip(_("Game ending – please wait…"));
+			draw_game_tip(_("Game ending – please wait…"), true);
 		}
 
 		if (g_mouse_cursor->is_visible()) {
@@ -336,21 +339,22 @@ int Panel::do_run() {
 	// Wait until the current logic frame ends or there may be segfaults.
 	// This may take quite a while if the game was running at low LOGIC-FPS,
 	// so we continue refreshing the graphics while we wait.
-	assert(logic_thread_locked_ == LogicThreadState::kFree || logic_thread_locked_ == LogicThreadState::kLocked);
-	logic_thread_locked_ = LogicThreadState::kEndingRequested;
-	while ((flags_ & pf_logic_think) && logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
-		const uint32_t start_time = SDL_GetTicks();
+	if (logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
+		logic_thread_locked_ = LogicThreadState::kEndingRequested;
+		while ((flags_ & pf_logic_think) && logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
+			const uint32_t start_time = SDL_GetTicks();
 
-		handle_notes();
+			handle_notes();
 
-		if (is_initializer) {
-			do_update_graphics(true);
-		}
+			if (is_initializer) {
+				do_update_graphics(true);
+			}
 
-		next_time = start_time + draw_delay;
-		const int32_t delay = next_time - SDL_GetTicks();
-		if (delay > 0) {
-			SDL_Delay(delay);
+			next_time = start_time + draw_delay;
+			const int32_t delay = next_time - SDL_GetTicks();
+			if (delay > 0) {
+				SDL_Delay(delay);
+			}
 		}
 	}
 

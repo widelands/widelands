@@ -99,5 +99,5 @@ void GameTips::stop() {
 }
 
 void GameTips::show_tip(const int32_t index) {
-	draw_game_tip(tips_[index].text);
+	draw_game_tip(tips_[index].text, false);
 }

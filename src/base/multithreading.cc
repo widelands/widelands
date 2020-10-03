@@ -53,12 +53,26 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 		// All other threads must ask it politely to do this for them.
 		if (wait_until_completion) {
 			bool done = false;
-			Notifications::publish(NoteThreadSafeFunction([fn, &done]() {
-				fn();
+
+			// Some codepaths want to perform special error handling, so we catch
+			// any errors and forward them to the caller in a thread-safe manner.
+			// Only if the caller waits for completion of course.
+			const std::exception* error = nullptr;
+
+			Notifications::publish(NoteThreadSafeFunction([fn, &done, &error]() {
+				try {
+					fn();
+				} catch (const std::exception& e) {
+					error = &e;
+				}
 				done = true;
 			}));
 			while (!done) {
 				SDL_Delay(5);
+			}
+
+			if (error) {
+				throw *error;
 			}
 		} else {
 			Notifications::publish(NoteThreadSafeFunction(fn));

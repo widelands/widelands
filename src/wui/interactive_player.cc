@@ -23,6 +23,7 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "graphic/game_renderer.h"
@@ -376,6 +377,8 @@ void InteractivePlayer::draw_immovables_for_visible_field(
    const Widelands::Player& player,
    RenderTarget* dst,
    std::set<Widelands::Coords>& deferred_coords) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 	if (imm == nullptr) {
 		return;

@@ -20,17 +20,19 @@ local function open_and_close_sound_options(dropdown, is_debug_build)
    assert_nil(wl.ui.MapView().windows.sound_options_menu, "Sound options window should not have been there yet")
 
    dropdown:select()
-   sleep(100)
+   sleep(5000)
 
    window = wl.ui.MapView().windows.sound_options_menu
    assert_not_nil(window, "Failed to open sound options window")
    window:close()
 
-   sleep(100)
+   sleep(1000)
    assert_nil(wl.ui.MapView().windows.sound_options_menu, "Failed to close sound options window")
 end
 
 run(function()
+   game.desired_speed = 1000
+
    sleep(100)
 
    -- Validate listing dropdowns

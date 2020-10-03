@@ -859,6 +859,8 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 }
 
 void Building::add_worker(Worker& worker) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	if (get_workers().empty()) {
 		if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
 			set_seeing(true);
@@ -869,6 +871,8 @@ void Building::add_worker(Worker& worker) {
 }
 
 void Building::remove_worker(Worker& worker) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	PlayerImmovable::remove_worker(worker);
 	if (get_workers().empty() && descr().type() != MapObjectType::WAREHOUSE) {
 		set_seeing(false);

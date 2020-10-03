@@ -10,7 +10,7 @@
 
 constexpr int kTextPadding = 48;
 
-void draw_game_tip(const std::string& text) {
+void draw_game_tip(const std::string& text, const bool additional_opacity) {
 	RenderTarget& rt = *g_gr->get_render_target();
 
 	const Image* pic_background =
@@ -18,6 +18,11 @@ void draw_game_tip(const std::string& text) {
 	const int w = pic_background->width();
 	const int h = pic_background->height();
 	Vector2i pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
+
+	if (additional_opacity) {
+		rt.brighten_rect(Recti(pt.x + kTextPadding, pt.y + kTextPadding, w - 2 * kTextPadding, h - 2 * kTextPadding), 32);
+	}
+
 	rt.blit(pt, pic_background);
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =

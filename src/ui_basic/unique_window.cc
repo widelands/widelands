@@ -62,9 +62,9 @@ void UniqueWindow::Registry::toggle() {
 			opened();
 		} else {
 			// Delete rather than die() to make dropdown lists behave
-			// delete window;
+			// delete window;  // NOCOM
 			window->die();
-			// window = nullptr;
+			window = nullptr;
 		}
 	} else {
 		open_window();
@@ -78,9 +78,9 @@ void UniqueWindow::Registry::toggle() {
 UniqueWindow::Registry::~Registry() {
 	// delete window;
 	if (window) {
-		// window->die();
-		// window = nullptr;
+		// window->die();  // NOCOM
 		delete window;
+		window = nullptr;
 	}
 }
 
@@ -97,7 +97,8 @@ UniqueWindow::UniqueWindow(Panel* const parent,
 	if (registry_) {
 		// delete registry_->window;
 		if (registry_->window) {
-			registry_->window->die();
+			// registry_->window->die();
+			delete registry_->window;
 		}
 
 		registry_->window = this;
@@ -113,7 +114,7 @@ UniqueWindow::UniqueWindow(Panel* const parent,
  * Unregister, save latest position.
  */
 UniqueWindow::~UniqueWindow() {
-	if (registry_) {
+	if (registry_ && registry_->window) {
 		assert(registry_->window == this);
 
 		registry_->window = nullptr;
