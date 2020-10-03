@@ -502,7 +502,7 @@ int LuaPlayer::seen_field(lua_State* L) {
 	Widelands::MapIndex const i =
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
-	lua_pushboolean(L, get(L, egbase).is_explored(i));
+	lua_pushboolean(L, get(L, egbase).get_vision(i).is_explored());
 	return 1;
 }
 

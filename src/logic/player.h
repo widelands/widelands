@@ -32,7 +32,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/message_queue.h"
-#include "logic/widelands.h"
+#include "logic/vision.h"
 #include "sound/constants.h"
 
 class Node;
@@ -286,16 +286,6 @@ public:
 		/// permanent vision.
 		Vision vision;
 
-		/// Returns whether this player is seeing this node right now.
-		bool is_visible() const {
-			return vision > 1;
-		}
-
-		/// Returns whether this player has ever seen this node.
-		bool is_explored() const {
-			return vision > 0;
-		}
-
 		//  Below follows information about the field, as far as this player
 		//  knows.
 
@@ -435,7 +425,10 @@ public:
 		return fields_.get();
 	}
 
-	Vision vision(MapIndex) const;
+	Vision get_vision(MapIndex) const;
+	bool is_seeing(MapIndex i) const {
+		return get_vision(i).is_visible();
+	}
 
 	/// Increment this player's vision for this node.
 	void see_node(MapIndex);
@@ -450,12 +443,6 @@ public:
 	/// Decrement this player's vision for each node in an area.
 	/// Called when a building or bob stops seeing this area.
 	void unsee_area(const Area<FCoords>&);
-
-	/// Returns whether this player is seeing this node right now.
-	bool is_seeing(MapIndex) const;
-
-	/// Returns whether this player has ever seen this node.
-	bool is_explored(MapIndex) const;
 
 	/// Explicitly hide or reveal the given field. The modes are as follows:
 	/// - kReveal:        Give the player full permanent vision of this field,

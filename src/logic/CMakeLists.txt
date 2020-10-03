@@ -71,6 +71,7 @@ wl_library(logic_game_controller
 
 wl_library(logic_constants
   SRCS
+    vision.h
     widelands.cc
     widelands.h
 )

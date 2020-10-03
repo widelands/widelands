@@ -96,23 +96,26 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				for (MapIndex m = 0; m < no_of_fields; ++m) {
 					Player::Field& f = player->fields_[m];
-					Vision saved_vision = static_cast<Widelands::Vision>(stoi(field_vector[m]));
-					assert(f.vision == 1 || f.vision % 2 == 0);
-					if (saved_vision == 1) {
-						assert(f.vision <= 1);
+					Vision saved_vision = Vision(stoi(field_vector[m]));
+					assert(f.vision.value == 1 || f.vision.value % 2 == 0);
+					if (saved_vision.value == 1) {
+						assert(f.vision.value <= 1);
 						f.vision = 1;
-					} else if (saved_vision % 2 == 1) {
-						f.vision = std::max(f.vision, static_cast<Widelands::Vision>(2)) + 1;
-						assert(f.vision > 2);
-						assert(f.vision % 2 == 1);
+					} else if (saved_vision.value % 2 == 1) {
+						if (f.vision.value < 2) {
+							f.vision = 2;
+						}
+						f.vision = f.vision.value + 1;
+						assert(f.vision.value > 2);
+						assert(f.vision.value % 2 == 1);
 					}
-					if (saved_vision != f.vision) {
+					if (saved_vision.value != f.vision.value) {
 						log_err("player%u(%d,%d): saved_vision %u != %u f.vision\n", p,
-						        map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision,
-						        f.vision);
+						        map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision.value,
+						        f.vision.value);
 					}
-					assert(saved_vision == f.vision);
-					if (f.is_explored() && !f.is_visible()) {
+					assert(saved_vision.value == f.vision.value);
+					if (f.vision == VisibleState::kPreviouslySeen) {
 						seen_fields.insert(&f);
 					}
 				}
@@ -135,7 +138,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						assert(field_vector.size() == additionally_seen);
 						for (size_t i = 0; i < additionally_seen; ++i) {
 							Player::Field& f = player->fields_[stoi(field_vector[i])];
-							assert(f.vision == 0);
+							assert(!f.vision.is_explored());
 							seen_fields.insert(&f);
 						}
 					}
@@ -332,10 +335,11 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 					f.owner = fr.unsigned_8();
 
-					Vision saved_vision = static_cast<Vision>(fr.unsigned_8());
+					// Vision saved_vision = static_cast<Vision>(fr.unsigned_8());
+					fr.unsigned_8();
 					// f.vision = static_cast<Vision>(fr.unsigned_8());
 
-					if (f.is_explored() && !f.is_visible() && packet_version > 1) {
+					if (f.vision == VisibleState::kPreviouslySeen && packet_version > 1) {
 						continue;
 					}
 
@@ -478,8 +482,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			const MapIndex upper_bound = map.max_index() - 1;
 			for (MapIndex m = 0; m < upper_bound; ++m) {
 				const Player::Field& f = player->fields_[m];
-				oss << static_cast<unsigned>(f.vision) << "|";
-				if (f.is_explored() && !f.is_visible()) {
+				oss << static_cast<unsigned>(f.vision.value) << "|";
+				if (f.vision == VisibleState::kPreviouslySeen) {
 					seen_fields.insert(&f);
 					// The data for some of the terrains and edges between PreviouslySeen
 					// and Unexplored fields is stored in an Unexplored field. The data
@@ -487,15 +491,15 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 					const Coords coords(m % map.get_width(), m / map.get_width());
 					for (const Coords& c : {map.tr_n(coords), map.tl_n(coords), map.l_n(coords)}) {
 						const Player::Field& neighbour = player->fields_[map.get_index(c)];
-						if (neighbour.vision == 0) {
+						if (neighbour.vision == VisibleState::kUnexplored) {
 							additionally_seen_fields.insert(&neighbour);
 						}
 					}
 				}
 			}
 			const Player::Field& f = player->fields_[upper_bound];
-			oss << static_cast<unsigned>(f.vision);
-			if (f.is_explored() && !f.is_visible()) {
+			oss << static_cast<unsigned>(f.vision.value);
+			if (f.vision == VisibleState::kPreviouslySeen) {
 				seen_fields.insert(&f);
 			}
 			fw.c_string(oss.str());
