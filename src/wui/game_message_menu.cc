@@ -44,7 +44,7 @@ constexpr int kMessageBodyY = kButtonSize + 3 * kPadding + kTableHeight;
 
 GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(
-        &plr, "messages", &registry, kWindowWidth, kWindowHeight, _("Messages: Inbox")),
+        &plr, "messages", &registry, kWindowWidth, kWindowHeight, _("Messages: Inbox"), true),
      message_body(this,
                   kPadding,
                   kMessageBodyY,
@@ -147,6 +147,8 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	list->layout();
 
 	list->focus();
+
+	set_visible(true);
 }
 
 /**

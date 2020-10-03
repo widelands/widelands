@@ -62,7 +62,8 @@ struct UniqueWindow : public Window {
 	             Registry*,
 	             int32_t w,
 	             int32_t h,
-	             const std::string& title);
+	             const std::string& title,
+	             bool initially_invisible = false);
 	virtual ~UniqueWindow();
 
 	bool get_usedefaultpos() {
