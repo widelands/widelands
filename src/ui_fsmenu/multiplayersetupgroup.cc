@@ -659,7 +659,6 @@ void MultiPlayerSetupGroup::update_players() {
 		                              buth_, i, settings_, npsb.get()));
 		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
 	}
-	
 	for (auto& p : multi_player_player_groups) {
 		p->update();
 	}
