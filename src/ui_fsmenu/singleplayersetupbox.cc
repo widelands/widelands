@@ -140,7 +140,7 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
             g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
-	add(&scrollableBox_, Resizing::kAlign, UI::Align::kCenter);
+	add(&scrollableBox_, Resizing::kExpandBoth);
 	scrollableBox_.set_scrolling(true);
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
 		if (n.action == NoteGameSettings::Action::kMap) {
@@ -157,8 +157,8 @@ void SinglePlayerSetupBox::update() {
 
 	for (PlayerSlot i = active_player_groups.size(); i < number_of_players; ++i) {
 		active_player_groups.push_back(
-		   new SinglePlayerActivePlayerGroup(this, 0, standard_height, i, settings_));
-		add(active_player_groups.at(i), Resizing::kFullSize);
+		   new SinglePlayerActivePlayerGroup(&scrollableBox_, 0, standard_height, i, settings_));
+		scrollableBox_.add(active_player_groups.at(i), Resizing::kFullSize);
 	}
 }
 
