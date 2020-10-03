@@ -70,5 +70,6 @@ private:
 	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups;  // not owned
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 	void update();
+	void reset();
 };
 #endif  // WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H
