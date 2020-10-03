@@ -334,8 +334,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Whether the client who is running the UI is allowed to change the tribe for this player slot.
 	bool has_tribe_access() const {
 		return settings_->settings().players[id_].state == PlayerSettings::State::kShared ?
-		          settings_->can_change_player_init(id_) :
-		          settings_->can_change_player_tribe(id_);
+                settings_->can_change_player_init(id_) :
+                settings_->can_change_player_tribe(id_);
 	}
 
 	/// This will update the game settings for the tribe or shared_in with the value
@@ -347,8 +347,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_settings = settings_->settings().players[id_];
 		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-		                                      UI::ButtonDisableStyle::kPermpressed :
-		                                      UI::ButtonDisableStyle::kFlat);
+                                            UI::ButtonDisableStyle::kPermpressed :
+                                            UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
 				n->set_player_shared(
@@ -653,14 +653,13 @@ void MultiPlayerSetupGroup::update_players() {
 	const GameSettings& settings = settings_->settings();
 	const size_t number_of_players = settings.players.size();
 
-	if (number_of_players > multi_player_player_groups.size()) {
-		for (PlayerSlot i = multi_player_player_groups.size(); i < number_of_players; ++i) {
-			multi_player_player_groups.push_back(new MultiPlayerPlayerGroup(
-			   &scrollable_playerbox, playerbox.get_w() - UI::Scrollbar::kSize, buth_, i, settings_,
-			   npsb.get()));
-			scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
-		}
+	for (PlayerSlot i = multi_player_player_groups.size(); i < number_of_players; ++i) {
+		multi_player_player_groups.push_back(
+		   new MultiPlayerPlayerGroup(&scrollable_playerbox, playerbox.get_w() - UI::Scrollbar::kSize,
+		                              buth_, i, settings_, npsb.get()));
+		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
 	}
+	
 	for (auto& p : multi_player_player_groups) {
 		p->update();
 	}
