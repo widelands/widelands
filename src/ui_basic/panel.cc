@@ -210,7 +210,8 @@ void Panel::logic_thread() {
  * clicked the window's close button or similar).
  */
 int Panel::do_run() {
-	logic_thread_locked_ = LogicThreadState::kEndingConfirmed;  // don't start the logic thread ere we're ready
+	logic_thread_locked_ =
+	   LogicThreadState::kEndingConfirmed;  // don't start the logic thread ere we're ready
 
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication* const app = WLApplication::get();
@@ -278,7 +279,9 @@ int Panel::do_run() {
 			// until the logic frame has ended. During this time, we no longer
 			// handle input, and we gray out the user interface to indicate this.
 
-			rt.tile(Recti(x_, y_, w_, h_), g_image_cache->get(std::string(kTemplateDir) + "loadscreens/ending.png"), Vector2i(0, 0));
+			rt.tile(Recti(x_, y_, w_, h_),
+			        g_image_cache->get(std::string(kTemplateDir) + "loadscreens/ending.png"),
+			        Vector2i(0, 0));
 
 			draw_game_tip(_("Game ending – please wait…"), true);
 		}
@@ -341,7 +344,8 @@ int Panel::do_run() {
 	// so we continue refreshing the graphics while we wait.
 	if (logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
 		logic_thread_locked_ = LogicThreadState::kEndingRequested;
-		while ((flags_ & pf_logic_think) && logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
+		while ((flags_ & pf_logic_think) &&
+		       logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
 			const uint32_t start_time = SDL_GetTicks();
 
 			handle_notes();
