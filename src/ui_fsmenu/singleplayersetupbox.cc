@@ -129,7 +129,7 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      settings_(settings),
      standard_height(standard_element_height),
-     scrollableBox_(this, 0, 0, UI::Box::Vertical),
+     scrollable_playerbox(this, 0, 0, UI::Box::Vertical),
      title_(this,
             0,
             0,
@@ -140,8 +140,8 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
             g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
-	add(&scrollableBox_, Resizing::kExpandBoth);
-	scrollableBox_.set_scrolling(true);
+	add(&scrollable_playerbox, Resizing::kExpandBoth);
+	scrollable_playerbox.set_scrolling(true);
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
 		if (n.action == NoteGameSettings::Action::kMap) {
 			reset();
@@ -156,9 +156,13 @@ void SinglePlayerSetupBox::update() {
 	const size_t number_of_players = settings.players.size();
 
 	for (PlayerSlot i = active_player_groups.size(); i < number_of_players; ++i) {
-		active_player_groups.push_back(
-		   new SinglePlayerActivePlayerGroup(&scrollableBox_, 0, standard_height, i, settings_));
-		scrollableBox_.add(active_player_groups.at(i), Resizing::kFullSize);
+		active_player_groups.push_back(new SinglePlayerActivePlayerGroup(
+		   &scrollable_playerbox, 0, standard_height, i, settings_));
+		scrollable_playerbox.add(active_player_groups.at(i), Resizing::kFullSize);
+	}
+
+	for (auto& p : active_player_groups) {
+		p->update();
 	}
 }
 

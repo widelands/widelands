@@ -65,7 +65,7 @@ public:
 private:
 	GameSettingsProvider* const settings_;
 	uint32_t standard_height;
-	UI::Box scrollableBox_;
+	UI::Box scrollable_playerbox;
 	UI::Textarea title_;
 	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups;  // not owned
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
