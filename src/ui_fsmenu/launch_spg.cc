@@ -71,7 +71,7 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 	const MapData& mapdata = *msm.get_map();
 
 	settings_->set_map(mapdata.name, mapdata.filename, mapdata.nrplayers);
-   Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
 	update_win_conditions();
 	update_peaceful_mode();
