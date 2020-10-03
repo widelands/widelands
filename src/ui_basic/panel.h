@@ -77,6 +77,8 @@ public:
 		pf_handle_textinput = 1024,
 		/// whether widget and its children will handle any key presses
 		pf_handle_keypresses = 2048,
+		// has a non-empty logic_think() implementation
+		pf_logic_think = 4096,
 	};
 
 	Panel(Panel* const nparent,
@@ -232,6 +234,10 @@ public:
 	virtual void think();
 	virtual void game_logic_think() {
 		// Overridden only by InteractiveBase
+	}
+
+	void set_logic_think() {
+		flags_ |= pf_logic_think;
 	}
 
 	Vector2i get_mouse_position() const;
@@ -423,7 +429,8 @@ private:
 
 	static FxId click_fx_;
 
-	bool logic_thread_locked_;
+	enum class LogicThreadState { kFree, kLocked, kEndingRequested, kEndingConfirmed };
+	LogicThreadState logic_thread_locked_;
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };

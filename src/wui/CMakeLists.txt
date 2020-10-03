@@ -195,9 +195,7 @@ wl_library(wui_game_tips
   DEPENDS
     base_i18n
     base_log
-    graphic
-    graphic_fonthandler
-    graphic_text_layout
+    graphic_functions
     scripting_lua_table
     scripting_lua_interface
     ui_basic

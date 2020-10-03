@@ -23,9 +23,11 @@
 
 #include <SDL_timer.h>
 
+#include "base/i18n.h"
 #include "base/multithreading.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/graphic_functions.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -77,7 +79,7 @@ Panel::Panel(Panel* const nparent,
      desired_h_(nh),
      running_(false),
      tooltip_(tooltip_text),
-     logic_thread_locked_(false) {
+     logic_thread_locked_(LogicThreadState::kEndingConfirmed) {
 	assert(nparent != this);
 	if (parent_) {
 		next_ = parent_->first_child_;
@@ -156,13 +158,37 @@ void Panel::logic_thread() {
 	WLApplication* const app = WLApplication::get();
 
 	uint32_t next_think_time;
+
 	while (!app->should_die()) {
 		uint32_t time = SDL_GetTicks();
 
-		if (modal_ && !modal_->logic_thread_locked_) {
-			modal_->logic_thread_locked_ = true;
-			modal_->game_logic_think();
-			modal_->logic_thread_locked_ = false;
+		if (modal_ && (modal_->flags_ & pf_logic_think)) {
+			switch (modal_->logic_thread_locked_) {
+			case LogicThreadState::kFree:
+				modal_->logic_thread_locked_ = LogicThreadState::kLocked;
+
+				modal_->game_logic_think();  // actual game logic
+
+				switch (modal_->logic_thread_locked_) {
+				case LogicThreadState::kLocked:
+					modal_->logic_thread_locked_ = LogicThreadState::kFree;
+					break;
+				case LogicThreadState::kEndingRequested:
+					modal_->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
+					break;
+				default:
+					NEVER_HERE();
+				}
+				break;
+
+			case LogicThreadState::kEndingRequested:
+				modal_->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
+				break;
+			case LogicThreadState::kEndingConfirmed:
+				break;
+			default:
+				NEVER_HERE();
+			}
 		}
 
 		next_think_time = time + kGameLogicDelay;
@@ -181,6 +207,8 @@ void Panel::logic_thread() {
  * clicked the window's close button or similar).
  */
 int Panel::do_run() {
+	logic_thread_locked_ = LogicThreadState::kEndingConfirmed;  // don't start the logic thread ere we're ready
+
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication* const app = WLApplication::get();
 	Panel* const prevmodal = modal_;
@@ -234,6 +262,41 @@ int Panel::do_run() {
 			notes.pop_front();
 		};
 	};
+	auto do_update_graphics = [this, handle_notes, app, forefather](const bool ending) {
+		RenderTarget& rt = *g_gr->get_render_target();
+
+		{
+			MutexLock m(MutexLock::ID::kObjects, handle_notes);
+			forefather->do_draw(rt);
+		}
+
+		if (ending) {
+			// After the user clicked on Quit, it may sometimes take many seconds
+			// until the logic frame has ended. During this time, we no longer
+			// handle input, and we gray out the user interface to indicate this.
+
+			rt.tile(Recti(x_, y_, w_, h_), g_image_cache->get(std::string(kTemplateDir) + "loadscreens/ending.png"), Vector2i(0, 0));
+
+			draw_game_tip(_("Game ending – please wait…"));
+		}
+
+		if (g_mouse_cursor->is_visible()) {
+			g_mouse_cursor->change_cursor(app->is_mouse_pressed());
+			g_mouse_cursor->draw(rt, app->get_mouse_position());
+
+			if (!ending) {
+				if (is_modal()) {
+					do_tooltip();
+				} else {
+					forefather->do_tooltip();
+				}
+			}
+		}
+
+		g_gr->refresh();
+	};
+
+	logic_thread_locked_ = LogicThreadState::kFree;  // tell the logic thread we're ready
 
 	uint32_t next_time = SDL_GetTicks();
 	while (running_) {
@@ -249,13 +312,8 @@ int Panel::do_run() {
 
 		if (start_time >= next_time) {
 			if (app->should_die()) {
-				while (logic_thread_locked_) {
-					handle_notes();
-					SDL_Delay(5);
-				}
-				logic_thread_locked_ = true;
 				end_modal<Returncodes>(Returncodes::kBack);
-				break;
+				assert(!running_);
 			}
 
 			do_think();
@@ -263,36 +321,45 @@ int Panel::do_run() {
 			check_child_death();
 
 			if (is_initializer) {
-				RenderTarget& rt = *g_gr->get_render_target();
-				{
-					MutexLock m(MutexLock::ID::kObjects, handle_notes);
-					forefather->do_draw(rt);
-				}
-				if (g_mouse_cursor->is_visible()) {
-					g_mouse_cursor->change_cursor(app->is_mouse_pressed());
-					g_mouse_cursor->draw(rt, app->get_mouse_position());
-					if (is_modal()) {
-						do_tooltip();
-					} else {
-						forefather->do_tooltip();
-					}
-				}
-				g_gr->refresh();
+				do_update_graphics(false);
 			}
 
 			next_time = start_time + draw_delay;
 		}
 
 		const int32_t delay = next_time - SDL_GetTicks();
+		if (running_ && delay > 0) {
+			SDL_Delay(delay);
+		}
+	}
+
+	// Wait until the current logic frame ends or there may be segfaults.
+	// This may take quite a while if the game was running at low LOGIC-FPS,
+	// so we continue refreshing the graphics while we wait.
+	assert(logic_thread_locked_ == LogicThreadState::kFree || logic_thread_locked_ == LogicThreadState::kLocked);
+	logic_thread_locked_ = LogicThreadState::kEndingRequested;
+	while ((flags_ & pf_logic_think) && logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
+		const uint32_t start_time = SDL_GetTicks();
+
+		handle_notes();
+
+		if (is_initializer) {
+			do_update_graphics(true);
+		}
+
+		next_time = start_time + draw_delay;
+		const int32_t delay = next_time - SDL_GetTicks();
 		if (delay > 0) {
 			SDL_Delay(delay);
 		}
 	}
+
+	// Unsubscribe from notes, and eliminate old minimap rendering requests and other garbarge
 	subscriber2.reset();
 	subscriber1.reset();
+	handle_notes();
 
-	handle_notes();  // eliminate outdated minimap rendering requests and other garbarge
-
+	// Panel-specific post-running code
 	end();
 
 	// Done

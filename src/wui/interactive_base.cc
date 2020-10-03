@@ -256,6 +256,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	setDefaultCommand([this](const std::vector<std::string>& str) { cmd_lua(str); });
 	addCommand("mapobject", [this](const std::vector<std::string>& str) { cmd_map_object(str); });
+
+	// Inform panel code that we have logic-related code
+	set_logic_think();
 }
 
 InteractiveBase::~InteractiveBase() {

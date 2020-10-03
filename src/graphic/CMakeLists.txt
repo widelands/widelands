@@ -314,6 +314,18 @@ wl_library(graphic_mouse_cursor
 )
 
 
+# Misc high-level helper and convenience functions
+
+wl_library(graphic_functions
+  SRCS
+    graphic_functions.cc
+    graphic_functions.h
+  DEPENDS
+    graphic
+    graphic_fonthandler
+    graphic_text_layout
+)
+
 # Base library
 
 wl_library(graphic

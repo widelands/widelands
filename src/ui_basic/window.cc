@@ -100,7 +100,8 @@ Window::Window(Panel* const parent,
                int32_t const y,
                uint32_t const w,
                uint32_t const h,
-               const std::string& title)
+               const std::string& title,
+               const bool initially_invisible)
    : NamedPanel(parent,
                 name,
                 x,
@@ -182,7 +183,9 @@ Window::Window(Panel* const parent,
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& note) { on_resolution_changed_note(note); });
 
-	set_visible(true);
+	if (!initially_invisible) {
+		set_visible(true);
+	}
 }
 
 void Window::update_toolbar_buttons() {

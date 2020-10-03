@@ -43,7 +43,6 @@ struct ActionConfirm : public UI::Window {
 		return dynamic_cast<InteractivePlayer&>(*get_parent());
 	}
 
-	void think() override = 0;
 	virtual void ok() = 0;
 
 protected:
@@ -130,7 +129,7 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
                              const std::string& message,
                              Widelands::MapObject& map_object,
                              const std::string& checkbox)
-   : UI::Window(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle),
+   : UI::Window(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle, true),
      object_(&map_object),
      checkbox_(nullptr) {
 	const int padding = 6;
@@ -171,6 +170,8 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 
 	center_to_parent();
 	cancelbtn->center_mouse();
+
+	set_visible(true);
 }
 
 /*

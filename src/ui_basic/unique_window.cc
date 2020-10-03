@@ -62,7 +62,9 @@ void UniqueWindow::Registry::toggle() {
 			opened();
 		} else {
 			// Delete rather than die() to make dropdown lists behave
-			delete window;
+			// delete window;
+			window->die();
+			// window = nullptr;
 		}
 	} else {
 		open_window();
@@ -74,7 +76,12 @@ void UniqueWindow::Registry::toggle() {
  * here.
  */
 UniqueWindow::Registry::~Registry() {
-	delete window;
+	// delete window;
+	if (window) {
+		// window->die();
+		// window = nullptr;
+		delete window;
+	}
 }
 
 /**
@@ -88,7 +95,10 @@ UniqueWindow::UniqueWindow(Panel* const parent,
                            const std::string& title)
    : Window(parent, name, 0, 0, w, h, title.c_str()), registry_(reg), usedefaultpos_(true) {
 	if (registry_) {
-		delete registry_->window;
+		// delete registry_->window;
+		if (registry_->window) {
+			registry_->window->die();
+		}
 
 		registry_->window = this;
 		if (registry_->valid_pos) {
