@@ -76,6 +76,17 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				std::set<Player::Field*> seen_fields;
 
+				// TODO(Niektory): Savegame compatibility
+				std::set<MapIndex> revealed_fields = {};
+				if (packet_version <= 4) {
+					const unsigned no_revealed_fields = fr.unsigned_32();
+					for (unsigned i = 0; i < no_revealed_fields; ++i) {
+						const MapIndex revealed_index = fr.unsigned_32();
+						revealed_fields.insert(revealed_index);
+						player->rediscover_node(map, map.get_fcoords(map[revealed_index]));
+					}
+				}
+
 				// Read numerical field infos as combined strings to reduce number of hard disk write
 				// operations
 
@@ -96,25 +107,44 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				for (MapIndex m = 0; m < no_of_fields; ++m) {
 					Player::Field& f = player->fields_[m];
-					Vision saved_vision = Vision(stoi(field_vector[m]));
-					assert(f.vision.value == 1 || f.vision.value % 2 == 0);
-					if (saved_vision.value == 1) {
-						assert(f.vision.value <= 1);
-						f.vision = 1;
-					} else if (saved_vision.value % 2 == 1) {
-						if (f.vision.value < 2) {
-							f.vision = 2;
+
+					// TODO(Niektory): Savegame compatibility
+					if (packet_version <= 4) {
+						VisibleState saved_vision = static_cast<VisibleState>(stoi(field_vector[m]));
+						if (f.vision == VisibleState::kUnexplored &&
+						    saved_vision == VisibleState::kPreviouslySeen) {
+							f.vision.value = 1;
 						}
-						f.vision = f.vision.value + 1;
-						assert(f.vision.value > 2);
-						assert(f.vision.value % 2 == 1);
+						if (revealed_fields.count(m)) {
+							if (f.vision.value < 2) {
+								f.vision.value = 2;
+							}
+							if (f.vision.value % 2 == 0) {
+								++f.vision.value;
+							}
+						}
+					} else {
+						Vision saved_vision = Vision(stoi(field_vector[m]));
+						assert(f.vision.value == 1 || f.vision.value % 2 == 0);
+						if (saved_vision.value == 1) {
+							assert(f.vision.value <= 1);
+							f.vision = 1;
+						} else if (saved_vision.value % 2 == 1) {
+							if (f.vision.value < 2) {
+								f.vision = 2;
+							}
+							f.vision = f.vision.value + 1;
+							assert(f.vision.value > 2);
+							assert(f.vision.value % 2 == 1);
+						}
+						if (saved_vision.value != f.vision.value) {
+							log_err("player%u(%d,%d): saved_vision %u != %u f.vision\n", p,
+							        map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y,
+							        saved_vision.value, f.vision.value);
+						}
+						assert(saved_vision.value == f.vision.value);
 					}
-					if (saved_vision.value != f.vision.value) {
-						log_err("player%u(%d,%d): saved_vision %u != %u f.vision\n", p,
-						        map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y, saved_vision.value,
-						        f.vision.value);
-					}
-					assert(saved_vision.value == f.vision.value);
+
 					if (f.vision == VisibleState::kPreviouslySeen) {
 						seen_fields.insert(&f);
 					}
@@ -138,7 +168,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						assert(field_vector.size() == additionally_seen);
 						for (size_t i = 0; i < additionally_seen; ++i) {
 							Player::Field& f = player->fields_[stoi(field_vector[i])];
-							assert(!f.vision.is_explored());
+							assert(f.vision == VisibleState::kUnexplored);
 							seen_fields.insert(&f);
 						}
 					}
@@ -325,25 +355,33 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 			for (uint8_t i = fr.unsigned_8(); i; --i) {
 				Player& player = *egbase.get_player(fr.unsigned_8());
 
-				/*player.revealed_fields_.clear();
+				std::set<MapIndex> revealed_fields = {};
 				for (uint32_t j = fr.unsigned_32(); j; --j) {
-				   player.revealed_fields_.insert(fr.unsigned_32());
-				}*/
+					revealed_fields.insert(fr.unsigned_32());
+				}
 
 				for (MapIndex m = map.max_index(); m; --m) {
 					Player::Field& f = player.fields_[m - 1];
 
 					f.owner = fr.unsigned_8();
 
-					// Vision saved_vision = static_cast<Vision>(fr.unsigned_8());
-					fr.unsigned_8();
-					// f.vision = static_cast<Vision>(fr.unsigned_8());
-
-					if (f.vision == VisibleState::kPreviouslySeen && packet_version > 1) {
-						continue;
+					VisibleState saved_vision = static_cast<VisibleState>(fr.unsigned_8());
+					if (f.vision == VisibleState::kUnexplored &&
+					    saved_vision == VisibleState::kPreviouslySeen) {
+						f.vision.value = 1;
+					}
+					if (revealed_fields.count(m - 1)) {
+						if (f.vision.value < 2) {
+							f.vision.value = 2;
+						}
+						if (f.vision.value % 2 == 0) {
+							++f.vision.value;
+						}
 					}
 
-					// f.vision = 0;
+					if (f.vision != VisibleState::kPreviouslySeen && packet_version > 1) {
+						continue;
+					}
 
 					f.time_node_last_unseen = fr.unsigned_32();
 					f.time_triangle_last_surveyed[0] = fr.unsigned_32();
