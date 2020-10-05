@@ -22,7 +22,7 @@ install:
   - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
   # Update keyring
   # - cmd: "bash --login -c \"pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz\""
-  - cmd: "bash --login -c \"pacman --noconfirm -U http://www2.futureware.at/~nickoe/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz\""
+  - cmd: "bash --login -c \"pacman --noconfirm -U http://www2.futureware.at/~nickoe/msys2-mirror/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz\""
   # Update mirrors
   - cmd: "bash --login -c \"pacman --noconfirm -Sy pacman pacman-mirrors\""
   # deleting broken repo from mirrorlist
