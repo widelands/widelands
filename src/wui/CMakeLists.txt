@@ -261,8 +261,6 @@ wl_library(wui
     militarysitewindow.h
     minimap.cc
     minimap.h
-    playerdescrgroup.cc
-    playerdescrgroup.h
     plot_area.cc
     plot_area.h
     portdockwaresdisplay.cc
@@ -331,9 +329,7 @@ wl_library(wui
     logic_map
     logic_map_objects
     logic_objectives
-    logic_tribe_basic_info
     logic_widelands_geometry
-    map_io_map_loader
     network
     note_sound
     notifications
