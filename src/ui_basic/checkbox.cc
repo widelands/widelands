@@ -91,7 +91,6 @@ void Statebox::layout() {
 			h = std::max(rendered_text_->height(), h);
 		}
 		set_desired_size(w, h);
-		set_size(w, h);
 	}
 }
 
