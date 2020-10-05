@@ -145,9 +145,12 @@ end
 --    :returns: :const:`true` if a button was clicked
 --
 function click_button(name)
+   sleep(5000)
+
    for button_name, button in pairs(wl.ui.MapView().buttons) do
       if button_name == name then
          button:click()
+         sleep(5000)
          return true
       end
    end
@@ -156,6 +159,7 @@ function click_button(name)
       for button_name, button in pairs(window.buttons) do
          if button_name == name then
             button:click()
+            sleep(5000)
             return true
          end
       end

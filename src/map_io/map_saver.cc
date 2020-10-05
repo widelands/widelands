@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/log.h"
+#include "base/multithreading.h"
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "graphic/image_io.h"
@@ -315,14 +316,15 @@ void MapSaver::save() {
 #endif
 
 	// Write minimap
-	{
-		set_progress_message(_("Minimap"), 22);
-		std::unique_ptr<Texture> minimap(
-		   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
-		FileWrite fw;
-		save_to_png(minimap.get(), &fw, ColorType::RGBA);
-		fw.write(fs_, "minimap.png");
-	}
+	set_progress_message(_("Minimap"), 22);
+	NoteThreadSafeFunction::instantiate(
+	   [this]() {
+	   std::unique_ptr<Texture> minimap(
+	      draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
+	   FileWrite fw;
+	   save_to_png(minimap.get(), &fw, ColorType::RGBA);
+	   fw.write(fs_, "minimap.png");
+	}, true);
 }
 
 }  // namespace Widelands

@@ -98,6 +98,7 @@ wl_library(map_io
     base_exceptions
     base_log
     base_macros
+    base_multithreading
     base_scoped_timer
     economy
     graphic_image_cache
