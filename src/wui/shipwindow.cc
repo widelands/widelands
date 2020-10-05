@@ -180,7 +180,6 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Wi
 	// Init button visibility
 	navigation_box_.set_visible(false);
 	btn_cancel_expedition_->set_enabled(false);
-	think();
 }
 
 void ShipWindow::set_button_visibility() {

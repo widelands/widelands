@@ -127,7 +127,6 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		get_tabs()->add("workers", g_image_cache->get(pic_tab_workers), worker_box, workers_heading);
 		update_worker_table(production_site);
 	}
-	think();
 }
 
 void ProductionSiteWindow::think() {

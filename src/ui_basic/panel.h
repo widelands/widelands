@@ -431,6 +431,7 @@ private:
 
 	enum class LogicThreadState { kFree, kLocked, kEndingRequested, kEndingConfirmed };
 	LogicThreadState logic_thread_locked_;
+	static bool logic_thread_running_;
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };

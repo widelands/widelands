@@ -20,6 +20,7 @@
 #include "wui/buildingwindow.h"
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -85,8 +86,10 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		case Widelands::NoteBuilding::Action::kChanged:
 			if (!is_dying_) {
 				const std::string active_tab = tabs_->tabs()[tabs_->active()]->get_name();
-				init(true, showing_workarea_);
-				tabs_->activate(active_tab);
+					NoteThreadSafeFunction::instantiate([this, active_tab]() {
+					init(true, showing_workarea_);
+					tabs_->activate(active_tab);
+				}, false);
 			}
 			break;
 		// The building is no more. Next think() will call die().
@@ -165,6 +168,8 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 ===============
 */
 void BuildingWindow::think() {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (building == nullptr || !igbase()->can_see(building->owner().player_number())) {
 		die();

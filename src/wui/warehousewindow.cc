@@ -205,5 +205,4 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 			                _("Expedition"));
 		}
 	}
-	think();
 }

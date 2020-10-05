@@ -198,6 +198,8 @@ void Texture::init(uint16_t w, uint16_t h) {
 }
 
 void Texture::lock() {
+	assert(is_initializer_thread());
+
 	if (blit_data_.texture_id == 0) {
 		return;
 	}
@@ -216,6 +218,8 @@ void Texture::lock() {
 }
 
 void Texture::unlock(UnlockMode mode) {
+	assert(is_initializer_thread());
+
 	if (width() <= 0 || height() <= 0) {
 		return;
 	}

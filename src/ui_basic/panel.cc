@@ -152,9 +152,11 @@ void Panel::free_children() {
 	first_child_ = nullptr;
 }
 
+bool Panel::logic_thread_running_(false);
 constexpr uint32_t kGameLogicDelay = 1000 / 15;
 // static
 void Panel::logic_thread() {
+	logic_thread_running_ = true;
 	WLApplication* const app = WLApplication::get();
 
 	uint32_t next_think_time;
@@ -197,9 +199,7 @@ void Panel::logic_thread() {
 			SDL_Delay(next_think_time - time);
 		}
 	}
-	if (modal_) {
-		modal_->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
-	}
+	logic_thread_running_ = false;
 }
 
 /**
@@ -342,9 +342,10 @@ int Panel::do_run() {
 	// Wait until the current logic frame ends or there may be segfaults.
 	// This may take quite a while if the game was running at low LOGIC-FPS,
 	// so we continue refreshing the graphics while we wait.
-	if (logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
+	if (logic_thread_locked_ != LogicThreadState::kEndingConfirmed && logic_thread_running_) {
 		logic_thread_locked_ = LogicThreadState::kEndingRequested;
 		while ((flags_ & pf_logic_think) &&
+		       logic_thread_running_ &&
 		       logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
 			const uint32_t start_time = SDL_GetTicks();
 
@@ -681,6 +682,11 @@ void Panel::do_think() {
 
 	if (thinks()) {
 		think();
+	}
+
+	// think() may have called die()
+	if (flags_ & pf_die) {
+		return;
 	}
 
 	for (Panel* child = first_child_; child; child = child->next_) {

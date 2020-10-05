@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/multithreading.h"
 #include "build_info.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
@@ -115,6 +116,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 		return;
 	}
 
+	NoteThreadSafeFunction::instantiate([&game, &fs, ipl]() {
 	std::unique_ptr<::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
 	if (sw != nullptr) {
 		const MiniMapLayer layers =
@@ -130,5 +132,6 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 		save_to_png(texture.get(), sw.get(), ColorType::RGBA);
 		sw->flush();
 	}
+	}, true);
 }
 }  // namespace Widelands
