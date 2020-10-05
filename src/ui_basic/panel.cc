@@ -344,8 +344,7 @@ int Panel::do_run() {
 	// so we continue refreshing the graphics while we wait.
 	if (logic_thread_locked_ != LogicThreadState::kEndingConfirmed && logic_thread_running_) {
 		logic_thread_locked_ = LogicThreadState::kEndingRequested;
-		while ((flags_ & pf_logic_think) &&
-		       logic_thread_running_ &&
+		while ((flags_ & pf_logic_think) && logic_thread_running_ &&
 		       logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
 			const uint32_t start_time = SDL_GetTicks();
 
