@@ -653,13 +653,11 @@ void MultiPlayerSetupGroup::update_players() {
 	const GameSettings& settings = settings_->settings();
 	const size_t number_of_players = settings.players.size();
 
-	if (number_of_players > multi_player_player_groups.size()) {
-		for (PlayerSlot i = multi_player_player_groups.size(); i < number_of_players; ++i) {
-			multi_player_player_groups.push_back(new MultiPlayerPlayerGroup(
-			   &scrollable_playerbox, playerbox.get_w() - UI::Scrollbar::kSize, buth_, i, settings_,
-			   npsb.get()));
-			scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
-		}
+	for (PlayerSlot i = multi_player_player_groups.size(); i < number_of_players; ++i) {
+		multi_player_player_groups.push_back(
+		   new MultiPlayerPlayerGroup(&scrollable_playerbox, playerbox.get_w() - UI::Scrollbar::kSize,
+		                              buth_, i, settings_, npsb.get()));
+		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFullSize);
 	}
 	for (auto& p : multi_player_player_groups) {
 		p->update();
