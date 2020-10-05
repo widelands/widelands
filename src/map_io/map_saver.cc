@@ -319,12 +319,13 @@ void MapSaver::save() {
 	set_progress_message(_("Minimap"), 22);
 	NoteThreadSafeFunction::instantiate(
 	   [this]() {
-	   std::unique_ptr<Texture> minimap(
-	      draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
-	   FileWrite fw;
-	   save_to_png(minimap.get(), &fw, ColorType::RGBA);
-	   fw.write(fs_, "minimap.png");
-	}, true);
+		   std::unique_ptr<Texture> minimap(draw_minimap(
+		      egbase_, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
+		   FileWrite fw;
+		   save_to_png(minimap.get(), &fw, ColorType::RGBA);
+		   fw.write(fs_, "minimap.png");
+	   },
+	   true);
 }
 
 }  // namespace Widelands
