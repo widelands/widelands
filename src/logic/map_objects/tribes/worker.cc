@@ -391,7 +391,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 					} else {
 						Coords const coord = imm->get_position();
 						MapIndex mapidx = map.get_index(coord, map.get_width());
-						if (!owner().get_vision(mapidx).is_explored()) {
+						if (owner().get_vision(mapidx) == VisibleState::kUnexplored) {
 							list.erase(list.begin() + idx);
 						}
 					}

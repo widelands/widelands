@@ -425,10 +425,13 @@ public:
 		return fields_.get();
 	}
 
-	Vision get_vision(MapIndex) const;
-	bool is_seeing(MapIndex i) const {
-		return get_vision(i).is_visible();
-	}
+	/// Returns whether the field is kUnexplored, kPreviouslySeen or kVisible.
+	/// Always kVisible in see_all mode.
+	VisibleState get_vision(MapIndex) const;
+
+	/// Returns whether this player is currently seeing this field.
+	/// Always true in see_all mode.
+	bool is_seeing(MapIndex) const;
 
 	/// Increment this player's vision for this node.
 	void see_node(MapIndex);

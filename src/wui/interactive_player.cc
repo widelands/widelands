@@ -60,7 +60,7 @@ namespace {
 float adjusted_field_brightness(const Widelands::FCoords& fcoords,
                                 const uint32_t gametime,
                                 const Widelands::Player::Field& pf) {
-	if (!pf.vision.is_explored()) {
+	if (pf.vision == Widelands::VisibleState::kUnexplored) {
 		return 0.;
 	}
 
@@ -749,7 +749,7 @@ bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) cons
 	const Widelands::Map& map = egbase().map();
 	const Widelands::Player::Field& player_field =
 	   plr.fields()[map.get_index(coords, map.get_width())];
-	return player_field.vision.is_visible();
+	return player_field.vision == Widelands::VisibleState::kVisible;
 }
 
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {

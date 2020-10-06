@@ -1297,15 +1297,15 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		// right neighbour
 		const FCoords r = map.r_n(f);
 		const MapIndex r_index = map.get_index(r, mapwidth);
-		const VisibleState r_vision = get_vision(r_index);
+		const VisibleState r_vision = fields()[r_index].vision;
 		// bottom right neighbour
 		const FCoords br = map.br_n(f);
 		const MapIndex br_index = map.get_index(br, mapwidth);
-		const VisibleState br_vision = get_vision(br_index);
+		const VisibleState br_vision = fields()[br_index].vision;
 		// bottom left neighbour
 		const FCoords bl = map.bl_n(f);
 		const MapIndex bl_index = map.get_index(bl, mapwidth);
-		const VisibleState bl_vision = get_vision(bl_index);
+		const VisibleState bl_vision = fields()[bl_index].vision;
 
 		field.border = f.field->is_border();
 		// draw a border if both nodes are borders belonging to the same player for all we know
@@ -1330,7 +1330,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 						map_object_descr = nullptr;
 						FCoords main_coords = map.get_fcoords(building->get_position());
 						Field& field_main = fields_[main_coords.field - &first_map_field];
-						if (!field_main.vision.is_visible()) {
+						if (field_main.vision != VisibleState::kVisible) {
 							rediscover_node(map, main_coords);
 							field_main.time_node_last_unseen = egbase().get_gametime();
 							field_main.vision = 1;
@@ -1353,7 +1353,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	{  //  discover the D triangle and the SW edge of the top right neighbour
 		FCoords tr = map.tr_n(f);
 		Field& tr_field = fields_[tr.field - &first_map_field];
-		if (!tr_field.vision.is_visible()) {
+		if (tr_field.vision != VisibleState::kVisible) {
 			tr_field.terrains.d = tr.field->terrain_d();
 			tr_field.r_sw = tr.field->get_road(WALK_SW);
 			tr_field.owner = tr.field->get_owned_by();
@@ -1362,7 +1362,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	{  //  discover both triangles and the SE edge of the top left  neighbour
 		FCoords tl = map.tl_n(f);
 		Field& tl_field = fields_[tl.field - &first_map_field];
-		if (!tl_field.vision.is_visible()) {
+		if (tl_field.vision != VisibleState::kVisible) {
 			tl_field.terrains = tl.field->get_terrains();
 			tl_field.r_se = tl.field->get_road(WALK_SE);
 			tl_field.owner = tl.field->get_owned_by();
@@ -1371,7 +1371,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	{  //  discover the R triangle and the  E edge of the     left  neighbour
 		FCoords l = map.l_n(f);
 		Field& l_field = fields_[l.field - &first_map_field];
-		if (!l_field.vision.is_visible()) {
+		if (l_field.vision != VisibleState::kVisible) {
 			l_field.terrains.r = l.field->terrain_r();
 			l_field.r_e = l.field->get_road(WALK_E);
 			l_field.owner = l.field->get_owned_by();
@@ -1379,8 +1379,12 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 	}
 }
 
-Vision Player::get_vision(MapIndex const i) const {
-	return fields_[i].vision;
+VisibleState Player::get_vision(MapIndex const i) const {
+	return see_all() ? VisibleState::kVisible : fields_[i].vision;
+}
+
+bool Player::is_seeing(MapIndex const i) const {
+	return get_vision(i) == VisibleState::kVisible;
 }
 
 void Player::see_node(const MapIndex i) {
@@ -1399,7 +1403,7 @@ void Player::see_node(const MapIndex i) {
 	for (PlayerNumber player_number : team_players_) {
 		if (Player* team_player = egbase().get_player(player_number)) {
 			team_player->force_update_team_vision(i, true);
-			assert(team_player->get_vision(i).value >= 2);
+			assert(team_player->fields()[i].vision.value >= 2);
 		}
 	}
 }
@@ -1426,7 +1430,7 @@ void Player::unsee_node(MapIndex const i) {
 		for (PlayerNumber player_number : team_players_) {
 			if (Player* team_player = egbase().get_player(player_number)) {
 				team_player->force_update_team_vision(i, false);
-				assert(team_player->get_vision(i).value == 1);
+				assert(team_player->fields()[i].vision.value == 1);
 			}
 		}
 	}
@@ -1471,7 +1475,7 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 		for (PlayerNumber player_number : team_players_) {
 			if (Player* team_player = egbase().get_player(player_number)) {
 				team_player->force_update_team_vision(i, true);
-				assert(team_player->get_vision(i).value >= 2);
+				assert(team_player->fields()[i].vision.value >= 2);
 			}
 		}
 		break;
@@ -1498,7 +1502,7 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 			for (PlayerNumber player_number : team_players_) {
 				if (Player* team_player = egbase().get_player(player_number)) {
 					team_player->force_update_team_vision(i, false);
-					assert(team_player->get_vision(i).value == 1);
+					assert(team_player->fields()[i].vision.value == 1);
 				}
 			}
 		}
@@ -1554,7 +1558,7 @@ void Player::update_team_vision(MapIndex const i) {
 	}
 	for (PlayerNumber player_number : team_players_) {
 		if (Player* team_player = egbase().get_player(player_number)) {
-			if (team_player->get_vision(i).value > 2) {
+			if (team_player->fields()[i].vision.value > 2) {
 				field.vision = 2;
 				break;
 			}
