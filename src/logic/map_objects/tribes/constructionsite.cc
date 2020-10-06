@@ -380,10 +380,12 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 
 		// Open the new building window if needed
 		const Serial s = b.serial();
-		NoteThreadSafeFunction::instantiate([s]() {
-		    // Do this in a thread-safe way to avoid a deadlock
-		    Notifications::publish(NoteBuilding(s, NoteBuilding::Action::kFinishWarp));
-		}, false);
+		NoteThreadSafeFunction::instantiate(
+		   [s]() {
+			   // Do this in a thread-safe way to avoid a deadlock
+			   Notifications::publish(NoteBuilding(s, NoteBuilding::Action::kFinishWarp));
+		   },
+		   false);
 	}
 }
 
