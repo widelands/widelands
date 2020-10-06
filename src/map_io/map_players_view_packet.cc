@@ -113,7 +113,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						VisibleState saved_vision = static_cast<VisibleState>(stoi(field_vector[m]));
 						if (f.vision == VisibleState::kUnexplored &&
 						    saved_vision == VisibleState::kPreviouslySeen) {
-							f.vision.value = 1;
+							f.vision = Vision(VisibleState::kPreviouslySeen);
 						}
 						if (revealed_fields.count(m)) {
 							if (f.vision.value < 2) {
@@ -128,12 +128,12 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						assert(f.vision.value == 1 || f.vision.value % 2 == 0);
 						if (saved_vision.value == 1) {
 							assert(f.vision.value <= 1);
-							f.vision = 1;
+							f.vision.value = 1;
 						} else if (saved_vision.value % 2 == 1) {
 							if (f.vision.value < 2) {
-								f.vision = 2;
+								f.vision.value = 2;
 							}
-							f.vision = f.vision.value + 1;
+							++f.vision.value;
 							assert(f.vision.value > 2);
 							assert(f.vision.value % 2 == 1);
 						}
@@ -368,7 +368,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					VisibleState saved_vision = static_cast<VisibleState>(fr.unsigned_8());
 					if (f.vision == VisibleState::kUnexplored &&
 					    saved_vision == VisibleState::kPreviouslySeen) {
-						f.vision.value = 1;
+						f.vision = Vision(VisibleState::kPreviouslySeen);
 					}
 					if (revealed_fields.count(m - 1)) {
 						if (f.vision.value < 2) {

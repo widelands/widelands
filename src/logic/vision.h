@@ -35,7 +35,23 @@ enum class VisibleState {
 struct Vision {
 	uint16_t value;
 
-	Vision(uint16_t v = 0) : value{v} {
+	explicit Vision(uint16_t v = 0) : value{v} {
+	}
+
+	explicit Vision(VisibleState vs) {
+		switch (vs) {
+		case VisibleState::kUnexplored:
+			value = 0;
+			break;
+		case VisibleState::kPreviouslySeen:
+			value = 1;
+			break;
+		case VisibleState::kVisible:
+			value = 2;
+			break;
+		default:
+			NEVER_HERE();
+		}
 	}
 
 	operator VisibleState() const {

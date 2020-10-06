@@ -1333,7 +1333,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 						if (field_main.vision != VisibleState::kVisible) {
 							rediscover_node(map, main_coords);
 							field_main.time_node_last_unseen = egbase().get_gametime();
-							field_main.vision = 1;
+							field_main.vision = Vision(VisibleState::kPreviouslySeen);
 						}
 					} else {
 						if (upcast(ConstructionSite const, cs, building)) {
@@ -1394,7 +1394,7 @@ void Player::see_node(const MapIndex i) {
 	assert(&field < fields_.get() + map.max_index());
 
 	if (field.vision.value < 2) {
-		field.vision = 2;
+		field.vision.value = 2;
 		rediscover_node(map, map.get_fcoords(map[i]));
 	}
 	field.vision.value += 2;
@@ -1466,7 +1466,7 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 			break;
 		}
 		if (field.vision.value < 2) {
-			field.vision = 2;
+			field.vision.value = 2;
 			rediscover_node(map, map.get_fcoords(map[i]));
 		}
 		assert(field.vision.value >= 2);
@@ -1512,7 +1512,7 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 		hide_or_reveal_field(coords, HideOrRevealFieldMode::kHide);
 		assert(field.vision.value == 1 || field.vision.value % 2 == 0);
 		if (field.vision.value == 1) {
-			field.vision = 0;
+			field.vision.value = 0;
 		}
 		assert(field.vision.value % 2 == 0);
 		break;
@@ -1530,13 +1530,13 @@ void Player::force_update_team_vision(MapIndex const i, bool visible) {
 	if (visible) {
 		if (field.vision.value < 2) {
 			rediscover_node(map, map.get_fcoords(map[i]));
-			field.vision = 2;
+			field.vision.value = 2;
 		}
 	} else {
 		if (field.vision.value == 2) {
 			field.time_node_last_unseen = egbase().get_gametime();
 			rediscover_node(map, map.get_fcoords(map[i]));
-			field.vision = 1;
+			field.vision.value = 1;
 		}
 	}
 }
@@ -1554,12 +1554,12 @@ void Player::update_team_vision(MapIndex const i) {
 	Vision old_vision = field.vision;
 
 	if (field.vision.value == 2) {
-		field.vision = 1;
+		field.vision.value = 1;
 	}
 	for (PlayerNumber player_number : team_players_) {
 		if (Player* team_player = egbase().get_player(player_number)) {
 			if (team_player->fields()[i].vision.value > 2) {
-				field.vision = 2;
+				field.vision.value = 2;
 				break;
 			}
 		}
