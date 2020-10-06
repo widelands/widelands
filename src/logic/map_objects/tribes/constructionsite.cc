@@ -24,6 +24,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/animation/animation.h"
@@ -378,7 +379,11 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		}
 
 		// Open the new building window if needed
-		Notifications::publish(NoteBuilding(b.serial(), NoteBuilding::Action::kFinishWarp));
+		const Serial s = b.serial();
+		NoteThreadSafeFunction::instantiate([s]() {
+		    // Do this in a thread-safe way to avoid a deadlock
+		    Notifications::publish(NoteBuilding(s, NoteBuilding::Action::kFinishWarp));
+		}, false);
 	}
 }
 
