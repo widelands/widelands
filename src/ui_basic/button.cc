@@ -291,8 +291,11 @@ void Button::draw(RenderTarget& dst) {
 }
 
 void Button::think() {
-	assert(repeating_);
-	assert(pressed_);
+	if (!repeating_ || !pressed_) {
+		// race condition during initialization
+		return;
+	}
+
 	Panel::think();
 
 	if (highlighted_) {
