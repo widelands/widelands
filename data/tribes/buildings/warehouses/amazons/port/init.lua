@@ -27,16 +27,10 @@ tribes:new_warehouse_type {
       rope = 2
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {95, 178},
-         fps = 10,
-      },
-      build = {
-         pictures = path.list_files (dirname .. "build_?.png"),
-         hotspot = {95, 178},
-      },
+      idle = {hotspot = {90, 84}},
+      build = {hotspot = {90, 84}},
    },
 
    aihints = {
