@@ -35,5 +35,4 @@ Time::Time(FileRead& fr) : value_(fr.unsigned_32()) {
 void Time::save(FileWrite& fw) const {
 	fw.unsigned_32(value_);
 }
-
 }  // namespace Widelands
