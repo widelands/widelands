@@ -219,7 +219,8 @@ void FieldDebugWindow::think() {
 
 			if (time_last_surveyed.is_valid()) {
 				str += (boost::format("  D triangle last surveyed at %u: amount %u\n") %
-				        time_last_surveyed.get() % static_cast<unsigned int>(player_field.resource_amounts.d))
+				        time_last_surveyed.get() %
+				        static_cast<unsigned int>(player_field.resource_amounts.d))
 				          .str();
 
 			} else {
@@ -232,7 +233,8 @@ void FieldDebugWindow::think() {
 
 			if (time_last_surveyed.is_valid()) {
 				str += (boost::format("  R triangle last surveyed at %u: amount %u\n") %
-				        time_last_surveyed.get() % static_cast<unsigned int>(player_field.resource_amounts.r))
+				        time_last_surveyed.get() %
+				        static_cast<unsigned int>(player_field.resource_amounts.r))
 				          .str();
 
 			} else {

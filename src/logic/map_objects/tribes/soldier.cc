@@ -542,9 +542,10 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
 	}
 
 	if (moving) {
-		const float f = math::clamp(static_cast<float>(game.get_gametime().get() - combat_walkstart_.get()) /
-		                               (combat_walkend_.get() - combat_walkstart_.get()),
-		                            0.f, 1.f);
+		const float f =
+		   math::clamp(static_cast<float>(game.get_gametime().get() - combat_walkstart_.get()) /
+		                  (combat_walkend_.get() - combat_walkstart_.get()),
+		               0.f, 1.f);
 		assert(combat_walkstart_ <= game.get_gametime());
 		assert(combat_walkstart_ < combat_walkend_);
 		epos.x = f * epos.x + (1 - f) * spos.x;
@@ -1058,10 +1059,10 @@ void Soldier::attack_update(Game& game, State& state) {
 
 	molog(game.get_gametime(), "[attack] attacking target building\n");
 	//  give the enemy soldier some time to act
-	schedule_act(
-	   game, Duration(enemy->attack_target()->attack(this) == AttackTarget::AttackResult::DefenderLaunched ?
-	            1000 :
-	            10));
+	schedule_act(game, Duration(enemy->attack_target()->attack(this) ==
+	                                  AttackTarget::AttackResult::DefenderLaunched ?
+	                               1000 :
+	                               10));
 }
 
 void Soldier::attack_pop(Game& game, State&) {

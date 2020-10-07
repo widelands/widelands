@@ -71,7 +71,8 @@ float adjusted_field_brightness(const Widelands::FCoords& fcoords,
 		static const Widelands::Duration kDecayTimeInMs = Widelands::Duration(20000);
 		const Widelands::Duration time_ago = gametime - pf.time_node_last_unseen;
 		if (time_ago < kDecayTimeInMs) {
-			brightness = (brightness * (2 * kDecayTimeInMs.get() - time_ago.get())) / (2 * kDecayTimeInMs.get());
+			brightness =
+			   (brightness * (2 * kDecayTimeInMs.get() - time_ago.get())) / (2 * kDecayTimeInMs.get());
 		} else {
 			brightness = brightness / 2;
 		}
@@ -506,7 +507,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
 			draw_road_building(*f);
 
-			draw_bridges(dst, f, f->seeing == Widelands::SeeUnseeNode::kVisible ? gametime : Widelands::Time(0), scale);
+			draw_bridges(
+			   dst, f, f->seeing == Widelands::SeeUnseeNode::kVisible ? gametime : Widelands::Time(0),
+			   scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 
 			// Draw immovables and bobs.

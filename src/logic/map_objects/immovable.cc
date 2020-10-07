@@ -451,7 +451,8 @@ void Immovable::draw(const Time& gametime,
 		return;
 	}
 	if (!anim_construction_total_) {
-		dst->blit_animation(point_on_dst, coords, scale, anim_, Time(gametime.get() - animstart_.get()));
+		dst->blit_animation(
+		   point_on_dst, coords, scale, anim_, Time(gametime.get() - animstart_.get()));
 		if (former_building_descr_) {
 			do_draw_info(
 			   info_to_draw, former_building_descr_->descname(), "", point_on_dst, scale, dst);
@@ -502,15 +503,15 @@ void Immovable::draw_construction(const Time& gametime,
 
 	const int percent = ((done.get() % units_per_frame.get()) * 100) / units_per_frame.get();
 
-	dst->blit_animation(
-	   point_on_dst, coords, scale, anim_, Time((frametime * current_frame).get()), &player_color, percent);
+	dst->blit_animation(point_on_dst, coords, scale, anim_, Time((frametime * current_frame).get()),
+	                    &player_color, percent);
 
 	// Additionally, if statistics are enabled, draw a progression string
-	do_draw_info(
-	   info_to_draw, descr().descname(),
-	   g_style_manager->color_tag((boost::format(_("%i%% built")) % (done.get() * 100 / total.get())).str(),
-	                              g_style_manager->building_statistics_style().construction_color()),
-	   point_on_dst, scale, dst);
+	do_draw_info(info_to_draw, descr().descname(),
+	             g_style_manager->color_tag(
+	                (boost::format(_("%i%% built")) % (done.get() * 100 / total.get())).str(),
+	                g_style_manager->building_statistics_style().construction_color()),
+	             point_on_dst, scale, dst);
 }
 
 /**

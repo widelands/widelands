@@ -139,9 +139,9 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	tab_panel_->add(
 	   "consumption", g_image_cache->get(pic_tab_consumption), plot_consumption_, _("Consumption"));
 
-	plot_economy_ =
-	   new DifferentialPlotArea(tab_panel_, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
-	                            Widelands::kStatisticsSampleTime.get(), WuiPlotArea::Plotmode::kRelative);
+	plot_economy_ = new DifferentialPlotArea(tab_panel_, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+	                                         Widelands::kStatisticsSampleTime.get(),
+	                                         WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
 	   "economy_health", g_image_cache->get(pic_tab_economy), plot_economy_, _("Economy health"));

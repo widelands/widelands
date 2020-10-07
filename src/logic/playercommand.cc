@@ -196,7 +196,9 @@ void PlayerCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& 
 /*** class Cmd_Bulldoze ***/
 
 CmdBulldoze::CmdBulldoze(StreamRead& des)
-   : PlayerCommand(Time(0), des.unsigned_8()), serial(des.unsigned_32()), recurse(des.unsigned_8()) {
+   : PlayerCommand(Time(0), des.unsigned_8()),
+     serial(des.unsigned_32()),
+     recurse(des.unsigned_8()) {
 }
 
 void CmdBulldoze::execute(Game& game) {
@@ -539,7 +541,8 @@ void CmdFlagAction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver&
 
 /*** Cmd_StartStopBuilding ***/
 
-CmdStartStopBuilding::CmdStartStopBuilding(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+CmdStartStopBuilding::CmdStartStopBuilding(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 }
 
@@ -693,7 +696,8 @@ void CmdStartOrCancelExpedition::write(FileWrite& fw, EditorGameBase& egbase, Ma
 
 /*** Cmd_ExpeditionConfig ***/
 
-CmdExpeditionConfig::CmdExpeditionConfig(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+CmdExpeditionConfig::CmdExpeditionConfig(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 	type = des.unsigned_8() == 0 ? wwWARE : wwWORKER;
 	index = des.unsigned_32();
@@ -798,7 +802,8 @@ void CmdEnhanceBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 }
 
 /*** Cmd_DismantleBuilding ***/
-CmdDismantleBuilding::CmdDismantleBuilding(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+CmdDismantleBuilding::CmdDismantleBuilding(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
 	keep_wares_ = des.unsigned_8();
 }
@@ -887,7 +892,8 @@ void CmdEvictWorker::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 }
 
 /*** Cmd_ShipScoutDirection ***/
-CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 	dir = static_cast<WalkingDir>(des.unsigned_8());
 }
@@ -949,7 +955,8 @@ void CmdShipScoutDirection::write(FileWrite& fw, EditorGameBase& egbase, MapObje
 }
 
 /*** Cmd_ShipConstructPort ***/
-CmdShipConstructPort::CmdShipConstructPort(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+CmdShipConstructPort::CmdShipConstructPort(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 	coords = read_coords_32(&des);
 }
@@ -1007,7 +1014,8 @@ void CmdShipConstructPort::write(FileWrite& fw, EditorGameBase& egbase, MapObjec
 }
 
 /*** Cmd_ShipExploreIsland ***/
-CmdShipExploreIsland::CmdShipExploreIsland(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+CmdShipExploreIsland::CmdShipExploreIsland(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 	island_explore_direction = static_cast<IslandExploreDirection>(des.unsigned_8());
 }
@@ -1376,7 +1384,9 @@ void CmdChangeTargetQuantity::read(FileRead& fr, EditorGameBase& egbase, MapObje
 }
 
 CmdChangeTargetQuantity::CmdChangeTargetQuantity(StreamRead& des)
-   : PlayerCommand(Time(0), des.unsigned_8()), economy_(des.unsigned_32()), ware_type_(des.unsigned_8()) {
+   : PlayerCommand(Time(0), des.unsigned_8()),
+     economy_(des.unsigned_32()),
+     ware_type_(des.unsigned_8()) {
 }
 
 void CmdChangeTargetQuantity::serialize(StreamWrite& ser) {
@@ -2024,7 +2034,8 @@ void CmdToggleMuteMessages::execute(Game& game) {
 	}
 }
 
-CmdToggleMuteMessages::CmdToggleMuteMessages(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+CmdToggleMuteMessages::CmdToggleMuteMessages(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	building_ = des.unsigned_32();
 	all_ = des.unsigned_8();
 }

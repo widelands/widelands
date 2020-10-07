@@ -79,10 +79,7 @@ private:
 struct CmdBulldoze : public PlayerCommand {
 	CmdBulldoze() : PlayerCommand(), serial(0), recurse(0) {
 	}  // For savegame loading
-	CmdBulldoze(const Time& t,
-	            const int32_t p,
-	            PlayerImmovable& pi,
-	            const bool init_recurse = false)
+	CmdBulldoze(const Time& t, const int32_t p, PlayerImmovable& pi, const bool init_recurse = false)
 	   : PlayerCommand(t, p), serial(pi.serial()), recurse(init_recurse) {
 	}
 
@@ -106,7 +103,10 @@ private:
 struct CmdBuild : public PlayerCommand {
 	CmdBuild() : PlayerCommand() {
 	}  // For savegame loading
-	CmdBuild(const Widelands::Time& init_duetime, const int32_t p, const Coords& c, const DescriptionIndex i)
+	CmdBuild(const Widelands::Time& init_duetime,
+	         const int32_t p,
+	         const Coords& c,
+	         const DescriptionIndex i)
 	   : PlayerCommand(init_duetime, p), coords(c), bi(i) {
 	}
 
@@ -130,8 +130,7 @@ private:
 struct CmdBuildFlag : public PlayerCommand {
 	CmdBuildFlag() : PlayerCommand() {
 	}  // For savegame loading
-	CmdBuildFlag(const Time& t, const int32_t p, const Coords& c)
-	   : PlayerCommand(t, p), coords(c) {
+	CmdBuildFlag(const Time& t, const int32_t p, const Coords& c) : PlayerCommand(t, p), coords(c) {
 	}
 
 	explicit CmdBuildFlag(StreamRead&);
@@ -330,8 +329,11 @@ private:
 struct CmdEnhanceBuilding : public PlayerCommand {
 	CmdEnhanceBuilding() : PlayerCommand(), serial_(0), keep_wares_(false) {
 	}  // For savegame loading
-	CmdEnhanceBuilding(
-	   const Widelands::Time& init_duetime, const int32_t p, Building& b, const DescriptionIndex i, bool kw)
+	CmdEnhanceBuilding(const Widelands::Time& init_duetime,
+	                   const int32_t p,
+	                   Building& b,
+	                   const DescriptionIndex i,
+	                   bool kw)
 	   : PlayerCommand(init_duetime, p), serial_(b.serial()), bi_(i), keep_wares_(kw) {
 	}
 
@@ -406,7 +408,10 @@ private:
 struct CmdShipScoutDirection : public PlayerCommand {
 	CmdShipScoutDirection() : PlayerCommand(), serial(0), dir(WalkingDir::IDLE) {
 	}  // For savegame loading
-	CmdShipScoutDirection(const Widelands::Time& t, PlayerNumber const p, Serial s, WalkingDir direction)
+	CmdShipScoutDirection(const Widelands::Time& t,
+	                      PlayerNumber const p,
+	                      Serial s,
+	                      WalkingDir direction)
 	   : PlayerCommand(t, p), serial(s), dir(direction) {
 	}
 
@@ -482,7 +487,8 @@ private:
 struct CmdShipSink : public PlayerCommand {
 	CmdShipSink() : PlayerCommand(), serial(0) {
 	}  // For savegame loading
-	CmdShipSink(const Widelands::Time& t, PlayerNumber const p, Serial s) : PlayerCommand(t, p), serial(s) {
+	CmdShipSink(const Widelands::Time& t, PlayerNumber const p, Serial s)
+	   : PlayerCommand(t, p), serial(s) {
 	}
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;

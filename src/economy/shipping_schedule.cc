@@ -727,7 +727,8 @@ Duration ShippingSchedule::update(Game& game) {
 	const Time& time = game.get_gametime();
 	const Duration time_since_last_update = time - last_updated_;
 
-	Time earliest_real_update = time - std::min(Duration(time.get()), kActualDurationsRecalculationInterval);
+	Time earliest_real_update =
+	   time - std::min(Duration(time.get()), kActualDurationsRecalculationInterval);
 	Ship* ship_to_update = nullptr;
 	for (auto& pair : last_actual_duration_recalculation_) {
 		if (pair.second < earliest_real_update) {
@@ -738,8 +739,9 @@ Duration ShippingSchedule::update(Game& game) {
 	if (ship_to_update) {
 		last_actual_duration_recalculation_[ship_to_update] = time;
 	}
-	sslog("FIRST PASS at %u (last %u, delta %u); will recalc for %s\n", time.get(), last_updated_.get(),
-	      time_since_last_update.get(), ship_to_update ? ship_to_update->get_shipname().c_str() : "(nil)");
+	sslog("FIRST PASS at %u (last %u, delta %u); will recalc for %s\n", time.get(),
+	      last_updated_.get(), time_since_last_update.get(),
+	      ship_to_update ? ship_to_update->get_shipname().c_str() : "(nil)");
 	for (auto& pair : plans_) {
 		Ship& ship = *pair.first.get(game);
 		if (pair.second.empty()) {

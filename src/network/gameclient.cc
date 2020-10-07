@@ -295,8 +295,7 @@ void GameClient::think() {
 			d->time.think(d->realspeed);
 		}
 
-		if (d->server_is_waiting &&
-		    d->game->get_gametime() == d->time.networktime()) {
+		if (d->server_is_waiting && d->game->get_gametime() == d->time.networktime()) {
 			send_time();
 			d->server_is_waiting = false;
 		} else if (d->game->get_gametime() != d->lasttimestamp) {

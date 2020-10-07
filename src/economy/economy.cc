@@ -745,7 +745,8 @@ void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
 		if (!supp->is_active()) {
 			// Calculate the time the building will be forced to idle waiting
 			// for the request
-			const int32_t idletime = game.get_gametime().get() + 15000 + 2 * cost - req.get_required_time().get();
+			const int32_t idletime =
+			   game.get_gametime().get() + 15000 + 2 * cost - req.get_required_time().get();
 			// If the building wouldn't have to idle, we wait with the request
 			if (idletime < -200) {
 				if (supply_pairs->nexttimer < 0 || supply_pairs->nexttimer > -idletime) {

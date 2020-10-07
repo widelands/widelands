@@ -422,7 +422,9 @@ protected:
 	/// how long it should take to mine, given the particular circumstances,
 	/// and pass the result to the following animation command, to set the
 	/// duration.
-	void program_step(Game&, const Duration& delay = Duration(10), ProgramResult phase = ProgramResult::kNone);
+	void program_step(Game&,
+	                  const Duration& delay = Duration(10),
+	                  ProgramResult phase = ProgramResult::kNone);
 
 	void program_start(Game&, const std::string& program_name);
 	virtual void program_end(Game&, ProgramResult);
@@ -448,10 +450,10 @@ protected:  // TrainingSite must have access to this stuff
 	FailedSkippedPrograms failed_skipped_programs_;
 
 	using Stack = std::vector<State>;
-	Stack stack_;           ///<  program stack
-	bool program_timer_;    ///< execute next instruction based on pointer
-	Time program_time_;  ///< timer time
-	Duration post_timer_;    ///< Time to schedule after ends
+	Stack stack_;          ///<  program stack
+	bool program_timer_;   ///< execute next instruction based on pointer
+	Time program_time_;    ///< timer time
+	Duration post_timer_;  ///< Time to schedule after ends
 
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;

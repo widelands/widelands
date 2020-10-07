@@ -300,7 +300,8 @@ bool DefaultAI::check_ships(const Widelands::Time& gametime) {
 			    !so.waiting_for_command_) {
 				if (gametime - so.last_command_time > Widelands::Duration(180 * 1000)) {
 					so.waiting_for_command_ = true;
-					log_warn_time(gametime,
+					log_warn_time(
+					   gametime,
 					   "  %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something wrong "
 					   "here?...\n",
 					   player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
@@ -316,7 +317,8 @@ bool DefaultAI::check_ships(const Widelands::Time& gametime) {
 				// escape mode here indicates that we are going over known ports, that means that last
 				// port space we found when circumventing the island was already known to the ship.
 				// Or(!) this is a island without a port and ship would sail around forever
-			} else if ((so.escape_mode || (so.last_command_time + Widelands::Duration(5 * 60 * 1000)) < gametime) &&
+			} else if ((so.escape_mode ||
+			            (so.last_command_time + Widelands::Duration(5 * 60 * 1000)) < gametime) &&
 			           so.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting) {
 				attempt_escape(so);
 			}
@@ -437,8 +439,9 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, const Widelands::Time
 		assert(expedition_time < expedition_max_duration);
 
 		// calculate percentage of remaining expedition time (range 0-100)
-		const uint8_t remaining_time = 100 - ((gametime - persistent_data->expedition_start_time).get() /
-		                                       (expedition_max_duration.get() / 100));
+		const uint8_t remaining_time =
+		   100 - ((gametime - persistent_data->expedition_start_time).get() /
+		          (expedition_max_duration.get() / 100));
 		assert(remaining_time <= 100);
 
 		// calculate a new persistent_data->colony_scan_area

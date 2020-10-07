@@ -778,8 +778,9 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 
 		assert(walkstart_ <= game.get_gametime());
 		assert(walkstart_ < walkend_);
-		const float f = math::clamp(
-		   static_cast<float>(game.get_gametime().get() - walkstart_.get()) / (walkend_.get() - walkstart_.get()), 0.f, 1.f);
+		const float f = math::clamp(static_cast<float>(game.get_gametime().get() - walkstart_.get()) /
+		                               (walkend_.get() - walkstart_.get()),
+		                            0.f, 1.f);
 		epos.x = f * epos.x + (1.f - f) * spos.x;
 		epos.y = f * epos.y + (1.f - f) * spos.y;
 		if (bridge) {

@@ -635,7 +635,8 @@ void ManagementData::review(const Widelands::Time& gametime,
 
 	// bonuses (1000 or nothing)
 	const uint16_t territory_bonus = (land > old_land || land > max_e_land) ? 1000 : 0;
-	const uint16_t iron_mine_bonus = (first_iron_mine_time < Widelands::Time(2 * 60 * 60 * 1000)) ? 1000 : 0;
+	const uint16_t iron_mine_bonus =
+	   (first_iron_mine_time < Widelands::Time(2 * 60 * 60 * 1000)) ? 1000 : 0;
 	const uint16_t attack_bonus = (attackers > 0) ? 1000 : 0;
 	const uint16_t training_bonus = (trained_soldiers > 0) ? 1000 : 0;
 
@@ -1155,7 +1156,8 @@ uint8_t PlayersStrengths::enemies_seen_lately_count(const Widelands::Time& gamet
 }
 
 // When we see enemy, we use this to store the time
-void PlayersStrengths::set_last_time_seen(const Widelands::Time& seentime, Widelands::PlayerNumber pn) {
+void PlayersStrengths::set_last_time_seen(const Widelands::Time& seentime,
+                                          Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
 		return;
 	}
@@ -1182,7 +1184,8 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number)
 }
 
 // Was the player seen less then 2 minutes ago
-bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const Widelands::Time& gametime) {
+bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn,
+                                          const Widelands::Time& gametime) {
 	if (all_stats.count(pn) == 0) {
 		// Should happen only rarely so we print a warning here
 		log_warn("AI %d: player has no statistics yet\n", this_player_number);
@@ -1410,7 +1413,8 @@ bool FlagWarehouseDistances::FlagInfo::update(const Widelands::Time& gametime,
 	return false;
 }
 
-uint16_t FlagWarehouseDistances::FlagInfo::get(const Widelands::Time& gametime, uint32_t* nw) const {
+uint16_t FlagWarehouseDistances::FlagInfo::get(const Widelands::Time& gametime,
+                                               uint32_t* nw) const {
 	*nw = nearest_warehouse;
 	if (gametime <= expiry_time) {
 		return distance;
@@ -1443,8 +1447,9 @@ uint16_t FlagWarehouseDistances::count() const {
 	return flags_map.size();
 }
 
-int16_t
-FlagWarehouseDistances::get_distance(const uint32_t flag_coords, const Widelands::Time& gametime, uint32_t* nw) {
+int16_t FlagWarehouseDistances::get_distance(const uint32_t flag_coords,
+                                             const Widelands::Time& gametime,
+                                             uint32_t* nw) {
 	if (flags_map.count(flag_coords) == 0) {
 		*nw = 0;
 		return kFarButReachable;  // this is to discourage to build second road from brand new flag...
@@ -1453,7 +1458,8 @@ FlagWarehouseDistances::get_distance(const uint32_t flag_coords, const Widelands
 	}
 }
 
-void FlagWarehouseDistances::set_road_built(const uint32_t coords_hash, const Widelands::Time& gametime) {
+void FlagWarehouseDistances::set_road_built(const uint32_t coords_hash,
+                                            const Widelands::Time& gametime) {
 	if (flags_map.count(coords_hash) == 1) {
 		flags_map[coords_hash].set_road_built(gametime);
 	}

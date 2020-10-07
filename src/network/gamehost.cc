@@ -707,7 +707,8 @@ void GameHost::run() {
 		d->committed_networktime = d->pseudo_networktime;
 
 		for (Client& client : d->clients) {
-			client.time = d->committed_networktime - Widelands::Duration(d->committed_networktime.get() > 0 ? 1 : 0);
+			client.time = d->committed_networktime -
+			              Widelands::Duration(d->committed_networktime.get() > 0 ? 1 : 0);
 		}
 
 		// The call to check_hung_clients ensures that the game leaves the
@@ -1814,8 +1815,8 @@ void GameHost::receive_client_time(uint32_t const number, const Widelands::Time&
 	log_info("[Host]: Client %i: Time %i\n", number, time.get());
 
 	if (d->waiting) {
-		log_info("[Host]: Client %i reports time %i (networktime = %i) during hang\n", number, time.get(),
-		         d->committed_networktime.get());
+		log_info("[Host]: Client %i reports time %i (networktime = %i) during hang\n", number,
+		         time.get(), d->committed_networktime.get());
 		check_hung_clients();
 	}
 }
@@ -1839,8 +1840,7 @@ void GameHost::check_hung_clients() {
 		} else {
 			assert(d->game != nullptr);
 			++nrdelayed;
-			if (delta > Widelands::Duration(
-			    5 * CLIENT_TIMESTAMP_INTERVAL * d->networkspeed / 1000)) {
+			if (delta > Widelands::Duration(5 * CLIENT_TIMESTAMP_INTERVAL * d->networkspeed / 1000)) {
 				log_info("[Host]: Client %i (%s) hung\n", i,
 				         d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;

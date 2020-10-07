@@ -36,7 +36,8 @@ constexpr int kButtonRowHeight = kButtonHeight + kMargin;
 constexpr int kLabelHeight = 18;
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
 
-constexpr Widelands::Duration kUpdateTimeInGametimeMs = Widelands::Duration(1000);  //  1 second, gametime
+constexpr Widelands::Duration kUpdateTimeInGametimeMs =
+   Widelands::Duration(1000);  //  1 second, gametime
 
 inline InteractivePlayer& BuildingStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());

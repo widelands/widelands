@@ -75,7 +75,9 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	push_animation(becomes, &animations, &total_frames);
 
 	uint32_t frame_index =
-	   totaltime.get() ? std::min(completedtime.get() * total_frames / totaltime.get(), total_frames - 1) : 0;
+	   totaltime.get() ?
+	      std::min(completedtime.get() * total_frames / totaltime.get(), total_frames - 1) :
+	      0;
 	uint32_t animation_index = 0;
 	while (frame_index >= animations[animation_index].second) {
 		frame_index -= animations[animation_index].second;
@@ -92,8 +94,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 			                    &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-			                    animations[animation_index].first, anim_time - Duration(kFrameLength), nullptr,
-			                    kBuildingSilhouetteOpacity);
+			                    animations[animation_index].first, anim_time - Duration(kFrameLength),
+			                    nullptr, kBuildingSilhouetteOpacity);
 		}
 	} else if (animation_index > 0) {
 		// The first pic, but not the first series of animations – draw the last pic of the previous
@@ -105,8 +107,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		} else {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
 			                    animations[animation_index - 1].first,
-			                    Time(kFrameLength * (animations[animation_index - 1].second - 1)), nullptr,
-			                    kBuildingSilhouetteOpacity);
+			                    Time(kFrameLength * (animations[animation_index - 1].second - 1)),
+			                    nullptr, kBuildingSilhouetteOpacity);
 		}
 	} else if (was) {
 		//  First pic in first series, but there was another building here before –
@@ -120,8 +122,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		} else {
 			dst->blit_animation(
 			   point_on_dst, Widelands::Coords::null(), scale, unocc,
-			   Time(kFrameLength * (g_animation_manager->get_animation(unocc).nr_frames() - 1)), nullptr,
-			   kBuildingSilhouetteOpacity);
+			   Time(kFrameLength * (g_animation_manager->get_animation(unocc).nr_frames() - 1)),
+			   nullptr, kBuildingSilhouetteOpacity);
 		}
 	}
 	// Now blit a segment of the current construction phase from the bottom.
@@ -744,7 +746,8 @@ void ConstructionSite::draw(const Time& gametime,
 	info_.completedtime = kConstructionsiteStepTime * work_completed_;
 
 	if (working_) {
-		assert(work_steptime_ <= Time((info_.completedtime + kConstructionsiteStepTime).get() + gametime.get()));
+		assert(work_steptime_ <=
+		       Time((info_.completedtime + kConstructionsiteStepTime).get() + gametime.get()));
 		info_.completedtime += gametime + kConstructionsiteStepTime - work_steptime_;
 	}
 

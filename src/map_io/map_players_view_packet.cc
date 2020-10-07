@@ -302,8 +302,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 								      tribes_lookup_table.lookup_building(fr.string()))));
 							}
 
-							field->partially_finished_building.constructionsite.totaltime =
-							   Duration(fr);
+							field->partially_finished_building.constructionsite.totaltime = Duration(fr);
 							field->partially_finished_building.constructionsite.completedtime =
 							   Duration(fr);
 						}

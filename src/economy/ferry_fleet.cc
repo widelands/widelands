@@ -264,7 +264,8 @@ void FerryFleet::request_ferry(EditorGameBase& egbase, Waterway* waterway, const
 			return;
 		}
 	}
-	pending_ferry_requests_.emplace(gametime.is_invalid() ? egbase.get_gametime() : gametime, waterway);
+	pending_ferry_requests_.emplace(
+	   gametime.is_invalid() ? egbase.get_gametime() : gametime, waterway);
 	waterway->set_fleet(this);
 }
 

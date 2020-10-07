@@ -99,7 +99,8 @@ void CmdQueue::run_queue(const Duration& interval, Time& game_time_var) {
 	const Time final_time = game_time_var + interval;
 
 	while (game_time_var < final_time) {
-		std::priority_queue<CmdItem>& current_cmds = cmds_[game_time_var.get() % kCommandQueueBucketSize];
+		std::priority_queue<CmdItem>& current_cmds =
+		   cmds_[game_time_var.get() % kCommandQueueBucketSize];
 
 		while (!current_cmds.empty()) {
 			Command& c = *current_cmds.top().cmd;

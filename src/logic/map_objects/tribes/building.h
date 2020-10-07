@@ -387,7 +387,7 @@ protected:
 
 	using LeaveQueue = std::vector<OPtr<Worker>>;
 	LeaveQueue leave_queue_;     //  FIFO queue of workers leaving the building
-	Time leave_time_;        //  when to wake the next one from leave queue
+	Time leave_time_;            //  when to wake the next one from leave queue
 	ObjectPointer leave_allow_;  //  worker that is allowed to leave now
 
 	//  The player who has defeated this building.

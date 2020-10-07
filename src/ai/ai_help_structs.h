@@ -472,9 +472,9 @@ struct BuildingObserver {
 	uint32_t new_building_overdue;
 	int32_t primary_priority;
 
-	bool expansion_type;       // military building used that can be used to control area
-	bool fighting_type;        // military building built near enemies
-	bool mountain_conqueror;   // military building built near mountains
+	bool expansion_type;              // military building used that can be used to control area
+	bool fighting_type;               // military building built near enemies
+	bool mountain_conqueror;          // military building built near mountains
 	Widelands::Time prohibited_till;  // do not build before (ms)
 	Widelands::Time forced_after;     // do not wait until ware is needed
 	uint8_t max_trainingsites_proportion;
@@ -768,7 +768,10 @@ struct MilitarySiteSizeObserver {
 
 // this represents a scheduler task
 struct SchedulerTask {
-	SchedulerTask(const Widelands::Time& time, const SchedulerTaskId t, const uint8_t p, const char* d);
+	SchedulerTask(const Widelands::Time& time,
+	              const SchedulerTaskId t,
+	              const uint8_t p,
+	              const char* d);
 
 	bool operator<(const SchedulerTask& other) const;
 

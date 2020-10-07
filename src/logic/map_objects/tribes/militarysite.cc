@@ -891,7 +891,8 @@ void MilitarySite::notify_player(Game& game, bool const discovered) {
 	send_message(game, Message::Type::kWarfareUnderAttack,
 	             /** TRANSLATORS: Militarysite is being attacked */
 	             pgettext("building", "Attack!"), descr().icon_filename(), _("You are under attack"),
-	             discovered ? descr().aggressor_str_ : descr().attack_str_, false, Duration(60 * 1000), 5);
+	             discovered ? descr().aggressor_str_ : descr().attack_str_, false,
+	             Duration(60 * 1000), 5);
 }
 
 /*

@@ -315,12 +315,13 @@ int32_t Request::get_priority(int32_t cost) const {
 	// with same priority will get ware first
 	//  make sure that idle request are lower
 	return MAX_IDLE_PRIORITY +
-	       std::max(uint32_t(1),
-	                ((economy_->owner().egbase().get_gametime().get() -
-	                  (is_construction_site ? get_required_time().get() : get_last_request_time().get())) *
-	                    WAITTIME_WEIGHT_IN_PRIORITY +
-	                 (PRIORITY_MAX_COST - cost) * COST_WEIGHT_IN_PRIORITY) *
-	                   modifier);
+	       std::max(
+	          uint32_t(1),
+	          ((economy_->owner().egbase().get_gametime().get() -
+	            (is_construction_site ? get_required_time().get() : get_last_request_time().get())) *
+	              WAITTIME_WEIGHT_IN_PRIORITY +
+	           (PRIORITY_MAX_COST - cost) * COST_WEIGHT_IN_PRIORITY) *
+	             modifier);
 }
 
 /**

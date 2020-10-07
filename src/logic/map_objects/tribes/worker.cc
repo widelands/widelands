@@ -2707,8 +2707,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 		}
 	}
 
-	if ((state.ivar1 < 0) ||
-	    (Time(state.ivar1) < game.get_gametime())) {  //  time to die?
+	if ((state.ivar1 < 0) || (Time(state.ivar1) < game.get_gametime())) {  //  time to die?
 		molog(game.get_gametime(), "[fugitive]: die\n");
 		return schedule_destroy(game);
 	}
@@ -3233,7 +3232,8 @@ void Worker::draw_inner(const EditorGameBase& game,
 		const Vector2f location(
 		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
 		dst->blit_animation(location, Widelands::Coords::null(), scale,
-		                    carried_ware->descr().get_animation("idle", this), Time(0), &player_color);
+		                    carried_ware->descr().get_animation("idle", this), Time(0),
+		                    &player_color);
 	}
 }
 
