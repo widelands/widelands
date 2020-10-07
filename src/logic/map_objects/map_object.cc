@@ -45,7 +45,7 @@ char const* const animation_direction_names[6] = {"_ne", "_e", "_se", "_sw", "_w
 
 namespace Widelands {
 
-CmdDestroyMapObject::CmdDestroyMapObject(uint32_t const t, MapObject& o)
+CmdDestroyMapObject::CmdDestroyMapObject(const Time& t, MapObject& o)
    : GameLogicCommand(t), obj_serial(o.serial()) {
 }
 
@@ -93,7 +93,7 @@ void CmdDestroyMapObject::write(FileWrite& fw, EditorGameBase& egbase, MapObject
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 }
 
-CmdAct::CmdAct(uint32_t const t, MapObject& o, int32_t const a)
+CmdAct::CmdAct(const Time& t, MapObject& o, int32_t const a)
    : GameLogicCommand(t), obj_serial(o.serial()), arg(a) {
 }
 
@@ -668,15 +668,15 @@ int32_t MapObject::get_training_attribute(TrainingAttribute) const {
  *
  * \return The absolute gametime at which the CMD_ACT will occur.
  */
-uint32_t MapObject::schedule_act(Game& game, uint32_t const tdelta, uint32_t const data) {
-	if (tdelta < endless()) {
-		uint32_t const time = game.get_gametime() + tdelta;
+Time MapObject::schedule_act(Game& game, const Duration& tdelta, uint32_t const data) {
+	if (tdelta.is_valid()) {
+		const Time time = game.get_gametime() + tdelta;
 
 		game.cmdqueue().enqueue(new CmdAct(time, *this, data));
 
 		return time;
 	} else {
-		return never();
+		return Time();
 	}
 }
 
@@ -706,7 +706,7 @@ const Player& MapObject::owner() const {
 /**
  * Prints a log message prepended by the object's serial number.
  */
-void MapObject::molog(const uint32_t gametime, char const* fmt, ...) const {
+void MapObject::molog(const Time& gametime, char const* fmt, ...) const {
 	if (!g_verbose && !logsink_) {
 		return;
 	}

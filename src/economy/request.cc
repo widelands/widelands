@@ -136,10 +136,10 @@ void Request::read(FileRead& fr,
 			assert(economy_);
 
 			count_ = fr.unsigned_32();
-			required_time_ = fr.unsigned_32();
-			required_interval_ = fr.unsigned_32();
+			required_time_ = Time(fr);
+			required_interval_ = Duration(fr);
 
-			last_request_time_ = fr.unsigned_32();
+			last_request_time_ = Time(fr);
 
 			assert(transfers_.empty());
 
@@ -208,10 +208,10 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 
 	fw.unsigned_32(count_);
 
-	fw.unsigned_32(required_time_);
-	fw.unsigned_32(required_interval_);
+	required_time_.save(fw);
+	required_interval_.save(fw);
 
-	fw.unsigned_32(last_request_time_);
+	last_request_time_.save(fw);
 
 	fw.unsigned_16(transfers_.size());  //  Write number of current transfers.
 	for (uint32_t i = 0; i < transfers_.size(); ++i) {
@@ -238,7 +238,7 @@ Flag& Request::target_flag() const {
  * Return the point in time at which we want the ware of the given number to
  * be delivered. nr is in the range [0..count_[
  */
-int32_t Request::get_base_required_time(EditorGameBase& egbase, uint32_t const nr) const {
+Time Request::get_base_required_time(EditorGameBase& egbase, uint32_t const nr) const {
 	if (count_ <= nr) {
 		if (!(count_ == 1 && nr == 1)) {
 			log_warn_time(egbase.get_gametime(),
@@ -247,22 +247,22 @@ int32_t Request::get_base_required_time(EditorGameBase& egbase, uint32_t const n
 			              nr, count_);
 		}
 	}
-	int32_t const curtime = egbase.get_gametime();
+	const Time& curtime = egbase.get_gametime();
 
-	if (!nr || !required_interval_) {
+	if (!nr || required_interval_.get() == 0) {
 		return required_time_;
 	}
 
-	if ((curtime - required_time_) > (required_interval_ * 2)) {
+	if (curtime >= required_time_ && (curtime - required_time_) > (required_interval_ * 2)) {
 		if (nr == 1) {
 			return required_time_ + (curtime - required_time_) / 2;
 		}
 
 		assert(2 <= nr);
-		return curtime + (nr - 2) * required_interval_;
+		return curtime + required_interval_ * (nr - 2);
 	}
 
-	return required_time_ + nr * required_interval_;
+	return required_time_ + required_interval_ * nr;
 }
 
 /**
@@ -270,7 +270,7 @@ int32_t Request::get_base_required_time(EditorGameBase& egbase, uint32_t const n
  * Can be in the past, indicating that we have been idling, waiting for the
  * ware.
  */
-int32_t Request::get_required_time() const {
+Time Request::get_required_time() const {
 	return get_base_required_time(economy_->owner().egbase(), transfers_.size());
 }
 
@@ -316,8 +316,8 @@ int32_t Request::get_priority(int32_t cost) const {
 	//  make sure that idle request are lower
 	return MAX_IDLE_PRIORITY +
 	       std::max(uint32_t(1),
-	                ((economy_->owner().egbase().get_gametime() -
-	                  (is_construction_site ? get_required_time() : get_last_request_time())) *
+	                ((economy_->owner().egbase().get_gametime().get() -
+	                  (is_construction_site ? get_required_time().get() : get_last_request_time().get())) *
 	                    WAITTIME_WEIGHT_IN_PRIORITY +
 	                 (PRIORITY_MAX_COST - cost) * COST_WEIGHT_IN_PRIORITY) *
 	                   modifier);
@@ -392,14 +392,14 @@ void Request::set_exact_match(bool match) {
  * Change the time at which the first ware to be delivered is needed.
  * Default is the gametime of the Request creation.
  */
-void Request::set_required_time(int32_t const time) {
+void Request::set_required_time(const Time& time) {
 	required_time_ = time;
 }
 
 /**
  * Change the time between desired delivery of wares.
  */
-void Request::set_required_interval(int32_t const interval) {
+void Request::set_required_interval(const Duration& interval) {
 	required_interval_ = interval;
 }
 

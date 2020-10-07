@@ -94,7 +94,7 @@ void Waterway::remove_worker(Worker& w) {
 
 void Waterway::request_ferry(EditorGameBase& egbase) {
 	FerryFleet* fleet = new FerryFleet(get_owner());
-	fleet->request_ferry(egbase, this);
+	fleet->request_ferry(egbase, this, egbase.get_gametime());
 	fleet->init(egbase);
 }
 

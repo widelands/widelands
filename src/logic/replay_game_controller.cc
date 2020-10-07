@@ -50,7 +50,7 @@ void ReplayGameController::think() {
 
 	frametime = frametime * real_speed() / 1000;
 
-	time_ = game_.get_gametime() + frametime;
+	time_ = game_.get_gametime() + Widelands::Duration(frametime);
 
 	if (replayreader_) {
 		while (Widelands::Command* const cmd = replayreader_->get_next_command(time_)) {
@@ -68,7 +68,7 @@ void ReplayGameController::send_player_command(Widelands::PlayerCommand*) {
 	throw wexception("Trying to send a player command during replay");
 }
 
-int32_t ReplayGameController::get_frametime() {
+Widelands::Duration ReplayGameController::get_frametime() {
 	return time_ - game_.get_gametime();
 }
 

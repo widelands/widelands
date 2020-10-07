@@ -117,7 +117,7 @@ bool Bob::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
 	if (upcast(Game, game, &egbase)) {
-		schedule_act(*game, 1);
+		schedule_act(*game, Duration(1));
 	} else {
 		// In editor: play idle task forever
 		set_animation(egbase, descr().get_animation("idle", this));
@@ -213,7 +213,7 @@ void Bob::schedule_destroy(Game& game) {
  * Schedule a new act for the current task. All other pending acts are
  * cancelled.
  */
-void Bob::schedule_act(Game& game, uint32_t tdelta) {
+void Bob::schedule_act(Game& game, const Duration& tdelta) {
 	MapObject::schedule_act(game, tdelta, actid_);
 	actscheduled_ = true;
 }
@@ -233,7 +233,7 @@ void Bob::skip_act() {
  * push_task() itself does not call any functions of the task, so the caller
  * can fill the state information with parameters for the task.
  */
-void Bob::push_task(Game& game, const Task& task, uint32_t const tdelta) {
+void Bob::push_task(Game& game, const Task& task, const Duration& tdelta) {
 	assert(!task.unique || !get_state(task));
 	assert(in_act_ || stack_.empty());
 
@@ -268,7 +268,7 @@ void Bob::pop_task(Game& game) {
 
 	do_pop_task(game);
 
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 }
 
 /**
@@ -336,7 +336,7 @@ void Bob::send_signal(Game& game, char const* const sig) {
 	}
 
 	signal_ = sig;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 }
 
 /**
@@ -353,7 +353,7 @@ void Bob::reset_tasks(Game& game) {
 	signal_.clear();
 
 	++actid_;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 }
 
 /**
@@ -392,7 +392,7 @@ void Bob::idle_update(Game& game, State& state) {
 	}
 
 	if (state.ivar1 > 0) {
-		schedule_act(game, state.ivar1);
+		schedule_act(game, Duration(state.ivar1));
 	} else {
 		skip_act();
 	}
@@ -699,11 +699,11 @@ void Bob::start_task_move(Game& game,
 	if (tdelta < 0) {
 		return send_signal(game, tdelta == -2 ? "blocked" : "fail");
 	}
-	push_task(game, taskMove, tdelta);
+	push_task(game, taskMove, Duration(tdelta));
 }
 
 void Bob::move_update(Game& game, State&) {
-	if (static_cast<uint32_t>(walkend_) <= game.get_gametime()) {
+	if (walkend_ <= game.get_gametime()) {
 		end_walk();
 		return pop_task(game);
 	} else {
@@ -776,10 +776,10 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		spos.y += end.field->get_height() * kHeightFactor * scale;
 		spos.y -= start.field->get_height() * kHeightFactor * scale;
 
-		assert(static_cast<uint32_t>(walkstart_) <= game.get_gametime());
+		assert(walkstart_ <= game.get_gametime());
 		assert(walkstart_ < walkend_);
 		const float f = math::clamp(
-		   static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_), 0.f, 1.f);
+		   static_cast<float>(game.get_gametime().get() - walkstart_.get()) / (walkend_.get() - walkstart_.get()), 0.f, 1.f);
 		epos.x = f * epos.x + (1.f - f) * spos.x;
 		epos.y = f * epos.y + (1.f - f) * spos.y;
 		if (bridge) {
@@ -810,7 +810,7 @@ void Bob::draw(const EditorGameBase& egbase,
 		adjust_field_on_dst.y += s->ivar3;
 	}
 	dst->blit_animation(calc_drawpos(egbase, adjust_field_on_dst, scale), coords, scale, anim_,
-	                    egbase.get_gametime() - animstart_,
+	                    Time(egbase.get_gametime().get() - animstart_.get()),
 	                    (bob_owner == nullptr) ? nullptr : &bob_owner->get_playercolor());
 }
 
@@ -853,11 +853,11 @@ int32_t Bob::start_walk(Game& game, WalkingDir const dir, uint32_t const a, bool
 
 	// Move is go
 	int32_t const tdelta = map.calc_cost(position_, dir);
-	assert(tdelta);
+	assert(tdelta > 0);
 
 	walking_ = dir;
 	walkstart_ = game.get_gametime();
-	walkend_ = walkstart_ + tdelta;
+	walkend_ = walkstart_ + Duration(tdelta);
 
 	set_position(game, newnode);
 	set_animation(game, a);
@@ -960,10 +960,10 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "Animation: %s\n",
 	      anim_ ? descr().get_animation_name(anim_).c_str() : "\\<none\\>");
 
-	molog(egbase.get_gametime(), "AnimStart: %i\n", animstart_);
+	molog(egbase.get_gametime(), "AnimStart: %i\n", animstart_.get());
 	molog(egbase.get_gametime(), "WalkingDir: %i\n", walking_);
-	molog(egbase.get_gametime(), "WalkingStart: %i\n", walkstart_);
-	molog(egbase.get_gametime(), "WalkEnd: %i\n", walkend_);
+	molog(egbase.get_gametime(), "WalkingStart: %i\n", walkstart_.get());
+	molog(egbase.get_gametime(), "WalkEnd: %i\n", walkend_.get());
 
 	molog(egbase.get_gametime(), "Signal: %s\n", signal_.c_str());
 
@@ -1060,11 +1060,11 @@ void Bob::Loader::load(FileRead& fr) {
 				         animname.c_str(), bob.descr().name().c_str());
 			}
 
-			bob.animstart_ = fr.signed_32();
+			bob.animstart_ = Time(fr);
 			bob.walking_ = static_cast<WalkingDir>(read_direction_8_allow_null(&fr));
 			if (bob.walking_) {
-				bob.walkstart_ = fr.signed_32();
-				bob.walkend_ = fr.signed_32();
+				bob.walkstart_ = Time(fr);
+				bob.walkend_ = Time(fr);
 			}
 
 			bob.actid_ = fr.unsigned_32();
@@ -1151,7 +1151,7 @@ void Bob::Loader::load_finish() {
 	//  See bug #537392 for more information:
 	//   https://bugs.launchpad.net/widelands/+bug/537392
 	Bob& bob = get<Bob>();
-	if (bob.stack_.empty() && !egbase().get_gametime()) {
+	if (bob.stack_.empty() && egbase().get_gametime().get() == 0) {
 		if (upcast(Game, game, &egbase())) {
 			bob.init_auto_task(*game);
 		}
@@ -1187,11 +1187,11 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 	// linkprev_ and linknext_ are recreated automatically
 
 	fw.c_string(anim_ ? descr().get_animation_name(anim_) : "");
-	fw.signed_32(animstart_);
+	animstart_.save(fw);
 	write_direction_8_allow_null(&fw, walking_);
 	if (walking_) {
-		fw.signed_32(walkstart_);
-		fw.signed_32(walkend_);
+		walkstart_.save(fw);
+		walkend_.save(fw);
 	}
 
 	fw.unsigned_32(actid_);

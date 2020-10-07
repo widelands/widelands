@@ -764,7 +764,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	// In-game clock and FPS
 	if ((game != nullptr) && get_config_bool("game_clock", true)) {
 		// Blit in-game clock
-		const std::string gametime(gametimestring(egbase().get_gametime(), true));
+		const std::string gametime(gametimestring(egbase().get_gametime().get(), true));
 		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
 		   as_richtext_paragraph(gametime, UI::FontStyle::kWuiGameSpeedAndCoordinates));
 		rendered_text->draw(dst, Vector2i(5, 5));
@@ -803,7 +803,7 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
 
 void InteractiveBase::draw_bridges(RenderTarget* dst,
                                    const FieldsToDraw::Field* f,
-                                   uint32_t gametime,
+                                   const Widelands::Time& gametime,
                                    float scale) const {
 	if (Widelands::is_bridge_segment(f->road_e)) {
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,

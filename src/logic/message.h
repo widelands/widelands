@@ -59,7 +59,7 @@ struct Message {
 	 *                   Player::add_message_with_timeout(). Defaults to ""
 	 */
 	Message(Message::Type msgtype,
-	        uint32_t sent_time,
+	        const Time& sent_time,
 	        const std::string& init_title,
 	        const std::string& init_icon_filename,
 	        const std::string& init_heading,
@@ -87,7 +87,7 @@ struct Message {
 	const std::string& sub_type() const {
 		return sub_type_;
 	}
-	uint32_t sent() const {
+	const Time& sent() const {
 		return sent_;
 	}
 	const std::string& title() const {
@@ -140,7 +140,7 @@ private:
 	const Image* icon_;  // Pointer to icon into picture stack
 	const std::string heading_;
 	const std::string body_;
-	uint32_t sent_;
+	Time sent_;
 	Widelands::Coords position_;
 	Widelands::Serial serial_;  // serial to map object
 	Status status_;

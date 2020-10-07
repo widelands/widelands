@@ -492,7 +492,7 @@ void EditorInteractive::think() {
 
 	realtime_ = SDL_GetTicks();
 
-	egbase().get_gametime_pointer() += realtime_ - lasttime;
+	egbase().get_gametime_pointer().increment(Widelands::Duration(realtime_ - lasttime));
 }
 
 void EditorInteractive::exit() {
@@ -538,7 +538,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	auto* fields_to_draw = map_view()->draw_terrain(ebase, nullptr, Workareas(), draw_grid_, &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
-	const uint32_t gametime = ebase.get_gametime();
+	const Widelands::Time& gametime = ebase.get_gametime();
 
 	// The map provides a mapping from player number to Coords, while we require
 	// the inverse here. We construct this, but this is done on every frame and

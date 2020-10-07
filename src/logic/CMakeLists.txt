@@ -63,6 +63,7 @@ wl_library(logic_game_controller
     ai
     logic
     logic_commands
+    logic_constants
     logic_game_settings
     ui_basic
     widelands_options
@@ -73,6 +74,8 @@ wl_library(logic_constants
   SRCS
     widelands.cc
     widelands.h
+  DEPENDS
+    io_fileread
 )
 
 wl_library(logic_filesystem_constants

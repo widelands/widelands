@@ -88,7 +88,7 @@ protected:
 	void cleanup(EditorGameBase&) override;
 
 	/** The road is drawn by the terrain renderer via marked fields. */
-	void draw(uint32_t, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
+	void draw(const Time&, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
 	}
 
 	void set_path(EditorGameBase&, const Path&);

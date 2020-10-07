@@ -25,9 +25,6 @@
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
-class FileRead;
-class FileWrite;
-
 namespace Widelands {
 
 /** struct Path

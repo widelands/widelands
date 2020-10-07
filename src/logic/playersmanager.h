@@ -44,7 +44,7 @@ class Player;
 struct PlayerEndStatus {
 	PlayerNumber player;
 	PlayerEndResult result;
-	uint32_t time;
+	Time time;
 	std::string info;
 };
 

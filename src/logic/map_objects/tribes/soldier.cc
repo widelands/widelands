@@ -333,8 +333,8 @@ Soldier::Soldier(const SoldierDescr& soldier_descr) : Worker(soldier_descr) {
 	retreat_health_ = 0;
 
 	combat_walking_ = CD_NONE;
-	combat_walkstart_ = 0;
-	combat_walkend_ = 0;
+	combat_walkstart_ = Time(0);
+	combat_walkend_ = Time(0);
 }
 
 bool Soldier::init(EditorGameBase& egbase) {
@@ -347,8 +347,8 @@ bool Soldier::init(EditorGameBase& egbase) {
 	current_health_ = get_max_health();
 
 	combat_walking_ = CD_NONE;
-	combat_walkstart_ = 0;
-	combat_walkend_ = 0;
+	combat_walkstart_ = Time(0);
+	combat_walkend_ = Time(0);
 
 	get_owner()->add_soldier(health_level_, attack_level_, defense_level_, evade_level_);
 
@@ -542,8 +542,8 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
 	}
 
 	if (moving) {
-		const float f = math::clamp(static_cast<float>(game.get_gametime() - combat_walkstart_) /
-		                               (combat_walkend_ - combat_walkstart_),
+		const float f = math::clamp(static_cast<float>(game.get_gametime().get() - combat_walkstart_.get()) /
+		                               (combat_walkend_.get() - combat_walkstart_.get()),
 		                            0.f, 1.f);
 		assert(combat_walkstart_ <= game.get_gametime());
 		assert(combat_walkstart_ < combat_walkend_);
@@ -651,7 +651,7 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 		if (battle_) {
 			uint32_t pending_damage = battle_->get_pending_damage(this);
 			if (pending_damage > 0) {
-				int32_t timeshift = owner().egbase().get_gametime() - get_animstart();
+				int32_t timeshift = owner().egbase().get_gametime().get() - get_animstart().get();
 				timeshift = std::min(std::max(0, timeshift), 1000);
 
 				pending_damage *= timeshift;
@@ -723,10 +723,10 @@ void Soldier::pop_task_or_fight(Game& game) {
  */
 void Soldier::start_animation(EditorGameBase& egbase,
                               const std::string& animname,
-                              uint32_t const time) {
+                              const Duration& time) {
 	molog(egbase.get_gametime(), "[soldier] starting animation %s", animname.c_str());
 	Game& game = dynamic_cast<Game&>(egbase);
-	return start_task_idle(game, descr().get_rand_anim(game, animname, this), time);
+	return start_task_idle(game, descr().get_rand_anim(game, animname, this), time.get());
 }
 
 /**
@@ -891,7 +891,7 @@ void Soldier::attack_update(Game& game, State& state) {
 			if (!location || !is_a(MilitarySite, location)) {
 				molog(game.get_gametime(), "[attack] No more site to go back to\n");
 				state.ivar2 = 2;
-				return schedule_act(game, 10);
+				return schedule_act(game, Duration(10));
 			}
 			Flag& baseflag = location->base_flag();
 			if (get_position() == baseflag.get_position()) {
@@ -1029,13 +1029,13 @@ void Soldier::attack_update(Game& game, State& state) {
 					pop_task(game);
 					set_location(newsite);
 					newsite->update_soldier_request();
-					return schedule_act(game, 10);
+					return schedule_act(game, Duration(10));
 				}
 			}
 		}
 		// Return home
 		state.ivar2 = 1;
-		return schedule_act(game, 10);
+		return schedule_act(game, Duration(10));
 	}
 
 	// At this point, we know that the enemy building still stands,
@@ -1050,7 +1050,7 @@ void Soldier::attack_update(Game& game, State& state) {
 			state.coords = Coords::null();
 			state.objvar1 = nullptr;
 			state.ivar2 = 1;
-			return schedule_act(game, 10);
+			return schedule_act(game, Duration(10));
 		}
 	}
 
@@ -1059,9 +1059,9 @@ void Soldier::attack_update(Game& game, State& state) {
 	molog(game.get_gametime(), "[attack] attacking target building\n");
 	//  give the enemy soldier some time to act
 	schedule_act(
-	   game, enemy->attack_target()->attack(this) == AttackTarget::AttackResult::DefenderLaunched ?
+	   game, Duration(enemy->attack_target()->attack(this) == AttackTarget::AttackResult::DefenderLaunched ?
 	            1000 :
-	            10);
+	            10));
 }
 
 void Soldier::attack_pop(Game& game, State&) {
@@ -1344,8 +1344,8 @@ void Soldier::start_task_move_in_battle(Game& game, CombatWalkingDir dir) {
 	}
 
 	const Map& map = game.map();
-	int32_t const tdelta = (map.calc_cost(get_position(), mapdir)) / 2;
-	molog(game.get_gametime(), "[move_in_battle] dir: (%d) tdelta: (%d)\n", dir, tdelta);
+	const Duration tdelta = Duration(map.calc_cost(get_position(), mapdir)) / 2;
+	molog(game.get_gametime(), "[move_in_battle] dir: (%d) tdelta: (%d)\n", dir, tdelta.get());
 	combat_walking_ = dir;
 	combat_walkstart_ = game.get_gametime();
 	combat_walkend_ = combat_walkstart_ + tdelta;
@@ -1468,7 +1468,7 @@ void Soldier::battle_update(Game& game, State&) {
 		if (opponent.stay_home() && (this == battle_->second())) {
 			// Wait until correct roles are assigned
 			new Battle(game, battle_->second(), battle_->first());
-			return schedule_act(game, 10);
+			return schedule_act(game, Duration(10));
 		}
 
 		if (opponent.get_position() != get_position()) {
@@ -1568,7 +1568,7 @@ Bob::Task const Soldier::taskDie = {"die", static_cast<Bob::Ptr>(&Soldier::die_u
 
 void Soldier::start_task_die(Game& game) {
 	push_task(game, taskDie);
-	top_state().ivar1 = game.get_gametime() + 1000;
+	top_state().ivar1 = game.get_gametime().get() + 1000;
 
 	// Dead soldier is not owned by a location
 	set_location(nullptr);
@@ -1587,8 +1587,8 @@ void Soldier::die_update(Game& game, State& state) {
 		signal_handled();
 	}
 
-	if ((state.ivar1 >= 0) && (static_cast<uint32_t>(state.ivar1) > game.get_gametime())) {
-		return schedule_act(game, state.ivar1 - game.get_gametime());
+	if ((state.ivar1 >= 0) && (Time(state.ivar1) > game.get_gametime())) {
+		return schedule_act(game, Time(state.ivar1) - game.get_gametime());
 	}
 
 	// When task updated, dead is near!
@@ -1738,8 +1738,8 @@ void Soldier::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "Defense:  %d%%\n", get_defense());
 	molog(egbase.get_gametime(), "Evade:    %d%%\n", get_evade());
 	molog(egbase.get_gametime(), "CombatWalkingDir:   %i\n", combat_walking_);
-	molog(egbase.get_gametime(), "CombatWalkingStart: %i\n", combat_walkstart_);
-	molog(egbase.get_gametime(), "CombatWalkEnd:      %i\n", combat_walkend_);
+	molog(egbase.get_gametime(), "CombatWalkingStart: %i\n", combat_walkstart_.get());
+	molog(egbase.get_gametime(), "CombatWalkEnd:      %i\n", combat_walkend_.get());
 	molog(egbase.get_gametime(), "HasBattle:   %s\n", battle_ ? "yes" : "no");
 	if (battle_) {
 		molog(egbase.get_gametime(), "BattleSerial: %u\n", battle_->serial());
@@ -1795,8 +1795,8 @@ void Soldier::Loader::load(FileRead& fr) {
 
 			soldier.combat_walking_ = static_cast<CombatWalkingDir>(fr.unsigned_8());
 			if (soldier.combat_walking_ != CD_NONE) {
-				soldier.combat_walkstart_ = fr.unsigned_32();
-				soldier.combat_walkend_ = fr.unsigned_32();
+				soldier.combat_walkstart_ = Time(fr);
+				soldier.combat_walkend_ = Time(fr);
 			}
 
 			battle_ = fr.unsigned_32();
@@ -1854,8 +1854,8 @@ void Soldier::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 
 	fw.unsigned_8(combat_walking_);
 	if (combat_walking_ != CD_NONE) {
-		fw.unsigned_32(combat_walkstart_);
-		fw.unsigned_32(combat_walkend_);
+		combat_walkstart_.save(fw);
+		combat_walkend_.save(fw);
 	}
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(battle_));

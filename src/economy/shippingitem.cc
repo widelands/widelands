@@ -101,7 +101,7 @@ void ShippingItem::end_shipping(Game& game) {
 
 	if (ware) {
 		ware->update(game);
-		ware->schedule_act(game, 10);
+		ware->schedule_act(game, Duration(10));
 	}
 	if (worker) {
 		worker->end_shipping(game);

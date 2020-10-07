@@ -71,7 +71,7 @@ private:
 
 	InteractiveGameBase& parent_;
 	MapView map_view_;
-	uint32_t last_visit_;
+	Widelands::Time last_visit_;
 	bool single_window_;
 	uint8_t cur_index_;
 	UI::Button* view_btns_[kViews];

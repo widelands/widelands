@@ -27,7 +27,7 @@
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/soldier.h"
 
-constexpr int32_t kUpdateTimeInGametimeMs = 500;  //  half a second, gametime
+constexpr Widelands::Duration kUpdateTimeInGametimeMs = Widelands::Duration(500);  //  half a second, gametime
 
 AttackBox::AttackBox(UI::Panel* parent,
                      Widelands::Player* player,

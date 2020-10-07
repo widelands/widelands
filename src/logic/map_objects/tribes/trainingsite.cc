@@ -367,7 +367,7 @@ void TrainingSite::SoldierControl::drop_soldier(Soldier& soldier) {
 	soldier.start_task_leavebuilding(game, true);
 
 	// Schedule, so that we can call new soldiers on next act()
-	training_site_->schedule_act(game, 100);
+	training_site_->schedule_act(game, Duration(100));
 	Notifications::publish(
 	   NoteTrainingSiteSoldierTrained(training_site_, training_site_->get_owner()));
 }
@@ -414,14 +414,14 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	// overwrite priorities.
 	calc_upgrades();
 	current_upgrade_ = nullptr;
-	set_post_timer(6000);
+	set_post_timer(Duration(6000));
 	training_failure_count_.clear();
 	max_stall_val_ = training_state_multiplier_ * d.get_max_stall();
 	highest_trainee_level_seen_ = 1;
 	latest_trainee_kickout_level_ = 1;
 	latest_trainee_was_kickout_ = false;
 	requesting_weak_trainees_ = false;
-	request_open_since_ = 0;
+	request_open_since_ = Time(0);
 	trainee_general_lower_bound_ = 2;
 	repeated_layoff_ctr_ = 0;
 	repeated_layoff_inc_ = false;
@@ -504,7 +504,7 @@ void TrainingSite::add_worker(Worker& w) {
 		}
 
 		if (upcast(Game, game, &get_owner()->egbase())) {
-			schedule_act(*game, 100);
+			schedule_act(*game, Duration(100));
 		}
 	}
 }
@@ -524,7 +524,7 @@ void TrainingSite::remove_worker(Worker& w) {
 			soldiers_.erase(it);
 
 			if (game) {
-				schedule_act(*game, 100);
+				schedule_act(*game, Duration(100));
 			}
 		}
 	}
@@ -544,7 +544,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 	Game* game = get_owner() ? dynamic_cast<Game*>(&(get_owner()->egbase())) : nullptr;
 	bool rebuild_request = false;
 	bool need_more_soldiers = false;
-	uint32_t dynamic_timeout = acceptance_threshold_timeout;
+	Duration dynamic_timeout = acceptance_threshold_timeout;
 	uint8_t trainee_general_upper_bound = std::numeric_limits<uint8_t>::max() - 1;
 	bool limit_upper_bound = false;
 
@@ -578,7 +578,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		repeated_layoff_inc_ = true;
 	}
 
-	const uint32_t timeofgame = game ? game->get_gametime() : 0;
+	const Time& timeofgame = game ? game->get_gametime() : Time(0);
 
 	if (did_incorporate && latest_trainee_was_kickout_ != requesting_weak_trainees_) {
 		// If type of desired recruits has been changed, the request is rebuild after incorporate
@@ -730,7 +730,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			qr.add(r);
 			soldier_request_->set_requirements(qr);
 			if (game) {
-				schedule_act(*game, 1 + dynamic_timeout);
+				schedule_act(*game, dynamic_timeout + Duration(1));
 			}
 		} else {
 			soldier_request_->set_requirements(r);

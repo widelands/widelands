@@ -20,9 +20,13 @@
 #ifndef WL_LOGIC_WIDELANDS_H
 #define WL_LOGIC_WIDELANDS_H
 
+#include <cassert>
 #include <cstdint>
 #include <limits>
 #include <vector>
+
+class FileRead;
+class FileWrite;
 
 namespace Widelands {
 
@@ -68,15 +72,160 @@ using Quantity = uint32_t;  // e.g. the number of a type of ware in a warehouse.
 
 using Vision = uint16_t;
 
-using Time = int32_t;  // TODO(unknown): should be unsigned
-inline Time never() {
-	return 0xffffffff;
-}
+// The difference of two points in time, in milliseconds gametime.
+struct Duration {
+	// The default-constructed Duration is the special value "endless"
+	constexpr explicit Duration(uint32_t v = std::numeric_limits<uint32_t>::max()) : value_(v) {
+	}
+	void operator+=(const Duration& delta) {
+		assert(is_valid());
+		assert(delta.is_valid());
+		value_ += delta.get();
+	}
+	void operator-=(const Duration& delta) {
+		assert(is_valid());
+		assert(delta.is_valid());
+		assert(get() >= delta.get());
+		value_ -= delta.get();
+	}
+	void operator/=(uint32_t d) {
+		assert(is_valid());
+		assert(d > 0);
+		value_ /= d;
+	}
 
-using Duration = uint32_t;
-inline Duration endless() {
-	return 0xffffffff;
-}
+	// Intervals arithmetics
+	Duration operator+(const Duration& d) const {
+		assert(is_valid());
+		assert(d.is_valid());
+		return Duration(get() + d.get());
+	}
+	Duration operator-(const Duration& d) const {
+		assert(is_valid());
+		assert(d.is_valid());
+		assert(get() >= d.get());
+		return Duration(get() - d.get());
+	}
+	Duration operator*(uint32_t d) const {
+		assert(is_valid());
+		return Duration(get() * d);
+	}
+	Duration operator/(uint32_t d) const {
+		assert(is_valid());
+		assert(d > 0);
+		return Duration(get() / d);
+	}
+
+	uint32_t get() const {
+		return value_;
+	}
+
+	inline bool operator<(const Duration& m) const {
+		return get() < m.get();
+	}
+	inline bool operator>(const Duration& m) const {
+		return get() > m.get();
+	}
+	inline bool operator<=(const Duration& m) const {
+		return get() <= m.get();
+	}
+	inline bool operator>=(const Duration& m) const {
+		return get() >= m.get();
+	}
+	inline bool operator==(const Duration& m) const {
+		return get() == m.get();
+	}
+	inline bool operator!=(const Duration& m) const {
+		return get() != m.get();
+	}
+
+	// Special values
+	inline bool is_invalid() const {
+		return *this == Duration();
+	}
+	inline bool is_valid() const {
+		return !is_invalid();
+	}
+
+	// Saveloading
+	explicit Duration(FileRead&);
+	void save(FileWrite&) const;
+
+private:
+	uint32_t value_;
+};
+
+// A time point, in milliseconds gametime.
+struct Time {
+	// The default-constructed Time is the special value "never"
+	constexpr explicit Time(uint32_t v = std::numeric_limits<uint32_t>::max()) : value_(v) {
+	}
+
+	// Adding/subtracting intervals
+	Time operator+(const Duration& delta) const {
+		assert(is_valid());
+		assert(delta.is_valid());
+		return Time(get() + delta.get());
+	}
+	Time operator-(const Duration& delta) const {
+		assert(is_valid());
+		assert(delta.is_valid());
+		assert(get() >= delta.get());
+		return Time(get() - delta.get());
+	}
+
+	// Obtaining a time difference
+	Duration operator-(const Time& t) const {
+		assert(is_valid());
+		assert(t.is_valid());
+		assert(get() >= t.get());
+		return Duration(get() - t.get());
+	}
+
+	uint32_t get() const {
+		return value_;
+	}
+
+	void increment(const Duration& d = Duration(1)) {
+		assert(is_valid());
+		assert(d.is_valid());
+		value_ += d.get();
+	}
+
+	inline bool operator<(const Time& m) const {
+		return get() < m.get();
+	}
+	inline bool operator>(const Time& m) const {
+		return get() > m.get();
+	}
+	inline bool operator<=(const Time& m) const {
+		return get() <= m.get();
+	}
+	inline bool operator>=(const Time& m) const {
+		return get() >= m.get();
+	}
+	inline bool operator==(const Time& m) const {
+		return get() == m.get();
+	}
+	inline bool operator!=(const Time& m) const {
+		return get() != m.get();
+	}
+
+	// Special values
+	inline bool is_invalid() const {
+		return *this == Time();
+	}
+	inline bool is_valid() const {
+		return !is_invalid();
+	}
+
+	// Saveloading
+	explicit Time(FileRead&);
+	void save(FileWrite&) const;
+
+private:
+	uint32_t value_;
+};
 
 using Serial = uint32_t;  /// Serial number for MapObject.
 constexpr Serial kInvalidSerial = std::numeric_limits<uint32_t>::max();

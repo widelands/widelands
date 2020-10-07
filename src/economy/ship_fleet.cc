@@ -681,7 +681,7 @@ void ShipFleet::update(EditorGameBase& egbase) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		schedule_act(*game, 100);
+		schedule_act(*game, Duration(100));
 		act_pending_ = true;
 	}
 }
@@ -705,7 +705,7 @@ void ShipFleet::act(Game& game, uint32_t) {
 
 	// All the work is done by the schedule
 	const Duration next = schedule_.update(game);
-	if (next < endless()) {
+	if (next.is_valid()) {
 		schedule_act(game, next);
 		act_pending_ = true;
 	}

@@ -340,7 +340,7 @@ public:
 	                  const std::string& heading,
 	                  const std::string& description,
 	                  bool link_to_building_lifetime = true,
-	                  uint32_t throttle_time = 0,
+	                  const Duration& throttle_time = Duration(0),
 	                  uint32_t throttle_radius = 0);
 
 	bool mute_messages() const {
@@ -366,7 +366,7 @@ protected:
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
-	void draw(uint32_t gametime,
+	void draw(const Time& gametime,
 	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Coords& coords,
@@ -383,11 +383,11 @@ protected:
 	Flag* flag_;
 
 	uint32_t anim_;
-	int32_t animstart_;
+	Time animstart_;
 
 	using LeaveQueue = std::vector<OPtr<Worker>>;
 	LeaveQueue leave_queue_;     //  FIFO queue of workers leaving the building
-	uint32_t leave_time_;        //  when to wake the next one from leave queue
+	Time leave_time_;        //  when to wake the next one from leave queue
 	ObjectPointer leave_allow_;  //  worker that is allowed to leave now
 
 	//  The player who has defeated this building.

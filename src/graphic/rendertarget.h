@@ -27,6 +27,7 @@
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
+#include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
 class Surface;
@@ -112,7 +113,7 @@ public:
 	                    const Widelands::Coords& coords,
 	                    const float scale,
 	                    uint32_t animation_id,
-	                    uint32_t time,
+	                    const Widelands::Time& time,
 	                    const RGBColor* player_color = nullptr,
 	                    float opacity = 1.0f,
 	                    const int percent_from_bottom = 100);

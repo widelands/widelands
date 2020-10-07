@@ -17,4 +17,23 @@
  *
  */
 
-// Dummy file as cmake cannot handle header only libraries :(.
+#include "logic/widelands.h"
+
+#include "io/fileread.h"
+#include "io/filewrite.h"
+
+namespace Widelands {
+
+Duration::Duration(FileRead& fr) : value_(fr.unsigned_32()) {
+}
+void Duration::save(FileWrite& fw) const {
+	fw.unsigned_32(value_);
+}
+
+Time::Time(FileRead& fr) : value_(fr.unsigned_32()) {
+}
+void Time::save(FileWrite& fw) const {
+	fw.unsigned_32(value_);
+}
+
+}

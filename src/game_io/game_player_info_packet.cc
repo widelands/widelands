@@ -103,7 +103,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 				PlayerEndStatus status;
 				status.player = fr.unsigned_8();
 				status.result = static_cast<PlayerEndResult>(fr.unsigned_8());
-				status.time = fr.unsigned_32();
+				status.time = Time(fr);
 				status.info = fr.c_string();
 				manager->set_player_end_status(status);
 			}
@@ -175,7 +175,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 	for (const PlayerEndStatus& status : end_status_list) {
 		fw.unsigned_8(status.player);
 		fw.unsigned_8(static_cast<uint8_t>(status.result));
-		fw.unsigned_32(status.time);
+		status.time.save(fw);
 		fw.c_string(status.info.c_str());
 	}
 

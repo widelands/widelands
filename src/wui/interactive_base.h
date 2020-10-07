@@ -226,7 +226,7 @@ protected:
 
 	void draw_bridges(RenderTarget* dst,
 	                  const FieldsToDraw::Field* f,
-	                  uint32_t gametime,
+	                  const Widelands::Time& gametime,
 	                  float scale) const;
 	void draw_road_building(FieldsToDraw::Field&);
 

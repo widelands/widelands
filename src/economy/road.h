@@ -110,7 +110,7 @@ private:
 	int32_t wallet_;
 
 	/// holds the gametime when wallet_ was last charged
-	uint32_t last_wallet_charge_;
+	Time last_wallet_charge_;
 
 	void request_carrier(CarrierSlot&);
 	static void

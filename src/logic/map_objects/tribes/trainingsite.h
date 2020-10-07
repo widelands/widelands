@@ -291,9 +291,9 @@ private:
 	bool recent_capacity_increase_;    // If used explicitly asks for more folks
 	const uint8_t kUpperBoundThreshold_ =
 	   3;  // Higher value makes it less likely to get weak soldiers in.
-	const uint32_t acceptance_threshold_timeout =
-	   5555;  // Lower the bar after this many milliseconds.
-	uint32_t
+	const Duration acceptance_threshold_timeout = Duration(
+	   5555);  // Lower the bar after this many milliseconds.
+	Time
 	   request_open_since_;  // Time units. If no soldiers appear, threshold is lowered after this.
 	void init_kick_state(const TrainingAttribute&, const TrainingSiteDescr&);
 

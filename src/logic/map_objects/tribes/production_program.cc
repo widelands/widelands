@@ -880,7 +880,7 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 	case ProgramResultHandlingMethod::kRepeat:
 		ps.top_state().phase = ProgramResult::kNone;
 		ps.program_timer_ = true;
-		ps.program_time_ = ps.schedule_act(game, 10);
+		ps.program_time_ = ps.schedule_act(game, Duration(10));
 		break;
 	}
 }
@@ -1040,7 +1040,7 @@ ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
 }
 
 void ProductionProgram::ActSleep::execute(Game& game, ProductionSite& ps) const {
-	return ps.program_step(game, duration_ ? duration_ : 0, ps.top_state().phase);
+	return ps.program_step(game, duration_.get() ? duration_ : Duration(0), ps.top_state().phase);
 }
 
 /* RST
@@ -1056,7 +1056,7 @@ ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argume
 void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) const {
 	ps.start_animation(game, parameters.animation);
 	return ps.program_step(
-	   game, parameters.duration ? parameters.duration : 0, ps.top_state().phase);
+	   game, parameters.duration.get() ? parameters.duration : Duration(0), ps.top_state().phase);
 }
 
 /* RST

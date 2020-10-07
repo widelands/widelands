@@ -268,8 +268,8 @@ void Critter::roam_update(Game& game, State& state) {
 	}
 
 	// alternately move and idle
-	Time idle_time_min = 1000;
-	Time idle_time_rnd = kCritterMaxIdleTime;
+	uint32_t idle_time_min = 1000;
+	uint32_t idle_time_rnd = kCritterMaxIdleTime;
 
 	if (state.ivar1) {
 		state.ivar1 = 0;
@@ -302,7 +302,7 @@ void Critter::roam_update(Game& game, State& state) {
 	}
 	state.ivar1 = 1;
 
-	const uint32_t age = game.get_gametime() - creation_time_;
+	const uint32_t age = (game.get_gametime() - creation_time_).get();
 	const uint32_t reproduction_rate = descr().get_reproduction_rate();
 
 	{  // chance to die
@@ -387,7 +387,7 @@ void Critter::roam_update(Game& game, State& state) {
 				upcast(Immovable, imm, get_position().field->get_immovable());
 				assert(imm);
 				molog(game.get_gametime(), "Yummy, I love a %s...\n", imm->descr().name().c_str());
-				imm->delay_growth(descr().get_size() * 2000);
+				imm->delay_growth(Duration(descr().get_size() * 2000));
 			} else {
 				Critter* food = candidates_for_eating[idx];
 				molog(game.get_gametime(), "Yummy, I love a %s...\n", food->descr().name().c_str());
@@ -547,7 +547,7 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 			}
 
 			Critter& critter = dynamic_cast<Critter&>(descr->create_object());
-			critter.creation_time_ = packet_version >= 3 ? fr.unsigned_32() : 0;
+			critter.creation_time_ = packet_version >= 3 ? Time(fr) : Time(0);
 			loader->init(egbase, mol, critter);
 			loader->load(fr);
 		} else {
@@ -569,7 +569,7 @@ void Critter::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	                                  "world";
 	fw.c_string(save_owner);
 	fw.c_string(descr().name());
-	fw.unsigned_32(creation_time_);
+	creation_time_.save(fw);
 
 	Bob::save(egbase, mos, fw);
 }
