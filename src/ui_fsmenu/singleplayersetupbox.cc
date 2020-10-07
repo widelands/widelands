@@ -82,7 +82,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 	add(&player_);
 	add(player_type_.get_dropdown());
 	add(tribe_.get_dropdown());
-	add(start_type.get_dropdown());
+	add(start_type.get_dropdown(), UI::Box::Resizing::kExpandBoth);
 	add(teams_.get_dropdown());
 
 	player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
@@ -129,7 +129,7 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      settings_(settings),
      standard_height(standard_element_height),
-     scrollableBox_(this, 0, 0, UI::Box::Vertical),
+     scrollable_playerbox(this, 0, 0, UI::Box::Vertical),
      title_(this,
             0,
             0,
@@ -140,26 +140,29 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
             g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
-	add(&scrollableBox_, Resizing::kAlign, UI::Align::kCenter);
-	scrollableBox_.set_scrolling(true);
-	subscriber_ =
-	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
+	add(&scrollable_playerbox, Resizing::kExpandBoth);
+	scrollable_playerbox.set_scrolling(true);
+	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
+		if (n.action == NoteGameSettings::Action::kMap) {
+			reset();
+		}
+		update();
+	});
 }
 
 void SinglePlayerSetupBox::update() {
 
 	const GameSettings& settings = settings_->settings();
 	const size_t number_of_players = settings.players.size();
-	for (auto& p : active_player_groups) {
-		p->die();
-	}
-	active_player_groups.clear();
-	active_player_groups.resize(number_of_players);
 
-	for (PlayerSlot i = 0; i < active_player_groups.size(); ++i) {
-		active_player_groups.at(i) =
-		   new SinglePlayerActivePlayerGroup(this, 0, standard_height, i, settings_);
-		add(active_player_groups.at(i), Resizing::kAlign, UI::Align::kCenter);
+	for (PlayerSlot i = active_player_groups.size(); i < number_of_players; ++i) {
+		active_player_groups.push_back(new SinglePlayerActivePlayerGroup(
+		   &scrollable_playerbox, 0, standard_height, i, settings_));
+		scrollable_playerbox.add(active_player_groups.at(i), Resizing::kFullSize);
+	}
+
+	for (auto& p : active_player_groups) {
+		p->update();
 	}
 }
 
@@ -169,4 +172,10 @@ void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_e
 	for (auto& active_player_group : active_player_groups) {
 		active_player_group->force_new_dimensions(scale, standard_element_height);
 	}
+}
+void SinglePlayerSetupBox::reset() {
+	for (auto& p : active_player_groups) {
+		p->die();
+	}
+	active_player_groups.clear();
 }
