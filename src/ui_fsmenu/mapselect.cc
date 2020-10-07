@@ -192,8 +192,9 @@ void FullscreenMenuMapSelect::think() {
 	if (update_map_details_) {
 		// Call performance heavy draw_minimap function only during think
 		update_map_details_ = false;
-		map_details_.update(
+		bool loadable = map_details_.update(
 		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
+		ok_.set_enabled(loadable && maps_data_.at(table_.get_selected()).nrplayers > 0);
 	}
 }
 
@@ -225,6 +226,8 @@ void FullscreenMenuMapSelect::clicked_ok() {
 	if (!mapdata.width) {
 		curdir_ = mapdata.filename;
 		fill_table();
+	} else if (!ok_.enabled()) {
+		return;
 	} else {
 		if (maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
@@ -236,9 +239,9 @@ void FullscreenMenuMapSelect::clicked_ok() {
 
 bool FullscreenMenuMapSelect::set_has_selection() {
 	bool has_selection = table_.has_selection();
-	ok_.set_enabled(has_selection && maps_data_.at(table_.get_selected()).nrplayers > 0);
 
 	if (!has_selection) {
+		ok_.set_enabled(false);
 		map_details_.clear();
 	}
 	return has_selection;
