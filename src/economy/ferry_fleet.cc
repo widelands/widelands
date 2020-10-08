@@ -172,6 +172,7 @@ bool FerryFleet::merge(EditorGameBase& egbase, FerryFleet* other) {
 		auto pair = other->pending_ferry_requests_.begin();
 		uint32_t time = pair->first;
 		Waterway* ww = pair->second;
+		assert(ww->get_fleet() == other);
 		// set_fleet() tells the associated waterway to remove this request from the other fleet
 		ww->set_fleet(this);
 		pending_ferry_requests_.emplace(time, ww);
@@ -191,9 +192,8 @@ void FerryFleet::cleanup(EditorGameBase& egbase) {
 	}
 	while (!pending_ferry_requests_.empty()) {
 		auto pair = pending_ferry_requests_.begin();
-		if (egbase.objects().object_still_available(pair->second)) {
-			pair->second->set_fleet(nullptr);
-		}
+		assert(pair->second->get_fleet() == this);
+		pair->second->set_fleet(nullptr);
 		pending_ferry_requests_.erase(pair);
 	}
 
@@ -280,7 +280,7 @@ void FerryFleet::cancel_ferry_request(Game& game, Waterway* waterway) {
 	for (Ferry* ferry : ferries_) {
 		if (ferry->get_destination(game) == waterway) {
 			ferry->set_destination(game, nullptr);
-			return;
+			break;
 		}
 	}
 	for (auto it = pending_ferry_requests_.begin(); it != pending_ferry_requests_.end(); ++it) {
