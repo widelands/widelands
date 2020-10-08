@@ -38,6 +38,15 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 5;
 
+/// Vision values for saveloading. We only care about PreviouslySeen and Revealed states here,
+/// the details about current player objects' vision are reconstructed when loading map object data.
+/// The values are stored in savegames so don't change them.
+enum class SavedVisionState {
+	kNone = '0',            // Neither of the below states
+	kPreviouslySeen = 'P',  // Previously seen, unseen now
+	kRevealed = 'R'         // Explicitly revealed
+};
+
 inline bool from_unsigned(unsigned value) {
 	return value == 1;
 }
@@ -100,10 +109,14 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				std::vector<std::string> data_vector;
 				std::string parseme;
 
-				// Seeing
+				// field.vision
 				parseme = fr.c_string();
-				boost::split(field_vector, parseme, boost::is_any_of("|"));
-				assert(field_vector.size() == no_of_fields);
+
+				// TODO(Niektory): Savegame compatibility
+				if (packet_version <= 4) {
+					boost::split(field_vector, parseme, boost::is_any_of("|"));
+					assert(field_vector.size() == no_of_fields);
+				}
 
 				for (MapIndex m = 0; m < no_of_fields; ++m) {
 					Player::Field& f = player->fields_[m];
@@ -124,12 +137,12 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							}
 						}
 					} else {
-						Vision saved_vision = Vision(stoi(field_vector[m]));
+						SavedVisionState saved_vision = SavedVisionState(parseme.at(m));
 						assert(f.vision.value == 1 || f.vision.value % 2 == 0);
-						if (saved_vision.value == 1) {
+						if (saved_vision == SavedVisionState::kPreviouslySeen) {
 							assert(f.vision.value <= 1);
 							f.vision.value = 1;
-						} else if (saved_vision.value % 2 == 1) {
+						} else if (saved_vision == SavedVisionState::kRevealed) {
 							if (f.vision.value < 2) {
 								f.vision.value = 2;
 							}
@@ -137,12 +150,6 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							assert(f.vision.value > 2);
 							assert(f.vision.value % 2 == 1);
 						}
-						if (saved_vision.value != f.vision.value) {
-							log_err("player%u(%d,%d): saved_vision %u != %u f.vision\n", p,
-							        map.get_fcoords(map[m]).x, map.get_fcoords(map[m]).y,
-							        saved_vision.value, f.vision.value);
-						}
-						assert(saved_vision.value == f.vision.value);
 					}
 
 					if (f.vision == VisibleState::kPreviouslySeen) {
@@ -515,12 +522,15 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 		// Write numerical field infos as combined strings to reduce number of hard disk write
 		// operations
 		{
-			// Seeing
+			// field.vision
 			std::ostringstream oss("");
 			const MapIndex upper_bound = map.max_index() - 1;
 			for (MapIndex m = 0; m < upper_bound; ++m) {
 				const Player::Field& f = player->fields_[m];
-				oss << static_cast<unsigned>(f.vision.value) << "|";
+				oss << static_cast<char>(f.vision.is_revealed() ?
+				   SavedVisionState::kRevealed :
+				   f.vision == VisibleState::kPreviouslySeen ? SavedVisionState::kPreviouslySeen :
+				                                               SavedVisionState::kNone);
 				if (f.vision == VisibleState::kPreviouslySeen) {
 					seen_fields.insert(&f);
 					// The data for some of the terrains and edges between PreviouslySeen
@@ -536,7 +546,10 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				}
 			}
 			const Player::Field& f = player->fields_[upper_bound];
-			oss << static_cast<unsigned>(f.vision.value);
+			oss << static_cast<char>(f.vision.is_revealed() ?
+				   SavedVisionState::kRevealed :
+				   f.vision == VisibleState::kPreviouslySeen ? SavedVisionState::kPreviouslySeen :
+				                                               SavedVisionState::kNone);
 			if (f.vision == VisibleState::kPreviouslySeen) {
 				seen_fields.insert(&f);
 			}
