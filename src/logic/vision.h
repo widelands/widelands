@@ -84,6 +84,17 @@ struct Vision {
 	uint16_t seers() const {
 		return value > 3 ? (value - 2) / 2 : 0;
 	}
+
+	void set_revealed(bool reveal) {
+		if (reveal == is_revealed()) {
+			return;
+		}
+		if (reveal) {
+			value = std::max(value, uint16_t(2)) + 1;
+		} else {
+			--value;
+		}
+	}
 };
 
 }  // namespace Widelands

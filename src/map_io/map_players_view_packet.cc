@@ -120,6 +120,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				for (MapIndex m = 0; m < no_of_fields; ++m) {
 					Player::Field& f = player->fields_[m];
+					assert(!f.vision.is_revealed());
 
 					// TODO(Niektory): Savegame compatibility
 					if (packet_version <= 4) {
@@ -129,26 +130,17 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							f.vision = Vision(VisibleState::kPreviouslySeen);
 						}
 						if (revealed_fields.count(m)) {
-							if (f.vision.value < 2) {
-								f.vision.value = 2;
-							}
-							if (f.vision.value % 2 == 0) {
-								++f.vision.value;
-							}
+							f.vision.set_revealed(true);
+							assert(f.vision.is_revealed());
 						}
 					} else {
 						SavedVisionState saved_vision = SavedVisionState(parseme.at(m));
-						assert(f.vision.value == 1 || f.vision.value % 2 == 0);
 						if (saved_vision == SavedVisionState::kPreviouslySeen) {
-							assert(f.vision.value <= 1);
-							f.vision.value = 1;
+							assert(!f.vision.is_visible());
+							f.vision = Vision(VisibleState::kPreviouslySeen);
 						} else if (saved_vision == SavedVisionState::kRevealed) {
-							if (f.vision.value < 2) {
-								f.vision.value = 2;
-							}
-							++f.vision.value;
-							assert(f.vision.value > 2);
-							assert(f.vision.value % 2 == 1);
+							f.vision.set_revealed(true);
+							assert(f.vision.is_revealed());
 						}
 					}
 
@@ -378,12 +370,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						f.vision = Vision(VisibleState::kPreviouslySeen);
 					}
 					if (revealed_fields.count(m - 1)) {
-						if (f.vision.value < 2) {
-							f.vision.value = 2;
-						}
-						if (f.vision.value % 2 == 0) {
-							++f.vision.value;
-						}
+						f.vision.set_revealed(true);
 					}
 
 					if (f.vision != VisibleState::kPreviouslySeen && packet_version > 1) {
