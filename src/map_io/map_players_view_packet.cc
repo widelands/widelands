@@ -515,9 +515,10 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			for (MapIndex m = 0; m < upper_bound; ++m) {
 				const Player::Field& f = player->fields_[m];
 				oss << static_cast<char>(f.vision.is_revealed() ?
-				   SavedVisionState::kRevealed :
-				   f.vision == VisibleState::kPreviouslySeen ? SavedVisionState::kPreviouslySeen :
-				                                               SavedVisionState::kNone);
+				                            SavedVisionState::kRevealed :
+				                            f.vision == VisibleState::kPreviouslySeen ?
+				                            SavedVisionState::kPreviouslySeen :
+				                            SavedVisionState::kNone);
 				if (f.vision == VisibleState::kPreviouslySeen) {
 					seen_fields.insert(&f);
 					// The data for some of the terrains and edges between PreviouslySeen
@@ -534,9 +535,10 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			}
 			const Player::Field& f = player->fields_[upper_bound];
 			oss << static_cast<char>(f.vision.is_revealed() ?
-				   SavedVisionState::kRevealed :
-				   f.vision == VisibleState::kPreviouslySeen ? SavedVisionState::kPreviouslySeen :
-				                                               SavedVisionState::kNone);
+			                            SavedVisionState::kRevealed :
+			                            f.vision == VisibleState::kPreviouslySeen ?
+			                            SavedVisionState::kPreviouslySeen :
+			                            SavedVisionState::kNone);
 			if (f.vision == VisibleState::kPreviouslySeen) {
 				seen_fields.insert(&f);
 			}
