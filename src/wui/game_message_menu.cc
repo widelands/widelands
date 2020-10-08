@@ -59,8 +59,6 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	list = new UI::Table<uintptr_t>(this, kPadding, kButtonSize + 2 * kPadding,
 	                                kWindowWidth - 2 * kPadding, kTableHeight, UI::PanelStyle::kWui,
 	                                UI::TableRows::kMulti);
-	list->selected.connect([this](uint32_t a) { selected(a); });
-	list->double_clicked.connect([this](uint32_t a) { double_clicked(a); });
 	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));
 	list->add_column(60, pgettext("message", "Type"), "", UI::Align::kCenter);
 	list->add_column(60, _("Status"), "", UI::Align::kCenter);
@@ -75,33 +73,23 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	geologistsbtn_ = new UI::Button(this, "filter_geologists_messages", kPadding, kPadding,
 	                                kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                                g_image_cache->get("images/wui/fieldaction/menu_geologist.png"));
-	geologistsbtn_->sigclicked.connect(
-	   [this]() { filter_messages(Widelands::Message::Type::kGeologists); });
 
 	economybtn_ = new UI::Button(this, "filter_economy_messages", 2 * kPadding + kButtonSize,
 	                             kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                             g_image_cache->get("images/wui/stats/genstats_nrwares.png"));
-	economybtn_->sigclicked.connect(
-	   [this]() { filter_messages(Widelands::Message::Type::kEconomy); });
 
 	seafaringbtn_ =
 	   new UI::Button(this, "filter_seafaring_messages", 3 * kPadding + 2 * kButtonSize, kPadding,
 	                  kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                  g_image_cache->get("images/wui/buildings/start_expedition.png"));
-	seafaringbtn_->sigclicked.connect(
-	   [this]() { filter_messages(Widelands::Message::Type::kSeafaring); });
 
 	warfarebtn_ = new UI::Button(this, "filter_warfare_messages", 4 * kPadding + 3 * kButtonSize,
 	                             kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                             g_image_cache->get("images/wui/messages/messages_warfare.png"));
-	warfarebtn_->sigclicked.connect(
-	   [this]() { filter_messages(Widelands::Message::Type::kWarfare); });
 
 	scenariobtn_ = new UI::Button(this, "filter_scenario_messages", 5 * kPadding + 4 * kButtonSize,
 	                              kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                              g_image_cache->get("images/wui/menus/objectives.png"));
-	scenariobtn_->sigclicked.connect(
-	   [this]() { filter_messages(Widelands::Message::Type::kScenario); });
 
 	message_filter_ = Widelands::Message::Type::kAllMessages;
 	set_filter_messages_tooltips();
@@ -112,14 +100,12 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	                             UI::ButtonStyle::kWuiPrimary,
 	                             g_image_cache->get("images/wui/messages/message_archive.png"));
 	update_archive_button_tooltip();
-	archivebtn_->sigclicked.connect([this]() { archive_or_restore(); });
 
 	togglemodebtn_ = new UI::Button(
 	   this, "toggle_between_inbox_or_archive",
 	   archivebtn_->get_x() + archivebtn_->get_w() + kPadding, archivebtn_->get_y(), kButtonSize,
 	   kButtonSize, UI::ButtonStyle::kWuiPrimary,
 	   g_image_cache->get("images/wui/messages/message_archived.png"), _("Show Archive"));
-	togglemodebtn_->sigclicked.connect([this]() { toggle_mode(); });
 
 	centerviewbtn_ =
 	   new UI::Button(this, "center_main_mapview_on_location", kWindowWidth - kPadding - kButtonSize,
@@ -128,7 +114,6 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	                  as_tooltip_text_with_hotkey(
 	                     /** TRANSLATORS: Tooltip in the messages window */
 	                     _("Center main mapview on location"), "g"));
-	centerviewbtn_->sigclicked.connect([this]() { center_view(); });
 	centerviewbtn_->set_enabled(false);
 
 	if (get_usedefaultpos()) {
@@ -147,6 +132,22 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	list->layout();
 
 	list->focus();
+
+	geologistsbtn_->sigclicked.connect(
+	   [this]() { filter_messages(Widelands::Message::Type::kGeologists); });
+	economybtn_->sigclicked.connect(
+	   [this]() { filter_messages(Widelands::Message::Type::kEconomy); });
+	seafaringbtn_->sigclicked.connect(
+	   [this]() { filter_messages(Widelands::Message::Type::kSeafaring); });
+	warfarebtn_->sigclicked.connect(
+	   [this]() { filter_messages(Widelands::Message::Type::kWarfare); });
+	scenariobtn_->sigclicked.connect(
+	   [this]() { filter_messages(Widelands::Message::Type::kScenario); });
+	list->selected.connect([this](uint32_t a) { selected(a); });
+	list->double_clicked.connect([this](uint32_t a) { double_clicked(a); });
+	archivebtn_->sigclicked.connect([this]() { archive_or_restore(); });
+	togglemodebtn_->sigclicked.connect([this]() { toggle_mode(); });
+	centerviewbtn_->sigclicked.connect([this]() { center_view(); });
 
 	set_visible(true);
 }
