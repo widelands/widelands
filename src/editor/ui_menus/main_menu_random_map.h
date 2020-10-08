@@ -24,6 +24,7 @@
 #include "editor/ui_menus/map_size_box.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
@@ -48,8 +49,9 @@ template <typename T, typename ID> struct IDButton;
 struct MainMenuNewRandomMap : public UI::UniqueWindow {
 	explicit MainMenuNewRandomMap(UI::Panel& parent,
 	                              UI::UniqueWindow::Registry&,
-	                              uint32_t w,
-	                              uint32_t h);
+	                              uint32_t map_w,
+	                              uint32_t map_h,
+	                              bool game);
 
 	bool do_generate_map(Widelands::EditorGameBase&,
 	                     EditorInteractive*,
@@ -61,11 +63,11 @@ struct MainMenuNewRandomMap : public UI::UniqueWindow {
 		kWater,
 		kLand,
 		kWasteland,
-		kResources,
-		kWorld,
 		kIslandMode,
 		kPlayers
 	};
+
+	bool handle_key(bool down, SDL_Keysym) override;
 
 private:
 	struct WorldDescription {
@@ -104,9 +106,7 @@ private:
 	int current_world_;
 	std::vector<std::string> resource_amounts_;
 	uint32_t resource_amount_;
-	UI::Box world_box_, resources_box_;
-	UI::Textarea world_label_, resources_label_;
-	UI::Button world_, resources_;
+	UI::Dropdown<size_t> world_, resources_;
 
 	// Land
 	int32_t waterval_, landval_, wastelandval_, mountainsval_;
@@ -125,6 +125,16 @@ private:
 	UI::Box map_id_box_;
 	UI::Textarea map_id_label_;
 	UI::EditBox map_id_edit_;
+
+	UI::Dropdown<std::string>* tribe_;
+	enum class GameDifficulty {
+		TradingOutpost_vs_Village,
+		FortVillage_vs_HQ,
+		HQ_vs_HQ,
+		Village_vs_FortVillage,
+		MinimalStart_vs_TradingOutpost,
+	};
+	UI::Dropdown<GameDifficulty>* difficulty_;
 
 	// Buttons
 	UI::Box button_box_;

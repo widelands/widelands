@@ -45,7 +45,8 @@ constexpr uint8_t kMaxMapgenPlayers = 8;
 MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                                            UI::UniqueWindow::Registry& registry,
                                            const uint32_t w,
-                                           const uint32_t h)
+                                           const uint32_t h,
+                                           const bool game)
    : UI::UniqueWindow(&parent, "random_map_menu", &registry, 400, 500, _("New Random Map")),
      // UI elements
      margin_(4),
@@ -69,7 +70,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
               UI::SpinBox::Type::kSmall),
      // World + Resources
      world_descriptions_({
-        /** TRANSLATORS: A world name for the random map generator in the editor */
         {"greenland", _("Summer")},
         /** TRANSLATORS: A world name for the random map generator in the editor */
         {"winterland", _("Winter")},
@@ -78,7 +78,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
         /** TRANSLATORS: A world name for the random map generator in the editor */
         {"blackland", _("Wasteland")},
      }),
-     current_world_(0),
+     current_world_(std::rand() % world_descriptions_.size()),  // NOLINT
      resource_amounts_({
         /** TRANSLATORS: Amount of resources in the random map generator in the editor */
         _("Low"),
@@ -88,26 +88,28 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
         _("High"),
      }),
      resource_amount_(2),
-     world_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
-     resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
-     world_label_(&world_box_, 0, 0, 0, 0, _("Climate:")),
-     resources_label_(&resources_box_, 0, 0, 0, 0, _("Resources:")),
-     world_(&world_box_,
+     world_(&box_,
             "world",
             0,
             0,
-            box_width_ - 2 * margin_ - std::max(world_label_.get_w(), resources_label_.get_w()),
+            box_width_,
+            8,
             label_height_,
-            UI::ButtonStyle::kWuiSecondary,
-            world_descriptions_[current_world_].descname),
-     resources_(&resources_box_,
+            _("Climate"),
+            UI::DropdownType::kTextual,
+            UI::PanelStyle::kWui,
+            UI::ButtonStyle::kWuiSecondary),
+     resources_(&box_,
                 "resources",
                 0,
                 0,
-                box_width_ - 2 * margin_ - std::max(world_label_.get_w(), resources_label_.get_w()),
+                box_width_,
+                8,
                 label_height_,
-                UI::ButtonStyle::kWuiSecondary,
-                resource_amounts_[resource_amount_].c_str()),
+                _("Resources"),
+                UI::DropdownType::kTextual,
+                UI::PanelStyle::kWui,
+                UI::ButtonStyle::kWuiSecondary),
      // Terrain
      waterval_(20),
      landval_(60),
@@ -158,7 +160,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                 0,
                 0,
                 box_width_ / 3,
-                resources_label_.get_h(),
+                mountains_label_.get_h(),
                 (boost::format(_("%i %%")) % mountainsval_).str(),
                 UI::Align::kCenter),
      island_mode_(&box_, Vector2i::zero(), _("Island mode")),
@@ -174,6 +176,32 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
      map_id_label_(&map_id_box_, 0, 0, 0, 0, _("Map ID:")),
      map_id_edit_(
         &map_id_box_, 0, 0, box_width_ - 2 * margin_ - map_id_label_.get_w(), UI::PanelStyle::kWui),
+
+     tribe_(game ? new UI::Dropdown<std::string>(
+          &box_,
+          "tribe",
+          0,
+          0,
+          box_width_,
+          8,
+          label_height_,
+          _("Tribe"),
+          UI::DropdownType::kTextual,
+          UI::PanelStyle::kWui,
+          UI::ButtonStyle::kWuiSecondary) : nullptr),
+     difficulty_(game ? new UI::Dropdown<GameDifficulty>(
+          &box_,
+          "difficulty",
+          0,
+          0,
+          box_width_,
+          8,
+          label_height_,
+          _("Difficulty"),
+          UI::DropdownType::kTextual,
+          UI::PanelStyle::kWui,
+          UI::ButtonStyle::kWuiSecondary) : nullptr),
+
      // Buttons
      button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
      ok_button_(&button_box_,
@@ -213,29 +241,35 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 
 	// ---------- Worlds ----------
 
-	world_box_.add(&world_label_);
-	if (world_label_.get_w() < resources_label_.get_w()) {
-		world_box_.add_space(resources_label_.get_w() - world_label_.get_w() - margin_);
+	world_.add(_("Random"), world_descriptions_.size(), nullptr, true);
+	for (size_t i = 0; i < world_descriptions_.size(); ++i) {
+		world_.add(world_descriptions_[i].descname, i);
 	}
 
-	world_.sigclicked.connect([this]() { button_clicked(ButtonId::kWorld); });
-	world_box_.add(&world_);
-	box_.add(&world_box_);
-	box_height += margin_ + world_box_.get_h();
+	world_.selected.connect([this]() {
+		current_world_ = world_.get_selected();
+		if (current_world_ == static_cast<int>(world_descriptions_.size())) {
+			current_world_ = std::rand() % world_descriptions_.size();  // NOLINT
+		}
+		nr_edit_box_changed();
+	});
+	box_.add(&world_);
+	box_height += margin_ + world_.get_h();
 	box_.add_space(margin_);
 	box_height += margin_;
 
 	// ---------- Amount of Resources (Low/Medium/High) ----------
 
-	resources_box_.add(&resources_label_);
-	if (resources_label_.get_w() < world_label_.get_w()) {
-		resources_box_.add_space(world_label_.get_w() - resources_label_.get_w() - margin_);
+	for (size_t i = 0; i < resource_amounts_.size(); ++i) {
+		resources_.add(resource_amounts_[i], i, nullptr, i == resource_amount_);
 	}
 
-	resources_.sigclicked.connect([this]() { button_clicked(ButtonId::kResources); });
-	resources_box_.add(&resources_);
-	box_.add(&resources_box_);
-	box_height += margin_ + resources_box_.get_h();
+	resources_.selected.connect([this]() {
+		resource_amount_ = resources_.get_selected();
+		nr_edit_box_changed();
+	});
+	box_.add(&resources_);
+	box_height += margin_ + resources_.get_h();
 	box_.add_space(margin_);
 	box_height += margin_;
 
@@ -319,6 +353,32 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 	box_.add_space(margin_);
 	box_height += margin_;
 
+	// ---------- Game-specific stuff ----------
+
+	if (game) {
+		tribe_->add(pgettext("tribe", "Random"), "", g_image_cache->get("images/ui_fsmenu/random.png"), true, _("The tribe will be selected at random"));
+		for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
+			tribe_->add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon), false, tribeinfo.tooltip);
+		}
+
+		box_.add(tribe_);
+		box_height += margin_ + tribe_->get_h();
+		box_.add_space(margin_);
+		box_height += margin_;
+
+		difficulty_->add(_("Very Easy"), GameDifficulty::TradingOutpost_vs_Village);
+		difficulty_->add(_("Easy"), GameDifficulty::FortVillage_vs_HQ);
+		difficulty_->add(_("Normal"), GameDifficulty::HQ_vs_HQ, nullptr, true);
+		difficulty_->add(_("Hard"), GameDifficulty::Village_vs_FortVillage);
+		difficulty_->add(_("Very Hard"), GameDifficulty::MinimalStart_vs_TradingOutpost);
+
+		box_.add(difficulty_);
+		box_height += margin_ + difficulty_->get_h();
+		box_.add_space(margin_);
+		box_height += 3 * margin_;
+
+	}
+
 	// ---------- "Generate Map" button ----------
 	cancel_button_.sigclicked.connect(
 	   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
@@ -341,6 +401,20 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 
 	nr_edit_box_changed();
 	center_to_parent();
+}
+
+bool MainMenuNewRandomMap::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_RETURN:
+		case SDLK_KP_ENTER:
+			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+			return true;
+		default:
+			break;
+		}
+	}
+	return UI::UniqueWindow::handle_key(down, code);
 }
 
 // Helper function for setting the highest number of allowed players dependent on the map size
@@ -367,16 +441,6 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	case ButtonId::kWasteland:
 		wastelandval_ = wasteland_.get_value();
 		normalize_landmass(n);
-		break;
-	case ButtonId::kResources:
-		++resource_amount_;
-		resource_amount_ %= resource_amounts_.size();
-		resources_.set_title(resource_amounts_[resource_amount_].c_str());
-		break;
-	case ButtonId::kWorld:
-		++current_world_;
-		current_world_ %= world_descriptions_.size();
-		world_.set_title(world_descriptions_[current_world_].descname);
 		break;
 	case ButtonId::kIslandMode:
 		break;
@@ -475,7 +539,7 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 	      << "Water = " << waterval_ << " %\n"
 	      << "Land = " << landval_ << " %\n"
 	      << "Wasteland = " << wastelandval_ << " %\n"
-	      << "Resources = " << resources_.get_title() << "\n"
+	      << "Resources = " << resource_amounts_[resources_.get_selected()] << "\n"
 	      << "ID = " << map_id_edit_.text() << "\n";
 
 	Widelands::MapGenerator gen(*map, map_info, egbase);
@@ -551,13 +615,61 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 			sp->set_peaceful_mode(false);
 			sp->set_custom_starting_positions(false);
 
+			const GameDifficulty difficulty = difficulty_->get_selected();
+			auto get_init = [difficulty](const bool is_player) {
+				// Update these constants if the starting conditions are reordered!!
+				static uint8_t constexpr kIndexOf_HQ = 0;
+				static uint8_t constexpr kIndexOf_FortifiedVillage = 1;
+				static uint8_t constexpr kIndexOf_TradingOutpost = 2;
+				static uint8_t constexpr kIndexOf_Village = 3;
+				// static uint8_t constexpr kIndexOf_PoorHamlet = 4;
+				static uint8_t constexpr kIndexOf_StrugglingOutpost = 5;
+				// static uint8_t constexpr kIndexOf_Discovery = 6;
+				// static uint8_t constexpr kIndexOf_NewWorld = 7;
+				switch (difficulty) {
+				case GameDifficulty::HQ_vs_HQ:
+					return kIndexOf_HQ;
+				case GameDifficulty::TradingOutpost_vs_Village:
+					return is_player ? kIndexOf_TradingOutpost : kIndexOf_Village;
+				case GameDifficulty::FortVillage_vs_HQ:
+					return is_player ? kIndexOf_FortifiedVillage : kIndexOf_HQ;
+				case GameDifficulty::Village_vs_FortVillage:
+					return is_player ? kIndexOf_Village : kIndexOf_FortifiedVillage;
+				case GameDifficulty::MinimalStart_vs_TradingOutpost:
+					return is_player ? kIndexOf_StrugglingOutpost : kIndexOf_TradingOutpost;
+				}
+				NEVER_HERE();
+			};
+			auto get_team = [difficulty](const bool is_player) {
+				if (is_player) {
+					return 0;  // He's always by himself
+				}
+				switch (difficulty) {
+				case GameDifficulty::TradingOutpost_vs_Village:
+					// Very Easy: Don't use teams
+					return 0;
+				case GameDifficulty::FortVillage_vs_HQ:
+					// Easy: Team up some AIs but not all of them
+					return std::rand() % 2;  // NOLINT
+				default:
+					// Others: Team up all AIs
+					return 1;
+				}
+			};
+
 			for (unsigned p = 0; p < nr_players; ++p) {
-				sp->set_player_name(p, p == plnum ?
-				                          _("Player") :
-				                          (boost::format(_("AI %u")) % (p > plnum ? p : p + 1)).str());
-				sp->set_player_team(p, p == plnum ? 0 : 1);
-				sp->set_player_tribe(p, "", true);
-				sp->set_player_init(p, 0);
+				if (p == plnum) {
+					sp->set_player_name(p, _("Player"));
+					const std::string& tribe = tribe_->get_selected();
+					sp->set_player_tribe(p, tribe, tribe.empty());
+					sp->set_player_team(p, get_team(true));
+					sp->set_player_init(p, get_init(true));
+				} else {
+					sp->set_player_name(p, (boost::format(_("AI %u")) % (p > plnum ? p : p + 1)).str());
+					sp->set_player_tribe(p, "", true);
+					sp->set_player_team(p, get_team(false));
+					sp->set_player_init(p, get_init(false));
+				}
 			}
 		} else {
 			ok_button_.set_enabled(true);
@@ -597,11 +709,11 @@ void MainMenuNewRandomMap::id_edit_box_changed() {
 		wastelandval_ = map_info.wastelandRatio * 100.0 + 0.49;
 
 		resource_amount_ = map_info.resource_amount;
-		resources_.set_title(resource_amounts_[resource_amount_]);
+		resources_.select(resource_amount_);
 
 		current_world_ = std::find(world_names.cbegin(), world_names.cend(), map_info.world_name) -
 		                 world_names.cbegin();
-		world_.set_title(world_descriptions_[current_world_].descname);
+		world_.select(current_world_);
 
 		island_mode_.set_state(map_info.islandMode);
 

@@ -169,7 +169,7 @@ void EditorInteractive::add_main_menu() {
 
 	menu_windows_.newrandommap.open_window = [this] {
 		MainMenuNewRandomMap m(*this, menu_windows_.newrandommap, egbase().map().get_width(),
-		                       egbase().map().get_height());
+		                       egbase().map().get_height(), false);
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			m.do_generate_map(egbase(), this, nullptr);
 		}

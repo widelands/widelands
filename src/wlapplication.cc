@@ -1266,7 +1266,7 @@ void WLApplication::mainmenu() {
 				game.tribes();
 				EditorInteractive::load_world_units(nullptr, game);
 
-				MainMenuNewRandomMap m(*mm, r, 64, 64);
+				MainMenuNewRandomMap m(*mm, r, 64, 64, true);
 				for (;;) {
 					if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 						// user pressed Cancel
