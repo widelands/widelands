@@ -46,8 +46,7 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
-     rendered_text_(nullptr),
-     rendered_width_(0) {
+     rendered_text_(nullptr) {
 	uint16_t w = pic->width();
 	uint16_t h = pic->height();
 	set_desired_size(w, h);
@@ -73,7 +72,7 @@ Statebox::Statebox(Panel* const parent,
 
 void Statebox::layout() {
 	// We only need to relayout if we have text and the available width changed
-	if ((flags_ & Has_Text) && (rendered_width_ != get_w())) {
+	if ((flags_ & Has_Text)) {
 		int w = get_w();
 		int h = kStateboxSize;
 		int pic_width = kStateboxSize;
@@ -91,9 +90,7 @@ void Statebox::layout() {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
 			h = std::max(rendered_text_->height(), h);
 		}
-		rendered_width_ = w;
-		set_desired_size(rendered_width_, h);
-		set_size(rendered_width_, h);
+		set_desired_size(w, h);
 	}
 }
 
