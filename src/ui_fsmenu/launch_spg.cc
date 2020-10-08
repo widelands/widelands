@@ -33,7 +33,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
    : FullscreenMenuLaunchGame(settings, ctrl),
      player_setup(&individual_content_box, settings, standard_element_height_, padding_) {
 
-	individual_content_box.add(&player_setup, UI::Box::Resizing::kFullSize);
+	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 	title_.set_text(_("Launch game"));
 	ok_.set_enabled(settings_->can_launch());
 }
@@ -71,6 +71,8 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 	const MapData& mapdata = *msm.get_map();
 
 	settings_->set_map(mapdata.name, mapdata.filename, mapdata.nrplayers);
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
+
 	update_win_conditions();
 	update_peaceful_mode();
 
