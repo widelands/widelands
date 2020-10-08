@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-11 11:58+0000\n"
-"PO-Revision-Date: 2020-09-18 12:58+0000\n"
-"Last-Translator: Jindřich Michal <jimi2000@seznam.cz>\n"
+"POT-Creation-Date: 2020-09-18 13:37+0000\n"
+"PO-Revision-Date: 2020-09-18 14:21+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:579 ../../src/base/i18n.cc:346
+#: ../../data/scripting/richtext.lua:579 ../../src/base/i18n.cc:347
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s a %2$s"
@@ -33,7 +33,7 @@ msgstr "%1$s a %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:581 ../../src/base/i18n.cc:350
+#: ../../data/scripting/richtext.lua:581 ../../src/base/i18n.cc:351
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s nebo %2$s"
@@ -45,7 +45,7 @@ msgstr "%1$s nebo %2$s"
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:583 ../../data/scripting/richtext.lua:588
-#: ../../src/base/i18n.cc:354 ../../src/base/i18n.cc:363
+#: ../../src/base/i18n.cc:355 ../../src/base/i18n.cc:364
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -53,7 +53,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:585 ../../src/base/i18n.cc:358
+#: ../../data/scripting/richtext.lua:585 ../../src/base/i18n.cc:359
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s a %2$s"
@@ -129,30 +129,30 @@ msgid "“%s”"
 msgstr "“%s”"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/computer_player.cc:43
+#: ../../src/ai/computer_player.cc:45
 #: ../../src/wui/multiplayersetupgroup.cc:391
 msgid "No AI"
 msgstr "Bez UI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:93
+#: ../../src/ai/defaultai.h:95
 msgid "Normal AI"
 msgstr "Normální UI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:108
+#: ../../src/ai/defaultai.h:110
 msgid "Weak AI"
 msgstr "Slabá UI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:123
+#: ../../src/ai/defaultai.h:125
 msgid "Very Weak AI"
 msgstr "Velmi slabá UI"
 
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:373
+#: ../../src/base/i18n.cc:374
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr ""
@@ -264,7 +264,7 @@ msgstr "listopad"
 msgid "Dec"
 msgstr "prosinec"
 
-#: ../../src/editor/editorinteractive.cc:84
+#: ../../src/editor/editorinteractive.cc:84 ../../src/ui_fsmenu/main.cc:265
 #: ../../src/wui/interactive_gamebase.cc:95
 msgctxt "hotkey"
 msgid "Esc"
@@ -770,7 +770,7 @@ msgstr "Klikem vybereš položku. Současným stiskem Ctrl můžeš vybrat více
 msgid "Current: %s"
 msgstr "Aktuálně: %s"
 
-#: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/multiplayer.cc:122
+#: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/main.cc:563
 #: ../../src/wui/encyclopedia_window.cc:140 ../../src/wui/login_box.cc:196
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
@@ -813,7 +813,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/player_menu.cc:66
 #: ../../src/ui_basic/messagebox.cc:93 ../../src/ui_fsmenu/helpwindow.cc:50
 #: ../../src/ui_fsmenu/load_map_or_game.cc:33
-#: ../../src/ui_fsmenu/options.cc:94
+#: ../../src/ui_fsmenu/options.cc:89
 #: ../../src/wui/game_main_menu_save_game.cc:71
 #: ../../src/wui/story_message_box.cc:46
 msgid "OK"
@@ -825,7 +825,7 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:194
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:60
 #: ../../src/ui_basic/messagebox.cc:99 ../../src/ui_fsmenu/launch_mpg.cc:73
-#: ../../src/ui_fsmenu/options.cc:92
+#: ../../src/ui_fsmenu/options.cc:87
 #: ../../src/wui/economy_options_window.cc:613
 #: ../../src/wui/game_main_menu_save_game.cc:70 ../../src/wui/login_box.cc:64
 msgid "Cancel"
@@ -1165,7 +1165,7 @@ msgstr "Počet hráčů"
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/player_menu.cc:146
 #: ../../src/editor/ui_menus/player_menu.cc:272
-#: ../../src/logic/single_player_game_settings_provider.cc:104
+#: ../../src/logic/single_player_game_settings_provider.cc:106
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:69
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:101
 #: ../../src/ui_fsmenu/launch_mpg.cc:523
@@ -1289,8 +1289,8 @@ msgstr ""
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
-#: ../../src/ui_basic/dropdown.cc:260 ../../src/ui_basic/dropdown.cc:307
-#: ../../src/ui_basic/dropdown.cc:374 ../../src/ui_basic/dropdown.cc:382
+#: ../../src/ui_basic/dropdown.cc:274 ../../src/ui_basic/dropdown.cc:321
+#: ../../src/ui_basic/dropdown.cc:388 ../../src/ui_basic/dropdown.cc:396
 #: ../../src/wui/multiplayersetupgroup.cc:381
 msgid "%1%: %2%"
 msgstr "%1%: %2%"
@@ -1389,14 +1389,14 @@ msgstr ""
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces tha
 #. * blank space in a list of illegal characters
-#: ../../src/io/filesystem/filesystem.cc:248
+#: ../../src/io/filesystem/filesystem.cc:249
 msgctxt "illegal_filename_characters"
 msgid "blank space"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. *  %s is a list of illegal characters
-#: ../../src/io/filesystem/filesystem.cc:256
+#: ../../src/io/filesystem/filesystem.cc:257
 #, c-format
 msgctxt "illegal_filename_characters"
 msgid "%s at the start of the filename"
@@ -1404,7 +1404,7 @@ msgstr ""
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. * %s is a list of illegal characters
-#: ../../src/io/filesystem/filesystem.cc:264
+#: ../../src/io/filesystem/filesystem.cc:265
 #, c-format
 msgctxt "illegal_filename_characters"
 msgid "%s anywhere in the filename"
@@ -1412,7 +1412,7 @@ msgstr ""
 
 #. * TRANSLATORS: Tooltip header for characters in illegal filenames.
 #. * This is followed by a list of bullet points
-#: ../../src/io/filesystem/filesystem.cc:272
+#: ../../src/io/filesystem/filesystem.cc:273
 msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
 msgstr ""
@@ -1420,42 +1420,42 @@ msgstr ""
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/io/profile.cc:40
+#: ../../src/io/profile.cc:41
 msgid "true"
 msgstr "pravda"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/io/profile.cc:43
+#: ../../src/io/profile.cc:44
 msgid "yes"
 msgstr "ano"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/io/profile.cc:46
+#: ../../src/io/profile.cc:47
 msgid "on"
 msgstr "zapnuto"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/io/profile.cc:53
+#: ../../src/io/profile.cc:54
 msgid "false"
 msgstr "nepravda"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/io/profile.cc:56
+#: ../../src/io/profile.cc:57
 msgid "no"
 msgstr "ne"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/io/profile.cc:59
+#: ../../src/io/profile.cc:60
 msgid "off"
 msgstr "vypnuto"
 
@@ -1485,40 +1485,40 @@ msgid "Cleaning up for loading: Map (3/3)"
 msgstr ""
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:146
+#: ../../src/logic/game.cc:147
 msgid "Not set"
 msgstr "Nenastaveno"
 
-#: ../../src/logic/game.cc:222 ../../src/logic/game.cc:274
-#: ../../src/logic/game.cc:358 ../../src/logic/game.cc:389
+#: ../../src/logic/game.cc:223 ../../src/logic/game.cc:275
+#: ../../src/logic/game.cc:359 ../../src/logic/game.cc:390
 msgid "Preloading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:316
+#: ../../src/logic/game.cc:317
 msgid "Initializing game…"
 msgstr ""
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:468
+#: ../../src/logic/game.cc:469
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:478 ../../src/logic/player.cc:226
+#: ../../src/logic/game.cc:479 ../../src/logic/player.cc:227
 msgid "Missing starting position"
 msgstr "Chybí startovací pozice"
 
-#: ../../src/logic/game.cc:479 ../../src/logic/player.cc:227
+#: ../../src/logic/game.cc:480 ../../src/logic/player.cc:228
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands nemůže zahájit hru, protože hráč %u nemá startovací pozici.\nPro vyřešení problému můžete ručně přidat startovací pozici v editoru Widelands."
 
-#: ../../src/logic/game.cc:909
+#: ../../src/logic/game.cc:910
 msgid "Trade Offer"
 msgstr "Obchodní nabídka"
 
-#: ../../src/logic/game.cc:911
+#: ../../src/logic/game.cc:912
 msgid "This market has received a new trade offer."
 msgstr "Tento trh obdržel novou obchodní nabídku."
 
@@ -2128,7 +2128,7 @@ msgstr "neschůdné"
 msgid "This objective has no description."
 msgstr "Tento úkol nemá popis."
 
-#: ../../src/logic/player.cc:1767
+#: ../../src/logic/player.cc:1768
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2298,8 +2298,8 @@ msgstr ""
 msgid "Checking map"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:151 ../../src/network/gamehost.cc:671
-#: ../../src/wlapplication.cc:1430
+#: ../../src/network/gameclient.cc:151 ../../src/network/gamehost.cc:673
+#: ../../src/wlapplication.cc:1399
 msgid "Preparing game…"
 msgstr ""
 
@@ -2335,126 +2335,126 @@ msgstr "%s bude provedeno automatické uložení hry."
 msgid "Disconnected from Host"
 msgstr "Odhlášeno od hostitele"
 
-#: ../../src/network/gamehost.cc:280
+#: ../../src/network/gamehost.cc:281
 msgid "Available host commands are:"
 msgstr "Příkazy k dispozici jsou:"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:282
+#: ../../src/network/gamehost.cc:283
 msgid "/help  -  Shows this help"
 msgstr "/help  -  zobrazí tento help"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:284
+#: ../../src/network/gamehost.cc:285
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr "/announce <msg>  -  pošle zprávu přes chat jako oznámení (systémový chat)"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:286
+#: ../../src/network/gamehost.cc:287
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr "/warn <jméno> <důvod>  -  varování uživatele <jméno> z důvodu <důvod>"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:288
+#: ../../src/network/gamehost.cc:289
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr "/kick <jméno> <důvod>  -  vyhození uživatele <jméno> z důvodu <důvod>"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:290
+#: ../../src/network/gamehost.cc:291
 msgid "/forcePause            -  Force the game to pause."
 msgstr "/forcePause            -  vynutí pozastavení hry."
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:292
+#: ../../src/network/gamehost.cc:293
 msgid "/endForcedPause        -  Return game to normal speed."
 msgstr "/endForcedPause        -  znovu nastaví normální rychlost hry."
 
-#: ../../src/network/gamehost.cc:299
+#: ../../src/network/gamehost.cc:300
 msgid "Wrong use, should be: /announce <message>"
 msgstr "Špatné použití, mělo by být: /announce <zpráva>"
 
-#: ../../src/network/gamehost.cc:311
+#: ../../src/network/gamehost.cc:312
 msgid "Wrong use, should be: /warn <name> <reason>"
 msgstr "Špatné použití, mělo by být: /warn <jméno> <důvod>"
 
-#: ../../src/network/gamehost.cc:315 ../../src/network/gamehost.cc:339
+#: ../../src/network/gamehost.cc:316 ../../src/network/gamehost.cc:340
 #, c-format
 msgid "The client %s could not be found."
 msgstr "Klient %s nebyl nalezen."
 
-#: ../../src/network/gamehost.cc:326
+#: ../../src/network/gamehost.cc:327
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr "Špatné použití, mělo by být: /kick <jméno> <důvod>"
 
-#: ../../src/network/gamehost.cc:337
+#: ../../src/network/gamehost.cc:338
 msgid "You can not kick yourself!"
 msgstr "Nemůžeš vyhodit sám sebe!"
 
-#: ../../src/network/gamehost.cc:343
+#: ../../src/network/gamehost.cc:344
 #, c-format
 msgid "Are you sure you want to kick %s?"
 msgstr "Jsi si jistý, že chceš vyhodit ze hry %s?"
 
-#: ../../src/network/gamehost.cc:345
+#: ../../src/network/gamehost.cc:346
 #, c-format
 msgid "The stated reason was: %s"
 msgstr "Uvedený důvod byl: %s"
 
-#: ../../src/network/gamehost.cc:346
+#: ../../src/network/gamehost.cc:347
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr "Pokud ano, napiš: /ack_kick %s"
 
-#: ../../src/network/gamehost.cc:354
+#: ../../src/network/gamehost.cc:355
 msgid "Kick acknowledgement cancelled: No name given!"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:356
+#: ../../src/network/gamehost.cc:357
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr "Špatné použití, mělo by být: /ack_kick <jméno>"
 
-#: ../../src/network/gamehost.cc:362
+#: ../../src/network/gamehost.cc:363
 msgid "Kick acknowledgement cancelled: Wrong name given!"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:372
+#: ../../src/network/gamehost.cc:373
 msgid "Pause was already forced - game should be paused."
 msgstr "Pozastavení bylo již vnuceno - hra by měla být pozastavena."
 
-#: ../../src/network/gamehost.cc:382
+#: ../../src/network/gamehost.cc:383
 msgid "There is no forced pause - nothing to end."
 msgstr "Není zde vynucené pozastavení - není co ukončit."
 
-#: ../../src/network/gamehost.cc:391
+#: ../../src/network/gamehost.cc:392
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Neplatný příkaz! Použij /help pro seznam příkazů."
 
-#: ../../src/network/gamehost.cc:520
+#: ../../src/network/gamehost.cc:521
 msgid "Failed to host the server!"
 msgstr "Nezdařilo se vytvořit server!"
 
-#: ../../src/network/gamehost.cc:521
+#: ../../src/network/gamehost.cc:522
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
 msgstr "Widelands se nezdařilo spustit server.\nToto by se nemělo stát a s největší pravděpodobností není nic, co s tím můžete udělat. Prosím, nahlaste chybu."
 
-#: ../../src/network/gamehost.cc:529
+#: ../../src/network/gamehost.cc:530
 msgid "Failed to start the server!"
 msgstr "Nezdařilo se spustit server!"
 
-#: ../../src/network/gamehost.cc:530
+#: ../../src/network/gamehost.cc:531
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
 msgstr "Widelands se nepodařilo spustit server.\nZřejmě je již spuštěn jiný proces, který využívá port serveru."
 
-#: ../../src/network/gamehost.cc:1625
+#: ../../src/network/gamehost.cc:1627
 #, c-format
 msgid "Computer %u"
 msgstr "Počítač %u"
 
-#: ../../src/network/gamehost.cc:1853
+#: ../../src/network/gamehost.cc:1855
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2865,18 +2865,18 @@ msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Vybrat položku"
 
-#: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:309
+#: ../../src/ui_basic/dropdown.cc:321 ../../src/ui_basic/dropdown.cc:323
 #: ../../src/ui_fsmenu/launch_mpg.cc:449
 msgid "Error"
 msgstr "Chyba"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:367
+#: ../../src/ui_basic/dropdown.cc:381
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nevybráno"
 
-#: ../../src/ui_basic/progresswindow.cc:53
+#: ../../src/ui_basic/progresswindow.cc:54
 msgid "Loading…"
 msgstr "Nahrávání..."
 
@@ -2926,32 +2926,32 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../src/ui_basic/window.cc:136 ../../src/ui_fsmenu/about.cc:39
+#: ../../src/ui_basic/window.cc:137 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/wui/watchwindow.cc:74
 msgid "Close"
 msgstr "Zavřít"
 
-#: ../../src/ui_basic/window.cc:190
+#: ../../src/ui_basic/window.cc:191
 msgid "Minimize"
 msgstr ""
 
-#: ../../src/ui_basic/window.cc:190
+#: ../../src/ui_basic/window.cc:191
 msgid "Restore"
 msgstr ""
 
-#: ../../src/ui_basic/window.cc:195
+#: ../../src/ui_basic/window.cc:196
 msgid "Pin"
 msgstr ""
 
-#: ../../src/ui_basic/window.cc:195
+#: ../../src/ui_basic/window.cc:196
 msgid "Unpin"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:36 ../../src/ui_fsmenu/main.cc:63
+#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:261
 msgid "About Widelands"
 msgstr "O Widelands"
 
-#: ../../src/ui_fsmenu/about.cc:48 ../../src/ui_fsmenu/about.cc:53
+#: ../../src/ui_fsmenu/about.cc:50 ../../src/ui_fsmenu/about.cc:55
 msgid "Lua Error"
 msgstr ""
 
@@ -3069,7 +3069,7 @@ msgid "Version"
 msgstr "Verze"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:158
-#: ../../src/ui_fsmenu/options.cc:244
+#: ../../src/ui_fsmenu/options.cc:241
 msgid "Game"
 msgstr "Hra"
 
@@ -3096,10 +3096,6 @@ msgstr "Čas spojení vypršel"
 msgid "unnamed %u"
 msgstr ""
 
-#: ../../src/ui_fsmenu/intro.cc:33
-msgid "Press any key or click to continue…"
-msgstr "Pro pokračování stikni klávesu nebo klikni..."
-
 #: ../../src/ui_fsmenu/launch_game.cc:56
 msgid "Peaceful mode"
 msgstr ""
@@ -3114,8 +3110,6 @@ msgstr "Začít hru"
 
 #: ../../src/ui_fsmenu/launch_game.cc:61
 #: ../../src/ui_fsmenu/load_map_or_game.cc:32
-#: ../../src/ui_fsmenu/multiplayer.cc:49
-#: ../../src/ui_fsmenu/singleplayer.cc:43
 msgid "Back"
 msgstr "Zpět"
 
@@ -3340,78 +3334,165 @@ msgstr "Návrat do menu hry jednoho hráče"
 msgid "Load this game"
 msgstr "Nahrát hru"
 
-#: ../../src/ui_fsmenu/main.cc:41
-msgid "Play Tutorial"
-msgstr "Hrát tutoriál"
+#: ../../src/ui_fsmenu/main.cc:179
+msgid "New Game"
+msgstr "Nová hra"
 
-#: ../../src/ui_fsmenu/main.cc:49 ../../src/ui_fsmenu/singleplayer.cc:33
-msgid "Single Player"
-msgstr "Hra jednoho hráče"
+#: ../../src/ui_fsmenu/main.cc:180
+msgid "Begin a new game"
+msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:57
+#: ../../src/ui_fsmenu/main.cc:181
+msgid "Campaigns"
+msgstr "Kampaně"
+
+#: ../../src/ui_fsmenu/main.cc:182
+msgid "Play a campaign"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:183
+msgid "Tutorials"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:184
+msgid "Play one of our beginners’ tutorials"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:185
+msgid "Load Game"
+msgstr "Nahrát hru"
+
+#: ../../src/ui_fsmenu/main.cc:186
+msgid "Continue a saved game"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:205
 msgid "Continue Playing"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:59
-msgid "Multiplayer"
-msgstr "Síťová hra"
-
-#: ../../src/ui_fsmenu/main.cc:60
-msgid "Watch Replay"
-msgstr "Sledovat záznam"
-
-#: ../../src/ui_fsmenu/main.cc:61
-msgid "Editor"
-msgstr "Editor"
-
-#: ../../src/ui_fsmenu/main.cc:62 ../../src/ui_fsmenu/options.cc:86
-msgid "Options"
-msgstr "Volby"
-
-#: ../../src/ui_fsmenu/main.cc:64
-msgid "Exit Widelands"
-msgstr "Opustit Widelands"
-
-#. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
-#: ../../src/ui_fsmenu/main.cc:74
-#, c-format
-msgid "Version %1$s (%2$s)"
-msgstr "Verze %1$s (%2$s)"
-
-#. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:82
-msgid "(C) %1%-%2% by the Widelands Development Team"
-msgstr "(C) %1%-%2% Widelands Development Team"
-
-#: ../../src/ui_fsmenu/main.cc:85
-msgid "Licensed under the GNU General Public License V2.0"
-msgstr "Licencováno GNU General Public License V2.0"
-
-#: ../../src/ui_fsmenu/main.cc:149
+#: ../../src/ui_fsmenu/main.cc:214
 #, c-format
 msgid "Map: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:152
+#: ../../src/ui_fsmenu/main.cc:217
 #, c-format
 msgid "Win Condition: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:156
+#: ../../src/ui_fsmenu/main.cc:221
 #, c-format
 msgid "Players: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:159
+#: ../../src/ui_fsmenu/main.cc:224
 #, c-format
 msgid "Gametime: %s"
 msgstr ""
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. 10:30'
-#: ../../src/ui_fsmenu/main.cc:163
+#: ../../src/ui_fsmenu/main.cc:229
 #, c-format
 msgid "Saved: %s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:237
+msgid "Online Game"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:238
+msgid "Join the Widelands lobby"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:239 ../../src/wui/login_box.cc:32
+msgid "Online Game Settings"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:240
+msgid "Log in as a registered user"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:241
+msgid "LAN / Direct IP"
+msgstr "LAN / Přímá IP"
+
+#: ../../src/ui_fsmenu/main.cc:242
+msgid "Play a private online game"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:244
+msgid "Single Player…"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:245
+msgid "Multiplayer…"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:247
+msgid "Begin or load a single-player campaign or free game"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:249
+msgid "Play with your friends over the internet"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:251
+msgid "Watch Replay"
+msgstr "Sledovat záznam"
+
+#: ../../src/ui_fsmenu/main.cc:252
+msgid "Watch the replay of an old game"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:254
+msgid "Editor"
+msgstr "Editor"
+
+#: ../../src/ui_fsmenu/main.cc:255
+msgid "Launch the map editor"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:256
+msgid "Add-Ons"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:259 ../../src/ui_fsmenu/options.cc:83
+msgid "Options"
+msgstr "Volby"
+
+#: ../../src/ui_fsmenu/main.cc:260
+msgid "Technical and game-related settings"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:263
+msgctxt "hotkey"
+msgid "F1"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:263
+msgid "Readme, License, and Credits"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:264
+msgid "Exit Widelands"
+msgstr "Opustit Widelands"
+
+#: ../../src/ui_fsmenu/main.cc:265
+msgid "Quit the game"
+msgstr ""
+
+#. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
+#: ../../src/ui_fsmenu/main.cc:269
+#, c-format
+msgid "Version %1$s (%2$s)"
+msgstr "Verze %1$s (%2$s)"
+
+#. * TRANSLATORS: Placeholders are the copyright years
+#: ../../src/ui_fsmenu/main.cc:272
+msgid ""
+"(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
+"General Public License V2.0"
 msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:52
@@ -3441,22 +3522,6 @@ msgstr "Vyvážené a nevyvážené"
 #: ../../src/ui_fsmenu/mapselect.cc:438
 msgctxt "balancing"
 msgid "Unspecified"
-msgstr ""
-
-#: ../../src/ui_fsmenu/multiplayer.cc:39
-msgid "Choose game type"
-msgstr "Zvolit typ hry"
-
-#: ../../src/ui_fsmenu/multiplayer.cc:45
-msgid "Online Game"
-msgstr ""
-
-#: ../../src/ui_fsmenu/multiplayer.cc:46
-msgid "LAN / Direct IP"
-msgstr "LAN / Přímá IP"
-
-#: ../../src/ui_fsmenu/multiplayer.cc:48 ../../src/wui/login_box.cc:32
-msgid "Online Game Settings"
 msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:37
@@ -3519,146 +3584,146 @@ msgid ""
 "numbers, and @ . + - _ characters."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:93
+#: ../../src/ui_fsmenu/options.cc:88
 msgid "Apply"
 msgstr "Použít"
 
-#: ../../src/ui_fsmenu/options.cc:114
+#: ../../src/ui_fsmenu/options.cc:109
 msgid "Language"
 msgstr "Jazyk"
 
-#: ../../src/ui_fsmenu/options.cc:125
+#: ../../src/ui_fsmenu/options.cc:120
 msgid "Window Size"
 msgstr "Velikost okna"
 
-#: ../../src/ui_fsmenu/options.cc:130
+#: ../../src/ui_fsmenu/options.cc:125
 msgid "Grab Input"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:131
+#: ../../src/ui_fsmenu/options.cc:126
 msgid "Use system mouse cursor"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:141
+#: ../../src/ui_fsmenu/options.cc:136
 msgid "Maximum FPS:"
 msgstr "Maximální FPS:"
 
-#: ../../src/ui_fsmenu/options.cc:146
+#: ../../src/ui_fsmenu/options.cc:141
 msgid "Snap windows only when overlapping"
 msgstr "Přichytit okna pouze při překryvu"
 
-#: ../../src/ui_fsmenu/options.cc:147
+#: ../../src/ui_fsmenu/options.cc:142
 msgid "Dock windows to edges"
 msgstr "Přichytit okna k okrajům"
 
-#: ../../src/ui_fsmenu/options.cc:149
+#: ../../src/ui_fsmenu/options.cc:144
 msgid "Animate automatic map movements"
 msgstr "Animovat automatické pohyby mapy"
 
-#: ../../src/ui_fsmenu/options.cc:160
+#: ../../src/ui_fsmenu/options.cc:155
 msgid "Distance for windows to snap to other panels:"
 msgstr "Vzdálenost pro přichycení oken k jiným panelům:"
 
-#: ../../src/ui_fsmenu/options.cc:172
+#: ../../src/ui_fsmenu/options.cc:167
 msgid "Distance for windows to snap to borders:"
 msgstr "Vzdálenost pro přichycení oken k okrajům:"
 
-#: ../../src/ui_fsmenu/options.cc:188
+#: ../../src/ui_fsmenu/options.cc:183
 msgid "Save game automatically every:"
 msgstr "Uložit hru automaticky každých:"
 
-#: ../../src/ui_fsmenu/options.cc:201
+#: ../../src/ui_fsmenu/options.cc:196
 msgid "Maximum number of autosave files:"
 msgstr "Maximální počet automaticky uložených pozic:"
 
-#: ../../src/ui_fsmenu/options.cc:207
+#: ../../src/ui_fsmenu/options.cc:202
 msgid "Compress widelands data files (maps, replays and savegames)"
 msgstr "Komprimovat datové soubory widelands (mapy, záznamy a uložené hry)"
 
-#: ../../src/ui_fsmenu/options.cc:212
+#: ../../src/ui_fsmenu/options.cc:207
 msgid "Write syncstreams in network games to debug desyncs"
 msgstr "Zápis do syncstreamu v síťové hře pro ladění desyncu"
 
-#: ../../src/ui_fsmenu/options.cc:218
+#: ../../src/ui_fsmenu/options.cc:213
 msgid "Start building road after placing a flag"
 msgstr "Začít budovat cestu po umístění vlajky"
 
-#: ../../src/ui_fsmenu/options.cc:220
+#: ../../src/ui_fsmenu/options.cc:215
 msgid "Show in-game chat with transparent background"
 msgstr "Zobrazit ve hře chat s průhledným pozadím"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:224
+#: ../../src/ui_fsmenu/options.cc:219
 msgid "Use single watchwindow mode"
 msgstr "Použít mód jednoduchého pohledového okna"
 
 #. * TRANSLATORS: This refers to to zooming with the scrollwheel.
-#: ../../src/ui_fsmenu/options.cc:226
+#: ../../src/ui_fsmenu/options.cc:221
 msgid "Zoom only when Ctrl is pressed"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:227
+#: ../../src/ui_fsmenu/options.cc:222
 msgid "Display game time in the top left corner"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:229
+#: ../../src/ui_fsmenu/options.cc:224
 msgid "Allow diagonal scrolling with the numeric keypad"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:240
+#: ../../src/ui_fsmenu/options.cc:237
 msgid "Interface"
 msgstr "Rozhraní"
 
-#: ../../src/ui_fsmenu/options.cc:241
+#: ../../src/ui_fsmenu/options.cc:238
 msgid "Windows"
 msgstr "Okna"
 
-#: ../../src/ui_fsmenu/options.cc:242
+#: ../../src/ui_fsmenu/options.cc:239
 msgid "Sound"
 msgstr "Zvuk"
 
-#: ../../src/ui_fsmenu/options.cc:243
+#: ../../src/ui_fsmenu/options.cc:240
 msgid "Saving"
 msgstr "Ukládání"
 
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:291
+#: ../../src/ui_fsmenu/options.cc:289
 msgid "Off"
 msgstr "Vypnuto"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:316
+#: ../../src/ui_fsmenu/options.cc:314
 msgid "Fullscreen"
 msgstr "Celá obrazovka"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:319
+#: ../../src/ui_fsmenu/options.cc:317
 msgid "Maximized"
 msgstr ""
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:329 ../../src/ui_fsmenu/options.cc:340
+#: ../../src/ui_fsmenu/options.cc:327 ../../src/ui_fsmenu/options.cc:338
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:443
+#: ../../src/ui_fsmenu/options.cc:436
 msgid "Try system language"
 msgstr "Zkus jazyk systému"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:547
+#: ../../src/ui_fsmenu/options.cc:540
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "Překlad do %sje hotový."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:550
+#: ../../src/ui_fsmenu/options.cc:543
 msgid "The translation into %1% is %2%%% complete."
 msgstr "Překlad do %1% je z %2%%% hotový."
 
-#: ../../src/ui_fsmenu/options.cc:564
+#: ../../src/ui_fsmenu/options.cc:557
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Chceš-li pomoci s překladem, prosím navštiv %s"
@@ -3738,23 +3803,11 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
-#: ../../src/ui_fsmenu/singleplayer.cc:38
-msgid "New Game"
-msgstr "Nová hra"
-
-#: ../../src/ui_fsmenu/singleplayer.cc:40
-msgid "Campaigns"
-msgstr "Kampaně"
-
-#: ../../src/ui_fsmenu/singleplayer.cc:42
-msgid "Load Game"
-msgstr "Nahrát hru"
-
-#: ../../src/wlapplication.cc:1222
+#: ../../src/wlapplication.cc:1241
 msgid "Game data error"
 msgstr "Chyba herních dat"
 
-#: ../../src/wlapplication.cc:1230
+#: ../../src/wlapplication.cc:1249
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -3762,18 +3815,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Prosíme nahlas nám tento problém, abychom mohli Widelands dále zlepšovat. Další podrobnosti najdeš ve standardním výstupu (stdout.txt na Windows). Používáš sestavení %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1237
+#: ../../src/wlapplication.cc:1256
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Prosíme uveď tuto informaci v hlášení chyby.\n\nWidelands se pokouší uložit hru, pokud při hře dojde k chybě. Často - ne vždy - je možné uloženou hru nahrát a pokračovat ve hraní."
 
-#: ../../src/wlapplication.cc:1369
+#: ../../src/wlapplication.cc:1338
 msgid "Invalid Address"
 msgstr "Neplatná adresa"
 
-#: ../../src/wlapplication.cc:1370
+#: ../../src/wlapplication.cc:1339
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "Zadaný hostname nebo adresa není platná a proto se není možné připojit."
 
@@ -4357,7 +4410,7 @@ msgstr ""
 
 #. * TRANSLATORS: Title for a window that shows debug information for a field
 #. on the map
-#: ../../src/wui/game_debug_ui.cc:193
+#: ../../src/wui/game_debug_ui.cc:134
 msgid "Debug Field"
 msgstr "Ladicí políčko"
 
@@ -5210,7 +5263,7 @@ msgid "The tribe will be set at random."
 msgstr "Kmen bude nastaven náhodně."
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
-#: ../../src/wui/plot_area.cc:105
+#: ../../src/wui/plot_area.cc:106
 msgctxt "unit_narrow"
 msgid "%1%d"
 msgid_plural "%1%d"
@@ -5220,7 +5273,7 @@ msgstr[2] "%1%d"
 msgstr[3] "%1%d"
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
-#: ../../src/wui/plot_area.cc:108
+#: ../../src/wui/plot_area.cc:109
 msgctxt "unit_narrow"
 msgid "%1%h"
 msgid_plural "%1%h"
@@ -5231,7 +5284,7 @@ msgstr[3] "%1%h"
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
-#: ../../src/wui/plot_area.cc:111
+#: ../../src/wui/plot_area.cc:112
 msgctxt "unit_narrow"
 msgid "%1%m"
 msgid_plural "%1%m"
@@ -5241,24 +5294,24 @@ msgstr[2] "%1%m"
 msgstr[3] "%1%m"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:124
+#: ../../src/wui/plot_area.cc:125
 msgctxt "unit_generic"
 msgid "days"
 msgstr "dny"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:127
+#: ../../src/wui/plot_area.cc:128
 msgctxt "unit_generic"
 msgid "hours"
 msgstr "hodiny"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:130
+#: ../../src/wui/plot_area.cc:131
 msgctxt "unit_generic"
 msgid "minutes"
 msgstr "minuty"
 
-#: ../../src/wui/plot_area.cc:359
+#: ../../src/wui/plot_area.cc:360
 msgid "game"
 msgstr "hra"
 
