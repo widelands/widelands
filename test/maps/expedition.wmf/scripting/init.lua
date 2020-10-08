@@ -88,13 +88,15 @@ function check_wares_in_port_are_all_there(args)
 end
 
 function cancel_expedition_in_shipwindow(which_ship)
+   game.desired_speed = 5 * 1000
    click_on_ship(which_ship or first_ship)
+   sleep(2000)
    assert_true(click_button("cancel_expedition"))
-   sleep(100)
+   sleep(2000)
    assert_true(click_button("ok"))
-   sleep(100)
+   sleep(2000)
    close_windows()
-   sleep(100)
+   sleep(2000)
 end
 
 --function cancel_expedition_or_sink_in_shipwindow()
@@ -129,9 +131,13 @@ end
 
 function dismantle_hardener()
    assert_true(click_building(p1, "barbarians_wood_hardener"))
+   sleep(2000)
    assert_true(click_button("dismantle"))
+   sleep(2000)
    assert_true(click_button("ok"))
+   sleep(2000)
    close_windows()
+   sleep(2000)
    while map:get_field(10, 18).immovable do
       sleep(317)
    end
