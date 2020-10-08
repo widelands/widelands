@@ -186,9 +186,7 @@ bool FerryFleet::merge(EditorGameBase& egbase, FerryFleet* other) {
 void FerryFleet::cleanup(EditorGameBase& egbase) {
 	while (!ferries_.empty()) {
 		Ferry* ferry = ferries_.back();
-		if (egbase.objects().object_still_available(ferry)) {
-			ferry->set_fleet(nullptr);
-		}
+		ferry->set_fleet(nullptr);
 		ferries_.pop_back();
 	}
 	while (!pending_ferry_requests_.empty()) {
@@ -226,6 +224,7 @@ bool FerryFleet::has_ferry(const Waterway& ww) const {
 
 void FerryFleet::add_ferry(Ferry* ferry) {
 	ferries_.push_back(ferry);
+	assert(std::count(ferries_.begin(), ferries_.end(), ferry) == 1);
 	ferry->set_fleet(this);
 }
 
@@ -237,7 +236,16 @@ void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
 		              serial(), ferry ? ferry->serial() : 0);
 		return;
 	}
-	ferries_.erase(it);
+	while (it != ferries_.end()) {
+		ferries_.erase(it);
+		it = std::find(ferries_.begin(), ferries_.end(), ferry);
+		if (it != ferries_.end()) {
+			log_err_time(egbase.get_gametime(),
+			             "FerryFleet %u: Multiple instances of ferry %u were in the ferry fleet\n",
+			             serial(), ferry->serial());
+		}
+	}
+	assert(std::count(ferries_.begin(), ferries_.end(), ferry) == 0);
 	ferry->set_fleet(nullptr);
 
 	if (ferry->get_location(egbase)) {
