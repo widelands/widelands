@@ -278,8 +278,7 @@ void FerryFleet::request_ferry(EditorGameBase& egbase, Waterway* waterway, int32
 
 void FerryFleet::cancel_ferry_request(Game& game, Waterway* waterway) {
 	for (Ferry* ferry : ferries_) {
-		if (game.objects().object_still_available(ferry) &&
-		    ferry->get_destination(game) == waterway) {
+		if (ferry->get_destination(game) == waterway) {
 			ferry->set_destination(game, nullptr);
 			return;
 		}
