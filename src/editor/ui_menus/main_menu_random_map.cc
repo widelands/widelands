@@ -177,30 +177,30 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
      map_id_edit_(
         &map_id_box_, 0, 0, box_width_ - 2 * margin_ - map_id_label_.get_w(), UI::PanelStyle::kWui),
 
-     tribe_(game ? new UI::Dropdown<std::string>(
-          &box_,
-          "tribe",
-          0,
-          0,
-          box_width_,
-          8,
-          label_height_,
-          _("Tribe"),
-          UI::DropdownType::kTextual,
-          UI::PanelStyle::kWui,
-          UI::ButtonStyle::kWuiSecondary) : nullptr),
-     difficulty_(game ? new UI::Dropdown<GameDifficulty>(
-          &box_,
-          "difficulty",
-          0,
-          0,
-          box_width_,
-          8,
-          label_height_,
-          _("Difficulty"),
-          UI::DropdownType::kTextual,
-          UI::PanelStyle::kWui,
-          UI::ButtonStyle::kWuiSecondary) : nullptr),
+     tribe_(game ? new UI::Dropdown<std::string>(&box_,
+                                                 "tribe",
+                                                 0,
+                                                 0,
+                                                 box_width_,
+                                                 8,
+                                                 label_height_,
+                                                 _("Tribe"),
+                                                 UI::DropdownType::kTextual,
+                                                 UI::PanelStyle::kWui,
+                                                 UI::ButtonStyle::kWuiSecondary) :
+                   nullptr),
+     difficulty_(game ? new UI::Dropdown<GameDifficulty>(&box_,
+                                                         "difficulty",
+                                                         0,
+                                                         0,
+                                                         box_width_,
+                                                         8,
+                                                         label_height_,
+                                                         _("Difficulty"),
+                                                         UI::DropdownType::kTextual,
+                                                         UI::PanelStyle::kWui,
+                                                         UI::ButtonStyle::kWuiSecondary) :
+                        nullptr),
 
      // Buttons
      button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
@@ -356,9 +356,12 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 	// ---------- Game-specific stuff ----------
 
 	if (game) {
-		tribe_->add(pgettext("tribe", "Random"), "", g_image_cache->get("images/ui_fsmenu/random.png"), true, _("The tribe will be selected at random"));
+		tribe_->add(pgettext("tribe", "Random"), "",
+		            g_image_cache->get("images/ui_fsmenu/random.png"), true,
+		            _("The tribe will be selected at random"));
 		for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-			tribe_->add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon), false, tribeinfo.tooltip);
+			tribe_->add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon), false,
+			            tribeinfo.tooltip);
 		}
 
 		box_.add(tribe_);
@@ -376,7 +379,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 		box_height += margin_ + difficulty_->get_h();
 		box_.add_space(margin_);
 		box_height += 3 * margin_;
-
 	}
 
 	// ---------- "Generate Map" button ----------
