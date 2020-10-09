@@ -397,7 +397,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						const DescriptionIndex& worker_index =
 						   tribe.worker_index(worker.descr().name().c_str());
 						if (!warehouse.incorporated_workers_.count(worker_index)) {
-							warehouse.incorporated_workers_[worker_index] = std::vector<Worker*>();
+							warehouse.incorporated_workers_[worker_index] = Warehouse::WorkerList();
 						}
 						warehouse.incorporated_workers_[worker_index].push_back(&worker);
 					} catch (const WException& e) {
@@ -1115,8 +1115,8 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 	using TWorkerMap = std::map<uint32_t, const Worker*>;
 	TWorkerMap workermap;
 	for (const auto& cwt : warehouse.incorporated_workers_) {
-		for (Worker* temp_worker : cwt.second) {
-			const Worker& w = *temp_worker;
+		for (OPtr<Worker> temp_worker : cwt.second) {
+			const Worker& w = *temp_worker.get(game);
 			assert(mos.is_object_known(w));
 			workermap.insert(std::make_pair(mos.get_object_file_index(w), &w));
 		}
