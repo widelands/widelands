@@ -58,7 +58,7 @@ Panel::Panel(Panel* const nparent,
              const int nw,
              const int nh,
              const std::string& tooltip_text,
-	         const bool initially_not_thinking,
+             const bool initially_not_thinking,
              const bool initially_invisible)
    : parent_(nparent),
      first_child_(nullptr),
