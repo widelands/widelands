@@ -670,12 +670,16 @@ void InteractiveGameBase::show_ship_window(Widelands::Ship* ship) {
 }
 
 void InteractiveGameBase::show_game_summary() {
-	if (game_summary_.window) {
-		game_summary_.window->set_visible(true);
-		game_summary_.window->think();
-		return;
-	}
-	new GameSummaryScreen(this, &game_summary_);
+	NoteThreadSafeFunction::instantiate(
+	    [this]() {
+	    if (game_summary_.window) {
+		    game_summary_.window->set_visible(true);
+		    game_summary_.window->think();
+		    return;
+	    }
+	    new GameSummaryScreen(this, &game_summary_);
+	    },
+	    true);
 }
 
 bool InteractiveGameBase::show_game_client_disconnected() {
