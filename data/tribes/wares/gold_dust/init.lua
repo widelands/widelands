@@ -8,12 +8,8 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Gold Dust"),
    icon = dirname .. "menu.png",
 
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
-         hotspot = { 4, 4 },
-      },
-   }
+   animation_directory = dirname,
+   animations = { idle = { hotspot = {9, 6}}}
 }
 
 pop_textdomain()
