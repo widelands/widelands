@@ -58,13 +58,14 @@ Panel::Panel(Panel* const nparent,
              const int nw,
              const int nh,
              const std::string& tooltip_text,
+	         const bool initially_not_thinking,
              const bool initially_invisible)
    : parent_(nparent),
      first_child_(nullptr),
      last_child_(nullptr),
      mousein_child_(nullptr),
      focus_(nullptr),
-     flags_(pf_handle_mouse | pf_thinks | pf_handle_keypresses),
+     flags_(pf_handle_mouse | pf_handle_keypresses),
      x_(nx),
      y_(ny),
      w_(nw),
@@ -96,6 +97,9 @@ Panel::Panel(Panel* const nparent,
 
 	if (!initially_invisible) {
 		flags_ |= pf_visible;
+	}
+	if (!initially_not_thinking) {
+		flags_ |= pf_thinks;
 	}
 }
 

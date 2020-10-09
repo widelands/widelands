@@ -87,6 +87,7 @@ public:
 	      int const nw,
 	      int const nh,
 	      const std::string& tooltip_text = std::string(),
+	      bool initially_not_thinking = false,
 	      bool initially_invisible = false);
 	virtual ~Panel();
 
@@ -458,8 +459,9 @@ struct NamedPanel : public Panel {
 	           int const nw,
 	           int const nh,
 	           const std::string& tooltip_text = std::string(),
+	           bool initially_not_thinking = false,
 	           bool initially_invisible = false)
-	   : Panel(nparent, nx, ny, nw, nh, tooltip_text, initially_invisible), name_(name) {
+	   : Panel(nparent, nx, ny, nw, nh, tooltip_text, initially_not_thinking, initially_invisible), name_(name) {
 	}
 
 	const std::string& get_name() const {

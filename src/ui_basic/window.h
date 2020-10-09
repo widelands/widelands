@@ -65,6 +65,7 @@ public:
 	       uint32_t w,
 	       uint32_t h,
 	       const std::string& title,
+	       bool initially_not_thinking = false,
 	       bool initially_invisible = false);
 	~Window() override;
 

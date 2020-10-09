@@ -101,6 +101,7 @@ Window::Window(Panel* const parent,
                uint32_t const w,
                uint32_t const h,
                const std::string& title,
+               const bool initially_not_thinking,
                const bool initially_invisible)
    : NamedPanel(parent,
                 name,
@@ -109,6 +110,7 @@ Window::Window(Panel* const parent,
                 w + kVerticalBorderThickness * 2,
                 kTopBorderThickness + h + kBottomBorderThickness,
                 "",
+                true,
                 true),
      is_minimal_(false),
      oldh_(kTopBorderThickness + h + kBottomBorderThickness),
@@ -185,6 +187,9 @@ Window::Window(Panel* const parent,
 
 	if (!initially_invisible) {
 		set_visible(true);
+	}
+	if (!initially_not_thinking) {
+		set_thinks(true);
 	}
 }
 
