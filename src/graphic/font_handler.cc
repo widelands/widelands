@@ -102,7 +102,7 @@ public:
 			} else {
 				currently_rendering_.insert(hash);
 				NoteThreadSafeFunction::instantiate(
-				   [this, text, hash, w]() {
+				   [this, &text, &hash, &w]() {
 					   render_cache_->insert(hash, rt_renderer_->render(text, w, fontset()->is_rtl()));
 				   },
 				   true);
