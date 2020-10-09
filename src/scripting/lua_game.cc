@@ -100,11 +100,16 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
-   PROP_RO(LuaPlayer, name),       PROP_RO(LuaPlayer, allowed_buildings),
-   PROP_RO(LuaPlayer, objectives), PROP_RO(LuaPlayer, defeated),
-   PROP_RO(LuaPlayer, messages),   PROP_RO(LuaPlayer, inbox),
-   PROP_RO(LuaPlayer, color),      PROP_RW(LuaPlayer, team),
-   PROP_RO(LuaPlayer, tribe),      PROP_RW(LuaPlayer, see_all),
+   PROP_RO(LuaPlayer, name),
+   PROP_RO(LuaPlayer, allowed_buildings),
+   PROP_RO(LuaPlayer, objectives),
+   PROP_RO(LuaPlayer, defeated),
+   PROP_RO(LuaPlayer, messages),
+   PROP_RO(LuaPlayer, inbox),
+   PROP_RO(LuaPlayer, color),
+   PROP_RW(LuaPlayer, team),
+   PROP_RO(LuaPlayer, tribe),
+   PROP_RW(LuaPlayer, see_all),
    PROP_RW(LuaPlayer, allow_additional_expedition_items),
    {nullptr, nullptr, nullptr},
 };
