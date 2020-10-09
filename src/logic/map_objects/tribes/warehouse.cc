@@ -718,13 +718,10 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 	// But portdock must know that it should not try to recreate itself
 	cleanup_in_progress_ = true;
 
-	if (egbase.objects().object_still_available(portdock_)) {
+	if (portdock_) {
 		portdock_->remove(egbase);
 	}
-
-	if (!egbase.objects().object_still_available(portdock_)) {
-		portdock_ = nullptr;
-	}
+	portdock_ = nullptr;
 
 	// This will launch all workers including incorporated ones up to kFleeingUnitsCap and then empty
 	// the stock.
