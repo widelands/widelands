@@ -105,6 +105,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, messages),   PROP_RO(LuaPlayer, inbox),
    PROP_RO(LuaPlayer, color),      PROP_RW(LuaPlayer, team),
    PROP_RO(LuaPlayer, tribe),      PROP_RW(LuaPlayer, see_all),
+   PROP_RW(LuaPlayer, allow_additional_expedition_items),
    {nullptr, nullptr, nullptr},
 };
 
@@ -271,6 +272,20 @@ int LuaPlayer::set_see_all(lua_State* const L) {
 int LuaPlayer::get_see_all(lua_State* const L) {
 	lua_pushboolean(L, get(L, get_egbase(L)).see_all());
 	return 1;
+}
+
+/* RST
+   .. attribute:: allow_additional_expedition_items
+
+      (RW) Whether the player may take additional items onto expeditions.
+*/
+int LuaPlayer::get_allow_additional_expedition_items(lua_State* L) {
+	lua_pushboolean(L, get(L, get_egbase(L)).additional_expedition_items_allowed());
+	return 1;
+}
+int LuaPlayer::set_allow_additional_expedition_items(lua_State* L) {
+	get(L, get_egbase(L)).set_allow_additional_expedition_items(luaL_checkboolean(L, -1));
+	return 0;
 }
 
 /*
