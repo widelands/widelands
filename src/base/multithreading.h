@@ -74,7 +74,7 @@ struct NoteThreadSafeFunctionHandled {
 class MutexLock {
 public:
 	// Which mutex to lock. Each entry corresponds to a different mutex.
-	enum class ID { kObjects, kCommands };
+	enum class ID { kObjects, kCommands, kMessages };
 
 	explicit MutexLock(ID);
 	explicit MutexLock(ID, const std::function<void()>& run_while_waiting);
