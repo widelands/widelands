@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# ThonyVezbe <a.guechoum@gmail.com>, 2020
 # Irriep Nala Novram <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-18 13:37+0000\n"
-"PO-Revision-Date: 2020-07-23 07:48+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
+"PO-Revision-Date: 2020-10-05 10:54+0000\n"
+"Last-Translator: ThonyVezbe <a.guechoum@gmail.com>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,7 +52,7 @@ msgstr "Daraozadoù Kavet"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:81
 msgid "Your team found a new artifact."
-msgstr ""
+msgstr "Un daraozad ouzhpenn zo bet kavet gant ho skipailh."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:85
@@ -69,7 +70,7 @@ msgstr "Daraozadoù Aloubet"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "Your team stole an artifact from an enemy."
-msgstr ""
+msgstr "Laeret en deus ho skipailh un daraozad digant un enebour."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:174
 msgid "Overview:"
@@ -173,7 +174,7 @@ msgstr ""
 #: ../../data/scripting/win_conditions/territorial_functions.lua:13
 #, lua-format
 msgid "Team %i"
-msgstr ""
+msgstr "Skipailh %i"
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:14
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
@@ -264,31 +265,31 @@ msgstr[4] ""
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:302
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%1% eurvezh ha %2%"
+msgstr[1] "%1% eurvezh ha %2%"
+msgstr[2] "%1% eurvezh ha %2%"
+msgstr[3] "%1% eurvezh ha %2%"
+msgstr[4] "%1% eurvezh ha %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:308
 msgid "%1% hour"
 msgid_plural "%1% hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%1% eurvezh"
+msgstr[1] "%1% eurvezh"
+msgstr[2] "%1% eurvezh"
+msgstr[3] "%1% eurvezh"
+msgstr[4] "%1% eurvezh"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:311
 #, lua-format
 msgid "The game will end in %s."
-msgstr ""
+msgstr "Echu e vo ar c'hoariadenn a-benn %s."
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:4
 msgid "Congratulations!"
-msgstr ""
+msgstr "Gourc'hemennoù!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:5
 msgid "You have won this game!"
@@ -322,7 +323,7 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:24
 msgid "Status"
-msgstr ""
+msgstr "Statud"
 
 #. TRANSLATORS: This is an overview for all players.
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:26
