@@ -95,30 +95,42 @@ Serial MapObjectSaver::register_object(const MapObject& obj) {
 
 	assert(!rec.registered);
 
-	if (obj.descr().type() == MapObjectType::FLAG) {
+	switch (obj.descr().type()) {
+	case MapObjectType::FLAG:
 		++nr_flags_;
-	} else if (obj.descr().type() == MapObjectType::ROAD) {
+		break;
+	case MapObjectType::ROAD:
 		++nr_roads_;
-	} else if (obj.descr().type() == MapObjectType::WATERWAY) {
+		break;
+	case MapObjectType::WATERWAY:
 		++nr_waterways_;
-	} else if (obj.descr().type() >= MapObjectType::BUILDING) {
-		++nr_buildings_;
-	} else if (obj.descr().type() >= MapObjectType::IMMOVABLE) {
-		++nr_immovables_;
-	} else if (obj.descr().type() == MapObjectType::WARE) {
-		++nr_wares_;
-	} else if (obj.descr().type() >= MapObjectType::BOB) {
-		++nr_bobs_;
-	} else if (obj.descr().type() == MapObjectType::BATTLE) {
+		break;
+	case MapObjectType::BATTLE:
 		++nr_battles_;
-	} else if (obj.descr().type() == MapObjectType::SHIP_FLEET) {
+		break;
+	case MapObjectType::SHIP_FLEET:
 		++nr_ship_fleets_;
-	} else if (obj.descr().type() == MapObjectType::FERRY_FLEET) {
+		break;
+	case MapObjectType::FERRY_FLEET:
 		++nr_ferry_fleets_;
-	} else if (obj.descr().type() == MapObjectType::PORTDOCK) {
+		break;
+	case MapObjectType::PORTDOCK:
 		++nr_portdocks_;
-	} else {
-		throw wexception("MapObjectSaver: Unknown MapObject type");
+		break;
+	case MapObjectType::WARE:
+		++nr_wares_;
+		break;
+	default:
+		if (obj.descr().type() >= MapObjectType::BUILDING) {
+			++nr_buildings_;
+		} else if (obj.descr().type() >= MapObjectType::IMMOVABLE) {
+			++nr_immovables_;
+		} else if (obj.descr().type() >= MapObjectType::BOB) {
+			++nr_bobs_;
+		} else {
+			throw wexception("MapObjectSaver: Unknown MapObjectType %u", obj.descr().type());
+		}
+		break;
 	}
 
 	rec.registered = true;
