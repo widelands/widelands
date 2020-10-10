@@ -75,6 +75,9 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 }
 
 void StoryMessageBox::clicked_ok() {
+	set_visible(false);
+	set_thinks(false);
+
 	// Manually force the game to reevaluate its current state, especially time information.
 	game_->game_controller()->think();
 	// Now get the game running again.
@@ -97,14 +100,12 @@ bool StoryMessageBox::handle_key(bool down, SDL_Keysym code) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-			clicked_ok();
-			return true;
 		case SDLK_ESCAPE:
 			clicked_ok();
-			return UI::Window::handle_key(down, code);
+			return true;
 		default:
 			break;  // not handled
 		}
 	}
-	return UI::Panel::handle_key(down, code);
+	return UI::Window::handle_key(down, code);
 }
