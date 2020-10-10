@@ -187,7 +187,8 @@ void MapWaterwaydataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 				}
 
 				fw.unsigned_32(r->fleet_ ? mos.get_object_file_index(*r->fleet_) : 0);
-				fw.unsigned_32(r->ferry_ ? mos.get_object_file_index(*r->ferry_) : 0);
+				fw.unsigned_32(
+				   r->ferry_.get(egbase) ? mos.get_object_file_index(*r->ferry_.get(egbase)) : 0);
 
 				mos.mark_object_as_saved(*r);
 			}

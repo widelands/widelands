@@ -63,10 +63,10 @@ struct Waterway : public RoadBase {
 	FerryFleet* get_fleet() {
 		return fleet_;
 	}
-	const Ferry* get_ferry() const {
+	const OPtr<Ferry> get_ferry() const {
 		return ferry_;
 	}
-	Ferry* get_ferry() {
+	OPtr<Ferry> get_ferry() {
 		return ferry_;
 	}
 
@@ -87,7 +87,7 @@ private:
 
 	void request_ferry(EditorGameBase& egbase);
 
-	Ferry* ferry_;
+	OPtr<Ferry> ferry_;
 	FerryFleet* fleet_;
 };
 }  // namespace Widelands

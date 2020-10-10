@@ -210,7 +210,7 @@ uint32_t FerryFleet::count_unattended_waterways() const {
 
 // Returns true of this waterway has a ferry or a ferry is on the way there
 bool FerryFleet::has_ferry(const Waterway& ww) const {
-	if (ww.get_ferry()) {
+	if (ww.get_ferry().get(owner().egbase())) {
 		return true;
 	}
 	assert(ww.get_fleet() == this);

@@ -79,11 +79,11 @@ void Waterway::link_into_flags(EditorGameBase& egbase, bool loading) {
 }
 
 bool Waterway::notify_ware(Game& game, FlagId flag) {
-	return ferry_ && ferry_->notify_ware(game, flag);
+	return ferry_.get(game) && ferry_.get(game)->notify_ware(game, flag);
 }
 
 void Waterway::remove_worker(Worker& w) {
-	if (ferry_ == &w) {
+	if (ferry_.get(owner().egbase()) == &w) {
 		ferry_ = nullptr;
 		// Since waterways cannot have any other worker than their own ferry and since a
 		// ferry cannot be disassigned except by destroying its waterway, I assume that
@@ -99,8 +99,8 @@ void Waterway::request_ferry(EditorGameBase& egbase) {
 }
 
 void Waterway::assign_carrier(Carrier& c, uint8_t) {
-	if (ferry_) {
-		ferry_->set_location(nullptr);
+	if (ferry_.get(owner().egbase())) {
+		ferry_.get(owner().egbase())->set_location(nullptr);
 	}
 	ferry_ = dynamic_cast<Ferry*>(&c);
 }
@@ -176,11 +176,11 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 	// Initialize the new waterway
 	newww.init(game);
 
-	if (ferry_) {
-		assert(ferry_->get_location(game) == this);
+	if (ferry_.get(game)) {
+		assert(ferry_.get(game)->get_location(game) == this);
 		// We assign the ferry to the waterway part it currently is on
 		bool other = true;
-		const Coords pos = ferry_->get_position();
+		const Coords pos = ferry_.get(game)->get_position();
 		Coords temp(flags_[FlagStart]->get_position());
 		for (uint32_t i = 0; i < path_.get_nsteps(); i++) {
 			if (temp == pos) {
@@ -192,11 +192,11 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 
 		if (other) {
 			molog(game.get_gametime(), "Assigning the ferry to the NEW waterway\n");
-			ferry_->set_destination(game, &newww);
+			ferry_.get(game)->set_destination(game, &newww);
 			request_ferry(game);
 		} else {
 			molog(game.get_gametime(), "Assigning the ferry to the OLD waterway\n");
-			ferry_->set_destination(game, this);
+			ferry_.get(game)->set_destination(game, this);
 			newww.request_ferry(game);
 		}
 	} else {
@@ -213,8 +213,8 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 void Waterway::cleanup(EditorGameBase& egbase) {
 	Economy::check_split(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	if (upcast(Game, game, &egbase)) {
-		if (ferry_ && egbase.objects().object_still_available(ferry_)) {
-			ferry_->set_destination(*game, nullptr);
+		if (ferry_.get(egbase)) {
+			ferry_.get(egbase)->set_destination(*game, nullptr);
 		}
 		if (fleet_ && egbase.objects().object_still_available(fleet_)) {
 			// Always call this, in case the fleet can disband now
@@ -227,7 +227,7 @@ void Waterway::cleanup(EditorGameBase& egbase) {
 void Waterway::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
-	molog(egbase.get_gametime(), "Ferry %u\n", ferry_ ? ferry_->serial() : 0);
+	molog(egbase.get_gametime(), "Ferry %u\n", ferry_.get(egbase) ? ferry_.serial() : 0);
 	molog(egbase.get_gametime(), "FerryFleet %u\n", fleet_ ? fleet_->serial() : 0);
 }
 
