@@ -48,8 +48,8 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			map->set_description(s.get_string("descr"));
 			map->set_hint(s.get_string("hint", ""));
 			map->set_background(s.get_string("background", ""));
-			map->set_background_theme(s.get_string("theme", ""));
 			old_world_name_ = s.get_string("world", "");
+			map->set_background_theme(s.get_string("theme", old_world_name_.c_str()));
 
 			std::string t = s.get_string("tags", "");
 			if (t != "") {
