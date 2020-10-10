@@ -28,7 +28,8 @@ takeover_soldiers = takeover_soldiers[difficulty]
 campaign_data = game:read_campaign_data("frisians", "fri01")
 if not campaign_data then
    campaign_message_box({
-      title = _"Warning",
+      -- TRANSLATORS: Message title for a piece of information
+      title = _"Note",
       body = p(_[[You appear not to have completed the previous mission. You may still play this scenario, but you will be at a disadvantage. I recommend that you complete the previous scenario first and then restart this mission.]]),
       w = 450,
       h = 150,
