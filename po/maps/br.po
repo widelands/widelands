@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# ThonyVezbe <a.guechoum@gmail.com>, 2020
 # Irriep Nala Novram <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-18 13:37+0000\n"
-"PO-Revision-Date: 2020-09-11 11:59+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
+"PO-Revision-Date: 2020-10-05 14:24+0000\n"
+"Last-Translator: ThonyVezbe <a.guechoum@gmail.com>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -70,7 +71,7 @@ msgstr ""
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "An Eil Impalaerezh"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
