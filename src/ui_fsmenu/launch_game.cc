@@ -47,7 +47,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
      fsmm_(fsmm),
 
      // Values for alignment and size
-     standard_element_width_(get_w() / 4),
+     standard_element_width_(get_w() / 3),
      standard_element_height_(get_h() * 9 / 200),
      padding_(4),
 
@@ -57,14 +57,14 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
      map_box_(&content_box_, 0, 0, UI::Box::Vertical),
      map_details(&map_box_, standard_element_width_, standard_element_height_, padding_),
 
-     win_condition_type(&map_box_,
-                        0,
-                        0,
-                        0,
-                        0,
-                        _("Type of game"),
-                        UI::Align::kCenter,
-                        g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
+     configure_game(&map_box_,
+                    0,
+                    0,
+                    0,
+                    0,
+                    _("Configure this game"),
+                    UI::Align::kCenter,
+                    g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
      win_condition_dropdown_(&map_box_,
                              "dropdown_wincondition",
                              0,
@@ -145,13 +145,15 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 
 	map_box_.add(&map_details);
 	map_box_.add_space(5 * padding_);
-	map_box_.add(&peaceful_);
-	map_box_.add_space(5 * padding_);
-	map_box_.add(&custom_starting_positions_);
-	map_box_.add_space(5 * padding_);
-	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	map_box_.add_space(2 * padding_);
+
+	map_box_.add(&configure_game, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	map_box_.add_space(3 * padding_);
 	map_box_.add(&win_condition_dropdown_);
+	map_box_.add_space(3 * padding_);
+	map_box_.add(&peaceful_);
+	map_box_.add_space(3 * padding_);
+	map_box_.add(&custom_starting_positions_);
+
 	map_box_.add_inf_space();
 	map_box_.add(&ok_, UI::Box::Resizing::kFullSize);
 	map_box_.add_space(2 * padding_);
@@ -173,7 +175,7 @@ void FullscreenMenuLaunchGame::layout() {
 	}
 
 	main_box_.set_size(get_w(), get_h());
-	standard_element_width_ = get_w() / 4;
+	standard_element_width_ = get_w() / 3;
 	standard_element_height_ = get_h() * 9 / 200;
 
 	ok_.set_desired_size(standard_element_width_, standard_element_height_);

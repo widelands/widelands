@@ -91,7 +91,7 @@ protected:
 	UI::Box map_box_;
 
 	MapDetailsBox map_details;
-	UI::Textarea win_condition_type;
+	UI::Textarea configure_game;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_, custom_starting_positions_;
 	std::string last_win_condition_;
