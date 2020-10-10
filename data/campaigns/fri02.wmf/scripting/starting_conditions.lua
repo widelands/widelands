@@ -139,11 +139,6 @@ end
 -- Additionally take all ship soldiers
 for descr,n in pairs(campaign_data.ship_soldiers) do
    local key = {tonumber(descr:sub(1,1)), tonumber(descr:sub(2,2)), tonumber(descr:sub(3,3)), 0}
-   print("NOCOM " .. descr .. "  = " .. n)
-   print("NOCOM Key1 = " .. key[1])
-   print("NOCOM Key2 = " .. key[2])
-   print("NOCOM Key3 = " .. key[3])
-   print("NOCOM Key4 = " .. key[4])
    if not soldiers[key] then
       soldiers[key] = n
    else
