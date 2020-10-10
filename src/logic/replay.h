@@ -30,7 +30,7 @@
 
 #include <string>
 
-#include "logic/widelands.h"
+#include "base/units.h"
 
 struct Md5Checksum;
 

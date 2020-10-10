@@ -26,6 +26,7 @@ wl_library(game_io
     base_log
     base_macros
     base_scoped_timer
+    base_units
     build_info
     economy
     graphic_image_io
@@ -35,7 +36,6 @@ wl_library(game_io
     io_profile
     logic
     logic_commands
-    logic_constants
     logic_exceptions
     logic_game_controller
     logic_map

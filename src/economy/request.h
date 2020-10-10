@@ -20,6 +20,7 @@
 #ifndef WL_ECONOMY_REQUEST_H
 #define WL_ECONOMY_REQUEST_H
 
+#include "base/units.h"
 #include "economy/trackptr.h"
 #include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/wareworker.h"

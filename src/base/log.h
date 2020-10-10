@@ -22,10 +22,10 @@
 
 #include <cstdint>
 #include <limits>
+#include <string>
 
 #include "base/macros.h"
-
-#include <string>
+#include "base/units.h"
 
 enum class LogType {
 	kInfo,     // normal info messages
@@ -34,21 +34,19 @@ enum class LogType {
 	kError     // fatal errors
 };
 
-constexpr uint32_t kNoTimestamp = 0;
-
 // Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
 // If `gametime` is not 0, a timestamp for the gametime will be prepended to the output;
 // otherwise, the real time will be used for the timestamp.
-void log_to_stdout(LogType, uint32_t gametime, const char*, ...) PRINTF_FORMAT(3, 4);
-#define log_info_time(time, ...) log_to_stdout(LogType::kInfo, time.get(), __VA_ARGS__)
-#define log_dbg_time(time, ...) log_to_stdout(LogType::kDebug, time.get(), __VA_ARGS__)
-#define log_warn_time(time, ...) log_to_stdout(LogType::kWarning, time.get(), __VA_ARGS__)
-#define log_err_time(time, ...) log_to_stdout(LogType::kError, time.get(), __VA_ARGS__)
+void log_to_stdout(LogType, const Widelands::Time& gametime, const char*, ...) PRINTF_FORMAT(3, 4);
+#define log_info_time(time, ...) log_to_stdout(LogType::kInfo, time, __VA_ARGS__)
+#define log_dbg_time(time, ...) log_to_stdout(LogType::kDebug, time, __VA_ARGS__)
+#define log_warn_time(time, ...) log_to_stdout(LogType::kWarning, time, __VA_ARGS__)
+#define log_err_time(time, ...) log_to_stdout(LogType::kError, time, __VA_ARGS__)
 
-#define log_info(...) log_to_stdout(LogType::kInfo, kNoTimestamp, __VA_ARGS__)
-#define log_dbg(...) log_to_stdout(LogType::kDebug, kNoTimestamp, __VA_ARGS__)
-#define log_warn(...) log_to_stdout(LogType::kWarning, kNoTimestamp, __VA_ARGS__)
-#define log_err(...) log_to_stdout(LogType::kError, kNoTimestamp, __VA_ARGS__)
+#define log_info(...) log_to_stdout(LogType::kInfo, Widelands::Time(), __VA_ARGS__)
+#define log_dbg(...) log_to_stdout(LogType::kDebug, Widelands::Time(), __VA_ARGS__)
+#define log_warn(...) log_to_stdout(LogType::kWarning, Widelands::Time(), __VA_ARGS__)
+#define log_err(...) log_to_stdout(LogType::kError, Widelands::Time(), __VA_ARGS__)
 
 extern bool g_verbose;
 

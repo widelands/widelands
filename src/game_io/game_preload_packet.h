@@ -20,9 +20,9 @@
 #ifndef WL_GAME_IO_GAME_PRELOAD_PACKET_H
 #define WL_GAME_IO_GAME_PRELOAD_PACKET_H
 
+#include "base/units.h"
 #include "game_io/game_data_packet.h"
 #include "logic/game_controller.h"
-#include "logic/widelands.h"
 
 namespace Widelands {
 

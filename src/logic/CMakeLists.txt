@@ -61,9 +61,9 @@ wl_library(logic_game_controller
   USES_SDL2
   DEPENDS
     ai
+    base_units
     logic
     logic_commands
-    logic_constants
     logic_game_settings
     ui_basic
     widelands_options
@@ -74,9 +74,6 @@ wl_library(logic_constants
   SRCS
     widelands.cc
     widelands.h
-  DEPENDS
-    base_exceptions
-    io_fileread
 )
 
 wl_library(logic_filesystem_constants
@@ -181,6 +178,7 @@ wl_library(logic_commands
     base_i18n
     base_log
     base_macros
+    base_units
     economy # TODO(GunChleoc): Circular dependency
     graphic_text_layout
     io_fileread
@@ -231,6 +229,7 @@ wl_library(logic
     base_random
     base_scoped_timer
     base_time_string
+    base_units
     build_info
     economy
     game_io

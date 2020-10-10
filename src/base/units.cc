@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2020 by the Widelands Development Team
+ * Copyright (C) 2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,4 +17,22 @@
  *
  */
 
-// Dummy file as cmake cannot handle header only libraries :(.
+#include "base/units.h"
+
+#include "io/fileread.h"
+#include "io/filewrite.h"
+
+namespace Widelands {
+
+Duration::Duration(FileRead& fr) : value_(fr.unsigned_32()) {
+}
+void Duration::save(FileWrite& fw) const {
+	fw.unsigned_32(value_);
+}
+
+Time::Time(FileRead& fr) : value_(fr.unsigned_32()) {
+}
+void Time::save(FileWrite& fw) const {
+	fw.unsigned_32(value_);
+}
+}  // namespace Widelands

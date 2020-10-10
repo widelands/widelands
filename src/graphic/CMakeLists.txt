@@ -331,6 +331,7 @@ wl_library(graphic
     base_i18n
     base_log
     base_scoped_timer
+    base_units
     build_info
     graphic_align
     graphic_animation
@@ -345,7 +346,6 @@ wl_library(graphic
     graphic_surface
     io_filesystem
     io_stream
-    logic_constants
     logic_widelands_geometry
     notifications
     scripting_lua_interface

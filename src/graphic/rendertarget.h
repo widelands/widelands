@@ -23,11 +23,11 @@
 #include <vector>
 
 #include "base/rect.h"
+#include "base/units.h"
 #include "graphic/align.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
-#include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
 class Surface;

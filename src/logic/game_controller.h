@@ -22,8 +22,8 @@
 
 #include <string>
 
+#include "base/units.h"
 #include "logic/player_end_result.h"
-#include "logic/widelands.h"
 
 namespace Widelands {
 class Game;

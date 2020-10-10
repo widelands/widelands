@@ -25,6 +25,9 @@
 #include "logic/widelands.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 
+class FileRead;
+class FileWrite;
+
 namespace Widelands {
 
 class Game;

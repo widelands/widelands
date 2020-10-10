@@ -22,6 +22,7 @@
 
 #include <cassert>
 
+#include "base/units.h"
 #include "graphic/playercolor.h"
 #include "logic/player_end_result.h"
 #include "logic/widelands.h"

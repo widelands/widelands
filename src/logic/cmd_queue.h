@@ -22,8 +22,8 @@
 
 #include <queue>
 
+#include "base/units.h"
 #include "logic/queue_cmd_ids.h"
-#include "logic/widelands.h"
 
 namespace Widelands {
 
