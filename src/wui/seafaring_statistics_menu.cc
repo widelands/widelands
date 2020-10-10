@@ -129,9 +129,6 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                        "g")),
      table_(&main_box_, 0, 0, get_inner_w() - 2 * kPadding, 100, UI::PanelStyle::kWui) {
 
-	const Widelands::TribeDescr& tribe = iplayer().player().tribe();
-	colony_icon_ = tribe.get_worker_descr(tribe.builder())->icon();
-
 	// Buttons for ship states
 	main_box_.add(&filter_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	filter_box_.add(&idle_btn_);
@@ -212,8 +209,6 @@ SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterSta
 		return pgettext("ship_state", "Scouting");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
 		return pgettext("ship_state", "Port Space Found");
-	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionColonizing:
-		return pgettext("ship_state", "Founding a Colony");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		return "All";  // The user shouldn't see this, so we don't localize
 	}
@@ -239,8 +234,6 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
 		filename = "images/wui/ship/ship_construct_port_space.png";
 		break;
-	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionColonizing:
-		return colony_icon_;
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		filename = "images/wui/ship/ship_scout_ne.png";
 		break;
@@ -267,10 +260,9 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 		status = ShipFilterStatus::kExpeditionScouting;
 		break;
 	case Widelands::Ship::ShipStates::kExpeditionPortspaceFound:
-		status = ShipFilterStatus::kExpeditionPortspaceFound;
-		break;
 	case Widelands::Ship::ShipStates::kExpeditionColonizing:
-		status = ShipFilterStatus::kExpeditionColonizing;
+		// We're grouping the "colonizing" status with the port space.
+		status = ShipFilterStatus::kExpeditionPortspaceFound;
 		break;
 	case Widelands::Ship::ShipStates::kSinkRequest:
 	case Widelands::Ship::ShipStates::kSinkAnimation:
@@ -487,8 +479,6 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 	case ShipFilterStatus::kExpeditionScouting:
 		toggle_filter_ships_button(scouting_btn_, status);
 		break;
-	// We're grouping the "colonizing" status with the port space.
-	case ShipFilterStatus::kExpeditionColonizing:
 	case ShipFilterStatus::kExpeditionPortspaceFound:
 		toggle_filter_ships_button(portspace_btn_, status);
 		break;
@@ -552,9 +542,8 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 	   pgettext("hotkey", "Alt+5")));
 }
 
-bool SeafaringStatisticsMenu::satisfies_filter(const ShipInfo& info, ShipFilterStatus filter) {
-	return filter == info.status || (filter == ShipFilterStatus::kExpeditionPortspaceFound &&
-	                                 info.status == ShipFilterStatus::kExpeditionColonizing);
+inline bool SeafaringStatisticsMenu::satisfies_filter(const ShipInfo& info, ShipFilterStatus filter) {
+	return filter == info.status;
 }
 
 void SeafaringStatisticsMenu::fill_table() {
