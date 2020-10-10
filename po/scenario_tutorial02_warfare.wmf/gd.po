@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-29 17:05+0000\n"
-"PO-Revision-Date: 2020-08-16 21:22+0000\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
+"PO-Revision-Date: 2020-10-02 08:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -277,12 +277,12 @@ msgstr "Nithear an uidheamachd seo ann an ceàrdaichean airm is armachd dhe ghua
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:125
 msgid ""
-"You should also keep in mind that each of the three tribes in Widelands has "
-"its own way of training, so the buildings and wares are different. Also, the"
-" ability levels cannot be compared: an Imperial soldier has a base attack of"
-" %1% at level 0, while a Barbarian soldier at the same level only has a base"
-" attack of %2%."
-msgstr "Thoir an aire cuideachd gu bheil dòighean oideachaidh fa leth aig gach treubh ann an Widelands, mar sin tha na togalaichean agus am bathar eadar-dhealaichte. Cuideachd, cha ghabh na leibheilean a choimeas: tha ionnsaigh bhunasach dhe %1% aig saighdear na h-Ìmpireachd air leibheil 0 fad ’s nach eil ach ionnsaigh bhunasach dhe %2% aig saighdear Tùsanach air an aon leibheil."
+"You should also keep in mind that each of the tribes in Widelands has its "
+"own way of training, so the buildings and wares are different. Also, the "
+"ability levels cannot be compared: an Imperial soldier has a base attack of "
+"%1% at level 0, while a Barbarian soldier at the same level only has a base "
+"attack of %2%."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143

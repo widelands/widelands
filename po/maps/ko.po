@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-29 17:05+0000\n"
-"PO-Revision-Date: 2020-08-29 17:32+0000\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
+"PO-Revision-Date: 2020-09-11 11:59+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -413,7 +413,7 @@ msgstr "지평선을 가로질러"
 
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
-msgstr ""
+msgstr "크리스틴 – 3plus4i 에의해 편집됨"
 
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
@@ -449,12 +449,12 @@ msgstr "알프스의 보석인 돌로미티 산맥은 그 원래의 아름다움
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
-"There is lot of flat ground on the mountains. Unfortunately, most of it is "
-"vertical – use the little building space you have wisely. A fortress at the "
-"mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"The mountains have an abundance of flat ground. Unfortunately, most of it is"
+" vertical – use the little building space you have wisely. A fortress at the"
+" mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it's the only way to find all the precious farm spaces."
-msgstr "산에는 평평한 땅이 많이 있습니다. 불행히도, 그것의 대부분은 수직입니다 – 당신이 가지고 있는 작은 건물 공간을 현명하게 사용하십시오. 좁은 산길 어귀에 있는 요새는 적군에게 만만치 않은 장애물이 될 수 있습니다 – 지형을 유리하게 활용하십시오. 모든 나무를 자르고 당신이 할 수 있는 모든 곳을 확장하십시오 – 그것이 모든 귀중한 농장 공간을 찾을 수 있는 유일한 방법입니다."
+msgstr ""
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -976,6 +976,12 @@ msgid ""
 "Many beautiful, green islands await the ones brave enough to pass the "
 "thousand waves, twinkling in the sun."
 msgstr "많은 아름답고 초록의 섬은 햇빛에 반짝이며 수천개의 파도를 넘어 갈 만큼 충분히 용감한 자들을 기다리고 있습니다."
+
+#: ../../data/maps/Twinkling_Waves.wmf/elemental:11
+msgid ""
+"Take care not to build your ships in the lagoons. They cannot pass through "
+"the reefs to the main ocean, where your ports are located."
+msgstr ""
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"

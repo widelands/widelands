@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-29 17:05+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
+"PO-Revision-Date: 2020-10-02 08:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -277,12 +277,12 @@ msgstr "Dette udstyr fremstilles i smedje fra kul, jern og undertiden guld. Du v
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:125
 msgid ""
-"You should also keep in mind that each of the three tribes in Widelands has "
-"its own way of training, so the buildings and wares are different. Also, the"
-" ability levels cannot be compared: an Imperial soldier has a base attack of"
-" %1% at level 0, while a Barbarian soldier at the same level only has a base"
-" attack of %2%."
-msgstr "Du skal også huske på, at hver af de tre stammer i Widelands har deres egne måder at træne på, så bygningerne og varerne er forskellige. Desuden kan niveauerne på evnerne ikke sammenlignes: en imperiesoldat har et grundangreb på %1% på niveau 0, mens en barbarsoldat på samme niveau kun har et grundangreb på %2%."
+"You should also keep in mind that each of the tribes in Widelands has its "
+"own way of training, so the buildings and wares are different. Also, the "
+"ability levels cannot be compared: an Imperial soldier has a base attack of "
+"%1% at level 0, while a Barbarian soldier at the same level only has a base "
+"attack of %2%."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143

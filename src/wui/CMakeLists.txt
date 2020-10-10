@@ -102,6 +102,7 @@ wl_library(wui_common_gamedetails
     graphic
     graphic_image_cache
     graphic_image_io
+    graphic_minimap_renderer
     graphic_surface
     graphic_text_layout
     io_filesystem
@@ -109,6 +110,7 @@ wl_library(wui_common_gamedetails
     logic_constants
     logic_filesystem_constants
     logic_game_controller
+    map_io_map_loader
     ui_basic
 )
 
@@ -127,10 +129,14 @@ wl_library(wui_common_mapdetails
     base_exceptions
     base_i18n
     graphic_image_cache
+    graphic_minimap_renderer
     graphic_text_layout
     io_filesystem
+    logic
+    logic_exceptions
     logic_game_settings
     logic_map
+    map_io_map_loader
     ui_basic
     wui_common_suggested_teams
 )
@@ -257,10 +263,6 @@ wl_library(wui
     militarysitewindow.h
     minimap.cc
     minimap.h
-    multiplayersetupgroup.cc
-    multiplayersetupgroup.h
-    playerdescrgroup.cc
-    playerdescrgroup.h
     plot_area.cc
     plot_area.h
     portdockwaresdisplay.cc
@@ -328,9 +330,7 @@ wl_library(wui
     logic_map
     logic_map_objects
     logic_objectives
-    logic_tribe_basic_info
     logic_widelands_geometry
-    map_io_map_loader
     network
     note_sound
     notifications

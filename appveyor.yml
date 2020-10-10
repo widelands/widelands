@@ -4,6 +4,8 @@
 #   Appveyor build configuration  #
 ###################################
 
+image: Visual Studio 2019
+
 init:
   - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686& set MINGWINCLUDE=C:\\msys64\\mingw32\\include) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64& set MINGWINCLUDE=C:\\msys64\\mingw64\\include)"
 
@@ -16,21 +18,16 @@ install:
   - cmd: "set PATH=%MINGWPATH%;C:\\msys64\\usr\\bin;C:\\Program Files (x86)\\Inno Setup 5;%PATH%"
   - cmd: "set CC=%MINGWPATH%\\gcc.exe"
   - cmd: "set CXX=%MINGWPATH%\\g++.exe"
-  # Update keyring
-  - cmd: "bash --login -c \"pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz\""
-  # Update mirrors
-  - cmd: "bash --login -c \"pacman --noconfirm -Sy pacman pacman-mirrors\""
   # deleting broken repo from mirrorlist
-  # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.msys\""
-  # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
-  # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.msys\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
   # Update msys2 system (twice, first run does system packages)
-  - cmd: "bash --login -c \"pacman --nodeps --noconfirm -Syy dash\""
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   # deleting broken repo from mirrorlist again
-  # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.msys\""
-  # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
-  # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.msys\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
@@ -40,7 +37,6 @@ shallow_clone: false
 branches:
   only:
     - master
-    - static_link
 
 build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%

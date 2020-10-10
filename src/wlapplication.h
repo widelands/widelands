@@ -38,6 +38,8 @@
 
 #include "base/vector.h"
 
+class FullscreenMenuMain;
+
 namespace Widelands {
 class Game;
 }
@@ -167,8 +169,9 @@ struct WLApplication {
 	void set_mouse_lock(bool locked);
 	// @}
 
-	// Refresh the graphics settings with the latest options.
-	void refresh_graphics();
+	// Handle the given pressed key. Returns true when key was
+	// handled.
+	bool handle_key(bool down, const SDL_Keycode& keycode, int modifiers);
 
 	// Pump SDL events and dispatch them.
 	void handle_input(InputCallback const*);
@@ -176,7 +179,7 @@ struct WLApplication {
 	void mainmenu();
 	void mainmenu_tutorial();
 	void mainmenu_singleplayer();
-	void mainmenu_multiplayer();
+	void mainmenu_multiplayer(const FullscreenMenuMain&, bool internet);
 	void mainmenu_editor();
 
 	bool new_game();
@@ -208,10 +211,6 @@ private:
 	void cleanup_temp_backups();
 
 	bool redirect_output(std::string path = "");
-
-	// Handle the given pressed key. Returns true when key was
-	// handled.
-	bool handle_key(bool down, const SDL_Keycode& keycode, int modifiers);
 
 	/**
 	 * The commandline, conveniently repackaged.

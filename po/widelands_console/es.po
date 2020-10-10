@@ -7,13 +7,14 @@
 # Thadah D. Denyse <juchuf@gmail.com>, 2018
 # Madkat Here, 2015
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
+# X Bello <xbello@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-29 17:05+0000\n"
-"PO-Revision-Date: 2020-08-16 16:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
+"PO-Revision-Date: 2020-09-20 11:10+0000\n"
+"Last-Translator: X Bello <xbello@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,13 +62,13 @@ msgstr "Por defecto es ~/.widelands"
 
 #: ../../src/wlapplication_messages.cc:56
 msgid "                      Default is %USERPROFILE%\\.widelands"
-msgstr ""
+msgstr "Por defecto es %USERPROFILE%/.widelands"
 
 #: ../../src/wlapplication_messages.cc:58
 msgid ""
 " --localedir=DIRNAME  Use specified directory for the widelands\n"
 "                      locale files"
-msgstr ""
+msgstr "--localedir=DIRNAME Utiliza el directorio especificado para los archivos de idioma"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the

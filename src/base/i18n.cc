@@ -23,6 +23,7 @@
 #include <clocale>
 #endif
 
+#include <cstdlib>
 #include <map>
 
 #include <boost/format.hpp>

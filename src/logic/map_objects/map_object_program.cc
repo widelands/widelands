@@ -19,6 +19,7 @@
 
 #include "logic/map_objects/map_object_program.h"
 
+#include <cstdlib>
 #include <regex>
 
 #include "base/log.h"

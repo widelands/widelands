@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-29 17:05+0000\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -1645,3 +1645,93 @@ msgstr ""
 "Verflucht seist du, Lutius, dass du friedliche Dienerinnen der Göttin Vesta "
 "ermordet hast! Möge dein Leben und dein Land verflucht sein und möge der "
 "Zorn der Göttin deine Familie vom Antlitz der Erde tilgen!"
+
+#. TRANSLATORS: Purpose helptext for an empire production site: Brewery
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
+msgctxt "empire_building"
+msgid "Produces beer to keep the miners strong and happy."
+msgstr "Stellt Bier her, um die Bergleute bei Laune zu halten."
+
+#. TRANSLATORS: Purpose helptext for an empire production site: Farm
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:105
+msgctxt "empire_building"
+msgid "Sows and harvests wheat."
+msgstr "Sät und erntet Weizen."
+
+#. TRANSLATORS: Purpose helptext for an empire production site: Forester's
+#. House
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:112
+msgctxt "empire_building"
+msgid "Plants trees in the surrounding area."
+msgstr "Pflanzt Bäume in der Umgebung."
+
+#. TRANSLATORS: Note helptext for an empire production site: Forester's House
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:114
+msgctxt "empire_building"
+msgid ""
+"The forester’s house needs free space within the work area to plant the "
+"trees."
+msgstr ""
+"Das Forsthaus braucht freien Raum innerhalb seines Arbeitsbereichs, um Bäume"
+" zu pflanzen."
+
+#. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
+#. House
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:121
+msgctxt "empire_building"
+msgid "Fells trees in the surrounding area and processes them into logs."
+msgstr "Fällt Bäume in der Umgebung und verarbeitet sie zu Stämmen."
+
+#. TRANSLATORS: Note helptext for an empire production site: Lumberjack's
+#. House
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:123
+msgctxt "empire_building"
+msgid "The lumberjack's house needs trees to fell within the work area."
+msgstr "Das Holzfällerhaus braucht Bäume innerhalb seines Arbeitsbereichs."
+
+#. TRANSLATORS: Purpose helptext for an empire production site: Mill
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130
+msgctxt "empire_building"
+msgid "Grinds wheat to produce flour."
+msgstr "Mahlt Weizen zu Mehl."
+
+#. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
+#. part 1
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:138
+msgctxt "empire_building"
+msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
+msgstr "Bildet Soldaten im „Angriff“ aus und verbessert die „Lebenspunkte“."
+
+#. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
+#. part 2
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:140
+msgctxt "empire_building"
+msgid "Equips the soldiers with all necessary weapons and armor parts."
+msgstr ""
+"Stattet die Soldaten mit allen nötigen Waffen und Rüstungsgegenständen aus."
+
+#. TRANSLATORS: Note helptext for an empire training site: Training Camp
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:143
+msgctxt "empire_building"
+msgid ""
+"Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
+"level with which they came."
+msgstr ""
+"Imperiale Soldaten können nicht in „Verteidigung“ ausgebildet werden und "
+"bleiben auf der niedrigsten Stufe."
+
+#. TRANSLATORS: Purpose helptext for an empire production site: Well
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:150
+msgctxt "empire_building"
+msgid "Draws water out of the deep."
+msgstr "Holt Wasser aus der Tiefe."
+
+#. TRANSLATORS: Purpose helptext for an empire warehouse: Temple of Vesta
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:157
+msgctxt "empire_building"
+msgid ""
+"In the temple of Vesta, the wares to worship are stored. It is the home of "
+"the priestesses and the guards of the goddess."
+msgstr ""
+"Im Tempel der Vesta werden die Waren für die Anbetungsopfer gelagert. Er ist"
+" das Heim der Priesterinnen und der Wächter der Gottheit."

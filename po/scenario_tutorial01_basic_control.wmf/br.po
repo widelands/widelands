@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# ThonyVezbe <a.guechoum@gmail.com>, 2020
 # Irriep Nala Novram <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-29 17:05+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
+"PO-Revision-Date: 2020-10-05 13:21+0000\n"
+"Last-Translator: ThonyVezbe <a.guechoum@gmail.com>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +47,7 @@ msgstr "Degemer mat e Tutorial Widelands!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:38
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "Donemat e Widelands!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
@@ -130,7 +131,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:75
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:90
 msgid "Let’s dive right in!"
-msgstr ""
+msgstr "Bec'h dezhi!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
@@ -834,7 +835,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Messages"
-msgstr ""
+msgstr "Kemennadennoù"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:541
 msgid "Introducing Messages"
@@ -884,7 +885,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:562
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:573
 msgid "Closing Windows"
-msgstr ""
+msgstr "Serriñ prenestroù"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:564
 msgid ""

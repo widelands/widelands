@@ -20,6 +20,7 @@
 #include "logic/player.h"
 
 #include <cassert>
+#include <cstdlib>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
@@ -1270,7 +1271,6 @@ void Player::enemyflagaction(Flag& flag,
 }
 
 void Player::rediscover_node(const Map& map, const FCoords& f) {
-
 	assert(0 <= f.x);
 	assert(f.x < map.get_width());
 	assert(0 <= f.y);
@@ -1385,6 +1385,11 @@ SeeUnseeNode Player::get_vision(MapIndex const i) const {
 
 void Player::add_seer(const MapObject& m, const Area<FCoords>& a) {
 	add_seer(m);
+	if (upcast(const Building, b, &m)) {
+		if (!b->is_seeing()) {
+			return;
+		}
+	}
 	for (const PlayerNumber& p : team_player_) {
 		egbase().get_player(p)->update_vision(a, true);
 	}
@@ -1417,27 +1422,31 @@ void Player::remove_seer(const MapObject& m, const Area<FCoords>& a) {
 }
 
 // Checks if any of our buildings or bobs, or one of one of our team mates, is seeing this node
-bool Player::should_see(const FCoords& f) const {
+bool Player::should_see(const FCoords& f, SeersList& nearby_objects) const {
+	const Map& map = egbase().map();
+	const MapIndex map_index = f.field - &map[0];
 	for (const PlayerNumber& p : team_player_) {
 		const Player& player = *egbase().get_player(p);
-		if (player.revealed_fields_.count(f)) {
+		if (player.revealed_fields_.count(map_index)) {
 			return true;
 		}
-		for (const MapObject* mo : player.seers_) {
-			if (mo->descr().type() >= MapObjectType::BUILDING) {
-				upcast(const Building, b, mo);
-				assert(b);
-				if (b->is_seeing() &&
-				    egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
-					return true;
-				}
-			} else {
-				// currently only buildings and bobs can see fields
-				upcast(const Bob, b, mo);
-				assert(b);
-				if (egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
-					return true;
-				}
+	}
+	for (const MapObject* mo : nearby_objects) {
+		if (mo->descr().type() >= MapObjectType::BUILDING) {
+			assert(is_a(Building, mo));
+			// TODO(Niektory): Using static cast for performance.
+			// It would be better to avoid the need to cast in the first place.
+			const Building* b = static_cast<const Building*>(mo);  // NOLINT
+			if (b->is_seeing() &&
+			    map.calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
+				return true;
+			}
+		} else {
+			// currently only buildings and bobs can see fields
+			assert(is_a(Bob, mo));
+			const Bob* b = static_cast<const Bob*>(mo);  // NOLINT
+			if (map.calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
+				return true;
 			}
 		}
 	}
@@ -1445,11 +1454,19 @@ bool Player::should_see(const FCoords& f) const {
 }
 
 void Player::update_vision(const FCoords& f, bool force_visible) {
+	SeersList team_seers_list;
+	if (!force_visible) {
+		team_seers_list = std::move(team_seers());
+	}
+	update_vision(f, force_visible, team_seers_list);
+}
+
+void Player::update_vision(const FCoords& f, bool force_visible, SeersList& nearby_objects) {
 	if (!fields_ || egbase().objects().is_cleaning_up()) {
 		return;
 	}
 	Player::Field& field = fields_[egbase().map().get_index(f)];
-	if (force_visible || should_see(f)) {
+	if (force_visible || should_see(f, nearby_objects)) {
 		if (field.seeing != SeeUnseeNode::kVisible) {
 			field.seeing = SeeUnseeNode::kVisible;
 			rediscover_node(egbase().map(), f);
@@ -1469,8 +1486,9 @@ void Player::update_vision_whole_map() {
 	}
 	const MapIndex max = egbase().map().max_index();
 	Widelands::Field* f = &egbase().map()[0];
+	SeersList team_seers_list = std::move(team_seers());
 	for (MapIndex i = 0; i < max; ++i, ++f) {
-		update_vision(egbase().map().get_fcoords(*f), false);
+		update_vision(egbase().map().get_fcoords(*f), false, team_seers_list);
 	}
 }
 
@@ -1478,6 +1496,15 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 	if (egbase().objects().is_cleaning_up()) {
 		return;
 	}
+
+	// Build a list of nearby objects.
+	// This way we only evaluate all objects (which is very expensive) once.
+	// When updating individual fields, only the objects from this list are evaluated.
+	SeersList nearby_objects;
+	if (!force_visible) {
+		nearby_objects = std::move(seers_for(area));
+	}
+
 	for (const PlayerNumber& p : team_player_) {
 		Player& player = *egbase().get_player(p);
 		if (!player.fields_) {
@@ -1485,9 +1512,65 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 		}
 		MapRegion<Area<FCoords>> mr(egbase().map(), area);
 		do {
-			player.update_vision(mr.location(), force_visible);
+			player.update_vision(mr.location(), force_visible, nearby_objects);
 		} while (mr.advance(egbase().map()));
 	}
+}
+
+Player::SeersList Player::team_seers() {
+	SeersList team_seers_list;
+	for (const PlayerNumber& p : team_player_) {
+		Player& player = *egbase().get_player(p);
+		std::copy(player.seers_.begin(), player.seers_.end(),
+		          std::back_insert_iterator<SeersList>(team_seers_list));
+	}
+	return team_seers_list;
+}
+
+/**
+ * Return a list of seers that can see at least one field from the given area.
+ * The list is approximately sorted by decreasing overlap of the given area and the seer's.
+ */
+Player::SeersList Player::seers_for(const Area<FCoords>& area) {
+	// Pick the seers and save them paired with the values for sorting.
+	std::list<std::pair<int, const MapObject*>> nearby_objects;
+	for (const PlayerNumber& p : team_player_) {
+		Player& player = *egbase().get_player(p);
+		for (const MapObject* seer : player.seers_) {
+			if (seer->descr().type() >= MapObjectType::BUILDING) {
+				assert(is_a(Building, seer));
+				// TODO(Niektory): Using static cast for performance.
+				// It would be better to avoid the need to cast in the first place.
+				const Building* b = static_cast<const Building*>(seer);  // NOLINT
+				if (b->is_seeing()) {
+					int dist =
+					   egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
+					if (dist <= area.radius) {
+						nearby_objects.push_back(std::make_pair(dist, b));
+					}
+				}
+			} else {
+				// currently only buildings and bobs can see fields
+				assert(is_a(Bob, seer));
+				const Bob* b = static_cast<const Bob*>(seer);  // NOLINT
+				int dist =
+				   egbase().map().calc_distance(area, b->get_position()) - b->descr().vision_range();
+				if (dist <= area.radius) {
+					nearby_objects.push_back(std::make_pair(dist, b));
+				}
+			}
+		}
+	}
+
+	// Sort the seers.
+	nearby_objects.sort([](std::pair<int, const MapObject*>& a,
+	                       std::pair<int, const MapObject*>& b) { return a.first < b.first; });
+	SeersList nearby_objects_2;
+	std::transform(nearby_objects.begin(), nearby_objects.end(),
+	               std::back_inserter(nearby_objects_2),
+	               [](std::pair<int, const MapObject*>& pair) { return pair.second; });
+
+	return nearby_objects_2;
 }
 
 void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {

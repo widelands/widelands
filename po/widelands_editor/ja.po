@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-29 17:05+0000\n"
-"PO-Revision-Date: 2019-10-09 08:04+0000\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
+"PO-Revision-Date: 2020-09-04 08:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -189,41 +189,50 @@ msgstr "見ての通り、エディタはどんどん改善されてはいるも
 msgid "The wiki also includes a short tutorial on how to build a map."
 msgstr "Wikiにはマップ作成に関する短いチュートリアルもあります。"
 
-#: ../../data/scripting/editor/terrain_help.lua:21
+#: ../../data/scripting/editor/terrain_help.lua:22
 msgid "Resources"
 msgstr "資源"
 
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
-#: ../../data/scripting/editor/terrain_help.lua:25
+#: ../../data/scripting/editor/terrain_help.lua:26
 msgid "Valid Resource:"
 msgstr ""
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
-#: ../../data/scripting/editor/terrain_help.lua:28
+#: ../../data/scripting/editor/terrain_help.lua:29
 msgid "Valid Resources:"
 msgstr ""
 
-#: ../../data/scripting/editor/terrain_help.lua:39
+#: ../../data/scripting/editor/terrain_help.lua:40
 msgid "Default:"
 msgstr "デフォルト"
 
 #. TRANSLATORS: e.g. "5x Water"
-#: ../../data/scripting/editor/terrain_help.lua:41
+#: ../../data/scripting/editor/terrain_help.lua:42
 msgid "%1%x %2%"
 msgstr "%2% x %1%"
 
 #. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:72
+#: ../../data/scripting/editor/terrain_help.lua:56
+#: ../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
 msgstr "樹木の成長確率"
 
-#: ../../data/scripting/editor/terrain_help.lua:77
+#: ../../data/scripting/editor/terrain_help.lua:61
+#: ../../data/scripting/editor/terrain_tooltip.lua:38
 msgid "No trees will grow here."
 msgstr "ここでは木々は育ちません。"
+
+#: ../../data/scripting/editor/terrain_tooltip.lua:26
+#: ../../data/scripting/editor/tree_tooltip.lua:23
+#, lua-format
+msgid "%2.1f%%"
+msgstr ""
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
 #: ../../data/scripting/editor/tree_help.lua:19
+#: ../../data/scripting/editor/tree_tooltip.lua:32
 msgid "Preferred terrains"
 msgstr "好む地形"

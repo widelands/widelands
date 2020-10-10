@@ -17,18 +17,20 @@
  *
  */
 
+#include <cstdlib>
+
 #include "ai/defaultai.h"
 #include "base/log.h"
 #include "economy/wares_queue.h"
 #include "logic/map_objects/tribes/militarysite.h"
 
-using namespace Widelands;
+namespace AI {
 
 bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
-	const Map& map = game().map();
+	const Widelands::Map& map = game().map();
 
-	PlayerNumber const nr_players = map.get_nrplayers();
+	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	uint32_t plr_in_game = 0;
 	Widelands::PlayerNumber const pn = player_number();
 
@@ -37,10 +39,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	update_player_stat(gametime);
 	// defining treshold ratio of own_strength/enemy's strength
 	uint32_t treshold_ratio = 90 + management_data.get_military_number_at(5) / 5;
-	if (type_ == Widelands::AiType::kNormal) {
+	if (type_ == AiType::kNormal) {
 		treshold_ratio -= 15;
 	}
-	if (type_ == Widelands::AiType::kVeryWeak) {
+	if (type_ == AiType::kVeryWeak) {
 		treshold_ratio += 20;
 	}
 
@@ -58,16 +60,17 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			continue;
 		}
 
-		MilitarySite* ms = mso.site;
+		Widelands::MilitarySite* ms = mso.site;
 		uint32_t const vision = ms->descr().vision_range();
-		FCoords f = map.get_fcoords(ms->get_position());
+		Widelands::FCoords f = map.get_fcoords(ms->get_position());
 
 		// get list of immovable around this our military site
-		static std::vector<ImmovableFound> immovables;
+		static std::vector<Widelands::ImmovableFound> immovables;
 		immovables.clear();
 		immovables.reserve(40);
-		map.find_immovables(game(), Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3),
-		                    &immovables, FindImmovableAttackTarget());
+		map.find_immovables(
+		   game(), Widelands::Area<Widelands::FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3),
+		   &immovables, Widelands::FindImmovableAttackTarget());
 
 		for (const auto& imm_found : immovables) {
 			if (upcast(Widelands::MilitarySite const, bld, imm_found.object)) {
@@ -115,13 +118,13 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	if (soldier_trained_log.count(gametime) == 0) {
 		// No soldier was trained lately ...
 		switch (type_) {
-		case Widelands::AiType::kNormal:
+		case AiType::kNormal:
 			general_score = 1;
 			break;
-		case Widelands::AiType::kWeak:
+		case AiType::kWeak:
 			general_score = 0;
 			break;
-		case Widelands::AiType::kVeryWeak:
+		case AiType::kVeryWeak:
 			general_score = -1;
 		}
 	}
@@ -171,11 +174,11 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		// if we dont get a flag, we remove the building from observers list
 		Widelands::FCoords f = map.get_fcoords(Widelands::Coords::unhash(observer.first));
 
-		Flag* flag = nullptr;
+		Widelands::Flag* flag = nullptr;
 
-		if (upcast(MilitarySite, bld, f.field->get_immovable())) {
+		if (upcast(Widelands::MilitarySite, bld, f.field->get_immovable())) {
 			if (player_->is_hostile(bld->owner())) {
-				std::vector<Soldier*> defenders;
+				std::vector<Widelands::Soldier*> defenders;
 				defenders = bld->soldier_control()->present_soldiers();
 				defenders_strength = calculate_strength(defenders);
 
@@ -186,10 +189,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				owner_number = bld->owner().player_number();
 			}
 		}
-		if (upcast(Warehouse, wh, f.field->get_immovable())) {
+		if (upcast(Widelands::Warehouse, wh, f.field->get_immovable())) {
 			if (player_->is_hostile(wh->owner())) {
 
-				std::vector<Soldier*> defenders;
+				std::vector<Widelands::Soldier*> defenders;
 				defenders = wh->soldier_control()->present_soldiers();
 				defenders_strength = calculate_strength(defenders);
 
@@ -219,8 +222,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			// updating info on mines nearby if needed
 			if (observer.second.mines_nearby == ExtendedBool::kUnset) {
 				FindNodeMineable find_mines_spots_nearby(game(), f.field->get_resources());
-				const int32_t minescount =
-				   map.find_fields(game(), Area<FCoords>(f, 6), nullptr, find_mines_spots_nearby);
+				const int32_t minescount = map.find_fields(
+				   game(), Widelands::Area<Widelands::FCoords>(f, 6), nullptr, find_mines_spots_nearby);
 				if (minescount > 0) {
 					observer.second.mines_nearby = ExtendedBool::kTrue;
 				} else {
@@ -232,7 +235,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 			// can we attack (only sites that conquer are attackable):
 			if (is_attackable) {
-				std::vector<Soldier*> attackers;
+				std::vector<Widelands::Soldier*> attackers;
 				player_->find_attack_soldiers(*flag, &attackers);
 				if (attackers.empty()) {
 					observer.second.attack_soldiers_strength = 0;
@@ -268,7 +271,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					                   player_statistics.get_old60_player_land(pn);
 				}
 
-				static std::vector<ImmovableFound> immovables;
+				static std::vector<Widelands::ImmovableFound> immovables;
 				immovables.reserve(50);
 				immovables.clear();
 				static std::set<uint32_t> unique_serials;
@@ -286,12 +289,12 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					}
 
 					// testing vicinity of the enemy building
-					if (upcast(Building const, building, &base_immovable)) {
+					if (upcast(Widelands::Building const, building, &base_immovable)) {
 
-						const PlayerNumber bpn = building->owner().player_number();
+						const Widelands::PlayerNumber bpn = building->owner().player_number();
 						if (player_statistics.get_is_enemy(bpn)) {  // owned by enemy
 							assert(!player_statistics.players_in_same_team(bpn, pn));
-							if (upcast(MilitarySite const, militarysite, building)) {
+							if (upcast(Widelands::MilitarySite const, militarysite, building)) {
 								// adding up enemies soldiers in region but not the one that can't move
 								// out to intercept our attackers
 								enemy_military_presence_in_region_ +=
@@ -300,7 +303,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 								++enemy_military_sites_in_region_;
 							}
 							// Warehouses are counted here too as they can host soldiers as well
-							if (upcast(Warehouse const, warehouse, building)) {
+							if (upcast(Widelands::Warehouse const, warehouse, building)) {
 								enemy_military_presence_in_region_ +=
 								   warehouse->soldier_control()->stationed_soldiers().size();
 								++enemy_military_sites_in_region_;
@@ -503,7 +506,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 						observer.second.score += inputs[j + kFNeuronBitSize];
 						if (inputs[j + kFNeuronBitSize] < -10 || inputs[j + kFNeuronBitSize] > 10) {
 							log_dbg_time(gametime, " pos: %d - value %d\n", j + kFNeuronBitSize,
-							             inputs[j + Widelands::kFNeuronBitSize]);
+							             inputs[j + kFNeuronBitSize]);
 						}
 					}
 					if (management_data.f_neuron_pool[16].get_position(j)) {
@@ -564,19 +567,19 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	assert(enemy_sites.count(best_target) > 0);
 
 	// attacking
-	FCoords f = map.get_fcoords(Coords::unhash(best_target));
+	Widelands::FCoords f = map.get_fcoords(Widelands::Coords::unhash(best_target));
 
-	Flag* flag = nullptr;  // flag of a building to be attacked
-	if (upcast(MilitarySite, bld, f.field->get_immovable())) {
+	Widelands::Flag* flag = nullptr;  // flag of a building to be attacked
+	if (upcast(Widelands::MilitarySite, bld, f.field->get_immovable())) {
 		flag = &bld->base_flag();
-	} else if (upcast(Warehouse, Wh, f.field->get_immovable())) {
+	} else if (upcast(Widelands::Warehouse, Wh, f.field->get_immovable())) {
 		flag = &Wh->base_flag();
 	} else {
 		return false;  // this should not happen
 	}
 
 	// how many attack soldiers we can send?
-	std::vector<Soldier*> soldiers;
+	std::vector<Widelands::Soldier*> soldiers;
 	int32_t attackers = player_->find_attack_soldiers(*flag, &soldiers);
 	assert(attackers < 500);
 
@@ -592,8 +595,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		return false;
 	}
 
-	std::vector<Serial> attacking_soldiers;
-	const SoldierDescr& descr = soldiers.front()->descr();
+	std::vector<Widelands::Serial> attacking_soldiers;
+	const Widelands::SoldierDescr& descr = soldiers.front()->descr();
 	int a = 0;  // counter of chosen soldiers
 	int b = 0;  // counter of attempts to choose
 	while (
@@ -618,8 +621,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	   (gametime - enemy_sites[best_target].last_time_attacked) / 1000);
 
 	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers);
-	assert(
-	   player_->is_seeing(Map::get_index(flag->get_building()->get_position(), map.get_width())));
+	assert(player_->is_seeing(
+	   Widelands::Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
 	enemy_sites[best_target].last_time_attacked = gametime;
 	++enemy_sites[best_target].attack_counter;
@@ -691,7 +694,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	trainingsites.push_back(trainingsites.front());
 	trainingsites.pop_front();
 
-	TrainingSite* ts = trainingsites.front().site;
+	Widelands::TrainingSite* ts = trainingsites.front().site;
 	TrainingSiteObserver& tso = trainingsites.front();
 
 	// Inform if we are above ai type limit.
@@ -703,9 +706,9 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		   player_number(), tso.bo->name, tso.bo->cnt_limit_by_aimode, tso.bo->total_count());
 	}
 
-	const DescriptionIndex enhancement = ts->descr().enhancement();
+	const Widelands::DescriptionIndex enhancement = ts->descr().enhancement();
 
-	if (enhancement != INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
+	if (enhancement != Widelands::INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
 	    ts_finished_count_ > 1 && ts_in_const_count_ == 0) {
 
 		// Make sure that:
@@ -732,9 +735,9 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	// reducing ware queues
 	// - for armours and weapons to 1
 	// - for others to 6
-	for (InputQueue* queue : tso.site->inputqueues()) {
+	for (Widelands::InputQueue* queue : tso.site->inputqueues()) {
 
-		if (queue->get_type() != wwWARE) {
+		if (queue->get_type() != Widelands::wwWARE) {
 			continue;
 		}
 
@@ -749,7 +752,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 			if (tribe_->get_ware_descr(queue->get_index())->name().find(pattern) !=
 			    std::string::npos) {
 				if (queue->get_max_fill() > 1) {
-					game().send_player_set_input_max_fill(*ts, queue->get_index(), wwWARE, 1);
+					game().send_player_set_input_max_fill(*ts, queue->get_index(), Widelands::wwWARE, 1);
 					continue;
 				}
 			}
@@ -758,7 +761,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 	// are we willing to train another soldier?
 	// bool want_train = true;
-	const PlayerNumber pn = player_number();
+	const Widelands::PlayerNumber pn = player_number();
 
 	// if soldier capacity is set to 0, we need to find out if the site is
 	// supplied enough to incrase the capacity to 1
@@ -771,8 +774,8 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		// minutes)
 		// we can accept also shortage up to 3
 		int32_t shortage = 0;
-		for (InputQueue* queue : tso.site->inputqueues()) {
-			if (queue->get_type() != wwWARE) {
+		for (Widelands::InputQueue* queue : tso.site->inputqueues()) {
+			if (queue->get_type() != Widelands::wwWARE) {
 				continue;
 			}
 			if (tso.bo->substitute_inputs.count(queue->get_index()) > 0) {
@@ -784,8 +787,8 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 
 		// checking non subsitutes
-		for (InputQueue* queue : tso.site->inputqueues()) {
-			if (queue->get_type() != wwWARE) {
+		for (Widelands::InputQueue* queue : tso.site->inputqueues()) {
+			if (queue->get_type() != Widelands::wwWARE) {
 				continue;
 			}
 			if (tso.bo->substitute_inputs.count(queue->get_index()) == 0) {
@@ -920,7 +923,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 
 	// Check next militarysite
 	bool changed = false;
-	MilitarySite* ms = militarysites.front().site;
+	Widelands::MilitarySite* ms = militarysites.front().site;
 
 	// Don't do anything if last change took place lately
 	if (militarysites.front().last_change + 2 * 60 * 1000 > gametime) {
@@ -939,15 +942,15 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		              militarysites.front().bo->cnt_limit_by_aimode);
 	}
 
-	FCoords f = game().map().get_fcoords(ms->get_position());
+	Widelands::FCoords f = game().map().get_fcoords(ms->get_position());
 
 	BuildableField bf(f);
 	update_buildable_field(bf);
 
-	Quantity const total_capacity = ms->soldier_control()->max_soldier_capacity();
-	Quantity const current_target = ms->soldier_control()->soldier_capacity();
-	Quantity const current_soldiers = ms->soldier_control()->present_soldiers().size();
-	Quantity target_occupancy = total_capacity;
+	Widelands::Quantity const total_capacity = ms->soldier_control()->max_soldier_capacity();
+	Widelands::Quantity const current_target = ms->soldier_control()->soldier_capacity();
+	Widelands::Quantity const current_soldiers = ms->soldier_control()->present_soldiers().size();
+	Widelands::Quantity target_occupancy = total_capacity;
 	if (soldier_status_ == SoldiersStatus::kBadShortage) {
 		target_occupancy = total_capacity / 3 + 1;
 	} else if (soldier_status_ == SoldiersStatus::kShortage) {
@@ -998,8 +1001,9 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			game().send_player_change_soldier_capacity(*ms, -1);
 			changed = true;
 		}
-		if (ms->get_soldier_preference() == SoldierPreference::kRookies) {
-			game().send_player_militarysite_set_soldier_preference(*ms, SoldierPreference::kHeroes);
+		if (ms->get_soldier_preference() == Widelands::SoldierPreference::kRookies) {
+			game().send_player_militarysite_set_soldier_preference(
+			   *ms, Widelands::SoldierPreference::kHeroes);
 			changed = true;
 		}
 	} else if (should_be_dismantled && can_be_dismantled) {
@@ -1016,8 +1020,9 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 			game().send_player_change_soldier_capacity(*ms, -1);
 			changed = true;
 		}
-		if (ms->get_soldier_preference() == SoldierPreference::kHeroes) {
-			game().send_player_militarysite_set_soldier_preference(*ms, SoldierPreference::kRookies);
+		if (ms->get_soldier_preference() == Widelands::SoldierPreference::kHeroes) {
+			game().send_player_militarysite_set_soldier_preference(
+			   *ms, Widelands::SoldierPreference::kRookies);
 			changed = true;
 		}
 	}
@@ -1044,9 +1049,9 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 	float evade = 0;
 	float final = 0;
 
-	const SoldierDescr& descr = soldiers.front()->descr();
+	const Widelands::SoldierDescr& descr = soldiers.front()->descr();
 
-	for (Soldier* soldier : soldiers) {
+	for (Widelands::Soldier* soldier : soldiers) {
 		health = soldier->get_current_health();
 		attack = (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2.f +
 		         descr.get_base_min_attack() +
@@ -1082,11 +1087,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 	assert(militarysites.size() == msites_built());
 
-	const PlayerNumber pn = player_number();
+	const Widelands::PlayerNumber pn = player_number();
 
 	// logically size of militarysite must in between 1 and 3 (including)
 	const uint8_t size = bo.desc->get_size();
-	assert(size >= BaseImmovable::SMALL && size <= BaseImmovable::BIG);
+	assert(size >= Widelands::BaseImmovable::SMALL && size <= Widelands::BaseImmovable::BIG);
 
 	if (military_last_build_ >
 	    gametime - (10 + std::abs(management_data.get_military_number_at(43)) * 1000 / 2)) {
@@ -1407,7 +1412,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 // This is called when soldier left the trainingsite
 // the purpose is to set soldier capacity to 0
 // (AI will then wait till training site is stocked)
-void DefaultAI::soldier_trained(const TrainingSite& site) {
+void DefaultAI::soldier_trained(const Widelands::TrainingSite& site) {
 
 	const uint32_t gametime = game().get_gametime();
 
@@ -1425,3 +1430,4 @@ void DefaultAI::soldier_trained(const TrainingSite& site) {
 
 	log_err_time(gametime, " %d: Computer player error - trainingsite not found\n", player_number());
 }
+}  // namespace AI

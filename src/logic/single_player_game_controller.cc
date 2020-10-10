@@ -42,7 +42,7 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
 }
 
 SinglePlayerGameController::~SinglePlayerGameController() {
-	for (ComputerPlayer* ai : computerplayers_) {
+	for (AI::ComputerPlayer* ai : computerplayers_) {
 		delete ai;
 	}
 	computerplayers_.clear();
@@ -73,7 +73,7 @@ void SinglePlayerGameController::think() {
 			}
 			if (!computerplayers_[p - 1]) {
 				computerplayers_[p - 1] =
-				   ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p);
+				   AI::ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p);
 			}
 			computerplayers_[p - 1]->think();
 		}

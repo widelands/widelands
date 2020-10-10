@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-29 17:05+0000\n"
-"PO-Revision-Date: 2020-08-25 12:24+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
+"PO-Revision-Date: 2020-10-02 08:02+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -280,12 +280,12 @@ msgstr "이런 장비들은 제작소들에서 석탄과 철, 그리고 때때�
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:125
 msgid ""
-"You should also keep in mind that each of the three tribes in Widelands has "
-"its own way of training, so the buildings and wares are different. Also, the"
-" ability levels cannot be compared: an Imperial soldier has a base attack of"
-" %1% at level 0, while a Barbarian soldier at the same level only has a base"
-" attack of %2%."
-msgstr "당신은 또한 와이드랜드의 3 부족들이 각자만의 훈련 방식이 있고, 그래서 건물과 물품이 다르다는 것을 명심해야 합니다. 또한 능력 수준도 비교할 수 없습니다: 야만인 군인들이 0 수준에서 %2%의 기초 공격을 가하는 동안, 제국 군인은 같은 수준에서 %1% 의 기초 공격을 가합니다."
+"You should also keep in mind that each of the tribes in Widelands has its "
+"own way of training, so the buildings and wares are different. Also, the "
+"ability levels cannot be compared: an Imperial soldier has a base attack of "
+"%1% at level 0, while a Barbarian soldier at the same level only has a base "
+"attack of %2%."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
