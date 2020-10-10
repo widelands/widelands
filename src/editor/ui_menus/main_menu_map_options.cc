@@ -336,12 +336,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	for (const std::string& theme :
 	     g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/gameloading/")) {
 		const std::string name(g_fs->fs_filename(theme.c_str()));
-		// TODO(Nordfriese): There must be a better way to localize the theme names
-		std::string localized_name =
-		   name == "summer" ?
-		      _("Summer") :
-		      name == "winter" ? _("Winter") : name == "blackland" ? _("Blackland") : name;
-		theme_dropdown_.add(localized_name, name);
+		theme_dropdown_.add(EditorInteractive::translate_old_world_name(name), name);
 	}
 	tags_box_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
 

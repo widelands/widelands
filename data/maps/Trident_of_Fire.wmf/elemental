@@ -10,7 +10,7 @@ author="Robnick"
 descr=_"In the vicinity of three major volcanoes, six lovely islands are inviting settlers to start a new life. Deserts and a quickly growing forest wait to be discovered. But only by becoming a naval power will your tribe be able to explore enough resources to compete with its opponents."
 hint=
 tags="1v1,2teams,3teams,balanced,official,seafaring"
-theme="summer"
+theme="desert"
 
 [teams00]
 team1="1"

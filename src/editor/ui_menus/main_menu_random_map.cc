@@ -68,16 +68,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
               UI::SpinBox::Units::kNone,
               UI::SpinBox::Type::kSmall),
      // World + Resources
-     world_descriptions_({
-        /** TRANSLATORS: A world name for the random map generator in the editor */
-        {"greenland", _("Summer")},
-        /** TRANSLATORS: A world name for the random map generator in the editor */
-        {"winterland", _("Winter")},
-        /** TRANSLATORS: A world name for the random map generator in the editor */
-        {"desert", _("Desert")},
-        /** TRANSLATORS: A world name for the random map generator in the editor */
-        {"blackland", _("Wasteland")},
-     }),
      current_world_(0),
      resource_amounts_({
         /** TRANSLATORS: Amount of resources in the random map generator in the editor */
@@ -99,7 +89,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
             box_width_ - 2 * margin_ - std::max(world_label_.get_w(), resources_label_.get_w()),
             label_height_,
             UI::ButtonStyle::kWuiSecondary,
-            world_descriptions_[current_world_].descname),
+            EditorInteractive::kOldWorldNames[current_world_].second()),
      resources_(&resources_box_,
                 "resources",
                 0,
@@ -373,8 +363,8 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 		break;
 	case ButtonId::kWorld:
 		++current_world_;
-		current_world_ %= world_descriptions_.size();
-		world_.set_title(world_descriptions_[current_world_].descname);
+		current_world_ %= EditorInteractive::kOldWorldNames.size();
+		world_.set_title(EditorInteractive::kOldWorldNames[current_world_].second());
 		break;
 	case ButtonId::kIslandMode:
 		break;
@@ -532,9 +522,9 @@ void MainMenuNewRandomMap::id_edit_box_changed() {
 	std::string str = map_id_edit_.text();
 
 	std::vector<std::string> world_names;
-	world_names.reserve(world_descriptions_.size());
-	for (const auto& descr : world_descriptions_) {
-		world_names.push_back(descr.name);
+	world_names.reserve(EditorInteractive::kOldWorldNames.size());
+	for (const auto& descr : EditorInteractive::kOldWorldNames) {
+		world_names.push_back(descr.first);
 	}
 
 	if (!Widelands::UniqueRandomMapInfo::set_from_id_string(map_info, str, world_names)) {
@@ -559,7 +549,7 @@ void MainMenuNewRandomMap::id_edit_box_changed() {
 
 		current_world_ = std::find(world_names.cbegin(), world_names.cend(), map_info.world_name) -
 		                 world_names.cbegin();
-		world_.set_title(world_descriptions_[current_world_].descname);
+		world_.set_title(EditorInteractive::kOldWorldNames[current_world_].second());
 
 		island_mode_.set_state(map_info.islandMode);
 
@@ -609,5 +599,5 @@ void MainMenuNewRandomMap::set_map_info(Widelands::UniqueRandomMapInfo& map_info
 	map_info.numPlayers = players_.get_value();
 	map_info.resource_amount =
 	   static_cast<Widelands::UniqueRandomMapInfo::ResourceAmount>(resource_amount_);
-	map_info.world_name = world_descriptions_[current_world_].name;
+	map_info.world_name = EditorInteractive::kOldWorldNames[current_world_].first;
 }

@@ -11,7 +11,7 @@ descr=_"The river has always provided food and communication. This time, eight e
 hint=_"Use the river wisely. Your opponents will do the same. You will find the main ore resources deep in the desert."
 hint=
 tags="1v1,2teams,3teams,4teams,balanced,ferries,seafaring,official"
-theme="summer"
+theme="desert"
 
 [teams00]
 team1="0"
