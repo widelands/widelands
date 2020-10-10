@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-18 13:37+0000\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
 "PO-Revision-Date: 2020-08-24 02:44+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -4019,17 +4019,17 @@ msgid ""
 "an economy. Warning: the AI can't successfully start from this"
 msgstr "Commencez le jeu avec juste un dépôt et le strict minimum pour démarrer une économie. Avertissement: L'IA n'arrive pas à démarrer depuis ceci"
 
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:43
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:44
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
 msgid "Be careful"
 msgstr "Soyez prudent"
 
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:43
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:44
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
