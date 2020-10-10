@@ -356,8 +356,9 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			for (const auto& observer : productionsites) {
 				if (observer.bo->is(BuildingAttribute::kShipyard)) {
 					for (uint32_t k = 0; k < observer.bo->inputs.size(); ++k) {
-						game().send_player_set_ware_priority(
-						   *observer.site, Widelands::wwWARE, observer.bo->inputs.at(k), Widelands::kPriorityHigh);
+						game().send_player_set_ware_priority(*observer.site, Widelands::wwWARE,
+						                                     observer.bo->inputs.at(k),
+						                                     Widelands::kPriorityHigh);
 					}
 				}
 			}
