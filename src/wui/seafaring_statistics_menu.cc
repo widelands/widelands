@@ -542,7 +542,8 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 	   pgettext("hotkey", "Alt+5")));
 }
 
-inline bool SeafaringStatisticsMenu::satisfies_filter(const ShipInfo& info, ShipFilterStatus filter) {
+inline bool SeafaringStatisticsMenu::satisfies_filter(const ShipInfo& info,
+                                                      ShipFilterStatus filter) {
 	return filter == info.status;
 }
 
