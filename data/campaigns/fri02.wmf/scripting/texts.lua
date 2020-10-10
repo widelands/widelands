@@ -132,17 +132,10 @@ local intro_1_iron = _([[The storms have maintained a firm grip on the ship thro
 local intro_1_picks = _([[The few tools we managed to salvage from Langeness did not cope well. The miners’ picks proved especially vulnerable, and we had to throw them in the ocean when it became evident that they had been corroded by the sea salt so much that we could never again mine anything with them.]])
 -- TRANSLATORS: Reebaud – Introduction 1
 local intro_1_end = _([[But we survived. Finally, we reached the mouth of a calmer fjord. We sailed upriver, and arrived here.]])
-local intro_1_body
-if lost_miners and lost_metals then
-   intro_1_body = intro_1_iron .. paragraphdivider() .. intro_1_picks .. paragraphdivider()
-elseif lost_miners then
-   intro_1_body = intro_1_picks .. paragraphdivider()
-elseif lost_metals then
-   intro_1_body = intro_1_iron .. paragraphdivider()
-else
-   intro_1_body = ""
-end
 
+local intro_1_body = ""
+if lost_metals then intro_1_body = intro_1_iron .. paragraphdivider() end
+if lost_miners then intro_1_body = intro_1_body .. intro_1_picks .. paragraphdivider() end
 intro_1 = {
    title =_ "Welcome Back!",
    body=reebaud(_"A new home", intro_1_start .. paragraphdivider() .. intro_1_body .. intro_1_end),
