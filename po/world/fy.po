@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-18 13:37+0000\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
 "PO-Revision-Date: 2020-09-04 08:26+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Western Frisian (http://www.transifex.com/widelands/widelands/language/fy/)\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Language: fy\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/world/critters/badger/init.lua:122
+#: ../../data/world/critters/badger/init.lua:124
 msgid "Badger"
 msgstr "Das"
 
-#: ../../data/world/critters/brownbear/init.lua:5
+#: ../../data/world/critters/brownbear/init.lua:7
 msgid "Brown bear"
 msgstr "Brune bear"
 
-#: ../../data/world/critters/bunny/init.lua:5
+#: ../../data/world/critters/bunny/init.lua:7
 msgid "Bunny"
 msgstr "Knyn"
 
-#: ../../data/world/critters/chamois/init.lua:5
+#: ../../data/world/critters/chamois/init.lua:7
 msgid "Chamois"
 msgstr ""
 
-#: ../../data/world/critters/deer/init.lua:5
+#: ../../data/world/critters/deer/init.lua:7
 msgid "Deer"
 msgstr "Hart"
 
@@ -41,43 +41,43 @@ msgstr "Hart"
 msgid "Duck"
 msgstr "Ein"
 
-#: ../../data/world/critters/fox/init.lua:5
+#: ../../data/world/critters/fox/init.lua:7
 msgid "Fox"
 msgstr "Foks"
 
-#: ../../data/world/critters/lynx/init.lua:5
+#: ../../data/world/critters/lynx/init.lua:7
 msgid "Lynx"
 msgstr "Lynks"
 
-#: ../../data/world/critters/marten/init.lua:5
+#: ../../data/world/critters/marten/init.lua:7
 msgid "Marten"
 msgstr "Marter"
 
-#: ../../data/world/critters/moose/init.lua:5
+#: ../../data/world/critters/moose/init.lua:7
 msgid "Moose"
 msgstr ""
 
-#: ../../data/world/critters/reindeer/init.lua:5
+#: ../../data/world/critters/reindeer/init.lua:7
 msgid "Reindeer"
 msgstr "Rendier"
 
-#: ../../data/world/critters/sheep/init.lua:5
+#: ../../data/world/critters/sheep/init.lua:7
 msgid "Sheep"
 msgstr "Skiep"
 
-#: ../../data/world/critters/stag/init.lua:5
+#: ../../data/world/critters/stag/init.lua:7
 msgid "Stag"
 msgstr "Mantjeshart"
 
-#: ../../data/world/critters/wildboar/init.lua:5
+#: ../../data/world/critters/wildboar/init.lua:7
 msgid "Wild boar"
 msgstr "Everswyn"
 
-#: ../../data/world/critters/wisent/init.lua:5
+#: ../../data/world/critters/wisent/init.lua:7
 msgid "Wisent"
 msgstr "Jeropeeske bizon"
 
-#: ../../data/world/critters/wolf/init.lua:5
+#: ../../data/world/critters/wolf/init.lua:7
 msgid "Wolf"
 msgstr "Wolf"
 

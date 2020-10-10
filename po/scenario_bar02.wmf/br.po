@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# ThonyVezbe <a.guechoum@gmail.com>, 2020
 # Irriep Nala Novram <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-18 13:37+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
+"PO-Revision-Date: 2020-10-05 13:11+0000\n"
+"Last-Translator: ThonyVezbe <a.guechoum@gmail.com>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,15 +62,15 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "Sevel ul lochenn pesketa"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:37
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Sevel ul lochenn chaseal"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
 msgid "Build a well"
-msgstr ""
+msgstr "Sevel ur puñs"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build a farm"
@@ -131,7 +132,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:79
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:81
 msgid "Build a fortress"
-msgstr ""
+msgstr "Sevel ur c'hreñvlec'h"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:82
 msgid "Build a fortress to the east of the mountains."
@@ -246,7 +247,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:155
 msgid "Close to Home"
-msgstr ""
+msgstr "Nepell deus ar gêr"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
@@ -273,7 +274,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Un devezh yen ouzhpenn"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:170
@@ -593,7 +594,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid "Victory"
-msgstr ""
+msgstr "Trec'h"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid ""
