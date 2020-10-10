@@ -114,6 +114,11 @@ public:
 	bool handle_tooltip() override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 
+	enum class WindowLayoutID { kNone, kFsMenuDefault, kFsMenuOptions, kFsMenuAbout };
+	virtual WindowLayoutID window_layout_id() const {
+		return WindowLayoutID::kNone;
+	}
+
 protected:
 	void die() override;
 	void layout() override;

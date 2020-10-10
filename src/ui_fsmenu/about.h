@@ -35,6 +35,10 @@ public:
 	~FullscreenMenuAbout() override {
 	}
 
+	WindowLayoutID window_layout_id() const override {
+		return UI::Window::WindowLayoutID::kFsMenuAbout;
+	}
+
 	bool handle_key(bool, SDL_Keysym) override;
 
 protected:

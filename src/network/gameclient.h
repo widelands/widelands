@@ -112,7 +112,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 		return true;
 	}
 
-	FullscreenMenuMain& fsmm() const {
+	FullscreenMenuMain& fullscreen_menu_main() const {
 		return fsmm_;
 	}
 

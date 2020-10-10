@@ -127,7 +127,7 @@ void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) {
  *  @return true to indicate that run is done.
  */
 bool GameClientImpl::run_map_menu(GameClient* parent) {
-	FullscreenMenuLaunchMPG lgm(parent->fsmm(), parent, parent, *parent);
+	FullscreenMenuLaunchMPG lgm(parent->fullscreen_menu_main(), parent, parent, *parent);
 	modal = &lgm;
 	MenuTarget code = lgm.run<MenuTarget>();
 	modal = nullptr;

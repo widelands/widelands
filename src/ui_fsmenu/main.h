@@ -25,6 +25,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/window.h"
 #include "ui_fsmenu/menu_target.h"
 
 /**
@@ -60,8 +61,8 @@ public:
 	// Set the labels for all buttons etc. This needs to be called after language switching.
 	void set_labels();
 
-	int16_t calc_desired_window_width(const std::string& window_name);
-	int16_t calc_desired_window_height(const std::string& window_name);
+	int16_t calc_desired_window_width(UI::Window::WindowLayoutID);
+	int16_t calc_desired_window_height(UI::Window::WindowLayoutID);
 
 private:
 	void layout() override;

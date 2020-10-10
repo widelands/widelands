@@ -44,14 +44,28 @@ constexpr uint32_t kImageExchangeDuration = 2500;
 
 constexpr uint32_t kNoSplash = std::numeric_limits<uint32_t>::max();
 
-int16_t FullscreenMenuMain::calc_desired_window_width(const std::string& window_name) {
-	return (window_name == "options" || window_name == "about") ? std::max(600, get_w() / 2) :
-	                                                              std::max(700, get_w() * 7 / 8);
+int16_t FullscreenMenuMain::calc_desired_window_width(const UI::Window::WindowLayoutID id) {
+	switch (id) {
+	case UI::Window::WindowLayoutID::kFsMenuDefault:
+		return std::max(700, get_w() * 7 / 8);
+	case UI::Window::WindowLayoutID::kFsMenuOptions:
+	case UI::Window::WindowLayoutID::kFsMenuAbout:
+		return std::max(600, get_w() / 2);
+	default:
+		NEVER_HERE();
+	}
 }
 
-int16_t FullscreenMenuMain::calc_desired_window_height(const std::string& window_name) {
-	return (window_name == "options" || window_name == "about") ? std::max(400, get_h() / 2) :
-	                                                              std::max(500, get_h() * 4 / 5);
+int16_t FullscreenMenuMain::calc_desired_window_height(const UI::Window::WindowLayoutID id) {
+	switch (id) {
+	case UI::Window::WindowLayoutID::kFsMenuDefault:
+	case UI::Window::WindowLayoutID::kFsMenuAbout:
+		return std::max(500, get_h() * 4 / 5);
+	case UI::Window::WindowLayoutID::kFsMenuOptions:
+		return std::max(400, get_h() / 2);
+	default:
+		NEVER_HERE();
+	}
 }
 
 FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
@@ -515,8 +529,8 @@ void FullscreenMenuMain::layout() {
 				w->restore();
 			}
 
-			const int16_t desired_w = calc_desired_window_width(w->get_name());
-			const int16_t desired_h = calc_desired_window_height(w->get_name());
+			const int16_t desired_w = calc_desired_window_width(w->window_layout_id());
+			const int16_t desired_h = calc_desired_window_height(w->window_layout_id());
 			w->set_size(desired_w, desired_h);
 			w->set_pos(Vector2i(std::min(get_inner_w() - desired_w, w->get_x()),
 			                    std::min(get_inner_h() - desired_h, w->get_y())));
