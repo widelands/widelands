@@ -423,6 +423,7 @@ private:
 
 /**
  * Provides a safe pointer to a MapObject
+ * Make sure the MapObject is initialized (has a serial) before using it in ObjectPointer!
  */
 struct ObjectPointer {
 	// Provide default constructor to shut up cppcheck.

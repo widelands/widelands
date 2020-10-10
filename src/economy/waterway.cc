@@ -94,8 +94,7 @@ void Waterway::remove_worker(Worker& w) {
 
 void Waterway::request_ferry(EditorGameBase& egbase) {
 	FerryFleet* fleet = new FerryFleet(get_owner());
-	fleet->request_ferry(egbase, this);
-	fleet->init(egbase);
+	fleet->init(egbase, this);
 }
 
 void Waterway::assign_carrier(Carrier& c, uint8_t) {
@@ -109,10 +108,10 @@ void Waterway::set_fleet(FerryFleet* fleet) {
 	if (fleet_ == fleet) {
 		return;
 	}
-	if (fleet_ && fleet) {
+	if (fleet_.get(get_owner()->egbase()) && fleet) {
 		// Only if the new fleet is non-null, to avoid problems in end-of-game cleanup
 		if (upcast(Game, game, &get_owner()->egbase())) {
-			fleet_->cancel_ferry_request(*game, this);
+			fleet_.get(get_owner()->egbase())->cancel_ferry_request(*game, this);
 		}
 	}
 	// This function should be called only by Fleet code, so we assume that the
@@ -201,7 +200,7 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 		}
 	} else {
 		// this is needed to make sure the ferry finds the way correctly
-		fleet_->reroute_ferry_request(game, this, this);
+		fleet_.get(game)->reroute_ferry_request(game, this, this);
 		newww.request_ferry(game);
 	}
 
@@ -216,9 +215,9 @@ void Waterway::cleanup(EditorGameBase& egbase) {
 		if (ferry_.get(egbase)) {
 			ferry_.get(egbase)->set_destination(*game, nullptr);
 		}
-		if (fleet_ && egbase.objects().object_still_available(fleet_)) {
+		if (fleet_.get(egbase)) {
 			// Always call this, in case the fleet can disband now
-			fleet_->cancel_ferry_request(*game, this);
+			fleet_.get(egbase)->cancel_ferry_request(*game, this);
 		}
 	}
 	RoadBase::cleanup(egbase);
@@ -228,7 +227,7 @@ void Waterway::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
 	molog(egbase.get_gametime(), "Ferry %u\n", ferry_.get(egbase) ? ferry_.serial() : 0);
-	molog(egbase.get_gametime(), "FerryFleet %u\n", fleet_ ? fleet_->serial() : 0);
+	molog(egbase.get_gametime(), "FerryFleet %u\n", fleet_.get(egbase) ? fleet_.serial() : 0);
 }
 
 }  // namespace Widelands

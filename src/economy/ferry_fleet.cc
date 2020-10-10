@@ -84,6 +84,14 @@ bool FerryFleet::init(EditorGameBase& egbase) {
 	return find_other_fleet(egbase);
 }
 
+bool FerryFleet::init(EditorGameBase& egbase, Waterway* waterway) {
+	MapObject::init(egbase);
+
+	request_ferry(egbase, waterway);
+
+	return find_other_fleet(egbase);
+}
+
 struct StepEvalFindFerryFleet {
 	explicit StepEvalFindFerryFleet(const EditorGameBase& egbase)
 	   : checkstep_(new CheckStepFerry(egbase)) {
@@ -125,7 +133,7 @@ bool FerryFleet::find_other_fleet(EditorGameBase& egbase) {
 			if (type == MapObjectType::WATERWAY) {
 				upcast(Waterway, ww, imm);
 				if (ww->get_fleet() != this && ww->get_owner() == get_owner()) {
-					return ww->get_fleet()->merge(egbase, this);
+					return ww->get_fleet().get(egbase)->merge(egbase, this);
 				}
 			}
 		}
@@ -213,7 +221,7 @@ bool FerryFleet::has_ferry(const Waterway& ww) const {
 	if (ww.get_ferry().get(owner().egbase())) {
 		return true;
 	}
-	assert(ww.get_fleet() == this);
+	assert(ww.get_fleet().get(owner().egbase()) == this);
 	for (const auto& pair : pending_ferry_requests_) {
 		if (pair.second == &ww) {
 			return false;
