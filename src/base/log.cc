@@ -173,7 +173,10 @@ std::vector<std::string> split(const std::string& s) {
 	return result;
 }
 
-void log_to_stdout(const LogType type, const Widelands::Time& gametime, const char* const fmt, ...) {
+void log_to_stdout(const LogType type,
+                   const Widelands::Time& gametime,
+                   const char* const fmt,
+                   ...) {
 	assert(logger != nullptr);
 
 	// message type and timestamp
