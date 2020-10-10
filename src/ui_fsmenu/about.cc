@@ -29,14 +29,17 @@
 constexpr int16_t kPadding = 4;
 
 FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
-   : UI::Window(&fsmm,
-                UI::WindowStyle::kFsMenu,
-                "about",
-                (fsmm.get_w() - fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuAbout)) / 2,
-                (fsmm.get_h() - fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout)) / 2,
-                fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuAbout),
-                fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout),
-                _("About Widelands")),
+   : UI::Window(
+        &fsmm,
+        UI::WindowStyle::kFsMenu,
+        "about",
+        (fsmm.get_w() - fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuAbout)) /
+           2,
+        (fsmm.get_h() - fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout)) /
+           2,
+        fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuAbout),
+        fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout),
+        _("About Widelands")),
      box_(this, 0, 0, UI::Box::Vertical),
      tabs_(&box_, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu),
      close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")) {
