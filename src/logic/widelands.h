@@ -20,10 +20,11 @@
 #ifndef WL_LOGIC_WIDELANDS_H
 #define WL_LOGIC_WIDELANDS_H
 
-#include <cassert>
 #include <cstdint>
 #include <limits>
 #include <vector>
+
+#include "base/wexception.h"
 
 class FileRead;
 class FileWrite;
@@ -78,41 +79,59 @@ struct Duration {
 	constexpr explicit Duration(uint32_t v = std::numeric_limits<uint32_t>::max()) : value_(v) {
 	}
 	void operator+=(const Duration& delta) {
-		assert(is_valid());
-		assert(delta.is_valid());
+		if (!is_valid() || !delta.is_valid()) {
+			throw wexception("Attempt to add invalid Durations");
+		}
 		value_ += delta.get();
 	}
 	void operator-=(const Duration& delta) {
-		assert(is_valid());
-		assert(delta.is_valid());
-		assert(get() >= delta.get());
+		if (!is_valid() || !delta.is_valid()) {
+			throw wexception("Attempt to subtract invalid Durations");
+		}
+		if (get() < delta.get()) {
+			throw wexception("Duration: Subtraction result would be negative");
+		}
 		value_ -= delta.get();
 	}
 	void operator/=(uint32_t d) {
-		assert(is_valid());
-		assert(d > 0);
+		if (!is_valid()) {
+			throw wexception("Attempt to divide invalid Duration");
+		}
+		if (d <= 0) {
+			throw wexception("Attempt to divide Duration by zero");
+		}
 		value_ /= d;
 	}
 
 	// Intervals arithmetics
 	Duration operator+(const Duration& d) const {
-		assert(is_valid());
-		assert(d.is_valid());
+		if (!is_valid() || !d.is_valid()) {
+			throw wexception("Attempt to add invalid Durations");
+		}
 		return Duration(get() + d.get());
 	}
 	Duration operator-(const Duration& d) const {
-		assert(is_valid());
-		assert(d.is_valid());
-		assert(get() >= d.get());
+		if (!is_valid() || !d.is_valid()) {
+			throw wexception("Attempt to subtract invalid Durations");
+		}
+		if (get() < d.get()) {
+			throw wexception("Duration: Subtraction result would be negative");
+		}
 		return Duration(get() - d.get());
 	}
 	Duration operator*(uint32_t d) const {
-		assert(is_valid());
+		if (!is_valid()) {
+			throw wexception("Attempt to multiply invalid Durations");
+		}
 		return Duration(get() * d);
 	}
 	Duration operator/(uint32_t d) const {
-		assert(is_valid());
-		assert(d > 0);
+		if (!is_valid()) {
+			throw wexception("Attempt to divide invalid Duration");
+		}
+		if (d <= 0) {
+			throw wexception("Attempt to divide Duration by zero");
+		}
 		return Duration(get() / d);
 	}
 
@@ -163,22 +182,29 @@ struct Time {
 
 	// Adding/subtracting intervals
 	Time operator+(const Duration& delta) const {
-		assert(is_valid());
-		assert(delta.is_valid());
+		if (!is_valid() || !delta.is_valid()) {
+			throw wexception("Attempt to add invalid Time or Duration");
+		}
 		return Time(get() + delta.get());
 	}
 	Time operator-(const Duration& delta) const {
-		assert(is_valid());
-		assert(delta.is_valid());
-		assert(get() >= delta.get());
+		if (!is_valid() || !delta.is_valid()) {
+			throw wexception("Attempt to subtract invalid Time or Duration");
+		}
+		if (get() < delta.get()) {
+			throw wexception("Time-Duration-Subtraction result would be negative");
+		}
 		return Time(get() - delta.get());
 	}
 
 	// Obtaining a time difference
 	Duration operator-(const Time& t) const {
-		assert(is_valid());
-		assert(t.is_valid());
-		assert(get() >= t.get());
+		if (!is_valid() || !t.is_valid()) {
+			throw wexception("Attempt to subtract invalid Time");
+		}
+		if (get() < t.get()) {
+			throw wexception("Time: Subtraction result would be negative");
+		}
 		return Duration(get() - t.get());
 	}
 
@@ -187,8 +213,9 @@ struct Time {
 	}
 
 	void increment(const Duration& d = Duration(1)) {
-		assert(is_valid());
-		assert(d.is_valid());
+		if (!is_valid() || !d.is_valid()) {
+			throw wexception("Attempt to increment invalid Time or Duration");
+		}
 		value_ += d.get();
 	}
 

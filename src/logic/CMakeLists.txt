@@ -75,6 +75,7 @@ wl_library(logic_constants
     widelands.cc
     widelands.h
   DEPENDS
+    base_exceptions
     io_fileread
 )
 
