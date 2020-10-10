@@ -68,16 +68,17 @@
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
 
-const std::vector<std::pair<std::string /* internal name */, std::function<std::string()> /* localized name */>> EditorInteractive::kOldWorldNames = {
-	/** TRANSLATORS: A world name for the random map generator in the editor */
-    {"greenland", []() { return _("Summer"); }},
-    /** TRANSLATORS: A world name for the random map generator in the editor */
-    {"winterland", []() { return _("Winter"); }},
-    /** TRANSLATORS: A world name for the random map generator in the editor */
-    {"desert", []() { return _("Desert"); }},
-    /** TRANSLATORS: A world name for the random map generator in the editor */
-    {"blackland", []() { return _("Wasteland"); }}
-};
+const std::vector<
+   std::pair<std::string /* internal name */, std::function<std::string()> /* localized name */>>
+   EditorInteractive::kOldWorldNames = {
+      /** TRANSLATORS: A world name for the random map generator in the editor */
+      {"greenland", []() { return _("Summer"); }},
+      /** TRANSLATORS: A world name for the random map generator in the editor */
+      {"winterland", []() { return _("Winter"); }},
+      /** TRANSLATORS: A world name for the random map generator in the editor */
+      {"desert", []() { return _("Desert"); }},
+      /** TRANSLATORS: A world name for the random map generator in the editor */
+      {"blackland", []() { return _("Wasteland"); }}};
 std::string EditorInteractive::translate_old_world_name(const std::string& name) {
 	for (const auto& pair : kOldWorldNames) {
 		if (pair.first == name) {
