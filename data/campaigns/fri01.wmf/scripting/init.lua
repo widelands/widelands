@@ -26,7 +26,5 @@ warehouse_mark = map:get_field(44, 77)
 flood_speed = {500, 430, 400}
 flood_speed = flood_speed[difficulty]
 
-p1.allow_additional_expedition_items = false
-
 include "map:scripting/texts.lua"
 include "map:scripting/mission_thread.lua"

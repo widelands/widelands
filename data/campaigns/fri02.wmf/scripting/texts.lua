@@ -124,22 +124,30 @@ obj_defeat_both = {
 -- Texts to the user
 -- ==================
 
-campaign_data_warning = {
-   title = _"Warning",
-   body = p(_[[You appear not to have completed the previous mission. You may still play this scenario, but you will be at a disadvantage. I recommend that you complete the previous scenario first and then restart this mission.]]),
-   w = 450,
-   h = 150,
-}
+-- TRANSLATORS: Reebaud – Introduction 1
+local intro_1_start = _([[I began to believe the journey would never end. I have no idea how long we were on the sea, tossed about by envious storms… it must have been months.]])
+-- TRANSLATORS: Reebaud – Introduction 1
+local intro_1_iron = _([[The storms have maintained a firm grip on the ship throughout our voyage. There was hardly a day on which we did not wonder whether it would be our last. We were compelled to drop the precious metals we have taken with us overboard to steady the ship, feeling as though it were a squalid sacrifice to the gods to give us hope to live a few hours longer.]])
+-- TRANSLATORS: Reebaud – Introduction 1
+local intro_1_picks = _([[The few tools we managed to salvage from Langeness did not cope well. The miners’ picks proved especially vulnerable, and we had to throw them in the ocean when it became evident that they had been corroded by the sea salt so much that we could never again mine anything with them.]])
+-- TRANSLATORS: Reebaud – Introduction 1
+local intro_1_end = _([[But we survived. Finally, we reached the mouth of a calmer fjord. We sailed upriver, and arrived here.]])
+local intro_1_body
+if lost_miners and lost_metals then
+   intro_1_body = intro_1_iron .. paragraphdivider() .. intro_1_picks .. paragraphdivider()
+elseif lost_miners then
+   intro_1_body = intro_1_picks .. paragraphdivider()
+elseif lost_metals then
+   intro_1_body = intro_1_iron .. paragraphdivider()
+else
+   intro_1_body = ""
+end
 
 intro_1 = {
    title =_ "Welcome Back!",
-   body=reebaud(_"A new home",
-      -- TRANSLATORS: Reebaud – Introduction 1
-      _([[I began to believe the journey would never end. I have no idea how long we were on the sea, tossed about by envious storms… it must have been months.]])
-      .. paragraphdivider() ..
-      -- TRANSLATORS: Reebaud – Introduction 1
-      _([[But we survived. Finally, we reached the mouth of a calmer fjord. We sailed upriver, and arrived here.]])),
+   body=reebaud(_"A new home", intro_1_start .. paragraphdivider() .. intro_1_body .. intro_1_end),
 }
+
 intro_2 = {
    title =_ "Welcome Back!",
    body=reebaud(_"A new home",
