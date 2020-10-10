@@ -1176,8 +1176,8 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 				expedition_->seen_port_buildspaces.push_back(read_coords_32(&fr));
 			}
 			// Swimability of the directions
-			for (uint8_t i = 0; i < LAST_DIRECTION; ++i) {
-				expedition_->swimmable[i] = (fr.unsigned_8() == 1);
+			for (bool& swimmable : expedition_->swimmable) {
+				swimmable = (fr.unsigned_8() == 1);
 			}
 			// whether scouting or exploring
 			expedition_->island_exploration = fr.unsigned_8() == 1;
