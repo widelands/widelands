@@ -6813,7 +6813,7 @@ int LuaField::get_viewpoint_y(lua_State* L) {
    .. attribute:: resource
 
       (RW) The name of the resource that is available in this field or
-      :const:`nil`
+      "none"
 
       :see also: :attr:`resource_amount`
 */

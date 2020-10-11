@@ -233,6 +233,8 @@ DescriptionIndex Descriptions::immovable_index(const std::string& immovablename)
 	return immovables_->get_index(immovablename);
 }
 DescriptionIndex Descriptions::resource_index(const std::string& resourcename) const {
+	// TODO(GunChleoc): Having "none" in the backend here is bad design.
+	// I think we have this for supporting LuaField::get_resource only, but we need to verify this.
 	return resourcename != "none" ? resources_->get_index(resourcename) : Widelands::kNoResource;
 }
 DescriptionIndex Descriptions::ship_index(const std::string& shipname) const {
