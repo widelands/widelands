@@ -33,9 +33,9 @@ class ComputerPlayer;
 class RGBColor;
 
 namespace Widelands {
-	class Game;
-	class Player;
-}
+class Game;
+class Player;
+}  // namespace Widelands
 
 /**
  * Class interface to provide access to the lists of network game participants to the UI.
@@ -56,7 +56,6 @@ namespace Widelands {
 class ParticipantList {
 
 public:
-
 	/// Describes the role of a participant inside the game
 	enum class ParticipantType {
 		/// A human user currently controlling a tribe
@@ -76,8 +75,9 @@ public:
 	 *             Also, a check for \c nullptr is used to determine whether a game is running.
 	 * @param localplayername The name of the network player on this computer.
 	 */
-	ParticipantList(const GameSettings* settings, Widelands::Game*& game,
-					const std::string& localplayername);
+	ParticipantList(const GameSettings* settings,
+	                Widelands::Game*& game,
+	                const std::string& localplayername);
 
 	/**
 	 * Returns the counts of currently connected participants.
@@ -185,7 +185,6 @@ public:
 	boost::signals2::signal<void(int16_t, uint8_t)> participant_updated_rtt;
 
 private:
-
 	/**
 	 * Fetches the UserSettings belonging to the given participant index.
 	 * The caller has to make sure that \c participant refers to a human user.
@@ -226,5 +225,4 @@ private:
 	int16_t participant_counts_[3];
 };
 
-#endif // WL_NETWORK_PARTICIPANTLIST_H
-
+#endif  // WL_NETWORK_PARTICIPANTLIST_H

@@ -1054,6 +1054,6 @@ bool InternetGaming::valid_username(const std::string& username) {
 	// Note: The memory for the lowercase version must be allocated before calling transform()
 	std::string lowercase = username;
 	std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(),
-		[](unsigned char c) { return std::tolower(c); } );
+	               [](unsigned char c) { return std::tolower(c); });
 	return lowercase != "team";
 }

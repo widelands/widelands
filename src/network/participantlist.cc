@@ -6,19 +6,18 @@
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 
-ParticipantList::ParticipantList(const GameSettings* settings, Widelands::Game*& game,
-									const std::string& localplayername)
-			: settings_(settings), game_(game), localplayername_(localplayername),
-				participant_counts_{-1} {
+ParticipantList::ParticipantList(const GameSettings* settings,
+                                 Widelands::Game*& game,
+                                 const std::string& localplayername)
+   : settings_(settings), game_(game), localplayername_(localplayername), participant_counts_{-1} {
 	assert(settings_ != nullptr);
 	// The pointer referenced by game_ might be undefined here
 	// localplayername_ might be empty here
 	update_participant_counts();
 
 	// When the update signal is called, re-calculate the participant counts
-	participants_updated.connect([this]() {
-			update_participant_counts();
-		}, boost::signals2::connect_position::at_front);
+	participants_updated.connect(
+	   [this]() { update_participant_counts(); }, boost::signals2::connect_position::at_front);
 }
 
 const int16_t* ParticipantList::get_participant_counts() const {
@@ -58,7 +57,6 @@ const std::string& ParticipantList::get_participant_name(int16_t participant) co
 	assert(ps.state == PlayerSettings::State::kComputer);
 	return AI::ComputerPlayer::get_implementation(ps.ai)->descname;
 }
-
 
 bool ParticipantList::needs_teamchat() const {
 	assert(participant_counts_[0] >= 0);
@@ -123,7 +121,7 @@ bool ParticipantList::needs_teamchat() const {
 			}
 			// We are all alone (in this game)
 			return false;
-		} // end player slot with no team
+		}  // end player slot with no team
 
 		// Search for other players with the same team
 		for (int16_t i = 0; i < participant_counts_[0]; ++i) {
@@ -237,11 +235,11 @@ int32_t ParticipantList::participant_to_playerindex(int16_t participant) const {
 const Widelands::Player* ParticipantList::participant_to_player(int16_t participant) const {
 	assert(participant < participant_counts_[2]);
 	assert(game_ != nullptr);
-	const Widelands::PlayersManager *pm = game_->player_manager();
+	const Widelands::PlayersManager* pm = game_->player_manager();
 	assert(pm);
 	const int32_t playerindex = participant_to_playerindex(participant);
 	assert(playerindex >= 0);
-	const Widelands::Player *p = pm->get_player(playerindex + 1);
+	const Widelands::Player* p = pm->get_player(playerindex + 1);
 	assert(p);
 	return p;
 }

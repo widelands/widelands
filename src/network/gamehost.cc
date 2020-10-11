@@ -914,7 +914,7 @@ void GameHost::send(ChatMessage msg) {
 							// We don't send messages to AIs or empty players
 							continue;
 						}
-						if (player.team == team_sender)  {
+						if (player.team == team_sender) {
 							if (d->settings.playernum == static_cast<int16_t>(i)) {
 								// The host is (one of the) users of this player
 								recipients.insert(-2);
@@ -930,10 +930,10 @@ void GameHost::send(ChatMessage msg) {
 							}
 						}
 					}
-				} // end team is not "no team"
-			} // end team is not spectator
-		} // end team message
-	} // end directed message
+				}  // end team is not "no team"
+			}     // end team is not spectator
+		}        // end team message
+	}           // end directed message
 
 	// Assemble message packet
 	SendPacket packet;
