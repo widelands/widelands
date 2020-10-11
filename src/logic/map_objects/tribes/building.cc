@@ -253,7 +253,8 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 	b.position_ = pos;
 	b.set_owner(owner);
 	if (immovable != INVALID_INDEX) {
-		// Remember that we're building on top of an immovable so we can put it back if the building gets removed
+		// Remember that we're building on top of an immovable so we can put it back if the building
+		// gets removed
 		b.old_buildings_.push_back(std::make_pair(immovable, false));
 	}
 	for (const auto& pair : former_buildings) {

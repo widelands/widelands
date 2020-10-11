@@ -152,15 +152,14 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							DescriptionIndex oldidx =
 							   building.owner().tribe().safe_building_index(fr.c_string());
 							const std::string type(fr.c_string());
-							building.old_buildings_.push_back(std::make_pair(
-							   oldidx, type.empty() || type == "building"));
+							building.old_buildings_.push_back(
+							   std::make_pair(oldidx, type.empty() || type == "building"));
 						}
 					} else {
 						while (fr.unsigned_8()) {
 							DescriptionIndex oldidx =
 							   building.owner().tribe().safe_building_index(fr.c_string());
-							building.old_buildings_.push_back(
-							   std::make_pair(oldidx, true));
+							building.old_buildings_.push_back(std::make_pair(oldidx, true));
 						}
 					}
 					// Only construction sites may have an empty list
