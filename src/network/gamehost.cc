@@ -55,6 +55,7 @@
 #include "network/network_lan_promotion.h"
 #include "network/network_player_settings_backend.h"
 #include "network/network_protocol.h"
+#include "network/participantlist.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
@@ -438,6 +439,8 @@ struct GameHostImpl {
 	GameSettings settings;
 	std::string localplayername;
 	uint32_t localdesiredspeed;
+	// unique_ptr instead of object to break cyclic dependency
+	std::unique_ptr<ParticipantList> participants;
 	HostChatProvider chat;
 	HostGameSettingsProvider hp;
 	NetworkPlayerSettingsBackend npsb;
@@ -486,6 +489,7 @@ struct GameHostImpl {
 
 	explicit GameHostImpl(GameHost* const h)
 	   : localdesiredspeed(0),
+	     participants(nullptr),
 	     chat(h),
 	     hp(h),
 	     npsb(&hp),
@@ -503,6 +507,12 @@ struct GameHostImpl {
 	     syncreport_time(0),
 	     syncreport(),
 	     syncreport_arrived(false) {
+	}
+
+	/// Takes ownership of the given pointer
+	void set_participant_list(ParticipantList* p) {
+		participants.reset(p);
+		chat.participants_ = p;
 	}
 };
 
@@ -553,6 +563,8 @@ GameHost::GameHost(const std::string& playername, bool internet)
 	hostuser.ready = true;
 	d->settings.users.push_back(hostuser);
 	file_.reset(nullptr);  //  Initialize as 0 pointer - unfortunately needed in struct.
+
+	d->set_participant_list(new ParticipantList(&(d->settings), d->game, d->localplayername));
 }
 
 GameHost::~GameHost() {
@@ -1560,6 +1572,9 @@ void GameHost::broadcast_setting_player(uint8_t const number) {
 	packet.unsigned_8(number);
 	write_setting_player(packet, number);
 	broadcast(packet);
+	if (d && d->chat.participants_) {
+		d->chat.participants_->participants_updated();
+	}
 }
 
 void GameHost::write_setting_all_players(SendPacket& packet) {
@@ -1585,6 +1600,9 @@ void GameHost::broadcast_setting_user(uint32_t const number) {
 	packet.unsigned_32(number);
 	write_setting_user(packet, number);
 	broadcast(packet);
+	if (d && d->chat.participants_) {
+		d->chat.participants_->participants_updated();
+	}
 }
 
 void GameHost::write_setting_all_users(SendPacket& packet) {
