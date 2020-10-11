@@ -10,7 +10,7 @@ author="Quappo"
 descr=_"Each tribe is surrounded by four mighty mountains. Who will first conquer them and claim the resources for his own tribe?"
 hint=_"I: Water can be found along the river. II: Snowmen mark additional water sources. III: Each mountain contains only one resource."
 tags="2teams,artifacts,balanced,ffa,official"
-theme="winterland"
+theme="winter"
 
 [teams00]
 team1="0,1"

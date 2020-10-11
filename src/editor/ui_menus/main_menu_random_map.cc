@@ -492,6 +492,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
 
 	map->recalc_whole_map(egbase);
+	map->set_background_theme(map_info.world_name);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
 	UI::WLMessageBox mbox(
 	   &eia,
@@ -504,8 +505,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	      positions.*/
 	   _("The map has been generated. "
 	     "Please double-check the player starting positions to make sure that your carriers won’t "
-	     "drown, "
-	     "or be stuck on an island or on top of a mountain."),
+	     "drown, or be stuck on an island or on top of a mountain."),
 	   UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();
 	egbase.remove_loader_ui();

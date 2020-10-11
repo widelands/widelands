@@ -333,10 +333,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tags_box_.add_space(padding_);
 
 	theme_dropdown_.add(_("(none)"), "");
-	for (const std::string& theme :
-	     g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/gameloading/")) {
-		const std::string name(g_fs->fs_filename(theme.c_str()));
-		theme_dropdown_.add(EditorInteractive::translate_old_world_name(name), name);
+	for (const auto& pair : EditorInteractive::kOldWorldNames) {
+		theme_dropdown_.add(pair.second(), pair.first);
 	}
 	tags_box_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
 
