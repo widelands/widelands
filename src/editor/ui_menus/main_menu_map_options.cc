@@ -332,9 +332,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tags_box_.add(&balancing_dropdown_, UI::Box::Resizing::kFullSize);
 	tags_box_.add_space(padding_);
 
-	theme_dropdown_.add(_("(none)"), "");
-	for (const auto& pair : EditorInteractive::kOldWorldNames) {
-		theme_dropdown_.add(pair.second(), pair.first);
+	theme_dropdown_.add(pgettext("map_theme", "(none)"), "");
+	for (const Widelands::Map::OldWorldInfo& owi : Widelands::Map::kOldWorldNames) {
+		theme_dropdown_.add(owi.descname(), owi.name);
 	}
 	tags_box_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
 

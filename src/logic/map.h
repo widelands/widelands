@@ -186,6 +186,22 @@ public:
 	friend struct MapElementalPacket;
 	friend struct WidelandsMapLoader;
 
+	struct OldWorldInfo {
+		// What we call it now (used for the gameloading UI's themes
+		// and by the random map generator)
+		std::string name;
+
+		// What this is called in very old map files. Used ONLY to map
+		// the world names of old maps to the new theme definitions.
+		std::string old_name;
+
+		// Localized name
+		std::function<std::string()> descname;
+	};
+	static const std::vector<OldWorldInfo> kOldWorldNames;
+	static const OldWorldInfo& get_old_world_info_by_new_name(const std::string& old_name);
+	static const OldWorldInfo& get_old_world_info_by_old_name(const std::string& old_name);
+
 	using PortSpacesSet = std::set<Coords>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
 

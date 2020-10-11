@@ -89,7 +89,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
             box_width_ - 2 * margin_ - std::max(world_label_.get_w(), resources_label_.get_w()),
             label_height_,
             UI::ButtonStyle::kWuiSecondary,
-            EditorInteractive::kOldWorldNames[current_world_].second()),
+            Widelands::Map::kOldWorldNames[current_world_].descname()),
      resources_(&resources_box_,
                 "resources",
                 0,
@@ -363,8 +363,8 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 		break;
 	case ButtonId::kWorld:
 		++current_world_;
-		current_world_ %= EditorInteractive::kOldWorldNames.size();
-		world_.set_title(EditorInteractive::kOldWorldNames[current_world_].second());
+		current_world_ %= Widelands::Map::kOldWorldNames.size();
+		world_.set_title(Widelands::Map::kOldWorldNames[current_world_].descname());
 		break;
 	case ButtonId::kIslandMode:
 		break;
@@ -522,9 +522,9 @@ void MainMenuNewRandomMap::id_edit_box_changed() {
 	std::string str = map_id_edit_.text();
 
 	std::vector<std::string> world_names;
-	world_names.reserve(EditorInteractive::kOldWorldNames.size());
-	for (const auto& descr : EditorInteractive::kOldWorldNames) {
-		world_names.push_back(descr.first);
+	world_names.reserve(Widelands::Map::kOldWorldNames.size());
+	for (const Widelands::Map::OldWorldInfo& descr : Widelands::Map::kOldWorldNames) {
+		world_names.push_back(descr.name);
 	}
 
 	if (!Widelands::UniqueRandomMapInfo::set_from_id_string(map_info, str, world_names)) {
@@ -549,7 +549,7 @@ void MainMenuNewRandomMap::id_edit_box_changed() {
 
 		current_world_ = std::find(world_names.cbegin(), world_names.cend(), map_info.world_name) -
 		                 world_names.cbegin();
-		world_.set_title(EditorInteractive::kOldWorldNames[current_world_].second());
+		world_.set_title(Widelands::Map::kOldWorldNames[current_world_].descname());
 
 		island_mode_.set_state(map_info.islandMode);
 
@@ -599,5 +599,5 @@ void MainMenuNewRandomMap::set_map_info(Widelands::UniqueRandomMapInfo& map_info
 	map_info.numPlayers = players_.get_value();
 	map_info.resource_amount =
 	   static_cast<Widelands::UniqueRandomMapInfo::ResourceAmount>(resource_amount_);
-	map_info.world_name = EditorInteractive::kOldWorldNames[current_world_].first;
+	map_info.world_name = Widelands::Map::kOldWorldNames[current_world_].name;
 }

@@ -22,7 +22,6 @@
 
 #include <map>
 #include <memory>
-#include <vector>
 
 #include "editor/editor_category.h"
 #include "editor/tools/history.h"
@@ -54,11 +53,6 @@ const static std::string kEditorSplashImage = std::string(kTemplateDir) + "loads
  */
 class EditorInteractive : public InteractiveBase {
 public:
-	static const std::vector<
-	   std::pair<std::string /* internal name */, std::function<std::string()> /* localized name */>>
-	   kOldWorldNames;
-	static std::string translate_old_world_name(const std::string&);
-
 	struct Tools {
 		Tools(const Widelands::Map& map)
 		   : current_pointer(&info),
