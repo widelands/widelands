@@ -92,6 +92,8 @@ protected:
 	                              const Widelands::InputQueue&,
 	                              bool = false);
 
+	Widelands::Game* const game_;
+
 	bool is_dying_;
 
 	void set_building_descr_for_help(const Widelands::BuildingDescr* d) {

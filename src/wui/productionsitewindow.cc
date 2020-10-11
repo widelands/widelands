@@ -210,8 +210,8 @@ void ProductionSiteWindow::evict_worker() {
 		Widelands::Worker* worker =
 		   production_site->working_positions()[worker_table_->get_selected()].worker;
 		if (worker) {
-			if (Widelands::Game* game = ibase()->get_game()) {
-				game->send_player_evict_worker(*worker);
+			if (game_) {
+				game_->send_player_evict_worker(*worker);
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}

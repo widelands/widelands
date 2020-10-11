@@ -195,8 +195,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				cs_soldier_capacity_decrease_->set_enabled(can_act);
 				cs_soldier_capacity_increase_->set_enabled(can_act);
 				cs_soldier_capacity_decrease_->sigclicked.connect([this, ts]() {
-					if (Widelands::Game* game = ibase()->get_game()) {
-						game->send_player_change_soldier_capacity(
+					if (game_) {
+						game_->send_player_change_soldier_capacity(
 						   *construction_site_.get(ibase()->egbase()),
 						   SDL_GetModState() & KMOD_CTRL ? 0 : ts->desired_capacity - 1);
 					} else {
@@ -204,8 +204,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 					}
 				});
 				cs_soldier_capacity_increase_->sigclicked.connect([this, ts]() {
-					if (Widelands::Game* game = ibase()->get_game()) {
-						game->send_player_change_soldier_capacity(
+					if (game_) {
+						game_->send_player_change_soldier_capacity(
 						   *construction_site_.get(ibase()->egbase()),
 						   SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1);
 					} else {
@@ -223,8 +223,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			                               _("Stop this building’s work after completion"));
 			cs_stopped_->clickedto.connect([this, ps](bool stop) {
 				if (stop != ps->stopped) {
-					if (Widelands::Game* game = ibase()->get_game()) {
-						game->send_player_start_stop_building(*construction_site_.get(ibase()->egbase()));
+					if (game_) {
+						game_->send_player_start_stop_building(*construction_site_.get(ibase()->egbase()));
 					} else {
 						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 					}
@@ -253,8 +253,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_soldier_capacity_decrease_->set_enabled(can_act);
 			cs_soldier_capacity_increase_->set_enabled(can_act);
 			cs_soldier_capacity_decrease_->sigclicked.connect([this, ms]() {
-				if (Widelands::Game* game = ibase()->get_game()) {
-					game->send_player_change_soldier_capacity(
+				if (game_) {
+					game_->send_player_change_soldier_capacity(
 					   *construction_site_.get(ibase()->egbase()),
 					   SDL_GetModState() & KMOD_CTRL ? 1 : ms->desired_capacity - 1);
 				} else {
@@ -262,8 +262,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				}
 			});
 			cs_soldier_capacity_increase_->sigclicked.connect([this, ms]() {
-				if (Widelands::Game* game = ibase()->get_game()) {
-					game->send_player_change_soldier_capacity(
+				if (game_) {
+					game_->send_player_change_soldier_capacity(
 					   *construction_site_.get(ibase()->egbase()),
 					   SDL_GetModState() & KMOD_CTRL ? ms->max_capacity : ms->desired_capacity + 1);
 				} else {
@@ -292,8 +292,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
 			if (can_act) {
 				cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
-					if (Widelands::Game* game = ibase()->get_game()) {
-						game->send_player_militarysite_set_soldier_preference(
+					if (game_) {
+						game_->send_player_militarysite_set_soldier_preference(
 						   *construction_site_.get(ibase()->egbase()),
 						   state ? Widelands::SoldierPreference::kRookies :
 						           Widelands::SoldierPreference::kHeroes);
@@ -361,8 +361,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				                    _("Start an expedition from this port after completion"));
 				cs_launch_expedition_->clickedto.connect([this, ws](bool launch) {
 					if (launch != ws->launch_expedition) {
-						if (Widelands::Game* game = ibase()->get_game()) {
-							game->send_player_start_or_cancel_expedition(
+						if (game_) {
+							game_->send_player_start_or_cancel_expedition(
 							   *construction_site_.get(ibase()->egbase()));
 						} else {
 							NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
@@ -398,8 +398,8 @@ void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::
 	if (ww == Widelands::wwWARE) {
 		for (const auto& pair : ws->ware_preferences) {
 			if (cs_warehouse_wares_->ware_selected(pair.first)) {
-				if (Widelands::Game* game = ibase()->get_game()) {
-					game->send_player_set_stock_policy(
+				if (game_) {
+					game_->send_player_set_stock_policy(
 					   *construction_site, Widelands::wwWARE, pair.first, p);
 				} else {
 					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
@@ -409,8 +409,8 @@ void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::
 	} else {
 		for (const auto& pair : ws->worker_preferences) {
 			if (cs_warehouse_workers_->ware_selected(pair.first)) {
-				if (Widelands::Game* game = ibase()->get_game()) {
-					game->send_player_set_stock_policy(
+				if (game_) {
+					game_->send_player_set_stock_policy(
 					   *construction_site, Widelands::wwWORKER, pair.first, p);
 				} else {
 					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement

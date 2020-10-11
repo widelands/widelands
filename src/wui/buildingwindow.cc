@@ -52,6 +52,7 @@ BuildingWindow::BuildingWindow(InteractiveBase& parent,
                                const Widelands::BuildingDescr& descr,
                                bool avoid_fastclick)
    : UI::UniqueWindow(&parent, "building_window", &reg, Width, 0, b.descr().descname()),
+     game_(parent.get_game()),
      is_dying_(false),
      parent_(&parent),
      building_(&b),
@@ -433,7 +434,7 @@ void BuildingWindow::act_bulldoze() {
 
 	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building->get_playercaps() & Widelands::Building::PCap_Bulldoze) {
-			ibase()->game().send_player_bulldoze(*building);
+			game_->send_player_bulldoze(*building);
 		}
 	} else if (upcast(InteractivePlayer, ipl, ibase())) {
 		show_bulldoze_confirm(*ipl, *building);
@@ -449,8 +450,8 @@ void BuildingWindow::act_dismantle() {
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-			if (Widelands::Game* game = ibase()->get_game()) {
-				game->send_player_dismantle(*building, false);
+			if (game_) {
+				game_->send_player_dismantle(*building, false);
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}
@@ -473,8 +474,8 @@ void BuildingWindow::act_start_stop() {
 	}
 
 	if (dynamic_cast<const Widelands::ProductionSite*>(building)) {
-		if (Widelands::Game* game = ibase()->get_game()) {
-			game->send_player_start_stop_building(*building);
+		if (game_) {
+			game_->send_player_start_stop_building(*building);
 		} else {
 			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 		}
@@ -495,8 +496,8 @@ void BuildingWindow::act_start_or_cancel_expedition() {
 	if (upcast(Widelands::Warehouse const, warehouse, building)) {
 		if (warehouse->get_portdock()) {
 			expeditionbtn_->set_enabled(false);
-			if (Widelands::Game* game = ibase()->get_game()) {
-				game->send_player_start_or_cancel_expedition(*building);
+			if (game_) {
+				game_->send_player_start_or_cancel_expedition(*building);
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}
@@ -522,8 +523,8 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 		upcast(Widelands::ConstructionSite, construction_site, building);
 		assert(construction_site);
 		if (SDL_GetModState() & KMOD_CTRL) {
-			if (Widelands::Game* game = ibase()->get_game()) {
-				game->send_player_enhance_building(
+			if (game_) {
+				game_->send_player_enhance_building(
 				   *construction_site, construction_site->building().enhancement(), false);
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
@@ -537,8 +538,8 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 
 	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building->get_playercaps() & Widelands::Building::PCap_Enhancable) {
-			if (Widelands::Game* game = ibase()->get_game()) {
-				game->send_player_enhance_building(*building, id, false);
+			if (game_) {
+				game_->send_player_enhance_building(*building, id, false);
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 			}
@@ -550,8 +551,8 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 
 void BuildingWindow::act_mute(bool all) {
 	if (Widelands::Building* building = building_.get(parent_->egbase())) {
-		if (Widelands::Game* game = ibase()->get_game()) {
-			game->send_player_toggle_mute(*building, all);
+		if (game_) {
+			game_->send_player_toggle_mute(*building, all);
 		} else {
 			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 		}
