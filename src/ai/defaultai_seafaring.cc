@@ -111,8 +111,8 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 // and makes two decisions:
 // - build a ship
 // - start preparation for expedition
-bool DefaultAI::marine_main_decisions(const Widelands::Time& gametime) {
-	if (gametime > last_seafaring_check_ + Widelands::Duration(20 * 1000)) {
+bool DefaultAI::marine_main_decisions(const Time& gametime) {
+	if (gametime > last_seafaring_check_ + Duration(20 * 1000)) {
 		const Widelands::Map& map = game().map();
 		map_allows_seafaring_ = map.allows_seafaring();
 		last_seafaring_check_ = gametime;
@@ -258,7 +258,7 @@ bool DefaultAI::marine_main_decisions(const Widelands::Time& gametime) {
 }
 
 // This identifies ships that are waiting for command
-bool DefaultAI::check_ships(const Widelands::Time& gametime) {
+bool DefaultAI::check_ships(const Time& gametime) {
 	// There is possibility that the map is not seafaring but we still have ships and/or shipyards
 	if (!map_allows_seafaring_ &&
 	    count_buildings_with_attribute(BuildingAttribute::kShipyard) == 0 && allships.empty()) {
@@ -298,7 +298,7 @@ bool DefaultAI::check_ships(const Widelands::Time& gametime) {
 			     so.ship->get_ship_state() ==
 			        Widelands::Ship::ShipStates::kExpeditionPortspaceFound) &&
 			    !so.waiting_for_command_) {
-				if (gametime - so.last_command_time > Widelands::Duration(180 * 1000)) {
+				if (gametime - so.last_command_time > Duration(180 * 1000)) {
 					so.waiting_for_command_ = true;
 					log_warn_time(
 					   gametime,
@@ -318,7 +318,7 @@ bool DefaultAI::check_ships(const Widelands::Time& gametime) {
 				// port space we found when circumventing the island was already known to the ship.
 				// Or(!) this is a island without a port and ship would sail around forever
 			} else if ((so.escape_mode ||
-			            (so.last_command_time + Widelands::Duration(5 * 60 * 1000)) < gametime) &&
+			            (so.last_command_time + Duration(5 * 60 * 1000)) < gametime) &&
 			           so.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting) {
 				attempt_escape(so);
 			}
@@ -381,7 +381,7 @@ bool DefaultAI::check_ships(const Widelands::Time& gametime) {
 /**
  * This is part of check_ships() function separated for readability
  */
-void DefaultAI::check_ship_in_expedition(ShipObserver& so, const Widelands::Time& gametime) {
+void DefaultAI::check_ship_in_expedition(ShipObserver& so, const Time& gametime) {
 	Widelands::PlayerNumber const pn = player_->player_number();
 
 	// There is theoretical possibility that we have more than one ship in expedition mode,
@@ -399,7 +399,7 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, const Widelands::Time
 
 	// consistency check
 	assert(expedition_ship_ == so.ship->serial() || expedition_ship_ == kNoShip);
-	Widelands::Duration expedition_time = gametime - persistent_data->expedition_start_time;
+	Duration expedition_time = gametime - persistent_data->expedition_start_time;
 
 	// Obviously a new expedition
 	if (expedition_ship_ == kNoShip) {
@@ -414,7 +414,7 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, const Widelands::Time
 		// Also we attempt to cancel expedition (the code for cancellation may not work properly)
 		// TODO(toptopple): - test expedition cancellation deeply (may need to be fixed)
 	} else if (expedition_time >= expedition_max_duration) {
-		assert(persistent_data->expedition_start_time > Widelands::Time(0));
+		assert(persistent_data->expedition_start_time > Time(0));
 		persistent_data->colony_scan_area = Widelands::Player::AiPersistentState::kColonyScanMinArea;
 		persistent_data->no_more_expeditions = true;
 		game().send_player_cancel_expedition_ship(*so.ship);
@@ -490,7 +490,7 @@ Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
 // navigation decisions (these notifications are processes not in 'real time')
 void DefaultAI::expedition_management(ShipObserver& so) {
 
-	const Widelands::Time& gametime = game().get_gametime();
+	const Time& gametime = game().get_gametime();
 	Widelands::PlayerNumber const pn = player_->player_number();
 
 	// second we put current spot into expedition visited_spots

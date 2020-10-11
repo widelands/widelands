@@ -143,24 +143,24 @@ private:
 
 	static constexpr bool kAbsValue = true;
 	static constexpr int32_t kSpotsTooLittle = 15;
-	static constexpr Widelands::Duration kManagementUpdateInterval =
-	   Widelands::Duration(10 * 60 * 1000);
-	static constexpr Widelands::Duration kStatUpdateInterval = Widelands::Duration(60 * 1000);
-	static constexpr Widelands::Duration kFlagWarehouseUpdInterval = Widelands::Duration(15 * 1000);
+	static constexpr Duration kManagementUpdateInterval =
+	   Duration(10 * 60 * 1000);
+	static constexpr Duration kStatUpdateInterval = Duration(60 * 1000);
+	static constexpr Duration kFlagWarehouseUpdInterval = Duration(15 * 1000);
 
 	// common for defaultai.cc and defaultai_seafaring.cc
-	static constexpr Widelands::Duration kExpeditionMinDuration =
-	   Widelands::Duration(60 * 60 * 1000);
-	static constexpr Widelands::Duration kExpeditionMaxDuration =
-	   Widelands::Duration(210 * 60 * 1000);
+	static constexpr Duration kExpeditionMinDuration =
+	   Duration(60 * 60 * 1000);
+	static constexpr Duration kExpeditionMaxDuration =
+	   Duration(210 * 60 * 1000);
 	static constexpr Widelands::Serial kNoShip = Widelands::kInvalidSerial;
-	static constexpr Widelands::Duration kShipCheckInterval = Widelands::Duration(5 * 1000);
+	static constexpr Duration kShipCheckInterval = Duration(5 * 1000);
 
 	// used by defaultai_warfare.cc
 	// duration of military campaign
-	static constexpr Widelands::Duration kCampaignDuration = Widelands::Duration(15 * 60 * 1000);
-	static constexpr Widelands::Duration kTrainingSitesCheckInterval =
-	   Widelands::Duration(15 * 1000);
+	static constexpr Duration kCampaignDuration = Duration(15 * 60 * 1000);
+	static constexpr Duration kTrainingSitesCheckInterval =
+	   Duration(15 * 1000);
 
 	// Variables of default AI
 	AiType type_;
@@ -172,8 +172,8 @@ private:
 
 	void late_initialization();
 
-	void update_all_buildable_fields(const Widelands::Time&);
-	void update_all_mineable_fields(const Widelands::Time&);
+	void update_all_buildable_fields(const Time&);
+	void update_all_mineable_fields(const Time&);
 	void update_all_not_buildable_fields();
 	void update_buildable_field(BuildableField&);
 	void update_mineable_field(MineableField&);
@@ -181,45 +181,45 @@ private:
 
 	// for production sites
 	BuildingNecessity
-	check_building_necessity(BuildingObserver& bo, PerfEvaluation purpose, const Widelands::Time&);
-	BuildingNecessity check_warehouse_necessity(BuildingObserver&, const Widelands::Time& gametime);
+	check_building_necessity(BuildingObserver& bo, PerfEvaluation purpose, const Time&);
+	BuildingNecessity check_warehouse_necessity(BuildingObserver&, const Time& gametime);
 	void sort_task_pool();
 	void sort_by_priority();
-	void set_taskpool_task_time(const Widelands::Time&, SchedulerTaskId);
-	const Widelands::Time& get_taskpool_task_time(SchedulerTaskId);
+	void set_taskpool_task_time(const Time&, SchedulerTaskId);
+	const Time& get_taskpool_task_time(SchedulerTaskId);
 
-	bool construct_building(const Widelands::Time&);
+	bool construct_building(const Time&);
 
 	// all road management is invoked by function improve_roads()
 	// if needed it calls create_shortcut_road() with a flag from which
 	// new road should be considered (or is needed)
-	bool improve_roads(const Widelands::Time&);
+	bool improve_roads(const Time&);
 	bool create_shortcut_road(const Widelands::Flag&,
 	                          uint16_t maxcheckradius,
-	                          const Widelands::Time& gametime);
+	                          const Time& gametime);
 	// trying to identify roads that might be removed
 	bool dispensable_road_test(const Widelands::Road&);
 	bool dismantle_dead_ends();
 	void collect_nearflags(std::map<uint32_t, NearFlag>&, const Widelands::Flag&, const uint16_t);
 	// calculating distances from local warehouse to flags
-	void check_flag_distances(const Widelands::Time&);
+	void check_flag_distances(const Time&);
 	FlagWarehouseDistances flag_warehouse_distance;
 
 	bool check_economies();
-	bool check_productionsites(const Widelands::Time&);
-	bool check_mines_(const Widelands::Time&);
+	bool check_productionsites(const Time&);
+	bool check_mines_(const Time&);
 
-	void print_stats(const Widelands::Time&);
+	void print_stats(const Time&);
 
 	uint32_t
-	get_stocklevel(BuildingObserver&, const Widelands::Time&, WareWorker = WareWorker::kWare) const;
+	get_stocklevel(BuildingObserver&, const Time&, WareWorker = WareWorker::kWare) const;
 	uint32_t
 	   calculate_stocklevel(Widelands::DescriptionIndex,
 	                        WareWorker = WareWorker::kWare) const;  // count all direct outputs_
 
-	void review_wares_targets(const Widelands::Time&);
+	void review_wares_targets(const Time&);
 
-	void update_player_stat(const Widelands::Time&);
+	void update_player_stat(const Time&);
 
 	// sometimes scanning an area in radius gives inappropriate results, so this is to verify that
 	// other player is accessible
@@ -252,7 +252,7 @@ private:
 	bool set_inputs_to_zero(const ProductionSiteObserver&);
 	void set_inputs_to_max(const ProductionSiteObserver&);
 	void stop_site(const ProductionSiteObserver&);
-	void initiate_dismantling(ProductionSiteObserver&, const Widelands::Time&);
+	void initiate_dismantling(ProductionSiteObserver&, const Time&);
 
 	// Checks whether first value is in range, or lesser then...
 	template <typename T> void check_range(const T, const T, const T, const char*);
@@ -264,28 +264,28 @@ private:
 	// Functions used for seafaring / defaultai_seafaring.cc
 	Widelands::IslandExploreDirection randomExploreDirection();
 	void gain_ship(Widelands::Ship&, NewShip);
-	void check_ship_in_expedition(ShipObserver&, const Widelands::Time&);
+	void check_ship_in_expedition(ShipObserver&, const Time&);
 	void expedition_management(ShipObserver&);
 	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
-	bool marine_main_decisions(const Widelands::Time&);
-	bool check_ships(const Widelands::Time&);
+	bool marine_main_decisions(const Time&);
+	bool check_ships(const Time&);
 	bool attempt_escape(ShipObserver& so);
 
 	// finding and owner
 	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t) const;
 
 	// Functions used for war and training stuff / defaultai_warfare.cc
-	bool check_militarysites(const Widelands::Time& gametime);
-	bool check_enemy_sites(const Widelands::Time& gametime);
+	bool check_militarysites(const Time& gametime);
+	bool check_enemy_sites(const Time& gametime);
 	void count_military_vacant_positions();
-	bool check_trainingsites(const Widelands::Time& gametime);
+	bool check_trainingsites(const Time& gametime);
 	// return single number of strength of vector of soldiers
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
 	// for militarysites (overloading the function)
-	BuildingNecessity check_building_necessity(BuildingObserver&, const Widelands::Time&);
+	BuildingNecessity check_building_necessity(BuildingObserver&, const Time&);
 	void soldier_trained(const Widelands::TrainingSite&);
-	bool critical_mine_unoccupied(const Widelands::Time&);
+	bool critical_mine_unoccupied(const Time&);
 
 	SoldiersStatus soldier_status_;
 	int32_t vacant_mil_positions_average_;
@@ -295,7 +295,7 @@ private:
 
 	// used by AI scheduler
 	uint32_t sched_stat_[20] = {0};
-	Widelands::Time next_ai_think_;
+	Time next_ai_think_;
 	// this is helping counter to track how many scheduler tasks are too delayed
 	// the purpose is to print out a warning that the game is pacing too fast
 	int32_t scheduler_delay_counter_;
@@ -343,15 +343,15 @@ private:
 	// for militarysites
 	uint32_t msites_in_constr() const;
 	uint32_t msites_built() const;
-	Widelands::Time military_last_dismantle_;
-	Widelands::Time military_last_build_;  // sometimes expansions just stops, this is time of last
+	Time military_last_dismantle_;
+	Time military_last_build_;  // sometimes expansions just stops, this is time of last
 	                                       // military building built
-	Widelands::Time time_of_last_construction_;
-	Widelands::Time next_mine_construction_due_;
+	Time time_of_last_construction_;
+	Time next_mine_construction_due_;
 	uint16_t fishers_count_;
 	uint16_t bakeries_count_;
 
-	Widelands::Time first_iron_mine_built;
+	Time first_iron_mine_built;
 
 	// for training sites per type
 	int16_t ts_finished_count_;
@@ -359,11 +359,11 @@ private:
 	int16_t ts_without_trainers_;
 
 	// for roads
-	Widelands::Time last_road_dismantled_;  // uses to prevent too frequent road dismantling
+	Time last_road_dismantled_;  // uses to prevent too frequent road dismantling
 	bool dead_ends_check_;                  // Do we need to check and dismantle dead ends?
 
-	Widelands::Time enemy_last_seen_;
-	Widelands::Time last_attack_time_;
+	Time enemy_last_seen_;
+	Time last_attack_time_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;
 
@@ -390,11 +390,11 @@ private:
 
 	// seafaring related
 	enum { kReprioritize, kStopShipyard, kStapShipyard };
-	static Widelands::Time last_seafaring_check_;
+	static Time last_seafaring_check_;
 	// False by default, until Map::allows_seafaring() is true
 	static bool map_allows_seafaring_;
 	uint32_t expedition_ship_;
-	Widelands::Duration expedition_max_duration;
+	Duration expedition_max_duration;
 	std::vector<int16_t> marine_task_queue;
 	std::unordered_set<uint32_t> expedition_visited_spots;
 

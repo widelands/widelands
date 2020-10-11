@@ -299,14 +299,14 @@ NearFlag::NearFlag() {
 EventTimeQueue::EventTimeQueue() {
 }
 
-void EventTimeQueue::push(const Widelands::Time& production_time, const uint32_t additional_id) {
+void EventTimeQueue::push(const Time& production_time, const uint32_t additional_id) {
 	queue.push_front(std::make_pair(production_time, additional_id));
 }
 
 // Return count of entries in log (deque), if id is provided, it counts corresponding
 // members. id here can be index of building, f.e. it count how many soldiers were
 // trained in particular type of training site
-uint32_t EventTimeQueue::count(const Widelands::Time& current_time, const uint32_t additional_id) {
+uint32_t EventTimeQueue::count(const Time& current_time, const uint32_t additional_id) {
 	strip_old(current_time);
 	if (additional_id == std::numeric_limits<uint32_t>::max()) {
 		return queue.size();
@@ -321,7 +321,7 @@ uint32_t EventTimeQueue::count(const Widelands::Time& current_time, const uint32
 	}
 }
 
-void EventTimeQueue::strip_old(const Widelands::Time& current_time) {
+void EventTimeQueue::strip_old(const Time& current_time) {
 	while (!queue.empty() && queue.back().first < current_time - duration_) {
 		queue.pop_back();
 	}
@@ -392,8 +392,8 @@ MineableField::MineableField(const Widelands::FCoords& fc)
 }
 
 EconomyObserver::EconomyObserver(Widelands::Economy& e) : economy(e) {
-	dismantle_grace_time = Widelands::Time();
-	fields_block_last_time = Widelands::Time(0);
+	dismantle_grace_time = Time();
+	fields_block_last_time = Time(0);
 }
 
 int32_t BuildingObserver::total_count() const {
@@ -622,7 +622,7 @@ int8_t ManagementData::shift_weight_value(const int8_t old_value, const bool agg
 
 // Used to score performance of AI
 // Should be disabled for "production"
-void ManagementData::review(const Widelands::Time& gametime,
+void ManagementData::review(const Time& gametime,
                             Widelands::PlayerNumber pn,
                             const uint32_t land,
                             const uint32_t max_e_land,
@@ -631,12 +631,12 @@ void ManagementData::review(const Widelands::Time& gametime,
                             const int16_t trained_soldiers,
                             const uint16_t strength,
                             const uint32_t existing_ps,
-                            const Widelands::Time& first_iron_mine_time) {
+                            const Time& first_iron_mine_time) {
 
 	// bonuses (1000 or nothing)
 	const uint16_t territory_bonus = (land > old_land || land > max_e_land) ? 1000 : 0;
 	const uint16_t iron_mine_bonus =
-	   (first_iron_mine_time < Widelands::Time(2 * 60 * 60 * 1000)) ? 1000 : 0;
+	   (first_iron_mine_time < Time(2 * 60 * 60 * 1000)) ? 1000 : 0;
 	const uint16_t attack_bonus = (attackers > 0) ? 1000 : 0;
 	const uint16_t training_bonus = (trained_soldiers > 0) ? 1000 : 0;
 
@@ -999,7 +999,7 @@ MilitarySiteSizeObserver::MilitarySiteSizeObserver() : in_construction(0), finis
 }
 
 // this represents a scheduler task
-SchedulerTask::SchedulerTask(const Widelands::Time& time,
+SchedulerTask::SchedulerTask(const Time& time,
                              const SchedulerTaskId t,
                              const uint8_t p,
                              const char* d)
@@ -1011,7 +1011,7 @@ bool SchedulerTask::operator<(const SchedulerTask& other) const {
 }
 
 // List of blocked fields with block time, with some accompanying functions
-void BlockedFields::add(Widelands::Coords coords, const Widelands::Time& till) {
+void BlockedFields::add(Widelands::Coords coords, const Time& till) {
 	const uint32_t hash = coords.hash();
 	if (blocked_fields_.count(hash) == 0) {
 		blocked_fields_.insert(std::make_pair(hash, till));
@@ -1025,7 +1025,7 @@ uint32_t BlockedFields::count() {
 	return blocked_fields_.size();
 }
 
-void BlockedFields::remove_expired(const Widelands::Time& gametime) {
+void BlockedFields::remove_expired(const Time& gametime) {
 	std::vector<uint32_t> fields_to_remove;
 	for (auto field : blocked_fields_) {
 		if (field.second < gametime) {
@@ -1062,7 +1062,7 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
      players_land(land),
      old_players_land(oland),
      old60_players_land(o60l) {
-	last_time_seen = Widelands::Time();
+	last_time_seen = Time();
 }
 
 // Inserting/updating data
@@ -1135,7 +1135,7 @@ void PlayersStrengths::recalculate_team_power() {
 }
 
 // This just goes over information about all enemies and where they were seen the last time
-bool PlayersStrengths::any_enemy_seen_lately(const Widelands::Time& gametime) {
+bool PlayersStrengths::any_enemy_seen_lately(const Time& gametime) {
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
 			return true;
@@ -1145,7 +1145,7 @@ bool PlayersStrengths::any_enemy_seen_lately(const Widelands::Time& gametime) {
 }
 
 // Returns count of nearby enemies
-uint8_t PlayersStrengths::enemies_seen_lately_count(const Widelands::Time& gametime) {
+uint8_t PlayersStrengths::enemies_seen_lately_count(const Time& gametime) {
 	uint8_t count = 0;
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
@@ -1156,7 +1156,7 @@ uint8_t PlayersStrengths::enemies_seen_lately_count(const Widelands::Time& gamet
 }
 
 // When we see enemy, we use this to store the time
-void PlayersStrengths::set_last_time_seen(const Widelands::Time& seentime,
+void PlayersStrengths::set_last_time_seen(const Time& seentime,
                                           Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
 		return;
@@ -1185,7 +1185,7 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number)
 
 // Was the player seen less then 2 minutes ago
 bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn,
-                                          const Widelands::Time& gametime) {
+                                          const Time& gametime) {
 	if (all_stats.count(pn) == 0) {
 		// Should happen only rarely so we print a warning here
 		log_warn("AI %d: player has no statistics yet\n", this_player_number);
@@ -1194,7 +1194,7 @@ bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn,
 	if (all_stats[pn].last_time_seen.is_invalid()) {
 		return false;
 	}
-	if (all_stats[pn].last_time_seen + Widelands::Duration(2U * 60U * 1000U) > gametime) {
+	if (all_stats[pn].last_time_seen + Duration(2U * 60U * 1000U) > gametime) {
 		return true;
 	}
 	return false;
@@ -1217,7 +1217,7 @@ uint32_t PlayersStrengths::get_player_land(Widelands::PlayerNumber pn) {
 }
 
 // Calculates the strength of the enemies seen within the last 2 minutes
-uint32_t PlayersStrengths::get_visible_enemies_power(const Widelands::Time& gametime) {
+uint32_t PlayersStrengths::get_visible_enemies_power(const Time& gametime) {
 	uint32_t pw = 0;
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
@@ -1308,7 +1308,7 @@ uint32_t PlayersStrengths::get_old60_player_land(Widelands::PlayerNumber pn) {
 	return all_stats[pn].old60_players_land;
 }
 
-uint32_t PlayersStrengths::get_old_visible_enemies_power(const Widelands::Time& gametime) {
+uint32_t PlayersStrengths::get_old_visible_enemies_power(const Time& gametime) {
 	uint32_t pw = 0;
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
@@ -1365,37 +1365,37 @@ bool PlayersStrengths::strong_enough(Widelands::PlayerNumber pl) {
 }
 
 // Update_time is used to prevent too frequent updates of statistics
-void PlayersStrengths::set_update_time(const Widelands::Time& gametime) {
+void PlayersStrengths::set_update_time(const Time& gametime) {
 	update_time = gametime;
 }
 
-const Widelands::Time& PlayersStrengths::get_update_time() {
+const Time& PlayersStrengths::get_update_time() {
 	return update_time;
 }
 
-FlagWarehouseDistances::FlagInfo::FlagInfo(const Widelands::Time& gametime,
+FlagWarehouseDistances::FlagInfo::FlagInfo(const Time& gametime,
                                            const uint16_t dist,
                                            const uint32_t wh) {
 	expiry_time = gametime + kFlagDistanceExpirationPeriod;
 	soft_expiry_time = gametime + kFlagDistanceExpirationPeriod / 2;
 	distance = dist;
 	nearest_warehouse = wh;
-	new_road_prohibited_till = Widelands::Time(0);
+	new_road_prohibited_till = Time(0);
 }
 FlagWarehouseDistances::FlagInfo::FlagInfo() {
-	expiry_time = Widelands::Time(0);
+	expiry_time = Time(0);
 	distance = 1000;
-	new_road_prohibited_till = Widelands::Time(0);
+	new_road_prohibited_till = Time(0);
 }
 
 // We are updating the distance info, but not all the time.
 // Always if after soft expiration period, but
 // if below expiration period only when the new value is lower than current one
 // In both cases new expiration times are calculated
-bool FlagWarehouseDistances::FlagInfo::update(const Widelands::Time& gametime,
+bool FlagWarehouseDistances::FlagInfo::update(const Time& gametime,
                                               const uint16_t new_distance,
                                               const uint32_t nearest_wh) {
-	const Widelands::Time new_expiry_time = gametime + kFlagDistanceExpirationPeriod;
+	const Time new_expiry_time = gametime + kFlagDistanceExpirationPeriod;
 
 	if (gametime > soft_expiry_time) {
 		distance = new_distance;
@@ -1413,7 +1413,7 @@ bool FlagWarehouseDistances::FlagInfo::update(const Widelands::Time& gametime,
 	return false;
 }
 
-uint16_t FlagWarehouseDistances::FlagInfo::get(const Widelands::Time& gametime,
+uint16_t FlagWarehouseDistances::FlagInfo::get(const Time& gametime,
                                                uint32_t* nw) const {
 	*nw = nearest_warehouse;
 	if (gametime <= expiry_time) {
@@ -1422,18 +1422,18 @@ uint16_t FlagWarehouseDistances::FlagInfo::get(const Widelands::Time& gametime,
 	return kFarButReachable;
 }
 
-void FlagWarehouseDistances::FlagInfo::set_road_built(const Widelands::Time& gametime) {
+void FlagWarehouseDistances::FlagInfo::set_road_built(const Time& gametime) {
 	// Prohibiting for next 60 seconds
-	new_road_prohibited_till = gametime + Widelands::Duration(60 * 1000);
+	new_road_prohibited_till = gametime + Duration(60 * 1000);
 }
 
-bool FlagWarehouseDistances::FlagInfo::is_road_prohibited(const Widelands::Time& gametime) const {
+bool FlagWarehouseDistances::FlagInfo::is_road_prohibited(const Time& gametime) const {
 	return new_road_prohibited_till > gametime;
 }
 
 bool FlagWarehouseDistances::set_distance(const uint32_t flag_coords,
                                           const uint16_t distance,
-                                          const Widelands::Time& gametime,
+                                          const Time& gametime,
                                           uint32_t const nearest_warehouse) {
 	if (flags_map.count(flag_coords) == 0) {
 		flags_map[flag_coords] =
@@ -1448,7 +1448,7 @@ uint16_t FlagWarehouseDistances::count() const {
 }
 
 int16_t FlagWarehouseDistances::get_distance(const uint32_t flag_coords,
-                                             const Widelands::Time& gametime,
+                                             const Time& gametime,
                                              uint32_t* nw) {
 	if (flags_map.count(flag_coords) == 0) {
 		*nw = 0;
@@ -1459,21 +1459,21 @@ int16_t FlagWarehouseDistances::get_distance(const uint32_t flag_coords,
 }
 
 void FlagWarehouseDistances::set_road_built(const uint32_t coords_hash,
-                                            const Widelands::Time& gametime) {
+                                            const Time& gametime) {
 	if (flags_map.count(coords_hash) == 1) {
 		flags_map[coords_hash].set_road_built(gametime);
 	}
 }
 
 bool FlagWarehouseDistances::is_road_prohibited(const uint32_t coords_hash,
-                                                const Widelands::Time& gametime) {
+                                                const Time& gametime) {
 	if (flags_map.count(coords_hash) == 1) {
 		return flags_map[coords_hash].is_road_prohibited(gametime);
 	}
 	return false;
 }
 
-bool FlagWarehouseDistances::remove_old_flag(const Widelands::Time& gametime) {
+bool FlagWarehouseDistances::remove_old_flag(const Time& gametime) {
 	for (std::map<uint32_t, FlagWarehouseDistances::FlagInfo>::iterator it = flags_map.begin();
 	     it != flags_map.end(); it++) {
 		if (it->second.expiry_time + kOldFlagRemoveTime < gametime) {

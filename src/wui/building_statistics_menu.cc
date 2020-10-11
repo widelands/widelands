@@ -36,8 +36,8 @@ constexpr int kButtonRowHeight = kButtonHeight + kMargin;
 constexpr int kLabelHeight = 18;
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
 
-constexpr Widelands::Duration kUpdateTimeInGametimeMs =
-   Widelands::Duration(1000);  //  1 second, gametime
+constexpr Duration kUpdateTimeInGametimeMs =
+   Duration(1000);  //  1 second, gametime
 
 inline InteractivePlayer& BuildingStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
@@ -549,7 +549,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
  */
 void BuildingStatisticsMenu::think() {
 	// Update statistics
-	const Widelands::Time& gametime = iplayer().game().get_gametime();
+	const Time& gametime = iplayer().game().get_gametime();
 
 	if (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
 		update_building_list();

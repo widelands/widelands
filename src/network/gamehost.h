@@ -53,7 +53,7 @@ struct GameHost : public GameController {
 	// GameController interface
 	void think() override;
 	void send_player_command(Widelands::PlayerCommand*) override;
-	Widelands::Duration get_frametime() override;
+	Duration get_frametime() override;
 	GameController::GameType get_game_type() override;
 
 	uint32_t real_speed() override;
@@ -160,8 +160,8 @@ private:
 	std::string get_computer_player_name(uint8_t playernum);
 	bool has_user_name(const std::string& name, uint8_t ignoreplayer = UserSettings::none());
 	void welcome_client(uint32_t number, std::string& playername);
-	void committed_network_time(const Widelands::Time& time);
-	void receive_client_time(uint32_t number, const Widelands::Time& time);
+	void committed_network_time(const Time& time);
+	void receive_client_time(uint32_t number, const Time& time);
 
 	void broadcast(SendPacket&);
 	void write_setting_map(SendPacket&);

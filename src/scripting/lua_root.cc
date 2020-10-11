@@ -252,12 +252,12 @@ int LuaGame::get_scenario_difficulty(lua_State* L) {
 */
 int LuaGame::launch_coroutine(lua_State* L) {
 	int nargs = lua_gettop(L);
-	Widelands::Time runtime = get_game(L).get_gametime();
+	Time runtime = get_game(L).get_gametime();
 	if (nargs < 2) {
 		report_error(L, "Too few arguments!");
 	}
 	if (nargs == 3) {
-		runtime = Widelands::Time(luaL_checkuint32(L, 3));
+		runtime = Time(luaL_checkuint32(L, 3));
 		lua_pop(L, 1);
 	}
 

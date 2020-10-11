@@ -37,16 +37,16 @@ enum class LogType {
 // Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
 // If `gametime` is not 0, a timestamp for the gametime will be prepended to the output;
 // otherwise, the real time will be used for the timestamp.
-void do_log(LogType, const Widelands::Time& gametime, const char*, ...) PRINTF_FORMAT(3, 4);
+void do_log(LogType, const Time& gametime, const char*, ...) PRINTF_FORMAT(3, 4);
 #define log_info_time(time, ...) do_log(LogType::kInfo, time, __VA_ARGS__)
 #define log_dbg_time(time, ...) do_log(LogType::kDebug, time, __VA_ARGS__)
 #define log_warn_time(time, ...) do_log(LogType::kWarning, time, __VA_ARGS__)
 #define log_err_time(time, ...) do_log(LogType::kError, time, __VA_ARGS__)
 
-#define log_info(...) do_log(LogType::kInfo, Widelands::Time(), __VA_ARGS__)
-#define log_dbg(...) do_log(LogType::kDebug, Widelands::Time(), __VA_ARGS__)
-#define log_warn(...) do_log(LogType::kWarning, Widelands::Time(), __VA_ARGS__)
-#define log_err(...) do_log(LogType::kError, Widelands::Time(), __VA_ARGS__)
+#define log_info(...) do_log(LogType::kInfo, Time(), __VA_ARGS__)
+#define log_dbg(...) do_log(LogType::kDebug, Time(), __VA_ARGS__)
+#define log_warn(...) do_log(LogType::kWarning, Time(), __VA_ARGS__)
+#define log_err(...) do_log(LogType::kError, Time(), __VA_ARGS__)
 
 extern bool g_verbose;
 

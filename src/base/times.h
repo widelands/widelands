@@ -27,11 +27,10 @@
 class FileRead;
 class FileWrite;
 
-namespace Widelands {
-
 // The difference of two points in time, in milliseconds gametime.
 struct Duration {
-	// The default-constructed Duration is the special value "endless"
+	// The default-constructed Duration is the special "invalid" value
+	// (semantically an "endless" duration)
 	constexpr explicit Duration(uint32_t v = std::numeric_limits<uint32_t>::max()) : value_(v) {
 	}
 	void operator+=(const Duration& delta) {
@@ -132,7 +131,8 @@ private:
 
 // A time point, in milliseconds gametime.
 struct Time {
-	// The default-constructed Time is the special value "never"
+	// The default-constructed Time is the special "invalid" value
+	// (semantically meaning "never")
 	constexpr explicit Time(uint32_t v = std::numeric_limits<uint32_t>::max()) : value_(v) {
 	}
 
@@ -209,7 +209,5 @@ struct Time {
 private:
 	uint32_t value_;
 };
-
-}  // namespace Widelands
 
 #endif  // end of include guard: WL_BASE_TIMES_H

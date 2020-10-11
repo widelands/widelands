@@ -83,7 +83,7 @@ bool NetAddress::is_valid() const {
 	return port != 0 && !ip.is_unspecified();
 }
 
-CmdNetCheckSync::CmdNetCheckSync(const Widelands::Time& dt, SyncReportCallback cb)
+CmdNetCheckSync::CmdNetCheckSync(const Time& dt, SyncReportCallback cb)
    : Command(dt), callback_(std::move(cb)) {
 }
 
@@ -92,10 +92,10 @@ void CmdNetCheckSync::execute(Widelands::Game&) {
 }
 
 NetworkTime::NetworkTime() {
-	reset(Widelands::Time(0));
+	reset(Time(0));
 }
 
-void NetworkTime::reset(const Widelands::Time& ntime) {
+void NetworkTime::reset(const Time& ntime) {
 	networktime_ = time_ = ntime;
 	lastframe_ = SDL_GetTicks();
 	latency_ = 0;
@@ -143,18 +143,18 @@ void NetworkTime::think(uint32_t const speed) {
 		delta = behind;
 	}
 
-	time_.increment(Widelands::Duration(delta));
+	time_.increment(Duration(delta));
 }
 
-const Widelands::Time& NetworkTime::time() const {
+const Time& NetworkTime::time() const {
 	return time_;
 }
 
-const Widelands::Time& NetworkTime::networktime() const {
+const Time& NetworkTime::networktime() const {
 	return networktime_;
 }
 
-void NetworkTime::receive(const Widelands::Time& ntime) {
+void NetworkTime::receive(const Time& ntime) {
 	if (ntime < networktime_) {
 		throw wexception("NetworkTime: Time appears to be running backwards.");
 	}

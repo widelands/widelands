@@ -301,7 +301,7 @@ void RenderTarget::blit_animation(const Vector2f& dst,
                                   const Widelands::Coords& coords,
                                   const float scale,
                                   uint32_t animation_id,
-                                  const Widelands::Time& time,
+                                  const Time& time,
                                   const RGBColor* player_color,
                                   const float opacity,
                                   const int percent_from_bottom) {

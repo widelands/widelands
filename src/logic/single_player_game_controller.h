@@ -30,7 +30,7 @@ public:
 
 	void think() override;
 	void send_player_command(Widelands::PlayerCommand*) override;
-	Widelands::Duration get_frametime() override;
+	Duration get_frametime() override;
 	GameController::GameType get_game_type() override;
 	uint32_t real_speed() override;
 	uint32_t desired_speed() override;
@@ -45,7 +45,7 @@ private:
 	Widelands::Game& game_;
 	bool use_ai_;
 	uint32_t lastframe_;
-	Widelands::Time time_;
+	Time time_;
 	uint32_t speed_;  ///< current game speed, in milliseconds per second
 	bool paused_;
 	uint32_t player_cmdserial_;

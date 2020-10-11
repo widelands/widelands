@@ -803,7 +803,7 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
 
 void InteractiveBase::draw_bridges(RenderTarget* dst,
                                    const FieldsToDraw::Field* f,
-                                   const Widelands::Time& gametime,
+                                   const Time& gametime,
                                    float scale) const {
 	if (Widelands::is_bridge_segment(f->road_e)) {
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,

@@ -77,7 +77,7 @@ struct GameClientImpl {
 	bool server_is_waiting;
 
 	/// Data for the last time message we sent.
-	Widelands::Time lasttimestamp;
+	Time lasttimestamp;
 	uint32_t lasttimestamp_realtime;
 
 	/// The real target speed, in milliseconds per second.
@@ -331,8 +331,8 @@ void GameClient::send_player_command(Widelands::PlayerCommand* pc) {
 	delete pc;
 }
 
-Widelands::Duration GameClient::get_frametime() {
-	return Widelands::Time(d->time.time()) - d->game->get_gametime();
+Duration GameClient::get_frametime() {
+	return Time(d->time.time()) - d->game->get_gametime();
 }
 
 GameController::GameType GameClient::get_game_type() {
@@ -899,7 +899,7 @@ void GameClient::handle_playercommand(RecvPacket& packet) {
 		throw DisconnectException("PLAYERCMD_WO_GAME");
 	}
 
-	const Widelands::Time time(packet.unsigned_32());
+	const Time time(packet.unsigned_32());
 	Widelands::PlayerCommand& plcmd = *Widelands::PlayerCommand::deserialize(packet);
 	plcmd.set_duetime(time);
 	d->game->enqueue_command(&plcmd);
@@ -913,7 +913,7 @@ void GameClient::handle_syncrequest(RecvPacket& packet) {
 	if (!d->game) {
 		throw DisconnectException("SYNCREQUEST_WO_GAME");
 	}
-	const Widelands::Time time(packet.unsigned_32());
+	const Time time(packet.unsigned_32());
 	d->time.receive(time);
 	d->game->enqueue_command(new CmdNetCheckSync(time, [this] { sync_report_callback(); }));
 	d->game->report_sync_request();
@@ -1026,7 +1026,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		log_info("[Client] speed: %u.%03u\n", d->realspeed / 1000, d->realspeed % 1000);
 		break;
 	case NETCMD_TIME:
-		d->time.receive(Widelands::Time(packet.unsigned_32()));
+		d->time.receive(Time(packet.unsigned_32()));
 		break;
 	case NETCMD_WAIT:
 		log_info("[Client]: server is waiting.\n");

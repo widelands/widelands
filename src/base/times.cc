@@ -22,8 +22,6 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 
-namespace Widelands {
-
 Duration::Duration(FileRead& fr) : value_(fr.unsigned_32()) {
 }
 void Duration::save(FileWrite& fw) const {
@@ -35,4 +33,3 @@ Time::Time(FileRead& fr) : value_(fr.unsigned_32()) {
 void Time::save(FileWrite& fw) const {
 	fw.unsigned_32(value_);
 }
-}  // namespace Widelands

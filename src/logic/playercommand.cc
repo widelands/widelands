@@ -77,7 +77,7 @@ BillOfMaterials deserialize_bill_of_materials(StreamRead* des) {
 
 /*** class PlayerCommand ***/
 
-PlayerCommand::PlayerCommand(const Widelands::Time& time, const PlayerNumber s)
+PlayerCommand::PlayerCommand(const Time& time, const PlayerNumber s)
    : GameLogicCommand(time), sender_(s), cmdserial_(0) {
 }
 
@@ -327,7 +327,7 @@ void CmdBuildFlag::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 
 /*** class Cmd_BuildRoad ***/
 
-CmdBuildRoad::CmdBuildRoad(const Widelands::Time& t, int32_t p, Path& pa)
+CmdBuildRoad::CmdBuildRoad(const Time& t, int32_t p, Path& pa)
    : PlayerCommand(t, p),
      path(&pa),
      start(pa.get_start()),
@@ -411,7 +411,7 @@ void CmdBuildRoad::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 
 /*** class Cmd_BuildWaterway ***/
 
-CmdBuildWaterway::CmdBuildWaterway(const Widelands::Time& t, int32_t p, Path& pa)
+CmdBuildWaterway::CmdBuildWaterway(const Time& t, int32_t p, Path& pa)
    : PlayerCommand(t, p),
      path(&pa),
      start(pa.get_start()),
@@ -1163,7 +1163,7 @@ void CmdShipCancelExpedition::write(FileWrite& fw, EditorGameBase& egbase, MapOb
 }
 
 /*** class Cmd_SetWarePriority ***/
-CmdSetWarePriority::CmdSetWarePriority(const Widelands::Time& init_duetime,
+CmdSetWarePriority::CmdSetWarePriority(const Time& init_duetime,
                                        const PlayerNumber init_sender,
                                        PlayerImmovable& imm,
                                        const int32_t init_type,
@@ -1252,7 +1252,7 @@ void CmdSetWarePriority::serialize(StreamWrite& ser) {
 }
 
 /*** class Cmd_SetWareMaxFill ***/
-CmdSetInputMaxFill::CmdSetInputMaxFill(const Widelands::Time& init_duetime,
+CmdSetInputMaxFill::CmdSetInputMaxFill(const Time& init_duetime,
                                        const PlayerNumber init_sender,
                                        PlayerImmovable& imm,
                                        const DescriptionIndex index,
@@ -1360,7 +1360,7 @@ void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
 	ser.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
-CmdChangeTargetQuantity::CmdChangeTargetQuantity(const Widelands::Time& init_duetime,
+CmdChangeTargetQuantity::CmdChangeTargetQuantity(const Time& init_duetime,
                                                  const PlayerNumber init_sender,
                                                  const uint32_t init_economy,
                                                  const DescriptionIndex init_ware_type)
@@ -1395,7 +1395,7 @@ void CmdChangeTargetQuantity::serialize(StreamWrite& ser) {
 	ser.unsigned_8(ware_type());
 }
 
-CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const Widelands::Time& init_duetime,
+CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const Time& init_duetime,
                                                    const PlayerNumber init_sender,
                                                    const uint32_t init_economy,
                                                    const DescriptionIndex init_ware_type,
@@ -1448,7 +1448,7 @@ void CmdSetWareTargetQuantity::serialize(StreamWrite& ser) {
 	ser.unsigned_32(permanent_);
 }
 
-CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const Widelands::Time& init_duetime,
+CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const Time& init_duetime,
                                                        const PlayerNumber init_sender,
                                                        const uint32_t init_economy,
                                                        const DescriptionIndex init_ware_type,
@@ -1848,7 +1848,7 @@ void CmdMessageSetStatusArchived::serialize(StreamWrite& ser) {
 }
 
 /*** struct Cmd_SetStockPolicy ***/
-CmdSetStockPolicy::CmdSetStockPolicy(const Widelands::Time& time,
+CmdSetStockPolicy::CmdSetStockPolicy(const Time& time,
                                      PlayerNumber p,
                                      Building& wh,
                                      bool isworker,
@@ -1950,7 +1950,7 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
-CmdProposeTrade::CmdProposeTrade(const Widelands::Time& time, PlayerNumber pn, const Trade& trade)
+CmdProposeTrade::CmdProposeTrade(const Time& time, PlayerNumber pn, const Trade& trade)
    : PlayerCommand(time, pn), trade_(trade) {
 }
 

@@ -154,7 +154,7 @@ private:
 	std::unique_ptr<UI::Button> attack_button_;
 
 	/// The last time the information in this Panel got updated
-	Widelands::Time lastupdate_;
+	Time lastupdate_;
 };
 
 #endif  // end of include guard: WL_WUI_ATTACK_BOX_H

@@ -26,7 +26,7 @@
 
 namespace AI {
 
-bool DefaultAI::check_enemy_sites(const Widelands::Time& gametime) {
+bool DefaultAI::check_enemy_sites(const Time& gametime) {
 
 	const Widelands::Map& map = game().map();
 
@@ -134,7 +134,7 @@ bool DefaultAI::check_enemy_sites(const Widelands::Time& gametime) {
 	// removing sites we saw too long ago
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
 	     site != enemy_sites.end(); ++site) {
-		if (site->second.last_time_seen + Widelands::Duration(20 * 60 * 1000) < gametime) {
+		if (site->second.last_time_seen + Duration(20 * 60 * 1000) < gametime) {
 			disappeared_sites.push_back(site->first);
 		}
 	}
@@ -148,14 +148,14 @@ bool DefaultAI::check_enemy_sites(const Widelands::Time& gametime) {
 
 		assert(site->second.last_time_attacked <= gametime);
 		// Do not attack too soon
-		if (Widelands::Duration(std::min<uint32_t>(site->second.attack_counter, 10) * 20 * 1000) >
+		if (Duration(std::min<uint32_t>(site->second.attack_counter, 10) * 20 * 1000) >
 		    (gametime - site->second.last_time_attacked)) {
 			continue;
 		}
 
 		++count;
 		// we test max 12 sites and prefer ones tested more then 1 min ago
-		if (((site->second.last_tested + Widelands::Duration(enemysites_check_delay_ * 1000)) >
+		if (((site->second.last_tested + Duration(enemysites_check_delay_ * 1000)) >
 		        gametime &&
 		     count > 4) ||
 		    count > 12) {
@@ -214,7 +214,7 @@ bool DefaultAI::check_enemy_sites(const Widelands::Time& gametime) {
 
 			// Site is still there but not visible for us
 			if (!is_visible) {
-				if (site->second.last_time_seen + Widelands::Duration(20 * 60 * 1000) < gametime) {
+				if (site->second.last_time_seen + Duration(20 * 60 * 1000) < gametime) {
 					log_dbg_time(
 					   gametime, "site %d not visible for more than 20 minutes\n", site->first);
 					disappeared_sites.push_back(site->first);
@@ -364,12 +364,12 @@ bool DefaultAI::check_enemy_sites(const Widelands::Time& gametime) {
 				                -3;
 				// TODO(Nordfriese): Passing a PlayerNumber to a function that expects
 				// a Time is a very bad idea, no idea what was intended here…
-				inputs[18] = (player_statistics.get_visible_enemies_power(Widelands::Time(pn)) >
-				              player_statistics.get_old_visible_enemies_power(Widelands::Time(pn))) ?
+				inputs[18] = (player_statistics.get_visible_enemies_power(Time(pn)) >
+				              player_statistics.get_old_visible_enemies_power(Time(pn))) ?
 				                -1 :
 				                1;
-				inputs[19] = (player_statistics.get_visible_enemies_power(Widelands::Time(pn)) >
-				              player_statistics.get_old_visible_enemies_power(Widelands::Time(pn))) ?
+				inputs[19] = (player_statistics.get_visible_enemies_power(Time(pn)) >
+				              player_statistics.get_old_visible_enemies_power(Time(pn))) ?
 				                -3 :
 				                3;
 				inputs[20] = (player_statistics.get_player_power(owner_number) >
@@ -400,38 +400,38 @@ bool DefaultAI::check_enemy_sites(const Widelands::Time& gametime) {
 				inputs[33] = soldier_trained_log.count(gametime) / 2;
 				inputs[34] = general_score * 2;
 				inputs[35] = -1;
-				inputs[36] = (gametime < Widelands::Time(15 * 60 * 1000)) ? -1 : 0;
-				inputs[37] = (gametime < Widelands::Time(20 * 60 * 1000)) ? -1 : 0;
-				inputs[38] = (gametime < Widelands::Time(25 * 60 * 1000)) ? -1 : 0;
-				inputs[39] = (gametime < Widelands::Time(30 * 60 * 1000)) ? -1 : 0;
-				inputs[40] = (gametime < Widelands::Time(35 * 60 * 1000)) ? -1 : 0;
-				inputs[41] = (gametime < Widelands::Time(40 * 60 * 1000)) ? -1 : 0;
+				inputs[36] = (gametime < Time(15 * 60 * 1000)) ? -1 : 0;
+				inputs[37] = (gametime < Time(20 * 60 * 1000)) ? -1 : 0;
+				inputs[38] = (gametime < Time(25 * 60 * 1000)) ? -1 : 0;
+				inputs[39] = (gametime < Time(30 * 60 * 1000)) ? -1 : 0;
+				inputs[40] = (gametime < Time(35 * 60 * 1000)) ? -1 : 0;
+				inputs[41] = (gametime < Time(40 * 60 * 1000)) ? -1 : 0;
 				inputs[42] =
-				   (site->second.last_time_attacked + Widelands::Duration(1 * 60 * 1000) > gametime) ?
+				   (site->second.last_time_attacked + Duration(1 * 60 * 1000) > gametime) ?
 				      -3 :
 				      0;
 				inputs[43] =
-				   (site->second.last_time_attacked + Widelands::Duration(30 * 1000) > gametime) ? -1 :
+				   (site->second.last_time_attacked + Duration(30 * 1000) > gametime) ? -1 :
 				                                                                                   0;
 				inputs[44] =
-				   (site->second.last_time_attacked + Widelands::Duration(2 * 60 * 1000) > gametime) ?
+				   (site->second.last_time_attacked + Duration(2 * 60 * 1000) > gametime) ?
 				      -2 :
 				      0;
 				inputs[45] =
-				   (site->second.last_time_attacked + Widelands::Duration(40 * 1000) > gametime) ? -1 :
+				   (site->second.last_time_attacked + Duration(40 * 1000) > gametime) ? -1 :
 				                                                                                   0;
 				inputs[46] =
-				   (site->second.last_time_attacked + Widelands::Duration(3 * 60 * 1000) > gametime) ?
+				   (site->second.last_time_attacked + Duration(3 * 60 * 1000) > gametime) ?
 				      -1 :
 				      0;
 				inputs[47] =
-				   (site->second.last_time_attacked + Widelands::Duration(30 * 1000) > gametime) ? -1 :
+				   (site->second.last_time_attacked + Duration(30 * 1000) > gametime) ? -1 :
 				                                                                                   0;
 				inputs[48] =
-				   (site->second.last_time_attacked + Widelands::Duration(90 * 1000) > gametime) ? -1 :
+				   (site->second.last_time_attacked + Duration(90 * 1000) > gametime) ? -1 :
 				                                                                                   0;
 				inputs[49] =
-				   (site->second.last_time_attacked + Widelands::Duration(2 * 60 * 1000) > gametime) ?
+				   (site->second.last_time_attacked + Duration(2 * 60 * 1000) > gametime) ?
 				      -1 :
 				      0;
 				inputs[50] = soldier_trained_log.count(gametime);
@@ -707,7 +707,7 @@ void DefaultAI::count_military_vacant_positions() {
 
 // this function only check with trainingsites
 // manipulates input queues and soldier capacity
-bool DefaultAI::check_trainingsites(const Widelands::Time& gametime) {
+bool DefaultAI::check_trainingsites(const Time& gametime) {
 
 	if (trainingsites.empty()) {
 		set_taskpool_task_time(gametime + kTrainingSitesCheckInterval + kTrainingSitesCheckInterval,
@@ -940,7 +940,7 @@ bool DefaultAI::check_trainingsites(const Widelands::Time& gametime) {
  *
  * \returns true if something was changed
  */
-bool DefaultAI::check_militarysites(const Widelands::Time& gametime) {
+bool DefaultAI::check_militarysites(const Time& gametime) {
 
 	// Only useable, if defaultAI owns at least one militarysite
 	if (militarysites.empty()) {
@@ -952,7 +952,7 @@ bool DefaultAI::check_militarysites(const Widelands::Time& gametime) {
 	Widelands::MilitarySite* ms = militarysites.front().site;
 
 	// Don't do anything if last change took place lately
-	if (militarysites.front().last_change + Widelands::Duration(2 * 60 * 1000) > gametime) {
+	if (militarysites.front().last_change + Duration(2 * 60 * 1000) > gametime) {
 		militarysites.push_back(militarysites.front());
 		militarysites.pop_front();
 		return false;
@@ -987,7 +987,7 @@ bool DefaultAI::check_militarysites(const Widelands::Time& gametime) {
 
 	const bool can_be_dismantled =
 	   (current_soldiers == 1 ||
-	    militarysites.front().built_time + Widelands::Duration(10 * 60 * 1000) < gametime) &&
+	    militarysites.front().built_time + Duration(10 * 60 * 1000) < gametime) &&
 	   bf.military_loneliness < 1000 - 2 * std::abs(management_data.get_military_number_at(14));
 
 	bool should_be_dismantled = false;
@@ -1110,7 +1110,7 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 // and we force some proportion to the number of military sites
 // sidenote: function can return kNotNeeded, but it means 'not allowed'
 BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
-                                                      const Widelands::Time& gametime) {
+                                                      const Time& gametime) {
 
 	assert(militarysites.size() == msites_built());
 
@@ -1121,7 +1121,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	assert(size >= Widelands::BaseImmovable::SMALL && size <= Widelands::BaseImmovable::BIG);
 
 	if (gametime < military_last_build_ +
-	                  Widelands::Duration(10 + std::abs(management_data.get_military_number_at(43)) *
+	                  Duration(10 + std::abs(management_data.get_military_number_at(43)) *
 	                                              1000 / 2)) {
 		return BuildingNecessity::kForbidden;
 	}
@@ -1296,15 +1296,15 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[65] = (bo.build_material_shortage) ? -1 : 0;
 	inputs[66] = (bo.build_material_shortage) ? -2 : 0;
 	inputs[67] = (bo.build_material_shortage) ? -8 : 0;
-	inputs[68] = (gametime < Widelands::Time(15 * 60 * 1000)) ? (size - 1) * -1 : 0;
-	inputs[69] = (gametime < Widelands::Time(30 * 60 * 1000)) ? (size - 1) * -1 : 0;
-	inputs[70] = (gametime < Widelands::Time(45 * 60 * 1000)) ? (size - 1) * -1 : 0;
-	inputs[71] = (gametime < Widelands::Time(15 * 60 * 1000)) ? (size - 1) * -2 : 0;
-	inputs[72] = (gametime < Widelands::Time(30 * 60 * 1000)) ? (size - 1) * -2 : 0;
-	inputs[73] = (gametime < Widelands::Time(45 * 60 * 1000)) ? (size - 1) * -2 : 0;
-	inputs[74] = (gametime < Widelands::Time(15 * 60 * 1000)) ? (size - 1) * -3 : 0;
-	inputs[75] = (gametime < Widelands::Time(30 * 60 * 1000)) ? (size - 1) * -3 : 0;
-	inputs[76] = (gametime < Widelands::Time(45 * 60 * 1000)) ? (size - 1) * -3 : 0;
+	inputs[68] = (gametime < Time(15 * 60 * 1000)) ? (size - 1) * -1 : 0;
+	inputs[69] = (gametime < Time(30 * 60 * 1000)) ? (size - 1) * -1 : 0;
+	inputs[70] = (gametime < Time(45 * 60 * 1000)) ? (size - 1) * -1 : 0;
+	inputs[71] = (gametime < Time(15 * 60 * 1000)) ? (size - 1) * -2 : 0;
+	inputs[72] = (gametime < Time(30 * 60 * 1000)) ? (size - 1) * -2 : 0;
+	inputs[73] = (gametime < Time(45 * 60 * 1000)) ? (size - 1) * -2 : 0;
+	inputs[74] = (gametime < Time(15 * 60 * 1000)) ? (size - 1) * -3 : 0;
+	inputs[75] = (gametime < Time(30 * 60 * 1000)) ? (size - 1) * -3 : 0;
+	inputs[76] = (gametime < Time(45 * 60 * 1000)) ? (size - 1) * -3 : 0;
 	inputs[77] =
 	   (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 2) ?
 	      1 :
@@ -1442,7 +1442,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 // (AI will then wait till training site is stocked)
 void DefaultAI::soldier_trained(const Widelands::TrainingSite& site) {
 
-	const Widelands::Time& gametime = game().get_gametime();
+	const Time& gametime = game().get_gametime();
 
 	for (TrainingSiteObserver& trainingsite_obs : trainingsites) {
 		if (trainingsite_obs.site == &site) {

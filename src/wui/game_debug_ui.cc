@@ -214,7 +214,7 @@ void FieldDebugWindow::think() {
 		            vision == Widelands::SeeUnseeNode::kPreviouslySeen ? "unseen" : "unexplored"))
 		          .str();
 		{
-			Widelands::Time const time_last_surveyed =
+			Time const time_last_surveyed =
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::D)];
 
 			if (time_last_surveyed.is_valid()) {
@@ -228,7 +228,7 @@ void FieldDebugWindow::think() {
 			}
 		}
 		{
-			Widelands::Time const time_last_surveyed =
+			Time const time_last_surveyed =
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::R)];
 
 			if (time_last_surveyed.is_valid()) {
