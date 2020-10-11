@@ -99,6 +99,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 				// When the participants change, create new contents for dropdown
 				has_team_ = chat_.participants_->needs_teamchat();
 				prepare_recipients();
+				select_recipient();
 			});
 		hbox_.add(&recipient_dropdown_, UI::Box::Resizing::kAlign);
 		hbox_.add_space(4);
@@ -287,6 +288,35 @@ void GameChatPanel::prepare_recipients() {
 					"images/players/genstats_player.png"));
 		}
 	}
+}
+
+/**
+ * Tries to select the recipient entered in the input field in the dropdown
+ * Sets errored-state otherwise. Returns whether recipient could be selected
+ */
+bool GameChatPanel::select_recipient() {
+	// Get the current recipient
+	std::string recipient = "";
+	const std::string& text = editbox.text();
+	if (!text.empty() && text[0] == '@') {
+		// Get the recipient string including the first space
+		// If there is no space, return the whole string
+		const size_t pos_space = text.find(' ');
+		if (pos_space != std::string::npos) {
+			recipient = text.substr(0, pos_space + 1);
+		} else {
+			// Append a space since that increases the chance
+			// to get a match in the dropdown
+			recipient = text + ' ';
+		}
+	}
+	// Try to re-set the recipient
+	recipient_dropdown_.select(recipient);
+	if (recipient != recipient_dropdown_.get_selected()) {
+		recipient_dropdown_.set_errored(_("Unknown Recipient"));
+		return false;
+	}
+	return true;
 }
 
 /**

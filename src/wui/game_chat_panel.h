@@ -68,6 +68,7 @@ private:
 	void draw(RenderTarget& dst) override;
 	void set_recipient();
 	void prepare_recipients();
+	bool select_recipient();
 
 	ChatProvider& chat_;
 	UI::Box vbox_;
