@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# ThonyVezbe <a.guechoum@gmail.com>, 2020
 # Irriep Nala Novram <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-18 13:37+0000\n"
-"PO-Revision-Date: 2020-08-23 15:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-05 14:30+0000\n"
+"Last-Translator: ThonyVezbe <a.guechoum@gmail.com>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -104,7 +105,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Tower"
-msgstr ""
+msgstr "Tour"
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:56
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:52
@@ -145,7 +146,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:8
 msgctxt "atlanteans_building"
 msgid "High Tower"
-msgstr ""
+msgstr "Tour uhel"
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:28
 msgid "Your soldiers have occupied your high tower."
@@ -171,7 +172,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Small Tower"
-msgstr ""
+msgstr "Tour bihan"
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:40
 msgid "Your soldiers have occupied your small tower."
@@ -254,7 +255,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:8
 msgctxt "barbarians_building"
 msgid "Fortress"
-msgstr ""
+msgstr "Kreñvlec'h"
 
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:70
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:67
@@ -321,7 +322,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:8
 msgctxt "barbarians_building"
 msgid "Tower"
-msgstr ""
+msgstr "Tour"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:8
@@ -359,13 +360,13 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:8
 msgctxt "empire_building"
 msgid "Castle"
-msgstr ""
+msgstr "Kastell"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:8
 msgctxt "empire_building"
 msgid "Fortress"
-msgstr ""
+msgstr "Kreñvlec'h"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:8
@@ -408,13 +409,13 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:8
 msgctxt "empire_building"
 msgid "Tower"
-msgstr ""
+msgstr "Tour"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:8
 msgctxt "frisians_building"
 msgid "Fortress"
-msgstr ""
+msgstr "Kreñvlec'h"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:8
@@ -452,13 +453,13 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:8
 msgctxt "frisians_building"
 msgid "Tower"
-msgstr ""
+msgstr "Tour"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:8
 msgctxt "frisians_building"
 msgid "Wooden Tower"
-msgstr ""
+msgstr "Tour koad"
 
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:62
 msgid "Your soldiers have occupied your wooden tower."
@@ -484,7 +485,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:8
 msgctxt "frisians_building"
 msgid "High Wooden Tower"
-msgstr ""
+msgstr "Tour koad uhel"
 
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:42
 msgid "Your soldiers have occupied your high wooden tower."
@@ -591,7 +592,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:87
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:53
 msgid "working"
-msgstr ""
+msgstr "labourat"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
 #. ...
@@ -609,13 +610,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Bakery"
-msgstr ""
+msgstr "Ti ar baraer"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:52
 msgctxt "atlanteans_building"
 msgid "baking bread"
-msgstr ""
+msgstr "fardañ bara"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:8
@@ -627,7 +628,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:55
 msgctxt "atlanteans_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "tuta ur soudard"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:8
@@ -693,7 +694,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Coal Mine"
-msgstr ""
+msgstr "Mengleuz glaou"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:55
@@ -724,7 +725,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:120
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:98
 msgid "No Coal"
-msgstr ""
+msgstr "Tamm glaou ebet"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:97
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:98
@@ -795,7 +796,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Farm"
-msgstr ""
+msgstr "Ti-feurm"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:56
@@ -837,7 +838,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:50
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:63
 msgid "No Fish"
-msgstr ""
+msgstr "Pesk ebet"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
@@ -863,7 +864,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Ti ar pesketaer"
 
 #. TRANSLATORS: Completed/Skipped/Did not start fishing because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:43
@@ -872,7 +873,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:79
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:54
 msgid "fishing"
-msgstr ""
+msgstr "pesketa"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:55
 msgctxt "atlanteans_building"
@@ -886,7 +887,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Forester’s House"
-msgstr ""
+msgstr "Ti ar foricher"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:43
@@ -911,7 +912,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Gold Mine"
-msgstr ""
+msgstr "Mengleuz aour"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:55
@@ -940,7 +941,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:106
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:96
 msgid "No Gold"
-msgstr ""
+msgstr "Tamm aour ebet"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:85
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:83
@@ -976,7 +977,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Hunter’s House"
-msgstr ""
+msgstr "Ti ar chaseour"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:40
@@ -984,7 +985,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:40
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:53
 msgid "hunting"
-msgstr ""
+msgstr "chaseal"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:60
@@ -1013,7 +1014,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mengleuz houarn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:55
@@ -1042,7 +1043,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:106
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:98
 msgid "No Iron"
-msgstr ""
+msgstr "Tamm houarn ebet"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:89
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:83
@@ -1066,7 +1067,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Mill"
-msgstr ""
+msgstr "Milin"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:60
@@ -1152,7 +1153,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:71
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:72
 msgid "constructing a ship"
-msgstr ""
+msgstr "sevel ul lestr"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:8
@@ -1358,14 +1359,14 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Well"
-msgstr ""
+msgstr "Puñs"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:58
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:55
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:65
 msgid "No Water"
-msgstr ""
+msgstr "Dour ebet"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:57
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:59
@@ -1398,7 +1399,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:48
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:61
 msgid "No Trees"
-msgstr ""
+msgstr "Gwezenn ebet"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:56
@@ -1443,7 +1444,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:8
 msgctxt "barbarians_building"
 msgid "Bakery"
-msgstr ""
+msgstr "Ti ar baraer"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:55
@@ -1461,7 +1462,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:57
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "tuta ur soudard"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:8
@@ -1496,7 +1497,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/init.lua:8
 msgctxt "barbarians_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Breserezh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because
 #. ...
@@ -1526,7 +1527,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:8
 msgctxt "barbarians_building"
 msgid "Coal Mine"
-msgstr ""
+msgstr "Mengleuz glaou"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:100
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:93
@@ -1540,7 +1541,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:8
 msgctxt "barbarians_building"
 msgid "Deep Coal Mine"
-msgstr ""
+msgstr "Mengleuz glaou don"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:8
@@ -1560,7 +1561,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:8
 msgctxt "barbarians_building"
 msgid "Farm"
-msgstr ""
+msgstr "Ti-feurm"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:64
@@ -1590,7 +1591,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Fisher’s Hut"
-msgstr ""
+msgstr "Lochenn ar pesketaer"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:60
 msgctxt "barbarians_building"
@@ -1609,7 +1610,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:8
 msgctxt "barbarians_building"
 msgid "Gold Mine"
-msgstr ""
+msgstr "Mengleuz aour"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:85
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:93
@@ -1623,7 +1624,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:8
 msgctxt "barbarians_building"
 msgid "Deep Gold Mine"
-msgstr ""
+msgstr "Mengleuz aour don"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:8
@@ -1692,7 +1693,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Hunter’s Hut"
-msgstr ""
+msgstr "Lochenn ar chaseour"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:64
@@ -1713,7 +1714,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:8
 msgctxt "barbarians_building"
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mengleuz houarn"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:85
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:93
@@ -1727,7 +1728,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:8
 msgctxt "barbarians_building"
 msgid "Deep Iron Mine"
-msgstr ""
+msgstr "Mengleuz houarn don"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:8
@@ -1816,7 +1817,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:88
 msgid "brewing beer"
-msgstr ""
+msgstr "bresañ bier"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:8
@@ -1883,7 +1884,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:8
 msgctxt "barbarians_building"
 msgid "Tavern"
-msgstr ""
+msgstr "Tavarn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:8
@@ -1925,7 +1926,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:8
 msgctxt "barbarians_building"
 msgid "Well"
-msgstr ""
+msgstr "Puñs"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:60
 msgctxt "barbarians_building"
@@ -1971,13 +1972,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:8
 msgctxt "empire_building"
 msgid "Bakery"
-msgstr ""
+msgstr "Ti ar baraer"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:57
 msgctxt "empire_building"
 msgid "baking bread"
-msgstr ""
+msgstr "fardañ bara"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:8
@@ -1989,13 +1990,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:56
 msgctxt "empire_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "tuta ur soudard"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:8
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Breserezh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:8
@@ -2007,7 +2008,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:8
 msgctxt "empire_building"
 msgid "Coal Mine"
-msgstr ""
+msgstr "Mengleuz glaou"
 
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:99
 msgctxt "empire_building"
@@ -2020,7 +2021,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:8
 msgctxt "empire_building"
 msgid "Deep Coal Mine"
-msgstr ""
+msgstr "Mengleuz glaou don"
 
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:79
 msgctxt "empire_building"
@@ -2046,7 +2047,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:8
 msgctxt "empire_building"
 msgid "Farm"
-msgstr ""
+msgstr "Ti-feurm"
 
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:74
 msgctxt "empire_building"
@@ -2064,7 +2065,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:8
 msgctxt "empire_building"
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Ti ar pesketaer"
 
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:52
 msgctxt "empire_building"
@@ -2077,13 +2078,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:8
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr ""
+msgstr "Ti ar foricher"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:8
 msgctxt "empire_building"
 msgid "Gold Mine"
-msgstr ""
+msgstr "Mengleuz aour"
 
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:98
 msgctxt "empire_building"
@@ -2096,7 +2097,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:8
 msgctxt "empire_building"
 msgid "Deep Gold Mine"
-msgstr ""
+msgstr "Mengleuz aour don"
 
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:77
 msgctxt "empire_building"
@@ -2110,7 +2111,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:8
 msgctxt "empire_building"
 msgid "Hunter’s House"
-msgstr ""
+msgstr "Ti ar chaseour"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:53
@@ -2124,13 +2125,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:8
 msgctxt "empire_building"
 msgid "Inn"
-msgstr ""
+msgstr "Ostaleri"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:8
 msgctxt "empire_building"
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mengleuz houarn"
 
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:99
 msgctxt "empire_building"
@@ -2143,7 +2144,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:8
 msgctxt "empire_building"
 msgid "Deep Iron Mine"
-msgstr ""
+msgstr "Mengleuz houarn don"
 
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:78
 msgctxt "empire_building"
@@ -2218,7 +2219,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:8
 msgctxt "empire_building"
 msgid "Mill"
-msgstr ""
+msgstr "Milin"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:50
@@ -2304,7 +2305,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:8
 msgctxt "empire_building"
 msgid "Tavern"
-msgstr ""
+msgstr "Tavarn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:8
@@ -2388,7 +2389,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:8
 msgctxt "empire_building"
 msgid "Well"
-msgstr ""
+msgstr "Puñs"
 
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:57
 msgctxt "empire_building"
@@ -2476,13 +2477,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:8
 msgctxt "frisians_building"
 msgid "Bakery"
-msgstr ""
+msgstr "Ti ar baraer"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
 msgid "baking bread"
-msgstr ""
+msgstr "fardañ bara"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:8
@@ -2494,7 +2495,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:72
 msgctxt "frisians_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "tuta ur soudard"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:8
@@ -2504,7 +2505,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:64
 msgid "No Flowers"
-msgstr ""
+msgstr "Bleunienn ebet"
 
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
 msgid "Out of Flowers"
@@ -2555,7 +2556,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:8
 msgctxt "frisians_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Breserezh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:8
@@ -2636,7 +2637,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:8
 msgctxt "frisians_building"
 msgid "Coal Mine"
-msgstr ""
+msgstr "Mengleuz glaou"
 
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:123
 msgctxt "frisians_building"
@@ -2649,7 +2650,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:8
 msgctxt "frisians_building"
 msgid "Deep Coal Mine"
-msgstr ""
+msgstr "Mengleuz glaou don"
 
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:101
 msgctxt "frisians_building"
@@ -2696,7 +2697,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Farm"
-msgstr ""
+msgstr "Ti-feurm"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:82
@@ -2724,7 +2725,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Ti ar pesketaer"
 
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:65
 msgctxt "frisians_building"
@@ -2737,7 +2738,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Forester’s House"
-msgstr ""
+msgstr "Ti ar foricher"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:8
@@ -2749,7 +2750,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:8
 msgctxt "frisians_building"
 msgid "Gold Mine"
-msgstr ""
+msgstr "Mengleuz aour"
 
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:109
 msgctxt "frisians_building"
@@ -2762,7 +2763,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:8
 msgctxt "frisians_building"
 msgid "Deep Gold Mine"
-msgstr ""
+msgstr "Mengleuz aour don"
 
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:99
 msgctxt "frisians_building"
@@ -2788,7 +2789,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Hunter’s House"
-msgstr ""
+msgstr "Ti ar chaseour"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:75
@@ -2802,7 +2803,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:8
 msgctxt "frisians_building"
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mengleuz houarn"
 
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:109
 msgctxt "frisians_building"
@@ -2815,7 +2816,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:8
 msgctxt "frisians_building"
 msgid "Deep Iron Mine"
-msgstr ""
+msgstr "Mengleuz houarn don"
 
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:101
 msgctxt "frisians_building"
@@ -2829,13 +2830,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:8
 msgctxt "frisians_building"
 msgid "Mead Brewery"
-msgstr ""
+msgstr "Breserezh mez"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:66
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:77
 msgid "brewing mead"
-msgstr ""
+msgstr "bresañ mez"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:8
@@ -2910,7 +2911,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:8
 msgctxt "frisians_building"
 msgid "Rock Mine"
-msgstr ""
+msgstr "Mengleuz maen"
 
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:125
 msgctxt "frisians_building"
@@ -2923,7 +2924,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:8
 msgctxt "frisians_building"
 msgid "Deep Rock Mine"
-msgstr ""
+msgstr "Mengleuz maen don"
 
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:102
 msgctxt "frisians_building"
@@ -2966,7 +2967,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:8
 msgctxt "frisians_building"
 msgid "Tailor’s Shop"
-msgstr ""
+msgstr "Stal ar c'hemener"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing studded fur garment
 #. because ...
@@ -2984,7 +2985,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:8
 msgctxt "frisians_building"
 msgid "Tavern"
-msgstr ""
+msgstr "Tavarn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -3012,7 +3013,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:8
 msgctxt "frisians_building"
 msgid "Well"
-msgstr ""
+msgstr "Puñs"
 
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:67
 msgctxt "frisians_building"
@@ -3345,7 +3346,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/atlanteans/port/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Port"
-msgstr ""
+msgstr "Porzh-mor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/warehouse/init.lua:8
@@ -3364,7 +3365,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/barbarians/port/init.lua:8
 msgctxt "barbarians_building"
 msgid "Port"
-msgstr ""
+msgstr "Porzh-mor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/barbarians/warehouse/init.lua:8
@@ -3388,7 +3389,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/empire/port/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Porzh-mor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/empire/warehouse/init.lua:8
@@ -3406,7 +3407,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/frisians/port/init.lua:8
 msgctxt "frisians_building"
 msgid "Port"
-msgstr ""
+msgstr "Porzh-mor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/frisians/warehouse/init.lua:8
@@ -3768,7 +3769,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:31
 msgctxt "resource_indicator"
 msgid "Water"
-msgstr ""
+msgstr "Dour"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:54
@@ -3911,7 +3912,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/atlanteans/init.lua:13
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantiz"
 
 #: ../../data/tribes/initialization/atlanteans/init.lua:14
 msgid ""
@@ -4004,17 +4005,17 @@ msgid ""
 "an economy. Warning: the AI can't successfully start from this"
 msgstr ""
 
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:43
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:44
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
 msgid "Be careful"
 msgstr ""
 
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:43
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:44
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
@@ -4063,7 +4064,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/village.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/village.lua:11
 msgid "Village"
-msgstr ""
+msgstr "Kêriadenn"
 
 #. TRANSLATORS: This is the tooltip for the "Village" starting condition
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/village.lua:13
@@ -4085,7 +4086,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
 msgid "Empire"
-msgstr ""
+msgstr "Impalaerezh"
 
 #: ../../data/tribes/initialization/empire/init.lua:13
 msgid "This is the culture of the Roman Empire."
@@ -4126,7 +4127,7 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
-msgstr ""
+msgstr "Labourerien"
 
 #: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
@@ -4140,7 +4141,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:83
 msgctxt "atlanteans_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Lestr"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:107
@@ -4200,7 +4201,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:125
 msgctxt "shipname"
 msgid "Atlantis"
-msgstr ""
+msgstr "Atlantis"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:127
@@ -4230,7 +4231,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:135
 msgctxt "shipname"
 msgid "Blanquilla"
-msgstr ""
+msgstr "Blanquilla"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:137
@@ -4272,7 +4273,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:149
 msgctxt "shipname"
 msgid "Eleuthera"
-msgstr ""
+msgstr "Eleuthera"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:151
@@ -4302,7 +4303,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:159
 msgctxt "shipname"
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:161
@@ -4332,7 +4333,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:169
 msgctxt "shipname"
 msgid "Loftomor"
-msgstr ""
+msgstr "Loftomor"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:171
@@ -4374,7 +4375,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:183
 msgctxt "shipname"
 msgid "Nevis"
-msgstr ""
+msgstr "Nevis"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:185
@@ -4392,19 +4393,19 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:189
 msgctxt "shipname"
 msgid "Opol"
-msgstr ""
+msgstr "Opol"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:191
 msgctxt "shipname"
 msgid "Orchila"
-msgstr ""
+msgstr "Orchila"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:193
 msgctxt "shipname"
 msgid "Ostur"
-msgstr ""
+msgstr "Ostur"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:195
@@ -4422,13 +4423,13 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:199
 msgctxt "shipname"
 msgid "Satul"
-msgstr ""
+msgstr "Satul"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:201
 msgctxt "shipname"
 msgid "Sidolus"
-msgstr ""
+msgstr "Sidolus"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:203
@@ -4494,7 +4495,7 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:8
 msgctxt "barbarians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Lestr"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:28
@@ -4506,49 +4507,49 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:30
 msgctxt "shipname"
 msgid "Aslaug"
-msgstr ""
+msgstr "Aslaug"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:32
 msgctxt "shipname"
 msgid "Baldr"
-msgstr ""
+msgstr "Baldr"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:34
 msgctxt "shipname"
 msgid "Bear"
-msgstr ""
+msgstr "Arzh"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:36
 msgctxt "shipname"
 msgid "Beowulf"
-msgstr ""
+msgstr "Beowulf"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:38
 msgctxt "shipname"
 msgid "Boldreth"
-msgstr ""
+msgstr "Boldreth"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:40
 msgctxt "shipname"
 msgid "Chat’Karuth"
-msgstr ""
+msgstr "Chat’Karuth"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:42
 msgctxt "shipname"
 msgid "Dellingr"
-msgstr ""
+msgstr "Dellingr"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:44
 msgctxt "shipname"
 msgid "Fulla"
-msgstr ""
+msgstr "Fulla"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:46
@@ -4560,49 +4561,49 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:48
 msgctxt "shipname"
 msgid "Hagbard"
-msgstr ""
+msgstr "Hagbard"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:50
 msgctxt "shipname"
 msgid "Heidrek"
-msgstr ""
+msgstr "Heidrek"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:52
 msgctxt "shipname"
 msgid "Heimdallr"
-msgstr ""
+msgstr "Heimdallr"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:54
 msgctxt "shipname"
 msgid "Hnoss"
-msgstr ""
+msgstr "Hnoss"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:56
 msgctxt "shipname"
 msgid "Hrothgar"
-msgstr ""
+msgstr "Hrothgar"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:58
 msgctxt "shipname"
 msgid "Ingeld"
-msgstr ""
+msgstr "Ingeld"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:60
 msgctxt "shipname"
 msgid "Karl Hundason"
-msgstr ""
+msgstr "Karl Hundason"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:62
 msgctxt "shipname"
 msgid "Khantrukh"
-msgstr ""
+msgstr "Khantrukh"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:64
@@ -4614,19 +4615,19 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:66
 msgctxt "shipname"
 msgid "Mani"
-msgstr ""
+msgstr "Mani"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:68
 msgctxt "shipname"
 msgid "Odin"
-msgstr ""
+msgstr "Odin"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:70
 msgctxt "shipname"
 msgid "Red Fox"
-msgstr ""
+msgstr "Louarn Ruz"
 
 #. TRANSLATORS: This Barbarian ship is mentioned in some lore texts
 #: ../../data/tribes/ships/barbarians/init.lua:72
@@ -4638,25 +4639,25 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:74
 msgctxt "shipname"
 msgid "Sigmund"
-msgstr ""
+msgstr "Sigmund"
 
 #. TRANSLATORS: This Barbarian ship is named after a barbarian bard
 #: ../../data/tribes/ships/barbarians/init.lua:76
 msgctxt "shipname"
 msgid "Sigurd"
-msgstr ""
+msgstr "Sigurd"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:78
 msgctxt "shipname"
 msgid "Snotra"
-msgstr ""
+msgstr "Snotra"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:80
 msgctxt "shipname"
 msgid "Thor"
-msgstr ""
+msgstr "Thor"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:82
@@ -4668,19 +4669,19 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:84
 msgctxt "shipname"
 msgid "Ullr"
-msgstr ""
+msgstr "Ullr"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:86
 msgctxt "shipname"
 msgid "Valdar"
-msgstr ""
+msgstr "Valdar"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:88
 msgctxt "shipname"
 msgid "Vili"
-msgstr ""
+msgstr "Vili"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:90
@@ -4704,13 +4705,13 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:96
 msgctxt "shipname"
 msgid "Yrsa"
-msgstr ""
+msgstr "Yrsa"
 
 #. TRANSLATORS: This is the Empire's ship's name used in lists of units
 #: ../../data/tribes/ships/empire/init.lua:8
 msgctxt "empire_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Lestr"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:28
@@ -4728,25 +4729,25 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:32
 msgctxt "shipname"
 msgid "Amalea"
-msgstr ""
+msgstr "Amalea"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:34
 msgctxt "shipname"
 msgid "Amolius"
-msgstr ""
+msgstr "Amolius"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:36
 msgctxt "shipname"
 msgid "Apollo"
-msgstr ""
+msgstr "Apollo"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:38
 msgctxt "shipname"
 msgid "Augustus"
-msgstr ""
+msgstr "Augustus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:40
@@ -4770,7 +4771,7 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:46
 msgctxt "shipname"
 msgid "Ben Hur"
-msgstr ""
+msgstr "Ben Hur"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:48
@@ -4782,19 +4783,19 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:50
 msgctxt "shipname"
 msgid "Brutus"
-msgstr ""
+msgstr "Brutus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:52
 msgctxt "shipname"
 msgid "Caligula"
-msgstr ""
+msgstr "Caligula"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:54
 msgctxt "shipname"
 msgid "Camilla"
-msgstr ""
+msgstr "Camilla"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:56
@@ -4806,31 +4807,31 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:58
 msgctxt "shipname"
 msgid "Caesar"
-msgstr ""
+msgstr "Caesar"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:60
 msgctxt "shipname"
 msgid "Cicero"
-msgstr ""
+msgstr "Cicero"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:62
 msgctxt "shipname"
 msgid "Claudius"
-msgstr ""
+msgstr "Claudius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:64
 msgctxt "shipname"
 msgid "Diana"
-msgstr ""
+msgstr "Diana"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:66
 msgctxt "shipname"
 msgid "Domitianus"
-msgstr ""
+msgstr "Domitianus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:68
@@ -4842,55 +4843,55 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:70
 msgctxt "shipname"
 msgid "Faustulus"
-msgstr ""
+msgstr "Faustulus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:72
 msgctxt "shipname"
 msgid "Galba"
-msgstr ""
+msgstr "Galba"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:74
 msgctxt "shipname"
 msgid "Gallus"
-msgstr ""
+msgstr "Gallus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:76
 msgctxt "shipname"
 msgid "Ianus"
-msgstr ""
+msgstr "Ianus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:78
 msgctxt "shipname"
 msgid "Iulius Caesar"
-msgstr ""
+msgstr "Iulius Caesar"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:80
 msgctxt "shipname"
 msgid "Iuno"
-msgstr ""
+msgstr "Iuno"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:82
 msgctxt "shipname"
 msgid "Iupiter"
-msgstr ""
+msgstr "Yaou"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:84
 msgctxt "shipname"
 msgid "Latium"
-msgstr ""
+msgstr "Latium"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:86
 msgctxt "shipname"
 msgid "Latonia"
-msgstr ""
+msgstr "Latonia"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:88
@@ -4902,13 +4903,13 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:90
 msgctxt "shipname"
 msgid "Liguria"
-msgstr ""
+msgstr "Liguria"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:92
 msgctxt "shipname"
 msgid "Lutius"
-msgstr ""
+msgstr "Lutius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:94
@@ -4920,13 +4921,13 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:96
 msgctxt "shipname"
 msgid "Mars"
-msgstr ""
+msgstr "Meurzh"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:98
 msgctxt "shipname"
 msgid "Minerva"
-msgstr ""
+msgstr "Minerva"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:100
@@ -4938,25 +4939,25 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:102
 msgctxt "shipname"
 msgid "Nero"
-msgstr ""
+msgstr "Nero"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:104
 msgctxt "shipname"
 msgid "Nerva"
-msgstr ""
+msgstr "Nerva"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:106
 msgctxt "shipname"
 msgid "Octavianus"
-msgstr ""
+msgstr "Octavianus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:108
 msgctxt "shipname"
 msgid "Otho"
-msgstr ""
+msgstr "Otho"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:110
@@ -4968,43 +4969,43 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:112
 msgctxt "shipname"
 msgid "Portus Bellus"
-msgstr ""
+msgstr "Portus Bellus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:114
 msgctxt "shipname"
 msgid "Quirinus"
-msgstr ""
+msgstr "Quirinus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:116
 msgctxt "shipname"
 msgid "Remus"
-msgstr ""
+msgstr "Remus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:118
 msgctxt "shipname"
 msgid "Romulus"
-msgstr ""
+msgstr "Romulus"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:120
 msgctxt "shipname"
 msgid "Saledus"
-msgstr ""
+msgstr "Saledus"
 
 #. TRANSLATORS: This Empire ship is named after a Roman deity
 #: ../../data/tribes/ships/empire/init.lua:122
 msgctxt "shipname"
 msgid "Saturn"
-msgstr ""
+msgstr "Sadorn"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:124
 msgctxt "shipname"
 msgid "Siena"
-msgstr ""
+msgstr "Siena"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:126
@@ -5016,67 +5017,67 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:128
 msgctxt "shipname"
 msgid "Thyrrenia"
-msgstr ""
+msgstr "Thyrrenia"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:130
 msgctxt "shipname"
 msgid "Tiberius"
-msgstr ""
+msgstr "Tiberius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:132
 msgctxt "shipname"
 msgid "Titus"
-msgstr ""
+msgstr "Titus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:134
 msgctxt "shipname"
 msgid "Traianus"
-msgstr ""
+msgstr "Traianus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:136
 msgctxt "shipname"
 msgid "Venus"
-msgstr ""
+msgstr "Venus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:138
 msgctxt "shipname"
 msgid "Vespasianus"
-msgstr ""
+msgstr "Vespasianus"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:140
 msgctxt "shipname"
 msgid "Vesta"
-msgstr ""
+msgstr "Vesta"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:142
 msgctxt "shipname"
 msgid "Vinea"
-msgstr ""
+msgstr "Vinea"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:144
 msgctxt "shipname"
 msgid "Vitellius"
-msgstr ""
+msgstr "Vitellius"
 
 #. TRANSLATORS: This is the Frisians' ship's name used in lists of units
 #: ../../data/tribes/ships/frisians/init.lua:8
 msgctxt "frisians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Lestr"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:45
 msgctxt "shipname"
 msgid "Amrum"
-msgstr ""
+msgstr "Amrum"
 
 #. TRANSLATORS: This frisian ship is named after a no longer existing island
 #. in Northern Frisia
@@ -5090,19 +5091,19 @@ msgstr ""
 #: ../../data/tribes/ships/frisians/init.lua:49
 msgctxt "shipname"
 msgid "Eiderstedt"
-msgstr ""
+msgstr "Eiderstedt"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:51
 msgctxt "shipname"
 msgid "Föhr"
-msgstr ""
+msgstr "Föhr"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:53
 msgctxt "shipname"
 msgid "Gröde"
-msgstr ""
+msgstr "Gröde"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:55
@@ -5120,19 +5121,19 @@ msgstr ""
 #: ../../data/tribes/ships/frisians/init.lua:59
 msgctxt "shipname"
 msgid "Helgoland"
-msgstr ""
+msgstr "Helgoland"
 
 #. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:61
 msgctxt "shipname"
 msgid "Hever"
-msgstr ""
+msgstr "Hever"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:63
 msgctxt "shipname"
 msgid "Hooge"
-msgstr ""
+msgstr "Hooge"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:65
@@ -5144,50 +5145,50 @@ msgstr ""
 #: ../../data/tribes/ships/frisians/init.lua:67
 msgctxt "shipname"
 msgid "Kormoransand"
-msgstr ""
+msgstr "Kormoransand"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:69
 msgctxt "shipname"
 msgid "Langeneß"
-msgstr ""
+msgstr "Langeneß"
 
 #. TRANSLATORS: This frisian ship is named after a water body in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:71
 msgctxt "shipname"
 msgid "Norderaue"
-msgstr ""
+msgstr "Norderaue"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:73
 msgctxt "shipname"
 msgid "Norderoog"
-msgstr ""
+msgstr "Norderoog"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:75
 msgctxt "shipname"
 msgid "Norderoogsand"
-msgstr ""
+msgstr "Norderoogsand"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:77
 msgctxt "shipname"
 msgid "Nordstrand"
-msgstr ""
+msgstr "Nordstrand"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:79
 msgctxt "shipname"
 msgid "Nordstrandischmoor"
-msgstr ""
+msgstr "Nordstrandischmoor"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:81
 msgctxt "shipname"
 msgid "Oland"
-msgstr ""
+msgstr "Oland"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:83
@@ -5207,43 +5208,43 @@ msgstr ""
 #: ../../data/tribes/ships/frisians/init.lua:87
 msgctxt "shipname"
 msgid "Süderaue"
-msgstr ""
+msgstr "Süderaue"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:89
 msgctxt "shipname"
 msgid "Süderoog"
-msgstr ""
+msgstr "Süderoog"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:91
 msgctxt "shipname"
 msgid "Süderoogsand"
-msgstr ""
+msgstr "Süderoogsand"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:93
 msgctxt "shipname"
 msgid "Südfall"
-msgstr ""
+msgstr "Südfall"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:95
 msgctxt "shipname"
 msgid "Sylt"
-msgstr ""
+msgstr "Sylt"
 
 #. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:97
 msgctxt "shipname"
 msgid "Uthlande"
-msgstr ""
+msgstr "Uthlande"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/armor/init.lua:85
 msgctxt "ware"
 msgid "Armor"
-msgstr ""
+msgstr "Houarnwisk"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/armor_chain/init.lua:8
@@ -5261,7 +5262,7 @@ msgstr ""
 #: ../../data/tribes/wares/armor_helmet/init.lua:8
 msgctxt "empire_ware"
 msgid "Helmet"
-msgstr ""
+msgstr "Tokarn"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/ax/init.lua:8
@@ -5315,7 +5316,7 @@ msgstr ""
 #: ../../data/tribes/wares/beer/init.lua:8
 msgctxt "ware"
 msgid "Beer"
-msgstr ""
+msgstr "Bier"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/beer_strong/init.lua:8
@@ -5345,7 +5346,7 @@ msgstr ""
 #: ../../data/tribes/wares/bread_atlanteans/init.lua:8
 msgctxt "atlanteans_ware"
 msgid "Bread"
-msgstr ""
+msgstr "Bara"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_barbarians/init.lua:8
@@ -5357,13 +5358,13 @@ msgstr ""
 #: ../../data/tribes/wares/bread_empire/init.lua:8
 msgctxt "empire_ware"
 msgid "Bread"
-msgstr ""
+msgstr "Bara"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_frisians/init.lua:8
 msgctxt "frisians_ware"
 msgid "Bread"
-msgstr ""
+msgstr "Bara"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_paddle/init.lua:8
@@ -5393,13 +5394,13 @@ msgstr ""
 #: ../../data/tribes/wares/cloth/init.lua:8
 msgctxt "ware"
 msgid "Cloth"
-msgstr ""
+msgstr "Gwiad"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/coal/init.lua:8
 msgctxt "ware"
 msgid "Coal"
-msgstr ""
+msgstr "Glaou"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/corn/init.lua:8
@@ -5435,7 +5436,7 @@ msgstr ""
 #: ../../data/tribes/wares/fish/init.lua:8
 msgctxt "ware"
 msgid "Fish"
-msgstr ""
+msgstr "Pesked"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fishing_net/init.lua:8
@@ -5453,19 +5454,19 @@ msgstr ""
 #: ../../data/tribes/wares/flour/init.lua:8
 msgctxt "ware"
 msgid "Flour"
-msgstr ""
+msgstr "Bleud"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fruit/init.lua:8
 msgctxt "ware"
 msgid "Fruit"
-msgstr ""
+msgstr "Frouezh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fur/init.lua:8
 msgctxt "ware"
 msgid "Fur"
-msgstr ""
+msgstr "Feur"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fur_garment/init.lua:8
@@ -5495,7 +5496,7 @@ msgstr ""
 #: ../../data/tribes/wares/gold/init.lua:8
 msgctxt "ware"
 msgid "Gold"
-msgstr ""
+msgstr "Aour"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/gold_ore/init.lua:8
@@ -5519,7 +5520,7 @@ msgstr ""
 #: ../../data/tribes/wares/grape/init.lua:8
 msgctxt "ware"
 msgid "Grape"
-msgstr ""
+msgstr "Rezin"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/grout/init.lua:8
@@ -5531,25 +5532,25 @@ msgstr ""
 #: ../../data/tribes/wares/hammer/init.lua:8
 msgctxt "ware"
 msgid "Hammer"
-msgstr ""
+msgstr "Morzhol"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/helmet/init.lua:8
 msgctxt "ware"
 msgid "Helmet"
-msgstr ""
+msgstr "Tokarn"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/helmet_golden/init.lua:8
 msgctxt "frisians_ware"
 msgid "Golden Helmet"
-msgstr ""
+msgstr "Tokarn aour"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/helmet_mask/init.lua:8
 msgctxt "ware"
 msgid "Mask"
-msgstr ""
+msgstr "Maskl"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/helmet_warhelm/init.lua:8
@@ -5561,13 +5562,13 @@ msgstr ""
 #: ../../data/tribes/wares/honey/init.lua:8
 msgctxt "ware"
 msgid "Honey"
-msgstr ""
+msgstr "Mel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/honey_bread/init.lua:8
 msgctxt "frisians_ware"
 msgid "Honey Bread"
-msgstr ""
+msgstr "Bara mel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/hook_pole/init.lua:8
@@ -5579,19 +5580,19 @@ msgstr ""
 #: ../../data/tribes/wares/hunting_bow/init.lua:8
 msgctxt "ware"
 msgid "Hunting Bow"
-msgstr ""
+msgstr "Gwareg chaseal"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/hunting_spear/init.lua:8
 msgctxt "ware"
 msgid "Hunting Spear"
-msgstr ""
+msgstr "Goaf chaseal"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/iron/init.lua:8
 msgctxt "ware"
 msgid "Iron"
-msgstr ""
+msgstr "Houarn"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/iron_ore/init.lua:8
@@ -5627,7 +5628,7 @@ msgstr ""
 #: ../../data/tribes/wares/mead/init.lua:8
 msgctxt "ware"
 msgid "Mead"
-msgstr ""
+msgstr "Mez"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/meal/init.lua:8
@@ -5639,7 +5640,7 @@ msgstr ""
 #: ../../data/tribes/wares/meat/init.lua:8
 msgctxt "ware"
 msgid "Meat"
-msgstr ""
+msgstr "Kig"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/milking_tongs/init.lua:8
@@ -5724,7 +5725,7 @@ msgstr ""
 #: ../../data/tribes/wares/shovel/init.lua:8
 msgctxt "ware"
 msgid "Shovel"
-msgstr ""
+msgstr "Pal"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/smoked_fish/init.lua:8
@@ -5748,7 +5749,7 @@ msgstr ""
 #: ../../data/tribes/wares/spear/init.lua:8
 msgctxt "ware"
 msgid "Spear"
-msgstr ""
+msgstr "Goaf"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_advanced/init.lua:8
@@ -5766,13 +5767,13 @@ msgstr ""
 #: ../../data/tribes/wares/spear_war/init.lua:8
 msgctxt "ware"
 msgid "War Spear"
-msgstr ""
+msgstr "Goaf brezel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_wooden/init.lua:8
 msgctxt "ware"
 msgid "Wooden Spear"
-msgstr ""
+msgstr "Goaf koad"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spider_silk/init.lua:8
@@ -5802,13 +5803,13 @@ msgstr ""
 #: ../../data/tribes/wares/sword_long/init.lua:8
 msgctxt "ware"
 msgid "Long Sword"
-msgstr ""
+msgstr "Kleze hir"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_short/init.lua:8
 msgctxt "ware"
 msgid "Short Sword"
-msgstr ""
+msgstr "Kleze berr"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/tabard/init.lua:8
@@ -5856,19 +5857,19 @@ msgstr ""
 #: ../../data/tribes/wares/water/init.lua:8
 msgctxt "ware"
 msgid "Water"
-msgstr ""
+msgstr "Dour"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/wheat/init.lua:8
 msgctxt "ware"
 msgid "Wheat"
-msgstr ""
+msgstr "Gwinizh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/wine/init.lua:8
 msgctxt "ware"
 msgid "Wine"
-msgstr ""
+msgstr "Gwin"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/wool/init.lua:8
@@ -5886,7 +5887,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/baker/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Baker"
-msgstr ""
+msgstr "Baraer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/blackroot_farmer/init.lua:8
@@ -5934,13 +5935,13 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/fisher/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Fisher"
-msgstr ""
+msgstr "Pesketaer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/forester/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Forester"
-msgstr ""
+msgstr "Foricher"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/geologist/init.lua:8
@@ -5952,7 +5953,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/horse/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Horse"
-msgstr ""
+msgstr "Marc'h"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/horsebreeder/init.lua:8
@@ -5964,25 +5965,25 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/hunter/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Hunter"
-msgstr ""
+msgstr "Chaseour"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/miller/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Miller"
-msgstr ""
+msgstr "Miliner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/miner/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Miner"
-msgstr ""
+msgstr "Mengleuzier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/recruit/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Recruit"
-msgstr ""
+msgstr "Tutaad"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/sawyer/init.lua:8
@@ -6018,7 +6019,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/soldier/init.lua:377
 msgctxt "atlanteans_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Soudard"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/spiderbreeder/init.lua:8
@@ -6066,7 +6067,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/baker/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Baker"
-msgstr ""
+msgstr "Baraer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/blacksmith/init.lua:8
@@ -6084,13 +6085,13 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/brewer/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Brewer"
-msgstr ""
+msgstr "Breser"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/brewer_master/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Master Brewer"
-msgstr ""
+msgstr "Mestr breser"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/builder/init.lua:8
@@ -6132,7 +6133,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/fisher/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Fisher"
-msgstr ""
+msgstr "Pesketaer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/gamekeeper/init.lua:8
@@ -6162,7 +6163,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/hunter/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Hunter"
-msgstr ""
+msgstr "Chaseour"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/innkeeper/init.lua:8
@@ -6186,19 +6187,19 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/miner/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Miner"
-msgstr ""
+msgstr "Mengleuzier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/miner_chief/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Chief Miner"
-msgstr ""
+msgstr "Penn mengleuzier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/miner_master/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Master Miner"
-msgstr ""
+msgstr "Mestr mengleuzier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/ox/init.lua:8
@@ -6216,7 +6217,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/recruit/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Recruit"
-msgstr ""
+msgstr "Tutaad"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/scout/init.lua:8
@@ -6240,7 +6241,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/soldier/init.lua:82
 msgctxt "barbarians_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Soudard"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/stonemason/init.lua:8
@@ -6270,13 +6271,13 @@ msgstr ""
 #: ../../data/tribes/workers/empire/baker/init.lua:8
 msgctxt "empire_worker"
 msgid "Baker"
-msgstr ""
+msgstr "Baraer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/brewer/init.lua:8
 msgctxt "empire_worker"
 msgid "Brewer"
-msgstr ""
+msgstr "Breser"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/builder/init.lua:8
@@ -6330,13 +6331,13 @@ msgstr ""
 #: ../../data/tribes/workers/empire/fisher/init.lua:8
 msgctxt "empire_worker"
 msgid "Fisher"
-msgstr ""
+msgstr "Pesketaer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/forester/init.lua:8
 msgctxt "empire_worker"
 msgid "Forester"
-msgstr ""
+msgstr "Foricher"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/geologist/init.lua:8
@@ -6348,7 +6349,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/hunter/init.lua:8
 msgctxt "empire_worker"
 msgid "Hunter"
-msgstr ""
+msgstr "Chaseour"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/innkeeper/init.lua:8
@@ -6366,19 +6367,19 @@ msgstr ""
 #: ../../data/tribes/workers/empire/miller/init.lua:8
 msgctxt "empire_worker"
 msgid "Miller"
-msgstr ""
+msgstr "Miliner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/miner/init.lua:8
 msgctxt "empire_worker"
 msgid "Miner"
-msgstr ""
+msgstr "Mengleuzier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/miner_master/init.lua:8
 msgctxt "empire_worker"
 msgid "Master Miner"
-msgstr ""
+msgstr "Mestr mengleuzier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/pigbreeder/init.lua:8
@@ -6390,7 +6391,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/recruit/init.lua:8
 msgctxt "empire_worker"
 msgid "Recruit"
-msgstr ""
+msgstr "Tutaad"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/scout/init.lua:8
@@ -6420,7 +6421,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/soldier/init.lua:82
 msgctxt "empire_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Soudard"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/stonemason/init.lua:8
@@ -6462,13 +6463,13 @@ msgstr ""
 #: ../../data/tribes/workers/empire/weaver/init.lua:8
 msgctxt "empire_worker"
 msgid "Weaver"
-msgstr ""
+msgstr "Gwiader"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/baker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Baker"
-msgstr ""
+msgstr "Baraer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/baker_master/init.lua:8
@@ -6504,13 +6505,13 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/brewer/init.lua:8
 msgctxt "frisians_worker"
 msgid "Brewer"
-msgstr ""
+msgstr "Breser"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/brewer_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Brewer"
-msgstr ""
+msgstr "Mestr breser"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/brickmaker/init.lua:8
@@ -6558,19 +6559,19 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/fisher/init.lua:8
 msgctxt "frisians_worker"
 msgid "Fisher"
-msgstr ""
+msgstr "Pesketaer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/forester/init.lua:8
 msgctxt "frisians_worker"
 msgid "Forester"
-msgstr ""
+msgstr "Foricher"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/fruit_collector/init.lua:8
 msgctxt "frisians_worker"
 msgid "Fruit Collector"
-msgstr ""
+msgstr "Dastumer frouezh"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/geologist/init.lua:8
@@ -6582,7 +6583,7 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/hunter/init.lua:8
 msgctxt "frisians_worker"
 msgid "Hunter"
-msgstr ""
+msgstr "Chaseour"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/landlady/init.lua:8
@@ -6594,13 +6595,13 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/miner/init.lua:8
 msgctxt "frisians_worker"
 msgid "Miner"
-msgstr ""
+msgstr "Mengleuzier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/miner_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Miner"
-msgstr ""
+msgstr "Mestr mengleuzier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/reed_farmer/init.lua:8
@@ -6660,7 +6661,7 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/soldier/init.lua:493
 msgctxt "frisians_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Soudard"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/stonemason/init.lua:8

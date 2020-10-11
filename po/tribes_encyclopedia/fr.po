@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-18 13:37+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
 "PO-Revision-Date: 2020-09-19 12:00+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -6242,7 +6242,7 @@ msgstr "Equipement :"
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
 #: ../../data/tribes/scripting/help/building_help.lua:329
-#: ../../data/tribes/scripting/help/building_help.lua:396
+#: ../../data/tribes/scripting/help/building_help.lua:405
 msgid "Text needed"
 msgstr "Texte nécessaire"
 
@@ -6261,216 +6261,216 @@ msgstr "Général"
 msgid "Purpose:"
 msgstr "Objectif :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:400
-#: ../../data/tribes/scripting/help/building_help.lua:620
+#: ../../data/tribes/scripting/help/building_help.lua:409
+#: ../../data/tribes/scripting/help/building_help.lua:629
 msgid "Note:"
 msgstr "Note :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:405
+#: ../../data/tribes/scripting/help/building_help.lua:414
 msgid "Work area radius:"
 msgstr "Rayon d'activité :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:409
-#: ../../data/tribes/scripting/help/building_help.lua:414
+#: ../../data/tribes/scripting/help/building_help.lua:418
+#: ../../data/tribes/scripting/help/building_help.lua:423
 msgid "Healing:"
 msgstr "Entrainement en santé :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:410
-#: ../../data/tribes/scripting/help/building_help.lua:415
+#: ../../data/tribes/scripting/help/building_help.lua:419
+#: ../../data/tribes/scripting/help/building_help.lua:424
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] "Le soldat en garnison récupèrent %d points de santé par seconde."
 msgstr[1] "Les soldats en garnison récupèrent %d points de santé par seconde."
 
-#: ../../data/tribes/scripting/help/building_help.lua:411
-#: ../../data/tribes/scripting/help/building_help.lua:417
+#: ../../data/tribes/scripting/help/building_help.lua:420
+#: ../../data/tribes/scripting/help/building_help.lua:426
 msgid "Conquer range:"
 msgstr "Zone de conquête&nbsp;:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:416
-#: ../../data/tribes/scripting/help/building_help.lua:420
+#: ../../data/tribes/scripting/help/building_help.lua:425
+#: ../../data/tribes/scripting/help/building_help.lua:429
 msgid "Capacity:"
 msgstr "Capacité :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:422
+#: ../../data/tribes/scripting/help/building_help.lua:431
 msgid "Vision range:"
 msgstr "Distance de vision :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:447
+#: ../../data/tribes/scripting/help/building_help.lua:456
 msgid "%1$s from: %2$s"
 msgstr "%1$s de : %2$s"
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../data/tribes/scripting/help/building_help.lua:453
+#: ../../data/tribes/scripting/help/building_help.lua:462
 msgid "Incoming:"
 msgstr "Entrant :"
 
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../data/tribes/scripting/help/building_help.lua:462
+#: ../../data/tribes/scripting/help/building_help.lua:471
 msgid "Mines:"
 msgstr "Mines :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:464
+#: ../../data/tribes/scripting/help/building_help.lua:473
 msgid "Collects:"
 msgstr "Collecte :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:473
+#: ../../data/tribes/scripting/help/building_help.lua:482
 msgid "Creates:"
 msgstr "Crée:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:478
+#: ../../data/tribes/scripting/help/building_help.lua:487
 msgid "Produces:"
 msgstr "Produit :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:520
+#: ../../data/tribes/scripting/help/building_help.lua:529
 msgid "Outgoing:"
 msgstr "Sortant :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:521
+#: ../../data/tribes/scripting/help/building_help.lua:530
 msgid "None"
 msgstr "Aucun"
 
-#: ../../data/tribes/scripting/help/building_help.lua:522
+#: ../../data/tribes/scripting/help/building_help.lua:531
 msgid "Dependencies"
 msgstr "Dependences"
 
-#: ../../data/tribes/scripting/help/building_help.lua:538
+#: ../../data/tribes/scripting/help/building_help.lua:547
 msgid "Health Training"
 msgstr "Entraînement en Santé"
 
-#: ../../data/tribes/scripting/help/building_help.lua:539
+#: ../../data/tribes/scripting/help/building_help.lua:548
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr "Entraîne la Santé de %1% jusqu'à %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:541
-#: ../../data/tribes/scripting/help/building_help.lua:555
-#: ../../data/tribes/scripting/help/building_help.lua:567
-#: ../../data/tribes/scripting/help/building_help.lua:580
+#: ../../data/tribes/scripting/help/building_help.lua:550
+#: ../../data/tribes/scripting/help/building_help.lua:564
+#: ../../data/tribes/scripting/help/building_help.lua:576
+#: ../../data/tribes/scripting/help/building_help.lua:589
 msgid "Soldiers:"
 msgstr "Soldats :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:551
+#: ../../data/tribes/scripting/help/building_help.lua:560
 msgid "Attack Training"
 msgstr "Entraînement à l'Attaque"
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:553
+#: ../../data/tribes/scripting/help/building_help.lua:562
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr "Entraîne l'Attaque de %1% à %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:564
+#: ../../data/tribes/scripting/help/building_help.lua:573
 msgid "Defense Training"
 msgstr "Entraînement à la Défense"
 
-#: ../../data/tribes/scripting/help/building_help.lua:565
+#: ../../data/tribes/scripting/help/building_help.lua:574
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr "Entraîne la Défense de %1% à %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:577
+#: ../../data/tribes/scripting/help/building_help.lua:586
 msgid "Evade Training"
 msgstr "Entrainement à l'esquive"
 
-#: ../../data/tribes/scripting/help/building_help.lua:578
+#: ../../data/tribes/scripting/help/building_help.lua:587
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr "Entraîne l'Esquive de %1% à %2%"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:605
+#: ../../data/tribes/scripting/help/building_help.lua:614
 msgid "Building"
 msgstr "Bâtiment"
 
-#: ../../data/tribes/scripting/help/building_help.lua:621
+#: ../../data/tribes/scripting/help/building_help.lua:630
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "Ce bâtiment peut être construit directement ou par amélioration d'un autre bâtiment."
 
-#: ../../data/tribes/scripting/help/building_help.lua:627
+#: ../../data/tribes/scripting/help/building_help.lua:636
 msgid "Direct build cost:"
 msgstr "Coût de construction directe :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:629
+#: ../../data/tribes/scripting/help/building_help.lua:638
 #: ../../data/tribes/scripting/help/immovable_help.lua:53
 msgid "Build cost:"
 msgstr "Coût de construction :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:640
+#: ../../data/tribes/scripting/help/building_help.lua:649
 msgid "Or enhanced from:"
 msgstr "Ou amélioré à partir de :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:642
+#: ../../data/tribes/scripting/help/building_help.lua:651
 msgid "Enhanced from:"
 msgstr "Amélioré à partir de :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:651
+#: ../../data/tribes/scripting/help/building_help.lua:660
 msgid "Cumulative cost:"
 msgstr "Coût cumulatif :"
 
-#: ../../data/tribes/scripting/help/building_help.lua:696
-#: ../../data/tribes/scripting/help/building_help.lua:745
+#: ../../data/tribes/scripting/help/building_help.lua:705
+#: ../../data/tribes/scripting/help/building_help.lua:754
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: ../../data/tribes/scripting/help/building_help.lua:701
+#: ../../data/tribes/scripting/help/building_help.lua:710
 msgid "If built directly, dismantle yields:"
 msgstr "Si construit directement, le démantèlement retourne&nbsp;:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:706
+#: ../../data/tribes/scripting/help/building_help.lua:715
 msgid "If enhanced, dismantle yields:"
 msgstr "Si amélioré, le démantèlement retourne&nbsp;:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:709
-#: ../../data/tribes/scripting/help/building_help.lua:750
+#: ../../data/tribes/scripting/help/building_help.lua:718
+#: ../../data/tribes/scripting/help/building_help.lua:759
 msgid "Dismantle yields:"
 msgstr "Le démantèlement retourne&nbsp;:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:759
+#: ../../data/tribes/scripting/help/building_help.lua:768
 msgid "Can be enhanced to:"
 msgstr "Peut être amélioré en&nbsp;:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:789
+#: ../../data/tribes/scripting/help/building_help.lua:798
 msgid "Crew required:"
 msgstr "Équipage requis&nbsp;:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:789
+#: ../../data/tribes/scripting/help/building_help.lua:798
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "Ouvriers"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:811
+#: ../../data/tribes/scripting/help/building_help.lua:820
 #, lua-format
 msgid "%s or better"
 msgstr "%s ou plus"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
-#: ../../data/tribes/scripting/help/building_help.lua:823
+#: ../../data/tribes/scripting/help/building_help.lua:832
 msgid "Worker uses:"
 msgstr "L'ouvrier utilise:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
 #. uses
-#: ../../data/tribes/scripting/help/building_help.lua:826
+#: ../../data/tribes/scripting/help/building_help.lua:835
 msgid "Workers use:"
 msgstr "Les ouvriers utilisent:"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
-#: ../../data/tribes/scripting/help/building_help.lua:858
+#: ../../data/tribes/scripting/help/building_help.lua:867
 msgid "Calculation needed"
 msgstr "Calcul nécessaire"
 
-#: ../../data/tribes/scripting/help/building_help.lua:862
+#: ../../data/tribes/scripting/help/building_help.lua:871
 msgid "Production"
 msgstr "Production"
 
-#: ../../data/tribes/scripting/help/building_help.lua:863
+#: ../../data/tribes/scripting/help/building_help.lua:872
 msgid "Performance:"
 msgstr "Performance&nbsp;:"
 
