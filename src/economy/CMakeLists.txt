@@ -58,7 +58,7 @@ wl_library(economy
     base_exceptions
     base_log
     base_macros
-    base_units
+    base_times
     graphic
     io_fileread
     logic

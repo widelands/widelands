@@ -142,7 +142,7 @@ wl_library(logic_map_objects
     base_macros
     base_math
     base_scoped_timer
-    base_units
+    base_times
     economy
     graphic
     graphic_animation

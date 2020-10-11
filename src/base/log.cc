@@ -163,7 +163,7 @@ static const char* to_string(const LogType& type) {
 	}
 }
 
-std::vector<std::string> split(const std::string& s) {
+static std::vector<std::string> split(const std::string& s) {
 	std::vector<std::string> result;
 	for (std::string::size_type pos = 0, endpos;
 	     (pos = s.find_first_not_of('\n', pos)) != std::string::npos; pos = endpos) {
@@ -173,10 +173,7 @@ std::vector<std::string> split(const std::string& s) {
 	return result;
 }
 
-void log_to_stdout(const LogType type,
-                   const Widelands::Time& gametime,
-                   const char* const fmt,
-                   ...) {
+void do_log(const LogType type, const Widelands::Time& gametime, const char* const fmt, ...) {
 	assert(logger != nullptr);
 
 	// message type and timestamp

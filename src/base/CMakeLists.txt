@@ -11,7 +11,7 @@ wl_library(base_log
   USES_SDL2
   DEPENDS
     base_macros
-    base_units
+    base_times
     build_info
 )
 
@@ -86,10 +86,10 @@ wl_library(base_time_string
 )
 
 
-wl_library(base_units
+wl_library(base_times
   SRCS
-    units.h
-    units.cc
+    times.h
+    times.cc
   DEPENDS
     base_exceptions
     io_fileread

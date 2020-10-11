@@ -22,7 +22,7 @@
 
 #include <string>
 
-#include "base/units.h"
+#include "base/times.h"
 #include "logic/player_end_result.h"
 
 namespace Widelands {

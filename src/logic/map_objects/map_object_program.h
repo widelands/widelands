@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-#include "base/units.h"
+#include "base/times.h"
 #include "sound/constants.h"
 
 namespace Widelands {

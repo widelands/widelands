@@ -25,7 +25,7 @@
 #include <string>
 
 #include "base/macros.h"
-#include "base/units.h"
+#include "base/times.h"
 
 enum class LogType {
 	kInfo,     // normal info messages
@@ -37,16 +37,16 @@ enum class LogType {
 // Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
 // If `gametime` is not 0, a timestamp for the gametime will be prepended to the output;
 // otherwise, the real time will be used for the timestamp.
-void log_to_stdout(LogType, const Widelands::Time& gametime, const char*, ...) PRINTF_FORMAT(3, 4);
-#define log_info_time(time, ...) log_to_stdout(LogType::kInfo, time, __VA_ARGS__)
-#define log_dbg_time(time, ...) log_to_stdout(LogType::kDebug, time, __VA_ARGS__)
-#define log_warn_time(time, ...) log_to_stdout(LogType::kWarning, time, __VA_ARGS__)
-#define log_err_time(time, ...) log_to_stdout(LogType::kError, time, __VA_ARGS__)
+void do_log(LogType, const Widelands::Time& gametime, const char*, ...) PRINTF_FORMAT(3, 4);
+#define log_info_time(time, ...) do_log(LogType::kInfo, time, __VA_ARGS__)
+#define log_dbg_time(time, ...) do_log(LogType::kDebug, time, __VA_ARGS__)
+#define log_warn_time(time, ...) do_log(LogType::kWarning, time, __VA_ARGS__)
+#define log_err_time(time, ...) do_log(LogType::kError, time, __VA_ARGS__)
 
-#define log_info(...) log_to_stdout(LogType::kInfo, Widelands::Time(), __VA_ARGS__)
-#define log_dbg(...) log_to_stdout(LogType::kDebug, Widelands::Time(), __VA_ARGS__)
-#define log_warn(...) log_to_stdout(LogType::kWarning, Widelands::Time(), __VA_ARGS__)
-#define log_err(...) log_to_stdout(LogType::kError, Widelands::Time(), __VA_ARGS__)
+#define log_info(...) do_log(LogType::kInfo, Widelands::Time(), __VA_ARGS__)
+#define log_dbg(...) do_log(LogType::kDebug, Widelands::Time(), __VA_ARGS__)
+#define log_warn(...) do_log(LogType::kWarning, Widelands::Time(), __VA_ARGS__)
+#define log_err(...) do_log(LogType::kError, Widelands::Time(), __VA_ARGS__)
 
 extern bool g_verbose;
 

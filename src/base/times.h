@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_BASE_UNITS_H
-#define WL_BASE_UNITS_H
+#ifndef WL_BASE_TIMES_H
+#define WL_BASE_TIMES_H
 
 #include <limits>
 
@@ -26,13 +26,6 @@
 
 class FileRead;
 class FileWrite;
-
-/*
- * This file defines various unit types used in the game logic. These used
- * to be named integer aliases; now they are structs to enforce type-safety.
- * Currently this file contains only `Time` and `Duration`; eventually,
- * more types, e.g. `DescriptionIndex` and `PlayerNumber`, will follow.
- */
 
 namespace Widelands {
 
@@ -219,4 +212,4 @@ private:
 
 }  // namespace Widelands
 
-#endif  // end of include guard: WL_BASE_UNITS_H
+#endif  // end of include guard: WL_BASE_TIMES_H

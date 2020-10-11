@@ -20,7 +20,7 @@
 #ifndef WL_LOGIC_MESSAGE_H
 #define WL_LOGIC_MESSAGE_H
 
-#include "base/units.h"
+#include "base/times.h"
 #include "graphic/image_cache.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"

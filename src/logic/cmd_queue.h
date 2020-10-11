@@ -22,7 +22,7 @@
 
 #include <queue>
 
-#include "base/units.h"
+#include "base/times.h"
 #include "logic/queue_cmd_ids.h"
 
 namespace Widelands {
