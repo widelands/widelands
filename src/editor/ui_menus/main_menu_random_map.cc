@@ -175,8 +175,11 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                       box_width_ - 2 * margin_ - map_number_label_.get_w(),
                       UI::PanelStyle::kWui),
      map_id_label_(&map_number_and_id_vbox_1_, 0, 0, 0, 0, _("Map ID:")),
-     map_id_edit_(
-        &map_number_and_id_vbox_2_, 0, 0, box_width_ - 2 * margin_ - map_id_label_.get_w(), UI::PanelStyle::kWui),
+     map_id_edit_(&map_number_and_id_vbox_2_,
+                  0,
+                  0,
+                  box_width_ - 2 * margin_ - map_id_label_.get_w(),
+                  UI::PanelStyle::kWui),
 
      tribe_(game ? new UI::Dropdown<std::string>(&box_,
                                                  "tribe",
@@ -596,7 +599,9 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 		   /** TRANSLATORS: You don't need to be literal with your translation, */
 		   /** TRANSLATORS: as long as the user understands that he needs to check the player
 		     positions.*/
-		   _("The map has been generated. Please double-check the player starting positions to make sure that your carriers won’t drown, or be stuck on an island or on top of a mountain."),
+		   _("The map has been generated. Please double-check the player starting positions to make "
+		     "sure that your carriers won’t drown, or be stuck on an island or on top of a "
+		     "mountain."),
 		   UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 	} else {
@@ -625,7 +630,8 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 					sp->set_player_team(p, 0);
 					sp->set_player_init(p, starting_condition_player_->get_selected());
 				} else {
-					sp->set_player_name(p, (boost::format(_("Computer %u")) % (p > plnum ? p : p + 1)).str());
+					sp->set_player_name(
+					   p, (boost::format(_("Computer %u")) % (p > plnum ? p : p + 1)).str());
 					sp->set_player_tribe(p, "", true);
 					sp->set_player_team(p, ai_teams_->get_state() ? 1 : 0);
 					sp->set_player_init(p, starting_condition_ai_->get_selected());
