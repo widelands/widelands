@@ -19,15 +19,15 @@ install:
   - cmd: "set CC=%MINGWPATH%\\gcc.exe"
   - cmd: "set CXX=%MINGWPATH%\\g++.exe"
   # deleting broken repo from mirrorlist
-  - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.msys\""
-  - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
-  - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.msys\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
   # Update msys2 system (twice, first run does system packages)
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   # deleting broken repo from mirrorlist again
-  - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.msys\""
-  - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
-  - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.msys\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
