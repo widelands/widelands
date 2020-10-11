@@ -53,14 +53,14 @@
 namespace Widelands {
 
 const std::vector<Map::OldWorldInfo> Map::kOldWorldNames = {
-      /** TRANSLATORS: A world name for the random map generator in the editor */
-      {"summer", "greenland", []() { return _("Summer"); }},
-      /** TRANSLATORS: A world name for the random map generator in the editor */
-      {"winter", "winterland", []() { return _("Winter"); }},
-      /** TRANSLATORS: A world name for the random map generator in the editor */
-      {"wasteland", "blackland", []() { return _("Wasteland"); }},
-      /** TRANSLATORS: A world name for the random map generator in the editor */
-      {"desert", "desert", []() { return _("Desert"); }}};
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"summer", "greenland", []() { return _("Summer"); }},
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"winter", "winterland", []() { return _("Winter"); }},
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"wasteland", "blackland", []() { return _("Wasteland"); }},
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"desert", "desert", []() { return _("Desert"); }}};
 const Map::OldWorldInfo& Map::get_old_world_info_by_old_name(const std::string& old_name) {
 	for (const OldWorldInfo& owi : kOldWorldNames) {
 		if (owi.old_name == old_name) {
