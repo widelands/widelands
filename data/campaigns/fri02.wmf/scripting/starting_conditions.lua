@@ -19,7 +19,7 @@ p1:forbid_buildings {
 }
 
 port1 = p1:place_building("frisians_port", p1_start, false, true)
-port1:set_wares {
+local wares = {
    log = 40,
    brick = 50,
    granite = 40,
@@ -36,12 +36,12 @@ port1:set_wares {
    sword_long = 2,
    sword_broad = 1
 }
-port1:set_workers {
+local workers = {
    frisians_woodcutter = 3,
    frisians_forester = 7,
    frisians_claydigger = 3,
    frisians_brickmaker = 2,
-   frisians_builder = 10,
+   frisians_builder = 9,
    frisians_blacksmith = 2,
    frisians_smelter = 3,
    frisians_smoker = 2,
@@ -62,8 +62,39 @@ port1:set_workers {
    frisians_charcoal_burner = 3
 }
 
+-- Saved wares
+for name,amount in pairs(campaign_data.wares) do
+   if name ~= "pick" and name ~= "iron" and name ~= "iron_ore" and name ~= "scrap_metal_mixed" and name ~= "scrap_iron" then
+      if wares[name] then
+         wares[name] = wares[name] + amount
+      else
+         wares[name] = amount
+      end
+   end
+end
+-- Subtract port buildcost (which was also saved)
+-- (but not the builder, he will be added to the list of workers below)
+for name,amount in pairs(wl.Game():get_building_description("frisians_port").buildcost) do
+   if wares[name] then wares[name] = wares[name] - amount end
+end
+
+-- Saved workers
+for name,amount in pairs(campaign_data.workers) do
+   if name == "frisians_miner" or name == "frisians_miner_master" then
+      name = "frisians_carrier"
+   end
+   if workers[name] then
+      workers[name] = workers[name] + amount
+   else
+      workers[name] = amount
+   end
+end
+
+port1:set_wares(wares)
+port1:set_workers(workers)
+
 local trained = 0
-for descr,n in pairs(campaign_data) do
+for descr,n in pairs(campaign_data.port_soldiers) do
    if descr ~= "000" then
       trained = trained + n
    end
@@ -76,7 +107,7 @@ if trained > takeover_soldiers then
       local key1 = math.random(0, 2)
       local key2 = math.random(0, 6)
       local key3 = math.random(0, 2)
-      for descr,n in pairs(campaign_data) do
+      for descr,n in pairs(campaign_data.port_soldiers) do
          if descr == (key1 .. key2 .. key3) and n > 0 and not (key1 == 0 and key2 == 0 and key3 == 0) then
             if n < remaining then
                soldiers[{key1, key2, key3, 0}] = n
@@ -85,7 +116,7 @@ if trained > takeover_soldiers then
                soldiers[{key1, key2, key3, 0}] = remaining
                remaining = 0
             end
-            campaign_data[descr] = nil
+            campaign_data.port_soldiers[descr] = nil
             break
          end
       end
@@ -96,14 +127,25 @@ else
    for h=0,2 do
       for a=0,6 do
          for d=0,2 do
-            if not (h == 0 and a == 0 and d == 0) and campaign_data[h .. a .. d] and campaign_data[h .. a .. d] > 0 then
-               soldiers[{h, a, d, 0}] = campaign_data[h .. a .. d]
+            if not (h == 0 and a == 0 and d == 0) and campaign_data.port_soldiers[h .. a .. d] and campaign_data.port_soldiers[h .. a .. d] > 0 then
+               soldiers[{h, a, d, 0}] = campaign_data.port_soldiers[h .. a .. d]
             end
          end
       end
    end
    soldiers[{0, 0, 0, 0}] = total_soldiers - trained
 end
+
+-- Additionally take all ship soldiers
+for descr,n in pairs(campaign_data.ship_soldiers) do
+   local key = {tonumber(descr:sub(1,1)), tonumber(descr:sub(2,2)), tonumber(descr:sub(3,3)), 0}
+   if not soldiers[key] then
+      soldiers[key] = n
+   else
+      soldiers[key] = soldiers[key] + n
+   end
+end
+
 port1:set_soldiers(soldiers)
 
 -- =======================================================================
