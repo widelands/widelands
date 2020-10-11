@@ -15,7 +15,7 @@ local wc_has_territory = _"%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 
 local wc_stats = "Territory percentage"
--- This needs to be exactly like wc_points, but localized, because wc_points
+-- This needs to be exactly like wc_stats, but localized, because wc_stats
 -- will be used as the key to fetch the translation in C++
 -- TRANSLATORS: subtext of the territorial statistics hook. Keep it short and consistent with the translation of the Win condition.
 local wc_stats_i18n = _"Territory percentage"
