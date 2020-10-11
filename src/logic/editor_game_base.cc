@@ -196,6 +196,7 @@ Descriptions* EditorGameBase::mutable_descriptions() {
 		// to descriptions through this method already.
 		ScopedTimer timer("Registering the descriptions took %ums");
 		Notifications::publish(UI::NoteLoadingMessage(_("Loading world and tribes…")));
+		assert(lua_);
 		descriptions_.reset(new Descriptions(lua_.get()));
 	}
 	return descriptions_.get();
