@@ -66,6 +66,7 @@ private:
 	void key_enter();
 	void key_escape();
 	void draw(RenderTarget& dst) override;
+	void key_changed();
 	void set_recipient();
 	void prepare_recipients();
 	bool select_recipient();
