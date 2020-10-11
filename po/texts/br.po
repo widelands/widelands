@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# ThonyVezbe <a.guechoum@gmail.com>, 2020
 # Irriep Nala Novram <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-18 13:37+0000\n"
-"PO-Revision-Date: 2020-07-23 07:47+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-05 14:23+0000\n"
+"Last-Translator: ThonyVezbe <a.guechoum@gmail.com>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +32,7 @@ msgstr "Dioroerien"
 
 #: ../../data/txts/ABOUT.lua:19
 msgid "Translators"
-msgstr ""
+msgstr "Troerien"
 
 #: ../../data/txts/AUTHORS.lua:28
 msgid "Widelands Development Team"
@@ -114,7 +115,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:12
 msgid "Status"
-msgstr ""
+msgstr "Statud"
 
 #: ../../data/txts/README.lua:13
 msgid ""
@@ -139,7 +140,7 @@ msgstr ""
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:19
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../data/txts/README.lua:22
 msgid "Reporting Bugs"
@@ -195,11 +196,11 @@ msgstr ""
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Troerien Widelands"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantiz"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarians"
@@ -219,7 +220,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
@@ -231,11 +232,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Empire"
-msgstr ""
+msgstr "Impalaerezh"
 
 #: ../../data/txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Flatpak"
@@ -247,7 +248,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
 msgid "Frisians"
@@ -263,7 +264,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage"
-msgstr ""
+msgstr "Pajenn degemer"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage Coders"
@@ -271,11 +272,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Maps and Missions"
@@ -283,7 +284,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Musicians"
-msgstr ""
+msgstr "Sonerien"
 
 #: ../../data/txts/developers.lua:3
 msgid "Other"
@@ -295,7 +296,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound"
-msgstr ""
+msgstr "Son"
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound Effects"
@@ -307,15 +308,15 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Translation"
-msgstr ""
+msgstr "Troidigezh"
 
 #: ../../data/txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
 msgid "and many, many more (thank you for everything you've done)"
@@ -327,7 +328,7 @@ msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
-msgstr ""
+msgstr "Skoazell enlinenn"
 
 #: ../../data/txts/help/common_helptexts.lua:11
 #, lua-format
@@ -395,7 +396,7 @@ msgstr ""
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -412,7 +413,7 @@ msgstr ""
 #: ../../data/txts/help/common_helptexts.lua:57
 msgctxt "hotkey"
 msgid "Ctrl + F"
-msgstr ""
+msgstr "Ctrl + F"
 
 #: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
@@ -455,7 +456,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
-msgstr ""
+msgstr "Arventennoù ar c'hoarier"
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
@@ -480,7 +481,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Closed."
-msgstr ""
+msgstr "Serret."
 
 #: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
@@ -498,7 +499,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid "Map details"
-msgstr ""
+msgstr "Munudoù ar gartenn"
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
@@ -693,12 +694,12 @@ msgstr ""
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
 msgid "1-9"
-msgstr ""
+msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
 msgid "Ctrl + (1-9)"
-msgstr ""
+msgstr "Ctrl + (1-9)"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -741,12 +742,12 @@ msgstr ""
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
 msgid "Ctrl + (+/-)"
-msgstr ""
+msgstr "Ctrl + (+/-)"
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
 msgid "Ctrl + 0"
-msgstr ""
+msgstr "Ctrl + 0"
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."

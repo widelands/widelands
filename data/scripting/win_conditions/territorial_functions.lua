@@ -138,7 +138,11 @@ function calculate_territory_points(fields, players)
       -- Still the same winner
       territory_points.remaining_time = territory_points.remaining_time - 1
    elseif winning_points == -1 then
-      -- No winner. This value is used to calculate whether to send a report to players.
+      -- No winner. We need to reset the information about last winner candidates
+      territory_points.last_winning_player = -1
+      territory_points.last_winning_player_name = -1
+      territory_points.last_winning_team = -1
+      -- This value is used to calculate whether to send a report to players.
       if territory_points.remaining_time == 1800 then
          territory_points.remaining_time = 1201
       elseif territory_points.remaining_time ~= 1201 then

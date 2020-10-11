@@ -27,8 +27,7 @@
 static std::string tribe_of(const GameSettings& game_settings, const PlayerSettings& p) {
 	for (const Widelands::TribeBasicInfo& tribeinfo : game_settings.tribes) {
 		if (tribeinfo.name == p.tribe) {
-			i18n::Textdomain td("tribes");
-			return _(tribeinfo.descname);
+			return tribeinfo.descname;
 		}
 	}
 	return g_style_manager->font_style(UI::FontStyle::kDisabled)
