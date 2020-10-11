@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-02 07:58+0000\n"
-"PO-Revision-Date: 2020-09-11 12:00+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-11 07:17+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -73,7 +73,7 @@ msgstr "’S e stuth togail cudromach a th’ anns na maidean."
 #: ../../data/tribes/initialization/atlanteans/units.lua:360
 msgctxt "atlanteans_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Thèid an dèanamh de dh’fhiodh leis a’ mhuileann shàbhaidh."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
 #: ../../data/tribes/initialization/atlanteans/units.lua:362
@@ -568,7 +568,7 @@ msgstr "Giùlainidh e rudan air na rathaidean agad."
 #: ../../data/tribes/initialization/atlanteans/units.lua:810
 msgctxt "atlanteans_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Bheir e batharan thar aibhnichean caola."
 
 #. TRANSLATORS: Helptext for an atlantean worker: Horse
 #: ../../data/tribes/initialization/atlanteans/units.lua:819
@@ -2061,7 +2061,7 @@ msgstr "Giùlainidh e rudan air na rathaidean agad."
 #: ../../data/tribes/initialization/barbarians/units.lua:541
 msgctxt "barbarians_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Bheir e batharan thar aibhnichean caola."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Ox
 #: ../../data/tribes/initialization/barbarians/units.lua:550
@@ -2579,7 +2579,7 @@ msgstr "Gabhaidh an sealgair fois fad %s mus tòisich e air an obair a-rithist."
 msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>as we love to cook and eat them.’"
-msgstr ""
+msgstr "“Is esan a bhrideas<br>is sinne a dh’itheas.”"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site:
 #. Gamekeeper's Hut
@@ -3632,7 +3632,7 @@ msgstr "Thèid na craobhan a leagail le coilltearan na h-Ìmpireachd is gabhaidh
 #: ../../data/tribes/initialization/empire/units.lua:106
 msgctxt "empire_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Thèid an dèanamh de dh’fhiodh leis a’ mhuileann shàbhaidh."
 
 #. TRANSLATORS: Helptext for an empire ware: Planks, part 3
 #: ../../data/tribes/initialization/empire/units.lua:108
@@ -3685,7 +3685,7 @@ msgctxt "empire_ware"
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
 "sheep farms and piggeries also need to be supplied with wheat."
-msgstr ""
+msgstr "Saothraichidh na tuathanasan a’ chruithneachd is thèid a cleachdadh leis na muileannan is na taighean-grùide. Tha stàballan, faingean is failean feumach air cruithneachd cuideachd."
 
 #. TRANSLATORS: Helptext for an empire ware: Flour
 #: ../../data/tribes/initialization/empire/units.lua:184
@@ -3840,7 +3840,7 @@ msgstr "Feumaidh gach clach-eòlaiche, fear-togail, ceàrd-armachd is airm-cheà
 #: ../../data/tribes/initialization/empire/units.lua:411
 msgctxt "empire_ware"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Thèid a shaothrachadh leis a’ cheàrdach acainnean."
 
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 2
 #: ../../data/tribes/initialization/empire/units.lua:424
@@ -3874,7 +3874,7 @@ msgstr "Tha feum air acainnean cidsin airson greimeagan is miasan a dhèanamh. T
 #: ../../data/tribes/initialization/empire/units.lua:468
 msgctxt "empire_ware"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "Thèid a chleachdadh leis a’ cheàrdach leaghadair ’s a shaothrachadh leis a’ cheàrdach acainnean."
 
 #. TRANSLATORS: Helptext for an empire ware: Wooden Spear
 #: ../../data/tribes/initialization/empire/units.lua:481
@@ -3968,7 +3968,7 @@ msgstr "Giùlainidh e rudan air na rathaidean agad."
 #: ../../data/tribes/initialization/empire/units.lua:575
 msgctxt "empire_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Bheir e batharan thar aibhnichean caola."
 
 #. TRANSLATORS: Helptext for an empire worker: Donkey
 #: ../../data/tribes/initialization/empire/units.lua:584
@@ -6311,7 +6311,7 @@ msgstr "Cruinneachadh:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:482
 msgid "Creates:"
-msgstr ""
+msgstr "Cruthachadh:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:487
 msgid "Produces:"

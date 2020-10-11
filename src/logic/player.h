@@ -596,6 +596,13 @@ public:
 	}
 	bool get_starting_position_suitability(const Coords&) const;
 
+	bool additional_expedition_items_allowed() const {
+		return allow_additional_expedition_items_;
+	}
+	void set_allow_additional_expedition_items(bool allow) {
+		allow_additional_expedition_items_ = allow;
+	}
+
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
@@ -704,6 +711,8 @@ private:
 	std::vector<SoldierStatistics> soldier_stats_;
 
 	bool is_picking_custom_starting_position_;
+
+	bool allow_additional_expedition_items_;
 
 	FxId message_fx_;
 	FxId attack_fx_;
