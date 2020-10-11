@@ -38,17 +38,15 @@ BOOST_AUTO_TEST_CASE(flag_distance_soft_expiry) {
 
 	// setting longer distance below soft_expiry time
 	BOOST_CHECK_EQUAL(
-	   fw.set_distance(1, 3, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), 4),
-	   false);
+	   fw.set_distance(1, 3, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), 4), false);
 	// distance to 3 not updated
 	BOOST_CHECK_EQUAL(
 	   fw.get_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), &tmp_wh), 2);
 	BOOST_CHECK_EQUAL(tmp_wh, 3);
 
 	// now setting after soft expiry
-	BOOST_CHECK_EQUAL(
-	   fw.set_distance(1, 1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), 6),
-	   true);  // distance set to 1
+	BOOST_CHECK_EQUAL(fw.set_distance(1, 1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), 6),
+	                  true);  // distance set to 1
 	BOOST_CHECK_EQUAL(
 	   fw.get_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), &tmp_wh), 1);
 	BOOST_CHECK_EQUAL(tmp_wh, 6);
@@ -62,11 +60,9 @@ BOOST_AUTO_TEST_CASE(flag_distance_below_expiry)
 
 	// setting longer distance after soft but below expiry time
 	BOOST_CHECK_EQUAL(
-	   fw.set_distance(1, 3, Time(AI::kFlagDistanceExpirationPeriod.get() * 2 / 3), 5),
-	   true);
+	   fw.set_distance(1, 3, Time(AI::kFlagDistanceExpirationPeriod.get() * 2 / 3), 5), true);
 	BOOST_CHECK_EQUAL(
-	   fw.get_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() * 2 / 3), &tmp_wh),
-	   3);
+	   fw.get_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() * 2 / 3), &tmp_wh), 3);
 	BOOST_CHECK_EQUAL(tmp_wh, 5);
 }
 
@@ -95,23 +91,19 @@ BOOST_AUTO_TEST_CASE(flag_distance_expiration_extension)
 
 	// Now we are after expiration time
 	BOOST_CHECK_EQUAL(
-	   fw.get_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() + 3), &tmp_wh),
-	   1000);
+	   fw.get_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() + 3), &tmp_wh), 1000);
 
 	// setting distance 2 time shortly one after another
 	BOOST_CHECK_EQUAL(
 	   fw.set_distance(1, 2, Time(AI::kFlagDistanceExpirationPeriod.get() + 3), 5), true);
 	BOOST_CHECK_EQUAL(
-	   fw.set_distance(1, 2, Time(AI::kFlagDistanceExpirationPeriod.get() + 10), 5),
-	   true);
+	   fw.set_distance(1, 2, Time(AI::kFlagDistanceExpirationPeriod.get() + 10), 5), true);
 	// current expiry_time should be 2*AI::kFlagDistanceExpirationPeriod + 10
 	BOOST_CHECK_EQUAL(
 	   fw.get_distance(1, Time(2 * AI::kFlagDistanceExpirationPeriod.get()), &tmp_wh), 2);
 	BOOST_CHECK_EQUAL(tmp_wh, 5);
 	BOOST_CHECK_EQUAL(
-	   fw.get_distance(
-	      1, Time(2 * AI::kFlagDistanceExpirationPeriod.get() + 15), &tmp_wh),
-	   1000);
+	   fw.get_distance(1, Time(2 * AI::kFlagDistanceExpirationPeriod.get() + 15), &tmp_wh), 1000);
 }
 
 BOOST_AUTO_TEST_CASE(flag_distance_road_builtexpiration_extension)
@@ -143,13 +135,12 @@ BOOST_AUTO_TEST_CASE(flag_distance_old_removal)
 	fw.set_distance(1, 2, Time(0), 3);
 	BOOST_CHECK_EQUAL(fw.count(), 1);
 	BOOST_CHECK_EQUAL(fw.remove_old_flag(Time(AI::kOldFlagRemoveTime.get() +
-	                                                     AI::kFlagDistanceExpirationPeriod.get())),
+	                                          AI::kFlagDistanceExpirationPeriod.get())),
 	                  false);
 	BOOST_CHECK_EQUAL(fw.count(), 1);
-	BOOST_CHECK_EQUAL(
-	   fw.remove_old_flag(Time(AI::kOldFlagRemoveTime.get() +
-	                                      AI::kFlagDistanceExpirationPeriod.get() + 2)),
-	   true);
+	BOOST_CHECK_EQUAL(fw.remove_old_flag(Time(AI::kOldFlagRemoveTime.get() +
+	                                          AI::kFlagDistanceExpirationPeriod.get() + 2)),
+	                  true);
 	BOOST_CHECK_EQUAL(fw.count(), 0);
 }
 

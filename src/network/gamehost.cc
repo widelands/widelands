@@ -707,8 +707,8 @@ void GameHost::run() {
 		d->committed_networktime = d->pseudo_networktime;
 
 		for (Client& client : d->clients) {
-			client.time = d->committed_networktime -
-			              Duration(d->committed_networktime.get() > 0 ? 1 : 0);
+			client.time =
+			   d->committed_networktime - Duration(d->committed_networktime.get() > 0 ? 1 : 0);
 		}
 
 		// The call to check_hung_clients ensures that the game leaves the

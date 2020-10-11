@@ -103,10 +103,7 @@ private:
 struct CmdBuild : public PlayerCommand {
 	CmdBuild() : PlayerCommand() {
 	}  // For savegame loading
-	CmdBuild(const Time& init_duetime,
-	         const int32_t p,
-	         const Coords& c,
-	         const DescriptionIndex i)
+	CmdBuild(const Time& init_duetime, const int32_t p, const Coords& c, const DescriptionIndex i)
 	   : PlayerCommand(init_duetime, p), coords(c), bi(i) {
 	}
 
@@ -298,12 +295,8 @@ private:
 struct CmdExpeditionConfig : public PlayerCommand {
 	CmdExpeditionConfig() : PlayerCommand() {
 	}  // For savegame loading
-	CmdExpeditionConfig(const Time& t,
-	                    PlayerNumber const p,
-	                    PortDock& pd,
-	                    WareWorker ww,
-	                    DescriptionIndex di,
-	                    bool a)
+	CmdExpeditionConfig(
+	   const Time& t, PlayerNumber const p, PortDock& pd, WareWorker ww, DescriptionIndex di, bool a)
 	   : PlayerCommand(t, p), serial(pd.serial()), type(ww), index(di), add(a) {
 	}
 
@@ -329,11 +322,8 @@ private:
 struct CmdEnhanceBuilding : public PlayerCommand {
 	CmdEnhanceBuilding() : PlayerCommand(), serial_(0), keep_wares_(false) {
 	}  // For savegame loading
-	CmdEnhanceBuilding(const Time& init_duetime,
-	                   const int32_t p,
-	                   Building& b,
-	                   const DescriptionIndex i,
-	                   bool kw)
+	CmdEnhanceBuilding(
+	   const Time& init_duetime, const int32_t p, Building& b, const DescriptionIndex i, bool kw)
 	   : PlayerCommand(init_duetime, p), serial_(b.serial()), bi_(i), keep_wares_(kw) {
 	}
 
@@ -408,10 +398,7 @@ private:
 struct CmdShipScoutDirection : public PlayerCommand {
 	CmdShipScoutDirection() : PlayerCommand(), serial(0), dir(WalkingDir::IDLE) {
 	}  // For savegame loading
-	CmdShipScoutDirection(const Time& t,
-	                      PlayerNumber const p,
-	                      Serial s,
-	                      WalkingDir direction)
+	CmdShipScoutDirection(const Time& t, PlayerNumber const p, Serial s, WalkingDir direction)
 	   : PlayerCommand(t, p), serial(s), dir(direction) {
 	}
 
@@ -487,8 +474,7 @@ private:
 struct CmdShipSink : public PlayerCommand {
 	CmdShipSink() : PlayerCommand(), serial(0) {
 	}  // For savegame loading
-	CmdShipSink(const Time& t, PlayerNumber const p, Serial s)
-	   : PlayerCommand(t, p), serial(s) {
+	CmdShipSink(const Time& t, PlayerNumber const p, Serial s) : PlayerCommand(t, p), serial(s) {
 	}
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;

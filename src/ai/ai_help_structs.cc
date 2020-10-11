@@ -635,8 +635,7 @@ void ManagementData::review(const Time& gametime,
 
 	// bonuses (1000 or nothing)
 	const uint16_t territory_bonus = (land > old_land || land > max_e_land) ? 1000 : 0;
-	const uint16_t iron_mine_bonus =
-	   (first_iron_mine_time < Time(2 * 60 * 60 * 1000)) ? 1000 : 0;
+	const uint16_t iron_mine_bonus = (first_iron_mine_time < Time(2 * 60 * 60 * 1000)) ? 1000 : 0;
 	const uint16_t attack_bonus = (attackers > 0) ? 1000 : 0;
 	const uint16_t training_bonus = (trained_soldiers > 0) ? 1000 : 0;
 
@@ -1156,8 +1155,7 @@ uint8_t PlayersStrengths::enemies_seen_lately_count(const Time& gametime) {
 }
 
 // When we see enemy, we use this to store the time
-void PlayersStrengths::set_last_time_seen(const Time& seentime,
-                                          Widelands::PlayerNumber pn) {
+void PlayersStrengths::set_last_time_seen(const Time& seentime, Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
 		return;
 	}
@@ -1184,8 +1182,7 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number)
 }
 
 // Was the player seen less then 2 minutes ago
-bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn,
-                                          const Time& gametime) {
+bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const Time& gametime) {
 	if (all_stats.count(pn) == 0) {
 		// Should happen only rarely so we print a warning here
 		log_warn("AI %d: player has no statistics yet\n", this_player_number);
@@ -1413,8 +1410,7 @@ bool FlagWarehouseDistances::FlagInfo::update(const Time& gametime,
 	return false;
 }
 
-uint16_t FlagWarehouseDistances::FlagInfo::get(const Time& gametime,
-                                               uint32_t* nw) const {
+uint16_t FlagWarehouseDistances::FlagInfo::get(const Time& gametime, uint32_t* nw) const {
 	*nw = nearest_warehouse;
 	if (gametime <= expiry_time) {
 		return distance;
@@ -1458,15 +1454,13 @@ int16_t FlagWarehouseDistances::get_distance(const uint32_t flag_coords,
 	}
 }
 
-void FlagWarehouseDistances::set_road_built(const uint32_t coords_hash,
-                                            const Time& gametime) {
+void FlagWarehouseDistances::set_road_built(const uint32_t coords_hash, const Time& gametime) {
 	if (flags_map.count(coords_hash) == 1) {
 		flags_map[coords_hash].set_road_built(gametime);
 	}
 }
 
-bool FlagWarehouseDistances::is_road_prohibited(const uint32_t coords_hash,
-                                                const Time& gametime) {
+bool FlagWarehouseDistances::is_road_prohibited(const uint32_t coords_hash, const Time& gametime) {
 	if (flags_map.count(coords_hash) == 1) {
 		return flags_map[coords_hash].is_road_prohibited(gametime);
 	}

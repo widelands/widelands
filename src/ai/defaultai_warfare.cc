@@ -155,8 +155,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 
 		++count;
 		// we test max 12 sites and prefer ones tested more then 1 min ago
-		if (((site->second.last_tested + Duration(enemysites_check_delay_ * 1000)) >
-		        gametime &&
+		if (((site->second.last_tested + Duration(enemysites_check_delay_ * 1000)) > gametime &&
 		     count > 4) ||
 		    count > 12) {
 			continue;
@@ -407,33 +406,21 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 				inputs[40] = (gametime < Time(35 * 60 * 1000)) ? -1 : 0;
 				inputs[41] = (gametime < Time(40 * 60 * 1000)) ? -1 : 0;
 				inputs[42] =
-				   (site->second.last_time_attacked + Duration(1 * 60 * 1000) > gametime) ?
-				      -3 :
-				      0;
+				   (site->second.last_time_attacked + Duration(1 * 60 * 1000) > gametime) ? -3 : 0;
 				inputs[43] =
-				   (site->second.last_time_attacked + Duration(30 * 1000) > gametime) ? -1 :
-				                                                                                   0;
+				   (site->second.last_time_attacked + Duration(30 * 1000) > gametime) ? -1 : 0;
 				inputs[44] =
-				   (site->second.last_time_attacked + Duration(2 * 60 * 1000) > gametime) ?
-				      -2 :
-				      0;
+				   (site->second.last_time_attacked + Duration(2 * 60 * 1000) > gametime) ? -2 : 0;
 				inputs[45] =
-				   (site->second.last_time_attacked + Duration(40 * 1000) > gametime) ? -1 :
-				                                                                                   0;
+				   (site->second.last_time_attacked + Duration(40 * 1000) > gametime) ? -1 : 0;
 				inputs[46] =
-				   (site->second.last_time_attacked + Duration(3 * 60 * 1000) > gametime) ?
-				      -1 :
-				      0;
+				   (site->second.last_time_attacked + Duration(3 * 60 * 1000) > gametime) ? -1 : 0;
 				inputs[47] =
-				   (site->second.last_time_attacked + Duration(30 * 1000) > gametime) ? -1 :
-				                                                                                   0;
+				   (site->second.last_time_attacked + Duration(30 * 1000) > gametime) ? -1 : 0;
 				inputs[48] =
-				   (site->second.last_time_attacked + Duration(90 * 1000) > gametime) ? -1 :
-				                                                                                   0;
+				   (site->second.last_time_attacked + Duration(90 * 1000) > gametime) ? -1 : 0;
 				inputs[49] =
-				   (site->second.last_time_attacked + Duration(2 * 60 * 1000) > gametime) ?
-				      -1 :
-				      0;
+				   (site->second.last_time_attacked + Duration(2 * 60 * 1000) > gametime) ? -1 : 0;
 				inputs[50] = soldier_trained_log.count(gametime);
 				inputs[51] = soldier_trained_log.count(gametime) / 2;
 				inputs[52] = (my_to_enemy_power_ratio - 100) / 50;
@@ -1109,8 +1096,7 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 // We count bigger buildings, medium ones get 1 points, big ones 2 points
 // and we force some proportion to the number of military sites
 // sidenote: function can return kNotNeeded, but it means 'not allowed'
-BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
-                                                      const Time& gametime) {
+BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, const Time& gametime) {
 
 	assert(militarysites.size() == msites_built());
 
@@ -1120,9 +1106,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	const uint8_t size = bo.desc->get_size();
 	assert(size >= Widelands::BaseImmovable::SMALL && size <= Widelands::BaseImmovable::BIG);
 
-	if (gametime < military_last_build_ +
-	                  Duration(10 + std::abs(management_data.get_military_number_at(43)) *
-	                                              1000 / 2)) {
+	if (gametime <
+	    military_last_build_ +
+	       Duration(10 + std::abs(management_data.get_military_number_at(43)) * 1000 / 2)) {
 		return BuildingNecessity::kForbidden;
 	}
 

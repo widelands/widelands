@@ -143,24 +143,20 @@ private:
 
 	static constexpr bool kAbsValue = true;
 	static constexpr int32_t kSpotsTooLittle = 15;
-	static constexpr Duration kManagementUpdateInterval =
-	   Duration(10 * 60 * 1000);
+	static constexpr Duration kManagementUpdateInterval = Duration(10 * 60 * 1000);
 	static constexpr Duration kStatUpdateInterval = Duration(60 * 1000);
 	static constexpr Duration kFlagWarehouseUpdInterval = Duration(15 * 1000);
 
 	// common for defaultai.cc and defaultai_seafaring.cc
-	static constexpr Duration kExpeditionMinDuration =
-	   Duration(60 * 60 * 1000);
-	static constexpr Duration kExpeditionMaxDuration =
-	   Duration(210 * 60 * 1000);
+	static constexpr Duration kExpeditionMinDuration = Duration(60 * 60 * 1000);
+	static constexpr Duration kExpeditionMaxDuration = Duration(210 * 60 * 1000);
 	static constexpr Widelands::Serial kNoShip = Widelands::kInvalidSerial;
 	static constexpr Duration kShipCheckInterval = Duration(5 * 1000);
 
 	// used by defaultai_warfare.cc
 	// duration of military campaign
 	static constexpr Duration kCampaignDuration = Duration(15 * 60 * 1000);
-	static constexpr Duration kTrainingSitesCheckInterval =
-	   Duration(15 * 1000);
+	static constexpr Duration kTrainingSitesCheckInterval = Duration(15 * 1000);
 
 	// Variables of default AI
 	AiType type_;
@@ -194,9 +190,7 @@ private:
 	// if needed it calls create_shortcut_road() with a flag from which
 	// new road should be considered (or is needed)
 	bool improve_roads(const Time&);
-	bool create_shortcut_road(const Widelands::Flag&,
-	                          uint16_t maxcheckradius,
-	                          const Time& gametime);
+	bool create_shortcut_road(const Widelands::Flag&, uint16_t maxcheckradius, const Time& gametime);
 	// trying to identify roads that might be removed
 	bool dispensable_road_test(const Widelands::Road&);
 	bool dismantle_dead_ends();
@@ -211,8 +205,7 @@ private:
 
 	void print_stats(const Time&);
 
-	uint32_t
-	get_stocklevel(BuildingObserver&, const Time&, WareWorker = WareWorker::kWare) const;
+	uint32_t get_stocklevel(BuildingObserver&, const Time&, WareWorker = WareWorker::kWare) const;
 	uint32_t
 	   calculate_stocklevel(Widelands::DescriptionIndex,
 	                        WareWorker = WareWorker::kWare) const;  // count all direct outputs_
@@ -345,7 +338,7 @@ private:
 	uint32_t msites_built() const;
 	Time military_last_dismantle_;
 	Time military_last_build_;  // sometimes expansions just stops, this is time of last
-	                                       // military building built
+	                            // military building built
 	Time time_of_last_construction_;
 	Time next_mine_construction_due_;
 	uint16_t fishers_count_;
@@ -360,7 +353,7 @@ private:
 
 	// for roads
 	Time last_road_dismantled_;  // uses to prevent too frequent road dismantling
-	bool dead_ends_check_;                  // Do we need to check and dismantle dead ends?
+	bool dead_ends_check_;       // Do we need to check and dismantle dead ends?
 
 	Time enemy_last_seen_;
 	Time last_attack_time_;
