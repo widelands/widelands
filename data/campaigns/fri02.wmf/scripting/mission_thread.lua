@@ -216,7 +216,7 @@ function mining_issues()
    campaign_message_box(train_recycle_2)
    campaign_message_box(train_recycle_3)
    local o = add_campaign_objective(obj_train_recycle)
-   campaign_message_box(train_recycle_4)
+   if not has_gold then campaign_message_box(train_recycle_4) end
    p1:allow_buildings {"frisians_recycling_center", "frisians_training_camp", "frisians_training_arena"}
    local has_miner = false
    while not has_miner do

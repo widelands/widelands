@@ -33,7 +33,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 25;
+constexpr uint16_t kCurrentPacketVersion = 26;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -92,6 +92,9 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 					if (packet_version >= 25) {
 						player->is_picking_custom_starting_position_ = fr.unsigned_8();
 						player->initialization_index_ = fr.unsigned_8();
+					}
+					if (packet_version >= 26) {
+						player->allow_additional_expedition_items_ = fr.unsigned_8();
 					}
 				}
 			}
@@ -163,6 +166,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 		}
 		fw.unsigned_8(plr->is_picking_custom_starting_position() ? 1 : 0);
 		fw.unsigned_8(plr->initialization_index_);
+		fw.unsigned_8(plr->allow_additional_expedition_items_ ? 1 : 0);
 	}
 	else {
 		fw.unsigned_8(0);  //  Player is NOT in game.
