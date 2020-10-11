@@ -81,7 +81,7 @@ public:
 	/**
 	 * \return the number of players (human or ai)
 	 */
-	uint8_t get_number_of_players() {
+	uint8_t get_number_of_players() const {
 		return number_of_players_;
 	}
 

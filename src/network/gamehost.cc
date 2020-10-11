@@ -419,6 +419,8 @@ private:
 struct Client {
 	NetHostInterface::ConnectionId sock_id;
 	uint8_t playernum;
+	// TODO(Notabilis): usernum is int16_t while UserSettings::position is uint8_t.
+	//                  Should this be the same data type?
 	int16_t usernum;
 	std::string build_id;
 	Md5Checksum syncreport;
@@ -444,7 +446,7 @@ struct GameHostImpl {
 	std::unique_ptr<NetHostInterface> net;
 
 	/// List of connected clients. Note that clients are not in the same
-	/// order as players. In fact, a client must not be assigned to a player.
+	/// order as players. In fact, a client may not be assigned to a player.
 	std::vector<Client> clients;
 
 	/// The game itself; only non-null while game is running
@@ -804,6 +806,7 @@ void GameHost::send_player_command(Widelands::PlayerCommand* pc) {
  */
 void GameHost::send(ChatMessage msg) {
 	if (msg.msg.empty()) {
+		// No message: Nothing to do
 		return;
 	}
 
