@@ -92,7 +92,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	if (map_fs->file_exists("scripting/tribes")) {
 		log_info("Game: Reading Scenario Tribes ... ");
 		game_.mutable_descriptions()->register_scenario_tribes(map_fs);
-		log_info("Game: Reading Scenario Tribes took %ums\n", timer.ms_since_last_query());
 	}
 
 	log_info("Game: Reading Player Info ...\n");
