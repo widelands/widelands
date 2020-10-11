@@ -323,7 +323,7 @@ void EditorGameBase::remove_loader_ui() {
 Building& EditorGameBase::warp_building(const Coords& c,
                                         PlayerNumber const owner,
                                         DescriptionIndex const idx,
-                                        FormerBuildings former_buildings) {
+                                        const FormerBuildings& former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 	return tribe.get_building_descr(idx)->create(
@@ -342,7 +342,7 @@ EditorGameBase::warp_constructionsite(const Coords& c,
                                       PlayerNumber const owner,
                                       DescriptionIndex idx,
                                       bool loading,
-                                      FormerBuildings former_buildings,
+                                      const FormerBuildings& former_buildings,
                                       const BuildingSettings* settings,
                                       const std::map<DescriptionIndex, Quantity>& preserved_wares) {
 	Player* plr = get_player(owner);
@@ -365,7 +365,7 @@ Building&
 EditorGameBase::warp_dismantlesite(const Coords& c,
                                    PlayerNumber const owner,
                                    bool loading,
-                                   FormerBuildings former_buildings,
+                                   const FormerBuildings& former_buildings,
                                    const std::map<DescriptionIndex, Quantity>& preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();

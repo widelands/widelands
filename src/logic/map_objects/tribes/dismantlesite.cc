@@ -70,7 +70,7 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
                              const Coords& c,
                              Player* plr,
                              bool loading,
-                             FormerBuildings& former_buildings,
+                             const FormerBuildings& former_buildings,
                              const std::map<DescriptionIndex, Quantity>& preserved_wares)
    : PartiallyFinishedBuilding(gdescr), preserved_wares_(preserved_wares), next_dropout_index_(0) {
 	position_ = c;
@@ -96,7 +96,8 @@ void DismantleSite::cleanup(EditorGameBase& egbase) {
 	if (was_immovable_ && work_completed_ >= work_steps_) {
 		// Put the old immovable in place again
 		for (const auto& pair : old_buildings_) {
-			if (pair.second == MapObjectType::IMMOVABLE) {
+			// 'false' means that this was built on top of an immovable, so we reinstate that immovable
+			if (!pair.second) {
 				egbase.create_immovable(position_, pair.first, get_owner());
 				break;
 			}
@@ -150,7 +151,8 @@ const Buildcost DismantleSite::count_returned_wares(Building* building) {
 	Buildcost result;
 	DescriptionIndex first_idx = INVALID_INDEX;
 	for (const auto& pair : building->get_former_buildings()) {
-		if (pair.second == MapObjectType::BUILDING) {
+		// 'true' means that this is an enhanced building
+		if (pair.second) {
 			first_idx = pair.first;
 			break;
 		}

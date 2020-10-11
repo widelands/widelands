@@ -219,12 +219,13 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
                                 Coords const pos,
                                 bool const construct,
                                 bool loading,
-                                FormerBuildings const former_buildings) const {
+                                const FormerBuildings& former_buildings) const {
 	DescriptionIndex immovable = INVALID_INDEX;
 	if (built_over_immovable_ != INVALID_INDEX) {
 		bool immovable_previously_found = false;
 		for (const auto& pair : former_buildings) {
-			if (pair.second == MapObjectType::IMMOVABLE) {
+			// 'false' means we're building on top of an immovable
+			if (!pair.second) {
 				const MapObjectDescr* d = egbase.descriptions().get_immovable_descr(pair.first);
 				if (d->has_attribute(built_over_immovable_)) {
 					immovable_previously_found = true;
@@ -252,7 +253,8 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 	b.position_ = pos;
 	b.set_owner(owner);
 	if (immovable != INVALID_INDEX) {
-		b.old_buildings_.push_back(std::make_pair(immovable, MapObjectType::IMMOVABLE));
+		// Remember that we're building on top of an immovable so we can put it back if the building gets removed
+		b.old_buildings_.push_back(std::make_pair(immovable, false));
 	}
 	for (const auto& pair : former_buildings) {
 		b.old_buildings_.push_back(pair);
@@ -473,7 +475,8 @@ bool Building::init(EditorGameBase& egbase) {
 	}
 
 	for (const auto& pair : old_buildings_) {
-		if (pair.second == MapObjectType::IMMOVABLE) {
+		// 'false' means we're building on top of an immovable
+		if (!pair.second) {
 			assert(!was_immovable_);
 			was_immovable_ = egbase.descriptions().get_immovable_descr(pair.first);
 			assert(was_immovable_);

@@ -42,12 +42,12 @@ constexpr int32_t kPriorityHigh = 8;
 
 constexpr float kBuildingSilhouetteOpacity = 0.3f;
 
-/* The value MapObjectType::BUILDING means that the DescriptionIndex is a normal building, as
- * happens e.g. when enhancing a building. The value MapObjectType::IMMOVABLE means that the
+/* The value 'true' means that the DescriptionIndex is a normal building, as
+ * happens e.g. when enhancing a building. The value 'false' means that the
  * DescriptionIndex refers to an immovable, as happens e.g. with amazon treetop sentry. This
  * immovable should therefore always be painted below the building image.
  */
-using FormerBuildings = std::vector<std::pair<DescriptionIndex, MapObjectType>>;
+using FormerBuildings = std::vector<std::pair<DescriptionIndex, bool>>;
 
 /*
  * Common to all buildings!
@@ -146,7 +146,7 @@ public:
 	                 Coords,
 	                 bool construct,
 	                 bool loading = false,
-	                 FormerBuildings former_buildings = FormerBuildings()) const;
+	                 const FormerBuildings& former_buildings = FormerBuildings()) const;
 
 	virtual uint32_t get_conquers() const;
 	virtual uint32_t vision_range() const;
@@ -294,7 +294,7 @@ public:
 	 * empty except enhancements. For a dismantle site, the last item will
 	 * be the one being dismantled.
 	 */
-	const FormerBuildings get_former_buildings() {
+	const FormerBuildings& get_former_buildings() {
 		return old_buildings_;
 	}
 

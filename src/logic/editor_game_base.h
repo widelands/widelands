@@ -137,19 +137,19 @@ public:
 	Building& warp_building(const Coords&,
 	                        PlayerNumber,
 	                        DescriptionIndex,
-	                        FormerBuildings former_buildings = FormerBuildings());
+	                        const FormerBuildings& former_buildings = FormerBuildings());
 	Building& warp_constructionsite(const Coords&,
 	                                PlayerNumber,
 	                                DescriptionIndex,
 	                                bool loading = false,
-	                                FormerBuildings former_buildings = FormerBuildings(),
+	                                const FormerBuildings& former_buildings = FormerBuildings(),
 	                                const BuildingSettings* settings = nullptr,
 	                                const std::map<DescriptionIndex, Quantity>& preserved_wares =
 	                                   std::map<DescriptionIndex, Quantity>());
 	Building& warp_dismantlesite(const Coords&,
 	                             PlayerNumber,
 	                             bool loading = false,
-	                             FormerBuildings former_buildings = FormerBuildings(),
+	                             const FormerBuildings& former_buildings = FormerBuildings(),
 	                             const std::map<DescriptionIndex, Quantity>& preserved_wares =
 	                                std::map<DescriptionIndex, Quantity>());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
