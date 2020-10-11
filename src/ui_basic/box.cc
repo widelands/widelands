@@ -305,6 +305,8 @@ void Box::scrollbar_moved(int32_t) {
  *
  */
 void Box::add(Panel* const panel, Resizing resizing, UI::Align const align) {
+	assert(panel->get_parent() == this);
+
 	Item it;
 
 	it.type = Item::ItemPanel;

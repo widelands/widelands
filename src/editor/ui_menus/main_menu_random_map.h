@@ -114,24 +114,19 @@ private:
 	UI::Checkbox island_mode_;
 
 	// Geeky stuff
-	UI::Box map_number_box_;
+	UI::Box map_number_and_id_hbox_, map_number_and_id_vbox_1_, map_number_and_id_vbox_2_;
+
 	uint32_t map_number_;
 	UI::Textarea map_number_label_;
 	UI::EditBox map_number_edit_;
 
-	UI::Box map_id_box_;
 	UI::Textarea map_id_label_;
 	UI::EditBox map_id_edit_;
 
 	UI::Dropdown<std::string>* tribe_;
-	enum class GameDifficulty {
-		TradingOutpost_vs_Village,
-		FortVillage_vs_HQ,
-		HQ_vs_HQ,
-		Village_vs_FortVillage,
-		MinimalStart_vs_TradingOutpost,
-	};
-	UI::Dropdown<GameDifficulty>* difficulty_;
+	UI::Dropdown<uint8_t>* starting_condition_player_;
+	UI::Dropdown<uint8_t>* starting_condition_ai_;
+	UI::Checkbox* ai_teams_;
 
 	// Buttons
 	UI::Box button_box_;

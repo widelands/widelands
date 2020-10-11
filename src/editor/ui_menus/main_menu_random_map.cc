@@ -165,17 +165,18 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                 UI::Align::kCenter),
      island_mode_(&box_, Vector2i::zero(), _("Island mode")),
      // Geeky stuff
-     map_number_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
-     map_number_label_(&map_number_box_, 0, 0, 0, 0, _("Random number:")),
-     map_number_edit_(&map_number_box_,
+     map_number_and_id_hbox_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
+     map_number_and_id_vbox_1_(&map_number_and_id_hbox_, 0, 0, UI::Box::Vertical, 0, 0, margin_),
+     map_number_and_id_vbox_2_(&map_number_and_id_hbox_, 0, 0, UI::Box::Vertical, 0, 0, margin_),
+     map_number_label_(&map_number_and_id_vbox_1_, 0, 0, 0, 0, _("Random number:")),
+     map_number_edit_(&map_number_and_id_vbox_2_,
                       0,
                       0,
                       box_width_ - 2 * margin_ - map_number_label_.get_w(),
                       UI::PanelStyle::kWui),
-     map_id_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
-     map_id_label_(&map_id_box_, 0, 0, 0, 0, _("Map ID:")),
+     map_id_label_(&map_number_and_id_vbox_1_, 0, 0, 0, 0, _("Map ID:")),
      map_id_edit_(
-        &map_id_box_, 0, 0, box_width_ - 2 * margin_ - map_id_label_.get_w(), UI::PanelStyle::kWui),
+        &map_number_and_id_vbox_2_, 0, 0, box_width_ - 2 * margin_ - map_id_label_.get_w(), UI::PanelStyle::kWui),
 
      tribe_(game ? new UI::Dropdown<std::string>(&box_,
                                                  "tribe",
@@ -189,18 +190,31 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                                                  UI::PanelStyle::kWui,
                                                  UI::ButtonStyle::kWuiSecondary) :
                    nullptr),
-     difficulty_(game ? new UI::Dropdown<GameDifficulty>(&box_,
-                                                         "difficulty",
-                                                         0,
-                                                         0,
-                                                         box_width_,
-                                                         8,
-                                                         label_height_,
-                                                         _("Difficulty"),
-                                                         UI::DropdownType::kTextual,
-                                                         UI::PanelStyle::kWui,
-                                                         UI::ButtonStyle::kWuiSecondary) :
-                        nullptr),
+     starting_condition_player_(game ? new UI::Dropdown<uint8_t>(&box_,
+                                                                 "sc_player",
+                                                                 0,
+                                                                 0,
+                                                                 box_width_,
+                                                                 8,
+                                                                 label_height_,
+                                                                 _("Your Starting Condition"),
+                                                                 UI::DropdownType::kTextual,
+                                                                 UI::PanelStyle::kWui,
+                                                                 UI::ButtonStyle::kWuiSecondary) :
+                                       nullptr),
+     starting_condition_ai_(game ? new UI::Dropdown<uint8_t>(&box_,
+                                                             "sc_ai",
+                                                             0,
+                                                             0,
+                                                             box_width_,
+                                                             8,
+                                                             label_height_,
+                                                             _("Enemies’ Starting Conditions"),
+                                                             UI::DropdownType::kTextual,
+                                                             UI::PanelStyle::kWui,
+                                                             UI::ButtonStyle::kWuiSecondary) :
+                                   nullptr),
+     ai_teams_(game ? new UI::Checkbox(&box_, Vector2i::zero(), _("Team up AIs")) : nullptr),
 
      // Buttons
      button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
@@ -220,22 +234,18 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                     0,
                     UI::ButtonStyle::kWuiSecondary,
                     _("Cancel")) {
-	int32_t box_height = 0;
 	box_.set_size(100, 20);  // Prevent assert failures
 
 	// ---------- Width + Height ----------
 
 	map_size_box_.set_selection_function([this] { button_clicked(ButtonId::kMapSize); });
 	box_.add(&map_size_box_, UI::Box::Resizing::kExpandBoth);
-	box_height += margin_ + map_size_box_.get_h();
 
 	// ---------- Players -----------
 
-	box_.add(&players_);
-	box_height += margin_ + players_.get_h();
+	box_.add(&players_, UI::Box::Resizing::kExpandBoth);
 
 	box_.add_space(margin_);
-	box_height += margin_;
 
 	players_.changed.connect([this]() { button_clicked(ButtonId::kPlayers); });
 
@@ -253,10 +263,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 		}
 		nr_edit_box_changed();
 	});
-	box_.add(&world_);
-	box_height += margin_ + world_.get_h();
+	box_.add(&world_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(margin_);
-	box_height += margin_;
 
 	// ---------- Amount of Resources (Low/Medium/High) ----------
 
@@ -268,25 +276,21 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 		resource_amount_ = resources_.get_selected();
 		nr_edit_box_changed();
 	});
-	box_.add(&resources_);
-	box_height += margin_ + resources_.get_h();
+	box_.add(&resources_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(margin_);
-	box_height += margin_;
 
 	// ---------- Water -----------
 	water_.get_buttons()[0]->sigclicked.connect([this]() { button_clicked(ButtonId::kWater); });
 	water_.get_buttons()[1]->sigclicked.connect([this]() { button_clicked(ButtonId::kWater); });
 
-	box_.add(&water_);
-	box_height += margin_ + water_.get_h();
+	box_.add(&water_, UI::Box::Resizing::kExpandBoth);
 
 	// ---------- Land -----------
 
 	land_.get_buttons()[0]->sigclicked.connect([this]() { button_clicked(ButtonId::kLand); });
 	land_.get_buttons()[1]->sigclicked.connect([this]() { button_clicked(ButtonId::kLand); });
 
-	box_.add(&land_);
-	box_height += margin_ + land_.get_h();
+	box_.add(&land_, UI::Box::Resizing::kExpandBoth);
 
 	// ---------- Wasteland -----------
 
@@ -295,8 +299,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 	wasteland_.get_buttons()[1]->sigclicked.connect(
 	   [this]() { button_clicked(ButtonId::kWasteland); });
 
-	box_.add(&wasteland_);
-	box_height += margin_ + wasteland_.get_h();
+	box_.add(&wasteland_, UI::Box::Resizing::kExpandBoth);
 
 	// ---------- Mountains -----------
 
@@ -309,24 +312,20 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 	mountains_box_.add(&mountains_);
 	mountains_box_.set_size(box_width_, mountains_label_.get_h());
 
-	box_.add(&mountains_box_);
-	box_height += margin_ + mountains_box_.get_h();
+	box_.add(&mountains_box_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(margin_);
-	box_height += margin_;
 
 	// ---------- Island mode ----------
 
 	island_mode_.set_state(true);
-	box_.add(&island_mode_);
-	box_height += margin_ + island_mode_.get_h();
+	box_.add(&island_mode_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(margin_);
-	box_height += margin_;
 
 	island_mode_.changed.connect([this]() { button_clicked(ButtonId::kIslandMode); });
 
 	// ---------- Random map number edit ----------
 
-	map_number_box_.add(&map_number_label_);
+	map_number_and_id_vbox_1_.add(&map_number_label_, UI::Box::Resizing::kExpandBoth);
 
 	map_number_edit_.changed.connect([this]() { nr_edit_box_changed(); });
 	RNG rng;
@@ -334,24 +333,22 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 	rng.rand();
 	map_number_ = rng.rand();
 	map_number_edit_.set_text(std::to_string(static_cast<unsigned int>(map_number_)));
-	map_number_box_.add(&map_number_edit_);
-	box_.add(&map_number_box_);
+	map_number_and_id_vbox_2_.add(&map_number_edit_, UI::Box::Resizing::kExpandBoth);
 
-	box_height += margin_ + map_number_box_.get_h();
 	box_.add_space(margin_);
-	box_height += margin_;
 
 	// ---------- Map ID String edit ----------
 
-	map_id_box_.add(&map_id_label_);
+	map_number_and_id_vbox_1_.add(&map_id_label_, UI::Box::Resizing::kExpandBoth);
 
 	map_id_edit_.set_text("abcd-efgh-ijkl-mnop");
 	map_id_edit_.changed.connect([this]() { id_edit_box_changed(); });
-	map_id_box_.add(&map_id_edit_);
-	box_.add(&map_id_box_);
-	box_height += margin_ + map_id_edit_.get_h();
+	map_number_and_id_vbox_2_.add(&map_id_edit_, UI::Box::Resizing::kExpandBoth);
+
+	map_number_and_id_hbox_.add(&map_number_and_id_vbox_1_, UI::Box::Resizing::kExpandBoth);
+	map_number_and_id_hbox_.add(&map_number_and_id_vbox_2_, UI::Box::Resizing::kExpandBoth);
+	box_.add(&map_number_and_id_hbox_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(margin_);
-	box_height += margin_;
 
 	// ---------- Game-specific stuff ----------
 
@@ -359,26 +356,37 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 		tribe_->add(pgettext("tribe", "Random"), "",
 		            g_image_cache->get("images/ui_fsmenu/random.png"), true,
 		            _("The tribe will be selected at random"));
+
+		bool first_pass = true;
 		for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
 			tribe_->add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon), false,
 			            tribeinfo.tooltip);
+
+			// I here assume that all tribes use equivalents of the same starting
+			// conditions, and that their order is the same for all tribes
+			if (first_pass) {
+				uint8_t i = 0;
+				for (const auto& init : tribeinfo.initializations) {
+					if (init.required_map_tags.empty()) {
+						starting_condition_player_->add(init.descname, i, nullptr, i == 0, init.tooltip);
+						starting_condition_ai_->add(init.descname, i, nullptr, i == 0, init.tooltip);
+					}
+					++i;
+				}
+				first_pass = false;
+			}
 		}
 
-		box_.add(tribe_);
-		box_height += margin_ + tribe_->get_h();
-		box_.add_space(margin_);
-		box_height += margin_;
+		ai_teams_->set_state(true);
 
-		difficulty_->add(_("Very Easy"), GameDifficulty::TradingOutpost_vs_Village);
-		difficulty_->add(_("Easy"), GameDifficulty::FortVillage_vs_HQ);
-		difficulty_->add(_("Normal"), GameDifficulty::HQ_vs_HQ, nullptr, true);
-		difficulty_->add(_("Hard"), GameDifficulty::Village_vs_FortVillage);
-		difficulty_->add(_("Very Hard"), GameDifficulty::MinimalStart_vs_TradingOutpost);
-
-		box_.add(difficulty_);
-		box_height += margin_ + difficulty_->get_h();
+		box_.add(tribe_, UI::Box::Resizing::kExpandBoth);
 		box_.add_space(margin_);
-		box_height += 3 * margin_;
+		box_.add(starting_condition_player_, UI::Box::Resizing::kExpandBoth);
+		box_.add_space(margin_);
+		box_.add(starting_condition_ai_, UI::Box::Resizing::kExpandBoth);
+		box_.add_space(margin_);
+		box_.add(ai_teams_, UI::Box::Resizing::kExpandBoth);
+		box_.add_space(margin_);
 	}
 
 	// ---------- "Generate Map" button ----------
@@ -387,19 +395,15 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 	ok_button_.sigclicked.connect(
 	   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk); });
 	if (UI::g_fh->fontset()->is_rtl()) {
-		button_box_.add(&ok_button_);
-		button_box_.add(&cancel_button_);
+		button_box_.add(&ok_button_, UI::Box::Resizing::kExpandBoth);
+		button_box_.add(&cancel_button_, UI::Box::Resizing::kExpandBoth);
 	} else {
-		button_box_.add(&cancel_button_);
-		button_box_.add(&ok_button_);
+		button_box_.add(&cancel_button_, UI::Box::Resizing::kExpandBoth);
+		button_box_.add(&ok_button_, UI::Box::Resizing::kExpandBoth);
 	}
-	box_.add(&button_box_);
-	box_height += margin_ + button_box_.get_h();
-	box_height += 6 * margin_;
+	box_.add(&button_box_, UI::Box::Resizing::kExpandBoth);
 
-	box_.set_size(box_width_, box_height);
-
-	set_inner_size(box_.get_w() + 2 * margin_, box_.get_h() + 2 * margin_);
+	set_center_panel(&box_);
 
 	nr_edit_box_changed();
 	center_to_parent();
@@ -592,11 +596,7 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 		   /** TRANSLATORS: You don't need to be literal with your translation, */
 		   /** TRANSLATORS: as long as the user understands that he needs to check the player
 		     positions.*/
-		   _("The map has been generated. "
-		     "Please double-check the player starting positions to make sure that your carriers "
-		     "won’t "
-		     "drown, "
-		     "or be stuck on an island or on top of a mountain."),
+		   _("The map has been generated. Please double-check the player starting positions to make sure that your carriers won’t drown, or be stuck on an island or on top of a mountain."),
 		   UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 	} else {
@@ -608,7 +608,7 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 			map->set_author(_("The Widelands Random Map Generator"));
 			map->set_description(
 			   _("This map was generated automatically by the Widelands Random Map Generator."));
-			map->set_waterway_max_length(std::rand() % 20);  // NOLINT
+			map->set_waterway_max_length((std::rand() % 5) * (std::rand() % 6));  // NOLINT
 
 			sp->set_map("", "", nr_players, false);
 			sp->set_scenario(false);
@@ -617,60 +617,18 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 			sp->set_peaceful_mode(false);
 			sp->set_custom_starting_positions(false);
 
-			const GameDifficulty difficulty = difficulty_->get_selected();
-			auto get_init = [difficulty](const bool is_player) {
-				// Update these constants if the starting conditions are reordered!!
-				static uint8_t constexpr kIndexOf_HQ = 0;
-				static uint8_t constexpr kIndexOf_FortifiedVillage = 1;
-				static uint8_t constexpr kIndexOf_TradingOutpost = 2;
-				static uint8_t constexpr kIndexOf_Village = 3;
-				// static uint8_t constexpr kIndexOf_PoorHamlet = 4;
-				static uint8_t constexpr kIndexOf_StrugglingOutpost = 5;
-				// static uint8_t constexpr kIndexOf_Discovery = 6;
-				// static uint8_t constexpr kIndexOf_NewWorld = 7;
-				switch (difficulty) {
-				case GameDifficulty::HQ_vs_HQ:
-					return kIndexOf_HQ;
-				case GameDifficulty::TradingOutpost_vs_Village:
-					return is_player ? kIndexOf_TradingOutpost : kIndexOf_Village;
-				case GameDifficulty::FortVillage_vs_HQ:
-					return is_player ? kIndexOf_FortifiedVillage : kIndexOf_HQ;
-				case GameDifficulty::Village_vs_FortVillage:
-					return is_player ? kIndexOf_Village : kIndexOf_FortifiedVillage;
-				case GameDifficulty::MinimalStart_vs_TradingOutpost:
-					return is_player ? kIndexOf_StrugglingOutpost : kIndexOf_TradingOutpost;
-				}
-				NEVER_HERE();
-			};
-			auto get_team = [difficulty](const bool is_player) {
-				if (is_player) {
-					return 0;  // He's always by himself
-				}
-				switch (difficulty) {
-				case GameDifficulty::TradingOutpost_vs_Village:
-					// Very Easy: Don't use teams
-					return 0;
-				case GameDifficulty::FortVillage_vs_HQ:
-					// Easy: Team up some AIs but not all of them
-					return std::rand() % 2;  // NOLINT
-				default:
-					// Others: Team up all AIs
-					return 1;
-				}
-			};
-
 			for (unsigned p = 0; p < nr_players; ++p) {
 				if (p == plnum) {
 					sp->set_player_name(p, _("Player"));
 					const std::string& tribe = tribe_->get_selected();
 					sp->set_player_tribe(p, tribe, tribe.empty());
-					sp->set_player_team(p, get_team(true));
-					sp->set_player_init(p, get_init(true));
+					sp->set_player_team(p, 0);
+					sp->set_player_init(p, starting_condition_player_->get_selected());
 				} else {
-					sp->set_player_name(p, (boost::format(_("AI %u")) % (p > plnum ? p : p + 1)).str());
+					sp->set_player_name(p, (boost::format(_("Computer %u")) % (p > plnum ? p : p + 1)).str());
 					sp->set_player_tribe(p, "", true);
-					sp->set_player_team(p, get_team(false));
-					sp->set_player_init(p, get_init(false));
+					sp->set_player_team(p, ai_teams_->get_state() ? 1 : 0);
+					sp->set_player_init(p, starting_condition_ai_->get_selected());
 				}
 			}
 		} else {
