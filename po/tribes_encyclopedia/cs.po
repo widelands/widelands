@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-18 13:37+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
 "PO-Revision-Date: 2020-09-11 12:00+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
@@ -6234,7 +6234,7 @@ msgstr "Vybavení:"
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
 #: ../../data/tribes/scripting/help/building_help.lua:329
-#: ../../data/tribes/scripting/help/building_help.lua:396
+#: ../../data/tribes/scripting/help/building_help.lua:405
 msgid "Text needed"
 msgstr "Text chybí"
 
@@ -6253,22 +6253,22 @@ msgstr "Obecné"
 msgid "Purpose:"
 msgstr "Účel:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:400
-#: ../../data/tribes/scripting/help/building_help.lua:620
+#: ../../data/tribes/scripting/help/building_help.lua:409
+#: ../../data/tribes/scripting/help/building_help.lua:629
 msgid "Note:"
 msgstr "Poznámka:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:405
+#: ../../data/tribes/scripting/help/building_help.lua:414
 msgid "Work area radius:"
 msgstr "Pracovní oblast:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:409
-#: ../../data/tribes/scripting/help/building_help.lua:414
+#: ../../data/tribes/scripting/help/building_help.lua:418
+#: ../../data/tribes/scripting/help/building_help.lua:423
 msgid "Healing:"
 msgstr "Uzdravování:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:410
-#: ../../data/tribes/scripting/help/building_help.lua:415
+#: ../../data/tribes/scripting/help/building_help.lua:419
+#: ../../data/tribes/scripting/help/building_help.lua:424
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
@@ -6277,194 +6277,194 @@ msgstr[1] "Vojáci ve vojenské budově se uzdravují %d bodů zdraví za sekund
 msgstr[2] "Vojáků ve vojenské budově se uzdravuje %d bodů zdraví za sekundu."
 msgstr[3] "Vojáků ve vojenské budově se uzdravuje %d bodů zdraví za sekundu."
 
-#: ../../data/tribes/scripting/help/building_help.lua:411
-#: ../../data/tribes/scripting/help/building_help.lua:417
+#: ../../data/tribes/scripting/help/building_help.lua:420
+#: ../../data/tribes/scripting/help/building_help.lua:426
 msgid "Conquer range:"
 msgstr "Obsazení oblasti:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:416
-#: ../../data/tribes/scripting/help/building_help.lua:420
+#: ../../data/tribes/scripting/help/building_help.lua:425
+#: ../../data/tribes/scripting/help/building_help.lua:429
 msgid "Capacity:"
 msgstr "Kapacita:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:422
+#: ../../data/tribes/scripting/help/building_help.lua:431
 msgid "Vision range:"
 msgstr "Dohled:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:447
+#: ../../data/tribes/scripting/help/building_help.lua:456
 msgid "%1$s from: %2$s"
 msgstr "%1$s z: %2$s"
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../data/tribes/scripting/help/building_help.lua:453
+#: ../../data/tribes/scripting/help/building_help.lua:462
 msgid "Incoming:"
 msgstr "Přírůstky:"
 
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../data/tribes/scripting/help/building_help.lua:462
+#: ../../data/tribes/scripting/help/building_help.lua:471
 msgid "Mines:"
 msgstr "Doly:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:464
+#: ../../data/tribes/scripting/help/building_help.lua:473
 msgid "Collects:"
 msgstr "Výběr:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:473
+#: ../../data/tribes/scripting/help/building_help.lua:482
 msgid "Creates:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:478
+#: ../../data/tribes/scripting/help/building_help.lua:487
 msgid "Produces:"
 msgstr "Produkce:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:520
+#: ../../data/tribes/scripting/help/building_help.lua:529
 msgid "Outgoing:"
 msgstr "Úbytky:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:521
+#: ../../data/tribes/scripting/help/building_help.lua:530
 msgid "None"
 msgstr "Nic"
 
-#: ../../data/tribes/scripting/help/building_help.lua:522
+#: ../../data/tribes/scripting/help/building_help.lua:531
 msgid "Dependencies"
 msgstr "Závislosti"
 
-#: ../../data/tribes/scripting/help/building_help.lua:538
+#: ../../data/tribes/scripting/help/building_help.lua:547
 msgid "Health Training"
 msgstr "Trénování zdraví"
 
-#: ../../data/tribes/scripting/help/building_help.lua:539
+#: ../../data/tribes/scripting/help/building_help.lua:548
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr "Trénuje \"zdraví\" z %1% na %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:541
-#: ../../data/tribes/scripting/help/building_help.lua:555
-#: ../../data/tribes/scripting/help/building_help.lua:567
-#: ../../data/tribes/scripting/help/building_help.lua:580
+#: ../../data/tribes/scripting/help/building_help.lua:550
+#: ../../data/tribes/scripting/help/building_help.lua:564
+#: ../../data/tribes/scripting/help/building_help.lua:576
+#: ../../data/tribes/scripting/help/building_help.lua:589
 msgid "Soldiers:"
 msgstr "Vojáci:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:551
+#: ../../data/tribes/scripting/help/building_help.lua:560
 msgid "Attack Training"
 msgstr "Trénování útoku"
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:553
+#: ../../data/tribes/scripting/help/building_help.lua:562
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr "Trénuje \"útok\" z %1% na %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:564
+#: ../../data/tribes/scripting/help/building_help.lua:573
 msgid "Defense Training"
 msgstr "Trénování obrany"
 
-#: ../../data/tribes/scripting/help/building_help.lua:565
+#: ../../data/tribes/scripting/help/building_help.lua:574
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr "Trénuje \"obranu\" z %1% na %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:577
+#: ../../data/tribes/scripting/help/building_help.lua:586
 msgid "Evade Training"
 msgstr "Trénování odrážení"
 
-#: ../../data/tribes/scripting/help/building_help.lua:578
+#: ../../data/tribes/scripting/help/building_help.lua:587
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr "Trénuje \"odrážení\" z %1% na %2%"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:605
+#: ../../data/tribes/scripting/help/building_help.lua:614
 msgid "Building"
 msgstr "Stavba"
 
-#: ../../data/tribes/scripting/help/building_help.lua:621
+#: ../../data/tribes/scripting/help/building_help.lua:630
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "Tato budova může buď být postavena, nebo získána úpravou existující stavby."
 
-#: ../../data/tribes/scripting/help/building_help.lua:627
+#: ../../data/tribes/scripting/help/building_help.lua:636
 msgid "Direct build cost:"
 msgstr "Přímé stavební náklady:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:629
+#: ../../data/tribes/scripting/help/building_help.lua:638
 #: ../../data/tribes/scripting/help/immovable_help.lua:53
 msgid "Build cost:"
 msgstr "Stavební náklady:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:640
+#: ../../data/tribes/scripting/help/building_help.lua:649
 msgid "Or enhanced from:"
 msgstr "Nebo úpravou z:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:642
+#: ../../data/tribes/scripting/help/building_help.lua:651
 msgid "Enhanced from:"
 msgstr "Upraveno z:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:651
+#: ../../data/tribes/scripting/help/building_help.lua:660
 msgid "Cumulative cost:"
 msgstr "Kumulativní náklady:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:696
-#: ../../data/tribes/scripting/help/building_help.lua:745
+#: ../../data/tribes/scripting/help/building_help.lua:705
+#: ../../data/tribes/scripting/help/building_help.lua:754
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: ../../data/tribes/scripting/help/building_help.lua:701
+#: ../../data/tribes/scripting/help/building_help.lua:710
 msgid "If built directly, dismantle yields:"
 msgstr "Pokud postaveno, rozebrání poskytne:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:706
+#: ../../data/tribes/scripting/help/building_help.lua:715
 msgid "If enhanced, dismantle yields:"
 msgstr "Pokud upraveno, rozebrání poskytne:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:709
-#: ../../data/tribes/scripting/help/building_help.lua:750
+#: ../../data/tribes/scripting/help/building_help.lua:718
+#: ../../data/tribes/scripting/help/building_help.lua:759
 msgid "Dismantle yields:"
 msgstr "Rozebrání poskytne:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:759
+#: ../../data/tribes/scripting/help/building_help.lua:768
 msgid "Can be enhanced to:"
 msgstr "Může být upraveno na:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:789
+#: ../../data/tribes/scripting/help/building_help.lua:798
 msgid "Crew required:"
 msgstr "Potřebuje posádku:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:789
+#: ../../data/tribes/scripting/help/building_help.lua:798
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "Dělníci"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:811
+#: ../../data/tribes/scripting/help/building_help.lua:820
 #, lua-format
 msgid "%s or better"
 msgstr "%s nebo lepší"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
-#: ../../data/tribes/scripting/help/building_help.lua:823
+#: ../../data/tribes/scripting/help/building_help.lua:832
 msgid "Worker uses:"
 msgstr ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
 #. uses
-#: ../../data/tribes/scripting/help/building_help.lua:826
+#: ../../data/tribes/scripting/help/building_help.lua:835
 msgid "Workers use:"
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
-#: ../../data/tribes/scripting/help/building_help.lua:858
+#: ../../data/tribes/scripting/help/building_help.lua:867
 msgid "Calculation needed"
 msgstr "Nutný výpočet"
 
-#: ../../data/tribes/scripting/help/building_help.lua:862
+#: ../../data/tribes/scripting/help/building_help.lua:871
 msgid "Production"
 msgstr "Produkce"
 
-#: ../../data/tribes/scripting/help/building_help.lua:863
+#: ../../data/tribes/scripting/help/building_help.lua:872
 msgid "Performance:"
 msgstr "Výkon:"
 
