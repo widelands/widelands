@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-02 07:58+0000\n"
-"PO-Revision-Date: 2020-10-02 08:02+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-10 05:39+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -721,7 +721,7 @@ msgstr "%1%x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:203
 #: ../../src/ui_fsmenu/launch_mpg.cc:58
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
 #: ../../src/ui_fsmenu/netsetup_lan.cc:121 ../../src/wui/mapdetails.cc:135
 #: ../../src/wui/minimap.cc:120
 msgid "Map"
@@ -735,7 +735,6 @@ msgstr "이름: %s"
 
 #: ../../src/editor/tools/info_tool.cc:208
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:430
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:160
 msgid "Size: %1% x %2%"
 msgstr "크기: %1% x %2%"
 
@@ -754,6 +753,7 @@ msgid "Author: %s"
 msgstr "제작자: %s"
 
 #: ../../src/editor/tools/info_tool.cc:222
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:111
 #, c-format
 msgid "Description: %s"
 msgstr "설명: %s"
@@ -913,7 +913,6 @@ msgid "Disabled"
 msgstr "사용 안 함"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:356
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:163
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
@@ -1171,7 +1170,6 @@ msgstr "선수의 수"
 #: ../../src/logic/single_player_game_settings_provider.cc:105
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:69
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:101
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:98
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:112
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:161
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:47
@@ -1191,7 +1189,6 @@ msgstr "부족"
 #: ../../src/editor/ui_menus/player_menu.cc:179
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:400
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:98
-#: ../../src/wui/playerdescrgroup.cc:162
 msgctxt "tribe"
 msgid "Random"
 msgstr "무작위"
@@ -2857,7 +2854,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "선택 안됨"
 
-#: ../../src/ui_basic/progresswindow.cc:54
+#: ../../src/ui_basic/progresswindow.cc:58
 msgid "Loading…"
 msgstr "불러오는 중…"
 
@@ -3124,7 +3121,6 @@ msgstr "선수가 게임을 시작할 때 자신의 시작 위치를 선택할 �
 #: ../../src/ui_fsmenu/scenariodetails.cc:48
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:279
 #: ../../src/wui/map_tags.cc:44 ../../src/wui/mapdetails.cc:135
-#: ../../src/wui/playerdescrgroup.cc:290
 msgid "Scenario"
 msgstr "시나리오"
 
@@ -3196,11 +3192,11 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "경고:\n당신이 선택한 저장된 게임은 디렉토리입니다. 이 상황은 당신이 옵션 'nozip'을 참으로 설정하거나 수동으로 저장된 게임을 압축 해제할 때 발생합니다.\n와이드랜드는 디렉토리 구조를 클라이언트에게 전달하지 못하므로, 다른 저장된 게임을 선택하거나 디렉토리의 내용물을 압축해주세요."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:273 ../../src/ui_fsmenu/launch_spg.cc:142
+#: ../../src/ui_fsmenu/launch_mpg.cc:273 ../../src/ui_fsmenu/launch_spg.cc:144
 msgid "File not found"
 msgstr "파일이 없습니다"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:274 ../../src/ui_fsmenu/launch_spg.cc:143
+#: ../../src/ui_fsmenu/launch_mpg.cc:274 ../../src/ui_fsmenu/launch_spg.cc:145
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -3297,7 +3293,7 @@ msgstr "지도: %s"
 msgid "Win Condition: %s"
 msgstr "승리 조건: %s"
 
-#: ../../src/ui_fsmenu/main.cc:221
+#: ../../src/ui_fsmenu/main.cc:221 ../../src/ui_fsmenu/mapdetailsbox.cc:106
 #, c-format
 msgid "Players: %s"
 msgstr "선수들: %s"
@@ -3412,33 +3408,60 @@ msgid ""
 "General Public License V2.0"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:45
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#, c-format
+msgid "invalid tribe ‘%s’"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:47
+msgid "Saved Players"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:54
+#, c-format
+msgid "Player %u: –"
+msgstr ""
+
+#. * TRANSLATORS: "Player 1 (Barbarians): Playername"
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:77
+#, c-format
+msgid "Player %1$u (%2$s): %3$s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+msgid "Map Details"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+msgid "Scenario Details"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:100
+#, c-format
+msgid "Size: %s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:103
+#, c-format
+msgid "%1$u×%2$u"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:118
+#, c-format
+msgid "Hint: %s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:149
 msgid "No map selected"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:56
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:160
 msgid "Change map or saved game"
 msgstr "지도 또는 저장된 게임 바꾸기"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:93
-msgid "Saved players are:"
-msgstr "저장된 선수:"
-
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:101
-msgid "closed"
-msgstr "닫힘"
-
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:150
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:214
 msgid "(no map)"
 msgstr "(지도 없음)"
-
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:158
-msgid "Map details:"
-msgstr "지도 상세 정보:"
-
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:168
-msgid "Scenario mode selected"
-msgstr "시나리오 모드 선택됨"
 
 #: ../../src/ui_fsmenu/mapselect.cc:52
 msgid "Choose a map"
@@ -3495,7 +3518,6 @@ msgstr "편"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:286
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:177
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:178
-#: ../../src/wui/playerdescrgroup.cc:144
 msgid "Random AI"
 msgstr "무작위 AI"
 
@@ -3513,13 +3535,11 @@ msgstr "닫힘"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:302
 #: ../../src/ui_fsmenu/netsetup_lan.cc:224
-#: ../../src/wui/playerdescrgroup.cc:128
 msgid "Open"
 msgstr "열기"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:310
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:195
-#: ../../src/wui/playerdescrgroup.cc:152
 msgid "Human"
 msgstr "인간"
 
@@ -3533,7 +3553,6 @@ msgstr "선수 %u와 공유함"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:446
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:280
-#: ../../src/wui/playerdescrgroup.cc:290
 msgid "Start type is set via the scenario"
 msgstr "시작 유형은 시나리오를 통해 설정됩니다."
 
@@ -4127,7 +4146,7 @@ msgid "Returns:"
 msgstr "반납:"
 
 #: ../../src/wui/buildingwindow.cc:383 ../../src/wui/fieldaction.cc:471
-#: ../../src/wui/shipwindow.cc:138
+#: ../../src/wui/shipwindow.cc:137
 msgid "Show Debug Window"
 msgstr "디버그 창 확인"
 
@@ -5221,14 +5240,6 @@ msgstr "땅길"
 msgid "Zoom"
 msgstr "배율"
 
-#: ../../src/wui/playerdescrgroup.cc:141
-msgid "Computer"
-msgstr "컴퓨터"
-
-#: ../../src/wui/playerdescrgroup.cc:163
-msgid "The tribe will be set at random."
-msgstr "부족은 무작위로 선택됩니다."
-
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:106
 msgctxt "unit_narrow"
@@ -5624,64 +5635,64 @@ msgstr "정찰중인 탐험 표시"
 msgid "Show expeditions that have found a port space or are founding a colony"
 msgstr "항구 자리를 찾았거나 식민지를 세우고있는 탐험대를 표시"
 
-#: ../../src/wui/shipwindow.cc:76
+#: ../../src/wui/shipwindow.cc:75
 msgid "Scout towards the north west"
 msgstr "북서쪽으로 정찰"
 
-#: ../../src/wui/shipwindow.cc:81
+#: ../../src/wui/shipwindow.cc:80
 msgid "Explore the island’s coast clockwise"
 msgstr "섬의 해안을 시계 방향으로 탐험"
 
-#: ../../src/wui/shipwindow.cc:86
+#: ../../src/wui/shipwindow.cc:85
 msgid "Scout towards the north east"
 msgstr "북동쪽으로 정찰"
 
-#: ../../src/wui/shipwindow.cc:91
+#: ../../src/wui/shipwindow.cc:90
 msgid "Scout towards the west"
 msgstr "서쪽으로 정찰"
 
-#: ../../src/wui/shipwindow.cc:96
+#: ../../src/wui/shipwindow.cc:95
 msgid "Construct a port at the current location"
 msgstr "항구를 현재 위치에 건설"
 
-#: ../../src/wui/shipwindow.cc:101
+#: ../../src/wui/shipwindow.cc:100
 msgid "Scout towards the east"
 msgstr "동쪽으로 정찰"
 
-#: ../../src/wui/shipwindow.cc:106
+#: ../../src/wui/shipwindow.cc:105
 msgid "Scout towards the south west"
 msgstr "남서쪽으로 정찰"
 
-#: ../../src/wui/shipwindow.cc:111
+#: ../../src/wui/shipwindow.cc:110
 msgid "Explore the island’s coast counter clockwise"
 msgstr "섬의 해안을 반시계 방향으로 탐험"
 
-#: ../../src/wui/shipwindow.cc:116
+#: ../../src/wui/shipwindow.cc:115
 msgid "Scout towards the south east"
 msgstr "남동쪽으로 정찰"
 
-#: ../../src/wui/shipwindow.cc:126
+#: ../../src/wui/shipwindow.cc:125
 msgid "Sink the ship"
 msgstr "자침"
 
-#: ../../src/wui/shipwindow.cc:130
+#: ../../src/wui/shipwindow.cc:129
 msgid "Cancel the Expedition"
 msgstr "탐험 취소"
 
-#: ../../src/wui/shipwindow.cc:143
+#: ../../src/wui/shipwindow.cc:142
 msgid "Go to destination"
 msgstr "목적지로 이동"
 
-#: ../../src/wui/shipwindow.cc:148
+#: ../../src/wui/shipwindow.cc:147
 msgid "Go to ship"
 msgstr "배로 이동"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:215
+#: ../../src/wui/shipwindow.cc:211
 msgid "Cancel Expedition"
 msgstr "탐험 취소"
 
-#: ../../src/wui/shipwindow.cc:216
+#: ../../src/wui/shipwindow.cc:212
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
