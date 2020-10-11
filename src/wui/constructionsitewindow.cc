@@ -224,7 +224,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_stopped_->clickedto.connect([this, ps](bool stop) {
 				if (stop != ps->stopped) {
 					if (game_) {
-						game_->send_player_start_stop_building(*construction_site_.get(ibase()->egbase()));
+						game_->send_player_start_stop_building(
+						   *construction_site_.get(ibase()->egbase()));
 					} else {
 						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 					}
