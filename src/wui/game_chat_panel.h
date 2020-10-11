@@ -24,6 +24,7 @@
 
 #include "chat/chat.h"
 #include "ui_basic/box.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 
@@ -39,6 +40,8 @@ struct GameChatPanel : public UI::Panel {
 	              uint32_t h,
 	              ChatProvider&,
 	              UI::PanelStyle style);
+
+	virtual ~GameChatPanel();
 
 	// Signal is called when a message has been sent by the user.
 	boost::signals2::signal<void()> sent;
@@ -63,14 +66,19 @@ private:
 	void key_enter();
 	void key_escape();
 	void draw(RenderTarget& dst) override;
+	void set_recipient();
+	void prepare_recipients();
 
 	ChatProvider& chat_;
-	UI::Box box_;
+	UI::Box vbox_;
 	UI::MultilineTextarea chatbox;
+	UI::Box hbox_;
+	UI::Dropdown<std::string> recipient_dropdown_;
 	UI::EditBox editbox;
 	size_t chat_message_counter;
 	FxId chat_sound;
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
+	boost::signals2::connection update_signal_connection;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_CHAT_PANEL_H

@@ -21,6 +21,10 @@
 
 #include <SDL_mouse.h>
 
+#include "base/i18n.h"
+#include "graphic/image_cache.h"
+#include "graphic/playercolor.h"
+#include "network/participantlist.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/mouse_constants.h"
 #include "wui/chat_msg_layout.h"
@@ -29,31 +33,44 @@
  * Create a game chat panel
  */
 GameChatPanel::GameChatPanel(UI::Panel* parent,
-                             int32_t const x,
-                             int32_t const y,
-                             uint32_t const w,
-                             uint32_t const h,
-                             ChatProvider& chat,
-                             UI::PanelStyle style)
-   : UI::Panel(parent, x, y, w, h),
-     chat_(chat),
-     box_(this, 0, 0, UI::Box::Vertical),
-     chatbox(&box_,
-             0,
-             0,
-             0,
-             0,
-             style,
-             "",
-             UI::Align::kLeft,
-             UI::MultilineTextarea::ScrollMode::kScrollLog),
-     editbox(this, 0, 0, w, style),
-     chat_message_counter(0),
-     chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
+								int32_t const x,
+								int32_t const y,
+								uint32_t const w,
+								uint32_t const h,
+								ChatProvider& chat,
+								UI::PanelStyle style)
+	: UI::Panel(parent, x, y, w, h),
+		chat_(chat),
+		vbox_(this, 0, 0, UI::Box::Vertical),
+		chatbox(&vbox_,
+			0,
+			0,
+			0,
+			0,
+			style,
+			"",
+			UI::Align::kLeft,
+			UI::MultilineTextarea::ScrollMode::kScrollLog),
+		hbox_(&vbox_, 0, 0, UI::Box::Horizontal),
+		recipient_dropdown_(&hbox_,
+			"chat_recipient_dropdown",
+			0,
+			h - 25,
+			25,
+			16,
+			25,
+			_("Recipient"),
+			UI::DropdownType::kPictorial,
+			UI::PanelStyle::kFsMenu,
+			UI::ButtonStyle::kFsMenuSecondary),
+		editbox(&hbox_, 28, 0, w - 28, style),
+		chat_message_counter(0),
+		chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")),
+		has_team_(false) {
 
-	box_.add(&chatbox, UI::Box::Resizing::kExpandBoth);
-	box_.add_space(4);
-	box_.add(&editbox, UI::Box::Resizing::kFullSize);
+	vbox_.add(&chatbox, UI::Box::Resizing::kExpandBoth);
+	vbox_.add_space(4);
+	vbox_.add(&hbox_, UI::Box::Resizing::kFullSize);//, UI::Box::Resizing::kFullSize);
 
 	editbox.ok.connect([this]() { key_enter(); });
 	editbox.cancel.connect([this]() { key_escape(); });
@@ -62,6 +79,29 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 	set_handle_mouse(true);
 	set_can_focus(true);
 
+	if (chat_.participants_ == nullptr) {
+		// No access to participant list. Hide the dropdown
+		recipient_dropdown_.set_visible(false);
+		// Increase the size of the edit box to fill the empty space
+		editbox.set_pos(Vector2i(editbox.get_x() - 28, editbox.get_y()));
+		editbox.set_size(editbox.get_w() + 28, editbox.get_h());
+		editbox.set_text(chat_.last_recipient_);
+	} else {
+		// When an entry has been selected, update the "@playername " in the edit field
+		recipient_dropdown_.selected.connect([this]() { set_recipient(); });
+		// Fill the dropdown menu with usernames
+		prepare_recipients();
+		// Insert "@playername " into the edit field if the dropdown currently has a selection
+		set_recipient();
+		update_signal_connection = chat_.participants_->participants_updated.connect([this]() {
+				// When the participants change, create new contents for dropdown
+				prepare_recipients();
+			});
+		hbox_.add(&recipient_dropdown_, UI::Box::Resizing::kAlign);
+		hbox_.add_space(4);
+
+	hbox_.add(&editbox, UI::Box::Resizing::kFillSpace);
+
 	chat_message_subscriber_ =
 	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recalculate(true); });
 	recalculate(true);
@@ -69,7 +109,13 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 }
 
 void GameChatPanel::layout() {
-	box_.set_size(get_inner_w(), get_inner_h());
+	vbox_.set_size(get_inner_w(), get_inner_h());
+}
+
+GameChatPanel::~GameChatPanel() {
+	if (chat_.participants_ != nullptr) {
+		update_signal_connection.disconnect();
+	}
 }
 
 /**
@@ -132,6 +178,81 @@ void GameChatPanel::key_escape() {
 	}
 	editbox.set_text("");
 	aborted();
+}
+
+
+/**
+ * Set the recipient in the input box to whatever is selected in the dropdown
+ */
+void GameChatPanel::set_recipient() {
+	assert(chat_.participants_ != nullptr);
+	assert(recipient_dropdown_.has_selection());
+
+	// Replace the old recipient, if any
+
+	const std::string& recipient = recipient_dropdown_.get_selected();
+	std::string str = editbox.text();
+
+	// We have a recipient already
+	if (str[0] == '@') {
+		size_t pos_first_space = str.find(' ');
+		if (pos_first_space == std::string::npos) {
+			// Its only the recipient in the input field (no space separating the message).
+			// Replace it completely.
+			// If we want to sent to @all, recipient is empty so we basically clear the input
+			str = recipient;
+		} else {
+			// There is some message, so replace the old with the new (possibly empty) recipient
+			// The separating space is already in recipient (see prepare_recipients())
+			str.replace(0, pos_first_space + 1, recipient);
+		}
+	} else {
+		// No recipient yet, prepend it
+		str = recipient + str;
+	}
+
+	// Set the updated string
+	editbox.set_text(str);
+	// Something has been selected. Re-focus the input box
+	editbox.focus();
+}
+
+/**
+ * Prepare the entries for chat recipients in the dropdown box
+ */
+void GameChatPanel::prepare_recipients() {
+	assert(chat_.participants_ != nullptr);
+
+	recipient_dropdown_.clear();
+	recipient_dropdown_.add(_("All"), "",
+		g_image_cache->get("images/wui/menus/toggle_minimap.png"));
+	// Select the "All" entry by default. Do *not* use the add() parameter for selecting it since
+	// it calls the listener for selected()
+	recipient_dropdown_.select("");
+		recipient_dropdown_.add(_("Team"), "@team ",
+			g_image_cache->get("images/wui/buildings/menu_list_workers.png"));
+
+	// Iterate over all human players (except ourselves) and add their names
+	const int16_t n_humans = chat_.participants_->get_participant_counts()[0];
+	const std::string& local_name = chat_.participants_->get_local_playername();
+
+	for (int16_t i = 0; i < n_humans; ++i) {
+		assert(chat_.participants_->get_participant_type(i) != ParticipantList::ParticipantType::kAI);
+		const std::string& name = chat_.participants_->get_participant_name(i);
+		if (name == local_name) {
+			continue;
+		}
+
+		if (chat_.participants_->get_participant_type(i)
+			== ParticipantList::ParticipantType::kSpectator) {
+			recipient_dropdown_.add(name, "@" + name + " ",
+				g_image_cache->get("images/wui/fieldaction/menu_tab_watch.png"));
+		} else {
+			recipient_dropdown_.add(name, "@" + name + " ",
+				playercolor_image(chat_.participants_->get_participant_color(i),
+					"images/players/genstats_player.png"));
+		}
+	}
 }
 
 /**
