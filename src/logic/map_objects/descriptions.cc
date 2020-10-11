@@ -48,7 +48,7 @@
 #include "sound/sound_handler.h"
 
 namespace Widelands {
-Descriptions::Descriptions(LuaInterface* lua)
+Descriptions::Descriptions(LuaInterface* lua, bool for_minimap)
    : critters_(new DescriptionMaintainer<CritterDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
@@ -75,9 +75,14 @@ Descriptions::Descriptions(LuaInterface* lua)
 			                    tribeinfo.name.c_str());
 		}
 	}
-
-	// Walk world directory and register objects
-	description_manager_->register_directory("world", g_fs, false);
+	if (for_minimap) {
+		// Only register objects required for minimap rendering
+		description_manager_->register_directory("world/terrains", g_fs, false);
+		description_manager_->register_directory("world/resources", g_fs, false);
+	} else {
+		// Walk world directory and register objects
+		description_manager_->register_directory("world", g_fs, false);
+	}
 
 	// We register tribes on demand in load_tribe for performance reasons
 }

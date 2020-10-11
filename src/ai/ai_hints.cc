@@ -24,6 +24,8 @@
 #include "base/log.h"
 #include "logic/game_data_error.h"
 
+namespace AI {
+
 /* RST
 AI Hints and Restrictions
 =========================
@@ -272,13 +274,13 @@ uint8_t BuildingHints::trainingsites_max_percent() const {
 	return trainingsites_max_percent_;
 }
 
-int16_t BuildingHints::get_ai_limit(const Widelands::AiType ai_type) const {
+int16_t BuildingHints::get_ai_limit(const AiType ai_type) const {
 	switch (ai_type) {
-	case Widelands::AiType::kVeryWeak:
+	case AiType::kVeryWeak:
 		return very_weak_ai_limit_;
-	case Widelands::AiType::kWeak:
+	case AiType::kWeak:
 		return weak_ai_limit_;
-	case Widelands::AiType::kNormal:
+	case AiType::kNormal:
 		return normal_ai_limit_;
 	}
 	NEVER_HERE();
@@ -308,3 +310,4 @@ void WareWorkerHints::set_preciousness(const std::string& ware_worker,
 	}
 	preciousnesses_.insert(std::make_pair(tribename, p));
 }
+}  // namespace AI

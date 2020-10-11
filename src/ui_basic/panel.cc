@@ -848,7 +848,9 @@ void Panel::check_child_death() {
 		next = p->next_;
 
 		if (p->flags_ & pf_die) {
-			p->parent_->on_death(p);
+			if (p->parent_) {
+				p->parent_->on_death(p);
+			}
 			delete p;
 			p = nullptr;
 		} else if (p->flags_ & pf_child_die) {

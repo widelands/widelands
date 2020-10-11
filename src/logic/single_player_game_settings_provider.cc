@@ -92,32 +92,31 @@ void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
 	s.mapname = mapname;
 	s.mapfilename = mapfilename;
 	s.savegame = savegame;
-
-	uint32_t oldplayers = s.players.size();
 	s.players.resize(maxplayers);
 
-	while (oldplayers < maxplayers) {
-		PlayerSettings& player = s.players[oldplayers];
+	set_player_number(0);
+	for (uint32_t player_nr = 0; player_nr < maxplayers; ++player_nr) {
+		PlayerSettings& player = s.players[player_nr];
 		player.state =
-		   (oldplayers == 0) ? PlayerSettings::State::kHuman : PlayerSettings::State::kComputer;
+		   (player_nr == 0) ? PlayerSettings::State::kHuman : PlayerSettings::State::kComputer;
 		player.tribe = s.tribes.at(0).name;
 		player.random_tribe = false;
 		player.initialization_index = 0;
-		player.name = (boost::format(_("Player %u")) % (oldplayers + 1)).str();
+		player.name = (boost::format(_("Player %u")) % (player_nr + 1)).str();
 		player.team = 0;
 		// Set default computerplayer ai type
 		if (player.state == PlayerSettings::State::kComputer) {
-			const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
+			const AI::ComputerPlayer::ImplementationVector& impls =
+			   AI::ComputerPlayer::get_implementations();
 			if (impls.size() > 1) {
 				player.ai = impls.at(0)->name;
 				player.random_ai = false;
 			}
 			// If AI player then set tribe to random
 			if (!s.scenario) {
-				set_player_tribe(oldplayers, "", true);
+				set_player_tribe(player_nr, "", true);
 			}
 		}
-		++oldplayers;
 	}
 }
 
@@ -148,9 +147,10 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 		return;
 	}
 
-	const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
+	const AI::ComputerPlayer::ImplementationVector& impls =
+	   AI::ComputerPlayer::get_implementations();
 	if (impls.size() > 1) {
-		ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
+		AI::ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
 		do {
 			++it;
 			if ((*(it - 1))->name == s.players[number].ai) {
@@ -166,7 +166,7 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 				// Choose a random AI
 				uint8_t random = (std::rand() % impls.size());  // NOLINT
 				it = impls.begin() + random;
-			} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
+			} while ((*it)->type == AI::ComputerPlayer::Implementation::Type::kEmpty);
 		}
 		s.players[number].ai = (*it)->name;
 	}
@@ -249,10 +249,18 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 		return;
 	}
 	PlayerSettings const position = settings().players.at(number);
-	PlayerSettings const player = settings().players.at(settings().playernum);
+	// Ensure that old player number isn't out of range when we switch to a map with less players
+	PlayerSettings const player = settings().players.at(
+	   settings().playernum < static_cast<int>(settings().players.size()) ? settings().playernum :
+	                                                                        0);
 	if (number < settings().players.size() && (position.state == PlayerSettings::State::kOpen ||
+	                                           position.state == PlayerSettings::State::kClosed ||
 	                                           position.state == PlayerSettings::State::kComputer)) {
+
+		// swap player but keep player name
 		set_player(number, player);
+		set_player_name(number, position.name);
+
 		set_player(settings().playernum, position);
 		s.playernum = number;
 	}

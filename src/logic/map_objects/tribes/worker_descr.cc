@@ -49,7 +49,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
      becomes_(table.has_key("experience") ? descriptions.load_worker(table.get_string("becomes")) :
                                             INVALID_INDEX),
      needed_experience_(table.has_key("becomes") ? table.get_int("experience") : INVALID_INDEX),
-     ai_hints_(new WareWorkerHints()),
+     ai_hints_(new AI::WareWorkerHints()),
      descriptions_(descriptions) {
 	if (icon_filename().empty()) {
 		throw GameDataError("Worker %s has no menu icon", name().c_str());

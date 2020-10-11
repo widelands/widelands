@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-04 08:23+0000\n"
-"PO-Revision-Date: 2020-08-30 17:31+0000\n"
+"POT-Creation-Date: 2020-10-02 07:58+0000\n"
+"PO-Revision-Date: 2020-09-14 12:37+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -455,12 +455,12 @@ msgstr "Das Juwel der Alpen, die Dolomiten Berglandschaft wurde für Ihre urspr�
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
-"There is lot of flat ground on the mountains. Unfortunately, most of it is "
-"vertical – use the little building space you have wisely. A fortress at the "
-"mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"The mountains have an abundance of flat ground. Unfortunately, most of it is"
+" vertical – use the little building space you have wisely. A fortress at the"
+" mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it's the only way to find all the precious farm spaces."
-msgstr "Es gibt eine Menge ebene Flächen  in den Bergen. Unglücklicherweise sind die meisten davon senkrecht – nutze den wenigen zur Verfügung stehenden Platz weise. Eine Festung am Beginn eines engen Bergpasses kann ein formidables Hindernis für eine gegenerische  Armee sein – nutze das Gelände zu deinem Vorteil. Fälle alle Bäume und expandiere wo immer du kannst – das ist der einzige Weg alle kostbaren Bauernhofplätze zu finden."
+msgstr "In den Bergen gibt es ebene Flächen im Überfluss. Unglücklicherweise sind die meisten davon senkrecht – nutze den wenigen zur Verfügung stehenden Platz weise. Eine Festung am Beginn eines engen Bergpasses kann ein formidables Hindernis für eine gegenerische  Armee sein – nutze das Gelände zu deinem Vorteil. Fälle alle Bäume und expandiere wo immer du kannst – das ist der einzige Weg alle kostbaren Bauernhofplätze zu finden."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -982,6 +982,12 @@ msgid ""
 "Many beautiful, green islands await the ones brave enough to pass the "
 "thousand waves, twinkling in the sun."
 msgstr "Viele wunderschöne, grüne Inseln warten auf jene, die tapfer genug sind, tausende im Sonnenlicht glitzernde Wellen zu bezwingen."
+
+#: ../../data/maps/Twinkling_Waves.wmf/elemental:11
+msgid ""
+"Take care not to build your ships in the lagoons. They cannot pass through "
+"the reefs to the main ocean, where your ports are located."
+msgstr "Achte darauf keine Schiffe in den Lagunen zu bauen. Sie können nicht durch die Riffe zum Hauptozean navigieren, wo deine Häfen sind."
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"

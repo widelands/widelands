@@ -702,7 +702,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 
 	width_ = w;
 	height_ = h;
-	fields_.reset(new_fields.release());
+	fields_ = std::move(new_fields);
 
 	// Always call allocate_player_maps() while changing the map's size.
 	// Forgetting to do so will result in random crashes.

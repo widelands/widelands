@@ -37,7 +37,7 @@ public:
 	MapDetails(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::PanelStyle style);
 
 	void clear();
-	void update(const MapData& mapdata, bool localize_mapname);
+	bool update(const MapData& mapdata, bool localize_mapname);
 	std::string name() {
 		return name_;
 	}
@@ -56,7 +56,8 @@ private:
 	UI::SuggestedTeamsBox* suggested_teams_box_;
 
 	// Used to render map preview
-	std::unique_ptr<const Texture> minimap_image_;
+	std::string last_map_;
+	std::unordered_map<std::string, std::unique_ptr<const Texture>> minimap_cache_;
 	Widelands::EditorGameBase egbase_;
 };
 

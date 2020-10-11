@@ -206,7 +206,8 @@ public:
 	const Descriptions& descriptions() const;
 
 	// Returns the mutable descriptions. Prefer descriptions() whenever possible.
-	Descriptions* mutable_descriptions();
+	// Use for_minimap to speed up world registering in map/game loading screens
+	Descriptions* mutable_descriptions(bool for_minimap = false);
 
 	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 

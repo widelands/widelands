@@ -112,6 +112,14 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 		log_warn("Terrain '%s' contains obsolete 'tooltips' table", name().c_str());
 	}
 
+	for (DescriptionIndex di = descriptions.nr_terrains(); di; --di) {
+		const TerrainDescription* t = descriptions.get_terrain_descr(di - 1);
+		if (t->dither_layer_ == dither_layer_) {
+			throw GameDataError("Terrain %s has the same dither layer %i as %s", name_.c_str(),
+			                    dither_layer_, t->name_.c_str());
+		}
+	}
+
 	if (table.has_key("enhancement")) {
 		enhancement_ = table.get_string("enhancement");
 		if (enhancement_ == name_) {

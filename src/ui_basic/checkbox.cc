@@ -71,8 +71,8 @@ Statebox::Statebox(Panel* const parent,
 }
 
 void Statebox::layout() {
-	// We only need to relayout if we have text
-	if (flags_ & Has_Text) {
+	// We only need to relayout if we have text and the available width changed
+	if ((flags_ & Has_Text)) {
 		int w = get_w();
 		int h = kStateboxSize;
 		int pic_width = kStateboxSize;
@@ -91,7 +91,6 @@ void Statebox::layout() {
 			h = std::max(rendered_text_->height(), h);
 		}
 		set_desired_size(w, h);
-		set_size(w, h);
 	}
 }
 

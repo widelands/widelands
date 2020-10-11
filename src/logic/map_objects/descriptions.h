@@ -46,7 +46,7 @@ class WorkerDescr;
 
 class Descriptions {
 public:
-	Descriptions(LuaInterface* lua);
+	Descriptions(LuaInterface* lua, bool for_minimap);
 	~Descriptions();
 
 	const DescriptionMaintainer<CritterDescr>& critters() const;

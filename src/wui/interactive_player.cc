@@ -185,8 +185,6 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
      grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")) {
 	add_main_menu();
 
-	set_display_flag(InteractiveBase::dfShowWorkareaOverlap, true);  // enable by default
-
 	toolbar()->add_space(15);
 
 	add_mapview_menu(MiniMapType::kStaticViewWindow);
@@ -275,6 +273,10 @@ void InteractivePlayer::add_statistics_menu() {
 }
 
 void InteractivePlayer::rebuild_statistics_menu() {
+	const StatisticsMenuEntry last_selection = statisticsmenu_.has_selection() ?
+	                                              statisticsmenu_.get_selected() :
+	                                              StatisticsMenuEntry::kSoldiers;
+
 	statisticsmenu_.clear();
 
 	if (egbase().map().allows_seafaring()) {
@@ -306,6 +308,8 @@ void InteractivePlayer::rebuild_statistics_menu() {
 	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral,
 	                    g_image_cache->get("images/wui/menus/statistics_general.png"), false, "",
 	                    "G");
+
+	statisticsmenu_.select(last_selection);
 }
 
 void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
@@ -335,6 +339,9 @@ void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 }
 
 void InteractivePlayer::rebuild_showhide_menu() {
+	const ShowHideEntry last_selection =
+	   showhidemenu_.has_selection() ? showhidemenu_.get_selected() : ShowHideEntry::kBuildingSpaces;
+
 	InteractiveGameBase::rebuild_showhide_menu();
 
 	showhidemenu_.add(
@@ -348,6 +355,8 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	   ShowHideEntry::kWorkareaOverlap,
 	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"), false,
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), "W");
+
+	showhidemenu_.select(last_selection);
 }
 
 bool InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) const {

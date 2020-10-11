@@ -8,7 +8,7 @@ wl.World():new_terrain_type{
    default_resource = "",
    default_resource_amount = 0,
    textures = { path.dirname(__file__) .. "idle.png" },
-   dither_layer = 250,
+   dither_layer = 251,
    temperature = 25,
    humidity = 800,
    fertility = 100,

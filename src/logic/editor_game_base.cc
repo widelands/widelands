@@ -189,7 +189,7 @@ const Descriptions& EditorGameBase::descriptions() const {
 	return *const_cast<EditorGameBase*>(this)->mutable_descriptions();
 }
 
-Descriptions* EditorGameBase::mutable_descriptions() {
+Descriptions* EditorGameBase::mutable_descriptions(bool for_minimap) {
 	if (!descriptions_) {
 		// Lazy initialization of Descriptions. We need to create the pointer to the
 		// descriptions immediately though, because the lua scripts need to have access
@@ -197,7 +197,7 @@ Descriptions* EditorGameBase::mutable_descriptions() {
 		ScopedTimer timer("Registering the descriptions took %ums");
 		Notifications::publish(UI::NoteLoadingMessage(_("Loading world and tribes…")));
 		assert(lua_);
-		descriptions_.reset(new Descriptions(lua_.get()));
+		descriptions_.reset(new Descriptions(lua_.get(), for_minimap));
 	}
 	return descriptions_.get();
 }
