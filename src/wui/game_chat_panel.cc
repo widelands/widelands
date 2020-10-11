@@ -89,12 +89,15 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 	} else {
 		// When an entry has been selected, update the "@playername " in the edit field
 		recipient_dropdown_.selected.connect([this]() { set_recipient(); });
+		// Figure out whether the local player has teammates
+		has_team_ = chat_.participants_->needs_teamchat();
 		// Fill the dropdown menu with usernames
 		prepare_recipients();
 		// Insert "@playername " into the edit field if the dropdown currently has a selection
 		set_recipient();
 		update_signal_connection = chat_.participants_->participants_updated.connect([this]() {
 				// When the participants change, create new contents for dropdown
+				has_team_ = chat_.participants_->needs_teamchat();
 				prepare_recipients();
 			});
 		hbox_.add(&recipient_dropdown_, UI::Box::Resizing::kAlign);
@@ -229,8 +232,10 @@ void GameChatPanel::prepare_recipients() {
 	// Select the "All" entry by default. Do *not* use the add() parameter for selecting it since
 	// it calls the listener for selected()
 	recipient_dropdown_.select("");
+	if (has_team_) {
 		recipient_dropdown_.add(_("Team"), "@team ",
 			g_image_cache->get("images/wui/buildings/menu_list_workers.png"));
+	}
 
 	// Iterate over all human players (except ourselves) and add their names
 	const int16_t n_humans = chat_.participants_->get_participant_counts()[0];

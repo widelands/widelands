@@ -77,6 +77,7 @@ private:
 	UI::EditBox editbox;
 	size_t chat_message_counter;
 	FxId chat_sound;
+	bool has_team_;
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
 	boost::signals2::connection update_signal_connection;
 };
