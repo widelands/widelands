@@ -93,6 +93,9 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 		has_team_ = chat_.participants_->needs_teamchat();
 		// Fill the dropdown menu with usernames
 		prepare_recipients();
+		// In the dropdown, select the entry that was used last time the menu was open
+		// If the recipient no longer exists, this will fail and "@all" will still be selected
+		recipient_dropdown_.select(chat_.last_recipient_);
 		// Insert "@playername " into the edit field if the dropdown currently has a selection
 		set_recipient();
 		update_signal_connection = chat_.participants_->participants_updated.connect([this]() {
@@ -210,6 +213,12 @@ void GameChatPanel::key_escape() {
 		unfocus_edit();
 	}
 	editbox.set_text("");
+	// Re-set the current selection to clean up a possible error state
+	if (chat_.participants_ != nullptr) {
+		recipient_dropdown_.select(chat_.last_recipient_);
+		set_recipient();
+	}
+	// Trigger the signal that writing was aborted
 	aborted();
 }
 

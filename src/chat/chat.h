@@ -90,6 +90,9 @@ struct ChatProvider {
 
 	// Access to user list to chat with. Might be nullptr
 	ParticipantList* participants_ = nullptr;
+
+	// The last recipient a message has been send to
+	std::string last_recipient_;
 };
 
 #endif  // end of include guard:
