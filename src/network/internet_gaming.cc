@@ -1042,7 +1042,7 @@ void InternetGaming::format_and_add_chat(const std::string& from,
 }
 
 /**
- * Check for vaild username characters.
+ * Check for vaild username characters and make sure its not "team".
  */
 bool InternetGaming::valid_username(const std::string& username) {
 	if (username.empty() ||
@@ -1050,5 +1050,10 @@ bool InternetGaming::valid_username(const std::string& username) {
 	                               "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= username.size()) {
 		return false;
 	}
-	return true;
+	// Check whether the username is not "team" without regarding upper/lower case
+	// Note: The memory for the lowercase version must be allocated before calling transform()
+	std::string lowercase = username;
+	std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(),
+		[](unsigned char c) { return std::tolower(c); } );
+	return lowercase != "team";
 }

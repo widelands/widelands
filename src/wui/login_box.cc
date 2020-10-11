@@ -164,7 +164,8 @@ void LoginBox::verify_input() {
 	} else if (!InternetGaming::ref().valid_username(eb_nickname->text())) {
 		eb_nickname->set_warning(true);
 		eb_nickname->set_tooltip(_("Enter a valid nickname. This value may contain only "
-		                           "English letters, numbers, and @ . + - _ characters."));
+		                           "English letters, numbers, and @ . + - _ characters "
+		                           "and must not be \"team\"."));
 		loginbtn->set_enabled(false);
 	}
 
