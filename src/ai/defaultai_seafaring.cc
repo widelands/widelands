@@ -112,7 +112,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 // - build a ship
 // - start preparation for expedition
 bool DefaultAI::marine_main_decisions(const Widelands::Time& gametime) {
-	if (gametime > last_seafaring_check_ + Widelands::Duration(20000)) {
+	if (gametime > last_seafaring_check_ + Widelands::Duration(20 * 1000)) {
 		const Widelands::Map& map = game().map();
 		map_allows_seafaring_ = map.allows_seafaring();
 		last_seafaring_check_ = gametime;

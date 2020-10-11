@@ -4010,7 +4010,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 					   gametime + Widelands::Duration(60 * 60 * 1000);  // one hour should be enough
 				} else {  // other constructionsites, usually new (standalone) constructionsites
 					eco->dismantle_grace_time =
-					   gametime + Widelands::Duration(30 * 1000 +  // very shot time is enough
+					   gametime + Widelands::Duration(30 * 1000 +  // very short time is enough
 					                                  (eco->flags.size() * 30 *
 					                                   1000));  // + 30 seconds for every flag in economy
 				}
