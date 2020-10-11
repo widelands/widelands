@@ -896,7 +896,7 @@ void GameClient::handle_setting_allplayers(RecvPacket& packet) {
 	}
 	// Map changes are finished here
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
-	if (d && participants_) {
+	if (participants_) {
 		participants_->participants_updated();
 	}
 }
