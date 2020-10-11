@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-02 07:58+0000\n"
-"PO-Revision-Date: 2020-10-02 08:02+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-10 05:39+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -727,7 +727,7 @@ msgstr "%1%x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:203
 #: ../../src/ui_fsmenu/launch_mpg.cc:58
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
 #: ../../src/ui_fsmenu/netsetup_lan.cc:121 ../../src/wui/mapdetails.cc:135
 #: ../../src/wui/minimap.cc:120
 msgid "Map"
@@ -741,7 +741,6 @@ msgstr "Имя: %s"
 
 #: ../../src/editor/tools/info_tool.cc:208
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:430
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:160
 msgid "Size: %1% x %2%"
 msgstr "Размер: %1% x %2%"
 
@@ -760,6 +759,7 @@ msgid "Author: %s"
 msgstr "Автор: %s"
 
 #: ../../src/editor/tools/info_tool.cc:222
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:111
 #, c-format
 msgid "Description: %s"
 msgstr "Описание: %s"
@@ -919,7 +919,6 @@ msgid "Disabled"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:356
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:163
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
@@ -1180,7 +1179,6 @@ msgstr "Количество игроков"
 #: ../../src/logic/single_player_game_settings_provider.cc:105
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:69
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:101
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:98
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:112
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:161
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:47
@@ -1200,7 +1198,6 @@ msgstr "Племя"
 #: ../../src/editor/ui_menus/player_menu.cc:179
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:400
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:98
-#: ../../src/wui/playerdescrgroup.cc:162
 msgctxt "tribe"
 msgid "Random"
 msgstr "Случайно"
@@ -2893,7 +2890,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Не выбрано"
 
-#: ../../src/ui_basic/progresswindow.cc:54
+#: ../../src/ui_basic/progresswindow.cc:58
 msgid "Loading…"
 msgstr "Загрузка..."
 
@@ -3169,7 +3166,6 @@ msgstr ""
 #: ../../src/ui_fsmenu/scenariodetails.cc:48
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:279
 #: ../../src/wui/map_tags.cc:44 ../../src/wui/mapdetails.cc:135
-#: ../../src/wui/playerdescrgroup.cc:290
 msgid "Scenario"
 msgstr "Сценарий"
 
@@ -3241,11 +3237,11 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "ВНИМАНИЕ:\nВыбранная вами сохраненная игра представляет собой каталог. Такое могло случиться если вы поставили параметр ‘nozip’  в значение \"истина\" или вручную распаковали сохраненную игру.\nWidelands не может передавать клиентам структуру каталогов, поэтому, пожалуйста, выберите другую сохраненную игру, или упакуйте содержимое каталога."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:273 ../../src/ui_fsmenu/launch_spg.cc:142
+#: ../../src/ui_fsmenu/launch_mpg.cc:273 ../../src/ui_fsmenu/launch_spg.cc:144
 msgid "File not found"
 msgstr "Файл не найден"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:274 ../../src/ui_fsmenu/launch_spg.cc:143
+#: ../../src/ui_fsmenu/launch_mpg.cc:274 ../../src/ui_fsmenu/launch_spg.cc:145
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -3342,7 +3338,7 @@ msgstr ""
 msgid "Win Condition: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:221
+#: ../../src/ui_fsmenu/main.cc:221 ../../src/ui_fsmenu/mapdetailsbox.cc:106
 #, c-format
 msgid "Players: %s"
 msgstr ""
@@ -3457,33 +3453,60 @@ msgid ""
 "General Public License V2.0"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:45
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#, c-format
+msgid "invalid tribe ‘%s’"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:47
+msgid "Saved Players"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:54
+#, c-format
+msgid "Player %u: –"
+msgstr ""
+
+#. * TRANSLATORS: "Player 1 (Barbarians): Playername"
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:77
+#, c-format
+msgid "Player %1$u (%2$s): %3$s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+msgid "Map Details"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+msgid "Scenario Details"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:100
+#, c-format
+msgid "Size: %s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:103
+#, c-format
+msgid "%1$u×%2$u"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:118
+#, c-format
+msgid "Hint: %s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:149
 msgid "No map selected"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:56
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:160
 msgid "Change map or saved game"
 msgstr "Сменить карту или сохранённую игру"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:93
-msgid "Saved players are:"
-msgstr "Сохранённые игроки:"
-
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:101
-msgid "closed"
-msgstr "закрыт"
-
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:150
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:214
 msgid "(no map)"
 msgstr "(нет карты)"
-
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:158
-msgid "Map details:"
-msgstr "Подробности карты:"
-
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:168
-msgid "Scenario mode selected"
-msgstr "Выбран режим сценариев"
 
 #: ../../src/ui_fsmenu/mapselect.cc:52
 msgid "Choose a map"
@@ -3540,7 +3563,6 @@ msgstr "Команда"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:286
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:177
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:178
-#: ../../src/wui/playerdescrgroup.cc:144
 msgid "Random AI"
 msgstr "Случайный ИИ"
 
@@ -3558,13 +3580,11 @@ msgstr "Закрыто"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:302
 #: ../../src/ui_fsmenu/netsetup_lan.cc:224
-#: ../../src/wui/playerdescrgroup.cc:128
 msgid "Open"
 msgstr "Открыто"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:310
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:195
-#: ../../src/wui/playerdescrgroup.cc:152
 msgid "Human"
 msgstr "Человек"
 
@@ -3578,7 +3598,6 @@ msgstr "Совместная с игроком %u"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:446
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:280
-#: ../../src/wui/playerdescrgroup.cc:290
 msgid "Start type is set via the scenario"
 msgstr "Тип запуска устанавливается по сценарию"
 
@@ -4172,7 +4191,7 @@ msgid "Returns:"
 msgstr "Вернётся:"
 
 #: ../../src/wui/buildingwindow.cc:383 ../../src/wui/fieldaction.cc:471
-#: ../../src/wui/shipwindow.cc:138
+#: ../../src/wui/shipwindow.cc:137
 msgid "Show Debug Window"
 msgstr "Показать окно отладки"
 
@@ -5281,14 +5300,6 @@ msgstr "Дороги"
 msgid "Zoom"
 msgstr "Масштаб"
 
-#: ../../src/wui/playerdescrgroup.cc:141
-msgid "Computer"
-msgstr "Компьютер"
-
-#: ../../src/wui/playerdescrgroup.cc:163
-msgid "The tribe will be set at random."
-msgstr "Племя будет выбрано случайно."
-
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:106
 msgctxt "unit_narrow"
@@ -5705,64 +5716,64 @@ msgstr "Показать действующие экспедиции"
 msgid "Show expeditions that have found a port space or are founding a colony"
 msgstr "Показать экспедиции, которые нашли место для постройки гавани"
 
-#: ../../src/wui/shipwindow.cc:76
+#: ../../src/wui/shipwindow.cc:75
 msgid "Scout towards the north west"
 msgstr "Вести разведку на северо-западном направлении"
 
-#: ../../src/wui/shipwindow.cc:81
+#: ../../src/wui/shipwindow.cc:80
 msgid "Explore the island’s coast clockwise"
 msgstr "Исследовать побережье острова двигаясь по направлению часовой стрелки."
 
-#: ../../src/wui/shipwindow.cc:86
+#: ../../src/wui/shipwindow.cc:85
 msgid "Scout towards the north east"
 msgstr "Вести разведку на северо-восточном направлении"
 
-#: ../../src/wui/shipwindow.cc:91
+#: ../../src/wui/shipwindow.cc:90
 msgid "Scout towards the west"
 msgstr "Вести разведку на западном направлении"
 
-#: ../../src/wui/shipwindow.cc:96
+#: ../../src/wui/shipwindow.cc:95
 msgid "Construct a port at the current location"
 msgstr "Построить порт в текущей локации"
 
-#: ../../src/wui/shipwindow.cc:101
+#: ../../src/wui/shipwindow.cc:100
 msgid "Scout towards the east"
 msgstr "Вести разведку на восточном направлении"
 
-#: ../../src/wui/shipwindow.cc:106
+#: ../../src/wui/shipwindow.cc:105
 msgid "Scout towards the south west"
 msgstr "Вести разведку на юго-западном направлении"
 
-#: ../../src/wui/shipwindow.cc:111
+#: ../../src/wui/shipwindow.cc:110
 msgid "Explore the island’s coast counter clockwise"
 msgstr "Исследовать побережье острова двигаясь против часовой."
 
-#: ../../src/wui/shipwindow.cc:116
+#: ../../src/wui/shipwindow.cc:115
 msgid "Scout towards the south east"
 msgstr "Вести разведку на южном направлении"
 
-#: ../../src/wui/shipwindow.cc:126
+#: ../../src/wui/shipwindow.cc:125
 msgid "Sink the ship"
 msgstr "Затопить корабль"
 
-#: ../../src/wui/shipwindow.cc:130
+#: ../../src/wui/shipwindow.cc:129
 msgid "Cancel the Expedition"
 msgstr "Отменить экспедицию"
 
-#: ../../src/wui/shipwindow.cc:143
+#: ../../src/wui/shipwindow.cc:142
 msgid "Go to destination"
 msgstr "Идти к указанному месту"
 
-#: ../../src/wui/shipwindow.cc:148
+#: ../../src/wui/shipwindow.cc:147
 msgid "Go to ship"
 msgstr "Идти в корабль"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:215
+#: ../../src/wui/shipwindow.cc:211
 msgid "Cancel Expedition"
 msgstr "Отмена экспедиции"
 
-#: ../../src/wui/shipwindow.cc:216
+#: ../../src/wui/shipwindow.cc:212
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
