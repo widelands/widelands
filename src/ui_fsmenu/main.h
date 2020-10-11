@@ -61,6 +61,8 @@ public:
 	// Set the labels for all buttons etc. This needs to be called after language switching.
 	void set_labels();
 
+	int16_t calc_desired_window_x(UI::Window::WindowLayoutID);
+	int16_t calc_desired_window_y(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_width(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_height(UI::Window::WindowLayoutID);
 

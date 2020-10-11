@@ -47,7 +47,7 @@ constexpr uint32_t kNoSplash = std::numeric_limits<uint32_t>::max();
 int16_t FullscreenMenuMain::calc_desired_window_width(const UI::Window::WindowLayoutID id) {
 	switch (id) {
 	case UI::Window::WindowLayoutID::kFsMenuDefault:
-		return std::max(700, get_w() * 7 / 8);
+		return get_w();
 	case UI::Window::WindowLayoutID::kFsMenuOptions:
 	case UI::Window::WindowLayoutID::kFsMenuAbout:
 		return std::max(600, get_w() / 2);
@@ -59,12 +59,31 @@ int16_t FullscreenMenuMain::calc_desired_window_width(const UI::Window::WindowLa
 int16_t FullscreenMenuMain::calc_desired_window_height(const UI::Window::WindowLayoutID id) {
 	switch (id) {
 	case UI::Window::WindowLayoutID::kFsMenuDefault:
+		return get_h();
 	case UI::Window::WindowLayoutID::kFsMenuAbout:
 		return std::max(500, get_h() * 4 / 5);
 	case UI::Window::WindowLayoutID::kFsMenuOptions:
 		return std::max(400, get_h() / 2);
 	default:
 		NEVER_HERE();
+	}
+}
+
+int16_t FullscreenMenuMain::calc_desired_window_x(const UI::Window::WindowLayoutID id) {
+	switch (id) {
+	case UI::Window::WindowLayoutID::kFsMenuDefault:
+		return -UI::Window::kVerticalBorderThickness;
+	default:
+		return (get_w() - calc_desired_window_width(id)) / 2;
+	}
+}
+
+int16_t FullscreenMenuMain::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
+	switch (id) {
+	case UI::Window::WindowLayoutID::kFsMenuDefault:
+		return -UI::Window::kTopBorderThickness;
+	default:
+		return (get_h() - calc_desired_window_height(id)) / 2;
 	}
 }
 
@@ -529,11 +548,11 @@ void FullscreenMenuMain::layout() {
 				w->restore();
 			}
 
-			const int16_t desired_w = calc_desired_window_width(w->window_layout_id());
-			const int16_t desired_h = calc_desired_window_height(w->window_layout_id());
+			const int16_t desired_w = calc_desired_window_width(w->window_layout_id()) + p->get_lborder() + p->get_rborder();
+			const int16_t desired_h = calc_desired_window_height(w->window_layout_id()) + p->get_tborder() + p->get_bborder();
 			w->set_size(desired_w, desired_h);
-			w->set_pos(Vector2i(std::min(get_inner_w() - desired_w, w->get_x()),
-			                    std::min(get_inner_h() - desired_h, w->get_y())));
+			// w->set_pos(Vector2i(calc_desired_window_x(w->window_layout_id()), calc_desired_window_y(w->window_layout_id())));
+			w->center_to_parent();
 
 			if (minimal) {
 				// …and then make it minimal again if it was minimal before

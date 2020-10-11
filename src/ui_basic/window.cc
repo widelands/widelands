@@ -35,25 +35,18 @@ namespace UI {
 /// Width the horizontal border graphics must have.
 constexpr int16_t kHorizonalBorderTotalLength = 100;
 
-/// Height the top border must have
-constexpr int16_t kTopBorderThickness = 20;
-
 constexpr int16_t kWindowTitlebarButtonsSize = 18;
 constexpr int16_t kWindowTitlebarButtonsSpacing = 1;
 // Used for both vertical and horizontal position finetuning
 constexpr int16_t kWindowTitlebarButtonsPos =
-   (kTopBorderThickness + kWindowTitlebarButtonsSize) / -2;
-
-/// Height the bottom border must have
-constexpr int16_t kBottomBorderThickness = 20;
+   (Window::kTopBorderThickness + kWindowTitlebarButtonsSize) / -2;
 
 /// Width to use as the corner. This must be >= kVerticalBorderThickness.
 constexpr int16_t kCornerWidth = 20;
 
 constexpr int16_t kHorizontalBorderMiddleLength(kHorizonalBorderTotalLength - 2 * kCornerWidth);
 
-/// Width/height the vertical border graphics must have.
-constexpr int16_t kVerticalBorderThickness = 20;
+/// Height the vertical border graphics must have
 constexpr int16_t kVerticalBorderTotalLength = 100;
 
 /// Height to use as the thingy.

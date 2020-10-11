@@ -33,10 +33,8 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
         &fsmm,
         UI::WindowStyle::kFsMenu,
         "about",
-        (fsmm.get_w() - fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuAbout)) /
-           2,
-        (fsmm.get_h() - fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout)) /
-           2,
+        fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuAbout),
+        fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuAbout),
         fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuAbout),
         fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout),
         _("About Widelands")),

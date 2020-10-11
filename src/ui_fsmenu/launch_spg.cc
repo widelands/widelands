@@ -57,8 +57,10 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 		return false;
 	}
 
+	set_visible(false);
 	FullscreenMenuMapSelect msm(fsmm_, settings_, nullptr);
 	MenuTarget code = msm.run<MenuTarget>();
+	set_visible(true);
 
 	if (code == MenuTarget::kBack) {
 		// Set scenario = false, else the menu might crash when back is pressed.

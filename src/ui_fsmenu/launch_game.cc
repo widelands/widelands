@@ -39,12 +39,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
    : UI::Window(&fsmm,
                 UI::WindowStyle::kFsMenu,
                 "launch_game",
-                (fsmm.get_w() -
-                 fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault)) /
-                   2,
-                (fsmm.get_h() -
-                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault)) /
-                   2,
+                fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuDefault),
+                fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
                 _("Launch Game")),

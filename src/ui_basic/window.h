@@ -57,6 +57,13 @@ namespace UI {
  */
 class Window : public NamedPanel {
 public:
+	/// Height the top border must have
+	static constexpr int16_t kTopBorderThickness = 20;
+	/// Height the bottom border must have
+	static constexpr int16_t kBottomBorderThickness = 20;
+	/// Width the vertical border graphics must have
+	static constexpr int16_t kVerticalBorderThickness = 20;
+
 	/// Do not use richtext for 'title'.
 	/// Text conventions: Title Case for the 'title'
 	Window(Panel* parent,

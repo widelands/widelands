@@ -78,12 +78,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
    : UI::Window(&fsmm,
                 UI::WindowStyle::kFsMenu,
                 "options",
-                (fsmm.get_w() -
-                 fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuOptions)) /
-                   2,
-                (fsmm.get_h() -
-                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuOptions)) /
-                   2,
+                fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuOptions),
+                fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuOptions),
                 fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuOptions),
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuOptions),
                 _("Options")),
