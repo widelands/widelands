@@ -102,6 +102,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 			});
 		hbox_.add(&recipient_dropdown_, UI::Box::Resizing::kAlign);
 		hbox_.add_space(4);
+	}
 
 	hbox_.add(&editbox, UI::Box::Resizing::kFillSpace);
 
@@ -165,13 +166,41 @@ void GameChatPanel::unfocus_edit() {
 }
 
 void GameChatPanel::key_enter() {
+
+
 	const std::string& str = editbox.text();
-
 	if (str.size()) {
-		chat_.send(str);
-	}
+		if (chat_.participants_ != nullptr) {
+			const size_t pos_first_space = str.find(' ');
 
-	editbox.set_text("");
+			std::string recipient;
+			// Reset message to only the recipient
+			if (str[0] == '@') {
+				// When pos+1 is greater than the string length, the whole string is returned
+				recipient = str.substr(0, pos_first_space + 1);
+			}
+
+			// Make sure we have a chat message to send and it is more than just the recipient
+			// Either it has no recipient or there is text behind the recipient
+			if (str[0] != '@' || pos_first_space < str.size() - 1) {
+				chat_.send(str);
+				chat_.last_recipient_ = recipient;
+			}
+
+			editbox.set_text(recipient);
+			// Set selection of dropdown to entered recipient, if possible
+			recipient_dropdown_.select(recipient);
+			if (recipient_dropdown_.get_selected() != recipient) {
+				// Seems the user is writing to someone unknown
+				recipient_dropdown_.set_errored(_("Unknown Recipient"));
+			}
+		} else {
+			// We don't have access to the player list, so just send the message
+			chat_.send(str);
+			editbox.set_text("");
+		}
+	}
+	// Trigger signal that a message was sent
 	sent();
 }
 
