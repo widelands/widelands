@@ -433,7 +433,7 @@ seed
    :arg percent proximity: The radius within which the immovable will seed is not limited and
       is determined by repeatedly generating a random number and comparing it with the proximity
       :ref:`map_object_programs_datatypes_percent` chance until the comparison fails. The higher
-      this number, the closer the new imovable will be seeded.
+      this number, the closer the new immovable will be seeded.
 
    Finds a random location nearby and creates a new immovable with the given name there with a
    chance depending on *this* immovable's terrain affinity. The chance that such a location will be

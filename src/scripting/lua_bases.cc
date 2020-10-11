@@ -173,13 +173,13 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	Widelands::Descriptions* descriptions = get_egbase(L).mutable_descriptions();
-	const std::string imovable_name = luaL_checkstring(L, 2);
+	const std::string immovable_name = luaL_checkstring(L, 2);
 	try {
-		const Widelands::ImmovableDescr* imovable_description =
-		   descriptions->get_immovable_descr(descriptions->load_immovable(imovable_name));
-		return LuaMaps::upcasted_map_object_descr_to_lua(L, imovable_description);
+		const Widelands::ImmovableDescr* immovable_description =
+		   descriptions->get_immovable_descr(descriptions->load_immovable(immovable_name));
+		return LuaMaps::upcasted_map_object_descr_to_lua(L, immovable_description);
 	} catch (const Widelands::GameDataError&) {
-		report_error(L, "Immovable %s does not exist", imovable_name.c_str());
+		report_error(L, "Immovable %s does not exist", immovable_name.c_str());
 	}
 }
 
