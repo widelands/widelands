@@ -548,10 +548,13 @@ void FullscreenMenuMain::layout() {
 				w->restore();
 			}
 
-			const int16_t desired_w = calc_desired_window_width(w->window_layout_id()) + p->get_lborder() + p->get_rborder();
-			const int16_t desired_h = calc_desired_window_height(w->window_layout_id()) + p->get_tborder() + p->get_bborder();
+			const int16_t desired_w =
+			   calc_desired_window_width(w->window_layout_id()) + p->get_lborder() + p->get_rborder();
+			const int16_t desired_h =
+			   calc_desired_window_height(w->window_layout_id()) + p->get_tborder() + p->get_bborder();
 			w->set_size(desired_w, desired_h);
-			// w->set_pos(Vector2i(calc_desired_window_x(w->window_layout_id()), calc_desired_window_y(w->window_layout_id())));
+			// w->set_pos(Vector2i(calc_desired_window_x(w->window_layout_id()),
+			// calc_desired_window_y(w->window_layout_id())));
 			w->center_to_parent();
 
 			if (minimal) {
