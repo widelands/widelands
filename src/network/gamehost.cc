@@ -822,92 +822,142 @@ void GameHost::send(ChatMessage msg) {
 		return;
 	}
 
+	// The set containing all receivers of the message.
+	// Being a set ensures that each receiver only gets the message once
+	std::set<int32_t> recipients;
+	// Whether this is a public (0), personal (1), or team (2) message (see protocol definition)
+	int msg_type = 0;
+	// Figure out who to send the message to
 	if (msg.recipient.empty()) {
-		SendPacket packet;
-		packet.unsigned_8(NETCMD_CHAT);
-		packet.signed_16(msg.playern);
-		packet.string(msg.sender);
-		packet.string(msg.msg);
-		packet.unsigned_8(0);
-		broadcast(packet);
+		// No recipient, so it is a broadcast. Send to everyone
+		// Nothing to do here
+	} else {
+		msg_type = 1;
+		// Add the sender to the recipients so it gets a copy of the message
+		if (msg.sender.empty()) {
+			// Since there is no sender, it must be a system message
+			assert(msg.playern == -2);
+		} else {
+			// No system message, so get the sending client
+			assert(msg.playern != -2);
+			const int32_t sender_id = check_client(msg.sender);
+			assert(sender_id != -1);
+			// The sender will get a copy of the message
+			recipients.insert(sender_id);
+		}
 
-		d->chat.receive(msg);
-	} else {  //  personal messages
-		SendPacket packet;
-		packet.unsigned_8(NETCMD_CHAT);
-
-		// Is this a pm for the host player?
-		if (d->localplayername == msg.recipient) {
-			d->chat.receive(msg);
-			// Write the SendPacket - will be used below to show that the message
-			// was received.
-			packet.signed_16(msg.playern);
-			packet.string(msg.sender);
-			packet.string(msg.msg);
-			packet.unsigned_8(1);
-			packet.string(msg.recipient);
-		} else {  // Find the recipient
-			int32_t clientnum = check_client(msg.recipient);
-			if (clientnum >= 0) {
-				packet.signed_16(msg.playern);
-				packet.string(msg.sender);
-				packet.string(msg.msg);
-				packet.unsigned_8(1);
-				packet.string(msg.recipient);
-				d->net->send(d->clients.at(clientnum).sock_id, packet);
-				log_info(
-				   "[Host]: personal chat: from %s to %s\n", msg.sender.c_str(), msg.recipient.c_str());
+		// The message is directed somewhere. Figure out where
+		if (msg.recipient != "team") {
+			// A single player is the recipient. Find it
+			const int32_t client_id = check_client(msg.recipient);
+			assert(client_id >= -2);
+			if (client_id == -1) {
+				// Error: Can't find given recipient, so we only will send
+				// an error message back to the sender
+				msg.sender.clear();
+				msg.playern = -2;
+				// TODO(Notabilis): Maybe make this a command so it can be localized on the client
+				msg.msg = "Failed to send message: Recipient \"";
+				msg.msg += msg.recipient + "\" could not be found!";
 			} else {
-				std::string fail = "Failed to send message: Recipient \"";
-				fail += msg.recipient + "\" could not be found!";
-
-				// is host the sender?
-				if (d->localplayername == msg.sender) {
-					ChatMessage err(fail);
-					err.playern = -2;  // System message
-					d->chat.receive(err);
-					return;  // nothing left to do!
-				}
-				packet.signed_16(-2);  // System message
-				packet.string("");
-				packet.string(fail);
-				packet.unsigned_8(0);
+				// Its either a player we found or the host (id -2). Either way, add it
+				recipients.insert(client_id);
 			}
-		}
-
-		if (msg.sender == msg.recipient) {  //  sent itself a private message
-			return;                          //  do not deliver it twice
-		}
-
-		// Now find the sender and send either the message or the failure notice
-		else if (msg.playern == -2) {  // private system message
-			return;
-		} else if (d->localplayername == msg.sender) {
-			d->chat.receive(msg);
-		} else {  // host is not the sender -> get sender
-			uint16_t i = 0;
-			for (; i < d->settings.users.size(); ++i) {
-				const UserSettings& user = d->settings.users.at(i);
-				if (user.name == msg.sender) {
-					break;
+		} else {
+			// It is a team message
+			msg_type = 2;
+			// Figure out who is in a team with the recipient and add them
+			// Figure out the team of the sender
+			if (msg.playern == UserSettings::none()) {
+				// The message is from a spectator. Find all other spectators and send it to them
+				if (d->settings.playernum == UserSettings::none()) {
+					// The host is (one of the) spectators
+					recipients.insert(-2);
 				}
-			}
-			if (i < d->settings.users.size()) {
-				uint32_t j = 0;
-				for (; j < d->clients.size(); ++j) {
-					if (d->clients.at(j).usernum == static_cast<int16_t>(i)) {
-						break;
+				for (uint16_t i = 0; i < d->settings.users.size(); ++i) {
+					const UserSettings& user = d->settings.users.at(i);
+					if (user.position != UserSettings::none()) {
+						continue;
+					}
+					// Search for the matching network connection
+					for (uint32_t client = 0; client < d->clients.size(); ++client) {
+						if (d->clients.at(client).usernum == static_cast<int16_t>(i)) {
+							// Found the matching connection, store it for later use
+							recipients.insert(client);
+						}
 					}
 				}
-				if (j < d->clients.size()) {
-					d->net->send(d->clients.at(j).sock_id, packet);
-				} else {
-					// Better no wexception it would break the whole game
-					log_warn("user was found but no client is connected to it!\n");
-				}
 			} else {
-				// Better no wexception it would break the whole game
-				log_warn("sender could not be found!");
+
+				assert(msg.playern >= 0);
+				const Widelands::TeamNumber team_sender = d->settings.players[msg.playern].team;
+				// Team 0 is the "no team" option.
+				// There might be multiple humans controlling that player, though
+				if (team_sender == 0) {
+					// Search for network clients that are using the player slot
+					for (uint32_t client = 0; client < d->clients.size(); ++client) {
+						if (d->clients.at(client).playernum == msg.playern) {
+							recipients.insert(client);
+						}
+					}
+					// Check if the host is using the same player slot
+					if (d->settings.playernum == msg.playern) {
+						recipients.insert(-2);
+					}
+				} else {
+					// Player has a team. Search for other human players with the same team
+					for (size_t i = 0; i < d->settings.players.size(); ++i) {
+						// Ignore whether we are using this player: It might be a shared player
+						// The set<> will filter out duplicated receivers anyway
+						const PlayerSettings& player = d->settings.players[i];
+						if (player.state != PlayerSettings::State::kHuman) {
+							// We don't send messages to AIs or empty players
+							continue;
+						}
+						if (player.team == team_sender)  {
+							if (d->settings.playernum == static_cast<int16_t>(i)) {
+								// The host is (one of the) users of this player
+								recipients.insert(-2);
+							}
+							// Search for the matching network connection(s)
+							for (uint32_t client = 0; client < d->clients.size(); ++client) {
+								if (d->clients.at(client).playernum == static_cast<int16_t>(i)) {
+									// Found the matching connection, store it for later use
+									recipients.insert(client);
+									// Don't break the loop, there might be multiple
+									// clients for one (shared) player
+								}
+							}
+						}
+					}
+				} // end team is not "no team"
+			} // end team is not spectator
+		} // end team message
+	} // end directed message
+
+	// Assemble message packet
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_CHAT);
+	packet.signed_16(msg.playern);
+	packet.string(msg.sender);
+	packet.string(msg.msg);
+	packet.unsigned_8(msg_type);
+	packet.string(msg.recipient);
+
+	// Send to either everyone or the found recipients
+	if (recipients.empty()) {
+		// Receive it on the host
+		d->chat.receive(msg);
+		// Send to all clients
+		broadcast(packet);
+	} else {
+		for (const int32_t clientnum : recipients) {
+			if (clientnum >= 0) {
+				d->net->send(d->clients.at(clientnum).sock_id, packet);
+			} else {
+				assert(clientnum == -2);
+				// Send to host player
+				d->chat.receive(msg);
 			}
 		}
 	}

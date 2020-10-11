@@ -321,7 +321,7 @@ enum {
 	 * \li signed_16:  playernumber - only used for colorization of messages.
 	 * \li string:     sender (may be empty to indicate system messages)
 	 * \li string:     the message
-	 * \li unsigned_8: whether this is a personal message (0 / 1)
+	 * \li unsigned_8: whether this is a public (0), personal (1), or team (2) message
 	 * \li string:     the recipient (only filled as personal message)
 	 */
 	NETCMD_CHAT = 21,
