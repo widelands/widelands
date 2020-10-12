@@ -36,7 +36,6 @@ SUPPRESSED_CHECKS = {
     '[google-default-arguments]',
     '[google-readability-function-size]',
     '[google-runtime-references]',
-    '[hicpp-function-size]',
     '[hicpp-member-init]',
     '[hicpp-no-array-decay]',
     '[hicpp-no-malloc]',
