@@ -102,11 +102,11 @@ public:
 		}
 	}
 
-	bool operator ==(const Vision other) const {
+	bool operator==(const Vision other) const {
 		return value_ == other.value_;
 	}
 
-	bool operator !=(const Vision other) const {
+	bool operator!=(const Vision other) const {
 		return value_ != other.value_;
 	}
 
