@@ -102,7 +102,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 	log_info("Game: Calling read_complete()\n");
 	map_packet.read_complete(game_);
-	log_info("Game: read_complete took: %ums\n", timer.ms_since_last_query());
 
 	MapObjectLoader* const mol = map_packet.get_map_object_loader();
 
