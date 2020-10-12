@@ -34,7 +34,6 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_layout.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -51,6 +50,7 @@
 #include "wlapplication_options.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
+#include "wui/info_panel.h"
 #include "wui/logmessage.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
@@ -158,8 +158,9 @@ void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+     info_panel_(*new InfoPanel(*this)),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
-     // Initialize chatoveraly before the toolbar so it is below
+     // Initialize chatoverlay before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this),
      mapviewmenu_(toolbar(),
@@ -217,6 +218,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	}
 
 	resize_chat_overlay();
+	info_panel_.move_to_top();
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
@@ -224,6 +226,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   map_view_.set_size(message.new_width, message.new_height);
 		   resize_chat_overlay();
 		   finalize_toolbar();
+		   info_panel_.layout();
 		   mainview_move();
 	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>(
@@ -708,7 +711,7 @@ double InteractiveBase::average_fps() const {
 Draw debug overlay when appropriate.
 ===============
 */
-void InteractiveBase::draw_overlay(RenderTarget& dst) {
+void InteractiveBase::draw_overlay(RenderTarget&) {
 	// Timing
 	uint32_t curframe = SDL_GetTicks();
 
@@ -754,30 +757,11 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		static boost::format node_format("(%i, %i)");
 		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y).str();
 	}
-	if (!node_text.empty()) {
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
-		   as_richtext_paragraph(node_text, UI::FontStyle::kWuiGameSpeedAndCoordinates));
-		rendered_text->draw(
-		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
-	}
+	info_panel_.set_coords_string(node_text);
 
 	// In-game clock and FPS
-	if ((game != nullptr) && get_config_bool("game_clock", true)) {
-		// Blit in-game clock
-		const std::string gametime(gametimestring(egbase().get_gametime(), true));
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
-		   as_richtext_paragraph(gametime, UI::FontStyle::kWuiGameSpeedAndCoordinates));
-		rendered_text->draw(dst, Vector2i(5, 5));
-
-		// Blit FPS when playing a game in debug mode
-		if (get_display_flag(dfDebug)) {
-			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-			rendered_text = UI::g_fh->render(
-			   as_richtext_paragraph((fps_format % (1000.0 / frametime_) % average_fps()).str(),
-			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
-			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
-		}
-	}
+	info_panel_.set_time_string((game != nullptr) && get_config_bool("game_clock", true) ? gametimestring(egbase().get_gametime(), true) : "");
+	info_panel_.set_fps_string(get_display_flag(dfDebug) ? (boost::format("%5.1f fps (avg: %5.1f fps)") % (1000.0 / frametime_) % average_fps()).str() : "");
 }
 
 void InteractiveBase::blit_overlay(RenderTarget* dst,

@@ -37,6 +37,7 @@
 #include "wui/minimap.h"
 #include "wui/quicknavigation.h"
 
+class InfoPanel;
 class UniqueWindowHandler;
 
 struct WorkareaPreview {
@@ -288,6 +289,8 @@ protected:
 #ifndef NDEBUG  //  only in debug builds
 	UI::UniqueWindow::Registry debugconsole_;
 #endif
+
+	InfoPanel& info_panel_;
 
 private:
 	void play_sound_effect(const NoteSound& note) const;

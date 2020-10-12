@@ -244,6 +244,8 @@ wl_library(wui
     general_statistics_menu.h
     helpwindow.cc
     helpwindow.h
+    info_panel.cc
+    info_panel.h
     inputqueuedisplay.cc
     inputqueuedisplay.h
     interactive_base.cc

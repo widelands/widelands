@@ -42,6 +42,7 @@
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
 #include "wui/game_summary.h"
+#include "wui/info_panel.h"
 #include "wui/interactive_player.h"
 #include "wui/militarysitewindow.h"
 #include "wui/productionsitewindow.h"
@@ -489,11 +490,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 			                .str();
 		}
 
-		if (!game_speed.empty()) {
-			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
-			   as_richtext_paragraph(game_speed, UI::FontStyle::kWuiGameSpeedAndCoordinates));
-			rendered_text->draw(dst, Vector2i(get_w() - 5, 5), UI::Align::kRight);
-		}
+		info_panel_.set_speed_string(game_speed);
 	}
 }
 
