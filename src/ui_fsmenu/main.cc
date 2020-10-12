@@ -47,7 +47,7 @@ constexpr uint32_t kNoSplash = std::numeric_limits<uint32_t>::max();
 int16_t FullscreenMenuMain::calc_desired_window_width(const UI::Window::WindowLayoutID id) {
 	switch (id) {
 	case UI::Window::WindowLayoutID::kFsMenuDefault:
-		return get_w();
+		return std::max(800, get_w() * 4 / 5);
 	case UI::Window::WindowLayoutID::kFsMenuOptions:
 	case UI::Window::WindowLayoutID::kFsMenuAbout:
 		return std::max(600, get_w() / 2);
@@ -59,7 +59,7 @@ int16_t FullscreenMenuMain::calc_desired_window_width(const UI::Window::WindowLa
 int16_t FullscreenMenuMain::calc_desired_window_height(const UI::Window::WindowLayoutID id) {
 	switch (id) {
 	case UI::Window::WindowLayoutID::kFsMenuDefault:
-		return get_h();
+		return std::max(600, get_h() * 4 / 5);
 	case UI::Window::WindowLayoutID::kFsMenuAbout:
 		return std::max(500, get_h() * 4 / 5);
 	case UI::Window::WindowLayoutID::kFsMenuOptions:
@@ -70,21 +70,11 @@ int16_t FullscreenMenuMain::calc_desired_window_height(const UI::Window::WindowL
 }
 
 int16_t FullscreenMenuMain::calc_desired_window_x(const UI::Window::WindowLayoutID id) {
-	switch (id) {
-	case UI::Window::WindowLayoutID::kFsMenuDefault:
-		return -UI::Window::kVerticalBorderThickness;
-	default:
-		return (get_w() - calc_desired_window_width(id)) / 2;
-	}
+	return (get_w() - calc_desired_window_width(id)) / 2 - UI::Window::kVerticalBorderThickness;
 }
 
 int16_t FullscreenMenuMain::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
-	switch (id) {
-	case UI::Window::WindowLayoutID::kFsMenuDefault:
-		return -UI::Window::kTopBorderThickness;
-	default:
-		return (get_h() - calc_desired_window_height(id)) / 2;
-	}
+	return (get_h() - calc_desired_window_height(id)) / 2 - UI::Window::kTopBorderThickness;
 }
 
 FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
@@ -553,9 +543,8 @@ void FullscreenMenuMain::layout() {
 			const int16_t desired_h =
 			   calc_desired_window_height(w->window_layout_id()) + p->get_tborder() + p->get_bborder();
 			w->set_size(desired_w, desired_h);
-			// w->set_pos(Vector2i(calc_desired_window_x(w->window_layout_id()),
-			// calc_desired_window_y(w->window_layout_id())));
-			w->center_to_parent();
+			w->set_pos(Vector2i(calc_desired_window_x(w->window_layout_id()),
+			                    calc_desired_window_y(w->window_layout_id())));
 
 			if (minimal) {
 				// …and then make it minimal again if it was minimal before
