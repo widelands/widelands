@@ -216,7 +216,7 @@ create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, Interactive
 	}
 	assert(capacity >= 0);
 
-	if (capacity > 0) {
+	if (capacity > 0 && wh.owner().additional_expedition_items_allowed()) {
 		const bool can_act = igb.can_act(wh.get_owner()->player_number());
 		box.add(new PortDockAdditionalItemsDisplay(
 		           igb.game(), &box, can_act, *wh.get_portdock(), capacity),

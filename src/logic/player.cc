@@ -146,6 +146,7 @@ Player::Player(EditorGameBase& the_egbase,
      ship_name_counter_(0),
      fields_(nullptr),
      is_picking_custom_starting_position_(false),
+     allow_additional_expedition_items_(true),
      message_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/message")),
      attack_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack")),
      occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")) {
