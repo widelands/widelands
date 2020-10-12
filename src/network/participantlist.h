@@ -29,7 +29,6 @@
 // Avoid as many includes as possible
 class GameSettings;
 class UserSettings;
-class ComputerPlayer;
 class RGBColor;
 
 namespace Widelands {
