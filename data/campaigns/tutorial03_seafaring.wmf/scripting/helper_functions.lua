@@ -80,7 +80,7 @@ end
 function get_waterway_fields(area)
    local fields = {}
    for i,field in pairs(area) do
-      if field.immovable and field.immovable.descr.type_name == "waterway" then -- NOCOM crash
+      if field.immovable and field.immovable.descr.type_name == "waterway" then
          table.insert(fields, field)
       end
    end
