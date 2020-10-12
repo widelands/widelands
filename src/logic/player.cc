@@ -697,8 +697,9 @@ Waterway& Player::force_waterway(const Path& path) {
 }
 
 Building& Player::force_building(Coords const location, const FormerBuildings& former_buildings) {
-	if (former_buildings.empty())
+	if (former_buildings.empty()) {
 		throw wexception("Player::force_building(): empty former_buildings");
+	}
 
 	const Map& map = egbase().map();
 	DescriptionIndex idx = former_buildings.back().first;

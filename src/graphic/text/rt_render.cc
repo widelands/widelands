@@ -1245,11 +1245,11 @@ class FontTagHandler : public TagHandler {
 public:
 	FontTagHandler(Tag& tag,
 	               FontCache& fc,
-	               NodeStyle ns,
+	               const NodeStyle& ns,
 	               ImageCache* image_cache,
 	               RendererStyle& init_renderer_style,
 	               const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets) {
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1285,11 +1285,11 @@ class PTagHandler : public TagHandler {
 public:
 	PTagHandler(Tag& tag,
 	            FontCache& fc,
-	            NodeStyle ns,
+	            const NodeStyle& ns,
 	            ImageCache* image_cache,
 	            RendererStyle& init_renderer_style,
 	            const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets), indent_(0) {
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), indent_(0) {
 	}
 
 	void enter() override {
@@ -1341,11 +1341,11 @@ class ImgTagHandler : public TagHandler {
 public:
 	ImgTagHandler(Tag& tag,
 	              FontCache& fc,
-	              NodeStyle ns,
+	              const NodeStyle& ns,
 	              ImageCache* image_cache,
 	              RendererStyle& init_renderer_style,
 	              const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets),
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     render_node_(nullptr) {
 	}
 
@@ -1396,11 +1396,11 @@ class VspaceTagHandler : public TagHandler {
 public:
 	VspaceTagHandler(Tag& tag,
 	                 FontCache& fc,
-	                 NodeStyle ns,
+	                 const NodeStyle& ns,
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
 	                 const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets), space_(0) {
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), space_(0) {
 	}
 
 	void enter() override {
@@ -1421,11 +1421,11 @@ class HspaceTagHandler : public TagHandler {
 public:
 	HspaceTagHandler(Tag& tag,
 	                 FontCache& fc,
-	                 NodeStyle ns,
+	                 const NodeStyle& ns,
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
 	                 const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets),
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     background_image_(nullptr),
 	     space_(0) {
 	}
@@ -1484,11 +1484,11 @@ class BrTagHandler : public TagHandler {
 public:
 	BrTagHandler(Tag& tag,
 	             FontCache& fc,
-	             NodeStyle ns,
+	             const NodeStyle& ns,
 	             ImageCache* image_cache,
 	             RendererStyle& init_renderer_style,
 	             const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets) {
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
@@ -1722,12 +1722,12 @@ class RTTagHandler : public DivTagHandler {
 public:
 	RTTagHandler(Tag& tag,
 	             FontCache& fc,
-	             NodeStyle ns,
+	             const NodeStyle& ns,
 	             ImageCache* image_cache,
 	             RendererStyle& init_renderer_style,
 	             const UI::FontSets* fontsets,
 	             uint16_t w)
-	   : DivTagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets, w, true) {
+	   : DivTagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets, w, true) {
 	}
 
 	// Handle attributes that are in rt, but not in div.
