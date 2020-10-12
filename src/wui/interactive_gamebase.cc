@@ -568,7 +568,7 @@ void InteractiveGameBase::show_game_summary() {
 }
 
 bool InteractiveGameBase::show_game_client_disconnected() {
-	assert(is_a(GameHost, get_game()->game_controller()));
+	assert(dynamic_cast<GameHost*>(get_game()->game_controller()) != nullptr);
 	if (!client_disconnected_.window) {
 		if (upcast(GameHost, host, get_game()->game_controller())) {
 			new GameClientDisconnected(this, client_disconnected_, host);

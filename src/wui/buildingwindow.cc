@@ -255,28 +255,25 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				      });
 			}
 		} else if (upcast(const Widelands::ProductionSite, productionsite, building)) {
-			if (!is_a(Widelands::MilitarySite, productionsite)) {
-				const bool is_stopped = productionsite->is_stopped();
-				UI::Button* stopbtn = new UI::Button(
-				   capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
-				   UI::ButtonStyle::kWuiMenu,
-				   g_image_cache->get(
-				      (is_stopped ? "images/ui_basic/continue.png" : "images/ui_basic/stop.png")),
-				   is_stopped ?
-				      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-				      _("Continue") :
-				      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-				      _("Stop"));
-				stopbtn->sigclicked.connect([this]() { act_start_stop(); });
-				capsbuttons->add(stopbtn);
+			const bool is_stopped = productionsite->is_stopped();
+			UI::Button* stopbtn = new UI::Button(
+			   capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			   g_image_cache->get(
+			      (is_stopped ? "images/ui_basic/continue.png" : "images/ui_basic/stop.png")),
+			   is_stopped ?
+			      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+			      _("Continue") :
+			      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+			      _("Stop"));
+			stopbtn->sigclicked.connect([this]() { act_start_stop(); });
+			capsbuttons->add(stopbtn);
 
-				// Add a fixed width separator rather than infinite space so the
-				// enhance/destroy/dismantle buttons are fixed in their position
-				// and not subject to the number of buttons on the right of the
-				// panel.
-				UI::Panel* spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
-				capsbuttons->add(spacer);
-			}
+			// Add a fixed width separator rather than infinite space so the
+			// enhance/destroy/dismantle buttons are fixed in their position
+			// and not subject to the number of buttons on the right of the
+			// panel.
+			UI::Panel* spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
+			capsbuttons->add(spacer);
 		}  // upcast to productionsite
 
 		upcast(Widelands::ConstructionSite, cs, building);
@@ -473,7 +470,7 @@ void BuildingWindow::act_start_stop() {
 		return;
 	}
 
-	if (dynamic_cast<const Widelands::ProductionSite*>(building)) {
+	if (building->descr().type() >= Widelands::MapObjectType::PRODUCTIONSITE) {
 		if (game_) {
 			game_->send_player_start_stop_building(*building);
 		} else {

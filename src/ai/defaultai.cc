@@ -1577,9 +1577,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	map.get_neighbour(field.coords, Widelands::WALK_SE, &fse);
 	field.preferred = false;
 	if (Widelands::BaseImmovable const* const imm = fse.field->get_immovable()) {
-		if (dynamic_cast<Widelands::Flag const*>(imm) ||
-		    (dynamic_cast<Widelands::Road const*>(imm) &&
-		     (fse.field->nodecaps() & Widelands::BUILDCAPS_FLAG))) {
+		if ((imm->descr().type() == Widelands::MapObjectType::FLAG ||
+		     imm->descr().type() == Widelands::MapObjectType::ROAD) &&
+		    (fse.field->nodecaps() & Widelands::BUILDCAPS_FLAG)) {
 			field.preferred = true;
 		}
 	}
@@ -2090,9 +2090,9 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 	map.get_brn(field.coords, &fse);
 
 	if (Widelands::BaseImmovable const* const imm = fse.field->get_immovable()) {
-		if (dynamic_cast<Widelands::Flag const*>(imm) ||
-		    (dynamic_cast<Widelands::Road const*>(imm) &&
-		     (fse.field->nodecaps() & Widelands::BUILDCAPS_FLAG))) {
+		if ((imm->descr().type() == Widelands::MapObjectType::FLAG ||
+		     imm->descr().type() == Widelands::MapObjectType::ROAD) &&
+		    (fse.field->nodecaps() & Widelands::BUILDCAPS_FLAG)) {
 			field.preferred = true;
 		}
 	}

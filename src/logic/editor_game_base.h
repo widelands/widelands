@@ -88,6 +88,10 @@ public:
 		return objects_;
 	}
 
+	virtual bool is_game() const {
+		return false;
+	}
+
 	// logic handler func
 	virtual void think();
 
