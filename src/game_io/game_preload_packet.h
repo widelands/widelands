@@ -40,6 +40,9 @@ struct GamePreloadPacket : public GameDataPacket {
 	std::string get_background() const {
 		return background_;
 	}
+	std::string get_background_theme() const {
+		return background_theme_;
+	}
 	std::string get_win_condition() const {
 		return win_condition_;
 	}
@@ -72,6 +75,7 @@ private:
 	std::string minimap_path_;
 	std::string mapname_;
 	std::string background_;
+	std::string background_theme_;
 	std::string win_condition_;
 	// Initializing everything to make cppcheck happy.
 	uint32_t gametime_ = 0U;

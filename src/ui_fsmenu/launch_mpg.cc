@@ -215,7 +215,8 @@ void FullscreenMenuLaunchMPG::select_map() {
 	settings_->set_scenario(code == MenuTarget::kScenarioGame);
 
 	const MapData& mapdata = *msm.get_map();
-	settings_->set_map(mapdata.name, mapdata.filename, mapdata.nrplayers);
+	settings_->set_map(
+	   mapdata.name, mapdata.filename, mapdata.theme, mapdata.background, mapdata.nrplayers);
 	map_changed();
 }
 
@@ -251,7 +252,8 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		std::string mapname = s.get_safe_string("name");
 		const int nr_players = s.get_safe_int("nr_players");
 
-		settings_->set_map(mapname, filename, nr_players, true);
+		settings_->set_map(mapname, filename, s.get_string("theme", ""),
+		                   s.get_string("background", ""), nr_players, true);
 		map_changed();
 
 		// Check for sendability

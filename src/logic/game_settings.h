@@ -172,6 +172,9 @@ struct GameSettings {
 	// Whether players may pick their own starting positions
 	bool custom_starting_positions;
 
+	std::string map_theme;
+	std::string map_background;
+
 	/// List of tribes that players are allowed to choose
 	std::vector<Widelands::TribeBasicInfo> tribes;
 
@@ -207,6 +210,8 @@ struct GameSettingsProvider {
 
 	virtual void set_map(const std::string& mapname,
 	                     const std::string& mapfilename,
+	                     const std::string& map_theme,
+	                     const std::string& map_bg,
 	                     uint32_t maxplayers,
 	                     bool savegame = false) = 0;
 	virtual void set_player_state(uint8_t number, PlayerSettings::State) = 0;

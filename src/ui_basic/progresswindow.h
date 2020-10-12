@@ -46,7 +46,7 @@ struct IProgressVisualization {
 
 /// Manages a progress window on the screen.
 struct ProgressWindow : public UI::Panel {
-	explicit ProgressWindow(const std::string& background = std::string());
+	explicit ProgressWindow(const std::string& theme, const std::string& background);
 	~ProgressWindow() override;
 
 	/// Register additional visualization (tips/hints, animation, etc)
@@ -65,6 +65,7 @@ private:
 	Vector2i label_center_;
 	Recti label_rectangle_;
 	VisualizationArray visualizations_;
+	std::string theme_;
 	std::string background_;
 	const UI::ProgressbarStyleInfo& style_;
 

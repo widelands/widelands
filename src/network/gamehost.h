@@ -71,6 +71,8 @@ struct GameHost : public GameController {
 	void set_scenario(bool);
 	void set_map(const std::string& mapname,
 	             const std::string& mapfilename,
+	             const std::string& map_theme,
+	             const std::string& map_bg,
 	             uint32_t maxplayers,
 	             bool savegame = false);
 	void set_player_state(uint8_t number, PlayerSettings::State state, bool host = false);

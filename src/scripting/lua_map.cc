@@ -5233,7 +5233,7 @@ int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
 
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 
-	if (is_a(Widelands::Game, &egbase)) {
+	if (egbase.is_game()) {
 		const Widelands::PortDock* pd = get(L, egbase)->get_portdock();
 		if (pd) {
 			if (pd->expedition_started()) {
@@ -6211,7 +6211,7 @@ int LuaShip::get_last_portdock(lua_State* L) {
 // UNTESTED sink states
 int LuaShip::get_state(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	if (is_a(Widelands::Game, &egbase)) {
+	if (egbase.is_game()) {
 		switch (get(L, egbase)->get_ship_state()) {
 		case Widelands::Ship::ShipStates::kTransport:
 			lua_pushstring(L, "transport");
@@ -6241,7 +6241,7 @@ int LuaShip::get_state(lua_State* L) {
 
 int LuaShip::get_scouting_direction(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	if (is_a(Widelands::Game, &egbase)) {
+	if (egbase.is_game()) {
 		switch (get(L, egbase)->get_scouting_direction()) {
 		case Widelands::WalkingDir::WALK_NE:
 			lua_pushstring(L, "ne");
@@ -6305,7 +6305,7 @@ int LuaShip::set_scouting_direction(lua_State* L) {
 */
 int LuaShip::get_island_explore_direction(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	if (is_a(Widelands::Game, &egbase)) {
+	if (egbase.is_game()) {
 		switch (get(L, egbase)->get_island_explore_direction()) {
 		case Widelands::IslandExploreDirection::kCounterClockwise:
 			lua_pushstring(L, "ccw");
@@ -6389,23 +6389,53 @@ int LuaShip::set_capacity(lua_State* L) {
  */
 
 /* RST
-   .. method:: get_wares()
+   .. method:: get_wares([which = nil])
 
-      Returns the number of wares on this ship. This does not implement
-      everything that :class:`HasWares` offers.
+      When called without arguments, returns the number of wares on this ship.
 
-      :returns: the number of wares
+      When called with a ware name as argument, returns the amount of the
+      specified ware on the ship.
+
+      When called with :const:`""` as argument, returns an array with
+      the names of all loaded wares.
+
+      :returns: the number of wares or an :class:`array` of :class:`string`
 */
 // UNTESTED
 int LuaShip::get_wares(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	int nwares = 0;
-	Widelands::WareInstance* ware;
 	Widelands::Ship* ship = get(L, egbase);
+
+	Widelands::WareInstance* ware = nullptr;
+	std::string filter = "";
+
+	if (lua_gettop(L) > 1) {
+		filter = luaL_checkstring(L, -1);
+		if (filter.empty()) {
+			// Push array of all ware names
+
+			lua_newtable(L);
+			uint32_t index = 1;
+			for (uint32_t i = 0; i < ship->get_nritems(); ++i) {
+				const Widelands::ShippingItem& item = ship->get_item(i);
+				item.get(egbase, &ware, nullptr);
+				if (ware) {
+					lua_pushuint32(L, index++);
+					lua_pushstring(L, ware->descr().name().c_str());
+					lua_rawset(L, -3);
+				}
+			}
+
+			return 1;
+		}
+	}
+
+	// Count wares, optionally filtering by `filter`.
+	int nwares = 0;
 	for (uint32_t i = 0; i < ship->get_nritems(); ++i) {
 		const Widelands::ShippingItem& item = ship->get_item(i);
 		item.get(egbase, &ware, nullptr);
-		if (ware != nullptr) {
+		if (ware && (filter.empty() || ware->descr().name() == filter)) {
 			++nwares;
 		}
 	}
@@ -6414,23 +6444,53 @@ int LuaShip::get_wares(lua_State* L) {
 }
 
 /* RST
-   .. method:: get_workers()
+   .. method:: get_workers([which = nil])
 
-      Returns the number of workers on this ship. This does not implement
-      everything that :class:`HasWorkers` offers.
+      When called without arguments, returns the number of workers on this ship.
 
-      :returns: the number of workers
+      When called with a worker name as argument, returns the amount of the
+      specified worker on the ship.
+
+      When called with :const:`""` as argument, returns an array
+      with all loaded workers.
+
+      :returns: the number of workers or an :class:`array` of :class:`Worker`
 */
 // UNTESTED
 int LuaShip::get_workers(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	int nworkers = 0;
-	Widelands::Worker* worker;
 	Widelands::Ship* ship = get(L, egbase);
+
+	Widelands::Worker* worker = nullptr;
+	std::string filter = "";
+
+	if (lua_gettop(L) > 1) {
+		filter = luaL_checkstring(L, -1);
+		if (filter.empty()) {
+			// Push array of all workers
+
+			lua_newtable(L);
+			uint32_t index = 1;
+			for (uint32_t i = 0; i < ship->get_nritems(); ++i) {
+				const Widelands::ShippingItem& item = ship->get_item(i);
+				item.get(egbase, nullptr, &worker);
+				if (worker) {
+					lua_pushuint32(L, index++);
+					upcasted_map_object_to_lua(L, worker);
+					lua_rawset(L, -3);
+				}
+			}
+
+			return 1;
+		}
+	}
+
+	// Count workers, optionally filtering by `filter`.
+	int nworkers = 0;
 	for (uint32_t i = 0; i < ship->get_nritems(); ++i) {
 		const Widelands::ShippingItem& item = ship->get_item(i);
 		item.get(egbase, nullptr, &worker);
-		if (worker != nullptr) {
+		if (worker && (filter.empty() || worker->descr().name() == filter)) {
 			++nworkers;
 		}
 	}
@@ -6919,7 +6979,7 @@ int LuaField::set_resource_amount(lua_State* L) {
 	}
 
 	auto* map = egbase.mutable_map();
-	if (is_a(Widelands::Game, &egbase)) {
+	if (egbase.is_game()) {
 		map->set_resources(c, amount);
 	} else {
 		// in editor, reset also initial amount

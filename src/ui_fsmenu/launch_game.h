@@ -47,6 +47,11 @@ public:
 		return UI::Window::WindowLayoutID::kFsMenuDefault;
 	}
 
+	GameSettingsProvider& settings() const {
+		assert(settings_);
+		return *settings_;
+	}
+
 protected:
 	virtual void clicked_ok() = 0;
 	virtual void clicked_back() = 0;

@@ -1395,7 +1395,8 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm) {
 			if (sp.has_players_tribe()) {
 				tipstexts.push_back(sp.get_players_tribe());
 			}
-			game.create_loader_ui(tipstexts, false);
+			game.create_loader_ui(tipstexts, false, lgm.settings().settings().map_theme,
+			                      lgm.settings().settings().map_background);
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
@@ -1501,6 +1502,8 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
  */
 bool WLApplication::replay(FullscreenMenuMain* fsmm) {
 	Widelands::Game game;
+
+	std::string map_theme, map_bg;
 	if (filename_.empty()) {
 		assert(fsmm);
 		SinglePlayerGameSettingsProvider sp;
@@ -1510,10 +1513,12 @@ bool WLApplication::replay(FullscreenMenuMain* fsmm) {
 		}
 
 		filename_ = rm.filename();
+		map_theme = sp.settings().map_theme;
+		map_bg = sp.settings().map_background;
 	}
 
 	try {
-		game.create_loader_ui({"general_game"}, true);
+		game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
 
 		game.set_ibase(new InteractiveSpectator(game, get_config_section()));
 		game.set_write_replay(false);
