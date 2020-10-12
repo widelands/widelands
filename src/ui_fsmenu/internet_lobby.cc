@@ -319,6 +319,7 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			er.set_string(1, client.name);
 			er.set_string(2, client.build_id);
 			er.set_string(3, client.game);
+			er.set_tooltip(2, client.build_id);
 
 			const Image* pic;
 			switch (convert_clienttype(client.type)) {

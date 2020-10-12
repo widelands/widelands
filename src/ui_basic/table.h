@@ -122,6 +122,7 @@ public:
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
 	bool handle_key(bool down, SDL_Keysym code);
+	bool draw_tooltip(RenderTarget& dst, const std::string& text);
 };
 
 template <> class Table<void*> : public Panel {
@@ -133,8 +134,10 @@ public:
 		void set_picture(uint8_t col, const Image* pic, const std::string& str = std::string());
 		/// Text conventions: Title Case for the 'str'
 		void set_string(uint8_t col, const std::string& str);
+		void set_tooltip(uint8_t col, const std::string& str);
 		const Image* get_picture(uint8_t col) const;
 		const std::string& get_string(uint8_t col) const;
+		const std::string& get_tooltip(uint8_t col) const;
 		void* entry() const {
 			return entry_;
 		}
@@ -161,6 +164,7 @@ public:
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;
+			std::string d_tooltip;
 		};
 		std::vector<Data> data_;
 		bool disabled_;
@@ -334,6 +338,7 @@ private:
 	using EntryRecordVector = std::vector<EntryRecord*>;
 	EntryRecordVector entry_records_;
 	void set_scrollpos(int32_t pos);
+	bool draw_tooltip(RenderTarget& dst, const std::string& text);
 };
 
 template <typename Entry> class Table<const Entry* const> : public Table<void*> {
