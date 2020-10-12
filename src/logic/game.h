@@ -163,6 +163,10 @@ public:
 	Game();
 	~Game() override;
 
+	bool is_game() const override {
+		return true;
+	}
+
 	// life cycle
 	void set_game_controller(GameController*);
 	GameController* game_controller();

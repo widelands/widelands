@@ -296,7 +296,8 @@ void Road::postsplit(Game& game, Flag& flag) {
 		// If he is in the building at our end flag or at the other road's
 		// end flag, he can be reassigned to the other road.
 		if (idx < 0) {
-			if (dynamic_cast<Building const*>(map.get_immovable(w->get_position()))) {
+			const MapObject* mo = map.get_immovable(w->get_position());
+			if (mo && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {
 				Coords pos;
 				map.get_brn(w->get_position(), &pos);
 				if (pos == path.get_start()) {

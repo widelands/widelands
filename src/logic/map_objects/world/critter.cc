@@ -188,7 +188,7 @@ Critter::Critter(const CritterDescr& critter_descr) : Bob(critter_descr), creati
 }
 
 bool Critter::init(EditorGameBase& egbase) {
-	if (is_a(Game, &egbase)) {
+	if (egbase.is_game()) {
 		// in editor, assume t0 as creation time so bobs don't die of old age right away when the
 		// actual game starts
 		creation_time_ = egbase.get_gametime();

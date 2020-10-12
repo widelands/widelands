@@ -63,10 +63,11 @@ bool CheckStepRoadAI::allowed(const Widelands::Map& map,
 			if (id != Widelands::CheckStep::stepLast && !open_end) {
 				return false;
 			}
-			if (dynamic_cast<Widelands::Flag const*>(imm)) {
+			if (imm->descr().type() == Widelands::MapObjectType::FLAG) {
 				return true;
 			}
-			if (!dynamic_cast<Widelands::Road const*>(imm) || !(endcaps & Widelands::BUILDCAPS_FLAG)) {
+			if (imm->descr().type() != Widelands::MapObjectType::ROAD ||
+			    !(endcaps & Widelands::BUILDCAPS_FLAG)) {
 				return false;
 			}
 		}

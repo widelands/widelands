@@ -889,7 +889,7 @@ void Soldier::attack_update(Game& game, State& state) {
 	if (state.ivar2 > 0) {
 		if (state.ivar2 == 1) {
 			// Return home
-			if (!location || !is_a(MilitarySite, location)) {
+			if (!location || location->descr().type() != MapObjectType::MILITARYSITE) {
 				molog(game.get_gametime(), "[attack] No more site to go back to\n");
 				state.ivar2 = 2;
 				return schedule_act(game, Duration(10));
@@ -1443,7 +1443,8 @@ void Soldier::battle_update(Game& game, State&) {
 	const Map& map = game.map();
 	Soldier& opponent = *battle_->opponent(*this);
 	if (opponent.get_position() != get_position()) {
-		if (is_a(Building, map[get_position()].get_immovable())) {
+		const MapObject* mo = map[get_position()].get_immovable();
+		if (mo && mo->descr().type() >= MapObjectType::BUILDING) {
 			// Note that this does not use the "leavebuilding" task,
 			// because that task is geared towards orderly workers leaving
 			// their location, whereas this case can also happen when

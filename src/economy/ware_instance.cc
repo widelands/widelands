@@ -127,7 +127,7 @@ bool IdleWareSupply::is_active() const {
 
 SupplyProviders IdleWareSupply::provider_type(Game* game) const {
 	MapObject* const loc = ware_.get_location(*game);
-	if (is_a(Ship, loc)) {
+	if (loc && loc->descr().type() == MapObjectType::SHIP) {
 		return SupplyProviders::kShip;
 	}
 	if (upcast(Worker, worker, loc)) {
@@ -438,7 +438,7 @@ void WareInstance::enter_building(Game& game, Building& building) {
 			t->has_failed();
 			cancel_moving();
 
-			if (is_a(Warehouse, &building)) {
+			if (building.descr().type() == MapObjectType::WAREHOUSE) {
 				building.receive_ware(game, descr_index_);
 				remove(game);
 			} else {

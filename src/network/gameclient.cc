@@ -266,7 +266,8 @@ void GameClient::run() {
 		if (has_players_tribe()) {
 			tipstexts.push_back(get_players_tribe());
 		}
-		UI::ProgressWindow& loader_ui = game.create_loader_ui(tipstexts, false);
+		UI::ProgressWindow& loader_ui =
+		   game.create_loader_ui(tipstexts, false, d->settings.map_theme, d->settings.map_background);
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
@@ -396,7 +397,8 @@ void GameClient::next_player_state(uint8_t) {
 	// client is not allowed to do this
 }
 
-void GameClient::set_map(const std::string&, const std::string&, uint32_t, bool) {
+void GameClient::set_map(
+   const std::string&, const std::string&, const std::string&, const std::string&, uint32_t, bool) {
 	// client is not allowed to do this
 }
 
@@ -660,6 +662,8 @@ void GameClient::handle_ping(RecvPacket&) {
 void GameClient::handle_setting_map(RecvPacket& packet) {
 	d->settings.mapname = packet.string();
 	d->settings.mapfilename = g_fs->FileSystem::fix_cross_file(packet.string());
+	d->settings.map_theme = packet.string();
+	d->settings.map_background = packet.string();
 	d->settings.savegame = packet.unsigned_8() == 1;
 	d->settings.scenario = packet.unsigned_8() == 1;
 	log_info("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(),

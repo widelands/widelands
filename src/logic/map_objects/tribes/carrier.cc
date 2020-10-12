@@ -211,7 +211,7 @@ void Carrier::transport_update(Game& game, State& state) {
 void Carrier::deliver_to_building(Game& game, State& state) {
 	BaseImmovable* const pos = game.map()[get_position()].get_immovable();
 
-	if (dynamic_cast<Flag const*>(pos)) {
+	if (pos && pos->descr().type() == Widelands::MapObjectType::FLAG) {
 		return pop_task(game);  //  we are done
 	} else if (upcast(Building, building, pos)) {
 		// Drop all wares addressed to this building
