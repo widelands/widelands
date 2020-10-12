@@ -153,6 +153,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdExpeditionConfig(des);
 	case QueueCommandTypes::kPickCustomStartingPosition:
 		return new CmdPickCustomStartingPosition(des);
+	case QueueCommandTypes::kMarkMapObjectForRemoval:
+		return new CmdMarkMapObjectForRemoval(des);
 
 	default:
 		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");

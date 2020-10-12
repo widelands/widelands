@@ -329,7 +329,8 @@ void FieldActionWindow::init() {
 	warp_mouse_to_fastclick_panel();
 }
 
-static bool suited_for_targeting(const Widelands::EditorGameBase& egbase,
+static bool suited_for_targeting(Widelands::PlayerNumber p,
+                                 const Widelands::EditorGameBase& egbase,
                                  const Widelands::Immovable& i) {
 	if (i.descr().collected_by().empty()) {
 		return false;
@@ -340,12 +341,22 @@ static bool suited_for_targeting(const Widelands::EditorGameBase& egbase,
 	           map.get_fcoords(i.get_position()), egbase.tribes().get_largest_workarea()));
 	do {
 		if (const Widelands::MapObject* mo = mr.location().field->get_immovable()) {
-			if (i.descr().collected_by().count(mo->descr().name())) {
-				upcast(const Widelands::ProductionSite, ps, mo);
-				assert(ps);
-				assert(!ps->descr().workarea_info().empty());
-				if (map.calc_distance(ps->get_position(), i.get_position()) <=
-				    ps->descr().workarea_info().rbegin()->first) {
+			if (mo->descr().type() < Widelands::MapObjectType::BUILDING) {
+				continue;
+			}
+
+			const Widelands::BuildingDescr& descr =
+			   mo->descr().type() == Widelands::MapObjectType::CONSTRUCTIONSITE ?
+			      dynamic_cast<const Widelands::ConstructionSite&>(*mo).building() :
+			      dynamic_cast<const Widelands::Building&>(*mo).descr();
+
+			if (i.descr().collected_by().count(descr.name())) {
+				upcast(const Widelands::Building, b, mo);
+				assert(b);
+				assert(descr.workarea_info().empty());
+				if (b->owner().player_number() == p &&
+				    map.calc_distance(b->get_position(), i.get_position()) <=
+				       descr.workarea_info().rbegin()->first) {
 					return true;
 				}
 			}
@@ -365,20 +376,20 @@ void FieldActionWindow::add_buttons_auto() {
 
 	upcast(InteractiveGameBase, igbase, &ibase());
 
-	if (igbase) {
+	if (upcast(InteractivePlayer, ipl, igbase)) {
 		// Target immovables for removal by workers
 		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
-			if (suited_for_targeting(igbase->egbase(), *mo)) {
+			if (mo->is_marked_for_removal(ipl->player_number())) {
 				UI::Box& box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
-				if (mo->is_marked_for_removal(igbase->player_number())) {
-					add_button(&box, "unmark_for_removal", pic_unmark_removal,
-					           &FieldActionWindow::act_unmark_removal,
-					           _("Marked for removal by a worker – click to unmark"));
-				} else {
-					add_button(&box, "mark_for_removal", pic_mark_removal,
-					           &FieldActionWindow::act_mark_removal,
-					           _("Mark this immovable for timely removal by a suited worker"));
-				}
+				add_button(&box, "unmark_for_removal", pic_unmark_removal,
+				           &FieldActionWindow::act_unmark_removal,
+				           _("Marked for removal by a worker – click to unmark"));
+				add_tab("target", pic_tab_target, &box, _("Immovable Actions"));
+			} else if (suited_for_targeting(ipl->player_number(), ipl->egbase(), *mo)) {
+				UI::Box& box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
+				add_button(&box, "mark_for_removal", pic_mark_removal,
+				           &FieldActionWindow::act_mark_removal,
+				           _("Mark this immovable for timely removal by a suited worker"));
 				add_tab("target", pic_tab_target, &box, _("Immovable Actions"));
 			}
 		}
