@@ -23,6 +23,8 @@
 #include <cassert>
 #include <cstdint>
 
+#include "base/macros.h"
+
 class BaseTrackPtr;
 
 /*
@@ -80,9 +82,7 @@ public:
 		tracker_ = new Tracker(this);
 	}
 
-	// Forbid copy operations to make cppcheck happy
-	Trackable(const Trackable& other) = delete;
-	Trackable& operator=(const Trackable& other) = delete;
+	DISALLOW_COPY_AND_ASSIGN(Trackable);
 
 	virtual ~Trackable() {
 		tracker_->clear();
