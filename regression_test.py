@@ -46,6 +46,7 @@ class WidelandsTestCase(unittest.TestCase):
     do_use_random_directory = True
     path_to_widelands_binary = None
     keep_output_around = False
+    ignore_error_code = False
 
     def __init__(self, test_script, **wlargs):
         unittest.TestCase.__init__(self)
@@ -94,6 +95,7 @@ class WidelandsTestCase(unittest.TestCase):
                     '--datadir_for_testing={}'.format(datadir_for_testing()),
                     '--homedir={}'.format(self.run_dir),
                     '--nosound',
+                    '--fail-on-lua-error',
                     '--language=en_US' ]
             args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
 
@@ -150,9 +152,12 @@ class WidelandsTestCase(unittest.TestCase):
         else:
             common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
                     self.run_dir, stdout_filename, stdout)
-            self.assertTrue(self.widelands_returncode == 0,
-                "Widelands exited abnormally. {}".format(common_msg)
-            )
+            if self.widelands_returncode == 1 and self.ignore_error_code:
+                out("IGNORING error code 1\n")
+            else:
+                self.assertTrue(self.widelands_returncode == 0,
+                    "Widelands exited abnormally. {}".format(common_msg)
+                )
             self.assertTrue("All Tests passed" in stdout,
                 "Not all tests pass. {}.".format(common_msg)
             )
@@ -181,6 +186,10 @@ def parse_args():
     )
     p.add_argument("-b", "--binary", type=str,
         help = "Run this binary as Widelands. Otherwise some default paths are searched."
+    )
+    p.add_argument("-i", "--ignore-error-code", action="store_true", default = False,
+        help = "Assume success on return code 1, to allow running the tests "
+        "without ASan reporting false positives."
     )
 
     args = p.parse_args()
@@ -241,6 +250,7 @@ def main():
     print("Using '{}' binary.".format(args.binary))
     WidelandsTestCase.do_use_random_directory = not args.nonrandom
     WidelandsTestCase.keep_output_around = args.keep_around
+    WidelandsTestCase.ignore_error_code = args.ignore_error_code
 
     all_files = [os.path.basename(filename) for filename in glob("test/test_*.py") ]
     if args.regexp:
