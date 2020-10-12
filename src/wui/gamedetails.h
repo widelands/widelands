@@ -66,10 +66,11 @@ private:
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
 	UI::Icon minimap_icon_;
-	std::unique_ptr<const Texture> minimap_image_;
 	UI::Box* button_box_;
 
 	// Used to render map preview
+	std::string last_game_;
+	std::unordered_map<std::string, std::unique_ptr<const Texture>> minimap_cache_;
 	Widelands::EditorGameBase egbase_;
 };
 

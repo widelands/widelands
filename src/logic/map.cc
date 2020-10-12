@@ -85,7 +85,7 @@ bool FindCarnivores::accept(Bob* b) const {
 	return false;
 }
 bool FindCritter::accept(Bob* b) const {
-	return is_a(Critter, b);
+	return b && b->descr().type() == MapObjectType::CRITTER;
 }
 bool FindBobByName::accept(Bob* b) const {
 	assert(b);
@@ -702,7 +702,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 
 	width_ = w;
 	height_ = h;
-	fields_.reset(new_fields.release());
+	fields_ = std::move(new_fields);
 
 	// Always call allocate_player_maps() while changing the map's size.
 	// Forgetting to do so will result in random crashes.

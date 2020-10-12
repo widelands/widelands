@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-04 08:23+0000\n"
-"PO-Revision-Date: 2020-08-29 17:32+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-11 07:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -334,7 +334,7 @@ msgstr "Astoria 2"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:10
 msgid "Long, economic play in beautiful land. Try every player!"
-msgstr ""
+msgstr "Cluich eaconamach fhada air tìr àlainn. Feuch gach cluicheadair!"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
@@ -412,7 +412,7 @@ msgstr "Thairis air an fhàire"
 
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
-msgstr ""
+msgstr "Kristin – air a dheasachadh le 3plus4i"
 
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
@@ -420,7 +420,7 @@ msgstr "Cruinnich sgioba is seòl dhan aineolach."
 
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
-msgstr ""
+msgstr "Cha ghabh am mapa seo a bhuannachadh leis a’ chumha buaidhe “fèin-fhlaitheach”."
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
@@ -448,12 +448,12 @@ msgstr "’S e na Dolaimitich a th’ ann an seud nan Alpannan agus chaidh iad a
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
-"There is lot of flat ground on the mountains. Unfortunately, most of it is "
-"vertical – use the little building space you have wisely. A fortress at the "
-"mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"The mountains have an abundance of flat ground. Unfortunately, most of it is"
+" vertical – use the little building space you have wisely. A fortress at the"
+" mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it's the only way to find all the precious farm spaces."
-msgstr ""
+msgstr "Tha tòrr talmhainn rèidhe air na beanntan. Gu mì-fhortanach, ’s ann inghearach a tha a’ mhòrchuid dheth – cleachd na th’ agad a rùm togail gu glic. Faodaidh dùn aig bun a’ bhealaich chumhaing a bhith ’na chnap-starra mòr dha dh’airm an nàmhad – cleachd an cruth-tìre gus do chuideachadh. Leag na craobhan uile far an urrainn dhut sin a dhèanamh – seo an t-aon dòigh air an lorg thu rùm dha na tuathanasan agad."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -481,7 +481,7 @@ msgstr "(tionndadh 0.2)"
 msgid ""
 "A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "Mapa glè mhòr na Roinn-eòrpa. Ghorm = An t-Suain, Dearg = An Eadailt, Buidhe = An Spàinnt, Uaine = An Tuirc, Dubh = An Ruis, Orains = Sasainn, Purpaidh = An Fhraing, Gheal = A’ Phòlainn"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:8
 msgid "Europa 1.1"
@@ -724,7 +724,7 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you're still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr ""
+msgstr "Tha am mapa seo ag amas air modh aon-chluicheadair dhan fheadhainn a tha glè sgileil agus a nì a’ chùis an aghaidh air 6 IFan gun duilgheadas sam bith air mapa àbhaisteach. Chan eil meatailt aig a’ chluicheadair ghorm (ach beagan iarainn gus an eaconamaidh a stèidheachadh), mar sin bidh thu an eisimeil air an t-saothrachadh dhe 5% a nì mèinnean falamh. Agus bidh thu a’ cluich an aghaidh sianar fhathast (ged as urrainn dhut cluicheadair IF no dhà a thoirt air falbh airson cùisean a dhèanamh beagan nas fhasa). Gura math a thèid leat!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -975,6 +975,12 @@ msgid ""
 "Many beautiful, green islands await the ones brave enough to pass the "
 "thousand waves, twinkling in the sun."
 msgstr "Tha iomadh eilean àlainn uaine a’ feitheamh air an fheadhainn a bhios dàna gu leòr gus tighinn thar drilean nam mìle tonn."
+
+#: ../../data/maps/Twinkling_Waves.wmf/elemental:11
+msgid ""
+"Take care not to build your ships in the lagoons. They cannot pass through "
+"the reefs to the main ocean, where your ports are located."
+msgstr "Thoir an aire nach tog thu na longan agad sna lochan. Chan fhaigh iad seachad air na creagan dhan chuan far a bheil na puirt agad."
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"

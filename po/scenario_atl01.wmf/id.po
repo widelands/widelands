@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-04 08:23+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-09-12 12:00+0000\n"
+"Last-Translator: Febryan 45 Mappers <muhammadfebryan1208@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/widelands/widelands/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +39,7 @@ msgstr "Bangun dua rumah penebang kayu"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Build two forester’s houses"
-msgstr "Bangun dua rumah rimbawan"
+msgstr "Bangun dua rumah penanam pohon"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a sawmill"
@@ -58,7 +58,7 @@ msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr "Pulau ini sangatlah besar dan selama kita tidak yakin bahwa kita sendirian, kita tidak bisa bersantai. Jelajahi dan taklukkan, ini adalah satu-astunya cara untuk melindungi kita dari ancaman di pulau dan dari Atlantis."
+msgstr "Pulau ini sangatlah besar dan selama kita tidak yakin bahwa kita sendirian, kita tidak bisa bersantai. Jelajahi dan taklukkan, ini adalah satu-satunya cara untuk melindungi kita dari ancaman di pulau dan dari Atlantis."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "Build military sites to expand your territory"
@@ -276,11 +276,11 @@ msgstr "Bangun tempat pembuatan kapal dekat dengan danau untuk memulai membangun
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:142
 msgid "Proud to the Death"
-msgstr "Bangga dengan Kematian"
+msgstr "Bangga dengan kematian"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:144
 msgid "Favored by the God"
-msgstr "Disukai oleh Tuhan"
+msgstr "Disukai oleh tuhan"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:146
@@ -305,7 +305,7 @@ msgstr "Cerita ini terjadi pada masa pemerintahan Raja Askandor, penerus ke 43 R
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:152
 msgid "Disgraced Before the God"
-msgstr "Aib Di hadapan Tuhan"
+msgstr "Aib di hadapan tuhan"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:154
 msgid "The God’s Punishment"
@@ -403,7 +403,7 @@ msgid ""
 " on Atlantis. I hope they will withstand the next rain. At least, the towers"
 " will warn us if a ship from Atlantis follows us and if the island is "
 "inhabited, we will see attackers a long time before they arrive."
-msgstr ""
+msgstr "Kita menghabiskan minggu terakhir membangun menara pengawas di gunung-gunung dekat dengan area mendarat kita; dan, tentunya, aula untuk kita semua. Kita mempunyai konstruktor yang sangat berbakat – masih, bangunan tidak cocok dengan seni yang kita punya di Atlantis. Saya harap mereka bisa berdiri tegak dengan hujan selanjutnya. Kurang lebih, menara ini memperingatkan kita jika ada sebuah perahu dari Atlantis yang mengikuti kita dan jika pulaunya sudah tinggali, kita akan melihat penyerang jauh sebelum mereka tiba."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:188
@@ -412,11 +412,11 @@ msgid ""
 "it a home. I reckon we need to establish a sustainable economy and to "
 "explore our surroundings. I called for specialists and will follow their "
 "advice."
-msgstr ""
+msgstr "Kita telah mendirikan kita semua di pulau ini. Langkah selanjutnya adalah membuat ini rumah. Saya rasa kita perlu mendirikan ekonomi berkelanjutan dan untuk menjelajah lingkungan kita. Saya akan memanggil spesialis dan akan mengikuti saran mereka."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:191
 msgid "Loftomor and Sidolus Arrive"
-msgstr ""
+msgstr "Loftomor dan Sidolus Datang"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:192
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:227
@@ -432,7 +432,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:470
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:194
@@ -441,7 +441,7 @@ msgid ""
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
 " you before me to seek your counsel: what needs to be done to make this our "
 "new home?"
-msgstr ""
+msgstr "Semoga Satul menghangatkan kamu berdua. Loftomor, kamu telah menjadi arsitek terkenal di pulau ini. Sidolus, kamu adalah seorang pejuang dan ahli strategi yang berpengalaman. Saya telah memanggilmu sebelum mencari nasihatmu: apa yang diperlukan untuk membuat ini rumah baru kita?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Loftomor Speaks"

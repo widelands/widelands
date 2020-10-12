@@ -597,6 +597,13 @@ public:
 	}
 	bool get_starting_position_suitability(const Coords&) const;
 
+	bool additional_expedition_items_allowed() const {
+		return allow_additional_expedition_items_;
+	}
+	void set_allow_additional_expedition_items(bool allow) {
+		allow_additional_expedition_items_ = allow;
+	}
+
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
@@ -640,12 +647,18 @@ private:
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */
 
-	bool should_see(const FCoords&) const;
+	using SeersList = std::list<const MapObject*>;
+
+	bool should_see(const FCoords&, SeersList& nearby_objects) const;
 	// Own bobs and buildings that are seeing fields in their vicinity
-	std::list<const MapObject*> seers_;
+	SeersList seers_;
 
 	void update_vision(const FCoords&, bool force_visible);
+	void update_vision(const FCoords&, bool force_visible, SeersList& nearby_objects);
 	void update_vision_whole_map();
+	SeersList team_seers();
+	SeersList seers_for(const Area<FCoords>&);
+
 	std::set<MapIndex> revealed_fields_;
 
 	/**
@@ -699,6 +712,8 @@ private:
 	std::vector<SoldierStatistics> soldier_stats_;
 
 	bool is_picking_custom_starting_position_;
+
+	bool allow_additional_expedition_items_;
 
 	FxId message_fx_;
 	FxId attack_fx_;

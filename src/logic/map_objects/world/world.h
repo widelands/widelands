@@ -39,7 +39,7 @@ class TerrainDescription;
 /// terrains, immovables and resources.
 class World {
 public:
-	explicit World(DescriptionManager* description_manager);
+	explicit World(DescriptionManager* description_manager, bool render_only = false);
 	~World() = default;
 
 	/// Add a world object type to the world.

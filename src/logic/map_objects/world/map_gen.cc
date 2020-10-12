@@ -89,6 +89,9 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table, const World& world, Area c
 
 		for (const std::string& terrain : terrains) {
 			const DescriptionIndex tix = world.terrains().get_index(terrain);
+			if (tix == INVALID_INDEX) {
+				throw GameDataError("Random Map Generator: Unknown terrain '%s'", terrain.c_str());
+			}
 			list->push_back(tix);
 		}
 	};

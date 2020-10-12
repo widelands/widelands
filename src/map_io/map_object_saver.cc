@@ -23,13 +23,10 @@
 #include "economy/ferry_fleet.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
-#include "economy/road.h"
 #include "economy/ship_fleet.h"
 #include "economy/ware_instance.h"
-#include "economy/waterway.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/battle.h"
-#include "logic/map_objects/tribes/building.h"
 
 namespace Widelands {
 
@@ -63,7 +60,7 @@ MapObjectSaver::MapObjectRec& MapObjectSaver::get_object_record(const MapObject&
 #ifndef NDEBUG
 	rec.description = to_string(obj.descr().type());
 	rec.description += " (";
-	rec.description += obj.serial();
+	rec.description += std::to_string(obj.serial());
 	rec.description += ')';
 #endif
 	rec.fileserial = ++lastserial_;
@@ -98,30 +95,42 @@ Serial MapObjectSaver::register_object(const MapObject& obj) {
 
 	assert(!rec.registered);
 
-	if (dynamic_cast<Flag const*>(&obj)) {
+	switch (obj.descr().type()) {
+	case MapObjectType::FLAG:
 		++nr_flags_;
-	} else if (dynamic_cast<Road const*>(&obj)) {
+		break;
+	case MapObjectType::ROAD:
 		++nr_roads_;
-	} else if (dynamic_cast<Waterway const*>(&obj)) {
+		break;
+	case MapObjectType::WATERWAY:
 		++nr_waterways_;
-	} else if (dynamic_cast<Building const*>(&obj)) {
-		++nr_buildings_;
-	} else if (dynamic_cast<Immovable const*>(&obj)) {
-		++nr_immovables_;
-	} else if (dynamic_cast<WareInstance const*>(&obj)) {
-		++nr_wares_;
-	} else if (dynamic_cast<Bob const*>(&obj)) {
-		++nr_bobs_;
-	} else if (dynamic_cast<Battle const*>(&obj)) {
+		break;
+	case MapObjectType::BATTLE:
 		++nr_battles_;
-	} else if (dynamic_cast<ShipFleet const*>(&obj)) {
+		break;
+	case MapObjectType::SHIP_FLEET:
 		++nr_ship_fleets_;
-	} else if (dynamic_cast<FerryFleet const*>(&obj)) {
+		break;
+	case MapObjectType::FERRY_FLEET:
 		++nr_ferry_fleets_;
-	} else if (dynamic_cast<PortDock const*>(&obj)) {
+		break;
+	case MapObjectType::PORTDOCK:
 		++nr_portdocks_;
-	} else {
-		throw wexception("MapObjectSaver: Unknown MapObject type");
+		break;
+	case MapObjectType::WARE:
+		++nr_wares_;
+		break;
+	default:
+		if (obj.descr().type() >= MapObjectType::BUILDING) {
+			++nr_buildings_;
+		} else if (obj.descr().type() >= MapObjectType::IMMOVABLE) {
+			++nr_immovables_;
+		} else if (obj.descr().type() >= MapObjectType::BOB) {
+			++nr_bobs_;
+		} else {
+			throw wexception("MapObjectSaver: Unknown MapObjectType %u", obj.descr().type());
+		}
+		break;
 	}
 
 	rec.registered = true;

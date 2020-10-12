@@ -895,7 +895,8 @@ WalkingDir Ship::get_scouting_direction() const {
 /// @note only called via player command
 void Ship::exp_construct_port(Game& game, const Coords& c) {
 	assert(expedition_);
-	if (is_a(Building, game.map().get_fcoords(c).field->get_immovable())) {
+	const MapObject* mo = game.map().get_fcoords(c).field->get_immovable();
+	if (mo && mo->descr().type() >= MapObjectType::BUILDING) {
 		// Another expedition ship (or an enemy player) was a second faster
 		set_ship_state_and_notify(
 		   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);

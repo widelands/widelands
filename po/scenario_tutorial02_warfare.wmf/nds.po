@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-04 08:23+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-09 14:53+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -92,7 +92,7 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr "De Schaa, wat een Soldat de feind dood, wenn een Angriff klappt. Een Willer Soldat mit Angriff-Stand 0 besehrt de Feind um ~%1% Gesundheid-Punkten, wenn he de Feind trefft. Mit elkeen Angriff-Stand kriggt he %2% Schaa-Punkten bito."
+msgstr "De Schaad, wat een Soldat de Feind dood, wenn een Angriff klappt. Een Willer Soldat mit Angriff-Stand 0 besehrt de Feind um ~%1% Gesundheid-Punkten, wenn he de Feind trefft. Mit elkeen Angriff-Stand kriggt he %2% Schaad-Punkten bito."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid "Defense:"
@@ -107,7 +107,7 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500·%2%%% = %3% health."
-msgstr "De Verteidigung is een Prozent-Tahl, wat vun eenem Angriff oftreckt word. Wille Lüü könen deese Egenskupp nich verbetern un hebben also immer Verteidigung-Stand 0, de Schaa word also immer um %1%%% minnert. Wenn een Angrieper mit eenem Angriff-Weert vun 3500 eenen Willen Soldat trefft, verlüst de Wille 3500·%2%%% = %3% Gesundheid-Punkten."
+msgstr "De Verteidigung is een Prozent-Tahl, wat vun eenem Angriff oftreckt word. Wille Lüü könen deese Egenskupp nich verbetern un hebben also immer Verteidigung-Stand 0, de Schaad word also immer um %1%%% minnert. Wenn een Angrieper mit eenem Angriff-Weert vun 3500 eenen Willen Soldat trefft, verlüst de Wille 3500·%2%%% = %3% Gesundheid-Punkten."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:54
 msgid "Evade:"
@@ -275,11 +275,11 @@ msgstr "Deese Dingen worden in Smeden ut Köhle, Iesen un bi eenigen ok Gold sme
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:125
 msgid ""
-"You should also keep in mind that each of the three tribes in Widelands has "
-"its own way of training, so the buildings and wares are different. Also, the"
-" ability levels cannot be compared: an Imperial soldier has a base attack of"
-" %1% at level 0, while a Barbarian soldier at the same level only has a base"
-" attack of %2%."
+"You should also keep in mind that each of the tribes in Widelands has its "
+"own way of training, so the buildings and wares are different. Also, the "
+"ability levels cannot be compared: an Imperial soldier has a base attack of "
+"%1% at level 0, while a Barbarian soldier at the same level only has a base "
+"attack of %2%."
 msgstr "Vergeet nich, dat alle Völker in Widelands anners öven un anner Boen un Waren hebben. De Egenskuppen-Standen könen nich vergleken worden: Een Rieks-Soldat hett een Angriff vun %1% bei Stand 0, een Willer Soldat mit de sülvigen Stand blot %2%."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131

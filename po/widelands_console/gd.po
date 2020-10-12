@@ -6,13 +6,13 @@
 # GunChleoc, 2016-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2016
-# GunChleoc, 2013-2016,2018
+# GunChleoc, 2013-2016,2018,2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-04 08:23+0000\n"
-"PO-Revision-Date: 2020-08-16 16:57+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-11 06:41+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -61,13 +61,13 @@ msgstr "                           'S e ~/.widelands a th' ann a ghnàth"
 
 #: ../../src/wlapplication_messages.cc:56
 msgid "                      Default is %USERPROFILE%\\.widelands"
-msgstr ""
+msgstr "                           'S e %USERPROFILE%\\.widelands a th' ann a ghnàth"
 
 #: ../../src/wlapplication_messages.cc:58
 msgid ""
 " --localedir=DIRNAME  Use specified directory for the widelands\n"
 "                      locale files"
-msgstr ""
+msgstr " --localedir=AINM-PASGAIN  Cleachd am pasgan sònraichte airson nam faidhlichean\n                           eadar-theangachaidh aig widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the

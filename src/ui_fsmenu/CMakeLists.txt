@@ -20,6 +20,7 @@ wl_library(ui_fsmenu_options
     sound
     widelands_ball_of_mud
     widelands_options
+    wui
     wui_sound_options
 )
 
@@ -88,20 +89,31 @@ wl_library(ui_fsmenu_gameloading
     launch_spg.h
     loadgame.cc
     loadgame.h
+    mapdetailsbox.cc
+    mapdetailsbox.h
+    multiplayersetupgroup.cc
+    multiplayersetupgroup.h
+    singleplayerdropdown.cc
+    singleplayerdropdown.h
+    singleplayersetupbox.cc
+    singleplayersetupbox.h
   DEPENDS
+    ai
     base_exceptions
     base_i18n
     base_log
     graphic_playercolor
+    graphic
+    graphic_image_cache
     io_filesystem
     io_profile
     logic
-    logic_constants
     logic_game_controller
     logic_game_settings
     logic_map
     logic_tribe_basic_info
     map_io_map_loader
+    network
     scripting_lua_interface
     scripting_lua_table
     ui_basic
@@ -110,7 +122,6 @@ wl_library(ui_fsmenu_gameloading
     ui_fsmenu_loading_common
     ui_fsmenu_maploading
     widelands_options
-    wui
     wui_chat_ui
     wui_common_gamedetails
     wui_common_suggested_teams

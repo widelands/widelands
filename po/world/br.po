@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# ThonyVezbe <a.guechoum@gmail.com>, 2020
 # Irriep Nala Novram <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-04 08:23+0000\n"
-"PO-Revision-Date: 2020-09-04 08:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-05 12:56+0000\n"
+"Last-Translator: ThonyVezbe <a.guechoum@gmail.com>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,23 +18,23 @@ msgstr ""
 "Language: br\n"
 "Plural-Forms: nplurals=5; plural=((n%10 == 1) && (n%100 != 11) && (n%100 !=71) && (n%100 !=91) ? 0 :(n%10 == 2) && (n%100 != 12) && (n%100 !=72) && (n%100 !=92) ? 1 :(n%10 ==3 || n%10==4 || n%10==9) && (n%100 < 10 || n% 100 > 19) && (n%100 < 70 || n%100 > 79) && (n%100 < 90 || n%100 > 99) ? 2 :(n != 0 && n % 1000000 == 0) ? 3 : 4);\n"
 
-#: ../../data/world/critters/badger/init.lua:122
+#: ../../data/world/critters/badger/init.lua:124
 msgid "Badger"
 msgstr "Broc'h"
 
-#: ../../data/world/critters/brownbear/init.lua:5
+#: ../../data/world/critters/brownbear/init.lua:7
 msgid "Brown bear"
 msgstr "Arzh Gell"
 
-#: ../../data/world/critters/bunny/init.lua:5
+#: ../../data/world/critters/bunny/init.lua:7
 msgid "Bunny"
 msgstr "Konifl"
 
-#: ../../data/world/critters/chamois/init.lua:5
+#: ../../data/world/critters/chamois/init.lua:7
 msgid "Chamois"
 msgstr "Gavr-Menez"
 
-#: ../../data/world/critters/deer/init.lua:5
+#: ../../data/world/critters/deer/init.lua:7
 msgid "Deer"
 msgstr "Karv"
 
@@ -41,45 +42,45 @@ msgstr "Karv"
 msgid "Duck"
 msgstr "Houad"
 
-#: ../../data/world/critters/fox/init.lua:5
+#: ../../data/world/critters/fox/init.lua:7
 msgid "Fox"
 msgstr "Louarn"
 
-#: ../../data/world/critters/lynx/init.lua:5
+#: ../../data/world/critters/lynx/init.lua:7
 msgid "Lynx"
 msgstr "Lynks"
 
-#: ../../data/world/critters/marten/init.lua:5
+#: ../../data/world/critters/marten/init.lua:7
 msgid "Marten"
 msgstr ""
 
-#: ../../data/world/critters/moose/init.lua:5
+#: ../../data/world/critters/moose/init.lua:7
 msgid "Moose"
 msgstr ""
 
-#: ../../data/world/critters/reindeer/init.lua:5
+#: ../../data/world/critters/reindeer/init.lua:7
 msgid "Reindeer"
 msgstr "Karv-Erc'h"
 
-#: ../../data/world/critters/sheep/init.lua:5
+#: ../../data/world/critters/sheep/init.lua:7
 msgid "Sheep"
 msgstr "Dañvad"
 
-#: ../../data/world/critters/stag/init.lua:5
+#: ../../data/world/critters/stag/init.lua:7
 msgid "Stag"
 msgstr "Karv"
 
-#: ../../data/world/critters/wildboar/init.lua:5
+#: ../../data/world/critters/wildboar/init.lua:7
 msgid "Wild boar"
 msgstr "Morc'h-gouez"
 
-#: ../../data/world/critters/wisent/init.lua:5
+#: ../../data/world/critters/wisent/init.lua:7
 msgid "Wisent"
 msgstr ""
 
-#: ../../data/world/critters/wolf/init.lua:5
+#: ../../data/world/critters/wolf/init.lua:7
 msgid "Wolf"
-msgstr ""
+msgstr "Bleiz"
 
 #: ../../data/world/immovables/artifacts/artifact00/init.lua:173
 #: ../../data/world/immovables/artifacts/artifact01/init.lua:7
@@ -170,38 +171,38 @@ msgstr ""
 msgid "Rocks 1"
 msgstr ""
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:25
-#: ../../data/world/immovables/rocks/desert/init.lua:25
-#: ../../data/world/immovables/rocks/greenland/init.lua:25
-#: ../../data/world/immovables/rocks/winterland/init.lua:25
+#: ../../data/world/immovables/rocks/blackland/init.lua:26
+#: ../../data/world/immovables/rocks/desert/init.lua:26
+#: ../../data/world/immovables/rocks/greenland/init.lua:26
+#: ../../data/world/immovables/rocks/winterland/init.lua:26
 msgid "Rocks 2"
 msgstr ""
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:43
-#: ../../data/world/immovables/rocks/desert/init.lua:43
-#: ../../data/world/immovables/rocks/greenland/init.lua:43
-#: ../../data/world/immovables/rocks/winterland/init.lua:43
+#: ../../data/world/immovables/rocks/blackland/init.lua:45
+#: ../../data/world/immovables/rocks/desert/init.lua:45
+#: ../../data/world/immovables/rocks/greenland/init.lua:45
+#: ../../data/world/immovables/rocks/winterland/init.lua:45
 msgid "Rocks 3"
 msgstr ""
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:61
-#: ../../data/world/immovables/rocks/desert/init.lua:61
-#: ../../data/world/immovables/rocks/greenland/init.lua:61
-#: ../../data/world/immovables/rocks/winterland/init.lua:61
+#: ../../data/world/immovables/rocks/blackland/init.lua:64
+#: ../../data/world/immovables/rocks/desert/init.lua:64
+#: ../../data/world/immovables/rocks/greenland/init.lua:64
+#: ../../data/world/immovables/rocks/winterland/init.lua:64
 msgid "Rocks 4"
 msgstr ""
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:79
-#: ../../data/world/immovables/rocks/desert/init.lua:79
-#: ../../data/world/immovables/rocks/greenland/init.lua:79
-#: ../../data/world/immovables/rocks/winterland/init.lua:79
+#: ../../data/world/immovables/rocks/blackland/init.lua:83
+#: ../../data/world/immovables/rocks/desert/init.lua:83
+#: ../../data/world/immovables/rocks/greenland/init.lua:83
+#: ../../data/world/immovables/rocks/winterland/init.lua:83
 msgid "Rocks 5"
 msgstr ""
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:97
-#: ../../data/world/immovables/rocks/desert/init.lua:97
-#: ../../data/world/immovables/rocks/greenland/init.lua:97
-#: ../../data/world/immovables/rocks/winterland/init.lua:97
+#: ../../data/world/immovables/rocks/blackland/init.lua:102
+#: ../../data/world/immovables/rocks/desert/init.lua:102
+#: ../../data/world/immovables/rocks/greenland/init.lua:102
+#: ../../data/world/immovables/rocks/winterland/init.lua:102
 msgid "Rocks 6"
 msgstr ""
 
@@ -795,7 +796,7 @@ msgstr ""
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../data/world/init.lua:486
 msgid "Summer"
-msgstr ""
+msgstr "Hañv"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../data/world/init.lua:515
@@ -805,24 +806,24 @@ msgstr ""
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../data/world/init.lua:543
 msgid "Winter"
-msgstr ""
+msgstr "Goañv"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../data/world/init.lua:571
 msgid "Desert"
-msgstr ""
+msgstr "Dezerzh"
 
 #: ../../data/world/resources/init.lua:110
 msgid "Coal"
-msgstr ""
+msgstr "Glaou"
 
 #: ../../data/world/resources/init.lua:126
 msgid "Gold"
-msgstr ""
+msgstr "Aour"
 
 #: ../../data/world/resources/init.lua:142
 msgid "Iron"
-msgstr ""
+msgstr "Houarn"
 
 #: ../../data/world/resources/init.lua:158
 msgid "Stones"
@@ -834,18 +835,18 @@ msgstr ""
 #: ../../data/world/terrains/wasteland/water/init.lua:5
 #: ../../data/world/terrains/winter/water/init.lua:5
 msgid "Water"
-msgstr ""
+msgstr "Dour"
 
 #: ../../data/world/resources/init.lua:190
 msgid "Fish"
-msgstr ""
+msgstr "Pesked"
 
 #: ../../data/world/terrains/desert/beach/init.lua:177
 #: ../../data/world/terrains/summer/beach/init.lua:5
 #: ../../data/world/terrains/wasteland/beach/init.lua:5
 #: ../../data/world/terrains/winter/beach/init.lua:5
 msgid "Beach"
-msgstr ""
+msgstr "Traezhenn"
 
 #: ../../data/world/terrains/desert/desert1/init.lua:5
 msgid "Desert 1"
@@ -950,7 +951,7 @@ msgstr ""
 #: ../../data/world/terrains/summer/snow/init.lua:5
 #: ../../data/world/terrains/winter/snow/init.lua:5
 msgid "Snow"
-msgstr ""
+msgstr "Erc'h"
 
 #: ../../data/world/terrains/summer/steppe_barren/init.lua:5
 msgid "Barren Steppe"
