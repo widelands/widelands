@@ -43,6 +43,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	virtual std::string get_map();
 	virtual void set_map(const std::string& mapname,
 	                     const std::string& mapfilename,
+	                     const std::string& map_theme,
+	                     const std::string& map_bg,
 	                     uint32_t const maxplayers,
 	                     bool const savegame) override;
 

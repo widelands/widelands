@@ -73,6 +73,7 @@ private:
 	// Tag, Checkbox
 	std::map<std::string, UI::Checkbox*> tags_checkboxes_;
 	UI::Dropdown<std::string> balancing_dropdown_;
+	UI::Dropdown<std::string> theme_dropdown_;
 
 	UI::SpinBox* waterway_length_box_;
 	UI::Icon* waterway_length_warning_;
