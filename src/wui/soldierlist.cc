@@ -491,7 +491,7 @@ void SoldierList::eject(const Soldier* soldier) {
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {
-	assert(is_a(Widelands::MilitarySite, &building_));
+	assert(building_.descr().type() == Widelands::MapObjectType::MILITARYSITE);
 	if (Widelands::Game* game = ibase_.get_game()) {
 		game->send_player_militarysite_set_soldier_preference(
 		   building_, changed_to == 0 ? Widelands::SoldierPreference::kRookies :
