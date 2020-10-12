@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-18 13:37+0000\n"
-"PO-Revision-Date: 2020-09-11 12:00+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-11 07:17+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -73,7 +73,7 @@ msgstr "’S e stuth togail cudromach a th’ anns na maidean."
 #: ../../data/tribes/initialization/atlanteans/units.lua:360
 msgctxt "atlanteans_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Thèid an dèanamh de dh’fhiodh leis a’ mhuileann shàbhaidh."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
 #: ../../data/tribes/initialization/atlanteans/units.lua:362
@@ -568,7 +568,7 @@ msgstr "Giùlainidh e rudan air na rathaidean agad."
 #: ../../data/tribes/initialization/atlanteans/units.lua:810
 msgctxt "atlanteans_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Bheir e batharan thar aibhnichean caola."
 
 #. TRANSLATORS: Helptext for an atlantean worker: Horse
 #: ../../data/tribes/initialization/atlanteans/units.lua:819
@@ -2061,7 +2061,7 @@ msgstr "Giùlainidh e rudan air na rathaidean agad."
 #: ../../data/tribes/initialization/barbarians/units.lua:541
 msgctxt "barbarians_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Bheir e batharan thar aibhnichean caola."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Ox
 #: ../../data/tribes/initialization/barbarians/units.lua:550
@@ -2579,7 +2579,7 @@ msgstr "Gabhaidh an sealgair fois fad %s mus tòisich e air an obair a-rithist."
 msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>as we love to cook and eat them.’"
-msgstr ""
+msgstr "“Is esan a bhrideas<br>is sinne a dh’itheas.”"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site:
 #. Gamekeeper's Hut
@@ -3632,7 +3632,7 @@ msgstr "Thèid na craobhan a leagail le coilltearan na h-Ìmpireachd is gabhaidh
 #: ../../data/tribes/initialization/empire/units.lua:106
 msgctxt "empire_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Thèid an dèanamh de dh’fhiodh leis a’ mhuileann shàbhaidh."
 
 #. TRANSLATORS: Helptext for an empire ware: Planks, part 3
 #: ../../data/tribes/initialization/empire/units.lua:108
@@ -3685,7 +3685,7 @@ msgctxt "empire_ware"
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
 "sheep farms and piggeries also need to be supplied with wheat."
-msgstr ""
+msgstr "Saothraichidh na tuathanasan a’ chruithneachd is thèid a cleachdadh leis na muileannan is na taighean-grùide. Tha stàballan, faingean is failean feumach air cruithneachd cuideachd."
 
 #. TRANSLATORS: Helptext for an empire ware: Flour
 #: ../../data/tribes/initialization/empire/units.lua:184
@@ -3840,7 +3840,7 @@ msgstr "Feumaidh gach clach-eòlaiche, fear-togail, ceàrd-armachd is airm-cheà
 #: ../../data/tribes/initialization/empire/units.lua:411
 msgctxt "empire_ware"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Thèid a shaothrachadh leis a’ cheàrdach acainnean."
 
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 2
 #: ../../data/tribes/initialization/empire/units.lua:424
@@ -3874,7 +3874,7 @@ msgstr "Tha feum air acainnean cidsin airson greimeagan is miasan a dhèanamh. T
 #: ../../data/tribes/initialization/empire/units.lua:468
 msgctxt "empire_ware"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "Thèid a chleachdadh leis a’ cheàrdach leaghadair ’s a shaothrachadh leis a’ cheàrdach acainnean."
 
 #. TRANSLATORS: Helptext for an empire ware: Wooden Spear
 #: ../../data/tribes/initialization/empire/units.lua:481
@@ -3968,7 +3968,7 @@ msgstr "Giùlainidh e rudan air na rathaidean agad."
 #: ../../data/tribes/initialization/empire/units.lua:575
 msgctxt "empire_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Bheir e batharan thar aibhnichean caola."
 
 #. TRANSLATORS: Helptext for an empire worker: Donkey
 #: ../../data/tribes/initialization/empire/units.lua:584
@@ -6233,7 +6233,7 @@ msgstr "Uidheamachd:"
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
 #: ../../data/tribes/scripting/help/building_help.lua:329
-#: ../../data/tribes/scripting/help/building_help.lua:396
+#: ../../data/tribes/scripting/help/building_help.lua:405
 msgid "Text needed"
 msgstr "Tha teacsa a dhìth"
 
@@ -6252,22 +6252,22 @@ msgstr "Coitcheann"
 msgid "Purpose:"
 msgstr "Adhbhar:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:400
-#: ../../data/tribes/scripting/help/building_help.lua:620
+#: ../../data/tribes/scripting/help/building_help.lua:409
+#: ../../data/tribes/scripting/help/building_help.lua:629
 msgid "Note:"
 msgstr "An aire:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:405
+#: ../../data/tribes/scripting/help/building_help.lua:414
 msgid "Work area radius:"
 msgstr "Rèideas an raoin-obrach:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:409
-#: ../../data/tribes/scripting/help/building_help.lua:414
+#: ../../data/tribes/scripting/help/building_help.lua:418
+#: ../../data/tribes/scripting/help/building_help.lua:423
 msgid "Healing:"
 msgstr "Slàinte:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:410
-#: ../../data/tribes/scripting/help/building_help.lua:415
+#: ../../data/tribes/scripting/help/building_help.lua:419
+#: ../../data/tribes/scripting/help/building_help.lua:424
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
@@ -6276,194 +6276,194 @@ msgstr[1] "Gheibh saighdearan a tha san togalach seo slànachadh le %d phuing ga
 msgstr[2] "Gheibh saighdearan a tha san togalach seo slànachadh le %d puingean gach diog."
 msgstr[3] "Gheibh saighdearan a tha san togalach seo slànachadh le %d puing gach diog."
 
-#: ../../data/tribes/scripting/help/building_help.lua:411
-#: ../../data/tribes/scripting/help/building_help.lua:417
+#: ../../data/tribes/scripting/help/building_help.lua:420
+#: ../../data/tribes/scripting/help/building_help.lua:426
 msgid "Conquer range:"
 msgstr "Astar a’ cheannsachaidh:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:416
-#: ../../data/tribes/scripting/help/building_help.lua:420
+#: ../../data/tribes/scripting/help/building_help.lua:425
+#: ../../data/tribes/scripting/help/building_help.lua:429
 msgid "Capacity:"
 msgstr "Uiread as motha de shaighdearan:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:422
+#: ../../data/tribes/scripting/help/building_help.lua:431
 msgid "Vision range:"
 msgstr "Astar lèirsinne:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:447
+#: ../../data/tribes/scripting/help/building_help.lua:456
 msgid "%1$s from: %2$s"
 msgstr "%1$s o: %2$s"
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../data/tribes/scripting/help/building_help.lua:453
+#: ../../data/tribes/scripting/help/building_help.lua:462
 msgid "Incoming:"
 msgstr "A-steach:"
 
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../data/tribes/scripting/help/building_help.lua:462
+#: ../../data/tribes/scripting/help/building_help.lua:471
 msgid "Mines:"
 msgstr "Tochladh:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:464
+#: ../../data/tribes/scripting/help/building_help.lua:473
 msgid "Collects:"
 msgstr "Cruinneachadh:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:473
+#: ../../data/tribes/scripting/help/building_help.lua:482
 msgid "Creates:"
-msgstr ""
+msgstr "Cruthachadh:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:478
+#: ../../data/tribes/scripting/help/building_help.lua:487
 msgid "Produces:"
 msgstr "Saothrachadh:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:520
+#: ../../data/tribes/scripting/help/building_help.lua:529
 msgid "Outgoing:"
 msgstr "A-mach:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:521
+#: ../../data/tribes/scripting/help/building_help.lua:530
 msgid "None"
 msgstr "Chan eil gin"
 
-#: ../../data/tribes/scripting/help/building_help.lua:522
+#: ../../data/tribes/scripting/help/building_help.lua:531
 msgid "Dependencies"
 msgstr "Eisimeileachdan"
 
-#: ../../data/tribes/scripting/help/building_help.lua:538
+#: ../../data/tribes/scripting/help/building_help.lua:547
 msgid "Health Training"
 msgstr "Oideachadh slàinte"
 
-#: ../../data/tribes/scripting/help/building_help.lua:539
+#: ../../data/tribes/scripting/help/building_help.lua:548
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr "Oidich “Slàinte” o %1% gu ruige %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:541
-#: ../../data/tribes/scripting/help/building_help.lua:555
-#: ../../data/tribes/scripting/help/building_help.lua:567
-#: ../../data/tribes/scripting/help/building_help.lua:580
+#: ../../data/tribes/scripting/help/building_help.lua:550
+#: ../../data/tribes/scripting/help/building_help.lua:564
+#: ../../data/tribes/scripting/help/building_help.lua:576
+#: ../../data/tribes/scripting/help/building_help.lua:589
 msgid "Soldiers:"
 msgstr "Saighdearan:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:551
+#: ../../data/tribes/scripting/help/building_help.lua:560
 msgid "Attack Training"
 msgstr "Oideachadh ionnsaighe"
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:553
+#: ../../data/tribes/scripting/help/building_help.lua:562
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr "Oidich “Ionnsaigh” o %1% gu ruige %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:564
+#: ../../data/tribes/scripting/help/building_help.lua:573
 msgid "Defense Training"
 msgstr "Oideachadh dìona"
 
-#: ../../data/tribes/scripting/help/building_help.lua:565
+#: ../../data/tribes/scripting/help/building_help.lua:574
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr "Oidich “Dìon” o %1% gu ruige %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:577
+#: ../../data/tribes/scripting/help/building_help.lua:586
 msgid "Evade Training"
 msgstr "Oideachadh teàrnaidh"
 
-#: ../../data/tribes/scripting/help/building_help.lua:578
+#: ../../data/tribes/scripting/help/building_help.lua:587
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr "Oidich “Teàrnadh” o %1% gu ruige %2%"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:605
+#: ../../data/tribes/scripting/help/building_help.lua:614
 msgid "Building"
 msgstr "Togail"
 
-#: ../../data/tribes/scripting/help/building_help.lua:621
+#: ../../data/tribes/scripting/help/building_help.lua:630
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "Gabhaidh an togalach seo togail gu dìreach no leasachadh o thogalach eile."
 
-#: ../../data/tribes/scripting/help/building_help.lua:627
+#: ../../data/tribes/scripting/help/building_help.lua:636
 msgid "Direct build cost:"
 msgstr "Cosgais na togail dìrich:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:629
+#: ../../data/tribes/scripting/help/building_help.lua:638
 #: ../../data/tribes/scripting/help/immovable_help.lua:53
 msgid "Build cost:"
 msgstr "Cosgais na togail:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:640
+#: ../../data/tribes/scripting/help/building_help.lua:649
 msgid "Or enhanced from:"
 msgstr "No leasachadh o:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:642
+#: ../../data/tribes/scripting/help/building_help.lua:651
 msgid "Enhanced from:"
 msgstr "Leasachadh o:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:651
+#: ../../data/tribes/scripting/help/building_help.lua:660
 msgid "Cumulative cost:"
 msgstr "Cosgais thionalach:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:696
-#: ../../data/tribes/scripting/help/building_help.lua:745
+#: ../../data/tribes/scripting/help/building_help.lua:705
+#: ../../data/tribes/scripting/help/building_help.lua:754
 msgid "Unknown"
 msgstr "Chan eil fhios"
 
-#: ../../data/tribes/scripting/help/building_help.lua:701
+#: ../../data/tribes/scripting/help/building_help.lua:710
 msgid "If built directly, dismantle yields:"
 msgstr "Ma chaidh a thogail gu dìreach, bheir an toirt às a chèile dhut:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:706
+#: ../../data/tribes/scripting/help/building_help.lua:715
 msgid "If enhanced, dismantle yields:"
 msgstr "Ma chaidh a leasachadh o thogalach eile, bheir an toirt às a chèile dhut:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:709
-#: ../../data/tribes/scripting/help/building_help.lua:750
+#: ../../data/tribes/scripting/help/building_help.lua:718
+#: ../../data/tribes/scripting/help/building_help.lua:759
 msgid "Dismantle yields:"
 msgstr "Bheir an toirt às a chèile dhut:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:759
+#: ../../data/tribes/scripting/help/building_help.lua:768
 msgid "Can be enhanced to:"
 msgstr "Gabhaidh a leasachadh gu:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:789
+#: ../../data/tribes/scripting/help/building_help.lua:798
 msgid "Crew required:"
 msgstr "Sgioba riatanach:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:789
+#: ../../data/tribes/scripting/help/building_help.lua:798
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "Luchd-obrach"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:811
+#: ../../data/tribes/scripting/help/building_help.lua:820
 #, lua-format
 msgid "%s or better"
 msgstr "%s no nas fheàrr"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
-#: ../../data/tribes/scripting/help/building_help.lua:823
+#: ../../data/tribes/scripting/help/building_help.lua:832
 msgid "Worker uses:"
 msgstr "Cleachdaidh an neach-obrach:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
 #. uses
-#: ../../data/tribes/scripting/help/building_help.lua:826
+#: ../../data/tribes/scripting/help/building_help.lua:835
 msgid "Workers use:"
 msgstr "Cleachdaidh an luchd-obrach:"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
-#: ../../data/tribes/scripting/help/building_help.lua:858
+#: ../../data/tribes/scripting/help/building_help.lua:867
 msgid "Calculation needed"
 msgstr "Cha deach seo àireamhachadh fhathast"
 
-#: ../../data/tribes/scripting/help/building_help.lua:862
+#: ../../data/tribes/scripting/help/building_help.lua:871
 msgid "Production"
 msgstr "Saothrachadh"
 
-#: ../../data/tribes/scripting/help/building_help.lua:863
+#: ../../data/tribes/scripting/help/building_help.lua:872
 msgid "Performance:"
 msgstr "Dèanadas:"
 

@@ -76,6 +76,8 @@ public:
 	int set_team(lua_State* L);
 	int get_see_all(lua_State* L);
 	int set_see_all(lua_State* L);
+	int get_allow_additional_expedition_items(lua_State* L);
+	int set_allow_additional_expedition_items(lua_State* L);
 
 	/*
 	 * Lua methods
