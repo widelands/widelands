@@ -400,8 +400,6 @@ struct ObjectManager {
 	void insert(MapObject*);
 	void remove(MapObject&);
 
-	bool object_still_available(const MapObject* const) const;
-
 	/**
 	 * When saving the map object, ordere matters. Return a vector of all ids
 	 * that are currently available;
