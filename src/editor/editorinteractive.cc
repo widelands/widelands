@@ -1039,7 +1039,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 		// Close all windows.
 		for (Panel* child = get_first_child(); child; child = child->get_next_sibling()) {
-			if (is_a(UI::Window, child)) {
+			if (dynamic_cast<UI::Window*>(child) != nullptr) {
 				child->die();
 			}
 		}
