@@ -1345,8 +1345,7 @@ public:
 	              ImageCache* image_cache,
 	              RendererStyle& init_renderer_style,
 	              const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
-	     render_node_(nullptr) {
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), render_node_(nullptr) {
 	}
 
 	void enter() override {
