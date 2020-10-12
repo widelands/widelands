@@ -26,7 +26,6 @@
 #include "economy/economy.h"
 #include "graphic/color.h"
 #include "logic/editor_game_base.h"
-#include "logic/hide_or_reveal_field_mode.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"

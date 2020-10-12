@@ -203,7 +203,6 @@ wl_library(logic
     editor_game_base.h
     game.cc
     game.h
-    hide_or_reveal_field_mode.h
     message.h
     message_id.h
     message_queue.h
