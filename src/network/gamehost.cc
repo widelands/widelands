@@ -121,9 +121,11 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 	void set_map(const std::string& mapname,
 	             const std::string& mapfilename,
+	             const std::string& theme,
+	             const std::string& bg,
 	             uint32_t const maxplayers,
 	             bool const savegame = false) override {
-		host_->set_map(mapname, mapfilename, maxplayers, savegame);
+		host_->set_map(mapname, mapfilename, theme, bg, maxplayers, savegame);
 	}
 	void set_player_state(uint8_t number, PlayerSettings::State const state) override {
 		if (number >= settings().players.size()) {
@@ -668,7 +670,7 @@ void GameHost::run() {
 		if (d->hp.has_players_tribe()) {
 			tipstexts.push_back(d->hp.get_players_tribe());
 		}
-		game.create_loader_ui(tipstexts, false);
+		game.create_loader_ui(tipstexts, false, d->settings.map_theme, d->settings.map_background);
 		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 		d->game = &game;
@@ -1045,11 +1047,15 @@ bool GameHost::can_launch() {
 
 void GameHost::set_map(const std::string& mapname,
                        const std::string& mapfilename,
+                       const std::string& theme,
+                       const std::string& bg,
                        uint32_t const maxplayers,
                        bool const savegame) {
 	d->settings.mapname = mapname;
 	d->settings.mapfilename = mapfilename;
 	d->settings.savegame = savegame;
+	d->settings.map_theme = theme;
+	d->settings.map_background = bg;
 
 	std::vector<PlayerSettings>::size_type oldplayers = d->settings.players.size();
 
@@ -1533,6 +1539,8 @@ void GameHost::broadcast(SendPacket& packet) {
 void GameHost::write_setting_map(SendPacket& packet) {
 	packet.string(d->settings.mapname);
 	packet.string(d->settings.mapfilename);
+	packet.string(d->settings.map_theme);
+	packet.string(d->settings.map_background);
 	packet.unsigned_8(d->settings.savegame ? 1 : 0);
 	packet.unsigned_8(d->settings.scenario ? 1 : 0);
 }
