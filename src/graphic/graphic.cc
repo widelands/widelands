@@ -202,7 +202,7 @@ void Graphic::set_window_size(int w, int h) {
 
 	if (maximized()) {
 		SDL_RestoreWindow(sdl_window_);
-	};
+	}
 
 	SDL_SetWindowSize(sdl_window_, w, h);
 }
