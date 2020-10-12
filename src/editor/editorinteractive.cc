@@ -962,7 +962,7 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
-	egbase.create_loader_ui({"editor"}, true, kEditorSplashImage);
+	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
 	eia.load_world_units(&eia, egbase);
 	egbase.tribes();
 
@@ -1075,7 +1075,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 		// Close all windows.
 		for (Panel* child = get_first_child(); child; child = child->get_next_sibling()) {
-			if (is_a(UI::Window, child)) {
+			if (dynamic_cast<UI::Window*>(child) != nullptr) {
 				child->die();
 			}
 		}

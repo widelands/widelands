@@ -69,16 +69,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
               UI::SpinBox::Units::kNone,
               UI::SpinBox::Type::kSmall),
      // World + Resources
-     world_descriptions_({
-        {"greenland", _("Summer")},
-        /** TRANSLATORS: A world name for the random map generator in the editor */
-        {"winterland", _("Winter")},
-        /** TRANSLATORS: A world name for the random map generator in the editor */
-        {"desert", _("Desert")},
-        /** TRANSLATORS: A world name for the random map generator in the editor */
-        {"blackland", _("Wasteland")},
-     }),
-     current_world_(std::rand() % world_descriptions_.size()),  // NOLINT
+     current_world_(std::rand() % Widelands::Map::kOldWorldNames.size()),  // NOLINT
      resource_amounts_({
         /** TRANSLATORS: Amount of resources in the random map generator in the editor */
         _("Low"),
@@ -254,15 +245,15 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 
 	// ---------- Worlds ----------
 
-	world_.add(_("Random"), world_descriptions_.size(), nullptr, true);
-	for (size_t i = 0; i < world_descriptions_.size(); ++i) {
-		world_.add(world_descriptions_[i].descname, i);
+	world_.add(_("Random"), Widelands::Map::kOldWorldNames.size(), nullptr, true);
+	for (size_t i = 0; i < Widelands::Map::kOldWorldNames.size(); ++i) {
+		world_.add(Widelands::Map::kOldWorldNames[i].descname(), i);
 	}
 
 	world_.selected.connect([this]() {
 		current_world_ = world_.get_selected();
-		if (current_world_ == static_cast<int>(world_descriptions_.size())) {
-			current_world_ = std::rand() % world_descriptions_.size();  // NOLINT
+		if (current_world_ == static_cast<int>(Widelands::Map::kOldWorldNames.size())) {
+			current_world_ = std::rand() % Widelands::Map::kOldWorldNames.size();  // NOLINT
 		}
 		nr_edit_box_changed();
 	});
@@ -529,12 +520,12 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 	cancel_button_.set_enabled(false);
 
 	assert((eia == nullptr) ^ (sp == nullptr));
-	assert((sp == nullptr) ^ is_a(Widelands::Game, &egbase));
+	assert((sp == nullptr) ^ egbase.is_game());
 
 	Widelands::Map* map = egbase.mutable_map();
 
 	if (eia) {
-		egbase.create_loader_ui({"editor"}, true, kEditorSplashImage);
+		egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
 		eia->cleanup_for_load();
 	} else {
 		egbase.cleanup_for_load();
@@ -586,6 +577,7 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
 
 	map->recalc_whole_map(egbase);
+	map->set_background_theme(map_info.world_name);
 	if (eia) {
 		eia->map_changed(EditorInteractive::MapWas::kReplaced);
 		egbase.remove_loader_ui();
@@ -615,7 +607,7 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 			   _("This map was generated automatically by the Widelands Random Map Generator."));
 			map->set_waterway_max_length((std::rand() % 5) * (std::rand() % 6));  // NOLINT
 
-			sp->set_map("", "", nr_players, false);
+			sp->set_map("", "", map_info.world_name, "", nr_players, false);
 			sp->set_scenario(false);
 			sp->set_player_number(plnum);
 			sp->set_win_condition_script("scripting/win_conditions/defeat_all.lua");
@@ -652,8 +644,8 @@ void MainMenuNewRandomMap::id_edit_box_changed() {
 	std::string str = map_id_edit_.text();
 
 	std::vector<std::string> world_names;
-	world_names.reserve(world_descriptions_.size());
-	for (const auto& descr : world_descriptions_) {
+	world_names.reserve(Widelands::Map::kOldWorldNames.size());
+	for (const Widelands::Map::OldWorldInfo& descr : Widelands::Map::kOldWorldNames) {
 		world_names.push_back(descr.name);
 	}
 
@@ -729,5 +721,5 @@ void MainMenuNewRandomMap::set_map_info(Widelands::UniqueRandomMapInfo& map_info
 	map_info.numPlayers = players_.get_value();
 	map_info.resource_amount =
 	   static_cast<Widelands::UniqueRandomMapInfo::ResourceAmount>(resource_amount_);
-	map_info.world_name = world_descriptions_[current_world_].name;
+	map_info.world_name = Widelands::Map::kOldWorldNames[current_world_].name;
 }

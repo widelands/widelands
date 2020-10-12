@@ -175,7 +175,8 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
  */
 void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	// Special case for buildings
-	if (is_a(Widelands::Building, egbase().map().get_immovable(node_and_triangle.node))) {
+	const Widelands::MapObject* mo = egbase().map().get_immovable(node_and_triangle.node);
+	if (mo && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {
 		show_building_window(node_and_triangle.node, false, false);
 		return;
 	}

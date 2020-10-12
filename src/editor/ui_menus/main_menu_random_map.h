@@ -67,11 +67,6 @@ struct MainMenuNewRandomMap : public UI::UniqueWindow {
 	bool handle_key(bool down, SDL_Keysym) override;
 
 private:
-	struct WorldDescription {
-		std::string name;
-		std::string descname;
-	};
-
 	void button_clicked(ButtonId);
 	void id_edit_box_changed();
 	void nr_edit_box_changed();
@@ -99,7 +94,6 @@ private:
 	UI::SpinBox players_;
 
 	// World + Resources
-	const std::vector<WorldDescription> world_descriptions_;
 	int current_world_;
 	std::vector<std::string> resource_amounts_;
 	uint32_t resource_amount_;

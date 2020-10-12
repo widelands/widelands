@@ -218,11 +218,12 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 		throw wexception("could not load \"%s\"", mapname.c_str());
 	}
 
-	create_loader_ui({"general_game"}, false);
+	// Need to do this first so we can set the theme and background.
+	maploader->preload_map(true);
+
+	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
-	maploader->preload_map(true);
-	change_loader_ui_background(map().get_background());
 
 	world();
 	tribes();
@@ -277,10 +278,9 @@ void Game::init_newgame(const GameSettings& settings) {
 	std::unique_ptr<MapLoader> maploader;
 	if (!settings.mapfilename.empty()) {
 		maploader = mutable_map()->get_correct_loader(settings.mapfilename);
-		assert(maploader != nullptr);
+		assert(maploader);
 		maploader->preload_map(settings.scenario);
 	}
-	change_loader_ui_background(map().get_background());
 
 	// Load world and tribes, if they were not loaded already
 	world();
@@ -313,6 +313,7 @@ void Game::init_newgame(const GameSettings& settings) {
 	}
 
 	if (!settings.mapfilename.empty()) {
+		assert(maploader);
 		maploader->load_map_complete(*this, settings.scenario ?
 		                                       Widelands::MapLoader::LoadType::kScenario :
 		                                       Widelands::MapLoader::LoadType::kGame);
@@ -372,7 +373,6 @@ void Game::init_savegame(const GameSettings& settings) {
 		GameLoader gl(settings.mapfilename, *this);
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
-		change_loader_ui_background(gpdp.get_background());
 
 		win_condition_displayname_ = gpdp.get_win_condition();
 		if (win_condition_displayname_ == "Scenario") {
@@ -394,17 +394,18 @@ void Game::init_savegame(const GameSettings& settings) {
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
-	create_loader_ui({"general_game", "singleplayer"}, false);
 	int8_t player_nr;
-
-	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 	{
 		GameLoader gl(filename, *this);
 
 		Widelands::GamePreloadPacket gpdp;
+		// Need to do this first so we can set the theme and background
 		gl.preload_game(gpdp);
-		change_loader_ui_background(gpdp.get_background());
+
+		create_loader_ui({"general_game", "singleplayer"}, false, gpdp.get_background_theme(),
+		                 gpdp.get_background());
+		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 		win_condition_displayname_ = gpdp.get_win_condition();
 		if (win_condition_displayname_ == "Scenario") {

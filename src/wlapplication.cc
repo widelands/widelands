@@ -1261,7 +1261,7 @@ void WLApplication::mainmenu() {
 				SinglePlayerGameSettingsProvider sp;
 				UI::UniqueWindow::Registry r;
 
-				game.create_loader_ui({"general_game", "singleplayer"}, false);
+				game.create_loader_ui({"general_game", "singleplayer"}, false, "", "");
 				game.world();
 				game.tribes();
 				EditorInteractive::load_world_units(nullptr, game);
@@ -1425,12 +1425,15 @@ bool WLApplication::new_game(Widelands::Game& game,
                              SinglePlayerGameSettingsProvider& sp,
                              const bool preconfigured) {
 	FullscreenMenuBase::MenuTarget code = FullscreenMenuBase::MenuTarget::kNormalGame;
+	std::string map_theme, map_bg;
 	if (!preconfigured) {
 		FullscreenMenuLaunchSPG lgm(&sp);
 		code = lgm.run<FullscreenMenuBase::MenuTarget>();
 		if (code == FullscreenMenuBase::MenuTarget::kBack) {
 			return false;
 		}
+		map_theme = lgm.settings().settings().map_theme;
+		map_bg = lgm.settings().settings().map_background;
 	}
 
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
@@ -1456,7 +1459,7 @@ bool WLApplication::new_game(Widelands::Game& game,
 				if (sp.has_players_tribe()) {
 					tipstexts.push_back(sp.get_players_tribe());
 				}
-				game.create_loader_ui(tipstexts, false);
+				game.create_loader_ui(tipstexts, false, map_theme, map_bg);
 			}
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
@@ -1561,6 +1564,8 @@ bool WLApplication::campaign_game() {
  */
 void WLApplication::replay() {
 	Widelands::Game game;
+
+	std::string map_theme, map_bg;
 	if (filename_.empty()) {
 		SinglePlayerGameSettingsProvider sp;
 		FullscreenMenuLoadGame rm(game, &sp, true);
@@ -1569,10 +1574,12 @@ void WLApplication::replay() {
 		}
 
 		filename_ = rm.filename();
+		map_theme = sp.settings().map_theme;
+		map_bg = sp.settings().map_background;
 	}
 
 	try {
-		game.create_loader_ui({"general_game"}, true);
+		game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
 
 		game.set_ibase(new InteractiveSpectator(game, get_config_section()));
 		game.set_write_replay(false);
