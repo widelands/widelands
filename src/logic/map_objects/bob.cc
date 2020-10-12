@@ -327,9 +327,7 @@ void Bob::signal_handled() {
 void Bob::send_signal(Game& game, char const* const sig) {
 	assert(*sig);  //  use set_signal() for signal removal
 
-	for (uint32_t i = 0; i < stack_.size(); ++i) {
-		State& state = stack_[i];
-
+	for (auto& state : stack_) {
 		if (state.task->signal_immediate) {
 			(this->*state.task->signal_immediate)(game, state, sig);
 		}
@@ -1198,9 +1196,7 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 	fw.c_string(signal_);
 
 	fw.unsigned_32(stack_.size());
-	for (unsigned int i = 0; i < stack_.size(); ++i) {
-		const State& state = stack_[i];
-
+	for (const auto& state : stack_) {
 		fw.c_string(state.task->name);
 		fw.signed_32(state.ivar1);
 		fw.signed_32(state.ivar2);
