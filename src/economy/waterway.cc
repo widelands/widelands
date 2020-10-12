@@ -72,7 +72,7 @@ void Waterway::link_into_flags(EditorGameBase& egbase, bool loading) {
 	RoadBase::link_into_flags(egbase);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	if (!loading) {
-		if (is_a(Game, &egbase)) {
+		if (egbase.is_game()) {
 			request_ferry(egbase);
 		}
 	}

@@ -414,7 +414,7 @@ void FieldActionWindow::add_buttons_auto() {
 				}
 			}
 
-			if (dynamic_cast<Game const*>(&ibase().egbase())) {
+			if (ibase().egbase().is_game()) {
 				add_button(buildbox, "configure_economy", "images/wui/stats/genstats_nrwares.png",
 				           &FieldActionWindow::act_configure_economy, _("Configure economy"));
 				if (can_act) {
@@ -461,7 +461,7 @@ void FieldActionWindow::add_buttons_auto() {
 	}
 
 	//  Watch actions, only when in game (no use in editor).
-	if (dynamic_cast<const Game*>(&ibase().egbase())) {
+	if (ibase().egbase().is_game()) {
 		add_button(&watchbox, "watch", pic_watchfield, &FieldActionWindow::act_watch,
 		           _("Watch field in a separate window"));
 	}
@@ -533,7 +533,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 
 		//  Some building types cannot be built (i.e. construction site) and not
 		//  allowed buildings.
-		if (dynamic_cast<const Game*>(&ibase().egbase())) {
+		if (ibase().egbase().is_game()) {
 			if (!building_descr->is_buildable() ||
 			    !player_->is_building_type_allowed(building_index)) {
 				continue;
@@ -1119,9 +1119,10 @@ void show_field_action(InteractiveBase* const ibase,
 		// did he click on a flag or a road where a flag can be built?
 		if (upcast(const Widelands::PlayerImmovable, i, map.get_immovable(target))) {
 			bool finish = false;
-			if (dynamic_cast<const Widelands::Flag*>(i)) {
+			if (i->descr().type() == Widelands::MapObjectType::FLAG) {
 				finish = true;
-			} else if (dynamic_cast<const Widelands::RoadBase*>(i)) {
+			} else if (i->descr().type() == Widelands::MapObjectType::ROAD ||
+			           i->descr().type() == Widelands::MapObjectType::WATERWAY) {
 				if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
 					upcast(Game, game, &player->egbase());
 					game->send_player_build_flag(player->player_number(), target);

@@ -777,7 +777,7 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	//  covered.
 	// TODO(SirVer): In the editor, no buildings should burn down when a military
 	// building is removed. Check this again though
-	if (is_a(Game, this)) {
+	if (is_game()) {
 		cleanup_playerimmovables_area(player_area);
 	}
 }
