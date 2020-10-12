@@ -118,8 +118,7 @@ void find_former_buildings(const Descriptions& descriptions,
 		for (DescriptionIndex i = 0; i < descriptions.nr_buildings(); ++i) {
 			const BuildingDescr* building_descr = descriptions.get_building_descr(i);
 			if (building_descr->enhancement() == oldest_idx) {
-				former_buildings->insert(
-				   former_buildings->begin(), std::make_pair(i, true));
+				former_buildings->insert(former_buildings->begin(), std::make_pair(i, true));
 				break;
 			}
 		}

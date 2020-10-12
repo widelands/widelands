@@ -77,9 +77,8 @@ MapDetails::MapDetails(
 	main_box_.add_space(padding_);
 	main_box_.add(&descr_box_, UI::Box::Resizing::kExpandBoth);
 
-
-	// Trigger description registering. Better have the delay when the screen loads than having it when the
-	// first map loads. Load terrains and resources only.
+	// Trigger description registering. Better have the delay when the screen loads than having it
+	// when the first map loads. Load terrains and resources only.
 	egbase_.mutable_descriptions(true);
 
 	layout();

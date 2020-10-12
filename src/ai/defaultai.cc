@@ -537,8 +537,8 @@ void DefaultAI::late_initialization() {
 	}
 
 	wares.resize(game().descriptions().nr_wares());
-	for (Widelands::DescriptionIndex i = 0; i < static_cast<Widelands::DescriptionIndex>(game().descriptions().nr_wares());
-	     ++i) {
+	for (Widelands::DescriptionIndex i = 0;
+	     i < static_cast<Widelands::DescriptionIndex>(game().descriptions().nr_wares()); ++i) {
 		wares.at(i).preciousness =
 		   game().descriptions().get_ware_descr(i)->ai_hints().preciousness(tribe_->name());
 	}
@@ -1590,10 +1590,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		Widelands::CheckStepWalkOn fisher_cstep(Widelands::MOVECAPS_WALK, true);
 		static std::vector<Widelands::Coords> fish_fields_list;  // pity this contains duplicates
 		fish_fields_list.clear();
-		map.find_reachable_fields(game(),
-		                          Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
-		                          &fish_fields_list, fisher_cstep,
-		                          Widelands::FindNodeResource(descriptions.resource_index("resource_fish")));
+		map.find_reachable_fields(
+		   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
+		   &fish_fields_list, fisher_cstep,
+		   Widelands::FindNodeResource(descriptions.resource_index("resource_fish")));
 
 		// This is "list" of unique fields in fish_fields_list we got above
 		static std::set<Widelands::Coords> counted_fields;

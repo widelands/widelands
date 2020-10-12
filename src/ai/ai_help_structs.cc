@@ -251,18 +251,22 @@ bool FindNodeMineable::accept(const Widelands::EditorGameBase&,
 }
 
 // Fishers and fishbreeders must be built near water
-FindNodeWater::FindNodeWater(const Widelands::Descriptions& descriptions) : descriptions_(descriptions) {
+FindNodeWater::FindNodeWater(const Widelands::Descriptions& descriptions)
+   : descriptions_(descriptions) {
 }
 
-bool FindNodeWater::accept(const Widelands::EditorGameBase& egbase, const Widelands::FCoords& coord) const {
+bool FindNodeWater::accept(const Widelands::EditorGameBase& egbase,
+                           const Widelands::FCoords& coord) const {
 	return (descriptions_.get_terrain_descr(coord.field->terrain_d())->get_is() &
 	        Widelands::TerrainDescription::Is::kWater) ||
 	       (descriptions_
-	           .get_terrain_descr(egbase.map().get_neighbour(coord, Widelands::WALK_W).field->terrain_r())
+	           .get_terrain_descr(
+	              egbase.map().get_neighbour(coord, Widelands::WALK_W).field->terrain_r())
 	           ->get_is() &
 	        Widelands::TerrainDescription::Is::kWater) ||
 	       (descriptions_
-	           .get_terrain_descr(egbase.map().get_neighbour(coord, Widelands::WALK_NW).field->terrain_r())
+	           .get_terrain_descr(
+	              egbase.map().get_neighbour(coord, Widelands::WALK_NW).field->terrain_r())
 	           ->get_is() &
 	        Widelands::TerrainDescription::Is::kWater);
 }
