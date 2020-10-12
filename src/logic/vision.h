@@ -24,40 +24,75 @@ namespace Widelands {
 
 enum class HideOrRevealFieldMode { kHide, kHideAndForget, kReveal };
 
-// Simplified vision information reduced to 3 states.
-// Do not change the order! It is stored in savegames.
+/// Simplified vision information reduced to 3 states.
+/// Do not change the order! It is stored in savegames.
 enum class VisibleState {
 	kUnexplored = 0,      // Never seen yet
 	kPreviouslySeen = 1,  // Previously seen
 	kVisible = 2          // Currently visible
 };
 
-// Extended vision information encoded as a number with some helper functions.
-// See Player::Field for explanation of values.
+/// Extended vision information encoded as a number with some helper functions.
+/// Used primarily in Player::Field.
+/// The meaning of the numerical value:
+///  0      if the player has never seen the node.
+///  1      if the player does not currently see the node, but has seen
+///         it previously.
+///  2      if the player's buildings and workers do not currently see
+///         the node, but it is visible to the player thanks to team
+///         vision.
+///  2+2*n  if the player's buildings and workers currently see the node,
+///         where n is the number of objects that can see the node.
+///  3+2*n  if the node is permanently revealed to the player;
+///         the meaning of n is the same as above and can be zero.
 struct Vision {
-	uint16_t value;
-
-	explicit Vision(uint16_t v = 0) : value{v} {
+public:
+	explicit Vision(const uint16_t v = 0) : value_{v} {
+	}
+	Vision& operator=(const uint16_t v) {
+		value_ = v;
+		return *this;
 	}
 
-	explicit Vision(VisibleState vs) {
+	explicit Vision(const VisibleState vs) {
 		switch (vs) {
 		case VisibleState::kUnexplored:
-			value = 0;
+			value_ = 0;
 			break;
 		case VisibleState::kPreviouslySeen:
-			value = 1;
+			value_ = 1;
 			break;
 		case VisibleState::kVisible:
-			value = 2;
+			// kVisible initializes to the "visible by teammates" state
+			value_ = 2;
 			break;
 		default:
 			NEVER_HERE();
 		}
 	}
+	Vision& operator=(const VisibleState vs) {
+		switch (vs) {
+		case VisibleState::kUnexplored:
+			value_ = 0;
+			break;
+		case VisibleState::kPreviouslySeen:
+			value_ = 1;
+			break;
+		case VisibleState::kVisible:
+			// kVisible initializes to the "visible by teammates" state
+			value_ = 2;
+			break;
+		default:
+			NEVER_HERE();
+		}
+		return *this;
+	}
 
+	operator uint16_t() const {
+		return value_;
+	}
 	operator VisibleState() const {
-		switch (value) {
+		switch (value_) {
 		case 0:
 			return VisibleState::kUnexplored;
 		case 1:
@@ -67,36 +102,50 @@ struct Vision {
 		}
 	}
 
+	bool operator ==(const Vision other) const {
+		return value_ == other.value_;
+	}
+
+	bool operator !=(const Vision other) const {
+		return value_ != other.value_;
+	}
+
 	bool is_explored() const {
-		return value > 0;
+		return value_ > 0;
 	}
-
 	bool is_visible() const {
-		return value > 1;
+		return value_ > 1;
 	}
-
 	bool is_seen_by_us() const {
-		return value > 2;
+		return value_ > 2;
 	}
-
 	bool is_revealed() const {
-		return value > 2 && value % 2 == 1;
+		return value_ > 2 && value_ % 2 == 1;
 	}
-
 	uint16_t seers() const {
-		return value > 3 ? (value - 2) / 2 : 0;
+		return value_ > 3 ? (value_ - 2) / 2 : 0;
 	}
 
-	void set_revealed(bool reveal) {
+	void increment_seers() {
+		value_ = std::max(value_, uint16_t(2)) + 2;
+	}
+	void decrement_seers() {
+		assert(seers() > 0);
+		value_ -= 2;
+	}
+	void set_revealed(const bool reveal) {
 		if (reveal == is_revealed()) {
 			return;
 		}
 		if (reveal) {
-			value = std::max(value, uint16_t(2)) + 1;
+			value_ = std::max(value_, uint16_t(2)) + 1;
 		} else {
-			--value;
+			--value_;
 		}
 	}
+
+private:
+	uint16_t value_;
 };
 
 }  // namespace Widelands

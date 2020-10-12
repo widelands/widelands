@@ -251,18 +251,6 @@ public:
 		/// Indicates whether the player is currently seeing this node or has
 		/// ever seen it.
 		///
-		/// The value is
-		///  0      if the player has never seen the node.
-		///  1      if the player does not currently see the node, but has seen
-		///         it previously.
-		///  2      if the player's buildings and workers do not currently see
-		///         the node, but it is visible to the player thanks to team
-		///         vision.
-		///  2+2*n  if the player's buildings and workers currently see the node,
-		///         where n is the number of objects that can see the node.
-		///  3+2*n  if the node is permanently revealed to the player;
-		///         the meaning of n is the same as above and can be zero.
-		///
 		/// Note a fundamental difference between seeing a node, and having
 		/// knownledge about resources. A node is considered continuously seen by
 		/// a player as long as it is within vision range of any person of that
