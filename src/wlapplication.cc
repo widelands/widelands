@@ -1017,6 +1017,10 @@ void WLApplication::handle_commandline_parameters() {
 		SoundHandler::disable_backend();
 		commandline_.erase("nosound");
 	}
+	if (commandline_.count("fail-on-lua-error")) {
+		g_fail_on_lua_error = true;
+		commandline_.erase("fail-on-lua-error");
+	}
 	if (commandline_.count("nozip")) {
 		set_config_bool("nozip", true);
 		commandline_.erase("nozip");
