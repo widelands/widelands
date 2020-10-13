@@ -22,6 +22,8 @@
 
 namespace Widelands {
 enum class PlayerEndResult : uint8_t { kLost = 0, kWon = 1, kResigned = 2, kUndefined = 255 };
+// For sorting in the game summary screen
+int32_t for_sorting(PlayerEndResult);
 }
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_END_RESULT_H

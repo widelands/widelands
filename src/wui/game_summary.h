@@ -20,7 +20,9 @@
 #ifndef WL_WUI_GAME_SUMMARY_H
 #define WL_WUI_GAME_SUMMARY_H
 
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
@@ -47,11 +49,13 @@ private:
 
 	Widelands::Game& game_;
 	uint32_t desired_speed_;
+	UI::Box* info_box_;
 	UI::Textarea* title_area_;
 	UI::Textarea* gametime_label_;
 	UI::Textarea* gametime_value_;
 	UI::Textarea* info_area_label_;
 	UI::MultilineTextarea* info_area_;
+	UI::Icon* widelands_icon_;
 	UI::Button* continue_button_;
 	UI::Button* stop_button_;
 	UI::Table<uintptr_t const>* players_table_;

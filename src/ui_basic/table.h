@@ -135,6 +135,17 @@ public:
 		void set_string(uint8_t col, const std::string& str);
 		const Image* get_picture(uint8_t col) const;
 		const std::string& get_string(uint8_t col) const;
+
+		/*
+		 * The special "for_sorting" value allows overriding the default sort order.
+		 * This is the minimal-invasive fix for the bug that in English,
+		 * "Won" sorts after "Lost", while in German, "Gewonnen" sorts before
+		 * "Verloren", but we want "Won" to sort before "Lost" in all languages.
+		 * This override is only respected by the default column compare.
+		 */
+		void set_for_sorting(uint8_t col, int32_t value);
+		int32_t get_for_sorting(uint8_t col) const;
+
 		void* entry() const {
 			return entry_;
 		}
@@ -161,6 +172,7 @@ public:
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;
+			int32_t for_sorting = 0;
 		};
 		std::vector<Data> data_;
 		bool disabled_;
