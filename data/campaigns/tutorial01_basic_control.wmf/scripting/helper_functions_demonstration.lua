@@ -80,6 +80,10 @@ function select_item_from_dropdown(name, item)
    blocker:lift_blocks()
 end
 
+function open_item_from_dropdown(name, item)
+   wl.ui.MapView().dropdowns[name]:open(item)
+end
+
 -- Make sure the user is in road building mode starting from the given flag
 function enter_road_building_mode(flag)
    local mv = wl.ui.MapView()
