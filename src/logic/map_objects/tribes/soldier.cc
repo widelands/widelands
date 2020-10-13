@@ -1229,7 +1229,7 @@ void Soldier::defense_update(Game& game, State& state) {
 	                     FindBobSoldierAttackingPlayer(game, *get_owner()));
 
 	if (soldiers.empty() || (get_current_health() < get_retreat_health())) {
-		if (get_retreat_health() > get_current_health()) {
+		if (get_current_health() < get_retreat_health()) {
 			assert(state.ivar1 & CF_RETREAT_WHEN_INJURED);
 			molog(game.get_gametime(), "[defense] I am heavily injured (%d)!\n", get_current_health());
 		} else {

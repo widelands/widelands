@@ -846,7 +846,7 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 	} else if ((ch == '1') || (ch == 'l') || (ch == 'L') || (ch == 'I') || (ch == 'i') ||
 	           (ch == 'J') || (ch == 'j')) {
 		return 23;
-	} else if (ch >= 'A' && ch < 'Z') {
+	} else if (ch >= 'A' && ch <= 'Z') {
 		char res = ch - 'A';
 		if (ch > 'I') {
 			--res;
