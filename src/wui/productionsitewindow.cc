@@ -78,7 +78,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		UI::Box* prod_box = new UI::Box(
 		   get_tabs(), 0, 0, UI::Box::Vertical, g_gr->get_xres() - 80, g_gr->get_yres() - 80);
 
-		for (const Widelands::InputQueue& queue : inputqueues) {
+		for (const Widelands::InputQueue* queue : inputqueues) {
 			prod_box->add(new InputQueueDisplay(prod_box, 0, 0, *igbase(), *production_site, *queue));
 		}
 

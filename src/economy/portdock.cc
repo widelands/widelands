@@ -512,7 +512,7 @@ void PortDock::Loader::load_pointers() {
 	PortDock& pd = get<PortDock>();
 	pd.warehouse_ = &mol().get<Warehouse>(warehouse_);
 
-	for (const ShippingItem& item : waiting_) {
+	for (ShippingItem::Loader& item : waiting_) {
 		pd.waiting_.push_back(item.get(mol()));
 	}
 	assert(pd.waiting_.size() == waiting_.size());

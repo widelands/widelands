@@ -211,7 +211,7 @@ uint32_t MapGenInfo::get_sum_land_resource_weight() const {
 	}
 
 	uint32_t sum = 0;
-	for (const auto& land_resource : land_resources_) {
+	for (const MapGenLandResource& land_resource : land_resources_) {
 		sum += land_resource.get_weight();
 	}
 	sum_bob_area_weights_ = sum;

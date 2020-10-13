@@ -576,7 +576,7 @@ int16_t GameHost::get_local_playerposition() {
 }
 
 void GameHost::clear_computer_players() {
-	for (auto* ai : d->computerplayers) {
+	for (AI::ComputerPlayer* ai : d->computerplayers) {
 		delete ai;
 	}
 	d->computerplayers.clear();
