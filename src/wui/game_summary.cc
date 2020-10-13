@@ -58,7 +58,8 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - kPadding),
 	   UI::PanelStyle::kWui, "");
 
-	widelands_icon_ = new UI::Icon(hbox1, 0, 0, info_area_->get_w(), info_area_->get_h(), g_image_cache->get("images/logos/wl-ico-128.png"));
+	widelands_icon_ = new UI::Icon(hbox1, 0, 0, info_area_->get_w(), info_area_->get_h(),
+	                               g_image_cache->get("images/logos/wl-ico-128.png"));
 
 	info_box_->add(info_area_label_);
 	info_box_->add(info_area_, UI::Box::Resizing::kFullSize);
