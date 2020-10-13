@@ -794,7 +794,7 @@ void MapGenerator::create_random_map() {
 		// Take the nearest ones
 		uint32_t min_distance = std::numeric_limits<uint32_t>::max();
 		Coords coords2;
-		for (const auto& c : coords) {
+		for (const Coords& c : coords) {
 			uint32_t test = map_.calc_distance(c, playerstart);
 			if (test < min_distance) {
 				min_distance = test;

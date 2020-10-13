@@ -214,7 +214,7 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 	fw.unsigned_32(last_request_time_);
 
 	fw.unsigned_16(transfers_.size());  //  Write number of current transfers.
-	for (const auto& trans : transfers_) {
+	for (const Transfer* trans : transfers_) {
 		if (trans->ware_) {  //  write ware/worker
 			assert(mos.is_object_known(*trans->ware_));
 			fw.unsigned_32(mos.get_object_file_index(*trans->ware_));

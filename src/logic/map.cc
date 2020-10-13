@@ -569,7 +569,7 @@ void Map::set_origin(const Coords& new_origin) {
 
 	// Take care of port spaces
 	PortSpacesSet new_port_spaces;
-	for (const auto& space : port_spaces_) {
+	for (const Coords& space : port_spaces_) {
 		Coords temp;
 		if (yisodd && ((space.y % 2) == 0)) {
 			temp = Coords(space.x - new_origin.x - 1, space.y - new_origin.y);
@@ -1686,7 +1686,7 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 
 	uint32_t cnt_mineable = 0;
 	uint32_t cnt_walkable = 0;
-	for (const auto& is : terrains) {
+	for (const TerrainDescription::Is& is : terrains) {
 		if (is & TerrainDescription::Is::kWater || is & TerrainDescription::Is::kUnwalkable) {
 			return BaseImmovable::NONE;
 		}
@@ -1714,7 +1714,7 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 		std::vector<ImmovableFound> objectlist;
 		find_immovables(egbase, Area<FCoords>(f, 1), &objectlist,
 		                FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
-		for (const auto& immfound : objectlist) {
+		for (const ImmovableFound& immfound : objectlist) {
 			const BaseImmovable* obj = immfound.object;
 			int objsize = obj->get_size();
 			if (objsize == BaseImmovable::NONE) {

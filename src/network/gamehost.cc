@@ -1019,7 +1019,7 @@ bool GameHost::can_launch() {
 
 	const std::vector<UserSettings>& users = d->settings.users;
 
-	for (const auto& client : d->clients) {
+	for (const Client& client : d->clients) {
 		const int usernum = client.usernum;
 		if (usernum == -1) {
 			return false;
