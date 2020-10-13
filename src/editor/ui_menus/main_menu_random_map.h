@@ -59,11 +59,6 @@ struct MainMenuNewRandomMap : public UI::UniqueWindow {
 	};
 
 private:
-	struct WorldDescription {
-		std::string name;
-		std::string descname;
-	};
-
 	void button_clicked(ButtonId);
 	void clicked_create_map();
 	void clicked_cancel();
@@ -93,7 +88,6 @@ private:
 	UI::SpinBox players_;
 
 	// World + Resources
-	const std::vector<WorldDescription> world_descriptions_;
 	int current_world_;
 	std::vector<std::string> resource_amounts_;
 	uint32_t resource_amount_;

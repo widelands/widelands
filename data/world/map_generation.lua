@@ -721,8 +721,8 @@ winterland = {
 }
 
 return {
-   greenland = greenland,
-   blackland = blackland,
+   summer = greenland,
+   wasteland = blackland,
    desert = desert,
-   winterland = winterland,
+   winter = winterland
 }
