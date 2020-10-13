@@ -19,7 +19,10 @@ local wc_desc = _(
 [[As wood gnome you like big forests, so your task is to have more trees on ]] ..
 [[your territory than any other player. The game will end after 4 hours of ]] ..
 [[playing. The one with the most trees at that point will win the game.]])
-local wc_trees_owned = _"Trees owned"
+local wc_trees_owned = "Trees owned"
+-- This needs to be exactly like wc_trees_owned, but localized, because wc_trees_owned
+-- will be used as the key to fetch the translation in C++
+local wc_trees_owned_i18n = _"Trees owned"
 
 local r = {
    name = wc_name,
