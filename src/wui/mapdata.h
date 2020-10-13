@@ -74,6 +74,8 @@ public:
 	MapAuthorData authors;
 	std::string description;
 	std::string hint;
+	std::string theme;
+	std::string background;
 	uint32_t nrplayers;
 	uint32_t width;
 	uint32_t height;
