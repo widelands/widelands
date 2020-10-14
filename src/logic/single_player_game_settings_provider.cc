@@ -266,6 +266,7 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 		set_player_name(number, position.name);
 
 		set_player(settings().playernum, position);
+		set_player_name(settings().playernum, player.name);
 		s.playernum = number;
 	}
 }
